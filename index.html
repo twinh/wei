@@ -314,9 +314,7 @@ $id = $widget->query('id');</code></pre>
 <!-- request
   ================================================== -->
   <section id="request">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Request</h1>
+  <h1>Request</h1>
 
 <p>管理HTTP请求数据($_REQUEST)</p>
 
@@ -396,8 +394,7 @@ $id = $widget-&gt;request('id');
 <td>HTTP请求方式</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>request($name, $default = null)</h4>
 
@@ -458,16 +455,12 @@ $id = $widget-&gt;request('id');
 <h4>request-&gt;inAjax()</h4>
 
 <p>检查当前是否为ajax(XMLHttpRequest)请求</p>
-</body></html>
-
   </section>
 
 <!-- cookie
   ================================================== -->
   <section id="cookie">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Cookie</h1>
+  <h1>Cookie</h1>
 
 <p>写入,读取和删除cookie($_COOKIE)</p>
 
@@ -541,8 +534,7 @@ $widget-&gt;cookie('key');
 <td>是否发送为不经过URL解码的cookie</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>cookie($key)</h4>
 
@@ -567,16 +559,12 @@ $widget-&gt;cookie('key');
 <h4>cookie-&gt;send()</h4>
 
 <p>发送cookie到浏览器</p>
-</body></html>
-
   </section>
 
 <!-- os
   ================================================== -->
   <section id="os">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Os</h1>
+  <h1>Os</h1>
 
 <p>检测客户端浏览器,操作系统和设备是否为指定的名称和版本</p>
 
@@ -666,16 +654,12 @@ $widget-&gt;cookie('key');
 <h4>os-&gt;inIpad()</h4>
 
 <p>检查用户是否使用iPad访问网站</p>
-</body></html>
-
   </section>
 
 <!-- post
   ================================================== -->
   <section id="post">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Post</h1>
+  <h1>Post</h1>
 
 <p>获取HTTP请求($_POST)数据</p>
 
@@ -716,16 +700,12 @@ $id = $widget-&gt;post('id');
 <h4>post-&gt;getInArray($name, array $array)</h4>
 
 <p>获取HTTP请求参数,如果参数的值不在数组中,将返回数组的第一个值</p>
-</body></html>
-
   </section>
 
 <!-- query
   ================================================== -->
   <section id="query">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Query</h1>
+  <h1>Query</h1>
 
 <p>获取HTTP请求($_GET)数据</p>
 
@@ -766,16 +746,12 @@ $id = $widget-&gt;query('id');
 <h4>query-&gt;getInArray($name, array $array)</h4>
 
 <p>获取HTTP请求参数,如果参数的值不在数组中,将返回数组的第一个值</p>
-</body></html>
-
   </section>
 
 <!-- server
   ================================================== -->
   <section id="server">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Server</h1>
+  <h1>Server</h1>
 
 <p>获取服务器运行和环境参数($_SERVER)</p>
 
@@ -816,16 +792,12 @@ $id = $widget-&gt;server('SERVER_NAME');
 <h4>server-&gt;getInArray($name, array $array)</h4>
 
 <p>获取服务器参数,如果参数的值不在数组中,将返回数组的第一个值</p>
-</body></html>
-
   </section>
 
 <!-- session
   ================================================== -->
   <section id="session">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Session</h1>
+  <h1>Session</h1>
 
 <p>管理用户会话信息</p>
 
@@ -859,8 +831,7 @@ if ($widget-&gt;sessio('verfiyCode') == $widget-&gt;post('verfiyCode')) {
 <td>widget</td>
 <td>存储会话信息的命名空间,因为在PHP中,用户会话信息是共享的</td>
 </tr></tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>session($key)</h4>
 
@@ -890,16 +861,12 @@ if ($widget-&gt;sessio('verfiyCode') == $widget-&gt;post('verfiyCode')) {
 
 <p>设置会话相关的ini配置,配置名称会自定加上<code>session.</code>前缀<br>
 详细配置可以查看<a href="http://php.net/manual/en/session.configuration.php">http://php.net/manual/en/session.configuration.php</a></p>
-</body></html>
-
   </section>
 
 <!-- upload
   ================================================== -->
   <section id="upload">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Upload</h1>
+  <h1>Upload</h1>
 
 <p>保存客户端上传的文件到指定目录</p>
 
@@ -1185,8 +1152,7 @@ if ($result) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>upload($options)</h4>
 
@@ -1195,16 +1161,12 @@ if ($result) {
 <h4>upload-&gt;getMessages()</h4>
 
 <p>获取错误信息</p>
-</body></html>
-
   </section>
 
 <!-- response
   ================================================== -->
   <section id="response">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Response</h1>
+  <h1>Response</h1>
 
 <p>发送HTTP响应头和响应内容</p>
 
@@ -1265,8 +1227,7 @@ Hello World'
 <td>HTTP响应的状态码</td>
 </tr>
 </tbody>
-</table>
-<h4>response-&gt;setContent($content)</h4>
+</table><h4>response-&gt;setContent($content)</h4>
 
 <p>设置HTTP响应的内容</p>
 
@@ -1289,16 +1250,12 @@ Hello World'
 <h4>response-&gt;setSentStatus($bool)</h4>
 
 <p>设置内容是否已发送</p>
-</body></html>
-
   </section>
 
 <!-- download
   ================================================== -->
   <section id="download">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Download</h1>
+  <h1>Download</h1>
 
 <p>发送下载文件的HTTP响应</p>
 
@@ -1344,22 +1301,17 @@ Hello World'
 <td>下载的方式,可选项为<code>inline</code>或<code>attachment</code>,如果是<code>inline</code>,浏览器会先尝试直接在浏览器中打开,如果是<code>attachment</code>,浏览器将直接弹出下载对话框</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>download($file, $options = array())</h4>
 
 <p>下载指定的文件</p>
-</body></html>
-
   </section>
 
 <!-- flush
   ================================================== -->
   <section id="flush">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Flush</h1>
+  <h1>Flush</h1>
 
 <p>关闭缓冲区,让后台脚本实时输出内容到浏览器</p>
 
@@ -1387,16 +1339,12 @@ for ($i = 1; $i &lt;= 10; $i++) {
 <h4>flush($content = null, $status = null)</h4>
 
 <p>直接输出内容到浏览器</p>
-</body></html>
-
   </section>
 
 <!-- header
   ================================================== -->
   <section id="header">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Header</h1>
+  <h1>Header</h1>
 
 <p>设置和获取HTTP响应头</p>
 
@@ -1453,20 +1401,15 @@ echo $widget-&gt;header('X-Powered-By');
 <td>是否替换已有的响应头</td>
 </tr>
 </tbody>
-</table>
-<h4>remove($name)</h4>
+</table><h4>remove($name)</h4>
 
 <p>删除HTTP响应头信息</p>
-</body></html>
-
   </section>
 
 <!-- json
   ================================================== -->
   <section id="json">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Json</h1>
+  <h1>Json</h1>
 
 <p>输出JSON或JSONP格式的数据到浏览器</p>
 
@@ -1531,16 +1474,12 @@ $widget-&gt;json('success', 0, array(), true);
 </tr>
 </tbody>
 </table>
-</body></html>
-
   </section>
 
 <!-- redirect
   ================================================== -->
   <section id="redirect">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Redirect</h1>
+  <h1>Redirect</h1>
 
 <p>跳转到指定地址</p>
 
@@ -1583,8 +1522,7 @@ $widget-&gt;json('success', 0, array(), true);
 <td>自定义跳转视图的文件,可以设置该选项以展示更加友好的跳转视图</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>redirect($url, $status = 302, $options = array())</h4>
 
@@ -1597,16 +1535,12 @@ $widget-&gt;json('success', 0, array(), true);
 <h4>redirect-&gt;setView($view)</h4>
 
 <p>设置默认的跳转视图</p>
-</body></html>
-
   </section>
 
 <!-- call
   ================================================== -->
   <section id="call">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Call</h1>
+  <h1>Call</h1>
 
 <p>象jQuery Ajax一样调用您的接口</p>
 
@@ -1617,6 +1551,7 @@ $widget-&gt;json('success', 0, array(), true);
 <pre><code class="php">$widget-&gt;call(array(
     'url' =&gt; 'http://jsfiddle.net/echo/json/',
     'method' =&gt; 'POST',
+    'dataType' =&gt; 'json',
     'data' =&gt; array(
         'json' =&gt; json_encode(array(
             'key' =&gt; 'value'
@@ -1715,7 +1650,7 @@ $widget-&gt;get('http://example.com', function($data, $call){
 <tr>
 <td>dataType</td>
 <td>string</td>
-<td>json</td>
+<td>text</td>
 <td>请求完成后,要对返回数据解析的类型</td>
 </tr>
 <tr>
@@ -1755,8 +1690,7 @@ $widget-&gt;get('http://example.com', function($data, $call){
 <td>请求完成后,不论是否成功都触发的回调,可用于数据记录等</td>
 </tr>
 </tbody>
-</table>
-<h4>beforeSend($call, $ch)</h4>
+</table><h4>beforeSend($call, $ch)</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -1776,8 +1710,7 @@ $widget-&gt;get('http://example.com', function($data, $call){
 <td>cUrl会话的变量</td>
 </tr>
 </tbody>
-</table>
-<h4>success($data, $call)</h4>
+</table><h4>success($data, $call)</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -1797,8 +1730,7 @@ $widget-&gt;get('http://example.com', function($data, $call){
 <td>当前的Call对象</td>
 </tr>
 </tbody>
-</table>
-<h5>
+</table><h5>
 <code>dataType</code>的值与$data返回的类型</h5>
 
 <table class="table table-bordered table-striped">
@@ -1828,8 +1760,7 @@ $widget-&gt;get('http://example.com', function($data, $call){
 <td>string</td>
 </tr>
 </tbody>
-</table>
-<h4>error($call, $textStatus, $exception)</h4>
+</table><h4>error($call, $textStatus, $exception)</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -1854,8 +1785,7 @@ $widget-&gt;get('http://example.com', function($data, $call){
 <td>错误的异常对象,可通过该对象获取详细的错误信息</td>
 </tr>
 </tbody>
-</table>
-<h5>
+</table><h5>
 <code>$textStatus</code>的值与出现的情况</h5>
 
 <table class="table table-bordered table-striped">
@@ -1877,8 +1807,7 @@ $widget-&gt;get('http://example.com', function($data, $call){
 <td>数据解析错误,如返回的数据不是正确的json格式</td>
 </tr>
 </tbody>
-</table>
-<h4>complete($call, $ch)</h4>
+</table><h4>complete($call, $ch)</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -1898,8 +1827,7 @@ $widget-&gt;get('http://example.com', function($data, $call){
 <td>cUrl会话的变量</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>call($options = array())</h4>
 
@@ -1941,55 +1869,55 @@ $widget-&gt;get('http://example.com', function($data, $call){
 
 <p>设置请求完成后触发的回调</p>
 
-<h4>call-&gt;get($url, $data, $callback)</h4>
+<h4>call-&gt;get($url, $data, $callback, $dataType)</h4>
 
 <p>通过GET方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;get($url, $callback)</h4>
+<h4>call-&gt;get($url, $callback, $dataType)</h4>
 
 <p>通过GET方式发送请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;post($url, $data, $callback)</h4>
+<h4>call-&gt;getJson($url, $callback)</h4>
+
+<p>通过GET方式发送请求,并以JSON格式解析返回数据,成功时触发<code>$callback</code>回调</p>
+
+<h4>call-&gt;post($url, $data, $callback, $dataType)</h4>
 
 <p>通过POST方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;post($url, $callback)</h4>
+<h4>call-&gt;post($url, $callback, $dataType)</h4>
 
 <p>通过POST方式发送请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;put($url, $data, $callback)</h4>
+<h4>call-&gt;put($url, $data, $callback, $dataType)</h4>
 
 <p>通过PUT方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;put($url, $callback)</h4>
+<h4>call-&gt;put($url, $callback, $dataType)</h4>
 
 <p>通过PUT方式发送请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;delete($url, $data, $callback)</h4>
+<h4>call-&gt;delete($url, $data, $callback, $dataType)</h4>
 
 <p>通过DELETE方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;delete($url, $callback)</h4>
+<h4>call-&gt;delete($url, $callback, $dataType)</h4>
 
 <p>通过DELETE方式发送请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;patch($url, $data, $callback)</h4>
+<h4>call-&gt;patch($url, $data, $callback, $dataType)</h4>
 
 <p>通过PATCH方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;patch($url, $callback)</h4>
+<h4>call-&gt;patch($url, $callback, $dataType)</h4>
 
 <p>通过PATCH方式发送请求,成功时触发<code>$callback</code>回调</p>
-</body></html>
-
   </section>
 
 <!-- cache-section
   ================================================== -->
   <section id="cache-section">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>缓存</h1>
+  <h1>缓存</h1>
 
 <p>Widget提供了多个PHP流行的后端缓存.这里有apc,redis,memcached等主流缓存,也有简单的文件缓存fileCache,
 可用于简单数据分析的数据库缓存dbCache等等.所有缓存拥有一致的接口,可以随意替换.</p>
@@ -2000,8 +1928,7 @@ $widget-&gt;get('http://example.com', function($data, $call){
 <li>缓存数据库查询,接口调用等耗时较长的操作</li>
 <li>将缓存作为计数器,记录按钮点击次数,网站访问次数等等</li>
 <li>在不同的请求之间,共享数据</li>
-</ul>
-<h2>支持的缓存类型及比较</h2>
+</ul><h2>支持的缓存类型及比较</h2>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -2066,16 +1993,14 @@ $widget-&gt;get('http://example.com', function($data, $call){
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<ul>
+</table><ul>
 <li>速度:判断依据是缓存数据存储的介质,如果数据存储在内存中则<code>快</code>,如果存储在磁盘则<code>慢</code>
 </li>
 <li>持久化:判断依据是缓存是否因为相关服务重启而丢失数据</li>
 <li>原子性:判断依据是<code>add</code>,<code>replace</code>,<code>increment</code>和<code>decrement</code>方法是否为原子操作</li>
 <li>
 <code>Cache</code>和<code>Bicache</code>为视配置而定</li>
-</ul>
-<h2>通用方法</h2>
+</ul><h2>通用方法</h2>
 
 <p>在下面的方法中,<code>cache</code>表示缓存微件的名称,可以替换为其他任意缓存,如<code>redis</code>, <code>memcached</code></p>
 
@@ -2112,8 +2037,7 @@ $widget-&gt;get('http://example.com', function($data, $call){
 <td>缓存的有效期,默认为0秒,表示永不过期</td>
 </tr>
 </tbody>
-</table>
-<h4>cache($key)</h4>
+</table><h4>cache($key)</h4>
 
 <p>获取指定名称的缓存</p>
 
@@ -2156,16 +2080,12 @@ $widget-&gt;get('http://example.com', function($data, $call){
 <h4>cache-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
-</body></html>
-
   </section>
 
 <!-- cache
   ================================================== -->
   <section id="cache">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Cache</h1>
+  <h1>Cache</h1>
 
 <p>设置或获取指定缓存类型的一项缓存</p>
 
@@ -2206,8 +2126,7 @@ $widget-&gt;cache('key');
 <td>apc</td>
 <td>缓存的类型</td>
 </tr></tbody>
-</table>
-<p>目前支持的缓存类型有</p>
+</table><p>目前支持的缓存类型有</p>
 
 <ul>
 <li>
@@ -2228,8 +2147,7 @@ $widget-&gt;cache('key');
 <li>
 <code>redis</code> Redis缓存 <em>推荐</em>
 </li>
-</ul>
-<h3>方法</h3>
+</ul><h3>方法</h3>
 
 <h4>cache($key, $value, $expire = 0)</h4>
 
@@ -2264,8 +2182,7 @@ $widget-&gt;cache('key');
 <td>缓存的有效期,默认为0秒,表示永不过期</td>
 </tr>
 </tbody>
-</table>
-<h4>cache($key)</h4>
+</table><h4>cache($key)</h4>
 
 <p>获取指定名称的缓存</p>
 
@@ -2308,16 +2225,12 @@ $widget-&gt;cache('key');
 <h4>cache-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
-</body></html>
-
   </section>
 
 <!-- apc
   ================================================== -->
   <section id="apc">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Apc</h1>
+  <h1>Apc</h1>
 
 <p>通过面向对象的方式设置或获取PHP APC缓存,并提供更多友好方便的功能方法.</p>
 
@@ -2380,8 +2293,7 @@ $widget-&gt;apc('key');
 <td>缓存的有效期,默认为0秒,表示永不过期</td>
 </tr>
 </tbody>
-</table>
-<h4>apc($key)</h4>
+</table><h4>apc($key)</h4>
 
 <p>获取指定名称的缓存</p>
 
@@ -2424,16 +2336,12 @@ $widget-&gt;apc('key');
 <h4>apc-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
-</body></html>
-
   </section>
 
 <!-- arrayCache
   ================================================== -->
   <section id="arrayCache">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>ArrayCache</h1>
+  <h1>ArrayCache</h1>
 
 <p>数组缓存,将数据存储在PHP数组中,每次请求结束数据就会被清空.</p>
 
@@ -2442,8 +2350,7 @@ $widget-&gt;apc('key');
 <ol>
 <li>在开发环境使用,确保每次页面请求都会获得最新生成的数据</li>
 <li>对计算结果进行临时存储,以便在不同地方获取数据,减少重复计算消耗的时间</li>
-</ol>
-<h2>案例</h2>
+</ol><h2>案例</h2>
 
 <h3>设置和获取缓存</h3>
 
@@ -2517,16 +2424,12 @@ $widget-&gt;arrayCache('name');
 <h4>arrayCache-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
-</body></html>
-
   </section>
 
 <!-- bicache
   ================================================== -->
   <section id="bicache">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Bicache</h1>
+  <h1>Bicache</h1>
 
 <p>设置或获取缓存,数据存储在二级缓存中</p>
 
@@ -2535,8 +2438,7 @@ $widget-&gt;arrayCache('name');
 <ol>
 <li>每次读取数据时,如果主缓存读取不到数据,将从从缓存读取数据</li>
 <li>每次写入数据时,如果检查上次更新到从缓存的间隔秒数大于配置秒数,则同步数据到从缓存中</li>
-</ol>
-<h2>案例</h2>
+</ol><h2>案例</h2>
 
 <h3>设置和获取缓存</h3>
 
@@ -2591,8 +2493,7 @@ $widget-&gt;bicache('key');
 <td>从缓存的类型,推荐使用文件类缓存,如fileCache或dbCache</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>bicache($key, $value, $expire = 0)</h4>
 
@@ -2627,8 +2528,7 @@ $widget-&gt;bicache('key');
 <td>缓存的有效期,默认为0秒,表示永不过期</td>
 </tr>
 </tbody>
-</table>
-<h4>bicache($key)</h4>
+</table><h4>bicache($key)</h4>
 
 <p>获取指定名称的缓存</p>
 
@@ -2671,16 +2571,12 @@ $widget-&gt;bicache('key');
 <h4>bicache-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
-</body></html>
-
   </section>
 
 <!-- couchbase
   ================================================== -->
   <section id="couchbase">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Couchbase</h1>
+  <h1>Couchbase</h1>
 
 <p>设置或获取一项缓存,缓存数据存储于Couchbase中</p>
 
@@ -2745,8 +2641,7 @@ $widget-&gt;couchbase('key');
 <td>是否使用长连接</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>couchbase($key, $value, $expire = 0)</h4>
 
@@ -2781,8 +2676,7 @@ $widget-&gt;couchbase('key');
 <td>缓存的有效期,默认为0秒,表示永不过期</td>
 </tr>
 </tbody>
-</table>
-<h4>couchbase($key)</h4>
+</table><h4>couchbase($key)</h4>
 
 <p>获取指定名称的缓存</p>
 
@@ -2825,16 +2719,12 @@ $widget-&gt;couchbase('key');
 <h4>couchbase-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
-</body></html>
-
   </section>
 
 <!-- dbCache
   ================================================== -->
   <section id="dbCache">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>DbCache</h1>
+  <h1>DbCache</h1>
 
 <p>设置或获取一项缓存,缓存数据存储于数据库中</p>
 
@@ -2875,8 +2765,7 @@ $widget-&gt;dbCache('key');
 <td>cache</td>
 <td>缓存数据表名称</td>
 </tr></tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>dbCache($key, $value, $expire = 0)</h4>
 
@@ -2911,8 +2800,7 @@ $widget-&gt;dbCache('key');
 <td>缓存的有效期,默认为0秒,表示永不过期</td>
 </tr>
 </tbody>
-</table>
-<h4>dbCache($key)</h4>
+</table><h4>dbCache($key)</h4>
 
 <p>获取指定名称的缓存</p>
 
@@ -2955,16 +2843,12 @@ $widget-&gt;dbCache('key');
 <h4>dbCache-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
-</body></html>
-
   </section>
 
 <!-- fileCache
   ================================================== -->
   <section id="fileCache">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>FileCache</h1>
+  <h1>FileCache</h1>
 
 <p>设置或获取文件缓存</p>
 
@@ -3022,8 +2906,7 @@ $widget-&gt;fileCache('key');
 <td>缓存的有效期,默认为0秒,表示永不过期</td>
 </tr>
 </tbody>
-</table>
-<h4>fileCache($key)</h4>
+</table><h4>fileCache($key)</h4>
 
 <p>获取指定名称的缓存</p>
 
@@ -3066,16 +2949,12 @@ $widget-&gt;fileCache('key');
 <h4>fileCache-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
-</body></html>
-
   </section>
 
 <!-- memcache
   ================================================== -->
   <section id="memcache">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Memcache</h1>
+  <h1>Memcache</h1>
 
 <p>设置或获取一项缓存,缓存数据存储于Memcache中</p>
 
@@ -3128,8 +3007,7 @@ $widget-&gt;memcache('key');
 <td>原始的Memcache对象</td>
 </tr>
 </tbody>
-</table>
-<h4>选项<code>servers</code>
+</table><h4>选项<code>servers</code>
 </h4>
 
 <table class="table table-bordered table-striped">
@@ -3159,8 +3037,7 @@ $widget-&gt;memcache('key');
 <td>是否使用长连接</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>memcache($key, $value, $expire = 0)</h4>
 
@@ -3195,8 +3072,7 @@ $widget-&gt;memcache('key');
 <td>缓存的有效期,默认为0秒,表示永不过期</td>
 </tr>
 </tbody>
-</table>
-<h4>memcache($key)</h4>
+</table><h4>memcache($key)</h4>
 
 <p>获取指定名称的缓存</p>
 
@@ -3239,16 +3115,12 @@ $widget-&gt;memcache('key');
 <h4>memcache-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
-</body></html>
-
   </section>
 
 <!-- memcached
   ================================================== -->
   <section id="memcached">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Memcached</h1>
+  <h1>Memcached</h1>
 
 <p>设置或获取一项缓存,缓存数据存储于memcached中</p>
 
@@ -3295,8 +3167,7 @@ $widget-&gt;memcached('key');
 <td>原始的memcached对象</td>
 </tr>
 </tbody>
-</table>
-<h4>选项<code>servers</code>
+</table><h4>选项<code>servers</code>
 </h4>
 
 <table class="table table-bordered table-striped">
@@ -3320,8 +3191,7 @@ $widget-&gt;memcached('key');
 <td>memcached服务器端口</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>memcached($key, $value, $expire = 0)</h4>
 
@@ -3356,8 +3226,7 @@ $widget-&gt;memcached('key');
 <td>缓存的有效期,默认为0秒,表示永不过期</td>
 </tr>
 </tbody>
-</table>
-<h4>memcached($key)</h4>
+</table><h4>memcached($key)</h4>
 
 <p>获取指定名称的缓存</p>
 
@@ -3400,16 +3269,12 @@ $widget-&gt;memcached('key');
 <h4>memcached-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
-</body></html>
-
   </section>
 
 <!-- mongoCache
   ================================================== -->
   <section id="mongoCache">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>MongoCache</h1>
+  <h1>MongoCache</h1>
 
 <p>设置或获取一项缓存,缓存数据存储于<a href="http://docs.mongodb.org/ecosystem/drivers/php/">Mangodb</a>中</p>
 
@@ -3468,8 +3333,7 @@ $widget-&gt;mongoCache('key');
 <td>存储缓存数据的集合的名称</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>mongoCache($key, $value, $expire = 0)</h4>
 
@@ -3504,8 +3368,7 @@ $widget-&gt;mongoCache('key');
 <td>缓存的有效期,默认为0秒,表示永不过期</td>
 </tr>
 </tbody>
-</table>
-<h4>mongoCache($key)</h4>
+</table><h4>mongoCache($key)</h4>
 
 <p>获取指定名称的缓存</p>
 
@@ -3548,16 +3411,12 @@ $widget-&gt;mongoCache('key');
 <h4>mongoCache-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
-</body></html>
-
   </section>
 
 <!-- redis
   ================================================== -->
   <section id="redis">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Redis</h1>
+  <h1>Redis</h1>
 
 <p>设置或获取一项缓存,缓存数据存储于Redis中</p>
 
@@ -3622,8 +3481,7 @@ $widget-&gt;redis('key');
 <td>原始的Redis对象</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>redis($key, $value, $expire = 0)</h4>
 
@@ -3658,8 +3516,7 @@ $widget-&gt;redis('key');
 <td>缓存的有效期,默认为0秒,表示永不过期</td>
 </tr>
 </tbody>
-</table>
-<h4>redis($key)</h4>
+</table><h4>redis($key)</h4>
 
 <p>获取指定名称的缓存</p>
 
@@ -3702,55 +3559,207 @@ $widget-&gt;redis('key');
 <h4>redis-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
-</body></html>
-
   </section>
 
 <!-- validate
   ================================================== -->
   <section id="validate">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1><a href="http://twinh.github.io/widget/api/validate">validate()</a></h1>
+  <h1>Validate</h1>
 
 <p>检查数组或对象中每一个元素是否能通过指定规则的验证</p>
 
-<pre><code class="php">\Widget\Validator validate( $options )
-</code></pre>
-
-<h5>参数</h5>
-
-<ul>
-<li>$options 验证器的配置选项
-
-<ul>
-<li> <strong>data</strong> <code>array|object</code> 待验证的数据,可以是数组或对象</li>
-<li> <strong>rules</strong> <code>array</code> 验证规则数组</li>
-<li> <strong>messages</strong> <code>array</code> 验证错误时的提示信息</li>
-<li> <strong>names</strong> <code>array</code> 数据项名称的数组,用于错误信息提示</li>
-<li> <strong>ruleValid</strong> <code>callback</code> 规则验证通过时调用的回调函数</li>
-<li> <strong>ruleInvalid</strong> <code>callback</code> 规则验证不通过时调用的回调函数</li>
-<li> <strong>fieldValid</strong> <code>callback</code> 数据项验证通过时调用的回调函数</li>
-<li> <strong>fieldInvalid</strong> <code>callback</code> 数据项验证不通过时调用的回调函数</li>
-<li> <strong>success</strong> <code>callback</code> 验证器验证通过(所有验证规则都通过)时调用的回调函数</li>
-<li> <strong>failure</strong> <code>callback</code> 验证器验证不通过(任意验证规则不通过)时调用的回调函数</li>
-<li> <strong>breakRule</strong> <code>bool</code> 是否当任意一项规则验证不通过时就中断验证流程,默认为false</li>
-<li> <strong>breakField</strong> <code>bool</code> 是否当任意一项数据验证不通过时就中断验证流程,默认为false</li>
-<li> <strong>skip</strong> <code>bool</code> 是否当任意一项数据中的一项规则不通过时,就跳转到下一项数据的验证流程,默认是false,启用后,每项数据最多会有一个未通过的验证规则</li>
-</ul>
-</li>
-</ul>
 <p>Widget验证器是参考<a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery Validation</a>
 开发的数据验证器,她与<code>jQuery Validation</code>有着很多相似的地方,所以如果你使用过
 <code>jQuery Validation</code>,使用Widget验证器将非常容易上手.</p>
 
-<h5>参数详细说明</h5>
+<h2>案例</h2>
 
-<h5>data</h5>
+<h3>检查数据是否符合指定的验证规则</h3>
+
+<pre><code class="php">$validator = $widget-&gt;validate(array(
+    'data' =&gt; array(
+        'username' =&gt; 'tw',
+        'email' =&gt; 'invalid',
+    ),
+    'rules' =&gt; array(
+        'username' =&gt; array(
+            'minLength' =&gt; 3,
+            'alnum' =&gt; true,
+        ),
+        'email' =&gt; array(
+            'email' =&gt; true
+        )
+    ),
+    'names' =&gt; array(
+        'username' =&gt; '用户名',
+        'email' =&gt; '邮箱'
+    ),
+    'messages' =&gt; array(
+        'username' =&gt; array(
+            'minLength' =&gt; '%name%的长度必须大于3',
+            'alnum' =&gt; '%name%只能由字母和数字组成'
+        ),
+        'email' =&gt; '%name%格式不正确'
+    )
+));
+
+// 检查是否通过验证
+if ($validator-&gt;isValid()) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+
+// 输出详细的错误信息
+print_r($validator-&gt;getDetailMessages());
+
+// 输出简练的错误信息
+print_r($validator-&gt;getSummaryMessages());
+
+// 输出合并的错误信息
+print_r($validator-&gt;getJoinedMessage());
+</code></pre>
+
+<h4>运行结果</h4>
+
+<pre><code class="php">// 检查是否通过验证
+'No'
+
+// 输出详细的错误信息
+Array
+(
+    [username] =&gt; Array
+        (
+            [minLength] =&gt; Array
+                (
+                    [tooShort] =&gt; 用户名的长度必须大于3
+                )
+
+        )
+
+    [email] =&gt; Array
+        (
+            [email] =&gt; Array
+                (
+                    [format] =&gt; 邮箱格式不正确
+                )
+
+        )
+
+)
+
+// 输出简洁的错误信息
+Array
+(
+    [username] =&gt; Array
+        (
+            [0] =&gt; 用户名的长度必须大于3
+        )
+
+    [email] =&gt; Array
+        (
+            [0] =&gt; 邮箱格式不正确
+        )
+
+)
+
+// 输出合并的错误信息
+'用户名的长度必须大于3
+邮箱格式不正确'
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>array,object</td>
+<td>array()</td>
+<td>待验证的数据,可以是数组或对象</td>
+</tr>
+<tr>
+<td>rules</td>
+<td>array</td>
+<td>array()</td>
+<td>验证规则数组</td>
+</tr>
+<tr>
+<td>names</td>
+<td>array</td>
+<td>array()</td>
+<td>数据项名称的数组,用于错误信息提示</td>
+</tr>
+<tr>
+<td>breakRule</td>
+<td>bool</td>
+<td>false</td>
+<td>是否当任意一项规则验证不通过时就中断验证流程</td>
+</tr>
+<tr>
+<td>breakField</td>
+<td>bool</td>
+<td>false</td>
+<td>是否当任意一项数据验证不通过时就中断验证流程</td>
+</tr>
+<tr>
+<td>skip</td>
+<td>bool</td>
+<td>false</td>
+<td>是否当任意一项数据中的一项规则不通过时,就跳转到下一项数据的验证流程,默认是false,启用后,每项数据最多会有一个未通过的验证规则</td>
+</tr>
+<tr>
+<td>ruleValid</td>
+<td>callback</td>
+<td>无</td>
+<td>规则验证通过时调用的回调函数</td>
+</tr>
+<tr>
+<td>ruleInvalid</td>
+<td>callback</td>
+<td>无</td>
+<td>规则验证不通过时调用的回调函数</td>
+</tr>
+<tr>
+<td>fieldValid</td>
+<td>callback</td>
+<td>无</td>
+<td>数据项验证通过时调用的回调函数</td>
+</tr>
+<tr>
+<td>fieldInvalid</td>
+<td>callback</td>
+<td>无</td>
+<td>数据项验证不通过时调用的回调函数</td>
+</tr>
+<tr>
+<td>success</td>
+<td>callback</td>
+<td>无</td>
+<td>验证器验证通过(所有验证规则都通过)时调用的回调函数</td>
+</tr>
+<tr>
+<td>failure</td>
+<td>callback</td>
+<td>无</td>
+<td>验证器验证不通过(任意验证规则不通过)时调用的回调函数</td>
+</tr>
+</tbody>
+</table><h4>选项详细说明</h4>
+
+<h4>data</h4>
 
 <p>待验证的数据,可以是数组或对象</p>
 
-<p>验证数据的取值的顺序如下(与<code>attr</code>微件一致)</p>
+<p>验证数据的取值的顺序如下</p>
 
 <ol>
 <li>如果<code>$data</code>是数组或<code>\ArrayAccess</code>的实例化对象,检查并返回<code>$data[$key]</code>的值</li>
@@ -3758,8 +3767,7 @@ $widget-&gt;redis('key');
 <li>如果<code>$data</code>是对象且方法<code>get. $key</code>存在,返回<code>$data-&gt;{'get' . $key}</code>
 </li>
 <li>如果以上均不存在,返回null</li>
-</ol>
-<p><strong>代码范例</strong></p>
+</ol><h4>代码范例</h4>
 
 <pre><code class="php">class User
 {
@@ -3796,18 +3804,20 @@ $widget-&gt;validate(array(
 ));
 </code></pre>
 
-<h5>rules</h5>
+<h4>rules</h4>
 
 <p>验证规则数组.键名是验证的数据项名称,值是验证规则.验证规则可以字符串,表示一项验证规则,也可以是数组
 ,表示多项验证规则.</p>
 
-<p><strong>注意:</strong>验证规则数组有一点与<code>jQuery Validation</code>不同,默认情况下,<code>jQuery Validation</code>的所有
+<p><strong>注意:</strong> 验证规则数组有一点与<code>jQuery Validation</code>不同,默认情况下,<code>jQuery Validation</code>的所有
 数据项都是 <strong>可选</strong> 的,但是Widget验证器的所有数据项都是 <strong>必选</strong> 的.如果某一个数据项是选填的,只需增
 加<code>required =&gt; false</code>的验证规则</p>
 
 <p>在验证过程中,验证器会根据验证规则的名称,检查对应的规则验证器是否存在,如<code>email</code>规则将被转换为
 <code>\Widget\Validator\Email</code>类,如果类不存在,将抛出<code>\Widget\Exception\InvalidArgumentException</code>
 异常提醒开发人员规则不存在.如果类存在,将初始化该类.然后,验证器组织验证规则提供的参数,供规则验证器验证.</p>
+
+<h4>代码范例</h4>
 
 <pre><code class="php">$widget-&gt;validate(array(
     'rules' =&gt; array(
@@ -3843,7 +3853,7 @@ $widget-&gt;validate(array(
 
 <p>验证错误时的提示信息.提示信息的格式与验证规则类似.</p>
 
-<p><strong>代码范例</strong></p>
+<h4>代码范例</h4>
 
 <pre><code class="php">$widget-&gt;validate(array(
     'rules' =&gt; array(
@@ -3890,15 +3900,15 @@ $widget-&gt;validate(array(
 ));
 </code></pre>
 
-<h5>names</h5>
+<h4>names</h4>
 
 <p>数据项名称的数组,用于错误信息提示.数组的键名是验证数据项的值,数值的值是验证数据项的名称.如</p>
 
 <p><strong>注意:</strong>如果未提供数据项名称,错误信息将以<code>该项</code>作为验证数据项的名称,完整的错误信息例如<code>该项不能为空</code></p>
 
-<p><strong>代码范例</strong>
-```php
-$widget-&gt;validate(array(
+<h4>代码范例</h4>
+
+<pre><code class="php">$widget-&gt;validate(array(
     'rules' =&gt; array(
         'name' =&gt; 'required',
         'email' =&gt; array(
@@ -3918,15 +3928,15 @@ $widget-&gt;validate(array(
         'email' =&gt; '邮箱',
         'avatar' =&gt; '头像'
     )
-));</p>
+));
 
-<p>// 输出信息类似:
+// 输出信息类似:
 // 用户名不能为空
 // 邮箱不能为空
 // 头像宽度不能超过200px
-```</p>
+</code></pre>
 
-<h5>ruleValid</h5>
+<h4>ruleValid</h4>
 
 <p>当任意一条规则验证通过时,验证器就会触发<code>ruleValid</code>事件.</p>
 
@@ -3935,16 +3945,42 @@ $widget-&gt;validate(array(
 <pre><code class="php">ruleValid( $event, $widget, $rule, $field, $validator )
 </code></pre>
 
-<ul>
-<li>$event <code>Widget\Event\Event</code> 事件对象</li>
-<li>$widget <code>Widget\Widget</code> 微件管理器</li>
-<li>$rule <code>string</code> 通过的规则名称</li>
-<li>$field <code>string</code> 当前验证的数据项名称</li>
-<li>$validator <code>Widget\Validator</code> 验证器对象</li>
-</ul>
-<p>如果<code>ruleValid</code>事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$event</td>
+<td>Widget\Event\Event</td>
+<td>事件对象</td>
+</tr>
+<tr>
+<td>$widget</td>
+<td>Widget\Widget</td>
+<td>微件管理器</td>
+</tr>
+<tr>
+<td>$rule</td>
+<td>string</td>
+<td>过的规则名称</td>
+</tr>
+<tr>
+<td>$field</td>
+<td>string</td>
+<td>当前验证的数据项名称</td>
+</tr>
+<tr>
+<td>$validator</td>
+<td>Widget\Validate</td>
+<td>验证器对象</td>
+</tr>
+</tbody>
+</table><p>如果<code>ruleValid</code>事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
-<p><strong>代码范例</strong></p>
+<h4>代码范例</h4>
 
 <pre><code class="php">$widget-&gt;validate(array(
     'data' =&gt; array(
@@ -3961,14 +3997,14 @@ $widget-&gt;validate(array(
 ));
 </code></pre>
 
-<p><strong>运行结果</strong></p>
+<h4>运行结果</h4>
 
 <pre><code class="php">'required'
 'name'
 'Yes'
 </code></pre>
 
-<h5>ruleInvalid</h5>
+<h4>ruleInvalid</h4>
 
 <p>当任意一条规则验证 <strong>不</strong> 通过时,验证器就会触发<code>ruleInvalid</code>事件.</p>
 
@@ -3977,17 +4013,43 @@ $widget-&gt;validate(array(
 <pre><code class="php">ruleInvalid( $event, $widget, $rule, $field, $validator )
 </code></pre>
 
-<ul>
-<li>$event <code>Widget\Event\Event</code> 事件对象</li>
-<li>$widget <code>Widget\Widget</code> 微件管理器</li>
-<li>$rule <code>string</code> 未通过的规则名称</li>
-<li>$field <code>string</code> 当前验证的数据项名称</li>
-<li>$validator <code>Widget\Validator</code> 验证器对象</li>
-</ul>
-<p><code>ruleInvalid</code>与<code>ruleValid</code>的行为一致.
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$event</td>
+<td>Widget\Event\Event</td>
+<td>事件对象</td>
+</tr>
+<tr>
+<td>$widget</td>
+<td>Widget\Widget</td>
+<td>微件管理器</td>
+</tr>
+<tr>
+<td>$rule</td>
+<td>string</td>
+<td>过的规则名称</td>
+</tr>
+<tr>
+<td>$field</td>
+<td>string</td>
+<td>当前验证的数据项名称</td>
+</tr>
+<tr>
+<td>$validator</td>
+<td>Widget\Validate</td>
+<td>验证器对象</td>
+</tr>
+</tbody>
+</table><p><code>ruleInvalid</code>与<code>ruleValid</code>的行为一致.
 同样的,如果<code>ruleInvalid</code>事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
-<p><strong>代码范例</strong></p>
+<h4>代码范例</h4>
 
 <pre><code class="php">$widget-&gt;validate(array(
     'data' =&gt; array(
@@ -4004,31 +4066,53 @@ $widget-&gt;validate(array(
 ));
 </code></pre>
 
-<p><strong>运行结果</strong></p>
+<h4>运行结果</h4>
 
 <pre><code class="php">'required'
 'name'
 'No'
 </code></pre>
 
-<h5>fieldValid</h5>
+<h4>fieldValid</h4>
 
 <p>当任意数据项验证通过时,验证器就会触发<code>fieldValid</code>事件.</p>
 
 <p><strong>参数</strong></p>
 
-<pre><code class="php">fieldValid ( $event, $widget, $field, $validator )
+<pre><code class="php">fieldValid($event, $widget, $field, $validator)
 </code></pre>
 
-<ul>
-<li>$event <code>Widget\Event\Event</code> 事件对象</li>
-<li>$widget <code>Widget\Widget</code> 微件管理器</li>
-<li>$field <code>string</code> 当前验证的数据项名称</li>
-<li>$validator <code>Widget\Validator</code> 验证器对象</li>
-</ul>
-<p>如果<code>fieldValid</code>事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$event</td>
+<td>Widget\Event\Event</td>
+<td>事件对象</td>
+</tr>
+<tr>
+<td>$widget</td>
+<td>Widget\Widget</td>
+<td>微件管理器</td>
+</tr>
+<tr>
+<td>$rule</td>
+<td>string</td>
+<td>过的规则名称</td>
+</tr>
+<tr>
+<td>$validator</td>
+<td>Widget\Validate</td>
+<td>验证器对象</td>
+</tr>
+</tbody>
+</table><p>如果<code>fieldValid</code>事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
-<p><strong>代码范例</strong></p>
+<h4>代码范例</h4>
 
 <pre><code class="php">$widget-&gt;validate(array(
     'data' =&gt; array(
@@ -4044,7 +4128,7 @@ $widget-&gt;validate(array(
 ));
 </code></pre>
 
-<p><strong>运行结果</strong></p>
+<h4>运行结果</h4>
 
 <pre><code class="php">'name'
 'Yes'
@@ -4059,15 +4143,37 @@ $widget-&gt;validate(array(
 <pre><code class="php">fieldInvalid ( $event, $widget, $field, $validator )
 </code></pre>
 
-<ul>
-<li>$event <code>Widge\Event\Event</code> 事件对象</li>
-<li>$widget <code>Widget\Widget</code> 微件管理器</li>
-<li>$field <code>string</code> 当前验证的数据项名称</li>
-<li>$validator <code>Widget\Validator</code> 验证器对象</li>
-</ul>
-<p>如果<code>fieldInvalid</code>事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$event</td>
+<td>Widget\Event\Event</td>
+<td>事件对象</td>
+</tr>
+<tr>
+<td>$widget</td>
+<td>Widget\Widget</td>
+<td>微件管理器</td>
+</tr>
+<tr>
+<td>$rule</td>
+<td>string</td>
+<td>过的规则名称</td>
+</tr>
+<tr>
+<td>$validator</td>
+<td>Widget\Validate</td>
+<td>验证器对象</td>
+</tr>
+</tbody>
+</table><p>如果<code>fieldInvalid</code>事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
-<p><strong>代码范例</strong></p>
+<h4>代码范例</h4>
 
 <pre><code class="php">$widget-&gt;validate(array(
     'data' =&gt; array(
@@ -4083,25 +4189,43 @@ $widget-&gt;validate(array(
 ));
 </code></pre>
 
-<p><strong>运行结果</strong></p>
+<h4>运行结果</h4>
 
 <pre><code class="php">'name'
 'No'
 </code></pre>
 
-<h5>success</h5>
+<h4>success</h4>
 
 <p>验证结束时,如果最终验证结果为通过,验证器就触发<code>success</code>事件.</p>
 
 <pre><code class="php">success ( $event, $widget, $validator )
 </code></pre>
 
-<ul>
-<li>$event <code>Widge\Event\Event</code> 事件对象</li>
-<li>$widget <code>Widget\Widget</code> 微件管理器</li>
-<li>$validator <code>Widget\Validator</code> 验证器对象</li>
-</ul>
-<p><strong>代码范例</strong></p>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$event</td>
+<td>Widget\Event\Event</td>
+<td>事件对象</td>
+</tr>
+<tr>
+<td>$widget</td>
+<td>Widget\Widget</td>
+<td>微件管理器</td>
+</tr>
+<tr>
+<td>$validator</td>
+<td>Widget\Validate</td>
+<td>验证器对象</td>
+</tr>
+</tbody>
+</table><h4>代码范例</h4>
 
 <pre><code class="php">$widget-&gt;validate(array(
     'data' =&gt; array(
@@ -4116,24 +4240,42 @@ $widget-&gt;validate(array(
 ));
 </code></pre>
 
-<p><strong>运行结果</strong></p>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
 
-<h5>failure</h5>
+<h4>failure</h4>
 
 <p>验证结束时,如果最终验证结果为 <strong>不</strong> 通过,验证器就触发<code>failure</code>事件.</p>
 
 <pre><code class="php">failure ( $event, $widget, $validator )
 </code></pre>
 
-<ul>
-<li>$event <code>Widge\Event\Event</code> 事件对象</li>
-<li>$widget <code>Widget\Widget</code> 微件管理器</li>
-<li>$validator <code>Widget\Validator</code> 验证器对象</li>
-</ul>
-<p><strong>代码范例</strong></p>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$event</td>
+<td>Widget\Event\Event</td>
+<td>事件对象</td>
+</tr>
+<tr>
+<td>$widget</td>
+<td>Widget\Widget</td>
+<td>微件管理器</td>
+</tr>
+<tr>
+<td>$validator</td>
+<td>Widget\Validate</td>
+<td>验证器对象</td>
+</tr>
+</tbody>
+</table><h4>代码范例</h4>
 
 <pre><code class="php">$widget-&gt;validate(array(
     'data' =&gt; array(
@@ -4148,122 +4290,94 @@ $widget-&gt;validate(array(
 ));
 </code></pre>
 
-<p><strong>运行结果</strong></p>
+<h4>运行结果</h4>
 
 <pre><code class="php">'No'
 </code></pre>
 
-<h5>breakRule</h5>
+<h4>breakRule</h4>
 
 <p>默认为不启用.启用该选项后,当任意一项规则验证不通过时就中断验证流程,直接返回验证结果(false)</p>
 
-<h5>breakField</h5>
+<h4>breakField</h4>
 
 <p>默认为不启用.启用该选项后,当任意一项数据验证不通过时就中断验证流程,直接返回验证结果(false)</p>
 
-<h5>skip</h5>
+<h4>skip</h4>
 
 <p>默认是不启用.启用该选项后,当任意一项数据中的一项规则不通过时,就跳转到下一项数据的验证流程,因此,每项数据最多会有一个未通过的验证规则</p>
 
-<hr>
-<h5>代码范例</h5>
+<h3>方法</h3>
 
-<p>检查数据是否符合指定的验证规则
-```php
-&lt;?php</p>
+<h4>validate($options)</h4>
 
-<p>$validator = $widget-&gt;validate(array(
-    'data' =&gt; array(
-        'username' =&gt; 'tw',
-        'email' =&gt; 'invalid',
-    ),
-    'rules' =&gt; array(
-        'username' =&gt; array(
-            'minLength' =&gt; 3,
-            'alnum' =&gt; true,
-        ),
-        'email' =&gt; array(
-            'email' =&gt; true
-        )
-    ),
-    'names' =&gt; array(
-        'username' =&gt; '用户名',
-        'email' =&gt; '邮箱'
-    ),
-    'messages' =&gt; array(
-        'username' =&gt; array(
-            'minLength' =&gt; '%name%的长度必须大于3',
-            'alnum' =&gt; '%name%只能由字母和数字组成'
-        ),
-        'email' =&gt; '%name%格式不正确'
-    )
-));</p>
+<p>检查数组或对象中每一个元素是否能通过指定规则的验证</p>
 
-<p>// 检查是否通过验证
-if ($validator-&gt;isValid()) {
-    echo 'Yes';
-} else {
-    echo 'No';
-}</p>
+<h4>validate-&gt;addRule($field, $rule, $parameters)</h4>
 
-<p>// 输出详细的错误信息
-print_r($validator-&gt;getDetailMessages());</p>
+<p>为数据项增加新的验证规则</p>
 
-<p>// 输出简练的错误信息
-print_r($validator-&gt;getSummaryMessages());</p>
+<h4>validate-&gt;hasRule($field, $rule)</h4>
 
-<p>// 输出合并的错误信息
-print_r($validator-&gt;getJoinedMessage());</p>
+<p>检查数据项是否包含指定的验证规则</p>
 
-<pre><code>##### 运行结果
-```php
-'NoArray
-(
-    [username] =&gt; Array
-        (
-            [minLength] =&gt; Array
-                (
-                    [tooShort] =&gt; 用户名的长度必须大于3
-                )
+<h4>validate-&gt;removeRule($field, $rule)</h4>
 
-        )
+<p>删除指定数据项的验证规则</p>
 
-    [email] =&gt; Array
-        (
-            [email] =&gt; Array
-                (
-                    [format] =&gt; 邮箱格式不正确
-                )
+<h4>validate-&gt;setData($data)</h4>
 
-        )
+<p>设置要验证的数据</p>
 
-)
-Array
-(
-    [username] =&gt; Array
-        (
-            [0] =&gt; 用户名的长度必须大于3
-        )
+<h4>validate-&gt;getData()</h4>
 
-    [email] =&gt; Array
-        (
-            [0] =&gt; 邮箱格式不正确
-        )
+<p>获取要验证的数据</p>
 
-)
-用户名的长度必须大于3
-邮箱格式不正确'
-</code></pre>
-</body></html>
+<h4>validate-&gt;setNames()</h4>
 
+<p>设置数据项的名称</p>
+
+<h4>validate-&gt;getNames()</h4>
+
+<p>获取数据项的名称</p>
+
+<h4>validate-&gt;getFieldData($field)</h4>
+
+<p>获取要验证的数据项的值</p>
+
+<h4>validate-&gt;setFieldData($field, $value)</h4>
+
+<p>设置要验证的数据项的值</p>
+
+<h4>validate-&gt;setMessages($messages)</h4>
+
+<p>设置自定义的错误信息</p>
+
+<h4>validate-&gt;getMessages()</h4>
+
+<p>获取自定义的错误信息</p>
+
+<h4>validate-&gt;getDetailMessages()</h4>
+
+<p>获取详细的验证错误信息</p>
+
+<h4>validate-&gt;getSummaryMessages()</h4>
+
+<p>获取简洁的验证错误信息</p>
+
+<h4>validate-&gt;getJoinedMessage()</h4>
+
+<p>获取合并的验证错误信息</p>
+
+<h4>validate-&gt;getRuleValidator()</h4>
+
+<p>获取规则验证器对象</p>
   </section>
 
 <!-- is
   ================================================== -->
   <section id="is">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1><a href="http://twinh.github.io/widget/api/is">is()</a></h1>
+  <h1><a href="http://twinh.github.io/widget/api/is">is()</a></h1>
 
 <p>检查数据是否能通过指定规则,或指定回调结构的验证</p>
 
@@ -4273,8 +4387,7 @@ Array
 <li>is($rule, $input, $options)</li>
 <li>is($fn, $input)</li>
 <li>is($rules, $input)</li>
-</ul>
-<h3>检查数据是否能通过指定规则的验证</h3>
+</ul><h3>检查数据是否能通过指定规则的验证</h3>
 
 <pre><code class="php">bool is($rule, $input, $options)
 </code></pre>
@@ -4288,8 +4401,7 @@ Array
 <strong>$input</strong> <code>mixed</code> 待验证的数据</li>
 <li>
 <strong>$options</strong> <code>array</code> 验证器的配置选项</li>
-</ul>
-<h5>代码范例</h5>
+</ul><h5>代码范例</h5>
 
 <p>检查数据是否为邮箱
 ```php
@@ -4307,8 +4419,7 @@ Array
 <pre><code class="php">'twihuang@qq.com is valid email'
 </code></pre>
 
-<hr>
-<h3>检查数据是否能通过指定回调结构的验证</h3>
+<hr><h3>检查数据是否能通过指定回调结构的验证</h3>
 
 <pre><code class="php">bool is($fn, $input)
 </code></pre>
@@ -4320,15 +4431,13 @@ Array
 <strong>$fn</strong> <code>callback</code> 用于验证数据的回调结构</li>
 <li>
 <strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<p>回调结构<code>$fn</code>包含三个参数,分别是</p>
+</ul><p>回调结构<code>$fn</code>包含三个参数,分别是</p>
 
 <ul>
 <li>$input <code>mixed</code> 待验证的数据</li>
 <li>$callback <code>\Widget\Validator\Callback</code> 回调验证器对象</li>
 <li>$widget <code>\Widget\Widget</code> 微件管理器</li>
-</ul>
-<h5>代码范例</h5>
+</ul><h5>代码范例</h5>
 
 <p>检查数据是否能被3整除
 ```php
@@ -4348,8 +4457,7 @@ Array
 <pre><code class="php">'No'
 </code></pre>
 
-<hr>
-<h3>检查数据是否能通过指定的验证规则数组验证</h3>
+<hr><h3>检查数据是否能通过指定的验证规则数组验证</h3>
 
 <pre><code class="php">bool is($rules, $input)
 </code></pre>
@@ -4361,8 +4469,7 @@ Array
 <strong>$rules</strong> <code>array</code> 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</li>
 <li>
 <strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>代码范例</h5>
+</ul><h5>代码范例</h5>
 
 <p>检查数据是否为数字,且长度在3到5之间
 ```php
@@ -4383,16 +4490,12 @@ if ($widget-&gt;is($rules, '123456')) {
 
 <pre><code class="php">'No'
 </code></pre>
-</body></html>
-
   </section>
 
 <!-- isAlnum
   ================================================== -->
   <section id="isAlnum">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isAlnum</h1>
+  <h1>isAlnum</h1>
 
 <p>检查数据是否只由字母(a-z)和数字(0-9)组成</p>
 
@@ -4444,22 +4547,17 @@ if ($widget-&gt;isAlnum($input)) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isAlnum($input)</h4>
 
 <p>检查数据是否只由字母(a-z)和数字(0-9)组成</p>
-</body></html>
-
   </section>
 
 <!-- isAlpha
   ================================================== -->
   <section id="isAlpha">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isAlpha</h1>
+  <h1>isAlpha</h1>
 
 <p>检查数据是否只由字母(a-z)组成</p>
 
@@ -4511,22 +4609,17 @@ if ($widget-&gt;isAlpha($input)) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isAlpha($input)</h4>
 
 <p>检查数据是否只由字母(a-z)组成</p>
-</body></html>
-
   </section>
 
 <!-- isBlank
   ================================================== -->
   <section id="isBlank">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isBlank</h1>
+  <h1>isBlank</h1>
 
 <p>检查数据是否为空(不允许空格)</p>
 
@@ -4572,22 +4665,17 @@ if ($widget-&gt;isBlank($input)) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isBlank($input)</h4>
 
 <p>检查数据是否为空(不允许空格)</p>
-</body></html>
-
   </section>
 
 <!-- isDecimal
   ================================================== -->
   <section id="isDecimal">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isDecimal</h1>
+  <h1>isDecimal</h1>
 
 <p>检查数据是否为小数</p>
 
@@ -4638,22 +4726,17 @@ if ($widget-&gt;isBlank($input)) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isDecimal($input)</h4>
 
 <p>检查数据是否为小数</p>
-</body></html>
-
   </section>
 
 <!-- isDigit
   ================================================== -->
   <section id="isDigit">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isDigit</h1>
+  <h1>isDigit</h1>
 
 <p>检查数据是否只由数字组成</p>
 
@@ -4700,8 +4783,7 @@ if ($widget-&gt;isBlank($input)) {
 <td></td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isDigit($input)</h4>
 
@@ -4727,16 +4809,12 @@ if ($widget-&gt;isBlank($input)) {
 </tr>
 </tbody>
 </table>
-</body></html>
-
   </section>
 
 <!-- isDivisibleby
   ================================================== -->
   <section id="isDivisibleby">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isDivisibleBy</h1>
+  <h1>isDivisibleBy</h1>
 
 <p>检查数据是否能被指定的除数整除</p>
 
@@ -4787,22 +4865,17 @@ if ($widget-&gt;isBlank($input)) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isDivisibleBy($input)</h4>
 
 <p>检查数据是否能被指定的除数整除</p>
-</body></html>
-
   </section>
 
 <!-- isDoubleByte
   ================================================== -->
   <section id="isDoubleByte">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isDoubleByte</h1>
+  <h1>isDoubleByte</h1>
 
 <p>检查数据是否只由双字节字符组成</p>
 
@@ -4853,22 +4926,17 @@ if ($widget-&gt;isBlank($input)) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isDoubleByte($input)</h4>
 
 <p>检查数据是否只由双字节字符组成</p>
-</body></html>
-
   </section>
 
 <!-- isEmpty
   ================================================== -->
   <section id="isEmpty">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isEmpty()</h1>
+  <h1>isEmpty()</h1>
 
 <p>检查数据是否为空(允许空格)</p>
 
@@ -4927,22 +4995,17 @@ if ($widget-&gt;isBlank($input)) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isEmpty($input)</h4>
 
 <p>检查数据是否为空(允许空格)</p>
-</body></html>
-
   </section>
 
 <!-- isEndsWith
   ================================================== -->
   <section id="isEndsWith">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isEndsWith</h1>
+  <h1>isEndsWith</h1>
 
 <p>检查数据是否以指定字符串结尾</p>
 
@@ -5033,22 +5096,17 @@ if ($widget-&gt;isBlank($input)) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isEndsWith($input, $findMe, $case = false)</h4>
 
 <p>检查数据是否以指定字符串结尾</p>
-</body></html>
-
   </section>
 
 <!-- isEquals
   ================================================== -->
   <section id="isEquals">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isEquals</h1>
+  <h1>isEquals</h1>
 
 <p>检查数据是否与指定数据相等</p>
 
@@ -5110,22 +5168,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isEquals($input, $equals, $strict = false)</h4>
 
 <p>检查数据是否与指定数据相等</p>
-</body></html>
-
   </section>
 
 <!-- isIn
   ================================================== -->
   <section id="isIn">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isIn</h1>
+  <h1>isIn</h1>
 
 <p>检查数据是否在指定的数组中</p>
 
@@ -5182,22 +5235,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isIn($input, $array, $strict = false)</h4>
 
 <p>检查数据是否在指定的数组中</p>
-</body></html>
-
   </section>
 
 <!-- isLowercase
   ================================================== -->
   <section id="isLowercase">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isLowercase</h1>
+  <h1>isLowercase</h1>
 
 <p>检查数据是否为小写字符</p>
 
@@ -5248,22 +5296,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isLowercase($input)</h4>
 
 <p>检查数据是否为小写字符</p>
-</body></html>
-
   </section>
 
 <!-- isNull
   ================================================== -->
   <section id="isNull">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isNull</h1>
+  <h1>isNull</h1>
 
 <p>检查数据是否为null</p>
 
@@ -5306,22 +5349,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isNull($input)</h4>
 
 <p>检查数据是否为null</p>
-</body></html>
-
   </section>
 
 <!-- isNumber
   ================================================== -->
   <section id="isNumber">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isNumber</h1>
+  <h1>isNumber</h1>
 
 <p>检查数据是否为有效数字</p>
 
@@ -5366,22 +5404,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isNumber($input)</h4>
 
 <p>检查数据是否为有效数字</p>
-</body></html>
-
   </section>
 
 <!-- isRegex
   ================================================== -->
   <section id="isRegex">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isRegex</h1>
+  <h1>isRegex</h1>
 
 <p>检查数据是否匹配指定的正则表达式</p>
 
@@ -5432,22 +5465,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isRegex($input)</h4>
 
 <p>检查数据是否匹配指定的正则表达式</p>
-</body></html>
-
   </section>
 
 <!-- isRequired
   ================================================== -->
   <section id="isRequired">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isRequired</h1>
+  <h1>isRequired</h1>
 
 <p>检查数据是否为空</p>
 
@@ -5506,22 +5534,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isRequired($input, $required = true)</h4>
 
 <p>检查数据是否为空</p>
-</body></html>
-
   </section>
 
 <!-- isStartsWith
   ================================================== -->
   <section id="isStartsWith">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isStartsWith</h1>
+  <h1>isStartsWith</h1>
 
 <p>检查数据是否以指定字符串开头</p>
 
@@ -5612,22 +5635,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isStartsWith($input, $findMe, $case = false)</h4>
 
 <p>检查数据是否以指定字符串开头</p>
-</body></html>
-
   </section>
 
 <!-- isType
   ================================================== -->
   <section id="isType">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isType</h1>
+  <h1>isType</h1>
 
 <p>检查数据是否为指定的类型</p>
 
@@ -5692,8 +5710,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<p>如果<code>type</code>的值不在下表中,将检查数据是否为<code>type</code>的实例化对象($input instanceof $type)</p>
+</table><p>如果<code>type</code>的值不在下表中,将检查数据是否为<code>type</code>的实例化对象($input instanceof $type)</p>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -5770,22 +5787,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>16进制数字</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isType($input, $type)</h4>
 
 <p>检查数据是否为指定的类型</p>
-</body></html>
-
   </section>
 
 <!-- isUppercase
   ================================================== -->
   <section id="isUppercase">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isUppercase</h1>
+  <h1>isUppercase</h1>
 
 <p>检查数据是否为大写字符</p>
 
@@ -5836,22 +5848,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isUppercase($input)</h4>
 
 <p>检查数据是否为大写字符</p>
-</body></html>
-
   </section>
 
 <!-- isLength
   ================================================== -->
   <section id="isLength">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isLength</h1>
+  <h1>isLength</h1>
 
 <p>检查数据的长度是否为指定的数值,或在指定的长度范围内</p>
 
@@ -5938,8 +5945,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<pre><code>注意: 当检查的数据是字符串时,返回的错误信息是`notIn`,当数据是数组时,返回的是`notInItem`
+</table><pre><code>注意: 当检查的数据是字符串时,返回的错误信息是`notIn`,当数据是数组时,返回的是`notInItem`
 </code></pre>
 
 <h4>isLength($input, $length)</h4>
@@ -5981,19 +5987,14 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<pre><code>注意: 当检查的数据是字符串时,返回的错误信息是`length`,当数据是数组时,返回的是`lengthItem`
+</table><pre><code>注意: 当检查的数据是字符串时,返回的错误信息是`length`,当数据是数组时,返回的是`lengthItem`
 </code></pre>
-</body></html>
-
   </section>
 
 <!-- isMax
   ================================================== -->
   <section id="isMax">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isMax</h1>
+  <h1>isMax</h1>
 
 <p>检查数据是否小于等于指定的值</p>
 
@@ -6050,22 +6051,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isMax($input, $max)</h4>
 
 <p>检查数据是否小于等于指定的值</p>
-</body></html>
-
   </section>
 
 <!-- isMaxLength
   ================================================== -->
   <section id="isMaxLength">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isMaxLength</h1>
+  <h1>isMaxLength</h1>
 
 <p>检查数据的长度是否小于等于指定数值</p>
 
@@ -6126,22 +6122,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isMaxLength($input, $max)</h4>
 
 <p>检查数据的长度是否小于等于指定数值</p>
-</body></html>
-
   </section>
 
 <!-- isMin
   ================================================== -->
   <section id="isMin">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isMin</h1>
+  <h1>isMin</h1>
 
 <p>检查数据是否大于等于指定的值</p>
 
@@ -6198,22 +6189,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isMin($input, $min)</h4>
 
 <p>检查数据是否大于等于指定的值</p>
-</body></html>
-
   </section>
 
 <!-- isMinLength
   ================================================== -->
   <section id="isMinLength">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isMinLength</h1>
+  <h1>isMinLength</h1>
 
 <p>检查数据的长度是否大于等于指定数值</p>
 
@@ -6276,22 +6262,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isMinLength($input, $min)</h4>
 
 <p>检查数据的长度是否大于等于指定数值</p>
-</body></html>
-
   </section>
 
 <!-- isRange
   ================================================== -->
   <section id="isRange">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isRange</h1>
+  <h1>isRange</h1>
 
 <p>检查数据是否在指定的两个值之间</p>
 
@@ -6354,22 +6335,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isRange($input)</h4>
 
 <p>检查数据是否在指定的两个值之间</p>
-</body></html>
-
   </section>
 
 <!-- isDate
   ================================================== -->
   <section id="isDate">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isDate</h1>
+  <h1>isDate</h1>
 
 <p>检查数据是否为合法的日期</p>
 
@@ -6444,24 +6420,19 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php">date</a>函数的格式说明. </p>
+</table><p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php">date</a>函数的格式说明. </p>
 
 <h3>方法</h3>
 
 <h4>isDate($input, $format = 'Y-m-d')</h4>
 
 <p>检查数据是否为合法的日期</p>
-</body></html>
-
   </section>
 
 <!-- isDateTime
   ================================================== -->
   <section id="isDateTime">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isDateTime</h1>
+  <h1>isDateTime</h1>
 
 <p>检查数据是否为合法的日期时间</p>
 
@@ -6550,24 +6521,19 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php">date</a>函数的格式说明. </p>
+</table><p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php">date</a>函数的格式说明. </p>
 
 <h3>方法</h3>
 
 <h4>isDateTime($input, $format = 'Y-m-d H:i:s')</h4>
 
 <p>检查数据是否为合法的日期时间</p>
-</body></html>
-
   </section>
 
 <!-- isTime
   ================================================== -->
   <section id="isTime">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isTime</h1>
+  <h1>isTime</h1>
 
 <p>检查数据是否为合法的时间</p>
 
@@ -6656,24 +6622,19 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php">date</a>函数的格式说明. </p>
+</table><p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php">date</a>函数的格式说明. </p>
 
 <h3>方法</h3>
 
 <h4>isTime($input, $format = 'H:i:s')</h4>
 
 <p>检查数据是否为合法的日期</p>
-</body></html>
-
   </section>
 
 <!-- isDir
   ================================================== -->
   <section id="isDir">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isDir</h1>
+  <h1>isDir</h1>
 
 <p>检查数据是否为存在的目录</p>
 
@@ -6724,22 +6685,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isDir($input)</h4>
 
 <p>检查数据是否为存在的目录</p>
-</body></html>
-
   </section>
 
 <!-- isExists
   ================================================== -->
   <section id="isExists">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isExists</h1>
+  <h1>isExists</h1>
 
 <p>检查数据是否为存在的文件或目录</p>
 
@@ -6790,8 +6746,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isExists($input)</h4>
 
@@ -6799,16 +6754,12 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 
 <pre><code class="php">bool isExists( $input )
 </code></pre>
-</body></html>
-
   </section>
 
 <!-- isFile
   ================================================== -->
   <section id="isFile">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isFile</h1>
+  <h1>isFile</h1>
 
 <p>检查数据是否为合法的文件,可选的检查选项有文件大小,扩展名和媒体类型</p>
 
@@ -6937,8 +6888,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isFile($input, $options)</h4>
 
@@ -6952,16 +6902,12 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <li>
 <code>\SplFile</code>对象</li>
 </ol>
-</body></html>
-
   </section>
 
 <!-- isImage
   ================================================== -->
   <section id="isImage">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isImage</h1>
+  <h1>isImage</h1>
 
 <p>检查数据是否为图片,同时还可以检查图片宽度和高度是否在指定的范围内</p>
 
@@ -7158,8 +7104,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isImage($input, $options = array())</h4>
 
@@ -7167,16 +7112,12 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 
 <p>图片验证器是文件验证器<a href="isFile.md">isFile</a>的子类,其中选项<code>maxSize</code>, <code>minSize</code>, <code>exts</code>,
 <code>excludeExts</code>, <code>mimeTypes</code>, <code>excludeMimeTypes</code>继承自父类.</p>
-</body></html>
-
   </section>
 
 <!-- isEmail
   ================================================== -->
   <section id="isEmail">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isEmail</h1>
+  <h1>isEmail</h1>
 
 <p>检查数据是否为有效的邮箱地址</p>
 
@@ -7227,22 +7168,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isEmail($input)</h4>
 
 <p>检查数据是否为有效的邮箱地址</p>
-</body></html>
-
   </section>
 
 <!-- isIp
   ================================================== -->
   <section id="isIp">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isIp</h1>
+  <h1>isIp</h1>
 
 <p>检查数据是否为有效的IP地址</p>
 
@@ -7325,22 +7261,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isIp($input, $options = array())</h4>
 
 <p>检查数据是否为有效的IP地址</p>
-</body></html>
-
   </section>
 
 <!-- isTld
   ================================================== -->
   <section id="isTld">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isTld</h1>
+  <h1>isTld</h1>
 
 <p>检查数据是否为存在的顶级域名</p>
 
@@ -7391,22 +7322,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isTld($input)</h4>
 
 <p>检查数据是否为存在的顶级域名</p>
-</body></html>
-
   </section>
 
 <!-- isUrl
   ================================================== -->
   <section id="isUrl">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isUrl</h1>
+  <h1>isUrl</h1>
 
 <p>检查数据是否为有效的URL地址,可选的检查选项有"path"和"query"</p>
 
@@ -7455,8 +7381,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 </li>
 </ul>
 </li>
-</ul>
-<h3>错误信息</h3>
+</ul><h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -7478,16 +7403,12 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 </tr>
 </tbody>
 </table>
-</body></html>
-
   </section>
 
 <!-- isUuid
   ================================================== -->
   <section id="isUuid">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isUuid</h1>
+  <h1>isUuid</h1>
 
 <p>检查数据是否为有效的UUID</p>
 
@@ -7538,22 +7459,17 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isUuid($input)</h4>
 
 <p>检查数据是否为有效的UUID</p>
-</body></html>
-
   </section>
 
 <!-- isCreditCard
   ================================================== -->
   <section id="isCreditCard">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isCreditCard</h1>
+  <h1>isCreditCard</h1>
 
 <p>检查数据是否为合法的信用卡号码</p>
 
@@ -7619,8 +7535,7 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<p>允许指定的信用卡类型有: American Express, Diners Club, Discover, JCB, MasterCard, China UnionPay 和 Visa</p>
+</table><p>允许指定的信用卡类型有: American Express, Diners Club, Discover, JCB, MasterCard, China UnionPay 和 Visa</p>
 
 <p>下表为目前允许的信用卡类型</p>
 
@@ -7667,20 +7582,15 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <td><code>Visa</code></td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isCreditCard($input, $type)</h4>
-</body></html>
-
   </section>
 
 <!-- isChinese
   ================================================== -->
   <section id="isChinese">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isChinese</h1>
+  <h1>isChinese</h1>
 
 <p>检查数据是否只由汉字组成</p>
 
@@ -7731,22 +7641,17 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isChinese($input)</h4>
 
 <p>检查数据是否只由汉字组成</p>
-</body></html>
-
   </section>
 
 <!-- isIdCardCn
   ================================================== -->
   <section id="isIdCardCn">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isIdCardCn</h1>
+  <h1>isIdCardCn</h1>
 
 <p>检查数据是否为有效的中国身份证</p>
 
@@ -7797,22 +7702,17 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isIdCardCn($input)</h4>
 
 <p>检查数据是否为有效的中国身份证</p>
-</body></html>
-
   </section>
 
 <!-- isIdCardHk
   ================================================== -->
   <section id="isIdCardHk">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isIdCardHk</h1>
+  <h1>isIdCardHk</h1>
 
 <p>检查数据是否为有效的香港身份证</p>
 
@@ -7863,22 +7763,17 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isIdCardHk($input)</h4>
 
 <p>检查数据是否为有效的香港身份证</p>
-</body></html>
-
   </section>
 
 <!-- isIdCardMo
   ================================================== -->
   <section id="isIdCardMo">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isIdCardMo</h1>
+  <h1>isIdCardMo</h1>
 
 <p>检查数据是否为有效的澳门身份证</p>
 
@@ -7929,22 +7824,17 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isIdCardMo($input)</h4>
 
 <p>检查数据是否为有效的澳门身份证</p>
-</body></html>
-
   </section>
 
 <!-- isIdCardTw
   ================================================== -->
   <section id="isIdCardTw">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isIdCardTw</h1>
+  <h1>isIdCardTw</h1>
 
 <p>检查数据是否为有效的台湾身份证</p>
 
@@ -7995,22 +7885,17 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isIdCardTw($input)</h4>
 
 <p>检查数据是否为有效的台湾身份证</p>
-</body></html>
-
   </section>
 
 <!-- isPhoneCn
   ================================================== -->
   <section id="isPhoneCn">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isPhoneCn</h1>
+  <h1>isPhoneCn</h1>
 
 <p>检查数据是否为有效的电话号码</p>
 
@@ -8061,22 +7946,17 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isPhoneCn($input)</h4>
 
 <p>检查数据是否为有效的电话号码</p>
-</body></html>
-
   </section>
 
 <!-- isPostcode
   ================================================== -->
   <section id="isPostcode">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isPostcode</h1>
+  <h1>isPostcode</h1>
 
 <p>检查数据是否为有效的中国邮政编码</p>
 
@@ -8127,22 +8007,17 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isPostcode($input)</h4>
 
 <p>检查数据是否为有效的中国邮政编码</p>
-</body></html>
-
   </section>
 
 <!-- isQQ
   ================================================== -->
   <section id="isQQ">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isQQ</h1>
+  <h1>isQQ</h1>
 
 <p>检查数据是否为有效的QQ号码</p>
 
@@ -8193,22 +8068,17 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isQQ($input)</h4>
 
 <p>检查数据是否为有效的QQ号码</p>
-</body></html>
-
   </section>
 
 <!-- isMobileCn
   ================================================== -->
   <section id="isMobileCn">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isMobileCn</h1>
+  <h1>isMobileCn</h1>
 
 <p>检查数据是否为有效的中国手机号码</p>
 
@@ -8259,20 +8129,15 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isMobileCn($input)</h4>
-</body></html>
-
   </section>
 
 <!-- isAllof
   ================================================== -->
   <section id="isAllof">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isAllOf</h1>
+  <h1>isAllOf</h1>
 
 <p>检查数据是否通过所有的规则校验</p>
 
@@ -8321,22 +8186,17 @@ if ($widget-&gt;isAllOf($input, array(
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isAllOf($input, $rules)</h4>
 
 <p>检查数据是否通过所有的规则校验</p>
-</body></html>
-
   </section>
 
 <!-- isNoneof
   ================================================== -->
   <section id="isNoneof">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isNoneOf</h1>
+  <h1>isNoneOf</h1>
 
 <p>检查数据是否不符合所有指定的规则校验</p>
 
@@ -8385,22 +8245,17 @@ if ($widget-&gt;isNoneOf('abc', $rules)) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isNoneOf($input, $rules)</h4>
 
 <p>检查数据是否不符合所有指定的规则校验</p>
-</body></html>
-
   </section>
 
 <!-- isOneof
   ================================================== -->
   <section id="isOneof">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isOneOf</h1>
+  <h1>isOneOf</h1>
 
 <p>检查数据是否满足指定规则中的任何一条</p>
 
@@ -8449,22 +8304,17 @@ if ($widget-&gt;isOneOf('abc', $rules)) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isOneOf($input, $rules)</h4>
 
 <p>检查数据是否满足指定规则中的任何一条</p>
-</body></html>
-
   </section>
 
 <!-- isSomeof
   ================================================== -->
   <section id="isSomeof">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isSomeOf</h1>
+  <h1>isSomeOf</h1>
 
 <p>检查数据是否通过指定数量规则的验证</p>
 
@@ -8520,22 +8370,17 @@ if ($widget-&gt;isSomeOf('abc', $rules)) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isSomeOf($input, $rules, $atLeast)</h4>
 
 <p>检查数据是否通过指定数量规则的验证</p>
-</body></html>
-
   </section>
 
 <!-- isEntityExists
   ================================================== -->
   <section id="isEntityExists">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isEntityExists</h1>
+  <h1>isEntityExists</h1>
 
 <p>检查Doctrine ORM实体是否存在</p>
 
@@ -8687,22 +8532,17 @@ if ($widget-&gt;isEntityExists('test', 'User', 'name')) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isEntityExists($input, $entityClass, $field = 'id')</h4>
 
 <p>检查Doctrine ORM实体是否存在</p>
-</body></html>
-
   </section>
 
 <!-- isRecordExists
   ================================================== -->
   <section id="isRecordExists">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isRecordExists</h1>
+  <h1>isRecordExists</h1>
 
 <p>检查数据表是否存在指定的记录</p>
 
@@ -8791,20 +8631,15 @@ if ($widget-&gt;isRecordExists('test', 'users', 'name')) {
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isRecordExists($input, $table, $field = 'id')</h4>
-</body></html>
-
   </section>
 
 <!-- isAll
   ================================================== -->
   <section id="isAll">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isAll</h1>
+  <h1>isAll</h1>
 
 <p>检查数组或对象里的每一项是否符合指定的规则</p>
 
@@ -8852,22 +8687,17 @@ if ($widget-&gt;isAll($input, array(
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isAll($input, $rules)</h4>
 
 <p>检查数组或对象里的每一项是否符合指定的规则</p>
-</body></html>
-
   </section>
 
 <!-- isCallback
   ================================================== -->
   <section id="isCallback">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isCallback</h1>
+  <h1>isCallback</h1>
 
 <p>检查数据是否通过指定回调方法验证</p>
 
@@ -8906,8 +8736,7 @@ if ($widget-&gt;isAll($input, array(
 <td>%name%不合法</td>
 <td>-</td>
 </tr></tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isCallback($input, $fn, $message = null)</h4>
 
@@ -8941,16 +8770,12 @@ if ($widget-&gt;isAll($input, array(
 </tr>
 </tbody>
 </table>
-</body></html>
-
   </section>
 
 <!-- isColor
   ================================================== -->
   <section id="isColor">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>isColor</h1>
+  <h1>isColor</h1>
 
 <p>检查数据是否为有效的十六进制颜色</p>
 
@@ -9001,22 +8826,17 @@ if ($widget-&gt;isAll($input, array(
 <td>-</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>isColor($input)</h4>
 
 <p>检查数据是否为有效的十六进制颜色</p>
-</body></html>
-
   </section>
 
 <!-- view
   ================================================== -->
   <section id="view">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>View</h1>
+  <h1>View</h1>
 
 <p>渲染指定名称的模板或获取视图微件对象</p>
 
@@ -9083,8 +8903,7 @@ Layout Footer'
 <td>默认的模板扩展名</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>view($name, $vars = array())</h4>
 
@@ -9121,16 +8940,12 @@ Layout Footer'
 <h4>view-&gt;setDirs($dirs)</h4>
 
 <p>设置模板所在的目录</p>
-</body></html>
-
   </section>
 
 <!-- escape
   ================================================== -->
   <section id="escape">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1><a href="http://twinh.github.io/widget/api/escape">escape()</a></h1>
+  <h1><a href="http://twinh.github.io/widget/api/escape">escape()</a></h1>
 
 <p>转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义</p>
 
@@ -9144,8 +8959,7 @@ Layout Footer'
 <strong>$input</strong> <code>string</code> 待转义的字符串</li>
 <li>
 <strong>$type</strong> <code>string</code> 转义的类型,支持html,js,css,attr和url5种转义方式,默认是html</li>
-</ul>
-<p>Escape微件是基于<a href="https://github.com/zendframework/zf2/tree/master/library/Zend/Escaper">Zend\Escaper</a>组件的字符串安全转义器.Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可以查看这里<a href="http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html">http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html</a></p>
+</ul><p>Escape微件是基于<a href="https://github.com/zendframework/zf2/tree/master/library/Zend/Escaper">Zend\Escaper</a>组件的字符串安全转义器.Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可以查看这里<a href="http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html">http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html</a></p>
 
 <p>转义HTML字符串也可以直接调用<code>$widget-&gt;escape-&gt;html($string)</code></p>
 
@@ -9228,16 +9042,12 @@ echo '"&gt;Click here!';
 
 <pre><code class="php">'&lt;a href="http://example.com/?name=onmouseover%3D%20%22alert%28%27zf2%27%29"&gt;Click here!&lt;/a&gt;'
 </code></pre>
-</body></html>
-
   </section>
 
 <!-- smarty
   ================================================== -->
   <section id="smarty">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<pre><code>该微件文档还在紧急编写中,敬请期待!
+  <pre><code>该微件文档还在紧急编写中,敬请期待!
 </code></pre>
 
 <h1><a href="http://twinh.github.io/widget/api/smarty">smarty()</a></h1>
@@ -9256,19 +9066,14 @@ echo '"&gt;Click here!';
 <strong>$name</strong> <code>string</code> The name of template</li>
 <li>
 <strong>$vars</strong> <code>array</code> The variables pass to template</li>
-</ul>
-<p>if NO parameter provied, the invoke method will return the \Smarty
+</ul><p>if NO parameter provied, the invoke method will return the \Smarty
 object otherwise, call the render method</p>
-</body></html>
-
   </section>
 
 <!-- twig
   ================================================== -->
   <section id="twig">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<pre><code>该微件文档还在紧急编写中,敬请期待!
+  <pre><code>该微件文档还在紧急编写中,敬请期待!
 </code></pre>
 
 <h1><a href="http://twinh.github.io/widget/api/twig">twig()</a></h1>
@@ -9287,19 +9092,14 @@ object otherwise, call the render method</p>
 <strong>$name</strong> <code>string</code> The name of template</li>
 <li>
 <strong>$vars</strong> <code>array</code> The variables pass to template</li>
-</ul>
-<p>if NO parameter provied, the invoke method will return the
+</ul><p>if NO parameter provied, the invoke method will return the
 \Twig_Environment object. otherwise, call the render method</p>
-</body></html>
-
   </section>
 
 <!-- event
   ================================================== -->
   <section id="event">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Event</h1>
+  <h1>Event</h1>
 
 <p>绑定,触发和移除事件,并支持命名空间等特性.</p>
 
@@ -9369,8 +9169,7 @@ $widget-&gt;trigger('connect');
 <td>当事件触发器触发时,传递给事件对象的数据</td>
 </tr>
 </tbody>
-</table>
-<p>事件触发器的优先级既可以是数字,也可以是字符串.预定于的字符串有<code>low</code>, <code>normal</code>, <code>high</code>,它们分别代表的数值如下表所示:</p>
+</table><p>事件触发器的优先级既可以是数字,也可以是字符串.预定于的字符串有<code>low</code>, <code>normal</code>, <code>high</code>,它们分别代表的数值如下表所示:</p>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -9391,8 +9190,7 @@ $widget-&gt;trigger('connect');
 <td>1000</td>
 </tr>
 </tbody>
-</table>
-<h4>off($type)</h4>
+</table><h4>off($type)</h4>
 
 <p>移除指定类型的事件触发器</p>
 
@@ -9411,8 +9209,7 @@ $widget-&gt;trigger('connect');
 <td>无</td>
 <td>事件的类型,可以包含命名空间,如"error.namespace",也可以只有命名空间,如".namespace"</td>
 </tr></tbody>
-</table>
-<p><code>off</code>微件是事件管理器(<code>eventManager</code>)<code>remove</code>方法的别名</p>
+</table><p><code>off</code>微件是事件管理器(<code>eventManager</code>)<code>remove</code>方法的别名</p>
 
 <p>如果<code>$type</code>只是纯命名空间,如'.namespace',表示移除该命名空间下所有的事件触发器</p>
 
@@ -9449,19 +9246,14 @@ $widget-&gt;trigger('connect');
 <td>微件对象</td>
 </tr>
 </tbody>
-</table>
-<p>第三个参数<code>$widget</code>为可选的微件对象,如果微件包含与事件名称相同的属性,那么,事件管理器将会把该属性
+</table><p>第三个参数<code>$widget</code>为可选的微件对象,如果微件包含与事件名称相同的属性,那么,事件管理器将会把该属性
 作为一个事件触发器,在所有的触发器触发后才触发.</p>
-</body></html>
-
   </section>
 
 <!-- db
   ================================================== -->
   <section id="db">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Db</h1>
+  <h1>Db</h1>
 
 <p>获取<a href="https://github.com/doctrine/dbal">Doctrine DBAL</a>的数据库查询对象</p>
 
@@ -9554,8 +9346,7 @@ $widget-&gt;dbSlave();
 <td>实例化的PDO对象</td>
 </tr>
 </tbody>
-</table>
-<h4>当选项<code>driver</code>的值为<code>pdo_sqlite</code>时,需提供以下配置选项</h4>
+</table><h4>当选项<code>driver</code>的值为<code>pdo_sqlite</code>时,需提供以下配置选项</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -9590,8 +9381,7 @@ $widget-&gt;dbSlave();
 <td>是否使用SQLite的内存数据库(非持久化,在每次请求完毕就自动删除)</td>
 </tr>
 </tbody>
-</table>
-<h4>当选项<code>driver</code>的值为<code>pdo_mysql</code>时,需提供以下配置选项</h4>
+</table><h4>当选项<code>driver</code>的值为<code>pdo_mysql</code>时,需提供以下配置选项</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -9644,8 +9434,7 @@ $widget-&gt;dbSlave();
 <td>连接数据库的字符集</td>
 </tr>
 </tbody>
-</table>
-<h4>当选项<code>driver</code>的值为<code>pdo_pgsql</code>时,需提供以下配置选项</h4>
+</table><h4>当选项<code>driver</code>的值为<code>pdo_pgsql</code>时,需提供以下配置选项</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -9686,8 +9475,7 @@ $widget-&gt;dbSlave();
 <td>连接数据库的数据库名称</td>
 </tr>
 </tbody>
-</table>
-<h4>当选项<code>driver</code>的值为<code>pdo_oci</code> / <code>oci8</code>时,需提供以下配置选项</h4>
+</table><h4>当选项<code>driver</code>的值为<code>pdo_oci</code> / <code>oci8</code>时,需提供以下配置选项</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -9734,8 +9522,7 @@ $widget-&gt;dbSlave();
 <td>连接数据库的字符集</td>
 </tr>
 </tbody>
-</table>
-<h4>当选项<code>driver</code>的值为<code>pdo_sqlsrv</code>时,需提供以下配置选项</h4>
+</table><h4>当选项<code>driver</code>的值为<code>pdo_sqlsrv</code>时,需提供以下配置选项</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -9776,22 +9563,17 @@ $widget-&gt;dbSlave();
 <td>连接数据库的数据库名称</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>db()</h4>
 
 <p>获取数据库查询对象</p>
-</body></html>
-
   </section>
 
 <!-- entityManager
   ================================================== -->
   <section id="entityManager">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>EntityManager</h1>
+  <h1>EntityManager</h1>
 
 <p>获取<a href="https://github.com/doctrine/doctrine2">Doctrine ORM</a>的实体管理对象</p>
 
@@ -9823,8 +9605,7 @@ echo get_class($em);
 <td>
 <code>\Doctrine\ORM\Configuration</code>的初始化参数</td>
 </tr></tbody>
-</table>
-<p>config选项的详细配置</p>
+</table><p>config选项的详细配置</p>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -9877,22 +9658,17 @@ echo get_class($em);
 <td></td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>entityManager()</h4>
 
 <p>获取Doctrine ORM的实体管理对象</p>
-</body></html>
-
   </section>
 
 <!-- error
   ================================================== -->
   <section id="error">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<pre><code>该微件文档还在紧急编写中,敬请期待!
+  <pre><code>该微件文档还在紧急编写中,敬请期待!
 </code></pre>
 
 <h1><a href="http://twinh.github.io/widget/api/error">error()</a></h1>
@@ -9914,16 +9690,12 @@ echo get_class($em);
 <li>
 <strong>$data</strong> <code>array</code> The data pass to the event object, when the handler is triggered</li>
 </ul>
-</body></html>
-
   </section>
 
 <!-- phpError
   ================================================== -->
   <section id="phpError">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>PHP Error</h1>
+  <h1>PHP Error</h1>
 
 <p><a href="http://phperror.net/">PHP Error</a>提供了更友好的错误提示信息,完整的语法和代码片段高亮,同时支持Ajax错误提示</p>
 
@@ -9958,16 +9730,12 @@ echo get_class($em);
 <h4>phpError()</h4>
 
 <p>获取\php_error\ErrorHandler对象</p>
-</body></html>
-
   </section>
 
 <!-- arr
   ================================================== -->
   <section id="arr">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Arr</h1>
+  <h1>Arr</h1>
 
 <p>数组工具微件,提供一些实用的数组操作方法</p>
 
@@ -10063,23 +9831,18 @@ print_r($widget-&gt;arr-&gt;sort($data, 'order', SORT_DESC));
 <li>如果<code>$data</code>是对象且方法<code>get. $key</code>存在,返回<code>$data-&gt;{'get' . $key}</code>
 </li>
 <li>如果以上均不存在,返回null</li>
-</ol>
-<p>使用<code>attr()</code>微件的好处在于你不用关心要取值的变量类型,不管它是数组,对象数组(\ArrayAccess),还是
+</ol><p>使用<code>attr()</code>微件的好处在于你不用关心要取值的变量类型,不管它是数组,对象数组(\ArrayAccess),还是
 其他对象</p>
 
 <h4>arr-&gt;sort($array, $key = 'order', $type = SORT_ASC)</h4>
 
 <p>对一个二维数组进行排序,类似SQL的ORDER BY语句</p>
-</body></html>
-
   </section>
 
 <!-- env
   ================================================== -->
   <section id="env">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Env</h1>
+  <h1>Env</h1>
 
 <p>环境检测及根据不同环境加载不同的配置文件</p>
 
@@ -10133,8 +9896,7 @@ print_r($widget-&gt;arr-&gt;sort($data, 'order', SORT_DESC));
 <td>配置环境的目录,%env%会替换成当前的环境名称</td>
 </tr>
 </tbody>
-</table>
-<h3>方法</h3>
+</table><h3>方法</h3>
 
 <h4>env()</h4>
 
@@ -10155,16 +9917,12 @@ print_r($widget-&gt;arr-&gt;sort($data, 'order', SORT_DESC));
 <h4>env-&gt;inProd()</h4>
 
 <p>检查是否为生产(线上)环境</p>
-</body></html>
-
   </section>
 
 <!-- logger
   ================================================== -->
   <section id="logger">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<pre><code>该微件文档还在紧急编写中,敬请期待!
+  <pre><code>该微件文档还在紧急编写中,敬请期待!
 </code></pre>
 
 <h1><a href="http://twinh.github.io/widget/api/logger">logger()</a></h1>
@@ -10186,16 +9944,12 @@ print_r($widget-&gt;arr-&gt;sort($data, 'order', SORT_DESC));
 <li>
 <strong>$context</strong> <code>array</code> </li>
 </ul>
-</body></html>
-
   </section>
 
 <!-- monolog
   ================================================== -->
   <section id="monolog">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<pre><code>该微件文档还在紧急编写中,敬请期待!
+  <pre><code>该微件文档还在紧急编写中,敬请期待!
 </code></pre>
 
 <h1><a href="http://twinh.github.io/widget/api/monolog">monolog()</a></h1>
@@ -10213,16 +9967,12 @@ print_r($widget-&gt;arr-&gt;sort($data, 'order', SORT_DESC));
 <li>
 <strong>$message</strong> <code>string</code> The log message</li>
 </ul>
-</body></html>
-
   </section>
 
 <!-- pinyin
   ================================================== -->
   <section id="pinyin">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<pre><code>该微件文档还在紧急编写中,敬请期待!
+  <pre><code>该微件文档还在紧急编写中,敬请期待!
 </code></pre>
 
 <h1><a href="http://twinh.github.io/widget/api/pinyin">pinyin()</a></h1>
@@ -10240,16 +9990,12 @@ print_r($widget-&gt;arr-&gt;sort($data, 'order', SORT_DESC));
 <li>
 <strong>$word</strong> <code>string</code> </li>
 </ul>
-</body></html>
-
   </section>
 
 <!-- uuid
   ================================================== -->
   <section id="uuid">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Uuid</h1>
+  <h1>Uuid</h1>
 
 <p>生成一个随机的UUID</p>
 
@@ -10274,16 +10020,12 @@ echo $widget-&gt;uuid();
 <p>生成一个随机的UUID</p>
 
 <p>生成的UUID可用于数据表主键,相比通过SQL语句<code>SELECT UUID</code>生成的UUID要快很多,而且调用更加方便.</p>
-</body></html>
-
   </section>
 
 <!-- website
   ================================================== -->
   <section id="website">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Website</h1>
+  <h1>Website</h1>
 
 <p>设置或获取网站的配置</p>
 
@@ -10319,8 +10061,6 @@ echo $widget-&gt;website('url');
 <h4>website($name, $value)</h4>
 
 <p>设置网站配置</p>
-</body></html>
-
   </section>
 
 </div><!-- /.container -->
