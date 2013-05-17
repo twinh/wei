@@ -26,6 +26,7 @@
     "autoload": {
         "psr-0": {
             "Widget": "lib"
-        }
+        },
+        "files": ["lib/Widget/Widget.php"]
     }
 }

@@ -372,4 +372,9 @@ class WidgetTest extends TestCase
     {
         Widget::reset('NotInstance');
     }
+
+    public function testWidgetFunction()
+    {
+        $this->assertSame(Widget::create(), widget());
+    }
 }

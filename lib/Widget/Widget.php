@@ -6,7 +6,8 @@
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Widget;
+namespace Widget
+{
 
 /**
  * @see Widget\AbstractWidget
@@ -87,7 +88,7 @@ class Widget extends AbstractWidget
 
     /**
      * The import configuration
-     * 
+     *
      * Format:
      * array(
      *     array(
@@ -143,7 +144,7 @@ class Widget extends AbstractWidget
     /**
      * Get widget manager instance
      *
-     * @param array $config          The array or file configuration
+     * @param array $config                 The array or file configuration
      * @param string $name                  The name of the instance
      * @return Widget
      * @throws \InvalidArgumentException    When the configuration parameter is not array or file
@@ -236,10 +237,10 @@ class Widget extends AbstractWidget
      * $this->config('name', 'param');  // Set one configuration
      * $this->config('key1/key2');      // Get the value of $this->config['key1']['key2']
      * ```
-     * 
+     *
      * @param  mixed $name  The name of configuration
      * @param  mixed $value The value of configuration
-     * @return mixed     
+     * @return mixed
      */
     public function config($name = null, $value = null)
     {
@@ -264,7 +265,7 @@ class Widget extends AbstractWidget
                     $temp = &$temp[$key];
                 }
             }
-            
+
             if (1 == func_num_args()) {
                 return isset($temp[$name]) ? $temp[$name] : null;
             } else {
@@ -375,10 +376,10 @@ class Widget extends AbstractWidget
             throw new \BadMethodCallException(sprintf('Property or method "%s" not found', $name));
         }
     }
-    
+
     /**
      * Initialize a new instance of widget, with the specified name
-     * 
+     *
      * @param string $name The name of the widget
      * @param array $options The option properies for widget
      * @param array $deps The dependent configuration
@@ -389,7 +390,7 @@ class Widget extends AbstractWidget
         $name .= '.' . uniqid();
         return $this->widget->get($name, $options, $deps);
     }
-    
+
     /**
      * Add a widget
      *
@@ -546,5 +547,25 @@ class Widget extends AbstractWidget
         }
 
         return $this;
+    }
+}
+
+}
+
+/**
+ * Define function in global namespace
+ */
+namespace
+{
+    /**
+     * Get widget manager instance
+     *
+     * @param array $config                 The array or file configuration
+     * @param string $name                  The name of the instance
+     * @return Widget
+     * @throws \InvalidArgumentException    When the configuration parameter is not array or file
+     */
+    function widget ($config = array(), $name = 'default') {
+        return Widget\Widget::create($config, $name);
     }
 }
