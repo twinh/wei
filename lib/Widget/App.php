@@ -68,7 +68,7 @@ class App extends AbstractWidget
      *
      * @var string
      */
-    protected $controllerFormat = '%module%\%controller%Controller';
+    protected $controllerFormat = '%module%\%controller%';
 
     /**
      * The controller instances
@@ -90,7 +90,7 @@ class App extends AbstractWidget
         $request = $this->request;
         $parameters = (array)$this->router->match($request->getPathInfo(), $request->getMethod());
         $request->set($parameters);
-        
+
         return $this->dispatch(
             $this->getModule(),
             $this->getController(),
