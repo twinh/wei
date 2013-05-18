@@ -30,7 +30,12 @@ class Is extends AbstractWidget
         'after'     => 'Widget\Validator\Min'
     );
 
-    private $rules = array(
+    /**
+     * The avaiable validator rules name
+     *
+     * @var array
+     */
+    protected $rules = array(
         'All', 'AllOf', 'Alnum', 'Alpha', 'Blank', 'Callback', 'Chinese',
         'Color', 'CreditCard', 'Date', 'DateTime', 'Decimal', 'Digit', 'Dir',
         'DivisibleBy', 'DoubleByte', 'Email', 'EndsWith', 'EntityExists',
@@ -65,7 +70,7 @@ class Is extends AbstractWidget
     /**
      * @param string|Validator\AbstractValidator|int $rule
      * @param array|null $input
-     * @paran mixed $options
+     * @param mixed $options
      * @internal Do NOT use this method for it may be changed in the future
      */
     public function validateOne($rule, $input, $options = array(), &$validator = null, $props = array())
