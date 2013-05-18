@@ -35,3 +35,7 @@ To run the tests:
 License
 -------
 Widget is an open-source project released MIT license. See the LICENSE file for details.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/twinh/widget/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
