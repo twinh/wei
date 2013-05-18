@@ -1,6 +1,5 @@
-    该微件文档还在紧急编写中,敬请期待!
-[error()](http://twinh.github.io/widget/api/error)
-==================================================
+Error
+=====
 
 Attach a handler to the error event
 

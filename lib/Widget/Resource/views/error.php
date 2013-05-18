@@ -25,7 +25,7 @@ strong, .error-text { color: #FF3000; }
     <p class="error-text"><?php echo $detail ?></p>
     <p><pre><?php echo $trace ?></pre></p>
 <?php else : ?>
-    <p>Unfortunately, an error occurred. Please try again later.</p>
+    <p><?= $detail ?></p>
 <?php endif ?>
 </body>
 </html>

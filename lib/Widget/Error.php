@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Event\Event;
 
 /**
- * The error widget to show pretty exception message 
+ * The error widget to show pretty exception message
  *
  * @property    Request $request The HTTP request widget
  * @property    Logger $logger The logger widget
@@ -21,11 +21,18 @@ use Widget\Event\Event;
 class Error extends AbstractWidget
 {
     /**
-     * The default error message when debug is not enable
+     * The default error message display when debug is not enable
      *
      * @var string
      */
     protected $message = 'Error';
+
+    /**
+     * The detail error message display when debug is not enable
+     *
+     * @var string
+     */
+    protected $detail = 'Unfortunately, an error occurred. Please try again later.';
 
     /**
      * Whether handle the PHP errors
@@ -33,7 +40,7 @@ class Error extends AbstractWidget
      * @var bool
      */
     protected $convertErrorToException = true;
-    
+
     /**
      * Constructor
      *
@@ -51,10 +58,10 @@ class Error extends AbstractWidget
             set_error_handler(array($this, 'hanldeError'));
         }
     }
-    
+
     /**
      * Attach a handler to the error event
-     * 
+     *
      * @param \Closure $fn The error handler
      * @param int|string $priority The event priority, could be int or specify strings, the higer number, the higer priority
      * @param array $data The data pass to the event object, when the handler is triggered
@@ -67,7 +74,7 @@ class Error extends AbstractWidget
 
     /**
      * The exception handler to render pretty message
-     * 
+     *
      * @param Event\Event $event
      * @param Widget $widget
      * @param \Exception $exception
@@ -76,24 +83,24 @@ class Error extends AbstractWidget
     {
         // Prevent ogirin exception output
         $event->preventDefault();
-        
+
         $debug = $widget->config('debug');
         $ajax = $this->request->inAjax();
-        
+
         try {
             // This widgets may show exception too
             $this->response->setStatusCode(500)->send();
             $this->logger->debug((string)$exception);
-            
+
             $this->renderException($exception, $debug, $ajax);
         } catch (\Exception $e) {
             $this->renderException($e, $debug, $ajax);
         }
     }
-    
+
     /**
      * Render exception message
-     * 
+     *
      * @param \Exception $exception
      * @param bool $debug Whether show debug trace
      * @param bool $ajax Wherher return json instead html string
@@ -107,7 +114,7 @@ class Error extends AbstractWidget
         $class      = get_class($exception);
         $trace      = htmlspecialchars($exception->getTraceAsString(), ENT_QUOTES);
         $detail     = sprintf('Threw by %s in %s on line %s', $class, $file, $line);
-        
+
         if ($ajax) {
             echo json_encode(array(
                 'code'      => -($code ? abs($code) : 500),
@@ -119,12 +126,13 @@ class Error extends AbstractWidget
             // File Infomation
             $mtime = date('Y-m-d H:i:s', filemtime($file));
             $fileInfo = $this->getFileCode($file, $line);
+            !$debug && $detail = $this->detail;
 
             // Display view file
             require __DIR__ . '/Resource/views/error.php';
         }
     }
-    
+
     /**
      * The error handler convert PHP error to exception
      *
@@ -148,7 +156,7 @@ class Error extends AbstractWidget
      * Get file code in specified range
      *
      * @param  string $file  The file name
-     * @param  int    $line  The file line 
+     * @param  int    $line  The file line
      * @param  int    $range The line range
      * @return string
      */
@@ -163,7 +171,7 @@ class Error extends AbstractWidget
         $total = count($code);
         $end = $line + $half;
         $total < $end && $end = $total;
-        
+
         $len = strlen($end);
 
         array_unshift($code, null);
@@ -176,7 +184,7 @@ class Error extends AbstractWidget
                 $content .= '<strong>' . htmlspecialchars($temp, ENT_QUOTES) . '</strong>';
             }
         }
-        
+
         return $content;
     }
 }
