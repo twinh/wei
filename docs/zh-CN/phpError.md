@@ -32,6 +32,3 @@ PHP Error
 
 #### phpError()
 获取\php_error\ErrorHandler对象
-
-
-
