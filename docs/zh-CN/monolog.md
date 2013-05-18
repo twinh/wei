@@ -1,14 +1,47 @@
-    该微件文档还在紧急编写中,敬请期待!
-[monolog()](http://twinh.github.io/widget/api/monolog)
-======================================================
+Monolog
+=======
 
-Get monolog logger object or add a log record
+获取Monolog对象或记录一条日志
 
-### Get monolog logger object or add a log record
+案例
+----
+
+### 记录一条DEBUG级别的日志
 ```php
-\Monolog\Logger|\boolen monolog($level, $message, $context)
+$widget->monolog()->debug('The logger is called');
 ```
 
-##### 参数
-* **$message** `string` The log message
+调用方式
+--------
 
+### 选项
+
+名称         | 类型     | 默认值  | 说明
+-------------|----------|---------|------
+handlers     | array    | 见下面  | Monolog的日志处理器
+
+handlers的默认值是
+
+```php
+$handlers = array(
+    // 键名表示处理器类的名称
+    // 如`stream`表示`Monolog\Handler\StreamHandler`,`chromePHP`表示`Monolog\Handler\ChromePHPHandler`
+    'stream' => array(
+        // 数组的值表示处理器类的初始化参数
+        'stream' => 'log/widget.log', // 日志所在的文件
+        'level' => MonologLogger::DEBUG, // 最低记录的等级
+    )
+);
+```
+
+您可以查看monolog的项目主页,了解更多处理器和配置
+
+https://github.com/Seldaek/monolog
+
+### 方法
+
+#### monolog()
+获取Monolog对象
+
+#### monolog($level, $message)
+记录一条日志

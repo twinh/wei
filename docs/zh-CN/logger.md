@@ -47,7 +47,7 @@ alert     | 高   | 必须马上处理的情况,如网站打不开,数据库连�
 
 日志等级及说明来自于[Monolog](https://github.com/Seldaek/monolog) 
 
-除了上面之外,还有notice和emergency级别,因不推荐使用,为避免混淆不一一详细说明.
+除了上面之外,还有notice和emergency级别,因不推荐使用,且为避免混淆,不一一详细说明.
 
 ### 方法
 
