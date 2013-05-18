@@ -10,7 +10,6 @@ PHP Error
     'widget' => array(
         'preload' => array(
             'phpError' // 在预加载选项增加phpError微件
-            '...'      // 预加载其他微件
         )
     ),
     // 配置PHP Error微件的选项
