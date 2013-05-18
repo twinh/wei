@@ -181,12 +181,6 @@
     </li>
     <li>
       <a href="#event">事件</a>
-      <ul class="nav">
-        <li><a href="#eventManager">eventManager</a> </li>
-        <li><a href="#off">off</a></li>
-        <li><a href="#on">on</a></li>
-        <li><a href="#trigger">trigger</a></li>
-      </ul>
     </li>
     <li>
       <a href="#db">数据库</a>
@@ -1913,20 +1907,18 @@
 <table class="table table-bordered table-striped">
 <thead><tr>
 <th></th>
-<th>Cache</th>
 <th>Apc</th>
 <th>DbCache</th>
 <th>FileCache</th>
 <th>Memecache</th>
 <th>Memcached</th>
+<th>MongoCache</th>
 <th>Couchbase</th>
 <th>Redis</th>
-<th>Bicache</th>
 </tr></thead>
 <tbody>
 <tr>
 <td>速度</td>
-<td>-</td>
 <td>快</td>
 <td>慢</td>
 <td>慢</td>
@@ -1934,11 +1926,10 @@
 <td>快</td>
 <td>快</td>
 <td>快</td>
-<td>-</td>
+<td>快</td>
 </tr>
 <tr>
 <td>持久化</td>
-<td>-</td>
 <td>×</td>
 <td>√</td>
 <td>√</td>
@@ -1946,11 +1937,10 @@
 <td>×</td>
 <td>√</td>
 <td>√</td>
-<td>-</td>
+<td>√</td>
 </tr>
 <tr>
 <td>分布式</td>
-<td>-</td>
 <td>×</td>
 <td>√</td>
 <td>×</td>
@@ -1958,11 +1948,10 @@
 <td>√</td>
 <td>√</td>
 <td>√</td>
-<td>-</td>
+<td>√</td>
 </tr>
 <tr>
 <td>原子性</td>
-<td>-</td>
 <td>√</td>
 <td>×</td>
 <td>√</td>
@@ -1970,7 +1959,7 @@
 <td>√</td>
 <td>√</td>
 <td>√</td>
-<td>-</td>
+<td>√</td>
 </tr>
 </tbody>
 </table><ul>
@@ -1979,7 +1968,7 @@
 <li>持久化:判断依据是缓存是否因为相关服务重启而丢失数据</li>
 <li>原子性:判断依据是<code>add</code>,<code>replace</code>,<code>increment</code>和<code>decrement</code>方法是否为原子操作</li>
 <li>
-<code>Cache</code>和<code>Bicache</code>为视配置而定</li>
+<code>Cache</code>和<code>Bicache</code>为视配置而定,不列入比较</li>
 </ul><h2>通用方法</h2>
 
 <p>在下面的方法中,<code>cache</code>表示缓存微件的名称,可以替换为其他任意缓存,如<code>redis</code>, <code>memcached</code></p>
@@ -4357,119 +4346,183 @@ $widget-&gt;arrayCache('name');
 <!-- is
   ================================================== -->
   <section id="is">
-  <div class="page-header"><h1><a href="http://twinh.github.io/widget/api/is">is()</a></h1></div>
+  <div class="page-header"><h1>is</h1></div>
 
-<p>检查数据是否能通过指定规则,或指定回调结构的验证</p>
+<p>验证管理器,用于检查数据是否能通过指定规则,或指定回调结构的验证</p>
 
-<h5>目录</h5>
+<h2>案例</h2>
 
-<ul>
-<li>is($rule, $input, $options)</li>
-<li>is($fn, $input)</li>
-<li>is($rules, $input)</li>
-</ul><h3>检查数据是否能通过指定规则的验证</h3>
+<h3>检查数据是否为邮箱</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nx">bool</span> <span class="nx">is</span><span class="p">(</span><span class="nv">$rule</span><span class="p">,</span> <span class="nv">$input</span><span class="p">,</span> <span class="nv">$options</span><span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">'email'</span><span class="p">,</span> <span class="s1">'twinhuang@qq.com'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'twihuang@qq.com is valid email'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'twihuang@qq.com is not valid email'</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$rule</strong> <code>string</code> 验证器的名称</li>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-<li>
-<strong>$options</strong> <code>array</code> 验证器的配置选项</li>
-</ul><h5>代码范例</h5>
-
-<p>检查数据是否为邮箱
-```php
-&lt;?php</p>
-
-<p>if ($widget-&gt;is('email', '<a href="mailto:twinhuang@qq.com">twinhuang@qq.com</a>')) {
-    echo '<a href="mailto:twihuang@qq.com">twihuang@qq.com</a> is valid email';
-} else {
-    echo '<a href="mailto:twihuang@qq.com">twihuang@qq.com</a> is not valid email';
-}
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <div class="highlight"><pre><code class="php"><span class="s1">'twihuang@qq.com is valid email'</span>
 </code></pre></div>
 
-<hr><h3>检查数据是否能通过指定回调结构的验证</h3>
+<h3>检查数据是否能被3整除</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nx">bool</span> <span class="nx">is</span><span class="p">(</span><span class="nv">$fn</span><span class="p">,</span> <span class="nv">$input</span><span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="nv">$input</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">0</span> <span class="o">===</span> <span class="mi">10</span> <span class="o">%</span> <span class="nv">$input</span><span class="p">;</span>
+<span class="p">},</span> <span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$fn</strong> <code>callback</code> 用于验证数据的回调结构</li>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul><p>回调结构<code>$fn</code>包含三个参数,分别是</p>
-
-<ul>
-<li>$input <code>mixed</code> 待验证的数据</li>
-<li>$callback <code>\Widget\Validator\Callback</code> 回调验证器对象</li>
-<li>$widget <code>\Widget\Widget</code> 微件管理器</li>
-</ul><h5>代码范例</h5>
-
-<p>检查数据是否能被3整除
-```php
-&lt;?php</p>
-
-<p>if ($widget-&gt;is(function($input) {
-    return 0 === 10 % $input;
-}, 3)) {
-    echo 'Yes';
-} else {
-    echo 'No';
-}
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <div class="highlight"><pre><code class="php"><span class="s1">'No'</span>
 </code></pre></div>
 
-<hr><h3>检查数据是否能通过指定的验证规则数组验证</h3>
+<h3>检查数据是否为数字,且长度在3到5之间</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nx">bool</span> <span class="nx">is</span><span class="p">(</span><span class="nv">$rules</span><span class="p">,</span> <span class="nv">$input</span><span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$rules</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'digit'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="s1">'length'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="nv">$rules</span><span class="p">,</span> <span class="s1">'123456'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$rules</strong> <code>array</code> 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</li>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul><h5>代码范例</h5>
-
-<p>检查数据是否为数字,且长度在3到5之间
-```php
-&lt;?php</p>
-
-<p>$rules = array(
-    'digit' =&gt; true,
-    'length' =&gt; array(3, 5)
-);
-if ($widget-&gt;is($rules, '123456')) {
-    echo 'Yes';
-} else {
-    echo 'No';
-}
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <div class="highlight"><pre><code class="php"><span class="s1">'No'</span>
 </code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<h3>方法</h3>
+
+<h4>is($rule, $input, $options = array())</h4>
+
+<p>检查数据是否能通过指定规则的验证</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$rule</td>
+<td>string</td>
+<td>无</td>
+<td>验证器的名称</td>
+</tr>
+<tr>
+<td>$input</td>
+<td>mixed</td>
+<td>无</td>
+<td>待验证的数据</td>
+</tr>
+<tr>
+<td>$options</td>
+<td>array</td>
+<td>array()</td>
+<td>验证器的配置选项</td>
+</tr>
+</tbody>
+</table><h4>is($fn, $input)</h4>
+
+<p>检查数据是否能通过指定回调结构的验证</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$fn</td>
+<td>callback</td>
+<td>无</td>
+<td>用于验证数据的回调结构</td>
+</tr>
+<tr>
+<td>$input</td>
+<td>mixed</td>
+<td>无</td>
+<td>待验证的数据配置选项</td>
+</tr>
+</tbody>
+</table><p>回调结构<code>$fn</code>包含三个参数,分别是</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$input</td>
+<td>mixed</td>
+<td>无</td>
+<td>待验证的数据</td>
+</tr>
+<tr>
+<td>$callback</td>
+<td>\Widget\Validator\Callback</td>
+<td>无</td>
+<td>回调验证器对象</td>
+</tr>
+<tr>
+<td>$widget</td>
+<td>\Widget\Widget</td>
+<td>无</td>
+<td>微件管理器</td>
+</tr>
+</tbody>
+</table><h4>is($rules, $input)</h4>
+
+<p>检查数据是否能通过指定的验证规则数组验证</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$rules</td>
+<td>array</td>
+<td>无</td>
+<td>证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</td>
+</tr>
+<tr>
+<td>$input</td>
+<td>mixed</td>
+<td>无</td>
+<td>待验证的数据配置选项</td>
+</tr>
+</tbody>
+</table><h4>is-&gt;hasRule($rule)</h4>
+
+<p>检查是否存在该验证规则</p>
+
+<h4>is-&gt;createRuleValidator($rule, array $options = array())</h4>
+
+<p>创建一个规则验证器对象</p>
   </section>
 
 <!-- isAlnum
@@ -8924,155 +8977,321 @@ if ($widget-&gt;is($rules, '123456')) {
 <!-- escape
   ================================================== -->
   <section id="escape">
-  <div class="page-header"><h1><a href="http://twinh.github.io/widget/api/escape">escape()</a></h1></div>
+  <div class="page-header"><h1>Escape</h1></div>
 
 <p>转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义</p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">bool</span> <span class="nx">escape</span><span class="p">(</span><span class="nv">$input</span> <span class="p">[,</span> <span class="nv">$type</span> <span class="p">]</span> <span class="p">)</span>
+<h2>案例</h2>
+
+<h3>转义HTML字符串</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">escape</span><span class="p">(</span><span class="s1">'&lt;script&gt;alert("xss")&lt;/script&gt;'</span><span class="p">);</span>
 </code></pre></div>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>string</code> 待转义的字符串</li>
-<li>
-<strong>$type</strong> <code>string</code> 转义的类型,支持html,js,css,attr和url5种转义方式,默认是html</li>
-</ul><p>Escape微件是基于<a href="https://github.com/zendframework/zf2/tree/master/library/Zend/Escaper">Zend\Escaper</a>组件的字符串安全转义器.Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可以查看这里<a href="http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html">http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html</a></p>
-
-<p>转义HTML字符串也可以直接调用<code>$widget-&gt;escape-&gt;html($string)</code></p>
-
-<p>转义Javascript字符串也可以直接调用<code>$widget-&gt;escape-&gt;js($string)</code></p>
-
-<p>转义CSS字符串也可以直接调用<code>$widget-&gt;escape-&gt;css($string)</code></p>
-
-<p>转义HTML属性字符串也可以直接调用<code>$widget-&gt;escape-&gt;attr($string)</code></p>
-
-<p>转义URL字符串也可以直接调用<code>$widget-&gt;escape-&gt;url($string)</code></p>
-
-<h5>代码范例</h5>
-
-<p>转义HTML字符串
-```php
-&lt;?php</p>
-
-<p>echo $widget-&gt;escape('alert("xss")');
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <div class="highlight"><pre><code class="php"><span class="s1">'&amp;lt;script&amp;gt;alert(&amp;quot;xss&amp;quot;)&amp;lt;/script&amp;gt;'</span>
 </code></pre></div>
 
-<h5>代码范例</h5>
+<h3>转义Javascript字符串</h3>
 
-<p>转义Javascript字符串
-```php
-&lt;?php</p>
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">escape</span><span class="o">-&gt;</span><span class="na">js</span><span class="p">(</span><span class="s1">'bar&amp;quot;; alert(&amp;quot;Meow!&amp;quot;); var xss=&amp;quot;true'</span><span class="p">);</span>
+</code></pre></div>
 
-<p>echo $widget-&gt;escape-&gt;js('bar"; alert("Meow!"); var xss="true');
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <div class="highlight"><pre><code class="php"><span class="s1">'bar\x26quot\x3B\x3B\x20alert\x28\x26quot\x3BMeow\x21\x26quot\x3B\x29\x3B\x20var\x20xss\x3D\x26quot\x3Btrue'</span>
 </code></pre></div>
 
-<h5>代码范例</h5>
+<h3>转义CSS字符串</h3>
 
-<p>转义CSS字符串
-```php
-&lt;?php</p>
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">escape</span><span class="o">-&gt;</span><span class="na">css</span><span class="p">(</span><span class="s2">"background-image: url('http://example.com/foo.jpg?&lt;/style&gt;&lt;script&gt;alert(1)&lt;/script&gt;');"</span><span class="p">);</span>
+</code></pre></div>
 
-<p>echo $widget-&gt;escape-&gt;css("background-image: url('<a href="http://example.com/foo.jpg">http://example.com/foo.jpg</a>?alert(1)');");
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <div class="highlight"><pre><code class="php"><span class="s1">'background\2D image\3A \20 url\28 \27 http\3A \2F \2F example\2E com\2F foo\2E jpg\3F \3C \2F style\3E \3C script\3E alert\28 1\29 \3C \2F script\3E \27 \29 \3B '</span>
 </code></pre></div>
 
-<h5>代码范例</h5>
+<h3>转义HTML属性字符串</h3>
 
-<p>转义HTML属性字符串
-```php
-&lt;?php</p>
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="s1">'&lt;span title='</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">escape</span><span class="o">-&gt;</span><span class="na">attr</span><span class="p">(</span><span class="s2">"faketitle onmouseover=alert(/xss/);"</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s1">'&gt;hi&lt;/span&gt;'</span><span class="p">;</span>
+</code></pre></div>
 
-<p>echo 'escape-&gt;attr("faketitle onmouseover=alert(/xss/);");
-echo '&gt;hi';
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <div class="highlight"><pre><code class="php"><span class="s1">'&lt;span title=faketitle&amp;#x20;onmouseover&amp;#x3D;alert&amp;#x28;&amp;#x2F;xss&amp;#x2F;&amp;#x29;&amp;#x3B;&gt;hi&lt;/span&gt;'</span>
 </code></pre></div>
 
-<h5>代码范例</h5>
+<h3>转义URL字符串</h3>
 
-<p>转义URL字符串
-```php
-&lt;?php</p>
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="s1">'&lt;a href="http://example.com/?name='</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">escape</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="s2">"onmouseover= </span><span class="se">\"</span><span class="s2">alert('zf2')"</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s1">'"&gt;Click here!&lt;/a&gt;'</span><span class="p">;</span>
+</code></pre></div>
 
-<p>echo 'escape-&gt;url("onmouseover= \"alert('zf2')");
-echo '"&gt;Click here!';
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <div class="highlight"><pre><code class="php"><span class="s1">'&lt;a href="http://example.com/?name=onmouseover%3D%20%22alert%28%27zf2%27%29"&gt;Click here!&lt;/a&gt;'</span>
 </code></pre></div>
+
+<h2>说明</h2>
+
+<p>Escape微件是基于<a href="https://github.com/zendframework/zf2/tree/master/library/Zend/Escaper">Zend\Escaper</a>组件的字符串安全转义器.
+Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可以查看这里
+<a href="http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html">http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html</a></p>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>方法</h3>
+
+<h4>escape($input, $type = 'html')</h4>
+
+<p>转义HTML字符串</p>
+
+<h4>escape-&gt;html($input)</h4>
+
+<p>转义HTML字符串</p>
+
+<h4>escape-&gt;js($input)</h4>
+
+<p>转义Javascript字符串</p>
+
+<h4>escape-&gt;css($input)</h4>
+
+<p>转义CSS字符串</p>
+
+<h4>escape-&gt;attr($input)</h4>
+
+<p>转义HTML属性字符串</p>
+
+<h4>escape-&gt;url($input)</h4>
+
+<p>转义URL字符串</p>
   </section>
 
 <!-- smarty
   ================================================== -->
   <section id="smarty">
-  <div class="highlight"><pre><code class="php"><span class="err">该微件文档还在紧急编写中</span><span class="p">,</span><span class="err">敬请期待</span><span class="o">!</span>
+  <div class="page-header"><h1>Smarty</h1></div>
+
+<p>渲染Smarty模板或获取Smarty对象</p>
+
+<h2>案例</h2>
+
+<h3>渲染模板<code>hello.tpl</code>
+</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 准备视图变量</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'Widget'</span>
+<span class="p">);</span>
+
+<span class="c1">// 输出渲染后的视图</span>
+<span class="k">echo</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">smarty</span><span class="p">(</span><span class="s1">'hello.tpl'</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
 </code></pre></div>
 
-<div class="page-header"><h1><a href="http://twinh.github.io/widget/api/smarty">smarty()</a></h1></div>
+<h4>文件<code>hello.tpl</code>的内容</h4>
 
-<p>Returns \Smarty object or render a template</p>
-
-<h3>Returns \Smarty object or render a template</h3>
-
-<div class="highlight"><pre><code class="php"><span class="nx">\Smarty</span><span class="o">|</span><span class="nx">string</span> <span class="nx">smarty</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$vars</span><span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="nx">Hello</span> <span class="p">{{</span><span class="nv">$name</span><span class="p">}}</span>
 </code></pre></div>
 
-<h5>参数</h5>
+<h4>输出结果</h4>
 
-<ul>
-<li>
-<strong>$name</strong> <code>string</code> The name of template</li>
-<li>
-<strong>$vars</strong> <code>array</code> The variables pass to template</li>
-</ul><p>if NO parameter provied, the invoke method will return the \Smarty
-object otherwise, call the render method</p>
+<div class="highlight"><pre><code class="php"><span class="s1">'Hello Widget'</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>extension</td>
+<td>string</td>
+<td>.tpl</td>
+<td>默认的模板扩展名</td>
+</tr>
+<tr>
+<td>object</td>
+<td>\Smarty</td>
+<td>无</td>
+<td>Smarty对象</td>
+</tr>
+<tr>
+<td>options</td>
+<td>array</td>
+<td>见下表</td>
+<td>Smarty对象的配置选项</td>
+</tr>
+</tbody>
+</table><h4>
+<code>options</code>的默认值</h4>
+
+<div class="highlight"><pre><code class="php"><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'template_dir'</span>      <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(),</span>
+    <span class="s1">'config_dir'</span>        <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(),</span>
+    <span class="s1">'plugins_dir'</span>       <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(),</span>
+    <span class="s1">'compile_dir'</span>       <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+    <span class="s1">'cache_dir'</span>         <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+    <span class="s1">'left_delimiter'</span>    <span class="o">=&gt;</span> <span class="s1">'{'</span><span class="p">,</span>
+    <span class="s1">'right_delimiter'</span>   <span class="o">=&gt;</span> <span class="s1">'}'</span><span class="p">,</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<h3>方法</h3>
+
+<h4>smarty($name, $vars = array())</h4>
+
+<p>渲染指定名称的模板</p>
+
+<h4>smarty()</h4>
+
+<p>获取Smarty对象</p>
+
+<h4>smarty-&gt;render($name, $vars = array())</h4>
+
+<p>渲染指定名称的模板,同<code>smarty($name, $vars = array())</code></p>
+
+<h4>smarty-&gt;display($name, $vars = array())</h4>
+
+<p>渲染并输出指定名称的模板</p>
+
+<h4>smarty-&gt;assign($name, $value)</h4>
+
+<p>设置视图变量</p>
+
+<h4>smarty-&gt;get($name)</h4>
+
+<p>获取视图变量</p>
   </section>
 
 <!-- twig
   ================================================== -->
   <section id="twig">
-  <div class="highlight"><pre><code class="php"><span class="err">该微件文档还在紧急编写中</span><span class="p">,</span><span class="err">敬请期待</span><span class="o">!</span>
+  <div class="page-header"><h1>Twig</h1></div>
+
+<p>渲染Twig模板或获取Twig_Environment对象</p>
+
+<h2>案例</h2>
+
+<h3>渲染模板<code>hello.html.twig</code>
+</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 设置Twig模板目录</span>
+<span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">config</span><span class="p">(</span><span class="s1">'twig'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'paths'</span> <span class="o">=&gt;</span> <span class="nx">__DIR__</span>
+<span class="p">));</span>
+
+<span class="c1">// 准备视图变量</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'Widget'</span>
+<span class="p">);</span>
+
+<span class="c1">// 输出渲染后的视图</span>
+<span class="k">echo</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">twig</span><span class="p">(</span><span class="s1">'hello.twig.html'</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
 </code></pre></div>
 
-<div class="page-header"><h1><a href="http://twinh.github.io/widget/api/twig">twig()</a></h1></div>
+<h4>文件<code>hello.html.twig</code>的内容</h4>
 
-<p>Returns \Twig_Environment object or render a template</p>
-
-<h3>Returns \Twig_Environment object or render a template</h3>
-
-<div class="highlight"><pre><code class="php"><span class="nx">\Twig_Environment</span><span class="o">|</span><span class="nx">string</span> <span class="nx">twig</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$vars</span><span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="nx">Hello</span> <span class="p">{{</span><span class="nx">name</span><span class="p">}}</span>
 </code></pre></div>
 
-<h5>参数</h5>
+<h4>输出结果</h4>
 
-<ul>
-<li>
-<strong>$name</strong> <code>string</code> The name of template</li>
-<li>
-<strong>$vars</strong> <code>array</code> The variables pass to template</li>
-</ul><p>if NO parameter provied, the invoke method will return the
-\Twig_Environment object. otherwise, call the render method</p>
+<div class="highlight"><pre><code class="php"><span class="s1">'Hello Widget'</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>extension</td>
+<td>string</td>
+<td>.html.twig</td>
+<td>默认的模板扩展名</td>
+</tr>
+<tr>
+<td>object</td>
+<td>Twig_Environment</td>
+<td>无</td>
+<td>Twig对象</td>
+</tr>
+<tr>
+<td>paths</td>
+<td>array,string</td>
+<td>无</td>
+<td>模板所在的目录</td>
+</tr>
+<tr>
+<td>envOptions</td>
+<td>array</td>
+<td>见下表</td>
+<td>创建Twig对象的配置选项</td>
+</tr>
+</tbody>
+</table><h4>
+<code>envOptions</code>的默认值</h4>
+
+<div class="highlight"><pre><code class="php"><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'debug'</span>                 <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">'charset'</span>               <span class="o">=&gt;</span> <span class="s1">'UTF-8'</span><span class="p">,</span>
+    <span class="s1">'base_template_class'</span>   <span class="o">=&gt;</span> <span class="s1">'Twig_Template'</span><span class="p">,</span>
+    <span class="s1">'strict_variables'</span>      <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">'autoescape'</span>            <span class="o">=&gt;</span> <span class="s1">'html'</span><span class="p">,</span>
+    <span class="s1">'cache'</span>                 <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">'auto_reload'</span>           <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+    <span class="s1">'optimizations'</span>         <span class="o">=&gt;</span> <span class="o">-</span><span class="mi">1</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<h3>方法</h3>
+
+<h4>twig($name, $vars = array())</h4>
+
+<p>渲染指定名称的模板</p>
+
+<h4>twig()</h4>
+
+<p>获取twig对象</p>
+
+<h4>twig-&gt;render($name, $vars = array())</h4>
+
+<p>渲染指定名称的模板,同<code>twig($name, $vars = array())</code></p>
+
+<h4>twig-&gt;display($name, $vars = array())</h4>
+
+<p>渲染并输出指定名称的模板</p>
+
+<h4>twig-&gt;assign($name, $value)</h4>
+
+<p>设置视图变量</p>
+
+<h4>twig-&gt;get($name)</h4>
+
+<p>获取视图变量</p>
   </section>
 
 <!-- event
@@ -9686,7 +9905,6 @@ object otherwise, call the render method</p>
     <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'preload'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">'phpError'</span> <span class="c1">// 在预加载选项增加phpError微件</span>
-            <span class="s1">'...'</span>      <span class="c1">// 预加载其他微件</span>
         <span class="p">)</span>
     <span class="p">),</span>
     <span class="c1">// 配置PHP Error微件的选项</span>
@@ -9722,9 +9940,7 @@ object otherwise, call the render method</p>
 
 <h3>获取数组或对象中指定键名的值</h3>
 
-<div class="highlight"><pre><code class="php"><span class="o">&lt;?</span><span class="nx">php</span>
-
-<span class="k">class</span> <span class="nc">Getter</span>
+<div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">Getter</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">getKey</span><span class="p">()</span>
     <span class="p">{</span>
@@ -9901,51 +10117,230 @@ object otherwise, call the render method</p>
 <!-- logger
   ================================================== -->
   <section id="logger">
-  <div class="highlight"><pre><code class="php"><span class="err">该微件文档还在紧急编写中</span><span class="p">,</span><span class="err">敬请期待</span><span class="o">!</span>
+  <div class="page-header"><h1>Logger</h1></div>
+
+<p>记录日志到文件中</p>
+
+<h2>案例</h2>
+
+<h3>记录一条DEBUG级别的日志</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="s1">'The logger is called'</span><span class="p">);</span>
+
+<span class="c1">// 输出日志文件的路径</span>
+<span class="k">echo</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">getFile</span><span class="p">();</span>
+
+<span class="c1">// 可以在日志文件看到类似格式的一条日志</span>
+<span class="c1">// [XXXX-XX-XX XX:XX:XX] widget.DEBUG: The logger is called</span>
 </code></pre></div>
 
-<div class="page-header"><h1><a href="http://twinh.github.io/widget/api/logger">logger()</a></h1></div>
+<h2>调用方式</h2>
 
-<p>Logs with an arbitrary level</p>
+<h3>选项</h3>
 
-<h3>Logs with an arbitrary level</h3>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>widget</td>
+<td>日志的名称,可以每个模块设定一个名称进行区分</td>
+</tr>
+<tr>
+<td>level</td>
+<td>string</td>
+<td>debug</td>
+<td>默认的日志级别</td>
+</tr>
+<tr>
+<td>handledLevel</td>
+<td>string</td>
+<td>debug</td>
+<td>记录到文件的最低日志等级,低于该等级的日志将不记录到文件中</td>
+</tr>
+<tr>
+<td>format</td>
+<td>string</td>
+<td>[%datetime%] %channel%.%level%: %message%\n</td>
+<td>日志的格式</td>
+</tr>
+<tr>
+<td>dateFormat</td>
+<td>string</td>
+<td>Y-m-d H:i:s</td>
+<td>日志中日期的格式,使用<a href="http://php.net/manual/en/function.date.php">date</a>函数转换</td>
+</tr>
+<tr>
+<td>file</td>
+<td>string</td>
+<td>无</td>
+<td>日志文件的路径,留空是根据日志目录和文件名称生成</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>string</td>
+<td>log</td>
+<td>日志文件的目录</td>
+</tr>
+<tr>
+<td>fileFormat</td>
+<td>string</td>
+<td>Ymd.\l\o\g</td>
+<td>日志文件名称的格式</td>
+</tr>
+<tr>
+<td>fileSize</td>
+<td>int</td>
+<td>134217728</td>
+<td>日志文件最大容量,单位是字节,默认是128mb,设为0表示不限制大小</td>
+</tr>
+</tbody>
+</table><h4>日志等级及使用场景</h4>
 
-<div class="highlight"><pre><code class="php"><span class="nx">bool</span> <span class="nx">logger</span><span class="p">(</span><span class="nv">$level</span><span class="p">,</span> <span class="nv">$message</span><span class="p">,</span> <span class="nv">$context</span><span class="p">)</span>
-</code></pre></div>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>级别</th>
+<th>使用场景</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>debug</td>
+<td>低</td>
+<td>具体的调试信息,如某个函数被调用了,某个参数的值,主要用于调试</td>
+</tr>
+<tr>
+<td>info</td>
+<td>低</td>
+<td>有用的信息,如某某用户登录了,SQL日志</td>
+</tr>
+<tr>
+<td>warning</td>
+<td>中</td>
+<td>个别情况出现的信息,例如使用废弃的接口,接口使用场景错误,配置错误</td>
+</tr>
+<tr>
+<td>error</td>
+<td>中</td>
+<td>运行中的错误,不需要马上处理,但应该被记录及监控,如邮件发送失败</td>
+</tr>
+<tr>
+<td>critical</td>
+<td>高</td>
+<td>严重的情况,如某个组件不可用,未捕获的异常</td>
+</tr>
+<tr>
+<td>alert</td>
+<td>高</td>
+<td>必须马上处理的情况,如网站打不开,数据库连不上,这种情况下应该发送短信通知你处理!</td>
+</tr>
+</tbody>
+</table><p>日志等级及说明来自于<a href="https://github.com/Seldaek/monolog">Monolog</a> </p>
 
-<h5>参数</h5>
+<p>除了上面之外,还有notice和emergency级别,因不推荐使用,且为避免混淆,不一一详细说明.</p>
 
-<ul>
-<li>
-<strong>$level</strong> <code>mixed</code> </li>
-<li>
-<strong>$message</strong> <code>string</code> </li>
-<li>
-<strong>$context</strong> <code>array</code> </li>
-</ul>
+<h3>方法</h3>
+
+<h4>logger($level, $message)</h4>
+
+<p>记录一条日志</p>
+
+<h4>logger-&gt;debug($message)</h4>
+
+<p>记录一条DEBUG等级的日志</p>
+
+<h4>logger-&gt;info($message)</h4>
+
+<p>记录一条info等级的日志</p>
+
+<h4>logger-&gt;warning($message)</h4>
+
+<p>记录一条warning等级的日志</p>
+
+<h4>logger-&gt;error($message)</h4>
+
+<p>记录一条error等级的日志</p>
+
+<h4>logger-&gt;critical($message)</h4>
+
+<p>记录一条critical等级的日志</p>
+
+<h4>logger-&gt;alert($message)</h4>
+
+<p>记录一条alert等级的日志</p>
+
+<h4>logger-&gt;getFile()</h4>
+
+<p>获取日志文件</p>
+
+<h4>logger-&gt;setLevel()</h4>
+
+<p>设置默认的日志级别</p>
   </section>
 
 <!-- monolog
   ================================================== -->
   <section id="monolog">
-  <div class="highlight"><pre><code class="php"><span class="err">该微件文档还在紧急编写中</span><span class="p">,</span><span class="err">敬请期待</span><span class="o">!</span>
+  <div class="page-header"><h1>Monolog</h1></div>
+
+<p>获取Monolog对象或记录一条日志</p>
+
+<h2>案例</h2>
+
+<h3>记录一条DEBUG级别的日志</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">monolog</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="s1">'The logger is called'</span><span class="p">);</span>
 </code></pre></div>
 
-<div class="page-header"><h1><a href="http://twinh.github.io/widget/api/monolog">monolog()</a></h1></div>
+<h2>调用方式</h2>
 
-<p>Get monolog logger object or add a log record</p>
+<h3>选项</h3>
 
-<h3>Get monolog logger object or add a log record</h3>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>handlers</td>
+<td>array</td>
+<td>见下面</td>
+<td>Monolog的日志处理器</td>
+</tr></tbody>
+</table><p>handlers的默认值是</p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">\Monolog\Logger</span><span class="o">|</span><span class="nx">\boolen</span> <span class="nx">monolog</span><span class="p">(</span><span class="nv">$level</span><span class="p">,</span> <span class="nv">$message</span><span class="p">,</span> <span class="nv">$context</span><span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$handlers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="c1">// 键名表示处理器类的名称</span>
+    <span class="c1">// 如`stream`表示`Monolog\Handler\StreamHandler`,`chromePHP`表示`Monolog\Handler\ChromePHPHandler`</span>
+    <span class="s1">'stream'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="c1">// 数组的值表示处理器类的初始化参数</span>
+        <span class="s1">'stream'</span> <span class="o">=&gt;</span> <span class="s1">'log/widget.log'</span><span class="p">,</span> <span class="c1">// 日志所在的文件</span>
+        <span class="s1">'level'</span> <span class="o">=&gt;</span> <span class="nx">MonologLogger</span><span class="o">::</span><span class="na">DEBUG</span><span class="p">,</span> <span class="c1">// 最低记录的等级</span>
+    <span class="p">)</span>
+<span class="p">);</span>
 </code></pre></div>
 
-<h5>参数</h5>
+<p>您可以查看monolog的项目主页,了解更多处理器和配置</p>
 
-<ul>
-<li>
-<strong>$message</strong> <code>string</code> The log message</li>
-</ul>
+<p><a href="https://github.com/Seldaek/monolog">https://github.com/Seldaek/monolog</a></p>
+
+<h3>方法</h3>
+
+<h4>monolog()</h4>
+
+<p>获取Monolog对象</p>
+
+<h4>monolog($level, $message)</h4>
+
+<p>记录一条日志</p>
   </section>
 
 <!-- pinyin
