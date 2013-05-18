@@ -85,8 +85,12 @@ class App extends AbstractWidget
      */
     public function __invoke(array $options = array())
     {
-        $this->setOption($options);
+        $options && $this->setOption($options);
 
+        $request = $this->request;
+        $parameters = (array)$this->router->match($request->getPathInfo(), $request->getMethod());
+        $request->set($parameters);
+        
         return $this->dispatch(
             $this->getModule(),
             $this->getController(),
