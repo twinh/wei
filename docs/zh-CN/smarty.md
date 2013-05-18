@@ -8,9 +8,12 @@ Smarty
 
 ### 渲染模板`hello.tpl`
 ```php
+// 准备视图变量
 $data = array(
     'name' => 'Widget'
 );
+
+// 输出渲染后的视图
 echo $widget->smarty('hello.tpl', $data);
 ```
 
@@ -45,7 +48,7 @@ array(
     'cache_dir'         => null,
     'left_delimiter'    => '{',
     'right_delimiter'   => '}',
-)
+);
 ```
 
 ### 方法
