@@ -25,7 +25,7 @@ class EventTest extends TestCase
     }
 
     /**
-     * @expectedException 
+     * @expectedException
      */
     public function testAddHandler()
     {
@@ -33,7 +33,7 @@ class EventTest extends TestCase
 
         $this->assertTrue($this->eventManager->has('test'));
     }
-    
+
     /**
      * @expectedException \Widget\Exception\UnexpectedTypeException
      */
@@ -131,17 +131,17 @@ class EventTest extends TestCase
         $this->assertTrue($em->has('test'));
         $this->off('test');
         $this->assertFalse($em->has('test'));
-        
+
         $init();
         $this->assertTrue($em->has('test.ns1'));
         $this->off('test.ns1');
         $this->assertFalse($em->has('test.ns1'));
-        
+
         $init();
         $this->assertTrue($em->has('test.ns1.ns2'));
         $this->off('test.ns1.ns2');
         $this->assertFalse($em->has('test.ns1.ns2'));
-        
+
         $init();
         $this->assertTrue($em->has('.ns1'));
         $this->off('.ns1');
@@ -163,7 +163,7 @@ class EventTest extends TestCase
 
         $this->assertInternalType('float', $event->getTimeStamp());
     }
-    
+
     public function testArrayAsOnParameters()
     {
         $this->off('test')
@@ -171,18 +171,18 @@ class EventTest extends TestCase
                 'test.ns1' => function(){},
                 'test.ns2' => function(){}
             ));
-            
+
         $this->assertTrue($this->eventManager->has('test'));
         $this->assertTrue($this->eventManager->has('test.ns1'));
         $this->assertTrue($this->eventManager->has('test.ns2'));
     }
-    
+
     public function testGetFullType()
     {
         $event = $this->eventManager->create('test.ns1');
-        
+
         $this->assertEquals('test', $event->getType());
-        
+
         $this->assertEquals('test.ns1', $event->getType(true));
     }
 }

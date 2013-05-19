@@ -4,6 +4,8 @@ namespace WidgetTest;
 
 /**
  * It's hard to test error, some of the tests is use for code coverage only
+ *
+ * @property \Widget\Error $error The error widget
  */
 class ErrorTest extends TestCase
 {
@@ -13,15 +15,21 @@ class ErrorTest extends TestCase
         parent::tearDown();
     }
 
+    public function testFatalException()
+    {
+        $test = $this;
+        $this->error->fatal(function($exception) use($test) {
+            $test->assertEquals('Class not found', $exception->getMessage());
+        });
+        $exception = new \ErrorException('Class not found', 0, 0, __FILE__, __LINE__);
+        $this->error->triggerHandler('fatal', $exception);
+    }
+
     public function createErrorView($message, $code = 0)
     {
         $exception = new \Exception($message, $code);
-        $event = new \Widget\Event\Event(array(
-            'widget' => $this->widget,
-            'name' => 'exception'
-        ));
 
-        $this->error->handleException($event, $this->widget, $exception);
+        $this->error->handleException($exception);
     }
 
     public function testException()
@@ -63,14 +71,7 @@ class ErrorTest extends TestCase
         $array['key'];
     }
 
-    public function testInvoker()
-    {
-        $this->error(function(){});
-
-        $this->assertTrue($this->eventManager->has('exception'));
-    }
-
-    public function testhandleException()
+    public function testHandleException()
     {
         // Output error like Method "Widget\Widget->debug" or widget "debug" (class "Widget\Debug") not found, called in file ...
         $this->expectOutputRegex('/Critical/');
@@ -78,13 +79,8 @@ class ErrorTest extends TestCase
         // Change logger to widget to make error in handleException
         $this->error->logger = $this->widget;
 
-        $event = new \Widget\Event\Event(array(
-            'widget' => $this->widget,
-            'name' => 'exception'
-        ));
-
         $exception = new \Exception();
 
-        $this->error->handleException($event, $this->widget, $exception);
+        $this->error->handleException($exception);
     }
 }
