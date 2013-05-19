@@ -8,15 +8,13 @@
 
 namespace Widget;
 
-use Widget\Event\Event;
-
 /**
  * The error widget to show pretty exception message
  *
  * @property    Request $request The HTTP request widget
  * @property    Logger $logger The logger widget
  * @property    Response $response The HTTP response widget
- * @method      EventManager on(string|Event $event) Attach a handler to an event
+ * @todo        HTTP status code support
  */
 class Error extends AbstractWidget
 {
@@ -35,41 +33,167 @@ class Error extends AbstractWidget
     protected $detail = 'Unfortunately, an error occurred. Please try again later.';
 
     /**
-     * Whether handle the PHP errors
+     * Whether ignore the previous exception handler or attch it again to the
+     * exception event
      *
      * @var bool
      */
-    protected $convertErrorToException = true;
+    protected $ignorePrevHandler = false;
+
+    /**
+     * The previouse exception handler
+     *
+     * @var null|callback
+     */
+    protected $prevExceptionHandler;
+
+    /**
+     * The custom error handlers
+     *
+     * @var array
+     */
+    protected $handlers = array(
+        'error'     => array(),
+        'fatal'     => array(),
+        'notFound'  => array()
+    );
+
+    /**
+     * The 404 not found exception classes
+     *
+     * @var array
+     */
+    protected $notFoundExceptions = array(
+        'Widget\Exception\NotFoundException'
+    );
 
     /**
      * Constructor
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct($options = array())
     {
         parent::__construct($options);
 
-        $this->on('exception', array(
-            $this, 'handleException'
-        ));
-
-        if ($this->convertErrorToException) {
-            set_error_handler(array($this, 'hanldeError'));
-        }
+        $this->registerErrorHandler();
+        $this->registerExceptionHandler();
+        $this->registerFatalHandler();
     }
 
     /**
-     * Attach a handler to the error event
+     * Attach a handler to exception error
      *
-     * @param \Closure $fn The error handler
-     * @param int|string $priority The event priority, could be int or specify strings, the higer number, the higer priority
-     * @param array $data The data pass to the event object, when the handler is triggered
-     * @return EventManager
+     * @param callback $fn The error handler
+     * @return Error
      */
-    public function __invoke(\Closure $fn, $priority = 1, $data = array())
+    public function __invoke($fn)
     {
-        return $this->on('exception', $fn, $priority, $data);
+        $this->handlers['error'][] = $fn;
+
+        return $this;
+    }
+
+    /**
+     * Attach a handler to not found error
+     *
+     * @param callback $fn The error handler
+     * @return Error
+     */
+    public function notFound($fn)
+    {
+        $this->handlers['notFound'][] = $fn;
+
+        return $this;
+    }
+
+    /**
+     * Attach a handler to fatal error
+     *
+     * @param callback $fn The error handler
+     * @return Error
+     */
+    public function fatal($fn)
+    {
+        $this->handlers['fatal'][] = $fn;
+
+        return $this;
+    }
+
+    /**
+     * Register exception hanlder
+     */
+    protected function registerExceptionHandler()
+    {
+        $this->prevExceptionHandler = set_exception_handler(array($this, 'handleException'));
+    }
+
+    /**
+     * Register error hanlder
+     */
+    protected function registerErrorHandler()
+    {
+        set_error_handler(array($this, 'hanldeError'));
+    }
+
+    /**
+     * Detecte fatal error and register fatal handler
+     */
+    protected function registerFatalHandler()
+    {
+        $error = $this;
+
+        // When shutdown, the current working directory will be set to the web
+        // server directory, store it for later use
+        $cwd = getcwd();
+
+        register_shutdown_function(function() use($error, $cwd) {
+            $e = error_get_last();
+            if (!$e || !in_array($e['type'], array(E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_PARSE))) {
+                // No error or not fatal error
+                return;
+            }
+
+            ob_end_clean();
+
+            // Reset the current working directory to make sure everything work as usual
+            chdir($cwd);
+
+            $exception = new \ErrorException($e['message'], $e['type'], 0, $e['file'], $e['line']);
+
+            if ($error->triggerHandler('fatal', $exception)) {
+                // Handled!
+                return;
+            }
+
+            // Fallback to error handlers
+            if ($error->triggerHandler('error', $exception)) {
+                // Handled!
+                return;
+            }
+
+            // Fallback to internal error hanlders
+            $error->internalHanldeException($exception);
+        });
+    }
+
+    /**
+     * Trigger a error handler
+     *
+     * @param string $type The type of error handlers
+     * @param \Exception $exception
+     * @return bool
+     * @internal description
+     */
+    public function triggerHandler($type, \Exception $exception)
+    {
+        foreach ($this->handlers[$type] as $handler) {
+            $result = call_user_func_array($handler, array($exception, $this->widget));
+            if (true === $result) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -79,17 +203,38 @@ class Error extends AbstractWidget
      * @param Widget $widget
      * @param \Exception $exception
      */
-    public function handleException(Event $event, $widget, $exception)
+    public function handleException(\Exception $exception)
     {
-        // Prevent ogirin exception output
-        $event->preventDefault();
+        if (!$this->ignorePrevHandler && $this->prevExceptionHandler) {
+            call_user_func($this->prevExceptionHandler, $exception);
+        }
 
-        $debug = $widget->config('debug');
+        if ($this->handlers['notFound']) {
+            foreach ($this->notFoundExceptions as $class) {
+                if ($exception instanceof $class) {
+                    if ($this->triggerHandler('notFound', $exception)) {
+                        return;
+                    }
+                }
+            }
+        }
+
+        if (!$this->triggerHandler('error', $exception)) {
+            $this->internalHanldeException($exception);
+        }
+
+        restore_exception_handler();
+    }
+
+    public function internalHanldeException($exception)
+    {
+        $code = 500;
+        $debug = $this->widget->config('debug');
         $ajax = $this->request->inAjax();
 
         try {
             // This widgets may show exception too
-            $this->response->setStatusCode(500)->send();
+            $this->response->setStatusCode($code)->send();
             $this->logger->critical((string)$exception);
 
             $this->renderException($exception, $debug, $ajax);

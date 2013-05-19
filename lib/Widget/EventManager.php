@@ -25,14 +25,6 @@ class EventManager extends AbstractWidget
     protected $handlers = array();
 
     /**
-     * Whether ignore the previous exception handler or attch it again to the
-     * exception event
-     *
-     * @var bool
-     */
-    protected $ignorePrevHandler = false;
-
-    /**
      * The available priorities text
      *
      * @var array
@@ -41,15 +33,6 @@ class EventManager extends AbstractWidget
         'low'       => -1000,
         'normal'    => 0,
         'high'      => 1000
-    );
-
-    /**
-     * The 404 exception classes
-     *
-     * @var array
-     */
-    protected $notFoundExceptions = array(
-        'Widget\Exception\NotFoundException'
     );
 
     /**
@@ -257,77 +240,17 @@ class EventManager extends AbstractWidget
      */
     protected function registerInternalEvent()
     {
-        $that = $this;
-        $cwd = getcwd();
-
-        // Attach the shutdown event
-        register_shutdown_function(function() use($that, $cwd) {
-            $error = error_get_last();
-            if ($error && in_array($error['type'], array(E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_PARSE))) {
-                chdir($cwd);
-                $exception = new \ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']);
-                $event = $that('fatal', $exception);
-                if (!$event->isDefaultPrevented()) {
-                    $that('exception', $exception);
-                }
-            }
-
-            $that('shutdown');
-        });
-
-        // Assign the exception to a class method instead of a lambda function
-        // to avoid "Fatal error: Cannot destroy active lambda function"
-        $prevHandler = set_exception_handler(array($this, 'handleException'));
-
-        // If setted the previous handler, attach it agian
-        if (!$this->ignorePrevHandler && $prevHandler) {
-            $this->add('exception', function($event, $widget, $exception) use($prevHandler) {
-                call_user_func($prevHandler, $exception);
-            });
-        }
-
-        // Convert exceptions to 404 event
-        $notFoundExceptions = $this->notFoundExceptions;
-        $this->add('exception', function(Event $event, $widget, $exception) use($that, $notFoundExceptions) {
-            if ($that->has('404')) {
-                foreach ($notFoundExceptions as $class) {
-                    if ($exception instanceof $class) {
-                        $event->preventDefault();
-                        $event->stopPropagation();
-                        $that('404', array($exception));
-                        return;
-                    }
-                }
-            }
-        });
+        $event = $this;
 
         // Attach the widget manager's construct and constructed event
         $this->widget->setOption(array(
-            'construct' => function ($name, $full) use($that) {
-                $that('construct.' . $name, array($name, $full));
+            'construct' => function ($name, $full) use($event) {
+                $event('construct.' . $name, array($name, $full));
             },
-            'constructed' => function($widget, $name, $full) use($that) {
-                $that('constructed.' . $name, array($widget, $name, $full));
+            'constructed' => function($widget, $name, $full) use($event) {
+                $event('constructed.' . $name, array($widget, $name, $full));
             }
         ));
-    }
-
-    /**
-     * The internal exception hanlder integrated with event
-     *
-     * @param \Exception $exception
-     * @throws \Exception When none of exception events have been prevented
-     * @internal
-     */
-    public function handleException(\Exception $exception)
-    {
-        $event = $this('exception', array($exception));
-
-        restore_exception_handler();
-
-        if (!$event->isDefaultPrevented()) {
-            throw $exception;
-        }
     }
 
     /**
