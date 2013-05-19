@@ -73,7 +73,7 @@ class ErrorTest extends TestCase
     public function testhandleException()
     {
         // Output error like Method "Widget\Widget->debug" or widget "debug" (class "Widget\Debug") not found, called in file ...
-        $this->expectOutputRegex('/Debug/');
+        $this->expectOutputRegex('/Critical/');
 
         // Change logger to widget to make error in handleException
         $this->error->logger = $this->widget;
