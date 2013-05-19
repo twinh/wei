@@ -89,6 +89,10 @@ class EventManager extends AbstractWidget
             ));
         }
 
+        if (!is_array($args)) {
+            $args = array($args);
+        }
+
         // Prepend the event and widget manager object to the beginning of the arguments
         array_unshift($args, $event, $this->widget);
 
@@ -254,9 +258,20 @@ class EventManager extends AbstractWidget
     protected function registerInternalEvent()
     {
         $that = $this;
+        $cwd = getcwd();
 
         // Attach the shutdown event
-        register_shutdown_function(function() use($that) {
+        register_shutdown_function(function() use($that, $cwd) {
+            $error = error_get_last();
+            if ($error && in_array($error['type'], array(E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_PARSE))) {
+                chdir($cwd);
+                $exception = new \ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']);
+                $event = $that('fatal', $exception);
+                if (!$event->isDefaultPrevented()) {
+                    $that('exception', $exception);
+                }
+            }
+
             $that('shutdown');
         });
 
