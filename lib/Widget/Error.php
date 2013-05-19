@@ -90,7 +90,7 @@ class Error extends AbstractWidget
         try {
             // This widgets may show exception too
             $this->response->setStatusCode(500)->send();
-            $this->logger->debug((string)$exception);
+            $this->logger->critical((string)$exception);
 
             $this->renderException($exception, $debug, $ajax);
         } catch (\Exception $e) {
