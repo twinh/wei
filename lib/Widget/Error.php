@@ -14,7 +14,6 @@ namespace Widget;
  * @property    Request $request The HTTP request widget
  * @property    Logger $logger The logger widget
  * @property    Response $response The HTTP response widget
- * @todo        HTTP status code support
  */
 class Error extends AbstractWidget
 {
@@ -31,6 +30,13 @@ class Error extends AbstractWidget
      * @var string
      */
     protected $detail = 'Unfortunately, an error occurred. Please try again later.';
+
+    /**
+     *
+     *
+     * @var string
+     */
+    protected $notFoundDetail = 'Sorry, the page you requested was not found. Please check the URL and try again.';
 
     /**
      * Whether ignore the previous exception handler or attch it again to the
@@ -255,12 +261,27 @@ class Error extends AbstractWidget
     public function renderException(\Exception $exception, $debug, $ajax)
     {
         $code       = $exception->getCode();
-        $message    = htmlspecialchars($debug ? $exception->getMessage() : $this->message, ENT_QUOTES);
         $file       = $exception->getFile();
         $line       = $exception->getLine();
         $class      = get_class($exception);
         $trace      = htmlspecialchars($exception->getTraceAsString(), ENT_QUOTES);
-        $detail     = sprintf('Threw by %s in %s on line %s', $class, $file, $line);
+
+        // Prepare message
+        if ($debug || 404 == $code) {
+            $message = $exception->getMessage();
+        } else {
+            $message = $this->message;
+        }
+        $message = htmlspecialchars($message, ENT_QUOTES);
+
+        // Prepare detail message
+        if ($debug) {
+            $detail = sprintf('Threw by %s in %s on line %s', $class, $file, $line);
+        } elseif (404 == $code) {
+            $detail = $this->notFoundDetail;
+        } else {
+            $detail = $this->detail;
+        }
 
         if ($ajax) {
             echo json_encode(array(
@@ -273,7 +294,6 @@ class Error extends AbstractWidget
             // File Infomation
             $mtime = date('Y-m-d H:i:s', filemtime($file));
             $fileInfo = $this->getFileCode($file, $line);
-            !$debug && $detail = $this->detail;
 
             // Display view file
             require __DIR__ . '/Resource/views/error.php';
