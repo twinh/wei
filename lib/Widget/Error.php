@@ -224,11 +224,15 @@ class Error extends AbstractWidget
         restore_exception_handler();
     }
 
-    public function internalHanldeException($exception)
+    public function internalHanldeException(\Exception $exception)
     {
-        $code = 500;
         $debug = $this->widget->config('debug');
         $ajax = $this->request->inAjax();
+        $code = $exception->getCode();
+
+        if ($code < 100 || $code > 600) {
+            $code = 500;
+        }
 
         try {
             // This widgets may show exception too

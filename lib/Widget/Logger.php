@@ -20,25 +20,25 @@ class Logger extends AbstractWidget
 {
     /**
      * The name of channel
-     *  
+     *
      * @var string
      */
     protected $name = 'widget';
 
     /**
      * The default level for log record which level is not specified
-     * 
+     *
      * @var string
      */
     protected $level = 'debug';
-    
+
     /**
      * The lowest level to be handled
-     * 
+     *
      * @var string
      */
     protected $handledLevel = 'debug';
-    
+
     /**
      * The log levels and priorities
      *
@@ -57,52 +57,52 @@ class Logger extends AbstractWidget
 
     /**
      * The format for log message
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $format = "[%datetime%] %channel%.%level%: %message%\n";
-    
+
     /**
      * The date format for log message
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $dateFormat = 'Y-m-d H:i:s';
-    
+
     /**
-     * The log file name, if specify this parameter, the "dir" and "fileFormat" 
+     * The log file name, if specify this parameter, the "dir" and "fileFormat"
      * parameters would be ignored
-     * 
-     * @var null|string 
+     *
+     * @var null|string
      */
     protected $file = null;
-    
+
     /**
      * The directory to store log files
-     * 
-     * @var type 
+     *
+     * @var type
      */
     protected $dir = 'log';
-    
+
     /**
      * The log file name, formatted by date
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $fileFormat = 'Ymd.\l\o\g';
-    
+
     /**
-     * The max file size for log file, default to 128mb, set 0 to ignore this 
+     * The max file size for log file, default to 128mb, set 0 to ignore this
      * property
-     * 
-     * @var int 
+     *
+     * @var int
      */
     protected $fileSize = 134217728;
-    
+
     /**
      * The log file handle
-     * 
-     * @var resource|null 
+     *
+     * @var resource|null
      */
     protected $handle;
 
@@ -142,16 +142,16 @@ class Logger extends AbstractWidget
             strtoupper($level),
             $message,
         ), $this->format);
-        
+
         // Write the log message
         if (!$this->handle) {
             $this->handle = fopen($this->getFile(), 'a');
         }
         fwrite($this->handle, $content);
-        
+
         return true;
     }
-    
+
     /**
      * Logs with an arbitrary level
      *
@@ -271,7 +271,7 @@ class Logger extends AbstractWidget
     {
         return $this('debug', $message, $context);
     }
-    
+
     /**
      * Get log file
      *
@@ -290,7 +290,7 @@ class Logger extends AbstractWidget
         if (!is_dir($this->dir) && false === @mkdir($this->dir, 0777, true)) {
             throw new RuntimeException('Unable to create directory ' . $this->dir);
         }
-        
+
         $file = realpath($this->dir) . '/' . date($this->fileFormat);
 
         if ($this->fileSize) {
@@ -317,43 +317,43 @@ class Logger extends AbstractWidget
 
         return $file;
     }
-    
+
     /**
      * Set default log level
-     * 
+     *
      * @param string $level
      * @return Logger
      */
     public function setLevel($level)
     {
         $this->level = $level;
-        
+
         return $this;
     }
-    
+
     /**
      * Set handled level
-     * 
+     *
      * @param int $handledLevel The handled level
      * @return Logger
      */
     public function setHandledLevel($handledLevel)
     {
         $this->handledLevel = $handledLevel;
-        
+
         return $this;
     }
 
     /**
      * Clear up all log file
-     * 
+     *
      * @return Logger
      */
     public function clean()
     {
         // Make sure the handle is close
         $this->close();
-        
+
         $dir = dirname($this->getFile());
         if (is_dir($dir)) {
             $files = scandir($dir);
@@ -368,7 +368,7 @@ class Logger extends AbstractWidget
         }
         return $this;
     }
-    
+
     /**
      * Close the file handle and reset to null
      */
@@ -379,7 +379,7 @@ class Logger extends AbstractWidget
         }
         $this->handle = null;
     }
-    
+
     /**
      * Destructor
      */
