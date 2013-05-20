@@ -199,8 +199,6 @@ class Error extends AbstractWidget
     /**
      * The exception handler to render pretty message
      *
-     * @param Event\Event $event
-     * @param Widget $widget
      * @param \Exception $exception
      */
     public function handleException(\Exception $exception)
