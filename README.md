@@ -1,4 +1,5 @@
-#Widget v0.9.2-beta [![Build Status](https://travis-ci.org/twinh/widget.png?branch=master)](https://travis-ci.org/twinh/widget)
+# Widget v0.9.2-beta [![Build Status](https://travis-ci.org/twinh/widget.png?branch=master)](https://travis-ci.org/twinh/widget)
+
 Widget is a micro-framework provided a new way to write PHP for faster and easier web development.
 
 Installation - Composer
@@ -27,7 +28,6 @@ $id = $widget->query('id');
 
 Testing
 -------
-
 To run the tests:
 
     $ phpunit
