@@ -20,7 +20,7 @@ Getting started
 require 'path/to/widget/lib/Widget/Widget.php';
 
 // Create the default widget manager instance
-$widget = \Widget\Widget::create();
+$widget = widget();
 
 // Invoke the query widget to receive the URL query parameter
 $id = $widget->query('id');
