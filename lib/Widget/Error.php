@@ -236,6 +236,7 @@ class Error extends AbstractWidget
         $ajax = $this->request->inAjax();
         $code = $exception->getCode();
 
+        // HTTP status code
         if ($code < 100 || $code > 600) {
             $code = 500;
         }
@@ -284,12 +285,15 @@ class Error extends AbstractWidget
         }
 
         if ($ajax) {
-            echo json_encode(array(
+            $json = array(
                 'code'      => -($code ? abs($code) : 500),
-                'message'   => $message,
+                'message'   => $message
+            );
+            $debug && $json += array(
                 'detail'    => $detail,
                 'trace'     => $trace
-            ));
+            );
+            echo json_encode($json);
         } else {
             // File Infomation
             $mtime = date('Y-m-d H:i:s', filemtime($file));
