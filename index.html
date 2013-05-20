@@ -8,9 +8,9 @@
 <meta name="author" content="">
 
 <title>
-  
+
     Widget Documentation
-  
+
 </title>
 
 <!-- Bootstrap core CSS -->
@@ -35,7 +35,7 @@
     <div class="bs-docs-sidebar">
   <ul class="nav bs-docs-sidenav">
     <h3 class="bs-docs-sidenav-heading"><a href="/">Widget</a></h3>
-    
+
     <li><a href="#welcome">欢迎</a></li>
     <li><a href="#getting-started">入门</a></li>
     <li><a href="#downloads">下载</a></li>
@@ -212,7 +212,7 @@
 </div>
 
 <!-- Page content of course! -->
-    <div class="bs-docs-container"> 
+    <div class="bs-docs-container">
 
 <!-- Welcome
   ================================================== -->
@@ -233,7 +233,7 @@
 <span class="k">require</span> <span class="s1">'path/to/widget/lib/Widget/Widget.php'</span><span class="p">;</span>
 
 <span class="c1">// 创建微件管理器对象</span>
-<span class="nv">$widget</span> <span class="o">=</span> <span class="nx">\Widget\Widget</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">();</span>
 
 <span class="c1">// 调用query微件,获取URL请求中id参数</span>
 <span class="nv">$id</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s1">'id'</span><span class="p">);</span>
@@ -4820,28 +4820,7 @@ $widget-&gt;arrayCache('name');
 
 <h4>isDigit($input)</h4>
 
-<h3>错误信息</h3>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>pattern</code></td>
-<td>%name%只能由数字(0-9)组成</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能只由数字(0-9)组成</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
+<p>检查数据是否只由数字组成</p>
   </section>
 
 <!-- isDivisibleby
@@ -9866,10 +9845,9 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <!-- error
   ================================================== -->
   <section id="error">
-  <div class="highlight"><pre><code class="php"><span class="err">该微件文档还在紧急编写中</span><span class="p">,</span><span class="err">敬请期待</span><span class="o">!</span>
-</code></pre></div>
+  <div class="page-header"><h1>Error</h1></div>
 
-<div class="page-header"><h1><a href="http://twinh.github.io/widget/api/error">error()</a></h1></div>
+<p>错误处理器,可自定义异常,404和fatal错误的处理</p>
 
 <p>Attach a handler to the error event</p>
 
@@ -9878,16 +9856,54 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <div class="highlight"><pre><code class="php"><span class="nx">\EventManager</span> <span class="nx">error</span><span class="p">(</span><span class="nv">$fn</span><span class="p">,</span> <span class="nv">$priority</span><span class="p">,</span> <span class="nv">$data</span><span class="p">)</span>
 </code></pre></div>
 
-<h5>参数</h5>
+<h3>选项</h3>
 
-<ul>
-<li>
-<strong>$fn</strong> <code>\Closure</code> The error handler</li>
-<li>
-<strong>$priority</strong> <code>int|string</code> The event priority, could be int or specify strings, the higer number, the higer priority</li>
-<li>
-<strong>$data</strong> <code>array</code> The data pass to the event object, when the handler is triggered</li>
-</ul>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>extension</td>
+<td>string</td>
+<td>.html.twig</td>
+<td>默认的模板扩展名</td>
+</tr>
+<tr>
+<td>object</td>
+<td>Twig_Environment</td>
+<td>无</td>
+<td>Twig对象</td>
+</tr>
+<tr>
+<td>paths</td>
+<td>array,string</td>
+<td>无</td>
+<td>模板所在的目录</td>
+</tr>
+<tr>
+<td>envOptions</td>
+<td>array</td>
+<td>见下表</td>
+<td>创建Twig对象的配置选项</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
+
+<h4>error($fn)</h4>
+
+<p>设置自定义的错误处理器</p>
+
+<h3>error-&gt;notFound($fn)</h3>
+
+<p>设置404的错误处理器</p>
+
+<h3>error-&gt;fatal($fn)</h3>
+
+<p>设置Fatal错误的处理器</p>
   </section>
 
 <!-- phpError
