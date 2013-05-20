@@ -283,7 +283,7 @@
   ================================================== -->
   <div id="widget" class="bs-docs-section-header">
     <h1>微件列表</h1>
-    <p class="lead">提供了上百个个各具特色的微件,包括缓存,事件,HTTP请求,HTTP响应,验证器等</p>
+    <p class="lead">提供了上百个各具特色的微件,包括缓存,事件,HTTP请求,HTTP响应,验证器等</p>
   </div>
 
 <!-- request
@@ -9849,11 +9849,20 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <p>错误处理器,可自定义异常,404和fatal错误的处理</p>
 
-<p>Attach a handler to the error event</p>
+<h2>案例</h2>
 
-<h3>Attach a handler to the error event</h3>
+<h3>自定义404错误页面</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nx">\EventManager</span> <span class="nx">error</span><span class="p">(</span><span class="nv">$fn</span><span class="p">,</span> <span class="nv">$priority</span><span class="p">,</span> <span class="nv">$data</span><span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">error</span><span class="o">-&gt;</span><span class="na">notFound</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="nv">$exception</span><span class="p">){</span>
+    <span class="c1">// 输出错误提醒,这里可以改成加载错误视图,记录错误日志等</span>
+    <span class="k">echo</span> <span class="s1">'Page not found'</span><span class="p">;</span>
+
+    <span class="c1">// 返回true表示错误已处理,不再输出默认的错误也页面</span>
+    <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="c1">// 抛出404错误</span>
+<span class="k">throw</span> <span class="k">new</span> <span class="nx">Widget\Exception\NotFoundException</span><span class="p">(</span><span class="s1">'Page not found'</span><span class="p">);</span>
 </code></pre></div>
 
 <h3>选项</h3>
@@ -9867,28 +9876,34 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 </tr></thead>
 <tbody>
 <tr>
-<td>extension</td>
+<td>message</td>
 <td>string</td>
-<td>.html.twig</td>
-<td>默认的模板扩展名</td>
+<td>Error</td>
+<td>错误标题</td>
 </tr>
 <tr>
-<td>object</td>
-<td>Twig_Environment</td>
-<td>无</td>
-<td>Twig对象</td>
+<td>detail</td>
+<td>string</td>
+<td>Unfortunately, an error occurred. Please try again later.</td>
+<td>未开启调试模式时的错误信息</td>
 </tr>
 <tr>
-<td>paths</td>
-<td>array,string</td>
-<td>无</td>
-<td>模板所在的目录</td>
+<td>notFoundDetail</td>
+<td>string</td>
+<td>Sorry, the page you requested was not found. Please check the URL and try again.</td>
+<td>未开启调试模式时的404错误信息</td>
 </tr>
 <tr>
-<td>envOptions</td>
+<td>ignorePrevHandler</td>
+<td>bool</td>
+<td>false</td>
+<td>是否忽略已有的异常处理器</td>
+</tr>
+<tr>
+<td>notFoundExceptions</td>
 <td>array</td>
-<td>见下表</td>
-<td>创建Twig对象的配置选项</td>
+<td>array('Widget\Exception\NotFoundException')</td>
+<td>404异常的类名</td>
 </tr>
 </tbody>
 </table><h3>方法</h3>
@@ -9897,7 +9912,27 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <p>设置自定义的错误处理器</p>
 
-<h3>error-&gt;notFound($fn)</h3>
+<p>处理器的参数如下表.</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$exception</td>
+<td>Exception</td>
+<td>异常对象</td>
+</tr>
+<tr>
+<td>$widget</td>
+<td>Widget\Widget</td>
+<td>微件管理器</td>
+</tr>
+</tbody>
+</table><h3>error-&gt;notFound($fn)</h3>
 
 <p>设置404的错误处理器</p>
 
