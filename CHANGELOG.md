@@ -12,7 +12,7 @@ Changelog
 * Added validation component
 * Added fisrt version of API documentation
 
-## 2012-08-03
+## 2012-08-30
 * Moved to GitHub
 
 ## 2010-07-25
