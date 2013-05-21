@@ -180,14 +180,14 @@
       </ul>
     </li>
     <li>
-      <a href="#event">事件</a>
-    </li>
-    <li>
       <a href="#db">数据库</a>
       <ul class="nav">
         <li><a href="#db">db</a></li>
         <li><a href="#entityManager">entityManager</a></li>
       </ul>
+    </li>
+    <li>
+      <a href="#event">事件</a>
     </li>
     <li>
       <a href="#error">错误处理</a>
@@ -9278,25 +9278,28 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
   <section id="event">
   <div class="page-header"><h1>Event</h1></div>
 
-<p>绑定,触发和移除事件,并支持命名空间等特性.</p>
+<p>事件管理器,支持绑定,触发,移除事件和命名空间等特性.</p>
 
 <h2>案例</h2>
 
 <h3>绑定,触发和移除事件</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 绑定名称为connect的事件</span>
-<span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">on</span><span class="p">(</span><span class="s1">'connect'</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 获取事件管理器对象</span>
+<span class="nv">$event</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">event</span><span class="p">;</span>
+
+<span class="c1">// 绑定名称为connect的事件</span>
+<span class="nv">$event</span><span class="o">-&gt;</span><span class="na">on</span><span class="p">(</span><span class="s1">'connect'</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span>
     <span class="k">echo</span> <span class="s1">'connected'</span><span class="p">;</span>
 <span class="p">});</span>
 
 <span class="c1">// 触发connect事件,将输出connected</span>
-<span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="s1">'connect'</span><span class="p">);</span>
+<span class="nv">$event</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="s1">'connect'</span><span class="p">);</span>
 
 <span class="c1">// 移除connect事件</span>
-<span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">off</span><span class="p">(</span><span class="s1">'connect'</span><span class="p">);</span>
+<span class="nv">$event</span><span class="o">-&gt;</span><span class="na">off</span><span class="p">(</span><span class="s1">'connect'</span><span class="p">);</span>
 
 <span class="c1">// 再次触发connect事件,没有任何输出</span>
-<span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="s1">'connect'</span><span class="p">);</span>
+<span class="nv">$event</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="s1">'connect'</span><span class="p">);</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
@@ -9307,7 +9310,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h3>方法</h3>
 
-<h4>on($type, $fn, $priority = 0, $data = array())</h4>
+<h4>event-&gt;on($type, $fn, $priority = 0, $data = array())</h4>
 
 <p>绑定指定类型的事件触发器</p>
 
@@ -9367,7 +9370,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <td>1000</td>
 </tr>
 </tbody>
-</table><h4>off($type)</h4>
+</table><h4>event-&gt;off($type)</h4>
 
 <p>移除指定类型的事件触发器</p>
 
@@ -9386,11 +9389,9 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <td>无</td>
 <td>事件的类型,可以包含命名空间,如"error.namespace",也可以只有命名空间,如".namespace"</td>
 </tr></tbody>
-</table><p><code>off</code>微件是事件管理器(<code>eventManager</code>)<code>remove</code>方法的别名</p>
+</table><p>如果<code>$type</code>只是纯命名空间,如'.namespace',表示移除该命名空间下所有的事件触发器</p>
 
-<p>如果<code>$type</code>只是纯命名空间,如'.namespace',表示移除该命名空间下所有的事件触发器</p>
-
-<h4>trigger($type, $params = array(), $widget = null)</h4>
+<h4>event-&gt;trigger($type, $params = array(), $widget = null)</h4>
 
 <p>触发指定类型的事件</p>
 
