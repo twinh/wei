@@ -8,14 +8,14 @@
 
 namespace Widget;
 
-use Widget\Event\Event;
+use Widget\Event\Event as StdEvent;
 
 /**
  * The event manager to add, remove and trigger events
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class EventManager extends AbstractWidget
+class Event extends AbstractWidget
 {
     /**
      * The array contains the event handlers
@@ -47,6 +47,11 @@ class EventManager extends AbstractWidget
         $this->registerInternalEvent();
     }
 
+    public function __invoke()
+    {
+        return $this;
+    }
+
     /**
      * Trigger an event
      *
@@ -57,15 +62,15 @@ class EventManager extends AbstractWidget
      *                                     will trigger it too
      * @return Event\Event The event object
      */
-    public function __invoke($type, $args = array(), WidgetInterface $widget = null)
+    public function trigger($type, $args = array(), WidgetInterface $widget = null)
     {
-        if ($type instanceof Event) {
+        if ($type instanceof StdEvent) {
             $event      = $type;
             $type       = $event->getType();
             $namespaces = $event->getNamespaces();
         } else {
             list($type, $namespaces) = $this->splitNamespace($type);
-            $event      = new Event(array(
+            $event      = new StdEvent(array(
                 'widget'        => $this->widget,
                 'type'          => $type,
                 'namespaces'    => $namespaces,
@@ -121,12 +126,12 @@ class EventManager extends AbstractWidget
      * @param array $data The data pass to the event object, when the handler is triggered
      * @return EventManager
      */
-    public function add($type, $fn = null, $priority = 0, $data = array())
+    public function on($type, $fn = null, $priority = 0, $data = array())
     {
         // ( $types )
         if (is_array($type)) {
             foreach ($type as $name => $fn) {
-                $this->add($name, $fn);
+                $this->on($name, $fn);
             }
             return $this;
         }
@@ -156,7 +161,7 @@ class EventManager extends AbstractWidget
      * @param string $type The type of event
      * @return EventManager
      */
-    public function remove($type)
+    public function off($type)
     {
         list($type, $namespaces) = $this->splitNamespace($type);
 
@@ -175,7 +180,7 @@ class EventManager extends AbstractWidget
         // Unbind all event in namespace
         } else {
             foreach ($this->handlers as $type => $handlers) {
-                $this->remove($type . '.' . implode('.', $namespaces));
+                $this->off($type . '.' . implode('.', $namespaces));
             }
         }
 
