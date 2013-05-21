@@ -122,15 +122,12 @@ API 参考目录
 * [twig](twig.md) - 渲染Twig模板
 * [view](view.md) - 渲染指定名称的模板
 
-#### 事件
-* [event](event.md) - 事件管理器
-* [off](event.md#off) - 移除指定类型的事件触发器
-* [on](event.md#on) - 添加指定类型的事件触发器
-* [trigger](event.md#trigger) - 触发指定类型的事件
-
 #### 数据库
 * [db](db.md) - 获取[Doctrine DBAL](https://github.com/doctrine/dbal)的Connection对象
 * [entityManager](entityManager.md) - 获取[Doctrine ORM](https://github.com/doctrine/doctrine2)的EntityManager对象
+
+#### 事件
+* [event](event.md) - 事件管理器,支持绑定,触发,移除事件和命名空间等特性.
 
 #### 错误处理
 * [error](error.md) - 提供简单友好的错误界面
