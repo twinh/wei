@@ -76,12 +76,13 @@ class Event extends AbstractWidget
     public function trigger($type, $args = array(), WidgetInterface $widget = null)
     {
         if ($type instanceof StdEvent) {
-            $event      = $type;
-            $type       = $event->getType();
-            $namespaces = $event->getNamespaces();
+            $event = $type;
         } else {
             $event = $this($type);
         }
+
+        $type = $event->getType();
+        $namespaces = $event->getNamespaces();
 
         if (!is_array($args)) {
             $args = array($args);
