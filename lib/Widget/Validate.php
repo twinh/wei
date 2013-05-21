@@ -225,7 +225,7 @@ class Validate extends AbstractWidget
 
                 // Trigger the ruleValid/ruleInvalid callback
                 $event = $result ? 'ruleValid' : 'ruleInvalid';
-                if ($this->trigger($event . '.validator', array($rule, $field, $this), $this)->isDefaultPrevented()) {
+                if ($this->event->trigger($event . '.validator', array($rule, $field, $this), $this)->isDefaultPrevented()) {
                     return $this->result;
                 }
 
@@ -244,7 +244,7 @@ class Validate extends AbstractWidget
 
             // Trigger the fieldValid/fieldInvalid callback
             $event = $this->isFieldValid($field) ? 'fieldValid' : 'fieldInvalid';
-            if ($this->trigger($event . '.validator', array($field, $this), $this)->isDefaultPrevented()) {
+            if ($this->event->trigger($event . '.validator', array($field, $this), $this)->isDefaultPrevented()) {
                 return $this->result;
             }
 
@@ -260,7 +260,7 @@ class Validate extends AbstractWidget
 
         // Trigger the success/failure callback
         $event = $this->result ? 'success' : 'failure';
-        $this->trigger($event . '.validator', array($this), $this);
+        $this->event->trigger($event . '.validator', array($this), $this);
 
         return $this->result;
     }

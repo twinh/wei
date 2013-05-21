@@ -693,7 +693,7 @@ class ValidatorTest extends TestCase
         $fn = function($e) use(&$coll) {
             $coll[] = $e->getType();
         };
-        $this->off('.validator')
+        $this->event->off('.validator')
             ->on(array(
             'ruleValid.validator' => $fn,
             'ruleInvalid.validator' => $fn,
