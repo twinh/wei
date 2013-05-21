@@ -1,26 +1,29 @@
 Event
 =====
 
-绑定,触发和移除事件,并支持命名空间等特性.
+事件管理器,支持绑定,触发,移除事件和命名空间等特性.
 
 案例
 ----
 
 ### 绑定,触发和移除事件
 ```php
+// 获取事件管理器对象
+$event = $widget->event;
+
 // 绑定名称为connect的事件
-$widget->on('connect', function(){
+$event->on('connect', function(){
     echo 'connected';
 });
 
 // 触发connect事件,将输出connected
-$widget->trigger('connect');
+$event->trigger('connect');
 
 // 移除connect事件
-$widget->off('connect');
+$event->off('connect');
 
 // 再次触发connect事件,没有任何输出
-$widget->trigger('connect');
+$event->trigger('connect');
 ```
 
 调用方式
@@ -32,7 +35,10 @@ $widget->trigger('connect');
 
 ### 方法
 
-#### on($type, $fn, $priority = 0, $data = array())
+#### event($type)
+创建一个新的事件对象
+
+#### event->on($type, $fn, $priority = 0, $data = array())
 绑定指定类型的事件触发器
 
 ##### 参数
@@ -52,7 +58,7 @@ $widget->trigger('connect');
 | normal   | 0        |
 | high     | 1000     |
 
-####  off($type)
+####  event->off($type)
 移除指定类型的事件触发器
 
 ##### 参数
@@ -61,11 +67,9 @@ $widget->trigger('connect');
 |-------|---------------|-----------|------------------------------------------------------------------------------------|
 | $type | string        | 无        | 事件的类型,可以包含命名空间,如"error.namespace",也可以只有命名空间,如".namespace"  |
 
-`off`微件是事件管理器(`eventManager`)`remove`方法的别名
-
 如果`$type`只是纯命名空间,如'.namespace',表示移除该命名空间下所有的事件触发器
 
-#### trigger($type, $params = array(), $widget = null)
+#### event->trigger($type, $params = array(), $widget = null)
 触发指定类型的事件
 
 ##### 参数

@@ -47,9 +47,20 @@ class Event extends AbstractWidget
         $this->registerInternalEvent();
     }
 
-    public function __invoke()
+    /**
+     * Create a event object
+     *
+     * @param string $type
+     * @return \Widget\Event\Event
+     */
+    public function __invoke($type)
     {
-        return $this;
+        list($type, $namespaces) = $this->splitNamespace($type);
+        return new StdEvent(array(
+            'widget'        => $this->widget,
+            'type'          => $type,
+            'namespaces'    => $namespaces,
+        ));
     }
 
     /**
@@ -69,12 +80,7 @@ class Event extends AbstractWidget
             $type       = $event->getType();
             $namespaces = $event->getNamespaces();
         } else {
-            list($type, $namespaces) = $this->splitNamespace($type);
-            $event      = new StdEvent(array(
-                'widget'        => $this->widget,
-                'type'          => $type,
-                'namespaces'    => $namespaces,
-            ));
+            $event = $this($type);
         }
 
         if (!is_array($args)) {
