@@ -12,8 +12,7 @@ use Widget\Exception\UnexpectedTypeException;
 use Widget\Exception\InvalidArgumentException;
 
 /**
- * The validator manager, use to validate input quickly, create validator and
- * rule validator
+ * The validator manager, use to validate input quickly, create validator
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

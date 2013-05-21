@@ -86,19 +86,16 @@ require_once 'WidgetInterface.php';
  *
  * Validation
  * @method   Validate   validate(array $option) Create a new validator and validate by specified options
- * @property Is         $is The validator manager, use to validate input quickly, create validator and rule validator
- *
- * Event
- * @property EventManager $eventManager The event manager to add, remove and trigger events
- * @method   EventManager off($type) Remove event handlers by specified type
- * @method   EventManager on($type, $fn = null, $priority = 0, $data = array()) Attach a handler to an event
- * @method   Event\Event  trigger($event, $params = array(), WidgetInterface $widget = null) Trigger an event
+ * @property Is         $is The validator manager, use to validate input quickly, create validator
  *
  * Database
  * @property Db                           $db A container widget for Doctrine DBAL connection object
  * @method   \Doctrine\DBAL\Connection    db() Retrieve the Doctrine DBAL connection object
  * @property EntityManager                $entityManager A container widget for Doctrine ORM entity manager object
  * @method   \Doctrine\ORM\EntityManager  entityManager() Returns the Docrine ORM entity manager
+ *
+ * Event
+ * @property Event      $event The event manager to add, remove and trigger events
  *
  * Util
  * @property Arr        $arr An util widget provides some useful method to manipulation array

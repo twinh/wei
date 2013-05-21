@@ -14,7 +14,8 @@ use Widget\Validator\ValidatorInterface;
  * The validator widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Is $is The validator manager
+ * @property    Is $is The validator manager, use to validate input quickly, create validator
+ * @property    Event $event The event manager
  */
 class Validate extends AbstractWidget
 {
