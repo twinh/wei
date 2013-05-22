@@ -9,6 +9,8 @@
 
 namespace Widget;
 
+use Widget\Stdlib\ArrayWidget;
+
 /**
  * The response header widget
  *
@@ -18,21 +20,21 @@ class Header extends ArrayWidget
 {
     /**
      * Constructor
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        
+
         $this->data = &$this->response->getHeaderReference();
     }
-    
+
     /**
      * Get or set HTTP header
      *
-     * @param  string|array $name    The header name or an associative array 
-     *                               that the key is header name and the value 
+     * @param  string|array $name    The header name or an associative array
+     *                               that the key is header name and the value
      *                               is header value
      * @param  string|array $values  The header values, for set method only
      * @param  bool         $replace Whether replace the exists values or not, for set method only
@@ -63,7 +65,7 @@ class Header extends ArrayWidget
             }
             return $this;
         }
-        
+
         $values = (array) $values;
 
         if (true === $replace || !isset($this->data[$name])) {
@@ -95,23 +97,23 @@ class Header extends ArrayWidget
 
         return $this->data[$name];
     }
-    
+
     /**
      * Remove header by specified name
-     * 
+     *
      * @param string $name The header name
      * @return Header
      */
     public function remove($name)
     {
         unset($this->data[$name]);
-        
+
         return $this;
     }
-    
+
     /**
      * Returns response header as string
-     * 
+     *
      * @return string
      */
     public function __toString()
