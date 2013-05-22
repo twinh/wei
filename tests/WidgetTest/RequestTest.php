@@ -446,14 +446,15 @@ class RequestTest extends TestCase
             'SERVER_PORT' => '8080',
             'HTTP_HOST' => 'test.com',
             'REQUEST_URI' => '/index.php?query=string',
+            'SERVER_PROTOCOL' => 'HTTP/1.0',
             'REQUEST_METHOD' => 'GET',
             'SCRIPT_NAME' => 'index.php'
         ));
 
         $this->assertEquals(
-'GET https://test.com:8080/index.php?query=string
-Host: test.com
-', (string)$this->request);
+            "GET https://test.com:8080/index.php?query=string HTTP/1.0\r\nHost: test.com\r\n",
+            (string)$this->request
+        );
     }
 
     public function testPathInfo()
