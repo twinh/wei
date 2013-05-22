@@ -150,7 +150,7 @@
         <li><a href="#isIdCardMo">isIdCardMo</a></li>
         <li><a href="#isIdCardTw">isIdCardTw</a></li>
         <li><a href="#isPhoneCn">isPhoneCn</a></li>
-        <li><a href="#isPostcode">isPostcode</a></li>
+        <li><a href="#isPostcodeCn">isPostcodeCn</a></li>
         <li><a href="#isQQ">isQQ</a></li>
         <li><a href="#isMobileCn">isMobileCn</a></li>
 
@@ -7965,18 +7965,18 @@ $widget-&gt;arrayCache('name');
 <p>检查数据是否为有效的电话号码</p>
   </section>
 
-<!-- isPostcode
+<!-- isPostcodeCn
   ================================================== -->
-  <section id="isPostcode">
-  <div class="page-header"><h1>isPostcode</h1></div>
+  <section id="isPostcodeCn">
+  <div class="page-header"><h1>isPostcodeCn</h1></div>
 
 <p>检查数据是否为有效的中国邮政编码</p>
 
 <h2>案例</h2>
 
-<h3>检查"123456"是否为有效的车牌号码</h3>
+<h3>检查"123456"是否为有效的中国邮政编码</h3>
 
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">isPostcode</span><span class="p">(</span><span class="s1">'123456'</span><span class="p">))</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">isPostcodeCn</span><span class="p">(</span><span class="s1">'123456'</span><span class="p">))</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
@@ -8021,7 +8021,7 @@ $widget-&gt;arrayCache('name');
 </tbody>
 </table><h3>方法</h3>
 
-<h4>isPostcode($input)</h4>
+<h4>isPostcodeCn($input)</h4>
 
 <p>检查数据是否为有效的中国邮政编码</p>
   </section>
@@ -9309,6 +9309,10 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p><em>无</em></p>
 
 <h3>方法</h3>
+
+<h4>event($type)</h4>
+
+<p>创建一个新的事件对象</p>
 
 <h4>event-&gt;on($type, $fn, $priority = 0, $data = array())</h4>
 
