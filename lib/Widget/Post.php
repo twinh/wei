@@ -8,6 +8,8 @@
 
 namespace Widget;
 
+use Widget\Stdlib\Parameter;
+
 /**
  * A widget that handles the HTTP request parameters ($_POST)
  *

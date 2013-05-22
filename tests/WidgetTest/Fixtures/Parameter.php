@@ -2,9 +2,9 @@
 
 namespace WidgetTest\Fixtures;
 
-use Widget\Parameter as BaseParameter;
+use Widget\Stdlib\Parameter as BaseParameter;
 
 class Parameter extends BaseParameter
 {
-    
+
 }

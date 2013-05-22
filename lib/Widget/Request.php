@@ -8,95 +8,97 @@
 
 namespace Widget;
 
+use Widget\Stdlib\Parameter;
+
 /**
  * A widget that handles the HTTP request Data
- * 
+ *
  * The methods are deviced from code of the Zend Framework (2.1-dev 2013-04-01)
  *   * getBaseUrl
  *   * getRequestUri
  *   * detectBaseUrl
  *   * detectRequestUri
- * 
+ *
  * @link      https://github.com/zendframework/zf2/blob/master/library/Zend/Http/PhpEnvironment/Request.php
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class Request extends Parameter
 {
     /**
      * The URL query parameters, equal to $_GET if $fromGlobal is true
-     * 
+     *
      * @var array
      */
     protected $gets = array();
-    
+
     /**
      * The HTTP request parameters, equal to $_POST if $fromGlobal is true
-     * 
+     *
      * @var array
      */
     protected $posts = array();
-    
+
     /**
      * The cookie parameters, equal to $_COOKIE if $fromGlobal is true
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $cookies = array();
-    
+
     /**
      * The server parameters, equal to $_SERVER if $fromGlobal is true
-     * 
+     *
      * @var array
      */
     protected $servers = array();
-    
+
     /**
      * The upload file parameters, equal to $_FILES if $fromGlobal is true
-     * 
+     *
      * @var array
      */
     protected $files = array();
-    
+
     /**
      * The request message body
-     * 
+     *
      * @var string
      */
     protected $content;
-    
+
     /**
      * Whether create request parameter from PHP global varibales
-     * 
+     *
      * @var bool
      */
     protected $fromGlobal = true;
-    
+
     /**
      * @var string
      */
     protected $baseUrl;
-    
+
     /**
      * @var string
      */
     protected $pathInfo;
-    
+
     /**
      * @var string
      */
     protected $requestUri;
-    
+
     /**
      * The HTTP request method
-     * 
+     *
      * @var string
      */
     protected $method;
-    
+
     /**
      * Constructor
      *
@@ -105,7 +107,7 @@ class Request extends Parameter
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        
+
         // Create paramters from super global variable on default
         if ($this->fromGlobal) {
             $this->gets     = &$_GET;
@@ -116,10 +118,10 @@ class Request extends Parameter
             $this->data     = &$_REQUEST;
         }
     }
-    
+
     /**
      * Returns the request scheme
-     * 
+     *
      * @return string
      */
     public function getScheme()
@@ -130,19 +132,19 @@ class Request extends Parameter
             return 'http';
         }
     }
-    
+
     /**
      * Returns the request host
-     * 
+     *
      * @return string
      */
     public function getHost()
     {
-        return $this->getServer('HTTP_HOST') 
+        return $this->getServer('HTTP_HOST')
             ?: $this->getServer('SERVER_NAME')
             ?: $this->getServer('REMOTE_ADDR');
     }
-    
+
     /**
      * Set the request URI.
      *
@@ -192,10 +194,10 @@ class Request extends Parameter
         }
         return $this->baseUrl;
     }
-    
+
     /**
      * Set the path info
-     * 
+     *
      * @param string $pathInfo
      * @return Request
      */
@@ -220,19 +222,19 @@ class Request extends Parameter
 
     /**
      * Returns the full URL, which contains scheme://domain[:port]/[baseUrl][PathInfo][?queryString]
-     * 
+     *
      * The full URL do not contain the fragment, for it never sent to the server
-     * 
+     *
      * @return string
      */
     public function getUrl()
     {
         return $this->getSchemeAndHost() . $this->getRequestUri();
     }
-    
+
     /**
      * Returns scheme and host which contains scheme://domain[:port]
-     * 
+     *
      * @return string
      */
     public function getSchemeAndHost()
@@ -243,13 +245,13 @@ class Request extends Parameter
         } else {
             $port = ':' . $port;
         }
-        
+
         return $this->getScheme() . '://' . $this->getHost() . $port;
     }
-    
+
     /**
      * Generates absolute URL for specified path
-     * 
+     *
      * @param string $path
      * @return string
      */
@@ -260,10 +262,10 @@ class Request extends Parameter
 
     /**
      * Returns the client IP address
-     * 
+     *
      * If the IP could not receive from the server parameter, or the IP address
      * is not valid, return the $default value instead
-     * 
+     *
      * @link http://en.wikipedia.org/wiki/X-Forwarded-For
      * @param  string $default The default ip address
      * @return string
@@ -276,10 +278,10 @@ class Request extends Parameter
 
         return filter_var($ip, FILTER_VALIDATE_IP) ? $ip : $default;
     }
-    
+
     /**
      * Returns the HTTP request method
-     * 
+     *
      * @return string
      */
     public function getMethod()
@@ -289,10 +291,10 @@ class Request extends Parameter
         }
         return $this->method;
     }
-    
+
     /**
      * Set the HTTP request method
-     * 
+     *
      * @param string $method The value of method
      * @return Request
      */
@@ -301,10 +303,10 @@ class Request extends Parameter
         $this->method = $method;
         return $this;
     }
-    
+
     /**
      * Check if the current request method is the specified string
-     * 
+     *
      * @param string $method The method name to be compared
      * @return bool
      */
@@ -312,40 +314,40 @@ class Request extends Parameter
     {
         return !strcasecmp($method, $this->getMethod());
     }
-    
+
     /**
-     * Check if the current request method is GET 
-     * 
+     * Check if the current request method is GET
+     *
      * @return bool
      */
     public function inGet()
     {
         return $this->inMethod('GET');
     }
-    
+
     /**
-     * Check if the current request method is POST 
-     * 
+     * Check if the current request method is POST
+     *
      * @return bool
      */
     public function inPost()
     {
         return $this->inMethod('POST');
     }
-    
+
     /**
      * Check if the current request is an ajax(XMLHttpRequest) request
-     * 
+     *
      * @return bool
      */
     public function inAjax()
     {
         return 'xmlhttprequest' == strtolower($this->getServer('HTTP_X_REQUESTED_WITH'));
     }
-    
+
     /**
      * Returns the HTTP parameters reference
-     * 
+     *
      * @param string $type The parameter type, could be get, post, cookie, or server
      * @return array The parameters array
      */
@@ -354,13 +356,13 @@ class Request extends Parameter
         if (in_array($type, array('get', 'post', 'cookie', 'server', 'file'))) {
             return $this->{$type . 's'};
         }
-        
+
         throw new Exception\InvalidArgumentException(sprintf('Unkonwn parameter type "%s"', $type));
     }
-    
+
     /**
      * Returns the request message body
-     * 
+     *
      * @return string
      */
     public function getContent()
@@ -370,23 +372,23 @@ class Request extends Parameter
         }
         return $this->content;
     }
-    
+
     /**
      * Set the request message body
-     * 
+     *
      * @param string $content
      * @return Request
      */
     public function setContent($content)
     {
         $this->content = $content;
-        
+
         return $this;
     }
-    
+
     /**
      * Returns the request message string
-     * 
+     *
      * @return string
      */
     public function __toString()
@@ -396,15 +398,15 @@ class Request extends Parameter
         foreach ($this->server->getHeaders() as $name => $value) {
             $name = implode('-', array_map('ucfirst', explode('_', strtolower($name))));
             $header .= $name . ': ' . $value . "\r\n";
-        } 
+        }
         return $this->getServer('REQUEST_METHOD') . ' ' . $this->getUrl() . ' ' . $this->getServer('SERVER_PROTOCOL') . "\r\n"
             . $header
             . $this->getContent();
     }
-    
+
     /**
      * Return the server and execution environment parameter value ($_SERVER)
-     * 
+     *
      * @param string $name The name of parameter
      * @return mixed
      */
@@ -412,7 +414,7 @@ class Request extends Parameter
     {
         return isset($this->servers[$name]) ? $this->servers[$name] : null;
     }
-    
+
     /**
      * Detect the base URI for the request
      *
@@ -543,16 +545,16 @@ class Request extends Parameter
 
         return $baseUrl;
     }
-    
+
     /**
      * Detect the path info for the request
-     * 
+     *
      * @return string
      */
     protected function detectPathInfo()
     {
         $uri = $this->getRequestUri();
-        
+
         $pathInfo = '/' . trim(substr($uri, strlen($this->getBaseUrl())), '/');
 
         if (false !== $pos = strpos($pathInfo, '?')) {

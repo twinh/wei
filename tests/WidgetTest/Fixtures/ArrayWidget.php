@@ -2,9 +2,9 @@
 
 namespace WidgetTest\Fixtures;
 
-use Widget\ArrayWidget as BaseArray;
+use Widget\Stdlib\ArrayWidget as BaseArray;
 
 class ArrayWidget extends BaseArray
 {
-    
+
 }

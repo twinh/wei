@@ -8,6 +8,8 @@
 
 namespace Widget;
 
+use Widget\Stdlib\ArrayWidget;
+
 /**
  * A widget that session parameters ($_SESSION)
  *
@@ -24,7 +26,7 @@ class Session extends ArrayWidget
 
     /**
      * The session configuration options
-     * 
+     *
      * @var array
      * @link http://php.net/manual/en/session.configuration.php
      */
@@ -37,7 +39,7 @@ class Session extends ArrayWidget
 
     /**
      * Constructor
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
@@ -45,7 +47,7 @@ class Session extends ArrayWidget
         parent::__construct($options + array(
             'inis' => $this->inis,
         ));
-        
+
         $this->start();
     }
 
@@ -72,7 +74,7 @@ class Session extends ArrayWidget
 
         return $this;
     }
-    
+
     /**
      * Get or set session
      *
@@ -88,10 +90,10 @@ class Session extends ArrayWidget
             return $this->set($key, $value);
         }
     }
-    
+
     /**
      * Returns session value
-     * 
+     *
      * @param  string $key    The name of session
      * @param  mixed  $default The default parameter value if the session does not exist
      * @return mixed
@@ -100,7 +102,7 @@ class Session extends ArrayWidget
     {
         return $this->offsetGet($key);
     }
-    
+
      /**
      * Set session value
      *
@@ -112,19 +114,19 @@ class Session extends ArrayWidget
     {
         return $this->offsetSet($name, $value);
     }
-    
+
     /**
      * Clear session data in current namespace
-     * 
+     *
      * @return Parameter
      */
     public function clear()
     {
         $this->data = array();
-        
+
         return $this;
     }
-    
+
     /**
      * Destroy all session data
      *
@@ -135,7 +137,7 @@ class Session extends ArrayWidget
         if (session_id()) {
             session_destroy();
         }
-        
+
         return $this->clear();
     }
 

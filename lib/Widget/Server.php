@@ -8,6 +8,8 @@
 
 namespace Widget;
 
+use Widget\Stdlib\Parameter;
+
 /**
  * A widget that handles the server and execution environment parameters ($_SERVER)
  *
@@ -27,10 +29,10 @@ class Server extends Parameter
 
         $this->data = &$this->request->getParameterReference('server');
     }
-    
+
     /**
      * Returns the HTTP request headers
-     * 
+     *
      * @return array
      */
     public function getHeaders()

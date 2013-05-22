@@ -8,54 +8,56 @@
 
 namespace Widget;
 
+use Widget\Stdlib\Parameter;
+
 /**
  * A widget manager the HTTP cookie
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request The HTTP request widget
- * 
+ *
  */
 class Cookie extends Parameter
 {
     /**
      * The lifetime of cookie (seconds)
-     * 
+     *
      * @var int
      * @link http://php.net/manual/en/function.setcookie.php
      */
     protected $expires = 86400;
-    
+
     /**
      * The path on the server in which the cookie will be available on
      *
-     * @var string 
+     * @var string
      */
     protected $path = '/';
-    
+
     /**
      * The domain that the cookie is available to
      *
      * @var string
      */
     protected $domain = null;
-    
+
     /**
      * Indicates that the cookie should only be transmitted over a secure HTTPS connection from the client
-     * 
+     *
      * @var bool
      */
     protected $secure = false;
-    
+
     /**
      * When TRUE the cookie will be made accessible only through the HTTP protocol
-     * 
+     *
      * @var bool
      */
     protected $httpOnly = false;
-    
+
     /**
      * Whether send a cookie without urlencoding the cookie value
-     * 
+     *
      * @var bool
      */
     protected $raw = false;
@@ -169,9 +171,9 @@ class Cookie extends Parameter
         foreach ($this->rawCookies as $name => $options) {
             $fn = $this->resolveValue($options, 'raw') ? 'setrawcookie' : 'setcookie';
             $fn(
-                $name, 
-                $options['value'], 
-                $time + $this->resolveValue($options, 'expires'), 
+                $name,
+                $options['value'],
+                $time + $this->resolveValue($options, 'expires'),
                 $this->resolveValue($options, 'path'),
                 $this->resolveValue($options, 'domain'),
                 $this->resolveValue($options, 'secure'),
@@ -182,10 +184,10 @@ class Cookie extends Parameter
 
         return $this;
     }
-    
+
     /**
      * Destructor
-     * 
+     *
      * @todo send or not ?
      */
     public function __destruct()
@@ -194,10 +196,10 @@ class Cookie extends Parameter
             $this->send();
         }
     }
-    
+
     /**
      * Resolve the options value
-     * 
+     *
      * @param array $options
      * @param string $key The name of property
      * @return mixed

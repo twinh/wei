@@ -8,6 +8,8 @@
 
 namespace Widget;
 
+use Widget\Stdlib\Parameter;
+
 /**
  * A widget that handles the URL query parameters ($_GET)
  *
