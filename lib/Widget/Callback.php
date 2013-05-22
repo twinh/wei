@@ -24,21 +24,21 @@ class Callback extends AbstractWidget
 {
     /**
      * The callback token to generate signature
-     * 
+     *
      * @var string
      */
     protected $token = 'widget';
-     
+
     /**
      * The HTTP raw post data, equals to $GLOBALS['HTTP_RAW_POST_DATA'] on default
-     * 
+     *
      * @var string
      */
     protected $postData;
-    
+
     /**
      * The rules to generate response message
-     * 
+     *
      * @var array
      */
     protected $rules = array(
@@ -50,82 +50,82 @@ class Callback extends AbstractWidget
         'video'     => null,
         'link'      => null
     );
-    
+
     /**
      * Whether return the mark message or not
-     * 
+     *
      * @var bool
      */
     protected $mark = false;
-    
+
     /**
      * @var string
      * @todo better name
      */
     protected $fallback;
-     
+
     /**
      * Are there any callbacks handled the message ?
-     * 
+     *
      * @var bool
      */
     protected $handled = false;
-    
+
     /**
      * Available when the matched the "startsWith" rule
-     * 
+     *
      * @var string
      */
     protected $keyword;
-    
+
     protected $toUserName;
-    
+
     protected $fromUserName;
-    
+
     protected $createTime;
-    
+
     protected $msgId;
-    
+
     protected $msgType;
-    
+
     protected $content;
-    
+
     protected $picUrl;
-    
+
     protected $locationX;
-    
+
     protected $locationY;
-    
+
     protected $scale;
-    
+
     protected $label;
-    
+
     protected $mediaId;
-    
+
     protected $format;
-   
+
     protected $event;
 
     protected $eventKey;
-    
+
     protected $thumbMediaId;
-    
+
     protected $title;
-    
+
     protected $description;
-    
+
     protected $url;
-    
+
     /**
      * Constructor
-     * 
+     *
      * @param array $options
-     * @global string $GLOBALS['HTTP_RAW_POST_DATA'] 
+     * @global string $GLOBALS['HTTP_RAW_POST_DATA']
      */
     public function __construct($options = array())
     {
         parent::__construct($options);
-        
+
         if (is_null($this->postData) && isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
             $this->postData = $GLOBALS['HTTP_RAW_POST_DATA'];
         }
@@ -133,7 +133,7 @@ class Callback extends AbstractWidget
 
     /**
      * Start up callback widget and output the matched rule message
-     * 
+     *
      * @return Callback
      */
     public function __invoke()
@@ -142,10 +142,10 @@ class Callback extends AbstractWidget
 
         return $this;
     }
-    
+
     /**
      * Parse the user input message and return matched rule message
-     * 
+     *
      * @return string|null
      */
     public function run()
@@ -163,14 +163,14 @@ class Callback extends AbstractWidget
 
         // Parse user input data
         $this->parsePostData();
-        
+
         switch ($this->msgType) {
             case 'text' :
                 if ($result = $this->handleText()) {
                     return $result;
                 }
                 break;
-                
+
             case  'event':
                 $eventRule = $this->rules['event'];
                 if (isset($eventRule[$this->event])
@@ -178,7 +178,7 @@ class Callback extends AbstractWidget
                     return $this->handle($eventRule[$this->event][$this->eventKey]);
                 }
                 break;
-                
+
             case 'location':
             case 'image':
             case 'voice':
@@ -189,15 +189,15 @@ class Callback extends AbstractWidget
                 }
                 break;
         }
-        
+
         if (!$this->handled && $this->fallback) {
             return $this->handle($this->fallback);
         }
     }
-    
+
     /**
      * Attach a callback which triggered when user subscribed you
-     * 
+     *
      * @param \Closure $fn
      * @return Callback
      */
@@ -205,10 +205,10 @@ class Callback extends AbstractWidget
     {
         return $this->addEventRule('subscribe', null, $fn);
     }
-    
+
     /**
      * Attach a callback which triggered when user unsubscribed you
-     * 
+     *
      * @param \Closure $fn
      * @return Callback
      */
@@ -228,10 +228,10 @@ class Callback extends AbstractWidget
     {
         return $this->addEventRule('click', $key, $fn);
     }
-    
+
     /**
      * Attach a callback which triggered when user input equals to the keyword
-     * 
+     *
      * @param string $keyword The keyword to compare with user input
      * @param \Closure $fn
      * @return Callback
@@ -240,10 +240,10 @@ class Callback extends AbstractWidget
     {
         return $this->addRule('is', $keyword, $fn);
     }
-    
+
     /**
      * Attach a callback with a keyword, which triggered when user input contains the keyword
-     * 
+     *
      * @param string $keyword The keyword to search in user input
      * @param \Closure $fn
      * @return Callback
@@ -252,10 +252,10 @@ class Callback extends AbstractWidget
     {
         return $this->addRule('has', $keyword, $fn);
     }
-    
+
     /**
      * Attach a callback with a keyword, which triggered when user input starts with the keyword
-     * 
+     *
      * @param string $keyword The keyword to search in user input
      * @param \Closure $fn
      * @return Callback
@@ -264,10 +264,10 @@ class Callback extends AbstractWidget
     {
         return $this->addRule('startsWith', $keyword, $fn);
     }
-    
+
     /**
      * Attach a callback with a regex pattern which triggered when user input match the pattern
-     * 
+     *
      * @param string $pattern The pattern to match
      * @param \Closure $fn
      * @return Callback
@@ -276,10 +276,10 @@ class Callback extends AbstractWidget
     {
         return $this->addRule('match', $pattern, $fn);
     }
-    
+
     /**
-     * Attach a callback to handle image message  
-     * 
+     * Attach a callback to handle image message
+     *
      * @param \Closure $fn
      * @return Callback
      */
@@ -288,10 +288,10 @@ class Callback extends AbstractWidget
         $this->rules['image'] = $fn;
         return $this;
     }
-    
+
     /**
      * Attach a callback to handle location message
-     * 
+     *
      * @param \Closure $fn
      * @return Callback
      */
@@ -300,10 +300,10 @@ class Callback extends AbstractWidget
         $this->rules['location'] = $fn;
         return $this;
     }
-    
+
     /**
      * Attach a callback to handle voice message
-     * 
+     *
      * @param \Closure $fn
      * @return Callback
      */
@@ -312,10 +312,10 @@ class Callback extends AbstractWidget
         $this->rules['voice'] = $fn;
         return $this;
     }
-    
+
     /**
      * Attach a callback to handle video message
-     * 
+     *
      * @param Closure $fn
      * @return Callback
      */
@@ -324,10 +324,10 @@ class Callback extends AbstractWidget
         $this->rules['video'] = $fn;
         return $this;
     }
-    
+
     /**
      * Attach a callback to handle link message
-     * 
+     *
      * @param Closure $fn
      * @return Callback
      */
@@ -336,10 +336,10 @@ class Callback extends AbstractWidget
         $this->rules['link'] = $fn;
         return $this;
     }
-    
+
     /**
      *  Attach a callback which triggered when none of the rule handled the input
-     * 
+     *
      * @param \Closure $fn
      * @return boolean
      */
@@ -348,10 +348,10 @@ class Callback extends AbstractWidget
         $this->fallback = $fn;
         return $this;
     }
-    
+
     /**
      * Generate text message for response
-     * 
+     *
      * @param string $content
      * @param bool $mark Whenter mark the message or not
      * @return \SimpleXMLElement
@@ -361,13 +361,13 @@ class Callback extends AbstractWidget
         $xml = $this->createXml();
 
         $this->addCDataChild($xml, 'Content', $content);
-        
+
         return $this->send('text', $xml, $mark);
     }
-    
+
     /**
      * Generate music message for response
-     * 
+     *
      * @param string $title The title of music
      * @param string $description The description display blow the title
      * @param string $url The music URL for player
@@ -379,19 +379,19 @@ class Callback extends AbstractWidget
     {
         $xml    = $this->createXml();
         $music  = $xml->addChild('Music');
-        
+
         $this
             ->addCDataChild($music, 'Title', $title)
             ->addCDataChild($music, 'Description', $description)
             ->addCDataChild($music, 'MusicUrl', $url)
             ->addCDataChild($music, 'HQMusicUrl', $hqUrl);
 
-        return $this->send('music', $xml, $mark);    
+        return $this->send('music', $xml, $mark);
     }
-    
+
     /**
      * Generate article message for response
-     * 
+     *
      * ```
      * // Sends one article
      * $callback->sendArticle(array(
@@ -400,7 +400,7 @@ class Callback extends AbstractWidget
      *     'picUrl' => 'The picture URL of article',
      *     'url' => 'The URL link to of article'
      * ));
-     * 
+     *
      * // Sends two or more articles
      * $callback->sendArticle(array(
      *     array(
@@ -418,10 +418,10 @@ class Callback extends AbstractWidget
      *     // more...
      *  ));
      * ```
-     * 
+     *
      * @param array $articles The article array
      * @param bool $mark Whenter mark the message or not
-     * @return \SimpleXMLElement 
+     * @return \SimpleXMLElement
      */
     public function sendArticle(array $articles, $mark = null)
     {
@@ -431,9 +431,9 @@ class Callback extends AbstractWidget
         if (!is_int(key($articles))) {
             $articles = array($articles);
         }
-        
+
         $xml->addChild('ArticleCount', count($articles));
-        
+
         $items = $xml->addChild('Articles');
         foreach ($articles as $article) {
             $article += array(
@@ -452,10 +452,10 @@ class Callback extends AbstractWidget
 
         return $this->send('news', $xml, $mark);
     }
-    
+
     /**
      * Whether return the mark message or not
-     * 
+     *
      * @param bool $bool
      * @return Callback
      */
@@ -464,10 +464,10 @@ class Callback extends AbstractWidget
         $this->mark = (bool)$bool;
         return $this;
     }
-    
+
     /**
      * Returns the keyword
-     * 
+     *
      * @return string
      */
     public function getKeyword()
@@ -477,17 +477,17 @@ class Callback extends AbstractWidget
 
     /**
      * Returns your user id
-     * 
+     *
      * @return string
      */
     public function getToUserName()
     {
         return $this->toUserName;
     }
-    
+
     /**
      * Reurns a user(OpenID) who sent message to you
-     * 
+     *
      * @return string
      */
     public function getFromUserName()
@@ -497,180 +497,180 @@ class Callback extends AbstractWidget
 
     /**
      * Returns the timestamp when message created
-     * 
+     *
      * @var string
      */
     public function getCreateTime()
     {
         return $this->createTime;
     }
-    
+
     /**
      * Returns the user input string, available when the message type is text
-     * 
+     *
      * @var string
      */
     public function getContent()
     {
         return $this->content;
     }
-    
+
     /**
      * Returns the message id
-     * 
+     *
      * @return string
      */
     public function getMsgId()
     {
         return $this->msgId;
     }
-    
+
     /**
      * Returns the message type
-     * 
+     *
      * Currently could be text, image, location, link, event, voice, video
-     * 
+     *
      * @return string
      */
     public function getMsgType()
     {
         return $this->msgType;
     }
-    
+
     /**
      * Returns the picture URL, available when the message type is image
-     * 
+     *
      * @var string
      */
     public function getPicUrl()
     {
         return $this->picUrl;
     }
-    
+
     /**
      * Returns the latitude of location, available when the message type is location
-     * 
+     *
      * @var string
      */
     public function getLocationX()
     {
         return $this->locationX;
     }
-    
+
     /**
      * Returns the longitude of location, available when the message type is location
-     * 
+     *
      * @var string
      */
     public function getLocationY()
     {
         return $this->locationY;
     }
-    
+
     /**
      * Returns the detail address of location, available when the message type is location
-     * 
-     * @var string 
+     *
+     * @var string
      */
     public function getLabel()
     {
         return $this->label;
     }
-    
+
     /**
      * Returns the scale of map, available when the message type is location
-     * 
+     *
      * @var string
      */
     public function getScale()
     {
         return $this->scale;
     }
-    
+
     /**
      * Returns the media id, available when the message type is voice or video
-     * 
+     *
      * @var string
      */
     public function getMediaId()
     {
         return $this->mediaId;
     }
-    
+
     /**
      * Returns the media format, available when the message type is voice
-     * 
+     *
      * @var string
      */
     public function getFormat()
     {
         return $this->format;
     }
-    
+
     /**
      * Returns the type of event, could be subscribe, unsubscribe or CLICK, available when the message type is event
-     * 
+     *
      * @var string
      */
     public function getEvent()
     {
         return $this->event;
     }
-    
+
     /**
      * Returns the key value of custom menu, available when the message type is event
-     * 
+     *
      * @var string
      */
     public function getEventKey()
     {
         return $this->eventKey;
     }
-    
+
     /**
      * Returns the thumbnail id of video, available when the message type is video
-     * 
-     * @var string 
+     *
+     * @var string
      */
     public function getThumbMediaId()
     {
         return $this->thumbMediaId;
     }
-    
+
     /**
      * Returns the title of URL, available when the message type is link
-     * 
+     *
      * @var string
      */
     public function getTitle()
     {
         return $this->title;
     }
-    
+
     /**
      * Returns the description of URL, available when the message type is link
-     * 
+     *
      * @var string
      */
     public function getDescription()
     {
         return $this->description;
     }
-    
+
     /**
      * Returns the URL link, available when the message type is link
-     * 
+     *
      * @var string
      */
     public function getUrl()
     {
         return $this->url;
     }
-    
+
     protected function handle($fn)
     {
         $this->handled = true;
-        
+
         $content = $fn($this, $this->widget);
         if (!$content instanceof SimpleXMLElement) {
             $content = $this->sendText($content);
@@ -678,10 +678,10 @@ class Callback extends AbstractWidget
 
         return $content->asXML();
     }
-        
+
     /**
      * Generate message for response
-     * 
+     *
      * @param string $type The type of message
      * @param \SimpleXMLElement $body The body of message
      * @param bool $mark $mark Whenter mark the message or not
@@ -693,28 +693,28 @@ class Callback extends AbstractWidget
             ->addCDataChild($xml, 'ToUserName', $this->fromUserName)
             ->addCDataChild($xml, 'FromUserName', $this->toUserName)
             ->addCDataChild($xml, 'MsgType', $type);
-        
+
         $xml->addChild('CreateTime', time());
         $xml->addChild('FuncFlag', (int)(is_bool($mark) ? $mark : $this->mark));
-        
+
         return $xml;
     }
 
     /**
-     * Create a root xml object 
-     * 
+     * Create a root xml object
+     *
      * @return \SimpleXMLElement
      */
     protected function createXml()
     {
         $xml = new SimpleXMLElement('<xml/>');
-        
+
         return $xml;
     }
-    
+
     /**
      * Adds a cdata section to specified xml object
-     * 
+     *
      * @param \SimpleXMLElement $xml
      * @param string $name
      * @param string $value
@@ -723,14 +723,14 @@ class Callback extends AbstractWidget
     protected function addCDataChild(SimpleXMLElement $xml, $name, $value)
     {
         $child = $xml->addChild($name);
-        $node = dom_import_simplexml($child); 
+        $node = dom_import_simplexml($child);
         $node->appendChild($node->ownerDocument->createCDATASection($value));
         return $this;
     }
-    
+
     /**
      * Adds rule to handle user input
-     * 
+     *
      * @param string $type
      * @param string $keyword
      * @param \Closure $fn
@@ -745,13 +745,13 @@ class Callback extends AbstractWidget
         );
         return $this;
     }
-    
+
     protected function addEventRule($name, $key, Closure $fn)
     {
         $this->rules['event'][$name][$key] = $fn;
         return $this;
     }
-    
+
     /**
      * Parse post data to receive user OpenID and input content and more
      */
@@ -767,7 +767,7 @@ class Callback extends AbstractWidget
             'video'     => array('MediaId', 'ThumbMediaId'),
             'link'      => array('Title', 'Description', 'Url')
         );
-        
+
         if ($this->postData) {
             $postObj        = @simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
             $this->msgType  = isset($postObj->MsgType) ? (string)$postObj->MsgType : null;
@@ -778,19 +778,19 @@ class Callback extends AbstractWidget
                         $this->$name = (string)$postObj->$field;
                     }
                 }
-            }         
+            }
         }
     }
-    
+
     /**
      * Check if the signature is valid
-     * 
+     *
      * @return bool
      */
     protected function checkSignature()
     {
         $tmpArr = array(
-            $this->token, 
+            $this->token,
             $this->query('timestamp'),
             $this->query('nonce')
         );
@@ -798,7 +798,7 @@ class Callback extends AbstractWidget
         $tmpStr = sha1(implode($tmpArr));
         return $tmpStr === $this->query('signature');
     }
-    
+
     protected function handleText()
     {
         foreach ($this->rules['text'] as $rule) {
@@ -807,19 +807,18 @@ class Callback extends AbstractWidget
                 case 'is':
                     $matched = $this->content == $rule['keyword'];
                     break;
-                    
+
                 case 'has' :
                     $matched = false !== strpos($this->content, $rule['keyword']);
                     break;
-                
+
                 case 'startsWith':
                     if (0 === stripos($this->content, $rule['keyword'])) {
                         $matched = true;
                         $this->keyword = substr($this->content, strlen($rule['keyword']));
                     }
-                    
                     break;
-                
+
                 case 'match':
                     $matched = preg_match($rule['keyword'], $this->content);
                     break;
