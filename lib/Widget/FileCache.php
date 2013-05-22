@@ -63,7 +63,7 @@ class FileCache extends AbstractCache
             return $this->set($key, $value, $expire);
         }
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -96,8 +96,8 @@ class FileCache extends AbstractCache
 
         return (bool) file_put_contents($file, $content, LOCK_EX);
     }
-    
-    
+
+
     /**
      * {@inheritdoc}
      */
@@ -111,7 +111,7 @@ class FileCache extends AbstractCache
 
         return false;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -131,7 +131,7 @@ class FileCache extends AbstractCache
             return false;
         }
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -191,7 +191,7 @@ class FileCache extends AbstractCache
 
         return $this->writeAndRelease($handle, $content, true);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -221,7 +221,7 @@ class FileCache extends AbstractCache
         return $this->writeAndRelease($handle, $content, true) ? $result : false;
     }
 
-    
+
     /**
      * {@inheritdoc}
      */
@@ -248,19 +248,19 @@ class FileCache extends AbstractCache
 
         return $this->dir . '/' . $key . '.' . $this->ext;
     }
-    
+
     /**
      * Set the cache directory
      *
      * @param string $dir
      * @return FileCache
-     * @throws Exception\IOException When failed to create the cache directory
+     * @throws \RuntimeException When failed to create the cache directory
      */
     public function setDir($dir)
     {
         if (!is_dir($dir)) {
             if (true !== @mkdir($dir, 0777, true)) {
-                throw new Exception\IOException(sprintf('Failed to create directory: "%s"', $dir));
+                throw new \RuntimeException(sprintf('Failed to create directory: "%s"', $dir));
             }
         }
 
@@ -271,7 +271,7 @@ class FileCache extends AbstractCache
 
     /**
      * Returns the cache directory
-     * 
+     *
      * @return string
      */
     public function getDir()
