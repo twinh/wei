@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>
+
+    Widget Documentation
+
+</title>
+
+<!-- Bootstrap core CSS -->
+<link href="./assets/css/bootstrap.css" rel="stylesheet">
+
+
+<!-- Documentation extras -->
+<link href="./assets/css/docs.css" rel="stylesheet">
+<link href="./assets/css/pygments-manni.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="./assets/js/html5shiv.js"></script>
+  <script src="./assets/js/respond/respond.min.js"></script>
+<![endif]-->
+
+    <!-- Place anything custom after this. -->
+  </head>
+  <body class="bs-docs-docs" data-spy="scroll" data-target=".bs-docs-sidebar">
+
+    <!-- Docs nav -->
+    <div class="bs-docs-sidebar">
+  <ul class="nav bs-docs-sidenav">
+    <h3 class="bs-docs-sidenav-heading"><a href="/">Widget</a></h3>
+
+    <li><a href="#welcome">欢迎</a></li>
+    <li><a href="#getting-started">入门</a></li>
+    <li><a href="#downloads">下载</a></li>
+    <li><a href="#news">随时关注最新消息</a></li>
+
+    <li>
+      <a class="nav-header" href="#widget">微件列表</a>
+    </li>
+    <li>
+      <a href="#request">HTTP请求</a>
+      <ul class="nav">
+        <li><a href="#request">Request</a></li>
+        <li><a href="#cookie">Cookie</a></li>
+        <li><a href="#os">Os</a></li>
+        <li><a href="#post">Post</a></li>
+        <li><a href="#query">Query</a></li>
+        <li><a href="#server">Server</a></li>
+        <li><a href="#session">Session</a></li>
+        <li><a href="#upload">Upload</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#response">HTTP响应</a>
+      <ul class="nav">
+        <li><a href="#response">Response</a></li>
+        <li><a href="#download">Download</a></li>
+        <li><a href="#flush">Flush</a></li>
+        <li><a href="#header">Header</a></li>
+        <li><a href="#json">Json</a></li>
+        <li><a href="#redirect">Redirect</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#call">接口调用</a>
+    </li>
+    <li>
+      <a href="#cache-section">缓存</a>
+      <ul class="nav">
+        <li><a href="#cache">Cache</a></li>
+        <li><a href="#apc">APC</a></li>
+        <li><a href="#arrayCache">ArrayCache</a></li>
+        <li><a href="#bicache">Bicache</a></li>
+        <li><a href="#couchbase">Couchbase</a></li>
+        <li><a href="#dbCache">DbCache</a></li>
+        <li><a href="#fileCache">FileCache</a></li>
+        <li><a href="#memcache">Memcache</a></li>
+        <li><a href="#memcached">Memcached</a></li>
+        <li><a href="#mongoCache">MongoCache</a></li>
+        <li><a href="#redis">Redis</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#validate">验证器</a>
+      <ul class="nav">
+        <li><a href="#validate">validate</a></li>
+        <li><a href="#is">is</a></li>
+
+        <li><a href="#isAlnum" class="nav-header">数据类型及组成</a><li>
+        <li><a href="#isAlnum">isAlnum</a></li>
+        <li><a href="#isAlpha">isAlpha</a></li>
+        <li><a href="#isBlank">isBlank</a></li>
+        <li><a href="#isDecimal">isDecimal</a></li>
+        <li><a href="#isDigit">isDigit</a></li>
+        <li><a href="#isDivisibleby">isDivisibleBy</a></li>
+        <li><a href="#isDoubleByte">isDoubleByte</a></li>
+        <li><a href="#isEmpty">isEmpty</a></li>
+        <li><a href="#isEndsWith">isEndsWith</a></li>
+        <li><a href="#isEquals">isEquals</a></li>
+        <li><a href="#isIn">isIn</a></li>
+        <li><a href="#isLowercase">isLowercase</a></li>
+        <li><a href="#isNull">isNull</a></li>
+        <li><a href="#isNumber">isNumber</a></li>
+        <li><a href="#isRegex">isRegex</a></li>
+        <li><a href="#isRequired">isRequired</a></li>
+        <li><a href="#isStartsWith">isStartsWith</a></li>
+        <li><a href="#isType">isType</a></li>
+        <li><a href="#isUppercase">isUppercase</a></li>
+
+        <li><a href="#isLength" class="nav-header">长度大小</a></li>
+        <li><a href="#isLength">isLength</a></li>
+        <li><a href="#isMax">isMax</a></li>
+        <li><a href="#isMaxLength">isMaxLength</a></li>
+        <li><a href="#isMin">isMin</a></li>
+        <li><a href="#isMinLength">isMinLength</a></li>
+        <li><a href="#isRange">isRange</a></li>
+
+        <li><a href="#isDate" class="nav-header">日期和时间</a>
+        <li><a href="#isDate">isDate</a></li>
+        <li><a href="#isDateTime">isDateTime</a></li>
+        <li><a href="#isTime">isTime</a></li>
+
+        <li><a href="#isDir" class="nav-header">文件目录</a></li>
+        <li><a href="#isDir">isDir</a></li>
+        <li><a href="#isExists">isExists</a></li>
+        <li><a href="#isFile">isFile</a></li>
+        <li><a href="#isImage">isImage</a></li>
+
+        <li><a href="#isEmail" class="nav-header">网络</a></li>
+        <li><a href="#isEmail">isEmail</a></li>
+        <li><a href="#isIp">isIp</a></li>
+        <li><a href="#isTld">isTld</a></li>
+        <li><a href="#isUrl">isUrl</a></li>
+        <li><a href="#isUuid">isUuid</a></li>
+
+        <li><a href="#isCreditCard" class="nav-header">区域:所有</a></li>
+        <li><a href="#isCreditCard">isCreditCard</a></li>
+
+        <li><a href="#isChinese" class="nav-header">区域:中国</a></li>
+        <li><a href="#isChinese">isChinese</a></li>
+        <li><a href="#isIdCardCn">isIdCardCn</a></li>
+        <li><a href="#isIdCardHk">isIdCardHk</a></li>
+        <li><a href="#isIdCardMo">isIdCardMo</a></li>
+        <li><a href="#isIdCardTw">isIdCardTw</a></li>
+        <li><a href="#isPhoneCn">isPhoneCn</a></li>
+        <li><a href="#isPostcodeCn">isPostcodeCn</a></li>
+        <li><a href="#isQQ">isQQ</a></li>
+        <li><a href="#isMobileCn">isMobileCn</a></li>
+
+        <li><a href="#isAllof" class="nav-header">分组</a></li>
+        <li><a href="#isAllof">isAllOf</a></li>
+        <li><a href="#isNoneof">isNoneOf</a></li>
+        <li><a href="#isOneof">isOneOf</a></li>
+        <li><a href="#isSomeof">isSomeOf</a></li>
+
+        <li><a href="#isEntityExists" class="nav-header">数据库</a></li>
+        <li><a href="#isEntityExists">isEntityExists</a></li>
+        <li><a href="#isRecordExists">isRecordExists</a></li>
+
+        <li><a href="#isAll" class="nav-header">其他</a></li>
+        <li><a href="#isAll">isAll</a></li>
+        <li><a href="#isCallback">isCallback</a></li>
+        <li><a href="#isColor">isColor</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#view">视图</a>
+      <ul class="nav">
+        <li><a href="#view">view</a></li>
+        <li><a href="#escape">escape</a></li>
+        <li><a href="#smarty">smarty</a></li>
+        <li><a href="#twig">twig</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#db">数据库</a>
+      <ul class="nav">
+        <li><a href="#db">db</a></li>
+        <li><a href="#entityManager">entityManager</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#event">事件</a>
+    </li>
+    <li>
+      <a href="#error">错误处理</a>
+      <ul class="nav">
+        <li><a href="#error">error</a></li>
+        <li><a href="#phpError">phpError</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#arr">工具</a>
+      <ul class="nav">
+        <li><a href="#arr">arr</a></li>
+        <li><a href="#env">env</a></li>
+        <li><a href="#logger">logger</a></li>
+        <li><a href="#monolog">monolog</a></li>
+        <li><a href="#pinyin">pinyin</a></li>
+        <li><a href="#uuid">uuid</a></li>
+        <li><a href="#website">website</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<!-- Page content of course! -->
+    <div class="bs-docs-container">
+
+<!-- Welcome
+  ================================================== -->
+  <div id="welcome" class="bs-docs-section-header">
+    <h1>欢迎</h1>
+    <p class="lead">欢迎来到PHP微框架Widget的文档.这里将为您展示丰富全面的Widget代码指导和案例.</p>
+  </div>
+
+<!-- Getting started
+  ================================================== -->
+  <div class="bs-docs-section" id="getting-started">
+    <div class="page-header">
+      <h1>入门</h1>
+    </div>
+    <p class="lead">Widget是一个非常小的PHP框架,她提供了一种高效简洁的方式让您更方便地使用PHP.<p>
+    <p>Widget的使用比任何框架都要简单,只需3步,<code>加载</code>=><code>创建</code>=><code>调用</code>!</p>
+    <%= syntax_highlighter("<pre class=\"php\"><code>// 加载核心类文件
+require 'path/to/widget/lib/Widget/Widget.php';
+
+// 创建微件管理器对象
+$widget = widget();
+
+// 调用query微件,获取URL请求中id参数
+$id = $widget->query('id');</code></pre>") %>
+  </div>
+
+<!-- Download
+  ================================================== -->
+  <div class="bs-docs-section" id="downloads">
+    <div class="page-header">
+      <h1>下载</h1>
+    </div>
+    <div class="row">
+      <div class="col-span-6">
+        <h3>1. 通过<a href="http://getcomposer.org/" target="_blank">Composer</a>下载</h3>
+        <p><%= syntax_highlighter('<pre class="json"><code>{
+    "require": {
+        "widget/widget": "0.9.2-beta"
+    }
+}</code></pre>', 'json') %></p>
+      </div>
+      <div class="col-span-6">
+        <h3>2. 直接下载</h3>
+        <p><a class="btn btn-large btn-primary btn-block" href="https://github.com/twinh/widget/archive/v0.9.2-beta.zip">最新版 v0.9.2-beta</a></p>
+        <p><a class="btn btn-large btn-block" href="https://github.com/twinh/widget/archive/master.zip">开发版</a></p>
+      </div>
+    </div>
+  </div>
+
+<!-- News
+  ================================================== -->
+  <div class="bs-docs-section" id="news">
+    <div class="page-header">
+      <h1>随时关注最新消息</h1>
+    </div>
+    <p class="lead">Widget每天都有新的提交,欢迎关注,了解最新趋势!</p>
+    <p>
+      <iframe src="http://ghbtns.com/github-btn.html?user=twinh&repo=widget&type=watch"
+        allowtransparency="true" frameborder="0" scrolling="0" width="53" height="20"></iframe>
+      <iframe src="http://ghbtns.com/github-btn.html?user=twinh&type=follow"
+        allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>
+    </p>
+  </div>
+
+  <!-- Widget
+  ================================================== -->
+  <div id="widget" class="bs-docs-section-header">
+    <h1>微件列表</h1>
+    <p class="lead">提供了上百个各具特色的微件,包括缓存,事件,HTTP请求,HTTP响应,验证器等</p>
+  </div>
+<% sections.each do |name, section| %>
+<!-- <%= name %>
+  ================================================== -->
+  <section id="<%= name %>">
+  <%= section %>
+  </section>
+<% end %>
+</div><!-- /.container -->
+
+<a href="#welcome" class="bs-docs-top">
+  Back to top
+</a>
+
+
+    <!-- Main docs footer (social buttons, copyright, etc). -->
+    <!-- Footer
+================================================== -->
+<footer class="bs-docs-footer">
+  <div class="bs-docs-container">
+
+    <div class="bs-docs-social">
+      <ul class="bs-docs-social-buttons">
+        <li>
+          <iframe src="http://ghbtns.com/github-btn.html?user=twinh&repo=widget&type=watch"
+            allowtransparency="true" frameborder="0" scrolling="0" width="53" height="20"></iframe>
+        <li>
+          <iframe src="http://ghbtns.com/github-btn.html?user=twinh&type=follow"
+            allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>
+        </li>
+      </ul>
+    </div>
+
+    <p>页面主题来自<a href="https://github.com/twitter/bootstrap">Bootstrap 3.0</a>,感谢Bootstrap 3.0!</p>
+    <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+    <ul class="footer-links">
+      <li><a href="https://github.com/twinh/widget/issues?state=open">Issues</a></li>
+      <li class="muted">&middot;</li>
+      <li><a href="https://github.com/twinh/widget/">Github</a></li>
+    </ul>
+  </div>
+</footer>
+
+    <!-- JS and analytics only. -->
+    <!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="./assets/js/jquery.js"></script>
+<script src="./assets/js/bootstrap-scrollspy.js"></script>
+<script src="./assets/js/bootstrap-affix.js"></script>
+<script src="./assets/js/application.js"></script>
+
+<!-- Analytics
+================================================== -->
+<script>
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4f0dc9fef5a1f55508000013');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+  </body>
+</html>
