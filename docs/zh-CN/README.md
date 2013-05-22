@@ -97,7 +97,7 @@ API 参考目录
 * [isIdCardMo](isIdCardMo.md) - 检查数据是否为有效的澳门身份证
 * [isIdCardTw](isIdCardTw.md) - 检查数据是否为有效的台湾身份证
 * [isPhoneCn](isPhoneCn.md) - 检查数据是否为有效的电话号码
-* [isPostcode](isPostcode.md) - 检查数据是否为有效的邮政编码
+* [isPostcodeCn](isPostcodeCn.md) - 检查数据是否为有效的邮政编码
 * [isQQ](isQQ.md) - 检查数据是否为有效的QQ号码
 * [isMobileCn](isMobileCn.md) - 检查数据是否为有效的手机号码
 
