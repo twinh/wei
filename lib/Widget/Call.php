@@ -133,6 +133,8 @@ class Call extends AbstractWidget
     /**
      * An event triggered when the requeset fails
      *
+     * The `$textStatus` could be `curl`, `http`, and `parser`
+     *
      * ```php
      * $widget->call(array(
      *     'error' => function(Call $call, $textStatus, \ErrorException $exception){

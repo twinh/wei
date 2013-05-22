@@ -109,7 +109,7 @@ $exception  | Exception    | 错误的异常对象,可通过该对象获取详�
 ------------|--------------
 curl        | cURL内部错误,如无法解析域名IP地址
 http        | HTTP状态码错误,如404页面不存在,500内部错误
-parsererror | 数据解析错误,如返回的数据不是正确的json格式
+parser      | 数据解析错误,如返回的数据不是正确的json格式
 
 #### complete($call, $ch)
 
