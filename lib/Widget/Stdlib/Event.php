@@ -6,7 +6,7 @@
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Widget\Event;
+namespace Widget\Stdlib;
 
 use Widget\AbstractWidget;
 
@@ -75,14 +75,14 @@ class Event extends AbstractWidget
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        
+
         $this->timeStamp = microtime(true);
     }
 
     /**
      * Returns the type of event
-     * 
-     * @param bool $full Whether return type or type with with namespace 
+     *
+     * @param bool $full Whether return type or type with with namespace
      * @return string
      */
     public function getType($full = false)
@@ -152,7 +152,7 @@ class Event extends AbstractWidget
 
     /**
      * Set a flag to prevent the default action
-     * 
+     *
      * @return Event\Event
      */
     public function preventDefault()
@@ -164,7 +164,7 @@ class Event extends AbstractWidget
 
     /**
      * Whether prevent the default action of event or not
-     * 
+     *
      * @return bool
      */
     public function isDefaultPrevented()
@@ -174,7 +174,7 @@ class Event extends AbstractWidget
 
     /**
      * Sets the event result
-     * 
+     *
      * @param mixed $result
      */
     public function setResult($result)
@@ -196,7 +196,7 @@ class Event extends AbstractWidget
 
     /**
      * Set the event data
-     * 
+     *
      * @param array $data
      */
     public function setData($data = array())
@@ -208,7 +208,7 @@ class Event extends AbstractWidget
 
     /**
      * Returns the event data
-     * 
+     *
      * @return array
      */
     public function getData()
@@ -218,7 +218,7 @@ class Event extends AbstractWidget
 
     /**
      * Set a flag to stop trigger the next handler
-     * 
+     *
      * @return Event\Event
      */
     public function stopPropagation()
@@ -230,7 +230,7 @@ class Event extends AbstractWidget
 
     /**
      * Whether to trigger the next handler or not
-     * 
+     *
      * @return bool
      */
     public function isPropagationStopped()

@@ -17,7 +17,7 @@ class EventTest extends TestCase
         $event = $this->event;
 
         $event->off('test')
-            ->on('test.ns.ns2', function(\Widget\Event\Event $event) use($that) {
+            ->on('test.ns.ns2', function(\Widget\Stdlib\Event $event) use($that) {
                 $that->assertEquals('test', $event->getType());
                 $that->assertEquals('ns.ns2', $event->getNamespace());
                 $that->assertEquals(array('ns', 'ns2'), $event->getNamespaces());

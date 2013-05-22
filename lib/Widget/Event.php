@@ -8,7 +8,7 @@
 
 namespace Widget;
 
-use Widget\Event\Event as StdEvent;
+use Widget\Stdlib\Event as StdEvent;
 
 /**
  * The event manager to add, remove and trigger events
@@ -51,7 +51,7 @@ class Event extends AbstractWidget
      * Create a event object
      *
      * @param string $type
-     * @return \Widget\Event\Event
+     * @return \Widget\Stdlib\Event
      */
     public function __invoke($type)
     {
@@ -71,7 +71,7 @@ class Event extends AbstractWidget
      * @param null|WidgetInterface $widget If the widget contains the
      *                                     $type property, the event manager
      *                                     will trigger it too
-     * @return Event\Event The event object
+     * @return Stdlib\Event The event object
      */
     public function trigger($type, $args = array(), WidgetInterface $widget = null)
     {
@@ -232,11 +232,11 @@ class Event extends AbstractWidget
     /**
      * Create a new event
      *
-     * @return Event\Event
+     * @return Stdlib\Event
      * @param array $namespaces
      * @todo check interface
      */
-    public function create($type, $class = 'Widget\Event\Event')
+    public function create($type, $class = 'Widget\Stdlib\Event')
     {
         list($type, $namespaces) = $this->splitNamespace($type);
 
