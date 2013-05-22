@@ -36,14 +36,14 @@ require_once 'WidgetInterface.php';
  * @property Session    $session A widget that session parameters ($_SESSION)
  * @method   mixed      session($name, $default = null) Returns a stringify session parameter value
  * @property Upload     $upload A widget that handles the uploaded files
- * @method   bool       upload(array $options = array() Upload a file
+ * @method   bool       upload(array $options = array()) Upload a file
  *
  * HTTP Response
  * @property Response   $response A widget that send the HTTP response
  * @method   Response   response($content = null, $status = null) Send response header and content
  * @property Download   $download A widget send file download response
  * @method   Download   download($file, $options) Send file download response
- * @property Flush      $fulsh A widget that flushes the content to browser immediately
+ * @property Flush      $flush A widget that flushes the content to browser immediately
  * @method   Flush      flush($content = null, $status = null) Send response content
  * @property Header     $header The response header widget
  * @method   mixed      header($name, $values = null, $replace = true) Get or set HTTP header

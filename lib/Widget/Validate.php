@@ -559,10 +559,10 @@ class Validate extends AbstractWidget
     }
 
     /**
-     * Set custome messages
+     * Set custom messages
      *
      * @param array $messages
-     * @todo confict with interface
+     * @todo conflict with interface
      */
     public function setMessages(array $messages)
     {
@@ -638,7 +638,7 @@ class Validate extends AbstractWidget
      *
      * @param string $field
      * @param string $rule
-     * @return Validate\AbstractRule
+     * @return Validator\AbstractRule
      */
     public function getRuleValidator($field, $rule)
     {
