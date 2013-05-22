@@ -341,7 +341,7 @@ class Request extends Parameter
      * @return bool
      */
     public function inAjax()
-    {   
+    {
         return 'xmlhttprequest' == strtolower($this->getServer('HTTP_X_REQUESTED_WITH'));
     }
 
@@ -350,7 +350,8 @@ class Request extends Parameter
      *
      * @param string $type The parameter type, could be get, post, cookie, or server
      * @return array The parameters array
-        */
+     * @throws \InvalidArgumentException When parameter type is unknown
+     */
     public function &getParameterReference($type)
     {
         if (in_array($type, array('get', 'post', 'cookie', 'server', 'file'))) {
