@@ -81,7 +81,7 @@ class ValidatorTest extends TestCase
     }
 
     /**
-     * @expectedException \Widget\Exception\InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testRuleNotDefined()
     {
@@ -640,7 +640,7 @@ class ValidatorTest extends TestCase
     }
 
     /**
-     * @expectedException Widget\Exception\UnexpectedValueException
+     * @expectedException \UnexpectedValueException
      */
     public function testInvalidArgumentException()
     {

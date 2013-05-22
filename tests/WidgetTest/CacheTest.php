@@ -12,9 +12,9 @@ class CacheTest extends CacheTestCase
         }
         parent::setUp();
     }
-    
+
     /**
-     * @expectedException Widget\Exception\InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testDriverClassNotFound()
     {
@@ -23,9 +23,9 @@ class CacheTest extends CacheTestCase
             'driver' => 'noThisCacheDriver'
         ));
     }
-    
+
     /**
-     * @expectedException Widget\Exception\InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testNotImplemented()
     {

@@ -12,68 +12,68 @@ use Widget\Exception;
 
 /**
  * Check if the input is valid file
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class File extends AbstractValidator
 {
     protected $notFoundMessage = '%name% is not found or not readable';
-    
+
     protected $maxSizeMessage = '%name% is too large(%sizeString%), allowed maximum size is %maxSizeString%';
-    
+
     protected $minSizeMessage = '%name% is too small(%sizeString%), expected minimum size is %minSizeString%';
 
     protected $extsMessage = '%name% extension(%ext%) is not allowed, allowed extension: %exts%';
-    
+
     protected $excludeExtsMessage = '%name% extension(%ext%) is not allowed, not allowed extension: %excludeExts%';
-    
+
     protected $mimeTypeNotDetectedMessage = '%name% mime type could not be detected';
-    
+
     protected $mimeTypesMessage = '%name% mime type "%mimeType%" is not allowed';
-    
+
     protected $excludeMimeTypesMessage = '%name% mime type "%mimeType%" is not allowed';
-    
+
     protected $negativeMessage = '%name% must be a non-existing file';
-    
+
     /**
      * The absolute file path, or false when file not found or not readable
-     * 
+     *
      * @var string|false
      */
     protected $file;
-    
+
     /**
-     * The origin name of uploaded file, if the input is not uploaded file 
+     * The origin name of uploaded file, if the input is not uploaded file
      * array, the origin name is equals to $this->file
-     * 
+     *
      * @var string
      */
     protected $originFile;
-    
+
     /**
      * The detected byte size of file
-     * 
+     *
      * @var int
      */
     protected $size;
-    
+
     /**
      * The formatted file size, e.g. 1.2MB, 10KB
-     * 
+     *
      * @var string
      */
     protected $sizeString;
-    
+
     /**
      * The maximum file size limit
      *
      * @var int
      */
     protected $maxSize = 0;
-    
+
     /**
      * The formatted maximum file size, e.g. 1.2MB, 10KB
-     * 
+     *
      * @var string
      */
     protected $maxSizeString;
@@ -84,17 +84,17 @@ class File extends AbstractValidator
      * @var int
      */
     protected $minSize = 0;
-    
+
     /**
      * The formatted minimum file size, e.g. 1.2MB, 10KB
-     * 
+     *
      * @var string
      */
     protected $minSizeString;
-    
+
     /**
      * The detected file extension
-     * 
+     *
      * @var string
      */
     protected $ext;
@@ -105,50 +105,50 @@ class File extends AbstractValidator
      * @var array
      */
     protected $exts = array();
-        
+
     /**
      * The excluding file extensions
      *
      * @var array
      */
     protected $excludeExts = array();
-    
+
     /**
      * The detected file mime type
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $mimeType;
-    
+
     /**
      * The allowd file mime types
-     * 
+     *
      * @var array
      */
     protected $mimeTypes = array();
-    
+
     /**
      * The excluding file mime types
-     * 
+     *
      * @var array
      */
     protected $excludeMimeTypes = array();
-    
+
     /**
      * The file size unit
-     * 
+     *
      * @var string
      */
     protected $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
 
     /**
      * The magic database file to detect file mime type
-     * 
+     *
      * @link http://www.php.net/manual/en/function.finfo-open.php
      * @var string|null
      */
     protected $magicFile;
-    
+
     /**
      * Check if the input is valid file
      *
@@ -157,10 +157,10 @@ class File extends AbstractValidator
     public function __invoke($input, $options = array())
     {
         $options && $this->storeOption($options);
-        
+
         return $this->isValid($input);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -170,22 +170,22 @@ class File extends AbstractValidator
             case is_string($input) :
                 $file = $originFile = $input;
                 break;
-            
+
             // File array from $_FILES
             case is_array($input) :
                 if (!isset($input['tmp_name']) || !isset($input['name'])) {
                     $this->addError('notFound');
                     return false;
                 }
-                
+
                 $file = $input['tmp_name'];
                 $originFile = $input['name'];
                 break;
-            
+
             case $input instanceof \SplFileInfo:
                 $file = $originFile = $input->getPathname();
                 break;
-            
+
             default:
                 $this->addError('notString');
                 return false;
@@ -197,7 +197,7 @@ class File extends AbstractValidator
             $this->addError('notFound');
             return false;
         }
-                
+
         // Validate file extension
         if ($this->exts || $this->excludeExts) {
             $ext = $this->getExt();
@@ -216,15 +216,15 @@ class File extends AbstractValidator
             $this->size = filesize($file);
             $this->sizeString = $this->fromBytes($this->size);
         }
-  
+
         if ($this->maxSize && $this->maxSize <= $this->size) {
             $this->addError('maxSize');
         }
-        
+
         if ($this->minSize && $this->minSize > $this->size) {
             $this->addError('minSize');
         }
-        
+
         // Validate file mime type
         if ($this->mimeTypes || $this->excludeMimeTypes) {
             $mimeType = $this->getMimeType();
@@ -237,20 +237,20 @@ class File extends AbstractValidator
         if ($this->mimeTypes && !$this->inMimeType($mimeType, $this->mimeTypes)) {
             $this->addError('mimeTypes');
         }
-        
+
         if ($this->excludeMimeTypes && $this->inMimeType($mimeType, $this->excludeMimeTypes)) {
             $this->addError('excludeMimeTypes');
         }
-        
+
         return !$this->errors;
     }
 
     /**
      * Checks if a mime type exists in a mime type array
-     * 
+     *
      * @param string $findMe    The mime type to be searched
-     * @param array $mimeTypes  The mime type array, allow element likes 
-     *                          "image/*" to match all image mime type, such as 
+     * @param array $mimeTypes  The mime type array, allow element likes
+     *                          "image/*" to match all image mime type, such as
      *                          "image/gif", "image/jpeg", etc
      * @return boolean
      */
@@ -260,7 +260,7 @@ class File extends AbstractValidator
             if ($mimeType == $findMe) {
                 return true;
             }
-            
+
             $type = strstr($mimeType, '/*', true);
             if ($type && $type === strstr($findMe, '/', true)) {
                 return true;
@@ -268,36 +268,36 @@ class File extends AbstractValidator
         }
         return false;
     }
-    
+
     /**
      * Set allowed file extensions
-     * 
+     *
      * @param string|array $exts String format likes 'php,js' or array format likes [php, js]
      * @return Validator\File
      */
     public function setExts($exts)
     {
         $this->exts = $this->convertToArray($exts);
-        
+
         return $this;
     }
-    
+
      /**
      * Set exclude file extensions
-     * 
+     *
      * @param string|array $exts String format likes 'php,js' or array format likes [php, js]
      * @return Validator\File
      */
     public function setExcludeExts($exts)
     {
         $this->excludeExts = $this->convertToArray($exts);
-        
+
         return $this;
     }
-    
+
     /**
-     * Set maximum file size 
-     * 
+     * Set maximum file size
+     *
      * @param string|int $maxSize
      * @return Validator\File
      */
@@ -305,13 +305,13 @@ class File extends AbstractValidator
     {
         $this->maxSize = $this->toBytes($maxSize);
         $this->maxSizeString = $this->fromBytes($this->maxSize);
-        
+
         return $this;
     }
-    
+
     /**
      * Set the minimum file size
-     * 
+     *
      * @param string|int $minSize
      * @return Validator\File
      */
@@ -319,13 +319,13 @@ class File extends AbstractValidator
     {
         $this->minSize = $this->toBytes($minSize);
         $this->minSizeString = $this->fromBytes($this->minSize);
-        
+
         return $this;
     }
-    
+
     /**
      * Converts human readable file size (e.g. 1.2MB, 10KB) into bytes
-     * 
+     *
      * @param string|int $size
      * @return int
      */
@@ -334,21 +334,21 @@ class File extends AbstractValidator
         if (is_numeric($size)) {
             return (int) $size;
         }
-        
+
         $unit = strtoupper(substr($size, -2));
-        
+
         $value = substr($size, 0, -1);
         if (!is_numeric($value)) {
             $value = substr($value, 0, -1);
         }
-        
+
         $exponent = array_search($unit, $this->units);
         return (int)($value * pow(1024, $exponent));
     }
-    
+
     /**
      * Formats bytes to human readable file size (e.g. 1.2MB, 10KB)
-     * 
+     *
      * @param int $bytes
      * @return string
      */
@@ -359,36 +359,36 @@ class File extends AbstractValidator
         }
         return round($bytes, 2) . $this->units[$i];
     }
-    
+
     /**
      * Set the file mime types
-     * 
+     *
      * @param string|array $mimeTypes
      * @return Validator\File
      */
     public function setMimeTypes($mimeTypes)
     {
         $this->mimeTypes = $this->convertToArray($mimeTypes);
-        
+
         return $this;
     }
-    
+
     /**
      * Set the file exclude mime types
-     * 
+     *
      * @param string|array $excludeMimeTypes
      * @return Validator\File
      */
     public function setExcludeMimeTypes($excludeMimeTypes)
     {
         $this->excludeMimeTypes = $this->convertToArray($excludeMimeTypes);
-        
+
         return $this;
     }
-    
+
     /**
      * Converts parameter to array
-     * 
+     *
      * @param mixed $var
      * @return array
      * @throws Exception\UnexpectedTypeException When parameter is not a string or array
@@ -403,28 +403,28 @@ class File extends AbstractValidator
             throw new Exception\UnexpectedTypeException($var, 'string or array');
         }
     }
-    
+
     /**
      * Returns the file mime type on success
-     * 
+     *
      * @return string|false
-     * @throws Exception\UnexpectedValueException When failed to open fileinfo database
+     * @throws \UnexpectedValueException When failed to open fileinfo database
      */
     public function getMimeType()
     {
         if (!$this->mimeType) {
             $finfo = finfo_open(FILEINFO_MIME_TYPE, $this->magicFile);
             if (!$finfo) {
-                throw new Exception\UnexpectedValueException('Failed to open fileinfo database');
+                throw new \UnexpectedValueException('Failed to open fileinfo database');
             }
             $this->mimeType = finfo_file($finfo, $this->file);
         }
         return $this->mimeType;
     }
-    
+
     /**
      * Returns the file extension, if file is not exists, return null instead
-     * 
+     *
      * @return string
      */
     public function getExt()
@@ -438,7 +438,7 @@ class File extends AbstractValidator
                 $this->ext = '';
             }
         }
-        
+
         return $this->ext;
     }
 }

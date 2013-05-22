@@ -17,35 +17,35 @@ class T extends AbstractWidget
 {
     /**
      * The default locale
-     * 
+     *
      * @var string
      */
     protected $locale = 'en';
-    
+
     /**
      * The fallback locale
-     * 
+     *
      * @var string
      */
     protected $fallbackLocale = 'en';
-    
+
     /**
      * The translator messages
-     *  
-     * @var array 
+     *
+     * @var array
      */
     protected $data = array();
 
     /**
      * The loaded translation files
-     * 
+     *
      * @var array
      */
     protected $files = array();
-    
+
     /**
      * Translate the message
-     * 
+     *
      * @param string $message
      * @param array $parameters
      * @return string
@@ -55,13 +55,13 @@ class T extends AbstractWidget
         if (isset($this->data[$message])) {
             $message = $this->data[$message];
         }
-        
+
         return $parameters ? strtr($message, $parameters) : $message;
     }
-    
+
     /**
      * Translates a message
-     * 
+     *
      * @param string $message
      * @param array $parameters
      * @return string
@@ -70,97 +70,97 @@ class T extends AbstractWidget
     {
         return $this($message, $parameters);
     }
-    
+
     /**
      * Sets the default locale
-     * 
+     *
      * @param string $locale
      * @return T
      */
     public function setLocale($locale)
     {
         $this->locale = $locale;
-        
+
         return $this;
     }
-    
+
     /**
      * Returns the default locale
-     * 
+     *
      * @return string
      */
     public function getLocale()
     {
         return $this->locale;
     }
-    
+
     /**
      * Set the fallback locale
-     * 
+     *
      * @param string $locale
      * @return T
      */
     public function setFallbackLocale($locale)
     {
         $this->fallbackLocale = $locale;
-        
+
         return $this;
     }
-    
+
     /**
      * Returns the fallback locale
-     * 
+     *
      * @return string
      */
     public function getFallbackLocale()
     {
         return $this->fallbackLocale;
     }
-    
+
     /**
      * Loads translator messages from file
-     * 
+     *
      * @param string $pattern The file path, which can contains %s that would be convert the current locale or fallback locale
      * @return T
-     * @throws Exception\InvalidArgumentException When file not found or not readable
+     * @throws \InvalidArgumentException When file not found or not readable
      */
     public function loadFromFile($pattern)
     {
         if (isset($this->files[$pattern])) {
             return $this;
         }
-        
+
         $file = sprintf($pattern, $this->locale);
         if (!is_file($file)) {
             $fallbackFile = sprintf($pattern, $this->fallbackLocale);
             if (!is_file($fallbackFile)) {
-                throw new Exception\InvalidArgumentException(sprintf('File "%s" and "%s" not found or not readable', $file, $fallbackFile));
+                throw new \InvalidArgumentException(sprintf('File "%s" and "%s" not found or not readable', $file, $fallbackFile));
             } else {
                 $file = $fallbackFile;
             }
         }
-        
+
         $this->files[$pattern] = true;
-        
+
         return $this->loadFromArray(require $file);
     }
-    
+
     /**
      * Loads translator messages from array
-     * 
+     *
      * @param array $messages
      * @return T
      */
     public function loadFromArray(array $messages)
     {
         $this->data = $messages + $this->data;
-        
+
         return $this;
     }
-    
+
     /**
      * Loads translator messages from closure
-     * 
+     *
      * @param \Closure $fn
      * @return T
      */

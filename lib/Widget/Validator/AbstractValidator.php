@@ -13,7 +13,7 @@ use Widget\Exception\UnexpectedValueException;
 
 /**
  * The base class of validator
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  * @method      string t(string $message, array $parameters = array()) Translates a message
  * @property    T $t The translator widget
@@ -22,77 +22,77 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
 {
     /**
      * The message added when the input required a stringify value
-     * 
+     *
      * @var string
      */
     protected $notStringMessage = '%name% must be a string';
-    
+
     /**
      * The common message for negative validator
-     * 
+     *
      * @var string
      */
     protected $negativeMessage = '%name% is not valid';
-    
+
     /**
      * The message name
-     * 
+     *
      * @var string
      */
     protected $name = 'This value';
-    
+
     /**
      * The error definition
-     * 
+     *
      * @var array
      */
     protected $errors = array();
-    
+
     /**
      * The summary message that would overwrite all $this->xxxMessage messages
-     * when called addError, which MAY useful when you want to set message for 
+     * when called addError, which MAY useful when you want to set message for
      * the validaor
-     * 
+     *
      * @var string
      * @internal
      */
     protected $message;
-    
+
     /**
-     * Whether it's a negative validator, for examole, notDigit is digit's 
-     * negative validator. The negative validator will returns $this->negativeMessage 
+     * Whether it's a negative validator, for examole, notDigit is digit's
+     * negative validator. The negative validator will returns $this->negativeMessage
      * as the error message currently
-     * 
+     *
      * @var string
      */
     protected $negative = false;
-    
+
     /**
      * The array constains the validator original property values
-     * 
+     *
      * @var array
      * @internal
      */
     protected $backup = array();
-    
+
     /**
      * The array to store previous and current called parameters from __invoke
-     * 
+     *
      * @var array
-     * @internal 
+     * @internal
      */
     protected $store = array(array());
-    
+
     /**
      * Whether the translation widget has loaded the validator messages
-     * 
+     *
      * @var bool
      */
     protected static $translationMessagesLoaded;
-     
+
     /**
      * Validate the input value
-     * 
+     *
      * @param mixed $input
      * @return bool
      */
@@ -108,21 +108,21 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     {
         // Clean previous status
         $this->reset();
-         
+
         return $this->negative xor $this->validate($input);
     }
-    
+
     /**
      * Validate the input value (ignore the $negative property)
-     * 
+     *
      * @param mixed $input The input to be validated
      * @return boolean
      */
     abstract protected function validate($input);
-    
+
     /**
      * Set property value
-     * 
+     *
      * @param string|array $name The name of property
      * @param mixed $value The value of property
      * @return Validator\AbstractValidator
@@ -137,22 +137,22 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
             }
             return $this;
         }
-        
+
         if (property_exists($this, $name)) {
             if (!array_key_exists($name, $this->backup)) {
                 $this->backup[$name] = $this->$name;
             }
             $this->store[count($this->store) - 1][$name] = $value;
         }
-        
+
         $this->setOption($name, $value);
-        
+
         return $this;
     }
 
     /**
      * Reset validator status
-     * 
+     *
      * @internal
      */
     protected function reset()
@@ -170,15 +170,15 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
         }
         $this->store[] = array();
     }
-    
+
     /**
      * {@inheritdoc}
-     * @throws Exception\UnexpectedValueException When message contains unkonwn parameter
+     * @throws \UnexpectedValueException When message contains unkonwn parameter
      */
     public function getMessages()
     {
         $this->loadTranslationMessages();
-        
+
         if ($this->negative) {
             $this->addError('negative');
         }
@@ -192,30 +192,30 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
                     $parameters['%name%'] = $this->t($this->name);
                 } else {
                     if (!property_exists($this, $match)) {
-                        throw new UnexpectedValueException(sprintf('Unkonwn parameter "%%%s%%" in message "%s"', $match, $message));
+                        throw new \UnexpectedValueException(sprintf('Unkonwn parameter "%%%s%%" in message "%s"', $match, $message));
                     }
-                    $parameters['%' . $match . '%'] = is_array($this->$match) ? 
+                    $parameters['%' . $match . '%'] = is_array($this->$match) ?
                         implode(', ', $this->$match) : $this->$match;;
                 }
             }
-            $messages[$name] = $this->t($message, $parameters);      
+            $messages[$name] = $this->t($message, $parameters);
         }
         return $messages;
     }
-    
+
     /**
      * Returns error message string
-     * 
+     *
      * @return srring
      */
     public function getJoinedMessage($separator = "\n")
     {
         return implode($separator, $this->getMessages());
     }
-    
+
     /**
      * Loads the validator translation messages
-     * 
+     *
      * @todo better way?
      */
     protected function loadTranslationMessages()
@@ -225,10 +225,10 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
             static::$translationMessagesLoaded = true;
         }
     }
-    
+
     /**
      * Sets the specified messages
-     * 
+     *
      * @param array $messages
      * @return Validator\AbstractValidator
      */
@@ -239,33 +239,33 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
         }
         return $this;
     }
-    
+
     /**
      * Returns message name
-     * 
+     *
      * @return string
      */
     public function getName()
     {
         return $this->name;
     }
-    
+
     /**
      * Sets message name
-     * 
+     *
      * @param string $name
      * @return Validator\AbstractValidator
      */
     public function setName($name)
     {
         $this->name = $name;
-        
+
         return $this;
     }
-    
+
     /**
      * Returns error definition
-     * 
+     *
      * @return array
      */
     public function getErrors()
@@ -275,7 +275,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
 
     /**
      * Adds error definition
-     * 
+     *
      * @param string $name The name of error
      * @param string $customMessage The custom error message
      */
@@ -283,10 +283,10 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     {
         $this->errors[$name] = $customMessage ?: $this->message ?: $this->{$name . 'Message'};
     }
-    
+
     /**
      * Returns whether the error defined
-     * 
+     *
      * @param string $name
      * @return bool
      */
@@ -294,10 +294,10 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     {
         return isset($this->errors[$name]);
     }
-    
+
     /**
      * Checks if the input value could be convert to string
-     * 
+     *
      * @param mixed $input
      * @return bool
      */

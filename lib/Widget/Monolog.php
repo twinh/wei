@@ -20,21 +20,21 @@ class Monolog extends AbstractWidget
 {
     /**
      * The name of channel
-     *  
+     *
      * @var string
      */
     protected $name = 'widget';
-    
+
     /**
      * The default log level
-     * 
+     *
      * @var int
      */
     protected $level = MonologLogger::DEBUG;
-    
+
     /**
      * The monolog handlers
-     * 
+     *
      * @var array
      */
     protected $handlers = array(
@@ -46,21 +46,21 @@ class Monolog extends AbstractWidget
 
     /**
      * The Monolog logger object
-     * 
-     * @var Monolog\Logger 
+     *
+     * @var Monolog\Logger
      */
     protected $logger;
 
     /**
      * Constructor
-     * 
+     *
      * @param array $options
-     * @throws Exception\InvalidArgumentException When log handlder not found
+     * @throws \InvalidArgumentException When log handlder not found
      */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        
+
         // Create a logger channel
         $logger = $this->logger = new MonologLogger($this->name);
 
@@ -71,27 +71,27 @@ class Monolog extends AbstractWidget
                     $class = '\Monolog\Handler\\' . ucfirst($name) . 'Handler';
                     $logger->pushHandler($this->createInstance($class, $parameters));
                     break;
-                
+
                 case $parameters instanceof \Monolog\Handler\HandlerInterface :
                     $logger->pushHandler($parameters);
                     break;
-                
+
                 default :
-                    throw new Exception\InvalidArgumentException(sprintf('Log handler "%s" not found', $name));
+                    throw new \InvalidArgumentException(sprintf('Log handler "%s" not found', $name));
             }
         }
     }
-    
+
     /**
      * Get monolog logger object or add a log record
-     * 
+     *
      * @param string $message The log message
      * @return \Monolog\Logger|boolen Returns Logger obejct when $message is null, otherwise returns log result
      */
     public function __invoke($level = null, $message = null, array $context = array())
     {
         !isset($level) && $level = $this->level;
-        
+
         return $message ? $this->logger->addRecord($level, $message, $context) : $this->logger;
     }
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * Zend Framework (http://framework.zend.com/)
- * 
+ *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
@@ -11,9 +11,9 @@ namespace Widget;
 
 /**
  * Context specific methods for use in secure output escaping
- * 
+ *
  * The escape is derived from code of the Zend Framework (2.1.5 - 20130324)
- * 
+ *
  * @link https://github.com/zendframework/zf2/blob/master/library/Zend/Escaper/Escaper.php
  */
 class Escape extends AbstractWidget
@@ -97,25 +97,25 @@ class Escape extends AbstractWidget
      * is set for htmlspecialchars() calls.
      *
      * @param string $encoding
-     * @throws Exception\InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function __construct($options = array())
     {
         parent::__construct($options);
-        
+
         $encoding = $this->encoding;
-        
+
         if ($encoding !== null) {
             $encoding = (string) $encoding;
             if ($encoding === '') {
-                throw new Exception\InvalidArgumentException(
+                throw new \InvalidArgumentException(
                     get_called_class() . ' constructor parameter does not allow a blank value'
                 );
             }
 
             $encoding = strtolower($encoding);
             if (!in_array($encoding, $this->supportedEncodings)) {
-                throw new Exception\InvalidArgumentException(
+                throw new \InvalidArgumentException(
                     'Value of \'' . $encoding . '\' passed to ' . get_called_class()
                     . ' constructor parameter is invalid. Provide an encoding supported by htmlspecialchars()'
                 );
@@ -393,10 +393,10 @@ class Escape extends AbstractWidget
         }
         return $result;
     }
-    
+
     /**
      * Escapes a string by specified type for secure ouput
-     * 
+     *
      * @param string $string
      * @param string $type
      * @return string
@@ -409,10 +409,10 @@ class Escape extends AbstractWidget
         }
         throw new Exception\UnsupportedException(sprintf('Unsupported escape type "%s"', $type));
     }
-    
+
     /**
      * The alias of escapeHtml method
-     * 
+     *
      * @param string $string
      * @return string
      */
@@ -420,10 +420,10 @@ class Escape extends AbstractWidget
     {
         return $this->escapeHtml($string);
     }
-    
+
     /**
      * The alias of escapeJs method
-     * 
+     *
      * @param string $string
      * @return string
      */
@@ -431,10 +431,10 @@ class Escape extends AbstractWidget
     {
         return $this->escapeJs($string);
     }
-    
+
     /**
      * The alias of escapeCss method
-     * 
+     *
      * @param string $string
      * @return string
      */
@@ -442,10 +442,10 @@ class Escape extends AbstractWidget
     {
         return $this->escapeCss($string);
     }
-    
+
     /**
      * The alias of escapeHtmlAttr method
-     * 
+     *
      * @param string $string
      * @return string
      */
@@ -453,10 +453,10 @@ class Escape extends AbstractWidget
     {
         return $this->escapeHtmlAttr($string);
     }
-    
+
     /**
      * The alias of escapeHtmlAttr method
-     * 
+     *
      * @param string $string
      * @return string
      */
@@ -464,10 +464,10 @@ class Escape extends AbstractWidget
     {
         return $this->escapeHtmlAttr($string);
     }
-    
+
     /**
      * The alias of escapeUrl method
-     * 
+     *
      * @param string $string
      * @return string
      */

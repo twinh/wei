@@ -159,7 +159,6 @@ class Validate extends AbstractWidget
      *
      * @param array $options The options for validation
      * @return bool Whether pass the validation or not
-     * @throws Exception\InvalidArgumentException When validation rules is empty
      * @throws Exception\UnexpectedTypeException  When validation rule is not array, string or instance of ValidatorInterface
      */
     public function valid($options = array())

@@ -48,7 +48,7 @@ class RequestTest extends TestCase
 
         $this->assertNull($widget->request->getRaw('remove'));
     }
-    
+
     public function testMethod()
     {
         foreach (array('GET', 'POST') as $method) {
@@ -62,73 +62,73 @@ class RequestTest extends TestCase
                 )
             ));
             $this->widget->set('request', $request);
-            
+
             $this->assertTrue($request->{'in' . $method}());
             $this->assertTrue($request->inMethod($method));
         }
     }
-    
+
     public function testAjax()
     {
         $this->server->set('HTTP_X_REQUESTED_WITH', 'xmlhttprequest');
-    
+
         $this->assertTrue($this->request->inAjax());
-        
+
         $this->server->set('HTTP_X_REQUESTED_WITH', 'json');
-        
+
         $this->assertFalse($this->request->inAjax());
-        
+
         $this->server->remove('HTTP_X_REQUESTED_WITH');
-        
+
         $this->assertFalse($this->request->inAjax());
     }
-    
+
     /**
-     * @expectedException \Widget\Exception\InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testInvalidParameterReference()
     {
         $this->request->getParameterReference('exception');
     }
-    
+
     public function testGetIp()
     {
         $this->server->set('HTTP_X_FORWARDED_FOR', '1.2.3.4');
         $this->assertEquals('1.2.3.4', $this->request->getIp());
-        
+
         $this->server->set('HTTP_X_FORWARDED_FOR', '1.2.3.4, 2.3.4.5');
         $this->assertEquals('1.2.3.4', $this->request->getIp());
-        
+
         $this->server->remove('HTTP_X_FORWARDED_FOR');
         $this->server->set('HTTP_CLIENT_IP', '8.8.8.8');
         $this->assertEquals('8.8.8.8', $this->request->getIp());
-        
+
         $this->server->remove('HTTP_CLIENT_IP');
         $this->server->set('REMOTE_ADDR', '9.9.9.9');
         $this->assertEquals('9.9.9.9', $this->request->getIp());
-        
+
         $this->server->set('HTTP_X_FORWARDED_FOR', 'invalid ip');
         $this->assertEquals('0.0.0.0', $this->request->getIp());
     }
-    
+
     public function testGetScheme()
     {
         $this->server->set('HTTPS', 'on');
         $this->assertEquals('https', $this->request->getScheme());
-        
+
         $this->server->set('HTTPS', '1');
         $this->assertEquals('https', $this->request->getScheme());
-        
+
         $this->server->set('HTTPS', 'off');
         $this->assertEquals('http', $this->request->getScheme());
-        
+
         $this->server->remove('HTTPS', '1');
         $this->assertEquals('http', $this->request->getScheme());
     }
-    
+
     /**
      * @link https://github.com/zendframework/zf2/blob/master/tests/ZendTest/Http/PhpEnvironment/RequestTest.php
-     * 
+     *
      * Data provider for testing base URL and path detection.
      */
     public function baseUrlAndPathProvider()
@@ -366,7 +366,7 @@ class RequestTest extends TestCase
         $this->assertEquals($baseUrl,  $this->request->getBaseUrl());
         $this->assertEquals($pathInfo, $this->request->getPathInfo());
     }
-    
+
     public function testGetHost()
     {
         $server = array(
@@ -376,22 +376,22 @@ class RequestTest extends TestCase
         );
         $this->server->setOption('data', $server);
         $this->assertEquals('a.test.com', $this->request->getHost());
-        
+
         unset($server['HTTP_HOST']);
         $this->server->setOption('data', $server);
         $this->assertEquals('test.com', $this->request->getHost());
-        
+
         unset($server['SERVER_NAME']);
         $this->server->setOption('127.0.0.1', $server);
     }
-    
+
     public function testSetRequestUri()
     {
         $this->request->setRequestUri('/blog');
-        
+
         $this->assertEquals('/blog', $this->request->getRequestUri());
     }
-    
+
     public function providerForGetUrl()
     {
         return array(
@@ -417,28 +417,28 @@ class RequestTest extends TestCase
             )
         );
     }
-    
+
     /**
      * @dataProvider providerForGetUrl
      */
     public function testGetUrl($server, $url, $urlPath)
     {
         $this->server->setOption('data', $server);
-        
+
         $this->assertEquals($url, $this->request->getUrl());
         $this->assertEquals($urlPath, $this->request->getUrlFor('/path'));
     }
-    
+
     public function testGetContent()
     {
         // Should be empty on not post request
         $this->assertEmpty($this->request->getContent());
-        
+
         $this->request->setContent(__METHOD__);
-        
+
         $this->assertEquals(__METHOD__, $this->request->getContent());
     }
-    
+
     public function testToString()
     {
         $this->server->setOption('data', array(
@@ -447,22 +447,22 @@ class RequestTest extends TestCase
             'HTTP_HOST' => 'test.com',
             'REQUEST_URI' => '/index.php?query=string',
             'REQUEST_METHOD' => 'GET',
-            'SCRIPT_NAME' => 'index.php' 
+            'SCRIPT_NAME' => 'index.php'
         ));
-        
+
         $this->assertEquals(
-'GET https://test.com:8080/index.php?query=string 
+'GET https://test.com:8080/index.php?query=string
 Host: test.com
 ', (string)$this->request);
     }
-    
+
     public function testPathInfo()
     {
         $this->request->setPathInfo('/blog');
-        
+
         $this->assertEquals('/blog', $this->request->getPathInfo());
     }
-    
+
     public function testEmptyPort()
     {
         $request = new \Widget\Request(array(
@@ -475,7 +475,7 @@ Host: test.com
 
         $this->assertEquals('http://test.com/', $request->getUrl());
     }
-    
+
     /**
      * @link https://github.com/twinh/widget/issues/54
      */
@@ -484,7 +484,7 @@ Host: test.com
         $request = new \Widget\Request(array(
             'fromGlobal' => false
         ));
-        
+
         foreach (array('get', 'post', 'cookie', 'server', 'file') as $option) {
             $this->assertInternalType('array', $request->getParameterReference($option));
         }

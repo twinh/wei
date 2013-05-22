@@ -175,7 +175,7 @@ class EscapeTest extends TestCase
     }
 
     /**
-     * @expectedException Widget\Exception\InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testSettingEncodingToEmptyStringShouldThrowException()
     {
@@ -194,7 +194,7 @@ class EscapeTest extends TestCase
     }
 
     /**
-     * @expectedException Widget\Exception\InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testSettingEncodingToInvalidValueShouldThrowException()
     {
@@ -216,13 +216,13 @@ class EscapeTest extends TestCase
                 $this->escaper->escapeHtml($key),
                 'Failed to escape: ' . $key
             );
-            
+
             // call by alias
             $this->assertEquals(
                 $value,
                 $this->escaper->html($key)
             );
-            
+
             // call by widget
             $this->assertEquals(
                 $value,
@@ -239,13 +239,13 @@ class EscapeTest extends TestCase
                 $this->escaper->escapeHtmlAttr($key),
                 'Failed to escape: ' . $key
             );
-            
+
             // call by alias
             $this->assertEquals(
                 $value,
                 $this->escaper->attr($key)
             );
-            
+
             // call by widget
             $this->assertEquals(
                 $value,
@@ -263,13 +263,13 @@ class EscapeTest extends TestCase
                 'Failed to escape: ' . $key
             );
         }
-        
+
         // call by alias
             $this->assertEquals(
                 $value,
                 $this->escaper->js($key)
             );
-            
+
             // call by widget
             $this->assertEquals(
                 $value,
@@ -295,13 +295,13 @@ class EscapeTest extends TestCase
                 $this->escaper->escapeCss($key),
                 'Failed to escape: ' . $key
             );
-            
+
             // call by alias
             $this->assertEquals(
                 $value,
                 $this->escaper->css($key)
             );
-            
+
             // call by widget
             $this->assertEquals(
                 $value,
@@ -328,13 +328,13 @@ class EscapeTest extends TestCase
                 $this->escaper->escapeUrl($key),
                 'Failed to escape: ' . $key
             );
-            
+
             // call by alias
             $this->assertEquals(
                 $value,
                 $this->escaper->url($key)
             );
-            
+
             // call by widget
             $this->assertEquals(
                 $value,
@@ -461,7 +461,7 @@ class EscapeTest extends TestCase
             }
         }
     }
-    
+
     /**
      * @expectedException Widget\Exception\UnsupportedException
      */

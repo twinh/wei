@@ -40,24 +40,24 @@ class Cache extends AbstractCache
     {
         parent::__construct($options + get_object_vars($this));
     }
-    
+
     /**
      * Set cache driver
-     * 
+     *
      * @param string $driver
      * @return Cache
-     * @throws Exception\InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function setDriver($driver)
     {
         $class = $this->widget->getClass($driver);
 
         if (!class_exists($class)) {
-            throw new Exception\InvalidArgumentException(sprintf('Cache driver class "%s" not found', $class));
+            throw new \InvalidArgumentException(sprintf('Cache driver class "%s" not found', $class));
         }
 
         if (!in_array('Widget\Cache\CacheInterface', class_implements($class))) {
-            throw new Exception\InvalidArgumentException(sprintf('Cache driver "%s" should implement the interface "Widget\Cache\CacheInterface"', $class));
+            throw new \InvalidArgumentException(sprintf('Cache driver "%s" should implement the interface "Widget\Cache\CacheInterface"', $class));
         }
 
         $this->object = $this->widget->get($driver);
@@ -76,7 +76,7 @@ class Cache extends AbstractCache
             return $this->set($key, $value, $expire);
         }
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -84,7 +84,7 @@ class Cache extends AbstractCache
     {
         return $this->object->get($key);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -92,7 +92,7 @@ class Cache extends AbstractCache
     {
         return $this->object->set($key, $value, $expire);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -100,7 +100,7 @@ class Cache extends AbstractCache
     {
         return $this->object->remove($key);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -116,7 +116,7 @@ class Cache extends AbstractCache
     {
         return $this->object->add($key, $value, $expire);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -124,7 +124,7 @@ class Cache extends AbstractCache
     {
         return $this->object->replace($key, $value, $expire);
     }
-    
+
     /**
      * {@inheritdoc}
      */

@@ -357,7 +357,7 @@ class Request extends Parameter
             return $this->{$type . 's'};
         }
 
-        throw new Exception\InvalidArgumentException(sprintf('Unkonwn parameter type "%s"', $type));
+        throw new \InvalidArgumentException(sprintf('Unkonwn parameter type "%s"', $type));
     }
 
     /**

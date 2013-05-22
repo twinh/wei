@@ -9,7 +9,6 @@
 namespace Widget;
 
 use Widget\Exception\UnexpectedTypeException;
-use Widget\Exception\InvalidArgumentException;
 
 /**
  * The validator manager, use to validate input quickly, create validator
@@ -165,7 +164,7 @@ class Is extends AbstractWidget
      * @param string $rule The name of rule validator
      * @param array $options The property options for rule validator
      * @return Widget\Validator\AbstractValidator
-     * @throws Exception\InvalidArgumentException When validator not found
+     * @throws \InvalidArgumentException When validator not found
      */
     public function createRuleValidator($rule, array $options = array())
     {
@@ -176,7 +175,7 @@ class Is extends AbstractWidget
         }
 
         if (!$class = $this->hasRule($rule)) {
-            throw new InvalidArgumentException(sprintf('Validator "%s" not found', $rule));
+            throw new \InvalidArgumentException(sprintf('Validator "%s" not found', $rule));
         }
 
         $options = $options + array('widget' => $this->widget) + (array)$this->widget->config('is' . ucfirst($rule));
