@@ -407,11 +407,36 @@ class Request extends Parameter
      * Return the server and execution environment parameter value ($_SERVER)
      *
      * @param string $name The name of parameter
+     * @param type $default The default parameter value if the parameter does not exist
      * @return mixed
      */
-    public function getServer($name)
+    public function getServer($name, $default = null)
     {
-        return isset($this->servers[$name]) ? $this->servers[$name] : null;
+        return isset($this->servers[$name]) ? $this->servers[$name] : $default;
+    }
+
+    /**
+     * Return the URL query parameter value ($_GET)
+     *
+     * @param string $name The name of parameter
+     * @param type $default The default parameter value if the parameter does not exist
+     * @return mixed
+     */
+    public function getQuery($name, $default = null)
+    {
+        return isset($this->gets[$name]) ? $this->gets[$name] : $default;
+    }
+
+    /**
+     * Return the HTTP request parameters value ($_POST)
+     *
+     * @param string $name The name of parameter
+     * @param type $default The default parameter value if the parameter does not exist
+     * @return mixed
+     */
+    public function getPost($name, $default = null)
+    {
+        return isset($this->posts[$name]) ? $this->posts[$name] : $default;
     }
 
     /**

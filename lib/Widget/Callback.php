@@ -18,7 +18,7 @@ use \SimpleXMLElement;
  * @link        http://mp.weixin.qq.com/wiki/index.php?title=%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3%E6%8C%87%E5%8D%97
  * @property    Response $response The HTTP response widget
  * @method      Response response(string $content, int $status = 200) Send headers and output content
- * @method      string query(string $name) Returns the URL query parameter value
+ * @property    Request $request A widget that handles the HTTP request data
  */
 class Callback extends AbstractWidget
 {
@@ -152,7 +152,7 @@ class Callback extends AbstractWidget
     {
         // Check if it's requested from the WeChat server
         if ($this->checkSignature()) {
-            if ($echostr = $this->query('echostr')) {
+            if ($echostr = $this->request->getQuery('echostr')) {
                 // Response echostr for fist time authentication
                 return htmlspecialchars($echostr, \ENT_QUOTES, 'UTF-8');
             }
@@ -791,12 +791,12 @@ class Callback extends AbstractWidget
     {
         $tmpArr = array(
             $this->token,
-            $this->query('timestamp'),
-            $this->query('nonce')
+            $this->request->getQuery('timestamp'),
+            $this->request->getQuery('nonce')
         );
         sort($tmpArr);
         $tmpStr = sha1(implode($tmpArr));
-        return $tmpStr === $this->query('signature');
+        return $tmpStr === $this->request->getQuery('signature');
     }
 
     protected function handleText()
