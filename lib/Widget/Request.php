@@ -341,7 +341,7 @@ class Request extends Parameter
      * @return bool
      */
     public function inAjax()
-    {
+    {   
         return 'xmlhttprequest' == strtolower($this->getServer('HTTP_X_REQUESTED_WITH'));
     }
 
@@ -350,14 +350,14 @@ class Request extends Parameter
      *
      * @param string $type The parameter type, could be get, post, cookie, or server
      * @return array The parameters array
-     */
+        */
     public function &getParameterReference($type)
     {
         if (in_array($type, array('get', 'post', 'cookie', 'server', 'file'))) {
             return $this->{$type . 's'};
         }
 
-        throw new \InvalidArgumentException(sprintf('Unkonwn parameter type "%s"', $type));
+        throw new \InvalidArgumentException(sprintf('Unknown parameter type "%s"', $type));
     }
 
     /**
@@ -407,7 +407,7 @@ class Request extends Parameter
      * Return the server and execution environment parameter value ($_SERVER)
      *
      * @param string $name The name of parameter
-     * @param type $default The default parameter value if the parameter does not exist
+     * @param mixed $default The default parameter value if the parameter does not exist
      * @return mixed
      */
     public function getServer($name, $default = null)
@@ -419,7 +419,7 @@ class Request extends Parameter
      * Return the URL query parameter value ($_GET)
      *
      * @param string $name The name of parameter
-     * @param type $default The default parameter value if the parameter does not exist
+     * @param mixed $default The default parameter value if the parameter does not exist
      * @return mixed
      */
     public function getQuery($name, $default = null)
@@ -431,7 +431,7 @@ class Request extends Parameter
      * Return the HTTP request parameters value ($_POST)
      *
      * @param string $name The name of parameter
-     * @param type $default The default parameter value if the parameter does not exist
+     * @param mixed $default The default parameter value if the parameter does not exist
      * @return mixed
      */
     public function getPost($name, $default = null)
