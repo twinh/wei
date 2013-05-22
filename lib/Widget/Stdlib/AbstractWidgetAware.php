@@ -8,6 +8,8 @@
 
 namespace Widget\Stdlib;
 
+use Widget\Widget;
+
 /**
  * A simple implementation of \Widget\WidgetAwareInterface
  *
