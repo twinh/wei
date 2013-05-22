@@ -394,8 +394,7 @@ class Request extends Parameter
     public function __toString()
     {
         $header = '';
-        // FIXME remove server
-        foreach ($this->server->getHeaders() as $name => $value) {
+        foreach ($this->getHeaders() as $name => $value) {
             $name = implode('-', array_map('ucfirst', explode('_', strtolower($name))));
             $header .= $name . ': ' . $value . "\r\n";
         }
@@ -413,6 +412,22 @@ class Request extends Parameter
     public function getServer($name)
     {
         return isset($this->servers[$name]) ? $this->servers[$name] : null;
+    }
+
+    /**
+     * Returns the HTTP request headers
+     *
+     * @return array
+     */
+    public function getHeaders()
+    {
+        $headers = array();
+        foreach ($this->servers as $name => $value) {
+            if (0 === strpos($name, 'HTTP_')) {
+                $headers[substr($name, 5)] = $value;
+            }
+        }
+        return $headers;
     }
 
     /**

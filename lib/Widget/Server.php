@@ -29,20 +29,4 @@ class Server extends Parameter
 
         $this->data = &$this->request->getParameterReference('server');
     }
-
-    /**
-     * Returns the HTTP request headers
-     *
-     * @return array
-     */
-    public function getHeaders()
-    {
-        $headers = array();
-        foreach ($this->data as $name => $value) {
-            if (0 === strpos($name, 'HTTP_')) {
-                $headers[substr($name, 5)] = $value;
-            }
-        }
-        return $headers;
-    }
 }
