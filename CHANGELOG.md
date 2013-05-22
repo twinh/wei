@@ -17,7 +17,19 @@ Changelog
 * Removed `inGet`, `inPost`, `inAjax` widget, use [request](lib/Widget/Request.php) widget instead
 * Merged `sort` and `attr` widgets in to [arr](lib/Widget/Arr.php) widget
 * Refactored [dbCache](lib/Widget/DbCache.php) widget
-* Added [couchbase](lib/Wudget/Couchbase.php) widget
+* Added [couchbase](lib/Widget/Couchbase.php) widget
+* Changed license to MIT
+* Added [isColor](lib/Widget/Validator/Color.php) validator
+* Added [mongoCache](lib/Widget/MongoCache.php) widget
+* Added [call](lib/Widget/Call.php) widget
+* Merged validator into [validate](lib/Widget/Validate.php) widget
+* Added global function `widget` to make it easy to receive widget manager
+* Refactored error widget, moved `exception`, `fatal` and `notFound` event to error widget
+* Removed marker widget
+* Added `cached` method for cache widgets
+* Renamed eventManager widget to [event](lib/Widget/Event.php)
+* Renamed isPostCode to [isPostCodeCn](lib/Widget/Validator/isPostCodeCn.php)
+* Added `Stdlib` namespace
 
 ## 0.9.2-beta (2013-04-14)
 
