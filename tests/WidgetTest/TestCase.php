@@ -3,7 +3,7 @@
 namespace WidgetTest;
 
 use Widget\Widget;
-use Widget\WidgetAwareInterface;
+use Widget\Stdlib\WidgetAwareInterface;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -85,15 +85,15 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
     {
         $widget = $this->widget;
         $name = $this->getWidgetName();
-        
+
         if ('widget' == strtolower($name)) {
             return;
         }
-        
+
         foreach ($widget->getOption('widgets') as $key => $value) {
             $widget->remove($key);
         }
-        
+
         foreach (get_object_vars($this->widget) as $name => $property) {
             // Preserve the widget manager
             if ('widget' == $name) {
@@ -106,7 +106,7 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
                 $widget->remove($name);
             }
         }
-        
+
         unset($this->object);
 
         if (isset($widget->{$name})) {
@@ -136,10 +136,10 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
     public function setWidget(Widget $widget)
     {
         $this->widget = $widget;
-        
+
         return $this;
     }
-    
+
     protected function assertIsSubset($subset, $parent, $message = '')
     {
         if (!(is_array($parent) && $subset)) {
@@ -152,7 +152,7 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
                 $this->assertTrue(false, $message);
             }
         }
-        
+
         $this->assertTrue(true);
     }
 }

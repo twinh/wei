@@ -6,7 +6,9 @@
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Widget;
+namespace Widget\Stdlib;
+
+use Widget\Widget;
 
 /**
  * A interface for developers to get and invoke widget in their objects
@@ -17,12 +19,12 @@ interface WidgetAwareInterface
 {
     /**
      * Sets the widget manager
-     * 
+     *
      * @param Widget $widget A widget manager instance
      * @return WidgetAwareInterface
      */
     public function setWidget(Widget $widget);
-    
+
     /**
      * Get the widget object by the given name
      *

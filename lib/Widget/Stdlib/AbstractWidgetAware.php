@@ -6,7 +6,7 @@
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Widget;
+namespace Widget\Stdlib;
 
 /**
  * A simple implementation of \Widget\WidgetAwareInterface
@@ -17,21 +17,21 @@ abstract class AbstractWidgetAware implements WidgetAwareInterface
 {
     /**
      * A widget manager instance
-     * 
+     *
      * @var Widget
      */
     protected $widget;
-    
+
     /**
      * {@inheritdoc}
      */
     public function setWidget(Widget $widget)
     {
         $this->widget = $widget;
-        
+
         return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */

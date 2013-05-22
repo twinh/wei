@@ -2,9 +2,9 @@
 
 namespace WidgetTest\Fixtures;
 
-use Widget\AbstractWidgetAware;
+use Widget\Stdlib\AbstractWidgetAware;
 
 class ClassExtendsWidgetAware extends AbstractWidgetAware
 {
-    
+
 }
