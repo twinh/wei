@@ -29,7 +29,7 @@ class DbCache extends AbstractCache
      * @var \Doctrine\DBAL\Connection
      */
     protected $conn;
-    
+
     /**
      * Constructor
      *
@@ -38,7 +38,7 @@ class DbCache extends AbstractCache
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        
+
         $this->conn = $this->db();
 
         $this->connect();
@@ -46,15 +46,13 @@ class DbCache extends AbstractCache
 
     /**
      * Connect the database
-     *
-     * @throws Exception\UnsupportedException When driver not support
      */
     public function connect()
     {
         $db = $this->db();
-        
+
         $sm = $db->getSchemaManager();
-        
+
         if (!$sm->tablesExist($this->table)) {
             $schema = $sm->createSchema();
             $table = $schema->createTable($this->table);
@@ -65,7 +63,7 @@ class DbCache extends AbstractCache
             $table->setPrimaryKey(array('id'));
             $sm->createTable($table);
         }
-        
+
         return $this;
     }
 
@@ -90,7 +88,7 @@ class DbCache extends AbstractCache
 
         return $result ? unserialize($result['value']) : false;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -104,9 +102,9 @@ class DbCache extends AbstractCache
         $identifier = array(
             'id' => $key
         );
-        
+
         if ($this->exists($key)) {
-            // In mysql, the rowCount method return 0 when data is not modified, 
+            // In mysql, the rowCount method return 0 when data is not modified,
             // so check errorCode to make sure it executed success
             $result = $this->conn->update($this->table, $data, $identifier) || !$this->conn->errorCode();
         } else {
@@ -115,7 +113,7 @@ class DbCache extends AbstractCache
 
         return (bool)$result;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -123,7 +121,7 @@ class DbCache extends AbstractCache
     {
         return (bool)$this->conn->delete($this->table, array('id' => $key));
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -158,13 +156,13 @@ class DbCache extends AbstractCache
 
     /**
      * Note: This method is not an atomic operation
-     * 
+     *
      * {@inheritdoc}
      */
     public function increment($key, $offset = 1)
     {
         $value = $this->get($key) + $offset;
-        
+
         return $this->set($key, $value) ? $value : false;
     }
 

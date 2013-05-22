@@ -400,14 +400,14 @@ class Escape extends AbstractWidget
      * @param string $string
      * @param string $type
      * @return string
-     * @throws Exception\UnsupportedException
+     * @throws \InvalidArgumentException
      */
     public function __invoke($string, $type = 'html')
     {
         if (in_array($type, array('html', 'js', 'css', 'attr', 'url'))) {
             return $this->{'escape' . $type}($string);
         }
-        throw new Exception\UnsupportedException(sprintf('Unsupported escape type "%s"', $type));
+        throw new \InvalidArgumentException(sprintf('Unsupported escape type "%s"', $type));
     }
 
     /**
