@@ -8,7 +8,7 @@
 
 namespace Widget;
 
-use Widget\Cache\AbstractCache;
+use Widget\Stdlib\AbstractCache;
 
 /**
  * A cache widget base on Memcache
@@ -73,7 +73,7 @@ class Memcache extends AbstractCache
 
         return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -101,7 +101,7 @@ class Memcache extends AbstractCache
     {
         return $this->object->set($key, $value, $this->flag, $expire);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -109,7 +109,7 @@ class Memcache extends AbstractCache
     {
         return $this->object->delete($key);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -156,7 +156,7 @@ class Memcache extends AbstractCache
     {
         return $this->object->flush();
     }
-    
+
     /**
      * Get memcache object
      *

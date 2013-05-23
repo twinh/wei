@@ -8,7 +8,7 @@
 
 namespace Widget;
 
-use Widget\Cache\AbstractCache;
+use Widget\Stdlib\AbstractCache;
 
 /**
  * A cache widget base on Couchbase
@@ -19,49 +19,49 @@ use Widget\Cache\AbstractCache;
 class Couchbase extends AbstractCache
 {
     /**
-     * An array of hostnames[:port] where the Couchbase cluster is running. The 
-     * port number is optional (and only needed if you're using a non-standard 
+     * An array of hostnames[:port] where the Couchbase cluster is running. The
+     * port number is optional (and only needed if you're using a non-standard
      * port).
-     * 
+     *
      * @var array|string
      */
     protected $hosts = '127.0.0.1:8091';
-    
+
     /**
      * The username used for authentication to the cluster
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $user;
-    
+
     /**
      * The password used to authenticate to the cluster
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $password;
-    
+
     /**
      * The name of the bucket to connect to
-     * 
+     *
      * @var string
      */
     protected $bucket = 'default';
-    
+
     /**
      * If a persistent object should be used or not
-     * 
+     *
      * @var bool
      */
     protected $persistent = true;
-    
+
     /**
      * The couchbase object
      *
      * @var \Couchbase
      */
     protected $object;
-    
+
     /**
      * Constructor
      *
@@ -75,7 +75,7 @@ class Couchbase extends AbstractCache
             $this->object = new \Couchbase($this->hosts, $this->user, $this->password, $this->bucket, $this->persistent);
         }
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -87,7 +87,7 @@ class Couchbase extends AbstractCache
             return $this->set($key, $value, $expire);
         }
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -103,7 +103,7 @@ class Couchbase extends AbstractCache
     {
         return $this->object->set($key, $value, $expire);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -111,7 +111,7 @@ class Couchbase extends AbstractCache
     {
         return $this->object->delete($key);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -150,7 +150,7 @@ class Couchbase extends AbstractCache
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @throws \CouchbaseServerException when flush is disabled for the bucket
      * @link http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-admin-web-console-data-buckets-createedit.html
      * @link http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-admin-cli-flushing.html
@@ -159,7 +159,7 @@ class Couchbase extends AbstractCache
     {
         return $this->object->flush();
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -167,7 +167,7 @@ class Couchbase extends AbstractCache
     {
         return $this->object->getMulti($keys);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -179,7 +179,7 @@ class Couchbase extends AbstractCache
         }
         return $results;
     }
-    
+
     /**
      * Get couchbase object
      *

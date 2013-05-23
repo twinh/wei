@@ -8,20 +8,20 @@
 
 namespace Widget;
 
-use Widget\Cache\AbstractCache;
+use Widget\Stdlib\AbstractCache;
 
 /**
  * A two-level cache widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Cache\CacheInterface $master The master(faster) cache object
- * @property    Cache\CacheInterface $slave The slave(slower) cache object
+ * @property    Stdlib\CacheInterface $master The master(faster) cache object
+ * @property    Stdlib\CacheInterface $slave The slave(slower) cache object
  */
 class Bicache extends AbstractCache
 {
     /**
      * The dependence map
-     * 
+     *
      * @var array
      */
     protected $deps = array(
@@ -35,7 +35,7 @@ class Bicache extends AbstractCache
      * @var int
      */
     protected $time = 5;
-    
+
     /**
      * {@inheritdoc}
      */
@@ -54,11 +54,11 @@ class Bicache extends AbstractCache
     public function get($key)
     {
         $value = $this->master->get($key);
-        
+
         if (false === $value) {
             return $this->slave->get($key);
         }
-        
+
         return $value;
     }
 
@@ -68,16 +68,16 @@ class Bicache extends AbstractCache
     public function set($key, $value, $expire = 0)
     {
         $result = $this->master->set($key, $value, $expire);
-        
+
         if ($result && $this->needUpdate($key)) {
             // $result is true, so return the slave cache result only
             return $this->slave->set($key, $value, $expire);
         }
-        
+
         // No need to update, return mater result only
         return $result;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -88,7 +88,7 @@ class Bicache extends AbstractCache
 
         return $result1 && $result2;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -113,19 +113,19 @@ class Bicache extends AbstractCache
         // false
         return $result;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function replace($key, $value, $expire = 0)
     {
         $result = $this->master->replace($key, $value, $expire);
-        
+
         // The cache can always be replaced when it's exists, so check for update
         if ($result && $this->needUpdate($key)) {
             return $this->slave->set($key, $value, $expire);
         }
-        
+
         return $result;
     }
 
@@ -135,11 +135,11 @@ class Bicache extends AbstractCache
     public function increment($key, $offset = 1)
     {
         $result = $this->master->increment($key, $offset);
-        
+
         if (false !== $result && $this->needUpdate($key)) {
             return $this->slave->set($key, $result) ? $result : false;
         }
-        
+
         return $result;
     }
 

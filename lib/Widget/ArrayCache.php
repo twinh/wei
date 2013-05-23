@@ -8,7 +8,7 @@
 
 namespace Widget;
 
-use Widget\Cache\AbstractCache;
+use Widget\Stdlib\AbstractCache;
 
 /**
  * A cache widget stored data in PHP array
@@ -19,11 +19,11 @@ class ArrayCache extends AbstractCache
 {
     /**
      * The array to store cache items
-     * 
+     *
      * @var array
      */
     protected $data = array();
-    
+
     /**
      * {@inheritdoc}
      */
@@ -60,7 +60,7 @@ class ArrayCache extends AbstractCache
     {
         unset($this->data[$key]);
     }
-    
+
     /**
      * {@inheritdoc}
      */

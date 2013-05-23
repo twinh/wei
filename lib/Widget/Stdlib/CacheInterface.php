@@ -6,7 +6,7 @@
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Widget\Cache;
+namespace Widget\Stdlib;
 
 /**
  * The base cache interface
@@ -32,10 +32,10 @@ interface CacheInterface
      * @return mixed
      */
     public function get($key);
-    
+
     /**
      * Retrieve multiple items
-     * 
+     *
      * @param array $keys The name of items
      */
     public function getMulti(array $keys);
@@ -52,12 +52,12 @@ interface CacheInterface
 
     /**
      * Store multiple items
-     * 
+     *
      * @param array $items An array of key/value pairs to store
      * @param int $expire The expire seconds, defaults to 0, means never expired
      */
     public function setMulti(array $items, $expire = 0);
-    
+
     /**
      * Remove an item
      *
@@ -65,10 +65,10 @@ interface CacheInterface
      * @return bool
      */
     public function remove($key);
-    
+
     /**
      * Check if an item is exists
-     * 
+     *
      * @param string $key
      * @return bool
      */

@@ -6,7 +6,7 @@
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Widget\Cache;
+namespace Widget\Stdlib;
 
 use Widget\AbstractWidget;
 

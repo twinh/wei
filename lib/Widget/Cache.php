@@ -8,7 +8,7 @@
 
 namespace Widget;
 
-use Widget\Cache\AbstractCache;
+use Widget\Stdlib\AbstractCache;
 
 /**
  * A cache widget proxy

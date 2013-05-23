@@ -8,7 +8,7 @@
 namespace Widget;
 
 use Widget\Exception;
-use Widget\Cache\AbstractCache;
+use Widget\Stdlib\AbstractCache;
 
 /**
  * A database cache widget

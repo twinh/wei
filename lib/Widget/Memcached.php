@@ -8,7 +8,7 @@
 
 namespace Widget;
 
-use Widget\Cache\AbstractCache;
+use Widget\Stdlib\AbstractCache;
 
 /**
  * A cache widget base on Memcached
@@ -63,7 +63,7 @@ class Memcached extends AbstractCache
 
         return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -91,13 +91,13 @@ class Memcached extends AbstractCache
     {
         return $this->object->set($key, $value, $expire);
     }
-    
+
     /**
      * {@inheritdoc}
-     * 
-     * Note: setMulti method is not reimplemented for it returning only one 
+     *
+     * Note: setMulti method is not reimplemented for it returning only one
      * "true" or "false" for all items
-     * 
+     *
      * @link http://www.php.net/manual/en/memcached.setmulti.php
      * @link https://github.com/php-memcached-dev/php-memcached/blob/master/php_memcached.c#L1219
      */
@@ -106,7 +106,7 @@ class Memcached extends AbstractCache
         $cas = null;
         return $this->object->getMulti($keys, $cas, \Memcached::GET_PRESERVE_ORDER);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -114,7 +114,7 @@ class Memcached extends AbstractCache
     {
         return $this->object->delete($key);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -150,7 +150,7 @@ class Memcached extends AbstractCache
     {
         return $this->incdec($key, $offset, $offset > 0);
     }
- 
+
     /**
       * {@inheritdoc}
       */
@@ -158,12 +158,12 @@ class Memcached extends AbstractCache
     {
         return $this->incdec($key, $offset, $offset < 0);
     }
-    
+
     /**
      * Increment/Decrement an item
-     * 
+     *
      * Memcached do not allow negative number as $offset parameter
-     * 
+     *
      * @link   https://github.com/php-memcached-dev/php-memcached/blob/master/php_memcached.c#L1746
      * @param  string    $key    The name of item
      * @param  int       $offset The value to be increased/decreased

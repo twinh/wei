@@ -8,7 +8,7 @@
 
 namespace Widget;
 
-use Widget\Cache\AbstractCache;
+use Widget\Stdlib\AbstractCache;
 
 /**
  * A cache widget base on Redis
@@ -51,10 +51,10 @@ class Redis extends AbstractCache
      * @var bool
      */
     protected $persistent = true;
-    
+
     /**
      * The options for \Redis::setOptions()
-     * 
+     *
      * @var array
      */
     protected $options = array(
@@ -85,13 +85,13 @@ class Redis extends AbstractCache
         $connect = $this->persistent ? 'pconnect' : 'connect';
 
         $result = $this->object->$connect($this->host, $this->port, $this->timeout);
-        
+
         if ($result) {
             foreach ($this->options as $key => $value) {
                 $this->object->setOption($key, $value);
             }
         }
-        
+
         return $result;
     }
 
@@ -122,7 +122,7 @@ class Redis extends AbstractCache
     {
         return $this->object->set($key, $value, $expire);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -130,14 +130,14 @@ class Redis extends AbstractCache
     {
         return array_combine($keys, $this->object->mGet($keys));
     }
-    
+
     /**
      * {@inheritdoc}
-     * 
-     * Note: 
+     *
+     * Note:
      * 1. The "$expire" parameter is not support by redis MSET command
      * 2. The elements in returning values are all true or false, see links for more detail
-     * 
+     *
      * @link http://redis.io/commands/mset
      * @link https://github.com/nicolasff/phpredis/blob/master/redis_array.c#L844
      */
@@ -146,7 +146,7 @@ class Redis extends AbstractCache
         $result = $this->object->mset($items);
         return array_combine(array_keys($items), array_pad(array(), count($items), $result));
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -154,7 +154,7 @@ class Redis extends AbstractCache
     {
         return (bool)$this->object->del($key);
     }
-       
+
     /**
      * {@inheritdoc}
      */
@@ -170,14 +170,14 @@ class Redis extends AbstractCache
     {
         $result = $this->object->setnx($key, $value);
         if (true === $result) {
-            $this->object->expire($key, $expire);   
+            $this->object->expire($key, $expire);
         }
         return $result;
     }
 
     /**
      * Note: This method is not an atomic operation
-     * 
+     *
      * {@inheritdoc}
      */
     public function replace($key, $value, $expire = 0)
@@ -227,7 +227,7 @@ class Redis extends AbstractCache
         } else {
             $this->object = new \Redis;
         }
-        
+
         return $this;
     }
 }

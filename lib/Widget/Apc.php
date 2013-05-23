@@ -8,7 +8,7 @@
 
 namespace Widget;
 
-use Widget\Cache\AbstractCache;
+use Widget\Stdlib\AbstractCache;
 
 /**
  * The PHP APC cache widget
@@ -52,7 +52,7 @@ class Apc extends AbstractCache
     {
         return apc_delete($key);
     }
-    
+
     /**
      * {@inheritdoc}
      */
