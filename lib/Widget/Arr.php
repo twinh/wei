@@ -79,7 +79,6 @@ class Arr extends AbstractWidget
     }
 
     /**
-     *
      * @return \Widget\Arr
      */
     public function __invoke()
