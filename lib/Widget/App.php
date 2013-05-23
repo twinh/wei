@@ -21,6 +21,8 @@ use Widget\Response;
  */
 class App extends AbstractWidget
 {
+    const FORWARD_CODE = 1000;
+
     /**
      * The available modules
      *
@@ -125,8 +127,12 @@ class App extends AbstractWidget
                         $response = $object->$method();
 
                         $this->handleResponse($response);
-                    } catch (Exception\DispatchBreakException $e) {
-                        $this->logger->debug(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
+                    } catch (\RuntimeException $e) {
+                        if ($e->getCode() === self::FORWARD_CODE) {
+                            $this->logger->debug(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
+                        } else {
+                            throw $e;
+                        }
                     }
                     return $this;
                 } else {
@@ -320,12 +326,11 @@ class App extends AbstractWidget
     /**
      * Throws a DispatchBreakException to prevent the previous dispatch process
      *
-     * @throws Exception\DispatchBreakException
+     * @throws \RuntimeException
      */
     public function preventPreviousDispatch()
     {
-        $traces = debug_backtrace();
-        throw new Exception\DispatchBreakException('', 0, $traces[0]['file'], $traces[0]['line']);
+        throw new \RuntimeException(null, self::FORWARD_CODE);
     }
 
     /**
