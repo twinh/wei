@@ -317,7 +317,7 @@ class Escape extends AbstractWidget
      * class' constructor.
      *
      * @param string $string
-     * @throws Exception\RuntimeException
+     * @throws \RuntimeException
      * @return string
      */
     protected function toUtf8($string)
@@ -329,7 +329,7 @@ class Escape extends AbstractWidget
         }
 
         if (!$this->isUtf8($result)) {
-            throw new Exception\RuntimeException(sprintf(
+            throw new \RuntimeException(sprintf(
                 'String to be escaped was not valid UTF-8 or could not be converted: %s', $result
             ));
         }
@@ -370,7 +370,7 @@ class Escape extends AbstractWidget
      * @param string $string
      * @param string $to
      * @param array|string $from
-     * @throws Exception\RuntimeException
+     * @throws \RuntimeException
      * @return string
      */
     protected function convertEncoding($string, $to, $from)
@@ -381,7 +381,7 @@ class Escape extends AbstractWidget
         } elseif (function_exists('mb_convert_encoding')) {
             $result = mb_convert_encoding($string, $to, $from);
         } else {
-            throw new Exception\RuntimeException(
+            throw new \RuntimeException(
                 get_called_class()
                 . ' requires either the iconv or mbstring extension to be installed'
                 . ' when escaping for non UTF-8 strings.'

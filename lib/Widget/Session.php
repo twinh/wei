@@ -60,7 +60,7 @@ class Session extends ArrayWidget
     {
         $file = $line = null;
         if (headers_sent($file, $line)) {
-            throw new Exception\RuntimeException(sprintf('Unable to start session, output started at %s:%s', $file, $line));
+            throw new \RuntimeException(sprintf('Unable to start session, output started at %s:%s', $file, $line));
         }
 
         // If session started, ignored it
