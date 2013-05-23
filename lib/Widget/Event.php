@@ -62,7 +62,7 @@ class Event extends AbstractWidget
             'namespaces'    => $namespaces,
         ));
     }
-
+    
     /**
      * Trigger an event
      *
@@ -230,24 +230,6 @@ class Event extends AbstractWidget
                 return false;
             }
         }
-    }
-
-    /**
-     * Create a new event
-     *
-     * @return Stdlib\Event
-     * @param array $namespaces
-     * @todo check interface
-     */
-    public function create($type, $class = 'Widget\Stdlib\Event')
-    {
-        list($type, $namespaces) = $this->splitNamespace($type);
-
-        return new $class(array(
-            'widget'        => $this->widget,
-            'type'          => $type,
-            'namespaces'    => $namespaces,
-        ));
     }
 
     /**

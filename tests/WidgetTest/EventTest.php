@@ -52,7 +52,7 @@ class EventTest extends TestCase
             ->trigger('test');
         $this->assertEquals(false, $event->getResult());
 
-        $event = $this->event->create('test');
+        $event = $this->event('test');
         $this->event->off('test')
             ->on('test', function(){
                 return 'result';
@@ -152,7 +152,7 @@ class EventTest extends TestCase
 
     public function testGetterAndSetterInEvent()
     {
-        $event = $this->event->create('test.ns1.ns2');
+        $event = $this->event('test.ns1.ns2');
 
         $this->assertEquals('ns1.ns2', $event->getNamespace());
 
@@ -180,7 +180,7 @@ class EventTest extends TestCase
 
     public function testGetFullType()
     {
-        $event = $this->event->create('test.ns1');
+        $event = $this->event('test.ns1');
 
         $this->assertEquals('test', $event->getType());
 
