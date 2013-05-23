@@ -167,7 +167,7 @@ class App extends AbstractWidget
      *
      * @param  mixed                     $response
      * @return Response|boolean
-     * @throws Exception\UnexpectedTypeException
+     * @throws \InvalidArgumentException
      */
     public function handleResponse($response)
     {
