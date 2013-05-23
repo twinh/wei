@@ -131,7 +131,7 @@ class Event extends AbstractWidget
      * @param callback $fn The event handler
      * @param int|string $priority The event priority, could be int or specify strings, the higer number, the higer priority
      * @param array $data The data pass to the event object, when the handler is triggered
-     * @return EventManager
+     * @return Event
      */
     public function on($type, $fn = null, $priority = 0, $data = array())
     {
@@ -145,7 +145,10 @@ class Event extends AbstractWidget
 
         // ( $type, $fn, $priority, $data )
         if (!is_callable($fn)) {
-            throw new Exception\UnexpectedTypeException($fn, 'callable');
+            throw new \InvalidArgumentException(sprintf(
+                'Expected argument of type callable, "%s" given',
+                is_object($fn) ? get_class($fn) : gettype($fn)
+            ));
         }
 
         $priority = is_numeric($priority) ? $priority :
@@ -166,7 +169,7 @@ class Event extends AbstractWidget
      * Remove event handlers by specified type
      *
      * @param string $type The type of event
-     * @return EventManager
+     * @return Event
      */
     public function off($type)
     {

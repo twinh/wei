@@ -36,7 +36,7 @@ class EventTest extends TestCase
     }
 
     /**
-     * @expectedException \Widget\Exception\UnexpectedTypeException
+     * @expectedException \InvalidArgumentException
      */
     public function testAddInvalidHandler()
     {
