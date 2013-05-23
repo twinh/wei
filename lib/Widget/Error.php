@@ -47,7 +47,7 @@ class Error extends AbstractWidget
     protected $ignorePrevHandler = false;
 
     /**
-     * The previouse exception handler
+     * The previous exception handler
      *
      * @var null|callback
      */
@@ -127,7 +127,7 @@ class Error extends AbstractWidget
     }
 
     /**
-     * Register exception hanlder
+     * Register exception Handler
      */
     protected function registerExceptionHandler()
     {
@@ -135,15 +135,15 @@ class Error extends AbstractWidget
     }
 
     /**
-     * Register error hanlder
+     * Register error Handler
      */
     protected function registerErrorHandler()
     {
-        set_error_handler(array($this, 'hanldeError'));
+        set_error_handler(array($this, 'HandleError'));
     }
 
     /**
-     * Detecte fatal error and register fatal handler
+     * Detect fatal error and register fatal handler
      */
     protected function registerFatalHandler()
     {
@@ -178,8 +178,8 @@ class Error extends AbstractWidget
                 return;
             }
 
-            // Fallback to internal error hanlders
-            $error->internalHanldeException($exception);
+            // Fallback to internal error Handlers
+            $error->internalHandleException($exception);
         });
     }
 
@@ -224,13 +224,13 @@ class Error extends AbstractWidget
         }
 
         if (!$this->triggerHandler('error', $exception)) {
-            $this->internalHanldeException($exception);
+            $this->internalHandleException($exception);
         }
 
         restore_exception_handler();
     }
 
-    public function internalHanldeException(\Exception $exception)
+    public function internalHandleException(\Exception $exception)
     {
         $debug = $this->widget->config('debug');
         $ajax = $this->request->inAjax();
@@ -257,7 +257,7 @@ class Error extends AbstractWidget
      *
      * @param \Exception $exception
      * @param bool $debug Whether show debug trace
-     * @param bool $ajax Wherher return json instead html string
+     * @param bool $ajax Whether return json instead html string
      */
     public function renderException(\Exception $exception, $debug, $ajax)
     {
@@ -295,7 +295,7 @@ class Error extends AbstractWidget
             );
             echo json_encode($json);
         } else {
-            // File Infomation
+            // File Information
             $mtime = date('Y-m-d H:i:s', filemtime($file));
             $fileInfo = $this->getFileCode($file, $line);
 
@@ -307,13 +307,14 @@ class Error extends AbstractWidget
     /**
      * The error handler convert PHP error to exception
      *
-     * @param int    $errno     The level of the error raised
+     * @param int $errno     The level of the error raised
      * @param string $errstr    The error message
      * @param string $errfile   The filename that the error was raised in
-     * @param int    $errline   The line number the error was raised at
+     * @param int $errline   The line number the error was raised at
+     * @throws \ErrorException convert PHP error to exception
      * @internal use for set_error_handler only
      */
-    public function hanldeError($errno, $errstr, $errfile, $errline)
+    public function HandleError($errno, $errstr, $errfile, $errline)
     {
         if (!(error_reporting() & $errno)) {
             // This error code is not included in error_reporting

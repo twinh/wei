@@ -86,21 +86,21 @@ class Response extends AbstractWidget
      * @var string
      */
     protected $statusText = 'OK';
-    
+
     /**
      * The response content
      *
      * @var string
      */
     protected $content;
-    
+
     /**
      * The response headers
-     * 
+     *
      * @var array
      */
     protected $headers = array();
-    
+
     /**
      * Whether response content has been sent
      *
@@ -145,13 +145,13 @@ class Response extends AbstractWidget
 
     /**
      * Send response content
-     * 
+     *
      * @return Response
      */
     public function sendContent()
     {
         echo $this->content;
-        
+
         return $this;
     }
 
@@ -165,24 +165,24 @@ class Response extends AbstractWidget
         if (null !== $content) {
             $this->content = $content;
         }
-        
+
         if (null !== $status) {
             $this->setStatusCode($status);
         }
-        
+
         $this->sendHeader();
 
         $this->sendContent();
 
         return $this;
     }
-    
+
     /**
      * Set the header status code
      *
      * @param  int          $code The status code
      * @param  string|null       $text The status text
-     * @return Header
+     * @return Response
      */
     public function setStatusCode($code, $text = null)
     {
@@ -261,7 +261,7 @@ class Response extends AbstractWidget
 
     /**
      * Returns response status, headers and content as string
-     * 
+     *
      * @return string
      */
     public function __toString()
@@ -270,17 +270,17 @@ class Response extends AbstractWidget
             . $this->header . "\r\n"
             . $this->content;
     }
-    
+
     /**
      * Returns the response headers varibale reference
-     * 
+     *
      * @return array
      */
     public function &getHeaderReference()
     {
         return $this->headers;
     }
-    
+
     /**
      * Check if response has been sent
      *
