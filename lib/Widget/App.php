@@ -158,7 +158,7 @@ class App extends AbstractWidget
                     break;
             }
         }
-        // You can use `$widget->on('404', function(){});` to custom the 404 page
+        // You can use `$widget->error->notFound(function(){});` to custom the 404 page
         throw new Exception\NotFoundException($message);
     }
 
