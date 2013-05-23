@@ -28,7 +28,7 @@ Changelog
 * Removed marker widget
 * Added `cached` method for cache widgets
 * Renamed eventManager widget to [event](lib/Widget/Event.php)
-* Renamed isPostCode to [isPostCodeCn](lib/Widget/Validator/PostCodeCn.php)
+* Renamed isPostCode to [isPostcodeCn](lib/Widget/Validator/PostcodeCn.php)
 * Added `Stdlib` namespace
 
 ## 0.9.2-beta (2013-04-14)
