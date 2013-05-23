@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * An util widget provides some useful method to manipulation array 
+ * An util widget provides some useful method to manipulation array
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
@@ -36,18 +36,18 @@ class Arr extends AbstractWidget
 
         return $array;
     }
-    
+
     /**
      * Returns the value of specified key in $data
-     * 
-     * @param mixed $data The data, could be array, instance of \ArrayAccess, 
-     *                    object or object with getter method 
+     *
+     * @param mixed $data The data, could be array, instance of \ArrayAccess,
+     *                    object or object with getter method
      * @param string $key The key of data
      * @return mixed|null Returns null on not found
      */
     public function attr($data, $key)
     {
-        if ((is_array($data) && array_key_exists($key, $data)) 
+        if ((is_array($data) && array_key_exists($key, $data))
             || ($data instanceof \ArrayAccess && $data->offsetExists($key))
         ) {
             return $data[$key];
@@ -59,9 +59,27 @@ class Arr extends AbstractWidget
             return null;
         }
     }
-    
+
     /**
-     * 
+     * Returns a new array that the key from the array rows
+     *
+     * @param array $array A two-dimensional array
+     * @param string $index The key in the second dimensional of array
+     * @return array
+     */
+    public function indexBy($array, $index)
+    {
+        $result = array();
+        foreach ($array as $row) {
+            if (array_key_exists($index, $row)) {
+                $result[$row[$index]] = $row;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     *
      * @return \Widget\Arr
      */
     public function __invoke()
