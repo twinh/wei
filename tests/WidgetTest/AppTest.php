@@ -100,7 +100,7 @@ class AppTest extends TestCase
     }
 
     /**
-     * @expectedException \Widget\Exception\UnexpectedTypeException
+     * @expectedException InvalidArgumentException
      */
     public function testActionReturnUnexpectedType()
     {

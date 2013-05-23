@@ -187,7 +187,10 @@ class App extends AbstractWidget
                 return !$response->isSent() && $response->send();
 
             default :
-                throw new Exception\UnexpectedTypeException($response, 'array, printable variable or \Widget\Response');
+                throw new \InvalidArgumentException(sprintf(
+                    'Expected argument of type array, printable variable or \Widget\Response, "%s" given',
+                    is_object($response) ? get_class($response) : gettype($response)
+                ));
         }
     }
 
