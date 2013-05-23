@@ -6,7 +6,7 @@
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Widget\View;
+namespace Widget\Stdlib;
 
 /**
  * The interface for view widget
@@ -43,9 +43,9 @@ interface ViewInterface
     public function assign($name, $value = null);
 
     /**
-     * Get default template file extension, such as php, tpl, this is useful for 
+     * Get default template file extension, such as php, tpl, this is useful for
      * automatic render template
-     * 
+     *
      * @return string
      */
     public function getExtension();

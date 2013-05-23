@@ -8,7 +8,7 @@
 
 namespace Widget;
 
-use Widget\View\AbstractView;
+use Widget\Stdlib\AbstractView;
 
 /**
  * A widget that use to render PHP template
@@ -19,11 +19,11 @@ class View extends AbstractView
 {
     /**
      * The template variables
-     * 
+     *
      * @var array
      */
     protected $vars = array();
-    
+
     /**
      * Template directory
      *
@@ -37,43 +37,43 @@ class View extends AbstractView
      * @var string
      */
     protected $extension = '.php';
-    
+
     /**
      * The layout configuration
-     * 
+     *
      * @var array|null
      */
     protected $layout;
-    
+
     /**
      * The current render view name
-     * 
+     *
      * @var string
      */
     private $currentName;
-    
+
     /**
      * Constructor
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        
+
         // Adds widget to template variable
         $this->assign('widget', $this->widget);
     }
 
     /**
      * Returns view widget or render a PHP template
-     * 
-     * if NO parameter provied, the invoke method will return the viw widget. 
+     *
+     * if NO parameter provied, the invoke method will return the viw widget.
      * otherwise, call the render method
      *
      * @param string $name The name of template
      * @param array $vars The variables pass to template
-     * 
+     *
      * @return View|string
      */
     public function __invoke($name = null, $vars = array())
@@ -92,7 +92,7 @@ class View extends AbstractView
     {
         // Set extra view variables
         $vars = $vars ? $vars + $this->vars : $this->vars;
-        
+
         // Assign $name to $this->currentName to avoid conflict with view parameter
         $this->currentName = $name;
 
@@ -101,7 +101,7 @@ class View extends AbstractView
         ob_start();
         require $this->getFile($this->currentName);
         $content = ob_get_clean();
-        
+
         // Render layout
         if ($this->layout) {
             $layout = $this->layout;
@@ -110,7 +110,7 @@ class View extends AbstractView
                 $layout['variable'] => $content
             ) + $vars);
         }
-        
+
         return $content;
     }
 
@@ -135,10 +135,10 @@ class View extends AbstractView
 
         return $this;
     }
-    
+
     /**
      * Returns the variable value or null if not defined
-     * 
+     *
      * @param string $name The name of variable
      * @return mixed
      */
@@ -164,12 +164,12 @@ class View extends AbstractView
 
         throw new Exception\NotFoundException(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->dirs)));
     }
-    
+
     /**
      * Set layout for current view
-     * 
-     * @param string $name The name of layout template 
-     * @param string $variable The varibale name that 
+     *
+     * @param string $name The name of layout template
+     * @param string $variable The varibale name that
      * @return View
      */
     public function layout($name, $variable = 'content')
@@ -178,20 +178,20 @@ class View extends AbstractView
             'name' => $name,
             'variable' => $variable
         );
-        
+
         return $this;
     }
-    
+
     /**
      * Set base directory for views
-     * 
+     *
      * @param string|array $dirs
      * @return View
      */
     public function setDirs($dirs)
     {
         $this->dirs = (array)$dirs;
-        
+
         return $this;
     }
 }

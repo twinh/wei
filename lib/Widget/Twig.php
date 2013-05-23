@@ -8,7 +8,7 @@
 
 namespace Widget;
 
-use Widget\View\AbstractView;
+use Widget\Stdlib\AbstractView;
 
 /**
  * A wrapper widget for Twig object
@@ -57,7 +57,7 @@ class Twig extends AbstractView
 
     /**
      * Constructor
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
@@ -74,13 +74,13 @@ class Twig extends AbstractView
 
     /**
      * Returns \Twig_Environment object or render a Twig template
-     * 
-     * if NO parameter provied, the invoke method will return the 
+     *
+     * if NO parameter provied, the invoke method will return the
      * \Twig_Environment object. otherwise, call the render method
      *
      * @param string $name The name of template
      * @param array $vars The variables pass to template
-     * 
+     *
      * @return \Twig_Environment|string
      */
     public function __invoke($name = null, $vars = array())
@@ -104,7 +104,7 @@ class Twig extends AbstractView
         } else {
             $this->object->addGlobal($name, $value);
         }
-        
+
         return $this;
     }
 

@@ -6,7 +6,7 @@
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Widget\View;
+namespace Widget\Stdlib;
 
 use Widget\AbstractWidget;
 
@@ -23,7 +23,7 @@ abstract class AbstractView extends AbstractWidget implements ViewInterface
      * @var string
      */
     protected $extension = '.php';
-    
+
     /**
      * {@inheritdoc}
      */

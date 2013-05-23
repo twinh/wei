@@ -8,7 +8,7 @@
 
 namespace Widget;
 
-use Widget\View\AbstractView;
+use Widget\Stdlib\AbstractView;
 
 /**
  * A wrapper widget for Smarty object
@@ -23,7 +23,7 @@ class Smarty extends AbstractView
      * @var \Smarty
      */
     protected $object;
-    
+
     /**
      * Default template file extension
      *
@@ -49,7 +49,7 @@ class Smarty extends AbstractView
 
     /**
      * Constructor
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
@@ -58,20 +58,20 @@ class Smarty extends AbstractView
             'object' => $this->object,
             'options' => $this->options
         ), $options));
-        
+
         // Adds widget to template variable
         $this->object->assign('widget', $this->widget);
     }
-    
+
     /**
      * Returns the internal Smarty object or render a Smarty template
-     * 
-     * if NO parameter provied, the invoke method will return the \Smarty 
+     *
+     * if NO parameter provied, the invoke method will return the \Smarty
      * object otherwise, call the render method
      *
      * @param string $name The name of template
      * @param array $vars The variables pass to template
-     * 
+     *
      * @return \Smarty|string
      */
     public function __invoke($name = null, $vars = array())
@@ -89,7 +89,7 @@ class Smarty extends AbstractView
     public function assign($name, $value = null)
     {
         $this->object->assign($name, $value);
-        
+
         return $this;
     }
 
@@ -112,33 +112,33 @@ class Smarty extends AbstractView
 
         return $this->object->fetch($name);
     }
-    
+
     /**
      * Set Smarty object
-     * 
+     *
      * @param \Smarty $object
      * @return Smarty
      */
     public function setObject(\Smarty $object = null)
     {
         $this->object = $object ? $object : new \Smarty();
-        
+
         return $this;
     }
-    
+
     /**
      * Set property value for Smarty
-     * 
+     *
      * @param array $options
      * @return Smarty
      */
     public function setOptions(array $options)
-    { 
+    {
         foreach ($options as $key => $value) {
             $this->options[$key] = $value;
             $value && $this->object->$key = $value;
         }
-        
+
         return $this;
     }
 }
