@@ -8,8 +8,6 @@
 
 namespace Widget;
 
-use Widget\Exception\UnexpectedTypeException;
-
 /**
  * The validator manager, use to validate input quickly, create validator
  *
@@ -110,7 +108,7 @@ class Is extends AbstractWidget
      * @param mixed $input The data to be validated
      * @param array $options The validation parameters
      * @return bool
-     * @throws Exception\UnexpectedTypeException When rule is not string, array or \Closure
+     * @throws \InvalidArgumentException When rule is not string, array or \Closure
      */
     public function __invoke($rule = null, $input = null, $options = array())
     {
@@ -133,7 +131,10 @@ class Is extends AbstractWidget
                 ));
                 return $validator->isValid();
             default:
-                throw new UnexpectedTypeException($rule, 'string, array or \Closure');
+                throw new \InvalidArgumentException(sprintf(
+                    'Expected argument of type string, array or \Closure, "%s" given',
+                    is_object($rule) ? get_class($rule) : gettype($rule)
+                ));
         }
     }
 

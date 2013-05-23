@@ -19,9 +19,9 @@ class InTest extends TestCase
     {
         $this->assertFalse($this->isIn($input, $array, $case));
     }
-    
+
     /**
-     * @expectedException Widget\Exception\UnexpectedTypeException
+     * @expectedException InvalidArgumentException
      */
     public function testUnexpectedType()
     {
@@ -36,7 +36,7 @@ class InTest extends TestCase
             array('', array(null)),
         );
     }
-    
+
     public function providerForNotIn()
     {
         return array(

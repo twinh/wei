@@ -36,7 +36,7 @@ class Router extends AbstractWidget
      *      -- defaults         array   the defaults params of the route
      *
      *      -- method           regex   the request method
-     * 
+     *
      *      -- regex            string  the regex complied from the pattern, just leave it blank when
      *                                  set a new route
      */
@@ -59,14 +59,14 @@ class Router extends AbstractWidget
             $pathInfo = $request->getPathInfo();
             $method = $request->getMethod();
         }
-        
+
         if (false !== ($parameters = $this->match($pathInfo, $method))) {
             $route = $this->router->getRoute($parameters['_id']);
             unset($parameters['_id']);
-            
+
             // Merge parameters to query widget
             $this->query->set($parameters);
-            
+
             array_unshift($parameters, $this->widget);
             $result = call_user_func_array($route['callback'], $parameters);
 
@@ -78,7 +78,7 @@ class Router extends AbstractWidget
 
     /**
      * Set routes
-     * 
+     *
      * @param array $routes
      * @return Router
      */
@@ -91,10 +91,10 @@ class Router extends AbstractWidget
 
         return $this;
     }
-    
+
     /**
      * Return routes
-     * 
+     *
      * @return array
      */
     public function getRoutes()
@@ -117,9 +117,12 @@ class Router extends AbstractWidget
         } elseif (is_array($route)) {
             $this->routes[] = $route + $this->routeOptions;
         } else {
-            throw new Exception\UnexpectedTypeException($route, 'string or array');
+            throw new \InvalidArgumentException(sprintf(
+                'Expected argument of type string or array, "%s" given',
+                is_object($route) ? get_class($route) : gettype($route)
+            ));
         }
-        
+
         return $this;
     }
 
@@ -212,7 +215,7 @@ class Router extends AbstractWidget
     protected function matchRoute($pathInfo, $method, $id)
     {
         $route = $this->compile($this->routes[$id]);
- 
+
         // When $route['method'] is not provided, accepts all request methods
         if ($method && $route['method'] && !preg_match('#' . $route['method'] . '#i', $method)) {
             return false;
@@ -222,7 +225,7 @@ class Router extends AbstractWidget
         if (!preg_match($route['regex'], $pathInfo, $matches)) {
             return false;
         }
-        
+
         // Get params in the path info
         $parameters = array();
         foreach ($matches as $key => $parameter) {
@@ -233,7 +236,7 @@ class Router extends AbstractWidget
         }
 
         $parameters += $route['defaults'];
-        
+
         preg_match_all('#<([a-zA-Z0-9_]++)>#', $route['pattern'], $matches);
         foreach ($matches[1] as $key) {
             if (!array_key_exists($key, $parameters)) {
@@ -274,7 +277,7 @@ class Router extends AbstractWidget
             return false;
         } else {
             $route = $this->compile($this->routes[$id]);
-            
+
             $isMatched = false;
 
             // Search the minimal optional parts
@@ -288,7 +291,7 @@ class Router extends AbstractWidget
                 // Search the required parts in the optional parts
                 while (preg_match('#<([a-zA-Z0-9_]++)>#', $replace, $match)) {
                     list($key, $param) = $match;
-                    
+
                     if (isset($parameters[$param])) {
                         if (isset($route['rules'][$param])) {
                             // The parameter not matched the rules
@@ -340,7 +343,7 @@ class Router extends AbstractWidget
 
                 unset($parameters[$param]);
             }
-            
+
 //            if (false === strpos($pattern, '<') && false === strpos($pattern, '(')) {
 //                return $pattern;
 //            }
@@ -370,10 +373,10 @@ class Router extends AbstractWidget
 
         return $this->buildQuery($parameters);
     }
-    
+
     /**
      * Add a GET route
-     * 
+     *
      * @param string $pattern
      * @param callback $fn
      */
@@ -381,10 +384,10 @@ class Router extends AbstractWidget
     {
         return $this->request($pattern, 'GET', $fn);
     }
-    
+
     /**
      * Add a POST route
-     * 
+     *
      * @param string $pattern
      * @param callback $fn
      */
@@ -392,10 +395,10 @@ class Router extends AbstractWidget
     {
         return $this->request($pattern, 'POST', $fn);
     }
-    
+
     /**
      * Add a DELETE route
-     * 
+     *
      * @param string $pattern
      * @param callback $fn
      */
@@ -403,10 +406,10 @@ class Router extends AbstractWidget
     {
         return $this->request($pattern, 'DELETE', $fn);
     }
-    
+
     /**
      * Add a PUT route
-     * 
+     *
      * @param string $pattern
      * @param callback $fn
      */
@@ -414,10 +417,10 @@ class Router extends AbstractWidget
     {
         return $this->request($pattern, 'PUT', $fn);
     }
-    
+
     /**
      * Add a route allow any request methods
-     * 
+     *
      * @param string $pattern The route pattern
      * @param string $method The route method
      * @param callback $fn The callback invoke then route is matched
@@ -429,7 +432,7 @@ class Router extends AbstractWidget
             $fn = $method;
             $method = null;
         }
-        
+
         $this->router->set(array(
             'pattern' => $pattern,
             'method' => $method,

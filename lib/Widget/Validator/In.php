@@ -8,23 +8,21 @@
 
 namespace Widget\Validator;
 
-use Widget\Exception\UnexpectedTypeException;
-
 /**
  * Check if the input is in specified array
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class In extends AbstractValidator
 {
     protected $notInMessage = '%name% must be in %array%';
-    
+
     protected $negativeMessage = '%name% must not be in %array%';
-    
+
     protected $strict = false;
-    
+
     protected $array = array();
-    
+
     /**
      * {@inheritdoc}
      */
@@ -34,16 +32,19 @@ class In extends AbstractValidator
             if ($array instanceof \ArrayObject) {
                 $array = $array->getArrayCopy();
             } elseif (!is_array($array)) {
-                throw new UnexpectedTypeException($input, 'array or \ArrayObject');
+                throw new \InvalidArgumentException(sprintf(
+                    'Expected argument of type array or \ArrayObject, "%s" given',
+                    is_object($array) ? get_class($array) : gettype($array)
+                ));
             }
             $this->storeOption('array', $array);
         }
-        
+
         is_bool($strict) && $this->storeOption('strict', $strict);
-        
+
         return $this->isValid($input);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -53,7 +54,7 @@ class In extends AbstractValidator
             $this->addError('notIn');
             return false;
         }
-        
+
         return true;
     }
 }

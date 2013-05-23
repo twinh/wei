@@ -8,32 +8,30 @@
 
 namespace Widget\Validator;
 
-use Widget\Exception\UnexpectedTypeException;
-
 /**
  * Check if the input is valid credit card number
- * 
- * The type of credit card could be American Express, Diners Club, Discover, 
+ *
+ * The type of credit card could be American Express, Diners Club, Discover,
  * JCB, MasterCard, China UnionPay or Visa
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class CreditCard extends AbstractValidator
 {
     protected $invalidMessage = '%name% must be valid credit card number';
-    
+
     protected $negativeMessage = '%name% must not be valid credit card number';
-    
+
     /**
      * Allowed credit cards name
-     * 
+     *
      * @var array
      */
     protected $type = array();
-    
+
     /**
      * The array contains card name, length and validation pattern
-     * 
+     *
      * @var array
      * @link http://en.wikipedia.org/wiki/Credit_card_number
      */
@@ -50,7 +48,7 @@ class CreditCard extends AbstractValidator
             'length'        => 16,
             'pattern'       => '6011|64|65'
         ),
-        'JCB'           => array( 
+        'JCB'           => array(
             'length'        => array(15, 16),
             'pattern'       => '2131|1800|35'
         ),
@@ -67,17 +65,17 @@ class CreditCard extends AbstractValidator
             'pattern'       => '4'
         )
     );
-    
+
     /**
      * {@inheritdoc}
      */
     public function __invoke($input, $type = null)
     {
         $type && $this->storeOption('type', $type);
-        
+
         return $this->isValid($input);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -92,21 +90,21 @@ class CreditCard extends AbstractValidator
             $this->addError('invalid');
             return false;
         }
-        
+
         if (!$this->validateType($input)) {
             $this->addError('invalid');
             return false;
         }
-        
+
         return true;
     }
-    
+
     public function validateLuhn($input)
     {
         $len    = strlen($input);
         $sum    = 0;
         $offset = $len % 2;
-        
+
         for ($i = 0; $i < $len; $i++) {
             if (0 == ($i + $offset) % 2) {
                 $add = $input[$i] * 2;
@@ -118,7 +116,7 @@ class CreditCard extends AbstractValidator
 
         return 0 == $sum % 10;
     }
-    
+
     public function validateType($input)
     {
         if (!$this->type) {
@@ -136,14 +134,14 @@ class CreditCard extends AbstractValidator
         }
         return false;
     }
-    
+
     /**
-     * Set allowed credit card types, could be array, string separated by 
+     * Set allowed credit card types, could be array, string separated by
      * comma(,) or string "all" means all supported types
-     * 
+     *
      * @param string|array $type
      * @return Validator\CreditCard
-     * @throws Exception\UnexpectedTypeException When parameter is not array or string
+     * @throws \InvalidArgumentException When parameter is not array or string
      */
     public function setType($type)
     {
@@ -156,9 +154,12 @@ class CreditCard extends AbstractValidator
         } elseif (is_array($type)) {
             $this->type = $type;
         } else {
-            throw new UnexpectedTypeException($type, 'array or string');
+            throw new \InvalidArgumentException(sprintf(
+                'Expected argument of type array or string, "%s" given',
+                is_object($type) ? get_class($type) : gettype($type)
+            ));
         }
-        
+
         return $this;
     }
 }

@@ -8,7 +8,7 @@ class RouterTest extends TestCase
      * @var \Widget\Router
      */
     protected $object;
-    
+
     public function testAddRouteWithName()
     {
         $router = $this->object;
@@ -16,7 +16,7 @@ class RouterTest extends TestCase
         $router->set(array(
             'pattern' => 'blog(/<page>)',
         ));
-        
+
         $this->assertNotNull($router->getRoute(0));
     }
 
@@ -102,7 +102,7 @@ class RouterTest extends TestCase
 
         $this->assertFalse($router->match('postOrPut', 'GET'));
     }
-    
+
     public function testNotMatchUri()
     {
         $router = $this->object;
@@ -118,11 +118,11 @@ class RouterTest extends TestCase
 
         $this->assertFalse($router->match('withoutThisRoute'));
     }
-    
+
     public function testOptionalKeyShouldReturnNull()
     {
         $router = $this->object;
-        
+
         $router->set(array(
             'pattern' => '/blog(/<page>)(<format>)',
             'defaults' => array(
@@ -130,13 +130,13 @@ class RouterTest extends TestCase
                 'page' => '1'
             ),
         ));
-        
+
         $parameters = $router->match('/blog/123');
-        
+
         $this->assertArrayHasKey('format', $parameters);
-        
+
         $this->assertNull($parameters['format']);
-        
+
         $this->assertIsSubset(array(
             'page' => '123',
             'controller' => 'blog',
@@ -169,7 +169,7 @@ class RouterTest extends TestCase
     public function testMatchWithNameParameter()
     {
         $router = $this->object;
-        
+
         $router->set(array(
             'pattern' => '<controller>(/<action>)'
         ));
@@ -343,39 +343,39 @@ class RouterTest extends TestCase
             'page' => '2',
         ), 'blogList'));
     }
-    
+
     public function testNoRuleMatchd()
     {
         $router = $this->object;
-        
+
         $router->set(array(
             'pattern' => 'blog/<page>'
         ));
-        
+
         $this->assertEquals('?controller=blog', $router->generatePath(array(
             'controller' => 'blog'
         )));
     }
-    
+
     public function testRemove()
     {
         $router = $this->object;
-        
+
         $router->set(array(
             'pattern' => 'blog/<page>'
         ));
-        
+
         $this->assertNotEquals(false, $router->getRoute(0));
-        
+
         $router->remove(0);
-        
+
         $this->assertFalse($router->getRoute('test'));
     }
-    
+
     public function testPatternIsOptional()
     {
         $router = $this->object;
-        
+
         $router->set(array(
             'pattern' => '(<controller>(/<action>))',
             'defaults' => array(
@@ -388,11 +388,11 @@ class RouterTest extends TestCase
             'key' => 'value'
         )));
     }
-    
+
     public function testSetRoutes()
     {
         $router = $this->object;
-        
+
         $router->setRoutes(array(
             array(
                 'pattern' => '/'
@@ -401,127 +401,127 @@ class RouterTest extends TestCase
                 'pattern' => '/docs'
             ),
         ));
-        
+
         $this->assertCount(2, $router->getRoutes());
     }
-    
+
     public function testStringAsRouteParameter()
     {
         $router = $this->object;
-        
+
         $router->set('/blog');
-        
+
         $this->assertNotEmpty($router->getRoutes());
     }
-    
+
     /**
-     * @expectedException \Widget\Exception\UnexpectedTypeException
+     * @expectedException \InvalidArgumentException
      */
     public function testUnexpectedTypeExceptionForSetRoute()
     {
         $this->object->set(new \stdClass());
     }
-    
+
     public function testRestRouter()
     {
         $router = $this->object;
-        
+
         $router->get('/', function(){
             return 'index';
         });
-        
+
         $router->get('/docs', function(){
             return 'docs';
         });
-        
+
         $router->get('/docs/<name>', function($widget, $name){
             return $name;
         });
-        
+
         $router->get('/feedback', function(){
             return 'write please';
         });
-        
+
         $router->post('/feedback', function(){
             return 'thanks';
         });
-        
+
         $router->put('/article', function(){
-           return 'put'; 
+           return 'put';
         });
-        
+
         $router->delete('/article', function(){
             return 'delete';
         });
-        
+
         $router->request('/page', function(){
             return 'page';
         });
-        
+
         $this->assertContains('index', $this->getRouterOutput('/'));
-        
+
         $this->assertContains('docs', $this->getRouterOutput('/docs'));
-        
+
         $this->assertContains('test-of-router', $this->getRouterOutput('/docs/test-of-router'));
-        
+
         $this->assertContains('write please', $this->getRouterOutput('/feedback'));
-        
+
         $this->assertContains('write please', $this->getRouterOutput('/feedback', 'GET'));
-        
+
         $this->assertContains('thanks', $this->getRouterOutput('/feedback', 'POST'));
-        
+
         $this->assertContains('put', $this->getRouterOutput('/article', 'PUT'));
-        
+
         $this->assertContains('delete', $this->getRouterOutput('/article', 'DELETE|POST'));
-        
+
         foreach (array('GET', 'POST', 'PUT', 'DELETE') as $method) {
             $this->assertContains('page', $this->getRouterOutput('/page', $method));
         }
     }
-    
+
     /**
      * @expectedException \Widget\Exception\NotFoundException
      */
     public function testNotFoundException()
     {
         $router = $this->object;
-        
+
         $router->request('/page', function(){});
-        
+
         $router('/pages');
     }
-    
+
     public function testPathInfoAndMethodFromRequest()
     {
         $router = $this->object;
-        
+
         $this->request->setPathInfo('/');
         $this->request->setMethod('GET');
-        
+
         $router->get('/', function(){
             return 'index';
         });
-        
+
         $this->assertContains('index', $this->getRouterOutput());
     }
-    
+
     public function testCallbackOptinalRouteParameter()
     {
         $router = $this->object;
-        
+
         $router->get('/(<module>(/<controller>(/<action>)))', function($widget, $module, $controller, $action){
             $args = func_get_args();
             array_shift($args);
             return implode('.', $args);
         });
-        
+
         $this->assertEquals('module.controller.action', $this->getRouterOutput('/module/controller/action'));
-        
+
         $this->assertEquals('module.controller.', $this->getRouterOutput('/module/controller'));
-        
+
         $this->assertEquals('..', $this->getRouterOutput('/'));
     }
-    
+
     protected function getRouterOutput()
     {
         ob_start();

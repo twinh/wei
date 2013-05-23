@@ -159,7 +159,7 @@ class Validate extends AbstractWidget
      *
      * @param array $options The options for validation
      * @return bool Whether pass the validation or not
-     * @throws Exception\UnexpectedTypeException  When validation rule is not array, string or instance of ValidatorInterface
+     * @throws \InvalidArgumentException  When validation rule is not array, string or instance of ValidatorInterface
      */
     public function valid($options = array())
     {
@@ -185,7 +185,10 @@ class Validate extends AbstractWidget
             } elseif ($rules instanceof ValidatorInterface) {
                 $rules = array($rules);
             } elseif (!is_array($rules)) {
-                throw new Exception\UnexpectedTypeException($rules, 'array, string or instance of ValidatorInterface');
+                throw new \InvalidArgumentException(sprintf(
+                    'Expected argument of type array, string or instance of ValidatorInterface, "%s" given',
+                    is_object($rules) ? get_class($rules) : gettype($rules)
+                ));
             }
 
             // Make sure the "required" rule at first
@@ -502,7 +505,10 @@ class Validate extends AbstractWidget
     public function setData($data)
     {
         if (!is_array($data) && !is_object($data)) {
-            throw new Exception\UnexpectedTypeException($data, 'array or object');
+            throw new \InvalidArgumentException(sprintf(
+                'Expected argument of type array or object, "%s" given',
+                is_object($data) ? get_class($data) : gettype($data)
+            ));
         }
 
         $this->data = $data;

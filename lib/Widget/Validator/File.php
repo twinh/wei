@@ -391,7 +391,7 @@ class File extends AbstractValidator
      *
      * @param mixed $var
      * @return array
-     * @throws Exception\UnexpectedTypeException When parameter is not a string or array
+     * @throws \InvalidArgumentException When parameter is not a string or array
      */
     protected function convertToArray($var)
     {
@@ -400,7 +400,10 @@ class File extends AbstractValidator
         } elseif (is_array($var)) {
             return $var;
         } else {
-            throw new Exception\UnexpectedTypeException($var, 'string or array');
+            throw new \InvalidArgumentException(sprintf(
+                'Expected argument of type string or array, "%s" given',
+                is_object($var) ? get_class($var) : gettype($var)
+            ));
         }
     }
 

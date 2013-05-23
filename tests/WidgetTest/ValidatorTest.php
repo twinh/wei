@@ -6,7 +6,7 @@ namespace WidgetTest;
 class ValidatorTest extends TestCase
 {
     /**
-     * @expectedException Widget\Exception\UnexpectedTypeException
+     * @expectedException InvalidArgumentException
      */
     public function testIsInException()
     {
@@ -73,7 +73,7 @@ class ValidatorTest extends TestCase
     }
 
     /**
-     * @expectedException Widget\Exception\UnexpectedTypeException
+     * @expectedException InvalidArgumentException
      */
     public function testUnexpectedType()
     {
@@ -508,7 +508,7 @@ class ValidatorTest extends TestCase
     }
 
     /**
-     * @expectedException \Widget\Exception\UnexpectedTypeException
+     * @expectedException \InvalidArgumentException
      */
     public function testUnexpectedTypeException()
     {
@@ -608,7 +608,7 @@ class ValidatorTest extends TestCase
     }
 
     /**
-     * @expectedException \Widget\Exception\UnexpectedTypeException
+     * @expectedException \InvalidArgumentException
      */
     public function testInvalidRule()
     {

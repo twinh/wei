@@ -31,11 +31,11 @@ class CreditCardTest extends TestCase
         // http://names.igopaygo.com/credit_card/paypal
         // http://www.regexmagic.com/manual/xmppatterncreditcard.html
         return array(
-            // validate luhn 
-            array('4111111111111111'), // Visa 	
+            // validate luhn
+            array('4111111111111111'), // Visa
             array('5500000000000004'), // MasterCard
             array('340000000000009'),  // American Express
-            array('30000000000004'),   // Diner's Club 
+            array('30000000000004'),   // Diner's Club
             array('30000000000004'),   // Carte Blanche
             array('6011000000000004'), // Discover
             array('201400000000009'),  // en Route
@@ -76,19 +76,19 @@ class CreditCardTest extends TestCase
             array('411111111111111'),  // not 16-digit
             array('4111111111111112'), // luhn not valid
             array('3530111333300001'), // luhn not valid
-            // invalid card 
+            // invalid card
             array('4111111111111111', 'MasterCard'),    // Visa
             array('5500000000000004', 'Visa'),          // MasterCard
             array('5500000000000004', 'Visa,UnionPay'), // MasterCard
             array('5500000000000004', array('Visa', 'UnionPay')), // MasterCard
-            
+
             // valid luhn, valid type, invalid length
             array('411111111111116', 'Visa')
         );
     }
-    
+
     /**
-     * @expectedException \Widget\Exception\UnexpectedTypeException
+     * @expectedException InvalidArgumentException
      */
     public function testException()
     {
