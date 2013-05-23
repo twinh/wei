@@ -12,9 +12,9 @@ class DownloadTest extends TestCase
 
         $this->assertContains('<?php $this->layout(\'layout.php\') ?>', $content);
     }
-    
+
     /**
-     * @expectedException Widget\Exception\NotFoundException
+     * @expectedException \RuntimeException
      */
     public function testFileNotFoundException()
     {

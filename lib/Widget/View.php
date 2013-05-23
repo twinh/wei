@@ -162,14 +162,14 @@ class View extends AbstractView
             }
         }
 
-        throw new Exception\NotFoundException(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->dirs)));
+        throw new \RuntimeException(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->dirs)), 404);
     }
 
     /**
      * Set layout for current view
      *
      * @param string $name The name of layout template
-     * @param string $variable The varibale name that
+     * @param string $variable The variable name that
      * @return View
      */
     public function layout($name, $variable = 'content')

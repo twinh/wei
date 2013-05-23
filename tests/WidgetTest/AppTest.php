@@ -39,7 +39,8 @@ class AppTest extends TestCase
     }
 
     /**
-     * @expectedException \Widget\Exception\NotFoundException
+     * @expectedException \RuntimeException
+     * @expectedExceptionCode 404
      * @expectedExceptionMessage The page you requested was not found - module "ModuleNotFound" is not available
      */
     public function testModuleNotFound()
@@ -50,7 +51,8 @@ class AppTest extends TestCase
     }
 
     /**
-     * @expectedException \Widget\Exception\NotFoundException
+     * @expectedException \RuntimeException
+     * @expectedExceptionCode 404
      * @expectedExceptionMessage The page you requested was not found - controller "ControllerNotFound" not found in module "WidgetTest\AppTest"
      */
     public function testControllerNotFound()
@@ -61,7 +63,8 @@ class AppTest extends TestCase
     }
 
     /**
-     * @expectedException \Widget\Exception\NotFoundException
+     * @expectedException \RuntimeException
+     * @expectedExceptionCode 404
      * @expectedExceptionMessage The page you requested was not found - action "ActionNotFound" not found in controller "WidgetTest\AppTest\Controller\TestController"
      */
     public function testActionNotFound()

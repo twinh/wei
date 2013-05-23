@@ -65,15 +65,6 @@ class Error extends AbstractWidget
     );
 
     /**
-     * The 404 not found exception classes
-     *
-     * @var array
-     */
-    protected $notFoundExceptions = array(
-        'Widget\Exception\NotFoundException'
-    );
-
-    /**
      * Constructor
      *
      * @param array $options
@@ -213,13 +204,9 @@ class Error extends AbstractWidget
             call_user_func($this->prevExceptionHandler, $exception);
         }
 
-        if ($this->handlers['notFound']) {
-            foreach ($this->notFoundExceptions as $class) {
-                if ($exception instanceof $class) {
-                    if ($this->triggerHandler('notFound', $exception)) {
-                        return;
-                    }
-                }
+        if (404 == $exception->getCode()) {
+            if ($this->triggerHandler('notFound', $exception)) {
+                return;
             }
         }
 

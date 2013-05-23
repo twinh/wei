@@ -72,7 +72,7 @@ class Router extends AbstractWidget
 
             return $this->response($result);
         } else {
-            throw new Exception\NotFoundException('The page you requested was not found');
+            throw new \RuntimeException('The page you requested was not found', 404);
         }
     }
 

@@ -480,7 +480,7 @@ class RouterTest extends TestCase
     }
 
     /**
-     * @expectedException \Widget\Exception\NotFoundException
+     * @expectedException \RuntimeException
      */
     public function testNotFoundException()
     {

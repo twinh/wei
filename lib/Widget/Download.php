@@ -35,7 +35,7 @@ class Download extends Response
 
     /**
      * The file name to display in download dialog
-     * 
+     *
      * @var string
      */
     protected $filename;
@@ -47,21 +47,21 @@ class Download extends Response
     {
         return $this->send($file, $options);
     }
-    
+
     /**
      * Send file download response
-     * 
+     *
      * @param string $file The path of file
      * @param array $options The widget options
      * @return Download
-     * @throws Exception\NotFoundException When file not found
+     * @throws \RuntimeException When file not found
      */
     public function send($file = null, $options = array())
     {
         $options && $this->setOption($options);
-        
+
         if (!is_file($file)) {
-            throw new Exception\NotFoundException('File not found');
+            throw new \RuntimeException('File not found', 404);
         }
 
         $name = $this->filename ?: basename($file);
@@ -72,7 +72,7 @@ class Download extends Response
         } else {
             $filename = "*=UTF-8''" . rawurlencode($name);
         }
-        
+
         $this->header->set(array(
             'Content-Description'       => 'File Transfer',
             'Content-Type'              => $this->type,
@@ -83,13 +83,13 @@ class Download extends Response
             'Pragma'                    => 'public',
             'Content-Length'            => filesize($file),
         ));
-        
+
         // Send headers
         parent::send();
-        
+
         // Send file content
         readfile($file);
-        
+
         return $this;
     }
 }

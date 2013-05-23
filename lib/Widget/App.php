@@ -14,9 +14,8 @@ use Widget\Response;
  * A widget to build simple mvc application
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @method      Event\Event trigger(string $eventName) Trigger a event
  * @method      Response response(string $content, int $status = 200) Send headers and output content
- * @property    View\ViewInterface $view The view widget, instance of \Widget\Viewable interface
+ * @property    Stdlib\ViewInterface $view The view widget, instance of \Widget\Viewable interface
  * @property    Logger $logger The logger widget
  * @property    Request $request The HTTP request widget
  */
@@ -105,7 +104,7 @@ class App extends AbstractWidget
      * @param  string    $controller The name of controller
      * @param  string    $action     The name of action
      * @return App
-     * @throws Exception\NotFoundException When controller or action not found
+     * @throws \RuntimeException When module, controller or action not found
      */
     public function dispatch($module, $controller, $action = 'index')
     {
@@ -159,7 +158,7 @@ class App extends AbstractWidget
             }
         }
         // You can use `$widget->error->notFound(function(){});` to custom the 404 page
-        throw new Exception\NotFoundException($message);
+        throw new \RuntimeException($message, 404);
     }
 
     /**

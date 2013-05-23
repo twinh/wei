@@ -18,14 +18,14 @@ class Redirect extends Response
 {
     /**
      * The custom view file
-     * 
+     *
      * @var string
      */
     protected $view;
-    
+
     /**
      * The seconds to wait before redirect
-     * 
+     *
      * @var int
      */
     protected $wait = 0;
@@ -54,12 +54,12 @@ class Redirect extends Response
      * @param  int            $status  The redirect status code
      * @param  array          $options The widget options
      * @return Redirect
-     * @throws Exception\NotFoundException  When custom view file not found
+     * @throws RuntimeException  When custom view file not found
      */
     public function __invoke($url = null, $status = 302, array $options = array())
     {
         $options = $this->setOption($options);
-        
+
         if ($this->view) {
             require $this->view;
         } else {
@@ -67,7 +67,7 @@ class Redirect extends Response
             if (0 === $this->wait) {
                 $this->header('Location', $url);
             }
-            
+
             $content = sprintf(static::$html, $this->wait, htmlspecialchars($url, ENT_QUOTES, 'UTF-8'));
 
             parent::__invoke($content, $status);
@@ -75,10 +75,10 @@ class Redirect extends Response
 
         return $this;
     }
-    
+
     /**
      * Set redirect view file
-     * 
+     *
      * @param string $view The view file
      * @return Redirect
      * @throws Exception\NotFoundException When view file not found
@@ -86,24 +86,24 @@ class Redirect extends Response
     public function setView($view)
     {
         if (!is_file($view)) {
-            throw new Exception\NotFoundException(sprintf('Redirect view "%s" not found', $view));
+            throw new \RuntimeException(sprintf('Redirect view "%s" not found', $view));
         }
-        
+
         $this->view = $view;
-        
+
         return $this;
     }
-    
+
     /**
      * Set wait seconds
-     * 
+     *
      * @param int $wait
      * @return Redirect
      */
     public function setWait($wait)
     {
         $this->wait = (int)$wait;
-        
+
         return $this;
     }
 }
