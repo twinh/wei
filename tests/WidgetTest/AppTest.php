@@ -21,7 +21,7 @@ class AppTest extends TestCase
 
     protected function tearDown()
     {
-        //$this->logger->clean();
+        $this->logger->clean();
         parent::tearDown();
     }
 

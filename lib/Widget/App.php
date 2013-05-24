@@ -111,7 +111,7 @@ class App extends AbstractWidget
     public function dispatch($module, $controller, $action = 'index')
     {
         // Check if module available
-        if ($this->isModuleAvaiable($module)) {
+        if ($this->isModuleAvailable($module)) {
 
             // Get controller instance by module and controller name
             $object = $this->getControllerInstance($module, $controller);
@@ -227,12 +227,12 @@ class App extends AbstractWidget
     }
 
     /**
-     * Check if the given module in avaiable modules
+     * Check if the given module in available modules
      *
      * @param string $module
      * @return bool
      */
-    public function isModuleAvaiable($module)
+    public function isModuleAvailable($module)
     {
         return in_array($module, $this->modules);
     }
