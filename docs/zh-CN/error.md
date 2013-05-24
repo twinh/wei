@@ -17,7 +17,7 @@ $widget->error->notFound(function($exception){
 });
 
 // 抛出404错误
-throw new Widget\Exception\NotFoundException('Page not found');
+throw new \Exception('Page not found', 404);
 ```
 
 ### 选项
@@ -28,7 +28,6 @@ message             | string | Error                                            
 detail              | string | Unfortunately, an error occurred. Please try again later.                        | 未开启调试模式时的错误信息
 notFoundDetail      | string | Sorry, the page you requested was not found. Please check the URL and try again. | 未开启调试模式时的404错误信息
 ignorePrevHandler   | bool   | false                                                                            | 是否忽略已有的异常处理器
-notFoundExceptions  | array  | array('Widget\Exception\NotFoundException')                                      | 404异常的类名
 
 ### 方法
 
