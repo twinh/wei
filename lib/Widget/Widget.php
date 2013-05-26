@@ -381,7 +381,7 @@ class Widget extends AbstractWidget
      * Initialize a new instance of widget, with the specified name
      *
      * @param string $name The name of the widget
-     * @param array $options The option properies for widget
+     * @param array $options The option properties for widget
      * @param array $deps The dependent configuration
      * @return WidgetInterface The widget object
      */
