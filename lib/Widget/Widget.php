@@ -57,7 +57,7 @@ class Widget extends AbstractWidget
     protected $inis = array();
 
     /**
-     * The direcroties for autoload
+     * The directories for autoload
      *
      * @var array
      */
@@ -119,7 +119,6 @@ class Widget extends AbstractWidget
      * Instance widget manager
      *
      * @param array $config
-     * @return void
      */
     public function __construct(array $config = array())
     {
@@ -316,9 +315,10 @@ class Widget extends AbstractWidget
      * Get a widget object
      *
      * @param string $name  The name of the widget, without class prefix "Widget\"
+     * @param array $options The option properties for widget
      * @param array $deps The dependent configuration
-     * @param array $options The option properies for widget
-     * @return WidgetInterface The widget object
+     * @throws \BadMethodCallException
+     * @return WidgetInterface
      */
     public function get($name, array $options = array(), array $deps = array())
     {
@@ -456,6 +456,7 @@ class Widget extends AbstractWidget
      * Whether enable autoload or not
      *
      * @param bool $enable
+     * @return Widget
      */
     public function setAutoload($enable)
     {
@@ -509,8 +510,9 @@ class Widget extends AbstractWidget
      *
      * @param string $dir The directory for class
      * @param string $namespace The prefix namespace of the class
-     * @return Widget
+     * @param null $format The widget name format, eg 'is%s'
      * @throws \InvalidArgumentException When the first parameter is not a directory
+     * @return Widget
      */
     public function import($dir, $namespace, $format = null)
     {
@@ -562,7 +564,7 @@ namespace
      *
      * @param array $config                 The array or file configuration
      * @param string $name                  The name of the instance
-     * @return Widget
+     * @return \Widget\Widget
      * @throws \InvalidArgumentException    When the configuration parameter is not array or file
      */
     function widget ($config = array(), $name = 'default') {
