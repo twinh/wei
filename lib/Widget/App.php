@@ -181,8 +181,8 @@ class App extends AbstractWidget
     /**
      * Set the name of controller
      *
-     * @param  string    $controller The name of controller
-     * @return App
+     * @param  string $controller The name of controller
+     * @return string
      */
     public function setController($controller)
     {
@@ -194,7 +194,7 @@ class App extends AbstractWidget
     /**
      * Get the name of action
      *
-     * @return string The name of action
+     * @return string
      */
     public function getAction()
     {
@@ -208,8 +208,8 @@ class App extends AbstractWidget
     /**
      * Set the name of action
      *
-     * @param  string    $action The name of action
-     * @return App
+     * @param  string $action The name of action
+     * @return string
      */
     public function setAction($action)
     {
@@ -221,7 +221,7 @@ class App extends AbstractWidget
     /**
      * Return the controller class name (without validate if the class exists)'
      *
-     * @param $controller The name of class
+     * @param string $controller The name of class
      * @return string
      */
     public function getControllerClass($controller)
@@ -235,8 +235,8 @@ class App extends AbstractWidget
      * Get the controller instance, if not found, return false instead
      *
      * @param string $controller The name of controller
-     * @param $action The name of action
-     * @return boolean
+     * @param string $action The name of action
+     * @return object|false
      */
     public function getControllerInstance($controller, $action)
     {
