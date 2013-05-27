@@ -26,7 +26,7 @@ class Url extends AbstractWidget
     );
 
     /**
-     * Build URL by specified uri and parameters
+     * Build URL path by specified uri and parameters
      *
      * ```php
      * // Returns controller=user&id=admin
@@ -43,9 +43,32 @@ class Url extends AbstractWidget
      * @param array|string $parameters Additional URL query parameters
      * @param array|string $_ More additional URL query parameters
      * @return string
-     * @throws \InvalidArgumentException When the number of uri parts is not allowed
      */
     public function __invoke($uri)
+    {
+        $arr = call_user_func_array(array($this, 'parse'), func_get_args());
+
+        return $this->router->generatePath($arr);
+    }
+
+    /**
+     * Build full URL by specified uri and parameters
+     *
+     * @return string
+     */
+    public function full()
+    {
+        $arr = call_user_func_array(array($this, 'parse'), func_get_args());
+
+        return $this->router->generateUrl($arr);
+    }
+
+    /**
+     * @param $uri
+     * @return array
+     * @throws \InvalidArgumentException When the number of uri parts is not allowed
+     */
+    protected function parse($uri)
     {
         $uris = explode('/', $uri);
         $arr = array();
@@ -78,6 +101,6 @@ class Url extends AbstractWidget
             $arr += $args[$i];
         }
 
-        return $this->router->generatePath($arr);
+        return $arr;
     }
 }
