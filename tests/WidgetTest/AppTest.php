@@ -11,6 +11,8 @@ class AppTest extends TestCase
     {
         parent::setUp();
 
+        $this->view->setDirs(__DIR__ . '/AppTest/views');
+
         $this->app
             ->setOption('namespace', 'WidgetTest\AppTest');
     }
@@ -37,7 +39,7 @@ class AppTest extends TestCase
     /**
      * @expectedException \RuntimeException
      * @expectedExceptionCode 404
-     * @expectedExceptionMessage The page you requested was not found
+     * @expectedExceptionMessage The page you requested was not found - controller "ControllerNotFound" (class "WidgetTest\AppTest\ControllerNotFound") not found
      */
     public function testControllerNotFound()
     {
@@ -50,15 +52,17 @@ class AppTest extends TestCase
     {
         $this->app->setController('admin/index');
 
+        $this->app->setAction('index');
+
         $this->app();
 
-        $this->exactly('admin.index');
+        $this->expectOutputString('admin.index');
     }
 
     /**
      * @expectedException \RuntimeException
      * @expectedExceptionCode 404
-     * @expectedExceptionMessage The page you requested was not found
+     * @expectedExceptionMessage The page you requested was not found - controller "Controller\Admin" (class "WidgetTest\AppTest\Controller\Admin") not found
      */
     public function testNestedControllerNotFound()
     {
@@ -70,7 +74,7 @@ class AppTest extends TestCase
     /**
      * @expectedException \RuntimeException
      * @expectedExceptionCode 404
-     * @expectedExceptionMessage The page you requested was not found - action "ActionNotFound" not found in controller "WidgetTest\AppTest\Test"
+     * @expectedExceptionMessage The page you requested was not found - action method "ActionNotFoundAction" not found in controller "test" (class "WidgetTest\AppTest\Test")
      */
     public function testActionNotFound()
     {
@@ -81,8 +85,6 @@ class AppTest extends TestCase
 
     public function testActionReturnArrayAsViewParameter()
     {
-        $this->view->setDirs(__DIR__ . '/AppTest/views');
-
         // WidgetTest\AppTest\Controller\TestController::returnArrayAction
         $this->request->set(array(
             'controller' => 'test',
@@ -132,12 +134,12 @@ class AppTest extends TestCase
 
     public function testGetControllerInstance()
     {
-        $this->assertFalse($this->app->getControllerInstance('Module', '../invalid/controller'));
+        $this->assertFalse($this->app->getControllerInstance('../invalid/controller', 'index'));
 
-        $controller = $this->app->getControllerInstance('test');
+        $controller = $this->app->getControllerInstance('test', 'index');
         $this->assertInstanceOf('WidgetTest\AppTest\Test', $controller);
 
-        $controller2 = $this->app->getControllerInstance('test');
+        $controller2 = $this->app->getControllerInstance('test', 'index');
         $this->assertSame($controller2, $controller);
     }
 
@@ -160,6 +162,18 @@ class AppTest extends TestCase
         $this->request->set(array(
             'controller' => 'test',
             'action' => 'forwardController'
+        ));
+
+        $this->app();
+    }
+
+    public function testNestedControllerView()
+    {
+        $this->expectOutputString('value');
+
+        $this->request->set(array(
+            'controller' => 'admin/index',
+            'action' => 'view'
         ));
 
         $this->app();

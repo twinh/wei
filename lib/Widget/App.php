@@ -31,7 +31,7 @@ class App extends AbstractWidget
     protected $namespace = 'App';
 
     /**
-     * The default values for module, controller and action
+     * The default values for controller and action
      *
      * @var array
      */
@@ -53,13 +53,6 @@ class App extends AbstractWidget
      * @var string
      */
     protected $action;
-
-    /**
-     * The controller class format
-     *
-     * @var string
-     */
-    protected $controllerFormat = 'App\%s';
 
     /**
      * The controller instances
@@ -94,23 +87,17 @@ class App extends AbstractWidget
      * @param  string    $controller The name of controller
      * @param  string    $action     The name of action
      * @return App
-     * @throws \RuntimeException When module, controller or action not found
+     * @throws \RuntimeException When controller or action not found
      */
     public function dispatch($controller, $action = 'index')
     {
-        // Get controller instance by module and controller name
-        $object = $this->getControllerInstance($controller);
+        $object = $this->getControllerInstance($controller, $action);
         if ($object) {
-
             // Check if action exists
-            // TODO Check by controller object, such as $object->hasAction($action)
             $method = $action . 'Action';
             if (method_exists($object, $method)) {
-
                 try {
-
                     $response = $object->$method();
-
                     $this->handleResponse($response);
                 } catch (\RuntimeException $e) {
                     if ($e->getCode() === self::FORWARD_CODE) {
@@ -133,11 +120,11 @@ class App extends AbstractWidget
             $message .= (' - ');
             switch ($notFound) {
                 case 'controller':
-                    $message .= sprintf('controller "%s" not found"', $controller);
+                    $message .= sprintf('controller "%s" (class "%s") not found', $controller, $this->getControllerClass($controller));
                     break;
 
                 case 'action':
-                    $message .= sprintf('action "%s" not found in controller "%s"', $action, get_class($object));
+                    $message .= sprintf('action method "%s" not found in controller "%s" (class "%s")', $method, $controller, get_class($object));
                     break;
             }
         }
@@ -175,17 +162,6 @@ class App extends AbstractWidget
                     is_object($response) ? get_class($response) : gettype($response)
                 ));
         }
-    }
-
-    /**
-     * Check if the given module in available modules
-     *
-     * @param string $module
-     * @return bool
-     */
-    public function isModuleAvailable($module)
-    {
-        return in_array($module, $this->modules);
     }
 
     /**
@@ -242,21 +218,23 @@ class App extends AbstractWidget
         return $this;
     }
 
+    public function getControllerClass($controller)
+    {
+        $controller = implode('\\', array_map('ucfirst', explode('/', $controller)));
+
+        return $this->namespace . '\\' . $controller;
+    }
+
     /**
      * Get the controller instance, if not found, return false instead
      *
      * @param string $controller The name of controller
+     * @param $action The name of action
      * @return boolean
      */
-    public function getControllerInstance($controller)
+    public function getControllerInstance($controller, $action)
     {
-        if (!preg_match('/^([_a-z0-9\/]+)$/i', $controller)) {
-            return false;
-        }
-
-        $controller = implode('\\', array_map('ucfirst', explode('/', $controller)));
-
-        $class = $this->namespace . '\\' . $controller;
+        $class = $this->getControllerClass($controller);
 
         if (isset($this->controllers[$class])) {
             return $this->controllers[$class];
@@ -268,6 +246,8 @@ class App extends AbstractWidget
 
         return $this->controllers[$class] = new $class(array(
             'widget' => $this->widget,
+            'controller' => $controller,
+            'action' => $action,
         ));
     }
 
@@ -293,11 +273,10 @@ class App extends AbstractWidget
     }
 
     /**
-     * Forwards to the given module, controller and action
+     * Forwards to the given controller and action
      *
      * @param string $action            The name of action
      * @param string|null $controller   The name of controller
-     * @param string|null $module       The name of module
      */
     public function forward($action = 'index', $controller = null)
     {

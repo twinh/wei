@@ -8,4 +8,11 @@ class Index extends \Widget\AbstractWidget
     {
         return 'admin.index';
     }
+
+    public function viewAction()
+    {
+        return array(
+            'key' => 'value'
+        );
+    }
 }
