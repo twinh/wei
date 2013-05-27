@@ -192,7 +192,7 @@ class RouterTest extends TestCase
             ),
         ));
 
-        $this->assertEquals('user/login?var1=value1', $router->path(array(
+        $this->assertEquals('user/login?var1=value1', $router->generatePath(array(
             'controller' => 'user',
             'action' => 'login',
             'var1' => 'value1',
@@ -213,7 +213,7 @@ class RouterTest extends TestCase
             ),
         ));
 
-        $this->assertEquals('?controller=user&var1=value1', $router->path(array(
+        $this->assertEquals('?controller=user&var1=value1', $router->generatePath(array(
             'controller' => 'user',
             'var1' => 'value1',
         )));
@@ -225,7 +225,7 @@ class RouterTest extends TestCase
 
         $router->remove('default');
 
-        $this->assertEquals('?var1=value1&var2=value2', $router->path(array(
+        $this->assertEquals('?var1=value1&var2=value2', $router->generatePath(array(
             'var1' => 'value1',
             'var2' => 'value2',
         )));
