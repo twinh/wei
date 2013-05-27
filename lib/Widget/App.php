@@ -218,6 +218,12 @@ class App extends AbstractWidget
         return $this;
     }
 
+    /**
+     * Return the controller class name (without validate if the class exists)'
+     *
+     * @param $controller The name of class
+     * @return string
+     */
     public function getControllerClass($controller)
     {
         $controller = implode('\\', array_map('ucfirst', explode('/', $controller)));
