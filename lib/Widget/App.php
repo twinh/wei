@@ -24,13 +24,11 @@ class App extends AbstractWidget
     const FORWARD_CODE = 1000;
 
     /**
-     * The available modules
+     * The root PHP namespace of application
      *
-     * @var array
+     * @var string
      */
-    protected $modules = array(
-        'app'
-    );
+    protected $namespace = 'App';
 
     /**
      * The default values for module, controller and action
@@ -38,17 +36,9 @@ class App extends AbstractWidget
      * @var array
      */
     protected $defaults = array(
-        'module'        => 'app',
         'controller'    => 'index',
         'action'        => 'index',
     );
-
-    /**
-     * The name of module
-     *
-     * @var string
-     */
-    protected $module;
 
     /**
      * The name of controller
@@ -69,7 +59,7 @@ class App extends AbstractWidget
      *
      * @var string
      */
-    protected $controllerFormat = '%module%\%controller%';
+    protected $controllerFormat = 'App\%s';
 
     /**
      * The controller instances
@@ -93,7 +83,6 @@ class App extends AbstractWidget
         $request->set($parameters);
 
         return $this->dispatch(
-            $this->getModule(),
             $this->getController(),
             $this->getAction()
         );
@@ -102,47 +91,40 @@ class App extends AbstractWidget
     /**
      * Load and execute the controller action
      *
-     * @param  string    $module     The name of module
      * @param  string    $controller The name of controller
      * @param  string    $action     The name of action
      * @return App
      * @throws \RuntimeException When module, controller or action not found
      */
-    public function dispatch($module, $controller, $action = 'index')
+    public function dispatch($controller, $action = 'index')
     {
-        // Check if module available
-        if ($this->isModuleAvailable($module)) {
+        // Get controller instance by module and controller name
+        $object = $this->getControllerInstance($controller);
+        if ($object) {
 
-            // Get controller instance by module and controller name
-            $object = $this->getControllerInstance($module, $controller);
-            if ($object) {
+            // Check if action exists
+            // TODO Check by controller object, such as $object->hasAction($action)
+            $method = $action . 'Action';
+            if (method_exists($object, $method)) {
 
-                // Check if action exists
-                // TODO Check by controller object, such as $object->hasAction($action)
-                $method = $action . 'Action';
-                if (method_exists($object, $method)) {
+                try {
 
-                    try {
+                    $response = $object->$method();
 
-                        $response = $object->$method();
-
-                        $this->handleResponse($response);
-                    } catch (\RuntimeException $e) {
-                        if ($e->getCode() === self::FORWARD_CODE) {
-                            $this->logger->debug(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
-                        } else {
-                            throw $e;
-                        }
+                    $this->handleResponse($response);
+                } catch (\RuntimeException $e) {
+                    if ($e->getCode() === self::FORWARD_CODE) {
+                        $this->logger->debug(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
+                    } else {
+                        throw $e;
                     }
-                    return $this;
-                } else {
-                    $notFound = 'action';
                 }
+                return $this;
             } else {
-                $notFound = 'controller';
+                $notFound = 'action';
             }
         } else {
-            $notFound = 'module';
+            $notFound = 'controller';
         }
 
         // Prepare exception message
@@ -150,12 +132,8 @@ class App extends AbstractWidget
         if ($this->widget->config('debug')) {
             $message .= (' - ');
             switch ($notFound) {
-                case 'module':
-                    $message .= sprintf('module "%s" is not available', $module);
-                    break;
-
                 case 'controller':
-                    $message .= sprintf('controller "%s" not found in module "%s"', $controller, $module);
+                    $message .= sprintf('controller "%s" not found"', $controller);
                     break;
 
                 case 'action':
@@ -197,33 +175,6 @@ class App extends AbstractWidget
                     is_object($response) ? get_class($response) : gettype($response)
                 ));
         }
-    }
-
-    /**
-     * Get the of name module
-     *
-     * @return string The name of module
-     */
-    public function getModule()
-    {
-        if (!$this->module) {
-            $this->module = $this->request->get('module', $this->defaults['module']);
-        }
-
-        return $this->module;
-    }
-
-    /**
-     * Set the name of module
-     *
-     * @param  string    $module The name of module
-     * @return App
-     */
-    public function setModule($module)
-    {
-        $this->module = $module;
-
-        return $this;
     }
 
     /**
@@ -294,21 +245,18 @@ class App extends AbstractWidget
     /**
      * Get the controller instance, if not found, return false instead
      *
-     * @param string $module The name of module
      * @param string $controller The name of controller
      * @return boolean
      */
-    public function getControllerInstance($module, $controller)
+    public function getControllerInstance($controller)
     {
-        if (!preg_match('/^([_a-z0-9]+)$/i', $controller)) {
+        if (!preg_match('/^([_a-z0-9\/]+)$/i', $controller)) {
             return false;
         }
 
-        $class = str_replace(
-            array('%module%', '%controller%'),
-            array(ucfirst($module), ucfirst($controller)),
-            $this->controllerFormat
-        );
+        $controller = implode('\\', array_map('ucfirst', explode('/', $controller)));
+
+        $class = $this->namespace . '\\' . $controller;
 
         if (isset($this->controllers[$class])) {
             return $this->controllers[$class];

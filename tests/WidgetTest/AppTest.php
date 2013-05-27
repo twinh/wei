@@ -12,11 +12,7 @@ class AppTest extends TestCase
         parent::setUp();
 
         $this->app
-            ->setOption('controllerFormat', '%module%\Controller\\%controller%Controller')
-            // Change avaiable modules
-            ->setOption('modules', array('WidgetTest\AppTest'))
-            // Set default module
-            ->setModule('WidgetTest\AppTest');
+            ->setOption('namespace', 'WidgetTest\AppTest');
     }
 
     protected function tearDown()
@@ -27,7 +23,7 @@ class AppTest extends TestCase
 
     public function testBaseApp()
     {
-        // WidgetTest\AppTest\Controller\TestController::testAction
+        // WidgetTest\AppTest\Controller\Test::testAction
         $this->request->set(array(
             'controller' => 'test',
             'action' => 'test'
@@ -41,19 +37,7 @@ class AppTest extends TestCase
     /**
      * @expectedException \RuntimeException
      * @expectedExceptionCode 404
-     * @expectedExceptionMessage The page you requested was not found - module "ModuleNotFound" is not available
-     */
-    public function testModuleNotFound()
-    {
-        $this->app->setModule('ModuleNotFound');
-
-        $this->app();
-    }
-
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionCode 404
-     * @expectedExceptionMessage The page you requested was not found - controller "ControllerNotFound" not found in module "WidgetTest\AppTest"
+     * @expectedExceptionMessage The page you requested was not found
      */
     public function testControllerNotFound()
     {
@@ -65,7 +49,19 @@ class AppTest extends TestCase
     /**
      * @expectedException \RuntimeException
      * @expectedExceptionCode 404
-     * @expectedExceptionMessage The page you requested was not found - action "ActionNotFound" not found in controller "WidgetTest\AppTest\Controller\TestController"
+     * @expectedExceptionMessage The page you requested was not found
+     */
+    public function testNestedNotFound()
+    {
+        $this->app->setController('Controller\Admin');
+
+        $this->app();
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     * @expectedExceptionCode 404
+     * @expectedExceptionMessage The page you requested was not found - action "ActionNotFound" not found in controller "WidgetTest\AppTest\Test"
      */
     public function testActionNotFound()
     {
@@ -116,14 +112,6 @@ class AppTest extends TestCase
         $this->app();
     }
 
-    public function testGetModuleFromRequest()
-    {
-        $this->app->setModule(null);
-        $this->request->set('module', 'test');
-
-        $this->assertEquals('test', $this->app->getModule());
-    }
-
     public function testDispatchBreak()
     {
         $this->request->set('action', 'dispatchBreak');
@@ -137,10 +125,10 @@ class AppTest extends TestCase
     {
         $this->assertFalse($this->app->getControllerInstance('Module', '../invalid/controller'));
 
-        $controller = $this->app->getControllerInstance('WidgetTest\AppTest', 'test');
-        $this->assertInstanceOf('WidgetTest\AppTest\Controller\TestController', $controller);
+        $controller = $this->app->getControllerInstance('test');
+        $this->assertInstanceOf('WidgetTest\AppTest\Test', $controller);
 
-        $controller2 = $this->app->getControllerInstance('WidgetTest\AppTest', 'test');
+        $controller2 = $this->app->getControllerInstance('test');
         $this->assertSame($controller2, $controller);
     }
 
