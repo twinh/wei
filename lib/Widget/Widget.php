@@ -517,7 +517,7 @@ class Widget extends AbstractWidget
     public function import($dir, $namespace, $format = null)
     {
         if (!is_dir($dir)) {
-            throw new \InvalidArgumentException('Parameter 1 should be valid directory');
+            throw new \InvalidArgumentException(sprintf('Fail to import widgets from non-exists directory "%s"', $dir));
         }
 
         $files = glob($dir . '/*.php') ?: array();

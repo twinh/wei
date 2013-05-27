@@ -214,7 +214,7 @@ class WidgetTest extends TestCase
     {
         $this->request->set('id', __METHOD__);
 
-        // Equals to $this->wideget->request('id')
+        // Equals to $this->widget->request('id')
         $id = $this->widget->invoke('request', array('id'));
 
         $this->assertEquals(__METHOD__, $id);
@@ -309,7 +309,7 @@ class WidgetTest extends TestCase
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Parameter 1 should be valid directory
+     * @expectedExceptionMessage Fail to import widgets from non-exists directory
      */
     public function testImportInvalidDir()
     {
