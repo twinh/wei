@@ -299,11 +299,10 @@ class App extends AbstractWidget
      * @param string|null $controller   The name of controller
      * @param string|null $module       The name of module
      */
-    public function forward($action = 'index', $controller = null , $module = null)
+    public function forward($action = 'index', $controller = null)
     {
         $this->setAction($action);
         $controller && $this->setController($controller);
-        $module && $this->setModule($action);
 
         $this()->preventPreviousDispatch();
     }

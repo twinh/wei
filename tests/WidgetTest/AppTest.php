@@ -46,12 +46,21 @@ class AppTest extends TestCase
         $this->app();
     }
 
+    public function testNestedController()
+    {
+        $this->app->setController('admin/index');
+
+        $this->app();
+
+        $this->exactly('admin.index');
+    }
+
     /**
      * @expectedException \RuntimeException
      * @expectedExceptionCode 404
      * @expectedExceptionMessage The page you requested was not found
      */
-    public function testNestedNotFound()
+    public function testNestedControllerNotFound()
     {
         $this->app->setController('Controller\Admin');
 
