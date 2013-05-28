@@ -124,7 +124,7 @@ class RouterTest extends TestCase
         $router = $this->object;
 
         $router->set(array(
-            'pattern' => '/blog(/<page>)(<format>)',
+            'pattern' => '/blog(/<page>)(.<format>)',
             'defaults' => array(
                 'controller' => 'blog',
                 'page' => '1'
@@ -505,21 +505,93 @@ class RouterTest extends TestCase
         $this->assertContains('index', $this->getRouterOutput());
     }
 
-    public function testCallbackOptinalRouteParameter()
+    public function testControllerActionRoute()
     {
         $router = $this->object;
 
-        $router->get('/(<module>(/<controller>(/<action>)))', function($widget, $module, $controller, $action){
-            $args = func_get_args();
-            array_shift($args);
-            return implode('.', $args);
-        });
+        $router->setRoutes(array(
+            array(
+                'pattern' => '/(<controller>/<action>)',
+                'defaults' => array(
+                    'controller' => 'index',
+                    'action' => 'index'
+                )
+            ),
+            array(
+                'pattern' => '/<controller>',
+                'defaults' => array(
+                    'action' => 'index'
+                )
+            )
+        ));
 
-        $this->assertEquals('module.controller.action', $this->getRouterOutput('/module/controller/action'));
+        $this->assertIsSubset(array(
+            'controller' => 'posts',
+            'action' => 'index'
+        ), $router->match('/posts'));
 
-        $this->assertEquals('module.controller.', $this->getRouterOutput('/module/controller'));
+        $this->assertIsSubset(array(
+            'controller' => 'posts',
+            'action' => 'add'
+        ), $router->match('/posts/add'));
 
-        $this->assertEquals('..', $this->getRouterOutput('/'));
+        $this->assertIsSubset(array(
+            'controller' => 'admin/posts',
+            'action' => 'add'
+        ), $router->match('/admin/posts/add'));
+    }
+
+    public function testControllerActionIdRoute()
+    {
+        $router = $this->object;
+
+        $router->setRoutes(array(
+            '/(<controller>/<action>/<id>).<format>',
+            '/(<controller>/<action>/<id>)',
+            '/<controller>/<action>',
+            '/<controller>'
+        ));
+
+        $this->assertIsSubset(array(
+            'controller' => 'admin/posts',
+            'action' => 'edit',
+            'id' => '234'
+        ), $router->match('/admin/posts/edit/234'));
+
+        $this->assertIsSubset(array(
+            'controller' => 'admin/posts',
+            'action' => 'edit',
+            'id' => '234',
+            'format' => 'html'
+        ), $router->match('/admin/posts/edit/234.html'));
+
+        $this->assertIsSubset(array(
+            'controller' => 'admin/posts',
+            'action' => 'edit',
+            'id' => '234',
+            'format' => 'rss'
+        ), $router->match('/admin/posts/edit/234.rss'));
+
+        $this->assertIsSubset(array(
+            'controller' => 'posts',
+            'action' => 'edit',
+            'id' => '1'
+        ), $router->match('/posts/edit/1'));
+
+        $this->assertIsSubset(array(
+            'controller' => 'posts',
+            'action' => 'index',
+        ), $router->match('/posts/index'));
+
+        $this->assertIsSubset(array(
+            'controller' => 'posts'
+        ), $router->match('/posts'));
+
+        $this->assertIsSubset(array(
+            'controller' => null, // $this->request('controller', 'index'); => 'index'
+            'action' => null,
+            'id' => null
+        ), $router->match('/'));
     }
 
     protected function getRouterOutput()

@@ -84,10 +84,9 @@ class Router extends AbstractWidget
      */
     public function setRoutes($routes)
     {
-        foreach ($routes as &$route) {
-            $route += $this->routeOptions;
+        foreach ($routes as $route) {
+            $this->set($route);
         }
-        $this->routes = $routes;
 
         return $this;
     }
@@ -105,7 +104,8 @@ class Router extends AbstractWidget
     /**
      * Add one route
      *
-     * @param  array       $route the options of the route
+     * @param  array $route the options of the route
+     * @throws \InvalidArgumentException When argument is not string or array
      * @return Router
      */
     public function set($route)
@@ -168,18 +168,18 @@ class Router extends AbstractWidget
 
         $regex = str_replace(array('(', ')'), array('(?:', ')?'), $regex);
 
-        $regex = str_replace(array('<', '>'), array('(?P<', '>[^/?]++)'), $regex);
+        $regex = str_replace(array('<', '>'), array('(?P<', '>.+?)'), $regex);
 
         if ($route['rules']) {
             $search = $replace = array();
             foreach ($route['rules'] as $key => $rule) {
-                $search[] = '<' . $key . '>[^/?]++';
+                $search[] = '<' . $key . '>.+?';
                 $replace[] = '<' . $key . '>' . $rule;
             }
             $regex = str_replace($search, $replace, $regex);
         }
 
-        $route['regex'] = '#^' . $regex . '$#uD';
+        $route['regex'] = '#^' . $regex . '$#uUD';
 
         return $route;
     }
