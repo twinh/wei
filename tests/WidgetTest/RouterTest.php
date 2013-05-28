@@ -608,6 +608,195 @@ class RouterTest extends TestCase
         $this->assertEquals('/', $router->generatePath(array()));
     }
 
+    /**
+     * @dataProvider providerForRestRoutes
+     */
+    public function testRestRoute($method, $path, $params)
+    {
+        $router = $this->object;
+
+        $router->setRoutes(array(
+            array(
+                'pattern' => '/<controller>/<id>/edit',
+                'method' => 'GET',
+                'defaults' => array(
+                    'action' => 'edit'
+                )
+            ),
+            array(
+                'pattern' => '/<controller>/new',
+                'method' => 'GET',
+                'defaults' => array(
+                    'action' => 'new'
+                )
+            ),
+            array(
+                'pattern' => '/<controller>/<id>',
+                'method' => 'GET',
+                'defaults' => array(
+                    'action' => 'show'
+                )
+            ),
+            array(
+                'pattern' => '/<controller>',
+                'method' => 'GET',
+                'defaults' => array(
+                    'action' => 'index'
+                )
+            ),
+            array(
+                'pattern' => '/<controller>/<id>',
+                'method' => 'PATCH|PUT',
+                'defaults' => array(
+                    'action' => 'update'
+                )
+            ),
+            array(
+                'pattern' => '/<controller>',
+                'method' => 'POST',
+                'defaults' => array(
+                    'action' => 'create'
+                )
+            ),
+            array(
+                'pattern' => '/<controller>/<id>',
+                'method' => 'DELETE',
+                'defaults' => array(
+                    'action' => 'destroy'
+                )
+            )
+        ));
+
+        $this->assertIsSubset($params, $router->match($path, $method));
+    }
+
+    public function providerForRestRoutes()
+    {
+        return array(
+            array(
+                'GET',
+                '/posts',
+                array(
+                    'controller' => 'posts',
+                    'action' => 'index'
+                )
+            ),
+            array(
+                'GET',
+                '/posts/new',
+                array(
+                    'controller' => 'posts',
+                    'action' => 'new'
+                )
+            ),
+            array(
+                'GET',
+                '/posts/123',
+                 array(
+                     'controller' => 'posts',
+                     'action' => 'show'
+                 )
+            ),
+            array(
+                'POST',
+                '/posts',
+                array(
+                    'controller' => 'posts',
+                    'action' => 'create'
+                )
+            ),
+            array(
+                'PUT',
+                '/posts/456',
+                array(
+                    'controller' => 'posts',
+                    'action' => 'update',
+                    'id' => '456'
+                ),
+            ),
+            array(
+                'PATCH',
+                '/posts/456',
+                array(
+                    'controller' => 'posts',
+                    'action' => 'update',
+                    'id' => '456'
+                ),
+            ),
+            array(
+                'DELETE',
+                '/posts/456',
+                array(
+                    'controller' => 'posts',
+                    'action' => 'destroy',
+                    'id' => '456'
+                )
+            ),
+            // NOTE
+            array(
+                'GET',
+                '/admin/posts',
+                array(
+                    'controller' => 'admin',
+                    'id' => 'posts'
+                )
+            ),
+            // namespace controller
+            array(
+                'GET',
+                '/admin/posts/new',
+                array(
+                    'controller' => 'admin/posts',
+                    'action' => 'new'
+                )
+            ),
+            array(
+                'GET',
+                '/admin/posts/456',
+                array(
+                    'controller' => 'admin/posts',
+                    'action' => 'show',
+                    'id' => '456'
+                )
+            ),
+            array(
+                'POST',
+                '/admin/posts',
+                array(
+                    'controller' => 'admin/posts',
+                    'action' => 'create'
+                )
+            ),
+            array(
+                'PUT',
+                '/admin/posts/456',
+                array(
+                    'controller' => 'admin/posts',
+                    'action' => 'update',
+                    'id' => '456'
+                ),
+            ),
+            array(
+                'PATCH',
+                '/admin/posts/456',
+                array(
+                    'controller' => 'admin/posts',
+                    'action' => 'update',
+                    'id' => '456'
+                ),
+            ),
+            array(
+                'DELETE',
+                '/admin/posts/456',
+                array(
+                    'controller' => 'admin/posts',
+                    'action' => 'destroy',
+                    'id' => '456'
+                )
+            ),
+        );
+    }
+
     protected function getRouterOutput()
     {
         ob_start();
