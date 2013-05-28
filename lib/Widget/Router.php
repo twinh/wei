@@ -130,7 +130,7 @@ class Router extends AbstractWidget
      * Get the route by id
      *
      * @param  string $id The id of the route
-     * @return array|false
+     * @return false|array
      */
     public function getRoute($id)
     {
@@ -251,6 +251,7 @@ class Router extends AbstractWidget
      * Build params to query string
      *
      * @param array $parameters The array params to combine
+     * @return string
      */
     protected function buildQuery($parameters)
     {
@@ -260,6 +261,7 @@ class Router extends AbstractWidget
     /**
      * @param array $parameters
      * @param string $id
+     * @return bool|string
      */
     protected function buildPath($parameters, $id)
     {
@@ -344,10 +346,6 @@ class Router extends AbstractWidget
                 unset($parameters[$param]);
             }
 
-//            if (false === strpos($pattern, '<') && false === strpos($pattern, '(')) {
-//                return $pattern;
-//            }
-
             // If nothing matched
             if (!$isMatched && '' === $pattern) {
                 return false;
@@ -379,6 +377,7 @@ class Router extends AbstractWidget
      *
      * @param string $pattern
      * @param callback $fn
+     * @return Router
      */
     public function get($pattern, $fn)
     {
@@ -390,6 +389,7 @@ class Router extends AbstractWidget
      *
      * @param string $pattern
      * @param callback $fn
+     * @return Router
      */
     public function post($pattern, $fn)
     {
@@ -401,6 +401,7 @@ class Router extends AbstractWidget
      *
      * @param string $pattern
      * @param callback $fn
+     * @return Router
      */
     public function delete($pattern, $fn)
     {
@@ -412,6 +413,7 @@ class Router extends AbstractWidget
      *
      * @param string $pattern
      * @param callback $fn
+     * @return Router
      */
     public function put($pattern, $fn)
     {
@@ -424,6 +426,7 @@ class Router extends AbstractWidget
      * @param string $pattern The route pattern
      * @param string $method The route method
      * @param callback $fn The callback invoke then route is matched
+     * @return Router
      */
     public function request($pattern, $method, $fn = null)
     {
@@ -438,5 +441,7 @@ class Router extends AbstractWidget
             'method' => $method,
             'callback' => $fn
         ));
+
+        return $this;
     }
 }
