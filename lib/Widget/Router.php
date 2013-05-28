@@ -301,7 +301,7 @@ class Router extends AbstractWidget
                         }
 
                         // Replace the key with the parameter value
-                        $replace = str_replace($key, urlencode($parameters[$param]), $replace);
+                        $replace = str_replace($key, ($parameters[$param]), $replace);
 
                         $isMatched = true;
 
@@ -337,7 +337,7 @@ class Router extends AbstractWidget
                     }
                 }
 
-                $pattern = str_replace($key, urlencode($parameters[$param]), $pattern);
+                $pattern = str_replace($key, ($parameters[$param]), $pattern);
 
                 $isMatched = true;
 
