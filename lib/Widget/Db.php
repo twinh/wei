@@ -15,9 +15,7 @@ namespace Widget;
  */
 class Db extends AbstractWidget
 {
-    protected $tables = array(
-
-    );
+    protected $tables = array();
 
     public function __invoke()
     {
@@ -36,7 +34,7 @@ class Db extends AbstractWidget
         ));
     }
 
-    public function findAll($table, $where = array())
+    public function findAll($table, $where)
     {
         $query = $this->prepareQuery($table, $where);
 
@@ -90,25 +88,10 @@ class Db extends AbstractWidget
             'widget' => $this->widget,
             'db' => $this,
             'table' => $table,
-            'data' => $data
+            'data' => $data ?: array()
         ));
 
         return $table;
-    }
-
-    public function insert($table)
-    {
-
-    }
-
-    public function delete($table)
-    {
-
-    }
-
-    public function update($table)
-    {
-
     }
 
     /**
@@ -131,6 +114,27 @@ class Db extends AbstractWidget
     {
         return strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $name));
     }
+
+    public function getTableByField($name)
+    {
+        return isset($this->tables[$name]['table']) ?
+            $this->tables[$name]['table'] : $name . 's';
+    }
+
+    public function getSingular($name)
+    {
+        foreach ($this->tables as $table => $options) {
+            if ($table == $name) {
+                return $table;
+            }
+        }
+        return rtrim($name, 's');
+    }
+
+    public function getPlural()
+    {
+
+    }
 }
 
 /**
@@ -139,6 +143,8 @@ class Db extends AbstractWidget
 class Table extends  AbstractWidget
 {
     protected $table;
+
+    protected $data = array();
 
     /**
      * @var Db
@@ -163,7 +169,15 @@ class Table extends  AbstractWidget
 
     public function toArray()
     {
-        return $this->data;
+        $data = array();
+        foreach ($this->data as $field => $value) {
+            if ($value instanceof Table || $value instanceof Coll) {
+                $data[$field] = $value->toArray();
+            } else {
+                $data[$field] = $value;
+            }
+        }
+        return $data;
     }
 
     public function fromArray($data)
@@ -180,34 +194,35 @@ class Table extends  AbstractWidget
         }
     }
 
-    public function save()
-    {
-
-    }
-
     public function __get($name)
     {
+        $db = $this->db;
         $fieldName = $this->db->camelCaseToUnderscore($name);
 
-        // Field
         if (isset($this->data[$fieldName])) {
             return $this->data[$fieldName];
-        // Has one
+            // has one
         } elseif (isset($this->data[$name . '_id'])) {
-            return $this->data[$fieldName] = $this->db->find($name . 's', array(
+            return $this->data[$fieldName] = $this->db->find($db->getTableByField($name), array(
                 'id' => $this->data[$name . '_id']
             ));
-        // One to many
+            // one to many
         } elseif (substr($name, -1) == 's') {
-            return $this->data[$fieldName] = $this->db->findAll($name, array(
-                rtrim($this->table, 's') . '_id' => $this->data['id']
+            $table = substr($name, 0, -1);
+            return $this->data[$fieldName] = $this->db->findAll($db->getTableByField($table), array(
+                $db->getSingular($this->table) . '_id' => $this->data['id']
             ));
-        // Belong to
+            // belong to
         } else {
-            return $this->data[$fieldName] = $this->db->find($name . 's', array(
-                rtrim($this->table, 's') . '_id' => $this->data['id']
+            return $this->data[$fieldName] = $this->db->find($db->getTableByField($name), array(
+                $db->getSingular($this->table) . '_id' => $this->data['id']
             ));
         }
+    }
+
+    public function __call($name, $args)
+    {
+
     }
 }
 
