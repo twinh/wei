@@ -36,7 +36,7 @@ class Db extends AbstractWidget
         ));
     }
 
-    public function findAll($table, $where)
+    public function findAll($table, $where = array())
     {
         $query = $this->prepareQuery($table, $where);
 
@@ -94,6 +94,21 @@ class Db extends AbstractWidget
         ));
 
         return $table;
+    }
+
+    public function insert($table)
+    {
+
+    }
+
+    public function delete($table)
+    {
+
+    }
+
+    public function update($table)
+    {
+
     }
 
     /**
@@ -165,23 +180,29 @@ class Table extends  AbstractWidget
         }
     }
 
+    public function save()
+    {
+
+    }
+
     public function __get($name)
     {
         $fieldName = $this->db->camelCaseToUnderscore($name);
 
+        // Field
         if (isset($this->data[$fieldName])) {
             return $this->data[$fieldName];
-        // has one
+        // Has one
         } elseif (isset($this->data[$name . '_id'])) {
             return $this->data[$fieldName] = $this->db->find($name . 's', array(
                 'id' => $this->data[$name . '_id']
             ));
-        // one to many
+        // One to many
         } elseif (substr($name, -1) == 's') {
             return $this->data[$fieldName] = $this->db->findAll($name, array(
                 rtrim($this->table, 's') . '_id' => $this->data['id']
             ));
-        // belong to
+        // Belong to
         } else {
             return $this->data[$fieldName] = $this->db->find($name . 's', array(
                 rtrim($this->table, 's') . '_id' => $this->data['id']
@@ -192,5 +213,11 @@ class Table extends  AbstractWidget
 
 class Coll extends  \ArrayObject
 {
-
+    public function toArray()
+    {
+        foreach ($this as $record) {
+            $data[] = $record->toArray();
+        }
+        return $data;
+    }
 }

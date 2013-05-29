@@ -2,6 +2,9 @@
 
 namespace WidgetTest;
 
+/**
+ * @property \Widget\Db db
+ */
 class DbTest extends TestCase
 {
     public function setUp()
@@ -19,6 +22,8 @@ class DbTest extends TestCase
         $db->query("CREATE TABLE groups (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
         $db->query("CREATE TABLE users (id INTEGER NOT NULL, group_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
         $db->query("CREATE TABLE posts (id INTEGER NOT NULL, user_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
+        $db->query("CREATE TABLE tags (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
+        $db->query("CREATE TABLE posts_tags (post_id INTEGER NOT NULL, tag_id INTEGER NOT NULL)");
 
         $db->insert('groups', array(
             'id' => '1',
@@ -45,6 +50,31 @@ class DbTest extends TestCase
         $db->insert('posts', array(
             'user_id' => '1',
             'name' => 'my second post',
+        ));
+
+        $db->insert('tags', array(
+            'id' => '1',
+            'name' => 'database'
+        ));
+
+        $db->insert('tags', array(
+            'id' => '2',
+            'name' => 'PHP'
+        ));
+
+        $db->insert('posts_tags', array(
+            'post_id' => '1',
+            'tag_id' => '1',
+        ));
+
+        $db->insert('posts_tags', array(
+            'post_id' => '1',
+            'tag_id' => '2',
+        ));
+
+        $db->insert('posts_tags', array(
+            'post_id' => '2',
+            'tag_id' => '1',
         ));
     }
 
