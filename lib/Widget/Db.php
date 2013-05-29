@@ -22,6 +22,16 @@ class Db extends AbstractWidget
         return $this;
     }
 
+    public function query()
+    {
+        
+    }
+
+    public function insert($table)
+    {
+
+    }
+
     /**
      * Return a new table instance
      */
