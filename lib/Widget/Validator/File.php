@@ -8,8 +8,6 @@
 
 namespace Widget\Validator;
 
-use Widget\Exception;
-
 /**
  * Check if the input is valid file
  *

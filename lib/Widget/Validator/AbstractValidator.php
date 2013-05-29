@@ -9,7 +9,6 @@
 namespace Widget\Validator;
 
 use Widget\AbstractWidget;
-use Widget\Exception\UnexpectedValueException;
 
 /**
  * The base class of validator

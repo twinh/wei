@@ -7,7 +7,6 @@
  */
 namespace Widget;
 
-use Widget\Exception;
 use Widget\Stdlib\AbstractCache;
 
 /**
