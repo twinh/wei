@@ -7,53 +7,53 @@ class RecordExistsTest extends TestCase
     protected $inputTestOptions = array(
         'table' => 'users'
     );
-    
+
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
-        
+
         if (!class_exists(('\Doctrine\DBAL\DriverManager'))) {
             return;
         }
-        
+
         $widget = \Widget\Widget::create();
-        
+
         /* @var $db \Doctrine\DBAL\Connection */
-        $db = $widget->db();
-        
+        $db = $widget->dbal();
+
         $db->query("CREATE TABLE users (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
-        
+
         $db->insert('users', array(
             'name' => 'twin',
             'address' => 'test'
         ));
-        
+
         $db->insert('users', array(
             'name' => 'test',
             'address' => 'test'
         ));
     }
-    
+
     public static function tearDownAfterClass()
     {
         if (!class_exists(('\Doctrine\DBAL\DriverManager'))) {
             return;
         }
-        
+
         $widget = \Widget\Widget::create();
-        
-        $widget->db()->query("DROP TABLE users");
+
+        $widget->dbal()->query("DROP TABLE users");
     }
-    
+
     public function setUp()
     {
         if (!class_exists(('\Doctrine\DBAL\DriverManager'))) {
             $this->markTestSkipped('doctrine\dbal is required');
         }
-        
+
         parent::setUp();
     }
-    
+
     /**
      * @dataProvider dataProviderForRecordExists
      */
@@ -62,7 +62,7 @@ class RecordExistsTest extends TestCase
         $this->assertTrue($this->isRecordExists($input, 'users', $field));
         $this->assertNotEmpty($this->isRecordExists->getData());
     }
-    
+
     /**
      * @dataProvider dataProviderForRecordNotExists
      */
@@ -71,7 +71,7 @@ class RecordExistsTest extends TestCase
         $this->assertFalse($this->isRecordExists($input, 'users', $field));
         $this->assertEmpty($this->isRecordExists->getData());
     }
-    
+
     public function dataProviderForRecordExists()
     {
         return array(
@@ -82,7 +82,7 @@ class RecordExistsTest extends TestCase
             array('test', 'address')
         );
     }
-    
+
     public function dataProviderForRecordNotExists()
     {
         return array(

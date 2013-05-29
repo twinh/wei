@@ -29,7 +29,8 @@ Changelog
 * Added `cached` method for cache widgets
 * Renamed eventManager widget to [event](lib/Widget/Event.php)
 * Renamed isPostCode to [isPostcodeCn](lib/Widget/Validator/PostcodeCn.php)
-* Added `Stdlib` namespace
+* Added `Stdlib` namespace, moved base cache, view, widget aware class to `Stdlib` namespace
+* Renamed `db` widget to [dbal](lib/Widget/Dbal.php)
 
 ## 0.9.2-beta (2013-04-14)
 

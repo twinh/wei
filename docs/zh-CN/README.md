@@ -124,7 +124,7 @@ API 参考目录
 * [view](view.md) - 渲染指定名称的模板
 
 #### 数据库
-* [db](db.md) - 获取[Doctrine DBAL](https://github.com/doctrine/dbal)的Connection对象
+* [dbal](dbal.md) - 获取[Doctrine DBAL](https://github.com/doctrine/dbal)的Connection对象
 * [entityManager](entityManager.md) - 获取[Doctrine ORM](https://github.com/doctrine/doctrine2)的EntityManager对象
 
 #### 事件

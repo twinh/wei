@@ -28,22 +28,22 @@ return Widget::create(array(
         'url' => 'http://php/widget/tests/WidgetTest/Fixtures/call.php',
         'ip' => '127.0.0.1' // set ip for WidgetTest\CallTest\::testIp
     ),
-    // Databse Widget Configuration
-    'db' => array(
+    // Database Widget Configuration
+    'dbal' => array(
         'driver' => 'pdo_sqlite',
         'path' => 'test.sqlite'
     ),
     'mysqlCache' => array(
         'deps' => array(
-            'db' => 'db.mysqlCache'
+            'dbal' => 'dbal.mysqlCache'
         )
     ),
     'pgCache' => array(
         'deps' => array(
-            'db' => 'db.pgCache'
+            'dbal' => 'dbal.pgCache'
         )
     ),
-    'db.mysqlCache' => array(
+    'dbal.mysqlCache' => array(
         'driver'    => 'pdo_mysql',
         'host'      => '127.0.0.1',
         'port'      => '3306',
@@ -52,7 +52,7 @@ return Widget::create(array(
         'dbname'    => 'widget',
         'charset'   => 'utf8'
     ),
-    'db.pgCache' => array(
+    'dbal.pgCache' => array(
         'driver'    => 'pdo_pgsql',
         'host'      => '127.0.0.1',
         'port'      => '5432',

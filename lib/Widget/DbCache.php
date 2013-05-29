@@ -39,7 +39,7 @@ class DbCache extends AbstractCache
     {
         parent::__construct($options);
 
-        $this->conn = $this->db();
+        $this->conn = $this->dbal();
 
         $this->connect();
     }
@@ -49,7 +49,7 @@ class DbCache extends AbstractCache
      */
     public function connect()
     {
-        $db = $this->db();
+        $db = $this->dbal();
 
         $sm = $db->getSchemaManager();
 

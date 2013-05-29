@@ -1,5 +1,5 @@
-Db
-==
+Dbal
+====
 
 获取[Doctrine DBAL](https://github.com/doctrine/dbal)的数据库查询对象
 
@@ -8,12 +8,12 @@ Db
 
 ### 设置数据库类型并执行简单的查询
 ```php
-$widget->config('db', array(
+$widget->config('dbal', array(
     'driver' => 'pdo_sqlite',
     'path' => 'test.sqlite'
 ));
 
-$db = $widget->db();
+$db = $widget->dbal();
 
 print_r($db->fetchAll("SELECT MAX(1, 2)"));
 ```
@@ -34,26 +34,26 @@ Array
 ```php
 // 添加微件别名
 $widget->appendOption('alias', array(
-    'dbSlave' => 'Widget\Db'
+    'dbalSlave' => 'Widget\DbAl'
 ));
 
 // 设置数据库配置选项
 $widget->config(array(
-    'db' => array(
+    'dbal' => array(
         'driver' => 'pdo_sqlite',
         'path' => 'test.sqlite'
     ),
-    'dbSlave' => array(
+    'dbalSlave' => array(
         'driver' => 'pdo_sqlite',
         'path' => 'slave.sqlite'
     )
 ));
 
 // 获取主DB数据库对象
-$widget->db();
+$widget->dbal();
 
 // 获取备DB数据库对象
-$widget->dbSlave();
+$widget->dbalSlave();
 ```
 
 调用方式
@@ -126,5 +126,5 @@ http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/conf
 
 ### 方法
 
-#### db()
+#### dbal()
 获取数据库查询对象

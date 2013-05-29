@@ -8,28 +8,28 @@ class TestCase extends BaseTestCase
 {
     /**
      * The name of validator
-     * 
+     *
      * @var string
      */
     protected $name;
-    
+
     /**
      * The validator options for input test
-     * 
+     *
      * @var array
      */
     protected $inputTestOptions = array();
-    
+
     protected static $resource;
-    
+
     public function setUp()
     {
         parent::setUp();
-        
+
         // Instance validator manager widget
         $this->is;
     }
-    
+
     public function getInputs()
     {
         return array(
@@ -59,14 +59,14 @@ class TestCase extends BaseTestCase
         // Gets validator name WidgetTest\Validator\LengthTest => Length
         $name = $this->name ?: substr(get_class($this), strrpos(get_class($this), '\\') + 1, -4);
         $validator = $this->is->createRuleValidator($name, $this->inputTestOptions);
-        
+
         // The validator should accept any type of INPUT and do NOT raise any
         // exceptions or errors
         foreach ($this->getInputs() as $input) {
             $this->assertInternalType('boolean', $validator($input));
         }
     }
-    
+
     public function createResource()
     {
         if (!static::$resource) {
@@ -75,7 +75,7 @@ class TestCase extends BaseTestCase
 
         return static::$resource;
     }
-    
+
     public static function tearDownAfterClass()
     {
         parent::tearDownAfterClass();

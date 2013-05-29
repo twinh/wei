@@ -15,7 +15,7 @@ use Doctrine\DBAL\DriverManager;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Db extends AbstractWidget
+class Dbal extends AbstractWidget
 {
     /**
      * Doctrine DBAL connection object

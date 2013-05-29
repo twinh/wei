@@ -16,7 +16,7 @@ use Doctrine\Common\Cache\Cache as DoctrineCache;
  * A container widget for Doctrine ORM entity manager object
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @method      \Doctrine\DBAL\Connection db() Returns the Doctrine DBAL connection object
+ * @method      \Doctrine\DBAL\Connection dbal() Returns the Doctrine DBAL connection object
  * @todo        ohter mapping
  */
 class EntityManager extends AbstractWidget
@@ -39,7 +39,7 @@ class EntityManager extends AbstractWidget
 
     /**
      * The Doctrine ORM entity manager object
-     * 
+     *
      * @var \Doctrine\ORM\EntityManager
      */
     protected $em;
@@ -103,11 +103,11 @@ class EntityManager extends AbstractWidget
         }
 
         // Create EntityManager
-        $this->em = BaseEntityManager::create($this->db(), $config);
+        $this->em = BaseEntityManager::create($this->dbal(), $config);
     }
 
     /**
-     * Returns the Docrine ORM entity manager
+     * Returns the Doctrine ORM entity manager
      *
      * @return \Doctrine\ORM\EntityManager
      */

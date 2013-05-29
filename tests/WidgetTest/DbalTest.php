@@ -2,7 +2,7 @@
 
 namespace WidgetTest;
 
-class DbTest extends TestCase
+class DbalTest extends TestCase
 {
     public function setUp()
     {
@@ -10,12 +10,12 @@ class DbTest extends TestCase
             $this->markTestSkipped('doctrine\dbal is required');
             return;
         }
-        
+
         parent::setUp();
     }
-    
+
     public function testWidget()
     {
-        $this->assertInstanceOf('\Doctrine\DBAL\Connection', $this->db());
+        $this->assertInstanceOf('\Doctrine\DBAL\Connection', $this->dbal());
     }
 }
