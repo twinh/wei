@@ -15,7 +15,7 @@ use Widget\AbstractWidget;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @method      string t(string $message, array $parameters = array()) Translates a message
- * @property    T $t The translator widget
+ * @property    \Widget\T $t The translator widget
  */
 abstract class AbstractValidator extends AbstractWidget implements ValidatorInterface
 {
@@ -124,12 +124,12 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
      *
      * @param string|array $name The name of property
      * @param mixed $value The value of property
-     * @return Validator\AbstractValidator
+     * @return AbstractValidator
      * @internal This method should be use to set __invoke arguments only
      */
     protected function storeOption($name, $value = null)
     {
-        // hanlde array
+        // handle array
         if (is_array($name)) {
             foreach ($name as $key => $value) {
                 $this->storeOption($key, $value);
@@ -191,7 +191,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
                     $parameters['%name%'] = $this->t($this->name);
                 } else {
                     if (!property_exists($this, $match)) {
-                        throw new \UnexpectedValueException(sprintf('Unkonwn parameter "%%%s%%" in message "%s"', $match, $message));
+                        throw new \UnexpectedValueException(sprintf('Unknown parameter "%%%s%%" in message "%s"', $match, $message));
                     }
                     $parameters['%' . $match . '%'] = is_array($this->$match) ?
                         implode(', ', $this->$match) : $this->$match;;
@@ -205,7 +205,8 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     /**
      * Returns error message string
      *
-     * @return srring
+     * @param string $separator The string to connect messages
+     * @return string
      */
     public function getJoinedMessage($separator = "\n")
     {
@@ -229,7 +230,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
      * Sets the specified messages
      *
      * @param array $messages
-     * @return Validator\AbstractValidator
+     * @return AbstractValidator
      */
     public function setMessages(array $messages)
     {
@@ -253,7 +254,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
      * Sets message name
      *
      * @param string $name
-     * @return Validator\AbstractValidator
+     * @return AbstractValidator
      */
     public function setName($name)
     {
