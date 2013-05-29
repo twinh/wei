@@ -6,6 +6,11 @@ class DbTest extends TestCase
 {
     public function setUp()
     {
+        if (!class_exists(('\Doctrine\DBAL\DriverManager'))) {
+            $this->markTestSkipped('doctrine\dbal is required');
+            return;
+        }
+
         parent::setUp();
 
         /* @var $db \Doctrine\DBAL\Connection */
