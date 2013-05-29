@@ -28,7 +28,7 @@ require_once 'WidgetInterface.php';
  * @property Os         $os A widget to detect user OS and browser name and version
  * @method   bool       os() Check if in the specified browser, OS or device
  * @property Post       $post A widget that handles the HTTP request parameters ($_POST)
- * @method   string     post($name, $default = null) Returns a stringify rquest parameter value
+ * @method   string     post($name, $default = null) Returns a stringify request parameter value
  * @property Query      $query A widget that handles the URL query parameters ($_GET)
  * @method   string     query($name, $default = null) Returns a stringify URL query parameter value
  * @property Server     $server A widget that handles the server and execution environment parameters ($_SERVER)
