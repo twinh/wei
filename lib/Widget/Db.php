@@ -15,6 +15,10 @@ namespace Widget;
  */
 class Db extends AbstractWidget
 {
+    protected $tables = array(
+
+    );
+
     public function __invoke()
     {
         return $this;
@@ -32,7 +36,26 @@ class Db extends AbstractWidget
         ));
     }
 
-    public function find($table, $id)
+    public function findAll($table, $where)
+    {
+        $query = $this->prepareQuery($table, $where);
+
+        $data = $query->fetchAll();
+
+        $records = array();
+        foreach ($data as $row) {
+            $records[] = new Table(array(
+                'widget' => $this->widget,
+                'db' => $this,
+                'table' => $table,
+                'data' => $row
+            ));
+        }
+
+        return new Coll($records);
+    }
+
+    public function prepareQuery($table, $where)
     {
         $query = $this->widget
             ->dbal()
@@ -40,8 +63,8 @@ class Db extends AbstractWidget
             ->select('*')
             ->from($table, 't');
 
-        if (is_array($id)) {
-            foreach ($id as $key => $value) {
+        if (is_array($where)) {
+            foreach ($where as $key => $value) {
                 $query
                     ->andWhere($key . ' = :' . $key)
                     ->setParameter($key, $value);
@@ -49,11 +72,18 @@ class Db extends AbstractWidget
         } else {
             $query
                 ->where('id = :id')
-                ->setParameter('id', $id);
+                ->setParameter('id', $where);
         }
 
         $data = $query
-            ->execute()
+            ->execute();
+
+        return $data;
+    }
+
+    public function find($table, $id)
+    {
+        $data = $this->prepareQuery($table, $id)
             ->fetch();
 
         $table = new Table(array(
@@ -128,20 +158,39 @@ class Table extends  AbstractWidget
         return $this;
     }
 
+    public function clear($field)
+    {
+        if (isset($this->data[$field])) {
+            unset($this->data[$field]);
+        }
+    }
+
     public function __get($name)
     {
         $fieldName = $this->db->camelCaseToUnderscore($name);
 
         if (isset($this->data[$fieldName])) {
             return $this->data[$fieldName];
+        // has one
         } elseif (isset($this->data[$name . '_id'])) {
-            return $this->db->find($name . 's', array(
+            return $this->data[$fieldName] = $this->db->find($name . 's', array(
                 'id' => $this->data[$name . '_id']
             ));
+        // one to many
+        } elseif (substr($name, -1) == 's') {
+            return $this->data[$fieldName] = $this->db->findAll($name, array(
+                rtrim($this->table, 's') . '_id' => $this->data['id']
+            ));
+        // belong to
         } else {
-            return $this->db->find($name . 's', array(
+            return $this->data[$fieldName] = $this->db->find($name . 's', array(
                 rtrim($this->table, 's') . '_id' => $this->data['id']
             ));
         }
     }
+}
+
+class Coll extends  \ArrayObject
+{
+
 }

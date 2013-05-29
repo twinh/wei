@@ -41,6 +41,11 @@ class DbTest extends TestCase
             'user_id' => '1',
             'name' => 'my first post',
         ));
+
+        $db->insert('posts', array(
+            'user_id' => '1',
+            'name' => 'my second post',
+        ));
     }
 
     public function testGetTable()
@@ -79,5 +84,17 @@ class DbTest extends TestCase
 
         $this->assertEquals('1', $group->id);
         $this->assertEquals('vip', $group->name);
+
+        // Relation one-to-many
+        $posts = $user->posts;
+
+        $this->assertInstanceOf('\Widget\Coll', $posts);
+
+        $firstPost = $posts[0];
+        $this->assertInstanceOf('\Widget\Table', $firstPost);
+
+        $this->assertEquals('1', $firstPost->id);
+        $this->assertEquals('my first post', $firstPost->name);
+        $this->assertEquals('1', $firstPost->userId);
     }
 }
