@@ -28,7 +28,10 @@ return Widget::create(array(
         'url' => 'http://php/widget/tests/WidgetTest/Fixtures/call.php',
         'ip' => '127.0.0.1' // set ip for WidgetTest\CallTest\::testIp
     ),
-    // Database Widget Configuration
+    'db' => array(
+        'dsn' => 'sqlite::memory:'
+    ),
+    // Doctrine DBAL widget configuration
     'dbal' => array(
         'driver' => 'pdo_sqlite',
         'memory' => true
@@ -60,7 +63,7 @@ return Widget::create(array(
         'password'  => '123456',
         'dbname'    => 'postgres',
     ),
-    // Doctrine ORM Widget Configuration
+    // Doctrine ORM widget configuration
     'entityManager' => array(
         'config' => array(
             'proxyDir' => './',

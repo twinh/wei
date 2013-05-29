@@ -8,28 +8,152 @@
 
 namespace Widget;
 
+use PDO;
+
 /**
- * A database widget
+ * A database widget that compatible with Doctrine DBAL
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class Db extends AbstractWidget
 {
+    /**
+     * The database username
+     *
+     * @var string
+     */
+    protected $user;
+
+    /**
+     * The database password
+     *
+     * @var string
+     */
+    protected $password;
+
+    /**
+     * The dsn parameter for PDO constructor
+     *
+     * @var string
+     */
+    protected $dsn = 'sqlite::memory:';
+
+    /**
+     * The PDO object
+     *
+     * @var \PDO
+     */
+    protected $pdo;
+
     protected $tables = array();
+
+    protected $beforeQuery;
+
+    protected $afterQuery;
+
+    protected $isConnected = false;
+
+    private $driver;
 
     public function __invoke()
     {
         return $this;
     }
 
-    public function query()
+    public function connect()
     {
-        
+        if ($this->isConnected) {
+            return false;
+        }
+
+        if ($this->pdo) {
+            $this->isConnected = true;
+            return true;
+        }
+
+        $this->pdo = new PDO($this->dsn, $this->user, $this->password);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo->setAttribute(PDO::ATTR_STRINGIFY_FETCHES, true);
+
+        $this->driver = $this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
+
+        $this->isConnected = true;
+        return true;
     }
 
-    public function insert($table)
+    public function insert($table, array $values)
     {
+        $field = implode(', ', array_keys($values));
+        $placeholder = implode(', ', array_pad(array(), count($values), '?'));
 
+        $query = "INSERT INTO $table ($field) VALUES ($placeholder)";
+
+        return $this->executeUpdate($query, array_values($values));
+    }
+
+    /**
+     * Executes an SQL INSERT/UPDATE/DELETE query with the given parameters
+     * and returns the number of affected rows
+     *
+     * @param $query
+     * @param array $params
+     * @return int
+     */
+    public function executeUpdate($query, $params = array())
+    {
+        $this->connect();
+
+        if ($params) {
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute($params);
+            $result = $stmt->rowCount();
+        } else {
+            $result = $this->pdo->exec($query);
+        }
+        return $result;
+    }
+
+    public function query($sql)
+    {
+        $this->connect();
+
+        $stmt = $this->pdo->query($sql);
+        //$this->pdo->query($sql);
+        //$stmt = $this->pdo->prepare($sql);
+        //$stmt->execute();
+
+        return $stmt;
+    }
+
+    public function lastInsertId()
+    {
+        return $this->pdo->lastInsertId();
+    }
+
+    public function executeQuery($query, $params = array())
+    {
+        $this->connect();
+
+        if ($params) {
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute($params);
+        } else {
+            $stmt = $this->pdo->query($query);
+        }
+
+        return $stmt;
+    }
+
+    public function errorCode()
+    {
+        $this->connect();
+        return $this->pdo->errorCode();
+    }
+
+    public function errorInfo()
+    {
+        $this->connect();
+        return $this->pdo->errorInfo();
     }
 
     /**
@@ -65,26 +189,22 @@ class Db extends AbstractWidget
 
     public function prepareQuery($table, $where)
     {
-        $query = $this->widget
-            ->dbal()
-            ->createQueryBuilder()
-            ->select('*')
-            ->from($table, 't');
+        $params = array();
+        $query = "SELECT * FROM $table ";
 
         if (is_array($where)) {
+            $wheres = array();
             foreach ($where as $key => $value) {
-                $query
-                    ->andWhere($key . ' = :' . $key)
-                    ->setParameter($key, $value);
+                $wheres[] = $key . ' = ?';
             }
+            $query .= "WHERE " . implode(' AND ', $wheres);
+            $params = array_values($where);
         } else {
-            $query
-                ->where('id = :id')
-                ->setParameter('id', $where);
+            $query .= "WHERE id = :id";
+            $params = array(":id" => $where);
         }
 
-        $data = $query
-            ->execute();
+        $data = $this->executeQuery($query, $params);
 
         return $data;
     }

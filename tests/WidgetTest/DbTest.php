@@ -9,15 +9,9 @@ class DbTest extends TestCase
 {
     public function setUp()
     {
-        if (!class_exists(('\Doctrine\DBAL\DriverManager'))) {
-            $this->markTestSkipped('doctrine\dbal is required');
-            return;
-        }
-
         parent::setUp();
 
-        /* @var $db \Doctrine\DBAL\Connection */
-        $db = $this->dbal();
+        $db = $this->db;
 
         $db->query("CREATE TABLE groups (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
         $db->query("CREATE TABLE users (id INTEGER NOT NULL, group_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
