@@ -31,7 +31,7 @@ return Widget::create(array(
     // Database Widget Configuration
     'dbal' => array(
         'driver' => 'pdo_sqlite',
-        'path' => 'test.sqlite'
+        'memory' => true
     ),
     'mysqlCache' => array(
         'deps' => array(
