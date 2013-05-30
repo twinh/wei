@@ -265,7 +265,7 @@ class Db extends AbstractWidget
 
     public function __call($name, $args)
     {
-        return call_user_func_array(array($this->getTable($name), 'find'), $args);
+        return $this->find($this->camelCaseToUnderscore($name), $args[0]);
     }
 
     public function camelCaseToUnderscore($name)
@@ -293,6 +293,21 @@ class Db extends AbstractWidget
     {
 
     }
+
+    public function from()
+    {
+
+    }
+
+    public function select()
+    {
+
+    }
+}
+
+class QueryBuilder
+{
+
 }
 
 /**
@@ -323,6 +338,13 @@ class Table extends  AbstractWidget
     {
         $this->table = $table;
         return $this;
+    }
+
+    public function create($data, $id = null)
+    {
+        if ($id) {
+
+        }
     }
 
     public function toArray()
