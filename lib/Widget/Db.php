@@ -277,9 +277,7 @@ class Db extends AbstractWidget
 
     public function find($table, $id)
     {
-                $data = $this
-            ->prepareSelect($table, $id)
-            ->fetch();
+        $data = $this->select($table, $id);
 
         if ($data) {
             $table = new Table(array(
@@ -299,13 +297,11 @@ class Db extends AbstractWidget
      *
      * @param string $table
      * @param array $where
-     * @return \Widget\Coll
+     * @return Coll
      */
     public function findAll($table, $where = null)
     {
-        $query = $this->prepareSelect($table, $where);
-
-        $data = $query->fetchAll();
+        $data = $this->selectAll($table, $where);
 
         $records = array();
         foreach ($data as $row) {

@@ -152,4 +152,22 @@ class DbTest extends TestCase
 
         $this->assertEquals('save', $user->name);
     }
+
+    public function testSelect()
+    {
+        $data = $this->db->select('users', 1);
+
+        $this->assertEquals('twin', $data['name']);
+    }
+
+    public function testSelectAll()
+    {
+        $data = $this->db->selectAll('users', array('name' => 'twin'));
+
+        $this->assertCount(1, $data);
+
+        $data = $this->db->selectAll('users');
+
+        $this->assertCount(2, $data);
+    }
 }
