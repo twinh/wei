@@ -123,6 +123,14 @@ class Db extends AbstractWidget
         return $this->executeUpdate($query, array_values($values));
     }
 
+    /**
+     * Executes a UPDATE query
+     *
+     * @param string $table The name of table
+     * @param array $data An associative array containing column-value pairs
+     * @param array $identifier The criteria to search records
+     * @return int The number of affected rows
+     */
     public function update($table, $data, $identifier)
     {
         $set = implode(' = ?, ', array_keys($data)) . ' = ?';
@@ -132,6 +140,20 @@ class Db extends AbstractWidget
         $params = array_merge(array_values($data), array_values($identifier));
 
         return $this->executeUpdate($query, $params);
+    }
+
+    /**
+     * Exeuctes a DELETE query
+     *
+     * @param string $table The name of table
+     * @param array $identifier The criteria to search records
+     * @return int The number of affected rows
+     */
+    public function delete($table, $identifier)
+    {
+        $query = "DELETE FROM $table WHERE " . implode(' = ? AND ', array_keys($identifier)) . ' = ?';
+
+        return $this->executeUpdate($query, array_values($identifier));
     }
 
     /**

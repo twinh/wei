@@ -130,4 +130,13 @@ class DbTest extends TestCase
 
         $this->assertEquals('hello', $user->name);
     }
+
+    public function testDelete()
+    {
+        $this->db->delete('users', array('id' => '1'));
+
+        $user = $this->db->find('users', 1);
+
+        $this->assertEmpty($user->toArray());
+    }
 }
