@@ -51,8 +51,18 @@ class Db extends AbstractWidget
 
     protected $afterQuery;
 
+    /**
+     * Whether connected to the database server
+     *
+     * @var bool
+     */
     protected $isConnected = false;
 
+    /**
+     * The name of PDO driver
+     *
+     * @var string
+     */
     private $driver;
 
     public function __invoke()
@@ -60,6 +70,11 @@ class Db extends AbstractWidget
         return $this;
     }
 
+    /**
+     * Connect to the database server
+     *
+     * @return boolean
+     */
     public function connect()
     {
         if ($this->isConnected) {
@@ -81,6 +96,13 @@ class Db extends AbstractWidget
         return true;
     }
 
+    /**
+     * Inserts specified data into table
+     *
+     * @param string $table The name of table
+     * @param array $values An associative array containing column-value pairs
+     * @return int The number of affected rows
+     */
     public function insert($table, array $values)
     {
         $field = implode(', ', array_keys($values));
@@ -95,9 +117,9 @@ class Db extends AbstractWidget
      * Executes an SQL INSERT/UPDATE/DELETE query with the given parameters
      * and returns the number of affected rows
      *
-     * @param $query
+     * @param $query The sql query
      * @param array $params
-     * @return int
+     * @return int The number of affected rows
      */
     public function executeUpdate($query, $params = array())
     {
@@ -140,12 +162,22 @@ class Db extends AbstractWidget
         return $stmt;
     }
 
+    /**
+     * Fetch the SQLSTATE associated with the last operation on the database handle
+     *
+     * @return mixed
+     */
     public function errorCode()
     {
         $this->connect();
         return $this->pdo->errorCode();
     }
 
+    /**
+     * Fetch extended error information associated with the last operation on the database handle
+     *
+     * @return array
+     */
     public function errorInfo()
     {
         $this->connect();
