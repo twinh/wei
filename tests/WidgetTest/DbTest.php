@@ -137,6 +137,6 @@ class DbTest extends TestCase
 
         $user = $this->db->find('users', 1);
 
-        $this->assertEmpty($user->toArray());
+        $this->assertFalse($user);
     }
 }

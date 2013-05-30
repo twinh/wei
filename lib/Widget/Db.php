@@ -292,14 +292,17 @@ class Db extends AbstractWidget
         $data = $this->prepareQuery($table, $id)
             ->fetch();
 
-        $table = new Table(array(
-            'widget' => $this->widget,
-            'db' => $this,
-            'table' => $table,
-            'data' => $data ?: array()
-        ));
-
-        return $table;
+        if ($data) {
+            $table = new Table(array(
+                'widget' => $this->widget,
+                'db' => $this,
+                'table' => $table,
+                'data' => $data ?: array()
+            ));
+            return $table;
+        } else {
+            return $data;
+        }
     }
 
     /**
