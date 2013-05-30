@@ -113,32 +113,28 @@ class Db extends AbstractWidget
         return $result;
     }
 
-    public function query($sql)
-    {
-        $this->connect();
-
-        $stmt = $this->pdo->query($sql);
-        //$this->pdo->query($sql);
-        //$stmt = $this->pdo->prepare($sql);
-        //$stmt->execute();
-
-        return $stmt;
-    }
-
     public function lastInsertId()
     {
         return $this->pdo->lastInsertId();
     }
 
-    public function executeQuery($query, $params = array())
+    public function query($query, $params = array())
     {
         $this->connect();
+
+        if ($this->beforeQuery) {
+            call_user_func_array($this->beforeQuery, array($query, $params, $this));
+        }
 
         if ($params) {
             $stmt = $this->pdo->prepare($query);
             $stmt->execute($params);
         } else {
             $stmt = $this->pdo->query($query);
+        }
+
+        if ($this->afterQuery) {
+            call_user_func_array($this->afterQuery, array($this));
         }
 
         return $stmt;
@@ -204,7 +200,7 @@ class Db extends AbstractWidget
             $params = array(":id" => $where);
         }
 
-        $data = $this->executeQuery($query, $params);
+        $data = $this->query($query, $params);
 
         return $data;
     }
