@@ -278,7 +278,7 @@ class Db extends AbstractWidget
             }
             $query .= "WHERE " . implode(' AND ', $wheres);
             $params = array_values($where);
-        } else {
+        } elseif ($where !== null) {
             $query .= "WHERE id = :id";
             $params = array(":id" => $where);
         }
@@ -507,7 +507,7 @@ class Table extends  AbstractWidget
     }
 }
 
-class Coll extends  \ArrayObject
+class Coll extends \ArrayObject
 {
     public function toArray()
     {
