@@ -99,6 +99,7 @@ class Db extends AbstractWidget
         $this->pdo = new PDO($this->dsn, $this->user, $this->password);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->pdo->setAttribute(PDO::ATTR_STRINGIFY_FETCHES, true);
+        $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
         $this->driver = $this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
 
@@ -246,7 +247,7 @@ class Db extends AbstractWidget
      * @param array $where
      * @return \Widget\Coll
      */
-    public function findAll($table, $where, $orderBy = null, $limit = null, $offset = null)
+    public function findAll($table, $where = null, $orderBy = null, $limit = null, $offset = null)
     {
         $query = $this->prepareQuery($table, $where);
 
@@ -356,6 +357,14 @@ class Db extends AbstractWidget
     {
 
     }
+
+    public function getColumns($table)
+    {
+        if (isset($this->tables[$table]['columns'])) {
+            return $this->tables[$table]['columns'];
+        }
+        return false;
+    }
 }
 
 class QueryBuilder
@@ -404,7 +413,22 @@ class Table extends  AbstractWidget
     {
         $data && $this->fromArray($data);
 
-        return $this->db->insert($this->table, $this->data);
+        $dbData = array();
+        $columns = $this->db->getColumns($this->table);
+        if ($columns) {
+            foreach ($data as $field => $value) {
+                if (isset($columns[$field])) {
+                    $dbData[$columns[$field]] = $value;
+                } else {
+                    $dbData[$field] = $value;
+                }
+            }
+        } else {
+            $dbData = $this->data;
+        }
+
+
+        return $this->db->insert($this->table, $dbData);
     }
 
     public function toArray()
@@ -432,6 +456,28 @@ class Table extends  AbstractWidget
         if (isset($this->data[$field])) {
             unset($this->data[$field]);
         }
+
+        return $this;
+    }
+
+    public function setData($data)
+    {
+        $columns = $this->db->getColumns($this->table);
+        if ($columns) {
+            $dbData = array();
+            $columns = array_flip($columns);
+            foreach ($data as $column => $value) {
+                if (isset($columns[$column])) {
+                    $dbData[$columns[$column]] = $value;
+                } else {
+                    $dbData[$column] = $value;
+                }
+            }
+            $this->data = $dbData;
+        } else {
+            $this->data = $data;
+        }
+        return $this;
     }
 
     public function __get($name)
@@ -458,11 +504,6 @@ class Table extends  AbstractWidget
                 $db->getSingular($this->table) . '_id' => $this->data['id']
             ));
         }
-    }
-
-    public function __call($name, $args)
-    {
-
     }
 }
 
