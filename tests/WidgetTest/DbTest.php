@@ -139,4 +139,17 @@ class DbTest extends TestCase
 
         $this->assertFalse($user);
     }
+
+    public function testRecordSave()
+    {
+        $this->db->users->save(array(
+            'group_id' => '1',
+            'name' => 'save',
+            'address' => 'save'
+        ));
+
+        $user = $this->db->find('users', array('name' => 'save'));
+
+        $this->assertEquals('save', $user->name);
+    }
 }

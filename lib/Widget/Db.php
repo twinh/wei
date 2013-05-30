@@ -400,6 +400,13 @@ class Table extends  AbstractWidget
         }
     }
 
+    public function save($data = array())
+    {
+        $data && $this->fromArray($data);
+
+        return $this->db->insert($this->table, $this->data);
+    }
+
     public function toArray()
     {
         $data = array();
