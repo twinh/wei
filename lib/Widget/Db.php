@@ -155,6 +155,44 @@ class Db extends AbstractWidget
     }
 
     /**
+     * Executes a SELECT query and return the first result
+     *
+     * @param string $table The name of table
+     * @param string|array $value The criteria to search record
+     * @param string $column The table column to search
+     * @return array
+     */
+    public function select($table, $value, $column = 'id')
+    {
+        $data = $this->selectAll($table, $value, $column, 1);
+        return $data ? $data[0] : false;
+    }
+
+    /**
+     * Executes a SELECT query and return all results
+     *
+     * @param string $table The name of table
+     * @param string|array $value The criteria to search record
+     * @param string $column The table column to search
+     * @return array
+     */
+    public function selectAll($table, $where = null, $column = 'id')
+    {
+        $params = array();
+        $query = "SELECT * FROM $table ";
+
+        if (is_array($where)) {
+            $query .= "WHERE " . implode(' = ? AND ', array_keys($where)) . ' = ?';
+            $params = array_values($where);
+        } elseif ($where !== null) {
+            $query .= "WHERE $column = :field";
+            $params = array('field' => $where);
+        }
+
+        return $this->query($query, $params)->fetchAll();
+    }
+
+    /**
      * Executes an SQL INSERT/UPDATE/DELETE query with the given parameters
      * and returns the number of affected rows
      *
@@ -237,6 +275,25 @@ class Db extends AbstractWidget
         ));
     }
 
+    public function find($table, $id)
+    {
+                $data = $this
+            ->prepareSelect($table, $id)
+            ->fetch();
+
+        if ($data) {
+            $table = new Table(array(
+                'widget' => $this->widget,
+                'db' => $this,
+                'table' => $table,
+                'data' => $data ?: array()
+            ));
+            return $table;
+        } else {
+            return $data;
+        }
+    }
+
     /**
      * Fetch data by specified
      *
@@ -244,9 +301,9 @@ class Db extends AbstractWidget
      * @param array $where
      * @return \Widget\Coll
      */
-    public function findAll($table, $where = null, $orderBy = null, $limit = null, $offset = null)
+    public function findAll($table, $where = null)
     {
-        $query = $this->prepareQuery($table, $where);
+        $query = $this->prepareSelect($table, $where);
 
         $data = $query->fetchAll();
 
@@ -261,46 +318,6 @@ class Db extends AbstractWidget
         }
 
         return new Coll($records);
-    }
-
-    public function prepareQuery($table, $where)
-    {
-        $params = array();
-        $query = "SELECT * FROM $table ";
-
-        if (is_array($where)) {
-            $wheres = array();
-            foreach ($where as $key => $value) {
-                $wheres[] = $key . ' = ?';
-            }
-            $query .= "WHERE " . implode(' AND ', $wheres);
-            $params = array_values($where);
-        } elseif ($where !== null) {
-            $query .= "WHERE id = :id";
-            $params = array(":id" => $where);
-        }
-
-        $data = $this->query($query, $params);
-
-        return $data;
-    }
-
-    public function find($table, $id)
-    {
-        $data = $this->prepareQuery($table, $id)
-            ->fetch();
-
-        if ($data) {
-            $table = new Table(array(
-                'widget' => $this->widget,
-                'db' => $this,
-                'table' => $table,
-                'data' => $data ?: array()
-            ));
-            return $table;
-        } else {
-            return $data;
-        }
     }
 
     /**
@@ -346,11 +363,6 @@ class Db extends AbstractWidget
     }
 
     public function from()
-    {
-
-    }
-
-    public function select()
     {
 
     }
