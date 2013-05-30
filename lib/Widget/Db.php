@@ -47,8 +47,18 @@ class Db extends AbstractWidget
 
     protected $tables = array();
 
+    /**
+     * The callback triggers before execute query
+     *
+     * @var callback
+     */
     protected $beforeQuery;
 
+    /**
+     * The callback triggers after execute query
+     *
+     * @var callback
+     */
     protected $afterQuery;
 
     /**
@@ -111,6 +121,17 @@ class Db extends AbstractWidget
         $query = "INSERT INTO $table ($field) VALUES ($placeholder)";
 
         return $this->executeUpdate($query, array_values($values));
+    }
+
+    public function update($table, $data, $identifier)
+    {
+        $set = implode(' = ?, ', array_keys($data)) . ' = ?';
+        $where = implode(' = ? AND ', array_keys($identifier)) . ' = ?';
+
+        $query = "UPDATE $table SET $set WHERE $where";
+        $params = array_merge(array_values($data), array_values($identifier));
+
+        return $this->executeUpdate($query, $params);
     }
 
     /**
@@ -196,7 +217,14 @@ class Db extends AbstractWidget
         ));
     }
 
-    public function findAll($table, $where)
+    /**
+     * Fetch data by specified
+     *
+     * @param string $table
+     * @param array $where
+     * @return \Widget\Coll
+     */
+    public function findAll($table, $where, $orderBy = null, $limit = null, $offset = null)
     {
         $query = $this->prepareQuery($table, $where);
 

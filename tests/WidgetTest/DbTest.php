@@ -121,4 +121,13 @@ class DbTest extends TestCase
         $this->assertEquals('my first post', $firstPost->name);
         $this->assertEquals('1', $firstPost->userId);
     }
+
+    public function testUpdate()
+    {
+        $this->db->update('users', array('name' => 'hello'), array('id' => '1'));
+
+        $user = $this->db->find('users', '1');
+
+        $this->assertEquals('hello', $user->name);
+    }
 }
