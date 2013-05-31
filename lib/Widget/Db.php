@@ -45,8 +45,6 @@ class Db extends AbstractWidget
      */
     protected $pdo;
 
-    protected $tables = array();
-
     /**
      * The callback triggers before execute query
      *
@@ -74,6 +72,20 @@ class Db extends AbstractWidget
      * @var string
      */
     private $driver;
+
+    /**
+     * The database table definitions
+     *
+     * @var array
+     */
+    protected $tables = array();
+
+    /**
+     * The record class when instance a new record object
+     *
+     * @var string
+     */
+    protected $recordClass = '\Widget\Table';
 
     public function __invoke()
     {
@@ -301,6 +313,23 @@ class Db extends AbstractWidget
     }
 
     /**
+     * Create a new instance of a SQL query builder.
+     *
+     * @return Db\QueryBuilder
+     */
+    public function createQueryBuilder()
+    {
+        return new Db\QueryBuilder($this);
+    }
+
+    public function from($table, $alias = null)
+    {
+        return $this
+            ->createQueryBuilder()
+            ->from($table, $alias ?: $table);
+    }
+
+    /**
      * Return a new table instance
      */
     public function getTable($name)
@@ -315,7 +344,7 @@ class Db extends AbstractWidget
     public function find($table, $id)
     {
         $data = $this->select($table, $id);
-        $class = $this->getTableClass($table) ?: '\Widget\Table';
+        $class = $this->getTableClass($table);
 
         if ($data) {
             $table = new $class(array(
@@ -392,20 +421,22 @@ class Db extends AbstractWidget
         return rtrim($name, 's');
     }
 
+    /**
+     * Returns the record class name
+     *
+     * @param string $name The name of table
+     * @return string
+     */
     public function getTableClass($name)
     {
         if (isset($this->tables[$name]['class'])) {
             return $this->tables[$name]['class'];
+        } else {
+            return $this->recordClass;
         }
-        return false;
     }
 
     public function getPlural()
-    {
-
-    }
-
-    public function from()
     {
 
     }
@@ -417,11 +448,6 @@ class Db extends AbstractWidget
         }
         return false;
     }
-}
-
-class QueryBuilder
-{
-
 }
 
 /**

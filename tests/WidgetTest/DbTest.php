@@ -179,6 +179,14 @@ class DbTest extends TestCase
 
         $data = $this->db->fetch("SELECT * FROM users WHERE name = ?", 'notFound');
         $this->assertFalse($data);
+
+        $data = $this->db->fetch("SELECT * FROM users WHERE name = :name", array('name' => 'twin'));
+        $this->assertInternalType('array', $data);
+        $this->assertEquals('twin', $data['name']);
+
+        $data = $this->db->fetch("SELECT * FROM users WHERE name = :name", array(':name' => 'twin'));
+        $this->assertInternalType('array', $data);
+        $this->assertEquals('twin', $data['name']);
     }
 
     public function testFetchAll()
