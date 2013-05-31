@@ -220,7 +220,7 @@ class Db extends AbstractWidget
      * Executes an SQL INSERT/UPDATE/DELETE query with the given parameters
      * and returns the number of affected rows
      *
-     * @param $query The sql query
+     * @param string $query The SQL query
      * @param array $params
      * @return int The number of affected rows
      */
@@ -238,6 +238,11 @@ class Db extends AbstractWidget
         return $result;
     }
 
+    /**
+     * Returns the ID of the last inserted row or sequence value
+     *
+     * @return string
+     */
     public function lastInsertId()
     {
         return $this->pdo->lastInsertId();
@@ -253,7 +258,7 @@ class Db extends AbstractWidget
 
         if ($params) {
             $stmt = $this->pdo->prepare($query);
-            $stmt->execute($params);
+            $stmt->execute((array)$params);
         } else {
             $stmt = $this->pdo->query($query);
         }
@@ -303,7 +308,7 @@ class Db extends AbstractWidget
     public function find($table, $id)
     {
         $data = $this->select($table, $id);
-        $class = $this->getTableClass($table) ?: 'Table';
+        $class = $this->getTableClass($table) ?: '\Widget\Table';
 
         if ($data) {
             $table = new $class(array(
@@ -328,7 +333,7 @@ class Db extends AbstractWidget
     public function findAll($table, $where = null)
     {
         $data = $this->selectAll($table, $where);
-        $class = $this->getTableClass($table) ?: 'Table';
+        $class = $this->getTableClass($table) ?: '\Widget\Table';
 
         $records = array();
         foreach ($data as $row) {

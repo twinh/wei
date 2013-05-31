@@ -170,4 +170,22 @@ class DbTest extends TestCase
 
         $this->assertCount(2, $data);
     }
+
+    public function testFetch()
+    {
+        $data = $this->db->fetch("SELECT * FROM users WHERE name = ?", 'twin');
+        $this->assertInternalType('array', $data);
+        $this->assertEquals('twin', $data['name']);
+
+        $data = $this->db->fetch("SELECT * FROM users WHERE name = ?", 'notFound');
+        $this->assertFalse($data);
+    }
+
+    public function testFetchAll()
+    {
+        $data = $this->db->fetchAll("SELECT * FROM users WHERE group_id = ?", '1');
+
+        $this->assertInternalType('array', $data);
+        $this->assertEquals('1', $data[0]['group_id']);
+    }
 }
