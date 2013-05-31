@@ -15,7 +15,7 @@ use PDO;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Db extends AbstractWidget
+class Db2 extends AbstractWidget
 {
     /**
      * The database username
@@ -141,7 +141,7 @@ class Db extends AbstractWidget
     }
 
     /**
-     * Exeuctes a DELETE query
+     * Executes a DELETE query
      *
      * @param string $table The name of table
      * @param array $identifier The criteria to search records
@@ -160,7 +160,7 @@ class Db extends AbstractWidget
      * @param string $table The name of table
      * @param string|array $value The criteria to search record
      * @param string $column The table column to search
-     * @return array
+     * @return array An associative array containing column-value pairs
      */
     public function select($table, $value, $column = 'id')
     {
@@ -172,11 +172,12 @@ class Db extends AbstractWidget
      * Executes a SELECT query and return all results
      *
      * @param string $table The name of table
-     * @param string|array $value The criteria to search record
+     * @param bool $where
      * @param string $column The table column to search
+     * @internal param array|string $value The criteria to search record
      * @return array
      */
-    public function selectAll($table, $where = null, $column = 'id')
+    public function selectAll($table, $where = false, $column = 'id')
     {
         $params = array();
         $query = "SELECT * FROM $table ";
@@ -184,7 +185,7 @@ class Db extends AbstractWidget
         if (is_array($where)) {
             $query .= "WHERE " . implode(' = ? AND ', array_keys($where)) . ' = ?';
             $params = array_values($where);
-        } elseif ($where !== null) {
+        } elseif ($where !== false) {
             $query .= "WHERE $column = :field";
             $params = array('field' => $where);
         }
@@ -278,9 +279,10 @@ class Db extends AbstractWidget
     public function find($table, $id)
     {
         $data = $this->select($table, $id);
+        $class = $this->getTableClass($table) ?: 'Table';
 
         if ($data) {
-            $table = new Table(array(
+            $table = new $class(array(
                 'widget' => $this->widget,
                 'db' => $this,
                 'table' => $table,
@@ -302,10 +304,11 @@ class Db extends AbstractWidget
     public function findAll($table, $where = null)
     {
         $data = $this->selectAll($table, $where);
+        $class = $this->getTableClass($table) ?: 'Table';
 
         $records = array();
         foreach ($data as $row) {
-            $records[] = new Table(array(
+            $records[] = new $class(array(
                 'widget' => $this->widget,
                 'db' => $this,
                 'table' => $table,
@@ -351,6 +354,14 @@ class Db extends AbstractWidget
             }
         }
         return rtrim($name, 's');
+    }
+
+    public function getTableClass($name)
+    {
+        if (isset($this->tables[$name]['class'])) {
+            return $this->tables[$name]['class'];
+        }
+        return false;
     }
 
     public function getPlural()
