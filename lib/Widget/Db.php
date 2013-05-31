@@ -105,7 +105,7 @@ class Db extends AbstractWidget
     }
 
     /**
-     * Inserts specified data into table
+     * Executes an INSERT query to insert specified data into table
      *
      * @param string $table The name of table
      * @param array $values An associative array containing column-value pairs
@@ -141,7 +141,7 @@ class Db extends AbstractWidget
     }
 
     /**
-     * Exeuctes a DELETE query
+     * Executes a DELETE query
      *
      * @param string $table The name of table
      * @param array $identifier The criteria to search records
@@ -172,8 +172,9 @@ class Db extends AbstractWidget
      * Executes a SELECT query and return all results
      *
      * @param string $table The name of table
-     * @param string|array $value The criteria to search record
+     * @param bool $where
      * @param string $column The table column to search
+     * @internal param array|string $value The criteria to search record
      * @return array
      */
     public function selectAll($table, $where = false, $column = 'id')
@@ -195,9 +196,9 @@ class Db extends AbstractWidget
     /**
      * Executes a query and returns the first result
      *
-     * @param type $sql
-     * @param type $params
-     * @return type
+     * @param string $sql The SQL query
+     * @param array|string $params The query parameters
+     * @return array|false Return an array or false when no result found
      */
     public function fetch($sql, $params = array())
     {
@@ -207,9 +208,9 @@ class Db extends AbstractWidget
     /**
      * Executes a query and returns all results
      *
-     * @param string $sql
-     * @param type $params
-     * @return type
+     * @param string $sql The SQL query
+     * @param array $params The query parameters
+     * @return array|false Return an array or false when no result found
      */
     public function fetchAll($sql, $params = array())
     {
@@ -220,20 +221,20 @@ class Db extends AbstractWidget
      * Executes an SQL INSERT/UPDATE/DELETE query with the given parameters
      * and returns the number of affected rows
      *
-     * @param string $query The SQL query
-     * @param array $params
+     * @param string $sql The SQL query
+     * @param array $params The query parameters
      * @return int The number of affected rows
      */
-    public function executeUpdate($query, $params = array())
+    public function executeUpdate($sql, $params = array())
     {
         $this->connect();
 
         if ($params) {
-            $stmt = $this->pdo->prepare($query);
+            $stmt = $this->pdo->prepare($sql);
             $stmt->execute($params);
             $result = $stmt->rowCount();
         } else {
-            $result = $this->pdo->exec($query);
+            $result = $this->pdo->exec($sql);
         }
         return $result;
     }
@@ -248,6 +249,13 @@ class Db extends AbstractWidget
         return $this->pdo->lastInsertId();
     }
 
+    /**
+     * Executes an SQL statement, returning a result set as a PDOStatement object
+     *
+     * @param string $query The SQL query
+     * @param array $params The SQL parameters
+     * @return \PDOStatement
+     */
     public function query($query, $params = array())
     {
         $this->connect();
@@ -269,7 +277,6 @@ class Db extends AbstractWidget
 
         return $stmt;
     }
-
 
     /**
      * Fetch the SQLSTATE associated with the last operation on the database handle
