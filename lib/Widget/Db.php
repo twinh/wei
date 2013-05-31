@@ -15,7 +15,7 @@ use PDO;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Db2 extends AbstractWidget
+class Db extends AbstractWidget
 {
     /**
      * The database username
@@ -141,7 +141,7 @@ class Db2 extends AbstractWidget
     }
 
     /**
-     * Executes a DELETE query
+     * Exeuctes a DELETE query
      *
      * @param string $table The name of table
      * @param array $identifier The criteria to search records
@@ -172,9 +172,8 @@ class Db2 extends AbstractWidget
      * Executes a SELECT query and return all results
      *
      * @param string $table The name of table
-     * @param bool $where
+     * @param string|array $value The criteria to search record
      * @param string $column The table column to search
-     * @internal param array|string $value The criteria to search record
      * @return array
      */
     public function selectAll($table, $where = false, $column = 'id')
@@ -191,6 +190,30 @@ class Db2 extends AbstractWidget
         }
 
         return $this->query($query, $params)->fetchAll();
+    }
+
+    /**
+     * Executes a query and returns the first result
+     *
+     * @param type $sql
+     * @param type $params
+     * @return type
+     */
+    public function fetch($sql, $params = array())
+    {
+        return $this->query($sql, $params)->fetch();
+    }
+
+    /**
+     * Executes a query and returns all results
+     *
+     * @param string $sql
+     * @param type $params
+     * @return type
+     */
+    public function fetchAll($sql, $params = array())
+    {
+        return $this->query($sql, $params)->fetchAll();
     }
 
     /**
@@ -241,6 +264,7 @@ class Db2 extends AbstractWidget
 
         return $stmt;
     }
+
 
     /**
      * Fetch the SQLSTATE associated with the last operation on the database handle
