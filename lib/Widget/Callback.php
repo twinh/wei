@@ -12,7 +12,7 @@ use \Closure;
 use \SimpleXMLElement;
 
 /**
- * A widget handles WeChat(Weixin) callback message
+ * A widget handles WeChat(WeiXin) callback message
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://mp.weixin.qq.com/wiki/index.php?title=%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3%E6%8C%87%E5%8D%97
@@ -353,7 +353,7 @@ class Callback extends AbstractWidget
      * Generate text message for response
      *
      * @param string $content
-     * @param bool $mark Whenter mark the message or not
+     * @param bool $mark Whether mark the message or not
      * @return \SimpleXMLElement
      */
     public function sendText($content, $mark = null)
@@ -372,7 +372,7 @@ class Callback extends AbstractWidget
      * @param string $description The description display blow the title
      * @param string $url The music URL for player
      * @param string $hqUrl The HQ music URL for player when user in WIFI
-     * @param string $mark Whenter mark the message or not
+     * @param string $mark Whether mark the message or not
      * @return \SimpleXMLElement
      */
     public function sendMusic($title, $description, $url, $hqUrl = null, $mark = null)
@@ -683,8 +683,8 @@ class Callback extends AbstractWidget
      * Generate message for response
      *
      * @param string $type The type of message
-     * @param \SimpleXMLElement $body The body of message
-     * @param bool $mark $mark Whenter mark the message or not
+     * @param \SimpleXMLElement $xml The xml object
+     * @param null|bool $mark $mark Whether mark the message or not
      * @return \SimpleXMLElement
      */
     protected function send($type, SimpleXMLElement $xml, $mark = null)
