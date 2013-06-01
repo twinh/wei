@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A base
+ * A base database record class
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

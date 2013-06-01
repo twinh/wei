@@ -9,6 +9,7 @@
 namespace Widget;
 
 use PDO;
+use Widget\Db\Collection;
 
 /**
  * A database widget that compatible with Doctrine DBAL
@@ -81,11 +82,18 @@ class Db extends AbstractWidget
     protected $tables = array();
 
     /**
-     * The record class when instance a new record object
+     * The base record class when instance a new record object
      *
      * @var string
      */
     protected $recordClass = '\Widget\Record';
+
+    /**
+     * The record namespace
+     *
+     * @var string
+     */
+    protected $recordNamespace;
 
     public function __invoke()
     {
@@ -400,7 +408,7 @@ class Db extends AbstractWidget
      *
      * @param string $table
      * @param array $where
-     * @return Coll
+     * @return Collection
      */
     public function findAll($table, $where = null)
     {
@@ -411,7 +419,7 @@ class Db extends AbstractWidget
             $records[] = $this->create($table, $row);
         }
 
-        return new Coll($records);
+        return new Collection($records);
     }
 
     /**
@@ -482,16 +490,5 @@ class Db extends AbstractWidget
             return $this->tables[$table]['columns'];
         }
         return false;
-    }
-}
-
-class Coll extends \ArrayObject
-{
-    public function toArray()
-    {
-        foreach ($this as $record) {
-            $data[] = $record->toArray();
-        }
-        return $data;
     }
 }

@@ -112,7 +112,7 @@ class DbTest extends TestCase
         // Relation one-to-many
         $posts = $user->posts;
 
-        $this->assertInstanceOf('\Widget\Coll', $posts);
+        $this->assertInstanceOf('\Widget\Db\Collection', $posts);
 
         $firstPost = $posts[0];
         $this->assertInstanceOf('\Widget\Record', $firstPost);
