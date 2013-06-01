@@ -247,6 +247,10 @@ class Db extends AbstractWidget
     {
         $this->connect();
 
+        if ($this->beforeQuery) {
+            call_user_func_array($this->beforeQuery, array($sql, $params, $this));
+        }
+
         if ($params) {
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute($params);
@@ -254,7 +258,41 @@ class Db extends AbstractWidget
         } else {
             $result = $this->pdo->exec($sql);
         }
+
+        if ($this->afterQuery) {
+            call_user_func_array($this->afterQuery, array($this));
+        }
+
         return $result;
+    }
+
+    /**
+     * Executes an SQL statement, returning a result set as a PDOStatement object
+     *
+     * @param string $sql The SQL query
+     * @param array $params The SQL parameters
+     * @return \PDOStatement
+     */
+    public function query($sql, $params = array())
+    {
+        $this->connect();
+
+        if ($this->beforeQuery) {
+            call_user_func_array($this->beforeQuery, array($sql, $params, $this));
+        }
+
+        if ($params) {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute((array)$params);
+        } else {
+            $stmt = $this->pdo->query($sql);
+        }
+
+        if ($this->afterQuery) {
+            call_user_func_array($this->afterQuery, array($this));
+        }
+
+        return $stmt;
     }
 
     /**
@@ -265,35 +303,6 @@ class Db extends AbstractWidget
     public function lastInsertId()
     {
         return $this->pdo->lastInsertId();
-    }
-
-    /**
-     * Executes an SQL statement, returning a result set as a PDOStatement object
-     *
-     * @param string $query The SQL query
-     * @param array $params The SQL parameters
-     * @return \PDOStatement
-     */
-    public function query($query, $params = array())
-    {
-        $this->connect();
-
-        if ($this->beforeQuery) {
-            call_user_func_array($this->beforeQuery, array($query, $params, $this));
-        }
-
-        if ($params) {
-            $stmt = $this->pdo->prepare($query);
-            $stmt->execute((array)$params);
-        } else {
-            $stmt = $this->pdo->query($query);
-        }
-
-        if ($this->afterQuery) {
-            call_user_func_array($this->afterQuery, array($this));
-        }
-
-        return $stmt;
     }
 
     /**
