@@ -330,33 +330,35 @@ class Db extends AbstractWidget
     }
 
     /**
-     * Return a new table instance
+     * Create a new record instance
+     *
+     * @param $table
+     * @param $data
+     * @return Table
      */
-    public function getTable($name)
+    public function create($table, $data = array())
     {
+        $class = $this->getRecordClass($table);
         return  new Table(array(
-            'widget' => $this->widget,
-            'db' => $this,
-            'table' => $this->camelCaseToUnderscore($name),
+            'widget'    => $this->widget,
+            'db'        => $this,
+            'table'     => $this->camelCaseToUnderscore($table),
+            'data'      => $data
         ));
     }
 
+    /**
+     *
+     *
+     * @param $table
+     * @param $id
+     * @return Table
+     */
     public function find($table, $id)
     {
         $data = $this->select($table, $id);
-        $class = $this->getTableClass($table);
 
-        if ($data) {
-            $table = new $class(array(
-                'widget' => $this->widget,
-                'db' => $this,
-                'table' => $table,
-                'data' => $data ?: array()
-            ));
-            return $table;
-        } else {
-            return $data;
-        }
+        return $data ? $this->create($table, $data) : false;
     }
 
     /**
@@ -369,16 +371,10 @@ class Db extends AbstractWidget
     public function findAll($table, $where = null)
     {
         $data = $this->selectAll($table, $where);
-        $class = $this->getTableClass($table) ?: '\Widget\Table';
 
         $records = array();
         foreach ($data as $row) {
-            $records[] = new $class(array(
-                'widget' => $this->widget,
-                'db' => $this,
-                'table' => $table,
-                'data' => $row
-            ));
+            $records[] = $this->create($table, $row);
         }
 
         return new Coll($records);
@@ -392,7 +388,7 @@ class Db extends AbstractWidget
      */
     public function __get($name)
     {
-        return $this->getTable($name);
+        return $this->create($name);
     }
 
     public function __call($name, $args)
@@ -411,6 +407,11 @@ class Db extends AbstractWidget
             $this->tables[$name]['table'] : $name . 's';
     }
 
+    public function getTableRelation($table)
+    {
+        return isset($this->tables[$table]['relations']) ? $this->tables[$table]['relations'] : array();
+    }
+
     public function getSingular($name)
     {
         foreach ($this->tables as $table => $options) {
@@ -427,7 +428,7 @@ class Db extends AbstractWidget
      * @param string $name The name of table
      * @return string
      */
-    public function getTableClass($name)
+    public function getRecordClass($name)
     {
         if (isset($this->tables[$name]['class'])) {
             return $this->tables[$name]['class'];
@@ -562,15 +563,20 @@ class Table extends  AbstractWidget
     {
         $db = $this->db;
         $fieldName = $this->db->camelCaseToUnderscore($name);
+        $relations = $this->db->getTableRelation($this->table);
 
         if (isset($this->data[$fieldName])) {
             return $this->data[$fieldName];
-            // has one
+        } elseif (isset($relations[$name])) {
+            return $this->data[$fieldName] = $this->db->find($relations[$name]['table'], array(
+                'id' => $this->data[$relations[$name]['column']]
+            ));
+        // has one
         } elseif (isset($this->data[$name . '_id'])) {
             return $this->data[$fieldName] = $this->db->find($db->getTableByField($name), array(
                 'id' => $this->data[$name . '_id']
             ));
-            // one to many
+        // one to many
         } elseif (substr($name, -1) == 's') {
             $table = substr($name, 0, -1);
             return $this->data[$fieldName] = $this->db->findAll($db->getTableByField($table), array(

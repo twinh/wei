@@ -74,7 +74,7 @@ class DbTest extends TestCase
 
     public function testGetTable()
     {
-        $this->assertInstanceOf('\Widget\Table', $this->db->getTable('users'));
+        $this->assertInstanceOf('\Widget\Table', $this->db->create('users'));
 
         $this->assertInstanceOf('\Widget\Table', $this->db->users);
     }
