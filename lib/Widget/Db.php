@@ -308,11 +308,17 @@ class Db extends AbstractWidget
             call_user_func_array($this->beforeQuery, array($sql, $params, $this));
         }
 
-        if ($params) {
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute((array)$params);
-        } else {
-            $stmt = $this->pdo->query($sql);
+        try {
+            if ($params) {
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute((array)$params);
+            } else {
+                $stmt = $this->pdo->query($sql);
+            }
+        } catch (\PDOException $e) {
+            $msg = 'An exception occurred while executing "' . $sql . '"';
+            $msg .= ":\n\n". $e->getMessage();
+            throw new \RuntimeException($msg, 0, $e);
         }
 
         if ($this->afterQuery) {
