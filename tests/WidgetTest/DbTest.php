@@ -72,11 +72,11 @@ class DbTest extends TestCase
         ));
     }
 
-    public function testGetTable()
+    public function testGetRecord()
     {
-        $this->assertInstanceOf('\Widget\Table', $this->db->create('users'));
+        $this->assertInstanceOf('\Widget\Record', $this->db->create('users'));
 
-        $this->assertInstanceOf('\Widget\Table', $this->db->users);
+        $this->assertInstanceOf('\Widget\Record', $this->db->users);
     }
 
     public function testGetRecordByPk()
@@ -85,7 +85,7 @@ class DbTest extends TestCase
 
         $user = $db->users('1');
 
-        $this->assertInstanceOf('\Widget\Table', $user);
+        $this->assertInstanceOf('\Widget\Record', $user);
 
         $this->assertEquals('1', $user->id);
         $this->assertEquals('twin', $user->name);
@@ -95,7 +95,7 @@ class DbTest extends TestCase
         // Relation one-to-one
         $post = $user->post;
 
-        $this->assertInstanceOf('\Widget\Table', $post);
+        $this->assertInstanceOf('\Widget\Record', $post);
 
         $this->assertEquals('1', $post->id);
         $this->assertEquals('my first post', $post->name);
@@ -104,7 +104,7 @@ class DbTest extends TestCase
         // Relation belong-to
         $group = $user->group;
 
-        $this->assertInstanceOf('\Widget\Table', $group);
+        $this->assertInstanceOf('\Widget\Record', $group);
 
         $this->assertEquals('1', $group->id);
         $this->assertEquals('vip', $group->name);
@@ -115,7 +115,7 @@ class DbTest extends TestCase
         $this->assertInstanceOf('\Widget\Coll', $posts);
 
         $firstPost = $posts[0];
-        $this->assertInstanceOf('\Widget\Table', $firstPost);
+        $this->assertInstanceOf('\Widget\Record', $firstPost);
 
         $this->assertEquals('1', $firstPost->id);
         $this->assertEquals('my first post', $firstPost->name);
