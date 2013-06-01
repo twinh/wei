@@ -170,13 +170,15 @@ class Db extends AbstractWidget
      * Executes a SELECT query and return the first result
      *
      * @param string $table The name of table
-     * @param string|array $value The criteria to search record
-     * @param string $column The table column to search
+     * @param string|array $where The primary key value or an associative array containing column-value pairs
+     * @param string $select The table columns to select
+     * @internal param array|string $value The criteria to search record
+     * @internal param string $column The table column to search
      * @return array An associative array containing column-value pairs
      */
-    public function select($table, $value, $column = 'id')
+    public function select($table, $where, $select = '*')
     {
-        $data = $this->selectAll($table, $value, $column, 1);
+        $data = $this->selectAll($table, $where, $select, 1);
         return $data ? $data[0] : false;
     }
 
@@ -184,22 +186,26 @@ class Db extends AbstractWidget
      * Executes a SELECT query and return all results
      *
      * @param string $table The name of table
-     * @param bool $where
-     * @param string $column The table column to search
-     * @internal param array|string $value The criteria to search record
+     * @param bool $where The primary key value or an associative array containing column-value pairs
+     * @param string $select The table columns to select
+     * @param int $limit The record number to retrieve
      * @return array
      */
-    public function selectAll($table, $where = false, $column = 'id')
+    public function selectAll($table, $where = false, $select = '*', $limit = null)
     {
         $params = array();
-        $query = "SELECT * FROM $table ";
+        $query = "SELECT $select FROM $table ";
 
         if (is_array($where)) {
             $query .= "WHERE " . implode(' = ? AND ', array_keys($where)) . ' = ?';
             $params = array_values($where);
         } elseif ($where !== false) {
-            $query .= "WHERE $column = :field";
+            $query .= "WHERE id = :field";
             $params = array('field' => $where);
+        }
+
+        if ($limit) {
+            $query .= " LIMIT $limit";
         }
 
         return $this->query($query, $params)->fetchAll();
@@ -381,7 +387,7 @@ class Db extends AbstractWidget
     }
 
     /**
-     * Returns a new table instance, alias of `getTable`
+     * Returns a new table instance, alias of `create`
      *
      * @param string $name
      * @return Table

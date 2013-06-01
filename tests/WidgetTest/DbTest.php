@@ -160,6 +160,15 @@ class DbTest extends TestCase
         $this->assertEquals('twin', $data['name']);
     }
 
+    public function testSelectColumn()
+    {
+        $data = $this->db->select('users', 1, 'id, name');
+
+        $this->assertArrayHasKey('id', $data);
+        $this->assertArrayHasKey('name', $data);
+        $this->assertArrayNotHasKey('group_id', $data);
+    }
+
     public function testSelectAll()
     {
         $data = $this->db->selectAll('users', array('name' => 'twin'));
