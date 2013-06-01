@@ -117,6 +117,25 @@ class Db extends AbstractWidget
     }
 
     /**
+     * Check if has connected to the database server
+     *
+     * @return bool
+     */
+    public function isConnected()
+    {
+        return $this->isConnected;
+    }
+
+    /**
+     * Close the database connection
+     */
+    public function close()
+    {
+        $this->pdo = null;
+        $this->isConnected = false;
+    }
+
+    /**
      * Executes an INSERT query to insert specified data into table
      *
      * @param string $table The name of table
