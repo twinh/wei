@@ -214,8 +214,31 @@ class DbTest extends TestCase
 
     public function testQuery()
     {
-        $user = $this->db('users')->where('name = ?', 'twin')->find();
+        // Pure String Conditions
+        $user = $this->db('users')->where("name = 'twin'")->find();
+        $this->assertEquals('twin', $user->name);
 
+        // ? Conditions
+        $user = $this->db('users')->where('name = ?', 'twin')->find();
+        $this->assertEquals('twin', $user->name);
+
+        $user = $this->db('users')->where('group_id = ? AND name = ?', array('1', 'twin'))->find();
+        $this->assertEquals('1', $user->group_id);
+        $this->assertEquals('twin', $user->name);
+
+        // : Conditions
+        $user = $this->db('users')->where('group_id = :groupId AND name = :name', array(
+            'groupId' => '1',
+            'name' => 'twin'
+        ))->find();
+        $this->assertEquals('1', $user->group_id);
+        $this->assertEquals('twin', $user->name);
+
+        $user = $this->db('users')->where('group_id = :groupId AND name = :name', array(
+            ':groupId' => '1',
+            ':name' => 'twin'
+        ))->find();
+        $this->assertEquals('1', $user->group_id);
         $this->assertEquals('twin', $user->name);
     }
 }

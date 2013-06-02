@@ -713,12 +713,14 @@ class QueryBuilder
      * @param mixed $predicates The restriction predicates.
      * @return QueryBuilder This QueryBuilder instance.
      */
-    public function where($conditions, $params = null, $type = null)
+    public function where($conditions, $params = null, $type = array())
     {
-        if (is_array($params)) {
-            $this->setParameters($params, $type);
-        } else {
-            $this->setParameter(0, $params, $type);
+        if ($params) {
+            if (is_array($params)) {
+                $this->setParameters($params, $type);
+            } else {
+                $this->setParameter(0, $params, $type);
+            }
         }
 
         return $this->add('where', $conditions);
