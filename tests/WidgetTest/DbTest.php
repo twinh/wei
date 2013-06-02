@@ -290,7 +290,7 @@ class DbTest extends TestCase
         $this->assertEquals("SELECT * FROM users u ORDER BY id ASC", $query->getSQL());
         $this->assertEquals('1', $user->id);
 
-        // addOrder
+        // Add order
         $query = $this->db('users')->orderBy('id', 'ASC')->addOrderBy('group_id', 'ASC');
         $user = $query->find();
 
@@ -306,7 +306,7 @@ class DbTest extends TestCase
         $this->assertArrayHasKey('group_id', $user);
         $this->assertArrayNotHasKey('name', $user);
 
-        // addSelect
+        // Add select
         $query = $this->db('users')->select('id')->addSelect('group_id');
         $user = $query->find()->toArray();
 
@@ -314,5 +314,22 @@ class DbTest extends TestCase
         $this->assertArrayHasKey('id', $user);
         $this->assertArrayHasKey('group_id', $user);
         $this->assertArrayNotHasKey('name', $user);
+
+        // Distinct
+        $query = $this->db('users')->select('DISTINCT group_id');
+        $user = $query->find();
+
+        $this->assertEquals("SELECT DISTINCT group_id FROM users u", $query->getSQL());
+        $this->assertEquals('1', $user->group_id);
+
+        // Limit
+        $query = $this->db('users')->limit(2);
+        $users = $query->findAll();
+
+        $this->assertEquals("SELECT * FROM users u LIMIT 2", $query->getSQL());
+        $this->assertCount(2, $users);
+
+        // Offset
+        $query = $this->db('users')->offset();
     }
 }

@@ -20,6 +20,7 @@
 namespace Widget\Db;
 
 use Widget\Db;
+use Widget\Db\Collection;
 
 /**
  * A minimalist version of Doctrine DBAL QueryBuilder
@@ -96,12 +97,12 @@ class QueryBuilder
     /**
      * @var integer The index of the first result to retrieve.
      */
-    private $firstResult = null;
+    private $offset = null;
 
     /**
      * @var integer The maximum number of results to retrieve.
      */
-    private $maxResults = null;
+    private $limit = null;
 
     /**
      * The counter of bound parameters used with {@see bindValue)
@@ -208,19 +209,12 @@ class QueryBuilder
 
         $table = $this->sqlParts['from'][0]['table'];
 
-        $class = $this->connection->getTableClass($table) ?: '\Widget\Table';
-
         $records = array();
         foreach ($data as $row) {
-            $records[] = new $class(array(
-                'widget' => $this->widget,
-                'db' => $this->connection,
-                'table' => $table,
-                'data' => $row
-            ));
+            $records[] = $this->connection->create($table, $row);
         }
 
-        return new \Widget\Coll($records);
+        return new Collection($records);
     }
 
     /**
@@ -341,49 +335,50 @@ class QueryBuilder
     /**
      * Sets the position of the first result to retrieve (the "offset").
      *
-     * @param integer $firstResult The first result to return.
+     * @param integer $offset The first result to return.
      * @return \Doctrine\DBAL\Query\QueryBuilder This QueryBuilder instance.
      */
-    public function setFirstResult($firstResult)
+    public function offset($offset)
     {
         $this->state = self::STATE_DIRTY;
-        $this->firstResult = $firstResult;
+        $this->offset = $offset;
         return $this;
     }
 
     /**
      * Gets the position of the first result the query object was set to retrieve (the "offset").
-     * Returns NULL if {@link setFirstResult} was not applied to this QueryBuilder.
+     * Returns NULL if {@link setoffset} was not applied to this QueryBuilder.
      *
      * @return integer The position of the first result.
      */
-    public function getFirstResult()
+    public function getoffset()
     {
-        return $this->firstResult;
+        return $this->offset;
     }
+
 
     /**
      * Sets the maximum number of results to retrieve (the "limit").
      *
-     * @param integer $maxResults The maximum number of results to retrieve.
-     * @return \Doctrine\DBAL\Query\QueryBuilder This QueryBuilder instance.
+     * @param integer $limit The maximum number of results to retrieve.
+     * @return QueryBuilder This QueryBuilder instance.
      */
-    public function setMaxResults($maxResults)
+    public function limit($limit)
     {
         $this->state = self::STATE_DIRTY;
-        $this->maxResults = $maxResults;
+        $this->limit = $limit;
         return $this;
     }
 
     /**
      * Gets the maximum number of results the query object was set to retrieve (the "limit").
-     * Returns NULL if {@link setMaxResults} was not applied to this query builder.
+     * Returns NULL if {@link setlimit} was not applied to this query builder.
      *
      * @return integer Maximum number of results.
      */
-    public function getMaxResults()
+    public function getlimit()
     {
-        return $this->maxResults;
+        return $this->limit;
     }
 
     /**
@@ -1023,9 +1018,16 @@ class QueryBuilder
             . ($this->sqlParts['having'] !== null ? ' HAVING ' . ((string) $this->sqlParts['having']) : '')
             . ($this->sqlParts['orderBy'] ? ' ORDER BY ' . implode(', ', $this->sqlParts['orderBy']) : '');
 
-        return ($this->maxResults === null && $this->firstResult == null)
-            ? $query
-            : $this->connection->getDatabasePlatform()->modifyLimitQuery($query, $this->maxResults, $this->firstResult);
+        // TODO mssql & oracle
+        if ($this->limit !== null) {
+            $query .= ' LIMIT ' . $this->limit;
+        }
+
+        if ($this->offset !== null) {
+            $query .= ' OFFSET ' . $this->offset;
+        }
+
+        return $query;
     }
 
     /**
