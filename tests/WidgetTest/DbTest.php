@@ -214,31 +214,54 @@ class DbTest extends TestCase
 
     public function testQuery()
     {
-        // Pure String Conditions
-        $user = $this->db('users')->where("name = 'twin'")->find();
+        // Pure string conditions
+        $query = $this->db('users')->where("name = 'twin'");
+        $user = $query->find();
+
+        $this->assertEquals("SELECT * FROM users u WHERE name = 'twin'", $query->getSQL());
         $this->assertEquals('twin', $user->name);
 
-        // ? Conditions
-        $user = $this->db('users')->where('name = ?', 'twin')->find();
+        // ? conditions
+        $query = $this->db('users')->where('name = ?', 'twin');
+        $user = $query->find();
+
+        $this->assertEquals("SELECT * FROM users u WHERE name = ?", $query->getSQL());
         $this->assertEquals('twin', $user->name);
 
-        $user = $this->db('users')->where('group_id = ? AND name = ?', array('1', 'twin'))->find();
+        $query = $this->db('users')->where('group_id = ? AND name = ?', array('1', 'twin'));
+        $user = $query->find();
+
+        $this->assertEquals("SELECT * FROM users u WHERE group_id = ? AND name = ?", $query->getSQL());
         $this->assertEquals('1', $user->group_id);
         $this->assertEquals('twin', $user->name);
 
-        // : Conditions
-        $user = $this->db('users')->where('group_id = :groupId AND name = :name', array(
+        // : conditions
+        $query = $this->db('users')->where('group_id = :groupId AND name = :name', array(
             'groupId' => '1',
             'name' => 'twin'
-        ))->find();
+        ));
+        $user = $query->find();
+
+        $this->assertEquals("SELECT * FROM users u WHERE group_id = :groupId AND name = :name", $query->getSQL());
         $this->assertEquals('1', $user->group_id);
         $this->assertEquals('twin', $user->name);
 
-        $user = $this->db('users')->where('group_id = :groupId AND name = :name', array(
+        $query = $this->db('users')->where('group_id = :groupId AND name = :name', array(
             ':groupId' => '1',
             ':name' => 'twin'
-        ))->find();
+        ));
+        $user = $query->find();
+
+        $this->assertEquals("SELECT * FROM users u WHERE group_id = :groupId AND name = :name", $query->getSQL());
         $this->assertEquals('1', $user->group_id);
         $this->assertEquals('twin', $user->name);
+
+        // Range conditions
+        $query = $this->db('users')->where('group_id BETWEEN ? AND ?', array('1', '2'));
+        $this->assertEquals("SELECT * FROM users u WHERE group_id BETWEEN ? AND ?", $query->getSQL());
+
+        $user = $query->find();
+        $this->assertGreaterThanOrEqual(1, $user->group_id);
+        $this->assertLessThanOrEqual(2, $user->group_id);
     }
 }
