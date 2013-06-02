@@ -4,6 +4,7 @@ namespace WidgetTest;
 
 /**
  * @property \Widget\Db db
+ * @method \Widget\Db\QueryBuilder db()
  */
 class DbTest extends TestCase
 {
@@ -204,5 +205,17 @@ class DbTest extends TestCase
 
         $this->assertInternalType('array', $data);
         $this->assertEquals('1', $data[0]['group_id']);
+    }
+
+    public function testRecordFind()
+    {
+        $user = $this->db->user;
+    }
+
+    public function testQuery()
+    {
+        $user = $this->db('users')->where('name = ?', 'twin')->find();
+
+        $this->assertEquals('twin', $user->name);
     }
 }
