@@ -721,7 +721,7 @@ class QueryBuilder
             foreach ($conditions as $column => $condition) {
                 if (is_array($condition)) {
                     $where[] = $column . ' IN (' . implode(', ', array_pad(array(), count($condition), '?')) . ')';
-                    $params += $condition;
+                    $params = array_merge($params, $condition);
                 } else {
                     $where[] = $column . " = ?";
                     $params[] = $condition;
