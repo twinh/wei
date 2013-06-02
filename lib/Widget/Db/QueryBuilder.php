@@ -715,6 +715,21 @@ class QueryBuilder
      */
     public function where($conditions, $params = null, $type = array())
     {
+        if (is_array($conditions)) {
+            $where = '';
+            $params = array();
+            foreach ($conditions as $column => $condition) {
+                if (is_array($condition)) {
+                    $where[] = $column . ' IN (' . implode(', ', array_pad(array(), count($condition), '?')) . ')';
+                    $params += $condition;
+                } else {
+                    $where[] = $column . " = ?";
+                    $params[] = $condition;
+                }
+            }
+            $conditions = implode(' AND ', $where);
+        }
+
         if ($params) {
             if (is_array($params)) {
                 $this->setParameters($params, $type);

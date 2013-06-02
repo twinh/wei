@@ -212,6 +212,9 @@ class DbTest extends TestCase
         $user = $this->db->user;
     }
 
+    /**
+     * @link http://edgeguides.rubyonrails.org/active_record_querying.html#conditions
+     */
     public function testQuery()
     {
         // Pure string conditions
@@ -263,5 +266,12 @@ class DbTest extends TestCase
         $user = $query->find();
         $this->assertGreaterThanOrEqual(1, $user->group_id);
         $this->assertLessThanOrEqual(2, $user->group_id);
+
+        // Subset conditions
+        $query = $this->db('users')->where(array('group_id' => array('1', '2')));
+        $user = $query->find();
+
+        $this->assertEquals("SELECT * FROM users u WHERE group_id IN (?, ?)", $query->getSQL());
+        $this->assertEquals('1', $user->group_id);
     }
 }
