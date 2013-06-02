@@ -26,6 +26,12 @@ class Record extends  AbstractWidget
      */
     protected $db;
 
+    /**
+     * The helper method to create a new record object
+     *
+     * @param $id
+     * @return Record
+     */
     public function find($id)
     {
         return $this->db->find($this->getTable(), $id);

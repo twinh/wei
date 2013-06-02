@@ -95,9 +95,9 @@ class Db extends AbstractWidget
      */
     protected $recordNamespace;
 
-    public function __invoke()
+    public function __invoke($table, $alias = null)
     {
-        return $this;
+        return $this->from($table, $alias);
     }
 
     /**
@@ -224,8 +224,14 @@ class Db extends AbstractWidget
         $query = "SELECT $select FROM $table ";
 
         if (is_array($where)) {
-            $query .= "WHERE " . implode(' = ? AND ', array_keys($where)) . ' = ?';
-            $params = array_values($where);
+            // Associative array
+            if (1) {
+                $query .= "WHERE " . implode(' = ? AND ', array_keys($where)) . ' = ?';
+                $params = array_values($where);
+            // Indexed array
+            } else {
+
+            }
         } elseif ($where !== false) {
             $query .= "WHERE id = :field";
             $params = array('field' => $where);
@@ -374,7 +380,7 @@ class Db extends AbstractWidget
     {
         return $this
             ->createQueryBuilder()
-            ->from($table, $alias ?: $table);
+            ->from($table, $alias ?: $table[0]);
     }
 
     /**
