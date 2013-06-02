@@ -282,5 +282,15 @@ class DbTest extends TestCase
 
         $this->assertEquals("SELECT * FROM users u WHERE id = ? AND group_id IN (?, ?)", $query->getSQL());
         $this->assertEquals('1', $user->id);
+
+        // Order
+        $query = $this->db('users')->orderBy('id', 'ASC');
+        $user = $query->find();
+
+        $this->assertEquals("SELECT * FROM users u ORDER BY id ASC", $query->getSQL());
+        $this->assertEquals("1", $user->id);
+
+        // addOrder
+
     }
 }
