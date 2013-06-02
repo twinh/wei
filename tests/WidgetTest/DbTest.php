@@ -273,5 +273,14 @@ class DbTest extends TestCase
 
         $this->assertEquals("SELECT * FROM users u WHERE group_id IN (?, ?)", $query->getSQL());
         $this->assertEquals('1', $user->group_id);
+
+        $query = $this->db('users')->where(array(
+            'id' => '1',
+            'group_id' => array('1', '2')
+        ));
+        $user = $query->find();
+
+        $this->assertEquals("SELECT * FROM users u WHERE id = ? AND group_id IN (?, ?)", $query->getSQL());
+        $this->assertEquals('1', $user->id);
     }
 }
