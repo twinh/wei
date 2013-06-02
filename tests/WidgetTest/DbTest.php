@@ -296,5 +296,23 @@ class DbTest extends TestCase
 
         $this->assertEquals("SELECT * FROM users u ORDER BY id ASC, group_id ASC", $query->getSQL());
         $this->assertEquals('1', $user->id);
+
+        // Select
+        $query = $this->db('users')->select('id, group_id');
+        $user = $query->find()->toArray();
+
+        $this->assertEquals("SELECT id, group_id FROM users u", $query->getSQL());
+        $this->assertArrayHasKey('id', $user);
+        $this->assertArrayHasKey('group_id', $user);
+        $this->assertArrayNotHasKey('name', $user);
+
+        // addSelect
+        $query = $this->db('users')->select('id')->addSelect('group_id');
+        $user = $query->find()->toArray();
+
+        $this->assertEquals("SELECT id, group_id FROM users u", $query->getSQL());
+        $this->assertArrayHasKey('id', $user);
+        $this->assertArrayHasKey('group_id', $user);
+        $this->assertArrayNotHasKey('name', $user);
     }
 }
