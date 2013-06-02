@@ -351,7 +351,7 @@ class QueryBuilder
      *
      * @return integer The position of the first result.
      */
-    public function getoffset()
+    public function getOffset()
     {
         return $this->offset;
     }

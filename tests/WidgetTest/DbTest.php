@@ -330,6 +330,10 @@ class DbTest extends TestCase
         $this->assertCount(2, $users);
 
         // Offset
-        $query = $this->db('users')->offset();
+        $query = $this->db('users')->limit(1)->offset(1);
+        $user = $query->find();
+
+        $this->assertEquals("SELECT * FROM users u LIMIT 1 OFFSET 1", $query->getSQL());
+        $this->assertEquals(2, $user->id);
     }
 }
