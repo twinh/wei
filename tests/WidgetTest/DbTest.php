@@ -2,6 +2,8 @@
 
 namespace WidgetTest;
 
+use Widget\DB\QueryBuilder;
+
 /**
  * @property \Widget\Db db
  * @method \Widget\Db\QueryBuilder db($table)

@@ -126,28 +126,6 @@ class QueryBuilder
     public function __construct(Db $connection)
     {
         $this->connection = $connection;
-        $this->select('*');
-    }
-
-    /**
-     * Gets an ExpressionBuilder used for object-oriented construction of query expressions.
-     * This producer method is intended for convenient inline usage. Example:
-     *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->select('u')
-     *         ->from('users', 'u')
-     *         ->where($qb->expr()->eq('u.id', 1));
-     * </code>
-     *
-     * For more complex expression construction, consider storing the expression
-     * builder object in a local variable.
-     *
-     * @return \Doctrine\DBAL\Query\Expression\ExpressionBuilder
-     */
-    public function expr()
-    {
-        return $this->connection->getExpressionBuilder();
     }
 
     /**
@@ -419,7 +397,13 @@ class QueryBuilder
         $this->state = self::STATE_DIRTY;
 
         if ($append) {
-            if ($sqlPartName == "orderBy" || $sqlPartName == "groupBy" || $sqlPartName == "select" || $sqlPartName == "set") {
+            if ($sqlPartName == "where" || $sqlPartName == "having") {
+                if ($this->sqlParts[$sqlPartName]) {
+                    $this->sqlParts[$sqlPartName] = '(' . $this->sqlParts[$sqlPartName] .  ')' . $sqlPart;
+                } else {
+                    $this->sqlParts[$sqlPartName] = $sqlPart;
+                }
+            } else if ($sqlPartName == "orderBy" || $sqlPartName == "groupBy" || $sqlPartName == "select" || $sqlPartName == "set") {
                 foreach ($sqlPart as $part) {
                     $this->sqlParts[$sqlPartName][] = $part;
                 }
@@ -725,28 +709,7 @@ class QueryBuilder
      */
     public function where($conditions, $params = null, $type = array())
     {
-        if (is_array($conditions)) {
-            $where = '';
-            $params = array();
-            foreach ($conditions as $column => $condition) {
-                if (is_array($condition)) {
-                    $where[] = $column . ' IN (' . implode(', ', array_pad(array(), count($condition), '?')) . ')';
-                    $params = array_merge($params, $condition);
-                } else {
-                    $where[] = $column . " = ?";
-                    $params[] = $condition;
-                }
-            }
-            $conditions = implode(' AND ', $where);
-        }
-
-        if ($params) {
-            if (is_array($params)) {
-                $this->setParameters($params, $type);
-            } else {
-                $this->setParameter(0, $params, $type);
-            }
-        }
+        $conditions = $this->processCondition($conditions, $params, $type);
 
         return $this->add('where', $conditions);
     }
@@ -767,19 +730,13 @@ class QueryBuilder
      * @return QueryBuilder This QueryBuilder instance.
      * @see where()
      */
-    public function andWhere($where)
+    public function andWhere($conditions, $params = null, $type = array())
     {
-        $where = $this->getQueryPart('where');
-        $args = func_get_args();
+        $conditions = $this->processCondition($conditions, $params, $type);
 
-        if ($where instanceof CompositeExpression && $where->getType() === CompositeExpression::TYPE_AND) {
-            $where->addMultiple($args);
-        } else {
-            array_unshift($args, $where);
-            $where = new CompositeExpression(CompositeExpression::TYPE_AND, $args);
-        }
+        $conditions = ' AND (' . $conditions . ')';
 
-        return $this->add('where', $where, true);
+        return $this->add('where', $conditions, true);
     }
 
     /**
@@ -798,19 +755,13 @@ class QueryBuilder
      * @return QueryBuilder $qb
      * @see where()
      */
-    public function orWhere($where)
+    public function orWhere($conditions, $params = null, $type = array())
     {
-        $where = $this->getQueryPart('where');
-        $args = func_get_args();
+        $conditions = $this->processCondition($conditions, $params, $type);
 
-        if ($where instanceof CompositeExpression && $where->getType() === CompositeExpression::TYPE_OR) {
-            $where->addMultiple($args);
-        } else {
-            array_unshift($args, $where);
-            $where = new CompositeExpression(CompositeExpression::TYPE_OR, $args);
-        }
+        $conditions = ' OR (' . $conditions . ')';
 
-        return $this->add('where', $where, true);
+        return $this->add('where', $conditions, true);
     }
 
     /**
@@ -871,17 +822,11 @@ class QueryBuilder
      * @param mixed $having The restriction over the groups.
      * @return QueryBuilder This QueryBuilder instance.
      */
-    public function having($having, $params = array(), $type = null)
+    public function having($conditions, $params = array(), $type = null)
     {
-        if ($params) {
-            if (is_array($params)) {
-                $this->setParameters($params, $type);
-            } else {
-                $this->setParameter(0, $params, $type);
-            }
-        }
+        $conditions = $this->processCondition($conditions, $params, $type);
 
-        return $this->add('having', $having);
+        return $this->add('having', $conditions);
     }
 
     /**
@@ -891,19 +836,14 @@ class QueryBuilder
      * @param mixed $having The restriction to append.
      * @return QueryBuilder This QueryBuilder instance.
      */
-    public function andHaving($having)
+    public function andHaving($conditions, $params = null, $type = array())
     {
-        $having = $this->getQueryPart('having');
-        $args = func_get_args();
 
-        if ($having instanceof CompositeExpression && $having->getType() === CompositeExpression::TYPE_AND) {
-            $having->addMultiple($args);
-        } else {
-            array_unshift($args, $having);
-            $having = new CompositeExpression(CompositeExpression::TYPE_AND, $args);
-        }
+        $conditions = $this->processCondition($conditions, $params, $type);
 
-        return $this->add('having', $having);
+        $conditions = ' AND (' . $conditions . ')';
+
+        return $this->add('having', $conditions, true);
     }
 
     /**
@@ -913,19 +853,14 @@ class QueryBuilder
      * @param mixed $having The restriction to add.
      * @return QueryBuilder This QueryBuilder instance.
      */
-    public function orHaving($having)
+    public function orHaving($conditions, $params = null, $type = array())
     {
-        $having = $this->getQueryPart('having');
-        $args = func_get_args();
 
-        if ($having instanceof CompositeExpression && $having->getType() === CompositeExpression::TYPE_OR) {
-            $having->addMultiple($args);
-        } else {
-            array_unshift($args, $having);
-            $having = new CompositeExpression(CompositeExpression::TYPE_OR, $args);
-        }
+        $conditions = $this->processCondition($conditions, $params, $type);
 
-        return $this->add('having', $having);
+        $conditions = ' OR (' . $conditions . ')';
+
+        return $this->add('having', $conditions, true);
     }
 
     /**
@@ -1011,6 +946,10 @@ class QueryBuilder
 
     protected function getSQLForSelect()
     {
+        if (!$this->sqlParts['select']) {
+            $this->sqlParts['select'] = array('*');
+        }
+
         $query = 'SELECT ' . implode(', ', $this->sqlParts['select']) . ' FROM ';
 
         $fromClauses = array();
@@ -1027,7 +966,9 @@ class QueryBuilder
 
         foreach ($this->sqlParts['join'] as $fromAlias => $joins) {
             if ( ! isset($knownAliases[$fromAlias]) ) {
-                throw QueryException::unknownAlias($fromAlias, array_keys($knownAliases));
+                throw new \RuntimeException("The given alias '" . $fromAlias . "' is not part of " .
+                    "any FROM or JOIN clause table. The currently registered " .
+                    "aliases are: " . implode(", ", array_keys($knownAliases)) . ".");
             }
         }
 
@@ -1088,72 +1029,6 @@ class QueryBuilder
         return $this->getSQL();
     }
 
-    /**
-     * Create a new named parameter and bind the value $value to it.
-     *
-     * This method provides a shortcut for PDOStatement::bindValue
-     * when using prepared statements.
-     *
-     * The parameter $value specifies the value that you want to bind. If
-     * $placeholder is not provided bindValue() will automatically create a
-     * placeholder for you. An automatic placeholder will be of the name
-     * ':dcValue1', ':dcValue2' etc.
-     *
-     * For more information see {@link http://php.net/pdostatement-bindparam}
-     *
-     * Example:
-     * <code>
-     * $value = 2;
-     * $q->eq( 'id', $q->bindValue( $value ) );
-     * $stmt = $q->executeQuery(); // executed with 'id = 2'
-     * </code>
-     *
-     * @license New BSD License
-     * @link http://www.zetacomponents.org
-     * @param mixed $value
-     * @param mixed $type
-     * @param string $placeHolder the name to bind with. The string must start with a colon ':'.
-     * @return string the placeholder name used.
-     */
-    public function createNamedParameter( $value, $type = \PDO::PARAM_STR, $placeHolder = null )
-    {
-        if ( $placeHolder === null ) {
-            $this->boundCounter++;
-            $placeHolder = ":dcValue" . $this->boundCounter;
-        }
-        $this->setParameter(substr($placeHolder, 1), $value, $type);
-
-        return $placeHolder;
-    }
-
-    /**
-     * Create a new positional parameter and bind the given value to it.
-     *
-     * Attention: If you are using positional parameters with the query builder you have
-     * to be very careful to bind all parameters in the order they appear in the SQL
-     * statement , otherwise they get bound in the wrong order which can lead to serious
-     * bugs in your code.
-     *
-     * Example:
-     * <code>
-     *  $qb = $conn->createQueryBuilder();
-     *  $qb->select('u.*')
-     *     ->from('users', 'u')
-     *     ->where('u.username = ' . $qb->createPositionalParameter('Foo', PDO::PARAM_STR))
-     *     ->orWhere('u.username = ' . $qb->createPositionalParameter('Bar', PDO::PARAM_STR))
-     * </code>
-     *
-     * @param  mixed $value
-     * @param  mixed $type
-     * @return string
-     */
-    public function createPositionalParameter($value, $type = \PDO::PARAM_STR)
-    {
-        $this->boundCounter++;
-        $this->setParameter($this->boundCounter, $value, $type);
-        return "?";
-    }
-
     protected function getSQLForJoins($fromAlias, array &$knownAliases)
     {
         $sql = '';
@@ -1170,5 +1045,33 @@ class QueryBuilder
         }
 
         return $sql;
+    }
+
+    protected function processCondition($conditions, $params, $type)
+    {
+        if (is_array($conditions)) {
+            $where = '';
+            $params = array();
+            foreach ($conditions as $column => $condition) {
+                if (is_array($condition)) {
+                    $where[] = $column . ' IN (' . implode(', ', array_pad(array(), count($condition), '?')) . ')';
+                    $params = array_merge($params, $condition);
+                } else {
+                    $where[] = $column . " = ?";
+                    $params[] = $condition;
+                }
+            }
+            $conditions = implode(' AND ', $where);
+        }
+
+        if ($params) {
+            if (is_array($params)) {
+                $this->setParameters($params, $type);
+            } else {
+                $this->setParameter(0, $params, $type);
+            }
+        }
+
+        return $conditions;
     }
 }
