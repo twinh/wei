@@ -121,7 +121,7 @@ class QueryBuilder
     /**
      * Initializes a new <tt>QueryBuilder</tt>.
      *
-     * @param \Doctrine\DBAL\Connection $connection DBAL Connection
+     * @param \Widget\Db $connection The database widget
      */
     public function __construct(Db $connection)
     {
@@ -139,9 +139,9 @@ class QueryBuilder
     }
 
     /**
-     * Get the associated DBAL Connection for this query builder.
+     * Get the associated database widget for this query builder.
      *
-     * @return \Doctrine\DBAL\Connection
+     * @return \Widget\Db
      */
     public function getConnection()
     {
@@ -321,7 +321,7 @@ class QueryBuilder
      * Sets the position of the first result to retrieve (the "offset").
      *
      * @param integer $offset The first result to return.
-     * @return \Doctrine\DBAL\Query\QueryBuilder This QueryBuilder instance.
+     * @return QueryBuilder This QueryBuilder instance.
      */
     public function offset($offset)
     {
@@ -383,7 +383,7 @@ class QueryBuilder
      * @param string  $sqlPartName
      * @param string  $sqlPart
      * @param boolean $append
-     * @return \Doctrine\DBAL\Query\QueryBuilder This QueryBuilder instance.
+     * @return QueryBuilder This QueryBuilder instance.
      */
     public function add($sqlPartName, $sqlPart, $append = false)
     {
