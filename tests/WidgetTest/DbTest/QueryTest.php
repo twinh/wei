@@ -108,7 +108,6 @@ class QueryTest extends TestCase
         $this->assertEquals('SELECT u.*, p.* FROM users u WHERE (u.username = ?) OR (u.name = ?)', (string) $qb);
     }
 
-    /* FIXME
     public function testSelectWithOrOrWhereConditions()
     {
         $qb   = new QueryBuilder($this->db);
@@ -119,7 +118,7 @@ class QueryTest extends TestCase
             ->orWhere('u.name = ?');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u WHERE (u.username = ?) OR (u.name = ?)', (string) $qb);
-    }*/
+    }
 
     public function testSelectWithAndOrWhereConditions()
     {
@@ -204,7 +203,6 @@ class QueryTest extends TestCase
         $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING u.name = ?', (string) $qb);
     }
 
-    /* FIXME
     public function testSelectAndHaving()
     {
         $qb   = new QueryBuilder($this->db);
@@ -215,7 +213,7 @@ class QueryTest extends TestCase
             ->andHaving('u.name = ?');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING u.name = ?', (string) $qb);
-    }*/
+    }
 
     public function testSelectHavingAndHaving()
     {
@@ -243,7 +241,6 @@ class QueryTest extends TestCase
         $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING (u.name = ?) OR (u.username = ?)', (string) $qb);
     }
 
-    /* FIXME
     public function testSelectOrHavingOrHaving()
     {
         $qb   = new QueryBuilder($this->db);
@@ -255,7 +252,7 @@ class QueryTest extends TestCase
             ->orHaving('u.username = ?');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING (u.name = ?) OR (u.username = ?)', (string) $qb);
-    }*/
+    }
 
     public function testSelectHavingAndOrHaving()
     {

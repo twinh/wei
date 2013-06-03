@@ -369,7 +369,7 @@ class QueryBuilder
      *
      * @return integer Maximum number of results.
      */
-    public function getlimit()
+    public function getLimit()
     {
         return $this->limit;
     }
@@ -380,12 +380,13 @@ class QueryBuilder
      * The available parts are: 'select', 'from', 'set', 'where',
      * 'groupBy', 'having' and 'orderBy'.
      *
-     * @param string  $sqlPartName
-     * @param string  $sqlPart
+     * @param string $sqlPartName
+     * @param string $sqlPart
      * @param boolean $append
+     * @param null $type
      * @return QueryBuilder This QueryBuilder instance.
      */
-    public function add($sqlPartName, $sqlPart, $append = false)
+    public function add($sqlPartName, $sqlPart, $append = false, $type = null)
     {
         $isArray = is_array($sqlPart);
         $isMultiple = is_array($this->sqlParts[$sqlPartName]);
@@ -399,7 +400,11 @@ class QueryBuilder
         if ($append) {
             if ($sqlPartName == "where" || $sqlPartName == "having") {
                 if ($this->sqlParts[$sqlPartName]) {
-                    $this->sqlParts[$sqlPartName] = '(' . $this->sqlParts[$sqlPartName] .  ')' . $sqlPart;
+                    if ($type) {
+                        $this->sqlParts[$sqlPartName] = '(' . $this->sqlParts[$sqlPartName] .  ') ' . $type . ' (' . $sqlPart  . ')';
+                    } else {
+                        $this->sqlParts[$sqlPartName] = '(' . $this->sqlParts[$sqlPartName] .  ')' . $sqlPart;
+                    }
                 } else {
                     $this->sqlParts[$sqlPartName] = $sqlPart;
                 }
@@ -734,9 +739,7 @@ class QueryBuilder
     {
         $conditions = $this->processCondition($conditions, $params, $type);
 
-        $conditions = ' AND (' . $conditions . ')';
-
-        return $this->add('where', $conditions, true);
+        return $this->add('where', $conditions, true, 'AND');
     }
 
     /**
@@ -759,9 +762,7 @@ class QueryBuilder
     {
         $conditions = $this->processCondition($conditions, $params, $type);
 
-        $conditions = ' OR (' . $conditions . ')';
-
-        return $this->add('where', $conditions, true);
+        return $this->add('where', $conditions, true, 'OR');
     }
 
     /**
@@ -838,12 +839,9 @@ class QueryBuilder
      */
     public function andHaving($conditions, $params = null, $type = array())
     {
-
         $conditions = $this->processCondition($conditions, $params, $type);
 
-        $conditions = ' AND (' . $conditions . ')';
-
-        return $this->add('having', $conditions, true);
+        return $this->add('having', $conditions, true, 'AND');
     }
 
     /**
@@ -855,12 +853,9 @@ class QueryBuilder
      */
     public function orHaving($conditions, $params = null, $type = array())
     {
-
         $conditions = $this->processCondition($conditions, $params, $type);
 
-        $conditions = ' OR (' . $conditions . ')';
-
-        return $this->add('having', $conditions, true);
+        return $this->add('having', $conditions, true, 'OR');
     }
 
     /**
