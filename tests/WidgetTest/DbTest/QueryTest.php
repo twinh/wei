@@ -420,10 +420,10 @@ class QueryTest extends TestCase
         $this->assertSame($qb2, $qb);
     }
 
-    public function testGetConnection()
+    public function testGetDb()
     {
         $qb   = new QueryBuilder($this->db);
-        $this->assertSame($this->db, $qb->getConnection());
+        $this->assertSame($this->db, $qb->getDb());
     }
 
     public function testGetState()
