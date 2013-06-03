@@ -35,9 +35,10 @@ use Widget\Db\Collection;
  * even if some vendors such as MySQL support it.
  *
  * @license     http://opensource.org/licenses/mit-license.php MIT License
- * @link        www.doctrine-project.com
+ * @link        http://www.doctrine-project.com
  * @author      Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author      Benjamin Eberlei <kontakt@beberlei.de>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class QueryBuilder
 {
@@ -51,9 +52,11 @@ class QueryBuilder
     const STATE_CLEAN = 1;
 
     /**
+     * The database widget
+     *
      * @var Db
      */
-    protected $connection = null;
+    protected $db = null;
 
     /**
      * @var array The array of SQL parts collected.
@@ -112,20 +115,13 @@ class QueryBuilder
     protected $rows = 10;
 
     /**
-     * The counter of bound parameters used with {@see bindValue)
-     *
-     * @var int
-     */
-    protected $boundCounter = 0;
-
-    /**
      * Initializes a new <tt>QueryBuilder</tt>.
      *
-     * @param \Widget\Db $connection The database widget
+     * @param \Widget\Db $db The database widget
      */
-    public function __construct(Db $connection)
+    public function __construct(Db $db)
     {
-        $this->connection = $connection;
+        $this->db = $db;
     }
 
     /**
@@ -143,9 +139,9 @@ class QueryBuilder
      *
      * @return \Widget\Db
      */
-    public function getConnection()
+    public function getDb()
     {
-        return $this->connection;
+        return $this->db;
     }
 
     /**
@@ -161,17 +157,14 @@ class QueryBuilder
     /**
      * Execute this query using the bound parameters and their types.
      *
-     * Uses {@see Connection::executeQuery} for select statements and {@see Connection::executeUpdate}
-     * for insert, update and delete statements.
-     *
      * @return mixed
      */
     public function execute()
     {
         if ($this->type == self::SELECT) {
-            return $this->connection->fetchAll($this->getSQL(), $this->params, $this->paramTypes);
+            return $this->db->fetchAll($this->getSQL(), $this->params, $this->paramTypes);
         } else {
-            return $this->connection->executeUpdate($this->getSQL(), $this->params, $this->paramTypes);
+            return $this->db->executeUpdate($this->getSQL(), $this->params, $this->paramTypes);
         }
     }
 
@@ -182,7 +175,7 @@ class QueryBuilder
         $table = $this->sqlParts['from'][0]['table'];
 
         if ($data) {
-            return $this->connection->create($table, $data[0]);
+            return $this->db->create($table, $data[0]);
         } else  {
             return false;
         }
@@ -196,23 +189,24 @@ class QueryBuilder
 
         $records = array();
         foreach ($data as $row) {
-            $records[] = $this->connection->create($table, $row);
+            $records[] = $this->db->create($table, $row);
         }
 
         return new Collection($records);
     }
 
     /**
-     * Get the complete SQL string formed by the current specifications of this QueryBuilder.
+     * Get the complete SQL string formed by the current specifications of this QueryBuilder
      *
-     * <code>
-     *     $qb = $em->createQueryBuilder()
-     *         ->select('u')
-     *         ->from('User', 'u')
-     *     echo $qb->getSQL(); // SELECT u FROM User u
-     * </code>
+     * ```php
+     * $qb = $db->createQueryBuilder()
+     *     ->select('id, group_id')
+     *     ->from('user');
      *
-     * @return string The sql query string.
+     * echo $qb->getSql(); // SELECT id, group_id FROM user u
+     * ```
+     *
+     * @return string The sql query string
      */
     public function getSQL()
     {
@@ -244,20 +238,20 @@ class QueryBuilder
     }
 
     /**
-     * Sets a query parameter for the query being constructed.
+     * Sets a query parameter for the query being constructed
      *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->select('u')
-     *         ->from('users', 'u')
-     *         ->where('u.id = :user_id')
-     *         ->setParameter(':user_id', 1);
-     * </code>
+     * ```php
+     * $qb = $db->createQueryBuilder()
+     *     ->select('*')
+     *     ->from('user', 'u')
+     *     ->where('u.id = :userId')
+     *     ->setParameter(':userId', 1);
+     * ```
      *
-     * @param string|integer $key The parameter position or name.
-     * @param mixed $value The parameter value.
+     * @param string|integer $key The parameter position or name
+     * @param mixed $value The parameter value
      * @param string|null $type PDO::PARAM_*
-     * @return QueryBuilder This QueryBuilder instance.
+     * @return QueryBuilder This QueryBuilder instance
      */
     public function setParameter($key, $value, $type = null)
     {
@@ -271,22 +265,22 @@ class QueryBuilder
     }
 
     /**
-     * Sets a collection of query parameters for the query being constructed.
+     * Sets a collection of query parameters for the query being constructed
      *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->select('u')
-     *         ->from('users', 'u')
-     *         ->where('u.id = :user_id1 OR u.id = :user_id2')
-     *         ->setParameters(array(
-     *             ':user_id1' => 1,
-     *             ':user_id2' => 2
-     *         ));
-     * </code>
+     * ```php
+     * $qb = $db->createQueryBuilder()
+     *     ->select('*')
+     *     ->from('user', 'u')
+     *     ->where('u.id = :userId1 OR u.id = :userId2')
+     *     ->setParameters(array(
+     *         ':userId1' => 1,
+     *         ':userId2' => 2
+     *     ));
+     * ```
      *
-     * @param array $params The query parameters to set.
-     * @param array $types  The query parameters types to set.
-     * @return QueryBuilder This QueryBuilder instance.
+     * @param array $params The query parameters to set
+     * @param array $types  The query parameters types to set
+     * @return QueryBuilder This QueryBuilder instance
      */
     public function setParameters(array $params, array $types = array())
     {
@@ -307,10 +301,10 @@ class QueryBuilder
     }
 
     /**
-     * Gets a (previously set) query parameter of the query being constructed.
+     * Gets a (previously set) query parameter of the query being constructed
      *
-     * @param mixed $key The key (index or name) of the bound parameter.
-     * @return mixed The value of the bound parameter.
+     * @param mixed $key The key (index or name) of the bound parameter
+     * @return mixed The value of the bound parameter
      */
     public function getParameter($key)
     {
@@ -318,10 +312,10 @@ class QueryBuilder
     }
 
     /**
-     * Sets the position of the first result to retrieve (the "offset").
+     * Sets the position of the first result to retrieve (the "offset")
      *
-     * @param integer $offset The first result to return.
-     * @return QueryBuilder This QueryBuilder instance.
+     * @param integer $offset The first result to return
+     * @return QueryBuilder This QueryBuilder instance
      */
     public function offset($offset)
     {
@@ -343,10 +337,10 @@ class QueryBuilder
 
 
     /**
-     * Sets the maximum number of results to retrieve (the "limit").
+     * Sets the maximum number of results to retrieve (the "limit")
      *
-     * @param integer $limit The maximum number of results to retrieve.
-     * @return QueryBuilder This QueryBuilder instance.
+     * @param integer $limit The maximum number of results to retrieve
+     * @return QueryBuilder This QueryBuilder instance
      */
     public function limit($limit)
     {
@@ -355,6 +349,15 @@ class QueryBuilder
         return $this;
     }
 
+    /**
+     * Sets the page number
+     *
+     * The "OFFSET" value is equals "($page - 1) * $this->rows"
+     * The "LIMIT" value is equals "$this->rows"
+     *
+     * @param int $page The page number
+     * @return $this
+     */
     public function page($page)
     {
         $this->state = self::STATE_DIRTY;
@@ -364,10 +367,10 @@ class QueryBuilder
     }
 
     /**
-     * Gets the maximum number of results the query object was set to retrieve (the "limit").
-     * Returns NULL if {@link setlimit} was not applied to this query builder.
+     * Gets the maximum number of results the query object was set to retrieve (the "limit")
+     * Returns NULL if {@link setlimit} was not applied to this query builder
      *
-     * @return integer Maximum number of results.
+     * @return integer Maximum number of results
      */
     public function getLimit()
     {
