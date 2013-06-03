@@ -162,9 +162,9 @@ class QueryBuilder
     public function execute()
     {
         if ($this->type == self::SELECT) {
-            return $this->db->fetchAll($this->getSQL(), $this->params, $this->paramTypes);
+            return $this->db->fetchAll($this->getSql(), $this->params, $this->paramTypes);
         } else {
-            return $this->db->executeUpdate($this->getSQL(), $this->params, $this->paramTypes);
+            return $this->db->executeUpdate($this->getSql(), $this->params, $this->paramTypes);
         }
     }
 
@@ -208,7 +208,7 @@ class QueryBuilder
      *
      * @return string The sql query string
      */
-    public function getSQL()
+    public function getSql()
     {
         if ($this->sql !== null && $this->state === self::STATE_CLEAN) {
             return $this->sql;
@@ -218,16 +218,16 @@ class QueryBuilder
 
         switch ($this->type) {
             case self::DELETE:
-                $sql = $this->getSQLForDelete();
+                $sql = $this->getSqlForDelete();
                 break;
 
             case self::UPDATE:
-                $sql = $this->getSQLForUpdate();
+                $sql = $this->getSqlForUpdate();
                 break;
 
             case self::SELECT:
             default:
-                $sql = $this->getSQLForSelect();
+                $sql = $this->getSqlForSelect();
                 break;
         }
 
@@ -942,7 +942,7 @@ class QueryBuilder
         return $this;
     }
 
-    protected function getSQLForSelect()
+    protected function getSqlForSelect()
     {
         if (!$this->sqlParts['select']) {
             $this->sqlParts['select'] = array('*');
@@ -957,7 +957,7 @@ class QueryBuilder
         foreach ($this->sqlParts['from'] as $from) {
             $knownAliases[$from['alias']] = true;
             $fromClause = $from['table'] . ' ' . $from['alias']
-                . $this->getSQLForJoins($from['alias'], $knownAliases);
+                . $this->getSqlForJoins($from['alias'], $knownAliases);
 
             $fromClauses[$from['alias']] = $fromClause;
         }
@@ -993,7 +993,7 @@ class QueryBuilder
      *
      * @return string
      */
-    protected function getSQLForUpdate()
+    protected function getSqlForUpdate()
     {
         $table = $this->sqlParts['from']['table'] . ($this->sqlParts['from']['alias'] ? ' ' . $this->sqlParts['from']['alias'] : '');
         $query = 'UPDATE ' . $table
@@ -1008,7 +1008,7 @@ class QueryBuilder
      *
      * @return string
      */
-    protected function getSQLForDelete()
+    protected function getSqlForDelete()
     {
         $table = $this->sqlParts['from']['table'] . ($this->sqlParts['from']['alias'] ? ' ' . $this->sqlParts['from']['alias'] : '');
         $query = 'DELETE FROM ' . $table . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '');
@@ -1024,10 +1024,10 @@ class QueryBuilder
      */
     public function __toString()
     {
-        return $this->getSQL();
+        return $this->getSql();
     }
 
-    protected function getSQLForJoins($fromAlias, array &$knownAliases)
+    protected function getSqlForJoins($fromAlias, array &$knownAliases)
     {
         $sql = '';
 
@@ -1038,7 +1038,7 @@ class QueryBuilder
                     . ' ON ' . ((string) $join['joinCondition']);
                 $knownAliases[$join['joinAlias']] = true;
 
-                $sql .= $this->getSQLForJoins($join['joinAlias'], $knownAliases);
+                $sql .= $this->getSqlForJoins($join['joinAlias'], $knownAliases);
             }
         }
 

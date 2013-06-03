@@ -436,10 +436,10 @@ class QueryTest extends TestCase
 
         $this->assertEquals(QueryBuilder::STATE_DIRTY, $qb->getState());
 
-        $sql1 = $qb->getSQL();
+        $sql1 = $qb->getSql();
 
         $this->assertEquals(QueryBuilder::STATE_CLEAN, $qb->getState());
-        $this->assertEquals($sql1, $qb->getSQL());
+        $this->assertEquals($sql1, $qb->getSql());
     }
 
     public function testLimit()
@@ -497,7 +497,7 @@ class QueryTest extends TestCase
             ->where('nt.lang = :lang AND n.deleted != 1');
 
         $this->setExpectedException('\RuntimeException', "The given alias 'invalid' is not part of any FROM or JOIN clause table. The currently registered aliases are: news, nv.");
-        $this->assertEquals('', $qb->getSQL());
+        $this->assertEquals('', $qb->getSql());
     }
 
     /**
@@ -515,7 +515,7 @@ class QueryTest extends TestCase
             ->where('nt.lang = ?')
             ->andWhere('n.deleted = 0');
 
-        $this->assertEquals("SELECT COUNT(DISTINCT news.id) FROM newspages news INNER JOIN nodeversion nv ON nv.refId = news.id AND nv.refEntityname='Entity\\News' INNER JOIN nodetranslation nt ON nv.nodetranslation = nt.id INNER JOIN node n ON nt.node = n.id WHERE (nt.lang = ?) AND (n.deleted = 0)", $qb->getSQL());
+        $this->assertEquals("SELECT COUNT(DISTINCT news.id) FROM newspages news INNER JOIN nodeversion nv ON nv.refId = news.id AND nv.refEntityname='Entity\\News' INNER JOIN nodetranslation nt ON nv.nodetranslation = nt.id INNER JOIN node n ON nt.node = n.id WHERE (nt.lang = ?) AND (n.deleted = 0)", $qb->getSql());
     }
 
     /**
@@ -533,6 +533,6 @@ class QueryTest extends TestCase
             ->where('u.id = a.user_id')
             ->andWhere('p.read = 1');
 
-        $this->assertEquals('SELECT DISTINCT u.id FROM users u INNER JOIN permissions p ON p.user_id = u.id, articles a INNER JOIN comments c ON c.article_id = a.id WHERE (u.id = a.user_id) AND (p.read = 1)', $qb->getSQL());
+        $this->assertEquals('SELECT DISTINCT u.id FROM users u INNER JOIN permissions p ON p.user_id = u.id, articles a INNER JOIN comments c ON c.article_id = a.id WHERE (u.id = a.user_id) AND (p.read = 1)', $qb->getSql());
     }
 }
