@@ -4,7 +4,7 @@ namespace WidgetTest;
 
 /**
  * @property \Widget\Db db
- * @method \Widget\Db\QueryBuilder db()
+ * @method \Widget\Db\QueryBuilder db($table)
  */
 class DbTest extends TestCase
 {
@@ -345,6 +345,13 @@ class DbTest extends TestCase
         $user = $query->find();
 
         $this->assertEquals("SELECT * FROM users u GROUP BY group_id", $query->getSQL());
+        $this->assertEquals('1', $user->group_id);
+
+        // Having
+        $query = $this->db('users')->groupBy('group_id')->having('group_id >= ?', '1');
+        $user = $query->find();
+
+        $this->assertEquals("SELECT * FROM users u GROUP BY group_id HAVING group_id >= ?", $query->getSQL());
         $this->assertEquals('1', $user->group_id);
     }
 }

@@ -871,10 +871,14 @@ class QueryBuilder
      * @param mixed $having The restriction over the groups.
      * @return QueryBuilder This QueryBuilder instance.
      */
-    public function having($having)
+    public function having($having, $params = array(), $type = null)
     {
-        if ( ! (func_num_args() == 1 && $having instanceof CompositeExpression)) {
-            $having = new CompositeExpression(CompositeExpression::TYPE_AND, func_get_args());
+        if ($params) {
+            if (is_array($params)) {
+                $this->setParameters($params, $type);
+            } else {
+                $this->setParameter(0, $params, $type);
+            }
         }
 
         return $this->add('having', $having);
