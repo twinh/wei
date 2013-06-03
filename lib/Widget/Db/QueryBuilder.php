@@ -105,6 +105,13 @@ class QueryBuilder
     private $limit = null;
 
     /**
+     * The default rows
+     *
+     * @var int
+     */
+    protected $rows = 10;
+
+    /**
      * The counter of bound parameters used with {@see bindValue)
      *
      * @var int
@@ -367,6 +374,14 @@ class QueryBuilder
     {
         $this->state = self::STATE_DIRTY;
         $this->limit = $limit;
+        return $this;
+    }
+
+    public function page($page)
+    {
+        $this->state = self::STATE_DIRTY;
+        $this->limit = $this->rows;
+        $this->offset = ($page - 1) * $this->rows;
         return $this;
     }
 
