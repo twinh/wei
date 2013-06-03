@@ -53,12 +53,12 @@ class QueryBuilder
     /**
      * @var Db
      */
-    private $connection = null;
+    protected $connection = null;
 
     /**
      * @var array The array of SQL parts collected.
      */
-    private $sqlParts = array(
+    protected $sqlParts = array(
         'select'  => array(),
         'from'    => array(),
         'join'    => array(),
@@ -72,37 +72,37 @@ class QueryBuilder
     /**
      * @var string The complete SQL string for this query.
      */
-    private $sql;
+    protected $sql;
 
     /**
      * @var array The query parameters.
      */
-    private $params = array();
+    protected $params = array();
 
     /**
      * @var array The parameter type map of this query.
      */
-    private $paramTypes = array();
+    protected $paramTypes = array();
 
     /**
      * @var integer The type of query this is. Can be select, update or delete.
      */
-    private $type = self::SELECT;
+    protected $type = self::SELECT;
 
     /**
      * @var integer The state of the query object. Can be dirty or clean.
      */
-    private $state = self::STATE_CLEAN;
+    protected $state = self::STATE_CLEAN;
 
     /**
      * @var integer The index of the first result to retrieve.
      */
-    private $offset = null;
+    protected $offset = null;
 
     /**
      * @var integer The maximum number of results to retrieve.
      */
-    private $limit = null;
+    protected $limit = null;
 
     /**
      * The default rows
@@ -116,7 +116,7 @@ class QueryBuilder
      *
      * @var int
      */
-    private $boundCounter = 0;
+    protected $boundCounter = 0;
 
     /**
      * Initializes a new <tt>QueryBuilder</tt>.
@@ -1005,7 +1005,7 @@ class QueryBuilder
         return $this;
     }
 
-    private function getSQLForSelect()
+    protected function getSQLForSelect()
     {
         $query = 'SELECT ' . implode(', ', $this->sqlParts['select']) . ' FROM ';
 
@@ -1050,7 +1050,7 @@ class QueryBuilder
      *
      * @return string
      */
-    private function getSQLForUpdate()
+    protected function getSQLForUpdate()
     {
         $table = $this->sqlParts['from']['table'] . ($this->sqlParts['from']['alias'] ? ' ' . $this->sqlParts['from']['alias'] : '');
         $query = 'UPDATE ' . $table
@@ -1065,7 +1065,7 @@ class QueryBuilder
      *
      * @return string
      */
-    private function getSQLForDelete()
+    protected function getSQLForDelete()
     {
         $table = $this->sqlParts['from']['table'] . ($this->sqlParts['from']['alias'] ? ' ' . $this->sqlParts['from']['alias'] : '');
         $query = 'DELETE FROM ' . $table . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '');
@@ -1150,7 +1150,7 @@ class QueryBuilder
         return "?";
     }
 
-    private function getSQLForJoins($fromAlias, array &$knownAliases)
+    protected function getSQLForJoins($fromAlias, array &$knownAliases)
     {
         $sql = '';
 
