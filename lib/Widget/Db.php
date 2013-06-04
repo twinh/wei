@@ -89,6 +89,13 @@ class Db extends AbstractWidget
     protected $recordClass = '\Widget\Record';
 
     /**
+     * An associative array that the key is table name and the value is class name
+     *
+     * @var array
+     */
+    protected $recordClasses = array();
+
+    /**
      * The record namespace
      *
      * @var string
@@ -406,7 +413,7 @@ class Db extends AbstractWidget
     public function create($table, $data = array())
     {
         $class = $this->getRecordClass($table);
-        return  new $class(array(
+        return new $class(array(
             'widget'    => $this->widget,
             'db'        => $this,
             'table'     => $this->camelCaseToUnderscore($table),
@@ -490,15 +497,15 @@ class Db extends AbstractWidget
     }
 
     /**
-     * Returns the record class name
+     * Returns the record class name of table
      *
      * @param string $name The name of table
-     * @return string
+     * @return string The record class name for table
      */
     public function getRecordClass($name)
     {
-        if (isset($this->tables[$name]['class'])) {
-            return $this->tables[$name]['class'];
+        if (isset($this->recordClasses[$name])) {
+            return $this->recordClasses[$name];
         }
 
         if ($this->recordNamespace) {
@@ -509,10 +516,5 @@ class Db extends AbstractWidget
         }
 
         return $this->recordClass;
-    }
-
-    public function getPlural()
-    {
-
     }
 }
