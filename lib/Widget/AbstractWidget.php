@@ -144,7 +144,8 @@ abstract class AbstractWidget implements WidgetInterface
     /**
      * Constructor
      *
-     * @param  array        $options The property options
+     * @param array $options The property options
+     * @throws \InvalidArgumentException When option "widget" is not an instance of "Widget\Widget"
      */
     public function __construct(array $options = array())
     {
@@ -152,8 +153,8 @@ abstract class AbstractWidget implements WidgetInterface
 
         if (!isset($this->widget)) {
             $this->widget = Widget::create();
-        } elseif (!$this->widget instanceof WidgetInterface) {
-            throw new \InvalidArgumentException(sprintf('Option "widget" of class "%s" should be an instance of "WidgetInterface"', get_class($this)));
+        } elseif (!$this->widget instanceof Widget) {
+            throw new \InvalidArgumentException(sprintf('Option "widget" of class "%s" should be an instance of "Widget\Widget"', get_class($this)));
         }
     }
 
