@@ -172,7 +172,7 @@ class QueryBuilder
     {
         $data = $this->execute();
 
-        $table = $this->sqlParts['from'][0]['table'];
+        $table = $this->sqlParts['from']['table'];
 
         if ($data) {
             return $this->db->create($table, $data[0]);
@@ -185,7 +185,7 @@ class QueryBuilder
     {
         $data = $this->execute();
 
-        $table = $this->sqlParts['from'][0]['table'];
+        $table = $this->sqlParts['from']['table'];
 
         $records = array();
         foreach ($data as $row) {

@@ -113,6 +113,9 @@ class DbTest extends TestCase
         $this->assertEquals('vip', $group->name);
 
         // Relation one-to-many
+        //$posts = $user->findAll('posts', 'users.id = posts.user_id');
+        //$posts = $db->finAll('posts', 'user_id = ?', $user->id);
+        //$posts = join ??
         $posts = $user->posts;
 
         $this->assertInstanceOf('\Widget\Db\Collection', $posts);
@@ -355,5 +358,8 @@ class DbTest extends TestCase
 
         $this->assertEquals("SELECT * FROM users u GROUP BY group_id HAVING group_id >= ?", $query->getSql());
         $this->assertEquals('1', $user->group_id);
+
+        // Join
+        //$query = $this->db('users')->leftJoin('group')
     }
 }
