@@ -366,4 +366,10 @@ class DbTest extends TestCase
         // Join
         //$query = $this->db('users')->leftJoin('group')
     }
+
+    public function testFetchColumn()
+    {
+        $count = $this->db->fetchColumn("SELECT COUNT(id) FROM users");
+        $this->assertEquals(2, $count);
+    }
 }

@@ -269,6 +269,19 @@ class Db extends AbstractWidget
     }
 
     /**
+     * Executes a query and returns a column value of the first row
+     *
+     * @param $sql The SQL query
+     * @param array $params The query parameters
+     * @param int $column The index of column
+     * @return string
+     */
+    public function fetchColumn($sql, $params = array(), $column = 0)
+    {
+        return $this->query($sql, $params)->fetchColumn($column);
+    }
+
+    /**
      * Executes an SQL INSERT/UPDATE/DELETE query with the given parameters
      * and returns the number of affected rows
      *
