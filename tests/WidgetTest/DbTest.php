@@ -424,4 +424,17 @@ class DbTest extends TestCase
         $this->assertArrayHasKey('name', $user);
         $this->assertArrayHasKey('address', $user);
     }
+
+    public function testDeleteRecord()
+    {
+        $user = $this->db->find('user', 1);
+
+        $result = $user->delete();
+
+        $this->assertTrue($result);
+
+        $user = $this->db->find('user', 1);
+
+        $this->assertFalse($user);
+    }
 }

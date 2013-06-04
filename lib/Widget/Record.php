@@ -15,45 +15,51 @@ namespace Widget;
  */
 class Record extends  AbstractWidget
 {
+    /**
+     * The record table name
+     *
+     * @var string
+     */
     protected $table;
 
     protected $fullTable;
 
+    protected $primaryKey = 'id';
+
+    /**
+     * The record data
+     *
+     * @var array
+     */
     protected $data = array();
 
     /**
+     * The database widget
+     *
      * @var Db
      */
     protected $db;
 
+    /**
+     * Return the record table name
+     *
+     * @return string
+     */
     public function getTable()
     {
         return $this->table;
     }
 
+    /**
+     * Set the record table name
+     *
+     * @param string $table
+     * @return Record
+     */
     public function setTable($table)
     {
         $this->table = $table;
         return $this;
-    }
-
-    public function create($data, $id = null)
-    {
-        if ($id) {
-
-        }
-    }
-
-    public function findOrCreate()
-    {
-
-    }
-
-    public function save($data = array())
-    {
-        $data && $this->fromArray($data);
-
-        return $this->db->insert($this->table, $this->data);
     }
 
     /**
@@ -113,6 +119,23 @@ class Record extends  AbstractWidget
         $this->data = $data;
 
         return $this;
+    }
+
+    public function save($data = array())
+    {
+        $data && $this->fromArray($data);
+
+        return $this->db->insert($this->table, $this->data);
+    }
+
+    /**
+     * Delete the current record
+     *
+     * @return int
+     */
+    public function delete()
+    {
+        return (bool)$this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
     }
 
     public function __get($name)
