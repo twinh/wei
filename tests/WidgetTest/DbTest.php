@@ -226,20 +226,20 @@ class DbTest extends TestCase
         $query = $this->db('users')->where("name = 'twin'");
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM users u WHERE name = 'twin'", $query->getSql());
+        $this->assertEquals("SELECT * FROM users WHERE name = 'twin'", $query->getSql());
         $this->assertEquals('twin', $user->name);
 
         // ? conditions
         $query = $this->db('users')->where('name = ?', 'twin');
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM users u WHERE name = ?", $query->getSql());
+        $this->assertEquals("SELECT * FROM users WHERE name = ?", $query->getSql());
         $this->assertEquals('twin', $user->name);
 
         $query = $this->db('users')->where('group_id = ? AND name = ?', array('1', 'twin'));
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM users u WHERE group_id = ? AND name = ?", $query->getSql());
+        $this->assertEquals("SELECT * FROM users WHERE group_id = ? AND name = ?", $query->getSql());
         $this->assertEquals('1', $user->group_id);
         $this->assertEquals('twin', $user->name);
 
@@ -250,7 +250,7 @@ class DbTest extends TestCase
         ));
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM users u WHERE group_id = :groupId AND name = :name", $query->getSql());
+        $this->assertEquals("SELECT * FROM users WHERE group_id = :groupId AND name = :name", $query->getSql());
         $this->assertEquals('1', $user->group_id);
         $this->assertEquals('twin', $user->name);
 
@@ -260,13 +260,13 @@ class DbTest extends TestCase
         ));
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM users u WHERE group_id = :groupId AND name = :name", $query->getSql());
+        $this->assertEquals("SELECT * FROM users WHERE group_id = :groupId AND name = :name", $query->getSql());
         $this->assertEquals('1', $user->group_id);
         $this->assertEquals('twin', $user->name);
 
         // Range conditions
         $query = $this->db('users')->where('group_id BETWEEN ? AND ?', array('1', '2'));
-        $this->assertEquals("SELECT * FROM users u WHERE group_id BETWEEN ? AND ?", $query->getSql());
+        $this->assertEquals("SELECT * FROM users WHERE group_id BETWEEN ? AND ?", $query->getSql());
 
         $user = $query->find();
         $this->assertGreaterThanOrEqual(1, $user->group_id);
@@ -276,7 +276,7 @@ class DbTest extends TestCase
         $query = $this->db('users')->where(array('group_id' => array('1', '2')));
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM users u WHERE group_id IN (?, ?)", $query->getSql());
+        $this->assertEquals("SELECT * FROM users WHERE group_id IN (?, ?)", $query->getSql());
         $this->assertEquals('1', $user->group_id);
 
         $query = $this->db('users')->where(array(
@@ -285,28 +285,28 @@ class DbTest extends TestCase
         ));
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM users u WHERE id = ? AND group_id IN (?, ?)", $query->getSql());
+        $this->assertEquals("SELECT * FROM users WHERE id = ? AND group_id IN (?, ?)", $query->getSql());
         $this->assertEquals('1', $user->id);
 
         // Order
         $query = $this->db('users')->orderBy('id', 'ASC');
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM users u ORDER BY id ASC", $query->getSql());
+        $this->assertEquals("SELECT * FROM users ORDER BY id ASC", $query->getSql());
         $this->assertEquals('1', $user->id);
 
         // Add order
         $query = $this->db('users')->orderBy('id', 'ASC')->addOrderBy('group_id', 'ASC');
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM users u ORDER BY id ASC, group_id ASC", $query->getSql());
+        $this->assertEquals("SELECT * FROM users ORDER BY id ASC, group_id ASC", $query->getSql());
         $this->assertEquals('1', $user->id);
 
         // Select
         $query = $this->db('users')->select('id, group_id');
         $user = $query->find()->toArray();
 
-        $this->assertEquals("SELECT id, group_id FROM users u", $query->getSql());
+        $this->assertEquals("SELECT id, group_id FROM users", $query->getSql());
         $this->assertArrayHasKey('id', $user);
         $this->assertArrayHasKey('group_id', $user);
         $this->assertArrayNotHasKey('name', $user);
@@ -315,7 +315,7 @@ class DbTest extends TestCase
         $query = $this->db('users')->select('id')->addSelect('group_id');
         $user = $query->find()->toArray();
 
-        $this->assertEquals("SELECT id, group_id FROM users u", $query->getSql());
+        $this->assertEquals("SELECT id, group_id FROM users", $query->getSql());
         $this->assertArrayHasKey('id', $user);
         $this->assertArrayHasKey('group_id', $user);
         $this->assertArrayNotHasKey('name', $user);
@@ -324,43 +324,43 @@ class DbTest extends TestCase
         $query = $this->db('users')->select('DISTINCT group_id');
         $user = $query->find();
 
-        $this->assertEquals("SELECT DISTINCT group_id FROM users u", $query->getSql());
+        $this->assertEquals("SELECT DISTINCT group_id FROM users", $query->getSql());
         $this->assertEquals('1', $user->group_id);
 
         // Limit
         $query = $this->db('users')->limit(2);
         $users = $query->findAll();
 
-        $this->assertEquals("SELECT * FROM users u LIMIT 2", $query->getSql());
+        $this->assertEquals("SELECT * FROM users LIMIT 2", $query->getSql());
         $this->assertCount(2, $users);
 
         // Offset
         $query = $this->db('users')->limit(1)->offset(1);
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM users u LIMIT 1 OFFSET 1", $query->getSql());
+        $this->assertEquals("SELECT * FROM users LIMIT 1 OFFSET 1", $query->getSql());
         $this->assertEquals(2, $user->id);
 
         // Page
         $query = $this->db('users')->page(3);
-        $this->assertEquals("SELECT * FROM users u LIMIT 10 OFFSET 20", $query->getSql());
+        $this->assertEquals("SELECT * FROM users LIMIT 10 OFFSET 20", $query->getSql());
 
         // Mixed limit and page
         $query = $this->db('users')->limit(3)->page(3);
-        $this->assertEquals("SELECT * FROM users u LIMIT 3 OFFSET 6", $query->getSql());
+        $this->assertEquals("SELECT * FROM users LIMIT 3 OFFSET 6", $query->getSql());
 
         // Group by
         $query = $this->db('users')->groupBy('group_id');
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM users u GROUP BY group_id", $query->getSql());
+        $this->assertEquals("SELECT * FROM users GROUP BY group_id", $query->getSql());
         $this->assertEquals('1', $user->group_id);
 
         // Having
         $query = $this->db('users')->groupBy('group_id')->having('group_id >= ?', '1');
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM users u GROUP BY group_id HAVING group_id >= ?", $query->getSql());
+        $this->assertEquals("SELECT * FROM users GROUP BY group_id HAVING group_id >= ?", $query->getSql());
         $this->assertEquals('1', $user->group_id);
 
         // Join

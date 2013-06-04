@@ -228,7 +228,7 @@ class Db extends AbstractWidget
             if (1) {
                 $query .= "WHERE " . implode(' = ? AND ', array_keys($where)) . ' = ?';
                 $params = array_values($where);
-            // Indexed array
+                // Indexed array
             } else {
 
             }
@@ -380,7 +380,7 @@ class Db extends AbstractWidget
     {
         return $this
             ->createQueryBuilder()
-            ->from($table, $alias ?: $table[0]);
+            ->from($table, $alias);
     }
 
     /**
@@ -486,21 +486,20 @@ class Db extends AbstractWidget
     {
         if (isset($this->tables[$name]['class'])) {
             return $this->tables[$name]['class'];
-        } else {
-            return $this->recordClass;
         }
+
+        if ($this->recordNamespace) {
+            $class = $this->recordNamespace . '\\' . ucfirst($this->camelCaseToUnderscore($name));
+            if (class_exists($class)) {
+                return $class;
+            }
+        }
+
+        return $this->recordClass;
     }
 
     public function getPlural()
     {
 
-    }
-
-    public function getColumns($table)
-    {
-        if (isset($this->tables[$table]['columns'])) {
-            return $this->tables[$table]['columns'];
-        }
-        return false;
     }
 }

@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * A base database record class
  *
- * @author      Twin Huang <twinhuang@qq.com>
+ * @author      Twin Huang <twinhuan    g@qq.com>
  */
 class Record extends  AbstractWidget
 {
@@ -59,22 +59,7 @@ class Record extends  AbstractWidget
     {
         $data && $this->fromArray($data);
 
-        $dbData = array();
-        $columns = $this->db->getColumns($this->table);
-        if ($columns) {
-            foreach ($data as $field => $value) {
-                if (isset($columns[$field])) {
-                    $dbData[$columns[$field]] = $value;
-                } else {
-                    $dbData[$field] = $value;
-                }
-            }
-        } else {
-            $dbData = $this->data;
-        }
-
-
-        return $this->db->insert($this->table, $dbData);
+        return $this->db->insert($this->table, $this->data);
     }
 
     public function toArray()
@@ -108,21 +93,8 @@ class Record extends  AbstractWidget
 
     public function setData($data)
     {
-        $columns = $this->db->getColumns($this->table);
-        if ($columns) {
-            $dbData = array();
-            $columns = array_flip($columns);
-            foreach ($data as $column => $value) {
-                if (isset($columns[$column])) {
-                    $dbData[$columns[$column]] = $value;
-                } else {
-                    $dbData[$column] = $value;
-                }
-            }
-            $this->data = $dbData;
-        } else {
-            $this->data = $data;
-        }
+        $this->data = $data;
+
         return $this;
     }
 
