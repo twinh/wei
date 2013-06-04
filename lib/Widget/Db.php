@@ -422,17 +422,36 @@ class Db extends AbstractWidget
     }
 
     /**
+     * Find a record
      *
-     *
-     * @param $table
-     * @param $id
-     * @return Record
+     * @param string $table The name of table
+     * @param string|array $id The primary key value
+     * @return Record|false
      */
     public function find($table, $id)
     {
         $data = $this->select($table, $id);
 
         return $data ? $this->create($table, $data) : false;
+    }
+
+    /**
+     * Find a record, if not found, create a new one from specified data
+     *
+     * @param string $table The name of table
+     * @param string $id The primary key value
+     * @param array $data The data to create a new record when record not found
+     * @return Record
+     */
+    public function findOrCreate($table, $id, $data = array())
+    {
+        $record = $this->select($table, $id);
+
+        if ($record) {
+            return $this->create($table, $record);
+        } else {
+            return $this->create($table, $data + array('id' => $id));
+        }
     }
 
     /**

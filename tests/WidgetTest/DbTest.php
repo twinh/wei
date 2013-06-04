@@ -146,6 +146,25 @@ class DbTest extends TestCase
         $this->assertFalse($user);
     }
 
+    public function testFind()
+    {
+        $user = $this->db->find('user', '1');
+
+        $this->assertEquals('1', $user->id);
+    }
+
+    public function testFindOrCreate()
+    {
+        $user = $this->db->find('user', '3');
+        $this->assertFalse($user);
+
+        $user = $this->db->findOrCreate('user', '3', array(
+            'name' => 'name'
+        ));
+        $this->assertEquals('name', $user->name);
+        $this->assertEquals('3', $user->id);
+    }
+
     public function testRecordSave()
     {
         $this->db->user->save(array(
@@ -393,5 +412,16 @@ class DbTest extends TestCase
 
         $this->assertEquals('WidgetTest\DbTest\User', $this->db->getRecordClass('user'));
         $this->assertInstanceOf('WidgetTest\DbTest\User', $user);
+    }
+
+    public function testRecordToArray()
+    {
+        $user = $this->db->find('user', 1)->toArray();
+
+        $this->assertInternalType('array', $user);
+        $this->assertArrayHasKey('id', $user);
+        $this->assertArrayHasKey('group_id', $user);
+        $this->assertArrayHasKey('name', $user);
+        $this->assertArrayHasKey('address', $user);
     }
 }

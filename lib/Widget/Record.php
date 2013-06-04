@@ -26,17 +26,6 @@ class Record extends  AbstractWidget
      */
     protected $db;
 
-    /**
-     * The helper method to create a new record object
-     *
-     * @param $id
-     * @return Record
-     */
-    public function find($id)
-    {
-        return $this->db->find($this->getTable(), $id);
-    }
-
     public function getTable()
     {
         return $this->table;
@@ -55,6 +44,11 @@ class Record extends  AbstractWidget
         }
     }
 
+    public function findOrCreate()
+    {
+
+    }
+
     public function save($data = array())
     {
         $data && $this->fromArray($data);
@@ -62,6 +56,11 @@ class Record extends  AbstractWidget
         return $this->db->insert($this->table, $this->data);
     }
 
+    /**
+     * Returns a the record data
+     *
+     * @return array
+     */
     public function toArray()
     {
         $data = array();
@@ -75,6 +74,12 @@ class Record extends  AbstractWidget
         return $data;
     }
 
+    /**
+     * Import a PHP array in this record
+     *
+     * @param $data
+     * @return Record
+     */
     public function fromArray($data)
     {
         $this->data = $data + $this->data;
@@ -82,6 +87,12 @@ class Record extends  AbstractWidget
         return $this;
     }
 
+    /**
+     *
+     *
+     * @param $field
+     * @return $this
+     */
     public function clear($field)
     {
         if (isset($this->data[$field])) {
@@ -91,6 +102,12 @@ class Record extends  AbstractWidget
         return $this;
     }
 
+    /**
+     * Set record data
+     *
+     * @param $data
+     * @return Record
+     */
     public function setData($data)
     {
         $this->data = $data;
@@ -127,5 +144,16 @@ class Record extends  AbstractWidget
                 $db->getSingular($this->table) . '_id' => $this->data['id']
             ));
         }
+    }
+
+    /**
+     * A helper method to find a record
+     *
+     * @param $id
+     * @return Record
+     */
+    public function find($id)
+    {
+        return $this->db->find($this->getTable(), $id);
     }
 }
