@@ -506,22 +506,19 @@ class QueryBuilder
      *         ->setParameter(':user_id', 1);
      * </code>
      *
-     * @param string $delete The table whose rows are subject to the deletion.
+     * @param string $table The table whose rows are subject to the deletion.
      * @param string $alias The table alias used in the constructed query.
      * @return QueryBuilder This QueryBuilder instance.
      */
-    public function delete($delete = null, $alias = null)
+    public function delete($table = null, $alias = null)
     {
         $this->type = self::DELETE;
 
-        if ( ! $delete) {
+        if ($table) {
+            return $this->from($table, $alias);
+        } else {
             return $this;
         }
-
-        return $this->add('from', array(
-            'table' => $delete,
-            'alias' => $alias
-        ));
     }
 
     /**
@@ -535,22 +532,19 @@ class QueryBuilder
      *         ->where('u.id = ?');
      * </code>
      *
-     * @param string $update The table whose rows are subject to the update.
+     * @param string $table The table whose rows are subject to the update.
      * @param string $alias The table alias used in the constructed query.
      * @return QueryBuilder This QueryBuilder instance.
      */
-    public function update($update = null, $alias = null)
+    public function update($table = null, $alias = null)
     {
         $this->type = self::UPDATE;
 
-        if ( ! $update) {
+        if ($table) {
+            return $this->from($table, $alias);
+        } else {
             return $this;
         }
-
-        return $this->add('from', array(
-            'table' => $update,
-            'alias' => $alias
-        ));
     }
 
     /**
@@ -572,7 +566,7 @@ class QueryBuilder
         return $this->add('from', array(
             'table' => $from,
             'alias' => $alias
-        ), true);
+        ));
     }
 
     /**
@@ -956,13 +950,10 @@ class QueryBuilder
 
         $query = 'SELECT ' . implode(', ', $this->sqlParts['select']) . ' FROM ';
 
-        $fromClauses = array();
+        // FROM
+        $query .= $this->sqlParts['from']['table'] . ($this->sqlParts['from']['alias'] ? ' ' . $this->sqlParts['from']['alias'] : '');
 
-        foreach ($this->sqlParts['from'] as $from) {
-            $fromClauses[$from['alias']] = $from['table'] . ($from['alias'] ? ' ' . $from['alias'] : '');
-        }
-        $query .= implode(', ', $fromClauses);
-
+        // JOIN
         foreach ($this->sqlParts['join'] as $join) {
             $query .= ' ' . strtoupper($join['joinType'])
                 . ' JOIN ' . $join['joinTable']

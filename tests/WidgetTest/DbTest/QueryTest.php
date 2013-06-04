@@ -332,18 +332,6 @@ class QueryTest extends TestCase
         $this->assertEquals(QueryBuilder::SELECT, $qb->getType());
     }
 
-    public function testSelectMultipleFrom()
-    {
-        $qb   = new QueryBuilder($this->db);
-
-        $qb->select('u.*')
-            ->addSelect('p.*')
-            ->from('users', 'u')
-            ->from('phonenumbers', 'p');
-
-        $this->assertEquals('SELECT u.*, p.* FROM users u, phonenumbers p', (string) $qb);
-    }
-
     public function testUpdate()
     {
         $qb   = new QueryBuilder($this->db);
