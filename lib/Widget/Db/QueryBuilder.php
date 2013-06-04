@@ -609,9 +609,9 @@ class QueryBuilder
     public function innerJoin($table, $on = null, $params = array(), $types = array())
     {
         return $this->add('join', array(
-            'joinType'      => 'inner',
-            'joinTable'     => $table,
-            'joinCondition' => $on
+            'type'      => 'inner',
+            'table'     => $table,
+            'condition' => $on
         ), true);
     }
 
@@ -634,9 +634,9 @@ class QueryBuilder
     public function leftJoin($table, $on = null, $params = array(), $types = array())
     {
         return $this->add('join', array(
-            'joinType'      => 'left',
-            'joinTable'     => $table,
-            'joinCondition' => $on
+            'type'      => 'left',
+            'table'     => $table,
+            'condition' => $on
         ), true);
     }
 
@@ -659,9 +659,9 @@ class QueryBuilder
     public function rightJoin($table, $on = null, $params = array(), $types = array())
     {
         return $this->add('join', array(
-            'joinType'      => 'right',
-            'joinTable'     => $table,
-            'joinCondition' => $on
+            'type'      => 'right',
+            'table'     => $table,
+            'condition' => $on
         ), true);
     }
 
@@ -955,9 +955,9 @@ class QueryBuilder
 
         // JOIN
         foreach ($this->sqlParts['join'] as $join) {
-            $query .= ' ' . strtoupper($join['joinType'])
-                . ' JOIN ' . $join['joinTable']
-                . ' ON ' . $join['joinCondition'];
+            $query .= ' ' . strtoupper($join['type'])
+                . ' JOIN ' . $join['table']
+                . ' ON ' . $join['condition'];
         }
 
         $query .= ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '')
@@ -1022,9 +1022,9 @@ class QueryBuilder
 
         if (isset($this->sqlParts['join'][$fromAlias])) {
             foreach ($this->sqlParts['join'][$fromAlias] as $join) {
-                $sql .= ' ' . strtoupper($join['joinType'])
-                    . ' JOIN ' . $join['joinTable'] . ' ' . $join['joinAlias']
-                    . ' ON ' . ((string) $join['joinCondition']);
+                $sql .= ' ' . strtoupper($join['type'])
+                    . ' JOIN ' . $join['table'] . ' ' . $join['joinAlias']
+                    . ' ON ' . ((string) $join['condition']);
                 $knownAliases[$join['joinAlias']] = true;
 
                 $sql .= $this->getSqlForJoins($join['joinAlias'], $knownAliases);
