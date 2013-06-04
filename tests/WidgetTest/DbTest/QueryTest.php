@@ -481,4 +481,14 @@ class QueryTest extends TestCase
         $qb->resetQueryParts(array('where', 'orderBy'));
         $this->assertEquals('SELECT u.* FROM users u', (string)$qb);
     }
+
+    public function testFrom()
+    {
+        $qb = new QueryBuilder($this->db);
+
+        // users table would be overwrite
+        $qb->from('users')->from('groups');
+
+        $this->assertEquals("SELECT * FROM groups", $qb->getSql());
+    }
 }

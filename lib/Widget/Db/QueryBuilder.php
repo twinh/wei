@@ -959,7 +959,7 @@ class QueryBuilder
         $fromClauses = array();
 
         foreach ($this->sqlParts['from'] as $from) {
-            $fromClauses[$from['alias']] = $from['table'] . ' ' . $from['alias'];
+            $fromClauses[$from['alias']] = $from['table'] . ($from['alias'] ? ' ' . $from['alias'] : '');
         }
         $query .= implode(', ', $fromClauses);
 
