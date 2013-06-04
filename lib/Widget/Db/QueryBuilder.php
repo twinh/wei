@@ -98,21 +98,18 @@ class QueryBuilder
     protected $state = self::STATE_CLEAN;
 
     /**
-     * @var integer The index of the first result to retrieve.
-     */
-    protected $offset = null;
-
-    /**
-     * @var integer The maximum number of results to retrieve.
-     */
-    protected $limit = null;
-
-    /**
-     * The default rows
+     * The index of the first result to retrieve
      *
-     * @var int
+     * @var integer
      */
-    protected $rows = 10;
+    protected $offset;
+
+    /**
+     * The maximum number of results to retrieve
+     *
+     * @var integer
+     */
+    protected $limit;
 
     /**
      * Initializes a new <tt>QueryBuilder</tt>.
@@ -361,8 +358,12 @@ class QueryBuilder
     public function page($page)
     {
         $this->state = self::STATE_DIRTY;
-        $this->limit = $this->rows;
-        $this->offset = ($page - 1) * $this->rows;
+
+        if (!$this->limit) {
+            $this->limit = 10;
+        }
+        $this->offset = ($page - 1) * $this->limit;
+
         return $this;
     }
 

@@ -345,6 +345,10 @@ class DbTest extends TestCase
         $query = $this->db('users')->page(3);
         $this->assertEquals("SELECT * FROM users u LIMIT 10 OFFSET 20", $query->getSql());
 
+        // Mixed limit and page
+        $query = $this->db('users')->limit(3)->page(3);
+        $this->assertEquals("SELECT * FROM users u LIMIT 3 OFFSET 6", $query->getSql());
+
         // Group by
         $query = $this->db('users')->groupBy('group_id');
         $user = $query->find();
