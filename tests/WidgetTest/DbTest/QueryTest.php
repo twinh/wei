@@ -46,9 +46,9 @@ class QueryTest extends TestCase
 
         $qb->select('u.*', 'p.*')
             ->from('users', 'u')
-            ->leftJoin('u', 'phones', 'p', 'p.user_id = u.id');
+            ->leftJoin('phones p', 'p.user_id = u.id');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u LEFT JOIN phones p ON p.user_id = u.id', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u LEFT JOIN phones p ON p.user_id = u.id', $qb->getSql());
     }
 
     public function testSelectWithJoin()
@@ -57,7 +57,7 @@ class QueryTest extends TestCase
 
         $qb->select('u.*', 'p.*')
             ->from('users', 'u')
-            ->Join('u', 'phones', 'p', 'p.user_id = u.id');
+            ->Join('phones p', 'p.user_id = u.id');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u INNER JOIN phones p ON p.user_id = u.id', (string) $qb);
     }
@@ -68,7 +68,7 @@ class QueryTest extends TestCase
 
         $qb->select('u.*', 'p.*')
             ->from('users', 'u')
-            ->innerJoin('u', 'phones', 'p', 'p.user_id = u.id');
+            ->innerJoin('phones p', 'p.user_id = u.id');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u INNER JOIN phones p ON p.user_id = u.id', (string) $qb);
     }
@@ -79,7 +79,7 @@ class QueryTest extends TestCase
 
         $qb->select('u.*', 'p.*')
             ->from('users', 'u')
-            ->rightJoin('u', 'phones', 'p', 'p.user_id = u.id');
+            ->rightJoin('phones p', 'p.user_id = u.id');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u RIGHT JOIN phones p ON p.user_id = u.id', (string) $qb);
     }
@@ -480,59 +480,5 @@ class QueryTest extends TestCase
         $this->assertEquals('SELECT u.* FROM users u WHERE u.name = ? ORDER BY u.name ASC', (string)$qb);
         $qb->resetQueryParts(array('where', 'orderBy'));
         $this->assertEquals('SELECT u.* FROM users u', (string)$qb);
-    }
-
-    /**
-     * @group DBAL-172
-     */
-    public function testReferenceJoinFromJoin()
-    {
-        $qb = new QueryBuilder($this->db);
-
-        $qb->select('COUNT(DISTINCT news.id)')
-            ->from('cb_newspages', 'news')
-            ->innerJoin('news', 'nodeversion', 'nv', 'nv.refId = news.id AND nv.refEntityname=\'News\'')
-            ->innerJoin('invalid', 'nodetranslation', 'nt', 'nv.nodetranslation = nt.id')
-            ->innerJoin('nt', 'node', 'n', 'nt.node = n.id')
-            ->where('nt.lang = :lang AND n.deleted != 1');
-
-        $this->setExpectedException('\RuntimeException', "The given alias 'invalid' is not part of any FROM or JOIN clause table. The currently registered aliases are: news, nv.");
-        $this->assertEquals('', $qb->getSql());
-    }
-
-    /**
-     * @group DBAL-172
-     */
-    public function testSelectFromMasterWithWhereOnJoinedTables()
-    {
-        $qb = new QueryBuilder($this->db);
-
-        $qb->select('COUNT(DISTINCT news.id)')
-            ->from('newspages', 'news')
-            ->innerJoin('news', 'nodeversion', 'nv', "nv.refId = news.id AND nv.refEntityname='Entity\\News'")
-            ->innerJoin('nv', 'nodetranslation', 'nt', 'nv.nodetranslation = nt.id')
-            ->innerJoin('nt', 'node', 'n', 'nt.node = n.id')
-            ->where('nt.lang = ?')
-            ->andWhere('n.deleted = 0');
-
-        $this->assertEquals("SELECT COUNT(DISTINCT news.id) FROM newspages news INNER JOIN nodeversion nv ON nv.refId = news.id AND nv.refEntityname='Entity\\News' INNER JOIN nodetranslation nt ON nv.nodetranslation = nt.id INNER JOIN node n ON nt.node = n.id WHERE (nt.lang = ?) AND (n.deleted = 0)", $qb->getSql());
-    }
-
-    /**
-     * @group DBAL-442
-     */
-    public function testSelectWithMultipleFromAndJoins()
-    {
-        $qb = new QueryBuilder($this->db);
-
-        $qb->select('DISTINCT u.id')
-            ->from('users', 'u')
-            ->from('articles', 'a')
-            ->innerJoin('u', 'permissions', 'p', 'p.user_id = u.id')
-            ->innerJoin('a', 'comments', 'c', 'c.article_id = a.id')
-            ->where('u.id = a.user_id')
-            ->andWhere('p.read = 1');
-
-        $this->assertEquals('SELECT DISTINCT u.id FROM users u INNER JOIN permissions p ON p.user_id = u.id, articles a INNER JOIN comments c ON c.article_id = a.id WHERE (u.id = a.user_id) AND (p.read = 1)', $qb->getSql());
     }
 }

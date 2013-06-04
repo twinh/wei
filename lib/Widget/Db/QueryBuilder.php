@@ -432,6 +432,15 @@ class QueryBuilder
         return $this;
     }
 
+    public function merge(QueryBuilder $query)
+    {
+        $sqlParts = $query->getQueryParts();
+        foreach ($sqlParts as $name => $sqlPart) {
+            $this->add($name, $sqlPart, true);
+        }
+        return $this;
+    }
+
     /**
      * Specifies an item that is to be returned in the query result.
      * Replaces any previously specified selections, if any.
@@ -558,7 +567,7 @@ class QueryBuilder
      * @param string $alias  The alias of the table
      * @return QueryBuilder This QueryBuilder instance.
      */
-    public function from($from, $alias)
+    public function from($from, $alias = null)
     {
         return $this->add('from', array(
             'table' => $from,
@@ -582,9 +591,9 @@ class QueryBuilder
      * @param string $condition The condition for the join
      * @return QueryBuilder This QueryBuilder instance.
      */
-    public function join($fromAlias, $join, $alias, $condition = null)
+    public function join($table, $on = null, $params = array(), $types = array())
     {
-        return $this->innerJoin($fromAlias, $join, $alias, $condition);
+        return $this->innerJoin($table, $on, $params, $types);
     }
 
     /**
@@ -603,15 +612,12 @@ class QueryBuilder
      * @param string $condition The condition for the join
      * @return QueryBuilder This QueryBuilder instance.
      */
-    public function innerJoin($fromAlias, $join, $alias, $condition = null)
+    public function innerJoin($table, $on = null, $params = array(), $types = array())
     {
         return $this->add('join', array(
-            $fromAlias => array(
-                'joinType'      => 'inner',
-                'joinTable'     => $join,
-                'joinAlias'     => $alias,
-                'joinCondition' => $condition
-            )
+            'joinType'      => 'inner',
+            'joinTable'     => $table,
+            'joinCondition' => $on
         ), true);
     }
 
@@ -631,15 +637,12 @@ class QueryBuilder
      * @param string $condition The condition for the join
      * @return QueryBuilder This QueryBuilder instance.
      */
-    public function leftJoin($fromAlias, $join, $alias, $condition = null)
+    public function leftJoin($table, $on = null, $params = array(), $types = array())
     {
         return $this->add('join', array(
-            $fromAlias => array(
-                'joinType'      => 'left',
-                'joinTable'     => $join,
-                'joinAlias'     => $alias,
-                'joinCondition' => $condition
-            )
+            'joinType'      => 'left',
+            'joinTable'     => $table,
+            'joinCondition' => $on
         ), true);
     }
 
@@ -659,15 +662,12 @@ class QueryBuilder
      * @param string $condition The condition for the join
      * @return QueryBuilder This QueryBuilder instance.
      */
-    public function rightJoin($fromAlias, $join, $alias, $condition = null)
+    public function rightJoin($table, $on = null, $params = array(), $types = array())
     {
         return $this->add('join', array(
-            $fromAlias => array(
-                'joinType'      => 'right',
-                'joinTable'     => $join,
-                'joinAlias'     => $alias,
-                'joinCondition' => $condition
-            )
+            'joinType'      => 'right',
+            'joinTable'     => $table,
+            'joinCondition' => $on
         ), true);
     }
 
@@ -942,6 +942,12 @@ class QueryBuilder
         return $this;
     }
 
+    /**
+     * Converts this instance into an SELECT string in SQL
+     *
+     * @throws \RuntimeException When table alias not registered
+     * @return string
+     */
     protected function getSqlForSelect()
     {
         if (!$this->sqlParts['select']) {
@@ -951,27 +957,19 @@ class QueryBuilder
         $query = 'SELECT ' . implode(', ', $this->sqlParts['select']) . ' FROM ';
 
         $fromClauses = array();
-        $knownAliases = array();
 
-        // Loop through all FROM clauses
         foreach ($this->sqlParts['from'] as $from) {
-            $knownAliases[$from['alias']] = true;
-            $fromClause = $from['table'] . ' ' . $from['alias']
-                . $this->getSqlForJoins($from['alias'], $knownAliases);
+            $fromClauses[$from['alias']] = $from['table'] . ' ' . $from['alias'];
+        }
+        $query .= implode(', ', $fromClauses);
 
-            $fromClauses[$from['alias']] = $fromClause;
+        foreach ($this->sqlParts['join'] as $join) {
+            $query .= ' ' . strtoupper($join['joinType'])
+                . ' JOIN ' . $join['joinTable']
+                . ' ON ' . $join['joinCondition'];
         }
 
-        foreach ($this->sqlParts['join'] as $fromAlias => $joins) {
-            if ( ! isset($knownAliases[$fromAlias]) ) {
-                throw new \RuntimeException("The given alias '" . $fromAlias . "' is not part of " .
-                    "any FROM or JOIN clause table. The currently registered " .
-                    "aliases are: " . implode(", ", array_keys($knownAliases)) . ".");
-            }
-        }
-
-        $query .= implode(', ', $fromClauses)
-            . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '')
+        $query .= ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '')
             . ($this->sqlParts['groupBy'] ? ' GROUP BY ' . implode(', ', $this->sqlParts['groupBy']) : '')
             . ($this->sqlParts['having'] !== null ? ' HAVING ' . ((string) $this->sqlParts['having']) : '')
             . ($this->sqlParts['orderBy'] ? ' ORDER BY ' . implode(', ', $this->sqlParts['orderBy']) : '');
