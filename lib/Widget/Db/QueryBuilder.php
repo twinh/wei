@@ -1016,24 +1016,6 @@ class QueryBuilder
         return $this->getSql();
     }
 
-    protected function getSqlForJoins($fromAlias, array &$knownAliases)
-    {
-        $sql = '';
-
-        if (isset($this->sqlParts['join'][$fromAlias])) {
-            foreach ($this->sqlParts['join'][$fromAlias] as $join) {
-                $sql .= ' ' . strtoupper($join['type'])
-                    . ' JOIN ' . $join['table'] . ' ' . $join['joinAlias']
-                    . ' ON ' . ((string) $join['condition']);
-                $knownAliases[$join['joinAlias']] = true;
-
-                $sql .= $this->getSqlForJoins($join['joinAlias'], $knownAliases);
-            }
-        }
-
-        return $sql;
-    }
-
     protected function processCondition($conditions, $params, $type)
     {
         if (is_array($conditions)) {
