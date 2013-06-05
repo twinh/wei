@@ -278,7 +278,7 @@ class Db extends AbstractWidget
     /**
      * Executes a query and returns a column value of the first row
      *
-     * @param $sql The SQL query
+     * @param string $sql The SQL query
      * @param array $params The query parameters
      * @param int $column The index of column
      * @return string
@@ -324,6 +324,7 @@ class Db extends AbstractWidget
      *
      * @param string $sql The SQL query
      * @param array $params The SQL parameters
+     * @throws \RuntimeException When a PDOException raise
      * @return \PDOStatement
      */
     public function query($sql, $params = array())
@@ -387,7 +388,7 @@ class Db extends AbstractWidget
     }
 
     /**
-     * Create a new instance of a SQL query builder.
+     * Create a new instance of a SQL query builder
      *
      * @return Db\QueryBuilder
      */
@@ -396,6 +397,13 @@ class Db extends AbstractWidget
         return new Db\QueryBuilder($this);
     }
 
+    /**
+     * Create a new instance of a SQL query builder with specified table and alias
+     *
+     * @param string $table The name of database table
+     * @param string $alias The name of table alias
+     * @return Db\QueryBuilder
+     */
     public function from($table, $alias = null)
     {
         return $this
@@ -406,8 +414,8 @@ class Db extends AbstractWidget
     /**
      * Create a new record instance
      *
-     * @param $table
-     * @param $data
+     * @param string $table The name of database table
+     * @param array $data The data for table record
      * @return Record
      */
     public function create($table, $data = array())
@@ -455,10 +463,10 @@ class Db extends AbstractWidget
     }
 
     /**
-     * Fetch data by specified
+     * Fetch records by specified conditions
      *
-     * @param string $table
-     * @param array $where
+     * @param string $table The name of database table
+     * @param array $where The primary key value or an associative array containing column-value pairs
      * @return Collection
      */
     public function findAll($table, $where = null)

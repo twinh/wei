@@ -7,11 +7,12 @@
  */
 
 namespace Widget;
+use Widget\Db\Collection;
 
 /**
  * A base database record class
  *
- * @author      Twin Huang <twinhuan    g@qq.com>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Record extends  AbstractWidget
 {
@@ -71,7 +72,7 @@ class Record extends  AbstractWidget
     {
         $data = array();
         foreach ($this->data as $field => $value) {
-            if ($value instanceof Record || $value instanceof Coll) {
+            if ($value instanceof Record || $value instanceof Collection) {
                 $data[$field] = $value->toArray();
             } else {
                 $data[$field] = $value;
