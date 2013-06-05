@@ -81,7 +81,7 @@ class Redirect extends Response
      *
      * @param string $view The view file
      * @return Redirect
-     * @throws Exception\NotFoundException When view file not found
+     * @throws \RuntimeException When view file not found
      */
     public function setView($view)
     {
