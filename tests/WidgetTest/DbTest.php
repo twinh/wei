@@ -384,6 +384,8 @@ class DbTest extends TestCase
         $this->assertEquals('1', $user->group_id);
 
         // Join
+        //$query = $this->db('user')->leftJoin('groups AS group', 'group.id = user.group_id');
+        //$user = $query->find();
         //$query = $this->db('user')->leftJoin('group')
     }
 
@@ -424,6 +426,13 @@ class DbTest extends TestCase
         $this->assertArrayHasKey('group_id', $user);
         $this->assertArrayHasKey('name', $user);
         $this->assertArrayHasKey('address', $user);
+
+        $user = $this->db->find('user', 1)->toArray(array('id', 'group_id'));
+        $this->assertInternalType('array', $user);
+        $this->assertArrayHasKey('id', $user);
+        $this->assertArrayHasKey('group_id', $user);
+        $this->assertArrayNotHasKey('name', $user);
+        $this->assertArrayNotHasKey('address', $user);
     }
 
     public function testDeleteRecord()

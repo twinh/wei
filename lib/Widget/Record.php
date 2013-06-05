@@ -66,12 +66,16 @@ class Record extends  AbstractWidget
     /**
      * Returns a the record data
      *
+     * @param array $returnFields A indexed array specified the fields to return
      * @return array
      */
-    public function toArray()
+    public function toArray($returnFields = array())
     {
         $data = array();
         foreach ($this->data as $field => $value) {
+            if ($returnFields && !in_array($field, $returnFields)) {
+                continue;
+            }
             if ($value instanceof Record || $value instanceof Collection) {
                 $data[$field] = $value->toArray();
             } else {
