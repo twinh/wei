@@ -116,7 +116,7 @@ class App extends AbstractWidget
 
         // Prepare exception message
         $message = 'The page you requested was not found';
-        if ($this->widget->config('debug')) {
+        if ($this->widget->inDebug()) {
             $message .= ' - ';
             switch ($notFound) {
                 case 'controller':

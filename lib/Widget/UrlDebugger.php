@@ -19,14 +19,14 @@ class UrlDebugger extends AbstractWidget
 {
     /**
      * Constructor
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
 
-        if ($this->widget->config('debug')) {
+        if ($this->widget->inDebug()) {
             $this->inject();
         }
     }
@@ -44,10 +44,10 @@ class UrlDebugger extends AbstractWidget
             $this->server['REQUEST_METHOD'] = $this->query['_method'];
         }
     }
-    
+
     /**
      * Invoker
-     * 
+     *
      * @return UrlDebugger
      */
     public function __invoke()

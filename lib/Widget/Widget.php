@@ -34,6 +34,13 @@ class Widget extends AbstractWidget
     protected static $instances = array();
 
     /**
+     * Whether in debug mode or not
+     *
+     * @var bool
+     */
+    protected $debug = true;
+
+    /**
      * The array contains the instanced widget objects
      *
      * @var array
@@ -450,6 +457,30 @@ class Widget extends AbstractWidget
         $class = $this->getClass($name);
 
         return class_exists($class) ? $class : false;
+    }
+
+    /**
+     * Set debug flag
+     *
+     * @param $bool
+     * @return Widget
+     * @todo set error_display,..
+     */
+    public function setDebug($bool)
+    {
+        $this->debug = (bool)$bool;
+
+        return $this;
+    }
+
+    /**
+     * Whether in debug mode or not
+     *
+     * @return bool
+     */
+    public function inDebug()
+    {
+        return $this->debug;
     }
 
     /**

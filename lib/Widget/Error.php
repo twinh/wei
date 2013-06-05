@@ -219,7 +219,7 @@ class Error extends AbstractWidget
 
     public function internalHandleException(\Exception $exception)
     {
-        $debug = $this->widget->config('debug');
+        $debug = $this->widget->inDebug();
         $ajax = $this->request->inAjax();
         $code = $exception->getCode();
 
