@@ -16,13 +16,13 @@ class DbTest extends TestCase
 
         $db = $this->db;
 
-        $db->query("CREATE TABLE groups (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
+        $db->query("CREATE TABLE user_group (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
         $db->query("CREATE TABLE user (id INTEGER NOT NULL, group_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE posts (id INTEGER NOT NULL, user_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE tags (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE posts_tags (post_id INTEGER NOT NULL, tag_id INTEGER NOT NULL)");
+        $db->query("CREATE TABLE post (id INTEGER NOT NULL, user_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
+        $db->query("CREATE TABLE tag (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
+        $db->query("CREATE TABLE post_tag (post_id INTEGER NOT NULL, tag_id INTEGER NOT NULL)");
 
-        $db->insert('groups', array(
+        $db->insert('user_group', array(
             'id' => '1',
             'name' => 'vip'
         ));
@@ -39,37 +39,37 @@ class DbTest extends TestCase
             'address' => 'test'
         ));
 
-        $db->insert('posts', array(
+        $db->insert('post', array(
             'user_id' => '1',
             'name' => 'my first post',
         ));
 
-        $db->insert('posts', array(
+        $db->insert('post', array(
             'user_id' => '1',
             'name' => 'my second post',
         ));
 
-        $db->insert('tags', array(
+        $db->insert('tag', array(
             'id' => '1',
             'name' => 'database'
         ));
 
-        $db->insert('tags', array(
+        $db->insert('tag', array(
             'id' => '2',
             'name' => 'PHP'
         ));
 
-        $db->insert('posts_tags', array(
+        $db->insert('post_tag', array(
             'post_id' => '1',
             'tag_id' => '1',
         ));
 
-        $db->insert('posts_tags', array(
+        $db->insert('post_tag', array(
             'post_id' => '1',
             'tag_id' => '2',
         ));
 
-        $db->insert('posts_tags', array(
+        $db->insert('post_tag', array(
             'post_id' => '2',
             'tag_id' => '1',
         ));
@@ -134,7 +134,7 @@ class DbTest extends TestCase
 
         $user = $db->user('1');
 
-        $post = $user->post = $db->find('posts', array('user_id' => $user->id));
+        $post = $user->post = $db->find('post', array('user_id' => $user->id));
 
         $this->assertInstanceOf('\Widget\Record', $post);
 
@@ -399,7 +399,7 @@ class DbTest extends TestCase
         $this->assertEquals('1', $user->group_id);
 
         // Join
-        //$query = $this->db('user')->leftJoin('groups AS group', 'group.id = user.group_id');
+        //$query = $this->db('user')->leftJoin('grouop AS group', 'group.id = user.group_id');
         //$user = $query->find();
         //$query = $this->db('user')->leftJoin('group')
     }

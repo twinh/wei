@@ -17,16 +17,16 @@ class User extends Record
 
     public function post()
     {
-        return $this->db->find('posts', array('user_id' => $this->data['id']));
+        return $this->db->find('post', array('user_id' => $this->data['id']));
     }
 
     public function group()
     {
-        return $this->db->find('groups', array('id' => $this->data['group_id']));
+        return $this->db->find('user_group', array('id' => $this->data['group_id']));
     }
 
     public function posts()
     {
-        return $this->db->findAll('posts', array('user_id' => $this->data['id']));
+        return $this->db->findAll('post', array('user_id' => $this->data['id']));
     }
 }
