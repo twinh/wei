@@ -86,7 +86,7 @@ class Db extends AbstractWidget
      *
      * @var string
      */
-    protected $recordClass = '\Widget\Record';
+    protected $recordClass = 'Widget\Db\Record';
 
     /**
      * An associative array that the key is table name and the value is class name
@@ -96,12 +96,17 @@ class Db extends AbstractWidget
     protected $recordClasses = array();
 
     /**
-     * The record namespace
+     * The record namespace without ending "\"
      *
      * @var string
      */
     protected $recordNamespace;
 
+    /**
+     * @param mixed $table
+     * @param null $alias
+     * @return mixed|Db\QueryBuilder
+     */
     public function __invoke($table, $alias = null)
     {
         return $this->from($table, $alias);
@@ -416,7 +421,7 @@ class Db extends AbstractWidget
      *
      * @param string $table The name of database table
      * @param array $data The data for table record
-     * @return Record
+     * @return Db\Record
      */
     public function create($table, $data = array())
     {
@@ -434,7 +439,7 @@ class Db extends AbstractWidget
      *
      * @param string $table The name of table
      * @param string|array $id The primary key value
-     * @return Record|false
+     * @return Db\Record|false
      */
     public function find($table, $id)
     {
@@ -449,7 +454,7 @@ class Db extends AbstractWidget
      * @param string $table The name of table
      * @param string $id The primary key value
      * @param array $data The data to create a new record when record not found
-     * @return Record
+     * @return Db\Record
      */
     public function findOrCreate($table, $id, $data = array())
     {
@@ -485,7 +490,7 @@ class Db extends AbstractWidget
      * Returns a new table instance, alias of `create`
      *
      * @param string $name
-     * @return Record
+     * @return Db\Record
      */
     public function __get($name)
     {

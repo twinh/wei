@@ -6,8 +6,10 @@
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Widget;
-use Widget\Db\Collection;
+namespace Widget\Db;
+
+use Widget\Db;
+use Widget\AbstractWidget;
 
 /**
  * A base database record class

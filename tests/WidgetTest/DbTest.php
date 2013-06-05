@@ -77,9 +77,9 @@ class DbTest extends TestCase
 
     public function testGetRecord()
     {
-        $this->assertInstanceOf('\Widget\Record', $this->db->create('user'));
+        $this->assertInstanceOf('\Widget\Db\Record', $this->db->create('user'));
 
-        $this->assertInstanceOf('\Widget\Record', $this->db->user);
+        $this->assertInstanceOf('\Widget\Db\Record', $this->db->user);
     }
 
     public function testRelation()
@@ -91,7 +91,7 @@ class DbTest extends TestCase
         /** @var $user \WidgetTest\DbTest\User */
         $user = $db->user('1');
 
-        $this->assertInstanceOf('\Widget\Record', $user);
+        $this->assertInstanceOf('\Widget\Db\Record', $user);
 
         $this->assertEquals('1', $user->id);
         $this->assertEquals('twin', $user->name);
@@ -101,7 +101,7 @@ class DbTest extends TestCase
         // Relation one-to-one
         $post = $user->post;
 
-        $this->assertInstanceOf('\Widget\Record', $post);
+        $this->assertInstanceOf('\Widget\Db\Record', $post);
 
         $this->assertEquals('1', $post->id);
         $this->assertEquals('my first post', $post->name);
@@ -110,7 +110,7 @@ class DbTest extends TestCase
         // Relation belong-to
         $group = $user->group;
 
-        $this->assertInstanceOf('\Widget\Record', $group);
+        $this->assertInstanceOf('\Widget\Db\Record', $group);
 
         $this->assertEquals('1', $group->id);
         $this->assertEquals('vip', $group->name);
@@ -121,7 +121,7 @@ class DbTest extends TestCase
         $this->assertInstanceOf('\Widget\Db\Collection', $posts);
 
         $firstPost = $posts[0];
-        $this->assertInstanceOf('\Widget\Record', $firstPost);
+        $this->assertInstanceOf('\Widget\Db\Record', $firstPost);
 
         $this->assertEquals('1', $firstPost->id);
         $this->assertEquals('my first post', $firstPost->name);
@@ -136,7 +136,7 @@ class DbTest extends TestCase
 
         $post = $user->post = $db->find('post', array('user_id' => $user->id));
 
-        $this->assertInstanceOf('\Widget\Record', $post);
+        $this->assertInstanceOf('\Widget\Db\Record', $post);
 
         $this->assertEquals('1', $post->id);
         $this->assertEquals('my first post', $post->name);

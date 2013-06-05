@@ -2,7 +2,7 @@
 
 namespace WidgetTest\DbTest;
 
-use Widget\Record as BaseRecord;
+use Widget\Db\Record as BaseRecord;
 
 class Record extends BaseRecord
 {
