@@ -164,11 +164,6 @@ class Record extends  AbstractWidget
         return parent::__get($name);
     }
 
-    public function has()
-    {
-
-    }
-
     /**
      * A helper method to find a record
      *

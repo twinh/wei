@@ -82,7 +82,7 @@ class DbTest extends TestCase
         $this->assertInstanceOf('\Widget\Record', $this->db->user);
     }
 
-    public function testGetRecordByPk()
+    public function testRelation()
     {
         $db = $this->db;
 
@@ -126,6 +126,21 @@ class DbTest extends TestCase
         $this->assertEquals('1', $firstPost->id);
         $this->assertEquals('my first post', $firstPost->name);
         $this->assertEquals('1', $firstPost->user_id);
+    }
+
+    public function testDynamicRelation()
+    {
+        $db = $this->db;
+
+        $user = $db->user('1');
+
+        $post = $user->post = $db->find('posts', array('user_id' => $user->id));
+
+        $this->assertInstanceOf('\Widget\Record', $post);
+
+        $this->assertEquals('1', $post->id);
+        $this->assertEquals('my first post', $post->name);
+        $this->assertEquals('1', $post->user_id);
     }
 
     public function testUpdate()
