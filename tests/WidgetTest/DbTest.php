@@ -247,9 +247,17 @@ class DbTest extends TestCase
         $this->assertEquals('1', $data[0]['group_id']);
     }
 
-    public function testRecordFind()
+    public function testGetRecordClass()
     {
-        $user = $this->db->user;
+        $db = $this->db;
+
+        $db->setOption('recordNamespace', 'WidgetTest\DbTest');
+
+        $this->assertEquals('WidgetTest\DbTest\User', $db->getRecordClass('user'));
+        $this->assertEquals('WidgetTest\DbTest\User', $db->getRecordClass('User'));
+        $this->assertEquals('WidgetTest\DbTest\UserGroup', $db->getRecordClass('user_group'));
+        $this->assertEquals('WidgetTest\DbTest\UserGroup', $db->getRecordClass('UserGroup'));
+        $this->assertEquals('WidgetTest\DbTest\UserGroup', $db->getRecordClass('User_Group'));
     }
 
     /**

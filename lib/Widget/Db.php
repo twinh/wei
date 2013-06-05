@@ -424,7 +424,7 @@ class Db extends AbstractWidget
         return new $class(array(
             'widget'    => $this->widget,
             'db'        => $this,
-            'table'     => $this->camelCaseToUnderscore($table),
+            'table'     => $table,
             'data'      => $data
         ));
     }
@@ -494,12 +494,7 @@ class Db extends AbstractWidget
 
     public function __call($name, $args)
     {
-        return $this->find($this->camelCaseToUnderscore($name), $args[0]);
-    }
-
-    public function camelCaseToUnderscore($name)
-    {
-        return strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $name));
+        return $this->find($name, $args[0]);
     }
 
     /**
@@ -515,7 +510,7 @@ class Db extends AbstractWidget
         }
 
         if ($this->recordNamespace) {
-            $class = $this->recordNamespace . '\\' . ucfirst($this->camelCaseToUnderscore($name));
+            $class = $this->recordNamespace . '\\' . implode('', array_map('ucfirst', explode('_', $name)));
             if (class_exists($class)) {
                 return $class;
             }
