@@ -507,4 +507,20 @@ class DbTest extends TestCase
 
         $this->assertFalse($user);
     }
+
+    public function testGetTable()
+    {
+        $user = $this->db->user('1');
+
+        $this->assertEquals('user', $user->getTable());
+    }
+
+    public function testColumnNotFound()
+    {
+        $user = $this->db->user('1');
+
+        $this->setExpectedException('\InvalidArgumentException', 'Column or relation "notFound" not found in record class "Widget\Db\Record"');
+
+        $user->notFound;
+    }
 }

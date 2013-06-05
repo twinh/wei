@@ -32,8 +32,11 @@ class Record extends AbstractWidget
      */
     protected $isNew = true;
 
-    protected $fullTable;
-
+    /**
+     * The primary key column
+     *
+     * @var string
+     */
     protected $primaryKey = 'id';
 
     /**
@@ -161,7 +164,8 @@ class Record extends AbstractWidget
      * Receives record column value, record, collection or widget instance
      *
      * @param string $name
-     * @return string|Record|Collection|\Widget\WidgetInterface
+     * @throws \InvalidArgumentException When column or relation not found
+     * @return string|Record|Collection
      */
     public function __get($name)
     {
@@ -175,8 +179,11 @@ class Record extends AbstractWidget
             return $this->$name = $this->$name();
         }
 
-        // Fallback to get widget
-        return parent::__get($name);
+        throw new \InvalidArgumentException(sprintf(
+            'Column or relation "%s" not found in record class "%s"',
+            $name,
+            get_class($this)
+        ));
     }
 
     /**
