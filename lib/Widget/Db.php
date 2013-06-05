@@ -421,16 +421,18 @@ class Db extends AbstractWidget
      *
      * @param string $table The name of database table
      * @param array $data The data for table record
+     * @param bool $isNew Whether it's a new record and have not save to database
      * @return Db\Record
      */
-    public function create($table, $data = array())
+    public function create($table, $data = array(), $isNew = false)
     {
         $class = $this->getRecordClass($table);
         return new $class(array(
             'widget'    => $this->widget,
             'db'        => $this,
             'table'     => $table,
-            'data'      => $data
+            'isNew'     => $isNew,
+            'data'      => $data,
         ));
     }
 
@@ -463,7 +465,7 @@ class Db extends AbstractWidget
         if ($record) {
             return $this->create($table, $record);
         } else {
-            return $this->create($table, $data + array('id' => $id));
+            return $this->create($table, $data + array('id' => $id), true);
         }
     }
 
@@ -494,7 +496,7 @@ class Db extends AbstractWidget
      */
     public function __get($name)
     {
-        return $this->create($name);
+        return $this->create($name, array(), true);
     }
 
     public function __call($name, $args)

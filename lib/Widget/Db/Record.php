@@ -25,6 +25,13 @@ class Record extends AbstractWidget
      */
     protected $table;
 
+    /**
+     * Whether it's a new record and have not save to database
+     *
+     * @var bool
+     */
+    protected $isNew = true;
+
     protected $fullTable;
 
     protected $primaryKey = 'id';
@@ -101,21 +108,6 @@ class Record extends AbstractWidget
     }
 
     /**
-     *
-     *
-     * @param $field
-     * @return $this
-     */
-    public function clear($field)
-    {
-        if (isset($this->data[$field])) {
-            unset($this->data[$field]);
-        }
-
-        return $this;
-    }
-
-    /**
      * Set record data
      *
      * @param $data
@@ -138,7 +130,21 @@ class Record extends AbstractWidget
     {
         $data && $this->fromArray($data);
 
-        return (bool)$this->db->insert($this->table, $this->data);
+        // Insert
+        if ($this->isNew) {
+            $result = $this->db->insert($this->table, $this->data);
+            if ($result) {
+                $this->isNew = false;
+                $this->data[$this->primaryKey] = $this->db->lastInsertId();
+            }
+            return (bool)$result;
+        // Update
+        } else {
+            // TODO update only changed field
+            return (bool)$this->db->update($this->table, $this->data, array(
+                $this->primaryKey => $this->data[$this->primaryKey]
+            ));
+        }
     }
 
     /**

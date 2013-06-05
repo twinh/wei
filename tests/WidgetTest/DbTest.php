@@ -204,16 +204,31 @@ class DbTest extends TestCase
 
     public function testRecordSave()
     {
-        $result = $this->db->user->save(array(
+        $db = $this->db;
+
+        // Existing user
+        $user = $db->user('1');
+        $result = $user->save();
+
+        $this->assertTrue($result);
+        $this->assertEquals('1', $user->id);
+
+        // New user save with data
+        $user = $db->user;
+        $result = $user->save(array(
             'group_id' => '1',
             'name' => 'save',
             'address' => 'save'
         ));
 
-        $user = $this->db->find('user', array('name' => 'save'));
-
         $this->assertTrue($result);
+        $this->assertEquals('3', $user->id);
         $this->assertEquals('save', $user->name);
+
+        // Save again
+        $result = $user->save();
+        $this->assertTrue($result);
+        $this->assertEquals('3', $user->id);
     }
 
     public function testSelect()
