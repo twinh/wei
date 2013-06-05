@@ -16,7 +16,7 @@ use Widget\AbstractWidget;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Record extends  AbstractWidget
+class Record extends AbstractWidget
 {
     /**
      * The record table name
@@ -151,6 +151,12 @@ class Record extends  AbstractWidget
         return (bool)$this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
     }
 
+    /**
+     * Receives record column value, record, collection or widget instance
+     *
+     * @param string $name
+     * @return string|Record|Collection|\Widget\WidgetInterface
+     */
     public function __get($name)
     {
         // Table columns
@@ -164,6 +170,17 @@ class Record extends  AbstractWidget
         }
 
         return parent::__get($name);
+    }
+
+    /**
+     * Set record value
+     *
+     * @param $name
+     * @param $value
+     */
+    public function __set($name, $value)
+    {
+        $this->data[$name] = $value;
     }
 
     /**

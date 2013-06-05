@@ -128,6 +128,17 @@ class DbTest extends TestCase
         $this->assertEquals('1', $firstPost->user_id);
     }
 
+    public function testSet()
+    {
+        $user = $this->db->user('1');
+
+        $this->assertEquals('1', $user->id);
+
+        $user->id = 2;
+
+        $this->assertEquals('2', $user->id);
+    }
+
     public function testDynamicRelation()
     {
         $db = $this->db;
