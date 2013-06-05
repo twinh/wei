@@ -122,11 +122,17 @@ class Record extends  AbstractWidget
         return $this;
     }
 
+    /**
+     * Save record data to database
+     *
+     * @param array $data
+     * @return bool
+     */
     public function save($data = array())
     {
         $data && $this->fromArray($data);
 
-        return $this->db->insert($this->table, $this->data);
+        return (bool)$this->db->insert($this->table, $this->data);
     }
 
     /**
