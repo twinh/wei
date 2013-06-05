@@ -75,6 +75,17 @@ class DbTest extends TestCase
         ));
     }
 
+    public function testIsConnected()
+    {
+        $db = $this->db;
+
+        $this->assertTrue($db->isConnected());
+
+        $db->close();
+
+        $this->assertFalse($db->isConnected());
+    }
+
     public function testGetRecord()
     {
         $this->assertInstanceOf('\Widget\Db\Record', $this->db->create('user'));

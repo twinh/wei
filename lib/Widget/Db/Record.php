@@ -159,16 +159,17 @@ class Record extends AbstractWidget
      */
     public function __get($name)
     {
-        // Table columns
+        // Get table column value
         if (array_key_exists($name, $this->data)) {
             return $this->data[$name];
         }
 
-        // Relation
+        // Get relation
         if (method_exists($this, $name)) {
             return $this->$name = $this->$name();
         }
 
+        // Fallback to get widget
         return parent::__get($name);
     }
 
