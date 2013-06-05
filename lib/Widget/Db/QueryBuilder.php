@@ -433,11 +433,21 @@ class QueryBuilder
         return $this;
     }
 
+    /**
+     * Merge a query builder
+     *
+     * Is it necessary ?
+     *
+     * @param QueryBuilder $query
+     * @return QueryBuilder
+     */
     public function merge(QueryBuilder $query)
     {
         $sqlParts = $query->getQueryParts();
         foreach ($sqlParts as $name => $sqlPart) {
-            $this->add($name, $sqlPart, true);
+            if ($sqlPart) {
+                $this->add($name, $sqlPart, true);
+            }
         }
         return $this;
     }
