@@ -502,27 +502,6 @@ class Db extends AbstractWidget
         return strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $name));
     }
 
-    public function getTableByField($name)
-    {
-        return isset($this->tables[$name]['table']) ?
-            $this->tables[$name]['table'] : $name . 's';
-    }
-
-    public function getTableRelation($table)
-    {
-        return isset($this->tables[$table]['relations']) ? $this->tables[$table]['relations'] : array();
-    }
-
-    public function getSingular($name)
-    {
-        foreach ($this->tables as $table => $options) {
-            if ($table == $name) {
-                return $table;
-            }
-        }
-        return rtrim($name, 's');
-    }
-
     /**
      * Returns the record class name of table
      *

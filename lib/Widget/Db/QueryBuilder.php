@@ -167,7 +167,9 @@ class QueryBuilder
 
     public function find()
     {
-        $data = $this->execute();
+        $data = $this
+            //->limit(1)
+            ->execute();
 
         $table = $this->sqlParts['from']['table'];
 
@@ -190,6 +192,11 @@ class QueryBuilder
         }
 
         return new Collection($records);
+    }
+
+    public function count()
+    {
+
     }
 
     /**

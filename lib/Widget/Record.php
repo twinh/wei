@@ -151,33 +151,22 @@ class Record extends  AbstractWidget
 
     public function __get($name)
     {
-        $db = $this->db;
-        $fieldName = $this->db->camelCaseToUnderscore($name);
-        $relations = $this->db->getTableRelation($this->table);
-
-        if (isset($this->data[$fieldName])) {
-            return $this->data[$fieldName];
-        } elseif (isset($relations[$name])) {
-            return $this->data[$fieldName] = $this->db->find($relations[$name]['table'], array(
-                'id' => $this->data[$relations[$name]['column']]
-            ));
-            // has one
-        } elseif (isset($this->data[$name . '_id'])) {
-            return $this->data[$fieldName] = $this->db->find($db->getTableByField($name), array(
-                'id' => $this->data[$name . '_id']
-            ));
-            // one to many
-        } elseif (substr($name, -1) == 's') {
-            $table = substr($name, 0, -1);
-            return $this->data[$fieldName] = $this->db->findAll($db->getTableByField($table), array(
-                $db->getSingular($this->table) . '_id' => $this->data['id']
-            ));
-            // belong to
-        } else {
-            return $this->data[$fieldName] = $this->db->find($db->getTableByField($name), array(
-                $db->getSingular($this->table) . '_id' => $this->data['id']
-            ));
+        // Table columns
+        if (array_key_exists($name, $this->data)) {
+            return $this->data[$name];
         }
+
+        // Relation
+        if (method_exists($this, $name)) {
+            return $this->$name = $this->$name();
+        }
+
+        return parent::__get($name);
+    }
+
+    public function has()
+    {
+
     }
 
     /**

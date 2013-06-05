@@ -86,6 +86,9 @@ class DbTest extends TestCase
     {
         $db = $this->db;
 
+        $db->setOption('recordNamespace', 'WidgetTest\DbTest');
+
+        /** @var $user \WidgetTest\DbTest\User */
         $user = $db->user('1');
 
         $this->assertInstanceOf('\Widget\Record', $user);
@@ -93,7 +96,7 @@ class DbTest extends TestCase
         $this->assertEquals('1', $user->id);
         $this->assertEquals('twin', $user->name);
         $this->assertEquals('test', $user->address);
-        $this->assertEquals('1', $user->groupId);
+        $this->assertEquals('1', $user->group_id);
 
         // Relation one-to-one
         $post = $user->post;
@@ -102,7 +105,7 @@ class DbTest extends TestCase
 
         $this->assertEquals('1', $post->id);
         $this->assertEquals('my first post', $post->name);
-        $this->assertEquals('1', $post->userId);
+        $this->assertEquals('1', $post->user_id);
 
         // Relation belong-to
         $group = $user->group;
@@ -113,9 +116,6 @@ class DbTest extends TestCase
         $this->assertEquals('vip', $group->name);
 
         // Relation one-to-many
-        //$posts = $user->findAll('posts', 'user.id = posts.user_id');
-        //$posts = $db->finAll('posts', 'user_id = ?', $user->id);
-        //$posts = join ??
         $posts = $user->posts;
 
         $this->assertInstanceOf('\Widget\Db\Collection', $posts);
@@ -125,7 +125,7 @@ class DbTest extends TestCase
 
         $this->assertEquals('1', $firstPost->id);
         $this->assertEquals('my first post', $firstPost->name);
-        $this->assertEquals('1', $firstPost->userId);
+        $this->assertEquals('1', $firstPost->user_id);
     }
 
     public function testUpdate()
