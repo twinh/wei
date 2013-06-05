@@ -699,25 +699,29 @@ class QueryBuilder
      * Specifies one or more restrictions to the query result.
      * Replaces any previously specified restrictions, if any.
      *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->select('u.name')
-     *         ->from('users', 'u')
-     *         ->where('u.id = ?');
+     * ```php
+     * $qb = $db->createQueryBuilder()
+     *     ->from('user')
+     *     ->where('id = ?', '1');
      *
-     *     // You can optionally programatically build and/or expressions
-     *     $qb = $conn->createQueryBuilder();
+     * $qb = $db->createQueryBuilder()
+     *     ->from('user')
+     *     ->where(array(
+     *         'id' => '1',
+     *         'username' => 'twin'
+     *      ));
      *
-     *     $or = $qb->expr()->orx();
-     *     $or->add($qb->expr()->eq('u.id', 1));
-     *     $or->add($qb->expr()->eq('u.id', 2));
+     * $qb = $db->createQueryBuilder()
+     *     ->from('user')
+     *     ->where(array(
+     *          'id' => array('1', '2', '3'
+     *     ));
+     * ```
      *
-     *     $qb->update('users', 'u')
-     *         ->set('u.password', md5('password'))
-     *         ->where($or);
-     * </code>
-     *
-     * @param mixed $predicates The restriction predicates.
+     * @param $conditions
+     * @param null $params
+     * @param array $type
+     * @internal param mixed $predicates The restriction predicates.
      * @return QueryBuilder This QueryBuilder instance.
      */
     public function where($conditions, $params = null, $type = array())
