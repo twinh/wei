@@ -1009,9 +1009,11 @@ class QueryBuilder
 
         if ($params) {
             if (is_array($params)) {
-                $this->setParameters($params, $types);
+                $this->params = array_merge($this->params, $params);
+                $this->paramTypes = array_merge($this->paramTypes, $types);
             } else {
-                $this->setParameter(0, $params, $types);
+                $this->params[] = $params;
+                $this->paramTypes[] = $types;
             }
         }
 
