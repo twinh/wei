@@ -11,12 +11,15 @@ namespace Widget\Db;
 use Closure;
 
 /**
- * A base database collection class
+ * A collection class contains the database records
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class Collection extends \ArrayObject
 {
+    /**
+     * @return array
+     */
     public function toArray()
     {
         $data = array();

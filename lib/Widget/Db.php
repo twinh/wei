@@ -89,6 +89,13 @@ class Db extends AbstractWidget
     protected $recordClass = 'Widget\Db\Record';
 
     /**
+     * The collection class to store database records
+     *
+     * @var string
+     */
+    protected $collectionClass = 'Widget\Db\Collection';
+
+    /**
      * An associative array that the key is table name and the value is class name
      *
      * @var array
@@ -485,7 +492,7 @@ class Db extends AbstractWidget
             $records[] = $this->create($table, $row);
         }
 
-        return new Collection($records);
+        return new $this->collectionClass($records);
     }
 
     /**

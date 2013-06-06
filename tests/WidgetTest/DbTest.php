@@ -547,7 +547,7 @@ class DbTest extends TestCase
         $count = $users->reduce(function($count, $user){
             return ++$count;
         });
-        
+
         $this->assertEquals(2, $count);
     }
 }
