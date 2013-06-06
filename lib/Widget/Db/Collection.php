@@ -18,6 +18,8 @@ use Closure;
 class Collection extends \ArrayObject
 {
     /**
+     * Returns the collection and relative records data as array
+     *
      * @return array
      */
     public function toArray()

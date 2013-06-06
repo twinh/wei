@@ -76,7 +76,7 @@ class Record extends AbstractWidget
     }
 
     /**
-     * Returns a the record data
+     * Returns the record and relative records data as array
      *
      * @param array $returnFields A indexed array specified the fields to return
      * @return array

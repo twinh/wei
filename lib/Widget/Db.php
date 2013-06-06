@@ -110,9 +110,11 @@ class Db extends AbstractWidget
     protected $recordNamespace;
 
     /**
-     * @param mixed $table
-     * @param null $alias
-     * @return mixed|Db\QueryBuilder
+     * Create a new instance of a SQL query builder with specified table and alias
+     *
+     * @param string $table The name of database table
+     * @param string $alias The name of table alias
+     * @return Db\QueryBuilder
      */
     public function __invoke($table, $alias = null)
     {
