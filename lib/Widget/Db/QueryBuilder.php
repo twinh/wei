@@ -399,25 +399,6 @@ class QueryBuilder
     }
 
     /**
-     * Merge a query builder
-     *
-     * Is it necessary ?
-     *
-     * @param QueryBuilder $query
-     * @return QueryBuilder
-     */
-    public function merge(QueryBuilder $query)
-    {
-        $sqlParts = $query->getQueryParts();
-        foreach ($sqlParts as $name => $sqlPart) {
-            if ($sqlPart) {
-                $this->add($name, $sqlPart, true);
-            }
-        }
-        return $this;
-    }
-
-    /**
      * Specifies an item that is to be returned in the query result.
      * Replaces any previously specified selections, if any.
      *

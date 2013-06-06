@@ -479,22 +479,4 @@ class QueryTest extends TestCase
 
         $this->assertEquals("SELECT * FROM groups", $qb->getSql());
     }
-
-    public function testMerge()
-    {
-        $qb = new QueryBuilder($this->db);
-        $qb2 = new QueryBuilder($this->db);
-
-        $qb
-            ->from('user')
-            ->orderBy('created_at', 'DESC');
-
-        $this->assertEquals("SELECT * FROM user ORDER BY created_at DESC", $qb->getSql());
-
-        $qb2->orderBy('updated_at', 'DESC');
-
-        $qb->merge($qb2);
-
-        $this->assertEquals("SELECT * FROM user ORDER BY created_at DESC, updated_at DESC", $qb->getSql());
-    }
 }
