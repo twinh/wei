@@ -184,7 +184,7 @@ class QueryBuilder
 
     public function count()
     {
-
+        return $this->db->fetchColumn($this->getSqlForCount(), $this->params);
     }
 
     /**
@@ -896,7 +896,7 @@ class QueryBuilder
      * @throws \RuntimeException When table alias not registered
      * @return string
      */
-    protected function getSqlForSelect()
+    protected function getSqlForSelect($count = false)
     {
         $parts = $this->sqlParts;
 
@@ -921,13 +921,15 @@ class QueryBuilder
             . ($parts['having'] !== null ? ' HAVING ' . ((string) $parts['having']) : '')
             . ($parts['orderBy'] ? ' ORDER BY ' . implode(', ', $parts['orderBy']) : '');
 
-        // TODO mssql & oracle
-        if ($parts['limit'] !== null) {
-            $query .= ' LIMIT ' . $parts['limit'];
-        }
+        if (false === $count) {
+            // TODO mssql & oracle
+            if ($parts['limit'] !== null) {
+                $query .= ' LIMIT ' . $parts['limit'];
+            }
 
-        if ($parts['offset'] !== null) {
-            $query .= ' OFFSET ' . $parts['offset'];
+            if ($parts['offset'] !== null) {
+                $query .= ' OFFSET ' . $parts['offset'];
+            }
         }
 
         return $query;
@@ -938,7 +940,7 @@ class QueryBuilder
      */
     protected function getSqlForCount()
     {
-        // TODO
+        return "SELECT COUNT(*) FROM (" . $this->getSqlForSelect(true) . ") widget_count";
     }
 
     /**
