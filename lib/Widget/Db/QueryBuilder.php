@@ -69,7 +69,9 @@ class QueryBuilder
         'where'   => null,
         'groupBy' => array(),
         'having'  => null,
-        'orderBy' => array()
+        'orderBy' => array(),
+        'limit'   => null,
+        'offset'  => null,
     );
 
     /**
@@ -96,20 +98,6 @@ class QueryBuilder
      * @var integer The state of the query object. Can be dirty or clean.
      */
     protected $state = self::STATE_CLEAN;
-
-    /**
-     * The index of the first result to retrieve
-     *
-     * @var integer
-     */
-    protected $offset;
-
-    /**
-     * The maximum number of results to retrieve
-     *
-     * @var integer
-     */
-    protected $limit;
 
     /**
      * Initializes a new <tt>QueryBuilder</tt>.
@@ -323,22 +311,8 @@ class QueryBuilder
      */
     public function offset($offset)
     {
-        $this->state = self::STATE_DIRTY;
-        $this->offset = $offset;
-        return $this;
+        return $this->add('offset', $offset);
     }
-
-    /**
-     * Gets the position of the first result the query object was set to retrieve (the "offset").
-     * Returns NULL if {@link setoffset} was not applied to this QueryBuilder.
-     *
-     * @return integer The position of the first result.
-     */
-    public function getOffset()
-    {
-        return $this->offset;
-    }
-
 
     /**
      * Sets the maximum number of results to retrieve (the "limit")
@@ -348,9 +322,7 @@ class QueryBuilder
      */
     public function limit($limit)
     {
-        $this->state = self::STATE_DIRTY;
-        $this->limit = $limit;
-        return $this;
+        return $this->add('limit', $limit);
     }
 
     /**
@@ -364,25 +336,14 @@ class QueryBuilder
      */
     public function page($page)
     {
-        $this->state = self::STATE_DIRTY;
+        $limit = $this->getQueryPart('limit');
 
-        if (!$this->limit) {
-            $this->limit = 10;
+        if (!$limit) {
+            $limit = 10;
+            $this->add('limit', $limit);
         }
-        $this->offset = ($page - 1) * $this->limit;
 
-        return $this;
-    }
-
-    /**
-     * Gets the maximum number of results the query object was set to retrieve (the "limit")
-     * Returns NULL if {@link setlimit} was not applied to this query builder
-     *
-     * @return integer Maximum number of results
-     */
-    public function getLimit()
-    {
-        return $this->limit;
+        return $this->add('offset', ($page - 1) * $limit);
     }
 
     /**
@@ -913,6 +874,11 @@ class QueryBuilder
         return $this->sqlParts[$queryPartName];
     }
 
+    public function get($queryPartName)
+    {
+        return $this->sqlParts[$queryPartName];
+    }
+
     /**
      * Get all query parts.
      *
@@ -988,12 +954,12 @@ class QueryBuilder
             . ($this->sqlParts['orderBy'] ? ' ORDER BY ' . implode(', ', $this->sqlParts['orderBy']) : '');
 
         // TODO mssql & oracle
-        if ($this->limit !== null) {
-            $query .= ' LIMIT ' . $this->limit;
+        if ($this->sqlParts['limit'] !== null) {
+            $query .= ' LIMIT ' . $this->sqlParts['limit'];
         }
 
-        if ($this->offset !== null) {
-            $query .= ' OFFSET ' . $this->offset;
+        if ($this->sqlParts['offset'] !== null) {
+            $query .= ' OFFSET ' . $this->sqlParts['offset'];
         }
 
         return $query;

@@ -436,7 +436,7 @@ class QueryTest extends TestCase
         $qb->limit(10);
 
         $this->assertEquals(QueryBuilder::STATE_DIRTY, $qb->getState());
-        $this->assertEQuals(10, $qb->getlimit());
+        $this->assertEQuals(10, $qb->get('limit'));
     }
 
     public function testSetFirstResult()
@@ -445,7 +445,7 @@ class QueryTest extends TestCase
         $qb->limit(10);
 
         $this->assertEquals(QueryBuilder::STATE_DIRTY, $qb->getState());
-        $this->assertEQuals(10, $qb->getlimit());
+        $this->assertEQuals(10, $qb->get('limit'));
     }
 
     public function testResetQueryPart()
