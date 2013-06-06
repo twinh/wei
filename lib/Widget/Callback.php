@@ -152,7 +152,7 @@ class Callback extends AbstractWidget
     {
         // Check if it's requested from the WeChat server
         if ($this->checkSignature()) {
-            if ($echostr = $this->query('echostr')) {
+            if ($echostr = $this->request->getQuery('echostr')) {
                 // Response echostr for fist time authentication
                 return htmlspecialchars($echostr, \ENT_QUOTES, 'UTF-8');
             }
@@ -791,12 +791,12 @@ class Callback extends AbstractWidget
     {
         $tmpArr = array(
             $this->token,
-            $this->query('timestamp'),
-            $this->query('nonce')
+            $this->request->getQuery('timestamp'),
+            $this->request->getQuery('nonce')
         );
         sort($tmpArr);
         $tmpStr = sha1(implode($tmpArr));
-        return $tmpStr === $this->query('signature');
+        return $tmpStr === $this->request->getQuery('signature');
     }
 
     protected function handleText()
