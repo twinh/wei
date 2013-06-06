@@ -336,7 +336,7 @@ class QueryBuilder
      */
     public function page($page)
     {
-        $limit = $this->getQueryPart('limit');
+        $limit = $this->get('limit');
 
         if (!$limit) {
             $limit = 10;
@@ -864,19 +864,14 @@ class QueryBuilder
     }
 
     /**
-     * Get a query part by its name.
+     * Returns a SQL query part by its name
      *
-     * @param string $queryPartName
-     * @return mixed $queryPart
+     * @param string $name The name of SQL part
+     * @return mixed
      */
-    public function getQueryPart($queryPartName)
+    public function get($name)
     {
-        return $this->sqlParts[$queryPartName];
-    }
-
-    public function get($queryPartName)
-    {
-        return $this->sqlParts[$queryPartName];
+        return isset($this->sqlParts[$name]) ? $this->sqlParts[$name] : false;
     }
 
     /**
