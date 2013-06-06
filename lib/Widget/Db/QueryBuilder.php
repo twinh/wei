@@ -100,9 +100,9 @@ class QueryBuilder
     protected $state = self::STATE_CLEAN;
 
     /**
-     * Initializes a new <tt>QueryBuilder</tt>.
+     * Initializes a new QueryBuilder
      *
-     * @param \Widget\Db $db The database widget
+     * @param Db $db The database widget
      */
     public function __construct(Db $db)
     {
@@ -110,7 +110,7 @@ class QueryBuilder
     }
 
     /**
-     * Get the type of the currently built query.
+     * Get the type of the currently built query
      *
      * @return integer
      */
@@ -120,7 +120,7 @@ class QueryBuilder
     }
 
     /**
-     * Get the associated database widget for this query builder.
+     * Get the associated database widget for this query builder
      *
      * @return \Widget\Db
      */
@@ -130,9 +130,9 @@ class QueryBuilder
     }
 
     /**
-     * Get the state of this query builder instance.
+     * Get the state of this query builder instance
      *
-     * @return integer Either QueryBuilder::STATE_DIRTY or QueryBuilder::STATE_CLEAN.
+     * @return integer Either QueryBuilder::STATE_DIRTY or QueryBuilder::STATE_CLEAN
      */
     public function getState()
     {
@@ -140,7 +140,7 @@ class QueryBuilder
     }
 
     /**
-     * Execute this query using the bound parameters and their types.
+     * Execute this query using the bound parameters and their types
      *
      * @return mixed
      */
@@ -206,27 +206,24 @@ class QueryBuilder
             return $this->sql;
         }
 
-        $sql = '';
-
         switch ($this->type) {
             case self::DELETE:
-                $sql = $this->getSqlForDelete();
+                $this->sql = $this->getSqlForDelete();
                 break;
 
             case self::UPDATE:
-                $sql = $this->getSqlForUpdate();
+                $this->sql = $this->getSqlForUpdate();
                 break;
 
             case self::SELECT:
             default:
-                $sql = $this->getSqlForSelect();
+                $this->sql = $this->getSqlForSelect();
                 break;
         }
 
         $this->state = self::STATE_CLEAN;
-        $this->sql = $sql;
 
-        return $sql;
+        return $this->sql;
     }
 
     /**
@@ -355,7 +352,7 @@ class QueryBuilder
      * @param string $sqlPartName
      * @param string $sqlPart
      * @param boolean $append
-     * @param null $type
+     * @param string $type
      * @return QueryBuilder This QueryBuilder instance.
      */
     public function add($sqlPartName, $sqlPart, $append = false, $type = null)
@@ -549,99 +546,83 @@ class QueryBuilder
     }
 
     /**
-     * Creates and adds a join to the query.
+     * Creates and adds a join to the query
      *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->select('u.name')
-     *         ->from('users', 'u')
-     *         ->join('u', 'phonenumbers', 'p', 'p.is_primary = 1');
-     * </code>
+     * ```php
+     * $qb = $db->createQueryBuilder()
+     *     ->from('user')
+     *     ->join('post', 'post.user_id = user.id');
+     * ```
      *
-     * @param string $fromAlias The alias that points to a from clause
-     * @param string $join The table name to join
-     * @param string $alias The alias of the join table
-     * @param string $condition The condition for the join
-     * @return QueryBuilder This QueryBuilder instance.
+     * @param string $table The table name to join
+     * @param string $on The condition for the join
+     * @param array $params The parameter values
+     * @param array $types The parameter types
+     * @return QueryBuilder
      */
     public function join($table, $on = null, $params = array(), $types = array())
     {
-        return $this->innerJoin($table, $on, $params, $types);
+        return $this->addJoin('inner', $table, $on, $params, $types);
     }
 
     /**
-     * Creates and adds a join to the query.
+     * Creates and adds a join to the query
      *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->select('u.name')
-     *         ->from('users', 'u')
-     *         ->innerJoin('u', 'phonenumbers', 'p', 'p.is_primary = 1');
-     * </code>
+     * ```php
+     * $qb = $db->createQueryBuilder()
+     *     ->from('user')
+     *     ->innerJoin('post', 'post.user_id = user.id');
+     * ```
      *
-     * @param string $fromAlias The alias that points to a from clause
-     * @param string $join The table name to join
-     * @param string $alias The alias of the join table
-     * @param string $condition The condition for the join
-     * @return QueryBuilder This QueryBuilder instance.
+     * @param string $table The table name to join
+     * @param string $on The condition for the join
+     * @param array $params The parameter values
+     * @param array $types The parameter types
+     * @return QueryBuilder
      */
     public function innerJoin($table, $on = null, $params = array(), $types = array())
     {
-        return $this->add('join', array(
-            'type'      => 'inner',
-            'table'     => $table,
-            'condition' => $on
-        ), true);
+        return $this->addJoin('inner', $table, $on, $params, $types);
     }
 
     /**
-     * Creates and adds a left join to the query.
+     * Creates and adds a join to the query
      *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->select('u.name')
-     *         ->from('users', 'u')
-     *         ->leftJoin('u', 'phonenumbers', 'p', 'p.is_primary = 1');
-     * </code>
+     * ```php
+     * $qb = $db->createQueryBuilder()
+     *     ->from('user')
+     *     ->leftJoin('post', 'post.user_id = user.id');
+     * ```
      *
-     * @param string $fromAlias The alias that points to a from clause
-     * @param string $join The table name to join
-     * @param string $alias The alias of the join table
-     * @param string $condition The condition for the join
-     * @return QueryBuilder This QueryBuilder instance.
+     * @param string $table The table name to join
+     * @param string $on The condition for the join
+     * @param array $params The parameter values
+     * @param array $types The parameter types
+     * @return QueryBuilder
      */
     public function leftJoin($table, $on = null, $params = array(), $types = array())
     {
-        return $this->add('join', array(
-            'type'      => 'left',
-            'table'     => $table,
-            'condition' => $on
-        ), true);
+        return $this->addJoin('left', $table, $on, $params, $types);
     }
 
     /**
-     * Creates and adds a right join to the query.
+     * Creates and adds a join to the query
      *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->select('u.name')
-     *         ->from('users', 'u')
-     *         ->rightJoin('u', 'phonenumbers', 'p', 'p.is_primary = 1');
-     * </code>
+     * ```php
+     * $qb = $db->createQueryBuilder()
+     *     ->from('user')
+     *     ->rightJoin('post', 'post.user_id = user.id');
+     * ```
      *
-     * @param string $fromAlias The alias that points to a from clause
-     * @param string $join The table name to join
-     * @param string $alias The alias of the join table
-     * @param string $condition The condition for the join
-     * @return QueryBuilder This QueryBuilder instance.
+     * @param string $table The table name to join
+     * @param string $on The condition for the join
+     * @param array $params The parameter values
+     * @param array $types The parameter types
+     * @return QueryBuilder
      */
     public function rightJoin($table, $on = null, $params = array(), $types = array())
     {
-        return $this->add('join', array(
-            'type'      => 'right',
-            'table'     => $table,
-            'condition' => $on
-        ), true);
+        return $this->addJoin('right', $table, $on, $params, $types);
     }
 
     /**
@@ -927,37 +908,47 @@ class QueryBuilder
      */
     protected function getSqlForSelect()
     {
-        if (!$this->sqlParts['select']) {
-            $this->sqlParts['select'] = array('*');
+        $parts = $this->sqlParts;
+
+        if (!$parts['select']) {
+            $parts['select'] = array('*');
         }
 
-        $query = 'SELECT ' . implode(', ', $this->sqlParts['select']) . ' FROM ';
+        $query = 'SELECT ' . implode(', ', $parts['select']) . ' FROM ';
 
         // FROM
-        $query .= $this->sqlParts['from']['table'] . ($this->sqlParts['from']['alias'] ? ' ' . $this->sqlParts['from']['alias'] : '');
+        $query .= $parts['from']['table'] . ($parts['from']['alias'] ? ' ' . $parts['from']['alias'] : '');
 
         // JOIN
-        foreach ($this->sqlParts['join'] as $join) {
+        foreach ($parts['join'] as $join) {
             $query .= ' ' . strtoupper($join['type'])
                 . ' JOIN ' . $join['table']
                 . ' ON ' . $join['condition'];
         }
 
-        $query .= ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '')
-            . ($this->sqlParts['groupBy'] ? ' GROUP BY ' . implode(', ', $this->sqlParts['groupBy']) : '')
-            . ($this->sqlParts['having'] !== null ? ' HAVING ' . ((string) $this->sqlParts['having']) : '')
-            . ($this->sqlParts['orderBy'] ? ' ORDER BY ' . implode(', ', $this->sqlParts['orderBy']) : '');
+        $query .= ($parts['where'] !== null ? ' WHERE ' . ((string) $parts['where']) : '')
+            . ($parts['groupBy'] ? ' GROUP BY ' . implode(', ', $parts['groupBy']) : '')
+            . ($parts['having'] !== null ? ' HAVING ' . ((string) $parts['having']) : '')
+            . ($parts['orderBy'] ? ' ORDER BY ' . implode(', ', $parts['orderBy']) : '');
 
         // TODO mssql & oracle
-        if ($this->sqlParts['limit'] !== null) {
-            $query .= ' LIMIT ' . $this->sqlParts['limit'];
+        if ($parts['limit'] !== null) {
+            $query .= ' LIMIT ' . $parts['limit'];
         }
 
-        if ($this->sqlParts['offset'] !== null) {
-            $query .= ' OFFSET ' . $this->sqlParts['offset'];
+        if ($parts['offset'] !== null) {
+            $query .= ' OFFSET ' . $parts['offset'];
         }
 
         return $query;
+    }
+
+    /**
+     * Converts this instance into an SELECT COUNT string in SQL
+     */
+    protected function getSqlForCount()
+    {
+        // TODO
     }
 
     /**
@@ -1025,5 +1016,16 @@ class QueryBuilder
         }
 
         return $conditions;
+    }
+
+    protected function addJoin($type, $table, $on = null, $params = array(), $types = array())
+    {
+        $this->add('join', array(
+            'type'      => $type,
+            'table'     => $table,
+            'condition' => $on
+        ), true);
+
+        return $this;
     }
 }

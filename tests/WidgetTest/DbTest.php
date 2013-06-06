@@ -444,9 +444,21 @@ class DbTest extends TestCase
         $this->assertEquals('1', $user->group_id);
 
         // Join
-        //$query = $this->db('user')->leftJoin('grouop AS group', 'group.id = user.group_id');
-        //$user = $query->find();
-        //$query = $this->db('user')->leftJoin('group')
+        $query = $this
+            ->db('user')
+            ->select('user.*, user_group.name AS group_name')
+            ->leftJoin('user_group', 'user_group.id = user.group_id');
+        $user = $query->find()->toArray();
+
+        $this->assertEquals("SELECT user.*, user_group.name AS group_name FROM user LEFT JOIN user_group ON user_group.id = user.group_id", $query->getSql());
+        $this->assertArrayHasKey('group_name', $user);
+
+        // Join with table alias
+        $query = $this
+            ->db('user', 'u')
+            ->rightJoin('user_group g', 'g.id = u.group_id');
+
+        $this->assertEquals("SELECT * FROM user u RIGHT JOIN user_group g ON g.id = u.group_id", $query->getSql());
     }
 
     public function testFetchColumn()
