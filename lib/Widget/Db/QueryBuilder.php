@@ -546,7 +546,7 @@ class QueryBuilder
     }
 
     /**
-     * Creates and adds a join to the query
+     * Adds a inner join to the query
      *
      * ```php
      * $qb = $db->createQueryBuilder()
@@ -566,7 +566,7 @@ class QueryBuilder
     }
 
     /**
-     * Creates and adds a join to the query
+     * Adds a inner join to the query
      *
      * ```php
      * $qb = $db->createQueryBuilder()
@@ -586,7 +586,7 @@ class QueryBuilder
     }
 
     /**
-     * Creates and adds a join to the query
+     * Adds a left join to the query
      *
      * ```php
      * $qb = $db->createQueryBuilder()
@@ -606,7 +606,7 @@ class QueryBuilder
     }
 
     /**
-     * Creates and adds a join to the query
+     * Adds a right join to the query
      *
      * ```php
      * $qb = $db->createQueryBuilder()
@@ -682,23 +682,24 @@ class QueryBuilder
 
     /**
      * Adds one or more restrictions to the query results, forming a logical
-     * conjunction with any previously specified restrictions.
+     * conjunction with any previously specified restrictions
      *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->select('u')
-     *         ->from('users', 'u')
-     *         ->where('u.username LIKE ?')
-     *         ->andWhere('u.is_active = 1');
-     * </code>
+     * ```php
+     * $qb = $db->createQueryBuilder()
+     *     ->select('*')
+     *     ->from('users', 'u')
+     *     ->where('u.username LIKE ?')
+     *     ->andWhere('u.is_active = 1');
+     * ```
      *
-     * @param mixed $where The query restrictions.
-     * @return QueryBuilder This QueryBuilder instance.
-     * @see where()
+     * @param string $conditions The WHERE conditions
+     * @param array $params The condition parameters
+     * @param array $types The parameter types
+     * @return QueryBuilder
      */
-    public function andWhere($conditions, $params = null, $type = array())
+    public function andWhere($conditions, $params = null, $types = array())
     {
-        $conditions = $this->processCondition($conditions, $params, $type);
+        $conditions = $this->processCondition($conditions, $params, $types);
 
         return $this->add('where', $conditions, true, 'AND');
     }
@@ -707,21 +708,23 @@ class QueryBuilder
      * Adds one or more restrictions to the query results, forming a logical
      * disjunction with any previously specified restrictions.
      *
-     * <code>
-     *     $qb = $em->createQueryBuilder()
-     *         ->select('u.name')
-     *         ->from('users', 'u')
-     *         ->where('u.id = 1')
-     *         ->orWhere('u.id = 2');
-     * </code>
+     * ```php
+     * $qb = $db->createQueryBuilder()
+     *     ->select('u.name')
+     *     ->from('users', 'u')
+     *     ->where('u.id = 1')
+     *     ->orWhere('u.id = 2');
      *
-     * @param mixed $where The WHERE statement
-     * @return QueryBuilder $qb
-     * @see where()
+     * ```
+     *
+     * @param string $conditions The WHERE conditions
+     * @param array $params The condition parameters
+     * @param array $types The parameter types
+     * @return QueryBuilder
      */
-    public function orWhere($conditions, $params = null, $type = array())
+    public function orWhere($conditions, $params = null, $types = array())
     {
-        $conditions = $this->processCondition($conditions, $params, $type);
+        $conditions = $this->processCondition($conditions, $params, $types);
 
         return $this->add('where', $conditions, true, 'OR');
     }
@@ -781,12 +784,14 @@ class QueryBuilder
      * Specifies a restriction over the groups of the query.
      * Replaces any previous having restrictions, if any.
      *
-     * @param mixed $having The restriction over the groups.
-     * @return QueryBuilder This QueryBuilder instance.
+     * @param string $conditions The having conditions
+     * @param array $params The condition parameters
+     * @param array $types The parameter types
+     * @return QueryBuilder
      */
-    public function having($conditions, $params = array(), $type = null)
+    public function having($conditions, $params = array(), $types = array())
     {
-        $conditions = $this->processCondition($conditions, $params, $type);
+        $conditions = $this->processCondition($conditions, $params, $types);
 
         return $this->add('having', $conditions);
     }
@@ -795,12 +800,14 @@ class QueryBuilder
      * Adds a restriction over the groups of the query, forming a logical
      * conjunction with any existing having restrictions.
      *
-     * @param mixed $having The restriction to append.
-     * @return QueryBuilder This QueryBuilder instance.
+     * @param string $conditions The HAVING conditions to append
+     * @param array $params The condition parameters
+     * @param array $types The parameter types
+     * @return QueryBuilder
      */
-    public function andHaving($conditions, $params = null, $type = array())
+    public function andHaving($conditions, $params = null, $types = array())
     {
-        $conditions = $this->processCondition($conditions, $params, $type);
+        $conditions = $this->processCondition($conditions, $params, $types);
 
         return $this->add('having', $conditions, true, 'AND');
     }
@@ -809,12 +816,14 @@ class QueryBuilder
      * Adds a restriction over the groups of the query, forming a logical
      * disjunction with any existing having restrictions.
      *
-     * @param mixed $having The restriction to add.
-     * @return QueryBuilder This QueryBuilder instance.
+     * @param string $conditions The HAVING conditions to add
+     * @param array $params The condition parameters
+     * @param array $types The parameter types
+     * @return QueryBuilder
      */
-    public function orHaving($conditions, $params = null, $type = array())
+    public function orHaving($conditions, $params = null, $types = array())
     {
-        $conditions = $this->processCondition($conditions, $params, $type);
+        $conditions = $this->processCondition($conditions, $params, $types);
 
         return $this->add('having', $conditions, true, 'OR');
     }
@@ -990,7 +999,15 @@ class QueryBuilder
         return $this->getSql();
     }
 
-    protected function processCondition($conditions, $params, $type)
+    /**
+     * Generate condition string for WHERE or Having statement
+     *
+     * @param $conditions
+     * @param $params
+     * @param $types
+     * @return string
+     */
+    protected function processCondition($conditions, $params, $types)
     {
         if (is_array($conditions)) {
             $where = '';
@@ -1009,15 +1026,25 @@ class QueryBuilder
 
         if ($params) {
             if (is_array($params)) {
-                $this->setParameters($params, $type);
+                $this->setParameters($params, $types);
             } else {
-                $this->setParameter(0, $params, $type);
+                $this->setParameter(0, $params, $types);
             }
         }
 
         return $conditions;
     }
 
+    /**
+     * Adds a join to the query
+     *
+     * @param $type
+     * @param $table
+     * @param string $on
+     * @param array $params
+     * @param array $types
+     * @return $this
+     */
     protected function addJoin($type, $table, $on = null, $params = array(), $types = array())
     {
         $this->add('join', array(
