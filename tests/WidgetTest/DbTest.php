@@ -523,4 +523,31 @@ class DbTest extends TestCase
 
         $user->notFound;
     }
+
+    public function testCollection()
+    {
+        $users = $this->db->findAll('user');
+
+        $this->assertInstanceOf('\Widget\Db\Collection', $users);
+
+        // Filter
+        $firstGroupUsers = $users->filter(function($user){
+            if ('1' == $user->group_id) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+
+        $this->assertEquals('1', $firstGroupUsers[0]->group_id);
+        $this->assertInstanceOf('\Widget\Db\Collection', $firstGroupUsers);
+        $this->assertNotSame($users, $firstGroupUsers);
+
+        // Reduce
+        $count = $users->reduce(function($count, $user){
+            return ++$count;
+        });
+        
+        $this->assertEquals(2, $count);
+    }
 }

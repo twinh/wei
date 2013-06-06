@@ -8,6 +8,8 @@
 
 namespace Widget\Db;
 
+use Closure;
+
 /**
  * A base database collection class
  *
@@ -17,9 +19,32 @@ class Collection extends \ArrayObject
 {
     public function toArray()
     {
+        $data = array();
         foreach ($this as $record) {
             $data[] = $record->toArray();
         }
         return $data;
+    }
+
+    /**
+     *  Filters elements of the collection using a callback function
+     *
+     * @param Closure $fn
+     * @return Collection
+     */
+    public function filter(Closure $fn)
+    {
+        return new static(array_filter($this->getArrayCopy(), $fn));
+    }
+
+    /**
+     * Iteratively reduce the collection to a single value using a callback function
+     *
+     * @param Closure $fn
+     * @return mixed
+     */
+    public function reduce(Closure $fn)
+    {
+        return array_reduce($this->getArrayCopy(), $fn);
     }
 }

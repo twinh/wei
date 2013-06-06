@@ -473,10 +473,10 @@ class Db extends AbstractWidget
      * Fetch records by specified conditions
      *
      * @param string $table The name of database table
-     * @param array $where The primary key value or an associative array containing column-value pairs
+     * @param array|false $where The primary key value or an associative array containing column-value pairs
      * @return Collection
      */
-    public function findAll($table, $where = null)
+    public function findAll($table, $where = false)
     {
         $data = $this->selectAll($table, $where);
 
