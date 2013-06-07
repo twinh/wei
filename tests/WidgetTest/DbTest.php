@@ -322,20 +322,20 @@ class DbTest extends TestCase
         $query = $this->db('user')->where("name = 'twin'");
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM user WHERE name = 'twin'", $query->getSql());
+        $this->assertEquals("SELECT * FROM user WHERE name = 'twin' LIMIT 1", $query->getSql());
         $this->assertEquals('twin', $user->name);
 
         // ? conditions
         $query = $this->db('user')->where('name = ?', 'twin');
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM user WHERE name = ?", $query->getSql());
+        $this->assertEquals("SELECT * FROM user WHERE name = ? LIMIT 1", $query->getSql());
         $this->assertEquals('twin', $user->name);
 
         $query = $this->db('user')->where('group_id = ? AND name = ?', array('1', 'twin'));
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM user WHERE group_id = ? AND name = ?", $query->getSql());
+        $this->assertEquals("SELECT * FROM user WHERE group_id = ? AND name = ? LIMIT 1", $query->getSql());
         $this->assertEquals('1', $user->group_id);
         $this->assertEquals('twin', $user->name);
 
@@ -346,7 +346,7 @@ class DbTest extends TestCase
         ));
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM user WHERE group_id = :groupId AND name = :name", $query->getSql());
+        $this->assertEquals("SELECT * FROM user WHERE group_id = :groupId AND name = :name LIMIT 1", $query->getSql());
         $this->assertEquals('1', $user->group_id);
         $this->assertEquals('twin', $user->name);
 
@@ -356,7 +356,7 @@ class DbTest extends TestCase
         ));
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM user WHERE group_id = :groupId AND name = :name", $query->getSql());
+        $this->assertEquals("SELECT * FROM user WHERE group_id = :groupId AND name = :name LIMIT 1", $query->getSql());
         $this->assertEquals('1', $user->group_id);
         $this->assertEquals('twin', $user->name);
 
@@ -372,7 +372,7 @@ class DbTest extends TestCase
         $query = $this->db('user')->where(array('group_id' => array('1', '2')));
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM user WHERE group_id IN (?, ?)", $query->getSql());
+        $this->assertEquals("SELECT * FROM user WHERE group_id IN (?, ?) LIMIT 1", $query->getSql());
         $this->assertEquals('1', $user->group_id);
 
         $query = $this->db('user')->where(array(
@@ -381,28 +381,28 @@ class DbTest extends TestCase
         ));
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM user WHERE id = ? AND group_id IN (?, ?)", $query->getSql());
+        $this->assertEquals("SELECT * FROM user WHERE id = ? AND group_id IN (?, ?) LIMIT 1", $query->getSql());
         $this->assertEquals('1', $user->id);
 
         // Order
         $query = $this->db('user')->orderBy('id', 'ASC');
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM user ORDER BY id ASC", $query->getSql());
+        $this->assertEquals("SELECT * FROM user ORDER BY id ASC LIMIT 1", $query->getSql());
         $this->assertEquals('1', $user->id);
 
         // Add order
         $query = $this->db('user')->orderBy('id', 'ASC')->addOrderBy('group_id', 'ASC');
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM user ORDER BY id ASC, group_id ASC", $query->getSql());
+        $this->assertEquals("SELECT * FROM user ORDER BY id ASC, group_id ASC LIMIT 1", $query->getSql());
         $this->assertEquals('1', $user->id);
 
         // Select
         $query = $this->db('user')->select('id, group_id');
         $user = $query->find()->toArray();
 
-        $this->assertEquals("SELECT id, group_id FROM user", $query->getSql());
+        $this->assertEquals("SELECT id, group_id FROM user LIMIT 1", $query->getSql());
         $this->assertArrayHasKey('id', $user);
         $this->assertArrayHasKey('group_id', $user);
         $this->assertArrayNotHasKey('name', $user);
@@ -411,7 +411,7 @@ class DbTest extends TestCase
         $query = $this->db('user')->select('id')->addSelect('group_id');
         $user = $query->find()->toArray();
 
-        $this->assertEquals("SELECT id, group_id FROM user", $query->getSql());
+        $this->assertEquals("SELECT id, group_id FROM user LIMIT 1", $query->getSql());
         $this->assertArrayHasKey('id', $user);
         $this->assertArrayHasKey('group_id', $user);
         $this->assertArrayNotHasKey('name', $user);
@@ -420,7 +420,7 @@ class DbTest extends TestCase
         $query = $this->db('user')->select('DISTINCT group_id');
         $user = $query->find();
 
-        $this->assertEquals("SELECT DISTINCT group_id FROM user", $query->getSql());
+        $this->assertEquals("SELECT DISTINCT group_id FROM user LIMIT 1", $query->getSql());
         $this->assertEquals('1', $user->group_id);
 
         // Limit
@@ -449,14 +449,14 @@ class DbTest extends TestCase
         $query = $this->db('user')->groupBy('group_id');
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM user GROUP BY group_id", $query->getSql());
+        $this->assertEquals("SELECT * FROM user GROUP BY group_id LIMIT 1", $query->getSql());
         $this->assertEquals('1', $user->group_id);
 
         // Having
         $query = $this->db('user')->groupBy('group_id')->having('group_id >= ?', '1');
         $user = $query->find();
 
-        $this->assertEquals("SELECT * FROM user GROUP BY group_id HAVING group_id >= ?", $query->getSql());
+        $this->assertEquals("SELECT * FROM user GROUP BY group_id HAVING group_id >= ? LIMIT 1", $query->getSql());
         $this->assertEquals('1', $user->group_id);
 
         // Join
@@ -466,7 +466,7 @@ class DbTest extends TestCase
             ->leftJoin('user_group', 'user_group.id = user.group_id');
         $user = $query->find()->toArray();
 
-        $this->assertEquals("SELECT user.*, user_group.name AS group_name FROM user LEFT JOIN user_group ON user_group.id = user.group_id", $query->getSql());
+        $this->assertEquals("SELECT user.*, user_group.name AS group_name FROM user LEFT JOIN user_group ON user_group.id = user.group_id LIMIT 1", $query->getSql());
         $this->assertArrayHasKey('group_name', $user);
 
         // Join with table alias

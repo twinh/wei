@@ -153,21 +153,27 @@ class QueryBuilder
         }
     }
 
+    /**
+     * Executes the generated SQL and returns the found record object or false
+     *
+     * @return bool|Record
+     */
     public function find()
     {
-        $data = $this
-            //->limit(1)
-            ->execute();
-
-        $table = $this->sqlParts['from']['table'];
+        $data = $this->fetch();
 
         if ($data) {
-            return $this->db->create($table, $data[0]);
+            return $this->db->create($this->sqlParts['from']['table'], $data);
         } else  {
             return false;
         }
     }
 
+    /**
+     * Executes the generated SQL and returns the found record collection object or false
+     *
+     * @return Collection
+     */
     public function findAll()
     {
         $data = $this->execute();
@@ -190,7 +196,8 @@ class QueryBuilder
     public function fetch()
     {
         $this->limit(1);
-        return $this->db->fetch($this->getSql());
+        $data = $this->execute();
+        return $data ? $data[0] : false;
     }
 
     /**
@@ -200,7 +207,7 @@ class QueryBuilder
      */
     public function fetchAll()
     {
-        return $this->db->fetchAll($this->getSql());
+        return $this->execute();
     }
 
     public function count()

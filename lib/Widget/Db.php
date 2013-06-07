@@ -266,7 +266,7 @@ class Db extends AbstractWidget
     }
 
     /**
-     * Executes a query and returns the first result
+     * Executes a query and returns the first array result
      *
      * @param string $sql The SQL query
      * @param array|string $params The query parameters
@@ -279,7 +279,7 @@ class Db extends AbstractWidget
     }
 
     /**
-     * Executes a query and returns all results
+     * Executes a query and returns all array results
      *
      * @param string $sql The SQL query
      * @param array $params The query parameters
@@ -455,7 +455,18 @@ class Db extends AbstractWidget
     }
 
     /**
-     * Find a record
+     * Find a record from specified table and conditions
+     *
+     * ```php
+     * // Find by primary key
+     * $db->find('user', 1);
+     *
+     * // Find by specified column
+     * $db->find('user', array('username' => 'twin'));
+     *
+     * // Find in list
+     * $db->find('user', array('id' => array(1, 2, 3)));
+     * ```
      *
      * @param string $table The name of table
      * @param string|array $id The primary key value
@@ -488,11 +499,22 @@ class Db extends AbstractWidget
     }
 
     /**
-     * Fetch records by specified conditions
+     * Find records from specified table and conditions
+     *
+     * ```php
+     * // Find by primary key
+     * $db->findAll('user', 1);
+     *
+     * // Find by specified column
+     * $db->findAll('user', array('username' => 'twin'));
+     *
+     * // Find in list
+     * $db->findAll('user', array('id' => array(1, 2, 3)));
+     * ```
      *
      * @param string $table The name of database table
      * @param array|false $where The primary key value or an associative array containing column-value pairs
-     * @return Collection
+     * @return Db\Collection
      */
     public function findAll($table, $where = false)
     {
@@ -544,15 +566,27 @@ class Db extends AbstractWidget
         return $this->recordClass;
     }
 
+    /**
+     * Bind parameters to statement object
+     *
+     * @param \PDOStatement $stmt
+     * @param array $params
+     * @param array $types
+     */
     protected function bindParameter(\PDOStatement $stmt, $params, $types)
     {
-        $params = (array)$params;
-        $types = (array)$types;
+        if (!is_array($params)) {
+            $params = array($params);
+        }
+        if (!is_array($types)) {
+            $types = array($types);
+        }
+
         $isIndex = is_int(key($params));
         $index = 1;
 
         foreach ($params as $name => $param) {
-            //
+            // Number index parameters
             if ($isIndex) {
                 if (isset($types[$index])) {
                     $stmt->bindValue($index, $param, $types[$index]);
@@ -560,7 +594,7 @@ class Db extends AbstractWidget
                     $stmt->bindValue($index, $param);
                 }
                 $index++;
-            //
+            // Named parameters
             } else {
                 if (isset($types[$name])) {
                     $stmt->bindValue($name, $param, $types[$name]);
