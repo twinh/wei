@@ -11,11 +11,11 @@ API 参考目录
 #### HTTP请求
 * [request](request.md) - 管理HTTP请求数据($_REQUEST)
 * [cookie](cookie.md) - 写入,读取和删除cookie($_COOKIE)
-* [os](os.md) - 检测客户端浏览器,操作系统和设备是否为指定的名称和版本
 * [post](post.md)  - 获取一项HTTP POST请求参数($_POST)的值
 * [query](query.md) - 获取一项HTTP GET查询参数($_GET)的值
 * [server](server.md) - 获取一项服务器和执行环境信息($_SERVER)的值
 * [session](session.md) - 获取一项会话($_SESSION)的值
+* [ua](ua.md) - 检测客户端浏览器,操作系统和设备是否为指定的名称和版本
 * [upload](upload.md) - 保存客户端上传的文件到指定目录
 
 #### HTTP响应

@@ -9,35 +9,35 @@
 namespace Widget;
 
 /**
- * A widget to detect user OS and browser name and version
+ * A widget to detect user OS, browser and device name and version
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request A widget that handles the HTTP request data
- * 
+ *
  * @method      bool inIe() Check if the user is browsing in Internet Explorer browser
  * @method      bool inChrome() Check if the user is browsing in Chrome browser
  * @method      bool inFirefox() Check if the user is browsing in Firefox browser
- * 
+ *
  * @method      bool inIos()  Check if the device is running on Apple's iOS platform
  * @method      bool inAndroid() Check if the device is running on Google's Android platform
  * @method      bool inWindowsPhone() Check if the device is running on Windows Phone platform
- * 
+ *
  * @method      bool inIphone() Check if the user is browsing by iPhone/iPod
  * @method      bool inIpad() Check if the user is browsing by iPad
  */
-class Os extends AbstractWidget
+class Ua extends AbstractWidget
 {
     protected $os = array(
-        // Browser 
+        // Browser
         'ie'            => 'MSIE ([\w.]+)',
         'chrome'        => 'Chrome\/([\w.]+)',
         'firefox'       => 'Firefox\/([\w.]+)',
-        
+
         // OS
         'ios'           => 'iP(?:hone|ad).*OS ([\d_]+)', // Contains iPod
         'android'       => 'Android ([\w.]+)',
         'windowsphone'  => 'Windows Phone (?:OS )?([\w.]+)',
-        
+
         // Device (Mobile & Tablet)
         'iphone'        => 'iPhone OS ([\d_]+)',
         'ipad'          => 'iPad.*OS ([\d_]+)'
@@ -45,17 +45,17 @@ class Os extends AbstractWidget
 
     /**
      * The versions of detected os
-     * 
+     *
      * @var string
      */
     protected $versions = array();
 
     /**
      * The user agent string from request header
-     * 
+     *
      * @var string
      */
-    protected $ua;
+    protected $userAgent;
 
     /**
      * Constructor
@@ -66,12 +66,12 @@ class Os extends AbstractWidget
     {
         parent::__construct($options);
 
-        $this->ua = $this->request->getServer('HTTP_USER_AGENT');
+        $this->userAgent = $this->request->getServer('HTTP_USER_AGENT');
     }
 
     /**
      * Check if in the specified browser, OS or device
-     * 
+     *
      * @param string $os The name of browser, OS or device
      * @return bool
      */
@@ -82,24 +82,24 @@ class Os extends AbstractWidget
 
     /**
      * Check if in the specified browser, OS or device
-     * 
+     *
      * @param string $os The name of browser, OS or device
      * @return bool
      */
     public function in($os)
     {
         $os = strtolower($os);
-        if (isset($this->os[$os]) && preg_match('/' . $this->os[$os] . '/i', $this->ua, $matches)) {
+        if (isset($this->os[$os]) && preg_match('/' . $this->os[$os] . '/i', $this->userAgent, $matches)) {
             $this->versions[$os] = isset($matches[1]) ? $matches[1] : false;
             return true;
         } else {
             return false;
         }
     }
-    
+
     /**
      * Returns the version of specified browser, OS or device
-     * 
+     *
      * @return string
      */
     public function getVersion($os)
@@ -113,7 +113,7 @@ class Os extends AbstractWidget
 
     /**
      * Magic call for method inXXX
-     * 
+     *
      * @param string $name
      * @param array $args
      * @return bool
@@ -125,10 +125,10 @@ class Os extends AbstractWidget
         }
         return parent::__call($name, $args);
     }
-    
+
     /**
      * Check if the device is mobile
-     * 
+     *
      * @link https://github.com/serbanghita/Mobile-Detect
      * @license MIT License https://github.com/serbanghita/Mobile-Detect/blob/master/LICENSE.txt
      * @return bool
@@ -136,7 +136,7 @@ class Os extends AbstractWidget
     public function inMobile()
     {
         $s = $this->request->getParameterReference('server');
-        
+
         if (
             isset($s['HTTP_ACCEPT']) &&
                 (strpos($s['HTTP_ACCEPT'], 'application/x-obml2d') !== false || // Opera Mini; @reference: http://dev.opera.com/articles/view/opera-binary-markup-language/

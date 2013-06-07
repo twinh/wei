@@ -22,11 +22,9 @@ require_once 'WidgetInterface.php';
  *
  * HTTP Request
  * @property Request    $request A widget that handles the HTTP request data
- * @method   mixed      request($name, $default = null) Returns a stringify rquest parameter value
+ * @method   mixed      request($name, $default = null) Returns a stringify request parameter value
  * @property Cookie     $cookie A widget manager the HTTP cookie
  * @method   mixed      cookie($key, $value = null, $options = array()) Get or set cookie
- * @property Os         $os A widget to detect user OS and browser name and version
- * @method   bool       os() Check if in the specified browser, OS or device
  * @property Post       $post A widget that handles the HTTP request parameters ($_POST)
  * @method   string     post($name, $default = null) Returns a stringify request parameter value
  * @property Query      $query A widget that handles the URL query parameters ($_GET)
@@ -35,6 +33,8 @@ require_once 'WidgetInterface.php';
  * @method   string     server($name, $default = null) Returns a stringify server or execution environment parameter value
  * @property Session    $session A widget that session parameters ($_SESSION)
  * @method   mixed      session($name, $default = null) Returns a stringify session parameter value
+ * @property Ua         $ua A widget to detect user OS, device and browser name and version
+ * @method   bool       ua() Check if in the specified browser, OS or device
  * @property Upload     $upload A widget that handles the uploaded files
  * @method   bool       upload(array $options = array()) Upload a file
  *

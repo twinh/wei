@@ -2,29 +2,29 @@
 
 namespace WidgetTest;
 
-class OsTest extends TestCase
+class UaTest extends TestCase
 {
     /**
      * @dataProvider providerForUserAgent
      */
-    public function testBrowser($ua, $os, $version = null)
+    public function testBrowser($userAgent, $os, $version = null)
     {
-        $this->os->setOption('ua', $ua);
-        
+        $this->ua->setOption('userAgent', $userAgent);
+
         // Compatible for old tests
         if (is_string($os)) {
-            $this->assertTrue($this->os($os));
-            $this->assertTrue($this->os->{'in' . $os}());
-            $this->assertEquals($version, $this->os->getVersion($os));
+            $this->assertTrue($this->ua($os));
+            $this->assertTrue($this->ua->{'in' . $os}());
+            $this->assertEquals($version, $this->ua->getVersion($os));
         } else {
             foreach ($os as $value) {
-                $this->assertTrue($this->os($value[0]));
-                $this->assertTrue($this->os->{'in' . $value[0]}());
-                $this->assertEquals($value[1], $this->os->getVersion($value[0]));
+                $this->assertTrue($this->ua($value[0]));
+                $this->assertTrue($this->ua->{'in' . $value[0]}());
+                $this->assertEquals($value[1], $this->ua->getVersion($value[0]));
             }
         }
     }
-    
+
     /**
      * @link http://www.useragentstring.com/
      */
