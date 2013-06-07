@@ -27,7 +27,7 @@ namespace Widget;
  */
 class Ua extends AbstractWidget
 {
-    protected $os = array(
+    protected $patterns = array(
         // Browser
         'ie'            => 'MSIE ([\w.]+)',
         'chrome'        => 'Chrome\/([\w.]+)',
@@ -72,25 +72,25 @@ class Ua extends AbstractWidget
     /**
      * Check if in the specified browser, OS or device
      *
-     * @param string $os The name of browser, OS or device
+     * @param string $name The name of browser, OS or device
      * @return bool
      */
-    public function __invoke($os)
+    public function __invoke($name)
     {
-        return $this->in($os);
+        return $this->in($name);
     }
 
     /**
      * Check if in the specified browser, OS or device
      *
-     * @param string $os The name of browser, OS or device
+     * @param string $name The name of browser, OS or device
      * @return bool
      */
-    public function in($os)
+    public function in($name)
     {
-        $os = strtolower($os);
-        if (isset($this->os[$os]) && preg_match('/' . $this->os[$os] . '/i', $this->userAgent, $matches)) {
-            $this->versions[$os] = isset($matches[1]) ? $matches[1] : false;
+        $name = strtolower($name);
+        if (isset($this->patterns[$name]) && preg_match('/' . $this->patterns[$name] . '/i', $this->userAgent, $matches)) {
+            $this->versions[$name] = isset($matches[1]) ? $matches[1] : false;
             return true;
         } else {
             return false;
@@ -100,15 +100,16 @@ class Ua extends AbstractWidget
     /**
      * Returns the version of specified browser, OS or device
      *
+     * @param string $name
      * @return string
      */
-    public function getVersion($os)
+    public function getVersion($name)
     {
-        $os = strtolower($os);
-        if (!isset($this->versions[$os])) {
-            $this->in($os);
+        $name = strtolower($name);
+        if (!isset($this->versions[$name])) {
+            $this->in($name);
         }
-        return $this->versions[$os];
+        return $this->versions[$name];
     }
 
     /**
