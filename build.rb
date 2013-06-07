@@ -29,7 +29,7 @@ end
 
 widgets = [
   # request-section
-    'request', 'cookie', 'os',  'post', 'query', 'server', 'session', 'upload',
+    'request', 'cookie', 'post', 'query', 'server', 'session', 'ua', 'upload',
   # response-section
     'response', 'download', 'flush', 'header', 'json', 'redirect',
   'call',

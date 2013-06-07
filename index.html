@@ -49,11 +49,11 @@
       <ul class="nav">
         <li><a href="#request">Request</a></li>
         <li><a href="#cookie">Cookie</a></li>
-        <li><a href="#os">Os</a></li>
         <li><a href="#post">Post</a></li>
         <li><a href="#query">Query</a></li>
         <li><a href="#server">Server</a></li>
         <li><a href="#session">Session</a></li>
+        <li><a href="#ua">Ua</a></li>
         <li><a href="#upload">Upload</a></li>
       </ul>
     </li>
@@ -536,100 +536,6 @@
 <p>发送cookie到浏览器</p>
   </section>
 
-<!-- os
-  ================================================== -->
-  <section id="os">
-  <div class="page-header"><h1>Os</h1></div>
-
-<p>检测客户端浏览器,操作系统和设备是否为指定的名称和版本</p>
-
-<h2>案例</h2>
-
-<h3>根据用户设备跳转到相应的页面</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">os</span><span class="o">-&gt;</span><span class="na">inIphone</span><span class="p">())</span> <span class="p">{</span>
-    <span class="c1">// 跳转到iPhone定制页面</span>
-<span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">os</span><span class="o">-&gt;</span><span class="na">inIpad</span><span class="p">())</span> <span class="p">{</span>
-    <span class="c1">// 跳转到iPad定制页面</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="c1">// 展示默认页面</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<h3>获取Windows Phone手机用户的版本</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">os</span><span class="o">-&gt;</span><span class="na">getVersion</span><span class="p">(</span><span class="s1">'WindowsPhone'</span><span class="p">);</span>
-</code></pre></div>
-
-<h3>如果用户为IE浏览器,输出用浏览器版本</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">os</span><span class="o">-&gt;</span><span class="na">inIe</span><span class="p">())</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">os</span><span class="o">-&gt;</span><span class="na">getVersion</span><span class="p">(</span><span class="s1">'ie'</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<h3>运行结果</h3>
-
-<div class="highlight"><pre><code class="php"><span class="s1">'10.0'</span>
-</code></pre></div>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<p><em>无</em></p>
-
-<h3>方法</h3>
-
-<h4>os($name)</h4>
-
-<p>检测客户端是否为指定的浏览器,操作系统和手持设备</p>
-
-<h4>os-&gt;in($name)</h4>
-
-<p>同<code>os($name)</code></p>
-
-<h4>os-&gt;getVersion($name)</h4>
-
-<p>获取客户端浏览器,操作系统或手持设备的版本</p>
-
-<h4>os-&gt;inMobile()</h4>
-
-<p>检查用户是否通过移动设备访问</p>
-
-<h4>os-&gt;inIe()</h4>
-
-<p>检查用户是否通过IE浏览器访问</p>
-
-<h4>os-&gt;inChrome()</h4>
-
-<p>检查用户是否通过Chrome浏览器访问</p>
-
-<h4>os-&gt;inFirefox()</h4>
-
-<p>检查用户是否通过Firefox浏览器访问</p>
-
-<h4>os-&gt;inIos()</h4>
-
-<p>检查用户是否使用苹果iOS系统</p>
-
-<h4>os-&gt;inAndroid()</h4>
-
-<p>检查用户是否使用谷歌安卓系统</p>
-
-<h4>os-&gt;inWindowsPhone()</h4>
-
-<p>检查用户是否使用微软Windows Phone系统</p>
-
-<h4>os-&gt;inIphone()</h4>
-
-<p>检查用户是否使用iPhone/iPod访问网站</p>
-
-<h4>os-&gt;inIpad()</h4>
-
-<p>检查用户是否使用iPad访问网站</p>
-  </section>
-
 <!-- post
   ================================================== -->
   <section id="post">
@@ -835,6 +741,100 @@
 
 <p>设置会话相关的ini配置,配置名称会自定加上<code>session.</code>前缀<br>
 详细配置可以查看<a href="http://php.net/manual/en/session.configuration.php">http://php.net/manual/en/session.configuration.php</a></p>
+  </section>
+
+<!-- ua
+  ================================================== -->
+  <section id="ua">
+  <div class="page-header"><h1>Ua</h1></div>
+
+<p>检测客户端浏览器,操作系统和设备是否为指定的名称和版本</p>
+
+<h2>案例</h2>
+
+<h3>根据用户设备跳转到相应的页面</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">inIphone</span><span class="p">())</span> <span class="p">{</span>
+    <span class="c1">// 跳转到iPhone定制页面</span>
+<span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">inIpad</span><span class="p">())</span> <span class="p">{</span>
+    <span class="c1">// 跳转到iPad定制页面</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// 展示默认页面</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>获取Windows Phone手机用户的版本</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">getVersion</span><span class="p">(</span><span class="s1">'WindowsPhone'</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>如果用户为IE浏览器,输出用浏览器版本</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">inIe</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">getVersion</span><span class="p">(</span><span class="s1">'ie'</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>运行结果</h3>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'10.0'</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>方法</h3>
+
+<h4>ua($name)</h4>
+
+<p>检测客户端是否为指定的浏览器,操作系统和手持设备</p>
+
+<h4>ua-&gt;in($name)</h4>
+
+<p>同<code>ua($name)</code></p>
+
+<h4>ua-&gt;getVersion($name)</h4>
+
+<p>获取客户端浏览器,操作系统或手持设备的版本</p>
+
+<h4>ua-&gt;inMobile()</h4>
+
+<p>检查用户是否通过移动设备访问</p>
+
+<h4>ua-&gt;inIe()</h4>
+
+<p>检查用户是否通过IE浏览器访问</p>
+
+<h4>ua-&gt;inChrome()</h4>
+
+<p>检查用户是否通过Chrome浏览器访问</p>
+
+<h4>ua-&gt;inFirefox()</h4>
+
+<p>检查用户是否通过Firefox浏览器访问</p>
+
+<h4>ua-&gt;inIos()</h4>
+
+<p>检查用户是否使用苹果iOS系统</p>
+
+<h4>ua-&gt;inAndroid()</h4>
+
+<p>检查用户是否使用谷歌安卓系统</p>
+
+<h4>ua-&gt;inWindowsPhone()</h4>
+
+<p>检查用户是否使用微软Windows Phone系统</p>
+
+<h4>ua-&gt;inIphone()</h4>
+
+<p>检查用户是否使用iPhone/iPod访问网站</p>
+
+<h4>ua-&gt;inIpad()</h4>
+
+<p>检查用户是否使用iPad访问网站</p>
   </section>
 
 <!-- upload
@@ -1777,7 +1777,7 @@
 <td>HTTP状态码错误,如404页面不存在,500内部错误</td>
 </tr>
 <tr>
-<td>parsererror</td>
+<td>parser</td>
 <td>数据解析错误,如返回的数据不是正确的json格式</td>
 </tr>
 </tbody>
@@ -9430,6 +9430,10 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 </tbody>
 </table><p>第三个参数<code>$widget</code>为可选的微件对象,如果微件包含与事件名称相同的属性,那么,事件管理器将会把该属性
 作为一个事件触发器,在所有的触发器触发后才触发.</p>
+
+<h4>event-&gt;has($type)</h4>
+
+<p>检查是否存在指定类型的事件触发器</p>
   </section>
 
 <!-- db
@@ -9437,317 +9441,17 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
   <section id="db">
   <div class="page-header"><h1>Db</h1></div>
 
-<p>获取<a href="https://github.com/doctrine/dbal">Doctrine DBAL</a>的数据库查询对象</p>
+<p>数据库操作</p>
 
 <h2>案例</h2>
-
-<h3>设置数据库类型并执行简单的查询</h3>
-
-<div class="highlight"><pre><code class="php"><span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">config</span><span class="p">(</span><span class="s1">'db'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s1">'driver'</span> <span class="o">=&gt;</span> <span class="s1">'pdo_sqlite'</span><span class="p">,</span>
-    <span class="s1">'path'</span> <span class="o">=&gt;</span> <span class="s1">'test.sqlite'</span>
-<span class="p">));</span>
-
-<span class="nv">$db</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">();</span>
-
-<span class="nb">print_r</span><span class="p">(</span><span class="nv">$db</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">(</span><span class="s2">"SELECT MAX(1, 2)"</span><span class="p">));</span>
-</code></pre></div>
-
-<h3>返回结果</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">Array</span>
-<span class="p">(</span>
-    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
-        <span class="p">(</span>
-            <span class="p">[</span><span class="nx">MAX</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span> <span class="o">=&gt;</span> <span class="mi">2</span>
-        <span class="p">)</span>
-
-<span class="p">)</span>
-</code></pre></div>
-
-<h3>创建读写(主备)分离的数据库查询对象</h3>
-
-<div class="highlight"><pre><code class="php"><span class="c1">// 添加微件别名</span>
-<span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">appendOption</span><span class="p">(</span><span class="s1">'alias'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s1">'dbSlave'</span> <span class="o">=&gt;</span> <span class="s1">'Widget\Db'</span>
-<span class="p">));</span>
-
-<span class="c1">// 设置数据库配置选项</span>
-<span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">config</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'driver'</span> <span class="o">=&gt;</span> <span class="s1">'pdo_sqlite'</span><span class="p">,</span>
-        <span class="s1">'path'</span> <span class="o">=&gt;</span> <span class="s1">'test.sqlite'</span>
-    <span class="p">),</span>
-    <span class="s1">'dbSlave'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'driver'</span> <span class="o">=&gt;</span> <span class="s1">'pdo_sqlite'</span><span class="p">,</span>
-        <span class="s1">'path'</span> <span class="o">=&gt;</span> <span class="s1">'slave.sqlite'</span>
-    <span class="p">)</span>
-<span class="p">));</span>
-
-<span class="c1">// 获取主DB数据库对象</span>
-<span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">();</span>
-
-<span class="c1">// 获取备DB数据库对象</span>
-<span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">dbSlave</span><span class="p">();</span>
-</code></pre></div>
 
 <h2>调用方式</h2>
 
 <h3>选项</h3>
 
-<p>完整的配置请查看Doctrine DBAL官方提供的文档
-<a href="http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html">http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html</a></p>
+<h3>方法</h3>
 
-<h4>以下三个主要选项,只要提供一个的值即可</h4>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>driver</td>
-<td>string</td>
-<td>无</td>
-<td>数据库驱动的类型,目前支持 <code>pdo_mysql</code>,<code>pdo_sqlite</code>,<code>pdo_pgsql</code>,<code>pdo_oci</code>,<code>pdo_sqlsrv</code>和<code>oci8</code>
-</td>
-</tr>
-<tr>
-<td>driverClass</td>
-<td>string</td>
-<td>无</td>
-<td>驱动的类名</td>
-</tr>
-<tr>
-<td>pdo</td>
-<td>\PDO</td>
-<td>无</td>
-<td>实例化的PDO对象</td>
-</tr>
-</tbody>
-</table><h4>当选项<code>driver</code>的值为<code>pdo_sqlite</code>时,需提供以下配置选项</h4>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>user</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的用户名</td>
-</tr>
-<tr>
-<td>password</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的密码</td>
-</tr>
-<tr>
-<td>path</td>
-<td>string</td>
-<td>无</td>
-<td>数据库存放的路径,与<code>memory</code>选项二选一,优先使用<code>path</code>选项</td>
-</tr>
-<tr>
-<td>memory</td>
-<td>bool</td>
-<td>无</td>
-<td>是否使用SQLite的内存数据库(非持久化,在每次请求完毕就自动删除)</td>
-</tr>
-</tbody>
-</table><h4>当选项<code>driver</code>的值为<code>pdo_mysql</code>时,需提供以下配置选项</h4>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>user</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的用户名</td>
-</tr>
-<tr>
-<td>password</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的密码</td>
-</tr>
-<tr>
-<td>host</td>
-<td>string</td>
-<td>无</td>
-<td>数据库的主机地址</td>
-</tr>
-<tr>
-<td>port</td>
-<td>int</td>
-<td>无</td>
-<td>连接数据库的端口</td>
-</tr>
-<tr>
-<td>dbname</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的数据库名称</td>
-</tr>
-<tr>
-<td>unix_socket</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的socket名称</td>
-</tr>
-<tr>
-<td>charset</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的字符集</td>
-</tr>
-</tbody>
-</table><h4>当选项<code>driver</code>的值为<code>pdo_pgsql</code>时,需提供以下配置选项</h4>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>user</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的用户名</td>
-</tr>
-<tr>
-<td>password</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的密码</td>
-</tr>
-<tr>
-<td>host</td>
-<td>string</td>
-<td>无</td>
-<td>数据库的主机地址</td>
-</tr>
-<tr>
-<td>port</td>
-<td>int</td>
-<td>无</td>
-<td>连接数据库的端口</td>
-</tr>
-<tr>
-<td>dbname</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的数据库名称</td>
-</tr>
-</tbody>
-</table><h4>当选项<code>driver</code>的值为<code>pdo_oci</code> / <code>oci8</code>时,需提供以下配置选项</h4>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>user</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的用户名</td>
-</tr>
-<tr>
-<td>password</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的密码</td>
-</tr>
-<tr>
-<td>host</td>
-<td>string</td>
-<td>无</td>
-<td>数据库的主机地址</td>
-</tr>
-<tr>
-<td>port</td>
-<td>int</td>
-<td>无</td>
-<td>连接数据库的端口</td>
-</tr>
-<tr>
-<td>dbname</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的数据库名称</td>
-</tr>
-<tr>
-<td>charset</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的字符集</td>
-</tr>
-</tbody>
-</table><h4>当选项<code>driver</code>的值为<code>pdo_sqlsrv</code>时,需提供以下配置选项</h4>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>user</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的用户名</td>
-</tr>
-<tr>
-<td>password</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的密码</td>
-</tr>
-<tr>
-<td>host</td>
-<td>string</td>
-<td>无</td>
-<td>数据库的主机地址</td>
-</tr>
-<tr>
-<td>port</td>
-<td>int</td>
-<td>无</td>
-<td>连接数据库的端口</td>
-</tr>
-<tr>
-<td>dbname</td>
-<td>string</td>
-<td>无</td>
-<td>连接数据库的数据库名称</td>
-</tr>
-</tbody>
-</table><h3>方法</h3>
-
-<h4>db()</h4>
+<h4>db</h4>
 
 <p>获取数据库查询对象</p>
   </section>
@@ -9867,7 +9571,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <span class="p">});</span>
 
 <span class="c1">// 抛出404错误</span>
-<span class="k">throw</span> <span class="k">new</span> <span class="nx">Widget\Exception\NotFoundException</span><span class="p">(</span><span class="s1">'Page not found'</span><span class="p">);</span>
+<span class="k">throw</span> <span class="k">new</span> <span class="nx">\Exception</span><span class="p">(</span><span class="s1">'Page not found'</span><span class="p">,</span> <span class="mi">404</span><span class="p">);</span>
 </code></pre></div>
 
 <h3>选项</h3>
@@ -9903,12 +9607,6 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <td>bool</td>
 <td>false</td>
 <td>是否忽略已有的异常处理器</td>
-</tr>
-<tr>
-<td>notFoundExceptions</td>
-<td>array</td>
-<td>array('Widget\Exception\NotFoundException')</td>
-<td>404异常的类名</td>
 </tr>
 </tbody>
 </table><h3>方法</h3>
