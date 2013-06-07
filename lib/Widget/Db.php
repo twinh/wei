@@ -270,11 +270,12 @@ class Db extends AbstractWidget
      *
      * @param string $sql The SQL query
      * @param array|string $params The query parameters
+     * @param array $types The parameter types to bind
      * @return array|false Return an array or false when no result found
      */
-    public function fetch($sql, $params = array())
+    public function fetch($sql, $params = array(), $types = array())
     {
-        return $this->query($sql, $params)->fetch();
+        return $this->query($sql, $params, $types)->fetch();
     }
 
     /**
@@ -282,11 +283,12 @@ class Db extends AbstractWidget
      *
      * @param string $sql The SQL query
      * @param array $params The query parameters
+     * @param array $types The parameter types to bind
      * @return array|false Return an array or false when no result found
      */
-    public function fetchAll($sql, $params = array())
+    public function fetchAll($sql, $params = array(), $types = array())
     {
-        return $this->query($sql, $params)->fetchAll();
+        return $this->query($sql, $params, $types)->fetchAll();
     }
 
     /**
@@ -308,14 +310,15 @@ class Db extends AbstractWidget
      *
      * @param string $sql The SQL query
      * @param array $params The query parameters
+     * @param array $types The parameter types to bind
      * @return int The number of affected rows
      */
-    public function executeUpdate($sql, $params = array())
+    public function executeUpdate($sql, $params = array(), $types = array())
     {
         $this->connect();
 
         if ($this->beforeQuery) {
-            call_user_func_array($this->beforeQuery, array($sql, $params, $this));
+            call_user_func_array($this->beforeQuery, array($sql, $params, $types, $this));
         }
 
         if ($params) {
@@ -338,21 +341,27 @@ class Db extends AbstractWidget
      *
      * @param string $sql The SQL query
      * @param array $params The SQL parameters
+     * @param array $types The parameter types to bind
      * @throws \RuntimeException When a PDOException raise
      * @return \PDOStatement
      */
-    public function query($sql, $params = array())
+    public function query($sql, $params = array(), $types = array())
     {
         $this->connect();
 
         if ($this->beforeQuery) {
-            call_user_func_array($this->beforeQuery, array($sql, $params, $this));
+            call_user_func_array($this->beforeQuery, array($sql, $params, $types, $this));
         }
 
         try {
             if ($params) {
                 $stmt = $this->pdo->prepare($sql);
-                $stmt->execute((array)$params);
+                if ($types) {
+                    $this->bindParameter($stmt, $params, $types);
+                    $stmt->execute();
+                } else {
+                    $stmt->execute((array)$params);
+                }
             } else {
                 $stmt = $this->pdo->query($sql);
             }
@@ -533,5 +542,10 @@ class Db extends AbstractWidget
         }
 
         return $this->recordClass;
+    }
+
+    protected function bindParameter($stmt, $params, $types)
+    {
+        // TODO
     }
 }

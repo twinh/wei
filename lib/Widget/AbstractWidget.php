@@ -89,6 +89,8 @@ require_once 'WidgetInterface.php';
  * @property Is         $is The validator manager, use to validate input quickly, create validator
  *
  * Database
+ * @property Db                           $db A database widget
+ * @method   Db\QueryBuilder              db()
  * @property Dbal                         $dbal A container widget for Doctrine DBAL connection object
  * @method   \Doctrine\DBAL\Connection    dbal() Retrieve the Doctrine DBAL connection object
  * @property EntityManager                $entityManager A container widget for Doctrine ORM entity manager object

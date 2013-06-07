@@ -1013,7 +1013,9 @@ class QueryBuilder
                 $this->paramTypes = array_merge($this->paramTypes, $types);
             } else {
                 $this->params[] = $params;
-                $this->paramTypes[] = $types;
+                if ($this->paramTypes) {
+                    $this->paramTypes[] = $types;
+                }
             }
         }
 
