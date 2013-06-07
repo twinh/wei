@@ -3,6 +3,7 @@
 namespace WidgetTest;
 
 use Widget\DB\QueryBuilder;
+use PDO;
 
 /**
  * @property \Widget\Db db
@@ -461,6 +462,34 @@ class DbTest extends TestCase
         $this->assertEquals("SELECT * FROM user u RIGHT JOIN user_group g ON g.id = u.group_id", $query->getSql());
     }
 
+    public function testBindValue()
+    {
+        // Not array parameter
+        $user = $this->db->fetch("SELECT * FROM user WHERE id = ?", 1, PDO::PARAM_INT);
+
+        $this->assertEquals('1', $user['id']);
+
+        // Array parameter
+        $user = $this->db->fetch("SELECT * FROM user WHERE id = ?", array(1), array(PDO::PARAM_INT));
+
+        $this->assertEquals('1', $user['id']);
+
+        // Name parameter
+        $user = $this->db->fetch("SELECT * FROM user WHERE id = :id", 1, array(
+            'id' => PDO::PARAM_INT
+        ));
+
+        $this->assertEquals('1', $user['id']);
+
+        // Name parameter with colon
+        $user = $this->db->fetch("SELECT * FROM user WHERE id = :id", 1, array(
+            ':id' => PDO::PARAM_INT
+        ));
+
+        $this->assertEquals('1', $user['id']);
+
+    }
+
     public function testFetchColumn()
     {
         $count = $this->db->fetchColumn("SELECT COUNT(id) FROM user");
@@ -575,10 +604,5 @@ class DbTest extends TestCase
 
         $this->assertEquals(null, $user->name);
         $this->assertEquals(null, $user->group_id);
-    }
-
-    public function testBind()
-    {
-
     }
 }

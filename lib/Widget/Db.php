@@ -544,8 +544,30 @@ class Db extends AbstractWidget
         return $this->recordClass;
     }
 
-    protected function bindParameter($stmt, $params, $types)
+    protected function bindParameter(\PDOStatement $stmt, $params, $types)
     {
-        // TODO
+        $params = (array)$params;
+        $types = (array)$types;
+        $isIndex = is_int(key($params));
+        $index = 1;
+
+        foreach ($params as $name => $param) {
+            //
+            if ($isIndex) {
+                if (isset($types[$index])) {
+                    $stmt->bindValue($index, $param, $types[$index]);
+                } else {
+                    $stmt->bindValue($index, $param);
+                }
+                $index++;
+            //
+            } else {
+                if (isset($types[$name])) {
+                    $stmt->bindValue($name, $param, $types[$name]);
+                } else {
+                    $stmt->bindValue($name, $param);
+                }
+            }
+        }
     }
 }
