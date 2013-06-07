@@ -563,6 +563,20 @@ class DbTest extends TestCase
         $this->assertEquals(2, $count);
     }
 
+    public function testRecordUnset()
+    {
+        $user = $this->db->user('1');
+
+        $this->assertEquals('twin', $user->name);
+        $this->assertEquals('1', $user->group_id);
+
+        unset($user->name);
+        $user->remove('group_id');
+
+        $this->assertEquals(null, $user->name);
+        $this->assertEquals(null, $user->group_id);
+    }
+
     public function testBind()
     {
 
