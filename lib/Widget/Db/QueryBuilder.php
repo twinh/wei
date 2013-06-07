@@ -537,13 +537,15 @@ class QueryBuilder
      *
      * @param string $table The table name to join
      * @param string $on The condition for the join
-     * @param array $params The parameter values
-     * @param array $types The parameter types
      * @return QueryBuilder
      */
-    public function join($table, $on = null, $params = array(), $types = array())
+    public function join($table, $on = null)
     {
-        return $this->addJoin('inner', $table, $on, $params, $types);
+        return $this->add('join', array(
+            'type'      => 'inner',
+            'table'     => $table,
+            'condition' => $on
+        ), true);
     }
 
     /**
@@ -557,13 +559,15 @@ class QueryBuilder
      *
      * @param string $table The table name to join
      * @param string $on The condition for the join
-     * @param array $params The parameter values
-     * @param array $types The parameter types
      * @return QueryBuilder
      */
-    public function innerJoin($table, $on = null, $params = array(), $types = array())
+    public function innerJoin($table, $on = null)
     {
-        return $this->addJoin('inner', $table, $on, $params, $types);
+        return $this->add('join', array(
+            'type'      => 'inner',
+            'table'     => $table,
+            'condition' => $on
+        ), true);
     }
 
     /**
@@ -577,13 +581,15 @@ class QueryBuilder
      *
      * @param string $table The table name to join
      * @param string $on The condition for the join
-     * @param array $params The parameter values
-     * @param array $types The parameter types
      * @return QueryBuilder
      */
-    public function leftJoin($table, $on = null, $params = array(), $types = array())
+    public function leftJoin($table, $on = null)
     {
-        return $this->addJoin('left', $table, $on, $params, $types);
+        return $this->add('join', array(
+            'type'      => 'left',
+            'table'     => $table,
+            'condition' => $on
+        ), true);
     }
 
     /**
@@ -597,13 +603,15 @@ class QueryBuilder
      *
      * @param string $table The table name to join
      * @param string $on The condition for the join
-     * @param array $params The parameter values
-     * @param array $types The parameter types
      * @return QueryBuilder
      */
-    public function rightJoin($table, $on = null, $params = array(), $types = array())
+    public function rightJoin($table, $on = null)
     {
-        return $this->addJoin('right', $table, $on, $params, $types);
+        return $this->add('join', array(
+            'type'      => 'right',
+            'table'     => $table,
+            'condition' => $on
+        ), true);
     }
 
     /**
@@ -1020,26 +1028,5 @@ class QueryBuilder
         }
 
         return $conditions;
-    }
-
-    /**
-     * Adds a join to the query
-     *
-     * @param $type
-     * @param $table
-     * @param string $on
-     * @param array $params
-     * @param array $types
-     * @return $this
-     */
-    protected function addJoin($type, $table, $on = null, $params = array(), $types = array())
-    {
-        $this->add('join', array(
-            'type'      => $type,
-            'table'     => $table,
-            'condition' => $on
-        ), true);
-
-        return $this;
     }
 }
