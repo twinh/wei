@@ -285,6 +285,21 @@ class DbTest extends TestCase
         $this->assertEquals('1', $data[0]['group_id']);
     }
 
+    public function testQueryFetch()
+    {
+        $data = $this->db('user')->where('id = 1')->fetch();
+        $this->assertInternalType('array', $data);
+        $this->assertEquals('1', $data['id']);
+    }
+
+    public function testQueryFetchAll()
+    {
+        $data = $this->db('user')->fetchAll();
+
+        $this->assertInternalType('array', $data);
+        $this->assertEquals('1', $data[0]['group_id']);
+    }
+
     public function testGetRecordClass()
     {
         $db = $this->db;

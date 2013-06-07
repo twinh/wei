@@ -182,9 +182,30 @@ class QueryBuilder
         return new Collection($records);
     }
 
+    /**
+     * Executes the generated query and returns the first array result
+     *
+     * @return array|false
+     */
+    public function fetch()
+    {
+        $this->limit(1);
+        return $this->db->fetch($this->getSql());
+    }
+
+    /**
+     * Executes the generated query and returns all array results
+     *
+     * @return array|false
+     */
+    public function fetchAll()
+    {
+        return $this->db->fetchAll($this->getSql());
+    }
+
     public function count()
     {
-        return $this->db->fetchColumn($this->getSqlForCount(), $this->params);
+        return (int)$this->db->fetchColumn($this->getSqlForCount(), $this->params);
     }
 
     /**
