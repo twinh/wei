@@ -198,6 +198,31 @@ class Record extends AbstractWidget
     }
 
     /**
+     * Remove column value
+     *
+     * @param string $name The name of column
+     * @return Record
+     */
+    public function __unset($name)
+    {
+        return $this->remove($name);
+    }
+
+    /**
+     * Remove column value
+     *
+     * @param string $name The name of column
+     * @return Record
+     */
+    public function remove($name)
+    {
+        if (array_key_exists($name, $this->data)) {
+            unset($this->data[$name]);
+        }
+        return $this;
+    }
+
+    /**
      * A helper method to find a record
      *
      * @param $id

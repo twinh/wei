@@ -562,4 +562,9 @@ class DbTest extends TestCase
 
         $this->assertEquals(2, $count);
     }
+
+    public function testBind()
+    {
+
+    }
 }
