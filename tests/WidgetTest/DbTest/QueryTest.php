@@ -336,8 +336,8 @@ class QueryTest extends TestCase
     {
         $qb   = new QueryBuilder($this->db);
         $qb->update('users', 'u')
-            ->set('u.foo', '?')
-            ->set('u.bar', '?');
+            ->set('u.foo = ?')
+            ->set('u.bar = ?');
 
         $this->assertEquals(QueryBuilder::UPDATE, $qb->getType());
         $this->assertEquals('UPDATE users u SET u.foo = ?, u.bar = ?', (string) $qb);
@@ -347,8 +347,8 @@ class QueryTest extends TestCase
     {
         $qb   = new QueryBuilder($this->db);
         $qb->update('users')
-            ->set('foo', '?')
-            ->set('bar', '?');
+            ->set('foo = ?')
+            ->set('bar = ?');
 
         $this->assertEquals('UPDATE users SET foo = ?, bar = ?', (string) $qb);
     }
@@ -357,7 +357,7 @@ class QueryTest extends TestCase
     {
         $qb   = new QueryBuilder($this->db);
         $qb->update('users', 'u')
-            ->set('u.foo', '?')
+            ->set('u.foo = ?')
             ->where('u.foo = ?');
 
         $this->assertEquals('UPDATE users u SET u.foo = ? WHERE u.foo = ?', (string) $qb);

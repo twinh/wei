@@ -16,6 +16,10 @@
         <testsuite name="widget">
             <directory>./tests/WidgetTest</directory>
         </testsuite>
+        <testsuite name="WidgetDb">
+            <file>./tests/WidgetTest/DbTest.php</file>
+            <file>./tests/WidgetTest/DbTest/QueryTest.php</file>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist>

@@ -390,6 +390,17 @@ class DbTest extends TestCase
         $this->assertEquals("SELECT * FROM user WHERE id = ? AND group_id IN (?, ?) LIMIT 1", $query->getSql());
         $this->assertEquals('1', $user->id);
 
+        // Overwrite where
+        $query = $this
+            ->db('user')
+            ->where('id = :id')
+            ->where('group_id = :groupId')
+            ->setParameter('groupId', 1);
+        $user = $query->find();
+
+        $this->assertEquals("SELECT * FROM user WHERE group_id = :groupId LIMIT 1", $query->getSql());
+        $this->assertEquals('1', $user->group_id);
+
         // Order
         $query = $this->db('user')->orderBy('id', 'ASC');
         $user = $query->find();
@@ -495,7 +506,18 @@ class DbTest extends TestCase
             ->having('group_id >= ?', '1');*/
     }
 
-    public function testBindValue()
+    public function testQueryUpdate()
+    {
+    $query = $this->db
+        ->createQueryBuilder()
+        ->update('user')
+        ->set('name = ?')
+        ->where('id = 1');
+
+        $this->assertEquals("UPDATE user SET name = ? WHERE id = 1", $query->getSql());
+    }
+
+        public function testBindValue()
     {
         // Not array parameter
         $user = $this->db->fetch("SELECT * FROM user WHERE id = ?", 1, PDO::PARAM_INT);
@@ -583,6 +605,19 @@ class DbTest extends TestCase
         $this->assertArrayHasKey('group_id', $user);
         $this->assertArrayNotHasKey('name', $user);
         $this->assertArrayNotHasKey('address', $user);
+
+
+        $this->db->setOption('recordClasses', array(
+            'user' => 'WidgetTest\DbTest\User'
+        ));
+
+        $user = $this->db->find('user', 1);
+        $posts = $user->posts;
+        $data = $user->toArray();
+
+        $this->assertInternalType('array', $data);
+        $this->assertInternalType('array', $data['posts']);
+        $this->assertInternalType('array', $data['posts'][0]);
     }
 
     public function testDeleteRecord()
@@ -619,6 +654,9 @@ class DbTest extends TestCase
         $users = $this->db->findAll('user');
 
         $this->assertInstanceOf('\Widget\Db\Collection', $users);
+
+        // ToArray
+        $this->assertInternalType('array', $users->toArray());
 
         // Filter
         $firstGroupUsers = $users->filter(function($user){
@@ -709,5 +747,12 @@ class DbTest extends TestCase
         $result = $this->db->executeUpdate("UPDATE user SET name = 'twin2' WHERE id = 1");
 
         $this->assertEquals(1, $result);
+    }
+
+    public function testFindHelper()
+    {
+        $user = $this->db->user->find('1');
+
+        $this->assertEquals('1', $user->id);
     }
 }

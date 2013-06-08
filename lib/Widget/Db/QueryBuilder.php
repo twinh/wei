@@ -645,20 +645,19 @@ class QueryBuilder
     /**
      * Sets a new value for a column in a bulk update query.
      *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->update('users', 'u')
-     *         ->set('u.password', md5('password'))
-     *         ->where('u.id = ?');
-     * </code>
+     * ```
+     * $qb = $db->createQueryBuilder()
+     *     ->update('users', 'u')
+     *     ->set('u.password = ?')
+     *     ->where('u.id = ?');
+     * ```
      *
-     * @param string $key The column to set.
-     * @param string $value The value, expression, placeholder, etc.
+     * @param string $set The SET clause
      * @return QueryBuilder This QueryBuilder instance.
      */
-    public function set($key, $value)
+    public function set($set)
     {
-        return $this->add('set', $key .' = ' . $value, true);
+        return $this->add('set', $set, true);
     }
 
     /**
