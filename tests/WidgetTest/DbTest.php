@@ -809,6 +809,14 @@ class DbTest extends TestCase
         $query->setParameter('id', 10);
         $user = $query->find();
         $this->assertFalse($user);
+
+
+        $query = $this
+            ->db('user')
+            ->andWhere('id = ?', '1', PDO::PARAM_INT);
+
+        $user = $query->find();
+        $this->assertEquals('1', $user->id);
     }
 
     public function testGetAndResetAll()

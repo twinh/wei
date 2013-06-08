@@ -375,7 +375,7 @@ class QueryBuilder
      * Either appends to or replaces a single, generic query part.
      *
      * The available parts are: 'select', 'from', 'set', 'where',
-     * 'groupBy', 'having' and 'orderBy'.
+     * 'groupBy', 'having', 'orderBy', 'limit' and 'offset'.
      *
      * @param string $sqlPartName
      * @param string $sqlPart
@@ -397,25 +397,16 @@ class QueryBuilder
         if ($append) {
             if ($sqlPartName == 'where' || $sqlPartName == 'having') {
                 if ($this->sqlParts[$sqlPartName]) {
-                    if ($type) {
-                        $this->sqlParts[$sqlPartName] = '(' . $this->sqlParts[$sqlPartName] .  ') ' . $type . ' (' . $sqlPart  . ')';
-                    } else {
-                        $this->sqlParts[$sqlPartName] = '(' . $this->sqlParts[$sqlPartName] .  ')' . $sqlPart;
-                    }
+                    $this->sqlParts[$sqlPartName] = '(' . $this->sqlParts[$sqlPartName] .  ') ' . $type . ' (' . $sqlPart  . ')';
                 } else {
                     $this->sqlParts[$sqlPartName] = $sqlPart;
                 }
-            } else if ($sqlPartName == 'orderBy' || $sqlPartName == 'groupBy' || $sqlPartName == 'select' || $sqlPartName == 'set') {
+            } elseif ($sqlPartName == 'orderBy' || $sqlPartName == 'groupBy' || $sqlPartName == 'select' || $sqlPartName == 'set') {
                 foreach ($sqlPart as $part) {
                     $this->sqlParts[$sqlPartName][] = $part;
                 }
-            } else if ($isArray && is_array($sqlPart[key($sqlPart)])) {
-                $key = key($sqlPart);
-                $this->sqlParts[$sqlPartName][$key][] = $sqlPart[$key];
-            } else if ($isMultiple) {
+            } elseif ($isMultiple) {
                 $this->sqlParts[$sqlPartName][] = $sqlPart;
-            } else {
-                $this->sqlParts[$sqlPartName] = $sqlPart;
             }
 
             return $this;
@@ -1048,7 +1039,7 @@ class QueryBuilder
                 $this->paramTypes = array_merge($this->paramTypes, $types);
             } else {
                 $this->params[] = $params;
-                if ($this->paramTypes) {
+                if ($types) {
                     $this->paramTypes[] = $types;
                 }
             }
