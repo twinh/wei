@@ -664,4 +664,34 @@ class DbTest extends TestCase
 
         $this->db->find('user', 1);
     }
+
+    public function testBeforeAndAfterQueryForUpdate()
+    {
+        $this->expectOutputString('beforeQueryafterQuery');
+
+        $this->db->setOption(array(
+            'beforeQuery' => function(){
+                echo 'beforeQuery';
+            },
+            'afterQuery' => function(){
+                echo 'afterQuery';
+            }
+        ));
+
+        $this->db->executeUpdate("UPDATE user SET name = 'twin2' WHERE id = 1");
+    }
+
+    public function testException()
+    {
+        $this->setExpectedException('RuntimeException');
+
+        $this->db->query("SELECT * FROM noThis table");
+    }
+
+    public function testUpdateWithoutParameters()
+    {
+        $result = $this->db->executeUpdate("UPDATE user SET name = 'twin2' WHERE id = 1");
+
+        $this->assertEquals(1, $result);
+    }
 }
