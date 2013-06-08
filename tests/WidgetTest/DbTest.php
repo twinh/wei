@@ -810,4 +810,21 @@ class DbTest extends TestCase
         $user = $query->find();
         $this->assertFalse($user);
     }
+
+    public function testGetAndResetAll()
+    {
+        $query = $this->db('user')->offset(1)->limit(1);
+
+        $this->assertEquals(1, $query->get('offset'));
+        $this->assertEquals(1, $query->get('limit'));
+
+        $queryParts = $query->getAll();
+        $this->assertArrayHasKey('offset', $queryParts);
+        $this->assertArrayHasKey('limit', $query);
+
+        $query->resetAll();
+
+        $this->assertEquals(null, $query->get('offset'));
+        $this->assertEquals(null, $query->get('limit'));
+    }
 }
