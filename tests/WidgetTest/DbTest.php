@@ -820,7 +820,7 @@ class DbTest extends TestCase
 
         $queryParts = $query->getAll();
         $this->assertArrayHasKey('offset', $queryParts);
-        $this->assertArrayHasKey('limit', $query);
+        $this->assertArrayHasKey('limit', $queryParts);
 
         $query->resetAll();
 
