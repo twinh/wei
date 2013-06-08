@@ -755,4 +755,17 @@ class DbTest extends TestCase
 
         $this->assertEquals('1', $user->id);
     }
+
+    public function testCount()
+    {
+        $count = $this->db('user')->count();
+
+        $this->assertInternalType('int', $count);
+        $this->assertEquals(2, $count);
+
+        $count = $this->db('user')->select('id, name')->limit(1)->offset(2)->count();
+
+        $this->assertInternalType('int', $count);
+        $this->assertEquals(2, $count);
+    }
 }
