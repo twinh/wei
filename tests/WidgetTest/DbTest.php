@@ -508,13 +508,18 @@ class DbTest extends TestCase
 
     public function testQueryUpdate()
     {
-    $query = $this->db
-        ->createQueryBuilder()
-        ->update('user')
-        ->set('name = ?')
-        ->where('id = 1');
+        $query = $this->db
+            ->createQueryBuilder()
+            ->update('user')
+            ->set('name = ?')
+            ->where('id = 1')
+            ->setParameter(0, 'twin2');
+        $result = $query->execute();
+        $user = $this->db->find('user', 1);
 
         $this->assertEquals("UPDATE user SET name = ? WHERE id = 1", $query->getSql());
+        $this->assertEquals(1, $result);
+        $this->assertEquals('twin2', $user->name);
     }
 
         public function testBindValue()
@@ -767,5 +772,42 @@ class DbTest extends TestCase
 
         $this->assertInternalType('int', $count);
         $this->assertEquals(2, $count);
+    }
+
+    public function testParameters()
+    {
+        $db = $this->db;
+
+        $query = $db
+            ->from('user')
+            ->where('id = :id AND group_id = :groupId')
+            ->setParameters(array(
+                'id' => 1,
+                'groupId' => 1
+            ), array(
+                PDO::PARAM_INT,
+                PDO::PARAM_INT
+            ));
+        $user = $query->find();
+
+        $this->assertEquals(array(
+            'id' => 1,
+            'groupId' => 1
+        ), $query->getParameters());
+
+        $this->assertEquals(1, $query->getParameter('id'));
+        $this->assertNull($query->getParameter('no'));
+
+        $this->assertEquals(1, $user->id);
+        $this->assertEquals(1, $user->group_id);
+
+        // Set parameter
+        $query->setParameter('id', 1, PDO::PARAM_STR);
+        $user = $query->find();
+        $this->assertEquals(1, $user->id);
+
+        $query->setParameter('id', 10);
+        $user = $query->find();
+        $this->assertFalse($user);
     }
 }

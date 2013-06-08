@@ -885,25 +885,25 @@ class QueryBuilder
      *
      * @return array $sqlParts
      */
-    public function getQueryParts()
+    public function getAll()
     {
         return $this->sqlParts;
     }
 
     /**
-     * Reset SQL parts
+     * Reset all SQL parts
      *
      * @param array $queryPartNames
      * @return QueryBuilder
      */
-    public function resetQueryParts($queryPartNames = null)
+    public function resetAll($queryPartNames = null)
     {
         if (is_null($queryPartNames)) {
             $queryPartNames = array_keys($this->sqlParts);
         }
 
         foreach ($queryPartNames as $queryPartName) {
-            $this->resetQueryPart($queryPartName);
+            $this->reset($queryPartName);
         }
 
         return $this;
@@ -915,7 +915,7 @@ class QueryBuilder
      * @param string $queryPartName
      * @return QueryBuilder
      */
-    public function resetQueryPart($queryPartName)
+    public function reset($queryPartName)
     {
         $this->sqlParts[$queryPartName] = is_array($this->sqlParts[$queryPartName])
             ? array() : null;
