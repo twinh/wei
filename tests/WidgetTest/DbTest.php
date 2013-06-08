@@ -648,4 +648,20 @@ class DbTest extends TestCase
         $this->assertArrayHasKey(1, $info);
         $this->assertArrayHasKey(1, $info);
     }
+
+    public function testBeforeAndAfterQuery()
+    {
+        $this->expectOutputString('beforeQueryafterQuery');
+
+        $this->db->setOption(array(
+            'beforeQuery' => function(){
+                echo 'beforeQuery';
+            },
+            'afterQuery' => function(){
+                echo 'afterQuery';
+            }
+        ));
+
+        $this->db->find('user', 1);
+    }
 }
