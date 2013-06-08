@@ -395,7 +395,7 @@ class QueryBuilder
         $this->state = self::STATE_DIRTY;
 
         if ($append) {
-            if ($sqlPartName == "where" || $sqlPartName == "having") {
+            if ($sqlPartName == 'where' || $sqlPartName == 'having') {
                 if ($this->sqlParts[$sqlPartName]) {
                     if ($type) {
                         $this->sqlParts[$sqlPartName] = '(' . $this->sqlParts[$sqlPartName] .  ') ' . $type . ' (' . $sqlPart  . ')';
@@ -405,7 +405,7 @@ class QueryBuilder
                 } else {
                     $this->sqlParts[$sqlPartName] = $sqlPart;
                 }
-            } else if ($sqlPartName == "orderBy" || $sqlPartName == "groupBy" || $sqlPartName == "select" || $sqlPartName == "set") {
+            } else if ($sqlPartName == 'orderBy' || $sqlPartName == 'groupBy' || $sqlPartName == 'select' || $sqlPartName == 'set') {
                 foreach ($sqlPart as $part) {
                     $this->sqlParts[$sqlPartName][] = $part;
                 }

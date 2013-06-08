@@ -632,4 +632,14 @@ class DbTest extends TestCase
         $this->assertEquals(null, $user->name);
         $this->assertEquals(null, $user->group_id);
     }
+
+    public function testErrorCodeAndInfo()
+    {
+        $this->db->errorCode();
+        $info = $this->db->errorInfo();
+
+        $this->assertArrayHasKey(0, $info);
+        $this->assertArrayHasKey(1, $info);
+        $this->assertArrayHasKey(1, $info);
+    }
 }
