@@ -588,8 +588,8 @@ class Db extends AbstractWidget
         foreach ($params as $name => $param) {
             // Number index parameters
             if ($isIndex) {
-                if (isset($types[$index])) {
-                    $stmt->bindValue($index, $param, $types[$index]);
+                if (isset($types[$index - 1])) {
+                    $stmt->bindValue($index, $param, $types[$index - 1]);
                 } else {
                     $stmt->bindValue($index, $param);
                 }

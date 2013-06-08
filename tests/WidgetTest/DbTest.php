@@ -507,20 +507,36 @@ class DbTest extends TestCase
 
         $this->assertEquals('1', $user['id']);
 
+        $user = $this->db->fetch("SELECT * FROM user WHERE id = ? AND group_id = ?", array(1, 1), array(
+            PDO::PARAM_INT // (no parameter type for second placeholder)
+        ));
+
+        $this->assertEquals('1', $user['id']);
+        $this->assertEquals('1', $user['group_id']);
+
         // Name parameter
-        $user = $this->db->fetch("SELECT * FROM user WHERE id = :id", 1, array(
+        $user = $this->db->fetch("SELECT * FROM user WHERE id = :id", array(
+            'id' => 1
+        ), array(
             'id' => PDO::PARAM_INT
         ));
 
         $this->assertEquals('1', $user['id']);
 
         // Name parameter with colon
-        $user = $this->db->fetch("SELECT * FROM user WHERE id = :id", 1, array(
+        $user = $this->db->fetch("SELECT * FROM user WHERE id = :id", array(
+            'id' => 1
+        ), array(
             ':id' => PDO::PARAM_INT
         ));
 
         $this->assertEquals('1', $user['id']);
 
+        $user = $this->db->fetch("SELECT * FROM user WHERE id = :id", array(
+            'id' => '1'
+        ));
+
+        $this->assertEquals('1', $user['id']);
     }
 
     public function testFetchColumn()
