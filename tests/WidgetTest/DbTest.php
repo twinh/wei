@@ -196,11 +196,17 @@ class DbTest extends TestCase
         $user = $this->db->find('user', '3');
         $this->assertFalse($user);
 
+        // Not found and create new object
         $user = $this->db->findOrCreate('user', '3', array(
             'name' => 'name'
         ));
         $this->assertEquals('name', $user->name);
         $this->assertEquals('3', $user->id);
+
+        // Found
+        $user = $this->db->findOrCreate('user', '2');
+
+        $this->assertEquals('2', $user->id);
     }
 
     public function testRecordSave()
