@@ -38,7 +38,25 @@ $widget->db->selectAll('user', array('groupId' => '1'));
 
 ### 选项
 
+名称            |  类型    | 默认值               | 说明
+----------------|----------|----------------------|------
+user            | string   | 无                   | 连接数据库的用户名
+password        | string   | 无                   | 连接数据库的密码
+dsn             | string   | sqlite::memory:      | 数据源名称(Data Source Name),详细配置请查看下表
+recordClass     | string   | Widget\Db\Record     | 记录类的基础类名称
+collectionClass | string   | Widget\Db\Collection | 记录集合类的基础类名称
+recordClasses   | array    | array()              | 自定义记录类的数组,键名为数据表名称,值为记录类名称
+recordNamespace | string   | 无                   | 自定义记录类的命名空间
+beforeQuery     | callback | 无                   | 在执行SQL查询之前触发的回调方法
+afterQuery      | callback | 无                   | 在执行SQL查询之后触发的回调方法
 
+### DSN配置
+
+数据库     | 参考格式                                                  | 完整配置链接
+-----------|-----------------------------------------------------------|--------------
+MySQL      | mysql:host=localhost;port=3306;dbname=testdb;charset=utf8 | http://www.php.net/manual/en/ref.pdo-mysql.connection.php
+SQLite     | sqlite:/opt/databases/mydb.sq3                            | http://www.php.net/manual/en/ref.pdo-sqlite.connection.php
+PostgreSQL | pgsql:host=localhost;port=5432;dbname=testdb              | http://www.php.net/manual/zh/ref.pdo-pgsql.connection.php
 
 ### 方法
 
@@ -72,6 +90,18 @@ $widget->db->selectAll('user', array('groupId' => '1'));
 #### db->fetchColumn($sql, $params = array(), $column = 0)
 执行一条SQL语句,并返回指定类的值
 
+#### db->find($table, $id)
+根据条件查找数据表的一条记录,返回的是一个`Widget\Db\Record`对象
+
+#### db->findAll($table, $where)
+根据条件查找数据表的所有匹配记录,返回的是一个`Widget\Db\Collection`对象
+
+#### db->create($table, $data)
+创建一个新的数据表记录对象
+
+#### db->findOrCreate($table, $id, $data = array())
+根据条件查找数据表的一条记录,如果记录不存在,将根据`$data`创建一条新的数据表记录对象
+
 #### db->executeUpdate($sql, $params = array())
 执行一条SQL语句,并返回影响的行数,主要用于INSERT/UPDATE/DELETE操作的SQL语句
 
@@ -83,3 +113,14 @@ $widget->db->selectAll('user', array('groupId' => '1'));
 
 #### db->errorInfo()
 获取PD错误信息数组
+
+#### db->getRecordClass($table)
+根据数据表名称获取记录类名称
+
+### 魔术方法
+
+#### db->$table
+创建一个新的数据表记录对象,等于`db->create($table, array())`
+
+#### db->$table($where)
+根据条件查找数据表的一条记录,返回的是一个`Widget\Db\Record`对象,同`db->find($table, $where)`

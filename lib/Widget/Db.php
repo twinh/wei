@@ -544,7 +544,7 @@ class Db extends AbstractWidget
      *
      * @param string $name
      * @param array $args
-     * @return mixed|Db\Record|false
+     * @return Db\Record|false
      */
     public function __call($name, $args)
     {
@@ -554,17 +554,17 @@ class Db extends AbstractWidget
     /**
      * Returns the record class name of table
      *
-     * @param string $name The name of table
+     * @param string $table The name of table
      * @return string The record class name for table
      */
-    public function getRecordClass($name)
+    public function getRecordClass($table)
     {
-        if (isset($this->recordClasses[$name])) {
-            return $this->recordClasses[$name];
+        if (isset($this->recordClasses[$table])) {
+            return $this->recordClasses[$table];
         }
 
         if ($this->recordNamespace) {
-            $class = $this->recordNamespace . '\\' . implode('', array_map('ucfirst', explode('_', $name)));
+            $class = $this->recordNamespace . '\\' . implode('', array_map('ucfirst', explode('_', $table)));
             if (class_exists($class)) {
                 return $class;
             }
