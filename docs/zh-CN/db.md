@@ -36,7 +36,7 @@ $widget->db->selectAll('user', array('groupId' => '1'));
 ### Active Record模式
 
 Active Record模式是将数据表的每一行映射为一个对象,数据表的字段与对象的属性一一对应.
-完整的介绍请查看维基百科的说明[http://zh.wikipedia.org/wiki/Active_Record](Active Record)
+完整的介绍请查看维基百科的说明[Active Record](http://zh.wikipedia.org/wiki/Active_Record)
 
 #### 创建对象并保存
 ```php
@@ -68,6 +68,15 @@ $user->username = 'twin';
 
 // 保存到数据库中 
 $user->save();
+```
+
+#### 删除对象
+```php
+// 查找主键为1的用户
+$user = $widget->db->user(1);
+
+// 删除该记录
+$user->delete();
 ```
 
 调用方式
