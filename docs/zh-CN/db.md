@@ -8,7 +8,7 @@ Db
 案例
 ----
 
-### (CRUD)增删查改操作
+### 增删查改(CRUD)操作
 ```php
 // 插入数据
 $widget->db->insert('user', array(
@@ -31,6 +31,43 @@ $widget->db->select('user', 1);
 
 // 查找所有分组编号为1的用户
 $widget->db->selectAll('user', array('groupId' => '1'));
+```
+
+### Active Record模式
+
+Active Record模式是将数据表的每一行映射为一个对象,数据表的字段与对象的属性一一对应.
+完整的介绍请查看维基百科的说明[http://zh.wikipedia.org/wiki/Active_Record](Active Record)
+
+#### 创建对象并保存
+```php
+// 创建一个新的用户记录对象
+/* @var $user \Widget\Db\Record */
+$user = $widget->db->user;
+
+// 或是通过`create`方法创建
+$user = $widegt->db->create('user', array('groupId' => 1));
+
+// 设置对象的值
+$user->username = 'twin';
+$user->createdAt = date('Y-m-d H:i:s');
+
+// 保存到数据库中
+$user->save();
+```
+
+#### 更新对象数据
+```php
+// 查找主键为1的用户
+$user = $widget->db->find('user', '1');
+
+// 或是通过魔术方法更自然的获取对象
+$user = $widget->db->user(1);
+
+// 更新对象的值
+$user->username = 'twin';
+
+// 保存到数据库中 
+$user->save();
 ```
 
 调用方式
@@ -123,4 +160,4 @@ PostgreSQL | pgsql:host=localhost;port=5432;dbname=testdb              | http://
 创建一个新的数据表记录对象,等于`db->create($table, array())`
 
 #### db->$table($where)
-根据条件查找数据表的一条记录,返回的是一个`Widget\Db\Record`对象,同`db->find($table, $where)`
+根据条件查找数据表的一条记录,返回的是一个`Widget\Db\Record`对象,等于`db->find($table, $where)`
