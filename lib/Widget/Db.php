@@ -539,9 +539,16 @@ class Db extends AbstractWidget
         return $this->create($name, array(), true);
     }
 
+    /**
+     * Find a record from specified table and conditions
+     *
+     * @param string $name
+     * @param array $args
+     * @return mixed|Db\Record|false
+     */
     public function __call($name, $args)
     {
-        return $this->find($name, $args[0]);
+        return $this->find($name, isset($args[0]) ? $args[0] : false);
     }
 
     /**
