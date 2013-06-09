@@ -168,17 +168,17 @@ class Db extends AbstractWidget
      * Executes an INSERT query to insert specified data into table
      *
      * @param string $table The name of table
-     * @param array $values An associative array containing column-value pairs
+     * @param array $data An associative array containing column-value pairs
      * @return int The number of affected rows
      */
-    public function insert($table, array $values)
+    public function insert($table, array $data)
     {
-        $field = implode(', ', array_keys($values));
-        $placeholder = implode(', ', array_pad(array(), count($values), '?'));
+        $field = implode(', ', array_keys($data));
+        $placeholder = implode(', ', array_pad(array(), count($data), '?'));
 
         $query = "INSERT INTO $table ($field) VALUES ($placeholder)";
 
-        return $this->executeUpdate($query, array_values($values));
+        return $this->executeUpdate($query, array_values($data));
     }
 
     /**
@@ -189,7 +189,7 @@ class Db extends AbstractWidget
      * @param array $identifier The criteria to search records
      * @return int The number of affected rows
      */
-    public function update($table, $data, $identifier)
+    public function update($table, array $data, array $identifier)
     {
         $set = implode(' = ?, ', array_keys($data)) . ' = ?';
         $where = implode(' = ? AND ', array_keys($identifier)) . ' = ?';
