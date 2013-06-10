@@ -72,8 +72,8 @@ class Gravatar extends AbstractWidget
         }
 
         $url .= md5(strtolower(trim($email)));
-        $url .= '?=' . $size ?: $this->size;
-        $url .= '&d' . $default ?: $this->default;
+        $url .= '?s=' . ($size ?: $this->size);
+        $url .= '&d=' . ($default ?: $this->default);
 
         if ($rating) {
             $url .= '&r=' . $rating;
