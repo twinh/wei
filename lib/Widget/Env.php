@@ -11,6 +11,10 @@ namespace Widget;
 /**
  * A widget to detect the environment name and load configuration by environment name
  *
+ * The environment name detect order:
+ *
+ *     user defined $env > $envDetect callback > $envMap
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request A widget that handles the HTTP request Data
  */
@@ -22,6 +26,13 @@ class Env extends AbstractWidget
      * @var string
      */
     protected $env;
+
+    /**
+     * A callback to detect the environment name
+     *
+     * @var callable
+     */
+    protected $detector;
 
     /**
      * An associative array contains server ip and environment name pairs
@@ -81,12 +92,15 @@ class Env extends AbstractWidget
      */
     public function detectEnvName()
     {
-        $ip = $this->request->getServer('SERVER_ADDR');
-
-        if (isset($this->envMap[$ip])) {
-            $this->env = $this->envMap[$ip];
+        if ($this->detector) {
+            $this->env = call_user_func($this->detector);
         } else {
-            $this->env = 'prod';
+            $ip = $this->request->getServer('SERVER_ADDR');
+            if (isset($this->envMap[$ip])) {
+                $this->env = $this->envMap[$ip];
+            } else {
+                $this->env = 'prod';
+            }
         }
 
         return $this;
