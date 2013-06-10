@@ -57,7 +57,7 @@ class Gravatar extends AbstractWidget
      * Generate a Gravatar URL for a specified email address
      *
      * @param string $email The email address
-     * @param string $size The image size in pixels
+     * @param int $size The image size in pixels
      * @param string $default The image type or URL when email do not have a Gravatar image
      * @param string $rating The image rating
      * @return string A image URL
