@@ -107,4 +107,16 @@ class Gravatar extends AbstractWidget
     {
         return $this->__invoke($email, $this->smallSize, $default, $rating);
     }
+
+    /**
+     * Sets the default image type or URL
+     *
+     * @param string $default
+     * @return Gravatar
+     */
+    public function setDefault($default)
+    {
+        $this->default = urlencode($default);
+        return $this;
+    }
 }
