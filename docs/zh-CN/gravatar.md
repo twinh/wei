@@ -36,11 +36,11 @@ widget(array(
     )
 ));
 
-echo '<img style="height:80px;" src="' . $widget->gravatar('twinhuang@example.com') . '" />';
+echo '<img height="80" src="' . $widget->gravatar('twinhuang@example.com') . '" />';
 ```
 
 #### 页面显示效果
-<img style="height:80px;" src="http://www.gravatar.com/avatar/ea58edaf7cced7ef81b06b14aeadb625?s=80&d=http%3A%2F%2Fi2.wp.com%2Fa248.e.akamai.net%2Fassets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
+<img height="80" src="http://www.gravatar.com/avatar/ea58edaf7cced7ef81b06b14aeadb625?s=80&d=http%3A%2F%2Fi2.wp.com%2Fa248.e.akamai.net%2Fassets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
 
 调用方式
 --------
