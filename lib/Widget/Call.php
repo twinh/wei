@@ -318,6 +318,7 @@ class Call extends AbstractWidget
         }
 
         if ($this->cookies) {
+            $cookies = array();
             foreach($this->cookies as $key => $value) {
                 $cookies[] = $key . '=' . urlencode($value);
             }
@@ -510,7 +511,7 @@ class Call extends AbstractWidget
     /**
      * Returns the cURL session
      *
-     * @return source
+     * @return resource
      */
     public function getCh()
     {
@@ -522,7 +523,7 @@ class Call extends AbstractWidget
      *
      * @param string $url
      * @param array $data
-     * @param callabck $callback
+     * @param callback $callback
      * @param string $dataType
      * @return Call
      */
@@ -536,7 +537,7 @@ class Call extends AbstractWidget
      *
      * @param string $url
      * @param array $data
-     * @param callabck $callback
+     * @param callback $callback
      * @return Call
      */
     public function getJson($url, $data, $callback = null)
@@ -549,7 +550,7 @@ class Call extends AbstractWidget
      *
      * @param string $url
      * @param array $data
-     * @param callabck $callback
+     * @param callback $callback
      * @param string $dataType
      * @return Call
      */
@@ -563,7 +564,7 @@ class Call extends AbstractWidget
      *
      * @param string $url
      * @param array $data
-     * @param callabck $callback
+     * @param callback $callback
      * @param string $dataType
      * @return Call
      */
@@ -577,7 +578,7 @@ class Call extends AbstractWidget
      *
      * @param string $url
      * @param array $data
-     * @param callabck $callback
+     * @param callback $callback
      * @param string $dataType
      * @return Call
      */
@@ -591,7 +592,7 @@ class Call extends AbstractWidget
      *
      * @param string $url
      * @param array $data
-     * @param callabck $callback
+     * @param callback $callback
      * @param string $dataType
      * @return Call
      */
@@ -606,6 +607,7 @@ class Call extends AbstractWidget
      * @param string $url
      * @param array $data
      * @param callback $callback
+     * @param string $dataType
      * @param string $method
      * @return Call
      */
