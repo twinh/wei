@@ -131,7 +131,7 @@ class Call extends AbstractWidget
     protected $success;
 
     /**
-     * An event triggered when the requeset fails
+     * An event triggered when the request fails
      *
      * The `$textStatus` could be `curl`, `http`, and `parser`
      *
@@ -478,7 +478,7 @@ class Call extends AbstractWidget
     }
 
     /**
-     * Parse the HTTP reponse header to key-value array
+     * Parse the HTTP response header to key-value array
      *
      * @param string $header
      * @return array
@@ -511,29 +511,6 @@ class Call extends AbstractWidget
     /**
      * Returns the cURL session
      *
-     * @return resource
-     */
-    public function getCh()
-    {
-        return $this->ch;
-    }
-
-    /**
-     * Execute a GET method request
-     *
-     * @param string $url
-     * @param array $data
-     * @param callback $callback
-     * @param string $dataType
-     * @return Call
-     */
-    public function get($url, $data, $callback = null, $dataType = null)
-    {
-        return $this->processMethod($url, $data, $callback, $dataType, 'GET');
-    }
-
-    /**
-     * Execute a GET method request and parse response to json data
      *
      * @param string $url
      * @param array $data

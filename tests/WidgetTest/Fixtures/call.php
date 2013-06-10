@@ -13,7 +13,7 @@ $result = null;
 switch ($test) {
     case 'headers':
         $widget->header('customHeader', 'value');
-        $result = json_encode($widget->server->getHeaders());
+        $result = json_encode($widget->request->getHeaders());
         break;
 
     case 'post':
