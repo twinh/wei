@@ -468,7 +468,7 @@ class CallTest extends TestCase
     public function testAliasMethod($method)
     {
         $test = $this;
-        $this->call->$method($this->url . '?test=methods', function($data) use($test, $method) {
+        $this->call->{strtolower($method)}($this->url . '?test=methods', function($data) use($test, $method) {
             $test->triggeredEvents[] = 'success';
             $test->assertEquals($method, $data->method);
         }, 'json');

@@ -53,7 +53,7 @@ class Call extends AbstractWidget
      *
      * @var string
      */
-    protected $gloabl = true;
+    protected $global = true;
 
     /**
      * A key-value array to store request headers
@@ -520,6 +520,20 @@ class Call extends AbstractWidget
     public function getJson($url, $data, $callback = null)
     {
         return $this->processMethod($url, $data, $callback, 'json', 'GET');
+    }
+
+    /**
+     * Execute a GET method request
+     *
+     * @param string $url
+     * @param array $data
+     * @param callback $callback
+     * @param string $dataType
+     * @return Call
+     */
+    public function get($url, $data, $callback = null, $dataType = null)
+    {
+        return $this->processMethod($url, $data, $callback, $dataType, 'GET');
     }
 
     /**
