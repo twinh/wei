@@ -101,7 +101,7 @@ require_once 'WidgetInterface.php';
  *
  * Util
  * @property Arr        $arr An util widget provides some useful method to manipulation array
- * @property Env        $env A widget to detect the environment and load configuration by environment
+ * @property Env        $env A widget to detect the environment name and load configuration by environment name
  * @method   string     env() Returns the environment name
  * @method   bool       is($rule = null, $input = null, $options = array()) Validate input by given rule
  * @property Logger     $logger A simple logger widget, which is base on the Monolog
