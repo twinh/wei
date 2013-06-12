@@ -154,7 +154,7 @@ class Db extends AbstractWidget
             $this->pdo->setAttribute(PDO::ATTR_STRINGIFY_FETCHES, true);
             $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-            $this->afterConnect &&& call_user_func($this->afterConnect, $this, $this->pdo);
+            $this->afterConnect && call_user_func($this->afterConnect, $this, $this->pdo);
         }
 
         $this->driver = $this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
