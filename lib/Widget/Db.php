@@ -47,6 +47,20 @@ class Db extends AbstractWidget
     protected $pdo;
 
     /**
+     * The callback triggers before connect to database
+     *
+     * @var callback
+     */
+    protected $beforeConnect;
+
+    /**
+     * The callback triggers after connect to database
+     *
+     * @var callback
+     */
+    protected $afterConnect;
+
+    /**
      * The callback triggers before execute query
      *
      * @var callback
@@ -133,10 +147,14 @@ class Db extends AbstractWidget
         }
 
         if (!$this->pdo) {
+            $this->beforeConnect && call_user_func($this->beforeConnect, $this);
+
             $this->pdo = new PDO($this->dsn, $this->user, $this->password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo->setAttribute(PDO::ATTR_STRINGIFY_FETCHES, true);
             $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+            $this->afterConnect &&& call_user_func($this->afterConnect, $this, $this->pdo);
         }
 
         $this->driver = $this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
