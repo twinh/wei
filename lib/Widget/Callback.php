@@ -65,6 +65,13 @@ class Callback extends AbstractWidget
     protected $fallback;
 
     /**
+     * Whether the signature is valid
+     *
+     * @var bool
+     */
+    protected $valid = false;
+
+    /**
      * Are there any callbacks handled the message ?
      *
      * @var bool
@@ -129,6 +136,8 @@ class Callback extends AbstractWidget
         if (is_null($this->postData) && isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
             $this->postData = $GLOBALS['HTTP_RAW_POST_DATA'];
         }
+
+        $this->parse();
     }
 
     /**
@@ -143,6 +152,17 @@ class Callback extends AbstractWidget
         return $this;
     }
 
+    public function parse()
+    {
+        // Check if it's requested from the WeChat server
+        if ($this->checkSignature()) {
+            $this->valid = true;
+            $this->parsePostData();
+        } else {
+            $this->valid = false;
+        }
+    }
+
     /**
      * Parse the user input message and return matched rule message
      *
@@ -150,19 +170,15 @@ class Callback extends AbstractWidget
      */
     public function run()
     {
-        // Check if it's requested from the WeChat server
-        if ($this->checkSignature()) {
+        if ($this->valid) {
             if ($echostr = $this->request->getQuery('echostr')) {
-                // Response echostr for fist time authentication
+                // Response 'echostr' for fist time authentication
                 return htmlspecialchars($echostr, \ENT_QUOTES, 'UTF-8');
             }
         } else {
             $this->response->setStatusCode(403);
             return 'Forbidden';
         }
-
-        // Parse user input data
-        $this->parsePostData();
 
         switch ($this->msgType) {
             case 'text' :
@@ -453,6 +469,11 @@ class Callback extends AbstractWidget
         return $this->send('news', $xml, $mark);
     }
 
+    public function isValid()
+    {
+        return $this->valid;
+    }
+
     /**
      * Whether return the mark message or not
      *
@@ -486,7 +507,7 @@ class Callback extends AbstractWidget
     }
 
     /**
-     * Reurns a user(OpenID) who sent message to you
+     * Returns the user openID who sent message to you
      *
      * @return string
      */
