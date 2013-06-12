@@ -526,4 +526,17 @@ class CallbackTest extends TestCase
                 <MsgId>1234567890123456</MsgId>
                 </xml>';
     }
+
+    public function testFlatMode()
+    {
+        $cb = $this->callback;
+        $this->query->set('signature', 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583');
+        $this->query->set('timestamp', '1366032735');
+        $this->query->set('nonce', '1365872231');
+        $cb->setOption('postData', $this->inputTextMessage('hi'));
+        $cb->parse();
+
+        // Receive data not in callback Closure
+        $this->assertEquals('hi', $cb->getContent());
+    }
 }
