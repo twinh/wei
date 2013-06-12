@@ -464,11 +464,18 @@ class Widget extends AbstractWidget
      *
      * @param $bool
      * @return Widget
-     * @todo set error_display,..
      */
     public function setDebug($bool)
     {
         $this->debug = (bool)$bool;
+
+        if ($bool) {
+            error_reporting(-1);
+            ini_set('display_errors', 1);
+        } else {
+            error_reporting(0);
+            ini_set('display_errors', 0);
+        }
 
         return $this;
     }
@@ -595,8 +602,8 @@ namespace
      *
      * @param array $config                 The array or file configuration
      * @param string $name                  The name of the instance
-     * @return \Widget\Widget
-     * @throws \InvalidArgumentException    When the configuration parameter is not array or file
+     * @return Widget\Widget
+     * @throws InvalidArgumentException    When the configuration parameter is not array or file
      */
     function widget ($config = array(), $name = 'default') {
         return Widget\Widget::create($config, $name);
