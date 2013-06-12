@@ -85,9 +85,9 @@ class Callback extends AbstractWidget
      */
     protected $keyword;
 
-    protected $toUserName;
-
     protected $fromUserName;
+
+    protected $toUserName;
 
     protected $createTime;
 
@@ -99,7 +99,13 @@ class Callback extends AbstractWidget
 
     protected $picUrl;
 
-    protected $locationX, $locationY, $scale, $label;
+    protected $locationX;
+
+    protected $locationY;
+
+    protected $scale;
+
+    protected $label;
 
     protected $mediaId;
 
@@ -164,14 +170,14 @@ class Callback extends AbstractWidget
      */
     public function run()
     {
-        if ($this->valid) {
-            if ($echostr = $this->request->getQuery('echostr')) {
-                // Response 'echostr' for fist time authentication
-                return htmlspecialchars($echostr, \ENT_QUOTES, 'UTF-8');
-            }
-        } else {
+        if (!$this->valid) {
             $this->response->setStatusCode(403);
             return 'Forbidden';
+        }
+
+        // Response 'echostr' for fist time authentication
+        if ($echostr = $this->request->getQuery('echostr')) {
+            return htmlspecialchars($echostr, \ENT_QUOTES, 'UTF-8');
         }
 
         switch ($this->msgType) {
@@ -565,7 +571,7 @@ class Callback extends AbstractWidget
     /**
      * Returns the latitude of location, available when the message type is location
      *
-     * @var string
+     * @return string
      */
     public function getLocationX()
     {
@@ -575,7 +581,7 @@ class Callback extends AbstractWidget
     /**
      * Returns the longitude of location, available when the message type is location
      *
-     * @var string
+     * @return string
      */
     public function getLocationY()
     {
@@ -585,7 +591,7 @@ class Callback extends AbstractWidget
     /**
      * Returns the detail address of location, available when the message type is location
      *
-     * @var string
+     * @return string
      */
     public function getLabel()
     {
@@ -595,7 +601,7 @@ class Callback extends AbstractWidget
     /**
      * Returns the scale of map, available when the message type is location
      *
-     * @var string
+     * @return string
      */
     public function getScale()
     {
@@ -605,7 +611,7 @@ class Callback extends AbstractWidget
     /**
      * Returns the media id, available when the message type is voice or video
      *
-     * @var string
+     * @return string
      */
     public function getMediaId()
     {
@@ -615,7 +621,7 @@ class Callback extends AbstractWidget
     /**
      * Returns the media format, available when the message type is voice
      *
-     * @var string
+     * @return string
      */
     public function getFormat()
     {
@@ -625,7 +631,7 @@ class Callback extends AbstractWidget
     /**
      * Returns the type of event, could be subscribe, unsubscribe or CLICK, available when the message type is event
      *
-     * @var string
+     * @return string
      */
     public function getEvent()
     {
@@ -635,7 +641,7 @@ class Callback extends AbstractWidget
     /**
      * Returns the key value of custom menu, available when the message type is event
      *
-     * @var string
+     * @return string
      */
     public function getEventKey()
     {
@@ -645,7 +651,7 @@ class Callback extends AbstractWidget
     /**
      * Returns the thumbnail id of video, available when the message type is video
      *
-     * @var string
+     * @return string
      */
     public function getThumbMediaId()
     {
@@ -655,7 +661,7 @@ class Callback extends AbstractWidget
     /**
      * Returns the title of URL, available when the message type is link
      *
-     * @var string
+     * @return string
      */
     public function getTitle()
     {
@@ -665,7 +671,7 @@ class Callback extends AbstractWidget
     /**
      * Returns the description of URL, available when the message type is link
      *
-     * @var string
+     * @return string
      */
     public function getDescription()
     {
@@ -675,7 +681,7 @@ class Callback extends AbstractWidget
     /**
      * Returns the URL link, available when the message type is link
      *
-     * @var string
+     * @return string
      */
     public function getUrl()
     {
@@ -773,7 +779,7 @@ class Callback extends AbstractWidget
     protected function parsePostData()
     {
         $defaults = array('FromUserName', 'ToUserName', 'MsgId', 'CreateTime');
-        $fields = array(
+        $attrs = array(
             'text'      => array('Content'),
             'image'     => array('PicUrl'),
             'location'  => array('Location_X', 'Location_Y', 'Scale', 'Label'),
@@ -786,8 +792,8 @@ class Callback extends AbstractWidget
         if ($this->postData) {
             $postObj        = @simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
             $this->msgType  = isset($postObj->MsgType) ? (string)$postObj->MsgType : null;
-            if (isset($fields[$this->msgType])) {
-                foreach (array_merge($defaults,$fields[$this->msgType]) as $field) {
+            if (isset($attrs[$this->msgType])) {
+                foreach (array_merge($defaults, $attrs[$this->msgType]) as $field) {
                     if (isset($postObj->$field)) {
                         $name = lcfirst(strtr($field, array('_' => '')));
                         $this->$name = (string)$postObj->$field;
