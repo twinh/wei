@@ -99,13 +99,7 @@ class Callback extends AbstractWidget
 
     protected $picUrl;
 
-    protected $locationX;
-
-    protected $locationY;
-
-    protected $scale;
-
-    protected $label;
+    protected $locationX, $locationY, $scale, $label;
 
     protected $mediaId;
 
