@@ -377,4 +377,10 @@ class WidgetTest extends TestCase
     {
         $this->assertSame(Widget::create(), widget());
     }
+
+    public function testGetSelf()
+    {
+        $this->assertSame($this->widget, $this->widget->widget);
+        $this->assertSame($this->widget, $this->widget->widget->widget);
+    }
 }

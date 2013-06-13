@@ -132,7 +132,7 @@ class Widget extends AbstractWidget
         // Set configurations for all widget
         $this->config = $config;
 
-        $this->widget = $this;
+        $this->widgets['widget'] = $this->widget = $this;
 
         // Set all options
         $options = get_object_vars($this);
