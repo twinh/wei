@@ -204,7 +204,7 @@ class ValidatorTest extends TestCase
             )
         ));
 
-        $this->assertTrue($validator->isFieldInvalidted('age'));
+        $this->assertTrue($validator->isFieldInvalid('age'));
 
         $this->assertTrue($validator->isFieldValid('email'));
 
