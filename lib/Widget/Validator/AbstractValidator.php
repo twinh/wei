@@ -67,7 +67,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     protected $negative = false;
 
     /**
-     * The array constains the validator original property values
+     * An array contains the validator original property values
      *
      * @var array
      * @internal
