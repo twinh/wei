@@ -15,6 +15,7 @@ use Widget\Stdlib\ArrayWidget;
  * The response header widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
+ * @property    Response $response A widget that handles the HTTP response data
  */
 class Header extends ArrayWidget
 {
@@ -118,12 +119,6 @@ class Header extends ArrayWidget
      */
     public function __toString()
     {
-        $string = '';
-        foreach ($this->data as $name => $values) {
-            foreach ($values as $value) {
-                $string .= $name . ': ' . $value . "\r\n";
-            }
-        }
-        return $string;
+        return $this->response->getHeaderString();
     }
 }

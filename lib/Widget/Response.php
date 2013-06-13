@@ -9,10 +9,9 @@
 namespace Widget;
 
 /**
- * A widget that send the HTTP response
+ * A widget that handles the HTTP response data
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Header $header The response header
  * @property    Cookie $cookie The cookie widget
  * @property    Logger $logger The logger widget
  */
@@ -267,7 +266,7 @@ class Response extends AbstractWidget
     public function __toString()
     {
         return sprintf('HTTP/%s %d %s', $this->version, $this->statusCode, $this->statusText) . "\r\n"
-            . $this->header . "\r\n"
+            . $this->getHeaderString() . "\r\n"
             . $this->content;
     }
 
@@ -279,6 +278,22 @@ class Response extends AbstractWidget
     public function &getHeaderReference()
     {
         return $this->headers;
+    }
+
+    /**
+     * Returns response header as string
+     *
+     * @return string
+     */
+    public function getHeaderString()
+    {
+        $string = '';
+        foreach ($this->headers as $name => $values) {
+            foreach ($values as $value) {
+                $string .= $name . ': ' . $value . "\r\n";
+            }
+        }
+        return $string;
     }
 
     /**
