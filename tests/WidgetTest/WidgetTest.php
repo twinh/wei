@@ -210,6 +210,18 @@ class WidgetTest extends TestCase
         $this->assertEquals('fromOrigin', $request->get('id'));
     }
 
+    public function testDeps()
+    {
+        $widget = $this->widget;
+
+        $widget->setOption('deps', array(
+            'subRequest' => 'request.sub'
+        ));
+
+        $this->assertEquals($widget->request, $widget->subRequest);
+        $this->assertNotSame($widget->request, $widget->subRequest);
+    }
+
     public function testInvoke()
     {
         $this->request->set('id', __METHOD__);

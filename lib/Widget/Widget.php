@@ -41,7 +41,7 @@ class Widget extends AbstractWidget
     protected $debug = true;
 
     /**
-     * The array contains the instanced widget objects
+     * An array contains the instanced widget objects
      *
      * @var array
      */
@@ -332,6 +332,10 @@ class Widget extends AbstractWidget
         // Resolve the widget name in dependent configuration
         if (isset($deps[$name])) {
             $name = $deps[$name];
+        }
+
+        if (isset($this->deps[$name])) {
+            $name = $this->deps[$name];
         }
 
         if (isset($this->widgets[$name])) {
