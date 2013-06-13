@@ -39,7 +39,7 @@ require_once 'WidgetInterface.php';
  * @method   bool       upload(array $options = array()) Upload a file
  *
  * HTTP Response
- * @property Response   $response A widget that send the HTTP response
+ * @property Response   $response A widget that handles the HTTP response data
  * @method   Response   response($content = null, $status = null) Send response header and content
  * @property Download   $download A widget send file download response
  * @method   Download   download($file, $options) Send file download response

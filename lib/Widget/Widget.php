@@ -605,7 +605,8 @@ namespace
      * @return Widget\Widget
      * @throws InvalidArgumentException    When the configuration parameter is not array or file
      */
-    function widget ($config = array(), $name = 'default') {
+    function widget ($config = array(), $name = 'default')
+    {
         return Widget\Widget::create($config, $name);
     }
 }
