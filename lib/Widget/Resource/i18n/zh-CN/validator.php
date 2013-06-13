@@ -167,7 +167,7 @@ return array(
     '%name% must contain at least %min% item(s)' => '%name%至少需要包括%min%项',
 
     // mobileCn
-    '%name% must be valid mobile number' => '%name%必须是13位长度的数字,以13,15或18开头',
+    '%name% must be valid mobile number' => '%name%必须是11位长度的数字,以13,14,15或18开头',
 
     // null
     '%name% must be null' => '%name%必须是null值',
