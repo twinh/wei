@@ -9,8 +9,6 @@
 
 namespace Widget;
 
-use Widget\Stdlib\ArrayWidget;
-
 /**
  * The response header widget
  *
