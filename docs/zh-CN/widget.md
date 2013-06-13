@@ -30,7 +30,8 @@ import      | array  | 无            | 导入指定目录下的微件类
 
 ### 方法
 
-#### \Widget\Widget::create();
+#### \Widget\Widget::create($config, $name = 'default')
+获取指定名称的微件管理器,如果不存在,将创建一个新的对象
 
 #### $widget->config($name, $vlaue = array())
 设置微件的选项配置
