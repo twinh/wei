@@ -209,6 +209,17 @@ class Record extends AbstractWidget
     }
 
     /**
+     * Check if column exists
+     *
+     * @param $name
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        return isset($this->data[$name]);
+    }
+
+    /**
      * Remove column value
      *
      * @param string $name The name of column
