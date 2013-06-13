@@ -50,7 +50,16 @@ $value      | array  | 无            | 微件的配置选项
 ------------|--------|---------------|------
 $name       | string | 无            | 微件的名称
 $options    | array  | 无            | 除了会通过`config`方法获取配置选项之外的附加的配置选项
-$deps       | array  | 
+$deps       | array  | 无            | 指定微件的依赖关系
+
+#### $widget->import($dir, $namespace, $format = null)
+导入指定目录下的微件类文件
+
+名称        | 类型   | 默认值        | 说明
+------------|--------|---------------|------
+$dir        | string | 无            | 类文件所在的目录
+$namespace  | string | 无            | 类名对应的命名空间
+$format     | string | 无            | 类文件的格式
 
 #### $widget->newInstance($name, $options = array(), $deps = array())
 初始化一个新的微件对象
