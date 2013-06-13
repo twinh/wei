@@ -247,7 +247,7 @@ class Response extends AbstractWidget
         header(sprintf('HTTP/%s %d %s', $this->version, $this->statusCode, $this->statusText));
 
         // Send headers
-        foreach ($this->header->toArray() as $name => $values) {
+        foreach ($this->headers as $name => $values) {
             foreach ($values as $value) {
                 header($name . ': ' . $value, false);
             }
@@ -272,7 +272,7 @@ class Response extends AbstractWidget
     }
 
     /**
-     * Returns the response headers varibale reference
+     * Returns the response headers variable reference
      *
      * @return array
      */
