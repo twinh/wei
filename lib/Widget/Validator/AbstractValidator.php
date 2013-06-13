@@ -50,7 +50,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     /**
      * The summary message that would overwrite all $this->xxxMessage messages
      * when called addError, which MAY useful when you want to set message for
-     * the validaor
+     * the validator
      *
      * @var string
      * @internal
@@ -58,7 +58,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     protected $message;
 
     /**
-     * Whether it's a negative validator, for examole, notDigit is digit's
+     * Whether it's a negative validator, for example, notDigit is digit's
      * negative validator. The negative validator will returns $this->negativeMessage
      * as the error message currently
      *
@@ -172,7 +172,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
 
     /**
      * {@inheritdoc}
-     * @throws \UnexpectedValueException When message contains unkonwn parameter
+     * @throws \UnexpectedValueException When message contains unknown parameter
      */
     public function getMessages()
     {
@@ -194,7 +194,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
                         throw new \UnexpectedValueException(sprintf('Unknown parameter "%%%s%%" in message "%s"', $match, $message));
                     }
                     $parameters['%' . $match . '%'] = is_array($this->$match) ?
-                        implode(', ', $this->$match) : $this->$match;;
+                        implode(', ', $this->$match) : $this->$match;
                 }
             }
             $messages[$name] = $this->t($message, $parameters);
