@@ -375,7 +375,7 @@ class Widget extends AbstractWidget
             $file = isset($traces[3]['file']) ? $traces[3]['file'] : $traces[4]['file'];
             $line = isset($traces[3]['line']) ? $traces[3]['line'] : $traces[4]['line'];
             throw new \BadMethodCallException(sprintf('Method "%s->%2$s" or widget "%s" (class "%s") not found, called in file "%s" at line %s', $traces[3]['class'], $traces[3]['function'], $class, $file, $line));
-        // $widget->noFound
+        // $widget->notFound
         } elseif (isset($traces[1]) && '__get' == $traces[1]['function'] && $name == $traces[1]['args'][0]) {
             throw new \BadMethodCallException(sprintf('Property or widget "%s" (class "%s") not found, called in file "%s" at line %s', $traces[1]['args'][0], $class, $traces[1]['file'], $traces[1]['line']));
         // "Call to undefined method class::method" or "Undefined property: class::$property"

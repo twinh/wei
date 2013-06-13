@@ -91,6 +91,9 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
         }
 
         foreach ($widget->getOption('widgets') as $key => $value) {
+            if ('widget' == $key) {
+                continue;
+            }
             $widget->remove($key);
         }
 
