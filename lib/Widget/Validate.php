@@ -41,7 +41,7 @@ class Validate extends AbstractWidget
     protected $messages = array();
 
     /**
-     * The names for messaages
+     * The names for messages
      *
      * @var array
      */
@@ -104,7 +104,7 @@ class Validate extends AbstractWidget
     protected $breakField = false;
 
     /**
-     * Whether skip the crruent field validation when the filed's rule is not
+     * Whether skip the current field validation when the filed's rule is not
      * valid, so every field contains one invalid rule at most
      *
      * @var bool
@@ -135,7 +135,7 @@ class Validate extends AbstractWidget
     /**
      * The rule validator instances
      *
-     * @var array<Validator\AbstractRule>
+     * @var array<Validator\AbstractValidator>
      */
     protected $ruleValidators = array();
 
@@ -217,7 +217,7 @@ class Validate extends AbstractWidget
                 // Record the rule validators
                 $this->ruleValidators[$field][$rule] = $validator;
 
-                // If any rule is invlid, the result would always be false in the whole validation flow
+                // If any rule is invalid, the result would always be false in the whole validation flow
                 if (false === $result) {
                     $this->result = false;
                 }
@@ -287,7 +287,7 @@ class Validate extends AbstractWidget
         /**
          * Prepare messages for validator
          *
-         * The mesages array may look like below
+         * The messages array may look like below
          * array(
          *     // Case 1
          *     'field' => 'message',
@@ -500,6 +500,7 @@ class Validate extends AbstractWidget
      * Sets data for validation
      *
      * @param array|object $data
+     * @throws \InvalidArgumentException when argument type is not array or object
      * @return Validate
      */
     public function setData($data)
@@ -553,6 +554,7 @@ class Validate extends AbstractWidget
      *
      * @param string $field The name of field
      * @param mixed $data The data of field
+     * @return Validate
      */
     public function setFieldData($field, $data)
     {
@@ -568,7 +570,6 @@ class Validate extends AbstractWidget
      * Set custom messages
      *
      * @param array $messages
-     * @todo conflict with interface
      */
     public function setMessages(array $messages)
     {
@@ -621,9 +622,10 @@ class Validate extends AbstractWidget
     }
 
     /**
-     * Returns error message string
+     * Returns error message string connected by specified separator
      *
-     * @return srring
+     * @param string $separator
+     * @return string
      */
     public function getJoinedMessage($separator = "\n")
     {
@@ -644,7 +646,7 @@ class Validate extends AbstractWidget
      *
      * @param string $field
      * @param string $rule
-     * @return Validator\AbstractRule
+     * @return Validator\AbstractValidator
      */
     public function getRuleValidator($field, $rule)
     {
