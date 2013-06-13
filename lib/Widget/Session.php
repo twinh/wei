@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Stdlib\ArrayWidget;
 
 /**
- * A widget that session parameters ($_SESSION)
+ * A widget that handles session parameters ($_SESSION)
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
@@ -54,6 +54,7 @@ class Session extends ArrayWidget
     /**
      * Start session
      *
+     * @throws \RuntimeException When header has been sent
      * @return Session
      */
     protected function start()
@@ -118,7 +119,7 @@ class Session extends ArrayWidget
     /**
      * Clear session data in current namespace
      *
-     * @return Parameter
+     * @return Session
      */
     public function clear()
     {
