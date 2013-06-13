@@ -1,14 +1,14 @@
 <?php
 
-use Widget\Widget;
-
-if (is_file(__DIR__ . '/../vendor/autoload.php')) {
-    require __DIR__ . '/../vendor/autoload.php';
+// Autoloading for Composer
+if (is_file($file = __DIR__ . '/../vendor/autoload.php')) {
+    require $file;
+// Fallback to widget manager
+} else {
+    require dirname(__DIR__) . '/lib/Widget/Widget.php';
 }
 
-require_once dirname(__DIR__) . '/lib/Widget/Widget.php';
-
-return Widget::create(array(
+return widget(array(
     'widget' => array(
         // Display all error message
         'debug' => true,
