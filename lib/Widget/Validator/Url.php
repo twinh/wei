@@ -10,41 +10,43 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is valid URL address
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class Url extends AbstractValidator
 {
     protected $invalidMessage = '%name% must be valid URL';
-    
+
     protected $negativeMessage = '%name% must not be URL';
-    
+
     /**
      * Requires the URL to contain a path part (like http://www.example.com/path/part)
-     * 
+     *
      * @var bool
      */
     protected $path = false;
-    
+
     /**
      * Requires URL to have a query string (like http://www.example.com/?query=string)
-     * 
+     *
      * @var bool
      */
     protected $query = false;
-    
+
     /**
      * Check if the input is valid URL address, options could be "path" and "query"
      *
+     * @param mixed $input
+     * @param array $options
      * @return string|bool
      */
     public function __invoke($input, $options = array())
     {
         $options && $this->storeOption($options);
-        
+
         return $this->isValid($input);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -62,7 +64,7 @@ class Url extends AbstractValidator
             $this->addError('invalid');
             return false;
         }
-        
+
         return true;
     }
 }
