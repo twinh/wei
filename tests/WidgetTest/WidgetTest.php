@@ -218,7 +218,7 @@ class WidgetTest extends TestCase
             'subRequest' => 'request.sub'
         ));
 
-        $this->assertEquals($widget->request, $widget->subRequest);
+        $this->assertInstanceOf('Widget\Request', $widget->subRequest);
         $this->assertNotSame($widget->request, $widget->subRequest);
     }
 
@@ -366,23 +366,16 @@ class WidgetTest extends TestCase
         $first = Widget::create(array(), 'first');
         $second = Widget::create(array(), 'second');
 
-        Widget::reset('first');
+        $this->assertTrue(Widget::reset('first'));
 
         $this->assertNotSame($first, Widget::create(array(), 'second'));
         $this->assertSame($second, Widget::create(array(), 'second'));
 
-        Widget::reset();
+        $this->assertTrue(Widget::reset());
         $this->assertNotSame($first, Widget::create(array(), 'second'));
         $this->assertNotSame($second, Widget::create(array(), 'second'));
-    }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Widget instance "NotInstance" not found
-     */
-    public function testRestInvalidArgumentException()
-    {
-        Widget::reset('NotInstance');
+        $this->assertFalse(Widget::reset('NotInstance'));
     }
 
     public function testWidgetFunction()

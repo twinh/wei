@@ -184,19 +184,21 @@ class Widget extends AbstractWidget
     }
 
     /**
-     * Reset the internal static instance
+     * Reset the internal widget manager instance
      *
-     * @param string|null $name             The name of the instance, if $name is null, reset all instances
-     * @throws \InvalidArgumentException    When instance not found
+     * @param string|null $name The name of the instance, if $name is null, reset all instances
+     * @return bool
      */
     public static function reset($name = null)
     {
         if (is_null($name)) {
             static::$instances = array();
+            return true;
         } elseif (isset(static::$instances[$name])) {
             unset(static::$instances[$name]);
+            return true;
         } else {
-            throw new \InvalidArgumentException(sprintf('Widget instance "%s" not found', $name));
+            return false;
         }
     }
 
