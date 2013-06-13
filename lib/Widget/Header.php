@@ -17,8 +17,15 @@ use Widget\Stdlib\ArrayWidget;
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Response $response A widget that handles the HTTP response data
  */
-class Header extends ArrayWidget
+class Header extends AbstractWidget
 {
+    /**
+     * The variable to store array
+     *
+     * @var array
+     */
+    protected $data = array();
+
     /**
      * Constructor
      *
