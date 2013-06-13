@@ -396,7 +396,7 @@ class Validate extends AbstractWidget
      * @param string $field
      * @return bool
      */
-    public function isFieldInvalidted($field)
+    public function isFieldInvalid($field)
     {
         return in_array($field, $this->getInvalidFields());
     }
