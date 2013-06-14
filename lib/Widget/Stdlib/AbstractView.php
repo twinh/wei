@@ -15,7 +15,7 @@ use Widget\AbstractWidget;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-abstract class AbstractView extends AbstractWidget implements ViewInterface
+abstract class AbstractView extends AbstractWidget
 {
     /**
      * Default template file extension
@@ -31,4 +31,31 @@ abstract class AbstractView extends AbstractWidget implements ViewInterface
     {
         return $this->extension;
     }
+
+    /**
+     * Render a template
+     *
+     * @param string $name  The name of template
+     * @param array  $vars  The variables pass to template
+     * @return string|null
+     */
+    abstract public function render($name, $vars = array());
+
+    /**
+     * Output a rendered template
+     *
+     * @param string $name  The name of template
+     * @param array  $vars  The variables pass to template
+     * @return void
+     */
+    abstract public function display($name, $vars = array());
+
+    /**
+     * Assign variables to template
+     *
+     * @param string $name  The name of the variable
+     * @param mixed  $value The value of the variable
+     * @return AbstractView
+     */
+    abstract public function assign($name, $value = null);
 }
