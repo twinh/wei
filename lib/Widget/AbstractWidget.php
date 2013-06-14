@@ -9,11 +9,6 @@
 namespace Widget;
 
 /**
- * @see Widget\WidgetInterface
- */
-require_once 'WidgetInterface.php';
-
-/**
  * The base class for all widgets
  *
  * @author   Twin Huang <twinhuang@qq.com>
@@ -127,7 +122,7 @@ require_once 'WidgetInterface.php';
  * @property Url        $url A util widget to build URL
  * @method   string     url($uri) Build URL by specified uri and parameters
  */
-abstract class AbstractWidget implements WidgetInterface
+abstract class AbstractWidget
 {
     /**
      * The default dependence map
@@ -161,7 +156,11 @@ abstract class AbstractWidget implements WidgetInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set option property value
+     *
+     * @param string|array $name
+     * @param mixed $value
+     * @return AbstractWidget
      */
     public function setOption($name, $value = null)
     {
@@ -192,7 +191,10 @@ abstract class AbstractWidget implements WidgetInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Returns option property value
+     *
+     * @param string $name The name of property
+     * @return mixed
      */
     public function getOption($name = null)
     {
@@ -209,7 +211,11 @@ abstract class AbstractWidget implements WidgetInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Invoke the widget by the given name
+     *
+     * @param string $name The name of widget
+     * @param array $args The arguments for widget's __invoke method
+     * @return mixed
      */
     public function __call($name, $args)
     {
@@ -217,10 +223,23 @@ abstract class AbstractWidget implements WidgetInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get the widget object by the given name
+     *
+     * @param  string $name The name of widget
+     * @return AbstractWidget
      */
     public function __get($name)
     {
         return $this->$name = $this->widget->get($name, array(), $this->deps);
     }
+
+    /**
+     * Invoke the current widget
+     *
+     * The method __invoke should be implemented by subclasses, the comment here
+     * is to avoid "Fatal error: Declaration of xxx::__invoke() must be
+     * compatible with that of Widget\AbstractWidget::__invoke() in xxx",
+     * because php does NOT accept dynamic arguments in magic method __invoke
+     */
+    //public function __invoke(){}
 }

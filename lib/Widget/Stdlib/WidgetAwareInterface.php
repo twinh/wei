@@ -9,6 +9,7 @@
 namespace Widget\Stdlib;
 
 use Widget\Widget;
+use Widget\AbstractWidget;
 
 /**
  * A interface for developers to get and invoke widget in their objects
@@ -29,7 +30,7 @@ interface WidgetAwareInterface
      * Get the widget object by the given name
      *
      * @param  string       $name The name of widget
-     * @return WidgetInterface
+     * @return AbstractWidget
      */
     public function __get($name);
 
