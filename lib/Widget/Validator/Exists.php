@@ -10,15 +10,15 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is existing file or directory
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class Exists extends AbstractValidator
 {
     protected $notFoundMessage = '%name% must be an existing file or directory';
-    
+
     protected $negativeMessage = '%name% must be a non-existing file or directory';
-            
+
     /**
      * {@inheritdoc}
      */
@@ -28,13 +28,13 @@ class Exists extends AbstractValidator
             $this->addError('notString');
             return false;
         }
-        
+
         $file = stream_resolve_include_path($input);
         if (!$file) {
             $this->addError('notFound');
             return false;
         }
-        
+
         return true;
     }
 }
