@@ -19,6 +19,7 @@ use Widget\Response;
  * @property    Logger $logger The logger widget
  * @property    Request $request The HTTP request widget
  */
+/** @noinspection PhpUndefinedClassInspection */
 class App extends AbstractWidget
 {
     const FORWARD_CODE = 1000;
