@@ -408,9 +408,9 @@ class Widget extends AbstractWidget
      * Add a widget
      *
      * @param string $name The name of widget
-     * @param WidgetInterface $widget The widget object
+     * @param AbstractWidget $widget The widget object
      */
-    public function set($name, WidgetInterface $widget)
+    public function set($name, AbstractWidget $widget)
     {
         $this->$name = $this->widgets[$name] = $widget;
     }
@@ -425,7 +425,7 @@ class Widget extends AbstractWidget
     {
         if (isset($this->widgets[$name])) {
             unset($this->widgets[$name]);
-            if (isset($this->$name) && $this->$name instanceof WidgetInterface) {
+            if (isset($this->$name) && $this->$name instanceof AbstractWidget) {
                 unset($this->$name);
             }
             return true;

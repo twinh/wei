@@ -15,7 +15,7 @@ use Widget\Response;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @method      Response response(string $content, int $status = 200) Send headers and output content
- * @property    Stdlib\ViewInterface $view The view widget, instance of \Widget\Viewable interface
+ * @property    Stdlib\AbstractView $view The view widget
  * @property    Logger $logger The logger widget
  * @property    Request $request The HTTP request widget
  */

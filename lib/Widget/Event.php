@@ -62,18 +62,18 @@ class Event extends AbstractWidget
             'namespaces'    => $namespaces,
         ));
     }
-    
+
     /**
      * Trigger an event
      *
      * @param  string $type The name of event or an Event object
      * @param  array $args The arguments pass to the handle
-     * @param null|WidgetInterface $widget If the widget contains the
+     * @param null|AbstractWidget $widget If the widget contains the
      *                                     $type property, the event manager
      *                                     will trigger it too
      * @return Stdlib\Event The event object
      */
-    public function trigger($type, $args = array(), WidgetInterface $widget = null)
+    public function trigger($type, $args = array(), AbstractWidget $widget = null)
     {
         if ($type instanceof StdEvent) {
             $event = $type;
