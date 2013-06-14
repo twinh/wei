@@ -9,27 +9,27 @@
 namespace Widget\Validator;
 
 /**
- * Check if the length (or size) of input is equals specified length or in 
+ * Check if the length (or size) of input is equals specified length or in
  * specified length range
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class Length extends AbstractLengthValidator
 {
     protected $lengthMessage = '%name% must have a length of %length%';
-    
+
     protected $lengthItemMessage = '%name% must contain %length% item(s)';
-    
+
     protected $notInMessage = '%name% must have a length between %min% and %max%';
 
     protected $notInItemMessage = '%name% must contain %min% to %max% item(s)';
-    
+
     protected $min;
-    
+
     protected $max;
-    
+
     protected $length;
-    
+
     /**
      * {@inheritdoc}
      */
@@ -43,20 +43,20 @@ class Length extends AbstractLengthValidator
         } elseif (is_numeric($min) && is_null($max)) {
             $this->storeOption('length', $min);
         }
-        
+
         return $this->isValid($input);
     }
-    
+
     /**
      * {@inheritdoc}
      */
     protected function validate($input)
     {
         if (false === ($len = $this->getLength($input))) {
-            $this->addError('notDetectd');
+            $this->addError('notDetected');
             return false;
         }
-        
+
         if (!is_null($this->length)) {
             if ($this->length != $len) {
                 $this->addError(is_scalar($input) ? 'length' : 'lengthItem');
@@ -66,7 +66,7 @@ class Length extends AbstractLengthValidator
             $this->addError(is_scalar($input) ? 'notIn' : 'notInItem');
             return false;
         }
-        
+
         return true;
     }
 }

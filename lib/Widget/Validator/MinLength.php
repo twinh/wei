@@ -10,15 +10,15 @@ namespace Widget\Validator;
 
 /**
  * Check if the length (or size) of input is greater than specified length
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class MinLength extends AbstractLengthValidator
 {
     protected $tooShortMessage = '%name% must have a length greater than %min%';
-    
+
     protected $tooFewMessage = '%name% must contain at least %min% item(s)';
-    
+
     protected $min;
 
     /**
@@ -27,25 +27,25 @@ class MinLength extends AbstractLengthValidator
     public function __invoke($input, $min = null)
     {
         $min && $this->storeOption('min', $min);
-        
+
         return $this->isValid($input);
     }
-    
+
     /**
      * {@inheritdoc}
      */
     protected function validate($input)
     {
         if (false === ($len = $this->getLength($input))) {
-            $this->addError('notDetectd');
+            $this->addError('notDetected');
             return false;
         }
-        
+
         if ($this->min > $len) {
             $this->addError(is_scalar($input) ? 'tooShort' : 'tooFew');
             return false;
         }
-        
+
         return true;
     }
 }
