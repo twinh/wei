@@ -25,7 +25,10 @@ abstract class AbstractView extends AbstractWidget
     protected $extension = '.php';
 
     /**
-     * {@inheritdoc}
+     * Get default template file extension, such as php, tpl, this is useful for
+     * automatic render template
+     *
+     * @return string
      */
     public function getExtension()
     {
