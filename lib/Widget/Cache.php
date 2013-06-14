@@ -20,7 +20,7 @@ class Cache extends AbstractCache
     /**
      * The storage widget object
      *
-     * @var Cache\CacheInterface
+     * @var AbstractCache
      */
     protected $object;
 
@@ -56,8 +56,8 @@ class Cache extends AbstractCache
             throw new \InvalidArgumentException(sprintf('Cache driver class "%s" not found', $class));
         }
 
-        if (!in_array('Widget\Cache\CacheInterface', class_implements($class))) {
-            throw new \InvalidArgumentException(sprintf('Cache driver "%s" should implement the interface "Widget\Cache\CacheInterface"', $class));
+        if (!is_subclass_of($class, 'Widget\Stdlib\AbstractCache')) {
+            throw new \InvalidArgumentException(sprintf('Cache driver class "%s" must extend "Widget\Stdlib\AbstractCache"', $class));
         }
 
         $this->object = $this->widget->get($driver);
