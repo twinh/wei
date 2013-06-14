@@ -19,22 +19,41 @@ class FieldExists extends AbstractValidator
 
     protected $tooManyMessage = '%name% must contain no more than %max% items';
 
+    protected $lengthMessage = '%name% must contain %length% item(s)';
+
+    /**
+     * Which fields should exists in validate data
+     *
+     * @var array
+     */
     protected $fields = array();
 
     /**
-     * How many field should exist at least
+     * How many fields should exist
+     *
+     * @var int
+     */
+    protected $length;
+
+    /**
+     * How many fields should exist at least
      *
      * @var int
      */
     protected $min;
 
     /**
-     * How many field should exist at most
+     * How many fields should exist at most
      *
      * @var int
      */
     protected $max;
 
+    /**
+     * How many fields found in validate data
+     *
+     * @var int
+     */
     protected $count;
 
     /**
@@ -47,6 +66,11 @@ class FieldExists extends AbstractValidator
             if ($this->validator->getFieldData($field)) {
                 $this->count++;
             }
+        }
+
+        if (!is_null($this->length) && $this->count != $this->length) {
+            $this->addError('length');
+            return false;
         }
 
         if (!is_null($this->min) && $this->count < $this->min) {

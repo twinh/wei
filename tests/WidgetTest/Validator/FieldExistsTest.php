@@ -49,8 +49,8 @@ class FieldExistsTest extends TestCase
             array(
                 'data' => array(
                     'mobile' => null,
-                    'officePhone' => '0754-88888888',
-                    'homePhone' => '0754-88888888'
+                    'officePhone' => '0755-88888888',
+                    'homePhone' => '0755-88888888'
                 ),
                 'min' => 1,
                 'max' => null,
@@ -69,8 +69,8 @@ class FieldExistsTest extends TestCase
             array(
                 'data' => array(
                     'mobile' => '13800138000',
-                    'officePhone' => '0754-88888888',
-                    'homePhone' => '0754-88888888',
+                    'officePhone' => '0755-88888888',
+                    'homePhone' => '0755-88888888',
                     'submit' => true
                 ),
                 'min' => 1,
@@ -79,5 +79,70 @@ class FieldExistsTest extends TestCase
                 'errorMessageName' => 'tooMany'
             )
         );
+    }
+
+    public function testLength()
+    {
+        /** @var $validator \Widget\Validate */
+        $validator = $this->validate(array(
+            'data' => array(
+                'officePhone' => '0755-88888888',
+                'homePhone' => null,
+                'submit' => 1
+            ),
+            'rules' => array(
+                'mobile' => array(
+                    'required' => false,
+                    'mobileCn' => true
+                ),
+                'officePhone' => array(
+                    'required' => false,
+                    'phoneCn' => true
+                ),
+                'homePhone' => array(
+                    'required' => false,
+                    'phoneCn' => true
+                ),
+                'submit' => array(
+                    'fieldExists' => array(
+                        'fields' => array('mobile', 'officePhone', 'homePhone'),
+                        'length' => 1
+                    )
+                )
+            )
+        ));
+
+        $this->assertTrue($validator->isValid());
+
+        /** @var $validator \Widget\Validate */
+        $validator = $this->validate(array(
+            'data' => array(
+                'officePhone' => '0755-88888888',
+                'homePhone' => '0755-88888888',
+                'submit' => 1
+            ),
+            'rules' => array(
+                'mobile' => array(
+                    'required' => false,
+                    'mobileCn' => true
+                ),
+                'officePhone' => array(
+                    'required' => false,
+                    'phoneCn' => true
+                ),
+                'homePhone' => array(
+                    'required' => false,
+                    'phoneCn' => true
+                ),
+                'submit' => array(
+                    'fieldExists' => array(
+                        'fields' => array('mobile', 'officePhone', 'homePhone'),
+                        'length' => 1
+                    )
+                )
+            )
+        ));
+
+        $this->assertFalse($validator->isValid());
     }
 }

@@ -42,7 +42,12 @@ class RecordExistsTest extends TestCase
 
         $widget = \Widget\Widget::create();
 
-        $widget->dbal()->query("DROP TABLE users");
+        try {
+            $widget->dbal()->query("DROP TABLE users");
+        } catch (\Doctrine\DBAL\DBALException $e) {
+            // ignore
+        }
+
     }
 
     public function setUp()
