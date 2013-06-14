@@ -67,6 +67,13 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     protected $negative = false;
 
     /**
+     * The validate widget, available when this rule validator invoke from validate widget
+     *
+     * @var \Widget\Validate
+     */
+    protected $validator;
+
+    /**
      * An array contains the validator original property values
      *
      * @var array

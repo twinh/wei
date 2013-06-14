@@ -156,7 +156,7 @@ return array(
 
     // maxLength
     '%name% must have a length lower than %max%' => '%name%的长度必须小于等于%max%',
-    '%name% must contain no more than %max% items' => '%name%最多包含%max%项',
+    '%name% must contain no more than %max% items' => '%name%最多只能包含%max%项',
 
     // min
     '%name% must be greater or equal than %min%' => '%name%必须大于等于%min%',

@@ -279,6 +279,8 @@ class Validate extends AbstractWidget
     {
         $props = $messages = array();
 
+        $props['validator'] = $this;
+
         // Prepare name for validator
         if (isset($this->names[$field])) {
             $props['name'] = $this->names[$field];
@@ -305,7 +307,7 @@ class Validate extends AbstractWidget
          * )
          *
          * In case 2, checking non-numeric offsets of strings would return true
-         * in PHP 5.3, while return false in PHP 5.4, so we do NOT konw
+         * in PHP 5.3, while return false in PHP 5.4, so we do NOT known
          * $messages is array or string
          * @link http://php.net/manual/en/function.isset.php
          *
@@ -450,6 +452,8 @@ class Validate extends AbstractWidget
 
     /**
      * Returns the validation result
+     *
+     * @return bool
      */
     public function isValid()
     {
