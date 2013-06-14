@@ -27,7 +27,7 @@ class Is extends AbstractWidget
     );
 
     /**
-     * The avaiable validator rules name
+     * The available validator rules name
      *
      * @var array
      */
@@ -67,6 +67,9 @@ class Is extends AbstractWidget
      * @param string|Validator\AbstractValidator|int $rule
      * @param array|null $input
      * @param mixed $options
+     * @param null &$validator
+     * @param array $props
+     * @return bool
      * @internal Do NOT use this method for it may be changed in the future
      */
     public function validateOne($rule, $input, $options = array(), &$validator = null, $props = array())
@@ -164,7 +167,7 @@ class Is extends AbstractWidget
      *
      * @param string $rule The name of rule validator
      * @param array $options The property options for rule validator
-     * @return Widget\Validator\AbstractValidator
+     * @return Validator\AbstractValidator
      * @throws \InvalidArgumentException When validator not found
      */
     public function createRuleValidator($rule, array $options = array())
