@@ -10,23 +10,23 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is valid by specified callback
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class Callback extends AbstractValidator
 {
     protected $invalidMessage = '%name% is not valid';
-    
+
     /**
      * The callback to validate the input
-     * 
+     *
      * @var callback
      */
     protected $fn;
-    
+
     /**
      * Check if the input is valid by specified callback
-     * 
+     *
      * @param mixed $input The input value
      * @param \Closure|null $fn  The callback to validate the input
      * @param string|null $message The custom invalid message
@@ -39,7 +39,7 @@ class Callback extends AbstractValidator
 
         return $this->isValid($input);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -49,7 +49,7 @@ class Callback extends AbstractValidator
             $this->addError('invalid');
             return false;
         }
-        
+
         return true;
     }
 }
