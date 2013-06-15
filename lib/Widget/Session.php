@@ -99,33 +99,9 @@ class Session extends Parameter
      * @param  mixed  $default The default parameter value if the session does not exist
      * @return mixed
      */
-    public function get($key)
+    public function get($key, $default = null)
     {
-        return $this->offsetGet($key);
-    }
-
-     /**
-     * Set session value
-     *
-     * @param string $name The name of session
-     * @param mixed  $value The value of session
-     * @return mixed
-     */
-    public function set($name, $value)
-    {
-        return $this->offsetSet($name, $value);
-    }
-
-    /**
-     * Clear session data in current namespace
-     *
-     * @return Session
-     */
-    public function clear()
-    {
-        $this->data = array();
-
-        return $this;
+        return isset($this->data[$key]) ? $this->data[$key] : $default;
     }
 
     /**
