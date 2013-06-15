@@ -8,14 +8,14 @@
 
 namespace Widget;
 
-use Widget\Stdlib\ArrayWidget;
+use Widget\Stdlib\Parameter;
 
 /**
  * A widget that handles session parameters ($_SESSION)
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Session extends ArrayWidget
+class Session extends Parameter
 {
     /**
      * Current namespace to store session data
