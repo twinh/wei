@@ -12,25 +12,25 @@ abstract class AbstractGroupValidator extends AbstractValidator
 {
     /**
      * The invalid validators
-     * 
-     * @var array<Validator\AbstractValidator>
+     *
+     * @var array<AbstractValidator>
      */
     protected $validators = array();
-    
+
     /**
      * Whether combine messages into single one or not
-     * 
+     *
      * @var bool
      */
     protected $combineMessages = true;
-    
+
     /**
      * {@inheritdoc}
      */
     protected function reset()
     {
         $this->validators = array();
-        
+
         parent::reset();
     }
 
@@ -42,8 +42,8 @@ abstract class AbstractGroupValidator extends AbstractValidator
     {
         /**
          * Combines messages into single one
-         * 
-         * FROM 
+         *
+         * FROM
          * array(
          *   'atLeast'          => 'atLeast message',
          *   'validator.rule'   => 'first message',
@@ -60,7 +60,7 @@ abstract class AbstractGroupValidator extends AbstractValidator
         if ($this->combineMessages) {
             $messages = parent::getMessages();
             $key = key($messages);
-        
+
             foreach ($this->validators as $rule => $validator) {
                 $messages[$rule] = implode(';', $validator->getMessages());
             }
