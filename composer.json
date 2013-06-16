@@ -14,7 +14,8 @@
         "smarty/smarty": "v3.1.13",
         "monolog/monolog": "1.*",
         "twig/twig": "1.*",
-        "joseph-lenton/php-error": "dev-master"
+        "joseph-lenton/php-error": "dev-master",
+        "satooshi/php-coveralls": "dev-master"
     },
     "authors": [
         {
