@@ -73,6 +73,9 @@ $widget = widget(array(
 // Travis configuration
 if (getenv('TRAVIS')) {
     widget(__DIR__ . '/config/travis.php');
+// CircleCi configuration
+} elseif (getenv('CIRCLECI')) {
+    widget(__DIR__ . '/config/circleci.php');
 }
 
 return $widget;
