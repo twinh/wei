@@ -20,30 +20,30 @@ class DbTest extends TestCase
         $this->dropTable();
         $this->createTable();
 
-        $db->insert('user_group', array(
+        $db->insert('member_group', array(
             'id' => '1',
             'name' => 'vip'
         ));
 
-        $db->insert('user', array(
+        $db->insert('member', array(
             'group_id' => '1',
             'name' => 'twin',
             'address' => 'test'
         ));
 
-        $db->insert('user', array(
+        $db->insert('member', array(
             'group_id' => '1',
             'name' => 'test',
             'address' => 'test'
         ));
 
         $db->insert('post', array(
-            'user_id' => '1',
+            'member_id' => '1',
             'name' => 'my first post',
         ));
 
         $db->insert('post', array(
-            'user_id' => '1',
+            'member_id' => '1',
             'name' => 'my second post',
         ));
 
@@ -76,9 +76,9 @@ class DbTest extends TestCase
     protected function createTable()
     {
         $db = $this->db;
-        $db->query("CREATE TABLE user_group (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE user (id INTEGER NOT NULL, group_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE post (id INTEGER NOT NULL, user_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
+        $db->query("CREATE TABLE member_group (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
+        $db->query("CREATE TABLE member (id INTEGER NOT NULL, group_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
+        $db->query("CREATE TABLE post (id INTEGER NOT NULL, member_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
         $db->query("CREATE TABLE tag (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
         $db->query("CREATE TABLE post_tag (post_id INTEGER NOT NULL, tag_id INTEGER NOT NULL)");
     }
@@ -86,8 +86,8 @@ class DbTest extends TestCase
     protected function dropTable()
     {
         $db = $this->db;
-        $db->query('DROP TABLE IF EXISTS user_group');
-        $db->query('DROP TABLE IF EXISTS user');
+        $db->query('DROP TABLE IF EXISTS member_group');
+        $db->query('DROP TABLE IF EXISTS member');
         $db->query('DROP TABLE IF EXISTS post');
         $db->query('DROP TABLE IF EXISTS tag');
         $db->query('DROP TABLE IF EXISTS post_tag');
@@ -106,9 +106,9 @@ class DbTest extends TestCase
 
     public function testGetRecord()
     {
-        $this->assertInstanceOf('\Widget\Db\Record', $this->db->create('user'));
+        $this->assertInstanceOf('\Widget\Db\Record', $this->db->create('member'));
 
-        $this->assertInstanceOf('\Widget\Db\Record', $this->db->user);
+        $this->assertInstanceOf('\Widget\Db\Record', $this->db->member);
     }
 
     public function testRelation()
@@ -117,27 +117,27 @@ class DbTest extends TestCase
 
         $db->setOption('recordNamespace', 'WidgetTest\DbTest');
 
-        /** @var $user \WidgetTest\DbTest\User */
-        $user = $db->user('1');
+        /** @var $member \WidgetTest\DbTest\Member */
+        $member = $db->member('1');
 
-        $this->assertInstanceOf('\Widget\Db\Record', $user);
+        $this->assertInstanceOf('\Widget\Db\Record', $member);
 
-        $this->assertEquals('1', $user->id);
-        $this->assertEquals('twin', $user->name);
-        $this->assertEquals('test', $user->address);
-        $this->assertEquals('1', $user->group_id);
+        $this->assertEquals('1', $member->id);
+        $this->assertEquals('twin', $member->name);
+        $this->assertEquals('test', $member->address);
+        $this->assertEquals('1', $member->group_id);
 
         // Relation one-to-one
-        $post = $user->post;
+        $post = $member->post;
 
         $this->assertInstanceOf('\Widget\Db\Record', $post);
 
         $this->assertEquals('1', $post->id);
         $this->assertEquals('my first post', $post->name);
-        $this->assertEquals('1', $post->user_id);
+        $this->assertEquals('1', $post->member_id);
 
         // Relation belong-to
-        $group = $user->group;
+        $group = $member->group;
 
         $this->assertInstanceOf('\Widget\Db\Record', $group);
 
@@ -145,7 +145,7 @@ class DbTest extends TestCase
         $this->assertEquals('vip', $group->name);
 
         // Relation one-to-many
-        $posts = $user->posts;
+        $posts = $member->posts;
 
         $this->assertInstanceOf('\Widget\Db\Collection', $posts);
 
@@ -154,119 +154,119 @@ class DbTest extends TestCase
 
         $this->assertEquals('1', $firstPost->id);
         $this->assertEquals('my first post', $firstPost->name);
-        $this->assertEquals('1', $firstPost->user_id);
+        $this->assertEquals('1', $firstPost->member_id);
     }
 
     public function testSet()
     {
-        $user = $this->db->user('1');
+        $member = $this->db->member('1');
 
-        $this->assertEquals('1', $user->id);
+        $this->assertEquals('1', $member->id);
 
-        $user->id = 2;
+        $member->id = 2;
 
-        $this->assertEquals('2', $user->id);
+        $this->assertEquals('2', $member->id);
     }
 
     public function testDynamicRelation()
     {
         $db = $this->db;
 
-        $user = $db->user('1');
+        $member = $db->member('1');
 
-        $post = $user->post = $db->find('post', array('user_id' => $user->id));
+        $post = $member->post = $db->find('post', array('member_id' => $member->id));
 
         $this->assertInstanceOf('\Widget\Db\Record', $post);
 
         $this->assertEquals('1', $post->id);
         $this->assertEquals('my first post', $post->name);
-        $this->assertEquals('1', $post->user_id);
+        $this->assertEquals('1', $post->member_id);
     }
 
     public function testUpdate()
     {
-        $this->db->update('user', array('name' => 'hello'), array('id' => '1'));
+        $this->db->update('member', array('name' => 'hello'), array('id' => '1'));
 
-        $user = $this->db->find('user', '1');
+        $member = $this->db->find('member', '1');
 
-        $this->assertEquals('hello', $user->name);
+        $this->assertEquals('hello', $member->name);
     }
 
     public function testDelete()
     {
-        $this->db->delete('user', array('id' => '1'));
+        $this->db->delete('member', array('id' => '1'));
 
-        $user = $this->db->find('user', 1);
+        $member = $this->db->find('member', 1);
 
-        $this->assertFalse($user);
+        $this->assertFalse($member);
     }
 
     public function testFind()
     {
-        $user = $this->db->find('user', '1');
+        $member = $this->db->find('member', '1');
 
-        $this->assertEquals('1', $user->id);
+        $this->assertEquals('1', $member->id);
     }
 
     public function testFindOrCreate()
     {
-        $user = $this->db->find('user', '3');
-        $this->assertFalse($user);
+        $member = $this->db->find('member', '3');
+        $this->assertFalse($member);
 
         // Not found and create new object
-        $user = $this->db->findOrCreate('user', '3', array(
+        $member = $this->db->findOrCreate('member', '3', array(
             'name' => 'name'
         ));
-        $this->assertEquals('name', $user->name);
-        $this->assertEquals('3', $user->id);
+        $this->assertEquals('name', $member->name);
+        $this->assertEquals('3', $member->id);
 
         // Found
-        $user = $this->db->findOrCreate('user', '2');
+        $member = $this->db->findOrCreate('member', '2');
 
-        $this->assertEquals('2', $user->id);
+        $this->assertEquals('2', $member->id);
     }
 
     public function testRecordSave()
     {
         $db = $this->db;
 
-        // Existing user
-        $user = $db->user('1');
-        $user->address = 'address';
-        $result = $user->save();
+        // Existing member
+        $member = $db->member('1');
+        $member->address = 'address';
+        $result = $member->save();
 
         $this->assertTrue($result);
-        $this->assertEquals('1', $user->id);
+        $this->assertEquals('1', $member->id);
 
-        // New user save with data
-        $user = $db->user;
-        $result = $user->save(array(
+        // New member save with data
+        $member = $db->member;
+        $result = $member->save(array(
             'group_id' => '1',
             'name' => 'save',
             'address' => 'save'
         ));
 
         $this->assertTrue($result);
-        $this->assertEquals('3', $user->id);
-        $this->assertEquals('save', $user->name);
+        $this->assertEquals('3', $member->id);
+        $this->assertEquals('save', $member->name);
 
         // Save again
-        $user->address = 'address3';
-        $result = $user->save();
+        $member->address = 'address3';
+        $result = $member->save();
         $this->assertTrue($result);
-        $this->assertEquals('3', $user->id);
+        $this->assertEquals('3', $member->id);
     }
 
     public function testSelect()
     {
-        $data = $this->db->select('user', 1);
+        $data = $this->db->select('member', 1);
 
         $this->assertEquals('twin', $data['name']);
     }
 
     public function testSelectColumn()
     {
-        $data = $this->db->select('user', 1, 'id, name');
+        $data = $this->db->select('member', 1, 'id, name');
 
         $this->assertArrayHasKey('id', $data);
         $this->assertArrayHasKey('name', $data);
@@ -275,36 +275,36 @@ class DbTest extends TestCase
 
     public function testSelectAll()
     {
-        $data = $this->db->selectAll('user', array('name' => 'twin'));
+        $data = $this->db->selectAll('member', array('name' => 'twin'));
 
         $this->assertCount(1, $data);
 
-        $data = $this->db->selectAll('user');
+        $data = $this->db->selectAll('member');
 
         $this->assertCount(2, $data);
     }
 
     public function testFetch()
     {
-        $data = $this->db->fetch("SELECT * FROM user WHERE name = ?", 'twin');
+        $data = $this->db->fetch("SELECT * FROM member WHERE name = ?", 'twin');
         $this->assertInternalType('array', $data);
         $this->assertEquals('twin', $data['name']);
 
-        $data = $this->db->fetch("SELECT * FROM user WHERE name = ?", 'notFound');
+        $data = $this->db->fetch("SELECT * FROM member WHERE name = ?", 'notFound');
         $this->assertFalse($data);
 
-        $data = $this->db->fetch("SELECT * FROM user WHERE name = :name", array('name' => 'twin'));
+        $data = $this->db->fetch("SELECT * FROM member WHERE name = :name", array('name' => 'twin'));
         $this->assertInternalType('array', $data);
         $this->assertEquals('twin', $data['name']);
 
-        $data = $this->db->fetch("SELECT * FROM user WHERE name = :name", array(':name' => 'twin'));
+        $data = $this->db->fetch("SELECT * FROM member WHERE name = :name", array(':name' => 'twin'));
         $this->assertInternalType('array', $data);
         $this->assertEquals('twin', $data['name']);
     }
 
     public function testFetchAll()
     {
-        $data = $this->db->fetchAll("SELECT * FROM user WHERE group_id = ?", '1');
+        $data = $this->db->fetchAll("SELECT * FROM member WHERE group_id = ?", '1');
 
         $this->assertInternalType('array', $data);
         $this->assertEquals('1', $data[0]['group_id']);
@@ -312,14 +312,14 @@ class DbTest extends TestCase
 
     public function testQueryFetch()
     {
-        $data = $this->db('user')->where('id = 1')->fetch();
+        $data = $this->db('member')->where('id = 1')->fetch();
         $this->assertInternalType('array', $data);
         $this->assertEquals('1', $data['id']);
     }
 
     public function testQueryFetchAll()
     {
-        $data = $this->db('user')->fetchAll();
+        $data = $this->db('member')->fetchAll();
 
         $this->assertInternalType('array', $data);
         $this->assertEquals('1', $data[0]['group_id']);
@@ -331,11 +331,11 @@ class DbTest extends TestCase
 
         $db->setOption('recordNamespace', 'WidgetTest\DbTest');
 
-        $this->assertEquals('WidgetTest\DbTest\User', $db->getRecordClass('user'));
-        $this->assertEquals('WidgetTest\DbTest\User', $db->getRecordClass('User'));
-        $this->assertEquals('WidgetTest\DbTest\UserGroup', $db->getRecordClass('user_group'));
-        $this->assertEquals('WidgetTest\DbTest\UserGroup', $db->getRecordClass('UserGroup'));
-        $this->assertEquals('WidgetTest\DbTest\UserGroup', $db->getRecordClass('User_Group'));
+        $this->assertEquals('WidgetTest\DbTest\Member', $db->getRecordClass('member'));
+        $this->assertEquals('WidgetTest\DbTest\Member', $db->getRecordClass('member'));
+        $this->assertEquals('WidgetTest\DbTest\MemberGroup', $db->getRecordClass('member_group'));
+        $this->assertEquals('WidgetTest\DbTest\MemberGroup', $db->getRecordClass('memberGroup'));
+        $this->assertEquals('WidgetTest\DbTest\MemberGroup', $db->getRecordClass('member_Group'));
     }
 
     /**
@@ -344,182 +344,182 @@ class DbTest extends TestCase
     public function testQuery()
     {
         // Pure string conditions
-        $query = $this->db('user')->where("name = 'twin'");
-        $user = $query->find();
+        $query = $this->db('member')->where("name = 'twin'");
+        $member = $query->find();
 
-        $this->assertEquals("SELECT * FROM user WHERE name = 'twin' LIMIT 1", $query->getSql());
-        $this->assertEquals('twin', $user->name);
+        $this->assertEquals("SELECT * FROM member WHERE name = 'twin' LIMIT 1", $query->getSql());
+        $this->assertEquals('twin', $member->name);
 
         // ? conditions
-        $query = $this->db('user')->where('name = ?', 'twin');
-        $user = $query->find();
+        $query = $this->db('member')->where('name = ?', 'twin');
+        $member = $query->find();
 
-        $this->assertEquals("SELECT * FROM user WHERE name = ? LIMIT 1", $query->getSql());
-        $this->assertEquals('twin', $user->name);
+        $this->assertEquals("SELECT * FROM member WHERE name = ? LIMIT 1", $query->getSql());
+        $this->assertEquals('twin', $member->name);
 
-        $query = $this->db('user')->where('group_id = ? AND name = ?', array('1', 'twin'));
-        $user = $query->find();
+        $query = $this->db('member')->where('group_id = ? AND name = ?', array('1', 'twin'));
+        $member = $query->find();
 
-        $this->assertEquals("SELECT * FROM user WHERE group_id = ? AND name = ? LIMIT 1", $query->getSql());
-        $this->assertEquals('1', $user->group_id);
-        $this->assertEquals('twin', $user->name);
+        $this->assertEquals("SELECT * FROM member WHERE group_id = ? AND name = ? LIMIT 1", $query->getSql());
+        $this->assertEquals('1', $member->group_id);
+        $this->assertEquals('twin', $member->name);
 
         // : conditions
-        $query = $this->db('user')->where('group_id = :groupId AND name = :name', array(
+        $query = $this->db('member')->where('group_id = :groupId AND name = :name', array(
             'groupId' => '1',
             'name' => 'twin'
         ));
-        $user = $query->find();
+        $member = $query->find();
 
-        $this->assertEquals("SELECT * FROM user WHERE group_id = :groupId AND name = :name LIMIT 1", $query->getSql());
-        $this->assertEquals('1', $user->group_id);
-        $this->assertEquals('twin', $user->name);
+        $this->assertEquals("SELECT * FROM member WHERE group_id = :groupId AND name = :name LIMIT 1", $query->getSql());
+        $this->assertEquals('1', $member->group_id);
+        $this->assertEquals('twin', $member->name);
 
-        $query = $this->db('user')->where('group_id = :groupId AND name = :name', array(
+        $query = $this->db('member')->where('group_id = :groupId AND name = :name', array(
             ':groupId' => '1',
             ':name' => 'twin'
         ));
-        $user = $query->find();
+        $member = $query->find();
 
-        $this->assertEquals("SELECT * FROM user WHERE group_id = :groupId AND name = :name LIMIT 1", $query->getSql());
-        $this->assertEquals('1', $user->group_id);
-        $this->assertEquals('twin', $user->name);
+        $this->assertEquals("SELECT * FROM member WHERE group_id = :groupId AND name = :name LIMIT 1", $query->getSql());
+        $this->assertEquals('1', $member->group_id);
+        $this->assertEquals('twin', $member->name);
 
         // Range conditions
-        $query = $this->db('user')->where('group_id BETWEEN ? AND ?', array('1', '2'));
-        $this->assertEquals("SELECT * FROM user WHERE group_id BETWEEN ? AND ?", $query->getSql());
+        $query = $this->db('member')->where('group_id BETWEEN ? AND ?', array('1', '2'));
+        $this->assertEquals("SELECT * FROM member WHERE group_id BETWEEN ? AND ?", $query->getSql());
 
-        $user = $query->find();
-        $this->assertGreaterThanOrEqual(1, $user->group_id);
-        $this->assertLessThanOrEqual(2, $user->group_id);
+        $member = $query->find();
+        $this->assertGreaterThanOrEqual(1, $member->group_id);
+        $this->assertLessThanOrEqual(2, $member->group_id);
 
         // Subset conditions
-        $query = $this->db('user')->where(array('group_id' => array('1', '2')));
-        $user = $query->find();
+        $query = $this->db('member')->where(array('group_id' => array('1', '2')));
+        $member = $query->find();
 
-        $this->assertEquals("SELECT * FROM user WHERE group_id IN (?, ?) LIMIT 1", $query->getSql());
-        $this->assertEquals('1', $user->group_id);
+        $this->assertEquals("SELECT * FROM member WHERE group_id IN (?, ?) LIMIT 1", $query->getSql());
+        $this->assertEquals('1', $member->group_id);
 
-        $query = $this->db('user')->where(array(
+        $query = $this->db('member')->where(array(
             'id' => '1',
             'group_id' => array('1', '2')
         ));
-        $user = $query->find();
+        $member = $query->find();
 
-        $this->assertEquals("SELECT * FROM user WHERE id = ? AND group_id IN (?, ?) LIMIT 1", $query->getSql());
-        $this->assertEquals('1', $user->id);
+        $this->assertEquals("SELECT * FROM member WHERE id = ? AND group_id IN (?, ?) LIMIT 1", $query->getSql());
+        $this->assertEquals('1', $member->id);
 
         // Overwrite where
         $query = $this
-            ->db('user')
+            ->db('member')
             ->where('id = :id')
             ->where('group_id = :groupId')
             ->setParameter('groupId', 1);
-        $user = $query->find();
+        $member = $query->find();
 
-        $this->assertEquals("SELECT * FROM user WHERE group_id = :groupId LIMIT 1", $query->getSql());
-        $this->assertEquals('1', $user->group_id);
+        $this->assertEquals("SELECT * FROM member WHERE group_id = :groupId LIMIT 1", $query->getSql());
+        $this->assertEquals('1', $member->group_id);
 
         // Order
-        $query = $this->db('user')->orderBy('id', 'ASC');
-        $user = $query->find();
+        $query = $this->db('member')->orderBy('id', 'ASC');
+        $member = $query->find();
 
-        $this->assertEquals("SELECT * FROM user ORDER BY id ASC LIMIT 1", $query->getSql());
-        $this->assertEquals('1', $user->id);
+        $this->assertEquals("SELECT * FROM member ORDER BY id ASC LIMIT 1", $query->getSql());
+        $this->assertEquals('1', $member->id);
 
         // Add order
-        $query = $this->db('user')->orderBy('id', 'ASC')->addOrderBy('group_id', 'ASC');
-        $user = $query->find();
+        $query = $this->db('member')->orderBy('id', 'ASC')->addOrderBy('group_id', 'ASC');
+        $member = $query->find();
 
-        $this->assertEquals("SELECT * FROM user ORDER BY id ASC, group_id ASC LIMIT 1", $query->getSql());
-        $this->assertEquals('1', $user->id);
+        $this->assertEquals("SELECT * FROM member ORDER BY id ASC, group_id ASC LIMIT 1", $query->getSql());
+        $this->assertEquals('1', $member->id);
 
         // Select
-        $query = $this->db('user')->select('id, group_id');
-        $user = $query->find()->toArray();
+        $query = $this->db('member')->select('id, group_id');
+        $member = $query->find()->toArray();
 
-        $this->assertEquals("SELECT id, group_id FROM user LIMIT 1", $query->getSql());
-        $this->assertArrayHasKey('id', $user);
-        $this->assertArrayHasKey('group_id', $user);
-        $this->assertArrayNotHasKey('name', $user);
+        $this->assertEquals("SELECT id, group_id FROM member LIMIT 1", $query->getSql());
+        $this->assertArrayHasKey('id', $member);
+        $this->assertArrayHasKey('group_id', $member);
+        $this->assertArrayNotHasKey('name', $member);
 
         // Add select
-        $query = $this->db('user')->select('id')->addSelect('group_id');
-        $user = $query->find()->toArray();
+        $query = $this->db('member')->select('id')->addSelect('group_id');
+        $member = $query->find()->toArray();
 
-        $this->assertEquals("SELECT id, group_id FROM user LIMIT 1", $query->getSql());
-        $this->assertArrayHasKey('id', $user);
-        $this->assertArrayHasKey('group_id', $user);
-        $this->assertArrayNotHasKey('name', $user);
+        $this->assertEquals("SELECT id, group_id FROM member LIMIT 1", $query->getSql());
+        $this->assertArrayHasKey('id', $member);
+        $this->assertArrayHasKey('group_id', $member);
+        $this->assertArrayNotHasKey('name', $member);
 
         // Distinct
-        $query = $this->db('user')->select('DISTINCT group_id');
-        $user = $query->find();
+        $query = $this->db('member')->select('DISTINCT group_id');
+        $member = $query->find();
 
-        $this->assertEquals("SELECT DISTINCT group_id FROM user LIMIT 1", $query->getSql());
-        $this->assertEquals('1', $user->group_id);
+        $this->assertEquals("SELECT DISTINCT group_id FROM member LIMIT 1", $query->getSql());
+        $this->assertEquals('1', $member->group_id);
 
         // Limit
-        $query = $this->db('user')->limit(2);
-        $user = $query->findAll();
+        $query = $this->db('member')->limit(2);
+        $member = $query->findAll();
 
-        $this->assertEquals("SELECT * FROM user LIMIT 2", $query->getSql());
-        $this->assertCount(2, $user);
+        $this->assertEquals("SELECT * FROM member LIMIT 2", $query->getSql());
+        $this->assertCount(2, $member);
 
         // Offset
-        $query = $this->db('user')->limit(1)->offset(1);
-        $user = $query->find();
+        $query = $this->db('member')->limit(1)->offset(1);
+        $member = $query->find();
 
-        $this->assertEquals("SELECT * FROM user LIMIT 1 OFFSET 1", $query->getSql());
-        $this->assertEquals(2, $user->id);
+        $this->assertEquals("SELECT * FROM member LIMIT 1 OFFSET 1", $query->getSql());
+        $this->assertEquals(2, $member->id);
 
         // Page
-        $query = $this->db('user')->page(3);
-        $this->assertEquals("SELECT * FROM user LIMIT 10 OFFSET 20", $query->getSql());
+        $query = $this->db('member')->page(3);
+        $this->assertEquals("SELECT * FROM member LIMIT 10 OFFSET 20", $query->getSql());
 
         // Mixed limit and page
-        $query = $this->db('user')->limit(3)->page(3);
-        $this->assertEquals("SELECT * FROM user LIMIT 3 OFFSET 6", $query->getSql());
+        $query = $this->db('member')->limit(3)->page(3);
+        $this->assertEquals("SELECT * FROM member LIMIT 3 OFFSET 6", $query->getSql());
 
         // Group by
-        $query = $this->db('user')->groupBy('group_id');
-        $user = $query->find();
+        $query = $this->db('member')->groupBy('id, group_id');
+        $member = $query->find();
 
-        $this->assertEquals("SELECT * FROM user GROUP BY group_id LIMIT 1", $query->getSql());
-        $this->assertEquals('1', $user->group_id);
+        $this->assertEquals("SELECT * FROM member GROUP BY id, group_id LIMIT 1", $query->getSql());
+        $this->assertEquals('1', $member->group_id);
 
         // Having
-        $query = $this->db('user')->groupBy('group_id')->having('group_id >= ?', '1');
-        $user = $query->find();
+        $query = $this->db('member')->groupBy('id, group_id')->having('group_id >= ?', '1');
+        $member = $query->find();
 
-        $this->assertEquals("SELECT * FROM user GROUP BY group_id HAVING group_id >= ? LIMIT 1", $query->getSql());
-        $this->assertEquals('1', $user->group_id);
+        $this->assertEquals("SELECT * FROM member GROUP BY id, group_id HAVING group_id >= ? LIMIT 1", $query->getSql());
+        $this->assertEquals('1', $member->group_id);
 
         // Join
         $query = $this
-            ->db('user')
-            ->select('user.*, user_group.name AS group_name')
-            ->leftJoin('user_group', 'user_group.id = user.group_id');
-        $user = $query->find()->toArray();
+            ->db('member')
+            ->select('member.*, member_group.name AS group_name')
+            ->leftJoin('member_group', 'member_group.id = member.group_id');
+        $member = $query->find()->toArray();
 
-        $this->assertEquals("SELECT user.*, user_group.name AS group_name FROM user LEFT JOIN user_group ON user_group.id = user.group_id LIMIT 1", $query->getSql());
-        $this->assertArrayHasKey('group_name', $user);
+        $this->assertEquals("SELECT member.*, member_group.name AS group_name FROM member LEFT JOIN member_group ON member_group.id = member.group_id LIMIT 1", $query->getSql());
+        $this->assertArrayHasKey('group_name', $member);
 
         // Join with table alias
         $query = $this
-            ->db('user', 'u')
-            ->rightJoin('user_group g', 'g.id = u.group_id');
+            ->db('member', 'u')
+            ->rightJoin('member_group g', 'g.id = u.group_id');
 
-        $this->assertEquals("SELECT * FROM user u RIGHT JOIN user_group g ON g.id = u.group_id", $query->getSql());
+        $this->assertEquals("SELECT * FROM member u RIGHT JOIN member_group g ON g.id = u.group_id", $query->getSql());
 
         /*$query1 = $this
-            ->db('user')
+            ->db('member')
             ->groupBy('id')
             ->having('group_id >= ?', '1')
             ->where('id >= ?', '2');
 
         $query2 = $this
-            ->db('user')
+            ->db('member')
             ->groupBy('id')
             ->where('id >= ?', '2')
             ->having('group_id >= ?', '1');*/
@@ -529,65 +529,65 @@ class DbTest extends TestCase
     {
         $query = $this->db
             ->createQueryBuilder()
-            ->update('user')
+            ->update('member')
             ->set('name = ?')
             ->where('id = 1')
             ->setParameter(0, 'twin2');
         $result = $query->execute();
-        $user = $this->db->find('user', 1);
+        $member = $this->db->find('member', 1);
 
-        $this->assertEquals("UPDATE user SET name = ? WHERE id = 1", $query->getSql());
+        $this->assertEquals("UPDATE member SET name = ? WHERE id = 1", $query->getSql());
         $this->assertEquals(1, $result);
-        $this->assertEquals('twin2', $user->name);
+        $this->assertEquals('twin2', $member->name);
     }
 
         public function testBindValue()
     {
         // Not array parameter
-        $user = $this->db->fetch("SELECT * FROM user WHERE id = ?", 1, PDO::PARAM_INT);
+        $member = $this->db->fetch("SELECT * FROM member WHERE id = ?", 1, PDO::PARAM_INT);
 
-        $this->assertEquals('1', $user['id']);
+        $this->assertEquals('1', $member['id']);
 
         // Array parameter
-        $user = $this->db->fetch("SELECT * FROM user WHERE id = ?", array(1), array(PDO::PARAM_INT));
+        $member = $this->db->fetch("SELECT * FROM member WHERE id = ?", array(1), array(PDO::PARAM_INT));
 
-        $this->assertEquals('1', $user['id']);
+        $this->assertEquals('1', $member['id']);
 
-        $user = $this->db->fetch("SELECT * FROM user WHERE id = ? AND group_id = ?", array(1, 1), array(
+        $member = $this->db->fetch("SELECT * FROM member WHERE id = ? AND group_id = ?", array(1, 1), array(
             PDO::PARAM_INT // (no parameter type for second placeholder)
         ));
 
-        $this->assertEquals('1', $user['id']);
-        $this->assertEquals('1', $user['group_id']);
+        $this->assertEquals('1', $member['id']);
+        $this->assertEquals('1', $member['group_id']);
 
         // Name parameter
-        $user = $this->db->fetch("SELECT * FROM user WHERE id = :id", array(
+        $member = $this->db->fetch("SELECT * FROM member WHERE id = :id", array(
             'id' => 1
         ), array(
             'id' => PDO::PARAM_INT
         ));
 
-        $this->assertEquals('1', $user['id']);
+        $this->assertEquals('1', $member['id']);
 
         // Name parameter with colon
-        $user = $this->db->fetch("SELECT * FROM user WHERE id = :id", array(
+        $member = $this->db->fetch("SELECT * FROM member WHERE id = :id", array(
             'id' => 1
         ), array(
             ':id' => PDO::PARAM_INT
         ));
 
-        $this->assertEquals('1', $user['id']);
+        $this->assertEquals('1', $member['id']);
 
-        $user = $this->db->fetch("SELECT * FROM user WHERE id = :id", array(
+        $member = $this->db->fetch("SELECT * FROM member WHERE id = :id", array(
             'id' => '1'
         ));
 
-        $this->assertEquals('1', $user['id']);
+        $this->assertEquals('1', $member['id']);
     }
 
     public function testFetchColumn()
     {
-        $count = $this->db->fetchColumn("SELECT COUNT(id) FROM user");
+        $count = $this->db->fetchColumn("SELECT COUNT(id) FROM member");
         $this->assertEquals(2, $count);
     }
 
@@ -595,49 +595,49 @@ class DbTest extends TestCase
     {
         $this->db->setOption('recordNamespace', 'WidgetTest\DbTest');
 
-        $user = $this->db->find('user', 1);
+        $member = $this->db->find('member', 1);
 
-        $this->assertEquals('WidgetTest\DbTest\User', $this->db->getRecordClass('user'));
-        $this->assertInstanceOf('WidgetTest\DbTest\User', $user);
+        $this->assertEquals('WidgetTest\DbTest\Member', $this->db->getRecordClass('member'));
+        $this->assertInstanceOf('WidgetTest\DbTest\Member', $member);
     }
 
     public function testCustomRecordClass()
     {
         $this->db->setOption('recordClasses', array(
-            'user' => 'WidgetTest\DbTest\User'
+            'member' => 'WidgetTest\DbTest\Member'
         ));
 
-        $user = $this->db->find('user', 1);
+        $member = $this->db->find('member', 1);
 
-        $this->assertEquals('WidgetTest\DbTest\User', $this->db->getRecordClass('user'));
-        $this->assertInstanceOf('WidgetTest\DbTest\User', $user);
+        $this->assertEquals('WidgetTest\DbTest\Member', $this->db->getRecordClass('member'));
+        $this->assertInstanceOf('WidgetTest\DbTest\Member', $member);
     }
 
     public function testRecordToArray()
     {
-        $user = $this->db->find('user', 1)->toArray();
+        $member = $this->db->find('member', 1)->toArray();
 
-        $this->assertInternalType('array', $user);
-        $this->assertArrayHasKey('id', $user);
-        $this->assertArrayHasKey('group_id', $user);
-        $this->assertArrayHasKey('name', $user);
-        $this->assertArrayHasKey('address', $user);
+        $this->assertInternalType('array', $member);
+        $this->assertArrayHasKey('id', $member);
+        $this->assertArrayHasKey('group_id', $member);
+        $this->assertArrayHasKey('name', $member);
+        $this->assertArrayHasKey('address', $member);
 
-        $user = $this->db->find('user', 1)->toArray(array('id', 'group_id'));
-        $this->assertInternalType('array', $user);
-        $this->assertArrayHasKey('id', $user);
-        $this->assertArrayHasKey('group_id', $user);
-        $this->assertArrayNotHasKey('name', $user);
-        $this->assertArrayNotHasKey('address', $user);
+        $member = $this->db->find('member', 1)->toArray(array('id', 'group_id'));
+        $this->assertInternalType('array', $member);
+        $this->assertArrayHasKey('id', $member);
+        $this->assertArrayHasKey('group_id', $member);
+        $this->assertArrayNotHasKey('name', $member);
+        $this->assertArrayNotHasKey('address', $member);
 
 
         $this->db->setOption('recordClasses', array(
-            'user' => 'WidgetTest\DbTest\User'
+            'member' => 'WidgetTest\DbTest\Member'
         ));
 
-        $user = $this->db->find('user', 1);
-        $posts = $user->posts;
-        $data = $user->toArray();
+        $member = $this->db->find('member', 1);
+        $posts = $member->posts;
+        $data = $member->toArray();
 
         $this->assertInternalType('array', $data);
         $this->assertInternalType('array', $data['posts']);
@@ -646,57 +646,57 @@ class DbTest extends TestCase
 
     public function testDeleteRecord()
     {
-        $user = $this->db->find('user', 1);
+        $member = $this->db->find('member', 1);
 
-        $result = $user->delete();
+        $result = $member->delete();
 
         $this->assertTrue($result);
 
-        $user = $this->db->find('user', 1);
+        $member = $this->db->find('member', 1);
 
-        $this->assertFalse($user);
+        $this->assertFalse($member);
     }
 
     public function testGetTable()
     {
-        $user = $this->db->user('1');
+        $member = $this->db->member('1');
 
-        $this->assertEquals('user', $user->getTable());
+        $this->assertEquals('member', $member->getTable());
     }
 
     public function testColumnNotFound()
     {
-        $user = $this->db->user('1');
+        $member = $this->db->member('1');
 
         $this->setExpectedException('\InvalidArgumentException', 'Column or relation "notFound" not found in record class "Widget\Db\Record"');
 
-        $user->notFound;
+        $member->notFound;
     }
 
     public function testCollection()
     {
-        $users = $this->db->findAll('user');
+        $members = $this->db->findAll('member');
 
-        $this->assertInstanceOf('\Widget\Db\Collection', $users);
+        $this->assertInstanceOf('\Widget\Db\Collection', $members);
 
         // ToArray
-        $this->assertInternalType('array', $users->toArray());
+        $this->assertInternalType('array', $members->toArray());
 
         // Filter
-        $firstGroupUsers = $users->filter(function($user){
-            if ('1' == $user->group_id) {
+        $firstGroupmembers = $members->filter(function($member){
+            if ('1' == $member->group_id) {
                 return true;
             } else {
                 return false;
             }
         });
 
-        $this->assertEquals('1', $firstGroupUsers[0]->group_id);
-        $this->assertInstanceOf('\Widget\Db\Collection', $firstGroupUsers);
-        $this->assertNotSame($users, $firstGroupUsers);
+        $this->assertEquals('1', $firstGroupmembers[0]->group_id);
+        $this->assertInstanceOf('\Widget\Db\Collection', $firstGroupmembers);
+        $this->assertNotSame($members, $firstGroupmembers);
 
         // Reduce
-        $count = $users->reduce(function($count, $user){
+        $count = $members->reduce(function($count, $member){
             return ++$count;
         });
 
@@ -705,16 +705,16 @@ class DbTest extends TestCase
 
     public function testRecordUnset()
     {
-        $user = $this->db->user('1');
+        $member = $this->db->member('1');
 
-        $this->assertEquals('twin', $user->name);
-        $this->assertEquals('1', $user->group_id);
+        $this->assertEquals('twin', $member->name);
+        $this->assertEquals('1', $member->group_id);
 
-        unset($user->name);
-        $user->remove('group_id');
+        unset($member->name);
+        $member->remove('group_id');
 
-        $this->assertEquals(null, $user->name);
-        $this->assertEquals(null, $user->group_id);
+        $this->assertEquals(null, $member->name);
+        $this->assertEquals(null, $member->group_id);
     }
 
     public function testErrorCodeAndInfo()
@@ -740,7 +740,7 @@ class DbTest extends TestCase
             }
         ));
 
-        $this->db->find('user', 1);
+        $this->db->find('member', 1);
     }
 
     public function testBeforeAndAfterQueryForUpdate()
@@ -756,7 +756,7 @@ class DbTest extends TestCase
             }
         ));
 
-        $this->db->executeUpdate("UPDATE user SET name = 'twin2' WHERE id = 1");
+        $this->db->executeUpdate("UPDATE member SET name = 'twin2' WHERE id = 1");
     }
 
     public function testException()
@@ -768,26 +768,26 @@ class DbTest extends TestCase
 
     public function testUpdateWithoutParameters()
     {
-        $result = $this->db->executeUpdate("UPDATE user SET name = 'twin2' WHERE id = 1");
+        $result = $this->db->executeUpdate("UPDATE member SET name = 'twin2' WHERE id = 1");
 
         $this->assertEquals(1, $result);
     }
 
     public function testFindHelper()
     {
-        $user = $this->db->user->find('1');
+        $member = $this->db->member->find('1');
 
-        $this->assertEquals('1', $user->id);
+        $this->assertEquals('1', $member->id);
     }
 
     public function testCount()
     {
-        $count = $this->db('user')->count();
+        $count = $this->db('member')->count();
 
         $this->assertInternalType('int', $count);
         $this->assertEquals(2, $count);
 
-        $count = $this->db('user')->select('id, name')->limit(1)->offset(2)->count();
+        $count = $this->db('member')->select('id, name')->limit(1)->offset(2)->count();
 
         $this->assertInternalType('int', $count);
         $this->assertEquals(2, $count);
@@ -798,7 +798,7 @@ class DbTest extends TestCase
         $db = $this->db;
 
         $query = $db
-            ->from('user')
+            ->from('member')
             ->where('id = :id AND group_id = :groupId')
             ->setParameters(array(
                 'id' => 1,
@@ -807,7 +807,7 @@ class DbTest extends TestCase
                 PDO::PARAM_INT,
                 PDO::PARAM_INT
             ));
-        $user = $query->find();
+        $member = $query->find();
 
         $this->assertEquals(array(
             'id' => 1,
@@ -817,30 +817,30 @@ class DbTest extends TestCase
         $this->assertEquals(1, $query->getParameter('id'));
         $this->assertNull($query->getParameter('no'));
 
-        $this->assertEquals(1, $user->id);
-        $this->assertEquals(1, $user->group_id);
+        $this->assertEquals(1, $member->id);
+        $this->assertEquals(1, $member->group_id);
 
         // Set parameter
         $query->setParameter('id', 1, PDO::PARAM_STR);
-        $user = $query->find();
-        $this->assertEquals(1, $user->id);
+        $member = $query->find();
+        $this->assertEquals(1, $member->id);
 
         $query->setParameter('id', 10);
-        $user = $query->find();
-        $this->assertFalse($user);
+        $member = $query->find();
+        $this->assertFalse($member);
 
 
         $query = $this
-            ->db('user')
+            ->db('member')
             ->andWhere('id = ?', '1', PDO::PARAM_INT);
 
-        $user = $query->find();
-        $this->assertEquals('1', $user->id);
+        $member = $query->find();
+        $this->assertEquals('1', $member->id);
     }
 
     public function testGetAndResetAll()
     {
-        $query = $this->db('user')->offset(1)->limit(1);
+        $query = $this->db('member')->offset(1)->limit(1);
 
         $this->assertEquals(1, $query->get('offset'));
         $this->assertEquals(1, $query->get('limit'));
