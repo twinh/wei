@@ -20,8 +20,8 @@ $widget = widget(array(
         'alias' => array(
             'mysqlCache' => 'Widget\DbCache',
             'pgCache' => 'Widget\DbCache',
+            'mysqlDb' => 'Widget\Db',
             'pgsqlDb' => 'Widget\Db',
-            'mysqlDb' => 'Widget\Db'
         )
     ),
     'call' => array(
