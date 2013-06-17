@@ -399,11 +399,12 @@ class Db extends AbstractWidget
     /**
      * Returns the ID of the last inserted row or sequence value
      *
+     * @param string $name The name of postgresql sequence
      * @return string
      */
-    public function lastInsertId()
+    public function lastInsertId($name = null)
     {
-        return $this->pdo->lastInsertId();
+        return $this->pdo->lastInsertId($name);
     }
 
     /**

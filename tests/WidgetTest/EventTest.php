@@ -11,7 +11,19 @@ class EventTest extends TestCase
 
     protected $callback;
 
-    public function testGeter()
+    public function tearDown()
+    {
+        // TODO added api in event widget to unregister
+        // Update to null to avoid "Serialization of 'Closure' is not allowed" in phpunit
+        // when session widget test "@runInSeparateProcess"
+        $this->widget->setOption(array(
+            'construct' => null,
+            'constructed' => null
+        ));
+        parent::tearDown();
+    }
+
+    public function testGetter()
     {
         $that = $this;
         $event = $this->event;

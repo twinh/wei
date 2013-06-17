@@ -138,7 +138,8 @@ class Record extends AbstractWidget
             $result = $this->db->insert($this->table, $this->data);
             if ($result) {
                 $this->isNew = false;
-                $this->data[$this->primaryKey] = $this->db->lastInsertId();
+                $name = sprintf('%s_%s_seq', $this->table, $this->primaryKey);
+                $this->data[$this->primaryKey] = $this->db->lastInsertId($name);
             }
             return (bool)$result;
         // Update

@@ -151,7 +151,7 @@ class Error extends AbstractWidget
                 return;
             }
 
-            ob_end_clean();
+            ob_get_length() && ob_end_clean();
 
             // Reset the current working directory to make sure everything work as usual
             chdir($cwd);

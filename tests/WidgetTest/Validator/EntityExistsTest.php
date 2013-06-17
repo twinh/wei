@@ -9,17 +9,17 @@ class EntityExistsTest extends TestCase
     protected $inputTestOptions = array(
         'entityClass' => 'WidgetTest\Fixtures\UserEntity'
     );
-    
-    public static function setUpBeforeClass()
+
+    public function setUp()
     {
-        parent::setUpBeforeClass();
-        
         if (!class_exists(('\Doctrine\ORM\EntityManager'))) {
-            return;
+            $this->markTestSkipped('doctrine\orm is required');
         }
-        
-        $widget = \Widget\Widget::create();
-        
+
+        parent::setUp();
+
+        $widget = $this->widget;
+
         $widget->config('entityManager', array(
             'config' => array(
                 'proxyDir' => './',
@@ -28,17 +28,18 @@ class EntityExistsTest extends TestCase
                 'annotationDriverPaths' => array('./')
             )
         ));
-        
+
         /* @var $em \Doctrine\ORM\EntityManager */
         $em = $widget->entityManager();
 
         $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
 
         $metadata = $em->getClassMetadata('WidgetTest\Fixtures\UserEntity');
-        
+
         // Create table from User entity
+        $tool->dropSchema(array($metadata));
         $tool->createSchema(array($metadata));
-        
+
         // Insert some test data
         $user1 = new UserEntity();
         $user1->setName('twin');
@@ -49,43 +50,32 @@ class EntityExistsTest extends TestCase
         $user2->setName('test');
         $user2->setEmail('test@test.com');
         $em->persist($user2);
-        
+
         $em->flush();
     }
-    
-    public function setUp()
-    {
-        if (!class_exists(('\Doctrine\ORM\EntityManager'))) {
-            $this->markTestSkipped('doctrine\orm is required');
-        }
 
-        parent::setUp();        
-    }
-
-    public static function tearDownAfterClass()
+    public function tearDown()
     {
         if (!class_exists(('\Doctrine\ORM\EntityManager'))) {
             return;
         }
-        
-        $widget = \Widget\Widget::create();
-        
-        /* @var $em \Doctrine\ORM\EntityManager */
-        $em = $widget->entityManager();
-        
-        $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
-        $tool->dropDatabase();
 
-        parent::tearDownAfterClass();
+        /* @var $em \Doctrine\ORM\EntityManager */
+        /*$em = $this->entityManager();
+
+        $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+        $tool->dropDatabase();*/
+
+        parent::tearDown();
     }
-    
+
     public function testEntityExists()
     {
         $this->assertTrue($this->isEntityExists('1', 'WidgetTest\Fixtures\UserEntity'));
-        
+
         $this->assertTrue($this->isEntityExists('twin', 'WidgetTest\Fixtures\UserEntity', 'name'));
     }
-    
+
     public function testCriteria()
     {
         $entityExists = new \Widget\Validator\EntityExists(array(
@@ -96,7 +86,7 @@ class EntityExistsTest extends TestCase
                 'email' => 'twin@test.com'
             )
         ));
-        
+
         $this->assertNull($entityExists->getEntity());
         $this->assertTrue($entityExists());
         $this->assertInstanceOf('WidgetTest\Fixtures\UserEntity', $entityExists->getEntity());
