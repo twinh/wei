@@ -12,7 +12,6 @@ matrix:
 
 env:
   - DB=mysql
-  - DB=sqlite
   - DB=pgsql
 
 before_script:
