@@ -14,7 +14,7 @@ class SessionTest extends TestCase
         parent::setUp();
         $data = array();
         session_set_save_handler(
-            // open
+        // open
             function(){
                 return true;
             },
@@ -39,7 +39,7 @@ class SessionTest extends TestCase
             function(){
                 return true;
             }
-       );
+        );
     }
 
     protected function tearDown()
@@ -52,6 +52,11 @@ class SessionTest extends TestCase
         parent::tearDown();
     }
 
+    /**
+     * FIXME remove @runInSeparateProcess for travis-ci
+     *
+     * @runInSeparateProcess
+     */
     public function testSet()
     {
         $session = $this->object;
@@ -61,6 +66,9 @@ class SessionTest extends TestCase
         $this->assertEquals('test', $session->get('action'));
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testClear()
     {
         $session = $this->object;
@@ -72,6 +80,9 @@ class SessionTest extends TestCase
         $this->assertEquals(null, $session->get('action'));
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testDestroy()
     {
         $session = $this->object;
@@ -84,6 +95,7 @@ class SessionTest extends TestCase
     }
     /**
      * @dataProvider providerForGetterAndSetter
+     * @runInSeparateProcess
      */
     public function testValues($value, $key)
     {

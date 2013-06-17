@@ -22,7 +22,7 @@ namespace WidgetTest
             $this->assertInstanceOf('\Widget\Flush', $this->flush());
 
             $this->assertEquals('1', ini_get('implicit_flush'));
-            
+
             $this->assertEquals(0, ob_get_level());
         }
     }
