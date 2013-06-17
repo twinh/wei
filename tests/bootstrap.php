@@ -73,7 +73,7 @@ $widget = widget(array(
 // TODO remove me
 // Avoid output start error
 // /home/travis/.phpenv/versions/5.3.3/share/pyrus/.pear/php/PHPUnit/Util/Printer.php:172
-session_start();
+ob_start();
 
 // Travis configuration
 if (getenv('TRAVIS')) {
