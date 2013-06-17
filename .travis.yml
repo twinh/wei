@@ -6,10 +6,21 @@ php:
   - 5.4
   - 5.5
 
+matrix:
+  allow_failures:
+    - php: 5.5
+
+env:
+  - DB=mysql
+  - DB=sqlite
+  - DB=pgsql
+
 before_script:
   - php -m
   - wget http://getcomposer.org/composer.phar
   - php composer.phar install --dev --no-interaction
+  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE IF NOT EXISTS widget_tests;'; fi"
+  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'CREATE DATABASE widget_tests;' -U postgres; fi"
 
 script:
   - mkdir -p build/logs
@@ -17,7 +28,3 @@ script:
 
 after_script:
   - php vendor/bin/coveralls -v
-
-matrix:
-  allow_failures:
-    - php: 5.5

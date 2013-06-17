@@ -8,7 +8,8 @@ if (is_file($file = __DIR__ . '/../vendor/autoload.php')) {
     require dirname(__DIR__) . '/lib/Widget/Widget.php';
 }
 
-return widget(array(
+// Localhost configuration
+$widget = widget(array(
     'widget' => array(
         // Display all error message
         'debug' => true,
@@ -68,3 +69,10 @@ return widget(array(
         )
     )
 ));
+
+// Travis configuration
+if (getenv('TRAVIS')) {
+    widget(__DIR__ . '/config/travis.php');
+}
+
+return $widget;
