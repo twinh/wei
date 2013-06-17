@@ -9,7 +9,11 @@ class CouchbaseTest extends CacheTestCase
         if (!extension_loaded('couchbase') || !class_exists('\Couchbase')) {
             $this->markTestSkipped('The couchbase extension is not loaded');
         }
-        
-        parent::setUp();
+
+        @parent::setUp();
+
+        if ($error = error_get_last()) {
+            $this->markTestIncomplete($error['message']);
+        }
     }
 }

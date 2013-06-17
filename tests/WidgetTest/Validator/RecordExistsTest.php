@@ -8,15 +8,19 @@ class RecordExistsTest extends TestCase
         'table' => 'users'
     );
 
-    public static function setUpBeforeClass()
+    public function setUp()
     {
-        parent::setUpBeforeClass();
+        if (!class_exists(('\Doctrine\DBAL\DriverManager'))) {
+            $this->markTestSkipped('doctrine\dbal is required');
+        }
+
+        parent::setUp();
 
         if (!class_exists(('\Doctrine\DBAL\DriverManager'))) {
             return;
         }
 
-        $widget = \Widget\Widget::create();
+        $widget = $this->widget;
 
         /* @var $db \Doctrine\DBAL\Connection */
         $db = $widget->dbal();
@@ -32,31 +36,6 @@ class RecordExistsTest extends TestCase
             'name' => 'test',
             'address' => 'test'
         ));
-    }
-
-    public static function tearDownAfterClass()
-    {
-        if (!class_exists(('\Doctrine\DBAL\DriverManager'))) {
-            return;
-        }
-
-        $widget = \Widget\Widget::create();
-
-        try {
-            $widget->dbal()->query("DROP TABLE users");
-        } catch (\Doctrine\DBAL\DBALException $e) {
-            // ignore
-        }
-
-    }
-
-    public function setUp()
-    {
-        if (!class_exists(('\Doctrine\DBAL\DriverManager'))) {
-            $this->markTestSkipped('doctrine\dbal is required');
-        }
-
-        parent::setUp();
     }
 
     /**
@@ -97,5 +76,19 @@ class RecordExistsTest extends TestCase
             array('test2', 'name'),
             array('test2', 'address')
         );
+    }
+
+    public function getInputs()
+    {
+        // DBAL-522
+        // Check if older than 2.4.0
+        if (1 === \Doctrine\DBAL\Version::compare('2.4.0')) {
+            $inputs = parent::getInputs();
+            $key = array_search(null, $inputs, true);
+            unset($inputs[$key]);
+            return $inputs;
+        } else {
+            return parent::getInputs();
+        }
     }
 }

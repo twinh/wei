@@ -10,7 +10,11 @@ class MongoCacheTest extends CacheTestCase
             $this->markTestSkipped('The mongo extension is not loaded');
         }
 
-        parent::setUp();
+        try {
+            parent::setUp();
+        } catch (\MongoConnectionException $e) {
+            $this->markTestIncomplete($e->getMessage());
+        }
     }
 
     public function testGetSetObject()
