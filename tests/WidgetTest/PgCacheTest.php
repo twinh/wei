@@ -12,7 +12,11 @@ class PgCacheTest extends CacheTestCase
         }
 
         parent::setUp();
-        
-        $this->object = $this->widget->pgCache;
+
+        try {
+            $this->object = $this->widget->pgCache;
+        } catch (\PDOException $e) {
+            $this->markTestSkipped($e->getMessage());
+        }
     }
 }
