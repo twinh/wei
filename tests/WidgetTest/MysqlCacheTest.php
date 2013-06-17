@@ -13,6 +13,11 @@ class MysqlCacheTest extends CacheTestCase
 
         parent::setUp();
 
-        $this->object = $this->widget->mysqlCache;
+        // TODO better way
+        try {
+            $this->object = $this->widget->mysqlCache;
+        } catch (\PDOException $e) {
+            $this->markTestSkipped($e->getMessage());
+        }
     }
 }
