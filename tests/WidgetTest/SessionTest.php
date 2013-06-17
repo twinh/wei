@@ -52,11 +52,6 @@ class SessionTest extends TestCase
         parent::tearDown();
     }
 
-    /**
-     * FIXME remove @runInSeparateProcess for travis-ci
-     *
-     * @runInSeparateProcess
-     */
     public function testSet()
     {
         $session = $this->object;
@@ -66,9 +61,6 @@ class SessionTest extends TestCase
         $this->assertEquals('test', $session->get('action'));
     }
 
-    /**
-     * @runInSeparateProcess
-     */
     public function testClear()
     {
         $session = $this->object;
@@ -80,9 +72,6 @@ class SessionTest extends TestCase
         $this->assertEquals(null, $session->get('action'));
     }
 
-    /**
-     * @runInSeparateProcess
-     */
     public function testDestroy()
     {
         $session = $this->object;
@@ -95,7 +84,6 @@ class SessionTest extends TestCase
     }
     /**
      * @dataProvider providerForGetterAndSetter
-     * @runInSeparateProcess
      */
     public function testValues($value, $key)
     {
