@@ -9,10 +9,11 @@ class SessionTest extends TestCase
      */
     protected $object;
 
-    protected function setUp()
+    /*protected function setUp()
     {
         // TODO
         $this->markTestSkipped('Skipped for fixed db test bugs');
+        return;
 
         parent::setUp();
         $data = array();
@@ -43,9 +44,9 @@ class SessionTest extends TestCase
                 return true;
             }
        );
-    }
+    }*/
 
-    protected function tearDown()
+    /*protected function tearDown()
     {
         // FIXME why sometime $this->obejct is NULL
         if ($this->object) {
@@ -53,26 +54,26 @@ class SessionTest extends TestCase
         }
 
         parent::tearDown();
-    }
+    }*/
 
     /**
      * FIXME remove @runInSeparateProcess for travis-ci
      *
      * @runInSeparateProcess
      */
-    public function testSet()
+    /*public function testSet()
     {
         $session = $this->object;
 
         $session->set('action', 'test');
 
         $this->assertEquals('test', $session->get('action'));
-    }
+    }*/
 
     /**
      * @runInSeparateProcess
      */
-    public function testClear()
+    /*public function testClear()
     {
         $session = $this->object;
 
@@ -81,12 +82,12 @@ class SessionTest extends TestCase
         $session->clear();
 
         $this->assertEquals(null, $session->get('action'));
-    }
+    }*/
 
     /**
      * @runInSeparateProcess
      */
-    public function testDestroy()
+    /*public function testDestroy()
     {
         $session = $this->object;
 
@@ -95,19 +96,20 @@ class SessionTest extends TestCase
         $session->destroy();
 
         $this->assertEquals(null, $session->get('action'));
-    }
+    }*/
+
     /**
      * @dataProvider providerForGetterAndSetter
      * @runInSeparateProcess
      */
-    public function testValues($value, $key)
+    /*public function testValues($value, $key)
     {
         $this->session($key, $value);
         $this->assertEquals($value, $this->session($key));
 
         $this->session->set($key, $value);
         $this->assertEquals($value, $this->session->get($key));
-    }
+    }*/
 
     public function providerForGetterAndSetter()
     {
