@@ -12,7 +12,7 @@ class MysqlCacheTest extends CacheTestCase
         }
 
         parent::setUp();
-        
+
         $this->object = $this->widget->mysqlCache;
     }
 }
