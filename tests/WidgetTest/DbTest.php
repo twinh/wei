@@ -17,11 +17,8 @@ class DbTest extends TestCase
 
         $db = $this->db;
 
-        $db->query("CREATE TABLE user_group (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE user (id INTEGER NOT NULL, group_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE post (id INTEGER NOT NULL, user_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE tag (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE post_tag (post_id INTEGER NOT NULL, tag_id INTEGER NOT NULL)");
+        $this->dropTable();
+        $this->createTable();
 
         $db->insert('user_group', array(
             'id' => '1',
@@ -74,6 +71,26 @@ class DbTest extends TestCase
             'post_id' => '2',
             'tag_id' => '1',
         ));
+    }
+
+    protected function createTable()
+    {
+        $db = $this->db;
+        $db->query("CREATE TABLE user_group (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
+        $db->query("CREATE TABLE user (id INTEGER NOT NULL, group_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
+        $db->query("CREATE TABLE post (id INTEGER NOT NULL, user_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
+        $db->query("CREATE TABLE tag (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
+        $db->query("CREATE TABLE post_tag (post_id INTEGER NOT NULL, tag_id INTEGER NOT NULL)");
+    }
+
+    protected function dropTable()
+    {
+        $db = $this->db;
+        $db->query('DROP TABLE IF EXISTS user_group');
+        $db->query('DROP TABLE IF EXISTS user');
+        $db->query('DROP TABLE IF EXISTS post');
+        $db->query('DROP TABLE IF EXISTS tag');
+        $db->query('DROP TABLE IF EXISTS post_tag');
     }
 
     public function testIsConnected()
@@ -215,6 +232,7 @@ class DbTest extends TestCase
 
         // Existing user
         $user = $db->user('1');
+        $user->address = 'address';
         $result = $user->save();
 
         $this->assertTrue($result);
@@ -233,6 +251,7 @@ class DbTest extends TestCase
         $this->assertEquals('save', $user->name);
 
         // Save again
+        $user->address = 'address3';
         $result = $user->save();
         $this->assertTrue($result);
         $this->assertEquals('3', $user->id);

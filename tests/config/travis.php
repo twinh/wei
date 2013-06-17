@@ -1,6 +1,11 @@
 <?php
 
 return array(
+    'mysqlDb' => array(
+        'user'      => 'root',
+        'password'  => '123456',
+        'dsn'       => 'mysql:host=127.0.0.1;port=3306;dbname=widget_tests;charset=utf8'
+    ),
     'dbal.mysqlCache' => array(
         'driver'    => 'pdo_mysql',
         'host'      => '127.0.0.1',

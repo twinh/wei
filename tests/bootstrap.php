@@ -19,7 +19,9 @@ $widget = widget(array(
         ),
         'alias' => array(
             'mysqlCache' => 'Widget\DbCache',
-            'pgCache' => 'Widget\DbCache'
+            'pgCache' => 'Widget\DbCache',
+            'pgsqlDb' => 'Widget\Db',
+            'mysqlDb' => 'Widget\Db'
         )
     ),
     'call' => array(
@@ -28,6 +30,16 @@ $widget = widget(array(
     ),
     'db' => array(
         'dsn' => 'sqlite::memory:'
+    ),
+    'mysqlDb' => array(
+        'user'      => 'root',
+        'password'  => '123456',
+        'dsn'       => 'mysql:host=127.0.0.1;port=3306;dbname=widget;charset=utf8'
+    ),
+    'pgsqlDb' => array(
+        'user'      => 'postgres',
+        'password'  => '123456',
+        'dsn'       => 'pgsql:host=127.0.0.1;port=5432;dbname=postgres'
     ),
     // Doctrine DBAL widget configuration
     'dbal' => array(
