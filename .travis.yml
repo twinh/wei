@@ -26,5 +26,5 @@ script:
   - mkdir -p build/logs
   - phpunit --verbose --coverage-clover build/logs/clover.xml
 
-#after_script:
-#  - php vendor/bin/coveralls -v
+after_script:
+  - php vendor/bin/coveralls -v --exclude-no-stmt
