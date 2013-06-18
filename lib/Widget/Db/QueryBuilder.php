@@ -63,7 +63,7 @@ class QueryBuilder
      */
     protected $sqlParts = array(
         'select'  => array(),
-        'from'    => array(),
+        'from'    => null,
         'join'    => array(),
         'set'     => array(),
         'where'   => null,
@@ -78,6 +78,13 @@ class QueryBuilder
      * @var string The complete SQL string for this query.
      */
     protected $sql;
+
+    /**
+     * The main table in SQL query
+     *
+     * @var string
+     */
+    protected $table;
 
     /**
      * @var array The query parameters.
@@ -140,6 +147,14 @@ class QueryBuilder
     }
 
     /**
+     * Returns the table name in query
+     */
+    public function getTable()
+    {
+        return $this->table;
+    }
+
+    /**
      * Execute this query using the bound parameters and their types
      *
      * @return mixed
@@ -163,7 +178,7 @@ class QueryBuilder
         $data = $this->fetch();
 
         if ($data) {
-            return $this->db->create($this->sqlParts['from']['table'], $data);
+            return $this->db->create($this->table, $data);
         } else  {
             return false;
         }
@@ -178,11 +193,9 @@ class QueryBuilder
     {
         $data = $this->execute();
 
-        $table = $this->sqlParts['from']['table'];
-
         $records = array();
         foreach ($data as $row) {
-            $records[] = $this->db->create($table, $row);
+            $records[] = $this->db->create($this->table, $row);
         }
 
         return new Collection($records);
@@ -483,15 +496,14 @@ class QueryBuilder
      * </code>
      *
      * @param string $table The table whose rows are subject to the deletion.
-     * @param string $alias The table alias used in the constructed query.
      * @return QueryBuilder This QueryBuilder instance.
      */
-    public function delete($table = null, $alias = null)
+    public function delete($table = null)
     {
         $this->type = self::DELETE;
 
         if ($table) {
-            return $this->from($table, $alias);
+            return $this->from($table);
         } else {
             return $this;
         }
@@ -508,41 +520,48 @@ class QueryBuilder
      *         ->where('u.id = ?');
      * </code>
      *
-     * @param string $table The table whose rows are subject to the update.
-     * @param string $alias The table alias used in the constructed query.
-     * @return QueryBuilder This QueryBuilder instance.
+     * @param string $table The table whose rows are subject to the update
+     * @return QueryBuilder This QueryBuilder instance
      */
-    public function update($table = null, $alias = null)
+    public function update($table = null)
     {
         $this->type = self::UPDATE;
 
         if ($table) {
-            return $this->from($table, $alias);
+            return $this->from($table);
         } else {
             return $this;
         }
     }
 
     /**
-     * Create and add a query root corresponding to the table identified by the
-     * given alias, forming a cartesian product with any existing query roots.
+     * Sets table for FROM query
      *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->select('u.id')
-     *         ->from('users', 'u')
-     * </code>
+     * ```php
+     * // SELECT * FROM users
+     * $qb = $db->createQueryBuilder()
+     *     ->select('*')
+     *     ->from('users');
+     *
+     * // SELECT * FROM users u
+     * $qb = $qb->createQueryBuilder()
+     *     ->select('*')
+     *     ->from('users u');
+     * ```
      *
      * @param string $from   The table
-     * @param string $alias  The alias of the table
      * @return QueryBuilder This QueryBuilder instance.
      */
-    public function from($from, $alias = null)
+    public function from($from)
     {
-        return $this->add('from', array(
-            'table' => $from,
-            'alias' => $alias
-        ));
+        $pos = strpos($from, ' ');
+        if (false !== $pos) {
+            $this->table = substr($from, 0, $pos);
+        } else {
+            $this->table = $from;
+        }
+
+        return $this->add('from', $from);
     }
 
     /**
@@ -670,7 +689,7 @@ class QueryBuilder
      * $qb = $db->createQueryBuilder()
      *     ->from('user')
      *     ->where(array(
-     *          'id' => array('1', '2', '3'
+     *          'id' => array('1', '2', '3')
      *     ));
      * ```
      *
@@ -919,7 +938,7 @@ class QueryBuilder
     /**
      * Converts this instance into an SELECT string in SQL
      *
-     * @throws \RuntimeException When table alias not registered
+     * @param bool $count
      * @return string
      */
     protected function getSqlForSelect($count = false)
@@ -930,10 +949,7 @@ class QueryBuilder
             $parts['select'] = array('*');
         }
 
-        $query = 'SELECT ' . implode(', ', $parts['select']) . ' FROM ';
-
-        // FROM
-        $query .= $parts['from']['table'] . ($parts['from']['alias'] ? ' ' . $parts['from']['alias'] : '');
+        $query = 'SELECT ' . implode(', ', $parts['select']) . ' FROM ' . $parts['from'];
 
         // JOIN
         foreach ($parts['join'] as $join) {
@@ -976,8 +992,7 @@ class QueryBuilder
      */
     protected function getSqlForUpdate()
     {
-        $table = $this->sqlParts['from']['table'] . ($this->sqlParts['from']['alias'] ? ' ' . $this->sqlParts['from']['alias'] : '');
-        $query = 'UPDATE ' . $table
+        $query = 'UPDATE ' . $this->sqlParts['from']
             . ' SET ' . implode(", ", $this->sqlParts['set'])
             . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '');
 
@@ -991,8 +1006,7 @@ class QueryBuilder
      */
     protected function getSqlForDelete()
     {
-        $table = $this->sqlParts['from']['table'] . ($this->sqlParts['from']['alias'] ? ' ' . $this->sqlParts['from']['alias'] : '');
-        $query = 'DELETE FROM ' . $table . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '');
+        $query = 'DELETE FROM ' . $this->sqlParts['from'] . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '');
 
         return $query;
     }

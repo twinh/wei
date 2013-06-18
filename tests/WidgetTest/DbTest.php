@@ -507,7 +507,7 @@ class DbTest extends TestCase
 
         // Join with table alias
         $query = $this
-            ->db('member', 'u')
+            ->db('member u')
             ->rightJoin('member_group g', 'g.id = u.group_id');
 
         $this->assertEquals("SELECT * FROM member u RIGHT JOIN member_group g ON g.id = u.group_id", $query->getSql());
@@ -841,5 +841,20 @@ class DbTest extends TestCase
 
         $this->assertEquals(null, $query->get('offset'));
         $this->assertEquals(null, $query->get('limit'));
+    }
+
+    public function testGetTableFromQueryBuilder()
+    {
+        $qb = $this->db('member');
+        $this->assertEquals('member', $qb->getTable());
+
+        $qb->from('member m');
+        $this->assertEquals('member', $qb->getTable());
+
+        $qb->from('member m');
+        $this->assertEquals('member', $qb->getTable());
+
+        $qb->from('member AS m');
+        $this->assertEquals('member', $qb->getTable());
     }
 }

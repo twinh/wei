@@ -24,7 +24,7 @@ class QueryTest extends TestCase
         $qb = new QueryBuilder($this->db);
 
         $qb->select('u.id')
-            ->from('users', 'u');
+            ->from('users u');
 
         $this->assertEquals('SELECT u.id FROM users u', (string) $qb);
     }
@@ -34,7 +34,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.id')
-            ->from('users', 'u')
+            ->from('users u')
             ->where('u.nickname = ?', '1');
 
         $this->assertEquals("SELECT u.id FROM users u WHERE u.nickname = ?", (string) $qb);
@@ -45,7 +45,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->leftJoin('phones p', 'p.user_id = u.id');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u LEFT JOIN phones p ON p.user_id = u.id', $qb->getSql());
@@ -56,7 +56,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->Join('phones p', 'p.user_id = u.id');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u INNER JOIN phones p ON p.user_id = u.id', (string) $qb);
@@ -67,7 +67,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->innerJoin('phones p', 'p.user_id = u.id');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u INNER JOIN phones p ON p.user_id = u.id', (string) $qb);
@@ -78,7 +78,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->rightJoin('phones p', 'p.user_id = u.id');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u RIGHT JOIN phones p ON p.user_id = u.id', (string) $qb);
@@ -89,7 +89,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->where('u.username = ?')
             ->andWhere('u.name = ?');
 
@@ -101,7 +101,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->where('u.username = ?')
             ->orWhere('u.name = ?');
 
@@ -113,7 +113,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->orWhere('u.username = ?')
             ->orWhere('u.name = ?');
 
@@ -125,7 +125,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->where('u.username = ?')
             ->andWhere('u.username = ?')
             ->orWhere('u.name = ?')
@@ -139,7 +139,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->groupBy('u.id');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id', (string) $qb);
@@ -151,7 +151,7 @@ class QueryTest extends TestCase
 
         $qb->select('u.*', 'p.*')
             ->groupBy(array())
-            ->from('users', 'u');
+            ->from('users u');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u', (string) $qb);
     }
@@ -162,7 +162,7 @@ class QueryTest extends TestCase
 
         $qb->select('u.*', 'p.*')
             ->addGroupBy(array())
-            ->from('users', 'u');
+            ->from('users u');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u', (string) $qb);
     }
@@ -172,7 +172,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->groupBy('u.id')
             ->addGroupBy('u.foo');
 
@@ -184,7 +184,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->groupBy('u.id')
             ->addGroupBy('u.foo', 'u.bar');
 
@@ -196,7 +196,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->groupBy('u.id')
             ->having('u.name = ?');
 
@@ -208,7 +208,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->groupBy('u.id')
             ->andHaving('u.name = ?');
 
@@ -220,7 +220,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->groupBy('u.id')
             ->having('u.name = ?')
             ->andHaving('u.username = ?');
@@ -233,7 +233,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->groupBy('u.id')
             ->having('u.name = ?')
             ->orHaving('u.username = ?');
@@ -246,7 +246,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->groupBy('u.id')
             ->orHaving('u.name = ?')
             ->orHaving('u.username = ?');
@@ -259,7 +259,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->groupBy('u.id')
             ->having('u.name = ?')
             ->orHaving('u.username = ?')
@@ -273,7 +273,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->orderBy('u.name');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u ORDER BY u.name ASC', (string) $qb);
@@ -284,7 +284,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->orderBy('u.name')
             ->addOrderBy('u.username', 'DESC');
 
@@ -296,7 +296,7 @@ class QueryTest extends TestCase
         $qb   = new QueryBuilder($this->db);
 
         $qb->select('u.*', 'p.*')
-            ->from('users', 'u')
+            ->from('users u')
             ->addOrderBy('u.name')
             ->addOrderBy('u.username', 'DESC');
 
@@ -318,7 +318,7 @@ class QueryTest extends TestCase
 
         $qb->select('u.*')
             ->addSelect('p.*')
-            ->from('users', 'u');
+            ->from('users u');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u', (string) $qb);
     }
@@ -335,7 +335,7 @@ class QueryTest extends TestCase
     public function testUpdate()
     {
         $qb   = new QueryBuilder($this->db);
-        $qb->update('users', 'u')
+        $qb->update('users u')
             ->set('u.foo = ?')
             ->set('u.bar = ?');
 
@@ -356,7 +356,7 @@ class QueryTest extends TestCase
     public function testUpdateWhere()
     {
         $qb   = new QueryBuilder($this->db);
-        $qb->update('users', 'u')
+        $qb->update('users u')
             ->set('u.foo = ?')
             ->where('u.foo = ?');
 
@@ -375,7 +375,7 @@ class QueryTest extends TestCase
     public function testDelete()
     {
         $qb   = new QueryBuilder($this->db);
-        $qb->delete('users', 'u');
+        $qb->delete('users u');
 
         $this->assertEquals(QueryBuilder::DELETE, $qb->getType());
         $this->assertEquals('DELETE FROM users u', (string) $qb);
@@ -393,7 +393,7 @@ class QueryTest extends TestCase
     public function testDeleteWhere()
     {
         $qb   = new QueryBuilder($this->db);
-        $qb->delete('users', 'u')
+        $qb->delete('users u')
             ->where('u.foo = ?');
 
         $this->assertEquals('DELETE FROM users u WHERE u.foo = ?', (string) $qb);
@@ -420,7 +420,7 @@ class QueryTest extends TestCase
 
         $this->assertEquals(QueryBuilder::STATE_CLEAN, $qb->getState());
 
-        $qb->select('u.*')->from('users', 'u');
+        $qb->select('u.*')->from('users u');
 
         $this->assertEquals(QueryBuilder::STATE_DIRTY, $qb->getState());
 
@@ -452,7 +452,7 @@ class QueryTest extends TestCase
     {
         $qb   = new QueryBuilder($this->db);
 
-        $qb->select('u.*')->from('users', 'u')->where('u.name = ?');
+        $qb->select('u.*')->from('users u')->where('u.name = ?');
 
         $this->assertEquals('SELECT u.* FROM users u WHERE u.name = ?', (string)$qb);
         $qb->reset('where');
@@ -463,7 +463,7 @@ class QueryTest extends TestCase
     {
         $qb   = new QueryBuilder($this->db);
 
-        $qb->select('u.*')->from('users', 'u')->where('u.name = ?')->orderBy('u.name');
+        $qb->select('u.*')->from('users u')->where('u.name = ?')->orderBy('u.name');
 
         $this->assertEquals('SELECT u.* FROM users u WHERE u.name = ? ORDER BY u.name ASC', (string)$qb);
         $qb->resetAll(array('where', 'orderBy'));
