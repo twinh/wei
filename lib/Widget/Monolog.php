@@ -47,7 +47,7 @@ class Monolog extends AbstractWidget
     /**
      * The Monolog logger object
      *
-     * @var Monolog\Logger
+     * @var \Monolog\Logger
      */
     protected $logger;
 
@@ -64,7 +64,7 @@ class Monolog extends AbstractWidget
         // Create a logger channel
         $logger = $this->logger = new MonologLogger($this->name);
 
-        // Add hanlders
+        // Add handlers
         foreach ($this->handlers as $name => $parameters) {
             switch (true) {
                 case is_array($parameters) :
@@ -85,8 +85,10 @@ class Monolog extends AbstractWidget
     /**
      * Get monolog logger object or add a log record
      *
+     * @param string $level The log level
      * @param string $message The log message
-     * @return \Monolog\Logger|boolen Returns Logger obejct when $message is null, otherwise returns log result
+     * @param array $context
+     * @return \Monolog\Logger|bool Returns Logger object when $message is null, otherwise returns log result
      */
     public function __invoke($level = null, $message = null, array $context = array())
     {
