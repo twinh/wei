@@ -13,7 +13,7 @@ class MongoCacheTest extends CacheTestCase
         try {
             parent::setUp();
         } catch (\MongoConnectionException $e) {
-            $this->markTestIncomplete($e->getMessage());
+            $this->markTestSkipped($e->getMessage());
         }
     }
 

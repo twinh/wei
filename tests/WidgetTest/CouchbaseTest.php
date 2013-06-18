@@ -13,7 +13,7 @@ class CouchbaseTest extends CacheTestCase
         @parent::setUp();
 
         if ($error = error_get_last()) {
-            $this->markTestIncomplete($error['message']);
+            $this->markTestSkipped($error['message']);
         }
     }
 }
