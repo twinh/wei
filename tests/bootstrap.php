@@ -8,8 +8,7 @@ if (is_file($file = __DIR__ . '/../vendor/autoload.php')) {
     require dirname(__DIR__) . '/lib/Widget/Widget.php';
 }
 
-// Localhost configuration
-$widget = widget(array(
+return widget(array(
     'widget' => array(
         // Display all error message
         'debug' => true,
@@ -19,9 +18,7 @@ $widget = widget(array(
         ),
         'alias' => array(
             'mysqlCache' => 'Widget\DbCache',
-            'pgCache' => 'Widget\DbCache',
-            'mysqlDb' => 'Widget\Db',
-            'pgsqlDb' => 'Widget\Db',
+            'pgCache' => 'Widget\DbCache'
         )
     ),
     'call' => array(
@@ -30,16 +27,6 @@ $widget = widget(array(
     ),
     'db' => array(
         'dsn' => 'sqlite::memory:'
-    ),
-    'mysqlDb' => array(
-        'user'      => 'root',
-        'password'  => '123456',
-        'dsn'       => 'mysql:host=127.0.0.1;port=3306;dbname=widget;charset=utf8'
-    ),
-    'pgsqlDb' => array(
-        'user'      => 'postgres',
-        'password'  => '123456',
-        'dsn'       => 'pgsql:host=127.0.0.1;port=5432;dbname=postgres'
     ),
     // Doctrine DBAL widget configuration
     'dbal' => array(
@@ -81,13 +68,3 @@ $widget = widget(array(
         )
     )
 ));
-
-// Travis configuration
-if (getenv('TRAVIS')) {
-    widget(__DIR__ . '/config/travis.php');
-// CircleCi configuration
-} elseif (getenv('CIRCLECI')) {
-    widget(__DIR__ . '/config/circleci.php');
-}
-
-return $widget;
