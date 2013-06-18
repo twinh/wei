@@ -511,18 +511,6 @@ class DbTest extends TestCase
             ->rightJoin('member_group g', 'g.id = u.group_id');
 
         $this->assertEquals("SELECT * FROM member u RIGHT JOIN member_group g ON g.id = u.group_id", $query->getSql());
-
-        /*$query1 = $this
-            ->db('member')
-            ->groupBy('id')
-            ->having('group_id >= ?', '1')
-            ->where('id >= ?', '2');
-
-        $query2 = $this
-            ->db('member')
-            ->groupBy('id')
-            ->where('id >= ?', '2')
-            ->having('group_id >= ?', '1');*/
     }
 
     public function testQueryUpdate()

@@ -6,7 +6,7 @@ QueryBuilder是一个简单的SQL查询构建器.
 案例
 ----
 
-###  从文章表里查询id为1且用户名为twin的用户
+###  从用户表里查询id为`1`且用户名为`twin`的用户
 ```php
 $member = widget()->db('member')
     ->select('id, username')
@@ -32,27 +32,24 @@ $qb = widget()->db('member');
 ```php
 $qb = widget()->db('member')->where("name = 'twin'");
 
-$member = $qb->find();
-
 // 执行SQL: SELECT * FROM member WHERE name = 'twin' LIMIT 1
+$member = $qb->find();
 ```
 
-### 通过问号占位符(`?`)构造查询条件
+### 通过问号占位符`?`构造查询条件
 ```php
 $qb = widget()->db('member')->where('name = ?', 'twin');
 
-$member = $qb->find();
-
 // 执行SQL: SELECT * FROM member WHERE name = ? LIMIT 1
+$member = $qb->find();
 ```
 
-### 通过多个问号占位符(`?`)构造查询条件
+### 通过多个问号占位符`?`构造查询条件
 ```php
 $qb = widget()->db('member')>where('group_id = ? AND name = ?', array('1', 'twin'));
 
-$member = $qb->find();
-
 // 执行SQL: SELECT * FROM member WHERE group_id = ? AND name = ?  LIMIT 1
+$member = $qb->find();
 ```
 
 ### 通过冒号占位符`:`构造查询条件
@@ -63,18 +60,16 @@ $qb = widget()->db('member')
             'name' => 'twin'
         ));
 
-$member = $qb->find();
-
 // 执行SQL: SELECT * FROM member WHERE group_id = :groupId AND name = :name
+$member = $qb->find();
 ```
 
 ### 构造范围查询
 ```php
 $qb = widget()->db('member')->where('group_id BETWEEN ? AND ?', array('1', '2'));
 
-$member = $qb->find();
-
 // 执行SQL: SELECT * FROM member WHERE group_id BETWEEN ? AND ?
+$member = $qb->find();
 ```
 
 ### 构造IN查询
@@ -85,9 +80,8 @@ $qb = widget()->db('member')
             'group_id' => array('1', '2')
         ));
 
-$member = $qb->find();
-
 // 执行SQL: SELECT * FROM member WHERE id = ? AND group_id IN (?, ?) LIMIT 1
+$member = $qb->find();
 ```
 
 ### 构造ORDER BY语句
@@ -126,7 +120,7 @@ $member = $query->find();
 // 执行SQL: SELECT id, group_id FROM member LIMIT 1
 ```
 
-### 设置LIMIT和OFFSET语句
+### 构造LIMIT和OFFSET语句
 ```php
 $qb = widget()->db('member')->limit(2);
 
@@ -144,9 +138,49 @@ $qb = widget()->db('member')->limit(3)->page(3);
 echo $qb->getSql();
 ```
 
-### 区分find和findAll
+### 构造Group语句
+```php
+$qb = widget()->db('member')->groupBy('id, group_id');
 
+// 生成SQL: SELECT * FROM member GROUP BY id, group_id
+echo $qb->groupBy();
+```
+
+### 构造Having语句
+```php
+$qb = widget()->db('member')->groupBy('id, group_id')->having('group_id >= ?', '1');
+
+// 生成SQL: SELECT * FROM member GROUP BY id, group_id HAVING group_id >= ?
+echo $qb->getSql();
+```
+
+### 构造JOIN语句
+```php
+$qb = widget()->db('member')
+        ->select('member.*, member_group.name AS group_name')
+        ->leftJoin('member_group', 'member_group.id = member.group_id');
+
+// 生成SQL: SELECT member.*, member_group.name AS group_name FROM member LEFT JOIN member_group ON member_group.id = member.group_id
+echo $qb->getSql();
+```
+
+### 重置已有的查询条件
+```php
+$qb = widget()->db('member')->where('id = 1')->orderBy('id', 'DESC');
+
+// 生成SQL: SELECT * FROM member WHERE id = 1 ORDER BY id DESC
+echo $qb->getSql();
+
+$qb->reset('where');
+
+// 生成SQL: SELECT * FROM member ORDER BY id DESC
+echo $qb->getSql();
+```
+
+### 区分find,findAll,fetch,fetchAll
+```php
     TODO
+```
 
 调用方式
 --------
