@@ -146,7 +146,8 @@ class Memcache extends AbstractCache
         if (false === $this->object->increment($key, $offset)) {
             return $this->object->set($key, $offset) ? $offset : false;
         }
-        return $this->object->get($key);
+        // Convert to int for memcache extension version < 3.0.3
+        return (int)$this->object->get($key);
     }
 
     /**
@@ -171,7 +172,7 @@ class Memcache extends AbstractCache
      * Set memcache object
      *
      * @param null|\Memcache $object
-     * @return Memcache
+     * @return \Memcache
      */
     public function setObject(\Memcache $object = null)
     {
