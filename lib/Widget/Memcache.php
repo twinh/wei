@@ -157,7 +157,7 @@ class Memcache extends AbstractCache
     /**
      * Increment/Decrement an item
      *
-     * Compatible method for memcache < 3.0.3 that do not support
+     * Compatible method for memcache < 3.0.3 that does not support
      * negative number as $offset parameter
      *
      * @param string $key The name of item
