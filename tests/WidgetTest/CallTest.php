@@ -23,9 +23,8 @@ class CallTest extends TestCase
 
         $this->url = $this->call->getOption('url');
 
-        // TODO how to test in cli
         if (false === @fopen($this->url, 'r')) {
-            $this->markTestSkipped(sprintf('Url %s is not available', $this->url));
+            $this->markTestSkipped(sprintf('URL %s is not available', $this->url));
         }
 
         $this->call->setOption('error', function($call, $type, $e){
@@ -422,7 +421,7 @@ class CallTest extends TestCase
     /**
      * @dataProvider providerForGetMethods
      */
-    public function testGet($method)
+    public function testGet2($method)
     {
         $test = $this;
         $this->call(array(
@@ -442,13 +441,14 @@ class CallTest extends TestCase
 
     public function providerForGetMethods()
     {
-        return array(
-            array('GET'),
-            ///array('HEAD'), no content
-            //array('TRACE'), Method Not Allowed
-            array('OPTIONS'),
-            // array('CONNECT'), Bad Request
-            array('CUSTOM')
+        // The result is depend on the server configuration
+        return array(             // Apache               PHP 5.4 cli web server
+            array('GET'),         // OK                   OK
+            //array('HEAD'),      // No content           200 But no content
+            //array('TRACE'),     // Method Not Allowed   OK
+            array('OPTIONS'),     // OK                   OK
+            //array('CONNECT'),   // Bad                  Request Invalid request (Malformed HTTP request)
+            //array('CUSTOM')     // OK                   Invalid request (Malformed HTTP request)
         );
     }
 

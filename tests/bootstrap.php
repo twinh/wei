@@ -25,7 +25,7 @@ $widget = widget(array(
         )
     ),
     'call' => array(
-        'url' => 'http://127.0.0.1:8000/call.php',
+        'url' => 'http://localhost:8000/call.php',
         'ip' => '127.0.0.1' // set ip for WidgetTest\CallTest\::testIp
     ),
     'db' => array(
