@@ -42,7 +42,7 @@ class Apc extends AbstractCache
      */
     public function set($key, $value, $expire = 0)
     {
-        return apc_store($key, $value, $expire);
+        return $expire >= 0 ? apc_store($key, $value, $expire) : apc_delete($key);
     }
 
     /**
