@@ -448,7 +448,7 @@ class CallTest extends TestCase
             //array('TRACE'),     // Method Not Allowed   OK
             array('OPTIONS'),     // OK                   OK
             //array('CONNECT'),   // Bad                  Request Invalid request (Malformed HTTP request)
-            //array('CUSTOM')     // OK                   Invalid request (Malformed HTTP request)
+            //array('CUSTOM')     // OK                   Request Invalid request (Malformed HTTP request)
         );
     }
 

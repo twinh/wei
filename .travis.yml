@@ -25,7 +25,7 @@ before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS widget_tests;'
   - psql -c 'CREATE DATABASE widget_tests;' -U postgres
   - mkdir -p build/logs
-  - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -gt 3 ]; then php -S localhost:8000 -t tests/WidgetTest/Fixtures/; fi;' > /dev/null &
+  - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -gt 3 ]; then php -S 0.0.0.0:8000 -t tests/WidgetTest/Fixtures/; fi;' > /dev/null &
 
 script:
   - phpunit --verbose --coverage-clover build/logs/clover.xml
