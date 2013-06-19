@@ -1,11 +1,6 @@
 <?php
 
 return array(
-    'redis' => array(
-        'options' => array(
-            Redis::OPT_SERIALIZER => Redis::SERIALIZER_PHP
-        )
-    ),
     'mysqlDb' => array(
         'user'      => 'travis',
         'password'  => '',
