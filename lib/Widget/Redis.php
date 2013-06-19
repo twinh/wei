@@ -58,7 +58,7 @@ class Redis extends AbstractCache
      * @var array
      */
     protected $options = array(
-        \Redis::OPT_SERIALIZER => \Redis::SERIALIZER_IGBINARY
+        \Redis::OPT_SERIALIZER => \Redis::SERIALIZER_PHP
     );
 
     /**
