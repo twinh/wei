@@ -10,10 +10,6 @@ matrix:
   allow_failures:
     - php: 5.5
 
-env:
-  - DB=mysql
-  - DB=pgsql
-
 services:
   - mongodb
 
@@ -23,9 +19,8 @@ before_script:
   - php -i
   - wget http://getcomposer.org/composer.phar
   - php composer.phar install --prefer-source --no-interaction
-  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE IF NOT EXISTS widget_tests;'; fi"
-  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'DROP DATABASE IF EXISTS widget_tests;' -U postgres; fi"
-  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'CREATE DATABASE widget_tests;' -U postgres; fi"
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS widget_tests;'
+  - psql -c 'CREATE DATABASE widget_tests;' -U postgres
   - mkdir -p build/logs
 
 script:
