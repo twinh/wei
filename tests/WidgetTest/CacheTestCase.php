@@ -56,12 +56,10 @@ class CacheTestCase extends TestCase
         // Increase from not exists key
         $this->assertSame(2, $cache->increment($key, 2));
 
-        // Increase from exists key and the offset is 3
-        $result = $cache->increment($key, 3);
+        echo phpversion('memcache') . "\n";
 
-        echo gettype($result) . "\n";
-        var_dump($result);
-        $this->assertSame(5, $result);
+        // Increase from exists key and the offset is 3
+        $this->assertSame(5, $cache->increment($key, 3));
 
         $this->assertSame(3, $cache->decrement($key, 2));
 

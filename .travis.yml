@@ -15,7 +15,6 @@ env:
   - DB=pgsql
 
 services:
-  - memcache
   - mongodb
 
 before_script:
