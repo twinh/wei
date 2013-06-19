@@ -14,17 +14,22 @@ env:
   - DB=mysql
   - DB=pgsql
 
+services:
+  - memcache
+  - mongodb
+
 before_script:
   - phpenv config-add tests/config/php.ini
   - php -m
+  - php -i
   - wget http://getcomposer.org/composer.phar
   - php composer.phar install --prefer-source --no-interaction
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE IF NOT EXISTS widget_tests;'; fi"
   - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'DROP DATABASE IF EXISTS widget_tests;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'CREATE DATABASE widget_tests;' -U postgres; fi"
+  - mkdir -p build/logs
 
 script:
-  - mkdir -p build/logs
   - phpunit --verbose --coverage-clover build/logs/clover.xml
 
 after_script:
