@@ -148,7 +148,7 @@ class Memcached extends AbstractCache
      */
     public function increment($key, $offset = 1)
     {
-        return $this->incdec($key, $offset, $offset > 0);
+        return $this->incDec($key, $offset, $offset > 0);
     }
 
     /**
@@ -156,7 +156,7 @@ class Memcached extends AbstractCache
       */
     public function decrement($key, $offset = 1)
     {
-        return $this->incdec($key, $offset, $offset < 0);
+        return $this->incDec($key, $offset, $offset < 0);
     }
 
     /**
@@ -164,12 +164,13 @@ class Memcached extends AbstractCache
      *
      * Memcached do not allow negative number as $offset parameter
      *
-     * @link   https://github.com/php-memcached-dev/php-memcached/blob/master/php_memcached.c#L1746
-     * @param  string    $key    The name of item
-     * @param  int       $offset The value to be increased/decreased
+     * @link https://github.com/php-memcached-dev/php-memcached/blob/master/php_memcached.c#L1746
+     * @param string $key The name of item
+     * @param int $offset The value to be increased/decreased
+     * @param bool $inc The operation is increase or decrease
      * @return int|false Returns the new value on success, or false on failure
      */
-    protected function incdec($key, $offset, $inc = true)
+    protected function incDec($key, $offset, $inc = true)
     {
         $method = $inc ? 'increment' : 'decrement';
         $offset = abs($offset);

@@ -143,7 +143,34 @@ class Memcache extends AbstractCache
      */
     public function increment($key, $offset = 1)
     {
-        if (false === $this->object->increment($key, $offset)) {
+        return $this->incDec($key, $offset, $offset > 0);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function decrement($key, $offset = 1)
+    {
+        return $this->incDec($key, $offset, $offset < 0);
+    }
+
+    /**
+     * Increment/Decrement an item
+     *
+     * Compatible method for memcache < 3.0.3 that do not support
+     * negative number as $offset parameter
+     *
+     * @param string $key The name of item
+     * @param int $offset The value to be increased/decreased
+     * @param bool $inc The operation is increase or decrease
+     * @return int|false Returns the new value on success, or false on failure
+     */
+    protected function incDec($key, $offset, $inc = true)
+    {
+        $method = $inc ? 'increment' : 'decrement';
+        $offset = abs($offset);
+        // IMPORTANT: memcache may return 0 in some 3.0.x beta version
+        if (false === $this->object->$method($key, $offset)) {
             return $this->object->set($key, $offset) ? $offset : false;
         }
         // Convert to int for memcache extension version < 3.0.3
