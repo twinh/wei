@@ -31,4 +31,5 @@ script:
   - phpunit --verbose --coverage-clover build/logs/clover.xml
 
 after_script:
+  - pkill php
   - php vendor/bin/coveralls -v --exclude-no-stmt
