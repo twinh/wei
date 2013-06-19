@@ -57,7 +57,10 @@ class CacheTestCase extends TestCase
         $this->assertSame(2, $cache->increment($key, 2));
 
         // Increase from exists key and the offset is 3
-        $this->assertSame(5, $cache->increment($key, 3));
+        $result = $cache->increment($key, 3);
+
+        $this->assertInternalType('int', $result);
+        $this->assertSame(5, $result);
 
         $this->assertSame(3, $cache->decrement($key, 2));
 
