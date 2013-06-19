@@ -15,6 +15,7 @@ env:
   - DB=pgsql
 
 before_script:
+  - phpenv config-add tests/config/php.ini
   - php -m
   - wget http://getcomposer.org/composer.phar
   - php composer.phar install --prefer-source --no-interaction
