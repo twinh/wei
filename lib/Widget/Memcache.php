@@ -43,7 +43,7 @@ class Memcache extends AbstractCache
      *
      * @var int
      */
-    protected $flag = 2;
+    protected $flag = 0;
 
     /**
      * Constructor
