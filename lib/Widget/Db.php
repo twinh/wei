@@ -283,6 +283,19 @@ class Db extends AbstractWidget
     }
 
     /**
+     * Returns the rows number of table search by specified parameters
+     *
+     * @param string $table
+     * @param array $params
+     * @return int
+     */
+    public function count($table, $params = false)
+    {
+        $data = $this->selectAll($table, $params, 'COUNT(1)');
+        return $data ? current($data[0]) : 0;
+    }
+
+    /**
      * Executes a query and returns the first array result
      *
      * @param string $sql The SQL query
@@ -290,7 +303,7 @@ class Db extends AbstractWidget
      * @param array $types The parameter types to bind
      * @return array|false Return an array or false when no result found
      */
-    public function fetch($sql, $params = array(), $types = array())
+    public function fetch($sql, $params = false, $types = array())
     {
         return $this->query($sql, $params, $types)->fetch();
     }

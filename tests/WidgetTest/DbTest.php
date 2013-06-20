@@ -264,7 +264,7 @@ class DbTest extends TestCase
         $this->assertEquals('twin', $data['name']);
     }
 
-    public function testSelectColumn()
+    public function testSelectWithColumn()
     {
         $data = $this->db->select('member', 1, 'id, name');
 
@@ -856,5 +856,22 @@ class DbTest extends TestCase
 
         $qb->from('member AS m');
         $this->assertEquals('member', $qb->getTable());
+    }
+
+    public function testDbCount()
+    {
+        $db = $this->db;
+
+        $count = $db->count('member');
+        $this->assertEquals(2, $count);
+
+        $count = $db->count('member', array('id' => '1'));
+        $this->assertEquals(1, $count);
+
+        $count = $db->count('member', array('id' => '1'));
+        $this->assertEquals(1, $count);
+
+        $count = $db->count('member', array('id' => '123'));
+        $this->assertEquals(0, $count);
     }
 }
