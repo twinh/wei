@@ -213,7 +213,8 @@ class Widget extends AbstractWidget
         $class = strtr($class, array('_' => DIRECTORY_SEPARATOR, '\\' => DIRECTORY_SEPARATOR)) . '.php';
 
         foreach ($this->autoloadMap as $prefix => $dir) {
-            if (0 === strpos($class, $prefix)) {
+            // Allow empty class prefix
+            if (!$prefix || 0 === strpos($class, $prefix)) {
                 if (file_exists($file = $dir . $class)) {
                     require_once $file;
                     return true;

@@ -15,7 +15,8 @@ $widget = widget(array(
         'debug' => true,
         // Set up autoload for WidgetTest namespace
         'autoloadMap' => array(
-            'WidgetTest' => __DIR__
+            'WidgetTest' => __DIR__,
+            '' => __DIR__ . '/fallback',
         ),
         'alias' => array(
             'mysqlCache' => 'Widget\DbCache',
