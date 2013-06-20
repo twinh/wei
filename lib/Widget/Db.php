@@ -246,15 +246,15 @@ class Db extends AbstractWidget
      * Executes a SELECT query and return the first result
      *
      * @param string $table The name of table
-     * @param string|array $where The primary key value or an associative array containing column-value pairs
+     * @param string|array $conditions The primary key value or an associative array containing column-value pairs
      * @param string $select The table columns to select
      * @internal param array|string $value The criteria to search record
      * @internal param string $column The table column to search
      * @return array An associative array containing column-value pairs
      */
-    public function select($table, $where, $select = '*')
+    public function select($table, $conditions, $select = '*')
     {
-        $data = $this->selectAll($table, $where, $select, 1);
+        $data = $this->selectAll($table, $conditions, $select, 1);
         return $data ? $data[0] : false;
     }
 
@@ -262,28 +262,22 @@ class Db extends AbstractWidget
      * Executes a SELECT query and return all results
      *
      * @param string $table The name of table
-     * @param bool $where The primary key value or an associative array containing column-value pairs
+     * @param bool $conditions The primary key value or an associative array containing column-value pairs
      * @param string $select The table columns to select
      * @param int $limit The record number to retrieve
      * @return array
      */
-    public function selectAll($table, $where = false, $select = '*', $limit = null)
+    public function selectAll($table, $conditions = false, $select = '*', $limit = null)
     {
         $params = array();
         $query = "SELECT $select FROM " . $this->getTable($table) . ' ';
 
-        if (is_array($where)) {
-            // Associative array
-            if (1) {
-                $query .= "WHERE " . implode(' = ? AND ', array_keys($where)) . ' = ?';
-                $params = array_values($where);
-                // Indexed array
-            } else {
-
-            }
-        } elseif ($where !== false) {
+        if (is_array($conditions)) {
+            $query .= "WHERE " . implode(' = ? AND ', array_keys($conditions)) . ' = ?';
+            $params = array_values($conditions);
+        } elseif ($conditions !== false) {
             $query .= "WHERE id = :field";
-            $params = array('field' => $where);
+            $params = array('field' => $conditions);
         }
 
         if ($limit) {
