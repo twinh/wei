@@ -874,4 +874,15 @@ class DbTest extends TestCase
         $count = $db->count('member', array('id' => '123'));
         $this->assertEquals(0, $count);
     }
+
+    public function testTablePrefix()
+    {
+        $db = $this->db;
+
+        $db->setOption('tablePrefix', 'tbl_');
+        $this->assertEquals('tbl_member', $db->getTable('member'));
+
+        $db->setOption('tablePrefix', 'post_');
+        $this->assertEquals(3, $db->count('tag'));
+    }
 }

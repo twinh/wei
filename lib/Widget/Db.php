@@ -124,6 +124,13 @@ class Db extends AbstractWidget
     protected $recordNamespace;
 
     /**
+     * The prefix of table name
+     *
+     * @var string
+     */
+    protected $tablePrefix;
+
+    /**
      * Create a new instance of a SQL query builder with specified table and alias
      *
      * @param string $table The name of database table
@@ -190,6 +197,7 @@ class Db extends AbstractWidget
      */
     public function insert($table, array $data)
     {
+        $table = $this->getTable($table);
         $field = implode(', ', array_keys($data));
         $placeholder = implode(', ', array_pad(array(), count($data), '?'));
 
@@ -208,6 +216,7 @@ class Db extends AbstractWidget
      */
     public function update($table, array $data, array $identifier)
     {
+        $table = $this->getTable($table);
         $set = implode(' = ?, ', array_keys($data)) . ' = ?';
         $where = implode(' = ? AND ', array_keys($identifier)) . ' = ?';
 
@@ -226,6 +235,8 @@ class Db extends AbstractWidget
      */
     public function delete($table, $identifier)
     {
+        $table = $this->getTable($table);
+
         $query = "DELETE FROM $table WHERE " . implode(' = ? AND ', array_keys($identifier)) . ' = ?';
 
         return $this->executeUpdate($query, array_values($identifier));
@@ -259,7 +270,7 @@ class Db extends AbstractWidget
     public function selectAll($table, $where = false, $select = '*', $limit = null)
     {
         $params = array();
-        $query = "SELECT $select FROM $table ";
+        $query = "SELECT $select FROM " . $this->getTable($table) . ' ';
 
         if (is_array($where)) {
             // Associative array
@@ -478,7 +489,7 @@ class Db extends AbstractWidget
         return new $class(array(
             'widget'    => $this->widget,
             'db'        => $this,
-            'table'     => $table,
+            'table'     => $this->getTable($table),
             'isNew'     => $isNew,
             'data'      => $data,
         ));
@@ -601,6 +612,17 @@ class Db extends AbstractWidget
         }
 
         return $this->recordClass;
+    }
+
+    /**
+     * Returns the full table name with prefix
+     *
+     * @param string $table
+     * @return string
+     */
+    public function getTable($table)
+    {
+        return $this->tablePrefix . $table;
     }
 
     /**
