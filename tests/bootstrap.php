@@ -82,12 +82,11 @@ $widget = widget(array(
     )
 ));
 
-// Travis configuration
-if (getenv('TRAVIS')) {
-    widget(__DIR__ . '/config/travis.php');
-// CircleCi configuration
-} elseif (getenv('CIRCLECI')) {
-    widget(__DIR__ . '/config/circleci.php');
+// Load configuration for CI
+foreach (array('TRAVIS', 'CIRCLECI', 'CODESHIP') as $ci) {
+    if (getenv($ci)) {
+        widget(__DIR__ . '/config/' . strtolower($ci) . '.php');
+    }
 }
 
 return $widget;
