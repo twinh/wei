@@ -37,6 +37,12 @@ API 参考目录
 * [cache](cache.md) - 通用缓存
 * [bicache](bicache.md) - 二级缓存
 
+#### 数据库
+* [db](db.md) - 数据库操作微件,支持基本的增删查改(CRUD)和流行的Active Record模式等数据库操作
+* [queryBuilder](queryBuilder.md) - 简洁高效的SQL查询构建器
+* [dbal](dbal.md) - 获取[Doctrine DBAL](https://github.com/doctrine/dbal)的Connection对象
+* [entityManager](entityManager.md) - 获取[Doctrine ORM](https://github.com/doctrine/doctrine2)的EntityManager对象
+
 #### 验证器
 * [validate](validate.md) - 检查数组或对象中每一个元素是否能通过指定规则的验证(类似[jQuery Validation](http://bassistance.de/jquery-plugins/jquery-plugin-validation/)插件)
 * [is](is.md) - 验证管理器,用于检查数据是否能通过指定规则,或指定回调结构的验证
@@ -122,10 +128,6 @@ API 参考目录
 * [smarty](smarty.md) - 渲染smarty模板
 * [twig](twig.md) - 渲染Twig模板
 * [view](view.md) - 渲染指定名称的模板
-
-#### 数据库
-* [dbal](dbal.md) - 获取[Doctrine DBAL](https://github.com/doctrine/dbal)的Connection对象
-* [entityManager](entityManager.md) - 获取[Doctrine ORM](https://github.com/doctrine/doctrine2)的EntityManager对象
 
 #### 事件
 * [event](event.md) - 事件管理器,支持绑定,触发,移除事件和命名空间等特性.
