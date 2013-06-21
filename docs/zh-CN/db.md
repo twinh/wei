@@ -1,9 +1,8 @@
 Db
 ==
 
-数据库操作
-
-目前支持`mysql`, `sqlite` 和 `pgsql`.
+基于PDO的数据库操作微件,支持基本的增删查改(CRUD)和流行的Active Record模式的数据库操作.
+目前支持`mysql`, `sqlite` 和 `pgsql`数据库.
 
 案例
 ----
@@ -11,26 +10,26 @@ Db
 ### 增删查改(CRUD)操作
 ```php
 // 插入数据
-$widget->db->insert('user', array(
+widget()->db->insert('user', array(
     'username' => 'twin',
     'createdAt' => date('Y-m-d H:i:s') 
 ));
 
 // 更新数据
-$widget->db->update(
+widget()->db->update(
     'user', 
     array('username' => 'twin'), 
     array('id' => '1')
 );
 
 // 删除数据
-$widget->db->delete('user', array('id' => '1'));
+widget()->db->delete('user', array('id' => '1'));
 
 // 查找id为1的用户
-$widget->db->select('user', 1);
+widget()->db->select('user', 1);
 
 // 查找所有分组编号为1的用户
-$widget->db->selectAll('user', array('groupId' => '1'));
+widget()->db->selectAll('user', array('groupId' => '1'));
 ```
 
 ### Active Record模式
@@ -42,10 +41,10 @@ Active Record模式是将数据表的每一行映射为一个对象,数据表的
 ```php
 // 创建一个新的用户记录对象
 /* @var $user \Widget\Db\Record */
-$user = $widget->db->user;
+$user = widget()->db->user;
 
 // 或是通过`create`方法创建
-$user = $widegt->db->create('user', array('groupId' => 1));
+$user = widget()->db->create('user', array('groupId' => 1));
 
 // 设置对象的值
 $user->username = 'twin';
@@ -55,13 +54,13 @@ $user->createdAt = date('Y-m-d H:i:s');
 $user->save();
 ```
 
-#### 更新对象数据
+#### 查找并更新对象数据
 ```php
 // 查找主键为1的用户
-$user = $widget->db->find('user', '1');
+$user = widget()->db->find('user', '1');
 
 // 或是通过魔术方法更自然的获取对象
-$user = $widget->db->user(1);
+$user = widget()->db->user(1);
 
 // 更新对象的值
 $user->username = 'twin';
@@ -73,7 +72,7 @@ $user->save();
 #### 删除对象
 ```php
 // 查找主键为1的用户
-$user = $widget->db->user(1);
+$user = widget()->db->user(1);
 
 // 删除该记录
 $user->delete();
