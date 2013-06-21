@@ -32,6 +32,8 @@ widgets = [
     'request', 'cookie', 'post', 'query', 'server', 'session', 'ua', 'upload',
   # response-section
     'response', 'download', 'flush', 'header', 'json', 'redirect',
+  # database
+    'db', 'queryBuilder', 'dbal', 'entityManager',
   'call',
   'cache-section',
     'cache', 'apc', 'arrayCache', 'bicache', 'couchbase', 'dbCache', 'fileCache', 'memcache', 'memcached', 'mongoCache', 'redis',
@@ -51,8 +53,6 @@ widgets = [
     'view', 'escape', 'smarty', 'twig',
   # event-section
     'event',
-  # database
-    'db', 'entityManager',
   # error
     'error', 'phpError',
   # util
