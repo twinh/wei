@@ -3,7 +3,7 @@ Db
 
 基于PDO的数据库操作微件,支持基本的增删查改(CRUD)和流行的Active Record模式的数据库操作.
 
-目前支持`mysql`, `sqlite` 和 `pgsql`数据库.
+目前支持`MySQL`,`SQLite`和`PostgreSQL`数据库.
 
 案例
 ----
@@ -79,6 +79,38 @@ $user = widget()->db->user(1);
 $user->delete();
 ```
 
+### 区分`fetch`,`select`和`find`
+
+在db微件,`fetch`,`select`和`find`方法都是用于查询数据库数据,他们共同的特征是只返回第一行数据,不同点在于:
+
+* `fetch`方法的第一个参数是完整的SQL语句,返回的是数组
+* `select`方法的第一个参数是数据表名称,返回的是数组
+* `find`方法的第一个参数也是数据表名称,但返回的是`Widget\Db\Record`对象
+
+另外,如果要查询多条数据,对应的方法是`fetchAll`,`selectAll`和`findAll`.
+
+```php
+$db = widget()->db;
+
+// 根据SQL语句查询一行记录,返回一个一维数组
+$array = $db->fetch("SELECT * FROM user WHERE id = 1");
+
+// 根据表名和条件查询一行记录,返回一个一维数组
+$array = $db->select('user', 1);
+
+// 根据表名和条件查询一行记录,返回一个一维数组
+$record = $db->find('user', 1);
+
+// 根据SQL语句查询多行记录,返回一个二维数组
+$array = $db->fetchAll("SELECT * FROM user WHERE groupId = 1");
+
+// 根据表名和条件查询多行记录,返回一个二维数组
+$array = $db->select('user');
+
+// 根据表名和条件查询多行记录,返回一个`Widget\Db\Collection`对象
+$collection = $db->find('user');
+```
+
 调用方式
 --------
 
@@ -106,35 +138,80 @@ PostgreSQL | pgsql:host=localhost;port=5432;dbname=testdb              | http://
 
 ### 方法
 
-#### db
-获取数据库查询对象
+#### db($table)
+根据数据表名称,创建一个新Query Builder对象
 
 #### db->insert($table, $data = array())
 向指定的数据表插入一条数据
 
-返回: int 受影响的行数
+**返回:** `int` 受影响的行数
 
-参数
+**参数**
 
 名称   | 类型   | 说明
 -------|--------|------
 $table | string | 要插入的数据表名称
 $data  | array  | 要插入的数据,数组的键名是数据表的字段名称,值是字段的值
 
-#### db->lastInsertId()
-获取最后插入数据表的编号
+#### db->lastInsertId($sequence = null)
+获取最后插入数据表的自增编号
 
-#### db->update($table, $data = array(), $identifier = array())
+**返回:** `string`
+
+**参数**
+
+名称      | 类型   | 说明
+----------|--------|------
+$sequence | string | 序列名称,数据库驱动为`PostgreSQL`时才需要提供该参数
+
+#### db->update($table, $data = array(), $conditions = array())
 根据条件更新数据表数据
 
-#### db->delete($table, $identifier = array())
+**返回:** `int` 受影响的行数
+
+**参数**
+
+名称        | 类型   | 说明
+------------|--------|------
+$table      | string | 要更新的数据表名称
+$data       | array  | 要更新的数据
+$conditions | array  | 更新语句的查询条件
+
+#### db->delete($table, $conditions = array())
 根据条件删除数据表数据
 
-#### db->select($table, $where)
+**返回:** `int` 受影响的行数
+
+**参数**
+
+名称        | 类型   | 说明
+------------|--------|------
+$table      | string | 要删除的数据表名称
+$conditions | array  | 删除语句的查询条件
+
+#### db->select($table, $conditions = array())
 根据条件查找数据表的一条记录
+
+**返回:** `array`|`false` 如果记录存在,返回记录数组,不存在返回`false`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$table      | string       | 要查找的数据表名称
+$conditions | string,array | 查询条件,如果类型是字符串,表示主键的值,如果是数组,键名表示数据表字段,值表示字段的值
 
 #### db->selectAll($table, $where = false)
 根据条件查找数据表的所有匹配记录
+
+**返回:** `array`|`false` 如果记录存在,返回二维记录数组,不存在返回`false`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$table      | string       | 要查找的数据表名称
+$conditions | string,array | 查询条件,如果类型是字符串,表示主键的值,如果是数组,键名表示数据表字段,值表示字段的值
 
 #### db->fetch($sql, $params = array())
 执行一条SQL语句并返回第一条记录,主要用于SELECT的SQL语句
