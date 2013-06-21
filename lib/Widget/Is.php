@@ -32,13 +32,13 @@ class Is extends AbstractWidget
      * @var array
      */
     protected $rules = array(
-        'All', 'AllOf', 'Alnum', 'Alpha', 'Blank', 'Callback', 'Chinese',
-        'Color', 'CreditCard', 'Date', 'DateTime', 'Decimal', 'Digit', 'Dir',
-        'DivisibleBy', 'DoubleByte', 'Email', 'EndsWith', 'EntityExists',
-        'Equals', 'Exists', 'File', 'IdCardCn', 'IdCardHk', 'IdCardMo',
-        'IdCardTw', 'Image', 'In', 'Ip', 'Length', 'Lowercase', 'Max',
-        'MaxLength', 'Min', 'MinLength', 'MobileCn', 'NoneOf', 'Null', 'Number',
-        'OneOf', 'PhoneCn', 'PlateNumberCn', 'Postcode', 'QQ', 'Range',
+        'All', 'AllOf', 'Alnum', 'Alpha', 'Between', 'Blank', 'Callback',
+        'Chinese', 'Color', 'CreditCard', 'Date', 'DateTime', 'Decimal',
+        'Digit', 'Dir', 'DivisibleBy', 'DoubleByte', 'Email', 'EndsWith',
+        'EntityExists', 'Equals', 'Exists', 'File', 'IdCardCn', 'IdCardHk',
+        'IdCardMo', 'IdCardTw', 'Image', 'In', 'Ip', 'Length', 'Lowercase',
+        'Max', 'MaxLength', 'Min', 'MinLength', 'MobileCn', 'NoneOf', 'Null',
+        'Number', 'OneOf', 'PhoneCn', 'PlateNumberCn', 'Postcode', 'QQ',
         'RecordExists', 'Regex', 'Required', 'SomeOf', 'StartsWith', 'Time',
         'Tld', 'Type', 'Uppercase', 'Url', 'Uuid'
     );

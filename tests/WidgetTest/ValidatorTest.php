@@ -44,7 +44,7 @@ class ValidatorTest extends TestCase
                 ),
                 'age' => array(
                     'digit' => true,
-                    'range' => array(
+                    'between' => array(
                         'min' => 1,
                         'max' => 150
                     )
@@ -152,7 +152,7 @@ class ValidatorTest extends TestCase
                 ),
                 // Will not valid
                 'age' => array(
-                    'range' => array(0, 150)
+                    'between' => array(0, 150)
                 ),
             ),
             'fieldValid' => function($event, $widget, $field, $validator) use(&$lastField) {
@@ -193,7 +193,7 @@ class ValidatorTest extends TestCase
             ),
             'rules' => array(
                 'age' => array(
-                    'range' => array(
+                    'between' => array(
                         'min' => 20,
                         'max' => 30,
                     )
@@ -212,14 +212,14 @@ class ValidatorTest extends TestCase
 
         $this->assertEquals(array('required', 'email'), $validator->getValidRules('email'));
 
-        $this->assertEquals(array('range'), $validator->getInvalidRules('age'));
+        $this->assertEquals(array('between'), $validator->getInvalidRules('age'));
 
-        $this->assertEquals(array('range'), array_keys($validator->getRules('age')));
+        $this->assertEquals(array('between'), array_keys($validator->getRules('age')));
 
         $this->assertEquals(array(
             'min' => 20,
             'max' => 30
-        ), $validator->getRuleParams('age', 'range'));
+        ), $validator->getRuleParams('age', 'between'));
 
         $this->assertEmpty($validator->getRuleParams('age', 'noThisRule'));
 

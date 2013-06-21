@@ -69,12 +69,12 @@ API 参考目录
 * [isUppercase](isUppercase.md) - 检查数据是否为大写
 
 长度大小
+* [isBetween](isBetween.md) - 检查数据是否在指定的两个值之间
 * [isLength](isLength.md) - 检查数据是否为指定的长度,或在指定的长度范围内
 * [isMax](isMax.md) - 检查数据是否小于等于指定的值
 * [isMaxLength](isMaxLength.md) - 检查数据是否小于等于指定长度
 * [isMin](isMin.md) - 检查数据是否大于等于指定的值
 * [isMinLength](isMinLength.md) - 检查数据是否大于等于指定长度
-* [isRange](isRange.md) - 检查数据是否在指定的两个值之间
 
 日期和时间
 * [isDate](isDate.md) - 检查数据是否为合法的日期
