@@ -289,13 +289,37 @@ $data       | array        | 初始化的数据
 #### db->findOrCreate($table, $id, $data = array())
 根据条件查找数据表的一条记录,如果记录不存在,将根据`$data`创建一条新的数据表记录对象
 
+**返回:** `Widget\Db\Record` 记录对象
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$table      | string       | 记录的数据表名称
+$id         | string       | 主键的值
+$data       | array        | 初始化的数据
+
 #### db->executeUpdate($sql, $params = array())
 执行一条SQL语句,并返回影响的行数,主要用于INSERT/UPDATE/DELETE操作的SQL语句
+
+**返回:** `int` 受影响的行数
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$sql        | string       | 要执行的SQL语句
+$params     | array        | 绑定到SQL的参数
 
 #### db->query($sql, $params = array())
 执行一条SQL语句,并返回`PDOStatement`对象
 
 **返回:** `PDOStatement`
+
+名称        | 类型         | 说明
+------------|--------------|------
+$sql        | string       | 要执行的SQL语句
+$params     | array        | 绑定到SQL的参数
 
 #### db->errorCode()
 获取PDO错误代号
