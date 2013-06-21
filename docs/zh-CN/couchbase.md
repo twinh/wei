@@ -9,17 +9,17 @@ Couchbase
 ### 设置和获取缓存
 ```php
 // 设置缓存
-$widget->couchbase('key', 'value');
+widget()->couchbase('key', 'value');
 // 返回 true
 
 // 获取缓存
-$widget->couchbase('key');
+widget()->couchbase('key');
 // 返回 value
 ```
 
 ### 设置60秒后就过期的缓存
 ```php
-$widget->couchbase('key', 'value', 60);
+widget()->couchbase('key', 'value', 60);
 ```
 
 调用方式

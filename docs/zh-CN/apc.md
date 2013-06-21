@@ -9,17 +9,17 @@ Apc
 ### 设置和获取缓存
 ```php
 // 设置缓存
-$widget->apc('key', 'value');
+widget()->apc('key', 'value');
 // true
 
 // 获取缓存
-$widget->apc('key');
+widget()->apc('key');
 // value
 ```
 
 ### 设置60秒后就过期的缓存
 ```php
-$widget->apc('key', 'value', 60);
+widget()->apc('key', 'value', 60);
 ```
 
 调用方式

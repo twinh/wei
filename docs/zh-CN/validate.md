@@ -12,7 +12,7 @@ Widget验证器是参考[jQuery Validation](http://bassistance.de/jquery-plugins
 
 ### 检查数据是否符合指定的验证规则
 ```php
-$validator = $widget->validate(array(
+$validator = widget()->validate(array(
     'data' => array(
         'username' => 'tw',
         'email' => 'invalid',
@@ -153,7 +153,7 @@ class User
 }
 
 // 以数组为验证数据
-$widget->validate(array(
+widget()->validate(array(
     'data' => array(
         'name' => 'twin',
         'email' => 'test@test.com'
@@ -161,7 +161,7 @@ $widget->validate(array(
 ));
 
 // 以数组对象为验证数据
-$widget->validate(array(
+widget()->validate(array(
     'data' => new \ArrayObject(array(
         'name' => 'twin',
         'email' => 'test@test.com'
@@ -169,7 +169,7 @@ $widget->validate(array(
 ));
 
 // 以对象为验证数据
-$widget->validate(array(
+widget()->validate(array(
     'data' => new User
 ));
 ```
@@ -188,7 +188,7 @@ $widget->validate(array(
 
 #### 代码范例
 ```php
-$widget->validate(array(
+widget()->validate(array(
     'rules' => array(
         // 简单规则,将会被转换为 array('required' => true)
         'name' => 'required',
@@ -223,7 +223,7 @@ $widget->validate(array(
 
 #### 代码范例
 ```php
-$widget->validate(array(
+widget()->validate(array(
     'rules' => array(
         'name' => 'required',
         'email' => array(
@@ -275,7 +275,7 @@ $widget->validate(array(
 
 #### 代码范例
 ```php
-$widget->validate(array(
+widget()->validate(array(
     'rules' => array(
         'name' => 'required',
         'email' => array(
@@ -309,13 +309,13 @@ $widget->validate(array(
 **参数**
 
 ```php
-ruleValid( $event, $widget, $rule, $field, $validator )
+ruleValid( $event, widget(), $rule, $field, $validator )
 ```
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $event      | Widget\Event\Event    | 事件对象
-$widget     | Widget\Widget         | 微件管理器
+widget()     | Widget\Widget         | 微件管理器
 $rule       | string                | 过的规则名称
 $field      | string                | 当前验证的数据项名称
 $validator  | Widget\Validate       | 验证器对象
@@ -324,14 +324,14 @@ $validator  | Widget\Validate       | 验证器对象
 
 #### 代码范例
 ```php
-$widget->validate(array(
+widget()->validate(array(
     'data' => array(
         'name' => 'twin'
     ),
     'rules' => array(
         'name' => 'required'
     ),
-    'ruleValid' => function($event, $widget, $rule, $field, $validator) {
+    'ruleValid' => function($event, widget(), $rule, $field, $validator) {
         echo $rule;
         echo $field;
         echo 'Yes';
@@ -353,13 +353,13 @@ $widget->validate(array(
 **参数**
 
 ```php
-ruleInvalid( $event, $widget, $rule, $field, $validator )
+ruleInvalid( $event, widget(), $rule, $field, $validator )
 ``` 
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $event      | Widget\Event\Event    | 事件对象
-$widget     | Widget\Widget         | 微件管理器
+widget()     | Widget\Widget         | 微件管理器
 $rule       | string                | 过的规则名称
 $field      | string                | 当前验证的数据项名称
 $validator  | Widget\Validate       | 验证器对象
@@ -370,14 +370,14 @@ $validator  | Widget\Validate       | 验证器对象
 #### 代码范例
 
 ```php
-$widget->validate(array(
+widget()->validate(array(
     'data' => array(
         'name' => null
     ),
     'rules' => array(
         'name' => 'required'
     ),
-    'ruleInvalid' => function($event, $widget, $rule, $field, $validator) {
+    'ruleInvalid' => function($event, widget(), $rule, $field, $validator) {
         echo $rule;
         echo $field;
         echo 'No';
@@ -399,13 +399,13 @@ $widget->validate(array(
 **参数**
 
 ```php
-fieldValid($event, $widget, $field, $validator)
+fieldValid($event, widget(), $field, $validator)
 ```
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $event      | Widget\Event\Event    | 事件对象
-$widget     | Widget\Widget         | 微件管理器
+widget()     | Widget\Widget         | 微件管理器
 $rule       | string                | 过的规则名称
 $validator  | Widget\Validate       | 验证器对象
 
@@ -414,14 +414,14 @@ $validator  | Widget\Validate       | 验证器对象
 #### 代码范例
 
 ```php
-$widget->validate(array(
+widget()->validate(array(
     'data' => array(
         'name' => 'twin'
     ),
     'rules' => array(
         'name' => 'required'
     ),
-    'fieldValid' => function($event, $widget, $field, $validator) {
+    'fieldValid' => function($event, widget(), $field, $validator) {
         echo $field;
         echo 'Yes';
     }
@@ -441,13 +441,13 @@ $widget->validate(array(
 **参数**
 
 ```php
-fieldInvalid ( $event, $widget, $field, $validator )
+fieldInvalid ( $event, widget(), $field, $validator )
 ```
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $event      | Widget\Event\Event    | 事件对象
-$widget     | Widget\Widget         | 微件管理器
+widget()     | Widget\Widget         | 微件管理器
 $rule       | string                | 过的规则名称
 $validator  | Widget\Validate       | 验证器对象
 
@@ -456,14 +456,14 @@ $validator  | Widget\Validate       | 验证器对象
 #### 代码范例
 
 ```php
-$widget->validate(array(
+widget()->validate(array(
     'data' => array(
         'name' => null
     ),
     'rules' => array(
         'name' => 'required'
     ),
-    'fieldValid' => function($event, $widget, $field, $validator) {
+    'fieldValid' => function($event, widget(), $field, $validator) {
         echo $field;
         echo 'No';
     }
@@ -481,26 +481,26 @@ $widget->validate(array(
 验证结束时,如果最终验证结果为通过,验证器就触发`success`事件.
 
 ```php
-success ( $event, $widget, $validator )
+success ( $event, widget(), $validator )
 ```
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $event      | Widget\Event\Event    | 事件对象
-$widget     | Widget\Widget         | 微件管理器
+widget()     | Widget\Widget         | 微件管理器
 $validator  | Widget\Validate       | 验证器对象
 
 #### 代码范例
 
 ```php
-$widget->validate(array(
+widget()->validate(array(
     'data' => array(
         'name' => 'twin'
     ),
     'rules' => array(
         'name' => 'required'
     ),
-    'success' => function($event, $widget, $validator) {
+    'success' => function($event, widget(), $validator) {
         echo 'Yes';
     }
 ));
@@ -516,26 +516,26 @@ $widget->validate(array(
 验证结束时,如果最终验证结果为 **不** 通过,验证器就触发`failure`事件.
 
 ```php
-failure ( $event, $widget, $validator )
+failure ( $event, widget(), $validator )
 ```
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $event      | Widget\Event\Event    | 事件对象
-$widget     | Widget\Widget         | 微件管理器
+widget()     | Widget\Widget         | 微件管理器
 $validator  | Widget\Validate       | 验证器对象
 
 #### 代码范例
 
 ```php
-$widget->validate(array(
+widget()->validate(array(
     'data' => array(
         'name' => null
     ),
     'rules' => array(
         'name' => 'required'
     ),
-    'failure' => function($event, $widget, $validator) {
+    'failure' => function($event, widget(), $validator) {
         echo 'No';
     }
 ));

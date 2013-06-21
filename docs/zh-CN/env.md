@@ -8,7 +8,7 @@ Env
 
 ### 在Widget初始化时根据环境加载配置
 ```php
-\Widget\Widget::create(array(
+widget(array(
     'widget' => array(
         'preload' => array(
             'env' // 在预加载选项增加Env微件
@@ -24,7 +24,7 @@ Env
 
 ### 判断当前是否在开发环境
 ```php
-if ($widget->env->inDev()) {
+if (widget()->env->inDev()) {
     // do something
 }
 ```

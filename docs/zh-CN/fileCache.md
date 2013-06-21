@@ -9,11 +9,11 @@ FileCache
 ### 设置和获取文件缓存
 ```php
 // 设置缓存
-$widget->fileCache('key', 'value');
+widget()->fileCache('key', 'value');
 // true
 
 // 获取缓存
-$widget->fileCache('key');
+widget()->fileCache('key');
 // value
 ```
 

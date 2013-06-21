@@ -32,7 +32,7 @@ $data = array(
 );
 
 foreach ($data as $row) {
-    echo $widget->arr->attr($row, 'key') . "\n";
+    echo widget()->arr->attr($row, 'key') . "\n";
 }
 ```
 ### 运行结果
@@ -53,7 +53,7 @@ $data = array(
     array('id' => 1, 'order' => 2)
 );
 
-print_r($widget->arr->sort($data, 'order', SORT_DESC));
+print_r(widget()->arr->sort($data, 'order', SORT_DESC));
 ```
 
 ### 运行结果

@@ -8,7 +8,7 @@ isDoubleByte
 
 ### 检查"中文abc"是否只由双字节字符组成
 ```php
-if ($widget->isDoubleByte('中文abc')) {
+if (widget()->isDoubleByte('中文abc')) {
     echo 'Yes';
 } else {
     echo 'No';

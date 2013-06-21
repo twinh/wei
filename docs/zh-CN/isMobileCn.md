@@ -8,7 +8,7 @@ isMobileCn
 
 ### 检查"13800138000"是否为有效的手机号码
 ```php
-if ($widget->isMobileCn('13800138000')) {
+if (widget()->isMobileCn('13800138000')) {
     echo 'Yes';
 } else {
     echo 'No';

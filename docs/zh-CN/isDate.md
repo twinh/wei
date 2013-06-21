@@ -8,7 +8,7 @@ isDate
 
 ### 检查"2013-01-01"是否为合法的日期
 ```php
-if ($widget->isDate('2013-01-01')) {
+if (widget()->isDate('2013-01-01')) {
     echo 'Yes';
 } else {
     echo 'No';

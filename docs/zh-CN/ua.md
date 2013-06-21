@@ -8,9 +8,9 @@ Ua
 
 ### 根据用户设备跳转到相应的页面
 ```php
-if ($widget->ua->inIphone()) {
+if (widget()->ua->inIphone()) {
     // 跳转到iPhone定制页面
-} elseif ($widget->ua->inIpad()) {
+} elseif (widget()->ua->inIpad()) {
     // 跳转到iPad定制页面
 } else {
     // 展示默认页面
@@ -20,13 +20,13 @@ if ($widget->ua->inIphone()) {
 
 ### 获取Windows Phone手机用户的版本
 ```php
-echo $widget->ua->getVersion('WindowsPhone');
+echo widget()->ua->getVersion('WindowsPhone');
 ```
 
 ### 如果用户为IE浏览器,输出用浏览器版本
 ```php
-if ($widget->ua->inIe()) {
-    echo $widget->ua->getVersion('ie');
+if (widget()->ua->inIe()) {
+    echo widget()->ua->getVersion('ie');
 }
 ```
 

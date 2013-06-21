@@ -8,7 +8,7 @@ isPostcodeCn
 
 ### 检查"123456"是否为有效的中国邮政编码
 ```php
-if ($widget->isPostcodeCn('123456')) {
+if (widget()->isPostcodeCn('123456')) {
     echo 'Yes';
 } else {
     echo 'No';

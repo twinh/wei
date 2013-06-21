@@ -11,7 +11,7 @@ Server
 // 假设 $_SERVER['SERVER_NAME'] = 'www.example.com';
 
 // 返回www.example.com
-$id = $widget->server('SERVER_NAME');
+$id = widget()->server('SERVER_NAME');
 ```
 
 调用方法

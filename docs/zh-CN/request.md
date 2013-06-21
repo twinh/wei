@@ -11,12 +11,12 @@ Request
 // 假设 $_REQUEST['id'] = 5;
 
 // 返回5
-$id = $widget->request('id');
+$id = widget()->request('id');
 ```
 
 ### 获取当前请求的URL地址
 ```php
-$url = $widget->request->getUrl();
+$url = widget()->request->getUrl();
 ```
 
 调用方式

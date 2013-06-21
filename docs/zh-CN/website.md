@@ -9,16 +9,16 @@ Website
 ### 设置网站的标题和URL
 ```php
 // 配置网站的标题为`Widget Documentation`
-$widget->website('title', 'Widget Documentation');
+widget()->website('title', 'Widget Documentation');
 
 // 输出网站标题
-echo $widget->website('title');
+echo widget()->website('title');
 
 // 配置网站的URL
-$widget->website('url', 'http://www.example.com');
+widget()->website('url', 'http://www.example.com');
 
 // 输出网站URL
-echo $widget->website('url');
+echo widget()->website('url');
 ```
 
 调用方式

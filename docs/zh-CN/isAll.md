@@ -9,7 +9,7 @@ isAll
 ### 检查数组里的每一项是否都为数字
 ```php
 $input = array(3, 2, 5);
-if ($widget->isAll($input, array(
+if (widget()->isAll($input, array(
     'digit' => true
 ))) {
     echo 'Yes';

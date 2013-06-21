@@ -8,7 +8,7 @@ isIdCardCn
 
 ### 检查15位数字"342622840209049"是否为有效的中国身份证
 ```php
-if ($widget->isIdCardCn('342622840209049')) {
+if (widget()->isIdCardCn('342622840209049')) {
     echo 'Yes';
 } else {
     echo 'No';

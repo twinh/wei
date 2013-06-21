@@ -8,7 +8,7 @@ isRegex
 
 ### 检查"abc"是否匹配正则表达式"/d/i"
 ```php
-if ($widget->isRegex('abc', '/d/i')) {
+if (widget()->isRegex('abc', '/d/i')) {
     echo 'Yes';
 } else {
     echo 'No';

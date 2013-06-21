@@ -8,12 +8,12 @@ Dbal
 
 ### 设置数据库类型并执行简单的查询
 ```php
-$widget->config('dbal', array(
+widget()->config('dbal', array(
     'driver' => 'pdo_sqlite',
     'path' => 'test.sqlite'
 ));
 
-$db = $widget->dbal();
+$db = widget()->dbal();
 
 print_r($db->fetchAll("SELECT MAX(1, 2)"));
 ```
@@ -33,12 +33,12 @@ Array
 ### 创建读写(主备)分离的数据库查询对象
 ```php
 // 添加微件别名
-$widget->appendOption('alias', array(
+widget()->appendOption('alias', array(
     'dbalSlave' => 'Widget\DbAl'
 ));
 
 // 设置数据库配置选项
-$widget->config(array(
+widget()->config(array(
     'dbal' => array(
         'driver' => 'pdo_sqlite',
         'path' => 'test.sqlite'
@@ -50,10 +50,10 @@ $widget->config(array(
 ));
 
 // 获取主DB数据库对象
-$widget->dbal();
+widget()->dbal();
 
 // 获取备DB数据库对象
-$widget->dbalSlave();
+widget()->dbalSlave();
 ```
 
 调用方式

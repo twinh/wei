@@ -9,7 +9,7 @@ Flush
 ### 逐个打印1-10的数字到浏览器窗口,没每隔一秒输出一个
 ```php
 // 关闭缓冲区,发送HTTP响应等
-$widget->flush();
+widget()->flush();
 
 for ($i = 1; $i <= 10; $i++) {
     echo $i;

@@ -8,9 +8,9 @@ Session
 
 ### 设置和获取会话信息
 ```php
-$widget->session('verfiyCode', 'WIDG');
+widget()->session('verfiyCode', 'WIDG');
 
-if ($widget->sessio('verfiyCode') == $widget->post('verfiyCode')) {
+if (widget()->sessio('verfiyCode') == widget()->post('verfiyCode')) {
     echo '验证码正确';
 } else {
     echo '验证码错误';

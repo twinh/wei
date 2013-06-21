@@ -6,7 +6,7 @@ PHP Error
 ----
 ### 在Widget初始化时加载PHP Error
 ```php
-\Widget\Widget::create(array(
+widget(array(
     'widget' => array(
         'preload' => array(
             'phpError' // 在预加载选项增加phpError微件

@@ -21,7 +21,7 @@ $widget = \Widget\Widget::create();
 名称        | 类型   | 默认值        | 说明
 ------------|--------|---------------|------
 config      | array  | 无            | 所有微件的配置选项
-inis        | array  | 无            | PHP的ini配置选项 
+inis        | array  | 无            | PHP的ini配置选项
 autoloadMap | array  | 无            | 自动加载的命名空间和路径地址
 autoload    | bool   | true          | 是否启用自动加载
 alias       | array  | 无            | 微件别名列表
@@ -33,18 +33,18 @@ import      | array  | 无            | 导入指定目录下的微件类
 #### \Widget\Widget::create($config, $name = 'default')
 获取指定名称的微件管理器,如果不存在,将创建一个新的对象
 
-#### $widget->config($name, $vlaue = array())
+#### widget()->config($name, $vlaue = array())
 设置微件的选项配置
 
 名称        | 类型   | 默认值        | 说明
 ------------|--------|---------------|------
 $name       | string | 无            | 微件的名称,如`request`, `request.sub`
-$value      | array  | 无            | 微件的配置选项 
+$value      | array  | 无            | 微件的配置选项
 
-#### $widget->config($name)
+#### widget()->config($name)
 获取微件的选项配置
 
-#### $widget->get($name, $options = array(), $deps = array())
+#### widget()->get($name, $options = array(), $deps = array())
 获取一个微件对象
 
 名称        | 类型   | 默认值        | 说明
@@ -53,7 +53,7 @@ $name       | string | 无            | 微件的名称
 $options    | array  | 无            | 除了会通过`config`方法获取配置选项之外的附加的配置选项
 $deps       | array  | 无            | 指定微件的依赖关系
 
-#### $widget->import($dir, $namespace, $format = null)
+#### widget()->import($dir, $namespace, $format = null)
 导入指定目录下的微件类文件
 
 名称        | 类型   | 默认值        | 说明
@@ -65,7 +65,7 @@ $format     | string | 无            | 类文件的格式
 #### $widget->newInstance($name, $options = array(), $deps = array())
 初始化一个新的微件对象
 
-#### $widget->set($name, $widget)
+#### $widget->set($name, widget())
 设置微件对象
 
 #### $widget->remove($name)
@@ -78,4 +78,4 @@ $format     | string | 无            | 类文件的格式
 检查微件是否存在
 
 #### $widget->setAutoload($bool)
-启用或禁用PSR-0自动加载
+启用或禁用PSR-0类自动加载

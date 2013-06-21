@@ -8,7 +8,7 @@ Error
 
 ### 自定义404错误页面
 ```php
-$widget->error->notFound(function($exception){
+widget()->error->notFound(function($exception){
     // 输出错误提醒,这里可以改成加载错误视图,记录错误日志等
     echo 'Page not found';
 
@@ -39,7 +39,7 @@ ignorePrevHandler   | bool   | false                                            
 名称        | 类型          | 说明
 ------------|---------------|------
 $exception  | Exception     | 异常对象
-$widget     | Widget\Widget | 微件管理器
+widget()     | Widget\Widget | 微件管理器
 
 ### error->notFound($fn)
 设置404的错误处理器

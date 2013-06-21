@@ -11,17 +11,17 @@ dbCache微件依赖于<a href="#db">db</a>微件
 ### 设置和获取缓存
 ```php
 // 设置缓存
-$widget->dbCache('key', 'value');
+widget()->dbCache('key', 'value');
 // 返回 true
 
 // 获取缓存
-$widget->dbCache('key');
+widget()->dbCache('key');
 // 返回 value
 ```
 
 ### 设置60秒后就过期的缓存
 ```php
-$widget->dbCache('key', 'value', 60);
+widget()->dbCache('key', 'value', 60);
 ```
 
 调用方式

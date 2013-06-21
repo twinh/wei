@@ -22,7 +22,7 @@ bool isAfter( $input [, $max])
 ```php
 <?php
  
-if ($widget->isAfter(date('Y-m-d'), '2013-01-01')) {
+if (widget()->isAfter(date('Y-m-d'), '2013-01-01')) {
     echo 'Today is after 2013-01-01';
 } else {
     echo 'Today is before 2013-01-01';

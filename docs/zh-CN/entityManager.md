@@ -8,7 +8,7 @@ EntityManager
 
 ### 获取Doctrine ORM的实体管理对象
 ```php
-$em = $widget->entityManager();
+$em = widget()->entityManager();
 
 // 返回 Doctrine\ORM\EntityManager();
 echo get_class($em);

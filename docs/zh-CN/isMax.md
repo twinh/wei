@@ -8,7 +8,7 @@ isMax
 
 ### 检查10是否小于等于20
 ```php
-if ($widget->isMax(10, 20)) {
+if (widget()->isMax(10, 20)) {
     echo 'Yes';
 } else {
     echo 'No';

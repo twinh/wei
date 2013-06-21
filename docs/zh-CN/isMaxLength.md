@@ -8,7 +8,7 @@ isMaxLength
 
 ### 检查"abc"的长度是否小于等于2
 ```php
-if ($widget->isMaxLength('abc', 2)) {
+if (widget()->isMaxLength('abc', 2)) {
     echo 'Yes';
 } else {
     echo 'No';

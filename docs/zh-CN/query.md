@@ -11,7 +11,7 @@ Query
 // 假设 $_GET['id'] = 5;
 
 // 返回5
-$id = $widget->query('id');
+$id = widget()->query('id');
 ```
 
 调用方法

@@ -11,17 +11,17 @@ Cache
 ### 设置和获取缓存
 ```php
 // 设置缓存
-$widget->cache('key', 'value');
+widget()->cache('key', 'value');
 // 返回 true
 
 // 获取缓存
-$widget->cache('key');
+widget()->cache('key');
 // 返回 value
 ```
 
 ### 设置60秒后就过期的缓存
 ```php
-$widget->cache('key', 'value', 60);
+widget()->cache('key', 'value', 60);
 ```
 
 调用方式

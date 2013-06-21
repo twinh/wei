@@ -8,7 +8,7 @@ Gravatar
 
 ### 生成默认大小(80px)的Gravatar头像
 ```php
-echo '<img src="' . $widget->gravatar('twinhuang@qq.com') . '" />';
+echo '<img src="' . widget()->gravatar('twinhuang@qq.com') . '" />';
 ```
 
 #### 页面显示效果
@@ -17,10 +17,10 @@ echo '<img src="' . $widget->gravatar('twinhuang@qq.com') . '" />';
 ### 生成预设定大小的Gravatar头像
 ```php
 // 输出较小尺寸(48px)的Gravatar头像
-echo '<img src="' . $widget->gravatar->small('twinhuang@qq.com') . '" />';
+echo '<img src="' . widget()->gravatar->small('twinhuang@qq.com') . '" />';
 
 // 输出较大尺寸(200px)的Gravatar头像
-echo '<img src="' . $widget->gravatar->large('twinhuang@qq.com') . '" />';
+echo '<img src="' . widget()->gravatar->large('twinhuang@qq.com') . '" />';
 ```
 
 #### 页面显示效果
@@ -36,7 +36,7 @@ widget(array(
     )
 ));
 
-echo '<img height="80" src="' . $widget->gravatar('twinhuang@example.com') . '" />';
+echo '<img height="80" src="' . widget()->gravatar('twinhuang@example.com') . '" />';
 ```
 
 #### 页面显示效果

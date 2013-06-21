@@ -9,17 +9,17 @@ MongoCache
 ### 设置和获取缓存
 ```php
 // 设置缓存
-$widget->mongoCache('key', 'value');
+widget()->mongoCache('key', 'value');
 // 返回 true
 
 // 获取缓存
-$widget->mongoCache('key');
+widget()->mongoCache('key');
 // 返回 value
 ```
 
 ### 设置60秒后就过期的缓存
 ```php
-$widget->mongoCache('key', 'value', 60);
+widget()->mongoCache('key', 'value', 60);
 ```
 
 调用方式

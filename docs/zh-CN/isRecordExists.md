@@ -9,13 +9,13 @@ isRecordExists
 #### 检查主键为1的用户是否存在,和检查name为test的用户是否存在
 ```php
 // Set configuraion for db widget
-$widget->config('db', array(
+widget()->config('db', array(
     'driver' => 'pdo_sqlite',
     'memory' => true
 ));
 
 /* @var $db \Doctrine\DBAL\Connection */
-$db = $widget->db();
+$db = widget()->db();
 
 $db->query("CREATE TABLE users (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
 
@@ -31,14 +31,14 @@ $db->insert('users', array(
 
 
 // Check if the id=1 user exists
-if ($widget->isRecordExists('1', 'users')) {
+if (widget()->isRecordExists('1', 'users')) {
     echo 'Yes';
 } else {
     echo 'No';
 }
 
 // Check if the name=test user exists
-if ($widget->isRecordExists('test', 'users', 'name')) {
+if (widget()->isRecordExists('test', 'users', 'name')) {
     echo 'Yes';
 } else {
     echo 'No';

@@ -9,7 +9,7 @@ Uuid
 ### 随机生成一个UUID
 ```php
 // 输出格式类似"05b59eca-866d-410b-96d7-e4f2c286f5a8"
-echo $widget->uuid();
+echo widget()->uuid();
 ```
 
 调用方式

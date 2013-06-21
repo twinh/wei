@@ -8,7 +8,7 @@ isRange
 
 ### 检查18是否在1到10之间
 ```php
-if ($widget->isRange(18, 1, 10)) {
+if (widget()->isRange(18, 1, 10)) {
     echo 'Yes';
 } else {
     echo 'No';

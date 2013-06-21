@@ -15,11 +15,11 @@ ArrayCache
 
 ```php
 // 设置缓存
-$widget->arrayCache('key', 'value');
+widget()->arrayCache('key', 'value');
 // 返回 true
 
 // 获取缓存
-$widget->arrayCache('key');
+widget()->arrayCache('key');
 // 返回 value
 ```
 
@@ -35,13 +35,13 @@ $widget->arrayCache('key');
 #### arrayCache ($key, $value)
 设置缓存的值
 ```php
-$widget->arrayCache('key', 'value');
+widget()->arrayCache('key', 'value');
 ```
 
 #### arrayCache($key)
 获取指定名称的缓存
 ```php
-$widget->arrayCache('name');
+widget()->arrayCache('name');
 ```
 
 #### arrayCache->set($key, $value)

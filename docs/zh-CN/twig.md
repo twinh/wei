@@ -9,7 +9,7 @@ Twig
 ### 渲染模板`hello.html.twig`
 ```php
 // 设置Twig模板目录
-$widget->config('twig', array(
+widget()->config('twig', array(
     'paths' => __DIR__
 ));
 
@@ -19,7 +19,7 @@ $data = array(
 );
 
 // 输出渲染后的视图
-echo $widget->twig('hello.twig.html', $data);
+echo widget()->twig('hello.twig.html', $data);
 ```
 
 #### 文件`hello.html.twig`的内容

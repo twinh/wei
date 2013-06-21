@@ -8,10 +8,10 @@ Logger
 
 ### 记录一条DEBUG级别的日志
 ```php
-$widget->logger->debug('The logger is called');
+widget()->logger->debug('The logger is called');
 
 // 输出日志文件的路径
-echo $widget->logger->getFile();
+echo widget()->logger->getFile();
 
 // 可以在日志文件看到类似格式的一条日志
 // [XXXX-XX-XX XX:XX:XX] widget.DEBUG: The logger is called

@@ -9,7 +9,7 @@ isAlnum
 ### 检查数据是否只由字母和数字组成
 ```php
 $input = 'abc123';
-if ($widget->isAlnum($input)) {
+if (widget()->isAlnum($input)) {
     echo 'Yes';
 } else {
     echo 'No';

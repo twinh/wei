@@ -9,17 +9,17 @@ Upload
 ### 上传单个文件
 
 ```php
-$result = $widget->upload();
+$result = widget()->upload();
 if ($result) {
     echo 'Yes';
 } else {
-    print_r($widget->upload->getMessages());
+    print_r(widget()->upload->getMessages());
 }
 ```
 
 ### 上传图片文件,限定宽度和高度小于2000px
 ```php
-$result = $widget->upload(array(
+$result = widget()->upload(array(
     'maxHeight' => 2000,
     'maxWidth' => 2000
 ));
@@ -27,20 +27,20 @@ $result = $widget->upload(array(
 if ($result) {
     echo 'Yes';
 } else {
-    print_r($widget->upload->getMessages());
+    print_r(widget()->upload->getMessages());
 }
 ```
 
 ### 在一个请求中批量上传文件
 ```php
 for ($i = 0; $i < 3; $i++) {
-    $result = $widget->upload(array(
+    $result = widget()->upload(array(
         'field' => 'upload_' . $i
     ));
     if ($result) {
         echo '文件' . $i . '上传成功';
     } else {
-        print_r($widget->upload->getMessages());
+        print_r(widget()->upload->getMessages());
     }
 }
 ```

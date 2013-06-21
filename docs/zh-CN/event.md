@@ -9,7 +9,7 @@ Event
 ### 绑定,触发和移除事件
 ```php
 // 获取事件管理器对象
-$event = $widget->event;
+$event = widget()->event;
 
 // 绑定名称为connect的事件
 $event->on('connect', function(){

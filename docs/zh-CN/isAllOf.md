@@ -9,7 +9,7 @@ isAllOf
 ### 检查数据是否为5-10位的数字
 ```php
 $input = '123456';
-if ($widget->isAllOf($input, array(
+if (widget()->isAllOf($input, array(
     'length' => array(5, 10),
     'digit' => true
 ))) {

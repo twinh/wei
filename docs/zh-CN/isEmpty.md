@@ -8,7 +8,7 @@ isEmpty()
 
 ### 检查"abc"是否为空
 ```php
-if ($widget->isEmpty('abc')) {
+if (widget()->isEmpty('abc')) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -22,7 +22,7 @@ if ($widget->isEmpty('abc')) {
 
 ### 检查空格字符串是否为空
 ```php
-if ($widget->isEmpty(' ')) {
+if (widget()->isEmpty(' ')) {
     echo 'Yes';
 } else {
     echo 'No';

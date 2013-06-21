@@ -8,7 +8,7 @@ isPhoneCn
 
 ### 检查"020-1234567"是否为电话号码
 ```php
-if ($widget->isPhoneCn('020-1234567')) {
+if (widget()->isPhoneCn('020-1234567')) {
     echo 'Yes';
 } else {
     echo 'No';

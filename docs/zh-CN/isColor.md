@@ -8,7 +8,7 @@ isColor
 
 ### 检查"#FF0000"是否为有效的十六进制颜色
 ```php
-if ($widget->isColor('#FF0000')) {
+if (widget()->isColor('#FF0000')) {
     echo 'Yes';
 } else {
     echo 'No';

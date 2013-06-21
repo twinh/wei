@@ -9,20 +9,20 @@ Cookie
 ### 写入和读取cookie的值
 ```php
 // 写入cookie,返回true
-$widget->cookie('key', 'value');
+widget()->cookie('key', 'value');
 
 // 读取cookie返回value
-$widget->cookie('key');
+widget()->cookie('key');
 ```
 
 ### 写入7天过期的cookie
 ```php
-$widget->cookie('key', 'value', array('expires' => 7));
+widget()->cookie('key', 'value', array('expires' => 7));
 ```
 
 ### 删除名称为'logined'的cookie
 ```php
-$widget->cookie->remove('logined');
+widget()->cookie->remove('logined');
 ```
 
 调用方式

@@ -14,7 +14,7 @@ $data = array(
 );
 
 // 输出渲染后的视图
-echo $widget->smarty('hello.tpl', $data);
+echo widget()->smarty('hello.tpl', $data);
 ```
 
 #### 文件`hello.tpl`的内容

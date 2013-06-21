@@ -8,10 +8,10 @@ Header
 
 ### 设置和获取自定义HTTP响应头
 ```php
-$widget->header('X-Powered-By', 'PHP');
+widget()->header('X-Powered-By', 'PHP');
 
 // 输出'PHP'
-echo $widget->header('X-Powered-By');
+echo widget()->header('X-Powered-By');
 ```
 
 调用方式

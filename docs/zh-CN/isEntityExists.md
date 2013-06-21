@@ -50,13 +50,13 @@ class User
 }
 
 // Set configuraion for db widget
-$widget->config('db', array(
+widget()->config('db', array(
     'driver' => 'pdo_sqlite',
     'memory' => true
 ));
 
 // Set configuration for entityManager widget
-$widget->config('entityManager', array(
+widget()->config('entityManager', array(
     'config' => array(
         'proxyDir' => './',
         'proxyNamespace' => 'Proxy',
@@ -66,7 +66,7 @@ $widget->config('entityManager', array(
 ));
 
 /* @var $em \Doctrine\ORM\EntityManager */
-$em = $widget->entityManager();
+$em = widget()->entityManager();
 
 $tool = new Doctrine\ORM\Tools\SchemaTool($em);
 
@@ -91,14 +91,14 @@ $em->persist($user2);
 $em->flush();
 
 // Check if the id=1 user exists
-if ($widget->isEntityExists('1', 'User')) {
+if (widget()->isEntityExists('1', 'User')) {
     echo 'Yes';
 } else {
     echo 'No';
 }
 
 // Check if the name=test user exists
-if ($widget->isEntityExists('test', 'User', 'name')) {
+if (widget()->isEntityExists('test', 'User', 'name')) {
     echo 'Yes';
 } else {
     echo 'No';

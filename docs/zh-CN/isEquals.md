@@ -13,7 +13,7 @@ $post = array(
     'password_confirmation' => '123456',
 );
 
-if ($widget->isEquals($post['password'], $post['password_confirmation'])) {
+if (widget()->isEquals($post['password'], $post['password_confirmation'])) {
     echo 'Yes';
 } else {
     echo 'No';

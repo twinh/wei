@@ -8,7 +8,7 @@ is
 
 ### 检查数据是否为邮箱
 ```php
-if ($widget->is('email', 'twinhuang@qq.com')) {
+if (widget()->is('email', 'twinhuang@qq.com')) {
     echo 'twihuang@qq.com is valid email';
 } else {
     echo 'twihuang@qq.com is not valid email';
@@ -22,7 +22,7 @@ if ($widget->is('email', 'twinhuang@qq.com')) {
 
 ### 检查数据是否能被3整除
 ```php
-if ($widget->is(function($input) {
+if (widget()->is(function($input) {
     return 0 === 10 % $input;
 }, 3)) {
     echo 'Yes';
@@ -42,7 +42,7 @@ $rules = array(
     'digit' => true,
     'length' => array(3, 5)
 );
-if ($widget->is($rules, '123456')) {
+if (widget()->is($rules, '123456')) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -84,7 +84,7 @@ $input     | mixed    | 无       | 待验证的数据配置选项
 -----------|----------------------------|----------|------
 $input     | mixed                      | 无       | 待验证的数据
 $callback  | \Widget\Validator\Callback | 无       | 回调验证器对象
-$widget    | \Widget\Widget             | 无       | 微件管理器
+widget()    | \Widget\Widget             | 无       | 微件管理器
 
 
 #### is($rules, $input)

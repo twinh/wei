@@ -8,14 +8,14 @@ Redirect
 
 ### 等待3秒后跳转d到谷歌首页
 ```php
-$widget->redirect('http://www.google.com', 302, array(
+widget()->redirect('http://www.google.com', 302, array(
     'wait' => 3
 ));
 ```
 
 ### 直接跳转到谷歌首页
 ```php
-$widget->redirect('http://www.google.com');
+widget()->redirect('http://www.google.com');
 ```
 
 调用方式

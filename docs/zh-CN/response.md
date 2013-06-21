@@ -8,7 +8,7 @@ Response
 
 ### 发送内容为"Hello World"的HTTP响应
 ```php
-$widget->response('Hello World');
+widget()->response('Hello World');
 ```
 
 #### 运行结果
@@ -18,7 +18,7 @@ $widget->response('Hello World');
 
 #### 获取上面案例中HTTP响应的完整内容
 ```php
-echo (string)$widget->response;
+echo (string)widget()->response;
 ```
 #### 运行结果
 ```php

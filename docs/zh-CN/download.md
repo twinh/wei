@@ -8,7 +8,7 @@ Download
 
 ### 下载当前运行的文件
 ```php
-$widget->download(__FILE__);
+widget()->download(__FILE__);
 ```
 #### 运行结果
 ![弹出下载对话框](resources/download.png)

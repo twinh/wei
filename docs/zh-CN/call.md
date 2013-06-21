@@ -8,7 +8,7 @@ Call
 
 ### 向接口`http://jsfiddle.net/echo/json/`发送POST请求并输出返回的json数据
 ```php
-$widget->call(array(
+widget()->call(array(
     'url' => 'http://jsfiddle.net/echo/json/',
     'method' => 'POST',
     'dataType' => 'json',
@@ -26,7 +26,7 @@ $widget->call(array(
 
 ### 处理请求错误
 ```php
-$widget->call(array(
+widget()->call(array(
     'url' => 'http://404.php.net', // 不存在的URL地址
     'error' => function($call, $status, $exception){
         // 输出错误的类型,如`curl`,完全错误类型请查看选项
@@ -41,7 +41,7 @@ $widget->call(array(
 ### 通过HTTP方法发送请求
 ```php
 // 此处的`get`还可以是`post`, `delete`, `put`或`patch`,表示通过相应的HTTP方法发送请求
-$widget->get('http://example.com', function($data, $call){
+widget()->get('http://example.com', function($data, $call){
     // 成功时打印出服务器返回的结果
     print_r($data);
 });

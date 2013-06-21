@@ -12,7 +12,7 @@ $rules = array(
     'alpha' => true,
     'maxLength' => 3
 );
-if ($widget->isNoneOf('abc', $rules)) {
+if (widget()->isNoneOf('abc', $rules)) {
     echo 'Yes';
 } else {
     echo 'No';

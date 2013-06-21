@@ -8,7 +8,7 @@ isFile
 
 ### 检查文件"5x5.gif"是否为存在且大小小于1.2mb
 ```php
-if ($widget->isImage('./5x5.gif', array('maxSize' => '1.2mb'))) {
+if (widget()->isImage('./5x5.gif', array('maxSize' => '1.2mb'))) {
     echo 'Yes';
 } else {
     echo 'No';

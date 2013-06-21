@@ -8,7 +8,7 @@ isIn
 
 ### 检查"1"是否在array(1, 2, 3)之中
 ```php
-if ($widget->isIn(1, array(1, 2, 3))) {
+if (widget()->isIn(1, array(1, 2, 3))) {
     echo 'Yes';
 } else {
     echo 'No';

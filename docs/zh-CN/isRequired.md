@@ -8,7 +8,7 @@ isRequired
 
 ### 检查null是否为空
 ```php
-if ($widget->isRequired(null)) {
+if (widget()->isRequired(null)) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -22,7 +22,7 @@ if ($widget->isRequired(null)) {
 
 ### 检查null是否为空,第二个参数设为false
 ```php
-if ($widget->isRequired(null, false)) {
+if (widget()->isRequired(null, false)) {
     echo 'Yes';
 } else {
     echo 'No';

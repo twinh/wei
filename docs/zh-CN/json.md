@@ -9,14 +9,14 @@ Json
 ### 输出JSON格式的数据
 ```php
 // 输出 {"code":0,"message":"success"}
-$widget->json('success', 0);
+widget()->json('success', 0);
 ```
 
 ### 输出JSONP格式的数据
 ```php
 // 假设URL请求地址为 index.php?callback=callback
 // 下面的调用将输出 callback({"code":0,"message":"success"})
-$widget->json('success', 0, array(), true);
+widget()->json('success', 0, array(), true);
 ```
 
 调用方式

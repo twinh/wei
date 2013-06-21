@@ -23,7 +23,7 @@ bool isPlateNumberCn( $input )
 ```php
 <?php
  
-if ($widget->isPlateNumberCn('京A12345')) {
+if (widget()->isPlateNumberCn('京A12345')) {
     echo 'Yes';
 } else {
     echo 'No';

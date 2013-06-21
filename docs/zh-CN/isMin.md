@@ -8,7 +8,7 @@ isMin
 
 ### 检查10是否大于等于20
 ```php
-if ($widget->isMin(10, 20)) {
+if (widget()->isMin(10, 20)) {
     echo 'Yes';
 } else {
     echo 'No';

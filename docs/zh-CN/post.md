@@ -11,7 +11,7 @@ Post
 // 假设 $_POST['id'] = 5;
 
 // 返回5
-$id = $widget->post('id');
+$id = widget()->post('id');
 ```
 
 调用方法

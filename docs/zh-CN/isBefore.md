@@ -22,7 +22,7 @@ bool isBefore( $input [, $min ])
 ```php
 <?php
  
-if ($widget->isBefore(date('Y-m-d'), '2020-01-01')) {
+if (widget()->isBefore(date('Y-m-d'), '2020-01-01')) {
     echo 'Today is before 2020-01-01';
 } else {
     echo 'Today is after 2020-01-01';

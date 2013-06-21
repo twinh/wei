@@ -8,7 +8,7 @@ Escape
 
 ### 转义HTML字符串
 ```php
-echo $widget->escape('<script>alert("xss")</script>');
+echo widget()->escape('<script>alert("xss")</script>');
 ```
 
 #### 运行结果
@@ -18,7 +18,7 @@ echo $widget->escape('<script>alert("xss")</script>');
 
 ### 转义Javascript字符串
 ```php
-echo $widget->escape->js('bar&quot;; alert(&quot;Meow!&quot;); var xss=&quot;true');
+echo widget()->escape->js('bar&quot;; alert(&quot;Meow!&quot;); var xss=&quot;true');
 ```
 
 #### 运行结果
@@ -28,7 +28,7 @@ echo $widget->escape->js('bar&quot;; alert(&quot;Meow!&quot;); var xss=&quot;tru
 
 ### 转义CSS字符串
 ```php
-echo $widget->escape->css("background-image: url('http://example.com/foo.jpg?</style><script>alert(1)</script>');");
+echo widget()->escape->css("background-image: url('http://example.com/foo.jpg?</style><script>alert(1)</script>');");
 ```
 
 #### 运行结果
@@ -39,7 +39,7 @@ echo $widget->escape->css("background-image: url('http://example.com/foo.jpg?</s
 ### 转义HTML属性字符串
 ```php
 echo '<span title=';
-echo $widget->escape->attr("faketitle onmouseover=alert(/xss/);");
+echo widget()->escape->attr("faketitle onmouseover=alert(/xss/);");
 echo '>hi</span>';
 ```
 
@@ -51,7 +51,7 @@ echo '>hi</span>';
 ### 转义URL字符串
 ```php
 echo '<a href="http://example.com/?name=';
-echo $widget->escape->url("onmouseover= \"alert('zf2')");
+echo widget()->escape->url("onmouseover= \"alert('zf2')");
 echo '">Click here!</a>';
 ```
 
