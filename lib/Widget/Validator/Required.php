@@ -17,6 +17,11 @@ class Required extends AbstractValidator
 {
     protected $requiredMessage = '%name% is required';
 
+    /**
+     * Whether the input is required or not
+     *
+     * @var bool
+     */
     protected $required = true;
 
     /**
