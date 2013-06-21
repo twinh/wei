@@ -201,7 +201,7 @@ $conditions | array  | 删除语句的查询条件
 $table      | string       | 要查找的数据表名称
 $conditions | string,array | 查询条件,如果类型是字符串,表示主键的值,如果是数组,键名表示数据表字段,值表示字段的值
 
-#### db->selectAll($table, $where = false)
+#### db->selectAll($table, $conditions = array())
 根据条件查找数据表的所有匹配记录
 
 **返回:** `array`|`false` 如果记录存在,返回二维记录数组,不存在返回`false`
