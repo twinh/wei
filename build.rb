@@ -40,7 +40,7 @@ widgets = [
   # validation-section
     'validate',  'is',
     'isAlnum', 'isAlpha', 'isBlank', 'isDecimal', 'isDigit', 'isDivisibleby', 'isDoubleByte', 'isEmpty', 'isEndsWith', 'isEquals', 'isIn', 'isLowercase', 'isNull', 'isNumber', 'isRegex', 'isRequired', 'isStartsWith', 'isType', 'isUppercase',
-    'isLength', 'isMax', 'isMaxLength', 'isMin', 'isMinLength', 'isRange',
+    'isBetween', 'isLength', 'isMax', 'isMaxLength', 'isMin', 'isMinLength',
     'isDate', 'isDateTime', 'isTime',
     'isDir', 'isExists', 'isFile', 'isImage',
     'isEmail', 'isIp', 'isTld', 'isUrl', 'isUuid',
