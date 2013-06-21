@@ -216,20 +216,75 @@ $conditions | string,array | 查询条件,如果类型是字符串,表示主键�
 #### db->fetch($sql, $params = array())
 执行一条SQL语句并返回第一条记录,主要用于SELECT的SQL语句
 
+**返回:** `array`|`false` 如果记录存在,返回记录数组,不存在返回`false`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$sql        | string       | 要执行的SQL语句
+$params     | array        | 绑定到SQL的参数
+
 #### db->fetchAll($sql, $params = array())
 执行一条SQL语句并返回所有记录
 
+**返回:** `array`|`false` 如果记录存在,返回二维记录数组,不存在返回`false`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$sql        | string       | 要执行的SQL语句
+$params     | array        | 绑定到SQL的参数
+
 #### db->fetchColumn($sql, $params = array(), $column = 0)
-执行一条SQL语句,并返回指定类的值
+执行一条SQL语句,并返回指定项目的值
 
-#### db->find($table, $id)
-根据条件查找数据表的一条记录,返回的是一个`Widget\Db\Record`对象
+**返回:** `string`
 
-#### db->findAll($table, $where)
-根据条件查找数据表的所有匹配记录,返回的是一个`Widget\Db\Collection`对象
+**参数**
 
-#### db->create($table, $data)
+名称        | 类型         | 说明
+------------|--------------|------
+$sql        | string       | 要执行的SQL语句
+$params     | array        | 绑定到SQL的参数
+$column     | int          | 返回第几项的值
+
+#### db->find($table, $conditions)
+根据条件查找数据表的一条记录
+
+**返回:** `Widget\Db\Record`|`false` 如果记录存在,返回记录对象,否则返回`false`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$table      | string       | 要查找的数据表名称
+$conditions | string,array | 查询条件,如果类型是字符串,表示主键的值,如果是数组,键名表示数据表字段,值表示字段的值
+
+#### db->findAll($table, $conditions)
+根据条件查找数据表的所有匹配记录
+
+**返回:** `Widget\Db\Collection`|`false` 如果记录存在,返回集合对象,否则返回`false`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$table      | string       | 要查找的数据表名称
+$conditions | string,array | 查询条件,如果类型是字符串,表示主键的值,如果是数组,键名表示数据表字段,值表示字段的值
+
+#### db->create($table, $data = array())
 创建一个新的数据表记录对象
+
+**返回:** `Widget\Db\Record` 记录对象
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$table      | string       | 记录的数据表名称
+$data       | array        | 初始化的数据
 
 #### db->findOrCreate($table, $id, $data = array())
 根据条件查找数据表的一条记录,如果记录不存在,将根据`$data`创建一条新的数据表记录对象
