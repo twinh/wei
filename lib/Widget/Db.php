@@ -131,7 +131,7 @@ class Db extends AbstractWidget
     protected $tablePrefix;
 
     /**
-     * Create a new instance of a SQL query builder with specified table and alias
+     * Create a new instance of a SQL query builder with specified table name
      *
      * @param string $table The name of database table
      * @return Db\QueryBuilder
@@ -211,17 +211,17 @@ class Db extends AbstractWidget
      *
      * @param string $table The name of table
      * @param array $data An associative array containing column-value pairs
-     * @param array $identifier The criteria to search records
+     * @param array $conditions The conditions to search records
      * @return int The number of affected rows
      */
-    public function update($table, array $data, array $identifier)
+    public function update($table, array $data, array $conditions)
     {
         $table = $this->getTable($table);
         $set = implode(' = ?, ', array_keys($data)) . ' = ?';
-        $where = implode(' = ? AND ', array_keys($identifier)) . ' = ?';
+        $where = implode(' = ? AND ', array_keys($conditions)) . ' = ?';
 
         $query = "UPDATE $table SET $set WHERE $where";
-        $params = array_merge(array_values($data), array_values($identifier));
+        $params = array_merge(array_values($data), array_values($conditions));
 
         return $this->executeUpdate($query, $params);
     }
@@ -230,16 +230,16 @@ class Db extends AbstractWidget
      * Executes a DELETE query
      *
      * @param string $table The name of table
-     * @param array $identifier The criteria to search records
+     * @param array $conditions The conditions to search records
      * @return int The number of affected rows
      */
-    public function delete($table, $identifier)
+    public function delete($table, array $conditions)
     {
         $table = $this->getTable($table);
 
-        $query = "DELETE FROM $table WHERE " . implode(' = ? AND ', array_keys($identifier)) . ' = ?';
+        $query = "DELETE FROM $table WHERE " . implode(' = ? AND ', array_keys($conditions)) . ' = ?';
 
-        return $this->executeUpdate($query, array_values($identifier));
+        return $this->executeUpdate($query, array_values($conditions));
     }
 
     /**
@@ -291,12 +291,12 @@ class Db extends AbstractWidget
      * Returns the rows number of table search by specified parameters
      *
      * @param string $table
-     * @param array $params
+     * @param array $conditions
      * @return int
      */
-    public function count($table, $params = false)
+    public function count($table, $conditions = false)
     {
-        $data = $this->selectAll($table, $params, 'COUNT(1)');
+        $data = $this->selectAll($table, $conditions, 'COUNT(1)');
         return $data ? current($data[0]) : 0;
     }
 
@@ -416,12 +416,12 @@ class Db extends AbstractWidget
     /**
      * Returns the ID of the last inserted row or sequence value
      *
-     * @param string $name The name of postgresql sequence
+     * @param string $name The name of PostgreSQL sequence
      * @return string
      */
-    public function lastInsertId($name = null)
+    public function lastInsertId($sequence = null)
     {
-        return $this->pdo->lastInsertId($name);
+        return $this->pdo->lastInsertId($sequence);
     }
 
     /**
