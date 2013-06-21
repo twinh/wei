@@ -2,6 +2,7 @@ Db
 ==
 
 基于PDO的数据库操作微件,支持基本的增删查改(CRUD)和流行的Active Record模式的数据库操作.
+
 目前支持`mysql`, `sqlite` 和 `pgsql`数据库.
 
 案例
@@ -108,8 +109,17 @@ PostgreSQL | pgsql:host=localhost;port=5432;dbname=testdb              | http://
 #### db
 获取数据库查询对象
 
-#### db->insert($table, $$data = array())
+#### db->insert($table, $data = array())
 向指定的数据表插入一条数据
+
+返回: int 受影响的行数
+
+参数
+
+名称   | 类型   | 说明
+-------|--------|------
+$table | string | 要插入的数据表名称
+$data  | array  | 要插入的数据,数组的键名是数据表的字段名称,值是字段的值
 
 #### db->lastInsertId()
 获取最后插入数据表的编号
@@ -158,6 +168,11 @@ PostgreSQL | pgsql:host=localhost;port=5432;dbname=testdb              | http://
 
 #### db->errorInfo()
 获取PD错误信息数组
+
+#### db->isConnected()
+检查是否已经连接到数据库
+
+返回: bool
 
 #### db->getRecordClass($table)
 根据数据表名称获取记录类名称
