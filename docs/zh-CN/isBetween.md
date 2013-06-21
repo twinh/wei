@@ -1,5 +1,5 @@
-isRange
-=======
+isBetween
+=========
 
 检查数据是否在指定的两个值之间
 
@@ -8,7 +8,7 @@ isRange
 
 ### 检查18是否在1到10之间
 ```php
-if (widget()->isRange(18, 1, 10)) {
+if (widget()->isBetween(18, 1, 10)) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -30,10 +30,10 @@ if (widget()->isRange(18, 1, 10)) {
 | min                 | int     | 无                                     | 用于比较的较小值  |
 | max                 | int     | 无                                     | 用于比较的较大值  |
 | notStringMessage    | string  | %name%必须是字符串                     | -                 |
-| rangeMessage        | string  | %name%必须在%min%到%max%之间           | -                 |
+| betweenMessage      | string  | %name%必须在%min%到%max%之间           | -                 |
 | negativeMessage     | string  | %name%不能在%min%到%max%之间           | -                 |
 
 ### 方法
 
-#### isRange($input)
+#### isBetween($input)
 检查数据是否在指定的两个值之间
