@@ -225,4 +225,39 @@ class UaTest extends TestCase
             )
         );
     }
+
+    /**
+     * @dataProvider providerForInMobile
+     */
+    public function testInMobile($headers)
+    {
+        $this->server->fromArray($headers);
+        $this->assertTrue($this->ua->inMobile());
+    }
+
+    public function providerForInMobile()
+    {
+        return array(
+            array(
+                array(
+                    'HTTP_ACCEPT' => 'application/x-obml2d'
+                )
+            ),
+            array(
+                array(
+                    'HTTP_ACCEPT' => 'text/vnd.wap.wml'
+                )
+            ),
+            array(
+                array(
+                    'HTTP_ACCEPT' => 'application/vnd.wap.xhtml+xml'
+                )
+            ),
+            array(
+                array(
+                    'HTTP_X_WAP_PROFILE' => '1'
+                )
+            ),
+        );
+    }
 }
