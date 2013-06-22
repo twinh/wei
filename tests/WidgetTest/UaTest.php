@@ -231,7 +231,9 @@ class UaTest extends TestCase
      */
     public function testInMobile($headers)
     {
-        $this->server->fromArray($headers);
+        foreach ($headers as $name => $value) {
+            $this->server[$name] = $value;
+        }
         $this->assertTrue($this->ua->inMobile());
     }
 
