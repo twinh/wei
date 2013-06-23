@@ -288,6 +288,18 @@ class Response extends AbstractWidget
     }
 
     /**
+     * Get response cookie
+     *
+     * @param  string $key The name of cookie
+     * @param  mixed  $default The default value when cookie not exists
+     * @return mixed
+     */
+    public function getCookie($key, $default = null)
+    {
+        return isset($this->cookie[$key]) ? $this->cookie[$key] : $default;
+    }
+
+    /**
      * Set response cookie
      *
      * @param  string       $key     The name of cookie
