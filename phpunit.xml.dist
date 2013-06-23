@@ -20,6 +20,11 @@
             <file>./tests/WidgetTest/DbTest.php</file>
             <file>./tests/WidgetTest/DbTest/QueryTest.php</file>
         </testsuite>
+        <testsuite name="Cookie">
+            <file>./tests/WidgetTest/CookieTest.php</file>
+            <file>./tests/WidgetTest/HeaderTest.php</file>
+            <file>./tests/WidgetTest/ResponseTest.php</file>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist>
