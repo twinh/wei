@@ -237,6 +237,11 @@ class UaTest extends TestCase
         $this->assertTrue($this->ua->inMobile());
     }
 
+    public function testNotInMobile()
+    {
+        $this->assertTrue($this->ua->inMobile());
+    }
+
     public function providerForInMobile()
     {
         return array(
@@ -260,6 +265,71 @@ class UaTest extends TestCase
                     'HTTP_X_WAP_PROFILE' => '1'
                 )
             ),
+            array(
+                array(
+                    'HTTP_X_WAP_CLIENTID' => '1'
+                )
+            ),
+            array(
+                array(
+                    'HTTP_WAP_CONNECTION' => '1'
+                )
+            ),
+            array(
+                array(
+                    'HTTP_PROFILE' => '1'
+                )
+            ),
+            array(
+                array(
+                    'HTTP_X_OPERAMINI_PHONE_UA' => '1'
+                )
+            ),
+            array(
+                array(
+                    'HTTP_X_NOKIA_IPADDRESS' => '1'
+                )
+            ),
+            array(
+                array(
+                    'HTTP_X_NOKIA_GATEWAY_ID' => '1'
+                )
+            ),
+            array(
+                array(
+                    'HTTP_X_ORANGE_ID' => '1'
+                )
+            ),
+            array(
+                array(
+                    'HTTP_X_VODAFONE_3GPDPCONTEXT' => '1'
+                )
+            ),
+            array(
+                array(
+                    'HTTP_X_HUAWEI_USERID' => '1'
+                )
+            ),
+            array(
+                array(
+                    'HTTP_UA_OS' => '1'
+                )
+            ),
+            array(
+                array(
+                    'HTTP_X_MOBILE_GATEWAY' => '1'
+                )
+            ),
+            array(
+                array(
+                    'HTTP_X_ATT_DEVICEID' => '1'
+                )
+            ),
+            array(
+                array(
+                    'HTTP_UA_CPU' => 'ARM'
+                )
+            )
         );
     }
 }
