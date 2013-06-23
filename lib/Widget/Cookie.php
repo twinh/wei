@@ -11,65 +11,14 @@ namespace Widget;
 use Widget\Stdlib\Parameter;
 
 /**
- * A widget manager the HTTP cookie
+ * A widget manager the HTTP request and response cookie
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Request $request The HTTP request widget
- *
+ * @property    Request $request A widget that handles the HTTP request data
+ * @property    Response $response A widget that handles the HTTP response data
  */
 class Cookie extends Parameter
 {
-    /**
-     * The lifetime of cookie (seconds)
-     *
-     * @var int
-     * @link http://php.net/manual/en/function.setcookie.php
-     */
-    protected $expires = 86400;
-
-    /**
-     * The path on the server in which the cookie will be available on
-     *
-     * @var string
-     */
-    protected $path = '/';
-
-    /**
-     * The domain that the cookie is available to
-     *
-     * @var string
-     */
-    protected $domain = null;
-
-    /**
-     * Indicates that the cookie should only be transmitted over a secure HTTPS connection from the client
-     *
-     * @var bool
-     */
-    protected $secure = false;
-
-    /**
-     * When TRUE the cookie will be made accessible only through the HTTP protocol
-     *
-     * @var bool
-     */
-    protected $httpOnly = false;
-
-    /**
-     * Whether send a cookie without urlencoding the cookie value
-     *
-     * @var bool
-     */
-    protected $raw = false;
-
-    /**
-     * The cookies that have not been sent to header, but will sent when class destruct
-     *
-     * @var array
-     * @see Cookie::__destruct
-     */
-    protected $rawCookies = array();
-
     /**
      * Constructor
      *
@@ -83,7 +32,7 @@ class Cookie extends Parameter
     }
 
     /**
-     * Get or set cookie
+     * Get request cookie or set response cookie
      *
      * @param  string       $key     the name of cookie
      * @param  mixed        $value   the value of cookie
@@ -100,7 +49,7 @@ class Cookie extends Parameter
     }
 
     /**
-     * Get cookie
+     * Get request cookie
      *
      * @param  string $key
      * @param  mixed  $default default value
@@ -112,7 +61,7 @@ class Cookie extends Parameter
     }
 
     /**
-     * Set cookie
+     * Set response cookie
      *
      * @param  string       $key     The name of cookie
      * @param  mixed        $value   The value of cookie
@@ -122,29 +71,26 @@ class Cookie extends Parameter
     public function set($key, $value = null, array $options = array())
     {
         if (isset($options['expires']) && 0 > $options['expires'] && isset($this->data[$key])) {
-             unset($this->data[$key]);
+            unset($this->data[$key]);
         } else {
             $this->data[$key] = $value;
         }
 
-        $this->rawCookies[$key] = array('value' => $value) + $options;
+        $this->response->setCookie($key, $value, $options);
 
         return $this;
     }
 
     /**
-     * Remove cookie
+     * Remove response cookie
      *
      * @param string $key the name of cookie
      * @return Cookie
      */
     public function remove($key)
     {
-        if (isset($this->data[$key])) {
-            $this->set($key, null, array(
-                'expires' => -1
-            ));
-        }
+        unset($this->data[$key]);
+        $this->response->removeCookie($key);
 
         return $this;
     }
@@ -158,54 +104,5 @@ class Cookie extends Parameter
     public function offsetUnset($key)
     {
         return $this->remove($key);
-    }
-
-    /**
-     * Send cookie to header
-     *
-     * @return Cookie
-     */
-    public function send()
-    {
-        $time = time();
-        foreach ($this->rawCookies as $name => $options) {
-            $fn = $this->resolveValue($options, 'raw') ? 'setrawcookie' : 'setcookie';
-            $fn(
-                $name,
-                $options['value'],
-                $time + $this->resolveValue($options, 'expires'),
-                $this->resolveValue($options, 'path'),
-                $this->resolveValue($options, 'domain'),
-                $this->resolveValue($options, 'secure'),
-                $this->resolveValue($options, 'httpOnly')
-            );
-            unset($this->rawCookies[$name]);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Destructor
-     *
-     * @todo send or not ?
-     */
-    public function __destruct()
-    {
-        if (!headers_sent()) {
-            $this->send();
-        }
-    }
-
-    /**
-     * Resolve the options value
-     *
-     * @param array $options
-     * @param string $key The name of property
-     * @return mixed
-     */
-    protected function resolveValue($options, $key)
-    {
-        return isset($options[$key]) ? $options[$key] : $this->$key;
     }
 }
