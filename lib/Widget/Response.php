@@ -12,7 +12,6 @@ namespace Widget;
  * A widget that handles the HTTP response data
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Cookie $cookie The cookie widget
  * @property    Logger $logger The logger widget
  */
 class Response extends AbstractWidget
@@ -99,6 +98,37 @@ class Response extends AbstractWidget
      * @var array
      */
     protected $headers = array();
+
+    /**
+     * The response cookies
+     *
+     * @var array
+     */
+    protected $cookies = array();
+
+    /**
+     * The cookie options
+     *
+     * Name     | Type   | Description
+     * ---------|--------|-------------
+     * expires  | int    | The lifetime of cookie (seconds)
+     * path     | string | The path on the server in which the cookie will be available on
+     * domain   | string | The domain that the cookie is available to
+     * secure   | bool   | Indicates that the cookie should only be transmitted over a secure HTTPS connection from the client
+     * httpOnly | bool   | When TRUE the cookie will be made accessible only through the HTTP protocol
+     * raw      | bool   | Whether send a cookie without urlencoding the cookie value
+     *
+     * @var array
+     * @link http://php.net/manual/en/function.setcookie.php
+     */
+    protected $cookieOption = array(
+        'expires'   => 864000,
+        'path'      => '/',
+        'domain'    => null,
+        'secure'    => false,
+        'httpOnly'  => false,
+        'raw'       => false,
+    );
 
     /**
      * Whether response content has been sent
@@ -252,8 +282,46 @@ class Response extends AbstractWidget
             }
         }
 
-        // Send cookie
-        $this->cookie->send();
+        $this->sendCookie();
+
+        return $this;
+    }
+
+    /**
+     * Set response cookie
+     *
+     * @param  string       $key     The name of cookie
+     * @param  mixed        $value   The value of cookie
+     * @param  array        $options The options of cookie
+     * @return Response
+     */
+    public function setCookie($key, $value , array $options = array())
+    {
+        $this->cookies[$key] = array('value' => $value) + $options;
+
+        return $this;
+    }
+
+    /**
+     * Remove response cookie
+     *
+     * @param string $key The name of cookie
+     * @return Response
+     */
+    public function removeCookie($key)
+    {
+        return $this->setCookie($key, '', array('expires' => -1));
+    }
+
+    public function sendCookie()
+    {
+        $time = time();
+        foreach ($this->cookies as $name => $o) {
+            $o += $this->cookieOption;
+            $fn = $o['raw'] ? 'setrawcookie' : 'setcookie';
+            $fn($name, $o['value'], $time + $o['expire'], $o['path'], $o['domain'], $o['secure'], $o['httpOnly']);
+        }
+        $this->cookies = array();
 
         return $this;
     }
