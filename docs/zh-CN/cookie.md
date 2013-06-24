@@ -30,14 +30,7 @@ widget()->cookie->remove('logined');
 
 ### 选项
 
-| 名称      | 类型      | 默认值    | 说明                                                                      |
-|-----------|-----------|-----------|---------------------------------------------------------------------------|
-| expires   | int       | 86400     | 当用户使用谷歌浏览器时为true                                              |
-| path      | string    | /         | cookie活动的路径                                                          |
-| domain    | string    | null      | 保存该cookie的域名                                                        |
-| secure    | bool      | false     | 是否只通过HTTPS安全连接来发送,只有在HTTPS连接下才有效                     |
-| httpOnly  | bool      | false     | 是否只通过HTTP协议发送cookie,如果是,客户端javascript将无法读取到该cookie  |
-| raw       | bool      | false     | 是否发送为不经过URL解码的cookie                                           |
+*无*
 
 ### 方法
 
