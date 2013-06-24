@@ -16,11 +16,13 @@ class ResponseTest extends TestCase
             'statusCode' => 200,
             'content' => 'body',
         ));
+
         $response->header->set(array(
             'Key' => 'Value',
             'Key1' => 'Value1'
         ));
 
+        $response->setCookie('key', 'value', 10);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('body', $response->getContent());

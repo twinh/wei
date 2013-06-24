@@ -15,9 +15,9 @@ widget()->cookie('key', 'value');
 widget()->cookie('key');
 ```
 
-### 写入7天过期的cookie
+### 写入7天后过期的cookie
 ```php
-widget()->cookie('key', 'value', array('expires' => 7));
+widget()->cookie('key', 'value', array('expires' => 7 * 86400));
 ```
 
 ### 删除名称为'logined'的cookie
@@ -55,6 +55,3 @@ widget()->cookie->remove('logined');
 
 #### cookie->remove($key)
 删除cookie
-
-#### cookie->send()
-发送cookie到浏览器
