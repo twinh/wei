@@ -99,6 +99,10 @@ class Response extends AbstractWidget
      */
     protected $headers = array();
 
+    protected $isHeaderSent;
+
+    protected $sentHeaders = array();
+
     /**
      * The response cookies
      *
@@ -136,6 +140,13 @@ class Response extends AbstractWidget
      * @var bool
      */
     protected $isSent = false;
+
+    /**
+     * Whether in unit test mode
+     *
+     * @var bool
+     */
+    protected $unitTest = false;
 
     /**
      * Send response header and content
@@ -259,6 +270,16 @@ class Response extends AbstractWidget
         return $this->version;
     }
 
+    public function setHeader()
+    {
+
+    }
+
+    public function getHeader()
+    {
+
+    }
+
     /**
      * Send headers, including HTTP status, raw headers and cookie
      *
@@ -267,24 +288,41 @@ class Response extends AbstractWidget
     public function sendHeader()
     {
         $file = $line = null;
-        if (headers_sent($file, $line)) {
+        if ($this->isHeaderSent($file, $line)) {
             $this->logger->debug(sprintf('Header has been at %s:%s', $file, $line));
             return false;
         }
 
         // Send status
-        header(sprintf('HTTP/%s %d %s', $this->version, $this->statusCode, $this->statusText));
+        $this->sendRawHeader(sprintf('HTTP/%s %d %s', $this->version, $this->statusCode, $this->statusText));
 
         // Send headers
         foreach ($this->headers as $name => $values) {
             foreach ($values as $value) {
-                header($name . ': ' . $value, false);
+                $this->sendRawHeader($value);
             }
         }
 
         $this->sendCookie();
 
         return $this;
+    }
+
+    public function sendRawHeader($header)
+    {
+        return $this->unitTest ? $this->sentHeaders[] = $header : header($header, false);
+    }
+
+    /**
+     * Checks if or where headers have been sent
+     *
+     * @param $file
+     * @param $line
+     * @return bool
+     */
+    public function isHeaderSent(&$file, &$line)
+    {
+        return $this->unitTest ? $this->isHeaderSent : headers_sent($file, $line);
     }
 
     /**
