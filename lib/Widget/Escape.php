@@ -12,7 +12,7 @@ namespace Widget;
 /**
  * Context specific methods for use in secure output escaping
  *
- * The escape is derived from code of the Zend Framework (2.1.5 - 20130324)
+ * The escape is derived from code of the Zend Framework 2.1.5 - 2.2.2
  *
  * @link https://github.com/zendframework/zf2/blob/master/library/Zend/Escaper/Escaper.php
  */
@@ -51,7 +51,7 @@ class Escape extends AbstractWidget
      *
      * @var string
      */
-    protected $htmlSpecialCharsFlags = \ENT_QUOTES;
+    protected $htmlSpecialCharsFlags = ENT_QUOTES;
 
     /**
      * Static Matcher which escapes characters for HTML Attribute contexts
@@ -109,14 +109,14 @@ class Escape extends AbstractWidget
             $encoding = (string) $encoding;
             if ($encoding === '') {
                 throw new \InvalidArgumentException(
-                    get_called_class() . ' constructor parameter does not allow a blank value'
+                    get_class($this) . ' constructor parameter does not allow a blank value'
                 );
             }
 
             $encoding = strtolower($encoding);
             if (!in_array($encoding, $this->supportedEncodings)) {
                 throw new \InvalidArgumentException(
-                    'Value of \'' . $encoding . '\' passed to ' . get_called_class()
+                    'Value of \'' . $encoding . '\' passed to ' . get_class($this)
                     . ' constructor parameter is invalid. Provide an encoding supported by htmlspecialchars()'
                 );
             }
@@ -125,7 +125,7 @@ class Escape extends AbstractWidget
         }
 
         if (defined('ENT_SUBSTITUTE')) {
-            $this->htmlSpecialCharsFlags|= \ENT_SUBSTITUTE;
+            $this->htmlSpecialCharsFlags|= ENT_SUBSTITUTE;
         }
 
         // set matcher callbacks
@@ -382,7 +382,7 @@ class Escape extends AbstractWidget
             $result = mb_convert_encoding($string, $to, $from);
         } else {
             throw new \RuntimeException(
-                get_called_class()
+                get_class($this)
                 . ' requires either the iconv or mbstring extension to be installed'
                 . ' when escaping for non UTF-8 strings.'
             );
