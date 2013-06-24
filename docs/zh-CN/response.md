@@ -35,6 +35,11 @@ Hello World'
 名称          | 类型      | 默认值    | 说明
 --------------|-----------|-----------|------
 cookieOption  | array     | 无        | 详见下表
+version       | string    | 1.1       | HTTP版本
+statusCode    | int       | 200       | HTTP状态码
+statusText    | string    | OK        | HTTP状态消息
+content       | string    | 无        | HTTP响应内容
+isSent        | bool      | false     | HTTP响应内容是否已发送
 
 #### CookieOption默认配置
 
