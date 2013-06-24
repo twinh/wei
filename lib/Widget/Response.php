@@ -331,7 +331,7 @@ class Response extends AbstractWidget
         foreach ($this->cookies as $name => $o) {
             $o += $this->cookieOption;
             $fn = $o['raw'] ? 'setrawcookie' : 'setcookie';
-            $fn($name, $o['value'], $time + $o['expire'], $o['path'], $o['domain'], $o['secure'], $o['httpOnly']);
+            $fn($name, $o['value'], $time + $o['expires'], $o['path'], $o['domain'], $o['secure'], $o['httpOnly']);
         }
         $this->cookies = array();
 

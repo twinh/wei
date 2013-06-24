@@ -22,7 +22,7 @@ class ResponseTest extends TestCase
             'Key1' => 'Value1'
         ));
 
-        $response->setCookie('key', 'value', 10);
+        $response->setCookie('key', 'value');
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('body', $response->getContent());
