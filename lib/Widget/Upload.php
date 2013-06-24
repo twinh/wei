@@ -21,7 +21,7 @@ class Upload extends Image
 {
     /**
      * Seems that the total post data size is too large
-     * 
+     *
      * @link http://php.net/manual/en/ini.core.php#ini.post-max-size
      */
     protected $postSizeMessage = 'No file uploaded or the total file size is too large, allowed maximum size is %postMaxSize%';
@@ -30,28 +30,28 @@ class Upload extends Image
      * The uploaded file array do not contain the key "$this->field", or error code not available
      */
     protected $noFileMessage = 'No file uploaded, please select a file to upload';
-    
+
     protected $formLimitMessage = '%name% is larger than the MAX_FILE_SIZE value in the HTML form';
-    
+
     protected $partialMessage = '%name% was partial uploaded, please try again';
-    
+
     protected $noTmpDirMessage = 'The temporary upload directory is missing';
-    
+
     protected $cantWriteMessage = 'Cannot write %name% to disk';
-    
+
     protected $extensionMessage = 'File upload stopped by extension';
-    
+
     protected $notUploadedFileMessage = 'No file uploaded';
-    
+
     protected $cantMoveMessage = 'Cannot move uploaded file';
-    
+
     /**
      * The name for error message
-     * 
+     *
      * @var string
      */
     protected $name = 'file';
-    
+
     /**
      * The name defined in the file input, if it's not specified, use the first
      * key in upload files array (equals to $_FILES on default)
@@ -59,59 +59,59 @@ class Upload extends Image
      * @var string
      */
     protected $field;
-    
+
     /**
-     * The diretory to save file, automatic create it if not exist
+     * The directory to save file, automatic create it if not exist
      *
      * @var string
      */
     protected $dir = 'uploads';
-    
+
     /**
-     * The custome file name (without extension) as upload file name to save
+     * The custom file name (without extension) as upload file name to save
      *
      * @var string
      */
     protected $fileName;
-    
+
     /**
      * Whether check if the upload file is valid image or not
-     * 
-     * You can spcify any one of the following options to enable image detect
+     *
+     * You can specify any one of the following options to enable image detect
      * * maxWidth
      * * maxHeight
      * * minWidth
-     * * minHieght
-     * 
+     * * minHeight
+     *
      * @var bool
      */
     protected $isImage = false;
-    
+
     /**
-     * Whether overwrite existing file, if set to false, the uploader will add 
+     * Whether overwrite existing file, if set to false, the uploader will add
      * a number between file name and extension, like file-1.jpg, file-2.jpg
-     * 
+     *
      * @var bool
      */
     protected $overwrite = false;
-    
+
     /**
      * Whether in unit test mode
-     * 
+     *
      * @var bool
      */
     protected $unitTest = false;
-    
+
     /**
      * The max size of post data, for $this->postMaxSize
-     * 
+     *
      * @var string
      */
     protected $postMaxSize;
-    
+
     /**
      * Constructor
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
@@ -123,9 +123,9 @@ class Upload extends Image
 
     /**
      * Upload a file
-     * 
-     * @param string|array $field
-     * @param array $options
+     *
+     * @param string|array $field The name of file input or options of widget
+     * @param array $options The options of widget
      * @return bool
      */
     public function __invoke($field = null, $options = array())
@@ -138,17 +138,17 @@ class Upload extends Image
         } elseif (is_array($field)) {
             $field && $this->storeOption($field);
         }
-        
+
         // Clean previous status
         parent::reset();
 
         $uploadedFiles = $this->request->getParameterReference('file');
-        
+
         // Set default name
         if (!$this->field) {
             $this->field = key($uploadedFiles);
         }
-        
+
         // Check if has file uploaded or file too large
         if (!isset($uploadedFiles[$this->field])) {
             $post = $this->request->getParameterReference('post');
@@ -164,7 +164,7 @@ class Upload extends Image
         }
 
         $uploadedFile = $uploadedFiles[$this->field];
-        
+
         /**
          * @link http://php.net/manual/en/features.file-upload.errors.php
          */
@@ -182,7 +182,7 @@ class Upload extends Image
                     $this->addError('formLimit');
                     break;
 
-                // The uploaded file was only partially uploaded 
+                // The uploaded file was only partially uploaded
                 // http://stackoverflow.com/questions/2937466/why-might-a-file-only-be-partially-uploaded
                 case UPLOAD_ERR_PARTIAL :
                     $this->addError('partial');
@@ -215,8 +215,8 @@ class Upload extends Image
             $this->addError('notUploadedFile');
             return false;
         }
-        
-        // Valdiate file extension, size, mime type by parent class
+
+        // Validate file extension, size, mime type by parent class
         if ($this->isImage || $this->maxWidth || $this->maxHeight || $this->minWidth || $this->minHeight) {
             $result = parent::validate($uploadedFile);
         } else {
@@ -225,13 +225,13 @@ class Upload extends Image
         if (false === $result) {
             return false;
         }
-        
+
         return $this->saveFile($uploadedFile);
     }
 
     /**
      * Save uploaded file to upload directory
-     * 
+     *
      * @param array $uploadedFile
      * @return boolean
      */
@@ -239,7 +239,7 @@ class Upload extends Image
     {
         $ext = $this->getExt();
         $fullExt = $ext ? '.' . $ext : '';
-        
+
         if ($this->fileName) {
             $fileName = $this->fileName;
         } else {
@@ -259,24 +259,24 @@ class Upload extends Image
             $this->addError('cantMove');
             return false;
         }
-        
+
         return true;
     }
-    
+
     /**
      * Returns the uploaded file path
-     * 
+     *
      * @return string
      */
     public function getFile()
     {
         return $this->file;
     }
-   
+
 
     /**
      * Set upload directory
-     * 
+     *
      * @param string $dir
      * @return Upload
      */
@@ -287,24 +287,24 @@ class Upload extends Image
             mkdir($dir, 0700, true);
         }
         $this->dir = $dir;
-        
+
         return $this;
     }
-    
+
     /**
      * Returns upload directory
-     * 
+     *
      * @return string
      */
     public function getDir()
     {
         return $this->dir;
     }
-    
+
     /**
      * Returns a human readable file size (e.g. 1.2MB, 10KB), which recive from
      * the ini configuration
-     * 
+     *
      * @param string $name The name of ini configuration
      * @return string
      */
@@ -313,11 +313,11 @@ class Upload extends Image
         $size = ini_get($name);
         return is_numeric($size) ? $this->fromBytes($size) : $size;
     }
-    
+
     /**
-     * Check if the file was uploaded via HTTP POST, if $this->unitTest is 
+     * Check if the file was uploaded via HTTP POST, if $this->unitTest is
      * enable, it will always return true
-     * 
+     *
      * @param string $file
      * @return bool
      */
@@ -325,11 +325,11 @@ class Upload extends Image
     {
         return $this->unitTest ? is_file($file) : is_uploaded_file($file);
     }
-    
+
     /**
-     * Moves an uploaded file to a new location, if $this->unitTest is enable, 
+     * Moves an uploaded file to a new location, if $this->unitTest is enable,
      * it will use `copy` function instead
-     * 
+     *
      * @param string $from The uploaded file name
      * @param string $to The destination of the moved file.
      * @return bool
