@@ -286,7 +286,7 @@ class QueryBuilder
      * @param string|integer $key The parameter position or name
      * @param mixed $value The parameter value
      * @param string|null $type PDO::PARAM_*
-     * @return QueryBuilder This QueryBuilder instance
+     * @return QueryBuilder
      */
     public function setParameter($key, $value, $type = null)
     {
@@ -315,7 +315,7 @@ class QueryBuilder
      *
      * @param array $params The query parameters to set
      * @param array $types  The query parameters types to set
-     * @return QueryBuilder This QueryBuilder instance
+     * @return QueryBuilder
      */
     public function setParameters(array $params, array $types = array())
     {
@@ -350,7 +350,7 @@ class QueryBuilder
      * Sets the position of the first result to retrieve (the "offset")
      *
      * @param integer $offset The first result to return
-     * @return QueryBuilder This QueryBuilder instance
+     * @return QueryBuilder
      */
     public function offset($offset)
     {
@@ -361,7 +361,7 @@ class QueryBuilder
      * Sets the maximum number of results to retrieve (the "limit")
      *
      * @param integer $limit The maximum number of results to retrieve
-     * @return QueryBuilder This QueryBuilder instance
+     * @return QueryBuilder
      */
     public function limit($limit)
     {
@@ -399,7 +399,7 @@ class QueryBuilder
      * @param string $sqlPart
      * @param boolean $append
      * @param string $type
-     * @return QueryBuilder This QueryBuilder instance.
+     * @return QueryBuilder
      */
     public function add($sqlPartName, $sqlPart, $append = false, $type = null)
     {
@@ -439,15 +439,15 @@ class QueryBuilder
      * Specifies an item that is to be returned in the query result.
      * Replaces any previously specified selections, if any.
      *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->select('u.id', 'p.id')
-     *         ->from('users', 'u')
-     *         ->leftJoin('u', 'phonenumbers', 'p', 'u.id = p.user_id');
-     * </code>
+     * ```
+     * $qb = $db->createQueryBuilder()
+     *     ->select('u.id', 'p.id')
+     *     ->from('users u')
+     *     ->leftJoin('phones p', 'u.id = p.user_id');
+     * ```
      *
      * @param mixed $select The selection expressions.
-     * @return QueryBuilder This QueryBuilder instance.
+     * @return QueryBuilder
      */
     public function select($select = null)
     {
@@ -465,16 +465,16 @@ class QueryBuilder
     /**
      * Adds an item that is to be returned in the query result.
      *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->select('u.id')
-     *         ->addSelect('p.id')
-     *         ->from('users', 'u')
-     *         ->leftJoin('u', 'phonenumbers', 'u.id = p.user_id');
-     * </code>
+     * ```
+     * $qb = $db->createQueryBuilder()
+     *     ->select('u.id')
+     *     ->addSelect('p.id')
+     *     ->from('users u')
+     *     ->leftJoin('phones p', 'u.id = p.user_id');
+     * ```
      *
      * @param mixed $select The selection expression.
-     * @return QueryBuilder This QueryBuilder instance.
+     * @return QueryBuilder
      */
     public function addSelect($select = null)
     {
@@ -493,15 +493,15 @@ class QueryBuilder
      * Turns the query being built into a bulk delete query that ranges over
      * a certain table.
      *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->delete('users', 'u')
-     *         ->where('u.id = :user_id');
-     *         ->setParameter(':user_id', 1);
-     * </code>
+     * ```
+     * $qb = $db->createQueryBuilder()
+     *     ->delete('users u')
+     *     ->where('u.id = :user_id');
+     *     ->setParameter(':user_id', 1);
+     * ```
      *
      * @param string $table The table whose rows are subject to the deletion.
-     * @return QueryBuilder This QueryBuilder instance.
+     * @return QueryBuilder
      */
     public function delete($table = null)
     {
@@ -518,15 +518,15 @@ class QueryBuilder
      * Turns the query being built into a bulk update query that ranges over
      * a certain table
      *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->update('users', 'u')
-     *         ->set('u.password', md5('password'))
-     *         ->where('u.id = ?');
-     * </code>
+     * ```
+     * $qb = $db->createQueryBuilder()
+     *     ->update('users u')
+     *     ->set('u.password', md5('password'))
+     *     ->where('u.id = ?');
+     * ```
      *
      * @param string $table The table whose rows are subject to the update
-     * @return QueryBuilder This QueryBuilder instance
+     * @return QueryBuilder
      */
     public function update($table = null)
     {
@@ -555,7 +555,7 @@ class QueryBuilder
      * ```
      *
      * @param string $from   The table
-     * @return QueryBuilder This QueryBuilder instance.
+     * @return QueryBuilder
      */
     public function from($from)
     {
@@ -662,13 +662,13 @@ class QueryBuilder
      *
      * ```
      * $qb = $db->createQueryBuilder()
-     *     ->update('users', 'u')
+     *     ->update('users u')
      *     ->set('u.password = ?')
      *     ->where('u.id = ?');
      * ```
      *
      * @param string $set The SET clause
-     * @return QueryBuilder This QueryBuilder instance.
+     * @return QueryBuilder
      */
     public function set($set)
     {
@@ -699,10 +699,10 @@ class QueryBuilder
      * ```
      *
      * @param $conditions
-     * @param null $params
+     * @param array $params
      * @param array $type
      * @internal param mixed $predicates The restriction predicates.
-     * @return QueryBuilder This QueryBuilder instance.
+     * @return QueryBuilder
      */
     public function where($conditions, $params = null, $type = array())
     {
@@ -718,7 +718,7 @@ class QueryBuilder
      * ```php
      * $qb = $db->createQueryBuilder()
      *     ->select('*')
-     *     ->from('users', 'u')
+     *     ->from('users u')
      *     ->where('u.username LIKE ?')
      *     ->andWhere('u.is_active = 1');
      * ```
@@ -742,10 +742,9 @@ class QueryBuilder
      * ```php
      * $qb = $db->createQueryBuilder()
      *     ->select('u.name')
-     *     ->from('users', 'u')
+     *     ->from('users u')
      *     ->where('u.id = 1')
      *     ->orWhere('u.id = 2');
-     *
      * ```
      *
      * @param string $conditions The WHERE conditions
@@ -764,15 +763,15 @@ class QueryBuilder
      * Specifies a grouping over the results of the query.
      * Replaces any previously specified groupings, if any.
      *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->select('u.name')
-     *         ->from('users', 'u')
-     *         ->groupBy('u.id');
-     * </code>
+     * ```
+     * $qb = $db->createQueryBuilder()
+     *     ->select('u.name')
+     *     ->from('users u')
+     *     ->groupBy('u.id');
+     * ```
      *
      * @param mixed $groupBy The grouping expression.
-     * @return QueryBuilder This QueryBuilder instance.
+     * @return QueryBuilder
      */
     public function groupBy($groupBy)
     {
@@ -789,16 +788,16 @@ class QueryBuilder
     /**
      * Adds a grouping expression to the query.
      *
-     * <code>
-     *     $qb = $conn->createQueryBuilder()
-     *         ->select('u.name')
-     *         ->from('users', 'u')
-     *         ->groupBy('u.lastLogin');
-     *         ->addGroupBy('u.createdAt')
-     * </code>
+     * ```
+     * $qb = $db->createQueryBuilder()
+     *     ->select('u.name')
+     *     ->from('users u')
+     *     ->groupBy('u.lastLogin');
+     *     ->addGroupBy('u.createdAt')
+     * ```
      *
      * @param mixed $groupBy The grouping expression.
-     * @return QueryBuilder This QueryBuilder instance.
+     * @return QueryBuilder
      */
     public function addGroupBy($groupBy)
     {
@@ -865,7 +864,7 @@ class QueryBuilder
      *
      * @param string $sort The ordering expression.
      * @param string $order The ordering direction.
-     * @return QueryBuilder This QueryBuilder instance.
+     * @return QueryBuilder
      */
     public function orderBy($sort, $order = null)
     {
@@ -877,7 +876,7 @@ class QueryBuilder
      *
      * @param string $sort The ordering expression.
      * @param string $order The ordering direction.
-     * @return QueryBuilder This QueryBuilder instance.
+     * @return QueryBuilder
      */
     public function addOrderBy($sort, $order = null)
     {
