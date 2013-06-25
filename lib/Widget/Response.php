@@ -161,6 +161,28 @@ class Response extends AbstractWidget
     }
 
     /**
+     * @see Response::__invoke
+     */
+    public function send($content = null, $status = null)
+    {
+        $this->isSent = true;
+
+        if (null !== $content) {
+            $this->content = $content;
+        }
+
+        if (null !== $status) {
+            $this->setStatusCode($status);
+        }
+
+        $this->sendHeader();
+
+        $this->sendContent();
+
+        return $this;
+    }
+
+    /**
      * Set response content
      *
      * @param  mixed          $content
@@ -191,28 +213,6 @@ class Response extends AbstractWidget
     public function sendContent()
     {
         echo $this->content;
-
-        return $this;
-    }
-
-    /**
-     * @see Response::__invoke
-     */
-    public function send($content = null, $status = null)
-    {
-        $this->isSent = true;
-
-        if (null !== $content) {
-            $this->content = $content;
-        }
-
-        if (null !== $status) {
-            $this->setStatusCode($status);
-        }
-
-        $this->sendHeader();
-
-        $this->sendContent();
 
         return $this;
     }
@@ -293,13 +293,15 @@ class Response extends AbstractWidget
             return false;
         }
 
+        $this->isHeaderSent = true;
+
         // Send status
         $this->sendRawHeader(sprintf('HTTP/%s %d %s', $this->version, $this->statusCode, $this->statusText));
 
         // Send headers
         foreach ($this->headers as $name => $values) {
             foreach ($values as $value) {
-                $this->sendRawHeader($value);
+                $this->sendRawHeader($name . ': ' . $value);
             }
         }
 
@@ -308,9 +310,9 @@ class Response extends AbstractWidget
         return $this;
     }
 
-    public function sendRawHeader($header)
+    protected function sendRawHeader($header)
     {
-        return $this->unitTest ? $this->sentHeaders[] = $header : header($header, false);
+        $this->unitTest ? $this->sentHeaders[] = $header : header($header, false);
     }
 
     /**
@@ -323,6 +325,11 @@ class Response extends AbstractWidget
     public function isHeaderSent(&$file, &$line)
     {
         return $this->unitTest ? $this->isHeaderSent : headers_sent($file, $line);
+    }
+
+    public function getSentHeaders()
+    {
+
     }
 
     /**
