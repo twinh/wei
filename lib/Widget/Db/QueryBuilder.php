@@ -700,13 +700,13 @@ class QueryBuilder
      *
      * @param $conditions
      * @param array $params
-     * @param array $type
+     * @param array $types
      * @internal param mixed $predicates The restriction predicates.
      * @return QueryBuilder
      */
-    public function where($conditions, $params = null, $type = array())
+    public function where($conditions, $params = null, $types = array())
     {
-        $conditions = $this->processCondition($conditions, $params, $type);
+        $conditions = $this->processCondition($conditions, $params, $types);
 
         return $this->add('where', $conditions);
     }
