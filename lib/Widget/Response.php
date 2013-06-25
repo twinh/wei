@@ -334,9 +334,9 @@ class Response extends AbstractWidget
     }
 
     /**
-     * Send headers, including HTTP status, raw headers and cookie
+     * Send HTTP headers, including HTTP status, raw headers and cookies
      *
-     * @return false|Response
+     * @return bool If the header has been seen, return false, otherwise, return true
      */
     public function sendHeader()
     {
@@ -358,7 +358,7 @@ class Response extends AbstractWidget
 
         $this->sendCookie();
 
-        return $this;
+        return true;
     }
 
     protected function sendRawHeader($header)
@@ -387,7 +387,7 @@ class Response extends AbstractWidget
      */
     public function getCookie($key, $default = null)
     {
-        return isset($this->cookie[$key]) ? $this->cookie[$key] : $default;
+        return isset($this->cookies[$key]) ? $this->cookies[$key]['value'] : $default;
     }
 
     /**
@@ -419,6 +419,8 @@ class Response extends AbstractWidget
     public function sendCookie()
     {
         $time = time();
+
+        // Anonymous function for unit test
         $setCookie = function(){};
 
         foreach ($this->cookies as $name => $o) {
@@ -426,7 +428,6 @@ class Response extends AbstractWidget
             $fn = $this->unitTest ? $setCookie : ($o['raw'] ? 'setrawcookie' : 'setcookie');
             $fn($name, $o['value'], $time + $o['expires'], $o['path'], $o['domain'], $o['secure'], $o['httpOnly']);
         }
-        $this->cookies = array();
 
         return $this;
     }
