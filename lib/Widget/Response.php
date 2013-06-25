@@ -419,14 +419,28 @@ class Response extends AbstractWidget
     public function sendCookie()
     {
         $time = time();
+        $setCookie = function(){};
+
         foreach ($this->cookies as $name => $o) {
+            $this->internalSendCookie($o);
             $o += $this->cookieOption;
-            $fn = $o['raw'] ? 'setrawcookie' : 'setcookie';
+            $fn = $this->unitTest ? $setCookie : $o['raw'] ? 'setrawcookie' : 'setcookie';
+            var_dump($fn);exit;
             $fn($name, $o['value'], $time + $o['expires'], $o['path'], $o['domain'], $o['secure'], $o['httpOnly']);
         }
         $this->cookies = array();
 
         return $this;
+    }
+
+    protected function internalSendCookie($o)
+    {
+
+    }
+
+    protected function sendRawCookie()
+    {
+        return $this->o
     }
 
     /**
