@@ -342,7 +342,9 @@ class Response extends AbstractWidget
     {
         $file = $line = null;
         if ($this->isHeaderSent($file, $line)) {
-            $this->logger->debug(sprintf('Header has been at %s:%s', $file, $line));
+            if ($this->widget->has('logger')) {
+                $this->logger->debug(sprintf('Header has been at %s:%s', $file, $line));
+            }
             return false;
         }
 
