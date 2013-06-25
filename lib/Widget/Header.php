@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * The response header widget
+ * A widget that handles the HTTP response headers
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Response $response A widget that handles the HTTP response data
