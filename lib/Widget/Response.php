@@ -99,6 +99,11 @@ class Response extends AbstractWidget
      */
     protected $headers = array();
 
+    /**
+     * The sent response headers
+     *
+     * @var array
+     */
     protected $sentHeaders = array();
 
     /**
@@ -170,7 +175,7 @@ class Response extends AbstractWidget
         $this->isSent = true;
 
         if (null !== $content) {
-            $this->content = $content;
+            $this->setContent($content);
         }
 
         if (null !== $status) {
@@ -363,6 +368,14 @@ class Response extends AbstractWidget
         return true;
     }
 
+    /**
+     * Send a raw HTTP header
+     *
+     * If in unit test mode, the response will store header string into
+     * `sentHeaders` property without send it for testing purpose
+     *
+     * @param string $header
+     */
     protected function sendRawHeader($header)
     {
         $this->unitTest ? ($this->sentHeaders[] = $header) : header($header, false);
@@ -371,9 +384,14 @@ class Response extends AbstractWidget
     /**
      * Checks if or where headers have been sent
      *
-     * @param $file
-     * @param $line
+     * If NOT in unit test mode and the optional `file` and `line` parameters
+     * are set, `isHeaderSent()` will put the PHP source file name and line
+     * number where output started in the file and line variables
+     *
+     * @param string $file
+     * @param int $line The line number where the output started
      * @return bool
+     * @link http://php.net/manual/en/function.headers-sent.php
      */
     public function isHeaderSent(&$file = null, &$line = null)
     {
