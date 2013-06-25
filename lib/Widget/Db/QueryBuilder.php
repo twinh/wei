@@ -223,6 +223,11 @@ class QueryBuilder
         return $this->execute();
     }
 
+    /**
+     * Execute a COUNT query to receive the rows number
+     *
+     * @return int
+     */
     public function count()
     {
         return (int)$this->db->fetchColumn($this->getSqlForCount(), $this->params);
