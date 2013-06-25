@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * The response header widget
+ * A widget that handles the HTTP response headers
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Response $response A widget that handles the HTTP response data
@@ -64,22 +64,7 @@ class Header extends AbstractWidget
      */
     public function set($name, $values = null, $replace = true)
     {
-        if (is_array($name)) {
-            foreach ($name as $key => $value) {
-                $this->set($key, $value);
-            }
-            return $this;
-        }
-
-        $values = (array) $values;
-
-        if (true === $replace || !isset($this->data[$name])) {
-            $this->data[$name] = $values;
-        } else {
-            $this->data[$name] = array_merge($this->data[$name], $values);
-        }
-
-        return $this;
+        return $this->response->setHeader($name, $values, $replace);
     }
 
     /**
@@ -92,15 +77,7 @@ class Header extends AbstractWidget
      */
     public function get($name, $default = null, $first = true)
     {
-        if (!isset($this->data[$name])) {
-            return $default;
-        }
-
-        if (is_array($this->data[$name]) && $first) {
-            return current($this->data[$name]);
-        }
-
-        return $this->data[$name];
+        return $this->response->getHeader($name, $default, $first);
     }
 
     /**
@@ -111,7 +88,7 @@ class Header extends AbstractWidget
      */
     public function remove($name)
     {
-        unset($this->data[$name]);
+        $this->response->removeHeader($name);
 
         return $this;
     }

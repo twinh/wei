@@ -100,6 +100,13 @@ class Response extends AbstractWidget
     protected $headers = array();
 
     /**
+     * The sent response headers
+     *
+     * @var array
+     */
+    protected $sentHeaders = array();
+
+    /**
      * The response cookies
      *
      * @var array
@@ -138,6 +145,13 @@ class Response extends AbstractWidget
     protected $isSent = false;
 
     /**
+     * Whether in unit test mode
+     *
+     * @var bool
+     */
+    protected $unitTest = false;
+
+    /**
      * Send response header and content
      *
      * @param  string         $content
@@ -147,6 +161,32 @@ class Response extends AbstractWidget
     public function __invoke($content = null, $status = null)
     {
         return $this->send($content, $status);
+    }
+
+    /**
+     * Send response header and content
+     *
+     * @param  string         $content
+     * @param  int            $status
+     * @return Response
+     */
+    public function send($content = null, $status = null)
+    {
+        $this->isSent = true;
+
+        if (null !== $content) {
+            $this->setContent($content);
+        }
+
+        if (null !== $status) {
+            $this->setStatusCode($status);
+        }
+
+        $this->sendHeader();
+
+        $this->sendContent();
+
+        return $this;
     }
 
     /**
@@ -180,28 +220,6 @@ class Response extends AbstractWidget
     public function sendContent()
     {
         echo $this->content;
-
-        return $this;
-    }
-
-    /**
-     * @see Response::__invoke
-     */
-    public function send($content = null, $status = null)
-    {
-        $this->isSent = true;
-
-        if (null !== $content) {
-            $this->content = $content;
-        }
-
-        if (null !== $status) {
-            $this->setStatusCode($status);
-        }
-
-        $this->sendHeader();
-
-        $this->sendContent();
 
         return $this;
     }
@@ -260,31 +278,124 @@ class Response extends AbstractWidget
     }
 
     /**
-     * Send headers, including HTTP status, raw headers and cookie
+     * Set the header string
      *
-     * @return false|Response
+     * @param  string       $name    The header name
+     * @param  string|array $values  The header values
+     * @param  bool         $replace Whether replace the exists values or not
+     * @return Response
+     */
+    public function setHeader($name, $values = null, $replace = true)
+    {
+        if (is_array($name)) {
+            foreach ($name as $key => $value) {
+                $this->setHeader($key, $value);
+            }
+            return $this;
+        }
+
+        $values = (array) $values;
+
+        if (true === $replace || !isset($this->headers[$name])) {
+            $this->headers[$name] = $values;
+        } else {
+            $this->headers[$name] = array_merge($this->headers[$name], $values);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get the header string
+     *
+     * @param  string $name    The header name
+     * @param  mixed  $default The default value
+     * @param  bool   $first   return the first element or the whole header values
+     * @return mixed
+     */
+    public function getHeader($name, $default = null, $first = true)
+    {
+        if (!isset($this->headers[$name])) {
+            return $default;
+        }
+
+        if (is_array($this->headers[$name]) && $first) {
+            return current($this->headers[$name]);
+        }
+
+        return $this->headers[$name];
+    }
+
+    /**
+     * Remove header by specified name
+     *
+     * @param string $name The header name
+     * @return Response
+     */
+    public function removeHeader($name)
+    {
+        unset($this->headers[$name]);
+        return $this;
+    }
+
+    /**
+     * Send HTTP headers, including HTTP status, raw headers and cookies
+     *
+     * @return bool If the header has been seen, return false, otherwise, return true
      */
     public function sendHeader()
     {
         $file = $line = null;
-        if (headers_sent($file, $line)) {
-            $this->logger->debug(sprintf('Header has been at %s:%s', $file, $line));
+        if ($this->isHeaderSent($file, $line)) {
+            if ($this->widget->has('logger')) {
+                $this->logger->debug(sprintf('Header has been at %s:%s', $file, $line));
+            }
             return false;
         }
 
         // Send status
-        header(sprintf('HTTP/%s %d %s', $this->version, $this->statusCode, $this->statusText));
+        $this->sendRawHeader(sprintf('HTTP/%s %d %s', $this->version, $this->statusCode, $this->statusText));
 
         // Send headers
         foreach ($this->headers as $name => $values) {
             foreach ($values as $value) {
-                header($name . ': ' . $value, false);
+                $this->sendRawHeader($name . ': ' . $value);
             }
         }
 
         $this->sendCookie();
 
-        return $this;
+        return true;
+    }
+
+    /**
+     * Send a raw HTTP header
+     *
+     * If in unit test mode, the response will store header string into
+     * `sentHeaders` property without send it for testing purpose
+     *
+     * @param string $header
+     */
+    protected function sendRawHeader($header)
+    {
+        $this->unitTest ? ($this->sentHeaders[] = $header) : header($header, false);
+    }
+
+    /**
+     * Checks if or where headers have been sent
+     *
+     * If NOT in unit test mode and the optional `file` and `line` parameters
+     * are set, `isHeaderSent()` will put the PHP source file name and line
+     * number where output started in the file and line variables
+     *
+     * @param string $file
+     * @param int $line The line number where the output started
+     * @return bool
+     * @link http://php.net/manual/en/function.headers-sent.php
+     */
+    public function isHeaderSent(&$file = null, &$line = null)
+    {
+        return $this->unitTest ? (bool)$this->sentHeaders : headers_sent($file, $line);
     }
 
     /**
@@ -296,7 +407,7 @@ class Response extends AbstractWidget
      */
     public function getCookie($key, $default = null)
     {
-        return isset($this->cookie[$key]) ? $this->cookie[$key] : $default;
+        return isset($this->cookies[$key]) ? $this->cookies[$key]['value'] : $default;
     }
 
     /**
@@ -328,12 +439,15 @@ class Response extends AbstractWidget
     public function sendCookie()
     {
         $time = time();
+
+        // Anonymous function for unit test
+        $setCookie = function(){};
+
         foreach ($this->cookies as $name => $o) {
             $o += $this->cookieOption;
-            $fn = $o['raw'] ? 'setrawcookie' : 'setcookie';
+            $fn = $this->unitTest ? $setCookie : ($o['raw'] ? 'setrawcookie' : 'setcookie');
             $fn($name, $o['value'], $time + $o['expires'], $o['path'], $o['domain'], $o['secure'], $o['httpOnly']);
         }
-        $this->cookies = array();
 
         return $this;
     }
