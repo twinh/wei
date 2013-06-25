@@ -177,12 +177,100 @@ $qb->reset('where');
 echo $qb->getSql();
 ```
 
-### 区分find,findAll,fetch,fetchAll
-```php
-    TODO
-```
-
 调用方式
 --------
 
 ### 方法
+
+#### db($table)
+根据数据表名称,创建一个新Query Builder对象
+
+**返回:** `QueryBuilder`
+
+#### db->createQueryBuilder()
+创建一个新Query Builder对象
+
+**返回:** `QueryBuilder`
+
+#### queryBuilder->select($select = null)
+设置SELECT字句要查询的字段名称
+
+**返回:** `QueryBuilder`
+
+#### queryBuilder->addSelect($select = null)
+增加SELECT子句要查询的字段名称
+
+**返回:** `QueryBuilder`
+
+#### queryBuilder->delete($table = null)
+设置SQL语句为DELETE操作
+
+**返回:** `QueryBuilder`
+
+#### queryBuilder->update($table = null)
+设置SQL语句为UPDATE操作
+
+**返回:** `QueryBuilder`
+
+#### queryBuilder->from($table)
+设置`FROM`字句的数据表名称
+
+**返回:** `QueryBuilder`
+
+#### queryBuilder->where($conditions, $params = null, $type = array())
+设置`WHERE`查询条件
+
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$conditions | string       | 查询条件,如`id = 1`, `id = ?`
+$params     | array        | 参数的值
+$type       | array        | 参数的类型
+
+#### queryBuilder->join($table, $on = null)
+增加`INNER JOIN`字句到当前查询中
+
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称   | 类型         | 说明
+-------|--------------|------
+$table | string       | 要连接的数据表名称,如`userGroup`
+$on    | string       | 连接的关联条件,如`user.groupId = userGroup.id`
+
+#### queryBuilder->innerJoin($table, $on = null)
+同上,增加`INNER JOIN`字句到当前查询中
+
+#### queryBuilder->leftJoin($table, $on = null)
+增加`LEFT JOIN`字句到当前查询中
+
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称   | 类型         | 说明
+-------|--------------|------
+$table | string       | 要连接的数据表名称,如`userGroup`
+$on    | string       | 连接的关联条件,如`user.groupId = userGroup.id`
+
+#### queryBuilder->rightJoin($table, $on = null)
+增加`RIGHT JOIN`字句到当前查询中
+
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称   | 类型         | 说明
+-------|--------------|------
+$table | string       | 要连接的数据表名称,如`userGroup`
+$on    | string       | 连接的关联条件,如`user.groupId = userGroup.id`
+
+#### queryBuilder->getTable()
+获取当前查询的数据表名称
+
+#### queryBuilder->getSql()
+获取当前查询的完整SQL语句
