@@ -18,7 +18,7 @@ namespace Widget;
  * HTTP Request
  * @property Request    $request A widget that handles the HTTP request data
  * @method   mixed      request($name, $default = null) Returns a stringify request parameter value
- * @property Cookie     $cookie A widget manager the HTTP cookie
+ * @property Cookie     $cookie A widget that handles the HTTP request and response cookies
  * @method   mixed      cookie($key, $value = null, $options = array()) Get or set cookie
  * @property Post       $post A widget that handles the HTTP request parameters ($_POST)
  * @method   string     post($name, $default = null) Returns a stringify request parameter value
@@ -40,7 +40,7 @@ namespace Widget;
  * @method   Download   download($file, $options) Send file download response
  * @property Flush      $flush A widget that flushes the content to browser immediately
  * @method   Flush      flush($content = null, $status = null) Send response content
- * @property Header     $header The response header widget
+ * @property Header     $header A widget that handles the HTTP response headers
  * @method   mixed      header($name, $values = null, $replace = true) Get or set HTTP header
  * @property Json       $json A widget to response json
  * @method   Json       json($message = null, $code = 0, array $append = array(), $jsonp = false) Send JSON(P) response

@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Stdlib\Parameter;
 
 /**
- * A widget manager the HTTP request and response cookie
+ * A widget that handles the HTTP request and response cookies
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request A widget that handles the HTTP request data

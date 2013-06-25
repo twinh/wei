@@ -80,6 +80,9 @@ $widget = widget(array(
             'proxyDir' => './',
             'annotationDriverPaths' => array('./')
         )
+    ),
+    'response' => array(
+        'unitTest' => true
     )
 ));
 

@@ -11,22 +11,25 @@ class ResponseTest extends TestCase
 
     public function testFromCreateToSend()
     {
-        $response = new \Widget\Response(array(
-            'widget' => $this->widget,
-            'statusCode' => 200,
-            'content' => 'body',
-        ));
+        $response = $this->object;
 
-        $response->header->set(array(
+        // Prepare
+        $response->setStatusCode(200);
+        $response->setContent('body');
+        $response->setHeader(array(
             'Key' => 'Value',
             'Key1' => 'Value1'
         ));
-
         $response->setCookie('key', 'value');
 
+        // Send
+        $output = $this->getOutput($response);
+
+        $this->assertEquals('body', $output);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('body', $response->getContent());
-        $this->assertEquals('body', $this->getOutput($response));
+        $this->assertTrue($response->isHeaderSent());
+        $this->assertEquals('value', $response->getCookie('key'));
     }
 
     public function testSend()
@@ -79,5 +82,26 @@ class ResponseTest extends TestCase
         $parts = explode("\r\n", $response);
 
         $this->assertContains('HTTP/1.1 200 Right!', $parts[0]);
+    }
+
+    public function testSendHeader()
+    {
+        $response = $this->object;
+
+        $response->setHeader('key', 'value');
+
+        $this->assertTrue($response->sendHeader());
+        $this->assertFalse($response->sendHeader());
+    }
+
+    public function testSendStatus()
+    {
+        $response = $this->object;
+
+        $response->setSentStatus(true);
+        $this->assertTrue($response->isSent());
+
+        $response->setSentStatus(false);
+        $this->assertFalse($response->isSent());
     }
 }
