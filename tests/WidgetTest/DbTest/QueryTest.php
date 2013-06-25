@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: Twin
- * Date: 13-6-3
- * Time: 下午1:13
- * To change this template use File | Settings | File Templates.
- */
 
 namespace WidgetTest\DbTest;
 
