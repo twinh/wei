@@ -11,22 +11,24 @@ class ResponseTest extends TestCase
 
     public function testFromCreateToSend()
     {
-        $response = new \Widget\Response(array(
-            'widget' => $this->widget,
-            'statusCode' => 200,
-            'content' => 'body',
-        ));
+        $response = $this->object;
 
-        $response->header->set(array(
+        // Prepare
+        $response->setStatusCode(200);
+        $response->setContent('body');
+        $response->setHeader(array(
             'Key' => 'Value',
             'Key1' => 'Value1'
         ));
-
         $response->setCookie('key', 'value');
 
+        // Send
+        $output = $this->getOutput($response);
+
+        $this->assertEquals('body', $output);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('body', $response->getContent());
-        $this->assertEquals('body', $this->getOutput($response));
+        $this->assertTrue($response->isHeaderSent());
     }
 
     public function testSend()

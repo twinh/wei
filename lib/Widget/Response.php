@@ -159,7 +159,11 @@ class Response extends AbstractWidget
     }
 
     /**
-     * @see Response::__invoke
+     * Send response header and content
+     *
+     * @param  string         $content
+     * @param  int            $status
+     * @return Response
      */
     public function send($content = null, $status = null)
     {
@@ -359,7 +363,7 @@ class Response extends AbstractWidget
 
     protected function sendRawHeader($header)
     {
-        $this->unitTest ? $this->sentHeaders[] = $header : header($header, false);
+        $this->unitTest ? ($this->sentHeaders[] = $header) : header($header, false);
     }
 
     /**
@@ -369,14 +373,9 @@ class Response extends AbstractWidget
      * @param $line
      * @return bool
      */
-    public function isHeaderSent(&$file, &$line)
+    public function isHeaderSent(&$file = null, &$line = null)
     {
         return $this->unitTest ? (bool)$this->sentHeaders : headers_sent($file, $line);
-    }
-
-    public function getSentHeaders()
-    {
-
     }
 
     /**
