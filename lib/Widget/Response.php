@@ -99,8 +99,6 @@ class Response extends AbstractWidget
      */
     protected $headers = array();
 
-    protected $isHeaderSent;
-
     protected $sentHeaders = array();
 
     /**
@@ -270,14 +268,65 @@ class Response extends AbstractWidget
         return $this->version;
     }
 
-    public function setHeader()
+    /**
+     * Set the header string
+     *
+     * @param  string       $name    The header name
+     * @param  string|array $values  The header values
+     * @param  bool         $replace Whether replace the exists values or not
+     * @return Response
+     */
+    public function setHeader($name, $values = null, $replace = true)
     {
+        if (is_array($name)) {
+            foreach ($name as $key => $value) {
+                $this->setHeader($key, $value);
+            }
+            return $this;
+        }
 
+        $values = (array) $values;
+
+        if (true === $replace || !isset($this->headers[$name])) {
+            $this->headers[$name] = $values;
+        } else {
+            $this->headers[$name] = array_merge($this->headers[$name], $values);
+        }
+
+        return $this;
     }
 
-    public function getHeader()
+    /**
+     * Get the header string
+     *
+     * @param  string $name    The header name
+     * @param  mixed  $default The default value
+     * @param  bool   $first   return the first element or the whole header values
+     * @return mixed
+     */
+    public function getHeader($name, $default = null, $first = true)
     {
+        if (!isset($this->headers[$name])) {
+            return $default;
+        }
 
+        if (is_array($this->headers[$name]) && $first) {
+            return current($this->headers[$name]);
+        }
+
+        return $this->headers[$name];
+    }
+
+    /**
+     * Remove header by specified name
+     *
+     * @param string $name The header name
+     * @return Response
+     */
+    public function removeHeader($name)
+    {
+        unset($this->headers[$name]);
+        return $this;
     }
 
     /**
@@ -292,8 +341,6 @@ class Response extends AbstractWidget
             $this->logger->debug(sprintf('Header has been at %s:%s', $file, $line));
             return false;
         }
-
-        $this->isHeaderSent = true;
 
         // Send status
         $this->sendRawHeader(sprintf('HTTP/%s %d %s', $this->version, $this->statusCode, $this->statusText));
@@ -324,7 +371,7 @@ class Response extends AbstractWidget
      */
     public function isHeaderSent(&$file, &$line)
     {
-        return $this->unitTest ? $this->isHeaderSent : headers_sent($file, $line);
+        return $this->unitTest ? (bool)$this->sentHeaders : headers_sent($file, $line);
     }
 
     public function getSentHeaders()
