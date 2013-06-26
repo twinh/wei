@@ -54,9 +54,7 @@ class HeaderTest extends TestCase
         // append
         $header->set('foo', 'bar', false);
 
-        $this->assertEquals('foo: bar
-foo: bar
-', (string)$header);
+        $this->assertEquals("foo: bar\r\nfoo: bar\r\n", (string)$header);
     }
 
     public function testSetArray()
