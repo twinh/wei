@@ -217,7 +217,7 @@ echo $qb->getSql();
 
 **返回:** `QueryBuilder`
 
-#### queryBuilder->where($conditions, $params = null, $type = array())
+#### queryBuilder->where($conditions, $params = null, $types = array())
 设置`WHERE`查询条件
 
 **返回:** `QueryBuilder`
@@ -228,7 +228,45 @@ echo $qb->getSql();
 ------------|--------------|------
 $conditions | string       | 查询条件,如`id = 1`, `id = ?`
 $params     | array        | 参数的值
-$type       | array        | 参数的类型
+$types      | array        | 参数的类型
+
+#### queryBuilder->andWhere($conditions, $params = null, $types = array())
+增加`AND`类型的`WHERE`条件到当前查询中
+
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$conditions | string       | 查询条件,如`id = 1`, `id = ?`
+$params     | array        | 参数的值
+$types      | array        | 参数的类型
+
+#### queryBuilder->orWhere($conditions, $params = null, $types = array())
+增加`OR`类型的`WHERE`条件到当前查询中
+
+**返回:** `QueryBuilder`
+
+#### queryBuilder->orderBy($sort, $order = 'ASC')
+设置`ORDER BY`字句
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$sort       | string       | 排序的字段名称
+$order      | string       | 排序类型,`ASC`或`DESC`
+
+#### queryBuilder->addOrderBy($sort, $order = 'ASC')
+添加`ORDER BY`字句到当前查询中
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$sort       | string       | 排序的字段名称
+$order      | string       | 排序类型,`ASC`或`DESC`
 
 #### queryBuilder->join($table, $on = null)
 增加`INNER JOIN`字句到当前查询中
@@ -268,6 +306,21 @@ $on    | string       | 连接的关联条件,如`user.groupId = userGroup.id`
 -------|--------------|------
 $table | string       | 要连接的数据表名称,如`userGroup`
 $on    | string       | 连接的关联条件,如`user.groupId = userGroup.id`
+
+#### queryBuilder->groupBy($groupBy)
+设置`GROUP BY`字句
+
+#### queryBuilder->addGroupBy($groupBy)
+添加`GROUP BY`字句到当前查询中
+
+#### queryBuilder->having($conditions, $params = array(), $types = array())
+设置`HAVING`字句
+
+#### queryBuilder->andHaving($conditions, $params = array(), $types = array())
+添加`AND`类型`HAVING`字句到当前查询中
+
+#### queryBuilder->orHaving($conditions, $params = array(), $types = array())
+添加`OR`类型的`HAVING`字句到当前查询中
 
 #### queryBuilder->getTable()
 获取当前查询的数据表名称
