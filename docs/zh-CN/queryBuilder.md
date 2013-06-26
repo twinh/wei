@@ -52,7 +52,7 @@ $qb = widget()->db('member')>where('group_id = ? AND name = ?', array('1', 'twin
 $member = $qb->find();
 ```
 
-### 通过冒号占位符`:`构造查询条件
+### 通过命名占位符`:`构造查询条件
 ```php
 $qb = widget()->db('member')
         ->where('group_id = :groupId AND name = :name', array(
@@ -461,6 +461,36 @@ $queryPartNames | null|array   | 留空表示重置所有字句,作为数组时,
 获取当前构造的SQL语句所查找到的行数
 
 **返回:** `int`
+
+#### queryBuilder->setParameter($key, $value, $type = null)
+设置绑定参数的值和类型
+
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$key        | string       | 参数的名称,对于使用命名占位符的预处理语句，应是类似 :name 形式的参数名。对于使用问号占位符的预处理语句，应是以1开始索引的参数位置。
+$value      | mixed        | 参数的值
+$type       | int          | 参数的类型,使用 PDO::PARAM_* 常量明确地指定参数的类型
+
+相关链接: http://php.net/manual/zh/pdostatement.bindvalue.php
+
+#### queryBuilder->setParameters(array $params, array $types = array())
+设置多个绑定参数的值和类型
+
+**返回:** `QueryBuilder`
+
+#### queryBuilder->getParameter($key)
+获取绑定参数的值
+
+**返回:** `mixed`
+
+#### queryBuilder->getParameters()
+获取所有绑定参数的值
+
+**返回:** `array`
 
 #### queryBuilder->getTable()
 获取当前查询的数据表名称
