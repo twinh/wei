@@ -1,7 +1,7 @@
 {
     "name": "widget/widget",
     "description": "A new way to write PHP",
-    "version": "0.9.2-beta",
+    "version": "0.9.3-RC1",
     "type": "library",
     "keywords": ["library"],
     "homepage": "https://github.com/twinh/widget",

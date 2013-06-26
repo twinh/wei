@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## 0.9.3
+## 0.9.3-RC1 (2013-06-26)
 
 * Added [callback](lib/Widget/Callback.php) widget to handle WeChat(Weixin) callback message
 * Added `overwrite` option for [upload](lib/Widget/Upload.php) widget
