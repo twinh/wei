@@ -10,15 +10,15 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is number
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class Number extends AbstractValidator
 {
     protected $notNumberMessage = '%name% must be valid number';
-    
+
     protected $negativeMessage = '%name% must not be number';
-    
+
     /**
      * {@inheritdoc}
      */
@@ -28,7 +28,7 @@ class Number extends AbstractValidator
             $this->addError('notNumber');
             return false;
         }
-        
+
         return true;
     }
 }

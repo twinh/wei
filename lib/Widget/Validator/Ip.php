@@ -10,44 +10,44 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is valid IP address
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link http://php.net/manual/en/filter.filters.flags.php
  */
 class Ip extends AbstractValidator
 {
     protected $notAllowMessage = '%name% must be valid IP';
-    
+
     protected $negativeMessage = '%name% must not be IP';
-    
+
     /**
      * Allows the IP address to be ONLY in IPv4 format
-     * 
+     *
      * @var bool
      */
     protected $ipv4 = false;
-    
+
     /**
      * Allows the IP address to be ONLY in IPv6 format
-     * 
+     *
      * @var bool
      */
     protected $ipv6 = false;
-    
+
     /**
      * Not allows the IP address to be in private ranges
-     * 
+     *
      * @var bool
      */
     protected $noPrivRange = false;
-    
+
     /**
      * Not allows the IP address to be in reserved ranges
-     * 
+     *
      * @var bool
      */
     protected $noResRange = false;
-    
+
     /**
      * {@inheritdoc}
      */
@@ -57,7 +57,7 @@ class Ip extends AbstractValidator
 
         return $this->isValid($input);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -81,7 +81,7 @@ class Ip extends AbstractValidator
             $this->addError('notAllow');
             return false;
         }
-        
+
         return true;
     }
 }

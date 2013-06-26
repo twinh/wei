@@ -10,19 +10,19 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is starts with specified string
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class StartsWith extends AbstractValidator
 {
     protected $notFoundMessage = '%name% must start with "%findMe%"';
-    
+
     protected $negativeMessage = '%name% must not start with "%findMe%"';
-    
+
     protected $findMe;
-    
+
     protected $case = false;
-    
+
     /**
      * {@inheritdoc}
      */
@@ -30,10 +30,10 @@ class StartsWith extends AbstractValidator
     {
         $findMe && $this->storeOption('findMe', $findMe);
         is_bool($case) && $this->storeOption('case', $case);
-        
+
         return $this->isValid($input);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -43,7 +43,7 @@ class StartsWith extends AbstractValidator
             $this->addError('notString');
             return false;
         }
-        
+
         if (is_string($this->findMe)) {
             $fn = $this->case ? 'strpos' : 'stripos';
             if (0 !== $fn($input, $this->findMe)) {
@@ -60,7 +60,7 @@ class StartsWith extends AbstractValidator
                 return false;
             }
         }
-        
+
         return true;
     }
 }

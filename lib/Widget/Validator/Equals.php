@@ -10,19 +10,19 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is equals to specified value
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class Equals extends AbstractValidator
 {
     protected $notEqualsMessage = '%name% must be equals %equals%';
-    
+
     protected $negativeMessage = '%name% must not be equals %equals%';
-    
+
     protected $equals;
-    
+
     protected $strict = false;
-    
+
     /**
      * {@inheritdoc}
      */
@@ -31,10 +31,10 @@ class Equals extends AbstractValidator
         // Sets $this->equals only when the second argument provided
         func_num_args() > 1 && $this->storeOption('equals', $equals);
         is_bool($strict) && $this->storeOption('strict', $strict);
-        
+
         return $this->isValid($input);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -44,7 +44,7 @@ class Equals extends AbstractValidator
             $this->addError('notEquals');
             return false;
         }
-        
+
         return true;
     }
 }

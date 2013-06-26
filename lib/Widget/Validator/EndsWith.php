@@ -10,19 +10,19 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is ends with specified string
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class EndsWith extends AbstractValidator
 {
     protected $notFoundMessage = '%name% must end with "%findMe%"';
-    
+
     protected $negativeMessage = '%name% must not end with "%findMe%"';
-    
+
     protected $findMe;
-    
+
     protected $case = false;
-    
+
     /**
      * {@inheritdoc}
      */
@@ -30,10 +30,10 @@ class EndsWith extends AbstractValidator
     {
         $findMe && $this->storeOption('findMe', $findMe);
         is_bool($case) && $this->storeOption('case', $case);
-        
+
         return $this->isValid($input);
     }
-    
+
     /**
      * {@inheritdoc}
      */

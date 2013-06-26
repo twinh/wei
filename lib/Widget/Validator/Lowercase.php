@@ -10,15 +10,15 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is lowsercase
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class Lowercase extends AbstractValidator
 {
     protected $invalidMessage = '%name% must be lowercase';
-    
+
     protected $negativeMessage = '%name% must not be lowercase';
-    
+
     /**
      * {@inheritdoc}
      */
@@ -28,7 +28,7 @@ class Lowercase extends AbstractValidator
             $this->addError('notString');
             return false;
         }
-        
+
         if (mb_strtolower($input, mb_detect_encoding($input)) != $input) {
             $this->addError('invalid');
             return false;

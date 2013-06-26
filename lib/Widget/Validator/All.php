@@ -10,35 +10,35 @@ namespace Widget\Validator;
 
 /**
  * Check if all of the element in the input is valid by all specified rules
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Is $is The validator manager
  */
 class All extends AbstractValidator
 {
     protected $notArrayMessage = '%name% must be of type array';
-    
+
     /**
      * This message is just a placeholder, would not display to user
-     * 
+     *
      * @var string
      */
     protected $invalidMessage = 'Some of the items is not valid';
-    
+
     protected $itemName = '%name%\'s %index% item';
-    
+
     protected $rules = array();
-    
+
     /**
      * The invalid validators
-     * 
+     *
      * @var array
      */
     protected $validators = array();
-    
+
     /**
      * Check if all of the element in the input is valid by all specified rules
-     * 
+     *
      * @param array|\Traversable $input The input to be validated
      * @param array $rules The validation rules
      * @return bool
@@ -46,10 +46,10 @@ class All extends AbstractValidator
     public function __invoke($input, array $rules = array())
     {
         $rules && $this->storeOption('rules', $rules);
-        
+
         return $this->isValid($input);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -70,7 +70,7 @@ class All extends AbstractValidator
             }
             $index++;
         }
-        
+
         // Adds the placeholder message
         if (count($this->validators)) {
             $this->addError('invalid');
@@ -78,7 +78,7 @@ class All extends AbstractValidator
         }
         return true;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -86,13 +86,13 @@ class All extends AbstractValidator
     {
         $this->loadTranslationMessages();
         $translator = $this->t;
-        
+
         // Firstly, translates the item name (%name%'s %index% item)
         // Secondly, translates "%name%" in the item name
         $name = $translator($translator($this->itemName), array(
             '%name%' => $translator($this->name)
         ));
-        
+
         $messages = array();
         foreach ($this->validators as $index => $validators) {
             foreach ($validators as $rule => $validator) {

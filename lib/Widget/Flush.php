@@ -10,7 +10,7 @@ namespace Widget;
 
 /**
  * A widget that flushes the content to browser immediately
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://php.net/manual/en/function.flush.php
  */
@@ -27,7 +27,7 @@ class Flush extends Response
 
         /**
          * Disable zlib to compress output
-         * 
+         *
          * @link http://www.php.net/manual/en/zlib.configuration.php
          */
         if (extension_loaded('zlib') && !headers_sent()) {
@@ -36,15 +36,15 @@ class Flush extends Response
 
         /**
          * Turn implicit flush on
-         * 
+         *
          * @link http://www.php.net/manual/en/function.ob-implicit-flush.php
          */
         ob_implicit_flush();
     }
-    
+
     /**
-     * Send response content 
-     * 
+     * Send response content
+     *
      * @param string $content
      * @param int $status
      * @return Flush
@@ -52,12 +52,12 @@ class Flush extends Response
     public function send($content = null, $status = null)
     {
         $this->prepare();
-        
+
         parent::send($content, $status);
-        
+
         /**
          * Send blank characters for output_buffering
-         * 
+         *
          * @link http://www.php.net/manual/en/outcontrol.configuration.php
          */
         if ($length = ini_get('output_buffering')) {
@@ -67,7 +67,7 @@ class Flush extends Response
         while (ob_get_level()) {
             ob_end_flush();
         }
-        
+
         return $this;
     }
 }

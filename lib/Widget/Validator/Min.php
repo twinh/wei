@@ -10,13 +10,13 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is greater or equal than specified value
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class Min extends AbstractValidator
-{        
+{
     protected $minMessage = '%name% must be greater or equal than %min%';
-    
+
     protected $negativeMessage = '%name% must not be greater or equal than %min%';
 
     protected $min;
@@ -27,10 +27,10 @@ class Min extends AbstractValidator
     public function __invoke($input, $min = null)
     {
         $min && $this->storeOption('min', $min);
-        
+
         return $this->isValid($input);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -40,7 +40,7 @@ class Min extends AbstractValidator
             $this->addError('min');
             return false;
         }
-        
+
         return true;
     }
 }

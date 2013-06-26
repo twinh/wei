@@ -12,11 +12,11 @@ interface ValidatorInterface
 {
     /**
      * Returns the invalid messages
-     * 
+     *
      * @return string
      */
     public function getMessages();
-    
+
     /**
      * Returns whether the $input value is valid
      */

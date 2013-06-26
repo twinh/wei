@@ -10,27 +10,27 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is less or equal than specified value
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class Max extends AbstractValidator
 {
     protected $maxMessage = '%name% must be less or equal than %max%';
-    
+
     protected $negativeMessage = '%name% must not be less or equal than %max%';
-    
+
     protected $max;
-    
+
     /**
      * {@inheritdoc}
      */
     public function __invoke($input, $max = null)
     {
         $max && $this->storeOption('max', $max);
-        
+
         return $this->isValid($input);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -40,7 +40,7 @@ class Max extends AbstractValidator
             $this->addError('max');
             return false;
         }
-        
+
         return true;
     }
 }

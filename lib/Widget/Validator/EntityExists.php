@@ -10,7 +10,7 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is existing Doctrine ORM entity
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    EntityManager $entityManager The doctrine orm entity manager widget
  * @method      \Doctrine\ORM\EntityManager entityManager() Returns the doctrine orm entity object
@@ -18,20 +18,20 @@ namespace Widget\Validator;
 class EntityExists extends AbstractValidator
 {
     protected $notFoundMessage = '%name% not exists';
-   
+
     protected $negativeMessage = '%name% already exists';
 
     protected $entityClass;
-   
+
     protected $field;
-   
+
     protected $entity;
-   
+
     protected $criteria;
-   
+
     /**
      * Check if the entity exists by specified criteria
-     * 
+     *
      * @param mixed $input The input value, be null when using criteria to be validated
      * @param string $entityClass The entity class to be validated
      * @param string $filed The field to be validated, on default  it's the primary filed
@@ -41,10 +41,10 @@ class EntityExists extends AbstractValidator
     {
         $entityClass && $this->storeOption('entityClass', $entityClass);
         $filed && $this->storeOption('field', $filed);
-        
+
         return $this->isValid($input);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -54,7 +54,7 @@ class EntityExists extends AbstractValidator
             $this->addError('notString');
             return false;
         }
-        
+
         /* @var $em \Doctrine\ORM\EntityManager */
         $em = $this->entityManager();
 
@@ -70,12 +70,12 @@ class EntityExists extends AbstractValidator
         } else {
             $this->entity = $repo->find((string)$input);
         }
-       
+
         if (!$this->entity) {
             $this->addError('notFound');
             return false;
         }
-       
+
         return true;
     }
 

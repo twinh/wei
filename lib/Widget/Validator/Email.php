@@ -10,15 +10,15 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is valid email address
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class Email extends AbstractValidator
 {
     protected $formatMessage = '%name% must be valid email address';
-    
+
     protected $negativeMessage = '%name% must not be an email address';
-    
+
     /**
      * {@inheritdoc}
      */
@@ -28,7 +28,7 @@ class Email extends AbstractValidator
             $this->addError('format');
             return false;
         }
-        
+
         return true;
     }
 }

@@ -10,15 +10,15 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is null
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class Null extends AbstractValidator
 {
     protected $notNullMessage = '%name% must be null';
-    
+
     protected $negativeMessage = '%name% must not be null';
-    
+
     /**
      * {@inheritdoc}
      */
@@ -28,7 +28,7 @@ class Null extends AbstractValidator
             $this->addError('notNull');
             return false;
         }
-        
+
         return true;
     }
 }

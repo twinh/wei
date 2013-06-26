@@ -10,16 +10,16 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is valid Taiwan identity card
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://zh.wikipedia.org/wiki/%E4%B8%AD%E8%8F%AF%E6%B0%91%E5%9C%8B%E5%9C%8B%E6%B0%91%E8%BA%AB%E5%88%86%E8%AD%89
  */
 class IdCardTw extends AbstractValidator
 {
     protected $invalidMessage = '%name% must be valid Taiwan identity card';
-    
+
     protected $negativeMessage = '%name% must not be valid Taiwan identity card';
-    
+
     protected $map = array(
         'A' => 10,
         'B' => 11,
@@ -48,31 +48,31 @@ class IdCardTw extends AbstractValidator
         'S' => 26,
         'Y' => 31
     );
-        
+
     /**
      * {@inheritdoc}
      */
-    protected function validate($input) 
+    protected function validate($input)
     {
         if (!$this->isString($input)) {
             $this->addError('notString');
             return false;
         }
-        
+
         if (10 != strlen($input)) {
             $this->addError('invalid');
             return false;
         }
-        
+
         $input = strtoupper($input);
-        
+
         // Validate the city letter, should be A-Z
         $first = ord($input[0]);
         if ($first <  65 || $first > 90) {
             $this->addError('invalid');
             return false;
         }
-        
+
         // Validate the gender
         if ($input[1] != '1' && $input[1] != '2') {
             $this->addError('invalid');
@@ -90,7 +90,7 @@ class IdCardTw extends AbstractValidator
             $this->addError('invalid');
             return false;
         }
-        
+
         return true;
     }
 }

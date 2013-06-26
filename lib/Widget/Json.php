@@ -17,21 +17,21 @@ class Json extends Response
 {
     /**
      * The key name of code
-     * 
+     *
      * @var string
      */
     protected $code = 'code';
-    
+
     /**
      * The key name of message
-     * 
+     *
      * @var string
      */
     protected $message = 'message';
-    
+
     /**
      * Response JSON or JSONP format string
-     * 
+     *
      * @param string $message The message node value
      * @param int $code The code node value
      * @param array $append The array append to the root node
@@ -44,7 +44,7 @@ class Json extends Response
             $this->code => $code,
             $this->message => $message,
         ) + $append);
-        
+
         if ($jsonp && $name = $this->request['callback']) {
             $this->header->set('Content-Type', 'application/javascript');
             $jsonp = $this->escape->js((string)$name);
@@ -52,7 +52,7 @@ class Json extends Response
         } else {
             $this->header->set('Content-Type', 'application/json');
         }
-        
+
         return parent::send($result);
     }
 }

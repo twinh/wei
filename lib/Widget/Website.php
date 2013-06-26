@@ -17,35 +17,35 @@ class Website extends AbstractWidget
 {
     /**
      * The website URL
-     * 
+     *
      * @var string
      */
     protected $url;
-    
+
     /**
      * The HTML title
-     * 
+     *
      * @var string
      */
     protected $title;
-    
+
     /**
      * The HTML meta description
-     * 
+     *
      * @var string
      */
     protected $description;
-    
+
     /**
      * The HTML charset for display only
-     * 
+     *
      * @var string
      */
     protected $charset = 'utf-8';
-    
+
     /**
      * Returns the value of website configuration
-     * 
+     *
      * @param string $name The name of configuration(widget option)
      * @return mixed
      */
@@ -53,10 +53,10 @@ class Website extends AbstractWidget
     {
         return $this->getOption($name);
     }
-    
+
     /**
      * Returns the value of website configuration
-     * 
+     *
      * @param string $name The name of configuration(widget option)
      * @return mixed
      */
@@ -64,10 +64,10 @@ class Website extends AbstractWidget
     {
         return $this->getOption($name);
     }
-    
+
     /**
      * Set the value of website configuration
-     * 
+     *
      * @param string $name The name of configuration(widget option)
      * @param mixed $value The value of configuration
      * @return Website

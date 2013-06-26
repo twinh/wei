@@ -10,15 +10,15 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is empty
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class EmptyValue extends AbstractValidator
 {
     protected $emptyMessage = '%name% must be empty';
-    
+
     protected $negativeMessage = '%name% must not be empty';
-    
+
     /**
      * {@inheritdoc}
      */
@@ -28,7 +28,7 @@ class EmptyValue extends AbstractValidator
             $this->addError('empty');
             return false;
         }
-        
+
         return true;
     }
 }
