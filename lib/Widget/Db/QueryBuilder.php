@@ -698,10 +698,9 @@ class QueryBuilder
      *     ));
      * ```
      *
-     * @param $conditions
-     * @param array $params
-     * @param array $types
-     * @internal param mixed $predicates The restriction predicates.
+     * @param $conditions The WHERE conditions
+     * @param array $params The condition parameters
+     * @param array $types The parameter types
      * @return QueryBuilder
      */
     public function where($conditions, $params = null, $types = array())
@@ -866,9 +865,9 @@ class QueryBuilder
      * @param string $order The ordering direction.
      * @return QueryBuilder
      */
-    public function orderBy($sort, $order = null)
+    public function orderBy($sort, $order = 'ASC')
     {
-        return $this->add('orderBy', $sort . ' ' . (! $order ? 'ASC' : $order), false);
+        return $this->add('orderBy', $sort . ' ' . ($order ?: 'ASC'), false);
     }
 
     /**
@@ -878,9 +877,9 @@ class QueryBuilder
      * @param string $order The ordering direction.
      * @return QueryBuilder
      */
-    public function addOrderBy($sort, $order = null)
+    public function addOrderBy($sort, $order = 'ASC')
     {
-        return $this->add('orderBy', $sort . ' ' . (! $order ? 'ASC' : $order), true);
+        return $this->add('orderBy', $sort . ' ' . ($order ?: 'ASC'), true);
     }
 
     /**
