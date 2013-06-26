@@ -251,6 +251,8 @@ $types      | array        | 参数的类型
 #### queryBuilder->orderBy($sort, $order = 'ASC')
 设置`ORDER BY`字句
 
+**返回:** `QueryBuilder`
+
 **参数**
 
 名称        | 类型         | 说明
@@ -261,12 +263,49 @@ $order      | string       | 排序类型,`ASC`或`DESC`
 #### queryBuilder->addOrderBy($sort, $order = 'ASC')
 添加`ORDER BY`字句到当前查询中
 
+**返回:** `QueryBuilder`
+
 **参数**
 
 名称        | 类型         | 说明
 ------------|--------------|------
 $sort       | string       | 排序的字段名称
 $order      | string       | 排序类型,`ASC`或`DESC`
+
+#### queryBuilder->offset($offset)
+设置`OFFSET`字句
+
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$offset     | int          | `OFFSET`字句的值,如0,10
+
+#### queryBuilder->limit($limit)
+设置`LIMIT`字句
+
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$limit      | int          | `LIMIT`字句的值,如0,10
+
+#### queryBuilder->page($page)
+设置`OFFSET`和`LIMIT`字句
+
+通过该方法设置`$page`的值之后,`OFFSET`的值等于`($page - 1) * $limit`,如果`$limit`为空,`$limit`会被设置为`10`
+
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$page       | int          | 当前在第几页
 
 #### queryBuilder->join($table, $on = null)
 增加`INNER JOIN`字句到当前查询中
@@ -310,20 +349,92 @@ $on    | string       | 连接的关联条件,如`user.groupId = userGroup.id`
 #### queryBuilder->groupBy($groupBy)
 设置`GROUP BY`字句
 
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$groupBy    | string       | `GROUP BY`字句的值
+
 #### queryBuilder->addGroupBy($groupBy)
 添加`GROUP BY`字句到当前查询中
+
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$groupBy    | string       | `GROUP BY`字句的值
 
 #### queryBuilder->having($conditions, $params = array(), $types = array())
 设置`HAVING`字句
 
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$conditions | string       | 查询条件,如`id = 1`, `id = ?`
+$params     | array        | 参数的值
+$types      | array        | 参数的类型
+
 #### queryBuilder->andHaving($conditions, $params = array(), $types = array())
 添加`AND`类型`HAVING`字句到当前查询中
+
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$conditions | string       | 查询条件,如`id = 1`, `id = ?`
+$params     | array        | 参数的值
+$types      | array        | 参数的类型
 
 #### queryBuilder->orHaving($conditions, $params = array(), $types = array())
 添加`OR`类型的`HAVING`字句到当前查询中
 
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$conditions | string       | 查询条件,如`id = 1`, `id = ?`
+$params     | array        | 参数的值
+$types      | array        | 参数的类型
+
+#### queryBuilder->reset($queryPartName)
+重置某一部分SQL字句
+
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称           | 类型         | 说明
+---------------|--------------|------
+$queryPartName | string       | 允许的值为`select`,`from`,`join`,`set`,`where`,`groupBy`,`having`,`orderBy`,`limit`或`offset`
+
+#### queryBuilder->resetAll($queryPartNames = null)
+重置某一部分或全部SQL字句
+
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称            | 类型         | 说明
+----------------|--------------|------
+$queryPartNames | null|array   | 留空表示重置所有字句,作为数组时,允许的值为`select`,`from`,`join`,`set`,`where`,`groupBy`,`having`,`orderBy`,`limit`或`offset`
+
 #### queryBuilder->getTable()
 获取当前查询的数据表名称
 
+**返回:** `string`
+
 #### queryBuilder->getSql()
 获取当前查询的完整SQL语句
+
+**返回:** `string`
