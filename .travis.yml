@@ -19,8 +19,7 @@ before_script:
   - phpenv config-add tests/config/php.ini
   - php -m
   - php -i
-  - wget http://getcomposer.org/composer.phar
-  - php composer.phar install --prefer-source --no-interaction
+  - composer install --prefer-source --no-interaction
   - pecl install redis
   - mysql -e 'CREATE DATABASE IF NOT EXISTS widget_tests;'
   - psql -c 'CREATE DATABASE widget_tests;' -U postgres
