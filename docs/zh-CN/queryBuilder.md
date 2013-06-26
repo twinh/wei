@@ -138,7 +138,7 @@ $qb = widget()->db('member')->limit(3)->page(3);
 echo $qb->getSql();
 ```
 
-### 构造Group语句
+### 构造GROUP BY语句
 ```php
 $qb = widget()->db('member')->groupBy('id, group_id');
 
@@ -146,7 +146,7 @@ $qb = widget()->db('member')->groupBy('id, group_id');
 echo $qb->groupBy();
 ```
 
-### 构造Having语句
+### 构造HAVING语句
 ```php
 $qb = widget()->db('member')->groupBy('id, group_id')->having('group_id >= ?', '1');
 
