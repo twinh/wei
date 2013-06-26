@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## 0.9.3 (not released yet)
+## 0.9.3
 
 * Added [callback](lib/Widget/Callback.php) widget to handle WeChat(Weixin) callback message
 * Added `overwrite` option for [upload](lib/Widget/Upload.php) widget
@@ -34,6 +34,14 @@ Changelog
 * Added new [db](lib/Widget/Db.php) widget with basic CURD, light Active Record and Query Builder support
 * Refactored [env](lib/Widget/Env.php) widget, use server IP to detect environment name
 * Added [gravatar](lib/Widget/Gravatar.php) widget
+* Added support for Chinese mobile number starts with 14
+* Added documentation for [widget](docs/zh-CN/widget.md) class
+* Moved debug configuration to widget class
+* Added [FieldExists](lib/Widget/Validator/FieldExists.php) validator
+* Remoevd WidgetInterface, ViewInterface, CacheInterface and ArrayWidget class, make it more esay
+* Integrated with [Coveralls](https://coveralls.io/‎),  [CircleCi](https://circleci.com/) and [Codeship](https://www.codeship.io/)
+* Refactored [cookie](lib/Widget/Cookie.php) and [response](lib/Widget/Response.php) widgets
+* Added more tests and improved more documentation
 
 ## 0.9.2-beta (2013-04-14)
 
