@@ -248,6 +248,14 @@ $types      | array        | 参数的类型
 
 **返回:** `QueryBuilder`
 
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$conditions | string       | 查询条件,如`id = 1`, `id = ?`
+$params     | array        | 参数的值
+$types      | array        | 参数的类型
+
 #### queryBuilder->orderBy($sort, $order = 'ASC')
 设置`ORDER BY`字句
 
@@ -428,6 +436,31 @@ $queryPartName | string       | 允许的值为`select`,`from`,`join`,`set`,`whe
 名称            | 类型         | 说明
 ----------------|--------------|------
 $queryPartNames | null|array   | 留空表示重置所有字句,作为数组时,允许的值为`select`,`from`,`join`,`set`,`where`,`groupBy`,`having`,`orderBy`,`limit`或`offset`
+
+#### queryBuilder->find()
+执行构造的SQL语句,并返回一个`Record`对象,如果结果为空,返回`false`
+
+**返回:** `Record`|`false`
+
+#### queryBuilder->findAll()
+执行构造的SQL语句,并返回一个`Collection`对象
+
+**返回:** `Collection`
+
+#### queryBuilder->fetch()
+执行构造的SQL语句,并返回一个一维数组,如果结果为空,返回`false`
+
+**返回:** `array`|`false`
+
+#### queryBuilder->fetchAll()
+执行构造的SQL语句,并返回一个二维数组,如果结果为空,返回`false`
+
+**返回:** `array`|`false`
+
+#### queryBuilder->count()
+获取当前构造的SQL语句所查找到的行数
+
+**返回:** `int`
 
 #### queryBuilder->getTable()
 获取当前查询的数据表名称

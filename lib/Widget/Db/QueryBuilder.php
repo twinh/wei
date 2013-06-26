@@ -171,7 +171,7 @@ class QueryBuilder
     /**
      * Executes the generated SQL and returns the found record object or false
      *
-     * @return bool|Record
+     * @return false|Record
      */
     public function find()
     {
