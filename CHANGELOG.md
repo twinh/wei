@@ -31,6 +31,9 @@ Changelog
 * Renamed isPostCode to [isPostcodeCn](lib/Widget/Validator/PostcodeCn.php)
 * Added `Stdlib` namespace, moved base cache, view, widget aware class to `Stdlib` namespace
 * Renamed `db` widget to [dbal](lib/Widget/Dbal.php)
+* Added new [db](lib/Widget/Db.php) widget with basic CURD, light Active Record and Query Builder support
+* Refactored [env](lib/Widget/Env.php) widget, use server IP to detect environment name
+* Added [gravatar](lib/Widget/Gravatar.php) widget
 
 ## 0.9.2-beta (2013-04-14)
 
