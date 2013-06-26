@@ -229,7 +229,7 @@ class Widget extends AbstractWidget
      * Get a widget instance
      *
      * @param string $name The name of widget
-     * @return WidgetInterface
+     * @return AbstractWidget
      */
     public function __invoke($name)
     {
@@ -328,7 +328,7 @@ class Widget extends AbstractWidget
      * @param array $options The option properties for widget
      * @param array $deps The dependent configuration
      * @throws \BadMethodCallException
-     * @return WidgetInterface
+     * @return AbstractWidget
      */
     public function get($name, array $options = array(), array $deps = array())
     {
@@ -354,7 +354,7 @@ class Widget extends AbstractWidget
         // Get the widget class and instance
         $class = $this->getClass($name);
         if (class_exists($class)) {
-            // @see WidgetInterface::__invoke
+            // @see AbstractWidget::__invoke
             if (!method_exists($class, '__invoke')) {
                 throw new \BadMethodCallException(sprintf('Method "__invoke" not found in class "%s"', $class));
             }
@@ -397,7 +397,7 @@ class Widget extends AbstractWidget
      * @param string $name The name of the widget
      * @param array $options The option properties for widget
      * @param array $deps The dependent configuration
-     * @return WidgetInterface The widget object
+     * @return AbstractWidget The widget object
      */
     public function newInstance($name, array $options = array(), array $deps = array())
     {
