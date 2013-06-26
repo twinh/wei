@@ -15,12 +15,12 @@ services:
   - redis-server
 
 before_script:
+  - composer install --prefer-source --no-interaction
+  - pecl install redis
   - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -gt 4 ]; then sed -i 1d "tests/config/php.ini"; fi;'
   - phpenv config-add tests/config/php.ini
   - php -m
   - php -i
-  - composer install --prefer-source --no-interaction
-  - pecl install redis
   - mysql -e 'CREATE DATABASE IF NOT EXISTS widget_tests;'
   - psql -c 'CREATE DATABASE widget_tests;' -U postgres
   - mkdir -p build/logs
