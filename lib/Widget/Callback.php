@@ -189,9 +189,10 @@ class Callback extends AbstractWidget
 
             case  'event':
                 $eventRule = $this->rules['event'];
-                if (isset($eventRule[$this->event])
-                    && isset($eventRule[$this->event][$this->eventKey])) {
-                    return $this->handle($eventRule[$this->event][$this->eventKey]);
+                $event = strtolower($this->event);
+                if (isset($eventRule[$event])
+                    && isset($eventRule[$event][$this->eventKey])) {
+                    return $this->handle($eventRule[$event][$this->eventKey]);
                 }
                 break;
 
