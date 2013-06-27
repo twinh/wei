@@ -1,7 +1,5 @@
 # Widget的配置
 
-Widget的配置
-
 Widget的配置与每一个微件类是紧密关联的,每一项配置都是有
 
 Widget的配置与用过的大部分框架不同.在大部分框架中,配置只是一个
@@ -10,9 +8,6 @@ Widget的配置与用过的大部分框架不同.在大部分框架中,配置只
 不再是无意义
 
 下面我们通过一个完整的配置例子来了解Widget的配置.
-
-Widget目前接受两种配置参数,一种是PHP文件,另一种是PHP数组.
-其他的类型的配置,可以自行转换成PHP数组后再
 
 
 `widget`函数的第一个参数接收一个PHP文件或PHP数组作为配置
@@ -41,13 +36,13 @@ $widget = widget(array(
     'redis' => array(
         'host' => '127.0.0.1',
         'port' => 6379
-        // ...
+        // ... 其他选项
     ),
     // 视图微件的配置
     'view' => array(
         'dirs' => 'views'
     )
-    // ...
+    // 更多微件配置...
 ));
 ```
 
@@ -58,14 +53,21 @@ $widget = widget(array(
 
 ## 设置和获取配置
 
+Widget目前接受两种配置参数,一种是PHP数组,另一种是返回PHP数组的文件.
+其他的类型的配置,可以查看最后的**扩展**章节了解
+
 ### 通过PHP数组加载配置
 
 ```php
 $widget = widget(array(
     'widget' => array(
-        ''
+        'debug' => true,
     ),
-    'db' => array()
+    'db' => array(
+        'dsn' => 'mysql:host=localhost;dbname=widget;charset=utf8',
+        'user' => 'root',
+        'password' => '123456',
+    )
 ));
 ```
 
@@ -78,7 +80,7 @@ $widget = widget('config/default.php');
 文件`config/default.php`的内容
 
 ```php
-// 定义一些常用变量
+// 定义一些常用变量或编写一些简单逻辑
 $root = dirname(__DIR__);
 $debug = true;
 
@@ -103,8 +105,21 @@ return array(
 ```php
 $widget = widget();
 
-// 获取数据库的配置数组
+// 获取数据库微件的配置数组
 $db = $widget->config('db');
+
+// 返回的数组如下
+$db = array(
+    'dsn' => 'mysql:host=localhost;dbname=widget;charset=utf8',
+    'user' => 'root',
+    'password' => '123456',
+);
+
+// 获取数据库微件配置中的`user`选项
+$user = $widget->config('db\user');
+
+// 返回的变量值如下
+$user = 'root';
 ```
 
 ## 深入了解配置
@@ -113,9 +128,9 @@ $db = $widget->config('db');
 
 ### 配置与微件选项
 
-## 扩展 - 使用其他格式配置
+## 扩展
 
-Widget默认支持PHP数组和PHP数组文件配置.除此之外,我们还可以使用其他格式作为配置文件.
+除了上面提到的PHP数组和PHP数组文件配置,我们可以通过简单的代码实现其他格式作为配置文件.
 
 ### 使用YAML作为配置文件
 
