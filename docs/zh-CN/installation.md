@@ -8,15 +8,15 @@ Widget支持通过[Composer](https://getcomposer.org)下载和直接下载源文
 
 ## 通过Composer下载
 
-1. 进入你的项目目录,下载Composer
+1. 进入您的项目目录,下载Composer
 
-```
+```sh
 $ curl -sS https://getcomposer.org/installer | php
 ```
 
 2. 在根目录下创建或更新您的composer.json文件
 
-```
+```json
 {
     "require": {
         "widget/widget": "0.9.3-RC1"
@@ -26,8 +26,8 @@ $ curl -sS https://getcomposer.org/installer | php
 
 3. 执行安装命令,耐心等待到安装结束
 
-```
-php composer.phar install
+```sh
+$ php composer.phar install
 ```
 
 至此,您可以看到根目录下增加了`vendor`目录,安装完成.
@@ -40,6 +40,8 @@ php composer.phar install
 
 ### 开发尝鲜版
 
-https://github.com/twinh/widget/archive/master.zip
+[zip](https://github.com/twinh/widget/archive/master.zip)  [tar.gz](https://github.com/twinh/widget/archive/0.9.3-RC1.tar.gz)
+
+### 更多
 
 更多版本请前往GitHub查看 [https://github.com/twinh/widget/tags](https://github.com/twinh/widget/tags)
