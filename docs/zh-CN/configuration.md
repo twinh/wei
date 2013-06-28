@@ -14,6 +14,7 @@ $widget = widget(array(
     // 微件管理器的配置
     'widget' => array(
         'debug' => true,
+        // ... 其他选项
     ),
     // 数据库微件的配置
     'db' => array(
@@ -29,7 +30,6 @@ $widget = widget(array(
     'redis' => array(
         'host' => '127.0.0.1',
         'port' => 6379
-        // ... 其他选项
     ),
     // 视图微件的配置
     'view' => array(
