@@ -2,8 +2,9 @@
 ==================
 目录
 ------------
-1. [Widget微框架简介](../../README.md)
-2. [配置](./configuration.md)
+1. [简介](introduction.md)
+2. [安装](installation.md)
+3. [配置](configuration.md)
 
 API 参考目录
 ------------
