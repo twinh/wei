@@ -11,7 +11,12 @@ if (is_file($file = __DIR__ . '/../vendor/autoload.php')) {
 // Localhost configuration
 $widget = widget(array(
     'widget' => array(
-        // Display all error message
+        // Display all PHP error message
+        'inis' => array(
+            'error_reporting' => -1,
+            'display_errors' => 1
+        ),
+        // Enable widget debug option
         'debug' => true,
         // Set up autoload for WidgetTest namespace
         'autoloadMap' => array(
