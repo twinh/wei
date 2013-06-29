@@ -14,7 +14,7 @@ $widget = widget(array(
         // Display all PHP error message
         'inis' => array(
             'error_reporting' => -1,
-            'display_errors' => 1
+            'display_errors' => true
         ),
         // Enable widget debug option
         'debug' => true,
