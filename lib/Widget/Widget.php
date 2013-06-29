@@ -476,11 +476,6 @@ class Widget extends AbstractWidget
     {
         $this->debug = (bool)$bool;
 
-        if ($bool) {
-            error_reporting(-1);
-            //ini_set('display_errors', 1);
-        }
-
         return $this;
     }
 
