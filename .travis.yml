@@ -22,7 +22,7 @@ before_script:
   - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -gt 3 ]; then php -S 0.0.0.0:8000 -t tests/WidgetTest/Fixtures/; fi;' > /dev/null &
 
 script:
-  - phpunit --verbose --coverage-clover build/logs/clover.xml
+  - phpunit --debug --verbose --coverage-clover build/logs/clover.xml
 
 after_script:
   - pkill php
