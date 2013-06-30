@@ -271,7 +271,7 @@ class File extends AbstractValidator
      * Set allowed file extensions
      *
      * @param string|array $exts String format likes 'php,js' or array format likes [php, js]
-     * @return Validator\File
+     * @return File
      */
     public function setExts($exts)
     {
@@ -284,7 +284,7 @@ class File extends AbstractValidator
      * Set exclude file extensions
      *
      * @param string|array $exts String format likes 'php,js' or array format likes [php, js]
-     * @return Validator\File
+     * @return File
      */
     public function setExcludeExts($exts)
     {
@@ -297,7 +297,7 @@ class File extends AbstractValidator
      * Set maximum file size
      *
      * @param string|int $maxSize
-     * @return Validator\File
+     * @return File
      */
     protected function setMaxSize($maxSize)
     {
@@ -311,7 +311,7 @@ class File extends AbstractValidator
      * Set the minimum file size
      *
      * @param string|int $minSize
-     * @return Validator\File
+     * @return File
      */
     protected function setMinSize($minSize)
     {
@@ -362,7 +362,7 @@ class File extends AbstractValidator
      * Set the file mime types
      *
      * @param string|array $mimeTypes
-     * @return Validator\File
+     * @return File
      */
     public function setMimeTypes($mimeTypes)
     {
@@ -375,7 +375,7 @@ class File extends AbstractValidator
      * Set the file exclude mime types
      *
      * @param string|array $excludeMimeTypes
-     * @return Validator\File
+     * @return File
      */
     public function setExcludeMimeTypes($excludeMimeTypes)
     {
