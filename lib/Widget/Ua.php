@@ -84,12 +84,18 @@ class Ua extends AbstractWidget
      * Check if in the specified browser, OS or device
      *
      * @param string $name The name of browser, OS or device
+     * @throws \InvalidArgumentException When name is not defined in patterns array
      * @return bool
      */
     public function in($name)
     {
         $name = strtolower($name);
-        if (isset($this->patterns[$name]) && preg_match('/' . $this->patterns[$name] . '/i', $this->userAgent, $matches)) {
+
+        if (!array_key_exists($name, $this->patterns)) {
+            throw new \InvalidArgumentException(sprintf('Unrecognized browser, OS, mobile or tablet name "%s"', $name));
+        }
+
+        if (preg_match('/' . $this->patterns[$name] . '/i', $this->userAgent, $matches)) {
             $this->versions[$name] = isset($matches[1]) ? $matches[1] : false;
             return true;
         } else {
