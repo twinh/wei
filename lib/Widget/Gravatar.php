@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A widget to generate a Gravatar URL for a specified email address
+ * A widget that generates a Gravatar URL for a specified email address
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        https://gravatar.com/site/implement/images/

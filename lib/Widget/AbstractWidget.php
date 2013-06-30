@@ -115,6 +115,8 @@ namespace Widget;
  * @method   Callback   callback() Start up callback widget and output the matched rule message
  * @property App        $app The application widget
  * @method   App        app(array $options = array()) Startup application
+ * @property Gravatar   $gravatar A widget that generates a Gravatar URL for a specified email address
+ * @method   string     gravatar($email, $size = null, $default = null, $rating = null) Generates a Gravatar URL for a specified email address
  * @property Router     $router A widget that build a simple REST application
  * @method   Router     router($pathInfo = null, $method = null) Run the application
  * @property T          $t A translator widget
