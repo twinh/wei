@@ -220,6 +220,10 @@ class WidgetTest extends TestCase
 
         $this->assertInstanceOf('Widget\Request', $widget->subRequest);
         $this->assertNotSame($widget->request, $widget->subRequest);
+
+        $subRequest = $widget->request->subRequest;
+        $this->assertInstanceOf('Widget\Request', $subRequest);
+        unset($widget->request->subRequest);
     }
 
     public function testInvoke()
