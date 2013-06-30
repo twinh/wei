@@ -474,7 +474,7 @@ class Widget extends AbstractWidget
      */
     public function setDebug($bool)
     {
-        $this->debug = (bool)$bool;
+        $this->debug = (bool) $bool;
 
         return $this;
     }
