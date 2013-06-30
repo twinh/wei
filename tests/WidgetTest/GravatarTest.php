@@ -35,4 +35,11 @@ class GravatarTest extends TestCase
         $smallSize = $this->gravatar->getOption('smallSize');
         $this->assertEquals('http://www.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0?s=' . $smallSize . '&d=mm', $url);
     }
+
+    public function testRating()
+    {
+        $url = $this->gravatar('test@example.com', null, null, 'g');
+
+        $this->assertEquals('http://www.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0?s=80&d=mm&r=g', $url);
+    }
 }
