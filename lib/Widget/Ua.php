@@ -150,7 +150,7 @@ class Ua extends AbstractWidget
                  strpos($s['HTTP_ACCEPT'], 'application/vnd.rim.html') !== false || // BlackBerry devices.
                  strpos($s['HTTP_ACCEPT'], 'text/vnd.wap.wml') !== false ||
                  strpos($s['HTTP_ACCEPT'], 'application/vnd.wap.xhtml+xml') !== false) ||
-            isset($s['HTTP_X_WAP_PROFILE'])             || // @todo: validate
+            isset($s['HTTP_X_WAP_PROFILE'])             ||
             isset($s['HTTP_X_WAP_CLIENTID'])            ||
             isset($s['HTTP_WAP_CONNECTION'])            ||
             isset($s['HTTP_PROFILE'])                   ||

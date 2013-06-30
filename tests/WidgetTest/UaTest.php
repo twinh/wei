@@ -259,19 +259,30 @@ class UaTest extends TestCase
         );
     }
 
+    public function testNotInMobile()
+    {
+        $request = new \Widget\Request(array(
+            'fromGlobal' => false,
+            'servers' => array(),
+        ));
+
+        $this->ua->request = $request;
+
+        $this->assertFalse($this->ua->inMobile());
+    }
+
     /**
      * @dataProvider providerForInMobile
      */
-    public function testInMobile($headers)
+    public function testInMobile($servers)
     {
-        foreach ($headers as $name => $value) {
-            $this->server[$name] = $value;
-        }
-        $this->assertTrue($this->ua->inMobile());
-    }
+        $request = new \Widget\Request(array(
+            'fromGlobal' => false,
+            'servers' => $servers,
+        ));
 
-    public function testNotInMobile()
-    {
+        $this->ua->request = $request;
+
         $this->assertTrue($this->ua->inMobile());
     }
 
@@ -323,6 +334,7 @@ class UaTest extends TestCase
                     'HTTP_X_NOKIA_IPADDRESS' => '1'
                 )
             ),
+            // 10
             array(
                 array(
                     'HTTP_X_NOKIA_GATEWAY_ID' => '1'
