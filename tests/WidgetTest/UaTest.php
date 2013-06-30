@@ -25,6 +25,39 @@ class UaTest extends TestCase
         }
     }
 
+    public function testInvalidException()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'Unrecognized browser, OS, mobile or tablet name "unknown"'
+        );
+
+        $this->ua->in('unknown');
+    }
+
+    public function testInvalidException2()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'Unrecognized browser, OS, mobile or tablet name "unknown"'
+        );
+
+        $this->ua->getVersion('unknown');
+    }
+
+    public function testNotIn()
+    {
+        $this->server['HTTP_USER_AGENT'] = 'fake';
+
+        $this->assertFalse($this->ua->inIPad());
+    }
+
+    public function testMagicCall()
+    {
+        $result = $this->ua->ua('iPad');
+        $this->assertFalse($result);
+    }
+
     /**
      * @link http://www.useragentstring.com/
      */
