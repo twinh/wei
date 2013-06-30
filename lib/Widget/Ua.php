@@ -99,6 +99,7 @@ class Ua extends AbstractWidget
             $this->versions[$name] = isset($matches[1]) ? $matches[1] : false;
             return true;
         } else {
+            $this->versions[$name] = false;
             return false;
         }
     }

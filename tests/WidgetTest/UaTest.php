@@ -45,6 +45,20 @@ class UaTest extends TestCase
         $this->ua->getVersion('unknown');
     }
 
+    public function testGetVersion()
+    {
+        $request = new \Widget\Request(array(
+            'fromGlobal' => false,
+            'server' => array(),
+        ));
+
+        $this->ua->request = $request;
+
+        $result = $this->ua->getVersion('iphone');
+
+        $this->assertFalse($result);
+    }
+
     public function testNotIn()
     {
         $this->server['HTTP_USER_AGENT'] = 'fake';
