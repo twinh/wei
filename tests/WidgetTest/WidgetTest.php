@@ -388,4 +388,13 @@ class WidgetTest extends TestCase
         $this->assertSame($this->widget, $this->widget->widget);
         $this->assertSame($this->widget, $this->widget->widget->widget);
     }
+
+    public function testDebug()
+    {
+        $this->widget->setDebug(false);
+        $this->assertFalse($this->widget->inDebug());
+
+        $this->widget->setDebug(true);
+        $this->assertTrue($this->widget->inDebug());
+    }
 }
