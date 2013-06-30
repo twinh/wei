@@ -66,7 +66,7 @@ class Gravatar extends AbstractWidget
     public function __invoke($email, $size = null, $default = null, $rating = null)
     {
         if ($this->secure) {
-            $url = 'https://secure.gravatar.com/';
+            $url = 'https://secure.gravatar.com/avatar/';
         } else {
             $url = 'http://www.gravatar.com/avatar/';
         }
