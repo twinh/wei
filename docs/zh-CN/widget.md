@@ -8,13 +8,21 @@ Widget
 案例
 ----
 
-### 获取微件对象
+### 获取微件管理器对象
 ```php
 $widget = widget();
 
-// 完整的获取方法是
+// 完整的获取方法如下,您可以根据自己的编码习惯选择适合您的方式
 $widget = \Widget\Widget::create();
 ```
+
+### 设置自动加载
+
+TODO
+
+### 开启错误调试
+
+TODO
 
 调用方式
 --------
@@ -25,6 +33,7 @@ $widget = \Widget\Widget::create();
 ------------|--------|---------------|------
 config      | array  | 无            | 所有微件的配置选项
 inis        | array  | 无            | PHP的ini配置选项
+debug       | bool   | true          | 是否启用调试模式
 autoloadMap | array  | 无            | 自动加载的命名空间和路径地址
 autoload    | bool   | true          | 是否启用自动加载
 alias       | array  | 无            | 微件别名列表
