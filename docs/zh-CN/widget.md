@@ -1,7 +1,9 @@
 Widget
 ======
 
-微件管理器,用于获取微件对象,设置自动加载,设置别名,设置配置等
+微件管理器,所有微件类的入口.
+
+用于获取微件对象,设置自动加载,设置别名,设置配置等.
 
 案例
 ----
@@ -10,9 +12,10 @@ Widget
 ```php
 $widget = widget();
 
-// 上面
+// 完整的获取方法是
 $widget = \Widget\Widget::create();
 ```
+
 调用方式
 --------
 
@@ -30,7 +33,7 @@ import      | array  | 无            | 导入指定目录下的微件类
 
 ### 方法
 
-#### \Widget\Widget::create($config, $name = 'default')
+#### widget($config, $name = 'default')
 获取指定名称的微件管理器,如果不存在,将创建一个新的对象
 
 #### widget()->config($name, $vlaue = array())
@@ -62,20 +65,20 @@ $dir        | string | 无            | 类文件所在的目录
 $namespace  | string | 无            | 类名对应的命名空间
 $format     | string | 无            | 类文件的格式
 
-#### $widget->newInstance($name, $options = array(), $deps = array())
+#### widget()->newInstance($name, $options = array(), $deps = array())
 初始化一个新的微件对象
 
-#### $widget->set($name, widget())
+#### widget()->set($name, widget())
 设置微件对象
 
-#### $widget->remove($name)
+#### widget()->remove($name)
 移出微件对象,如果对象存在,返回`true`,否则返回`false`
 
-#### $widget->getClass($name)
+#### widget()->getClass($name)
 根据微件名称获取微件类名
 
-#### $widget->has($name)
+#### widget()->has($name)
 检查微件是否存在
 
-#### $widget->setAutoload($bool)
+#### widget()->setAutoload($bool)
 启用或禁用PSR-0类自动加载
