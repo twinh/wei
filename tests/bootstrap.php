@@ -92,7 +92,7 @@ $widget = widget(array(
 ));
 
 // Load configuration for CI
-foreach (array('TRAVIS', 'CIRCLECI', 'CODESHIP') as $ci) {
+foreach (array('TRAVIS', 'CODESHIP') as $ci) {
     if (getenv($ci)) {
         widget(__DIR__ . '/config/' . strtolower($ci) . '.php');
     }
