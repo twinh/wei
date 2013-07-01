@@ -78,7 +78,7 @@ class Logger extends AbstractWidget
     /**
      * The directory to store log files
      *
-     * @var type
+     * @var string
      */
     protected $dir = 'log';
 
@@ -286,7 +286,7 @@ class Logger extends AbstractWidget
         $file = &$this->file;
 
         if (!is_dir($this->dir) && false === @mkdir($this->dir, 0777, true)) {
-            throw new \RuntimeException('Unable to create directory ' . $this->dir);
+            throw new \RuntimeException(sprintf('Unable to create directory "%s"', $this->dir);
         }
 
         $file = realpath($this->dir) . '/' . date($this->fileFormat);
