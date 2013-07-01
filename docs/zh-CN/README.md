@@ -9,6 +9,10 @@
 API 参考目录
 ------------
 
+#### Widget管理器
+
+* [widget](widget.md) - 微件管理器,用于获取微件对象,设置配置等
+
 #### HTTP请求
 * [request](request.md) - 管理HTTP请求数据($_REQUEST)
 * [cookie](cookie.md) - 写入,读取和删除cookie($_COOKIE)
