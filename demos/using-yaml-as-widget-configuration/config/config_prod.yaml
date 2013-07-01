@@ -1,0 +1,11 @@
+# Configuration for widget manager
+widget:
+  inis:
+    error_reporting: 0
+    display_errors: off
+  debug: false
+  # More option for widget manager here ...
+# Configuration for logger widget
+logger:
+  dir: log
+# More configuration for other widgets here ...

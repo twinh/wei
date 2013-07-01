@@ -1,0 +1,1 @@
+# Using Yaml as widget configuration
