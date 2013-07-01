@@ -124,7 +124,7 @@ $user = 'root';
 
 ### 使用YAML作为配置文件
 
-**TODO**
+[查看演示案例](../../demos/using-yaml-as-widget-configuration)
 
 ### 使用JSON作为配置文件
 
