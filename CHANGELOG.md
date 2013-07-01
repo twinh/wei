@@ -39,7 +39,7 @@ Changelog
 * Moved debug configuration to widget class
 * Added [FieldExists](lib/Widget/Validator/FieldExists.php) validator
 * Remoevd WidgetInterface, ViewInterface, CacheInterface and ArrayWidget class, make it more esay
-* Integrated with [Coveralls](https://coveralls.io/‎),  [CircleCi](https://circleci.com/) and [Codeship](https://www.codeship.io/)
+* Integrated with [Coveralls](https://coveralls.io/‎), and [Codeship](https://www.codeship.io/)
 * Refactored [cookie](lib/Widget/Cookie.php) and [response](lib/Widget/Response.php) widgets
 * Added more tests and improved more documentation
 
