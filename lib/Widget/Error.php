@@ -301,7 +301,7 @@ class Error extends AbstractWidget
      * @throws \ErrorException convert PHP error to exception
      * @internal use for set_error_handler only
      */
-    public function HandleError($errno, $errstr, $errfile, $errline)
+    public function handleError($errno, $errstr, $errfile, $errline)
     {
         if (!(error_reporting() & $errno)) {
             // This error code is not included in error_reporting
