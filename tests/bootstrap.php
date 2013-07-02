@@ -25,7 +25,7 @@ $widget = widget(array(
         ),
         'aliases' => array(
             'mysqlCache' => 'Widget\DbCache',
-            'pgCache' => 'Widget\DbCache',
+            'pgsqlCache' => 'Widget\DbCache',
             'mysqlDb' => 'Widget\Db',
             'pgsqlDb' => 'Widget\Db',
         )
@@ -57,7 +57,7 @@ $widget = widget(array(
             'dbal' => 'dbal.mysqlCache'
         )
     ),
-    'pgCache' => array(
+    'pgsqlCache' => array(
         'deps' => array(
             'dbal' => 'dbal.pgCache'
         )
