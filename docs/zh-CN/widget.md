@@ -17,9 +17,9 @@ $widget = widget();
 $widget = \Widget\Widget::create();
 ```
 
-### 设置自动加载
+### 设置类自动加载
 
-Widget支持[PRS-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)风格的自动加载器.
+Widget支持[PRS-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)风格的类自动加载器.
 
 ```php
 widget(array(
@@ -28,8 +28,8 @@ widget(array(
         'autoload' => true,
         // 设置自动加载的类的命名空间和类所在的目录
         'autoloadMap' => array(
-            'MyNamesapce' => 'path/to/MyNamespace',
-            'MyProject' => 'path/to/MyProject',
+            'MyLib' => 'path/to/lib',
+            'MyProject' => 'path/to/project',
             // 将未在上面指定命名空间的类,都引导到library目录下
             '' => 'path/to/library'
         )
@@ -37,7 +37,12 @@ widget(array(
 ));
 
 // 检查类是否正确加载
+
+// => 检查文件 path/to/library/MyNamesapce/MyClass.php 是否存在
 var_dump(class_exists('MyNamesapce\MyClass'));
+
+// => 检查文件 path/to/library/MyClass/MyClass.php 是否存在
+var_dump(class_exists('MyClass\MyClass'));
 ```
 
 ### 开启错误调试
