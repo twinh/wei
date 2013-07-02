@@ -129,7 +129,3 @@ $user = 'root';
 ### 使用JSON作为配置文件
 
 [查看演示案例](../../demos/using-json-as-widget-configuration)
-
-### 使用INI作为配置文件
-
-**TODO**
