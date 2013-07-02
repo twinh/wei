@@ -96,7 +96,7 @@ class Escape extends AbstractWidget
      * the current object. If PHP 5.4 is detected, additional ENT_SUBSTITUTE flag
      * is set for htmlspecialchars() calls.
      *
-     * @param string $encoding
+     * @param array $options
      * @throws \InvalidArgumentException
      */
     public function __construct($options = array())
@@ -153,6 +153,10 @@ class Escape extends AbstractWidget
      */
     public function escapeHtml($string)
     {
+        if (!$string) {
+            return $string;
+        }
+
         $result = htmlspecialchars($string, $this->htmlSpecialCharsFlags, $this->encoding);
         return $result;
     }
@@ -167,6 +171,10 @@ class Escape extends AbstractWidget
      */
     public function escapeHtmlAttr($string)
     {
+        if (!$string) {
+            return $string;
+        }
+
         $string = $this->toUtf8($string);
         if ($string === '' || ctype_digit($string)) {
             return $string;
@@ -190,6 +198,10 @@ class Escape extends AbstractWidget
      */
     public function escapeJs($string)
     {
+        if (!$string) {
+            return $string;
+        }
+
         $string = $this->toUtf8($string);
         if ($string === '' || ctype_digit($string)) {
             return $string;
@@ -209,6 +221,10 @@ class Escape extends AbstractWidget
      */
     public function escapeUrl($string)
     {
+        if (!$string) {
+            return $string;
+        }
+
         return rawurlencode($string);
     }
 
@@ -221,6 +237,10 @@ class Escape extends AbstractWidget
      */
     public function escapeCss($string)
     {
+        if (!$string) {
+            return $string;
+        }
+
         $string = $this->toUtf8($string);
         if ($string === '' || ctype_digit($string)) {
             return $string;
