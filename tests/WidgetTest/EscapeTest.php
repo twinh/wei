@@ -469,4 +469,24 @@ class EscapeTest extends TestCase
     {
         $this->escape('string', 'unsupport-type');
     }
+
+    public function providerForEmptyVar()
+    {
+        return array(
+            array(''),
+            array(null),
+            array(0),
+            array('0'),
+        );
+    }
+
+    /**
+     * @dataProvider providerForEmptyVar
+     */
+    public function testEmptyVar($value)
+    {
+        foreach (array('html', 'js', 'css', 'url', 'attr') as $method) {
+            $this->assertSame($value, $this->escaper->$method($value));
+        }
+    }
 }
