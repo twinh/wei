@@ -42,7 +42,23 @@ var_dump(class_exists('MyNamesapce\MyClass'));
 
 ### 开启错误调试
 
-TODO
+Widget的错误调试可通过`debug`选项开启,PHP的调试可通过`inis`选项配置
+
+```php
+widget(array(
+    'widget' => array(
+        // 通过PHP ini配置,开启PHP错误信息提示
+        'inis' => array(
+            // 在屏幕上输出错误信息
+            'display_errors' => true,
+            // 设置错误报告的级别
+            'error_reporting' => -1,
+        ),
+        // 开启Widget的调试模式
+        'debug' => true,
+    )
+));
+```
 
 调用方式
 --------
