@@ -59,7 +59,7 @@ $widget = widget(array(
     ),
     'pgsqlCache' => array(
         'deps' => array(
-            'dbal' => 'dbal.pgCache'
+            'dbal' => 'dbal.pgsqlCache'
         )
     ),
     'dbal.mysqlCache' => array(
@@ -71,7 +71,7 @@ $widget = widget(array(
         'dbname'    => 'widget',
         'charset'   => 'utf8'
     ),
-    'dbal.pgCache' => array(
+    'dbal.pgsqlCache' => array(
         'driver'    => 'pdo_pgsql',
         'host'      => '127.0.0.1',
         'port'      => '5432',
