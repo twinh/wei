@@ -6,30 +6,12 @@
 2. [安装](installation.md)
 3. [配置](configuration.md)
 
-API 参考目录
+API参考目录
 ------------
 
 #### Widget管理器
 
 * [widget](widget.md) - 微件管理器,用于获取微件对象,设置配置等
-
-#### HTTP请求
-* [request](request.md) - 管理HTTP请求数据($_REQUEST)
-* [cookie](cookie.md) - 写入,读取和删除cookie($_COOKIE)
-* [post](post.md)  - 获取一项HTTP POST请求参数($_POST)的值
-* [query](query.md) - 获取一项HTTP GET查询参数($_GET)的值
-* [server](server.md) - 获取一项服务器和执行环境信息($_SERVER)的值
-* [session](session.md) - 获取一项会话($_SESSION)的值
-* [ua](ua.md) - 检测客户端浏览器,操作系统和设备是否为指定的名称和版本
-* [upload](upload.md) - 保存客户端上传的文件到指定目录
-
-#### HTTP响应
-* [response](response.md) - 发送HTTP响应头和内容
-* [download](download.md) - 发送下载文件的HTTP响应
-* [flush](flush.md) - 关闭缓冲区,让后台脚本实时输出内容到浏览器
-* [header](header.md) - 设置和获取HTTP响应头
-* [json](json.md) - 输出JSON或JSONP格式的数据到浏览器
-* [redirect](redirect.md) - 跳转到指定地址
 
 #### [缓存](cache-section.md)
 * [apc](apc.md) - APC缓存
@@ -127,6 +109,24 @@ API 参考目录
 * [isAll](isAll.md) - 检查集合里的每一项是否符合指定的规则
 * [isCallback](isCallback.md) - 检查数据是否通过指定回调方法验证
 * [isColor](isColor.md) - 检查数据是否为有效的十六进制颜色
+
+#### HTTP请求
+* [request](request.md) - 管理HTTP请求数据($_REQUEST)
+* [cookie](cookie.md) - 写入,读取和删除cookie($_COOKIE)
+* [post](post.md)  - 获取一项HTTP POST请求参数($_POST)的值
+* [query](query.md) - 获取一项HTTP GET查询参数($_GET)的值
+* [server](server.md) - 获取一项服务器和执行环境信息($_SERVER)的值
+* [session](session.md) - 获取一项会话($_SESSION)的值
+* [ua](ua.md) - 检测客户端浏览器,操作系统和设备是否为指定的名称和版本
+* [upload](upload.md) - 保存客户端上传的文件到指定目录
+
+#### HTTP响应
+* [response](response.md) - 发送HTTP响应头和内容
+* [download](download.md) - 发送下载文件的HTTP响应
+* [flush](flush.md) - 关闭缓冲区,让后台脚本实时输出内容到浏览器
+* [header](header.md) - 设置和获取HTTP响应头
+* [json](json.md) - 输出JSON或JSONP格式的数据到浏览器
+* [redirect](redirect.md) - 跳转到指定地址
 
 #### 视图
 * [escape](escape.md) - 转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义
