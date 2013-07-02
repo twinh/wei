@@ -1,6 +1,5 @@
 <?php
 
-require 'vendor/autoload.php';
 require '../../lib/Widget/Widget.php';
 
 // Get widget manager
