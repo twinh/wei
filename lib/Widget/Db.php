@@ -40,6 +40,13 @@ class Db extends AbstractWidget
     protected $dsn = 'sqlite::memory:';
 
     /**
+     * A key=>value array of driver-specific connection options.
+     *
+     * @var array
+     */
+    protected $driverOptions = array();
+
+    /**
      * The PDO object
      *
      * @var \PDO
@@ -155,10 +162,13 @@ class Db extends AbstractWidget
         if (!$this->pdo) {
             $this->beforeConnect && call_user_func($this->beforeConnect, $this);
 
-            $this->pdo = new PDO($this->dsn, $this->user, $this->password);
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->pdo->setAttribute(PDO::ATTR_STRINGIFY_FETCHES, true);
-            $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            $options = $this->driverOptions + array(
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_STRINGIFY_FETCHES => true,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            );
+
+            $this->pdo = new PDO($this->dsn, $this->user, $this->password, $options);
 
             $this->afterConnect && call_user_func($this->afterConnect, $this, $this->pdo);
         }
