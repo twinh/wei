@@ -21,7 +21,7 @@ $widget = \Widget\Widget::create();
 
 Widget支持[PRS-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)风格的自动加载器.
 
-```
+```php
 widget(array(
     'widget' => array(
         // 启用自动加载
