@@ -17,7 +17,7 @@ $widget = widget();
 $env = $widget->env();
 
 // Load configuration by environment name
-$file = 'config/config_' . $env . '.yaml';
+$file = 'config/config_' . $env . '.yml';
 
 if (is_file($file)) {
     // TODO cache me
