@@ -1,0 +1,1 @@
+# Using JSON as widget configuration

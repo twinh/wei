@@ -1,0 +1,13 @@
+{
+    "_comment": "Configuration for widget manager",
+    "widget": {
+        "inis": {
+            "error_reporting": 0,
+            "display_errors": "off"
+        },
+        "debug": true
+    },
+    "logger": {
+        "dir": "log"
+    }
+}
