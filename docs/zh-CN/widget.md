@@ -17,6 +17,25 @@ $widget = widget();
 $widget = \Widget\Widget::create();
 ```
 
+### 设置微件配置
+
+微件配置可以通过widget函数的第一个参数来设置,
+
+完整配置请查看[配置](configuration.md)章节.
+
+```php
+$widget = widget(array(
+    'widget' => array(
+        'debug' => true,
+    ),
+    'db' => array(
+        'dsn' => 'mysql:host=localhost;dbname=widget;charset=utf8',
+        'user' => 'root',
+        'password' => '123456',
+    )
+));
+```
+
 ### 设置类自动加载
 
 Widget支持[PRS-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)风格的类自动加载器.
