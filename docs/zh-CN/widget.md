@@ -19,7 +19,26 @@ $widget = \Widget\Widget::create();
 
 ### 设置自动加载
 
-TODO
+Widget支持[PRS-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)风格的自动加载器.
+
+```
+widget(array(
+    'widget' => array(
+        // 启用自动加载
+        'autoload' => true,
+        // 设置自动加载的类的命名空间和类所在的目录
+        'autoloadMap' => array(
+            'MyNamesapce' => 'path/to/MyNamespace',
+            'MyProject' => 'path/to/MyProject',
+            // 将未在上面指定命名空间的类,都引导到library目录下
+            '' => 'path/to/library'
+        )
+    )
+));
+
+// 检查类是否正确加载
+var_dump(class_exists('MyNamesapce\MyClass'));
+```
 
 ### 开启错误调试
 
