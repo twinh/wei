@@ -130,7 +130,7 @@ class WidgetTest extends TestCase
      */
     public function testInstanceWidgetWithoutInvokeMethodFromWidgetManager()
     {
-        $this->widget->setOption('+alias', array(
+        $this->widget->setOption('+aliases', array(
             'noInvokeMethod' => 'WidgetTest\Fixtures\WidgetWithoutInvokeMethod'
         ));
 
@@ -143,7 +143,7 @@ class WidgetTest extends TestCase
      */
     public function testInstanceWidgetWithoutInvokeMethod()
     {
-        $this->widget->setOption('+alias', array(
+        $this->widget->setOption('+aliases', array(
             'noInvokeMethod' => 'WidgetTest\Fixtures\WidgetWithoutInvokeMethod'
         ));
 
@@ -263,9 +263,9 @@ class WidgetTest extends TestCase
         $this->assertNotSame($this->request, $newRequest);
     }
 
-    public function testGetClassFromAlias()
+    public function testGetClassFromAliases()
     {
-        $this->widget->setOption('+alias', array(
+        $this->widget->setOption('+aliases', array(
             'request' => '\Widget\Request'
         ));
 

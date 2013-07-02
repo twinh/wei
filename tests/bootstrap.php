@@ -23,7 +23,7 @@ $widget = widget(array(
             'WidgetTest' => __DIR__,
             '' => __DIR__ . '/fallback',
         ),
-        'alias' => array(
+        'aliases' => array(
             'mysqlCache' => 'Widget\DbCache',
             'pgCache' => 'Widget\DbCache',
             'mysqlDb' => 'Widget\Db',

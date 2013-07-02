@@ -82,7 +82,7 @@ class Widget extends AbstractWidget
      *
      * @var array
      */
-    protected $alias = array();
+    protected $aliases = array();
 
     /**
      * The widgets that will be instanced after widget manager constructed
@@ -443,8 +443,8 @@ class Widget extends AbstractWidget
      */
     public function getClass($name)
     {
-        if (isset($this->alias[$name])) {
-            $class = $this->alias[$name];
+        if (isset($this->aliases[$name])) {
+            $class = $this->aliases[$name];
         } else {
             $class = 'Widget\\' . ucfirst($name);
         }
@@ -562,7 +562,7 @@ class Widget extends AbstractWidget
         foreach ($files as $file) {
             $class = substr(basename($file), 0, -4);
             $name = $format ? sprintf($format, $class) : $class;
-            $this->alias[lcfirst($name)] = $namespace . '\\' . $class;
+            $this->aliases[lcfirst($name)] = $namespace . '\\' . $class;
         }
 
         return $this;
