@@ -4,7 +4,7 @@ Widget is a micro-framework provided a new way to write PHP for faster and easie
 
 ## [Installation](docs/zh-CN/installation.md)
 
-#### Composer
+### Composer
 
 Define the following requirement in your `composer.json` file and run `php composer.phar install` to install
 ```json
@@ -15,12 +15,12 @@ Define the following requirement in your `composer.json` file and run `php compo
 }
 ```
 
-#### Dowload source code
+**Dowload source code**
 
 * [Stable Release](https://github.com/twinh/widget/archive/0.9.3-RC1.zip)
 * [Develope Release](https://github.com/twinh/widget/archive/master.zip)
 
-## Getting started
+### Getting started
 
 ```php
 // Require the widget manager class
@@ -31,6 +31,40 @@ $widget = widget();
 
 // Invoke the query widget to receive the URL query parameter
 $id = $widget->query('id');
+```
+
+## API Overview
+
+### Cache
+
+```php
+$widget = widget();
+
+// Available cache widgets
+$widget->apc;
+$widget->arrayCache;
+$widget->couchbase;
+$widget->dbCache;
+$widget->fileCache;
+$widget->memcache;
+$widget->memcached;
+$widget->redis;
+$widget->cache;
+
+$cache = $widget->memcached;
+
+// Cache APIs 
+$cache->get('key');
+$cache->set('key', 'value', 60);
+$cache->remove('key', 'value');
+$cache->exists('key');
+$cache->add('key', 'value');
+$cache->replace('key', 'value');
+$cache->increment('key', 1);
+$cache->decrement('key', 1);
+$cache->getMulti(array('key', 'key2'));
+$cache->setMulti(array('key' => 'value', 'key2' => 'value2'));
+$cache->clear();
 ```
 
 ## Testing
