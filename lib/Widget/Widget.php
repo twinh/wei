@@ -348,7 +348,7 @@ class Widget extends AbstractWidget
         // Resolve the real widget name and the config name($full)
         $full = $name;
         if (false !== ($pos = strpos($name, '.'))) {
-            $name = substr($name, 0, $pos);
+            $name = substr($name, $pos + 1);
         }
 
         // Get the widget class and instance
@@ -401,7 +401,7 @@ class Widget extends AbstractWidget
      */
     public function newInstance($name, array $options = array(), array $deps = array())
     {
-        $name .= '.' . uniqid();
+        $name .= uniqid() . '.' . $name;
         return $this->widget->get($name, $options, $deps);
     }
 

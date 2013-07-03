@@ -189,7 +189,7 @@ class WidgetTest extends TestCase
     public function testGetFromDeps()
     {
         // Set options for sub request
-        $this->widget->config('request.sub', array(
+        $this->widget->config('sub.request', array(
             'fromGlobal' => false,
             'data' => array(
                 'id' => 'fromSubRequest'
@@ -215,7 +215,7 @@ class WidgetTest extends TestCase
         $widget = $this->widget;
 
         $widget->setOption('deps', array(
-            'subRequest' => 'request.sub'
+            'subRequest' => 'sub.request'
         ));
 
         $this->assertInstanceOf('Widget\Request', $widget->subRequest);
