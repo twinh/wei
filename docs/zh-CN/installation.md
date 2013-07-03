@@ -21,7 +21,7 @@ Widget支持通过[Composer](https://getcomposer.org)下载和直接下载源文
     ```json
     {
         "require": {
-        "widget/widget": "0.9.3-RC1"
+            "widget/widget": "0.9.3-RC1"
         }
     }
     ```
