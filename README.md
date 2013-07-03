@@ -1,6 +1,6 @@
 # Widget 0.9.3-RC1 [![Build Status](https://travis-ci.org/twinh/widget.png?branch=master)](https://travis-ci.org/twinh/widget)
 
-Widget is a micro-framework provided powerful APIs for faster and easier PHP development.
+Widget is a micro-framework provided powerful but simple APIs for faster and easier PHP 5.3+ development.
 
 ## [Installation](docs/zh-CN/installation.md)
 
@@ -15,10 +15,10 @@ Define the following requirement in your `composer.json` file and run `php compo
 }
 ```
 
-### Dowload source code (ZIP)
+### Dowload source code
 
-* [Stable Release](https://github.com/twinh/widget/archive/0.9.3-RC1.zip)
-* [Develope Release](https://github.com/twinh/widget/archive/master.zip)
+* [Stable Version](https://github.com/twinh/widget/archive/0.9.3-RC1.zip)
+* [Develop Version](https://github.com/twinh/widget/archive/master.zip)
 
 ## Getting started
 
@@ -33,7 +33,12 @@ $widget = widget();
 $id = $widget->query('id');
 ```
 
-## [API Overview](docs/zh-CN#api)
+## Resources
+
+* [Documentation](docs/zh-CN)
+* [Demo](demos)
+
+## API Overview
 
 ### Cache
 
@@ -206,7 +211,7 @@ if (!$widget->isDigit('abc')) {
 // ...
 ```
 
-### More powerful widgets
+### [More powerful widgets](docs/zh-CN)
 
 ```php
 $widget->request;
