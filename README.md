@@ -2,8 +2,10 @@
 
 Widget is a micro-framework provided a new way to write PHP for faster and easier web development.
 
-Installation - Composer
------------------------
+## [Installation](docs/zh-CN/installation.md)
+
+#### Composer
+
 Define the following requirement in your `composer.json` file and run `php composer.phar install` to install
 ```json
 {
@@ -13,8 +15,13 @@ Define the following requirement in your `composer.json` file and run `php compo
 }
 ```
 
-Getting started
----------------
+#### Dowload source code
+
+* [Stable Release](https://github.com/twinh/widget/archive/0.9.3-RC1.zip)
+* [Develope Release](https://github.com/twinh/widget/archive/master.zip)
+
+## Getting started
+
 ```php
 // Require the widget manager class
 require 'path/to/widget/lib/Widget/Widget.php';
@@ -26,12 +33,14 @@ $widget = widget();
 $id = $widget->query('id');
 ```
 
-Testing
--------
+## Testing
+
 To run the tests:
 
-    $ phpunit
+```sh
+$ phpunit
+```
 
-License
--------
+## License
+
 Widget is an open-source project released MIT license. See the LICENSE file for details.
