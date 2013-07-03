@@ -16,11 +16,11 @@ namespace Widget;
 class Is extends AbstractWidget
 {
     /**
-     * The validator rule alias
+     * The validator rule aliases
      *
      * @var array
      */
-    protected $alias = array(
+    protected $aliases = array(
         'empty'     => 'Widget\Validator\EmptyValue',
         'before'    => 'Widget\Validator\Max',
         'after'     => 'Widget\Validator\Min'
@@ -57,10 +57,10 @@ class Is extends AbstractWidget
         foreach ($this->rules as $rule) {
             $rules['is' . $rule] = 'Widget\Validator\\' . $rule;
         }
-        foreach ($this->alias as $rule => $class) {
+        foreach ($this->aliases as $rule => $class) {
             $rules['is' . ucfirst($rule)] = $class;
         }
-        $this->widget->setOption('+alias', $rules);
+        $this->widget->setOption('+aliases', $rules);
     }
 
     /**
@@ -150,8 +150,8 @@ class Is extends AbstractWidget
     public function hasRule($rule)
     {
         $rule = lcfirst($rule);
-        if (isset($this->alias[$rule])) {
-            $class = $this->alias[$rule];
+        if (isset($this->aliases[$rule])) {
+            $class = $this->aliases[$rule];
         } else {
             $class = 'Widget\Validator\\' . ucfirst($rule);
         }

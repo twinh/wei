@@ -23,11 +23,13 @@ $widget = widget(array(
             'WidgetTest' => __DIR__,
             '' => __DIR__ . '/fallback',
         ),
-        'alias' => array(
-            'mysqlCache' => 'Widget\DbCache',
-            'pgCache' => 'Widget\DbCache',
-            'mysqlDb' => 'Widget\Db',
-            'pgsqlDb' => 'Widget\Db',
+        'deps' => array(
+            'mysqlDb' => 'mysql.db',
+            'pgsqlDb' => 'pgsql.db',
+            'mysqlDbal' => 'mysql.dbal',
+            'pgsqlDbal' => 'pgsql.dbal',
+            'mysqlCache' => 'mysql.dbCache',
+            'pgsqlCache' => 'pgsql.dbCache'
         )
     ),
     'call' => array(
@@ -37,12 +39,12 @@ $widget = widget(array(
     'db' => array(
         'dsn' => 'sqlite::memory:'
     ),
-    'mysqlDb' => array(
+    'mysql.db' => array(
         'user'      => 'root',
         'password'  => '123456',
         'dsn'       => 'mysql:host=127.0.0.1;port=3306;dbname=widget;charset=utf8'
     ),
-    'pgsqlDb' => array(
+    'pgsql.db' => array(
         'user'      => 'postgres',
         'password'  => '123456',
         'dsn'       => 'pgsql:host=127.0.0.1;port=5432;dbname=postgres'
@@ -52,17 +54,7 @@ $widget = widget(array(
         'driver' => 'pdo_sqlite',
         'memory' => true
     ),
-    'mysqlCache' => array(
-        'deps' => array(
-            'dbal' => 'dbal.mysqlCache'
-        )
-    ),
-    'pgCache' => array(
-        'deps' => array(
-            'dbal' => 'dbal.pgCache'
-        )
-    ),
-    'dbal.mysqlCache' => array(
+    'mysql.dbal' => array(
         'driver'    => 'pdo_mysql',
         'host'      => '127.0.0.1',
         'port'      => '3306',
@@ -71,13 +63,23 @@ $widget = widget(array(
         'dbname'    => 'widget',
         'charset'   => 'utf8'
     ),
-    'dbal.pgCache' => array(
+    'pgsql.dbal' => array(
         'driver'    => 'pdo_pgsql',
         'host'      => '127.0.0.1',
         'port'      => '5432',
         'user'      => 'postgres',
         'password'  => '123456',
         'dbname'    => 'postgres',
+    ),
+    'mysql.dbCache' => array(
+        'deps' => array(
+            'dbal' => 'mysql.dbal'
+        )
+    ),
+    'pgsql.dbCache' => array(
+        'deps' => array(
+            'dbal' => 'pgsql.dbal'
+        )
     ),
     // Doctrine ORM widget configuration
     'entityManager' => array(

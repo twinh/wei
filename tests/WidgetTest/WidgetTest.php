@@ -130,7 +130,7 @@ class WidgetTest extends TestCase
      */
     public function testInstanceWidgetWithoutInvokeMethodFromWidgetManager()
     {
-        $this->widget->setOption('+alias', array(
+        $this->widget->setOption('+aliases', array(
             'noInvokeMethod' => 'WidgetTest\Fixtures\WidgetWithoutInvokeMethod'
         ));
 
@@ -143,7 +143,7 @@ class WidgetTest extends TestCase
      */
     public function testInstanceWidgetWithoutInvokeMethod()
     {
-        $this->widget->setOption('+alias', array(
+        $this->widget->setOption('+aliases', array(
             'noInvokeMethod' => 'WidgetTest\Fixtures\WidgetWithoutInvokeMethod'
         ));
 
@@ -189,7 +189,7 @@ class WidgetTest extends TestCase
     public function testGetFromDeps()
     {
         // Set options for sub request
-        $this->widget->config('request.sub', array(
+        $this->widget->config('sub.request', array(
             'fromGlobal' => false,
             'data' => array(
                 'id' => 'fromSubRequest'
@@ -215,7 +215,7 @@ class WidgetTest extends TestCase
         $widget = $this->widget;
 
         $widget->setOption('deps', array(
-            'subRequest' => 'request.sub'
+            'subRequest' => 'sub.request'
         ));
 
         $this->assertInstanceOf('Widget\Request', $widget->subRequest);
@@ -263,9 +263,9 @@ class WidgetTest extends TestCase
         $this->assertNotSame($this->request, $newRequest);
     }
 
-    public function testGetClassFromAlias()
+    public function testGetClassFromAliases()
     {
-        $this->widget->setOption('+alias', array(
+        $this->widget->setOption('+aliases', array(
             'request' => '\Widget\Request'
         ));
 
