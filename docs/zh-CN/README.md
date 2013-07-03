@@ -1,13 +1,15 @@
 欢迎使用Widget文档
 ==================
-目录
+
+文档目录
 ------------
+
 1. [简介](introduction.md)
 2. [安装](installation.md)
 3. [配置](configuration.md)
 
 API参考目录
-------------
+-----------
 
 #### Widget管理器
 
@@ -15,6 +17,7 @@ API参考目录
 
 #### [缓存](cache-section.md)
 * [apc](apc.md) - APC缓存
+* [arrayCache](arrayCache.md) - PHP数组缓存
 * [couchbase](couchbase.md) - Couchbase缓存
 * [dbCache](dbCache.md) - 数据库缓存
 * [fileCache](fileCache.md) - 文件缓存
