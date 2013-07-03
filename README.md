@@ -1,6 +1,6 @@
 # Widget 0.9.3-RC1 [![Build Status](https://travis-ci.org/twinh/widget.png?branch=master)](https://travis-ci.org/twinh/widget)
 
-Widget is a micro-framework provided powerful APIs for faster and easier web development.
+Widget is a micro-framework provided powerful APIs for faster and easier PHP development.
 
 ## [Installation](docs/zh-CN/installation.md)
 
@@ -15,7 +15,7 @@ Define the following requirement in your `composer.json` file and run `php compo
 }
 ```
 
-**Dowload source code**
+### Dowload source code (ZIP)
 
 * [Stable Release](https://github.com/twinh/widget/archive/0.9.3-RC1.zip)
 * [Develope Release](https://github.com/twinh/widget/archive/master.zip)
@@ -100,6 +100,89 @@ $userArray = $db->select('user', 1);
 
 // Find all users who's groupId is 1
 $userArray = $db->selectAll('user', array('groupId' => '1'));
+```
+
+### Validator
+
+```php
+// Available validator widgets
+
+// Data type and composition
+$widget->isAlnum($input);
+$widget->isAlpha($input);
+$widget->isBlank($input);
+$widget->isDecimal($input);
+$widget->isDigit($input);
+$widget->isDivisibleBy($input);
+$widget->isDoubleByte($input);
+$widget->isEmpty($input);
+$widget->isEndsWith($input);
+$widget->isEquals($input);
+$widget->isIn($input);
+$widget->isLowercase($input);
+$widget->isNull($input);
+$widget->isNumber($input);
+$widget->isRegex($input);
+$widget->isRequired($input);
+$widget->isStartsWith($input);
+$widget->isType($input);
+$widget->isUppercase($input);
+
+// Length and size
+$widget->isBetween($input);
+$widget->isLength($input);
+$widget->isMax($input);
+$widget->isMaxLength($input);
+$widget->isMin($input);
+$widget->isMinLength($input);
+
+// Date and time
+$widget->isDate($input);
+$widget->isDateTime($input);
+$widget->isTime($input);
+
+// File and directory
+$widget->isDir($input);
+$widget->isExists($input);
+$widget->isFile($input);
+$widget->isImage($input);
+
+// Network
+$widget->isEmail($input);
+$widget->isIp($input);
+$widget->isTld($input);
+$widget->isUrl($input);
+$widget->isUuid($input);
+
+// Region: All
+$widget->isCreditCard($input);
+
+// Region: Chinese
+$widget->isChinese($input);
+$widget->isIdCardCn($input);
+$widget->isIdCardHk($input);
+$widget->isIdCardMo($input);
+$widget->isIdCardTw($input);
+$widget->isPhoneCn($input);
+$widget->isPostcodeCn($input);
+$widget->isQQ($input);
+$widget->isMobileCn($input);
+
+// Group
+$widget->isAllOf($input);
+$widget->isNoneOf($input);
+$widget->isOneOf($input);
+$widget->isSomeOf($input);
+
+// Others
+$widget->isAll($input);
+$widget->isCallback($input);
+$widget->isColor($input);
+
+// Validate and get error message
+if (!$widget->isDigit('abc')) {
+    print_r($widget->isDigit->getMessages());
+}
 ```
 
 ## Testing
