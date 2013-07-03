@@ -33,7 +33,7 @@ $widget = widget();
 $id = $widget->query('id');
 ```
 
-## API Overview
+## [API Overview](docs/zh-CN#api)
 
 ### Cache
 
@@ -63,43 +63,62 @@ $cache->decrement('key', 1);
 $cache->getMulti(array('key', 'key2'));
 $cache->setMulti(array('key' => 'value', 'key2' => 'value2'));
 $cache->clear();
+
+// ...
 ```
 
 ### Db
 
 ```php
-// Set options for db widget
-$widget->config(array(
-    'db' => array(
-        'user'      => 'root',
-        'password'  => '123456',
-        'dsn'       => 'mysql:host=127.0.0.1;port=3306;dbname=widget;charset=utf8'
-    )
-));
-
 $db = $widget->db;
 
-// Insert data into user table
-$db->insert('user', array(
-    'username' => 'twin',
-    'createdAt' => date('Y-m-d H:i:s') 
-));
+// Basic CRUD and Active Recrod support
+$db->query();
+$db->insert();
+$db->update();
+$db->delete();
+$db->select();
+$db->selectAll();
+$db->fetch();
+$db->fetchAll();
+$db->fetchColumn();
+$db->find();
+$db->findAll();
+$db->execute();
 
-// Update data in user table
-$db->update(
-    'user', 
-    array('username' => 'twin'), 
-    array('id' => '1')
-);
+// Using QueryBuilder to build SQL
+$qb = $db->createQueryBuilder();
 
-// Delete data
-$db->delete('user', array('id' => '1'));
+$qb
+    ->select()
+    ->addSelect()
+    ->update()
+    ->delete()
+    ->from()
+    ->where()
+    ->andWhere()
+    ->orWhere()
+    ->groupBy()
+    ->addGroupBy()
+    ->having()
+    ->andHaving()
+    ->orHaving()
+    ->orderBy()
+    ->addOrderBy()
+    ->offset()
+    ->limit()
+    ->page();
 
-// Find one user who's id is 1
-$userArray = $db->select('user', 1);
+$qb->find();
+$qb->findAll();
+$qb->fetch();
+$qb->fetchAll();
+$qb->fetchColumn();
+$qb->count();
+$qb->execute();
+$qb->getSql();
 
-// Find all users who's groupId is 1
-$userArray = $db->selectAll('user', array('groupId' => '1'));
+// ...
 ```
 
 ### Validator
@@ -183,6 +202,30 @@ $widget->isColor($input);
 if (!$widget->isDigit('abc')) {
     print_r($widget->isDigit->getMessages());
 }
+
+// ...
+```
+
+### More powerful widgets
+
+```php
+$widget->request;
+$widget->cookie;
+$widget->post;
+$widget->query;
+$widget->server;
+$widget->session;
+$widget->ua;
+$widget->upload;
+$widget->response;
+$widget->header;
+$widget->escape;
+$widget->logger;
+$widget->call;
+$widget->env;
+$widget->error;
+
+// ...
 ```
 
 ## Testing
