@@ -211,7 +211,7 @@ if (!$widget->isDigit('abc')) {
 // ...
 ```
 
-### [More powerful widgets](docs/zh-CN)
+### [More](docs/zh-CN#api)
 
 ```php
 $widget->request;
