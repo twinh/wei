@@ -1,9 +1,16 @@
 Changelog
 =========
 
+## 0.9.3 (2013-07-04)
+
+* Fixed [WeChatApp](lib/Widget/WeChatApp.php) click event letter case typo
+* Added introduction, installation, and configuration documentations
+* Added new demos : using YAML/JSON as widget configuration
+* Added driverOptions for db widget
+
 ## 0.9.3-RC1 (2013-06-26)
 
-* Added [callback](lib/Widget/Callback.php) widget to handle WeChat(Weixin) callback message
+* Added `callback` widget to handle WeChat(Weixin) callback message
 * Added `overwrite` option for [upload](lib/Widget/Upload.php) widget
 * Added support for upload file without extension
 * Added `getMulti` and `setMulti` method for cache widgets
