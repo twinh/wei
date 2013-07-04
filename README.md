@@ -2,7 +2,7 @@
 
 Widget is a micro-framework provided powerful but simple APIs for faster and easier PHP 5.3+ development.
 
-## [Installation](docs/zh-CN/installation.md)
+## [Installation](docs/zh-CN/book/installation.md)
 
 ### Composer
 
