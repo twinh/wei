@@ -2,16 +2,16 @@
 
 namespace WidgetTest;
 
-use Widget\Callback;
+use Widget\WeChatApp;
 
 /**
- * @property \Widget\Callback $callback The WeChat callback widget
+ * @property \Widget\WeChatApp $callback The WeChat callback widget
  */
-class CallbackTest extends TestCase
+class WeChatAppTest extends TestCase
 {
     public function testForbiddenForInvalidSignature()
     {
-        $callback = $this->callback;
+        $callback = $this->weChatApp;
         $this->query->set('signature', 'invalid');
         $this->query->set('timestamp', 'invalid');
         $this->query->set('nonce', 'invalid');
@@ -21,13 +21,13 @@ class CallbackTest extends TestCase
         $callback->parse();
         $return = $callback();
 
-        $this->assertInstanceOf('\Widget\Callback', $return);
+        $this->assertInstanceOf('\Widget\WeChatApp', $return);
         $this->assertEquals('403', $this->response->getStatusCode());
     }
 
     public function testEchostr()
     {
-        $callback = $this->callback;
+        $callback = $this->weChatApp;
         $this->query->set('signature', 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583');
         $this->query->set('timestamp', '1366032735');
         $this->query->set('nonce', '1365872231');
@@ -39,13 +39,13 @@ class CallbackTest extends TestCase
         $return = $callback();
         $this->assertEquals($rand, ob_get_clean());
 
-        $this->assertInstanceOf('\Widget\Callback', $return);
+        $this->assertInstanceOf('\Widget\WeChatApp', $return);
         $this->assertEquals(200, $this->response->getStatusCode());
     }
 
     public function testEchorStrOnlyWhenAuth()
     {
-        $cb = $this->callback;
+        $cb = $this->weChatApp;
 
         $cb->fallback(function(){
             return 'nerver see me';
@@ -66,7 +66,7 @@ class CallbackTest extends TestCase
     public function testHttpRawPostData()
     {
         $GLOBALS['HTTP_RAW_POST_DATA'] = 'test';
-        $callback = new \Widget\Callback();
+        $callback = new \Widget\WeChatApp();
 
         $this->assertEquals('test', $callback->getOption('postData'));
     }
@@ -76,7 +76,7 @@ class CallbackTest extends TestCase
      */
     public function testInputAndOutput($query, $input, $data, $outputContent = null, $mark = null)
     {
-        $cb = $this->callback;
+        $cb = $this->weChatApp;
 
         // Inject HTTP query
         $gets = array();
@@ -136,11 +136,11 @@ class CallbackTest extends TestCase
             return 'your input is 1';
         });
 
-        $cb->is('2', function(Callback $cb){
+        $cb->is('2', function(WeChatApp $cb){
             return $cb->sendMusic('Burning', 'A song of Maria Arredondo', 'url', 'HQ url', true);
         });
 
-        $cb->is('3', function(Callback $cb){
+        $cb->is('3', function(WeChatApp $cb){
             return $cb->sendArticle(array(
                 'title' => 'It\'s fine today',
                 'description' => 'A new day is coming~~',
@@ -153,7 +153,7 @@ class CallbackTest extends TestCase
             return 'sorry, not this time';
         });
 
-        $cb->has('ipad', function(Callback $cb){
+        $cb->has('ipad', function(WeChatApp $cb){
             return $cb->sendText('Find a ipad ? ok, i will remember u', true);
         });
 
@@ -167,7 +167,7 @@ class CallbackTest extends TestCase
             return 'anyone find my brother?';
         });
 
-        $cb->match('/twin/i', function(Callback $cb){
+        $cb->match('/twin/i', function(WeChatApp $cb){
             return 'Yes, I\'m here';
         });
 
@@ -176,7 +176,7 @@ class CallbackTest extends TestCase
         $return = $cb();
         $content = ob_get_clean();
 
-        $this->assertInstanceOf('\Widget\Callback', $return);
+        $this->assertInstanceOf('\Widget\WeChatApp', $return);
 
         foreach ($data as $name => $value) {
             $this->assertEquals($value, $cb->{'get' . $name}());
@@ -529,7 +529,7 @@ class CallbackTest extends TestCase
 
     public function testFlatMode()
     {
-        $cb = $this->callback;
+        $cb = $this->weChatApp;
         $this->query->set('signature', 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583');
         $this->query->set('timestamp', '1366032735');
         $this->query->set('nonce', '1365872231');

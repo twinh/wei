@@ -20,10 +20,10 @@ use \SimpleXMLElement;
  * @method      Response response(string $content, int $status = 200) Send headers and output content
  * @property    Request $request A widget that handles the HTTP request data
  */
-class Callback extends AbstractWidget
+class WeChatApp extends AbstractWidget
 {
     /**
-     * The callback token to generate signature
+     * The WeChat token to generate signature
      *
      * @var string
      */
@@ -141,9 +141,9 @@ class Callback extends AbstractWidget
     }
 
     /**
-     * Start up callback widget and output the matched rule message
+     * Start up WeChat application and output the matched rule message
      *
-     * @return Callback
+     * @return WeChatApp
      */
     public function __invoke()
     {
@@ -216,7 +216,7 @@ class Callback extends AbstractWidget
      * Attach a callback which triggered when user subscribed you
      *
      * @param \Closure $fn
-     * @return Callback
+     * @return WeChatApp
      */
     public function subscribe(Closure $fn)
     {
@@ -227,7 +227,7 @@ class Callback extends AbstractWidget
      * Attach a callback which triggered when user unsubscribed you
      *
      * @param \Closure $fn
-     * @return Callback
+     * @return WeChatApp
      */
     public function unsubscribe(Closure $fn)
     {
@@ -239,7 +239,7 @@ class Callback extends AbstractWidget
      *
      * @param string $key The key of event
      * @param \Closure $fn
-     * @return Callback
+     * @return WeChatApp
      */
     public function click($key, Closure $fn)
     {
@@ -251,7 +251,7 @@ class Callback extends AbstractWidget
      *
      * @param string $keyword The keyword to compare with user input
      * @param \Closure $fn
-     * @return Callback
+     * @return WeChatApp
      */
     public function is($keyword, Closure $fn)
     {
@@ -263,7 +263,7 @@ class Callback extends AbstractWidget
      *
      * @param string $keyword The keyword to search in user input
      * @param \Closure $fn
-     * @return Callback
+     * @return WeChatApp
      */
     public function has($keyword, Closure $fn)
     {
@@ -275,7 +275,7 @@ class Callback extends AbstractWidget
      *
      * @param string $keyword The keyword to search in user input
      * @param \Closure $fn
-     * @return Callback
+     * @return WeChatApp
      */
     public function startsWith($keyword, Closure $fn)
     {
@@ -287,7 +287,7 @@ class Callback extends AbstractWidget
      *
      * @param string $pattern The pattern to match
      * @param \Closure $fn
-     * @return Callback
+     * @return WeChatApp
      */
     public function match($pattern, Closure $fn)
     {
@@ -298,7 +298,7 @@ class Callback extends AbstractWidget
      * Attach a callback to handle image message
      *
      * @param \Closure $fn
-     * @return Callback
+     * @return WeChatApp
      */
     public function receiveImage(Closure $fn)
     {
@@ -310,7 +310,7 @@ class Callback extends AbstractWidget
      * Attach a callback to handle location message
      *
      * @param \Closure $fn
-     * @return Callback
+     * @return WeChatApp
      */
     public function receiveLocation(Closure $fn)
     {
@@ -322,7 +322,7 @@ class Callback extends AbstractWidget
      * Attach a callback to handle voice message
      *
      * @param \Closure $fn
-     * @return Callback
+     * @return WeChatApp
      */
     public function receiveVoice(Closure $fn)
     {
@@ -334,7 +334,7 @@ class Callback extends AbstractWidget
      * Attach a callback to handle video message
      *
      * @param Closure $fn
-     * @return Callback
+     * @return WeChatApp
      */
     public function receiveVideo(Closure $fn)
     {
@@ -346,7 +346,7 @@ class Callback extends AbstractWidget
      * Attach a callback to handle link message
      *
      * @param Closure $fn
-     * @return Callback
+     * @return WeChatApp
      */
     public function receiveLink(Closure $fn)
     {
@@ -411,7 +411,7 @@ class Callback extends AbstractWidget
      *
      * ```
      * // Sends one article
-     * $callback->sendArticle(array(
+     * $app->sendArticle(array(
      *     'title' => 'The title of article',
      *     'description' => 'The description of article',
      *     'picUrl' => 'The picture URL of article',
@@ -419,7 +419,7 @@ class Callback extends AbstractWidget
      * ));
      *
      * // Sends two or more articles
-     * $callback->sendArticle(array(
+     * $app->sendArticle(array(
      *     array(
      *         'title' => 'The title of article',
      *         'description' => 'The description of article',
@@ -479,7 +479,7 @@ class Callback extends AbstractWidget
      * Whether return the mark message or not
      *
      * @param bool $bool
-     * @return Callback
+     * @return WeChatApp
      */
     public function setMark($bool)
     {
@@ -740,7 +740,7 @@ class Callback extends AbstractWidget
      * @param \SimpleXMLElement $xml
      * @param string $name
      * @param string $value
-     * @return Callback
+     * @return WeChatApp
      */
     protected function addCDataChild(SimpleXMLElement $xml, $name, $value)
     {
@@ -756,7 +756,7 @@ class Callback extends AbstractWidget
      * @param string $type
      * @param string $keyword
      * @param \Closure $fn
-     * @return Callback
+     * @return WeChatApp
      */
     protected function addRule($type, $keyword, Closure $fn)
     {

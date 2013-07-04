@@ -111,8 +111,8 @@ namespace Widget;
  * @method   string     website($name) Returns the value of website configuration
  * @property Call       $call A widget handles HTTP request like jQuery Ajax
  * @method   Call       call(array $options) Create a new call object and execute
- * @property Callback   $callback A widget handles WeChat(Weixin) callback message
- * @method   Callback   callback() Start up callback widget and output the matched rule message
+ * @property WeChatApp  $weChatApp A widget handles WeChat(Weixin) callback message
+ * @method   WeChatApp  weChatApp() Start up WeChat application and output the matched rule message
  * @property App        $app The application widget
  * @method   App        app(array $options = array()) Startup application
  * @property Gravatar   $gravatar A widget that generates a Gravatar URL for a specified email address
