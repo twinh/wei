@@ -13,7 +13,7 @@ API参考目录
 
 #### Widget管理器
 
-* [widget](widget.md) - 微件管理器,用于获取微件对象,设置配置等
+* [widget](api/widget.md) - 微件管理器,用于获取微件对象,设置配置等
 
 #### [缓存](cache-section.md)
 * [apc](api/apc.md) - APC缓存
