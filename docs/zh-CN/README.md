@@ -8,6 +8,9 @@
 2. [安装](installation.md)
 3. [配置](configuration.md)
 4. [缓存](cache.md)
+5. [数据库](api/db.md)
+6. [数据校验](api/validate.md)
+7. [接口调用](api/call.md)
 
 API参考目录
 -----------
@@ -137,6 +140,7 @@ API参考目录
 #### 工具
 * [arr](api/attr.md) - 数组工具微件,提供一些实用的数组操作方法
 * [env](api/env.md) - 环境检测及根据不同环境加载不同的配置文件
+* [call](api/call.md) - 象jQuery Ajax一样调用您的接口
 * [error](api/error.md) - 提供简洁友好的错误界面
 * [event](api/event.md) - 事件管理器,支持绑定,触发,移除事件和命名空间等特性.
 * [logger](api/logger.md) - 记录日志
