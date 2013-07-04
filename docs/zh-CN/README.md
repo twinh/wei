@@ -7,6 +7,7 @@
 1. [简介](introduction.md)
 2. [安装](installation.md)
 3. [配置](configuration.md)
+4. [缓存](cache.md)
 
 API参考目录
 -----------
@@ -15,7 +16,7 @@ API参考目录
 
 * [widget](api/widget.md) - 微件管理器,用于获取微件对象,设置配置等
 
-#### [缓存](cache-section.md)
+#### [缓存](cache.md)
 * [apc](api/apc.md) - APC缓存
 * [arrayCache](api/arrayCache.md) - PHP数组缓存
 * [couchbase](api/couchbase.md) - Couchbase缓存
