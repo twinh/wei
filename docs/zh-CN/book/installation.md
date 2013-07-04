@@ -21,7 +21,7 @@ Widget支持通过[Composer](https://getcomposer.org)下载和直接下载源文
     ```json
     {
         "require": {
-            "widget/widget": "0.9.3-RC1"
+            "widget/widget": "0.9.3"
         }
     }
     ```
@@ -38,11 +38,11 @@ Widget支持通过[Composer](https://getcomposer.org)下载和直接下载源文
 
 ### 稳定版
 
-*敬请等待*
+Zip文件下载: [https://github.com/twinh/widget/archive/0.9.3.zip](https://github.com/twinh/widget/archive/0.9.3.zip)
 
 ### 开发尝鲜版
 
-Zip文件下载: [https://github.com/twinh/widget/archive/master.zip](https://github.com/twinh/widget/archive/master.zip) 
+Zip文件下载: [https://github.com/twinh/widget/archive/master.zip](https://github.com/twinh/widget/archive/master.zip)
 
 ### 更多历史版本
 

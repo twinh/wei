@@ -24,7 +24,7 @@ class Widget extends AbstractWidget
     /**
      * Version
      */
-    const VERSION = '0.9.3-RC1';
+    const VERSION = '0.9.3';
 
     /**
      * The instances of widget manager
