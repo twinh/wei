@@ -17,7 +17,7 @@ Define the following requirement in your `composer.json` file and run `php compo
 
 ### Dowload source code
 
-* [Stable Version](https://github.com/twinh/widget/archive/0.9.3.zip)
+* [Stable Version](https://github.com/twinh/widget/archive/v0.9.3.zip)
 * [Develop Version](https://github.com/twinh/widget/archive/master.zip)
 
 ## Getting started
