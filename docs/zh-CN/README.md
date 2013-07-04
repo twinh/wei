@@ -4,10 +4,10 @@
 文档目录
 ------------
 
-1. [简介](introduction.md)
-2. [安装](installation.md)
-3. [配置](configuration.md)
-4. [缓存](cache.md)
+1. [简介](book/introduction.md)
+2. [安装](book/installation.md)
+3. [配置](book/configuration.md)
+4. [缓存](book/cache.md)
 5. [数据库](api/db.md)
 6. [数据校验](api/validate.md)
 7. [接口调用](api/call.md)
@@ -19,7 +19,7 @@ API参考目录
 
 * [widget](api/widget.md) - 微件管理器,用于获取微件对象,设置配置等
 
-#### [缓存](cache.md)
+#### [缓存](book/cache.md)
 * [apc](api/apc.md) - APC缓存
 * [arrayCache](api/arrayCache.md) - PHP数组缓存
 * [couchbase](api/couchbase.md) - Couchbase缓存
