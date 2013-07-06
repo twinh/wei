@@ -513,6 +513,30 @@ class DbTest extends TestCase
         $this->assertEquals("SELECT * FROM member u RIGHT JOIN member_group g ON g.id = u.group_id", $query->getSql());
     }
 
+    public function testIndexBy()
+    {
+        $members = $this->db('member')
+            ->indexBy('name')
+            ->fetchAll();
+
+        $this->assertArrayHasKey('twin', $members);
+        $this->assertArrayHasKey('test', $members);
+
+        $members = $this->db('member')
+            ->indexBy('name')
+            ->findAll();
+
+        $this->assertArrayHasKey('twin', $members);
+        $this->assertArrayHasKey('test', $members);
+
+        $members = $members->toArray();
+
+        $this->assertArrayHasKey('twin', $members);
+        $this->assertArrayHasKey('test', $members);
+    }
+
+
+
     public function testQueryUpdate()
     {
         $query = $this->db
@@ -529,7 +553,7 @@ class DbTest extends TestCase
         $this->assertEquals('twin2', $member->name);
     }
 
-        public function testBindValue()
+    public function testBindValue()
     {
         // Not array parameter
         $member = $this->db->fetch("SELECT * FROM member WHERE id = ?", 1, PDO::PARAM_INT);
