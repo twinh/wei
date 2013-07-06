@@ -193,11 +193,11 @@ class QueryBuilder
      */
     public function findAll()
     {
-        $data = $this->execute();
+        $data = $this->fetchAll();
 
         $records = array();
-        foreach ($data as $row) {
-            $records[] = $this->db->create($this->table, $row);
+        foreach ($data as $key => $row) {
+            $records[$key] = $this->db->create($this->table, $row);
         }
 
         return new Collection($records);

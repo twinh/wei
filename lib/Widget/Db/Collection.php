@@ -25,8 +25,8 @@ class Collection extends \ArrayObject
     public function toArray()
     {
         $data = array();
-        foreach ($this as $record) {
-            $data[] = $record->toArray();
+        foreach ($this as $key => $record) {
+            $data[$key] = $record->toArray();
         }
         return $data;
     }
