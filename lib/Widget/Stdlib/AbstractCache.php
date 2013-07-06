@@ -18,14 +18,16 @@ use Widget\AbstractWidget;
 abstract class AbstractCache extends AbstractWidget
 {
     /**
-     * Retrieve or store an item
-     *
-     * @param  string      $key    The name of item
-     * @param  mixed       $value  The value of item
-     * @param  int         $expire The expire seconds, 0 means never expired
-     * @return mixed
+     * {@inheritdoc}
      */
-    abstract public function __invoke($key, $value = null, $expire = 0);
+    public function __invoke($key, $value = null, $expire = 0)
+    {
+        if (1 == func_num_args()) {
+            return $this->get($key);
+        } else {
+            return $this->set($key, $value, $expire);
+        }
+    }
 
     /**
      * Retrieve multiple items

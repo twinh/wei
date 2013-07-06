@@ -68,18 +68,6 @@ class Cache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function __invoke($key, $value = null, $expire = 0)
-    {
-        if (1 == func_num_args()) {
-            return $this->get($key);
-        } else {
-            return $this->set($key, $value, $expire);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function get($key)
     {
         return $this->object->get($key);
