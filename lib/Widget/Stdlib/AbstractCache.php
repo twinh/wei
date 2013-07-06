@@ -50,8 +50,7 @@ abstract class AbstractCache extends AbstractWidget
     public function setMulti(array $items, $expire = 0)
     {
         $results = array();
-        foreach ($items as $key => $value)
-        {
+        foreach ($items as $key => $value) {
             $results[$key] = $this->set($key, $value, $expire);
         }
         return $results;
