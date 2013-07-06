@@ -74,6 +74,8 @@ class QueryBuilder
         'offset'  => null,
     );
 
+    protected $indexBy;
+
     /**
      * @var string The complete SQL string for this query.
      */
@@ -220,7 +222,21 @@ class QueryBuilder
      */
     public function fetchAll()
     {
-        return $this->execute();
+        $data = $this->execute();
+
+        if ($data && $this->indexBy && !array_key_exists($this->indexBy, $data[0])) {
+            throw new \RuntimeException('Index column "%s" not found in fetched data');
+        }
+
+        if ($this->indexBy) {
+            $newData = array();
+            foreach ($data as $row) {
+                $newData[$row[$this->indexBy]] = $row;
+            }
+            return $newData;
+        } else {
+            return $data;
+        }
     }
 
     /**
@@ -880,6 +896,13 @@ class QueryBuilder
     public function addOrderBy($sort, $order = 'ASC')
     {
         return $this->add('orderBy', $sort . ' ' . ($order ?: 'ASC'), true);
+    }
+
+    public function indexBy($column)
+    {
+        $this->indexBy = $column;
+
+        return $this;
     }
 
     /**
