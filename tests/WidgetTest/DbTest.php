@@ -533,6 +533,11 @@ class DbTest extends TestCase
 
         $this->assertArrayHasKey('twin', $members);
         $this->assertArrayHasKey('test', $members);
+
+        $this->setExpectedException('RuntimeException', 'Index column "test" not found in fetched data');
+        $members = $this->db('member')
+            ->indexBy('test')
+            ->fetchAll();
     }
 
 

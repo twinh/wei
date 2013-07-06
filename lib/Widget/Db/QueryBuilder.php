@@ -74,6 +74,12 @@ class QueryBuilder
         'offset'  => null,
     );
 
+    /**
+     * A column to be the key of the fetched array, if not provided, return
+     * default number index array
+     *
+     * @var string
+     */
     protected $indexBy;
 
     /**
@@ -225,7 +231,7 @@ class QueryBuilder
         $data = $this->execute();
 
         if ($data && $this->indexBy && !array_key_exists($this->indexBy, $data[0])) {
-            throw new \RuntimeException('Index column "%s" not found in fetched data');
+            throw new \RuntimeException(sprintf('Index column "%s" not found in fetched data', $this->indexBy));
         }
 
         if ($this->indexBy) {
@@ -898,6 +904,12 @@ class QueryBuilder
         return $this->add('orderBy', $sort . ' ' . ($order ?: 'ASC'), true);
     }
 
+    /**
+     * Specifies a column to be the key of the fetched array
+     *
+     * @param string $column
+     * @return $this
+     */
     public function indexBy($column)
     {
         $this->indexBy = $column;
