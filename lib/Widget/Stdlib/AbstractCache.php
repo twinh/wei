@@ -56,7 +56,7 @@ abstract class AbstractCache extends AbstractWidget
     }
 
     /**
-     * Store callback result in cache for specified times
+     * Store callback result in cache with specified times
      *
      * @param callback $fn
      * @param int $expire
@@ -65,7 +65,9 @@ abstract class AbstractCache extends AbstractWidget
      */
     public function cached($fn, $expire, $key = null)
     {
-        $key = md5(new \ReflectionFunction($fn)) . $key;
+        if ($key === null) {
+            $key = md5(new \ReflectionFunction($fn));
+        }
 
         if (false === $result = $this->get($key)) {
             $result = call_user_func($fn);
