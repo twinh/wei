@@ -130,7 +130,7 @@ class Widget extends AbstractWidget
     public function __construct(array $config = array())
     {
         // Set configurations for all widget
-        $this->config = $config;
+        $this->config($config);
 
         $this->widgets['widget'] = $this->widget = $this;
 
@@ -289,6 +289,23 @@ class Widget extends AbstractWidget
         // Merge all configurations
         if (is_array($name)) {
             foreach ($name as $key => $value) {
+                /**
+                 * Automatically create dependence map when configuration key contains "."
+                 *
+                 * $this->config = array(
+                 *    'mysql.db' => array(),
+                 * );
+                 * =>
+                 * $this->deps['mysqlDb'] = 'mysql.db';
+                 */
+                if (false !== ($pos = strpos($key, '.'))) {
+                    $parts = explode('.', $key, 2);
+                    $widgetName = $parts[0] . ucfirst($parts[1]);
+                    if (!isset($this->deps[$widgetName])) {
+                        $this->deps[$widgetName] = $key;
+                    }
+                }
+
                 if (is_array($value)) {
                     foreach ($value as $subKey => $subValue) {
                         $this->config[$key][$subKey] = $subValue;
