@@ -2,6 +2,21 @@
 
 Widget is a micro-framework provided powerful but simple APIs for faster and easier PHP 5.3+ development.
 
+## Getting started
+
+Start using Widget in 3 steps, it's easier than any frameworks you've seen before!
+
+```php
+// Include the widget manager class
+require 'path/to/widget/lib/Widget/Widget.php';
+
+// Create the default widget manager instance
+$widget = widget();
+
+// Invoke the "query" widget to receive the URL query parameter
+$id = $widget->query('id');
+```
+
 ## [Installation](docs/zh-CN/book/installation.md)
 
 ### Composer
@@ -15,23 +30,10 @@ Define the following requirement in your `composer.json` file and run `php compo
 }
 ```
 
-### Dowload source code
+### Download source code
 
 * [Stable Version](https://github.com/twinh/widget/archive/v0.9.3.zip)
 * [Develop Version](https://github.com/twinh/widget/archive/master.zip)
-
-## Getting started
-
-```php
-// Include the widget manager class
-require 'path/to/widget/lib/Widget/Widget.php';
-
-// Create the default widget manager instance
-$widget = widget();
-
-// Invoke the query widget to receive the URL query parameter
-$id = $widget->query('id');
-```
 
 ## Resources
 
