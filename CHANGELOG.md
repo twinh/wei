@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 0.9.4 (WIP)
+
+* Merged cache widget's `cached` method into `get` method
+
 ## 0.9.3 (2013-07-04)
 
 * Fixed [WeChatApp](lib/Widget/WeChatApp.php) click event letter case typo
