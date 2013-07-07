@@ -39,7 +39,7 @@ class Bicache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function get($key)
+    protected function doGet($key)
     {
         $value = $this->master->get($key);
 

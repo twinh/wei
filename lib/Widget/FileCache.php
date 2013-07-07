@@ -55,7 +55,7 @@ class FileCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function get($key)
+    protected function doGet($key)
     {
         $file = $this->getFile($key);
 

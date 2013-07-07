@@ -20,7 +20,7 @@ class Apc extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function get($key)
+    protected function doGet($key)
     {
         return apc_fetch($key);
     }

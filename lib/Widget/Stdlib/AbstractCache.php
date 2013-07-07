@@ -84,7 +84,43 @@ abstract class AbstractCache extends AbstractWidget
      * @param  string      $key The name of item
      * @return mixed
      */
-    abstract public function get($key);
+    abstract protected function doGet($key);
+
+    /**
+     * Retrieve an item
+     *
+     * ```php
+     * $cache = widget()->cache;
+     *
+     * $cache->get('key'); // => false
+     *
+     * $cache->get('key', function($widget){
+    *      return 'value';
+     * }); // => "value"
+     *
+     * $cache->get('key'); // => "value"
+     * ```
+     *
+     * @param string $key The name of item
+     * @param int $expire The expire seconds of callback return value
+     * @param callback $fn The callback to execute when cache not found
+     * @return mixed
+     */
+    public function get($key, $expire = null, $fn = null)
+    {
+        $result = $this->doGet($key);
+
+        if (false === $result && null !== $expire) {
+            if (is_callable($expire)) {
+                $fn = $expire;
+                $expire = 0;
+            }
+            $result = call_user_func($fn, $this->widget);
+            $this->set($key, $result, $expire);
+        }
+
+        return $result;
+    }
 
     /**
      * Store an item

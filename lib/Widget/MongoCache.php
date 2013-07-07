@@ -45,7 +45,7 @@ class MongoCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function get($key)
+    protected function doGet($key)
     {
         $result = $this->object->findOne(array('_id' => $key), array('value', 'expire'));
 

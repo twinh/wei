@@ -69,7 +69,7 @@ class DbCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function get($key)
+    protected function doGet($key)
     {
         $result = $this->conn->fetchAssoc("SELECT * FROM {$this->table} WHERE id = ?", array($key));
 

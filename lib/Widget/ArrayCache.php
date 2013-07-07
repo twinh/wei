@@ -27,7 +27,7 @@ class ArrayCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function get($key)
+    protected function doGet($key)
     {
         return array_key_exists($key, $this->data) ? $this->data[$key] : false;
     }

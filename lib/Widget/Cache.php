@@ -68,7 +68,7 @@ class Cache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function get($key)
+    protected function doGet($key)
     {
         return $this->object->get($key);
     }

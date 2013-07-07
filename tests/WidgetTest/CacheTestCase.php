@@ -121,22 +121,25 @@ class CacheTestCase extends TestCase
         $this->assertEquals($items, $cache->getMulti(array_keys($items)));
     }
 
-    public function testCached()
+    public function testGetFalseResultAndSet()
     {
-       $cache = $this->object;
-       $num = 1;
+        $cache = $this->object;
+        $num = 1;
+        $key = __METHOD__;
 
-       $result = $cache->cached(function() use($num){
-           return ++$num;
-       }, 60);
+        $cache->clear();
 
-       $this->assertEquals(2, $result);
+        $result = $cache->get($key, 60, function() use($num){
+            return ++$num;
+        });
 
-       // receive from cache
-       $result2 = $cache->cached(function() use($num){
-           return ++$num;
-       }, 60);
+        $this->assertEquals(2, $result);
 
-       $this->assertEquals(2, $result2);
+        // receive from cache
+        $result2 = $cache->get($key, function() use($num){
+            return ++$num;
+        });
+
+        $this->assertEquals(2, $result2);
     }
 }
