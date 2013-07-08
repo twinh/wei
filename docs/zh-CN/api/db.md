@@ -112,7 +112,7 @@ $slaveDb = $widget->slaveDb;
 // 获取日志数据库微件
 $loggerDb = $widget->loggerDb;
 
-// 使用数据库微件查询用户编号为1的操作日志
+// 使用日志数据库微件查询用户编号为1的操作日志
 $loggerDb->findAll('userLog', array('userId' => 1));
 ```
 
@@ -177,6 +177,14 @@ PostgreSQL | pgsql:host=localhost;port=5432;dbname=testdb              | http://
 
 #### db($table)
 根据数据表名称,创建一个新Query Builder对象
+
+**返回:** `Widget\Db\QueryBuilder`
+
+**参数**
+
+名称      | 类型   | 说明
+----------|--------|------
+$table    | string | 数据表的名称,如`user`,或带别名形式的`user u`
 
 #### db->insert($table, $data = array())
 向指定的数据表插入一条数据
