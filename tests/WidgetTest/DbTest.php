@@ -260,8 +260,11 @@ class DbTest extends TestCase
     public function testSelect()
     {
         $data = $this->db->select('member', 1);
-
         $this->assertEquals('twin', $data['name']);
+
+        // Empty array as conditions
+        $data = $this->db->select('member', array());
+        $this->assertArrayHasKey('name', $data);
     }
 
     public function testSelectWithColumn()
