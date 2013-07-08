@@ -124,6 +124,51 @@ $user = $widget->config('db\user');
 $user = 'root';
 ```
 
+### 配置多个微件对象(如:连接到多个数据库)
+
+在微框架中,要为一个微件配置多个实例,只需添加一个新的配置项即可.
+
+配置项命名规则为`自定义名称.微件名称`,如`slave.db`,`slave`表示业务名称,按需命名,`db`表示数据库微件,两者通过`.`连接
+
+在添加了该配置后,微框架会自动进行映射,可以通过`$widget->slaveDb`获取到`slave.db`配置的数据库微件
+
+下面的例子展示了多个数据库的配置和数据库对象的获取.
+
+```php
+$widget = widget(array(
+    // 默认数据库微件的配置
+    'db' => array(
+        'dsn' => 'mysql:host=localhost;dbname=widget;charset=utf8',
+        'user' => 'root',
+        'password' => '123456',
+    ),
+    // 备机数据库微件的配置
+    'slave.db' => array(
+        'dsn' => 'mysql:host=slave-host;dbname=widget;charset=utf8',
+        'user' => 'root',
+        'password' => '123456',
+    ),
+    // 日志数据库微件的配置
+    'logger.db' => array(
+        'dsn' => 'mysql:host=logger-host;dbname=widget;charset=utf8',
+        'user' => 'root',
+        'password' => '123456',
+    )
+));
+
+// 获取默认数据库微件
+$db = $widget->db;
+
+// 获取备机数据库微件
+$slaveDb = $widget->slaveDb;
+
+// 获取日志数据库微件
+$loggerDb = $widget->loggerDb;
+
+// 使用日志数据库微件查询用户编号为1的操作日志
+$loggerDb->findAll('userLog', array('userId' => 1));
+```
+
 ## 扩展
 
 除了上面提到的PHP数组和PHP数组文件配置,我们可以通过简单的代码实现其他格式作为配置文件.
