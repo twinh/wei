@@ -229,15 +229,15 @@
     <div class="page-header">
       <h1>入门</h1>
     </div>
-    <p class="lead">Widget是一个非常小的PHP框架,她提供了一种高效简洁的方式让您更方便地使用PHP.<p>
+    <p class="lead">Widget是一个PHP微框架,提供了强大又简洁的接口,让PHP开发更快速,更简单.<p>
     <p>Widget的使用比任何框架都要简单,只需3步,<code>加载</code>=><code>创建</code>=><code>调用</code>!</p>
-    <%= syntax_highlighter("<pre class=\"php\"><code>// 加载核心类文件
+    <%= syntax_highlighter("<pre class=\"php\"><code>// 1. 加载核心类文件
 require 'path/to/widget/lib/Widget/Widget.php';
 
-// 创建微件管理器对象
+// 2. 创建微件管理器对象
 $widget = widget();
 
-// 调用query微件,获取URL请求中id参数
+// 3. 调用query微件,获取URL请求中id参数
 $id = $widget->query('id');</code></pre>") %>
   </div>
 
@@ -252,13 +252,13 @@ $id = $widget->query('id');</code></pre>") %>
         <h3>1. 通过<a href="http://getcomposer.org/" target="_blank">Composer</a>下载</h3>
         <p><%= syntax_highlighter('<pre class="json"><code>{
     "require": {
-        "widget/widget": "0.9.2-beta"
+        "widget/widget": "0.9.3"
     }
 }</code></pre>', 'json') %></p>
       </div>
       <div class="col-span-6">
         <h3>2. 直接下载</h3>
-        <p><a class="btn btn-large btn-primary btn-block" href="https://github.com/twinh/widget/archive/v0.9.2-beta.zip">最新版 v0.9.2-beta</a></p>
+        <p><a class="btn btn-large btn-primary btn-block" href="https://github.com/twinh/widget/archive/v0.9.3.zip">最新版 v0.9.3</a></p>
         <p><a class="btn btn-large btn-block" href="https://github.com/twinh/widget/archive/master.zip">开发版</a></p>
       </div>
     </div>
