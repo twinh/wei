@@ -28,6 +28,7 @@ def markdown(text)
 end
 
 widgets = [
+    'widget',
   # request-section
     'request', 'cookie', 'post', 'query', 'server', 'session', 'ua', 'upload',
   # response-section

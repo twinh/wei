@@ -45,6 +45,9 @@
       <a class="nav-header" href="#widget">微件列表</a>
     </li>
     <li>
+      <a href="#widget">Widget管理器</a>
+    </li>
+    <li>
       <a href="#request">HTTP请求</a>
       <ul class="nav">
         <li><a href="#request">Request</a></li>
@@ -229,15 +232,15 @@
     <div class="page-header">
       <h1>入门</h1>
     </div>
-    <p class="lead">Widget是一个非常小的PHP框架,她提供了一种高效简洁的方式让您更方便地使用PHP.<p>
+    <p class="lead">Widget是一个PHP微框架,提供了强大又简洁的接口,让PHP开发更快速,更简单.<p>
     <p>Widget的使用比任何框架都要简单,只需3步,<code>加载</code>=><code>创建</code>=><code>调用</code>!</p>
-    <div class="highlight"><pre><code class="php"><span class="c1">// 加载核心类文件</span>
+    <div class="highlight"><pre><code class="php"><span class="c1">// 1. 加载核心类文件</span>
 <span class="k">require</span> <span class="s1">'path/to/widget/lib/Widget/Widget.php'</span><span class="p">;</span>
 
-<span class="c1">// 创建微件管理器对象</span>
+<span class="c1">// 2. 创建微件管理器对象</span>
 <span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">();</span>
 
-<span class="c1">// 调用query微件,获取URL请求中id参数</span>
+<span class="c1">// 3. 调用query微件,获取URL请求中id参数</span>
 <span class="nv">$id</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s1">'id'</span><span class="p">);</span>
 </code></pre></div>
   </div>
@@ -287,6 +290,338 @@
     <h1>微件列表</h1>
     <p class="lead">提供了上百个各具特色的微件,包括缓存,事件,HTTP请求,HTTP响应,验证器等</p>
   </div>
+
+<!-- api/widget
+  ================================================== -->
+  <section id="widget">
+  <div class="page-header"><h1>Widget</h1></div>
+
+<p>微件管理器,所有微件对象的入口.</p>
+
+<p>用于获取微件对象,设置自动加载,设置别名,设置配置等.</p>
+
+<h2>案例</h2>
+
+<h3>获取微件管理器对象</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 通过widget函数获取</span>
+<span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">();</span>
+
+<span class="c1">// 完整的获取方法如下,您可以根据自己的编码习惯选择适合您的方式</span>
+<span class="nv">$widget</span> <span class="o">=</span> <span class="nx">\Widget\Widget</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+</code></pre></div>
+
+<h3>设置微件配置</h3>
+
+<p>微件配置可以通过widget函数的第一个参数来设置,</p>
+
+<p>完整配置请查看<a href="../configuration.md">配置</a>章节.</p>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'debug'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'dsn'</span> <span class="o">=&gt;</span> <span class="s1">'mysql:host=localhost;dbname=widget;charset=utf8'</span><span class="p">,</span>
+        <span class="s1">'user'</span> <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
+        <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</code></pre></div>
+
+<h3>设置类自动加载</h3>
+
+<p>Widget支持<a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md">PRS-0</a>风格的类自动加载器.</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="c1">// 启用自动加载</span>
+        <span class="s1">'autoload'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="c1">// 设置自动加载的类的命名空间和类所在的目录</span>
+        <span class="s1">'autoloadMap'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'MyLib'</span> <span class="o">=&gt;</span> <span class="s1">'path/to/lib'</span><span class="p">,</span>
+            <span class="s1">'MyProject'</span> <span class="o">=&gt;</span> <span class="s1">'path/to/project'</span><span class="p">,</span>
+            <span class="c1">// 将未在上面指定命名空间的类,都引导到library目录下</span>
+            <span class="s1">''</span> <span class="o">=&gt;</span> <span class="s1">'path/to/library'</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+
+<span class="c1">// 检查类是否正确加载</span>
+
+<span class="c1">// =&gt; 检查文件 path/to/library/MyNamesapce/MyClass.php 是否存在</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nb">class_exists</span><span class="p">(</span><span class="s1">'MyNamesapce\MyClass'</span><span class="p">));</span>
+
+<span class="c1">// =&gt; 检查文件 path/to/library/MyClass/MyClass.php 是否存在</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nb">class_exists</span><span class="p">(</span><span class="s1">'MyClass\MyClass'</span><span class="p">));</span>
+</code></pre></div>
+
+<h3>开启错误调试</h3>
+
+<p>Widget的错误调试可通过<code>debug</code>选项开启,PHP的调试可通过<code>inis</code>选项配置</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="c1">// 通过PHP ini配置,开启PHP错误信息提示</span>
+        <span class="s1">'inis'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="c1">// 在屏幕上输出错误信息</span>
+            <span class="s1">'display_errors'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+            <span class="c1">// 设置错误报告的级别</span>
+            <span class="s1">'error_reporting'</span> <span class="o">=&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="c1">// 开启Widget的调试模式</span>
+        <span class="s1">'debug'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>config</td>
+<td>array</td>
+<td>无</td>
+<td>所有微件的配置选项</td>
+</tr>
+<tr>
+<td>inis</td>
+<td>array</td>
+<td>无</td>
+<td>PHP的ini配置选项</td>
+</tr>
+<tr>
+<td>debug</td>
+<td>bool</td>
+<td>true</td>
+<td>是否启用调试模式</td>
+</tr>
+<tr>
+<td>autoloadMap</td>
+<td>array</td>
+<td>无</td>
+<td>自动加载的命名空间和路径地址</td>
+</tr>
+<tr>
+<td>autoload</td>
+<td>bool</td>
+<td>true</td>
+<td>是否启用自动加载</td>
+</tr>
+<tr>
+<td>alias</td>
+<td>array</td>
+<td>无</td>
+<td>微件别名列表</td>
+</tr>
+<tr>
+<td>preload</td>
+<td>array</td>
+<td>array('is')</td>
+<td>预加载的微件列表</td>
+</tr>
+<tr>
+<td>import</td>
+<td>array</td>
+<td>无</td>
+<td>导入指定目录下的微件类</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
+
+<h4>widget($config, $name = 'default')</h4>
+
+<p>获取指定名称的微件管理器,如果不存在,将创建一个新的对象</p>
+
+<p><strong>返回:</strong> <code>Widget\Widget</code> 微件管理器对象</p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$config</td>
+<td>string,array</td>
+<td>微件的配置数组或配置文件</td>
+</tr>
+<tr>
+<td>$name</td>
+<td>string</td>
+<td>微件对象的名称</td>
+</tr>
+</tbody>
+</table><h4>widget()-&gt;config($name, $vlaue = array())</h4>
+
+<p>设置微件的配置</p>
+
+<p><strong>返回:</strong> <code>Widget\Widget</code> 微件管理器对象</p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$name</td>
+<td>string</td>
+<td>无</td>
+<td>微件的名称,如<code>request</code>, <code>request.sub</code>
+</td>
+</tr>
+<tr>
+<td>$value</td>
+<td>array</td>
+<td>无</td>
+<td>微件的配置选项</td>
+</tr>
+</tbody>
+</table><h4>widget()-&gt;config($array = array())</h4>
+
+<p>设置微件所有配置</p>
+
+<p><strong>返回:</strong> <code>Widget\Widget</code> 微件管理器对象</p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$array</td>
+<td>array</td>
+<td>无</td>
+<td>微件的完整配置</td>
+</tr></tbody>
+</table><h4>widget()-&gt;config($name)</h4>
+
+<p>获取微件的选项配置</p>
+
+<p><strong>返回:</strong> <code>mixed</code> 配置的值,如果配置不存在,返回<code>null</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$name</td>
+<td>string</td>
+<td>无</td>
+<td>配置的名称</td>
+</tr></tbody>
+</table><h4>widget()-&gt;get($name, $options = array(), $deps = array())</h4>
+
+<p>获取一个微件对象</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$name</td>
+<td>string</td>
+<td>无</td>
+<td>微件的名称</td>
+</tr>
+<tr>
+<td>$options</td>
+<td>array</td>
+<td>无</td>
+<td>除了会通过<code>config</code>方法获取配置选项之外的附加的配置选项</td>
+</tr>
+<tr>
+<td>$deps</td>
+<td>array</td>
+<td>无</td>
+<td>指定微件的依赖关系</td>
+</tr>
+</tbody>
+</table><h4>widget()-&gt;import($dir, $namespace, $format = null)</h4>
+
+<p>导入指定目录下的微件类文件</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$dir</td>
+<td>string</td>
+<td>无</td>
+<td>类文件所在的目录</td>
+</tr>
+<tr>
+<td>$namespace</td>
+<td>string</td>
+<td>无</td>
+<td>类名对应的命名空间</td>
+</tr>
+<tr>
+<td>$format</td>
+<td>string</td>
+<td>无</td>
+<td>类文件的格式</td>
+</tr>
+</tbody>
+</table><h4>widget()-&gt;newInstance($name, $options = array(), $deps = array())</h4>
+
+<p>初始化一个新的微件对象</p>
+
+<h4>widget()-&gt;set($name, widget())</h4>
+
+<p>设置微件对象</p>
+
+<h4>widget()-&gt;remove($name)</h4>
+
+<p>移出微件对象,如果对象存在,返回<code>true</code>,否则返回<code>false</code></p>
+
+<h4>widget()-&gt;getClass($name)</h4>
+
+<p>根据微件名称获取微件类名</p>
+
+<h4>widget()-&gt;has($name)</h4>
+
+<p>检查微件是否存在</p>
+
+<h4>widget()-&gt;setAutoload($bool)</h4>
+
+<p>启用或禁用PSR-0类自动加载</p>
+  </section>
 
 <!-- api/request
   ================================================== -->
