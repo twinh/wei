@@ -22,6 +22,12 @@ $widget = widget(array(
         'user' => 'root',
         'password' => '123456',
     ),
+    // 备机数据库微件的配置
+    'slave.db' => array(
+        'dsn' => 'mysql:host=slave-host;dbname=widget;charset=utf8',
+        'user' => 'root',
+        'password' => '123456',
+    ),
     // 日志微件的配置
     'logger' => array(
         'dir'   => 'log',

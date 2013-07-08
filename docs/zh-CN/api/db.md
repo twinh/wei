@@ -79,6 +79,43 @@ $user = widget()->db->user(1);
 $user->delete();
 ```
 
+### 连接到多个数据库
+
+```php
+$widget = widget(array(
+    // 数据库微件的配置
+    'db' => array(
+        'dsn' => 'mysql:host=localhost;dbname=widget;charset=utf8',
+        'user' => 'root',
+        'password' => '123456',
+    ),
+    // 备机数据库微件的配置
+    'slave.db' => array(
+        'dsn' => 'mysql:host=slave-host;dbname=widget;charset=utf8',
+        'user' => 'root',
+        'password' => '123456',
+    ),
+    // 日志数据库微件的配置
+    'logger.db' => array(
+        'dsn' => 'mysql:host=logger-host;dbname=widget;charset=utf8',
+        'user' => 'root',
+        'password' => '123456',
+    )
+));
+
+// 获取默认数据库微件
+$db = $widget->db;
+
+// 获取备机数据库微件
+$slaveDb = $widget->slaveDb;
+
+// 获取日志数据库微件
+$loggerDb = $widget->loggerDb;
+
+// 使用数据库微件查询用户编号为1的操作日志
+$loggerDb->findAll('userLog', array('userId' => 1));
+```
+
 ### 区分`fetch`,`select`和`find`
 
 在db微件,`fetch`,`select`和`find`方法都是用于查询数据库数据,他们共同的特征是只返回第一行数据,不同点在于:
