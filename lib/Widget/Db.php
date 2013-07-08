@@ -283,11 +283,13 @@ class Db extends AbstractWidget
         $query = "SELECT $select FROM " . $this->getTable($table) . ' ';
 
         if (is_array($conditions)) {
-            $query .= "WHERE " . implode(' = ? AND ', array_keys($conditions)) . ' = ?';
-            $params = array_values($conditions);
+            if (!empty($conditions)) {
+                $query .= "WHERE " . implode(' = ? AND ', array_keys($conditions)) . ' = ?';
+                $params = array_values($conditions);
+            }
         } elseif ($conditions !== false) {
-            $query .= "WHERE id = :field";
-            $params = array('field' => $conditions);
+            $query .= "WHERE id = :id";
+            $params = array('id' => $conditions);
         }
 
         if ($limit) {
