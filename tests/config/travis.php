@@ -1,17 +1,17 @@
 <?php
 
 return array(
-    'mysqlDb' => array(
+    'mysql.db' => array(
         'user'      => 'travis',
         'password'  => '',
         'dsn'       => 'mysql:host=127.0.0.1;port=3306;dbname=widget_tests;charset=utf8'
     ),
-    'pgsqlDb' => array(
+    'pgsql.db' => array(
         'user'      => 'travis',
         'password'  => '',
         'dsn'       => 'pgsql:host=127.0.0.1;port=5432;dbname=widget_tests'
     ),
-    'dbal.mysqlCache' => array(
+    'mysql.dbal' => array(
         'driver'    => 'pdo_mysql',
         'host'      => '127.0.0.1',
         'port'      => '3306',
@@ -20,7 +20,7 @@ return array(
         'dbname'    => 'widget_tests',
         'charset'   => 'utf8'
     ),
-    'dbal.pgCache' => array(
+    'pgsql.dbal' => array(
         'driver'    => 'pdo_pgsql',
         'host'      => '127.0.0.1',
         'port'      => '5432',
