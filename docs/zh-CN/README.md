@@ -8,7 +8,7 @@
 2. [安装](book/installation.md)
 3. [配置](book/configuration.md)
 4. [缓存](book/cache.md)
-5. [数据库](api/db.md)
+5. [数据库操作](api/db.md)
 6. [数据校验](api/validate.md)
 7. [接口调用](api/call.md)
 
