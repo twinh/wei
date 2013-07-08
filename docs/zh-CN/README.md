@@ -40,6 +40,9 @@ API参考目录
 * [db](api/db.md) - 数据库操作微件,支持基本的增删查改(CRUD)和流行的Active Record模式等数据库操作
 * [queryBuilder](api/queryBuilder.md) - 简洁高效的SQL查询构建器
 
+#### 接口调用
+* [call](api/call.md) - 象jQuery Ajax一样调用您的接口
+
 #### 验证器
 * [validate](api/validate.md) - 检查数组或对象中每一个元素是否能通过指定规则的验证(类似[jQuery Validation](http://bassistance.de/jquery-plugins/jquery-plugin-validation/)插件)
 * [is](api/is.md) - 验证管理器,用于检查数据是否能通过指定规则,或指定回调结构的验证
@@ -144,7 +147,6 @@ API参考目录
 
 #### 工具
 * [arr](api/attr.md) - 数组工具微件,提供一些实用的数组操作方法
-* [call](api/call.md) - 象jQuery Ajax一样调用您的接口
 * [env](api/env.md) - 环境检测及根据不同环境加载不同的配置文件
 * [error](api/error.md) - 提供简洁友好的错误界面
 * [event](api/event.md) - 事件管理器,支持绑定,触发,移除事件和命名空间等特性
