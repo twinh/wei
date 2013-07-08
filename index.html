@@ -81,7 +81,7 @@
       <a href="#call">接口调用</a>
     </li>
     <li>
-      <a href="#cache-section">缓存</a>
+      <a href="#book-cache">缓存</a>
       <ul class="nav">
         <li><a href="#cache">Cache</a></li>
         <li><a href="#apc">APC</a></li>
@@ -288,7 +288,7 @@
     <p class="lead">提供了上百个各具特色的微件,包括缓存,事件,HTTP请求,HTTP响应,验证器等</p>
   </div>
 
-<!-- request
+<!-- api/request
   ================================================== -->
   <section id="request">
   <div class="page-header"><h1>Request</h1></div>
@@ -434,7 +434,7 @@
 <p>检查当前是否为ajax(XMLHttpRequest)请求</p>
   </section>
 
-<!-- cookie
+<!-- api/cookie
   ================================================== -->
   <section id="cookie">
   <div class="page-header"><h1>Cookie</h1></div>
@@ -452,9 +452,9 @@
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cookie</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
 </code></pre></div>
 
-<h3>写入7天过期的cookie</h3>
+<h3>写入7天后过期的cookie</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cookie</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'expires'</span> <span class="o">=&gt;</span> <span class="mi">7</span><span class="p">));</span>
+<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cookie</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'expires'</span> <span class="o">=&gt;</span> <span class="mi">7</span> <span class="o">*</span> <span class="mi">86400</span><span class="p">));</span>
 </code></pre></div>
 
 <h3>删除名称为'logined'的cookie</h3>
@@ -466,52 +466,9 @@
 
 <h3>选项</h3>
 
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>expires</td>
-<td>int</td>
-<td>86400</td>
-<td>当用户使用谷歌浏览器时为true</td>
-</tr>
-<tr>
-<td>path</td>
-<td>string</td>
-<td>/</td>
-<td>cookie活动的路径</td>
-</tr>
-<tr>
-<td>domain</td>
-<td>string</td>
-<td>null</td>
-<td>保存该cookie的域名</td>
-</tr>
-<tr>
-<td>secure</td>
-<td>bool</td>
-<td>false</td>
-<td>是否只通过HTTPS安全连接来发送,只有在HTTPS连接下才有效</td>
-</tr>
-<tr>
-<td>httpOnly</td>
-<td>bool</td>
-<td>false</td>
-<td>是否只通过HTTP协议发送cookie,如果是,客户端javascript将无法读取到该cookie</td>
-</tr>
-<tr>
-<td>raw</td>
-<td>bool</td>
-<td>false</td>
-<td>是否发送为不经过URL解码的cookie</td>
-</tr>
-</tbody>
-</table><h3>方法</h3>
+<p><em>无</em></p>
+
+<h3>方法</h3>
 
 <h4>cookie($key)</h4>
 
@@ -532,13 +489,9 @@
 <h4>cookie-&gt;remove($key)</h4>
 
 <p>删除cookie</p>
-
-<h4>cookie-&gt;send()</h4>
-
-<p>发送cookie到浏览器</p>
   </section>
 
-<!-- post
+<!-- api/post
   ================================================== -->
   <section id="post">
   <div class="page-header"><h1>Post</h1></div>
@@ -584,7 +537,7 @@
 <p>获取HTTP请求参数,如果参数的值不在数组中,将返回数组的第一个值</p>
   </section>
 
-<!-- query
+<!-- api/query
   ================================================== -->
   <section id="query">
   <div class="page-header"><h1>Query</h1></div>
@@ -630,7 +583,7 @@
 <p>获取HTTP请求参数,如果参数的值不在数组中,将返回数组的第一个值</p>
   </section>
 
-<!-- server
+<!-- api/server
   ================================================== -->
   <section id="server">
   <div class="page-header"><h1>Server</h1></div>
@@ -676,7 +629,7 @@
 <p>获取服务器参数,如果参数的值不在数组中,将返回数组的第一个值</p>
   </section>
 
-<!-- session
+<!-- api/session
   ================================================== -->
   <section id="session">
   <div class="page-header"><h1>Session</h1></div>
@@ -745,7 +698,7 @@
 详细配置可以查看<a href="http://php.net/manual/en/session.configuration.php">http://php.net/manual/en/session.configuration.php</a></p>
   </section>
 
-<!-- ua
+<!-- api/ua
   ================================================== -->
   <section id="ua">
   <div class="page-header"><h1>Ua</h1></div>
@@ -839,7 +792,7 @@
 <p>检查用户是否使用iPad访问网站</p>
   </section>
 
-<!-- upload
+<!-- api/upload
   ================================================== -->
   <section id="upload">
   <div class="page-header"><h1>Upload</h1></div>
@@ -1139,7 +1092,7 @@
 <p>获取错误信息</p>
   </section>
 
-<!-- response
+<!-- api/response
   ================================================== -->
   <section id="response">
   <div class="page-header"><h1>Response</h1></div>
@@ -1174,9 +1127,99 @@
 
 <h3>选项</h3>
 
-<p><em>无</em></p>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>cookieOption</td>
+<td>array</td>
+<td>无</td>
+<td>详见下表</td>
+</tr>
+<tr>
+<td>version</td>
+<td>string</td>
+<td>1.1</td>
+<td>HTTP版本</td>
+</tr>
+<tr>
+<td>statusCode</td>
+<td>int</td>
+<td>200</td>
+<td>HTTP状态码</td>
+</tr>
+<tr>
+<td>statusText</td>
+<td>string</td>
+<td>OK</td>
+<td>HTTP状态消息</td>
+</tr>
+<tr>
+<td>content</td>
+<td>string</td>
+<td>无</td>
+<td>HTTP响应内容</td>
+</tr>
+<tr>
+<td>isSent</td>
+<td>bool</td>
+<td>false</td>
+<td>HTTP响应内容是否已发送</td>
+</tr>
+</tbody>
+</table><h4>CookieOption默认配置</h4>
 
-<h3>方法</h3>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>expires</td>
+<td>int</td>
+<td>86400</td>
+<td>cookie相对于现在的过期秒数</td>
+</tr>
+<tr>
+<td>path</td>
+<td>string</td>
+<td>/</td>
+<td>cookie活动的路径</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>string</td>
+<td>null</td>
+<td>保存该cookie的域名</td>
+</tr>
+<tr>
+<td>secure</td>
+<td>bool</td>
+<td>false</td>
+<td>是否只通过HTTPS安全连接来发送,只有在HTTPS连接下才有效</td>
+</tr>
+<tr>
+<td>httpOnly</td>
+<td>bool</td>
+<td>false</td>
+<td>是否只通过HTTP协议发送cookie,如果是,客户端javascript将无法读取到该cookie</td>
+</tr>
+<tr>
+<td>raw</td>
+<td>bool</td>
+<td>false</td>
+<td>是否发送为不经过URL解码的cookie</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
 
 <h4>response($content, $status = null)</h4>
 
@@ -1228,7 +1271,7 @@
 <p>设置内容是否已发送</p>
   </section>
 
-<!-- download
+<!-- api/download
   ================================================== -->
   <section id="download">
   <div class="page-header"><h1>Download</h1></div>
@@ -1284,7 +1327,7 @@
 <p>下载指定的文件</p>
   </section>
 
-<!-- flush
+<!-- api/flush
   ================================================== -->
   <section id="flush">
   <div class="page-header"><h1>Flush</h1></div>
@@ -1317,7 +1360,7 @@
 <p>直接输出内容到浏览器</p>
   </section>
 
-<!-- header
+<!-- api/header
   ================================================== -->
   <section id="header">
   <div class="page-header"><h1>Header</h1></div>
@@ -1382,7 +1425,7 @@
 <p>删除HTTP响应头信息</p>
   </section>
 
-<!-- json
+<!-- api/json
   ================================================== -->
   <section id="json">
   <div class="page-header"><h1>Json</h1></div>
@@ -1452,7 +1495,7 @@
 </table>
   </section>
 
-<!-- redirect
+<!-- api/redirect
   ================================================== -->
   <section id="redirect">
   <div class="page-header"><h1>Redirect</h1></div>
@@ -1513,7 +1556,7 @@
 <p>设置默认的跳转视图</p>
   </section>
 
-<!-- db
+<!-- api/db
   ================================================== -->
   <section id="db">
   <div class="page-header"><h1>Db</h1></div>
@@ -1593,6 +1636,42 @@
 
 <span class="c1">// 删除该记录</span>
 <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
+</code></pre></div>
+
+<h3>连接到多个数据库</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="c1">// 数据库微件的配置</span>
+    <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'dsn'</span> <span class="o">=&gt;</span> <span class="s1">'mysql:host=localhost;dbname=widget;charset=utf8'</span><span class="p">,</span>
+        <span class="s1">'user'</span> <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
+        <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="c1">// 备机数据库微件的配置</span>
+    <span class="s1">'slave.db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'dsn'</span> <span class="o">=&gt;</span> <span class="s1">'mysql:host=slave-host;dbname=widget;charset=utf8'</span><span class="p">,</span>
+        <span class="s1">'user'</span> <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
+        <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="c1">// 日志数据库微件的配置</span>
+    <span class="s1">'logger.db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'dsn'</span> <span class="o">=&gt;</span> <span class="s1">'mysql:host=logger-host;dbname=widget;charset=utf8'</span><span class="p">,</span>
+        <span class="s1">'user'</span> <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
+        <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+
+<span class="c1">// 获取默认数据库微件</span>
+<span class="nv">$db</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">;</span>
+
+<span class="c1">// 获取备机数据库微件</span>
+<span class="nv">$slaveDb</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">slaveDb</span><span class="p">;</span>
+
+<span class="c1">// 获取日志数据库微件</span>
+<span class="nv">$loggerDb</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">loggerDb</span><span class="p">;</span>
+
+<span class="c1">// 使用日志数据库微件查询用户编号为1的操作日志</span>
+<span class="nv">$loggerDb</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">(</span><span class="s1">'userLog'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'userId'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
 </code></pre></div>
 
 <h3>区分<code>fetch</code>,<code>select</code>和<code>find</code>
@@ -1728,7 +1807,23 @@
 
 <p>根据数据表名称,创建一个新Query Builder对象</p>
 
-<h4>db-&gt;insert($table, $data = array())</h4>
+<p><strong>返回:</strong> <code>Widget\Db\QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$table</td>
+<td>string</td>
+<td>数据表的名称,如<code>user</code>,或带别名形式的<code>user u</code>
+</td>
+</tr></tbody>
+</table><h4>db-&gt;insert($table, $data = array())</h4>
 
 <p>向指定的数据表插入一条数据</p>
 
@@ -2163,7 +2258,7 @@
 <p><strong>返回:</strong> <code>Widget\Db\Record</code></p>
   </section>
 
-<!-- queryBuilder
+<!-- api/queryBuilder
   ================================================== -->
   <section id="queryBuilder">
   <div class="page-header"><h1>QueryBuilder</h1></div>
@@ -2218,7 +2313,7 @@
 <span class="nv">$member</span> <span class="o">=</span> <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">();</span>
 </code></pre></div>
 
-<h3>通过冒号占位符<code>:</code>构造查询条件</h3>
+<h3>通过命名占位符<code>:</code>构造查询条件</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$qb</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'member'</span><span class="p">)</span>
         <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">'group_id = :groupId AND name = :name'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
@@ -2304,7 +2399,7 @@
 <span class="k">echo</span> <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">getSql</span><span class="p">();</span>
 </code></pre></div>
 
-<h3>构造Group语句</h3>
+<h3>构造GROUP BY语句</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$qb</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'member'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">groupBy</span><span class="p">(</span><span class="s1">'id, group_id'</span><span class="p">);</span>
 
@@ -2312,7 +2407,7 @@
 <span class="k">echo</span> <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">groupBy</span><span class="p">();</span>
 </code></pre></div>
 
-<h3>构造Having语句</h3>
+<h3>构造HAVING语句</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$qb</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'member'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">groupBy</span><span class="p">(</span><span class="s1">'id, group_id'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">having</span><span class="p">(</span><span class="s1">'group_id &gt;= ?'</span><span class="p">,</span> <span class="s1">'1'</span><span class="p">);</span>
 
@@ -2343,17 +2438,677 @@
 <span class="k">echo</span> <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">getSql</span><span class="p">();</span>
 </code></pre></div>
 
-<h3>区分find,findAll,fetch,fetchAll</h3>
+<h3>使用<code>indexBy</code>控制返回二维数组的键名</h3>
 
-<div class="highlight"><pre><code class="php">    <span class="nx">TODO</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$qb</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'member'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">indexBy</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="nv">$data</span> <span class="o">=</span> <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">();</span>
+
+<span class="c1">// 使用前,数组的键名是数字,从0开始</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="mi">0</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="s1">'1'</span><span class="p">,</span>
+        <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'twin'</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="mi">1</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="s1">'2'</span><span class="p">,</span>
+        <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'test'</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// 使用后,数组的键名被替换为指定字段的值</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'twin'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="s1">'1'</span><span class="p">,</span>
+        <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'twin'</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s1">'test'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="s1">'2'</span><span class="p">,</span>
+        <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'test'</span>
+    <span class="p">)</span>
+<span class="p">);</span>
 </code></pre></div>
 
-<h2>调用方式</h2>
+<p><strong>注意</strong> </p>
+
+<ol>
+<li>
+<code>indexBy</code>仅对<code>fetchAll</code>和<code>findAll</code>的返回值有作用,<code>execute</code>方法仍然返回原始的数组</li>
+<li>如果字段的值重复,后面的值将覆盖前面的值</li>
+</ol><h2>调用方式</h2>
 
 <h3>方法</h3>
+
+<h4>db($table)</h4>
+
+<p>根据数据表名称,创建一个新Query Builder对象</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<h4>db-&gt;createQueryBuilder()</h4>
+
+<p>创建一个新Query Builder对象</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<h4>queryBuilder-&gt;select($select = null)</h4>
+
+<p>设置SELECT字句要查询的字段名称</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<h4>queryBuilder-&gt;addSelect($select = null)</h4>
+
+<p>增加SELECT子句要查询的字段名称</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<h4>queryBuilder-&gt;delete($table = null)</h4>
+
+<p>设置SQL语句为DELETE操作</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<h4>queryBuilder-&gt;update($table = null)</h4>
+
+<p>设置SQL语句为UPDATE操作</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<h4>queryBuilder-&gt;from($table)</h4>
+
+<p>设置<code>FROM</code>字句的数据表名称</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<h4>queryBuilder-&gt;where($conditions, $params = null, $types = array())</h4>
+
+<p>设置<code>WHERE</code>查询条件</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$conditions</td>
+<td>string</td>
+<td>查询条件,如<code>id = 1</code>, <code>id = ?</code>
+</td>
+</tr>
+<tr>
+<td>$params</td>
+<td>array</td>
+<td>参数的值</td>
+</tr>
+<tr>
+<td>$types</td>
+<td>array</td>
+<td>参数的类型</td>
+</tr>
+</tbody>
+</table><h4>queryBuilder-&gt;andWhere($conditions, $params = null, $types = array())</h4>
+
+<p>增加<code>AND</code>类型的<code>WHERE</code>条件到当前查询中</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$conditions</td>
+<td>string</td>
+<td>查询条件,如<code>id = 1</code>, <code>id = ?</code>
+</td>
+</tr>
+<tr>
+<td>$params</td>
+<td>array</td>
+<td>参数的值</td>
+</tr>
+<tr>
+<td>$types</td>
+<td>array</td>
+<td>参数的类型</td>
+</tr>
+</tbody>
+</table><h4>queryBuilder-&gt;orWhere($conditions, $params = null, $types = array())</h4>
+
+<p>增加<code>OR</code>类型的<code>WHERE</code>条件到当前查询中</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$conditions</td>
+<td>string</td>
+<td>查询条件,如<code>id = 1</code>, <code>id = ?</code>
+</td>
+</tr>
+<tr>
+<td>$params</td>
+<td>array</td>
+<td>参数的值</td>
+</tr>
+<tr>
+<td>$types</td>
+<td>array</td>
+<td>参数的类型</td>
+</tr>
+</tbody>
+</table><h4>queryBuilder-&gt;orderBy($sort, $order = 'ASC')</h4>
+
+<p>设置<code>ORDER BY</code>字句</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$sort</td>
+<td>string</td>
+<td>排序的字段名称</td>
+</tr>
+<tr>
+<td>$order</td>
+<td>string</td>
+<td>排序类型,<code>ASC</code>或<code>DESC</code>
+</td>
+</tr>
+</tbody>
+</table><h4>queryBuilder-&gt;addOrderBy($sort, $order = 'ASC')</h4>
+
+<p>添加<code>ORDER BY</code>字句到当前查询中</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$sort</td>
+<td>string</td>
+<td>排序的字段名称</td>
+</tr>
+<tr>
+<td>$order</td>
+<td>string</td>
+<td>排序类型,<code>ASC</code>或<code>DESC</code>
+</td>
+</tr>
+</tbody>
+</table><h4>queryBuilder-&gt;offset($offset)</h4>
+
+<p>设置<code>OFFSET</code>字句</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$offset</td>
+<td>int</td>
+<td>
+<code>OFFSET</code>字句的值,如0,10</td>
+</tr></tbody>
+</table><h4>queryBuilder-&gt;limit($limit)</h4>
+
+<p>设置<code>LIMIT</code>字句</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$limit</td>
+<td>int</td>
+<td>
+<code>LIMIT</code>字句的值,如0,10</td>
+</tr></tbody>
+</table><h4>queryBuilder-&gt;page($page)</h4>
+
+<p>设置<code>OFFSET</code>和<code>LIMIT</code>字句</p>
+
+<p>通过该方法设置<code>$page</code>的值之后,<code>OFFSET</code>的值等于<code>($page - 1) * $limit</code>,如果<code>$limit</code>为空,<code>$limit</code>会被设置为<code>10</code></p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$page</td>
+<td>int</td>
+<td>当前在第几页</td>
+</tr></tbody>
+</table><h4>queryBuilder-&gt;join($table, $on = null)</h4>
+
+<p>增加<code>INNER JOIN</code>字句到当前查询中</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$table</td>
+<td>string</td>
+<td>要连接的数据表名称,如<code>userGroup</code>
+</td>
+</tr>
+<tr>
+<td>$on</td>
+<td>string</td>
+<td>连接的关联条件,如<code>user.groupId = userGroup.id</code>
+</td>
+</tr>
+</tbody>
+</table><h4>queryBuilder-&gt;innerJoin($table, $on = null)</h4>
+
+<p>同上,增加<code>INNER JOIN</code>字句到当前查询中</p>
+
+<h4>queryBuilder-&gt;leftJoin($table, $on = null)</h4>
+
+<p>增加<code>LEFT JOIN</code>字句到当前查询中</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$table</td>
+<td>string</td>
+<td>要连接的数据表名称,如<code>userGroup</code>
+</td>
+</tr>
+<tr>
+<td>$on</td>
+<td>string</td>
+<td>连接的关联条件,如<code>user.groupId = userGroup.id</code>
+</td>
+</tr>
+</tbody>
+</table><h4>queryBuilder-&gt;rightJoin($table, $on = null)</h4>
+
+<p>增加<code>RIGHT JOIN</code>字句到当前查询中</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$table</td>
+<td>string</td>
+<td>要连接的数据表名称,如<code>userGroup</code>
+</td>
+</tr>
+<tr>
+<td>$on</td>
+<td>string</td>
+<td>连接的关联条件,如<code>user.groupId = userGroup.id</code>
+</td>
+</tr>
+</tbody>
+</table><h4>queryBuilder-&gt;groupBy($groupBy)</h4>
+
+<p>设置<code>GROUP BY</code>字句</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$groupBy</td>
+<td>string</td>
+<td>
+<code>GROUP BY</code>字句的值</td>
+</tr></tbody>
+</table><h4>queryBuilder-&gt;addGroupBy($groupBy)</h4>
+
+<p>添加<code>GROUP BY</code>字句到当前查询中</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$groupBy</td>
+<td>string</td>
+<td>
+<code>GROUP BY</code>字句的值</td>
+</tr></tbody>
+</table><h4>queryBuilder-&gt;having($conditions, $params = array(), $types = array())</h4>
+
+<p>设置<code>HAVING</code>字句</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$conditions</td>
+<td>string</td>
+<td>查询条件,如<code>id = 1</code>, <code>id = ?</code>
+</td>
+</tr>
+<tr>
+<td>$params</td>
+<td>array</td>
+<td>参数的值</td>
+</tr>
+<tr>
+<td>$types</td>
+<td>array</td>
+<td>参数的类型</td>
+</tr>
+</tbody>
+</table><h4>queryBuilder-&gt;andHaving($conditions, $params = array(), $types = array())</h4>
+
+<p>添加<code>AND</code>类型<code>HAVING</code>字句到当前查询中</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$conditions</td>
+<td>string</td>
+<td>查询条件,如<code>id = 1</code>, <code>id = ?</code>
+</td>
+</tr>
+<tr>
+<td>$params</td>
+<td>array</td>
+<td>参数的值</td>
+</tr>
+<tr>
+<td>$types</td>
+<td>array</td>
+<td>参数的类型</td>
+</tr>
+</tbody>
+</table><h4>queryBuilder-&gt;orHaving($conditions, $params = array(), $types = array())</h4>
+
+<p>添加<code>OR</code>类型的<code>HAVING</code>字句到当前查询中</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$conditions</td>
+<td>string</td>
+<td>查询条件,如<code>id = 1</code>, <code>id = ?</code>
+</td>
+</tr>
+<tr>
+<td>$params</td>
+<td>array</td>
+<td>参数的值</td>
+</tr>
+<tr>
+<td>$types</td>
+<td>array</td>
+<td>参数的类型</td>
+</tr>
+</tbody>
+</table><h4>queryBuilder-&gt;indexBy($column)</h4>
+
+<p>控制返回二维数组的键名为指定字段的值</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$column</td>
+<td>string</td>
+<td>字段的名称,必须存在select语句中</td>
+</tr></tbody>
+</table><h4>queryBuilder-&gt;reset($queryPartName)</h4>
+
+<p>重置某一部分SQL字句</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$queryPartName</td>
+<td>string</td>
+<td>允许的值为<code>select</code>,<code>from</code>,<code>join</code>,<code>set</code>,<code>where</code>,<code>groupBy</code>,<code>having</code>,<code>orderBy</code>,<code>limit</code>或<code>offset</code>
+</td>
+</tr></tbody>
+</table><h4>queryBuilder-&gt;resetAll($queryPartNames = null)</h4>
+
+<p>重置某一部分或全部SQL字句</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$queryPartNames</td>
+<td>null</td>
+<td>array</td>
+</tr></tbody>
+</table><h4>queryBuilder-&gt;find()</h4>
+
+<p>执行构造的SQL语句,并返回一个<code>Record</code>对象,如果结果为空,返回<code>false</code></p>
+
+<p><strong>返回:</strong> <code>Record</code>|<code>false</code></p>
+
+<h4>queryBuilder-&gt;findAll()</h4>
+
+<p>执行构造的SQL语句,并返回一个<code>Collection</code>对象</p>
+
+<p><strong>返回:</strong> <code>Collection</code></p>
+
+<h4>queryBuilder-&gt;fetch()</h4>
+
+<p>执行构造的SQL语句,并返回一个一维数组,如果结果为空,返回<code>false</code></p>
+
+<p><strong>返回:</strong> <code>array</code>|<code>false</code></p>
+
+<h4>queryBuilder-&gt;fetchAll()</h4>
+
+<p>执行构造的SQL语句,并返回一个二维数组,如果结果为空,返回<code>false</code></p>
+
+<p><strong>返回:</strong> <code>array</code>|<code>false</code></p>
+
+<h4>queryBuilder-&gt;count()</h4>
+
+<p>获取当前构造的SQL语句所查找到的行数</p>
+
+<p><strong>返回:</strong> <code>int</code></p>
+
+<h4>queryBuilder-&gt;setParameter($key, $value, $type = null)</h4>
+
+<p>设置绑定参数的值和类型</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$key</td>
+<td>string</td>
+<td>参数的名称,对于使用命名占位符的预处理语句，应是类似 :name 形式的参数名。对于使用问号占位符的预处理语句，应是以1开始索引的参数位置。</td>
+</tr>
+<tr>
+<td>$value</td>
+<td>mixed</td>
+<td>参数的值</td>
+</tr>
+<tr>
+<td>$type</td>
+<td>int</td>
+<td>参数的类型,使用 PDO::PARAM_* 常量明确地指定参数的类型</td>
+</tr>
+</tbody>
+</table><p>相关链接: <a href="http://php.net/manual/zh/pdostatement.bindvalue.php">http://php.net/manual/zh/pdostatement.bindvalue.php</a></p>
+
+<h4>queryBuilder-&gt;setParameters(array $params, array $types = array())</h4>
+
+<p>设置多个绑定参数的值和类型</p>
+
+<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+
+<h4>queryBuilder-&gt;getParameter($key)</h4>
+
+<p>获取绑定参数的值</p>
+
+<p><strong>返回:</strong> <code>mixed</code></p>
+
+<h4>queryBuilder-&gt;getParameters()</h4>
+
+<p>获取所有绑定参数的值</p>
+
+<p><strong>返回:</strong> <code>array</code></p>
+
+<h4>queryBuilder-&gt;getTable()</h4>
+
+<p>获取当前查询的数据表名称</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
+
+<h4>queryBuilder-&gt;getSql()</h4>
+
+<p>获取当前查询的完整SQL语句</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
   </section>
 
-<!-- dbal
+<!-- api/dbal
   ================================================== -->
   <section id="dbal">
   <div class="page-header"><h1>Dbal</h1></div>
@@ -2384,32 +3139,6 @@
         <span class="p">)</span>
 
 <span class="p">)</span>
-</code></pre></div>
-
-<h3>创建读写(主备)分离的数据库查询对象</h3>
-
-<div class="highlight"><pre><code class="php"><span class="c1">// 添加微件别名</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">appendOption</span><span class="p">(</span><span class="s1">'alias'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s1">'dbalSlave'</span> <span class="o">=&gt;</span> <span class="s1">'Widget\DbAl'</span>
-<span class="p">));</span>
-
-<span class="c1">// 设置数据库配置选项</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">config</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'dbal'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'driver'</span> <span class="o">=&gt;</span> <span class="s1">'pdo_sqlite'</span><span class="p">,</span>
-        <span class="s1">'path'</span> <span class="o">=&gt;</span> <span class="s1">'test.sqlite'</span>
-    <span class="p">),</span>
-    <span class="s1">'dbalSlave'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'driver'</span> <span class="o">=&gt;</span> <span class="s1">'pdo_sqlite'</span><span class="p">,</span>
-        <span class="s1">'path'</span> <span class="o">=&gt;</span> <span class="s1">'slave.sqlite'</span>
-    <span class="p">)</span>
-<span class="p">));</span>
-
-<span class="c1">// 获取主DB数据库对象</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">dbal</span><span class="p">();</span>
-
-<span class="c1">// 获取备DB数据库对象</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">dbalSlave</span><span class="p">();</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
@@ -2673,7 +3402,7 @@
 <p>获取数据库查询对象</p>
   </section>
 
-<!-- entityManager
+<!-- api/entityManager
   ================================================== -->
   <section id="entityManager">
   <div class="page-header"><h1>EntityManager</h1></div>
@@ -2768,7 +3497,7 @@
 <p>获取Doctrine ORM的实体管理对象</p>
   </section>
 
-<!-- call
+<!-- api/call
   ================================================== -->
   <section id="call">
   <div class="page-header"><h1>Call</h1></div>
@@ -3145,9 +3874,9 @@
 <p>通过PATCH方式发送请求,成功时触发<code>$callback</code>回调</p>
   </section>
 
-<!-- cache-section
+<!-- book/cache
   ================================================== -->
-  <section id="cache-section">
+  <section id="book-cache">
   <div class="page-header"><h1>缓存</h1></div>
 
 <p>Widget提供了多个PHP流行的后端缓存.这里有apc,redis,memcached等主流缓存,也有简单的文件缓存fileCache,
@@ -3161,9 +3890,35 @@
 <li>在不同的请求之间,共享数据</li>
 </ul><h2>支持的缓存类型及比较</h2>
 
+<h3>支持的缓存类型</h3>
+
+<ul>
+<li>
+<a href="api/apc.md">apc</a> - APC缓存</li>
+<li>
+<a href="api/arrayCache.md">arrayCache</a> - PHP数组缓存</li>
+<li>
+<a href="api/couchbase.md">couchbase</a> - Couchbase缓存</li>
+<li>
+<a href="api/dbCache.md">dbCache</a> - 数据库缓存</li>
+<li>
+<a href="api/fileCache.md">fileCache</a> - 文件缓存</li>
+<li>
+<a href="api/memcache.md">memcache</a> - Memcachce缓存</li>
+<li>
+<a href="api/memcached.md">memcached</a> - Memcached缓存</li>
+<li>
+<a href="api/redis.md">redis</a> - Redis缓存</li>
+<li>
+<a href="api/cache.md">cache</a> - 通用缓存</li>
+<li>
+<a href="api/bicache.md">bicache</a> - 二级缓存</li>
+</ul><h3>特性对比</h3>
+
 <table class="table table-bordered table-striped">
 <thead><tr>
 <th></th>
+<th>ArrayCache</th>
 <th>Apc</th>
 <th>DbCache</th>
 <th>FileCache</th>
@@ -3177,6 +3932,7 @@
 <tr>
 <td>速度</td>
 <td>快</td>
+<td>快</td>
 <td>慢</td>
 <td>慢</td>
 <td>快</td>
@@ -3187,6 +3943,7 @@
 </tr>
 <tr>
 <td>持久化</td>
+<td>-</td>
 <td>×</td>
 <td>√</td>
 <td>√</td>
@@ -3199,6 +3956,7 @@
 <tr>
 <td>分布式</td>
 <td>×</td>
+<td>×</td>
 <td>√</td>
 <td>×</td>
 <td>√</td>
@@ -3210,6 +3968,7 @@
 <tr>
 <td>原子性</td>
 <td>√</td>
+<td>√</td>
 <td>×</td>
 <td>√</td>
 <td>√</td>
@@ -3220,12 +3979,16 @@
 </tr>
 </tbody>
 </table><ul>
-<li>速度:判断依据是缓存数据存储的介质,如果数据存储在内存中则<code>快</code>,如果存储在磁盘则<code>慢</code>
-</li>
-<li>持久化:判断依据是缓存是否因为相关服务重启而丢失数据</li>
-<li>原子性:判断依据是<code>add</code>,<code>replace</code>,<code>increment</code>和<code>decrement</code>方法是否为原子操作</li>
 <li>
-<code>Cache</code>和<code>Bicache</code>为视配置而定,不列入比较</li>
+<code>√</code> 表示支持</li>
+<li>
+<code>×</code> 表示不支持</li>
+<li><p><code>-</code>  表示不具备该特性</p></li>
+<li><p>速度:判断依据是缓存数据存储的介质,如果数据存储在内存中则<code>快</code>,如果存储在磁盘则<code>慢</code></p></li>
+<li><p>持久化:判断依据是缓存是否因为相关服务重启而丢失数据</p></li>
+<li><p>原子性:判断依据是<code>add</code>,<code>replace</code>,<code>increment</code>和<code>decrement</code>方法是否为原子操作</p></li>
+<li><p><code>Cache</code>和<code>Bicache</code>为视配置而定,不列入比较</p></li>
+<li><p><code>ArrayCache</code>使用PHP数组存储数据,每次请求结束后销毁,因此不具备持久化特性</p></li>
 </ul><h2>通用方法</h2>
 
 <p>在下面的方法中,<code>cache</code>表示缓存微件的名称,可以替换为其他任意缓存,如<code>redis</code>, <code>memcached</code></p>
@@ -3308,7 +4071,7 @@
 <p>批量设置缓存的值</p>
   </section>
 
-<!-- cache
+<!-- api/cache
   ================================================== -->
   <section id="cache">
   <div class="page-header"><h1>Cache</h1></div>
@@ -3453,7 +4216,7 @@
 <p>批量设置缓存的值</p>
   </section>
 
-<!-- apc
+<!-- api/apc
   ================================================== -->
   <section id="apc">
   <div class="page-header"><h1>Apc</h1></div>
@@ -3564,7 +4327,7 @@
 <p>批量设置缓存的值</p>
   </section>
 
-<!-- arrayCache
+<!-- api/arrayCache
   ================================================== -->
   <section id="arrayCache">
   <div class="page-header"><h1>ArrayCache</h1></div>
@@ -3652,7 +4415,7 @@ widget()-&gt;arrayCache('name');
 <p>批量设置缓存的值</p>
   </section>
 
-<!-- bicache
+<!-- api/bicache
   ================================================== -->
   <section id="bicache">
   <div class="page-header"><h1>Bicache</h1></div>
@@ -3799,7 +4562,7 @@ widget()-&gt;arrayCache('name');
 <p>批量设置缓存的值</p>
   </section>
 
-<!-- couchbase
+<!-- api/couchbase
   ================================================== -->
   <section id="couchbase">
   <div class="page-header"><h1>Couchbase</h1></div>
@@ -3947,7 +4710,7 @@ widget()-&gt;arrayCache('name');
 <p>批量设置缓存的值</p>
   </section>
 
-<!-- dbCache
+<!-- api/dbCache
   ================================================== -->
   <section id="dbCache">
   <div class="page-header"><h1>DbCache</h1></div>
@@ -4071,7 +4834,7 @@ widget()-&gt;arrayCache('name');
 <p>批量设置缓存的值</p>
   </section>
 
-<!-- fileCache
+<!-- api/fileCache
   ================================================== -->
   <section id="fileCache">
   <div class="page-header"><h1>FileCache</h1></div>
@@ -4177,7 +4940,7 @@ widget()-&gt;arrayCache('name');
 <p>批量设置缓存的值</p>
   </section>
 
-<!-- memcache
+<!-- api/memcache
   ================================================== -->
   <section id="memcache">
   <div class="page-header"><h1>Memcache</h1></div>
@@ -4343,7 +5106,7 @@ widget()-&gt;arrayCache('name');
 <p>批量设置缓存的值</p>
   </section>
 
-<!-- memcached
+<!-- api/memcached
   ================================================== -->
   <section id="memcached">
   <div class="page-header"><h1>Memcached</h1></div>
@@ -4497,7 +5260,7 @@ widget()-&gt;arrayCache('name');
 <p>批量设置缓存的值</p>
   </section>
 
-<!-- mongoCache
+<!-- api/mongoCache
   ================================================== -->
   <section id="mongoCache">
   <div class="page-header"><h1>MongoCache</h1></div>
@@ -4639,7 +5402,7 @@ widget()-&gt;arrayCache('name');
 <p>批量设置缓存的值</p>
   </section>
 
-<!-- redis
+<!-- api/redis
   ================================================== -->
   <section id="redis">
   <div class="page-header"><h1>Redis</h1></div>
@@ -4787,7 +5550,7 @@ widget()-&gt;arrayCache('name');
 <p>批量设置缓存的值</p>
   </section>
 
-<!-- validate
+<!-- api/validate
   ================================================== -->
   <section id="validate">
   <div class="page-header"><h1>Validate</h1></div>
@@ -5600,7 +6363,7 @@ widget()-&gt;arrayCache('name');
 <p>获取规则验证器对象</p>
   </section>
 
-<!-- is
+<!-- api/is
   ================================================== -->
   <section id="is">
   <div class="page-header"><h1>is</h1></div>
@@ -5782,7 +6545,7 @@ widget()-&gt;arrayCache('name');
 <p>创建一个规则验证器对象</p>
   </section>
 
-<!-- isAlnum
+<!-- api/isAlnum
   ================================================== -->
   <section id="isAlnum">
   <div class="page-header"><h1>isAlnum</h1></div>
@@ -5844,7 +6607,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否只由字母(a-z)和数字(0-9)组成</p>
   </section>
 
-<!-- isAlpha
+<!-- api/isAlpha
   ================================================== -->
   <section id="isAlpha">
   <div class="page-header"><h1>isAlpha</h1></div>
@@ -5906,7 +6669,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否只由字母(a-z)组成</p>
   </section>
 
-<!-- isBlank
+<!-- api/isBlank
   ================================================== -->
   <section id="isBlank">
   <div class="page-header"><h1>isBlank</h1></div>
@@ -5962,7 +6725,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为空(不允许空格)</p>
   </section>
 
-<!-- isDecimal
+<!-- api/isDecimal
   ================================================== -->
   <section id="isDecimal">
   <div class="page-header"><h1>isDecimal</h1></div>
@@ -6023,7 +6786,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为小数</p>
   </section>
 
-<!-- isDigit
+<!-- api/isDigit
   ================================================== -->
   <section id="isDigit">
   <div class="page-header"><h1>isDigit</h1></div>
@@ -6080,7 +6843,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否只由数字组成</p>
   </section>
 
-<!-- isDivisibleby
+<!-- api/isDivisibleby
   ================================================== -->
   <section id="isDivisibleby">
   <div class="page-header"><h1>isDivisibleBy</h1></div>
@@ -6141,7 +6904,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否能被指定的除数整除</p>
   </section>
 
-<!-- isDoubleByte
+<!-- api/isDoubleByte
   ================================================== -->
   <section id="isDoubleByte">
   <div class="page-header"><h1>isDoubleByte</h1></div>
@@ -6202,7 +6965,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否只由双字节字符组成</p>
   </section>
 
-<!-- isEmpty
+<!-- api/isEmpty
   ================================================== -->
   <section id="isEmpty">
   <div class="page-header"><h1>isEmpty()</h1></div>
@@ -6271,7 +7034,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为空(允许空格)</p>
   </section>
 
-<!-- isEndsWith
+<!-- api/isEndsWith
   ================================================== -->
   <section id="isEndsWith">
   <div class="page-header"><h1>isEndsWith</h1></div>
@@ -6372,7 +7135,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否以指定字符串结尾</p>
   </section>
 
-<!-- isEquals
+<!-- api/isEquals
   ================================================== -->
   <section id="isEquals">
   <div class="page-header"><h1>isEquals</h1></div>
@@ -6444,7 +7207,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否与指定数据相等</p>
   </section>
 
-<!-- isIn
+<!-- api/isIn
   ================================================== -->
   <section id="isIn">
   <div class="page-header"><h1>isIn</h1></div>
@@ -6511,7 +7274,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否在指定的数组中</p>
   </section>
 
-<!-- isLowercase
+<!-- api/isLowercase
   ================================================== -->
   <section id="isLowercase">
   <div class="page-header"><h1>isLowercase</h1></div>
@@ -6572,7 +7335,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为小写字符</p>
   </section>
 
-<!-- isNull
+<!-- api/isNull
   ================================================== -->
   <section id="isNull">
   <div class="page-header"><h1>isNull</h1></div>
@@ -6625,7 +7388,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为null</p>
   </section>
 
-<!-- isNumber
+<!-- api/isNumber
   ================================================== -->
   <section id="isNumber">
   <div class="page-header"><h1>isNumber</h1></div>
@@ -6680,7 +7443,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为有效数字</p>
   </section>
 
-<!-- isRegex
+<!-- api/isRegex
   ================================================== -->
   <section id="isRegex">
   <div class="page-header"><h1>isRegex</h1></div>
@@ -6741,7 +7504,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否匹配指定的正则表达式</p>
   </section>
 
-<!-- isRequired
+<!-- api/isRequired
   ================================================== -->
   <section id="isRequired">
   <div class="page-header"><h1>isRequired</h1></div>
@@ -6810,7 +7573,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为空</p>
   </section>
 
-<!-- isStartsWith
+<!-- api/isStartsWith
   ================================================== -->
   <section id="isStartsWith">
   <div class="page-header"><h1>isStartsWith</h1></div>
@@ -6911,7 +7674,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否以指定字符串开头</p>
   </section>
 
-<!-- isType
+<!-- api/isType
   ================================================== -->
   <section id="isType">
   <div class="page-header"><h1>isType</h1></div>
@@ -7063,7 +7826,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为指定的类型</p>
   </section>
 
-<!-- isUppercase
+<!-- api/isUppercase
   ================================================== -->
   <section id="isUppercase">
   <div class="page-header"><h1>isUppercase</h1></div>
@@ -7124,7 +7887,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为大写字符</p>
   </section>
 
-<!-- isBetween
+<!-- api/isBetween
   ================================================== -->
   <section id="isBetween">
   <div class="page-header"><h1>isBetween</h1></div>
@@ -7197,7 +7960,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否在指定的两个值之间</p>
   </section>
 
-<!-- isLength
+<!-- api/isLength
   ================================================== -->
   <section id="isLength">
   <div class="page-header"><h1>isLength</h1></div>
@@ -7333,7 +8096,7 @@ widget()-&gt;arrayCache('name');
 </code></pre></div>
   </section>
 
-<!-- isMax
+<!-- api/isMax
   ================================================== -->
   <section id="isMax">
   <div class="page-header"><h1>isMax</h1></div>
@@ -7400,7 +8163,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否小于等于指定的值</p>
   </section>
 
-<!-- isMaxLength
+<!-- api/isMaxLength
   ================================================== -->
   <section id="isMaxLength">
   <div class="page-header"><h1>isMaxLength</h1></div>
@@ -7471,7 +8234,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据的长度是否小于等于指定数值</p>
   </section>
 
-<!-- isMin
+<!-- api/isMin
   ================================================== -->
   <section id="isMin">
   <div class="page-header"><h1>isMin</h1></div>
@@ -7538,7 +8301,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否大于等于指定的值</p>
   </section>
 
-<!-- isMinLength
+<!-- api/isMinLength
   ================================================== -->
   <section id="isMinLength">
   <div class="page-header"><h1>isMinLength</h1></div>
@@ -7611,7 +8374,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据的长度是否大于等于指定数值</p>
   </section>
 
-<!-- isDate
+<!-- api/isDate
   ================================================== -->
   <section id="isDate">
   <div class="page-header"><h1>isDate</h1></div>
@@ -7698,7 +8461,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为合法的日期</p>
   </section>
 
-<!-- isDateTime
+<!-- api/isDateTime
   ================================================== -->
   <section id="isDateTime">
   <div class="page-header"><h1>isDateTime</h1></div>
@@ -7799,7 +8562,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为合法的日期时间</p>
   </section>
 
-<!-- isTime
+<!-- api/isTime
   ================================================== -->
   <section id="isTime">
   <div class="page-header"><h1>isTime</h1></div>
@@ -7900,7 +8663,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为合法的日期</p>
   </section>
 
-<!-- isDir
+<!-- api/isDir
   ================================================== -->
   <section id="isDir">
   <div class="page-header"><h1>isDir</h1></div>
@@ -7961,7 +8724,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为存在的目录</p>
   </section>
 
-<!-- isExists
+<!-- api/isExists
   ================================================== -->
   <section id="isExists">
   <div class="page-header"><h1>isExists</h1></div>
@@ -8025,7 +8788,7 @@ widget()-&gt;arrayCache('name');
 </code></pre></div>
   </section>
 
-<!-- isFile
+<!-- api/isFile
   ================================================== -->
   <section id="isFile">
   <div class="page-header"><h1>isFile</h1></div>
@@ -8173,7 +8936,7 @@ widget()-&gt;arrayCache('name');
 </ol>
   </section>
 
-<!-- isImage
+<!-- api/isImage
   ================================================== -->
   <section id="isImage">
   <div class="page-header"><h1>isImage</h1></div>
@@ -8383,7 +9146,7 @@ widget()-&gt;arrayCache('name');
 <code>excludeExts</code>, <code>mimeTypes</code>, <code>excludeMimeTypes</code>继承自父类.</p>
   </section>
 
-<!-- isEmail
+<!-- api/isEmail
   ================================================== -->
   <section id="isEmail">
   <div class="page-header"><h1>isEmail</h1></div>
@@ -8444,7 +9207,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为有效的邮箱地址</p>
   </section>
 
-<!-- isIp
+<!-- api/isIp
   ================================================== -->
   <section id="isIp">
   <div class="page-header"><h1>isIp</h1></div>
@@ -8537,7 +9300,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为有效的IP地址</p>
   </section>
 
-<!-- isTld
+<!-- api/isTld
   ================================================== -->
   <section id="isTld">
   <div class="page-header"><h1>isTld</h1></div>
@@ -8598,7 +9361,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为存在的顶级域名</p>
   </section>
 
-<!-- isUrl
+<!-- api/isUrl
   ================================================== -->
   <section id="isUrl">
   <div class="page-header"><h1>isUrl</h1></div>
@@ -8679,7 +9442,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为有效的URL地址</p>
   </section>
 
-<!-- isUuid
+<!-- api/isUuid
   ================================================== -->
   <section id="isUuid">
   <div class="page-header"><h1>isUuid</h1></div>
@@ -8740,7 +9503,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为有效的UUID</p>
   </section>
 
-<!-- isCreditCard
+<!-- api/isCreditCard
   ================================================== -->
   <section id="isCreditCard">
   <div class="page-header"><h1>isCreditCard</h1></div>
@@ -8861,7 +9624,7 @@ widget()-&gt;arrayCache('name');
 <h4>isCreditCard($input, $type)</h4>
   </section>
 
-<!-- isChinese
+<!-- api/isChinese
   ================================================== -->
   <section id="isChinese">
   <div class="page-header"><h1>isChinese</h1></div>
@@ -8922,7 +9685,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否只由汉字组成</p>
   </section>
 
-<!-- isIdCardCn
+<!-- api/isIdCardCn
   ================================================== -->
   <section id="isIdCardCn">
   <div class="page-header"><h1>isIdCardCn</h1></div>
@@ -8983,7 +9746,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为有效的中国身份证</p>
   </section>
 
-<!-- isIdCardHk
+<!-- api/isIdCardHk
   ================================================== -->
   <section id="isIdCardHk">
   <div class="page-header"><h1>isIdCardHk</h1></div>
@@ -9044,7 +9807,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为有效的香港身份证</p>
   </section>
 
-<!-- isIdCardMo
+<!-- api/isIdCardMo
   ================================================== -->
   <section id="isIdCardMo">
   <div class="page-header"><h1>isIdCardMo</h1></div>
@@ -9105,7 +9868,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为有效的澳门身份证</p>
   </section>
 
-<!-- isIdCardTw
+<!-- api/isIdCardTw
   ================================================== -->
   <section id="isIdCardTw">
   <div class="page-header"><h1>isIdCardTw</h1></div>
@@ -9166,7 +9929,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为有效的台湾身份证</p>
   </section>
 
-<!-- isPhoneCn
+<!-- api/isPhoneCn
   ================================================== -->
   <section id="isPhoneCn">
   <div class="page-header"><h1>isPhoneCn</h1></div>
@@ -9227,7 +9990,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为有效的电话号码</p>
   </section>
 
-<!-- isPostcodeCn
+<!-- api/isPostcodeCn
   ================================================== -->
   <section id="isPostcodeCn">
   <div class="page-header"><h1>isPostcodeCn</h1></div>
@@ -9288,7 +10051,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为有效的中国邮政编码</p>
   </section>
 
-<!-- isQQ
+<!-- api/isQQ
   ================================================== -->
   <section id="isQQ">
   <div class="page-header"><h1>isQQ</h1></div>
@@ -9349,7 +10112,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为有效的QQ号码</p>
   </section>
 
-<!-- isMobileCn
+<!-- api/isMobileCn
   ================================================== -->
   <section id="isMobileCn">
   <div class="page-header"><h1>isMobileCn</h1></div>
@@ -9408,7 +10171,7 @@ widget()-&gt;arrayCache('name');
 <h4>isMobileCn($input)</h4>
   </section>
 
-<!-- isAllof
+<!-- api/isAllof
   ================================================== -->
   <section id="isAllof">
   <div class="page-header"><h1>isAllOf</h1></div>
@@ -9467,7 +10230,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否通过所有的规则校验</p>
   </section>
 
-<!-- isNoneof
+<!-- api/isNoneof
   ================================================== -->
   <section id="isNoneof">
   <div class="page-header"><h1>isNoneOf</h1></div>
@@ -9526,7 +10289,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否不符合所有指定的规则校验</p>
   </section>
 
-<!-- isOneof
+<!-- api/isOneof
   ================================================== -->
   <section id="isOneof">
   <div class="page-header"><h1>isOneOf</h1></div>
@@ -9585,7 +10348,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否满足指定规则中的任何一条</p>
   </section>
 
-<!-- isSomeof
+<!-- api/isSomeof
   ================================================== -->
   <section id="isSomeof">
   <div class="page-header"><h1>isSomeOf</h1></div>
@@ -9651,7 +10414,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否通过指定数量规则的验证</p>
   </section>
 
-<!-- isEntityExists
+<!-- api/isEntityExists
   ================================================== -->
   <section id="isEntityExists">
   <div class="page-header"><h1>isEntityExists</h1></div>
@@ -9813,7 +10576,7 @@ widget()-&gt;arrayCache('name');
 <p>检查Doctrine ORM实体是否存在</p>
   </section>
 
-<!-- isRecordExists
+<!-- api/isRecordExists
   ================================================== -->
   <section id="isRecordExists">
   <div class="page-header"><h1>isRecordExists</h1></div>
@@ -9909,7 +10672,7 @@ widget()-&gt;arrayCache('name');
 <h4>isRecordExists($input, $table, $field = 'id')</h4>
   </section>
 
-<!-- isAll
+<!-- api/isAll
   ================================================== -->
   <section id="isAll">
   <div class="page-header"><h1>isAll</h1></div>
@@ -9967,7 +10730,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数组或对象里的每一项是否符合指定的规则</p>
   </section>
 
-<!-- isCallback
+<!-- api/isCallback
   ================================================== -->
   <section id="isCallback">
   <div class="page-header"><h1>isCallback</h1></div>
@@ -10045,7 +10808,7 @@ widget()-&gt;arrayCache('name');
 </table>
   </section>
 
-<!-- isColor
+<!-- api/isColor
   ================================================== -->
   <section id="isColor">
   <div class="page-header"><h1>isColor</h1></div>
@@ -10106,7 +10869,7 @@ widget()-&gt;arrayCache('name');
 <p>检查数据是否为有效的十六进制颜色</p>
   </section>
 
-<!-- view
+<!-- api/view
   ================================================== -->
   <section id="view">
   <div class="page-header"><h1>View</h1></div>
@@ -10215,7 +10978,7 @@ widget()-&gt;arrayCache('name');
 <p>设置模板所在的目录</p>
   </section>
 
-<!-- escape
+<!-- api/escape
   ================================================== -->
   <section id="escape">
   <div class="page-header"><h1>Escape</h1></div>
@@ -10317,7 +11080,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>转义URL字符串</p>
   </section>
 
-<!-- smarty
+<!-- api/smarty
   ================================================== -->
   <section id="smarty">
   <div class="page-header"><h1>Smarty</h1></div>
@@ -10420,7 +11183,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>获取视图变量</p>
   </section>
 
-<!-- twig
+<!-- api/twig
   ================================================== -->
   <section id="twig">
   <div class="page-header"><h1>Twig</h1></div>
@@ -10535,7 +11298,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>获取视图变量</p>
   </section>
 
-<!-- event
+<!-- api/event
   ================================================== -->
   <section id="event">
   <div class="page-header"><h1>Event</h1></div>
@@ -10698,7 +11461,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>检查是否存在指定类型的事件触发器</p>
   </section>
 
-<!-- error
+<!-- api/error
   ================================================== -->
   <section id="error">
   <div class="page-header"><h1>Error</h1></div>
@@ -10791,7 +11554,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>设置Fatal错误的处理器</p>
   </section>
 
-<!-- phpError
+<!-- api/phpError
   ================================================== -->
   <section id="phpError">
   <div class="page-header"><h1>PHP Error</h1></div>
@@ -10830,7 +11593,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>获取\php_error\ErrorHandler对象</p>
   </section>
 
-<!-- arr
+<!-- api/arr
   ================================================== -->
   <section id="arr">
   <div class="page-header"><h1>Arr</h1></div>
@@ -10935,7 +11698,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>对一个二维数组进行排序,类似SQL的ORDER BY语句</p>
   </section>
 
-<!-- env
+<!-- api/env
   ================================================== -->
   <section id="env">
   <div class="page-header"><h1>Env</h1></div>
@@ -11034,7 +11797,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>检查是否为生产(线上)环境</p>
   </section>
 
-<!-- logger
+<!-- api/logger
   ================================================== -->
   <section id="logger">
   <div class="page-header"><h1>Logger</h1></div>
@@ -11204,7 +11967,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>设置默认的日志级别</p>
   </section>
 
-<!-- monolog
+<!-- api/monolog
   ================================================== -->
   <section id="monolog">
   <div class="page-header"><h1>Monolog</h1></div>
@@ -11263,7 +12026,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>记录一条日志</p>
   </section>
 
-<!-- pinyin
+<!-- api/pinyin
   ================================================== -->
   <section id="pinyin">
   <div class="highlight"><pre><code class="php"><span class="err">该微件文档还在紧急编写中</span><span class="p">,</span><span class="err">敬请期待</span><span class="o">!</span>
@@ -11286,7 +12049,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 </ul>
   </section>
 
-<!-- uuid
+<!-- api/uuid
   ================================================== -->
   <section id="uuid">
   <div class="page-header"><h1>Uuid</h1></div>
@@ -11316,7 +12079,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>生成的UUID可用于数据表主键,相比通过SQL语句<code>SELECT UUID</code>生成的UUID要快很多,而且调用更加方便.</p>
   </section>
 
-<!-- website
+<!-- api/website
   ================================================== -->
   <section id="website">
   <div class="page-header"><h1>Website</h1></div>

@@ -81,7 +81,7 @@
       <a href="#call">接口调用</a>
     </li>
     <li>
-      <a href="#cache-section">缓存</a>
+      <a href="#book-cache">缓存</a>
       <ul class="nav">
         <li><a href="#cache">Cache</a></li>
         <li><a href="#apc">APC</a></li>
@@ -288,8 +288,8 @@ $id = $widget->query('id');</code></pre>") %>
 <% sections.each do |name, section| %>
 <!-- <%= name %>
   ================================================== -->
-  <section id="<%= name %>">
-  <%= section %>
+  <section id="<%= section["id"] %>">
+  <%= section["content"] %>
   </section>
 <% end %>
 </div><!-- /.container -->

@@ -35,7 +35,7 @@ widgets = [
   # database
     'db', 'queryBuilder', 'dbal', 'entityManager',
   'call',
-  'cache-section',
+  'book/cache',
     'cache', 'apc', 'arrayCache', 'bicache', 'couchbase', 'dbCache', 'fileCache', 'memcache', 'memcached', 'mongoCache', 'redis',
   # validation-section
     'validate',  'is',
@@ -61,11 +61,20 @@ widgets = [
 
 sections = {}
 
-widgets.each { |widget|
-  content = File.read("../widget/docs/zh-CN/#{widget}.md")
+widgets.each do |name|
+  if name.index("/")
+    id = name.gsub("/", "-")
+  else
+    id = name
+    name = "api/" + name
+  end
+  content = File.read("../widget/docs/zh-CN/#{name}.md")
   content = markdown(content)
-  sections[widget] = content
-}
+  sections[name] = {
+    "id" => id,
+    "content" => content
+  }
+end
 
 rhtml = ERB.new(File.read('index.tmpl.html'))
 
