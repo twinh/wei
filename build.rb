@@ -28,16 +28,13 @@ def markdown(text)
 end
 
 widgets = [
+  # widget manager
     'widget',
-  # request-section
-    'request', 'cookie', 'post', 'query', 'server', 'session', 'ua', 'upload',
-  # response-section
-    'response', 'download', 'flush', 'header', 'json', 'redirect',
-  # database
-    'db', 'queryBuilder', 'dbal', 'entityManager',
-  'call',
   'book/cache',
     'cache', 'apc', 'arrayCache', 'bicache', 'couchbase', 'dbCache', 'fileCache', 'memcache', 'memcached', 'mongoCache', 'redis',
+  # database
+    'db', 'queryBuilder',
+    'call',
   # validation-section
     'validate',  'is',
     'isAlnum', 'isAlpha', 'isBlank', 'isDecimal', 'isDigit', 'isDivisibleby', 'isDoubleByte', 'isEmpty', 'isEndsWith', 'isEquals', 'isIn', 'isLowercase', 'isNull', 'isNumber', 'isRegex', 'isRequired', 'isStartsWith', 'isType', 'isUppercase',
@@ -50,14 +47,22 @@ widgets = [
     'isAllof', 'isNoneof', 'isOneof', 'isSomeof',
     'isEntityExists', 'isRecordExists',
     'isAll', 'isCallback', 'isColor',
+  # request-section
+    'request', 'cookie', 'post', 'query', 'server', 'session', 'ua', 'upload',
+  # response-section
+    'response', 'download', 'flush', 'header', 'json', 'redirect',
   # view-section
-    'view', 'escape', 'smarty', 'twig',
-  # event-section
-    'event',
-  # error
-    'error', 'phpError',
-  # util
-    'arr', 'env', 'logger', 'monolog', 'pinyin', 'uuid', 'website',
+    'escape', 'view',
+  # others
+    'arr', 'env', 'error', 'event', 'gravatar', 'logger', 'pinyin', 'uuid', 'website',
+  # third party
+    # db
+    'dbal', 'entityManager',
+    # view
+    'smarty', 'twig',
+    # others
+    'monolog', 
+    'phpError'
 ]
 
 sections = {}
