@@ -177,6 +177,42 @@ $qb->reset('where');
 echo $qb->getSql();
 ```
 
+### 使用`indexBy`控制返回二维数组的键名
+```php
+$qb = widget()->db('member')->indexBy('name')->limit(2);
+
+$data = $qb->fetchAll();
+
+// 使用前,数组的键名是数字,从0开始
+$data = array(
+    0 => array(
+        'id' => '1',
+        'name' => 'twin',
+    ),
+    1 => array(
+        'id' => '2',
+        'name' => 'test'
+    )
+);
+
+// 使用后,数组的键名被替换为指定字段的值
+$data = array(
+    'twin' => array(
+        'id' => '1',
+        'name' => 'twin',
+    ),
+    'test' => array(
+        'id' => '2',
+        'name' => 'test'
+    )
+);
+```
+
+**注意** 
+
+1. `indexBy`仅对`fetchAll`和`findAll`的返回值有作用,`execute`方法仍然返回原始的数组
+2. 如果字段的值重复,后面的值将覆盖前面的值
+
 调用方式
 --------
 
@@ -414,6 +450,17 @@ $types      | array        | 参数的类型
 $conditions | string       | 查询条件,如`id = 1`, `id = ?`
 $params     | array        | 参数的值
 $types      | array        | 参数的类型
+
+#### queryBuilder->indexBy($column)
+控制返回二维数组的键名为指定字段的值
+
+**返回:** `QueryBuilder`
+
+**参数**
+
+名称        | 类型         | 说明
+------------|--------------|------
+$column     | string       | 字段的名称,必须存在select语句中
 
 #### queryBuilder->reset($queryPartName)
 重置某一部分SQL字句
