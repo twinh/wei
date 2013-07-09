@@ -10,12 +10,10 @@ isRecordExists
 ```php
 // Set configuraion for db widget
 widget()->config('db', array(
-    'driver' => 'pdo_sqlite',
-    'memory' => true
+    'dsn' => 'sqlite::memory:',
 ));
 
-/* @var $db \Doctrine\DBAL\Connection */
-$db = widget()->db();
+$db = widget()->db;
 
 $db->query("CREATE TABLE users (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
 
@@ -67,3 +65,4 @@ if (widget()->isRecordExists('test', 'users', 'name')) {
 ### 方法
 
 #### isRecordExists($input, $table, $field = 'id')
+检查数据表是否存在指定的记录
