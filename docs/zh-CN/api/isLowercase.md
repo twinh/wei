@@ -35,3 +35,11 @@ if (widget()->isLowercase('abc')) {
 
 #### isLowercase($input)
 检查数据是否为小写字符
+
+**返回:** `bool` 检查结果
+
+**参数**
+
+名称   | 类型   | 说明
+-------|--------|------
+$input | string | 要检查的数据
