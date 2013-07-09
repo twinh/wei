@@ -1,4 +1,8 @@
-# Widget [![Build Status](https://travis-ci.org/twinh/widget.png?branch=master)](https://travis-ci.org/twinh/widget)
+# Widget
+
+[![Build Status](https://travis-ci.org/twinh/widget.png?branch=master)](https://travis-ci.org/twinh/widget)
+[![Coverage Status](https://coveralls.io/repos/twinh/widget/badge.png?branch=master)](https://coveralls.io/r/twinh/widget?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/widget/widget/v/stable.png)](https://packagist.org/packages/widget/widget)
 
 Widget is a micro-framework provided powerful but simple APIs for faster and easier PHP 5.3+ development.
 
