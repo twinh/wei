@@ -66,18 +66,4 @@ class RecordExistsTest extends TestCase
             array('test2', 'address')
         );
     }
-
-    public function getInputs()
-    {
-        // DBAL-522
-        // Check if older than 2.4.0
-        if (1 === \Doctrine\DBAL\Version::compare('2.4.0')) {
-            $inputs = parent::getInputs();
-            $key = array_search(null, $inputs, true);
-            unset($inputs[$key]);
-            return $inputs;
-        } else {
-            return parent::getInputs();
-        }
-    }
 }
