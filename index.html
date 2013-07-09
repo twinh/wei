@@ -9273,12 +9273,10 @@ widget()-&gt;arrayCache('name');
 
 <div class="highlight"><pre><code class="php"><span class="c1">// Set configuraion for db widget</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">config</span><span class="p">(</span><span class="s1">'db'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s1">'driver'</span> <span class="o">=&gt;</span> <span class="s1">'pdo_sqlite'</span><span class="p">,</span>
-    <span class="s1">'memory'</span> <span class="o">=&gt;</span> <span class="k">true</span>
+    <span class="s1">'dsn'</span> <span class="o">=&gt;</span> <span class="s1">'sqlite::memory:'</span><span class="p">,</span>
 <span class="p">));</span>
 
-<span class="cm">/* @var $db \Doctrine\DBAL\Connection */</span>
-<span class="nv">$db</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">();</span>
+<span class="nv">$db</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">;</span>
 
 <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">"CREATE TABLE users (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))"</span><span class="p">);</span>
 
@@ -9354,6 +9352,8 @@ widget()-&gt;arrayCache('name');
 </table><h3>方法</h3>
 
 <h4>isRecordExists($input, $table, $field = 'id')</h4>
+
+<p>检查数据表是否存在指定的记录</p>
   </section>
 
 <!-- api/isAll
@@ -11895,8 +11895,9 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h3>选项</h3>
 
-<p>完整的配置请查看Doctrine DBAL官方提供的文档
-<a href="http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html">http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html</a></p>
+<p>完整的配置请查看Doctrine DBAL官方提供的文档</p>
+
+<p><a href="http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html">http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html</a></p>
 
 <h4>以下三个主要选项,只要提供一个的值即可</h4>
 
