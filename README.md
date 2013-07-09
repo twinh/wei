@@ -17,7 +17,7 @@ $widget = widget();
 $id = $widget->query('id');
 ```
 
-## [Installation](docs/zh-CN/book/installation.md)
+## Installation
 
 ### Composer
 
@@ -37,7 +37,7 @@ Define the following requirement in your `composer.json` file and run `php compo
 
 ## Resources
 
-* [Documentation](docs/zh-CN)
+* [Documentation](docs/zh-CN) (Chinese)
 * [Demo](demos)
 
 ## API Overview
