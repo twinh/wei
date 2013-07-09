@@ -865,17 +865,17 @@ class DbTest extends TestCase
     {
         $query = $this
             ->db('member')
+            ->where('id = ?', $value)
+            ->andWhere('id = ?', $value)
+            ->andWhere('id = ?', $value)
+            ->orWhere('id = ?', $value)
+            ->orWhere('id = ?', $value)
             ->groupBy('id')
             ->having('id = ?', $value)
             ->andHaving('id = ?', $value)
             ->andHaving('id = ?', $value)
             ->orHaving('id = ?', $value)
-            ->orHaving('id = ?', $value)
-            ->where('id = ?', $value)
-            ->andWhere('id = ?', $value)
-            ->andWhere('id = ?', $value)
-            ->orWhere('id = ?', $value)
-            ->orWhere('id = ?', $value);
+            ->orHaving('id = ?', $value);
 
         // No error raise
         $array = $query->fetchAll();
@@ -889,7 +889,7 @@ class DbTest extends TestCase
             array(0),
             array(null),
             array(true),
-            array(array())
+            array(array(null))
         );
     }
 
