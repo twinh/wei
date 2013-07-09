@@ -529,8 +529,8 @@ class DbTest extends TestCase
             ->indexBy('name')
             ->findAll();
 
-        $this->assertArrayHasKey('twin', $members);
-        $this->assertArrayHasKey('test', $members);
+        $this->assertInstanceOf('\Widget\Db\Record', $members['twin']);
+        $this->assertInstanceOf('\Widget\Db\Record', $members['test']);
 
         $members = $members->toArray();
 
@@ -542,8 +542,6 @@ class DbTest extends TestCase
             ->indexBy('test')
             ->fetchAll();
     }
-
-
 
     public function testQueryUpdate()
     {
