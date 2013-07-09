@@ -12,8 +12,6 @@ class EntityExistsTest extends TestCase
 
     public function setUp()
     {
-        $this->markTestSkipped('debug for segmentation fault');
-        return;
         if (!class_exists(('\Doctrine\ORM\EntityManager'))) {
             $this->markTestSkipped('doctrine\orm is required');
         }
