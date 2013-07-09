@@ -10,20 +10,9 @@ class RecordExistsTest extends TestCase
 
     public function setUp()
     {
-        if (!class_exists(('\Doctrine\DBAL\DriverManager'))) {
-            $this->markTestSkipped('doctrine\dbal is required');
-        }
-
         parent::setUp();
 
-        if (!class_exists(('\Doctrine\DBAL\DriverManager'))) {
-            return;
-        }
-
-        $widget = $this->widget;
-
-        /* @var $db \Doctrine\DBAL\Connection */
-        $db = $widget->dbal();
+        $db = $this->widget->db;
 
         $db->query("CREATE TABLE users (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
 

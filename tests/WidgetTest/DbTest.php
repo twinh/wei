@@ -868,12 +868,18 @@ class DbTest extends TestCase
             ->groupBy('id')
             ->having('id = ?', $value)
             ->andHaving('id = ?', $value)
+            ->andHaving('id = ?', $value)
+            ->orHaving('id = ?', $value)
             ->orHaving('id = ?', $value)
             ->where('id = ?', $value)
             ->andWhere('id = ?', $value)
+            ->andWhere('id = ?', $value)
+            ->orWhere('id = ?', $value)
             ->orWhere('id = ?', $value);
 
-        $query->fetchAll();
+        // No error raise
+        $array = $query->fetchAll();
+        $this->assertInternalType('array', $array);
     }
 
     public function providerForParameterValue()
@@ -882,7 +888,8 @@ class DbTest extends TestCase
             array('0'),
             array(0),
             array(null),
-            array(true)
+            array(true),
+            array(array())
         );
     }
 

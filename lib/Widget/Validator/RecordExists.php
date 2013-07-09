@@ -77,14 +77,10 @@ class RecordExists extends AbstractValidator
             return false;
         }
 
-        $db = $this->dbal();
-
-        $this->data = $db->createQueryBuilder()
-            ->select('*')
-            ->from($this->table, 't')
-            ->where('t.' . $this->field . ' = :value')
-            ->setParameter('value', $input)
-            ->execute()
+        $this->data = $this->db
+            ->createQueryBuilder()
+            ->from($this->table)
+            ->where($this->field . ' = ?', $input)
             ->fetch();
 
         if (empty($this->data)) {
