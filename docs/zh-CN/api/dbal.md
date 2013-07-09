@@ -36,6 +36,7 @@ Array
 ### 选项
 
 完整的配置请查看Doctrine DBAL官方提供的文档
+
 http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html
 
 #### 以下三个主要选项,只要提供一个的值即可
