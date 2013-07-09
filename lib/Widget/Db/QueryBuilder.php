@@ -725,7 +725,7 @@ class QueryBuilder
      * @param array $types The parameter types
      * @return QueryBuilder
      */
-    public function where($conditions, $params = null, $types = array())
+    public function where($conditions, $params = array(), $types = array())
     {
         $conditions = $this->processCondition($conditions, $params, $types);
 
@@ -749,7 +749,7 @@ class QueryBuilder
      * @param array $types The parameter types
      * @return QueryBuilder
      */
-    public function andWhere($conditions, $params = false, $types = array())
+    public function andWhere($conditions, $params = array(), $types = array())
     {
         $conditions = $this->processCondition($conditions, $params, $types);
 
@@ -773,7 +773,7 @@ class QueryBuilder
      * @param array $types The parameter types
      * @return QueryBuilder
      */
-    public function orWhere($conditions, $params = null, $types = array())
+    public function orWhere($conditions, $params = array(), $types = array())
     {
         $conditions = $this->processCondition($conditions, $params, $types);
 
@@ -856,7 +856,7 @@ class QueryBuilder
      * @param array $types The parameter types
      * @return QueryBuilder
      */
-    public function andHaving($conditions, $params = null, $types = array())
+    public function andHaving($conditions, $params = array(), $types = array())
     {
         $conditions = $this->processCondition($conditions, $params, $types);
 
@@ -872,7 +872,7 @@ class QueryBuilder
      * @param array $types The parameter types
      * @return QueryBuilder
      */
-    public function orHaving($conditions, $params = null, $types = array())
+    public function orHaving($conditions, $params = array(), $types = array())
     {
         $conditions = $this->processCondition($conditions, $params, $types);
 

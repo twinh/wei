@@ -858,6 +858,35 @@ class DbTest extends TestCase
         $this->assertEquals('1', $member->id);
     }
 
+    /**
+     * @dataProvider providerForParameterValue
+     */
+    public function testParameterValue($value)
+    {
+        $query = $this
+            ->db('member')
+            ->groupBy('id')
+            ->having('id = ?', $value)
+            ->andHaving('id = ?', $value)
+            ->orHaving('id = ?', $value)
+            ->where('id = ?', $value)
+            ->andWhere('id = ?', $value)
+            ->orWhere('id = ?', $value);
+
+
+        $query->fetchAll();
+    }
+
+    public function providerForParameterValue()
+    {
+        return array(
+            array('0'),
+            array(0),
+            array(null),
+            array(true)
+        );
+    }
+
     public function testGetAndResetAll()
     {
         $query = $this->db('member')->offset(1)->limit(1);
