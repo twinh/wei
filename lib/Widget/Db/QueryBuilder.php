@@ -749,7 +749,7 @@ class QueryBuilder
      * @param array $types The parameter types
      * @return QueryBuilder
      */
-    public function andWhere($conditions, $params = null, $types = array())
+    public function andWhere($conditions, $params = false, $types = array())
     {
         $conditions = $this->processCondition($conditions, $params, $types);
 
@@ -1085,7 +1085,7 @@ class QueryBuilder
             $conditions = implode(' AND ', $where);
         }
 
-        if ($params) {
+        if ($params !== false) {
             if (is_array($params)) {
                 $this->params = array_merge($this->params, $params);
                 $this->paramTypes = array_merge($this->paramTypes, $types);
