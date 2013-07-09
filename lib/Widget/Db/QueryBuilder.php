@@ -720,7 +720,7 @@ class QueryBuilder
      *     ));
      * ```
      *
-     * @param $conditions The WHERE conditions
+     * @param string $conditions The WHERE conditions
      * @param array $params The condition parameters
      * @param array $types The parameter types
      * @return QueryBuilder

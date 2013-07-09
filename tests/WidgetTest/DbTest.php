@@ -873,7 +873,6 @@ class DbTest extends TestCase
             ->andWhere('id = ?', $value)
             ->orWhere('id = ?', $value);
 
-
         $query->fetchAll();
     }
 
