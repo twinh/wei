@@ -29,7 +29,7 @@ class MapTest extends TestCase
         );
     }
 
-    public function testtoJson()
+    public function testToJson()
     {
         $this->assertEquals('{"1":"Yes","0":"No"}', $this->map->toJson('yesOrNo'));
     }
