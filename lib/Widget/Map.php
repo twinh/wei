@@ -54,13 +54,13 @@ class Map extends AbstractWidget
      * Set map file
      *
      * @param string $file
-     * @throws \InvalidArgumentException when file not found
+     * @throws \InvalidArgumentException when map file not found
      * @return Map
      */
     public function setFile($file)
     {
         if (!is_file($file)) {
-            throw new \InvalidArgumentException(sprintf('File %s not found', $file));
+            throw new \InvalidArgumentException(sprintf('Map file "%s" not found', $file));
         }
 
         $this->file = $file;
@@ -117,7 +117,7 @@ class Map extends AbstractWidget
     }
 
     /**
-     * Convert map data to html select options
+     * Convert map data to HTML select options
      *
      * @param string $name The name of map
      * @return string
