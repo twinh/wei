@@ -123,6 +123,8 @@ namespace Widget;
  * @method   string     t($message, array $parameters = array()) Translate the message
  * @property Url        $url A util widget to build URL
  * @method   string     url($uri) Build URL by specified uri and parameters
+ * @property Map        $map A widget that handles key-value map data
+ * @method   mixed      map($name, $key = null) Get map data by specified name
  */
 abstract class AbstractWidget
 {
