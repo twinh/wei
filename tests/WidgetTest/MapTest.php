@@ -37,6 +37,16 @@ class MapTest extends TestCase
     public function testToOptions()
     {
         $this->assertEquals('<option value="1">Yes</option><option value="0">No</option>', $this->map->toOptions('yesOrNo'));
+
+        $this->assertEquals('<optgroup label="province1"><option value="city1">shenzhen</option></optgroup><optgroup label="province2"><option value="city2">shanghai</option></optgroup>', $this->map->toOptions('country'));
+    }
+
+    public function testToSimpleArray()
+    {
+        $this->assertEquals(array(
+            'city1' => 'shenzhen',
+            'city2' => 'shanghai'
+        ), $this->map->toSimpleArray('country'));
     }
 
     public function testMapFileNotFoundException()
