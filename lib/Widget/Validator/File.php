@@ -119,7 +119,7 @@ class File extends AbstractValidator
     protected $mimeType;
 
     /**
-     * The allowd file mime types
+     * The allowed file mime types
      *
      * @var array
      */
@@ -148,9 +148,7 @@ class File extends AbstractValidator
     protected $magicFile;
 
     /**
-     * Check if the input is valid file
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function __invoke($input, $options = array())
     {
