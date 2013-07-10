@@ -11,12 +11,19 @@ class FileTest extends TestCase
         ));
     }
 
-    public function testIsFile()
+    // TODO which causes segmentation fault in PHP 5.3.3 ?
+    public function testIsFile1()
     {
         $this->assertFalse($this->is('file', array()), 'Not File path');
+    }
 
+    public function testIsFile2()
+    {
         $this->assertTrue($this->is('file', __FILE__), 'File found');
+    }
 
+    public function testIsFile3()
+    {
         $this->assertFalse($this->is('file', '.file not found'), 'File not found');
     }
 
