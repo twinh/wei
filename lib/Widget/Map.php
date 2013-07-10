@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * Description of Map
+ * A widget that handles key-value map data
  *
  * @author twinhuang
  */
