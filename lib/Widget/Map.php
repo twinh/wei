@@ -81,13 +81,6 @@ class Map extends AbstractWidget
         if (isset($this->data[$name])) {
             return $this->data[$name];
         }
-        if (isset($this->arrayObjects[$name])) {
-            return $this->arrayObjects[$name];
-        }
-
-        if (isset($this->data[$name])) {
-            return $this->arrayObjects[$name] = new \ArrayObject($this->data[$name]);
-        }
 
         throw new \InvalidArgumentException(sprintf('Map name "%s" not defined', $name));
     }
