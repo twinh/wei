@@ -29,16 +29,19 @@ class Map extends AbstractWidget
      */
     protected $data;
 
-    protected $arrayObjects;
-
-    protected $inverses = array();
+    /**
+     * The inverse map data
+     *
+     * @var array
+     */
+    protected $inverseData = array();
 
     /**
-     * Get map data by specified name
+     * Returns map data by specified name
      *
-     * @param string $name
-     * @param string $key
-     * @return mixed
+     * @param string $name The name of map
+     * @param null|string $key The item name in map
+     * @return array|string The map array or the item value of map
      */
     public function __invoke($name, $key = null)
     {
@@ -70,7 +73,7 @@ class Map extends AbstractWidget
     }
 
     /**
-     * Get map data by given name
+     * Returns map data by given name
      *
      * @param string $name
      * @return array
@@ -85,21 +88,28 @@ class Map extends AbstractWidget
         throw new \InvalidArgumentException(sprintf('Map name "%s" not defined', $name));
     }
 
+    /**
+     * Get inverse map data
+     *
+     * @param $name
+     * @param string|null $key
+     * @return array|string
+     */
     public function getInverse($name, $key = null)
     {
-        if (!isset($this->inverses[$name])) {
-            $this->inverses[$name] = array_flip($this->get($name));
+        if (!isset($this->inverseData[$name])) {
+            $this->inverseData[$name] = array_flip($this->get($name));
         }
 
         if ($key) {
-            return isset($this->inverses[$name][$key]) ? $this->inverses[$name][$key] : null;
+            return isset($this->inverseData[$name][$key]) ? $this->inverseData[$name][$key] : false;
         } else {
-            return $this->inverses[$name];
+            return $this->inverseData[$name];
         }
     }
 
     /**
-     * Convert map data to json
+     * Convert map data to JSON
      *
      * @param string $name The name of map
      * @return string
@@ -133,16 +143,22 @@ class Map extends AbstractWidget
     }
 
     /**
-     * Convert map data to single level php array
+     * Convert map data to single level PHP array
      *
-     * @param string $name
+     * @param string $name The name of map
+     * @return array
      */
     public function toSimpleArray($name)
     {
         return $this->loopSimpleArray($this->get($name));
     }
 
-    protected function loopSimpleArray($data, &$result = array())
+    /**
+     * @param array $data
+     * @param array $result
+     * @return array
+     */
+    protected function loopSimpleArray(array $data, &$result = array())
     {
         foreach ($data as $key => $value) {
             if (is_array($value)) {
