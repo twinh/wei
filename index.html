@@ -2525,7 +2525,39 @@ widget()-&gt;arrayCache('name');
 <td>在执行SQL查询之后触发的回调方法</td>
 </tr>
 </tbody>
-</table><h3>DSN配置</h3>
+</table><h4>beforeQuery回调的参数</h4>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$sql</td>
+<td>string</td>
+<td>当前执行的SQL语句</td>
+</tr>
+<tr>
+<td>$params</td>
+<td>array</td>
+<td>执行语句的参数</td>
+</tr>
+<tr>
+<td>$types</td>
+<td>array</td>
+<td>执行语句的参数类型</td>
+</tr>
+<tr>
+<td>$db</td>
+<td>Widget\Db</td>
+<td>当前Db微件对象</td>
+</tr>
+</tbody>
+</table><h4>afterQuery回调的参数</h4>
+
+<h3>DSN配置</h3>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
