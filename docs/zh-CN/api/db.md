@@ -165,6 +165,15 @@ recordNamespace | string   | 无                   | 自定义记录类的命名
 beforeQuery     | callback | 无                   | 在执行SQL查询之前触发的回调方法
 afterQuery      | callback | 无                   | 在执行SQL查询之后触发的回调方法
 
+#### beforeQuery回调的参数
+
+名称    | 类型      | 说明
+--------|-----------|------
+$sql    | string    | 当前执行的SQL语句
+$params | array     | 执行语句的参数
+$types  | array     | 执行语句的参数类型
+$db     | Widget\Db | 当前Db微件对象
+
 ### DSN配置
 
 数据库     | 参考格式                                                  | 完整配置链接
