@@ -2460,15 +2460,22 @@ widget()-&gt;arrayCache('name');
 
 <h3>通过beforeQuery记录SQL日志</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'beforeQuery'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$sql</span><span class="p">,</span> <span class="nv">$params</span><span class="p">,</span> <span class="nv">$types</span><span class="p">,</span> <span class="nv">$db</span><span class="p">)</span> <span class="p">{</span>
             <span class="nv">$log</span> <span class="o">=</span> <span class="nv">$sql</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">.</span> <span class="nb">var_export</span><span class="p">(</span><span class="nv">$params</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
             <span class="c1">// 通过db微件获取logger微件,并调用debug方法记录SQL日志</span>
-            <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="nv">$log</span><span class="p">);</span>
+            <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="nv">$log</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">)</span>
 <span class="p">));</span>
+
+<span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">"SELECT DATE('now')"</span><span class="p">);</span>
+
+<span class="c1">// 日志文件内容</span>
+<span class="c1">//[2013-07-10 23:15:38] widget.DEBUG: SELECT DATE('now')</span>
+<span class="c1">//array (</span>
+<span class="c1">//)</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
