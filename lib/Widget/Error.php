@@ -294,21 +294,21 @@ class Error extends AbstractWidget
     /**
      * The error handler convert PHP error to exception
      *
-     * @param int $errno The level of the error raised
-     * @param string $errstr The error message
-     * @param string $errfile The filename that the error was raised in
-     * @param int $errline The line number the error was raised at
+     * @param int $code The level of the error raised
+     * @param string $message The error message
+     * @param string $file The filename that the error was raised in
+     * @param int $line The line number the error was raised at
      * @throws \ErrorException convert PHP error to exception
      * @internal use for set_error_handler only
      */
-    public function handleError($errno, $errstr, $errfile, $errline)
+    public function handleError($code, $message, $file, $line)
     {
-        if (!(error_reporting() & $errno)) {
+        if (!(error_reporting() & $code)) {
             // This error code is not included in error_reporting
             return;
         }
         restore_error_handler();
-        throw new \ErrorException($errstr, $errno, 500, $errfile, $errline);
+        throw new \ErrorException($message, $code, 500, $file, $line);
     }
 
     /**
