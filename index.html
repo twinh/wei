@@ -2458,6 +2458,19 @@ widget()-&gt;arrayCache('name');
 <span class="nv">$collection</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'user'</span><span class="p">);</span>
 </code></pre></div>
 
+<h3>通过beforeQuery记录SQL日志</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'beforeQuery'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$sql</span><span class="p">,</span> <span class="nv">$params</span><span class="p">,</span> <span class="nv">$types</span><span class="p">,</span> <span class="nv">$db</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$log</span> <span class="o">=</span> <span class="nv">$sql</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">.</span> <span class="nb">var_export</span><span class="p">(</span><span class="nv">$params</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+            <span class="c1">// 通过db微件获取logger微件,并调用debug方法记录SQL日志</span>
+            <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="nv">$log</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</code></pre></div>
+
 <h2>调用方式</h2>
 
 <h3>选项</h3>
@@ -2557,7 +2570,18 @@ widget()-&gt;arrayCache('name');
 </tbody>
 </table><h4>afterQuery回调的参数</h4>
 
-<h3>DSN配置</h3>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$db</td>
+<td>Widget\Db</td>
+<td>当前Db微件对象</td>
+</tr></tbody>
+</table><h3>DSN配置</h3>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
