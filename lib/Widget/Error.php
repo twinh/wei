@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * The error widget to show pretty exception message
+ * A widget that handles exception and display pretty exception message
  *
  * @property    Request $request The HTTP request widget
  * @property    Logger $logger The logger widget
