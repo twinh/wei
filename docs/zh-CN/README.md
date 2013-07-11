@@ -145,7 +145,7 @@ API参考目录
 * [escape](api/escape.md) - 转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义
 * [view](api/view.md) - 渲染指定名称的PHP模板
 
-#### 工具
+#### 其他
 * [arr](api/attr.md) - 数组工具微件,提供一些实用的数组操作方法
 * [env](api/env.md) - 环境检测及根据不同环境加载不同的配置文件
 * [error](api/error.md) - 提供简洁友好的错误界面
