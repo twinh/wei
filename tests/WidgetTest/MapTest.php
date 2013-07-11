@@ -58,4 +58,18 @@ class MapTest extends TestCase
             'file' => 'notFound.php'
         ));
     }
+
+    public function testGetInverse()
+    {
+        $this->assertEquals(
+            array(
+                'Yes' => '1',
+                'No' => '0',
+            ),
+            $this->map->getInverse('yesOrNo')
+        );
+
+        $this->assertEquals('1', $this->map->getInverse('yesOrNo', 'Yes'));
+        $this->assertEquals('0', $this->map->getInverse('yesOrNo', 'No'));
+    }
 }
