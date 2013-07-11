@@ -72,4 +72,11 @@ class MapTest extends TestCase
         $this->assertEquals('1', $this->map->getInverse('yesOrNo', 'Yes'));
         $this->assertEquals('0', $this->map->getInverse('yesOrNo', 'No'));
     }
+
+    public function getNotDefinedMap()
+    {
+        $this->setExpectedException('\InvalidArgumentException', 'Map name "notFound" not defined');
+
+        $this->map('notDefined');
+    }
 }
