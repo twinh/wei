@@ -148,6 +148,19 @@ $array = $db->select('user');
 $collection = $db->find('user');
 ```
 
+### 通过beforeQuery记录SQL日志
+```php
+widget(array(
+    'db' => array(
+        'beforeQuery' => function($sql, $params, $types, $db) {
+            $log = $sql . "\n" . var_export($params, true);
+            // 通过db微件获取logger微件,并调用debug方法记录SQL日志
+            $db->logger->debug($log);
+        }
+    )
+));
+```
+
 调用方式
 --------
 
@@ -172,6 +185,12 @@ afterQuery      | callback | 无                   | 在执行SQL查询之后触
 $sql    | string    | 当前执行的SQL语句
 $params | array     | 执行语句的参数
 $types  | array     | 执行语句的参数类型
+$db     | Widget\Db | 当前Db微件对象
+
+#### afterQuery回调的参数
+
+名称    | 类型      | 说明
+--------|-----------|------
 $db     | Widget\Db | 当前Db微件对象
 
 ### DSN配置
