@@ -150,15 +150,22 @@ $collection = $db->find('user');
 
 ### 通过beforeQuery记录SQL日志
 ```php
-widget(array(
+$widget = widget(array(
     'db' => array(
         'beforeQuery' => function($sql, $params, $types, $db) {
             $log = $sql . "\n" . var_export($params, true);
             // 通过db微件获取logger微件,并调用debug方法记录SQL日志
-            $db->logger->debug($log);
+            widget()->logger->debug($log);
         }
     )
 ));
+
+$widget->db->query("SELECT DATE('now')");
+
+// 日志文件内容
+//[2013-07-10 23:15:38] widget.DEBUG: SELECT DATE('now')
+//array (
+//)
 ```
 
 调用方式
