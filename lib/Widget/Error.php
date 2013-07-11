@@ -32,14 +32,14 @@ class Error extends AbstractWidget
     protected $detail = 'Unfortunately, an error occurred. Please try again later.';
 
     /**
-     *
+     * The detail error message display when thrown 404 exception
      *
      * @var string
      */
     protected $notFoundDetail = 'Sorry, the page you requested was not found. Please check the URL and try again.';
 
     /**
-     * Whether ignore the previous exception handler or attch it again to the
+     * Whether ignore the previous exception handler or attach it again to the
      * exception event
      *
      * @var bool
@@ -294,10 +294,10 @@ class Error extends AbstractWidget
     /**
      * The error handler convert PHP error to exception
      *
-     * @param int $errno     The level of the error raised
-     * @param string $errstr    The error message
-     * @param string $errfile   The filename that the error was raised in
-     * @param int $errline   The line number the error was raised at
+     * @param int $errno The level of the error raised
+     * @param string $errstr The error message
+     * @param string $errfile The filename that the error was raised in
+     * @param int $errline The line number the error was raised at
      * @throws \ErrorException convert PHP error to exception
      * @internal use for set_error_handler only
      */
