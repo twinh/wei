@@ -6,7 +6,7 @@ namespace WidgetTest;
 class ValidatorTest extends TestCase
 {
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testIsInException()
     {
@@ -568,6 +568,33 @@ class ValidatorTest extends TestCase
         $this->assertContains('error message 1', $message);
         $this->assertContains('error message 2', $message);
         $this->assertEquals('error message 1|error message 2', $message);
+    }
+
+    public function testGetFirstMessage()
+    {
+        $validator = $this->validate(array(
+            'data' => array(),
+            'rules' => array(
+                'name' => array(
+                    'required' => false
+                )
+            )
+        ));
+        $this->assertFalse($validator->getFirstMessage());
+
+        $validator = $this->validate(array(
+            'data' => array(),
+            'rules' => array(
+                'name' => 'required',
+                'email' => 'required'
+            ),
+            'messages' => array(
+                'name' => 'error message 1',
+                'email' => 'error message 2'
+            )
+        ));
+        $firstMessage = $validator->getFirstMessage();
+        $this->assertEquals('error message 1', $firstMessage);
     }
 
     public function testGetRuleValidator()
