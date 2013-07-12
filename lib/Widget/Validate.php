@@ -574,10 +574,13 @@ class Validate extends AbstractWidget
      * Set custom messages
      *
      * @param array $messages
+     * @return Validate
      */
     public function setMessages(array $messages)
     {
         $this->messages = $messages;
+
+        return $this;
     }
 
     /**
