@@ -168,8 +168,8 @@ widget()->validate(array(
 加`required => false`的验证规则
 
 在验证过程中,验证器会根据验证规则的名称,检查对应的规则验证器是否存在,如`email`规则将被转换为
-`\Widget\Validator\Email`类,如果类不存在,将抛出`\Widget\Exception\InvalidArgumentException`
-异常提醒开发人员规则不存在.如果类存在,将初始化该类.然后,验证器组织验证规则提供的参数,供规则验证器验证.
+`\Widget\Validator\Email`类,如果类不存在,将抛出异常提醒开发人员规则不存在.
+如果类存在,将初始化该类.然后,验证器组织验证规则提供的参数,供规则验证器验证.
 
 #### 代码范例
 ```php
@@ -201,6 +201,35 @@ widget()->validate(array(
         ) 
     )
 ));
+```
+
+#### 代码范例
+
+区分验证规则和验证微件的名称
+
+1. 验证微件均是以is开头,如isDigit,isAlnum
+2. 作为验证规则时,需使用原始的名称,如digit,alnum
+
+```php
+$age = 18;
+
+widget()->validate(array(
+    'data' => array(
+        'age' => $age
+    ),
+    'rules' => array(
+        'age' => array(
+            'digit' => true, // √正确
+            'isDigit' => true, // ×错误
+        )
+    )
+));
+
+// 通过isDigit验证微件,验证数据
+widget()->isDigit($age);
+
+// 通过is微件,指定验证规则验证数据
+widget()->is('digit', $age);
 ```
 
 #### messages
