@@ -4354,6 +4354,9 @@ widget()-&gt;arrayCache('name');
 
 <span class="c1">// 输出合并的错误信息</span>
 <span class="nb">print_r</span><span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getJoinedMessage</span><span class="p">());</span>
+
+<span class="c1">// 输出第一条错误信息</span>
+<span class="nb">print_r</span><span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getFirstMessage</span><span class="p">());</span>
 </code></pre></div>
 
 <h4>运行结果</h4>
@@ -4402,6 +4405,9 @@ widget()-&gt;arrayCache('name');
 <span class="c1">// 输出合并的错误信息</span>
 <span class="s1">'用户名的长度必须大于3</span>
 <span class="s1">邮箱格式不正确'</span>
+
+<span class="c1">// 输出第一条错误信息</span>
+<span class="s1">'用户名的长度必须大于3'</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
@@ -4694,7 +4700,7 @@ widget()-&gt;arrayCache('name');
 <td>事件对象</td>
 </tr>
 <tr>
-<td>widget()</td>
+<td>$widget</td>
 <td>Widget\Widget</td>
 <td>微件管理器</td>
 </tr>
@@ -4762,7 +4768,7 @@ widget()-&gt;arrayCache('name');
 <td>事件对象</td>
 </tr>
 <tr>
-<td>widget()</td>
+<td>$widget</td>
 <td>Widget\Widget</td>
 <td>微件管理器</td>
 </tr>
@@ -4831,7 +4837,7 @@ widget()-&gt;arrayCache('name');
 <td>事件对象</td>
 </tr>
 <tr>
-<td>widget()</td>
+<td>$widget</td>
 <td>Widget\Widget</td>
 <td>微件管理器</td>
 </tr>
@@ -4892,7 +4898,7 @@ widget()-&gt;arrayCache('name');
 <td>事件对象</td>
 </tr>
 <tr>
-<td>widget()</td>
+<td>$widget</td>
 <td>Widget\Widget</td>
 <td>微件管理器</td>
 </tr>
@@ -4951,7 +4957,7 @@ widget()-&gt;arrayCache('name');
 <td>事件对象</td>
 </tr>
 <tr>
-<td>widget()</td>
+<td>$widget</td>
 <td>Widget\Widget</td>
 <td>微件管理器</td>
 </tr>
@@ -5001,7 +5007,7 @@ widget()-&gt;arrayCache('name');
 <td>事件对象</td>
 </tr>
 <tr>
-<td>widget()</td>
+<td>$widget</td>
 <td>Widget\Widget</td>
 <td>微件管理器</td>
 </tr>
@@ -5104,6 +5110,10 @@ widget()-&gt;arrayCache('name');
 <h4>validate-&gt;getJoinedMessage()</h4>
 
 <p>获取合并的验证错误信息</p>
+
+<h4>validate-&gt;getFirstMessage()</h4>
+
+<p>获取第一条验证错误信息</p>
 
 <h4>validate-&gt;getRuleValidator()</h4>
 
