@@ -4703,19 +4703,9 @@ widget()-&gt;arrayCache('name');
 </tr></thead>
 <tbody>
 <tr>
-<td>$event</td>
-<td>Widget\Event\Event</td>
-<td>事件对象</td>
-</tr>
-<tr>
-<td>$widget</td>
-<td>Widget\Widget</td>
-<td>微件管理器</td>
-</tr>
-<tr>
 <td>$rule</td>
 <td>string</td>
-<td>过的规则名称</td>
+<td>验证规则的名称</td>
 </tr>
 <tr>
 <td>$field</td>
@@ -4726,6 +4716,11 @@ widget()-&gt;arrayCache('name');
 <td>$validator</td>
 <td>Widget\Validate</td>
 <td>验证器对象</td>
+</tr>
+<tr>
+<td>$widget</td>
+<td>Widget\Widget</td>
+<td>微件管理器</td>
 </tr>
 </tbody>
 </table><p>如果<code>ruleValid</code>事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
@@ -4739,7 +4734,7 @@ widget()-&gt;arrayCache('name');
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'required'</span>
     <span class="p">),</span>
-    <span class="s1">'ruleValid'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nx">widget</span><span class="p">(),</span> <span class="nv">$rule</span><span class="p">,</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">'ruleValid'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$rule</span><span class="p">,</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">echo</span> <span class="nv">$rule</span><span class="p">;</span>
         <span class="k">echo</span> <span class="nv">$field</span><span class="p">;</span>
         <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
@@ -4760,7 +4755,7 @@ widget()-&gt;arrayCache('name');
 
 <p><strong>参数</strong></p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">ruleInvalid</span><span class="p">(</span> <span class="nv">$event</span><span class="p">,</span> <span class="nx">widget</span><span class="p">(),</span> <span class="nv">$rule</span><span class="p">,</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span> <span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="nx">ruleInvalid</span><span class="p">(</span><span class="nv">$rule</span><span class="p">,</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span>
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
@@ -4771,19 +4766,9 @@ widget()-&gt;arrayCache('name');
 </tr></thead>
 <tbody>
 <tr>
-<td>$event</td>
-<td>Widget\Event\Event</td>
-<td>事件对象</td>
-</tr>
-<tr>
-<td>$widget</td>
-<td>Widget\Widget</td>
-<td>微件管理器</td>
-</tr>
-<tr>
 <td>$rule</td>
 <td>string</td>
-<td>过的规则名称</td>
+<td>验证规则的名称</td>
 </tr>
 <tr>
 <td>$field</td>
@@ -4794,6 +4779,11 @@ widget()-&gt;arrayCache('name');
 <td>$validator</td>
 <td>Widget\Validate</td>
 <td>验证器对象</td>
+</tr>
+<tr>
+<td>$widget</td>
+<td>Widget\Widget</td>
+<td>微件管理器</td>
 </tr>
 </tbody>
 </table><p><code>ruleInvalid</code>与<code>ruleValid</code>的行为一致.
@@ -4808,7 +4798,7 @@ widget()-&gt;arrayCache('name');
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'required'</span>
     <span class="p">),</span>
-    <span class="s1">'ruleInvalid'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nx">widget</span><span class="p">(),</span> <span class="nv">$rule</span><span class="p">,</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">'ruleInvalid'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$rule</span><span class="p">,</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">echo</span> <span class="nv">$rule</span><span class="p">;</span>
         <span class="k">echo</span> <span class="nv">$field</span><span class="p">;</span>
         <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
@@ -4829,7 +4819,7 @@ widget()-&gt;arrayCache('name');
 
 <p><strong>参数</strong></p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">fieldValid</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nx">widget</span><span class="p">(),</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="nx">fieldValid</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span>
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
@@ -4840,24 +4830,19 @@ widget()-&gt;arrayCache('name');
 </tr></thead>
 <tbody>
 <tr>
-<td>$event</td>
-<td>Widget\Event\Event</td>
-<td>事件对象</td>
-</tr>
-<tr>
-<td>$widget</td>
-<td>Widget\Widget</td>
-<td>微件管理器</td>
-</tr>
-<tr>
 <td>$rule</td>
 <td>string</td>
-<td>过的规则名称</td>
+<td>验证规则的名称</td>
 </tr>
 <tr>
 <td>$validator</td>
 <td>Widget\Validate</td>
 <td>验证器对象</td>
+</tr>
+<tr>
+<td>$widget</td>
+<td>Widget\Widget</td>
+<td>微件管理器</td>
 </tr>
 </tbody>
 </table><p>如果<code>fieldValid</code>事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
@@ -4871,7 +4856,7 @@ widget()-&gt;arrayCache('name');
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'required'</span>
     <span class="p">),</span>
-    <span class="s1">'fieldValid'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nx">widget</span><span class="p">(),</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">'fieldValid'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">echo</span> <span class="nv">$field</span><span class="p">;</span>
         <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
     <span class="p">}</span>
@@ -4890,7 +4875,7 @@ widget()-&gt;arrayCache('name');
 
 <p><strong>参数</strong></p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">fieldInvalid</span> <span class="p">(</span> <span class="nv">$event</span><span class="p">,</span> <span class="nx">widget</span><span class="p">(),</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span> <span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="nx">fieldInvalid</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span>
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
@@ -4901,24 +4886,19 @@ widget()-&gt;arrayCache('name');
 </tr></thead>
 <tbody>
 <tr>
-<td>$event</td>
-<td>Widget\Event\Event</td>
-<td>事件对象</td>
-</tr>
-<tr>
-<td>$widget</td>
-<td>Widget\Widget</td>
-<td>微件管理器</td>
-</tr>
-<tr>
 <td>$rule</td>
 <td>string</td>
-<td>过的规则名称</td>
+<td>验证规则的名称</td>
 </tr>
 <tr>
 <td>$validator</td>
 <td>Widget\Validate</td>
 <td>验证器对象</td>
+</tr>
+<tr>
+<td>$widget</td>
+<td>Widget\Widget</td>
+<td>微件管理器</td>
 </tr>
 </tbody>
 </table><p>如果<code>fieldInvalid</code>事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
@@ -4932,7 +4912,7 @@ widget()-&gt;arrayCache('name');
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'required'</span>
     <span class="p">),</span>
-    <span class="s1">'fieldValid'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nx">widget</span><span class="p">(),</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">'fieldValid'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">echo</span> <span class="nv">$field</span><span class="p">;</span>
         <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
     <span class="p">}</span>
@@ -4949,7 +4929,7 @@ widget()-&gt;arrayCache('name');
 
 <p>验证结束时,如果最终验证结果为通过,验证器就触发<code>success</code>事件.</p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">success</span> <span class="p">(</span> <span class="nv">$event</span><span class="p">,</span> <span class="nx">widget</span><span class="p">(),</span> <span class="nv">$validator</span> <span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="nx">success</span><span class="p">(</span><span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span>
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
@@ -4960,19 +4940,14 @@ widget()-&gt;arrayCache('name');
 </tr></thead>
 <tbody>
 <tr>
-<td>$event</td>
-<td>Widget\Event\Event</td>
-<td>事件对象</td>
+<td>$validator</td>
+<td>Widget\Validate</td>
+<td>验证器对象</td>
 </tr>
 <tr>
 <td>$widget</td>
 <td>Widget\Widget</td>
 <td>微件管理器</td>
-</tr>
-<tr>
-<td>$validator</td>
-<td>Widget\Validate</td>
-<td>验证器对象</td>
 </tr>
 </tbody>
 </table><h4>代码范例</h4>
@@ -4984,7 +4959,7 @@ widget()-&gt;arrayCache('name');
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'required'</span>
     <span class="p">),</span>
-    <span class="s1">'success'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nx">widget</span><span class="p">(),</span> <span class="nv">$validator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">'success'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">));</span>
@@ -5010,19 +4985,14 @@ widget()-&gt;arrayCache('name');
 </tr></thead>
 <tbody>
 <tr>
-<td>$event</td>
-<td>Widget\Event\Event</td>
-<td>事件对象</td>
+<td>$validator</td>
+<td>Widget\Validate</td>
+<td>验证器对象</td>
 </tr>
 <tr>
 <td>$widget</td>
 <td>Widget\Widget</td>
 <td>微件管理器</td>
-</tr>
-<tr>
-<td>$validator</td>
-<td>Widget\Validate</td>
-<td>验证器对象</td>
 </tr>
 </tbody>
 </table><h4>代码范例</h4>
@@ -5034,7 +5004,7 @@ widget()-&gt;arrayCache('name');
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'required'</span>
     <span class="p">),</span>
-    <span class="s1">'failure'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nx">widget</span><span class="p">(),</span> <span class="nv">$validator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">'failure'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">));</span>
