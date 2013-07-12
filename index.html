@@ -3929,28 +3929,27 @@ widget()-&gt;arrayCache('name');
 
 <h2>案例</h2>
 
-<h3>向接口<code>http://jsfiddle.net/echo/json/</code>发送POST请求并输出返回的json数据</h3>
+<h3>一个完整的例子:获取公开的gists列表</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'http://jsfiddle.net/echo/json/'</span><span class="p">,</span>
-    <span class="s1">'method'</span> <span class="o">=&gt;</span> <span class="s1">'POST'</span><span class="p">,</span>
+    <span class="c1">// 设置请求的URL地址</span>
+    <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'https://api.github.com/gists/public'</span><span class="p">,</span>
+    <span class="c1">// 默认请求方式为GET,可以设置为POST,PUT等</span>
+    <span class="s1">'method'</span> <span class="o">=&gt;</span> <span class="s1">'GET'</span><span class="p">,</span>
+    <span class="c1">// 自动解析返回数据为JSON对象</span>
     <span class="s1">'dataType'</span> <span class="o">=&gt;</span> <span class="s1">'json'</span><span class="p">,</span>
+    <span class="c1">// 设置发送的参数</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'json'</span> <span class="o">=&gt;</span> <span class="nb">json_encode</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-            <span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span>
-        <span class="p">))</span>
+        <span class="s1">'time'</span> <span class="o">=&gt;</span> <span class="nb">time</span><span class="p">(),</span>
     <span class="p">),</span>
-    <span class="s1">'success'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$data</span><span class="p">){</span>
-        <span class="c1">// 输出value</span>
-        <span class="k">echo</span> <span class="nv">$data</span><span class="o">-&gt;</span><span class="na">key</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">));</span>
-</code></pre></div>
-
-<h3>处理请求错误</h3>
-
-<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'http://404.php.net'</span><span class="p">,</span> <span class="c1">// 不存在的URL地址</span>
+    <span class="s1">'beforeSent'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$call</span><span class="p">,</span> <span class="nv">$ch</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 在发送前额外设置cURL选项</span>
+        <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="s1">'xx'</span><span class="p">,</span> <span class="s1">'xx'</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="s1">'success'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nv">$call</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 输出第一条的地址,如https://api.github.com/gists/xxxxxxx</span>
+        <span class="k">echo</span> <span class="nv">$data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">;</span>
+    <span class="p">},</span>
     <span class="s1">'error'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$call</span><span class="p">,</span> <span class="nv">$status</span><span class="p">,</span> <span class="nv">$exception</span><span class="p">){</span>
         <span class="c1">// 输出错误的类型,如`curl`,完全错误类型请查看选项</span>
         <span class="k">echo</span> <span class="nv">$status</span><span class="p">;</span>
