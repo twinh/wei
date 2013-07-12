@@ -54,6 +54,9 @@ print_r($validator->getSummaryMessages());
 
 // 输出合并的错误信息
 print_r($validator->getJoinedMessage());
+
+// 输出第一条错误信息
+print_r($validator->getFirstMessage());
 ```
 
 #### 运行结果
@@ -102,8 +105,10 @@ Array
 // 输出合并的错误信息
 '用户名的长度必须大于3
 邮箱格式不正确'
-```
 
+// 输出第一条错误信息
+'用户名的长度必须大于3'
+```
 
 调用方式
 --------
@@ -315,7 +320,7 @@ ruleValid( $event, widget(), $rule, $field, $validator )
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $event      | Widget\Event\Event    | 事件对象
-widget()     | Widget\Widget         | 微件管理器
+$widget     | Widget\Widget         | 微件管理器
 $rule       | string                | 过的规则名称
 $field      | string                | 当前验证的数据项名称
 $validator  | Widget\Validate       | 验证器对象
@@ -359,7 +364,7 @@ ruleInvalid( $event, widget(), $rule, $field, $validator )
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $event      | Widget\Event\Event    | 事件对象
-widget()     | Widget\Widget         | 微件管理器
+$widget     | Widget\Widget         | 微件管理器
 $rule       | string                | 过的规则名称
 $field      | string                | 当前验证的数据项名称
 $validator  | Widget\Validate       | 验证器对象
@@ -405,7 +410,7 @@ fieldValid($event, widget(), $field, $validator)
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $event      | Widget\Event\Event    | 事件对象
-widget()     | Widget\Widget         | 微件管理器
+$widget     | Widget\Widget         | 微件管理器
 $rule       | string                | 过的规则名称
 $validator  | Widget\Validate       | 验证器对象
 
@@ -447,7 +452,7 @@ fieldInvalid ( $event, widget(), $field, $validator )
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $event      | Widget\Event\Event    | 事件对象
-widget()     | Widget\Widget         | 微件管理器
+$widget     | Widget\Widget         | 微件管理器
 $rule       | string                | 过的规则名称
 $validator  | Widget\Validate       | 验证器对象
 
@@ -487,7 +492,7 @@ success ( $event, widget(), $validator )
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $event      | Widget\Event\Event    | 事件对象
-widget()     | Widget\Widget         | 微件管理器
+$widget     | Widget\Widget         | 微件管理器
 $validator  | Widget\Validate       | 验证器对象
 
 #### 代码范例
@@ -522,7 +527,7 @@ failure ( $event, widget(), $validator )
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $event      | Widget\Event\Event    | 事件对象
-widget()     | Widget\Widget         | 微件管理器
+$widget     | Widget\Widget         | 微件管理器
 $validator  | Widget\Validate       | 验证器对象
 
 #### 代码范例
@@ -602,6 +607,9 @@ widget()->validate(array(
 
 #### validate->getJoinedMessage()
 获取合并的验证错误信息
+
+#### validate->getFirstMessage()
+获取第一条验证错误信息
 
 #### validate->getRuleValidator()
 获取规则验证器对象
