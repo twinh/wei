@@ -39,75 +39,55 @@ $validator = widget()->validate(array(
     )
 ));
 
-// 检查是否通过验证
+// 检查是否通过验证,输出'No'
 if ($validator->isValid()) {
     echo 'Yes';
 } else {
     echo 'No';
 }
 
-// 输出详细的错误信息
-print_r($validator->getDetailMessages());
+// 获取详细的错误信息
+$detailMessages = $validator->getDetailMessages();
 
-// 输出简练的错误信息
-print_r($validator->getSummaryMessages());
+// 返回的信息如下
+$detailMessages = array (
+    'username' => array (
+        'minLength' => array (
+            'tooShort' => '用户名的长度必须大于3',
+        ),
+    ),
+    'email' => array (
+        'email' => array (
+            'format' => '邮箱格式不正确',
+        ),
+    ),
+);
 
-// 输出合并的错误信息
-print_r($validator->getJoinedMessage());
 
-// 输出第一条错误信息
-print_r($validator->getFirstMessage());
-```
+// 获取简练的错误信息
+$summaryMessages = $validator->getSummaryMessages();
 
-#### 运行结果
-```php
-// 检查是否通过验证
-'No'
+// 返回的信息如下
+$summaryMessages = array (
+    'username' => array (
+        0 => '用户名的长度必须大于3',
+    ),
+    'email' => array (
+        0 => '邮箱格式不正确',
+    ),
+);
 
-// 输出详细的错误信息
-Array
-(
-    [username] => Array
-        (
-            [minLength] => Array
-                (
-                    [tooShort] => 用户名的长度必须大于3
-                )
+// 获取合并的错误信息
+$joinedMessage = $validator->getJoinedMessage();
 
-        )
+// 返回的信息如下
+$joinedMessage = "用户名的长度必须大于3\n邮箱格式不正确";
 
-    [email] => Array
-        (
-            [email] => Array
-                (
-                    [format] => 邮箱格式不正确
-                )
+// 获取第一条错误信息
+$firstMessage = $validator->getFirstMessage();
 
-        )
-
-)
-
-// 输出简洁的错误信息
-Array
-(
-    [username] => Array
-        (
-            [0] => 用户名的长度必须大于3
-        )
-
-    [email] => Array
-        (
-            [0] => 邮箱格式不正确
-        )
-
-)
-
-// 输出合并的错误信息
-'用户名的长度必须大于3
-邮箱格式不正确'
-
-// 输出第一条错误信息
-'用户名的长度必须大于3'
+// 返回的信息如下
+$firstMessage = '用户名的长度必须大于3';
 ```
 
 调用方式
