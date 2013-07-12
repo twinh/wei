@@ -646,6 +646,19 @@ class Validate extends AbstractWidget
     }
 
     /**
+     * Returns the first error message string
+     *
+     * @return false|string
+     */
+    public function getFirstMessage()
+    {
+        if ($this->isValid()) {
+            return false;
+        }
+        return current(current(current($this->getDetailMessages())));
+    }
+
+    /**
      * Returns the rule validator object
      *
      * @param string $field
