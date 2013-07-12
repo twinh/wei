@@ -73,7 +73,7 @@ class ValidatorTest extends TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testUnexpectedType()
     {
@@ -103,7 +103,7 @@ class ValidatorTest extends TestCase
                 ),
             ),
             'breakRule' => true,
-            'ruleInvalid' => function($event, $widget, $rule, $field, $validator) use(&$breakRule) {
+            'ruleInvalid' => function($rule, $field, $validator) use(&$breakRule) {
                 $breakRule = $rule;
             }
         ));
@@ -121,11 +121,11 @@ class ValidatorTest extends TestCase
             ),
             'rules' => array(
                 'email' => array(
-                    'required' => true, //Aavoid automatic added
+                    'required' => true, // Avoid automatic added
                     'email' => true, // Will not valid
                 ),
             ),
-            'ruleValid' => function($event, $widget, $rule, $field, $validator) use(&$lastRule) {
+            'ruleValid' => function($rule, $field, $validator) use(&$lastRule) {
                 $lastRule = $rule;
 
                 // Return false to break the validation flow
@@ -155,7 +155,7 @@ class ValidatorTest extends TestCase
                     'between' => array(0, 150)
                 ),
             ),
-            'fieldValid' => function($event, $widget, $field, $validator) use(&$lastField) {
+            'fieldValid' => function($field, $validator) use(&$lastField) {
                 $lastField = $field;
 
                 // Return false to break the validation flow
@@ -711,52 +711,6 @@ class ValidatorTest extends TestCase
         $email->setName('email');
 
         $this->assertEquals('email', $email->getName());
-    }
-
-
-    public function testValidatorEvents()
-    {
-        $coll = array();
-        $fn = function($e) use(&$coll) {
-            $coll[] = $e->getType();
-        };
-        $this->event->off('.validator')
-            ->on(array(
-            'ruleValid.validator' => $fn,
-            'ruleInvalid.validator' => $fn,
-            'fieldValid.validator' => $fn,
-            'fieldInvalid.validator' => $fn,
-            'success.validator' => $fn,
-            'failure.validator' => $fn
-        ));
-
-        $validator = $this->validate(array(
-            'data' => array(
-                'email' => 'error-email',
-                'age' => 13
-            ),
-            'rules' => array(
-                'email' => array( // fieldInvalid
-                    'required' => true, // ruleValid
-                    'email' => true,    // ruleInValid
-                ),
-                'age' => array( // fieldValid
-                    'digit' => true // ruleValid
-                )
-            ),
-            'names' => array(
-                'email' => 'Your email'
-            )
-        ));
-
-        $coll = array_unique($coll);
-
-        $this->assertContains('ruleValid', $coll);
-        $this->assertContains('ruleInvalid', $coll);
-        $this->assertContains('fieldValid', $coll);
-        $this->assertContains('fieldInvalid', $coll);
-        $this->assertContains('failure', $coll);
-        $this->assertNotContains('success', $coll);
     }
 
     public function testReset()

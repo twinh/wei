@@ -15,7 +15,6 @@ use Widget\Validator\ValidatorInterface;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Is $is The validator manager, use to validate input quickly, create validator
- * @property    Event $event The event manager
  */
 class Validate extends AbstractWidget
 {
@@ -48,42 +47,42 @@ class Validate extends AbstractWidget
     protected $names = array();
 
     /**
-     * The event triggered when every rule is valid
+     * The callback triggered when every rule is valid
      *
      * @var null|callback
      */
     protected $ruleValid = null;
 
     /**
-     * The event triggered when every rule is invalid
+     * The callback triggered when every rule is invalid
      *
      * @var null|callback
      */
     protected $ruleInvalid = null;
 
     /**
-     * The event triggered when every field is valid
+     * The callback triggered when every field is valid
      *
      * @var null|callback
      */
     protected $fieldValid = null;
 
     /**
-     * The event triggered when every field is invalid
+     * The callback triggered when every field is invalid
      *
      * @var null|callback
      */
     protected $fieldInvalid = null;
 
     /**
-     * The event triggered after all rules are valid
+     * The callback triggered after all rules are valid
      *
      * @var null|callback
      */
     protected $success = null;
 
     /**
-     * The event triggered when the validation is invalid
+     * The callback triggered when the validation is invalid
      *
      * @var null|callback
      */
@@ -227,8 +226,8 @@ class Validate extends AbstractWidget
                 $this->$method($field, $rule);
 
                 // Trigger the ruleValid/ruleInvalid callback
-                $event = $result ? 'ruleValid' : 'ruleInvalid';
-                if ($this->event->trigger($event . '.validator', array($rule, $field, $this), $this)->isDefaultPrevented()) {
+                $callback = $result ? 'ruleValid' : 'ruleInvalid';
+                if ($this->$callback && false === call_user_func($this->$callback, $rule, $field, $this, $this->widget)) {
                     return $this->result;
                 }
 
@@ -246,8 +245,8 @@ class Validate extends AbstractWidget
             }
 
             // Trigger the fieldValid/fieldInvalid callback
-            $event = $this->isFieldValid($field) ? 'fieldValid' : 'fieldInvalid';
-            if ($this->event->trigger($event . '.validator', array($field, $this), $this)->isDefaultPrevented()) {
+            $callback = $this->isFieldValid($field) ? 'fieldValid' : 'fieldInvalid';
+            if ($this->$callback && false === call_user_func($this->$callback, $field, $this, $this->widget)) {
                 return $this->result;
             }
 
@@ -262,8 +261,8 @@ class Validate extends AbstractWidget
         }
 
         // Trigger the success/failure callback
-        $event = $this->result ? 'success' : 'failure';
-        $this->event->trigger($event . '.validator', array($this), $this);
+        $callback = $this->result ? 'success' : 'failure';
+        $this->$callback && call_user_func($this->$callback, $this, $this->widget);
 
         return $this->result;
     }
