@@ -323,16 +323,15 @@ widget()->validate(array(
 **参数**
 
 ```php
-ruleValid( $event, widget(), $rule, $field, $validator )
+ruleValid($rule, $field, $validator, $widget)
 ```
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
-$event      | Widget\Event\Event    | 事件对象
-$widget     | Widget\Widget         | 微件管理器
-$rule       | string                | 过的规则名称
+$rule       | string                | 验证规则的名称
 $field      | string                | 当前验证的数据项名称
 $validator  | Widget\Validate       | 验证器对象
+$widget     | Widget\Widget         | 微件管理器
 
 如果`ruleValid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
@@ -345,7 +344,7 @@ widget()->validate(array(
     'rules' => array(
         'name' => 'required'
     ),
-    'ruleValid' => function($event, widget(), $rule, $field, $validator) {
+    'ruleValid' => function($rule, $field, $validator, $widget) {
         echo $rule;
         echo $field;
         echo 'Yes';
@@ -367,16 +366,15 @@ widget()->validate(array(
 **参数**
 
 ```php
-ruleInvalid( $event, widget(), $rule, $field, $validator )
-``` 
+ruleInvalid($rule, $field, $validator, $widget)
+```
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
-$event      | Widget\Event\Event    | 事件对象
-$widget     | Widget\Widget         | 微件管理器
-$rule       | string                | 过的规则名称
+$rule       | string                | 验证规则的名称
 $field      | string                | 当前验证的数据项名称
 $validator  | Widget\Validate       | 验证器对象
+$widget     | Widget\Widget         | 微件管理器
 
 `ruleInvalid`与`ruleValid`的行为一致.
 同样的,如果`ruleInvalid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
@@ -391,7 +389,7 @@ widget()->validate(array(
     'rules' => array(
         'name' => 'required'
     ),
-    'ruleInvalid' => function($event, widget(), $rule, $field, $validator) {
+    'ruleInvalid' => function($rule, $field, $validator, $widget) {
         echo $rule;
         echo $field;
         echo 'No';
@@ -413,15 +411,14 @@ widget()->validate(array(
 **参数**
 
 ```php
-fieldValid($event, widget(), $field, $validator)
+fieldValid($field, $validator, $widget)
 ```
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
-$event      | Widget\Event\Event    | 事件对象
-$widget     | Widget\Widget         | 微件管理器
-$rule       | string                | 过的规则名称
+$rule       | string                | 验证规则的名称
 $validator  | Widget\Validate       | 验证器对象
+$widget     | Widget\Widget         | 微件管理器
 
 如果`fieldValid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
@@ -435,7 +432,7 @@ widget()->validate(array(
     'rules' => array(
         'name' => 'required'
     ),
-    'fieldValid' => function($event, widget(), $field, $validator) {
+    'fieldValid' => function($field, $validator, $widget) {
         echo $field;
         echo 'Yes';
     }
@@ -455,15 +452,14 @@ widget()->validate(array(
 **参数**
 
 ```php
-fieldInvalid ( $event, widget(), $field, $validator )
+fieldInvalid($field, $validator, $widget)
 ```
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
-$event      | Widget\Event\Event    | 事件对象
-$widget     | Widget\Widget         | 微件管理器
-$rule       | string                | 过的规则名称
+$rule       | string                | 验证规则的名称
 $validator  | Widget\Validate       | 验证器对象
+$widget     | Widget\Widget         | 微件管理器
 
 如果`fieldInvalid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
@@ -477,7 +473,7 @@ widget()->validate(array(
     'rules' => array(
         'name' => 'required'
     ),
-    'fieldValid' => function($event, widget(), $field, $validator) {
+    'fieldValid' => function($field, $validator, $widget) {
         echo $field;
         echo 'No';
     }
@@ -495,14 +491,13 @@ widget()->validate(array(
 验证结束时,如果最终验证结果为通过,验证器就触发`success`事件.
 
 ```php
-success ( $event, widget(), $validator )
+success($validator, $widget)
 ```
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
-$event      | Widget\Event\Event    | 事件对象
-$widget     | Widget\Widget         | 微件管理器
 $validator  | Widget\Validate       | 验证器对象
+$widget     | Widget\Widget         | 微件管理器
 
 #### 代码范例
 
@@ -514,7 +509,7 @@ widget()->validate(array(
     'rules' => array(
         'name' => 'required'
     ),
-    'success' => function($event, widget(), $validator) {
+    'success' => function($validator, $widget) {
         echo 'Yes';
     }
 ));
@@ -535,9 +530,8 @@ failure ( $event, widget(), $validator )
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
-$event      | Widget\Event\Event    | 事件对象
-$widget     | Widget\Widget         | 微件管理器
 $validator  | Widget\Validate       | 验证器对象
+$widget     | Widget\Widget         | 微件管理器
 
 #### 代码范例
 
@@ -549,7 +543,7 @@ widget()->validate(array(
     'rules' => array(
         'name' => 'required'
     ),
-    'failure' => function($event, widget(), $validator) {
+    'failure' => function($validator, $widget) {
         echo 'No';
     }
 ));
