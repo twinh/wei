@@ -163,8 +163,8 @@ API参考目录
 * [entityManager](api/entityManager.md) - 获取[Doctrine ORM](https://github.com/doctrine/doctrine2)的EntityManager对象
 
 ##### 视图
-* [smarty](api/smarty.md) - 渲染smarty模板
-* [twig](api/twig.md) - 渲染Twig模板
+* [smarty](api/smarty.md) - 渲染Smarty模板或获取原始Smarty对象
+* [twig](api/twig.md) - 渲染Twig模板或获取原始Twig_Environment对象
 
 ##### 其他
 * [monolog](api/monolog.md) - 获取[Monolog](https://github.com/Seldaek/monolog)对象或记录一条日志

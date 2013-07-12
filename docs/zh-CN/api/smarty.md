@@ -1,7 +1,7 @@
 Smarty
 ======
 
-渲染Smarty模板或获取Smarty对象
+渲染Smarty模板或获取原始Smarty对象
 
 案例
 ----
@@ -57,7 +57,7 @@ array(
 渲染指定名称的模板
 
 #### smarty()
-获取Smarty对象
+获取原始Smarty对象
 
 #### smarty->render($name, $vars = array())
 渲染指定名称的模板,同`smarty($name, $vars = array())`
