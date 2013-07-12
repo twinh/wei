@@ -6,28 +6,27 @@ Call
 案例
 ----
 
-### 向接口`http://jsfiddle.net/echo/json/`发送POST请求并输出返回的json数据
+### 一个完整的例子:获取公开的gists列表
 ```php
 widget()->call(array(
-    'url' => 'http://jsfiddle.net/echo/json/',
-    'method' => 'POST',
+    // 设置请求的URL地址
+    'url' => 'https://api.github.com/gists/public',
+    // 默认请求方式为GET,可以设置为POST,PUT等
+    'method' => 'GET',
+    // 自动解析返回数据为JSON对象
     'dataType' => 'json',
+    // 设置发送的参数
     'data' => array(
-        'json' => json_encode(array(
-            'key' => 'value'
-        ))
+        'time' => time(),
     ),
-    'success' => function($data){
-        // 输出value
-        echo $data->key;
-    }
-));
-```
-
-### 处理请求错误
-```php
-widget()->call(array(
-    'url' => 'http://404.php.net', // 不存在的URL地址
+    'beforeSent' => function($call, $ch) {
+        // 在发送前额外设置cURL选项
+        curl_setopt($ch, 'xx', 'xx');
+    },
+    'success' => function($data, $call) {
+        // 输出第一条的地址,如https://api.github.com/gists/xxxxxxx
+        echo $data[0]->url;
+    },
     'error' => function($call, $status, $exception){
         // 输出错误的类型,如`curl`,完全错误类型请查看选项
         echo $status;
