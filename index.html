@@ -4339,75 +4339,55 @@ widget()-&gt;arrayCache('name');
     <span class="p">)</span>
 <span class="p">));</span>
 
-<span class="c1">// 检查是否通过验证</span>
+<span class="c1">// 检查是否通过验证,输出'No'</span>
 <span class="k">if</span> <span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">isValid</span><span class="p">())</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="c1">// 输出详细的错误信息</span>
-<span class="nb">print_r</span><span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getDetailMessages</span><span class="p">());</span>
+<span class="c1">// 获取详细的错误信息</span>
+<span class="nv">$detailMessages</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getDetailMessages</span><span class="p">();</span>
 
-<span class="c1">// 输出简练的错误信息</span>
-<span class="nb">print_r</span><span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getSummaryMessages</span><span class="p">());</span>
+<span class="c1">// 返回的信息如下</span>
+<span class="nv">$detailMessages</span> <span class="o">=</span> <span class="k">array</span> <span class="p">(</span>
+    <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="k">array</span> <span class="p">(</span>
+        <span class="s1">'minLength'</span> <span class="o">=&gt;</span> <span class="k">array</span> <span class="p">(</span>
+            <span class="s1">'tooShort'</span> <span class="o">=&gt;</span> <span class="s1">'用户名的长度必须大于3'</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">),</span>
+    <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="k">array</span> <span class="p">(</span>
+        <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="k">array</span> <span class="p">(</span>
+            <span class="s1">'format'</span> <span class="o">=&gt;</span> <span class="s1">'邮箱格式不正确'</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">),</span>
+<span class="p">);</span>
 
-<span class="c1">// 输出合并的错误信息</span>
-<span class="nb">print_r</span><span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getJoinedMessage</span><span class="p">());</span>
 
-<span class="c1">// 输出第一条错误信息</span>
-<span class="nb">print_r</span><span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getFirstMessage</span><span class="p">());</span>
-</code></pre></div>
+<span class="c1">// 获取简练的错误信息</span>
+<span class="nv">$summaryMessages</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getSummaryMessages</span><span class="p">();</span>
 
-<h4>运行结果</h4>
+<span class="c1">// 返回的信息如下</span>
+<span class="nv">$summaryMessages</span> <span class="o">=</span> <span class="k">array</span> <span class="p">(</span>
+    <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="k">array</span> <span class="p">(</span>
+        <span class="mi">0</span> <span class="o">=&gt;</span> <span class="s1">'用户名的长度必须大于3'</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="k">array</span> <span class="p">(</span>
+        <span class="mi">0</span> <span class="o">=&gt;</span> <span class="s1">'邮箱格式不正确'</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">);</span>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 检查是否通过验证</span>
-<span class="s1">'No'</span>
+<span class="c1">// 获取合并的错误信息</span>
+<span class="nv">$joinedMessage</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getJoinedMessage</span><span class="p">();</span>
 
-<span class="c1">// 输出详细的错误信息</span>
-<span class="k">Array</span>
-<span class="p">(</span>
-    <span class="p">[</span><span class="nx">username</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
-        <span class="p">(</span>
-            <span class="p">[</span><span class="nx">minLength</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
-                <span class="p">(</span>
-                    <span class="p">[</span><span class="nx">tooShort</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="err">用户名的长度必须大于</span><span class="mi">3</span>
-                <span class="p">)</span>
+<span class="c1">// 返回的信息如下</span>
+<span class="nv">$joinedMessage</span> <span class="o">=</span> <span class="s2">"用户名的长度必须大于3</span><span class="se">\n</span><span class="s2">邮箱格式不正确"</span><span class="p">;</span>
 
-        <span class="p">)</span>
+<span class="c1">// 获取第一条错误信息</span>
+<span class="nv">$firstMessage</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getFirstMessage</span><span class="p">();</span>
 
-    <span class="p">[</span><span class="nx">email</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
-        <span class="p">(</span>
-            <span class="p">[</span><span class="nx">email</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
-                <span class="p">(</span>
-                    <span class="p">[</span><span class="nx">format</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="err">邮箱格式不正确</span>
-                <span class="p">)</span>
-
-        <span class="p">)</span>
-
-<span class="p">)</span>
-
-<span class="c1">// 输出简洁的错误信息</span>
-<span class="k">Array</span>
-<span class="p">(</span>
-    <span class="p">[</span><span class="nx">username</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
-        <span class="p">(</span>
-            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="err">用户名的长度必须大于</span><span class="mi">3</span>
-        <span class="p">)</span>
-
-    <span class="p">[</span><span class="nx">email</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
-        <span class="p">(</span>
-            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="err">邮箱格式不正确</span>
-        <span class="p">)</span>
-
-<span class="p">)</span>
-
-<span class="c1">// 输出合并的错误信息</span>
-<span class="s1">'用户名的长度必须大于3</span>
-<span class="s1">邮箱格式不正确'</span>
-
-<span class="c1">// 输出第一条错误信息</span>
-<span class="s1">'用户名的长度必须大于3'</span>
+<span class="c1">// 返回的信息如下</span>
+<span class="nv">$firstMessage</span> <span class="o">=</span> <span class="s1">'用户名的长度必须大于3'</span><span class="p">;</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
