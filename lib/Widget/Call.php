@@ -79,7 +79,7 @@ class Call extends AbstractWidget
     /**
      * The data type to parse the response body
      *
-     * The data type could by `json`, `xml`, `query`(URL query string),
+     * The data type could by `json`, `jsonObject`, `xml`, `query`(URL query string),
      * `serialize` and `text`
      *
      * @var string
@@ -387,6 +387,13 @@ class Call extends AbstractWidget
     {
         switch ($type) {
             case 'json' :
+                $data = json_decode($data, true);
+                if (null === $data && json_last_error() != JSON_ERROR_NONE) {
+                    $exception = new \ErrorException('Parser error', json_last_error());
+                }
+                break;
+
+            case 'jsonObject' :
                 $data = json_decode($data);
                 if (null === $data && json_last_error() != JSON_ERROR_NONE) {
                     $exception = new \ErrorException('Parser error', json_last_error());
@@ -509,8 +516,7 @@ class Call extends AbstractWidget
     }
 
     /**
-     * Returns the cURL session
-     *
+     * Execute a GET method request and parser response data to JSON array
      *
      * @param string $url
      * @param array $data
@@ -520,6 +526,19 @@ class Call extends AbstractWidget
     public function getJson($url, $data, $callback = null)
     {
         return $this->processMethod($url, $data, $callback, 'json', 'GET');
+    }
+
+    /**
+     * Execute a GET method request and parser response data to JSON object
+     *
+     * @param string $url
+     * @param array $data
+     * @param callback $callback
+     * @return Call
+     */
+    public function getJsonObject($url, $data, $callback = null)
+    {
+        return $this->processMethod($url, $data, $callback, 'jsonObject', 'GET');
     }
 
     /**

@@ -156,8 +156,8 @@ class CallTest extends TestCase
                 // header set by php script
                 $test->assertEquals('value', $call->getResponseHeader('customHeader'));
 
-                $test->assertEquals('Value', $data->KEY);
-                $test->assertEquals('Value with space', $data->KEY_NAME);
+                $test->assertEquals('Value', $data['KEY']);
+                $test->assertEquals('Value with space', $data['KEY_NAME']);
             }
         ));
     }
@@ -236,7 +236,7 @@ class CallTest extends TestCase
         $test = $this;
         $this->call(array(
             'url' => $this->url . '?type=json',
-            'dataType' => 'json',
+            'dataType' => 'jsonObject',
             'success' => function($data) use($test) {
                 $test->triggeredEvents[] = 'success';
                 $test->assertEquals(0, $data->code);
@@ -246,13 +246,24 @@ class CallTest extends TestCase
         $this->assertCalledEvents(array('success'));
     }
 
+    public function testGetJsonObject()
+    {
+        $test = $this;
+        $this->call->getJsonObject($this->url . '?type=json', function($data) use($test) {
+            $test->triggeredEvents[] = 'success';
+            $test->assertEquals(0, $data->code);
+            $test->assertEquals('success', $data->message);
+        });
+        $this->assertCalledEvents(array('success'));
+    }
+
     public function testGetJson()
     {
         $test = $this;
         $this->call->getJson($this->url . '?type=json', function($data) use($test) {
             $test->triggeredEvents[] = 'success';
-            $test->assertEquals(0, $data->code);
-            $test->assertEquals('success', $data->message);
+            $test->assertEquals(0, $data['code']);
+            $test->assertEquals('success', $data['message']);
         });
         $this->assertCalledEvents(array('success'));
     }
@@ -356,7 +367,7 @@ class CallTest extends TestCase
         $test = $this;
         $this->call(array(
             'url' => $this->url . '?test=cookie',
-            'dataType' => 'json',
+            'dataType' => 'jsonObject',
             'cookies' => array(
                 'key' => 'value',
                 'bool' => true,
@@ -391,7 +402,7 @@ class CallTest extends TestCase
             $test->assertEquals('1', $data->post);
             $test->assertEquals('1', $data->array->{0});
             $test->assertEquals('value', $data->array->string);
-        }, 'json');
+        }, 'jsonObject');
 
         $this->assertCalledEvents(array('success'));
     }
@@ -405,7 +416,7 @@ class CallTest extends TestCase
         $this->call(array(
             'url' => $this->url . '?test=methods',
             'method' => $method,
-            'dataType' => 'json',
+            'dataType' => 'jsonObject',
             'data' => array(
                 'k' => 'v'
             ),
@@ -427,7 +438,7 @@ class CallTest extends TestCase
         $this->call(array(
             'url' => $this->url . '?test=get',
             'method' => $method,
-            'dataType' => 'json',
+            'dataType' => 'jsonObject',
             'data' => array(
                 'k' => 'v'
             ),
@@ -471,7 +482,7 @@ class CallTest extends TestCase
         $this->call->{strtolower($method)}($this->url . '?test=methods', function($data) use($test, $method) {
             $test->triggeredEvents[] = 'success';
             $test->assertEquals($method, $data->method);
-        }, 'json');
+        }, 'jsonObject');
         $this->assertCalledEvents(array('success'));
     }
 
@@ -491,7 +502,7 @@ class CallTest extends TestCase
         $test = $this;
         $this->call(array(
             'url' => $this->url . '?wait=0.1',
-            'dataType' => 'json',
+            'dataType' => 'jsonObject',
             'timeout' => 50,
             'error' => function($call, $textStatus) use($test) {
                 $test->triggeredEvents[] = 'error';
@@ -509,7 +520,7 @@ class CallTest extends TestCase
         $this->call(array(
             'url' => $this->url . '?test=methods',
             'global' => true,
-            'dataType' => 'json',
+            'dataType' => 'jsonObject',
             'data' => array(
                 'k' => 'v'
             ),
@@ -523,7 +534,7 @@ class CallTest extends TestCase
         $this->triggeredEvents = array();
         $this->call(array(
             'url' => $this->url . '?test=methods',
-            'dataType' => 'json',
+            'dataType' => 'jsonObject',
             'global' => false,
             'success' => function($data) use($test) {
                 $test->triggeredEvents[] = 'success';
@@ -539,7 +550,7 @@ class CallTest extends TestCase
         $this->call(array(
             'url' => $this->url . '?test=get',
             'data' => 'key=value&number=10',
-            'dataType' => 'json',
+            'dataType' => 'jsonObject',
             'success' => function($data) use($test) {
                 $test->triggeredEvents[] = 'success';
                 $test->assertEquals('value', $data->key);
