@@ -23,6 +23,7 @@ class DecimalTest extends TestCase
     public function providerForDecimal()
     {
         return array(
+            array(0.0),
             array('0.123'),
             array('1.0'),
             array(1.0),
@@ -39,6 +40,8 @@ class DecimalTest extends TestCase
     public function providerForNotDecimal()
     {
         return array(
+            array('0'),
+            array(0),
             array('1 23456'),
             array('a bcdefg'),
             array('0.0.1'),

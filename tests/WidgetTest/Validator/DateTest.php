@@ -29,10 +29,13 @@ class DateTest extends TestCase
             array('2012-02-29'),
         );
     }
-    
+
     public function providerForNotDate()
     {
         return array(
+            array('0'),
+            array(0),
+            array(0.0),
             array('2013-02-29'),
             array('2013-01-32'),
             array('2013-00-00'),

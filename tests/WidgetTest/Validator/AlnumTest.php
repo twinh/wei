@@ -23,6 +23,9 @@ class AlnumTest extends TestCase
     public function providerForAlnum()
     {
         return array(
+            array('0'),
+            array(0),
+            array(0.0),
             array('abcedfg'),
             array('a2BcD3eFg4'),
             array('045fewwefds'),

@@ -31,6 +31,9 @@ class AlphaTest extends TestCase
     public function providerForNotAlpha()
     {
         return array(
+            array('0'),
+            array(0),
+            array(0.0),
             array('abcdefg1'),
             array('a bcdefg'),
             array('123'),

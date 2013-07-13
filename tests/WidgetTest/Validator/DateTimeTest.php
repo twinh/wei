@@ -29,28 +29,31 @@ class DateTimeTest extends TestCase
             array('2013-02-29 24:00:00'), // => 2013-03-02 00:00:00
         );
     }
-    
+
     public function providerForNotDateTime()
     {
         return array(
+            array('0'),
+            array(0),
+            array(0.0),
             array('2013-02-29 24:00:00', 'Y-m-d H:i:s'),
             array('2013-01-32 23:60:00'),
             array('2013-00-00 23:59:61'),
             array('2012 61:00')
         );
     }
-    
+
     public function testBeforeAndAfter()
     {
         $this->assertTrue($this->is('date', '2013-02-19', array(
             'before' => '2013-03-01',
             'after' => '2013-01-01',
         )));
-        
+
         $this->assertFalse($this->is('date', '2013-02-19', array(
             'before' => '2013-01-01'
         )));
-        
+
         $this->assertFalse($this->is('date', '2013-02-19', array(
             'after' => '2013-03-01'
         )));
