@@ -23,6 +23,9 @@ class DigitTest extends TestCase
     public function providerForDigit()
     {
         return array(
+            array('0'),
+            array(0),
+            array(0.0),
             array('123456'),
             array('0123456'),
         );
