@@ -37,7 +37,7 @@ class BlankTest extends TestCase
         return array(
             array(' abc '),
             array('a b'),
-            array('　'), // Chinse fullwith space
+            array('　'), // ﻿Unicode full width space
         );
     }
 }
