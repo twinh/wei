@@ -16,7 +16,7 @@ def syntax_highlighter(html, lexer = 'php')
 
   doc.search('pre').each do |pre|
     code = Pygments.highlight(pre.text.rstrip, :lexer => lexer, :options => {:startinline => true})
-    code = code.gsub('<pre>', '<pre><code class="' + lexer + '">').gsub('</pre>', '</code></pre>')
+    code = code.to_s.gsub('<pre>', '<pre><code class="' + lexer + '">').gsub('</pre>', '</code></pre>')
     pre.replace code
   end
   doc.to_s

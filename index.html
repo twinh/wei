@@ -3936,7 +3936,7 @@ widget()-&gt;arrayCache('name');
     <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'https://api.github.com/gists/public'</span><span class="p">,</span>
     <span class="c1">// 默认请求方式为GET,可以设置为POST,PUT等</span>
     <span class="s1">'method'</span> <span class="o">=&gt;</span> <span class="s1">'GET'</span><span class="p">,</span>
-    <span class="c1">// 自动解析返回数据为JSON对象</span>
+    <span class="c1">// 自动解析返回数据为JSON数组</span>
     <span class="s1">'dataType'</span> <span class="o">=&gt;</span> <span class="s1">'json'</span><span class="p">,</span>
     <span class="c1">// 设置发送的参数</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -4033,7 +4033,8 @@ widget()-&gt;arrayCache('name');
 <td>dataType</td>
 <td>string</td>
 <td>text</td>
-<td>请求完成后,要对返回数据解析的类型</td>
+<td>请求完成后,要对返回数据解析的类型,可以是<code>json</code>,<code>jsonObject</code>,<code>xml</code>,<code>query</code>,<code>serialize</code>和<code>text</code>
+</td>
 </tr>
 <tr>
 <td>referer</td>
@@ -4123,6 +4124,10 @@ widget()-&gt;arrayCache('name');
 <tbody>
 <tr>
 <td>json</td>
+<td>array</td>
+</tr>
+<tr>
+<td>jsonObject</td>
 <td>stdClass</td>
 </tr>
 <tr>
