@@ -13,7 +13,7 @@ widget()->call(array(
     'url' => 'https://api.github.com/gists/public',
     // 默认请求方式为GET,可以设置为POST,PUT等
     'method' => 'GET',
-    // 自动解析返回数据为JSON对象
+    // 自动解析返回数据为JSON数组
     'dataType' => 'json',
     // 设置发送的参数
     'data' => array(
@@ -61,7 +61,7 @@ gloabl      | bool         | true    | 是否使用全局配置选项
 headers     | array        | array   | 要发送的HTTP头
 ip          | string       | 无      | 要请求的URL地址中域名的IP地址,注意不是您的服务器IP地址
 timeout     | int          | 0       | 整个请求的最大运行时间,单位是毫秒,默认是无限制
-dataType    | string       | text    | 请求完成后,要对返回数据解析的类型
+dataType    | string       | text    | 请求完成后,要对返回数据解析的类型,可以是`json`,`jsonObject`,`xml`,`query`,`serialize`和`text`
 referer     | string       | 无      | 请求HTTP头中的referer值
 userAgent   | string       | 无      | 请求HTTP头中的userAgent值
 beforeSend  | callback     | 无      | 在发送请求前触发的回调,可通过该回调更改任意配置
@@ -86,13 +86,14 @@ $call       | \Widget\Call | 当前的Call对象
 
 ##### `dataType`的值与$data返回的类型
 
-dataType  | 返回数据类型
-----------|--------------
-json      | stdClass
-xml       | SimpleXMLElement
-query     | array
-serialize | 任意PHP合法类型
-text      | string
+dataType   | 返回数据类型
+-----------|--------------
+json       | array
+jsonObject | stdClass
+xml        | SimpleXMLElement
+query      | array
+serialize  | 任意PHP合法类型
+text       | string
 
 #### error($call, $textStatus, $exception)
 
