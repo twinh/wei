@@ -7,6 +7,7 @@ Call
 ----
 
 ### 一个完整的例子:获取公开的gists列表
+
 ```php
 widget()->call(array(
     // 设置请求的URL地址
@@ -64,6 +65,7 @@ widget()->call(array(
         // do something
     }
 ));
+```
 
 ### 通过HTTP方法发送请求
 

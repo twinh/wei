@@ -198,6 +198,7 @@ class Call extends AbstractWidget
     protected $curlOpts = array(
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_HEADER => true,
+        CURLOPT_FOLLOWLOCATION => true,
     );
 
     /**
