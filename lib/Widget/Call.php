@@ -648,7 +648,7 @@ class Call extends AbstractWidget
      * Set callback for success event
      *
      * @param \Closure $fn
-     * @return \Widget\Call
+     * @return Call
      */
     public function success(\Closure $fn)
     {
@@ -660,7 +660,7 @@ class Call extends AbstractWidget
      * Set callback for error event
      *
      * @param \Closure $fn
-     * @return \Widget\Call
+     * @return Call
      */
     public function error(\Closure $fn)
     {
@@ -672,7 +672,7 @@ class Call extends AbstractWidget
      * Set callback for complete event
      *
      * @param \Closure $fn
-     * @return \Widget\Call
+     * @return Call
      */
     public function complete(\Closure $fn)
     {
