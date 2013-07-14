@@ -37,7 +37,36 @@ widget()->call(array(
 ));
 ```
 
+### 指定请求域名的IP地址:通过指向不同的IP地址,访问不同的环境
+
+```php
+widget()->call(array(
+    'url' => 'http://google.com',
+    'ip' => '74.125.128.105', // 线上运营环境
+    //'ip' => '127.0.0.1', // 本地开发环境
+    'success' => function($data){
+        // do something
+    }
+));
+```
+
+### 通过切换IP地址实现负载均衡
+
+```php
+widget()->call(array(
+    'url' => 'http://google.com',
+    // 随机使用其中一个IP地址
+    'ip' => array_rand(array(
+        '74.125.128.147',
+        '74.125.128.105'
+    )),
+    'success' => function($data){
+        // do something
+    }
+));
+
 ### 通过HTTP方法发送请求
+
 ```php
 // 此处的`get`还可以是`post`, `delete`, `put`或`patch`,表示通过相应的HTTP方法发送请求
 widget()->get('http://example.com', function($data, $call){
