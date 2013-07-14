@@ -3985,11 +3985,11 @@ widget()-&gt;arrayCache('name');
         <span class="c1">// do something</span>
     <span class="p">}</span>
 <span class="p">));</span>
+</code></pre></div>
 
-<span class="c1">### 通过HTTP方法发送请求</span>
+<h3>通过HTTP方法发送请求</h3>
 
-<span class="sb">```php</span>
-<span class="sb">// 此处的`</span><span class="nx">get</span><span class="sb">`还可以是`</span><span class="nx">post</span><span class="sb">`, `</span><span class="nx">delete</span><span class="sb">`, `</span><span class="nx">put</span><span class="sb">`或`</span><span class="nx">patch</span><span class="err">`</span><span class="p">,</span><span class="err">表示通过相应的</span><span class="nx">HTTP</span><span class="err">方法发送请求</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 此处的`get`还可以是`post`, `delete`, `put`或`patch`,表示通过相应的HTTP方法发送请求</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'http://example.com'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nv">$call</span><span class="p">){</span>
     <span class="c1">// 成功时打印出服务器返回的结果</span>
     <span class="nb">print_r</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
