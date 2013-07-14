@@ -350,13 +350,29 @@ class CallTest extends TestCase
 
     public function testReferer()
     {
+        $referer = 'http://google.com';
         $test = $this;
         $this->call(array(
             'url' => $this->url . '?test=referer',
-            'referer' => 'Sent from my iPhone',
-            'success' => function($data) use($test) {
+            'referer' => $referer,
+            'success' => function($data) use($test, $referer) {
                 $test->triggeredEvents[] = 'success';
-                $test->assertEquals('Sent from my iPhone', $data);
+                $test->assertEquals($referer, $data);
+            }
+        ));
+        $this->assertCalledEvents(array('success'));
+    }
+
+    public function testAutoReferer()
+    {
+        $url = $this->url . '?test=referer';
+        $test = $this;
+        $this->call(array(
+            'url' => $url,
+            'referer' => true, // Equals to current request URL
+            'success' => function($data) use($test, $url) {
+                $test->triggeredEvents[] = 'success';
+                $test->assertEquals($url, $data);
             }
         ));
         $this->assertCalledEvents(array('success'));

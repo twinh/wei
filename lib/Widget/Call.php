@@ -310,7 +310,12 @@ class Call extends AbstractWidget
         }
 
         if ($this->referer) {
-            $opts[CURLOPT_REFERER] = $this->referer;
+            // Automatic use current request URL as referer URL
+            if (true === $this->referer) {
+                $opts[CURLOPT_REFERER] = $this->url;
+            } else {
+                $opts[CURLOPT_REFERER] = $this->referer;
+            }
         }
 
         if ($this->userAgent) {
