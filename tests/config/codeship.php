@@ -3,7 +3,7 @@
 return array(
     'widget' => array(
         'inis' => array(
-            'date.timezone' => '',
+            'date.timezone' => 'UTC',
         )
     ),
     'mysql.db' => array(
