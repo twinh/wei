@@ -67,6 +67,22 @@ widget()->call(array(
 ));
 ```
 
+### 自动设置请求地址为referer地址
+
+```php
+widget()->call(array(
+    'url' => 'http://google.com',
+    'referer' => true
+));
+
+// referer等于true时,相当于`url`的值
+
+widget()->call(array(
+    'url' => 'http://google.com',
+    'referer' => 'http://google.com',
+));
+```
+
 ### 通过HTTP方法发送请求
 
 ```php
