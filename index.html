@@ -4574,18 +4574,17 @@ widget()-&gt;arrayCache('name');
 
 <h4>rules</h4>
 
-<p>验证规则数组.键名是验证的数据项名称,值是验证规则.验证规则可以字符串,表示一项验证规则,也可以是数组
-,表示多项验证规则.</p>
+<p>验证规则数组.</p>
 
-<p><strong>注意:</strong> 验证规则数组有一点与<code>jQuery Validation</code>不同,默认情况下,<code>jQuery Validation</code>的所有
-数据项都是 <strong>可选</strong> 的,但是Widget验证器的所有数据项都是 <strong>必选</strong> 的.如果某一个数据项是选填的,只需增
-加<code>required =&gt; false</code>的验证规则</p>
+<p>规则可以字符串,表示一项验证规则,也可以是数组,表示多项验证规则.</p>
 
-<p>在验证过程中,验证器会根据验证规则的名称,检查对应的规则验证器是否存在,如<code>email</code>规则将被转换为
-<code>\Widget\Validator\Email</code>类,如果类不存在,将抛出异常提醒开发人员规则不存在.
-如果类存在,将初始化该类.然后,验证器组织验证规则提供的参数,供规则验证器验证.</p>
+<p><strong>注意:</strong> </p>
 
-<h4>代码范例</h4>
+<ol>
+<li>所有数据项都是 <strong>必选</strong> 的,如果某一个数据项是选填的,只需增加 <strong><code>required =&gt; false</code></strong> 的验证规则</li>
+<li>验证规则会被转换成对应的类.如<code>email</code>规则将被转换为<code>\Widget\Validator\Email</code>类,如果类不存在,将抛出异常提醒开发人员规则不存在.</li>
+<li>验证规则都是 <strong>不</strong> 以<code>is</code>开头的,<code>email</code>,<code>digit</code>是正确的规则名称,<code>isEmail</code>,<code>isDigit</code>是错误的规则名称</li>
+</ol><h4>代码范例</h4>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
