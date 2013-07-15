@@ -1,6 +1,11 @@
 <?php
 
 return array(
+    'widget' => array(
+        'inis' => array(
+            'date.timezone' => '',
+        )
+    ),
     'mysql.db' => array(
         'user'      => getenv('MYSQL_USER'),
         'password'  => getenv('MYSQL_PASSWORD'),

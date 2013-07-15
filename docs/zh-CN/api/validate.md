@@ -318,7 +318,7 @@ widget()->validate(array(
 ```
 
 #### ruleValid
-当任意一条规则验证通过时,验证器就会触发`ruleValid`事件.
+当任意一条规则验证通过时,验证器就会触发`ruleValid`回调.
 
 **参数**
 
@@ -333,7 +333,7 @@ $field      | string                | 当前验证的数据项名称
 $validator  | Widget\Validate       | 验证器对象
 $widget     | Widget\Widget         | 微件管理器
 
-如果`ruleValid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
+如果`ruleValid`回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
 #### 代码范例
 ```php
@@ -361,7 +361,7 @@ widget()->validate(array(
 ```
 
 #### ruleInvalid
-当任意一条规则验证 **不** 通过时,验证器就会触发`ruleInvalid`事件.
+当任意一条规则验证 **不** 通过时,验证器就会触发`ruleInvalid`回调.
 
 **参数**
 
@@ -377,7 +377,7 @@ $validator  | Widget\Validate       | 验证器对象
 $widget     | Widget\Widget         | 微件管理器
 
 `ruleInvalid`与`ruleValid`的行为一致.
-同样的,如果`ruleInvalid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
+同样的,如果`ruleInvalid`回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
 #### 代码范例
 
@@ -406,7 +406,7 @@ widget()->validate(array(
 ```
 
 #### fieldValid
-当任意数据项验证通过时,验证器就会触发`fieldValid`事件.
+当任意数据项验证通过时,验证器就会触发`fieldValid`回调.
 
 **参数**
 
@@ -420,7 +420,7 @@ $rule       | string                | 验证规则的名称
 $validator  | Widget\Validate       | 验证器对象
 $widget     | Widget\Widget         | 微件管理器
 
-如果`fieldValid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
+如果`fieldValid`回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
 #### 代码范例
 
@@ -447,7 +447,7 @@ widget()->validate(array(
 ```
 
 ##### fieldInvalid
-当任意数据项验证 **不** 通过时,验证器就会触发`fieldInvalid`事件.
+当任意数据项验证 **不** 通过时,验证器就会触发`fieldInvalid`回调.
 
 **参数**
 
@@ -461,7 +461,7 @@ $rule       | string                | 验证规则的名称
 $validator  | Widget\Validate       | 验证器对象
 $widget     | Widget\Widget         | 微件管理器
 
-如果`fieldInvalid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
+如果`fieldInvalid`回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
 #### 代码范例
 
@@ -488,7 +488,7 @@ widget()->validate(array(
 ```
 
 #### success
-验证结束时,如果最终验证结果为通过,验证器就触发`success`事件.
+验证结束时,如果最终验证结果为通过,验证器就触发`success`回调.
 
 ```php
 success($validator, $widget)
@@ -522,7 +522,7 @@ widget()->validate(array(
 ```
 
 #### failure
-验证结束时,如果最终验证结果为 **不** 通过,验证器就触发`failure`事件.
+验证结束时,如果最终验证结果为 **不** 通过,验证器就触发`failure`回调.
 
 ```php
 failure ( $event, widget(), $validator )
