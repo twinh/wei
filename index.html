@@ -3987,6 +3987,21 @@ widget()-&gt;arrayCache('name');
 <span class="p">));</span>
 </code></pre></div>
 
+<h3>自动设置请求地址为referer地址</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'http://google.com'</span><span class="p">,</span>
+    <span class="s1">'referer'</span> <span class="o">=&gt;</span> <span class="k">true</span>
+<span class="p">));</span>
+
+<span class="c1">// referer等于true时,相当于`url`的值</span>
+
+<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'http://google.com'</span><span class="p">,</span>
+    <span class="s1">'referer'</span> <span class="o">=&gt;</span> <span class="s1">'http://google.com'</span><span class="p">,</span>
+<span class="p">));</span>
+</code></pre></div>
+
 <h3>通过HTTP方法发送请求</h3>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 此处的`get`还可以是`post`, `delete`, `put`或`patch`,表示通过相应的HTTP方法发送请求</span>
