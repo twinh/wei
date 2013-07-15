@@ -567,7 +567,16 @@ widget()->validate(array(
 ### 方法
 
 #### validate($options)
+
 检查数组或对象中每一个元素是否能通过指定规则的验证
+
+返回: `Validate` 新的验证器对象
+
+参数
+
+名称        | 类型         | 说明
+------------|--------------|------
+$options    | array        | 验证器的选项,完整内容请查看"调用方式"-"选项"章节
 
 #### validate->addRule($field, $rule, $parameters)
 为数据项增加新的验证规则
