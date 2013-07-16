@@ -5110,15 +5110,86 @@ widget()-&gt;arrayCache('name');
 
 <p>为数据项增加新的验证规则</p>
 
-<h4>validate-&gt;hasRule($field, $rule)</h4>
+<p>返回: <code>Validate</code> 验证器对象</p>
+
+<p>参数</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$field</td>
+<td>string</td>
+<td>数据项的名称</td>
+</tr>
+<tr>
+<td>$rule</td>
+<td>string</td>
+<td>验证规则的名称</td>
+</tr>
+<tr>
+<td>$parameters</td>
+<td>string</td>
+<td>验证规则的参数</td>
+</tr>
+</tbody>
+</table><h4>validate-&gt;hasRule($field, $rule)</h4>
 
 <p>检查数据项是否包含指定的验证规则</p>
 
-<h4>validate-&gt;removeRule($field, $rule)</h4>
+<p>返回: <code>bool</code></p>
+
+<p>参数</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$field</td>
+<td>string</td>
+<td>数据项的名称</td>
+</tr>
+<tr>
+<td>$rule</td>
+<td>string</td>
+<td>验证规则的名称</td>
+</tr>
+</tbody>
+</table><h4>validate-&gt;removeRule($field, $rule)</h4>
 
 <p>删除指定数据项的验证规则</p>
 
-<h4>validate-&gt;setData($data)</h4>
+<p>返回: <code>bool</code> 规则存在并删除返回<code>true</code>,不存在返回<code>false</code></p>
+
+<p>参数</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$field</td>
+<td>string</td>
+<td>数据项的名称</td>
+</tr>
+<tr>
+<td>$rule</td>
+<td>string</td>
+<td>验证规则的名称</td>
+</tr>
+</tbody>
+</table><h4>validate-&gt;setData($data)</h4>
 
 <p>设置要验证的数据</p>
 
