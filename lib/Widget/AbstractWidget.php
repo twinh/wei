@@ -13,8 +13,6 @@ namespace Widget;
  *
  * @author   Twin Huang <twinhuang@qq.com>
  *
- * @method   mixed      __invoke(mixed $mixed) The invoke method
- *
  * Cache
  * @property Cache      $cache A cache widget proxy
  * @method   mixed      cache($key, $value = null, $expire = 0) Retrieve or store an item by cache
@@ -247,14 +245,4 @@ abstract class AbstractWidget
     {
         return $this->$name = $this->widget->get($name, array(), $this->deps);
     }
-
-    /**
-     * Invoke the current widget
-     *
-     * The method __invoke should be implemented by subclasses, the comment here
-     * is to avoid "Fatal error: Declaration of xxx::__invoke() must be
-     * compatible with that of Widget\AbstractWidget::__invoke() in xxx",
-     * because PHP does NOT accept dynamic arguments in magic method __invoke
-     */
-    //public function __invoke(){}
 }
