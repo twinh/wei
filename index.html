@@ -5075,15 +5075,17 @@ widget()-&gt;arrayCache('name');
 
 <h4>breakRule</h4>
 
-<p>默认为不启用.启用该选项后,当任意一项规则验证不通过时就中断验证流程,直接返回验证结果(false)</p>
+<p>默认为<code>false</code>.设置为<code>true</code>后,当任意一项规则验证不通过时就中断验证流程,直接返回验证结果(false)</p>
 
 <h4>breakField</h4>
 
-<p>默认为不启用.启用该选项后,当任意一项数据验证不通过时就中断验证流程,直接返回验证结果(false)</p>
+<p>默认为<code>false</code>.设置为<code>true</code>后,当任意一项数据验证不通过时就中断验证流程,直接返回验证结果(false)</p>
 
 <h4>skip</h4>
 
-<p>默认是不启用.启用该选项后,当任意一项数据中的一项规则不通过时,就跳转到下一项数据的验证流程,因此,每项数据最多会有一个未通过的验证规则</p>
+<p>默认为<code>false</code>.设置为<code>true</code>后,当任意一项数据中的一项规则不通过时,就跳转到下一项数据的验证流程.</p>
+
+<p>因此,每项数据最多会有一个未通过的验证规则</p>
 
 <h3>方法</h3>
 
@@ -5197,13 +5199,15 @@ widget()-&gt;arrayCache('name');
 
 <p>获取要验证的数据</p>
 
-<h4>validate-&gt;setNames()</h4>
+<h4>validate-&gt;setNames($names)</h4>
 
 <p>设置数据项的名称</p>
 
 <h4>validate-&gt;getNames()</h4>
 
 <p>获取数据项的名称</p>
+
+<p>返回: <code>array</code></p>
 
 <h4>validate-&gt;getFieldData($field)</h4>
 
