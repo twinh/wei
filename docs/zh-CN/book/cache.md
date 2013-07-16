@@ -4,11 +4,27 @@
 Widget提供了多个PHP流行的后端缓存.这里有apc,redis,memcached等主流缓存,也有简单的文件缓存fileCache,
 可用于简单数据分析的数据库缓存dbCache等等.所有缓存拥有一致的接口,可以随意替换.
 
-## 使用案例
+## 案例
 
-* 缓存数据库查询,接口调用等耗时较长的操作
-* 将缓存作为计数器,记录按钮点击次数,网站访问次数等等
-* 在不同的请求之间,共享数据
+### 缓存数据库查询,接口调用等耗时较长的操作
+
+```php
+$totalUsers = widget()->cache->get('totalUsers', 30, function($widget){
+	return $widget->db->fetchColumn("SELECT COUNT(1) FROM user");
+});
+```
+
+### 将缓存作为计数器,记录按钮点击次数,网站访问次数等等
+
+```php
+// TODO
+```
+
+### 在不同的请求之间,共享数据
+
+```php
+// TODO
+```
 
 ## 支持的缓存类型及比较
 
