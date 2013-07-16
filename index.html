@@ -637,13 +637,26 @@
 <p>Widget提供了多个PHP流行的后端缓存.这里有apc,redis,memcached等主流缓存,也有简单的文件缓存fileCache,
 可用于简单数据分析的数据库缓存dbCache等等.所有缓存拥有一致的接口,可以随意替换.</p>
 
-<h2>使用案例</h2>
+<h2>案例</h2>
 
-<ul>
-<li>缓存数据库查询,接口调用等耗时较长的操作</li>
-<li>将缓存作为计数器,记录按钮点击次数,网站访问次数等等</li>
-<li>在不同的请求之间,共享数据</li>
-</ul><h2>支持的缓存类型及比较</h2>
+<h3>缓存数据库查询,接口调用等耗时较长的操作</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$totalUsers</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'totalUsers'</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$widget</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">fetchColumn</span><span class="p">(</span><span class="s2">"SELECT COUNT(1) FROM user"</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<h3>将缓存作为计数器,记录按钮点击次数,网站访问次数等等</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// TODO</span>
+</code></pre></div>
+
+<h3>在不同的请求之间,共享数据</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// TODO</span>
+</code></pre></div>
+
+<h2>支持的缓存类型及比较</h2>
 
 <h3>支持的缓存类型</h3>
 
