@@ -5091,7 +5091,7 @@ widget()-&gt;arrayCache('name');
 
 <p>检查数组或对象中每一个元素是否能通过指定规则的验证</p>
 
-<p>返回: <code>Validate</code> 新的验证器对象</p>
+<p>返回: <code>Widget\Validate</code> 新的验证器对象</p>
 
 <p>参数</p>
 
@@ -5110,7 +5110,7 @@ widget()-&gt;arrayCache('name');
 
 <p>为数据项增加新的验证规则</p>
 
-<p>返回: <code>Validate</code> 验证器对象</p>
+<p>返回: <code>Widget\Validate</code> 验证器对象</p>
 
 <p>参数</p>
 
@@ -5209,37 +5209,136 @@ widget()-&gt;arrayCache('name');
 
 <p>获取要验证的数据项的值</p>
 
-<h4>validate-&gt;setFieldData($field, $value)</h4>
+<p>返回: <code>mixed</code> 不存在时返回null</p>
+
+<p>参数</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$field</td>
+<td>string</td>
+<td>数据项的名称</td>
+</tr></tbody>
+</table><h4>validate-&gt;setFieldData($field, $value)</h4>
 
 <p>设置要验证的数据项的值</p>
 
-<h4>validate-&gt;setMessages($messages)</h4>
+<p>返回: <code>Widget\Validate</code></p>
+
+<p>参数</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$field</td>
+<td>string</td>
+<td>数据项的名称</td>
+</tr>
+<tr>
+<td>$value</td>
+<td>mixed</td>
+<td>数据项的值</td>
+</tr>
+</tbody>
+</table><h4>validate-&gt;setMessages($messages)</h4>
 
 <p>设置自定义的错误信息</p>
 
-<h4>validate-&gt;getMessages()</h4>
+<p>返回: <code>Widget\Validate</code></p>
+
+<p>参数</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$messages</td>
+<td>array</td>
+<td>错误信息数组</td>
+</tr></tbody>
+</table><h4>validate-&gt;getMessages()</h4>
 
 <p>获取自定义的错误信息</p>
+
+<p>返回: <code>array</code> </p>
 
 <h4>validate-&gt;getDetailMessages()</h4>
 
 <p>获取详细的验证错误信息</p>
 
+<p>返回: <code>array</code> </p>
+
 <h4>validate-&gt;getSummaryMessages()</h4>
 
 <p>获取简洁的验证错误信息</p>
 
-<h4>validate-&gt;getJoinedMessage()</h4>
+<p>返回: <code>array</code> </p>
+
+<h4>validate-&gt;getJoinedMessage($separator = "\n")</h4>
 
 <p>获取合并的验证错误信息</p>
 
-<h4>validate-&gt;getFirstMessage()</h4>
+<p>返回: <code>string</code></p>
+
+<p>参数</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$separator</td>
+<td>string</td>
+<td>合并错误信息数组的分隔符</td>
+</tr></tbody>
+</table><h4>validate-&gt;getFirstMessage()</h4>
 
 <p>获取第一条验证错误信息</p>
 
-<h4>validate-&gt;getRuleValidator()</h4>
+<p>返回: <code>string</code>|<code>false</code> 验证不通过时返回第一条错误信息,通过时返回<code>false</code></p>
+
+<h4>validate-&gt;getRuleValidator($field, $rule)</h4>
 
 <p>获取规则验证器对象</p>
+
+<p>返回: <code>Widget\Validator\AbstractValidator</code>|<code>null</code> 验证器不存在时返回null</p>
+
+<p>参数</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$field</td>
+<td>string</td>
+<td>数据项的名称</td>
+</tr>
+<tr>
+<td>$rule</td>
+<td>string</td>
+<td>验证规则的名称</td>
+</tr>
+</tbody>
+</table>
   </section>
 
 <!-- api/is
