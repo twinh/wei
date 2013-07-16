@@ -570,7 +570,7 @@ widget()->validate(array(
 
 检查数组或对象中每一个元素是否能通过指定规则的验证
 
-返回: `Validate` 新的验证器对象
+返回: `Widget\Validate` 新的验证器对象
 
 参数
 
@@ -581,7 +581,7 @@ $options    | array        | 验证器的选项,完整内容请查看"调用方�
 #### validate->addRule($field, $rule, $parameters)
 为数据项增加新的验证规则
 
-返回: `Validate` 验证器对象
+返回: `Widget\Validate` 验证器对象
 
 参数
 
@@ -630,26 +630,76 @@ $rule       | string       | 验证规则的名称
 #### validate->getFieldData($field)
 获取要验证的数据项的值
 
+返回: `mixed` 不存在时返回null
+
+参数
+
+名称        | 类型         | 说明
+------------|--------------|------
+$field      | string       | 数据项的名称
+
 #### validate->setFieldData($field, $value)
 设置要验证的数据项的值
+
+返回: `Widget\Validate`
+
+参数
+
+名称        | 类型         | 说明
+------------|--------------|------
+$field      | string       | 数据项的名称
+$value      | mixed        | 数据项的值
 
 #### validate->setMessages($messages)
 设置自定义的错误信息
 
+返回: `Widget\Validate`
+
+参数
+
+名称        | 类型         | 说明
+------------|--------------|------
+$messages   | array        | 错误信息数组
+
 #### validate->getMessages()
 获取自定义的错误信息
+
+返回: `array` 
 
 #### validate->getDetailMessages()
 获取详细的验证错误信息
 
+返回: `array` 
+
 #### validate->getSummaryMessages()
 获取简洁的验证错误信息
 
-#### validate->getJoinedMessage()
+返回: `array` 
+
+#### validate->getJoinedMessage($separator = "\n")
 获取合并的验证错误信息
+
+返回: `string`
+
+参数
+
+名称        | 类型         | 说明
+------------|--------------|------
+$separator  | string       | 合并错误信息数组的分隔符
 
 #### validate->getFirstMessage()
 获取第一条验证错误信息
 
-#### validate->getRuleValidator()
+返回: `string`|`false` 验证不通过时返回第一条错误信息,通过时返回`false`
+
+#### validate->getRuleValidator($field, $rule)
 获取规则验证器对象
+
+返回: `Widget\Validator\AbstractValidator`|`null` 验证器不存在时返回null
+
+参数
+
+名称        | 类型         | 说明
+------------|--------------|------
+$field      | string       | 数据项的名称
+$rule       | string       | 验证规则的名称
