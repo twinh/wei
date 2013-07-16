@@ -126,32 +126,6 @@ class WidgetTest extends TestCase
 
     /**
      * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Method "__invoke" not found in class "WidgetTest\Fixtures\WidgetWithoutInvokeMethod"
-     */
-    public function testInstanceWidgetWithoutInvokeMethodFromWidgetManager()
-    {
-        $this->widget->setOption('+aliases', array(
-            'noInvokeMethod' => 'WidgetTest\Fixtures\WidgetWithoutInvokeMethod'
-        ));
-
-        $this->widget->noInvokeMethod;
-    }
-
-    /**
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Method "__invoke" not found in class "WidgetTest\Fixtures\WidgetWithoutInvokeMethod"
-     */
-    public function testInstanceWidgetWithoutInvokeMethod()
-    {
-        $this->widget->setOption('+aliases', array(
-            'noInvokeMethod' => 'WidgetTest\Fixtures\WidgetWithoutInvokeMethod'
-        ));
-
-        $this->widget->request->noInvokeMethod;
-    }
-
-    /**
-     * @expectedException \BadMethodCallException
      * @expectedExceptionMessage Property or widget "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file
      */
     public function testInstanceNotFoundWidgetFromWidgetManager()

@@ -371,11 +371,6 @@ class Widget extends AbstractWidget
         // Get the widget class and instance
         $class = $this->getClass($name);
         if (class_exists($class)) {
-            // @see AbstractWidget::__invoke
-            if (!method_exists($class, '__invoke')) {
-                throw new \BadMethodCallException(sprintf('Method "__invoke" not found in class "%s"', $class));
-            }
-
             // Trigger the construct callback
             $this->construct && call_user_func($this->construct, $name, $full);
 
