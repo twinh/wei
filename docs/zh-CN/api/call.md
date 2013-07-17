@@ -173,6 +173,11 @@ $ch         | resource     | cUrl会话的变量
 #### call($url, $options = array())
 根据给定的URL地址,初始化一个Call对象,并执行HTTP请求
 
+#### call->isSuccess()
+返回请求及数据解析是否成功
+
+返回: `bool`
+
 #### call->getCh()
 获取cURL的资源变量
 
