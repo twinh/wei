@@ -163,6 +163,13 @@ class Call extends AbstractWidget
     protected $complete;
 
     /**
+     * The request result
+     *
+     * @var bool
+     */
+    protected $result;
+
+    /**
      * The response body string
      *
      * @var string
@@ -366,17 +373,21 @@ class Call extends AbstractWidget
             if ($isSuccess) {
                 $response = $this->parse($this->responseText, $this->dataType, $exception);
                 if (!$exception) {
+                    $this->result = true;
                     $this->trigger('success', array($response, $this));
                 } else {
+                    $this->result = false;
                     $this->trigger('error', array($this, 'parser', $exception));
                 }
             } else {
                 preg_match('/[\d]{3} (.+?)\r/', $this->responseHeader, $matches);
                 $exception = new \ErrorException($matches[1], $statusCode);
+                $this->result = false;
                 $this->trigger('error', array($this, 'http', $exception));
             }
         } else {
             $exception = new \ErrorException(curl_error($ch), curl_errno($ch));
+            $this->result = false;
             $this->trigger('error', array($this, 'curl', $exception));
         }
     }
@@ -507,6 +518,16 @@ class Call extends AbstractWidget
         }
 
         return $headers;
+    }
+
+    /**
+     * Return if the request is success
+     *
+     * @return bool
+     */
+    public function isSuccess()
+    {
+        return $this->result;
     }
 
     /**

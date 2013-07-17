@@ -4,6 +4,9 @@ namespace WidgetTest;
 
 use Widget\Call;
 
+/**
+ * @method Call call($options)
+ */
 class CallTest extends TestCase
 {
     /**
@@ -38,7 +41,7 @@ class CallTest extends TestCase
     public function testSuccess($options)
     {
         $test = $this;
-        $this->call(array(
+        $call = $this->call(array(
             'beforeSend' => function() use($test) {
                 $test->triggeredEvents[] = 'beforeSend';
                 $test->assertTrue(true);
@@ -52,6 +55,8 @@ class CallTest extends TestCase
                 $test->assertTrue(true);
             }
         ) + $options);
+
+        $this->assertTrue($call->isSuccess());
 
         $this->assertCalledEvents(array('beforeSend', 'success', 'complete'));
     }
@@ -102,7 +107,7 @@ class CallTest extends TestCase
     {
         $test = $this;
 
-        $this->call(array(
+        $call = $this->call(array(
             'beforeSend' => function() use($test) {
                 $test->triggeredEvents[] = 'beforeSend';
                 $test->assertTrue(true);
@@ -116,6 +121,8 @@ class CallTest extends TestCase
                 $test->assertEquals($responseText, $call->getResponseText());
             }
         ) + $options);
+
+        $this->assertFalse($call->isSuccess());
 
         $this->assertCalledEvents(array('beforeSend', 'error', 'complete'));
     }
@@ -144,7 +151,7 @@ class CallTest extends TestCase
     public function testHeaders()
     {
         $test = $this;
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url . '?test=headers',
             'dataType' => 'json',
             'headers' => array(
@@ -160,13 +167,15 @@ class CallTest extends TestCase
                 $test->assertEquals('Value with space', $data['KEY_NAME']);
             }
         ));
+
+        $this->assertTrue($call->isSuccess());
     }
 
     public function testLateBindingCallbacks()
     {
         $test = $this;
 
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url,
             'beforeSend' => function(Call $call) use($test) {
                 $test->triggeredEvents[] = 'beforeSend';
@@ -178,6 +187,7 @@ class CallTest extends TestCase
             }
         ));
 
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('beforeSend', 'success', 'complete'));
     }
 
@@ -201,7 +211,7 @@ class CallTest extends TestCase
     {
         $test = $this;
 
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url,
             'beforeSend' => function(Call $call) use($test) {
                 $test->triggeredEvents[] = 'beforeSend';
@@ -213,6 +223,7 @@ class CallTest extends TestCase
             }
         ));
 
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('beforeSend', 'success'));
     }
 
@@ -234,7 +245,7 @@ class CallTest extends TestCase
     public function testJsonDataType()
     {
         $test = $this;
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url . '?type=json',
             'dataType' => 'jsonObject',
             'success' => function($data) use($test) {
@@ -243,35 +254,38 @@ class CallTest extends TestCase
                 $test->assertEquals('success', $data->message);
             }
         ));
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
     }
 
     public function testGetJsonObject()
     {
         $test = $this;
-        $this->call->getJsonObject($this->url . '?type=json', function($data) use($test) {
+        $call = $this->call->getJsonObject($this->url . '?type=json', function($data) use($test) {
             $test->triggeredEvents[] = 'success';
             $test->assertEquals(0, $data->code);
             $test->assertEquals('success', $data->message);
         });
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
     }
 
     public function testGetJson()
     {
         $test = $this;
-        $this->call->getJson($this->url . '?type=json', function($data) use($test) {
+        $call = $this->call->getJson($this->url . '?type=json', function($data) use($test) {
             $test->triggeredEvents[] = 'success';
             $test->assertEquals(0, $data['code']);
             $test->assertEquals('success', $data['message']);
         });
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
     }
 
     public function testSerializeDataType()
     {
         $test = $this;
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url . '?type=serialize',
             'dataType' => 'serialize',
             'success' => function($data) use($test) {
@@ -280,11 +294,12 @@ class CallTest extends TestCase
                 $test->assertEquals('success', $data['message']);
             }
         ));
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
 
         // Parse error
         $test->triggeredEvents = array();
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url . '?type=json',
             'dataType' => 'serialize',
             'error' => function($call, $textStatus, $exception) use($test) {
@@ -293,13 +308,14 @@ class CallTest extends TestCase
                 $test->assertInstanceOf('\ErrorException', $exception);
             }
         ));
+        $this->assertFalse($call->isSuccess());
         $this->assertCalledEvents(array('error'));
     }
 
     public function testXmlDataType()
     {
         $test = $this;
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url . '?type=xml',
             'dataType' => 'xml',
             'success' => function(\SimpleXMLElement $data) use($test) {
@@ -308,10 +324,11 @@ class CallTest extends TestCase
                 $test->assertEquals('success', (string)$data->message);
             }
         ));
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
 
         $this->triggeredEvents = array();
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url . '?type=json',
             'dataType' => 'xml',
             'error' => function($call, $textStatus, $exception) use($test) {
@@ -320,13 +337,14 @@ class CallTest extends TestCase
                 $test->assertInstanceOf('\ErrorException', $exception);
             }
         ));
+        $this->assertFalse($call->isSuccess());
         $this->assertCalledEvents(array('error'));
     }
 
     public function testUserAgent()
     {
         $test = $this;
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url . '?test=user-agent',
             'userAgent' => 'Test',
             'success' => function($data) use($test) {
@@ -334,10 +352,11 @@ class CallTest extends TestCase
                 $test->assertEquals('Test', $data);
             }
         ));
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
 
         $test->triggeredEvents = array();
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url . '?test=user-agent',
             'userAgent' => false,
             'success' => function($data) use($test) {
@@ -345,6 +364,7 @@ class CallTest extends TestCase
                 $test->assertEquals('', $data);
             }
         ));
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
     }
 
@@ -352,7 +372,7 @@ class CallTest extends TestCase
     {
         $referer = 'http://google.com';
         $test = $this;
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url . '?test=referer',
             'referer' => $referer,
             'success' => function($data) use($test, $referer) {
@@ -360,6 +380,7 @@ class CallTest extends TestCase
                 $test->assertEquals($referer, $data);
             }
         ));
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
     }
 
@@ -367,7 +388,7 @@ class CallTest extends TestCase
     {
         $url = $this->url . '?test=referer';
         $test = $this;
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $url,
             'referer' => true, // Equals to current request URL
             'success' => function($data) use($test, $url) {
@@ -375,13 +396,14 @@ class CallTest extends TestCase
                 $test->assertEquals($url, $data);
             }
         ));
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
     }
 
     public function testCookie()
     {
         $test = $this;
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url . '?test=cookie',
             'dataType' => 'jsonObject',
             'cookies' => array(
@@ -398,6 +420,7 @@ class CallTest extends TestCase
                 $test->assertEquals('S P', $data->space);
             }
         ));
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
     }
 
@@ -412,7 +435,7 @@ class CallTest extends TestCase
                 'string' => 'value'
             )
         );
-        $this->call->post($this->url . '?test=post', $data, function($data) use($test) {
+        $call = $this->call->post($this->url . '?test=post', $data, function($data) use($test) {
             $test->triggeredEvents[] = 'success';
             $test->assertEquals('value', $data->key);
             $test->assertEquals('1', $data->post);
@@ -420,6 +443,7 @@ class CallTest extends TestCase
             $test->assertEquals('value', $data->array->string);
         }, 'jsonObject');
 
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
     }
 
@@ -429,7 +453,7 @@ class CallTest extends TestCase
     public function testMethods($method)
     {
         $test = $this;
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url . '?test=methods',
             'method' => $method,
             'dataType' => 'jsonObject',
@@ -442,6 +466,7 @@ class CallTest extends TestCase
                 $test->assertEquals('v', $data->data->k);
             }
         ));
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
     }
 
@@ -451,7 +476,7 @@ class CallTest extends TestCase
     public function testGet2($method)
     {
         $test = $this;
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url . '?test=get',
             'method' => $method,
             'dataType' => 'jsonObject',
@@ -463,6 +488,7 @@ class CallTest extends TestCase
                 $test->assertEquals('v', $data->k);
             }
         ));
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
     }
 
@@ -495,10 +521,11 @@ class CallTest extends TestCase
     public function testAliasMethod($method)
     {
         $test = $this;
-        $this->call->{strtolower($method)}($this->url . '?test=methods', function($data) use($test, $method) {
+        $call = $this->call->{strtolower($method)}($this->url . '?test=methods', function($data) use($test, $method) {
             $test->triggeredEvents[] = 'success';
             $test->assertEquals($method, $data->method);
         }, 'jsonObject');
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
     }
 
@@ -516,7 +543,7 @@ class CallTest extends TestCase
     public function testTimeout()
     {
         $test = $this;
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url . '?wait=0.1',
             'dataType' => 'jsonObject',
             'timeout' => 50,
@@ -525,6 +552,7 @@ class CallTest extends TestCase
                 $test->assertEquals('curl', $textStatus);
             }
         ));
+        $this->assertFalse($call->isSuccess());
         $this->assertCalledEvents(array('error'));
     }
 
@@ -533,7 +561,7 @@ class CallTest extends TestCase
         $test = $this;
         $this->call->setMethod('POST');
 
-        $this->call(array(
+       $call = $this->call(array(
             'url' => $this->url . '?test=methods',
             'global' => true,
             'dataType' => 'jsonObject',
@@ -545,10 +573,11 @@ class CallTest extends TestCase
                 $test->assertEquals('POST', $data->method);
             }
         ));
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
 
         $this->triggeredEvents = array();
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url . '?test=methods',
             'dataType' => 'jsonObject',
             'global' => false,
@@ -557,13 +586,14 @@ class CallTest extends TestCase
                 $test->assertEquals('GET', $data->method);
             }
         ));
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
     }
 
     public function testStringAsData()
     {
         $test = $this;
-        $this->call(array(
+        $call = $this->call(array(
             'url' => $this->url . '?test=get',
             'data' => 'key=value&number=10',
             'dataType' => 'jsonObject',
@@ -573,6 +603,7 @@ class CallTest extends TestCase
                 $test->assertEquals('10', $data->number);
             }
         ));
+        $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
     }
 
