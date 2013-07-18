@@ -8,6 +8,8 @@ Widget提供了多个PHP流行的后端缓存.这里有apc,redis,memcached等主
 
 ### 缓存数据库查询,接口调用等耗时较长的操作
 
+如缓存用户总数,每30秒更新一次
+
 ```php
 $totalUsers = widget()->cache->get('totalUsers', 30, function($widget){
 	return $widget->db->fetchColumn("SELECT COUNT(1) FROM user");
@@ -17,7 +19,12 @@ $totalUsers = widget()->cache->get('totalUsers', 30, function($widget){
 ### 将缓存作为计数器,记录按钮点击次数,网站访问次数等等
 
 ```php
-// TODO
+$cache = widget()->cache;
+
+// 设置文章访问次数增加1,返回增加后的总次数
+$hits = $cache->increment('article-1', 1);
+
+echo '该文章已被访问' . $hits . '次';
 ```
 
 ### 在不同的请求之间,共享数据
