@@ -76,7 +76,7 @@ class Redis extends AbstractCache
     }
 
     /**
-     * Connet the redis server and set redis options
+     * Connect the redis server and set redis options
      *
      * @return bool true on success, false on error
      */
