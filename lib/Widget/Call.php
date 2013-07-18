@@ -177,6 +177,13 @@ class Call extends AbstractWidget
     protected $responseText;
 
     /**
+     * The parsed response JSON array
+     *
+     * @var array
+     */
+    protected $responseJson;
+
+    /**
      * The response header string
      *
      * @var string
@@ -374,6 +381,10 @@ class Call extends AbstractWidget
                 $response = $this->parse($this->responseText, $this->dataType, $exception);
                 if (!$exception) {
                     $this->result = true;
+                    $property = 'response' . ucfirst($this->dataType);
+                    if (property_exists($this, $property)) {
+                        $this->$property = $response;
+                    }
                     $this->trigger('success', array($response, $this));
                 } else {
                     $this->result = false;
@@ -466,6 +477,16 @@ class Call extends AbstractWidget
     public function getResponseText()
     {
         return $this->responseText;
+    }
+
+    /**
+     * Returns the response json data
+     *
+     * @return array
+     */
+    public function getResponseJson()
+    {
+        return $this->responseJson;
     }
 
     /**

@@ -607,6 +607,20 @@ class CallTest extends TestCase
         $this->assertCalledEvents(array('success'));
     }
 
+    public function testGetResponseJson()
+    {
+        $call = $this->call(array(
+            'url' => $this->url . '?type=json',
+            'data' => array(),
+            'dataType' => 'json',
+        ));
+
+        $data = $call->getResponseJson();
+
+        $this->assertEquals(0, $data['code']);
+        $this->assertEquals('success', $data['message']);
+    }
+
     public function assertCalledEvents($events)
     {
         foreach ((array)$events as $event) {
