@@ -489,7 +489,7 @@ class Db extends AbstractWidget
      * @param bool $isNew Whether it's a new record and have not save to database
      * @return Db\Record
      */
-    public function create($table, $data = array(), $isNew = false)
+    public function create($table, $data = array(), $isNew = true)
     {
         $class = $this->getRecordClass($table);
         return new $class(array(
@@ -523,7 +523,7 @@ class Db extends AbstractWidget
     {
         $data = $this->select($table, $id);
 
-        return $data ? $this->create($table, $data) : false;
+        return $data ? $this->create($table, $data, false) : false;
     }
 
     /**
@@ -539,9 +539,9 @@ class Db extends AbstractWidget
         $record = $this->select($table, $id);
 
         if ($record) {
-            return $this->create($table, $record);
+            return $this->create($table, $record, false);
         } else {
-            return $this->create($table, $data + array('id' => $id), true);
+            return $this->create($table, $data + array('id' => $id));
         }
     }
 
@@ -569,7 +569,7 @@ class Db extends AbstractWidget
 
         $records = array();
         foreach ($data as $row) {
-            $records[] = $this->create($table, $row);
+            $records[] = $this->create($table, $row, false);
         }
 
         return new $this->collectionClass($records);
@@ -583,7 +583,7 @@ class Db extends AbstractWidget
      */
     public function __get($name)
     {
-        return $this->create($name, array(), true);
+        return $this->create($name, array());
     }
 
     /**
