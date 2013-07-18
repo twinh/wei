@@ -25,20 +25,26 @@ $hits = $cache->increment('article-1', 1);
 echo '该文章已被访问' . $hits . '次';
 ```
 
+### 批量设置和获取缓存
+
+```php
+$cache = widget()->cache;
+```
+
 ## 支持的缓存类型及比较
 
 ### 支持的缓存类型
 
-* [apc](api/apc.md) - APC缓存
-* [arrayCache](api/arrayCache.md) - PHP数组缓存
-* [couchbase](api/couchbase.md) - Couchbase缓存
-* [dbCache](api/dbCache.md) - 数据库缓存
-* [fileCache](api/fileCache.md) - 文件缓存
-* [memcache](api/memcache.md) - Memcachce缓存
-* [memcached](api/memcached.md) - Memcached缓存
-* [redis](api/redis.md) - Redis缓存
-* [cache](api/cache.md) - 通用缓存
-* [bicache](api/bicache.md) - 二级缓存
+* [apc](../api/apc.md) - APC缓存
+* [arrayCache](../api/arrayCache.md) - PHP数组缓存
+* [couchbase](../api/couchbase.md) - Couchbase缓存
+* [dbCache](../api/dbCache.md) - 数据库缓存
+* [fileCache](../api/fileCache.md) - 文件缓存
+* [memcache](../api/memcache.md) - Memcachce缓存
+* [memcached](../api/memcached.md) - Memcached缓存
+* [redis](../api/redis.md) - Redis缓存
+* [cache](../api/cache.md) - 通用缓存
+* [bicache](../api/bicache.md) - 二级缓存
 
 ### 特性对比
 
