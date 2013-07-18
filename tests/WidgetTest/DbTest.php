@@ -791,13 +791,6 @@ class DbTest extends TestCase
         $this->assertEquals(1, $result);
     }
 
-    public function testFindHelper()
-    {
-        $member = $this->db->member->find('1');
-
-        $this->assertEquals('1', $member->id);
-    }
-
     public function testCount()
     {
         $count = $this->db('member')->count();

@@ -233,15 +233,4 @@ class Record extends AbstractWidget
         }
         return $this;
     }
-
-    /**
-     * A helper method to find a record
-     *
-     * @param $id
-     * @return Record
-     */
-    public function find($id)
-    {
-        return $this->db->find($this->getTable(), $id);
-    }
 }
