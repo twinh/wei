@@ -641,6 +641,8 @@
 
 <h3>缓存数据库查询,接口调用等耗时较长的操作</h3>
 
+<p>如缓存用户总数,每30秒更新一次</p>
+
 <div class="highlight"><pre><code class="php"><span class="nv">$totalUsers</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'totalUsers'</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$widget</span><span class="p">){</span>
     <span class="k">return</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">fetchColumn</span><span class="p">(</span><span class="s2">"SELECT COUNT(1) FROM user"</span><span class="p">);</span>
 <span class="p">});</span>
@@ -648,7 +650,12 @@
 
 <h3>将缓存作为计数器,记录按钮点击次数,网站访问次数等等</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// TODO</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$cache</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="p">;</span>
+
+<span class="c1">// 设置文章访问次数增加1,返回增加后的总次数</span>
+<span class="nv">$hits</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">increment</span><span class="p">(</span><span class="s1">'article-1'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="s1">'该文章已被访问'</span> <span class="o">.</span> <span class="nv">$hits</span> <span class="o">.</span> <span class="s1">'次'</span><span class="p">;</span>
 </code></pre></div>
 
 <h3>在不同的请求之间,共享数据</h3>
