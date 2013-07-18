@@ -22,6 +22,8 @@ widget()->memcache('key');
 widget()->memcache('key', 'value', 60);
 ```
 
+更多案例请查看"[缓存](../book/cache.md)"章节
+
 调用方式
 -------
 
