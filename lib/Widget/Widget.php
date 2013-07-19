@@ -422,10 +422,12 @@ class Widget extends AbstractWidget
      *
      * @param string $name The name of widget
      * @param AbstractWidget $widget The widget object
+     * @return Widget
      */
     public function set($name, AbstractWidget $widget)
     {
         $this->$name = $this->widgets[$name] = $widget;
+        return $this;
     }
 
     /**
