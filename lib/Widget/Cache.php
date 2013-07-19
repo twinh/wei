@@ -66,6 +66,16 @@ class Cache extends AbstractCache
     }
 
     /**
+     * Returns current cache driver
+     *
+     * @return string
+     */
+    public function getDriver()
+    {
+        return $this->driver;
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function doGet($key)
