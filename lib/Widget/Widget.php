@@ -540,13 +540,15 @@ class Widget extends AbstractWidget
     }
 
     /**
-     * Set the ini options
+     * Sets the value of PHP configuration options
      *
-     * @param  array               $inis
+     * @param array $inis
      * @return Widget
      */
     public function setInis($inis)
     {
+        $this->inis = $inis;
+
         foreach ($inis as $key => $value) {
             ini_set($key, $value);
         }
