@@ -29,6 +29,46 @@ echo '该文章已被访问' . $hits . '次';
 
 ```php
 $cache = widget()->cache;
+
+// 批量设置缓存
+$result = $cache->setMulti(array(
+	'array' 	=> array(),
+	'bool'		=> true,
+	'float'		=> 1.2,
+	'int'		=> 1,
+	'null'		=> null,
+	'object'	=> new \stdClass()
+));
+
+// 返回结果
+$result = array (
+  'array' => true,
+  'bool' => true,
+  'float' => true,
+  'int' => true,
+  'null' => true,
+  'object' => true,
+);
+
+// 批量获取缓存
+$result = $cache->getMulti(array(
+    'array',
+    'bool',
+    'float',
+    'int',
+    'null',
+    'object'
+));
+
+// 返回结果
+$result = array (
+  'array' => array (),
+  'bool' => true,
+  'float' => 1.2,
+  'int' => 1,
+  'null' => NULL,
+  'object' => stdClass::__set_state(array()),
+);
 ```
 
 ## 支持的缓存类型及比较
