@@ -7,10 +7,11 @@
 1. [简介](book/introduction.md)
 2. [安装](book/installation.md)
 3. [配置](book/configuration.md)
-4. [缓存](book/cache.md)
-5. [数据库操作](api/db.md)
-6. [数据校验](api/validate.md)
-7. [接口调用](api/call.md)
+4. [微件管理器](api/widget.md)
+5. [缓存](book/cache.md)
+6. [数据库操作](api/db.md)
+7. [数据校验](api/validate.md)
+8. [接口调用](api/call.md)
 
 演示案例
 --------
