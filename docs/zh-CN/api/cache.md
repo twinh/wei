@@ -24,6 +24,27 @@ widget()->cache('key');
 widget()->cache('key', 'value', 60);
 ```
 
+### 配置缓存驱动为`Redis`
+
+```php
+
+// 配置缓存驱动为`redis`,同时配置redis的服务器地址
+widget(array(
+	'cache' => array(
+		'driver' => 'redis'
+	),
+	'redis' => array(
+		'host' => '127.0.0.1',
+	)
+));
+
+// 获取缓存对象
+$cache = widget()->cache;
+
+// 输出缓存驱动, 输出为`redis`
+echo $cache->getDriver();
+```
+
 更多案例请查看"[缓存](../book/cache.md)"章节
 
 调用方式
