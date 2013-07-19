@@ -60,6 +60,8 @@ class Cache extends AbstractCache
             throw new \InvalidArgumentException(sprintf('Cache driver class "%s" must extend "Widget\Stdlib\AbstractCache"', $class));
         }
 
+        $this->driver = $driver;
+
         $this->object = $this->widget->get($driver);
 
         return $this;

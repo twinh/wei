@@ -34,4 +34,11 @@ class CacheTest extends CacheTestCase
             'driver' => 'request'
         ));
     }
+
+    public function testCacheDriver()
+    {
+        $this->cache->setDriver('redis');
+
+        $this->assertEquals('redis', $this->cache->getDriver('redis'));
+    }
 }
