@@ -1102,6 +1102,26 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
+<h3>配置缓存驱动为<code>Redis</code>
+</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 配置缓存驱动为`redis`,同时配置redis的服务器地址</span>
+<span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'cache'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'driver'</span> <span class="o">=&gt;</span> <span class="s1">'redis'</span>
+    <span class="p">),</span>
+    <span class="s1">'redis'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'host'</span> <span class="o">=&gt;</span> <span class="s1">'127.0.0.1'</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+
+<span class="c1">// 获取缓存对象</span>
+<span class="nv">$cache</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="p">;</span>
+
+<span class="c1">// 输出缓存驱动, 输出为`redis`</span>
+<span class="k">echo</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">getDriver</span><span class="p">();</span>
+</code></pre></div>
+
 <p>更多案例请查看"<a href="../book/cache.md">缓存</a>"章节</p>
 
 <h2>调用方式</h2>
