@@ -658,6 +658,8 @@
 
 <h3>批量设置和获取缓存</h3>
 
+<p><strong>注意:</strong> 目前只有<code>couchbase</code>和<code>redis</code>支持原生的批量设置,其他的缓存都是逐个设置.</p>
+
 <div class="highlight"><pre><code class="php"><span class="nv">$cache</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="p">;</span>
 
 <span class="c1">// 批量设置缓存</span>
