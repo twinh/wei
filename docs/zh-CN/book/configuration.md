@@ -175,8 +175,8 @@ $loggerDb->findAll('userLog', array('userId' => 1));
 
 ### 使用YAML作为配置文件
 
-[查看演示案例](../../demos/using-yaml-as-widget-configuration)
+[查看演示案例](../../../demos/using-yaml-as-widget-configuration)
 
 ### 使用JSON作为配置文件
 
-[查看演示案例](../../demos/using-json-as-widget-configuration)
+[查看演示案例](../../../demos/using-json-as-widget-configuration)
