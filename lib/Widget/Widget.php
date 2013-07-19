@@ -545,7 +545,7 @@ class Widget extends AbstractWidget
      * @param array $inis
      * @return Widget
      */
-    public function setInis($inis)
+    public function setInis(array $inis)
     {
         $this->inis = $inis;
 
