@@ -559,6 +559,19 @@ class Widget extends AbstractWidget
     }
 
     /**
+     * Set widget alias
+     *
+     * @param string $name The name of widget
+     * @param string $class The class that the widget reference to
+     * @return Widget
+     */
+    public function setAlias($name, $class)
+    {
+        $this->aliases[$name] = $class;
+        return $this;
+    }
+
+    /**
      * Import the class in the given directory as widget
      *
      * @param string $dir The directory for class
