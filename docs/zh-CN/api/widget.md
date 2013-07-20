@@ -84,6 +84,12 @@ widget(array(
 ));
 ```
 
+### 区分`aliases`和`deps`
+
+```php
+// TODO
+```
+
 调用方式
 --------
 
