@@ -375,4 +375,13 @@ class WidgetTest extends TestCase
         $this->widget->setDebug(true);
         $this->assertTrue($this->widget->inDebug());
     }
+
+    public function testSetAlias()
+    {
+        $this->widget->setAlias('widgetName', 'className');
+        $aliases = $this->widget->getOption('aliases');
+
+        $this->assertArrayHasKey('widgetName', $aliases);
+        $this->assertEquals('className', $aliases['widgetName']);
+    }
 }
