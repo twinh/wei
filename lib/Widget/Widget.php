@@ -15,7 +15,7 @@ namespace Widget
 require_once 'AbstractWidget.php';
 
 /**
- * The root widget and widget manager
+ * The root widget and widget container
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
@@ -27,7 +27,7 @@ class Widget extends AbstractWidget
     const VERSION = '0.9.3';
 
     /**
-     * The instances of widget manager
+     * The instances of widget container
      *
      * @var array
      */
@@ -55,7 +55,7 @@ class Widget extends AbstractWidget
     protected $config = array();
 
     /**
-     * The php configuration options that will be set when widget manager constructing
+     * The php configuration options that will be set when widget container constructing
      *
      * @var array
      * @see http://www.php.net/manual/en/ini.php
@@ -85,7 +85,7 @@ class Widget extends AbstractWidget
     protected $aliases = array();
 
     /**
-     * The widgets that will be instanced after widget manager constructed
+     * The widgets that will be instanced after widget container constructed
      *
      * @var array
      */
@@ -123,7 +123,7 @@ class Widget extends AbstractWidget
     protected $constructed;
 
     /**
-     * Instance widget manager
+     * Instance widget container
      *
      * @param array $config
      */
@@ -148,7 +148,7 @@ class Widget extends AbstractWidget
     }
 
     /**
-     * Get widget manager instance
+     * Get widget container instance
      *
      * @param array $config                 The array or file configuration
      * @param string $name                  The name of the instance
@@ -184,7 +184,7 @@ class Widget extends AbstractWidget
     }
 
     /**
-     * Reset the internal widget manager instance
+     * Reset the internal widget container instance
      *
      * @param string|null $name The name of the instance, if $name is null, reset all instances
      * @return bool
@@ -626,7 +626,7 @@ class Widget extends AbstractWidget
 namespace
 {
     /**
-     * Get widget manager instance
+     * Get widget container instance
      *
      * @param array $config                 The array or file configuration
      * @param string $name                  The name of the instance
