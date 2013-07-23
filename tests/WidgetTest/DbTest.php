@@ -224,6 +224,14 @@ class DbTest extends TestCase
         $member = $this->db->findOrCreate('member', '2');
 
         $this->assertEquals('2', $member->id);
+
+        $member = $this->db->findOrCreate('member', '3', array(
+            'id' => '1', // Would be overwrite
+            'name' => 'twin'
+        ));
+
+        $this->assertNotEquals('1', $member->id);
+        $this->assertEquals('3', $member->id);
     }
 
     public function testRecordSave()

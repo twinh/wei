@@ -541,7 +541,7 @@ class Db extends AbstractWidget
         if ($record) {
             return $this->create($table, $record, false);
         } else {
-            return $this->create($table, $data + array('id' => $id));
+            return $this->create($table, array('id' => $id) + $data);
         }
     }
 
