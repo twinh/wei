@@ -23,7 +23,7 @@ class CouchbaseTest extends CacheTestCase
             return;
         }
 
-        // Mock Couchbase object for most of platform has no Couchbase installed yet.
+        // Mock Couchbase object for most of platforms have not installed Couchbase yet.
         $couchbase = $this->getMockBuilder('Couchbase')
             ->disableOriginalConstructor()
             ->getMock();
