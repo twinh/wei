@@ -98,7 +98,7 @@ class Event extends AbstractWidget
      * Set the type of event
      *
      * @param  string      $type
-     * @return Event\Event
+     * @return Event
      */
     public function setType($type)
     {
@@ -121,7 +121,7 @@ class Event extends AbstractWidget
      * Set the namespaces of event
      *
      * @param array $namespaces
-     * @return Event\Event
+     * @return Event
      */
     public function setNamespaces(array $namespaces)
     {
@@ -153,7 +153,7 @@ class Event extends AbstractWidget
     /**
      * Set a flag to prevent the default action
      *
-     * @return Event\Event
+     * @return Event
      */
     public function preventDefault()
     {
@@ -176,6 +176,7 @@ class Event extends AbstractWidget
      * Sets the event result
      *
      * @param mixed $result
+     * @return Event
      */
     public function setResult($result)
     {
@@ -185,7 +186,7 @@ class Event extends AbstractWidget
     }
 
     /**
-     * Returns the last result returnted by the event handler
+     * Returns the last result returned by the event handler
      *
      * @return mixed
      */
@@ -198,6 +199,7 @@ class Event extends AbstractWidget
      * Set the event data
      *
      * @param array $data
+     * @return Event
      */
     public function setData($data = array())
     {
@@ -219,7 +221,7 @@ class Event extends AbstractWidget
     /**
      * Set a flag to stop trigger the next handler
      *
-     * @return Event\Event
+     * @return Event
      */
     public function stopPropagation()
     {
