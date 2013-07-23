@@ -37,7 +37,7 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
     {
         parent::__construct($name, $data, $dataName);
 
-        $this->widget = Widget::create();
+        $this->widget = widget();
     }
 
     /**
@@ -59,8 +59,6 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
-     *
-     * @todo How to inject container manager instead of Widget::create()
      */
     protected function setUp()
     {
@@ -103,7 +101,7 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
                 continue;
             }
 
-            // Remove all widget instanlled by current test object
+            // Remove all widget instanced by current test object
             if ($property instanceof \Widget\AbstractWidget) {
                 unset($this->$name);
                 $widget->remove($name);
