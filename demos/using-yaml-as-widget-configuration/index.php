@@ -10,7 +10,7 @@ if (!is_file('vendor/autoload.php')) {
 require 'vendor/autoload.php';
 require '../../lib/Widget/Widget.php';
 
-// Get widget manager
+// Get widget container
 $widget = widget();
 
 // Get current environment name

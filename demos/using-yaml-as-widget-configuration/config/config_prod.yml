@@ -1,10 +1,10 @@
-# Configuration for widget manager
+# Configuration for widget container
 widget:
   inis:
     error_reporting: 0
     display_errors: off
   debug: false
-  # More option for widget manager here ...
+  # More option for widget container here ...
 # Configuration for logger widget
 logger:
   dir: log

@@ -20,7 +20,7 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
     protected $object;
 
     /**
-     * The widget manager
+     * The widget container
      *
      * @var \Widget\Widget
      */
@@ -60,7 +60,7 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @todo How to inject widget manager instead of Widget::create()
+     * @todo How to inject container manager instead of Widget::create()
      */
     protected function setUp()
     {
@@ -98,7 +98,7 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
         }
 
         foreach (get_object_vars($this->widget) as $name => $property) {
-            // Preserve the widget manager
+            // Preserve the widget container
             if ('widget' == $name) {
                 continue;
             }

@@ -88,7 +88,7 @@ class Event extends AbstractWidget
             $args = array($args);
         }
 
-        // Prepend the event and widget manager object to the beginning of the arguments
+        // Prepend the event and widget container object to the beginning of the arguments
         array_unshift($args, $event, $this->widget);
 
         if (isset($this->handlers[$type])) {
@@ -239,7 +239,7 @@ class Event extends AbstractWidget
     {
         $event = $this;
 
-        // Attach the widget manager's construct and constructed event
+        // Attach the widget container's construct and constructed event
         $this->widget->setOption(array(
             'construct' => function ($name, $full) use($event) {
                 $event('construct.' . $name, array($name, $full));

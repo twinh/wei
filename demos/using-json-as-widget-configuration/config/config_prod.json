@@ -1,5 +1,5 @@
 {
-    "_comment": "Configuration for widget manager",
+    "_comment": "Configuration for widget container",
     "widget": {
         "inis": {
             "error_reporting": 0,

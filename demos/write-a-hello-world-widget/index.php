@@ -2,9 +2,9 @@
 
 require '../../lib/Widget/Widget.php';
 
-// Create widget manager
+// Create widget container
 $widget = widget(array(
-    // Set options for widget manager
+    // Set options for widget container
     'widget' => array(
         // Add autoload for `Demo` namespace
         'autoloadMap' => array(

@@ -145,7 +145,7 @@ abstract class AbstractWidget
     protected $deps = array();
 
     /**
-     * The widget manager object
+     * The widget container object
      *
      * @var Widget
      */

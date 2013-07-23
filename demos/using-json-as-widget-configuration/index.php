@@ -2,7 +2,7 @@
 
 require '../../lib/Widget/Widget.php';
 
-// Get widget manager
+// Get widget container
 $widget = widget();
 
 // Get current environment name

@@ -3,7 +3,7 @@
 // Autoloading for Composer
 if (is_file($file = __DIR__ . '/../vendor/autoload.php')) {
     require $file;
-// Fallback to widget manager
+// Fallback to widget container
 } else {
     require dirname(__DIR__) . '/lib/Widget/Widget.php';
 }

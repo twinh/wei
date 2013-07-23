@@ -18,7 +18,7 @@ use Widget\Widget;
 abstract class AbstractWidgetAware implements WidgetAwareInterface
 {
     /**
-     * A widget manager instance
+     * A widget container instance
      *
      * @var Widget
      */

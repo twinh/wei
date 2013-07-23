@@ -19,9 +19,9 @@ use Widget\AbstractWidget;
 interface WidgetAwareInterface
 {
     /**
-     * Sets the widget manager
+     * Sets the widget container
      *
-     * @param Widget $widget A widget manager instance
+     * @param Widget $widget A widget container instance
      * @return WidgetAwareInterface
      */
     public function setWidget(Widget $widget);
