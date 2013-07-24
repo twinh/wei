@@ -118,7 +118,8 @@ $qb
     ->addOrderBy()
     ->offset()
     ->limit()
-    ->page();
+    ->page()
+    ->indexBy();
 
 $qb->find();
 $qb->findAll();

@@ -11,3 +11,4 @@
 * [使用YAML作为Widget微框架配置](using-yaml-as-widget-configuration)
 * [使用JSON作为Widget微框架配置](using-json-as-widget-configuration)
 * [编写你的Hello World微件](write-a-hello-world-widget)
+* [使用Map微件管理您的映射数据](using-map-widget-to-manage-mapping-data)
