@@ -316,12 +316,12 @@ class Validate extends AbstractWidget
         if (isset($this->messages[$field][$rule]) && is_array($this->messages[$field])) {
             $messages = $this->messages[$field][$rule];
         // Case 1
-        } elseif (isset($this->messages[$field]) && is_string($this->messages[$field])) {
+        } elseif (isset($this->messages[$field]) && is_scalar($this->messages[$field])) {
             $messages = $this->messages[$field];
         }
 
         // Convert message to array for validator
-        if (is_string($messages)) {
+        if (is_scalar($messages)) {
             $props['message'] =  $messages;
         } elseif (is_array($messages)) {
             foreach ($messages as $name => $message) {
