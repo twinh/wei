@@ -145,7 +145,7 @@ class Db extends AbstractWidget
      */
     public function __invoke($table)
     {
-        return $this->from($table);
+        return $this->createQueryBuilder($table);
     }
 
     /**
@@ -461,24 +461,13 @@ class Db extends AbstractWidget
     /**
      * Create a new instance of a SQL query builder
      *
-     * @return Db\QueryBuilder
-     */
-    public function createQueryBuilder()
-    {
-        return new Db\QueryBuilder($this);
-    }
-
-    /**
-     * Create a new instance of a SQL query builder with specified table and alias
-     *
      * @param string $table The name of database table
      * @return Db\QueryBuilder
      */
-    public function from($table)
+    public function createQueryBuilder($table = null)
     {
-        return $this
-            ->createQueryBuilder()
-            ->from($table);
+        $qb = new Db\QueryBuilder($this);
+        return $qb->from($table);
     }
 
     /**

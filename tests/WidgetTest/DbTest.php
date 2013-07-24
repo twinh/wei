@@ -816,8 +816,7 @@ class DbTest extends TestCase
     {
         $db = $this->db;
 
-        $query = $db
-            ->from('member')
+        $query = $db('member')
             ->where('id = :id AND group_id = :groupId')
             ->setParameters(array(
                 'id' => 1,
