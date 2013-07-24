@@ -4,6 +4,15 @@ Changelog
 ## 0.9.4 (WIP)
 
 * Merged cache widget's `cached` method into `get` method
+* Added `indexBy` method for query builder
+* Added support that automatically create dependence map when configuration key contains ".", refs 6ca934c7fb79956f804641c3dc127a8789e03961
+* Fixed query builder parameter number error when parameter value is 0 or null, refs 719aec608e748bbc36089fe20a08d56bebe54f15
+* Fixed test error for PHPUnit < 3.7.0
+* Used db widget instead of dbal widget as recordExists validator db provider
+* Added [map](lib/Widget/Map.php) widget that handles key-value map data
+* Added `jsonObject` dataType for `call` widget
+* Removed `__invoke` method, `__invoke` method is optional, refs 7c7f13e3702c11bd5f35f4e9dcc74598e6cd72b3
+* Added getResponseJson for `call` widget
 
 ## 0.9.3 (2013-07-04)
 
