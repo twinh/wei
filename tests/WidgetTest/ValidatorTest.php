@@ -727,7 +727,7 @@ class ValidatorTest extends TestCase
 
     public function testIntAsMessage()
     {
-        $validate = $this->validate(array(
+        $validator = $this->validate(array(
             'data' => array(
                 'email' => 'twinhuang',
             ),
@@ -740,6 +740,20 @@ class ValidatorTest extends TestCase
                 'email' => 123,
             )
         ));
-        $this->assertEquals(123, $validate->getFirstMessage());
+        $this->assertEquals(123, $validator->getFirstMessage());
+    }
+
+    public function testNullRules()
+    {
+        $validator = $this->validate(array(
+            'rules' => null
+        ));
+        $this->assertTrue($validator->isValid());
+
+        $validator = $this->validate(array(
+            'rules' => null,
+            'messages' => null
+        ));
+        $this->assertTrue($validator->isValid());
     }
 }
