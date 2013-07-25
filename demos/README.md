@@ -5,6 +5,7 @@
 * [Using YAML as widget configuration](using-yaml-as-widget-configuration)
 * [Using JSON as widget configuration](using-json-as-widget-configuration)
 * [Write a hello world widget](write-a-hello-world-widget)
+* [Using Map Widget To Manage Mapping Data](using-map-widget-to-manage-mapping-data)
 
 ## 目录
 
