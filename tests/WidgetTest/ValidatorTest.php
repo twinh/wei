@@ -2,7 +2,6 @@
 
 namespace WidgetTest;
 
-
 class ValidatorTest extends TestCase
 {
     /**
@@ -724,5 +723,23 @@ class ValidatorTest extends TestCase
         // Equals to $this->isEndsWith('abc', null);
         // Not equals to $this->isEndsWith('abc', 'BC', true);
         $this->assertTrue($this->isEndsWith('abc'));
+    }
+
+    public function testIntAsMessage()
+    {
+        $validate = $this->validate(array(
+            'data' => array(
+                'email' => 'twinhuang',
+            ),
+            'rules' => array(
+                'email' => array(
+                    'email' => true
+                ),
+            ),
+            'messages' => array(
+                'email' => 123,
+            )
+        ));
+        $this->assertEquals(123, $validate->getFirstMessage());
     }
 }
