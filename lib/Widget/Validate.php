@@ -403,6 +403,18 @@ class Validate extends AbstractWidget
     }
 
     /**
+     * Set field rules
+     *
+     * @param array $rules
+     * @return Validate
+     */
+    public function setRules(array $rules = null)
+    {
+        $this->rules = (array)$rules;
+        return $this;
+    }
+
+    /**
      * Get valid rules by field name
      *
      * @param string $field The valid field
@@ -575,10 +587,9 @@ class Validate extends AbstractWidget
      * @param array $messages
      * @return Validate
      */
-    public function setMessages(array $messages)
+    public function setMessages(array $messages = null)
     {
-        $this->messages = $messages;
-
+        $this->messages = (array)$messages;
         return $this;
     }
 
