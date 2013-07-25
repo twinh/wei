@@ -12,7 +12,8 @@ Changelog
 * Added [map](lib/Widget/Map.php) widget that handles key-value map data
 * Added `jsonObject` dataType for `call` widget
 * Removed `__invoke` method, `__invoke` method is optional, refs 7c7f13e3702c11bd5f35f4e9dcc74598e6cd72b3
-* Added getResponseJson for `call` widget
+* Added getResponseJson method for `call` widget
+* Allow `null` value as validate rules and messages, refs 132b13dcda99dbd56d596cc50dff13bba8a48c38
 
 ## 0.9.3 (2013-07-04)
 
