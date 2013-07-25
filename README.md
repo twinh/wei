@@ -41,8 +41,9 @@ Define the following requirement in your `composer.json` file and run `php compo
 
 ## Resources
 
-* [Documentation](docs/zh-CN) (Chinese)
-* [Demo](demos)
+* [Documentation](docs/zh-CN) (Chinese, Github online markdown)
+* [Documentation](http://twinh.github.io/widget/) (Chinese, single HTML file)
+* [Demo](demos) (English, Github online markdown)
 
 ## API Overview
 
