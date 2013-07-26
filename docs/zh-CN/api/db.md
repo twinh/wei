@@ -168,6 +168,14 @@ $widget->db->query("SELECT DATE('now')");
 //)
 ```
 
+### SQL查询构建器
+
+如果增删查改(CRUD)操作和Active Record模式还不能满足您的需求,
+
+你可以尝试使用QueryBuilder来生成更复杂的SQL语句
+
+[QueryBuilder](queryBuilder.md)
+
 调用方式
 --------
 
