@@ -20,6 +20,7 @@ $totalUsers = widget()->cache->get('totalUsers', 30, function($widget){
 $cache = widget()->cache;
 
 // 设置文章访问次数增加1,返回增加后的总次数
+// 注意: 开发人员无需预先判断该键名的缓存是否存在,如果缓存不存在,将自动从0开始计算
 $hits = $cache->increment('article-1', 1);
 
 echo '该文章已被访问' . $hits . '次';
