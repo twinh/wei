@@ -1,4 +1,6 @@
 Widget Framework Documentation
 ==============================
 
-http://twinh.github.io/widget/
+Documentation: http://twinh.github.io/widget/
+
+API Documentaton: http://twinh.github.io/widget/apidoc/
