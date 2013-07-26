@@ -86,8 +86,20 @@ widget(array(
 
 ### 区分`aliases`和`deps`
 
+1. `aliases`选项数组的key是微件名称,value是类名称
+2. `deps`选项数组的key是微件名称,value也是微件名称
+
 ```php
-// TODO
+widget(array(
+    'widget' => array(
+        'aliases' => array(
+            '微件名称' => '类名称'
+        ),
+        'deps' => array(
+            '微件名称' => '微件名称'
+        )
+    )
+));
 ```
 
 调用方式
