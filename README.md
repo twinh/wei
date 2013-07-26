@@ -43,6 +43,7 @@ Define the following requirement in your `composer.json` file and run `php compo
 
 * [Documentation](docs/zh-CN) (Chinese, GitHub online markdown)
 * [Documentation](http://twinh.github.io/widget/) (Chinese, single HTML file)
+* [API Documentation](http://twinh.github.io/widget/apidoc/) (English)
 * [Demo](demos) (English, GitHub online markdown)
 
 ## API Overview
