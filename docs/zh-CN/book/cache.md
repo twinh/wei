@@ -28,7 +28,7 @@ echo '该文章已被访问' . $hits . '次';
 
 ### 批量设置和获取缓存
 
-**注意:** 目前只有`couchbase`和`redis`支持原生的批量设置,其他的缓存都是逐个设置.
+**注意:** 目前只有`redis`和`couchbase`支持原生的批量设置,其他的缓存实际都是通过`foreach`语句逐个设置.
 
 ```php
 $cache = widget()->cache;
