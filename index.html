@@ -310,7 +310,12 @@
 
 <h3>获取微件管理器对象</h3>
 
+<div class="highlight"><pre><code class="php"><span class="c1">// 通过widget函数获取</span>
+<span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">();</span>
 
+<span class="c1">// 完整的获取方法如下,您可以根据自己的编码习惯选择适合您的方式</span>
+<span class="nv">$widget</span> <span class="o">=</span> <span class="nx">\Widget\Widget</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+</code></pre></div>
 
 <h3>设置微件配置</h3>
 
@@ -379,7 +384,21 @@
 <h3>区分<code>aliases</code>和<code>deps</code>
 </h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// TODO</span>
+<ol>
+<li>
+<code>aliases</code>选项数组的key是微件名称,value是类名称</li>
+<li>
+<code>deps</code>选项数组的key是微件名称,value也是微件名称</li>
+</ol><div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'微件名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span>
+        <span class="p">),</span>
+        <span class="s1">'deps'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'微件名称'</span> <span class="o">=&gt;</span> <span class="s1">'微件名称'</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">));</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
