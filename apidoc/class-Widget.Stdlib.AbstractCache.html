@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Widget\Stdlib\AbstractCache | Widget API Documentation</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?1362233758"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Widget.html">Widget<span></span></a>
+						<ul>
+				<li><a href="namespace-Widget.Db.html">Db</a>
+						</li>
+				<li class="active"><a href="namespace-Widget.Stdlib.html">Stdlib</a>
+						</li>
+				<li><a href="namespace-Widget.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Widget.Stdlib.AbstractCache.html">AbstractCache</a></li>
+				<li><a href="class-Widget.Stdlib.AbstractView.html">AbstractView</a></li>
+				<li><a href="class-Widget.Stdlib.AbstractWidgetAware.html">AbstractWidgetAware</a></li>
+				<li><a href="class-Widget.Stdlib.Event.html">Event</a></li>
+				<li><a href="class-Widget.Stdlib.Parameter.html">Parameter</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Widget.Stdlib.WidgetAwareInterface.html">WidgetAwareInterface</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Widget.Stdlib.html" title="Summary of Widget\Stdlib"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class AbstractCache</h1>
+
+
+	<div class="description">
+	
+<p>A simple implementation of Cache\CacheInterface</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Widget.AbstractWidget.html"><span>Widget\AbstractWidget</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Widget\Stdlib\AbstractCache</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+	<div>
+		<h4>Direct known subclasses</h4>
+			<a href="class-Widget.Apc.html">Widget\Apc</a>, 
+			<a href="class-Widget.ArrayCache.html">Widget\ArrayCache</a>, 
+			<a href="class-Widget.Redis.html">Widget\Redis</a>, 
+			<a href="class-Widget.Bicache.html">Widget\Bicache</a>, 
+			<a href="class-Widget.Cache.html">Widget\Cache</a>, 
+			<a href="class-Widget.Couchbase.html">Widget\Couchbase</a>, 
+			<a href="class-Widget.DbCache.html">Widget\DbCache</a>, 
+			<a href="class-Widget.FileCache.html">Widget\FileCache</a>, 
+			<a href="class-Widget.Memcache.html">Widget\Memcache</a>, 
+			<a href="class-Widget.Memcached.html">Widget\Memcached</a>, 
+			<a href="class-Widget.MongoCache.html">Widget\MongoCache</a>
+	</div>
+
+
+
+
+
+
+	<div class="info">
+		<b>Abstract</b><br />
+		
+		<b>Namespace:</b> <a href="namespace-Widget.html">Widget</a>\<a href="namespace-Widget.Stdlib.html">Stdlib</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+		<b>Located at</b> <a href="source-class-Widget.Stdlib.AbstractCache.html#13-176" title="Go to source code">Stdlib/AbstractCache.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Widget.Stdlib.AbstractCache.html#20-30" title="Go to source code">__invoke</a>( <span>mixed <var>$key</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMulti" id="_getMulti">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMulti">#</a>
+		<code><a href="source-class-Widget.Stdlib.AbstractCache.html#32-45" title="Go to source code">getMulti</a>( <span>array <var>$keys</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve multiple items</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve multiple items</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$keys</var></dt>
+					<dd><code>array</code><br>$keys The name of items</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setMulti" id="_setMulti">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setMulti">#</a>
+		<code><a href="source-class-Widget.Stdlib.AbstractCache.html#47-57" title="Go to source code">setMulti</a>( <span>array <var>$items</var></span>, <span>mixed <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="doGet" id="_doGet">
+
+		<td class="attributes"><code>
+			abstract protected 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_doGet">#</a>
+		<code><a href="source-class-Widget.Stdlib.AbstractCache.html#59-65" title="Go to source code">doGet</a>( <span>string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve an item</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve an item</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of item</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="get" id="_get">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_get">#</a>
+		<code><a href="source-class-Widget.Stdlib.AbstractCache.html#67-101" title="Go to source code">get</a>( <span>string <var>$key</var></span>, <span>integer <var>$expire</var> = <span class="php-keyword1">null</span></span>, <span>callable <var>$fn</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve an item</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve an item</p>
+
+<p><code>`</code>php $cache = widget()-&gt;cache;</p>
+
+<p>$cache-&gt;get('key'); // =&gt; false</p>
+
+<p>$cache-&gt;get('key', function($widget){ return 'value'; }); // =&gt;
+"value"</p>
+
+<p>$cache-&gt;get('key'); // =&gt; "value" <code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of item</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>integer</code><br>$expire The expire seconds of callback return value</dd>
+					<dt><var>$fn</var></dt>
+					<dd><code>callable</code><br>$fn The callback to execute when cache not found</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="set" id="_set">
+
+		<td class="attributes"><code>
+			abstract public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_set">#</a>
+		<code><a href="source-class-Widget.Stdlib.AbstractCache.html#103-111" title="Go to source code">set</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Store an item</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Store an item</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of item</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value The value of item</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>integer</code><br>$expire The expire seconds, defaults to 0, means never expired</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="remove" id="_remove">
+
+		<td class="attributes"><code>
+			abstract public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_remove">#</a>
+		<code><a href="source-class-Widget.Stdlib.AbstractCache.html#113-119" title="Go to source code">remove</a>( <span>string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Remove an item</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Remove an item</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of item</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="exists" id="_exists">
+
+		<td class="attributes"><code>
+			abstract public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_exists">#</a>
+		<code><a href="source-class-Widget.Stdlib.AbstractCache.html#121-127" title="Go to source code">exists</a>( <span>string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if an item is exists</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if an item is exists</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="add" id="_add">
+
+		<td class="attributes"><code>
+			abstract public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_add">#</a>
+		<code><a href="source-class-Widget.Stdlib.AbstractCache.html#129-137" title="Go to source code">add</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Add an item</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Add an item</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of item</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value The value of item</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>integer</code><br>$expire The expire seconds, defaults to 0, means never expired</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="replace" id="_replace">
+
+		<td class="attributes"><code>
+			abstract public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_replace">#</a>
+		<code><a href="source-class-Widget.Stdlib.AbstractCache.html#139-147" title="Go to source code">replace</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Replace an existing item</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Replace an existing item</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of item</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value The value of item</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>integer</code><br>$expire The expire seconds, defaults to 0, means never expired</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="increment" id="_increment">
+
+		<td class="attributes"><code>
+			abstract public 
+			integer|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_increment">#</a>
+		<code><a href="source-class-Widget.Stdlib.AbstractCache.html#149-156" title="Go to source code">increment</a>( <span>string <var>$key</var></span>, <span>integer <var>$offset</var> = <span class="php-num">1</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Increment an item</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Increment an item</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of item</dd>
+					<dt><var>$offset</var></dt>
+					<dd><code>integer</code><br>$offset The value to increased</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer|false</code><br>Returns the new value on success, or false on failure<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="decrement" id="_decrement">
+
+		<td class="attributes"><code>
+			 public 
+			integer|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_decrement">#</a>
+		<code><a href="source-class-Widget.Stdlib.AbstractCache.html#158-168" title="Go to source code">decrement</a>( <span>string <var>$key</var></span>, <span>integer <var>$offset</var> = <span class="php-num">1</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Decrement an item</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Decrement an item</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of item</dd>
+					<dt><var>$offset</var></dt>
+					<dd><code>integer</code><br>$offset The value to be decreased</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer|false</code><br>Returns the new value on success, or false on failure<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="clear" id="_clear">
+
+		<td class="attributes"><code>
+			abstract public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_clear">#</a>
+		<code><a href="source-class-Widget.Stdlib.AbstractCache.html#170-175" title="Go to source code">clear</a>( )</code>
+
+		<div class="description short">
+			
+<p>Clear all items</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Clear all items</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Widget.AbstractWidget.html#methods">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#___call">__call()</a>, 
+			<a href="class-Widget.AbstractWidget.html#___construct">__construct()</a>, 
+			<a href="class-Widget.AbstractWidget.html#___get">__get()</a>, 
+			<a href="class-Widget.AbstractWidget.html#_getOption">getOption()</a>, 
+			<a href="class-Widget.AbstractWidget.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary inherited">
+	<caption>Magic methods inherited from <a href="class-Widget.AbstractWidget.html#methods">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#m_apc">apc()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_app">app()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_arrayCache">arrayCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_bicache">bicache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_cache">cache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_call">call()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_cookie">cookie()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_couchbase">couchbase()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_db">db()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_dbCache">dbCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_dbal">dbal()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_download">download()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_entityManager">entityManager()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_env">env()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_error">error()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_escape">escape()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_fileCache">fileCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_flush">flush()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_gravatar">gravatar()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_header">header()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_is">is()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_json">json()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_logger">logger()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_map">map()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_memcache">memcache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_memcached">memcached()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_monolog">monolog()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_pinyin">pinyin()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_post">post()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_query">query()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_redirect">redirect()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_redis">redis()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_request">request()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_response">response()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_router">router()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_server">server()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_session">session()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_smarty">smarty()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_t">t()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_twig">twig()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_ua">ua()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_upload">upload()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_url">url()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_uuid">uuid()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_validate">validate()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_view">view()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_weChatApp">weChatApp()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_website">website()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Widget.AbstractWidget.html#properties">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#$deps"><var>$deps</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#$widget"><var>$widget</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary inherited">
+	<caption>Magic properties inherited from <a href="class-Widget.AbstractWidget.html#properties">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#m$apc"><var>$apc</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$app"><var>$app</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$arr"><var>$arr</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$arrayCache"><var>$arrayCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$bicache"><var>$bicache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$cache"><var>$cache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$call"><var>$call</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$cookie"><var>$cookie</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$couchbase"><var>$couchbase</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$db"><var>$db</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$dbCache"><var>$dbCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$dbal"><var>$dbal</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$download"><var>$download</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$entityManager"><var>$entityManager</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$env"><var>$env</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$error"><var>$error</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$escape"><var>$escape</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$event"><var>$event</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$fileCache"><var>$fileCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$flush"><var>$flush</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$gravatar"><var>$gravatar</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$header"><var>$header</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$is"><var>$is</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$json"><var>$json</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$logger"><var>$logger</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$map"><var>$map</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$memcache"><var>$memcache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$memcached"><var>$memcached</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$monolog"><var>$monolog</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$pinyin"><var>$pinyin</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$post"><var>$post</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$query"><var>$query</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$redirect"><var>$redirect</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$redis"><var>$redis</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$request"><var>$request</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$response"><var>$response</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$router"><var>$router</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$server"><var>$server</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$session"><var>$session</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$smarty"><var>$smarty</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$t"><var>$t</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$twig"><var>$twig</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$ua"><var>$ua</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$upload"><var>$upload</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$url"><var>$url</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$uuid"><var>$uuid</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$view"><var>$view</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$weChatApp"><var>$weChatApp</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$website"><var>$website</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+</div>
+
+	<div id="footer">
+		Widget API Documentation API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

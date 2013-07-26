@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Widget\Stdlib\Event | Widget API Documentation</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?1362233758"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Widget.html">Widget<span></span></a>
+						<ul>
+				<li><a href="namespace-Widget.Db.html">Db</a>
+						</li>
+				<li class="active"><a href="namespace-Widget.Stdlib.html">Stdlib</a>
+						</li>
+				<li><a href="namespace-Widget.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Widget.Stdlib.AbstractCache.html">AbstractCache</a></li>
+				<li><a href="class-Widget.Stdlib.AbstractView.html">AbstractView</a></li>
+				<li><a href="class-Widget.Stdlib.AbstractWidgetAware.html">AbstractWidgetAware</a></li>
+				<li class="active"><a href="class-Widget.Stdlib.Event.html">Event</a></li>
+				<li><a href="class-Widget.Stdlib.Parameter.html">Parameter</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Widget.Stdlib.WidgetAwareInterface.html">WidgetAwareInterface</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Widget.Stdlib.html" title="Summary of Widget\Stdlib"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Event</h1>
+
+
+	<div class="description">
+	
+<p>The base event class</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Widget.AbstractWidget.html"><span>Widget\AbstractWidget</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Widget\Stdlib\Event</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Widget.html">Widget</a>\<a href="namespace-Widget.Stdlib.html">Stdlib</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+				<b>Link:</b>
+				<a href="http://api.jquery.com/category/events/event-object/">http://api.jquery.com/category/events/event-object/</a><br />
+		<b>Located at</b> <a href="source-class-Widget.Stdlib.Event.html#13-242" title="Go to source code">Stdlib/Event.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Widget.Stdlib.Event.html#70-80" title="Go to source code">__construct</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Constructor</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructor</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When option "widget" is not an instance of "Widget\Widget"<br />
+				</div>
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Widget.AbstractWidget.html#___construct">Widget\AbstractWidget::__construct()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getType" id="_getType">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getType">#</a>
+		<code><a href="source-class-Widget.Stdlib.Event.html#82-95" title="Go to source code">getType</a>( <span>boolean <var>$full</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the type of event</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the type of event</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$full</var></dt>
+					<dd><code>boolean</code><br>$full Whether return type or type with with namespace</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setType" id="_setType">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Stdlib.Event.html">Widget\Stdlib\Event</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setType">#</a>
+		<code><a href="source-class-Widget.Stdlib.Event.html#97-108" title="Go to source code">setType</a>( <span>string <var>$type</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the type of event</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the type of event</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$type</var></dt>
+					<dd><code>string</code><br>$type</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Stdlib.Event.html">Widget\Stdlib\Event</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getNamespaces" id="_getNamespaces">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getNamespaces">#</a>
+		<code><a href="source-class-Widget.Stdlib.Event.html#110-118" title="Go to source code">getNamespaces</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the namespaces of event</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the namespaces of event</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setNamespaces" id="_setNamespaces">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Stdlib.Event.html">Widget\Stdlib\Event</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setNamespaces">#</a>
+		<code><a href="source-class-Widget.Stdlib.Event.html#120-131" title="Go to source code">setNamespaces</a>( <span>array <var>$namespaces</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the namespaces of event</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the namespaces of event</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$namespaces</var></dt>
+					<dd><code>array</code><br>$namespaces</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Stdlib.Event.html">Widget\Stdlib\Event</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getNamespace" id="_getNamespace">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getNamespace">#</a>
+		<code><a href="source-class-Widget.Stdlib.Event.html#133-141" title="Go to source code">getNamespace</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the event namespace</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the event namespace</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getTimeStamp" id="_getTimeStamp">
+
+		<td class="attributes"><code>
+			 public 
+			string|float
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getTimeStamp">#</a>
+		<code><a href="source-class-Widget.Stdlib.Event.html#143-151" title="Go to source code">getTimeStamp</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the time stamp when event constructed</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the time stamp when event constructed</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string|float</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="preventDefault" id="_preventDefault">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Stdlib.Event.html">Widget\Stdlib\Event</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_preventDefault">#</a>
+		<code><a href="source-class-Widget.Stdlib.Event.html#153-163" title="Go to source code">preventDefault</a>( )</code>
+
+		<div class="description short">
+			
+<p>Set a flag to prevent the default action</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set a flag to prevent the default action</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Stdlib.Event.html">Widget\Stdlib\Event</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isDefaultPrevented" id="_isDefaultPrevented">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isDefaultPrevented">#</a>
+		<code><a href="source-class-Widget.Stdlib.Event.html#165-173" title="Go to source code">isDefaultPrevented</a>( )</code>
+
+		<div class="description short">
+			
+<p>Whether prevent the default action of event or not</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Whether prevent the default action of event or not</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setResult" id="_setResult">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Stdlib.Event.html">Widget\Stdlib\Event</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setResult">#</a>
+		<code><a href="source-class-Widget.Stdlib.Event.html#175-186" title="Go to source code">setResult</a>( <span>mixed <var>$result</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets the event result</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets the event result</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$result</var></dt>
+					<dd><code>mixed</code><br>$result</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Stdlib.Event.html">Widget\Stdlib\Event</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResult" id="_getResult">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getResult">#</a>
+		<code><a href="source-class-Widget.Stdlib.Event.html#188-196" title="Go to source code">getResult</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the last result returned by the event handler</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the last result returned by the event handler</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setData" id="_setData">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Stdlib.Event.html">Widget\Stdlib\Event</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setData">#</a>
+		<code><a href="source-class-Widget.Stdlib.Event.html#198-209" title="Go to source code">setData</a>( <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Set the event data</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the event data</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Stdlib.Event.html">Widget\Stdlib\Event</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getData" id="_getData">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getData">#</a>
+		<code><a href="source-class-Widget.Stdlib.Event.html#211-219" title="Go to source code">getData</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the event data</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the event data</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="stopPropagation" id="_stopPropagation">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Stdlib.Event.html">Widget\Stdlib\Event</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_stopPropagation">#</a>
+		<code><a href="source-class-Widget.Stdlib.Event.html#221-231" title="Go to source code">stopPropagation</a>( )</code>
+
+		<div class="description short">
+			
+<p>Set a flag to stop trigger the next handler</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set a flag to stop trigger the next handler</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Stdlib.Event.html">Widget\Stdlib\Event</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPropagationStopped" id="_isPropagationStopped">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isPropagationStopped">#</a>
+		<code><a href="source-class-Widget.Stdlib.Event.html#233-241" title="Go to source code">isPropagationStopped</a>( )</code>
+
+		<div class="description short">
+			
+<p>Whether to trigger the next handler or not</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Whether to trigger the next handler or not</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Widget.AbstractWidget.html#methods">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#___call">__call()</a>, 
+			<a href="class-Widget.AbstractWidget.html#___get">__get()</a>, 
+			<a href="class-Widget.AbstractWidget.html#_getOption">getOption()</a>, 
+			<a href="class-Widget.AbstractWidget.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary inherited">
+	<caption>Magic methods inherited from <a href="class-Widget.AbstractWidget.html#methods">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#m_apc">apc()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_app">app()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_arrayCache">arrayCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_bicache">bicache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_cache">cache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_call">call()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_cookie">cookie()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_couchbase">couchbase()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_db">db()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_dbCache">dbCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_dbal">dbal()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_download">download()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_entityManager">entityManager()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_env">env()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_error">error()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_escape">escape()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_fileCache">fileCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_flush">flush()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_gravatar">gravatar()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_header">header()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_is">is()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_json">json()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_logger">logger()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_map">map()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_memcache">memcache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_memcached">memcached()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_monolog">monolog()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_pinyin">pinyin()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_post">post()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_query">query()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_redirect">redirect()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_redis">redis()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_request">request()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_response">response()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_router">router()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_server">server()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_session">session()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_smarty">smarty()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_t">t()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_twig">twig()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_ua">ua()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_upload">upload()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_url">url()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_uuid">uuid()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_validate">validate()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_view">view()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_weChatApp">weChatApp()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_website">website()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="type" id="$type">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Stdlib.Event.html#21-26" title="Go to source code"><var>$type</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$type" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The name of event</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The name of event</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="namespaces" id="$namespaces">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Stdlib.Event.html#28-33" title="Go to source code"><var>$namespaces</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$namespaces" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The namespaces of event</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The namespaces of event</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="timeStamp" id="$timeStamp">
+		<td class="attributes"><code>
+			protected  
+			float
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Stdlib.Event.html#35-40" title="Go to source code"><var>$timeStamp</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$timeStamp" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Time stamp with microseconds when object constructed</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Time stamp with microseconds when object constructed</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="preventDefault" id="$preventDefault">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Stdlib.Event.html#42-47" title="Go to source code"><var>$preventDefault</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$preventDefault" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether prevent the default action of event or not</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether prevent the default action of event or not</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="stopPropagation" id="$stopPropagation">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Stdlib.Event.html#49-54" title="Go to source code"><var>$stopPropagation</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$stopPropagation" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether to trigger the next handler or not</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether to trigger the next handler or not</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="result" id="$result">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Stdlib.Event.html#56-61" title="Go to source code"><var>$result</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$result" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The last value returned by an event handler</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The last value returned by an event handler</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="data" id="$data">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Stdlib.Event.html#63-68" title="Go to source code"><var>$data</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$data" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The data accepted from the handler</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The data accepted from the handler</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Widget.AbstractWidget.html#properties">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#$deps"><var>$deps</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#$widget"><var>$widget</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary inherited">
+	<caption>Magic properties inherited from <a href="class-Widget.AbstractWidget.html#properties">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#m$apc"><var>$apc</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$app"><var>$app</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$arr"><var>$arr</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$arrayCache"><var>$arrayCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$bicache"><var>$bicache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$cache"><var>$cache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$call"><var>$call</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$cookie"><var>$cookie</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$couchbase"><var>$couchbase</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$db"><var>$db</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$dbCache"><var>$dbCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$dbal"><var>$dbal</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$download"><var>$download</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$entityManager"><var>$entityManager</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$env"><var>$env</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$error"><var>$error</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$escape"><var>$escape</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$event"><var>$event</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$fileCache"><var>$fileCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$flush"><var>$flush</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$gravatar"><var>$gravatar</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$header"><var>$header</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$is"><var>$is</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$json"><var>$json</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$logger"><var>$logger</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$map"><var>$map</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$memcache"><var>$memcache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$memcached"><var>$memcached</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$monolog"><var>$monolog</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$pinyin"><var>$pinyin</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$post"><var>$post</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$query"><var>$query</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$redirect"><var>$redirect</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$redis"><var>$redis</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$request"><var>$request</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$response"><var>$response</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$router"><var>$router</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$server"><var>$server</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$session"><var>$session</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$smarty"><var>$smarty</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$t"><var>$t</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$twig"><var>$twig</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$ua"><var>$ua</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$upload"><var>$upload</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$url"><var>$url</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$uuid"><var>$uuid</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$view"><var>$view</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$weChatApp"><var>$weChatApp</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$website"><var>$website</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+</div>
+
+	<div id="footer">
+		Widget API Documentation API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

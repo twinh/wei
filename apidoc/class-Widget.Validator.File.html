@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Widget\Validator\File | Widget API Documentation</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?1362233758"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Widget.html">Widget<span></span></a>
+						<ul>
+				<li><a href="namespace-Widget.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
+						</li>
+				<li class="active"><a href="namespace-Widget.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Widget.Validator.AbstractGroupValidator.html">AbstractGroupValidator</a></li>
+				<li><a href="class-Widget.Validator.AbstractLengthValidator.html">AbstractLengthValidator</a></li>
+				<li><a href="class-Widget.Validator.AbstractValidator.html">AbstractValidator</a></li>
+				<li><a href="class-Widget.Validator.All.html">All</a></li>
+				<li><a href="class-Widget.Validator.AllOf.html">AllOf</a></li>
+				<li><a href="class-Widget.Validator.Alnum.html">Alnum</a></li>
+				<li><a href="class-Widget.Validator.Alpha.html">Alpha</a></li>
+				<li><a href="class-Widget.Validator.Between.html">Between</a></li>
+				<li><a href="class-Widget.Validator.Blank.html">Blank</a></li>
+				<li><a href="class-Widget.Validator.Callback.html">Callback</a></li>
+				<li><a href="class-Widget.Validator.Chinese.html">Chinese</a></li>
+				<li><a href="class-Widget.Validator.Color.html">Color</a></li>
+				<li><a href="class-Widget.Validator.CreditCard.html">CreditCard</a></li>
+				<li><a href="class-Widget.Validator.Date.html">Date</a></li>
+				<li><a href="class-Widget.Validator.DateTime.html">DateTime</a></li>
+				<li><a href="class-Widget.Validator.Decimal.html">Decimal</a></li>
+				<li><a href="class-Widget.Validator.Digit.html">Digit</a></li>
+				<li><a href="class-Widget.Validator.Dir.html">Dir</a></li>
+				<li><a href="class-Widget.Validator.DivisibleBy.html">DivisibleBy</a></li>
+				<li><a href="class-Widget.Validator.DoubleByte.html">DoubleByte</a></li>
+				<li><a href="class-Widget.Validator.Email.html">Email</a></li>
+				<li><a href="class-Widget.Validator.EmptyValue.html">EmptyValue</a></li>
+				<li><a href="class-Widget.Validator.EndsWith.html">EndsWith</a></li>
+				<li><a href="class-Widget.Validator.EntityExists.html">EntityExists</a></li>
+				<li><a href="class-Widget.Validator.Equals.html">Equals</a></li>
+				<li><a href="class-Widget.Validator.Exists.html">Exists</a></li>
+				<li><a href="class-Widget.Validator.FieldExists.html">FieldExists</a></li>
+				<li class="active"><a href="class-Widget.Validator.File.html">File</a></li>
+				<li><a href="class-Widget.Validator.IdCardCn.html">IdCardCn</a></li>
+				<li><a href="class-Widget.Validator.IdCardHk.html">IdCardHk</a></li>
+				<li><a href="class-Widget.Validator.IdCardMo.html">IdCardMo</a></li>
+				<li><a href="class-Widget.Validator.IdCardTw.html">IdCardTw</a></li>
+				<li><a href="class-Widget.Validator.Image.html">Image</a></li>
+				<li><a href="class-Widget.Validator.In.html">In</a></li>
+				<li><a href="class-Widget.Validator.Ip.html">Ip</a></li>
+				<li><a href="class-Widget.Validator.Length.html">Length</a></li>
+				<li><a href="class-Widget.Validator.Lowercase.html">Lowercase</a></li>
+				<li><a href="class-Widget.Validator.Max.html">Max</a></li>
+				<li><a href="class-Widget.Validator.MaxLength.html">MaxLength</a></li>
+				<li><a href="class-Widget.Validator.Min.html">Min</a></li>
+				<li><a href="class-Widget.Validator.MinLength.html">MinLength</a></li>
+				<li><a href="class-Widget.Validator.MobileCn.html">MobileCn</a></li>
+				<li><a href="class-Widget.Validator.NoneOf.html">NoneOf</a></li>
+				<li><a href="class-Widget.Validator.Null.html">Null</a></li>
+				<li><a href="class-Widget.Validator.Number.html">Number</a></li>
+				<li><a href="class-Widget.Validator.OneOf.html">OneOf</a></li>
+				<li><a href="class-Widget.Validator.PhoneCn.html">PhoneCn</a></li>
+				<li><a href="class-Widget.Validator.PlateNumberCn.html">PlateNumberCn</a></li>
+				<li><a href="class-Widget.Validator.PostcodeCn.html">PostcodeCn</a></li>
+				<li><a href="class-Widget.Validator.QQ.html">QQ</a></li>
+				<li><a href="class-Widget.Validator.RecordExists.html">RecordExists</a></li>
+				<li><a href="class-Widget.Validator.Regex.html">Regex</a></li>
+				<li><a href="class-Widget.Validator.Required.html">Required</a></li>
+				<li><a href="class-Widget.Validator.SomeOf.html">SomeOf</a></li>
+				<li><a href="class-Widget.Validator.StartsWith.html">StartsWith</a></li>
+				<li><a href="class-Widget.Validator.Time.html">Time</a></li>
+				<li><a href="class-Widget.Validator.Tld.html">Tld</a></li>
+				<li><a href="class-Widget.Validator.Type.html">Type</a></li>
+				<li><a href="class-Widget.Validator.Uppercase.html">Uppercase</a></li>
+				<li><a href="class-Widget.Validator.Url.html">Url</a></li>
+				<li><a href="class-Widget.Validator.Uuid.html">Uuid</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Widget.Validator.ValidatorInterface.html">ValidatorInterface</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Widget.Validator.html" title="Summary of Widget\Validator"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class File</h1>
+
+
+	<div class="description">
+	
+<p>Check if the input is valid file</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Widget.AbstractWidget.html"><span>Widget\AbstractWidget</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+			<a href="class-Widget.Validator.AbstractValidator.html"><span>Widget\Validator\AbstractValidator</span></a>
+			
+			 implements 
+				<a href="class-Widget.Validator.ValidatorInterface.html"><span>Widget\Validator\ValidatorInterface</span></a>
+			
+			
+		</dd>
+		<dd style="padding-left:60px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Widget\Validator\File</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+	<div>
+		<h4>Direct known subclasses</h4>
+			<a href="class-Widget.Validator.Image.html">Widget\Validator\Image</a>
+	</div>
+
+	<div>
+		<h4>Indirect known subclasses</h4>
+			<a href="class-Widget.Upload.html">Widget\Upload</a>
+	</div>
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Widget.html">Widget</a>\<a href="namespace-Widget.Validator.html">Validator</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+		<b>Located at</b> <a href="source-class-Widget.Validator.File.html#11-443" title="Go to source code">Validator/File.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Widget.Validator.File.html#150-158" title="Go to source code">__invoke</a>( <span>mixed <var>$input</var></span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Validate the input value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Validate the input value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$options</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Widget.Validator.AbstractValidator.html#___invoke">Widget\Validator\AbstractValidator::__invoke()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="validate" id="_validate">
+
+		<td class="attributes"><code>
+			 protected 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_validate">#</a>
+		<code><a href="source-class-Widget.Validator.File.html#160-242" title="Go to source code">validate</a>( <span>mixed <var>$input</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Validate the input value (ignore the $negative property)</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Validate the input value (ignore the $negative property)</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input The input to be validated</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="inMimeType" id="_inMimeType">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_inMimeType">#</a>
+		<code><a href="source-class-Widget.Validator.File.html#244-266" title="Go to source code">inMimeType</a>( <span>string <var>$findMe</var></span>, <span>array <var>$mimeTypes</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Checks if a mime type exists in a mime type array</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Checks if a mime type exists in a mime type array</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$findMe</var></dt>
+					<dd><code>string</code><br>$findMe The mime type to be searched</dd>
+					<dt><var>$mimeTypes</var></dt>
+					<dd><code>array</code><br>$mimeTypes The mime type array, allow element likes "image/*" to match all image
+mime type, such as "image/gif", "image/jpeg", etc</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setExts" id="_setExts">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Validator.File.html">Widget\Validator\File</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setExts">#</a>
+		<code><a href="source-class-Widget.Validator.File.html#268-279" title="Go to source code">setExts</a>( <span>string|array <var>$exts</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set allowed file extensions</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set allowed file extensions</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$exts</var></dt>
+					<dd><code>string|array</code><br>$exts String format likes 'php,js' or array format likes [php, js]</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Validator.File.html">Widget\Validator\File</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setExcludeExts" id="_setExcludeExts">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Validator.File.html">Widget\Validator\File</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setExcludeExts">#</a>
+		<code><a href="source-class-Widget.Validator.File.html#281-292" title="Go to source code">setExcludeExts</a>( <span>string|array <var>$exts</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set exclude file extensions</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set exclude file extensions</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$exts</var></dt>
+					<dd><code>string|array</code><br>$exts String format likes 'php,js' or array format likes [php, js]</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Validator.File.html">Widget\Validator\File</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setMaxSize" id="_setMaxSize">
+
+		<td class="attributes"><code>
+			 protected 
+			<code><a href="class-Widget.Validator.File.html">Widget\Validator\File</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setMaxSize">#</a>
+		<code><a href="source-class-Widget.Validator.File.html#294-306" title="Go to source code">setMaxSize</a>( <span>string|integer <var>$maxSize</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set maximum file size</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set maximum file size</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$maxSize</var></dt>
+					<dd><code>string|integer</code><br>$maxSize</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Validator.File.html">Widget\Validator\File</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setMinSize" id="_setMinSize">
+
+		<td class="attributes"><code>
+			 protected 
+			<code><a href="class-Widget.Validator.File.html">Widget\Validator\File</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setMinSize">#</a>
+		<code><a href="source-class-Widget.Validator.File.html#308-320" title="Go to source code">setMinSize</a>( <span>string|integer <var>$minSize</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the minimum file size</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the minimum file size</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$minSize</var></dt>
+					<dd><code>string|integer</code><br>$minSize</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Validator.File.html">Widget\Validator\File</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toBytes" id="_toBytes">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_toBytes">#</a>
+		<code><a href="source-class-Widget.Validator.File.html#322-343" title="Go to source code">toBytes</a>( <span>string|integer <var>$size</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Converts human readable file size (e.g. 1.2MB, 10KB) into bytes</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Converts human readable file size (e.g. 1.2MB, 10KB) into bytes</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$size</var></dt>
+					<dd><code>string|integer</code><br>$size</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="fromBytes" id="_fromBytes">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_fromBytes">#</a>
+		<code><a href="source-class-Widget.Validator.File.html#345-357" title="Go to source code">fromBytes</a>( <span>integer <var>$bytes</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Formats bytes to human readable file size (e.g. 1.2MB, 10KB)</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Formats bytes to human readable file size (e.g. 1.2MB, 10KB)</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bytes</var></dt>
+					<dd><code>integer</code><br>$bytes</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setMimeTypes" id="_setMimeTypes">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Validator.File.html">Widget\Validator\File</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setMimeTypes">#</a>
+		<code><a href="source-class-Widget.Validator.File.html#359-370" title="Go to source code">setMimeTypes</a>( <span>string|array <var>$mimeTypes</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the file mime types</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the file mime types</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$mimeTypes</var></dt>
+					<dd><code>string|array</code><br>$mimeTypes</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Validator.File.html">Widget\Validator\File</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setExcludeMimeTypes" id="_setExcludeMimeTypes">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Validator.File.html">Widget\Validator\File</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setExcludeMimeTypes">#</a>
+		<code><a href="source-class-Widget.Validator.File.html#372-383" title="Go to source code">setExcludeMimeTypes</a>( <span>string|array <var>$excludeMimeTypes</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the file exclude mime types</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the file exclude mime types</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$excludeMimeTypes</var></dt>
+					<dd><code>string|array</code><br>$excludeMimeTypes</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Validator.File.html">Widget\Validator\File</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="convertToArray" id="_convertToArray">
+
+		<td class="attributes"><code>
+			 protected 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_convertToArray">#</a>
+		<code><a href="source-class-Widget.Validator.File.html#385-404" title="Go to source code">convertToArray</a>( <span>mixed <var>$var</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Converts parameter to array</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Converts parameter to array</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$var</var></dt>
+					<dd><code>mixed</code><br>$var</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When parameter is not a string or array<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMimeType" id="_getMimeType">
+
+		<td class="attributes"><code>
+			 public 
+			string|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMimeType">#</a>
+		<code><a href="source-class-Widget.Validator.File.html#406-422" title="Go to source code">getMimeType</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the file mime type on success</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the file mime type on success</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string|false</code><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-UnexpectedValueException.html">UnexpectedValueException</a></code></code><br>When failed to open fileinfo database<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getExt" id="_getExt">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getExt">#</a>
+		<code><a href="source-class-Widget.Validator.File.html#424-442" title="Go to source code">getExt</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the file extension, if file is not exists, return null instead</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the file extension, if file is not exists, return null instead</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Widget.Validator.AbstractValidator.html#methods">Widget\Validator\AbstractValidator</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.Validator.AbstractValidator.html#_addError">addError()</a>, 
+			<a href="class-Widget.Validator.AbstractValidator.html#_getErrors">getErrors()</a>, 
+			<a href="class-Widget.Validator.AbstractValidator.html#_getJoinedMessage">getJoinedMessage()</a>, 
+			<a href="class-Widget.Validator.AbstractValidator.html#_getMessages">getMessages()</a>, 
+			<a href="class-Widget.Validator.AbstractValidator.html#_getName">getName()</a>, 
+			<a href="class-Widget.Validator.AbstractValidator.html#_hasError">hasError()</a>, 
+			<a href="class-Widget.Validator.AbstractValidator.html#_isString">isString()</a>, 
+			<a href="class-Widget.Validator.AbstractValidator.html#_isValid">isValid()</a>, 
+			<a href="class-Widget.Validator.AbstractValidator.html#_loadTranslationMessages">loadTranslationMessages()</a>, 
+			<a href="class-Widget.Validator.AbstractValidator.html#_setMessages">setMessages()</a>, 
+			<a href="class-Widget.Validator.AbstractValidator.html#_setName">setName()</a>, 
+			<a href="class-Widget.Validator.AbstractValidator.html#_storeOption">storeOption()</a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Widget.AbstractWidget.html#methods">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#___call">__call()</a>, 
+			<a href="class-Widget.AbstractWidget.html#___construct">__construct()</a>, 
+			<a href="class-Widget.AbstractWidget.html#___get">__get()</a>, 
+			<a href="class-Widget.AbstractWidget.html#_getOption">getOption()</a>, 
+			<a href="class-Widget.AbstractWidget.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary inherited">
+	<caption>Magic methods inherited from <a href="class-Widget.Validator.AbstractValidator.html#methods">Widget\Validator\AbstractValidator</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.Validator.AbstractValidator.html#m_t">t()</a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Magic methods inherited from <a href="class-Widget.AbstractWidget.html#methods">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#m_apc">apc()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_app">app()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_arrayCache">arrayCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_bicache">bicache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_cache">cache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_call">call()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_cookie">cookie()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_couchbase">couchbase()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_db">db()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_dbCache">dbCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_dbal">dbal()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_download">download()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_entityManager">entityManager()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_env">env()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_error">error()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_escape">escape()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_fileCache">fileCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_flush">flush()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_gravatar">gravatar()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_header">header()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_is">is()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_json">json()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_logger">logger()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_map">map()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_memcache">memcache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_memcached">memcached()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_monolog">monolog()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_pinyin">pinyin()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_post">post()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_query">query()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_redirect">redirect()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_redis">redis()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_request">request()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_response">response()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_router">router()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_server">server()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_session">session()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_smarty">smarty()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_twig">twig()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_ua">ua()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_upload">upload()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_url">url()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_uuid">uuid()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_validate">validate()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_view">view()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_weChatApp">weChatApp()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_website">website()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="notFoundMessage" id="$notFoundMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#18" title="Go to source code"><var>$notFoundMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'%name% is not found or not readable'</span></code></td>
+		<td class="description"><div>
+			<a href="#$notFoundMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="maxSizeMessage" id="$maxSizeMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#20" title="Go to source code"><var>$maxSizeMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'%name% is too large(%sizeString%), allowed maximum size is %maxSizeString%'</span></code></td>
+		<td class="description"><div>
+			<a href="#$maxSizeMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="minSizeMessage" id="$minSizeMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#22" title="Go to source code"><var>$minSizeMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'%name% is too small(%sizeString%), expected minimum size is %minSizeString%'</span></code></td>
+		<td class="description"><div>
+			<a href="#$minSizeMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="extsMessage" id="$extsMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#24" title="Go to source code"><var>$extsMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'%name% extension(%ext%) is not allowed, allowed extension: %exts%'</span></code></td>
+		<td class="description"><div>
+			<a href="#$extsMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="excludeExtsMessage" id="$excludeExtsMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#26" title="Go to source code"><var>$excludeExtsMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'%name% extension(%ext%) is not allowed, not allowed extension: %excludeExts%'</span></code></td>
+		<td class="description"><div>
+			<a href="#$excludeExtsMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="mimeTypeNotDetectedMessage" id="$mimeTypeNotDetectedMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#28" title="Go to source code"><var>$mimeTypeNotDetectedMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'%name% mime type could not be detected'</span></code></td>
+		<td class="description"><div>
+			<a href="#$mimeTypeNotDetectedMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="mimeTypesMessage" id="$mimeTypesMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#30" title="Go to source code"><var>$mimeTypesMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'%name% mime type &quot;%mimeType%&quot; is not allowed'</span></code></td>
+		<td class="description"><div>
+			<a href="#$mimeTypesMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="excludeMimeTypesMessage" id="$excludeMimeTypesMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#32" title="Go to source code"><var>$excludeMimeTypesMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'%name% mime type &quot;%mimeType%&quot; is not allowed'</span></code></td>
+		<td class="description"><div>
+			<a href="#$excludeMimeTypesMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="negativeMessage" id="$negativeMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#34" title="Go to source code"><var>$negativeMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'%name% must be a non-existing file'</span></code></td>
+		<td class="description"><div>
+			<a href="#$negativeMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The common message for negative validator</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The common message for negative validator</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="file" id="$file">
+		<td class="attributes"><code>
+			protected  
+			string|false
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#36-41" title="Go to source code"><var>$file</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$file" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The absolute file path, or false when file not found or not readable</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The absolute file path, or false when file not found or not readable</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="originFile" id="$originFile">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#43-49" title="Go to source code"><var>$originFile</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$originFile" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The origin name of uploaded file, if the input is not uploaded file array,
+the origin name is equals to $this-&gt;file</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The origin name of uploaded file, if the input is not uploaded file array,
+the origin name is equals to $this-&gt;file</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="size" id="$size">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#51-56" title="Go to source code"><var>$size</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$size" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The detected byte size of file</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The detected byte size of file</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="sizeString" id="$sizeString">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#58-63" title="Go to source code"><var>$sizeString</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$sizeString" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The formatted file size, e.g. 1.2MB, 10KB</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The formatted file size, e.g. 1.2MB, 10KB</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="maxSize" id="$maxSize">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#65-70" title="Go to source code"><var>$maxSize</var></a>
+		</td>
+		<td class="value"><code><span class="php-num">0</span></code></td>
+		<td class="description"><div>
+			<a href="#$maxSize" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The maximum file size limit</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The maximum file size limit</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="maxSizeString" id="$maxSizeString">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#72-77" title="Go to source code"><var>$maxSizeString</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$maxSizeString" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The formatted maximum file size, e.g. 1.2MB, 10KB</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The formatted maximum file size, e.g. 1.2MB, 10KB</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="minSize" id="$minSize">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#79-84" title="Go to source code"><var>$minSize</var></a>
+		</td>
+		<td class="value"><code><span class="php-num">0</span></code></td>
+		<td class="description"><div>
+			<a href="#$minSize" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The minimum file size limit</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The minimum file size limit</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="minSizeString" id="$minSizeString">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#86-91" title="Go to source code"><var>$minSizeString</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$minSizeString" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The formatted minimum file size, e.g. 1.2MB, 10KB</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The formatted minimum file size, e.g. 1.2MB, 10KB</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="ext" id="$ext">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#93-98" title="Go to source code"><var>$ext</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$ext" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The detected file extension</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The detected file extension</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="exts" id="$exts">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#100-105" title="Go to source code"><var>$exts</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$exts" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The allowed file extensions</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The allowed file extensions</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="excludeExts" id="$excludeExts">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#107-112" title="Go to source code"><var>$excludeExts</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$excludeExts" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The excluding file extensions</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The excluding file extensions</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="mimeType" id="$mimeType">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#114-119" title="Go to source code"><var>$mimeType</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$mimeType" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The detected file mime type</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The detected file mime type</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="mimeTypes" id="$mimeTypes">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#121-126" title="Go to source code"><var>$mimeTypes</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$mimeTypes" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The allowed file mime types</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The allowed file mime types</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="excludeMimeTypes" id="$excludeMimeTypes">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#128-133" title="Go to source code"><var>$excludeMimeTypes</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$excludeMimeTypes" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The excluding file mime types</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The excluding file mime types</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="units" id="$units">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#135-140" title="Go to source code"><var>$units</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(<span class="php-quote">'B'</span>, <span class="php-quote">'KB'</span>, <span class="php-quote">'MB'</span>, <span class="php-quote">'GB'</span>, <span class="php-quote">'TB'</span>, <span class="php-quote">'PB'</span>, <span class="php-quote">'EB'</span>, <span class="php-quote">'ZB'</span>, <span class="php-quote">'YB'</span>)</code></td>
+		<td class="description"><div>
+			<a href="#$units" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The file size unit</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The file size unit</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="magicFile" id="$magicFile">
+		<td class="attributes"><code>
+			protected  
+			string|null
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.File.html#142-148" title="Go to source code"><var>$magicFile</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$magicFile" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The magic database file to detect file mime type</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The magic database file to detect file mime type</p>
+
+
+					<h4>Link</h4>
+					<div class="list">
+							<a href="http://www.php.net/manual/en/function.finfo-open.php">http://www.php.net/manual/en/function.finfo-open.php</a><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Widget.Validator.AbstractValidator.html#properties">Widget\Validator\AbstractValidator</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.Validator.AbstractValidator.html#$errors"><var>$errors</var></a>, 
+			<a href="class-Widget.Validator.AbstractValidator.html#$name"><var>$name</var></a>, 
+			<a href="class-Widget.Validator.AbstractValidator.html#$negative"><var>$negative</var></a>, 
+			<a href="class-Widget.Validator.AbstractValidator.html#$notStringMessage"><var>$notStringMessage</var></a>, 
+			<a href="class-Widget.Validator.AbstractValidator.html#$translationMessagesLoaded"><var>$translationMessagesLoaded</var></a>, 
+			<a href="class-Widget.Validator.AbstractValidator.html#$validator"><var>$validator</var></a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Widget.AbstractWidget.html#properties">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#$deps"><var>$deps</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#$widget"><var>$widget</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary inherited">
+	<caption>Magic properties inherited from <a href="class-Widget.Validator.AbstractValidator.html#properties">Widget\Validator\AbstractValidator</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.Validator.AbstractValidator.html#m$t"><var>$t</var></a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Magic properties inherited from <a href="class-Widget.AbstractWidget.html#properties">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#m$apc"><var>$apc</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$app"><var>$app</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$arr"><var>$arr</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$arrayCache"><var>$arrayCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$bicache"><var>$bicache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$cache"><var>$cache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$call"><var>$call</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$cookie"><var>$cookie</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$couchbase"><var>$couchbase</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$db"><var>$db</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$dbCache"><var>$dbCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$dbal"><var>$dbal</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$download"><var>$download</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$entityManager"><var>$entityManager</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$env"><var>$env</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$error"><var>$error</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$escape"><var>$escape</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$event"><var>$event</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$fileCache"><var>$fileCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$flush"><var>$flush</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$gravatar"><var>$gravatar</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$header"><var>$header</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$is"><var>$is</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$json"><var>$json</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$logger"><var>$logger</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$map"><var>$map</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$memcache"><var>$memcache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$memcached"><var>$memcached</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$monolog"><var>$monolog</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$pinyin"><var>$pinyin</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$post"><var>$post</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$query"><var>$query</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$redirect"><var>$redirect</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$redis"><var>$redis</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$request"><var>$request</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$response"><var>$response</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$router"><var>$router</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$server"><var>$server</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$session"><var>$session</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$smarty"><var>$smarty</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$twig"><var>$twig</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$ua"><var>$ua</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$upload"><var>$upload</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$url"><var>$url</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$uuid"><var>$uuid</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$view"><var>$view</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$weChatApp"><var>$weChatApp</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$website"><var>$website</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+</div>
+
+	<div id="footer">
+		Widget API Documentation API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

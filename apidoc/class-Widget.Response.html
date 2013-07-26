@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Widget\Response | Widget API Documentation</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?1362233758"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Widget.html">Widget<span></span></a>
+						<ul>
+				<li><a href="namespace-Widget.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
+						</li>
+				<li><a href="namespace-Widget.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Widget.AbstractWidget.html">AbstractWidget</a></li>
+				<li><a href="class-Widget.Apc.html">Apc</a></li>
+				<li><a href="class-Widget.App.html">App</a></li>
+				<li><a href="class-Widget.Arr.html">Arr</a></li>
+				<li><a href="class-Widget.ArrayCache.html">ArrayCache</a></li>
+				<li><a href="class-Widget.Bicache.html">Bicache</a></li>
+				<li><a href="class-Widget.Cache.html">Cache</a></li>
+				<li><a href="class-Widget.Call.html">Call</a></li>
+				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
+				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Widget.Db.html">Db</a></li>
+				<li><a href="class-Widget.Dbal.html">Dbal</a></li>
+				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
+				<li><a href="class-Widget.Download.html">Download</a></li>
+				<li><a href="class-Widget.EntityManager.html">EntityManager</a></li>
+				<li><a href="class-Widget.Env.html">Env</a></li>
+				<li><a href="class-Widget.Error.html">Error</a></li>
+				<li><a href="class-Widget.Escape.html">Escape</a></li>
+				<li><a href="class-Widget.Event.html">Event</a></li>
+				<li><a href="class-Widget.FileCache.html">FileCache</a></li>
+				<li><a href="class-Widget.Flush.html">Flush</a></li>
+				<li><a href="class-Widget.Gravatar.html">Gravatar</a></li>
+				<li><a href="class-Widget.Header.html">Header</a></li>
+				<li><a href="class-Widget.Is.html">Is</a></li>
+				<li><a href="class-Widget.Json.html">Json</a></li>
+				<li><a href="class-Widget.Logger.html">Logger</a></li>
+				<li><a href="class-Widget.Map.html">Map</a></li>
+				<li><a href="class-Widget.Memcache.html">Memcache</a></li>
+				<li><a href="class-Widget.Memcached.html">Memcached</a></li>
+				<li><a href="class-Widget.MongoCache.html">MongoCache</a></li>
+				<li><a href="class-Widget.Monolog.html">Monolog</a></li>
+				<li><a href="class-Widget.PhpError.html">PhpError</a></li>
+				<li><a href="class-Widget.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Widget.Post.html">Post</a></li>
+				<li><a href="class-Widget.Query.html">Query</a></li>
+				<li><a href="class-Widget.Redirect.html">Redirect</a></li>
+				<li><a href="class-Widget.Redis.html">Redis</a></li>
+				<li><a href="class-Widget.Request.html">Request</a></li>
+				<li class="active"><a href="class-Widget.Response.html">Response</a></li>
+				<li><a href="class-Widget.Router.html">Router</a></li>
+				<li><a href="class-Widget.Server.html">Server</a></li>
+				<li><a href="class-Widget.Session.html">Session</a></li>
+				<li><a href="class-Widget.Smarty.html">Smarty</a></li>
+				<li><a href="class-Widget.T.html">T</a></li>
+				<li><a href="class-Widget.Twig.html">Twig</a></li>
+				<li><a href="class-Widget.Ua.html">Ua</a></li>
+				<li><a href="class-Widget.Upload.html">Upload</a></li>
+				<li><a href="class-Widget.Url.html">Url</a></li>
+				<li><a href="class-Widget.UrlDebugger.html">UrlDebugger</a></li>
+				<li><a href="class-Widget.Uuid.html">Uuid</a></li>
+				<li><a href="class-Widget.Validate.html">Validate</a></li>
+				<li><a href="class-Widget.View.html">View</a></li>
+				<li><a href="class-Widget.Website.html">Website</a></li>
+				<li><a href="class-Widget.WeChatApp.html">WeChatApp</a></li>
+				<li><a href="class-Widget.Widget.html">Widget</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Widget.html" title="Summary of Widget"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Response</h1>
+
+
+	<div class="description">
+	
+<p>A widget that handles the HTTP response data</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Widget.AbstractWidget.html"><span>Widget\AbstractWidget</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Widget\Response</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+	<div>
+		<h4>Direct known subclasses</h4>
+			<a href="class-Widget.Download.html">Widget\Download</a>, 
+			<a href="class-Widget.Flush.html">Widget\Flush</a>, 
+			<a href="class-Widget.Json.html">Widget\Json</a>, 
+			<a href="class-Widget.Redirect.html">Widget\Redirect</a>
+	</div>
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Widget.html">Widget</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+		<b>Located at</b> <a href="source-class-Widget.Response.html#11-515" title="Go to source code">Response.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Response.html">Widget\Response</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Widget.Response.html#154-164" title="Go to source code">__invoke</a>( <span>string <var>$content</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$status</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Send response header and content</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Send response header and content</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$content</var></dt>
+					<dd><code>string</code><br>$content</dd>
+					<dt><var>$status</var></dt>
+					<dd><code>integer</code><br>$status</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Response.html">Widget\Response</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="send" id="_send">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Response.html">Widget\Response</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_send">#</a>
+		<code><a href="source-class-Widget.Response.html#166-190" title="Go to source code">send</a>( <span>string <var>$content</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$status</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Send response header and content</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Send response header and content</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$content</var></dt>
+					<dd><code>string</code><br>$content</dd>
+					<dt><var>$status</var></dt>
+					<dd><code>integer</code><br>$status</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Response.html">Widget\Response</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setContent" id="_setContent">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Response.html">Widget\Response</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setContent">#</a>
+		<code><a href="source-class-Widget.Response.html#192-203" title="Go to source code">setContent</a>( <span>mixed <var>$content</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set response content</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set response content</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$content</var></dt>
+					<dd><code>mixed</code><br>$content</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Response.html">Widget\Response</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getContent" id="_getContent">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getContent">#</a>
+		<code><a href="source-class-Widget.Response.html#205-213" title="Go to source code">getContent</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get response content</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get response content</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sendContent" id="_sendContent">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Response.html">Widget\Response</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sendContent">#</a>
+		<code><a href="source-class-Widget.Response.html#215-225" title="Go to source code">sendContent</a>( )</code>
+
+		<div class="description short">
+			
+<p>Send response content</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Send response content</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Response.html">Widget\Response</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setStatusCode" id="_setStatusCode">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Response.html">Widget\Response</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setStatusCode">#</a>
+		<code><a href="source-class-Widget.Response.html#227-245" title="Go to source code">setStatusCode</a>( <span>integer <var>$code</var></span>, <span>string|null <var>$text</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the header status code</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the header status code</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$code</var></dt>
+					<dd><code>integer</code><br>$code The status code</dd>
+					<dt><var>$text</var></dt>
+					<dd><code>string|null</code><br>$text The status text</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Response.html">Widget\Response</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getStatusCode" id="_getStatusCode">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getStatusCode">#</a>
+		<code><a href="source-class-Widget.Response.html#247-255" title="Go to source code">getStatusCode</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the status code</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the status code</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setVersion" id="_setVersion">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Header.html">Widget\Header</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setVersion">#</a>
+		<code><a href="source-class-Widget.Response.html#257-268" title="Go to source code">setVersion</a>( <span>string <var>$version</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the HTTP version</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the HTTP version</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$version</var></dt>
+					<dd><code>string</code><br>$version The HTTP version</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Header.html">Widget\Header</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getVersion" id="_getVersion">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getVersion">#</a>
+		<code><a href="source-class-Widget.Response.html#270-278" title="Go to source code">getVersion</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the HTTP version</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the HTTP version</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setHeader" id="_setHeader">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Response.html">Widget\Response</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setHeader">#</a>
+		<code><a href="source-class-Widget.Response.html#280-306" title="Go to source code">setHeader</a>( <span>string <var>$name</var></span>, <span>string|array <var>$values</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$replace</var> = <span class="php-keyword1">true</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the header string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the header string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The header name</dd>
+					<dt><var>$values</var></dt>
+					<dd><code>string|array</code><br>$values The header values</dd>
+					<dt><var>$replace</var></dt>
+					<dd><code>boolean</code><br>$replace Whether replace the exists values or not</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Response.html">Widget\Response</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getHeader" id="_getHeader">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getHeader">#</a>
+		<code><a href="source-class-Widget.Response.html#308-327" title="Go to source code">getHeader</a>( <span>string <var>$name</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$first</var> = <span class="php-keyword1">true</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Get the header string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the header string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The header name</dd>
+					<dt><var>$default</var></dt>
+					<dd><code>mixed</code><br>$default The default value</dd>
+					<dt><var>$first</var></dt>
+					<dd><code>boolean</code><br>$first return the first element or the whole header values</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeHeader" id="_removeHeader">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Response.html">Widget\Response</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeHeader">#</a>
+		<code><a href="source-class-Widget.Response.html#329-339" title="Go to source code">removeHeader</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Remove header by specified name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Remove header by specified name</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The header name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Response.html">Widget\Response</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sendHeader" id="_sendHeader">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sendHeader">#</a>
+		<code><a href="source-class-Widget.Response.html#341-369" title="Go to source code">sendHeader</a>( )</code>
+
+		<div class="description short">
+			
+<p>Send HTTP headers, including HTTP status, raw headers and cookies</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Send HTTP headers, including HTTP status, raw headers and cookies</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>If the header has been seen, return false, otherwise, return true<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sendRawHeader" id="_sendRawHeader">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sendRawHeader">#</a>
+		<code><a href="source-class-Widget.Response.html#371-382" title="Go to source code">sendRawHeader</a>( <span>string <var>$header</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Send a raw HTTP header</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Send a raw HTTP header</p>
+
+<p>If in unit test mode, the response will store header string into
+<code>sentHeaders</code> property without send it for testing purpose</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$header</var></dt>
+					<dd><code>string</code><br>$header</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isHeaderSent" id="_isHeaderSent">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isHeaderSent">#</a>
+		<code><a href="source-class-Widget.Response.html#384-399" title="Go to source code">isHeaderSent</a>( <span>string <var>&amp; $file</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>&amp; $line</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Checks if or where headers have been sent</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Checks if or where headers have been sent</p>
+
+<p>If NOT in unit test mode and the optional <code>file</code> and
+<code>line</code> parameters are set, <code>isHeaderSent()</code> will put the
+PHP source file name and line number where output started in the file and line
+variables</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$file</var></dt>
+					<dd><code>string</code><br>$file</dd>
+					<dt><var>$line</var></dt>
+					<dd><code>integer</code><br>$line The line number where the output started</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+				<h4>Link</h4>
+				<div class="list">
+						<a href="http://php.net/manual/en/function.headers-sent.php">http://php.net/manual/en/function.headers-sent.php</a><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getCookie" id="_getCookie">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getCookie">#</a>
+		<code><a href="source-class-Widget.Response.html#401-411" title="Go to source code">getCookie</a>( <span>string <var>$key</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Get response cookie</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get response cookie</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of cookie</dd>
+					<dt><var>$default</var></dt>
+					<dd><code>mixed</code><br>$default The default value when cookie not exists</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setCookie" id="_setCookie">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Response.html">Widget\Response</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setCookie">#</a>
+		<code><a href="source-class-Widget.Response.html#413-426" title="Go to source code">setCookie</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Set response cookie</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set response cookie</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of cookie</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value The value of cookie</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options The options of cookie</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Response.html">Widget\Response</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeCookie" id="_removeCookie">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Response.html">Widget\Response</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeCookie">#</a>
+		<code><a href="source-class-Widget.Response.html#428-437" title="Go to source code">removeCookie</a>( <span>string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Remove response cookie</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Remove response cookie</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of cookie</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Response.html">Widget\Response</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sendCookie" id="_sendCookie">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sendCookie">#</a>
+		<code><a href="source-class-Widget.Response.html#439-453" title="Go to source code">sendCookie</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__toString" id="___toString">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___toString">#</a>
+		<code><a href="source-class-Widget.Response.html#455-465" title="Go to source code">__toString</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns response status, headers and content as string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns response status, headers and content as string</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getHeaderReference" id="_getHeaderReference">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			&amp;
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getHeaderReference">#</a>
+		<code><a href="source-class-Widget.Response.html#467-475" title="Go to source code">getHeaderReference</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the response headers variable reference</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the response headers variable reference</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getHeaderString" id="_getHeaderString">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getHeaderString">#</a>
+		<code><a href="source-class-Widget.Response.html#477-491" title="Go to source code">getHeaderString</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns response header as string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns response header as string</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isSent" id="_isSent">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isSent">#</a>
+		<code><a href="source-class-Widget.Response.html#493-501" title="Go to source code">isSent</a>( )</code>
+
+		<div class="description short">
+			
+<p>Check if response has been sent</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if response has been sent</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setSentStatus" id="_setSentStatus">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Response.html">Widget\Response</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setSentStatus">#</a>
+		<code><a href="source-class-Widget.Response.html#503-514" title="Go to source code">setSentStatus</a>( <span>boolean <var>$bool</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set response sent status</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set response sent status</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bool</var></dt>
+					<dd><code>boolean</code><br>$bool</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Response.html">Widget\Response</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Widget.AbstractWidget.html#methods">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#___call">__call()</a>, 
+			<a href="class-Widget.AbstractWidget.html#___construct">__construct()</a>, 
+			<a href="class-Widget.AbstractWidget.html#___get">__get()</a>, 
+			<a href="class-Widget.AbstractWidget.html#_getOption">getOption()</a>, 
+			<a href="class-Widget.AbstractWidget.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary inherited">
+	<caption>Magic methods inherited from <a href="class-Widget.AbstractWidget.html#methods">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#m_apc">apc()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_app">app()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_arrayCache">arrayCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_bicache">bicache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_cache">cache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_call">call()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_cookie">cookie()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_couchbase">couchbase()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_db">db()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_dbCache">dbCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_dbal">dbal()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_download">download()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_entityManager">entityManager()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_env">env()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_error">error()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_escape">escape()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_fileCache">fileCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_flush">flush()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_gravatar">gravatar()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_header">header()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_is">is()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_json">json()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_logger">logger()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_map">map()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_memcache">memcache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_memcached">memcached()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_monolog">monolog()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_pinyin">pinyin()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_post">post()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_query">query()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_redirect">redirect()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_redis">redis()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_request">request()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_response">response()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_router">router()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_server">server()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_session">session()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_smarty">smarty()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_t">t()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_twig">twig()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_ua">ua()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_upload">upload()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_url">url()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_uuid">uuid()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_validate">validate()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_view">view()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_weChatApp">weChatApp()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_website">website()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="codeTexts" id="$codeTexts">
+		<td class="attributes"><code>
+			protected static 
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Response.html#19-65" title="Go to source code"><var>$codeTexts</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+    <span class="php-comment">// Successful Requests</span>
+    <span class="php-num">200</span> =&gt; <span class="php-quote">'OK'</span>,
+    <span class="php-num">201</span> =&gt; <span class="php-quote">'Created'</span>,
+    <span class="php-num">202</span> =&gt; <span class="php-quote">'Accepted'</span>,
+    <span class="php-num">203</span> =&gt; <span class="php-quote">'Non-Authoritative Information'</span>,
+    <span class="php-num">204</span> =&gt; <span class="php-quote">'No Content'</span>,
+    <span class="php-num">205</span> =&gt; <span class="php-quote">'Reset Content'</span>,
+    <span class="php-num">206</span> =&gt; <span class="php-quote">'Partial Content'</span>,
+    <span class="php-comment">// Redirects</span>
+    <span class="php-num">300</span> =&gt; <span class="php-quote">'Multiple Choices'</span>,
+    <span class="php-num">301</span> =&gt; <span class="php-quote">'Moved Permanently'</span>,
+    <span class="php-num">302</span> =&gt; <span class="php-quote">'Found'</span>,
+    <span class="php-num">303</span> =&gt; <span class="php-quote">'See Other'</span>,
+    <span class="php-num">304</span> =&gt; <span class="php-quote">'Not Modified'</span>,
+    <span class="php-num">305</span> =&gt; <span class="php-quote">'Use Proxy'</span>,
+    <span class="php-num">307</span> =&gt; <span class="php-quote">'Temporary Redirect'</span>,
+    <span class="php-comment">// Client Errors</span>
+    <span class="php-num">401</span> =&gt; <span class="php-quote">'Unauthorized'</span>,
+    <span class="php-num">403</span> =&gt; <span class="php-quote">'Forbidden'</span>,
+    <span class="php-num">404</span> =&gt; <span class="php-quote">'Not Found'</span>,
+    <span class="php-num">405</span> =&gt; <span class="php-quote">'Method Not Allowed'</span>,
+    <span class="php-num">406</span> =&gt; <span class="php-quote">'Not Acceptable'</span>,
+    <span class="php-num">407</span> =&gt; <span class="php-quote">'Proxy Authentication Required'</span>,
+    <span class="php-num">408</span> =&gt; <span class="php-quote">'Request Timeout'</span>,
+    <span class="php-num">409</span> =&gt; <span class="php-quote">'Conflict'</span>,
+    <span class="php-num">410</span> =&gt; <span class="php-quote">'Gone'</span>,
+    <span class="php-num">411</span> =&gt; <span class="php-quote">'Length Required'</span>,
+    <span class="php-num">412</span> =&gt; <span class="php-quote">'Precondition Failed'</span>,
+    <span class="php-num">413</span> =&gt; <span class="php-quote">'Request Entity Too Large'</span>,
+    <span class="php-num">414</span> =&gt; <span class="php-quote">'Request-URI Too Long'</span>,
+    <span class="php-num">415</span> =&gt; <span class="php-quote">'Unsupported Media Type'</span>,
+    <span class="php-num">416</span> =&gt; <span class="php-quote">'Requested Range Not Satisfiable'</span>,
+    <span class="php-num">417</span> =&gt; <span class="php-quote">'Expectation Failed'</span>,
+    <span class="php-comment">// Server Errors</span>
+    <span class="php-num">500</span> =&gt; <span class="php-quote">'Internal Server Error'</span>,
+    <span class="php-num">501</span> =&gt; <span class="php-quote">'Not Implemented'</span>,
+    <span class="php-num">502</span> =&gt; <span class="php-quote">'Bad Gateway'</span>,
+    <span class="php-num">503</span> =&gt; <span class="php-quote">'Service Unavailable'</span>,
+    <span class="php-num">504</span> =&gt; <span class="php-quote">'Gateway Timeout'</span>,
+    <span class="php-num">505</span> =&gt; <span class="php-quote">'HTTP Version Not Supported'</span>
+)</code></td>
+		<td class="description"><div>
+			<a href="#$codeTexts" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Common use HTTP status code and text</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Common use HTTP status code and text</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="version" id="$version">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Response.html#67-72" title="Go to source code"><var>$version</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'1.1'</span></code></td>
+		<td class="description"><div>
+			<a href="#$version" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The HTTP version, current is 1.0 or 1.1</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The HTTP version, current is 1.0 or 1.1</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="statusCode" id="$statusCode">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Response.html#74-79" title="Go to source code"><var>$statusCode</var></a>
+		</td>
+		<td class="value"><code><span class="php-num">200</span></code></td>
+		<td class="description"><div>
+			<a href="#$statusCode" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The status code</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The status code</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="statusText" id="$statusText">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Response.html#81-86" title="Go to source code"><var>$statusText</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'OK'</span></code></td>
+		<td class="description"><div>
+			<a href="#$statusText" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The status text for status code</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The status text for status code</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="content" id="$content">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Response.html#88-93" title="Go to source code"><var>$content</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$content" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The response content</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The response content</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="headers" id="$headers">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Response.html#95-100" title="Go to source code"><var>$headers</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$headers" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The response headers</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The response headers</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="sentHeaders" id="$sentHeaders">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Response.html#102-107" title="Go to source code"><var>$sentHeaders</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$sentHeaders" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The sent response headers</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The sent response headers</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="cookies" id="$cookies">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Response.html#109-114" title="Go to source code"><var>$cookies</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$cookies" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The response cookies</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The response cookies</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="cookieOption" id="$cookieOption">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Response.html#116-138" title="Go to source code"><var>$cookieOption</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+    <span class="php-quote">'expires'</span>   =&gt; <span class="php-num">864000</span>,
+    <span class="php-quote">'path'</span>      =&gt; <span class="php-quote">'/'</span>,
+    <span class="php-quote">'domain'</span>    =&gt; <span class="php-keyword1">null</span>,
+    <span class="php-quote">'secure'</span>    =&gt; <span class="php-keyword1">false</span>,
+    <span class="php-quote">'httpOnly'</span>  =&gt; <span class="php-keyword1">false</span>,
+    <span class="php-quote">'raw'</span>       =&gt; <span class="php-keyword1">false</span>,
+)</code></td>
+		<td class="description"><div>
+			<a href="#$cookieOption" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The cookie options</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The cookie options</p>
+
+<p>Name | Type | Description ---------|--------|------------- expires | int |
+The lifetime of cookie (seconds) path | string | The path on the server in which
+the cookie will be available on domain | string | The domain that the cookie is
+available to secure | bool | Indicates that the cookie should only be
+transmitted over a secure HTTPS connection from the client httpOnly | bool |
+When TRUE the cookie will be made accessible only through the HTTP protocol raw
+| bool | Whether send a cookie without urlencoding the cookie value</p>
+
+
+					<h4>Link</h4>
+					<div class="list">
+							<a href="http://php.net/manual/en/function.setcookie.php">http://php.net/manual/en/function.setcookie.php</a><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isSent" id="$isSent">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Response.html#140-145" title="Go to source code"><var>$isSent</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$isSent" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether response content has been sent</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether response content has been sent</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="unitTest" id="$unitTest">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Response.html#147-152" title="Go to source code"><var>$unitTest</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$unitTest" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether in unit test mode</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether in unit test mode</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Widget.AbstractWidget.html#properties">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#$deps"><var>$deps</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#$widget"><var>$widget</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+	<table class="summary" id="magicProperties">
+	<caption>Magic properties summary</caption>
+	<tr data-order="logger" id="m$logger">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Widget.Logger.html">Widget\Logger</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Response.html#15" title="Go to source code"><var>$logger</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$logger" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The logger widget</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The logger widget</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Magic properties inherited from <a href="class-Widget.AbstractWidget.html#properties">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#m$apc"><var>$apc</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$app"><var>$app</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$arr"><var>$arr</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$arrayCache"><var>$arrayCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$bicache"><var>$bicache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$cache"><var>$cache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$call"><var>$call</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$cookie"><var>$cookie</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$couchbase"><var>$couchbase</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$db"><var>$db</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$dbCache"><var>$dbCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$dbal"><var>$dbal</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$download"><var>$download</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$entityManager"><var>$entityManager</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$env"><var>$env</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$error"><var>$error</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$escape"><var>$escape</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$event"><var>$event</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$fileCache"><var>$fileCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$flush"><var>$flush</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$gravatar"><var>$gravatar</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$header"><var>$header</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$is"><var>$is</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$json"><var>$json</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$map"><var>$map</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$memcache"><var>$memcache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$memcached"><var>$memcached</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$monolog"><var>$monolog</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$pinyin"><var>$pinyin</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$post"><var>$post</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$query"><var>$query</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$redirect"><var>$redirect</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$redis"><var>$redis</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$request"><var>$request</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$response"><var>$response</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$router"><var>$router</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$server"><var>$server</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$session"><var>$session</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$smarty"><var>$smarty</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$t"><var>$t</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$twig"><var>$twig</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$ua"><var>$ua</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$upload"><var>$upload</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$url"><var>$url</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$uuid"><var>$uuid</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$view"><var>$view</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$weChatApp"><var>$weChatApp</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$website"><var>$website</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+</div>
+
+	<div id="footer">
+		Widget API Documentation API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Widget\Pinyin | Widget API Documentation</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?1362233758"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Widget.html">Widget<span></span></a>
+						<ul>
+				<li><a href="namespace-Widget.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
+						</li>
+				<li><a href="namespace-Widget.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Widget.AbstractWidget.html">AbstractWidget</a></li>
+				<li><a href="class-Widget.Apc.html">Apc</a></li>
+				<li><a href="class-Widget.App.html">App</a></li>
+				<li><a href="class-Widget.Arr.html">Arr</a></li>
+				<li><a href="class-Widget.ArrayCache.html">ArrayCache</a></li>
+				<li><a href="class-Widget.Bicache.html">Bicache</a></li>
+				<li><a href="class-Widget.Cache.html">Cache</a></li>
+				<li><a href="class-Widget.Call.html">Call</a></li>
+				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
+				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Widget.Db.html">Db</a></li>
+				<li><a href="class-Widget.Dbal.html">Dbal</a></li>
+				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
+				<li><a href="class-Widget.Download.html">Download</a></li>
+				<li><a href="class-Widget.EntityManager.html">EntityManager</a></li>
+				<li><a href="class-Widget.Env.html">Env</a></li>
+				<li><a href="class-Widget.Error.html">Error</a></li>
+				<li><a href="class-Widget.Escape.html">Escape</a></li>
+				<li><a href="class-Widget.Event.html">Event</a></li>
+				<li><a href="class-Widget.FileCache.html">FileCache</a></li>
+				<li><a href="class-Widget.Flush.html">Flush</a></li>
+				<li><a href="class-Widget.Gravatar.html">Gravatar</a></li>
+				<li><a href="class-Widget.Header.html">Header</a></li>
+				<li><a href="class-Widget.Is.html">Is</a></li>
+				<li><a href="class-Widget.Json.html">Json</a></li>
+				<li><a href="class-Widget.Logger.html">Logger</a></li>
+				<li><a href="class-Widget.Map.html">Map</a></li>
+				<li><a href="class-Widget.Memcache.html">Memcache</a></li>
+				<li><a href="class-Widget.Memcached.html">Memcached</a></li>
+				<li><a href="class-Widget.MongoCache.html">MongoCache</a></li>
+				<li><a href="class-Widget.Monolog.html">Monolog</a></li>
+				<li><a href="class-Widget.PhpError.html">PhpError</a></li>
+				<li class="active"><a href="class-Widget.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Widget.Post.html">Post</a></li>
+				<li><a href="class-Widget.Query.html">Query</a></li>
+				<li><a href="class-Widget.Redirect.html">Redirect</a></li>
+				<li><a href="class-Widget.Redis.html">Redis</a></li>
+				<li><a href="class-Widget.Request.html">Request</a></li>
+				<li><a href="class-Widget.Response.html">Response</a></li>
+				<li><a href="class-Widget.Router.html">Router</a></li>
+				<li><a href="class-Widget.Server.html">Server</a></li>
+				<li><a href="class-Widget.Session.html">Session</a></li>
+				<li><a href="class-Widget.Smarty.html">Smarty</a></li>
+				<li><a href="class-Widget.T.html">T</a></li>
+				<li><a href="class-Widget.Twig.html">Twig</a></li>
+				<li><a href="class-Widget.Ua.html">Ua</a></li>
+				<li><a href="class-Widget.Upload.html">Upload</a></li>
+				<li><a href="class-Widget.Url.html">Url</a></li>
+				<li><a href="class-Widget.UrlDebugger.html">UrlDebugger</a></li>
+				<li><a href="class-Widget.Uuid.html">Uuid</a></li>
+				<li><a href="class-Widget.Validate.html">Validate</a></li>
+				<li><a href="class-Widget.View.html">View</a></li>
+				<li><a href="class-Widget.Website.html">Website</a></li>
+				<li><a href="class-Widget.WeChatApp.html">WeChatApp</a></li>
+				<li><a href="class-Widget.Widget.html">Widget</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Widget.html" title="Summary of Widget"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Pinyin</h1>
+
+
+	<div class="description">
+	
+<p>An util widget that converts Chinese words to phonetic alphabets</p>
+
+<p>The basic code of the pinyin widget is from the internet</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Widget.AbstractWidget.html"><span>Widget\AbstractWidget</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Widget\Pinyin</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Widget.html">Widget</a><br />
+		
+
+		<b>Located at</b> <a href="source-class-Widget.Pinyin.html#12-456" title="Go to source code">Pinyin.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="transform" id="_transform">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_transform">#</a>
+		<code><a href="source-class-Widget.Pinyin.html#420-434" title="Go to source code">transform</a>( <span>mixed <var>$num</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Widget.Pinyin.html#436-455" title="Go to source code">__invoke</a>( <span>string <var>$word</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Converts Chinese words to phonetic alphabets</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Converts Chinese words to phonetic alphabets</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$word</var></dt>
+					<dd><code>string</code><br>$word</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Widget.AbstractWidget.html#methods">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#___call">__call()</a>, 
+			<a href="class-Widget.AbstractWidget.html#___construct">__construct()</a>, 
+			<a href="class-Widget.AbstractWidget.html#___get">__get()</a>, 
+			<a href="class-Widget.AbstractWidget.html#_getOption">getOption()</a>, 
+			<a href="class-Widget.AbstractWidget.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary inherited">
+	<caption>Magic methods inherited from <a href="class-Widget.AbstractWidget.html#methods">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#m_apc">apc()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_app">app()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_arrayCache">arrayCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_bicache">bicache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_cache">cache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_call">call()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_cookie">cookie()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_couchbase">couchbase()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_db">db()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_dbCache">dbCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_dbal">dbal()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_download">download()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_entityManager">entityManager()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_env">env()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_error">error()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_escape">escape()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_fileCache">fileCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_flush">flush()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_gravatar">gravatar()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_header">header()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_is">is()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_json">json()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_logger">logger()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_map">map()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_memcache">memcache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_memcached">memcached()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_monolog">monolog()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_pinyin">pinyin()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_post">post()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_query">query()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_redirect">redirect()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_redis">redis()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_request">request()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_response">response()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_router">router()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_server">server()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_session">session()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_smarty">smarty()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_t">t()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_twig">twig()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_ua">ua()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_upload">upload()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_url">url()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_uuid">uuid()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_validate">validate()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_view">view()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_weChatApp">weChatApp()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_website">website()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="dictionary" id="$dictionary">
+		<td class="attributes"><code>
+			public static 
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Pinyin.html#21-418" title="Go to source code"><var>$dictionary</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+    <span class="php-keyword1">array</span>(<span class="php-quote">'a'</span>, -<span class="php-num">20319</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ai'</span>, -<span class="php-num">20317</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'an'</span>, -<span class="php-num">20304</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ang'</span>, -<span class="php-num">20295</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ao'</span>, -<span class="php-num">20292</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ba'</span>, -<span class="php-num">20283</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'bai'</span>, -<span class="php-num">20265</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ban'</span>, -<span class="php-num">20257</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'bang'</span>, -<span class="php-num">20242</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'bao'</span>, -<span class="php-num">20230</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'bei'</span>, -<span class="php-num">20051</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ben'</span>, -<span class="php-num">20036</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'beng'</span>, -<span class="php-num">20032</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'bi'</span>, -<span class="php-num">20026</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'bian'</span>, -<span class="php-num">20002</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'biao'</span>, -<span class="php-num">19990</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'bie'</span>, -<span class="php-num">19986</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'bin'</span>, -<span class="php-num">19982</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'bing'</span>, -<span class="php-num">19976</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'bo'</span>, -<span class="php-num">19805</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'bu'</span>, -<span class="php-num">19784</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ca'</span>, -<span class="php-num">19775</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'cai'</span>, -<span class="php-num">19774</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'can'</span>, -<span class="php-num">19763</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'cang'</span>, -<span class="php-num">19756</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'cao'</span>, -<span class="php-num">19751</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ce'</span>, -<span class="php-num">19746</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ceng'</span>, -<span class="php-num">19741</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'cha'</span>, -<span class="php-num">19739</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'chai'</span>, -<span class="php-num">19728</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'chan'</span>, -<span class="php-num">19725</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'chang'</span>, -<span class="php-num">19715</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'chao'</span>, -<span class="php-num">19540</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'che'</span>, -<span class="php-num">19531</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'chen'</span>, -<span class="php-num">19525</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'cheng'</span>, -<span class="php-num">19515</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'chi'</span>, -<span class="php-num">19500</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'chong'</span>, -<span class="php-num">19484</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'chou'</span>, -<span class="php-num">19479</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'chu'</span>, -<span class="php-num">19467</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'chuai'</span>, -<span class="php-num">19289</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'chuan'</span>, -<span class="php-num">19288</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'chuang'</span>, -<span class="php-num">19281</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'chui'</span>, -<span class="php-num">19275</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'chun'</span>, -<span class="php-num">19270</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'chuo'</span>, -<span class="php-num">19263</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ci'</span>, -<span class="php-num">19261</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'cong'</span>, -<span class="php-num">19249</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'cou'</span>, -<span class="php-num">19243</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'cu'</span>, -<span class="php-num">19242</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'cuan'</span>, -<span class="php-num">19238</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'cui'</span>, -<span class="php-num">19235</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'cun'</span>, -<span class="php-num">19227</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'cuo'</span>, -<span class="php-num">19224</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'da'</span>, -<span class="php-num">19218</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'dai'</span>, -<span class="php-num">19212</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'dan'</span>, -<span class="php-num">19038</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'dang'</span>, -<span class="php-num">19023</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'dao'</span>, -<span class="php-num">19018</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'de'</span>, -<span class="php-num">19006</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'deng'</span>, -<span class="php-num">19003</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'di'</span>, -<span class="php-num">18996</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'dian'</span>, -<span class="php-num">18977</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'diao'</span>, -<span class="php-num">18961</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'die'</span>, -<span class="php-num">18952</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ding'</span>, -<span class="php-num">18783</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'diu'</span>, -<span class="php-num">18774</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'dong'</span>, -<span class="php-num">18773</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'dou'</span>, -<span class="php-num">18763</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'du'</span>, -<span class="php-num">18756</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'duan'</span>, -<span class="php-num">18741</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'dui'</span>, -<span class="php-num">18735</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'dun'</span>, -<span class="php-num">18731</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'duo'</span>, -<span class="php-num">18722</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'e'</span>, -<span class="php-num">18710</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'en'</span>, -<span class="php-num">18697</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'er'</span>, -<span class="php-num">18696</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'fa'</span>, -<span class="php-num">18526</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'fan'</span>, -<span class="php-num">18518</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'fang'</span>, -<span class="php-num">18501</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'fei'</span>, -<span class="php-num">18490</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'fen'</span>, -<span class="php-num">18478</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'feng'</span>, -<span class="php-num">18463</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'fo'</span>, -<span class="php-num">18448</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'fou'</span>, -<span class="php-num">18447</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'fu'</span>, -<span class="php-num">18446</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ga'</span>, -<span class="php-num">18239</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'gai'</span>, -<span class="php-num">18237</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'gan'</span>, -<span class="php-num">18231</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'gang'</span>, -<span class="php-num">18220</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'gao'</span>, -<span class="php-num">18211</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ge'</span>, -<span class="php-num">18201</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'gei'</span>, -<span class="php-num">18184</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'gen'</span>, -<span class="php-num">18183</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'geng'</span>, -<span class="php-num">18181</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'gong'</span>, -<span class="php-num">18012</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'gou'</span>, -<span class="php-num">17997</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'gu'</span>, -<span class="php-num">17988</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'gua'</span>, -<span class="php-num">17970</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'guai'</span>, -<span class="php-num">17964</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'guan'</span>, -<span class="php-num">17961</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'guang'</span>, -<span class="php-num">17950</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'gui'</span>, -<span class="php-num">17947</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'gun'</span>, -<span class="php-num">17931</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'guo'</span>, -<span class="php-num">17928</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ha'</span>, -<span class="php-num">17922</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'hai'</span>, -<span class="php-num">17759</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'han'</span>, -<span class="php-num">17752</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'hang'</span>, -<span class="php-num">17733</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'hao'</span>, -<span class="php-num">17730</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'he'</span>, -<span class="php-num">17721</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'hei'</span>, -<span class="php-num">17703</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'hen'</span>, -<span class="php-num">17701</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'heng'</span>, -<span class="php-num">17697</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'hong'</span>, -<span class="php-num">17692</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'hou'</span>, -<span class="php-num">17683</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'hu'</span>, -<span class="php-num">17676</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'hua'</span>, -<span class="php-num">17496</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'huai'</span>, -<span class="php-num">17487</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'huan'</span>, -<span class="php-num">17482</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'huang'</span>, -<span class="php-num">17468</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'hui'</span>, -<span class="php-num">17454</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'hun'</span>, -<span class="php-num">17433</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'huo'</span>, -<span class="php-num">17427</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ji'</span>, -<span class="php-num">17417</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'jia'</span>, -<span class="php-num">17202</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'jian'</span>, -<span class="php-num">17185</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'jiang'</span>, -<span class="php-num">16983</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'jiao'</span>, -<span class="php-num">16970</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'jie'</span>, -<span class="php-num">16942</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'jin'</span>, -<span class="php-num">16915</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'jing'</span>, -<span class="php-num">16733</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'jiong'</span>, -<span class="php-num">16708</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'jiu'</span>, -<span class="php-num">16706</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ju'</span>, -<span class="php-num">16689</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'juan'</span>, -<span class="php-num">16664</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'jue'</span>, -<span class="php-num">16657</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'jun'</span>, -<span class="php-num">16647</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ka'</span>, -<span class="php-num">16474</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'kai'</span>, -<span class="php-num">16470</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'kan'</span>, -<span class="php-num">16465</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'kang'</span>, -<span class="php-num">16459</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'kao'</span>, -<span class="php-num">16452</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ke'</span>, -<span class="php-num">16448</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ken'</span>, -<span class="php-num">16433</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'keng'</span>, -<span class="php-num">16429</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'kong'</span>, -<span class="php-num">16427</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'kou'</span>, -<span class="php-num">16423</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ku'</span>, -<span class="php-num">16419</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'kua'</span>, -<span class="php-num">16412</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'kuai'</span>, -<span class="php-num">16407</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'kuan'</span>, -<span class="php-num">16403</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'kuang'</span>, -<span class="php-num">16401</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'kui'</span>, -<span class="php-num">16393</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'kun'</span>, -<span class="php-num">16220</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'kuo'</span>, -<span class="php-num">16216</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'la'</span>, -<span class="php-num">16212</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'lai'</span>, -<span class="php-num">16205</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'lan'</span>, -<span class="php-num">16202</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'lang'</span>, -<span class="php-num">16187</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'lao'</span>, -<span class="php-num">16180</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'le'</span>, -<span class="php-num">16171</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'lei'</span>, -<span class="php-num">16169</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'leng'</span>, -<span class="php-num">16158</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'li'</span>, -<span class="php-num">16155</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'lia'</span>, -<span class="php-num">15959</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'lian'</span>, -<span class="php-num">15958</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'liang'</span>, -<span class="php-num">15944</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'liao'</span>, -<span class="php-num">15933</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'lie'</span>, -<span class="php-num">15920</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'lin'</span>, -<span class="php-num">15915</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ling'</span>, -<span class="php-num">15903</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'liu'</span>, -<span class="php-num">15889</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'long'</span>, -<span class="php-num">15878</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'lou'</span>, -<span class="php-num">15707</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'lu'</span>, -<span class="php-num">15701</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'lv'</span>, -<span class="php-num">15681</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'luan'</span>, -<span class="php-num">15667</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'lue'</span>, -<span class="php-num">15661</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'lun'</span>, -<span class="php-num">15659</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'luo'</span>, -<span class="php-num">15652</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ma'</span>, -<span class="php-num">15640</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'mai'</span>, -<span class="php-num">15631</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'man'</span>, -<span class="php-num">15625</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'mang'</span>, -<span class="php-num">15454</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'mao'</span>, -<span class="php-num">15448</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'me'</span>, -<span class="php-num">15436</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'mei'</span>, -<span class="php-num">15435</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'men'</span>, -<span class="php-num">15419</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'meng'</span>, -<span class="php-num">15416</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'mi'</span>, -<span class="php-num">15408</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'mian'</span>, -<span class="php-num">15394</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'miao'</span>, -<span class="php-num">15385</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'mie'</span>, -<span class="php-num">15377</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'min'</span>, -<span class="php-num">15375</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ming'</span>, -<span class="php-num">15369</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'miu'</span>, -<span class="php-num">15363</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'mo'</span>, -<span class="php-num">15362</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'mou'</span>, -<span class="php-num">15183</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'mu'</span>, -<span class="php-num">15180</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'na'</span>, -<span class="php-num">15165</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'nai'</span>, -<span class="php-num">15158</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'nan'</span>, -<span class="php-num">15153</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'nang'</span>, -<span class="php-num">15150</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'nao'</span>, -<span class="php-num">15149</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ne'</span>, -<span class="php-num">15144</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'nei'</span>, -<span class="php-num">15143</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'nen'</span>, -<span class="php-num">15141</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'neng'</span>, -<span class="php-num">15140</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ni'</span>, -<span class="php-num">15139</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'nian'</span>, -<span class="php-num">15128</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'niang'</span>, -<span class="php-num">15121</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'niao'</span>, -<span class="php-num">15119</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'nie'</span>, -<span class="php-num">15117</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'nin'</span>, -<span class="php-num">15110</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ning'</span>, -<span class="php-num">15109</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'niu'</span>, -<span class="php-num">14941</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'nong'</span>, -<span class="php-num">14937</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'nu'</span>, -<span class="php-num">14933</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'nv'</span>, -<span class="php-num">14930</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'nuan'</span>, -<span class="php-num">14929</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'nue'</span>, -<span class="php-num">14928</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'nuo'</span>, -<span class="php-num">14926</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'o'</span>, -<span class="php-num">14922</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ou'</span>, -<span class="php-num">14921</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'pa'</span>, -<span class="php-num">14914</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'pai'</span>, -<span class="php-num">14908</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'pan'</span>, -<span class="php-num">14902</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'pang'</span>, -<span class="php-num">14894</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'pao'</span>, -<span class="php-num">14889</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'pei'</span>, -<span class="php-num">14882</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'pen'</span>, -<span class="php-num">14873</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'peng'</span>, -<span class="php-num">14871</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'pi'</span>, -<span class="php-num">14857</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'pian'</span>, -<span class="php-num">14678</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'piao'</span>, -<span class="php-num">14674</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'pie'</span>, -<span class="php-num">14670</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'pin'</span>, -<span class="php-num">14668</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ping'</span>, -<span class="php-num">14663</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'po'</span>, -<span class="php-num">14654</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'pu'</span>, -<span class="php-num">14645</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'qi'</span>, -<span class="php-num">14630</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'qia'</span>, -<span class="php-num">14594</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'qian'</span>, -<span class="php-num">14429</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'qiang'</span>, -<span class="php-num">14407</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'qiao'</span>, -<span class="php-num">14399</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'qie'</span>, -<span class="php-num">14384</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'qin'</span>, -<span class="php-num">14379</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'qing'</span>, -<span class="php-num">14368</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'qiong'</span>, -<span class="php-num">14355</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'qiu'</span>, -<span class="php-num">14353</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'qu'</span>, -<span class="php-num">14345</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'quan'</span>, -<span class="php-num">14170</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'que'</span>, -<span class="php-num">14159</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'qun'</span>, -<span class="php-num">14151</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ran'</span>, -<span class="php-num">14149</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'rang'</span>, -<span class="php-num">14145</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'rao'</span>, -<span class="php-num">14140</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'re'</span>, -<span class="php-num">14137</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ren'</span>, -<span class="php-num">14135</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'reng'</span>, -<span class="php-num">14125</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ri'</span>, -<span class="php-num">14123</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'rong'</span>, -<span class="php-num">14122</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'rou'</span>, -<span class="php-num">14112</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ru'</span>, -<span class="php-num">14109</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ruan'</span>, -<span class="php-num">14099</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'rui'</span>, -<span class="php-num">14097</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'run'</span>, -<span class="php-num">14094</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ruo'</span>, -<span class="php-num">14092</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'sa'</span>, -<span class="php-num">14090</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'sai'</span>, -<span class="php-num">14087</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'san'</span>, -<span class="php-num">14083</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'sang'</span>, -<span class="php-num">13917</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'sao'</span>, -<span class="php-num">13914</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'se'</span>, -<span class="php-num">13910</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'sen'</span>, -<span class="php-num">13907</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'seng'</span>, -<span class="php-num">13906</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'sha'</span>, -<span class="php-num">13905</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'shai'</span>, -<span class="php-num">13896</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'shan'</span>, -<span class="php-num">13894</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'shang'</span>, -<span class="php-num">13878</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'shao'</span>, -<span class="php-num">13870</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'she'</span>, -<span class="php-num">13859</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'shen'</span>, -<span class="php-num">13847</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'sheng'</span>, -<span class="php-num">13831</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'shi'</span>, -<span class="php-num">13658</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'shou'</span>, -<span class="php-num">13611</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'shu'</span>, -<span class="php-num">13601</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'shua'</span>, -<span class="php-num">13406</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'shuai'</span>, -<span class="php-num">13404</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'shuan'</span>, -<span class="php-num">13400</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'shuang'</span>, -<span class="php-num">13398</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'shui'</span>, -<span class="php-num">13395</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'shun'</span>, -<span class="php-num">13391</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'shuo'</span>, -<span class="php-num">13387</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'si'</span>, -<span class="php-num">13383</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'song'</span>, -<span class="php-num">13367</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'sou'</span>, -<span class="php-num">13359</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'su'</span>, -<span class="php-num">13356</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'suan'</span>, -<span class="php-num">13343</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'sui'</span>, -<span class="php-num">13340</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'sun'</span>, -<span class="php-num">13329</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'suo'</span>, -<span class="php-num">13326</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ta'</span>, -<span class="php-num">13318</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'tai'</span>, -<span class="php-num">13147</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'tan'</span>, -<span class="php-num">13138</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'tang'</span>, -<span class="php-num">13120</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'tao'</span>, -<span class="php-num">13107</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'te'</span>, -<span class="php-num">13096</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'teng'</span>, -<span class="php-num">13095</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ti'</span>, -<span class="php-num">13091</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'tian'</span>, -<span class="php-num">13076</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'tiao'</span>, -<span class="php-num">13068</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'tie'</span>, -<span class="php-num">13063</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ting'</span>, -<span class="php-num">13060</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'tong'</span>, -<span class="php-num">12888</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'tou'</span>, -<span class="php-num">12875</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'tu'</span>, -<span class="php-num">12871</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'tuan'</span>, -<span class="php-num">12860</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'tui'</span>, -<span class="php-num">12858</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'tun'</span>, -<span class="php-num">12852</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'tuo'</span>, -<span class="php-num">12849</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'wa'</span>, -<span class="php-num">12838</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'wai'</span>, -<span class="php-num">12831</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'wan'</span>, -<span class="php-num">12829</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'wang'</span>, -<span class="php-num">12812</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'wei'</span>, -<span class="php-num">12802</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'wen'</span>, -<span class="php-num">12607</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'weng'</span>, -<span class="php-num">12597</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'wo'</span>, -<span class="php-num">12594</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'wu'</span>, -<span class="php-num">12585</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'xi'</span>, -<span class="php-num">12556</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'xia'</span>, -<span class="php-num">12359</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'xian'</span>, -<span class="php-num">12346</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'xiang'</span>, -<span class="php-num">12320</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'xiao'</span>, -<span class="php-num">12300</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'xie'</span>, -<span class="php-num">12120</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'xin'</span>, -<span class="php-num">12099</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'xing'</span>, -<span class="php-num">12089</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'xiong'</span>, -<span class="php-num">12074</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'xiu'</span>, -<span class="php-num">12067</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'xu'</span>, -<span class="php-num">12058</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'xuan'</span>, -<span class="php-num">12039</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'xue'</span>, -<span class="php-num">11867</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'xun'</span>, -<span class="php-num">11861</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ya'</span>, -<span class="php-num">11847</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'yan'</span>, -<span class="php-num">11831</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'yang'</span>, -<span class="php-num">11798</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'yao'</span>, -<span class="php-num">11781</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ye'</span>, -<span class="php-num">11604</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'yi'</span>, -<span class="php-num">11589</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'yin'</span>, -<span class="php-num">11536</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ying'</span>, -<span class="php-num">11358</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'yo'</span>, -<span class="php-num">11340</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'yong'</span>, -<span class="php-num">11339</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'you'</span>, -<span class="php-num">11324</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'yu'</span>, -<span class="php-num">11303</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'yuan'</span>, -<span class="php-num">11097</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'yue'</span>, -<span class="php-num">11077</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'yun'</span>, -<span class="php-num">11067</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'za'</span>, -<span class="php-num">11055</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zai'</span>, -<span class="php-num">11052</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zan'</span>, -<span class="php-num">11045</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zang'</span>, -<span class="php-num">11041</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zao'</span>, -<span class="php-num">11038</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'ze'</span>, -<span class="php-num">11024</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zei'</span>, -<span class="php-num">11020</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zen'</span>, -<span class="php-num">11019</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zeng'</span>, -<span class="php-num">11018</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zha'</span>, -<span class="php-num">11014</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhai'</span>, -<span class="php-num">10838</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhan'</span>, -<span class="php-num">10832</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhang'</span>, -<span class="php-num">10815</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhao'</span>, -<span class="php-num">10800</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhe'</span>, -<span class="php-num">10790</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhen'</span>, -<span class="php-num">10780</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zheng'</span>, -<span class="php-num">10764</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhi'</span>, -<span class="php-num">10587</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhong'</span>, -<span class="php-num">10544</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhou'</span>, -<span class="php-num">10533</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhu'</span>, -<span class="php-num">10519</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhua'</span>, -<span class="php-num">10331</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhuai'</span>, -<span class="php-num">10329</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhuan'</span>, -<span class="php-num">10328</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhuang'</span>, -<span class="php-num">10322</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhui'</span>, -<span class="php-num">10315</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhun'</span>, -<span class="php-num">10309</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zhuo'</span>, -<span class="php-num">10307</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zi'</span>, -<span class="php-num">10296</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zong'</span>, -<span class="php-num">10281</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zou'</span>, -<span class="php-num">10274</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zu'</span>, -<span class="php-num">10270</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zuan'</span>, -<span class="php-num">10262</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zui'</span>, -<span class="php-num">10260</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zun'</span>, -<span class="php-num">10256</span>),
+    <span class="php-keyword1">array</span>(<span class="php-quote">'zuo'</span>, -<span class="php-num">10254</span>)
+)</code></td>
+		<td class="description"><div>
+			<a href="#$dictionary" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Widget.AbstractWidget.html#properties">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#$deps"><var>$deps</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#$widget"><var>$widget</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary inherited">
+	<caption>Magic properties inherited from <a href="class-Widget.AbstractWidget.html#properties">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#m$apc"><var>$apc</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$app"><var>$app</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$arr"><var>$arr</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$arrayCache"><var>$arrayCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$bicache"><var>$bicache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$cache"><var>$cache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$call"><var>$call</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$cookie"><var>$cookie</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$couchbase"><var>$couchbase</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$db"><var>$db</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$dbCache"><var>$dbCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$dbal"><var>$dbal</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$download"><var>$download</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$entityManager"><var>$entityManager</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$env"><var>$env</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$error"><var>$error</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$escape"><var>$escape</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$event"><var>$event</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$fileCache"><var>$fileCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$flush"><var>$flush</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$gravatar"><var>$gravatar</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$header"><var>$header</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$is"><var>$is</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$json"><var>$json</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$logger"><var>$logger</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$map"><var>$map</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$memcache"><var>$memcache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$memcached"><var>$memcached</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$monolog"><var>$monolog</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$pinyin"><var>$pinyin</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$post"><var>$post</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$query"><var>$query</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$redirect"><var>$redirect</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$redis"><var>$redis</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$request"><var>$request</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$response"><var>$response</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$router"><var>$router</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$server"><var>$server</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$session"><var>$session</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$smarty"><var>$smarty</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$t"><var>$t</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$twig"><var>$twig</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$ua"><var>$ua</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$upload"><var>$upload</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$url"><var>$url</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$uuid"><var>$uuid</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$view"><var>$view</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$weChatApp"><var>$weChatApp</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$website"><var>$website</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+</div>
+
+	<div id="footer">
+		Widget API Documentation API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

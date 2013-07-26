@@ -1,0 +1,2020 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Widget\Db | Widget API Documentation</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?1362233758"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Widget.html">Widget<span></span></a>
+						<ul>
+				<li><a href="namespace-Widget.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
+						</li>
+				<li><a href="namespace-Widget.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Widget.AbstractWidget.html">AbstractWidget</a></li>
+				<li><a href="class-Widget.Apc.html">Apc</a></li>
+				<li><a href="class-Widget.App.html">App</a></li>
+				<li><a href="class-Widget.Arr.html">Arr</a></li>
+				<li><a href="class-Widget.ArrayCache.html">ArrayCache</a></li>
+				<li><a href="class-Widget.Bicache.html">Bicache</a></li>
+				<li><a href="class-Widget.Cache.html">Cache</a></li>
+				<li><a href="class-Widget.Call.html">Call</a></li>
+				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
+				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
+				<li class="active"><a href="class-Widget.Db.html">Db</a></li>
+				<li><a href="class-Widget.Dbal.html">Dbal</a></li>
+				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
+				<li><a href="class-Widget.Download.html">Download</a></li>
+				<li><a href="class-Widget.EntityManager.html">EntityManager</a></li>
+				<li><a href="class-Widget.Env.html">Env</a></li>
+				<li><a href="class-Widget.Error.html">Error</a></li>
+				<li><a href="class-Widget.Escape.html">Escape</a></li>
+				<li><a href="class-Widget.Event.html">Event</a></li>
+				<li><a href="class-Widget.FileCache.html">FileCache</a></li>
+				<li><a href="class-Widget.Flush.html">Flush</a></li>
+				<li><a href="class-Widget.Gravatar.html">Gravatar</a></li>
+				<li><a href="class-Widget.Header.html">Header</a></li>
+				<li><a href="class-Widget.Is.html">Is</a></li>
+				<li><a href="class-Widget.Json.html">Json</a></li>
+				<li><a href="class-Widget.Logger.html">Logger</a></li>
+				<li><a href="class-Widget.Map.html">Map</a></li>
+				<li><a href="class-Widget.Memcache.html">Memcache</a></li>
+				<li><a href="class-Widget.Memcached.html">Memcached</a></li>
+				<li><a href="class-Widget.MongoCache.html">MongoCache</a></li>
+				<li><a href="class-Widget.Monolog.html">Monolog</a></li>
+				<li><a href="class-Widget.PhpError.html">PhpError</a></li>
+				<li><a href="class-Widget.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Widget.Post.html">Post</a></li>
+				<li><a href="class-Widget.Query.html">Query</a></li>
+				<li><a href="class-Widget.Redirect.html">Redirect</a></li>
+				<li><a href="class-Widget.Redis.html">Redis</a></li>
+				<li><a href="class-Widget.Request.html">Request</a></li>
+				<li><a href="class-Widget.Response.html">Response</a></li>
+				<li><a href="class-Widget.Router.html">Router</a></li>
+				<li><a href="class-Widget.Server.html">Server</a></li>
+				<li><a href="class-Widget.Session.html">Session</a></li>
+				<li><a href="class-Widget.Smarty.html">Smarty</a></li>
+				<li><a href="class-Widget.T.html">T</a></li>
+				<li><a href="class-Widget.Twig.html">Twig</a></li>
+				<li><a href="class-Widget.Ua.html">Ua</a></li>
+				<li><a href="class-Widget.Upload.html">Upload</a></li>
+				<li><a href="class-Widget.Url.html">Url</a></li>
+				<li><a href="class-Widget.UrlDebugger.html">UrlDebugger</a></li>
+				<li><a href="class-Widget.Uuid.html">Uuid</a></li>
+				<li><a href="class-Widget.Validate.html">Validate</a></li>
+				<li><a href="class-Widget.View.html">View</a></li>
+				<li><a href="class-Widget.Website.html">Website</a></li>
+				<li><a href="class-Widget.WeChatApp.html">WeChatApp</a></li>
+				<li><a href="class-Widget.Widget.html">Widget</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Widget.html" title="Summary of Widget"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Db</h1>
+
+
+	<div class="description">
+	
+<p>A database widget that compatible with Doctrine DBAL</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Widget.AbstractWidget.html"><span>Widget\AbstractWidget</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Widget\Db</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Widget.html">Widget</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+		<b>Located at</b> <a href="source-class-Widget.Db.html#14-661" title="Go to source code">Db.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Db.QueryBuilder.html">Widget\Db\QueryBuilder</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Widget.Db.html#140-149" title="Go to source code">__invoke</a>( <span>string <var>$table</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Create a new instance of a SQL query builder with specified table name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a new instance of a SQL query builder with specified table name</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of database table</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Db.QueryBuilder.html">Widget\Db\QueryBuilder</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="connect" id="_connect">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_connect">#</a>
+		<code><a href="source-class-Widget.Db.html#151-180" title="Go to source code">connect</a>( )</code>
+
+		<div class="description short">
+			
+<p>Connect to the database server</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Connect to the database server</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isConnected" id="_isConnected">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isConnected">#</a>
+		<code><a href="source-class-Widget.Db.html#182-190" title="Go to source code">isConnected</a>( )</code>
+
+		<div class="description short">
+			
+<p>Check if has connected to the database server</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if has connected to the database server</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="close" id="_close">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_close">#</a>
+		<code><a href="source-class-Widget.Db.html#192-199" title="Go to source code">close</a>( )</code>
+
+		<div class="description short">
+			
+<p>Close the database connection</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Close the database connection</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="insert" id="_insert">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_insert">#</a>
+		<code><a href="source-class-Widget.Db.html#201-217" title="Go to source code">insert</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Executes an INSERT query to insert specified data into table</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes an INSERT query to insert specified data into table</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data An associative array containing column-value pairs</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>The number of affected rows<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="update" id="_update">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_update">#</a>
+		<code><a href="source-class-Widget.Db.html#219-237" title="Go to source code">update</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var></span>, <span>array <var>$conditions</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Executes a UPDATE query</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes a UPDATE query</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data An associative array containing column-value pairs</dd>
+					<dt><var>$conditions</var></dt>
+					<dd><code>array</code><br>$conditions The conditions to search records</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>The number of affected rows<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="delete" id="_delete">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_delete">#</a>
+		<code><a href="source-class-Widget.Db.html#239-253" title="Go to source code">delete</a>( <span>string <var>$table</var></span>, <span>array <var>$conditions</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Executes a DELETE query</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes a DELETE query</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+					<dt><var>$conditions</var></dt>
+					<dd><code>array</code><br>$conditions The conditions to search records</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>The number of affected rows<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="select" id="_select">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_select">#</a>
+		<code><a href="source-class-Widget.Db.html#255-269" title="Go to source code">select</a>( <span>string <var>$table</var></span>, <span>string|array <var>$conditions</var></span>, <span>string <var>$select</var> = <span class="php-quote">'*'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Executes a SELECT query and return the first result</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes a SELECT query and return the first result</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+					<dt><var>$conditions</var></dt>
+					<dd><code>string|array</code><br>$conditions The primary key value or an associative array containing
+column-value pairs</dd>
+					<dt><var>$select</var></dt>
+					<dd><code>string</code><br>$select The table columns to select</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>An associative array containing column-value pairs<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="selectAll" id="_selectAll">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_selectAll">#</a>
+		<code><a href="source-class-Widget.Db.html#271-300" title="Go to source code">selectAll</a>( <span>string <var>$table</var></span>, <span>boolean <var>$conditions</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$select</var> = <span class="php-quote">'*'</span></span>, <span>integer <var>$limit</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Executes a SELECT query and return all results</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes a SELECT query and return all results</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+					<dt><var>$conditions</var></dt>
+					<dd><code>boolean</code><br>$conditions The primary key value or an associative array containing
+column-value pairs</dd>
+					<dt><var>$select</var></dt>
+					<dd><code>string</code><br>$select The table columns to select</dd>
+					<dt><var>$limit</var></dt>
+					<dd><code>integer</code><br>$limit The record number to retrieve</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="count" id="_count">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_count">#</a>
+		<code><a href="source-class-Widget.Db.html#302-313" title="Go to source code">count</a>( <span>string <var>$table</var></span>, <span>array <var>$conditions</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the rows number of table search by specified parameters</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the rows number of table search by specified parameters</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table</dd>
+					<dt><var>$conditions</var></dt>
+					<dd><code>array</code><br>$conditions</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="fetch" id="_fetch">
+
+		<td class="attributes"><code>
+			 public 
+			array|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_fetch">#</a>
+		<code><a href="source-class-Widget.Db.html#315-326" title="Go to source code">fetch</a>( <span>string <var>$sql</var></span>, <span>array|string <var>$params</var> = <span class="php-keyword1">false</span></span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Executes a query and returns the first array result</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes a query and returns the first array result</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sql</var></dt>
+					<dd><code>string</code><br>$sql The SQL query</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array|string</code><br>$params The query parameters</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types The parameter types to bind</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array|false</code><br>Return an array or false when no result found<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="fetchAll" id="_fetchAll">
+
+		<td class="attributes"><code>
+			 public 
+			array|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_fetchAll">#</a>
+		<code><a href="source-class-Widget.Db.html#328-339" title="Go to source code">fetchAll</a>( <span>string <var>$sql</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Executes a query and returns all array results</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes a query and returns all array results</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sql</var></dt>
+					<dd><code>string</code><br>$sql The SQL query</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params The query parameters</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types The parameter types to bind</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array|false</code><br>Return an array or false when no result found<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="fetchColumn" id="_fetchColumn">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_fetchColumn">#</a>
+		<code><a href="source-class-Widget.Db.html#341-352" title="Go to source code">fetchColumn</a>( <span>string <var>$sql</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>integer <var>$column</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Executes a query and returns a column value of the first row</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes a query and returns a column value of the first row</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sql</var></dt>
+					<dd><code>string</code><br>$sql The SQL query</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params The query parameters</dd>
+					<dt><var>$column</var></dt>
+					<dd><code>integer</code><br>$column The index of column</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="executeUpdate" id="_executeUpdate">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_executeUpdate">#</a>
+		<code><a href="source-class-Widget.Db.html#354-384" title="Go to source code">executeUpdate</a>( <span>string <var>$sql</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Executes an SQL INSERT/UPDATE/DELETE query with the given parameters and
+returns the number of affected rows</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes an SQL INSERT/UPDATE/DELETE query with the given parameters and
+returns the number of affected rows</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sql</var></dt>
+					<dd><code>string</code><br>$sql The SQL query</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params The query parameters</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types The parameter types to bind</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>The number of affected rows<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="query" id="_query">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-PDOStatement.html">PDOStatement</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_query">#</a>
+		<code><a href="source-class-Widget.Db.html#386-426" title="Go to source code">query</a>( <span>string <var>$sql</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Executes an SQL statement, returning a result set as a PDOStatement
+object</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes an SQL statement, returning a result set as a PDOStatement
+object</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sql</var></dt>
+					<dd><code>string</code><br>$sql The SQL query</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params The SQL parameters</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types The parameter types to bind</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-PDOStatement.html">PDOStatement</a></code></code><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-RuntimeException.html">RuntimeException</a></code></code><br>When a PDOException raise<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="lastInsertId" id="_lastInsertId">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_lastInsertId">#</a>
+		<code><a href="source-class-Widget.Db.html#428-437" title="Go to source code">lastInsertId</a>( <span>string <var>$sequence</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the ID of the last inserted row or sequence value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the ID of the last inserted row or sequence value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sequence</var></dt>
+					<dd><code>string</code><br>$name The name of PostgreSQL sequence</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="errorCode" id="_errorCode">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_errorCode">#</a>
+		<code><a href="source-class-Widget.Db.html#439-448" title="Go to source code">errorCode</a>( )</code>
+
+		<div class="description short">
+			
+<p>Fetch the SQLSTATE associated with the last operation on the database
+handle</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Fetch the SQLSTATE associated with the last operation on the database
+handle</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="errorInfo" id="_errorInfo">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_errorInfo">#</a>
+		<code><a href="source-class-Widget.Db.html#450-459" title="Go to source code">errorInfo</a>( )</code>
+
+		<div class="description short">
+			
+<p>Fetch extended error information associated with the last operation on the
+database handle</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Fetch extended error information associated with the last operation on the
+database handle</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="createQueryBuilder" id="_createQueryBuilder">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Db.QueryBuilder.html">Widget\Db\QueryBuilder</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createQueryBuilder">#</a>
+		<code><a href="source-class-Widget.Db.html#461-471" title="Go to source code">createQueryBuilder</a>( <span>string <var>$table</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Create a new instance of a SQL query builder</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a new instance of a SQL query builder</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of database table</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Db.QueryBuilder.html">Widget\Db\QueryBuilder</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="create" id="_create">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Db.Record.html">Widget\Db\Record</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_create">#</a>
+		<code><a href="source-class-Widget.Db.html#473-491" title="Go to source code">create</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>boolean <var>$isNew</var> = <span class="php-keyword1">true</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Create a new record instance</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a new record instance</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of database table</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data The data for table record</dd>
+					<dt><var>$isNew</var></dt>
+					<dd><code>boolean</code><br>$isNew Whether it's a new record and have not save to database</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Db.Record.html">Widget\Db\Record</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="find" id="_find">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Db.Record.html">Widget\Db\Record</a></code>|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_find">#</a>
+		<code><a href="source-class-Widget.Db.html#493-516" title="Go to source code">find</a>( <span>string <var>$table</var></span>, <span>string|array <var>$id</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Find a record from specified table and conditions</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Find a record from specified table and conditions</p>
+
+<p><code>`</code>php // Find by primary key $db-&gt;find('user', 1);</p>
+
+<p>// Find by specified column $db-&gt;find('user', array('username' =&gt;
+'twin'));</p>
+
+<p>// Find in list $db-&gt;find('user', array('id' =&gt; array(1, 2, 3)));
+<code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+					<dt><var>$id</var></dt>
+					<dd><code>string|array</code><br>$id The primary key value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Db.Record.html">Widget\Db\Record</a></code>|false</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="findOrCreate" id="_findOrCreate">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Db.Record.html">Widget\Db\Record</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_findOrCreate">#</a>
+		<code><a href="source-class-Widget.Db.html#518-535" title="Go to source code">findOrCreate</a>( <span>string <var>$table</var></span>, <span>string <var>$id</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Find a record, if not found, create a new one from specified data</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Find a record, if not found, create a new one from specified data</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+					<dt><var>$id</var></dt>
+					<dd><code>string</code><br>$id The primary key value</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data The data to create a new record when record not found</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Db.Record.html">Widget\Db\Record</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="findAll" id="_findAll">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Db.Collection.html">Widget\Db\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_findAll">#</a>
+		<code><a href="source-class-Widget.Db.html#537-565" title="Go to source code">findAll</a>( <span>string <var>$table</var></span>, <span>array|false <var>$where</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Find records from specified table and conditions</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Find records from specified table and conditions</p>
+
+<p><code>`</code>php // Find by primary key $db-&gt;findAll('user', 1);</p>
+
+<p>// Find by specified column $db-&gt;findAll('user', array('username' =&gt;
+'twin'));</p>
+
+<p>// Find in list $db-&gt;findAll('user', array('id' =&gt; array(1, 2, 3)));
+<code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of database table</dd>
+					<dt><var>$where</var></dt>
+					<dd><code>array|false</code><br>$where The primary key value or an associative array containing column-value
+pairs</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Db.Collection.html">Widget\Db\Collection</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__get" id="___get">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Db.Record.html">Widget\Db\Record</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___get">#</a>
+		<code><a href="source-class-Widget.Db.html#567-576" title="Go to source code">__get</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns a new table instance, alias of <code>create</code></p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a new table instance, alias of <code>create</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Db.Record.html">Widget\Db\Record</a></code></code><br />
+				</div>
+
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Widget.AbstractWidget.html#___get">Widget\AbstractWidget::__get()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__call" id="___call">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Db.Record.html">Widget\Db\Record</a></code>|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___call">#</a>
+		<code><a href="source-class-Widget.Db.html#578-588" title="Go to source code">__call</a>( <span>string <var>$name</var></span>, <span>array <var>$args</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Find a record from specified table and conditions</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Find a record from specified table and conditions</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name</dd>
+					<dt><var>$args</var></dt>
+					<dd><code>array</code><br>$args</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Db.Record.html">Widget\Db\Record</a></code>|false</code><br />
+				</div>
+
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Widget.AbstractWidget.html#___call">Widget\AbstractWidget::__call()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRecordClass" id="_getRecordClass">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getRecordClass">#</a>
+		<code><a href="source-class-Widget.Db.html#590-610" title="Go to source code">getRecordClass</a>( <span>string <var>$table</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the record class name of table</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the record class name of table</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The record class name for table<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getTable" id="_getTable">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getTable">#</a>
+		<code><a href="source-class-Widget.Db.html#612-621" title="Go to source code">getTable</a>( <span>string <var>$table</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the full table name with prefix</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the full table name with prefix</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="bindParameter" id="_bindParameter">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_bindParameter">#</a>
+		<code><a href="source-class-Widget.Db.html#623-660" title="Go to source code">bindParameter</a>( <span><code><a href="class-PDOStatement.html">PDOStatement</a></code> <var>$stmt</var></span>, <span>array <var>$params</var></span>, <span>array <var>$types</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Bind parameters to statement object</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Bind parameters to statement object</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$stmt</var></dt>
+					<dd><code><code><a href="class-PDOStatement.html">PDOStatement</a></code></code><br>$stmt</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Widget.AbstractWidget.html#methods">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#___construct">__construct()</a>, 
+			<a href="class-Widget.AbstractWidget.html#_getOption">getOption()</a>, 
+			<a href="class-Widget.AbstractWidget.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary inherited">
+	<caption>Magic methods inherited from <a href="class-Widget.AbstractWidget.html#methods">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#m_apc">apc()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_app">app()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_arrayCache">arrayCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_bicache">bicache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_cache">cache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_call">call()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_cookie">cookie()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_couchbase">couchbase()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_db">db()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_dbCache">dbCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_dbal">dbal()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_download">download()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_entityManager">entityManager()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_env">env()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_error">error()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_escape">escape()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_fileCache">fileCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_flush">flush()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_gravatar">gravatar()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_header">header()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_is">is()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_json">json()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_logger">logger()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_map">map()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_memcache">memcache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_memcached">memcached()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_monolog">monolog()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_pinyin">pinyin()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_post">post()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_query">query()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_redirect">redirect()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_redis">redis()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_request">request()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_response">response()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_router">router()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_server">server()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_session">session()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_smarty">smarty()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_t">t()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_twig">twig()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_ua">ua()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_upload">upload()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_url">url()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_uuid">uuid()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_validate">validate()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_view">view()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_weChatApp">weChatApp()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_website">website()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="user" id="$user">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Db.html#21-26" title="Go to source code"><var>$user</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$user" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The database username</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The database username</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="password" id="$password">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Db.html#28-33" title="Go to source code"><var>$password</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$password" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The database password</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The database password</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="dsn" id="$dsn">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Db.html#35-40" title="Go to source code"><var>$dsn</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'sqlite::memory:'</span></code></td>
+		<td class="description"><div>
+			<a href="#$dsn" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The dsn parameter for PDO constructor</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The dsn parameter for PDO constructor</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="driverOptions" id="$driverOptions">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Db.html#42-47" title="Go to source code"><var>$driverOptions</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$driverOptions" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A key=&gt;value array of driver-specific connection options.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A key=&gt;value array of driver-specific connection options.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="pdo" id="$pdo">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-PDO.html">PDO</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Db.html#49-54" title="Go to source code"><var>$pdo</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$pdo" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The PDO object</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The PDO object</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="beforeConnect" id="$beforeConnect">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Db.html#56-61" title="Go to source code"><var>$beforeConnect</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$beforeConnect" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback triggers before connect to database</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback triggers before connect to database</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="afterConnect" id="$afterConnect">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Db.html#63-68" title="Go to source code"><var>$afterConnect</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$afterConnect" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback triggers after connect to database</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback triggers after connect to database</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="beforeQuery" id="$beforeQuery">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Db.html#70-75" title="Go to source code"><var>$beforeQuery</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$beforeQuery" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback triggers before execute query</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback triggers before execute query</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="afterQuery" id="$afterQuery">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Db.html#77-82" title="Go to source code"><var>$afterQuery</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$afterQuery" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback triggers after execute query</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback triggers after execute query</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isConnected" id="$isConnected">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Db.html#84-89" title="Go to source code"><var>$isConnected</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$isConnected" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether connected to the database server</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether connected to the database server</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="tables" id="$tables">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Db.html#98-103" title="Go to source code"><var>$tables</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$tables" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The database table definitions</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The database table definitions</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="recordClass" id="$recordClass">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Db.html#105-110" title="Go to source code"><var>$recordClass</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'Widget\Db\Record'</span></code></td>
+		<td class="description"><div>
+			<a href="#$recordClass" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The base record class when instance a new record object</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The base record class when instance a new record object</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="collectionClass" id="$collectionClass">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Db.html#112-117" title="Go to source code"><var>$collectionClass</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'Widget\Db\Collection'</span></code></td>
+		<td class="description"><div>
+			<a href="#$collectionClass" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The collection class to store database records</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The collection class to store database records</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="recordClasses" id="$recordClasses">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Db.html#119-124" title="Go to source code"><var>$recordClasses</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$recordClasses" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>An associative array that the key is table name and the value is class
+name</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>An associative array that the key is table name and the value is class
+name</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="recordNamespace" id="$recordNamespace">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Db.html#126-131" title="Go to source code"><var>$recordNamespace</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$recordNamespace" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The record namespace without ending "\"</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The record namespace without ending "\"</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="tablePrefix" id="$tablePrefix">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Db.html#133-138" title="Go to source code"><var>$tablePrefix</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$tablePrefix" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The prefix of table name</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The prefix of table name</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Widget.AbstractWidget.html#properties">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#$deps"><var>$deps</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#$widget"><var>$widget</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary inherited">
+	<caption>Magic properties inherited from <a href="class-Widget.AbstractWidget.html#properties">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#m$apc"><var>$apc</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$app"><var>$app</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$arr"><var>$arr</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$arrayCache"><var>$arrayCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$bicache"><var>$bicache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$cache"><var>$cache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$call"><var>$call</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$cookie"><var>$cookie</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$couchbase"><var>$couchbase</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$db"><var>$db</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$dbCache"><var>$dbCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$dbal"><var>$dbal</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$download"><var>$download</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$entityManager"><var>$entityManager</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$env"><var>$env</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$error"><var>$error</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$escape"><var>$escape</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$event"><var>$event</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$fileCache"><var>$fileCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$flush"><var>$flush</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$gravatar"><var>$gravatar</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$header"><var>$header</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$is"><var>$is</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$json"><var>$json</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$logger"><var>$logger</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$map"><var>$map</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$memcache"><var>$memcache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$memcached"><var>$memcached</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$monolog"><var>$monolog</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$pinyin"><var>$pinyin</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$post"><var>$post</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$query"><var>$query</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$redirect"><var>$redirect</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$redis"><var>$redis</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$request"><var>$request</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$response"><var>$response</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$router"><var>$router</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$server"><var>$server</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$session"><var>$session</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$smarty"><var>$smarty</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$t"><var>$t</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$twig"><var>$twig</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$ua"><var>$ua</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$upload"><var>$upload</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$url"><var>$url</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$uuid"><var>$uuid</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$view"><var>$view</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$weChatApp"><var>$weChatApp</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$website"><var>$website</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+</div>
+
+	<div id="footer">
+		Widget API Documentation API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Widget\Call | Widget API Documentation</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?1362233758"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Widget.html">Widget<span></span></a>
+						<ul>
+				<li><a href="namespace-Widget.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
+						</li>
+				<li><a href="namespace-Widget.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Widget.AbstractWidget.html">AbstractWidget</a></li>
+				<li><a href="class-Widget.Apc.html">Apc</a></li>
+				<li><a href="class-Widget.App.html">App</a></li>
+				<li><a href="class-Widget.Arr.html">Arr</a></li>
+				<li><a href="class-Widget.ArrayCache.html">ArrayCache</a></li>
+				<li><a href="class-Widget.Bicache.html">Bicache</a></li>
+				<li><a href="class-Widget.Cache.html">Cache</a></li>
+				<li class="active"><a href="class-Widget.Call.html">Call</a></li>
+				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
+				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Widget.Db.html">Db</a></li>
+				<li><a href="class-Widget.Dbal.html">Dbal</a></li>
+				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
+				<li><a href="class-Widget.Download.html">Download</a></li>
+				<li><a href="class-Widget.EntityManager.html">EntityManager</a></li>
+				<li><a href="class-Widget.Env.html">Env</a></li>
+				<li><a href="class-Widget.Error.html">Error</a></li>
+				<li><a href="class-Widget.Escape.html">Escape</a></li>
+				<li><a href="class-Widget.Event.html">Event</a></li>
+				<li><a href="class-Widget.FileCache.html">FileCache</a></li>
+				<li><a href="class-Widget.Flush.html">Flush</a></li>
+				<li><a href="class-Widget.Gravatar.html">Gravatar</a></li>
+				<li><a href="class-Widget.Header.html">Header</a></li>
+				<li><a href="class-Widget.Is.html">Is</a></li>
+				<li><a href="class-Widget.Json.html">Json</a></li>
+				<li><a href="class-Widget.Logger.html">Logger</a></li>
+				<li><a href="class-Widget.Map.html">Map</a></li>
+				<li><a href="class-Widget.Memcache.html">Memcache</a></li>
+				<li><a href="class-Widget.Memcached.html">Memcached</a></li>
+				<li><a href="class-Widget.MongoCache.html">MongoCache</a></li>
+				<li><a href="class-Widget.Monolog.html">Monolog</a></li>
+				<li><a href="class-Widget.PhpError.html">PhpError</a></li>
+				<li><a href="class-Widget.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Widget.Post.html">Post</a></li>
+				<li><a href="class-Widget.Query.html">Query</a></li>
+				<li><a href="class-Widget.Redirect.html">Redirect</a></li>
+				<li><a href="class-Widget.Redis.html">Redis</a></li>
+				<li><a href="class-Widget.Request.html">Request</a></li>
+				<li><a href="class-Widget.Response.html">Response</a></li>
+				<li><a href="class-Widget.Router.html">Router</a></li>
+				<li><a href="class-Widget.Server.html">Server</a></li>
+				<li><a href="class-Widget.Session.html">Session</a></li>
+				<li><a href="class-Widget.Smarty.html">Smarty</a></li>
+				<li><a href="class-Widget.T.html">T</a></li>
+				<li><a href="class-Widget.Twig.html">Twig</a></li>
+				<li><a href="class-Widget.Ua.html">Ua</a></li>
+				<li><a href="class-Widget.Upload.html">Upload</a></li>
+				<li><a href="class-Widget.Url.html">Url</a></li>
+				<li><a href="class-Widget.UrlDebugger.html">UrlDebugger</a></li>
+				<li><a href="class-Widget.Uuid.html">Uuid</a></li>
+				<li><a href="class-Widget.Validate.html">Validate</a></li>
+				<li><a href="class-Widget.View.html">View</a></li>
+				<li><a href="class-Widget.Website.html">Website</a></li>
+				<li><a href="class-Widget.WeChatApp.html">WeChatApp</a></li>
+				<li><a href="class-Widget.Widget.html">Widget</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Widget.html" title="Summary of Widget"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Call</h1>
+
+
+	<div class="description">
+	
+<p>A widget handles HTTP request which inspired by jQuery Ajax</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Widget.AbstractWidget.html"><span>Widget\AbstractWidget</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Widget\Call</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Widget.html">Widget</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+				<b>Link:</b>
+				<a href="http://api.jquery.com/jQuery.ajax/">http://api.jquery.com/jQuery.ajax/</a><br />
+		<b>Located at</b> <a href="source-class-Widget.Call.html#11-724" title="Go to source code">Call.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Call.html">Widget\Call</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Widget.Call.html#218-249" title="Go to source code">__invoke</a>( <span>array|string <var>$url</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Create a new call object and execute</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a new call object and execute</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>array|string</code><br>$url A options array or the request URL</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options A options array if the first parameter is string</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Call.html">Widget\Call</a></code></code><br>A new call object<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="execute" id="_execute">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_execute">#</a>
+		<code><a href="source-class-Widget.Call.html#251-269" title="Go to source code">execute</a>( )</code>
+
+		<div class="description short">
+			
+<p>Execute the request, parse the response data and trigger relative events</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute the request, parse the response data and trigger relative events</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="prepareCurlOpts" id="_prepareCurlOpts">
+
+		<td class="attributes"><code>
+			 protected 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_prepareCurlOpts">#</a>
+		<code><a href="source-class-Widget.Call.html#271-364" title="Go to source code">prepareCurlOpts</a>( )</code>
+
+		<div class="description short">
+			
+<p>Prepare cURL options</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Prepare cURL options</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="handleResponse" id="_handleResponse">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_handleResponse">#</a>
+		<code><a href="source-class-Widget.Call.html#366-404" title="Go to source code">handleResponse</a>( <span>string <var>$response</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Parse response text</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Parse response text</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$response</var></dt>
+					<dd><code>string</code><br>$response</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parse" id="_parse">
+
+		<td class="attributes"><code>
+			 protected 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_parse">#</a>
+		<code><a href="source-class-Widget.Call.html#406-456" title="Go to source code">parse</a>( <span>string <var>$data</var></span>, <span>string <var>$type</var></span>, <span>null <var>&amp; $exception</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Parse data by specified type</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Parse data by specified type</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd><code>string</code><br>$data</dd>
+					<dt><var>$type</var></dt>
+					<dd><code>string</code><br>$type</dd>
+					<dt><var>$exception</var></dt>
+					<dd><code>null</code><br>$exception A variable to store exception when parser error</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="trigger" id="_trigger">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_trigger">#</a>
+		<code><a href="source-class-Widget.Call.html#458-470" title="Go to source code">trigger</a>( <span>string <var>$name</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Trigger a internal callback event</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Trigger a internal callback event</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponseText" id="_getResponseText">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getResponseText">#</a>
+		<code><a href="source-class-Widget.Call.html#472-480" title="Go to source code">getResponseText</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the response text</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the response text</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponseJson" id="_getResponseJson">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getResponseJson">#</a>
+		<code><a href="source-class-Widget.Call.html#482-490" title="Go to source code">getResponseJson</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the response json data</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the response json data</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setRequestHeader" id="_setRequestHeader">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Call.html">Widget\Call</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setRequestHeader">#</a>
+		<code><a href="source-class-Widget.Call.html#492-504" title="Go to source code">setRequestHeader</a>( <span>string <var>$name</var></span>, <span>string <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set request header value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set request header value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Call.html">Widget\Call</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponseHeader" id="_getResponseHeader">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getResponseHeader">#</a>
+		<code><a href="source-class-Widget.Call.html#506-523" title="Go to source code">getResponseHeader</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns request header value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns request header value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parseHeader" id="_parseHeader">
+
+		<td class="attributes"><code>
+			 protected 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_parseHeader">#</a>
+		<code><a href="source-class-Widget.Call.html#525-542" title="Go to source code">parseHeader</a>( <span>string <var>$header</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Parse the HTTP response header to key-value array</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Parse the HTTP response header to key-value array</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$header</var></dt>
+					<dd><code>string</code><br>$header</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isSuccess" id="_isSuccess">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isSuccess">#</a>
+		<code><a href="source-class-Widget.Call.html#544-552" title="Go to source code">isSuccess</a>( )</code>
+
+		<div class="description short">
+			
+<p>Return if the request is success</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Return if the request is success</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setMethod" id="_setMethod">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Call.html">Widget\Call</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setMethod">#</a>
+		<code><a href="source-class-Widget.Call.html#554-564" title="Go to source code">setMethod</a>( <span>string <var>$method</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set request method</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set request method</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$method</var></dt>
+					<dd><code>string</code><br>$method</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Call.html">Widget\Call</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getJson" id="_getJson">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Call.html">Widget\Call</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getJson">#</a>
+		<code><a href="source-class-Widget.Call.html#566-577" title="Go to source code">getJson</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a GET method request and parser response data to JSON array</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a GET method request and parser response data to JSON array</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+					<dt><var>$callback</var></dt>
+					<dd><code>callable</code><br>$callback</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Call.html">Widget\Call</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getJsonObject" id="_getJsonObject">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Call.html">Widget\Call</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getJsonObject">#</a>
+		<code><a href="source-class-Widget.Call.html#579-590" title="Go to source code">getJsonObject</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a GET method request and parser response data to JSON object</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a GET method request and parser response data to JSON object</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+					<dt><var>$callback</var></dt>
+					<dd><code>callable</code><br>$callback</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Call.html">Widget\Call</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="get" id="_get">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Call.html">Widget\Call</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_get">#</a>
+		<code><a href="source-class-Widget.Call.html#592-604" title="Go to source code">get</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a GET method request</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a GET method request</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+					<dt><var>$callback</var></dt>
+					<dd><code>callable</code><br>$callback</dd>
+					<dt><var>$dataType</var></dt>
+					<dd><code>string</code><br>$dataType</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Call.html">Widget\Call</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="post" id="_post">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Call.html">Widget\Call</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_post">#</a>
+		<code><a href="source-class-Widget.Call.html#606-618" title="Go to source code">post</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a POST method request</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a POST method request</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+					<dt><var>$callback</var></dt>
+					<dd><code>callable</code><br>$callback</dd>
+					<dt><var>$dataType</var></dt>
+					<dd><code>string</code><br>$dataType</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Call.html">Widget\Call</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="put" id="_put">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Call.html">Widget\Call</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_put">#</a>
+		<code><a href="source-class-Widget.Call.html#620-632" title="Go to source code">put</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a PUT method request</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a PUT method request</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+					<dt><var>$callback</var></dt>
+					<dd><code>callable</code><br>$callback</dd>
+					<dt><var>$dataType</var></dt>
+					<dd><code>string</code><br>$dataType</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Call.html">Widget\Call</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="delete" id="_delete">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Call.html">Widget\Call</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_delete">#</a>
+		<code><a href="source-class-Widget.Call.html#634-646" title="Go to source code">delete</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a DELETE method request</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a DELETE method request</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+					<dt><var>$callback</var></dt>
+					<dd><code>callable</code><br>$callback</dd>
+					<dt><var>$dataType</var></dt>
+					<dd><code>string</code><br>$dataType</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Call.html">Widget\Call</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="patch" id="_patch">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Call.html">Widget\Call</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_patch">#</a>
+		<code><a href="source-class-Widget.Call.html#648-660" title="Go to source code">patch</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a PATCH method request</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a PATCH method request</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+					<dt><var>$callback</var></dt>
+					<dd><code>callable</code><br>$callback</dd>
+					<dt><var>$dataType</var></dt>
+					<dd><code>string</code><br>$dataType</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Call.html">Widget\Call</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="processMethod" id="_processMethod">
+
+		<td class="attributes"><code>
+			 protected 
+			<code><a href="class-Widget.Call.html">Widget\Call</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_processMethod">#</a>
+		<code><a href="source-class-Widget.Call.html#662-687" title="Go to source code">processMethod</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var></span>, <span>string <var>$dataType</var></span>, <span>string <var>$method</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a specified method request</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a specified method request</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+					<dt><var>$callback</var></dt>
+					<dd><code>callable</code><br>$callback</dd>
+					<dt><var>$dataType</var></dt>
+					<dd><code>string</code><br>$dataType</dd>
+					<dt><var>$method</var></dt>
+					<dd><code>string</code><br>$method</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Call.html">Widget\Call</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="success" id="_success">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Call.html">Widget\Call</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_success">#</a>
+		<code><a href="source-class-Widget.Call.html#689-699" title="Go to source code">success</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set callback for success event</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set callback for success event</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Call.html">Widget\Call</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="error" id="_error">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Call.html">Widget\Call</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_error">#</a>
+		<code><a href="source-class-Widget.Call.html#701-711" title="Go to source code">error</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set callback for error event</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set callback for error event</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Call.html">Widget\Call</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="complete" id="_complete">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Call.html">Widget\Call</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_complete">#</a>
+		<code><a href="source-class-Widget.Call.html#713-723" title="Go to source code">complete</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set callback for complete event</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set callback for complete event</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Call.html">Widget\Call</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Widget.AbstractWidget.html#methods">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#___call">__call()</a>, 
+			<a href="class-Widget.AbstractWidget.html#___construct">__construct()</a>, 
+			<a href="class-Widget.AbstractWidget.html#___get">__get()</a>, 
+			<a href="class-Widget.AbstractWidget.html#_getOption">getOption()</a>, 
+			<a href="class-Widget.AbstractWidget.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary inherited">
+	<caption>Magic methods inherited from <a href="class-Widget.AbstractWidget.html#methods">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#m_apc">apc()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_app">app()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_arrayCache">arrayCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_bicache">bicache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_cache">cache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_call">call()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_cookie">cookie()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_couchbase">couchbase()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_db">db()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_dbCache">dbCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_dbal">dbal()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_download">download()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_entityManager">entityManager()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_env">env()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_error">error()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_escape">escape()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_fileCache">fileCache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_flush">flush()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_gravatar">gravatar()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_header">header()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_is">is()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_json">json()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_logger">logger()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_map">map()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_memcache">memcache()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_memcached">memcached()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_monolog">monolog()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_pinyin">pinyin()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_post">post()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_query">query()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_redirect">redirect()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_redis">redis()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_request">request()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_response">response()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_router">router()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_server">server()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_session">session()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_smarty">smarty()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_t">t()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_twig">twig()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_ua">ua()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_upload">upload()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_url">url()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_uuid">uuid()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_validate">validate()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_view">view()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_weChatApp">weChatApp()</a>, 
+			<a href="class-Widget.AbstractWidget.html#m_website">website()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="method" id="$method">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#19-27" title="Go to source code"><var>$method</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'GET'</span></code></td>
+		<td class="description"><div>
+			<a href="#$method" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The HTTP request method</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The HTTP request method</p>
+
+<p>The method could be <code>GET</code>, <code>POST</code>, <code>DELETE</code>,
+<code>PUT</code>, <code>PATCH</code> or any other methods that the server is
+supported</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="contentType" id="$contentType">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#29-34" title="Go to source code"><var>$contentType</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'application/x-www-form-urlencoded; charset=UTF-8'</span></code></td>
+		<td class="description"><div>
+			<a href="#$contentType" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The content type in HTTP request header</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The content type in HTTP request header</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="cookies" id="$cookies">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#36-41" title="Go to source code"><var>$cookies</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$cookies" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A key-value array to store cookies</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A key-value array to store cookies</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="data" id="$data">
+		<td class="attributes"><code>
+			protected  
+			array|string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#43-48" title="Go to source code"><var>$data</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$data" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The data to send to the server</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The data to send to the server</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="global" id="$global">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#50-56" title="Go to source code"><var>$global</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">true</span></code></td>
+		<td class="description"><div>
+			<a href="#$global" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether use the global options in <code>$widget-&gt;call</code> object when
+create a new object</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether use the global options in <code>$widget-&gt;call</code> object when
+create a new object</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="headers" id="$headers">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#58-63" title="Go to source code"><var>$headers</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$headers" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A key-value array to store request headers</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A key-value array to store request headers</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="ip" id="$ip">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#65-70" title="Go to source code"><var>$ip</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$ip" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The IP address for the host name in URL, NOT your client IP</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The IP address for the host name in URL, NOT your client IP</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="timeout" id="$timeout">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#72-77" title="Go to source code"><var>$timeout</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$timeout" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A number of milliseconds to wait in the whole connection</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A number of milliseconds to wait in the whole connection</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="dataType" id="$dataType">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#79-87" title="Go to source code"><var>$dataType</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'text'</span></code></td>
+		<td class="description"><div>
+			<a href="#$dataType" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The data type to parse the response body</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The data type to parse the response body</p>
+
+<p>The data type could by <code>json</code>, <code>jsonObject</code>,
+<code>xml</code>, <code>query</code>(URL query string), <code>serialize</code>
+and <code>text</code></p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="referer" id="$referer">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#89-94" title="Go to source code"><var>$referer</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$referer" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The custom HTTP referer string</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The custom HTTP referer string</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="userAgent" id="$userAgent">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#96-101" title="Go to source code"><var>$userAgent</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$userAgent" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The custom HTTP user agent string</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The custom HTTP user agent string</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="beforeSend" id="$beforeSend">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#103-116" title="Go to source code"><var>$beforeSend</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$beforeSend" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>An event triggered after prepared the data and before the process the
+request</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>An event triggered after prepared the data and before the process the
+request</p>
+
+<p><code>`</code>php $widget-&gt;call(array( 'beforeSend' =&gt; function(Call
+$call, $ch){<br />
+} )); <code>`</code></p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="success" id="$success">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#118-131" title="Go to source code"><var>$success</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$success" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>An event triggered after the request is called success</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>An event triggered after the request is called success</p>
+
+<p><code>`</code>php $widget-&gt;call(array( 'success' =&gt; function($data,
+Call $call){<br />
+} )); <code>`</code></p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="error" id="$error">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#133-148" title="Go to source code"><var>$error</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$error" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>An event triggered when the request fails</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>An event triggered when the request fails</p>
+
+<p>The <code>$textStatus</code> could be <code>curl</code>, <code>http</code>,
+and <code>parser</code></p>
+
+<p><code>`</code>php $widget-&gt;call(array( 'error' =&gt; function(Call $call,
+$textStatus, \ErrorException $exception){<br />
+} )); <code>`</code></p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="complete" id="$complete">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#150-163" title="Go to source code"><var>$complete</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$complete" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>An event triggered when finishes (after <code>success</code> and
+<code>error</code> callbacks are executed)</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>An event triggered when finishes (after <code>success</code> and
+<code>error</code> callbacks are executed)</p>
+
+<p><code>`</code>php $widget-&gt;call(array( 'complete' =&gt; function(Call
+$call, $ch){<br />
+} )); <code>`</code></p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="result" id="$result">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#165-170" title="Go to source code"><var>$result</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$result" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The request result</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The request result</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="responseText" id="$responseText">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#172-177" title="Go to source code"><var>$responseText</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$responseText" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The response body string</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The response body string</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="responseJson" id="$responseJson">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#179-184" title="Go to source code"><var>$responseJson</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$responseJson" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The parsed response JSON array</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The parsed response JSON array</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="responseHeader" id="$responseHeader">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#186-191" title="Go to source code"><var>$responseHeader</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$responseHeader" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The response header string</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The response header string</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="responseHeaders" id="$responseHeaders">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#193-198" title="Go to source code"><var>$responseHeaders</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$responseHeaders" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The parsed response header array</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The parsed response header array</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="ch" id="$ch">
+		<td class="attributes"><code>
+			protected  
+			resource
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#200-205" title="Go to source code"><var>$ch</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$ch" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The cURL session</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The cURL session</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="curlOpts" id="$curlOpts">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#207-216" title="Go to source code"><var>$curlOpts</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+    CURLOPT_RETURNTRANSFER =&gt; <span class="php-keyword1">true</span>,
+    CURLOPT_HEADER =&gt; <span class="php-keyword1">true</span>,
+    CURLOPT_FOLLOWLOCATION =&gt; <span class="php-keyword1">true</span>,
+)</code></td>
+		<td class="description"><div>
+			<a href="#$curlOpts" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The predefined cURL options</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The predefined cURL options</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Widget.AbstractWidget.html#properties">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#$deps"><var>$deps</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#$widget"><var>$widget</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary inherited">
+	<caption>Magic properties inherited from <a href="class-Widget.AbstractWidget.html#properties">Widget\AbstractWidget</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.AbstractWidget.html#m$apc"><var>$apc</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$app"><var>$app</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$arr"><var>$arr</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$arrayCache"><var>$arrayCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$bicache"><var>$bicache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$cache"><var>$cache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$call"><var>$call</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$cookie"><var>$cookie</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$couchbase"><var>$couchbase</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$db"><var>$db</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$dbCache"><var>$dbCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$dbal"><var>$dbal</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$download"><var>$download</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$entityManager"><var>$entityManager</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$env"><var>$env</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$error"><var>$error</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$escape"><var>$escape</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$event"><var>$event</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$fileCache"><var>$fileCache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$flush"><var>$flush</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$gravatar"><var>$gravatar</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$header"><var>$header</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$is"><var>$is</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$json"><var>$json</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$logger"><var>$logger</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$map"><var>$map</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$memcache"><var>$memcache</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$memcached"><var>$memcached</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$monolog"><var>$monolog</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$pinyin"><var>$pinyin</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$post"><var>$post</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$query"><var>$query</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$redirect"><var>$redirect</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$redis"><var>$redis</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$request"><var>$request</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$response"><var>$response</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$router"><var>$router</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$server"><var>$server</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$session"><var>$session</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$smarty"><var>$smarty</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$t"><var>$t</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$twig"><var>$twig</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$ua"><var>$ua</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$upload"><var>$upload</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$url"><var>$url</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$uuid"><var>$uuid</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$view"><var>$view</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$weChatApp"><var>$weChatApp</var></a>, 
+			<a href="class-Widget.AbstractWidget.html#m$website"><var>$website</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+</div>
+
+	<div id="footer">
+		Widget API Documentation API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
