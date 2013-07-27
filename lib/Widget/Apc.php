@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Stdlib\AbstractCache;
 
 /**
- * The PHP APC cache widget
+ * A cache widget stored data in PHP APC
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
