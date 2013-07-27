@@ -37,7 +37,7 @@ namespace Widget;
  *
  * Database
  * @property Db                           $db A database widget
- * @method   Db\QueryBuilder              db()
+ * @method   Db\QueryBuilder              db($table = null) Create a new instance of a SQL query builder with specified table name
  *
  * @property Call       $call A widget handles HTTP request like jQuery Ajax
  * @method   Call       call(array $options) Create a new call object and execute
