@@ -342,11 +342,13 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="c1">// 启用自动加载</span>
-        <span class="s1">'autoload'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="s1">'autoload'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> 
         <span class="c1">// 设置自动加载的类的命名空间和类所在的目录</span>
         <span class="s1">'autoloadMap'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'命名空间'</span> <span class="o">=&gt;</span> <span class="s1">'类所在路径'</span><span class="p">,</span>
             <span class="s1">'MyLib'</span> <span class="o">=&gt;</span> <span class="s1">'path/to/lib'</span><span class="p">,</span>
             <span class="s1">'MyProject'</span> <span class="o">=&gt;</span> <span class="s1">'path/to/project'</span><span class="p">,</span>
+            <span class="s1">'MyClass/Module'</span> <span class="o">=&gt;</span> <span class="s1">'path/to/class'</span><span class="p">,</span>
             <span class="c1">// 将未在上面指定命名空间的类,都引导到library目录下</span>
             <span class="s1">''</span> <span class="o">=&gt;</span> <span class="s1">'path/to/library'</span>
         <span class="p">)</span>
