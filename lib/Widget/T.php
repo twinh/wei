@@ -44,7 +44,7 @@ class T extends AbstractWidget
     protected $files = array();
 
     /**
-     * Translate the message
+     * Translate a message
      *
      * @param string $message
      * @param array $parameters
