@@ -68,6 +68,8 @@ var_dump(class_exists('MyClass\MyClass'));
 
 Widget的错误调试可通过`debug`选项开启,PHP的调试可通过`inis`选项配置
 
+**注意:** 两者的配置相互独立,不互相影响
+
 ```php
 widget(array(
     'widget' => array(
