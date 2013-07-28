@@ -88,6 +88,49 @@ widget(array(
 ));
 ```
 
+### 通过`aliases`选项加载自定义微件
+
+除了系统自带的微件之外,你也可以自定义微件类.
+
+1. 定义您的类,继承于`\Widget\AbstractWidget`
+
+    ```php
+    namespace MyProject;
+
+    class Application extends \Widget\AbstractWidget
+    {
+        public function run()
+        {
+            // do something
+        }
+    }
+    ```
+2. 设置`aliases`选项,指定您定义的类的微件名称
+
+    ```php
+    widget(array(
+        'aliases' => array(
+            '微件名称' => '类名称',
+            'app' => 'MyProject\Application'
+        )
+    ));
+    ```
+
+3. 调用您的微件
+    ```php
+    // 获取自定义微件对象
+    $app = widget()->app;
+
+    // 和
+    $app->run();
+    ```
+
+### 通过`import`选项导入目录下的自定义微件
+
+```php
+TODO
+``
+
 ### 区分`aliases`和`deps`
 
 1. `aliases`选项数组的key是微件名称,value是类名称
