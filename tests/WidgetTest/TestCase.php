@@ -3,7 +3,6 @@
 namespace WidgetTest;
 
 use Widget\Widget;
-use Widget\Stdlib\WidgetAwareInterface;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -12,7 +11,7 @@ use PHPUnit_Framework_TestCase;
  * @package     Widget
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterface
+class TestCase extends PHPUnit_Framework_TestCase
 {
     /**
      * @var \Widget\AbstractWidget
@@ -116,7 +115,11 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
     }
 
     /**
-     * {@inheritdoc}
+     * Invoke the widget by the given name
+     *
+     * @param string $name The name of widget
+     * @param array $args The arguments for widget's __invoke method
+     * @return mixed
      */
     public function __call($name, $args)
     {
@@ -124,21 +127,14 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
     }
 
     /**
-     * {@inheritdoc}
+     * Get the widget object by the given name
+     *
+     * @param string $name The name of widget
+     * @return \Widget\AbstractWidget
      */
     public function __get($name)
     {
         return $this->widget->get($name);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setWidget(Widget $widget)
-    {
-        $this->widget = $widget;
-
-        return $this;
     }
 
     protected function assertIsSubset($subset, $parent, $message = '')

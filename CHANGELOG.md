@@ -3,7 +3,6 @@ Changelog
 
 ## 0.9.4 (WIP)
 
-* Added `autoload` paramter for import method
 * Merged cache widget's `cached` method into `get` method
 * Added `indexBy` method for query builder
 * Added support that automatically create dependence map when configuration key contains ".", refs 6ca934c7fb79956f804641c3dc127a8789e03961
@@ -15,6 +14,8 @@ Changelog
 * Removed `__invoke` method, `__invoke` method is optional, refs 7c7f13e3702c11bd5f35f4e9dcc74598e6cd72b3
 * Added getResponseJson method for `call` widget
 * Allow `null` value as validate rules and messages, refs 132b13dcda99dbd56d596cc50dff13bba8a48c38
+* Added `autoload` paramter for import method
+* Removed `WidgetAwareInterface` and `AbstractWidgetAware` class, use `widget()` is more convenient
 
 ## 0.9.3 (2013-07-04)
 
