@@ -10358,6 +10358,13 @@ widget()-&gt;arrayCache('name');
 <div class="highlight"><pre><code class="php"><span class="nv">$url</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">getUrl</span><span class="p">();</span>
 </code></pre></div>
 
+<h3>检查当前请求是否由Ajax发起</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">inAjax</span><span class="p">())</span> <span class="p">{</span>
+    <span class="c1">// do something</span>
+<span class="p">}</span>
+</code></pre></div>
+
 <h2>调用方式</h2>
 
 <h3>选项</h3>
