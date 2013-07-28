@@ -289,6 +289,7 @@ class WidgetTest extends TestCase
                 'dir' => __DIR__ . '/Fixtures/Import',
                 'namespace' => '\WidgetTest\Fixtures\Import',
                 'format' => 'test%s',
+                'autoload' => false
             )
         ));
 
@@ -304,6 +305,21 @@ class WidgetTest extends TestCase
     public function testImportInvalidDir()
     {
         $this->widget->import(__DIR__ . '/not found/', 'test');
+    }
+
+    public function testImportWithAutoload()
+    {
+        $this->widget->setImport(array(
+            array(
+                'dir' => __DIR__ . '/Fixtures/Import',
+                'namespace' => '\WidgetTest\Fixtures\Import',
+                'format' => 'test%s',
+                'autoload' => true
+            )
+        ));
+
+        $map = $this->widget->getOption('autoloadMap');
+        $this->assertArrayHasKey('\WidgetTest\Fixtures\Import', $map);
     }
 
     public function testNewWidgetFromFactoryMethod()

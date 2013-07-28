@@ -577,13 +577,18 @@ class Widget extends AbstractWidget
      * @param string $dir The directory for class
      * @param string $namespace The prefix namespace of the class
      * @param null $format The widget name format, eg 'is%s'
+     * @param bool $autoload Whether added namespace and directory to `autoloadMap` or nor
      * @throws \InvalidArgumentException When the first parameter is not a directory
      * @return Widget
      */
-    public function import($dir, $namespace, $format = null)
+    public function import($dir, $namespace, $format = null, $autoload = true)
     {
         if (!is_dir($dir)) {
             throw new \InvalidArgumentException(sprintf('Fail to import widgets from non-exists directory "%s"', $dir));
+        }
+
+        if ($autoload) {
+            $this->autoloadMap[$namespace] = $dir;
         }
 
         $files = glob($dir . '/*.php') ?: array();
@@ -609,9 +614,10 @@ class Widget extends AbstractWidget
             $option += array(
                 'dir' => null,
                 'namespace' => null,
-                'format' => null
+                'format' => null,
+                'autoload' => true,
             );
-            $this->import($option['dir'], $option['namespace'], $option['format']);
+            $this->import($option['dir'], $option['namespace'], $option['format'], $option['autoload']);
         }
 
         return $this;

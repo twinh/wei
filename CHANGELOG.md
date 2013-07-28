@@ -3,6 +3,7 @@ Changelog
 
 ## 0.9.4 (WIP)
 
+* Added `autoload` paramter for import method
 * Merged cache widget's `cached` method into `get` method
 * Added `indexBy` method for query builder
 * Added support that automatically create dependence map when configuration key contains ".", refs 6ca934c7fb79956f804641c3dc127a8789e03961
