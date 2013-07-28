@@ -6,7 +6,7 @@ isDecimal
 案例
 ----
 
-### 检查"0.0.1"是否为小数
+### 检查"1.0.0"是否为小数
 ```php
 if (widget()->isDecimal('1.0.0')) {
     echo 'Yes';
