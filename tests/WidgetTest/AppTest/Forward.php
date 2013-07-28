@@ -4,7 +4,7 @@ namespace WidgetTest\AppTest;
 
 class Forward extends \Widget\AbstractWidget
 {
-    public function targetAction()
+    public function target()
     {
         return 'target';
     }

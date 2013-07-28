@@ -4,35 +4,35 @@ namespace WidgetTest\AppTest;
 
 class Test extends \Widget\AbstractWidget
 {
-    public function testAction()
+    public function test()
     {
         return 'test';
     }
 
-    public function returnArrayAction()
+    public function returnArray()
     {
         return array(
             'key' => 'value'
         );
     }
 
-    public function returnResponseAction()
+    public function returnResponse()
     {
         $this->response->setContent('response content');
 
         return $this->response;
     }
 
-    public function returnUnexpectedTypeAction()
+    public function returnUnexpectedType()
     {
         return new \stdClass();
     }
 
-    public function dispatchBreakAction()
+    public function dispatchBreak()
     {
         $this->doSomethingNotInActions();
 
-        throw new \Widget\Exception\RuntimeException('You can\'t see me');
+        throw new \RuntimeException('You can\'t see me');
     }
 
     public function doSomethingNotInActions()
@@ -41,20 +41,20 @@ class Test extends \Widget\AbstractWidget
 
         $this->app->preventPreviousDispatch();
 
-        throw new \Widget\Exception\RuntimeException('You can\'t see me too');
+        throw new \RuntimeException('You can\'t see me too');
     }
 
-    public function forwardActionAction()
+    public function forwardAction()
     {
         return $this->app->forward('target');
     }
 
-    public function forwardControllerAction()
+    public function forwardController()
     {
         return $this->app->forward('target', 'forward');
     }
 
-    public function targetAction()
+    public function target()
     {
         return 'target';
     }

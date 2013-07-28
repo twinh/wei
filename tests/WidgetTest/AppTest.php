@@ -74,7 +74,7 @@ class AppTest extends TestCase
     /**
      * @expectedException \RuntimeException
      * @expectedExceptionCode 404
-     * @expectedExceptionMessage The page you requested was not found - action method "ActionNotFoundAction" not found in controller "test" (class "WidgetTest\AppTest\Test")
+     * @expectedExceptionMessage The page you requested was not found - action method "ActionNotFound" not found in controller "test" (class "WidgetTest\AppTest\Test")
      */
     public function testActionNotFound()
     {

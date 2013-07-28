@@ -4,12 +4,12 @@ namespace WidgetTest\AppTest\Admin;
 
 class Index extends \Widget\AbstractWidget
 {
-    public function IndexAction()
+    public function index()
     {
         return 'admin.index';
     }
 
-    public function viewAction()
+    public function view()
     {
         return array(
             'key' => 'value'
