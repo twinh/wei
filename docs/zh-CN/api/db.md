@@ -116,7 +116,7 @@ $loggerDb = $widget->loggerDb;
 $loggerDb->findAll('userLog', array('userId' => 1));
 ```
 
-### 区分`fetch`,`select`和`find`
+### 区分`fetch`,`select`和`find`方法
 
 在db微件,`fetch`,`select`和`find`方法都是用于查询数据库数据,他们共同的特征是只返回第一行数据,不同点在于:
 
@@ -147,6 +147,19 @@ $array = $db->select('user');
 // 根据表名和条件查询多行记录,返回一个`Widget\Db\Collection`对象
 $collection = $db->find('user');
 ```
+
+### 所有查询方法的参数和返回值类型比较
+
+方法        | 参数                | 返回值类型
+------------|---------------------|------------
+select      | $table, $conditions | 数组
+selectAll   | $table, $conditions | 二维数组
+fetch       | $sql                | 数组
+fetchAll    | $sql                | 二维数组
+fetchColumn | $sql                | 字符串,返回指定栏的值
+find        | $table, $conditions | Widget\Db\Record对象
+findAll     | $table, $conditions | Widget\Db\Collection对象
+query       | $sql                | PDOStatement对象
 
 ### 通过beforeQuery记录SQL日志
 ```php
