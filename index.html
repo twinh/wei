@@ -4512,7 +4512,7 @@ widget()-&gt;arrayCache('name');
 <td>dataType</td>
 <td>string</td>
 <td>text</td>
-<td>请求完成后,要对返回数据解析的类型,可以是<code>json</code>,<code>jsonObject</code>,<code>xml</code>,<code>query</code>,<code>serialize</code>和<code>text</code>
+<td>请求完成后,要对返回数据解析的类型,可以是<code>json</code>(数组),<code>jsonObject</code>,<code>xml</code>,<code>query</code>,<code>serialize</code>和<code>text</code>
 </td>
 </tr>
 <tr>
@@ -4552,7 +4552,9 @@ widget()-&gt;arrayCache('name');
 <td>请求完成后,不论是否成功都触发的回调,可用于数据记录等</td>
 </tr>
 </tbody>
-</table><h4>beforeSend($call, $ch)</h4>
+</table><h3>回调</h3>
+
+<h4>beforeSend($call, $ch)</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
