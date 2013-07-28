@@ -109,9 +109,11 @@ widget(array(
 
     ```php
     widget(array(
-        'aliases' => array(
-            '微件名称' => '类名称',
-            'app' => 'MyProject\Application'
+        'widget' => array(
+            'aliases' => array(
+                '微件名称' => '类名称',
+                'app' => 'MyProject\Application'
+            )
         )
     ));
     ```
@@ -120,17 +122,34 @@ widget(array(
 
     ```php
     // 获取自定义微件对象
+    /* @var $app \MyProject\Application */
     $app = widget()->app;
 
-    // 和
+    // 和平常一样调用类的方法
     $app->run();
     ```
 
 ### 通过`import`选项导入目录下的自定义微件
 
 ```php
-TODO
-``
+// TODO more detail message
+widget(array(
+    'widget' => array(
+        'import' => array(
+            array(
+                'dir' => '要导入的类文件所在的目录',
+                'namespace' => '要导入的类文件所在的命名空间',
+                'format' => '导入的微件名格式'
+            ),
+            array(
+                'dir' => 'path/to/MyProject',
+                'namespace' => 'MyProject',
+                'format' => 'my%s'
+            )
+        ),
+    )
+));
+```
 
 ### 区分`aliases`和`deps`
 
