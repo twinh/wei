@@ -6,11 +6,11 @@ Session
 案例
 ----
 
-### 设置和获取会话信息
+### 使用Session存储验证码,并校验请求的验证码是否正确
 ```php
 widget()->session('verfiyCode', 'WIDG');
 
-if (widget()->sessio('verfiyCode') == widget()->post('verfiyCode')) {
+if (widget()->session('verfiyCode') == widget()->post('verfiyCode')) {
     echo '验证码正确';
 } else {
     echo '验证码错误';
@@ -22,9 +22,21 @@ if (widget()->sessio('verfiyCode') == widget()->post('verfiyCode')) {
 
 ### 选项
 
-| 名称          | 类型      | 默认值    | 说明                                                    | 
-|---------------|-----------|-----------|---------------------------------------------------------|
-| namespace     | string    | widget    | 存储会话信息的命名空间,因为在PHP中,用户会话信息是共享的 |
+名称      | 类型         | 默认值    | 说明
+----------|--------------|-----------|------
+namespace | string|false | false     | 存储会话信息的命名空间,默认不启用
+inis      | array        | 见下表    | PHP会话配置选项
+
+#### inis选项的值
+
+所有的配置选项和默认值请查阅 http://php.net/manual/en/session.configuration.php
+
+名称 			| 值
+----------------|----
+cache_limiter   | private_no_expire
+cookie_lifetime | 86400
+cache_expire 	| 86400
+gc_maxlifetime	| 86400
 
 ### 方法
 

@@ -18,11 +18,11 @@ use Widget\Stdlib\Parameter;
 class Session extends Parameter
 {
     /**
-     * Current namespace to store session data
+     * The namespace to store session data, disable on default
      *
      * @var string
      */
-    protected $namespace = 'widget';
+    protected $namespace = false;
 
     /**
      * The session configuration options
@@ -67,10 +67,14 @@ class Session extends Parameter
         // If session started, ignored it
         if (!session_id()) {
             session_start();
-            if (!isset($_SESSION[$this->namespace])) {
-                $_SESSION[$this->namespace] = array();
+            if ($this->namespace) {
+                if (!isset($_SESSION[$this->namespace])) {
+                    $_SESSION[$this->namespace] = array();
+                }
+                $this->data = &$_SESSION[$this->namespace];
+            } else {
+                $this->data = &$_SESSION;
             }
-            $this->data = &$_SESSION[$this->namespace];
         }
 
         return $this;

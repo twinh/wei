@@ -16,6 +16,7 @@ Changelog
 * Allow `null` value as validate rules and messages, refs 132b13dcda99dbd56d596cc50dff13bba8a48c38
 * Added `autoload` paramter for import method
 * Removed `WidgetAwareInterface` and `AbstractWidgetAware` class, use `widget()` is more convenient
+* Changed session namespace default to false
 
 ## 0.9.3 (2013-07-04)
 
