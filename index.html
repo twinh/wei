@@ -10693,11 +10693,11 @@ widget()-&gt;arrayCache('name');
 
 <h2>案例</h2>
 
-<h3>设置和获取会话信息</h3>
+<h3>使用Session存储验证码,并校验请求的验证码是否正确</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">session</span><span class="p">(</span><span class="s1">'verfiyCode'</span><span class="p">,</span> <span class="s1">'WIDG'</span><span class="p">);</span>
 
-<span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">sessio</span><span class="p">(</span><span class="s1">'verfiyCode'</span><span class="p">)</span> <span class="o">==</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'verfiyCode'</span><span class="p">))</span> <span class="p">{</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">session</span><span class="p">(</span><span class="s1">'verfiyCode'</span><span class="p">)</span> <span class="o">==</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'verfiyCode'</span><span class="p">))</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'验证码正确'</span><span class="p">;</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'验证码错误'</span><span class="p">;</span>
@@ -10715,12 +10715,47 @@ widget()-&gt;arrayCache('name');
 <th>默认值</th>
 <th>说明</th>
 </tr></thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>namespace</td>
 <td>string</td>
-<td>widget</td>
-<td>存储会话信息的命名空间,因为在PHP中,用户会话信息是共享的</td>
-</tr></tbody>
+<td>false</td>
+<td>false</td>
+</tr>
+<tr>
+<td>inis</td>
+<td>array</td>
+<td>见下表</td>
+<td>PHP会话配置选项</td>
+</tr>
+</tbody>
+</table><h4>inis选项的值</h4>
+
+<p>所有的配置选项和默认值请查阅 <a href="http://php.net/manual/en/session.configuration.php">http://php.net/manual/en/session.configuration.php</a></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>值</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>cache_limiter</td>
+<td>private_no_expire</td>
+</tr>
+<tr>
+<td>cookie_lifetime</td>
+<td>86400</td>
+</tr>
+<tr>
+<td>cache_expire</td>
+<td>86400</td>
+</tr>
+<tr>
+<td>gc_maxlifetime</td>
+<td>86400</td>
+</tr>
+</tbody>
 </table><h3>方法</h3>
 
 <h4>session($key)</h4>
