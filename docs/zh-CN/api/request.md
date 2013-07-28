@@ -19,6 +19,13 @@ $id = widget()->request('id');
 $url = widget()->request->getUrl();
 ```
 
+### 检查当前请求是否由Ajax发起
+```php
+if (widget()->request->inAjax()) {
+	// do something
+}
+```
+
 调用方式
 --------
 
