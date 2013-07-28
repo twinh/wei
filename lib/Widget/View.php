@@ -68,7 +68,7 @@ class View extends AbstractView
     /**
      * Returns view widget or render a PHP template
      *
-     * if NO parameter provied, the invoke method will return the viw widget.
+     * if NO parameter provided, the invoke method will return the view widget,
      * otherwise, call the render method
      *
      * @param string $name The name of template
@@ -152,7 +152,7 @@ class View extends AbstractView
      *
      * @param  string    $name The name of template
      * @return string    The template file path
-     * @throws Exception When file not found
+     * @throws \RuntimeException When template file not found
      */
     public function getFile($name)
     {
