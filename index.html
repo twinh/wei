@@ -385,15 +385,58 @@
 <span class="p">));</span>
 </code></pre></div>
 
-<h3>区分<code>aliases</code>和<code>deps</code>
-</h3>
+<h3>通过<code>aliases</code>选项加载自定义微件</h3>
+
+<p>除了系统自带的微件之外,你也可以自定义微件类.</p>
 
 <ol>
 <li>
-<code>aliases</code>选项数组的key是微件名称,value是类名称</li>
+<p>定义您的类,继承于<code>\Widget\AbstractWidget</code></p>
+
+<div class="highlight"><pre><code class="php"><span class="k">namespace</span> <span class="nx">MyProject</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Application</span> <span class="k">extends</span> <span class="nx">\Widget\AbstractWidget</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// do something</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
 <li>
-<code>deps</code>选项数组的key是微件名称,value也是微件名称</li>
-</ol><div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<p>设置<code>aliases</code>选项,指定您定义的类的微件名称</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'微件名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span><span class="p">,</span>
+        <span class="s1">'app'</span> <span class="o">=&gt;</span> <span class="s1">'MyProject\Application'</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</code></pre></div>
+</li>
+<li>
+<p>调用您的微件
+```php
+// 获取自定义微件对象
+$app = widget()-&gt;app;</p>
+
+<p>// 和
+$app-&gt;run();
+```</p>
+</li>
+</ol><h3>通过<code>import</code>选项导入目录下的自定义微件</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nx">TODO</span>
+<span class="sb">``</span>
+
+<span class="c1">### 区分`aliases`和`deps`</span>
+
+<span class="mf">1.</span> <span class="sb">`aliases`</span><span class="err">选项数组的</span><span class="nb">key</span><span class="err">是微件名称</span><span class="p">,</span><span class="nx">value</span><span class="err">是类名称</span>
+<span class="mf">2.</span> <span class="sb">`deps`</span><span class="err">选项数组的</span><span class="nb">key</span><span class="err">是微件名称</span><span class="p">,</span><span class="nx">value</span><span class="err">也是微件名称</span>
+
+<span class="sb">``</span><span class="err">`</span><span class="nx">php</span>
+<span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">'微件名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span>
