@@ -117,6 +117,7 @@ widget(array(
     ```
 
 3. 调用您的微件
+
     ```php
     // 获取自定义微件对象
     $app = widget()->app;
