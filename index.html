@@ -2805,8 +2805,7 @@ widget()-&gt;arrayCache('name');
 <span class="nv">$loggerDb</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">(</span><span class="s1">'userLog'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'userId'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
 </code></pre></div>
 
-<h3>区分<code>fetch</code>,<code>select</code>和<code>find</code>
-</h3>
+<h3>区分<code>fetch</code>,<code>select</code>和<code>find</code>方法</h3>
 
 <p>在db微件,<code>fetch</code>,<code>select</code>和<code>find</code>方法都是用于查询数据库数据,他们共同的特征是只返回第一行数据,不同点在于:</p>
 
@@ -2840,7 +2839,57 @@ widget()-&gt;arrayCache('name');
 <span class="nv">$collection</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'user'</span><span class="p">);</span>
 </code></pre></div>
 
-<h3>通过beforeQuery记录SQL日志</h3>
+<h3>所有查询方法的参数和返回值类型比较</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>方法</th>
+<th>参数</th>
+<th>返回值类型</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>select</td>
+<td>$table, $conditions</td>
+<td>数组</td>
+</tr>
+<tr>
+<td>selectAll</td>
+<td>$table, $conditions</td>
+<td>二维数组</td>
+</tr>
+<tr>
+<td>fetch</td>
+<td>$sql</td>
+<td>数组</td>
+</tr>
+<tr>
+<td>fetchAll</td>
+<td>$sql</td>
+<td>二维数组</td>
+</tr>
+<tr>
+<td>fetchColumn</td>
+<td>$sql</td>
+<td>字符串,返回指定栏的值</td>
+</tr>
+<tr>
+<td>find</td>
+<td>$table, $conditions</td>
+<td>Widget\Db\Record对象</td>
+</tr>
+<tr>
+<td>findAll</td>
+<td>$table, $conditions</td>
+<td>Widget\Db\Collection对象</td>
+</tr>
+<tr>
+<td>query</td>
+<td>$sql</td>
+<td>PDOStatement对象</td>
+</tr>
+</tbody>
+</table><h3>通过beforeQuery记录SQL日志</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
