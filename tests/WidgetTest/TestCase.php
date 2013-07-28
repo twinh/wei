@@ -137,11 +137,19 @@ class TestCase extends PHPUnit_Framework_TestCase
         return $this->widget->get($name);
     }
 
+    /**
+     * Asserts that an array is contains another array
+     *
+     * @param array $subset
+     * @param array $parent
+     * @param string $message
+     * @return void
+     */
     protected function assertIsSubset($subset, $parent, $message = '')
     {
         if (!(is_array($parent) && $subset)) {
             $this->assertTrue(false, $message);
-            return false;
+            return;
         }
 
         foreach ($subset as $item) {
