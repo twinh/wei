@@ -5751,9 +5751,11 @@ widget()-&gt;arrayCache('name');
 
 <h3>检查数据是否能被3整除</h3>
 
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="nv">$input</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="mi">0</span> <span class="o">===</span> <span class="mi">10</span> <span class="o">%</span> <span class="nv">$input</span><span class="p">;</span>
-<span class="p">},</span> <span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$fn</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nv">$input</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">0</span> <span class="o">===</span> <span class="nv">$input</span> <span class="o">%</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="nv">$fn</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
