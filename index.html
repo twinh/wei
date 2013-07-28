@@ -408,9 +408,11 @@
 <p>设置<code>aliases</code>选项,指定您定义的类的微件名称</p>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'微件名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span><span class="p">,</span>
-        <span class="s1">'app'</span> <span class="o">=&gt;</span> <span class="s1">'MyProject\Application'</span>
+    <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'微件名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span><span class="p">,</span>
+            <span class="s1">'app'</span> <span class="o">=&gt;</span> <span class="s1">'MyProject\Application'</span>
+        <span class="p">)</span>
     <span class="p">)</span>
 <span class="p">));</span>
 </code></pre></div>
@@ -419,24 +421,43 @@
 <p>调用您的微件</p>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 获取自定义微件对象</span>
+<span class="cm">/* @var $app \MyProject\Application */</span>
 <span class="nv">$app</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">app</span><span class="p">;</span>
 
-<span class="c1">// 和</span>
+<span class="c1">// 和平常一样调用类的方法</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </code></pre></div>
 </li>
 </ol><h3>通过<code>import</code>选项导入目录下的自定义微件</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nx">TODO</span>
-<span class="sb">``</span>
-
-<span class="c1">### 区分`aliases`和`deps`</span>
-
-<span class="mf">1.</span> <span class="sb">`aliases`</span><span class="err">选项数组的</span><span class="nb">key</span><span class="err">是微件名称</span><span class="p">,</span><span class="nx">value</span><span class="err">是类名称</span>
-<span class="mf">2.</span> <span class="sb">`deps`</span><span class="err">选项数组的</span><span class="nb">key</span><span class="err">是微件名称</span><span class="p">,</span><span class="nx">value</span><span class="err">也是微件名称</span>
-
-<span class="sb">``</span><span class="err">`</span><span class="nx">php</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// TODO more detail message</span>
 <span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'import'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="k">array</span><span class="p">(</span>
+                <span class="s1">'dir'</span> <span class="o">=&gt;</span> <span class="s1">'要导入的类文件所在的目录'</span><span class="p">,</span>
+                <span class="s1">'namespace'</span> <span class="o">=&gt;</span> <span class="s1">'要导入的类文件所在的命名空间'</span><span class="p">,</span>
+                <span class="s1">'format'</span> <span class="o">=&gt;</span> <span class="s1">'导入的微件名格式'</span>
+            <span class="p">),</span>
+            <span class="k">array</span><span class="p">(</span>
+                <span class="s1">'dir'</span> <span class="o">=&gt;</span> <span class="s1">'path/to/MyProject'</span><span class="p">,</span>
+                <span class="s1">'namespace'</span> <span class="o">=&gt;</span> <span class="s1">'MyProject'</span><span class="p">,</span>
+                <span class="s1">'format'</span> <span class="o">=&gt;</span> <span class="s1">'my%s'</span>
+            <span class="p">)</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</code></pre></div>
+
+<h3>区分<code>aliases</code>和<code>deps</code>
+</h3>
+
+<ol>
+<li>
+<code>aliases</code>选项数组的key是微件名称,value是类名称</li>
+<li>
+<code>deps</code>选项数组的key是微件名称,value也是微件名称</li>
+</ol><div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">'微件名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span>
