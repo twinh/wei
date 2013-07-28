@@ -22,9 +22,11 @@ if (widget()->is('email', 'twinhuang@qq.com')) {
 
 ### 检查数据是否能被3整除
 ```php
-if (widget()->is(function($input) {
-    return 0 === 10 % $input;
-}, 3)) {
+$fn = function($input) {
+    return 0 === $input % 3;
+};
+
+if (widget()->is($fn, 10)) {
     echo 'Yes';
 } else {
     echo 'No';
