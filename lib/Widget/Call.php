@@ -104,6 +104,7 @@ class Call extends AbstractWidget
      * Whether disable cURL from verifying the peer's certificate
      *
      * @var bool
+     * @link http://unitstep.net/blog/2009/05/05/using-curl-in-php-to-access-https-ssltls-protected-sites/
      * @link http://stackoverflow.com/questions/6400300/php-curl-https-causing-exception-ssl-certificate-problem-verify-that-the-ca-cer
      */
     protected $disableSslVerification = false;

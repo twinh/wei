@@ -93,28 +93,55 @@ widget()->get('http://example.com', function($data, $call){
 });
 ```
 
+### 禁用SSL证书验证
+
+在开发环境中,如果我们未安装SSL证书,访问HTTPS网站会提示如下错误.
+
+    curl SSL certificate problem, verify that the CA cert is OK. Details: error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed
+
+我们可以设置`disableSslVerification`选项来禁用SSL证书验证.当然该方法不建议在正式环境使用.
+
+```php
+widget()->call(array(
+    'url' => 'https://api.github.com/gists',
+    'disableSslVerification' => true,
+));
+```
+
+扩展阅读:
+
+在PHP中使用cURL来访问受SSL/TLS保护的网站
+
+http://unitstep.net/blog/2009/05/05/using-curl-in-php-to-access-https-ssltls-protected-sites/
+
+StackOverflow上关于该问题的讨论和解决方法
+
+http://stackoverflow.com/questions/6400300/php-curl-https-causing-exception-ssl-certificate-problem-verify-that-the-ca-cer
+
+
 调用方式
 --------
 
 ### 选项
 
-名称        | 类型         | 默认值  | 说明
-------------|--------------|---------|------
-method      | string       | GET     | HTTP的请求方式,可以是`GET`, `POST`, `DELETE`, `PUT`, `PATCH`或任意其他服务器支持的方式
-contentType | string       | application/x-www-form-urlencoded; charset=UTF-8 | HTTP请求头内容类型
-cookies     | array        | array() | cookie数组,key是cookie的名称,value是cookie的值,cookie的值只能是字符串
-data        | array,string | array() | 要发送到服务器的数据
-gloabl      | bool         | true    | 是否使用全局配置选项
-headers     | array        | array   | 要发送的HTTP头
-ip          | string       | 无      | 要请求的URL地址中域名的IP地址,注意不是您的服务器IP地址
-timeout     | int          | 0       | 整个请求的最大运行时间,单位是毫秒,默认是无限制
-dataType    | string       | text    | 请求完成后,要对返回数据解析的类型,可以是`json`(数组),`jsonObject`,`xml`,`query`,`serialize`和`text`
-referer     | string       | 无      | 请求HTTP头中的referer值
-userAgent   | string       | 无      | 请求HTTP头中的userAgent值
-beforeSend  | callback     | 无      | 在发送请求前触发的回调,可通过该回调更改任意配置
-success     | callback     | 无      | 请求并解析数据成功后触发的回调
-error       | callback     | 无      | 请求或解析失败后触发的回调,可用于记录日志,展示错误信息等
-complete    | callback     | 无      | 请求完成后,不论是否成功都触发的回调,可用于数据记录等
+名称                   | 类型         | 默认值  | 说明
+-----------------------|--------------|---------|------
+method                 | string       | GET     | HTTP的请求方式,可以是`GET`, `POST`, `DELETE`, `PUT`, `PATCH`或任意其他服务器支持的方式
+contentType            | string       | application/x-www-form-urlencoded; charset=UTF-8 | HTTP请求头内容类型
+cookies                | array        | array() | cookie数组,key是cookie的名称,value是cookie的值,cookie的值只能是字符串
+data                   | array,string | array() | 要发送到服务器的数据
+gloabl                 | bool         | true    | 是否使用全局配置选项
+headers                | array        | array   | 要发送的HTTP头
+ip                     | string       | 无      | 要请求的URL地址中域名的IP地址,注意不是您的服务器IP地址
+timeout                | int          | 0       | 整个请求的最大运行时间,单位是毫秒,默认是无限制
+dataType               | string       | text    | 请求完成后,要对返回数据解析的类型,可以是`json`(数组),`jsonObject`,`xml`,`query`,`serialize`和`text`
+referer                | string       | 无      | 请求HTTP头中的referer值
+userAgent              | string       | 无      | 请求HTTP头中的userAgent值
+disableSslVerification | bool         | false   | 是否禁用SSL证书验证
+beforeSend             | callback     | 无      | 在发送请求前触发的回调,可通过该回调更改任意配置
+success                | callback     | 无      | 请求并解析数据成功后触发的回调
+error                  | callback     | 无      | 请求或解析失败后触发的回调,可用于记录日志,展示错误信息等
+complete               | callback     | 无      | 请求完成后,不论是否成功都触发的回调,可用于数据记录等
 
 ### 回调
 
