@@ -11,7 +11,7 @@ Call
 ```php
 widget()->call(array(
     // 设置请求的URL地址
-    'url' => 'https://api.github.com/gists/public',
+    'url' => 'https://api.github.com/gists',
     // 默认请求方式为GET,可以设置为POST,PUT等
     'method' => 'GET',
     // 自动解析返回数据为JSON数组
