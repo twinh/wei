@@ -20,7 +20,7 @@ widget()->call(array(
     'data' => array(
         'time' => time(),
     ),
-    'beforeSent' => function($call, $ch) {
+    'beforeSend' => function($call, $ch) {
         // 在发送前额外设置cURL选项
         curl_setopt($ch, 'xx', 'xx');
     },
