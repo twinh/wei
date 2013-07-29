@@ -4379,7 +4379,7 @@ widget()-&gt;arrayCache('name');
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'time'</span> <span class="o">=&gt;</span> <span class="nb">time</span><span class="p">(),</span>
     <span class="p">),</span>
-    <span class="s1">'beforeSent'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$call</span><span class="p">,</span> <span class="nv">$ch</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">'beforeSend'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$call</span><span class="p">,</span> <span class="nv">$ch</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// 在发送前额外设置cURL选项</span>
         <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="s1">'xx'</span><span class="p">,</span> <span class="s1">'xx'</span><span class="p">);</span>
     <span class="p">},</span>
