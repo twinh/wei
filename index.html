@@ -4448,6 +4448,31 @@ widget()-&gt;arrayCache('name');
 <span class="p">});</span>
 </code></pre></div>
 
+<h3>禁用SSL证书验证</h3>
+
+<p>在开发环境中,如果我们未安装SSL证书,访问HTTPS网站会提示如下错误.</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">curl</span> <span class="nx">SSL</span> <span class="nx">certificate</span> <span class="nx">problem</span><span class="p">,</span> <span class="nx">verify</span> <span class="nx">that</span> <span class="nx">the</span> <span class="nx">CA</span> <span class="nx">cert</span> <span class="nx">is</span> <span class="nx">OK</span><span class="o">.</span> <span class="nx">Details</span><span class="o">:</span> <span class="nx">error</span><span class="o">:</span><span class="mi">14090086</span><span class="o">:</span><span class="nx">SSL</span> <span class="nx">routines</span><span class="o">:</span><span class="nx">SSL3_GET_SERVER_CERTIFICATE</span><span class="o">:</span><span class="nx">certificate</span> <span class="nx">verify</span> <span class="nx">failed</span>
+</code></pre></div>
+
+<p>我们可以设置<code>disableSslVerification</code>选项来禁用SSL证书验证.当然该方法不建议在正式环境使用.</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'https://api.github.com/gists'</span><span class="p">,</span>
+    <span class="s1">'disableSslVerification'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+<span class="p">));</span>
+</code></pre></div>
+
+<p>扩展阅读:</p>
+
+<p>在PHP中使用cURL来访问受SSL/TLS保护的网站</p>
+
+<p><a href="http://unitstep.net/blog/2009/05/05/using-curl-in-php-to-access-https-ssltls-protected-sites/">http://unitstep.net/blog/2009/05/05/using-curl-in-php-to-access-https-ssltls-protected-sites/</a></p>
+
+<p>StackOverflow上关于该问题的讨论和解决方法</p>
+
+<p><a href="http://stackoverflow.com/questions/6400300/php-curl-https-causing-exception-ssl-certificate-problem-verify-that-the-ca-cer">http://stackoverflow.com/questions/6400300/php-curl-https-causing-exception-ssl-certificate-problem-verify-that-the-ca-cer</a></p>
+
 <h2>调用方式</h2>
 
 <h3>选项</h3>
@@ -4526,6 +4551,12 @@ widget()-&gt;arrayCache('name');
 <td>string</td>
 <td>无</td>
 <td>请求HTTP头中的userAgent值</td>
+</tr>
+<tr>
+<td>disableSslVerification</td>
+<td>bool</td>
+<td>false</td>
+<td>是否禁用SSL证书验证</td>
 </tr>
 <tr>
 <td>beforeSend</td>
