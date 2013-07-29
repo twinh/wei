@@ -621,6 +621,21 @@ class CallTest extends TestCase
         $this->assertEquals('success', $data['message']);
     }
 
+    public function testFlatApi()
+    {
+        /** @var $call \Widget\Call */
+        $call = $this->call(array(
+            'url' => $this->url . '?type=json',
+            'dataType' => 'json'
+        ));
+
+        $this->assertTrue($call->isSuccess());
+
+        $result = $call->getResponse();
+
+        $this->assertInternalType('array', $result);
+    }
+
     public function assertCalledEvents($events)
     {
         foreach ((array)$events as $event) {

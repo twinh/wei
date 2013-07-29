@@ -177,6 +177,13 @@ class Call extends AbstractWidget
     protected $responseText;
 
     /**
+     * The parsed response data
+     *
+     * @var mixed
+     */
+    protected $response;
+
+    /**
      * The parsed response JSON array
      *
      * @var array
@@ -378,7 +385,7 @@ class Call extends AbstractWidget
             $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $isSuccess = $statusCode >= 200 && $statusCode < 300 || $statusCode === 304;
             if ($isSuccess) {
-                $response = $this->parse($this->responseText, $this->dataType, $exception);
+                $this->response = $response = $this->parse($this->responseText, $this->dataType, $exception);
                 if (!$exception) {
                     $this->result = true;
                     $property = 'response' . ucfirst($this->dataType);
@@ -487,6 +494,16 @@ class Call extends AbstractWidget
     public function getResponseJson()
     {
         return $this->responseJson;
+    }
+
+    /**
+     * Returns the parsed response data
+     *
+     * @return mixed
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 
     /**
