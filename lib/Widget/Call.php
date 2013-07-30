@@ -221,6 +221,20 @@ class Call extends AbstractWidget
     protected $ch;
 
     /**
+     * The error text status
+     *
+     * @var string
+     */
+    protected $errorStatus = '';
+
+    /**
+     * The error exception object
+     *
+     * @var \ErrorException
+     */
+    protected $errorException;
+
+    /**
      * The predefined cURL options
      *
      * @var array
@@ -426,12 +440,14 @@ class Call extends AbstractWidget
     /**
      * Trigger error callback
      *
-     * @param string $type
-     * @param \Exception $exception
+     * @param string $status
+     * @param \ErrorException $exception
      */
-    protected function triggerError($type, $exception)
+    protected function triggerError($status, \ErrorException $exception)
     {
-        $this->error && call_user_func($this->error, $this, $type, $exception);
+        $this->errorStatus = $status;
+        $this->errorException = $exception;
+        $this->error && call_user_func($this->error, $this, $status, $exception);
     }
 
     /**
@@ -747,5 +763,25 @@ class Call extends AbstractWidget
     {
         $this->complete = $fn;
         return $this;
+    }
+
+    /**
+     * Returns the error status text
+     *
+     * @return string
+     */
+    public function getErrorStatus()
+    {
+        return $this->errorStatus;
+    }
+
+    /**
+     * Returns the error exception object
+     *
+     * @return \ErrorException
+     */
+    public function getErrorException()
+    {
+        return $this->errorException;
     }
 }

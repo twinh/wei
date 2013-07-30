@@ -124,6 +124,8 @@ class CallTest extends TestCase
 
         $this->assertFalse($call->isSuccess());
 
+        $this->assertInstanceOf('\ErrorException', $call->getErrorException());
+
         $this->assertCalledEvents(array('beforeSend', 'error', 'complete'));
     }
 
@@ -623,6 +625,7 @@ class CallTest extends TestCase
 
     public function testFlatApi()
     {
+        // Success
         /** @var $call \Widget\Call */
         $call = $this->call(array(
             'url' => $this->url . '?type=json',
@@ -634,6 +637,17 @@ class CallTest extends TestCase
         $result = $call->getResponse();
 
         $this->assertInternalType('array', $result);
+
+        // Error
+        $call = $this->call(array(
+            'url' => $this->url . '?code=404',
+            'error' => function(){
+                // overwrite the default error handler
+            }
+        ));
+        $this->assertFalse($call->isSuccess());
+        $this->assertEquals('http', $call->getErrorStatus());
+        $this->assertInstanceOf('\ErrorException', $call->getErrorException());
     }
 
     public function assertCalledEvents($events)
