@@ -9,7 +9,7 @@ Call
 ### 一个完整的例子:获取公开的gists列表
 
 ```php
-widget()->call(array(
+$call = widget()->call(array(
     // 设置请求的URL地址
     'url' => 'https://api.github.com/gists',
     // 默认请求方式为GET,可以设置为POST,PUT等
@@ -22,20 +22,23 @@ widget()->call(array(
     ),
     'beforeSend' => function($call, $ch) {
         // 在发送前额外设置cURL选项
-        curl_setopt($ch, 'xx', 'xx');
-    },
-    'success' => function($data, $call) {
-        // 输出第一条的地址,如https://api.github.com/gists/xxxxxxx
-        echo $data[0]->url;
-    },
-    'error' => function($call, $status, $exception){
-        // 输出错误的类型,如`curl`,完全错误类型请查看选项
-        echo $status;
-
-        // 输出完整的错误信息,如`Couldn't resolve host '404.php.net'`
-        echo $exception->getMessage();
+        //curl_setopt($ch, 'xx', 'xx');
     }
 ));
+
+if ($call->isSuccess()) {
+    // 请求成功,获取解析后的返回值
+    $response = $call->getResponse();
+
+    // 输出第一条的地址,如https://api.github.com/gists/xxxxxxx
+    var_dump($response[0]['url']);
+} else {
+    // 输出错误的类型,如`curl`,完全错误类型请查看选项
+    var_dump($call->getErrorStatus());
+
+    // 输出异常的信息,如`Couldn't resolve host '404.php.net'`
+    var_dump($call->getErrorException()->getMessage());
+}
 ```
 
 ### 指定请求域名的IP地址:通过指向不同的IP地址,访问不同的环境
