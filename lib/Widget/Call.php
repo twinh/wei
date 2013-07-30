@@ -273,13 +273,13 @@ class Call extends AbstractWidget
 
         curl_setopt_array($ch, $this->prepareCurlOpts());
 
-        $this->trigger('beforeSend', array($this, $ch));
+        $this->beforeSend && call_user_func($this->beforeSend, $this, $ch);
 
         $response = curl_exec($ch);
 
         $this->handleResponse($response);
 
-        $this->trigger('complete', array($this, $ch));
+        $this->complete && call_user_func($this->complete, $this, $ch);
 
         curl_close($ch);
     }
@@ -405,22 +405,33 @@ class Call extends AbstractWidget
                     if (property_exists($this, $property)) {
                         $this->$property = $response;
                     }
-                    $this->trigger('success', array($response, $this));
+                    $this->success && call_user_func($this->success, $response, $this);
                 } else {
                     $this->result = false;
-                    $this->trigger('error', array($this, 'parser', $exception));
+                    $this->triggerError('parser', $exception);
                 }
             } else {
                 preg_match('/[\d]{3} (.+?)\r/', $this->responseHeader, $matches);
                 $exception = new \ErrorException($matches[1], $statusCode);
                 $this->result = false;
-                $this->trigger('error', array($this, 'http', $exception));
+                $this->triggerError('http', $exception);
             }
         } else {
             $exception = new \ErrorException(curl_error($ch), curl_errno($ch));
             $this->result = false;
-            $this->trigger('error', array($this, 'curl', $exception));
+            $this->triggerError('curl', $exception);
         }
+    }
+
+    /**
+     * Trigger error callback
+     *
+     * @param string $type
+     * @param \Exception $exception
+     */
+    protected function triggerError($type, $exception)
+    {
+        $this->error && call_user_func($this->error, $this, $type, $exception);
     }
 
     /**
@@ -473,20 +484,6 @@ class Call extends AbstractWidget
         }
 
         return $data;
-    }
-
-    /**
-     * Trigger a internal callback event
-     *
-     * @param string $name
-     * @param array $params
-     */
-    protected function trigger($name, $params = array())
-    {
-        if (is_callable($this->$name)) {
-            $params = is_array($params) ? $params : array($params);
-            call_user_func_array($this->$name, $params);
-        }
     }
 
     /**
