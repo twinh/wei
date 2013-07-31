@@ -51,7 +51,7 @@ class Call extends AbstractWidget
      * Whether use the global options in `$widget->call` object when create a
      * new object
      *
-     * @var string
+     * @var bool
      */
     protected $global = true;
 
