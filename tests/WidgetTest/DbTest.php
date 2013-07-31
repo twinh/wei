@@ -967,12 +967,10 @@ class DbTest extends TestCase
     public function testGlobalEvent()
     {
         $cb = 'pi';
+        $this->db->setOption('beforeConnect', $cb);
         $this->widget->config(array(
-            'db' => array(
-                'beforeConnect' => $cb
-            ),
             'cb.db' => array(
-                'db2' => $this->db,
+                'db' => $this->db,
                 'global' => true
             )
         ));
