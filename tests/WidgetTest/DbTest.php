@@ -950,4 +950,19 @@ class DbTest extends TestCase
         $db->setOption('tablePrefix', 'post_');
         $this->assertEquals(3, $db->count('tag'));
     }
+
+    public function testConnectFails()
+    {
+        $this->setExpectedException('\PDOException');
+        $test = &$this;
+        $db = new \Widget\Db(array(
+            'widget' => $this->widget,
+            'dsn' => 'mysql:host=255.255.255.255;dbname=test;port=3306',
+            'connectFails' => function($db, $exception) use($test) {
+                $test->assertTrue(true);
+                $test->assertInstanceOf('PDOException', $exception);
+            }
+        ));
+        $db->connect();
+    }
 }

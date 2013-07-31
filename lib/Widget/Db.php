@@ -178,7 +178,7 @@ class Db extends AbstractWidget
             try {
                 $this->pdo = new PDO($this->dsn, $this->user, $this->password, $options);
             } catch (\PDOException $e) {
-                $this->connectFails && call_user_func($this->connectFails, $this);
+                $this->connectFails && call_user_func($this->connectFails, $this, $e);
                 throw $e;
             }
 
