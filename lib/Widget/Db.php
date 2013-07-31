@@ -60,6 +60,8 @@ class Db extends AbstractWidget
      */
     protected $beforeConnect;
 
+    protected $connectFails;
+
     /**
      * The callback triggers after connect to database
      *
@@ -168,7 +170,12 @@ class Db extends AbstractWidget
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
             );
 
-            $this->pdo = new PDO($this->dsn, $this->user, $this->password, $options);
+            try {
+                $this->pdo = new PDO($this->dsn, $this->user, $this->password, $options);
+            } catch (\PDOException $e) {
+                $this->connectFails && call_user_func($this->connectFails, $this);
+                throw $e;
+            }
 
             $this->afterConnect && call_user_func($this->afterConnect, $this, $this->pdo);
         }
@@ -618,6 +625,26 @@ class Db extends AbstractWidget
     public function getTable($table)
     {
         return $this->tablePrefix . $table;
+    }
+
+    /**
+     * Returns the database username
+     *
+     * @return string
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Returns the database password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 
     /**
