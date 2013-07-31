@@ -60,6 +60,11 @@ class Db extends AbstractWidget
      */
     protected $beforeConnect;
 
+    /**
+     * The callback triggers when fails to connect to database
+     *
+     * @var callback
+     */
     protected $connectFails;
 
     /**
