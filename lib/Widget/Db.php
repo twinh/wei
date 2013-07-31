@@ -145,6 +145,34 @@ class Db extends AbstractWidget
     protected $tablePrefix;
 
     /**
+     * Whether use the callbacks from default db widget
+     *
+     * @var bool
+     */
+    protected $global = false;
+
+    /**
+     * Constructor
+     *
+     * @param array $options
+     */
+    public function __construct(array $options = array())
+    {
+        parent::__construct($options);
+
+        // Uses callbacks from default db widget if global option is true
+        if (true == $this->global && $this !== $this->db) {
+            $callbacks = array(
+                'beforeConnect', 'connectFails', 'afterConnect',
+                'beforeQuery', 'afterQuery'
+            );
+            foreach ($callbacks as $callback) {
+                $this->$callback = $this->db->getOption($callback);
+            }
+        }
+    }
+
+    /**
      * Create a new instance of a SQL query builder with specified table name
      *
      * @param string $table The name of database table
@@ -158,6 +186,7 @@ class Db extends AbstractWidget
     /**
      * Connect to the database server
      *
+     * @throws \PDOException When fails to connect to database server
      * @return boolean
      */
     public function connect()
