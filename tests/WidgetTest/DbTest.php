@@ -978,7 +978,11 @@ class DbTest extends TestCase
         $this->assertSame($cb, $this->db->getOption('beforeConnect'));
         $this->assertSame($cb, $this->cbDb->getOption('beforeConnect'));
 
+        // Remove all relation configuration
         unset($this->cbDb);
         $this->widget->remove('cbDb');
+        $this->widget->config('cb.db', array(
+            'db' => null
+        ));
     }
 }
