@@ -161,13 +161,13 @@ class Db extends AbstractWidget
         parent::__construct($options);
 
         // Uses callbacks from default db widget if global option is true
-        if (true == $this->global && $this !== $this->db) {
+        if (true == $this->global && $this !== $this->widget->db) {
             $callbacks = array(
                 'beforeConnect', 'connectFails', 'afterConnect',
                 'beforeQuery', 'afterQuery'
             );
             foreach ($callbacks as $callback) {
-                $this->$callback = $this->db->getOption($callback);
+                $this->$callback = $this->widget->db->getOption($callback);
             }
         }
     }

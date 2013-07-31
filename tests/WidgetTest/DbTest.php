@@ -965,4 +965,23 @@ class DbTest extends TestCase
         ));
         $db->connect();
     }
+
+    public function testGlobalEvent()
+    {
+        $cb = function(){
+            return 'hi';
+        };
+        $this->widget->config(array(
+            'db' => array(
+                'beforeConnect' => $cb
+            ),
+            'cb.db' => array(
+                'db2' => $this->db,
+                'global' => true
+            )
+        ));
+
+        $this->assertSame($cb, $this->db->getOption('beforeConnect'));
+        $this->assertSame($cb, $this->cbDb->getOption('beforeConnect'));
+    }
 }
