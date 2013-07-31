@@ -40,11 +40,12 @@ class Db extends AbstractWidget
     protected $dsn = 'sqlite::memory:';
 
     /**
-     * A key=>value array of driver-specific connection options.
+     * A key=>value array of driver-specific connection attributes
      *
      * @var array
+     * @link http://www.php.net/manual/zh/pdo.setattribute.php
      */
-    protected $driverOptions = array();
+    protected $attrs = array();
 
     /**
      * The PDO object
@@ -198,14 +199,14 @@ class Db extends AbstractWidget
         if (!$this->pdo) {
             $this->beforeConnect && call_user_func($this->beforeConnect, $this);
 
-            $options = $this->driverOptions + array(
+            $attrs = $this->attrs + array(
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_STRINGIFY_FETCHES => true,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
             );
 
             try {
-                $this->pdo = new PDO($this->dsn, $this->user, $this->password, $options);
+                $this->pdo = new PDO($this->dsn, $this->user, $this->password, $attrs);
             } catch (\PDOException $e) {
                 $this->connectFails && call_user_func($this->connectFails, $this, $e);
                 throw $e;

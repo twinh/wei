@@ -197,7 +197,7 @@ $widget->db->query("SELECT DATE('now')");
 user            | string   | 无                   | 连接数据库的用户名
 password        | string   | 无                   | 连接数据库的密码
 dsn             | string   | sqlite::memory:      | 数据源名称(Data Source Name),详细配置请查看下表
-driverOptions   | array    | array()              | PDO的属性配置
+attrs           | array    | array()              | PDO的属性配置
 recordClass     | string   | Widget\Db\Record     | 记录类的基础类名称
 collectionClass | string   | Widget\Db\Collection | 记录集合类的基础类名称
 recordClasses   | array    | array()              | 自定义记录类的数组,键名为数据表名称,值为记录类名称
