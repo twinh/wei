@@ -197,14 +197,48 @@ $widget->db->query("SELECT DATE('now')");
 user            | string   | 无                   | 连接数据库的用户名
 password        | string   | 无                   | 连接数据库的密码
 dsn             | string   | sqlite::memory:      | 数据源名称(Data Source Name),详细配置请查看下表
+driverOptions   | array    | array()              | PDO的属性配置
 recordClass     | string   | Widget\Db\Record     | 记录类的基础类名称
 collectionClass | string   | Widget\Db\Collection | 记录集合类的基础类名称
 recordClasses   | array    | array()              | 自定义记录类的数组,键名为数据表名称,值为记录类名称
 recordNamespace | string   | 无                   | 自定义记录类的命名空间
-beforeQuery     | callback | 无                   | 在执行SQL查询之前触发的回调方法
-afterQuery      | callback | 无                   | 在执行SQL查询之后触发的回调方法
+beforeConnect   | callback | 无                   | 在连接PDO之前触发的回调方法
+connectFails    | callback | 无                   | 连接PDO失败时触发的回调方法
+afterConnect    | callback | 无                   | 连接PDO完成(成功)时触发的回调方法
+beforeQuery     | callback | 无                   | 在执行SQL语句之前触发的回调方法
+afterQuery      | callback | 无                   | 在执行SQL语句之后触发的回调方法
 
-#### beforeQuery回调的参数
+### 回调
+
+#### beforeConnect
+
+在连接PDO之前触发的回调方法
+
+名称    | 类型      | 说明
+--------|-----------|------
+$db     | Widget\Db | 当前Db微件对象
+
+#### connectFails
+
+连接PDO失败时触发的回调方法
+
+名称    | 类型         | 说明
+--------|--------------|------
+$db     | Widget\Db    | 当前Db微件对象
+$e      | PDOException | PDO异常对象
+
+#### afterConnect
+
+连接PDO完成(成功)时触发的回调方法
+
+名称    | 类型         | 说明
+--------|--------------|------
+$db     | Widget\Db    | 当前Db微件对象
+$pdo    | PDO          | PDO对象
+
+#### beforeQuery
+
+在执行SQL语句之前触发的回调方法
 
 名称    | 类型      | 说明
 --------|-----------|------
@@ -213,7 +247,9 @@ $params | array     | 执行语句的参数
 $types  | array     | 执行语句的参数类型
 $db     | Widget\Db | 当前Db微件对象
 
-#### afterQuery回调的参数
+#### afterQuery
+
+在执行SQL语句之后触发的回调方法
 
 名称    | 类型      | 说明
 --------|-----------|------
