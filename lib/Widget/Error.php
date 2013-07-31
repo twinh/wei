@@ -130,7 +130,7 @@ class Error extends AbstractWidget
      */
     protected function registerErrorHandler()
     {
-        set_error_handler(array($this, 'HandleError'));
+        set_error_handler(array($this, 'handleError'));
     }
 
     /**
