@@ -966,9 +966,7 @@ class DbTest extends TestCase
 
     public function testGlobalEvent()
     {
-        $cb = function(){
-            return 'hi';
-        };
+        $cb = 'pi';
         $this->widget->config(array(
             'db' => array(
                 'beforeConnect' => $cb
