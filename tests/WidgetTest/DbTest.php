@@ -107,8 +107,6 @@ class DbTest extends TestCase
     public function testGetRecord()
     {
         $this->assertInstanceOf('\Widget\Db\Record', $this->db->create('member'));
-
-        $this->assertInstanceOf('\Widget\Db\Record', $this->db->member);
     }
 
     public function testRelation()
@@ -247,7 +245,7 @@ class DbTest extends TestCase
         $this->assertEquals('1', $member->id);
 
         // New member save with data
-        $member = $db->member;
+        $member = $db->create('member');
         $result = $member->save(array(
             'group_id' => '1',
             'name' => 'save',

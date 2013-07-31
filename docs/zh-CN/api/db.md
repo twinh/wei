@@ -442,11 +442,6 @@ $params     | array        | 绑定到SQL的参数
 
 ### 魔术方法
 
-#### db->$table
-创建一个新的数据表记录对象,等于`db->create($table, array())`
-
-**返回:** `Widget\Db\Record`
-
 #### db->$table($conditions)
 根据条件查找数据表的一行记录,返回的是一个`Widget\Db\Record`对象,等于`db->find($table, $conditions)`
 

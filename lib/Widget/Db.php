@@ -161,13 +161,13 @@ class Db extends AbstractWidget
         parent::__construct($options);
 
         // Uses callbacks from default db widget if global option is true
-        if (true == $this->global && $this !== $this->widget->db) {
+        if (true == $this->global && $this !== $this->db) {
             $callbacks = array(
                 'beforeConnect', 'connectFails', 'afterConnect',
                 'beforeQuery', 'afterQuery'
             );
             foreach ($callbacks as $callback) {
-                $this->$callback = $this->widget->db->getOption($callback);
+                $this->$callback = $this->db->getOption($callback);
             }
         }
     }
@@ -603,17 +603,6 @@ class Db extends AbstractWidget
         }
 
         return new $this->collectionClass($records);
-    }
-
-    /**
-     * Returns a new table instance, alias of `create`
-     *
-     * @param string $name
-     * @return Db\Record
-     */
-    public function __get($name)
-    {
-        return $this->create($name, array());
     }
 
     /**
