@@ -44,26 +44,14 @@ class Memcached extends AbstractCache
      */
     public function __construct(array $options = array())
     {
-        $this->setOption($options, array('object', 'servers'));
+        parent::__construct($options);
 
-        parent::__construct();
+        if (!$this->object) {
+            $this->object = new \Memcached;
+        }
+        $this->object->addServers($this->servers);
     }
-
-    /**
-     * Set servers
-     *
-     * @param array $servers
-     * @return \Memcached
-     */
-    public function setServers($servers)
-    {
-        $this->object->addServers($servers);
-
-        $this->servers = $servers;
-
-        return $this;
-    }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -199,7 +187,6 @@ class Memcached extends AbstractCache
         } else {
             $this->object = new \Memcached;
         }
-
         return $this;
     }
 }
