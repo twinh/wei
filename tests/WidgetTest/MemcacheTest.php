@@ -28,4 +28,21 @@ class MemcacheTest extends CacheTestCase
 
         $this->assertInstanceOf('\Memcache', $cache->getObject());
     }
+
+    public function testCustomServer()
+    {
+        $this->widget->config(array(
+            'test.memcache' => array(
+                'servers' => array(
+                    array(
+                        'host'          => 'localhost',
+                        'port'          => 11211,
+                        'persistent'    => true
+                    )
+                )
+            )
+        ));
+
+        $this->assertInstanceOf('\Widget\Memcache', $this->widget->testMemcache);
+    }
 }

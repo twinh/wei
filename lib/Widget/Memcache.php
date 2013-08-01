@@ -52,26 +52,15 @@ class Memcache extends AbstractCache
      */
     public function __construct(array $options = array())
     {
-        $this->setOption($options, array('object', 'servers'));
+        parent::__construct($options);
 
-        parent::__construct();
-    }
-
-    /**
-     * Set servers
-     *
-     * @param array $servers
-     * @return \Memcache
-     */
-    public function setServers($servers)
-    {
-        foreach ((array)$servers as $server) {
+        // Instance memcache object and connect to server
+        if (!$this->object) {
+            $this->object = new \Memcache;
+        }
+        foreach ($this->servers as $server) {
             call_user_func_array(array($this->object, 'addServer'), $server);
         }
-
-        $this->servers = $servers;
-
-        return $this;
     }
 
     /**
@@ -196,7 +185,6 @@ class Memcache extends AbstractCache
         } else {
             $this->object = new \Memcache;
         }
-
         return $this;
     }
 }
