@@ -153,6 +153,7 @@ API参考目录
 * [event](api/event.md) - 事件管理器,支持绑定,触发,移除事件和命名空间等特性
 * [gravatar](api/gravatar.md) - 根据邮箱地址生成自定义大小的Gravatar头像
 * [logger](api/logger.md) - 记录日志
+* [map](api/map.md) - 映射数据管理
 * [pinyin](api/pinyin.md) - 将中文转换为拼音字母
 * [uuid](api/uuid.md) - 生成一个随机的UUID
 * [website](api/website.md) - 设置和获取网站自定义网站配置信息
