@@ -12778,7 +12778,8 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h3>转换"微框架"为拼音字母</h3>
 
-<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">pinyin</span><span class="p">(</span><span class="s1">'微框架'</span><span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 输出`PHPweikuangjia`</span>
+<span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">pinyin</span><span class="p">(</span><span class="s1">'PHP微框架'</span><span class="p">);</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
@@ -12792,6 +12793,23 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <h4>pinyin($word)</h4>
 
 <p>将中文转换为拼音字母</p>
+
+<p><strong>返回:</strong> <code>string</code> 拼音字母</p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$word</td>
+<td>string</td>
+<td>要转换的中文字符</td>
+</tr></tbody>
+</table>
   </section>
 
 <!-- api/uuid
