@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## 0.9.4 (WIP)
+## 0.9.4-RC1 (2013-08-02)
 
 * Merged cache widget's `cached` method into `get` method
 * Added `indexBy` method for query builder
@@ -17,6 +17,9 @@ Changelog
 * Added `autoload` paramter for import method
 * Removed `WidgetAwareInterface` and `AbstractWidgetAware` class, use `widget()` is more convenient
 * Changed session namespace default to false
+* Added getResponse, getErrorStatus, getErrorException methods, disableSslVerification option for call widget, refs #86
+* Added global option, connectFails callback, getUser and getPassword methods for db widget
+* Fixed memcache and memcached option error
 
 ## 0.9.3 (2013-07-04)
 
