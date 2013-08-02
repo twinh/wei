@@ -1,14 +1,26 @@
-    该微件文档还在紧急编写中,敬请期待!
-[pinyin()](http://twinh.github.io/widget/api/pinyin)
-====================================================
+Pinyin
+======
 
-Converts chinese words to phonetic alphabets
+将中文转换为拼音字母
 
-### Converts chinese words to phonetic alphabets
+案例
+----
+
+### 转换"微框架"为拼音字母
+
 ```php
-string pinyin($word)
+TODO
 ```
 
-##### 参数
-* **$word** `string` 
+调用方式
+--------
 
+### 选项
+
+*无*
+
+### 方法
+
+#### pinyin($word)
+
+将中文转换为拼音字母
