@@ -199,6 +199,7 @@
         <li><a href="#event">event</a></li>
         <li><a href="#gravatar">gravatar</a></li>
         <li><a href="#logger">logger</a></li>
+        <li><a href="#map">map</a></li>
         <li><a href="#pinyin">pinyin</a></li>
         <li><a href="#uuid">uuid</a></li>
         <li><a href="#website">website</a></li>
@@ -12704,6 +12705,66 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <h4>logger-&gt;setLevel()</h4>
 
 <p>设置默认的日志级别</p>
+  </section>
+
+<!-- api/map
+  ================================================== -->
+  <section id="map">
+  <div class="page-header"><h1>Map</h1></div>
+
+<p>映射数据管理</p>
+
+<h2>案例</h2>
+
+<h3>获取映射列表</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$statuses</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">(</span><span class="s1">'statuses'</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>获取执行项的映射列表的值</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 输出"草稿中"</span>
+<span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">(</span><span class="s1">'statuses'</span><span class="p">,</span> <span class="s1">'draf'</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>输出HTML option标签</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// TODO</span>
+</code></pre></div>
+
+<h3>输出JSON数据</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// TODO</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>file</td>
+<td>string</td>
+<td>无</td>
+<td>map文件所在的路径</td>
+</tr></tbody>
+</table><h3>方法</h3>
+
+<h4>map($name)</h4>
+
+<h4>map($name, $key)</h4>
+
+<h4>map-&gt;get($name)</h4>
+
+<h4>map-&gt;toJson($name)</h4>
+
+<h4>map-&gt;toOptions($name)</h4>
   </section>
 
 <!-- api/pinyin
