@@ -26,7 +26,7 @@ class Record extends AbstractWidget
     protected $table;
 
     /**
-     * Whether it's a new record and have not save to database
+     * Whether it's a new record and has not save to database
      *
      * @var bool
      */
@@ -232,5 +232,15 @@ class Record extends AbstractWidget
             $this->data[$name] = null;
         }
         return $this;
+    }
+
+    /**
+     * Check if it's a new record and has not save to database
+     *
+     * @return bool
+     */
+    public function isNew()
+    {
+        return $this->isNew;
     }
 }
