@@ -13,8 +13,6 @@ namespace Widget;
  * An util widget that converts Chinese words to phonetic alphabets
  *
  * The basic code of the pinyin widget is from the internet
- *
- * @todo refactor and enhance
  */
 class Pinyin extends AbstractWidget
 {
