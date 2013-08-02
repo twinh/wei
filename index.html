@@ -12770,24 +12770,28 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <!-- api/pinyin
   ================================================== -->
   <section id="pinyin">
-  <div class="highlight"><pre><code class="php"><span class="err">该微件文档还在紧急编写中</span><span class="p">,</span><span class="err">敬请期待</span><span class="o">!</span>
+  <div class="page-header"><h1>Pinyin</h1></div>
+
+<p>将中文转换为拼音字母</p>
+
+<h2>案例</h2>
+
+<h3>转换"微框架"为拼音字母</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">pinyin</span><span class="p">(</span><span class="s1">'微框架'</span><span class="p">);</span>
 </code></pre></div>
 
-<div class="page-header"><h1><a href="http://twinh.github.io/widget/api/pinyin">pinyin()</a></h1></div>
+<h2>调用方式</h2>
 
-<p>Converts chinese words to phonetic alphabets</p>
+<h3>选项</h3>
 
-<h3>Converts chinese words to phonetic alphabets</h3>
+<p><em>无</em></p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">string</span> <span class="nx">pinyin</span><span class="p">(</span><span class="nv">$word</span><span class="p">)</span>
-</code></pre></div>
+<h3>方法</h3>
 
-<h5>参数</h5>
+<h4>pinyin($word)</h4>
 
-<ul>
-<li>
-<strong>$word</strong> <code>string</code> </li>
-</ul>
+<p>将中文转换为拼音字母</p>
   </section>
 
 <!-- api/uuid
