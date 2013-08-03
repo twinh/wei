@@ -256,7 +256,8 @@ class Db extends AbstractWidget
             );
 
             // Build PDO DSN
-            $this->dsn &= $dsn = $this->driver . ':';
+            $dsn = $this->driver . ':';
+            $this->dsn = &$dsn;
             switch ($this->driver) {
                 case 'mysql':
                     $this->host && $dsn .= 'host=' . $this->host . ';';
