@@ -20,6 +20,11 @@ return array(
         'm' => '男',
         'f' => '女'
     ),
+    'priorities' => array(
+    	-10 => '低',
+    	0 	=> '中',
+    	10 	=> '高'
+    ),
 	'statuses' => array(
 		'draft' 	=> '草稿箱',
 		'inProcess'	=> '进行中',
