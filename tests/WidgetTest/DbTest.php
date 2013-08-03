@@ -987,4 +987,16 @@ class DbTest extends TestCase
             'db' => null
         ));
     }
+
+    public function testUnsupportedDriver()
+    {
+        $this->setExpectedException('\RuntimeException', 'Unsupported database driver: abc');
+
+        $db = new \Widget\Db(array(
+            'widget' => $this->widget,
+            'driver' => 'abc'
+        ));
+
+        $db->query("SELECT MAX(1, 2)");
+    }
 }

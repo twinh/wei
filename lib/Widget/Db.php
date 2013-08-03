@@ -281,7 +281,7 @@ class Db extends AbstractWidget
                     break;
 
                 default:
-                    throw new \RuntimeException();
+                    throw new \RuntimeException(sprintf('Unsupported database driver: %s', $this->driver));
             }
 
             try {
@@ -294,7 +294,6 @@ class Db extends AbstractWidget
             $this->afterConnect && call_user_func($this->afterConnect, $this, $this->pdo);
         }
 
-        $this->driver = $this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
         $this->isConnected = true;
 
         return true;
