@@ -12759,8 +12759,10 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h3>获取执行项的映射列表的值</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 输出"女"</span>
-<span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">(</span><span class="s1">'gender'</span><span class="p">,</span> <span class="s1">'f'</span><span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">(</span><span class="s1">'gender'</span><span class="p">,</span> <span class="s1">'f'</span><span class="p">);</span>
+
+<span class="c1">// 输出</span>
+<span class="s1">'女'</span><span class="p">;</span>
 </code></pre></div>
 
 <h3>输出HTML option标签</h3>
@@ -12768,7 +12770,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="o">-&gt;</span><span class="na">toOptions</span><span class="p">(</span><span class="s1">'yesOrNo'</span><span class="p">);</span>
 
 <span class="c1">// 输出</span>
-<span class="s1">'&lt;option value="y"&gt;是&lt;/option&gt;&lt;option value="n"&gt;否&lt;/option&gt;'</span>
+<span class="s1">'&lt;option value="y"&gt;是&lt;/option&gt;&lt;option value="n"&gt;否&lt;/option&gt;'</span><span class="p">;</span>
 </code></pre></div>
 
 <h3>输出JSON数据</h3>
@@ -12776,7 +12778,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="o">-&gt;</span><span class="na">toJson</span><span class="p">(</span><span class="s1">'yesOrNo'</span><span class="p">);</span>
 
 <span class="c1">// 输出</span>
-<span class="s1">'{"y":"\u662f","n":"\u5426"}'</span>
+<span class="s1">'{"y":"\u662f","n":"\u5426"}'</span><span class="p">;</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
