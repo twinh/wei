@@ -12716,25 +12716,67 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h2>案例</h2>
 
+<h3>配置映射文件的路径</h3>
+
+<p>假设文件<code>config/map.php</code>的内容如下</p>
+
+<div class="highlight"><pre><code class="php"><span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'yesOrNo'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'y'</span> <span class="o">=&gt;</span> <span class="s1">'是'</span><span class="p">,</span>
+        <span class="s1">'n'</span> <span class="o">=&gt;</span> <span class="s1">'否'</span>
+    <span class="p">),</span>
+    <span class="s1">'gender'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'m'</span> <span class="o">=&gt;</span> <span class="s1">'男'</span><span class="p">,</span>
+        <span class="s1">'f'</span> <span class="o">=&gt;</span> <span class="s1">'女'</span>
+    <span class="p">),</span>
+    <span class="s1">'statuses'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'draft'</span>     <span class="o">=&gt;</span> <span class="s1">'草稿箱'</span><span class="p">,</span>
+        <span class="s1">'inProcess'</span> <span class="o">=&gt;</span> <span class="s1">'进行中'</span><span class="p">,</span>
+        <span class="s1">'done'</span>      <span class="o">=&gt;</span> <span class="s1">'完成'</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<p>指定map文件路径</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'map'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'file'</span> <span class="o">=&gt;</span> <span class="s1">'config/map.php'</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</code></pre></div>
+
 <h3>获取映射列表</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$statuses</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">(</span><span class="s1">'statuses'</span><span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$gender</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">(</span><span class="s1">'gender'</span><span class="p">);</span>
+
+<span class="c1">// 返回</span>
+<span class="nv">$gender</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'m'</span> <span class="o">=&gt;</span> <span class="s1">'男'</span><span class="p">,</span>
+    <span class="s1">'f'</span> <span class="o">=&gt;</span> <span class="s1">'女'</span>
+<span class="p">);</span>
 </code></pre></div>
 
 <h3>获取执行项的映射列表的值</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 输出"草稿中"</span>
-<span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">(</span><span class="s1">'statuses'</span><span class="p">,</span> <span class="s1">'draf'</span><span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 输出"女"</span>
+<span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">(</span><span class="s1">'gender'</span><span class="p">,</span> <span class="s1">'f'</span><span class="p">);</span>
 </code></pre></div>
 
 <h3>输出HTML option标签</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// TODO</span>
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="o">-&gt;</span><span class="na">toOptions</span><span class="p">(</span><span class="s1">'yesOrNo'</span><span class="p">);</span>
+
+<span class="c1">// 输出</span>
+<span class="s1">'&lt;option value="y"&gt;是&lt;/option&gt;&lt;option value="n"&gt;否&lt;/option&gt;'</span>
 </code></pre></div>
 
 <h3>输出JSON数据</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// TODO</span>
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="o">-&gt;</span><span class="na">toJson</span><span class="p">(</span><span class="s1">'yesOrNo'</span><span class="p">);</span>
+
+<span class="c1">// 输出</span>
+<span class="s1">'{"y":"\u662f","n":"\u5426"}'</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
