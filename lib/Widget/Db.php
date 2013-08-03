@@ -83,13 +83,6 @@ class Db extends AbstractWidget
     protected $path;
 
     /**
-     * Whether the sqlite database is in memory
-     *
-     * @var bool
-     */
-    protected $memory = false;
-
-    /**
      * The dsn parameter for PDO constructor
      *
      * @var string
@@ -268,11 +261,7 @@ class Db extends AbstractWidget
                     break;
 
                 case 'sqlite':
-                    if ($this->path) {
-                        $dsn .= $this->path;
-                    } elseif ($this->memory) {
-                        $dsn .= ':memory:';
-                    }
+                    $dsn .= $this->path;
                     break;
 
                 case 'pgsql':

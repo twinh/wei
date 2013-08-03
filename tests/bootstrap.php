@@ -33,8 +33,8 @@ $widget = widget(array(
         'ip' => '127.0.0.1' // set ip for WidgetTest\CallTest\::testIp
     ),
     'db' => array(
-        'driver' => 'sqlite',
-        'memory' => true
+        'driver'    => 'sqlite',
+        'path'      => ':memory:'
     ),
     'mysql.db' => array(
         'driver'    => 'mysql',
