@@ -2751,7 +2751,7 @@ widget()-&gt;arrayCache('name');
 <div class="highlight"><pre><code class="php"><span class="c1">// 查找主键为1的用户</span>
 <span class="nv">$user</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="s1">'1'</span><span class="p">);</span>
 
-<span class="c1">// 或是通过魔术方法更自然的获取对象</span>
+<span class="c1">// 或是通过魔术方法更自然地获取对象</span>
 <span class="nv">$user</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 
 <span class="c1">// 更新对象的值</span>
@@ -2775,21 +2775,30 @@ widget()-&gt;arrayCache('name');
 <div class="highlight"><pre><code class="php"><span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="c1">// 数据库微件的配置</span>
     <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'dsn'</span> <span class="o">=&gt;</span> <span class="s1">'mysql:host=localhost;dbname=widget;charset=utf8'</span><span class="p">,</span>
-        <span class="s1">'user'</span> <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
-        <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
+        <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
+        <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'localhost'</span><span class="p">,</span>
+        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'widget'</span><span class="p">,</span>
+        <span class="s1">'charset'</span>   <span class="o">=&gt;</span> <span class="s1">'utf8'</span><span class="p">,</span>
+        <span class="s1">'user'</span>      <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
+        <span class="s1">'password'</span>  <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
     <span class="p">),</span>
     <span class="c1">// 备机数据库微件的配置</span>
     <span class="s1">'slave.db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'dsn'</span> <span class="o">=&gt;</span> <span class="s1">'mysql:host=slave-host;dbname=widget;charset=utf8'</span><span class="p">,</span>
-        <span class="s1">'user'</span> <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
-        <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
+        <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
+        <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'slave-host'</span><span class="p">,</span>
+        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'widget'</span><span class="p">,</span>
+        <span class="s1">'charset'</span>   <span class="o">=&gt;</span> <span class="s1">'utf-8'</span><span class="p">,</span>
+        <span class="s1">'user'</span>      <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
+        <span class="s1">'password'</span>  <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
     <span class="p">),</span>
     <span class="c1">// 日志数据库微件的配置</span>
     <span class="s1">'logger.db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'dsn'</span> <span class="o">=&gt;</span> <span class="s1">'mysql:host=logger-host;dbname=widget;charset=utf8'</span><span class="p">,</span>
-        <span class="s1">'user'</span> <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
-        <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
+        <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
+        <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'logger-host'</span><span class="p">,</span>
+        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'widget'</span><span class="p">,</span>
+        <span class="s1">'charset'</span>   <span class="o">=&gt;</span> <span class="s1">'utf-8'</span><span class="p">,</span>
+        <span class="s1">'user'</span>      <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
+        <span class="s1">'password'</span>  <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
     <span class="p">)</span>
 <span class="p">));</span>
 
@@ -2941,10 +2950,41 @@ widget()-&gt;arrayCache('name');
 <td>连接数据库的密码</td>
 </tr>
 <tr>
-<td>dsn</td>
+<td>host</td>
 <td>string</td>
-<td>sqlite::memory:</td>
-<td>数据源名称(Data Source Name),详细配置请查看下表</td>
+<td>127.0.0.1</td>
+<td>数据库所在的主机地址,仅驱动为mysql和pgsql时有效</td>
+</tr>
+<tr>
+<td>port</td>
+<td>string</td>
+<td>无</td>
+<td>数据库服务器运行的端口,仅驱动为mysql和pgsql时有效</td>
+</tr>
+<tr>
+<td>dbname</td>
+<td>string</td>
+<td>无</td>
+<td>数据库名称,仅驱动为mysql和pgsql时有效</td>
+</tr>
+<tr>
+<td>unixSocket</td>
+<td>string</td>
+<td>无</td>
+<td>MySQL数据库的Unix socket连接文件,仅驱动为mysql时有效</td>
+</tr>
+<tr>
+<td>charset</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的字符集,仅驱动为mysql时有效</td>
+</tr>
+<tr>
+<td>path</td>
+<td>string</td>
+<td>无</td>
+<td>SQLite数据库所在的路径,如果存储在内存中,使用<code>:memory:</code>
+</td>
 </tr>
 <tr>
 <td>attrs</td>
@@ -3581,6 +3621,36 @@ widget()-&gt;arrayCache('name');
 <p>根据数据表名称获取记录类名称</p>
 
 <p><strong>返回:</strong> <code>string</code> 如果记录类不存在,返回默认类<code>Widget\Db\Record</code></p>
+
+<h4>db-&gt;getUser()</h4>
+
+<p>获取连接数据库的用户名称</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
+
+<h4>db-&gt;getPassword()</h4>
+
+<p>获取连接数据库的用户密码</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
+
+<h4>db-&gt;getHost()</h4>
+
+<p>获取数据库所在的主机地址</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
+
+<h4>db-&gt;getPort()</h4>
+
+<p>获取数据库服务器运行的端口</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
+
+<h4>db-&gt;getDbname()</h4>
+
+<p>获取数据库的名称</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
 
 <h3>魔术方法</h3>
 
@@ -12716,74 +12786,25 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h2>案例</h2>
 
-<h3>配置映射文件的路径</h3>
-
-<p>假设文件<code>config/map.php</code>的内容如下</p>
-
-<div class="highlight"><pre><code class="php"><span class="k">return</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s1">'yesOrNo'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'y'</span> <span class="o">=&gt;</span> <span class="s1">'是'</span><span class="p">,</span>
-        <span class="s1">'n'</span> <span class="o">=&gt;</span> <span class="s1">'否'</span>
-    <span class="p">),</span>
-    <span class="s1">'gender'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'m'</span> <span class="o">=&gt;</span> <span class="s1">'男'</span><span class="p">,</span>
-        <span class="s1">'f'</span> <span class="o">=&gt;</span> <span class="s1">'女'</span>
-    <span class="p">),</span>
-    <span class="s1">'priorities'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="o">-</span><span class="mi">10</span> <span class="o">=&gt;</span> <span class="s1">'低'</span><span class="p">,</span>
-        <span class="mi">0</span>   <span class="o">=&gt;</span> <span class="s1">'中'</span><span class="p">,</span>
-        <span class="mi">10</span>  <span class="o">=&gt;</span> <span class="s1">'高'</span>
-    <span class="p">),</span>
-    <span class="s1">'statuses'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'draft'</span>     <span class="o">=&gt;</span> <span class="s1">'草稿箱'</span><span class="p">,</span>
-        <span class="s1">'inProcess'</span> <span class="o">=&gt;</span> <span class="s1">'进行中'</span><span class="p">,</span>
-        <span class="s1">'done'</span>      <span class="o">=&gt;</span> <span class="s1">'完成'</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="p">);</span>
-</code></pre></div>
-
-<p>指定map文件路径</p>
-
-<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'map'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'file'</span> <span class="o">=&gt;</span> <span class="s1">'config/map.php'</span>
-    <span class="p">)</span>
-<span class="p">));</span>
-</code></pre></div>
-
 <h3>获取映射列表</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$gender</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">(</span><span class="s1">'gender'</span><span class="p">);</span>
-
-<span class="c1">// 返回</span>
-<span class="nv">$gender</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s1">'m'</span> <span class="o">=&gt;</span> <span class="s1">'男'</span><span class="p">,</span>
-    <span class="s1">'f'</span> <span class="o">=&gt;</span> <span class="s1">'女'</span>
-<span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$statuses</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">(</span><span class="s1">'statuses'</span><span class="p">);</span>
 </code></pre></div>
 
 <h3>获取执行项的映射列表的值</h3>
 
-<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">(</span><span class="s1">'gender'</span><span class="p">,</span> <span class="s1">'f'</span><span class="p">);</span>
-
-<span class="c1">// 输出</span>
-<span class="s1">'女'</span><span class="p">;</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 输出"草稿中"</span>
+<span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">(</span><span class="s1">'statuses'</span><span class="p">,</span> <span class="s1">'draf'</span><span class="p">);</span>
 </code></pre></div>
 
 <h3>输出HTML option标签</h3>
 
-<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="o">-&gt;</span><span class="na">toOptions</span><span class="p">(</span><span class="s1">'yesOrNo'</span><span class="p">);</span>
-
-<span class="c1">// 输出</span>
-<span class="s1">'&lt;option value="y"&gt;是&lt;/option&gt;&lt;option value="n"&gt;否&lt;/option&gt;'</span><span class="p">;</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// TODO</span>
 </code></pre></div>
 
 <h3>输出JSON数据</h3>
 
-<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="o">-&gt;</span><span class="na">toJson</span><span class="p">(</span><span class="s1">'yesOrNo'</span><span class="p">);</span>
-
-<span class="c1">// 输出</span>
-<span class="s1">'{"y":"\u662f","n":"\u5426"}'</span><span class="p">;</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// TODO</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
