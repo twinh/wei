@@ -751,6 +751,36 @@ class Db extends AbstractWidget
     }
 
     /**
+     * Returns the hostname on which the database server resides
+     *
+     * @return string
+     */
+    public function getHost()
+    {
+        return $this->host;
+    }
+
+    /**
+     * Returns the port on which the database server is running
+     *
+     * @return string
+     */
+    public function getPort()
+    {
+        return $this->port;
+    }
+
+    /**
+     * Returns the name of the database
+     *
+     * @return string
+     */
+    public function getDbname()
+    {
+        return $this->dbname;
+    }
+
+    /**
      * Bind parameters to statement object
      *
      * @param \PDOStatement $stmt
