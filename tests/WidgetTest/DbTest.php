@@ -955,7 +955,9 @@ class DbTest extends TestCase
         $test = &$this;
         $db = new \Widget\Db(array(
             'widget' => $this->widget,
-            'dsn' => 'mysql:host=255.255.255.255;dbname=test;port=3306',
+            'driver' => 'mysql',
+            'host'   => '255.255.255.255',
+            'dbname' => 'test',
             'connectFails' => function($db, $exception) use($test) {
                 $test->assertTrue(true);
                 $test->assertInstanceOf('PDOException', $exception);

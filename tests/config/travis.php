@@ -2,14 +2,16 @@
 
 return array(
     'mysql.db' => array(
+        'driver'    => 'mysql',
         'user'      => 'travis',
         'password'  => '',
-        'dsn'       => 'mysql:host=127.0.0.1;port=3306;dbname=widget_tests;charset=utf8'
+        'dbname'    => 'widget_tests',
     ),
     'pgsql.db' => array(
+        'driver'    => 'pgsql',
         'user'      => 'travis',
         'password'  => '',
-        'dsn'       => 'pgsql:host=127.0.0.1;port=5432;dbname=widget_tests'
+        'dbname'    => 'widget_tests'
     ),
     'mysql.dbal' => array(
         'driver'    => 'pdo_mysql',

@@ -9,6 +9,7 @@
 namespace Widget;
 
 use PDO;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Widget\Db\Collection;
 
 /**
@@ -18,6 +19,13 @@ use Widget\Db\Collection;
  */
 class Db extends AbstractWidget
 {
+    /**
+     * The name of PDO driver, could be mysql, sqlite or pgsql
+     *
+     * @var string
+     */
+    protected $driver = 'mysql';
+
     /**
      * The database username
      *
@@ -33,11 +41,60 @@ class Db extends AbstractWidget
     protected $password;
 
     /**
+     * The hostname on which the database server resides, for mysql and pgsql
+     *
+     * @var string
+     */
+    protected $host = '127.0.0.1';
+
+    /**
+     * The port on which the database server is running, for mysql and pgsql
+     *
+     * @var string
+     */
+    protected $port;
+
+    /**
+     * The name of the database, for mysql and pgsql
+     *
+     * @var string
+     */
+    protected $dbname;
+
+    /**
+     * The MySQL Unix socket (shouldn't be used with host or port), for mysql only
+     *
+     * @var string
+     */
+    protected $unixSocket;
+
+    /**
+     * The character set, for mysql only
+     *
+     * @var string
+     */
+    protected $charset;
+
+    /**
+     * The path for sqlite database
+     *
+     * @var string
+     */
+    protected $path;
+
+    /**
+     * Whether the sqlite database is in memory
+     *
+     * @var bool
+     */
+    protected $memory = false;
+
+    /**
      * The dsn parameter for PDO constructor
      *
      * @var string
      */
-    protected $dsn = 'sqlite::memory:';
+    protected $dsn;
 
     /**
      * A key=>value array of driver-specific connection attributes
@@ -95,13 +152,6 @@ class Db extends AbstractWidget
      * @var bool
      */
     protected $isConnected = false;
-
-    /**
-     * The name of PDO driver
-     *
-     * @var string
-     */
-    private $driver;
 
     /**
      * The database table definitions
@@ -205,8 +255,37 @@ class Db extends AbstractWidget
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
             );
 
+            // Build PDO DSN
+            $this->dsn &= $dsn = $this->driver . ':';
+            switch ($this->driver) {
+                case 'mysql':
+                    $this->host && $dsn .= 'host=' . $this->host . ';';
+                    $this->port && $dsn .= 'port=' . $this->port . ';';
+                    $this->dbname && $dsn .= 'dbname=' . $this->dbname . ';';
+                    $this->unixSocket && $dsn .= 'unix_socket=' . $this->unixSocket . ';';
+                    $this->charset && $dsn .= 'charset=' . $this->charset . ';';
+                    break;
+
+                case 'sqlite':
+                    if ($this->path) {
+                        $dsn .= $this->path;
+                    } elseif ($this->memory) {
+                        $dsn .= ':memory:';
+                    }
+                    break;
+
+                case 'pgsql':
+                    $this->host && $dsn .= 'host=' . $this->host . ';';
+                    $this->port && $dsn .= 'port=' . $this->port . ';';
+                    $this->dbname && $dsn .= 'dbname=' . $this->dbname . ';';
+                    break;
+
+                default:
+                    throw new \RuntimeException();
+            }
+
             try {
-                $this->pdo = new PDO($this->dsn, $this->user, $this->password, $attrs);
+                $this->pdo = new PDO($dsn, $this->user, $this->password, $attrs);
             } catch (\PDOException $e) {
                 $this->connectFails && call_user_func($this->connectFails, $this, $e);
                 throw $e;

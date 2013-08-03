@@ -7,14 +7,16 @@ return array(
         )
     ),
     'mysql.db' => array(
+        'driver'    => 'mysql',
         'user'      => getenv('MYSQL_USER'),
         'password'  => getenv('MYSQL_PASSWORD'),
-        'dsn'       => 'mysql:host=127.0.0.1;port=3306;dbname=widget_test;charset=utf8'
+        'dbname'    => 'widget_test'
     ),
     'pgsql.db' => array(
+        'driver'    => 'pgsql',
         'user'      => getenv('PG_USER'),
         'password'  => getenv('PG_PASSWORD'),
-        'dsn'       => 'pgsql:host=127.0.0.1;port=5432;dbname=widget_test'
+        'dbname'    => 'widget_test'
     ),
     'mysql.dbal' => array(
         'driver'    => 'pdo_mysql',
