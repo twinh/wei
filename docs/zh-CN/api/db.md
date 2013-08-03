@@ -203,6 +203,7 @@ $widget->db->query("SELECT DATE('now')");
 
 名称            |  类型    | 默认值               | 说明
 ----------------|----------|----------------------|------
+dirver          | string   | mysql                | 数据库驱动类型,可以是`mysql`,`sqlite`或`pgsql`
 user            | string   | 无                   | 连接数据库的用户名
 password        | string   | 无                   | 连接数据库的密码
 host            | string   | 127.0.0.1            | 数据库所在的主机地址,仅驱动为mysql和pgsql时有效
@@ -221,6 +222,14 @@ connectFails    | callback | 无                   | 连接PDO失败时触发的
 afterConnect    | callback | 无                   | 连接PDO完成(成功)时触发的回调方法
 beforeQuery     | callback | 无                   | 在执行SQL语句之前触发的回调方法
 afterQuery      | callback | 无                   | 在执行SQL语句之后触发的回调方法
+
+#### 不同驱动连接到数据库的基本选项
+
+驱动类型 | 选项
+---------|------
+mysql    | user, password, host, port, dbname, unixSocket, charset
+sqlite   | user, password, host, port, dbname
+pgsql    | path
 
 ### 回调
 
@@ -268,14 +277,6 @@ $db     | Widget\Db | 当前Db微件对象
 名称    | 类型      | 说明
 --------|-----------|------
 $db     | Widget\Db | 当前Db微件对象
-
-### DSN配置
-
-数据库     | 参考格式                                                  | 完整配置链接
------------|-----------------------------------------------------------|--------------
-MySQL      | mysql:host=localhost;port=3306;dbname=testdb;charset=utf8 | http://www.php.net/manual/en/ref.pdo-mysql.connection.php
-SQLite     | sqlite:/opt/databases/mydb.sq3                            | http://www.php.net/manual/en/ref.pdo-sqlite.connection.php
-PostgreSQL | pgsql:host=localhost;port=5432;dbname=testdb              | http://www.php.net/manual/zh/ref.pdo-pgsql.connection.php
 
 ### 方法
 
