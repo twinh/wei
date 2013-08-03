@@ -2938,6 +2938,13 @@ widget()-&gt;arrayCache('name');
 </tr></thead>
 <tbody>
 <tr>
+<td>dirver</td>
+<td>string</td>
+<td>mysql</td>
+<td>数据库驱动类型,可以是<code>mysql</code>,<code>sqlite</code>或<code>pgsql</code>
+</td>
+</tr>
+<tr>
 <td>user</td>
 <td>string</td>
 <td>无</td>
@@ -3045,6 +3052,27 @@ widget()-&gt;arrayCache('name');
 <td>callback</td>
 <td>无</td>
 <td>在执行SQL语句之后触发的回调方法</td>
+</tr>
+</tbody>
+</table><h4>不同驱动连接到数据库的基本选项</h4>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>驱动类型</th>
+<th>选项</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>mysql</td>
+<td>user, password, host, port, dbname, unixSocket, charset</td>
+</tr>
+<tr>
+<td>sqlite</td>
+<td>user, password, host, port, dbname</td>
+</tr>
+<tr>
+<td>pgsql</td>
+<td>path</td>
 </tr>
 </tbody>
 </table><h3>回调</h3>
@@ -3155,31 +3183,6 @@ widget()-&gt;arrayCache('name');
 <td>Widget\Db</td>
 <td>当前Db微件对象</td>
 </tr></tbody>
-</table><h3>DSN配置</h3>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>数据库</th>
-<th>参考格式</th>
-<th>完整配置链接</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>MySQL</td>
-<td>mysql:host=localhost;port=3306;dbname=testdb;charset=utf8</td>
-<td><a href="http://www.php.net/manual/en/ref.pdo-mysql.connection.php">http://www.php.net/manual/en/ref.pdo-mysql.connection.php</a></td>
-</tr>
-<tr>
-<td>SQLite</td>
-<td>sqlite:/opt/databases/mydb.sq3</td>
-<td><a href="http://www.php.net/manual/en/ref.pdo-sqlite.connection.php">http://www.php.net/manual/en/ref.pdo-sqlite.connection.php</a></td>
-</tr>
-<tr>
-<td>PostgreSQL</td>
-<td>pgsql:host=localhost;port=5432;dbname=testdb</td>
-<td><a href="http://www.php.net/manual/zh/ref.pdo-pgsql.connection.php">http://www.php.net/manual/zh/ref.pdo-pgsql.connection.php</a></td>
-</tr>
-</tbody>
 </table><h3>方法</h3>
 
 <h4>db($table)</h4>
