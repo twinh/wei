@@ -955,7 +955,9 @@ class DbTest extends TestCase
         $test = &$this;
         $db = new \Widget\Db(array(
             'widget' => $this->widget,
-            'dsn' => 'mysql:host=255.255.255.255;dbname=test;port=3306',
+            'driver' => 'mysql',
+            'host'   => '255.255.255.255',
+            'dbname' => 'test',
             'connectFails' => function($db, $exception) use($test) {
                 $test->assertTrue(true);
                 $test->assertInstanceOf('PDOException', $exception);
@@ -984,5 +986,27 @@ class DbTest extends TestCase
         $this->widget->config('cb.db', array(
             'db' => null
         ));
+    }
+
+    public function testUnsupportedDriver()
+    {
+        $this->setExpectedException('\RuntimeException', 'Unsupported database driver: abc');
+
+        $db = new \Widget\Db(array(
+            'widget' => $this->widget,
+            'driver' => 'abc'
+        ));
+
+        $db->query("SELECT MAX(1, 2)");
+    }
+
+    public function testCustomDsn()
+    {
+        $db = new \Widget\Db(array(
+            'widget' => $this->widget,
+            'dsn' => 'sqlite::memory:'
+        ));
+
+        $this->assertEquals('sqlite::memory:', $db->getDsn());
     }
 }

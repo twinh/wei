@@ -60,7 +60,7 @@ $user->save();
 // 查找主键为1的用户
 $user = widget()->db->find('user', '1');
 
-// 或是通过魔术方法更自然的获取对象
+// 或是通过魔术方法更自然地获取对象
 $user = widget()->db->user(1);
 
 // 更新对象的值
@@ -85,21 +85,30 @@ $user->delete();
 $widget = widget(array(
     // 数据库微件的配置
     'db' => array(
-        'dsn' => 'mysql:host=localhost;dbname=widget;charset=utf8',
-        'user' => 'root',
-        'password' => '123456',
+        'driver'    => 'mysql',
+        'host'      => 'localhost',
+        'dbname'    => 'widget',
+        'charset'   => 'utf8',
+        'user'      => 'root',
+        'password'  => '123456',
     ),
     // 备机数据库微件的配置
     'slave.db' => array(
-        'dsn' => 'mysql:host=slave-host;dbname=widget;charset=utf8',
-        'user' => 'root',
-        'password' => '123456',
+        'driver'    => 'mysql',
+        'host'      => 'slave-host',
+        'dbname'    => 'widget',
+        'charset'   => 'utf-8',
+        'user'      => 'root',
+        'password'  => '123456',
     ),
     // 日志数据库微件的配置
     'logger.db' => array(
-        'dsn' => 'mysql:host=logger-host;dbname=widget;charset=utf8',
-        'user' => 'root',
-        'password' => '123456',
+        'driver'    => 'mysql',
+        'host'      => 'logger-host',
+        'dbname'    => 'widget',
+        'charset'   => 'utf-8',
+        'user'      => 'root',
+        'password'  => '123456',
     )
 ));
 
@@ -194,9 +203,15 @@ $widget->db->query("SELECT DATE('now')");
 
 名称            |  类型    | 默认值               | 说明
 ----------------|----------|----------------------|------
+dirver          | string   | mysql                | 数据库驱动类型,可以是`mysql`,`sqlite`或`pgsql`
 user            | string   | 无                   | 连接数据库的用户名
 password        | string   | 无                   | 连接数据库的密码
-dsn             | string   | sqlite::memory:      | 数据源名称(Data Source Name),详细配置请查看下表
+host            | string   | 127.0.0.1            | 数据库所在的主机地址,仅驱动为mysql和pgsql时有效
+port            | string   | 无                   | 数据库服务器运行的端口,仅驱动为mysql和pgsql时有效
+dbname          | string   | 无                   | 数据库名称,仅驱动为mysql和pgsql时有效
+unixSocket      | string   | 无                   | MySQL数据库的Unix socket连接文件,仅驱动为mysql时有效
+charset         | string   | 无                   | 连接数据库的字符集,仅驱动为mysql时有效
+path            | string   | 无                   | SQLite数据库所在的路径,如果存储在内存中,使用`:memory:`
 attrs           | array    | array()              | PDO的属性配置
 recordClass     | string   | Widget\Db\Record     | 记录类的基础类名称
 collectionClass | string   | Widget\Db\Collection | 记录集合类的基础类名称
@@ -207,6 +222,14 @@ connectFails    | callback | 无                   | 连接PDO失败时触发的
 afterConnect    | callback | 无                   | 连接PDO完成(成功)时触发的回调方法
 beforeQuery     | callback | 无                   | 在执行SQL语句之前触发的回调方法
 afterQuery      | callback | 无                   | 在执行SQL语句之后触发的回调方法
+
+#### 不同驱动连接到数据库的私有选项
+
+驱动类型 | 选项
+---------|------
+mysql    | user, password, host, port, dbname, unixSocket, charset
+sqlite   | user, password, host, port, dbname
+pgsql    | path
 
 ### 回调
 
@@ -254,14 +277,6 @@ $db     | Widget\Db | 当前Db微件对象
 名称    | 类型      | 说明
 --------|-----------|------
 $db     | Widget\Db | 当前Db微件对象
-
-### DSN配置
-
-数据库     | 参考格式                                                  | 完整配置链接
------------|-----------------------------------------------------------|--------------
-MySQL      | mysql:host=localhost;port=3306;dbname=testdb;charset=utf8 | http://www.php.net/manual/en/ref.pdo-mysql.connection.php
-SQLite     | sqlite:/opt/databases/mydb.sq3                            | http://www.php.net/manual/en/ref.pdo-sqlite.connection.php
-PostgreSQL | pgsql:host=localhost;port=5432;dbname=testdb              | http://www.php.net/manual/zh/ref.pdo-pgsql.connection.php
 
 ### 方法
 
@@ -475,6 +490,37 @@ $params     | array        | 绑定到SQL的参数
 根据数据表名称获取记录类名称
 
 **返回:** `string` 如果记录类不存在,返回默认类`Widget\Db\Record`
+
+#### db->getUser()
+获取连接数据库的用户名称
+
+**返回:** `string`
+
+#### db->getPassword()
+获取连接数据库的用户密码
+
+**返回:** `string`
+
+#### db->getHost()
+获取数据库所在的主机地址
+
+**返回:** `string`
+
+#### db->getPort()
+获取数据库服务器运行的端口
+
+**返回:** `string`
+
+#### db->getDbname()
+获取数据库的名称
+
+**返回:** `string`
+
+#### db->getDsn()
+获取连接到PDO的DSN字符串
+
+**返回:** `string`
+
 
 ### 魔术方法
 
