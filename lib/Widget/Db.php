@@ -248,33 +248,8 @@ class Db extends AbstractWidget
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
             );
 
-            // Build PDO DSN
-            $dsn = $this->driver . ':';
-            $this->dsn = &$dsn;
-            switch ($this->driver) {
-                case 'mysql':
-                    $this->host && $dsn .= 'host=' . $this->host . ';';
-                    $this->port && $dsn .= 'port=' . $this->port . ';';
-                    $this->dbname && $dsn .= 'dbname=' . $this->dbname . ';';
-                    $this->unixSocket && $dsn .= 'unix_socket=' . $this->unixSocket . ';';
-                    $this->charset && $dsn .= 'charset=' . $this->charset . ';';
-                    break;
-
-                case 'sqlite':
-                    $dsn .= $this->path;
-                    break;
-
-                case 'pgsql':
-                    $this->host && $dsn .= 'host=' . $this->host . ';';
-                    $this->port && $dsn .= 'port=' . $this->port . ';';
-                    $this->dbname && $dsn .= 'dbname=' . $this->dbname . ';';
-                    break;
-
-                default:
-                    throw new \RuntimeException(sprintf('Unsupported database driver: %s', $this->driver));
-            }
-
             try {
+                $dsn = $this->getDsn();
                 $this->pdo = new PDO($dsn, $this->user, $this->password, $attrs);
             } catch (\PDOException $e) {
                 $this->connectFails && call_user_func($this->connectFails, $this, $e);
@@ -767,6 +742,44 @@ class Db extends AbstractWidget
     public function getDbname()
     {
         return $this->dbname;
+    }
+
+    /**
+     * Returns the PDO DSN
+     *
+     * @return string
+     * @throws \RuntimeException When database driver is unsupported
+     */
+    public function getDsn()
+    {
+        if ($this->dsn) {
+            return $this->dsn;
+        }
+
+        $dsn = $this->driver . ':';
+        switch ($this->driver) {
+            case 'mysql':
+                $this->host && $dsn .= 'host=' . $this->host . ';';
+                $this->port && $dsn .= 'port=' . $this->port . ';';
+                $this->dbname && $dsn .= 'dbname=' . $this->dbname . ';';
+                $this->unixSocket && $dsn .= 'unix_socket=' . $this->unixSocket . ';';
+                $this->charset && $dsn .= 'charset=' . $this->charset . ';';
+                break;
+
+            case 'sqlite':
+                $dsn .= $this->path;
+                break;
+
+            case 'pgsql':
+                $this->host && $dsn .= 'host=' . $this->host . ';';
+                $this->port && $dsn .= 'port=' . $this->port . ';';
+                $this->dbname && $dsn .= 'dbname=' . $this->dbname . ';';
+                break;
+
+            default:
+                throw new \RuntimeException(sprintf('Unsupported database driver: %s', $this->driver));
+        }
+        return $this->dsn = $dsn;
     }
 
     /**

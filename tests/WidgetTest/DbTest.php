@@ -999,4 +999,14 @@ class DbTest extends TestCase
 
         $db->query("SELECT MAX(1, 2)");
     }
+
+    public function testCustomDsn()
+    {
+        $db = new \Widget\Db(array(
+            'widget' => $this->widget,
+            'dsn' => 'sqlite::memory:'
+        ));
+
+        $this->assertEquals('sqlite::memory:', $db->getDsn());
+    }
 }
