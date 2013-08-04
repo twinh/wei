@@ -516,6 +516,12 @@ $params     | array        | 绑定到SQL的参数
 
 **返回:** `string`
 
+#### db->getDsn()
+获取连接到PDO的DSN字符串
+
+**返回:** `string`
+
+
 ### 魔术方法
 
 #### db->$table($conditions)

@@ -9,7 +9,6 @@
 namespace Widget;
 
 use PDO;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Widget\Db\Collection;
 
 /**
