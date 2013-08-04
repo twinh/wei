@@ -223,7 +223,7 @@ afterConnect    | callback | 无                   | 连接PDO完成(成功)时�
 beforeQuery     | callback | 无                   | 在执行SQL语句之前触发的回调方法
 afterQuery      | callback | 无                   | 在执行SQL语句之后触发的回调方法
 
-#### 不同驱动连接到数据库的基本选项
+#### 不同驱动连接到数据库的私有选项
 
 驱动类型 | 选项
 ---------|------
