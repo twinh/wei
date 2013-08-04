@@ -33,17 +33,25 @@ $widget = widget(array(
         'ip' => '127.0.0.1' // set ip for WidgetTest\CallTest\::testIp
     ),
     'db' => array(
-        'dsn' => 'sqlite::memory:'
+        'driver'    => 'sqlite',
+        'path'      => ':memory:'
     ),
     'mysql.db' => array(
+        'driver'    => 'mysql',
         'user'      => 'root',
         'password'  => '123456',
-        'dsn'       => 'mysql:host=127.0.0.1;port=3306;dbname=widget;charset=utf8'
+        'host'      => '127.0.0.1',
+        'port'      => 3306,
+        'dbname'    => 'widget',
+        'charset'   => 'utf8'
     ),
     'pgsql.db' => array(
+        'driver'    => 'pgsql',
         'user'      => 'postgres',
         'password'  => '123456',
-        'dsn'       => 'pgsql:host=127.0.0.1;port=5432;dbname=postgres'
+        'host'      => '127.0.0.1',
+        'port'      => 5432,
+        'dbname'    => 'postgres'
     ),
     // Doctrine DBAL widget configuration
     'dbal' => array(

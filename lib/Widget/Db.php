@@ -19,6 +19,13 @@ use Widget\Db\Collection;
 class Db extends AbstractWidget
 {
     /**
+     * The name of PDO driver, could be mysql, sqlite or pgsql
+     *
+     * @var string
+     */
+    protected $driver = 'mysql';
+
+    /**
      * The database username
      *
      * @var string
@@ -33,11 +40,53 @@ class Db extends AbstractWidget
     protected $password;
 
     /**
+     * The hostname on which the database server resides, for mysql and pgsql
+     *
+     * @var string
+     */
+    protected $host = '127.0.0.1';
+
+    /**
+     * The port on which the database server is running, for mysql and pgsql
+     *
+     * @var string
+     */
+    protected $port;
+
+    /**
+     * The name of the database, for mysql and pgsql
+     *
+     * @var string
+     */
+    protected $dbname;
+
+    /**
+     * The MySQL Unix socket (shouldn't be used with host or port), for mysql only
+     *
+     * @var string
+     */
+    protected $unixSocket;
+
+    /**
+     * The character set, for mysql only
+     *
+     * @var string
+     */
+    protected $charset;
+
+    /**
+     * The path for sqlite database
+     *
+     * @var string
+     */
+    protected $path;
+
+    /**
      * The dsn parameter for PDO constructor
      *
      * @var string
      */
-    protected $dsn = 'sqlite::memory:';
+    protected $dsn;
 
     /**
      * A key=>value array of driver-specific connection attributes
@@ -95,13 +144,6 @@ class Db extends AbstractWidget
      * @var bool
      */
     protected $isConnected = false;
-
-    /**
-     * The name of PDO driver
-     *
-     * @var string
-     */
-    private $driver;
 
     /**
      * The database table definitions
@@ -206,7 +248,8 @@ class Db extends AbstractWidget
             );
 
             try {
-                $this->pdo = new PDO($this->dsn, $this->user, $this->password, $attrs);
+                $dsn = $this->getDsn();
+                $this->pdo = new PDO($dsn, $this->user, $this->password, $attrs);
             } catch (\PDOException $e) {
                 $this->connectFails && call_user_func($this->connectFails, $this, $e);
                 throw $e;
@@ -215,7 +258,6 @@ class Db extends AbstractWidget
             $this->afterConnect && call_user_func($this->afterConnect, $this, $this->pdo);
         }
 
-        $this->driver = $this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
         $this->isConnected = true;
 
         return true;
@@ -669,6 +711,74 @@ class Db extends AbstractWidget
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Returns the hostname on which the database server resides
+     *
+     * @return string
+     */
+    public function getHost()
+    {
+        return $this->host;
+    }
+
+    /**
+     * Returns the port on which the database server is running
+     *
+     * @return string
+     */
+    public function getPort()
+    {
+        return $this->port;
+    }
+
+    /**
+     * Returns the name of the database
+     *
+     * @return string
+     */
+    public function getDbname()
+    {
+        return $this->dbname;
+    }
+
+    /**
+     * Returns the PDO DSN
+     *
+     * @return string
+     * @throws \RuntimeException When database driver is unsupported
+     */
+    public function getDsn()
+    {
+        if ($this->dsn) {
+            return $this->dsn;
+        }
+
+        $dsn = $this->driver . ':';
+        switch ($this->driver) {
+            case 'mysql':
+                $this->host && $dsn .= 'host=' . $this->host . ';';
+                $this->port && $dsn .= 'port=' . $this->port . ';';
+                $this->dbname && $dsn .= 'dbname=' . $this->dbname . ';';
+                $this->unixSocket && $dsn .= 'unix_socket=' . $this->unixSocket . ';';
+                $this->charset && $dsn .= 'charset=' . $this->charset . ';';
+                break;
+
+            case 'sqlite':
+                $dsn .= $this->path;
+                break;
+
+            case 'pgsql':
+                $this->host && $dsn .= 'host=' . $this->host . ';';
+                $this->port && $dsn .= 'port=' . $this->port . ';';
+                $this->dbname && $dsn .= 'dbname=' . $this->dbname . ';';
+                break;
+
+            default:
+                throw new \RuntimeException(sprintf('Unsupported database driver: %s', $this->driver));
+        }
+        return $this->dsn = $dsn;
     }
 
     /**
