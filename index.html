@@ -781,7 +781,7 @@
 
 <span class="c1">// 设置文章访问次数增加1,返回增加后的总次数</span>
 <span class="c1">// 注意: 开发人员无需预先判断该键名的缓存是否存在,如果缓存不存在,将自动从0开始计算</span>
-<span class="nv">$hits</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">increment</span><span class="p">(</span><span class="s1">'article-1'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="nv">$hits</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">inc</span><span class="p">(</span><span class="s1">'article-1'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
 <span class="k">echo</span> <span class="s1">'该文章已被访问'</span> <span class="o">.</span> <span class="nv">$hits</span> <span class="o">.</span> <span class="s1">'次'</span><span class="p">;</span>
 </code></pre></div>
@@ -954,7 +954,7 @@
 <li>速度:判断依据是缓存数据存储的介质,如果数据存储在内存中则<code>快</code>,如果存储在磁盘则<code>慢</code>
 </li>
 <li>持久化:判断依据是缓存是否因为相关服务重启而丢失数据</li>
-<li>原子性:判断依据是<code>add</code>,<code>replace</code>,<code>increment</code>和<code>decrement</code>方法是否为原子操作</li>
+<li>原子性:判断依据是<code>add</code>,<code>replace</code>,<code>inc</code>和<code>dec</code>方法是否为原子操作</li>
 <li>
 <code>Cache</code>和<code>Bicache</code>为视配置而定,不列入比较</li>
 <li>
@@ -1127,7 +1127,7 @@
 <td>缓存的值,允许任意变量类型</td>
 </tr>
 </tbody>
-</table><h4>cache-&gt;increment($key, $offset = 1)</h4>
+</table><h4>cache-&gt;inc($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
@@ -1156,7 +1156,7 @@
 <td>增大的值</td>
 </tr>
 </tbody>
-</table><h4>cache-&gt;decrement($key, $offset = 1)</h4>
+</table><h4>cache-&gt;dec($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
@@ -1326,11 +1326,11 @@
 
 <p>替换一项缓存,如果缓存 <strong>不</strong> 存在,返回false</p>
 
-<h4>apc-&gt;increment($key, $offset = 1)</h4>
+<h4>apc-&gt;inc($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
-<h4>apc-&gt;decrement($key, $offset = 1)</h4>
+<h4>apc-&gt;dec($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
@@ -1416,11 +1416,11 @@ widget()-&gt;arrayCache('name');
 
 <p>替换一项缓存,如果缓存 <strong>不</strong> 存在,返回false</p>
 
-<h4>arrayCache-&gt;increment($key, $offset = 1)</h4>
+<h4>arrayCache-&gt;inc($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
-<h4>arrayCache-&gt;decrement($key, $offset = 1)</h4>
+<h4>arrayCache-&gt;dec($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
@@ -1565,11 +1565,11 @@ widget()-&gt;arrayCache('name');
 
 <p>替换一项缓存,如果缓存不存在,返回false</p>
 
-<h4>bicache-&gt;increment($key, $offset = 1)</h4>
+<h4>bicache-&gt;inc($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
-<h4>bicache-&gt;decrement($key, $offset = 1)</h4>
+<h4>bicache-&gt;dec($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
@@ -1715,11 +1715,11 @@ widget()-&gt;arrayCache('name');
 
 <p>替换一项缓存,如果缓存不存在,返回false</p>
 
-<h4>couchbase-&gt;increment($key, $offset = 1)</h4>
+<h4>couchbase-&gt;inc($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
-<h4>couchbase-&gt;decrement($key, $offset = 1)</h4>
+<h4>couchbase-&gt;dec($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
@@ -1841,11 +1841,11 @@ widget()-&gt;arrayCache('name');
 
 <p>替换一项缓存,如果缓存不存在,返回false</p>
 
-<h4>dbCache-&gt;increment($key, $offset = 1)</h4>
+<h4>dbCache-&gt;inc($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
-<h4>dbCache-&gt;decrement($key, $offset = 1)</h4>
+<h4>dbCache-&gt;dec($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
@@ -1949,11 +1949,11 @@ widget()-&gt;arrayCache('name');
 
 <p>替换一项缓存,如果缓存 <strong>不</strong> 存在,返回false</p>
 
-<h4>fileCache-&gt;increment($key, $offset = 1)</h4>
+<h4>fileCache-&gt;inc($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
-<h4>fileCache-&gt;decrement($key, $offset = 1)</h4>
+<h4>fileCache-&gt;dec($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
@@ -2117,11 +2117,11 @@ widget()-&gt;arrayCache('name');
 
 <p>替换一项缓存,如果缓存不存在,返回false</p>
 
-<h4>memcache-&gt;increment($key, $offset = 1)</h4>
+<h4>memcache-&gt;inc($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
-<h4>memcache-&gt;decrement($key, $offset = 1)</h4>
+<h4>memcache-&gt;dec($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
@@ -2273,11 +2273,11 @@ widget()-&gt;arrayCache('name');
 
 <p>替换一项缓存,如果缓存不存在,返回false</p>
 
-<h4>memcached-&gt;increment($key, $offset = 1)</h4>
+<h4>memcached-&gt;inc($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
-<h4>memcached-&gt;decrement($key, $offset = 1)</h4>
+<h4>memcached-&gt;dec($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
@@ -2417,11 +2417,11 @@ widget()-&gt;arrayCache('name');
 
 <p>替换一项缓存,如果缓存不存在,返回false</p>
 
-<h4>mongoCache-&gt;increment($key, $offset = 1)</h4>
+<h4>mongoCache-&gt;inc($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
-<h4>mongoCache-&gt;decrement($key, $offset = 1)</h4>
+<h4>mongoCache-&gt;dec($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
@@ -2569,11 +2569,11 @@ widget()-&gt;arrayCache('name');
 
 <p>替换一项缓存,如果缓存不存在,返回false</p>
 
-<h4>redis-&gt;increment($key, $offset = 1)</h4>
+<h4>redis-&gt;inc($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
-<h4>redis-&gt;decrement($key, $offset = 1)</h4>
+<h4>redis-&gt;dec($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
