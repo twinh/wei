@@ -26,6 +26,7 @@ API参考目录
 * [widget](api/widget.md) - 微件管理器,用于获取微件对象,设置配置等
 
 #### 缓存
+* [cache](api/cache.md) - 通用缓存
 * [apc](api/apc.md) - APC缓存
 * [arrayCache](api/arrayCache.md) - PHP数组缓存
 * [couchbase](api/couchbase.md) - Couchbase缓存
@@ -35,7 +36,6 @@ API参考目录
 * [memcached](api/memcached.md) - Memcached缓存
 * [mongoCache](api/mongoCache) - MongoCache缓存
 * [redis](api/redis.md) - Redis缓存
-* [cache](api/cache.md) - 通用缓存
 * [bicache](api/bicache.md) - 二级缓存
 
 #### 数据库
