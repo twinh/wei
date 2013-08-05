@@ -23,12 +23,22 @@ class DbCache extends AbstractCache
      */
     protected $table = 'cache';
 
+    /**
+     * The SQL to check if table exists
+     *
+     * @var array
+     */
     protected $checkTableSqls = array(
         'mysql'     => "SHOW TABLES LIKE '%s'",
         'sqlite'    => "SELECT name FROM sqlite_master WHERE type='table' AND name='%s'",
         'pgsql'     => "SELECT true FROM pg_tables WHERE tablename = '%s'"
     );
 
+    /**
+     * The SQL to create cache table
+     *
+     * @var array
+     */
     protected $createTableSqls = array(
         'mysql'  => "CREATE TABLE %s (id VARCHAR(255) NOT NULL, value LONGTEXT NOT NULL, expire DATETIME NOT NULL, lastModified DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB",
         'sqlite' => "CREATE TABLE %s (id VARCHAR(255) NOT NULL, value CLOB NOT NULL, expire DATETIME NOT NULL, lastModified DATETIME NOT NULL, PRIMARY KEY(id))",
@@ -52,16 +62,14 @@ class DbCache extends AbstractCache
      */
     public function prepareTable()
     {
-        if (!$this->tableExists()) {
-            $sql = sprintf($this->createTableSqls[$this->db->getDriver()], $this->table);
-            $this->db->executeUpdate($sql);
-        }
-    }
+        $db = $this->db;
+        $driver = $db->getDriver();
 
-    protected function tableExists()
-    {
-        $sql = sprintf($this->checkTableSqls[$this->db->getDriver()], $this->table);
-        return (bool)$this->db->fetchColumn($sql);
+        $tableExistsSql = sprintf($this->checkTableSqls[$driver], $this->table);
+        if (!$this->db->fetchColumn($tableExistsSql)) {
+            $createTableSql = sprintf($this->createTableSqls[$driver], $this->table);
+            $db->executeUpdate($createTableSql);
+        }
     }
 
     /**
