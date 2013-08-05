@@ -1,7 +1,7 @@
 Cache
 =====
 
-设置或获取指定缓存类型的一项缓存
+缓存数据管理
 
 使用`cache`微件会让你的代码更加灵活自由
 
@@ -131,28 +131,31 @@ driver    | string | apc       | 缓存的类型
 
 #### 支持的缓存类型
 
-* [apc](apc.md) - APC缓存 *推荐*
+* [apc](apc.md) - APC缓存 *(推荐)*
 * [arrayCache](arrayCache.md) - PHP数组缓存
 * [couchbase](couchbase.md) - Couchbase缓存
 * [dbCache](dbCache.md) - 数据库缓存
 * [fileCache](fileCache.md) - 文件缓存
 * [memcache](memcache.md) - Memcachce缓存
-* [memcached](memcached.md) - Memcached缓存
-* [redis](redis.md) - Redis缓存 *推荐*
+* [memcached](memcached.md) - Memcached缓存 *(推荐)*
+* [mongoCache](mongoCache.md) - MongoDB缓存
+* [redis](redis.md) - Redis缓存 *(推荐)*
 * [bicache](bicache.md) - 二级缓存
 
 #### 特性对比
 
-特性   | ArrayCache | Apc | DbCache | FileCache | Memecache | Memcached | MongoCache | Couchbase | Redis
--------|------------|-----|---------|-----------|-----------|-----------|------------|-----------|-------
-速度   | 快         | 快  | 慢      | 慢        | 快        | 快        | 快         | 快        | 快
-持久化 | -          | ×  | √      | √        | ×        | ×        | √         | √        | √
-分布式 | ×         | ×  | √      | ×        | √        | √        | √         | √        | √
-原子性 | √         | √  | ×      | √        | √        | √        | √         | √        | √
+特性   | Apc | ArrayCache | DbCache | FileCache | Memecache | Memcached | MongoCache | Couchbase | Redis
+-------|-----|------------|---------|-----------|-----------|-----------|------------|-----------|-------
+速度   | 快  | 快         | 慢      | 慢        | 快        | 快        | 快         | 快        | 快
+持久化 | ×  | -          |  √     | √        | ×        | ×        | √         | √        | √
+分布式 | ×  | ×         |  √     | ×        | √        | √        | √         | √        | √
+原子性 | √  | √         |  ×     | √        | √        | √        | √         | √        | √
 
 * `√` 表示支持
 * `×` 表示不支持
 * `-`  表示不具备该特性
+
+说明:
 
 * 速度:判断依据是缓存数据存储的介质,如果数据存储在内存中则`快`,如果存储在磁盘则`慢`
 * 持久化:判断依据是缓存是否因为相关服务重启而丢失数据
