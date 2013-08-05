@@ -24,6 +24,13 @@ class DbCache extends AbstractCache
     protected $table = 'cache';
 
     /**
+     * Whether check if table is exists or not
+     *
+     * @var bool
+     */
+    protected $checkTable = true;
+
+    /**
      * The SQL to check if table exists
      *
      * @var array
@@ -66,7 +73,7 @@ class DbCache extends AbstractCache
         $driver = $db->getDriver();
 
         $tableExistsSql = sprintf($this->checkTableSqls[$driver], $this->table);
-        if (!$this->db->fetchColumn($tableExistsSql)) {
+        if ($this->checkTable && !$this->db->fetchColumn($tableExistsSql)) {
             $createTableSql = sprintf($this->createTableSqls[$driver], $this->table);
             $db->executeUpdate($createTableSql);
         }
