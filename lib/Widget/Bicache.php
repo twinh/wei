@@ -120,9 +120,9 @@ class Bicache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function increment($key, $offset = 1)
+    public function inc($key, $offset = 1)
     {
-        $result = $this->master->increment($key, $offset);
+        $result = $this->master->inc($key, $offset);
 
         if (false !== $result && $this->needUpdate($key)) {
             return $this->slave->set($key, $result) ? $result : false;

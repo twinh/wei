@@ -71,10 +71,10 @@ widget()->couchbase('key', 'value', 60);
 #### couchbase->replace($key, $value)
 替换一项缓存,如果缓存不存在,返回false
 
-#### couchbase->increment($key, $offset = 1)
+#### couchbase->inc($key, $offset = 1)
 增大一项缓存的值
 
-#### couchbase->decrement($key, $offset = 1)
+#### couchbase->dec($key, $offset = 1)
 减小一项缓存的值
 
 #### couchbase->getMulti($keys)

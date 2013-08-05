@@ -128,9 +128,9 @@ class Cache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function increment($key, $offset = 1)
+    public function inc($key, $offset = 1)
     {
-        return $this->object->increment($key, $offset);
+        return $this->object->inc($key, $offset);
     }
 
     /**

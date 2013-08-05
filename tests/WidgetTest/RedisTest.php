@@ -19,7 +19,7 @@ class RedisTest extends CacheTestCase
         }
     }
 
-    public function testIncrementAndDecrement()
+    public function testIncAndDec()
     {
         $redis = $this->object->getObject();
 
@@ -27,7 +27,7 @@ class RedisTest extends CacheTestCase
         // Avoid segmentation fault
         $redis->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_NONE);
 
-        parent::testIncrementAndDecrement();
+        parent::testIncAndDec();
     }
 
     public function testGetAndSetObject()

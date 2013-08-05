@@ -153,7 +153,7 @@ abstract class AbstractCache extends AbstractWidget
      * @param  int       $offset The value to increased
      * @return int|false Returns the new value on success, or false on failure
      */
-    abstract public function increment($key, $offset = 1);
+    abstract public function inc($key, $offset = 1);
 
     /**
      * Decrement an item
@@ -162,9 +162,9 @@ abstract class AbstractCache extends AbstractWidget
      * @param  int       $offset The value to be decreased
      * @return int|false Returns the new value on success, or false on failure
      */
-    public function decrement($key, $offset = 1)
+    public function dec($key, $offset = 1)
     {
-        return $this->increment($key, -$offset);
+        return $this->inc($key, -$offset);
     }
 
     /**

@@ -60,10 +60,10 @@ widget()->fileCache('key');
 #### fileCache->replace($key, $value)
 替换一项缓存,如果缓存 **不** 存在,返回false
 
-#### fileCache->increment($key, $offset = 1)
+#### fileCache->inc($key, $offset = 1)
 增大一项缓存的值
 
-#### fileCache->decrement($key, $offset = 1)
+#### fileCache->dec($key, $offset = 1)
 减小一项缓存的值
 
 #### fileCache->getMulti($keys)

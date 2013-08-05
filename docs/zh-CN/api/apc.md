@@ -65,10 +65,10 @@ widget()->apc('key', 'value', 60);
 #### apc->replace($key, $value)
 替换一项缓存,如果缓存 **不** 存在,返回false
 
-#### apc->increment($key, $offset = 1)
+#### apc->inc($key, $offset = 1)
 增大一项缓存的值
 
-#### apc->decrement($key, $offset = 1)
+#### apc->dec($key, $offset = 1)
 减小一项缓存的值
 
 #### apc->getMulti($keys)

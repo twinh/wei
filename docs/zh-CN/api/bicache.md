@@ -75,10 +75,10 @@ widget()->bicache('key', 'value', 60);
 #### bicache->replace($key, $value)
 替换一项缓存,如果缓存不存在,返回false
 
-#### bicache->increment($key, $offset = 1)
+#### bicache->inc($key, $offset = 1)
 增大一项缓存的值
 
-#### bicache->decrement($key, $offset = 1)
+#### bicache->dec($key, $offset = 1)
 减小一项缓存的值
 
 #### bicache->getMulti($keys)

@@ -70,10 +70,10 @@ widget()->mongoCache('key', 'value', 60);
 #### mongoCache->replace($key, $value)
 替换一项缓存,如果缓存不存在,返回false
 
-#### mongoCache->increment($key, $offset = 1)
+#### mongoCache->inc($key, $offset = 1)
 增大一项缓存的值
 
-#### mongoCache->decrement($key, $offset = 1)
+#### mongoCache->dec($key, $offset = 1)
 减小一项缓存的值
 
 #### mongoCache->getMulti($keys)

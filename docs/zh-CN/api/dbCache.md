@@ -69,10 +69,10 @@ widget()->dbCache('key', 'value', 60);
 #### dbCache->replace($key, $value)
 替换一项缓存,如果缓存不存在,返回false
 
-#### dbCache->increment($key, $offset = 1)
+#### dbCache->inc($key, $offset = 1)
 增大一项缓存的值
 
-#### dbCache->decrement($key, $offset = 1)
+#### dbCache->dec($key, $offset = 1)
 减小一项缓存的值
 
 #### dbCache->getMulti($keys)

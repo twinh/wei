@@ -14,10 +14,10 @@ class FileCacheTest extends CacheTestCase
         $this->object->clear();
 
         rmdir($this->object->getDir());
-        
+
         parent::tearDown();
     }
-    
+
     public function testGetDir()
     {
         $file = $this->object;
@@ -27,7 +27,7 @@ class FileCacheTest extends CacheTestCase
         $file->setDir($newDir);
 
         $this->assertFileExists($newDir);
-        
+
         /*ob_start();
 
         $widget->error->option(array(
@@ -87,7 +87,7 @@ class FileCacheTest extends CacheTestCase
         fclose($handle);*/
     }
 
-    public function testGet() 
+    public function testGet()
     {
         $widget = $this->object;
 
@@ -104,7 +104,7 @@ class FileCacheTest extends CacheTestCase
         $this->assertFalse($widget->get('test'), 'cache is expired');
     }
 
-    public function testSet() 
+    public function testSet()
     {
         $widget = $this->object;
 
@@ -147,36 +147,36 @@ class FileCacheTest extends CacheTestCase
         $this->assertFalse($widget->remove('test'), 'cache not found');
     }
 
-    public function testIncrement()
+    public function testInc()
     {
         $widget = $this->object;
 
         $widget->set(__METHOD__, 1);
 
-        $widget->increment(__METHOD__);
+        $widget->inc(__METHOD__);
 
         $this->assertEquals($widget->get(__METHOD__), 2);
 
         $widget->remove(__METHOD__);
-        $result = $widget->increment(__METHOD__);
+        $result = $widget->inc(__METHOD__);
         $this->assertEquals(1, $result);
 
         $widget->set(__METHOD__, 'string');
-        $widget->increment(__METHOD__);
+        $widget->inc(__METHOD__);
         $this->assertEquals(1, $widget->get(__METHOD__));
 
         $widget->set(__METHOD__, 1, -1);
-        $widget->increment(__METHOD__);
+        $widget->inc(__METHOD__);
         $this->assertEquals(1, $widget->get(__METHOD__));
     }
 
-    public function testDecrement()
+    public function testDec()
     {
         $widget = $this->object;
 
         $widget->set(__METHOD__, 1);
 
-        $widget->decrement(__METHOD__);
+        $widget->dec(__METHOD__);
 
         $this->assertEquals($widget->get(__METHOD__), 0);
     }

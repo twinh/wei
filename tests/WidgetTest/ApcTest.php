@@ -30,7 +30,7 @@ class ApcTest extends CacheTestCase
 
         $this->assertFalse($apc->get('test'), 'cache is expired');
     }
-    
+
     public function testObjectAsInvoker()
     {
         $apc = $this->object;
@@ -40,7 +40,7 @@ class ApcTest extends CacheTestCase
         $this->assertEquals(true, $apc->apc(__METHOD__));
     }
 
-    public function testSet() 
+    public function testSet()
     {
         $apc = $this->object;
 
@@ -64,7 +64,7 @@ class ApcTest extends CacheTestCase
         $this->assertFalse($apc->add(__METHOD__ . 'key', true));
     }
 
-    public function testReplace() 
+    public function testReplace()
     {
         $apc = $this->object;
 
@@ -77,39 +77,39 @@ class ApcTest extends CacheTestCase
         $this->assertTrue($apc->replace(__METHOD__ . 'key', true));
     }
 
-    public function testIncrement() 
+    public function testInc()
     {
         $apc = $this->object;
 
         $apc->set(__METHOD__, 1);
 
-        $apc->increment(__METHOD__);
+        $apc->inc(__METHOD__);
 
         $this->assertEquals($apc->get(__METHOD__), 2);
 
         $apc->remove(__METHOD__);
 
-        $result = $apc->increment(__METHOD__);
+        $result = $apc->inc(__METHOD__);
 
         $this->assertEquals(1, $result);
 
         $apc->set(__METHOD__, 'string');
 
-        $this->assertEquals(1, $apc->increment(__METHOD__));
+        $this->assertEquals(1, $apc->inc(__METHOD__));
     }
 
-    public function testDecrement() 
+    public function testDec()
     {
         $apc = $this->object;
 
         $apc->set(__METHOD__, 1);
 
-        $apc->decrement(__METHOD__);
+        $apc->dec(__METHOD__);
 
         $this->assertEquals($apc->get(__METHOD__), 0);
     }
 
-    public function testClear() 
+    public function testClear()
     {
         $apc = $this->object;
 

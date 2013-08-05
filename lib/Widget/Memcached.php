@@ -122,7 +122,7 @@ class Memcached extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function increment($key, $offset = 1)
+    public function inc($key, $offset = 1)
     {
         return $this->incDec($key, $offset, $offset > 0);
     }
@@ -130,7 +130,7 @@ class Memcached extends AbstractCache
     /**
       * {@inheritdoc}
       */
-    public function decrement($key, $offset = 1)
+    public function dec($key, $offset = 1)
     {
         return $this->incDec($key, $offset, $offset < 0);
     }

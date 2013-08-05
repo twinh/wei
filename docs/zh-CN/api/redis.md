@@ -73,10 +73,10 @@ $expire   | int       | 0         | 缓存的有效期,默认为0秒,表示永�
 #### redis->replace($key, $value)
 替换一项缓存,如果缓存不存在,返回false
 
-#### redis->increment($key, $offset = 1)
+#### redis->inc($key, $offset = 1)
 增大一项缓存的值
 
-#### redis->decrement($key, $offset = 1)
+#### redis->dec($key, $offset = 1)
 减小一项缓存的值
 
 #### redis->getMulti($keys)

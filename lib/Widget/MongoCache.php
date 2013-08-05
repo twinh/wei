@@ -118,7 +118,7 @@ class MongoCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function increment($key, $offset = 1)
+    public function inc($key, $offset = 1)
     {
         $result = $this->object->findAndModify(
             array('_id' => $key),

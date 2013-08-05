@@ -179,7 +179,7 @@ class Redis extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function increment($key, $offset = 1)
+    public function inc($key, $offset = 1)
     {
         return $this->object->incrBy($key, $offset);
     }

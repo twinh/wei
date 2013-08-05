@@ -86,7 +86,7 @@ class ArrayCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function increment($key, $offset = 1)
+    public function inc($key, $offset = 1)
     {
         if ($this->exists($key)) {
             return $this->data[$key] += $offset;

@@ -46,7 +46,7 @@ class CacheTestCase extends TestCase
         );
     }
 
-    public function testIncrementAndDecrement()
+    public function testIncAndDec()
     {
         $cache = $this->object;
 
@@ -54,17 +54,17 @@ class CacheTestCase extends TestCase
         $cache->remove($key);
 
         // Increase from not exists key
-        $this->assertSame(2, $cache->increment($key, 2));
+        $this->assertSame(2, $cache->inc($key, 2));
 
         // Increase from exists key and the offset is 3
-        $this->assertSame(5, $cache->increment($key, 3));
+        $this->assertSame(5, $cache->inc($key, 3));
 
-        $this->assertSame(3, $cache->decrement($key, 2));
+        $this->assertSame(3, $cache->dec($key, 2));
 
         // Negative number
-        $this->assertSame(1, $cache->increment($key, -2));
+        $this->assertSame(1, $cache->inc($key, -2));
 
-        $this->assertSame(3, $cache->decrement($key, -2));
+        $this->assertSame(3, $cache->dec($key, -2));
     }
 
     public function testClear()

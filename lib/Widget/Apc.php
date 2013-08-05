@@ -72,7 +72,7 @@ class Apc extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function increment($key, $offset = 1)
+    public function inc($key, $offset = 1)
     {
         if (false === apc_inc($key, $offset)) {
             return apc_store($key, $offset) ? $offset : false;

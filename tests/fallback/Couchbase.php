@@ -7,8 +7,8 @@ class Couchbase
     public function add(){}
     public function replace(){}
     public function delete(){}
-    public function increment(){}
-    public function decrement(){}
+    public function inc(){}
+    public function dec(){}
     public function getMulti(){}
     public function setMulti(){}
     public function flush(){}

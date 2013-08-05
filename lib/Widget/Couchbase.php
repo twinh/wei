@@ -131,9 +131,9 @@ class Couchbase extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function increment($key, $offset = 1)
+    public function inc($key, $offset = 1)
     {
-        return $this->object->increment($key, $offset, true, 0, $offset);
+        return $this->object->inc($key, $offset, true, 0, $offset);
     }
 
     /**

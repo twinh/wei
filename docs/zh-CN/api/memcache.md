@@ -76,10 +76,10 @@ widget()->memcache('key', 'value', 60);
 #### memcache->replace($key, $value)
 替换一项缓存,如果缓存不存在,返回false
 
-#### memcache->increment($key, $offset = 1)
+#### memcache->inc($key, $offset = 1)
 增大一项缓存的值
 
-#### memcache->decrement($key, $offset = 1)
+#### memcache->dec($key, $offset = 1)
 减小一项缓存的值
 
 #### memcache->getMulti($keys)

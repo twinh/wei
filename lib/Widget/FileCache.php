@@ -183,7 +183,7 @@ class FileCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function increment($key, $offset = 1)
+    public function inc($key, $offset = 1)
     {
         $file = $this->getFile($key);
 
