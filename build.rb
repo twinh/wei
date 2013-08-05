@@ -30,7 +30,7 @@ end
 widgets = [
   # widget manager
     'widget',
-  'book/cache',
+  # cache
     'cache', 'apc', 'arrayCache', 'bicache', 'couchbase', 'dbCache', 'fileCache', 'memcache', 'memcached', 'mongoCache', 'redis',
   # database
     'db', 'queryBuilder',

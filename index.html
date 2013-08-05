@@ -718,15 +718,55 @@
 <p>启用或禁用PSR-0类自动加载</p>
   </section>
 
-<!-- book/cache
+<!-- api/cache
   ================================================== -->
-  <section id="book-cache">
-  <div class="page-header"><h1>缓存</h1></div>
+  <section id="cache">
+  <div class="page-header"><h1>Cache</h1></div>
+
+<p>设置或获取指定缓存类型的一项缓存</p>
+
+<p>使用<code>cache</code>微件会让你的代码更加灵活自由</p>
+
+<p>你可以不用关注缓存的类型,并且可以根据需求或代码运行环境快速切换缓存类型,同时不用过多改动已有的代码.</p>
 
 <p>Widget提供了多个PHP流行的后端缓存.这里有apc,redis,memcached等主流缓存,也有简单的文件缓存fileCache,
 可用于简单数据分析的数据库缓存dbCache等等.所有缓存拥有一致的接口,可以随意替换.</p>
 
 <h2>案例</h2>
+
+<h3>设置和获取缓存</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存,返回true</span>
+<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">);</span>
+
+<span class="c1">// 获取缓存,返回'value'</span>
+<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>设置60秒后就过期的缓存</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>配置缓存驱动为<code>Redis</code>
+</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 配置缓存驱动为`redis`,同时配置redis的服务器地址</span>
+<span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'cache'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'driver'</span> <span class="o">=&gt;</span> <span class="s1">'redis'</span>
+    <span class="p">),</span>
+    <span class="s1">'redis'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'host'</span> <span class="o">=&gt;</span> <span class="s1">'127.0.0.1'</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+
+<span class="c1">// 获取缓存对象</span>
+<span class="nv">$cache</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="p">;</span>
+
+<span class="c1">// 输出缓存驱动, 输出为`redis`</span>
+<span class="k">echo</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">getDriver</span><span class="p">();</span>
+</code></pre></div>
 
 <h3>缓存数据库查询,如缓存用户总数,每30秒更新一次</h3>
 
@@ -793,32 +833,49 @@
 <span class="p">);</span>
 </code></pre></div>
 
-<h2>支持的缓存类型及比较</h2>
+<h2>调用方式</h2>
 
-<h3>支持的缓存类型</h3>
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>driver</td>
+<td>string</td>
+<td>apc</td>
+<td>缓存的类型</td>
+</tr></tbody>
+</table><h3>支持的缓存类型及比较</h3>
+
+<h4>支持的缓存类型</h4>
 
 <ul>
 <li>
-<a href="../api/apc.md">apc</a> - APC缓存</li>
+<a href="apc.md">apc</a> - APC缓存 <em>推荐</em>
+</li>
 <li>
-<a href="../api/arrayCache.md">arrayCache</a> - PHP数组缓存</li>
+<a href="arrayCache.md">arrayCache</a> - PHP数组缓存</li>
 <li>
-<a href="../api/couchbase.md">couchbase</a> - Couchbase缓存</li>
+<a href="couchbase.md">couchbase</a> - Couchbase缓存</li>
 <li>
-<a href="../api/dbCache.md">dbCache</a> - 数据库缓存</li>
+<a href="dbCache.md">dbCache</a> - 数据库缓存</li>
 <li>
-<a href="../api/fileCache.md">fileCache</a> - 文件缓存</li>
+<a href="fileCache.md">fileCache</a> - 文件缓存</li>
 <li>
-<a href="../api/memcache.md">memcache</a> - Memcachce缓存</li>
+<a href="memcache.md">memcache</a> - Memcachce缓存</li>
 <li>
-<a href="../api/memcached.md">memcached</a> - Memcached缓存</li>
+<a href="memcached.md">memcached</a> - Memcached缓存</li>
 <li>
-<a href="../api/redis.md">redis</a> - Redis缓存</li>
+<a href="redis.md">redis</a> - Redis缓存 <em>推荐</em>
+</li>
 <li>
-<a href="../api/cache.md">cache</a> - 通用缓存</li>
-<li>
-<a href="../api/bicache.md">bicache</a> - 二级缓存</li>
-</ul><h3>特性对比</h3>
+<a href="bicache.md">bicache</a> - 二级缓存</li>
+</ul><h4>特性对比</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -894,9 +951,9 @@
 <li><p>原子性:判断依据是<code>add</code>,<code>replace</code>,<code>increment</code>和<code>decrement</code>方法是否为原子操作</p></li>
 <li><p><code>Cache</code>和<code>Bicache</code>为视配置而定,不列入比较</p></li>
 <li><p><code>ArrayCache</code>使用PHP数组存储数据,每次请求结束后销毁,因此不具备持久化特性</p></li>
-</ul><h2>通用方法</h2>
+</ul><h3>通用方法</h3>
 
-<p>在下面的方法中,<code>cache</code>表示缓存微件的名称,可以替换为其他任意缓存,如<code>redis</code>, <code>memcached</code></p>
+<p>在下面的方法中,<code>cache</code>表示缓存微件的名称,可以替换为其他任意缓存,如<code>redis</code>, <code>memcached</code>等</p>
 
 <h4>cache($key, $value, $expire = 0)</h4>
 
@@ -1163,173 +1220,6 @@
 <td>要缓存的数据</td>
 </tr></tbody>
 </table>
-  </section>
-
-<!-- api/cache
-  ================================================== -->
-  <section id="cache">
-  <div class="page-header"><h1>Cache</h1></div>
-
-<p>设置或获取指定缓存类型的一项缓存</p>
-
-<p>使用<code>cache</code>微件会让你的代码更加灵活自由,你可以不用关注缓存的类型,并且可以根据需求或代码运行环境快速切换缓存类型,同时不用过多改动已有的代码</p>
-
-<h2>案例</h2>
-
-<h3>设置和获取缓存</h3>
-
-<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">);</span>
-<span class="c1">// 返回 true</span>
-
-<span class="c1">// 获取缓存</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
-<span class="c1">// 返回 value</span>
-</code></pre></div>
-
-<h3>设置60秒后就过期的缓存</h3>
-
-<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
-</code></pre></div>
-
-<h3>配置缓存驱动为<code>Redis</code>
-</h3>
-
-<div class="highlight"><pre><code class="php"><span class="c1">// 配置缓存驱动为`redis`,同时配置redis的服务器地址</span>
-<span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'cache'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'driver'</span> <span class="o">=&gt;</span> <span class="s1">'redis'</span>
-    <span class="p">),</span>
-    <span class="s1">'redis'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'host'</span> <span class="o">=&gt;</span> <span class="s1">'127.0.0.1'</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="p">));</span>
-
-<span class="c1">// 获取缓存对象</span>
-<span class="nv">$cache</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="p">;</span>
-
-<span class="c1">// 输出缓存驱动, 输出为`redis`</span>
-<span class="k">echo</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">getDriver</span><span class="p">();</span>
-</code></pre></div>
-
-<p>更多案例请查看"<a href="../book/cache.md">缓存</a>"章节</p>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody><tr>
-<td>driver</td>
-<td>string</td>
-<td>apc</td>
-<td>缓存的类型</td>
-</tr></tbody>
-</table><p>目前支持的缓存类型有</p>
-
-<ul>
-<li>
-<code>apc</code> APC缓存 <em>推荐</em>
-</li>
-<li>
-<code>arrayCache</code> 数值缓存</li>
-<li>
-<code>couchbase</code> Couchbase缓存</li>
-<li>
-<code>dbCache</code> 数据库缓存</li>
-<li>
-<code>fileCache</code> 文件缓存</li>
-<li>
-<code>memcache</code> Memcache缓存</li>
-<li>
-<code>memcached</code> Memcached缓存</li>
-<li>
-<code>redis</code> Redis缓存 <em>推荐</em>
-</li>
-</ul><h3>方法</h3>
-
-<h4>cache($key, $value, $expire = 0)</h4>
-
-<p>设置缓存的值</p>
-
-<h5>参数</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>$key</td>
-<td>string</td>
-<td>无</td>
-<td>缓存的键名</td>
-</tr>
-<tr>
-<td>$value</td>
-<td>mixed</td>
-<td>无</td>
-<td>缓存的值,允许任意类型</td>
-</tr>
-<tr>
-<td>$expire</td>
-<td>int</td>
-<td>0</td>
-<td>缓存的有效期,默认为0秒,表示永不过期</td>
-</tr>
-</tbody>
-</table><h4>cache($key)</h4>
-
-<p>获取指定名称的缓存</p>
-
-<h4>cache-&gt;set($key, $value, $expire = 0)</h4>
-
-<p>设置缓存的值,同<code>cache($key, $value, $expire = 0)</code></p>
-
-<h4>cache-&gt;get($key)</h4>
-
-<p>获取缓存的值,同<code>cache($key)</code></p>
-
-<h4>cache-&gt;remove($key)</h4>
-
-<p>移除一项缓存</p>
-
-<h4>cache-&gt;exists($key)</h4>
-
-<p>检查缓存是否存在</p>
-
-<h4>cache-&gt;add($key, $value)</h4>
-
-<p>增加一项缓存,如果缓存已存在,返回false</p>
-
-<h4>cache-&gt;replace($key, $value)</h4>
-
-<p>替换一项缓存,如果缓存不存在,返回false</p>
-
-<h4>cache-&gt;increment($key, $offset = 1)</h4>
-
-<p>增大一项缓存的值</p>
-
-<h4>cache-&gt;decrement($key, $offset = 1)</h4>
-
-<p>减小一项缓存的值</p>
-
-<h4>cache-&gt;getMulti($keys)</h4>
-
-<p>批量获取缓存的值</p>
-
-<h4>cache-&gt;setMulti($values)</h4>
-
-<p>批量设置缓存的值</p>
   </section>
 
 <!-- api/apc
