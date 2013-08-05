@@ -744,6 +744,16 @@ class Db extends AbstractWidget
     }
 
     /**
+     * Returns the name of PDO driver
+     *
+     * @return string
+     */
+    public function getDriver()
+    {
+        return $this->driver;
+    }
+
+    /**
      * Returns the PDO DSN
      *
      * @return string
