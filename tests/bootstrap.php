@@ -77,12 +77,12 @@ $widget = widget(array(
     ),
     'mysql.dbCache' => array(
         'deps' => array(
-            'dbal' => 'mysql.dbal'
+            'db' => 'mysql.db'
         )
     ),
     'pgsql.dbCache' => array(
         'deps' => array(
-            'dbal' => 'pgsql.dbal'
+            'db' => 'mysql.db'
         )
     ),
     // Doctrine ORM widget configuration

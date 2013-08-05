@@ -13,7 +13,6 @@ use Widget\Stdlib\AbstractCache;
  * A database cache widget
  *
  * @author  Twin Huang <twinhuang@qq.com>
- * @todo    add serialize field
  */
 class DbCache extends AbstractCache
 {
@@ -24,10 +23,17 @@ class DbCache extends AbstractCache
      */
     protected $table = 'cache';
 
-    /**
-     * @var \Doctrine\DBAL\Connection
-     */
-    protected $conn;
+    protected $checkTableSqls = array(
+        'mysql'     => "SHOW TABLES LIKE '%s'",
+        'sqlite'    => "SELECT name FROM sqlite_master WHERE type='table' AND name='%s'",
+        'pgsql'     => "SELECT true FROM pg_tables WHERE tablename = '%s'"
+    );
+
+    protected $createTableSqls = array(
+        'mysql'  => "CREATE TABLE %s (id VARCHAR(255) NOT NULL, value LONGTEXT NOT NULL, expire DATETIME NOT NULL, lastModified DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB",
+        'sqlite' => "CREATE TABLE %s (id VARCHAR(255) NOT NULL, value CLOB NOT NULL, expire DATETIME NOT NULL, lastModified DATETIME NOT NULL, PRIMARY KEY(id))",
+        'pgsql'  => "CREATE TABLE %s (id VARCHAR(255) NOT NULL, value TEXT NOT NULL, expire TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, lastModified TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))",
+    );
 
     /**
      * Constructor
@@ -38,32 +44,24 @@ class DbCache extends AbstractCache
     {
         parent::__construct($options);
 
-        $this->conn = $this->dbal();
-
-        $this->connect();
+        $this->prepareTable();
     }
 
     /**
-     * Connect the database
+     * Check if table exists, if not exists, create table
      */
-    public function connect()
+    public function prepareTable()
     {
-        $db = $this->dbal();
-
-        $sm = $db->getSchemaManager();
-
-        if (!$sm->tablesExist($this->table)) {
-            $schema = $sm->createSchema();
-            $table = $schema->createTable($this->table);
-            $table->addColumn('id', 'string');
-            $table->addColumn('value', 'string');
-            $table->addColumn('expire', 'integer');
-            $table->addColumn('lastModified', 'integer');
-            $table->setPrimaryKey(array('id'));
-            $sm->createTable($table);
+        if (!$this->tableExists()) {
+            $sql = sprintf($this->createTableSqls[$this->db->getDriver()], $this->table);
+            $this->db->executeUpdate($sql);
         }
+    }
 
-        return $this;
+    protected function tableExists()
+    {
+        $sql = sprintf($this->checkTableSqls[$this->db->getDriver()], $this->table);
+        return (bool)$this->db->fetchColumn($sql);
     }
 
     /**
@@ -71,8 +69,7 @@ class DbCache extends AbstractCache
      */
     protected function doGet($key)
     {
-        $result = $this->conn->fetchAssoc("SELECT * FROM {$this->table} WHERE id = ?", array($key));
-
+        $result = $this->db->select($this->table, $key);
         return $result ? unserialize($result['value']) : false;
     }
 
@@ -93,9 +90,9 @@ class DbCache extends AbstractCache
         if ($this->exists($key)) {
             // In mysql, the rowCount method return 0 when data is not modified,
             // so check errorCode to make sure it executed success
-            $result = $this->conn->update($this->table, $data, $identifier) || !$this->conn->errorCode();
+            $result = $this->db->update($this->table, $data, $identifier) || !$this->db->errorCode();
         } else {
-            $result = $this->conn->insert($this->table, $data + $identifier);
+            $result = $this->db->insert($this->table, $data + $identifier);
         }
 
         return (bool)$result;
@@ -106,7 +103,7 @@ class DbCache extends AbstractCache
      */
     public function remove($key)
     {
-        return (bool)$this->conn->delete($this->table, array('id' => $key));
+        return (bool)$this->db->delete($this->table, array('id' => $key));
     }
 
     /**
@@ -114,7 +111,7 @@ class DbCache extends AbstractCache
      */
     public function exists($key)
     {
-        return (bool)$this->conn->fetchArray("SELECT id FROM {$this->table} WHERE id = ?", array($key));
+        return (bool)$this->db->select($this->table, $key);
     }
 
     /**
@@ -158,6 +155,6 @@ class DbCache extends AbstractCache
      */
     public function clear()
     {
-        return (bool)$this->conn->executeUpdate("DELETE FROM {$this->table}");
+        return (bool)$this->db->executeUpdate("DELETE FROM {$this->table}");
     }
 }
