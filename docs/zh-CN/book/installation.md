@@ -38,12 +38,12 @@ Widget支持通过[Composer](https://getcomposer.org)下载和直接下载源文
 
 ### 稳定版
 
-Zip文件下载: [https://github.com/twinh/widget/archive/v0.9.3.zip](https://github.com/twinh/widget/archive/v0.9.3.zip)
+Zip文件下载: https://github.com/twinh/widget/archive/v0.9.3.zip
 
 ### 开发尝鲜版
 
-Zip文件下载: [https://github.com/twinh/widget/archive/master.zip](https://github.com/twinh/widget/archive/master.zip)
+Zip文件下载: https://github.com/twinh/widget/archive/master.zip
 
 ### 更多历史版本
 
-更多历史版本请前往GitHub查看 [https://github.com/twinh/widget/tags](https://github.com/twinh/widget/tags)
+更多历史版本请前往GitHub查看 https://github.com/twinh/widget/releases
