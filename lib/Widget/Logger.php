@@ -141,13 +141,21 @@ class Logger extends AbstractWidget
             $message,
         ), $this->format);
 
-        // Write the log message
+        return $this->writeLog($content);
+    }
+
+    /**
+     * Write the log message
+     *
+     * @param string $content
+     * @return bool
+     */
+    protected function writeLog($content)
+    {
         if (!$this->handle) {
             $this->handle = fopen($this->getFile(), 'a');
         }
-        fwrite($this->handle, $content);
-
-        return true;
+        return (bool)fwrite($this->handle, $content);
     }
 
     /**
