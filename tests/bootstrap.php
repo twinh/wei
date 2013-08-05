@@ -23,10 +23,6 @@ $widget = widget(array(
             'WidgetTest' => __DIR__,
             '' => __DIR__ . '/fallback',
         ),
-        '+deps' => array(
-            'mysqlCache' => 'mysql.dbCache',
-            'pgsqlCache' => 'pgsql.dbCache'
-        )
     ),
     'call' => array(
         'url' => 'http://localhost:8000/call.php',
@@ -53,28 +49,6 @@ $widget = widget(array(
         'port'      => 5432,
         'dbname'    => 'postgres'
     ),
-    // Doctrine DBAL widget configuration
-    'dbal' => array(
-        'driver' => 'pdo_sqlite',
-        'memory' => true
-    ),
-    'mysql.dbal' => array(
-        'driver'    => 'pdo_mysql',
-        'host'      => '127.0.0.1',
-        'port'      => '3306',
-        'user'      => 'root',
-        'password'  => '123456',
-        'dbname'    => 'widget',
-        'charset'   => 'utf8'
-    ),
-    'pgsql.dbal' => array(
-        'driver'    => 'pdo_pgsql',
-        'host'      => '127.0.0.1',
-        'port'      => '5432',
-        'user'      => 'postgres',
-        'password'  => '123456',
-        'dbname'    => 'postgres',
-    ),
     'mysql.dbCache' => array(
         'deps' => array(
             'db' => 'mysql.db'
@@ -84,6 +58,11 @@ $widget = widget(array(
         'deps' => array(
             'db' => 'pgsql.db'
         )
+    ),
+    // Doctrine DBAL widget configuration
+    'dbal' => array(
+        'driver' => 'pdo_sqlite',
+        'memory' => true
     ),
     // Doctrine ORM widget configuration
     'entityManager' => array(
