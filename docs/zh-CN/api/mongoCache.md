@@ -1,7 +1,7 @@
 MongoCache
 ==========
 
-设置或获取一项缓存,缓存数据存储于[Mangodb](http://docs.mongodb.org/ecosystem/drivers/php/)中
+设置或获取一项缓存,缓存数据存储于[MangoDB](http://docs.mongodb.org/ecosystem/drivers/php/)中
 
 案例
 ----
@@ -31,8 +31,8 @@ widget()->mongoCache('key', 'value', 60);
 
 | 名称       | 类型         | 默认值         | 说明                                                    |
 |------------|--------------|----------------|---------------------------------------------------------|
-| host       | string       | localhost      | Mongodb所在的服务器名称                                 |
-| port       | int          | 27017          | Mongodb所在的服务器的端口                               |
+| host       | string       | localhost      | MangoDB所在的服务器名称                                 |
+| port       | int          | 27017          | MangoDB所在的服务器的端口                               |
 | db         | string       | cache          | 存储缓存数据的数据库的名称                              |
 | collection | string       | cache          | 存储缓存数据的集合的名称                                |
 
