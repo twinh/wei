@@ -8,7 +8,7 @@
 2. [安装](book/installation.md)
 3. [配置](book/configuration.md)
 4. [微件管理器](api/widget.md)
-5. [缓存](book/cache.md)
+5. [缓存](api/cache.md)
 6. [数据库操作](api/db.md)
 7. [数据校验](api/validate.md)
 8. [接口调用](api/call.md)
@@ -25,7 +25,7 @@ API参考目录
 
 * [widget](api/widget.md) - 微件管理器,用于获取微件对象,设置配置等
 
-#### [缓存](book/cache.md)
+#### 缓存
 * [apc](api/apc.md) - APC缓存
 * [arrayCache](api/arrayCache.md) - PHP数组缓存
 * [couchbase](api/couchbase.md) - Couchbase缓存
@@ -33,6 +33,7 @@ API参考目录
 * [fileCache](api/fileCache.md) - 文件缓存
 * [memcache](api/memcache.md) - Memcachce缓存
 * [memcached](api/memcached.md) - Memcached缓存
+* [mongoCache](api/mongoCache) - MongoCache缓存
 * [redis](api/redis.md) - Redis缓存
 * [cache](api/cache.md) - 通用缓存
 * [bicache](api/bicache.md) - 二级缓存
