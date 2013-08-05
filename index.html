@@ -723,7 +723,7 @@
   <section id="cache">
   <div class="page-header"><h1>Cache</h1></div>
 
-<p>设置或获取指定缓存类型的一项缓存</p>
+<p>缓存数据管理</p>
 
 <p>使用<code>cache</code>微件会让你的代码更加灵活自由</p>
 
@@ -856,7 +856,7 @@
 
 <ul>
 <li>
-<a href="apc.md">apc</a> - APC缓存 <em>推荐</em>
+<a href="apc.md">apc</a> - APC缓存 <em>(推荐)</em>
 </li>
 <li>
 <a href="arrayCache.md">arrayCache</a> - PHP数组缓存</li>
@@ -869,9 +869,12 @@
 <li>
 <a href="memcache.md">memcache</a> - Memcachce缓存</li>
 <li>
-<a href="memcached.md">memcached</a> - Memcached缓存</li>
+<a href="memcached.md">memcached</a> - Memcached缓存 <em>(推荐)</em>
+</li>
 <li>
-<a href="redis.md">redis</a> - Redis缓存 <em>推荐</em>
+<a href="mongoCache.md">mongoCache</a> - MongoDB缓存</li>
+<li>
+<a href="redis.md">redis</a> - Redis缓存 <em>(推荐)</em>
 </li>
 <li>
 <a href="bicache.md">bicache</a> - 二级缓存</li>
@@ -880,8 +883,8 @@
 <table class="table table-bordered table-striped">
 <thead><tr>
 <th>特性</th>
-<th>ArrayCache</th>
 <th>Apc</th>
+<th>ArrayCache</th>
 <th>DbCache</th>
 <th>FileCache</th>
 <th>Memecache</th>
@@ -905,8 +908,8 @@
 </tr>
 <tr>
 <td>持久化</td>
-<td>-</td>
 <td>×</td>
+<td>-</td>
 <td>√</td>
 <td>√</td>
 <td>×</td>
@@ -945,12 +948,19 @@
 <code>√</code> 表示支持</li>
 <li>
 <code>×</code> 表示不支持</li>
-<li><p><code>-</code>  表示不具备该特性</p></li>
-<li><p>速度:判断依据是缓存数据存储的介质,如果数据存储在内存中则<code>快</code>,如果存储在磁盘则<code>慢</code></p></li>
-<li><p>持久化:判断依据是缓存是否因为相关服务重启而丢失数据</p></li>
-<li><p>原子性:判断依据是<code>add</code>,<code>replace</code>,<code>increment</code>和<code>decrement</code>方法是否为原子操作</p></li>
-<li><p><code>Cache</code>和<code>Bicache</code>为视配置而定,不列入比较</p></li>
-<li><p><code>ArrayCache</code>使用PHP数组存储数据,每次请求结束后销毁,因此不具备持久化特性</p></li>
+<li>
+<code>-</code>  表示不具备该特性</li>
+</ul><p>说明:</p>
+
+<ul>
+<li>速度:判断依据是缓存数据存储的介质,如果数据存储在内存中则<code>快</code>,如果存储在磁盘则<code>慢</code>
+</li>
+<li>持久化:判断依据是缓存是否因为相关服务重启而丢失数据</li>
+<li>原子性:判断依据是<code>add</code>,<code>replace</code>,<code>increment</code>和<code>decrement</code>方法是否为原子操作</li>
+<li>
+<code>Cache</code>和<code>Bicache</code>为视配置而定,不列入比较</li>
+<li>
+<code>ArrayCache</code>使用PHP数组存储数据,每次请求结束后销毁,因此不具备持久化特性</li>
 </ul><h3>通用方法</h3>
 
 <p>在下面的方法中,<code>cache</code>表示缓存微件的名称,可以替换为其他任意缓存,如<code>redis</code>, <code>memcached</code>等</p>
