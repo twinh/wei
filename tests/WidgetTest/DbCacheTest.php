@@ -6,14 +6,13 @@ class DbCacheTest extends CacheTestCase
 {
     public function setUp()
     {
-        if (!class_exists(('\Doctrine\DBAL\DriverManager'))) {
-            $this->markTestSkipped('doctrine\dbal is required');
-            return;
+        try {
+            $this->object = $this->widget->dbCache;
+        } catch (\PDOException $e) {
+            $this->markTestSkipped($e->getMessage());
         }
-        
-        parent::setUp();
     }
-    
+
     public static function tearDownAfterClass()
     {
         @unlink('cache.sqlite');

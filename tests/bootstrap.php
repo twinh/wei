@@ -82,7 +82,7 @@ $widget = widget(array(
     ),
     'pgsql.dbCache' => array(
         'deps' => array(
-            'db' => 'mysql.db'
+            'db' => 'pgsql.db'
         )
     ),
     // Doctrine ORM widget configuration

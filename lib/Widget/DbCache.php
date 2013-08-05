@@ -80,8 +80,8 @@ class DbCache extends AbstractCache
     {
         $data = array(
             'value' => serialize($value),
-            'lastModified' => time(),
-            'expire' => $expire ? time() + $expire : 2147483647
+            'lastModified' => date('Y-m-d H:i:s'),
+            'expire' => date('Y-m-d H:i:s', $expire ? time() + $expire: 2147483647)
         );
         $identifier = array(
             'id' => $key
