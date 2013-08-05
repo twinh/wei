@@ -34,7 +34,7 @@ API参考目录
 * [fileCache](api/fileCache.md) - 文件缓存
 * [memcache](api/memcache.md) - Memcachce缓存
 * [memcached](api/memcached.md) - Memcached缓存
-* [mongoCache](api/mongoCache) - MongoCache缓存
+* [mongoCache](api/mongoCache.md) - MongoCache缓存
 * [redis](api/redis.md) - Redis缓存
 * [bicache](api/bicache.md) - 二级缓存
 
