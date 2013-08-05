@@ -3,6 +3,7 @@ Changelog
 
 ## 0.9.4 (WIP)
 * Changed cache widgets' `increment` and `decrement` methods to `inc` and `dec`
+* Refactored dbCache, use db widget instead of dbal widget to execute SQL
 
 ## 0.9.4-RC1 (2013-08-02)
 
