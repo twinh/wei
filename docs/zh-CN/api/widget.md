@@ -91,6 +91,24 @@ widget(array(
 ));
 ```
 
+### 设置PHPini配置
+
+[PHP的配置](http://www.php.net/manual/zh/ini.php)可以通过`inis`选项来设置.
+
+```php
+widget(array(
+    'widget' => array(
+        'inis' => array(
+            'date.timezone' => 'Asia/Shanghai', // 设置时区为上海
+            'memory_limit'  => '128M',          // 设置最大限制为128M
+            'post_max_size' => '8M',            // 设置POST请求的最大数据限制
+            'session.name'  => 'PHPSESSID',     // 设置Session的cookie名称
+            'ini配置名称'   => 'ini配置的值',
+        )
+    )
+));
+```
+
 ### 通过`aliases`选项加载自定义微件
 
 除了系统自带的微件之外,你也可以自定义微件类.
