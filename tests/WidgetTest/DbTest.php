@@ -230,6 +230,14 @@ class DbTest extends TestCase
 
         $this->assertNotEquals('1', $member->id);
         $this->assertEquals('3', $member->id);
+
+        $member = $this->db->findOrCreate('member', array(
+            'group_id' => '1',
+            'name' => 'twin2',
+        ));
+
+        $this->assertEquals('1', $member->group_id);
+        $this->assertEquals('twin2', $member->name);
     }
 
     public function testRecordSave()
