@@ -29,9 +29,12 @@ $widget = widget(array(
         'debug' => true,
     ),
     'db' => array(
-        'dsn' => 'mysql:host=localhost;dbname=widget;charset=utf8',
-        'user' => 'root',
-        'password' => '123456',
+        'driver'    => 'mysql',
+        'host'      => 'localhost',
+        'dbname'    => 'widget',
+        'charset'   => 'utf8',
+        'user'      => 'root',
+        'password'  => '123456',
     )
 ));
 ```

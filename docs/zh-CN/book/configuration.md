@@ -18,15 +18,21 @@ $widget = widget(array(
     ),
     // 数据库微件的配置
     'db' => array(
-        'dsn' => 'mysql:host=localhost;dbname=widget;charset=utf8',
-        'user' => 'root',
-        'password' => '123456',
+        'driver'    => 'mysql',
+        'host'      => 'localhost',
+        'dbname'    => 'widget',
+        'charset'   => 'utf8',
+        'user'      => 'root',
+        'password'  => '123456',
     ),
     // 备机数据库微件的配置
     'slave.db' => array(
-        'dsn' => 'mysql:host=slave-host;dbname=widget;charset=utf8',
-        'user' => 'root',
-        'password' => '123456',
+        'driver'    => 'mysql',
+        'host'      => 'slave-host',
+        'dbname'    => 'widget',
+        'charset'   => 'utf8',
+        'user'      => 'root',
+        'password'  => '123456',
     ),
     // 日志微件的配置
     'logger' => array(
@@ -66,9 +72,12 @@ $widget = widget(array(
         'debug' => true,
     ),
     'db' => array(
-        'dsn' => 'mysql:host=localhost;dbname=widget;charset=utf8',
-        'user' => 'root',
-        'password' => '123456',
+        'driver'    => 'mysql',
+        'host'      => 'localhost',
+        'dbname'    => 'widget',
+        'charset'   => 'utf8',
+        'user'      => 'root',
+        'password'  => '123456',
     )
 ));
 ```
@@ -92,9 +101,12 @@ return array(
         'debug' => $debug
     ),
     'db' => array(
-        'dsn' => 'mysql:host=localhost;dbname=widget;charset=utf8',
-        'user' => 'root',
-        'password' => '123456',
+        'driver'    => 'mysql',
+        'host'      => 'localhost',
+        'dbname'    => 'widget',
+        'charset'   => 'utf8',
+        'user'      => 'root',
+        'password'  => '123456',
     ),
     'view' => array(
         'dirs' => $root
@@ -112,9 +124,12 @@ $db = $widget->config('db');
 
 // 返回的数组如下
 $db = array(
-    'dsn' => 'mysql:host=localhost;dbname=widget;charset=utf8',
-    'user' => 'root',
-    'password' => '123456',
+    'driver'    => 'mysql',
+    'host'      => 'localhost',
+    'dbname'    => 'widget',
+    'charset'   => 'utf8',
+    'user'      => 'root',
+    'password'  => '123456',
 );
 
 // 获取数据库微件配置中的`user`选项
@@ -138,21 +153,30 @@ $user = 'root';
 $widget = widget(array(
     // 默认数据库微件的配置
     'db' => array(
-        'dsn' => 'mysql:host=localhost;dbname=widget;charset=utf8',
-        'user' => 'root',
-        'password' => '123456',
+        'driver'    => 'mysql',
+        'host'      => 'localhost',
+        'dbname'    => 'widget',
+        'charset'   => 'utf8',
+        'user'      => 'root',
+        'password'  => '123456',
     ),
     // 备机数据库微件的配置
     'slave.db' => array(
-        'dsn' => 'mysql:host=slave-host;dbname=widget;charset=utf8',
-        'user' => 'root',
-        'password' => '123456',
+        'driver'    => 'mysql',
+        'host'      => 'slave-host',
+        'dbname'    => 'widget',
+        'charset'   => 'utf8',
+        'user'      => 'root',
+        'password'  => '123456',
     ),
     // 日志数据库微件的配置
     'logger.db' => array(
-        'dsn' => 'mysql:host=logger-host;dbname=widget;charset=utf8',
-        'user' => 'root',
-        'password' => '123456',
+        'driver'    => 'mysql',
+        'host'      => 'logger-host',
+        'dbname'    => 'widget',
+        'charset'   => 'utf8',
+        'user'      => 'root',
+        'password'  => '123456',
     )
 ));
 
