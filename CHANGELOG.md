@@ -1,9 +1,11 @@
 Changelog
 =========
 
-## 0.9.4 (WIP)
+## 0.9.4 (2013-08-07)
 * Changed cache widgets' `increment` and `decrement` methods to `inc` and `dec`
 * Refactored dbCache, use db widget instead of dbal widget to execute SQL
+* Added isNew method for record class
+* Added host, port and more options for db widget, removed DSN option
 
 ## 0.9.4-RC1 (2013-08-02)
 

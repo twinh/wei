@@ -29,14 +29,14 @@ Define the following requirement in your `composer.json` file and run `php compo
 ```json
 {
     "require": {
-        "widget/widget": "0.9.3"
+        "widget/widget": "0.9.4"
     }
 }
 ```
 
 ### Download source code
 
-* [Stable Version](https://github.com/twinh/widget/archive/v0.9.3.zip)
+* [Stable Version](https://github.com/twinh/widget/archive/v0.9.4.zip)
 * [Develop Version](https://github.com/twinh/widget/archive/master.zip)
 
 ## Resources
