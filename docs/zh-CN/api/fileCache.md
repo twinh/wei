@@ -17,7 +17,7 @@ widget()->fileCache('key');
 // value
 ```
 
-更多案例请查看"[缓存](../book/cache.md)"章节
+更多案例请查看"[缓存](cache.md#案例)"章节
 
 调用方式
 --------
@@ -28,11 +28,11 @@ widget()->fileCache('key');
 ----------|--------|-----------|------
 dir       | string | cache     | 缓存文件存储的目录
 
-### 通用方法
+### 继承的方法
 
-通用方法请查看[cache](cache.md)微件文档
+通用方法请查看[cache](cache.md#通用方法)微件文档
 
-### 自身方法
+### 方法
 
 #### fileCache->getDir()
 获取文件缓存的目录
