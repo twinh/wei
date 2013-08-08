@@ -59,20 +59,20 @@ class Env extends AbstractWidget
     {
         parent::__construct($options);
 
-        // Load cli configuration when run in cli mode
-        if (php_sapi_name() === 'cli') {
-            $file = str_replace('%env%', 'cli', $this->configDir);
-            $this->loadConfigFile($file);
-        }
-
         // Detect environment name if not set
         if (!$this->env) {
             $this->detectEnvName();
         }
 
-        // Load configuration by env
+        // Load configuration by env name
         $file = str_replace('%env%', $this->env, $this->configDir);
         $this->loadConfigFile($file);
+
+        // Load CLI configuration when run in CLI mode
+        if (php_sapi_name() === 'cli') {
+            $file = str_replace('%env%', 'cli', $this->configDir);
+            $this->loadConfigFile($file);
+        }
     }
 
     /**
