@@ -64,7 +64,7 @@ class Env extends AbstractWidget
             $this->detectEnvName();
         }
 
-        // Load configuration by env name
+        // Load configuration by environment name
         $file = str_replace('%env%', $this->env, $this->configDir);
         $this->loadConfigFile($file);
 
@@ -86,7 +86,7 @@ class Env extends AbstractWidget
     }
 
     /**
-     * Detect environment by server ip
+     * Detect environment by server IP
      *
      * @return Env
      */
