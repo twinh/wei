@@ -1898,21 +1898,11 @@ widget()-&gt;arrayCache('name');
 <span class="c1">// value</span>
 </code></pre></div>
 
-<p>更多案例请查看"<a href="../book/cache.md">缓存</a>"章节</p>
+<p>更多案例请查看"<a href="cache.md#%E6%A1%88%E4%BE%8B">缓存</a>"章节</p>
 
 <h2>调用方式</h2>
 
 <h3>选项</h3>
-
-<p><em>无</em></p>
-
-<h3>方法</h3>
-
-<h4>fileCache($key, $value, $expire = 0)</h4>
-
-<p>设置缓存的值</p>
-
-<h5>参数</h5>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -1921,69 +1911,17 @@ widget()-&gt;arrayCache('name');
 <th>默认值</th>
 <th>说明</th>
 </tr></thead>
-<tbody>
-<tr>
-<td>$key</td>
+<tbody><tr>
+<td>dir</td>
 <td>string</td>
-<td>无</td>
-<td>缓存的键名</td>
-</tr>
-<tr>
-<td>$value</td>
-<td>mixed</td>
-<td>无</td>
-<td>缓存的值,允许任意类型</td>
-</tr>
-<tr>
-<td>$expire</td>
-<td>int</td>
-<td>0</td>
-<td>缓存的有效期,默认为0秒,表示永不过期</td>
-</tr>
-</tbody>
-</table><h4>fileCache($key)</h4>
+<td>cache</td>
+<td>缓存文件存储的目录</td>
+</tr></tbody>
+</table><h3>继承的方法</h3>
 
-<p>获取指定名称的缓存</p>
+<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
 
-<h4>fileCache-&gt;set($key, $value, $expire = 0)</h4>
-
-<p>设置缓存的值,同<code>fileCache($key, $value, $expire = 0)</code></p>
-
-<h4>fileCache-&gt;get($key)</h4>
-
-<p>获取缓存的值,同<code>fileCache($key)</code></p>
-
-<h4>fileCache-&gt;remove($key)</h4>
-
-<p>移除一项缓存</p>
-
-<h4>fileCache-&gt;exists($key)</h4>
-
-<p>检查缓存是否存在</p>
-
-<h4>fileCache-&gt;add($key, $value)</h4>
-
-<p>增加一项缓存,如果缓存已存在,返回false</p>
-
-<h4>fileCache-&gt;replace($key, $value)</h4>
-
-<p>替换一项缓存,如果缓存 <strong>不</strong> 存在,返回false</p>
-
-<h4>fileCache-&gt;inc($key, $offset = 1)</h4>
-
-<p>增大一项缓存的值</p>
-
-<h4>fileCache-&gt;dec($key, $offset = 1)</h4>
-
-<p>减小一项缓存的值</p>
-
-<h4>fileCache-&gt;getMulti($keys)</h4>
-
-<p>批量获取缓存的值</p>
-
-<h4>fileCache-&gt;setMulti($values)</h4>
-
-<p>批量设置缓存的值</p>
+<h3>方法</h3>
 
 <h4>fileCache-&gt;getDir()</h4>
 
