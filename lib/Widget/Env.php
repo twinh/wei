@@ -96,8 +96,22 @@ class Env extends AbstractWidget
             $this->env = call_user_func($this->detector);
         } else {
             $ip = $this->request->getServer('SERVER_ADDR');
-            if (isset($this->envMap[$ip])) {
-                $this->env = $this->envMap[$ip];
+            if ($ip) {
+                if (isset($this->envMap[$ip])) {
+                    $this->env = $this->envMap[$ip];
+                } else {
+                    $this->env = 'prod';
+                }
+            } elseif (php_sapi_name() == 'cli' && $ips = $this->getServerIps()) {
+                foreach ($ips as $ip) {
+                    if (isset($this->envMap[$ip])) {
+                        $this->env = $this->envMap[$ip];
+                        break;
+                    }
+                }
+                if (!$this->env) {
+                    $this->env = 'prod';
+                }
             } else {
                 $this->env = 'prod';
             }
@@ -172,5 +186,18 @@ class Env extends AbstractWidget
 
         $config = (array)require $file;
         $this->widget->config($config);
+    }
+
+    /**
+     * Returns server IPs from `ifconfig` command line
+     *
+     * @return array
+     * @todo windows
+     */
+    protected function getServerIps()
+    {
+        // TODO check command result: command not found, Permission denied
+        preg_match_all('/eth(?:.+?)inet addr: ?([^ ]+)/s', `/sbin/ifconfig`, $ips);
+        return $ips[1];
     }
 }
