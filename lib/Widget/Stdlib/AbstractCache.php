@@ -101,6 +101,31 @@ abstract class AbstractCache extends AbstractWidget
     }
 
     /**
+     * Get file content with cache
+
+     * @param string $file The path of file
+     * @param callback $fn The callback to get and parse file content
+     * @return mixed
+     */
+    public function getFileContent($file, $fn)
+    {
+        $modifiedTimeKey = $file . '-modifiedTime';
+        $contentKey      = $file . '-content';
+        $modifiedTime = filemtime($file);
+
+        if ($modifiedTime > $this->get($modifiedTimeKey)) {
+            $content = call_user_func($fn, $file, $this->widget);
+            $this->setMulti(array(
+                $modifiedTimeKey => $modifiedTime,
+                $contentKey      => $content,
+            ));
+        }  else {
+            $content = $this->get($contentKey);
+        }
+        return $content;
+    }
+
+    /**
      * Store an item
      *
      * @param  string $key    The name of item
