@@ -12,8 +12,10 @@ $env = $widget->env();
 $file = 'config/config_' . $env . '.json';
 
 if (is_file($file)) {
-    // TODO cache me
-    $config = json_decode(file_get_contents($file), true);
+    // Load file content and store it in cache
+    $config = $widget->cache->getFileContent($file, function($file) {
+        return json_decode(file_get_contents($file), true);
+    });
     widget($config);
 } else {
     echo sprintf('JSON configuration file "%s" not found', $file);

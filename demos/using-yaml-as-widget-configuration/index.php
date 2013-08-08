@@ -20,8 +20,10 @@ $env = $widget->env();
 $file = 'config/config_' . $env . '.yml';
 
 if (is_file($file)) {
-    // TODO cache me
-    $config = Yaml::parse($file);
+    // Load file content and store it in cache
+    $config = $widget->cache->getFileContent($file, function($file) {
+        return Yaml::parse($file);
+    });
     widget($config);
 } else {
     echo sprintf('YAML configuration file "%s" not found', $file);
