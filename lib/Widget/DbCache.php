@@ -102,7 +102,7 @@ class DbCache extends AbstractCache
             'id' => $key
         );
 
-        if ($this->exists($key)) {
+        if ($this->doExists($key)) {
             // In mysql, the rowCount method return 0 when data is not modified,
             // so check errorCode to make sure it executed success
             $result = $this->db->update($this->table, $data, $identifier) || '0000' == $this->db->errorCode();
@@ -134,10 +134,10 @@ class DbCache extends AbstractCache
      */
     protected function doAdd($key, $value, $expire = 0)
     {
-        if ($this->exists($key)) {
+        if ($this->doExists($key)) {
             return false;
         } else {
-            return $this->set($key, $value, $expire);
+            return $this->doSet($key, $value, $expire);
         }
     }
 
@@ -146,10 +146,10 @@ class DbCache extends AbstractCache
      */
     protected function doReplace($key, $value, $expire = 0)
     {
-        if (!$this->exists($key)) {
+        if (!$this->doExists($key)) {
             return false;
         } else {
-            return $this->set($key, $value, $expire);
+            return $this->doSet($key, $value, $expire);
         }
     }
 
@@ -160,9 +160,9 @@ class DbCache extends AbstractCache
      */
     protected function doInc($key, $offset = 1)
     {
-        $value = $this->get($key) + $offset;
+        $value = $this->doGet($key) + $offset;
 
-        return $this->set($key, $value) ? $value : false;
+        return $this->doSet($key, $value) ? $value : false;
     }
 
     /**
