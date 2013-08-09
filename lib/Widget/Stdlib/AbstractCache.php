@@ -25,7 +25,12 @@ abstract class AbstractCache extends AbstractWidget
     protected $keyPrefix = '';
 
     /**
-     * {@inheritdoc}
+     * Retrieve or store an item
+     *
+     * @param string $key The name of item
+     * @param mixed $value The value of item
+     * @param int $expire The expire seconds, defaults to 0, means never expired
+     * @return mixed
      */
     public function __invoke($key, $value = null, $expire = 0)
     {
@@ -73,18 +78,35 @@ abstract class AbstractCache extends AbstractWidget
         return $result;
     }
 
+    /**
+     * Store an item
+     *
+     * @param  string $key    The name of item
+     * @param  mixed  $value  The value of item
+     * @param  int    $expire The expire seconds, defaults to 0, means never expired
+     * @return bool
+     */
     public function set($key, $value, $expire = 0)
     {
         return $this->doSet($this->getKeyWithPrefix($key), $value, $expire);
     }
 
+    /**
+     * Remove an item
+     *
+     * @param  string $key The name of item
+     * @return bool
+     */
     public function remove($key)
     {
         return $this->doRemove($this->getKeyWithPrefix($key));
     }
 
     /**
-     * {@inheritdoc}
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
      */
     public function exists($key)
     {
@@ -92,7 +114,12 @@ abstract class AbstractCache extends AbstractWidget
     }
 
     /**
-     * {@inheritdoc}
+     * Add an item
+     *
+     * @param  string $key    The name of item
+     * @param  mixed  $value  The value of item
+     * @param  int    $expire The expire seconds, defaults to 0, means never expired
+     * @return bool
      */
     public function add($key, $value, $expire = 0)
     {
@@ -100,7 +127,12 @@ abstract class AbstractCache extends AbstractWidget
     }
 
     /**
-     * {@inheritdoc}
+     * Replace an existing item
+     *
+     * @param  string $key    The name of item
+     * @param  mixed  $value  The value of item
+     * @param  int    $expire The expire seconds, defaults to 0, means never expired
+     * @return bool
      */
     public function replace($key, $value, $expire = 0)
     {
@@ -108,7 +140,11 @@ abstract class AbstractCache extends AbstractWidget
     }
 
     /**
-     * {@inheritdoc}
+     * Increment an item
+     *
+     * @param  string    $key    The name of item
+     * @param  int       $offset The value to increased
+     * @return int|false Returns the new value on success, or false on failure
      */
     public function inc($key, $offset = 1)
     {
