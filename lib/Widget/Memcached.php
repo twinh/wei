@@ -80,7 +80,9 @@ class Memcached extends AbstractCache
     public function getMulti(array $keys)
     {
         $cas = null;
-        return $this->object->getMulti($keys, $cas, \Memcached::GET_PRESERVE_ORDER);
+        $keysWithPrefix = array_map(array($this, 'getKeyWithPrefix'), $keys);
+        $values = $this->object->getMulti($keysWithPrefix, $cas, \Memcached::GET_PRESERVE_ORDER);
+        return array_combine($keys, $values);
     }
 
     /**
@@ -132,7 +134,7 @@ class Memcached extends AbstractCache
      */
     public function dec($key, $offset = 1)
     {
-        return $this->incDec($key, $offset, $offset < 0);
+        return $this->incDec($this->getKeyWithPrefix($key), $offset, $offset < 0);
     }
 
     /**

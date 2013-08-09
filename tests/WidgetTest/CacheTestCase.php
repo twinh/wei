@@ -64,21 +64,21 @@ class CacheTestCase extends TestCase
 
         // Increase from not exists key
         $this->assertSame(2, $cache->inc($key, 2));
-        $this->assertSame(2, $cache->get($key));
+        $this->assertEquals(2, $cache->get($key));
 
         // Increase from exists key and the offset is 3
         $this->assertSame(5, $cache->inc($key, 3));
-        $this->assertSame(5, $cache->get($key));
+        $this->assertEquals(5, $cache->get($key));
 
         $this->assertSame(3, $cache->dec($key, 2));
-        $this->assertSame(3, $cache->get($key));
+        $this->assertEquals(3, $cache->get($key));
 
         // Negative number
         $this->assertSame(1, $cache->inc($key, -2));
-        $this->assertSame(1, $cache->get($key));
+        $this->assertEquals(1, $cache->get($key));
 
         $this->assertSame(3, $cache->dec($key, -2));
-        $this->assertSame(3, $cache->get($key));
+        $this->assertEquals(3, $cache->get($key));
     }
 
     public function testClear()
@@ -160,10 +160,10 @@ class CacheTestCase extends TestCase
     public function testKeyPrefix()
     {
         $cache = $this->object;
-        $cache->setKeyPrefix(__METHOD__);
-        $this->assertEquals(__METHOD__, $cache->getKeyPrefix());
+        $cache->setKeyPrefix('prefix-');
+        $this->assertEquals('prefix-', $cache->getKeyPrefix());
 
-        $cache->set('test', 1   );
+        $cache->set('test', 1);
         $this->assertEquals(1, $cache->get('test'));
         $this->assertSame(3, $cache->inc('test', 2));
         $this->assertSame(1, $cache->dec('test', 2));
@@ -173,6 +173,13 @@ class CacheTestCase extends TestCase
 
         $this->assertTrue($cache->remove('test'));
         $this->assertTrue($cache->add('test', 3));
-        $this->assertSame(3, $cache->get('test'));
+        $this->assertEquals(3, $cache->get('test'));
+
+        $this->assertEquals(array('test' => 3), $cache->getMulti(array('test')));
+
+        $result = $cache->setMulti(array('test' => 2));
+        $this->assertEquals(array('test' => true), $result);
+
+        $this->assertEquals(2, $cache->get('test'));
     }
 }

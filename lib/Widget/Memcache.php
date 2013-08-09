@@ -128,7 +128,7 @@ class Memcache extends AbstractCache
      */
     public function dec($key, $offset = 1)
     {
-        return $this->incDec($key, $offset, $offset < 0);
+        return $this->incDec($this->getKeyWithPrefix($key), $offset, $offset < 0);
     }
 
     /**
