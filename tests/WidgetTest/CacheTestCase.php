@@ -156,4 +156,23 @@ class CacheTestCase extends TestCase
 
         $this->assertEquals(2, $result2);
     }
+
+    public function testKeyPrefix()
+    {
+        $cache = $this->object;
+        $cache->setKeyPrefix(__METHOD__);
+        $this->assertEquals(__METHOD__, $cache->getKeyPrefix());
+
+        $cache->set('test', 1   );
+        $this->assertEquals(1, $cache->get('test'));
+        $this->assertSame(3, $cache->inc('test', 2));
+        $this->assertSame(1, $cache->dec('test', 2));
+
+        $this->assertEquals(2, $cache->replace('test', 2));
+        $this->assertEquals(2, $cache->get('test'));
+
+        $this->assertTrue($cache->remove('test'));
+        $this->assertTrue($cache->add('test', 3));
+        $this->assertSame(3, $cache->get('test'));
+    }
 }
