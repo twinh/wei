@@ -57,7 +57,7 @@ class FileCache extends AbstractCache
      */
     protected function doGet($key)
     {
-        $file = $this->getFile($key);
+        $file = $this->getFile($key, false);
 
         if (!is_file($file)) {
             return false;
@@ -78,20 +78,19 @@ class FileCache extends AbstractCache
      */
     protected function doSet($key, $value, $expire = 0)
     {
-        $file = $this->getFile($key);
+        $file = $this->getFile($key, false);
 
         $content = $this->prepareContent($value, $expire);
 
         return (bool) file_put_contents($file, $content, LOCK_EX);
     }
 
-
     /**
      * {@inheritdoc}
      */
     protected function doRemove($key)
     {
-        $file = $this->getFile($key);
+        $file = $this->getFile($key, false);
 
         if (is_file($file)) {
             return unlink($file);
@@ -105,7 +104,7 @@ class FileCache extends AbstractCache
      */
     protected function doExists($key)
     {
-        $file = $this->getFile($key);
+        $file = $this->getFile($key, false);
 
         if (!is_file($file)) {
             return false;
@@ -125,7 +124,7 @@ class FileCache extends AbstractCache
      */
     protected function doAdd($key, $value, $expire = 0)
     {
-        $file = $this->getFile($key);
+        $file = $this->getFile($key, false);
 
         if (!is_file($file)) {
             // Open and try to lock file immediately
@@ -159,7 +158,7 @@ class FileCache extends AbstractCache
      */
     protected function doReplace($key, $value, $expire = 0)
     {
-        $file = $this->getFile($key);
+        $file = $this->getFile($key, false);
 
         if (!is_file($file)) {
             return false;
@@ -185,10 +184,10 @@ class FileCache extends AbstractCache
      */
     protected function doInc($key, $offset = 1)
     {
-        $file = $this->getFile($key);
+        $file = $this->getFile($key, false);
 
         if (!is_file($file)) {
-            return $this->set($key, $offset) ? $offset : false;
+            return $this->doSet($key, $offset) ? $offset : false;
         }
 
         // Open file for reading and rewriting
@@ -228,10 +227,12 @@ class FileCache extends AbstractCache
      * Get cache file by key
      *
      * @param  string $key
+     * @param bool $withPrefix
      * @return string
      */
-    public function getFile($key)
+    public function getFile($key, $withPrefix = true)
     {
+        $withPrefix && $key = $this->getKeyWithPrefix($key);
         $key = str_replace($this->illegalChars, '_', $key);
 
         return $this->dir . '/' . $key . '.' . $this->ext;
