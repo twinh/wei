@@ -28,7 +28,7 @@ class Apc extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function doSet($key, $value, $expire = 0)
+    protected function doSet($key, $value, $expire = 0)
     {
         return $expire >= 0 ? apc_store($key, $value, $expire) : apc_delete($key);
     }
@@ -36,7 +36,7 @@ class Apc extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function doRemove($key)
+    protected function doRemove($key)
     {
         return apc_delete($key);
     }
@@ -44,7 +44,7 @@ class Apc extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function doExists($key)
+    protected function doExists($key)
     {
         return apc_exists($key);
     }
@@ -52,7 +52,7 @@ class Apc extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function doAdd($key, $value, $expire = 0)
+    protected function doAdd($key, $value, $expire = 0)
     {
         return apc_add($key, $value, $expire);
     }
@@ -60,7 +60,7 @@ class Apc extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function doReplace($key, $value, $expire = 0)
+    protected function doReplace($key, $value, $expire = 0)
     {
         if (apc_exists($key)) {
             return apc_store($key, $value, $expire);
@@ -72,7 +72,7 @@ class Apc extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function doInc($key, $offset = 1)
+    protected function doInc($key, $offset = 1)
     {
         if (false === apc_inc($key, $offset)) {
             return apc_store($key, $offset) ? $offset : false;
