@@ -60,6 +60,7 @@ abstract class AbstractCache extends AbstractWidget
      * @param string $key The name of item
      * @param int $expire The expire seconds of callback return value
      * @param callback $fn The callback to execute when cache not found
+     * @throws \RuntimeException When set cache return false
      * @return mixed
      */
     public function get($key, $expire = null, $fn = null)
@@ -115,7 +116,7 @@ abstract class AbstractCache extends AbstractWidget
      */
     public function exists($key)
     {
-        return $this->doExists($key);
+        return $this->doExists($this->getKeyWithPrefix($key));
     }
 
     /**
@@ -128,7 +129,7 @@ abstract class AbstractCache extends AbstractWidget
      */
     public function add($key, $value, $expire = 0)
     {
-        return $this->doAdd($key, $value, $expire);
+        return $this->doAdd($this->getKeyWithPrefix($key), $value, $expire);
     }
 
     /**
@@ -141,7 +142,7 @@ abstract class AbstractCache extends AbstractWidget
      */
     public function replace($key, $value, $expire = 0)
     {
-        return $this->doReplace($key, $value, $expire);
+        return $this->doReplace($this->getKeyWithPrefix($key), $value, $expire);
     }
 
     /**
@@ -153,7 +154,7 @@ abstract class AbstractCache extends AbstractWidget
      */
     public function inc($key, $offset = 1)
     {
-        return $this->doInc($key, $offset);
+        return $this->doInc($this->getKeyWithPrefix($key), $offset);
     }
 
     /**
@@ -245,10 +246,10 @@ abstract class AbstractCache extends AbstractWidget
     /**
      * Returns the cache key with key prefix
      *
-     * @param $key
+     * @param string $key
      * @return string
      */
-    public function getKeyWithPrefix($key)
+    protected function getKeyWithPrefix($key)
     {
         return $this->keyPrefix . $key;
     }

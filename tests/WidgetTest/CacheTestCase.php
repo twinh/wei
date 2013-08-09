@@ -9,6 +9,12 @@ class CacheTestCase extends TestCase
      */
     protected $object;
 
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->object->setKeyPrefix('test-');
+    }
+
     /**
      * @dataProvider providerForGetterAndSetter
      */
@@ -58,16 +64,21 @@ class CacheTestCase extends TestCase
 
         // Increase from not exists key
         $this->assertSame(2, $cache->inc($key, 2));
+        $this->assertSame(2, $cache->get($key));
 
         // Increase from exists key and the offset is 3
         $this->assertSame(5, $cache->inc($key, 3));
+        $this->assertSame(5, $cache->get($key));
 
         $this->assertSame(3, $cache->dec($key, 2));
+        $this->assertSame(3, $cache->get($key));
 
         // Negative number
         $this->assertSame(1, $cache->inc($key, -2));
+        $this->assertSame(1, $cache->get($key));
 
         $this->assertSame(3, $cache->dec($key, -2));
+        $this->assertSame(3, $cache->get($key));
     }
 
     public function testClear()
