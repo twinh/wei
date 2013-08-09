@@ -47,6 +47,7 @@ class ArrayCache extends AbstractCache
     protected function doRemove($key)
     {
         unset($this->data[$key]);
+        return true;
     }
 
     /**
@@ -62,7 +63,7 @@ class ArrayCache extends AbstractCache
      */
     protected function doAdd($key, $value, $expire = 0)
     {
-        if ($this->exists($key)) {
+        if ($this->doExists($key)) {
             return false;
         } else {
             $this->data[$key] = $value;
@@ -75,7 +76,7 @@ class ArrayCache extends AbstractCache
      */
     protected function doReplace($key, $value, $expire = 0)
     {
-        if (!$this->exists($key)) {
+        if (!$this->doExists($key)) {
             return false;
         } else {
             $this->data[$key] = $value;
@@ -88,7 +89,7 @@ class ArrayCache extends AbstractCache
      */
     protected function doInc($key, $offset = 1)
     {
-        if ($this->exists($key)) {
+        if ($this->doExists($key)) {
             return $this->data[$key] += $offset;
         } else {
             return $this->data[$key] = $offset;
