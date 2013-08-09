@@ -26,7 +26,10 @@ class CacheTestCase extends TestCase
         $this->assertEquals($value, $cache->get($key));
 
         $this->assertFalse($cache->add($key, $value));
-        // TODO mysql return false when value column value not changed
+
+        // Replace with the same value for testing MySQL cache
+        $this->assertTrue($cache->replace($key, $value));
+
         $this->assertTrue($cache->replace($key, uniqid()));
     }
 
