@@ -87,7 +87,7 @@ class Couchbase extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function set($key, $value, $expire = 0)
+    protected function doSet($key, $value, $expire = 0)
     {
         return $this->object->set($key, $value, $expire);
     }
@@ -95,7 +95,7 @@ class Couchbase extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    protected function doRemove($key)
     {
         return $this->object->delete($key);
     }
@@ -103,7 +103,7 @@ class Couchbase extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    protected function doExists($key)
     {
         if ($this->object->add($key, true)) {
             $this->object->delete($key);
@@ -115,7 +115,7 @@ class Couchbase extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function add($key, $value, $expire = 0)
+    protected function doAdd($key, $value, $expire = 0)
     {
         return (bool)$this->object->add($key, $value, $expire);
     }
@@ -123,7 +123,7 @@ class Couchbase extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function replace($key, $value, $expire = 0)
+    protected function doReplace($key, $value, $expire = 0)
     {
         return (bool)$this->object->replace($key, $value, $expire);
     }
@@ -131,7 +131,7 @@ class Couchbase extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function inc($key, $offset = 1)
+    protected function doInc($key, $offset = 1)
     {
         return $this->object->inc($key, $offset, true, 0, $offset);
     }

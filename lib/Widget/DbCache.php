@@ -91,7 +91,7 @@ class DbCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function set($key, $value, $expire = 0)
+    protected function doSet($key, $value, $expire = 0)
     {
         $data = array(
             'value' => serialize($value),
@@ -116,7 +116,7 @@ class DbCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    protected function doRemove($key)
     {
         return (bool)$this->db->delete($this->table, array('id' => $key));
     }
@@ -124,7 +124,7 @@ class DbCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    protected function doExists($key)
     {
         return (bool)$this->db->select($this->table, $key);
     }
@@ -132,7 +132,7 @@ class DbCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function add($key, $value, $expire = 0)
+    protected function doAdd($key, $value, $expire = 0)
     {
         if ($this->exists($key)) {
             return false;
@@ -144,7 +144,7 @@ class DbCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function replace($key, $value, $expire = 0)
+    protected function doReplace($key, $value, $expire = 0)
     {
         if (!$this->exists($key)) {
             return false;
@@ -158,7 +158,7 @@ class DbCache extends AbstractCache
      *
      * {@inheritdoc}
      */
-    public function inc($key, $offset = 1)
+    protected function doInc($key, $offset = 1)
     {
         $value = $this->get($key) + $offset;
 

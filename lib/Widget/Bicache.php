@@ -53,7 +53,7 @@ class Bicache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function set($key, $value, $expire = 0)
+    protected function doSet($key, $value, $expire = 0)
     {
         $result = $this->master->set($key, $value, $expire);
 
@@ -69,7 +69,7 @@ class Bicache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    protected function doRemove($key)
     {
         $result1 = $this->master->remove($key);
         $result2 = $this->slave->remove($key);
@@ -80,7 +80,7 @@ class Bicache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    protected function doExists($key)
     {
         return $this->master->exists($key) || $this->slave->exists($key);
     }
@@ -88,7 +88,7 @@ class Bicache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function add($key, $value, $expire = 0)
+    protected function doAdd($key, $value, $expire = 0)
     {
         $result = $this->master->add($key, $value, $expire);
 
@@ -105,7 +105,7 @@ class Bicache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function replace($key, $value, $expire = 0)
+    protected function doReplace($key, $value, $expire = 0)
     {
         $result = $this->master->replace($key, $value, $expire);
 
@@ -120,7 +120,7 @@ class Bicache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function inc($key, $offset = 1)
+    protected function doInc($key, $offset = 1)
     {
         $result = $this->master->inc($key, $offset);
 

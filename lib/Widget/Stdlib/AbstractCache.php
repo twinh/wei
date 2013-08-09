@@ -18,6 +18,13 @@ use Widget\AbstractWidget;
 abstract class AbstractCache extends AbstractWidget
 {
     /**
+     * The string prepend to the cache key
+     *
+     * @var string
+     */
+    protected $keyPrefix = '';
+
+    /**
      * {@inheritdoc}
      */
     public function __invoke($key, $value = null, $expire = 0)
@@ -27,6 +34,97 @@ abstract class AbstractCache extends AbstractWidget
         } else {
             return $this->set($key, $value, $expire);
         }
+    }
+
+    /**
+     * Retrieve an item
+     *
+     * ```php
+     * $cache = widget()->cache;
+     *
+     * $cache->get('key'); // => false
+     *
+     * $cache->get('key', function($widget){
+     *      return 'value';
+     * }); // => "value"
+     *
+     * $cache->get('key'); // => "value"
+     * ```
+     *
+     * @param string $key The name of item
+     * @param int $expire The expire seconds of callback return value
+     * @param callback $fn The callback to execute when cache not found
+     * @return mixed
+     */
+    public function get($key, $expire = null, $fn = null)
+    {
+        $key = $this->getKeyWithPrefix($key);
+        $result = $this->doGet($key);
+
+        if (false === $result && null !== $expire) {
+            if (is_callable($expire)) {
+                $fn = $expire;
+                $expire = 0;
+            }
+            $result = call_user_func($fn, $this->widget);
+            $this->set($key, $result, $expire);
+        }
+
+        return $result;
+    }
+
+    public function set($key, $value, $expire = 0)
+    {
+        return $this->doSet($this->getKeyWithPrefix($key), $value, $expire);
+    }
+
+    public function remove($key)
+    {
+        return $this->doRemove($this->getKeyWithPrefix($key));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function exists($key)
+    {
+        return $this->doExists($key);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function add($key, $value, $expire = 0)
+    {
+        return $this->doAdd($key, $value, $expire);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function replace($key, $value, $expire = 0)
+    {
+        return $this->doReplace($key, $value, $expire);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function inc($key, $offset = 1)
+    {
+        return $this->doInc($key, $offset);
+    }
+
+    /**
+     * Decrement an item
+     *
+     * @param  string    $key    The name of item
+     * @param  int       $offset The value to be decreased
+     * @return int|false Returns the new value on success, or false on failure
+     */
+    public function dec($key, $offset = 1)
+    {
+        return $this->inc($key, -$offset);
     }
 
     /**
@@ -57,50 +155,6 @@ abstract class AbstractCache extends AbstractWidget
     }
 
     /**
-     * Retrieve an item
-     *
-     * @param  string      $key The name of item
-     * @return mixed
-     */
-    abstract protected function doGet($key);
-
-    /**
-     * Retrieve an item
-     *
-     * ```php
-     * $cache = widget()->cache;
-     *
-     * $cache->get('key'); // => false
-     *
-     * $cache->get('key', function($widget){
-    *      return 'value';
-     * }); // => "value"
-     *
-     * $cache->get('key'); // => "value"
-     * ```
-     *
-     * @param string $key The name of item
-     * @param int $expire The expire seconds of callback return value
-     * @param callback $fn The callback to execute when cache not found
-     * @return mixed
-     */
-    public function get($key, $expire = null, $fn = null)
-    {
-        $result = $this->doGet($key);
-
-        if (false === $result && null !== $expire) {
-            if (is_callable($expire)) {
-                $fn = $expire;
-                $expire = 0;
-            }
-            $result = call_user_func($fn, $this->widget);
-            $this->set($key, $result, $expire);
-        }
-
-        return $result;
-    }
-
-    /**
      * Get file content with cache
 
      * @param string $file The path of file
@@ -111,7 +165,7 @@ abstract class AbstractCache extends AbstractWidget
     {
         $modifiedTimeKey = $file . '-modifiedTime';
         $contentKey      = $file . '-content';
-        $modifiedTime = filemtime($file);
+        $modifiedTime    = filemtime($file);
 
         if ($modifiedTime > $this->get($modifiedTimeKey)) {
             $content = call_user_func($fn, $file, $this->widget);
@@ -126,6 +180,47 @@ abstract class AbstractCache extends AbstractWidget
     }
 
     /**
+     * Returns the key prefix
+     *
+     * @return string
+     */
+    public function getKeyPrefix()
+    {
+        return $this->keyPrefix;
+    }
+
+    /**
+     * Set the cache key prefix
+     *
+     * @param string $keyPrefix
+     * @return $this
+     */
+    public function setKeyPrefix($keyPrefix)
+    {
+        $this->keyPrefix = $keyPrefix;
+        return $this;
+    }
+
+    /**
+     * Returns the cache key with key prefix
+     *
+     * @param $key
+     * @return string
+     */
+    public function getKeyWithPrefix($key)
+    {
+        return $this->keyPrefix . $key;
+    }
+
+    /**
+     * Retrieve an item
+     *
+     * @param  string      $key The name of item
+     * @return mixed
+     */
+    abstract protected function doGet($key);
+
+    /**
      * Store an item
      *
      * @param  string $key    The name of item
@@ -133,7 +228,7 @@ abstract class AbstractCache extends AbstractWidget
      * @param  int    $expire The expire seconds, defaults to 0, means never expired
      * @return bool
      */
-    abstract public function set($key, $value, $expire = 0);
+    abstract protected function doSet($key, $value, $expire = 0);
 
     /**
      * Remove an item
@@ -141,7 +236,7 @@ abstract class AbstractCache extends AbstractWidget
      * @param  string $key The name of item
      * @return bool
      */
-    abstract public function remove($key);
+    abstract protected function doRemove($key);
 
     /**
      * Check if an item is exists
@@ -149,7 +244,7 @@ abstract class AbstractCache extends AbstractWidget
      * @param string $key
      * @return bool
      */
-    abstract public function exists($key);
+    abstract protected function doExists($key);
 
     /**
      * Add an item
@@ -159,7 +254,7 @@ abstract class AbstractCache extends AbstractWidget
      * @param  int    $expire The expire seconds, defaults to 0, means never expired
      * @return bool
      */
-    abstract public function add($key, $value, $expire = 0);
+    abstract protected function doAdd($key, $value, $expire = 0);
 
     /**
      * Replace an existing item
@@ -169,7 +264,7 @@ abstract class AbstractCache extends AbstractWidget
      * @param  int    $expire The expire seconds, defaults to 0, means never expired
      * @return bool
      */
-    abstract public function replace($key, $value, $expire = 0);
+    abstract protected function doReplace($key, $value, $expire = 0);
 
     /**
      * Increment an item
@@ -178,19 +273,7 @@ abstract class AbstractCache extends AbstractWidget
      * @param  int       $offset The value to increased
      * @return int|false Returns the new value on success, or false on failure
      */
-    abstract public function inc($key, $offset = 1);
-
-    /**
-     * Decrement an item
-     *
-     * @param  string    $key    The name of item
-     * @param  int       $offset The value to be decreased
-     * @return int|false Returns the new value on success, or false on failure
-     */
-    public function dec($key, $offset = 1)
-    {
-        return $this->inc($key, -$offset);
-    }
+    abstract protected function doInc($key, $offset = 1);
 
     /**
      * Clear all items

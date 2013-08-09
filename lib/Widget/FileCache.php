@@ -76,7 +76,7 @@ class FileCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function set($key, $value, $expire = 0)
+    protected function doSet($key, $value, $expire = 0)
     {
         $file = $this->getFile($key);
 
@@ -89,7 +89,7 @@ class FileCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    protected function doRemove($key)
     {
         $file = $this->getFile($key);
 
@@ -103,7 +103,7 @@ class FileCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    protected function doExists($key)
     {
         $file = $this->getFile($key);
 
@@ -123,7 +123,7 @@ class FileCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function add($key, $value, $expire = 0)
+    protected function doAdd($key, $value, $expire = 0)
     {
         $file = $this->getFile($key);
 
@@ -157,7 +157,7 @@ class FileCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function replace($key, $value, $expire = 0)
+    protected function doReplace($key, $value, $expire = 0)
     {
         $file = $this->getFile($key);
 
@@ -183,7 +183,7 @@ class FileCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function inc($key, $offset = 1)
+    protected function doInc($key, $offset = 1)
     {
         $file = $this->getFile($key);
 

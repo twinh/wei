@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Stdlib\AbstractCache;
 
 /**
- * A cache widget base on Mongodb
+ * A cache widget base on MongoDB
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
@@ -59,7 +59,7 @@ class MongoCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function set($key, $value, $expire = 0)
+    protected function doSet($key, $value, $expire = 0)
     {
         return $this->object->save(array(
             '_id' => $key,
@@ -72,7 +72,7 @@ class MongoCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    protected function doRemove($key)
     {
         return $this->object->remove(array('_id' => $key));;
     }
@@ -80,7 +80,7 @@ class MongoCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    protected function doExists($key)
     {
         $result = $this->object->findOne(array('_id' => $key), array('expire'));
 
@@ -94,7 +94,7 @@ class MongoCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function add($key, $value, $expire = 0)
+    protected function doAdd($key, $value, $expire = 0)
     {
         if ($this->exists($key)) {
             return false;
@@ -106,7 +106,7 @@ class MongoCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function replace($key, $value, $expire = 0)
+    protected function doReplace($key, $value, $expire = 0)
     {
         if ($this->exists($key)) {
             return $this->set($key, $value, $expire);
@@ -118,7 +118,7 @@ class MongoCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function inc($key, $offset = 1)
+    protected function doInc($key, $offset = 1)
     {
         $result = $this->object->findAndModify(
             array('_id' => $key),

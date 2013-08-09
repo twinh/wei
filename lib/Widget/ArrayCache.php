@@ -35,7 +35,7 @@ class ArrayCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function set($key, $value, $expire = 0)
+    public function doSet($key, $value, $expire = 0)
     {
         $this->data[$key] = $value;
         return true;
@@ -44,7 +44,7 @@ class ArrayCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    public function doRemove($key)
     {
         unset($this->data[$key]);
     }
@@ -52,7 +52,7 @@ class ArrayCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    public function doExists($key)
     {
         return array_key_exists($key, $this->data);
     }
@@ -60,7 +60,7 @@ class ArrayCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function add($key, $value, $expire = 0)
+    public function doAdd($key, $value, $expire = 0)
     {
         if ($this->exists($key)) {
             return false;
@@ -73,7 +73,7 @@ class ArrayCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function replace($key, $value, $expire = 0)
+    public function doReplace($key, $value, $expire = 0)
     {
         if (!$this->exists($key)) {
             return false;
@@ -86,7 +86,7 @@ class ArrayCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function inc($key, $offset = 1)
+    public function doInc($key, $offset = 1)
     {
         if ($this->exists($key)) {
             return $this->data[$key] += $offset;
