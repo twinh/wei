@@ -8,6 +8,7 @@
 
 namespace Widget\Stdlib;
 
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Widget\AbstractWidget;
 
 /**
@@ -72,7 +73,11 @@ abstract class AbstractCache extends AbstractWidget
                 $expire = 0;
             }
             $result = call_user_func($fn, $this->widget);
-            $this->set($key, $result, $expire);
+
+            $setResult = $this->set($key, $result, $expire);
+            if (false === $setResult) {
+                throw new \RuntimeException('Fail to store cache from callback');
+            }
         }
 
         return $result;
