@@ -497,8 +497,12 @@ class Db extends AbstractWidget
                 $stmt = $this->pdo->query($sql);
             }
         } catch (\PDOException $e) {
-            $msg = 'An exception occurred while executing "' . $sql . '"';
-            $msg .= ":\n\n". $e->getMessage();
+            $msg = sprintf(
+                'An exception occurred while executing "%s" : %s, with parameters %s',
+                $sql,
+                "\n\n" . $e->getMessage(),
+                json_encode($params)
+            );
             throw new \RuntimeException($msg, 0, $e);
         }
 
