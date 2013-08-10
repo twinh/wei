@@ -166,6 +166,7 @@ class CacheTestCase extends TestCase
         $cache->set('test', 1);
         $this->assertEquals(1, $cache->get('test'));
         $this->assertSame(3, $cache->inc('test', 2));
+
         $this->assertSame(1, $cache->dec('test', 2));
 
         $this->assertEquals(2, $cache->replace('test', 2));

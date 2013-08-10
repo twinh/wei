@@ -33,7 +33,7 @@ class CouchbaseTest extends CacheTestCase
         ));
 
         $cache = $this->widget->newInstance('arrayCache');
-        $this->object = $this->widget->couchbase;
+        $object = $this->object = $this->widget->couchbase;
 
         $couchbase->expects($this->any())
             ->method('get')
@@ -85,14 +85,20 @@ class CouchbaseTest extends CacheTestCase
 
         $couchbase->expects($this->any())
             ->method('setMulti')
-            ->will($this->returnCallback(function($items, $expire = 0) use($cache) {
-                return $cache->setMulti($items, $expire);
+            ->will($this->returnCallback(function($items, $expire = 0) use($cache, $object) {
+                $cache->setKeyPrefix($object->getKeyPrefix());
+                $result = $cache->setMulti($items, $expire);
+                $cache->setKeyPrefix('');
+                return $result;
             }));
 
         $couchbase->expects($this->any())
             ->method('getMulti')
-            ->will($this->returnCallback(function($items) use($cache) {
-                return $cache->getMulti($items);
+            ->will($this->returnCallback(function($items) use($cache, $object) {
+                $cache->setKeyPrefix($object->getKeyPrefix());
+                $result = $cache->getMulti($items);
+                $cache->setKeyPrefix('');
+                return $result;
             }));
     }
 
