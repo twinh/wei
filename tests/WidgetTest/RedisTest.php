@@ -22,12 +22,17 @@ class RedisTest extends CacheTestCase
     public function testIncAndDec()
     {
         $redis = $this->object->getObject();
-
-        // FIXME
-        // Avoid segmentation fault
         $redis->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_NONE);
 
         parent::testIncAndDec();
+    }
+
+    public function testKeyPrefix()
+    {
+        $redis = $this->object->getObject();
+        $redis->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_NONE);
+
+        parent::testKeyPrefix();
     }
 
     public function testGetAndSetObject()
