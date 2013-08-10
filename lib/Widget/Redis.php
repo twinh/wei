@@ -116,7 +116,8 @@ class Redis extends AbstractCache
      */
     public function getMulti(array $keys)
     {
-        return array_combine($keys, $this->object->mGet($keys));
+        $keysWithPrefix = array_map(array($this, 'getKeyWithPrefix'), $keys);
+        return array_combine($keys, $this->object->mGet($keysWithPrefix));
     }
 
     /**
@@ -131,8 +132,11 @@ class Redis extends AbstractCache
      */
     public function setMulti(array $items, $expire = 0)
     {
+        $keys = array_keys($items);
+        $keysWithPrefix = array_map(array($this, 'getKeyWithPrefix'), $keys);
+        $items = array_combine($keysWithPrefix, $items);
         $result = $this->object->mset($items);
-        return array_combine(array_keys($items), array_pad(array(), count($items), $result));
+        return array_combine($keys, array_pad(array(), count($items), $result));
     }
 
     /**
@@ -158,7 +162,7 @@ class Redis extends AbstractCache
     {
         $result = $this->object->setnx($key, $value);
         if (true === $result) {
-            $this->object->expire($key, $expire);
+            $this->object->expire($key, $expire === 0 ? -1 : $expire);
         }
         return $result;
     }
