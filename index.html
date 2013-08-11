@@ -1261,13 +1261,11 @@
 
 <h3>设置和获取缓存</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存,返回true</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">apc</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">);</span>
-<span class="c1">// true</span>
 
-<span class="c1">// 获取缓存</span>
+<span class="c1">// 获取缓存,返回'value'</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">apc</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
-<span class="c1">// value</span>
 </code></pre></div>
 
 <h3>设置60秒后就过期的缓存</h3>
@@ -1283,84 +1281,13 @@
 
 <p><em>无</em></p>
 
+<h3>继承的方法</h3>
+
+<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
+
 <h3>方法</h3>
 
-<h4>apc($key, $value, $expire = 0)</h4>
-
-<p>设置缓存的值</p>
-
-<h5>参数</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>$key</td>
-<td>string</td>
-<td>无</td>
-<td>缓存的键名</td>
-</tr>
-<tr>
-<td>$value</td>
-<td>mixed</td>
-<td>无</td>
-<td>缓存的值,允许任意类型</td>
-</tr>
-<tr>
-<td>$expire</td>
-<td>int</td>
-<td>0</td>
-<td>缓存的有效期,默认为0秒,表示永不过期</td>
-</tr>
-</tbody>
-</table><h4>apc($key)</h4>
-
-<p>获取指定名称的缓存</p>
-
-<h4>apc-&gt;set($key, $value)</h4>
-
-<p>设置缓存的值,同<code>apc($key, $value, $expire = 0)</code></p>
-
-<h4>apc-&gt;get($key)</h4>
-
-<p>获取缓存的值,同<code>apc($key)</code></p>
-
-<h4>apc-&gt;remove($key)</h4>
-
-<p>移除一项缓存</p>
-
-<h4>apc-&gt;exists($key)</h4>
-
-<p>检查缓存是否存在</p>
-
-<h4>apc-&gt;add($key, $value)</h4>
-
-<p>增加一项缓存,如果缓存已存在,返回false</p>
-
-<h4>apc-&gt;replace($key, $value)</h4>
-
-<p>替换一项缓存,如果缓存 <strong>不</strong> 存在,返回false</p>
-
-<h4>apc-&gt;inc($key, $offset = 1)</h4>
-
-<p>增大一项缓存的值</p>
-
-<h4>apc-&gt;dec($key, $offset = 1)</h4>
-
-<p>减小一项缓存的值</p>
-
-<h4>apc-&gt;getMulti($keys)</h4>
-
-<p>批量获取缓存的值</p>
-
-<h4>apc-&gt;setMulti($values)</h4>
-
-<p>批量设置缓存的值</p>
+<p><em>无</em></p>
   </section>
 
 <!-- api/arrayCache
@@ -1379,11 +1306,10 @@
 
 <h3>设置和获取缓存</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存,返回true</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">arrayCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">);</span>
-<span class="c1">// 返回 true</span>
 
-<span class="c1">// 获取缓存</span>
+<span class="c1">// 获取缓存,返回'value'</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">arrayCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
 <span class="c1">// 返回 value</span>
 </code></pre></div>
@@ -1396,61 +1322,13 @@
 
 <p><em>无</em></p>
 
+<h3>继承的方法</h3>
+
+<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
+
 <h3>方法</h3>
 
-<h4>arrayCache ($key, $value)</h4>
-
-<p>设置缓存的值
-<code>php
-widget()-&gt;arrayCache('key', 'value');
-</code></p>
-
-<h4>arrayCache($key)</h4>
-
-<p>获取指定名称的缓存
-<code>php
-widget()-&gt;arrayCache('name');
-</code></p>
-
-<h4>arrayCache-&gt;set($key, $value)</h4>
-
-<p>设置缓存的值</p>
-
-<h4>arrayCache-&gt;get($key)</h4>
-
-<p>获取缓存的值</p>
-
-<h4>arrayCache-&gt;remove($key)</h4>
-
-<p>移除一项缓存</p>
-
-<h4>arrayCache-&gt;exists($key)</h4>
-
-<p>检查缓存是否存在</p>
-
-<h4>arrayCache-&gt;add($key, $value)</h4>
-
-<p>增加一项缓存,如果缓存已存在,返回false</p>
-
-<h4>arrayCache-&gt;replace($key, $value)</h4>
-
-<p>替换一项缓存,如果缓存 <strong>不</strong> 存在,返回false</p>
-
-<h4>arrayCache-&gt;inc($key, $offset = 1)</h4>
-
-<p>增大一项缓存的值</p>
-
-<h4>arrayCache-&gt;dec($key, $offset = 1)</h4>
-
-<p>减小一项缓存的值</p>
-
-<h4>arrayCache-&gt;getMulti($keys)</h4>
-
-<p>批量获取缓存的值</p>
-
-<h4>arrayCache-&gt;setMulti($values)</h4>
-
-<p>批量设置缓存的值</p>
+<p><em>无</em></p>
   </section>
 
 <!-- api/bicache
@@ -1469,13 +1347,11 @@ widget()-&gt;arrayCache('name');
 
 <h3>设置和获取缓存</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存,返回true</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">bicache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">);</span>
-<span class="c1">// 返回 true</span>
 
-<span class="c1">// 获取缓存</span>
+<span class="c1">// 获取缓存,返回'value'</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">bicache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
-<span class="c1">// 返回 value</span>
 </code></pre></div>
 
 <h3>设置60秒后就过期的缓存</h3>
@@ -1522,84 +1398,13 @@ widget()-&gt;arrayCache('name');
 <td>从缓存的类型,推荐使用文件类缓存,如fileCache或dbCache</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table><h3>继承的方法</h3>
 
-<h4>bicache($key, $value, $expire = 0)</h4>
+<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
 
-<p>设置缓存的值</p>
+<h3>方法</h3>
 
-<h5>参数</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>$key</td>
-<td>string</td>
-<td>无</td>
-<td>缓存的键名</td>
-</tr>
-<tr>
-<td>$value</td>
-<td>mixed</td>
-<td>无</td>
-<td>缓存的值,允许任意类型</td>
-</tr>
-<tr>
-<td>$expire</td>
-<td>int</td>
-<td>0</td>
-<td>缓存的有效期,默认为0秒,表示永不过期</td>
-</tr>
-</tbody>
-</table><h4>bicache($key)</h4>
-
-<p>获取指定名称的缓存</p>
-
-<h4>bicache-&gt;set($key, $value, $expire = 0)</h4>
-
-<p>设置缓存的值,同<code>bicache($key, $value, $expire = 0)</code></p>
-
-<h4>bicache-&gt;get($key)</h4>
-
-<p>获取缓存的值,同<code>bicache($key)</code></p>
-
-<h4>bicache-&gt;remove($key)</h4>
-
-<p>移除一项缓存</p>
-
-<h4>bicache-&gt;exists($key)</h4>
-
-<p>检查缓存是否存在</p>
-
-<h4>bicache-&gt;add($key, $value)</h4>
-
-<p>增加一项缓存,如果缓存已存在,返回false</p>
-
-<h4>bicache-&gt;replace($key, $value)</h4>
-
-<p>替换一项缓存,如果缓存不存在,返回false</p>
-
-<h4>bicache-&gt;inc($key, $offset = 1)</h4>
-
-<p>增大一项缓存的值</p>
-
-<h4>bicache-&gt;dec($key, $offset = 1)</h4>
-
-<p>减小一项缓存的值</p>
-
-<h4>bicache-&gt;getMulti($keys)</h4>
-
-<p>批量获取缓存的值</p>
-
-<h4>bicache-&gt;setMulti($values)</h4>
-
-<p>批量设置缓存的值</p>
+<p><em>无</em></p>
   </section>
 
 <!-- api/couchbase
@@ -1613,13 +1418,11 @@ widget()-&gt;arrayCache('name');
 
 <h3>设置和获取缓存</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存,返回true</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">couchbase</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">);</span>
-<span class="c1">// 返回 true</span>
 
-<span class="c1">// 获取缓存</span>
+<span class="c1">// 获取缓存,返回'value'</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">couchbase</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
-<span class="c1">// 返回 value</span>
 </code></pre></div>
 
 <h3>设置60秒后就过期的缓存</h3>
@@ -1672,84 +1475,19 @@ widget()-&gt;arrayCache('name');
 <td>是否使用长连接</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table><h3>继承的方法</h3>
 
-<h4>couchbase($key, $value, $expire = 0)</h4>
+<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
 
-<p>设置缓存的值</p>
+<h3>方法</h3>
 
-<h5>参数</h5>
+<h4>couchbase-&gt;getObject()</h4>
 
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>$key</td>
-<td>string</td>
-<td>无</td>
-<td>缓存的键名</td>
-</tr>
-<tr>
-<td>$value</td>
-<td>mixed</td>
-<td>无</td>
-<td>缓存的值,允许任意类型</td>
-</tr>
-<tr>
-<td>$expire</td>
-<td>int</td>
-<td>0</td>
-<td>缓存的有效期,默认为0秒,表示永不过期</td>
-</tr>
-</tbody>
-</table><h4>couchbase($key)</h4>
+<p>获取原生Couchbase对象</p>
 
-<p>获取指定名称的缓存</p>
+<h4>couchbase-&gt;setObject($couchbase)</h4>
 
-<h4>couchbase-&gt;set($key, $value, $expire = 0)</h4>
-
-<p>设置缓存的值,同<code>couchbase($key, $value, $expire = 0)</code></p>
-
-<h4>couchbase-&gt;get($key)</h4>
-
-<p>获取缓存的值,同<code>couchbase($key)</code></p>
-
-<h4>couchbase-&gt;remove($key)</h4>
-
-<p>移除一项缓存</p>
-
-<h4>couchbase-&gt;exists($key)</h4>
-
-<p>检查缓存是否存在</p>
-
-<h4>couchbase-&gt;add($key, $value)</h4>
-
-<p>增加一项缓存,如果缓存已存在,返回false</p>
-
-<h4>couchbase-&gt;replace($key, $value)</h4>
-
-<p>替换一项缓存,如果缓存不存在,返回false</p>
-
-<h4>couchbase-&gt;inc($key, $offset = 1)</h4>
-
-<p>增大一项缓存的值</p>
-
-<h4>couchbase-&gt;dec($key, $offset = 1)</h4>
-
-<p>减小一项缓存的值</p>
-
-<h4>couchbase-&gt;getMulti($keys)</h4>
-
-<p>批量获取缓存的值</p>
-
-<h4>couchbase-&gt;setMulti($values)</h4>
-
-<p>批量设置缓存的值</p>
+<p>设置原生Couchbase对象</p>
   </section>
 
 <!-- api/dbCache
@@ -1759,19 +1497,17 @@ widget()-&gt;arrayCache('name');
 
 <p>设置或获取一项缓存,缓存数据存储于数据库中</p>
 
-<p>dbCache微件依赖于db微件</p>
+<p>dbCache微件依赖于<a href="db.md">db</a>微件</p>
 
 <h2>案例</h2>
 
 <h3>设置和获取缓存</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存,返回true</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">dbCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">);</span>
-<span class="c1">// 返回 true</span>
 
-<span class="c1">// 获取缓存</span>
+<span class="c1">// 获取缓存,返回'value'</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">dbCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
-<span class="c1">// 返回 value</span>
 </code></pre></div>
 
 <h3>设置60秒后就过期的缓存</h3>
@@ -1798,84 +1534,13 @@ widget()-&gt;arrayCache('name');
 <td>cache</td>
 <td>缓存数据表名称</td>
 </tr></tbody>
-</table><h3>方法</h3>
+</table><h3>继承的方法</h3>
 
-<h4>dbCache($key, $value, $expire = 0)</h4>
+<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
 
-<p>设置缓存的值</p>
+<h3>方法</h3>
 
-<h5>参数</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>$key</td>
-<td>string</td>
-<td>无</td>
-<td>缓存的键名</td>
-</tr>
-<tr>
-<td>$value</td>
-<td>mixed</td>
-<td>无</td>
-<td>缓存的值,允许任意类型</td>
-</tr>
-<tr>
-<td>$expire</td>
-<td>int</td>
-<td>0</td>
-<td>缓存的有效期,默认为0秒,表示永不过期</td>
-</tr>
-</tbody>
-</table><h4>dbCache($key)</h4>
-
-<p>获取指定名称的缓存</p>
-
-<h4>dbCache-&gt;set($key, $value, $expire = 0)</h4>
-
-<p>设置缓存的值,同<code>dbCache($key, $value, $expire = 0)</code></p>
-
-<h4>dbCache-&gt;get($key)</h4>
-
-<p>获取缓存的值,同<code>dbCache($key)</code></p>
-
-<h4>dbCache-&gt;remove($key)</h4>
-
-<p>移除一项缓存</p>
-
-<h4>dbCache-&gt;exists($key)</h4>
-
-<p>检查缓存是否存在</p>
-
-<h4>dbCache-&gt;add($key, $value)</h4>
-
-<p>增加一项缓存,如果缓存已存在,返回false</p>
-
-<h4>dbCache-&gt;replace($key, $value)</h4>
-
-<p>替换一项缓存,如果缓存不存在,返回false</p>
-
-<h4>dbCache-&gt;inc($key, $offset = 1)</h4>
-
-<p>增大一项缓存的值</p>
-
-<h4>dbCache-&gt;dec($key, $offset = 1)</h4>
-
-<p>减小一项缓存的值</p>
-
-<h4>dbCache-&gt;getMulti($keys)</h4>
-
-<p>批量获取缓存的值</p>
-
-<h4>dbCache-&gt;setMulti($values)</h4>
-
-<p>批量设置缓存的值</p>
+<p><em>无</em></p>
   </section>
 
 <!-- api/fileCache
@@ -1945,13 +1610,11 @@ widget()-&gt;arrayCache('name');
 
 <h3>设置和获取缓存</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存,返回true</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">memcache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">);</span>
-<span class="c1">// 返回 true</span>
 
-<span class="c1">// 获取缓存</span>
+<span class="c1">// 获取缓存,返回'value'</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">memcache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
-<span class="c1">// 返回 value</span>
 </code></pre></div>
 
 <h3>设置60秒后就过期的缓存</h3>
@@ -2022,84 +1685,19 @@ widget()-&gt;arrayCache('name');
 <td>是否使用长连接</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table><h3>继承的方法</h3>
 
-<h4>memcache($key, $value, $expire = 0)</h4>
+<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
 
-<p>设置缓存的值</p>
+<h3>方法</h3>
 
-<h5>参数</h5>
+<h4>memcache-&gt;getObject()</h4>
 
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>$key</td>
-<td>string</td>
-<td>无</td>
-<td>缓存的键名</td>
-</tr>
-<tr>
-<td>$value</td>
-<td>mixed</td>
-<td>无</td>
-<td>缓存的值,允许任意类型</td>
-</tr>
-<tr>
-<td>$expire</td>
-<td>int</td>
-<td>0</td>
-<td>缓存的有效期,默认为0秒,表示永不过期</td>
-</tr>
-</tbody>
-</table><h4>memcache($key)</h4>
+<p>获取原生Memcache对象</p>
 
-<p>获取指定名称的缓存</p>
+<h4>memcache-&gt;setObject($memcache)</h4>
 
-<h4>memcache-&gt;set($key, $value)</h4>
-
-<p>设置缓存的值,同<code>memcache($key, $value, $expire = 0)</code></p>
-
-<h4>memcache-&gt;get($key)</h4>
-
-<p>获取缓存的值,同<code>memcache($key)</code></p>
-
-<h4>memcache-&gt;remove($key)</h4>
-
-<p>移除一项缓存</p>
-
-<h4>memcache-&gt;exists($key)</h4>
-
-<p>检查缓存是否存在</p>
-
-<h4>memcache-&gt;add($key, $value)</h4>
-
-<p>增加一项缓存,如果缓存已存在,返回false</p>
-
-<h4>memcache-&gt;replace($key, $value)</h4>
-
-<p>替换一项缓存,如果缓存不存在,返回false</p>
-
-<h4>memcache-&gt;inc($key, $offset = 1)</h4>
-
-<p>增大一项缓存的值</p>
-
-<h4>memcache-&gt;dec($key, $offset = 1)</h4>
-
-<p>减小一项缓存的值</p>
-
-<h4>memcache-&gt;getMulti($keys)</h4>
-
-<p>批量获取缓存的值</p>
-
-<h4>memcache-&gt;setMulti($values)</h4>
-
-<p>批量设置缓存的值</p>
+<p>设置原生Memcache对象</p>
   </section>
 
 <!-- api/memcached
@@ -2113,13 +1711,11 @@ widget()-&gt;arrayCache('name');
 
 <h3>设置和获取缓存</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存,返回true</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">memcached</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">);</span>
-<span class="c1">// 返回 true</span>
 
-<span class="c1">// 获取缓存</span>
+<span class="c1">// 获取缓存,返回'value'</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">memcached</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
-<span class="c1">// 返回 value</span>
 </code></pre></div>
 
 <h3>设置60秒后就过期的缓存</h3>
@@ -2178,84 +1774,19 @@ widget()-&gt;arrayCache('name');
 <td>memcached服务器端口</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table><h3>继承的方法</h3>
 
-<h4>memcached($key, $value, $expire = 0)</h4>
+<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
 
-<p>设置缓存的值</p>
+<h3>方法</h3>
 
-<h5>参数</h5>
+<h4>memcached-&gt;getObject()</h4>
 
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>$key</td>
-<td>string</td>
-<td>无</td>
-<td>缓存的键名</td>
-</tr>
-<tr>
-<td>$value</td>
-<td>mixed</td>
-<td>无</td>
-<td>缓存的值,允许任意类型</td>
-</tr>
-<tr>
-<td>$expire</td>
-<td>int</td>
-<td>0</td>
-<td>缓存的有效期,默认为0秒,表示永不过期</td>
-</tr>
-</tbody>
-</table><h4>memcached($key)</h4>
+<p>获取原生Memcached对象</p>
 
-<p>获取指定名称的缓存</p>
+<h4>memcached-&gt;setObject($memcached)</h4>
 
-<h4>memcached-&gt;set($key, $value)</h4>
-
-<p>设置缓存的值,同<code>memcached($key, $value, $expire = 0)</code></p>
-
-<h4>memcached-&gt;get($key)</h4>
-
-<p>获取缓存的值,同<code>memcached($key)</code></p>
-
-<h4>memcached-&gt;remove($key)</h4>
-
-<p>移除一项缓存</p>
-
-<h5>memcached-&gt;exists($key)</h5>
-
-<p>检查缓存是否存在</p>
-
-<h5>memcached-&gt;add($key, $value)</h5>
-
-<p>增加一项缓存,如果缓存已存在,返回false</p>
-
-<h4>memcached-&gt;replace($key, $value)</h4>
-
-<p>替换一项缓存,如果缓存不存在,返回false</p>
-
-<h4>memcached-&gt;inc($key, $offset = 1)</h4>
-
-<p>增大一项缓存的值</p>
-
-<h4>memcached-&gt;dec($key, $offset = 1)</h4>
-
-<p>减小一项缓存的值</p>
-
-<h4>memcached-&gt;getMulti($keys)</h4>
-
-<p>批量获取缓存的值</p>
-
-<h4>memcached-&gt;setMulti($values)</h4>
-
-<p>批量设置缓存的值</p>
+<p>设置原生Memcached对象</p>
   </section>
 
 <!-- api/mongoCache
@@ -2269,13 +1800,11 @@ widget()-&gt;arrayCache('name');
 
 <h3>设置和获取缓存</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存,返回true</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">mongoCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">);</span>
-<span class="c1">// 返回 true</span>
 
-<span class="c1">// 获取缓存</span>
+<span class="c1">// 获取缓存,返回'value'</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">mongoCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
-<span class="c1">// 返回 value</span>
 </code></pre></div>
 
 <h3>设置60秒后就过期的缓存</h3>
@@ -2322,84 +1851,13 @@ widget()-&gt;arrayCache('name');
 <td>存储缓存数据的集合的名称</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table><h3>继承的方法</h3>
 
-<h4>mongoCache($key, $value, $expire = 0)</h4>
+<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
 
-<p>设置缓存的值</p>
+<h3>方法</h3>
 
-<h5>参数</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>$key</td>
-<td>string</td>
-<td>无</td>
-<td>缓存的键名</td>
-</tr>
-<tr>
-<td>$value</td>
-<td>mixed</td>
-<td>无</td>
-<td>缓存的值,允许任意类型</td>
-</tr>
-<tr>
-<td>$expire</td>
-<td>int</td>
-<td>0</td>
-<td>缓存的有效期,默认为0秒,表示永不过期</td>
-</tr>
-</tbody>
-</table><h4>mongoCache($key)</h4>
-
-<p>获取指定名称的缓存</p>
-
-<h4>mongoCache-&gt;set($key, $value, $expire = 0)</h4>
-
-<p>设置缓存的值,同<code>mongoCache($key, $value, $expire = 0)</code></p>
-
-<h4>mongoCache-&gt;get($key)</h4>
-
-<p>获取缓存的值,同<code>mongoCache($key)</code></p>
-
-<h4>mongoCache-&gt;remove($key)</h4>
-
-<p>移除一项缓存</p>
-
-<h4>mongoCache-&gt;exists($key)</h4>
-
-<p>检查缓存是否存在</p>
-
-<h4>mongoCache-&gt;add($key, $value)</h4>
-
-<p>增加一项缓存,如果缓存已存在,返回false</p>
-
-<h4>mongoCache-&gt;replace($key, $value)</h4>
-
-<p>替换一项缓存,如果缓存不存在,返回false</p>
-
-<h4>mongoCache-&gt;inc($key, $offset = 1)</h4>
-
-<p>增大一项缓存的值</p>
-
-<h4>mongoCache-&gt;dec($key, $offset = 1)</h4>
-
-<p>减小一项缓存的值</p>
-
-<h4>mongoCache-&gt;getMulti($keys)</h4>
-
-<p>批量获取缓存的值</p>
-
-<h4>mongoCache-&gt;setMulti($values)</h4>
-
-<p>批量设置缓存的值</p>
+<p><em>无</em></p>
   </section>
 
 <!-- api/redis
@@ -2413,13 +1871,11 @@ widget()-&gt;arrayCache('name');
 
 <h3>设置和获取缓存</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存,返回true</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">redis</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">);</span>
-<span class="c1">// 返回 true</span>
 
-<span class="c1">// 获取缓存</span>
+<span class="c1">// 获取缓存,返回'value'</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">redis</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
-<span class="c1">// 返回 value</span>
 </code></pre></div>
 
 <h3>设置60秒后就过期的缓存</h3>
