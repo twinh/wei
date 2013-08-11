@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Stdlib\AbstractCache;
 
 /**
- * A cache widget base on MongoDB
+ * A cache widget that stores data in MongoDB
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
@@ -74,7 +74,7 @@ class MongoCache extends AbstractCache
      */
     protected function doRemove($key)
     {
-        return $this->object->remove(array('_id' => $key));;
+        return $this->object->remove(array('_id' => $key));
     }
 
     /**
@@ -96,10 +96,10 @@ class MongoCache extends AbstractCache
      */
     protected function doAdd($key, $value, $expire = 0)
     {
-        if ($this->exists($key)) {
+        if ($this->doExists($key)) {
             return false;
         } else {
-            return $this->set($key, $value, $expire);
+            return $this->doSet($key, $value, $expire);
         }
     }
 
@@ -108,25 +108,23 @@ class MongoCache extends AbstractCache
      */
     protected function doReplace($key, $value, $expire = 0)
     {
-        if ($this->exists($key)) {
-            return $this->set($key, $value, $expire);
+        if ($this->doExists($key)) {
+            return $this->doSet($key, $value, $expire);
         } else {
             return false;
         }
     }
 
     /**
+     * Note: This method is not an atomic operation
+     *
      * {@inheritdoc}
      */
     protected function doInc($key, $offset = 1)
     {
-        $result = $this->object->findAndModify(
-            array('_id' => $key),
-            array('$inc' => array('value' => $offset)),
-            array(),
-            array('upsert' => true)
-        );
-        return $result ? $result['value'] + $offset : $offset;
+        $value = $this->doGet($key) + $offset;
+
+        return $this->doSet($key, $value) ? $value : false;
     }
 
     /**
@@ -156,7 +154,6 @@ class MongoCache extends AbstractCache
     public function setObject(\MongoCollection $object)
     {
         $this->object = $object;
-
         return $this;
     }
 }
