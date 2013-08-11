@@ -743,14 +743,7 @@
   <section id="cache">
   <div class="page-header"><h1>Cache</h1></div>
 
-<p>缓存数据管理</p>
-
-<p>使用<code>cache</code>微件会让你的代码更加灵活自由</p>
-
-<p>你可以不用关注缓存的类型,并且可以根据需求或代码运行环境快速切换缓存类型,同时不用过多改动已有的代码.</p>
-
-<p>Widget提供了多个PHP流行的后端缓存.这里有apc,redis,memcached等主流缓存,也有简单的文件缓存fileCache,
-可用于简单数据分析的数据库缓存dbCache等等.所有缓存拥有一致的接口,可以随意替换.</p>
+<p>缓存数据管理,可设定Memcached,Redis,APC,文件等作为缓存驱动</p>
 
 <h2>案例</h2>
 
@@ -1311,7 +1304,6 @@
 
 <span class="c1">// 获取缓存,返回'value'</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">arrayCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
-<span class="c1">// 返回 value</span>
 </code></pre></div>
 
 <p>更多案例请查看"<a href="../book/cache.md">缓存</a>"章节</p>
