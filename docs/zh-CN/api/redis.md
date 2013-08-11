@@ -8,13 +8,11 @@ Redis
 
 ### 设置和获取缓存
 ```php
-// 设置缓存
+// 设置缓存,返回true
 widget()->redis('key', 'value');
-// 返回 true
 
-// 获取缓存
+// 获取缓存,返回'value'
 widget()->redis('key');
-// 返回 value
 ```
 
 ### 设置60秒后就过期的缓存
