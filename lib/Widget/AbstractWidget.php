@@ -16,21 +16,21 @@ namespace Widget;
  * Cache
  * @property Cache      $cache A cache widget proxy
  * @method   mixed      cache($key, $value = null, $expire = 0) Retrieve or store an item by cache
- * @property ArrayCache $arrayCache  A cache widget stored data in PHP array
+ * @property ArrayCache $arrayCache  A cache widget that stored data in PHP array
  * @method   mixed      arrayCache($key, $value = null, $expire = 0) Retrieve or store an item by array cache
- * @property Apc        $apc The PHP APC cache widget
+ * @property Apc        $apc A cache widget that stored data in PHP APC
  * @method   mixed      apc($key, $value = null, $expire = 0) Retrieve or store an item
- * @property DbCache    $dbCache A database cache widget
+ * @property DbCache    $dbCache A cache widget that stored data in databases
  * @method   mixed      dbCache($key, $value = null, $expire = 0) Retrieve or store an item by database cache
- * @property FileCache  $fileCache A file cache widget
+ * @property FileCache  $fileCache A cache widget that stored data in files
  * @method   mixed      fileCache($key, $value = null, $expire = 0) Retrieve or store an item by file
- * @property Memcache   $memcache A cache widget base on Memcache
+ * @property Memcache   $memcache A cache widget that stored data in Memcache
  * @method   mixed      memcache($key, $value = null, $expire = 0) Retrieve or store an item by Memcache
- * @property Memcached  $memcached A cache widget base on Memcached
+ * @property Memcached  $memcached A cache widget that stored data in Memcached
  * @method   mixed      memcached($key, $value = null, $expire = 0) Retrieve or store an item by Memcached
  * @property Couchbase  $couchbase A cache widget base on Couchbase
  * @method   mixed      couchbase($key, $value = null, $expire = 0) Retrieve or store an item by Couchbase
- * @property redis      $redis A cache widget base on Redis
+ * @property redis      $redis A cache widget that stores data in Redis
  * @method   mixed      redis($key, $value = null, $expire = 0) Retrieve or store an item by Redis
  * @property Bicache    $bicache A two-level cache widget
  * @method   mixed      bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache

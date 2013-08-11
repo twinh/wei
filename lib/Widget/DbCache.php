@@ -10,7 +10,7 @@ namespace Widget;
 use Widget\Stdlib\AbstractCache;
 
 /**
- * A database cache widget
+ * A cache widget that stored data in databases
  *
  * @author  Twin Huang <twinhuang@qq.com>
  */

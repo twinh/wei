@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Stdlib\AbstractCache;
 
 /**
- * A cache widget base on Couchbase
+ * A cache widget that stored data in Couchbase
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        https://github.com/couchbase/php-ext-couchbase

@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Stdlib\AbstractCache;
 
 /**
- * A file cache widget
+ * A cache widget that stored data in files
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

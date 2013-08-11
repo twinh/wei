@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Stdlib\AbstractCache;
 
 /**
- * A cache widget that stored data in Redis server
+ * A cache widget that stored data in Redis
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

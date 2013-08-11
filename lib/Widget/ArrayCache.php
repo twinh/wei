@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Stdlib\AbstractCache;
 
 /**
- * A cache widget stored data in PHP array
+ * A cache widget that stored data in PHP array
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
