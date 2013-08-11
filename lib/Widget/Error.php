@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * A widget that handles exception and display pretty exception message
  *
- * @property    Request $request The HTTP request widget
  * @property    Logger $logger The logger widget
  * @property    Response $response The HTTP response widget
  */
@@ -220,7 +219,6 @@ class Error extends AbstractWidget
     public function internalHandleException(\Exception $exception)
     {
         $debug = $this->widget->inDebug();
-        $ajax = $this->request->inAjax();
         $code = $exception->getCode();
 
         // HTTP status code
@@ -233,9 +231,9 @@ class Error extends AbstractWidget
             $this->response->setStatusCode($code)->send();
             $this->logger->critical((string)$exception);
 
-            $this->renderException($exception, $debug, $ajax);
+            $this->renderException($exception, $debug);
         } catch (\Exception $e) {
-            $this->renderException($e, $debug, $ajax);
+            $this->renderException($e, $debug);
         }
     }
 
@@ -244,9 +242,8 @@ class Error extends AbstractWidget
      *
      * @param \Exception $exception
      * @param bool $debug Whether show debug trace
-     * @param bool $ajax Whether return json instead html string
      */
-    public function renderException(\Exception $exception, $debug, $ajax)
+    public function renderException(\Exception $exception, $debug)
     {
         $code       = $exception->getCode();
         $file       = $exception->getFile();
@@ -271,24 +268,12 @@ class Error extends AbstractWidget
             $detail = $this->detail;
         }
 
-        if ($ajax) {
-            $json = array(
-                'code'      => -($code ? abs($code) : 500),
-                'message'   => $message
-            );
-            $debug && $json += array(
-                'detail'    => $detail,
-                'trace'     => $trace
-            );
-            echo json_encode($json);
-        } else {
-            // File Information
-            $mtime = date('Y-m-d H:i:s', filemtime($file));
-            $fileInfo = $this->getFileCode($file, $line);
+        // File Information
+        $mtime = date('Y-m-d H:i:s', filemtime($file));
+        $fileInfo = $this->getFileCode($file, $line);
 
-            // Display view file
-            require __DIR__ . '/Resource/views/error.php';
-        }
+        // Display view file
+        require __DIR__ . '/Resource/views/error.php';
     }
 
     /**

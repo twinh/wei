@@ -39,25 +39,11 @@ class ErrorTest extends TestCase
         $this->createErrorView('test exception');
     }
 
-    public function testAjaxException()
-    {
-        $this->server->set('HTTP_X_REQUESTED_WITH', 'xmlhttprequest');
-
-        ob_start();
-        $this->createErrorView('ajax error', 250);
-        $json = json_decode(ob_get_clean(), true);
-
-        $this->assertSame(json_last_error(), JSON_ERROR_NONE);
-        $this->assertEquals($json['message'], 'ajax error');
-        $this->assertEquals($json['code'], -250);
-        $this->assertContains('Threw by Exception in', $json['detail']);
-    }
-
     public function testErrorHandler()
     {
         error_reporting(0);
 
-        // Cover \Widget\Error::hanldeError
+        // Cover \Widget\Error::handleError
         $array['key'];
 
         error_reporting(-1);
