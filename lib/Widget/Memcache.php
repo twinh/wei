@@ -175,16 +175,12 @@ class Memcache extends AbstractCache
     /**
      * Set memcache object
      *
-     * @param null|\Memcache $object
+     * @param \Memcache $object
      * @return \Memcache
      */
-    public function setObject(\Memcache $object = null)
+    public function setObject(\Memcache $object)
     {
-        if ($object) {
-            $this->object = $object;
-        } else {
-            $this->object = new \Memcache;
-        }
+        $this->object = $object;
         return $this;
     }
 }

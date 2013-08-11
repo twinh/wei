@@ -179,16 +179,12 @@ class Memcached extends AbstractCache
     /**
      * Set memcached object
      *
-     * @param null|\Memcached $object
+     * @param \Memcached $object
      * @return Memcached
      */
-    public function setObject(\Memcached $object = null)
+    public function setObject(\Memcached $object)
     {
-        if ($object) {
-            $this->object = $object;
-        } else {
-            $this->object = new \Memcached;
-        }
+        $this->object = $object;
         return $this;
     }
 }
