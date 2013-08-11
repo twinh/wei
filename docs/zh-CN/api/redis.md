@@ -36,51 +36,16 @@ prot       | int          | 6379           | Redis所在的服务器端口
 timeout    | float        | 0.0            | 连接服务器的超时秒数
 persistent | bool         | true           | 是否使用长连接
 object     | \Redis       | 无             | 原始的Redis对象
+auth 	   | string 	  | 无 			   | Redis服务器的验证密码
+
+### 继承的方法
+
+通用方法请查看[cache](cache.md#通用方法)微件文档
 
 ### 方法
 
-#### redis($key, $value, $expire = 0)
-设置缓存的值
+#### redis->getObject()
+获取原生Redis对象
 
-返回: `bool` 是否设置成功
-
-参数
-
-名称      | 类型      | 默认值    | 说明
-----------|-----------|-----------|------
-$key      | string    | 无        | 缓存的键名
-$value    | mixed     | 无        | 缓存的值,允许任意类型
-$expire   | int       | 0         | 缓存的有效期,默认为0秒,表示永不过期
-
-#### redis($key)
-获取指定名称的缓存
-
-#### redis->set($key, $value, $expire = 0)
-设置缓存的值,同`redis($key, $value, $expire = 0)`
-
-#### redis->get($key)
-获取缓存的值,同`redis($key)`
-
-#### redis->remove($key)
-移除一项缓存
-
-#### redis->exists($key)
-检查缓存是否存在
-
-#### redis->add($key, $value)
-增加一项缓存,如果缓存已存在,返回false
-
-#### redis->replace($key, $value)
-替换一项缓存,如果缓存不存在,返回false
-
-#### redis->inc($key, $offset = 1)
-增大一项缓存的值
-
-#### redis->dec($key, $offset = 1)
-减小一项缓存的值
-
-#### redis->getMulti($keys)
-批量获取缓存的值
-
-#### redis->setMulti($values)
-批量设置缓存的值
+#### redis->setObject($redis)
+设置原生Redis对象

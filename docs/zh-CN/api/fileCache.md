@@ -8,13 +8,11 @@ FileCache
 
 ### 设置和获取文件缓存
 ```php
-// 设置缓存
+// 设置缓存,返回true
 widget()->fileCache('key', 'value');
-// true
 
-// 获取缓存
+// 获取缓存,返回'value'
 widget()->fileCache('key');
-// value
 ```
 
 更多案例请查看"[缓存](cache.md#案例)"章节
