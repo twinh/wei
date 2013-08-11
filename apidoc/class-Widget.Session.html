@@ -7,7 +7,7 @@
 	<title>Class Widget\Session | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?2084780333"></script>
+	<script type="text/javascript" src="elementlist.js?4045824885"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -53,6 +53,7 @@
 				<li><a href="class-Widget.Call.html">Call</a></li>
 				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
 				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Widget.Counter.html">Counter</a></li>
 				<li><a href="class-Widget.Db.html">Db</a></li>
 				<li><a href="class-Widget.Dbal.html">Dbal</a></li>
 				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
@@ -193,7 +194,7 @@
 				<b>Author:</b>
 				Twin Huang &lt;<a
 href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-Widget.Session.html#13-135" title="Go to source code">Session.php</a><br />
+		<b>Located at</b> <a href="source-class-Widget.Session.html#13-139" title="Go to source code">Session.php</a><br />
 	</div>
 
 
@@ -255,7 +256,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_start">#</a>
-		<code><a href="source-class-Widget.Session.html#54-77" title="Go to source code">start</a>( )</code>
+		<code><a href="source-class-Widget.Session.html#54-81" title="Go to source code">start</a>( )</code>
 
 		<div class="description short">
 			
@@ -296,7 +297,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#___invoke">#</a>
-		<code><a href="source-class-Widget.Session.html#79-93" title="Go to source code">__invoke</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Session.html#83-97" title="Go to source code">__invoke</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -342,7 +343,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_get">#</a>
-		<code><a href="source-class-Widget.Session.html#95-105" title="Go to source code">get</a>( <span>string <var>$key</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Session.html#99-109" title="Go to source code">get</a>( <span>string <var>$key</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -388,7 +389,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_destroy">#</a>
-		<code><a href="source-class-Widget.Session.html#107-119" title="Go to source code">destroy</a>( )</code>
+		<code><a href="source-class-Widget.Session.html#111-123" title="Go to source code">destroy</a>( )</code>
 
 		<div class="description short">
 			
@@ -425,7 +426,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setInis">#</a>
-		<code><a href="source-class-Widget.Session.html#121-134" title="Go to source code">setInis</a>( <span>array <var>$inis</var></span> )</code>
+		<code><a href="source-class-Widget.Session.html#125-138" title="Go to source code">setInis</a>( <span>array <var>$inis</var></span> )</code>
 
 		<div class="description short">
 			
@@ -569,19 +570,19 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		<td class="name">
 				<a href="source-class-Widget.Session.html#20-25" title="Go to source code"><var>$namespace</var></a>
 		</td>
-		<td class="value"><code><span class="php-quote">'widget'</span></code></td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
 		<td class="description"><div>
 			<a href="#$namespace" class="anchor">#</a>
 
 			<div class="description short">
 				
-<p>Current namespace to store session data</p>
+<p>The namespace to store session data, disable on default</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>Current namespace to store session data</p>
+<p>The namespace to store session data, disable on default</p>
 
 
 			</div>

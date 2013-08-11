@@ -7,7 +7,7 @@
 	<title>Class Widget\FileCache | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?2084780333"></script>
+	<script type="text/javascript" src="elementlist.js?4045824885"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -53,6 +53,7 @@
 				<li><a href="class-Widget.Call.html">Call</a></li>
 				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
 				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Widget.Counter.html">Counter</a></li>
 				<li><a href="class-Widget.Db.html">Db</a></li>
 				<li><a href="class-Widget.Dbal.html">Dbal</a></li>
 				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
@@ -145,7 +146,7 @@
 
 	<div class="description">
 	
-<p>A file cache widget</p>
+<p>A cache widget that stored data in files</p>
 
 	</div>
 
@@ -187,7 +188,7 @@
 				<b>Author:</b>
 				Twin Huang &lt;<a
 href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-Widget.FileCache.html#13-354" title="Go to source code">FileCache.php</a><br />
+		<b>Located at</b> <a href="source-class-Widget.FileCache.html#13-355" title="Go to source code">FileCache.php</a><br />
 	</div>
 
 
@@ -280,18 +281,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="set" id="_set">
+	<tr data-order="doSet" id="_doSet">
 
 		<td class="attributes"><code>
-			 public 
+			 protected 
 			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_set">#</a>
-		<code><a href="source-class-Widget.FileCache.html#76-86" title="Go to source code">set</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+		<a class="anchor" href="#_doSet">#</a>
+		<code><a href="source-class-Widget.FileCache.html#76-86" title="Go to source code">doSet</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
 
 		<div class="description short">
 			
@@ -326,18 +327,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="remove" id="_remove">
+	<tr data-order="doRemove" id="_doRemove">
 
 		<td class="attributes"><code>
-			 public 
+			 protected 
 			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_remove">#</a>
-		<code><a href="source-class-Widget.FileCache.html#89-101" title="Go to source code">remove</a>( <span>string <var>$key</var></span> )</code>
+		<a class="anchor" href="#_doRemove">#</a>
+		<code><a href="source-class-Widget.FileCache.html#88-100" title="Go to source code">doRemove</a>( <span>string <var>$key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -368,18 +369,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="exists" id="_exists">
+	<tr data-order="doExists" id="_doExists">
 
 		<td class="attributes"><code>
-			 public 
+			 protected 
 			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_exists">#</a>
-		<code><a href="source-class-Widget.FileCache.html#103-121" title="Go to source code">exists</a>( <span>string <var>$key</var></span> )</code>
+		<a class="anchor" href="#_doExists">#</a>
+		<code><a href="source-class-Widget.FileCache.html#102-120" title="Go to source code">doExists</a>( <span>string <var>$key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -410,18 +411,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="add" id="_add">
+	<tr data-order="doAdd" id="_doAdd">
 
 		<td class="attributes"><code>
-			 public 
+			 protected 
 			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_add">#</a>
-		<code><a href="source-class-Widget.FileCache.html#123-155" title="Go to source code">add</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+		<a class="anchor" href="#_doAdd">#</a>
+		<code><a href="source-class-Widget.FileCache.html#122-154" title="Go to source code">doAdd</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
 
 		<div class="description short">
 			
@@ -456,18 +457,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="replace" id="_replace">
+	<tr data-order="doReplace" id="_doReplace">
 
 		<td class="attributes"><code>
-			 public 
+			 protected 
 			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_replace">#</a>
-		<code><a href="source-class-Widget.FileCache.html#157-181" title="Go to source code">replace</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+		<a class="anchor" href="#_doReplace">#</a>
+		<code><a href="source-class-Widget.FileCache.html#156-180" title="Go to source code">doReplace</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
 
 		<div class="description short">
 			
@@ -502,18 +503,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="increment" id="_increment">
+	<tr data-order="doInc" id="_doInc">
 
 		<td class="attributes"><code>
-			 public 
+			 protected 
 			integer|false
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_increment">#</a>
-		<code><a href="source-class-Widget.FileCache.html#183-210" title="Go to source code">increment</a>( <span>string <var>$key</var></span>, <span>integer <var>$offset</var> = <span class="php-num">1</span></span> )</code>
+		<a class="anchor" href="#_doInc">#</a>
+		<code><a href="source-class-Widget.FileCache.html#182-209" title="Go to source code">doInc</a>( <span>string <var>$key</var></span>, <span>integer <var>$offset</var> = <span class="php-num">1</span></span> )</code>
 
 		<div class="description short">
 			
@@ -557,7 +558,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_clear">#</a>
-		<code><a href="source-class-Widget.FileCache.html#213-225" title="Go to source code">clear</a>( )</code>
+		<code><a href="source-class-Widget.FileCache.html#212-224" title="Go to source code">clear</a>( )</code>
 
 		<div class="description short">
 			
@@ -594,7 +595,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getFile">#</a>
-		<code><a href="source-class-Widget.FileCache.html#227-238" title="Go to source code">getFile</a>( <span>string <var>$key</var></span> )</code>
+		<code><a href="source-class-Widget.FileCache.html#226-239" title="Go to source code">getFile</a>( <span>string <var>$key</var></span>, <span>boolean <var>$withPrefix</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -612,6 +613,8 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
 					<dd><code>string</code><br>$key</dd>
+					<dt><var>$withPrefix</var></dt>
+					<dd><code>boolean</code><br>$withPrefix</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -636,7 +639,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setDir">#</a>
-		<code><a href="source-class-Widget.FileCache.html#240-258" title="Go to source code">setDir</a>( <span>string <var>$dir</var></span> )</code>
+		<code><a href="source-class-Widget.FileCache.html#241-259" title="Go to source code">setDir</a>( <span>string <var>$dir</var></span> )</code>
 
 		<div class="description short">
 			
@@ -682,7 +685,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDir">#</a>
-		<code><a href="source-class-Widget.FileCache.html#260-268" title="Go to source code">getDir</a>( )</code>
+		<code><a href="source-class-Widget.FileCache.html#261-269" title="Go to source code">getDir</a>( )</code>
 
 		<div class="description short">
 			
@@ -719,7 +722,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_openAndLock">#</a>
-		<code><a href="source-class-Widget.FileCache.html#270-291" title="Go to source code">openAndLock</a>( <span>string <var>$file</var></span>, <span>string <var>$mode</var></span>, <span>integer <var>$operation</var></span> )</code>
+		<code><a href="source-class-Widget.FileCache.html#271-292" title="Go to source code">openAndLock</a>( <span>string <var>$file</var></span>, <span>string <var>$mode</var></span>, <span>integer <var>$operation</var></span> )</code>
 
 		<div class="description short">
 			
@@ -765,7 +768,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_readAndVerify">#</a>
-		<code><a href="source-class-Widget.FileCache.html#293-312" title="Go to source code">readAndVerify</a>( <span>resource <var>$handle</var></span>, <span>string <var>$file</var></span> )</code>
+		<code><a href="source-class-Widget.FileCache.html#294-313" title="Go to source code">readAndVerify</a>( <span>resource <var>$handle</var></span>, <span>string <var>$file</var></span> )</code>
 
 		<div class="description short">
 			
@@ -809,7 +812,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_prepareContent">#</a>
-		<code><a href="source-class-Widget.FileCache.html#314-330" title="Go to source code">prepareContent</a>( <span>string <var>$content</var></span>, <span>integer <var>$expire</var></span> )</code>
+		<code><a href="source-class-Widget.FileCache.html#315-331" title="Go to source code">prepareContent</a>( <span>string <var>$content</var></span>, <span>integer <var>$expire</var></span> )</code>
 
 		<div class="description short">
 			
@@ -853,7 +856,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_writeAndRelease">#</a>
-		<code><a href="source-class-Widget.FileCache.html#332-353" title="Go to source code">writeAndRelease</a>( <span>resouce <var>$handle</var></span>, <span>string <var>$content</var></span>, <span>boolean <var>$rewirte</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-Widget.FileCache.html#333-354" title="Go to source code">writeAndRelease</a>( <span>resouce <var>$handle</var></span>, <span>string <var>$content</var></span>, <span>boolean <var>$rewirte</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -895,9 +898,19 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 	<tr>
 		<td><code>
 			<a href="class-Widget.Stdlib.AbstractCache.html#___invoke">__invoke()</a>, 
-			<a href="class-Widget.Stdlib.AbstractCache.html#_decrement">decrement()</a>, 
+			<a href="class-Widget.Stdlib.AbstractCache.html#_add">add()</a>, 
+			<a href="class-Widget.Stdlib.AbstractCache.html#_dec">dec()</a>, 
+			<a href="class-Widget.Stdlib.AbstractCache.html#_exists">exists()</a>, 
 			<a href="class-Widget.Stdlib.AbstractCache.html#_get">get()</a>, 
+			<a href="class-Widget.Stdlib.AbstractCache.html#_getFileContent">getFileContent()</a>, 
+			<a href="class-Widget.Stdlib.AbstractCache.html#_getKeyPrefix">getKeyPrefix()</a>, 
+			<a href="class-Widget.Stdlib.AbstractCache.html#_getKeyWithPrefix">getKeyWithPrefix()</a>, 
 			<a href="class-Widget.Stdlib.AbstractCache.html#_getMulti">getMulti()</a>, 
+			<a href="class-Widget.Stdlib.AbstractCache.html#_inc">inc()</a>, 
+			<a href="class-Widget.Stdlib.AbstractCache.html#_remove">remove()</a>, 
+			<a href="class-Widget.Stdlib.AbstractCache.html#_replace">replace()</a>, 
+			<a href="class-Widget.Stdlib.AbstractCache.html#_set">set()</a>, 
+			<a href="class-Widget.Stdlib.AbstractCache.html#_setKeyPrefix">setKeyPrefix()</a>, 
 			<a href="class-Widget.Stdlib.AbstractCache.html#_setMulti">setMulti()</a>
 		</code></td>
 	</tr>
@@ -1066,6 +1079,14 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 	</tr>
 	</table>
 
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Widget.Stdlib.AbstractCache.html#properties">Widget\Stdlib\AbstractCache</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.Stdlib.AbstractCache.html#$keyPrefix"><var>$keyPrefix</var></a>
+		</code></td>
+	</tr>
+	</table>
 	<table class="summary inherited">
 	<caption>Properties inherited from <a href="class-Widget.AbstractWidget.html#properties">Widget\AbstractWidget</a></caption>
 	<tr>

@@ -7,7 +7,7 @@
 	<title>Class Widget\AbstractWidget | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?2084780333"></script>
+	<script type="text/javascript" src="elementlist.js?4045824885"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -53,6 +53,7 @@
 				<li><a href="class-Widget.Call.html">Call</a></li>
 				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
 				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Widget.Counter.html">Counter</a></li>
 				<li><a href="class-Widget.Db.html">Db</a></li>
 				<li><a href="class-Widget.Dbal.html">Dbal</a></li>
 				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
@@ -155,6 +156,7 @@
 		<h4>Direct known subclasses</h4>
 			<a href="class-Widget.App.html">Widget\App</a>, 
 			<a href="class-Widget.Arr.html">Widget\Arr</a>, 
+			<a href="class-Widget.Escape.html">Widget\Escape</a>, 
 			<a href="class-Widget.Event.html">Widget\Event</a>, 
 			<a href="class-Widget.Gravatar.html">Widget\Gravatar</a>, 
 			<a href="class-Widget.Header.html">Widget\Header</a>, 
@@ -164,8 +166,8 @@
 			<a href="class-Widget.Monolog.html">Widget\Monolog</a>, 
 			<a href="class-Widget.PhpError.html">Widget\PhpError</a>, 
 			<a href="class-Widget.Pinyin.html">Widget\Pinyin</a>, 
-			<a href="class-Widget.Response.html">Widget\Response</a>, 
 			<a href="class-Widget.Call.html">Widget\Call</a>, 
+			<a href="class-Widget.Response.html">Widget\Response</a>, 
 			<a href="class-Widget.Router.html">Widget\Router</a>, 
 			<a href="class-Widget.Stdlib.AbstractCache.html">Widget\Stdlib\AbstractCache</a>, 
 			<a href="class-Widget.Stdlib.AbstractView.html">Widget\Stdlib\AbstractView</a>, 
@@ -175,19 +177,19 @@
 			<a href="class-Widget.Ua.html">Widget\Ua</a>, 
 			<a href="class-Widget.Url.html">Widget\Url</a>, 
 			<a href="class-Widget.UrlDebugger.html">Widget\UrlDebugger</a>, 
+			<a href="class-Widget.Counter.html">Widget\Counter</a>, 
 			<a href="class-Widget.Uuid.html">Widget\Uuid</a>, 
-			<a href="class-Widget.Db.html">Widget\Db</a>, 
 			<a href="class-Widget.Validate.html">Widget\Validate</a>, 
 			<a href="class-Widget.Validator.AbstractValidator.html">Widget\Validator\AbstractValidator</a>, 
 			<a href="class-Widget.Website.html">Widget\Website</a>, 
 			<a href="class-Widget.WeChatApp.html">Widget\WeChatApp</a>, 
 			<a href="class-Widget.Widget.html">Widget\Widget</a>, 
+			<a href="class-Widget.Db.html">Widget\Db</a>, 
 			<a href="class-Widget.Db.Record.html">Widget\Db\Record</a>, 
 			<a href="class-Widget.Dbal.html">Widget\Dbal</a>, 
 			<a href="class-Widget.EntityManager.html">Widget\EntityManager</a>, 
 			<a href="class-Widget.Env.html">Widget\Env</a>, 
-			<a href="class-Widget.Error.html">Widget\Error</a>, 
-			<a href="class-Widget.Escape.html">Widget\Escape</a>
+			<a href="class-Widget.Error.html">Widget\Error</a>
 	</div>
 
 	<div>
@@ -2717,13 +2719,13 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt; Cache<br 
 
 			<div class="description short">
 				
-<p>A cache widget stored data in PHP array</p>
+<p>A cache widget that stored data in PHP array</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>A cache widget stored data in PHP array</p>
+<p>A cache widget that stored data in PHP array</p>
 
 
 			</div>
@@ -2743,13 +2745,13 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt; Cache<br 
 
 			<div class="description short">
 				
-<p>The PHP APC cache widget</p>
+<p>A cache widget that stored data in PHP APC</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>The PHP APC cache widget</p>
+<p>A cache widget that stored data in PHP APC</p>
 
 
 			</div>
@@ -2769,13 +2771,13 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt; Cache<br 
 
 			<div class="description short">
 				
-<p>A database cache widget</p>
+<p>A cache widget that stored data in databases</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>A database cache widget</p>
+<p>A cache widget that stored data in databases</p>
 
 
 			</div>
@@ -2795,13 +2797,13 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt; Cache<br 
 
 			<div class="description short">
 				
-<p>A file cache widget</p>
+<p>A cache widget that stored data in files</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>A file cache widget</p>
+<p>A cache widget that stored data in files</p>
 
 
 			</div>
@@ -2821,13 +2823,13 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt; Cache<br 
 
 			<div class="description short">
 				
-<p>A cache widget base on Memcache</p>
+<p>A cache widget that stored data in Memcache</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>A cache widget base on Memcache</p>
+<p>A cache widget that stored data in Memcache</p>
 
 
 			</div>
@@ -2847,13 +2849,13 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt; Cache<br 
 
 			<div class="description short">
 				
-<p>A cache widget base on Memcached</p>
+<p>A cache widget that stored data in Memcached</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>A cache widget base on Memcached</p>
+<p>A cache widget that stored data in Memcached</p>
 
 
 			</div>
@@ -2899,13 +2901,13 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt; Cache<br 
 
 			<div class="description short">
 				
-<p>A cache widget base on Redis</p>
+<p>A cache widget that stores data in Redis</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>A cache widget base on Redis</p>
+<p>A cache widget that stores data in Redis</p>
 
 
 			</div>

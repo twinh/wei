@@ -7,7 +7,7 @@
 	<title>Class Widget\Logger | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?2084780333"></script>
+	<script type="text/javascript" src="elementlist.js?4045824885"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -53,6 +53,7 @@
 				<li><a href="class-Widget.Call.html">Call</a></li>
 				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
 				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Widget.Counter.html">Counter</a></li>
 				<li><a href="class-Widget.Db.html">Db</a></li>
 				<li><a href="class-Widget.Dbal.html">Dbal</a></li>
 				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
@@ -182,7 +183,7 @@
 href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 				<b>Link:</b>
 				<a href="https://github.com/Seldaek/monolog">https://github.com/Seldaek/monolog</a><br />
-		<b>Located at</b> <a href="source-class-Widget.Logger.html#11-388" title="Go to source code">Logger.php</a><br />
+		<b>Located at</b> <a href="source-class-Widget.Logger.html#11-396" title="Go to source code">Logger.php</a><br />
 	</div>
 
 
@@ -200,7 +201,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#___invoke">#</a>
-		<code><a href="source-class-Widget.Logger.html#115-151" title="Go to source code">__invoke</a>( <span>mixed <var>$level</var></span>, <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Logger.html#115-145" title="Go to source code">__invoke</a>( <span>mixed <var>$level</var></span>, <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -235,6 +236,48 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="writeLog" id="_writeLog">
+
+		<td class="attributes"><code>
+			 protected 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_writeLog">#</a>
+		<code><a href="source-class-Widget.Logger.html#147-159" title="Go to source code">writeLog</a>( <span>string <var>$content</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Write the log message</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Write the log message</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$content</var></dt>
+					<dd><code>string</code><br>$content</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="log" id="_log">
 
 		<td class="attributes"><code>
@@ -246,7 +289,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_log">#</a>
-		<code><a href="source-class-Widget.Logger.html#153-164" title="Go to source code">log</a>( <span>mixed <var>$level</var></span>, <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Logger.html#161-172" title="Go to source code">log</a>( <span>mixed <var>$level</var></span>, <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -292,7 +335,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_emergency">#</a>
-		<code><a href="source-class-Widget.Logger.html#166-176" title="Go to source code">emergency</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Logger.html#174-184" title="Go to source code">emergency</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -336,7 +379,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_alert">#</a>
-		<code><a href="source-class-Widget.Logger.html#178-191" title="Go to source code">alert</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Logger.html#186-199" title="Go to source code">alert</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -383,7 +426,7 @@ the SMS alerts and wake you up.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_critical">#</a>
-		<code><a href="source-class-Widget.Logger.html#193-205" title="Go to source code">critical</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Logger.html#201-213" title="Go to source code">critical</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -429,7 +472,7 @@ the SMS alerts and wake you up.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_error">#</a>
-		<code><a href="source-class-Widget.Logger.html#207-218" title="Go to source code">error</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Logger.html#215-226" title="Go to source code">error</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -475,7 +518,7 @@ logged and monitored.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_warning">#</a>
-		<code><a href="source-class-Widget.Logger.html#220-233" title="Go to source code">warning</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Logger.html#228-241" title="Go to source code">warning</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -522,7 +565,7 @@ are not necessarily wrong.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_notice">#</a>
-		<code><a href="source-class-Widget.Logger.html#235-245" title="Go to source code">notice</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Logger.html#243-253" title="Go to source code">notice</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -566,7 +609,7 @@ are not necessarily wrong.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_info">#</a>
-		<code><a href="source-class-Widget.Logger.html#247-259" title="Go to source code">info</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Logger.html#255-267" title="Go to source code">info</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -612,7 +655,7 @@ are not necessarily wrong.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_debug">#</a>
-		<code><a href="source-class-Widget.Logger.html#261-271" title="Go to source code">debug</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Logger.html#269-279" title="Go to source code">debug</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -656,7 +699,7 @@ are not necessarily wrong.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getFile">#</a>
-		<code><a href="source-class-Widget.Logger.html#273-317" title="Go to source code">getFile</a>( )</code>
+		<code><a href="source-class-Widget.Logger.html#281-325" title="Go to source code">getFile</a>( )</code>
 
 		<div class="description short">
 			
@@ -697,7 +740,7 @@ are not necessarily wrong.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setLevel">#</a>
-		<code><a href="source-class-Widget.Logger.html#319-330" title="Go to source code">setLevel</a>( <span>string <var>$level</var></span> )</code>
+		<code><a href="source-class-Widget.Logger.html#327-338" title="Go to source code">setLevel</a>( <span>string <var>$level</var></span> )</code>
 
 		<div class="description short">
 			
@@ -739,7 +782,7 @@ are not necessarily wrong.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setHandledLevel">#</a>
-		<code><a href="source-class-Widget.Logger.html#332-343" title="Go to source code">setHandledLevel</a>( <span>integer <var>$handledLevel</var></span> )</code>
+		<code><a href="source-class-Widget.Logger.html#340-351" title="Go to source code">setHandledLevel</a>( <span>integer <var>$handledLevel</var></span> )</code>
 
 		<div class="description short">
 			
@@ -781,7 +824,7 @@ are not necessarily wrong.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_clean">#</a>
-		<code><a href="source-class-Widget.Logger.html#345-368" title="Go to source code">clean</a>( )</code>
+		<code><a href="source-class-Widget.Logger.html#353-376" title="Go to source code">clean</a>( )</code>
 
 		<div class="description short">
 			
@@ -818,7 +861,7 @@ are not necessarily wrong.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_close">#</a>
-		<code><a href="source-class-Widget.Logger.html#370-379" title="Go to source code">close</a>( )</code>
+		<code><a href="source-class-Widget.Logger.html#378-387" title="Go to source code">close</a>( )</code>
 
 		<div class="description short">
 			
@@ -851,7 +894,7 @@ are not necessarily wrong.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___destruct">#</a>
-		<code><a href="source-class-Widget.Logger.html#381-387" title="Go to source code">__destruct</a>( )</code>
+		<code><a href="source-class-Widget.Logger.html#389-395" title="Go to source code">__destruct</a>( )</code>
 
 		<div class="description short">
 			

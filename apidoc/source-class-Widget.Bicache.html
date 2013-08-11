@@ -8,7 +8,7 @@
 	<title>File Bicache.php | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?2084780333"></script>
+	<script type="text/javascript" src="elementlist.js?4045824885"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -54,6 +54,7 @@
 				<li><a href="class-Widget.Call.html">Call</a></li>
 				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
 				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Widget.Counter.html">Counter</a></li>
 				<li><a href="class-Widget.Db.html">Db</a></li>
 				<li><a href="class-Widget.Dbal.html">Dbal</a></li>
 				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
@@ -196,7 +197,7 @@
 </span><span id="53" class="l"><a class="l" href="#53"> 53: </a>    <span class="php-comment">/**
 </span></span><span id="54" class="l"><a class="l" href="#54"> 54: </a><span class="php-comment">     * {@inheritdoc}
 </span></span><span id="55" class="l"><a class="l" href="#55"> 55: </a><span class="php-comment">     */</span>
-</span><span id="56" class="l"><a class="l" href="#56"> 56: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_set" href="#_set">set</a>(<span class="php-var">$key</span>, <span class="php-var">$value</span>, <span class="php-var">$expire</span> = <span class="php-num">0</span>)
+</span><span id="56" class="l"><a class="l" href="#56"> 56: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_doSet" href="#_doSet">doSet</a>(<span class="php-var">$key</span>, <span class="php-var">$value</span>, <span class="php-var">$expire</span> = <span class="php-num">0</span>)
 </span><span id="57" class="l"><a class="l" href="#57"> 57: </a>    {
 </span><span id="58" class="l"><a class="l" href="#58"> 58: </a>        <span class="php-var">$result</span> = <span class="php-var">$this</span>-&gt;master-&gt;set(<span class="php-var">$key</span>, <span class="php-var">$value</span>, <span class="php-var">$expire</span>);
 </span><span id="59" class="l"><a class="l" href="#59"> 59: </a>
@@ -212,7 +213,7 @@
 </span><span id="69" class="l"><a class="l" href="#69"> 69: </a>    <span class="php-comment">/**
 </span></span><span id="70" class="l"><a class="l" href="#70"> 70: </a><span class="php-comment">     * {@inheritdoc}
 </span></span><span id="71" class="l"><a class="l" href="#71"> 71: </a><span class="php-comment">     */</span>
-</span><span id="72" class="l"><a class="l" href="#72"> 72: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_remove" href="#_remove">remove</a>(<span class="php-var">$key</span>)
+</span><span id="72" class="l"><a class="l" href="#72"> 72: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_doRemove" href="#_doRemove">doRemove</a>(<span class="php-var">$key</span>)
 </span><span id="73" class="l"><a class="l" href="#73"> 73: </a>    {
 </span><span id="74" class="l"><a class="l" href="#74"> 74: </a>        <span class="php-var">$result1</span> = <span class="php-var">$this</span>-&gt;master-&gt;remove(<span class="php-var">$key</span>);
 </span><span id="75" class="l"><a class="l" href="#75"> 75: </a>        <span class="php-var">$result2</span> = <span class="php-var">$this</span>-&gt;slave-&gt;remove(<span class="php-var">$key</span>);
@@ -223,7 +224,7 @@
 </span><span id="80" class="l"><a class="l" href="#80"> 80: </a>    <span class="php-comment">/**
 </span></span><span id="81" class="l"><a class="l" href="#81"> 81: </a><span class="php-comment">     * {@inheritdoc}
 </span></span><span id="82" class="l"><a class="l" href="#82"> 82: </a><span class="php-comment">     */</span>
-</span><span id="83" class="l"><a class="l" href="#83"> 83: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_exists" href="#_exists">exists</a>(<span class="php-var">$key</span>)
+</span><span id="83" class="l"><a class="l" href="#83"> 83: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_doExists" href="#_doExists">doExists</a>(<span class="php-var">$key</span>)
 </span><span id="84" class="l"><a class="l" href="#84"> 84: </a>    {
 </span><span id="85" class="l"><a class="l" href="#85"> 85: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;master-&gt;exists(<span class="php-var">$key</span>) || <span class="php-var">$this</span>-&gt;slave-&gt;exists(<span class="php-var">$key</span>);
 </span><span id="86" class="l"><a class="l" href="#86"> 86: </a>    }
@@ -231,7 +232,7 @@
 </span><span id="88" class="l"><a class="l" href="#88"> 88: </a>    <span class="php-comment">/**
 </span></span><span id="89" class="l"><a class="l" href="#89"> 89: </a><span class="php-comment">     * {@inheritdoc}
 </span></span><span id="90" class="l"><a class="l" href="#90"> 90: </a><span class="php-comment">     */</span>
-</span><span id="91" class="l"><a class="l" href="#91"> 91: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_add" href="#_add">add</a>(<span class="php-var">$key</span>, <span class="php-var">$value</span>, <span class="php-var">$expire</span> = <span class="php-num">0</span>)
+</span><span id="91" class="l"><a class="l" href="#91"> 91: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_doAdd" href="#_doAdd">doAdd</a>(<span class="php-var">$key</span>, <span class="php-var">$value</span>, <span class="php-var">$expire</span> = <span class="php-num">0</span>)
 </span><span id="92" class="l"><a class="l" href="#92"> 92: </a>    {
 </span><span id="93" class="l"><a class="l" href="#93"> 93: </a>        <span class="php-var">$result</span> = <span class="php-var">$this</span>-&gt;master-&gt;add(<span class="php-var">$key</span>, <span class="php-var">$value</span>, <span class="php-var">$expire</span>);
 </span><span id="94" class="l"><a class="l" href="#94"> 94: </a>
@@ -248,7 +249,7 @@
 </span><span id="105" class="l"><a class="l" href="#105">105: </a>    <span class="php-comment">/**
 </span></span><span id="106" class="l"><a class="l" href="#106">106: </a><span class="php-comment">     * {@inheritdoc}
 </span></span><span id="107" class="l"><a class="l" href="#107">107: </a><span class="php-comment">     */</span>
-</span><span id="108" class="l"><a class="l" href="#108">108: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_replace" href="#_replace">replace</a>(<span class="php-var">$key</span>, <span class="php-var">$value</span>, <span class="php-var">$expire</span> = <span class="php-num">0</span>)
+</span><span id="108" class="l"><a class="l" href="#108">108: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_doReplace" href="#_doReplace">doReplace</a>(<span class="php-var">$key</span>, <span class="php-var">$value</span>, <span class="php-var">$expire</span> = <span class="php-num">0</span>)
 </span><span id="109" class="l"><a class="l" href="#109">109: </a>    {
 </span><span id="110" class="l"><a class="l" href="#110">110: </a>        <span class="php-var">$result</span> = <span class="php-var">$this</span>-&gt;master-&gt;replace(<span class="php-var">$key</span>, <span class="php-var">$value</span>, <span class="php-var">$expire</span>);
 </span><span id="111" class="l"><a class="l" href="#111">111: </a>
@@ -263,9 +264,9 @@
 </span><span id="120" class="l"><a class="l" href="#120">120: </a>    <span class="php-comment">/**
 </span></span><span id="121" class="l"><a class="l" href="#121">121: </a><span class="php-comment">     * {@inheritdoc}
 </span></span><span id="122" class="l"><a class="l" href="#122">122: </a><span class="php-comment">     */</span>
-</span><span id="123" class="l"><a class="l" href="#123">123: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_increment" href="#_increment">increment</a>(<span class="php-var">$key</span>, <span class="php-var">$offset</span> = <span class="php-num">1</span>)
+</span><span id="123" class="l"><a class="l" href="#123">123: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_doInc" href="#_doInc">doInc</a>(<span class="php-var">$key</span>, <span class="php-var">$offset</span> = <span class="php-num">1</span>)
 </span><span id="124" class="l"><a class="l" href="#124">124: </a>    {
-</span><span id="125" class="l"><a class="l" href="#125">125: </a>        <span class="php-var">$result</span> = <span class="php-var">$this</span>-&gt;master-&gt;increment(<span class="php-var">$key</span>, <span class="php-var">$offset</span>);
+</span><span id="125" class="l"><a class="l" href="#125">125: </a>        <span class="php-var">$result</span> = <span class="php-var">$this</span>-&gt;master-&gt;inc(<span class="php-var">$key</span>, <span class="php-var">$offset</span>);
 </span><span id="126" class="l"><a class="l" href="#126">126: </a>
 </span><span id="127" class="l"><a class="l" href="#127">127: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">false</span> !== <span class="php-var">$result</span> &amp;&amp; <span class="php-var">$this</span>-&gt;needUpdate(<span class="php-var">$key</span>)) {
 </span><span id="128" class="l"><a class="l" href="#128">128: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;slave-&gt;set(<span class="php-var">$key</span>, <span class="php-var">$result</span>) ? <span class="php-var">$result</span> : <span class="php-keyword1">false</span>;

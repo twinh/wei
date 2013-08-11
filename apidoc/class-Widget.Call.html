@@ -7,7 +7,7 @@
 	<title>Class Widget\Call | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?2084780333"></script>
+	<script type="text/javascript" src="elementlist.js?4045824885"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -53,6 +53,7 @@
 				<li class="active"><a href="class-Widget.Call.html">Call</a></li>
 				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
 				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Widget.Counter.html">Counter</a></li>
 				<li><a href="class-Widget.Db.html">Db</a></li>
 				<li><a href="class-Widget.Dbal.html">Dbal</a></li>
 				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
@@ -182,7 +183,7 @@
 href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 				<b>Link:</b>
 				<a href="http://api.jquery.com/jQuery.ajax/">http://api.jquery.com/jQuery.ajax/</a><br />
-		<b>Located at</b> <a href="source-class-Widget.Call.html#11-724" title="Go to source code">Call.php</a><br />
+		<b>Located at</b> <a href="source-class-Widget.Call.html#11-787" title="Go to source code">Call.php</a><br />
 	</div>
 
 
@@ -200,7 +201,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#___invoke">#</a>
-		<code><a href="source-class-Widget.Call.html#218-249" title="Go to source code">__invoke</a>( <span>array|string <var>$url</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Call.html#248-279" title="Go to source code">__invoke</a>( <span>array|string <var>$url</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -244,7 +245,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_execute">#</a>
-		<code><a href="source-class-Widget.Call.html#251-269" title="Go to source code">execute</a>( )</code>
+		<code><a href="source-class-Widget.Call.html#281-299" title="Go to source code">execute</a>( )</code>
 
 		<div class="description short">
 			
@@ -277,7 +278,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_prepareCurlOpts">#</a>
-		<code><a href="source-class-Widget.Call.html#271-364" title="Go to source code">prepareCurlOpts</a>( )</code>
+		<code><a href="source-class-Widget.Call.html#301-398" title="Go to source code">prepareCurlOpts</a>( )</code>
 
 		<div class="description short">
 			
@@ -314,7 +315,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_handleResponse">#</a>
-		<code><a href="source-class-Widget.Call.html#366-404" title="Go to source code">handleResponse</a>( <span>string <var>$response</var></span> )</code>
+		<code><a href="source-class-Widget.Call.html#400-438" title="Go to source code">handleResponse</a>( <span>string <var>$response</var></span> )</code>
 
 		<div class="description short">
 			
@@ -341,6 +342,46 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="triggerError" id="_triggerError">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_triggerError">#</a>
+		<code><a href="source-class-Widget.Call.html#440-451" title="Go to source code">triggerError</a>( <span>string <var>$status</var></span>, <span><code><a href="class-ErrorException.html">ErrorException</a></code> <var>$exception</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Trigger error callback</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Trigger error callback</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$status</var></dt>
+					<dd><code>string</code><br>$status</dd>
+					<dt><var>$exception</var></dt>
+					<dd><code><code><a href="class-ErrorException.html">ErrorException</a></code></code><br>$exception</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="parse" id="_parse">
 
 		<td class="attributes"><code>
@@ -352,7 +393,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_parse">#</a>
-		<code><a href="source-class-Widget.Call.html#406-456" title="Go to source code">parse</a>( <span>string <var>$data</var></span>, <span>string <var>$type</var></span>, <span>null <var>&amp; $exception</var></span> )</code>
+		<code><a href="source-class-Widget.Call.html#453-503" title="Go to source code">parse</a>( <span>string <var>$data</var></span>, <span>string <var>$type</var></span>, <span>null <var>&amp; $exception</var></span> )</code>
 
 		<div class="description short">
 			
@@ -387,46 +428,6 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="trigger" id="_trigger">
-
-		<td class="attributes"><code>
-			 protected 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_trigger">#</a>
-		<code><a href="source-class-Widget.Call.html#458-470" title="Go to source code">trigger</a>( <span>string <var>$name</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
-
-		<div class="description short">
-			
-<p>Trigger a internal callback event</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Trigger a internal callback event</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$name</var></dt>
-					<dd><code>string</code><br>$name</dd>
-					<dt><var>$params</var></dt>
-					<dd><code>array</code><br>$params</dd>
-				</dl></div>
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
 	<tr data-order="getResponseText" id="_getResponseText">
 
 		<td class="attributes"><code>
@@ -438,7 +439,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getResponseText">#</a>
-		<code><a href="source-class-Widget.Call.html#472-480" title="Go to source code">getResponseText</a>( )</code>
+		<code><a href="source-class-Widget.Call.html#505-513" title="Go to source code">getResponseText</a>( )</code>
 
 		<div class="description short">
 			
@@ -475,7 +476,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getResponseJson">#</a>
-		<code><a href="source-class-Widget.Call.html#482-490" title="Go to source code">getResponseJson</a>( )</code>
+		<code><a href="source-class-Widget.Call.html#515-523" title="Go to source code">getResponseJson</a>( )</code>
 
 		<div class="description short">
 			
@@ -501,6 +502,43 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="getResponse" id="_getResponse">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getResponse">#</a>
+		<code><a href="source-class-Widget.Call.html#525-533" title="Go to source code">getResponse</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the parsed response data</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the parsed response data</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="setRequestHeader" id="_setRequestHeader">
 
 		<td class="attributes"><code>
@@ -512,7 +550,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setRequestHeader">#</a>
-		<code><a href="source-class-Widget.Call.html#492-504" title="Go to source code">setRequestHeader</a>( <span>string <var>$name</var></span>, <span>string <var>$value</var></span> )</code>
+		<code><a href="source-class-Widget.Call.html#535-547" title="Go to source code">setRequestHeader</a>( <span>string <var>$name</var></span>, <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -556,7 +594,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getResponseHeader">#</a>
-		<code><a href="source-class-Widget.Call.html#506-523" title="Go to source code">getResponseHeader</a>( <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-Widget.Call.html#549-566" title="Go to source code">getResponseHeader</a>( <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -598,7 +636,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_parseHeader">#</a>
-		<code><a href="source-class-Widget.Call.html#525-542" title="Go to source code">parseHeader</a>( <span>string <var>$header</var></span> )</code>
+		<code><a href="source-class-Widget.Call.html#568-585" title="Go to source code">parseHeader</a>( <span>string <var>$header</var></span> )</code>
 
 		<div class="description short">
 			
@@ -640,7 +678,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isSuccess">#</a>
-		<code><a href="source-class-Widget.Call.html#544-552" title="Go to source code">isSuccess</a>( )</code>
+		<code><a href="source-class-Widget.Call.html#587-595" title="Go to source code">isSuccess</a>( )</code>
 
 		<div class="description short">
 			
@@ -677,7 +715,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setMethod">#</a>
-		<code><a href="source-class-Widget.Call.html#554-564" title="Go to source code">setMethod</a>( <span>string <var>$method</var></span> )</code>
+		<code><a href="source-class-Widget.Call.html#597-607" title="Go to source code">setMethod</a>( <span>string <var>$method</var></span> )</code>
 
 		<div class="description short">
 			
@@ -719,7 +757,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getJson">#</a>
-		<code><a href="source-class-Widget.Call.html#566-577" title="Go to source code">getJson</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Call.html#609-620" title="Go to source code">getJson</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -765,7 +803,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getJsonObject">#</a>
-		<code><a href="source-class-Widget.Call.html#579-590" title="Go to source code">getJsonObject</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Call.html#622-633" title="Go to source code">getJsonObject</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -811,7 +849,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_get">#</a>
-		<code><a href="source-class-Widget.Call.html#592-604" title="Go to source code">get</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Call.html#635-647" title="Go to source code">get</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -859,7 +897,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_post">#</a>
-		<code><a href="source-class-Widget.Call.html#606-618" title="Go to source code">post</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Call.html#649-661" title="Go to source code">post</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -907,7 +945,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_put">#</a>
-		<code><a href="source-class-Widget.Call.html#620-632" title="Go to source code">put</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Call.html#663-675" title="Go to source code">put</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -955,7 +993,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_delete">#</a>
-		<code><a href="source-class-Widget.Call.html#634-646" title="Go to source code">delete</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Call.html#677-689" title="Go to source code">delete</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1003,7 +1041,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_patch">#</a>
-		<code><a href="source-class-Widget.Call.html#648-660" title="Go to source code">patch</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Call.html#691-703" title="Go to source code">patch</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1051,7 +1089,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_processMethod">#</a>
-		<code><a href="source-class-Widget.Call.html#662-687" title="Go to source code">processMethod</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var></span>, <span>string <var>$dataType</var></span>, <span>string <var>$method</var></span> )</code>
+		<code><a href="source-class-Widget.Call.html#705-730" title="Go to source code">processMethod</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>callable <var>$callback</var></span>, <span>string <var>$dataType</var></span>, <span>string <var>$method</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1101,7 +1139,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_success">#</a>
-		<code><a href="source-class-Widget.Call.html#689-699" title="Go to source code">success</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Widget.Call.html#732-742" title="Go to source code">success</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1143,7 +1181,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_error">#</a>
-		<code><a href="source-class-Widget.Call.html#701-711" title="Go to source code">error</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Widget.Call.html#744-754" title="Go to source code">error</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1185,7 +1223,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_complete">#</a>
-		<code><a href="source-class-Widget.Call.html#713-723" title="Go to source code">complete</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Widget.Call.html#756-766" title="Go to source code">complete</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1208,6 +1246,80 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 				<h4>Returns</h4>
 				<div class="list">
 					<code><code><a href="class-Widget.Call.html">Widget\Call</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getErrorStatus" id="_getErrorStatus">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getErrorStatus">#</a>
+		<code><a href="source-class-Widget.Call.html#768-776" title="Go to source code">getErrorStatus</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the error status text</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the error status text</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getErrorException" id="_getErrorException">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-ErrorException.html">ErrorException</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getErrorException">#</a>
+		<code><a href="source-class-Widget.Call.html#778-786" title="Go to source code">getErrorException</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the error exception object</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the error exception object</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-ErrorException.html">ErrorException</a></code></code><br />
 				</div>
 
 
@@ -1413,7 +1525,7 @@ supported</p>
 	<tr data-order="global" id="$global">
 		<td class="attributes"><code>
 			protected  
-			string
+			boolean
 		</code></td>
 
 		<td class="name">
@@ -1605,6 +1717,38 @@ and <code>text</code></p>
 			</div>
 		</div></td>
 	</tr>
+	<tr data-order="disableSslVerification" id="$disableSslVerification">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#103-110" title="Go to source code"><var>$disableSslVerification</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$disableSslVerification" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether disable cURL from verifying the peer's certificate</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether disable cURL from verifying the peer's certificate</p>
+
+
+					<h4>Link</h4>
+					<div class="list">
+							<a href="http://unitstep.net/blog/2009/05/05/using-curl-in-php-to-access-https-ssltls-protected-sites/">http://unitstep.net/blog/2009/05/05/using-curl-in-php-to-access-https-ssltls-protected-sites/</a><br />
+							<a href="http://stackoverflow.com/questions/6400300/php-curl-https-causing-exception-ssl-certificate-problem-verify-that-the-ca-cer">http://stackoverflow.com/questions/6400300/php-curl-https-causing-exception-ssl-certificate-problem-verify-that-the-ca-cer</a><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
 	<tr data-order="beforeSend" id="$beforeSend">
 		<td class="attributes"><code>
 			protected  
@@ -1612,7 +1756,7 @@ and <code>text</code></p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Call.html#103-116" title="Go to source code"><var>$beforeSend</var></a>
+				<a href="source-class-Widget.Call.html#112-125" title="Go to source code"><var>$beforeSend</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1645,7 +1789,7 @@ $call, $ch){<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Call.html#118-131" title="Go to source code"><var>$success</var></a>
+				<a href="source-class-Widget.Call.html#127-140" title="Go to source code"><var>$success</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1676,7 +1820,7 @@ Call $call){<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Call.html#133-148" title="Go to source code"><var>$error</var></a>
+				<a href="source-class-Widget.Call.html#142-157" title="Go to source code"><var>$error</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1710,7 +1854,7 @@ $textStatus, \ErrorException $exception){<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Call.html#150-163" title="Go to source code"><var>$complete</var></a>
+				<a href="source-class-Widget.Call.html#159-172" title="Go to source code"><var>$complete</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1743,7 +1887,7 @@ $call, $ch){<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Call.html#165-170" title="Go to source code"><var>$result</var></a>
+				<a href="source-class-Widget.Call.html#174-179" title="Go to source code"><var>$result</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1770,7 +1914,7 @@ $call, $ch){<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Call.html#172-177" title="Go to source code"><var>$responseText</var></a>
+				<a href="source-class-Widget.Call.html#181-186" title="Go to source code"><var>$responseText</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1790,6 +1934,33 @@ $call, $ch){<br />
 			</div>
 		</div></td>
 	</tr>
+	<tr data-order="response" id="$response">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#188-193" title="Go to source code"><var>$response</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$response" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The parsed response data</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The parsed response data</p>
+
+
+			</div>
+		</div></td>
+	</tr>
 	<tr data-order="responseJson" id="$responseJson">
 		<td class="attributes"><code>
 			protected  
@@ -1797,7 +1968,7 @@ $call, $ch){<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Call.html#179-184" title="Go to source code"><var>$responseJson</var></a>
+				<a href="source-class-Widget.Call.html#195-200" title="Go to source code"><var>$responseJson</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1824,7 +1995,7 @@ $call, $ch){<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Call.html#186-191" title="Go to source code"><var>$responseHeader</var></a>
+				<a href="source-class-Widget.Call.html#202-207" title="Go to source code"><var>$responseHeader</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1851,7 +2022,7 @@ $call, $ch){<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Call.html#193-198" title="Go to source code"><var>$responseHeaders</var></a>
+				<a href="source-class-Widget.Call.html#209-214" title="Go to source code"><var>$responseHeaders</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1878,7 +2049,7 @@ $call, $ch){<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Call.html#200-205" title="Go to source code"><var>$ch</var></a>
+				<a href="source-class-Widget.Call.html#216-221" title="Go to source code"><var>$ch</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1898,6 +2069,60 @@ $call, $ch){<br />
 			</div>
 		</div></td>
 	</tr>
+	<tr data-order="errorStatus" id="$errorStatus">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#223-228" title="Go to source code"><var>$errorStatus</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">''</span></code></td>
+		<td class="description"><div>
+			<a href="#$errorStatus" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The error text status</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The error text status</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="errorException" id="$errorException">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-ErrorException.html">ErrorException</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Call.html#230-235" title="Go to source code"><var>$errorException</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$errorException" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The error exception object</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The error exception object</p>
+
+
+			</div>
+		</div></td>
+	</tr>
 	<tr data-order="curlOpts" id="$curlOpts">
 		<td class="attributes"><code>
 			protected  
@@ -1905,7 +2130,7 @@ $call, $ch){<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Call.html#207-216" title="Go to source code"><var>$curlOpts</var></a>
+				<a href="source-class-Widget.Call.html#237-246" title="Go to source code"><var>$curlOpts</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">array</span>(
     CURLOPT_RETURNTRANSFER =&gt; <span class="php-keyword1">true</span>,
