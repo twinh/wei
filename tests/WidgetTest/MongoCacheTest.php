@@ -10,10 +10,6 @@ class MongoCacheTest extends CacheTestCase
             $this->markTestSkipped('The mongo extension is not loaded');
         }
 
-        if (!method_exists('MongoCollection', 'findAndModify')) {
-            $this->markTestSkipped('Required mongo version equals or greater than 1.3.0');
-        }
-
         try {
             parent::setUp();
         } catch (\MongoConnectionException $e) {
