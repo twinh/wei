@@ -53,6 +53,13 @@ class Redis extends AbstractCache
     protected $persistent = true;
 
     /**
+     * A password to authenticate the connection
+     *
+     * @var string
+     */
+    protected $auth;
+
+    /**
      * The options for \Redis::setOptions()
      *
      * @var array
@@ -86,6 +93,10 @@ class Redis extends AbstractCache
         $this->object = new \Redis;
         $connect = $this->persistent ? 'pconnect' : 'connect';
         $result = $this->object->$connect($this->host, $this->port, $this->timeout);
+
+        if ($result && $this->auth) {
+            $result = $this->object->auth($this->auth);
+        }
 
         if ($result) {
             foreach ($this->options as $key => $value) {
