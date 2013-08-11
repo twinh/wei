@@ -1889,13 +1889,11 @@ widget()-&gt;arrayCache('name');
 
 <h3>设置和获取文件缓存</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 设置缓存,返回true</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">fileCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">);</span>
-<span class="c1">// true</span>
 
-<span class="c1">// 获取缓存</span>
+<span class="c1">// 获取缓存,返回'value'</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">fileCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
-<span class="c1">// value</span>
 </code></pre></div>
 
 <p>更多案例请查看"<a href="cache.md#%E6%A1%88%E4%BE%8B">缓存</a>"章节</p>
@@ -2473,87 +2471,26 @@ widget()-&gt;arrayCache('name');
 <td>无</td>
 <td>原始的Redis对象</td>
 </tr>
-</tbody>
-</table><h3>方法</h3>
-
-<h4>redis($key, $value, $expire = 0)</h4>
-
-<p>设置缓存的值</p>
-
-<p>返回: <code>bool</code> 是否设置成功</p>
-
-<p>参数</p>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
 <tr>
-<td>$key</td>
+<td>auth</td>
 <td>string</td>
 <td>无</td>
-<td>缓存的键名</td>
-</tr>
-<tr>
-<td>$value</td>
-<td>mixed</td>
-<td>无</td>
-<td>缓存的值,允许任意类型</td>
-</tr>
-<tr>
-<td>$expire</td>
-<td>int</td>
-<td>0</td>
-<td>缓存的有效期,默认为0秒,表示永不过期</td>
+<td>Redis服务器的验证密码</td>
 </tr>
 </tbody>
-</table><h4>redis($key)</h4>
+</table><h3>继承的方法</h3>
 
-<p>获取指定名称的缓存</p>
+<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
 
-<h4>redis-&gt;set($key, $value, $expire = 0)</h4>
+<h3>方法</h3>
 
-<p>设置缓存的值,同<code>redis($key, $value, $expire = 0)</code></p>
+<h4>redis-&gt;getObject()</h4>
 
-<h4>redis-&gt;get($key)</h4>
+<p>获取原生Redis对象</p>
 
-<p>获取缓存的值,同<code>redis($key)</code></p>
+<h4>redis-&gt;setObject($redis)</h4>
 
-<h4>redis-&gt;remove($key)</h4>
-
-<p>移除一项缓存</p>
-
-<h4>redis-&gt;exists($key)</h4>
-
-<p>检查缓存是否存在</p>
-
-<h4>redis-&gt;add($key, $value)</h4>
-
-<p>增加一项缓存,如果缓存已存在,返回false</p>
-
-<h4>redis-&gt;replace($key, $value)</h4>
-
-<p>替换一项缓存,如果缓存不存在,返回false</p>
-
-<h4>redis-&gt;inc($key, $offset = 1)</h4>
-
-<p>增大一项缓存的值</p>
-
-<h4>redis-&gt;dec($key, $offset = 1)</h4>
-
-<p>减小一项缓存的值</p>
-
-<h4>redis-&gt;getMulti($keys)</h4>
-
-<p>批量获取缓存的值</p>
-
-<h4>redis-&gt;setMulti($values)</h4>
-
-<p>批量设置缓存的值</p>
+<p>设置原生Redis对象</p>
   </section>
 
 <!-- api/db
