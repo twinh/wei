@@ -19,7 +19,6 @@ widget()->arrayCache('key', 'value');
 
 // 获取缓存,返回'value'
 widget()->arrayCache('key');
-// 返回 value
 ```
 
 更多案例请查看"[缓存](../book/cache.md)"章节
