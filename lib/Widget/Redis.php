@@ -68,10 +68,7 @@ class Redis extends AbstractCache
      */
     public function __construct(array $options = array())
     {
-        parent::__construct($options + array(
-            'object' => $this->object
-        ));
-
+        parent::__construct($options);
         $this->connect();
     }
 
@@ -82,8 +79,12 @@ class Redis extends AbstractCache
      */
     public function connect()
     {
-        $connect = $this->persistent ? 'pconnect' : 'connect';
+        if ($this->object) {
+            return true;
+        }
 
+        $this->object = new \Redis;
+        $connect = $this->persistent ? 'pconnect' : 'connect';
         $result = $this->object->$connect($this->host, $this->port, $this->timeout);
 
         if ($result) {
@@ -209,17 +210,12 @@ class Redis extends AbstractCache
     /**
      * Set the redis object
      *
-     * @param null|\Redis $object
+     * @param \Redis $object
      * @return Redis
      */
-    public function setObject(\Redis $object = null)
+    public function setObject(\Redis $object)
     {
-        if ($object) {
-            $this->object = $object;
-        } else {
-            $this->object = new \Redis;
-        }
-
+        $this->object = $object;
         return $this;
     }
 }
