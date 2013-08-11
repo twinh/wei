@@ -28,9 +28,11 @@ namespace Widget;
  * @method   mixed      memcache($key, $value = null, $expire = 0) Retrieve or store an item by Memcache
  * @property Memcached  $memcached A cache widget that stored data in Memcached
  * @method   mixed      memcached($key, $value = null, $expire = 0) Retrieve or store an item by Memcached
+ * @property MongoCache $mongoCache A cache widget that stores data in MongoDB
+ * @method   mixed      mongoCache($key, $value = null, $expire = 0) Retrieve or store an item by MongoDB
  * @property Couchbase  $couchbase A cache widget base on Couchbase
  * @method   mixed      couchbase($key, $value = null, $expire = 0) Retrieve or store an item by Couchbase
- * @property redis      $redis A cache widget that stores data in Redis
+ * @property Redis      $redis A cache widget that stores data in Redis
  * @method   mixed      redis($key, $value = null, $expire = 0) Retrieve or store an item by Redis
  * @property Bicache    $bicache A two-level cache widget
  * @method   mixed      bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache

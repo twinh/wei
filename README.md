@@ -52,6 +52,7 @@ Define the following requirement in your `composer.json` file and run `php compo
 
 ```php
 // Available cache widgets
+$widget->cache;
 $widget->apc;
 $widget->arrayCache;
 $widget->couchbase;
@@ -59,8 +60,8 @@ $widget->dbCache;
 $widget->fileCache;
 $widget->memcache;
 $widget->memcached;
+$widget->mongoCache;
 $widget->redis;
-$widget->cache;
 
 $cache = $widget->memcached;
 
