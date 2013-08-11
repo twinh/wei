@@ -17,14 +17,39 @@ use Widget\Stdlib\AbstractCache;
  */
 class MongoCache extends AbstractCache
 {
+    /**
+     * The host connect to MongoDB
+     *
+     * @var string
+     */
     protected $host = 'localhost';
 
+    /**
+     * The port connect to MongoDB
+     *
+     * @var int
+     */
     protected $port = 27017;
 
+    /**
+     * The MongoDb collection object
+     *
+     * @var \MongoCollection
+     */
     protected $object;
 
+    /**
+     * The database stores cache data
+     *
+     * @var string
+     */
     protected $db = 'cache';
 
+    /**
+     * The collection stores cache data
+     *
+     * @var string
+     */
     protected $collection = 'cache';
 
     /**
