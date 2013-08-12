@@ -87,37 +87,40 @@ class Env extends AbstractWidget
 
     /**
      * Detect environment by server IP
-     *
-     * @return Env
      */
     public function detectEnvName()
     {
         if ($this->detector) {
             $this->env = call_user_func($this->detector);
-        } else {
-            $ip = $this->request->getServer('SERVER_ADDR');
-            if ($ip) {
-                if (isset($this->envMap[$ip])) {
-                    $this->env = $this->envMap[$ip];
-                } else {
-                    $this->env = 'prod';
-                }
-            } elseif (php_sapi_name() == 'cli' && $ips = $this->getServerIps()) {
-                foreach ($ips as $ip) {
-                    if (isset($this->envMap[$ip])) {
-                        $this->env = $this->envMap[$ip];
-                        break;
-                    }
-                }
-                if (!$this->env) {
-                    $this->env = 'prod';
-                }
+            return;
+        }
+
+        // Executes in web server, like Apache, Nginx
+        if ($ip = $this->request->getServer('SERVER_ADDR')) {
+            if (isset($this->envMap[$ip])) {
+                $this->env = $this->envMap[$ip];
             } else {
                 $this->env = 'prod';
             }
+            return;
         }
 
-        return $this;
+        // Executes in CLI
+        if (php_sapi_name() == 'cli' && $ips = $this->getServerIps()) {
+            foreach ($ips as $ip) {
+                if (isset($this->envMap[$ip])) {
+                    $this->env = $this->envMap[$ip];
+                    break;
+                }
+            }
+            if (!$this->env) {
+                $this->env = 'prod';
+            }
+            return;
+        }
+
+        $this->env = 'prod';
+        return;
     }
 
     /**
