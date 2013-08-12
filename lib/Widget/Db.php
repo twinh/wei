@@ -228,7 +228,7 @@ class Db extends AbstractWidget
      * @param string $table The name of database table
      * @return Db\QueryBuilder
      */
-    public function __invoke($table)
+    public function __invoke($table = null)
     {
         return $this->createQueryBuilder($table);
     }
