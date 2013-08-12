@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 0.9.5 (WIP)
+* Added `getLastSql` method for db widget
+
 ## 0.9.4 (2013-08-07)
 * Changed cache widgets' `increment` and `decrement` methods to `inc` and `dec`
 * Refactored dbCache, use db widget instead of dbal widget to execute SQL

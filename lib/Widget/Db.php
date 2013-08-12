@@ -195,6 +195,13 @@ class Db extends AbstractWidget
     protected $global = false;
 
     /**
+     * The last executed SQL query
+     *
+     * @var string
+     */
+    protected $lastSql;
+
+    /**
      * Constructor
      *
      * @param array $options
@@ -447,7 +454,7 @@ class Db extends AbstractWidget
     public function executeUpdate($sql, $params = array(), $types = array())
     {
         $this->connect();
-
+        $this->lastSql = $sql;
         if ($this->beforeQuery) {
             call_user_func_array($this->beforeQuery, array($sql, $params, $types, $this));
         }
@@ -479,7 +486,7 @@ class Db extends AbstractWidget
     public function query($sql, $params = array(), $types = array())
     {
         $this->connect();
-
+        $this->lastSql = $sql;
         if ($this->beforeQuery) {
             call_user_func_array($this->beforeQuery, array($sql, $params, $types, $this));
         }
@@ -794,6 +801,16 @@ class Db extends AbstractWidget
                 throw new \RuntimeException(sprintf('Unsupported database driver: %s', $this->driver));
         }
         return $this->dsn = $dsn;
+    }
+
+    /**
+     * Returns the last executed SQL query
+     *
+     * @return string
+     */
+    public function getLastSql()
+    {
+        return $this->lastSql;
     }
 
     /**
