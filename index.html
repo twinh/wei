@@ -2438,7 +2438,7 @@
 </tr></tbody>
 </table><h3>方法</h3>
 
-<h4>db($table)</h4>
+<h4>db($table = null)</h4>
 
 <p>根据数据表名称,创建一个新Query Builder对象</p>
 
@@ -2911,6 +2911,12 @@
 <h4>db-&gt;getDsn()</h4>
 
 <p>获取连接到PDO的DSN字符串</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
+
+<h4>db-&gt;getLastSql()</h4>
+
+<p>获取最后执行的SQL语句</p>
 
 <p><strong>返回:</strong> <code>string</code></p>
 
