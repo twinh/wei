@@ -576,11 +576,11 @@ namespace Widget
          * @param string $dir The directory for class
          * @param string $namespace The prefix namespace of the class
          * @param null $format The widget name format, eg 'is%s'
-         * @param bool $autoload Whether added namespace and directory to `autoloadMap` or nor
+         * @param bool $autoload Whether add namespace and directory to `autoloadMap` or nor
          * @throws \InvalidArgumentException When the first parameter is not a directory
          * @return Widget
          */
-        public function import($dir, $namespace, $format = null, $autoload = true)
+        public function import($dir, $namespace, $format = null, $autoload = false)
         {
             if (!is_dir($dir)) {
                 throw new \InvalidArgumentException(sprintf('Fail to import widgets from non-exists directory "%s"', $dir));
