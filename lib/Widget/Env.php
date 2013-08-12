@@ -110,13 +110,9 @@ class Env extends AbstractWidget
             foreach ($ips as $ip) {
                 if (isset($this->envMap[$ip])) {
                     $this->env = $this->envMap[$ip];
-                    break;
+                    return;
                 }
             }
-            if (!$this->env) {
-                $this->env = 'prod';
-            }
-            return;
         }
 
         $this->env = 'prod';
