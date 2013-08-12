@@ -280,7 +280,7 @@ $db     | Widget\Db | 当前Db微件对象
 
 ### 方法
 
-#### db($table)
+#### db($table = null)
 根据数据表名称,创建一个新Query Builder对象
 
 **返回:** `Widget\Db\QueryBuilder`
@@ -521,6 +521,10 @@ $params     | array        | 绑定到SQL的参数
 
 **返回:** `string`
 
+#### db->getLastSql()
+获取最后执行的SQL语句
+
+**返回:** `string`
 
 ### 魔术方法
 
