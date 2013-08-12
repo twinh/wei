@@ -214,7 +214,7 @@ namespace Widget
             foreach ($this->autoloadMap as $prefix => $dir) {
                 // Allow empty class prefix
                 if (!$prefix || 0 === strpos($class, $prefix)) {
-                    if (file_exists($file = $dir . $class)) {
+                    if (file_exists($file = $dir . DIRECTORY_SEPARATOR . $class)) {
                         require_once $file;
                         return true;
                     }
@@ -529,11 +529,11 @@ namespace Widget
         public function setAutoloadMap(array $map)
         {
             foreach ($map as &$dir) {
-                $dir = realpath($dir) . DIRECTORY_SEPARATOR;
+                $dir = realpath($dir);
             }
 
             // The autoload directories will always contain the widget directory
-            $map['Widget'] = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
+            $map['Widget'] = dirname(dirname(__FILE__));
 
             $this->autoloadMap = $map;
 
@@ -587,11 +587,10 @@ namespace Widget
             }
 
             if ($autoload) {
-                $this->autoloadMap[$namespace] = $dir;
+                $this->autoloadMap[$namespace] = dirname($dir);
             }
 
             $files = glob($dir . '/*.php') ?: array();
-
             foreach ($files as $file) {
                 $class = substr(basename($file), 0, -4);
                 $name = $format ? sprintf($format, $class) : $class;
@@ -607,9 +606,9 @@ namespace Widget
          * @param array $import
          * @return Widget
          */
-        public function setImport($import = array())
+        public function setImport(array $import = array())
         {
-            foreach ((array)$import as $option) {
+            foreach ($import as $option) {
                 $option += array(
                     'dir' => null,
                     'namespace' => null,
@@ -618,7 +617,6 @@ namespace Widget
                 );
                 $this->import($option['dir'], $option['namespace'], $option['format'], $option['autoload']);
             }
-
             return $this;
         }
     }
