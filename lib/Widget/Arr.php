@@ -77,12 +77,4 @@ class Arr extends AbstractWidget
         }
         return $result;
     }
-
-    /**
-     * @return \Widget\Arr
-     */
-    public function __invoke()
-    {
-        return $this;
-    }
 }
