@@ -63,6 +63,22 @@ $hits = $cache->inc('article-1', 1);
 echo '该文章已被访问' . $hits . '次';
 ```
 
+### 使用缓存前缀来避免缓存名称冲突
+
+有些时候,我们会共享同一个memcched服务,共享同一个APC,这时可以通过设置缓存名称前缀,避免数据冲突
+
+```php
+// 设置APC缓存的键名前缀
+widget(array(
+    'memcached' => array(
+        'keyPrefix' => 'project-'
+    )
+));
+
+// 缓存键名将自动转换为'project-key'
+widget()->memcached->set('key', 'value');
+```
+
 ### 批量设置和获取缓存
 
 **注意:** 目前只有`redis`和`couchbase`支持原生的批量设置,其他的缓存实际都是通过`foreach`语句逐个设置.
