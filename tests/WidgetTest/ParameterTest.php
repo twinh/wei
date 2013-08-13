@@ -51,7 +51,6 @@ class ParameterTest extends TestCase
             'gets' => 'query',
             'posts' => 'post',
             'cookies' => 'cookie',
-            'servers' => 'server',
             'data' => 'request'
         );
 
