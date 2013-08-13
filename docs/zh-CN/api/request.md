@@ -26,6 +26,14 @@ if (widget()->request->inAjax()) {
 }
 ```
 
+### 获取服务器IP地址
+```php
+// 假设 $_SERVER['SERVER_ADDR'] = '127.0.0.1';
+
+// 返回127.0.0.1
+$ip = widget()->request->getServer('SERVER_ADDR');
+```
+
 调用方式
 --------
 
