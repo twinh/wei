@@ -12,8 +12,7 @@ namespace Widget;
  * A widget to detect user OS, browser and device name and version
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Request $request A widget that handles the HTTP request data
- *
+
  * @method      bool inIe() Check if the user is browsing in Internet Explorer browser
  * @method      bool inChrome() Check if the user is browsing in Chrome browser
  * @method      bool inFirefox() Check if the user is browsing in Firefox browser
