@@ -16,7 +16,6 @@ namespace Widget;
  *     user defined $env > $envDetect callback > $envMap
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Request $request A widget that handles the HTTP request Data
  */
 class Env extends Base
 {
@@ -49,6 +48,13 @@ class Env extends Base
      * @var string
      */
     protected $configDir = 'config/config_%env%.php';
+
+    /**
+     * The server and execution environment parameters, equals to $_SERVER on default
+     *
+     * @var array
+     */
+    protected $server;
 
     /**
      * Constructor
@@ -96,7 +102,8 @@ class Env extends Base
         }
 
         // Executes in web server, like Apache, Nginx
-        if ($ip = $this->request->getServer('SERVER_ADDR')) {
+        if (isset($this->server['SERVER_ADDR'])) {
+            $ip = $this->server['SERVER_ADDR'];
             if (isset($this->envMap[$ip])) {
                 $this->env = $this->envMap[$ip];
             } else {
