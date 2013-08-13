@@ -311,12 +311,7 @@
 
 <h3>获取微件管理器对象</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 通过widget函数获取</span>
-<span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">();</span>
 
-<span class="c1">// 完整的获取方法如下,您可以根据自己的编码习惯选择适合您的方式</span>
-<span class="nv">$widget</span> <span class="o">=</span> <span class="nx">\Widget\Widget</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
-</code></pre></div>
 
 <h3>设置微件配置</h3>
 
@@ -10122,52 +10117,6 @@
 <h4>query-&gt;getInArray($name, array $array)</h4>
 
 <p>获取HTTP请求参数,如果参数的值不在数组中,将返回数组的第一个值</p>
-  </section>
-
-<!-- api/server
-  ================================================== -->
-  <section id="server">
-  <div class="page-header"><h1>Server</h1></div>
-
-<p>获取服务器运行和环境参数($_SERVER)</p>
-
-<h2>案例</h2>
-
-<h3>获取名称为iERVER_NAME的服务器运行参数</h3>
-
-<div class="highlight"><pre><code class="php"><span class="c1">// 假设 $_SERVER['SERVER_NAME'] = 'www.example.com';</span>
-
-<span class="c1">// 返回www.example.com</span>
-<span class="nv">$id</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">server</span><span class="p">(</span><span class="s1">'SERVER_NAME'</span><span class="p">);</span>
-</code></pre></div>
-
-<h2>调用方法</h2>
-
-<h3>选项</h3>
-
-<p><em>无</em></p>
-
-<h3>方法</h3>
-
-<h4>server($name, $default = null)</h4>
-
-<p>获取服务器参数($_SERVER),返回值类型为字符串</p>
-
-<h4>server-&gt;getRaw($name, $default = null)</h4>
-
-<p>获取服务器参数的原始值</p>
-
-<h4>server-&gt;getInt($name, $min = null, $max = null)</h4>
-
-<p>获取服务器参数,返回值类型为整形</p>
-
-<h4>server-&gt;getArray($name, $default = null)</h4>
-
-<p>获取服务器参数,返回值类型为数组</p>
-
-<h4>server-&gt;getInArray($name, array $array)</h4>
-
-<p>获取服务器参数,如果参数的值不在数组中,将返回数组的第一个值</p>
   </section>
 
 <!-- api/session
