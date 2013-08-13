@@ -133,7 +133,7 @@ method                 | string       | GET     | HTTP的请求方式,可以是`
 contentType            | string       | application/x-www-form-urlencoded; charset=UTF-8 | HTTP请求头内容类型
 cookies                | array        | array() | cookie数组,key是cookie的名称,value是cookie的值,cookie的值只能是字符串
 data                   | array,string | array() | 要发送到服务器的数据
-gloabl                 | bool         | true    | 是否使用全局配置选项
+global                 | bool         | true    | 是否使用全局配置选项
 headers                | array        | array   | 要发送的HTTP头
 ip                     | string       | 无      | 要请求的URL地址中域名的IP地址,注意不是您的服务器IP地址
 timeout                | int          | 0       | 整个请求的最大运行时间,单位是毫秒,默认是无限制
