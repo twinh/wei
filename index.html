@@ -799,6 +799,21 @@
 <span class="k">echo</span> <span class="s1">'该文章已被访问'</span> <span class="o">.</span> <span class="nv">$hits</span> <span class="o">.</span> <span class="s1">'次'</span><span class="p">;</span>
 </code></pre></div>
 
+<h3>使用缓存前缀来避免缓存名称冲突</h3>
+
+<p>有些时候,我们会共享同一个memcched服务,共享同一个APC,这时可以通过设置缓存名称前缀,避免数据冲突</p>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 设置APC缓存的键名前缀</span>
+<span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'memcached'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'keyPrefix'</span> <span class="o">=&gt;</span> <span class="s1">'project-'</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+
+<span class="c1">// 缓存键名将自动转换为'project-key'</span>
+<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">memcached</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">);</span>
+</code></pre></div>
+
 <h3>批量设置和获取缓存</h3>
 
 <p><strong>注意:</strong> 目前只有<code>redis</code>和<code>couchbase</code>支持原生的批量设置,其他的缓存实际都是通过<code>foreach</code>语句逐个设置.</p>
