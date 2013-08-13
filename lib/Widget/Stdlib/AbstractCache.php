@@ -8,7 +8,6 @@
 
 namespace Widget\Stdlib;
 
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Widget\AbstractWidget;
 
 /**
