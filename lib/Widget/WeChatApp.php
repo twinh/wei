@@ -18,7 +18,6 @@ use \SimpleXMLElement;
  * @link        http://mp.weixin.qq.com/wiki/index.php?title=%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3%E6%8C%87%E5%8D%97
  * @property    Response $response The HTTP response widget
  * @method      Response response(string $content, int $status = 200) Send headers and output content
- * @property    Request $request A widget that handles the HTTP request data
  */
 class WeChatApp extends Base
 {
@@ -35,6 +34,13 @@ class WeChatApp extends Base
      * @var string
      */
     protected $postData;
+
+    /**
+     * The URL query parameters, equals to $_GET on default
+     *
+     * @var array
+     */
+    protected $query;
 
     /**
      * The rules to generate response message
@@ -133,6 +139,10 @@ class WeChatApp extends Base
     {
         parent::__construct($options);
 
+        if (!$this->query) {
+            $this->query = $_GET;
+        }
+
         if (is_null($this->postData) && isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
             $this->postData = $GLOBALS['HTTP_RAW_POST_DATA'];
         }
@@ -176,8 +186,8 @@ class WeChatApp extends Base
         }
 
         // Response 'echostr' for fist time authentication
-        if ($echostr = $this->request->getQuery('echostr')) {
-            return htmlspecialchars($echostr, \ENT_QUOTES, 'UTF-8');
+        if (isset($this->query['echostr'])) {
+            return htmlspecialchars($this->query['echostr'], \ENT_QUOTES, 'UTF-8');
         }
 
         switch ($this->msgType) {
@@ -811,14 +821,15 @@ class WeChatApp extends Base
      */
     protected function checkSignature()
     {
+        $query = $this->query;
         $tmpArr = array(
             $this->token,
-            $this->request->getQuery('timestamp'),
-            $this->request->getQuery('nonce')
+            isset($query['timestamp']) ? $query['timestamp'] : '',
+            isset($query['nonce']) ? $query['nonce'] : ''
         );
         sort($tmpArr);
         $tmpStr = sha1(implode($tmpArr));
-        return $tmpStr === $this->request->getQuery('signature');
+        return isset($query['signature']) && $tmpStr === $query['signature'];
     }
 
     protected function handleText()

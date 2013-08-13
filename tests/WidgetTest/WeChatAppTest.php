@@ -5,6 +5,7 @@ namespace WidgetTest;
 use Widget\WeChatApp;
 
 /**
+/**
  * @property \Widget\WeChatApp $callback The WeChat callback widget
  */
 class WeChatAppTest extends TestCase
@@ -28,10 +29,12 @@ class WeChatAppTest extends TestCase
     public function testEchostr()
     {
         $callback = $this->weChatApp;
-        $this->query->set('signature', 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583');
-        $this->query->set('timestamp', '1366032735');
-        $this->query->set('nonce', '1365872231');
-        $this->query->set('echostr', $rand = mt_rand(0, 100000));
+        $callback->setOption('query', array(
+            'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+            'timestamp' => '1366032735',
+            'nonce'     => '1365872231',
+            'echostr'   => $rand = mt_rand(0, 100000)
+        ));
 
         //$this->expectOutputString($rand);
         ob_start();
@@ -51,10 +54,12 @@ class WeChatAppTest extends TestCase
             return 'nerver see me';
         });
 
-        $this->query->set('signature', 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583');
-        $this->query->set('timestamp', '1366032735');
-        $this->query->set('nonce', '1365872231');
-        $this->query->set('echostr', $rand = mt_rand(0, 100000));
+        $cb->setOption('query', array(
+            'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+            'timestamp' => '1366032735',
+            'nonce'     => '1365872231',
+            'echostr'   => $rand = mt_rand(0, 100000)
+        ));
 
         //$this->expectOutputString($rand);
         ob_start();
@@ -81,7 +86,7 @@ class WeChatAppTest extends TestCase
         // Inject HTTP query
         $gets = array();
         parse_str($query, $gets);
-        $this->request->setOption('gets', $gets);
+        $cb->setOption('query', $gets);
 
         // Inject user input message
         $cb->setOption('postData', $input);
@@ -530,9 +535,12 @@ class WeChatAppTest extends TestCase
     public function testFlatMode()
     {
         $cb = $this->weChatApp;
-        $this->query->set('signature', 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583');
-        $this->query->set('timestamp', '1366032735');
-        $this->query->set('nonce', '1365872231');
+        $cb->setOption('query', array(
+            'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+            'timestamp' => '1366032735',
+            'nonce'     => '1365872231',
+            'echostr'   => $rand = mt_rand(0, 100000)
+        ));
         $cb->setOption('postData', $this->inputTextMessage('hi'));
         $cb->parse();
 
