@@ -13,7 +13,7 @@ namespace Widget;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class T extends AbstractWidget
+class T extends Base
 {
     /**
      * The default locale

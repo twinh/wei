@@ -13,7 +13,7 @@ namespace Widget;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Is extends AbstractWidget
+class Is extends Base
 {
     /**
      * The validator rule aliases

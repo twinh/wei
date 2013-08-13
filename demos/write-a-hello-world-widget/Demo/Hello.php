@@ -2,9 +2,9 @@
 
 namespace Demo;
 
-use Widget\AbstractWidget;
+use Widget\Base;
 
-class Hello extends AbstractWidget
+class Hello extends Base
 {
     public function __invoke($world = 'World')
     {

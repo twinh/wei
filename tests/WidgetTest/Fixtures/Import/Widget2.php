@@ -2,9 +2,9 @@
 
 namespace WidgetTest\Fixtures\Import;
 
-use Widget\AbstractWidget;
+use Widget\Base;
 
-class Widget2 extends AbstractWidget
+class Widget2 extends Base
 {
-    
+
 }

@@ -14,7 +14,7 @@ namespace Widget;
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Logger $logger The logger widget
  */
-class Response extends AbstractWidget
+class Response extends Base
 {
     /**
      * Common use HTTP status code and text

@@ -2,7 +2,7 @@
 
 namespace WidgetTest\AppTest;
 
-class Test extends \Widget\AbstractWidget
+class Test extends \Widget\Base
 {
     public function test()
     {

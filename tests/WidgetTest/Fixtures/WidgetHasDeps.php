@@ -2,9 +2,9 @@
 
 namespace WidgetTest\Fixtures;
 
-use Widget\AbstractWidget;
+use Widget\Base;
 
-class WidgetHasDeps extends AbstractWidget
+class WidgetHasDeps extends Base
 {
     protected $deps = array(
         'request' => 'sub.request'

@@ -20,7 +20,7 @@ use \SimpleXMLElement;
  * @method      Response response(string $content, int $status = 200) Send headers and output content
  * @property    Request $request A widget that handles the HTTP request data
  */
-class WeChatApp extends AbstractWidget
+class WeChatApp extends Base
 {
     /**
      * The WeChat token to generate signature

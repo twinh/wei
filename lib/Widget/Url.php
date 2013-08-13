@@ -14,7 +14,7 @@ namespace Widget;
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Router $router Router
  */
-class Url extends AbstractWidget
+class Url extends Base
 {
     /**
      * @var array

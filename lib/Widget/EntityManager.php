@@ -19,7 +19,7 @@ use Doctrine\Common\Cache\Cache as DoctrineCache;
  * @method      \Doctrine\DBAL\Connection dbal() Returns the Doctrine DBAL connection object
  * @todo        ohter mapping
  */
-class EntityManager extends AbstractWidget
+class EntityManager extends Base
 {
     /**
      * The configuration for \Doctrine\ORM\Configuration

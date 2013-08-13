@@ -16,7 +16,7 @@ use Widget\Db\Collection;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Db extends AbstractWidget
+class Db extends Base
 {
     /**
      * The name of PDO driver, could be mysql, sqlite or pgsql

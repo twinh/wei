@@ -13,7 +13,7 @@ namespace Widget;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Uuid extends AbstractWidget
+class Uuid extends Base
 {
     /**
      * Generate a RANDOM UUID(universally unique identifier)

@@ -16,7 +16,7 @@ use Monolog\Logger as MonologLogger;
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        https://github.com/Seldaek/monolog
  */
-class Monolog extends AbstractWidget
+class Monolog extends Base
 {
     /**
      * The name of channel

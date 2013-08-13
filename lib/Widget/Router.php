@@ -17,7 +17,7 @@ namespace Widget;
  * @property    Request $request The HTTP request widget
  * @method      Response response(string $content) Send response header and content
  */
-class Router extends AbstractWidget
+class Router extends Base
 {
     /**
      * The routes configurations

@@ -13,7 +13,7 @@ namespace Widget;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Arr extends AbstractWidget
+class Arr extends Base
 {
     /**
      * Sort two-dimensional array like SQL ORDER BY clause

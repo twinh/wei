@@ -13,7 +13,7 @@ namespace Widget;
  *
  * @author twinhuang
  */
-class Map extends AbstractWidget
+class Map extends Base
 {
     /**
      * The map PHP file

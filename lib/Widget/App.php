@@ -19,7 +19,7 @@ use Widget\Response;
  * @property    Logger $logger The logger widget
  * @property    Request $request The HTTP request widget
  */
-class App extends AbstractWidget
+class App extends Base
 {
     const FORWARD_CODE = 1000;
 

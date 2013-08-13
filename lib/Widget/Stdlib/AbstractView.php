@@ -8,14 +8,14 @@
 
 namespace Widget\Stdlib;
 
-use Widget\AbstractWidget;
+use Widget\Base;
 
 /**
  * The base class for view widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-abstract class AbstractView extends AbstractWidget
+abstract class AbstractView extends Base
 {
     /**
      * Default template file extension

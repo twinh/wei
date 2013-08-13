@@ -2,9 +2,9 @@
 
 namespace WidgetTest\Fixtures;
 
-use \Widget\AbstractWidget;
+use \Widget\Base;
 
-class WidgetWithCallbackEvent extends AbstractWidget
+class WidgetWithCallbackEvent extends Base
 {
     protected $callback;
 }

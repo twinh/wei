@@ -15,7 +15,7 @@ namespace Widget;
  * @property    Server $server The server widget
  * @property    Query $query The query widget
  */
-class UrlDebugger extends AbstractWidget
+class UrlDebugger extends Base
 {
     /**
      * Constructor

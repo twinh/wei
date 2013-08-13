@@ -2,7 +2,7 @@
 
 namespace WidgetTest\AppTest;
 
-class Forward extends \Widget\AbstractWidget
+class Forward extends \Widget\Base
 {
     public function target()
     {

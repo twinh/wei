@@ -13,7 +13,7 @@ namespace Widget;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Website extends AbstractWidget
+class Website extends Base
 {
     /**
      * The website URL

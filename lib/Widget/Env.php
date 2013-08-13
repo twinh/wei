@@ -18,7 +18,7 @@ namespace Widget;
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request A widget that handles the HTTP request Data
  */
-class Env extends AbstractWidget
+class Env extends Base
 {
     /**
      * The environment name

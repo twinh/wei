@@ -8,7 +8,7 @@
 
 namespace Widget\Stdlib;
 
-use Widget\AbstractWidget;
+use Widget\Base;
 
 /**
  * The base event class
@@ -16,7 +16,7 @@ use Widget\AbstractWidget;
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://api.jquery.com/category/events/event-object/
  */
-class Event extends AbstractWidget
+class Event extends Base
 {
     /**
      * The name of event

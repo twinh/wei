@@ -8,14 +8,14 @@
 
 namespace Widget\Stdlib;
 
-use Widget\AbstractWidget;
+use Widget\Base;
 
 /**
  * The basic class for request widget, like get, post etc
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-abstract class Parameter extends AbstractWidget implements \ArrayAccess, \Countable, \IteratorAggregate
+abstract class Parameter extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
      * The variable to store array

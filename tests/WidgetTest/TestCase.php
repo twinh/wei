@@ -14,7 +14,7 @@ use PHPUnit_Framework_TestCase;
 class TestCase extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var \Widget\AbstractWidget
+     * @var \Widget\Base
      */
     protected $object;
 
@@ -101,7 +101,7 @@ class TestCase extends PHPUnit_Framework_TestCase
             }
 
             // Remove all widget instanced by current test object
-            if ($property instanceof \Widget\AbstractWidget) {
+            if ($property instanceof \Widget\Base) {
                 unset($this->$name);
                 $widget->remove($name);
             }
@@ -130,7 +130,7 @@ class TestCase extends PHPUnit_Framework_TestCase
      * Get the widget object by the given name
      *
      * @param string $name The name of widget
-     * @return \Widget\AbstractWidget
+     * @return \Widget\Base
      */
     public function __get($name)
     {

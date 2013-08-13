@@ -14,7 +14,7 @@ namespace Widget;
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        https://gravatar.com/site/implement/images/
  */
-class Gravatar extends AbstractWidget
+class Gravatar extends Base
 {
     /**
      * The default image type or URL when email do not have a Gravatar image

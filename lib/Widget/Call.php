@@ -14,7 +14,7 @@ namespace Widget;
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://api.jquery.com/jQuery.ajax/
  */
-class Call extends AbstractWidget
+class Call extends Base
 {
     /**
      * The request URL

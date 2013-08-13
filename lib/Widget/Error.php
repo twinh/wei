@@ -14,7 +14,7 @@ namespace Widget;
  * @property    Logger $logger The logger widget
  * @property    Response $response The HTTP response widget
  */
-class Error extends AbstractWidget
+class Error extends Base
 {
     /**
      * The default error message display when debug is not enable

@@ -16,7 +16,7 @@ namespace Widget;
  *
  * @link https://github.com/zendframework/zf2/blob/master/library/Zend/Escaper/Escaper.php
  */
-class Escape extends AbstractWidget
+class Escape extends Base
 {
     /**
      * Entity Map mapping Unicode codepoints to any available named HTML entities.

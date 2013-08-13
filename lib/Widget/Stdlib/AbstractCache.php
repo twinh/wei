@@ -8,14 +8,14 @@
 
 namespace Widget\Stdlib;
 
-use Widget\AbstractWidget;
+use Widget\Base;
 
 /**
  * A simple implementation of Cache\CacheInterface
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-abstract class AbstractCache extends AbstractWidget
+abstract class AbstractCache extends Base
 {
     /**
      * The string prepend to the cache key

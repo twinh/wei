@@ -9,16 +9,16 @@
 namespace Widget
 {
     /**
-     * @see Widget\AbstractWidget
+     * @see Widget\Base
      */
-    require_once 'AbstractWidget.php';
+    require_once 'Base.php';
 
     /**
      * The root widget and widget container
      *
      * @author      Twin Huang <twinhuang@qq.com>
      */
-    class Widget extends AbstractWidget
+    class Widget extends Base
     {
         /**
          * Version
@@ -228,7 +228,7 @@ namespace Widget
          * Get a widget instance
          *
          * @param string $name The name of widget
-         * @return AbstractWidget
+         * @return Base
          */
         public function __invoke($name)
         {
@@ -344,7 +344,7 @@ namespace Widget
          * @param array $options The option properties for widget
          * @param array $deps The dependent configuration
          * @throws \BadMethodCallException
-         * @return AbstractWidget
+         * @return Base
          */
         public function get($name, array $options = array(), array $deps = array())
         {
@@ -408,7 +408,7 @@ namespace Widget
          * @param string $name The name of the widget
          * @param array $options The option properties for widget
          * @param array $deps The dependent configuration
-         * @return AbstractWidget The widget object
+         * @return Base The widget object
          */
         public function newInstance($name, array $options = array(), array $deps = array())
         {
@@ -420,10 +420,10 @@ namespace Widget
          * Add a widget
          *
          * @param string $name The name of widget
-         * @param AbstractWidget $widget The widget object
+         * @param Base $widget The widget object
          * @return Widget
          */
-        public function set($name, AbstractWidget $widget)
+        public function set($name, Base $widget)
         {
             $this->$name = $this->widgets[$name] = $widget;
             return $this;
@@ -439,7 +439,7 @@ namespace Widget
         {
             if (isset($this->widgets[$name])) {
                 unset($this->widgets[$name]);
-                if (isset($this->$name) && $this->$name instanceof AbstractWidget) {
+                if (isset($this->$name) && $this->$name instanceof Base) {
                     unset($this->$name);
                 }
                 return true;

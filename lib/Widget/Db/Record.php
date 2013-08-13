@@ -9,14 +9,14 @@
 namespace Widget\Db;
 
 use Widget\Db;
-use Widget\AbstractWidget;
+use Widget\Base;
 
 /**
  * A base database record class
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Record extends AbstractWidget
+class Record extends Base
 {
     /**
      * The record table name

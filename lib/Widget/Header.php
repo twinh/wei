@@ -14,7 +14,7 @@ namespace Widget;
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Response $response A widget that handles the HTTP response data
  */
-class Header extends AbstractWidget
+class Header extends Base
 {
     /**
      * The variable to store array

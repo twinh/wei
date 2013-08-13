@@ -25,7 +25,7 @@ namespace Widget;
  * @method      bool inIphone() Check if the user is browsing by iPhone/iPod
  * @method      bool inIpad() Check if the user is browsing by iPad
  */
-class Ua extends AbstractWidget
+class Ua extends Base
 {
     protected $patterns = array(
         // Browser

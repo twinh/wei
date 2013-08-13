@@ -2,7 +2,7 @@
 
 namespace WidgetTest\AppTest\Admin;
 
-class Index extends \Widget\AbstractWidget
+class Index extends \Widget\Base
 {
     public function index()
     {

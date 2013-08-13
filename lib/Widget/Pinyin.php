@@ -14,7 +14,7 @@ namespace Widget;
  *
  * The basic code of the pinyin widget is from the internet
  */
-class Pinyin extends AbstractWidget
+class Pinyin extends Base
 {
     public static $dictionary = array(
         array('a', -20319),
