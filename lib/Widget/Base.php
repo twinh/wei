@@ -58,7 +58,6 @@ namespace Widget;
  * @method   string     post($name, $default = null) Returns a stringify request parameter value
  * @property Query      $query A widget that handles the URL query parameters ($_GET)
  * @method   string     query($name, $default = null) Returns a stringify URL query parameter value
- * @property Server     $server A widget that handles the server and execution environment parameters ($_SERVER)
  * @method   string     server($name, $default = null) Returns a stringify server or execution environment parameter value
  * @property Session    $session A widget that session parameters ($_SESSION)
  * @method   mixed      session($name, $default = null) Returns a stringify session parameter value
