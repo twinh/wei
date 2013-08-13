@@ -74,7 +74,7 @@ abstract class AbstractCache extends AbstractWidget
             }
             $result = call_user_func($fn, $this->widget);
 
-            $setResult = $this->set($key, $result, $expire);
+            $setResult = $this->doSet($key, $result, $expire);
             if (false === $setResult) {
                 throw new \RuntimeException('Fail to store cache from callback');
             }
