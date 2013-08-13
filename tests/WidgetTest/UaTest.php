@@ -290,13 +290,7 @@ class UaTest extends TestCase
      */
     public function testInMobile($servers)
     {
-        $request = new \Widget\Request(array(
-            'fromGlobal' => false,
-            'servers' => $servers,
-        ));
-
-        $this->ua->request = $request;
-
+        $this->ua->setOption('server', $servers);
         $this->assertTrue($this->ua->inMobile());
     }
 

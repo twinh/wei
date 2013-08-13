@@ -58,6 +58,13 @@ class Ua extends Base
     protected $userAgent;
 
     /**
+     * The server and execution environment parameters, equals to $_SERVER on default
+     *
+     * @var array
+     */
+    protected $server;
+
+    /**
      * Constructor
      *
      * @param array $options
@@ -66,7 +73,13 @@ class Ua extends Base
     {
         parent::__construct($options);
 
-        $this->userAgent = $this->request->getServer('HTTP_USER_AGENT');
+        if (!$this->server) {
+            $this->server = $_SERVER;
+        }
+
+        if (!$this->userAgent) {
+            $this->userAgent = isset($this->server['HTTP_USER_AGENT']) ? $this->server['HTTP_USER_AGENT'] : null;
+        }
     }
 
     /**
@@ -143,8 +156,7 @@ class Ua extends Base
      */
     public function inMobile()
     {
-        $s = $this->request->getParameterReference('server');
-
+        $s = $this->server;
         if (
             isset($s['HTTP_ACCEPT']) &&
                 (strpos($s['HTTP_ACCEPT'], 'application/x-obml2d') !== false || // Opera Mini; @reference: http://dev.opera.com/articles/view/opera-binary-markup-language/
