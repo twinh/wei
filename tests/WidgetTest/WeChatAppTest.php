@@ -26,7 +26,6 @@ class WeChatAppTest extends TestCase
         $return = $app();
 
         $this->assertInstanceOf('\Widget\WeChatApp', $return);
-        $this->assertEquals('403', $this->response->getStatusCode());
     }
 
     public function testEchostr()

@@ -16,8 +16,6 @@ use \SimpleXMLElement;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://mp.weixin.qq.com/wiki/index.php?title=%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3%E6%8C%87%E5%8D%97
- * @property    Response $response The HTTP response widget
- * @method      Response response(string $content, int $status = 200) Send headers and output content
  */
 class WeChatApp extends Base
 {
@@ -43,7 +41,7 @@ class WeChatApp extends Base
     protected $query;
 
     /**
-     * The rules to generate response message
+     * The rules to generate output message
      *
      * @var array
      */
@@ -157,8 +155,7 @@ class WeChatApp extends Base
      */
     public function __invoke()
     {
-        $this->response($this->run());
-
+        echo $this->run();
         return $this;
     }
 
@@ -181,11 +178,10 @@ class WeChatApp extends Base
     public function run()
     {
         if (!$this->valid) {
-            $this->response->setStatusCode(403);
             return 'Forbidden';
         }
 
-        // Response 'echostr' for fist time authentication
+        // Output 'echostr' for fist time authentication
         if (isset($this->query['echostr'])) {
             return htmlspecialchars($this->query['echostr'], \ENT_QUOTES, 'UTF-8');
         }
@@ -377,7 +373,7 @@ class WeChatApp extends Base
     }
 
     /**
-     * Generate text message for response
+     * Generate text message for output
      *
      * @param string $content
      * @param bool $mark Whether mark the message or not
@@ -393,7 +389,7 @@ class WeChatApp extends Base
     }
 
     /**
-     * Generate music message for response
+     * Generate music message for output
      *
      * @param string $title The title of music
      * @param string $description The description display blow the title
@@ -417,7 +413,7 @@ class WeChatApp extends Base
     }
 
     /**
-     * Generate article message for response
+     * Generate article message for output
      *
      * ```
      * // Sends one article
@@ -712,7 +708,7 @@ class WeChatApp extends Base
     }
 
     /**
-     * Generate message for response
+     * Generate message for output
      *
      * @param string $type The type of message
      * @param \SimpleXMLElement $xml The xml object
