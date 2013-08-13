@@ -12,7 +12,6 @@ namespace Widget;
  * A widget send file download response
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Request $request A widget that handles the HTTP request data
  */
 class Download extends Response
 {
@@ -41,6 +40,27 @@ class Download extends Response
     protected $filename;
 
     /**
+     * The server and execution environment parameters, equals to $_SERVER on default
+     *
+     * @var array
+     */
+    protected $server;
+
+    /**
+     * Constructor
+     *
+     * @param array $options
+     */
+    public function __construct(array $options = array())
+    {
+        parent::__construct($options);
+
+        if (!$this->server) {
+            $this->server = $_SERVER;
+        }
+    }
+
+    /**
      * Send file download response
      */
     public function __invoke($file = null, $options = array())
@@ -67,7 +87,8 @@ class Download extends Response
         $name = $this->filename ?: basename($file);
 
         // For IE
-        if (preg_match('/MSIE ([\w.]+)/', $this->request->getServer('HTTP_USER_AGENT'))) {
+        $userAgent = isset($this->server['HTTP_USER_AGENT']) ? $this->server['HTTP_USER_AGENT'] : '';
+        if (preg_match('/MSIE ([\w.]+)/', $userAgent)) {
             $filename = '=' . rawurlencode($name);
         } else {
             $filename = "*=UTF-8''" . rawurlencode($name);
