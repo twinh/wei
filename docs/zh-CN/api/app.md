@@ -1,14 +1,14 @@
-    该微件文档还在紧急编写中,敬请期待!
-[app()](http://twinh.github.io/widget/api/app)
-==============================================
+App
+===
 
-Startup application
+创建一个MVC应用
 
-### Startup application
-```php
-\App|null app($options)
-```
+案例
+----
 
-##### 参数
-* **$options** `array` 
+	TODO
 
+调用方式
+--------
+
+	TODO
