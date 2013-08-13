@@ -4,6 +4,11 @@ namespace WidgetTest;
 
 class ParameterTest extends TestCase
 {
+    /**
+     * @var \Widget\Stdlib\Parameter
+     */
+    protected $object;
+
     public function setUp()
     {
         $this->object = new \WidgetTest\Fixtures\Parameter(array(
@@ -168,15 +173,15 @@ class ParameterTest extends TestCase
 
     public function testInvoker()
     {
-        $widget = $this->object;
+        $parameter = $this->object;
 
-        $widget->fromArray(array(
+        $parameter->fromArray(array(
             'string' => 'value',
             1 => 2
         ));
 
-        $this->assertEquals('value', $widget('string'));
+        $this->assertEquals('value', $parameter('string'));
 
-        $this->assertEquals('custom', $widget('no this key', 'custom'));
+        $this->assertEquals('custom', $parameter('no this key', 'custom'));
     }
 }
