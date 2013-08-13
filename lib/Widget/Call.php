@@ -17,6 +17,13 @@ namespace Widget;
 class Call extends AbstractWidget
 {
     /**
+     * The request URL
+     *
+     * @var string
+     */
+    protected $url;
+
+    /**
      * The HTTP request method
      *
      * The method could be `GET`, `POST`, `DELETE`, `PUT`, `PATCH` or any other
@@ -530,6 +537,26 @@ class Call extends AbstractWidget
     public function getResponse()
     {
         return $this->response;
+    }
+
+    /**
+     * Returns the request URL
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Returns the request method
+     *
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->method;
     }
 
     /**
