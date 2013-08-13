@@ -560,6 +560,26 @@ class Call extends AbstractWidget
     }
 
     /**
+     * Returns the IP address for the host name in URL
+     *
+     * @return string
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    /**
+     * Returns the data to send to the server
+     *
+     * @return array|string
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
      * Set request header value
      *
      * @param string $name
