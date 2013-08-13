@@ -4,23 +4,26 @@ namespace WidgetTest;
 
 use Widget\WeChatApp;
 
-/**
-/**
- * @property \Widget\WeChatApp $callback The WeChat callback widget
- */
 class WeChatAppTest extends TestCase
 {
+    /**
+     * @var \Widget\WeChatApp
+     */
+    protected $object;
+
     public function testForbiddenForInvalidSignature()
     {
-        $callback = $this->weChatApp;
-        $this->query->set('signature', 'invalid');
-        $this->query->set('timestamp', 'invalid');
-        $this->query->set('nonce', 'invalid');
+        $app = $this->object;
+        $app->setOption('query', array(
+            'signature' => 'invalid',
+            'timestamp' => 'invalid',
+            'nonce'     => 'invalid',
+        ));
 
         $this->expectOutputString('Forbidden');
 
-        $callback->parse();
-        $return = $callback();
+        $app->parse();
+        $return = $app();
 
         $this->assertInstanceOf('\Widget\WeChatApp', $return);
         $this->assertEquals('403', $this->response->getStatusCode());
@@ -28,8 +31,8 @@ class WeChatAppTest extends TestCase
 
     public function testEchostr()
     {
-        $callback = $this->weChatApp;
-        $callback->setOption('query', array(
+        $app = $this->object;
+        $app->setOption('query', array(
             'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
             'timestamp' => '1366032735',
             'nonce'     => '1365872231',
@@ -38,8 +41,8 @@ class WeChatAppTest extends TestCase
 
         //$this->expectOutputString($rand);
         ob_start();
-        $callback->parse();
-        $return = $callback();
+        $app->parse();
+        $return = $app();
         $this->assertEquals($rand, ob_get_clean());
 
         $this->assertInstanceOf('\Widget\WeChatApp', $return);
@@ -48,13 +51,13 @@ class WeChatAppTest extends TestCase
 
     public function testEchorStrOnlyWhenAuth()
     {
-        $cb = $this->weChatApp;
+        $app = $this->object;
 
-        $cb->fallback(function(){
+        $app->fallback(function(){
             return 'nerver see me';
         });
 
-        $cb->setOption('query', array(
+        $app->setOption('query', array(
             'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
             'timestamp' => '1366032735',
             'nonce'     => '1365872231',
@@ -63,17 +66,17 @@ class WeChatAppTest extends TestCase
 
         //$this->expectOutputString($rand);
         ob_start();
-        $cb->parse();
-        $cb();
+        $app->parse();
+        $app();
         $this->assertEquals($rand, ob_get_clean());
     }
 
     public function testHttpRawPostData()
     {
         $GLOBALS['HTTP_RAW_POST_DATA'] = 'test';
-        $callback = new \Widget\WeChatApp();
+        $app = new \Widget\WeChatApp();
 
-        $this->assertEquals('test', $callback->getOption('postData'));
+        $this->assertEquals('test', $app->getOption('postData'));
     }
 
     /**
@@ -81,72 +84,72 @@ class WeChatAppTest extends TestCase
      */
     public function testInputAndOutput($query, $input, $data, $outputContent = null, $mark = null)
     {
-        $cb = $this->weChatApp;
+        $app = $this->object;
 
         // Inject HTTP query
         $gets = array();
         parse_str($query, $gets);
-        $cb->setOption('query', $gets);
+        $app->setOption('query', $gets);
 
         // Inject user input message
-        $cb->setOption('postData', $input);
+        $app->setOption('postData', $input);
 
-        $cb->fallback(function($callback){
-            return "Your input is " . $callback->getContent();
+        $app->fallback(function($app){
+            return "Your input is " . $app->getContent();
         });
 
-        $cb->subscribe(function(){
+        $app->subscribe(function(){
             return 'you are my 100 reader, wonderful!';
         });
 
-        $cb->unsubscribe(function(){
+        $app->unsubscribe(function(){
             return 'you won\'t see this message';
         });
 
-        $cb->click('button', function(){
+        $app->click('button', function(){
             return 'you clicked the button';
         });
 
-        $cb->click('index', function(){
+        $app->click('index', function(){
             return 'you clicked index';
         });
 
-        $cb->receiveImage(function($cb){
-            $cb->setMark(true);
+        $app->receiveImage(function($app){
+            $app->setMark(true);
             return 'you sent a picture to me';
         });
 
-        $cb->receiveLocation(function($cb){
-            $cb->setMark(false);
+        $app->receiveLocation(function($app){
+            $app->setMark(false);
             return 'the place looks livable';
         });
 
-        $cb->receiveVoice(function(){
+        $app->receiveVoice(function(){
             return 'u sound like a old man~';
         });
 
-        $cb->receiveVideo(function(){
+        $app->receiveVideo(function(){
             return 'good video';
         });
 
-        $cb->receiveLink(function(){
+        $app->receiveLink(function(){
             return 'got a link';
         });
 
-        $cb->is('0', function(){
+        $app->is('0', function(){
             return 'your input is 0';
         });
 
-        $cb->is('1', function(){
+        $app->is('1', function(){
             return 'your input is 1';
         });
 
-        $cb->is('2', function(WeChatApp $cb){
-            return $cb->sendMusic('Burning', 'A song of Maria Arredondo', 'url', 'HQ url', true);
+        $app->is('2', function(WeChatApp $app){
+            return $app->sendMusic('Burning', 'A song of Maria Arredondo', 'url', 'HQ url', true);
         });
 
-        $cb->is('3', function(WeChatApp $cb){
-            return $cb->sendArticle(array(
+        $app->is('3', function(WeChatApp $app){
+            return $app->sendArticle(array(
                 'title' => 'It\'s fine today',
                 'description' => 'A new day is coming~~',
                 'picUrl' => 'http://pic-url',
@@ -154,42 +157,42 @@ class WeChatAppTest extends TestCase
             ));
         });
 
-        $cb->has('iphone', function(){
+        $app->has('iphone', function(){
             return 'sorry, not this time';
         });
 
-        $cb->has('ipad', function(WeChatApp $cb){
-            return $cb->sendText('Find a ipad ? ok, i will remember u', true);
+        $app->has('ipad', function(WeChatApp $app){
+            return $app->sendText('Find a ipad ? ok, i will remember u', true);
         });
 
         $that = $this;
-        $cb->startsWith('t', function($cb) use($that){
-            $that->assertEquals(' xx', $cb->getKeyword());
+        $app->startsWith('t', function($app) use($that){
+            $that->assertEquals(' xx', $app->getKeyword());
             return 'The translation result is: xx';
         });
 
-        $cb->match('/twin/', function(){
+        $app->match('/twin/', function(){
             return 'anyone find my brother?';
         });
 
-        $cb->match('/twin/i', function(WeChatApp $cb){
+        $app->match('/twin/i', function(WeChatApp $app){
             return 'Yes, I\'m here';
         });
 
         ob_start();
-        $cb->parse();
-        $return = $cb();
+        $app->parse();
+        $return = $app();
         $content = ob_get_clean();
 
         $this->assertInstanceOf('\Widget\WeChatApp', $return);
 
         foreach ($data as $name => $value) {
-            $this->assertEquals($value, $cb->{'get' . $name}());
+            $this->assertEquals($value, $app->{'get' . $name}());
         }
 
         $output = simplexml_load_string($content, 'SimpleXMLElement', LIBXML_NOCDATA);
-        $this->assertEquals($cb->getToUserName(), (string)$output->FromUserName);
-        $this->assertEquals($cb->getFromUserName(), (string)$output->ToUserName);
+        $this->assertEquals($app->getToUserName(), (string)$output->FromUserName);
+        $this->assertEquals($app->getFromUserName(), (string)$output->ToUserName);
 
         // Test mark message
         if (is_bool($mark)) {
@@ -197,7 +200,7 @@ class WeChatAppTest extends TestCase
         }
 
         // Test message content
-        switch ($cb->getMsgType()) {
+        switch ($app->getMsgType()) {
             case 'text':
                 $this->assertEquals($outputContent, $output->Content);
                 break;
@@ -223,7 +226,7 @@ class WeChatAppTest extends TestCase
                 break;
 
             case 'event':
-                switch ($cb->getEvent()) {
+                switch ($app->getEvent()) {
                     case 'subscribe':
                         $this->assertEquals('you are my 100 reader, wonderful!', $output->Content);
                         break;
@@ -233,7 +236,7 @@ class WeChatAppTest extends TestCase
                         break;
 
                     case 'click' :
-                        switch ($cb->getEventKey()) {
+                        switch ($app->getEventKey()) {
                             case 'button':
                                 $this->assertEquals('you clicked the button', $output->Content);
                                 break;
@@ -534,17 +537,17 @@ class WeChatAppTest extends TestCase
 
     public function testFlatMode()
     {
-        $cb = $this->weChatApp;
-        $cb->setOption('query', array(
+        $app = $this->object;
+        $app->setOption('query', array(
             'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
             'timestamp' => '1366032735',
             'nonce'     => '1365872231',
             'echostr'   => $rand = mt_rand(0, 100000)
         ));
-        $cb->setOption('postData', $this->inputTextMessage('hi'));
-        $cb->parse();
+        $app->setOption('postData', $this->inputTextMessage('hi'));
+        $app->parse();
 
         // Receive data not in callback Closure
-        $this->assertEquals('hi', $cb->getContent());
+        $this->assertEquals('hi', $app->getContent());
     }
 }
