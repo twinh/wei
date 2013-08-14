@@ -65,7 +65,7 @@ class Router extends Base
             unset($parameters['_id']);
 
             // Merge parameters to request query parameters
-            $query = $this->request->getParameterReference('query');
+            $query = $this->request->getParameterReference('get');
             $query += $parameters;
 
             array_unshift($parameters, $this->widget);

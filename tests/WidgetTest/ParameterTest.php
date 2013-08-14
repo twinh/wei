@@ -85,9 +85,9 @@ class ParameterTest extends TestCase
             'key1' => 'value1'
         );
 
-        $this->query->set($array);
+        $this->request->set($array);
 
-        $this->assertIsSubset($array, $this->query->toArray());
+        $this->assertIsSubset($array, $this->request->toArray());
     }
 
     public function testOffsetExists() {
