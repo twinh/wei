@@ -21,11 +21,11 @@ switch ($test) {
         break;
 
     case 'user-agent':
-        $result = $widget->server('HTTP_USER_AGENT');
+        $result = $widget->request->getServer('HTTP_USER_AGENT');
         break;
 
     case 'referer':
-        $result = $widget->server('HTTP_REFERER');
+        $result = $widget->request->getServer('HTTP_REFERER');
         break;
 
     case 'cookie':

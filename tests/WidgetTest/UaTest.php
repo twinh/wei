@@ -61,7 +61,9 @@ class UaTest extends TestCase
 
     public function testNotIn()
     {
-        $this->server['HTTP_USER_AGENT'] = 'fake';
+        $this->ua->setOption('servers', array(
+            'HTTP_USER_AGENT' => 'fale',
+        ));
 
         $this->assertFalse($this->ua->inIPad());
     }

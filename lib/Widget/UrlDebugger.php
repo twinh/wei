@@ -37,21 +37,11 @@ class UrlDebugger extends Base
     public function inject()
     {
         if ($this->query['_ajax']) {
-            $this->server['HTTP_X_REQUESTED_WITH'] = 'xmlhttprequest';
+            $this->request->setServer('HTTP_X_REQUESTED_WITH', 'xmlhttprequest');
         }
 
         if ($this->query['_method']) {
-            $this->server['REQUEST_METHOD'] = $this->query['_method'];
+            $this->request->setServer('REQUEST_METHOD', $this->query['_method']);
         }
-    }
-
-    /**
-     * Invoker
-     *
-     * @return UrlDebugger
-     */
-    public function __invoke()
-    {
-        return $this;
     }
 }
