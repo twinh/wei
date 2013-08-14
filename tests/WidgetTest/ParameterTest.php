@@ -49,7 +49,6 @@ class ParameterTest extends TestCase
     {
         $parameters = array(
             'gets' => 'query',
-            'posts' => 'post',
             'cookies' => 'cookie',
             'data' => 'request'
         );

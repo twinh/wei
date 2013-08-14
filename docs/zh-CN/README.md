@@ -128,7 +128,6 @@ API参考目录
 #### HTTP请求
 * [request](api/request.md) - 管理HTTP请求数据($_REQUEST)
 * [cookie](api/cookie.md) - 写入,读取和删除cookie($_COOKIE)
-* [post](api/post.md)  - 获取一项HTTP POST请求参数($_POST)的值
 * [query](api/query.md) - 获取一项HTTP GET查询参数($_GET)的值
 * [session](api/session.md) - 获取一项会话($_SESSION)的值
 * [ua](api/ua.md) - 检测客户端浏览器,操作系统和设备是否为指定的名称和版本

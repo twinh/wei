@@ -487,7 +487,7 @@ class RequestTest extends TestCase
             'fromGlobal' => false
         ));
 
-        foreach (array('get', 'post', 'cookie', 'server', 'file') as $option) {
+        foreach (array('get', 'cookie', 'server', 'file') as $option) {
             $this->assertInternalType('array', $request->getParameterReference($option));
         }
     }
