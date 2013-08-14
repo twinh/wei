@@ -70,15 +70,16 @@ class RequestTest extends TestCase
 
     public function testAjax()
     {
-        $this->server->set('HTTP_X_REQUESTED_WITH', 'xmlhttprequest');
+        $this->request->setServer('HTTP_X_REQUESTED_WITH', 'xmlhttprequest');
 
         $this->assertTrue($this->request->inAjax());
 
-        $this->server->set('HTTP_X_REQUESTED_WITH', 'json');
+        $this->request->setServer('HTTP_X_REQUESTED_WITH', 'json');
 
         $this->assertFalse($this->request->inAjax());
 
-        $this->server->remove('HTTP_X_REQUESTED_WITH');
+        $servers = $this->request->getParameterReference('server');
+        unset($servers['HTTP_X_REQUESTED_WITH']);
 
         $this->assertFalse($this->request->inAjax());
     }
@@ -93,36 +94,39 @@ class RequestTest extends TestCase
 
     public function testGetIp()
     {
-        $this->server->set('HTTP_X_FORWARDED_FOR', '1.2.3.4');
+        $this->request->setServer('HTTP_X_FORWARDED_FOR', '1.2.3.4');
         $this->assertEquals('1.2.3.4', $this->request->getIp());
 
-        $this->server->set('HTTP_X_FORWARDED_FOR', '1.2.3.4, 2.3.4.5');
+        $this->request->setServer('HTTP_X_FORWARDED_FOR', '1.2.3.4, 2.3.4.5');
         $this->assertEquals('1.2.3.4', $this->request->getIp());
 
-        $this->server->remove('HTTP_X_FORWARDED_FOR');
-        $this->server->set('HTTP_CLIENT_IP', '8.8.8.8');
+        $servers = &$this->request->getParameterReference('server');
+        unset($servers['HTTP_X_FORWARDED_FOR']);
+        $servers['HTTP_CLIENT_IP'] = '8.8.8.8';
         $this->assertEquals('8.8.8.8', $this->request->getIp());
 
-        $this->server->remove('HTTP_CLIENT_IP');
-        $this->server->set('REMOTE_ADDR', '9.9.9.9');
+        $servers = $this->request->getParameterReference('server');
+        unset($servers['HTTP_CLIENT_IP']);
+        $servers['REMOTE_ADDR'] = '9.9.9.9';
         $this->assertEquals('9.9.9.9', $this->request->getIp());
 
-        $this->server->set('HTTP_X_FORWARDED_FOR', 'invalid ip');
+        $this->request->setServer('HTTP_X_FORWARDED_FOR', 'invalid ip');
         $this->assertEquals('0.0.0.0', $this->request->getIp());
     }
 
     public function testGetScheme()
     {
-        $this->server->set('HTTPS', 'on');
+        $this->request->setServer('HTTPS', 'on');
         $this->assertEquals('https', $this->request->getScheme());
 
-        $this->server->set('HTTPS', '1');
+        $this->request->setServer('HTTPS', '1');
         $this->assertEquals('https', $this->request->getScheme());
 
-        $this->server->set('HTTPS', 'off');
+        $this->request->setServer('HTTPS', 'off');
         $this->assertEquals('http', $this->request->getScheme());
 
-        $this->server->remove('HTTPS', '1');
+        $servers = $this->request->getParameterReference('server');
+        unset($servers['HTTPS']);
         $this->assertEquals('http', $this->request->getScheme());
     }
 
@@ -361,7 +365,7 @@ class RequestTest extends TestCase
      */
     public function testBasePathDetection(array $server, $baseUrl, $pathInfo)
     {
-        $this->server->setOption('data', $server);
+        $this->request->setOption('servers', $server);
 
         $this->assertEquals($baseUrl,  $this->request->getBaseUrl());
         $this->assertEquals($pathInfo, $this->request->getPathInfo());
@@ -374,15 +378,12 @@ class RequestTest extends TestCase
             'SERVER_NAME' => 'test.com',
             'REMOTE_ADDR' => '127.0.0.1'
         );
-        $this->server->setOption('data', $server);
+        $this->request->setOption('servers', $server);
         $this->assertEquals('a.test.com', $this->request->getHost());
 
         unset($server['HTTP_HOST']);
-        $this->server->setOption('data', $server);
+        $this->request->setOption('servers', $server);
         $this->assertEquals('test.com', $this->request->getHost());
-
-        unset($server['SERVER_NAME']);
-        $this->server->setOption('127.0.0.1', $server);
     }
 
     public function testSetRequestUri()
@@ -423,7 +424,7 @@ class RequestTest extends TestCase
      */
     public function testGetUrl($server, $url, $urlPath)
     {
-        $this->server->setOption('data', $server);
+        $this->request->setOption('servers', $server);
 
         $this->assertEquals($url, $this->request->getUrl());
         $this->assertEquals($urlPath, $this->request->getUrlFor('/path'));
@@ -441,7 +442,7 @@ class RequestTest extends TestCase
 
     public function testToString()
     {
-        $this->server->setOption('data', array(
+        $this->request->setOption('servers', array(
             'HTTPS' => 'on',
             'SERVER_PORT' => '8080',
             'HTTP_HOST' => 'test.com',

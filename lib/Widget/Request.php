@@ -417,6 +417,19 @@ class Request extends Parameter
     }
 
     /**
+     * Set the server and execution environment parameter value ($_SERVER)
+     *
+     * @param string $name
+     * @param string $value
+     * @return Request
+     */
+    public function setServer($name, $value)
+    {
+        $this->servers[$name] = $value;
+        return $this;
+    }
+
+    /**
      * Return the URL query parameter value ($_GET)
      *
      * @param string $name The name of parameter
