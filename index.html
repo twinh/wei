@@ -11315,6 +11315,55 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>对一个二维数组进行排序,类似SQL的ORDER BY语句</p>
   </section>
 
+<!-- api/config
+  ================================================== -->
+  <section id="config">
+  <div class="page-header"><h1>Config</h1></div>
+
+<p>设置或获取自定义配置</p>
+
+<h2>案例</h2>
+
+<h3>设置和获取配置</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 设置配置项'title'的值为'Widget Documentation'</span>
+<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">config</span><span class="p">(</span><span class="s1">'title'</span><span class="p">,</span> <span class="s1">'Widget Documentation'</span><span class="p">);</span>
+
+<span class="c1">// 输出配置项'title'的值</span>
+<span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">config</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'title'</span><span class="p">);</span>
+
+<span class="c1">// 设置配置项'url'的值</span>
+<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">config</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">'url'</span><span class="p">,</span> <span class="s1">'http://www.example.com'</span><span class="p">);</span>
+
+<span class="c1">// 输出配置项'url'的值</span>
+<span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">config</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>方法</h3>
+
+<h4>config($name, $default)</h4>
+
+<p>获取配置</p>
+
+<h4>config($name, $value)</h4>
+
+<p>设置配置</p>
+
+<h4>config-&gt;get($name, $default = null)</h4>
+
+<p>获取配置</p>
+
+<h4>config-&gt;set($name, $value)</h4>
+
+<p>设置配置</p>
+  </section>
+
 <!-- api/env
   ================================================== -->
   <section id="env">
@@ -12124,47 +12173,6 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>生成一个随机的UUID</p>
 
 <p>生成的UUID可用于数据表主键,相比通过SQL语句<code>SELECT UUID</code>生成的UUID要快很多,而且调用更加方便.</p>
-  </section>
-
-<!-- api/website
-  ================================================== -->
-  <section id="website">
-  <div class="page-header"><h1>Website</h1></div>
-
-<p>设置或获取网站的配置</p>
-
-<h2>案例</h2>
-
-<h3>设置网站的标题和URL</h3>
-
-<div class="highlight"><pre><code class="php"><span class="c1">// 配置网站的标题为`Widget Documentation`</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">website</span><span class="p">(</span><span class="s1">'title'</span><span class="p">,</span> <span class="s1">'Widget Documentation'</span><span class="p">);</span>
-
-<span class="c1">// 输出网站标题</span>
-<span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">website</span><span class="p">(</span><span class="s1">'title'</span><span class="p">);</span>
-
-<span class="c1">// 配置网站的URL</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">website</span><span class="p">(</span><span class="s1">'url'</span><span class="p">,</span> <span class="s1">'http://www.example.com'</span><span class="p">);</span>
-
-<span class="c1">// 输出网站URL</span>
-<span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">website</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
-</code></pre></div>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<p>Website微件接受任意选项作为网站配置,因为她只负责设置和获取配置,并不关心配置的名称和内容</p>
-
-<h3>方法</h3>
-
-<h4>website($name)</h4>
-
-<p>获取网站配置</p>
-
-<h4>website($name, $value)</h4>
-
-<p>设置网站配置</p>
   </section>
 
 <!-- api/dbal

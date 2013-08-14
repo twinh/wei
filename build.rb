@@ -54,7 +54,7 @@ widgets = [
   # view-section
     'escape', 'view',
   # others
-    'arr', 'env', 'error', 'event', 'gravatar', 'logger', 'map', 'pinyin', 'uuid', 'website',
+    'arr', 'config', 'env', 'error', 'event', 'gravatar', 'logger', 'map', 'pinyin', 'uuid',
   # third party
     # db
     'dbal', 'entityManager',
