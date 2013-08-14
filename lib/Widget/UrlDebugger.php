@@ -12,8 +12,6 @@ namespace Widget;
  * The widget allows inject data from URL query string
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Server $server The server widget
- * @property    Query $query The query widget
  */
 class UrlDebugger extends Base
 {
@@ -36,12 +34,12 @@ class UrlDebugger extends Base
      */
     public function inject()
     {
-        if ($this->query['_ajax']) {
+        if ($this->request->get('_ajax')) {
             $this->request->setServer('HTTP_X_REQUESTED_WITH', 'xmlhttprequest');
         }
 
-        if ($this->query['_method']) {
-            $this->request->setServer('REQUEST_METHOD', $this->query['_method']);
+        if ($method = $this->request->get('_method')) {
+            $this->request->setServer('REQUEST_METHOD', $method);
         }
     }
 }

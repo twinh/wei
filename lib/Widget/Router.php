@@ -64,8 +64,9 @@ class Router extends Base
             $route = $this->router->getRoute($parameters['_id']);
             unset($parameters['_id']);
 
-            // Merge parameters to query widget
-            $this->query->set($parameters);
+            // Merge parameters to request query parameters
+            $query = $this->request->getParameterReference('query');
+            $query += $parameters;
 
             array_unshift($parameters, $this->widget);
             $result = call_user_func_array($route['callback'], $parameters);

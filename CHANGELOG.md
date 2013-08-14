@@ -4,7 +4,7 @@ Changelog
 ## 0.9.5 (WIP)
 * Added `getLastSql` method for db widget
 * Renamed base class from AbstractWidget to Base
-* Removed server, post widgets
+* Removed server, post, query widgets
 
 ## 0.9.4 (2013-08-07)
 * Changed cache widgets' `increment` and `decrement` methods to `inc` and `dec`

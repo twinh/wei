@@ -126,9 +126,8 @@ API参考目录
 * [isColor](api/isColor.md) - 检查数据是否为有效的十六进制颜色
 
 #### HTTP请求
-* [request](api/request.md) - 管理HTTP请求数据($_REQUEST)
+* [request](api/request.md) - 管理HTTP请求数据,包括$_REQUEST,$_GET,$_POST和$_SERVER)
 * [cookie](api/cookie.md) - 写入,读取和删除cookie($_COOKIE)
-* [query](api/query.md) - 获取一项HTTP GET查询参数($_GET)的值
 * [session](api/session.md) - 获取一项会话($_SESSION)的值
 * [ua](api/ua.md) - 检测客户端浏览器,操作系统和设备是否为指定的名称和版本
 * [upload](api/upload.md) - 保存客户端上传的文件到指定目录
