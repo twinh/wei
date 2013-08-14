@@ -4,7 +4,7 @@ namespace WidgetTest;
 
 class ConfigTest extends TestCase
 {
-    public function testWebsite()
+    public function testConfig()
     {
         $this->config->set('title', 'My Blog');
 
