@@ -48,7 +48,7 @@ widgets = [
     'isEntityExists', 'isRecordExists',
     'isAll', 'isCallback', 'isColor',
   # request-section
-    'request', 'cookie', 'query', 'session', 'ua', 'upload',
+    'request', 'cookie', 'session', 'ua', 'upload',
   # response-section
     'response', 'download', 'flush', 'header', 'json', 'redirect',
   # view-section
