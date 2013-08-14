@@ -9,40 +9,12 @@
 namespace Widget;
 
 /**
- * A pure configuration widget for your website
+ * A pure configuration widget for your application
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Website extends Base
+class Config extends Base
 {
-    /**
-     * The website URL
-     *
-     * @var string
-     */
-    protected $url;
-
-    /**
-     * The HTML title
-     *
-     * @var string
-     */
-    protected $title;
-
-    /**
-     * The HTML meta description
-     *
-     * @var string
-     */
-    protected $description;
-
-    /**
-     * The HTML charset for display only
-     *
-     * @var string
-     */
-    protected $charset = 'utf-8';
-
     /**
      * Returns the value of website configuration
      *
@@ -51,18 +23,19 @@ class Website extends Base
      */
     public function __invoke($name)
     {
-        return $this->getOption($name);
+        return $this->get($name);
     }
 
     /**
-     * Returns the value of website configuration
+     * Returns the value of configuration
      *
      * @param string $name The name of configuration(widget option)
+     * @param mixed $default The default value
      * @return mixed
      */
-    public function get($name)
+    public function get($name, $default = null)
     {
-        return $this->getOption($name);
+        return isset($this->$name) ? $this->$name : $default;
     }
 
     /**
@@ -70,10 +43,11 @@ class Website extends Base
      *
      * @param string $name The name of configuration(widget option)
      * @param mixed $value The value of configuration
-     * @return Website
+     * @return Config
      */
     public function set($name, $value)
     {
-        return $this->setOption($name, $value);
+        $this->$name = $value;
+        return $this;
     }
 }

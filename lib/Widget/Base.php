@@ -112,8 +112,8 @@ namespace Widget;
  * @method   string     pinyin($word) Converts Chinese words to phonetic alphabets
  * @property Uuid       $uuid A util widget that generates a RANDOM UUID(universally unique identifier)
  * @method   string     uuid() generates a RANDOM UUID(universally unique identifier)
- * @property Website    $website A pure configuration widget for your website
- * @method   string     website($name) Returns the value of website configuration
+ * @property Config     $config A pure configuration widget for your application
+ * @method   string     config($name) Returns the value of your configuration
  * @property T          $t A translator widget
  * @method   string     t($message, array $parameters = array()) Translate the message
  *
