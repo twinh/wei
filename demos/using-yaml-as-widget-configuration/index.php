@@ -31,4 +31,4 @@ if (is_file($file)) {
 }
 
 // Output configuration
-var_dump($widget->config('widget'));
+var_dump($widget->getConfig('widget'));

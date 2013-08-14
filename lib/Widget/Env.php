@@ -195,7 +195,7 @@ class Env extends Base
         }
 
         $config = (array)require $file;
-        $this->widget->config($config);
+        $this->widget->setConfig($config);
     }
 
     /**

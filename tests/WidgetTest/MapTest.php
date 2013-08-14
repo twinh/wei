@@ -6,7 +6,7 @@ class MapTest extends TestCase
 {
     public function setUp()
     {
-        $this->widget->config('map', array(
+        $this->widget->setConfig('map', array(
             'file' => __DIR__ . '/Fixtures/map.php',
         ));
 

@@ -28,7 +28,7 @@ namespace Widget
         /**
          * The instances of widget container
          *
-         * @var array
+         * @var array<Widget>
          */
         protected static $instances = array();
 
@@ -42,7 +42,7 @@ namespace Widget
         /**
          * An array contains the instanced widget objects
          *
-         * @var array
+         * @var array<Base>
          */
         protected $widgets = array();
 
@@ -51,7 +51,7 @@ namespace Widget
          *
          * @var array
          */
-        protected $config = array();
+        protected $configs = array();
 
         /**
          * The php configuration options that will be set when widget container constructing
@@ -129,14 +129,14 @@ namespace Widget
         public function __construct(array $config = array())
         {
             // Set configurations for all widget
-            $this->config($config);
+            $this->setConfig($config);
 
             $this->widgets['widget'] = $this->widget = $this;
 
             // Set all options
             $options = get_object_vars($this);
-            if (isset($this->config['widget'])) {
-                $options = array_merge($options, $this->config['widget']);
+            if (isset($this->configs['widget'])) {
+                $options = array_merge($options, $this->configs['widget']);
             }
             $this->setOption($options);
 
@@ -176,7 +176,7 @@ namespace Widget
             if (!isset(static::$instances[$name])) {
                 static::$instances[$name] = new static($config);
             } else {
-                static::$instances[$name]->config($config);
+                static::$instances[$name]->setConfig($config);
             }
 
             return static::$instances[$name];
@@ -236,30 +236,17 @@ namespace Widget
         }
 
         /**
-         * Get or set widget's configuration
+         * Set widget's configuration
          *
-         * ```php
-         * $this->config();                 // Returns all configurations
-         * $this->config('widgetName');     // Get the configuration for 'widgetName'
-         * $this->config($array);           // Merge all configurations
-         * $this->config('name', 'param');  // Set one configuration
-         * $this->config('key1/key2');      // Get the value of $this->config['key1']['key2']
-         * ```
-         *
-         * @param  mixed $name  The name of configuration
-         * @param  mixed $value The value of configuration
-         * @return mixed
+         * @param string $name
+         * @param mixed $value
+         * @return Widget
          */
-        public function config($name = null, $value = null)
+        public function setConfig($name, $value = null)
         {
-            // Returns all configurations
-            if (null === $name) {
-                return $this->config;
-            }
-
             // Get or set one configuration
             if (is_string($name)) {
-                $temp = &$this->config;
+                $temp = &$this->configs;
                 if (false === strpos($name, '/')) {
                     $first = $name;
                 } else {
@@ -274,15 +261,11 @@ namespace Widget
                     }
                 }
 
-                if (1 == func_num_args()) {
-                    return isset($temp[$name]) ? $temp[$name] : null;
-                } else {
-                    $temp[$name] = $value;
-                    if (isset($this->widgets[$first])) {
-                        $this->widgets[$first]->setOption($value);
-                    }
-                    return $this;
+                $temp[$name] = $value;
+                if (isset($this->widgets[$first])) {
+                    $this->widgets[$first]->setOption($value);
                 }
+                return $this;
             }
 
             // Merge all configurations
@@ -307,19 +290,39 @@ namespace Widget
 
                     if (is_array($value)) {
                         foreach ($value as $subKey => $subValue) {
-                            $this->config[$key][$subKey] = $subValue;
+                            $this->configs[$key][$subKey] = $subValue;
                         }
                         if (isset($this->widgets[$key])) {
                             $this->widgets[$key]->setOption($value);
                         }
                     } else {
-                        $this->config[$key] = $value;
+                        $this->configs[$key] = $value;
                     }
                 }
             }
+        }
 
-            // Do NOT match any actions
-            return null;
+        /**
+         * Get widget's configuration
+         *
+         * @param string $name The name of configuration
+         * @param mixed $default The default value if configuration not found
+         * @return mixed
+         */
+        public function getConfig($name, $default = null)
+        {
+            $temp = &$this->configs;
+            if (0 !== strpos($name, '/')) {
+                $keys = explode('/', $name);
+                $name = array_pop($keys);
+                foreach ($keys as $key) {
+                    if (!isset($temp[$key])) {
+                        $temp[$key] = null;
+                    }
+                    $temp = &$temp[$key];
+                }
+            }
+            return isset($temp[$name]) ? $temp[$name] : $default;
         }
 
         /**
@@ -374,7 +377,7 @@ namespace Widget
                 $this->construct && call_user_func($this->construct, $name, $full);
 
                 // Load the widget configuration and make sure "widget" option at first
-                $options = array('widget' => $this) + $options + (array)$this->config($full);
+                $options = array('widget' => $this) + $options + (array)$this->getConfig($full);
 
                 $this->widgets[$full] = new $class($options);
 

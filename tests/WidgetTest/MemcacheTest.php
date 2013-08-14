@@ -31,7 +31,7 @@ class MemcacheTest extends CacheTestCase
 
     public function testCustomServer()
     {
-        $this->widget->config(array(
+        $this->widget->setConfig(array(
             'test.memcache' => array(
                 'servers' => array(
                     array(

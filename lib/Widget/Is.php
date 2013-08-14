@@ -182,7 +182,7 @@ class Is extends Base
             throw new \InvalidArgumentException(sprintf('Validator "%s" not found', $rule));
         }
 
-        $options = $options + array('widget' => $this->widget) + (array)$this->widget->config('is' . ucfirst($rule));
+        $options = $options + array('widget' => $this->widget) + (array)$this->widget->getConfig('is' . ucfirst($rule));
 
         return new $class($options);
     }

@@ -982,7 +982,7 @@ class DbTest extends TestCase
     {
         $cb = 'pi';
         $this->db->setOption('beforeConnect', $cb);
-        $this->widget->config(array(
+        $this->widget->setConfig(array(
             'cb.db' => array(
                 'db' => $this->db,
                 'global' => true
@@ -995,7 +995,7 @@ class DbTest extends TestCase
         // Remove all relation configuration
         unset($this->cbDb);
         $this->widget->remove('cbDb');
-        $this->widget->config('cb.db', array(
+        $this->widget->setConfig('cb.db', array(
             'db' => null
         ));
     }

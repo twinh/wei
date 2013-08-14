@@ -20,7 +20,7 @@ class EntityExistsTest extends TestCase
 
         $widget = $this->widget;
 
-        $widget->config('entityManager', array(
+        $widget->setConfig('entityManager', array(
             'config' => array(
                 'proxyDir' => './',
                 'proxyNamespace' => 'Proxy',

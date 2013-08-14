@@ -28,7 +28,7 @@ class CouchbaseTest extends CacheTestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->widget->config('couchbase', array(
+        $this->widget->setConfig('couchbase', array(
             'object' => $couchbase
         ));
 

@@ -18,34 +18,31 @@ class WidgetTest extends TestCase
     {
         $widget = $this->widget;
 
-        $widget->config('key', 'value');
+        $widget->setConfig('key', 'value');
 
-        $this->assertEquals('value', $widget->config('key'));
+        $this->assertEquals('value', $widget->getConfig('key'));
 
-        $widget->config('first/second', 'value2');
+        $widget->setConfig('first/second', 'value2');
 
-        $this->assertEquals(array('second' => 'value2',), $widget->config('first'));
-
-        $config = $widget->config();
-        $this->assertEquals($widget->getOption('config'), $config);
+        $this->assertEquals(array('second' => 'value2',), $widget->getConfig('first'));
     }
 
     public function testMergeConfig()
     {
-        $this->widget->config(array(
+        $this->widget->setConfig(array(
             'widgetName' => array(
                 'option1' => 'value1',
             )
         ));
 
-        $this->widget->config(array(
+        $this->widget->setConfig(array(
             'widgetName' => array(
                 'option2' => 'value2',
             )
         ));
 
-        $this->assertEquals('value1', $this->widget->config('widgetName/option1'));
-        $this->assertEquals('value2', $this->widget->config('widgetName/option2'));
+        $this->assertEquals('value1', $this->widget->getConfig('widgetName/option1'));
+        $this->assertEquals('value2', $this->widget->getConfig('widgetName/option2'));
     }
 
     public function testSetOptionInSetConfig()
@@ -53,16 +50,16 @@ class WidgetTest extends TestCase
         $widget = $this->widget;
         $request = $widget->request;
 
-        $widget->config('request', array(
+        $widget->setConfig('request', array(
             'method' => 'POST'
         ));
         $this->assertEquals('POST', $request->getMethod());
 
         // No effect at this time
-        $widget->config('request/method', 'PUT');
+        $widget->setConfig('request/method', 'PUT');
         $this->assertEquals('POST', $request->getMethod());
 
-        $widget->config(array(
+        $widget->setConfig(array(
             'request' => array(
                 'method' => 'DELETE'
             )
@@ -163,7 +160,7 @@ class WidgetTest extends TestCase
     public function testGetFromDeps()
     {
         // Set options for sub request
-        $this->widget->config('sub.request', array(
+        $this->widget->setConfig('sub.request', array(
             'fromGlobal' => false,
             'data' => array(
                 'id' => 'fromSubRequest'
@@ -334,7 +331,7 @@ class WidgetTest extends TestCase
     {
         $widget = Widget::create(__DIR__ . '/Fixtures/env/twin.php');
 
-        $this->assertTrue($widget->config('twin'));
+        $this->assertTrue($widget->getConfig('twin'));
     }
 
     /**

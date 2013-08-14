@@ -11,7 +11,7 @@ class TwigTest extends TestCase
             return;
         }
 
-        $this->widget->config('twig', array(
+        $this->widget->setConfig('twig', array(
             'paths' => __DIR__ . '/Fixtures'
         ));
         parent::setUp();

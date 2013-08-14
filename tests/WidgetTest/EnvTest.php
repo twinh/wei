@@ -6,7 +6,7 @@ class EnvTest extends TestCase
 {
     public function setUp()
     {
-        $this->widget->config('env/configDir', __DIR__ . '/Fixtures/env/%env%.php');
+        $this->widget->setConfig('env/configDir', __DIR__ . '/Fixtures/env/%env%.php');
 
         parent::setUp();
     }
@@ -23,7 +23,7 @@ class EnvTest extends TestCase
     public function testLoadCliConfig()
     {
         // Load form __DIR__ . '/Fixtures/env/cli.php' when phpunit call setUp
-        $this->assertTrue($this->widget->config('cli'));
+        $this->assertTrue($this->widget->getConfig('cli'));
     }
 
     public function testSetEnv()
