@@ -47,13 +47,6 @@ class UaTest extends TestCase
 
     public function testGetVersion()
     {
-        $request = new \Widget\Request(array(
-            'fromGlobal' => false,
-            'server' => array(),
-        ));
-
-        $this->ua->request = $request;
-
         $result = $this->ua->getVersion('iphone');
 
         $this->assertFalse($result);
