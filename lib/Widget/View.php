@@ -15,7 +15,7 @@ use Widget\Stdlib\AbstractView;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class View extends AbstractView
+class View extends Base
 {
     /**
      * The template variables
@@ -86,7 +86,11 @@ class View extends AbstractView
     }
 
     /**
-     * {@inheritdoc}
+     * Render a template
+     *
+     * @param string $name  The name of template
+     * @param array  $vars  The variables pass to template
+     * @return string|null
      */
     public function render($name, $vars = array())
     {
@@ -115,7 +119,11 @@ class View extends AbstractView
     }
 
     /**
-     * {@inheritdoc}
+     * Output a rendered template
+     *
+     * @param string $name  The name of template
+     * @param array  $vars  The variables pass to template
+     * @return void
      */
     public function display($name, $vars = array())
     {
@@ -123,7 +131,11 @@ class View extends AbstractView
     }
 
     /**
-     * {@inheritdoc}
+     * Assign variables to template
+     *
+     * @param string $name  The name of the variable
+     * @param mixed  $value The value of the variable
+     * @return AbstractView
      */
     public function assign($name, $value = null)
     {
@@ -193,5 +205,16 @@ class View extends AbstractView
         $this->dirs = (array)$dirs;
 
         return $this;
+    }
+
+    /**
+     * Get default template file extension, such as php, tpl, this is useful for
+     * automatic render template
+     *
+     * @return string
+     */
+    public function getExtension()
+    {
+        return $this->extension;
     }
 }
