@@ -2,13 +2,13 @@
 
 require '../../../lib/Widget/Widget.php';
 
-$widget = Widget\Widget::create();
-$request = $widget->request;
-$dataType = $widget->query('type');
-$test = $widget->query('test');
-$statusCode = $widget->query->getInt('code', 200);
-$wait = (float)$widget->query('wait');
-$result = null;
+$widget     = Widget\Widget::create();
+$request    = $widget->request;
+$dataType   = $request->getQuery('type');
+$test       = $request->getQuery('test');
+$statusCode = $request->getQuery('code', 200);
+$wait       = (float)$request->getQuery('wait');
+$result     = null;
 
 switch ($test) {
     case 'headers':
