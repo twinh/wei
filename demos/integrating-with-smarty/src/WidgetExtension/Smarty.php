@@ -6,16 +6,16 @@
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Widget;
+namespace WidgetExtension;
 
-use Widget\Stdlib\AbstractView;
+use Widget\Base;
 
 /**
  * A wrapper widget for Smarty object
  *
- * @author      Twin Huang <twinhuang@qq.com>
+ * @author Twin Huang <twinhuang@qq.com>
  */
-class Smarty extends AbstractView
+class Smarty extends Base
 {
     /**
      * The original Smarty object
@@ -37,15 +37,7 @@ class Smarty extends AbstractView
      * @var array
      * @link http://www.smarty.net/docs/en/api.variables.tpl
      */
-    public $options = array(
-        'template_dir'      => array(),
-        'config_dir'        => array(),
-        'plugins_dir'       => array(),
-        'compile_dir'       => null,
-        'cache_dir'         => null,
-        'left_delimiter'    => '{',
-        'right_delimiter'   => '}',
-    );
+    public $options = array();
 
     /**
      * Constructor
@@ -66,7 +58,7 @@ class Smarty extends AbstractView
     /**
      * Returns the internal Smarty object or render a Smarty template
      *
-     * if NO parameter provied, the invoke method will return the \Smarty
+     * if NO parameter provided, the invoke method will return the \Smarty
      * object otherwise, call the render method
      *
      * @param string $name The name of template
