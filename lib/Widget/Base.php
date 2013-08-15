@@ -128,8 +128,6 @@ namespace Widget;
  *  View
  * @property Smarty     $smarty A wrapper widget for Smarty object
  * @method   mixed      smarty($name = null, $vars = array()) Returns the internal Smarty object or render a Smarty template
- * @property Twig       $twig A wrapper widget for Twig object
- * @method   mixed      twig($name = null, $vars = array()) Returns \Twig_Environment object or render a Twig template
  *
  *  Others
  * @property Monolog    $monolog A wrapper widget for Monolog

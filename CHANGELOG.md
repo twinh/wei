@@ -4,7 +4,7 @@ Changelog
 ## 0.9.5 (WIP)
 * Added `getLastSql` method for db widget
 * Renamed base class from AbstractWidget to Base
-* Removed server, post, query widgets
+* Removed server, post, query and header widgets
 * Added new `config` widget, ref #128
 
 ## 0.9.4 (2013-08-07)
