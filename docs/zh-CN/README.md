@@ -136,7 +136,6 @@ API参考目录
 * [response](api/response.md) - 发送HTTP响应头和内容
 * [download](api/download.md) - 发送下载文件的HTTP响应
 * [flush](api/flush.md) - 关闭缓冲区,让后台脚本实时输出内容到浏览器
-* [header](api/header.md) - 设置和获取HTTP响应头
 * [json](api/json.md) - 输出JSON或JSONP格式的数据到浏览器
 * [redirect](api/redirect.md) - 跳转到指定地址
 
