@@ -46,7 +46,7 @@ class ResponseTest extends TestCase
     {
         $response = $this->object;
 
-        $response->header->set(array(
+        $response->setHeader(array(
             'Key' => 'Value',
             'Key1' => 'Value1'
         ));

@@ -94,7 +94,7 @@ class Download extends Response
             $filename = "*=UTF-8''" . rawurlencode($name);
         }
 
-        $this->header->set(array(
+        $this->setHeader(array(
             'Content-Description'       => 'File Transfer',
             'Content-Type'              => $this->type,
             'Content-Disposition'       => $this->disposition . ';filename' . $filename,

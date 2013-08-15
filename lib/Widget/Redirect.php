@@ -12,7 +12,6 @@ namespace Widget;
  * A widget that send a redirect response
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @method      Header header(string $name, string|array $values) Set the header value
  */
 class Redirect extends Response
 {
@@ -65,7 +64,7 @@ class Redirect extends Response
         } else {
             // Location header does not support delay
             if (0 === $this->wait) {
-                $this->header('Location', $url);
+                $this->setHeader('Location', $url);
             }
 
             $content = sprintf(static::$html, $this->wait, htmlspecialchars($url, ENT_QUOTES, 'UTF-8'));

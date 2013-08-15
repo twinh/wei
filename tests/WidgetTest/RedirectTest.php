@@ -31,7 +31,7 @@ class RedirectTest extends TestCase
 
         $this->redirect('http://www.google.com');
 
-        $this->assertEquals('http://www.google.com', $this->header->get('Location'));
+        $this->assertEquals('http://www.google.com', $this->redirect->getHeader('Location'));
     }
 
     public function testWait()
