@@ -59,7 +59,7 @@ widgets = [
     # db
     'dbal', 'entityManager',
     # view
-    'smarty', 'twig',
+    'smarty',
     # others
     'monolog', 
     'phpError'
