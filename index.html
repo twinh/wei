@@ -175,7 +175,6 @@
         <li><a href="#response">Response</a></li>
         <li><a href="#download">Download</a></li>
         <li><a href="#flush">Flush</a></li>
-        <li><a href="#header">Header</a></li>
         <li><a href="#json">Json</a></li>
         <li><a href="#redirect">Redirect</a></li>
       </ul>
@@ -10801,71 +10800,6 @@
 <h4>flush($content = null, $status = null)</h4>
 
 <p>直接输出内容到浏览器</p>
-  </section>
-
-<!-- api/header
-  ================================================== -->
-  <section id="header">
-  <div class="page-header"><h1>Header</h1></div>
-
-<p>设置和获取HTTP响应头</p>
-
-<h2>案例</h2>
-
-<h3>设置和获取自定义HTTP响应头</h3>
-
-<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">'X-Powered-By'</span><span class="p">,</span> <span class="s1">'PHP'</span><span class="p">);</span>
-
-<span class="c1">// 输出'PHP'</span>
-<span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">'X-Powered-By'</span><span class="p">);</span>
-</code></pre></div>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<p><em>无</em></p>
-
-<h3>方法</h3>
-
-<h4>header($name)</h4>
-
-<p>获取HTTP响应头信息</p>
-
-<h4>header($name, $values, $replace = true)</h4>
-
-<p>设置HTTP响应头信息</p>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>$name</td>
-<td>string</td>
-<td>无</td>
-<td>HTTP响应头的名称</td>
-</tr>
-<tr>
-<td>$values</td>
-<td>string</td>
-<td>无</td>
-<td>HTTP响应头的值</td>
-</tr>
-<tr>
-<td>$replace</td>
-<td>bool</td>
-<td>true</td>
-<td>是否替换已有的响应头</td>
-</tr>
-</tbody>
-</table><h4>remove($name)</h4>
-
-<p>删除HTTP响应头信息</p>
   </section>
 
 <!-- api/json

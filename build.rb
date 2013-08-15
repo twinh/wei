@@ -50,7 +50,7 @@ widgets = [
   # request-section
     'request', 'cookie', 'session', 'ua', 'upload',
   # response-section
-    'response', 'download', 'flush', 'header', 'json', 'redirect',
+    'response', 'download', 'flush', 'json', 'redirect',
   # view-section
     'escape', 'view',
   # others
