@@ -8,8 +8,6 @@
 
 namespace Widget;
 
-use Widget\Stdlib\AbstractView;
-
 /**
  * A widget that use to render PHP template
  *
