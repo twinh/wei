@@ -19,7 +19,6 @@ class ViewTest extends TestCase
     public function testInvoker()
     {
         $view = $this->object;
-        $this->assertInstanceOf('Widget\View', $view());
 
         // Render by invoker
         $content = $view('layout.php', array(

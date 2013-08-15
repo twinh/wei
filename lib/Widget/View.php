@@ -64,23 +64,16 @@ class View extends Base
     }
 
     /**
-     * Returns view widget or render a PHP template
-     *
-     * if NO parameter provided, the invoke method will return the view widget,
-     * otherwise, call the render method
+     * Render a PHP template
      *
      * @param string $name The name of template
      * @param array $vars The variables pass to template
      *
-     * @return View|string
+     * @return string
      */
     public function __invoke($name = null, $vars = array())
     {
-        if (0 === func_num_args()) {
-            return $this;
-        } else {
-            return $this->render($name, $vars);
-        }
+        return $this->render($name, $vars);
     }
 
     /**
