@@ -150,7 +150,6 @@
         <li><a href="#isSomeof">isSomeOf</a></li>
 
         <li><a href="#isEntityExists" class="nav-header">数据库</a></li>
-        <li><a href="#isEntityExists">isEntityExists</a></li>
         <li><a href="#isRecordExists">isRecordExists</a></li>
 
         <li><a href="#isAll" class="nav-header">其他</a></li>
@@ -202,16 +201,8 @@
       </ul>
     </li>
     <li>
-      <a href="#dbal">第三方</a>
+      <a href="#monolog">第三方</a>
       <ul class="nav">
-        <li><a href="#dbal" class="nav-header">数据库</a></li>
-        <li><a href="#dbal">dbal</a></li>
-        <li><a href="#entityManager">entityManager</a></li>
-
-        <li><a href="#smarty" class="nav-header">视图</a></li>
-        <li><a href="#twig">twig</a></li>
-
-        <li><a href="#monolog" class="nav-header">其他</a></li>
         <li><a href="#monolog">monolog</a></li>
         <li><a href="#phpError">phpError</a></li>
       </ul>
@@ -11945,109 +11936,6 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>生成一个随机的UUID</p>
 
 <p>生成的UUID可用于数据表主键,相比通过SQL语句<code>SELECT UUID</code>生成的UUID要快很多,而且调用更加方便.</p>
-  </section>
-
-<!-- api/smarty
-  ================================================== -->
-  <section id="smarty">
-  <div class="page-header"><h1>Smarty</h1></div>
-
-<p>渲染Smarty模板或获取原始Smarty对象</p>
-
-<h2>案例</h2>
-
-<h3>渲染模板<code>hello.tpl</code>
-</h3>
-
-<div class="highlight"><pre><code class="php"><span class="c1">// 准备视图变量</span>
-<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'Widget'</span>
-<span class="p">);</span>
-
-<span class="c1">// 输出渲染后的视图</span>
-<span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">smarty</span><span class="p">(</span><span class="s1">'hello.tpl'</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
-</code></pre></div>
-
-<h4>文件<code>hello.tpl</code>的内容</h4>
-
-<div class="highlight"><pre><code class="php"><span class="nx">Hello</span> <span class="p">{{</span><span class="nv">$name</span><span class="p">}}</span>
-</code></pre></div>
-
-<h4>输出结果</h4>
-
-<div class="highlight"><pre><code class="php"><span class="s1">'Hello Widget'</span>
-</code></pre></div>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>extension</td>
-<td>string</td>
-<td>.tpl</td>
-<td>默认的模板扩展名</td>
-</tr>
-<tr>
-<td>object</td>
-<td>\Smarty</td>
-<td>无</td>
-<td>Smarty对象</td>
-</tr>
-<tr>
-<td>options</td>
-<td>array</td>
-<td>见下表</td>
-<td>Smarty对象的配置选项</td>
-</tr>
-</tbody>
-</table><h4>
-<code>options</code>的默认值</h4>
-
-<div class="highlight"><pre><code class="php"><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'template_dir'</span>      <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(),</span>
-    <span class="s1">'config_dir'</span>        <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(),</span>
-    <span class="s1">'plugins_dir'</span>       <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(),</span>
-    <span class="s1">'compile_dir'</span>       <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
-    <span class="s1">'cache_dir'</span>         <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
-    <span class="s1">'left_delimiter'</span>    <span class="o">=&gt;</span> <span class="s1">'{'</span><span class="p">,</span>
-    <span class="s1">'right_delimiter'</span>   <span class="o">=&gt;</span> <span class="s1">'}'</span><span class="p">,</span>
-<span class="p">);</span>
-</code></pre></div>
-
-<h3>方法</h3>
-
-<h4>smarty($name, $vars = array())</h4>
-
-<p>渲染指定名称的模板</p>
-
-<h4>smarty()</h4>
-
-<p>获取原始Smarty对象</p>
-
-<h4>smarty-&gt;render($name, $vars = array())</h4>
-
-<p>渲染指定名称的模板,同<code>smarty($name, $vars = array())</code></p>
-
-<h4>smarty-&gt;display($name, $vars = array())</h4>
-
-<p>渲染并输出指定名称的模板</p>
-
-<h4>smarty-&gt;assign($name, $value)</h4>
-
-<p>设置视图变量</p>
-
-<h4>smarty-&gt;get($name)</h4>
-
-<p>获取视图变量</p>
   </section>
 
 <!-- api/monolog
