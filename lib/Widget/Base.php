@@ -119,12 +119,6 @@ namespace Widget;
  *
  * Third Party
  *
- *  Database
- * @property Dbal                         $dbal A container widget for Doctrine DBAL connection object
- * @method   \Doctrine\DBAL\Connection    dbal() Retrieve the Doctrine DBAL connection object
- * @property EntityManager                $entityManager A container widget for Doctrine ORM entity manager object
- * @method   \Doctrine\ORM\EntityManager  entityManager() Returns the Doctrine ORM entity manager
- *
  *  View
  * @property Smarty     $smarty A wrapper widget for Smarty object
  * @method   mixed      smarty($name = null, $vars = array()) Returns the internal Smarty object or render a Smarty template

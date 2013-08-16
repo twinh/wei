@@ -59,18 +59,6 @@ $widget = widget(array(
             'db' => 'pgsql.db'
         )
     ),
-    // Doctrine DBAL widget configuration
-    'dbal' => array(
-        'driver' => 'pdo_sqlite',
-        'memory' => true
-    ),
-    // Doctrine ORM widget configuration
-    'entityManager' => array(
-        'config' => array(
-            'proxyDir' => './',
-            'annotationDriverPaths' => array('./')
-        )
-    ),
     'response' => array(
         'unitTest' => true
     )
