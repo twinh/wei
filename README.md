@@ -72,8 +72,8 @@ $cache->remove('key', 'value');
 $cache->exists('key');
 $cache->add('key', 'value');
 $cache->replace('key', 'value');
-$cache->increment('key', 1);
-$cache->decrement('key', 1);
+$cache->inc('key', 1);
+$cache->dec('key', 1);
 $cache->getMulti(array('key', 'key2'));
 $cache->setMulti(array('key' => 'value', 'key2' => 'value2'));
 $cache->clear();
@@ -226,14 +226,10 @@ if (!$widget->isDigit('abc')) {
 ```php
 $widget->request;
 $widget->cookie;
-$widget->post;
-$widget->query;
-$widget->server;
 $widget->session;
 $widget->ua;
 $widget->upload;
 $widget->response;
-$widget->header;
 $widget->escape;
 $widget->logger;
 $widget->call;
