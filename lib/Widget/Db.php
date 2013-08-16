@@ -784,7 +784,7 @@ class Db extends Base
                 $this->port && $dsn .= 'port=' . $this->port . ';';
                 $this->dbname && $dsn .= 'dbname=' . $this->dbname . ';';
                 $this->unixSocket && $dsn .= 'unix_socket=' . $this->unixSocket . ';';
-                $this->charset && $dsn .= 'charset=' . $this->charset . ';';
+                $this->charset && $dsn .= 'charset=' . $this->charset;
                 break;
 
             case 'sqlite':
@@ -794,7 +794,7 @@ class Db extends Base
             case 'pgsql':
                 $this->host && $dsn .= 'host=' . $this->host . ';';
                 $this->port && $dsn .= 'port=' . $this->port . ';';
-                $this->dbname && $dsn .= 'dbname=' . $this->dbname . ';';
+                $this->dbname && $dsn .= 'dbname=' . $this->dbname;
                 break;
 
             default:
