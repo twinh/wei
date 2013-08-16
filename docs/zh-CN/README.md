@@ -117,7 +117,6 @@ API参考目录
 * [isSomeOf](api/isSomeOf.md) - 检查数据是否通过指定数量规则的验证
 
 ##### 数据库
-* [isEntityExists](api/isEntityExists.md) - 检查Doctrine ORM实体是否存在
 * [isRecordExists](api/isRecordExists.md) - 检查数据表是否存在指定的记录
 
 ##### 其他
@@ -156,10 +155,6 @@ API参考目录
 * [uuid](api/uuid.md) - 生成一个随机的UUID
 
 #### 第三方
-
-##### 数据库
-* [dbal](api/dbal.md) - 获取[Doctrine DBAL](https://github.com/doctrine/dbal)的Connection对象
-* [entityManager](api/entityManager.md) - 获取[Doctrine ORM](https://github.com/doctrine/doctrine2)的EntityManager对象
 
 ##### 视图
 * [smarty](api/smarty.md) - 渲染Smarty模板或获取原始Smarty对象
