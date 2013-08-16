@@ -38,8 +38,8 @@ namespace Widget;
  * @method   mixed      bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
  *
  * Database
- * @property Db                           $db A database widget
- * @method   Db\QueryBuilder              db($table = null) Create a new instance of a SQL query builder with specified table name
+ * @property Db                 $db A database widget
+ * @method   Db\QueryBuilder    db($table = null) Create a new instance of a SQL query builder with specified table name
  *
  * @property Call       $call A widget handles HTTP request like jQuery Ajax
  * @method   Call       call(array $options) Create a new call object and execute
@@ -54,10 +54,6 @@ namespace Widget;
  * @method   mixed      request($name, $default = null) Returns a stringify request parameter value
  * @property Cookie     $cookie A widget that handles the HTTP request and response cookies
  * @method   mixed      cookie($key, $value = null, $options = array()) Get or set cookie
- * @property Post       $post A widget that handles the HTTP request parameters ($_POST)
- * @method   string     post($name, $default = null) Returns a stringify request parameter value
- * @property Query      $query A widget that handles the URL query parameters ($_GET)
- * @method   string     query($name, $default = null) Returns a stringify URL query parameter value
  * @property Session    $session A widget that session parameters ($_SESSION)
  * @method   mixed      session($name, $default = null) Returns a stringify session parameter value
  * @property Ua         $ua A widget to detect user OS, device and browser name and version
@@ -72,8 +68,6 @@ namespace Widget;
  * @method   Download   download($file, $options) Send file download response
  * @property Flush      $flush A widget that flushes the content to browser immediately
  * @method   Flush      flush($content = null, $status = null) Send response content
- * @property Header     $header A widget that handles the HTTP response headers
- * @method   mixed      header($name, $values = null, $replace = true) Get or set HTTP header
  * @property Json       $json A widget to response json
  * @method   Json       json($message = null, $code = 0, array $append = array(), $jsonp = false) Send JSON(P) response
  * @property Redirect   $redirect A widget that send a redirect response
@@ -118,12 +112,6 @@ namespace Widget;
  * @method   string     t($message, array $parameters = array()) Translate the message
  *
  * Third Party
- *
- *  View
- * @property Smarty     $smarty A wrapper widget for Smarty object
- * @method   mixed      smarty($name = null, $vars = array()) Returns the internal Smarty object or render a Smarty template
- *
- *  Others
  * @property Monolog    $monolog A wrapper widget for Monolog
  * @method   bool       monolog($level = null, $message = null, array $context = array()) Get monolog logger object or add a log record
  */
