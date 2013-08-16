@@ -35,7 +35,7 @@ widgets = [
   # database
     'db', 'queryBuilder',
     'call',
-  # validation-section
+  # validation
     'validate',  'is',
     'isAlnum', 'isAlpha', 'isBlank', 'isDecimal', 'isDigit', 'isDivisibleby', 'isDoubleByte', 'isEmpty', 'isEndsWith', 'isEquals', 'isIn', 'isLowercase', 'isNull', 'isNumber', 'isRegex', 'isRequired', 'isStartsWith', 'isType', 'isUppercase',
     'isBetween', 'isLength', 'isMax', 'isMaxLength', 'isMin', 'isMinLength',
@@ -45,7 +45,7 @@ widgets = [
     'isCreditCard',
     'isChinese', 'isIdCardCn', 'isIdCardHk', 'isIdCardMo', 'isIdCardTw', 'isPhoneCn', 'isPostcodeCn', 'isQQ', 'isMobileCn',
     'isAllof', 'isNoneof', 'isOneof', 'isSomeof',
-    'isEntityExists', 'isRecordExists',
+    'isRecordExists',
     'isAll', 'isCallback', 'isColor',
   # request-section
     'request', 'cookie', 'session', 'ua', 'upload',
@@ -56,8 +56,6 @@ widgets = [
   # others
     'arr', 'config', 'env', 'error', 'event', 'gravatar', 'logger', 'map', 'pinyin', 'uuid',
   # third party
-    # db
-    'dbal', 'entityManager',
     # view
     'smarty',
     # others
