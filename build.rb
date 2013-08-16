@@ -47,18 +47,15 @@ widgets = [
     'isAllof', 'isNoneof', 'isOneof', 'isSomeof',
     'isRecordExists',
     'isAll', 'isCallback', 'isColor',
-  # request-section
+  # request
     'request', 'cookie', 'session', 'ua', 'upload',
-  # response-section
+  # response
     'response', 'download', 'flush', 'json', 'redirect',
-  # view-section
+  # view
     'escape', 'view',
   # others
     'arr', 'config', 'env', 'error', 'event', 'gravatar', 'logger', 'map', 'pinyin', 'uuid',
   # third party
-    # view
-    'smarty',
-    # others
     'monolog', 
     'phpError'
 ]
