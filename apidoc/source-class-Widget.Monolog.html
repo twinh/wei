@@ -8,7 +8,7 @@
 	<title>File Monolog.php | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?4045824885"></script>
+	<script type="text/javascript" src="elementlist.js?412079968"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -44,22 +44,21 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li><a href="class-Widget.AbstractWidget.html">AbstractWidget</a></li>
 				<li><a href="class-Widget.Apc.html">Apc</a></li>
 				<li><a href="class-Widget.App.html">App</a></li>
 				<li><a href="class-Widget.Arr.html">Arr</a></li>
 				<li><a href="class-Widget.ArrayCache.html">ArrayCache</a></li>
+				<li><a href="class-Widget.Base.html">Base</a></li>
 				<li><a href="class-Widget.Bicache.html">Bicache</a></li>
 				<li><a href="class-Widget.Cache.html">Cache</a></li>
 				<li><a href="class-Widget.Call.html">Call</a></li>
+				<li><a href="class-Widget.Config.html">Config</a></li>
 				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
 				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
 				<li><a href="class-Widget.Counter.html">Counter</a></li>
 				<li><a href="class-Widget.Db.html">Db</a></li>
-				<li><a href="class-Widget.Dbal.html">Dbal</a></li>
 				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
 				<li><a href="class-Widget.Download.html">Download</a></li>
-				<li><a href="class-Widget.EntityManager.html">EntityManager</a></li>
 				<li><a href="class-Widget.Env.html">Env</a></li>
 				<li><a href="class-Widget.Error.html">Error</a></li>
 				<li><a href="class-Widget.Escape.html">Escape</a></li>
@@ -67,7 +66,6 @@
 				<li><a href="class-Widget.FileCache.html">FileCache</a></li>
 				<li><a href="class-Widget.Flush.html">Flush</a></li>
 				<li><a href="class-Widget.Gravatar.html">Gravatar</a></li>
-				<li><a href="class-Widget.Header.html">Header</a></li>
 				<li><a href="class-Widget.Is.html">Is</a></li>
 				<li><a href="class-Widget.Json.html">Json</a></li>
 				<li><a href="class-Widget.Logger.html">Logger</a></li>
@@ -78,18 +76,13 @@
 				<li class="active"><a href="class-Widget.Monolog.html">Monolog</a></li>
 				<li><a href="class-Widget.PhpError.html">PhpError</a></li>
 				<li><a href="class-Widget.Pinyin.html">Pinyin</a></li>
-				<li><a href="class-Widget.Post.html">Post</a></li>
-				<li><a href="class-Widget.Query.html">Query</a></li>
 				<li><a href="class-Widget.Redirect.html">Redirect</a></li>
 				<li><a href="class-Widget.Redis.html">Redis</a></li>
 				<li><a href="class-Widget.Request.html">Request</a></li>
 				<li><a href="class-Widget.Response.html">Response</a></li>
 				<li><a href="class-Widget.Router.html">Router</a></li>
-				<li><a href="class-Widget.Server.html">Server</a></li>
 				<li><a href="class-Widget.Session.html">Session</a></li>
-				<li><a href="class-Widget.Smarty.html">Smarty</a></li>
 				<li><a href="class-Widget.T.html">T</a></li>
-				<li><a href="class-Widget.Twig.html">Twig</a></li>
 				<li><a href="class-Widget.Ua.html">Ua</a></li>
 				<li><a href="class-Widget.Upload.html">Upload</a></li>
 				<li><a href="class-Widget.Url.html">Url</a></li>
@@ -97,7 +90,6 @@
 				<li><a href="class-Widget.Uuid.html">Uuid</a></li>
 				<li><a href="class-Widget.Validate.html">Validate</a></li>
 				<li><a href="class-Widget.View.html">View</a></li>
-				<li><a href="class-Widget.Website.html">Website</a></li>
 				<li><a href="class-Widget.WeChatApp.html">WeChatApp</a></li>
 				<li><a href="class-Widget.Widget.html">Widget</a></li>
 			</ul>
@@ -160,7 +152,7 @@
 </span></span><span id="16" class="l"><a class="l" href="#16"> 16: </a><span class="php-comment"> * @author      Twin Huang &lt;twinhuang@qq.com&gt;
 </span></span><span id="17" class="l"><a class="l" href="#17"> 17: </a><span class="php-comment"> * @link        https://github.com/Seldaek/monolog
 </span></span><span id="18" class="l"><a class="l" href="#18"> 18: </a><span class="php-comment"> */</span>
-</span><span id="19" class="l"><a class="l" href="#19"> 19: </a><span class="php-keyword1">class</span> <a id="Monolog" href="#Monolog">Monolog</a> <span class="php-keyword1">extends</span> AbstractWidget
+</span><span id="19" class="l"><a class="l" href="#19"> 19: </a><span class="php-keyword1">class</span> <a id="Monolog" href="#Monolog">Monolog</a> <span class="php-keyword1">extends</span> Base
 </span><span id="20" class="l"><a class="l" href="#20"> 20: </a>{
 </span><span id="21" class="l"><a class="l" href="#21"> 21: </a>    <span class="php-comment">/**
 </span></span><span id="22" class="l"><a class="l" href="#22"> 22: </a><span class="php-comment">     * The name of channel
