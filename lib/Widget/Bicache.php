@@ -144,6 +144,7 @@ class Bicache extends BaseCache
      * Check if the key need to update to the slave cache
      *
      * @param string $key
+     * @return bool
      */
     protected function needUpdate($key)
     {
