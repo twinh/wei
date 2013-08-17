@@ -24,7 +24,7 @@ if (widget()->session('verfiyCode') == widget()->post('verfiyCode')) {
 
 名称      | 类型         | 默认值    | 说明
 ----------|--------------|-----------|------
-namespace | string|false | false     | 存储会话信息的命名空间,默认不启用
+namespace | string,false | false     | 存储会话信息的命名空间,默认不启用
 inis      | array        | 见下表    | PHP会话配置选项
 
 #### inis选项的值
