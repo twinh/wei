@@ -8,14 +8,12 @@
 
 namespace Widget;
 
-use Widget\Stdlib\AbstractCache;
-
 /**
  * A cache widget that stored data in PHP APC
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Apc extends AbstractCache
+class Apc extends BaseCache
 {
     /**
      * {@inheritdoc}

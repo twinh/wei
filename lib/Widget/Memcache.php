@@ -8,14 +8,12 @@
 
 namespace Widget;
 
-use Widget\Stdlib\AbstractCache;
-
 /**
  * A cache widget that stored data in Memcache
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Memcache extends AbstractCache
+class Memcache extends BaseCache
 {
     /**
      * The memcache object

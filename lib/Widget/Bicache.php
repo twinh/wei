@@ -8,16 +8,14 @@
 
 namespace Widget;
 
-use Widget\Stdlib\AbstractCache;
-
 /**
  * A two-level cache widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Stdlib\AbstractCache $master The master(faster) cache object
- * @property    Stdlib\AbstractCache $slave The slave(slower) cache object
+ * @property    BaseCache $master The master(faster) cache object
+ * @property    BaseCache $slave The slave(slower) cache object
  */
-class Bicache extends AbstractCache
+class Bicache extends BaseCache
 {
     /**
      * The dependence map

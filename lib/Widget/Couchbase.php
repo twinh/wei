@@ -8,15 +8,13 @@
 
 namespace Widget;
 
-use Widget\Stdlib\AbstractCache;
-
 /**
  * A cache widget that stored data in Couchbase
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        https://github.com/couchbase/php-ext-couchbase
  */
-class Couchbase extends AbstractCache
+class Couchbase extends BaseCache
 {
     /**
      * An array of hostnames[:port] where the Couchbase cluster is running. The

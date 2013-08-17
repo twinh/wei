@@ -8,19 +8,17 @@
 
 namespace Widget;
 
-use Widget\Stdlib\AbstractCache;
-
 /**
  * A cache widget proxy
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Cache extends AbstractCache
+class Cache extends BaseCache
 {
     /**
      * The storage widget object
      *
-     * @var AbstractCache
+     * @var BaseCache
      */
     protected $object;
 
@@ -56,7 +54,7 @@ class Cache extends AbstractCache
             throw new \InvalidArgumentException(sprintf('Cache driver class "%s" not found', $class));
         }
 
-        if (!is_subclass_of($class, 'Widget\Stdlib\AbstractCache')) {
+        if (!is_subclass_of($class, 'Widget\Stdlib\BaseCache')) {
             throw new \InvalidArgumentException(sprintf('Cache driver class "%s" must extend "Widget\Stdlib\AbstractCache"', $class));
         }
 

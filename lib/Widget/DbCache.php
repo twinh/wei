@@ -5,16 +5,15 @@
  * @copyright   Copyright (c) 2008-2013 Twin Huang
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Widget;
 
-use Widget\Stdlib\AbstractCache;
+namespace Widget;
 
 /**
  * A cache widget that stored data in databases
  *
  * @author  Twin Huang <twinhuang@qq.com>
  */
-class DbCache extends AbstractCache
+class DbCache extends BaseCache
 {
     /**
      * The cache table name

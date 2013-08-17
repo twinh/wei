@@ -8,14 +8,12 @@
 
 namespace Widget;
 
-use Widget\Stdlib\AbstractCache;
-
 /**
  * A cache widget that stored data in Redis
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Redis extends AbstractCache
+class Redis extends BaseCache
 {
     /**
      * The redis object

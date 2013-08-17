@@ -8,14 +8,12 @@
 
 namespace Widget;
 
-use Widget\Stdlib\AbstractCache;
-
 /**
  * A cache widget that stored data in files
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class FileCache extends AbstractCache
+class FileCache extends BaseCache
 {
     /**
      * The cache directory

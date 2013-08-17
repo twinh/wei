@@ -8,14 +8,12 @@
 
 namespace Widget;
 
-use Widget\Stdlib\AbstractCache;
-
 /**
  * A cache widget that stores data in MongoDB
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class MongoCache extends AbstractCache
+class MongoCache extends BaseCache
 {
     /**
      * The host connect to MongoDB

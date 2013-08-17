@@ -8,14 +8,12 @@
 
 namespace Widget;
 
-use Widget\Stdlib\AbstractCache;
-
 /**
  * A cache widget that stored data in PHP array
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class ArrayCache extends AbstractCache
+class ArrayCache extends BaseCache
 {
     /**
      * The array to store cache items
