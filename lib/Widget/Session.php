@@ -59,24 +59,25 @@ class Session extends Parameter
      */
     protected function start()
     {
+        // If session started, ignored it
+        if (session_id()) {
+            return $this;
+        }
+
         $file = $line = null;
         if (headers_sent($file, $line)) {
             throw new \RuntimeException(sprintf('Unable to start session, output started at %s:%s', $file, $line));
         }
 
-        // If session started, ignored it
-        if (!session_id()) {
-            session_start();
-            if ($this->namespace) {
-                if (!isset($_SESSION[$this->namespace])) {
-                    $_SESSION[$this->namespace] = array();
-                }
-                $this->data = &$_SESSION[$this->namespace];
-            } else {
-                $this->data = &$_SESSION;
+        session_start();
+        if ($this->namespace) {
+            if (!isset($_SESSION[$this->namespace])) {
+                $_SESSION[$this->namespace] = array();
             }
+            $this->data = &$_SESSION[$this->namespace];
+        } else {
+            $this->data = &$_SESSION;
         }
-
         return $this;
     }
 
@@ -118,7 +119,6 @@ class Session extends Parameter
         if (session_id()) {
             session_destroy();
         }
-
         return $this->clear();
     }
 
@@ -133,7 +133,7 @@ class Session extends Parameter
         foreach ($inis as $name => $value) {
             ini_set('session.' . $name, $value);
         }
-
+        $this->inis = $inis + $this->inis;
         return $this;
     }
 }
