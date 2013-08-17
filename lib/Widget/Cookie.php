@@ -17,8 +17,15 @@ use Widget\Stdlib\Parameter;
  * @property    Request $request A widget that handles the HTTP request data
  * @property    Response $response A widget that handles the HTTP response data
  */
-class Cookie extends Parameter
+class Cookie extends Base
 {
+    /**
+     * The cookie data
+     *
+     * @var array
+     */
+    protected $data = array();
+
     /**
      * Constructor
      *
@@ -96,13 +103,59 @@ class Cookie extends Parameter
     }
 
     /**
-     * Remove cookie
+     * Clear all parameter data
      *
-     * @param  string       $key the name of cookie
+     * @return Parameter
+     */
+    public function clear()
+    {
+        $this->data = array();
+
+        return $this;
+    }
+
+    /**
+     * Check if the offset exists
+     *
+     * @param  string $offset
+     * @return bool
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->data[$offset]);
+    }
+
+    /**
+     * Get the offset value
+     *
+     * @param  string $offset
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->data[$offset]) ? $this->data[$offset] : null;
+    }
+
+    /**
+     * Set the offset value
+     *
+     * @param string $offset
+     * @param mixed  $value
+     * @return mixed
+     */
+    public function offsetSet($offset, $value)
+    {
+        return $this->data[$offset] = $value;
+    }
+
+    /**
+     * Unset the offset
+     *
+     * @param string $offset
      * @return Cookie
      */
-    public function offsetUnset($key)
+    public function offsetUnset($offset)
     {
-        return $this->remove($key);
+        return $this->remove($offset);
     }
 }
