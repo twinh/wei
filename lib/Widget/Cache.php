@@ -54,7 +54,7 @@ class Cache extends BaseCache
             throw new \InvalidArgumentException(sprintf('Cache driver class "%s" not found', $class));
         }
 
-        if (!is_subclass_of($class, 'Widget\Stdlib\BaseCache')) {
+        if (!is_subclass_of($class, 'Widget\BaseCache')) {
             throw new \InvalidArgumentException(sprintf('Cache driver class "%s" must extend "Widget\Stdlib\AbstractCache"', $class));
         }
 
