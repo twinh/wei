@@ -17,7 +17,7 @@ use Widget\Base;
  * @method      string t(string $message, array $parameters = array()) Translates a message
  * @property    \Widget\T $t The translator widget
  */
-abstract class AbstractValidator extends Base implements ValidatorInterface
+abstract class AbstractValidator extends Base
 {
     /**
      * The message added when the input required a stringify value

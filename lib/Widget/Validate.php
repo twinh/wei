@@ -8,6 +8,7 @@
 
 namespace Widget;
 
+use Widget\Validator\AbstractValidator;
 use Widget\Validator\ValidatorInterface;
 
 /**
@@ -158,7 +159,7 @@ class Validate extends Base
      *
      * @param array $options The options for validation
      * @return bool Whether pass the validation or not
-     * @throws \InvalidArgumentException  When validation rule is not array, string or instance of ValidatorInterface
+     * @throws \InvalidArgumentException  When validation rule is not array, string or instance of AbstractValidator
      */
     public function valid($options = array())
     {
@@ -181,7 +182,7 @@ class Validate extends Base
              */
             if (is_string($rules)) {
                 $rules = array($rules => true);
-            } elseif ($rules instanceof ValidatorInterface) {
+            } elseif ($rules instanceof AbstractValidator) {
                 $rules = array($rules);
             } elseif (!is_array($rules)) {
                 throw new \InvalidArgumentException(sprintf(
