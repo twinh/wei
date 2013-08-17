@@ -7,10 +7,15 @@ Session
 ----
 
 ### 使用Session存储验证码,并校验请求的验证码是否正确
+
+验证码页面
 ```php
 widget()->session('verfiyCode', 'WIDG');
+``
 
-if (widget()->session('verfiyCode') == widget()->post('verfiyCode')) {
+校验页面
+```php
+if (widget()->session('verfiyCode') == widget()->request('verfiyCode')) {
     echo '验证码正确';
 } else {
     echo '验证码错误';
