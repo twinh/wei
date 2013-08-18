@@ -88,12 +88,12 @@ $cache = widget()->cache;
 
 // 批量设置缓存
 $result = $cache->setMulti(array(
-	  'array' 	=> array(),
-	  'bool'		=> true,
-	  'float'		=> 1.2,
-	  'int'		=> 1,
-	  'null'		=> null,
-	  'object'	=> new \stdClass()
+    'array' 	=> array(),
+    'bool'		=> true,
+    'float'		=> 1.2,
+    'int'		=> 1,
+    'null'		=> null,
+    'object'	=> new \stdClass()
 ));
 
 // 返回结果
@@ -118,12 +118,12 @@ $result = $cache->getMulti(array(
 
 // 返回结果
 $result = array (
-  'array' => array (),
-  'bool' => true,
-  'float' => 1.2,
-  'int' => 1,
-  'null' => NULL,
-  'object' => stdClass::__set_state(array()),
+    'array' => array(),
+    'bool' => true,
+    'float' => 1.2,
+    'int' => 1,
+    'null' => NULL,
+    'object' => stdClass::__set_state(array()),
 );
 ```
 
@@ -162,7 +162,7 @@ driver    | string | apc       | 缓存的类型
 速度   | 快  | 快         | 慢      | 慢        | 快        | 快        | 快         | 快        | 快
 持久化 | ×  | -          |  √     | √        | ×        | ×        | √         | √        | √
 分布式 | ×  | ×         |  √     | ×        | √        | √        | √         | √        | √
-原子性 | √  | √         |  ×     | √        | √        | √        | √         | √        | √
+原子性 | √  | √         |  ×     | √        | √        | √        | ×         | √        | √
 
 * `√` 表示支持
 * `×` 表示不支持
