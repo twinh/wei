@@ -8,8 +8,6 @@
 
 namespace Widget;
 
-use Widget\Stdlib\Parameter;
-
 /**
  * A widget that handles the HTTP request and response cookies
  *
@@ -17,7 +15,7 @@ use Widget\Stdlib\Parameter;
  * @property    Request $request A widget that handles the HTTP request data
  * @property    Response $response A widget that handles the HTTP response data
  */
-class Cookie extends Base
+class Cookie extends Base implements \ArrayAccess
 {
     /**
      * The cookie data
