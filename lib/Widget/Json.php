@@ -38,7 +38,7 @@ class Json extends Response
      * @param bool $jsonp Whether allow response json format on demand
      * @return Json
      */
-    public function __invoke($message = null, $code = 0, array $append = array(), $jsonp = false)
+    public function __invoke($message = null, $code = 1, array $append = array(), $jsonp = false)
     {
         $result = json_encode(array(
             $this->code => $code,
