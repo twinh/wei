@@ -9,7 +9,7 @@ Cache
 ### 设置和获取缓存
 
 ```php
-// 设置缓存,返回true
+// 设置缓存,成功返回true,失败返回false
 widget()->cache('key', 'value');
 
 // 获取缓存,返回'value'
@@ -88,22 +88,22 @@ $cache = widget()->cache;
 
 // 批量设置缓存
 $result = $cache->setMulti(array(
-	'array' 	=> array(),
-	'bool'		=> true,
-	'float'		=> 1.2,
-	'int'		=> 1,
-	'null'		=> null,
-	'object'	=> new \stdClass()
+	  'array' 	=> array(),
+	  'bool'		=> true,
+	  'float'		=> 1.2,
+	  'int'		=> 1,
+	  'null'		=> null,
+	  'object'	=> new \stdClass()
 ));
 
 // 返回结果
 $result = array (
-  'array' => true,
-  'bool' => true,
-  'float' => true,
-  'int' => true,
-  'null' => true,
-  'object' => true,
+    'array' => true,
+    'bool' => true,
+    'float' => true,
+    'int' => true,
+    'null' => true,
+    'object' => true,
 );
 
 // 批量获取缓存
