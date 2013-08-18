@@ -17,13 +17,8 @@ require 'path/to/widget/lib/Widget/Widget.php';
 // 2. Create the default widget container instance
 $widget = widget();
 
-// 3. Call any widgets to do your stuff
-$user = $widget->db->select('user', 1);
-
-$cc = $widget->fileCache->get('xxx');
-
-// 3. Invoke the "query" widget to receive the URL query parameter
-$id = $widget->query('id');
+// 3. Invoke the "request" widget to receive the HTTP request parameter
+$id = $widget->request('id');
 ```
 
 ## Installation
