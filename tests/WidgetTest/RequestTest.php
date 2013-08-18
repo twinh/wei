@@ -4,6 +4,11 @@ namespace WidgetTest;
 
 class RequestTest extends TestCase
 {
+    /**
+     * @var \Widget\Request
+     */
+    protected $object;
+
     public function testInvoke()
     {
         $widget = $this->object;
@@ -46,7 +51,7 @@ class RequestTest extends TestCase
 
         $widget->remove('remove');
 
-        $this->assertNull($widget->request->getRaw('remove'));
+        $this->assertNull($widget->request->get('remove'));
     }
 
     public function testMethod()
@@ -537,5 +542,140 @@ class RequestTest extends TestCase
             'ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8',
             'ACCEPT_CHARSET' => 'UTF-8,*;q=0.5',
           ), $this->request->getHeaders());
+    }
+
+    public function testInvoker()
+    {
+        $request = $this->object;
+
+        $request->fromArray(array(
+            'string' => 'value',
+            1 => 2
+        ));
+
+        $this->assertEquals('value', $request('string'));
+
+        $this->assertEquals('custom', $request('no this key', 'custom'));
+    }
+
+    public function testCount()
+    {
+        $widget = $this->object;
+
+        $widget->fromArray(range(1, 10));
+
+        $this->assertCount(10, $widget);
+    }
+
+    public function testFromArray() {
+        $widget = $this->object;
+
+        $widget['key2'] = 'value2';
+
+        $widget->fromArray(array(
+            'key1' => 'value1',
+            'key2' => 'value changed',
+        ));
+
+        $this->assertEquals('value1', $widget['key1']);
+
+        $this->assertEquals('value changed', $widget['key2']);
+    }
+
+    public function testToArray()
+    {
+        $widget = $this->object;
+
+        $widget->fromArray(array(
+            'key' => 'other value',
+        ));
+
+        $arr = $widget->toArray();
+
+        $this->assertContains('other value', $arr);
+    }
+
+    public function testArrayAsSetParameter()
+    {
+        $array = array(
+            'key' => 'value',
+            'key1' => 'value1'
+        );
+
+        $this->request->set($array);
+
+        $this->assertIsSubset($array, $this->request->toArray());
+    }
+
+    public function testOffsetExists() {
+        $widget = $this->object;
+
+        $widget['key'] = 'value';
+
+        $this->assertTrue(isset($widget['key']));
+    }
+
+    public function testOffsetGet() {
+        $widget = $this->object;
+
+        $widget['key'] = 'value1';
+
+        $this->assertEquals('value1', $widget['key']);
+    }
+
+    public function testOffsetUnset() {
+        $widget = $this->object;
+
+        unset($widget['key']);
+
+        $this->assertNull($widget['key']);
+    }
+
+    public function createParameterObject($type, $class)
+    {
+        // create request widget from custom parameter
+        $request = new \Widget\Request(array(
+            'widget' => $this->widget,
+            'fromGlobal' => false,
+            $type => array(
+                'key' => 'value',
+                'key2' => 'value2',
+                'int' => '5',
+                'array' => array(
+                    'item' => 'value'
+                )
+            )
+        ));
+        return $request;
+    }
+
+    public function testGetter()
+    {
+        $parameters = array(
+            'data' => 'request'
+        );
+
+        foreach ($parameters as $type => $class) {
+            $parameter = $this->createParameterObject($type, $class);
+
+            $this->assertEquals('value', $parameter->get('key'));
+
+            $this->assertEquals(5, $parameter->getInt('int'));
+
+            $this->assertEquals('', $parameter->get('notFound'));
+
+            // int => 5, not in specified array
+            $this->assertEquals('firstValue', $parameter->getInArray('int', array(
+                'firstKey' => 'firstValue',
+                'secondKey' => 'secondValue'
+            )));
+
+            // int => 5
+            $this->assertEquals(6, $parameter->getInt('int', 6));
+
+            $this->assertEquals(6, $parameter->getInt('int', 6, 10));
+
+            $this->assertEquals(4, $parameter->getInt('int', 1, 4));
+        }
     }
 }
