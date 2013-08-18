@@ -103,7 +103,7 @@ class Cookie extends Base
     }
 
     /**
-     * Clear all parameter data
+     * Clear all cookie data
      *
      * @return Parameter
      */
@@ -112,6 +112,16 @@ class Cookie extends Base
         $this->data = array();
 
         return $this;
+    }
+
+    /**
+     * Returns all cookie data
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->data;
     }
 
     /**
