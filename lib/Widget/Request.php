@@ -8,8 +8,6 @@
 
 namespace Widget;
 
-use Widget\Stdlib\Parameter;
-
 /**
  * A widget that handles the HTTP request data
  *
@@ -191,7 +189,7 @@ class Request extends Base implements \ArrayAccess, \Countable
      *
      * @param string|array $name The parameter name or A key-value array
      * @param mixed $value The parameter value
-     * @return Parameter
+     * @return Request
      */
     public function set($name, $value = null)
     {
@@ -202,7 +200,6 @@ class Request extends Base implements \ArrayAccess, \Countable
                 $this->data[$key] = $value;
             }
         }
-
         return $this;
     }
 
@@ -210,24 +207,22 @@ class Request extends Base implements \ArrayAccess, \Countable
      * Remove parameter by specified name
      *
      * @param string $name The parameter name
-     * @return Parameter
+     * @return Request
      */
     public function remove($name)
     {
         unset($this->data[$name]);
-
         return $this;
     }
 
     /**
      * Clear all parameter data
      *
-     * @return Parameter
+     * @return Request
      */
     public function clear()
     {
         $this->data = array();
-
         return $this;
     }
 
@@ -279,12 +274,11 @@ class Request extends Base implements \ArrayAccess, \Countable
      * Merge data from array
      *
      * @param  array            $array
-     * @return Parameter
+     * @return Request
      */
     public function fromArray(array $array = array())
     {
         $this->data = $array;
-
         return $this;
     }
 
