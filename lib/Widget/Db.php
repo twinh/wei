@@ -468,7 +468,7 @@ class Db extends Base
         }
 
         if ($this->afterQuery) {
-            call_user_func_array($this->afterQuery, array($this));
+            call_user_func_array($this->afterQuery, array($sql, $params, $types, $this));
         }
 
         return $result;
@@ -514,7 +514,7 @@ class Db extends Base
         }
 
         if ($this->afterQuery) {
-            call_user_func_array($this->afterQuery, array($this));
+            call_user_func_array($this->afterQuery, array($sql, $params, $types, $this));
         }
 
         return $stmt;
