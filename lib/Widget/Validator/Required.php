@@ -46,10 +46,21 @@ class Required extends AbstractValidator
      */
     protected function validate($input)
     {
-        if ($this->required && in_array($input, $this->invalid, true)) {
+        if ($this->required && $this->isInvalid($input)) {
             $this->addError('required');
             return false;
         }
         return true;
+    }
+
+    /**
+     * Check if the input is in invalid variables
+     *
+     * @param mixed $input
+     * @return bool
+     */
+    public function isInvalid($input)
+    {
+        return in_array($input, $this->invalid, true);
     }
 }

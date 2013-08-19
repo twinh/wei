@@ -756,4 +756,22 @@ class ValidatorTest extends TestCase
         ));
         $this->assertTrue($validator->isValid());
     }
+
+    public function testValidateOptionalZeroValue()
+    {
+        $validator = $this->validate(array(
+            'data' => array(
+                'email' => 0
+            ),
+            'rules' => array(
+                'email' => array(
+                    'required' => false,
+                    'email' => true
+                )
+            )
+        ));
+
+        $this->assertFalse($validator->isValid());
+        $this->assertEquals(array('email'), $validator->getInvalidRules('email'));
+    }
 }

@@ -192,12 +192,12 @@ class Validate extends Base
 
             // Make sure the "required" rule at first
             if (!isset($rules['required'])) {
-                $value = true;
+                $isRequired = true;
             } else {
-                $value = (bool) $rules['required'];
+                $isRequired = (bool) $rules['required'];
                 unset($rules['required']);
             }
-            $rules = array('required' => $value) + $rules;
+            $rules = array('required' => $isRequired) + $rules;
 
             // Start validation
             foreach ($rules as $rule => $params) {
@@ -233,7 +233,7 @@ class Validate extends Base
 
                 if ($result) {
                     // The field data is empty and optional, skip the remaining validation rules
-                    if (empty($data) && 'required' === $rule) {
+                    if ('required' === $rule && $validator->isInvalid($data)) {
                         break;
                     }
                 } else {
