@@ -145,9 +145,10 @@ class Record extends Base
         // Update
         } else {
             // TODO update only changed field
-            return (bool)$this->db->update($this->table, $this->data, array(
+            $affectedRows = $this->db->update($this->table, $this->data, array(
                 $this->primaryKey => $this->data[$this->primaryKey]
             ));
+            return $affectedRows || '0000' == $this->db->errorCode();
         }
     }
 
