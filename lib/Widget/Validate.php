@@ -9,7 +9,6 @@
 namespace Widget;
 
 use Widget\Validator\AbstractValidator;
-use Widget\Validator\ValidatorInterface;
 
 /**
  * The validator widget
