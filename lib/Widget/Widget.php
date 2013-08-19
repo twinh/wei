@@ -637,7 +637,7 @@ namespace
      * @param string $name                  The name of the instance
      * @return Widget\Widget
      */
-    function widget ($config = array(), $name = 'default')
+    function widget($config = array(), $name = 'default')
     {
         return Widget\Widget::create($config, $name);
     }
