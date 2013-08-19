@@ -22,7 +22,7 @@ class Decimal extends AbstractValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($input)
+    protected function doValidate($input)
     {
         if (is_float($input) || (is_numeric($input) && count(explode('.', $input)) == 2)) {
             return true;
