@@ -66,7 +66,7 @@ class Tld extends In
     /**
      * {@inheritdoc}
      */
-    protected function validate($input)
+    protected function doValidate($input)
     {
         is_string($input) && $input = strtolower($input);
 

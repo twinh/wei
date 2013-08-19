@@ -48,7 +48,7 @@ class In extends AbstractValidator
     /**
      * {@inheritdoc}
      */
-    protected function validate($input)
+    protected function doValidate($input)
     {
         if (!in_array($input, $this->array, $this->strict)) {
             $this->addError('notIn');

@@ -52,7 +52,7 @@ class SomeOf extends AbstractGroupValidator
     /**
      * {@inheritdoc}
      */
-    protected function validate($input)
+    protected function doValidate($input)
     {
         // Adds "atLeast" error at first, make sure this error at the top of
         // stack, if any rule is passed, the error will be removed

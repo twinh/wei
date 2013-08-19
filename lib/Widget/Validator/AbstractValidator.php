@@ -115,7 +115,7 @@ abstract class AbstractValidator extends Base
         // Clean previous status
         $this->reset();
 
-        return $this->negative xor $this->validate($input);
+        return $this->negative xor $this->doValidate($input);
     }
 
     /**
@@ -124,7 +124,7 @@ abstract class AbstractValidator extends Base
      * @param mixed $input The input to be validated
      * @return boolean
      */
-    abstract protected function validate($input);
+    abstract protected function doValidate($input);
 
     /**
      * Set property value

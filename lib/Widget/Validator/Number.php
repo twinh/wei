@@ -22,7 +22,7 @@ class Number extends AbstractValidator
     /**
      * {@inheritdoc}
      */
-    protected function validate($input)
+    protected function doValidate($input)
     {
         if (!is_numeric($input)) {
             $this->addError('notNumber');

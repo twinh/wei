@@ -34,7 +34,7 @@ class Max extends AbstractValidator
     /**
      * {@inheritdoc}
      */
-    protected function validate($input)
+    protected function doValidate($input)
     {
         if ($this->max < $input) {
             $this->addError('max');

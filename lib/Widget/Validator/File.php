@@ -160,7 +160,7 @@ class File extends AbstractValidator
     /**
      * {@inheritdoc}
      */
-    protected function validate($input)
+    protected function doValidate($input)
     {
         switch ( true ) {
             case is_string($input) :

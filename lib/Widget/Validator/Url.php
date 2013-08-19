@@ -50,7 +50,7 @@ class Url extends AbstractValidator
     /**
      * {@inheritdoc}
      */
-    protected function validate($input)
+    protected function doValidate($input)
     {
         $flag = 0;
         if ($this->path) {

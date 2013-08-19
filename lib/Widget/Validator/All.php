@@ -53,7 +53,7 @@ class All extends AbstractValidator
     /**
      * {@inheritdoc}
      */
-    protected function validate($input)
+    protected function doValidate($input)
     {
         if (!is_array($input) && !$input instanceof \Traversable) {
             $this->addError('notArray');

@@ -39,7 +39,7 @@ class DivisibleBy extends AbstractValidator
     /**
      * {@inheritdoc}
      */
-    protected function validate($input)
+    protected function doValidate($input)
     {
         if (!$this->isString($input)) {
             $this->addError('notDivisible');

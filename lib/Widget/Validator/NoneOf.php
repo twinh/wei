@@ -37,7 +37,7 @@ class NoneOf extends AbstractGroupValidator
     /**
      * {@inheritdoc}
      */
-    protected function validate($input)
+    protected function doValidate($input)
     {
         $this->addError('invalid');
 

@@ -22,7 +22,7 @@ class EmptyValue extends AbstractValidator
     /**
      * {@inheritdoc}
      */
-    protected function validate($input)
+    protected function doValidate($input)
     {
         if (!empty($input)) {
             $this->addError('empty');

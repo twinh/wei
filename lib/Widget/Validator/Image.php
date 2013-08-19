@@ -50,7 +50,7 @@ class Image extends File
     /**
      * {@inheritdoc}
      */
-    protected function validate($input)
+    protected function doValidate($input)
     {
         parent::validate($input);
         if ($this->hasError('notString') || $this->hasError('notFound')) {

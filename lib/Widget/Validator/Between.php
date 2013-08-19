@@ -40,7 +40,7 @@ class Between extends AbstractValidator
     /**
      * {@inheritdoc}
      */
-    protected function validate($input)
+    protected function doValidate($input)
     {
         if ($this->min > $input || $this->max < $input) {
             $this->addError('between');

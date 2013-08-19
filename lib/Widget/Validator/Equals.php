@@ -38,7 +38,7 @@ class Equals extends AbstractValidator
     /**
      * {@inheritdoc}
      */
-    protected function validate($input)
+    protected function doValidate($input)
     {
         if (!($this->strict ? $input === $this->equals : $input == $this->equals)) {
             $this->addError('notEquals');

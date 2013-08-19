@@ -50,7 +50,7 @@ class Length extends AbstractLengthValidator
     /**
      * {@inheritdoc}
      */
-    protected function validate($input)
+    protected function doValidate($input)
     {
         if (false === ($len = $this->getLength($input))) {
             $this->addError('notDetected');

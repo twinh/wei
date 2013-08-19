@@ -59,7 +59,7 @@ class FieldExists extends AbstractValidator
     /**
      * {@inheritdoc}
      */
-    protected function validate($input)
+    protected function doValidate($input)
     {
         $this->count = 0;
         foreach ($this->fields as $field) {
