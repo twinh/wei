@@ -218,9 +218,9 @@ class Upload extends Image
 
         // Validate file extension, size, mime type by parent class
         if ($this->isImage || $this->maxWidth || $this->maxHeight || $this->minWidth || $this->minHeight) {
-            $result = parent::validate($uploadedFile);
+            $result = parent::doValidate($uploadedFile);
         } else {
-            $result = FileValidator::validate($uploadedFile);
+            $result = FileValidator::doValidate($uploadedFile);
         }
         if (false === $result) {
             return false;

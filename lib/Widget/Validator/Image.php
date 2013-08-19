@@ -52,7 +52,7 @@ class Image extends File
      */
     protected function doValidate($input)
     {
-        parent::validate($input);
+        parent::doValidate($input);
         if ($this->hasError('notString') || $this->hasError('notFound')) {
             return false;
         }

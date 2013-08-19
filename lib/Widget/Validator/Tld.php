@@ -70,6 +70,6 @@ class Tld extends In
     {
         is_string($input) && $input = strtolower($input);
 
-        return parent::validate($input);
+        return parent::doValidate($input);
     }
 }
