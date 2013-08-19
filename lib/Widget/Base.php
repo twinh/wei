@@ -38,8 +38,8 @@ namespace Widget;
  * @method   mixed      bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
  *
  * Database
- * @property Db                 $db A database widget
- * @method   Db\QueryBuilder    db($table = null) Create a new instance of a SQL query builder with specified table name
+ * @property Db                         $db A database widget
+ * @method   \Widget\Db\QueryBuilder    db($table = null) Create a new instance of a SQL query builder with specified table name
  *
  * @property Call       $call A widget handles HTTP request like jQuery Ajax
  * @method   Call       call(array $options) Create a new call object and execute
