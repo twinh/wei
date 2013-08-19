@@ -74,18 +74,18 @@ namespace Widget;
  * @method   \Widget\Redirect   redirect($url = null, $status = 302, array $options = array()) Send a redirect response
  *
  * View
- * @property Escape $escape A widget to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
- * @method   string escape($string, $type = 'html') Escapes a string by specified type for secure output
- * @property View   $view A widget that use to render PHP template
- * @method   string view($name = null, $vars = array()) Returns view widget or render a PHP template
+ * @property Escape             $escape A widget to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
+ * @method   string             escape($string, $type = 'html') Escapes a string by specified type for secure output
+ * @property View               $view A widget that use to render PHP template
+ * @method   string             view($name = null, $vars = array()) Returns view widget or render a PHP template
  *
  * Application
  * @property WeChatApp          $weChatApp A widget handles WeChat(WeiXin) callback message
- * @method   \Widget\WeChatApp   weChatApp() Start up WeChat application and output the matched rule message
+ * @method   \Widget\WeChatApp  weChatApp() Start up WeChat application and output the matched rule message
  * @property App                $app The application widget
- * @method   \Widget\App         app(array $options = array()) Startup application
+ * @method   \Widget\App        app(array $options = array()) Startup application
  * @property Router             $router A widget that build a simple REST application
- * @method   \Widget\Router      router($pathInfo = null, $method = null) Run the application
+ * @method   \Widget\Router     router($pathInfo = null, $method = null) Run the application
  * @property Url                $url A util widget to build URL
  * @method   string             url($uri) Build URL by specified uri and parameters
  *
