@@ -33,8 +33,9 @@ host       | string       | 127.0.0.1      | Redis所在的服务器名称
 prot       | int          | 6379           | Redis所在的服务器端口
 timeout    | float        | 0.0            | 连接服务器的超时秒数
 persistent | bool         | true           | 是否使用长连接
-object     | \Redis       | 无             | 原始的Redis对象
 auth 	   | string 	  | 无 			   | Redis服务器的验证密码
+object     | \Redis       | 无             | 原始的Redis对象
+options    | array 		  | -              | \Redis::setOption()方法的参数
 
 ### 继承的方法
 
