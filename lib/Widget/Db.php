@@ -453,25 +453,7 @@ class Db extends Base
      */
     public function executeUpdate($sql, $params = array(), $types = array())
     {
-        $this->connect();
-        $this->lastSql = $sql;
-        if ($this->beforeQuery) {
-            call_user_func_array($this->beforeQuery, array($sql, $params, $types, $this));
-        }
-
-        if ($params) {
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute($params);
-            $result = $stmt->rowCount();
-        } else {
-            $result = $this->pdo->exec($sql);
-        }
-
-        if ($this->afterQuery) {
-            call_user_func_array($this->afterQuery, array($sql, $params, $types, $this));
-        }
-
-        return $result;
+        return $this->query($sql, $params, $types, true);
     }
 
     /**
@@ -480,10 +462,11 @@ class Db extends Base
      * @param string $sql The SQL query
      * @param array $params The SQL parameters
      * @param array $types The parameter types to bind
+     * @param bool $returnRows
      * @throws \RuntimeException When a PDOException raise
-     * @return \PDOStatement
+     * @return \PDOStatement|int
      */
-    public function query($sql, $params = array(), $types = array())
+    public function query($sql, $params = array(), $types = array(), $returnRows = false)
     {
         $this->connect();
         $this->lastSql = $sql;
@@ -492,16 +475,27 @@ class Db extends Base
         }
 
         try {
-            if ($params) {
-                $stmt = $this->pdo->prepare($sql);
-                if ($types) {
-                    $this->bindParameter($stmt, $params, $types);
-                    $stmt->execute();
+            if (!$returnRows) {
+                if ($params) {
+                    $stmt = $this->pdo->prepare($sql);
+                    if ($types) {
+                        $this->bindParameter($stmt, $params, $types);
+                        $stmt->execute();
+                    } else {
+                        $stmt->execute((array)$params);
+                    }
                 } else {
-                    $stmt->execute((array)$params);
+                    $stmt = $this->pdo->query($sql);
                 }
+                $result = $stmt;
             } else {
-                $stmt = $this->pdo->query($sql);
+                if ($params) {
+                    $stmt = $this->pdo->prepare($sql);
+                    $stmt->execute($params);
+                    $result = $stmt->rowCount();
+                } else {
+                    $result = $this->pdo->exec($sql);
+                }
             }
         } catch (\PDOException $e) {
             $msg = sprintf(
@@ -517,7 +511,7 @@ class Db extends Base
             call_user_func_array($this->afterQuery, array($sql, $params, $types, $this));
         }
 
-        return $stmt;
+        return $result;
     }
 
     /**
