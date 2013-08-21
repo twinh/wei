@@ -70,7 +70,7 @@ class Apc extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doInc($key, $offset = 1)
+    protected function doIncr($key, $offset = 1)
     {
         if (false === apc_inc($key, $offset)) {
             return apc_store($key, $offset) ? $offset : false;

@@ -68,13 +68,13 @@ class CouchbaseTest extends CacheTestCase
         $couchbase->expects($this->any())
             ->method('inc')
             ->will($this->returnCallback(function($key, $offset) use($cache) {
-                return $cache->inc($key, $offset);
+                return $cache->incr($key, $offset);
             }));
 
         $couchbase->expects($this->any())
             ->method('dec')
             ->will($this->returnCallback(function($key, $offset) use($cache) {
-                return $cache->dec($key, $offset);
+                return $cache->decr($key, $offset);
             }));
 
         $couchbase->expects($this->any())

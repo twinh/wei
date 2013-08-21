@@ -143,7 +143,7 @@ class MongoCache extends BaseCache
      *
      * {@inheritdoc}
      */
-    protected function doInc($key, $offset = 1)
+    protected function doIncr($key, $offset = 1)
     {
         $value = $this->doGet($key) + $offset;
 
