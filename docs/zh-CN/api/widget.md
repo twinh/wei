@@ -220,7 +220,7 @@ import      | array  | 无            | 导入指定目录下的微件类
 $config | string,array | 微件的配置数组或配置文件
 $name   | string       | 微件对象的名称
 
-#### widget()->config($name, $vlaue = array())
+#### widget()->setConfig($name, $vlaue = array())
 设置微件的配置
 
 **返回:** `Widget\Widget` 微件管理器对象
@@ -232,7 +232,7 @@ $name   | string       | 微件对象的名称
 $name       | string | 无            | 微件的名称,如`request`, `request.sub`
 $value      | array  | 无            | 微件的配置选项
 
-#### widget()->config($array = array())
+#### widget()->setConfig($array = array())
 设置微件所有配置
 
 **返回:** `Widget\Widget` 微件管理器对象
@@ -243,7 +243,7 @@ $value      | array  | 无            | 微件的配置选项
 ------------|--------|---------------|------
 $array      | array  | 无            | 微件的完整配置
 
-#### widget()->config($name)
+#### widget()->getConfig($name)
 获取微件的选项配置
 
 **返回:** `mixed` 配置的值,如果配置不存在,返回`null`
