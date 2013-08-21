@@ -6,7 +6,7 @@ class EnvTest extends TestCase
 {
     public function setUp()
     {
-        $this->widget->setConfig('env/configDir', __DIR__ . '/Fixtures/env/%env%.php');
+        $this->widget->setConfig('env:configDir', __DIR__ . '/Fixtures/env/%env%.php');
 
         parent::setUp();
     }
