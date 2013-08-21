@@ -537,7 +537,7 @@ namespace Widget
          */
         public function setInis(array $inis)
         {
-            $this->inis = $inis;
+            $this->inis = $inis + $this->inis;
             foreach ($inis as $key => $value) {
                 ini_set($key, $value);
             }

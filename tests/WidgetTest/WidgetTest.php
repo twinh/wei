@@ -129,10 +129,22 @@ class WidgetTest extends TestCase
 
     public function testSetInis()
     {
-        $this->widget->setInis(array(
+        $widget = $this->widget;
+
+        $widget->setInis(array(
             'date.timezone' => 'Asia/Shanghai'
         ));
+
         $this->assertEquals('Asia/Shanghai', ini_get('date.timezone'));
+        $this->assertIsSubset(array('date.timezone' => 'Asia/Shanghai'), $widget->getOption('inis'));
+
+        $widget->setInis(array(
+            'date.default_latitude' => '31.7667'
+        ));
+        $this->assertIsSubset(array(
+            'date.timezone' => 'Asia/Shanghai',
+            'date.default_latitude' => '31.7667'
+        ), $widget->getOption('inis'));
     }
 
     public function testSet()
