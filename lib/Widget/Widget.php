@@ -47,7 +47,7 @@ namespace Widget
         protected $widgets = array();
 
         /**
-         * The global configurations for all widgets
+         * The configurations for all widgets
          *
          * @var array
          */
@@ -100,7 +100,8 @@ namespace Widget
          *     array(
          *         'dir' => 'lib/Widget/Validator'
          *         'namespace' => 'Widget\Validator'
-         *         'format' => 'is%s'
+         *         'format' => 'is%s',
+         *         'autoload' => false
          *     )
          * )
          * @var array
