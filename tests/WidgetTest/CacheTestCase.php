@@ -5,7 +5,7 @@ namespace WidgetTest;
 class CacheTestCase extends TestCase
 {
     /**
-     * @var \Widget\Stdlib\BaseCache
+     * @var \Widget\BaseCache
      */
     protected $object;
 

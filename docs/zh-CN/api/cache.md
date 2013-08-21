@@ -58,7 +58,7 @@ $cache = widget()->cache;
 
 // 设置文章访问次数增加1,返回增加后的总次数
 // 注意: 开发人员无需预先判断该键名的缓存是否存在,如果缓存不存在,将自动从0开始计算
-$hits = $cache->inc('article-1', 1);
+$hits = $cache->incr('article-1', 1);
 
 echo '该文章已被访问' . $hits . '次';
 ```
@@ -172,7 +172,7 @@ driver    | string | apc       | 缓存的类型
 
 * 速度:判断依据是缓存数据存储的介质,如果数据存储在内存中则`快`,如果存储在磁盘则`慢`
 * 持久化:判断依据是缓存是否因为相关服务重启而丢失数据
-* 原子性:判断依据是`add`,`replace`,`inc`和`dec`方法是否为原子操作
+* 原子性:判断依据是`add`,`replace`,`incr`和`decr`方法是否为原子操作
 * `Cache`和`Bicache`为视配置而定,不列入比较
 * `ArrayCache`使用PHP数组存储数据,每次请求结束后销毁,因此不具备持久化特性
 
@@ -264,7 +264,7 @@ $value    | mixed     | 无        | 缓存的值,允许任意变量类型
 $key      | string    | 无        | 缓存的键名
 $value    | mixed     | 无        | 缓存的值,允许任意变量类型
 
-#### cache->inc($key, $offset = 1)
+#### cache->incr($key, $offset = 1)
 
 增大一项缓存的值
 
@@ -277,7 +277,7 @@ $value    | mixed     | 无        | 缓存的值,允许任意变量类型
 $key      | string    | 无        | 缓存的键名
 $offset   | int       | 1         | 增大的值
 
-#### cache->dec($key, $offset = 1)
+#### cache->decr($key, $offset = 1)
 
 减小一项缓存的值
 
