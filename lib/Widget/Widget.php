@@ -239,68 +239,65 @@ namespace Widget
         /**
          * Set widget's configuration
          *
-         * @param string $name
+         * @param string|array $name
          * @param mixed $value
          * @return Widget
          */
         public function setConfig($name, $value = null)
         {
-            // Get or set one configuration
-            if (is_string($name)) {
-                $temp = &$this->configs;
-                if (false === strpos($name, '/')) {
-                    $first = $name;
-                } else {
-                    $keys = explode('/', $name);
-                    $first = $keys[0];
-                    $name = array_pop($keys);
-                    foreach ($keys as $key) {
-                        if (!isset($temp[$key])) {
-                            $temp[$key] = null;
-                        }
-                        $temp = &$temp[$key];
-                    }
-                }
-
-                $temp[$name] = $value;
-                if (isset($this->widgets[$first])) {
-                    $this->widgets[$first]->setOption($value);
+            // Set array configurations
+            if (is_array($name)) {
+                foreach ($name as $key => $value) {
+                    $this->setConfig($key, $value);
                 }
                 return $this;
             }
 
-            // Merge all configurations
-            if (is_array($name)) {
-                foreach ($name as $key => $value) {
-                    /**
-                     * Automatically create dependence map when configuration key contains "."
-                     *
-                     * $this->config = array(
-                     *    'mysql.db' => array(),
-                     * );
-                     * =>
-                     * $this->deps['mysqlDb'] = 'mysql.db';
-                     */
-                    if (false !== ($pos = strpos($key, '.'))) {
-                        $parts = explode('.', $key, 2);
-                        $widgetName = $parts[0] . ucfirst($parts[1]);
-                        if (!isset($this->deps[$widgetName])) {
-                            $this->deps[$widgetName] = $key;
-                        }
-                    }
+            // Set one configuration
+            $names = explode(':', $name);
+            $first = $names[0];
+            $configs = &$this->configs;
 
-                    if (is_array($value)) {
-                        foreach ($value as $subKey => $subValue) {
-                            $this->configs[$key][$subKey] = $subValue;
-                        }
-                        if (isset($this->widgets[$key])) {
-                            $this->widgets[$key]->setOption($value);
-                        }
-                    } else {
-                        $this->configs[$key] = $value;
-                    }
+            foreach ($names as $name) {
+                if (!is_array($configs)) {
+                    $configs = array();
+                }
+                if (!isset($configs[$name])) {
+                    $configs[$name] = array();
+                }
+                $configs = &$configs[$name];
+            }
+
+            // Merge only first child node
+            if (is_array($configs) && is_array($value)) {
+                $configs = $value + $configs;
+            } else {
+                $configs = $value;
+            }
+
+            /**
+             * Automatically create dependence map when configuration key contains "."
+             *
+             * $this->configs = array(
+             *    'mysql.db' => array(),
+             * );
+             * =>
+             * $this->deps['mysqlDb'] = 'mysql.db';
+             */
+            if (false !== strpos($first, '.')) {
+                $parts = explode('.', $first, 2);
+                $widgetName = $parts[0] . ucfirst($parts[1]);
+                if (!isset($this->deps[$widgetName])) {
+                    $this->deps[$widgetName] = $first;
                 }
             }
+
+            // Set options for existing widget
+            if (isset($this->widgets[$first])) {
+                $this->widgets[$first]->setOption($value);
+            }
+
+            return $this;
         }
 
         /**
@@ -312,18 +309,19 @@ namespace Widget
          */
         public function getConfig($name, $default = null)
         {
-            $temp = &$this->configs;
-            if (0 !== strpos($name, '/')) {
-                $keys = explode('/', $name);
-                $name = array_pop($keys);
-                foreach ($keys as $key) {
-                    if (!isset($temp[$key])) {
-                        $temp[$key] = null;
-                    }
-                    $temp = &$temp[$key];
+            if (false === strpos($name, ':')) {
+                return isset($this->configs[$name]) ? $this->configs[$name] : $default;
+            }
+
+            $configs = &$this->configs;
+            foreach (explode(':', $name) as $key) {
+                if (is_array($configs) && isset($configs[$key])) {
+                    $configs = &$configs[$key];
+                } else {
+                    return $default;
                 }
             }
-            return isset($temp[$name]) ? $temp[$name] : $default;
+            return $configs;
         }
 
         /**

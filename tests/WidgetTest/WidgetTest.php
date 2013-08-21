@@ -17,32 +17,67 @@ class WidgetTest extends TestCase
     public function testConfig()
     {
         $widget = $this->widget;
+        $widget->setConfig(array(
+            'test' => array(
+                'a' => array(
+                    'b' => array(
+                        'c' => false
+                    )
+                )
+            )
+        ));
 
-        $widget->setConfig('key', 'value');
+        $this->assertSame(array('a' => array('b' => array('c' => false))), $widget->getConfig('test'));
+        $this->assertSame(array('b' => array('c' => false)), $widget->getConfig('test:a'));
+        $this->assertSame(array('c' => false), $widget->getConfig('test:a:b'));
+        $this->assertSame(false, $widget->getConfig('test:a:b:c'));
+        $this->assertSame(null, $widget->getConfig('test:noThisKey'));
+        $this->assertSame(false, $widget->getConfig('test:noThisKey', false));
+        $this->assertSame(0, $widget->getConfig('test:noThisKey', 0));
 
-        $this->assertEquals('value', $widget->getConfig('key'));
+        $widget->setConfig('test2', array());
+        $this->assertSame(array(), $widget->getConfig('test2'));
 
-        $widget->setConfig('first/second', 'value2');
+        $widget->setConfig('test2:a', 'b');
+        $this->assertSame('b', $widget->getConfig('test2:a'));
+        $this->assertSame(array('a' => 'b'), $widget->getConfig('test2'));
 
-        $this->assertEquals(array('second' => 'value2',), $widget->getConfig('first'));
+        $widget->setConfig('test2:a:b', 'c');
+        $this->assertSame('c', $widget->getConfig('test2:a:b'));
+
+        $widget->setConfig('test.request', array());
+        $deps = $widget->getOption('deps');
+        $this->assertArrayHasKey('testRequest', $deps);
+        $this->assertSame('test.request', $deps['testRequest']);
     }
 
     public function testMergeConfig()
     {
-        $this->widget->setConfig(array(
+        $widget = $this->widget;
+
+        $widget->setConfig(array(
             'widgetName' => array(
                 'option1' => 'value1',
             )
         ));
 
-        $this->widget->setConfig(array(
+        $widget->setConfig(array(
             'widgetName' => array(
                 'option2' => 'value2',
             )
         ));
 
-        $this->assertEquals('value1', $this->widget->getConfig('widgetName/option1'));
-        $this->assertEquals('value2', $this->widget->getConfig('widgetName/option2'));
+        $this->assertEquals('value1', $widget->getConfig('widgetName:option1'));
+        $this->assertEquals('value2', $widget->getConfig('widgetName:option2'));
+
+        $widget->setConfig(array(
+            'widgetName' => array(
+                'option1' => 'value3',
+            )
+        ));
+
+        $this->assertEquals('value3', $widget->getConfig('widgetName:option1'));
+        $this->assertEquals('value2', $widget->getConfig('widgetName:option2'));
     }
 
     public function testSetOptionInSetConfig()
