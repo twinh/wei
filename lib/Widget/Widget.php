@@ -28,7 +28,7 @@ namespace Widget
         /**
          * The instances of widget container
          *
-         * @var array<Widget>
+         * @var Widget[]
          */
         protected static $instances = array();
 
@@ -42,7 +42,7 @@ namespace Widget
         /**
          * An array contains the instanced widget objects
          *
-         * @var array<Base>
+         * @var Base[]
          */
         protected $widgets = array();
 
@@ -479,7 +479,6 @@ namespace Widget
         public function has($name)
         {
             $class = $this->getClass($name);
-
             return class_exists($class) ? $class : false;
         }
 
@@ -492,7 +491,6 @@ namespace Widget
         public function setDebug($bool)
         {
             $this->debug = (bool) $bool;
-
             return $this;
         }
 
@@ -553,11 +551,9 @@ namespace Widget
         public function setInis(array $inis)
         {
             $this->inis = $inis;
-
             foreach ($inis as $key => $value) {
                 ini_set($key, $value);
             }
-
             return $this;
         }
 
