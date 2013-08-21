@@ -193,7 +193,7 @@ class Redis extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doInc($key, $offset = 1)
+    protected function doIncr($key, $offset = 1)
     {
         return $this->object->incrBy($key, $offset);
     }

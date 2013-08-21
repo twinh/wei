@@ -5,7 +5,7 @@ namespace WidgetTest;
 class CacheTestCase extends TestCase
 {
     /**
-     * @var \Widget\Stdlib\BaseCache
+     * @var \Widget\BaseCache
      */
     protected $object;
 
@@ -55,7 +55,7 @@ class CacheTestCase extends TestCase
         );
     }
 
-    public function testIncAndDec()
+    public function testIncrAndDecr()
     {
         $cache = $this->object;
 
@@ -63,21 +63,21 @@ class CacheTestCase extends TestCase
         $cache->remove($key);
 
         // Increase from not exists key
-        $this->assertSame(2, $cache->inc($key, 2));
+        $this->assertSame(2, $cache->incr($key, 2));
         $this->assertEquals(2, $cache->get($key));
 
         // Increase from exists key and the offset is 3
-        $this->assertSame(5, $cache->inc($key, 3));
+        $this->assertSame(5, $cache->incr($key, 3));
         $this->assertEquals(5, $cache->get($key));
 
-        $this->assertSame(3, $cache->dec($key, 2));
+        $this->assertSame(3, $cache->decr($key, 2));
         $this->assertEquals(3, $cache->get($key));
 
         // Negative number
-        $this->assertSame(1, $cache->inc($key, -2));
+        $this->assertSame(1, $cache->incr($key, -2));
         $this->assertEquals(1, $cache->get($key));
 
-        $this->assertSame(3, $cache->dec($key, -2));
+        $this->assertSame(3, $cache->decr($key, -2));
         $this->assertEquals(3, $cache->get($key));
     }
 
@@ -165,9 +165,9 @@ class CacheTestCase extends TestCase
 
         $cache->set('test', 1);
         $this->assertEquals(1, $cache->get('test'));
-        $this->assertSame(3, $cache->inc('test', 2));
+        $this->assertSame(3, $cache->incr('test', 2));
 
-        $this->assertSame(1, $cache->dec('test', 2));
+        $this->assertSame(1, $cache->decr('test', 2));
 
         $this->assertEquals(2, $cache->replace('test', 2));
         $this->assertEquals(2, $cache->get('test'));

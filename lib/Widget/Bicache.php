@@ -118,9 +118,9 @@ class Bicache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doInc($key, $offset = 1)
+    protected function doIncr($key, $offset = 1)
     {
-        $result = $this->master->inc($key, $offset);
+        $result = $this->master->incr($key, $offset);
 
         if (false !== $result && $this->needUpdate($key)) {
             return $this->slave->set($key, $result) ? $result : false;

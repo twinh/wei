@@ -85,7 +85,7 @@ class ArrayCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doInc($key, $offset = 1)
+    protected function doIncr($key, $offset = 1)
     {
         if ($this->doExists($key)) {
             return $this->data[$key] += $offset;
