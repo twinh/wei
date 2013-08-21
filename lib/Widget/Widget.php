@@ -387,7 +387,7 @@ namespace Widget
             // $widget->notFound
             } elseif (isset($traces[1]) && '__get' == $traces[1]['function'] && $name == $traces[1]['args'][0]) {
                 throw new \BadMethodCallException(sprintf('Property or widget "%s" (class "%s") not found, called in file "%s" at line %s', $traces[1]['args'][0], $class, $traces[1]['file'], $traces[1]['line']));
-            // "Call to undefined method class::method" or "Undefined property: class::$property"
+            // $widget->get('notFound');
             } else {
                 throw new \BadMethodCallException(sprintf('Property or method "%s" not found', $name));
             }
