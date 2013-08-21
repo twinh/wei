@@ -189,7 +189,7 @@ class WidgetTest extends TestCase
      */
     public function testInvokeNotFoundWidgetByCallUserFunc()
     {
-        call_user_func($this->widget, 'notFoundWidget');
+        $this->widget->get('notFoundWidget');
     }
 
     public function testGetFromDeps()
@@ -240,13 +240,6 @@ class WidgetTest extends TestCase
         $id = $this->widget->invoke('request', array('id'));
 
         $this->assertEquals(__METHOD__, $id);
-    }
-
-    public function testInvoker()
-    {
-        $request = $this->widget('request');
-
-        $this->assertInstanceOf('\Widget\Request', $request);
     }
 
     public function testInstanceWidgetWithWidgetOption()

@@ -226,17 +226,6 @@ namespace Widget
         }
 
         /**
-         * Get a widget instance
-         *
-         * @param string $name The name of widget
-         * @return Base
-         */
-        public function __invoke($name)
-        {
-            return $this->get($name);
-        }
-
-        /**
          * Set widget's configuration
          *
          * @param string|array $name
