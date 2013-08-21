@@ -517,7 +517,7 @@ class Db extends Base
     /**
      * Returns the ID of the last inserted row or sequence value
      *
-     * @param string $name The name of PostgreSQL sequence
+     * @param string $sequence The name of PostgreSQL sequence
      * @return string
      */
     public function lastInsertId($sequence = null)
