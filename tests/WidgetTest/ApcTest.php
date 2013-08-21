@@ -98,7 +98,7 @@ class ApcTest extends CacheTestCase
         $this->assertEquals(1, $apc->incr(__METHOD__));
     }
 
-    public function testDec()
+    public function testDecr()
     {
         $apc = $this->object;
 

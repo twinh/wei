@@ -55,7 +55,7 @@ class CacheTestCase extends TestCase
         );
     }
 
-    public function testIncAndDec()
+    public function testIncrAndDecr()
     {
         $cache = $this->object;
 

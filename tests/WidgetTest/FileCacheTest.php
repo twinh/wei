@@ -147,7 +147,7 @@ class FileCacheTest extends CacheTestCase
         $this->assertFalse($widget->remove('test'), 'cache not found');
     }
 
-    public function testInc()
+    public function testIncr()
     {
         $widget = $this->object;
 
@@ -170,7 +170,7 @@ class FileCacheTest extends CacheTestCase
         $this->assertEquals(1, $widget->get(__METHOD__));
     }
 
-    public function testDec()
+    public function testDecr()
     {
         $widget = $this->object;
 
