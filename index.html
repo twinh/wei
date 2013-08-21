@@ -788,7 +788,7 @@
 
 <h3>使用缓存前缀来避免缓存名称冲突</h3>
 
-<p>有些时候,我们会共享同一个memcched服务,共享同一个APC,这时可以通过设置缓存名称前缀,避免数据冲突</p>
+<p>有些时候,我们会在多个应用中,共享同一个memcched服务,共享同一个APC,这时可以通过设置缓存名称前缀,避免数据冲突</p>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 设置APC缓存的键名前缀</span>
 <span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
