@@ -77,25 +77,25 @@ class ApcTest extends CacheTestCase
         $this->assertTrue($apc->replace(__METHOD__ . 'key', true));
     }
 
-    public function testInc()
+    public function testIncr()
     {
         $apc = $this->object;
 
         $apc->set(__METHOD__, 1);
 
-        $apc->inc(__METHOD__);
+        $apc->incr(__METHOD__);
 
         $this->assertEquals($apc->get(__METHOD__), 2);
 
         $apc->remove(__METHOD__);
 
-        $result = $apc->inc(__METHOD__);
+        $result = $apc->incr(__METHOD__);
 
         $this->assertEquals(1, $result);
 
         $apc->set(__METHOD__, 'string');
 
-        $this->assertEquals(1, $apc->inc(__METHOD__));
+        $this->assertEquals(1, $apc->incr(__METHOD__));
     }
 
     public function testDec()
@@ -104,7 +104,7 @@ class ApcTest extends CacheTestCase
 
         $apc->set(__METHOD__, 1);
 
-        $apc->dec(__METHOD__);
+        $apc->decr(__METHOD__);
 
         $this->assertEquals($apc->get(__METHOD__), 0);
     }

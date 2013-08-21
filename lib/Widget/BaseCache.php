@@ -149,9 +149,9 @@ abstract class BaseCache extends Base
      * @param  int       $offset The value to increased
      * @return int|false Returns the new value on success, or false on failure
      */
-    public function inc($key, $offset = 1)
+    public function incr($key, $offset = 1)
     {
-        return $this->doInc($this->getKeyWithPrefix($key), $offset);
+        return $this->doIncr($this->getKeyWithPrefix($key), $offset);
     }
 
     /**
@@ -161,9 +161,9 @@ abstract class BaseCache extends Base
      * @param  int       $offset The value to be decreased
      * @return int|false Returns the new value on success, or false on failure
      */
-    public function dec($key, $offset = 1)
+    public function decr($key, $offset = 1)
     {
-        return $this->inc($key, -$offset);
+        return $this->incr($key, -$offset);
     }
 
     /**
@@ -312,7 +312,7 @@ abstract class BaseCache extends Base
      * @param  int       $offset The value to increased
      * @return int|false Returns the new value on success, or false on failure
      */
-    abstract protected function doInc($key, $offset = 1);
+    abstract protected function doIncr($key, $offset = 1);
 
     /**
      * Clear all items

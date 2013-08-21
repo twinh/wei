@@ -180,7 +180,7 @@ class FileCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doInc($key, $offset = 1)
+    protected function doIncr($key, $offset = 1)
     {
         $file = $this->getFile($key, false);
 

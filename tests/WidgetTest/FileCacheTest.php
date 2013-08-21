@@ -153,20 +153,20 @@ class FileCacheTest extends CacheTestCase
 
         $widget->set(__METHOD__, 1);
 
-        $widget->inc(__METHOD__);
+        $widget->incr(__METHOD__);
 
         $this->assertEquals($widget->get(__METHOD__), 2);
 
         $widget->remove(__METHOD__);
-        $result = $widget->inc(__METHOD__);
+        $result = $widget->incr(__METHOD__);
         $this->assertEquals(1, $result);
 
         $widget->set(__METHOD__, 'string');
-        $widget->inc(__METHOD__);
+        $widget->incr(__METHOD__);
         $this->assertEquals(1, $widget->get(__METHOD__));
 
         $widget->set(__METHOD__, 1, -1);
-        $widget->inc(__METHOD__);
+        $widget->incr(__METHOD__);
         $this->assertEquals(1, $widget->get(__METHOD__));
     }
 
@@ -176,7 +176,7 @@ class FileCacheTest extends CacheTestCase
 
         $widget->set(__METHOD__, 1);
 
-        $widget->dec(__METHOD__);
+        $widget->decr(__METHOD__);
 
         $this->assertEquals($widget->get(__METHOD__), 0);
     }

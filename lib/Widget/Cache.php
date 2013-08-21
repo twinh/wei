@@ -126,9 +126,9 @@ class Cache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doInc($key, $offset = 1)
+    protected function doIncr($key, $offset = 1)
     {
-        return $this->object->inc($key, $offset);
+        return $this->object->incr($key, $offset);
     }
 
     /**

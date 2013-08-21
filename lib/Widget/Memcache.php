@@ -116,7 +116,7 @@ class Memcache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doInc($key, $offset = 1)
+    protected function doIncr($key, $offset = 1)
     {
         return $this->incDec($key, $offset, $offset > 0);
     }
@@ -124,7 +124,7 @@ class Memcache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function dec($key, $offset = 1)
+    public function decr($key, $offset = 1)
     {
         return $this->incDec($this->getKeyWithPrefix($key), $offset, $offset < 0);
     }
