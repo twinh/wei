@@ -781,7 +781,7 @@
 
 <span class="c1">// 设置文章访问次数增加1,返回增加后的总次数</span>
 <span class="c1">// 注意: 开发人员无需预先判断该键名的缓存是否存在,如果缓存不存在,将自动从0开始计算</span>
-<span class="nv">$hits</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">inc</span><span class="p">(</span><span class="s1">'article-1'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="nv">$hits</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">incr</span><span class="p">(</span><span class="s1">'article-1'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
 <span class="k">echo</span> <span class="s1">'该文章已被访问'</span> <span class="o">.</span> <span class="nv">$hits</span> <span class="o">.</span> <span class="s1">'次'</span><span class="p">;</span>
 </code></pre></div>
@@ -984,7 +984,7 @@
 <li>速度:判断依据是缓存数据存储的介质,如果数据存储在内存中则<code>快</code>,如果存储在磁盘则<code>慢</code>
 </li>
 <li>持久化:判断依据是缓存是否因为相关服务重启而丢失数据</li>
-<li>原子性:判断依据是<code>add</code>,<code>replace</code>,<code>inc</code>和<code>dec</code>方法是否为原子操作</li>
+<li>原子性:判断依据是<code>add</code>,<code>replace</code>,<code>incr</code>和<code>decr</code>方法是否为原子操作</li>
 <li>
 <code>Cache</code>和<code>Bicache</code>为视配置而定,不列入比较</li>
 <li>
@@ -1157,7 +1157,7 @@
 <td>缓存的值,允许任意变量类型</td>
 </tr>
 </tbody>
-</table><h4>cache-&gt;inc($key, $offset = 1)</h4>
+</table><h4>cache-&gt;incr($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
@@ -1186,7 +1186,7 @@
 <td>增大的值</td>
 </tr>
 </tbody>
-</table><h4>cache-&gt;dec($key, $offset = 1)</h4>
+</table><h4>cache-&gt;decr($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
