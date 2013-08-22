@@ -91,6 +91,7 @@ namespace Widget;
  *
  * Other
  * @property Arr            $arr An util widget provides some useful method to manipulation array
+ * @property Config         $config A widget to manage widget configurations
  * @property Env            $env A widget to detect the environment name and load configuration by environment name
  * @method   string         env() Returns the environment name
  * @property Error          $error A widget that handles exception and display pretty exception message
@@ -100,14 +101,10 @@ namespace Widget;
  * @method   string         gravatar($email, $size = null, $default = null, $rating = null) Generates a Gravatar URL for a specified email address
  * @property Logger         $logger A simple logger widget, which is base on the Monolog
  * @method   bool           logger($level, $message) Logs with an arbitrary level
- * @property Map            $map A widget that handles key-value map data
- * @method   mixed          map($name, $key = null) Get map data by specified name
  * @property Pinyin         $pinyin An util widget that converts Chinese words to phonetic alphabets
  * @method   string         pinyin($word) Converts Chinese words to phonetic alphabets
  * @property Uuid           $uuid A util widget that generates a RANDOM UUID(universally unique identifier)
  * @method   string         uuid() generates a RANDOM UUID(universally unique identifier)
- * @property Config         $config A pure configuration widget for your application
- * @method   string         config($name) Returns the value of your configuration
  * @property T              $t A translator widget
  * @method   string         t($message, array $parameters = array()) Translate the message
  *
