@@ -7,6 +7,7 @@ Changelog
 * Removed server, post, query, header, twig, smarty, dbal, entityManager widgets
 * Added new `config` widget, ref #128
 * Changed cache widgets' `inc` and `dec` methods to `incr` and `decr`
+* merged `map` widget into `config` widget, refs #131
 
 ## 0.9.4 (2013-08-07)
 * Changed cache widgets' `increment` and `decrement` methods to `inc` and `dec`
