@@ -324,7 +324,6 @@ namespace Widget
         public function invoke($name, array $args = array(), $deps = array())
         {
             $widget = $this->get($name, $deps);
-
             return call_user_func_array(array($widget, '__invoke'), $args);
         }
 
@@ -435,7 +434,6 @@ namespace Widget
                 }
                 return true;
             }
-
             return false;
         }
 
@@ -452,7 +450,6 @@ namespace Widget
             } else {
                 $class = 'Widget\\' . ucfirst($name);
             }
-
             return $class;
         }
 
