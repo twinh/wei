@@ -120,21 +120,18 @@ class Record extends Base
     public function fromArray($data)
     {
         $this->data = $data + $this->data;
-
         return $this;
     }
 
     /**
-     * Set record data
+     * Import a PHP array in this record
      *
-     * @param $data
+     * @param array $data
      * @return Record
      */
-    public function setData($data)
+    public function setData(array $data)
     {
-        $this->data = $data;
-
-        return $this;
+        return $this->fromArray($data);
     }
 
     /**
