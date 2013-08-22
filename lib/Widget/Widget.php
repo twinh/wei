@@ -26,32 +26,11 @@ namespace Widget
         const VERSION = '0.9.4';
 
         /**
-         * The instances of widget container
-         *
-         * @var Widget[]
-         */
-        protected static $instances = array();
-
-        /**
          * Whether in debug mode or not
          *
          * @var bool
          */
         protected $debug = true;
-
-        /**
-         * An array contains the instanced widget objects
-         *
-         * @var Base[]
-         */
-        protected $widgets = array();
-
-        /**
-         * The configurations for all widgets
-         *
-         * @var array
-         */
-        protected $configs = array();
 
         /**
          * The php configuration options that will be set when widget container constructing
@@ -63,13 +42,6 @@ namespace Widget
         protected $inis = array();
 
         /**
-         * The directories for autoload
-         *
-         * @var array
-         */
-        protected $autoloadMap = array();
-
-        /**
          * Whether enable class autoload or not
          *
          * @var bool
@@ -77,20 +49,18 @@ namespace Widget
         protected $autoload = true;
 
         /**
+         * The directories for autoload
+         *
+         * @var array
+         */
+        protected $autoloadMap = array();
+
+        /**
          * The widget name to class name map
          *
          * @var array
          */
         protected $aliases = array();
-
-        /**
-         * The widgets that will be instanced after widget container constructed
-         *
-         * @var array
-         */
-        protected $preload = array(
-            'is'
-        );
 
         /**
          * The import configuration
@@ -121,6 +91,36 @@ namespace Widget
          * @var callable
          */
         protected $constructed;
+
+        /**
+         * The widgets that will be instanced after widget container constructed
+         *
+         * @var array
+         */
+        protected $preload = array(
+            'is'
+        );
+
+        /**
+         * An array contains the instanced widget objects
+         *
+         * @var Base[]
+         */
+        protected $widgets = array();
+
+        /**
+         * The configurations for all widgets
+         *
+         * @var array
+         */
+        protected $configs = array();
+
+        /**
+         * The instances of widget container
+         *
+         * @var Widget[]
+         */
+        protected static $instances = array();
 
         /**
          * Instance widget container
