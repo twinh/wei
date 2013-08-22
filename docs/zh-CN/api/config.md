@@ -41,7 +41,7 @@ widget()->setConfig(array(
 ));
 ```
 
-#### 输出HTML option标签
+### 输出HTML option标签
 
 ```php
 echo widget()->config->toOptions('yesOrNo');
@@ -50,7 +50,7 @@ echo widget()->config->toOptions('yesOrNo');
 '<option value="y">是</option><option value="n">否</option>';
 ```
 
-#### 输出JSON数据
+### 输出JSON数据
 
 ```php
 echo widget()->config->toJson('yesOrNo');
