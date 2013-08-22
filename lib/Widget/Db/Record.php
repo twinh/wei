@@ -33,6 +33,13 @@ class Record extends Base
     protected $isNew = true;
 
     /**
+     * Whether the record's data is modified
+     *
+     * @var bool
+     */
+    protected $isModified = false;
+
+    /**
      * The primary key column
      *
      * @var string
@@ -45,6 +52,13 @@ class Record extends Base
      * @var array
      */
     protected $data = array();
+
+    /**
+     * The modified record data
+     *
+     * @var array
+     */
+    protected $modifiedData = array();
 
     /**
      * The database widget
@@ -144,11 +158,19 @@ class Record extends Base
             return (bool)$result;
         // Update
         } else {
-            // TODO update only changed field
-            $affectedRows = $this->db->update($this->table, $this->data, array(
-                $this->primaryKey => $this->data[$this->primaryKey]
-            ));
-            return $affectedRows || '0000' == $this->db->errorCode();
+            if ($this->isModified) {
+                $affectedRows = $this->db->update($this->table, $this->modifiedData, array(
+                    $this->primaryKey => $this->data[$this->primaryKey]
+                ));
+                $result = $affectedRows || '0000' == $this->db->errorCode();
+                if ($result) {
+                    $this->isModified = false;
+                    $this->modifiedData = array();
+                }
+                return $result;
+            } else {
+                return true;
+            }
         }
     }
 
@@ -191,12 +213,14 @@ class Record extends Base
     /**
      * Set record value
      *
-     * @param $name
-     * @param $value
+     * @param string $name
+     * @param mixed $value
      */
     public function __set($name, $value)
     {
         $this->data[$name] = $value;
+        $this->modifiedData[$name] = $value;
+        $this->isModified = true;
     }
 
     /**
@@ -243,5 +267,10 @@ class Record extends Base
     public function isNew()
     {
         return $this->isNew;
+    }
+
+    public function isModified()
+    {
+        return $this->isModified;
     }
 }
