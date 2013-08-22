@@ -545,6 +545,18 @@ namespace Widget
         }
 
         /**
+         * Merge widget aliases
+         *
+         * @param array $aliases
+         * @return $this
+         */
+        public function setAliases(array $aliases)
+        {
+            $this->aliases = $aliases + $this->aliases;
+            return $this;
+        }
+
+        /**
          * Set widget alias
          *
          * @param string $name The name of widget
