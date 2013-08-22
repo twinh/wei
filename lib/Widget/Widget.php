@@ -615,6 +615,16 @@ namespace Widget
             }
             return $this;
         }
+
+        /**
+         * Merge the dependence map
+         *
+         * @param array $deps
+         */
+        protected function setDeps(array $deps)
+        {
+            $this->deps = $deps + $this->deps;
+        }
     }
 }
 
