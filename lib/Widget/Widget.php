@@ -567,9 +567,9 @@ namespace Widget
         }
 
         /**
-         * Import the class in the given directory as widget
+         * Import classes in the specified directory as widgets
          *
-         * @param string $dir The directory for class
+         * @param string $dir The directory to search class
          * @param string $namespace The prefix namespace of the class
          * @param null $format The widget name format, eg 'is%s'
          * @param bool $autoload Whether add namespace and directory to `autoloadMap` or nor
@@ -604,6 +604,7 @@ namespace Widget
          */
         public function setImport(array $import = array())
         {
+            $this->import = $import + $this->import;
             foreach ($import as $option) {
                 $option += array(
                     'dir' => null,
