@@ -9,45 +9,43 @@
 namespace Widget;
 
 /**
- * A pure configuration widget for your application
+ * A widget to manage widget configurations
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class Config extends Base
 {
     /**
-     * Returns the value of website configuration
+     * Convert configuration data to JSON
      *
-     * @param string $name The name of configuration(widget option)
-     * @return mixed
+     * @param string $name The name of configuration item
+     * @return string
      */
-    public function __invoke($name)
+    public function toJson($name)
     {
-        return $this->get($name);
+        return json_encode($this->widget->getConfig($name));
     }
 
     /**
-     * Returns the value of configuration
+     * Convert configuration data to HTML select options
      *
-     * @param string $name The name of configuration(widget option)
-     * @param mixed $default The default value
-     * @return mixed
+     * @param string $name The name of configuration item
+     * @return string
      */
-    public function get($name, $default = null)
+    public function toOptions($name)
     {
-        return isset($this->$name) ? $this->$name : $default;
-    }
-
-    /**
-     * Set the value of website configuration
-     *
-     * @param string $name The name of configuration(widget option)
-     * @param mixed $value The value of configuration
-     * @return Config
-     */
-    public function set($name, $value)
-    {
-        $this->$name = $value;
-        return $this;
+        $html = '';
+        foreach ($this->widget->getConfig($name) as $value => $text) {
+            if (is_array($text)) {
+                $html .= '<optgroup label="' . $value . '">';
+                foreach ($text as $v => $t) {
+                    $html .= '<option value="' . $v . '">' . $t . '</option>';
+                }
+                $html .= '</optgroup>';
+            } else {
+                $html .= '<option value="' . $value . '">' . $text . '</option>';
+            }
+        }
+        return $html;
     }
 }
