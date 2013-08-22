@@ -189,12 +189,12 @@
       <a href="#arr">其他</a>
       <ul class="nav">
         <li><a href="#arr">arr</a></li>
+        <li><a href="#config">config</a></li>
         <li><a href="#env">env</a></li>
         <li><a href="#error">error</a></li>
         <li><a href="#event">event</a></li>
         <li><a href="#gravatar">gravatar</a></li>
         <li><a href="#logger">logger</a></li>
-        <li><a href="#map">map</a></li>
         <li><a href="#pinyin">pinyin</a></li>
         <li><a href="#uuid">uuid</a></li>
         <li><a href="#website">website</a></li>
@@ -11094,23 +11094,57 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
   <section id="config">
   <div class="page-header"><h1>Config</h1></div>
 
-<p>设置或获取自定义配置</p>
+<p>配置数据管理</p>
 
 <h2>案例</h2>
 
 <h3>设置和获取配置</h3>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 设置配置项'title'的值为'Widget Documentation'</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">config</span><span class="p">(</span><span class="s1">'title'</span><span class="p">,</span> <span class="s1">'Widget Documentation'</span><span class="p">);</span>
+<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setConfig</span><span class="p">(</span><span class="s1">'title'</span><span class="p">,</span> <span class="s1">'Widget Documentation'</span><span class="p">);</span>
 
 <span class="c1">// 输出配置项'title'的值</span>
-<span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">config</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'title'</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getConfig</span><span class="p">(</span><span class="s1">'title'</span><span class="p">);</span>
+</code></pre></div>
 
-<span class="c1">// 设置配置项'url'的值</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">config</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">'url'</span><span class="p">,</span> <span class="s1">'http://www.example.com'</span><span class="p">);</span>
+<h3>批量设置配置数据</h3>
 
-<span class="c1">// 输出配置项'url'的值</span>
-<span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">config</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setConfig</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'yesOrNo'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'y'</span> <span class="o">=&gt;</span> <span class="s1">'是'</span><span class="p">,</span>
+        <span class="s1">'n'</span> <span class="o">=&gt;</span> <span class="s1">'否'</span>
+    <span class="p">),</span>
+    <span class="s1">'gender'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'m'</span> <span class="o">=&gt;</span> <span class="s1">'男'</span><span class="p">,</span>
+        <span class="s1">'f'</span> <span class="o">=&gt;</span> <span class="s1">'女'</span>
+    <span class="p">),</span>
+    <span class="s1">'priorities'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="o">-</span><span class="mi">10</span> <span class="o">=&gt;</span> <span class="s1">'低'</span><span class="p">,</span>
+        <span class="mi">0</span>   <span class="o">=&gt;</span> <span class="s1">'中'</span><span class="p">,</span>
+        <span class="mi">10</span>  <span class="o">=&gt;</span> <span class="s1">'高'</span>
+    <span class="p">),</span>
+    <span class="s1">'statuses'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'draft'</span>     <span class="o">=&gt;</span> <span class="s1">'草稿箱'</span><span class="p">,</span>
+        <span class="s1">'inProcess'</span> <span class="o">=&gt;</span> <span class="s1">'进行中'</span><span class="p">,</span>
+        <span class="s1">'done'</span>      <span class="o">=&gt;</span> <span class="s1">'完成'</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</code></pre></div>
+
+<h4>输出HTML option标签</h4>
+
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">config</span><span class="o">-&gt;</span><span class="na">toOptions</span><span class="p">(</span><span class="s1">'yesOrNo'</span><span class="p">);</span>
+
+<span class="c1">// 输出</span>
+<span class="s1">'&lt;option value="y"&gt;是&lt;/option&gt;&lt;option value="n"&gt;否&lt;/option&gt;'</span><span class="p">;</span>
+</code></pre></div>
+
+<h4>输出JSON数据</h4>
+
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">config</span><span class="o">-&gt;</span><span class="na">toJson</span><span class="p">(</span><span class="s1">'yesOrNo'</span><span class="p">);</span>
+
+<span class="c1">// 输出</span>
+<span class="s1">'{"y":"\u662f","n":"\u5426"}'</span><span class="p">;</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
@@ -11121,21 +11155,21 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h3>方法</h3>
 
-<h4>config($name, $default)</h4>
-
-<p>获取配置</p>
-
-<h4>config($name, $value)</h4>
+<h4>widget-&gt;setConfig($name, $default = null)</h4>
 
 <p>设置配置</p>
 
-<h4>config-&gt;get($name, $default = null)</h4>
+<h4>widget-&gt;getConfig($name, $value)</h4>
 
 <p>获取配置</p>
 
-<h4>config-&gt;set($name, $value)</h4>
+<h4>config-&gt;toJson($name)</h4>
 
-<p>设置配置</p>
+<p>转换配置为JSON字符串</p>
+
+<h4>config-&gt;toOptions($name)</h4>
+
+<p>转换配置为HTML下拉菜单选项</p>
   </section>
 
 <!-- api/env
@@ -11763,115 +11797,6 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <h4>logger-&gt;setLevel()</h4>
 
 <p>设置默认的日志级别</p>
-  </section>
-
-<!-- api/map
-  ================================================== -->
-  <section id="map">
-  <div class="page-header"><h1>Map</h1></div>
-
-<p>映射数据管理</p>
-
-<h2>案例</h2>
-
-<h3>配置映射文件的路径</h3>
-
-<p>假设文件<code>config/map.php</code>的内容如下</p>
-
-<div class="highlight"><pre><code class="php"><span class="k">return</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s1">'yesOrNo'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'y'</span> <span class="o">=&gt;</span> <span class="s1">'是'</span><span class="p">,</span>
-        <span class="s1">'n'</span> <span class="o">=&gt;</span> <span class="s1">'否'</span>
-    <span class="p">),</span>
-    <span class="s1">'gender'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'m'</span> <span class="o">=&gt;</span> <span class="s1">'男'</span><span class="p">,</span>
-        <span class="s1">'f'</span> <span class="o">=&gt;</span> <span class="s1">'女'</span>
-    <span class="p">),</span>
-    <span class="s1">'priorities'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="o">-</span><span class="mi">10</span> <span class="o">=&gt;</span> <span class="s1">'低'</span><span class="p">,</span>
-        <span class="mi">0</span>   <span class="o">=&gt;</span> <span class="s1">'中'</span><span class="p">,</span>
-        <span class="mi">10</span>  <span class="o">=&gt;</span> <span class="s1">'高'</span>
-    <span class="p">),</span>
-    <span class="s1">'statuses'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'draft'</span>     <span class="o">=&gt;</span> <span class="s1">'草稿箱'</span><span class="p">,</span>
-        <span class="s1">'inProcess'</span> <span class="o">=&gt;</span> <span class="s1">'进行中'</span><span class="p">,</span>
-        <span class="s1">'done'</span>      <span class="o">=&gt;</span> <span class="s1">'完成'</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="p">);</span>
-</code></pre></div>
-
-<p>指定map文件路径</p>
-
-<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'map'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'file'</span> <span class="o">=&gt;</span> <span class="s1">'config/map.php'</span>
-    <span class="p">)</span>
-<span class="p">));</span>
-</code></pre></div>
-
-<h3>获取映射列表</h3>
-
-<div class="highlight"><pre><code class="php"><span class="nv">$gender</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">(</span><span class="s1">'gender'</span><span class="p">);</span>
-
-<span class="c1">// 返回</span>
-<span class="nv">$gender</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s1">'m'</span> <span class="o">=&gt;</span> <span class="s1">'男'</span><span class="p">,</span>
-    <span class="s1">'f'</span> <span class="o">=&gt;</span> <span class="s1">'女'</span>
-<span class="p">);</span>
-</code></pre></div>
-
-<h3>获取执行项的映射列表的值</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">(</span><span class="s1">'gender'</span><span class="p">,</span> <span class="s1">'f'</span><span class="p">);</span>
-
-<span class="c1">// 输出</span>
-<span class="s1">'女'</span><span class="p">;</span>
-</code></pre></div>
-
-<h3>输出HTML option标签</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="o">-&gt;</span><span class="na">toOptions</span><span class="p">(</span><span class="s1">'yesOrNo'</span><span class="p">);</span>
-
-<span class="c1">// 输出</span>
-<span class="s1">'&lt;option value="y"&gt;是&lt;/option&gt;&lt;option value="n"&gt;否&lt;/option&gt;'</span><span class="p">;</span>
-</code></pre></div>
-
-<h3>输出JSON数据</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">map</span><span class="o">-&gt;</span><span class="na">toJson</span><span class="p">(</span><span class="s1">'yesOrNo'</span><span class="p">);</span>
-
-<span class="c1">// 输出</span>
-<span class="s1">'{"y":"\u662f","n":"\u5426"}'</span><span class="p">;</span>
-</code></pre></div>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody><tr>
-<td>file</td>
-<td>string</td>
-<td>无</td>
-<td>map文件所在的路径</td>
-</tr></tbody>
-</table><h3>方法</h3>
-
-<h4>map($name)</h4>
-
-<h4>map($name, $key)</h4>
-
-<h4>map-&gt;get($name)</h4>
-
-<h4>map-&gt;toJson($name)</h4>
-
-<h4>map-&gt;toOptions($name)</h4>
   </section>
 
 <!-- api/pinyin
