@@ -425,6 +425,10 @@ class QueryBuilder
      */
     public function add($sqlPartName, $sqlPart, $append = false, $type = null)
     {
+        if (!$sqlPart) {
+            return $this;
+        }
+
         $isArray = is_array($sqlPart);
         $isMultiple = is_array($this->sqlParts[$sqlPartName]);
 
@@ -1071,7 +1075,7 @@ class QueryBuilder
     protected function processCondition($conditions, $params, $types)
     {
         if (is_array($conditions)) {
-            $where = '';
+            $where = array();
             $params = array();
             foreach ($conditions as $column => $condition) {
                 if (is_array($condition)) {
