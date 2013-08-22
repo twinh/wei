@@ -8,7 +8,7 @@
 	<title>File Validator/Tld.php | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?412079968"></script>
+	<script type="text/javascript" src="elementlist.js?969285891"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -106,10 +106,6 @@
 				<li><a href="class-Widget.Validator.Uuid.html">Uuid</a></li>
 			</ul>
 
-			<h3>Interfaces</h3>
-			<ul>
-				<li><a href="class-Widget.Validator.ValidatorInterface.html">ValidatorInterface</a></li>
-			</ul>
 
 
 
@@ -218,11 +214,11 @@
 </span><span id="66" class="l"><a class="l" href="#66">66: </a>    <span class="php-comment">/**
 </span></span><span id="67" class="l"><a class="l" href="#67">67: </a><span class="php-comment">     * {@inheritdoc}
 </span></span><span id="68" class="l"><a class="l" href="#68">68: </a><span class="php-comment">     */</span>
-</span><span id="69" class="l"><a class="l" href="#69">69: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_validate" href="#_validate">validate</a>(<span class="php-var">$input</span>)
+</span><span id="69" class="l"><a class="l" href="#69">69: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_doValidate" href="#_doValidate">doValidate</a>(<span class="php-var">$input</span>)
 </span><span id="70" class="l"><a class="l" href="#70">70: </a>    {
 </span><span id="71" class="l"><a class="l" href="#71">71: </a>        <span class="php-keyword2">is_string</span>(<span class="php-var">$input</span>) &amp;&amp; <span class="php-var">$input</span> = <span class="php-keyword2">strtolower</span>(<span class="php-var">$input</span>);
 </span><span id="72" class="l"><a class="l" href="#72">72: </a>
-</span><span id="73" class="l"><a class="l" href="#73">73: </a>        <span class="php-keyword1">return</span> parent::validate(<span class="php-var">$input</span>);
+</span><span id="73" class="l"><a class="l" href="#73">73: </a>        <span class="php-keyword1">return</span> parent::doValidate(<span class="php-var">$input</span>);
 </span><span id="74" class="l"><a class="l" href="#74">74: </a>    }
 </span><span id="75" class="l"><a class="l" href="#75">75: </a>}
 </span><span id="76" class="l"><a class="l" href="#76">76: </a></span></code></pre>

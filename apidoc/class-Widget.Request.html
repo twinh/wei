@@ -7,7 +7,7 @@
 	<title>Class Widget\Request | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?412079968"></script>
+	<script type="text/javascript" src="elementlist.js?969285891"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -48,6 +48,7 @@
 				<li><a href="class-Widget.Arr.html">Arr</a></li>
 				<li><a href="class-Widget.ArrayCache.html">ArrayCache</a></li>
 				<li><a href="class-Widget.Base.html">Base</a></li>
+				<li><a href="class-Widget.BaseCache.html">BaseCache</a></li>
 				<li><a href="class-Widget.Bicache.html">Bicache</a></li>
 				<li><a href="class-Widget.Cache.html">Cache</a></li>
 				<li><a href="class-Widget.Call.html">Call</a></li>
@@ -68,7 +69,6 @@
 				<li><a href="class-Widget.Is.html">Is</a></li>
 				<li><a href="class-Widget.Json.html">Json</a></li>
 				<li><a href="class-Widget.Logger.html">Logger</a></li>
-				<li><a href="class-Widget.Map.html">Map</a></li>
 				<li><a href="class-Widget.Memcache.html">Memcache</a></li>
 				<li><a href="class-Widget.Memcached.html">Memcached</a></li>
 				<li><a href="class-Widget.MongoCache.html">MongoCache</a></li>
@@ -154,20 +154,11 @@
 		</dd>
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by" />
-			<a href="class-Widget.Stdlib.Parameter.html"><span>Widget\Stdlib\Parameter</span></a>
-			
+<b><span>Widget\Request</span></b>			
 			 implements 
 				<a href="class-ArrayAccess.html"><span>ArrayAccess</span></a>, 
 			
-				<a href="class-Countable.html"><span>Countable</span></a>, 
-			
-				<a href="class-IteratorAggregate.html"><span>IteratorAggregate</span></a>
-			
-			
-		</dd>
-		<dd style="padding-left:60px">
-			<img src="resources/inherit.png" alt="Extended by" />
-<b><span>Widget\Request</span></b>			
+				<a href="class-Countable.html"><span>Countable</span></a>
 			
 			
 		</dd>
@@ -198,7 +189,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 				<a href="https://github.com/zendframework/zf2/blob/master/library/Zend/Http/PhpEnvironment/Request.php">https://github.com/zendframework/zf2/blob/master/library/Zend/Http/PhpEnvironment/Request.php</a><br />
 				<b>Link:</b>
 				<a href="http://github.com/zendframework/zf2">for the canonical source repository</a><br />
-		<b>Located at</b> <a href="source-class-Widget.Request.html#13-618" title="Go to source code">Request.php</a><br />
+		<b>Located at</b> <a href="source-class-Widget.Request.html#11-801" title="Go to source code">Request.php</a><br />
 	</div>
 
 
@@ -216,7 +207,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Widget.Request.html#102-120" title="Go to source code">__construct</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Request.html#107-125" title="Go to source code">__construct</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -249,6 +240,601 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			string|null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Widget.Request.html#127-137" title="Go to source code">__invoke</a>( <span>string <var>$name</var></span>, <span>mixed <var>$default</var> = <span class="php-quote">''</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns a <em>stringify</em> or user defined($default) parameter value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a <em>stringify</em> or user defined($default) parameter value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The parameter name</dd>
+					<dt><var>$default</var></dt>
+					<dd><code>mixed</code><br>$default The default parameter value if the parameter does not exist</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string|null</code><br>The parameter value<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="get" id="_get">
+
+		<td class="attributes"><code>
+			 public 
+			string|null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_get">#</a>
+		<code><a href="source-class-Widget.Request.html#139-149" title="Go to source code">get</a>( <span>string <var>$name</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns a <em>stringify</em> or user defined($default) parameter value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a <em>stringify</em> or user defined($default) parameter value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The parameter name</dd>
+					<dt><var>$default</var></dt>
+					<dd><code>mixed</code><br>$default The default parameter value if the parameter does not exist</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string|null</code><br>The parameter value<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getInt" id="_getInt">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getInt">#</a>
+		<code><a href="source-class-Widget.Request.html#151-170" title="Go to source code">getInt</a>( <span>string <var>$name</var></span>, <span>integer|null <var>$min</var> = <span class="php-keyword1">null</span></span>, <span>integer|null <var>$max</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns a integer value in the specified range</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a integer value in the specified range</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The parameter name</dd>
+					<dt><var>$min</var></dt>
+					<dd><code>integer|null</code><br>$min The min value for the parameter</dd>
+					<dt><var>$max</var></dt>
+					<dd><code>integer|null</code><br>$max The max value for the parameter</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>The parameter value<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getInArray" id="_getInArray">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getInArray">#</a>
+		<code><a href="source-class-Widget.Request.html#172-185" title="Go to source code">getInArray</a>( <span>string <var>$name</var></span>, <span>array <var>$array</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns a parameter value in the specified array, if not in, returns the
+first element instead</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a parameter value in the specified array, if not in, returns the
+first element instead</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The parameter name</dd>
+					<dt><var>$array</var></dt>
+					<dd><code>array</code><br>$array The array to be search</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>The parameter value<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="set" id="_set">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Request.html">Widget\Request</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_set">#</a>
+		<code><a href="source-class-Widget.Request.html#187-204" title="Go to source code">set</a>( <span>string|array <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Set parameter value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set parameter value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string|array</code><br>$name The parameter name or A key-value array</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value The parameter value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Request.html">Widget\Request</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="remove" id="_remove">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Request.html">Widget\Request</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_remove">#</a>
+		<code><a href="source-class-Widget.Request.html#206-216" title="Go to source code">remove</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Remove parameter by specified name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Remove parameter by specified name</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The parameter name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Request.html">Widget\Request</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="clear" id="_clear">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Request.html">Widget\Request</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_clear">#</a>
+		<code><a href="source-class-Widget.Request.html#218-227" title="Go to source code">clear</a>( )</code>
+
+		<div class="description short">
+			
+<p>Clear all parameter data</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Clear all parameter data</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Request.html">Widget\Request</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetExists" id="_offsetExists">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetExists">#</a>
+		<code><a href="source-class-Widget.Request.html#229-238" title="Go to source code">offsetExists</a>( <span>string <var>$offset</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the offset exists</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the offset exists</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd><code>string</code><br>$offset</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-ArrayAccess.html#_offsetExists">ArrayAccess::offsetExists()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetGet" id="_offsetGet">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetGet">#</a>
+		<code><a href="source-class-Widget.Request.html#240-249" title="Go to source code">offsetGet</a>( <span>string <var>$offset</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get the offset value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the offset value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd><code>string</code><br>$offset</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-ArrayAccess.html#_offsetGet">ArrayAccess::offsetGet()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetSet" id="_offsetSet">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetSet">#</a>
+		<code><a href="source-class-Widget.Request.html#251-261" title="Go to source code">offsetSet</a>( <span>string <var>$offset</var></span>, <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the offset value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the offset value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd><code>string</code><br>$offset</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-ArrayAccess.html#_offsetSet">ArrayAccess::offsetSet()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetUnset" id="_offsetUnset">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetUnset">#</a>
+		<code><a href="source-class-Widget.Request.html#263-271" title="Go to source code">offsetUnset</a>( <span>string <var>$offset</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Unset the offset</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Unset the offset</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd><code>string</code><br>$offset</dd>
+				</dl></div>
+
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-ArrayAccess.html#_offsetUnset">ArrayAccess::offsetUnset()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="fromArray" id="_fromArray">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Widget.Request.html">Widget\Request</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_fromArray">#</a>
+		<code><a href="source-class-Widget.Request.html#273-283" title="Go to source code">fromArray</a>( <span>array <var>$array</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Merge data from array</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Merge data from array</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$array</var></dt>
+					<dd><code>array</code><br>$array</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Widget.Request.html">Widget\Request</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="toArray" id="_toArray">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_toArray">#</a>
+		<code><a href="source-class-Widget.Request.html#285-293" title="Go to source code">toArray</a>( )</code>
+
+		<div class="description short">
+			
+<p>Return the source array of the object</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Return the source array of the object</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="count" id="_count">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_count">#</a>
+		<code><a href="source-class-Widget.Request.html#295-303" title="Go to source code">count</a>( )</code>
+
+		<div class="description short">
+			
+<p>Return the length of data</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Return the length of data</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>the length of data<br />
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Countable.html#_count">Countable::count()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="getScheme" id="_getScheme">
 
 		<td class="attributes"><code>
@@ -260,7 +846,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getScheme">#</a>
-		<code><a href="source-class-Widget.Request.html#122-134" title="Go to source code">getScheme</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#305-317" title="Go to source code">getScheme</a>( )</code>
 
 		<div class="description short">
 			
@@ -297,7 +883,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getHost">#</a>
-		<code><a href="source-class-Widget.Request.html#136-146" title="Go to source code">getHost</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#319-329" title="Go to source code">getHost</a>( )</code>
 
 		<div class="description short">
 			
@@ -334,7 +920,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setRequestUri">#</a>
-		<code><a href="source-class-Widget.Request.html#148-158" title="Go to source code">setRequestUri</a>( <span>string <var>$requestUri</var></span> )</code>
+		<code><a href="source-class-Widget.Request.html#331-341" title="Go to source code">setRequestUri</a>( <span>string <var>$requestUri</var></span> )</code>
 
 		<div class="description short">
 			
@@ -376,7 +962,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getRequestUri">#</a>
-		<code><a href="source-class-Widget.Request.html#160-171" title="Go to source code">getRequestUri</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#343-354" title="Go to source code">getRequestUri</a>( )</code>
 
 		<div class="description short">
 			
@@ -413,7 +999,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setBaseUrl">#</a>
-		<code><a href="source-class-Widget.Request.html#173-183" title="Go to source code">setBaseUrl</a>( <span>string <var>$baseUrl</var></span> )</code>
+		<code><a href="source-class-Widget.Request.html#356-366" title="Go to source code">setBaseUrl</a>( <span>string <var>$baseUrl</var></span> )</code>
 
 		<div class="description short">
 			
@@ -455,7 +1041,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getBaseUrl">#</a>
-		<code><a href="source-class-Widget.Request.html#185-196" title="Go to source code">getBaseUrl</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#368-379" title="Go to source code">getBaseUrl</a>( )</code>
 
 		<div class="description short">
 			
@@ -492,7 +1078,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setPathInfo">#</a>
-		<code><a href="source-class-Widget.Request.html#198-208" title="Go to source code">setPathInfo</a>( <span>string <var>$pathInfo</var></span> )</code>
+		<code><a href="source-class-Widget.Request.html#381-391" title="Go to source code">setPathInfo</a>( <span>string <var>$pathInfo</var></span> )</code>
 
 		<div class="description short">
 			
@@ -534,7 +1120,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getPathInfo">#</a>
-		<code><a href="source-class-Widget.Request.html#210-221" title="Go to source code">getPathInfo</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#393-404" title="Go to source code">getPathInfo</a>( )</code>
 
 		<div class="description short">
 			
@@ -571,7 +1157,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUrl">#</a>
-		<code><a href="source-class-Widget.Request.html#223-233" title="Go to source code">getUrl</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#406-416" title="Go to source code">getUrl</a>( )</code>
 
 		<div class="description short">
 			
@@ -612,7 +1198,7 @@ scheme://domain[:port]/[baseUrl][PathInfo][?queryString]</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getSchemeAndHost">#</a>
-		<code><a href="source-class-Widget.Request.html#235-250" title="Go to source code">getSchemeAndHost</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#418-433" title="Go to source code">getSchemeAndHost</a>( )</code>
 
 		<div class="description short">
 			
@@ -649,7 +1235,7 @@ scheme://domain[:port]/[baseUrl][PathInfo][?queryString]</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUrlFor">#</a>
-		<code><a href="source-class-Widget.Request.html#252-261" title="Go to source code">getUrlFor</a>( <span>string <var>$path</var></span> )</code>
+		<code><a href="source-class-Widget.Request.html#435-444" title="Go to source code">getUrlFor</a>( <span>string <var>$path</var></span> )</code>
 
 		<div class="description short">
 			
@@ -691,7 +1277,7 @@ scheme://domain[:port]/[baseUrl][PathInfo][?queryString]</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getIp">#</a>
-		<code><a href="source-class-Widget.Request.html#263-280" title="Go to source code">getIp</a>( <span>string <var>$default</var> = <span class="php-quote">'0.0.0.0'</span></span> )</code>
+		<code><a href="source-class-Widget.Request.html#446-463" title="Go to source code">getIp</a>( <span>string <var>$default</var> = <span class="php-quote">'0.0.0.0'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -740,7 +1326,7 @@ not valid, return the $default value instead</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getMethod">#</a>
-		<code><a href="source-class-Widget.Request.html#282-293" title="Go to source code">getMethod</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#465-476" title="Go to source code">getMethod</a>( )</code>
 
 		<div class="description short">
 			
@@ -777,7 +1363,7 @@ not valid, return the $default value instead</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setMethod">#</a>
-		<code><a href="source-class-Widget.Request.html#295-305" title="Go to source code">setMethod</a>( <span>string <var>$method</var></span> )</code>
+		<code><a href="source-class-Widget.Request.html#478-488" title="Go to source code">setMethod</a>( <span>string <var>$method</var></span> )</code>
 
 		<div class="description short">
 			
@@ -819,7 +1405,7 @@ not valid, return the $default value instead</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_inMethod">#</a>
-		<code><a href="source-class-Widget.Request.html#307-316" title="Go to source code">inMethod</a>( <span>string <var>$method</var></span> )</code>
+		<code><a href="source-class-Widget.Request.html#490-499" title="Go to source code">inMethod</a>( <span>string <var>$method</var></span> )</code>
 
 		<div class="description short">
 			
@@ -861,7 +1447,7 @@ not valid, return the $default value instead</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_inGet">#</a>
-		<code><a href="source-class-Widget.Request.html#318-326" title="Go to source code">inGet</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#501-509" title="Go to source code">inGet</a>( )</code>
 
 		<div class="description short">
 			
@@ -898,7 +1484,7 @@ not valid, return the $default value instead</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_inPost">#</a>
-		<code><a href="source-class-Widget.Request.html#328-336" title="Go to source code">inPost</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#511-519" title="Go to source code">inPost</a>( )</code>
 
 		<div class="description short">
 			
@@ -935,7 +1521,7 @@ not valid, return the $default value instead</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_inAjax">#</a>
-		<code><a href="source-class-Widget.Request.html#338-346" title="Go to source code">inAjax</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#521-529" title="Go to source code">inAjax</a>( )</code>
 
 		<div class="description short">
 			
@@ -972,7 +1558,7 @@ not valid, return the $default value instead</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getParameterReference">#</a>
-		<code><a href="source-class-Widget.Request.html#348-362" title="Go to source code">getParameterReference</a>( <span>string <var>$type</var></span> )</code>
+		<code><a href="source-class-Widget.Request.html#531-545" title="Go to source code">getParameterReference</a>( <span>string <var>$type</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1018,7 +1604,7 @@ not valid, return the $default value instead</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getContent">#</a>
-		<code><a href="source-class-Widget.Request.html#364-375" title="Go to source code">getContent</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#547-558" title="Go to source code">getContent</a>( )</code>
 
 		<div class="description short">
 			
@@ -1055,7 +1641,7 @@ not valid, return the $default value instead</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setContent">#</a>
-		<code><a href="source-class-Widget.Request.html#377-387" title="Go to source code">setContent</a>( <span>string <var>$content</var></span> )</code>
+		<code><a href="source-class-Widget.Request.html#560-570" title="Go to source code">setContent</a>( <span>string <var>$content</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1097,7 +1683,7 @@ not valid, return the $default value instead</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___toString">#</a>
-		<code><a href="source-class-Widget.Request.html#389-404" title="Go to source code">__toString</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#572-587" title="Go to source code">__toString</a>( )</code>
 
 		<div class="description short">
 			
@@ -1134,7 +1720,7 @@ not valid, return the $default value instead</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getServer">#</a>
-		<code><a href="source-class-Widget.Request.html#406-416" title="Go to source code">getServer</a>( <span>string <var>$name</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Request.html#589-599" title="Go to source code">getServer</a>( <span>string <var>$name</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1178,7 +1764,7 @@ not valid, return the $default value instead</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setServer">#</a>
-		<code><a href="source-class-Widget.Request.html#418-429" title="Go to source code">setServer</a>( <span>string <var>$name</var></span>, <span>string <var>$value</var></span> )</code>
+		<code><a href="source-class-Widget.Request.html#601-612" title="Go to source code">setServer</a>( <span>string <var>$name</var></span>, <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1222,7 +1808,7 @@ not valid, return the $default value instead</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getQuery">#</a>
-		<code><a href="source-class-Widget.Request.html#431-441" title="Go to source code">getQuery</a>( <span>string <var>$name</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Request.html#614-624" title="Go to source code">getQuery</a>( <span>string <var>$name</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1266,7 +1852,7 @@ not valid, return the $default value instead</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getPost">#</a>
-		<code><a href="source-class-Widget.Request.html#443-453" title="Go to source code">getPost</a>( <span>string <var>$name</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Request.html#626-636" title="Go to source code">getPost</a>( <span>string <var>$name</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1310,7 +1896,7 @@ not valid, return the $default value instead</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getHeaders">#</a>
-		<code><a href="source-class-Widget.Request.html#455-469" title="Go to source code">getHeaders</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#638-652" title="Go to source code">getHeaders</a>( )</code>
 
 		<div class="description short">
 			
@@ -1347,7 +1933,7 @@ not valid, return the $default value instead</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_detectRequestUri">#</a>
-		<code><a href="source-class-Widget.Request.html#471-524" title="Go to source code">detectRequestUri</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#654-707" title="Go to source code">detectRequestUri</a>( )</code>
 
 		<div class="description short">
 			
@@ -1387,7 +1973,7 @@ including rewrite URIs, proxy URIs, etc.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_detectBaseUrl">#</a>
-		<code><a href="source-class-Widget.Request.html#526-600" title="Go to source code">detectBaseUrl</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#709-783" title="Go to source code">detectBaseUrl</a>( )</code>
 
 		<div class="description short">
 			
@@ -1430,7 +2016,7 @@ path.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_detectPathInfo">#</a>
-		<code><a href="source-class-Widget.Request.html#602-617" title="Go to source code">detectPathInfo</a>( )</code>
+		<code><a href="source-class-Widget.Request.html#785-800" title="Go to source code">detectPathInfo</a>( )</code>
 
 		<div class="description short">
 			
@@ -1459,31 +2045,6 @@ path.</p>
 	</table>
 
 	<table class="summary inherited">
-	<caption>Methods inherited from <a href="class-Widget.Stdlib.Parameter.html#methods">Widget\Stdlib\Parameter</a></caption>
-	<tr>
-		<td><code>
-			<a href="class-Widget.Stdlib.Parameter.html#___invoke">__invoke()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_clear">clear()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_count">count()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_fromArray">fromArray()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_get">get()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_getArray">getArray()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_getInArray">getInArray()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_getInt">getInt()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_getIterator">getIterator()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_getRaw">getRaw()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_keys">keys()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_offsetExists">offsetExists()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_offsetGet">offsetGet()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_offsetSet">offsetSet()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_offsetUnset">offsetUnset()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_remove">remove()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_set">set()</a>, 
-			<a href="class-Widget.Stdlib.Parameter.html#_toArray">toArray()</a>
-		</code></td>
-	</tr>
-	</table>
-	<table class="summary inherited">
 	<caption>Methods inherited from <a href="class-Widget.Base.html#methods">Widget\Base</a></caption>
 	<tr>
 		<td><code>
@@ -1507,7 +2068,6 @@ path.</p>
 			<a href="class-Widget.Base.html#m_bicache">bicache()</a>, 
 			<a href="class-Widget.Base.html#m_cache">cache()</a>, 
 			<a href="class-Widget.Base.html#m_call">call()</a>, 
-			<a href="class-Widget.Base.html#m_config">config()</a>, 
 			<a href="class-Widget.Base.html#m_cookie">cookie()</a>, 
 			<a href="class-Widget.Base.html#m_couchbase">couchbase()</a>, 
 			<a href="class-Widget.Base.html#m_db">db()</a>, 
@@ -1519,25 +2079,20 @@ path.</p>
 			<a href="class-Widget.Base.html#m_fileCache">fileCache()</a>, 
 			<a href="class-Widget.Base.html#m_flush">flush()</a>, 
 			<a href="class-Widget.Base.html#m_gravatar">gravatar()</a>, 
-			<a href="class-Widget.Base.html#m_header">header()</a>, 
 			<a href="class-Widget.Base.html#m_is">is()</a>, 
 			<a href="class-Widget.Base.html#m_json">json()</a>, 
 			<a href="class-Widget.Base.html#m_logger">logger()</a>, 
-			<a href="class-Widget.Base.html#m_map">map()</a>, 
 			<a href="class-Widget.Base.html#m_memcache">memcache()</a>, 
 			<a href="class-Widget.Base.html#m_memcached">memcached()</a>, 
 			<a href="class-Widget.Base.html#m_mongoCache">mongoCache()</a>, 
 			<a href="class-Widget.Base.html#m_monolog">monolog()</a>, 
 			<a href="class-Widget.Base.html#m_pinyin">pinyin()</a>, 
-			<a href="class-Widget.Base.html#m_post">post()</a>, 
-			<a href="class-Widget.Base.html#m_query">query()</a>, 
 			<a href="class-Widget.Base.html#m_redirect">redirect()</a>, 
 			<a href="class-Widget.Base.html#m_redis">redis()</a>, 
 			<a href="class-Widget.Base.html#m_request">request()</a>, 
 			<a href="class-Widget.Base.html#m_response">response()</a>, 
 			<a href="class-Widget.Base.html#m_router">router()</a>, 
 			<a href="class-Widget.Base.html#m_session">session()</a>, 
-			<a href="class-Widget.Base.html#m_smarty">smarty()</a>, 
 			<a href="class-Widget.Base.html#m_t">t()</a>, 
 			<a href="class-Widget.Base.html#m_ua">ua()</a>, 
 			<a href="class-Widget.Base.html#m_upload">upload()</a>, 
@@ -1559,6 +2114,33 @@ path.</p>
 
 	<table class="summary" id="properties">
 	<caption>Properties summary</caption>
+	<tr data-order="data" id="$data">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Request.html#29-34" title="Go to source code"><var>$data</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$data" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The request parameters, equals to $_REQUEST when $fromGlobal is true</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The request parameters, equals to $_REQUEST when $fromGlobal is true</p>
+
+
+			</div>
+		</div></td>
+	</tr>
 	<tr data-order="gets" id="$gets">
 		<td class="attributes"><code>
 			protected  
@@ -1566,7 +2148,7 @@ path.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Request.html#31-36" title="Go to source code"><var>$gets</var></a>
+				<a href="source-class-Widget.Request.html#36-41" title="Go to source code"><var>$gets</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
 		<td class="description"><div>
@@ -1574,13 +2156,13 @@ path.</p>
 
 			<div class="description short">
 				
-<p>The URL query parameters, equal to $_GET if $fromGlobal is true</p>
+<p>The URL query parameters, equal to $_GET when $fromGlobal is true</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>The URL query parameters, equal to $_GET if $fromGlobal is true</p>
+<p>The URL query parameters, equal to $_GET when $fromGlobal is true</p>
 
 
 			</div>
@@ -1593,7 +2175,7 @@ path.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Request.html#38-43" title="Go to source code"><var>$posts</var></a>
+				<a href="source-class-Widget.Request.html#43-48" title="Go to source code"><var>$posts</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
 		<td class="description"><div>
@@ -1601,13 +2183,13 @@ path.</p>
 
 			<div class="description short">
 				
-<p>The HTTP request parameters, equal to $_POST if $fromGlobal is true</p>
+<p>The HTTP request parameters, equal to $_POST when $fromGlobal is true</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>The HTTP request parameters, equal to $_POST if $fromGlobal is true</p>
+<p>The HTTP request parameters, equal to $_POST when $fromGlobal is true</p>
 
 
 			</div>
@@ -1620,7 +2202,7 @@ path.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Request.html#45-50" title="Go to source code"><var>$cookies</var></a>
+				<a href="source-class-Widget.Request.html#50-55" title="Go to source code"><var>$cookies</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
 		<td class="description"><div>
@@ -1628,13 +2210,13 @@ path.</p>
 
 			<div class="description short">
 				
-<p>The cookie parameters, equal to $_COOKIE if $fromGlobal is true</p>
+<p>The cookie parameters, equal to $_COOKIE when $fromGlobal is true</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>The cookie parameters, equal to $_COOKIE if $fromGlobal is true</p>
+<p>The cookie parameters, equal to $_COOKIE when $fromGlobal is true</p>
 
 
 			</div>
@@ -1647,7 +2229,7 @@ path.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Request.html#52-57" title="Go to source code"><var>$servers</var></a>
+				<a href="source-class-Widget.Request.html#57-62" title="Go to source code"><var>$servers</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
 		<td class="description"><div>
@@ -1655,13 +2237,13 @@ path.</p>
 
 			<div class="description short">
 				
-<p>The server parameters, equal to $_SERVER if $fromGlobal is true</p>
+<p>The server parameters, equal to $_SERVER when $fromGlobal is true</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>The server parameters, equal to $_SERVER if $fromGlobal is true</p>
+<p>The server parameters, equal to $_SERVER when $fromGlobal is true</p>
 
 
 			</div>
@@ -1674,7 +2256,7 @@ path.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Request.html#59-64" title="Go to source code"><var>$files</var></a>
+				<a href="source-class-Widget.Request.html#64-69" title="Go to source code"><var>$files</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
 		<td class="description"><div>
@@ -1682,13 +2264,13 @@ path.</p>
 
 			<div class="description short">
 				
-<p>The upload file parameters, equal to $_FILES if $fromGlobal is true</p>
+<p>The upload file parameters, equal to $_FILES when $fromGlobal is true</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>The upload file parameters, equal to $_FILES if $fromGlobal is true</p>
+<p>The upload file parameters, equal to $_FILES when $fromGlobal is true</p>
 
 
 			</div>
@@ -1701,7 +2283,7 @@ path.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Request.html#66-71" title="Go to source code"><var>$content</var></a>
+				<a href="source-class-Widget.Request.html#71-76" title="Go to source code"><var>$content</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1728,7 +2310,7 @@ path.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Request.html#73-78" title="Go to source code"><var>$fromGlobal</var></a>
+				<a href="source-class-Widget.Request.html#78-83" title="Go to source code"><var>$fromGlobal</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">true</span></code></td>
 		<td class="description"><div>
@@ -1755,7 +2337,7 @@ path.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Request.html#80-83" title="Go to source code"><var>$baseUrl</var></a>
+				<a href="source-class-Widget.Request.html#85-88" title="Go to source code"><var>$baseUrl</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1778,7 +2360,7 @@ path.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Request.html#85-88" title="Go to source code"><var>$pathInfo</var></a>
+				<a href="source-class-Widget.Request.html#90-93" title="Go to source code"><var>$pathInfo</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1801,7 +2383,7 @@ path.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Request.html#90-93" title="Go to source code"><var>$requestUri</var></a>
+				<a href="source-class-Widget.Request.html#95-98" title="Go to source code"><var>$requestUri</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1824,7 +2406,7 @@ path.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Request.html#95-100" title="Go to source code"><var>$method</var></a>
+				<a href="source-class-Widget.Request.html#100-105" title="Go to source code"><var>$method</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1846,14 +2428,6 @@ path.</p>
 	</tr>
 	</table>
 
-	<table class="summary inherited">
-	<caption>Properties inherited from <a href="class-Widget.Stdlib.Parameter.html#properties">Widget\Stdlib\Parameter</a></caption>
-	<tr>
-		<td><code>
-			<a href="class-Widget.Stdlib.Parameter.html#$data"><var>$data</var></a>
-		</code></td>
-	</tr>
-	</table>
 	<table class="summary inherited">
 	<caption>Properties inherited from <a href="class-Widget.Base.html#properties">Widget\Base</a></caption>
 	<tr>
@@ -1890,25 +2464,20 @@ path.</p>
 			<a href="class-Widget.Base.html#m$fileCache"><var>$fileCache</var></a>, 
 			<a href="class-Widget.Base.html#m$flush"><var>$flush</var></a>, 
 			<a href="class-Widget.Base.html#m$gravatar"><var>$gravatar</var></a>, 
-			<a href="class-Widget.Base.html#m$header"><var>$header</var></a>, 
 			<a href="class-Widget.Base.html#m$is"><var>$is</var></a>, 
 			<a href="class-Widget.Base.html#m$json"><var>$json</var></a>, 
 			<a href="class-Widget.Base.html#m$logger"><var>$logger</var></a>, 
-			<a href="class-Widget.Base.html#m$map"><var>$map</var></a>, 
 			<a href="class-Widget.Base.html#m$memcache"><var>$memcache</var></a>, 
 			<a href="class-Widget.Base.html#m$memcached"><var>$memcached</var></a>, 
 			<a href="class-Widget.Base.html#m$mongoCache"><var>$mongoCache</var></a>, 
 			<a href="class-Widget.Base.html#m$monolog"><var>$monolog</var></a>, 
 			<a href="class-Widget.Base.html#m$pinyin"><var>$pinyin</var></a>, 
-			<a href="class-Widget.Base.html#m$post"><var>$post</var></a>, 
-			<a href="class-Widget.Base.html#m$query"><var>$query</var></a>, 
 			<a href="class-Widget.Base.html#m$redirect"><var>$redirect</var></a>, 
 			<a href="class-Widget.Base.html#m$redis"><var>$redis</var></a>, 
 			<a href="class-Widget.Base.html#m$request"><var>$request</var></a>, 
 			<a href="class-Widget.Base.html#m$response"><var>$response</var></a>, 
 			<a href="class-Widget.Base.html#m$router"><var>$router</var></a>, 
 			<a href="class-Widget.Base.html#m$session"><var>$session</var></a>, 
-			<a href="class-Widget.Base.html#m$smarty"><var>$smarty</var></a>, 
 			<a href="class-Widget.Base.html#m$t"><var>$t</var></a>, 
 			<a href="class-Widget.Base.html#m$ua"><var>$ua</var></a>, 
 			<a href="class-Widget.Base.html#m$upload"><var>$upload</var></a>, 

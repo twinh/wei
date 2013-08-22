@@ -7,7 +7,7 @@
 	<title>Class Widget\Widget | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?412079968"></script>
+	<script type="text/javascript" src="elementlist.js?969285891"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -48,6 +48,7 @@
 				<li><a href="class-Widget.Arr.html">Arr</a></li>
 				<li><a href="class-Widget.ArrayCache.html">ArrayCache</a></li>
 				<li><a href="class-Widget.Base.html">Base</a></li>
+				<li><a href="class-Widget.BaseCache.html">BaseCache</a></li>
 				<li><a href="class-Widget.Bicache.html">Bicache</a></li>
 				<li><a href="class-Widget.Cache.html">Cache</a></li>
 				<li><a href="class-Widget.Call.html">Call</a></li>
@@ -68,7 +69,6 @@
 				<li><a href="class-Widget.Is.html">Is</a></li>
 				<li><a href="class-Widget.Json.html">Json</a></li>
 				<li><a href="class-Widget.Logger.html">Logger</a></li>
-				<li><a href="class-Widget.Map.html">Map</a></li>
 				<li><a href="class-Widget.Memcache.html">Memcache</a></li>
 				<li><a href="class-Widget.Memcached.html">Memcached</a></li>
 				<li><a href="class-Widget.MongoCache.html">MongoCache</a></li>
@@ -173,7 +173,7 @@
 				<b>Author:</b>
 				Twin Huang &lt;<a
 href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-Widget.Widget.html#16-625" title="Go to source code">Widget.php</a><br />
+		<b>Located at</b> <a href="source-class-Widget.Widget.html#16-628" title="Go to source code">Widget.php</a><br />
 	</div>
 
 
@@ -191,7 +191,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Widget.Widget.html#124-147" title="Go to source code">__construct</a>( <span>array <var>$config</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Widget.html#125-148" title="Go to source code">__construct</a>( <span>array <var>$config</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -235,7 +235,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_create">#</a>
-		<code><a href="source-class-Widget.Widget.html#149-183" title="Go to source code">create</a>( <span>array <var>$config</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$name</var> = <span class="php-quote">'default'</span></span> )</code>
+		<code><a href="source-class-Widget.Widget.html#150-184" title="Go to source code">create</a>( <span>array <var>$config</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$name</var> = <span class="php-quote">'default'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -283,7 +283,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_reset">#</a>
-		<code><a href="source-class-Widget.Widget.html#185-202" title="Go to source code">reset</a>( <span>string|null <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Widget.html#186-203" title="Go to source code">reset</a>( <span>string|null <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -325,7 +325,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_autoload">#</a>
-		<code><a href="source-class-Widget.Widget.html#204-225" title="Go to source code">autoload</a>( <span>string <var>$class</var></span> )</code>
+		<code><a href="source-class-Widget.Widget.html#205-226" title="Go to source code">autoload</a>( <span>string <var>$class</var></span> )</code>
 
 		<div class="description short">
 			
@@ -356,48 +356,6 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="__invoke" id="___invoke">
-
-		<td class="attributes"><code>
-			 public 
-			<code><a href="class-Widget.Base.html">Widget\Base</a></code>
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#___invoke">#</a>
-		<code><a href="source-class-Widget.Widget.html#227-236" title="Go to source code">__invoke</a>( <span>string <var>$name</var></span> )</code>
-
-		<div class="description short">
-			
-<p>Get a widget instance</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Get a widget instance</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$name</var></dt>
-					<dd><code>string</code><br>$name The name of widget</dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code><code><a href="class-Widget.Base.html">Widget\Base</a></code></code><br />
-				</div>
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
 	<tr data-order="setConfig" id="_setConfig">
 
 		<td class="attributes"><code>
@@ -409,7 +367,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setConfig">#</a>
-		<code><a href="source-class-Widget.Widget.html#238-303" title="Go to source code">setConfig</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Widget.html#228-290" title="Go to source code">setConfig</a>( <span>string|array <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -426,7 +384,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$name</var></dt>
-					<dd><code>string</code><br>$name</dd>
+					<dd><code>string|array</code><br>$name</dd>
 					<dt><var>$value</var></dt>
 					<dd><code>mixed</code><br>$value</dd>
 				</dl></div>
@@ -453,7 +411,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getConfig">#</a>
-		<code><a href="source-class-Widget.Widget.html#305-326" title="Go to source code">getConfig</a>( <span>string <var>$name</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Widget.html#292-314" title="Go to source code">getConfig</a>( <span>string <var>$name</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -497,7 +455,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_invoke">#</a>
-		<code><a href="source-class-Widget.Widget.html#328-341" title="Go to source code">invoke</a>( <span>string <var>$name</var></span>, <span>array <var>$args</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$deps</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Widget.html#316-328" title="Go to source code">invoke</a>( <span>string <var>$name</var></span>, <span>array <var>$args</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$deps</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -543,7 +501,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_get">#</a>
-		<code><a href="source-class-Widget.Widget.html#343-406" title="Go to source code">get</a>( <span>string <var>$name</var></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$deps</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Widget.html#330-393" title="Go to source code">get</a>( <span>string <var>$name</var></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$deps</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -593,7 +551,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_newInstance">#</a>
-		<code><a href="source-class-Widget.Widget.html#408-420" title="Go to source code">newInstance</a>( <span>string <var>$name</var></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$deps</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Widget.html#395-407" title="Go to source code">newInstance</a>( <span>string <var>$name</var></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$deps</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -639,7 +597,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_set">#</a>
-		<code><a href="source-class-Widget.Widget.html#422-433" title="Go to source code">set</a>( <span>string <var>$name</var></span>, <span><code><a href="class-Widget.Base.html">Widget\Base</a></code> <var>$widget</var></span> )</code>
+		<code><a href="source-class-Widget.Widget.html#409-420" title="Go to source code">set</a>( <span>string <var>$name</var></span>, <span><code><a href="class-Widget.Base.html">Widget\Base</a></code> <var>$widget</var></span> )</code>
 
 		<div class="description short">
 			
@@ -683,7 +641,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_remove">#</a>
-		<code><a href="source-class-Widget.Widget.html#435-452" title="Go to source code">remove</a>( <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-Widget.Widget.html#422-438" title="Go to source code">remove</a>( <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -725,7 +683,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getClass">#</a>
-		<code><a href="source-class-Widget.Widget.html#454-469" title="Go to source code">getClass</a>( <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-Widget.Widget.html#440-454" title="Go to source code">getClass</a>( <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -767,7 +725,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_has">#</a>
-		<code><a href="source-class-Widget.Widget.html#471-483" title="Go to source code">has</a>( <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-Widget.Widget.html#456-467" title="Go to source code">has</a>( <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -811,7 +769,7 @@ the full class name, else return false</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setDebug">#</a>
-		<code><a href="source-class-Widget.Widget.html#485-496" title="Go to source code">setDebug</a>( <span>mixed <var>$bool</var></span> )</code>
+		<code><a href="source-class-Widget.Widget.html#469-479" title="Go to source code">setDebug</a>( <span>mixed <var>$bool</var></span> )</code>
 
 		<div class="description short">
 			
@@ -853,7 +811,7 @@ the full class name, else return false</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_inDebug">#</a>
-		<code><a href="source-class-Widget.Widget.html#498-506" title="Go to source code">inDebug</a>( )</code>
+		<code><a href="source-class-Widget.Widget.html#481-489" title="Go to source code">inDebug</a>( )</code>
 
 		<div class="description short">
 			
@@ -890,7 +848,7 @@ the full class name, else return false</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setAutoload">#</a>
-		<code><a href="source-class-Widget.Widget.html#508-524" title="Go to source code">setAutoload</a>( <span>boolean <var>$enable</var></span> )</code>
+		<code><a href="source-class-Widget.Widget.html#491-507" title="Go to source code">setAutoload</a>( <span>boolean <var>$enable</var></span> )</code>
 
 		<div class="description short">
 			
@@ -932,7 +890,7 @@ the full class name, else return false</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setAutoloadMap">#</a>
-		<code><a href="source-class-Widget.Widget.html#526-544" title="Go to source code">setAutoloadMap</a>( <span>array <var>$map</var></span> )</code>
+		<code><a href="source-class-Widget.Widget.html#509-527" title="Go to source code">setAutoloadMap</a>( <span>array <var>$map</var></span> )</code>
 
 		<div class="description short">
 			
@@ -974,7 +932,7 @@ the full class name, else return false</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setInis">#</a>
-		<code><a href="source-class-Widget.Widget.html#546-561" title="Go to source code">setInis</a>( <span>array <var>$inis</var></span> )</code>
+		<code><a href="source-class-Widget.Widget.html#529-542" title="Go to source code">setInis</a>( <span>array <var>$inis</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1005,6 +963,48 @@ the full class name, else return false</p>
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="setAliases" id="_setAliases">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setAliases">#</a>
+		<code><a href="source-class-Widget.Widget.html#544-554" title="Go to source code">setAliases</a>( <span>array <var>$aliases</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Merge widget aliases</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Merge widget aliases</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$aliases</var></dt>
+					<dd><code>array</code><br>$aliases</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="setAlias" id="_setAlias">
 
 		<td class="attributes"><code>
@@ -1016,7 +1016,7 @@ the full class name, else return false</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setAlias">#</a>
-		<code><a href="source-class-Widget.Widget.html#563-574" title="Go to source code">setAlias</a>( <span>string <var>$name</var></span>, <span>string <var>$class</var></span> )</code>
+		<code><a href="source-class-Widget.Widget.html#556-567" title="Go to source code">setAlias</a>( <span>string <var>$name</var></span>, <span>string <var>$class</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1060,7 +1060,7 @@ the full class name, else return false</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_import">#</a>
-		<code><a href="source-class-Widget.Widget.html#576-604" title="Go to source code">import</a>( <span>string <var>$dir</var></span>, <span>string <var>$namespace</var></span>, <span>null <var>$format</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$autoload</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-Widget.Widget.html#569-597" title="Go to source code">import</a>( <span>string <var>$dir</var></span>, <span>string <var>$namespace</var></span>, <span>null <var>$format</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$autoload</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1112,7 +1112,7 @@ the full class name, else return false</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setImport">#</a>
-		<code><a href="source-class-Widget.Widget.html#606-624" title="Go to source code">setImport</a>( <span>array <var>$import</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Widget.html#599-617" title="Go to source code">setImport</a>( <span>array <var>$import</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -1136,6 +1136,44 @@ the full class name, else return false</p>
 				<div class="list">
 					<code><code><a href="class-Widget.Widget.html">Widget\Widget</a></code></code><br />
 				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setDeps" id="_setDeps">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setDeps">#</a>
+		<code><a href="source-class-Widget.Widget.html#619-627" title="Go to source code">setDeps</a>( <span>array <var>$deps</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Merge the dependence map</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Merge the dependence map</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$deps</var></dt>
+					<dd><code>array</code><br>$deps</dd>
+				</dl></div>
+
 
 
 
@@ -1169,7 +1207,6 @@ the full class name, else return false</p>
 			<a href="class-Widget.Base.html#m_bicache">bicache()</a>, 
 			<a href="class-Widget.Base.html#m_cache">cache()</a>, 
 			<a href="class-Widget.Base.html#m_call">call()</a>, 
-			<a href="class-Widget.Base.html#m_config">config()</a>, 
 			<a href="class-Widget.Base.html#m_cookie">cookie()</a>, 
 			<a href="class-Widget.Base.html#m_couchbase">couchbase()</a>, 
 			<a href="class-Widget.Base.html#m_db">db()</a>, 
@@ -1181,25 +1218,20 @@ the full class name, else return false</p>
 			<a href="class-Widget.Base.html#m_fileCache">fileCache()</a>, 
 			<a href="class-Widget.Base.html#m_flush">flush()</a>, 
 			<a href="class-Widget.Base.html#m_gravatar">gravatar()</a>, 
-			<a href="class-Widget.Base.html#m_header">header()</a>, 
 			<a href="class-Widget.Base.html#m_is">is()</a>, 
 			<a href="class-Widget.Base.html#m_json">json()</a>, 
 			<a href="class-Widget.Base.html#m_logger">logger()</a>, 
-			<a href="class-Widget.Base.html#m_map">map()</a>, 
 			<a href="class-Widget.Base.html#m_memcache">memcache()</a>, 
 			<a href="class-Widget.Base.html#m_memcached">memcached()</a>, 
 			<a href="class-Widget.Base.html#m_mongoCache">mongoCache()</a>, 
 			<a href="class-Widget.Base.html#m_monolog">monolog()</a>, 
 			<a href="class-Widget.Base.html#m_pinyin">pinyin()</a>, 
-			<a href="class-Widget.Base.html#m_post">post()</a>, 
-			<a href="class-Widget.Base.html#m_query">query()</a>, 
 			<a href="class-Widget.Base.html#m_redirect">redirect()</a>, 
 			<a href="class-Widget.Base.html#m_redis">redis()</a>, 
 			<a href="class-Widget.Base.html#m_request">request()</a>, 
 			<a href="class-Widget.Base.html#m_response">response()</a>, 
 			<a href="class-Widget.Base.html#m_router">router()</a>, 
 			<a href="class-Widget.Base.html#m_session">session()</a>, 
-			<a href="class-Widget.Base.html#m_smarty">smarty()</a>, 
 			<a href="class-Widget.Base.html#m_t">t()</a>, 
 			<a href="class-Widget.Base.html#m_ua">ua()</a>, 
 			<a href="class-Widget.Base.html#m_upload">upload()</a>, 
@@ -1248,33 +1280,6 @@ the full class name, else return false</p>
 
 	<table class="summary" id="properties">
 	<caption>Properties summary</caption>
-	<tr data-order="instances" id="$instances">
-		<td class="attributes"><code>
-			protected static 
-			array&lt;Widget&gt;
-		</code></td>
-
-		<td class="name">
-				<a href="source-class-Widget.Widget.html#28-33" title="Go to source code"><var>$instances</var></a>
-		</td>
-		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
-		<td class="description"><div>
-			<a href="#$instances" class="anchor">#</a>
-
-			<div class="description short">
-				
-<p>The instances of widget container</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-<p>The instances of widget container</p>
-
-
-			</div>
-		</div></td>
-	</tr>
 	<tr data-order="debug" id="$debug">
 		<td class="attributes"><code>
 			protected  
@@ -1282,7 +1287,7 @@ the full class name, else return false</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Widget.html#35-40" title="Go to source code"><var>$debug</var></a>
+				<a href="source-class-Widget.Widget.html#28-33" title="Go to source code"><var>$debug</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">true</span></code></td>
 		<td class="description"><div>
@@ -1302,60 +1307,6 @@ the full class name, else return false</p>
 			</div>
 		</div></td>
 	</tr>
-	<tr data-order="widgets" id="$widgets">
-		<td class="attributes"><code>
-			protected  
-			array&lt;Base&gt;
-		</code></td>
-
-		<td class="name">
-				<a href="source-class-Widget.Widget.html#42-47" title="Go to source code"><var>$widgets</var></a>
-		</td>
-		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
-		<td class="description"><div>
-			<a href="#$widgets" class="anchor">#</a>
-
-			<div class="description short">
-				
-<p>An array contains the instanced widget objects</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-<p>An array contains the instanced widget objects</p>
-
-
-			</div>
-		</div></td>
-	</tr>
-	<tr data-order="configs" id="$configs">
-		<td class="attributes"><code>
-			protected  
-			array
-		</code></td>
-
-		<td class="name">
-				<a href="source-class-Widget.Widget.html#49-54" title="Go to source code"><var>$configs</var></a>
-		</td>
-		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
-		<td class="description"><div>
-			<a href="#$configs" class="anchor">#</a>
-
-			<div class="description short">
-				
-<p>The global configurations for all widgets</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-<p>The global configurations for all widgets</p>
-
-
-			</div>
-		</div></td>
-	</tr>
 	<tr data-order="inis" id="$inis">
 		<td class="attributes"><code>
 			protected  
@@ -1363,7 +1314,7 @@ the full class name, else return false</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Widget.html#56-63" title="Go to source code"><var>$inis</var></a>
+				<a href="source-class-Widget.Widget.html#35-42" title="Go to source code"><var>$inis</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
 		<td class="description"><div>
@@ -1392,33 +1343,6 @@ href="http://www.php.net/manual/en/function.ini-set.php">http://www.php.net/manu
 			</div>
 		</div></td>
 	</tr>
-	<tr data-order="autoloadMap" id="$autoloadMap">
-		<td class="attributes"><code>
-			protected  
-			array
-		</code></td>
-
-		<td class="name">
-				<a href="source-class-Widget.Widget.html#65-70" title="Go to source code"><var>$autoloadMap</var></a>
-		</td>
-		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
-		<td class="description"><div>
-			<a href="#$autoloadMap" class="anchor">#</a>
-
-			<div class="description short">
-				
-<p>The directories for autoload</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-<p>The directories for autoload</p>
-
-
-			</div>
-		</div></td>
-	</tr>
 	<tr data-order="autoload" id="$autoload">
 		<td class="attributes"><code>
 			protected  
@@ -1426,7 +1350,7 @@ href="http://www.php.net/manual/en/function.ini-set.php">http://www.php.net/manu
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Widget.html#72-77" title="Go to source code"><var>$autoload</var></a>
+				<a href="source-class-Widget.Widget.html#44-49" title="Go to source code"><var>$autoload</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">true</span></code></td>
 		<td class="description"><div>
@@ -1446,6 +1370,33 @@ href="http://www.php.net/manual/en/function.ini-set.php">http://www.php.net/manu
 			</div>
 		</div></td>
 	</tr>
+	<tr data-order="autoloadMap" id="$autoloadMap">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Widget.html#51-56" title="Go to source code"><var>$autoloadMap</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$autoloadMap" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The directories for autoload</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The directories for autoload</p>
+
+
+			</div>
+		</div></td>
+	</tr>
 	<tr data-order="aliases" id="$aliases">
 		<td class="attributes"><code>
 			protected  
@@ -1453,7 +1404,7 @@ href="http://www.php.net/manual/en/function.ini-set.php">http://www.php.net/manu
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Widget.html#79-84" title="Go to source code"><var>$aliases</var></a>
+				<a href="source-class-Widget.Widget.html#58-63" title="Go to source code"><var>$aliases</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
 		<td class="description"><div>
@@ -1473,35 +1424,6 @@ href="http://www.php.net/manual/en/function.ini-set.php">http://www.php.net/manu
 			</div>
 		</div></td>
 	</tr>
-	<tr data-order="preload" id="$preload">
-		<td class="attributes"><code>
-			protected  
-			array
-		</code></td>
-
-		<td class="name">
-				<a href="source-class-Widget.Widget.html#86-93" title="Go to source code"><var>$preload</var></a>
-		</td>
-		<td class="value"><code><span class="php-keyword1">array</span>(
-        <span class="php-quote">'is'</span>
-    )</code></td>
-		<td class="description"><div>
-			<a href="#$preload" class="anchor">#</a>
-
-			<div class="description short">
-				
-<p>The widgets that will be instanced after widget container constructed</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-<p>The widgets that will be instanced after widget container constructed</p>
-
-
-			</div>
-		</div></td>
-	</tr>
 	<tr data-order="import" id="$import">
 		<td class="attributes"><code>
 			protected  
@@ -1509,7 +1431,7 @@ href="http://www.php.net/manual/en/function.ini-set.php">http://www.php.net/manu
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Widget.html#95-108" title="Go to source code"><var>$import</var></a>
+				<a href="source-class-Widget.Widget.html#65-79" title="Go to source code"><var>$import</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
 		<td class="description"><div>
@@ -1526,7 +1448,7 @@ href="http://www.php.net/manual/en/function.ini-set.php">http://www.php.net/manu
 <p>The import configuration</p>
 
 <p>Format: array( array( 'dir' =&gt; 'lib/Widget/Validator' 'namespace' =&gt;
-'Widget\Validator' 'format' =&gt; 'is%s' ) )</p>
+'Widget\Validator' 'format' =&gt; 'is%s', 'autoload' =&gt; false ) )</p>
 
 
 			</div>
@@ -1539,7 +1461,7 @@ href="http://www.php.net/manual/en/function.ini-set.php">http://www.php.net/manu
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Widget.html#110-115" title="Go to source code"><var>$construct</var></a>
+				<a href="source-class-Widget.Widget.html#81-86" title="Go to source code"><var>$construct</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1566,7 +1488,7 @@ href="http://www.php.net/manual/en/function.ini-set.php">http://www.php.net/manu
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Widget.html#117-122" title="Go to source code"><var>$constructed</var></a>
+				<a href="source-class-Widget.Widget.html#88-93" title="Go to source code"><var>$constructed</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1581,6 +1503,116 @@ href="http://www.php.net/manual/en/function.ini-set.php">http://www.php.net/manu
 			<div class="description detailed hidden">
 				
 <p>The callback executes <em>after</em> widget constructed</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="preload" id="$preload">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Widget.html#95-102" title="Go to source code"><var>$preload</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+        <span class="php-quote">'is'</span>
+    )</code></td>
+		<td class="description"><div>
+			<a href="#$preload" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The widgets that will be instanced after widget container constructed</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The widgets that will be instanced after widget container constructed</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="widgets" id="$widgets">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-Widget.Base.html">Widget\Base</a>[]</code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Widget.html#104-109" title="Go to source code"><var>$widgets</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$widgets" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>An array contains the instanced widget objects</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>An array contains the instanced widget objects</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="configs" id="$configs">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Widget.html#111-116" title="Go to source code"><var>$configs</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$configs" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The configurations for all widgets</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The configurations for all widgets</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="instances" id="$instances">
+		<td class="attributes"><code>
+			protected static 
+			<code><a href="class-Widget.Widget.html">Widget\Widget</a>[]</code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Widget.html#118-123" title="Go to source code"><var>$instances</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$instances" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The instances of widget container</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The instances of widget container</p>
 
 
 			</div>
@@ -1624,25 +1656,20 @@ href="http://www.php.net/manual/en/function.ini-set.php">http://www.php.net/manu
 			<a href="class-Widget.Base.html#m$fileCache"><var>$fileCache</var></a>, 
 			<a href="class-Widget.Base.html#m$flush"><var>$flush</var></a>, 
 			<a href="class-Widget.Base.html#m$gravatar"><var>$gravatar</var></a>, 
-			<a href="class-Widget.Base.html#m$header"><var>$header</var></a>, 
 			<a href="class-Widget.Base.html#m$is"><var>$is</var></a>, 
 			<a href="class-Widget.Base.html#m$json"><var>$json</var></a>, 
 			<a href="class-Widget.Base.html#m$logger"><var>$logger</var></a>, 
-			<a href="class-Widget.Base.html#m$map"><var>$map</var></a>, 
 			<a href="class-Widget.Base.html#m$memcache"><var>$memcache</var></a>, 
 			<a href="class-Widget.Base.html#m$memcached"><var>$memcached</var></a>, 
 			<a href="class-Widget.Base.html#m$mongoCache"><var>$mongoCache</var></a>, 
 			<a href="class-Widget.Base.html#m$monolog"><var>$monolog</var></a>, 
 			<a href="class-Widget.Base.html#m$pinyin"><var>$pinyin</var></a>, 
-			<a href="class-Widget.Base.html#m$post"><var>$post</var></a>, 
-			<a href="class-Widget.Base.html#m$query"><var>$query</var></a>, 
 			<a href="class-Widget.Base.html#m$redirect"><var>$redirect</var></a>, 
 			<a href="class-Widget.Base.html#m$redis"><var>$redis</var></a>, 
 			<a href="class-Widget.Base.html#m$request"><var>$request</var></a>, 
 			<a href="class-Widget.Base.html#m$response"><var>$response</var></a>, 
 			<a href="class-Widget.Base.html#m$router"><var>$router</var></a>, 
 			<a href="class-Widget.Base.html#m$session"><var>$session</var></a>, 
-			<a href="class-Widget.Base.html#m$smarty"><var>$smarty</var></a>, 
 			<a href="class-Widget.Base.html#m$t"><var>$t</var></a>, 
 			<a href="class-Widget.Base.html#m$ua"><var>$ua</var></a>, 
 			<a href="class-Widget.Base.html#m$upload"><var>$upload</var></a>, 

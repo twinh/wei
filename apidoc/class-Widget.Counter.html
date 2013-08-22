@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Widget\Map | Widget Framework</title>
+	<title>Class Widget\Counter | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?412079968"></script>
+	<script type="text/javascript" src="elementlist.js?969285891"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -48,13 +48,14 @@
 				<li><a href="class-Widget.Arr.html">Arr</a></li>
 				<li><a href="class-Widget.ArrayCache.html">ArrayCache</a></li>
 				<li><a href="class-Widget.Base.html">Base</a></li>
+				<li><a href="class-Widget.BaseCache.html">BaseCache</a></li>
 				<li><a href="class-Widget.Bicache.html">Bicache</a></li>
 				<li><a href="class-Widget.Cache.html">Cache</a></li>
 				<li><a href="class-Widget.Call.html">Call</a></li>
 				<li><a href="class-Widget.Config.html">Config</a></li>
 				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
 				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
-				<li><a href="class-Widget.Counter.html">Counter</a></li>
+				<li class="active"><a href="class-Widget.Counter.html">Counter</a></li>
 				<li><a href="class-Widget.Db.html">Db</a></li>
 				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
 				<li><a href="class-Widget.Download.html">Download</a></li>
@@ -68,7 +69,6 @@
 				<li><a href="class-Widget.Is.html">Is</a></li>
 				<li><a href="class-Widget.Json.html">Json</a></li>
 				<li><a href="class-Widget.Logger.html">Logger</a></li>
-				<li class="active"><a href="class-Widget.Map.html">Map</a></li>
 				<li><a href="class-Widget.Memcache.html">Memcache</a></li>
 				<li><a href="class-Widget.Memcached.html">Memcached</a></li>
 				<li><a href="class-Widget.MongoCache.html">MongoCache</a></li>
@@ -133,12 +133,12 @@
 	</div>
 
 <div id="content" class="class">
-	<h1>Class Map</h1>
+	<h1>Class Counter</h1>
 
 
 	<div class="description">
 	
-<p>A widget that handles key-value map data</p>
+<p>A cache widget base on Couchbase</p>
 
 	</div>
 
@@ -151,7 +151,7 @@
 		</dd>
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by" />
-<b><span>Widget\Map</span></b>			
+<b><span>Widget\Counter</span></b>			
 			
 			
 		</dd>
@@ -171,51 +171,37 @@
 		
 
 				<b>Author:</b>
-				twinhuang<br />
-		<b>Located at</b> <a href="source-class-Widget.Map.html#11-172" title="Go to source code">Map.php</a><br />
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+		<b>Located at</b> <a href="source-class-Widget.Counter.html#11-41" title="Go to source code">Counter.php</a><br />
 	</div>
 
 
 
 	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
-	<tr data-order="__invoke" id="___invoke">
+	<tr data-order="inc" id="_inc">
 
 		<td class="attributes"><code>
 			 public 
-			array|string
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#___invoke">#</a>
-		<code><a href="source-class-Widget.Map.html#39-54" title="Go to source code">__invoke</a>( <span>string <var>$name</var></span>, <span>null|string <var>$key</var> = <span class="php-keyword1">null</span></span> )</code>
+		<a class="anchor" href="#_inc">#</a>
+		<code><a href="source-class-Widget.Counter.html#22-25" title="Go to source code">inc</a>( )</code>
 
 		<div class="description short">
 			
-<p>Returns map data by specified name</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Returns map data by specified name</p>
 
 
 
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$name</var></dt>
-					<dd><code>string</code><br>$name The name of map</dd>
-					<dt><var>$key</var></dt>
-					<dd><code>null|string</code><br>$key The item name in map</dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>array|string</code><br>The map array or the item value of map<br />
-				</div>
 
 
 
@@ -223,46 +209,29 @@
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="setFile" id="_setFile">
+	<tr data-order="dec" id="_dec">
 
 		<td class="attributes"><code>
 			 public 
-			<code><a href="class-Widget.Map.html">Widget\Map</a></code>
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_setFile">#</a>
-		<code><a href="source-class-Widget.Map.html#56-73" title="Go to source code">setFile</a>( <span>string <var>$file</var></span> )</code>
+		<a class="anchor" href="#_dec">#</a>
+		<code><a href="source-class-Widget.Counter.html#27-30" title="Go to source code">dec</a>( )</code>
 
 		<div class="description short">
 			
-<p>Set map file</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Set map file</p>
 
 
 
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$file</var></dt>
-					<dd><code>string</code><br>$file</dd>
-				</dl></div>
 
-				<h4>Returns</h4>
-				<div class="list">
-					<code><code><a href="class-Widget.Map.html">Widget\Map</a></code></code><br />
-				</div>
-
-				<h4>Throws</h4>
-				<div class="list">
-					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>when map file not found<br />
-				</div>
 
 
 
@@ -273,230 +242,43 @@
 
 		<td class="attributes"><code>
 			 public 
-			array
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_get">#</a>
-		<code><a href="source-class-Widget.Map.html#75-89" title="Go to source code">get</a>( <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-Widget.Counter.html#32-35" title="Go to source code">get</a>( )</code>
 
 		<div class="description short">
 			
-<p>Returns map data by given name</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Returns map data by given name</p>
 
 
 
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$name</var></dt>
-					<dd><code>string</code><br>$name</dd>
-				</dl></div>
 
-				<h4>Returns</h4>
-				<div class="list">
-					<code>array</code><br />
-				</div>
-
-				<h4>Throws</h4>
-				<div class="list">
-					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br />
-				</div>
 
 
 
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="getInverse" id="_getInverse">
+	<tr data-order="set" id="_set">
 
 		<td class="attributes"><code>
 			 public 
-			array|string
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_getInverse">#</a>
-		<code><a href="source-class-Widget.Map.html#91-109" title="Go to source code">getInverse</a>( <span>mixed <var>$name</var></span>, <span>string|null <var>$key</var> = <span class="php-keyword1">null</span></span> )</code>
-
-		<div class="description short">
-			
-<p>Get inverse map data</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Get inverse map data</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$name</var></dt>
-					<dd><code>mixed</code><br>$name</dd>
-					<dt><var>$key</var></dt>
-					<dd><code>string|null</code><br>$key</dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>array|string</code><br />
-				</div>
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="toJson" id="_toJson">
-
-		<td class="attributes"><code>
-			 public 
-			string
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_toJson">#</a>
-		<code><a href="source-class-Widget.Map.html#111-120" title="Go to source code">toJson</a>( <span>string <var>$name</var></span> )</code>
-
-		<div class="description short">
-			
-<p>Convert map data to JSON</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Convert map data to JSON</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$name</var></dt>
-					<dd><code>string</code><br>$name The name of map</dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>string</code><br />
-				</div>
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="toOptions" id="_toOptions">
-
-		<td class="attributes"><code>
-			 public 
-			string
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_toOptions">#</a>
-		<code><a href="source-class-Widget.Map.html#122-143" title="Go to source code">toOptions</a>( <span>string <var>$name</var></span> )</code>
-
-		<div class="description short">
-			
-<p>Convert map data to HTML select options</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Convert map data to HTML select options</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$name</var></dt>
-					<dd><code>string</code><br>$name The name of map</dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>string</code><br />
-				</div>
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="toSimpleArray" id="_toSimpleArray">
-
-		<td class="attributes"><code>
-			 public 
-			array
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_toSimpleArray">#</a>
-		<code><a href="source-class-Widget.Map.html#145-154" title="Go to source code">toSimpleArray</a>( <span>string <var>$name</var></span> )</code>
-
-		<div class="description short">
-			
-<p>Convert map data to single level PHP array</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Convert map data to single level PHP array</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$name</var></dt>
-					<dd><code>string</code><br>$name The name of map</dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>array</code><br />
-				</div>
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="loopSimpleArray" id="_loopSimpleArray">
-
-		<td class="attributes"><code>
-			 protected 
-			array
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_loopSimpleArray">#</a>
-		<code><a href="source-class-Widget.Map.html#156-171" title="Go to source code">loopSimpleArray</a>( <span>array <var>$data</var></span>, <span>array <var>&amp; $result</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<a class="anchor" href="#_set">#</a>
+		<code><a href="source-class-Widget.Counter.html#37-40" title="Go to source code">set</a>( )</code>
 
 		<div class="description short">
 			
@@ -506,18 +288,7 @@
 			
 
 
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$data</var></dt>
-					<dd><code>array</code><br>$data</dd>
-					<dt><var>$result</var></dt>
-					<dd><code>array</code><br>$result</dd>
-				</dl></div>
 
-				<h4>Returns</h4>
-				<div class="list">
-					<code>array</code><br />
-				</div>
 
 
 
@@ -552,7 +323,6 @@
 			<a href="class-Widget.Base.html#m_bicache">bicache()</a>, 
 			<a href="class-Widget.Base.html#m_cache">cache()</a>, 
 			<a href="class-Widget.Base.html#m_call">call()</a>, 
-			<a href="class-Widget.Base.html#m_config">config()</a>, 
 			<a href="class-Widget.Base.html#m_cookie">cookie()</a>, 
 			<a href="class-Widget.Base.html#m_couchbase">couchbase()</a>, 
 			<a href="class-Widget.Base.html#m_db">db()</a>, 
@@ -564,25 +334,20 @@
 			<a href="class-Widget.Base.html#m_fileCache">fileCache()</a>, 
 			<a href="class-Widget.Base.html#m_flush">flush()</a>, 
 			<a href="class-Widget.Base.html#m_gravatar">gravatar()</a>, 
-			<a href="class-Widget.Base.html#m_header">header()</a>, 
 			<a href="class-Widget.Base.html#m_is">is()</a>, 
 			<a href="class-Widget.Base.html#m_json">json()</a>, 
 			<a href="class-Widget.Base.html#m_logger">logger()</a>, 
-			<a href="class-Widget.Base.html#m_map">map()</a>, 
 			<a href="class-Widget.Base.html#m_memcache">memcache()</a>, 
 			<a href="class-Widget.Base.html#m_memcached">memcached()</a>, 
 			<a href="class-Widget.Base.html#m_mongoCache">mongoCache()</a>, 
 			<a href="class-Widget.Base.html#m_monolog">monolog()</a>, 
 			<a href="class-Widget.Base.html#m_pinyin">pinyin()</a>, 
-			<a href="class-Widget.Base.html#m_post">post()</a>, 
-			<a href="class-Widget.Base.html#m_query">query()</a>, 
 			<a href="class-Widget.Base.html#m_redirect">redirect()</a>, 
 			<a href="class-Widget.Base.html#m_redis">redis()</a>, 
 			<a href="class-Widget.Base.html#m_request">request()</a>, 
 			<a href="class-Widget.Base.html#m_response">response()</a>, 
 			<a href="class-Widget.Base.html#m_router">router()</a>, 
 			<a href="class-Widget.Base.html#m_session">session()</a>, 
-			<a href="class-Widget.Base.html#m_smarty">smarty()</a>, 
 			<a href="class-Widget.Base.html#m_t">t()</a>, 
 			<a href="class-Widget.Base.html#m_ua">ua()</a>, 
 			<a href="class-Widget.Base.html#m_upload">upload()</a>, 
@@ -604,82 +369,30 @@
 
 	<table class="summary" id="properties">
 	<caption>Properties summary</caption>
-	<tr data-order="file" id="$file">
-		<td class="attributes"><code>
-			protected  
-			string
-		</code></td>
-
-		<td class="name">
-				<a href="source-class-Widget.Map.html#18-23" title="Go to source code"><var>$file</var></a>
-		</td>
-		<td class="value"><code></code></td>
-		<td class="description"><div>
-			<a href="#$file" class="anchor">#</a>
-
-			<div class="description short">
-				
-<p>The map PHP file</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-<p>The map PHP file</p>
-
-
-			</div>
-		</div></td>
-	</tr>
-	<tr data-order="data" id="$data">
+	<tr data-order="deps" id="$deps">
 		<td class="attributes"><code>
 			protected  
 			array
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Map.html#25-30" title="Go to source code"><var>$data</var></a>
+				<a href="source-class-Widget.Counter.html#18-20" title="Go to source code"><var>$deps</var></a>
 		</td>
-		<td class="value"><code></code></td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+    <span class="php-quote">'cache'</span> =&gt; <span class="php-quote">''</span>
+)</code></td>
 		<td class="description"><div>
-			<a href="#$data" class="anchor">#</a>
+			<a href="#$deps" class="anchor">#</a>
 
 			<div class="description short">
 				
-<p>The data return by map file</p>
+<p>The default dependence map</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>The data return by map file</p>
-
-
-			</div>
-		</div></td>
-	</tr>
-	<tr data-order="inverseData" id="$inverseData">
-		<td class="attributes"><code>
-			protected  
-			array
-		</code></td>
-
-		<td class="name">
-				<a href="source-class-Widget.Map.html#32-37" title="Go to source code"><var>$inverseData</var></a>
-		</td>
-		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
-		<td class="description"><div>
-			<a href="#$inverseData" class="anchor">#</a>
-
-			<div class="description short">
-				
-<p>The inverse map data</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-<p>The inverse map data</p>
+<p>The default dependence map</p>
 
 
 			</div>
@@ -691,7 +404,6 @@
 	<caption>Properties inherited from <a href="class-Widget.Base.html#properties">Widget\Base</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-Widget.Base.html#$deps"><var>$deps</var></a>, 
 			<a href="class-Widget.Base.html#$widget"><var>$widget</var></a>
 		</code></td>
 	</tr>
@@ -723,25 +435,20 @@
 			<a href="class-Widget.Base.html#m$fileCache"><var>$fileCache</var></a>, 
 			<a href="class-Widget.Base.html#m$flush"><var>$flush</var></a>, 
 			<a href="class-Widget.Base.html#m$gravatar"><var>$gravatar</var></a>, 
-			<a href="class-Widget.Base.html#m$header"><var>$header</var></a>, 
 			<a href="class-Widget.Base.html#m$is"><var>$is</var></a>, 
 			<a href="class-Widget.Base.html#m$json"><var>$json</var></a>, 
 			<a href="class-Widget.Base.html#m$logger"><var>$logger</var></a>, 
-			<a href="class-Widget.Base.html#m$map"><var>$map</var></a>, 
 			<a href="class-Widget.Base.html#m$memcache"><var>$memcache</var></a>, 
 			<a href="class-Widget.Base.html#m$memcached"><var>$memcached</var></a>, 
 			<a href="class-Widget.Base.html#m$mongoCache"><var>$mongoCache</var></a>, 
 			<a href="class-Widget.Base.html#m$monolog"><var>$monolog</var></a>, 
 			<a href="class-Widget.Base.html#m$pinyin"><var>$pinyin</var></a>, 
-			<a href="class-Widget.Base.html#m$post"><var>$post</var></a>, 
-			<a href="class-Widget.Base.html#m$query"><var>$query</var></a>, 
 			<a href="class-Widget.Base.html#m$redirect"><var>$redirect</var></a>, 
 			<a href="class-Widget.Base.html#m$redis"><var>$redis</var></a>, 
 			<a href="class-Widget.Base.html#m$request"><var>$request</var></a>, 
 			<a href="class-Widget.Base.html#m$response"><var>$response</var></a>, 
 			<a href="class-Widget.Base.html#m$router"><var>$router</var></a>, 
 			<a href="class-Widget.Base.html#m$session"><var>$session</var></a>, 
-			<a href="class-Widget.Base.html#m$smarty"><var>$smarty</var></a>, 
 			<a href="class-Widget.Base.html#m$t"><var>$t</var></a>, 
 			<a href="class-Widget.Base.html#m$ua"><var>$ua</var></a>, 
 			<a href="class-Widget.Base.html#m$upload"><var>$upload</var></a>, 

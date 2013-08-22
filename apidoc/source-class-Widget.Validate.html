@@ -8,7 +8,7 @@
 	<title>File Validate.php | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?412079968"></script>
+	<script type="text/javascript" src="elementlist.js?969285891"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -49,6 +49,7 @@
 				<li><a href="class-Widget.Arr.html">Arr</a></li>
 				<li><a href="class-Widget.ArrayCache.html">ArrayCache</a></li>
 				<li><a href="class-Widget.Base.html">Base</a></li>
+				<li><a href="class-Widget.BaseCache.html">BaseCache</a></li>
 				<li><a href="class-Widget.Bicache.html">Bicache</a></li>
 				<li><a href="class-Widget.Cache.html">Cache</a></li>
 				<li><a href="class-Widget.Call.html">Call</a></li>
@@ -69,7 +70,6 @@
 				<li><a href="class-Widget.Is.html">Is</a></li>
 				<li><a href="class-Widget.Json.html">Json</a></li>
 				<li><a href="class-Widget.Logger.html">Logger</a></li>
-				<li><a href="class-Widget.Map.html">Map</a></li>
 				<li><a href="class-Widget.Memcache.html">Memcache</a></li>
 				<li><a href="class-Widget.Memcached.html">Memcached</a></li>
 				<li><a href="class-Widget.MongoCache.html">MongoCache</a></li>
@@ -144,7 +144,7 @@
 </span><span id="8" class="l"><a class="l" href="#8">  8: </a>
 </span><span id="9" class="l"><a class="l" href="#9">  9: </a><span class="php-keyword1">namespace</span> Widget;
 </span><span id="10" class="l"><a class="l" href="#10"> 10: </a>
-</span><span id="11" class="l"><a class="l" href="#11"> 11: </a><span class="php-keyword1">use</span> Widget\Validator\ValidatorInterface;
+</span><span id="11" class="l"><a class="l" href="#11"> 11: </a><span class="php-keyword1">use</span> Widget\Validator\AbstractValidator;
 </span><span id="12" class="l"><a class="l" href="#12"> 12: </a>
 </span><span id="13" class="l"><a class="l" href="#13"> 13: </a><span class="php-comment">/**
 </span></span><span id="14" class="l"><a class="l" href="#14"> 14: </a><span class="php-comment"> * The validator widget
@@ -294,7 +294,7 @@
 </span></span><span id="158" class="l"><a class="l" href="#158">158: </a><span class="php-comment">     *
 </span></span><span id="159" class="l"><a class="l" href="#159">159: </a><span class="php-comment">     * @param array $options The options for validation
 </span></span><span id="160" class="l"><a class="l" href="#160">160: </a><span class="php-comment">     * @return bool Whether pass the validation or not
-</span></span><span id="161" class="l"><a class="l" href="#161">161: </a><span class="php-comment">     * @throws \InvalidArgumentException  When validation rule is not array, string or instance of ValidatorInterface
+</span></span><span id="161" class="l"><a class="l" href="#161">161: </a><span class="php-comment">     * @throws \InvalidArgumentException  When validation rule is not array, string or instance of AbstractValidator
 </span></span><span id="162" class="l"><a class="l" href="#162">162: </a><span class="php-comment">     */</span>
 </span><span id="163" class="l"><a class="l" href="#163">163: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_valid" href="#_valid">valid</a>(<span class="php-var">$options</span> = <span class="php-keyword1">array</span>())
 </span><span id="164" class="l"><a class="l" href="#164">164: </a>    {
@@ -317,7 +317,7 @@
 </span></span><span id="181" class="l"><a class="l" href="#181">181: </a><span class="php-comment">             */</span>
 </span><span id="182" class="l"><a class="l" href="#182">182: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">is_string</span>(<span class="php-var">$rules</span>)) {
 </span><span id="183" class="l"><a class="l" href="#183">183: </a>                <span class="php-var">$rules</span> = <span class="php-keyword1">array</span>(<span class="php-var">$rules</span> =&gt; <span class="php-keyword1">true</span>);
-</span><span id="184" class="l"><a class="l" href="#184">184: </a>            } <span class="php-keyword1">elseif</span> (<span class="php-var">$rules</span> <span class="php-keyword1">instanceof</span> ValidatorInterface) {
+</span><span id="184" class="l"><a class="l" href="#184">184: </a>            } <span class="php-keyword1">elseif</span> (<span class="php-var">$rules</span> <span class="php-keyword1">instanceof</span> AbstractValidator) {
 </span><span id="185" class="l"><a class="l" href="#185">185: </a>                <span class="php-var">$rules</span> = <span class="php-keyword1">array</span>(<span class="php-var">$rules</span>);
 </span><span id="186" class="l"><a class="l" href="#186">186: </a>            } <span class="php-keyword1">elseif</span> (!<span class="php-keyword2">is_array</span>(<span class="php-var">$rules</span>)) {
 </span><span id="187" class="l"><a class="l" href="#187">187: </a>                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-keyword2">sprintf</span>(
@@ -328,12 +328,12 @@
 </span><span id="192" class="l"><a class="l" href="#192">192: </a>
 </span><span id="193" class="l"><a class="l" href="#193">193: </a>            <span class="php-comment">// Make sure the &quot;required&quot; rule at first</span>
 </span><span id="194" class="l"><a class="l" href="#194">194: </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$rules</span>[<span class="php-quote">'required'</span>])) {
-</span><span id="195" class="l"><a class="l" href="#195">195: </a>                <span class="php-var">$value</span> = <span class="php-keyword1">true</span>;
+</span><span id="195" class="l"><a class="l" href="#195">195: </a>                <span class="php-var">$isRequired</span> = <span class="php-keyword1">true</span>;
 </span><span id="196" class="l"><a class="l" href="#196">196: </a>            } <span class="php-keyword1">else</span> {
-</span><span id="197" class="l"><a class="l" href="#197">197: </a>                <span class="php-var">$value</span> = (bool) <span class="php-var">$rules</span>[<span class="php-quote">'required'</span>];
+</span><span id="197" class="l"><a class="l" href="#197">197: </a>                <span class="php-var">$isRequired</span> = (bool) <span class="php-var">$rules</span>[<span class="php-quote">'required'</span>];
 </span><span id="198" class="l"><a class="l" href="#198">198: </a>                <span class="php-keyword1">unset</span>(<span class="php-var">$rules</span>[<span class="php-quote">'required'</span>]);
 </span><span id="199" class="l"><a class="l" href="#199">199: </a>            }
-</span><span id="200" class="l"><a class="l" href="#200">200: </a>            <span class="php-var">$rules</span> = <span class="php-keyword1">array</span>(<span class="php-quote">'required'</span> =&gt; <span class="php-var">$value</span>) + <span class="php-var">$rules</span>;
+</span><span id="200" class="l"><a class="l" href="#200">200: </a>            <span class="php-var">$rules</span> = <span class="php-keyword1">array</span>(<span class="php-quote">'required'</span> =&gt; <span class="php-var">$isRequired</span>) + <span class="php-var">$rules</span>;
 </span><span id="201" class="l"><a class="l" href="#201">201: </a>
 </span><span id="202" class="l"><a class="l" href="#202">202: </a>            <span class="php-comment">// Start validation</span>
 </span><span id="203" class="l"><a class="l" href="#203">203: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$rules</span> <span class="php-keyword1">as</span> <span class="php-var">$rule</span> =&gt; <span class="php-var">$params</span>) {
@@ -369,7 +369,7 @@
 </span><span id="233" class="l"><a class="l" href="#233">233: </a>
 </span><span id="234" class="l"><a class="l" href="#234">234: </a>                <span class="php-keyword1">if</span> (<span class="php-var">$result</span>) {
 </span><span id="235" class="l"><a class="l" href="#235">235: </a>                    <span class="php-comment">// The field data is empty and optional, skip the remaining validation rules</span>
-</span><span id="236" class="l"><a class="l" href="#236">236: </a>                    <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$data</span>) &amp;&amp; <span class="php-quote">'required'</span> === <span class="php-var">$rule</span>) {
+</span><span id="236" class="l"><a class="l" href="#236">236: </a>                    <span class="php-keyword1">if</span> (<span class="php-quote">'required'</span> === <span class="php-var">$rule</span> &amp;&amp; <span class="php-var">$validator</span>-&gt;isInvalid(<span class="php-var">$data</span>)) {
 </span><span id="237" class="l"><a class="l" href="#237">237: </a>                        <span class="php-keyword1">break</span>;
 </span><span id="238" class="l"><a class="l" href="#238">238: </a>                    }
 </span><span id="239" class="l"><a class="l" href="#239">239: </a>                } <span class="php-keyword1">else</span> {

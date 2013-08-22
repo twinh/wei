@@ -7,7 +7,7 @@
 	<title>Class Widget\Db | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?412079968"></script>
+	<script type="text/javascript" src="elementlist.js?969285891"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -48,6 +48,7 @@
 				<li><a href="class-Widget.Arr.html">Arr</a></li>
 				<li><a href="class-Widget.ArrayCache.html">ArrayCache</a></li>
 				<li><a href="class-Widget.Base.html">Base</a></li>
+				<li><a href="class-Widget.BaseCache.html">BaseCache</a></li>
 				<li><a href="class-Widget.Bicache.html">Bicache</a></li>
 				<li><a href="class-Widget.Cache.html">Cache</a></li>
 				<li><a href="class-Widget.Call.html">Call</a></li>
@@ -68,7 +69,6 @@
 				<li><a href="class-Widget.Is.html">Is</a></li>
 				<li><a href="class-Widget.Json.html">Json</a></li>
 				<li><a href="class-Widget.Logger.html">Logger</a></li>
-				<li><a href="class-Widget.Map.html">Map</a></li>
 				<li><a href="class-Widget.Memcache.html">Memcache</a></li>
 				<li><a href="class-Widget.Memcached.html">Memcached</a></li>
 				<li><a href="class-Widget.MongoCache.html">MongoCache</a></li>
@@ -173,7 +173,7 @@
 				<b>Author:</b>
 				Twin Huang &lt;<a
 href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-Widget.Db.html#14-854" title="Go to source code">Db.php</a><br />
+		<b>Located at</b> <a href="source-class-Widget.Db.html#14-848" title="Go to source code">Db.php</a><br />
 	</div>
 
 
@@ -800,7 +800,7 @@ column-value pairs</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_executeUpdate">#</a>
-		<code><a href="source-class-Widget.Db.html#445-475" title="Go to source code">executeUpdate</a>( <span>string <var>$sql</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Db.html#445-457" title="Go to source code">executeUpdate</a>( <span>string <var>$sql</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -841,14 +841,14 @@ returns the number of affected rows</p>
 
 		<td class="attributes"><code>
 			 public 
-			<code><a href="class-PDOStatement.html">PDOStatement</a></code>
+			<code><a href="class-PDOStatement.html">PDOStatement</a></code>|integer
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_query">#</a>
-		<code><a href="source-class-Widget.Db.html#477-521" title="Go to source code">query</a>( <span>string <var>$sql</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Db.html#459-515" title="Go to source code">query</a>( <span>string <var>$sql</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span>, <span>boolean <var>$returnRows</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -872,11 +872,13 @@ object</p>
 					<dd><code>array</code><br>$params The SQL parameters</dd>
 					<dt><var>$types</var></dt>
 					<dd><code>array</code><br>$types The parameter types to bind</dd>
+					<dt><var>$returnRows</var></dt>
+					<dd><code>boolean</code><br>$returnRows</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-PDOStatement.html">PDOStatement</a></code></code><br />
+					<code><code><a href="class-PDOStatement.html">PDOStatement</a></code>|integer</code><br />
 				</div>
 
 				<h4>Throws</h4>
@@ -900,7 +902,7 @@ object</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lastInsertId">#</a>
-		<code><a href="source-class-Widget.Db.html#523-532" title="Go to source code">lastInsertId</a>( <span>string <var>$sequence</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Db.html#517-526" title="Go to source code">lastInsertId</a>( <span>string <var>$sequence</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -917,7 +919,7 @@ object</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$sequence</var></dt>
-					<dd><code>string</code><br>$name The name of PostgreSQL sequence</dd>
+					<dd><code>string</code><br>$sequence The name of PostgreSQL sequence</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -942,7 +944,7 @@ object</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_errorCode">#</a>
-		<code><a href="source-class-Widget.Db.html#534-543" title="Go to source code">errorCode</a>( )</code>
+		<code><a href="source-class-Widget.Db.html#528-537" title="Go to source code">errorCode</a>( )</code>
 
 		<div class="description short">
 			
@@ -981,7 +983,7 @@ handle</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_errorInfo">#</a>
-		<code><a href="source-class-Widget.Db.html#545-554" title="Go to source code">errorInfo</a>( )</code>
+		<code><a href="source-class-Widget.Db.html#539-548" title="Go to source code">errorInfo</a>( )</code>
 
 		<div class="description short">
 			
@@ -1020,7 +1022,7 @@ database handle</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createQueryBuilder">#</a>
-		<code><a href="source-class-Widget.Db.html#556-566" title="Go to source code">createQueryBuilder</a>( <span>string <var>$table</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Db.html#550-560" title="Go to source code">createQueryBuilder</a>( <span>string <var>$table</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1062,7 +1064,7 @@ database handle</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_create">#</a>
-		<code><a href="source-class-Widget.Db.html#568-586" title="Go to source code">create</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>boolean <var>$isNew</var> = <span class="php-keyword1">true</span></span> )</code>
+		<code><a href="source-class-Widget.Db.html#562-580" title="Go to source code">create</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>boolean <var>$isNew</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1108,7 +1110,7 @@ database handle</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_find">#</a>
-		<code><a href="source-class-Widget.Db.html#588-611" title="Go to source code">find</a>( <span>string <var>$table</var></span>, <span>string|array <var>$id</var></span> )</code>
+		<code><a href="source-class-Widget.Db.html#582-605" title="Go to source code">find</a>( <span>string <var>$table</var></span>, <span>string|array <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1160,7 +1162,7 @@ database handle</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_findOrCreate">#</a>
-		<code><a href="source-class-Widget.Db.html#613-631" title="Go to source code">findOrCreate</a>( <span>string <var>$table</var></span>, <span>string <var>$id</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Db.html#607-625" title="Go to source code">findOrCreate</a>( <span>string <var>$table</var></span>, <span>string <var>$id</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -1206,7 +1208,7 @@ database handle</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_findAll">#</a>
-		<code><a href="source-class-Widget.Db.html#633-661" title="Go to source code">findAll</a>( <span>string <var>$table</var></span>, <span>array|false <var>$where</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-Widget.Db.html#627-655" title="Go to source code">findAll</a>( <span>string <var>$table</var></span>, <span>array|false <var>$where</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1259,7 +1261,7 @@ pairs</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___call">#</a>
-		<code><a href="source-class-Widget.Db.html#663-673" title="Go to source code">__call</a>( <span>string <var>$name</var></span>, <span>array <var>$args</var></span> )</code>
+		<code><a href="source-class-Widget.Db.html#657-667" title="Go to source code">__call</a>( <span>string <var>$name</var></span>, <span>array <var>$args</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1305,7 +1307,7 @@ pairs</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getRecordClass">#</a>
-		<code><a href="source-class-Widget.Db.html#675-695" title="Go to source code">getRecordClass</a>( <span>string <var>$table</var></span> )</code>
+		<code><a href="source-class-Widget.Db.html#669-689" title="Go to source code">getRecordClass</a>( <span>string <var>$table</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1347,7 +1349,7 @@ pairs</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getTable">#</a>
-		<code><a href="source-class-Widget.Db.html#697-706" title="Go to source code">getTable</a>( <span>string <var>$table</var></span> )</code>
+		<code><a href="source-class-Widget.Db.html#691-700" title="Go to source code">getTable</a>( <span>string <var>$table</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1389,7 +1391,7 @@ pairs</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUser">#</a>
-		<code><a href="source-class-Widget.Db.html#708-716" title="Go to source code">getUser</a>( )</code>
+		<code><a href="source-class-Widget.Db.html#702-710" title="Go to source code">getUser</a>( )</code>
 
 		<div class="description short">
 			
@@ -1426,7 +1428,7 @@ pairs</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getPassword">#</a>
-		<code><a href="source-class-Widget.Db.html#718-726" title="Go to source code">getPassword</a>( )</code>
+		<code><a href="source-class-Widget.Db.html#712-720" title="Go to source code">getPassword</a>( )</code>
 
 		<div class="description short">
 			
@@ -1463,7 +1465,7 @@ pairs</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getHost">#</a>
-		<code><a href="source-class-Widget.Db.html#728-736" title="Go to source code">getHost</a>( )</code>
+		<code><a href="source-class-Widget.Db.html#722-730" title="Go to source code">getHost</a>( )</code>
 
 		<div class="description short">
 			
@@ -1500,7 +1502,7 @@ pairs</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getPort">#</a>
-		<code><a href="source-class-Widget.Db.html#738-746" title="Go to source code">getPort</a>( )</code>
+		<code><a href="source-class-Widget.Db.html#732-740" title="Go to source code">getPort</a>( )</code>
 
 		<div class="description short">
 			
@@ -1537,7 +1539,7 @@ pairs</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDbname">#</a>
-		<code><a href="source-class-Widget.Db.html#748-756" title="Go to source code">getDbname</a>( )</code>
+		<code><a href="source-class-Widget.Db.html#742-750" title="Go to source code">getDbname</a>( )</code>
 
 		<div class="description short">
 			
@@ -1574,7 +1576,7 @@ pairs</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDriver">#</a>
-		<code><a href="source-class-Widget.Db.html#758-766" title="Go to source code">getDriver</a>( )</code>
+		<code><a href="source-class-Widget.Db.html#752-760" title="Go to source code">getDriver</a>( )</code>
 
 		<div class="description short">
 			
@@ -1611,7 +1613,7 @@ pairs</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDsn">#</a>
-		<code><a href="source-class-Widget.Db.html#768-804" title="Go to source code">getDsn</a>( )</code>
+		<code><a href="source-class-Widget.Db.html#762-798" title="Go to source code">getDsn</a>( )</code>
 
 		<div class="description short">
 			
@@ -1652,7 +1654,7 @@ pairs</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getLastSql">#</a>
-		<code><a href="source-class-Widget.Db.html#806-814" title="Go to source code">getLastSql</a>( )</code>
+		<code><a href="source-class-Widget.Db.html#800-808" title="Go to source code">getLastSql</a>( )</code>
 
 		<div class="description short">
 			
@@ -1689,7 +1691,7 @@ pairs</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_bindParameter">#</a>
-		<code><a href="source-class-Widget.Db.html#816-853" title="Go to source code">bindParameter</a>( <span><code><a href="class-PDOStatement.html">PDOStatement</a></code> <var>$stmt</var></span>, <span>array <var>$params</var></span>, <span>array <var>$types</var></span> )</code>
+		<code><a href="source-class-Widget.Db.html#810-847" title="Go to source code">bindParameter</a>( <span><code><a href="class-PDOStatement.html">PDOStatement</a></code> <var>$stmt</var></span>, <span>array <var>$params</var></span>, <span>array <var>$types</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1745,7 +1747,6 @@ pairs</dd>
 			<a href="class-Widget.Base.html#m_bicache">bicache()</a>, 
 			<a href="class-Widget.Base.html#m_cache">cache()</a>, 
 			<a href="class-Widget.Base.html#m_call">call()</a>, 
-			<a href="class-Widget.Base.html#m_config">config()</a>, 
 			<a href="class-Widget.Base.html#m_cookie">cookie()</a>, 
 			<a href="class-Widget.Base.html#m_couchbase">couchbase()</a>, 
 			<a href="class-Widget.Base.html#m_db">db()</a>, 
@@ -1757,25 +1758,20 @@ pairs</dd>
 			<a href="class-Widget.Base.html#m_fileCache">fileCache()</a>, 
 			<a href="class-Widget.Base.html#m_flush">flush()</a>, 
 			<a href="class-Widget.Base.html#m_gravatar">gravatar()</a>, 
-			<a href="class-Widget.Base.html#m_header">header()</a>, 
 			<a href="class-Widget.Base.html#m_is">is()</a>, 
 			<a href="class-Widget.Base.html#m_json">json()</a>, 
 			<a href="class-Widget.Base.html#m_logger">logger()</a>, 
-			<a href="class-Widget.Base.html#m_map">map()</a>, 
 			<a href="class-Widget.Base.html#m_memcache">memcache()</a>, 
 			<a href="class-Widget.Base.html#m_memcached">memcached()</a>, 
 			<a href="class-Widget.Base.html#m_mongoCache">mongoCache()</a>, 
 			<a href="class-Widget.Base.html#m_monolog">monolog()</a>, 
 			<a href="class-Widget.Base.html#m_pinyin">pinyin()</a>, 
-			<a href="class-Widget.Base.html#m_post">post()</a>, 
-			<a href="class-Widget.Base.html#m_query">query()</a>, 
 			<a href="class-Widget.Base.html#m_redirect">redirect()</a>, 
 			<a href="class-Widget.Base.html#m_redis">redis()</a>, 
 			<a href="class-Widget.Base.html#m_request">request()</a>, 
 			<a href="class-Widget.Base.html#m_response">response()</a>, 
 			<a href="class-Widget.Base.html#m_router">router()</a>, 
 			<a href="class-Widget.Base.html#m_session">session()</a>, 
-			<a href="class-Widget.Base.html#m_smarty">smarty()</a>, 
 			<a href="class-Widget.Base.html#m_t">t()</a>, 
 			<a href="class-Widget.Base.html#m_ua">ua()</a>, 
 			<a href="class-Widget.Base.html#m_upload">upload()</a>, 
@@ -2545,25 +2541,20 @@ name</p>
 			<a href="class-Widget.Base.html#m$fileCache"><var>$fileCache</var></a>, 
 			<a href="class-Widget.Base.html#m$flush"><var>$flush</var></a>, 
 			<a href="class-Widget.Base.html#m$gravatar"><var>$gravatar</var></a>, 
-			<a href="class-Widget.Base.html#m$header"><var>$header</var></a>, 
 			<a href="class-Widget.Base.html#m$is"><var>$is</var></a>, 
 			<a href="class-Widget.Base.html#m$json"><var>$json</var></a>, 
 			<a href="class-Widget.Base.html#m$logger"><var>$logger</var></a>, 
-			<a href="class-Widget.Base.html#m$map"><var>$map</var></a>, 
 			<a href="class-Widget.Base.html#m$memcache"><var>$memcache</var></a>, 
 			<a href="class-Widget.Base.html#m$memcached"><var>$memcached</var></a>, 
 			<a href="class-Widget.Base.html#m$mongoCache"><var>$mongoCache</var></a>, 
 			<a href="class-Widget.Base.html#m$monolog"><var>$monolog</var></a>, 
 			<a href="class-Widget.Base.html#m$pinyin"><var>$pinyin</var></a>, 
-			<a href="class-Widget.Base.html#m$post"><var>$post</var></a>, 
-			<a href="class-Widget.Base.html#m$query"><var>$query</var></a>, 
 			<a href="class-Widget.Base.html#m$redirect"><var>$redirect</var></a>, 
 			<a href="class-Widget.Base.html#m$redis"><var>$redis</var></a>, 
 			<a href="class-Widget.Base.html#m$request"><var>$request</var></a>, 
 			<a href="class-Widget.Base.html#m$response"><var>$response</var></a>, 
 			<a href="class-Widget.Base.html#m$router"><var>$router</var></a>, 
 			<a href="class-Widget.Base.html#m$session"><var>$session</var></a>, 
-			<a href="class-Widget.Base.html#m$smarty"><var>$smarty</var></a>, 
 			<a href="class-Widget.Base.html#m$t"><var>$t</var></a>, 
 			<a href="class-Widget.Base.html#m$ua"><var>$ua</var></a>, 
 			<a href="class-Widget.Base.html#m$upload"><var>$upload</var></a>, 

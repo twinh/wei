@@ -8,7 +8,7 @@
 	<title>File Upload.php | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?412079968"></script>
+	<script type="text/javascript" src="elementlist.js?969285891"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -49,6 +49,7 @@
 				<li><a href="class-Widget.Arr.html">Arr</a></li>
 				<li><a href="class-Widget.ArrayCache.html">ArrayCache</a></li>
 				<li><a href="class-Widget.Base.html">Base</a></li>
+				<li><a href="class-Widget.BaseCache.html">BaseCache</a></li>
 				<li><a href="class-Widget.Bicache.html">Bicache</a></li>
 				<li><a href="class-Widget.Cache.html">Cache</a></li>
 				<li><a href="class-Widget.Call.html">Call</a></li>
@@ -69,7 +70,6 @@
 				<li><a href="class-Widget.Is.html">Is</a></li>
 				<li><a href="class-Widget.Json.html">Json</a></li>
 				<li><a href="class-Widget.Logger.html">Logger</a></li>
-				<li><a href="class-Widget.Map.html">Map</a></li>
 				<li><a href="class-Widget.Memcache.html">Memcache</a></li>
 				<li><a href="class-Widget.Memcached.html">Memcached</a></li>
 				<li><a href="class-Widget.MongoCache.html">MongoCache</a></li>
@@ -354,9 +354,9 @@
 </span><span id="218" class="l"><a class="l" href="#218">218: </a>
 </span><span id="219" class="l"><a class="l" href="#219">219: </a>        <span class="php-comment">// Validate file extension, size, mime type by parent class</span>
 </span><span id="220" class="l"><a class="l" href="#220">220: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;isImage || <span class="php-var">$this</span>-&gt;maxWidth || <span class="php-var">$this</span>-&gt;maxHeight || <span class="php-var">$this</span>-&gt;minWidth || <span class="php-var">$this</span>-&gt;minHeight) {
-</span><span id="221" class="l"><a class="l" href="#221">221: </a>            <span class="php-var">$result</span> = parent::validate(<span class="php-var">$uploadedFile</span>);
+</span><span id="221" class="l"><a class="l" href="#221">221: </a>            <span class="php-var">$result</span> = parent::doValidate(<span class="php-var">$uploadedFile</span>);
 </span><span id="222" class="l"><a class="l" href="#222">222: </a>        } <span class="php-keyword1">else</span> {
-</span><span id="223" class="l"><a class="l" href="#223">223: </a>            <span class="php-var">$result</span> = FileValidator::validate(<span class="php-var">$uploadedFile</span>);
+</span><span id="223" class="l"><a class="l" href="#223">223: </a>            <span class="php-var">$result</span> = FileValidator::doValidate(<span class="php-var">$uploadedFile</span>);
 </span><span id="224" class="l"><a class="l" href="#224">224: </a>        }
 </span><span id="225" class="l"><a class="l" href="#225">225: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">false</span> === <span class="php-var">$result</span>) {
 </span><span id="226" class="l"><a class="l" href="#226">226: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
