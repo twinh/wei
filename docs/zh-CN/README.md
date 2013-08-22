@@ -144,13 +144,12 @@ API参考目录
 
 #### 其他
 * [arr](api/arr.md) - 数组工具微件,提供一些实用的数组操作方法
-* [config](api/config.md) - 自定义配置信息
+* [config](api/config.md) - 配置信息管理
 * [env](api/env.md) - 环境检测及根据不同环境加载不同的配置文件
 * [error](api/error.md) - 提供简洁友好的错误界面
 * [event](api/event.md) - 事件管理器,支持绑定,触发,移除事件和命名空间等特性
 * [gravatar](api/gravatar.md) - 根据邮箱地址生成自定义大小的Gravatar头像
 * [logger](api/logger.md) - 记录日志
-* [map](api/map.md) - 映射数据管理
 * [pinyin](api/pinyin.md) - 将中文转换为拼音字母
 * [uuid](api/uuid.md) - 生成一个随机的UUID
 

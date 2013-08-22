@@ -1,7 +1,7 @@
 Config
 ======
 
-设置或获取自定义配置
+配置数据管理
 
 案例
 ----
@@ -10,16 +10,53 @@ Config
 
 ```php
 // 设置配置项'title'的值为'Widget Documentation'
-widget()->config('title', 'Widget Documentation');
+widget()->setConfig('title', 'Widget Documentation');
 
 // 输出配置项'title'的值
-echo widget()->config->get('title');
+echo widget()->getConfig('title');
+```
 
-// 设置配置项'url'的值
-widget()->config->set('url', 'http://www.example.com');
+### 批量设置配置数据
 
-// 输出配置项'url'的值
-echo widget()->config->get('url');
+```php
+widget()->setConfig(array(
+	'yesOrNo' => array(
+        'y' => '是',
+        'n' => '否'
+    ),
+    'gender' => array(
+        'm' => '男',
+        'f' => '女'
+    ),
+    'priorities' => array(
+    	-10 => '低',
+    	0 	=> '中',
+    	10 	=> '高'
+    ),
+	'statuses' => array(
+		'draft' 	=> '草稿箱',
+		'inProcess'	=> '进行中',
+		'done' 		=> '完成',
+	)
+));
+```
+
+#### 输出HTML option标签
+
+```php
+echo widget()->config->toOptions('yesOrNo');
+
+// 输出
+'<option value="y">是</option><option value="n">否</option>';
+```
+
+#### 输出JSON数据
+
+```php
+echo widget()->config->toJson('yesOrNo');
+
+// 输出
+'{"y":"\u662f","n":"\u5426"}';
 ```
 
 调用方式
@@ -31,14 +68,14 @@ echo widget()->config->get('url');
 
 ### 方法
 
-#### config($name, $default)
-获取配置
-
-#### config($name, $value)
+#### widget->setConfig($name, $default = null)
 设置配置
 
-#### config->get($name, $default = null)
+#### widget->getConfig($name, $value)
 获取配置
 
-#### config->set($name, $value)
-设置配置
+#### config->toJson($name)
+转换配置为JSON字符串
+
+#### config->toOptions($name)
+转换配置为HTML下拉菜单选项
