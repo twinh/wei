@@ -113,12 +113,12 @@ widget(array(
 
 除了系统自带的微件之外,你也可以自定义微件类.
 
-1. 定义您的类,继承于`\Widget\AbstractWidget`
+1. 定义您的类,继承于`\Widget\Base`
 
     ```php
     namespace MyProject;
 
-    class Application extends \Widget\AbstractWidget
+    class Application extends \Widget\Base
     {
         public function run()
         {
