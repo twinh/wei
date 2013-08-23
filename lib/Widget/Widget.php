@@ -140,11 +140,6 @@ namespace Widget
                 $options = array_merge($options, $this->configs['widget']);
             }
             $this->setOption($options);
-
-            // Instance preload widgets
-            foreach ((array)$this->preload as $widgetName) {
-                $this->get($widgetName);
-            }
         }
 
         /**
@@ -625,6 +620,19 @@ namespace Widget
         protected function setDeps(array $deps)
         {
             $this->deps = $deps + $this->deps;
+        }
+
+        /**
+         * Instance preload widgets
+         *
+         * @param array $preload
+         */
+        protected function setPreload(array $preload)
+        {
+            $this->preload = array_merge($this->preload, $preload);
+            foreach ($preload as $widgetName) {
+                $this->get($widgetName);
+            }
         }
     }
 }
