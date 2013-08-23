@@ -21,7 +21,7 @@ $widget = \Widget\Widget::create();
 
 微件配置可以通过widget函数的第一个参数来设置,
 
-完整配置请查看[配置](../configuration.md)章节.
+完整配置请查看[配置](../book/configuration.md)章节.
 
 ```php
 $widget = widget(array(
