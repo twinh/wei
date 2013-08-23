@@ -120,7 +120,7 @@ return array(
 $widget = widget();
 
 // 获取数据库微件的配置数组
-$db = $widget->config('db');
+$db = $widget->getConfig('db');
 
 // 返回的数组如下
 $db = array(
@@ -133,7 +133,8 @@ $db = array(
 );
 
 // 获取数据库微件配置中的`user`选项
-$user = $widget->config('db\user');
+// 注意,不同级别的配置名称应该通过冒号":"隔开
+$user = $widget->getConfig('db:user');
 
 // 返回的变量值如下
 $user = 'root';
