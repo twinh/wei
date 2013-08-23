@@ -91,7 +91,7 @@ widget(array(
 ));
 ```
 
-### 设置PHPini配置
+### 设置PHP ini配置
 
 [PHP的配置](http://www.php.net/manual/zh/ini.php)可以通过`inis`选项来设置.
 
