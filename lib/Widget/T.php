@@ -16,18 +16,18 @@ namespace Widget;
 class T extends Base
 {
     /**
-     * The default locale
+     * The current locale
      *
      * @var string
      */
     protected $locale = 'en';
 
     /**
-     * The fallback locale
+     * The default locale
      *
      * @var string
      */
-    protected $fallbackLocale = 'en';
+    protected $defaultLocale = 'en';
 
     /**
      * The translator messages
@@ -72,7 +72,7 @@ class T extends Base
     }
 
     /**
-     * Sets the default locale
+     * Sets the current locale
      *
      * @param string $locale
      * @return T
@@ -80,7 +80,6 @@ class T extends Base
     public function setLocale($locale)
     {
         $this->locale = $locale;
-
         return $this;
     }
 
@@ -100,10 +99,9 @@ class T extends Base
      * @param string $locale
      * @return T
      */
-    public function setFallbackLocale($locale)
+    public function setDefaultLocale($locale)
     {
-        $this->fallbackLocale = $locale;
-
+        $this->defaultLocale = $locale;
         return $this;
     }
 
@@ -112,9 +110,9 @@ class T extends Base
      *
      * @return string
      */
-    public function getFallbackLocale()
+    public function getDefaultLocale()
     {
-        return $this->fallbackLocale;
+        return $this->defaultLocale;
     }
 
     /**
@@ -132,11 +130,11 @@ class T extends Base
 
         $file = sprintf($pattern, $this->locale);
         if (!is_file($file)) {
-            $fallbackFile = sprintf($pattern, $this->fallbackLocale);
-            if (!is_file($fallbackFile)) {
-                throw new \InvalidArgumentException(sprintf('File "%s" and "%s" not found or not readable', $file, $fallbackFile));
+            $defaultFile = sprintf($pattern, $this->defaultLocale);
+            if (!is_file($defaultFile)) {
+                throw new \InvalidArgumentException(sprintf('File "%s" and "%s" not found or not readable', $file, $defaultFile));
             } else {
-                $file = $fallbackFile;
+                $file = $defaultFile;
             }
         }
 
@@ -154,7 +152,6 @@ class T extends Base
     public function loadFromArray(array $messages)
     {
         $this->data = $messages + $this->data;
-
         return $this;
     }
 
