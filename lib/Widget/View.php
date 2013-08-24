@@ -126,7 +126,7 @@ class View extends Base
      *
      * @param string $name  The name of the variable
      * @param mixed  $value The value of the variable
-     * @return AbstractView
+     * @return View
      */
     public function assign($name, $value = null)
     {
