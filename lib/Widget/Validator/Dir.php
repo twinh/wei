@@ -2,7 +2,7 @@
 /**
  * Widget Framework
  *
- * @copyright   Twin Huang Copyright (c) 2008-2013 Twin Huang
+ * @copyright   Copyright (c) 2008-2013 Twin Huang Copyright (c) 2008-2013 Twin Huang
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
