@@ -31,14 +31,18 @@ class App extends Base
     protected $namespace = 'App';
 
     /**
-     * The default values for controller and action
+     * The default controller name
      *
-     * @var array
+     * @var string
      */
-    protected $defaults = array(
-        'controller'    => 'index',
-        'action'        => 'index',
-    );
+    protected $defaultController = 'index';
+
+    /**
+     * The default action name
+     *
+     * @var string
+     */
+    protected $defaultAction = 'index';
 
     /**
      * The name of controller
@@ -176,9 +180,8 @@ class App extends Base
     public function getController()
     {
         if (!$this->controller) {
-            $this->controller = $this->request->get('controller', $this->defaults['controller']);
+            $this->controller = $this->request->get('controller', $this->defaultController);
         }
-
         return $this->controller;
     }
 
@@ -191,7 +194,6 @@ class App extends Base
     public function setController($controller)
     {
         $this->controller = $controller;
-
         return $this;
     }
 
@@ -203,9 +205,8 @@ class App extends Base
     public function getAction()
     {
         if (!$this->action) {
-            $this->action = $this->request->get('action', $this->defaults['action']);
+            $this->action = $this->request->get('action', $this->defaultAction);
         }
-
         return $this->action;
     }
 
@@ -218,7 +219,6 @@ class App extends Base
     public function setAction($action)
     {
         $this->action = $action;
-
         return $this;
     }
 
@@ -231,7 +231,6 @@ class App extends Base
     public function getControllerClass($controller)
     {
         $controller = implode('\\', array_map('ucfirst', explode('/', $controller)));
-
         return $this->namespace . '\\' . $controller;
     }
 
@@ -262,7 +261,7 @@ class App extends Base
     }
 
     /**
-     * Throws a DispatchBreakException to prevent the previous dispatch process
+     * Throws a exception to prevent the previous dispatch process
      *
      * @throws \RuntimeException
      */
