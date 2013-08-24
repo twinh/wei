@@ -60,7 +60,7 @@ class Is extends Base
         foreach ($this->aliases as $rule => $class) {
             $rules['is' . ucfirst($rule)] = $class;
         }
-        $this->widget->setOption('+aliases', $rules);
+        $this->widget->setAliases($rules);
     }
 
     /**
