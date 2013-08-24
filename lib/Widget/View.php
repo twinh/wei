@@ -135,7 +135,6 @@ class View extends Base
         } else {
             $this->vars[$name] = $value;
         }
-
         return $this;
     }
 
@@ -164,7 +163,6 @@ class View extends Base
                 return $file;
             }
         }
-
         throw new \RuntimeException(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->dirs)), 404);
     }
 
@@ -181,7 +179,6 @@ class View extends Base
             'name' => $name,
             'variable' => $variable
         );
-
         return $this;
     }
 
@@ -194,7 +191,6 @@ class View extends Base
     public function setDirs($dirs)
     {
         $this->dirs = (array)$dirs;
-
         return $this;
     }
 
