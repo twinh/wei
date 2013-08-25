@@ -41,7 +41,7 @@ class TTest extends TestCase
         $this->t->loadFromFile(__DIR__ . '/Fixtures/i18n/%s.php');
     }
 
-    public function testLoadFromFallback()
+    public function testLoadFromDefaultLocale()
     {
         $this->t->setLocale('zh-CN');
 
@@ -50,13 +50,13 @@ class TTest extends TestCase
         $this->assertEquals('value', $this->t('key'));
     }
 
-    public function testFallbackLocale()
+    public function testDefaultLocale()
     {
-        $this->assertEquals('en', $this->t->getFallbackLocale());
+        $this->assertEquals('en', $this->t->getDefaultLocale());
 
-        $this->t->setFallbackLocale('zh-CN');
+        $this->t->setDefaultLocale('zh-CN');
 
-        $this->assertEquals('zh-CN', $this->t->getFallbackLocale());
+        $this->assertEquals('zh-CN', $this->t->getDefaultLocale());
     }
 
      public function testLocale()
