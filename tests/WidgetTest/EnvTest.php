@@ -88,7 +88,7 @@ class EnvTest extends TestCase
                     'SERVER_ADDR' => '1.2.3.4'
                 ),
                 'envMap' => array(
-                    '1.2.3.4' => 'prod'
+                    '1.2.3.4' => 'test'
                 )
             )
         ));
