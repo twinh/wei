@@ -616,7 +616,7 @@ namespace Widget
                     'dir' => null,
                     'namespace' => null,
                     'format' => null,
-                    'autoload' => true,
+                    'autoload' => false,
                 );
                 $this->import($option['dir'], $option['namespace'], $option['format'], $option['autoload']);
             }
