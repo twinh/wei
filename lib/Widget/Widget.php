@@ -33,7 +33,7 @@ namespace Widget
         protected $debug = true;
 
         /**
-         * The php configuration options that will be set when widget container constructing
+         * The PHP configuration options that will be set when widget container constructing
          *
          * @var array
          * @see http://www.php.net/manual/en/ini.php
