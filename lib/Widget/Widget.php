@@ -26,6 +26,13 @@ namespace Widget
         const VERSION = '0.9.4';
 
         /**
+         * The configurations for all widgets
+         *
+         * @var array
+         */
+        protected $configs = array();
+
+        /**
          * Whether in debug mode or not
          *
          * @var bool
@@ -114,13 +121,6 @@ namespace Widget
          * @var Base[]
          */
         protected $widgets = array();
-
-        /**
-         * The configurations for all widgets
-         *
-         * @var array
-         */
-        protected $configs = array();
 
         /**
          * The instances of widget container

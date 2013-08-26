@@ -72,4 +72,28 @@ class EnvTest extends TestCase
 
         $this->assertEquals('test', $env->getEnv());
     }
+
+    public function testPreloadEnvWidgetOverwriteConfigError()
+    {
+        $widget = new \Widget\Widget(array(
+            'widget' => array(
+                'debug' => true,
+                'preload' => array(
+                    'env'
+                )
+            ),
+            'env' => array(
+                'configDir' => __DIR__ . '/Fixtures/env/%env%.php',
+                'server' => array(
+                    'SERVER_ADDR' => '1.2.3.4'
+                ),
+                'envMap' => array(
+                    '1.2.3.4' => 'prod'
+                )
+            )
+        ));
+
+        $this->assertFalse($widget->inDebug());
+        $this->assertFalse($widget->getConfig('widget:debug'));
+    }
 }
