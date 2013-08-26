@@ -439,6 +439,10 @@ class DbTest extends TestCase
         $this->assertEquals("SELECT * FROM member WHERE group_id = :groupId LIMIT 1", $query->getSql());
         $this->assertEquals('1', $member->group_id);
 
+        // Where with empty content
+        $query = $this->db('member')->where(array());
+        $this->assertEquals("SELECT * FROM member", $query->getSql());
+
         // Order
         $query = $this->db('member')->orderBy('id', 'ASC');
         $member = $query->find();
