@@ -551,7 +551,7 @@ namespace Widget
          * Merge widget aliases
          *
          * @param array $aliases
-         * @return $this
+         * @return Widget
          */
         public function setAliases(array $aliases)
         {
