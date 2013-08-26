@@ -132,13 +132,14 @@ namespace Widget
             // Set configurations for all widget
             $this->setConfig($config);
 
-            $this->widgets['widget'] = $this->widget = $this;
+            $this->set('widget', $this);
 
             // Set all options
             $options = get_object_vars($this);
             if (isset($this->configs['widget'])) {
                 $options = array_merge($options, $this->configs['widget']);
             }
+            var_dump(array_keys($options));
             $this->setOption($options);
         }
 
@@ -291,8 +292,12 @@ namespace Widget
          * @param mixed $default The default value if configuration not found
          * @return mixed
          */
-        public function getConfig($name, $default = null)
+        public function getConfig($name = null, $default = null)
         {
+            if (is_null($name)) {
+                return $this->configs;
+            }
+
             if (false === strpos($name, ':')) {
                 return isset($this->configs[$name]) ? $this->configs[$name] : $default;
             }
@@ -631,7 +636,7 @@ namespace Widget
         {
             $this->preload = array_merge($this->preload, $preload);
             foreach ($preload as $widgetName) {
-                $this->get($widgetName);
+                $this->set($widgetName, $this->get($widgetName));
             }
         }
     }
