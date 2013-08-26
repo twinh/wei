@@ -115,7 +115,7 @@ namespace Widget;
 abstract class Base
 {
     /**
-     * The default dependence map
+     * The widget name dependence map
      *
      * @var array
      */

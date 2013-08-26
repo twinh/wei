@@ -63,6 +63,13 @@ namespace Widget
         protected $aliases = array();
 
         /**
+         * The widget name dependence map
+         *
+         * @var array
+         */
+        protected $deps = array();
+
+        /**
          * The import configuration
          *
          * Format:
@@ -139,7 +146,6 @@ namespace Widget
             if (isset($this->configs['widget'])) {
                 $options = array_merge($options, $this->configs['widget']);
             }
-            var_dump(array_keys($options));
             $this->setOption($options);
         }
 

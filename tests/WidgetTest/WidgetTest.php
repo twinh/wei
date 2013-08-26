@@ -244,6 +244,28 @@ class WidgetTest extends TestCase
         unset($widget->request->subRequest);
     }
 
+    public function testPreloadWidgetInDependenceMap()
+    {
+        $widget = new Widget(array(
+            'widget' => array(
+                'deps' => array(
+                    'request' => 'sub.request',
+                ),
+                'preload' => array(
+                    'request'
+                )
+            ),
+            'request' => array(
+                'fromGlobal' => true,
+            ),
+            'sub.request' => array(
+                'fromGlobal' => false,
+            )
+        ));
+
+        $this->assertFalse($widget->request->getOption('fromGlobal'));
+    }
+
     public function testInvoke()
     {
         $this->request->set('id', __METHOD__);
