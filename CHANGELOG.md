@@ -9,6 +9,7 @@ Changelog
 * Changed cache widgets' `inc` and `dec` methods to `incr` and `decr`
 * Merged `map` widget into `config` widget, refs #131
 * Chagned log level priorities to adapted with monolog
+* Added formatLog method for logger widget
 
 ## 0.9.4 (2013-08-07)
 * Changed cache widgets' `increment` and `decrement` methods to `inc` and `dec`

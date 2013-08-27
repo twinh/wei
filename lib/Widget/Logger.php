@@ -124,14 +124,43 @@ class Logger extends Base
     {
         $level = isset($this->levels[$level]) ? $level : $this->level;
 
-        // Check if the level would be handle
+        // Check if the level would be handled
         if (isset($this->levels[$level])) {
             if ($this->levels[$level] < $this->levels[$this->handledLevel]) {
                 return false;
             }
         }
 
-        // Format the log message
+        return $this->writeLog($level, $message, $context);
+    }
+
+    /**
+     * Write the log message
+     *
+     * @param string $level
+     * @param string $message
+     * @param array $context
+     * @return bool
+     */
+    protected function writeLog($level, $message, $context)
+    {
+        if (!$this->handle) {
+            $this->handle = fopen($this->getFile(), 'a');
+        }
+        $content = $this->formatLog($level, $message, $context);
+        return (bool)fwrite($this->handle, $content);
+    }
+
+    /**
+     * Format the log message
+     *
+     * @param string $level
+     * @param string $message
+     * @param array $context
+     * @return string
+     */
+    protected function formatLog($level, $message, array $context = array())
+    {
         $content = str_replace(array(
             '%datetime%', '%channel%', '%level%', '%message%',
         ), array(
@@ -140,22 +169,7 @@ class Logger extends Base
             strtoupper($level),
             $message,
         ), $this->format);
-
-        return $this->writeLog($content);
-    }
-
-    /**
-     * Write the log message
-     *
-     * @param string $content
-     * @return bool
-     */
-    protected function writeLog($content)
-    {
-        if (!$this->handle) {
-            $this->handle = fopen($this->getFile(), 'a');
-        }
-        return (bool)fwrite($this->handle, $content);
+        return $content;
     }
 
     /**
