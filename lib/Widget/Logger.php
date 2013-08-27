@@ -333,7 +333,6 @@ class Logger extends Base
     public function setLevel($level)
     {
         $this->level = $level;
-
         return $this;
     }
 
@@ -346,7 +345,6 @@ class Logger extends Base
     public function setHandledLevel($handledLevel)
     {
         $this->handledLevel = $handledLevel;
-
         return $this;
     }
 
