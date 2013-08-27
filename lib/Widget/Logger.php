@@ -120,7 +120,7 @@ class Logger extends Base
      * @param array $context
      * @return bool Whether the log record has been handled
      */
-    public function __invoke($level, $message, array $context = array())
+    public function log($level, $message, array $context = array())
     {
         $level = isset($this->levels[$level]) ? $level : $this->level;
 
@@ -166,9 +166,9 @@ class Logger extends Base
      * @param array $context
      * @return bool
      */
-    public function log($level, $message, array $context = array())
+    public function __invoke($level, $message, array $context = array())
     {
-        return $this($level, $message, $context);
+        return $this->log($level, $message, $context);
     }
 
     /**
@@ -195,7 +195,7 @@ class Logger extends Base
      */
     public function alert($message, array $context = array())
     {
-        return $this('alert', $message, $context);
+        return $this->log('alert', $message, $context);
     }
 
     /**
@@ -209,7 +209,7 @@ class Logger extends Base
      */
     public function critical($message, array $context = array())
     {
-        return $this('critical', $message, $context);
+        return $this->log('critical', $message, $context);
     }
 
     /**
@@ -222,7 +222,7 @@ class Logger extends Base
      */
     public function error($message, array $context = array())
     {
-        return $this('error', $message, $context);
+        return $this->log('error', $message, $context);
     }
 
     /**
@@ -237,7 +237,7 @@ class Logger extends Base
      */
     public function warning($message, array $context = array())
     {
-        return $this('warning', $message, $context);
+        return $this->log('warning', $message, $context);
     }
 
     /**
@@ -249,7 +249,7 @@ class Logger extends Base
      */
     public function notice($message, array $context = array())
     {
-        return $this('notice', $message, $context);
+        return $this->log('notice', $message, $context);
     }
 
     /**
@@ -263,7 +263,7 @@ class Logger extends Base
      */
     public function info($message, array $context = array())
     {
-        return $this('info', $message, $context);
+        return $this->log('info', $message, $context);
     }
 
     /**
@@ -275,7 +275,7 @@ class Logger extends Base
      */
     public function debug($message, array $context = array())
     {
-        return $this('debug', $message, $context);
+        return $this->log('debug', $message, $context);
     }
 
     /**
