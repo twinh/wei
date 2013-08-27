@@ -43,14 +43,14 @@ class Logger extends Base
      * @var array
      */
     protected $levels = array(
-        'debug'     => 0,
-        'info'      => 1,
-        'notice'    => 2,
-        'warning'   => 3,
-        'error'     => 4,
-        'critical'  => 5,
-        'alert'     => 6,
-        'emergency' => 7
+        'debug'     => 100,
+        'info'      => 200,
+        'notice'    => 250,
+        'warning'   => 300,
+        'error'     => 400,
+        'critical'  => 500,
+        'alert'     => 550,
+        'emergency' => 600
     );
 
     /**
