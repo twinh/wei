@@ -195,11 +195,11 @@ class Db extends Base
     protected $global = false;
 
     /**
-     * The last executed SQL query
+     * All executed SQL queries
      *
-     * @var string
+     * @var array
      */
-    protected $lastSql;
+    protected $queries = array();
 
     /**
      * Constructor
@@ -469,7 +469,7 @@ class Db extends Base
     public function query($sql, $params = array(), $types = array(), $returnRows = false)
     {
         $this->connect();
-        $this->lastSql = $sql;
+        $this->queries[] = $sql;
         if ($this->beforeQuery) {
             call_user_func_array($this->beforeQuery, array($sql, $params, $types, $this));
         }
@@ -804,7 +804,17 @@ class Db extends Base
      */
     public function getLastSql()
     {
-        return $this->lastSql;
+        return end($this->queries);
+    }
+
+    /**
+     * Returns all executed SQL queries
+     *
+     * @return array
+     */
+    public function getQueries()
+    {
+        return $this->queries;
     }
 
     /**
