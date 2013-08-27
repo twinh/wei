@@ -78,6 +78,26 @@ class Redis extends BaseCache
     }
 
     /**
+     * Returns the redis object, retrieve or store an item
+     *
+     * @param string $key The name of item
+     * @param mixed $value The value of item
+     * @param int $expire The expire seconds, defaults to 0, means never expired
+     * @return mixed
+     */
+    public function __invoke($key, $value = null, $expire = 0)
+    {
+        switch (func_num_args()) {
+            case 0:
+                return $this->object;
+            case 1:
+                return $this->get($key);
+            default:
+                return $this->set($key, $value, $expire);
+        }
+    }
+
+    /**
      * Connect the redis server and set redis options
      *
      * @return bool true on success, false on error

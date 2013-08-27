@@ -46,4 +46,9 @@ class RedisTest extends CacheTestCase
 
         $this->assertInstanceOf('\Redis', $cache->getObject());
     }
+
+    public function testGetRedisObject()
+    {
+        $this->assertInstanceOf('\Redis', $this->redis());
+    }
 }
