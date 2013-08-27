@@ -266,6 +266,11 @@ class Record extends Base
         return $this->isNew;
     }
 
+    /**
+     * Check if the record's data is modified
+     *
+     * @return bool
+     */
     public function isModified()
     {
         return $this->isModified;
