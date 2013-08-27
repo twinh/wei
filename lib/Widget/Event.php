@@ -48,12 +48,50 @@ class Event extends Base
     }
 
     /**
+     * Create a callback list
+     *
+     * @param callable $callback
+     * @param callable $_
+     * @return bool|null
+     */
+    public function __invoke()
+    {
+        $callbacks = func_get_args();
+        return function() use($callbacks) {
+            $args = func_get_args();
+            foreach ($callbacks as $callback) {
+                if (false === call_user_func_array($callback, $args)) {
+                    return false;
+                }
+            }
+            return null;
+        };
+    }
+
+    public function add($name, $fn)
+    {
+        if (false === ($pos = strrpos($name, '.'))) {
+            throw new \InvalidArgumentException('Option name must contain "."');
+        }
+
+        $widgetName = substr($name, 0, $pos);
+        $optionName = substr($name, $pos);
+
+        if ($this->widget->isInstanced($widgetName)) {
+            $widget = $this->widget->get($widgetName);
+            $widget->setOption($optionName);
+        } else {
+
+        }
+    }
+
+    /**
      * Create a event object
      *
      * @param string $type
      * @return \Widget\Stdlib\Event
      */
-    public function __invoke($type)
+    public function __invoke2($type)
     {
         list($type, $namespaces) = $this->splitNamespace($type);
         return new StdEvent(array(
@@ -124,6 +162,8 @@ class Event extends Base
         return $event;
     }
 
+
+
     /**
      * Attach a handler to an event
      *
@@ -133,7 +173,7 @@ class Event extends Base
      * @param array $data The data pass to the event object, when the handler is triggered
      * @return Event
      */
-    public function on($type, $fn = null, $priority = 0, $data = array())
+    public function on2($type, $fn = null, $priority = 0, $data = array())
     {
         // ( $types )
         if (is_array($type)) {

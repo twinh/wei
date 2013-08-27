@@ -989,7 +989,7 @@ class DbTest extends TestCase
         $this->widget->setConfig(array(
             'cb.db' => array(
                 'db' => $this->db,
-                'global' => true
+                'globalCallback' => true
             )
         ));
 

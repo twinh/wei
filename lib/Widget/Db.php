@@ -192,7 +192,7 @@ class Db extends Base
      *
      * @var bool
      */
-    protected $global = false;
+    protected $globalCallback = false;
 
     /**
      * All executed SQL queries
@@ -211,7 +211,7 @@ class Db extends Base
         parent::__construct($options);
 
         // Uses callbacks from default db widget if global option is true
-        if (true == $this->global && $this !== $this->db) {
+        if (true == $this->globalCallback && $this !== $this->db) {
             $callbacks = array(
                 'beforeConnect', 'connectFails', 'afterConnect',
                 'beforeQuery', 'afterQuery'
