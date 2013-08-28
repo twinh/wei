@@ -85,7 +85,7 @@ class Redis extends BaseCache
      * @param int $expire The expire seconds, defaults to 0, means never expired
      * @return mixed
      */
-    public function __invoke($key, $value = null, $expire = 0)
+    public function __invoke($key = null, $value = null, $expire = 0)
     {
         switch (func_num_args()) {
             case 0:
