@@ -462,7 +462,7 @@ class Db extends Base
      * @param string $sql The SQL query
      * @param array $params The SQL parameters
      * @param array $types The parameter types to bind
-     * @param bool $returnRows
+     * @param bool $returnRows Whether returns a PDOStatement object or the number of affected rows
      * @throws \RuntimeException When a PDOException raise
      * @return \PDOStatement|int
      */
