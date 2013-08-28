@@ -8,8 +8,6 @@
 
 namespace Widget;
 
-use Jeremeamia\SuperClosure\SerializableClosure;
-
 /**
  * A queue widget
  *
@@ -77,15 +75,7 @@ class Async extends Base
             throw new \InvalidArgumentException('Parameter for async must be callable');
         }
 
-        return $this;
-        $data = new SerializableClosure($fn);
-        $data = serialize($data);
-
-        /*if ($fn instanceof \Closure) {
-            $data = $this->serializeClosure($fn);
-        } else {
-            $data = serialize($fn);
-        }*/
+        $data = $this->serializeClosure($fn);
 
         // TODO redis 连接超时,塞入失败上报到网管
         $result = $this->push($data);
@@ -121,20 +111,7 @@ class Async extends Base
                     $logger->debug('Received queue content: ' . var_export($fn, true));
                 }
 
-                $fn = unserialize($fn);
-
-                // Execute callback
-                if (!is_callable($fn)) {
-
-                    /*@eval('$fn = ' . $fn);
-
-                    if ($e = error_get_last()) {
-                        $logger->alert('Eval queue callback error', $e);
-                        continue;
-                    }*/
-                }
-
-                $result = call_user_func($fn);
+                $result = $this->callSerializedClosure($fn);
 
                 $logger->debug('Executed callback result: ' . var_export($result, true));
             } catch (\RedisException $e) {
@@ -423,26 +400,59 @@ class Async extends Base
     }
 
     /**
-     * Serialize the closure to string
+     * Serialize callable variable to string
      *
      * @param callable $fn
      * @return string
+     * @throws \InvalidArgumentException
      */
-    public function serializeClosure(\Closure $fn)
+    public function serializeClosure($fn)
     {
-        $func = new \ReflectionFunction($fn);
-        $filename = $func->getFileName();
-        $start_line = $func->getStartLine() - 1; // it's actually - 1, otherwise you wont get the function() block
-        $end_line = $func->getEndLine();
-        $length = $end_line - $start_line;
+        if (!$fn instanceof \Closure && !is_array($fn) && !is_string($fn)) {
+            throw new \InvalidArgumentException('Argument must be instance of Closure, array or string');
+        }
 
-        $source = file($filename);
-        $body = implode("", array_slice($source, $start_line, $length));
+        if ($fn instanceof \Closure) {
+            $func = new \ReflectionFunction($fn);
+            $filename = $func->getFileName();
+            $start_line = $func->getStartLine() - 1; // it's actually - 1, otherwise you wont get the function() block
+            $end_line = $func->getEndLine();
+            $length = $end_line - $start_line;
 
-        $begin = strpos($body, 'function(');
+            $source = file($filename);
+            $body = implode("", array_slice($source, $start_line, $length));
 
-        $body = substr($body, $begin, strrpos($body, '}') - $begin + 1) . ';';
+            $begin = strpos($body, 'function(');
 
-        return $body;
+            $body = substr($body, $begin, strrpos($body, '}') - $begin + 1) . ';';
+
+            $useVariables = $func->getStaticVariables();
+
+            return serialize(array($body, $useVariables));
+        } else {
+            return serialize(array($fn, false));
+        }
+    }
+
+    /**
+     * Call a serialized Closure
+     *
+     * @param string $_context
+     * @return mixed
+     */
+    public function callSerializedClosure($_context)
+    {
+        list($_fn, $_useVars) = unserialize($_context);
+
+        $_useVars && extract($_useVars);
+
+        if (!is_callable($_fn)) {
+            @eval('$_fn = ' . $_fn);
+            if ($e = error_get_last()) {
+                $this->logger->alert('Eval queue callback error', $e);
+            }
+        }
+
+        return call_user_func($_fn);
     }
 }
