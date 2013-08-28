@@ -457,7 +457,7 @@ class Db extends Base
     }
 
     /**
-     * Executes an SQL statement, returning a result set as a PDOStatement object
+     * Executes an SQL statement, returning a PDOStatement object or the number of affected rows
      *
      * @param string $sql The SQL query
      * @param array $params The SQL parameters
