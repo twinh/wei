@@ -399,6 +399,17 @@ namespace Widget
         }
 
         /**
+         * Check if the widget is instanced
+         *
+         * @param string $name The name of widget
+         * @return bool
+         */
+        public function isInstanced($name)
+        {
+            return isset($this->widgets[$name]);
+        }
+
+        /**
          * Initialize a new instance of widget, with the specified name
          *
          * @param string $name The name of the widget

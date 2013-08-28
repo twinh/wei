@@ -459,4 +459,11 @@ class WidgetTest extends TestCase
         $this->assertArrayHasKey('widgetName', $aliases);
         $this->assertEquals('className', $aliases['widgetName']);
     }
+
+    public function testIsInstanced()
+    {
+        $this->assertTrue($this->widget->isInstanced('widget'));
+        $this->widget->remove('widgetName');
+        $this->assertFalse($this->widget->isInstanced('widgetName'));
+    }
 }
