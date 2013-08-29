@@ -637,7 +637,6 @@ namespace Widget
                 );
                 $this->import($option['dir'], $option['namespace'], $option['format'], $option['autoload']);
             }
-            return $this;
         }
 
         /**
