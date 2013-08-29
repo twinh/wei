@@ -96,7 +96,6 @@ namespace Widget;
  * @method   string         env() Returns the environment name
  * @property Error          $error A widget that handles exception and display pretty exception message
  * @method   \Widget\Error  error($fn) Attach a handler to exception error
- * @property Event          $event The event manager to add, remove and trigger events
  * @property Gravatar       $gravatar A widget that generates a Gravatar URL for a specified email address
  * @method   string         gravatar($email, $size = null, $default = null, $rating = null) Generates a Gravatar URL for a specified email address
  * @property Logger         $logger A simple logger widget, which is base on the Monolog

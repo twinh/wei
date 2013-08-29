@@ -4,7 +4,7 @@ Changelog
 ## 0.9.5 (WIP)
 * Added `getLastSql` method for db widget
 * Renamed base class from AbstractWidget to Base
-* Removed server, post, query, header, twig, smarty, dbal, entityManager widgets
+* Removed server, post, query, header, twig, smarty, dbal, entityManager, event widgets
 * Added new `config` widget, ref #128
 * Changed cache widgets' `inc` and `dec` methods to `incr` and `decr`
 * Merged `map` widget into `config` widget, refs #131

@@ -117,7 +117,7 @@ class Call extends Base
     protected $disableSslVerification = false;
 
     /**
-     * An event triggered after prepared the data and before the process the request
+     * An callback triggered after prepared the data and before the process the request
      *
      * ```php
      * $widget->call(array(
@@ -132,7 +132,7 @@ class Call extends Base
     protected $beforeSend;
 
     /**
-     * An event triggered after the request is called success
+     * An callback triggered after the request is called success
      *
      * ```php
      * $widget->call(array(
@@ -147,7 +147,7 @@ class Call extends Base
     protected $success;
 
     /**
-     * An event triggered when the request fails
+     * An callback triggered when the request fails
      *
      * The `$textStatus` could be `curl`, `http`, and `parser`
      *
@@ -164,7 +164,7 @@ class Call extends Base
     protected $error;
 
     /**
-     * An event triggered when finishes (after `success` and `error` callbacks are executed)
+     * An callback triggered when finishes (after `success` and `error` callbacks are executed)
      *
      * ```php
      * $widget->call(array(
@@ -286,7 +286,7 @@ class Call extends Base
     }
 
     /**
-     * Execute the request, parse the response data and trigger relative events
+     * Execute the request, parse the response data and trigger relative callbacks
      */
     public function execute()
     {
@@ -777,7 +777,7 @@ class Call extends Base
     }
 
     /**
-     * Set callback for success event
+     * Set success callback
      *
      * @param \Closure $fn
      * @return Call
@@ -789,7 +789,7 @@ class Call extends Base
     }
 
     /**
-     * Set callback for error event
+     * Set error callback
      *
      * @param \Closure $fn
      * @return Call
@@ -801,7 +801,7 @@ class Call extends Base
     }
 
     /**
-     * Set callback for complete event
+     * Set complete callback
      *
      * @param \Closure $fn
      * @return Call

@@ -147,7 +147,6 @@ API参考目录
 * [config](api/config.md) - 配置信息管理
 * [env](api/env.md) - 环境检测及根据不同环境加载不同的配置文件
 * [error](api/error.md) - 提供简洁友好的错误界面
-* [event](api/event.md) - 事件管理器,支持绑定,触发,移除事件和命名空间等特性
 * [gravatar](api/gravatar.md) - 根据邮箱地址生成自定义大小的Gravatar头像
 * [logger](api/logger.md) - 记录日志
 * [pinyin](api/pinyin.md) - 将中文转换为拼音字母
