@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class In extends AbstractValidator
+class In extends BaseValidator
 {
     protected $notInMessage = '%name% must be in %array%';
 

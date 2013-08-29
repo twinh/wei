@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class FieldExists extends AbstractValidator
+class FieldExists extends BaseValidator
 {
     protected $tooFewMessage = '%name% must contain at least %min% item(s)';
 

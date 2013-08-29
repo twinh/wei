@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Equals extends AbstractValidator
+class Equals extends BaseValidator
 {
     protected $notEqualsMessage = '%name% must be equals %equals%';
 

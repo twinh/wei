@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class IdCardCn extends AbstractValidator
+class IdCardCn extends BaseValidator
 {
     protected $invalidMessage = '%name% must be valid Chinese identity card';
 

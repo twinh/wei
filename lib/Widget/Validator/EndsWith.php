@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class EndsWith extends AbstractValidator
+class EndsWith extends BaseValidator
 {
     protected $notFoundMessage = '%name% must end with "%findMe%"';
 

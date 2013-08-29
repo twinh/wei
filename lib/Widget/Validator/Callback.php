@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Callback extends AbstractValidator
+class Callback extends BaseValidator
 {
     protected $invalidMessage = '%name% is not valid';
 

@@ -14,7 +14,7 @@ namespace Widget\Validator;
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    \Widget\Is $is The validator manager
  */
-class NoneOf extends AbstractGroupValidator
+class NoneOf extends BaseGroupValidator
 {
     protected $invalidMessage = '%name% must be passed by all of these rules';
 

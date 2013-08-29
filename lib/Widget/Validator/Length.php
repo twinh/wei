@@ -14,7 +14,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Length extends AbstractLengthValidator
+class Length extends BaseLengthValidator
 {
     protected $lengthMessage = '%name% must have a length of %length%';
 

@@ -17,7 +17,7 @@ use Widget\Base;
  * @method      string t(string $message, array $parameters = array()) Translates a message
  * @property    \Widget\T $t The translator widget
  */
-abstract class AbstractValidator extends Base
+abstract class BaseValidator extends Base
 {
     /**
      * The message added when the input required a stringify value
@@ -131,7 +131,7 @@ abstract class AbstractValidator extends Base
      *
      * @param string|array $name The name of property
      * @param mixed $value The value of property
-     * @return AbstractValidator
+     * @return BaseValidator
      * @internal This method should be use to set __invoke arguments only
      */
     protected function storeOption($name, $value = null)
@@ -237,7 +237,7 @@ abstract class AbstractValidator extends Base
      * Sets the specified messages
      *
      * @param array $messages
-     * @return AbstractValidator
+     * @return BaseValidator
      */
     public function setMessages(array $messages)
     {
@@ -261,7 +261,7 @@ abstract class AbstractValidator extends Base
      * Sets message name
      *
      * @param string $name
-     * @return AbstractValidator
+     * @return BaseValidator
      */
     public function setName($name)
     {

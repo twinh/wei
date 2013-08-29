@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class File extends AbstractValidator
+class File extends BaseValidator
 {
     protected $notFoundMessage = '%name% is not found or not readable';
 

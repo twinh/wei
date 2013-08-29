@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Null extends AbstractValidator
+class Null extends BaseValidator
 {
     protected $notNullMessage = '%name% must be null';
 

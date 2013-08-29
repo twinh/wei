@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Exists extends AbstractValidator
+class Exists extends BaseValidator
 {
     protected $notFoundMessage = '%name% must be an existing file or directory';
 

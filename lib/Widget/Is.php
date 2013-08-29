@@ -64,7 +64,7 @@ class Is extends Base
     }
 
     /**
-     * @param string|Validator\AbstractValidator|int $rule
+     * @param string|Validator\BaseValidator|int $rule
      * @param array|null $input
      * @param mixed $options
      * @param null &$validator
@@ -82,7 +82,7 @@ class Is extends Base
             }
         }
 
-        if ($rule instanceof Validator\AbstractValidator) {
+        if ($rule instanceof Validator\BaseValidator) {
             $validator = $rule;
             return $rule($input);
         }
@@ -167,7 +167,7 @@ class Is extends Base
      *
      * @param string $rule The name of rule validator
      * @param array $options The property options for rule validator
-     * @return Validator\AbstractValidator
+     * @return Validator\BaseValidator
      * @throws \InvalidArgumentException When validator not found
      */
     public function createRuleValidator($rule, array $options = array())

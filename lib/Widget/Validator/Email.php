@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Email extends AbstractValidator
+class Email extends BaseValidator
 {
     protected $formatMessage = '%name% must be valid email address';
 

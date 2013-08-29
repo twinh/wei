@@ -14,7 +14,7 @@ namespace Widget\Validator;
  * @author      Twin Huang <twinhuang@qq.com>
  * @method      \Doctrine\DBAL\Connection db() The Doctrine DBAL connection object
  */
-class RecordExists extends AbstractValidator
+class RecordExists extends BaseValidator
 {
     /**
      * The message added when query return empty result

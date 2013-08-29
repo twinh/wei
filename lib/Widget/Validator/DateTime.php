@@ -15,7 +15,7 @@ use DateTime as Dt;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class DateTime extends AbstractValidator
+class DateTime extends BaseValidator
 {
     /**
      * Message occurred when thrown "Failed to parse time string" exception

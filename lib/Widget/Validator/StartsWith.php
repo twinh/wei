@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class StartsWith extends AbstractValidator
+class StartsWith extends BaseValidator
 {
     protected $notFoundMessage = '%name% must start with "%findMe%"';
 

@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Blank extends AbstractValidator
+class Blank extends BaseValidator
 {
     protected $blankMessage = '%name% must be blank';
 

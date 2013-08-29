@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Url extends AbstractValidator
+class Url extends BaseValidator
 {
     protected $invalidMessage = '%name% must be valid URL';
 

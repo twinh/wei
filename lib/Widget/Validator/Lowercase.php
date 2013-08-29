@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Lowercase extends AbstractValidator
+class Lowercase extends BaseValidator
 {
     protected $invalidMessage = '%name% must be lowercase';
 

@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class MaxLength extends AbstractLengthValidator
+class MaxLength extends BaseLengthValidator
 {
     protected $tooLongMessage = '%name% must have a length lower than %max%';
 

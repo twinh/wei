@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Required extends AbstractValidator
+class Required extends BaseValidator
 {
     protected $requiredMessage = '%name% is required';
 

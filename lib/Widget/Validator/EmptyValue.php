@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class EmptyValue extends AbstractValidator
+class EmptyValue extends BaseValidator
 {
     protected $emptyMessage = '%name% must be empty';
 

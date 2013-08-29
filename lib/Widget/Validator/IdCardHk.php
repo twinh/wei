@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class IdCardHk extends AbstractValidator
+class IdCardHk extends BaseValidator
 {
     protected $invalidMessage = '%name% must be valid Hong Kong identity card';
 

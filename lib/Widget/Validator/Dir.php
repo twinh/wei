@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Dir extends AbstractValidator
+class Dir extends BaseValidator
 {
     protected $notFoundMessage = '%name% must be an existing directory';
 

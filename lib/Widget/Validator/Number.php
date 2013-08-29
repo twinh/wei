@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Number extends AbstractValidator
+class Number extends BaseValidator
 {
     protected $notNumberMessage = '%name% must be valid number';
 

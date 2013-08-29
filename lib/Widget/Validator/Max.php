@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Max extends AbstractValidator
+class Max extends BaseValidator
 {
     protected $maxMessage = '%name% must be less or equal than %max%';
 

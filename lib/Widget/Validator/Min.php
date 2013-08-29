@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Min extends AbstractValidator
+class Min extends BaseValidator
 {
     protected $minMessage = '%name% must be greater or equal than %min%';
 

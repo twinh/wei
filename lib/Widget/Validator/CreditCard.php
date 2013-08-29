@@ -16,7 +16,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class CreditCard extends AbstractValidator
+class CreditCard extends BaseValidator
 {
     protected $invalidMessage = '%name% must be valid credit card number';
 

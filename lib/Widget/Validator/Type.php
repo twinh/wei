@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Type extends AbstractValidator
+class Type extends BaseValidator
 {
     protected $typeMessage = '%name% must be %typeName%';
 

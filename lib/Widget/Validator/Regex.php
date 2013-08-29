@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Regex extends AbstractValidator
+class Regex extends BaseValidator
 {
     protected $patternMessage = '%name% must match against pattern "%pattern%"';
 

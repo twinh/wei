@@ -14,7 +14,7 @@ namespace Widget\Validator;
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Is $is The validator manager
  */
-class All extends AbstractValidator
+class All extends BaseValidator
 {
     protected $notArrayMessage = '%name% must be of type array';
 

@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Uppercase extends AbstractValidator
+class Uppercase extends BaseValidator
 {
     protected $invalidMessage = '%name% must be uppercase';
 

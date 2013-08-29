@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Between extends AbstractValidator
+class Between extends BaseValidator
 {
     protected $betweenMessage = '%name% must between %min% and %max%';
 

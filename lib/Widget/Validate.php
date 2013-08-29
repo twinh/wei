@@ -8,7 +8,7 @@
 
 namespace Widget;
 
-use Widget\Validator\AbstractValidator;
+use Widget\Validator\BaseValidator;
 
 /**
  * The validator widget
@@ -134,7 +134,7 @@ class Validate extends Base
     /**
      * The rule validator instances
      *
-     * @var array<Validator\AbstractValidator>
+     * @var array<Validator\BaseValidator>
      */
     protected $ruleValidators = array();
 
@@ -158,7 +158,7 @@ class Validate extends Base
      *
      * @param array $options The options for validation
      * @return bool Whether pass the validation or not
-     * @throws \InvalidArgumentException  When validation rule is not array, string or instance of AbstractValidator
+     * @throws \InvalidArgumentException  When validation rule is not array, string or instance of BaseValidator
      */
     public function valid($options = array())
     {
@@ -181,7 +181,7 @@ class Validate extends Base
              */
             if (is_string($rules)) {
                 $rules = array($rules => true);
-            } elseif ($rules instanceof AbstractValidator) {
+            } elseif ($rules instanceof BaseValidator) {
                 $rules = array($rules);
             } elseif (!is_array($rules)) {
                 throw new \InvalidArgumentException(sprintf(
@@ -205,7 +205,7 @@ class Validate extends Base
                 $props = $this->prepareProps($field, $rule);
 
                 // The current rule validation result
-                /* @var $validator Validator\AbstractValidator */
+                /* @var $validator Validator\BaseValidator */
                 $validator = null;
                 $result = $this->is->validateOne($rule, $data, $params, $validator, $props);
 
@@ -676,7 +676,7 @@ class Validate extends Base
      *
      * @param string $field
      * @param string $rule
-     * @return Validator\AbstractValidator
+     * @return Validator\BaseValidator
      */
     public function getRuleValidator($field, $rule)
     {

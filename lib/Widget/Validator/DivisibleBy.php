@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class DivisibleBy extends AbstractValidator
+class DivisibleBy extends BaseValidator
 {
     protected $notDivisibleMessage = '%name% must be divisible by %divisor%';
 

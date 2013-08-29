@@ -14,7 +14,7 @@ namespace Widget\Validator;
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    \Widget\Is $is The validator manager
  */
-class SomeOf extends AbstractGroupValidator
+class SomeOf extends BaseGroupValidator
 {
     protected $atLeastMessage = '%name% must be passed by at least %left% of %count% rules';
 

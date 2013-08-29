@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Decimal extends AbstractValidator
+class Decimal extends BaseValidator
 {
     protected $invalidMessage = '%name% must be decimal';
 

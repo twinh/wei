@@ -8,12 +8,12 @@
 
 namespace Widget\Validator;
 
-abstract class AbstractGroupValidator extends AbstractValidator
+abstract class BaseGroupValidator extends BaseValidator
 {
     /**
      * The invalid validators
      *
-     * @var array<AbstractValidator>
+     * @var array<BaseValidator>
      */
     protected $validators = array();
 
