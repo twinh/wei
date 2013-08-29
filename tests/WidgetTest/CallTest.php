@@ -650,6 +650,47 @@ class CallTest extends TestCase
         $this->assertInstanceOf('\ErrorException', $call->getErrorException());
     }
 
+    public function testGetMethod()
+    {
+        $call = new \Widget\Call(array(
+            'widget' => $this->widget,
+            'method' => 'GET',
+        ));
+        $this->assertEquals('GET', $call->getMethod());
+
+        $call = new \Widget\Call(array(
+            'widget' => $this->widget,
+            'method' => 'test',
+        ));
+        $this->assertEquals('TEST', $call->getMethod());
+    }
+
+    public function testGetIp()
+    {
+        $call = new \Widget\Call(array(
+            'widget' => $this->widget,
+            'ip' => '8.8.8.8'
+        ));
+        $this->assertEquals('8.8.8.8', $call->getIp());
+    }
+
+    public function testGetData()
+    {
+        $call = new \Widget\Call(array(
+            'widget' => $this->widget,
+            'data' => array(
+                'key' => 'value'
+            )
+        ));
+        $this->assertEquals(array('key' => 'value'), $call->getData());
+
+        $call = new \Widget\Call(array(
+            'widget' => $this->widget,
+            'data' => 'string'
+        ));
+        $this->assertEquals('string', $call->getData());
+    }
+
     public function assertCalledEvents($events)
     {
         foreach ((array)$events as $event) {
