@@ -195,15 +195,36 @@ widget(array(
 
 ### 选项
 
-名称        | 类型   | 默认值        | 说明
-------------|--------|---------------|------
-debug       | bool   | true          | 是否启用调试模式
-inis        | array  | 无            | PHP的ini配置选项
-autoload    | bool   | true          | 是否启用自动加载
-autoloadMap | array  | 无            | 自动加载的命名空间和路径地址
-aliases     | array  | 无            | 微件别名列表
-import      | array  | 无            | 导入指定目录下的微件类
-preload     | array  | array('is')   | 预加载的微件列表
+名称            | 类型     | 默认值        | 说明
+----------------|----------|---------------|------
+debug           | bool     | true          | 是否启用调试模式
+inis            | array    | 无            | PHP的ini配置选项
+autoload        | bool     | true          | 是否启用自动加载
+autoloadMap     | array    | 无            | 自动加载的命名空间和路径地址
+aliases         | array    | 无            | 微件别名列表
+import          | array    | 无            | 导入指定目录下的微件类
+preload         | array    | array('is')   | 预加载的微件列表
+beforeConstruct | callbale | 无            | 每个微件初始化前的回调
+afterConstruct  | callbale | 无            | 每个微件初始化后的回调
+
+### 回调
+
+#### beforeConstruct($widget, $full, $name)
+
+名称        | 类型          | 说明
+------------|---------------|------
+$widget     | Widget\Widget | 微件容器对象
+$full       | string        | 完整的微件名称,包含`.`连接符,如`db`,`user.db` 
+$name       | string        | 微件名称,不包含`.`连接符,如`db`,`request`
+
+#### afterConstruct($widget, $full, $name, $object)
+
+名称        | 类型          | 说明
+------------|---------------|------
+$widget     | Widget\Widget | 微件容器对象
+$full       | string        | 完整的微件名称,包含`.`连接符,如`db`,`user.db` 
+$name       | string        | 微件名称,不包含`.`连接符,如`db`,`request`
+$object     | Widget\Base   | 当前初始化的微件
 
 ### 方法
 
