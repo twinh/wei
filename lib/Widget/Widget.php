@@ -82,12 +82,18 @@ namespace Widget
          * Format:
          * array(
          *     array(
-         *         'dir' => 'lib/Widget/Validator'
-         *         'namespace' => 'Widget\Validator'
+         *         'dir' => 'lib/Widget/Validator',
+         *         'namespace' => 'Widget\Validator',
          *         'format' => 'is%s',
          *         'autoload' => false
+         *     ),
+         *     array(
+         *         'dir' => 'src/MyProject/Widget',
+         *         'namespace' => 'MyProject\Widget',
+         *         'format' => '%s',
+         *         'autoload' => true
          *     )
-         * )
+         * );
          * @var array
          */
         protected $import = array();
