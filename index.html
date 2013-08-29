@@ -9948,19 +9948,20 @@
 
 <h3>使用Session存储验证码,并校验请求的验证码是否正确</h3>
 
-<p>验证码页面
-`<code>php
-widget()-&gt;session('verfiyCode', 'WIDG');
-</code></p>
+<p>验证码页面</p>
 
-<p>校验页面
-<code>php
-if (widget()-&gt;session('verfiyCode') == widget()-&gt;request('verfiyCode')) {
-    echo '验证码正确';
-} else {
-    echo '验证码错误';
-}
-</code></p>
+<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">session</span><span class="p">(</span><span class="s1">'verfiyCode'</span><span class="p">,</span> <span class="s1">'WIDG'</span><span class="p">);</span>
+<span class="sb">``</span>
+
+<span class="err">校验页面</span>
+
+<span class="sb">``</span><span class="err">`</span><span class="nx">php</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">session</span><span class="p">(</span><span class="s1">'verfiyCode'</span><span class="p">)</span> <span class="o">==</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">'verfiyCode'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'验证码正确'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'验证码错误'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <h2>调用方式</h2>
 
