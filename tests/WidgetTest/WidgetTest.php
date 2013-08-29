@@ -433,7 +433,12 @@ class WidgetTest extends TestCase
 
     public function testWidgetFunction()
     {
-        $this->assertSame(Widget::create(), widget());
+        $this->assertSame($this->widget, widget());
+    }
+
+    public function testWeiFunction()
+    {
+        $this->assertSame($this->widget, wei());
     }
 
     public function testGetSelf()
