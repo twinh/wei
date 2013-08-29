@@ -114,7 +114,6 @@ abstract class BaseValidator extends Base
     {
         // Clean previous status
         $this->reset();
-
         return $this->negative xor $this->doValidate($input);
     }
 
@@ -131,17 +130,16 @@ abstract class BaseValidator extends Base
      *
      * @param string|array $name The name of property
      * @param mixed $value The value of property
-     * @return BaseValidator
      * @internal This method should be use to set __invoke arguments only
      */
     protected function storeOption($name, $value = null)
     {
-        // handle array
+        // Handle array
         if (is_array($name)) {
             foreach ($name as $key => $value) {
                 $this->storeOption($key, $value);
             }
-            return $this;
+            return;
         }
 
         if (property_exists($this, $name)) {
@@ -150,10 +148,7 @@ abstract class BaseValidator extends Base
             }
             $this->store[count($this->store) - 1][$name] = $value;
         }
-
         $this->setOption($name, $value);
-
-        return $this;
     }
 
     /**
@@ -266,7 +261,6 @@ abstract class BaseValidator extends Base
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
 
