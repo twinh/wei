@@ -27,7 +27,8 @@ class EndsWithTest extends TestCase
             array('ABC', 'c', false),
             array('abc', '', false),
             array('abc', array('C', 'B', 'A'), false),
-            array('hello word', array('wo', 'word'), true)
+            array('hello word', array('wo', 'word'), true),
+            array(123, 3)
         );
     }
 
@@ -36,7 +37,8 @@ class EndsWithTest extends TestCase
         return array(
             array('abc', 'b', false),
             array('ABC', 'c', true),
-            array('ABC', array('a', 'b', 'c'), true)
+            array('ABC', array('a', 'b', 'c'), true),
+            array(123, 1)
         );
     }
 }

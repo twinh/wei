@@ -44,9 +44,9 @@ class StartsWith extends BaseValidator
             return false;
         }
 
-        if (is_string($this->findMe)) {
+        if (is_scalar($this->findMe)) {
             $fn = $this->case ? 'strpos' : 'stripos';
-            if (0 !== $fn($input, $this->findMe)) {
+            if (0 !== $fn($input, (string)$this->findMe)) {
                 $this->addError('notFound');
                 return false;
             }

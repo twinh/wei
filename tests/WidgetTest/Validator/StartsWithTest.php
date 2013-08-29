@@ -27,7 +27,8 @@ class StartsWithTest extends TestCase
             array('ABC', 'A', false),
             array('abc', '', false),
             array('abc', array('A', 'B', 'C'), false),
-            array('hello word', array('hel', 'hell'), false)
+            array('hello word', array('hel', 'hell'), false),
+            array(123, 1),
         );
     }
 
@@ -37,6 +38,7 @@ class StartsWithTest extends TestCase
             array('abc', 'b', false),
             array('ABC', 'a', true),
             array('abc', array('A', 'B', 'C'), true),
+            array(123, 3)
         );
     }
 }

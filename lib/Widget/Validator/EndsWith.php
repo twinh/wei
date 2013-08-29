@@ -47,7 +47,7 @@ class EndsWith extends BaseValidator
         if (is_scalar($this->findMe)) {
             $pos = strlen($input) - strlen($this->findMe);
             $fn = $this->case ? 'strrpos' : 'strripos';
-            if ($pos !== $fn($input, $this->findMe)) {
+            if ($pos !== $fn($input, (string)$this->findMe)) {
                 $this->addError('notFound');
                 return false;
             }
