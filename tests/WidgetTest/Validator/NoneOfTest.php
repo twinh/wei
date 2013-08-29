@@ -13,7 +13,7 @@ class NoneOfTest extends TestCase
             )
         )));
     }
-    
+
     public function testNotNoneOf()
     {
         $this->assertFalse($this->isNoneOf('10000@qq.com', array(
@@ -23,17 +23,32 @@ class NoneOfTest extends TestCase
             )
         )));
     }
-    
+
     public function testGetMessages()
     {
         $noneOf = $this->is->createRuleValidator('noneOf');
-        
+
         $noneOf('abc', array(
             'equals' => 'abc',
             'alnum' => true
         ));
-        
+
         // Returns multi messages as default
         $this->assertCount(2, $noneOf->getMessages());
+    }
+
+    public function testIntAsFindMeOption()
+    {
+        $result = $this->isNoneOf('game@', array(
+            'email' => true,
+            'endsWith' => 1233
+        ));
+        $this->assertTrue($result);
+
+        $result = $this->isNoneOf('game@', array(
+            'email' => true,
+            'endsWith' => "123"
+        ));
+        $this->assertTrue($result);
     }
 }
