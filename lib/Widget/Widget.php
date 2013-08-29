@@ -97,14 +97,14 @@ namespace Widget
          *
          * @var callable
          */
-        protected $construct;
+        protected $beforeConstruct;
 
         /**
          * The callback executes *after* widget constructed
          *
          * @var callable
          */
-        protected $constructed;
+        protected $afterConstruct;
 
         /**
          * The widgets that will be instanced after widget container constructed
@@ -366,16 +366,16 @@ namespace Widget
             // Get the widget class and instance
             $class = $this->getClass($name);
             if (class_exists($class)) {
-                // Trigger the construct callback
-                $this->construct && call_user_func($this->construct, $name, $full);
+                // Trigger the before construct callback
+                $this->beforeConstruct && call_user_func($this->beforeConstruct, $name, $full);
 
                 // Load the widget configuration and make sure "widget" option at first
                 $options = array('widget' => $this) + $options + (array)$this->getConfig($full);
 
                 $this->widgets[$full] = new $class($options);
 
-                // Trigger the constructed callback
-                $this->constructed && call_user_func($this->constructed, $this->widgets[$full], $name, $full);
+                // Trigger the after construct callback
+                $this->afterConstruct && call_user_func($this->afterConstruct, $this->widgets[$full], $name, $full);
 
                 return $this->widgets[$full];
             }
