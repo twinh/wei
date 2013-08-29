@@ -1,11 +1,6 @@
 <?php
 
 return array(
-    'widget' => array(
-        'inis' => array(
-            'date.timezone' => 'UTC',
-        )
-    ),
     'mysql.db' => array(
         'driver'    => 'mysql',
         'user'      => getenv('MYSQL_USER'),

@@ -14,7 +14,8 @@ $widget = widget(array(
         // Display all PHP error message
         'inis' => array(
             'error_reporting' => -1,
-            'display_errors' => true
+            'display_errors' => true,
+            'date.timezone' => 'UTC',
         ),
         // Enable widget debug option
         'debug' => true,
