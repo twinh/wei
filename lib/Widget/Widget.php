@@ -620,12 +620,12 @@ namespace Widget
         }
 
         /**
-         * Set import
+         * Set import widgets
          *
          * @param array $import
          * @return Widget
          */
-        public function setImport(array $import = array())
+        protected function setImport(array $import = array())
         {
             $this->import = $import + $this->import;
             foreach ($import as $option) {

@@ -343,17 +343,22 @@ class WidgetTest extends TestCase
 
     public function testImport()
     {
-        $this->widget->setImport(array(
-            array(
-                'dir' => __DIR__ . '/Fixtures/Import',
-                'namespace' => '\WidgetTest\Fixtures\Import',
-                'format' => 'test%s',
-                'autoload' => false
+        $widget = new Widget(array(
+            'widget' => array(
+                'autoload' => false,
+                'import' => array(
+                    array(
+                        'dir' => __DIR__ . '/Fixtures/Import',
+                        'namespace' => '\WidgetTest\Fixtures\Import',
+                        'format' => 'test%s',
+                        'autoload' => true
+                    )
+                )
             )
         ));
 
-        $this->assertEquals('\WidgetTest\Fixtures\Import\Widget1', $this->widget->has('testWidget1'));
-        $this->assertEquals('\WidgetTest\Fixtures\Import\Widget2', $this->widget->has('testWidget2'));
+        $this->assertEquals('\WidgetTest\Fixtures\Import\Widget1', $widget->has('testWidget1'));
+        $this->assertEquals('\WidgetTest\Fixtures\Import\Widget2', $widget->has('testWidget2'));
         $this->assertFalse($this->widget->has('testWidget3'));
     }
 
@@ -368,16 +373,21 @@ class WidgetTest extends TestCase
 
     public function testImportWithAutoload()
     {
-        $this->widget->setImport(array(
-            array(
-                'dir' => __DIR__ . '/Fixtures/Import',
-                'namespace' => '\WidgetTest\Fixtures\Import',
-                'format' => 'test%s',
-                'autoload' => true
+        $widget = new Widget(array(
+            'widget' => array(
+                'autoload' => false,
+                'import' => array(
+                    array(
+                        'dir' => __DIR__ . '/Fixtures/Import',
+                        'namespace' => '\WidgetTest\Fixtures\Import',
+                        'format' => 'test%s',
+                        'autoload' => true
+                    )
+                )
             )
         ));
 
-        $map = $this->widget->getOption('autoloadMap');
+        $map = $widget->getOption('autoloadMap');
         $this->assertArrayHasKey('\WidgetTest\Fixtures\Import', $map);
     }
 
