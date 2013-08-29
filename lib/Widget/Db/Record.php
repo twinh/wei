@@ -275,4 +275,26 @@ class Record extends Base
     {
         return $this->isModified;
     }
+
+    /**
+     * Sets the primary key column
+     *
+     * @param string $primaryKey
+     * @return $this
+     */
+    public function setPrimaryKey($primaryKey)
+    {
+        $this->primaryKey = $primaryKey;
+        return $this;
+    }
+
+    /**
+     * Returns the primary key column
+     *
+     * @return string
+     */
+    public function getPrimaryKey()
+    {
+        return $this->primaryKey;
+    }
 }
