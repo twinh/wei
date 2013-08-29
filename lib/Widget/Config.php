@@ -48,4 +48,25 @@ class Config extends Base
         }
         return $html;
     }
+
+    /**
+     * Adds callback to widget configuration
+     *
+     * @param string $name
+     * @param callable $fn
+     * @return $this
+     */
+    public function add($name, $fn)
+    {
+        $prevFn = $this->widget->getConfig($name);
+        $this->widget->setConfig($name, !$prevFn ? $fn : function() use($fn, $prevFn) {
+            $args = func_get_args();
+            if (false === call_user_func_array($prevFn, $args)) {
+                return false;
+            } else {
+                return call_user_func_array($fn, $args);
+            }
+        });
+        return $this;
+    }
 }

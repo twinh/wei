@@ -33,7 +33,7 @@ namespace Widget;
  * @property Couchbase  $couchbase A cache widget base on Couchbase
  * @method   mixed      couchbase($key, $value = null, $expire = 0) Retrieve or store an item by Couchbase
  * @property Redis      $redis A cache widget that stores data in Redis
- * @method   mixed      redis($key, $value = null, $expire = 0) Retrieve or store an item by Redis
+ * @method   mixed      redis($key = null, $value = null, $expire = 0) Retrieve or store an item by Redis
  * @property Bicache    $bicache A two-level cache widget
  * @method   mixed      bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
  *

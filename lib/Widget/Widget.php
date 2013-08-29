@@ -367,7 +367,7 @@ namespace Widget
             $class = $this->getClass($name);
             if (class_exists($class)) {
                 // Trigger the before construct callback
-                $this->beforeConstruct && call_user_func($this->beforeConstruct, $name, $full);
+                $this->beforeConstruct && call_user_func($this->beforeConstruct, $this, $full, $name);
 
                 // Load the widget configuration and make sure "widget" option at first
                 $options = array('widget' => $this) + $options + (array)$this->getConfig($full);
@@ -375,7 +375,7 @@ namespace Widget
                 $this->widgets[$full] = new $class($options);
 
                 // Trigger the after construct callback
-                $this->afterConstruct && call_user_func($this->afterConstruct, $this->widgets[$full], $name, $full);
+                $this->afterConstruct && call_user_func($this->afterConstruct, $this, $full, $name, $this->widgets[$full]);
 
                 return $this->widgets[$full];
             }

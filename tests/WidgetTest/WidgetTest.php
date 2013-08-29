@@ -466,4 +466,29 @@ class WidgetTest extends TestCase
         $this->widget->remove('widgetName');
         $this->assertFalse($this->widget->isInstanced('widgetName'));
     }
+
+    public function testConstructCallback()
+    {
+        $beforeConstruct = $afterConstruct = array();
+        $widget = new Widget(array(
+            'widget' => array(
+                'autoload' => false,
+                'beforeConstruct' => function($widget, $fullName, $name) use(&$beforeConstruct) {
+                    $beforeConstruct[] = $fullName;
+                },
+                'afterConstruct' => function($widget, $fullName, $name, $object) use(&$afterConstruct) {
+                    $afterConstruct[] = $fullName;
+                }
+            )
+        ));
+
+        // Instance widgets
+        $widget->request;
+        $widget->{'sub.request'};
+
+        $this->assertContains('request', $beforeConstruct);
+        $this->assertContains('sub.request', $afterConstruct);
+        $this->assertContains('request', $beforeConstruct);
+        $this->assertContains('sub.request', $afterConstruct);
+    }
 }
