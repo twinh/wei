@@ -9,7 +9,7 @@ isCharLength
 ### 检查"微框架"的长度是否为3
 
 ```php
-if (widget()->isLength('微框架', 3)) {
+if (widget()->isCharLength('微框架', 3)) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -25,7 +25,7 @@ if (widget()->isLength('微框架', 3)) {
 ### 检查"微框架"的长度是否在3到6之间
 
 ```php
-if (widget()->isLength('abc', 3, 6)) {
+if (widget()->isCharLength('微框架', 3, 6)) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -61,13 +61,10 @@ charset           | string  | UTF-8   | 验证数据的字符集
 | max               | int     | 无                                 | 限制长度的最大值     |
 | notDetectdMessage | string  | 无法检测到%name%的长度             | -                    |
 | notInMessage      | string  | %name%的长度必须在%min%和%max%之间 | -                    |
-| notInItemMessage  | string  | %name%必须包含%min%到%max%项       | -                    |
-
-    注意: 当检查的数据是字符串时,返回的错误信息是`notIn`,当数据是数组时,返回的是`notInItem`
-
 
 #### isCharLength($input, $length)
-检查数据的长度是否为指定的数值
+
+检查数据的字符数是否为指定的数值
 
 ##### 选项
 
@@ -76,6 +73,3 @@ charset           | string  | UTF-8   | 验证数据的字符集
 | length            | int     | 无                                 | 指定长度的值         |
 | notDetectdMessage | string  | 无法检测到%name%的长度             | -                    |
 | lengthMessage     | string  | %name%的长度必须是%length%         | -                    |
-| lengthItemMessage | string  | %name%必须包含%length%项           | -                    |
-
-    注意: 当检查的数据是字符串时,返回的错误信息是`length`,当数据是数组时,返回的是`lengthItem`
