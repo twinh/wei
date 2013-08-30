@@ -14,20 +14,17 @@ namespace Widget\Validator;
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    \Widget\Is $is The validator manager
  */
-class NoneOf extends BaseGroupValidator
+class NoneOf extends SomeOf
 {
     protected $invalidMessage = '%name% must be passed by all of these rules';
-
-    protected $rules = array();
-
-    protected $validators = array();
 
     protected $combineMessages = false;
 
     /**
      * {@inheritdoc}
+     * @param void $__ Avoid compatible error
      */
-    public function __invoke($input, array $rules = array())
+    public function __invoke($input, array $rules = array(), $__ = null)
     {
         $rules && $this->storeOption('rules', $rules);
 

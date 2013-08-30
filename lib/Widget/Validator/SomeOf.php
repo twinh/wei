@@ -14,7 +14,7 @@ namespace Widget\Validator;
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    \Widget\Is $is The validator manager
  */
-class SomeOf extends BaseGroupValidator
+class SomeOf extends BaseValidator
 {
     protected $atLeastMessage = '%name% must be passed by at least %left% of %count% rules';
 
@@ -40,6 +40,13 @@ class SomeOf extends BaseGroupValidator
     protected $atLeast;
 
     /**
+     * Whether combine messages into single one or not
+     *
+     * @var bool
+     */
+    protected $combineMessages = true;
+
+    /**
      * The passed rules number, using for message only
      *
      * @var string
@@ -52,6 +59,13 @@ class SomeOf extends BaseGroupValidator
      * @var string
      */
     protected $left;
+
+    /**
+     * The invalid validators
+     *
+     * @var array<BaseValidator>
+     */
+    protected $validators = array();
 
     /**
      * {@inheritdoc}
@@ -93,5 +107,58 @@ class SomeOf extends BaseGroupValidator
         $this->left = $this->atLeast - $passed;
 
         return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function reset()
+    {
+        $this->validators = array();
+        parent::reset();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMessages()
+    {
+        /**
+         * Combines messages into single one
+         *
+         * FROM
+         * array(
+         *   'atLeast'          => 'atLeast message',
+         *   'validator.rule'   => 'first message',
+         *   'validator.rul2'   => 'second message',
+         *   'validator2.rule'  => 'third message'
+         * )
+         * TO
+         * array(
+         *   'atLeast' => "atLeast message\n"
+         *              . "first message;second message\n"
+         *              . "third message"
+         * )
+         */
+        if ($this->combineMessages) {
+            $messages = parent::getMessages();
+            $key = key($messages);
+
+            foreach ($this->validators as $rule => $validator) {
+                $messages[$rule] = implode(';', $validator->getMessages());
+            }
+
+            return array(
+                $key => implode("\n", $messages)
+            );
+        } else {
+            $messages = array();
+            foreach ($this->validators as $rule => $validator) {
+                foreach ($validator->getMessages() as $option => $message) {
+                    $messages[$rule . '.' . $option] = $message;
+                }
+            }
+            return $messages;
+        }
     }
 }
