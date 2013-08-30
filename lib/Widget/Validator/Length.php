@@ -14,8 +14,10 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Length extends BaseLengthValidator
+class Length extends BaseValidator
 {
+    protected $notDetectedMessage = '%name%\'s length could not be detected';
+
     protected $lengthMessage = '%name% must have a length of %length%';
 
     protected $lengthItemMessage = '%name% must contain %length% item(s)';
@@ -28,7 +30,26 @@ class Length extends BaseLengthValidator
 
     protected $max;
 
+    /**
+     * The required exactly length of input
+     *
+     * @var int
+     */
     protected $length;
+
+    /**
+     * Whether count the string length by characters or bytes
+     *
+     * @var bool
+     */
+    protected $countByChars = false;
+
+    /**
+     * The character encoding
+     *
+     * @var string
+     */
+    protected $charset = 'UTF-8';
 
     /**
      * {@inheritdoc}
@@ -68,5 +89,26 @@ class Length extends BaseLengthValidator
         }
 
         return true;
+    }
+
+    /**
+     * Return the input's length or false when could not detected
+     *
+     * @param string|array|\Countable $input
+     * @return int|false
+     */
+    public function getLength($input)
+    {
+        if (is_scalar($input)) {
+            if ($this->countByChars) {
+                return mb_strlen($input, $this->charset);
+            } else {
+                return strlen($input);
+            }
+        } elseif (is_array($input) || $input instanceof \Countable) {
+            return count($input);
+        } else {
+            return false;
+        }
     }
 }
