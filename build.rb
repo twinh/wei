@@ -14,11 +14,24 @@ def syntax_highlighter(html, lexer = 'php')
 
   doc.search('h1').wrap('<div class="page-header"></div>')
 
+  doc.search('a').each do |link|
+    if link['href'].start_with? "http"
+      link['target'] = '_blank'
+    elsif link['href'].start_with? "../"
+      link['target'] = '_blank'
+      link['href'] = 'https://github.com/twinh/widget/tree/master/docs/zh-CN/api/' + link['href']
+    else
+      url = "#" + link['href']
+      link['href'] = url[0..-4]
+    end
+  end
+
   doc.search('pre').each do |pre|
     code = Pygments.highlight(pre.text.rstrip, :lexer => lexer, :options => {:startinline => true})
     code = code.to_s.gsub('<pre>', '<pre><code class="' + lexer + '">').gsub('</pre>', '</code></pre>')
     pre.replace code
   end
+
   doc.to_s
 end
 

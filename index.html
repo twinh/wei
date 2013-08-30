@@ -308,7 +308,7 @@
 
 <p>微件配置可以通过widget函数的第一个参数来设置,</p>
 
-<p>完整配置请查看<a href="../book/configuration.md">配置</a>章节.</p>
+<p>完整配置请查看<a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/configuration.md" target="_blank">配置</a>章节.</p>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -327,7 +327,7 @@
 
 <h3>设置类自动加载</h3>
 
-<p>Widget支持<a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md">PRS-0</a>风格的类自动加载器.</p>
+<p>Widget支持<a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md" target="_blank">PRS-0</a>风格的类自动加载器.</p>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -377,7 +377,7 @@
 
 <h3>设置PHP ini配置</h3>
 
-<p><a href="http://www.php.net/manual/zh/ini.php">PHP的配置</a>可以通过<code>inis</code>选项来设置.</p>
+<p><a href="http://www.php.net/manual/zh/ini.php" target="_blank">PHP的配置</a>可以通过<code>inis</code>选项来设置.</p>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -950,28 +950,28 @@
 
 <ul>
 <li>
-<a href="apc.md">apc</a> - APC缓存 <em>(推荐)</em>
+<a href="#apc">apc</a> - APC缓存 <em>(推荐)</em>
 </li>
 <li>
-<a href="arrayCache.md">arrayCache</a> - PHP数组缓存</li>
+<a href="#arrayCache">arrayCache</a> - PHP数组缓存</li>
 <li>
-<a href="couchbase.md">couchbase</a> - Couchbase缓存</li>
+<a href="#couchbase">couchbase</a> - Couchbase缓存</li>
 <li>
-<a href="dbCache.md">dbCache</a> - 数据库缓存</li>
+<a href="#dbCache">dbCache</a> - 数据库缓存</li>
 <li>
-<a href="fileCache.md">fileCache</a> - 文件缓存</li>
+<a href="#fileCache">fileCache</a> - 文件缓存</li>
 <li>
-<a href="memcache.md">memcache</a> - Memcachce缓存</li>
+<a href="#memcache">memcache</a> - Memcachce缓存</li>
 <li>
-<a href="memcached.md">memcached</a> - Memcached缓存 <em>(推荐)</em>
+<a href="#memcached">memcached</a> - Memcached缓存 <em>(推荐)</em>
 </li>
 <li>
-<a href="mongoCache.md">mongoCache</a> - MongoDB缓存</li>
+<a href="#mongoCache">mongoCache</a> - MongoDB缓存</li>
 <li>
-<a href="redis.md">redis</a> - Redis缓存 <em>(推荐)</em>
+<a href="#redis">redis</a> - Redis缓存 <em>(推荐)</em>
 </li>
 <li>
-<a href="bicache.md">bicache</a> - 二级缓存</li>
+<a href="#bicache">bicache</a> - 二级缓存</li>
 </ul><h4>特性对比</h4>
 
 <table class="table table-bordered table-striped">
@@ -1349,7 +1349,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">apc</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看"<a href="../book/cache.md">缓存</a>"章节</p>
+<p>更多案例请查看"<a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/cache.md" target="_blank">缓存</a>"章节</p>
 
 <h2>调用方式</h2>
 
@@ -1359,7 +1359,7 @@
 
 <h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
+<p>通用方法请查看<a href="#cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3">cache</a>微件文档</p>
 
 <h3>方法</h3>
 
@@ -1389,7 +1389,7 @@
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">arrayCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看"<a href="../book/cache.md">缓存</a>"章节</p>
+<p>更多案例请查看"<a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/cache.md" target="_blank">缓存</a>"章节</p>
 
 <h2>调用方式</h2>
 
@@ -1399,7 +1399,7 @@
 
 <h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
+<p>通用方法请查看<a href="#cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3">cache</a>微件文档</p>
 
 <h3>方法</h3>
 
@@ -1434,7 +1434,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">bicache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看"<a href="../book/cache.md">缓存</a>"章节</p>
+<p>更多案例请查看"<a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/cache.md" target="_blank">缓存</a>"章节</p>
 
 <h2>调用方式</h2>
 
@@ -1475,7 +1475,7 @@
 </tbody>
 </table><h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
+<p>通用方法请查看<a href="#cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3">cache</a>微件文档</p>
 
 <h3>方法</h3>
 
@@ -1505,7 +1505,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">couchbase</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看"<a href="../book/cache.md">缓存</a>"章节</p>
+<p>更多案例请查看"<a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/cache.md" target="_blank">缓存</a>"章节</p>
 
 <h2>调用方式</h2>
 
@@ -1552,7 +1552,7 @@
 </tbody>
 </table><h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
+<p>通用方法请查看<a href="#cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3">cache</a>微件文档</p>
 
 <h3>方法</h3>
 
@@ -1572,7 +1572,7 @@
 
 <p>设置或获取一项缓存,缓存数据存储于数据库中</p>
 
-<p>dbCache微件依赖于<a href="db.md">db</a>微件</p>
+<p>dbCache微件依赖于<a href="#db">db</a>微件</p>
 
 <h2>案例</h2>
 
@@ -1590,7 +1590,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">dbCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看"<a href="../book/cache.md">缓存</a>"章节</p>
+<p>更多案例请查看"<a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/cache.md" target="_blank">缓存</a>"章节</p>
 
 <h2>调用方式</h2>
 
@@ -1611,7 +1611,7 @@
 </tr></tbody>
 </table><h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
+<p>通用方法请查看<a href="#cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3">cache</a>微件文档</p>
 
 <h3>方法</h3>
 
@@ -1636,7 +1636,7 @@
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">fileCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看"<a href="cache.md#%E6%A1%88%E4%BE%8B">缓存</a>"章节</p>
+<p>更多案例请查看"<a href="#cache.md#%E6%A1%88%E4%BE">缓存</a>"章节</p>
 
 <h2>调用方式</h2>
 
@@ -1657,7 +1657,7 @@
 </tr></tbody>
 </table><h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
+<p>通用方法请查看<a href="#cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3">cache</a>微件文档</p>
 
 <h3>方法</h3>
 
@@ -1697,7 +1697,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">memcache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看"<a href="../book/cache.md">缓存</a>"章节</p>
+<p>更多案例请查看"<a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/cache.md" target="_blank">缓存</a>"章节</p>
 
 <h2>调用方式</h2>
 
@@ -1762,7 +1762,7 @@
 </tbody>
 </table><h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
+<p>通用方法请查看<a href="#cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3">cache</a>微件文档</p>
 
 <h3>方法</h3>
 
@@ -1798,7 +1798,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">memcached</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看"<a href="../book/cache.md">缓存</a>"章节</p>
+<p>更多案例请查看"<a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/cache.md" target="_blank">缓存</a>"章节</p>
 
 <h2>调用方式</h2>
 
@@ -1851,7 +1851,7 @@
 </tbody>
 </table><h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
+<p>通用方法请查看<a href="#cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3">cache</a>微件文档</p>
 
 <h3>方法</h3>
 
@@ -1869,7 +1869,7 @@
   <section id="mongoCache">
   <div class="page-header"><h1>MongoCache</h1></div>
 
-<p>设置或获取一项缓存,缓存数据存储于<a href="http://docs.mongodb.org/ecosystem/drivers/php/">MangoDB</a>中</p>
+<p>设置或获取一项缓存,缓存数据存储于<a href="http://docs.mongodb.org/ecosystem/drivers/php/" target="_blank">MangoDB</a>中</p>
 
 <h2>案例</h2>
 
@@ -1887,7 +1887,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">mongoCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看"<a href="../book/cache.md">缓存</a>"章节</p>
+<p>更多案例请查看"<a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/cache.md" target="_blank">缓存</a>"章节</p>
 
 <h2>调用方式</h2>
 
@@ -1928,7 +1928,7 @@
 </tbody>
 </table><h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
+<p>通用方法请查看<a href="#cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3">cache</a>微件文档</p>
 
 <h3>方法</h3>
 
@@ -1958,7 +1958,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">redis</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看"<a href="../book/cache.md">缓存</a>"章节</p>
+<p>更多案例请查看"<a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/cache.md" target="_blank">缓存</a>"章节</p>
 
 <h2>调用方式</h2>
 
@@ -2017,7 +2017,7 @@
 </tbody>
 </table><h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95">cache</a>微件文档</p>
+<p>通用方法请查看<a href="#cache.md#%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3">cache</a>微件文档</p>
 
 <h3>方法</h3>
 
@@ -2069,7 +2069,7 @@
 <h3>Active Record模式</h3>
 
 <p>Active Record模式是将数据表的每一行映射为一个对象,数据表的字段与对象的属性一一对应.
-完整的介绍请查看维基百科的说明<a href="http://zh.wikipedia.org/wiki/Active_Record">Active Record</a></p>
+完整的介绍请查看维基百科的说明<a href="http://zh.wikipedia.org/wiki/Active_Record" target="_blank">Active Record</a></p>
 
 <h4>创建记录并保存</h4>
 
@@ -2265,7 +2265,7 @@
 
 <p>如果增删查改(CRUD)操作和Active Record模式还不能满足您的需求,你可以尝试使用QueryBuilder来生成更复杂的SQL语句</p>
 
-<p><a href="queryBuilder.md">查看QueryBuilder</a></p>
+<p><a href="#queryBuilder">查看QueryBuilder</a></p>
 
 <h2>调用方式</h2>
 
@@ -3835,7 +3835,7 @@
 <td>参数的类型,使用 PDO::PARAM_* 常量明确地指定参数的类型</td>
 </tr>
 </tbody>
-</table><p>相关链接: <a href="http://php.net/manual/zh/pdostatement.bindvalue.php">http://php.net/manual/zh/pdostatement.bindvalue.php</a></p>
+</table><p>相关链接: <a href="http://php.net/manual/zh/pdostatement.bindvalue.php" target="_blank">http://php.net/manual/zh/pdostatement.bindvalue.php</a></p>
 
 <h4>queryBuilder-&gt;setParameters(array $params, array $types = array())</h4>
 
@@ -3981,11 +3981,11 @@
 
 <p>在PHP中使用cURL来访问受SSL/TLS保护的网站</p>
 
-<p><a href="http://unitstep.net/blog/2009/05/05/using-curl-in-php-to-access-https-ssltls-protected-sites/">http://unitstep.net/blog/2009/05/05/using-curl-in-php-to-access-https-ssltls-protected-sites/</a></p>
+<p><a href="http://unitstep.net/blog/2009/05/05/using-curl-in-php-to-access-https-ssltls-protected-sites/" target="_blank">http://unitstep.net/blog/2009/05/05/using-curl-in-php-to-access-https-ssltls-protected-sites/</a></p>
 
 <p>StackOverflow上关于该问题的讨论和解决方法</p>
 
-<p><a href="http://stackoverflow.com/questions/6400300/php-curl-https-causing-exception-ssl-certificate-problem-verify-that-the-ca-cer">http://stackoverflow.com/questions/6400300/php-curl-https-causing-exception-ssl-certificate-problem-verify-that-the-ca-cer</a></p>
+<p><a href="http://stackoverflow.com/questions/6400300/php-curl-https-causing-exception-ssl-certificate-problem-verify-that-the-ca-cer" target="_blank">http://stackoverflow.com/questions/6400300/php-curl-https-causing-exception-ssl-certificate-problem-verify-that-the-ca-cer</a></p>
 
 <h2>调用方式</h2>
 
@@ -4340,7 +4340,7 @@
 
 <p>检查数组或对象中每一个元素是否能通过指定规则的验证</p>
 
-<p>Widget验证器是参考<a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery Validation</a>
+<p>Widget验证器是参考<a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/" target="_blank">jQuery Validation</a>
 开发的数据验证器,她与<code>jQuery Validation</code>有着很多相似的地方,所以如果你使用过
 <code>jQuery Validation</code>,使用Widget验证器将非常容易上手.</p>
 
@@ -7595,7 +7595,7 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php">date</a>函数的格式说明. </p>
+</table><p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php" target="_blank">date</a>函数的格式说明. </p>
 
 <h3>方法</h3>
 
@@ -7696,7 +7696,7 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php">date</a>函数的格式说明. </p>
+</table><p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php" target="_blank">date</a>函数的格式说明. </p>
 
 <h3>方法</h3>
 
@@ -7797,7 +7797,7 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php">date</a>函数的格式说明. </p>
+</table><p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php" target="_blank">date</a>函数的格式说明. </p>
 
 <h3>方法</h3>
 
@@ -8285,7 +8285,7 @@
 
 <p>检查数据是否为图片,同时还可以检查图片宽度和高度是否在指定的范围内</p>
 
-<p>图片验证器是文件验证器<a href="isFile.md">isFile</a>的子类,其中选项<code>maxSize</code>, <code>minSize</code>, <code>exts</code>,
+<p>图片验证器是文件验证器<a href="#isFile">isFile</a>的子类,其中选项<code>maxSize</code>, <code>minSize</code>, <code>exts</code>,
 <code>excludeExts</code>, <code>mimeTypes</code>, <code>excludeMimeTypes</code>继承自父类.</p>
   </section>
 
@@ -8298,7 +8298,7 @@
 
 <h2>案例</h2>
 
-<h3>检查"<a href="mailto:example@example.com">example@example.com</a>"是否为邮箱地址</h3>
+<h3>检查"<a href="#mailto:example@example.">example@example.com</a>"是否为邮箱地址</h3>
 
 <div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isEmail</span><span class="p">(</span><span class="s1">'example@example.com'</span><span class="p">))</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
@@ -8549,14 +8549,14 @@
 <td>path</td>
 <td>bool</td>
 <td>false</td>
-<td>是否要求URL带有路径,如<a href="http://www.example.com/path/part">http://www.example.com/path/part</a>
+<td>是否要求URL带有路径,如<a href="http://www.example.com/path/part" target="_blank">http://www.example.com/path/part</a>
 </td>
 </tr>
 <tr>
 <td>query</td>
 <td>bool</td>
 <td>false</td>
-<td>是否要求URL带有查询参数,如<a href="http://www.example/?query=string">http://www.example/?query=string</a>
+<td>是否要求URL带有查询参数,如<a href="http://www.example/?query=string" target="_blank">http://www.example/?query=string</a>
 </td>
 </tr>
 <tr>
@@ -10121,7 +10121,7 @@
 </tbody>
 </table><h4>inis选项的值</h4>
 
-<p>所有的配置选项和默认值请查阅 <a href="http://php.net/manual/en/session.configuration.php">http://php.net/manual/en/session.configuration.php</a></p>
+<p>所有的配置选项和默认值请查阅 <a href="http://php.net/manual/en/session.configuration.php" target="_blank">http://php.net/manual/en/session.configuration.php</a></p>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -10175,7 +10175,7 @@
 <h4>session-&gt;setInis(array $inis)</h4>
 
 <p>设置会话相关的ini配置,配置名称会自定加上<code>session.</code>前缀<br>
-详细配置可以查看<a href="http://php.net/manual/en/session.configuration.php">http://php.net/manual/en/session.configuration.php</a></p>
+详细配置可以查看<a href="http://php.net/manual/en/session.configuration.php" target="_blank">http://php.net/manual/en/session.configuration.php</a></p>
   </section>
 
 <!-- api/ua
@@ -10947,7 +10947,7 @@
 <td>wait</td>
 <td>int</td>
 <td>0</td>
-<td>等待跳转的秒数,如果wait为0,使用的是HTTP header跳转,如果不为0,因为HTTP header不支持延迟跳转,所以使用的是HTML <a href="http://en.wikipedia.org/wiki/Meta_refresh">Meta refresh</a>跳转</td>
+<td>等待跳转的秒数,如果wait为0,使用的是HTTP header跳转,如果不为0,因为HTTP header不支持延迟跳转,所以使用的是HTML <a href="http://en.wikipedia.org/wiki/Meta_refresh" target="_blank">Meta refresh</a>跳转</td>
 </tr>
 <tr>
 <td>view</td>
@@ -11036,9 +11036,9 @@
 
 <h2>说明</h2>
 
-<p>Escape微件是基于<a href="https://github.com/zendframework/zf2/tree/master/library/Zend/Escaper">Zend\Escaper</a>组件的字符串安全转义器.
+<p>Escape微件是基于<a href="https://github.com/zendframework/zf2/tree/master/library/Zend/Escaper" target="_blank">Zend\Escaper</a>组件的字符串安全转义器.
 Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可以查看这里
-<a href="http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html">http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html</a></p>
+<a href="http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html" target="_blank">http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html</a></p>
 
 <h2>调用方式</h2>
 
@@ -11724,7 +11724,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <td>dateFormat</td>
 <td>string</td>
 <td>Y-m-d H:i:s</td>
-<td>日志中日期的格式,使用<a href="http://php.net/manual/en/function.date.php">date</a>函数转换</td>
+<td>日志中日期的格式,使用<a href="http://php.net/manual/en/function.date.php" target="_blank">date</a>函数转换</td>
 </tr>
 <tr>
 <td>file</td>
@@ -11791,7 +11791,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <td>必须马上处理的情况,如网站打不开,数据库连不上,这种情况下应该发送短信通知你处理!</td>
 </tr>
 </tbody>
-</table><p>日志等级及说明来自于<a href="https://github.com/Seldaek/monolog">Monolog</a> </p>
+</table><p>日志等级及说明来自于<a href="https://github.com/Seldaek/monolog" target="_blank">Monolog</a> </p>
 
 <p>除了上面之外,还有notice和emergency级别,因不推荐使用,且为避免混淆,不一一详细说明.</p>
 
@@ -11955,7 +11955,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <p>您可以查看monolog的项目主页,了解更多处理器和配置</p>
 
-<p><a href="https://github.com/Seldaek/monolog">https://github.com/Seldaek/monolog</a></p>
+<p><a href="https://github.com/Seldaek/monolog" target="_blank">https://github.com/Seldaek/monolog</a></p>
 
 <h3>方法</h3>
 
@@ -11973,7 +11973,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
   <section id="phpError">
   <div class="page-header"><h1>PHP Error</h1></div>
 
-<p><a href="http://phperror.net/">PHP Error</a>提供了更友好的错误提示信息,完整的语法和代码片段高亮,同时支持Ajax错误提示</p>
+<p><a href="http://phperror.net/" target="_blank">PHP Error</a>提供了更友好的错误提示信息,完整的语法和代码片段高亮,同时支持Ajax错误提示</p>
 
 <h2>案例</h2>
 
@@ -11998,7 +11998,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h3>选项</h3>
 
-<p>参见PHP Error官网文档<a href="https://github.com/JosephLenton/PHP-Error/wiki/Options">https://github.com/JosephLenton/PHP-Error/wiki/Options</a></p>
+<p>参见PHP Error官网文档<a href="https://github.com/JosephLenton/PHP-Error/wiki/Options" target="_blank">https://github.com/JosephLenton/PHP-Error/wiki/Options</a></p>
 
 <h3>方法</h3>
 
