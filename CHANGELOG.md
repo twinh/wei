@@ -10,6 +10,7 @@ Changelog
 * Merged `map` widget into `config` widget, refs #131
 * Chagned log level priorities to adapted with monolog
 * Added formatLog method for logger widget
+* Added `isCharLength` validator
 
 ## 0.9.4 (2013-08-07)
 * Changed cache widgets' `increment` and `decrement` methods to `inc` and `dec`
