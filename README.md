@@ -165,6 +165,7 @@ $widget->isUppercase($input);
 // Length and size
 $widget->isBetween($input);
 $widget->isLength($input);
+$widget->isCharLength($input);
 $widget->isMax($input);
 $widget->isMaxLength($input);
 $widget->isMin($input);

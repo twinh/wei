@@ -73,6 +73,7 @@ API参考目录
 ##### 长度大小
 * [isBetween](api/isBetween.md) - 检查数据是否在指定的两个值之间
 * [isLength](api/isLength.md) - 检查数据是否为指定的长度,或在指定的长度范围内
+* [isCharLength](api/isCharLength.md) - 检查数据的字符数是否为指定的数值
 * [isMax](api/isMax.md) - 检查数据是否小于等于指定的值
 * [isMaxLength](api/isMaxLength.md) - 检查数据是否小于等于指定长度
 * [isMin](api/isMin.md) - 检查数据是否大于等于指定的值
