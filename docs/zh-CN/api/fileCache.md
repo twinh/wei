@@ -16,7 +16,7 @@ widget()->fileCache('key', 'value');
 widget()->fileCache('key');
 ```
 
-更多案例请查看"[缓存](cache.md#案例)"章节
+更多案例请查看"[Cache](cache.md)"微件
 
 调用方式
 --------

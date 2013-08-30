@@ -22,7 +22,7 @@ widget()->memcached('key');
 widget()->memcached('key', 'value', 60);
 ```
 
-更多案例请查看"[缓存](../book/cache.md)"章节
+更多案例请查看"[Cache](cache.md)"微件
 
 调用方式
 -------
