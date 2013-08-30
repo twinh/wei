@@ -34,7 +34,7 @@ abstract class BaseValidator extends Base
     protected $negativeMessage = '%name% is not valid';
 
     /**
-     * The message name
+     * The name display in error message
      *
      * @var string
      */
@@ -173,24 +173,26 @@ abstract class BaseValidator extends Base
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the error messages
+     *
+     * @param string $name The name display in error message
+     * @return array
      * @throws \UnexpectedValueException When message contains unknown parameter
      */
-    public function getMessages()
+    public function getMessages($name = null)
     {
+        !$name && $name = $this->name;
+        $this->negative && $this->addError('negative');
+
         $this->loadTranslationMessages();
 
-        if ($this->negative) {
-            $this->addError('negative');
-        }
-
         $messages = array();
-        foreach ($this->errors as $name => $message) {
+        foreach ($this->errors as $optionName => $message) {
             preg_match_all('/\%(.+?)\%/', $message, $matches);
             $parameters = array();
             foreach ($matches[1] as $match) {
                 if ('name' == $match) {
-                    $parameters['%name%'] = $this->t($this->name);
+                    $parameters['%name%'] = $this->t($name);
                 } else {
                     if (!property_exists($this, $match)) {
                         throw new \UnexpectedValueException(sprintf('Unknown parameter "%%%s%%" in message "%s"', $match, $message));
@@ -199,7 +201,7 @@ abstract class BaseValidator extends Base
                         implode(', ', $this->$match) : $this->$match;
                 }
             }
-            $messages[$name] = $this->t($message, $parameters);
+            $messages[$optionName] = $this->t($message, $parameters);
         }
         return $messages;
     }
@@ -208,11 +210,12 @@ abstract class BaseValidator extends Base
      * Returns error message string
      *
      * @param string $separator The string to connect messages
+     * @param string $name The name display in error message
      * @return string
      */
-    public function getJoinedMessage($separator = "\n")
+    public function getJoinedMessage($separator = "\n", $name = null)
     {
-        return implode($separator, $this->getMessages());
+        return implode($separator, $this->getMessages($name));
     }
 
     /**
