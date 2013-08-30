@@ -30,10 +30,8 @@ abstract class BaseGroupValidator extends BaseValidator
     protected function reset()
     {
         $this->validators = array();
-
         parent::reset();
     }
-
 
     /**
      * {@inheritdoc}

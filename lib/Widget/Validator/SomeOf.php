@@ -18,6 +18,18 @@ class SomeOf extends BaseGroupValidator
 {
     protected $atLeastMessage = '%name% must be passed by at least %left% of %count% rules';
 
+    /**
+     * The validator rules
+     *
+     * Format:
+     * array(
+     *     'email' => true,
+     *     'endsWith' => array(
+     *         'findMe' => '@google.com'
+     *     )
+     * );
+     * @var array
+     */
     protected $rules = array();
 
     /**
@@ -41,6 +53,9 @@ class SomeOf extends BaseGroupValidator
      */
     protected $left;
 
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($input, array $rules = array(), $atLeast = null)
     {
         $atLeast && $this->storeOption('atLeast', $atLeast);
