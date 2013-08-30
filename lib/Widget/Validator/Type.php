@@ -68,12 +68,10 @@ class Type extends BaseValidator
     /**
      * {@inheritdoc}
      */
-    public function getMessages()
+    public function getMessages($name = null)
     {
         $this->loadTranslationMessages();
-
         $this->typeName = $this->t($this->type);
-
-        return parent::getMessages();
+        return parent::getMessages($name);
     }
 }

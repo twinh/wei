@@ -63,7 +63,7 @@ class SomeOf extends BaseValidator
     /**
      * The invalid validators
      *
-     * @var array<BaseValidator>
+     * @var BaseValidator[]
      */
     protected $validators = array();
 
@@ -121,7 +121,7 @@ class SomeOf extends BaseValidator
     /**
      * {@inheritdoc}
      */
-    public function getMessages()
+    public function getMessages($name = null)
     {
         /**
          * Combines messages into single one
@@ -145,7 +145,7 @@ class SomeOf extends BaseValidator
             $key = key($messages);
 
             foreach ($this->validators as $rule => $validator) {
-                $messages[$rule] = implode(';', $validator->getMessages());
+                $messages[$rule] = implode(';', $validator->getMessages($name));
             }
 
             return array(
@@ -154,7 +154,7 @@ class SomeOf extends BaseValidator
         } else {
             $messages = array();
             foreach ($this->validators as $rule => $validator) {
-                foreach ($validator->getMessages() as $option => $message) {
+                foreach ($validator->getMessages($name) as $option => $message) {
                     $messages[$rule . '.' . $option] = $message;
                 }
             }

@@ -12,7 +12,7 @@ namespace Widget\Validator;
  * Check if all of the element in the input is valid by all specified rules
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Is $is The validator manager
+ * @property    \Widget\Is $is The validator manager
  */
 class All extends BaseValidator
 {
@@ -82,7 +82,7 @@ class All extends BaseValidator
     /**
      * {@inheritdoc}
      */
-    public function getMessages()
+    public function getMessages($name = null)
     {
         $this->loadTranslationMessages();
         $translator = $this->t;
@@ -90,11 +90,12 @@ class All extends BaseValidator
         // Firstly, translates the item name (%name%'s %index% item)
         // Secondly, translates "%name%" in the item name
         $name = $translator($translator($this->itemName), array(
-            '%name%' => $translator($this->name)
+            '%name%' => $translator($name ?: $this->name)
         ));
 
         $messages = array();
         foreach ($this->validators as $index => $validators) {
+            /** @var $validator BaseValidator */
             foreach ($validators as $rule => $validator) {
                 // Lastly, translates "index" in the item name
                 $validator->setName($translator($name, array(
