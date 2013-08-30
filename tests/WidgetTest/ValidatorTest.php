@@ -781,10 +781,4 @@ class ValidatorTest extends TestCase
         $this->assertContains('ABC', $this->isLength->getJoinedMessage("\n", 'ABC'));
         $this->assertEquals('This value', $this->isLength->getName());
     }
-
-    public function testValidateCharLength()
-    {
-        $result = $this->isLength('');
-        $result = $this->isCharLength('i ♥ u');
-    }
 }
