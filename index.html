@@ -6972,137 +6972,6 @@
 <p>检查数据是否在指定的两个值之间</p>
   </section>
 
-<!-- api/isCharLength
-  ================================================== -->
-  <section id="isCharLength">
-  <div class="page-header"><h1>isCharLength</h1></div>
-
-<p>检查数据的 <strong>字符数</strong> 是否为指定的数值</p>
-
-<h2>案例</h2>
-
-<h3>检查"微框架"的长度是否为3</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isCharLength</span><span class="p">(</span><span class="s1">'微框架'</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<h4>运行结果</h4>
-
-<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
-</code></pre></div>
-
-<h3>检查"微框架"的长度是否在3到6之间</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isCharLength</span><span class="p">(</span><span class="s1">'微框架'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<h4>运行结果</h4>
-
-<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
-</code></pre></div>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody><tr>
-<td>charset</td>
-<td>string</td>
-<td>UTF-8</td>
-<td>验证数据的字符集</td>
-</tr></tbody>
-</table><h3>方法</h3>
-
-<h4>isCharLength($input, $min, $max)</h4>
-
-<p>检查数据的字符数是否在指定的长度范围内</p>
-
-<h5>选项</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>min</td>
-<td>int</td>
-<td>无</td>
-<td>限制长度的最小值</td>
-</tr>
-<tr>
-<td>max</td>
-<td>int</td>
-<td>无</td>
-<td>限制长度的最大值</td>
-</tr>
-<tr>
-<td>notDetectdMessage</td>
-<td>string</td>
-<td>无法检测到%name%的长度</td>
-<td>-</td>
-</tr>
-<tr>
-<td>notInMessage</td>
-<td>string</td>
-<td>%name%的长度必须在%min%和%max%之间</td>
-<td>-</td>
-</tr>
-</tbody>
-</table><h4>isCharLength($input, $length)</h4>
-
-<p>检查数据的字符数是否为指定的数值</p>
-
-<h5>选项</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>length</td>
-<td>int</td>
-<td>无</td>
-<td>指定长度的值</td>
-</tr>
-<tr>
-<td>notDetectdMessage</td>
-<td>string</td>
-<td>无法检测到%name%的长度</td>
-<td>-</td>
-</tr>
-<tr>
-<td>lengthMessage</td>
-<td>string</td>
-<td>%name%的长度必须是%length%</td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
-  </section>
-
 <!-- api/isLength
   ================================================== -->
   <section id="isLength">
@@ -7237,6 +7106,137 @@
 </tbody>
 </table><div class="highlight"><pre><code class="php"><span class="err">注意</span><span class="o">:</span> <span class="err">当检查的数据是字符串时</span><span class="p">,</span><span class="err">返回的错误信息是</span><span class="sb">`length`</span><span class="p">,</span><span class="err">当数据是数组时</span><span class="p">,</span><span class="err">返回的是</span><span class="sb">`lengthItem`</span>
 </code></pre></div>
+  </section>
+
+<!-- api/isCharLength
+  ================================================== -->
+  <section id="isCharLength">
+  <div class="page-header"><h1>isCharLength</h1></div>
+
+<p>检查数据的 <strong>字符数</strong> 是否为指定的数值</p>
+
+<h2>案例</h2>
+
+<h3>检查"微框架"的长度是否为3</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isCharLength</span><span class="p">(</span><span class="s1">'微框架'</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
+</code></pre></div>
+
+<h3>检查"微框架"的长度是否在3到6之间</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isCharLength</span><span class="p">(</span><span class="s1">'微框架'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>charset</td>
+<td>string</td>
+<td>UTF-8</td>
+<td>验证数据的字符集</td>
+</tr></tbody>
+</table><h3>方法</h3>
+
+<h4>isCharLength($input, $min, $max)</h4>
+
+<p>检查数据的字符数是否在指定的长度范围内</p>
+
+<h5>选项</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>min</td>
+<td>int</td>
+<td>无</td>
+<td>限制长度的最小值</td>
+</tr>
+<tr>
+<td>max</td>
+<td>int</td>
+<td>无</td>
+<td>限制长度的最大值</td>
+</tr>
+<tr>
+<td>notDetectdMessage</td>
+<td>string</td>
+<td>无法检测到%name%的长度</td>
+<td>-</td>
+</tr>
+<tr>
+<td>notInMessage</td>
+<td>string</td>
+<td>%name%的长度必须在%min%和%max%之间</td>
+<td>-</td>
+</tr>
+</tbody>
+</table><h4>isCharLength($input, $length)</h4>
+
+<p>检查数据的字符数是否为指定的数值</p>
+
+<h5>选项</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>length</td>
+<td>int</td>
+<td>无</td>
+<td>指定长度的值</td>
+</tr>
+<tr>
+<td>notDetectdMessage</td>
+<td>string</td>
+<td>无法检测到%name%的长度</td>
+<td>-</td>
+</tr>
+<tr>
+<td>lengthMessage</td>
+<td>string</td>
+<td>%name%的长度必须是%length%</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
   </section>
 
 <!-- api/isMax
