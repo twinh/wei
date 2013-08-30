@@ -2,6 +2,11 @@
 
 namespace WidgetTest;
 
+/**
+ * @property \Widget\Is $is
+ * @method bool is()
+ * @method \Widget\Validate validate($options = array())
+ */
 class ValidatorTest extends TestCase
 {
     /**
@@ -145,7 +150,7 @@ class ValidatorTest extends TestCase
                 'age' => 5
             ),
             'rules' => array(
-                // Will valild
+                // Will valid
                 'email' => array(
                     'email' => true,
                 ),
@@ -182,9 +187,8 @@ class ValidatorTest extends TestCase
         $this->assertFalse($this->is('notDigit', '123'));
     }
 
-    public function testIsFieldInvalidted()
+    public function testIsFieldInvalidated()
     {
-        /* @var $validator \Widget\Validator */
         $validator = $this->validate(array(
             'data' => array(
                 'age' => 10,
@@ -227,7 +231,6 @@ class ValidatorTest extends TestCase
 
     public function testRuleOperation()
     {
-        /* @var $validator \Widget\Validator */
         $validator = $this->validate();
 
         $this->assertFalse($validator->hasRule('username', 'email'));
@@ -243,7 +246,6 @@ class ValidatorTest extends TestCase
 
     public function testData()
     {
-        /* @var $validator \Widget\Validator */
         $validator = $this->validate();
 
         $this->assertEmpty($validator->getData());
@@ -263,7 +265,6 @@ class ValidatorTest extends TestCase
 
     public function testGetValidateFields()
     {
-        /* @var $validator \Widget\Validator */
         $validator = $this->validate(array(
             'data' => array(
                 'email' => 'a@b.com',
@@ -288,7 +289,6 @@ class ValidatorTest extends TestCase
 
     public function testMessage()
     {
-        /* @var $validator \Widget\Validator */
         $validator = $this->validate(array(
             'data' => array(
                 'username'  => '',
@@ -417,7 +417,6 @@ class ValidatorTest extends TestCase
 
     public function testSkip()
     {
-        /* @var $validator \Widget\Validator */
         $validator = $this->validate(array(
             'data' => array(
                 'email' => 'error-email',
@@ -494,7 +493,6 @@ class ValidatorTest extends TestCase
         $this->assertTrue($validator->isValid());
     }
 
-    // noop
     public function testGetterSetter()
     {
         $data = new \stdClass();
@@ -516,7 +514,7 @@ class ValidatorTest extends TestCase
         $validator->setData('string');
     }
 
-    public function testCustomeFieldName()
+    public function testCustomFieldName()
     {
         $validator = $this->validate(array(
             'data' => array(
@@ -548,10 +546,10 @@ class ValidatorTest extends TestCase
             ),
             'rules' => array(
                 'email' => array(
-                    'required' => true, // valid
-                    'length' => array(1, 3), // not valid
-                    'email' => true,    // not valid
-                    'endsWith' => '@gamil.com' // not valid
+                    'required' => true,         // valid
+                    'length' => array(1, 3),    // not valid
+                    'email' => true,            // not valid
+                    'endsWith' => '@gmail.com'  // not valid
                 )
             ),
             'messages' => array(
@@ -604,9 +602,9 @@ class ValidatorTest extends TestCase
             ),
             'rules' => array(
                 'email' => array(
-                    'required' => true, // valid
-                    'length' => array(1, 3), // not valid
-                    'email' => true,    // not valid
+                    'required' => true,         // valid
+                    'length' => array(1, 3),    // not valid
+                    'email' => true,            // not valid
                 )
             ),
             'names' => array(
