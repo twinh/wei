@@ -772,4 +772,13 @@ class ValidatorTest extends TestCase
         $this->assertFalse($validator->isValid());
         $this->assertEquals(array('email'), $validator->getInvalidRules('email'));
     }
+
+    public function testGetValidatorMessages()
+    {
+        $result = $this->isLength('abc', 4, 5);
+        $this->assertFalse($result);
+        $this->assertContains('ABC', current($this->isLength->getMessages('ABC')));
+        $this->assertContains('ABC', $this->isLength->getJoinedMessage("\n", 'ABC'));
+        $this->assertEquals('This value', $this->isLength->getName());
+    }
 }
