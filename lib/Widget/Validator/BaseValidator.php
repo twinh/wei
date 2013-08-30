@@ -67,7 +67,7 @@ abstract class BaseValidator extends Base
     protected $negative = false;
 
     /**
-     * The validate widget, available when this rule validator invoke from validate widget
+     * The validate widget, available when this rule validator is invoked from validate widget
      *
      * @var \Widget\Validate
      */
