@@ -140,7 +140,7 @@ class CreditCard extends BaseValidator
      * comma(,) or string "all" means all supported types
      *
      * @param string|array $type
-     * @return Validator\CreditCard
+     * @return CreditCard
      * @throws \InvalidArgumentException When parameter is not array or string
      */
     public function setType($type)
