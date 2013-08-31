@@ -21,7 +21,7 @@ def syntax_highlighter(html, lexer = 'php')
       link['target'] = '_blank'
       link['href'] = 'https://github.com/twinh/widget/tree/master/docs/zh-CN/api/' + link['href']
     else
-      url = "#" + link['href']
+      url = "#" + link['href'].split('#')[0]
       link['href'] = url[0..-4]
     end
   end
