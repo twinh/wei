@@ -342,7 +342,6 @@ class Validate extends Base
     public function addValidRule($field, $rule)
     {
         $this->validRules[$field][] = $rule;
-
         return $this;
     }
 
@@ -356,7 +355,6 @@ class Validate extends Base
     public function addInvalidRule($field, $rule)
     {
         $this->invalidRules[$field][] = $rule;
-
         return $this;
     }
 
@@ -526,9 +524,7 @@ class Validate extends Base
                 is_object($data) ? get_class($data) : gettype($data)
             ));
         }
-
         $this->data = $data;
-
         return $this;
     }
 
