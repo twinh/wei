@@ -20,7 +20,7 @@ widget()->redis('key');
 widget()->redis('key', 'value', 60);
 ```
 
-更多案例请查看"[Cache](cache.md)"微件
+更多案例请查看[Cache](cache.md)微件
 
 调用方式
 --------
@@ -39,7 +39,7 @@ options    | array 		  | -              | \Redis::setOption()方法的参数
 
 ### 继承的方法
 
-通用方法请查看[cache](cache.md#通用方法)微件文档
+通用方法请查看[Cache](cache.md#通用方法)微件
 
 ### 方法
 

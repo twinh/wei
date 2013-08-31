@@ -24,7 +24,7 @@ widget()->dbCache('key');
 widget()->dbCache('key', 'value', 60);
 ```
 
-更多案例请查看"[Cache](cache.md)"微件
+更多案例请查看[Cache](cache.md)微件
 
 调用方式
 --------
@@ -37,7 +37,7 @@ table     | string    | cache     | 缓存数据表名称
 
 ### 继承的方法
 
-通用方法请查看[cache](cache.md#通用方法)微件文档
+通用方法请查看[Cache](cache.md#通用方法)微件
 
 ### 方法
 
