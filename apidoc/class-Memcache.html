@@ -7,7 +7,7 @@
 	<title>Class Memcache | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?969285891"></script>
+	<script type="text/javascript" src="elementlist.js?143782770"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -29,8 +29,6 @@
 						<ul>
 				<li><a href="namespace-Widget.Db.html">Db</a>
 						</li>
-				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
-						</li>
 				<li><a href="namespace-Widget.Validator.html">Validator</a>
 						</li>
 							</ul></li>
@@ -47,7 +45,7 @@
 				<li><a href="class-Closure.html">Closure</a></li>
 				<li class="active"><a href="class-Memcache.html">Memcache</a></li>
 				<li><a href="class-Memcached.html">Memcached</a></li>
-				<li><a href="class-MongoCollection.html">MongoCollection</a></li>
+				<li><a href="class-MemcachePool.html">MemcachePool</a></li>
 				<li><a href="class-PDO.html">PDO</a></li>
 				<li><a href="class-PDOStatement.html">PDOStatement</a></li>
 				<li><a href="class-Redis.html">Redis</a></li>
@@ -118,6 +116,20 @@
 
 
 
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-MemcachePool.html"><span>MemcachePool</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Memcache</span></b>			
+			
+			
+		</dd>
+	</dl>
 
 
 
@@ -164,6 +176,8 @@
 
 
 
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-MemcachePool.html#_connect">MemcachePool::connect()</a></code></div>
 
 		</div>
 		</div></td>
@@ -222,476 +236,41 @@
 
 
 
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="setserverparams" id="_setserverparams">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_setserverparams">#</a>
-		<code><a href="http://php.net/manual/memcache.setserverparams.php" title="Go to PHP documentation">setserverparams</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="getserverstatus" id="_getserverstatus">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_getserverstatus">#</a>
-		<code><a href="http://php.net/manual/memcache.getserverstatus.php" title="Go to PHP documentation">getserverstatus</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="getversion" id="_getversion">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_getversion">#</a>
-		<code><a href="http://php.net/manual/memcache.getversion.php" title="Go to PHP documentation">getversion</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="add" id="_add">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_add">#</a>
-		<code><a href="http://php.net/manual/memcache.add.php" title="Go to PHP documentation">add</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="set" id="_set">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_set">#</a>
-		<code><a href="http://php.net/manual/memcache.set.php" title="Go to PHP documentation">set</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="replace" id="_replace">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_replace">#</a>
-		<code><a href="http://php.net/manual/memcache.replace.php" title="Go to PHP documentation">replace</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="get" id="_get">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_get">#</a>
-		<code><a href="http://php.net/manual/memcache.get.php" title="Go to PHP documentation">get</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="delete" id="_delete">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_delete">#</a>
-		<code><a href="http://php.net/manual/memcache.delete.php" title="Go to PHP documentation">delete</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="getstats" id="_getstats">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_getstats">#</a>
-		<code><a href="http://php.net/manual/memcache.getstats.php" title="Go to PHP documentation">getstats</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="getextendedstats" id="_getextendedstats">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_getextendedstats">#</a>
-		<code><a href="http://php.net/manual/memcache.getextendedstats.php" title="Go to PHP documentation">getextendedstats</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="setcompressthreshold" id="_setcompressthreshold">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_setcompressthreshold">#</a>
-		<code><a href="http://php.net/manual/memcache.setcompressthreshold.php" title="Go to PHP documentation">setcompressthreshold</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="increment" id="_increment">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_increment">#</a>
-		<code><a href="http://php.net/manual/memcache.increment.php" title="Go to PHP documentation">increment</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="decrement" id="_decrement">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_decrement">#</a>
-		<code><a href="http://php.net/manual/memcache.decrement.php" title="Go to PHP documentation">decrement</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="close" id="_close">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_close">#</a>
-		<code><a href="http://php.net/manual/memcache.close.php" title="Go to PHP documentation">close</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="flush" id="_flush">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_flush">#</a>
-		<code><a href="http://php.net/manual/memcache.flush.php" title="Go to PHP documentation">flush</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="setoptimeout" id="_setoptimeout">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_setoptimeout">#</a>
-		<code><a href="http://php.net/manual/memcache.setoptimeout.php" title="Go to PHP documentation">setoptimeout</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-MemcachePool.html#_addserver">MemcachePool::addserver()</a></code></div>
 
 		</div>
 		</div></td>
 	</tr>
 	</table>
 
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-MemcachePool.html#methods">MemcachePool</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-MemcachePool.html#_add">add()</a>, 
+			<a href="class-MemcachePool.html#_append">append()</a>, 
+			<a href="class-MemcachePool.html#_cas">cas()</a>, 
+			<a href="class-MemcachePool.html#_close">close()</a>, 
+			<a href="class-MemcachePool.html#_decrement">decrement()</a>, 
+			<a href="class-MemcachePool.html#_delete">delete()</a>, 
+			<a href="class-MemcachePool.html#_findserver">findserver()</a>, 
+			<a href="class-MemcachePool.html#_flush">flush()</a>, 
+			<a href="class-MemcachePool.html#_get">get()</a>, 
+			<a href="class-MemcachePool.html#_getextendedstats">getextendedstats()</a>, 
+			<a href="class-MemcachePool.html#_getserverstatus">getserverstatus()</a>, 
+			<a href="class-MemcachePool.html#_getstats">getstats()</a>, 
+			<a href="class-MemcachePool.html#_getversion">getversion()</a>, 
+			<a href="class-MemcachePool.html#_increment">increment()</a>, 
+			<a href="class-MemcachePool.html#_prepend">prepend()</a>, 
+			<a href="class-MemcachePool.html#_replace">replace()</a>, 
+			<a href="class-MemcachePool.html#_set">set()</a>, 
+			<a href="class-MemcachePool.html#_setcompressthreshold">setcompressthreshold()</a>, 
+			<a href="class-MemcachePool.html#_setfailurecallback">setfailurecallback()</a>, 
+			<a href="class-MemcachePool.html#_setserverparams">setserverparams()</a>
+		</code></td>
+	</tr>
+	</table>
 
 
 

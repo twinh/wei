@@ -7,7 +7,7 @@
 	<title>Class Memcached | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?969285891"></script>
+	<script type="text/javascript" src="elementlist.js?143782770"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -29,8 +29,6 @@
 						<ul>
 				<li><a href="namespace-Widget.Db.html">Db</a>
 						</li>
-				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
-						</li>
 				<li><a href="namespace-Widget.Validator.html">Validator</a>
 						</li>
 							</ul></li>
@@ -47,7 +45,7 @@
 				<li><a href="class-Closure.html">Closure</a></li>
 				<li><a href="class-Memcache.html">Memcache</a></li>
 				<li class="active"><a href="class-Memcached.html">Memcached</a></li>
-				<li><a href="class-MongoCollection.html">MongoCollection</a></li>
+				<li><a href="class-MemcachePool.html">MemcachePool</a></li>
 				<li><a href="class-PDO.html">PDO</a></li>
 				<li><a href="class-PDOStatement.html">PDOStatement</a></li>
 				<li><a href="class-Redis.html">Redis</a></li>
@@ -150,7 +148,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="http://php.net/manual/memcached.construct.php" title="Go to PHP documentation">__construct</a>( <span>mixed <var>$persistent_id</var></span> )</code>
+		<code><a href="http://php.net/manual/memcached.construct.php" title="Go to PHP documentation">__construct</a>( <span>mixed <var>$persistent_id</var></span>, <span>mixed <var>$callback</var></span> )</code>
 
 		<div class="description short">
 			
@@ -499,6 +497,64 @@
 		<td class="name"><div>
 		<a class="anchor" href="#_setByKey">#</a>
 		<code><a href="http://php.net/manual/memcached.setbykey.php" title="Go to PHP documentation">setByKey</a>( <span>mixed <var>$server_key</var></span>, <span>mixed <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>mixed <var>$expiration</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="touch" id="_touch">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_touch">#</a>
+		<code><a href="http://php.net/manual/memcached.touch.php" title="Go to PHP documentation">touch</a>( <span>mixed <var>$key</var></span>, <span>mixed <var>$expiration</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="touchByKey" id="_touchByKey">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_touchByKey">#</a>
+		<code><a href="http://php.net/manual/memcached.touchbykey.php" title="Go to PHP documentation">touchByKey</a>( <span>mixed <var>$server_key</var></span>, <span>mixed <var>$key</var></span>, <span>mixed <var>$expiration</var></span> )</code>
 
 		<div class="description short">
 			
@@ -893,6 +949,35 @@
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="deleteMulti" id="_deleteMulti">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_deleteMulti">#</a>
+		<code><a href="http://php.net/manual/memcached.deletemulti.php" title="Go to PHP documentation">deleteMulti</a>( <span>mixed <var>$keys</var></span>, <span>mixed <var>$time</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="deleteByKey" id="_deleteByKey">
 
 		<td class="attributes"><code>
@@ -922,6 +1007,35 @@
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="deleteMultiByKey" id="_deleteMultiByKey">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_deleteMultiByKey">#</a>
+		<code><a href="http://php.net/manual/memcached.deletemultibykey.php" title="Go to PHP documentation">deleteMultiByKey</a>( <span>mixed <var>$server_key</var></span>, <span>mixed <var>$keys</var></span>, <span>mixed <var>$time</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="increment" id="_increment">
 
 		<td class="attributes"><code>
@@ -933,7 +1047,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_increment">#</a>
-		<code><a href="http://php.net/manual/memcached.increment.php" title="Go to PHP documentation">increment</a>( <span>mixed <var>$key</var></span>, <span>mixed <var>$offset</var></span> )</code>
+		<code><a href="http://php.net/manual/memcached.increment.php" title="Go to PHP documentation">increment</a>( <span>mixed <var>$key</var></span>, <span>mixed <var>$offset</var></span>, <span>mixed <var>$initial_value</var></span>, <span>mixed <var>$expiry</var></span> )</code>
 
 		<div class="description short">
 			
@@ -962,7 +1076,65 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_decrement">#</a>
-		<code><a href="http://php.net/manual/memcached.decrement.php" title="Go to PHP documentation">decrement</a>( <span>mixed <var>$key</var></span>, <span>mixed <var>$offset</var></span> )</code>
+		<code><a href="http://php.net/manual/memcached.decrement.php" title="Go to PHP documentation">decrement</a>( <span>mixed <var>$key</var></span>, <span>mixed <var>$offset</var></span>, <span>mixed <var>$initial_value</var></span>, <span>mixed <var>$expiry</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="incrementByKey" id="_incrementByKey">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_incrementByKey">#</a>
+		<code><a href="http://php.net/manual/memcached.incrementbykey.php" title="Go to PHP documentation">incrementByKey</a>( <span>mixed <var>$server_key</var></span>, <span>mixed <var>$key</var></span>, <span>mixed <var>$offset</var></span>, <span>mixed <var>$initial_value</var></span>, <span>mixed <var>$expiry</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="decrementByKey" id="_decrementByKey">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_decrementByKey">#</a>
+		<code><a href="http://php.net/manual/memcached.decrementbykey.php" title="Go to PHP documentation">decrementByKey</a>( <span>mixed <var>$server_key</var></span>, <span>mixed <var>$key</var></span>, <span>mixed <var>$offset</var></span>, <span>mixed <var>$initial_value</var></span>, <span>mixed <var>$expiry</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1096,6 +1268,64 @@
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="resetServerList" id="_resetServerList">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_resetServerList">#</a>
+		<code><a href="http://php.net/manual/memcached.resetserverlist.php" title="Go to PHP documentation">resetServerList</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="quit" id="_quit">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_quit">#</a>
+		<code><a href="http://php.net/manual/memcached.quit.php" title="Go to PHP documentation">quit</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="getStats" id="_getStats">
 
 		<td class="attributes"><code>
@@ -1137,6 +1367,35 @@
 		<td class="name"><div>
 		<a class="anchor" href="#_getVersion">#</a>
 		<code><a href="http://php.net/manual/memcached.getversion.php" title="Go to PHP documentation">getVersion</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAllKeys" id="_getAllKeys">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAllKeys">#</a>
+		<code><a href="http://php.net/manual/memcached.getallkeys.php" title="Go to PHP documentation">getAllKeys</a>( )</code>
 
 		<div class="description short">
 			
@@ -1241,6 +1500,93 @@
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="setOptions" id="_setOptions">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setOptions">#</a>
+		<code><a href="http://php.net/manual/memcached.setoptions.php" title="Go to PHP documentation">setOptions</a>( <span>mixed <var>$options</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPersistent" id="_isPersistent">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isPersistent">#</a>
+		<code><a href="http://php.net/manual/memcached.ispersistent.php" title="Go to PHP documentation">isPersistent</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPristine" id="_isPristine">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isPristine">#</a>
+		<code><a href="http://php.net/manual/memcached.ispristine.php" title="Go to PHP documentation">isPristine</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	</table>
 
 
@@ -1261,6 +1607,26 @@
 		<td class="value"><code>-<span class="php-num">1001</span></code></td>
 		<td class="description"><div>
 			<a href="#OPT_COMPRESSION" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="OPT_COMPRESSION_TYPE" id="OPT_COMPRESSION_TYPE">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.opt-compression-type" title="Go to PHP documentation"><b>OPT_COMPRESSION_TYPE</b></a>
+		</code></td>
+		<td class="value"><code>-<span class="php-num">1004</span></code></td>
+		<td class="description"><div>
+			<a href="#OPT_COMPRESSION_TYPE" class="anchor">#</a>
 
 			<div class="description short">
 				
@@ -1338,9 +1704,49 @@
 		<td class="name"><code>
 				<a href="http://php.net/manual/class.memcached.php#memcached.constants.have-json" title="Go to PHP documentation"><b>HAVE_JSON</b></a>
 		</code></td>
-		<td class="value"><code><span class="php-num">1</span></code></td>
+		<td class="value"><code><span class="php-num">0</span></code></td>
 		<td class="description"><div>
 			<a href="#HAVE_JSON" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="HAVE_SESSION" id="HAVE_SESSION">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.have-session" title="Go to PHP documentation"><b>HAVE_SESSION</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">1</span></code></td>
+		<td class="description"><div>
+			<a href="#HAVE_SESSION" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="HAVE_SASL" id="HAVE_SASL">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.have-sasl" title="Go to PHP documentation"><b>HAVE_SASL</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">0</span></code></td>
+		<td class="description"><div>
+			<a href="#HAVE_SASL" class="anchor">#</a>
 
 			<div class="description short">
 				
@@ -1612,6 +2018,26 @@
 			</div>
 		</div></td>
 	</tr>
+	<tr data-order="DISTRIBUTION_VIRTUAL_BUCKET" id="DISTRIBUTION_VIRTUAL_BUCKET">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.distribution-virtual-bucket" title="Go to PHP documentation"><b>DISTRIBUTION_VIRTUAL_BUCKET</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">6</span></code></td>
+		<td class="description"><div>
+			<a href="#DISTRIBUTION_VIRTUAL_BUCKET" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
 	<tr data-order="OPT_LIBKETAMA_COMPATIBLE" id="OPT_LIBKETAMA_COMPATIBLE">
 
 		<td class="attributes"><code>integer</code></td>
@@ -1621,6 +2047,46 @@
 		<td class="value"><code><span class="php-num">16</span></code></td>
 		<td class="description"><div>
 			<a href="#OPT_LIBKETAMA_COMPATIBLE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="OPT_LIBKETAMA_HASH" id="OPT_LIBKETAMA_HASH">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.opt-libketama-hash" title="Go to PHP documentation"><b>OPT_LIBKETAMA_HASH</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">17</span></code></td>
+		<td class="description"><div>
+			<a href="#OPT_LIBKETAMA_HASH" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="OPT_TCP_KEEPALIVE" id="OPT_TCP_KEEPALIVE">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.opt-tcp-keepalive" title="Go to PHP documentation"><b>OPT_TCP_KEEPALIVE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">32</span></code></td>
+		<td class="description"><div>
+			<a href="#OPT_TCP_KEEPALIVE" class="anchor">#</a>
 
 			<div class="description short">
 				
@@ -1881,6 +2347,186 @@
 		<td class="value"><code><span class="php-num">21</span></code></td>
 		<td class="description"><div>
 			<a href="#OPT_SERVER_FAILURE_LIMIT" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="OPT_AUTO_EJECT_HOSTS" id="OPT_AUTO_EJECT_HOSTS">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.opt-auto-eject-hosts" title="Go to PHP documentation"><b>OPT_AUTO_EJECT_HOSTS</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">28</span></code></td>
+		<td class="description"><div>
+			<a href="#OPT_AUTO_EJECT_HOSTS" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="OPT_HASH_WITH_PREFIX_KEY" id="OPT_HASH_WITH_PREFIX_KEY">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.opt-hash-with-prefix-key" title="Go to PHP documentation"><b>OPT_HASH_WITH_PREFIX_KEY</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">25</span></code></td>
+		<td class="description"><div>
+			<a href="#OPT_HASH_WITH_PREFIX_KEY" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="OPT_NOREPLY" id="OPT_NOREPLY">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.opt-noreply" title="Go to PHP documentation"><b>OPT_NOREPLY</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">26</span></code></td>
+		<td class="description"><div>
+			<a href="#OPT_NOREPLY" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="OPT_SORT_HOSTS" id="OPT_SORT_HOSTS">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.opt-sort-hosts" title="Go to PHP documentation"><b>OPT_SORT_HOSTS</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">12</span></code></td>
+		<td class="description"><div>
+			<a href="#OPT_SORT_HOSTS" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="OPT_VERIFY_KEY" id="OPT_VERIFY_KEY">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.opt-verify-key" title="Go to PHP documentation"><b>OPT_VERIFY_KEY</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">13</span></code></td>
+		<td class="description"><div>
+			<a href="#OPT_VERIFY_KEY" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="OPT_USE_UDP" id="OPT_USE_UDP">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.opt-use-udp" title="Go to PHP documentation"><b>OPT_USE_UDP</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">27</span></code></td>
+		<td class="description"><div>
+			<a href="#OPT_USE_UDP" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="OPT_NUMBER_OF_REPLICAS" id="OPT_NUMBER_OF_REPLICAS">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.opt-number-of-replicas" title="Go to PHP documentation"><b>OPT_NUMBER_OF_REPLICAS</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">29</span></code></td>
+		<td class="description"><div>
+			<a href="#OPT_NUMBER_OF_REPLICAS" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="OPT_RANDOMIZE_REPLICA_READ" id="OPT_RANDOMIZE_REPLICA_READ">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.opt-randomize-replica-read" title="Go to PHP documentation"><b>OPT_RANDOMIZE_REPLICA_READ</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">30</span></code></td>
+		<td class="description"><div>
+			<a href="#OPT_RANDOMIZE_REPLICA_READ" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="OPT_REMOVE_FAILED_SERVERS" id="OPT_REMOVE_FAILED_SERVERS">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.opt-remove-failed-servers" title="Go to PHP documentation"><b>OPT_REMOVE_FAILED_SERVERS</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">35</span></code></td>
+		<td class="description"><div>
+			<a href="#OPT_REMOVE_FAILED_SERVERS" class="anchor">#</a>
 
 			<div class="description short">
 				
@@ -2272,6 +2918,206 @@
 			</div>
 		</div></td>
 	</tr>
+	<tr data-order="RES_STORED" id="RES_STORED">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.res-stored" title="Go to PHP documentation"><b>RES_STORED</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">15</span></code></td>
+		<td class="description"><div>
+			<a href="#RES_STORED" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="RES_DELETED" id="RES_DELETED">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.res-deleted" title="Go to PHP documentation"><b>RES_DELETED</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">22</span></code></td>
+		<td class="description"><div>
+			<a href="#RES_DELETED" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="RES_STAT" id="RES_STAT">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.res-stat" title="Go to PHP documentation"><b>RES_STAT</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">24</span></code></td>
+		<td class="description"><div>
+			<a href="#RES_STAT" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="RES_ITEM" id="RES_ITEM">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.res-item" title="Go to PHP documentation"><b>RES_ITEM</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">25</span></code></td>
+		<td class="description"><div>
+			<a href="#RES_ITEM" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="RES_NOT_SUPPORTED" id="RES_NOT_SUPPORTED">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.res-not-supported" title="Go to PHP documentation"><b>RES_NOT_SUPPORTED</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">28</span></code></td>
+		<td class="description"><div>
+			<a href="#RES_NOT_SUPPORTED" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="RES_FETCH_NOTFINISHED" id="RES_FETCH_NOTFINISHED">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.res-fetch-notfinished" title="Go to PHP documentation"><b>RES_FETCH_NOTFINISHED</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">30</span></code></td>
+		<td class="description"><div>
+			<a href="#RES_FETCH_NOTFINISHED" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="RES_SERVER_MARKED_DEAD" id="RES_SERVER_MARKED_DEAD">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.res-server-marked-dead" title="Go to PHP documentation"><b>RES_SERVER_MARKED_DEAD</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">35</span></code></td>
+		<td class="description"><div>
+			<a href="#RES_SERVER_MARKED_DEAD" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="RES_UNKNOWN_STAT_KEY" id="RES_UNKNOWN_STAT_KEY">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.res-unknown-stat-key" title="Go to PHP documentation"><b>RES_UNKNOWN_STAT_KEY</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">36</span></code></td>
+		<td class="description"><div>
+			<a href="#RES_UNKNOWN_STAT_KEY" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="RES_INVALID_HOST_PROTOCOL" id="RES_INVALID_HOST_PROTOCOL">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.res-invalid-host-protocol" title="Go to PHP documentation"><b>RES_INVALID_HOST_PROTOCOL</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">34</span></code></td>
+		<td class="description"><div>
+			<a href="#RES_INVALID_HOST_PROTOCOL" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="RES_MEMORY_ALLOCATION_FAILURE" id="RES_MEMORY_ALLOCATION_FAILURE">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.res-memory-allocation-failure" title="Go to PHP documentation"><b>RES_MEMORY_ALLOCATION_FAILURE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">17</span></code></td>
+		<td class="description"><div>
+			<a href="#RES_MEMORY_ALLOCATION_FAILURE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
 	<tr data-order="RES_CONNECTION_SOCKET_CREATE_FAILURE" id="RES_CONNECTION_SOCKET_CREATE_FAILURE">
 
 		<td class="attributes"><code>integer</code></td>
@@ -2372,6 +3218,66 @@
 			</div>
 		</div></td>
 	</tr>
+	<tr data-order="SERIALIZER_JSON_ARRAY" id="SERIALIZER_JSON_ARRAY">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.serializer-json-array" title="Go to PHP documentation"><b>SERIALIZER_JSON_ARRAY</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">4</span></code></td>
+		<td class="description"><div>
+			<a href="#SERIALIZER_JSON_ARRAY" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="COMPRESSION_FASTLZ" id="COMPRESSION_FASTLZ">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.compression-fastlz" title="Go to PHP documentation"><b>COMPRESSION_FASTLZ</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">2</span></code></td>
+		<td class="description"><div>
+			<a href="#COMPRESSION_FASTLZ" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="COMPRESSION_ZLIB" id="COMPRESSION_ZLIB">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.compression-zlib" title="Go to PHP documentation"><b>COMPRESSION_ZLIB</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">1</span></code></td>
+		<td class="description"><div>
+			<a href="#COMPRESSION_ZLIB" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
 	<tr data-order="GET_PRESERVE_ORDER" id="GET_PRESERVE_ORDER">
 
 		<td class="attributes"><code>integer</code></td>
@@ -2381,6 +3287,26 @@
 		<td class="value"><code><span class="php-num">1</span></code></td>
 		<td class="description"><div>
 			<a href="#GET_PRESERVE_ORDER" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="GET_ERROR_RETURN_VALUE" id="GET_ERROR_RETURN_VALUE">
+
+		<td class="attributes"><code>boolean</code></td>
+		<td class="name"><code>
+				<a href="http://php.net/manual/class.memcached.php#memcached.constants.get-error-return-value" title="Go to PHP documentation"><b>GET_ERROR_RETURN_VALUE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#GET_ERROR_RETURN_VALUE" class="anchor">#</a>
 
 			<div class="description short">
 				

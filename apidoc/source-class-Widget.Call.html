@@ -8,7 +8,7 @@
 	<title>File Call.php | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?969285891"></script>
+	<script type="text/javascript" src="elementlist.js?143782770"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -29,8 +29,6 @@
 				<li class="active"><a href="namespace-Widget.html">Widget<span></span></a>
 						<ul>
 				<li><a href="namespace-Widget.Db.html">Db</a>
-						</li>
-				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
 						</li>
 				<li><a href="namespace-Widget.Validator.html">Validator</a>
 						</li>
@@ -56,14 +54,12 @@
 				<li><a href="class-Widget.Config.html">Config</a></li>
 				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
 				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
-				<li><a href="class-Widget.Counter.html">Counter</a></li>
 				<li><a href="class-Widget.Db.html">Db</a></li>
 				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
 				<li><a href="class-Widget.Download.html">Download</a></li>
 				<li><a href="class-Widget.Env.html">Env</a></li>
 				<li><a href="class-Widget.Error.html">Error</a></li>
 				<li><a href="class-Widget.Escape.html">Escape</a></li>
-				<li><a href="class-Widget.Event.html">Event</a></li>
 				<li><a href="class-Widget.FileCache.html">FileCache</a></li>
 				<li><a href="class-Widget.Flush.html">Flush</a></li>
 				<li><a href="class-Widget.Gravatar.html">Gravatar</a></li>
@@ -253,7 +249,7 @@
 </span><span id="117" class="l"><a class="l" href="#117">117: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$disableSslVerification" href="#$disableSslVerification">$disableSslVerification</a></span> = <span class="php-keyword1">false</span>;
 </span><span id="118" class="l"><a class="l" href="#118">118: </a>
 </span><span id="119" class="l"><a class="l" href="#119">119: </a>    <span class="php-comment">/**
-</span></span><span id="120" class="l"><a class="l" href="#120">120: </a><span class="php-comment">     * An event triggered after prepared the data and before the process the request
+</span></span><span id="120" class="l"><a class="l" href="#120">120: </a><span class="php-comment">     * An callback triggered after prepared the data and before the process the request
 </span></span><span id="121" class="l"><a class="l" href="#121">121: </a><span class="php-comment">     *
 </span></span><span id="122" class="l"><a class="l" href="#122">122: </a><span class="php-comment">     * ```php
 </span></span><span id="123" class="l"><a class="l" href="#123">123: </a><span class="php-comment">     * $widget-&gt;call(array(
@@ -268,7 +264,7 @@
 </span><span id="132" class="l"><a class="l" href="#132">132: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$beforeSend" href="#$beforeSend">$beforeSend</a></span>;
 </span><span id="133" class="l"><a class="l" href="#133">133: </a>
 </span><span id="134" class="l"><a class="l" href="#134">134: </a>    <span class="php-comment">/**
-</span></span><span id="135" class="l"><a class="l" href="#135">135: </a><span class="php-comment">     * An event triggered after the request is called success
+</span></span><span id="135" class="l"><a class="l" href="#135">135: </a><span class="php-comment">     * An callback triggered after the request is called success
 </span></span><span id="136" class="l"><a class="l" href="#136">136: </a><span class="php-comment">     *
 </span></span><span id="137" class="l"><a class="l" href="#137">137: </a><span class="php-comment">     * ```php
 </span></span><span id="138" class="l"><a class="l" href="#138">138: </a><span class="php-comment">     * $widget-&gt;call(array(
@@ -283,7 +279,7 @@
 </span><span id="147" class="l"><a class="l" href="#147">147: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$success" href="#$success">$success</a></span>;
 </span><span id="148" class="l"><a class="l" href="#148">148: </a>
 </span><span id="149" class="l"><a class="l" href="#149">149: </a>    <span class="php-comment">/**
-</span></span><span id="150" class="l"><a class="l" href="#150">150: </a><span class="php-comment">     * An event triggered when the request fails
+</span></span><span id="150" class="l"><a class="l" href="#150">150: </a><span class="php-comment">     * An callback triggered when the request fails
 </span></span><span id="151" class="l"><a class="l" href="#151">151: </a><span class="php-comment">     *
 </span></span><span id="152" class="l"><a class="l" href="#152">152: </a><span class="php-comment">     * The `$textStatus` could be `curl`, `http`, and `parser`
 </span></span><span id="153" class="l"><a class="l" href="#153">153: </a><span class="php-comment">     *
@@ -300,7 +296,7 @@
 </span><span id="164" class="l"><a class="l" href="#164">164: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$error" href="#$error">$error</a></span>;
 </span><span id="165" class="l"><a class="l" href="#165">165: </a>
 </span><span id="166" class="l"><a class="l" href="#166">166: </a>    <span class="php-comment">/**
-</span></span><span id="167" class="l"><a class="l" href="#167">167: </a><span class="php-comment">     * An event triggered when finishes (after `success` and `error` callbacks are executed)
+</span></span><span id="167" class="l"><a class="l" href="#167">167: </a><span class="php-comment">     * An callback triggered when finishes (after `success` and `error` callbacks are executed)
 </span></span><span id="168" class="l"><a class="l" href="#168">168: </a><span class="php-comment">     *
 </span></span><span id="169" class="l"><a class="l" href="#169">169: </a><span class="php-comment">     * ```php
 </span></span><span id="170" class="l"><a class="l" href="#170">170: </a><span class="php-comment">     * $widget-&gt;call(array(
@@ -422,7 +418,7 @@
 </span><span id="286" class="l"><a class="l" href="#286">286: </a>    }
 </span><span id="287" class="l"><a class="l" href="#287">287: </a>
 </span><span id="288" class="l"><a class="l" href="#288">288: </a>    <span class="php-comment">/**
-</span></span><span id="289" class="l"><a class="l" href="#289">289: </a><span class="php-comment">     * Execute the request, parse the response data and trigger relative events
+</span></span><span id="289" class="l"><a class="l" href="#289">289: </a><span class="php-comment">     * Execute the request, parse the response data and trigger relative callbacks
 </span></span><span id="290" class="l"><a class="l" href="#290">290: </a><span class="php-comment">     */</span>
 </span><span id="291" class="l"><a class="l" href="#291">291: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_execute" href="#_execute">execute</a>()
 </span><span id="292" class="l"><a class="l" href="#292">292: </a>    {
@@ -913,7 +909,7 @@
 </span><span id="777" class="l"><a class="l" href="#777">777: </a>    }
 </span><span id="778" class="l"><a class="l" href="#778">778: </a>
 </span><span id="779" class="l"><a class="l" href="#779">779: </a>    <span class="php-comment">/**
-</span></span><span id="780" class="l"><a class="l" href="#780">780: </a><span class="php-comment">     * Set callback for success event
+</span></span><span id="780" class="l"><a class="l" href="#780">780: </a><span class="php-comment">     * Set success callback
 </span></span><span id="781" class="l"><a class="l" href="#781">781: </a><span class="php-comment">     *
 </span></span><span id="782" class="l"><a class="l" href="#782">782: </a><span class="php-comment">     * @param \Closure $fn
 </span></span><span id="783" class="l"><a class="l" href="#783">783: </a><span class="php-comment">     * @return Call
@@ -925,7 +921,7 @@
 </span><span id="789" class="l"><a class="l" href="#789">789: </a>    }
 </span><span id="790" class="l"><a class="l" href="#790">790: </a>
 </span><span id="791" class="l"><a class="l" href="#791">791: </a>    <span class="php-comment">/**
-</span></span><span id="792" class="l"><a class="l" href="#792">792: </a><span class="php-comment">     * Set callback for error event
+</span></span><span id="792" class="l"><a class="l" href="#792">792: </a><span class="php-comment">     * Set error callback
 </span></span><span id="793" class="l"><a class="l" href="#793">793: </a><span class="php-comment">     *
 </span></span><span id="794" class="l"><a class="l" href="#794">794: </a><span class="php-comment">     * @param \Closure $fn
 </span></span><span id="795" class="l"><a class="l" href="#795">795: </a><span class="php-comment">     * @return Call
@@ -937,7 +933,7 @@
 </span><span id="801" class="l"><a class="l" href="#801">801: </a>    }
 </span><span id="802" class="l"><a class="l" href="#802">802: </a>
 </span><span id="803" class="l"><a class="l" href="#803">803: </a>    <span class="php-comment">/**
-</span></span><span id="804" class="l"><a class="l" href="#804">804: </a><span class="php-comment">     * Set callback for complete event
+</span></span><span id="804" class="l"><a class="l" href="#804">804: </a><span class="php-comment">     * Set complete callback
 </span></span><span id="805" class="l"><a class="l" href="#805">805: </a><span class="php-comment">     *
 </span></span><span id="806" class="l"><a class="l" href="#806">806: </a><span class="php-comment">     * @param \Closure $fn
 </span></span><span id="807" class="l"><a class="l" href="#807">807: </a><span class="php-comment">     * @return Call

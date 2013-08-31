@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Widget\Validator\AbstractGroupValidator | Widget Framework</title>
+	<title>Class Widget\Validator\CharLength | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?969285891"></script>
+	<script type="text/javascript" src="elementlist.js?143782770"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -29,8 +29,6 @@
 						<ul>
 				<li><a href="namespace-Widget.Db.html">Db</a>
 						</li>
-				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
-						</li>
 				<li class="active"><a href="namespace-Widget.Validator.html">Validator</a>
 						</li>
 							</ul></li>
@@ -43,16 +41,15 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li class="active"><a href="class-Widget.Validator.AbstractGroupValidator.html">AbstractGroupValidator</a></li>
-				<li><a href="class-Widget.Validator.AbstractLengthValidator.html">AbstractLengthValidator</a></li>
-				<li><a href="class-Widget.Validator.AbstractValidator.html">AbstractValidator</a></li>
 				<li><a href="class-Widget.Validator.All.html">All</a></li>
 				<li><a href="class-Widget.Validator.AllOf.html">AllOf</a></li>
 				<li><a href="class-Widget.Validator.Alnum.html">Alnum</a></li>
 				<li><a href="class-Widget.Validator.Alpha.html">Alpha</a></li>
+				<li><a href="class-Widget.Validator.BaseValidator.html">BaseValidator</a></li>
 				<li><a href="class-Widget.Validator.Between.html">Between</a></li>
 				<li><a href="class-Widget.Validator.Blank.html">Blank</a></li>
 				<li><a href="class-Widget.Validator.Callback.html">Callback</a></li>
+				<li class="active"><a href="class-Widget.Validator.CharLength.html">CharLength</a></li>
 				<li><a href="class-Widget.Validator.Chinese.html">Chinese</a></li>
 				<li><a href="class-Widget.Validator.Color.html">Color</a></li>
 				<li><a href="class-Widget.Validator.CreditCard.html">CreditCard</a></li>
@@ -145,12 +142,13 @@
 	</div>
 
 <div id="content" class="class">
-	<h1>Class AbstractGroupValidator</h1>
+	<h1>Class CharLength</h1>
 
 
 	<div class="description">
 	
-<p>The base class of validator</p>
+<p>Check if the characters length (or size) of input is equals specified length
+or in specified length range</p>
 
 	</div>
 
@@ -163,38 +161,35 @@
 		</dd>
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by" />
-			<a href="class-Widget.Validator.AbstractValidator.html"><span>Widget\Validator\AbstractValidator</span></a>
+			<a href="class-Widget.Validator.BaseValidator.html"><span>Widget\Validator\BaseValidator</span></a>
 			
 			
 			
 		</dd>
 		<dd style="padding-left:60px">
 			<img src="resources/inherit.png" alt="Extended by" />
-<b><span>Widget\Validator\AbstractGroupValidator</span></b>			
+			<a href="class-Widget.Validator.Length.html"><span>Widget\Validator\Length</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:90px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Widget\Validator\CharLength</span></b>			
 			
 			
 		</dd>
 	</dl>
 
 
-	<div>
-		<h4>Direct known subclasses</h4>
-			<a href="class-Widget.Validator.NoneOf.html">Widget\Validator\NoneOf</a>, 
-			<a href="class-Widget.Validator.SomeOf.html">Widget\Validator\SomeOf</a>
-	</div>
 
-	<div>
-		<h4>Indirect known subclasses</h4>
-			<a href="class-Widget.Validator.AllOf.html">Widget\Validator\AllOf</a>, 
-			<a href="class-Widget.Validator.OneOf.html">Widget\Validator\OneOf</a>
-	</div>
 
 
 
 
 
 	<div class="info">
-		<b>Abstract</b><br />
+		
 		
 		<b>Namespace:</b> <a href="namespace-Widget.html">Widget</a>\<a href="namespace-Widget.Validator.html">Validator</a><br />
 		
@@ -202,100 +197,38 @@
 				<b>Author:</b>
 				Twin Huang &lt;<a
 href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-Widget.Validator.AbstractGroupValidator.html#11-81" title="Go to source code">Validator/AbstractGroupValidator.php</a><br />
+		<b>Located at</b> <a href="source-class-Widget.Validator.CharLength.html#11-24" title="Go to source code">Validator/CharLength.php</a><br />
 	</div>
 
 
 
-	<table class="summary" id="methods">
-	<caption>Methods summary</caption>
-	<tr data-order="reset" id="_reset">
-
-		<td class="attributes"><code>
-			 protected 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_reset">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractGroupValidator.html#27-35" title="Go to source code">reset</a>( )</code>
-
-		<div class="description short">
-			
-<p>Reset validator status</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Reset validator status</p>
-
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="getMessages" id="_getMessages">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_getMessages">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractGroupValidator.html#38-80" title="Go to source code">getMessages</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-				<h4>Throws</h4>
-				<div class="list">
-					<code><code><a href="class-UnexpectedValueException.html">UnexpectedValueException</a></code></code><br>When message contains unknown parameter<br />
-				</div>
-
-
-				<h4>Overrides</h4>
-				<div class="list"><code><a href="class-Widget.Validator.AbstractValidator.html#_getMessages">Widget\Validator\AbstractValidator::getMessages()</a></code></div>
-
-		</div>
-		</div></td>
-	</tr>
-	</table>
 
 	<table class="summary inherited">
-	<caption>Methods inherited from <a href="class-Widget.Validator.AbstractValidator.html#methods">Widget\Validator\AbstractValidator</a></caption>
+	<caption>Methods inherited from <a href="class-Widget.Validator.Length.html#methods">Widget\Validator\Length</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-Widget.Validator.AbstractValidator.html#___invoke">__invoke()</a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#_addError">addError()</a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#_doValidate">doValidate()</a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#_getErrors">getErrors()</a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#_getJoinedMessage">getJoinedMessage()</a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#_getName">getName()</a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#_hasError">hasError()</a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#_isString">isString()</a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#_isValid">isValid()</a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#_loadTranslationMessages">loadTranslationMessages()</a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#_setMessages">setMessages()</a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#_setName">setName()</a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#_storeOption">storeOption()</a>
+			<a href="class-Widget.Validator.Length.html#___invoke">__invoke()</a>, 
+			<a href="class-Widget.Validator.Length.html#_doValidate">doValidate()</a>, 
+			<a href="class-Widget.Validator.Length.html#_getLength">getLength()</a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Widget.Validator.BaseValidator.html#methods">Widget\Validator\BaseValidator</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.Validator.BaseValidator.html#_addError">addError()</a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#_getErrors">getErrors()</a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#_getJoinedMessage">getJoinedMessage()</a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#_getMessages">getMessages()</a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#_getName">getName()</a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#_hasError">hasError()</a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#_isString">isString()</a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#_isValid">isValid()</a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#_loadTranslationMessages">loadTranslationMessages()</a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#_setMessages">setMessages()</a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#_setName">setName()</a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#_storeOption">storeOption()</a>
 		</code></td>
 	</tr>
 	</table>
@@ -315,10 +248,10 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 
 	<table class="summary inherited">
-	<caption>Magic methods inherited from <a href="class-Widget.Validator.AbstractValidator.html#methods">Widget\Validator\AbstractValidator</a></caption>
+	<caption>Magic methods inherited from <a href="class-Widget.Validator.BaseValidator.html#methods">Widget\Validator\BaseValidator</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-Widget.Validator.AbstractValidator.html#m_t">t()</a>
+			<a href="class-Widget.Validator.BaseValidator.html#m_t">t()</a>
 		</code></td>
 	</tr>
 	</table>
@@ -377,55 +310,74 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 	<table class="summary" id="properties">
 	<caption>Properties summary</caption>
-	<tr data-order="validators" id="$validators">
+	<tr data-order="lengthMessage" id="$lengthMessage">
 		<td class="attributes"><code>
 			protected  
-			array&lt;AbstractValidator&gt;
+			string
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Validator.AbstractGroupValidator.html#13-18" title="Go to source code"><var>$validators</var></a>
+				<a href="source-class-Widget.Validator.CharLength.html#19" title="Go to source code"><var>$lengthMessage</var></a>
 		</td>
-		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="value"><code><span class="php-quote">'%name% must have %length% characters'</span></code></td>
 		<td class="description"><div>
-			<a href="#$validators" class="anchor">#</a>
+			<a href="#$lengthMessage" class="anchor">#</a>
 
 			<div class="description short">
 				
-<p>The invalid validators</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>The invalid validators</p>
-
 
 			</div>
 		</div></td>
 	</tr>
-	<tr data-order="combineMessages" id="$combineMessages">
+	<tr data-order="notInMessage" id="$notInMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Widget.Validator.CharLength.html#21" title="Go to source code"><var>$notInMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'%name% must have %min% to %max% characters'</span></code></td>
+		<td class="description"><div>
+			<a href="#$notInMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="countByChars" id="$countByChars">
 		<td class="attributes"><code>
 			protected  
 			boolean
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Validator.AbstractGroupValidator.html#20-25" title="Go to source code"><var>$combineMessages</var></a>
+				<a href="source-class-Widget.Validator.CharLength.html#23" title="Go to source code"><var>$countByChars</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">true</span></code></td>
 		<td class="description"><div>
-			<a href="#$combineMessages" class="anchor">#</a>
+			<a href="#$countByChars" class="anchor">#</a>
 
 			<div class="description short">
 				
-<p>Whether combine messages into single one or not</p>
+<p>Whether count the string length by characters or bytes</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>Whether combine messages into single one or not</p>
+<p>Whether count the string length by characters or bytes</p>
 
 
 			</div>
@@ -434,16 +386,30 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 	</table>
 
 	<table class="summary inherited">
-	<caption>Properties inherited from <a href="class-Widget.Validator.AbstractValidator.html#properties">Widget\Validator\AbstractValidator</a></caption>
+	<caption>Properties inherited from <a href="class-Widget.Validator.Length.html#properties">Widget\Validator\Length</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-Widget.Validator.AbstractValidator.html#$errors"><var>$errors</var></a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#$name"><var>$name</var></a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#$negative"><var>$negative</var></a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#$negativeMessage"><var>$negativeMessage</var></a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#$notStringMessage"><var>$notStringMessage</var></a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#$translationMessagesLoaded"><var>$translationMessagesLoaded</var></a>, 
-			<a href="class-Widget.Validator.AbstractValidator.html#$validator"><var>$validator</var></a>
+			<a href="class-Widget.Validator.Length.html#$charset"><var>$charset</var></a>, 
+			<a href="class-Widget.Validator.Length.html#$length"><var>$length</var></a>, 
+			<a href="class-Widget.Validator.Length.html#$lengthItemMessage"><var>$lengthItemMessage</var></a>, 
+			<a href="class-Widget.Validator.Length.html#$max"><var>$max</var></a>, 
+			<a href="class-Widget.Validator.Length.html#$min"><var>$min</var></a>, 
+			<a href="class-Widget.Validator.Length.html#$notDetectedMessage"><var>$notDetectedMessage</var></a>, 
+			<a href="class-Widget.Validator.Length.html#$notInItemMessage"><var>$notInItemMessage</var></a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Widget.Validator.BaseValidator.html#properties">Widget\Validator\BaseValidator</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Widget.Validator.BaseValidator.html#$errors"><var>$errors</var></a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#$name"><var>$name</var></a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#$negative"><var>$negative</var></a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#$negativeMessage"><var>$negativeMessage</var></a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#$notStringMessage"><var>$notStringMessage</var></a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#$translationMessagesLoaded"><var>$translationMessagesLoaded</var></a>, 
+			<a href="class-Widget.Validator.BaseValidator.html#$validator"><var>$validator</var></a>
 		</code></td>
 	</tr>
 	</table>
@@ -460,10 +426,10 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 
 	<table class="summary inherited">
-	<caption>Magic properties inherited from <a href="class-Widget.Validator.AbstractValidator.html#properties">Widget\Validator\AbstractValidator</a></caption>
+	<caption>Magic properties inherited from <a href="class-Widget.Validator.BaseValidator.html#properties">Widget\Validator\BaseValidator</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-Widget.Validator.AbstractValidator.html#m$t"><var>$t</var></a>
+			<a href="class-Widget.Validator.BaseValidator.html#m$t"><var>$t</var></a>
 		</code></td>
 	</tr>
 	</table>
@@ -487,7 +453,6 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 			<a href="class-Widget.Base.html#m$env"><var>$env</var></a>, 
 			<a href="class-Widget.Base.html#m$error"><var>$error</var></a>, 
 			<a href="class-Widget.Base.html#m$escape"><var>$escape</var></a>, 
-			<a href="class-Widget.Base.html#m$event"><var>$event</var></a>, 
 			<a href="class-Widget.Base.html#m$fileCache"><var>$fileCache</var></a>, 
 			<a href="class-Widget.Base.html#m$flush"><var>$flush</var></a>, 
 			<a href="class-Widget.Base.html#m$gravatar"><var>$gravatar</var></a>, 

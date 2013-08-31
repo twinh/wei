@@ -8,7 +8,7 @@
 	<title>File Validator/All.php | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?969285891"></script>
+	<script type="text/javascript" src="elementlist.js?143782770"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -30,8 +30,6 @@
 						<ul>
 				<li><a href="namespace-Widget.Db.html">Db</a>
 						</li>
-				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
-						</li>
 				<li class="active"><a href="namespace-Widget.Validator.html">Validator</a>
 						</li>
 							</ul></li>
@@ -44,16 +42,15 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li><a href="class-Widget.Validator.AbstractGroupValidator.html">AbstractGroupValidator</a></li>
-				<li><a href="class-Widget.Validator.AbstractLengthValidator.html">AbstractLengthValidator</a></li>
-				<li><a href="class-Widget.Validator.AbstractValidator.html">AbstractValidator</a></li>
 				<li class="active"><a href="class-Widget.Validator.All.html">All</a></li>
 				<li><a href="class-Widget.Validator.AllOf.html">AllOf</a></li>
 				<li><a href="class-Widget.Validator.Alnum.html">Alnum</a></li>
 				<li><a href="class-Widget.Validator.Alpha.html">Alpha</a></li>
+				<li><a href="class-Widget.Validator.BaseValidator.html">BaseValidator</a></li>
 				<li><a href="class-Widget.Validator.Between.html">Between</a></li>
 				<li><a href="class-Widget.Validator.Blank.html">Blank</a></li>
 				<li><a href="class-Widget.Validator.Callback.html">Callback</a></li>
+				<li><a href="class-Widget.Validator.CharLength.html">CharLength</a></li>
 				<li><a href="class-Widget.Validator.Chinese.html">Chinese</a></li>
 				<li><a href="class-Widget.Validator.Color.html">Color</a></li>
 				<li><a href="class-Widget.Validator.CreditCard.html">CreditCard</a></li>
@@ -160,9 +157,9 @@
 </span></span><span id="12" class="l"><a class="l" href="#12"> 12: </a><span class="php-comment"> * Check if all of the element in the input is valid by all specified rules
 </span></span><span id="13" class="l"><a class="l" href="#13"> 13: </a><span class="php-comment"> *
 </span></span><span id="14" class="l"><a class="l" href="#14"> 14: </a><span class="php-comment"> * @author      Twin Huang &lt;twinhuang@qq.com&gt;
-</span></span><span id="15" class="l"><a class="l" href="#15"> 15: </a><span class="php-comment"> * @property    Is $is The validator manager
+</span></span><span id="15" class="l"><a class="l" href="#15"> 15: </a><span class="php-comment"> * @property    \Widget\Is $is The validator manager
 </span></span><span id="16" class="l"><a class="l" href="#16"> 16: </a><span class="php-comment"> */</span>
-</span><span id="17" class="l"><a class="l" href="#17"> 17: </a><span class="php-keyword1">class</span> <a id="All" href="#All">All</a> <span class="php-keyword1">extends</span> AbstractValidator
+</span><span id="17" class="l"><a class="l" href="#17"> 17: </a><span class="php-keyword1">class</span> <a id="All" href="#All">All</a> <span class="php-keyword1">extends</span> BaseValidator
 </span><span id="18" class="l"><a class="l" href="#18"> 18: </a>{
 </span><span id="19" class="l"><a class="l" href="#19"> 19: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$notArrayMessage" href="#$notArrayMessage">$notArrayMessage</a></span> = <span class="php-quote">'%name% must be of type array'</span>;
 </span><span id="20" class="l"><a class="l" href="#20"> 20: </a>
@@ -230,7 +227,7 @@
 </span><span id="82" class="l"><a class="l" href="#82"> 82: </a>    <span class="php-comment">/**
 </span></span><span id="83" class="l"><a class="l" href="#83"> 83: </a><span class="php-comment">     * {@inheritdoc}
 </span></span><span id="84" class="l"><a class="l" href="#84"> 84: </a><span class="php-comment">     */</span>
-</span><span id="85" class="l"><a class="l" href="#85"> 85: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getMessages" href="#_getMessages">getMessages</a>()
+</span><span id="85" class="l"><a class="l" href="#85"> 85: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getMessages" href="#_getMessages">getMessages</a>(<span class="php-var">$name</span> = <span class="php-keyword1">null</span>)
 </span><span id="86" class="l"><a class="l" href="#86"> 86: </a>    {
 </span><span id="87" class="l"><a class="l" href="#87"> 87: </a>        <span class="php-var">$this</span>-&gt;loadTranslationMessages();
 </span><span id="88" class="l"><a class="l" href="#88"> 88: </a>        <span class="php-var">$translator</span> = <span class="php-var">$this</span>-&gt;t;
@@ -238,25 +235,26 @@
 </span><span id="90" class="l"><a class="l" href="#90"> 90: </a>        <span class="php-comment">// Firstly, translates the item name (%name%'s %index% item)</span>
 </span><span id="91" class="l"><a class="l" href="#91"> 91: </a>        <span class="php-comment">// Secondly, translates &quot;%name%&quot; in the item name</span>
 </span><span id="92" class="l"><a class="l" href="#92"> 92: </a>        <span class="php-var">$name</span> = <span class="php-var">$translator</span>(<span class="php-var">$translator</span>(<span class="php-var">$this</span>-&gt;itemName), <span class="php-keyword1">array</span>(
-</span><span id="93" class="l"><a class="l" href="#93"> 93: </a>            <span class="php-quote">'%name%'</span> =&gt; <span class="php-var">$translator</span>(<span class="php-var">$this</span>-&gt;name)
+</span><span id="93" class="l"><a class="l" href="#93"> 93: </a>            <span class="php-quote">'%name%'</span> =&gt; <span class="php-var">$translator</span>(<span class="php-var">$name</span> ?: <span class="php-var">$this</span>-&gt;name)
 </span><span id="94" class="l"><a class="l" href="#94"> 94: </a>        ));
 </span><span id="95" class="l"><a class="l" href="#95"> 95: </a>
 </span><span id="96" class="l"><a class="l" href="#96"> 96: </a>        <span class="php-var">$messages</span> = <span class="php-keyword1">array</span>();
 </span><span id="97" class="l"><a class="l" href="#97"> 97: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;validators <span class="php-keyword1">as</span> <span class="php-var">$index</span> =&gt; <span class="php-var">$validators</span>) {
-</span><span id="98" class="l"><a class="l" href="#98"> 98: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$validators</span> <span class="php-keyword1">as</span> <span class="php-var">$rule</span> =&gt; <span class="php-var">$validator</span>) {
-</span><span id="99" class="l"><a class="l" href="#99"> 99: </a>                <span class="php-comment">// Lastly, translates &quot;index&quot; in the item name</span>
-</span><span id="100" class="l"><a class="l" href="#100">100: </a>                <span class="php-var">$validator</span>-&gt;setName(<span class="php-var">$translator</span>(<span class="php-var">$name</span>, <span class="php-keyword1">array</span>(
-</span><span id="101" class="l"><a class="l" href="#101">101: </a>                    <span class="php-quote">'%index%'</span> =&gt; <span class="php-var">$index</span>
-</span><span id="102" class="l"><a class="l" href="#102">102: </a>                )));
-</span><span id="103" class="l"><a class="l" href="#103">103: </a>                <span class="php-keyword1">foreach</span> (<span class="php-var">$validator</span>-&gt;getMessages() <span class="php-keyword1">as</span> <span class="php-var">$option</span> =&gt; <span class="php-var">$message</span>) {
-</span><span id="104" class="l"><a class="l" href="#104">104: </a>                    <span class="php-var">$messages</span>[<span class="php-var">$rule</span> . <span class="php-quote">'.'</span> . <span class="php-var">$option</span> . <span class="php-quote">'.'</span> . <span class="php-var">$index</span>] = <span class="php-var">$message</span>;
-</span><span id="105" class="l"><a class="l" href="#105">105: </a>                }
-</span><span id="106" class="l"><a class="l" href="#106">106: </a>            }
-</span><span id="107" class="l"><a class="l" href="#107">107: </a>        }
-</span><span id="108" class="l"><a class="l" href="#108">108: </a>        <span class="php-keyword1">return</span> <span class="php-var">$messages</span>;
-</span><span id="109" class="l"><a class="l" href="#109">109: </a>    }
-</span><span id="110" class="l"><a class="l" href="#110">110: </a>}
-</span><span id="111" class="l"><a class="l" href="#111">111: </a></span></code></pre>
+</span><span id="98" class="l"><a class="l" href="#98"> 98: </a>            <span class="php-comment">/** @var $validator BaseValidator */</span>
+</span><span id="99" class="l"><a class="l" href="#99"> 99: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$validators</span> <span class="php-keyword1">as</span> <span class="php-var">$rule</span> =&gt; <span class="php-var">$validator</span>) {
+</span><span id="100" class="l"><a class="l" href="#100">100: </a>                <span class="php-comment">// Lastly, translates &quot;index&quot; in the item name</span>
+</span><span id="101" class="l"><a class="l" href="#101">101: </a>                <span class="php-var">$validator</span>-&gt;setName(<span class="php-var">$translator</span>(<span class="php-var">$name</span>, <span class="php-keyword1">array</span>(
+</span><span id="102" class="l"><a class="l" href="#102">102: </a>                    <span class="php-quote">'%index%'</span> =&gt; <span class="php-var">$index</span>
+</span><span id="103" class="l"><a class="l" href="#103">103: </a>                )));
+</span><span id="104" class="l"><a class="l" href="#104">104: </a>                <span class="php-keyword1">foreach</span> (<span class="php-var">$validator</span>-&gt;getMessages() <span class="php-keyword1">as</span> <span class="php-var">$option</span> =&gt; <span class="php-var">$message</span>) {
+</span><span id="105" class="l"><a class="l" href="#105">105: </a>                    <span class="php-var">$messages</span>[<span class="php-var">$rule</span> . <span class="php-quote">'.'</span> . <span class="php-var">$option</span> . <span class="php-quote">'.'</span> . <span class="php-var">$index</span>] = <span class="php-var">$message</span>;
+</span><span id="106" class="l"><a class="l" href="#106">106: </a>                }
+</span><span id="107" class="l"><a class="l" href="#107">107: </a>            }
+</span><span id="108" class="l"><a class="l" href="#108">108: </a>        }
+</span><span id="109" class="l"><a class="l" href="#109">109: </a>        <span class="php-keyword1">return</span> <span class="php-var">$messages</span>;
+</span><span id="110" class="l"><a class="l" href="#110">110: </a>    }
+</span><span id="111" class="l"><a class="l" href="#111">111: </a>}
+</span><span id="112" class="l"><a class="l" href="#112">112: </a></span></code></pre>
 
 	<div id="footer">
 		Widget Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

@@ -7,7 +7,7 @@
 	<title>Class Widget\Validate | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?969285891"></script>
+	<script type="text/javascript" src="elementlist.js?143782770"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -28,8 +28,6 @@
 				<li class="active"><a href="namespace-Widget.html">Widget<span></span></a>
 						<ul>
 				<li><a href="namespace-Widget.Db.html">Db</a>
-						</li>
-				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
 						</li>
 				<li><a href="namespace-Widget.Validator.html">Validator</a>
 						</li>
@@ -55,14 +53,12 @@
 				<li><a href="class-Widget.Config.html">Config</a></li>
 				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
 				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
-				<li><a href="class-Widget.Counter.html">Counter</a></li>
 				<li><a href="class-Widget.Db.html">Db</a></li>
 				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
 				<li><a href="class-Widget.Download.html">Download</a></li>
 				<li><a href="class-Widget.Env.html">Env</a></li>
 				<li><a href="class-Widget.Error.html">Error</a></li>
 				<li><a href="class-Widget.Escape.html">Escape</a></li>
-				<li><a href="class-Widget.Event.html">Event</a></li>
 				<li><a href="class-Widget.FileCache.html">FileCache</a></li>
 				<li><a href="class-Widget.Flush.html">Flush</a></li>
 				<li><a href="class-Widget.Gravatar.html">Gravatar</a></li>
@@ -173,7 +169,7 @@
 				<b>Author:</b>
 				Twin Huang &lt;<a
 href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-Widget.Validate.html#13-705" title="Go to source code">Validate.php</a><br />
+		<b>Located at</b> <a href="source-class-Widget.Validate.html#13-701" title="Go to source code">Validate.php</a><br />
 	</div>
 
 
@@ -260,7 +256,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When validation rule is not array, string or instance of AbstractValidator<br />
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When validation rule is not array, string or instance of BaseValidator<br />
 				</div>
 
 
@@ -323,7 +319,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addValidRule">#</a>
-		<code><a href="source-class-Widget.Validate.html#335-347" title="Go to source code">addValidRule</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#335-346" title="Go to source code">addValidRule</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
 
 		<div class="description short">
 			
@@ -367,7 +363,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addInvalidRule">#</a>
-		<code><a href="source-class-Widget.Validate.html#349-361" title="Go to source code">addInvalidRule</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#348-359" title="Go to source code">addInvalidRule</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
 
 		<div class="description short">
 			
@@ -411,7 +407,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getValidFields">#</a>
-		<code><a href="source-class-Widget.Validate.html#363-371" title="Go to source code">getValidFields</a>( )</code>
+		<code><a href="source-class-Widget.Validate.html#361-369" title="Go to source code">getValidFields</a>( )</code>
 
 		<div class="description short">
 			
@@ -448,7 +444,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getInvalidFields">#</a>
-		<code><a href="source-class-Widget.Validate.html#373-381" title="Go to source code">getInvalidFields</a>( )</code>
+		<code><a href="source-class-Widget.Validate.html#371-379" title="Go to source code">getInvalidFields</a>( )</code>
 
 		<div class="description short">
 			
@@ -485,7 +481,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isFieldValid">#</a>
-		<code><a href="source-class-Widget.Validate.html#383-392" title="Go to source code">isFieldValid</a>( <span>string <var>$field</var></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#381-390" title="Go to source code">isFieldValid</a>( <span>string <var>$field</var></span> )</code>
 
 		<div class="description short">
 			
@@ -527,7 +523,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isFieldInvalid">#</a>
-		<code><a href="source-class-Widget.Validate.html#394-403" title="Go to source code">isFieldInvalid</a>( <span>string <var>$field</var></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#392-401" title="Go to source code">isFieldInvalid</a>( <span>string <var>$field</var></span> )</code>
 
 		<div class="description short">
 			
@@ -569,7 +565,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setRules">#</a>
-		<code><a href="source-class-Widget.Validate.html#405-415" title="Go to source code">setRules</a>( <span>array <var>$rules</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#403-413" title="Go to source code">setRules</a>( <span>array <var>$rules</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -611,7 +607,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getRules">#</a>
-		<code><a href="source-class-Widget.Validate.html#417-426" title="Go to source code">getRules</a>( <span>string <var>$field</var></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#415-424" title="Go to source code">getRules</a>( <span>string <var>$field</var></span> )</code>
 
 		<div class="description short">
 			
@@ -653,7 +649,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getRuleParams">#</a>
-		<code><a href="source-class-Widget.Validate.html#428-438" title="Go to source code">getRuleParams</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#426-436" title="Go to source code">getRuleParams</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
 
 		<div class="description short">
 			
@@ -697,7 +693,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getValidRules">#</a>
-		<code><a href="source-class-Widget.Validate.html#440-449" title="Go to source code">getValidRules</a>( <span>string <var>$field</var></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#438-447" title="Go to source code">getValidRules</a>( <span>string <var>$field</var></span> )</code>
 
 		<div class="description short">
 			
@@ -739,7 +735,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getInvalidRules">#</a>
-		<code><a href="source-class-Widget.Validate.html#451-462" title="Go to source code">getInvalidRules</a>( <span>string <var>$field</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#449-460" title="Go to source code">getInvalidRules</a>( <span>string <var>$field</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -781,7 +777,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isValid">#</a>
-		<code><a href="source-class-Widget.Validate.html#464-472" title="Go to source code">isValid</a>( )</code>
+		<code><a href="source-class-Widget.Validate.html#462-470" title="Go to source code">isValid</a>( )</code>
 
 		<div class="description short">
 			
@@ -818,7 +814,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addRule">#</a>
-		<code><a href="source-class-Widget.Validate.html#474-484" title="Go to source code">addRule</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span>, <span>mixed <var>$parameters</var></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#472-482" title="Go to source code">addRule</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span>, <span>mixed <var>$parameters</var></span> )</code>
 
 		<div class="description short">
 			
@@ -860,7 +856,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_hasRule">#</a>
-		<code><a href="source-class-Widget.Validate.html#486-496" title="Go to source code">hasRule</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#484-494" title="Go to source code">hasRule</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
 
 		<div class="description short">
 			
@@ -904,7 +900,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_removeRule">#</a>
-		<code><a href="source-class-Widget.Validate.html#498-512" title="Go to source code">removeRule</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#496-510" title="Go to source code">removeRule</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
 
 		<div class="description short">
 			
@@ -948,7 +944,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setData">#</a>
-		<code><a href="source-class-Widget.Validate.html#514-533" title="Go to source code">setData</a>( <span>array|object <var>$data</var></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#512-529" title="Go to source code">setData</a>( <span>array|object <var>$data</var></span> )</code>
 
 		<div class="description short">
 			
@@ -994,7 +990,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getData">#</a>
-		<code><a href="source-class-Widget.Validate.html#535-543" title="Go to source code">getData</a>( )</code>
+		<code><a href="source-class-Widget.Validate.html#531-539" title="Go to source code">getData</a>( )</code>
 
 		<div class="description short">
 			
@@ -1031,7 +1027,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getFieldData">#</a>
-		<code><a href="source-class-Widget.Validate.html#545-565" title="Go to source code">getFieldData</a>( <span>string <var>$field</var></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#541-561" title="Go to source code">getFieldData</a>( <span>string <var>$field</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1073,7 +1069,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setFieldData">#</a>
-		<code><a href="source-class-Widget.Validate.html#567-582" title="Go to source code">setFieldData</a>( <span>string <var>$field</var></span>, <span>mixed <var>$data</var></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#563-578" title="Go to source code">setFieldData</a>( <span>string <var>$field</var></span>, <span>mixed <var>$data</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1117,7 +1113,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setMessages">#</a>
-		<code><a href="source-class-Widget.Validate.html#584-594" title="Go to source code">setMessages</a>( <span>array <var>$messages</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#580-590" title="Go to source code">setMessages</a>( <span>array <var>$messages</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1159,7 +1155,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getMessages">#</a>
-		<code><a href="source-class-Widget.Validate.html#596-604" title="Go to source code">getMessages</a>( )</code>
+		<code><a href="source-class-Widget.Validate.html#592-600" title="Go to source code">getMessages</a>( )</code>
 
 		<div class="description short">
 			
@@ -1196,7 +1192,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDetailMessages">#</a>
-		<code><a href="source-class-Widget.Validate.html#606-620" title="Go to source code">getDetailMessages</a>( )</code>
+		<code><a href="source-class-Widget.Validate.html#602-616" title="Go to source code">getDetailMessages</a>( )</code>
 
 		<div class="description short">
 			
@@ -1233,7 +1229,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getSummaryMessages">#</a>
-		<code><a href="source-class-Widget.Validate.html#622-639" title="Go to source code">getSummaryMessages</a>( )</code>
+		<code><a href="source-class-Widget.Validate.html#618-635" title="Go to source code">getSummaryMessages</a>( )</code>
 
 		<div class="description short">
 			
@@ -1270,7 +1266,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getJoinedMessage">#</a>
-		<code><a href="source-class-Widget.Validate.html#641-659" title="Go to source code">getJoinedMessage</a>( <span>string <var>$separator</var> = <span class="php-quote">&quot;\n&quot;</span></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#637-655" title="Go to source code">getJoinedMessage</a>( <span>string <var>$separator</var> = <span class="php-quote">&quot;\n&quot;</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1312,7 +1308,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getFirstMessage">#</a>
-		<code><a href="source-class-Widget.Validate.html#661-672" title="Go to source code">getFirstMessage</a>( )</code>
+		<code><a href="source-class-Widget.Validate.html#657-668" title="Go to source code">getFirstMessage</a>( )</code>
 
 		<div class="description short">
 			
@@ -1342,14 +1338,14 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="attributes"><code>
 			 public 
-			<code><a href="class-Widget.Validator.AbstractValidator.html">Widget\Validator\AbstractValidator</a></code>
+			<code><a href="class-Widget.Validator.BaseValidator.html">Widget\Validator\BaseValidator</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getRuleValidator">#</a>
-		<code><a href="source-class-Widget.Validate.html#674-684" title="Go to source code">getRuleValidator</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#670-680" title="Go to source code">getRuleValidator</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1373,7 +1369,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Widget.Validator.AbstractValidator.html">Widget\Validator\AbstractValidator</a></code></code><br />
+					<code><code><a href="class-Widget.Validator.BaseValidator.html">Widget\Validator\BaseValidator</a></code></code><br />
 				</div>
 
 
@@ -1393,7 +1389,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setNames">#</a>
-		<code><a href="source-class-Widget.Validate.html#686-694" title="Go to source code">setNames</a>( <span>array <var>$names</var></span> )</code>
+		<code><a href="source-class-Widget.Validate.html#682-690" title="Go to source code">setNames</a>( <span>array <var>$names</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1431,7 +1427,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getNames">#</a>
-		<code><a href="source-class-Widget.Validate.html#696-704" title="Go to source code">getNames</a>( )</code>
+		<code><a href="source-class-Widget.Validate.html#692-700" title="Go to source code">getNames</a>( )</code>
 
 		<div class="description short">
 			
@@ -1641,13 +1637,13 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 	<tr data-order="ruleValid" id="$ruleValid">
 		<td class="attributes"><code>
 			protected  
-			null|callable
+			callable
 		</code></td>
 
 		<td class="name">
 				<a href="source-class-Widget.Validate.html#49-54" title="Go to source code"><var>$ruleValid</var></a>
 		</td>
-		<td class="value"><code><span class="php-keyword1">null</span></code></td>
+		<td class="value"><code></code></td>
 		<td class="description"><div>
 			<a href="#$ruleValid" class="anchor">#</a>
 
@@ -1668,13 +1664,13 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 	<tr data-order="ruleInvalid" id="$ruleInvalid">
 		<td class="attributes"><code>
 			protected  
-			null|callable
+			callable
 		</code></td>
 
 		<td class="name">
 				<a href="source-class-Widget.Validate.html#56-61" title="Go to source code"><var>$ruleInvalid</var></a>
 		</td>
-		<td class="value"><code><span class="php-keyword1">null</span></code></td>
+		<td class="value"><code></code></td>
 		<td class="description"><div>
 			<a href="#$ruleInvalid" class="anchor">#</a>
 
@@ -1695,13 +1691,13 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 	<tr data-order="fieldValid" id="$fieldValid">
 		<td class="attributes"><code>
 			protected  
-			null|callable
+			callable
 		</code></td>
 
 		<td class="name">
 				<a href="source-class-Widget.Validate.html#63-68" title="Go to source code"><var>$fieldValid</var></a>
 		</td>
-		<td class="value"><code><span class="php-keyword1">null</span></code></td>
+		<td class="value"><code></code></td>
 		<td class="description"><div>
 			<a href="#$fieldValid" class="anchor">#</a>
 
@@ -1722,13 +1718,13 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 	<tr data-order="fieldInvalid" id="$fieldInvalid">
 		<td class="attributes"><code>
 			protected  
-			null|callable
+			callable
 		</code></td>
 
 		<td class="name">
 				<a href="source-class-Widget.Validate.html#70-75" title="Go to source code"><var>$fieldInvalid</var></a>
 		</td>
-		<td class="value"><code><span class="php-keyword1">null</span></code></td>
+		<td class="value"><code></code></td>
 		<td class="description"><div>
 			<a href="#$fieldInvalid" class="anchor">#</a>
 
@@ -1749,13 +1745,13 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 	<tr data-order="success" id="$success">
 		<td class="attributes"><code>
 			protected  
-			null|callable
+			callable
 		</code></td>
 
 		<td class="name">
 				<a href="source-class-Widget.Validate.html#77-82" title="Go to source code"><var>$success</var></a>
 		</td>
-		<td class="value"><code><span class="php-keyword1">null</span></code></td>
+		<td class="value"><code></code></td>
 		<td class="description"><div>
 			<a href="#$success" class="anchor">#</a>
 
@@ -1776,13 +1772,13 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 	<tr data-order="failure" id="$failure">
 		<td class="attributes"><code>
 			protected  
-			null|callable
+			callable
 		</code></td>
 
 		<td class="name">
 				<a href="source-class-Widget.Validate.html#84-89" title="Go to source code"><var>$failure</var></a>
 		</td>
-		<td class="value"><code><span class="php-keyword1">null</span></code></td>
+		<td class="value"><code></code></td>
 		<td class="description"><div>
 			<a href="#$failure" class="anchor">#</a>
 
@@ -1969,7 +1965,7 @@ value</p>
 	<tr data-order="ruleValidators" id="$ruleValidators">
 		<td class="attributes"><code>
 			protected  
-			array&lt;Validator\AbstractValidator&gt;
+			array&lt;Validator\BaseValidator&gt;
 		</code></td>
 
 		<td class="name">
@@ -2056,7 +2052,6 @@ value</p>
 			<a href="class-Widget.Base.html#m$env"><var>$env</var></a>, 
 			<a href="class-Widget.Base.html#m$error"><var>$error</var></a>, 
 			<a href="class-Widget.Base.html#m$escape"><var>$escape</var></a>, 
-			<a href="class-Widget.Base.html#m$event"><var>$event</var></a>, 
 			<a href="class-Widget.Base.html#m$fileCache"><var>$fileCache</var></a>, 
 			<a href="class-Widget.Base.html#m$flush"><var>$flush</var></a>, 
 			<a href="class-Widget.Base.html#m$gravatar"><var>$gravatar</var></a>, 

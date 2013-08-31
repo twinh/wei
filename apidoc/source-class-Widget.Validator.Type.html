@@ -8,7 +8,7 @@
 	<title>File Validator/Type.php | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?969285891"></script>
+	<script type="text/javascript" src="elementlist.js?143782770"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -30,8 +30,6 @@
 						<ul>
 				<li><a href="namespace-Widget.Db.html">Db</a>
 						</li>
-				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
-						</li>
 				<li class="active"><a href="namespace-Widget.Validator.html">Validator</a>
 						</li>
 							</ul></li>
@@ -44,16 +42,15 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li><a href="class-Widget.Validator.AbstractGroupValidator.html">AbstractGroupValidator</a></li>
-				<li><a href="class-Widget.Validator.AbstractLengthValidator.html">AbstractLengthValidator</a></li>
-				<li><a href="class-Widget.Validator.AbstractValidator.html">AbstractValidator</a></li>
 				<li><a href="class-Widget.Validator.All.html">All</a></li>
 				<li><a href="class-Widget.Validator.AllOf.html">AllOf</a></li>
 				<li><a href="class-Widget.Validator.Alnum.html">Alnum</a></li>
 				<li><a href="class-Widget.Validator.Alpha.html">Alpha</a></li>
+				<li><a href="class-Widget.Validator.BaseValidator.html">BaseValidator</a></li>
 				<li><a href="class-Widget.Validator.Between.html">Between</a></li>
 				<li><a href="class-Widget.Validator.Blank.html">Blank</a></li>
 				<li><a href="class-Widget.Validator.Callback.html">Callback</a></li>
+				<li><a href="class-Widget.Validator.CharLength.html">CharLength</a></li>
 				<li><a href="class-Widget.Validator.Chinese.html">Chinese</a></li>
 				<li><a href="class-Widget.Validator.Color.html">Color</a></li>
 				<li><a href="class-Widget.Validator.CreditCard.html">CreditCard</a></li>
@@ -161,7 +158,7 @@
 </span></span><span id="13" class="l"><a class="l" href="#13">13: </a><span class="php-comment"> *
 </span></span><span id="14" class="l"><a class="l" href="#14">14: </a><span class="php-comment"> * @author      Twin Huang &lt;twinhuang@qq.com&gt;
 </span></span><span id="15" class="l"><a class="l" href="#15">15: </a><span class="php-comment"> */</span>
-</span><span id="16" class="l"><a class="l" href="#16">16: </a><span class="php-keyword1">class</span> <a id="Type" href="#Type">Type</a> <span class="php-keyword1">extends</span> AbstractValidator
+</span><span id="16" class="l"><a class="l" href="#16">16: </a><span class="php-keyword1">class</span> <a id="Type" href="#Type">Type</a> <span class="php-keyword1">extends</span> BaseValidator
 </span><span id="17" class="l"><a class="l" href="#17">17: </a>{
 </span><span id="18" class="l"><a class="l" href="#18">18: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$typeMessage" href="#$typeMessage">$typeMessage</a></span> = <span class="php-quote">'%name% must be %typeName%'</span>;
 </span><span id="19" class="l"><a class="l" href="#19">19: </a>
@@ -216,16 +213,14 @@
 </span><span id="68" class="l"><a class="l" href="#68">68: </a>    <span class="php-comment">/**
 </span></span><span id="69" class="l"><a class="l" href="#69">69: </a><span class="php-comment">     * {@inheritdoc}
 </span></span><span id="70" class="l"><a class="l" href="#70">70: </a><span class="php-comment">     */</span>
-</span><span id="71" class="l"><a class="l" href="#71">71: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getMessages" href="#_getMessages">getMessages</a>()
+</span><span id="71" class="l"><a class="l" href="#71">71: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getMessages" href="#_getMessages">getMessages</a>(<span class="php-var">$name</span> = <span class="php-keyword1">null</span>)
 </span><span id="72" class="l"><a class="l" href="#72">72: </a>    {
 </span><span id="73" class="l"><a class="l" href="#73">73: </a>        <span class="php-var">$this</span>-&gt;loadTranslationMessages();
-</span><span id="74" class="l"><a class="l" href="#74">74: </a>
-</span><span id="75" class="l"><a class="l" href="#75">75: </a>        <span class="php-var">$this</span>-&gt;typeName = <span class="php-var">$this</span>-&gt;t(<span class="php-var">$this</span>-&gt;type);
-</span><span id="76" class="l"><a class="l" href="#76">76: </a>
-</span><span id="77" class="l"><a class="l" href="#77">77: </a>        <span class="php-keyword1">return</span> parent::getMessages();
-</span><span id="78" class="l"><a class="l" href="#78">78: </a>    }
-</span><span id="79" class="l"><a class="l" href="#79">79: </a>}
-</span><span id="80" class="l"><a class="l" href="#80">80: </a></span></code></pre>
+</span><span id="74" class="l"><a class="l" href="#74">74: </a>        <span class="php-var">$this</span>-&gt;typeName = <span class="php-var">$this</span>-&gt;t(<span class="php-var">$this</span>-&gt;type);
+</span><span id="75" class="l"><a class="l" href="#75">75: </a>        <span class="php-keyword1">return</span> parent::getMessages(<span class="php-var">$name</span>);
+</span><span id="76" class="l"><a class="l" href="#76">76: </a>    }
+</span><span id="77" class="l"><a class="l" href="#77">77: </a>}
+</span><span id="78" class="l"><a class="l" href="#78">78: </a></span></code></pre>
 
 	<div id="footer">
 		Widget Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

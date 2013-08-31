@@ -8,7 +8,7 @@
 	<title>File Validator/EndsWith.php | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?969285891"></script>
+	<script type="text/javascript" src="elementlist.js?143782770"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -30,8 +30,6 @@
 						<ul>
 				<li><a href="namespace-Widget.Db.html">Db</a>
 						</li>
-				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
-						</li>
 				<li class="active"><a href="namespace-Widget.Validator.html">Validator</a>
 						</li>
 							</ul></li>
@@ -44,16 +42,15 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li><a href="class-Widget.Validator.AbstractGroupValidator.html">AbstractGroupValidator</a></li>
-				<li><a href="class-Widget.Validator.AbstractLengthValidator.html">AbstractLengthValidator</a></li>
-				<li><a href="class-Widget.Validator.AbstractValidator.html">AbstractValidator</a></li>
 				<li><a href="class-Widget.Validator.All.html">All</a></li>
 				<li><a href="class-Widget.Validator.AllOf.html">AllOf</a></li>
 				<li><a href="class-Widget.Validator.Alnum.html">Alnum</a></li>
 				<li><a href="class-Widget.Validator.Alpha.html">Alpha</a></li>
+				<li><a href="class-Widget.Validator.BaseValidator.html">BaseValidator</a></li>
 				<li><a href="class-Widget.Validator.Between.html">Between</a></li>
 				<li><a href="class-Widget.Validator.Blank.html">Blank</a></li>
 				<li><a href="class-Widget.Validator.Callback.html">Callback</a></li>
+				<li><a href="class-Widget.Validator.CharLength.html">CharLength</a></li>
 				<li><a href="class-Widget.Validator.Chinese.html">Chinese</a></li>
 				<li><a href="class-Widget.Validator.Color.html">Color</a></li>
 				<li><a href="class-Widget.Validator.CreditCard.html">CreditCard</a></li>
@@ -161,7 +158,7 @@
 </span></span><span id="13" class="l"><a class="l" href="#13">13: </a><span class="php-comment"> *
 </span></span><span id="14" class="l"><a class="l" href="#14">14: </a><span class="php-comment"> * @author      Twin Huang &lt;twinhuang@qq.com&gt;
 </span></span><span id="15" class="l"><a class="l" href="#15">15: </a><span class="php-comment"> */</span>
-</span><span id="16" class="l"><a class="l" href="#16">16: </a><span class="php-keyword1">class</span> <a id="EndsWith" href="#EndsWith">EndsWith</a> <span class="php-keyword1">extends</span> AbstractValidator
+</span><span id="16" class="l"><a class="l" href="#16">16: </a><span class="php-keyword1">class</span> <a id="EndsWith" href="#EndsWith">EndsWith</a> <span class="php-keyword1">extends</span> BaseValidator
 </span><span id="17" class="l"><a class="l" href="#17">17: </a>{
 </span><span id="18" class="l"><a class="l" href="#18">18: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$notFoundMessage" href="#$notFoundMessage">$notFoundMessage</a></span> = <span class="php-quote">'%name% must end with &quot;%findMe%&quot;'</span>;
 </span><span id="19" class="l"><a class="l" href="#19">19: </a>
@@ -192,10 +189,10 @@
 </span><span id="44" class="l"><a class="l" href="#44">44: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
 </span><span id="45" class="l"><a class="l" href="#45">45: </a>        }
 </span><span id="46" class="l"><a class="l" href="#46">46: </a>
-</span><span id="47" class="l"><a class="l" href="#47">47: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_string</span>(<span class="php-var">$this</span>-&gt;findMe)) {
+</span><span id="47" class="l"><a class="l" href="#47">47: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_scalar</span>(<span class="php-var">$this</span>-&gt;findMe)) {
 </span><span id="48" class="l"><a class="l" href="#48">48: </a>            <span class="php-var">$pos</span> = <span class="php-keyword2">strlen</span>(<span class="php-var">$input</span>) - <span class="php-keyword2">strlen</span>(<span class="php-var">$this</span>-&gt;findMe);
 </span><span id="49" class="l"><a class="l" href="#49">49: </a>            <span class="php-var">$fn</span> = <span class="php-var">$this</span>-&gt;<span class="php-keyword1">case</span> ? <span class="php-quote">'strrpos'</span> : <span class="php-quote">'strripos'</span>;
-</span><span id="50" class="l"><a class="l" href="#50">50: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$pos</span> !== <span class="php-var">$fn</span>(<span class="php-var">$input</span>, <span class="php-var">$this</span>-&gt;findMe)) {
+</span><span id="50" class="l"><a class="l" href="#50">50: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$pos</span> !== <span class="php-var">$fn</span>(<span class="php-var">$input</span>, (string)<span class="php-var">$this</span>-&gt;findMe)) {
 </span><span id="51" class="l"><a class="l" href="#51">51: </a>                <span class="php-var">$this</span>-&gt;addError(<span class="php-quote">'notFound'</span>);
 </span><span id="52" class="l"><a class="l" href="#52">52: </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
 </span><span id="53" class="l"><a class="l" href="#53">53: </a>            }

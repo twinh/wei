@@ -7,7 +7,7 @@
 	<title>Class Widget\Is | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?969285891"></script>
+	<script type="text/javascript" src="elementlist.js?143782770"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -28,8 +28,6 @@
 				<li class="active"><a href="namespace-Widget.html">Widget<span></span></a>
 						<ul>
 				<li><a href="namespace-Widget.Db.html">Db</a>
-						</li>
-				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
 						</li>
 				<li><a href="namespace-Widget.Validator.html">Validator</a>
 						</li>
@@ -55,14 +53,12 @@
 				<li><a href="class-Widget.Config.html">Config</a></li>
 				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
 				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
-				<li><a href="class-Widget.Counter.html">Counter</a></li>
 				<li><a href="class-Widget.Db.html">Db</a></li>
 				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
 				<li><a href="class-Widget.Download.html">Download</a></li>
 				<li><a href="class-Widget.Env.html">Env</a></li>
 				<li><a href="class-Widget.Error.html">Error</a></li>
 				<li><a href="class-Widget.Escape.html">Escape</a></li>
-				<li><a href="class-Widget.Event.html">Event</a></li>
 				<li><a href="class-Widget.FileCache.html">FileCache</a></li>
 				<li><a href="class-Widget.Flush.html">Flush</a></li>
 				<li><a href="class-Widget.Gravatar.html">Gravatar</a></li>
@@ -235,7 +231,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_validateOne">#</a>
-		<code><a href="source-class-Widget.Is.html#66-105" title="Go to source code">validateOne</a>( <span>string|<code><a href="class-Widget.Validator.AbstractValidator.html">Widget\Validator\AbstractValidator</a></code>|integer <var>$rule</var></span>, <span>array|null <var>$input</var></span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span>, <span>null <var>&amp; $validator</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$props</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Is.html#66-105" title="Go to source code">validateOne</a>( <span>string|<code><a href="class-Widget.Validator.BaseValidator.html">Widget\Validator\BaseValidator</a></code>|integer <var>$rule</var></span>, <span>array|null <var>$input</var></span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span>, <span>null <var>&amp; $validator</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$props</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -248,7 +244,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$rule</var></dt>
-					<dd><code>string|<code><a href="class-Widget.Validator.AbstractValidator.html">Widget\Validator\AbstractValidator</a></code>|integer</code><br>$rule</dd>
+					<dd><code>string|<code><a href="class-Widget.Validator.BaseValidator.html">Widget\Validator\BaseValidator</a></code>|integer</code><br>$rule</dd>
 					<dt><var>$input</var></dt>
 					<dd><code>array|null</code><br>$input</dd>
 					<dt><var>$options</var></dt>
@@ -366,7 +362,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="attributes"><code>
 			 public 
-			<code><a href="class-Widget.Validator.AbstractValidator.html">Widget\Validator\AbstractValidator</a></code>
+			<code><a href="class-Widget.Validator.BaseValidator.html">Widget\Validator\BaseValidator</a></code>
 			
 			</code>
 		</td>
@@ -397,7 +393,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Widget.Validator.AbstractValidator.html">Widget\Validator\AbstractValidator</a></code></code><br />
+					<code><code><a href="class-Widget.Validator.BaseValidator.html">Widget\Validator\BaseValidator</a></code></code><br />
 				</div>
 
 				<h4>Throws</h4>
@@ -524,9 +520,9 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</td>
 		<td class="value"><code><span class="php-keyword1">array</span>(
     <span class="php-quote">'All'</span>, <span class="php-quote">'AllOf'</span>, <span class="php-quote">'Alnum'</span>, <span class="php-quote">'Alpha'</span>, <span class="php-quote">'Between'</span>, <span class="php-quote">'Blank'</span>, <span class="php-quote">'Callback'</span>,
-    <span class="php-quote">'Chinese'</span>, <span class="php-quote">'Color'</span>, <span class="php-quote">'CreditCard'</span>, <span class="php-quote">'Date'</span>, <span class="php-quote">'DateTime'</span>, <span class="php-quote">'Decimal'</span>,
-    <span class="php-quote">'Digit'</span>, <span class="php-quote">'Dir'</span>, <span class="php-quote">'DivisibleBy'</span>, <span class="php-quote">'DoubleByte'</span>, <span class="php-quote">'Email'</span>, <span class="php-quote">'EndsWith'</span>,
-    <span class="php-quote">'EntityExists'</span>, <span class="php-quote">'Equals'</span>, <span class="php-quote">'Exists'</span>, <span class="php-quote">'File'</span>, <span class="php-quote">'IdCardCn'</span>, <span class="php-quote">'IdCardHk'</span>,
+    <span class="php-quote">'CharLength'</span>, <span class="php-quote">'Chinese'</span>, <span class="php-quote">'Color'</span>, <span class="php-quote">'CreditCard'</span>, <span class="php-quote">'Date'</span>, <span class="php-quote">'DateTime'</span>,
+    <span class="php-quote">'Decimal'</span>, <span class="php-quote">'Digit'</span>, <span class="php-quote">'Dir'</span>, <span class="php-quote">'DivisibleBy'</span>, <span class="php-quote">'DoubleByte'</span>, <span class="php-quote">'Email'</span>,
+    <span class="php-quote">'EndsWith'</span>, <span class="php-quote">'Equals'</span>, <span class="php-quote">'Exists'</span>, <span class="php-quote">'File'</span>, <span class="php-quote">'IdCardCn'</span>, <span class="php-quote">'IdCardHk'</span>,
     <span class="php-quote">'IdCardMo'</span>, <span class="php-quote">'IdCardTw'</span>, <span class="php-quote">'Image'</span>, <span class="php-quote">'In'</span>, <span class="php-quote">'Ip'</span>, <span class="php-quote">'Length'</span>, <span class="php-quote">'Lowercase'</span>,
     <span class="php-quote">'Max'</span>, <span class="php-quote">'MaxLength'</span>, <span class="php-quote">'Min'</span>, <span class="php-quote">'MinLength'</span>, <span class="php-quote">'MobileCn'</span>, <span class="php-quote">'NoneOf'</span>, <span class="php-quote">'Null'</span>,
     <span class="php-quote">'Number'</span>, <span class="php-quote">'OneOf'</span>, <span class="php-quote">'PhoneCn'</span>, <span class="php-quote">'PlateNumberCn'</span>, <span class="php-quote">'Postcode'</span>, <span class="php-quote">'QQ'</span>,
@@ -584,7 +580,6 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 			<a href="class-Widget.Base.html#m$env"><var>$env</var></a>, 
 			<a href="class-Widget.Base.html#m$error"><var>$error</var></a>, 
 			<a href="class-Widget.Base.html#m$escape"><var>$escape</var></a>, 
-			<a href="class-Widget.Base.html#m$event"><var>$event</var></a>, 
 			<a href="class-Widget.Base.html#m$fileCache"><var>$fileCache</var></a>, 
 			<a href="class-Widget.Base.html#m$flush"><var>$flush</var></a>, 
 			<a href="class-Widget.Base.html#m$gravatar"><var>$gravatar</var></a>, 

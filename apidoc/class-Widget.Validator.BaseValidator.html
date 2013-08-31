@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Widget\Validator\AbstractValidator | Widget Framework</title>
+	<title>Class Widget\Validator\BaseValidator | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?969285891"></script>
+	<script type="text/javascript" src="elementlist.js?143782770"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -29,8 +29,6 @@
 						<ul>
 				<li><a href="namespace-Widget.Db.html">Db</a>
 						</li>
-				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
-						</li>
 				<li class="active"><a href="namespace-Widget.Validator.html">Validator</a>
 						</li>
 							</ul></li>
@@ -43,16 +41,15 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li><a href="class-Widget.Validator.AbstractGroupValidator.html">AbstractGroupValidator</a></li>
-				<li><a href="class-Widget.Validator.AbstractLengthValidator.html">AbstractLengthValidator</a></li>
-				<li class="active"><a href="class-Widget.Validator.AbstractValidator.html">AbstractValidator</a></li>
 				<li><a href="class-Widget.Validator.All.html">All</a></li>
 				<li><a href="class-Widget.Validator.AllOf.html">AllOf</a></li>
 				<li><a href="class-Widget.Validator.Alnum.html">Alnum</a></li>
 				<li><a href="class-Widget.Validator.Alpha.html">Alpha</a></li>
+				<li class="active"><a href="class-Widget.Validator.BaseValidator.html">BaseValidator</a></li>
 				<li><a href="class-Widget.Validator.Between.html">Between</a></li>
 				<li><a href="class-Widget.Validator.Blank.html">Blank</a></li>
 				<li><a href="class-Widget.Validator.Callback.html">Callback</a></li>
+				<li><a href="class-Widget.Validator.CharLength.html">CharLength</a></li>
 				<li><a href="class-Widget.Validator.Chinese.html">Chinese</a></li>
 				<li><a href="class-Widget.Validator.Color.html">Color</a></li>
 				<li><a href="class-Widget.Validator.CreditCard.html">CreditCard</a></li>
@@ -145,7 +142,7 @@
 	</div>
 
 <div id="content" class="class">
-	<h1>Class AbstractValidator</h1>
+	<h1>Class BaseValidator</h1>
 
 
 	<div class="description">
@@ -163,7 +160,7 @@
 		</dd>
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by" />
-<b><span>Widget\Validator\AbstractValidator</span></b>			
+<b><span>Widget\Validator\BaseValidator</span></b>			
 			
 			
 		</dd>
@@ -172,10 +169,8 @@
 
 	<div>
 		<h4>Direct known subclasses</h4>
-			<a href="class-Widget.Validator.AbstractGroupValidator.html">Widget\Validator\AbstractGroupValidator</a>, 
-			<a href="class-Widget.Validator.AbstractLengthValidator.html">Widget\Validator\AbstractLengthValidator</a>, 
-			<a href="class-Widget.Validator.DivisibleBy.html">Widget\Validator\DivisibleBy</a>, 
-			<a href="class-Widget.Validator.Email.html">Widget\Validator\Email</a>, 
+			<a href="class-Widget.Validator.All.html">Widget\Validator\All</a>, 
+			<a href="class-Widget.Validator.Between.html">Widget\Validator\Between</a>, 
 			<a href="class-Widget.Validator.EmptyValue.html">Widget\Validator\EmptyValue</a>, 
 			<a href="class-Widget.Validator.EndsWith.html">Widget\Validator\EndsWith</a>, 
 			<a href="class-Widget.Validator.Equals.html">Widget\Validator\Equals</a>, 
@@ -184,10 +179,11 @@
 			<a href="class-Widget.Validator.File.html">Widget\Validator\File</a>, 
 			<a href="class-Widget.Validator.IdCardCn.html">Widget\Validator\IdCardCn</a>, 
 			<a href="class-Widget.Validator.IdCardHk.html">Widget\Validator\IdCardHk</a>, 
-			<a href="class-Widget.Validator.All.html">Widget\Validator\All</a>, 
 			<a href="class-Widget.Validator.IdCardTw.html">Widget\Validator\IdCardTw</a>, 
 			<a href="class-Widget.Validator.In.html">Widget\Validator\In</a>, 
+			<a href="class-Widget.Validator.Blank.html">Widget\Validator\Blank</a>, 
 			<a href="class-Widget.Validator.Ip.html">Widget\Validator\Ip</a>, 
+			<a href="class-Widget.Validator.Length.html">Widget\Validator\Length</a>, 
 			<a href="class-Widget.Validator.Lowercase.html">Widget\Validator\Lowercase</a>, 
 			<a href="class-Widget.Validator.Max.html">Widget\Validator\Max</a>, 
 			<a href="class-Widget.Validator.Min.html">Widget\Validator\Min</a>, 
@@ -195,26 +191,27 @@
 			<a href="class-Widget.Validator.Number.html">Widget\Validator\Number</a>, 
 			<a href="class-Widget.Validator.RecordExists.html">Widget\Validator\RecordExists</a>, 
 			<a href="class-Widget.Validator.Regex.html">Widget\Validator\Regex</a>, 
-			<a href="class-Widget.Validator.Between.html">Widget\Validator\Between</a>, 
 			<a href="class-Widget.Validator.Required.html">Widget\Validator\Required</a>, 
+			<a href="class-Widget.Validator.Callback.html">Widget\Validator\Callback</a>, 
+			<a href="class-Widget.Validator.SomeOf.html">Widget\Validator\SomeOf</a>, 
 			<a href="class-Widget.Validator.StartsWith.html">Widget\Validator\StartsWith</a>, 
 			<a href="class-Widget.Validator.Type.html">Widget\Validator\Type</a>, 
 			<a href="class-Widget.Validator.Uppercase.html">Widget\Validator\Uppercase</a>, 
 			<a href="class-Widget.Validator.Url.html">Widget\Validator\Url</a>, 
-			<a href="class-Widget.Validator.Blank.html">Widget\Validator\Blank</a>, 
-			<a href="class-Widget.Validator.Callback.html">Widget\Validator\Callback</a>, 
 			<a href="class-Widget.Validator.CreditCard.html">Widget\Validator\CreditCard</a>, 
 			<a href="class-Widget.Validator.DateTime.html">Widget\Validator\DateTime</a>, 
 			<a href="class-Widget.Validator.Decimal.html">Widget\Validator\Decimal</a>, 
-			<a href="class-Widget.Validator.Dir.html">Widget\Validator\Dir</a>
+			<a href="class-Widget.Validator.Dir.html">Widget\Validator\Dir</a>, 
+			<a href="class-Widget.Validator.DivisibleBy.html">Widget\Validator\DivisibleBy</a>, 
+			<a href="class-Widget.Validator.Email.html">Widget\Validator\Email</a>
 	</div>
 
 	<div>
 		<h4>Indirect known subclasses</h4>
 			<a href="class-Widget.Upload.html">Widget\Upload</a>, 
 			<a href="class-Widget.Validator.AllOf.html">Widget\Validator\AllOf</a>, 
+			<a href="class-Widget.Validator.IdCardMo.html">Widget\Validator\IdCardMo</a>, 
 			<a href="class-Widget.Validator.Image.html">Widget\Validator\Image</a>, 
-			<a href="class-Widget.Validator.Length.html">Widget\Validator\Length</a>, 
 			<a href="class-Widget.Validator.MaxLength.html">Widget\Validator\MaxLength</a>, 
 			<a href="class-Widget.Validator.MinLength.html">Widget\Validator\MinLength</a>, 
 			<a href="class-Widget.Validator.MobileCn.html">Widget\Validator\MobileCn</a>, 
@@ -225,17 +222,16 @@
 			<a href="class-Widget.Validator.PostcodeCn.html">Widget\Validator\PostcodeCn</a>, 
 			<a href="class-Widget.Validator.Alnum.html">Widget\Validator\Alnum</a>, 
 			<a href="class-Widget.Validator.QQ.html">Widget\Validator\QQ</a>, 
-			<a href="class-Widget.Validator.SomeOf.html">Widget\Validator\SomeOf</a>, 
 			<a href="class-Widget.Validator.Time.html">Widget\Validator\Time</a>, 
 			<a href="class-Widget.Validator.Tld.html">Widget\Validator\Tld</a>, 
 			<a href="class-Widget.Validator.Uuid.html">Widget\Validator\Uuid</a>, 
 			<a href="class-Widget.Validator.Alpha.html">Widget\Validator\Alpha</a>, 
+			<a href="class-Widget.Validator.CharLength.html">Widget\Validator\CharLength</a>, 
 			<a href="class-Widget.Validator.Chinese.html">Widget\Validator\Chinese</a>, 
 			<a href="class-Widget.Validator.Color.html">Widget\Validator\Color</a>, 
 			<a href="class-Widget.Validator.Date.html">Widget\Validator\Date</a>, 
 			<a href="class-Widget.Validator.Digit.html">Widget\Validator\Digit</a>, 
-			<a href="class-Widget.Validator.DoubleByte.html">Widget\Validator\DoubleByte</a>, 
-			<a href="class-Widget.Validator.IdCardMo.html">Widget\Validator\IdCardMo</a>
+			<a href="class-Widget.Validator.DoubleByte.html">Widget\Validator\DoubleByte</a>
 	</div>
 
 
@@ -251,7 +247,7 @@
 				<b>Author:</b>
 				Twin Huang &lt;<a
 href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-Widget.Validator.AbstractValidator.html#13-315" title="Go to source code">Validator/AbstractValidator.php</a><br />
+		<b>Located at</b> <a href="source-class-Widget.Validator.BaseValidator.html#13-312" title="Go to source code">Validator/BaseValidator.php</a><br />
 	</div>
 
 
@@ -269,7 +265,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#___invoke">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractValidator.html#99-108" title="Go to source code">__invoke</a>( <span>mixed <var>$input</var></span> )</code>
+		<code><a href="source-class-Widget.Validator.BaseValidator.html#99-108" title="Go to source code">__invoke</a>( <span>mixed <var>$input</var></span> )</code>
 
 		<div class="description short">
 			
@@ -311,7 +307,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isValid">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractValidator.html#110-119" title="Go to source code">isValid</a>( <span>mixed <var>$input</var></span> )</code>
+		<code><a href="source-class-Widget.Validator.BaseValidator.html#110-118" title="Go to source code">isValid</a>( <span>mixed <var>$input</var></span> )</code>
 
 		<div class="description short">
 			
@@ -340,7 +336,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_doValidate">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractValidator.html#121-127" title="Go to source code">doValidate</a>( <span>mixed <var>$input</var></span> )</code>
+		<code><a href="source-class-Widget.Validator.BaseValidator.html#120-126" title="Go to source code">doValidate</a>( <span>mixed <var>$input</var></span> )</code>
 
 		<div class="description short">
 			
@@ -375,14 +371,14 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="attributes"><code>
 			 protected 
-			<code><a href="class-Widget.Validator.AbstractValidator.html">Widget\Validator\AbstractValidator</a></code>
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_storeOption">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractValidator.html#129-157" title="Go to source code">storeOption</a>( <span>string|array <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Validator.BaseValidator.html#128-152" title="Go to source code">storeOption</a>( <span>string|array <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -404,10 +400,6 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 					<dd><code>mixed</code><br>$value The value of property</dd>
 				</dl></div>
 
-				<h4>Returns</h4>
-				<div class="list">
-					<code><code><a href="class-Widget.Validator.AbstractValidator.html">Widget\Validator\AbstractValidator</a></code></code><br />
-				</div>
 
 
 
@@ -419,24 +411,37 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="attributes"><code>
 			 public 
-			
+			array
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getMessages">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractValidator.html#180-210" title="Go to source code">getMessages</a>( )</code>
+		<code><a href="source-class-Widget.Validator.BaseValidator.html#175-207" title="Go to source code">getMessages</a>( <span>string <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
+<p>Returns the error messages</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Returns the error messages</p>
 
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The name display in error message</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
 
 				<h4>Throws</h4>
 				<div class="list">
@@ -459,7 +464,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getJoinedMessage">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractValidator.html#212-221" title="Go to source code">getJoinedMessage</a>( <span>string <var>$separator</var> = <span class="php-quote">&quot;\n&quot;</span></span> )</code>
+		<code><a href="source-class-Widget.Validator.BaseValidator.html#209-219" title="Go to source code">getJoinedMessage</a>( <span>string <var>$separator</var> = <span class="php-quote">&quot;\n&quot;</span></span>, <span>string <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -477,6 +482,8 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 				<div class="list"><dl>
 					<dt><var>$separator</var></dt>
 					<dd><code>string</code><br>$separator The string to connect messages</dd>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The name display in error message</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -501,7 +508,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loadTranslationMessages">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractValidator.html#223-234" title="Go to source code">loadTranslationMessages</a>( )</code>
+		<code><a href="source-class-Widget.Validator.BaseValidator.html#221-232" title="Go to source code">loadTranslationMessages</a>( )</code>
 
 		<div class="description short">
 			
@@ -527,14 +534,14 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="attributes"><code>
 			 public 
-			<code><a href="class-Widget.Validator.AbstractValidator.html">Widget\Validator\AbstractValidator</a></code>
+			<code><a href="class-Widget.Validator.BaseValidator.html">Widget\Validator\BaseValidator</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setMessages">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractValidator.html#236-248" title="Go to source code">setMessages</a>( <span>array <var>$messages</var></span> )</code>
+		<code><a href="source-class-Widget.Validator.BaseValidator.html#234-246" title="Go to source code">setMessages</a>( <span>array <var>$messages</var></span> )</code>
 
 		<div class="description short">
 			
@@ -556,7 +563,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Widget.Validator.AbstractValidator.html">Widget\Validator\AbstractValidator</a></code></code><br />
+					<code><code><a href="class-Widget.Validator.BaseValidator.html">Widget\Validator\BaseValidator</a></code></code><br />
 				</div>
 
 
@@ -576,7 +583,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getName">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractValidator.html#250-258" title="Go to source code">getName</a>( )</code>
+		<code><a href="source-class-Widget.Validator.BaseValidator.html#248-256" title="Go to source code">getName</a>( )</code>
 
 		<div class="description short">
 			
@@ -606,14 +613,14 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="attributes"><code>
 			 public 
-			<code><a href="class-Widget.Validator.AbstractValidator.html">Widget\Validator\AbstractValidator</a></code>
+			<code><a href="class-Widget.Validator.BaseValidator.html">Widget\Validator\BaseValidator</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setName">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractValidator.html#260-271" title="Go to source code">setName</a>( <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-Widget.Validator.BaseValidator.html#258-268" title="Go to source code">setName</a>( <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -635,7 +642,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Widget.Validator.AbstractValidator.html">Widget\Validator\AbstractValidator</a></code></code><br />
+					<code><code><a href="class-Widget.Validator.BaseValidator.html">Widget\Validator\BaseValidator</a></code></code><br />
 				</div>
 
 
@@ -655,7 +662,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getErrors">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractValidator.html#273-281" title="Go to source code">getErrors</a>( )</code>
+		<code><a href="source-class-Widget.Validator.BaseValidator.html#270-278" title="Go to source code">getErrors</a>( )</code>
 
 		<div class="description short">
 			
@@ -692,7 +699,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addError">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractValidator.html#283-292" title="Go to source code">addError</a>( <span>string <var>$name</var></span>, <span>string <var>$customMessage</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Widget.Validator.BaseValidator.html#280-289" title="Go to source code">addError</a>( <span>string <var>$name</var></span>, <span>string <var>$customMessage</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -732,7 +739,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_hasError">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractValidator.html#294-303" title="Go to source code">hasError</a>( <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-Widget.Validator.BaseValidator.html#291-300" title="Go to source code">hasError</a>( <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -774,7 +781,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isString">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractValidator.html#305-314" title="Go to source code">isString</a>( <span>mixed <var>$input</var></span> )</code>
+		<code><a href="source-class-Widget.Validator.BaseValidator.html#302-311" title="Go to source code">isString</a>( <span>mixed <var>$input</var></span> )</code>
 
 		<div class="description short">
 			
@@ -834,7 +841,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#m_t">#</a>
-		<code><a href="source-class-Widget.Validator.AbstractValidator.html#17" title="Go to source code">t</a>( <span>string <var>$message</var> = </span>, <span>array <var>$parameters</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Widget.Validator.BaseValidator.html#17" title="Go to source code">t</a>( <span>string <var>$message</var> = </span>, <span>array <var>$parameters</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -933,7 +940,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Validator.AbstractValidator.html#22-27" title="Go to source code"><var>$notStringMessage</var></a>
+				<a href="source-class-Widget.Validator.BaseValidator.html#22-27" title="Go to source code"><var>$notStringMessage</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">'%name% must be a string'</span></code></td>
 		<td class="description"><div>
@@ -960,7 +967,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Validator.AbstractValidator.html#29-34" title="Go to source code"><var>$negativeMessage</var></a>
+				<a href="source-class-Widget.Validator.BaseValidator.html#29-34" title="Go to source code"><var>$negativeMessage</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">'%name% is not valid'</span></code></td>
 		<td class="description"><div>
@@ -987,7 +994,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Validator.AbstractValidator.html#36-41" title="Go to source code"><var>$name</var></a>
+				<a href="source-class-Widget.Validator.BaseValidator.html#36-41" title="Go to source code"><var>$name</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">'This value'</span></code></td>
 		<td class="description"><div>
@@ -995,13 +1002,13 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 			<div class="description short">
 				
-<p>The message name</p>
+<p>The name display in error message</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>The message name</p>
+<p>The name display in error message</p>
 
 
 			</div>
@@ -1014,7 +1021,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Validator.AbstractValidator.html#43-48" title="Go to source code"><var>$errors</var></a>
+				<a href="source-class-Widget.Validator.BaseValidator.html#43-48" title="Go to source code"><var>$errors</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
 		<td class="description"><div>
@@ -1041,7 +1048,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Validator.AbstractValidator.html#60-67" title="Go to source code"><var>$negative</var></a>
+				<a href="source-class-Widget.Validator.BaseValidator.html#60-67" title="Go to source code"><var>$negative</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">false</span></code></td>
 		<td class="description"><div>
@@ -1072,7 +1079,7 @@ error message currently</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Validator.AbstractValidator.html#69-74" title="Go to source code"><var>$validator</var></a>
+				<a href="source-class-Widget.Validator.BaseValidator.html#69-74" title="Go to source code"><var>$validator</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1080,15 +1087,15 @@ error message currently</p>
 
 			<div class="description short">
 				
-<p>The validate widget, available when this rule validator invoke from validate
-widget</p>
+<p>The validate widget, available when this rule validator is invoked from
+validate widget</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>The validate widget, available when this rule validator invoke from validate
-widget</p>
+<p>The validate widget, available when this rule validator is invoked from
+validate widget</p>
 
 
 			</div>
@@ -1101,7 +1108,7 @@ widget</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Validator.AbstractValidator.html#92-97" title="Go to source code"><var>$translationMessagesLoaded</var></a>
+				<a href="source-class-Widget.Validator.BaseValidator.html#92-97" title="Go to source code"><var>$translationMessagesLoaded</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1143,7 +1150,7 @@ widget</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Widget.Validator.AbstractValidator.html#18" title="Go to source code"><var>$t</var></a>
+				<a href="source-class-Widget.Validator.BaseValidator.html#18" title="Go to source code"><var>$t</var></a>
 		</td>
 		<td class="description"><div>
 			<a href="#m$t" class="anchor">#</a>
@@ -1184,7 +1191,6 @@ widget</p>
 			<a href="class-Widget.Base.html#m$env"><var>$env</var></a>, 
 			<a href="class-Widget.Base.html#m$error"><var>$error</var></a>, 
 			<a href="class-Widget.Base.html#m$escape"><var>$escape</var></a>, 
-			<a href="class-Widget.Base.html#m$event"><var>$event</var></a>, 
 			<a href="class-Widget.Base.html#m$fileCache"><var>$fileCache</var></a>, 
 			<a href="class-Widget.Base.html#m$flush"><var>$flush</var></a>, 
 			<a href="class-Widget.Base.html#m$gravatar"><var>$gravatar</var></a>, 

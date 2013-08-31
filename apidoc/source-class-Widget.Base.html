@@ -8,7 +8,7 @@
 	<title>File Base.php | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?969285891"></script>
+	<script type="text/javascript" src="elementlist.js?143782770"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -29,8 +29,6 @@
 				<li class="active"><a href="namespace-Widget.html">Widget<span></span></a>
 						<ul>
 				<li><a href="namespace-Widget.Db.html">Db</a>
-						</li>
-				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
 						</li>
 				<li><a href="namespace-Widget.Validator.html">Validator</a>
 						</li>
@@ -56,14 +54,12 @@
 				<li><a href="class-Widget.Config.html">Config</a></li>
 				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
 				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
-				<li><a href="class-Widget.Counter.html">Counter</a></li>
 				<li><a href="class-Widget.Db.html">Db</a></li>
 				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
 				<li><a href="class-Widget.Download.html">Download</a></li>
 				<li><a href="class-Widget.Env.html">Env</a></li>
 				<li><a href="class-Widget.Error.html">Error</a></li>
 				<li><a href="class-Widget.Escape.html">Escape</a></li>
-				<li><a href="class-Widget.Event.html">Event</a></li>
 				<li><a href="class-Widget.FileCache.html">FileCache</a></li>
 				<li><a href="class-Widget.Flush.html">Flush</a></li>
 				<li><a href="class-Widget.Gravatar.html">Gravatar</a></li>
@@ -169,7 +165,7 @@
 </span></span><span id="33" class="l"><a class="l" href="#33"> 33: </a><span class="php-comment"> * @property Couchbase  $couchbase A cache widget base on Couchbase
 </span></span><span id="34" class="l"><a class="l" href="#34"> 34: </a><span class="php-comment"> * @method   mixed      couchbase($key, $value = null, $expire = 0) Retrieve or store an item by Couchbase
 </span></span><span id="35" class="l"><a class="l" href="#35"> 35: </a><span class="php-comment"> * @property Redis      $redis A cache widget that stores data in Redis
-</span></span><span id="36" class="l"><a class="l" href="#36"> 36: </a><span class="php-comment"> * @method   mixed      redis($key, $value = null, $expire = 0) Retrieve or store an item by Redis
+</span></span><span id="36" class="l"><a class="l" href="#36"> 36: </a><span class="php-comment"> * @method   mixed      redis($key = null, $value = null, $expire = 0) Retrieve or store an item by Redis
 </span></span><span id="37" class="l"><a class="l" href="#37"> 37: </a><span class="php-comment"> * @property Bicache    $bicache A two-level cache widget
 </span></span><span id="38" class="l"><a class="l" href="#38"> 38: </a><span class="php-comment"> * @method   mixed      bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
 </span></span><span id="39" class="l"><a class="l" href="#39"> 39: </a><span class="php-comment"> *
@@ -232,134 +228,133 @@
 </span></span><span id="96" class="l"><a class="l" href="#96"> 96: </a><span class="php-comment"> * @method   string         env() Returns the environment name
 </span></span><span id="97" class="l"><a class="l" href="#97"> 97: </a><span class="php-comment"> * @property Error          $error A widget that handles exception and display pretty exception message
 </span></span><span id="98" class="l"><a class="l" href="#98"> 98: </a><span class="php-comment"> * @method   \Widget\Error  error($fn) Attach a handler to exception error
-</span></span><span id="99" class="l"><a class="l" href="#99"> 99: </a><span class="php-comment"> * @property Event          $event The event manager to add, remove and trigger events
-</span></span><span id="100" class="l"><a class="l" href="#100">100: </a><span class="php-comment"> * @property Gravatar       $gravatar A widget that generates a Gravatar URL for a specified email address
-</span></span><span id="101" class="l"><a class="l" href="#101">101: </a><span class="php-comment"> * @method   string         gravatar($email, $size = null, $default = null, $rating = null) Generates a Gravatar URL for a specified email address
-</span></span><span id="102" class="l"><a class="l" href="#102">102: </a><span class="php-comment"> * @property Logger         $logger A simple logger widget, which is base on the Monolog
-</span></span><span id="103" class="l"><a class="l" href="#103">103: </a><span class="php-comment"> * @method   bool           logger($level, $message) Logs with an arbitrary level
-</span></span><span id="104" class="l"><a class="l" href="#104">104: </a><span class="php-comment"> * @property Pinyin         $pinyin An util widget that converts Chinese words to phonetic alphabets
-</span></span><span id="105" class="l"><a class="l" href="#105">105: </a><span class="php-comment"> * @method   string         pinyin($word) Converts Chinese words to phonetic alphabets
-</span></span><span id="106" class="l"><a class="l" href="#106">106: </a><span class="php-comment"> * @property Uuid           $uuid A util widget that generates a RANDOM UUID(universally unique identifier)
-</span></span><span id="107" class="l"><a class="l" href="#107">107: </a><span class="php-comment"> * @method   string         uuid() generates a RANDOM UUID(universally unique identifier)
-</span></span><span id="108" class="l"><a class="l" href="#108">108: </a><span class="php-comment"> * @property T              $t A translator widget
-</span></span><span id="109" class="l"><a class="l" href="#109">109: </a><span class="php-comment"> * @method   string         t($message, array $parameters = array()) Translate the message
-</span></span><span id="110" class="l"><a class="l" href="#110">110: </a><span class="php-comment"> *
-</span></span><span id="111" class="l"><a class="l" href="#111">111: </a><span class="php-comment"> * Third Party
-</span></span><span id="112" class="l"><a class="l" href="#112">112: </a><span class="php-comment"> * @property Monolog        $monolog A wrapper widget for Monolog
-</span></span><span id="113" class="l"><a class="l" href="#113">113: </a><span class="php-comment"> * @method   bool           monolog($level = null, $message = null, array $context = array()) Get monolog logger object or add a log record
-</span></span><span id="114" class="l"><a class="l" href="#114">114: </a><span class="php-comment"> */</span>
-</span><span id="115" class="l"><a class="l" href="#115">115: </a><span class="php-keyword1">abstract</span> <span class="php-keyword1">class</span> <a id="Base" href="#Base">Base</a>
-</span><span id="116" class="l"><a class="l" href="#116">116: </a>{
-</span><span id="117" class="l"><a class="l" href="#117">117: </a>    <span class="php-comment">/**
-</span></span><span id="118" class="l"><a class="l" href="#118">118: </a><span class="php-comment">     * The default dependence map
-</span></span><span id="119" class="l"><a class="l" href="#119">119: </a><span class="php-comment">     *
-</span></span><span id="120" class="l"><a class="l" href="#120">120: </a><span class="php-comment">     * @var array
-</span></span><span id="121" class="l"><a class="l" href="#121">121: </a><span class="php-comment">     */</span>
-</span><span id="122" class="l"><a class="l" href="#122">122: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$deps" href="#$deps">$deps</a></span> = <span class="php-keyword1">array</span>();
-</span><span id="123" class="l"><a class="l" href="#123">123: </a>
-</span><span id="124" class="l"><a class="l" href="#124">124: </a>    <span class="php-comment">/**
-</span></span><span id="125" class="l"><a class="l" href="#125">125: </a><span class="php-comment">     * The widget container object
-</span></span><span id="126" class="l"><a class="l" href="#126">126: </a><span class="php-comment">     *
-</span></span><span id="127" class="l"><a class="l" href="#127">127: </a><span class="php-comment">     * @var Widget
-</span></span><span id="128" class="l"><a class="l" href="#128">128: </a><span class="php-comment">     */</span>
-</span><span id="129" class="l"><a class="l" href="#129">129: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$widget" href="#$widget">$widget</a></span>;
-</span><span id="130" class="l"><a class="l" href="#130">130: </a>
-</span><span id="131" class="l"><a class="l" href="#131">131: </a>    <span class="php-comment">/**
-</span></span><span id="132" class="l"><a class="l" href="#132">132: </a><span class="php-comment">     * Constructor
-</span></span><span id="133" class="l"><a class="l" href="#133">133: </a><span class="php-comment">     *
-</span></span><span id="134" class="l"><a class="l" href="#134">134: </a><span class="php-comment">     * @param array $options The property options
-</span></span><span id="135" class="l"><a class="l" href="#135">135: </a><span class="php-comment">     * @throws \InvalidArgumentException When option &quot;widget&quot; is not an instance of &quot;Widget\Widget&quot;
-</span></span><span id="136" class="l"><a class="l" href="#136">136: </a><span class="php-comment">     */</span>
-</span><span id="137" class="l"><a class="l" href="#137">137: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="___construct" href="#___construct">__construct</a>(<span class="php-keyword1">array</span> <span class="php-var">$options</span> = <span class="php-keyword1">array</span>())
-</span><span id="138" class="l"><a class="l" href="#138">138: </a>    {
-</span><span id="139" class="l"><a class="l" href="#139">139: </a>        <span class="php-var">$this</span>-&gt;setOption(<span class="php-var">$options</span>);
-</span><span id="140" class="l"><a class="l" href="#140">140: </a>
-</span><span id="141" class="l"><a class="l" href="#141">141: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;widget)) {
-</span><span id="142" class="l"><a class="l" href="#142">142: </a>            <span class="php-var">$this</span>-&gt;widget = Widget::create();
-</span><span id="143" class="l"><a class="l" href="#143">143: </a>        } <span class="php-keyword1">elseif</span> (!<span class="php-var">$this</span>-&gt;widget <span class="php-keyword1">instanceof</span> Widget) {
-</span><span id="144" class="l"><a class="l" href="#144">144: </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'Option &quot;widget&quot; of class &quot;%s&quot; should be an instance of &quot;Widget\Widget&quot;'</span>, <span class="php-keyword2">get_class</span>(<span class="php-var">$this</span>)));
-</span><span id="145" class="l"><a class="l" href="#145">145: </a>        }
-</span><span id="146" class="l"><a class="l" href="#146">146: </a>    }
-</span><span id="147" class="l"><a class="l" href="#147">147: </a>
-</span><span id="148" class="l"><a class="l" href="#148">148: </a>    <span class="php-comment">/**
-</span></span><span id="149" class="l"><a class="l" href="#149">149: </a><span class="php-comment">     * Set option property value
-</span></span><span id="150" class="l"><a class="l" href="#150">150: </a><span class="php-comment">     *
-</span></span><span id="151" class="l"><a class="l" href="#151">151: </a><span class="php-comment">     * @param string|array $name
-</span></span><span id="152" class="l"><a class="l" href="#152">152: </a><span class="php-comment">     * @param mixed $value
-</span></span><span id="153" class="l"><a class="l" href="#153">153: </a><span class="php-comment">     * @return Base
-</span></span><span id="154" class="l"><a class="l" href="#154">154: </a><span class="php-comment">     */</span>
-</span><span id="155" class="l"><a class="l" href="#155">155: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setOption" href="#_setOption">setOption</a>(<span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>)
-</span><span id="156" class="l"><a class="l" href="#156">156: </a>    {
-</span><span id="157" class="l"><a class="l" href="#157">157: </a>        <span class="php-comment">// Set options</span>
-</span><span id="158" class="l"><a class="l" href="#158">158: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$name</span>)) {
-</span><span id="159" class="l"><a class="l" href="#159">159: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$value</span>)) {
-</span><span id="160" class="l"><a class="l" href="#160">160: </a>                <span class="php-var">$name</span> += <span class="php-keyword2">array_intersect_key</span>(<span class="php-keyword2">get_object_vars</span>(<span class="php-var">$this</span>), <span class="php-keyword2">array_flip</span>(<span class="php-var">$value</span>));
-</span><span id="161" class="l"><a class="l" href="#161">161: </a>            }
-</span><span id="162" class="l"><a class="l" href="#162">162: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$name</span> <span class="php-keyword1">as</span> <span class="php-var">$k</span> =&gt; <span class="php-var">$v</span>) {
-</span><span id="163" class="l"><a class="l" href="#163">163: </a>                <span class="php-var">$this</span>-&gt;setOption(<span class="php-var">$k</span>, <span class="php-var">$v</span>);
-</span><span id="164" class="l"><a class="l" href="#164">164: </a>            }
-</span><span id="165" class="l"><a class="l" href="#165">165: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
-</span><span id="166" class="l"><a class="l" href="#166">166: </a>        }
-</span><span id="167" class="l"><a class="l" href="#167">167: </a>
-</span><span id="168" class="l"><a class="l" href="#168">168: </a>        <span class="php-comment">// Append option</span>
-</span><span id="169" class="l"><a class="l" href="#169">169: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$name</span>[<span class="php-num">0</span>]) &amp;&amp; <span class="php-quote">'+'</span> == <span class="php-var">$name</span>[<span class="php-num">0</span>]) {
-</span><span id="170" class="l"><a class="l" href="#170">170: </a>            <span class="php-var">$name</span> = <span class="php-keyword2">substr</span>(<span class="php-var">$name</span>, <span class="php-num">1</span>);
-</span><span id="171" class="l"><a class="l" href="#171">171: </a>            <span class="php-var">$this</span>-&gt;<span class="php-var">$name</span> = (<span class="php-keyword1">array</span>)<span class="php-var">$this</span>-&gt;<span class="php-var">$name</span> + <span class="php-var">$value</span>;
-</span><span id="172" class="l"><a class="l" href="#172">172: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
-</span><span id="173" class="l"><a class="l" href="#173">173: </a>        }
-</span><span id="174" class="l"><a class="l" href="#174">174: </a>
-</span><span id="175" class="l"><a class="l" href="#175">175: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">method_exists</span>(<span class="php-var">$this</span>, <span class="php-var">$method</span> = <span class="php-quote">'set'</span> . <span class="php-var">$name</span>)) {
-</span><span id="176" class="l"><a class="l" href="#176">176: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;<span class="php-var">$method</span>(<span class="php-var">$value</span>);
-</span><span id="177" class="l"><a class="l" href="#177">177: </a>        } <span class="php-keyword1">else</span> {
-</span><span id="178" class="l"><a class="l" href="#178">178: </a>            <span class="php-var">$this</span>-&gt;<span class="php-var">$name</span> = <span class="php-var">$value</span>;
-</span><span id="179" class="l"><a class="l" href="#179">179: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
-</span><span id="180" class="l"><a class="l" href="#180">180: </a>        }
-</span><span id="181" class="l"><a class="l" href="#181">181: </a>    }
-</span><span id="182" class="l"><a class="l" href="#182">182: </a>
-</span><span id="183" class="l"><a class="l" href="#183">183: </a>    <span class="php-comment">/**
-</span></span><span id="184" class="l"><a class="l" href="#184">184: </a><span class="php-comment">     * Returns option property value
-</span></span><span id="185" class="l"><a class="l" href="#185">185: </a><span class="php-comment">     *
-</span></span><span id="186" class="l"><a class="l" href="#186">186: </a><span class="php-comment">     * @param string $name The name of property
-</span></span><span id="187" class="l"><a class="l" href="#187">187: </a><span class="php-comment">     * @return mixed
-</span></span><span id="188" class="l"><a class="l" href="#188">188: </a><span class="php-comment">     */</span>
-</span><span id="189" class="l"><a class="l" href="#189">189: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getOption" href="#_getOption">getOption</a>(<span class="php-var">$name</span> = <span class="php-keyword1">null</span>)
-</span><span id="190" class="l"><a class="l" href="#190">190: </a>    {
-</span><span id="191" class="l"><a class="l" href="#191">191: </a>        <span class="php-comment">// Returns all property options</span>
-</span><span id="192" class="l"><a class="l" href="#192">192: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">null</span> === <span class="php-var">$name</span>) {
-</span><span id="193" class="l"><a class="l" href="#193">193: </a>            <span class="php-keyword1">return</span> <span class="php-keyword2">get_object_vars</span>(<span class="php-var">$this</span>);
-</span><span id="194" class="l"><a class="l" href="#194">194: </a>        }
-</span><span id="195" class="l"><a class="l" href="#195">195: </a>
-</span><span id="196" class="l"><a class="l" href="#196">196: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">method_exists</span>(<span class="php-var">$this</span>, <span class="php-var">$method</span> = <span class="php-quote">'get'</span> . <span class="php-var">$name</span>)) {
-</span><span id="197" class="l"><a class="l" href="#197">197: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;<span class="php-var">$method</span>();
-</span><span id="198" class="l"><a class="l" href="#198">198: </a>        } <span class="php-keyword1">else</span> {
-</span><span id="199" class="l"><a class="l" href="#199">199: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;<span class="php-var">$name</span>) ? <span class="php-var">$this</span>-&gt;<span class="php-var">$name</span> : <span class="php-keyword1">null</span>;
-</span><span id="200" class="l"><a class="l" href="#200">200: </a>        }
-</span><span id="201" class="l"><a class="l" href="#201">201: </a>    }
-</span><span id="202" class="l"><a class="l" href="#202">202: </a>
-</span><span id="203" class="l"><a class="l" href="#203">203: </a>    <span class="php-comment">/**
-</span></span><span id="204" class="l"><a class="l" href="#204">204: </a><span class="php-comment">     * Invoke the widget by the given name
-</span></span><span id="205" class="l"><a class="l" href="#205">205: </a><span class="php-comment">     *
-</span></span><span id="206" class="l"><a class="l" href="#206">206: </a><span class="php-comment">     * @param string $name The name of widget
-</span></span><span id="207" class="l"><a class="l" href="#207">207: </a><span class="php-comment">     * @param array $args The arguments for widget's __invoke method
-</span></span><span id="208" class="l"><a class="l" href="#208">208: </a><span class="php-comment">     * @return mixed
-</span></span><span id="209" class="l"><a class="l" href="#209">209: </a><span class="php-comment">     */</span>
-</span><span id="210" class="l"><a class="l" href="#210">210: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="___call" href="#___call">__call</a>(<span class="php-var">$name</span>, <span class="php-var">$args</span>)
-</span><span id="211" class="l"><a class="l" href="#211">211: </a>    {
-</span><span id="212" class="l"><a class="l" href="#212">212: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">call_user_func_array</span>(<span class="php-var">$this</span>-&gt;<span class="php-var">$name</span>, <span class="php-var">$args</span>);
-</span><span id="213" class="l"><a class="l" href="#213">213: </a>    }
-</span><span id="214" class="l"><a class="l" href="#214">214: </a>
-</span><span id="215" class="l"><a class="l" href="#215">215: </a>    <span class="php-comment">/**
-</span></span><span id="216" class="l"><a class="l" href="#216">216: </a><span class="php-comment">     * Get the widget object by the given name
-</span></span><span id="217" class="l"><a class="l" href="#217">217: </a><span class="php-comment">     *
-</span></span><span id="218" class="l"><a class="l" href="#218">218: </a><span class="php-comment">     * @param  string $name The name of widget
-</span></span><span id="219" class="l"><a class="l" href="#219">219: </a><span class="php-comment">     * @return Base
-</span></span><span id="220" class="l"><a class="l" href="#220">220: </a><span class="php-comment">     */</span>
-</span><span id="221" class="l"><a class="l" href="#221">221: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="___get" href="#___get">__get</a>(<span class="php-var">$name</span>)
-</span><span id="222" class="l"><a class="l" href="#222">222: </a>    {
-</span><span id="223" class="l"><a class="l" href="#223">223: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;<span class="php-var">$name</span> = <span class="php-var">$this</span>-&gt;widget-&gt;get(<span class="php-var">$name</span>, <span class="php-keyword1">array</span>(), <span class="php-var">$this</span>-&gt;deps);
-</span><span id="224" class="l"><a class="l" href="#224">224: </a>    }
-</span><span id="225" class="l"><a class="l" href="#225">225: </a>}
-</span><span id="226" class="l"><a class="l" href="#226">226: </a></span></code></pre>
+</span></span><span id="99" class="l"><a class="l" href="#99"> 99: </a><span class="php-comment"> * @property Gravatar       $gravatar A widget that generates a Gravatar URL for a specified email address
+</span></span><span id="100" class="l"><a class="l" href="#100">100: </a><span class="php-comment"> * @method   string         gravatar($email, $size = null, $default = null, $rating = null) Generates a Gravatar URL for a specified email address
+</span></span><span id="101" class="l"><a class="l" href="#101">101: </a><span class="php-comment"> * @property Logger         $logger A simple logger widget, which is base on the Monolog
+</span></span><span id="102" class="l"><a class="l" href="#102">102: </a><span class="php-comment"> * @method   bool           logger($level, $message) Logs with an arbitrary level
+</span></span><span id="103" class="l"><a class="l" href="#103">103: </a><span class="php-comment"> * @property Pinyin         $pinyin An util widget that converts Chinese words to phonetic alphabets
+</span></span><span id="104" class="l"><a class="l" href="#104">104: </a><span class="php-comment"> * @method   string         pinyin($word) Converts Chinese words to phonetic alphabets
+</span></span><span id="105" class="l"><a class="l" href="#105">105: </a><span class="php-comment"> * @property Uuid           $uuid A util widget that generates a RANDOM UUID(universally unique identifier)
+</span></span><span id="106" class="l"><a class="l" href="#106">106: </a><span class="php-comment"> * @method   string         uuid() generates a RANDOM UUID(universally unique identifier)
+</span></span><span id="107" class="l"><a class="l" href="#107">107: </a><span class="php-comment"> * @property T              $t A translator widget
+</span></span><span id="108" class="l"><a class="l" href="#108">108: </a><span class="php-comment"> * @method   string         t($message, array $parameters = array()) Translate the message
+</span></span><span id="109" class="l"><a class="l" href="#109">109: </a><span class="php-comment"> *
+</span></span><span id="110" class="l"><a class="l" href="#110">110: </a><span class="php-comment"> * Third Party
+</span></span><span id="111" class="l"><a class="l" href="#111">111: </a><span class="php-comment"> * @property Monolog        $monolog A wrapper widget for Monolog
+</span></span><span id="112" class="l"><a class="l" href="#112">112: </a><span class="php-comment"> * @method   bool           monolog($level = null, $message = null, array $context = array()) Get monolog logger object or add a log record
+</span></span><span id="113" class="l"><a class="l" href="#113">113: </a><span class="php-comment"> */</span>
+</span><span id="114" class="l"><a class="l" href="#114">114: </a><span class="php-keyword1">abstract</span> <span class="php-keyword1">class</span> <a id="Base" href="#Base">Base</a>
+</span><span id="115" class="l"><a class="l" href="#115">115: </a>{
+</span><span id="116" class="l"><a class="l" href="#116">116: </a>    <span class="php-comment">/**
+</span></span><span id="117" class="l"><a class="l" href="#117">117: </a><span class="php-comment">     * The widget name dependence map
+</span></span><span id="118" class="l"><a class="l" href="#118">118: </a><span class="php-comment">     *
+</span></span><span id="119" class="l"><a class="l" href="#119">119: </a><span class="php-comment">     * @var array
+</span></span><span id="120" class="l"><a class="l" href="#120">120: </a><span class="php-comment">     */</span>
+</span><span id="121" class="l"><a class="l" href="#121">121: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$deps" href="#$deps">$deps</a></span> = <span class="php-keyword1">array</span>();
+</span><span id="122" class="l"><a class="l" href="#122">122: </a>
+</span><span id="123" class="l"><a class="l" href="#123">123: </a>    <span class="php-comment">/**
+</span></span><span id="124" class="l"><a class="l" href="#124">124: </a><span class="php-comment">     * The widget container object
+</span></span><span id="125" class="l"><a class="l" href="#125">125: </a><span class="php-comment">     *
+</span></span><span id="126" class="l"><a class="l" href="#126">126: </a><span class="php-comment">     * @var Widget
+</span></span><span id="127" class="l"><a class="l" href="#127">127: </a><span class="php-comment">     */</span>
+</span><span id="128" class="l"><a class="l" href="#128">128: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$widget" href="#$widget">$widget</a></span>;
+</span><span id="129" class="l"><a class="l" href="#129">129: </a>
+</span><span id="130" class="l"><a class="l" href="#130">130: </a>    <span class="php-comment">/**
+</span></span><span id="131" class="l"><a class="l" href="#131">131: </a><span class="php-comment">     * Constructor
+</span></span><span id="132" class="l"><a class="l" href="#132">132: </a><span class="php-comment">     *
+</span></span><span id="133" class="l"><a class="l" href="#133">133: </a><span class="php-comment">     * @param array $options The property options
+</span></span><span id="134" class="l"><a class="l" href="#134">134: </a><span class="php-comment">     * @throws \InvalidArgumentException When option &quot;widget&quot; is not an instance of &quot;Widget\Widget&quot;
+</span></span><span id="135" class="l"><a class="l" href="#135">135: </a><span class="php-comment">     */</span>
+</span><span id="136" class="l"><a class="l" href="#136">136: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="___construct" href="#___construct">__construct</a>(<span class="php-keyword1">array</span> <span class="php-var">$options</span> = <span class="php-keyword1">array</span>())
+</span><span id="137" class="l"><a class="l" href="#137">137: </a>    {
+</span><span id="138" class="l"><a class="l" href="#138">138: </a>        <span class="php-var">$this</span>-&gt;setOption(<span class="php-var">$options</span>);
+</span><span id="139" class="l"><a class="l" href="#139">139: </a>
+</span><span id="140" class="l"><a class="l" href="#140">140: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;widget)) {
+</span><span id="141" class="l"><a class="l" href="#141">141: </a>            <span class="php-var">$this</span>-&gt;widget = Widget::create();
+</span><span id="142" class="l"><a class="l" href="#142">142: </a>        } <span class="php-keyword1">elseif</span> (!<span class="php-var">$this</span>-&gt;widget <span class="php-keyword1">instanceof</span> Widget) {
+</span><span id="143" class="l"><a class="l" href="#143">143: </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'Option &quot;widget&quot; of class &quot;%s&quot; should be an instance of &quot;Widget\Widget&quot;'</span>, <span class="php-keyword2">get_class</span>(<span class="php-var">$this</span>)));
+</span><span id="144" class="l"><a class="l" href="#144">144: </a>        }
+</span><span id="145" class="l"><a class="l" href="#145">145: </a>    }
+</span><span id="146" class="l"><a class="l" href="#146">146: </a>
+</span><span id="147" class="l"><a class="l" href="#147">147: </a>    <span class="php-comment">/**
+</span></span><span id="148" class="l"><a class="l" href="#148">148: </a><span class="php-comment">     * Set option property value
+</span></span><span id="149" class="l"><a class="l" href="#149">149: </a><span class="php-comment">     *
+</span></span><span id="150" class="l"><a class="l" href="#150">150: </a><span class="php-comment">     * @param string|array $name
+</span></span><span id="151" class="l"><a class="l" href="#151">151: </a><span class="php-comment">     * @param mixed $value
+</span></span><span id="152" class="l"><a class="l" href="#152">152: </a><span class="php-comment">     * @return Base
+</span></span><span id="153" class="l"><a class="l" href="#153">153: </a><span class="php-comment">     */</span>
+</span><span id="154" class="l"><a class="l" href="#154">154: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setOption" href="#_setOption">setOption</a>(<span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>)
+</span><span id="155" class="l"><a class="l" href="#155">155: </a>    {
+</span><span id="156" class="l"><a class="l" href="#156">156: </a>        <span class="php-comment">// Set options</span>
+</span><span id="157" class="l"><a class="l" href="#157">157: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$name</span>)) {
+</span><span id="158" class="l"><a class="l" href="#158">158: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$value</span>)) {
+</span><span id="159" class="l"><a class="l" href="#159">159: </a>                <span class="php-var">$name</span> += <span class="php-keyword2">array_intersect_key</span>(<span class="php-keyword2">get_object_vars</span>(<span class="php-var">$this</span>), <span class="php-keyword2">array_flip</span>(<span class="php-var">$value</span>));
+</span><span id="160" class="l"><a class="l" href="#160">160: </a>            }
+</span><span id="161" class="l"><a class="l" href="#161">161: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$name</span> <span class="php-keyword1">as</span> <span class="php-var">$k</span> =&gt; <span class="php-var">$v</span>) {
+</span><span id="162" class="l"><a class="l" href="#162">162: </a>                <span class="php-var">$this</span>-&gt;setOption(<span class="php-var">$k</span>, <span class="php-var">$v</span>);
+</span><span id="163" class="l"><a class="l" href="#163">163: </a>            }
+</span><span id="164" class="l"><a class="l" href="#164">164: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="165" class="l"><a class="l" href="#165">165: </a>        }
+</span><span id="166" class="l"><a class="l" href="#166">166: </a>
+</span><span id="167" class="l"><a class="l" href="#167">167: </a>        <span class="php-comment">// Append option</span>
+</span><span id="168" class="l"><a class="l" href="#168">168: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$name</span>[<span class="php-num">0</span>]) &amp;&amp; <span class="php-quote">'+'</span> == <span class="php-var">$name</span>[<span class="php-num">0</span>]) {
+</span><span id="169" class="l"><a class="l" href="#169">169: </a>            <span class="php-var">$name</span> = <span class="php-keyword2">substr</span>(<span class="php-var">$name</span>, <span class="php-num">1</span>);
+</span><span id="170" class="l"><a class="l" href="#170">170: </a>            <span class="php-var">$this</span>-&gt;<span class="php-var">$name</span> = (<span class="php-keyword1">array</span>)<span class="php-var">$this</span>-&gt;<span class="php-var">$name</span> + <span class="php-var">$value</span>;
+</span><span id="171" class="l"><a class="l" href="#171">171: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="172" class="l"><a class="l" href="#172">172: </a>        }
+</span><span id="173" class="l"><a class="l" href="#173">173: </a>
+</span><span id="174" class="l"><a class="l" href="#174">174: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">method_exists</span>(<span class="php-var">$this</span>, <span class="php-var">$method</span> = <span class="php-quote">'set'</span> . <span class="php-var">$name</span>)) {
+</span><span id="175" class="l"><a class="l" href="#175">175: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;<span class="php-var">$method</span>(<span class="php-var">$value</span>);
+</span><span id="176" class="l"><a class="l" href="#176">176: </a>        } <span class="php-keyword1">else</span> {
+</span><span id="177" class="l"><a class="l" href="#177">177: </a>            <span class="php-var">$this</span>-&gt;<span class="php-var">$name</span> = <span class="php-var">$value</span>;
+</span><span id="178" class="l"><a class="l" href="#178">178: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="179" class="l"><a class="l" href="#179">179: </a>        }
+</span><span id="180" class="l"><a class="l" href="#180">180: </a>    }
+</span><span id="181" class="l"><a class="l" href="#181">181: </a>
+</span><span id="182" class="l"><a class="l" href="#182">182: </a>    <span class="php-comment">/**
+</span></span><span id="183" class="l"><a class="l" href="#183">183: </a><span class="php-comment">     * Returns option property value
+</span></span><span id="184" class="l"><a class="l" href="#184">184: </a><span class="php-comment">     *
+</span></span><span id="185" class="l"><a class="l" href="#185">185: </a><span class="php-comment">     * @param string $name The name of property
+</span></span><span id="186" class="l"><a class="l" href="#186">186: </a><span class="php-comment">     * @return mixed
+</span></span><span id="187" class="l"><a class="l" href="#187">187: </a><span class="php-comment">     */</span>
+</span><span id="188" class="l"><a class="l" href="#188">188: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getOption" href="#_getOption">getOption</a>(<span class="php-var">$name</span> = <span class="php-keyword1">null</span>)
+</span><span id="189" class="l"><a class="l" href="#189">189: </a>    {
+</span><span id="190" class="l"><a class="l" href="#190">190: </a>        <span class="php-comment">// Returns all property options</span>
+</span><span id="191" class="l"><a class="l" href="#191">191: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">null</span> === <span class="php-var">$name</span>) {
+</span><span id="192" class="l"><a class="l" href="#192">192: </a>            <span class="php-keyword1">return</span> <span class="php-keyword2">get_object_vars</span>(<span class="php-var">$this</span>);
+</span><span id="193" class="l"><a class="l" href="#193">193: </a>        }
+</span><span id="194" class="l"><a class="l" href="#194">194: </a>
+</span><span id="195" class="l"><a class="l" href="#195">195: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">method_exists</span>(<span class="php-var">$this</span>, <span class="php-var">$method</span> = <span class="php-quote">'get'</span> . <span class="php-var">$name</span>)) {
+</span><span id="196" class="l"><a class="l" href="#196">196: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;<span class="php-var">$method</span>();
+</span><span id="197" class="l"><a class="l" href="#197">197: </a>        } <span class="php-keyword1">else</span> {
+</span><span id="198" class="l"><a class="l" href="#198">198: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;<span class="php-var">$name</span>) ? <span class="php-var">$this</span>-&gt;<span class="php-var">$name</span> : <span class="php-keyword1">null</span>;
+</span><span id="199" class="l"><a class="l" href="#199">199: </a>        }
+</span><span id="200" class="l"><a class="l" href="#200">200: </a>    }
+</span><span id="201" class="l"><a class="l" href="#201">201: </a>
+</span><span id="202" class="l"><a class="l" href="#202">202: </a>    <span class="php-comment">/**
+</span></span><span id="203" class="l"><a class="l" href="#203">203: </a><span class="php-comment">     * Invoke the widget by the given name
+</span></span><span id="204" class="l"><a class="l" href="#204">204: </a><span class="php-comment">     *
+</span></span><span id="205" class="l"><a class="l" href="#205">205: </a><span class="php-comment">     * @param string $name The name of widget
+</span></span><span id="206" class="l"><a class="l" href="#206">206: </a><span class="php-comment">     * @param array $args The arguments for widget's __invoke method
+</span></span><span id="207" class="l"><a class="l" href="#207">207: </a><span class="php-comment">     * @return mixed
+</span></span><span id="208" class="l"><a class="l" href="#208">208: </a><span class="php-comment">     */</span>
+</span><span id="209" class="l"><a class="l" href="#209">209: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="___call" href="#___call">__call</a>(<span class="php-var">$name</span>, <span class="php-var">$args</span>)
+</span><span id="210" class="l"><a class="l" href="#210">210: </a>    {
+</span><span id="211" class="l"><a class="l" href="#211">211: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">call_user_func_array</span>(<span class="php-var">$this</span>-&gt;<span class="php-var">$name</span>, <span class="php-var">$args</span>);
+</span><span id="212" class="l"><a class="l" href="#212">212: </a>    }
+</span><span id="213" class="l"><a class="l" href="#213">213: </a>
+</span><span id="214" class="l"><a class="l" href="#214">214: </a>    <span class="php-comment">/**
+</span></span><span id="215" class="l"><a class="l" href="#215">215: </a><span class="php-comment">     * Get the widget object by the given name
+</span></span><span id="216" class="l"><a class="l" href="#216">216: </a><span class="php-comment">     *
+</span></span><span id="217" class="l"><a class="l" href="#217">217: </a><span class="php-comment">     * @param  string $name The name of widget
+</span></span><span id="218" class="l"><a class="l" href="#218">218: </a><span class="php-comment">     * @return Base
+</span></span><span id="219" class="l"><a class="l" href="#219">219: </a><span class="php-comment">     */</span>
+</span><span id="220" class="l"><a class="l" href="#220">220: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="___get" href="#___get">__get</a>(<span class="php-var">$name</span>)
+</span><span id="221" class="l"><a class="l" href="#221">221: </a>    {
+</span><span id="222" class="l"><a class="l" href="#222">222: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;<span class="php-var">$name</span> = <span class="php-var">$this</span>-&gt;widget-&gt;get(<span class="php-var">$name</span>, <span class="php-keyword1">array</span>(), <span class="php-var">$this</span>-&gt;deps);
+</span><span id="223" class="l"><a class="l" href="#223">223: </a>    }
+</span><span id="224" class="l"><a class="l" href="#224">224: </a>}
+</span><span id="225" class="l"><a class="l" href="#225">225: </a></span></code></pre>
 
 	<div id="footer">
 		Widget Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

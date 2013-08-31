@@ -8,7 +8,7 @@
 	<title>File Is.php | Widget Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?969285891"></script>
+	<script type="text/javascript" src="elementlist.js?143782770"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -29,8 +29,6 @@
 				<li class="active"><a href="namespace-Widget.html">Widget<span></span></a>
 						<ul>
 				<li><a href="namespace-Widget.Db.html">Db</a>
-						</li>
-				<li><a href="namespace-Widget.Stdlib.html">Stdlib</a>
 						</li>
 				<li><a href="namespace-Widget.Validator.html">Validator</a>
 						</li>
@@ -56,14 +54,12 @@
 				<li><a href="class-Widget.Config.html">Config</a></li>
 				<li><a href="class-Widget.Cookie.html">Cookie</a></li>
 				<li><a href="class-Widget.Couchbase.html">Couchbase</a></li>
-				<li><a href="class-Widget.Counter.html">Counter</a></li>
 				<li><a href="class-Widget.Db.html">Db</a></li>
 				<li><a href="class-Widget.DbCache.html">DbCache</a></li>
 				<li><a href="class-Widget.Download.html">Download</a></li>
 				<li><a href="class-Widget.Env.html">Env</a></li>
 				<li><a href="class-Widget.Error.html">Error</a></li>
 				<li><a href="class-Widget.Escape.html">Escape</a></li>
-				<li><a href="class-Widget.Event.html">Event</a></li>
 				<li><a href="class-Widget.FileCache.html">FileCache</a></li>
 				<li><a href="class-Widget.Flush.html">Flush</a></li>
 				<li><a href="class-Widget.Gravatar.html">Gravatar</a></li>
@@ -169,9 +165,9 @@
 </span></span><span id="33" class="l"><a class="l" href="#33"> 33: </a><span class="php-comment">     */</span>
 </span><span id="34" class="l"><a class="l" href="#34"> 34: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$rules" href="#$rules">$rules</a></span> = <span class="php-keyword1">array</span>(
 </span><span id="35" class="l"><a class="l" href="#35"> 35: </a>        <span class="php-quote">'All'</span>, <span class="php-quote">'AllOf'</span>, <span class="php-quote">'Alnum'</span>, <span class="php-quote">'Alpha'</span>, <span class="php-quote">'Between'</span>, <span class="php-quote">'Blank'</span>, <span class="php-quote">'Callback'</span>,
-</span><span id="36" class="l"><a class="l" href="#36"> 36: </a>        <span class="php-quote">'Chinese'</span>, <span class="php-quote">'Color'</span>, <span class="php-quote">'CreditCard'</span>, <span class="php-quote">'Date'</span>, <span class="php-quote">'DateTime'</span>, <span class="php-quote">'Decimal'</span>,
-</span><span id="37" class="l"><a class="l" href="#37"> 37: </a>        <span class="php-quote">'Digit'</span>, <span class="php-quote">'Dir'</span>, <span class="php-quote">'DivisibleBy'</span>, <span class="php-quote">'DoubleByte'</span>, <span class="php-quote">'Email'</span>, <span class="php-quote">'EndsWith'</span>,
-</span><span id="38" class="l"><a class="l" href="#38"> 38: </a>        <span class="php-quote">'EntityExists'</span>, <span class="php-quote">'Equals'</span>, <span class="php-quote">'Exists'</span>, <span class="php-quote">'File'</span>, <span class="php-quote">'IdCardCn'</span>, <span class="php-quote">'IdCardHk'</span>,
+</span><span id="36" class="l"><a class="l" href="#36"> 36: </a>        <span class="php-quote">'CharLength'</span>, <span class="php-quote">'Chinese'</span>, <span class="php-quote">'Color'</span>, <span class="php-quote">'CreditCard'</span>, <span class="php-quote">'Date'</span>, <span class="php-quote">'DateTime'</span>,
+</span><span id="37" class="l"><a class="l" href="#37"> 37: </a>        <span class="php-quote">'Decimal'</span>, <span class="php-quote">'Digit'</span>, <span class="php-quote">'Dir'</span>, <span class="php-quote">'DivisibleBy'</span>, <span class="php-quote">'DoubleByte'</span>, <span class="php-quote">'Email'</span>,
+</span><span id="38" class="l"><a class="l" href="#38"> 38: </a>        <span class="php-quote">'EndsWith'</span>, <span class="php-quote">'Equals'</span>, <span class="php-quote">'Exists'</span>, <span class="php-quote">'File'</span>, <span class="php-quote">'IdCardCn'</span>, <span class="php-quote">'IdCardHk'</span>,
 </span><span id="39" class="l"><a class="l" href="#39"> 39: </a>        <span class="php-quote">'IdCardMo'</span>, <span class="php-quote">'IdCardTw'</span>, <span class="php-quote">'Image'</span>, <span class="php-quote">'In'</span>, <span class="php-quote">'Ip'</span>, <span class="php-quote">'Length'</span>, <span class="php-quote">'Lowercase'</span>,
 </span><span id="40" class="l"><a class="l" href="#40"> 40: </a>        <span class="php-quote">'Max'</span>, <span class="php-quote">'MaxLength'</span>, <span class="php-quote">'Min'</span>, <span class="php-quote">'MinLength'</span>, <span class="php-quote">'MobileCn'</span>, <span class="php-quote">'NoneOf'</span>, <span class="php-quote">'Null'</span>,
 </span><span id="41" class="l"><a class="l" href="#41"> 41: </a>        <span class="php-quote">'Number'</span>, <span class="php-quote">'OneOf'</span>, <span class="php-quote">'PhoneCn'</span>, <span class="php-quote">'PlateNumberCn'</span>, <span class="php-quote">'Postcode'</span>, <span class="php-quote">'QQ'</span>,
@@ -196,11 +192,11 @@
 </span><span id="60" class="l"><a class="l" href="#60"> 60: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;aliases <span class="php-keyword1">as</span> <span class="php-var">$rule</span> =&gt; <span class="php-var">$class</span>) {
 </span><span id="61" class="l"><a class="l" href="#61"> 61: </a>            <span class="php-var">$rules</span>[<span class="php-quote">'is'</span> . <span class="php-keyword2">ucfirst</span>(<span class="php-var">$rule</span>)] = <span class="php-var">$class</span>;
 </span><span id="62" class="l"><a class="l" href="#62"> 62: </a>        }
-</span><span id="63" class="l"><a class="l" href="#63"> 63: </a>        <span class="php-var">$this</span>-&gt;widget-&gt;setOption(<span class="php-quote">'+aliases'</span>, <span class="php-var">$rules</span>);
+</span><span id="63" class="l"><a class="l" href="#63"> 63: </a>        <span class="php-var">$this</span>-&gt;widget-&gt;setAliases(<span class="php-var">$rules</span>);
 </span><span id="64" class="l"><a class="l" href="#64"> 64: </a>    }
 </span><span id="65" class="l"><a class="l" href="#65"> 65: </a>
 </span><span id="66" class="l"><a class="l" href="#66"> 66: </a>    <span class="php-comment">/**
-</span></span><span id="67" class="l"><a class="l" href="#67"> 67: </a><span class="php-comment">     * @param string|Validator\AbstractValidator|int $rule
+</span></span><span id="67" class="l"><a class="l" href="#67"> 67: </a><span class="php-comment">     * @param string|Validator\BaseValidator|int $rule
 </span></span><span id="68" class="l"><a class="l" href="#68"> 68: </a><span class="php-comment">     * @param array|null $input
 </span></span><span id="69" class="l"><a class="l" href="#69"> 69: </a><span class="php-comment">     * @param mixed $options
 </span></span><span id="70" class="l"><a class="l" href="#70"> 70: </a><span class="php-comment">     * @param null &amp;$validator
@@ -218,7 +214,7 @@
 </span><span id="82" class="l"><a class="l" href="#82"> 82: </a>            }
 </span><span id="83" class="l"><a class="l" href="#83"> 83: </a>        }
 </span><span id="84" class="l"><a class="l" href="#84"> 84: </a>
-</span><span id="85" class="l"><a class="l" href="#85"> 85: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$rule</span> <span class="php-keyword1">instanceof</span> Validator\AbstractValidator) {
+</span><span id="85" class="l"><a class="l" href="#85"> 85: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$rule</span> <span class="php-keyword1">instanceof</span> Validator\BaseValidator) {
 </span><span id="86" class="l"><a class="l" href="#86"> 86: </a>            <span class="php-var">$validator</span> = <span class="php-var">$rule</span>;
 </span><span id="87" class="l"><a class="l" href="#87"> 87: </a>            <span class="php-keyword1">return</span> <span class="php-var">$rule</span>(<span class="php-var">$input</span>);
 </span><span id="88" class="l"><a class="l" href="#88"> 88: </a>        }
@@ -303,7 +299,7 @@
 </span></span><span id="167" class="l"><a class="l" href="#167">167: </a><span class="php-comment">     *
 </span></span><span id="168" class="l"><a class="l" href="#168">168: </a><span class="php-comment">     * @param string $rule The name of rule validator
 </span></span><span id="169" class="l"><a class="l" href="#169">169: </a><span class="php-comment">     * @param array $options The property options for rule validator
-</span></span><span id="170" class="l"><a class="l" href="#170">170: </a><span class="php-comment">     * @return Validator\AbstractValidator
+</span></span><span id="170" class="l"><a class="l" href="#170">170: </a><span class="php-comment">     * @return Validator\BaseValidator
 </span></span><span id="171" class="l"><a class="l" href="#171">171: </a><span class="php-comment">     * @throws \InvalidArgumentException When validator not found
 </span></span><span id="172" class="l"><a class="l" href="#172">172: </a><span class="php-comment">     */</span>
 </span><span id="173" class="l"><a class="l" href="#173">173: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_createRuleValidator" href="#_createRuleValidator">createRuleValidator</a>(<span class="php-var">$rule</span>, <span class="php-keyword1">array</span> <span class="php-var">$options</span> = <span class="php-keyword1">array</span>())
