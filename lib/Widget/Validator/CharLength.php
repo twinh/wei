@@ -16,5 +16,9 @@ namespace Widget\Validator;
  */
 class CharLength extends Length
 {
+    protected $lengthMessage = '%name% must have %length% characters';
+
+    protected $notInMessage = '%name% must have %min% to %max% characters';
+
     protected $countByChars = true;
 }
