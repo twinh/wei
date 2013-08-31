@@ -8,11 +8,6 @@
 
     var $window = $(window)
 
-    // Disable certain links in docs
-    $('section [href^=#]').click(function (e) {
-      e.preventDefault()
-    })
-
     // back to top
     // setTimeout(function () {
     //   $('.bs-docs-sidenav').affix({
