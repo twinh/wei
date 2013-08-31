@@ -49,44 +49,44 @@ class Validate extends Base
     /**
      * The callback triggered when every rule is valid
      *
-     * @var null|callback
+     * @var callable
      */
-    protected $ruleValid = null;
+    protected $ruleValid;
 
     /**
      * The callback triggered when every rule is invalid
      *
-     * @var null|callback
+     * @var callable
      */
-    protected $ruleInvalid = null;
+    protected $ruleInvalid;
 
     /**
      * The callback triggered when every field is valid
      *
-     * @var null|callback
+     * @var callable
      */
-    protected $fieldValid = null;
+    protected $fieldValid;
 
     /**
      * The callback triggered when every field is invalid
      *
-     * @var null|callback
+     * @var callable
      */
-    protected $fieldInvalid = null;
+    protected $fieldInvalid;
 
     /**
      * The callback triggered after all rules are valid
      *
-     * @var null|callback
+     * @var callable
      */
-    protected $success = null;
+    protected $success;
 
     /**
      * The callback triggered when the validation is invalid
      *
-     * @var null|callback
+     * @var callable
      */
-    protected $failure = null;
+    protected $failure;
 
     /**
      * Whether break the validation flow when any field's rule is not valid
