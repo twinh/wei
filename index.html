@@ -10082,12 +10082,11 @@
 <p>验证码页面</p>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">session</span><span class="p">(</span><span class="s1">'verfiyCode'</span><span class="p">,</span> <span class="s1">'WIDG'</span><span class="p">);</span>
-<span class="sb">``</span>
+</code></pre></div>
 
-<span class="err">校验页面</span>
+<p>校验页面</p>
 
-<span class="sb">``</span><span class="err">`</span><span class="nx">php</span>
-<span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">session</span><span class="p">(</span><span class="s1">'verfiyCode'</span><span class="p">)</span> <span class="o">==</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">'verfiyCode'</span><span class="p">))</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">session</span><span class="p">(</span><span class="s1">'verfiyCode'</span><span class="p">)</span> <span class="o">==</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">'verfiyCode'</span><span class="p">))</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'验证码正确'</span><span class="p">;</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'验证码错误'</span><span class="p">;</span>
@@ -10174,7 +10173,7 @@
 
 <h4>session-&gt;setInis(array $inis)</h4>
 
-<p>设置会话相关的ini配置,配置名称会自定加上<code>session.</code>前缀<br>
+<p>设置会话相关的ini配置,配置名称会自定加上<code>session.</code>前缀
 详细配置可以查看<a href="http://php.net/manual/en/session.configuration.php" target="_blank">http://php.net/manual/en/session.configuration.php</a></p>
   </section>
 
