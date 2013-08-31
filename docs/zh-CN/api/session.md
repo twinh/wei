@@ -12,7 +12,7 @@ Session
 
 ```php
 widget()->session('verfiyCode', 'WIDG');
-``
+```
 
 校验页面
 
@@ -66,5 +66,5 @@ gc_maxlifetime	| 86400
 删除所有的会话消息
 
 #### session->setInis(array $inis)
-设置会话相关的ini配置,配置名称会自定加上`session.`前缀  
+设置会话相关的ini配置,配置名称会自定加上`session.`前缀
 详细配置可以查看http://php.net/manual/en/session.configuration.php
