@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class MaxLength extends BaseLengthValidator
+class MaxLength extends Length
 {
     protected $tooLongMessage = '%name% must have a length lower than %max%';
 
@@ -24,7 +24,7 @@ class MaxLength extends BaseLengthValidator
     /**
      * {@inheritdoc}
      */
-    public function __invoke($input, $max = null)
+    public function __invoke($input, $max = null, $__ = null)
     {
         $max && $this->storeOption('max', $max);
 

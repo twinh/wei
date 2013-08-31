@@ -13,7 +13,7 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class MinLength extends BaseLengthValidator
+class MinLength extends Length
 {
     protected $tooShortMessage = '%name% must have a length greater than %min%';
 
@@ -24,7 +24,7 @@ class MinLength extends BaseLengthValidator
     /**
      * {@inheritdoc}
      */
-    public function __invoke($input, $min = null)
+    public function __invoke($input, $min = null, $__ = null)
     {
         $min && $this->storeOption('min', $min);
 
