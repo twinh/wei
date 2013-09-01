@@ -19,21 +19,21 @@ class Blank extends BaseValidator
 
     protected $negativeMessage = '%name% must not be blank';
 
+    protected $invalid = array(null, '', false, array());
+
     /**
      * {@inheritdoc}
      */
     protected function doValidate($input)
     {
-        if ($this->isString($input)) {
-            $result = '' === trim($input);
+        if (
+            in_array($input, $this->invalid, true)
+            || ($this->isString($input) && '' === trim($input))
+        ) {
+            return true;
         } else {
-            $result = !empty($input);
-        }
-
-        if (!$result) {
             $this->addError('blank');
+            return false;
         }
-
-        return $result;
     }
 }

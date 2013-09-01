@@ -31,10 +31,7 @@ class EmptyTest extends TestCase
         return array(
             array(''),
             array(false),
-            array(0),
-            array(0.0),
             array(array()),
-            array('0'),
             array(null),
         );
     }
@@ -42,6 +39,9 @@ class EmptyTest extends TestCase
     public function providerForNotEmpty()
     {
         return array(
+            array('0'),
+            array(0),
+            array(0.0),
             array('string'),
             array(' '),
             array("\r\n"),

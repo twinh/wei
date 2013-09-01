@@ -35,6 +35,9 @@ class BlankTest extends TestCase
     public function providerForNotBlank()
     {
         return array(
+            array('0'),
+            array(0),
+            array(0.0),
             array(' abc '),
             array('a b'),
             array('　'), // ﻿Unicode full width space

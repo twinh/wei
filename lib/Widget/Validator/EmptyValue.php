@@ -19,16 +19,18 @@ class EmptyValue extends BaseValidator
 
     protected $negativeMessage = '%name% must not be empty';
 
+    protected $invalid = array(null, '', false, array());
+
     /**
      * {@inheritdoc}
      */
     protected function doValidate($input)
     {
-        if (!empty($input)) {
+        if (in_array($input, $this->invalid, true)) {
+            return true;
+        } else {
             $this->addError('empty');
             return false;
         }
-
-        return true;
     }
 }
