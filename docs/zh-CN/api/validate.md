@@ -11,6 +11,7 @@ Widget验证器是参考[jQuery Validation](http://bassistance.de/jquery-plugins
 ----
 
 ### 检查数据是否符合指定的验证规则
+
 ```php
 $validator = widget()->validate(array(
     'data' => array(
@@ -88,6 +89,77 @@ $firstMessage = $validator->getFirstMessage();
 
 // 返回的信息如下
 $firstMessage = '用户名的长度必须大于3';
+```
+
+### 区分`required`,`notBlank`和`notEmpty`验证规则
+
+这三个验证规则都用于检查数据不能为空,它们在使用场景和检查的数据内容稍有不同.
+
+**使用场景的区别**
+
+* required通常用于验证器的规则中,表示某一项是不能为空或是可选
+
+    ```php
+    $validator = widget()->validate(array(
+        'rules' => array(
+            'email' => array(
+                'required' => true,
+                'email' => true,
+            )
+        )
+    ));
+    ```
+* notEmpty和notBlank既可以用于验证器规则中,又可以独立作为验证微件
+
+    ```php
+    // 作为验证器规则
+    $validator = widget()->validate(array(
+        'rules' => array(
+            'email' => array(
+                'required' => true,
+                'notEmpty' => true,
+                'email' => true,
+            )
+        )
+    ));
+
+    // 独立使用
+    if ($this->isBlank($input)) {
+        print_r($this->isBlank->getMessages());
+    }
+    if ($this->isEmpty($input)) {
+        print_r($this->isEmpty->getMessages());
+    }
+    ```
+
+**检查内容的区别**
+
+* 当数据为以下值时,这三个规则均验证不通过,返回`false`
+
+    * null
+    * '' (空字符串)
+    * false
+    * array() (空数组)
+
+* 当数据完全由以下字符组成时,`notBlank`规则会验证不通过,返回`false`
+
+    字符   | ASCII | 说明
+    -------|-------|------
+    " "    | 32    | 普通空格符
+    "\t"   | 9     | 制表符
+    "\n"   | 10    | 换行符
+    "\r"   | 13    | 回车符
+    "\0"   | 0     | 空字节符
+    "\x0B" | 11    | 垂直制表符
+
+    来源参见[trim](http://www.php.net/manual/zh/function.trim.php)函数
+
+* 当数据由其他字符组成(包括0),所有规则均验证通过,返回`true`
+
+### 区分`all`和`allOf`验证规则
+
+```php
+
 ```
 
 调用方式
