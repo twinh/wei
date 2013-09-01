@@ -4349,10 +4349,12 @@
 <h3>检查数据是否符合指定的验证规则</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$validator</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="c1">// 待验证的数据</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="s1">'tw'</span><span class="p">,</span>
         <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'invalid'</span><span class="p">,</span>
     <span class="p">),</span>
+    <span class="c1">// 验证规则数组</span>
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">'minLength'</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
@@ -4362,10 +4364,12 @@
             <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="k">true</span>
         <span class="p">)</span>
     <span class="p">),</span>
+    <span class="c1">// 数据项名称的数组,用于错误信息提示</span>
     <span class="s1">'names'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="s1">'用户名'</span><span class="p">,</span>
         <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'邮箱'</span>
     <span class="p">),</span>
+    <span class="c1">// 验证错误时的提示信息,留空将使用默认信息</span>
     <span class="s1">'messages'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">'minLength'</span> <span class="o">=&gt;</span> <span class="s1">'%name%的长度必须大于3'</span><span class="p">,</span>
@@ -4426,112 +4430,6 @@
 <span class="nv">$firstMessage</span> <span class="o">=</span> <span class="s1">'用户名的长度必须大于3'</span><span class="p">;</span>
 </code></pre></div>
 
-<h3>区分<code>required</code>,<code>notBlank</code>和<code>notEmpty</code>验证规则</h3>
-
-<p>这三个验证规则都用于检查数据不能为空,它们在使用场景和检查的数据内容稍有不同.</p>
-
-<p><strong>使用场景的区别</strong></p>
-
-<ul>
-<li>
-<p>required通常用于验证器的规则中,表示某一项是不能为空或是可选</p>
-
-<div class="highlight"><pre><code class="php"><span class="nv">$validator</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-            <span class="s1">'required'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
-            <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
-<span class="p">));</span>
-</code></pre></div>
-</li>
-<li>
-<p>notEmpty和notBlank既可以用于验证器规则中,又可以独立作为验证微件</p>
-
-<div class="highlight"><pre><code class="php"><span class="c1">// 作为验证器规则</span>
-<span class="nv">$validator</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-            <span class="s1">'required'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
-            <span class="s1">'notEmpty'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
-            <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
-<span class="p">));</span>
-
-<span class="c1">// 独立使用</span>
-<span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isBlank</span><span class="p">(</span><span class="nv">$input</span><span class="p">))</span> <span class="p">{</span>
-    <span class="nb">print_r</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isBlank</span><span class="o">-&gt;</span><span class="na">getMessages</span><span class="p">());</span>
-<span class="p">}</span>
-<span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isEmpty</span><span class="p">(</span><span class="nv">$input</span><span class="p">))</span> <span class="p">{</span>
-    <span class="nb">print_r</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isEmpty</span><span class="o">-&gt;</span><span class="na">getMessages</span><span class="p">());</span>
-<span class="p">}</span>
-</code></pre></div>
-</li>
-</ul><p><strong>检查内容的区别</strong></p>
-
-<ul>
-<li>
-<p>当数据为以下值时,这三个规则均验证不通过,返回<code>false</code></p>
-
-<ul>
-<li>null</li>
-<li>'' (空字符串)</li>
-<li>false</li>
-<li>array() (空数组)</li>
-</ul>
-</li>
-<li>
-<p>当数据完全由以下任意字符组成时,<code>notBlank</code>规则会验证不通过,返回<code>false</code></p>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>字符</th>
-<th>ASCII</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>" "</td>
-<td>32</td>
-<td>普通空格符</td>
-</tr>
-<tr>
-<td>"\t"</td>
-<td>9</td>
-<td>制表符</td>
-</tr>
-<tr>
-<td>"\n"</td>
-<td>10</td>
-<td>换行符</td>
-</tr>
-<tr>
-<td>"\r"</td>
-<td>13</td>
-<td>回车符</td>
-</tr>
-<tr>
-<td>"\0"</td>
-<td>0</td>
-<td>空字节符</td>
-</tr>
-<tr>
-<td>"\x0B"</td>
-<td>11</td>
-<td>垂直制表符</td>
-</tr>
-</tbody>
-</table>
-<p>来源参见<a href="http://www.php.net/manual/zh/function.trim.php" target="_blank">trim</a>函数</p>
-</li>
-<li><p>当数据由其他字符组成(包括0),所有规则均验证通过,返回<code>true</code></p></li>
-</ul><h3>区分<code>all</code>和<code>allOf</code>验证规则</h3>
-
-<div class="highlight"><pre><code class="php"><span class="c1">// TDOO</span>
-</code></pre></div>
-
 <h2>调用方式</h2>
 
 <h3>选项</h3>
@@ -4561,6 +4459,12 @@
 <td>array</td>
 <td>array()</td>
 <td>数据项名称的数组,用于错误信息提示</td>
+</tr>
+<tr>
+<td>messages</td>
+<td>array</td>
+<td>array()</td>
+<td>验证错误时的提示信息</td>
 </tr>
 <tr>
 <td>breakRule</td>
