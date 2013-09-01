@@ -4578,15 +4578,15 @@
 
 <p>规则可以字符串,表示一项验证规则,也可以是数组,表示多项验证规则.</p>
 
+<p>所有的验证规则请查看<a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../#api%E5%8F%82%E8%80%83%E7%9B%AE%E5%BD%95" target="_blank">API目录</a>-<a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../#%E9%AA%8C%E8%AF%81%E5%99%A8" target="_blank">验证器</a>章节.</p>
+
 <p><strong>注意:</strong> </p>
 
 <ol>
 <li>所有数据项默认都是 <strong>必选</strong> 的,如果某一个数据项是选填的,只需增加 <strong><code>required =&gt; false</code></strong> 的验证规则</li>
 <li>验证规则会被转换成对应的类.如<code>email</code>规则将被转换为<code>\Widget\Validator\Email</code>类,如果类不存在,将抛出异常提醒开发人员规则不存在.</li>
 <li>验证规则都是 <strong>不</strong> 以<code>is</code>开头的,<code>email</code>,<code>digit</code>是正确的规则名称,<code>isEmail</code>,<code>isDigit</code>是错误的规则名称</li>
-</ol><p>所有的验证规则请查看API目录 ../#%E9%AA%8C%E8%AF%81%E5%99%A8</p>
-
-<h4>案例:验证规则格式</h4>
+</ol><h4>案例:验证规则格式</h4>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -4621,8 +4621,10 @@
 <h4>案例:区分验证规则和验证微件的名称</h4>
 
 <ol>
-<li>验证微件均是以is开头,如isDigit,isAlnum</li>
-<li>作为验证规则时,需使用原始的名称,如digit,alnum</li>
+<li>验证微件均是以<code>is</code>开头,如<code>isDigit</code>,<code>isAlnum</code>
+</li>
+<li>作为验证规则时,需使用原始的名称,如<code>digit</code>,<code>alnum</code>
+</li>
 </ol><div class="highlight"><pre><code class="php"><span class="nv">$age</span> <span class="o">=</span> <span class="mi">18</span><span class="p">;</span>
 
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
@@ -4638,10 +4640,10 @@
 <span class="p">));</span>
 
 <span class="c1">// 通过isDigit验证微件,验证数据</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isDigit</span><span class="p">(</span><span class="nv">$age</span><span class="p">);</span>
+<span class="nv">$bool</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isDigit</span><span class="p">(</span><span class="nv">$age</span><span class="p">);</span>
 
 <span class="c1">// 通过is微件,指定验证规则验证数据</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">'digit'</span><span class="p">,</span> <span class="nv">$age</span><span class="p">);</span>
+<span class="nv">$bool</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">'digit'</span><span class="p">,</span> <span class="nv">$age</span><span class="p">);</span>
 </code></pre></div>
 
 <h4>案例:区分<code>required</code>,<code>notBlank</code>和<code>notEmpty</code>验证规则</h4>
@@ -4652,7 +4654,7 @@
 
 <ul>
 <li>
-<p>required通常用于验证器的规则中,表示某一项是不能为空或是可选</p>
+<p><code>required</code>通常用于验证器的规则中,表示某一项是不能为空或是可选</p>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$validator</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -4665,7 +4667,7 @@
 </code></pre></div>
 </li>
 <li>
-<p>notEmpty和notBlank既可以用于验证器规则中,又可以独立作为验证微件</p>
+<p><code>notEmpty</code>和<code>notBlank</code>既可以用于验证器规则中,又可以独立作为验证微件</p>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 作为验证器规则</span>
 <span class="nv">$validator</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
@@ -4754,7 +4756,7 @@
 
 <p>验证错误时的提示信息.提示信息的格式与验证规则类似.</p>
 
-<h4>代码范例</h4>
+<h4>案例:提示信息的格式</h4>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -4807,7 +4809,7 @@
 
 <p><strong>注意:</strong>如果未提供数据项名称,错误信息将以<code>该项</code>作为验证数据项的名称,完整的错误信息例如<code>该项不能为空</code></p>
 
-<h4>代码范例</h4>
+<h4>案例</h4>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -4876,7 +4878,7 @@
 </tbody>
 </table><p>如果<code>ruleValid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
-<h4>代码范例</h4>
+<h4>案例</h4>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -4940,7 +4942,7 @@
 </table><p><code>ruleInvalid</code>与<code>ruleValid</code>的行为一致.
 同样的,如果<code>ruleInvalid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
-<h4>代码范例</h4>
+<h4>案例</h4>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -4998,7 +5000,7 @@
 </tbody>
 </table><p>如果<code>fieldValid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
-<h4>代码范例</h4>
+<h4>案例</h4>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -5054,7 +5056,7 @@
 </tbody>
 </table><p>如果<code>fieldInvalid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
-<h4>代码范例</h4>
+<h4>案例</h4>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -5101,7 +5103,7 @@
 <td>微件管理器</td>
 </tr>
 </tbody>
-</table><h4>代码范例</h4>
+</table><h4>案例</h4>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -5146,7 +5148,7 @@
 <td>微件管理器</td>
 </tr>
 </tbody>
-</table><h4>代码范例</h4>
+</table><h4>案例</h4>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
