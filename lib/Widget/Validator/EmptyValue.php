@@ -19,6 +19,11 @@ class EmptyValue extends BaseValidator
 
     protected $negativeMessage = '%name% must not be empty';
 
+    /**
+     * The invalid variable values
+     *
+     * @var array
+     */
     protected $invalid = array(null, '', false, array());
 
     /**
