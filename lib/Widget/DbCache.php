@@ -98,7 +98,7 @@ class DbCache extends BaseCache
         $data = array(
             'value' => serialize($value),
             'lastModified' => date('Y-m-d H:i:s'),
-            'expire' => date('Y-m-d H:i:s', $expire ? time() + $expire: 2147483647)
+            'expire' => date('Y-m-d H:i:s', $expire ? time() + $expire : 2147483647)
         );
         $identifier = array(
             'id' => $key
@@ -133,7 +133,7 @@ class DbCache extends BaseCache
         if (!$result) {
             return false;
         }
-        if ($result['expire'] < time()) {
+        if ($result['expire'] < date('Y-m-d H:i:s')) {
             $this->doRemove($key);
             return false;
         }
