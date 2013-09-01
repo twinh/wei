@@ -11,6 +11,7 @@ Changelog
 * Chagned log level priorities to adapted with monolog
 * Added formatLog method for logger widget
 * Added `isCharLength` validator
+* Added expire time support for dbCache widget
 
 ## 0.9.4 (2013-08-07)
 * Changed cache widgets' `increment` and `decrement` methods to `inc` and `dec`

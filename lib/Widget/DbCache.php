@@ -59,7 +59,6 @@ class DbCache extends BaseCache
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-
         $this->prepareTable();
     }
 
@@ -83,8 +82,12 @@ class DbCache extends BaseCache
      */
     protected function doGet($key)
     {
-        $result = $this->db->select($this->table, $key);
-        return $result ? unserialize($result['value']) : false;
+        if ($this->doExists($key)) {
+            $result = $this->db->select($this->table, $key);
+            return unserialize($result['value']);
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -125,7 +128,17 @@ class DbCache extends BaseCache
      */
     protected function doExists($key)
     {
-        return (bool)$this->db->select($this->table, $key);
+        $result = $this->db->select($this->table, $key);
+
+        if (!$result) {
+            return false;
+        }
+        if ($result['expire'] < time()) {
+            $this->doRemove($key);
+            return false;
+        }
+
+        return true;
     }
 
     /**
