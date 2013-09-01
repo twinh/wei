@@ -105,7 +105,7 @@ class DbCache extends BaseCache
         );
 
         if ($this->doExists($key)) {
-            // In mysql, the rowCount method return 0 when data is not modified,
+            // In MySQL, the rowCount method return 0 when data is not modified,
             // so check errorCode to make sure it executed success
             $result = $this->db->update($this->table, $data, $identifier) || '0000' == $this->db->errorCode();
         } else {
@@ -173,7 +173,6 @@ class DbCache extends BaseCache
     protected function doIncr($key, $offset = 1)
     {
         $value = $this->doGet($key) + $offset;
-
         return $this->doSet($key, $value) ? $value : false;
     }
 
