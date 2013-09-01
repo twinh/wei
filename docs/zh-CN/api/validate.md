@@ -109,12 +109,12 @@ messages     | array        | array() | 验证错误时的提示信息
 breakRule    | bool         | false   | 是否当任意一项规则验证不通过时就中断验证流程
 breakField   | bool         | false   | 是否当任意一项数据验证不通过时就中断验证流程
 skip         | bool         | false   | 是否当任意一项数据中的一项规则不通过时,就跳转到下一项数据的验证流程,默认是false,启用后,每项数据最多会有一个未通过的验证规则
-ruleValid    | callback     | 无      | 规则验证通过时调用的回调函数
-ruleInvalid  | callback     | 无      | 规则验证不通过时调用的回调函数
-fieldValid   | callback     | 无      | 数据项验证通过时调用的回调函数
-fieldInvalid | callback     | 无      | 数据项验证不通过时调用的回调函数
-success      | callback     | 无      | 验证器验证通过(所有验证规则都通过)时调用的回调函数
-failure      | callback     | 无      | 验证器验证不通过(任意验证规则不通过)时调用的回调函数
+ruleValid    | callable     | 无      | 规则验证通过时调用的回调函数
+ruleInvalid  | callable     | 无      | 规则验证不通过时调用的回调函数
+fieldValid   | callable     | 无      | 数据项验证通过时调用的回调函数
+fieldInvalid | callable     | 无      | 数据项验证不通过时调用的回调函数
+success      | callable     | 无      | 验证器验证通过(所有验证规则都通过)时调用的回调函数
+failure      | callable     | 无      | 验证器验证不通过(任意验证规则不通过)时调用的回调函数
 
 #### 选项详细说明
 
@@ -306,7 +306,7 @@ $bool = widget()->is('digit', $age);
 
 * 当数据由其他字符组成(包括0),所有规则均验证通过,返回`true`
 
-### 案例:区分`all`和`allOf`验证规则
+#### 案例:区分`all`和`allOf`验证规则
 
 ```php
 // TDOO
@@ -616,7 +616,7 @@ widget()->validate(array(
 验证结束时,如果最终验证结果为 **不** 通过,验证器就触发`failure`回调.
 
 ```php
-failure ( $event, widget(), $validator )
+failure ( $event, $widget, $validator )
 ```
 
 名称        | 类型                  | 说明
