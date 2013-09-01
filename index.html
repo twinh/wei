@@ -4486,37 +4486,37 @@
 </tr>
 <tr>
 <td>ruleValid</td>
-<td>callback</td>
+<td>callable</td>
 <td>无</td>
 <td>规则验证通过时调用的回调函数</td>
 </tr>
 <tr>
 <td>ruleInvalid</td>
-<td>callback</td>
+<td>callable</td>
 <td>无</td>
 <td>规则验证不通过时调用的回调函数</td>
 </tr>
 <tr>
 <td>fieldValid</td>
-<td>callback</td>
+<td>callable</td>
 <td>无</td>
 <td>数据项验证通过时调用的回调函数</td>
 </tr>
 <tr>
 <td>fieldInvalid</td>
-<td>callback</td>
+<td>callable</td>
 <td>无</td>
 <td>数据项验证不通过时调用的回调函数</td>
 </tr>
 <tr>
 <td>success</td>
-<td>callback</td>
+<td>callable</td>
 <td>无</td>
 <td>验证器验证通过(所有验证规则都通过)时调用的回调函数</td>
 </tr>
 <tr>
 <td>failure</td>
-<td>callback</td>
+<td>callable</td>
 <td>无</td>
 <td>验证器验证不通过(任意验证规则不通过)时调用的回调函数</td>
 </tr>
@@ -4747,7 +4747,7 @@
 <p>来源参见<a href="http://www.php.net/manual/zh/function.trim.php" target="_blank">trim</a>函数</p>
 </li>
 <li><p>当数据由其他字符组成(包括0),所有规则均验证通过,返回<code>true</code></p></li>
-</ul><h3>案例:区分<code>all</code>和<code>allOf</code>验证规则</h3>
+</ul><h4>案例:区分<code>all</code>和<code>allOf</code>验证规则</h4>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// TDOO</span>
 </code></pre></div>
@@ -5127,7 +5127,7 @@
 
 <p>验证结束时,如果最终验证结果为 <strong>不</strong> 通过,验证器就触发<code>failure</code>回调.</p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">failure</span> <span class="p">(</span> <span class="nv">$event</span><span class="p">,</span> <span class="nx">widget</span><span class="p">(),</span> <span class="nv">$validator</span> <span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="nx">failure</span> <span class="p">(</span> <span class="nv">$event</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">,</span> <span class="nv">$validator</span> <span class="p">)</span>
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
