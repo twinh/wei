@@ -4426,6 +4426,14 @@
 <span class="nv">$firstMessage</span> <span class="o">=</span> <span class="s1">'用户名的长度必须大于3'</span><span class="p">;</span>
 </code></pre></div>
 
+<h3>区分<code>required</code>,<code>notBlank</code>和<code>notEmpty</code>验证规则</h3>
+
+
+
+<h3>区分<code>all</code>和<code>allOf</code>验证规则</h3>
+
+
+
 <h2>调用方式</h2>
 
 <h3>选项</h3>
@@ -6529,7 +6537,14 @@
 
 <p>检查数据是否为空</p>
 
-<h2>案例</h2>
+<p>检查以下值会返回false,其他值(包括0)均返回true</p>
+
+<ul>
+<li>null</li>
+<li>'' (空字符串)</li>
+<li>false</li>
+<li>array() (空数组)</li>
+</ul><h2>案例</h2>
 
 <h3>检查null是否为空</h3>
 
@@ -6545,9 +6560,9 @@
 <div class="highlight"><pre><code class="php"><span class="s1">'No'</span>
 </code></pre></div>
 
-<h3>检查null是否为空,第二个参数设为false</h3>
+<h3>检查0是否为空</h3>
 
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isRequired</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">false</span><span class="p">))</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isRequired</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
@@ -6556,7 +6571,7 @@
 
 <h4>运行结果</h4>
 
-<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
+<div class="highlight"><pre><code class="php"><span class="s1">'No'</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
