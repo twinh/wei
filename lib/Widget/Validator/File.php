@@ -274,7 +274,6 @@ class File extends BaseValidator
     public function setExts($exts)
     {
         $this->exts = $this->convertToArray($exts);
-
         return $this;
     }
 
@@ -287,7 +286,6 @@ class File extends BaseValidator
     public function setExcludeExts($exts)
     {
         $this->excludeExts = $this->convertToArray($exts);
-
         return $this;
     }
 
@@ -301,7 +299,6 @@ class File extends BaseValidator
     {
         $this->maxSize = $this->toBytes($maxSize);
         $this->maxSizeString = $this->fromBytes($this->maxSize);
-
         return $this;
     }
 
@@ -315,7 +312,6 @@ class File extends BaseValidator
     {
         $this->minSize = $this->toBytes($minSize);
         $this->minSizeString = $this->fromBytes($this->minSize);
-
         return $this;
     }
 
@@ -365,7 +361,6 @@ class File extends BaseValidator
     public function setMimeTypes($mimeTypes)
     {
         $this->mimeTypes = $this->convertToArray($mimeTypes);
-
         return $this;
     }
 
@@ -378,7 +373,6 @@ class File extends BaseValidator
     public function setExcludeMimeTypes($excludeMimeTypes)
     {
         $this->excludeMimeTypes = $this->convertToArray($excludeMimeTypes);
-
         return $this;
     }
 
@@ -437,7 +431,6 @@ class File extends BaseValidator
                 $this->ext = '';
             }
         }
-
         return $this->ext;
     }
 }
