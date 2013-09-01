@@ -581,6 +581,7 @@ widget()->validate(array(
 $options    | array        | 验证器的选项,完整内容请查看"调用方式"-"选项"章节
 
 #### validate->addRule($field, $rule, $parameters)
+
 为数据项增加新的验证规则
 
 返回: `Widget\Validate` 验证器对象
@@ -594,6 +595,7 @@ $rule       | string       | 验证规则的名称
 $parameters | string       | 验证规则的参数
 
 #### validate->hasRule($field, $rule)
+
 检查数据项是否包含指定的验证规则
 
 返回: `bool`
@@ -606,6 +608,7 @@ $field      | string       | 数据项的名称
 $rule       | string       | 验证规则的名称
 
 #### validate->removeRule($field, $rule)
+
 删除指定数据项的验证规则
 
 返回: `bool` 规则存在并删除返回`true`,不存在返回`false`
@@ -618,20 +621,31 @@ $field      | string       | 数据项的名称
 $rule       | string       | 验证规则的名称
 
 #### validate->setData($data)
+
 设置要验证的数据
 
+返回: `Widget\Validate` 验证器对象
+
 #### validate->getData()
+
 获取要验证的数据
 
+返回: `array`
+
 #### validate->setNames($names)
+
 设置数据项的名称
 
+返回: `Widget\Validate` 验证器对象
+
 #### validate->getNames()
+
 获取数据项的名称
 
 返回: `array`
 
 #### validate->getFieldData($field)
+
 获取要验证的数据项的值
 
 返回: `mixed` 不存在时返回null
@@ -643,6 +657,7 @@ $rule       | string       | 验证规则的名称
 $field      | string       | 数据项的名称
 
 #### validate->setFieldData($field, $value)
+
 设置要验证的数据项的值
 
 返回: `Widget\Validate`
@@ -655,6 +670,7 @@ $field      | string       | 数据项的名称
 $value      | mixed        | 数据项的值
 
 #### validate->setMessages($messages)
+
 设置自定义的错误信息
 
 返回: `Widget\Validate`
@@ -666,21 +682,25 @@ $value      | mixed        | 数据项的值
 $messages   | array        | 错误信息数组
 
 #### validate->getMessages()
+
 获取自定义的错误信息
 
 返回: `array` 
 
 #### validate->getDetailMessages()
+
 获取详细的验证错误信息
 
 返回: `array` 
 
 #### validate->getSummaryMessages()
+
 获取简洁的验证错误信息
 
 返回: `array` 
 
 #### validate->getJoinedMessage($separator = "\n")
+
 获取合并的验证错误信息
 
 返回: `string`
@@ -692,11 +712,13 @@ $messages   | array        | 错误信息数组
 $separator  | string       | 合并错误信息数组的分隔符
 
 #### validate->getFirstMessage()
+
 获取第一条验证错误信息
 
 返回: `string`|`false` 验证不通过时返回第一条错误信息,通过时返回`false`
 
 #### validate->getRuleValidator($field, $rule)
+
 获取规则验证器对象
 
 返回: `Widget\Validator\AbstractValidator`|`null` 验证器不存在时返回null
