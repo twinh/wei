@@ -173,13 +173,13 @@ widget()->validate(array(
 
 规则可以字符串,表示一项验证规则,也可以是数组,表示多项验证规则.
 
+所有的验证规则请查看[API目录](../#api参考目录)-[验证器](../#验证器)章节.
+
 **注意:** 
 
 1. 所有数据项默认都是 **必选** 的,如果某一个数据项是选填的,只需增加 **`required => false`** 的验证规则
 2. 验证规则会被转换成对应的类.如`email`规则将被转换为`\Widget\Validator\Email`类,如果类不存在,将抛出异常提醒开发人员规则不存在.
 3. 验证规则都是 **不** 以`is`开头的,`email`,`digit`是正确的规则名称,`isEmail`,`isDigit`是错误的规则名称
-
-所有的验证规则请查看API目录 ../#%E9%AA%8C%E8%AF%81%E5%99%A8
 
 #### 案例:验证规则格式
 
@@ -216,8 +216,8 @@ widget()->validate(array(
 
 #### 案例:区分验证规则和验证微件的名称
 
-1. 验证微件均是以is开头,如isDigit,isAlnum
-2. 作为验证规则时,需使用原始的名称,如digit,alnum
+1. 验证微件均是以`is`开头,如`isDigit`,`isAlnum`
+2. 作为验证规则时,需使用原始的名称,如`digit`,`alnum`
 
 ```php
 $age = 18;
@@ -235,10 +235,10 @@ widget()->validate(array(
 ));
 
 // 通过isDigit验证微件,验证数据
-widget()->isDigit($age);
+$bool = widget()->isDigit($age);
 
 // 通过is微件,指定验证规则验证数据
-widget()->is('digit', $age);
+$bool = widget()->is('digit', $age);
 ```
 
 #### 案例:区分`required`,`notBlank`和`notEmpty`验证规则
@@ -247,7 +247,7 @@ widget()->is('digit', $age);
 
 **使用场景的区别**
 
-* required通常用于验证器的规则中,表示某一项是不能为空或是可选
+* `required`通常用于验证器的规则中,表示某一项是不能为空或是可选
 
     ```php
     $validator = widget()->validate(array(
@@ -259,7 +259,7 @@ widget()->is('digit', $age);
         )
     ));
     ```
-* notEmpty和notBlank既可以用于验证器规则中,又可以独立作为验证微件
+* `notEmpty`和`notBlank`既可以用于验证器规则中,又可以独立作为验证微件
 
     ```php
     // 作为验证器规则
@@ -316,7 +316,7 @@ widget()->is('digit', $age);
 
 验证错误时的提示信息.提示信息的格式与验证规则类似.
 
-#### 代码范例
+#### 案例:提示信息的格式
 
 ```php
 widget()->validate(array(
@@ -365,11 +365,13 @@ widget()->validate(array(
 ```
 
 #### names
+
 数据项名称的数组,用于错误信息提示.数组的键名是验证数据项的值,数值的值是验证数据项的名称.如
 
 **注意:**如果未提供数据项名称,错误信息将以`该项`作为验证数据项的名称,完整的错误信息例如`该项不能为空`
 
-#### 代码范例
+#### 案例
+
 ```php
 widget()->validate(array(
     'rules' => array(
@@ -400,6 +402,7 @@ widget()->validate(array(
 ```
 
 #### ruleValid
+
 当任意一条规则验证通过时,验证器就会触发`ruleValid`回调.
 
 **参数**
@@ -417,7 +420,8 @@ $widget     | Widget\Widget         | 微件管理器
 
 如果`ruleValid`回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
-#### 代码范例
+#### 案例
+
 ```php
 widget()->validate(array(
     'data' => array(
@@ -443,6 +447,7 @@ widget()->validate(array(
 ```
 
 #### ruleInvalid
+
 当任意一条规则验证 **不** 通过时,验证器就会触发`ruleInvalid`回调.
 
 **参数**
@@ -461,7 +466,7 @@ $widget     | Widget\Widget         | 微件管理器
 `ruleInvalid`与`ruleValid`的行为一致.
 同样的,如果`ruleInvalid`回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
-#### 代码范例
+#### 案例
 
 ```php
 widget()->validate(array(
@@ -488,6 +493,7 @@ widget()->validate(array(
 ```
 
 #### fieldValid
+
 当任意数据项验证通过时,验证器就会触发`fieldValid`回调.
 
 **参数**
@@ -504,7 +510,7 @@ $widget     | Widget\Widget         | 微件管理器
 
 如果`fieldValid`回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
-#### 代码范例
+#### 案例
 
 ```php
 widget()->validate(array(
@@ -529,6 +535,7 @@ widget()->validate(array(
 ```
 
 ##### fieldInvalid
+
 当任意数据项验证 **不** 通过时,验证器就会触发`fieldInvalid`回调.
 
 **参数**
@@ -545,7 +552,7 @@ $widget     | Widget\Widget         | 微件管理器
 
 如果`fieldInvalid`回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
-#### 代码范例
+#### 案例
 
 ```php
 widget()->validate(array(
@@ -570,6 +577,7 @@ widget()->validate(array(
 ```
 
 #### success
+
 验证结束时,如果最终验证结果为通过,验证器就触发`success`回调.
 
 ```php
@@ -581,7 +589,7 @@ success($validator, $widget)
 $validator  | Widget\Validate       | 验证器对象
 $widget     | Widget\Widget         | 微件管理器
 
-#### 代码范例
+#### 案例
 
 ```php
 widget()->validate(array(
@@ -604,6 +612,7 @@ widget()->validate(array(
 ```
 
 #### failure
+
 验证结束时,如果最终验证结果为 **不** 通过,验证器就触发`failure`回调.
 
 ```php
@@ -615,7 +624,7 @@ failure ( $event, widget(), $validator )
 $validator  | Widget\Validate       | 验证器对象
 $widget     | Widget\Widget         | 微件管理器
 
-#### 代码范例
+#### 案例
 
 ```php
 widget()->validate(array(
@@ -637,13 +646,16 @@ widget()->validate(array(
 'No'
 ```
 
-#### breakRule 
+#### breakRule
+
 默认为`false`.设置为`true`后,当任意一项规则验证不通过时就中断验证流程,直接返回验证结果(false)
 
 #### breakField
+
 默认为`false`.设置为`true`后,当任意一项数据验证不通过时就中断验证流程,直接返回验证结果(false)
 
 #### skip
+
 默认为`false`.设置为`true`后,当任意一项数据中的一项规则不通过时,就跳转到下一项数据的验证流程.
 
 因此,每项数据最多会有一个未通过的验证规则
