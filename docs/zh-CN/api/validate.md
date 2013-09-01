@@ -95,7 +95,153 @@ $firstMessage = $validator->getFirstMessage();
 $firstMessage = '用户名的长度必须大于3';
 ```
 
-### 区分`required`,`notBlank`和`notEmpty`验证规则
+调用方式
+--------
+
+### 选项
+
+名称         | 类型         | 默认值  | 说明
+-------------|--------------|---------|------
+data         | array,object | array() | 待验证的数据,可以是数组或对象
+rules        | array        | array() | 验证规则数组
+names        | array        | array() | 数据项名称的数组,用于错误信息提示
+messages     | array        | array() | 验证错误时的提示信息
+breakRule    | bool         | false   | 是否当任意一项规则验证不通过时就中断验证流程
+breakField   | bool         | false   | 是否当任意一项数据验证不通过时就中断验证流程
+skip         | bool         | false   | 是否当任意一项数据中的一项规则不通过时,就跳转到下一项数据的验证流程,默认是false,启用后,每项数据最多会有一个未通过的验证规则
+ruleValid    | callback     | 无      | 规则验证通过时调用的回调函数
+ruleInvalid  | callback     | 无      | 规则验证不通过时调用的回调函数
+fieldValid   | callback     | 无      | 数据项验证通过时调用的回调函数
+fieldInvalid | callback     | 无      | 数据项验证不通过时调用的回调函数
+success      | callback     | 无      | 验证器验证通过(所有验证规则都通过)时调用的回调函数
+failure      | callback     | 无      | 验证器验证不通过(任意验证规则不通过)时调用的回调函数
+
+#### 选项详细说明
+
+#### data
+
+待验证的数据,可以是数组或对象
+
+验证数据的取值的顺序如下
+
+1. 如果`$data`是数组或`\ArrayAccess`的实例化对象,检查并返回`$data[$key]`的值
+2. 如果`$data`是对象,检查属性`$key`是否存在,存在则返回`$data->$key`的值
+3. 如果`$data`是对象且方法`get. $key`存在,返回`$data->{'get' . $key}`
+4. 如果以上均不存在,返回null
+
+#### 案例:使用数组和对象作为验证数据
+
+```php
+class User
+{
+    public function getName()
+    {
+        return 'twin';
+    }
+
+    public function getEmail()
+    {
+        return 'test@test.com';
+    }
+}
+
+// 以数组为验证数据
+widget()->validate(array(
+    'data' => array(
+        'name' => 'twin',
+        'email' => 'test@test.com'
+    )
+));
+
+// 以数组对象为验证数据
+widget()->validate(array(
+    'data' => new \ArrayObject(array(
+        'name' => 'twin',
+        'email' => 'test@test.com'
+    ))
+));
+
+// 以对象为验证数据
+widget()->validate(array(
+    'data' => new User
+));
+```
+
+#### rules
+
+验证规则数组.
+
+规则可以字符串,表示一项验证规则,也可以是数组,表示多项验证规则.
+
+**注意:** 
+
+1. 所有数据项默认都是 **必选** 的,如果某一个数据项是选填的,只需增加 **`required => false`** 的验证规则
+2. 验证规则会被转换成对应的类.如`email`规则将被转换为`\Widget\Validator\Email`类,如果类不存在,将抛出异常提醒开发人员规则不存在.
+3. 验证规则都是 **不** 以`is`开头的,`email`,`digit`是正确的规则名称,`isEmail`,`isDigit`是错误的规则名称
+
+所有的验证规则请查看API目录 ../#%E9%AA%8C%E8%AF%81%E5%99%A8
+
+#### 案例:验证规则格式
+
+```php
+widget()->validate(array(
+    'rules' => array(
+        // 简单规则,将会被转换为 array('required' => true)
+        'name' => 'required',
+        // 复合规则
+        'email' => array(
+            'required' => false, // 设置为false表示email是选填
+            'email' => true,
+            'length' => array(3, 256),
+        ),
+        // 完整规则
+        'avatar' => array(
+            'image' => array(
+                'maxWidth' => 200,
+                'maxHeight' => 200
+            )
+        ),
+        // 允许的验证器格式
+        '数据项名称' => array(
+            '验证器名称1',
+            '验证器名称2' => array('验证的选项1', '验证的选项2'), // 参数将传递给验证器的__invoke方法
+            '验证器名称3' => array( // 参数将传递给验证器的setOption方法
+                '验证器选项名称1' => '验证器选项值1',
+                '验证器选项名称2' => '验证器选项值2',
+            )
+        ) 
+    )
+));
+```
+
+#### 案例:区分验证规则和验证微件的名称
+
+1. 验证微件均是以is开头,如isDigit,isAlnum
+2. 作为验证规则时,需使用原始的名称,如digit,alnum
+
+```php
+$age = 18;
+
+widget()->validate(array(
+    'data' => array(
+        'age' => $age
+    ),
+    'rules' => array(
+        'age' => array(
+            'digit' => true, // √正确
+            'isDigit' => true, // ×错误
+        )
+    )
+));
+
+// 通过isDigit验证微件,验证数据
+widget()->isDigit($age);
+
+// 通过is微件,指定验证规则验证数据
+widget()->is('digit', $age);
+```
+
+#### 案例:区分`required`,`notBlank`和`notEmpty`验证规则
 
 这三个验证规则都用于检查数据不能为空,它们在使用场景和检查的数据内容稍有不同.
 
@@ -160,162 +306,18 @@ $firstMessage = '用户名的长度必须大于3';
 
 * 当数据由其他字符组成(包括0),所有规则均验证通过,返回`true`
 
-### 区分`all`和`allOf`验证规则
+### 案例:区分`all`和`allOf`验证规则
 
 ```php
 // TDOO
 ```
 
-调用方式
---------
-
-### 选项
-
-名称         | 类型         | 默认值  | 说明
--------------|--------------|---------|------
-data         | array,object | array() | 待验证的数据,可以是数组或对象
-rules        | array        | array() | 验证规则数组
-names        | array        | array() | 数据项名称的数组,用于错误信息提示
-messages     | array        | array() | 验证错误时的提示信息
-breakRule    | bool         | false   | 是否当任意一项规则验证不通过时就中断验证流程
-breakField   | bool         | false   | 是否当任意一项数据验证不通过时就中断验证流程
-skip         | bool         | false   | 是否当任意一项数据中的一项规则不通过时,就跳转到下一项数据的验证流程,默认是false,启用后,每项数据最多会有一个未通过的验证规则
-ruleValid    | callback     | 无      | 规则验证通过时调用的回调函数
-ruleInvalid  | callback     | 无      | 规则验证不通过时调用的回调函数
-fieldValid   | callback     | 无      | 数据项验证通过时调用的回调函数
-fieldInvalid | callback     | 无      | 数据项验证不通过时调用的回调函数
-success      | callback     | 无      | 验证器验证通过(所有验证规则都通过)时调用的回调函数
-failure      | callback     | 无      | 验证器验证不通过(任意验证规则不通过)时调用的回调函数
-
-#### 选项详细说明
-
-#### data
-
-待验证的数据,可以是数组或对象
-
-验证数据的取值的顺序如下
-
-1. 如果`$data`是数组或`\ArrayAccess`的实例化对象,检查并返回`$data[$key]`的值
-2. 如果`$data`是对象,检查属性`$key`是否存在,存在则返回`$data->$key`的值
-3. 如果`$data`是对象且方法`get. $key`存在,返回`$data->{'get' . $key}`
-4. 如果以上均不存在,返回null
-
-#### 代码范例
-
-```php
-class User
-{
-    public function getName()
-    {
-        return 'twin';
-    }
-
-    public function getEmail()
-    {
-        return 'test@test.com';
-    }
-}
-
-// 以数组为验证数据
-widget()->validate(array(
-    'data' => array(
-        'name' => 'twin',
-        'email' => 'test@test.com'
-    )
-));
-
-// 以数组对象为验证数据
-widget()->validate(array(
-    'data' => new \ArrayObject(array(
-        'name' => 'twin',
-        'email' => 'test@test.com'
-    ))
-));
-
-// 以对象为验证数据
-widget()->validate(array(
-    'data' => new User
-));
-```
-
-#### rules
-
-验证规则数组.
-
-规则可以字符串,表示一项验证规则,也可以是数组,表示多项验证规则.
-
-**注意:** 
-
-1. 所有数据项都是 **必选** 的,如果某一个数据项是选填的,只需增加 **`required => false`** 的验证规则
-2. 验证规则会被转换成对应的类.如`email`规则将被转换为`\Widget\Validator\Email`类,如果类不存在,将抛出异常提醒开发人员规则不存在.
-3. 验证规则都是 **不** 以`is`开头的,`email`,`digit`是正确的规则名称,`isEmail`,`isDigit`是错误的规则名称
-
-#### 代码范例
-
-```php
-widget()->validate(array(
-    'rules' => array(
-        // 简单规则,将会被转换为 array('required' => true)
-        'name' => 'required',
-        // 复合规则
-        'email' => array(
-            'required' => false, // 设置为false表示email是选填
-            'email' => true,
-            'length' => array(3, 256),
-        ),
-        // 完整规则
-        'avatar' => array(
-            'image' => array(
-                'maxWidth' => 200,
-                'maxHeight' => 200
-            )
-        ),
-        // 允许的验证器格式
-        '数据项名称' => array(
-            '验证器名称1',
-            '验证器名称2' => array('验证的选项1', '验证的选项2'), // 参数将传递给验证器的__invoke方法
-            '验证器名称3' => array( // 参数将传递给验证器的setOption方法
-                '验证器选项名称1' => '验证器选项值1',
-                '验证器选项名称2' => '验证器选项值2',
-            )
-        ) 
-    )
-));
-```
-
-#### 代码范例
-
-区分验证规则和验证微件的名称
-
-1. 验证微件均是以is开头,如isDigit,isAlnum
-2. 作为验证规则时,需使用原始的名称,如digit,alnum
-
-```php
-$age = 18;
-
-widget()->validate(array(
-    'data' => array(
-        'age' => $age
-    ),
-    'rules' => array(
-        'age' => array(
-            'digit' => true, // √正确
-            'isDigit' => true, // ×错误
-        )
-    )
-));
-
-// 通过isDigit验证微件,验证数据
-widget()->isDigit($age);
-
-// 通过is微件,指定验证规则验证数据
-widget()->is('digit', $age);
-```
-
 #### messages
+
 验证错误时的提示信息.提示信息的格式与验证规则类似.
 
 #### 代码范例
+
 ```php
 widget()->validate(array(
     'rules' => array(
