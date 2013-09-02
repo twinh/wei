@@ -4535,7 +4535,7 @@
 <li>如果<code>$data</code>是对象且方法<code>get. $key</code>存在,返回<code>$data-&gt;{'get' . $key}</code>
 </li>
 <li>如果以上均不存在,返回null</li>
-</ol><h6>案例:使用数组和对象作为验证数据</h6>
+</ol><h5>案例:使用数组和对象作为验证数据</h5>
 
 <div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">User</span>
 <span class="p">{</span>
@@ -4586,7 +4586,7 @@
 <li>所有数据项默认都是 <strong>必选</strong> 的,如果某一个数据项是选填的,只需增加 <strong><code>required =&gt; false</code></strong> 的验证规则</li>
 <li>验证规则会被转换成对应的类.如<code>email</code>规则将被转换为<code>\Widget\Validator\Email</code>类,如果类不存在,将抛出异常提醒开发人员规则不存在.</li>
 <li>验证规则都是 <strong>不</strong> 以<code>is</code>开头的,<code>email</code>,<code>digit</code>是正确的规则名称,<code>isEmail</code>,<code>isDigit</code>是错误的规则名称</li>
-</ol><h6>案例:验证规则格式</h6>
+</ol><h5>案例:验证规则格式</h5>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -4618,7 +4618,7 @@
 <span class="p">));</span>
 </code></pre></div>
 
-<h6>案例:区分验证规则和验证微件的名称</h6>
+<h5>案例:区分验证规则和验证微件的名称</h5>
 
 <ol>
 <li>验证微件均是以<code>is</code>开头,如<code>isDigit</code>,<code>isAlnum</code>
@@ -4646,7 +4646,7 @@
 <span class="nv">$bool</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">'digit'</span><span class="p">,</span> <span class="nv">$age</span><span class="p">);</span>
 </code></pre></div>
 
-<h6>案例:区分<code>required</code>,<code>notBlank</code>和<code>notEmpty</code>验证规则</h6>
+<h5>案例:区分<code>required</code>,<code>notBlank</code>和<code>notEmpty</code>验证规则</h5>
 
 <p>这三个验证规则都用于检查数据不能为空,它们在使用场景和检查的数据内容稍有不同.</p>
 
@@ -4747,7 +4747,7 @@
 <p>来源参见<a href="http://www.php.net/manual/zh/function.trim.php" target="_blank">trim</a>函数</p>
 </li>
 <li><p>当数据由其他字符组成(包括0),所有规则均验证通过,返回<code>true</code></p></li>
-</ul><h6>案例:区分<code>all</code>和<code>allOf</code>验证规则</h6>
+</ul><h5>案例:区分<code>all</code>和<code>allOf</code>验证规则</h5>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// TDOO</span>
 </code></pre></div>
@@ -4756,7 +4756,7 @@
 
 <p>验证错误时的提示信息.提示信息的格式与验证规则类似.</p>
 
-<h6>案例:提示信息的格式</h6>
+<h5>案例:提示信息的格式</h5>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
