@@ -29,7 +29,7 @@ class NoneOfTest extends TestCase
         $noneOf = $this->is->createRuleValidator('noneOf');
 
         $noneOf('abc', array(
-            'equals' => 'abc',
+            'equalTo' => 'abc',
             'alnum' => true
         ));
 
