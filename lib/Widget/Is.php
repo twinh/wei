@@ -40,7 +40,9 @@ class Is extends Base
         'Max', 'MaxLength', 'Min', 'MinLength', 'MobileCn', 'NoneOf', 'Null',
         'Number', 'OneOf', 'PhoneCn', 'PlateNumberCn', 'Postcode', 'QQ',
         'RecordExists', 'Regex', 'Required', 'SomeOf', 'StartsWith', 'Time',
-        'Tld', 'Type', 'Uppercase', 'Url', 'Uuid'
+        'Tld', 'Type', 'Uppercase', 'Url', 'Uuid',
+        // Comparison
+        'IdenticalTo',
     );
 
     /**

@@ -42,10 +42,21 @@ class EqualTo extends BaseValidator
      */
     protected function doValidate($input)
     {
-        if ($input != $this->value) {
-            $this->addError('notEquals');
+        if (!$this->doCompare($input)) {
+            $this->addError('invalid');
             return false;
         }
         return true;
+    }
+
+    /**
+     * Compare input and option value
+     *
+     * @param mixed $input
+     * @return bool
+     */
+    protected function doCompare($input)
+    {
+        return $input == $this->value;
     }
 }
