@@ -13,24 +13,26 @@ namespace Widget\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Equals extends BaseValidator
+class EqualTo extends BaseValidator
 {
     protected $notEqualsMessage = '%name% must be equals %equals%';
 
     protected $negativeMessage = '%name% must not be equals %equals%';
 
-    protected $equals;
-
-    protected $strict = false;
+    /**
+     * The value to be compared
+     *
+     * @var mixed
+     */
+    protected $value;
 
     /**
      * {@inheritdoc}
      */
-    public function __invoke($input, $equals = null, $strict = null)
+    public function __invoke($input, $value = null)
     {
         // Sets $this->equals only when the second argument provided
-        func_num_args() > 1 && $this->storeOption('equals', $equals);
-        is_bool($strict) && $this->storeOption('strict', $strict);
+        func_num_args() > 1 && $this->storeOption('value', $value);
 
         return $this->isValid($input);
     }
@@ -40,11 +42,10 @@ class Equals extends BaseValidator
      */
     protected function doValidate($input)
     {
-        if (!($this->strict ? $input === $this->equals : $input == $this->equals)) {
+        if ($input != $this->value) {
             $this->addError('notEquals');
             return false;
         }
-
         return true;
     }
 }

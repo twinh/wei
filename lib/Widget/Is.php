@@ -35,7 +35,7 @@ class Is extends Base
         'All', 'AllOf', 'Alnum', 'Alpha', 'Between', 'Blank', 'Callback',
         'CharLength', 'Chinese', 'Color', 'CreditCard', 'Date', 'DateTime',
         'Decimal', 'Digit', 'Dir', 'DivisibleBy', 'DoubleByte', 'Email',
-        'EndsWith', 'Equals', 'Exists', 'File', 'IdCardCn', 'IdCardHk',
+        'EndsWith', 'EqualTo', 'Exists', 'File', 'IdCardCn', 'IdCardHk',
         'IdCardMo', 'IdCardTw', 'Image', 'In', 'Ip', 'Length', 'Lowercase',
         'Max', 'MaxLength', 'Min', 'MinLength', 'MobileCn', 'NoneOf', 'Null',
         'Number', 'OneOf', 'PhoneCn', 'PlateNumberCn', 'Postcode', 'QQ',

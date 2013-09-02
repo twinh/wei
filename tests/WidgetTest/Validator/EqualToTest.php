@@ -2,22 +2,22 @@
 
 namespace WidgetTest\Validator;
 
-class EqualsTest extends TestCase
+class EqualToTest extends TestCase
 {
     /**
      * @dataProvider providerForEquals
      */
-    public function testEquals($input, $equals, $strict = null)
+    public function testEquals($input, $equals)
     {
-        $this->assertTrue($this->isEquals($input, $equals, $strict));
+        $this->assertTrue($this->isEqualTo($input, $equals));
     }
 
     /**
      * @dataProvider providerForNotEquals
      */
-    public function testNotEquals($input, $equals, $strict = null)
+    public function testNotEquals($input, $equals)
     {
-        $this->assertFalse($this->isEquals($input, $equals, $strict));
+        $this->assertFalse($this->isEqualTo($input, $equals));
     }
 
     public function providerForEquals()
@@ -25,7 +25,8 @@ class EqualsTest extends TestCase
         return array(
             array('abc', 'abc'),
             array(0, null),
-            array(null, null, true),
+            array(0, ''),
+            array(null, null),
             array(new \stdClass, new \stdClass)
         );
     }
@@ -34,8 +35,8 @@ class EqualsTest extends TestCase
     {
         return array(
             array('abc', 'bbc'),
-            array(0, null, true),
-            array(new \stdClass(), new \stdClass(), true)
+            array('', array()),
+            array(new \stdClass, new \ArrayObject())
         );
     }
 }
