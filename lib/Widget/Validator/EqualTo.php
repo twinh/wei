@@ -15,7 +15,7 @@ namespace Widget\Validator;
  */
 class EqualTo extends BaseValidator
 {
-    protected $notEqualsMessage = '%name% must be equals %value%';
+    protected $invalidMessage = '%name% must be equals %value%';
 
     protected $negativeMessage = '%name% must not be equals %value%';
 
