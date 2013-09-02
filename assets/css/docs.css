@@ -12,6 +12,9 @@ body {
   position: relative; /* For scrollyspy */
   /* We add the padding to the body for >768px only */
 }
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
 
 .bs-docs-container,
 .bs-home-container {
