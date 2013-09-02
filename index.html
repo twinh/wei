@@ -4523,7 +4523,7 @@
 </tbody>
 </table><h4>选项详细说明</h4>
 
-<h4>data</h4>
+<h4>选项:data</h4>
 
 <p>待验证的数据,可以是数组或对象</p>
 
@@ -4535,7 +4535,7 @@
 <li>如果<code>$data</code>是对象且方法<code>get. $key</code>存在,返回<code>$data-&gt;{'get' . $key}</code>
 </li>
 <li>如果以上均不存在,返回null</li>
-</ol><h4>案例:使用数组和对象作为验证数据</h4>
+</ol><h6>案例:使用数组和对象作为验证数据</h6>
 
 <div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">User</span>
 <span class="p">{</span>
@@ -4572,7 +4572,7 @@
 <span class="p">));</span>
 </code></pre></div>
 
-<h4>rules</h4>
+<h4>选项:rules</h4>
 
 <p>验证规则数组.</p>
 
@@ -4586,7 +4586,7 @@
 <li>所有数据项默认都是 <strong>必选</strong> 的,如果某一个数据项是选填的,只需增加 <strong><code>required =&gt; false</code></strong> 的验证规则</li>
 <li>验证规则会被转换成对应的类.如<code>email</code>规则将被转换为<code>\Widget\Validator\Email</code>类,如果类不存在,将抛出异常提醒开发人员规则不存在.</li>
 <li>验证规则都是 <strong>不</strong> 以<code>is</code>开头的,<code>email</code>,<code>digit</code>是正确的规则名称,<code>isEmail</code>,<code>isDigit</code>是错误的规则名称</li>
-</ol><h4>案例:验证规则格式</h4>
+</ol><h6>案例:验证规则格式</h6>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -4618,7 +4618,7 @@
 <span class="p">));</span>
 </code></pre></div>
 
-<h4>案例:区分验证规则和验证微件的名称</h4>
+<h6>案例:区分验证规则和验证微件的名称</h6>
 
 <ol>
 <li>验证微件均是以<code>is</code>开头,如<code>isDigit</code>,<code>isAlnum</code>
@@ -4646,7 +4646,7 @@
 <span class="nv">$bool</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">'digit'</span><span class="p">,</span> <span class="nv">$age</span><span class="p">);</span>
 </code></pre></div>
 
-<h4>案例:区分<code>required</code>,<code>notBlank</code>和<code>notEmpty</code>验证规则</h4>
+<h6>案例:区分<code>required</code>,<code>notBlank</code>和<code>notEmpty</code>验证规则</h6>
 
 <p>这三个验证规则都用于检查数据不能为空,它们在使用场景和检查的数据内容稍有不同.</p>
 
@@ -4747,16 +4747,16 @@
 <p>来源参见<a href="http://www.php.net/manual/zh/function.trim.php" target="_blank">trim</a>函数</p>
 </li>
 <li><p>当数据由其他字符组成(包括0),所有规则均验证通过,返回<code>true</code></p></li>
-</ul><h4>案例:区分<code>all</code>和<code>allOf</code>验证规则</h4>
+</ul><h6>案例:区分<code>all</code>和<code>allOf</code>验证规则</h6>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// TDOO</span>
 </code></pre></div>
 
-<h4>messages</h4>
+<h4>选项:messages</h4>
 
 <p>验证错误时的提示信息.提示信息的格式与验证规则类似.</p>
 
-<h4>案例:提示信息的格式</h4>
+<h6>案例:提示信息的格式</h6>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -4803,13 +4803,13 @@
 <span class="p">));</span>
 </code></pre></div>
 
-<h4>names</h4>
+<h4>选项:names</h4>
 
 <p>数据项名称的数组,用于错误信息提示.数组的键名是验证数据项的值,数值的值是验证数据项的名称.如</p>
 
 <p><strong>注意:</strong>如果未提供数据项名称,错误信息将以<code>该项</code>作为验证数据项的名称,完整的错误信息例如<code>该项不能为空</code></p>
 
-<h4>案例</h4>
+<h5>案例</h5>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -4839,7 +4839,7 @@
 <span class="c1">// 头像宽度不能超过200px</span>
 </code></pre></div>
 
-<h4>ruleValid</h4>
+<h4>回调:ruleValid</h4>
 
 <p>当任意一条规则验证通过时,验证器就会触发<code>ruleValid</code>回调.</p>
 
@@ -4878,7 +4878,7 @@
 </tbody>
 </table><p>如果<code>ruleValid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
-<h4>案例</h4>
+<h5>案例</h5>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -4895,14 +4895,14 @@
 <span class="p">));</span>
 </code></pre></div>
 
-<h4>运行结果</h4>
+<h5>运行结果</h5>
 
 <div class="highlight"><pre><code class="php"><span class="s1">'required'</span>
 <span class="s1">'name'</span>
 <span class="s1">'Yes'</span>
 </code></pre></div>
 
-<h4>ruleInvalid</h4>
+<h4>回调:ruleInvalid</h4>
 
 <p>当任意一条规则验证 <strong>不</strong> 通过时,验证器就会触发<code>ruleInvalid</code>回调.</p>
 
@@ -4942,7 +4942,7 @@
 </table><p><code>ruleInvalid</code>与<code>ruleValid</code>的行为一致.
 同样的,如果<code>ruleInvalid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
-<h4>案例</h4>
+<h5>案例</h5>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -4959,14 +4959,14 @@
 <span class="p">));</span>
 </code></pre></div>
 
-<h4>运行结果</h4>
+<h5>运行结果</h5>
 
 <div class="highlight"><pre><code class="php"><span class="s1">'required'</span>
 <span class="s1">'name'</span>
 <span class="s1">'No'</span>
 </code></pre></div>
 
-<h4>fieldValid</h4>
+<h4>回调:fieldValid</h4>
 
 <p>当任意数据项验证通过时,验证器就会触发<code>fieldValid</code>回调.</p>
 
@@ -5000,7 +5000,7 @@
 </tbody>
 </table><p>如果<code>fieldValid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
-<h4>案例</h4>
+<h5>案例</h5>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -5016,13 +5016,13 @@
 <span class="p">));</span>
 </code></pre></div>
 
-<h4>运行结果</h4>
+<h5>运行结果</h5>
 
 <div class="highlight"><pre><code class="php"><span class="s1">'name'</span>
 <span class="s1">'Yes'</span>
 </code></pre></div>
 
-<h5>fieldInvalid</h5>
+<h5>回调:fieldInvalid</h5>
 
 <p>当任意数据项验证 <strong>不</strong> 通过时,验证器就会触发<code>fieldInvalid</code>回调.</p>
 
@@ -5056,7 +5056,7 @@
 </tbody>
 </table><p>如果<code>fieldInvalid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
-<h4>案例</h4>
+<h5>案例</h5>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -5072,13 +5072,13 @@
 <span class="p">));</span>
 </code></pre></div>
 
-<h4>运行结果</h4>
+<h5>运行结果</h5>
 
 <div class="highlight"><pre><code class="php"><span class="s1">'name'</span>
 <span class="s1">'No'</span>
 </code></pre></div>
 
-<h4>success</h4>
+<h4>回调:success</h4>
 
 <p>验证结束时,如果最终验证结果为通过,验证器就触发<code>success</code>回调.</p>
 
@@ -5103,7 +5103,7 @@
 <td>微件管理器</td>
 </tr>
 </tbody>
-</table><h4>案例</h4>
+</table><h5>案例</h5>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -5118,12 +5118,12 @@
 <span class="p">));</span>
 </code></pre></div>
 
-<h4>运行结果</h4>
+<h5>运行结果</h5>
 
 <div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
 </code></pre></div>
 
-<h4>failure</h4>
+<h4>回调:failure</h4>
 
 <p>验证结束时,如果最终验证结果为 <strong>不</strong> 通过,验证器就触发<code>failure</code>回调.</p>
 
@@ -5148,7 +5148,7 @@
 <td>微件管理器</td>
 </tr>
 </tbody>
-</table><h4>案例</h4>
+</table><h5>案例</h5>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -5163,20 +5163,20 @@
 <span class="p">));</span>
 </code></pre></div>
 
-<h4>运行结果</h4>
+<h5>运行结果</h5>
 
 <div class="highlight"><pre><code class="php"><span class="s1">'No'</span>
 </code></pre></div>
 
-<h4>breakRule</h4>
+<h4>选项:breakRule</h4>
 
 <p>默认为<code>false</code>.设置为<code>true</code>后,当任意一项规则验证不通过时就中断验证流程,直接返回验证结果(false)</p>
 
-<h4>breakField</h4>
+<h4>选项:breakField</h4>
 
 <p>默认为<code>false</code>.设置为<code>true</code>后,当任意一项数据验证不通过时就中断验证流程,直接返回验证结果(false)</p>
 
-<h4>skip</h4>
+<h4>选项:skip</h4>
 
 <p>默认为<code>false</code>.设置为<code>true</code>后,当任意一项数据中的一项规则不通过时,就跳转到下一项数据的验证流程.</p>
 
