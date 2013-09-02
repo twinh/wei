@@ -95,8 +95,8 @@ return array(
     '%name% already exists' => '%name%已存在',
 
     // equals
-    '%name% must be equals %equals%' => '%name%必须等于%equals%',
-    '%name% must not be equals %equals%' => '%name%不能等于%equals%',
+    '%name% must be equals %value%' => '%name%必须等于%value%',
+    '%name% must not be equals %value%' => '%name%不能等于%value%',
 
     // exists
     '%name% must be an existing file or directory' => '%name%必须是存在的文件或目录',

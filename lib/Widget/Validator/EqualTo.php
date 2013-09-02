@@ -9,15 +9,15 @@
 namespace Widget\Validator;
 
 /**
- * Check if the input is equals to specified value
+ * Check if the input is equals to (==) specified value
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
 class EqualTo extends BaseValidator
 {
-    protected $notEqualsMessage = '%name% must be equals %equals%';
+    protected $notEqualsMessage = '%name% must be equals %value%';
 
-    protected $negativeMessage = '%name% must not be equals %equals%';
+    protected $negativeMessage = '%name% must not be equals %value%';
 
     /**
      * The value to be compared
