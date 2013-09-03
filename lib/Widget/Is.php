@@ -22,8 +22,6 @@ class Is extends Base
      */
     protected $aliases = array(
         'empty'     => 'Widget\Validator\EmptyValue',
-        'before'    => 'Widget\Validator\Max',
-        'after'     => 'Widget\Validator\Min'
     );
 
     /**
@@ -35,14 +33,14 @@ class Is extends Base
         'All', 'AllOf', 'Alnum', 'Alpha', 'Between', 'Blank', 'Callback',
         'CharLength', 'Chinese', 'Color', 'CreditCard', 'Date', 'DateTime',
         'Decimal', 'Digit', 'Dir', 'DivisibleBy', 'DoubleByte', 'Email',
-        'EndsWith', 'EqualTo', 'Exists', 'File', 'IdCardCn', 'IdCardHk',
+        'EndsWith', 'Exists', 'File', 'IdCardCn', 'IdCardHk',
         'IdCardMo', 'IdCardTw', 'Image', 'In', 'Ip', 'Length', 'Lowercase',
         'Max', 'MaxLength', 'Min', 'MinLength', 'MobileCn', 'NoneOf', 'Null',
         'Number', 'OneOf', 'PhoneCn', 'PlateNumberCn', 'Postcode', 'QQ',
         'RecordExists', 'Regex', 'Required', 'SomeOf', 'StartsWith', 'Time',
         'Tld', 'Type', 'Uppercase', 'Url', 'Uuid',
         // Comparison
-        'IdenticalTo', 'GreaterThan', 'GreaterThanOrEqual', 'LessThan', 'LessThanOrEqual'
+        'EqualTo', 'IdenticalTo', 'GreaterThan', 'GreaterThanOrEqual', 'LessThan', 'LessThanOrEqual'
     );
 
     /**
