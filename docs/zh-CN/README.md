@@ -59,7 +59,6 @@ API参考目录
 * [isDoubleByte](api/isDoubleByte.md) - 检查数据是否只由双字节字符组成
 * [isEmpty](api/isEmpty.md) - 检查数据是否为空(允许空格)
 * [isEndsWith](api/isEndsWith.md) - 检查数据是否以指定字符串结尾
-* [isEquals](api/isEquals.md) - 检查数据是否与指定数据相等
 * [isIn](api/isIn.md) - 检查数据是否在指定的数组中
 * [isLowercase](api/isLowercase.md) - 检查数据是否为小写
 * [isNull](api/isNull.md) - 检查数据是否为null
@@ -71,13 +70,21 @@ API参考目录
 * [isUppercase](api/isUppercase.md) - 检查数据是否为大写
 
 ##### 长度大小
-* [isBetween](api/isBetween.md) - 检查数据是否在指定的两个值之间
+
 * [isLength](api/isLength.md) - 检查数据是否为指定的长度,或在指定的长度范围内
 * [isCharLength](api/isCharLength.md) - 检查数据的字符数是否为指定的数值
-* [isMax](api/isMax.md) - 检查数据是否小于等于指定的值
-* [isMaxLength](api/isMaxLength.md) - 检查数据是否小于等于指定长度
-* [isMin](api/isMin.md) - 检查数据是否大于等于指定的值
 * [isMinLength](api/isMinLength.md) - 检查数据是否大于等于指定长度
+* [isMaxLength](api/isMaxLength.md) - 检查数据是否小于等于指定长度
+
+##### 大小
+
+* [isEqualTo](api/isEqualTo.md) - 检查数据是否等于(==)指定的值
+* [isIdenticalTo](api/isIdenticalTo.md) - 检查数据是否完全等于(===)指定的值
+* [isGreaterThan](api/isGreaterThan.md) - 检查数据是否大于(>)指定的值
+* [isGreaterThanOrEqual](api/isGreaterThanOrEqual.md) - 检查数据是否大于等于(>=)指定的值
+* [isLessThan](api/isLessThan.md) - 检查数据是否小于(<)指定的值
+* [isLessThanOrEqual](api/isLessThanOrEqual.md) - 检查数据是否小于等于(<=)指定的值
+* [isBetween](api/isBetween.md) - 检查数据是否在指定的两个值之间
 
 ##### 日期和时间
 * [isDate](api/isDate.md) - 检查数据是否为合法的日期
