@@ -10,6 +10,7 @@ services:
   - mongodb
 
 before_script:
+  - composer self-update
   - composer install --prefer-source --no-interaction
   - pecl install redis
   - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -gt 4 ]; then sed -i 1d "tests/config/php.ini"; fi;'
