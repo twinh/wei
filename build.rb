@@ -50,8 +50,12 @@ widgets = [
     'call',
   # validation
     'validate',  'is',
+    #
     'isAlnum', 'isAlpha', 'isBlank', 'isDecimal', 'isDigit', 'isDivisibleby', 'isDoubleByte', 'isEmpty', 'isEndsWith', 'isEquals', 'isIn', 'isLowercase', 'isNull', 'isNumber', 'isRegex', 'isRequired', 'isStartsWith', 'isType', 'isUppercase',
+    # Length
     'isBetween', 'isLength', 'isCharLength', 'isLessThanOrEqual', 'isMaxLength', 'isGreaterThanOrEqual', 'isMinLength',
+    # 
+    'isEqualTo', 'isIdenticalTo',
     'isDate', 'isDateTime', 'isTime',
     'isDir', 'isExists', 'isFile', 'isImage',
     'isEmail', 'isIp', 'isTld', 'isUrl', 'isUuid',
