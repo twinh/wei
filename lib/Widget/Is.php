@@ -42,7 +42,7 @@ class Is extends Base
         'RecordExists', 'Regex', 'Required', 'SomeOf', 'StartsWith', 'Time',
         'Tld', 'Type', 'Uppercase', 'Url', 'Uuid',
         // Comparison
-        'IdenticalTo', 'GreaterThan', 'GreaterThanOrEqual'
+        'IdenticalTo', 'GreaterThan', 'GreaterThanOrEqual', 'LessThan'
     );
 
     /**
