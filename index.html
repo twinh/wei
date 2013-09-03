@@ -6237,78 +6237,6 @@
 <p>检查数据是否以指定字符串结尾</p>
   </section>
 
-<!-- api/isEquals
-  ================================================== -->
-  <section id="isEquals">
-  <div class="page-header"><h1>isEquals</h1></div>
-
-<p>检查数据是否与指定数据相等</p>
-
-<h2>案例</h2>
-
-<h3>检查指定的两个值是否相等</h3>
-
-<div class="highlight"><pre><code class="php"><span class="nv">$post</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
-    <span class="s1">'password_confirmation'</span> <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
-<span class="p">);</span>
-
-<span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isEquals</span><span class="p">(</span><span class="nv">$post</span><span class="p">[</span><span class="s1">'password'</span><span class="p">],</span> <span class="nv">$post</span><span class="p">[</span><span class="s1">'password_confirmation'</span><span class="p">]))</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<h4>运行结果</h4>
-
-<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
-</code></pre></div>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>equals</td>
-<td>mixed</td>
-<td>无</td>
-<td>与数据比较的值</td>
-</tr>
-<tr>
-<td>strict</td>
-<td>int</td>
-<td>无</td>
-<td>是否使用全等(===)进行比较,默认使用等于(==)比较</td>
-</tr>
-<tr>
-<td>notEqualsMessage</td>
-<td>string</td>
-<td>%name%必须等于%equals%</td>
-<td>-</td>
-</tr>
-<tr>
-<td>negativeMessage</td>
-<td>string</td>
-<td>%name%不能等于%equals%</td>
-<td>-</td>
-</tr>
-</tbody>
-</table><h3>方法</h3>
-
-<h4>isEquals($input, $equals, $strict = false)</h4>
-
-<p>检查数据是否与指定数据相等</p>
-  </section>
-
 <!-- api/isIn
   ================================================== -->
   <section id="isIn">
@@ -7370,9 +7298,9 @@
 </table>
   </section>
 
-<!-- api/isMax
+<!-- api/isLessThanOrEqual
   ================================================== -->
-  <section id="isMax">
+  <section id="isLessThanOrEqual">
   <div class="page-header"><h1>isMax</h1></div>
 
 <p>检查数据是否小于等于指定的值</p>
@@ -7508,9 +7436,9 @@
 <p>检查数据的长度是否小于等于指定数值</p>
   </section>
 
-<!-- api/isMin
+<!-- api/isGreaterThanOrEqual
   ================================================== -->
-  <section id="isMin">
+  <section id="isGreaterThanOrEqual">
   <div class="page-header"><h1>isMin</h1></div>
 
 <p>检查数据是否大于等于指定的值</p>
@@ -7646,6 +7574,152 @@
 <h4>isMinLength($input, $min)</h4>
 
 <p>检查数据的长度是否大于等于指定数值</p>
+  </section>
+
+<!-- api/isEqualTo
+  ================================================== -->
+  <section id="isEqualTo">
+  <div class="page-header"><h1>isEqualTo</h1></div>
+
+<p>检查数据是否等于(==)指定的值</p>
+
+<h2>案例</h2>
+
+<h3>检查指定的两个值是否相等</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$post</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
+    <span class="s1">'password_confirmation'</span> <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
+<span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isEqualTo</span><span class="p">(</span><span class="nv">$post</span><span class="p">[</span><span class="s1">'password'</span><span class="p">],</span> <span class="nv">$post</span><span class="p">[</span><span class="s1">'password_confirmation'</span><span class="p">]))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>value</td>
+<td>mixed</td>
+<td>无</td>
+<td>与数据比较的值</td>
+</tr>
+<tr>
+<td>invalidMessage</td>
+<td>string</td>
+<td>%name%必须等于%value%</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能等于%value%</td>
+<td>-</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
+
+<h4>isEqualTo($input, $value)</h4>
+
+<p>检查数据是否等于(==)指定的值</p>
+  </section>
+
+<!-- api/isIdenticalTo
+  ================================================== -->
+  <section id="isIdenticalTo">
+  <div class="page-header"><h1>isIdenticalTo</h1></div>
+
+<p>检查数据是否完全等于(===)指定的值</p>
+
+<h2>案例</h2>
+
+<h3>检查指定的两个值是否完全相等</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$post</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
+    <span class="s1">'password_confirmation'</span> <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
+<span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isIdenticalTo</span><span class="p">(</span><span class="nv">$post</span><span class="p">[</span><span class="s1">'password'</span><span class="p">],</span> <span class="nv">$post</span><span class="p">[</span><span class="s1">'password_confirmation'</span><span class="p">]))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
+</code></pre></div>
+
+<h3>检查<code>0</code>和<code>false</code>是否完全相等</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isIdenticalTo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="k">false</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'No'</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>value</td>
+<td>mixed</td>
+<td>无</td>
+<td>与数据比较的值</td>
+</tr>
+<tr>
+<td>invalidMessage</td>
+<td>string</td>
+<td>%name%必须等于%value%</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能等于%value%</td>
+<td>-</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
+
+<h4>isIdenticalTo($input, $value)</h4>
+
+<p>检查数据是否完全等于(===)指定的值</p>
   </section>
 
 <!-- api/isDate
