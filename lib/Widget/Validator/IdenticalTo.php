@@ -17,7 +17,7 @@ class IdenticalTo extends EqualTo
 {
     protected $invalidMessage = '%name% must be identical to %value%';
 
-    protected $negativeMessage = '%name% must not be identical to %equals%';
+    protected $negativeMessage = '%name% must not be identical to %value%';
 
     /**
      * {@inheritdoc}

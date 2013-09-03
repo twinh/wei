@@ -94,9 +94,13 @@ return array(
     '%name% not exists' => '%name%不存在',
     '%name% already exists' => '%name%已存在',
 
-    // equals
+    // equalTo
     '%name% must be equals %value%' => '%name%必须等于%value%',
     '%name% must not be equals %value%' => '%name%不能等于%value%',
+
+    // identicalTo
+    '%name% must be identical to %value%' => '%name%必须完全等于%value%',
+    '%name% must not be identical to %value%' => '%name%不能完全等于%value%',
 
     // exists
     '%name% must be an existing file or directory' => '%name%必须是存在的文件或目录',

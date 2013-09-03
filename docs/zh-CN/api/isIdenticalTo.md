@@ -1,12 +1,12 @@
-isEqualTo
-=========
+isIdenticalTo
+=============
 
-检查数据是否等于(==)指定的值
+检查数据是否完全等于(===)指定的值
 
 案例
 ----
 
-### 检查指定的两个值是否相等
+### 检查指定的两个值是否完全相等
 
 ```php
 $post = array(
@@ -14,7 +14,7 @@ $post = array(
     'password_confirmation' => '123456',
 );
 
-if (widget()->isEqualTo($post['password'], $post['password_confirmation'])) {
+if (widget()->isIdenticalTo($post['password'], $post['password_confirmation'])) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -25,6 +25,22 @@ if (widget()->isEqualTo($post['password'], $post['password_confirmation'])) {
 
 ```php
 'Yes'
+```
+
+### 检查`0`和`false`是否完全相等
+
+```php
+if (widget()->isIdenticalTo(0, false)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+
+#### 运行结果
+
+```php
+'No'
 ```
 
 调用方式
@@ -40,6 +56,6 @@ negativeMessage   | string  | %name%不能等于%value%    | -
 
 ### 方法
 
-#### isEqualTo($input, $value)
+#### isIdenticalTo($input, $value)
 
-检查数据是否等于(==)指定的值
+检查数据是否完全等于(===)指定的值

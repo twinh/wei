@@ -69,7 +69,7 @@ API参考目录
 * [isType](api/isType.md) - 检查数据是否为指定的类型
 * [isUppercase](api/isUppercase.md) - 检查数据是否为大写
 
-##### 长度大小
+##### 长度
 
 * [isLength](api/isLength.md) - 检查数据是否为指定的长度,或在指定的长度范围内
 * [isCharLength](api/isCharLength.md) - 检查数据的字符数是否为指定的数值
