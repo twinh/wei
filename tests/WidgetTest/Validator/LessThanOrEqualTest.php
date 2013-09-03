@@ -2,25 +2,25 @@
 
 namespace WidgetTest\Validator;
 
-class MaxTest extends TestCase
+class LessThanOrEqualTest extends TestCase
 {
     /**
-     * @dataProvider providerForMax
+     * @dataProvider providerForLessThanOrEqual
      */
-    public function testMax($input, $options)
+    public function testLessThanOrEqual($input, $options)
     {
-        $this->assertTrue($this->isMax($input, $options));
+        $this->assertTrue($this->isLessThanOrEqual($input, $options));
     }
 
     /**
-     * @dataProvider providerForNotMax
+     * @dataProvider providerForNotLessThanOrEqual
      */
-    public function testNotMax($input, $options)
+    public function testNotLessThanOrEqual($input, $options)
     {
-        $this->assertFalse($this->isMax($input, $options));
+        $this->assertFalse($this->isLessThanOrEqual($input, $options));
     }
-    
-    public function providerForMax()
+
+    public function providerForLessThanOrEqual()
     {
         return array(
             array(7, 7),
@@ -32,7 +32,7 @@ class MaxTest extends TestCase
         );
     }
 
-    public function providerForNotMax()
+    public function providerForNotLessThanOrEqual()
     {
         return array(
             array(7, 6),
