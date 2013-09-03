@@ -2,28 +2,27 @@
 
 namespace WidgetTest\Validator;
 
-class MinTest extends TestCase
+class GreaterThanTest extends TestCase
 {
     /**
-     * @dataProvider providerForMin
+     * @dataProvider providerForGreaterThan
      */
-    public function testMin($input, $options)
+    public function testGreaterThan($input, $options)
     {
-        $this->assertTrue($this->isMin($input, $options));
+        $this->assertTrue($this->isGreaterThan($input, $options));
     }
 
     /**
-     * @dataProvider providerForNotMin
+     * @dataProvider providerForNotGreaterThan
      */
-    public function testNotMin($input, $options)
+    public function testNotGreaterThan($input, $options)
     {
-        $this->assertFalse($this->isMin($input, $options));
+        $this->assertFalse($this->isGreaterThan($input, $options));
     }
-    
-    public function providerForMin()
+
+    public function providerForGreaterThan()
     {
         return array(
-            array(7, 7),
             array(7, 6),
             array(0.1, 0.01),
             array('2000-01-01', '1999-01-01'),
@@ -31,9 +30,10 @@ class MinTest extends TestCase
         );
     }
 
-    public function providerForNotMin()
+    public function providerForNotGreaterThan()
     {
         return array(
+            array(7, 7),
             array(7, 8),
             array(0.1, 0.2),
             array('2000-01-01', '2001-01-01'),

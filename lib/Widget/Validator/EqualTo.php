@@ -9,7 +9,7 @@
 namespace Widget\Validator;
 
 /**
- * Check if the input is equals to (==) specified value
+ * Check if the input is equals to (==) the specified value
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
