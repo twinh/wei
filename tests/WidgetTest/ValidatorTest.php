@@ -450,18 +450,6 @@ class ValidatorTest extends TestCase
         $this->assertContains('length', $validator->getInvalidRules('username'));
     }
 
-    public function testBeforeValidator()
-    {
-        $this->assertTrue($this->is('before', date('Y-m-d'), date('Y-m-d', time() + 864000)));
-        $this->assertFalse($this->is('before', date('Y-m-d'), date('Y-m-d', time() - 864000)));
-    }
-
-    public function testAfterValidator()
-    {
-        $this->assertTrue($this->is('after', date('Y-m-d'), date('Y-m-d', time() - 864000)));
-        $this->assertFalse($this->is('after', date('Y-m-d'), date('Y-m-d', time() + 864000)));
-    }
-
     public function testStdClassAsData()
     {
         $data = new \stdClass();
