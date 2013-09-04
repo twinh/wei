@@ -1,12 +1,13 @@
 isBetween
 =========
 
-检查数据是否在指定的两个值之间
+检查数据是否在指定的两个值之间,不包含值本身($min < $input < $max)
 
 案例
 ----
 
 ### 检查18是否在1到10之间
+
 ```php
 if (widget()->isBetween(18, 1, 10)) {
     echo 'Yes';
@@ -16,6 +17,7 @@ if (widget()->isBetween(18, 1, 10)) {
 ```
 
 #### 运行结果
+
 ```php
 'No'
 ```
@@ -35,5 +37,5 @@ if (widget()->isBetween(18, 1, 10)) {
 
 ### 方法
 
-#### isBetween($input)
+#### isBetween($input, $min, $max)
 检查数据是否在指定的两个值之间
