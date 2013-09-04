@@ -53,10 +53,12 @@ widgets = [
     #
     'isAlnum', 'isAlpha', 'isBlank', 'isDecimal', 'isDigit', 'isDivisibleby', 'isDoubleByte', 'isEmpty', 'isEndsWith', 'isIn', 'isLowercase', 'isNull', 'isNumber', 'isRegex', 'isRequired', 'isStartsWith', 'isType', 'isUppercase',
     # Length
-    'isBetween', 'isLength', 'isCharLength', 'isLessThanOrEqual', 'isMaxLength', 'isGreaterThanOrEqual', 'isMinLength',
+    'isLength', 'isCharLength', 'isMaxLength', 'isMinLength',
     # 
-    'isEqualTo', 'isIdenticalTo',
+    'isEqualTo', 'isIdenticalTo', 'isGreaterThan', 'isGreaterThanOrEqual', 'isLessThan', 'isLessThanOrEqual', 'isBetween',
+    # Date & Time
     'isDate', 'isDateTime', 'isTime',
+    # File & Directory
     'isDir', 'isExists', 'isFile', 'isImage',
     'isEmail', 'isIp', 'isTld', 'isUrl', 'isUuid',
     'isCreditCard',

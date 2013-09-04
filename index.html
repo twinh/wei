@@ -92,7 +92,6 @@
         <li><a href="#isDoubleByte">isDoubleByte</a></li>
         <li><a href="#isEmpty">isEmpty</a></li>
         <li><a href="#isEndsWith">isEndsWith</a></li>
-        <li><a href="#isEquals">isEquals</a></li>
         <li><a href="#isIn">isIn</a></li>
         <li><a href="#isLowercase">isLowercase</a></li>
         <li><a href="#isNull">isNull</a></li>
@@ -103,14 +102,20 @@
         <li><a href="#isType">isType</a></li>
         <li><a href="#isUppercase">isUppercase</a></li>
 
-        <li><a href="#isBetween" class="nav-header">长度大小</a></li>
-        <li><a href="#isBetween">isBetween</a></li>
+        <li><a href="#isLength" class="nav-header">长度</a></li>
         <li><a href="#isLength">isLength</a></li>
         <li><a href="#isCharLength">isCharLength</a></li>
-        <li><a href="#isMax">isMax</a></li>
         <li><a href="#isMaxLength">isMaxLength</a></li>
-        <li><a href="#isMin">isMin</a></li>
         <li><a href="#isMinLength">isMinLength</a></li>
+
+        <li><a href="#isEqualTo" class="nav-header">大小</a></li>
+        <li><a href="#isEqualTo">isEqualTo</a></li>
+        <li><a href="#isIdenticalTo">isIdenticalTo</a></li>
+        <li><a href="#isGreaterThan">isGreaterThan</a></li>
+        <li><a href="#isGreaterThanOrEqual">isGreaterThanOrEqual</a></li>
+        <li><a href="#isLessThan">isLessThan</a></li>
+        <li><a href="#isLessThanOrEqual ">isLessThanOrEqual </a></li>
+        <li><a href="#isBetween">isBetween</a></li>
 
         <li><a href="#isDate" class="nav-header">日期和时间</a>
         <li><a href="#isDate">isDate</a></li>
@@ -6958,79 +6963,6 @@
 <p>检查数据是否为大写字符</p>
   </section>
 
-<!-- api/isBetween
-  ================================================== -->
-  <section id="isBetween">
-  <div class="page-header"><h1>isBetween</h1></div>
-
-<p>检查数据是否在指定的两个值之间,不包含值本身($min &lt; $input &lt; $max)</p>
-
-<h2>案例</h2>
-
-<h3>检查18是否在1到10之间</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isBetween</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<h4>运行结果</h4>
-
-<div class="highlight"><pre><code class="php"><span class="s1">'No'</span>
-</code></pre></div>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>min</td>
-<td>int</td>
-<td>无</td>
-<td>用于比较的较小值</td>
-</tr>
-<tr>
-<td>max</td>
-<td>int</td>
-<td>无</td>
-<td>用于比较的较大值</td>
-</tr>
-<tr>
-<td>notStringMessage</td>
-<td>string</td>
-<td>%name%必须是字符串</td>
-<td>-</td>
-</tr>
-<tr>
-<td>betweenMessage</td>
-<td>string</td>
-<td>%name%必须在%min%到%max%之间</td>
-<td>-</td>
-</tr>
-<tr>
-<td>negativeMessage</td>
-<td>string</td>
-<td>%name%不能在%min%到%max%之间</td>
-<td>-</td>
-</tr>
-</tbody>
-</table><h3>方法</h3>
-
-<h4>isBetween($input, $min, $max)</h4>
-
-<p>检查数据是否在指定的两个值之间</p>
-  </section>
-
 <!-- api/isLength
   ================================================== -->
   <section id="isLength">
@@ -7298,67 +7230,6 @@
 </table>
   </section>
 
-<!-- api/isLessThanOrEqual
-  ================================================== -->
-  <section id="isLessThanOrEqual">
-  <div class="page-header"><h1>isLessThanOrEqual</h1></div>
-
-<p>检查数据是否小于等于(&lt;=)指定的值</p>
-
-<h2>案例</h2>
-
-<h3>检查10是否小于等于20</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isLessThanOrEqual</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<h4>运行结果</h4>
-
-<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
-</code></pre></div>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>value</td>
-<td>mixed</td>
-<td>无</td>
-<td>待比较的数值</td>
-</tr>
-<tr>
-<td>invalidMessage</td>
-<td>string</td>
-<td>%name%必须小于等于%max%</td>
-<td>-</td>
-</tr>
-<tr>
-<td>negativeMessage</td>
-<td>string</td>
-<td>%name%必须不小于等于%max%</td>
-<td>-</td>
-</tr>
-</tbody>
-</table><h3>方法</h3>
-
-<h4>isLessThanOrEqual($input, $value)</h4>
-
-<p>检查数据是否在指定的两个值之间</p>
-  </section>
-
 <!-- api/isMaxLength
   ================================================== -->
   <section id="isMaxLength">
@@ -7428,67 +7299,6 @@
 <h4>isMaxLength($input, $max)</h4>
 
 <p>检查数据的长度是否小于等于指定数值</p>
-  </section>
-
-<!-- api/isGreaterThanOrEqual
-  ================================================== -->
-  <section id="isGreaterThanOrEqual">
-  <div class="page-header"><h1>isGreaterThanOrEqual</h1></div>
-
-<p>检查数据是否大于等于(&gt;=)指定的值</p>
-
-<h2>案例</h2>
-
-<h3>检查10是否大于等于20</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isGreaterThanOrEqual</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<h4>运行结果</h4>
-
-<div class="highlight"><pre><code class="php"><span class="s1">'No'</span>
-</code></pre></div>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>value</td>
-<td>mixed</td>
-<td>无</td>
-<td>待比较的数值</td>
-</tr>
-<tr>
-<td>invalidMessage</td>
-<td>string</td>
-<td>%name%必须大于等于%value%</td>
-<td>-</td>
-</tr>
-<tr>
-<td>negativeMessage</td>
-<td>string</td>
-<td>%name%不合法</td>
-<td>-</td>
-</tr>
-</tbody>
-</table><h3>方法</h3>
-
-<h4>isGreaterThanOrEqual($input, $value)</h4>
-
-<p>检查数据是否大于等于(&gt;=)指定的值</p>
   </section>
 
 <!-- api/isMinLength
@@ -7708,6 +7518,323 @@
 <h4>isIdenticalTo($input, $value)</h4>
 
 <p>检查数据是否完全等于(===)指定的值</p>
+  </section>
+
+<!-- api/isGreaterThan
+  ================================================== -->
+  <section id="isGreaterThan">
+  <div class="page-header"><h1>isGreaterThan</h1></div>
+
+<p>检查数据是否大于(&gt;)指定的值</p>
+
+<h2>案例</h2>
+
+<h3>检查10是否大于20</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isGreaterThan</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'No'</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>value</td>
+<td>mixed</td>
+<td>无</td>
+<td>待比较的数值</td>
+</tr>
+<tr>
+<td>invalidMessage</td>
+<td>string</td>
+<td>%name%必须大于等于%value%</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不合法</td>
+<td>-</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
+
+<h4>isGreaterThan($input, $value)</h4>
+
+<p>检查数据是否大于(&gt;)指定的值</p>
+  </section>
+
+<!-- api/isGreaterThanOrEqual
+  ================================================== -->
+  <section id="isGreaterThanOrEqual">
+  <div class="page-header"><h1>isGreaterThanOrEqual</h1></div>
+
+<p>检查数据是否大于等于(&gt;=)指定的值</p>
+
+<h2>案例</h2>
+
+<h3>检查10是否大于等于20</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isGreaterThanOrEqual</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'No'</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>value</td>
+<td>mixed</td>
+<td>无</td>
+<td>待比较的数值</td>
+</tr>
+<tr>
+<td>invalidMessage</td>
+<td>string</td>
+<td>%name%必须大于等于%value%</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不合法</td>
+<td>-</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
+
+<h4>isGreaterThanOrEqual($input, $value)</h4>
+
+<p>检查数据是否大于等于(&gt;=)指定的值</p>
+  </section>
+
+<!-- api/isLessThan
+  ================================================== -->
+  <section id="isLessThan">
+  <div class="page-header"><h1>isLessThan</h1></div>
+
+<p>检查数据是否小于(&lt;)指定的值</p>
+
+<h2>案例</h2>
+
+<h3>检查10是否小于20</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isLessThan</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>value</td>
+<td>mixed</td>
+<td>无</td>
+<td>待比较的数值</td>
+</tr>
+<tr>
+<td>invalidMessage</td>
+<td>string</td>
+<td>%name%必须小于等于%max%</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%必须不小于等于%max%</td>
+<td>-</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
+
+<h4>isLessThan($input, $value)</h4>
+
+<p>检查数据是否小于(&lt;)指定的值</p>
+  </section>
+
+<!-- api/isLessThanOrEqual
+  ================================================== -->
+  <section id="isLessThanOrEqual">
+  <div class="page-header"><h1>isLessThanOrEqual</h1></div>
+
+<p>检查数据是否小于等于(&lt;=)指定的值</p>
+
+<h2>案例</h2>
+
+<h3>检查10是否小于等于20</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isLessThanOrEqual</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>value</td>
+<td>mixed</td>
+<td>无</td>
+<td>待比较的数值</td>
+</tr>
+<tr>
+<td>invalidMessage</td>
+<td>string</td>
+<td>%name%必须小于等于%max%</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%必须不小于等于%max%</td>
+<td>-</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
+
+<h4>isLessThanOrEqual($input, $value)</h4>
+
+<p>检查数据是否在指定的两个值之间</p>
+  </section>
+
+<!-- api/isBetween
+  ================================================== -->
+  <section id="isBetween">
+  <div class="page-header"><h1>isBetween</h1></div>
+
+<p>检查数据是否在指定的两个值之间,不包含值本身($min &lt; $input &lt; $max)</p>
+
+<h2>案例</h2>
+
+<h3>检查18是否在1到10之间</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isBetween</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'No'</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>min</td>
+<td>int</td>
+<td>无</td>
+<td>用于比较的较小值</td>
+</tr>
+<tr>
+<td>max</td>
+<td>int</td>
+<td>无</td>
+<td>用于比较的较大值</td>
+</tr>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>betweenMessage</td>
+<td>string</td>
+<td>%name%必须在%min%到%max%之间</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能在%min%到%max%之间</td>
+<td>-</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
+
+<h4>isBetween($input, $min, $max)</h4>
+
+<p>检查数据是否在指定的两个值之间</p>
   </section>
 
 <!-- api/isDate
