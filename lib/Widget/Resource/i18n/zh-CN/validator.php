@@ -102,6 +102,22 @@ return array(
     '%name% must be identical to %value%' => '%name%必须完全等于%value%',
     '%name% must not be identical to %value%' => '%name%不能完全等于%value%',
 
+    // greaterThan
+    '%name% must be greater than %value%' => '%name%必须大于%value%',
+    '%name% must not be greater than %value%' => '%name%必须不大于%$value%',
+
+    // greaterThanOrEqual
+    '%name% must be greater than or equal to %value%' => '%name%必须大于或等于%value%',
+    '%name% must not be greater than or equal to %value%' => '%name%必须不大于或等于%value%',
+
+    // lessThan
+    '%name% must be less than %value%' => '%name%必须小于%value%',
+    '%name% must not be less than %value%' => '%name%必须不小于%value%',
+
+    // lessThanOrEqual
+    '%name% must be less than or equal to %value%' => '%name%必须小于或等于%value%',
+    '%name% must not be less than or equal to %value%' => '%name%必须不小于或等于%value%',
+
     // exists
     '%name% must be an existing file or directory' => '%name%必须是存在的文件或目录',
     '%name% must be a non-existing file or directory' => '%name%必须是不存在的文件或目录',
@@ -158,17 +174,9 @@ return array(
     '%name% must be lowercase' => '%name%不能包含大写字母',
     '%name% must not be lowercase' => '%name%不能包含小写字母',
 
-    // max
-    '%name% must be less or equal than %max%' => '%name%必须小于等于%max%',
-    '%name% must not be less or equal than %max%' => '%name%必须不小于等于%max%',
-
     // maxLength
     '%name% must have a length lower than %max%' => '%name%的长度必须小于等于%max%',
     '%name% must contain no more than %max% items' => '%name%最多只能包含%max%项',
-
-    // min
-    '%name% must be greater or equal than %min%' => '%name%必须大于等于%min%',
-    '%name% must not be greater or equal than %min%' => '%name%必须不大于等于%min%',
 
     // minLength
     '%name% must have a length greater than %min%' => '%name%的长度必须大于等于%min%',
