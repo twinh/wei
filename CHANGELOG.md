@@ -2,18 +2,45 @@ Changelog
 =========
 
 ## 0.9.5 (WIP)
-* Added `getLastSql` method for db widget
-* Renamed base class from AbstractWidget to Base
+
+## 0.9.5-RC1 (2013-09-04)
+
+* Added support for env widget to get server IP in CLI mode
+* Added key prefix for cache widgets
+* Fixed MySQL cache return false when cache value not changed
+* Added new function 'wei', which means 微(micro) in Chinese
+* Added `getLastSql`, `getQueries` method for db widget
+* Added `getUrl`, `getMethod`, `getData`, `getIp` for call widget
+* Removed request widget dependence in most widgets
 * Removed server, post, query, header, twig, smarty, dbal, entityManager, event widgets
+* Added `getConfig` and `setConfig` for widget container, removed `config` method
 * Added new `config` widget, ref #128
-* Changed cache widgets' `inc` and `dec` methods to `incr` and `decr`
 * Merged `map` widget into `config` widget, refs #131
-* Chagned log level priorities to adapted with monolog
+* Renamed Widget\Stdlib\AbstractCache to Widget\BaseCase
+* Removed validatorInterface class
+* Added parameters for db widget afterQuery callback
+* Fixed record class save method return false when no field value changed
+* Changed cache widgets' `inc` and `dec` methods to `incr` and `decr`
+* Added isModified method and modifiedData property for db record class
+* Added setAliases, setDeps and isInstanced methods for widget container
+* Added support for empty where condition to query builder class
+* Changed log level priorities to adapted with Monolog
+* Added shorthand method `widget()->redis()` to get original \Redis object
+* Rename callback options from construct & constructed to beforeConstruct & afterConstructed
+* Added setPrimaryKey & getPrimaryKey method for record class
+* Renamed base class from AbstractWidget to Base
+* Fixed startsWith and endsWith validator error when findMe option is int
+* Merged BaseGroupValidator into someOf validator
+* Added name parameter for getMessages and getJoinedMessage
 * Added formatLog method for logger widget
 * Added `isCharLength` validator
 * Added expire time support for dbCache widget
+* Renamed equals validator to equalTo, refs #134
+* Added new validator widgets: IdenticalTo, greaterThan and lessThan
+* Renamed max and min validators to lessThanOrEqual and greaterThanOrEqual validators
 
 ## 0.9.4 (2013-08-07)
+
 * Changed cache widgets' `increment` and `decrement` methods to `inc` and `dec`
 * Refactored dbCache, use db widget instead of dbal widget to execute SQL
 * Added isNew method for record class
