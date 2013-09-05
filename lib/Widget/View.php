@@ -60,7 +60,10 @@ class View extends Base
         parent::__construct($options);
 
         // Adds widget to template variable
-        $this->assign('widget', $this->widget);
+        $this->assign(array(
+            'widget' => $this->widget,
+            'wei'    => $this->widget
+        ));
     }
 
     /**
