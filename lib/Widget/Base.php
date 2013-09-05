@@ -112,138 +112,138 @@ namespace Widget;
  * @method   bool               is($rule = null, $input = null, $options = array()) Validate input by given rule
  *
  * Data type and composition
- * @property \Widget\Validator\Alnum        $isAlnum
- * @method   bool                           isAlnum($input) Check if the input contains letters (a-z) and digits (0-9)
- * @property \Widget\Validator\Alpha        $isAlpha
- * @method   bool                           isAlpha($input) Check if the input contains only letters (a-z)
- * @property \Widget\Validator\Blank        $isBlank
- * @method   bool                           isBlank($input) Check if the input is blank
- * @property \Widget\Validator\Decimal      $isDecimal
- * @method   bool                           isDecimal($input) Check if the input is decimal
- * @property \Widget\Validator\Digit        $isDigit
- * @method   bool                           isDigit($input) Check if the input contains only digits (0-9)
- * @property \Widget\Validator\DivisibleBy  $isDivisibleBy
- * @method   bool                           isDivisibleBy($input, $divisor) Check if the input could be divisible by specified divisor
- * @property \Widget\Validator\DoubleByte   $isDoubleByte
- * @method   bool                           isDoubleByte($input) Check if the input contains only double characters
- * @property \Widget\Validator\EmptyValue   $isEmpty
- * @method   bool                           isEmpty($input) Check if the input is empty
- * @property \Widget\Validator\EndsWith     $isEndsWith
- * @method   bool                           isEndsWith($input, $findMe, $case = false) Check if the input is ends with specified string
- * @property \Widget\Validator\In           $isIn
- * @method   bool                           isIn($input, array $array, $strict = false) Check if the input is in specified array
- * @property \Widget\Validator\Lowercase    $isLowercase
- * @method   bool                           isLowercase($input) Check if the input is lowercase
- * @property \Widget\Validator\Null         $isNull
- * @method   bool                           isNull($input) Check if the input is null
- * @property \Widget\Validator\Number       $isNumber
- * @method   bool                           isNumber($input) Check if the input is number
- * @property \Widget\Validator\Regex        $isRegex
- * @method   bool                           isRegex($input, $pattern) Check if the input is valid by specified regular expression
- * @property \Widget\Validator\StartsWith   $isStartsWith
- * @method   bool                           isStartsWith($input, $findMe, $case = false) Check if the input is starts with specified string
- * @property \Widget\Validator\Type         $isType
- * @method   bool                           isType($input, $type) Check if the type of input is equals specified type name
- * @property \Widget\Validator\Uppercase    $isUppercase
- * @method   bool                           isUppercase($input) Check if the input is uppercase
+ * @property Validator\Alnum        $isAlnum
+ * @method   bool                   isAlnum($input) Check if the input contains letters (a-z) and digits (0-9)
+ * @property Validator\Alpha        $isAlpha
+ * @method   bool                   isAlpha($input) Check if the input contains only letters (a-z)
+ * @property Validator\Blank        $isBlank
+ * @method   bool                   isBlank($input) Check if the input is blank
+ * @property Validator\Decimal      $isDecimal
+ * @method   bool                   isDecimal($input) Check if the input is decimal
+ * @property Validator\Digit        $isDigit
+ * @method   bool                   isDigit($input) Check if the input contains only digits (0-9)
+ * @property Validator\DivisibleBy  $isDivisibleBy
+ * @method   bool                   isDivisibleBy($input, $divisor) Check if the input could be divisible by specified divisor
+ * @property Validator\DoubleByte   $isDoubleByte
+ * @method   bool                   isDoubleByte($input) Check if the input contains only double characters
+ * @property Validator\EmptyValue   $isEmpty
+ * @method   bool                   isEmpty($input) Check if the input is empty
+ * @property Validator\EndsWith     $isEndsWith
+ * @method   bool                   isEndsWith($input, $findMe, $case = false) Check if the input is ends with specified string
+ * @property Validator\In           $isIn
+ * @method   bool                   isIn($input, array $array, $strict = false) Check if the input is in specified array
+ * @property Validator\Lowercase    $isLowercase
+ * @method   bool                   isLowercase($input) Check if the input is lowercase
+ * @property Validator\Null         $isNull
+ * @method   bool                   isNull($input) Check if the input is null
+ * @property Validator\Number       $isNumber
+ * @method   bool                   isNumber($input) Check if the input is number
+ * @property Validator\Regex        $isRegex
+ * @method   bool                   isRegex($input, $pattern) Check if the input is valid by specified regular expression
+ * @property Validator\StartsWith   $isStartsWith
+ * @method   bool                   isStartsWith($input, $findMe, $case = false) Check if the input is starts with specified string
+ * @property Validator\Type         $isType
+ * @method   bool                   isType($input, $type) Check if the type of input is equals specified type name
+ * @property Validator\Uppercase    $isUppercase
+ * @method   bool                   isUppercase($input) Check if the input is uppercase
  *
  * Length
- * @property \Widget\Validator\Length       $isLength
- * @method   bool                           isLength($input, $length, $max = null) Check if the length (or size) of input is equals specified length or in specified length range
- * @property \Widget\Validator\CharLength   $isCharLength
- * @method   bool                           isCharLength($input, $length) Check if the characters length of input is equals specified length
- * @property \Widget\Validator\MinLength    $isMinLength
- * @method   bool                           isMinLength($input, $min) Check if the length (or size) of input is greater than specified length
- * @property \Widget\Validator\MaxLength    $isMaxLength
- * @method   bool                           isMaxLength($input, $max) Check if the length (or size) of input is lower than specified length
+ * @property Validator\Length       $isLength
+ * @method   bool                   isLength($input, $length, $max = null) Check if the length (or size) of input is equals specified length or in specified length range
+ * @property Validator\CharLength   $isCharLength
+ * @method   bool                   isCharLength($input, $length) Check if the characters length of input is equals specified length
+ * @property Validator\MinLength    $isMinLength
+ * @method   bool                   isMinLength($input, $min) Check if the length (or size) of input is greater than specified length
+ * @property Validator\MaxLength    $isMaxLength
+ * @method   bool                   isMaxLength($input, $max) Check if the length (or size) of input is lower than specified length
  *
  * Comparison
- * @property \Widget\Validator\EqualTo              $isEqualTo
- * @method   bool                                   isEqualTo($input, $value) Check if the input is equals to (==) the specified value
- * @property \Widget\Validator\IdenticalTo          $identicalTo
- * @method   bool                                   isIdenticalTo($input, $value) Check if the input is equals to (==) the specified value
- * @property \Widget\Validator\GreaterThan          $isGreaterThan
- * @method   bool                                   isGreaterThan($input, $value) Check if the input is greater than (>=) the specified value
- * @property \Widget\Validator\GreaterThanOrEqual   $isGreaterThanOrEqual
- * @method   bool                                   isGreaterThanOrEqual($input, $value) Check if the input is greater than or equal to (>=) the specified value
- * @property \Widget\Validator\LessThan             $isLessThan
- * @method   bool                                   isLessThan($input, $value) Check if the input is less than (<) the specified value
- * @property \Widget\Validator\LessThanOrEqual      $isLessThanOrEqual
- * @method   bool                                   isLessThanOrEqual($input, $value) Check if the input is less than or equal to (<=) the specified value
- * @property \Widget\Validator\Between              $isBetween
- * @method   bool                                   isBetween($input, $min, $max) Check if the input is between the specified minimum and maximum value
+ * @property Validator\EqualTo              $isEqualTo
+ * @method   bool                           isEqualTo($input, $value) Check if the input is equals to (==) the specified value
+ * @property Validator\IdenticalTo          $identicalTo
+ * @method   bool                           isIdenticalTo($input, $value) Check if the input is equals to (==) the specified value
+ * @property Validator\GreaterThan          $isGreaterThan
+ * @method   bool                           isGreaterThan($input, $value) Check if the input is greater than (>=) the specified value
+ * @property Validator\GreaterThanOrEqual   $isGreaterThanOrEqual
+ * @method   bool                           isGreaterThanOrEqual($input, $value) Check if the input is greater than or equal to (>=) the specified value
+ * @property Validator\LessThan             $isLessThan
+ * @method   bool                           isLessThan($input, $value) Check if the input is less than (<) the specified value
+ * @property Validator\LessThanOrEqual      $isLessThanOrEqual
+ * @method   bool                           isLessThanOrEqual($input, $value) Check if the input is less than or equal to (<=) the specified value
+ * @property Validator\Between              $isBetween
+ * @method   bool                           isBetween($input, $min, $max) Check if the input is between the specified minimum and maximum value
  *
  * Date and time
- * @property \Widget\Validator\Date         $isDate
- * @method   bool                           isDate($input, $format = 'Y-m-d') Check if the input is a valid date
- * @property \Widget\Validator\DateTime     $isDateTime
- * @method   bool                           isDateTime($input, $format = null) Check if the input is a valid date
- * @property \Widget\Validator\Time         $isTime
- * @method   bool                           isTime($input, $format = 'H:i:s') Check if the input is a valid time
+ * @property Validator\Date         $isDate
+ * @method   bool                   isDate($input, $format = 'Y-m-d') Check if the input is a valid date
+ * @property Validator\DateTime     $isDateTime
+ * @method   bool                   isDateTime($input, $format = null) Check if the input is a valid date
+ * @property Validator\Time         $isTime
+ * @method   bool                   isTime($input, $format = 'H:i:s') Check if the input is a valid time
  *
  * File and directory
- * @property \Widget\Validator\Dir          $isDir
- * @method   bool                           isDir($input) Check if the input is existing directory
- * @property \Widget\Validator\Exists       $isExists
- * @method   bool                           isExists($input) Check if the input is existing file or directory
- * @property \Widget\Validator\File         $isFile
- * @method   bool                           isFile($input, array $options) Check if the input is valid file
- * @property \Widget\Validator\Image        $isImage
- * @method   bool                           isImage($input, array $options) Check if the input is valid image
+ * @property Validator\Dir          $isDir
+ * @method   bool                   isDir($input) Check if the input is existing directory
+ * @property Validator\Exists       $isExists
+ * @method   bool                   isExists($input) Check if the input is existing file or directory
+ * @property Validator\File         $isFile
+ * @method   bool                   isFile($input, array $options) Check if the input is valid file
+ * @property Validator\Image        $isImage
+ * @method   bool                   isImage($input, array $options) Check if the input is valid image
  *
  * Network
- * @property \Widget\Validator\Email        $isEmail
- * @method   bool                           isEmail($input) Check if the input is valid email address
- * @property \Widget\Validator\Ip           $isIp
- * @method   bool                           isIp($input, array $options = array()) Check if the input is valid IP address
- * @property \Widget\Validator\Tld          $isTld
- * @method   bool                           isTld($input) Check if the input is a valid top-level domain
- * @property \Widget\Validator\Url          $isUrl
- * @method   bool                           isUrl($input, array $options = array()) Check if the input is valid URL address
- * @property \Widget\Validator\Uuid         $isUuid
- * @method   bool                           isUuid($input) Check if the input is valid UUID(v4)
+ * @property Validator\Email        $isEmail
+ * @method   bool                   isEmail($input) Check if the input is valid email address
+ * @property Validator\Ip           $isIp
+ * @method   bool                   isIp($input, array $options = array()) Check if the input is valid IP address
+ * @property Validator\Tld          $isTld
+ * @method   bool                   isTld($input) Check if the input is a valid top-level domain
+ * @property Validator\Url          $isUrl
+ * @method   bool                   isUrl($input, array $options = array()) Check if the input is valid URL address
+ * @property Validator\Uuid         $isUuid
+ * @method   bool                   isUuid($input) Check if the input is valid UUID(v4)
  *
  * Region
- * @property \Widget\Validator\CreditCard   $isCreditCard
- * @method   bool                           isCreditCard($input, $type = null) Check if the input is valid credit card number
- * @property \Widget\Validator\Chinese      $isChinese
- * @method   bool                           isChinese($input) Check if the input contains only Chinese characters
- * @property \Widget\Validator\IdCardCn     $isIdCardCn
- * @method   bool                           isIdCardCn($input) Check if the input is valid Chinese identity card
- * @property \Widget\Validator\IdCardHk     $isIdCardHk
- * @method   bool                           isIdCardHk($input) Check if the input is valid Hong Kong identity card
- * @property \Widget\Validator\IdCardMo     $isIdCardMo
- * @method   bool                           isIdCardMo($input) Check if the input is valid Macau identity card
- * @property \Widget\Validator\IdCardTw     $isIdCardTw
- * @method   bool                           isIdCardTw($input) Check if the input is valid Taiwan identity card
- * @property \Widget\Validator\PhoneCn      $isPhoneCn
- * @method   bool                           isPhoneCn($input) Check if the input is valid Chinese phone number
- * @property \Widget\Validator\PostcodeCn   $isPostcodeCn
- * @method   bool                           isPostcodeCn($input) Check if the input is valid Chinese postcode
- * @property \Widget\Validator\QQ           $isQQ
- * @method   bool                           isQQ($input) Check if the input is valid QQ number
- * @property \Widget\Validator\MobileCn     $isMobileCn
- * @method   bool                           isMobileCn($input) Check if the input is valid Chinese mobile number
+ * @property Validator\CreditCard   $isCreditCard
+ * @method   bool                   isCreditCard($input, $type = null) Check if the input is valid credit card number
+ * @property Validator\Chinese      $isChinese
+ * @method   bool                   isChinese($input) Check if the input contains only Chinese characters
+ * @property Validator\IdCardCn     $isIdCardCn
+ * @method   bool                   isIdCardCn($input) Check if the input is valid Chinese identity card
+ * @property Validator\IdCardHk     $isIdCardHk
+ * @method   bool                   isIdCardHk($input) Check if the input is valid Hong Kong identity card
+ * @property Validator\IdCardMo     $isIdCardMo
+ * @method   bool                   isIdCardMo($input) Check if the input is valid Macau identity card
+ * @property Validator\IdCardTw     $isIdCardTw
+ * @method   bool                   isIdCardTw($input) Check if the input is valid Taiwan identity card
+ * @property Validator\PhoneCn      $isPhoneCn
+ * @method   bool                   isPhoneCn($input) Check if the input is valid Chinese phone number
+ * @property Validator\PostcodeCn   $isPostcodeCn
+ * @method   bool                   isPostcodeCn($input) Check if the input is valid Chinese postcode
+ * @property Validator\QQ           $isQQ
+ * @method   bool                   isQQ($input) Check if the input is valid QQ number
+ * @property Validator\MobileCn     $isMobileCn
+ * @method   bool                   isMobileCn($input) Check if the input is valid Chinese mobile number
  *
  * Group
- * @property \Widget\Validator\AllOf        $isAllOf
- * @method   bool                           isAllOf($input, array $rules) Check if the input is valid by all of the rules
- * @property \Widget\Validator\NoneOf       $isNoneOf
- * @method   bool                           isNoneOf($input, array $rules) Check if the input is NOT valid by all of specified rules
- * @property \Widget\Validator\OneOf        $isOneOf
- * @method   bool                           isOneOf($input, array $rules) Check if the input is valid by any of the rules
- * @property \Widget\Validator\SomeOf       $isSomeOf
- * @method   bool                           isSomeOf($input, array $rules, $atLeast) Check if the input is valid by specified number of the rules
+ * @property Validator\AllOf        $isAllOf
+ * @method   bool                   isAllOf($input, array $rules) Check if the input is valid by all of the rules
+ * @property Validator\NoneOf       $isNoneOf
+ * @method   bool                   isNoneOf($input, array $rules) Check if the input is NOT valid by all of specified rules
+ * @property Validator\OneOf        $isOneOf
+ * @method   bool                   isOneOf($input, array $rules) Check if the input is valid by any of the rules
+ * @property Validator\SomeOf       $isSomeOf
+ * @method   bool                   isSomeOf($input, array $rules, $atLeast) Check if the input is valid by specified number of the rules
  *
  * Others
- * @property \Widget\Validator\RecordExists $isRecordExists
- * @method   bool                           isRecordExists($input, $table, $field = 'id') Check if the input is existing table record
- * @property \Widget\Validator\All          $isAll
- * @method   bool                           isAll($input, array $rules) Check if all of the element in the input is valid by all specified rules
- * @property \Widget\Validator\Callback     $isCallback
- * @method   bool                           isCallback($input, \Closure $fn, $message = null) Check if the input is valid by specified callback
- * @property \Widget\Validator\Color        $isColor
- * @method   bool                           isColor($input) Check if the input is valid Hex color
+ * @property Validator\RecordExists $isRecordExists
+ * @method   bool                   isRecordExists($input, $table, $field = 'id') Check if the input is existing table record
+ * @property Validator\All          $isAll
+ * @method   bool                   isAll($input, array $rules) Check if all of the element in the input is valid by all specified rules
+ * @property Validator\Callback     $isCallback
+ * @method   bool                   isCallback($input, \Closure $fn, $message = null) Check if the input is valid by specified callback
+ * @property Validator\Color        $isColor
+ * @method   bool                   isColor($input) Check if the input is valid Hex color
  */
 abstract class Base
 {
