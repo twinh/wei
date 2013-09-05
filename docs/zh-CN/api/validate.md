@@ -51,6 +51,31 @@ if ($validator->isValid()) {
     echo 'No';
 }
 
+// 获取第一条错误信息
+$firstMessage = $validator->getFirstMessage();
+
+// 返回的信息如下
+$firstMessage = '用户名的长度必须大于3';
+
+// 获取合并的错误信息
+$joinedMessage = $validator->getJoinedMessage();
+
+// 返回的信息如下
+$joinedMessage = "用户名的长度必须大于3\n邮箱格式不正确";
+
+// 获取简练的错误信息
+$summaryMessages = $validator->getSummaryMessages();
+
+// 返回的信息如下
+$summaryMessages = array (
+    'username' => array (
+        0 => '用户名的长度必须大于3',
+    ),
+    'email' => array (
+        0 => '邮箱格式不正确',
+    ),
+);
+
 // 获取详细的错误信息
 $detailMessages = $validator->getDetailMessages();
 
@@ -67,32 +92,6 @@ $detailMessages = array (
         ),
     ),
 );
-
-
-// 获取简练的错误信息
-$summaryMessages = $validator->getSummaryMessages();
-
-// 返回的信息如下
-$summaryMessages = array (
-    'username' => array (
-        0 => '用户名的长度必须大于3',
-    ),
-    'email' => array (
-        0 => '邮箱格式不正确',
-    ),
-);
-
-// 获取合并的错误信息
-$joinedMessage = $validator->getJoinedMessage();
-
-// 返回的信息如下
-$joinedMessage = "用户名的长度必须大于3\n邮箱格式不正确";
-
-// 获取第一条错误信息
-$firstMessage = $validator->getFirstMessage();
-
-// 返回的信息如下
-$firstMessage = '用户名的长度必须大于3';
 ```
 
 调用方式
