@@ -154,8 +154,70 @@ namespace Widget;
  * @method   bool                           isCharLength($input, $length) Check if the characters length of input is equals specified length
  * @property \Widget\Validator\MinLength    $isMinLength
  * @method   bool                           isMinLength($input, $min) Check if the length (or size) of input is greater than specified length
- * @property \Widget\Validator\MaxLength    $isMaxLength Check if the length (or size) of input is lower than specified length
- * @method   bool                           isMaxLength($input, $min) Check if the length (or size) of input is greater than specified length
+ * @property \Widget\Validator\MaxLength    $isMaxLength
+ * @method   bool                           isMaxLength($input, $max) Check if the length (or size) of input is lower than specified length
+ *
+ * Date and time
+ * @property \Widget\Validator\Date         $isDate
+ * @method   bool                           isDate($input, $format = 'Y-m-d') Check if the input is a valid date
+ * @property \Widget\Validator\DateTime     $isDateTime
+ * @method   bool                           isDateTime($input, $format = null) Check if the input is a valid date
+ * @property \Widget\Validator\Time         $isTime
+ * @method   bool                           isTime($input, $format = 'H:i:s') Check if the input is a valid time
+ *
+ * File and directory
+ * @property \Widget\Validator\Dir          $isDir
+ * @method   bool                           isDir($input) Check if the input is existing directory
+ * @property \Widget\Validator\Exists       $isExists
+ * @method   bool                           isExists($input) Check if the input is existing file or directory
+ * @property \Widget\Validator\File         $isFile
+ * @method   bool                           isFile($input, array $options) Check if the input is valid file
+ * @property \Widget\Validator\Image        $isImage
+ * @method   bool                           isImage($input, array $options) Check if the input is valid image
+ *
+ * Network
+ * @property \Widget\Validator\Email        $isEmail
+ * @method   bool                           isEmail($input) Check if the input is valid email address
+ * @property \Widget\Validator\Ip           $isIp
+ * @method   bool                           isIp($input) Check if the input is valid IP address
+ * @property \Widget\Validator\Tld          $isTld
+ * @method   bool                           isTld($input) Check if the input is a valid top-level domain
+ * @property \Widget\Validator\Url          $isUrl
+ * @method   bool                           isUrl($input) Check if the input is valid URL address
+ * @property \Widget\Validator\Uuid         $isUuid
+ * @method   bool                           isUuid($input) Check if the input is valid UUID(v4)
+ *
+ * Region
+ * @property \Widget\Validator\CreditCard   $isCreditCard
+ * @method   bool                           isCreditCard($input) Check if the input is valid credit card number
+ * @property \Widget\Validator\Chinese      $isChinese
+ * @method   bool                           isChinese($input) Check if the input contains only Chinese characters
+ * @property \Widget\Validator\IdCardCn     $isIdCardCn
+ * @method   bool                           isIdCardCn($input) Check if the input is valid Chinese identity card
+ * @property \Widget\Validator\IdCardHk     $isIdCardHk
+ * @method   bool                           isIdCardHk($input) Check if the input is valid Hong Kong identity card
+ * @property \Widget\Validator\IdCardMo     $isIdCardMo
+ * @method   bool                           isIdCardMo($input) Check if the input is valid Macau identity card
+ * @property \Widget\Validator\IdCardTw     $isIdCardTw
+ * @method   bool                           isIdCardTw($input) Check if the input is valid Taiwan identity card
+ * @property \Widget\Validator\PhoneCn      $isPhoneCn
+ * @method   bool                           isPhoneCn($input) Check if the input is valid Chinese phone number
+ * @property \Widget\Validator\PostcodeCn   $isPostcodeCn
+ * @method   bool                           isPostcodeCn($input) Check if the input is valid Chinese postcode
+ * @property \Widget\Validator\QQ           $isQQ
+ * @method   bool                           isQQ($input) Check if the input is valid QQ number
+ * @property \Widget\Validator\MobileCn     $isMobileCn
+ * @method   bool                           isMobileCn($input) Check if the input is valid Chinese mobile number
+ *
+ * Group
+ * @property \Widget\Validator\AllOf        $isAllOf
+ * @method   bool                           isAllOf($input) Check if the input is valid by all of the rules
+ * @property \Widget\Validator\NoneOf       $isNoneOf
+ * @method   bool                           isNoneOf($input) Check if the input is NOT valid by all of specified rules
+ * @property \Widget\Validator\OneOf        $isOneOf
+ * @method   bool                           isOneOf($input) Check if the input is valid by any of the rules
+ * @property \Widget\Validator\SomeOf       $isSomeOf
+ * @method   bool                           isSomeOf($input) Check if the input is valid by specified number of the rules
  *
  * Comparison
  * @property \Widget\Validator\EqualTo              $isEqualTo
