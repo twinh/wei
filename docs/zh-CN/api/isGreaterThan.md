@@ -1,15 +1,15 @@
-isGreaterThanOrEqual
-====================
+isGreaterThan
+=============
 
-检查数据是否大于等于(>=)指定的值
+检查数据是否大于(>)指定的值
 
 案例
 ----
 
-### 检查10是否大于等于20
+### 检查10是否大于20
 
 ```php
-if (widget()->isGreaterThanOrEqual(10, 20)) {
+if (widget()->isGreaterThan(10, 20)) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -35,5 +35,5 @@ negativeMessage   | string  | %name%不合法                       | -
 
 ### 方法
 
-#### isGreaterThanOrEqual($input, $value)
-检查数据是否大于等于(>=)指定的值
+#### isGreaterThan($input, $value)
+检查数据是否大于(>)指定的值

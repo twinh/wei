@@ -51,6 +51,31 @@ if ($validator->isValid()) {
     echo 'No';
 }
 
+// 获取第一条错误信息
+$firstMessage = $validator->getFirstMessage();
+
+// 返回的信息如下
+$firstMessage = '用户名的长度必须大于3';
+
+// 获取合并的错误信息
+$joinedMessage = $validator->getJoinedMessage();
+
+// 返回的信息如下
+$joinedMessage = "用户名的长度必须大于3\n邮箱格式不正确";
+
+// 获取简练的错误信息
+$summaryMessages = $validator->getSummaryMessages();
+
+// 返回的信息如下
+$summaryMessages = array (
+    'username' => array (
+        0 => '用户名的长度必须大于3',
+    ),
+    'email' => array (
+        0 => '邮箱格式不正确',
+    ),
+);
+
 // 获取详细的错误信息
 $detailMessages = $validator->getDetailMessages();
 
@@ -67,32 +92,6 @@ $detailMessages = array (
         ),
     ),
 );
-
-
-// 获取简练的错误信息
-$summaryMessages = $validator->getSummaryMessages();
-
-// 返回的信息如下
-$summaryMessages = array (
-    'username' => array (
-        0 => '用户名的长度必须大于3',
-    ),
-    'email' => array (
-        0 => '邮箱格式不正确',
-    ),
-);
-
-// 获取合并的错误信息
-$joinedMessage = $validator->getJoinedMessage();
-
-// 返回的信息如下
-$joinedMessage = "用户名的长度必须大于3\n邮箱格式不正确";
-
-// 获取第一条错误信息
-$firstMessage = $validator->getFirstMessage();
-
-// 返回的信息如下
-$firstMessage = '用户名的长度必须大于3';
 ```
 
 调用方式
@@ -273,7 +272,7 @@ $bool = widget()->is('digit', $age);
         )
     ));
 
-    // 独立使用
+    // 独立使用,注意不以`not`开头
     if ($this->isBlank($input)) {
         print_r($this->isBlank->getMessages());
     }
@@ -308,8 +307,41 @@ $bool = widget()->is('digit', $age);
 
 ##### 案例:区分`all`和`allOf`验证规则
 
+规则说明:
+
+* `all`: 检查`数组`里的每一项是否符合指定的规则
+* `allOf`: 检查数据是否通过所有的规则校验
+
+它们的区别在于`all`的检查数据必须是数组,检查的对象是数组里的每一项,`allOf`可以是任意值
+
+**检查数组里的每一项是否都为数字,并且小于8**
+
 ```php
-// TDOO
+$input = array(3, 2, 5);
+if (widget()->isAll($input, array(
+    'digit' => true,
+    'lessThan' => 8
+))) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+// 输出Yes
+```
+
+**检查数据是否为数字,并且小于8**
+
+```php
+$input = 3;
+if (widget()->isAllOf($input, array(
+    'digit' => true,
+    'lessThan' => 8
+))) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+// 输出Yes
 ```
 
 #### 选项:messages

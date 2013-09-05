@@ -11,8 +11,8 @@ require 'path/to/widget/lib/Widget/Widget.php';
 // 创建微件管理器对象
 $widget = widget();
 
-// 调用query微件,获取URL请求中id参数
-$id = $widget->query('id');
+// 调用query微件,获取HTTP请求中id参数
+$id = $widget->request('id');
 ```
 
 ## 功能特性

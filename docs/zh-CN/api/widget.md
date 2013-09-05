@@ -25,9 +25,11 @@ $widget = \Widget\Widget::create();
 
 ```php
 $widget = widget(array(
+    // 类`Widget\Widget`的属性值
     'widget' => array(
         'debug' => true,
     ),
+    // 类`Widget\Db`的属性值
     'db' => array(
         'driver'    => 'mysql',
         'host'      => 'localhost',

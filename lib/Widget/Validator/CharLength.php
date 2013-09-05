@@ -9,8 +9,7 @@
 namespace Widget\Validator;
 
 /**
- * Check if the characters length (or size) of input is equals specified length
- * or in specified length range
+ * Check if the characters length of input is equals specified length
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

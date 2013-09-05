@@ -84,7 +84,7 @@ API参考目录
 * [isGreaterThanOrEqual](api/isGreaterThanOrEqual.md) - 检查数据是否大于等于(>=)指定的值
 * [isLessThan](api/isLessThan.md) - 检查数据是否小于(<)指定的值
 * [isLessThanOrEqual](api/isLessThanOrEqual.md) - 检查数据是否小于等于(<=)指定的值
-* [isBetween](api/isBetween.md) - 检查数据是否在指定的两个值之间
+* [isBetween](api/isBetween.md) - 检查数据是否在指定的两个值之间($min < $input < $max)
 
 ##### 日期和时间
 * [isDate](api/isDate.md) - 检查数据是否为合法的日期
