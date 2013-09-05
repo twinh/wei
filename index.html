@@ -4393,6 +4393,31 @@
     <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
 <span class="p">}</span>
 
+<span class="c1">// 获取第一条错误信息</span>
+<span class="nv">$firstMessage</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getFirstMessage</span><span class="p">();</span>
+
+<span class="c1">// 返回的信息如下</span>
+<span class="nv">$firstMessage</span> <span class="o">=</span> <span class="s1">'用户名的长度必须大于3'</span><span class="p">;</span>
+
+<span class="c1">// 获取合并的错误信息</span>
+<span class="nv">$joinedMessage</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getJoinedMessage</span><span class="p">();</span>
+
+<span class="c1">// 返回的信息如下</span>
+<span class="nv">$joinedMessage</span> <span class="o">=</span> <span class="s2">"用户名的长度必须大于3</span><span class="se">\n</span><span class="s2">邮箱格式不正确"</span><span class="p">;</span>
+
+<span class="c1">// 获取简练的错误信息</span>
+<span class="nv">$summaryMessages</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getSummaryMessages</span><span class="p">();</span>
+
+<span class="c1">// 返回的信息如下</span>
+<span class="nv">$summaryMessages</span> <span class="o">=</span> <span class="k">array</span> <span class="p">(</span>
+    <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="k">array</span> <span class="p">(</span>
+        <span class="mi">0</span> <span class="o">=&gt;</span> <span class="s1">'用户名的长度必须大于3'</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="k">array</span> <span class="p">(</span>
+        <span class="mi">0</span> <span class="o">=&gt;</span> <span class="s1">'邮箱格式不正确'</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+
 <span class="c1">// 获取详细的错误信息</span>
 <span class="nv">$detailMessages</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getDetailMessages</span><span class="p">();</span>
 
@@ -4409,32 +4434,6 @@
         <span class="p">),</span>
     <span class="p">),</span>
 <span class="p">);</span>
-
-
-<span class="c1">// 获取简练的错误信息</span>
-<span class="nv">$summaryMessages</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getSummaryMessages</span><span class="p">();</span>
-
-<span class="c1">// 返回的信息如下</span>
-<span class="nv">$summaryMessages</span> <span class="o">=</span> <span class="k">array</span> <span class="p">(</span>
-    <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="k">array</span> <span class="p">(</span>
-        <span class="mi">0</span> <span class="o">=&gt;</span> <span class="s1">'用户名的长度必须大于3'</span><span class="p">,</span>
-    <span class="p">),</span>
-    <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="k">array</span> <span class="p">(</span>
-        <span class="mi">0</span> <span class="o">=&gt;</span> <span class="s1">'邮箱格式不正确'</span><span class="p">,</span>
-    <span class="p">),</span>
-<span class="p">);</span>
-
-<span class="c1">// 获取合并的错误信息</span>
-<span class="nv">$joinedMessage</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getJoinedMessage</span><span class="p">();</span>
-
-<span class="c1">// 返回的信息如下</span>
-<span class="nv">$joinedMessage</span> <span class="o">=</span> <span class="s2">"用户名的长度必须大于3</span><span class="se">\n</span><span class="s2">邮箱格式不正确"</span><span class="p">;</span>
-
-<span class="c1">// 获取第一条错误信息</span>
-<span class="nv">$firstMessage</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getFirstMessage</span><span class="p">();</span>
-
-<span class="c1">// 返回的信息如下</span>
-<span class="nv">$firstMessage</span> <span class="o">=</span> <span class="s1">'用户名的长度必须大于3'</span><span class="p">;</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
