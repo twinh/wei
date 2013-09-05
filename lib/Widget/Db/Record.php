@@ -47,6 +47,13 @@ class Record extends Base
     protected $primaryKey = 'id';
 
     /**
+     * The table fields
+     *
+     * @var array
+     */
+    protected $fields = array();
+
+    /**
      * The record data
      *
      * @var array
@@ -119,7 +126,9 @@ class Record extends Base
      */
     public function fromArray($data)
     {
-        $this->data = $data + $this->data;
+        foreach ($data as $key => $value) {
+            $this->$key = $value;
+        }
         return $this;
     }
 
@@ -195,6 +204,10 @@ class Record extends Base
             return $this->data[$name];
         }
 
+        if (in_array($name, $this->fields)) {
+            return null;
+        }
+
         // Get relation
         if (method_exists($this, $name)) {
             return $this->$name = $this->$name();
@@ -215,9 +228,13 @@ class Record extends Base
      */
     public function __set($name, $value)
     {
-        $this->data[$name] = $value;
-        $this->modifiedData[$name] = $value;
-        $this->isModified = true;
+        if (!$this->fields || in_array($name, $this->fields)) {
+            $this->data[$name] = $value;
+            $this->modifiedData[$name] = $value;
+            $this->isModified = true;
+        } else {
+            $this->$name = $value;
+        }
     }
 
     /**
