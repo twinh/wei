@@ -44,11 +44,6 @@ namespace Widget;
  * @property Call           $call A widget handles HTTP request like jQuery Ajax
  * @method   \Widget\Call   call(array $options) Create a new call object and execute
  *
- * Validation
- * @method   \Widget\Validate   validate(array $option) Create a new validator and validate by specified options
- * @property Is                 $is The validator manager, use to validate input quickly, create validator
- * @method   bool               is($rule = null, $input = null, $options = array()) Validate input by given rule
- *
  * HTTP Request
  * @property Request    $request A widget that handles the HTTP request data
  * @method   mixed      request($name, $default = null) Returns a stringify request parameter value
@@ -111,6 +106,11 @@ namespace Widget;
  * @property Monolog        $monolog A wrapper widget for Monolog
  * @method   bool           monolog($level = null, $message = null, array $context = array()) Get monolog logger object or add a log record
  *
+ * Validation
+ * @method   \Widget\Validate   validate(array $option) Create a new validator and validate by specified options
+ * @property Is                 $is The validator manager, use to validate input quickly, create validator
+ * @method   bool               is($rule = null, $input = null, $options = array()) Validate input by given rule
+ *
  * Data type and composition
  * @property \Widget\Validator\Alnum    $isAlnum
  * @method   bool                       isAlnum($input) Check if the input contains letters (a-z) and digits (0-9)
@@ -119,7 +119,7 @@ namespace Widget;
  *
  * Comparison
  * @property \Widget\Validator\EqualTo              $isEqualTo
-   @method   bool                                   isEqualTo($input, $value)
+ * @method   bool                                   isEqualTo($input, $value)
  * @property \Widget\Validator\IdenticalTo          $identicalTo
  * @method   bool                                   isIdenticalTo($input, $value) Check if the input is equals to (==) the specified value
  * @property \Widget\Validator\GreaterThan          $isGreaterThan
