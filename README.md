@@ -151,7 +151,6 @@ $widget->isDivisibleBy($input);
 $widget->isDoubleByte($input);
 $widget->isEmpty($input);
 $widget->isEndsWith($input);
-$widget->isEquals($input);
 $widget->isIn($input);
 $widget->isLowercase($input);
 $widget->isNull($input);
@@ -162,14 +161,20 @@ $widget->isStartsWith($input);
 $widget->isType($input);
 $widget->isUppercase($input);
 
-// Length and size
-$widget->isBetween($input);
+// Length
 $widget->isLength($input);
 $widget->isCharLength($input);
-$widget->isMax($input);
 $widget->isMaxLength($input);
-$widget->isMin($input);
 $widget->isMinLength($input);
+
+// Comparison
+$widget->isEqualTo($input);
+$widget->isIdenticalTo($input);
+$widget->isGreaterThan($input);
+$widget->isGreaterThanOrEqual($input);
+$widget->isLessThan($input);
+$widget->isLessThanOrEqual($input);
+$widget->isBetween($input);
 
 // Date and time
 $widget->isDate($input);
