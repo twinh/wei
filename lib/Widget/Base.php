@@ -112,14 +112,54 @@ namespace Widget;
  * @method   bool               is($rule = null, $input = null, $options = array()) Validate input by given rule
  *
  * Data type and composition
- * @property \Widget\Validator\Alnum    $isAlnum
- * @method   bool                       isAlnum($input) Check if the input contains letters (a-z) and digits (0-9)
- * @property \Widget\Validator\Alpha    $isAlpha
- * @method   bool                       isAlpha($input) Check if the input contains only letters (a-z)
+ * @property \Widget\Validator\Alnum        $isAlnum
+ * @method   bool                           isAlnum($input) Check if the input contains letters (a-z) and digits (0-9)
+ * @property \Widget\Validator\Alpha        $isAlpha
+ * @method   bool                           isAlpha($input) Check if the input contains only letters (a-z)
+ * @property \Widget\Validator\Blank        $isBlank
+ * @method   bool                           isBlank($input) Check if the input is blank
+ * @property \Widget\Validator\Decimal      $isDecimal
+ * @method   bool                           isDecimal($input) Check if the input is decimal
+ * @property \Widget\Validator\Digit        $isDigit
+ * @method   bool                           isDigit($input) Check if the input contains only digits (0-9)
+ * @property \Widget\Validator\DivisibleBy  $isDivisibleBy
+ * @method   bool                           isDivisibleBy($input, $divisor) Check if the input could be divisible by specified divisor
+ * @property \Widget\Validator\DoubleByte   $isDoubleByte
+ * @method   bool                           isDoubleByte($input) Check if the input contains only double characters
+ * @property \Widget\Validator\EmptyValue   $isEmpty
+ * @method   bool                           isEmpty($input) Check if the input is empty
+ * @property \Widget\Validator\EndsWith     $isEndsWith
+ * @method   bool                           isEndsWith($input, $findMe, $case = false) Check if the input is ends with specified string
+ * @property \Widget\Validator\In           $isIn
+ * @method   bool                           isIn($input, array $array, $strict = false) Check if the input is in specified array
+ * @property \Widget\Validator\Lowercase    $isLowercase
+ * @method   bool                           isLowercase($input) Check if the input is lowercase
+ * @property \Widget\Validator\Null         $isNull
+ * @method   bool                           isNull($input) Check if the input is null
+ * @property \Widget\Validator\Number       $isNumber
+ * @method   bool                           isNumber($input) Check if the input is number
+ * @property \Widget\Validator\Regex        $isRegex
+ * @method   bool                           isRegex($input) Check if the input is valid by specified regular expression
+ * @property \Widget\Validator\StartsWith   $isStartsWith
+ * @method   bool                           isStartsWith($input, $findMe, $case = false) Check if the input is starts with specified string
+ * @property \Widget\Validator\Type         $isType
+ * @method   bool                           isType($input, $type) Check if the type of input is equals specified type name
+ * @property \Widget\Validator\Uppercase    $isUppercase
+ * @method   bool                           isUppercase($input) Check if the input is uppercase
+ *
+ * Length
+ * @property \Widget\Validator\Length       $isLength
+ * @method   bool                           isLength($input, $length, $max = null) Check if the length (or size) of input is equals specified length or in specified length range
+ * @property \Widget\Validator\CharLength   $isCharLength
+ * @method   bool                           isCharLength($input, $length) Check if the characters length of input is equals specified length
+ * @property \Widget\Validator\MinLength    $isMinLength
+ * @method   bool                           isMinLength($input, $min) Check if the length (or size) of input is greater than specified length
+ * @property \Widget\Validator\MaxLength    $isMaxLength Check if the length (or size) of input is lower than specified length
+ * @method   bool                           isMaxLength($input, $min) Check if the length (or size) of input is greater than specified length
  *
  * Comparison
  * @property \Widget\Validator\EqualTo              $isEqualTo
- * @method   bool                                   isEqualTo($input, $value)
+ * @method   bool                                   isEqualTo($input, $value) Check if the input is equals to (==) the specified value
  * @property \Widget\Validator\IdenticalTo          $identicalTo
  * @method   bool                                   isIdenticalTo($input, $value) Check if the input is equals to (==) the specified value
  * @property \Widget\Validator\GreaterThan          $isGreaterThan
