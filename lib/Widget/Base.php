@@ -116,6 +116,22 @@ namespace Widget;
  * @method   bool                       isAlnum($input) Check if the input contains letters (a-z) and digits (0-9)
  * @property \Widget\Validator\Alpha    $isAlpha
  * @method   bool                       isAlpha($input) Check if the input contains only letters (a-z)
+ *
+ * Comparison
+ * @property \Widget\Validator\EqualTo              $isEqualTo
+   @method   bool                                   isEqualTo($input, $value)
+ * @property \Widget\Validator\IdenticalTo          $identicalTo
+ * @method   bool                                   isIdenticalTo($input, $value) Check if the input is equals to (==) the specified value
+ * @property \Widget\Validator\GreaterThan          $isGreaterThan
+ * @method   bool                                   isGreaterThan($input, $value) Check if the input is greater than (>=) the specified value
+ * @property \Widget\Validator\GreaterThanOrEqual   $isGreaterThanOrEqual
+ * @method   bool                                   isGreaterThanOrEqual($input, $value) Check if the input is greater than or equal to (>=) the specified value
+ * @property \Widget\Validator\LessThan             $isLessThan
+ * @method   bool                                   isLessThan($input, $value) Check if the input is less than (<) the specified value
+ * @property \Widget\Validator\LessThanOrEqual      $isLessThanOrEqual
+ * @method   bool                                   isLessThanOrEqual($input, $value) Check if the input is less than or equal to (<=) the specified value
+ * @property \Widget\Validator\Between              $isBetween
+ * @method   bool                                   isBetween($input, $min, $max) Check if the input is between the specified minimum and maximum value
  */
 abstract class Base
 {
