@@ -110,6 +110,12 @@ namespace Widget;
  * Third Party
  * @property Monolog        $monolog A wrapper widget for Monolog
  * @method   bool           monolog($level = null, $message = null, array $context = array()) Get monolog logger object or add a log record
+ *
+ * Data type and composition
+ * @property \Widget\Validator\Alnum    $isAlnum
+ * @method   bool                       isAlnum($input) Check if the input contains letters (a-z) and digits (0-9)
+ * @property \Widget\Validator\Alpha    $isAlpha
+ * @method   bool                       isAlpha($input) Check if the input contains only letters (a-z)
  */
 abstract class Base
 {
