@@ -54,7 +54,7 @@ widgets = [
     'isAlnum', 'isAlpha', 'isBlank', 'isDecimal', 'isDigit', 'isDivisibleby', 'isDoubleByte', 'isEmpty', 'isEndsWith', 'isIn', 'isLowercase', 'isNull', 'isNumber', 'isRegex', 'isRequired', 'isStartsWith', 'isType', 'isUppercase',
     # Length
     'isLength', 'isCharLength', 'isMaxLength', 'isMinLength',
-    # 
+    # Comparison
     'isEqualTo', 'isIdenticalTo', 'isGreaterThan', 'isGreaterThanOrEqual', 'isLessThan', 'isLessThanOrEqual', 'isBetween',
     # Date & Time
     'isDate', 'isDateTime', 'isTime',

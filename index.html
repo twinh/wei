@@ -4685,7 +4685,7 @@
     <span class="p">)</span>
 <span class="p">));</span>
 
-<span class="c1">// 独立使用</span>
+<span class="c1">// 独立使用,注意不以`not`开头</span>
 <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isBlank</span><span class="p">(</span><span class="nv">$input</span><span class="p">))</span> <span class="p">{</span>
     <span class="nb">print_r</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isBlank</span><span class="o">-&gt;</span><span class="na">getMessages</span><span class="p">());</span>
 <span class="p">}</span>
@@ -4754,7 +4754,41 @@
 <li><p>当数据由其他字符组成(包括0),所有规则均验证通过,返回<code>true</code></p></li>
 </ul><h5>案例:区分<code>all</code>和<code>allOf</code>验证规则</h5>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// TDOO</span>
+<p>规则说明:</p>
+
+<ul>
+<li>
+<code>all</code>: 检查<code>数组</code>里的每一项是否符合指定的规则</li>
+<li>
+<code>allOf</code>: 检查数据是否通过所有的规则校验</li>
+</ul><p>它们的区别在于<code>all</code>的检查数据必须是数组,检查的对象是数组里的每一项,<code>allOf</code>可以是任意值</p>
+
+<p><strong>检查数组里的每一项是否都为数字,并且小于8</strong></p>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$input</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isAll</span><span class="p">(</span><span class="nv">$input</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'digit'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="s1">'lessThan'</span> <span class="o">=&gt;</span> <span class="mi">8</span>
+<span class="p">)))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 输出Yes</span>
+</code></pre></div>
+
+<p><strong>检查数据是否为数字,并且小于8</strong></p>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$input</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isAllOf</span><span class="p">(</span><span class="nv">$input</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'digit'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="s1">'lessThan'</span> <span class="o">=&gt;</span> <span class="mi">8</span>
+<span class="p">)))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 输出Yes</span>
 </code></pre></div>
 
 <h4>选项:messages</h4>
@@ -9978,7 +10012,7 @@
   <section id="isAll">
   <div class="page-header"><h1>isAll</h1></div>
 
-<p>检查数组或对象里的每一项是否符合指定的规则</p>
+<p>检查数组里的每一项是否符合指定的规则</p>
 
 <h2>案例</h2>
 
@@ -10028,7 +10062,7 @@
 
 <h4>isAll($input, $rules)</h4>
 
-<p>检查数组或对象里的每一项是否符合指定的规则</p>
+<p>检查数组里的每一项是否符合指定的规则</p>
   </section>
 
 <!-- api/isCallback
