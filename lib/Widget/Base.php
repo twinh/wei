@@ -139,7 +139,7 @@ namespace Widget;
  * @property \Widget\Validator\Number       $isNumber
  * @method   bool                           isNumber($input) Check if the input is number
  * @property \Widget\Validator\Regex        $isRegex
- * @method   bool                           isRegex($input) Check if the input is valid by specified regular expression
+ * @method   bool                           isRegex($input, $pattern) Check if the input is valid by specified regular expression
  * @property \Widget\Validator\StartsWith   $isStartsWith
  * @method   bool                           isStartsWith($input, $findMe, $case = false) Check if the input is starts with specified string
  * @property \Widget\Validator\Type         $isType
@@ -195,17 +195,17 @@ namespace Widget;
  * @property \Widget\Validator\Email        $isEmail
  * @method   bool                           isEmail($input) Check if the input is valid email address
  * @property \Widget\Validator\Ip           $isIp
- * @method   bool                           isIp($input) Check if the input is valid IP address
+ * @method   bool                           isIp($input, array $options = array()) Check if the input is valid IP address
  * @property \Widget\Validator\Tld          $isTld
  * @method   bool                           isTld($input) Check if the input is a valid top-level domain
  * @property \Widget\Validator\Url          $isUrl
- * @method   bool                           isUrl($input) Check if the input is valid URL address
+ * @method   bool                           isUrl($input, array $options = array()) Check if the input is valid URL address
  * @property \Widget\Validator\Uuid         $isUuid
  * @method   bool                           isUuid($input) Check if the input is valid UUID(v4)
  *
  * Region
  * @property \Widget\Validator\CreditCard   $isCreditCard
- * @method   bool                           isCreditCard($input) Check if the input is valid credit card number
+ * @method   bool                           isCreditCard($input, $type = null) Check if the input is valid credit card number
  * @property \Widget\Validator\Chinese      $isChinese
  * @method   bool                           isChinese($input) Check if the input contains only Chinese characters
  * @property \Widget\Validator\IdCardCn     $isIdCardCn
@@ -227,21 +227,21 @@ namespace Widget;
  *
  * Group
  * @property \Widget\Validator\AllOf        $isAllOf
- * @method   bool                           isAllOf($input) Check if the input is valid by all of the rules
+ * @method   bool                           isAllOf($input, array $rules) Check if the input is valid by all of the rules
  * @property \Widget\Validator\NoneOf       $isNoneOf
- * @method   bool                           isNoneOf($input) Check if the input is NOT valid by all of specified rules
+ * @method   bool                           isNoneOf($input, array $rules) Check if the input is NOT valid by all of specified rules
  * @property \Widget\Validator\OneOf        $isOneOf
- * @method   bool                           isOneOf($input) Check if the input is valid by any of the rules
+ * @method   bool                           isOneOf($input, array $rules) Check if the input is valid by any of the rules
  * @property \Widget\Validator\SomeOf       $isSomeOf
- * @method   bool                           isSomeOf($input) Check if the input is valid by specified number of the rules
+ * @method   bool                           isSomeOf($input, array $rules, $atLeast) Check if the input is valid by specified number of the rules
  *
  * Others
  * @property \Widget\Validator\RecordExists $isRecordExists
- * @method   bool                           isRecordExists($input) Check if the input is existing table record
+ * @method   bool                           isRecordExists($input, $table, $field = 'id') Check if the input is existing table record
  * @property \Widget\Validator\All          $isAll
- * @method   bool                           isAll($input) Check if all of the element in the input is valid by all specified rules
+ * @method   bool                           isAll($input, array $rules) Check if all of the element in the input is valid by all specified rules
  * @property \Widget\Validator\Callback     $isCallback
- * @method   bool                           isCallback($input) Check if the input is valid by specified callback
+ * @method   bool                           isCallback($input, \Closure $fn, $message = null) Check if the input is valid by specified callback
  * @property \Widget\Validator\Color        $isColor
  * @method   bool                           isColor($input) Check if the input is valid Hex color
  */
