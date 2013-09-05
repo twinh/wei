@@ -157,6 +157,22 @@ namespace Widget;
  * @property \Widget\Validator\MaxLength    $isMaxLength
  * @method   bool                           isMaxLength($input, $max) Check if the length (or size) of input is lower than specified length
  *
+ * Comparison
+ * @property \Widget\Validator\EqualTo              $isEqualTo
+ * @method   bool                                   isEqualTo($input, $value) Check if the input is equals to (==) the specified value
+ * @property \Widget\Validator\IdenticalTo          $identicalTo
+ * @method   bool                                   isIdenticalTo($input, $value) Check if the input is equals to (==) the specified value
+ * @property \Widget\Validator\GreaterThan          $isGreaterThan
+ * @method   bool                                   isGreaterThan($input, $value) Check if the input is greater than (>=) the specified value
+ * @property \Widget\Validator\GreaterThanOrEqual   $isGreaterThanOrEqual
+ * @method   bool                                   isGreaterThanOrEqual($input, $value) Check if the input is greater than or equal to (>=) the specified value
+ * @property \Widget\Validator\LessThan             $isLessThan
+ * @method   bool                                   isLessThan($input, $value) Check if the input is less than (<) the specified value
+ * @property \Widget\Validator\LessThanOrEqual      $isLessThanOrEqual
+ * @method   bool                                   isLessThanOrEqual($input, $value) Check if the input is less than or equal to (<=) the specified value
+ * @property \Widget\Validator\Between              $isBetween
+ * @method   bool                                   isBetween($input, $min, $max) Check if the input is between the specified minimum and maximum value
+ *
  * Date and time
  * @property \Widget\Validator\Date         $isDate
  * @method   bool                           isDate($input, $format = 'Y-m-d') Check if the input is a valid date
@@ -219,21 +235,15 @@ namespace Widget;
  * @property \Widget\Validator\SomeOf       $isSomeOf
  * @method   bool                           isSomeOf($input) Check if the input is valid by specified number of the rules
  *
- * Comparison
- * @property \Widget\Validator\EqualTo              $isEqualTo
- * @method   bool                                   isEqualTo($input, $value) Check if the input is equals to (==) the specified value
- * @property \Widget\Validator\IdenticalTo          $identicalTo
- * @method   bool                                   isIdenticalTo($input, $value) Check if the input is equals to (==) the specified value
- * @property \Widget\Validator\GreaterThan          $isGreaterThan
- * @method   bool                                   isGreaterThan($input, $value) Check if the input is greater than (>=) the specified value
- * @property \Widget\Validator\GreaterThanOrEqual   $isGreaterThanOrEqual
- * @method   bool                                   isGreaterThanOrEqual($input, $value) Check if the input is greater than or equal to (>=) the specified value
- * @property \Widget\Validator\LessThan             $isLessThan
- * @method   bool                                   isLessThan($input, $value) Check if the input is less than (<) the specified value
- * @property \Widget\Validator\LessThanOrEqual      $isLessThanOrEqual
- * @method   bool                                   isLessThanOrEqual($input, $value) Check if the input is less than or equal to (<=) the specified value
- * @property \Widget\Validator\Between              $isBetween
- * @method   bool                                   isBetween($input, $min, $max) Check if the input is between the specified minimum and maximum value
+ * Others
+ * @property \Widget\Validator\RecordExists $isRecordExists
+ * @method   bool                           isRecordExists($input) Check if the input is existing table record
+ * @property \Widget\Validator\All          $isAll
+ * @method   bool                           isAll($input) Check if all of the element in the input is valid by all specified rules
+ * @property \Widget\Validator\Callback     $isCallback
+ * @method   bool                           isCallback($input) Check if the input is valid by specified callback
+ * @property \Widget\Validator\Color        $isColor
+ * @method   bool                           isColor($input) Check if the input is valid Hex color
  */
 abstract class Base
 {
