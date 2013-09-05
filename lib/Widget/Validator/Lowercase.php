@@ -9,7 +9,7 @@
 namespace Widget\Validator;
 
 /**
- * Check if the input is lowsercase
+ * Check if the input is lowercase
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
