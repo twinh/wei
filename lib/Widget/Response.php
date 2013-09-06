@@ -577,7 +577,7 @@ class Response extends Base
      *
      * @param string $file The path of file
      * @param array $downloadOptions The download options
-     * @return Download
+     * @return $this
      * @throws \RuntimeException When file not found
      */
     public function download($file = null, array $downloadOptions = array())
@@ -589,13 +589,14 @@ class Response extends Base
         }
 
         $name = $o['filename'] ?: basename($file);
+        $name = rawurlencode($name);
 
         // For IE
         $userAgent = $this->request->getServer('HTTP_USER_AGENT');
         if (preg_match('/MSIE ([\w.]+)/', $userAgent)) {
-            $filename = '=' . rawurlencode($name);
+            $filename = '=' . $name;
         } else {
-            $filename = "*=UTF-8''" . rawurlencode($name);
+            $filename = "*=UTF-8''" . $name;
         }
 
         $this->setHeader(array(
