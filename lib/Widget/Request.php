@@ -24,7 +24,7 @@ namespace Widget;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Request extends Base implements \ArrayAccess, \Countable
+class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
      * The request parameters, equals to $_REQUEST when $fromGlobal is true
@@ -797,5 +797,15 @@ class Request extends Base implements \ArrayAccess, \Countable
             $pathInfo = substr($pathInfo, 0, $pos);
         }
         return $pathInfo;
+    }
+
+    /**
+     * Retrieve an array iterator
+     *
+     * @return \ArrayIterator
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->data);
     }
 }
