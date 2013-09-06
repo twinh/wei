@@ -508,7 +508,13 @@ class Response extends Base
         return $this;
     }
 
-    public function flush($content)
+    /**
+     * Flushes content to browser immediately
+     *
+     * @param string $content
+     * @return $this
+     */
+    public function flush($content = null)
     {
         if (function_exists('apache_setenv')) {
             apache_setenv('no-gzip', '1');

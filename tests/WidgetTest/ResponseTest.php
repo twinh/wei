@@ -107,7 +107,7 @@ namespace WidgetTest
 
         public function testFlush()
         {
-            $this->assertInstanceOf('\Widget\Response', $this->response->flush('xx'));
+            $this->assertInstanceOf('\Widget\Response', $this->response->flush());
 
             $this->assertEquals('1', ini_get('implicit_flush'));
 
