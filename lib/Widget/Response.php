@@ -507,4 +507,41 @@ class Response extends Base
         $this->isSent = (bool) $bool;
         return $this;
     }
+
+    public function flush($content)
+    {
+        if (function_exists('apache_setenv')) {
+            apache_setenv('no-gzip', '1');
+        }
+
+        /**
+         * Disable zlib to compress output
+         * @link http://www.php.net/manual/en/zlib.configuration.php
+         */
+        if (!headers_sent() &&extension_loaded('zlib')) {
+            ini_set('zlib.output_compression', '0');
+        }
+
+        /**
+         * Turn implicit flush on
+         * @link http://www.php.net/manual/en/function.ob-implicit-flush.php
+         */
+        ob_implicit_flush();
+
+        $this->send($content);
+
+        /**
+         * Send blank characters for output_buffering
+         * @link http://www.php.net/manual/en/outcontrol.configuration.php
+         */
+        if ($length = ini_get('output_buffering')) {
+            echo str_pad('', $length);
+        }
+
+        while (ob_get_level()) {
+            ob_end_flush();
+        }
+
+        return $this;
+    }
 }

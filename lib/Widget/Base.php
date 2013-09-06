@@ -61,8 +61,6 @@ namespace Widget;
  * @method   \Widget\Response   response($content = null, $status = null) Send response header and content
  * @property Download           $download A widget send file download response
  * @method   \Widget\Download   download($file, $options) Send file download response
- * @property Flush              $flush A widget that flushes the content to browser immediately
- * @method   \Widget\Flush      flush($content = null, $status = null) Send response content
  * @property Json               $json A widget to response json
  * @method   \Widget\Json       json($message = null, $code = 0, array $append = array(), $jsonp = false) Send JSON(P) response
  * @property Redirect           $redirect A widget that send a redirect response
