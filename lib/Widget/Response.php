@@ -138,6 +138,27 @@ class Response extends Base
     );
 
     /**
+     * The download options
+     *
+     * Name        | Type   | Description
+     * ------------|--------|-------------
+     * type        | string | The HTTP content type
+     * disposition | string | The type of disposition, could be "attachment" or "inline",
+     * filename    | string | The file name to display in download dialog
+     *
+     * When disposition is "inline", the browser will try to open file within
+     * the browser, while "attachment" will force it to download
+     *
+     * @var array
+     * @link http://stackoverflow.com/questions/1395151/content-dispositionwhat-are-the-differences-between-inline-and-attachment
+     */
+    protected $downloadOption = array(
+        'type'          => 'application/x-download',
+        'disposition'   => 'attachment',
+        'filename'      => null,
+    );
+
+    /**
      * Whether response content has been sent
      *
      * @var bool
@@ -547,6 +568,52 @@ class Response extends Base
         while (ob_get_level()) {
             ob_end_flush();
         }
+
+        return $this;
+    }
+
+    /**
+     * Send file download response
+     *
+     * @param string $file The path of file
+     * @param array $downloadOptions The download options
+     * @return Download
+     * @throws \RuntimeException When file not found
+     */
+    public function download($file = null, array $downloadOptions = array())
+    {
+        $o = $downloadOptions + $this->downloadOption;
+
+        if (!is_file($file)) {
+            throw new \RuntimeException('File not found', 404);
+        }
+
+        $name = $o['filename'] ?: basename($file);
+
+        // For IE
+        $userAgent = $this->request->getServer('HTTP_USER_AGENT');
+        if (preg_match('/MSIE ([\w.]+)/', $userAgent)) {
+            $filename = '=' . rawurlencode($name);
+        } else {
+            $filename = "*=UTF-8''" . rawurlencode($name);
+        }
+
+        $this->setHeader(array(
+            'Content-Description'       => 'File Transfer',
+            'Content-Type'              => $o['type'],
+            'Content-Disposition'       => $o['disposition'] . ';filename' . $filename,
+            'Content-Transfer-Encoding' => 'binary',
+            'Expires'                   => '0',
+            'Cache-Control'             => 'must-revalidate',
+            'Pragma'                    => 'public',
+            'Content-Length'            => filesize($file),
+        ));
+
+        // Send headers
+        $this->send();
+
+        // Send file content
+        readfile($file);
 
         return $this;
     }

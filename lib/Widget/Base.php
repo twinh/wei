@@ -59,8 +59,6 @@ namespace Widget;
  * HTTP Response
  * @property Response           $response A widget that handles the HTTP response data
  * @method   \Widget\Response   response($content = null, $status = null) Send response header and content
- * @property Download           $download A widget send file download response
- * @method   \Widget\Download   download($file, $options) Send file download response
  * @property Json               $json A widget to response json
  * @method   \Widget\Json       json($message = null, $code = 0, array $append = array(), $jsonp = false) Send JSON(P) response
  * @property Redirect           $redirect A widget that send a redirect response
