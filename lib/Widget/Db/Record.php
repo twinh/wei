@@ -47,6 +47,13 @@ class Record extends Base
     protected $primaryKey = 'id';
 
     /**
+     * The table fields
+     *
+     * @var array
+     */
+    protected $fields = array();
+
+    /**
      * The record data
      *
      * @var array

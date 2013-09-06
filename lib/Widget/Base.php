@@ -177,7 +177,7 @@ namespace Widget;
  * @property Validator\Date         $isDate
  * @method   bool                   isDate($input, $format = 'Y-m-d') Check if the input is a valid date
  * @property Validator\DateTime     $isDateTime
- * @method   bool                   isDateTime($input, $format = null) Check if the input is a valid date
+ * @method   bool                   isDateTime($input, $format = null) Check if the input is a valid datetime
  * @property Validator\Time         $isTime
  * @method   bool                   isTime($input, $format = 'H:i:s') Check if the input is a valid time
  *

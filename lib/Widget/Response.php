@@ -183,7 +183,6 @@ class Response extends Base
         }
 
         $this->sendHeader();
-
         $this->sendContent();
 
         return $this;
@@ -198,7 +197,6 @@ class Response extends Base
     public function setContent($content)
     {
         $this->content = $content;
-
         return $this;
     }
 
@@ -220,7 +218,6 @@ class Response extends Base
     public function sendContent()
     {
         echo $this->content;
-
         return $this;
     }
 
@@ -258,12 +255,11 @@ class Response extends Base
      * Set the HTTP version
      *
      * @param  string       $version The HTTP version
-     * @return Header
+     * @return Response
      */
     public function setVersion($version)
     {
         $this->version = $version;
-
         return $this;
     }
 
@@ -509,7 +505,6 @@ class Response extends Base
     public function setSentStatus($bool)
     {
         $this->isSent = (bool) $bool;
-
         return $this;
     }
 }
