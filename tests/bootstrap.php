@@ -61,6 +61,12 @@ $widget = widget(array(
             'db' => 'pgsql.db'
         )
     ),
+    'bicache' => array(
+        'deps' => array(
+            'master' => 'arrayCache',
+            'slave' => 'fileCache',
+        )
+    ),
     'response' => array(
         'unitTest' => true
     )
