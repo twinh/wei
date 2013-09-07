@@ -415,7 +415,7 @@ class Escape extends Base
     }
 
     /**
-     * Escapes a string by specified type for secure ouput
+     * Escapes a string by specified type for secure output
      *
      * @param string $string
      * @param string $type

@@ -53,11 +53,10 @@ class Redirect extends Response
      * @param  int            $status  The redirect status code
      * @param  array          $options The widget options
      * @return Redirect
-     * @throws RuntimeException  When custom view file not found
      */
     public function __invoke($url = null, $status = 302, array $options = array())
     {
-        $options = $this->setOption($options);
+        $this->setOption($options);
 
         if ($this->view) {
             require $this->view;
@@ -102,7 +101,6 @@ class Redirect extends Response
     public function setWait($wait)
     {
         $this->wait = (int)$wait;
-
         return $this;
     }
 }
