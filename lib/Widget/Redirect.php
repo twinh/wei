@@ -64,20 +64,25 @@ class Redirect extends Response
     {
         $this->setOption($options);
 
-        if ($this->view) {
-            require $this->view;
-        } else {
-            // Location header does not support delay
-            if (0 === $this->wait) {
-                $this->setHeader('Location', $url);
-            }
+        // The variables for custom redirect view
+        $escapedUrl = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
+        $wait = $this->wait;
 
-            $content = sprintf(static::$html, $this->wait, htmlspecialchars($url, ENT_QUOTES, 'UTF-8'));
-
-            parent::__invoke($content, $this->statusCode);
+        // Location header does not support delay
+        if (0 === $wait) {
+            $this->setHeader('Location', $url);
         }
 
-        return $this;
+        // Prepare response content
+        if ($this->view) {
+            ob_start();
+            require $this->view;
+            $content = ob_get_clean();
+        } else {
+            $content = sprintf(static::$html, $wait, $escapedUrl);
+        }
+
+        return $this->send($content, $this->statusCode);
     }
 
     /**
