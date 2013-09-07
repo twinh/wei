@@ -86,7 +86,6 @@ class Error extends Base
     public function __invoke($fn)
     {
         $this->handlers['error'][] = $fn;
-
         return $this;
     }
 
@@ -99,7 +98,6 @@ class Error extends Base
     public function notFound($fn)
     {
         $this->handlers['notFound'][] = $fn;
-
         return $this;
     }
 
@@ -112,7 +110,6 @@ class Error extends Base
     public function fatal($fn)
     {
         $this->handlers['fatal'][] = $fn;
-
         return $this;
     }
 
