@@ -41,7 +41,7 @@ class Redirect extends Response
      *
      * @var string
      */
-    protected static $html = '<!DOCTYPE html>
+    protected $defaultHtml = '<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -79,7 +79,7 @@ class Redirect extends Response
             require $this->view;
             $content = ob_get_clean();
         } else {
-            $content = sprintf(static::$html, $wait, $escapedUrl);
+            $content = sprintf($this->defaultHtml, $wait, $escapedUrl);
         }
 
         return $this->send($content, $this->statusCode);
