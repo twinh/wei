@@ -15,7 +15,7 @@ namespace Widget;
  * @property    Request $request A widget that handles the HTTP request data
  * @property    Response $response A widget that handles the HTTP response data
  */
-class Cookie extends Base implements \ArrayAccess
+class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
 {
     /**
      * The cookie data
@@ -96,19 +96,17 @@ class Cookie extends Base implements \ArrayAccess
     {
         unset($this->data[$key]);
         $this->response->removeCookie($key);
-
         return $this;
     }
 
     /**
      * Clear all cookie data
      *
-     * @return Parameter
+     * @return Cookie
      */
     public function clear()
     {
         $this->data = array();
-
         return $this;
     }
 
@@ -165,5 +163,15 @@ class Cookie extends Base implements \ArrayAccess
     public function offsetUnset($offset)
     {
         return $this->remove($offset);
+    }
+
+    /**
+     * Retrieve an array iterator
+     *
+     * @return \ArrayIterator
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->data);
     }
 }
