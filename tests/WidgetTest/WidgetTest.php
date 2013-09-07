@@ -102,6 +102,12 @@ class WidgetTest extends TestCase
         $this->assertEquals('DELETE', $request->getMethod());
     }
 
+    public function testGetConfigs()
+    {
+        $configs = $this->widget->getConfig();
+        $this->assertInternalType('array', $configs);
+    }
+
     /**
      * @expectedException \InvalidArgumentException
      */
