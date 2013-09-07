@@ -16,7 +16,7 @@ namespace Widget;
 class Redirect extends Response
 {
     /**
-     * The custom view file
+     * The custom redirect view file
      *
      * @var string
      */
@@ -28,6 +28,13 @@ class Redirect extends Response
      * @var int
      */
     protected $wait = 0;
+
+    /**
+     * The redirect status code
+     *
+     * @var int
+     */
+    protected $statusCode = 302;
 
     /**
      * The default view content
@@ -50,11 +57,10 @@ class Redirect extends Response
      * Send a redirect response
      *
      * @param  string         $url     The url redirect to
-     * @param  int            $status  The redirect status code
-     * @param  array          $options The widget options
+     * @param  array          $options The redirect widget options
      * @return Redirect
      */
-    public function __invoke($url = null, $status = 302, array $options = array())
+    public function __invoke($url = null, $options = array())
     {
         $this->setOption($options);
 
@@ -68,7 +74,7 @@ class Redirect extends Response
 
             $content = sprintf(static::$html, $this->wait, htmlspecialchars($url, ENT_QUOTES, 'UTF-8'));
 
-            parent::__invoke($content, $status);
+            parent::__invoke($content, $this->statusCode);
         }
 
         return $this;
@@ -84,11 +90,9 @@ class Redirect extends Response
     public function setView($view)
     {
         if (!is_file($view)) {
-            throw new \RuntimeException(sprintf('Redirect view "%s" not found', $view));
+            throw new \RuntimeException(sprintf('Redirect view file "%s" not found', $view));
         }
-
         $this->view = $view;
-
         return $this;
     }
 

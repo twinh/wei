@@ -62,7 +62,7 @@ namespace Widget;
  * @property Json               $json A widget to response json
  * @method   \Widget\Json       json($message = null, $code = 0, array $append = array(), $jsonp = false) Send JSON(P) response
  * @property Redirect           $redirect A widget that send a redirect response
- * @method   \Widget\Redirect   redirect($url = null, $status = 302, array $options = array()) Send a redirect response
+ * @method   \Widget\Redirect   redirect($url = null, array $options = array()) Send a redirect response
  *
  * View
  * @property Escape             $escape A widget to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
