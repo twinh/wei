@@ -178,7 +178,6 @@
       <a href="#response">HTTP响应</a>
       <ul class="nav">
         <li><a href="#response">Response</a></li>
-        <li><a href="#flush">Flush</a></li>
         <li><a href="#json">Json</a></li>
         <li><a href="#redirect">Redirect</a></li>
       </ul>
@@ -10965,6 +10964,17 @@
 
 <p><img src="resources/download.png" alt="弹出下载对话框"></p>
 
+<h3>逐个打印1-10的数字到浏览器窗口,每隔一秒输出一个</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 关闭缓冲区,发送HTTP响应等</span>
+<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">flush</span><span class="p">();</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$i</span><span class="p">;</span>
+    <span class="nb">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
 <h2>调用方式</h2>
 
 <h3>选项</h3>
@@ -11152,39 +11162,10 @@
 <h4>response-&gt;download($file, $downloadOptions = array())</h4>
 
 <p>下载指定的文件</p>
-  </section>
-
-<!-- api/flush
-  ================================================== -->
-  <section id="flush">
-  <div class="page-header"><h1>Flush</h1></div>
-
-<p>关闭缓冲区,让后台脚本实时输出内容到浏览器</p>
-
-<h2>代码范例</h2>
-
-<h3>逐个打印1-10的数字到浏览器窗口,没每隔一秒输出一个</h3>
-
-<div class="highlight"><pre><code class="php"><span class="c1">// 关闭缓冲区,发送HTTP响应等</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">flush</span><span class="p">();</span>
-
-<span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="nv">$i</span><span class="p">;</span>
-    <span class="nb">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<p><em>无</em></p>
-
-<h3>方法</h3>
 
 <h4>flush($content = null, $status = null)</h4>
 
-<p>直接输出内容到浏览器</p>
+<p>关闭缓冲区,让后台脚本实时输出内容到浏览器</p>
   </section>
 
 <!-- api/json

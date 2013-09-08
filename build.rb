@@ -69,7 +69,7 @@ widgets = [
   # request
     'request', 'cookie', 'session', 'ua', 'upload',
   # response
-    'response', 'flush', 'json', 'redirect',
+    'response', 'json', 'redirect',
   # view
     'escape', 'view',
   # others
