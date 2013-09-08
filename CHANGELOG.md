@@ -1,7 +1,12 @@
 Changelog
 =========
 
-## 0.9.5 (WIP)
+## 0.9.5 (2013-09-08)
+
+* Added `getIterator` method for request and cookie widgets
+* Added `fields` property for record class
+* Merged flush, download widget into response widget, refs #135
+* Added headers for redirect widget when send by custom view
 
 ## 0.9.5-RC1 (2013-09-04)
 
