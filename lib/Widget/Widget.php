@@ -23,7 +23,7 @@ namespace Widget
         /**
          * Version
          */
-        const VERSION = '0.9.5-RC1';
+        const VERSION = '0.9.5';
 
         /**
          * The configurations for all widgets
