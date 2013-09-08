@@ -68,7 +68,7 @@ $cache = $widget->memcached;
 // Cache APIs
 $cache->get('key');
 $cache->set('key', 'value', 60);
-$cache->remove('key', 'value');
+$cache->remove('key');
 $cache->exists('key');
 $cache->add('key', 'value');
 $cache->replace('key', 'value');
@@ -81,7 +81,7 @@ $cache->clear();
 // ...
 ```
 
-### Db
+### Database
 
 ```php
 $db = $widget->db;
