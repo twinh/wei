@@ -41,6 +41,18 @@ widget()->download(__FILE__);
 
 ![弹出下载对话框](resources/download.png)
 
+### 逐个打印1-10的数字到浏览器窗口,每隔一秒输出一个
+
+```php
+// 关闭缓冲区,发送HTTP响应等
+widget()->flush();
+
+for ($i = 1; $i <= 10; $i++) {
+    echo $i;
+    sleep(1);
+}
+```
+
 调用方式
 --------
 
@@ -106,3 +118,6 @@ $stateCode    | int       | 200       | HTTP响应的状态码
 
 #### response->download($file, $downloadOptions = array())
 下载指定的文件
+
+#### flush($content = null, $status = null)
+关闭缓冲区,让后台脚本实时输出内容到浏览器
