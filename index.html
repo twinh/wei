@@ -11179,15 +11179,15 @@
 
 <h3>输出JSON格式的数据</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 输出 {"code":0,"message":"success"}</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">(</span><span class="s1">'success'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 输出 {"code":1,"message":"success"}</span>
+<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">(</span><span class="s1">'success'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 </code></pre></div>
 
 <h3>输出JSONP格式的数据</h3>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 假设URL请求地址为 index.php?callback=callback</span>
-<span class="c1">// 下面的调用将输出 callback({"code":0,"message":"success"})</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">(</span><span class="s1">'success'</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">array</span><span class="p">(),</span> <span class="k">true</span><span class="p">);</span>
+<span class="c1">// 下面的调用将输出 callback({"code":1,"message":"success"})</span>
+<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">(</span><span class="s1">'success'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="k">array</span><span class="p">(),</span> <span class="k">true</span><span class="p">);</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
@@ -11198,7 +11198,7 @@
 
 <h3>方法</h3>
 
-<h4>json($message, $code = 0, $append = array(), $jsonp = false)</h4>
+<h4>json($message, $code = 1, $append = array(), $jsonp = false)</h4>
 
 <p>参数</p>
 
@@ -11219,7 +11219,7 @@
 <tr>
 <td>$code</td>
 <td>int</td>
-<td>0</td>
+<td>1</td>
 <td>返回code的值</td>
 </tr>
 <tr>
