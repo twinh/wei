@@ -60,7 +60,7 @@ namespace Widget;
  * @property Response           $response A widget that handles the HTTP response data
  * @method   \Widget\Response   response($content = null, $status = null) Send response header and content
  * @property Json               $json A widget to response json
- * @method   \Widget\Json       json($message = null, $code = 0, array $append = array(), $jsonp = false) Send JSON(P) response
+ * @method   \Widget\Json       json($message = null, $code = 1, array $append = array(), $jsonp = false) Send JSON(P) response
  * @property Redirect           $redirect A widget that send a redirect response
  * @method   \Widget\Redirect   redirect($url = null, array $options = array()) Send a redirect response
  *
