@@ -16,7 +16,7 @@ use Widget\Base;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Record extends Base
+class Record extends Base implements \ArrayAccess
 {
     /**
      * The record table name
@@ -221,7 +221,7 @@ class Record extends Base
     }
 
     /**
-     * Set record value
+     * Set column value
      *
      * @param string $name
      * @param mixed $value
@@ -251,7 +251,7 @@ class Record extends Base
     /**
      * Check if column exists
      *
-     * @param $name
+     * @param string $name
      * @return bool
      */
     public function __isset($name)
@@ -313,5 +313,48 @@ class Record extends Base
     public function getPrimaryKey()
     {
         return $this->primaryKey;
+    }
+
+    /**
+     * Check if column exists
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function offsetExists($name)
+    {
+        return $this->__isset($name);
+    }
+
+    /**
+     * Receives record column value
+     *
+     * @param string $name
+     * @return string
+     */
+    public function offsetGet($name)
+    {
+        return $this->__get($name);
+    }
+
+    /**
+     * Set column value
+     *
+     * @param string $name
+     * @param mixed $value
+     */
+    public function offsetSet($name, $value)
+    {
+        $this->__set($name, $value);
+    }
+
+    /**
+     * Remove column value
+     *
+     * @param string $name The name of column
+     */
+    public function offsetUnset($name)
+    {
+        $this->__unset($name);
     }
 }
