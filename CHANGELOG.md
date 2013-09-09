@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 0.9.6 (WIP)
+
+* Added ArrayAccess support for db record class
+* Fixed create db record error when key name is class property name
+* Added `getIterator` method for session widget
+
 ## 0.9.5 (2013-09-08)
 
 * Added `getIterator` method for request and cookie widgets
