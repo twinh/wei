@@ -166,6 +166,25 @@ class DbTest extends TestCase
         $this->assertEquals('2', $member->id);
     }
 
+    public function testRecordArrayAccess()
+    {
+        /** @var $member \WidgetTest\DbTest\Member */
+        $member = $this->db->member('1');
+
+        $this->assertEquals(1, $member['id']);
+
+        $member['name'] = 'test';
+        $this->assertEquals('test', $member['name']);
+        $this->assertEquals($member->name, $member['name']);
+
+        $this->assertTrue(isset($member['name']));
+
+        unset($member['name']);
+        $this->assertNull($member['name']);
+
+        $this->assertFalse(isset($member['name']));
+    }
+
     public function testDynamicRelation()
     {
         $db = $this->db;
