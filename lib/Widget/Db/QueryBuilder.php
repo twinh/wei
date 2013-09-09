@@ -75,7 +75,7 @@ class QueryBuilder
     );
 
     /**
-     * A column to be the key of the fetched array, if not provided, return
+     * A field to be the key of the fetched array, if not provided, return
      * default number index array
      *
      * @var string
@@ -231,7 +231,7 @@ class QueryBuilder
         $data = $this->execute();
 
         if ($data && $this->indexBy && !array_key_exists($this->indexBy, $data[0])) {
-            throw new \RuntimeException(sprintf('Index column "%s" not found in fetched data', $this->indexBy));
+            throw new \RuntimeException(sprintf('Index field "%s" not found in fetched data', $this->indexBy));
         }
 
         if ($this->indexBy) {
@@ -684,7 +684,7 @@ class QueryBuilder
     }
 
     /**
-     * Sets a new value for a column in a bulk update query.
+     * Sets a new value for a field in a bulk update query.
      *
      * ```
      * $qb = $db->createQueryBuilder()
@@ -909,15 +909,14 @@ class QueryBuilder
     }
 
     /**
-     * Specifies a column to be the key of the fetched array
+     * Specifies a field to be the key of the fetched array
      *
-     * @param string $column
+     * @param string $field
      * @return $this
      */
-    public function indexBy($column)
+    public function indexBy($field)
     {
-        $this->indexBy = $column;
-
+        $this->indexBy = $field;
         return $this;
     }
 
@@ -1077,12 +1076,12 @@ class QueryBuilder
         if (is_array($conditions)) {
             $where = array();
             $params = array();
-            foreach ($conditions as $column => $condition) {
+            foreach ($conditions as $field => $condition) {
                 if (is_array($condition)) {
-                    $where[] = $column . ' IN (' . implode(', ', array_pad(array(), count($condition), '?')) . ')';
+                    $where[] = $field . ' IN (' . implode(', ', array_pad(array(), count($condition), '?')) . ')';
                     $params = array_merge($params, $condition);
                 } else {
-                    $where[] = $column . " = ?";
+                    $where[] = $field . " = ?";
                     $params[] = $condition;
                 }
             }

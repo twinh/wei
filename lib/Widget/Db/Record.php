@@ -40,7 +40,7 @@ class Record extends Base implements \ArrayAccess
     protected $isModified = false;
 
     /**
-     * The primary key column
+     * The primary key field
      *
      * @var string
      */
@@ -191,15 +191,15 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
-     * Receives record column value
+     * Receives record field value
      *
      * @param string $name
-     * @throws \InvalidArgumentException When column not found
+     * @throws \InvalidArgumentException When field not found
      * @return string
      */
     public function __get($name)
     {
-        // Get table column value
+        // Get table field value
         if (array_key_exists($name, $this->data)) {
             return $this->data[$name];
         }
@@ -209,14 +209,14 @@ class Record extends Base implements \ArrayAccess
         }
 
         throw new \InvalidArgumentException(sprintf(
-            'Column "%s" not found in record class "%s"',
+            'Field "%s" not found in record class "%s"',
             $name,
             get_class($this)
         ));
     }
 
     /**
-     * Set column value
+     * Set field value
      *
      * @param string $name
      * @param mixed $value
@@ -233,9 +233,9 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
-     * Remove column value
+     * Remove field value
      *
-     * @param string $name The name of column
+     * @param string $name The name of field
      * @return Record
      */
     public function __unset($name)
@@ -244,7 +244,7 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
-     * Check if column exists
+     * Check if field exists
      *
      * @param string $name
      * @return bool
@@ -255,9 +255,9 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
-     * Remove column value
+     * Remove field value
      *
-     * @param string $name The name of column
+     * @param string $name The name of field
      * @return Record
      */
     public function remove($name)
@@ -289,7 +289,7 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
-     * Sets the primary key column
+     * Sets the primary key field
      *
      * @param string $primaryKey
      * @return $this
@@ -301,7 +301,7 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
-     * Returns the primary key column
+     * Returns the primary key field
      *
      * @return string
      */
@@ -311,7 +311,7 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
-     * Check if column exists
+     * Check if field exists
      *
      * @param string $name
      * @return bool
@@ -322,7 +322,7 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
-     * Receives record column value
+     * Receives record field value
      *
      * @param string $name
      * @return string
@@ -333,7 +333,7 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
-     * Set column value
+     * Set field value
      *
      * @param string $name
      * @param mixed $value
@@ -344,9 +344,9 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
-     * Remove column value
+     * Remove field value
      *
-     * @param string $name The name of column
+     * @param string $name The name of field
      */
     public function offsetUnset($name)
     {

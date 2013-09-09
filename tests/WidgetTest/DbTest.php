@@ -302,7 +302,7 @@ class DbTest extends TestCase
         $this->assertArrayHasKey('name', $data);
     }
 
-    public function testSelectWithColumn()
+    public function testSelectWithField()
     {
         $data = $this->db->select('member', 1, 'id, name');
 
@@ -578,7 +578,7 @@ class DbTest extends TestCase
         $this->assertArrayHasKey('twin', $members);
         $this->assertArrayHasKey('test', $members);
 
-        $this->setExpectedException('RuntimeException', 'Index column "test" not found in fetched data');
+        $this->setExpectedException('RuntimeException', 'Index field "test" not found in fetched data');
         $members = $this->db('member')
             ->indexBy('test')
             ->fetchAll();
@@ -723,11 +723,11 @@ class DbTest extends TestCase
         $this->assertEquals('member', $member->getTable());
     }
 
-    public function testColumnNotFound()
+    public function testFieldNotFound()
     {
         $member = $this->db->member('1');
 
-        $this->setExpectedException('\InvalidArgumentException', 'Column "notFound" not found in record class "Widget\Db\Record"');
+        $this->setExpectedException('\InvalidArgumentException', 'Field "notFound" not found in record class "Widget\Db\Record"');
 
         $member->notFound;
     }
