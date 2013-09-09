@@ -93,6 +93,20 @@ class SessionTest extends TestCase
 
         $this->assertEquals(null, $session->get('action'));
     }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testForEach()
+    {
+        $session = $this->object;
+        $session->set('test', __FUNCTION__);
+
+        foreach ($session as $key => $value) {
+            $this->assertEquals($value, $session->get($key));
+        }
+    }
+
     /**
      * @dataProvider providerForGetterAndSetter
      * @runInSeparateProcess

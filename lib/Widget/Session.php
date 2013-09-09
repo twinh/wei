@@ -13,7 +13,7 @@ namespace Widget;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Session extends Base implements \ArrayAccess, \Countable
+class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
      * The namespace to store session data, disable on default
@@ -235,5 +235,15 @@ class Session extends Base implements \ArrayAccess, \Countable
     public function count()
     {
         return count($this->data);
+    }
+
+    /**
+     * Retrieve an array iterator
+     *
+     * @return \ArrayIterator
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->data);
     }
 }
