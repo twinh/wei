@@ -191,11 +191,11 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
-     * Receives record column value, record, collection or widget instance
+     * Receives record column value
      *
      * @param string $name
-     * @throws \InvalidArgumentException When column or relation not found
-     * @return string|Record|Collection
+     * @throws \InvalidArgumentException When column not found
+     * @return string
      */
     public function __get($name)
     {
@@ -208,13 +208,8 @@ class Record extends Base implements \ArrayAccess
             return null;
         }
 
-        // Get relation
-        if (method_exists($this, $name)) {
-            return $this->$name = $this->$name();
-        }
-
         throw new \InvalidArgumentException(sprintf(
-            'Column or relation "%s" not found in record class "%s"',
+            'Column "%s" not found in record class "%s"',
             $name,
             get_class($this)
         ));

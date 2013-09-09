@@ -15,18 +15,19 @@ class Member extends Record
         'age' => 0,
     );
 
-    public function post()
+    public function getPost()
     {
         return $this->db->find('post', array('member_id' => $this->data['id']));
     }
 
-    public function group()
+    public function getGroup()
     {
         return $this->db->find('member_group', array('id' => $this->data['group_id']));
     }
 
-    public function posts()
+    public function getPosts()
     {
-        return $this->db->findAll('post', array('member_id' => $this->data['id']));
+        $this->posts = $this->db->findAll('post', array('member_id' => $this->data['id']));
+        return $this->posts;
     }
 }

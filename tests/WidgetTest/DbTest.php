@@ -126,7 +126,7 @@ class DbTest extends TestCase
         $this->assertEquals('1', $member->group_id);
 
         // Relation one-to-one
-        $post = $member->post;
+        $post = $member->getPost();
 
         $this->assertInstanceOf('\Widget\Db\Record', $post);
 
@@ -135,7 +135,7 @@ class DbTest extends TestCase
         $this->assertEquals('1', $post->member_id);
 
         // Relation belong-to
-        $group = $member->group;
+        $group = $member->getGroup();
 
         $this->assertInstanceOf('\Widget\Db\Record', $group);
 
@@ -143,7 +143,7 @@ class DbTest extends TestCase
         $this->assertEquals('vip', $group->name);
 
         // Relation one-to-many
-        $posts = $member->posts;
+        $posts = $member->getPosts();
 
         $this->assertInstanceOf('\Widget\Db\Collection', $posts);
 
@@ -185,7 +185,7 @@ class DbTest extends TestCase
         $this->assertFalse(isset($member['name']));
     }
 
-    public function testDynamicRelation()
+    public function testGetRelation()
     {
         $db = $this->db;
 
@@ -695,7 +695,7 @@ class DbTest extends TestCase
         ));
 
         $member = $this->db->find('member', 1);
-        $posts = $member->posts;
+        $posts = $member->getPosts();
         $data = $member->toArray();
 
         $this->assertInternalType('array', $data);
@@ -727,7 +727,7 @@ class DbTest extends TestCase
     {
         $member = $this->db->member('1');
 
-        $this->setExpectedException('\InvalidArgumentException', 'Column or relation "notFound" not found in record class "Widget\Db\Record"');
+        $this->setExpectedException('\InvalidArgumentException', 'Column "notFound" not found in record class "Widget\Db\Record"');
 
         $member->notFound;
     }
