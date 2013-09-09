@@ -127,7 +127,7 @@ class Record extends Base
     public function fromArray($data)
     {
         foreach ($data as $key => $value) {
-            $this->$key = $value;
+            $this->__set($key, $value);
         }
         return $this;
     }
