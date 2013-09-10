@@ -173,6 +173,20 @@ class Response extends Base
     protected $unitTest = false;
 
     /**
+     * The callback executes *before* send response
+     *
+     * @var callable
+     */
+    protected $beforeSend;
+
+    /**
+     * The callback executes *after* sent response
+     *
+     * @var callable
+     */
+    protected $afterSend;
+
+    /**
      * Send response header and content
      *
      * @param  string         $content
@@ -203,8 +217,18 @@ class Response extends Base
             $this->setStatusCode($status);
         }
 
+        // Trigger the after send callback
+        if ($this->beforeSend) {
+            call_user_func($this->beforeSend, $this, $content);
+        }
+
         $this->sendHeader();
         $this->sendContent();
+
+        // Trigger the after send callback
+        if ($this->afterSend) {
+            call_user_func($this->afterSend, $this);
+        }
 
         return $this;
     }
