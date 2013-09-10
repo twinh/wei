@@ -1170,7 +1170,7 @@
 <td>无</td>
 <td>缓存的键名</td>
 </tr></tbody>
-</table><h4>cache-&gt;add($key, $value)</h4>
+</table><h4>cache-&gt;add($key, $value, $expire = 0)</h4>
 
 <p>增加一项缓存,如果缓存已存在,返回false</p>
 
@@ -1197,6 +1197,12 @@
 <td>mixed</td>
 <td>无</td>
 <td>缓存的值,允许任意变量类型</td>
+</tr>
+<tr>
+<td>$expire</td>
+<td>int</td>
+<td>0</td>
+<td>缓存的有效期,默认为0秒,表示永不过期</td>
 </tr>
 </tbody>
 </table><h4>cache-&gt;replace($key, $value)</h4>
