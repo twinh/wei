@@ -290,6 +290,15 @@ class Db extends Base
     }
 
     /**
+     * Close the current connection and create a new one
+     */
+    public function reconnect()
+    {
+        $this->close();
+        $this->connect();
+    }
+
+    /**
      * Executes an INSERT query to insert specified data into table
      *
      * @param string $table The name of table
