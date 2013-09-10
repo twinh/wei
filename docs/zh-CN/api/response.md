@@ -18,11 +18,12 @@ widget()->response('Hello World');
 'Hello World'
 ```
 
-#### 获取上面案例中HTTP响应的完整内容
+### 获取上面案例中HTTP响应的完整内容
 
 ```php
 echo (string)widget()->response;
 ```
+
 #### 运行结果
 
 ```php
@@ -31,10 +32,10 @@ echo (string)widget()->response;
 Hello World'
 ```
 
-### 下载指定的文件
+### 让浏览器弹出下载对话框,下载指定的文件
 
 ```php
-widget()->download(__FILE__);
+widget()->response->download(__FILE__);
 ```
 
 #### 运行结果
@@ -45,7 +46,7 @@ widget()->download(__FILE__);
 
 ```php
 // 关闭缓冲区,发送HTTP响应等
-widget()->flush();
+widget()->response->flush();
 
 for ($i = 1; $i <= 10; $i++) {
     echo $i;
@@ -135,5 +136,5 @@ $stateCode    | int       | 200       | HTTP响应的状态码
 #### response->download($file, $downloadOptions = array())
 下载指定的文件
 
-#### flush($content = null, $status = null)
+#### response->flush($content = null, $status = null)
 关闭缓冲区,让后台脚本实时输出内容到浏览器
