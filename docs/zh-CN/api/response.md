@@ -65,9 +65,10 @@ statusCode     | int       | 200       | HTTP状态码
 statusText     | string    | OK        | HTTP状态消息
 content        | string    | 无        | HTTP响应内容
 isSent         | bool      | false     | HTTP响应内容是否已发送
-cookieOption   | array     | -         | 详见下表
-downloadOption | array     | -         | 详见下表
-
+cookieOption   | array     | 见下表    | 设置cookie的相关选项
+downloadOption | array     | 见下表    | 调用`download`方法的相关选项
+beforeSend     | callable  | 无        | 在发送响应前调用的回调
+afterSend      | callable  | 无        | 在发送响应后调用的回调
 
 #### `cookieOption`默认选项
 
@@ -87,6 +88,21 @@ raw       | bool      | false     | 是否发送为不经过URL解码的cookie
 filename      | string | null                   | 弹出下载对话框时显示的文件名称
 type          | string | application/x-download | 指定HTTP内容类型（Content-Type）
 disposition   | string | attachment             | 下载的方式,可选项为`inline`或`attachment`,如果是`inline`,浏览器会先尝试直接在浏览器中打开,如果是`attachment`,浏览器将直接弹出下载对话框
+
+#### 回调: beforeSend
+
+#### beforeSend($response, $content)
+
+名称        | 类型            | 说明
+------------|-----------------|------
+$response   | Widget\Response | 当前HTTP响应对象
+$content    | string          | 发送响应的内容
+
+##### 回调: afterSend($response)
+
+名称        | 类型            | 说明
+------------|-----------------|------
+$response   | Widget\Response | 当前HTTP响应对象
 
 ### 方法
 
