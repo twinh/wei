@@ -51,8 +51,14 @@ class Memcache extends BaseCache
     public function __construct(array $options = array())
     {
         parent::__construct($options);
+        $this->connect();
+    }
 
-        // Instance memcache object and connect to server
+    /**
+     * Instance memcache object and connect to server
+     */
+    protected function connect()
+    {
         if (!$this->object) {
             $this->object = new \Memcache;
         }
