@@ -81,7 +81,7 @@ class WeChatAppTest extends TestCase
     /**
      * @dataProvider providerForInputAndOutput
      */
-    public function testInputAndOutput($query, $input, $data, $outputContent = null, $mark = null)
+    public function testInputAndOutput($query, $input, $data, $outputContent = null)
     {
         $app = $this->object;
 
@@ -114,12 +114,10 @@ class WeChatAppTest extends TestCase
         });
 
         $app->receiveImage(function($app){
-            $app->setMark(true);
             return 'you sent a picture to me';
         });
 
         $app->receiveLocation(function($app){
-            $app->setMark(false);
             return 'the place looks livable';
         });
 
@@ -192,11 +190,6 @@ class WeChatAppTest extends TestCase
         $output = simplexml_load_string($content, 'SimpleXMLElement', LIBXML_NOCDATA);
         $this->assertEquals($app->getToUserName(), (string)$output->FromUserName);
         $this->assertEquals($app->getFromUserName(), (string)$output->ToUserName);
-
-        // Test mark message
-        if (is_bool($mark)) {
-            $this->assertEquals($mark, (bool)(string)$output->FuncFlag);
-        }
 
         // Test message content
         switch ($app->getMsgType()) {
@@ -277,8 +270,7 @@ class WeChatAppTest extends TestCase
                     'msgType' => 'text',
                     'msgId' => '1234567890123456'
                 ),
-                'your input is 0',
-                false
+                'your input is 0'
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -288,8 +280,7 @@ class WeChatAppTest extends TestCase
                     'msgType' => 'text',
                     'msgId' => '1234567890123456'
                 ),
-                'your input is 1',
-                false
+                'your input is 1'
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -298,7 +289,6 @@ class WeChatAppTest extends TestCase
                     'content' => '2',
                 ),
                 '', // return music
-                true
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -306,8 +296,7 @@ class WeChatAppTest extends TestCase
                 array(
 
                 ),
-               'Your input is 99999',
-                false
+               'Your input is 99999'
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -315,8 +304,7 @@ class WeChatAppTest extends TestCase
                 array(
 
                 ),
-               'The translation result is: xx',
-                false
+               'The translation result is: xx'
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -325,7 +313,6 @@ class WeChatAppTest extends TestCase
                     'content' => '3',
                 ),
                 '', // return news
-                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -334,7 +321,6 @@ class WeChatAppTest extends TestCase
                     'content' => 'I want a ipad',
                 ),
                 'Find a ipad ? ok, i will remember u',
-                true
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -343,7 +329,6 @@ class WeChatAppTest extends TestCase
                     'content' => 'Are u Twin?',
                 ),
                 'Yes, I\'m here',
-                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -361,7 +346,6 @@ class WeChatAppTest extends TestCase
                     'msgId' => '1234567890123456',
                     'picUrl' => 'http://mmsns.qpic.cn/mmsns/X1X15BcJOnSyeD9OtgfgM5RovwBP83QMHpd2YtO8DqtWG5jarm937g/0'
                 ),
-                true
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -384,7 +368,6 @@ class WeChatAppTest extends TestCase
                     'label' => '中国广东省深圳市 邮政编码: 518049',
                     'msgId' => '1234567890123456'
                 ),
-                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -403,7 +386,6 @@ class WeChatAppTest extends TestCase
                     'format' => 'amr',
                     'msgId' => '1234567890123456'
                 ),
-                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -420,7 +402,6 @@ class WeChatAppTest extends TestCase
                     'event' => 'unsubscribe',
                     'eventKey' => ''
                 ),
-                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -437,7 +418,6 @@ class WeChatAppTest extends TestCase
                     'event' => 'subscribe',
                     'eventKey' => ''
                 ),
-                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -454,7 +434,6 @@ class WeChatAppTest extends TestCase
                     'event' => 'CLICK',
                     'eventKey' => 'index'
                 ),
-                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -471,7 +450,6 @@ class WeChatAppTest extends TestCase
                     'event' => 'CLICK',
                     'eventKey' => 'button'
                 ),
-                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -489,7 +467,6 @@ class WeChatAppTest extends TestCase
                     'mediaId' => '1ilIgC6h1vmkKqoodLK-PiQy6DhVccDKm0cnLANsbjxKyDldYBTlhSepr3hAg5K9',
                     'thumbMediaId' => 'ZWWu54xvKw6PRfEmrdzZuzfPAiKBpQMEPHfB732tF1QHazqp1wvN5nFWF18ppCto'
                 ),
-                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -509,7 +486,6 @@ class WeChatAppTest extends TestCase
                     'description' => '公众平台官网链接',
                     'url' => 'url'
                 ),
-                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -517,7 +493,6 @@ class WeChatAppTest extends TestCase
                 array(
                     'msgType' => null
                 ),
-                false
             ),
         );
     }

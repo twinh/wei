@@ -56,13 +56,6 @@ class WeChatApp extends Base
     );
 
     /**
-     * Whether return the mark message or not
-     *
-     * @var bool
-     */
-    protected $mark = false;
-
-    /**
      * @var string
      * @todo better name
      */
@@ -376,16 +369,13 @@ class WeChatApp extends Base
      * Generate text message for output
      *
      * @param string $content
-     * @param bool $mark Whether mark the message or not
      * @return \SimpleXMLElement
      */
-    public function sendText($content, $mark = null)
+    public function sendText($content)
     {
         $xml = $this->createXml();
-
         $this->addCDataChild($xml, 'Content', $content);
-
-        return $this->send('text', $xml, $mark);
+        return $this->send('text', $xml);
     }
 
     /**
@@ -395,10 +385,9 @@ class WeChatApp extends Base
      * @param string $description The description display blow the title
      * @param string $url The music URL for player
      * @param string $hqUrl The HQ music URL for player when user in WIFI
-     * @param string $mark Whether mark the message or not
      * @return \SimpleXMLElement
      */
-    public function sendMusic($title, $description, $url, $hqUrl = null, $mark = null)
+    public function sendMusic($title, $description, $url, $hqUrl = null)
     {
         $xml    = $this->createXml();
         $music  = $xml->addChild('Music');
@@ -409,7 +398,7 @@ class WeChatApp extends Base
             ->addCDataChild($music, 'MusicUrl', $url)
             ->addCDataChild($music, 'HQMusicUrl', $hqUrl);
 
-        return $this->send('music', $xml, $mark);
+        return $this->send('music', $xml);
     }
 
     /**
@@ -443,10 +432,9 @@ class WeChatApp extends Base
      * ```
      *
      * @param array $articles The article array
-     * @param bool $mark Whenter mark the message or not
      * @return \SimpleXMLElement
      */
-    public function sendArticle(array $articles, $mark = null)
+    public function sendArticle(array $articles)
     {
         $xml = $this->createXml();
 
@@ -473,24 +461,12 @@ class WeChatApp extends Base
                 ->addCDataChild($item, 'Url', $article['url']);
         }
 
-        return $this->send('news', $xml, $mark);
+        return $this->send('news', $xml);
     }
 
     public function isValid()
     {
         return $this->valid;
-    }
-
-    /**
-     * Whether return the mark message or not
-     *
-     * @param bool $bool
-     * @return WeChatApp
-     */
-    public function setMark($bool)
-    {
-        $this->mark = (bool)$bool;
-        return $this;
     }
 
     /**
@@ -712,10 +688,9 @@ class WeChatApp extends Base
      *
      * @param string $type The type of message
      * @param \SimpleXMLElement $xml The xml object
-     * @param null|bool $mark $mark Whether mark the message or not
      * @return \SimpleXMLElement
      */
-    protected function send($type, SimpleXMLElement $xml, $mark = null)
+    protected function send($type, SimpleXMLElement $xml)
     {
         $this
             ->addCDataChild($xml, 'ToUserName', $this->fromUserName)
@@ -723,7 +698,6 @@ class WeChatApp extends Base
             ->addCDataChild($xml, 'MsgType', $type);
 
         $xml->addChild('CreateTime', time());
-        $xml->addChild('FuncFlag', (int)(is_bool($mark) ? $mark : $this->mark));
 
         return $xml;
     }
@@ -736,7 +710,6 @@ class WeChatApp extends Base
     protected function createXml()
     {
         $xml = new SimpleXMLElement('<xml/>');
-
         return $xml;
     }
 
