@@ -71,7 +71,7 @@ downloadOption | array     | 见下表    | 调用`download`方法的相关选�
 beforeSend     | callable  | 无        | 在发送响应前调用的回调
 afterSend      | callable  | 无        | 在发送响应后调用的回调
 
-#### `cookieOption`默认选项
+#### 选项: cookieOption
 
 名称      | 类型      | 默认值    | 说明
 ----------|-----------|-----------|------
@@ -82,7 +82,7 @@ secure    | bool      | false     | 是否只通过HTTPS安全连接来发送,�
 httpOnly  | bool      | false     | 是否只通过HTTP协议发送cookie,如果是,客户端javascript将无法读取到该cookie
 raw       | bool      | false     | 是否发送为不经过URL解码的cookie
 
-#### `downloadOption`默认选项
+#### 选项: downloadOption
 
 名称          | 类型   | 默认值                 | 说明
 --------------|--------|------------------------|------
@@ -99,7 +99,7 @@ disposition   | string | attachment             | 下载的方式,可选项为`i
 $response   | Widget\Response | 当前HTTP响应对象
 $content    | string          | 发送响应的内容
 
-##### 回调: afterSend($response)
+#### 回调: afterSend($response)
 
 名称        | 类型            | 说明
 ------------|-----------------|------
