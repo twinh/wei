@@ -11020,14 +11020,26 @@
 <tr>
 <td>cookieOption</td>
 <td>array</td>
-<td>-</td>
-<td>详见下表</td>
+<td>见下表</td>
+<td>设置cookie的相关选项</td>
 </tr>
 <tr>
 <td>downloadOption</td>
 <td>array</td>
-<td>-</td>
-<td>详见下表</td>
+<td>见下表</td>
+<td>调用<code>download</code>方法的相关选项</td>
+</tr>
+<tr>
+<td>beforeSend</td>
+<td>callable</td>
+<td>无</td>
+<td>在发送响应前调用的回调</td>
+</tr>
+<tr>
+<td>afterSend</td>
+<td>callable</td>
+<td>无</td>
+<td>在发送响应后调用的回调</td>
 </tr>
 </tbody>
 </table><h4>
@@ -11108,6 +11120,41 @@
 <td>下载的方式,可选项为<code>inline</code>或<code>attachment</code>,如果是<code>inline</code>,浏览器会先尝试直接在浏览器中打开,如果是<code>attachment</code>,浏览器将直接弹出下载对话框</td>
 </tr>
 </tbody>
+</table><h4>回调: beforeSend</h4>
+
+<h4>beforeSend($response, $content)</h4>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$response</td>
+<td>Widget\Response</td>
+<td>当前HTTP响应对象</td>
+</tr>
+<tr>
+<td>$content</td>
+<td>string</td>
+<td>发送响应的内容</td>
+</tr>
+</tbody>
+</table><h5>回调: afterSend($response)</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$response</td>
+<td>Widget\Response</td>
+<td>当前HTTP响应对象</td>
+</tr></tbody>
 </table><h3>方法</h3>
 
 <h4>response($content, $status = null)</h4>
