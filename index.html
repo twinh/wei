@@ -10943,7 +10943,7 @@
 <div class="highlight"><pre><code class="php"><span class="s1">'Hello World'</span>
 </code></pre></div>
 
-<h4>获取上面案例中HTTP响应的完整内容</h4>
+<h3>获取上面案例中HTTP响应的完整内容</h3>
 
 <div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">response</span><span class="p">;</span>
 </code></pre></div>
@@ -10955,9 +10955,9 @@
 <span class="s1">Hello World'</span>
 </code></pre></div>
 
-<h3>下载指定的文件</h3>
+<h3>让浏览器弹出下载对话框,下载指定的文件</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">download</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">download</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">);</span>
 </code></pre></div>
 
 <h4>运行结果</h4>
@@ -10967,7 +10967,7 @@
 <h3>逐个打印1-10的数字到浏览器窗口,每隔一秒输出一个</h3>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 关闭缓冲区,发送HTTP响应等</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">flush</span><span class="p">();</span>
+<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">flush</span><span class="p">();</span>
 
 <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="nv">$i</span><span class="p">;</span>
@@ -11210,7 +11210,7 @@
 
 <p>下载指定的文件</p>
 
-<h4>flush($content = null, $status = null)</h4>
+<h4>response-&gt;flush($content = null, $status = null)</h4>
 
 <p>关闭缓冲区,让后台脚本实时输出内容到浏览器</p>
   </section>
