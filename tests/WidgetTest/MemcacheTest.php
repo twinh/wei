@@ -45,4 +45,9 @@ class MemcacheTest extends CacheTestCase
 
         $this->assertInstanceOf('\Widget\Memcache', $this->widget->testMemcache);
     }
+
+    public function testGetMemcacheObject()
+    {
+        $this->assertInstanceOf('Memcache', $this->memcache());
+    }
 }

@@ -62,6 +62,26 @@ class Memcache extends BaseCache
     }
 
     /**
+     * Returns the memcache object, retrieve or store an item
+     *
+     * @param string $key The name of item
+     * @param mixed $value The value of item
+     * @param int $expire The expire seconds, defaults to 0, means never expired
+     * @return mixed
+     */
+    public function __invoke($key = null, $value = null, $expire = 0)
+    {
+        switch (func_num_args()) {
+            case 0:
+                return $this->object;
+            case 1:
+                return $this->get($key);
+            default:
+                return $this->set($key, $value, $expire);
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function doGet($key)
