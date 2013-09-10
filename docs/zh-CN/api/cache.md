@@ -238,7 +238,7 @@ $key      | string    | 无        | 缓存的键名
 ----------|-----------|-----------|------
 $key      | string    | 无        | 缓存的键名
 
-#### cache->add($key, $value)
+#### cache->add($key, $value, $expire = 0)
 
 增加一项缓存,如果缓存已存在,返回false
 
@@ -250,6 +250,7 @@ $key      | string    | 无        | 缓存的键名
 ----------|-----------|-----------|------
 $key      | string    | 无        | 缓存的键名
 $value    | mixed     | 无        | 缓存的值,允许任意变量类型
+$expire   | int       | 0         | 缓存的有效期,默认为0秒,表示永不过期
 
 #### cache->replace($key, $value)
 
