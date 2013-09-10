@@ -90,9 +90,7 @@ filename      | string | null                   | 弹出下载对话框时显示
 type          | string | application/x-download | 指定HTTP内容类型（Content-Type）
 disposition   | string | attachment             | 下载的方式,可选项为`inline`或`attachment`,如果是`inline`,浏览器会先尝试直接在浏览器中打开,如果是`attachment`,浏览器将直接弹出下载对话框
 
-#### 回调: beforeSend
-
-#### beforeSend($response, $content)
+#### 回调: beforeSend($response, $content)
 
 名称        | 类型            | 说明
 ------------|-----------------|------
