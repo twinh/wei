@@ -1068,4 +1068,26 @@ class DbTest extends TestCase
 
         $this->assertEquals(2, $result);
     }
+
+    public function testSlaveDb()
+    {
+        // Generate slave db configuration name
+        $driver = $this->db->getDriver();
+        $configName = $driver . 'Slave.db';
+
+        // Set configuration for slave db
+        $options = $this->widget->getConfig('db');
+        $this->widget->setConfig($configName, $options);
+
+        $this->db->setOption('slaveDb', $configName);
+
+        $query = "SELECT 1 + 2";
+        $this->db->query($query);
+
+        /** @var $slaveDb \Widget\Db */
+        $slaveDb = $this->widget->get($configName);
+
+        $this->assertNotContains($query, $this->db->getQueries());
+        $this->assertContains($query, $slaveDb->getQueries());
+    }
 }

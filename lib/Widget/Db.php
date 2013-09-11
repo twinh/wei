@@ -202,6 +202,13 @@ class Db extends Base
     protected $queries = array();
 
     /**
+     * The salve db configuration name
+     *
+     * @var string
+     */
+    protected $slaveDb;
+
+    /**
      * Constructor
      *
      * @param array $options
@@ -503,6 +510,13 @@ class Db extends Base
      */
     public function query($sql, $params = array(), $types = array(), $returnRows = false)
     {
+        // A select query, using slave db if configured
+        if (!$returnRows && $this->slaveDb) {
+            /** @var $slaveDb \Widget\Db */
+            $slaveDb = $this->widget->get($this->slaveDb);
+            return $slaveDb->query($sql, $params, $types, $returnRows);
+        }
+
         $this->connect();
         $this->queries[] = $sql;
         if ($this->beforeQuery) {
