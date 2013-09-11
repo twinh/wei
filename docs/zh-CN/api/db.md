@@ -250,8 +250,6 @@ $slaveDb = $widget->slaveDb;
 $slaveDb->select('table', array('key' => 'value'));
 ```
 
-```
-
 调用方式
 --------
 
