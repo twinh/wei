@@ -1084,9 +1084,11 @@ class DbTest extends TestCase
         $query = "SELECT 1 + 2";
         $this->db->query($query);
 
+        // Receives the slave db widget
         /** @var $slaveDb \Widget\Db */
         $slaveDb = $this->widget->get($configName);
 
+        // Test that the query is execute by slave db, not the master db
         $this->assertNotContains($query, $this->db->getQueries());
         $this->assertContains($query, $slaveDb->getQueries());
     }
