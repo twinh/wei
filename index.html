@@ -2272,6 +2272,54 @@
 <span class="c1">//)</span>
 </code></pre></div>
 
+<h3>配置读写分离(master-slave)的数据库操作</h3>
+
+<p>通过<code>slaveDb</code>选项可配置备数据库,主要具有以下功能</p>
+
+<ul>
+<li>读操作使用slave数据库</li>
+<li>写操作使用master数据库</li>
+</ul><div class="highlight"><pre><code class="php"><span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="c1">// 主数据库微件的配置</span>
+    <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
+        <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'localhost'</span><span class="p">,</span>
+        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'widget'</span><span class="p">,</span>
+        <span class="s1">'charset'</span>   <span class="o">=&gt;</span> <span class="s1">'utf8'</span><span class="p">,</span>
+        <span class="s1">'user'</span>      <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
+        <span class="s1">'password'</span>  <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
+        <span class="c1">// 重要: 通过`slaveDb`选项指定备机数据库的配置名称</span>
+        <span class="s1">'slaveDb'</span>   <span class="o">=&gt;</span> <span class="s1">'slave.db'</span>
+    <span class="p">),</span>
+    <span class="c1">// 备机数据库微件的配置</span>
+    <span class="s1">'slave.db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
+        <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'slave-host'</span><span class="p">,</span>
+        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'widget'</span><span class="p">,</span>
+        <span class="s1">'charset'</span>   <span class="o">=&gt;</span> <span class="s1">'utf-8'</span><span class="p">,</span>
+        <span class="s1">'user'</span>      <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
+        <span class="s1">'password'</span>  <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">));</span>
+
+<span class="c1">// 获取主数据库微件对象</span>
+<span class="nv">$db</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">;</span>
+
+<span class="c1">// 执行写操作,使用主数据库</span>
+<span class="nv">$db</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="s1">'table'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">));</span>
+<span class="nv">$db</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="s1">'table'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'set'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">'where'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">))</span>
+
+<span class="c1">// 执行读操作,使用备数据库</span>
+<span class="nv">$db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">'table'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">));</span>
+<span class="nv">$db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'table'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">));</span>
+
+<span class="c1">// 获取备数据库微件对象</span>
+<span class="nv">$slaveDb</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">slaveDb</span><span class="p">;</span>
+
+<span class="c1">// 直接使用备数据库操作</span>
+<span class="nv">$slaveDb</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">'table'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">));</span>
+</code></pre></div>
+
 <h3>SQL查询构建器</h3>
 
 <p>如果增删查改(CRUD)操作和Active Record模式还不能满足您的需求,你可以尝试使用QueryBuilder来生成更复杂的SQL语句</p>
@@ -2375,6 +2423,12 @@
 <td>string</td>
 <td>无</td>
 <td>自定义记录类的命名空间</td>
+</tr>
+<tr>
+<td>slaveDb</td>
+<td>string</td>
+<td>无</td>
+<td>Slave数据库(用于读查询)的配置名称</td>
 </tr>
 <tr>
 <td>beforeConnect</td>
