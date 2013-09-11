@@ -9,6 +9,7 @@ Db
 ----
 
 ### 增删查改(CRUD)操作
+
 ```php
 // 插入数据
 widget()->db->insert('user', array(
@@ -39,6 +40,7 @@ Active Record模式是将数据表的每一行映射为一个对象,数据表的
 完整的介绍请查看维基百科的说明[Active Record](http://zh.wikipedia.org/wiki/Active_Record)
 
 #### 创建记录并保存
+
 ```php
 // 创建一个新的用户记录对象
 /* @var $user \Widget\Db\Record */
@@ -56,6 +58,7 @@ $user->save();
 ```
 
 #### 查找并更新记录数据
+
 ```php
 // 查找主键为1的用户
 $user = widget()->db->find('user', '1');
@@ -71,6 +74,7 @@ $user->save();
 ```
 
 #### 删除记录
+
 ```php
 // 查找主键为1的用户
 $user = widget()->db->user(1);
@@ -171,6 +175,7 @@ findAll     | $table, $conditions | Widget\Db\Collection对象
 query       | $sql                | PDOStatement对象
 
 ### 通过beforeQuery记录SQL日志
+
 ```php
 $widget = widget(array(
     'db' => array(
@@ -302,6 +307,18 @@ $table    | string | 数据表的名称,如`user`,或带别名形式的`user u`
 -------|--------|------
 $table | string | 要插入的数据表名称
 $data  | array  | 要插入的数据,数组的键名是数据表的字段名称,值是字段的值
+
+#### db->insertBatch($table, $data = array())
+向指定的数据表插入多条数据(目前不支持`SQLite`)
+
+**返回:** `int` 受影响的行数
+
+**参数**
+
+名称   | 类型   | 说明
+-------|--------|------
+$table | string | 要插入的数据表名称
+$data  | array  | 要插入的二维数组数据
 
 #### db->lastInsertId($sequence = null)
 获取最后插入数据表的自增编号
