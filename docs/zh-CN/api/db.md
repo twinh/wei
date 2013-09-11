@@ -195,6 +195,55 @@ $widget->db->query("SELECT DATE('now')");
 //)
 ```
 
+### 配置读写分离(master-slave)的数据库操作
+
+通过`slaveDb`选项可配置备数据库,主要具有以下功能
+
+* 读操作使用slave数据库
+* 写操作使用master数据库
+
+```php
+$widget = widget(array(
+    // 主数据库微件的配置
+    'db' => array(
+        'driver'    => 'mysql',
+        'host'      => 'localhost',
+        'dbname'    => 'widget',
+        'charset'   => 'utf8',
+        'user'      => 'root',
+        'password'  => '123456',
+        // 重要: 通过`slaveDb`选项指定备机数据库的配置名称
+        'slaveDb'   => 'slave.db'
+    ),
+    // 备机数据库微件的配置
+    'slave.db' => array(
+        'driver'    => 'mysql',
+        'host'      => 'slave-host',
+        'dbname'    => 'widget',
+        'charset'   => 'utf-8',
+        'user'      => 'root',
+        'password'  => '123456',
+    ),
+));
+
+// 获取主数据库微件对象
+$db = $widget->db;
+
+// 执行写操作,使用主数据库
+$db->insert('table', array('key' => 'value'));
+$db->update('table', array('set' => 'value'), array('where' => 'value'))
+
+// 执行读操作,使用备数据库
+$db->select('table', array('key' => 'value'));
+$db->find('table', array('key' => 'value'));
+
+// 获取备数据库微件对象
+$slaveDb = $widget->slaveDb;
+
+// 直接使用备数据库操作
+$slaveDb->select('table', array('key' => 'value'));
+```
+
 ### SQL查询构建器
 
 如果增删查改(CRUD)操作和Active Record模式还不能满足您的需求,你可以尝试使用QueryBuilder来生成更复杂的SQL语句
@@ -222,6 +271,7 @@ recordClass     | string   | Widget\Db\Record     | 记录类的基础类名称
 collectionClass | string   | Widget\Db\Collection | 记录集合类的基础类名称
 recordClasses   | array    | array()              | 自定义记录类的数组,键名为数据表名称,值为记录类名称
 recordNamespace | string   | 无                   | 自定义记录类的命名空间
+slaveDb         | string   | 无                   | Slave数据库(用于读查询)的配置名称
 beforeConnect   | callback | 无                   | 在连接PDO之前触发的回调方法
 connectFails    | callback | 无                   | 连接PDO失败时触发的回调方法
 afterConnect    | callback | 无                   | 连接PDO完成(成功)时触发的回调方法
