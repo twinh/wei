@@ -2584,6 +2584,32 @@
 <td>要插入的数据,数组的键名是数据表的字段名称,值是字段的值</td>
 </tr>
 </tbody>
+</table><h4>db-&gt;insertBatch($table, $data = array())</h4>
+
+<p>向指定的数据表插入多条数据(目前不支持<code>SQLite</code>)</p>
+
+<p><strong>返回:</strong> <code>int</code> 受影响的行数</p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$table</td>
+<td>string</td>
+<td>要插入的数据表名称</td>
+</tr>
+<tr>
+<td>$data</td>
+<td>array</td>
+<td>要插入的二维数组数据</td>
+</tr>
+</tbody>
 </table><h4>db-&gt;lastInsertId($sequence = null)</h4>
 
 <p>获取最后插入数据表的自增编号</p>
