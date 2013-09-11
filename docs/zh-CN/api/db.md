@@ -3,7 +3,7 @@ Db
 
 基于PDO的数据库操作微件,支持基本的增删查改(CRUD)和流行的Active Record模式的数据库操作.
 
-目前支持`MySQL`,`SQLite`和`PostgreSQL`数据库.
+目前主要支持`MySQL`,`SQLite`和`PostgreSQL`数据库.
 
 案例
 ----
@@ -174,7 +174,7 @@ find        | $table, $conditions | Widget\Db\Record对象
 findAll     | $table, $conditions | Widget\Db\Collection对象
 query       | $sql                | PDOStatement对象
 
-### 通过beforeQuery记录SQL日志
+### 通过beforeQuery回调记录SQL日志
 
 ```php
 $widget = widget(array(
@@ -194,6 +194,12 @@ $widget->db->query("SELECT DATE('now')");
 //array (
 //)
 ```
+
+### SQL查询构建器
+
+如果增删查改(CRUD)操作和Active Record模式还不能满足您的需求,你可以尝试使用QueryBuilder来生成更复杂的SQL语句
+
+[查看QueryBuilder](queryBuilder.md)
 
 ### 配置读写分离(master-slave)的数据库操作
 
@@ -244,11 +250,7 @@ $slaveDb = $widget->slaveDb;
 $slaveDb->select('table', array('key' => 'value'));
 ```
 
-### SQL查询构建器
-
-如果增删查改(CRUD)操作和Active Record模式还不能满足您的需求,你可以尝试使用QueryBuilder来生成更复杂的SQL语句
-
-[查看QueryBuilder](queryBuilder.md)
+```
 
 调用方式
 --------
@@ -283,8 +285,8 @@ afterQuery      | callback | 无                   | 在执行SQL语句之后触
 驱动类型 | 选项
 ---------|------
 mysql    | user, password, host, port, dbname, unixSocket, charset
-sqlite   | user, password, host, port, dbname
-pgsql    | path
+pgsql    | user, password, host, port, dbname
+sqlite   | path
 
 ### 回调
 
