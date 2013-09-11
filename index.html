@@ -2326,356 +2326,787 @@
 <span class="nv">$slaveDb</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">'table'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">));</span>
 </code></pre></div>
 
-<div class="highlight"><pre><code class="php"><span class="err">调用方式</span>
-<span class="o">--------</span>
-
-<span class="c1">### 选项</span>
-
-<span class="err">名称</span>            <span class="o">|</span>  <span class="err">类型</span>    <span class="o">|</span> <span class="err">默认值</span>               <span class="o">|</span> <span class="err">说明</span>
-<span class="o">----------------|----------|----------------------|------</span>
-<span class="nx">dirver</span>          <span class="o">|</span> <span class="nx">string</span>   <span class="o">|</span> <span class="nx">mysql</span>                <span class="o">|</span> <span class="err">数据库驱动类型</span><span class="p">,</span><span class="err">可以是</span><span class="sb">`mysql`</span><span class="p">,</span><span class="sb">`sqlite`</span><span class="err">或</span><span class="sb">`pgsql`</span>
-<span class="nx">user</span>            <span class="o">|</span> <span class="nx">string</span>   <span class="o">|</span> <span class="err">无</span>                   <span class="o">|</span> <span class="err">连接数据库的用户名</span>
-<span class="nx">password</span>        <span class="o">|</span> <span class="nx">string</span>   <span class="o">|</span> <span class="err">无</span>                   <span class="o">|</span> <span class="err">连接数据库的密码</span>
-<span class="nx">host</span>            <span class="o">|</span> <span class="nx">string</span>   <span class="o">|</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>            <span class="o">|</span> <span class="err">数据库所在的主机地址</span><span class="p">,</span><span class="err">仅驱动为</span><span class="nx">mysql</span><span class="err">和</span><span class="nx">pgsql</span><span class="err">时有效</span>
-<span class="nx">port</span>            <span class="o">|</span> <span class="nx">string</span>   <span class="o">|</span> <span class="err">无</span>                   <span class="o">|</span> <span class="err">数据库服务器运行的端口</span><span class="p">,</span><span class="err">仅驱动为</span><span class="nx">mysql</span><span class="err">和</span><span class="nx">pgsql</span><span class="err">时有效</span>
-<span class="nx">dbname</span>          <span class="o">|</span> <span class="nx">string</span>   <span class="o">|</span> <span class="err">无</span>                   <span class="o">|</span> <span class="err">数据库名称</span><span class="p">,</span><span class="err">仅驱动为</span><span class="nx">mysql</span><span class="err">和</span><span class="nx">pgsql</span><span class="err">时有效</span>
-<span class="nx">unixSocket</span>      <span class="o">|</span> <span class="nx">string</span>   <span class="o">|</span> <span class="err">无</span>                   <span class="o">|</span> <span class="nx">MySQL</span><span class="err">数据库的</span><span class="nx">Unix</span> <span class="nx">socket</span><span class="err">连接文件</span><span class="p">,</span><span class="err">仅驱动为</span><span class="nx">mysql</span><span class="err">时有效</span>
-<span class="nx">charset</span>         <span class="o">|</span> <span class="nx">string</span>   <span class="o">|</span> <span class="err">无</span>                   <span class="o">|</span> <span class="err">连接数据库的字符集</span><span class="p">,</span><span class="err">仅驱动为</span><span class="nx">mysql</span><span class="err">时有效</span>
-<span class="nx">path</span>            <span class="o">|</span> <span class="nx">string</span>   <span class="o">|</span> <span class="err">无</span>                   <span class="o">|</span> <span class="nx">SQLite</span><span class="err">数据库所在的路径</span><span class="p">,</span><span class="err">如果存储在内存中</span><span class="p">,</span><span class="err">使用</span><span class="sb">`:memory:`</span>
-<span class="nx">attrs</span>           <span class="o">|</span> <span class="k">array</span>    <span class="o">|</span> <span class="k">array</span><span class="p">()</span>              <span class="o">|</span> <span class="nx">PDO</span><span class="err">的属性配置</span>
-<span class="nx">recordClass</span>     <span class="o">|</span> <span class="nx">string</span>   <span class="o">|</span> <span class="nx">Widget\Db\Record</span>     <span class="o">|</span> <span class="err">记录类的基础类名称</span>
-<span class="nx">collectionClass</span> <span class="o">|</span> <span class="nx">string</span>   <span class="o">|</span> <span class="nx">Widget\Db\Collection</span> <span class="o">|</span> <span class="err">记录集合类的基础类名称</span>
-<span class="nx">recordClasses</span>   <span class="o">|</span> <span class="k">array</span>    <span class="o">|</span> <span class="k">array</span><span class="p">()</span>              <span class="o">|</span> <span class="err">自定义记录类的数组</span><span class="p">,</span><span class="err">键名为数据表名称</span><span class="p">,</span><span class="err">值为记录类名称</span>
-<span class="nx">recordNamespace</span> <span class="o">|</span> <span class="nx">string</span>   <span class="o">|</span> <span class="err">无</span>                   <span class="o">|</span> <span class="err">自定义记录类的命名空间</span>
-<span class="nx">slaveDb</span>         <span class="o">|</span> <span class="nx">string</span>   <span class="o">|</span> <span class="err">无</span>                   <span class="o">|</span> <span class="nx">Slave</span><span class="err">数据库</span><span class="p">(</span><span class="err">用于读查询</span><span class="p">)</span><span class="err">的配置名称</span>
-<span class="nx">beforeConnect</span>   <span class="o">|</span> <span class="nx">callback</span> <span class="o">|</span> <span class="err">无</span>                   <span class="o">|</span> <span class="err">在连接</span><span class="nx">PDO</span><span class="err">之前触发的回调方法</span>
-<span class="nx">connectFails</span>    <span class="o">|</span> <span class="nx">callback</span> <span class="o">|</span> <span class="err">无</span>                   <span class="o">|</span> <span class="err">连接</span><span class="nx">PDO</span><span class="err">失败时触发的回调方法</span>
-<span class="nx">afterConnect</span>    <span class="o">|</span> <span class="nx">callback</span> <span class="o">|</span> <span class="err">无</span>                   <span class="o">|</span> <span class="err">连接</span><span class="nx">PDO</span><span class="err">完成</span><span class="p">(</span><span class="err">成功</span><span class="p">)</span><span class="err">时触发的回调方法</span>
-<span class="nx">beforeQuery</span>     <span class="o">|</span> <span class="nx">callback</span> <span class="o">|</span> <span class="err">无</span>                   <span class="o">|</span> <span class="err">在执行</span><span class="nx">SQL</span><span class="err">语句之前触发的回调方法</span>
-<span class="nx">afterQuery</span>      <span class="o">|</span> <span class="nx">callback</span> <span class="o">|</span> <span class="err">无</span>                   <span class="o">|</span> <span class="err">在执行</span><span class="nx">SQL</span><span class="err">语句之后触发的回调方法</span>
-
-<span class="c1">#### 不同驱动连接到数据库的私有选项</span>
-
-<span class="err">驱动类型</span> <span class="o">|</span> <span class="err">选项</span>
-<span class="o">---------|------</span>
-<span class="nx">mysql</span>    <span class="o">|</span> <span class="nx">user</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">host</span><span class="p">,</span> <span class="nx">port</span><span class="p">,</span> <span class="nx">dbname</span><span class="p">,</span> <span class="nx">unixSocket</span><span class="p">,</span> <span class="nx">charset</span>
-<span class="nx">pgsql</span>    <span class="o">|</span> <span class="nx">user</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">host</span><span class="p">,</span> <span class="nx">port</span><span class="p">,</span> <span class="nx">dbname</span>
-<span class="nx">sqlite</span>   <span class="o">|</span> <span class="nx">path</span>
-
-<span class="c1">### 回调</span>
-
-<span class="c1">#### beforeConnect</span>
-
-<span class="err">在连接</span><span class="nx">PDO</span><span class="err">之前触发的回调方法</span>
-
-<span class="err">名称</span>    <span class="o">|</span> <span class="err">类型</span>      <span class="o">|</span> <span class="err">说明</span>
-<span class="o">--------|-----------|------</span>
-<span class="nv">$db</span>     <span class="o">|</span> <span class="nx">Widget\Db</span> <span class="o">|</span> <span class="err">当前</span><span class="nx">Db</span><span class="err">微件对象</span>
-
-<span class="c1">#### connectFails</span>
-
-<span class="err">连接</span><span class="nx">PDO</span><span class="err">失败时触发的回调方法</span>
-
-<span class="err">名称</span>    <span class="o">|</span> <span class="err">类型</span>         <span class="o">|</span> <span class="err">说明</span>
-<span class="o">--------|--------------|------</span>
-<span class="nv">$db</span>     <span class="o">|</span> <span class="nx">Widget\Db</span>    <span class="o">|</span> <span class="err">当前</span><span class="nx">Db</span><span class="err">微件对象</span>
-<span class="nv">$e</span>      <span class="o">|</span> <span class="nx">PDOException</span> <span class="o">|</span> <span class="nx">PDO</span><span class="err">异常对象</span>
-
-<span class="c1">#### afterConnect</span>
-
-<span class="err">连接</span><span class="nx">PDO</span><span class="err">完成</span><span class="p">(</span><span class="err">成功</span><span class="p">)</span><span class="err">时触发的回调方法</span>
-
-<span class="err">名称</span>    <span class="o">|</span> <span class="err">类型</span>         <span class="o">|</span> <span class="err">说明</span>
-<span class="o">--------|--------------|------</span>
-<span class="nv">$db</span>     <span class="o">|</span> <span class="nx">Widget\Db</span>    <span class="o">|</span> <span class="err">当前</span><span class="nx">Db</span><span class="err">微件对象</span>
-<span class="nv">$pdo</span>    <span class="o">|</span> <span class="nx">PDO</span>          <span class="o">|</span> <span class="nx">PDO</span><span class="err">对象</span>
-
-<span class="c1">#### beforeQuery</span>
-
-<span class="err">在执行</span><span class="nx">SQL</span><span class="err">语句之前触发的回调方法</span>
-
-<span class="err">名称</span>    <span class="o">|</span> <span class="err">类型</span>      <span class="o">|</span> <span class="err">说明</span>
-<span class="o">--------|-----------|------</span>
-<span class="nv">$sql</span>    <span class="o">|</span> <span class="nx">string</span>    <span class="o">|</span> <span class="err">当前执行的</span><span class="nx">SQL</span><span class="err">语句</span>
-<span class="nv">$params</span> <span class="o">|</span> <span class="k">array</span>     <span class="o">|</span> <span class="err">执行语句的参数</span>
-<span class="nv">$types</span>  <span class="o">|</span> <span class="k">array</span>     <span class="o">|</span> <span class="err">执行语句的参数类型</span>
-<span class="nv">$db</span>     <span class="o">|</span> <span class="nx">Widget\Db</span> <span class="o">|</span> <span class="err">当前</span><span class="nx">Db</span><span class="err">微件对象</span>
-
-<span class="c1">#### afterQuery</span>
-
-<span class="err">在执行</span><span class="nx">SQL</span><span class="err">语句之后触发的回调方法</span>
-
-<span class="err">名称</span>    <span class="o">|</span> <span class="err">类型</span>      <span class="o">|</span> <span class="err">说明</span>
-<span class="o">--------|-----------|------</span>
-<span class="nv">$db</span>     <span class="o">|</span> <span class="nx">Widget\Db</span> <span class="o">|</span> <span class="err">当前</span><span class="nx">Db</span><span class="err">微件对象</span>
-
-<span class="c1">### 方法</span>
-
-<span class="c1">#### db($table = null)</span>
-<span class="err">根据数据表名称</span><span class="p">,</span><span class="err">创建一个新</span><span class="nx">Query</span> <span class="nx">Builder</span><span class="err">对象</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`Widget\Db\QueryBuilder`</span>
-
-<span class="o">**</span><span class="err">参数</span><span class="o">**</span>
-
-<span class="err">名称</span>      <span class="o">|</span> <span class="err">类型</span>   <span class="o">|</span> <span class="err">说明</span>
-<span class="o">----------|--------|------</span>
-<span class="nv">$table</span>    <span class="o">|</span> <span class="nx">string</span> <span class="o">|</span> <span class="err">数据表的名称</span><span class="p">,</span><span class="err">如</span><span class="sb">`user`</span><span class="p">,</span><span class="err">或带别名形式的</span><span class="sb">`user u`</span>
-
-<span class="c1">#### db-&gt;insert($table, $data = array())</span>
-<span class="err">向指定的数据表插入一条数据</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`int`</span> <span class="err">受影响的行数</span>
-
-<span class="o">**</span><span class="err">参数</span><span class="o">**</span>
-
-<span class="err">名称</span>   <span class="o">|</span> <span class="err">类型</span>   <span class="o">|</span> <span class="err">说明</span>
-<span class="o">-------|--------|------</span>
-<span class="nv">$table</span> <span class="o">|</span> <span class="nx">string</span> <span class="o">|</span> <span class="err">要插入的数据表名称</span>
-<span class="nv">$data</span>  <span class="o">|</span> <span class="k">array</span>  <span class="o">|</span> <span class="err">要插入的数据</span><span class="p">,</span><span class="err">数组的键名是数据表的字段名称</span><span class="p">,</span><span class="err">值是字段的值</span>
-
-<span class="c1">#### db-&gt;insertBatch($table, $data = array())</span>
-<span class="err">向指定的数据表插入多条数据</span><span class="p">(</span><span class="err">目前不支持</span><span class="sb">`SQLite`</span><span class="p">)</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`int`</span> <span class="err">受影响的行数</span>
-
-<span class="o">**</span><span class="err">参数</span><span class="o">**</span>
-
-<span class="err">名称</span>   <span class="o">|</span> <span class="err">类型</span>   <span class="o">|</span> <span class="err">说明</span>
-<span class="o">-------|--------|------</span>
-<span class="nv">$table</span> <span class="o">|</span> <span class="nx">string</span> <span class="o">|</span> <span class="err">要插入的数据表名称</span>
-<span class="nv">$data</span>  <span class="o">|</span> <span class="k">array</span>  <span class="o">|</span> <span class="err">要插入的二维数组数据</span>
-
-<span class="c1">#### db-&gt;lastInsertId($sequence = null)</span>
-<span class="err">获取最后插入数据表的自增编号</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`string`</span>
-
-<span class="o">**</span><span class="err">参数</span><span class="o">**</span>
-
-<span class="err">名称</span>      <span class="o">|</span> <span class="err">类型</span>   <span class="o">|</span> <span class="err">说明</span>
-<span class="o">----------|--------|------</span>
-<span class="nv">$sequence</span> <span class="o">|</span> <span class="nx">string</span> <span class="o">|</span> <span class="err">序列名称</span><span class="p">,</span><span class="err">数据库驱动为</span><span class="sb">`PostgreSQL`</span><span class="err">时才需要提供该参数</span>
-
-<span class="c1">#### db-&gt;update($table, $data = array(), $conditions = array())</span>
-<span class="err">根据条件更新数据表数据</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`int`</span> <span class="err">受影响的行数</span>
-
-<span class="o">**</span><span class="err">参数</span><span class="o">**</span>
-
-<span class="err">名称</span>        <span class="o">|</span> <span class="err">类型</span>   <span class="o">|</span> <span class="err">说明</span>
-<span class="o">------------|--------|------</span>
-<span class="nv">$table</span>      <span class="o">|</span> <span class="nx">string</span> <span class="o">|</span> <span class="err">要更新的数据表名称</span>
-<span class="nv">$data</span>       <span class="o">|</span> <span class="k">array</span>  <span class="o">|</span> <span class="err">要更新的数据</span>
-<span class="nv">$conditions</span> <span class="o">|</span> <span class="k">array</span>  <span class="o">|</span> <span class="err">更新语句的查询条件</span>
-
-<span class="c1">#### db-&gt;delete($table, $conditions = array())</span>
-<span class="err">根据条件删除数据表数据</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`int`</span> <span class="err">受影响的行数</span>
-
-<span class="o">**</span><span class="err">参数</span><span class="o">**</span>
-
-<span class="err">名称</span>        <span class="o">|</span> <span class="err">类型</span>   <span class="o">|</span> <span class="err">说明</span>
-<span class="o">------------|--------|------</span>
-<span class="nv">$table</span>      <span class="o">|</span> <span class="nx">string</span> <span class="o">|</span> <span class="err">要删除的数据表名称</span>
-<span class="nv">$conditions</span> <span class="o">|</span> <span class="k">array</span>  <span class="o">|</span> <span class="err">删除语句的查询条件</span>
-
-<span class="c1">#### db-&gt;select($table, $conditions = array())</span>
-<span class="err">根据条件查找数据表的一条记录</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`array`</span><span class="o">|</span><span class="sb">`false`</span> <span class="err">如果记录存在</span><span class="p">,</span><span class="err">返回记录数组</span><span class="p">,</span><span class="err">不存在返回</span><span class="sb">`false`</span>
-
-<span class="o">**</span><span class="err">参数</span><span class="o">**</span>
-
-<span class="err">名称</span>        <span class="o">|</span> <span class="err">类型</span>         <span class="o">|</span> <span class="err">说明</span>
-<span class="o">------------|--------------|------</span>
-<span class="nv">$table</span>      <span class="o">|</span> <span class="nx">string</span>       <span class="o">|</span> <span class="err">要查找的数据表名称</span>
-<span class="nv">$conditions</span> <span class="o">|</span> <span class="nx">string</span><span class="p">,</span><span class="k">array</span> <span class="o">|</span> <span class="err">查询条件</span><span class="p">,</span><span class="err">如果类型是字符串</span><span class="p">,</span><span class="err">表示主键的值</span><span class="p">,</span><span class="err">如果是数组</span><span class="p">,</span><span class="err">键名表示数据表字段</span><span class="p">,</span><span class="err">值表示字段的值</span>
-
-<span class="c1">#### db-&gt;selectAll($table, $conditions = array())</span>
-<span class="err">根据条件查找数据表的所有匹配记录</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`array`</span><span class="o">|</span><span class="sb">`false`</span> <span class="err">如果记录存在</span><span class="p">,</span><span class="err">返回二维记录数组</span><span class="p">,</span><span class="err">不存在返回</span><span class="sb">`false`</span>
-
-<span class="o">**</span><span class="err">参数</span><span class="o">**</span>
-
-<span class="err">名称</span>        <span class="o">|</span> <span class="err">类型</span>         <span class="o">|</span> <span class="err">说明</span>
-<span class="o">------------|--------------|------</span>
-<span class="nv">$table</span>      <span class="o">|</span> <span class="nx">string</span>       <span class="o">|</span> <span class="err">要查找的数据表名称</span>
-<span class="nv">$conditions</span> <span class="o">|</span> <span class="nx">string</span><span class="p">,</span><span class="k">array</span> <span class="o">|</span> <span class="err">查询条件</span><span class="p">,</span><span class="err">如果类型是字符串</span><span class="p">,</span><span class="err">表示主键的值</span><span class="p">,</span><span class="err">如果是数组</span><span class="p">,</span><span class="err">键名表示数据表字段</span><span class="p">,</span><span class="err">值表示字段的值</span>
-
-<span class="c1">#### db-&gt;fetch($sql, $params = array())</span>
-<span class="err">执行一条</span><span class="nx">SQL</span><span class="err">语句并返回第一条记录</span><span class="p">,</span><span class="err">主要用于</span><span class="nx">SELECT</span><span class="err">的</span><span class="nx">SQL</span><span class="err">语句</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`array`</span><span class="o">|</span><span class="sb">`false`</span> <span class="err">如果记录存在</span><span class="p">,</span><span class="err">返回记录数组</span><span class="p">,</span><span class="err">不存在返回</span><span class="sb">`false`</span>
-
-<span class="o">**</span><span class="err">参数</span><span class="o">**</span>
-
-<span class="err">名称</span>        <span class="o">|</span> <span class="err">类型</span>         <span class="o">|</span> <span class="err">说明</span>
-<span class="o">------------|--------------|------</span>
-<span class="nv">$sql</span>        <span class="o">|</span> <span class="nx">string</span>       <span class="o">|</span> <span class="err">要执行的</span><span class="nx">SQL</span><span class="err">语句</span>
-<span class="nv">$params</span>     <span class="o">|</span> <span class="k">array</span>        <span class="o">|</span> <span class="err">绑定到</span><span class="nx">SQL</span><span class="err">的参数</span>
-
-<span class="c1">#### db-&gt;fetchAll($sql, $params = array())</span>
-<span class="err">执行一条</span><span class="nx">SQL</span><span class="err">语句并返回所有记录</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`array`</span><span class="o">|</span><span class="sb">`false`</span> <span class="err">如果记录存在</span><span class="p">,</span><span class="err">返回二维记录数组</span><span class="p">,</span><span class="err">不存在返回</span><span class="sb">`false`</span>
-
-<span class="o">**</span><span class="err">参数</span><span class="o">**</span>
-
-<span class="err">名称</span>        <span class="o">|</span> <span class="err">类型</span>         <span class="o">|</span> <span class="err">说明</span>
-<span class="o">------------|--------------|------</span>
-<span class="nv">$sql</span>        <span class="o">|</span> <span class="nx">string</span>       <span class="o">|</span> <span class="err">要执行的</span><span class="nx">SQL</span><span class="err">语句</span>
-<span class="nv">$params</span>     <span class="o">|</span> <span class="k">array</span>        <span class="o">|</span> <span class="err">绑定到</span><span class="nx">SQL</span><span class="err">的参数</span>
-
-<span class="c1">#### db-&gt;fetchColumn($sql, $params = array(), $column = 0)</span>
-<span class="err">执行一条</span><span class="nx">SQL</span><span class="err">语句</span><span class="p">,</span><span class="err">并返回指定项目的值</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`string`</span>
-
-<span class="o">**</span><span class="err">参数</span><span class="o">**</span>
-
-<span class="err">名称</span>        <span class="o">|</span> <span class="err">类型</span>         <span class="o">|</span> <span class="err">说明</span>
-<span class="o">------------|--------------|------</span>
-<span class="nv">$sql</span>        <span class="o">|</span> <span class="nx">string</span>       <span class="o">|</span> <span class="err">要执行的</span><span class="nx">SQL</span><span class="err">语句</span>
-<span class="nv">$params</span>     <span class="o">|</span> <span class="k">array</span>        <span class="o">|</span> <span class="err">绑定到</span><span class="nx">SQL</span><span class="err">的参数</span>
-<span class="nv">$column</span>     <span class="o">|</span> <span class="nx">int</span>          <span class="o">|</span> <span class="err">返回第几项的值</span>
-
-<span class="c1">#### db-&gt;find($table, $conditions)</span>
-<span class="err">根据条件查找数据表的一条记录</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`Widget\Db\Record`</span><span class="o">|</span><span class="sb">`false`</span> <span class="err">如果记录存在</span><span class="p">,</span><span class="err">返回记录对象</span><span class="p">,</span><span class="err">否则返回</span><span class="sb">`false`</span>
-
-<span class="o">**</span><span class="err">参数</span><span class="o">**</span>
-
-<span class="err">名称</span>        <span class="o">|</span> <span class="err">类型</span>         <span class="o">|</span> <span class="err">说明</span>
-<span class="o">------------|--------------|------</span>
-<span class="nv">$table</span>      <span class="o">|</span> <span class="nx">string</span>       <span class="o">|</span> <span class="err">要查找的数据表名称</span>
-<span class="nv">$conditions</span> <span class="o">|</span> <span class="nx">string</span><span class="p">,</span><span class="k">array</span> <span class="o">|</span> <span class="err">查询条件</span><span class="p">,</span><span class="err">如果类型是字符串</span><span class="p">,</span><span class="err">表示主键的值</span><span class="p">,</span><span class="err">如果是数组</span><span class="p">,</span><span class="err">键名表示数据表字段</span><span class="p">,</span><span class="err">值表示字段的值</span>
-
-<span class="c1">#### db-&gt;findAll($table, $conditions)</span>
-<span class="err">根据条件查找数据表的所有匹配记录</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`Widget\Db\Collection`</span><span class="o">|</span><span class="sb">`false`</span> <span class="err">如果记录存在</span><span class="p">,</span><span class="err">返回集合对象</span><span class="p">,</span><span class="err">否则返回</span><span class="sb">`false`</span>
-
-<span class="o">**</span><span class="err">参数</span><span class="o">**</span>
-
-<span class="err">名称</span>        <span class="o">|</span> <span class="err">类型</span>         <span class="o">|</span> <span class="err">说明</span>
-<span class="o">------------|--------------|------</span>
-<span class="nv">$table</span>      <span class="o">|</span> <span class="nx">string</span>       <span class="o">|</span> <span class="err">要查找的数据表名称</span>
-<span class="nv">$conditions</span> <span class="o">|</span> <span class="nx">string</span><span class="p">,</span><span class="k">array</span> <span class="o">|</span> <span class="err">查询条件</span><span class="p">,</span><span class="err">如果类型是字符串</span><span class="p">,</span><span class="err">表示主键的值</span><span class="p">,</span><span class="err">如果是数组</span><span class="p">,</span><span class="err">键名表示数据表字段</span><span class="p">,</span><span class="err">值表示字段的值</span>
-
-<span class="c1">#### db-&gt;create($table, $data = array())</span>
-<span class="err">创建一个新的数据表记录对象</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`Widget\Db\Record`</span> <span class="err">记录对象</span>
-
-<span class="o">**</span><span class="err">参数</span><span class="o">**</span>
-
-<span class="err">名称</span>        <span class="o">|</span> <span class="err">类型</span>         <span class="o">|</span> <span class="err">说明</span>
-<span class="o">------------|--------------|------</span>
-<span class="nv">$table</span>      <span class="o">|</span> <span class="nx">string</span>       <span class="o">|</span> <span class="err">记录的数据表名称</span>
-<span class="nv">$data</span>       <span class="o">|</span> <span class="k">array</span>        <span class="o">|</span> <span class="err">初始化的数据</span>
-
-<span class="c1">#### db-&gt;findOrCreate($table, $id, $data = array())</span>
-<span class="err">根据条件查找数据表的一条记录</span><span class="p">,</span><span class="err">如果记录不存在</span><span class="p">,</span><span class="err">将根据</span><span class="sb">`$data`</span><span class="err">创建一条新的数据表记录对象</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`Widget\Db\Record`</span> <span class="err">记录对象</span>
-
-<span class="o">**</span><span class="err">参数</span><span class="o">**</span>
-
-<span class="err">名称</span>        <span class="o">|</span> <span class="err">类型</span>         <span class="o">|</span> <span class="err">说明</span>
-<span class="o">------------|--------------|------</span>
-<span class="nv">$table</span>      <span class="o">|</span> <span class="nx">string</span>       <span class="o">|</span> <span class="err">记录的数据表名称</span>
-<span class="nv">$id</span>         <span class="o">|</span> <span class="nx">string</span>       <span class="o">|</span> <span class="err">主键的值</span>
-<span class="nv">$data</span>       <span class="o">|</span> <span class="k">array</span>        <span class="o">|</span> <span class="err">初始化的数据</span>
-
-<span class="c1">#### db-&gt;executeUpdate($sql, $params = array())</span>
-<span class="err">执行一条</span><span class="nx">SQL</span><span class="err">语句</span><span class="p">,</span><span class="err">并返回影响的行数</span><span class="p">,</span><span class="err">主要用于</span><span class="nx">INSERT</span><span class="o">/</span><span class="nx">UPDATE</span><span class="o">/</span><span class="nx">DELETE</span><span class="err">操作的</span><span class="nx">SQL</span><span class="err">语句</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`int`</span> <span class="err">受影响的行数</span>
-
-<span class="o">**</span><span class="err">参数</span><span class="o">**</span>
-
-<span class="err">名称</span>        <span class="o">|</span> <span class="err">类型</span>         <span class="o">|</span> <span class="err">说明</span>
-<span class="o">------------|--------------|------</span>
-<span class="nv">$sql</span>        <span class="o">|</span> <span class="nx">string</span>       <span class="o">|</span> <span class="err">要执行的</span><span class="nx">SQL</span><span class="err">语句</span>
-<span class="nv">$params</span>     <span class="o">|</span> <span class="k">array</span>        <span class="o">|</span> <span class="err">绑定到</span><span class="nx">SQL</span><span class="err">的参数</span>
-
-<span class="c1">#### db-&gt;query($sql, $params = array())</span>
-<span class="err">执行一条</span><span class="nx">SQL</span><span class="err">语句</span><span class="p">,</span><span class="err">并返回</span><span class="sb">`PDOStatement`</span><span class="err">对象</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`PDOStatement`</span>
-
-<span class="err">名称</span>        <span class="o">|</span> <span class="err">类型</span>         <span class="o">|</span> <span class="err">说明</span>
-<span class="o">------------|--------------|------</span>
-<span class="nv">$sql</span>        <span class="o">|</span> <span class="nx">string</span>       <span class="o">|</span> <span class="err">要执行的</span><span class="nx">SQL</span><span class="err">语句</span>
-<span class="nv">$params</span>     <span class="o">|</span> <span class="k">array</span>        <span class="o">|</span> <span class="err">绑定到</span><span class="nx">SQL</span><span class="err">的参数</span>
-
-<span class="c1">#### db-&gt;errorCode()</span>
-<span class="err">获取</span><span class="nx">PDO</span><span class="err">错误代号</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`int`</span>
-
-<span class="c1">#### db-&gt;errorInfo()</span>
-<span class="err">获取</span><span class="nx">PD</span><span class="err">错误信息数组</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`array`</span>
-
-<span class="c1">#### db-&gt;isConnected()</span>
-<span class="err">检查是否已经连接到数据库</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`bool`</span>
-
-<span class="c1">#### db-&gt;getRecordClass($table)</span>
-<span class="err">根据数据表名称获取记录类名称</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`string`</span> <span class="err">如果记录类不存在</span><span class="p">,</span><span class="err">返回默认类</span><span class="sb">`Widget\Db\Record`</span>
-
-<span class="c1">#### db-&gt;getUser()</span>
-<span class="err">获取连接数据库的用户名称</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`string`</span>
-
-<span class="c1">#### db-&gt;getPassword()</span>
-<span class="err">获取连接数据库的用户密码</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`string`</span>
-
-<span class="c1">#### db-&gt;getHost()</span>
-<span class="err">获取数据库所在的主机地址</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`string`</span>
-
-<span class="c1">#### db-&gt;getPort()</span>
-<span class="err">获取数据库服务器运行的端口</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`string`</span>
-
-<span class="c1">#### db-&gt;getDbname()</span>
-<span class="err">获取数据库的名称</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`string`</span>
-
-<span class="c1">#### db-&gt;getDsn()</span>
-<span class="err">获取连接到</span><span class="nx">PDO</span><span class="err">的</span><span class="nx">DSN</span><span class="err">字符串</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`string`</span>
-
-<span class="c1">#### db-&gt;getLastSql()</span>
-<span class="err">获取最后执行的</span><span class="nx">SQL</span><span class="err">语句</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`string`</span>
-
-<span class="c1">### 魔术方法</span>
-
-<span class="c1">#### db-&gt;$table($conditions)</span>
-<span class="err">根据条件查找数据表的一行记录</span><span class="p">,</span><span class="err">返回的是一个</span><span class="sb">`Widget\Db\Record`</span><span class="err">对象</span><span class="p">,</span><span class="err">等于</span><span class="sb">`db-&gt;find($table, $conditions)`</span>
-
-<span class="o">**</span><span class="err">返回</span><span class="o">:**</span> <span class="sb">`Widget\Db\Record`</span>
-</code></pre></div>
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>dirver</td>
+<td>string</td>
+<td>mysql</td>
+<td>数据库驱动类型,可以是<code>mysql</code>,<code>sqlite</code>或<code>pgsql</code>
+</td>
+</tr>
+<tr>
+<td>user</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的密码</td>
+</tr>
+<tr>
+<td>host</td>
+<td>string</td>
+<td>127.0.0.1</td>
+<td>数据库所在的主机地址,仅驱动为mysql和pgsql时有效</td>
+</tr>
+<tr>
+<td>port</td>
+<td>string</td>
+<td>无</td>
+<td>数据库服务器运行的端口,仅驱动为mysql和pgsql时有效</td>
+</tr>
+<tr>
+<td>dbname</td>
+<td>string</td>
+<td>无</td>
+<td>数据库名称,仅驱动为mysql和pgsql时有效</td>
+</tr>
+<tr>
+<td>unixSocket</td>
+<td>string</td>
+<td>无</td>
+<td>MySQL数据库的Unix socket连接文件,仅驱动为mysql时有效</td>
+</tr>
+<tr>
+<td>charset</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的字符集,仅驱动为mysql时有效</td>
+</tr>
+<tr>
+<td>path</td>
+<td>string</td>
+<td>无</td>
+<td>SQLite数据库所在的路径,如果存储在内存中,使用<code>:memory:</code>
+</td>
+</tr>
+<tr>
+<td>attrs</td>
+<td>array</td>
+<td>array()</td>
+<td>PDO的属性配置</td>
+</tr>
+<tr>
+<td>recordClass</td>
+<td>string</td>
+<td>Widget\Db\Record</td>
+<td>记录类的基础类名称</td>
+</tr>
+<tr>
+<td>collectionClass</td>
+<td>string</td>
+<td>Widget\Db\Collection</td>
+<td>记录集合类的基础类名称</td>
+</tr>
+<tr>
+<td>recordClasses</td>
+<td>array</td>
+<td>array()</td>
+<td>自定义记录类的数组,键名为数据表名称,值为记录类名称</td>
+</tr>
+<tr>
+<td>recordNamespace</td>
+<td>string</td>
+<td>无</td>
+<td>自定义记录类的命名空间</td>
+</tr>
+<tr>
+<td>slaveDb</td>
+<td>string</td>
+<td>无</td>
+<td>Slave数据库(用于读查询)的配置名称</td>
+</tr>
+<tr>
+<td>beforeConnect</td>
+<td>callback</td>
+<td>无</td>
+<td>在连接PDO之前触发的回调方法</td>
+</tr>
+<tr>
+<td>connectFails</td>
+<td>callback</td>
+<td>无</td>
+<td>连接PDO失败时触发的回调方法</td>
+</tr>
+<tr>
+<td>afterConnect</td>
+<td>callback</td>
+<td>无</td>
+<td>连接PDO完成(成功)时触发的回调方法</td>
+</tr>
+<tr>
+<td>beforeQuery</td>
+<td>callback</td>
+<td>无</td>
+<td>在执行SQL语句之前触发的回调方法</td>
+</tr>
+<tr>
+<td>afterQuery</td>
+<td>callback</td>
+<td>无</td>
+<td>在执行SQL语句之后触发的回调方法</td>
+</tr>
+</tbody>
+</table><h4>不同驱动连接到数据库的私有选项</h4>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>驱动类型</th>
+<th>选项</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>mysql</td>
+<td>user, password, host, port, dbname, unixSocket, charset</td>
+</tr>
+<tr>
+<td>pgsql</td>
+<td>user, password, host, port, dbname</td>
+</tr>
+<tr>
+<td>sqlite</td>
+<td>path</td>
+</tr>
+</tbody>
+</table><h3>回调</h3>
+
+<h4>beforeConnect</h4>
+
+<p>在连接PDO之前触发的回调方法</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$db</td>
+<td>Widget\Db</td>
+<td>当前Db微件对象</td>
+</tr></tbody>
+</table><h4>connectFails</h4>
+
+<p>连接PDO失败时触发的回调方法</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$db</td>
+<td>Widget\Db</td>
+<td>当前Db微件对象</td>
+</tr>
+<tr>
+<td>$e</td>
+<td>PDOException</td>
+<td>PDO异常对象</td>
+</tr>
+</tbody>
+</table><h4>afterConnect</h4>
+
+<p>连接PDO完成(成功)时触发的回调方法</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$db</td>
+<td>Widget\Db</td>
+<td>当前Db微件对象</td>
+</tr>
+<tr>
+<td>$pdo</td>
+<td>PDO</td>
+<td>PDO对象</td>
+</tr>
+</tbody>
+</table><h4>beforeQuery</h4>
+
+<p>在执行SQL语句之前触发的回调方法</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$sql</td>
+<td>string</td>
+<td>当前执行的SQL语句</td>
+</tr>
+<tr>
+<td>$params</td>
+<td>array</td>
+<td>执行语句的参数</td>
+</tr>
+<tr>
+<td>$types</td>
+<td>array</td>
+<td>执行语句的参数类型</td>
+</tr>
+<tr>
+<td>$db</td>
+<td>Widget\Db</td>
+<td>当前Db微件对象</td>
+</tr>
+</tbody>
+</table><h4>afterQuery</h4>
+
+<p>在执行SQL语句之后触发的回调方法</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$db</td>
+<td>Widget\Db</td>
+<td>当前Db微件对象</td>
+</tr></tbody>
+</table><h3>方法</h3>
+
+<h4>db($table = null)</h4>
+
+<p>根据数据表名称,创建一个新Query Builder对象</p>
+
+<p><strong>返回:</strong> <code>Widget\Db\QueryBuilder</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$table</td>
+<td>string</td>
+<td>数据表的名称,如<code>user</code>,或带别名形式的<code>user u</code>
+</td>
+</tr></tbody>
+</table><h4>db-&gt;insert($table, $data = array())</h4>
+
+<p>向指定的数据表插入一条数据</p>
+
+<p><strong>返回:</strong> <code>int</code> 受影响的行数</p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$table</td>
+<td>string</td>
+<td>要插入的数据表名称</td>
+</tr>
+<tr>
+<td>$data</td>
+<td>array</td>
+<td>要插入的数据,数组的键名是数据表的字段名称,值是字段的值</td>
+</tr>
+</tbody>
+</table><h4>db-&gt;insertBatch($table, $data = array())</h4>
+
+<p>向指定的数据表插入多条数据(目前不支持<code>SQLite</code>)</p>
+
+<p><strong>返回:</strong> <code>int</code> 受影响的行数</p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$table</td>
+<td>string</td>
+<td>要插入的数据表名称</td>
+</tr>
+<tr>
+<td>$data</td>
+<td>array</td>
+<td>要插入的二维数组数据</td>
+</tr>
+</tbody>
+</table><h4>db-&gt;lastInsertId($sequence = null)</h4>
+
+<p>获取最后插入数据表的自增编号</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$sequence</td>
+<td>string</td>
+<td>序列名称,数据库驱动为<code>PostgreSQL</code>时才需要提供该参数</td>
+</tr></tbody>
+</table><h4>db-&gt;update($table, $data = array(), $conditions = array())</h4>
+
+<p>根据条件更新数据表数据</p>
+
+<p><strong>返回:</strong> <code>int</code> 受影响的行数</p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$table</td>
+<td>string</td>
+<td>要更新的数据表名称</td>
+</tr>
+<tr>
+<td>$data</td>
+<td>array</td>
+<td>要更新的数据</td>
+</tr>
+<tr>
+<td>$conditions</td>
+<td>array</td>
+<td>更新语句的查询条件</td>
+</tr>
+</tbody>
+</table><h4>db-&gt;delete($table, $conditions = array())</h4>
+
+<p>根据条件删除数据表数据</p>
+
+<p><strong>返回:</strong> <code>int</code> 受影响的行数</p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$table</td>
+<td>string</td>
+<td>要删除的数据表名称</td>
+</tr>
+<tr>
+<td>$conditions</td>
+<td>array</td>
+<td>删除语句的查询条件</td>
+</tr>
+</tbody>
+</table><h4>db-&gt;select($table, $conditions = array())</h4>
+
+<p>根据条件查找数据表的一条记录</p>
+
+<p><strong>返回:</strong> <code>array</code>|<code>false</code> 如果记录存在,返回记录数组,不存在返回<code>false</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$table</td>
+<td>string</td>
+<td>要查找的数据表名称</td>
+</tr>
+<tr>
+<td>$conditions</td>
+<td>string,array</td>
+<td>查询条件,如果类型是字符串,表示主键的值,如果是数组,键名表示数据表字段,值表示字段的值</td>
+</tr>
+</tbody>
+</table><h4>db-&gt;selectAll($table, $conditions = array())</h4>
+
+<p>根据条件查找数据表的所有匹配记录</p>
+
+<p><strong>返回:</strong> <code>array</code>|<code>false</code> 如果记录存在,返回二维记录数组,不存在返回<code>false</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$table</td>
+<td>string</td>
+<td>要查找的数据表名称</td>
+</tr>
+<tr>
+<td>$conditions</td>
+<td>string,array</td>
+<td>查询条件,如果类型是字符串,表示主键的值,如果是数组,键名表示数据表字段,值表示字段的值</td>
+</tr>
+</tbody>
+</table><h4>db-&gt;fetch($sql, $params = array())</h4>
+
+<p>执行一条SQL语句并返回第一条记录,主要用于SELECT的SQL语句</p>
+
+<p><strong>返回:</strong> <code>array</code>|<code>false</code> 如果记录存在,返回记录数组,不存在返回<code>false</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$sql</td>
+<td>string</td>
+<td>要执行的SQL语句</td>
+</tr>
+<tr>
+<td>$params</td>
+<td>array</td>
+<td>绑定到SQL的参数</td>
+</tr>
+</tbody>
+</table><h4>db-&gt;fetchAll($sql, $params = array())</h4>
+
+<p>执行一条SQL语句并返回所有记录</p>
+
+<p><strong>返回:</strong> <code>array</code>|<code>false</code> 如果记录存在,返回二维记录数组,不存在返回<code>false</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$sql</td>
+<td>string</td>
+<td>要执行的SQL语句</td>
+</tr>
+<tr>
+<td>$params</td>
+<td>array</td>
+<td>绑定到SQL的参数</td>
+</tr>
+</tbody>
+</table><h4>db-&gt;fetchColumn($sql, $params = array(), $column = 0)</h4>
+
+<p>执行一条SQL语句,并返回指定项目的值</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$sql</td>
+<td>string</td>
+<td>要执行的SQL语句</td>
+</tr>
+<tr>
+<td>$params</td>
+<td>array</td>
+<td>绑定到SQL的参数</td>
+</tr>
+<tr>
+<td>$column</td>
+<td>int</td>
+<td>返回第几项的值</td>
+</tr>
+</tbody>
+</table><h4>db-&gt;find($table, $conditions)</h4>
+
+<p>根据条件查找数据表的一条记录</p>
+
+<p><strong>返回:</strong> <code>Widget\Db\Record</code>|<code>false</code> 如果记录存在,返回记录对象,否则返回<code>false</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$table</td>
+<td>string</td>
+<td>要查找的数据表名称</td>
+</tr>
+<tr>
+<td>$conditions</td>
+<td>string,array</td>
+<td>查询条件,如果类型是字符串,表示主键的值,如果是数组,键名表示数据表字段,值表示字段的值</td>
+</tr>
+</tbody>
+</table><h4>db-&gt;findAll($table, $conditions)</h4>
+
+<p>根据条件查找数据表的所有匹配记录</p>
+
+<p><strong>返回:</strong> <code>Widget\Db\Collection</code>|<code>false</code> 如果记录存在,返回集合对象,否则返回<code>false</code></p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$table</td>
+<td>string</td>
+<td>要查找的数据表名称</td>
+</tr>
+<tr>
+<td>$conditions</td>
+<td>string,array</td>
+<td>查询条件,如果类型是字符串,表示主键的值,如果是数组,键名表示数据表字段,值表示字段的值</td>
+</tr>
+</tbody>
+</table><h4>db-&gt;create($table, $data = array())</h4>
+
+<p>创建一个新的数据表记录对象</p>
+
+<p><strong>返回:</strong> <code>Widget\Db\Record</code> 记录对象</p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$table</td>
+<td>string</td>
+<td>记录的数据表名称</td>
+</tr>
+<tr>
+<td>$data</td>
+<td>array</td>
+<td>初始化的数据</td>
+</tr>
+</tbody>
+</table><h4>db-&gt;findOrCreate($table, $id, $data = array())</h4>
+
+<p>根据条件查找数据表的一条记录,如果记录不存在,将根据<code>$data</code>创建一条新的数据表记录对象</p>
+
+<p><strong>返回:</strong> <code>Widget\Db\Record</code> 记录对象</p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$table</td>
+<td>string</td>
+<td>记录的数据表名称</td>
+</tr>
+<tr>
+<td>$id</td>
+<td>string</td>
+<td>主键的值</td>
+</tr>
+<tr>
+<td>$data</td>
+<td>array</td>
+<td>初始化的数据</td>
+</tr>
+</tbody>
+</table><h4>db-&gt;executeUpdate($sql, $params = array())</h4>
+
+<p>执行一条SQL语句,并返回影响的行数,主要用于INSERT/UPDATE/DELETE操作的SQL语句</p>
+
+<p><strong>返回:</strong> <code>int</code> 受影响的行数</p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$sql</td>
+<td>string</td>
+<td>要执行的SQL语句</td>
+</tr>
+<tr>
+<td>$params</td>
+<td>array</td>
+<td>绑定到SQL的参数</td>
+</tr>
+</tbody>
+</table><h4>db-&gt;query($sql, $params = array())</h4>
+
+<p>执行一条SQL语句,并返回<code>PDOStatement</code>对象</p>
+
+<p><strong>返回:</strong> <code>PDOStatement</code></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$sql</td>
+<td>string</td>
+<td>要执行的SQL语句</td>
+</tr>
+<tr>
+<td>$params</td>
+<td>array</td>
+<td>绑定到SQL的参数</td>
+</tr>
+</tbody>
+</table><h4>db-&gt;errorCode()</h4>
+
+<p>获取PDO错误代号</p>
+
+<p><strong>返回:</strong> <code>int</code></p>
+
+<h4>db-&gt;errorInfo()</h4>
+
+<p>获取PD错误信息数组</p>
+
+<p><strong>返回:</strong> <code>array</code></p>
+
+<h4>db-&gt;isConnected()</h4>
+
+<p>检查是否已经连接到数据库</p>
+
+<p><strong>返回:</strong> <code>bool</code></p>
+
+<h4>db-&gt;getRecordClass($table)</h4>
+
+<p>根据数据表名称获取记录类名称</p>
+
+<p><strong>返回:</strong> <code>string</code> 如果记录类不存在,返回默认类<code>Widget\Db\Record</code></p>
+
+<h4>db-&gt;getUser()</h4>
+
+<p>获取连接数据库的用户名称</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
+
+<h4>db-&gt;getPassword()</h4>
+
+<p>获取连接数据库的用户密码</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
+
+<h4>db-&gt;getHost()</h4>
+
+<p>获取数据库所在的主机地址</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
+
+<h4>db-&gt;getPort()</h4>
+
+<p>获取数据库服务器运行的端口</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
+
+<h4>db-&gt;getDbname()</h4>
+
+<p>获取数据库的名称</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
+
+<h4>db-&gt;getDsn()</h4>
+
+<p>获取连接到PDO的DSN字符串</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
+
+<h4>db-&gt;getLastSql()</h4>
+
+<p>获取最后执行的SQL语句</p>
+
+<p><strong>返回:</strong> <code>string</code></p>
+
+<h3>魔术方法</h3>
+
+<h4>db-&gt;$table($conditions)</h4>
+
+<p>根据条件查找数据表的一行记录,返回的是一个<code>Widget\Db\Record</code>对象,等于<code>db-&gt;find($table, $conditions)</code></p>
+
+<p><strong>返回:</strong> <code>Widget\Db\Record</code></p>
   </section>
 
 <!-- api/queryBuilder
