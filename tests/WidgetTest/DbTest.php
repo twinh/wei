@@ -1046,4 +1046,26 @@ class DbTest extends TestCase
 
         $this->assertEquals('sqlite::memory:', $db->getDsn());
     }
+
+    public function testInsertBatch()
+    {
+        if ('sqlite' == $this->db->getDriver()) {
+            $this->markTestSkipped('batch insert is not support by SQLite');
+        }
+
+        $result = $this->db->insertBatch('member', array(
+            array(
+                'group_id' => '1',
+                'name' => 'twin',
+                'address' => 'test'
+            ),
+            array(
+                'group_id' => '1',
+                'name' => 'test',
+                'address' => 'test'
+            )
+        ));
+
+        $this->assertEquals(2, $result);
+    }
 }

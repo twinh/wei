@@ -317,6 +317,32 @@ class Db extends Base
     }
 
     /**
+     * Insert batch data into table
+     *
+     * NOTE: The method is not working for SQLite
+     *
+     * @param string $table The name of table
+     * @param array $data A two-dimensional array
+     * @return int
+     */
+    public function insertBatch($table, array $data)
+    {
+        $table = $this->getTable($table);
+        $field = implode(', ', array_keys($data[0]));
+        $placeholders = array();
+        $values = array();
+
+        foreach ($data as $row) {
+            $placeholders[] = '(' . implode(', ', array_pad(array(), count($row), '?')) . ')';
+            $values = array_merge($values, array_values($row));
+        }
+        $placeholder = implode(', ', $placeholders);
+
+        $query = "INSERT INTO $table ($field) VALUES $placeholder";
+        return $this->executeUpdate($query, $values);
+    }
+
+    /**
      * Executes a UPDATE query
      *
      * @param string $table The name of table
