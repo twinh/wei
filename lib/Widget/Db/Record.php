@@ -119,6 +119,16 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
+     * Returns the record and relative records data as JSON string
+     *
+     * @return string
+     */
+    public function toJson()
+    {
+        return json_encode($this->toArray());
+    }
+
+    /**
      * Import a PHP array in this record
      *
      * @param $data
