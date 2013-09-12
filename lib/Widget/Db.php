@@ -505,7 +505,7 @@ class Db extends Base
      * @param array $params The SQL parameters
      * @param array $types The parameter types to bind
      * @param bool $returnRows Whether returns a PDOStatement object or the number of affected rows
-     * @throws \RuntimeException When a PDOException raise
+     * @throws \PDOException
      * @return \PDOStatement|int
      */
     public function query($sql, $params = array(), $types = array(), $returnRows = false)
