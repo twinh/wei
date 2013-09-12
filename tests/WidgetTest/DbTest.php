@@ -822,7 +822,7 @@ class DbTest extends TestCase
 
     public function testException()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->setExpectedException('PDOException');
 
         $this->db->query("SELECT * FROM noThis table");
     }

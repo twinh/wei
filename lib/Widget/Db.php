@@ -547,13 +547,21 @@ class Db extends Base
                 }
             }
         } catch (\PDOException $e) {
+            // Builder exception message
             $msg = sprintf(
-                'An exception occurred while executing "%s" : %s, with parameters %s',
+                "An exception occurred while executing \"%s\" : \n\n %s",
                 $sql,
-                "\n\n" . $e->getMessage(),
-                json_encode($params)
+                $e->getMessage()
             );
-            throw new \RuntimeException($msg, 0, $e);
+            if ($params) {
+                $msg .= ', with parameters ' . json_encode($params);
+            }
+
+            // Reset exception message
+            $message = new \ReflectionProperty($e, 'message');
+            $message->setAccessible(true);
+            $message->setValue($e, $msg);
+            throw $e;
         }
 
         if ($this->afterQuery) {
