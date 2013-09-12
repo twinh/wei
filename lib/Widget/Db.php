@@ -202,6 +202,13 @@ class Db extends Base
     protected $queries = array();
 
     /**
+     * The salve db configuration name
+     *
+     * @var string
+     */
+    protected $slaveDb;
+
+    /**
      * Constructor
      *
      * @param array $options
@@ -290,6 +297,15 @@ class Db extends Base
     }
 
     /**
+     * Close the current connection and create a new one
+     */
+    public function reconnect()
+    {
+        $this->close();
+        $this->connect();
+    }
+
+    /**
      * Executes an INSERT query to insert specified data into table
      *
      * @param string $table The name of table
@@ -305,6 +321,32 @@ class Db extends Base
         $query = "INSERT INTO $table ($field) VALUES ($placeholder)";
 
         return $this->executeUpdate($query, array_values($data));
+    }
+
+    /**
+     * Insert batch data into table
+     *
+     * NOTE: The method is not working for SQLite
+     *
+     * @param string $table The name of table
+     * @param array $data A two-dimensional array
+     * @return int
+     */
+    public function insertBatch($table, array $data)
+    {
+        $table = $this->getTable($table);
+        $field = implode(', ', array_keys($data[0]));
+        $placeholders = array();
+        $values = array();
+
+        foreach ($data as $row) {
+            $placeholders[] = '(' . implode(', ', array_pad(array(), count($row), '?')) . ')';
+            $values = array_merge($values, array_values($row));
+        }
+        $placeholder = implode(', ', $placeholders);
+
+        $query = "INSERT INTO $table ($field) VALUES $placeholder";
+        return $this->executeUpdate($query, $values);
     }
 
     /**
@@ -463,11 +505,18 @@ class Db extends Base
      * @param array $params The SQL parameters
      * @param array $types The parameter types to bind
      * @param bool $returnRows Whether returns a PDOStatement object or the number of affected rows
-     * @throws \RuntimeException When a PDOException raise
+     * @throws \PDOException
      * @return \PDOStatement|int
      */
     public function query($sql, $params = array(), $types = array(), $returnRows = false)
     {
+        // A select query, using slave db if configured
+        if (!$returnRows && $this->slaveDb) {
+            /** @var $slaveDb \Widget\Db */
+            $slaveDb = $this->widget->get($this->slaveDb);
+            return $slaveDb->query($sql, $params, $types, $returnRows);
+        }
+
         $this->connect();
         $this->queries[] = $sql;
         if ($this->beforeQuery) {
@@ -498,13 +547,21 @@ class Db extends Base
                 }
             }
         } catch (\PDOException $e) {
+            // Builder exception message
             $msg = sprintf(
-                'An exception occurred while executing "%s" : %s, with parameters %s',
+                "An exception occurred while executing \"%s\" : \n\n %s",
                 $sql,
-                "\n\n" . $e->getMessage(),
-                json_encode($params)
+                $e->getMessage()
             );
-            throw new \RuntimeException($msg, 0, $e);
+            if ($params) {
+                $msg .= ', with parameters ' . json_encode($params);
+            }
+
+            // Reset exception message
+            $message = new \ReflectionProperty($e, 'message');
+            $message->setAccessible(true);
+            $message->setValue($e, $msg);
+            throw $e;
         }
 
         if ($this->afterQuery) {

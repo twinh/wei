@@ -95,31 +95,32 @@ class App extends Base
      */
     public function dispatch($controller, $action = 'index')
     {
-        $object = $this->getControllerInstance($controller, $action);
-        if ($object) {
-            // Check if action is exists and public
-            if (method_exists($object, $action)) {
-                $ref = new \ReflectionMethod($object, $action);
-                if ($ref->isPublic()) {
-                    try {
+        try {
+            $object = $this->getControllerInstance($controller, $action);
+            if ($object) {
+                // Check if action is exists and public
+                if (method_exists($object, $action)) {
+                    $ref = new \ReflectionMethod($object, $action);
+                    if ($ref->isPublic()) {
                         $response = $object->$action();
                         $this->handleResponse($response);
-                    } catch (\RuntimeException $e) {
-                        if ($e->getCode() === self::FORWARD_CODE) {
-                            $this->logger->debug(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
-                        } else {
-                            throw $e;
-                        }
+                        return $this;
+                    } else {
+                        $notFound = 'action';
                     }
-                    return $this;
                 } else {
                     $notFound = 'action';
                 }
             } else {
-                $notFound = 'action';
+                $notFound = 'controller';
             }
-        } else {
-            $notFound = 'controller';
+        } catch (\RuntimeException $e) {
+            if ($e->getCode() === self::FORWARD_CODE) {
+                $this->logger->debug(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
+                return $this;
+            } else {
+                throw $e;
+            }
         }
 
         // Prepare exception message

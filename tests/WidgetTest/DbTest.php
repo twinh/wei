@@ -822,7 +822,7 @@ class DbTest extends TestCase
 
     public function testException()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->setExpectedException('PDOException');
 
         $this->db->query("SELECT * FROM noThis table");
     }
@@ -1045,5 +1045,51 @@ class DbTest extends TestCase
         ));
 
         $this->assertEquals('sqlite::memory:', $db->getDsn());
+    }
+
+    public function testInsertBatch()
+    {
+        if ('sqlite' == $this->db->getDriver()) {
+            $this->markTestSkipped('batch insert is not support by SQLite');
+        }
+
+        $result = $this->db->insertBatch('member', array(
+            array(
+                'group_id' => '1',
+                'name' => 'twin',
+                'address' => 'test'
+            ),
+            array(
+                'group_id' => '1',
+                'name' => 'test',
+                'address' => 'test'
+            )
+        ));
+
+        $this->assertEquals(2, $result);
+    }
+
+    public function testSlaveDb()
+    {
+        // Generate slave db configuration name
+        $driver = $this->db->getDriver();
+        $configName = $driver . 'Slave.db';
+
+        // Set configuration for slave db
+        $options = $this->widget->getConfig('db');
+        $this->widget->setConfig($configName, $options);
+
+        $this->db->setOption('slaveDb', $configName);
+
+        $query = "SELECT 1 + 2";
+        $this->db->query($query);
+
+        // Receives the slave db widget
+        /** @var $slaveDb \Widget\Db */
+        $slaveDb = $this->widget->get($configName);
+
+        // Test that the query is execute by slave db, not the master db
+        $this->assertNotContains($query, $this->db->getQueries());
+        $this->assertContains($query, $slaveDb->getQueries());
     }
 }

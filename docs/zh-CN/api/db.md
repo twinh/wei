@@ -3,12 +3,13 @@ Db
 
 基于PDO的数据库操作微件,支持基本的增删查改(CRUD)和流行的Active Record模式的数据库操作.
 
-目前支持`MySQL`,`SQLite`和`PostgreSQL`数据库.
+目前主要支持`MySQL`,`SQLite`和`PostgreSQL`数据库.
 
 案例
 ----
 
 ### 增删查改(CRUD)操作
+
 ```php
 // 插入数据
 widget()->db->insert('user', array(
@@ -39,6 +40,7 @@ Active Record模式是将数据表的每一行映射为一个对象,数据表的
 完整的介绍请查看维基百科的说明[Active Record](http://zh.wikipedia.org/wiki/Active_Record)
 
 #### 创建记录并保存
+
 ```php
 // 创建一个新的用户记录对象
 /* @var $user \Widget\Db\Record */
@@ -56,6 +58,7 @@ $user->save();
 ```
 
 #### 查找并更新记录数据
+
 ```php
 // 查找主键为1的用户
 $user = widget()->db->find('user', '1');
@@ -71,6 +74,7 @@ $user->save();
 ```
 
 #### 删除记录
+
 ```php
 // 查找主键为1的用户
 $user = widget()->db->user(1);
@@ -170,7 +174,8 @@ find        | $table, $conditions | Widget\Db\Record对象
 findAll     | $table, $conditions | Widget\Db\Collection对象
 query       | $sql                | PDOStatement对象
 
-### 通过beforeQuery记录SQL日志
+### 通过beforeQuery回调记录SQL日志
+
 ```php
 $widget = widget(array(
     'db' => array(
@@ -196,6 +201,55 @@ $widget->db->query("SELECT DATE('now')");
 
 [查看QueryBuilder](queryBuilder.md)
 
+### 配置读写分离(master-slave)的数据库操作
+
+通过`slaveDb`选项可配置备数据库,主要具有以下功能
+
+* 读操作使用slave数据库
+* 写操作使用master数据库
+
+```php
+$widget = widget(array(
+    // 主数据库微件的配置
+    'db' => array(
+        'driver'    => 'mysql',
+        'host'      => 'localhost',
+        'dbname'    => 'widget',
+        'charset'   => 'utf8',
+        'user'      => 'root',
+        'password'  => '123456',
+        // 重要: 通过`slaveDb`选项指定备机数据库的配置名称
+        'slaveDb'   => 'slave.db'
+    ),
+    // 备机数据库微件的配置
+    'slave.db' => array(
+        'driver'    => 'mysql',
+        'host'      => 'slave-host',
+        'dbname'    => 'widget',
+        'charset'   => 'utf-8',
+        'user'      => 'root',
+        'password'  => '123456',
+    ),
+));
+
+// 获取主数据库微件对象
+$db = $widget->db;
+
+// 执行写操作,使用主数据库
+$db->insert('table', array('key' => 'value'));
+$db->update('table', array('set' => 'value'), array('where' => 'value'))
+
+// 执行读操作,使用备数据库
+$db->select('table', array('key' => 'value'));
+$db->find('table', array('key' => 'value'));
+
+// 获取备数据库微件对象
+$slaveDb = $widget->slaveDb;
+
+// 直接使用备数据库操作
+$slaveDb->select('table', array('key' => 'value'));
+```
+
 调用方式
 --------
 
@@ -217,6 +271,7 @@ recordClass     | string   | Widget\Db\Record     | 记录类的基础类名称
 collectionClass | string   | Widget\Db\Collection | 记录集合类的基础类名称
 recordClasses   | array    | array()              | 自定义记录类的数组,键名为数据表名称,值为记录类名称
 recordNamespace | string   | 无                   | 自定义记录类的命名空间
+slaveDb         | string   | 无                   | Slave数据库(用于读查询)的配置名称
 beforeConnect   | callback | 无                   | 在连接PDO之前触发的回调方法
 connectFails    | callback | 无                   | 连接PDO失败时触发的回调方法
 afterConnect    | callback | 无                   | 连接PDO完成(成功)时触发的回调方法
@@ -228,8 +283,8 @@ afterQuery      | callback | 无                   | 在执行SQL语句之后触
 驱动类型 | 选项
 ---------|------
 mysql    | user, password, host, port, dbname, unixSocket, charset
-sqlite   | user, password, host, port, dbname
-pgsql    | path
+pgsql    | user, password, host, port, dbname
+sqlite   | path
 
 ### 回调
 
@@ -302,6 +357,18 @@ $table    | string | 数据表的名称,如`user`,或带别名形式的`user u`
 -------|--------|------
 $table | string | 要插入的数据表名称
 $data  | array  | 要插入的数据,数组的键名是数据表的字段名称,值是字段的值
+
+#### db->insertBatch($table, $data = array())
+向指定的数据表插入多条数据(目前不支持`SQLite`)
+
+**返回:** `int` 受影响的行数
+
+**参数**
+
+名称   | 类型   | 说明
+-------|--------|------
+$table | string | 要插入的数据表名称
+$data  | array  | 要插入的二维数组数据
 
 #### db->lastInsertId($sequence = null)
 获取最后插入数据表的自增编号
