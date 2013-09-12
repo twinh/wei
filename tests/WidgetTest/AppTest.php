@@ -137,7 +137,7 @@ class AppTest extends TestCase
         $this->request->set('controller', 'dispatchBreak');
 
         $this->expectOutputString('');
-        
+
         $this->app();
     }
 

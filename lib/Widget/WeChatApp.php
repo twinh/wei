@@ -270,7 +270,7 @@ class WeChatApp extends Base
     }
 
     /**
-     * Attach a callback with a keyword, which triggered when user input starts with the keyword
+     * Attach a callback with a keyword, which triggered when user input starts with the keyword (case insensitive)
      *
      * @param string $keyword The keyword to search in user input
      * @param \Closure $fn
