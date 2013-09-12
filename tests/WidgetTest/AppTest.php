@@ -132,6 +132,15 @@ class AppTest extends TestCase
         $this->app();
     }
 
+    public function testDispatchBreakInConstructor()
+    {
+        $this->request->set('controller', 'dispatchBreak');
+
+        $this->expectOutputString('');
+        
+        $this->app();
+    }
+
     public function testGetControllerInstance()
     {
         $this->assertFalse($this->app->getControllerInstance('../invalid/controller', 'index'));
