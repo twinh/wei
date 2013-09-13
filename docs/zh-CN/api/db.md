@@ -39,6 +39,8 @@ widget()->db->selectAll('user', array('groupId' => '1'));
 Active Record模式是将数据表的每一行映射为一个对象,数据表的字段与对象的属性一一对应.
 完整的介绍请查看维基百科的说明[Active Record](http://zh.wikipedia.org/wiki/Active_Record)
 
+[查看Active Record](activeRecord.md)
+
 #### 创建记录并保存
 
 ```php
@@ -82,6 +84,12 @@ $user = widget()->db->user(1);
 // 删除该记录
 $user->delete();
 ```
+
+### SQL查询构建器
+
+如果增删查改(CRUD)操作和Active Record模式还不能满足您的需求,你可以尝试使用QueryBuilder来生成更复杂的SQL语句
+
+[查看QueryBuilder](queryBuilder.md)
 
 ### 连接到多个数据库
 
@@ -194,12 +202,6 @@ $widget->db->query("SELECT DATE('now')");
 //array (
 //)
 ```
-
-### SQL查询构建器
-
-如果增删查改(CRUD)操作和Active Record模式还不能满足您的需求,你可以尝试使用QueryBuilder来生成更复杂的SQL语句
-
-[查看QueryBuilder](queryBuilder.md)
 
 ### 配置读写分离(master-slave)的数据库操作
 

@@ -40,7 +40,8 @@ API参考目录
 
 #### 数据库
 * [db](api/db.md) - 数据库操作微件,支持基本的增删查改(CRUD)和流行的Active Record模式等数据库操作
-* [queryBuilder](api/queryBuilder.md) - 简洁高效的SQL查询构建器
+* [Active Record](api/activeRecord.md) - Active Record操作
+* [Query Builder](api/queryBuilder.md) - 简洁高效的SQL查询构建器
 
 #### 接口调用
 * [call](api/call.md) - 象jQuery Ajax一样调用您的接口
