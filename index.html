@@ -2082,6 +2082,8 @@
 <p>Active Record模式是将数据表的每一行映射为一个对象,数据表的字段与对象的属性一一对应.
 完整的介绍请查看维基百科的说明<a href="http://zh.wikipedia.org/wiki/Active_Record" target="_blank">Active Record</a></p>
 
+<p><a href="#activeRecord">查看Active Record</a></p>
+
 <h4>创建记录并保存</h4>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 创建一个新的用户记录对象</span>
@@ -2122,6 +2124,12 @@
 <span class="c1">// 删除该记录</span>
 <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
 </code></pre></div>
+
+<h3>SQL查询构建器</h3>
+
+<p>如果增删查改(CRUD)操作和Active Record模式还不能满足您的需求,你可以尝试使用QueryBuilder来生成更复杂的SQL语句</p>
+
+<p><a href="#queryBuilder">查看QueryBuilder</a></p>
 
 <h3>连接到多个数据库</h3>
 
@@ -2271,12 +2279,6 @@
 <span class="c1">//array (</span>
 <span class="c1">//)</span>
 </code></pre></div>
-
-<h3>SQL查询构建器</h3>
-
-<p>如果增删查改(CRUD)操作和Active Record模式还不能满足您的需求,你可以尝试使用QueryBuilder来生成更复杂的SQL语句</p>
-
-<p><a href="#queryBuilder">查看QueryBuilder</a></p>
 
 <h3>配置读写分离(master-slave)的数据库操作</h3>
 
