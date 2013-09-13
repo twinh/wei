@@ -1,7 +1,7 @@
-QueryBuilder
-============
+Query Builder
+=============
 
-QueryBuilder是一个简单的SQL查询构建器.
+Query Builder是一个简单的SQL查询构建器.
 
 案例
 ----
@@ -228,32 +228,32 @@ $data = array(
 
 **返回:** `QueryBuilder`
 
-#### queryBuilder->select($select = null)
+#### $qb->select($select = null)
 设置SELECT字句要查询的字段名称
 
 **返回:** `QueryBuilder`
 
-#### queryBuilder->addSelect($select = null)
+#### $qb->addSelect($select = null)
 增加SELECT子句要查询的字段名称
 
 **返回:** `QueryBuilder`
 
-#### queryBuilder->delete($table = null)
+#### $qb->delete($table = null)
 设置SQL语句为DELETE操作
 
 **返回:** `QueryBuilder`
 
-#### queryBuilder->update($table = null)
+#### $qb->update($table = null)
 设置SQL语句为UPDATE操作
 
 **返回:** `QueryBuilder`
 
-#### queryBuilder->from($table)
+#### $qb->from($table)
 设置`FROM`字句的数据表名称
 
 **返回:** `QueryBuilder`
 
-#### queryBuilder->where($conditions, $params = null, $types = array())
+#### $qb->where($conditions, $params = null, $types = array())
 设置`WHERE`查询条件
 
 **返回:** `QueryBuilder`
@@ -266,7 +266,7 @@ $conditions | string       | 查询条件,如`id = 1`, `id = ?`
 $params     | array        | 参数的值
 $types      | array        | 参数的类型
 
-#### queryBuilder->andWhere($conditions, $params = null, $types = array())
+#### $qb->andWhere($conditions, $params = null, $types = array())
 增加`AND`类型的`WHERE`条件到当前查询中
 
 **返回:** `QueryBuilder`
@@ -279,7 +279,7 @@ $conditions | string       | 查询条件,如`id = 1`, `id = ?`
 $params     | array        | 参数的值
 $types      | array        | 参数的类型
 
-#### queryBuilder->orWhere($conditions, $params = null, $types = array())
+#### $qb->orWhere($conditions, $params = null, $types = array())
 增加`OR`类型的`WHERE`条件到当前查询中
 
 **返回:** `QueryBuilder`
@@ -292,7 +292,7 @@ $conditions | string       | 查询条件,如`id = 1`, `id = ?`
 $params     | array        | 参数的值
 $types      | array        | 参数的类型
 
-#### queryBuilder->orderBy($sort, $order = 'ASC')
+#### $qb->orderBy($sort, $order = 'ASC')
 设置`ORDER BY`字句
 
 **返回:** `QueryBuilder`
@@ -304,7 +304,7 @@ $types      | array        | 参数的类型
 $sort       | string       | 排序的字段名称
 $order      | string       | 排序类型,`ASC`或`DESC`
 
-#### queryBuilder->addOrderBy($sort, $order = 'ASC')
+#### $qb->addOrderBy($sort, $order = 'ASC')
 添加`ORDER BY`字句到当前查询中
 
 **返回:** `QueryBuilder`
@@ -316,7 +316,7 @@ $order      | string       | 排序类型,`ASC`或`DESC`
 $sort       | string       | 排序的字段名称
 $order      | string       | 排序类型,`ASC`或`DESC`
 
-#### queryBuilder->offset($offset)
+#### $qb->offset($offset)
 设置`OFFSET`字句
 
 **返回:** `QueryBuilder`
@@ -327,7 +327,7 @@ $order      | string       | 排序类型,`ASC`或`DESC`
 ------------|--------------|------
 $offset     | int          | `OFFSET`字句的值,如0,10
 
-#### queryBuilder->limit($limit)
+#### $qb->limit($limit)
 设置`LIMIT`字句
 
 **返回:** `QueryBuilder`
@@ -338,7 +338,7 @@ $offset     | int          | `OFFSET`字句的值,如0,10
 ------------|--------------|------
 $limit      | int          | `LIMIT`字句的值,如0,10
 
-#### queryBuilder->page($page)
+#### $qb->page($page)
 设置`OFFSET`和`LIMIT`字句
 
 通过该方法设置`$page`的值之后,`OFFSET`的值等于`($page - 1) * $limit`,如果`$limit`为空,`$limit`会被设置为`10`
@@ -351,7 +351,7 @@ $limit      | int          | `LIMIT`字句的值,如0,10
 ------------|--------------|------
 $page       | int          | 当前在第几页
 
-#### queryBuilder->join($table, $on = null)
+#### $qb->join($table, $on = null)
 增加`INNER JOIN`字句到当前查询中
 
 **返回:** `QueryBuilder`
@@ -363,10 +363,10 @@ $page       | int          | 当前在第几页
 $table | string       | 要连接的数据表名称,如`userGroup`
 $on    | string       | 连接的关联条件,如`user.groupId = userGroup.id`
 
-#### queryBuilder->innerJoin($table, $on = null)
+#### $qb->innerJoin($table, $on = null)
 同上,增加`INNER JOIN`字句到当前查询中
 
-#### queryBuilder->leftJoin($table, $on = null)
+#### $qb->leftJoin($table, $on = null)
 增加`LEFT JOIN`字句到当前查询中
 
 **返回:** `QueryBuilder`
@@ -378,7 +378,7 @@ $on    | string       | 连接的关联条件,如`user.groupId = userGroup.id`
 $table | string       | 要连接的数据表名称,如`userGroup`
 $on    | string       | 连接的关联条件,如`user.groupId = userGroup.id`
 
-#### queryBuilder->rightJoin($table, $on = null)
+#### $qb->rightJoin($table, $on = null)
 增加`RIGHT JOIN`字句到当前查询中
 
 **返回:** `QueryBuilder`
@@ -390,7 +390,7 @@ $on    | string       | 连接的关联条件,如`user.groupId = userGroup.id`
 $table | string       | 要连接的数据表名称,如`userGroup`
 $on    | string       | 连接的关联条件,如`user.groupId = userGroup.id`
 
-#### queryBuilder->groupBy($groupBy)
+#### $qb->groupBy($groupBy)
 设置`GROUP BY`字句
 
 **返回:** `QueryBuilder`
@@ -401,7 +401,7 @@ $on    | string       | 连接的关联条件,如`user.groupId = userGroup.id`
 ------------|--------------|------
 $groupBy    | string       | `GROUP BY`字句的值
 
-#### queryBuilder->addGroupBy($groupBy)
+#### $qb->addGroupBy($groupBy)
 添加`GROUP BY`字句到当前查询中
 
 **返回:** `QueryBuilder`
@@ -412,7 +412,7 @@ $groupBy    | string       | `GROUP BY`字句的值
 ------------|--------------|------
 $groupBy    | string       | `GROUP BY`字句的值
 
-#### queryBuilder->having($conditions, $params = array(), $types = array())
+#### $qb->having($conditions, $params = array(), $types = array())
 设置`HAVING`字句
 
 **返回:** `QueryBuilder`
@@ -425,7 +425,7 @@ $conditions | string       | 查询条件,如`id = 1`, `id = ?`
 $params     | array        | 参数的值
 $types      | array        | 参数的类型
 
-#### queryBuilder->andHaving($conditions, $params = array(), $types = array())
+#### $qb->andHaving($conditions, $params = array(), $types = array())
 添加`AND`类型`HAVING`字句到当前查询中
 
 **返回:** `QueryBuilder`
@@ -438,7 +438,7 @@ $conditions | string       | 查询条件,如`id = 1`, `id = ?`
 $params     | array        | 参数的值
 $types      | array        | 参数的类型
 
-#### queryBuilder->orHaving($conditions, $params = array(), $types = array())
+#### $qb->orHaving($conditions, $params = array(), $types = array())
 添加`OR`类型的`HAVING`字句到当前查询中
 
 **返回:** `QueryBuilder`
@@ -451,7 +451,7 @@ $conditions | string       | 查询条件,如`id = 1`, `id = ?`
 $params     | array        | 参数的值
 $types      | array        | 参数的类型
 
-#### queryBuilder->indexBy($column)
+#### $qb->indexBy($column)
 控制返回二维数组的键名为指定字段的值
 
 **返回:** `QueryBuilder`
@@ -462,7 +462,7 @@ $types      | array        | 参数的类型
 ------------|--------------|------
 $column     | string       | 字段的名称,必须存在select语句中
 
-#### queryBuilder->reset($queryPartName)
+#### $qb->reset($queryPartName)
 重置某一部分SQL字句
 
 **返回:** `QueryBuilder`
@@ -473,7 +473,7 @@ $column     | string       | 字段的名称,必须存在select语句中
 ---------------|--------------|------
 $queryPartName | string       | 允许的值为`select`,`from`,`join`,`set`,`where`,`groupBy`,`having`,`orderBy`,`limit`或`offset`
 
-#### queryBuilder->resetAll($queryPartNames = null)
+#### $qb->resetAll($queryPartNames = null)
 重置某一部分或全部SQL字句
 
 **返回:** `QueryBuilder`
@@ -484,32 +484,32 @@ $queryPartName | string       | 允许的值为`select`,`from`,`join`,`set`,`whe
 ----------------|--------------|------
 $queryPartNames | null|array   | 留空表示重置所有字句,作为数组时,允许的值为`select`,`from`,`join`,`set`,`where`,`groupBy`,`having`,`orderBy`,`limit`或`offset`
 
-#### queryBuilder->find()
+#### $qb->find()
 执行构造的SQL语句,并返回一个`Record`对象,如果结果为空,返回`false`
 
 **返回:** `Record`|`false`
 
-#### queryBuilder->findAll()
+#### $qb->findAll()
 执行构造的SQL语句,并返回一个`Collection`对象
 
 **返回:** `Collection`
 
-#### queryBuilder->fetch()
+#### $qb->fetch()
 执行构造的SQL语句,并返回一个一维数组,如果结果为空,返回`false`
 
 **返回:** `array`|`false`
 
-#### queryBuilder->fetchAll()
+#### $qb->fetchAll()
 执行构造的SQL语句,并返回一个二维数组,如果结果为空,返回`false`
 
 **返回:** `array`|`false`
 
-#### queryBuilder->count()
+#### $qb->count()
 获取当前构造的SQL语句所查找到的行数
 
 **返回:** `int`
 
-#### queryBuilder->setParameter($key, $value, $type = null)
+#### $qb->setParameter($key, $value, $type = null)
 设置绑定参数的值和类型
 
 **返回:** `QueryBuilder`
@@ -524,27 +524,27 @@ $type       | int          | 参数的类型,使用 PDO::PARAM_* 常量明确地
 
 相关链接: http://php.net/manual/zh/pdostatement.bindvalue.php
 
-#### queryBuilder->setParameters(array $params, array $types = array())
+#### $qb->setParameters(array $params, array $types = array())
 设置多个绑定参数的值和类型
 
 **返回:** `QueryBuilder`
 
-#### queryBuilder->getParameter($key)
+#### $qb->getParameter($key)
 获取绑定参数的值
 
 **返回:** `mixed`
 
-#### queryBuilder->getParameters()
+#### $qb->getParameters()
 获取所有绑定参数的值
 
 **返回:** `array`
 
-#### queryBuilder->getTable()
+#### $qb->getTable()
 获取当前查询的数据表名称
 
 **返回:** `string`
 
-#### queryBuilder->getSql()
+#### $qb->getSql()
 获取当前查询的完整SQL语句
 
 **返回:** `string`
