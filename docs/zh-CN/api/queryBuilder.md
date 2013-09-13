@@ -7,6 +7,7 @@ Query Builder是一个简单的SQL查询构建器.
 ----
 
 ###  从用户表里查询id为`1`且用户名为`twin`的用户
+
 ```php
 $member = widget()->db('member')
     ->select('id, username')
@@ -20,6 +21,7 @@ $member = widget()->db('member')
 ```
 
 ### 创建一个新的QueryBuilder
+
 ```php
 // 创建一个新的QueryBuilder
 $qb = widget()->db->createQueryBuilder()
@@ -29,6 +31,7 @@ $qb = widget()->db('member');
 ```
 
 ### 字符串查询条件
+
 ```php
 $qb = widget()->db('member')->where("name = 'twin'");
 
@@ -37,6 +40,7 @@ $member = $qb->find();
 ```
 
 ### 通过问号占位符`?`构造查询条件
+
 ```php
 $qb = widget()->db('member')->where('name = ?', 'twin');
 
@@ -45,6 +49,7 @@ $member = $qb->find();
 ```
 
 ### 通过多个问号占位符`?`构造查询条件
+
 ```php
 $qb = widget()->db('member')>where('group_id = ? AND name = ?', array('1', 'twin'));
 
@@ -53,6 +58,7 @@ $member = $qb->find();
 ```
 
 ### 通过命名占位符`:`构造查询条件
+
 ```php
 $qb = widget()->db('member')
         ->where('group_id = :groupId AND name = :name', array(
@@ -65,6 +71,7 @@ $member = $qb->find();
 ```
 
 ### 构造范围查询
+
 ```php
 $qb = widget()->db('member')->where('group_id BETWEEN ? AND ?', array('1', '2'));
 
@@ -73,6 +80,7 @@ $member = $qb->find();
 ```
 
 ### 构造IN查询
+
 ```php
 $qb = widget()->db('member')
         ->where(array(
@@ -85,6 +93,7 @@ $member = $qb->find();
 ```
 
 ### 构造ORDER BY语句
+
 ```php
 $qb = widget()->db('member')->orderBy('id', 'ASC');
 
@@ -94,6 +103,7 @@ $member = $qb->find();
 ```
 
 ### 增加ORDER BY语句
+
 ```php
 $qb = widget()->db('member')->orderBy('id', 'ASC')->addOrderBy('group_id', 'ASC');
 
@@ -103,6 +113,7 @@ $member = $query->find();
 ```
 
 ### 设置SELECT查询的字段
+
 ```php
 $qb = widget()->db('member')->select('id, group_id');
 
@@ -112,6 +123,7 @@ $member = $query->find();
 ```
 
 ### 增加SELECT查询的字段
+
 ```php
 $qb = widget()->db('member')->select('id')->addSelect('group_id');
 
@@ -121,6 +133,7 @@ $member = $query->find();
 ```
 
 ### 构造LIMIT和OFFSET语句
+
 ```php
 $qb = widget()->db('member')->limit(2);
 
@@ -139,6 +152,7 @@ echo $qb->getSql();
 ```
 
 ### 构造GROUP BY语句
+
 ```php
 $qb = widget()->db('member')->groupBy('id, group_id');
 
@@ -147,6 +161,7 @@ echo $qb->groupBy();
 ```
 
 ### 构造HAVING语句
+
 ```php
 $qb = widget()->db('member')->groupBy('id, group_id')->having('group_id >= ?', '1');
 
@@ -155,6 +170,7 @@ echo $qb->getSql();
 ```
 
 ### 构造JOIN语句
+
 ```php
 $qb = widget()->db('member')
         ->select('member.*, member_group.name AS group_name')
@@ -165,6 +181,7 @@ echo $qb->getSql();
 ```
 
 ### 重置已有的查询条件
+
 ```php
 $qb = widget()->db('member')->where('id = 1')->orderBy('id', 'DESC');
 
@@ -178,6 +195,7 @@ echo $qb->getSql();
 ```
 
 ### 使用`indexBy`控制返回二维数组的键名
+
 ```php
 $qb = widget()->db('member')->indexBy('name')->limit(2);
 
@@ -208,10 +226,10 @@ $data = array(
 );
 ```
 
-**注意** 
-
-1. `indexBy`仅对`fetchAll`和`findAll`的返回值有作用,`execute`方法仍然返回原始的数组
-2. 如果字段的值重复,后面的值将覆盖前面的值
+> #### 注意
+>
+> 1. `indexBy`仅对`fetchAll`和`findAll`的返回值有作用,`execute`方法仍然返回原始的数组
+> 2. 如果字段的值重复,后面的值将覆盖前面的值
 
 调用方式
 --------
