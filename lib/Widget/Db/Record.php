@@ -75,6 +75,62 @@ class Record extends Base implements \ArrayAccess
     protected $db;
 
     /**
+     * The callback triggered before save a record
+     *
+     * @var callable
+     */
+    protected $beforeSave;
+
+    /**
+     * The callback triggered after save a record
+     *
+     * @var callable
+     */
+    protected $afterSave;
+
+    /**
+     * The callback triggered before insert a record
+     *
+     * @var callable
+     */
+    protected $beforeInsert;
+
+    /**
+     * The callback triggered after insert a record
+     *
+     * @var callable
+     */
+    protected $afterInsert;
+
+    /**
+     * The callback triggered after update a record
+     *
+     * @var callable
+     */
+    protected $beforeUpdate;
+
+    /**
+     * The callback triggered after update a record
+     *
+     * @var callable
+     */
+    protected $afterUpdate;
+
+    /**
+     * The callback triggered before delete a record
+     *
+     * @var callable
+     */
+    protected $beforeDelete;
+
+    /**
+     * The callback triggered after delete a record
+     *
+     * @var callable
+     */
+    protected $afterDelete;
+
+    /**
      * Return the record table name
      *
      * @return string
@@ -163,17 +219,27 @@ class Record extends Base implements \ArrayAccess
     {
         $data && $this->fromArray($data);
 
+        $this->beforeSave && call_user_func($this->beforeSave, $this, $this->widget);
+
         // Insert
         if ($this->isNew) {
-            $result = $this->db->insert($this->table, $this->data);
+
+            $this->beforeInsert && call_user_func($this->beforeSave, $this, $this->widget);
+
+            $result = (bool)$this->db->insert($this->table, $this->data);
             if ($result) {
                 $this->isNew = false;
                 $name = sprintf('%s_%s_seq', $this->table, $this->primaryKey);
                 $this->data[$this->primaryKey] = $this->db->lastInsertId($name);
             }
-            return (bool)$result;
+
+            $this->afterInsert && call_user_func($this->afterInsert, $this, $this->widget);
+
         // Update
         } else {
+
+            $this->beforeUpdate && call_user_func($this->beforeUpdate, $this, $this->widget);
+
             if ($this->isModified) {
                 $affectedRows = $this->db->update($this->table, $this->modifiedData, array(
                     $this->primaryKey => $this->data[$this->primaryKey]
@@ -183,11 +249,16 @@ class Record extends Base implements \ArrayAccess
                     $this->isModified = false;
                     $this->modifiedData = array();
                 }
-                return $result;
             } else {
-                return true;
+                $result = true;
             }
+
+            $this->afterUpdate && call_user_func($this->afterUpdate, $this, $this->widget);
         }
+
+        $this->afterSave && call_user_func($this->afterSave, $this, $this->widget);
+
+        return $result;
     }
 
     /**
@@ -197,7 +268,13 @@ class Record extends Base implements \ArrayAccess
      */
     public function delete()
     {
-        return (bool)$this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
+        $this->beforeDelete && call_user_func($this->beforeDelete, $this, $this->widget);
+
+        $result = (bool)$this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
+
+        $this->afterDelete && call_user_func($this->afterDelete, $this, $this->widget);
+
+        return $result;
     }
 
     /**
