@@ -2084,7 +2084,7 @@
 
 <p><a href="#activeRecord">查看Active Record</a></p>
 
-<h4>创建记录并保存</h4>
+<p><strong>创建记录并保存</strong></p>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 创建一个新的用户记录对象</span>
 <span class="cm">/* @var $user \Widget\Db\Record */</span>
@@ -2101,7 +2101,7 @@
 <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
 </code></pre></div>
 
-<h4>查找并更新记录数据</h4>
+<p><strong>查找并更新记录数据</strong></p>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 查找主键为1的用户</span>
 <span class="nv">$user</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="s1">'1'</span><span class="p">);</span>
@@ -2116,7 +2116,7 @@
 <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
 </code></pre></div>
 
-<h4>删除记录</h4>
+<p><strong>删除记录</strong></p>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 查找主键为1的用户</span>
 <span class="nv">$user</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
@@ -3114,9 +3114,9 @@
 <!-- api/queryBuilder
   ================================================== -->
   <section id="queryBuilder">
-  <div class="page-header"><h1>QueryBuilder</h1></div>
+  <div class="page-header"><h1>Query Builder</h1></div>
 
-<p>QueryBuilder是一个简单的SQL查询构建器.</p>
+<p>Query Builder是一个简单的SQL查询构建器.</p>
 
 <h2>案例</h2>
 
@@ -3344,37 +3344,37 @@
 
 <p><strong>返回:</strong> <code>QueryBuilder</code></p>
 
-<h4>queryBuilder-&gt;select($select = null)</h4>
+<h4>$qb-&gt;select($select = null)</h4>
 
 <p>设置SELECT字句要查询的字段名称</p>
 
 <p><strong>返回:</strong> <code>QueryBuilder</code></p>
 
-<h4>queryBuilder-&gt;addSelect($select = null)</h4>
+<h4>$qb-&gt;addSelect($select = null)</h4>
 
 <p>增加SELECT子句要查询的字段名称</p>
 
 <p><strong>返回:</strong> <code>QueryBuilder</code></p>
 
-<h4>queryBuilder-&gt;delete($table = null)</h4>
+<h4>$qb-&gt;delete($table = null)</h4>
 
 <p>设置SQL语句为DELETE操作</p>
 
 <p><strong>返回:</strong> <code>QueryBuilder</code></p>
 
-<h4>queryBuilder-&gt;update($table = null)</h4>
+<h4>$qb-&gt;update($table = null)</h4>
 
 <p>设置SQL语句为UPDATE操作</p>
 
 <p><strong>返回:</strong> <code>QueryBuilder</code></p>
 
-<h4>queryBuilder-&gt;from($table)</h4>
+<h4>$qb-&gt;from($table)</h4>
 
 <p>设置<code>FROM</code>字句的数据表名称</p>
 
 <p><strong>返回:</strong> <code>QueryBuilder</code></p>
 
-<h4>queryBuilder-&gt;where($conditions, $params = null, $types = array())</h4>
+<h4>$qb-&gt;where($conditions, $params = null, $types = array())</h4>
 
 <p>设置<code>WHERE</code>查询条件</p>
 
@@ -3406,7 +3406,7 @@
 <td>参数的类型</td>
 </tr>
 </tbody>
-</table><h4>queryBuilder-&gt;andWhere($conditions, $params = null, $types = array())</h4>
+</table><h4>$qb-&gt;andWhere($conditions, $params = null, $types = array())</h4>
 
 <p>增加<code>AND</code>类型的<code>WHERE</code>条件到当前查询中</p>
 
@@ -3438,7 +3438,7 @@
 <td>参数的类型</td>
 </tr>
 </tbody>
-</table><h4>queryBuilder-&gt;orWhere($conditions, $params = null, $types = array())</h4>
+</table><h4>$qb-&gt;orWhere($conditions, $params = null, $types = array())</h4>
 
 <p>增加<code>OR</code>类型的<code>WHERE</code>条件到当前查询中</p>
 
@@ -3470,7 +3470,7 @@
 <td>参数的类型</td>
 </tr>
 </tbody>
-</table><h4>queryBuilder-&gt;orderBy($sort, $order = 'ASC')</h4>
+</table><h4>$qb-&gt;orderBy($sort, $order = 'ASC')</h4>
 
 <p>设置<code>ORDER BY</code>字句</p>
 
@@ -3497,7 +3497,7 @@
 </td>
 </tr>
 </tbody>
-</table><h4>queryBuilder-&gt;addOrderBy($sort, $order = 'ASC')</h4>
+</table><h4>$qb-&gt;addOrderBy($sort, $order = 'ASC')</h4>
 
 <p>添加<code>ORDER BY</code>字句到当前查询中</p>
 
@@ -3524,7 +3524,7 @@
 </td>
 </tr>
 </tbody>
-</table><h4>queryBuilder-&gt;offset($offset)</h4>
+</table><h4>$qb-&gt;offset($offset)</h4>
 
 <p>设置<code>OFFSET</code>字句</p>
 
@@ -3544,7 +3544,7 @@
 <td>
 <code>OFFSET</code>字句的值,如0,10</td>
 </tr></tbody>
-</table><h4>queryBuilder-&gt;limit($limit)</h4>
+</table><h4>$qb-&gt;limit($limit)</h4>
 
 <p>设置<code>LIMIT</code>字句</p>
 
@@ -3564,7 +3564,7 @@
 <td>
 <code>LIMIT</code>字句的值,如0,10</td>
 </tr></tbody>
-</table><h4>queryBuilder-&gt;page($page)</h4>
+</table><h4>$qb-&gt;page($page)</h4>
 
 <p>设置<code>OFFSET</code>和<code>LIMIT</code>字句</p>
 
@@ -3585,7 +3585,7 @@
 <td>int</td>
 <td>当前在第几页</td>
 </tr></tbody>
-</table><h4>queryBuilder-&gt;join($table, $on = null)</h4>
+</table><h4>$qb-&gt;join($table, $on = null)</h4>
 
 <p>增加<code>INNER JOIN</code>字句到当前查询中</p>
 
@@ -3613,11 +3613,11 @@
 </td>
 </tr>
 </tbody>
-</table><h4>queryBuilder-&gt;innerJoin($table, $on = null)</h4>
+</table><h4>$qb-&gt;innerJoin($table, $on = null)</h4>
 
 <p>同上,增加<code>INNER JOIN</code>字句到当前查询中</p>
 
-<h4>queryBuilder-&gt;leftJoin($table, $on = null)</h4>
+<h4>$qb-&gt;leftJoin($table, $on = null)</h4>
 
 <p>增加<code>LEFT JOIN</code>字句到当前查询中</p>
 
@@ -3645,7 +3645,7 @@
 </td>
 </tr>
 </tbody>
-</table><h4>queryBuilder-&gt;rightJoin($table, $on = null)</h4>
+</table><h4>$qb-&gt;rightJoin($table, $on = null)</h4>
 
 <p>增加<code>RIGHT JOIN</code>字句到当前查询中</p>
 
@@ -3673,7 +3673,7 @@
 </td>
 </tr>
 </tbody>
-</table><h4>queryBuilder-&gt;groupBy($groupBy)</h4>
+</table><h4>$qb-&gt;groupBy($groupBy)</h4>
 
 <p>设置<code>GROUP BY</code>字句</p>
 
@@ -3693,7 +3693,7 @@
 <td>
 <code>GROUP BY</code>字句的值</td>
 </tr></tbody>
-</table><h4>queryBuilder-&gt;addGroupBy($groupBy)</h4>
+</table><h4>$qb-&gt;addGroupBy($groupBy)</h4>
 
 <p>添加<code>GROUP BY</code>字句到当前查询中</p>
 
@@ -3713,7 +3713,7 @@
 <td>
 <code>GROUP BY</code>字句的值</td>
 </tr></tbody>
-</table><h4>queryBuilder-&gt;having($conditions, $params = array(), $types = array())</h4>
+</table><h4>$qb-&gt;having($conditions, $params = array(), $types = array())</h4>
 
 <p>设置<code>HAVING</code>字句</p>
 
@@ -3745,7 +3745,7 @@
 <td>参数的类型</td>
 </tr>
 </tbody>
-</table><h4>queryBuilder-&gt;andHaving($conditions, $params = array(), $types = array())</h4>
+</table><h4>$qb-&gt;andHaving($conditions, $params = array(), $types = array())</h4>
 
 <p>添加<code>AND</code>类型<code>HAVING</code>字句到当前查询中</p>
 
@@ -3777,7 +3777,7 @@
 <td>参数的类型</td>
 </tr>
 </tbody>
-</table><h4>queryBuilder-&gt;orHaving($conditions, $params = array(), $types = array())</h4>
+</table><h4>$qb-&gt;orHaving($conditions, $params = array(), $types = array())</h4>
 
 <p>添加<code>OR</code>类型的<code>HAVING</code>字句到当前查询中</p>
 
@@ -3809,7 +3809,7 @@
 <td>参数的类型</td>
 </tr>
 </tbody>
-</table><h4>queryBuilder-&gt;indexBy($column)</h4>
+</table><h4>$qb-&gt;indexBy($column)</h4>
 
 <p>控制返回二维数组的键名为指定字段的值</p>
 
@@ -3828,7 +3828,7 @@
 <td>string</td>
 <td>字段的名称,必须存在select语句中</td>
 </tr></tbody>
-</table><h4>queryBuilder-&gt;reset($queryPartName)</h4>
+</table><h4>$qb-&gt;reset($queryPartName)</h4>
 
 <p>重置某一部分SQL字句</p>
 
@@ -3848,7 +3848,7 @@
 <td>允许的值为<code>select</code>,<code>from</code>,<code>join</code>,<code>set</code>,<code>where</code>,<code>groupBy</code>,<code>having</code>,<code>orderBy</code>,<code>limit</code>或<code>offset</code>
 </td>
 </tr></tbody>
-</table><h4>queryBuilder-&gt;resetAll($queryPartNames = null)</h4>
+</table><h4>$qb-&gt;resetAll($queryPartNames = null)</h4>
 
 <p>重置某一部分或全部SQL字句</p>
 
@@ -3867,37 +3867,37 @@
 <td>null</td>
 <td>array</td>
 </tr></tbody>
-</table><h4>queryBuilder-&gt;find()</h4>
+</table><h4>$qb-&gt;find()</h4>
 
 <p>执行构造的SQL语句,并返回一个<code>Record</code>对象,如果结果为空,返回<code>false</code></p>
 
 <p><strong>返回:</strong> <code>Record</code>|<code>false</code></p>
 
-<h4>queryBuilder-&gt;findAll()</h4>
+<h4>$qb-&gt;findAll()</h4>
 
 <p>执行构造的SQL语句,并返回一个<code>Collection</code>对象</p>
 
 <p><strong>返回:</strong> <code>Collection</code></p>
 
-<h4>queryBuilder-&gt;fetch()</h4>
+<h4>$qb-&gt;fetch()</h4>
 
 <p>执行构造的SQL语句,并返回一个一维数组,如果结果为空,返回<code>false</code></p>
 
 <p><strong>返回:</strong> <code>array</code>|<code>false</code></p>
 
-<h4>queryBuilder-&gt;fetchAll()</h4>
+<h4>$qb-&gt;fetchAll()</h4>
 
 <p>执行构造的SQL语句,并返回一个二维数组,如果结果为空,返回<code>false</code></p>
 
 <p><strong>返回:</strong> <code>array</code>|<code>false</code></p>
 
-<h4>queryBuilder-&gt;count()</h4>
+<h4>$qb-&gt;count()</h4>
 
 <p>获取当前构造的SQL语句所查找到的行数</p>
 
 <p><strong>返回:</strong> <code>int</code></p>
 
-<h4>queryBuilder-&gt;setParameter($key, $value, $type = null)</h4>
+<h4>$qb-&gt;setParameter($key, $value, $type = null)</h4>
 
 <p>设置绑定参数的值和类型</p>
 
@@ -3930,31 +3930,31 @@
 </tbody>
 </table><p>相关链接: <a href="http://php.net/manual/zh/pdostatement.bindvalue.php" target="_blank">http://php.net/manual/zh/pdostatement.bindvalue.php</a></p>
 
-<h4>queryBuilder-&gt;setParameters(array $params, array $types = array())</h4>
+<h4>$qb-&gt;setParameters(array $params, array $types = array())</h4>
 
 <p>设置多个绑定参数的值和类型</p>
 
 <p><strong>返回:</strong> <code>QueryBuilder</code></p>
 
-<h4>queryBuilder-&gt;getParameter($key)</h4>
+<h4>$qb-&gt;getParameter($key)</h4>
 
 <p>获取绑定参数的值</p>
 
 <p><strong>返回:</strong> <code>mixed</code></p>
 
-<h4>queryBuilder-&gt;getParameters()</h4>
+<h4>$qb-&gt;getParameters()</h4>
 
 <p>获取所有绑定参数的值</p>
 
 <p><strong>返回:</strong> <code>array</code></p>
 
-<h4>queryBuilder-&gt;getTable()</h4>
+<h4>$qb-&gt;getTable()</h4>
 
 <p>获取当前查询的数据表名称</p>
 
 <p><strong>返回:</strong> <code>string</code></p>
 
-<h4>queryBuilder-&gt;getSql()</h4>
+<h4>$qb-&gt;getSql()</h4>
 
 <p>获取当前查询的完整SQL语句</p>
 
