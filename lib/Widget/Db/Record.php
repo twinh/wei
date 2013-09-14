@@ -212,13 +212,10 @@ class Record extends Base implements \ArrayAccess
     /**
      * Save record data to database
      *
-     * @param array $data
      * @return bool
      */
-    public function save($data = array())
+    public function save()
     {
-        $data && $this->fromArray($data);
-
         $this->beforeSave && call_user_func($this->beforeSave, $this, $this->widget);
 
         // Insert
