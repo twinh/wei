@@ -519,6 +519,21 @@ class Validate extends Base
     }
 
     /**
+     * Removes the validate field
+     *
+     * @param string $field
+     * @return bool
+     */
+    public function removeField($field)
+    {
+        if (isset($this->rules[$field])) {
+            unset($this->rules[$field]);
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Sets data for validation
      *
      * @param array|object $data
