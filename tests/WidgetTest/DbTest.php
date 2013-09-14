@@ -1093,4 +1093,18 @@ class DbTest extends TestCase
         $this->assertNotContains($query, $this->db->getQueries());
         $this->assertContains($query, $slaveDb->getQueries());
     }
+
+    public function testReload()
+    {
+        $member = $this->db->find('member', 1);
+        $member2 = $this->db->find('member', 1);
+
+        $member->group_id = 2;
+        $member->save();
+
+        $this->assertNotEquals($member->group_id, $member2->group_id);
+
+        $member2->reload();
+        $this->assertEquals($member->group_id, $member2->group_id);
+    }
 }
