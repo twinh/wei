@@ -37,6 +37,7 @@ widget()->db->selectAll('user', array('groupId' => '1'));
 ### Active Record模式
 
 Active Record模式是将数据表的每一行映射为一个对象,数据表的字段与对象的属性一一对应.
+
 完整的介绍请查看维基百科的说明[Active Record](http://zh.wikipedia.org/wiki/Active_Record)
 
 [查看Active Record](activeRecord.md)
@@ -276,7 +277,7 @@ afterConnect    | callback | 无                   | 连接PDO完成(成功)时�
 beforeQuery     | callback | 无                   | 在执行SQL语句之前触发的回调方法
 afterQuery      | callback | 无                   | 在执行SQL语句之后触发的回调方法
 
-#### 不同驱动连接到数据库的私有选项
+#### 不同驱动连接到数据库的连接选项
 
 驱动类型 | 选项
 ---------|------
