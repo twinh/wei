@@ -47,6 +47,13 @@ class Validate extends Base
     protected $names = array();
 
     /**
+     * The callback triggered before validation
+     *
+     * @var callable
+     */
+    protected $beforeValidate;
+
+    /**
      * The callback triggered when every rule is valid
      *
      * @var callable
@@ -166,6 +173,8 @@ class Validate extends Base
 
         // Initialize the validation result to be true
         $this->result = true;
+
+        $this->beforeValidate && call_user_func($this->beforeValidate, $this, $this->widget);
 
         foreach ($this->rules as $field => $rules) {
             $data = $this->getFieldData($field);
