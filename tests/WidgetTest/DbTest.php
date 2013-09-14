@@ -1051,7 +1051,7 @@ class DbTest extends TestCase
     public function testInsertBatch()
     {
         if ('sqlite' == $this->db->getDriver()) {
-            $this->markTestSkipped('batch insert is not support by SQLite');
+            $this->markTestSkipped('batch insert is not supported by SQLite');
         }
 
         $result = $this->db->insertBatch('member', array(
