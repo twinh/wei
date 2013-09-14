@@ -275,6 +275,19 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
+     * Reload the record data from database
+     *
+     * @return $this
+     */
+    public function reload()
+    {
+        $this->data = (array)$this->db->select($this->table, $this->__get($this->primaryKey));
+        $this->isModified = false;
+        $this->modifiedData = array();
+        return $this;
+    }
+
+    /**
      * Receives record field value
      *
      * @param string $name
