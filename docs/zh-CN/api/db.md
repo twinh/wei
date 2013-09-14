@@ -41,14 +41,10 @@ Active Record模式是将数据表的每一行映射为一个对象,数据表的
 
 [查看Active Record](activeRecord.md)
 
-#### 创建记录并保存
+**创建记录并保存**
 
 ```php
 // 创建一个新的用户记录对象
-/* @var $user \Widget\Db\Record */
-$user = widget()->db->user;
-
-// 或是通过`create`方法创建
 $user = widget()->db->create('user', array('groupId' => 1));
 
 // 设置对象的值
@@ -59,7 +55,7 @@ $user->createdAt = date('Y-m-d H:i:s');
 $user->save();
 ```
 
-#### 查找并更新记录数据
+**查找并更新记录数据**
 
 ```php
 // 查找主键为1的用户
@@ -75,7 +71,7 @@ $user->username = 'twin';
 $user->save();
 ```
 
-#### 删除记录
+**删除记录**
 
 ```php
 // 查找主键为1的用户
