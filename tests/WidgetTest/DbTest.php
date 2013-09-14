@@ -274,11 +274,12 @@ class DbTest extends TestCase
         // New member save with data
         $member = $db->create('member');
         $this->assertTrue($member->isNew());
-        $result = $member->save(array(
+        $member->fromArray(array(
             'group_id' => '1',
             'name' => 'save',
             'address' => 'save'
         ));
+        $result = $member->save();
         $this->assertFalse($member->isNew());
 
         $this->assertTrue($result);
@@ -1050,7 +1051,7 @@ class DbTest extends TestCase
     public function testInsertBatch()
     {
         if ('sqlite' == $this->db->getDriver()) {
-            $this->markTestSkipped('batch insert is not support by SQLite');
+            $this->markTestSkipped('batch insert is not supported by SQLite');
         }
 
         $result = $this->db->insertBatch('member', array(
@@ -1091,5 +1092,19 @@ class DbTest extends TestCase
         // Test that the query is execute by slave db, not the master db
         $this->assertNotContains($query, $this->db->getQueries());
         $this->assertContains($query, $slaveDb->getQueries());
+    }
+
+    public function testReload()
+    {
+        $member = $this->db->find('member', 1);
+        $member2 = $this->db->find('member', 1);
+
+        $member->group_id = 2;
+        $member->save();
+
+        $this->assertNotEquals($member->group_id, $member2->group_id);
+
+        $member2->reload();
+        $this->assertEquals($member->group_id, $member2->group_id);
     }
 }

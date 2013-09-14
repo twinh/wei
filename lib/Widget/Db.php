@@ -393,7 +393,7 @@ class Db extends Base
      * @param string $select The table columns to select
      * @internal param array|string $value The criteria to search record
      * @internal param string $column The table column to search
-     * @return array An associative array containing column-value pairs
+     * @return array|false An associative array containing column-value pairs
      */
     public function select($table, $conditions, $select = '*')
     {

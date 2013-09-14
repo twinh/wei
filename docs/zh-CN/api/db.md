@@ -37,16 +37,15 @@ widget()->db->selectAll('user', array('groupId' => '1'));
 ### Active Record模式
 
 Active Record模式是将数据表的每一行映射为一个对象,数据表的字段与对象的属性一一对应.
+
 完整的介绍请查看维基百科的说明[Active Record](http://zh.wikipedia.org/wiki/Active_Record)
 
-#### 创建记录并保存
+[查看Active Record](activeRecord.md)
+
+**创建记录并保存**
 
 ```php
 // 创建一个新的用户记录对象
-/* @var $user \Widget\Db\Record */
-$user = widget()->db->user;
-
-// 或是通过`create`方法创建
 $user = widget()->db->create('user', array('groupId' => 1));
 
 // 设置对象的值
@@ -57,7 +56,7 @@ $user->createdAt = date('Y-m-d H:i:s');
 $user->save();
 ```
 
-#### 查找并更新记录数据
+**查找并更新记录数据**
 
 ```php
 // 查找主键为1的用户
@@ -73,7 +72,7 @@ $user->username = 'twin';
 $user->save();
 ```
 
-#### 删除记录
+**删除记录**
 
 ```php
 // 查找主键为1的用户
@@ -82,6 +81,12 @@ $user = widget()->db->user(1);
 // 删除该记录
 $user->delete();
 ```
+
+### SQL查询构建器
+
+如果增删查改(CRUD)操作和Active Record模式还不能满足您的需求,你可以尝试使用QueryBuilder来生成更复杂的SQL语句
+
+[查看QueryBuilder](queryBuilder.md)
 
 ### 连接到多个数据库
 
@@ -195,12 +200,6 @@ $widget->db->query("SELECT DATE('now')");
 //)
 ```
 
-### SQL查询构建器
-
-如果增删查改(CRUD)操作和Active Record模式还不能满足您的需求,你可以尝试使用QueryBuilder来生成更复杂的SQL语句
-
-[查看QueryBuilder](queryBuilder.md)
-
 ### 配置读写分离(master-slave)的数据库操作
 
 通过`slaveDb`选项可配置备数据库,主要具有以下功能
@@ -278,7 +277,7 @@ afterConnect    | callback | 无                   | 连接PDO完成(成功)时�
 beforeQuery     | callback | 无                   | 在执行SQL语句之前触发的回调方法
 afterQuery      | callback | 无                   | 在执行SQL语句之后触发的回调方法
 
-#### 不同驱动连接到数据库的私有选项
+#### 不同驱动连接到数据库的连接选项
 
 驱动类型 | 选项
 ---------|------
