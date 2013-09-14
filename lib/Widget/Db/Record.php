@@ -216,12 +216,12 @@ class Record extends Base implements \ArrayAccess
      */
     public function save()
     {
-        $this->beforeSave && call_user_func($this->beforeSave, $this, $this->widget);
+        $this->trigger('beforeSave');
 
         // Insert
         if ($this->isNew) {
 
-            $this->beforeInsert && call_user_func($this->beforeSave, $this, $this->widget);
+            $this->trigger('beforeInsert');
 
             $result = (bool)$this->db->insert($this->table, $this->data);
             if ($result) {
@@ -230,12 +230,12 @@ class Record extends Base implements \ArrayAccess
                 $this->data[$this->primaryKey] = $this->db->lastInsertId($name);
             }
 
-            $this->afterInsert && call_user_func($this->afterInsert, $this, $this->widget);
+            $this->trigger('afterInsert');
 
         // Update
         } else {
 
-            $this->beforeUpdate && call_user_func($this->beforeUpdate, $this, $this->widget);
+            $this->trigger('beforeUpdate');
 
             if ($this->isModified) {
                 $affectedRows = $this->db->update($this->table, $this->modifiedData, array(
@@ -250,10 +250,10 @@ class Record extends Base implements \ArrayAccess
                 $result = true;
             }
 
-            $this->afterUpdate && call_user_func($this->afterUpdate, $this, $this->widget);
+            $this->trigger('afterUpdate');
         }
 
-        $this->afterSave && call_user_func($this->afterSave, $this, $this->widget);
+        $this->trigger('afterSave');
 
         return $result;
     }
@@ -265,11 +265,11 @@ class Record extends Base implements \ArrayAccess
      */
     public function delete()
     {
-        $this->beforeDelete && call_user_func($this->beforeDelete, $this, $this->widget);
+        $this->trigger('beforeDelete');
 
         $result = (bool)$this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
 
-        $this->afterDelete && call_user_func($this->afterDelete, $this, $this->widget);
+        $this->trigger('afterDelete');
 
         return $result;
     }
@@ -392,6 +392,16 @@ class Record extends Base implements \ArrayAccess
     public function getPrimaryKey()
     {
         return $this->primaryKey;
+    }
+
+    /**
+     * Trigger a callback
+     *
+     * @param string $name
+     */
+    protected function trigger($name)
+    {
+        $this->$name && call_user_func($this->$name, $this, $this->widget);
     }
 
     /**

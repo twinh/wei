@@ -274,11 +274,12 @@ class DbTest extends TestCase
         // New member save with data
         $member = $db->create('member');
         $this->assertTrue($member->isNew());
-        $result = $member->save(array(
+        $member->fromArray(array(
             'group_id' => '1',
             'name' => 'save',
             'address' => 'save'
         ));
+        $result = $member->save();
         $this->assertFalse($member->isNew());
 
         $this->assertTrue($result);
