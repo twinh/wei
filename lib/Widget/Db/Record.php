@@ -232,7 +232,7 @@ class Record extends Base implements \ArrayAccess
 
             $this->trigger('afterInsert');
 
-        // Update
+            // Update
         } else {
 
             $this->trigger('beforeUpdate');
@@ -414,6 +414,7 @@ class Record extends Base implements \ArrayAccess
      */
     protected function trigger($name)
     {
+        $this->$name();
         $this->$name && call_user_func($this->$name, $this, $this->widget);
     }
 
@@ -458,5 +459,61 @@ class Record extends Base implements \ArrayAccess
     public function offsetUnset($name)
     {
         $this->__unset($name);
+    }
+
+    /**
+     * The method called before save a record
+     */
+    public function beforeSave()
+    {
+    }
+
+    /**
+     * The method called after save a record
+     */
+    public function afterSave()
+    {
+    }
+
+    /**
+     * The method called before insert a record
+     */
+    public function beforeInsert()
+    {
+    }
+
+    /**
+     * The method called after insert a record
+     */
+    public function afterInsert()
+    {
+    }
+
+    /**
+     * The method called before update a record
+     */
+    public function beforeUpdate()
+    {
+    }
+
+    /**
+     * The method called after update a record
+     */
+    public function afterUpdate()
+    {
+    }
+
+    /**
+     * The method called before delete a record
+     */
+    public function beforeDelete()
+    {
+    }
+
+    /**
+     * The method called after delete a record
+     */
+    public function afterDelete()
+    {
     }
 }
