@@ -170,6 +170,16 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     }
 
     /**
+     * Returns session data as array
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->data;
+    }
+
+    /**
      * Set session configuration options
      *
      * @param array $inis
