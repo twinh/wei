@@ -59,12 +59,17 @@ gc_maxlifetime	| 86400
 #### session->set($key, $value)
 设置会话信息的值,同`session($key, $value)`
 
+#### session->remove($key)
+删除指定会话名称
+
+#### session->exists($key)
+检查指定会话名称是否存在
+
 #### session->clear()
 删除当前命名空间的会话信息
 
 #### session->destory()
 删除所有的会话消息
 
-#### session->setInis(array $inis)
-设置会话相关的ini配置,配置名称会自定加上`session.`前缀
-详细配置可以查看http://php.net/manual/en/session.configuration.php
+#### session->toArray();
+获取当前命名空间下所有会话
