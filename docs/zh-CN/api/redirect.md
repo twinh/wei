@@ -6,7 +6,8 @@ Redirect
 案例
 ----
 
-### 等待3秒后跳转d到谷歌首页
+### 等待3秒后跳转到谷歌首页
+
 ```php
 widget()->redirect('http://www.google.com', 302, array(
     'wait' => 3
@@ -14,9 +15,42 @@ widget()->redirect('http://www.google.com', 302, array(
 ```
 
 ### 直接跳转到谷歌首页
+
 ```php
 widget()->redirect('http://www.google.com');
 ```
+
+### 自定义跳转视图
+
+设置全局跳转视图文件
+
+```php
+widget(array(
+    'redirect' => array(
+        'view' => 'path/to/redirect.php'
+    )
+));
+```
+
+文件`path/to/redirect.php`
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="<?= $wait ?>;url=<?= $escapedUrl ?>">
+    <title>正在跳转到 <?= $escapedUrl ?></title>
+  </head>
+  <body>
+    <h1>跳转到<a href="<?= $escapedUrl ?>"><?= $escapedUrl ?></a></h1>
+  </body>
+</html>
+```
+
+> #### 注意
+> 
+> 使用`view`选项自定义视图时,需要自行处理跳转逻辑
 
 调用方式
 --------
