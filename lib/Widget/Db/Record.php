@@ -130,6 +130,16 @@ class Record extends Base implements \ArrayAccess
      */
     protected $afterDelete;
 
+    public function __construct(array $options = array())
+    {
+        parent::__construct($options);
+
+        // TODO better way
+        // Clear modified status after created
+        $this->isModified = false;
+        $this->modifiedData = array();
+    }
+
     /**
      * Return the record table name
      *
