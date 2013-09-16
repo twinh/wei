@@ -114,3 +114,11 @@ id | username | password
 
 #### unset($record->$field)
 删除字段的值
+
+### 数组操作方式
+
+#### $record[$field]
+获取字段的值
+
+#### $record[$field] = 'xxx'
+设置字段的值
