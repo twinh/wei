@@ -46,7 +46,7 @@ widgets = [
   # cache
     'cache', 'apc', 'arrayCache', 'bicache', 'couchbase', 'dbCache', 'fileCache', 'memcache', 'memcached', 'mongoCache', 'redis',
   # database
-    'db', 'queryBuilder', 'activeRecord'
+    'db', 'queryBuilder', 'activeRecord',
     'call',
   # validation
     'validate',  'is',

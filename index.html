@@ -70,7 +70,8 @@
       <a href="#db">数据库</a>
       <ul class="nav">
         <li><a href="#db">db</a></li>
-        <li><a href="#queryBuilder">queryBuilder</a></li>
+        <li><a href="#queryBuilder">Query Builder</a></li>
+        <li><a href="#activeRecord">Active Record</a></li>
       </ul>
     </li>
     <li>
@@ -2079,8 +2080,9 @@
 
 <h3>Active Record模式</h3>
 
-<p>Active Record模式是将数据表的每一行映射为一个对象,数据表的字段与对象的属性一一对应.
-完整的介绍请查看维基百科的说明<a href="http://zh.wikipedia.org/wiki/Active_Record" target="_blank">Active Record</a></p>
+<p>Active Record模式是将数据表的每一行映射为一个对象,数据表的字段与对象的属性一一对应.</p>
+
+<p>完整的介绍请查看维基百科的说明<a href="http://zh.wikipedia.org/wiki/Active_Record" target="_blank">Active Record</a></p>
 
 <p><a href="#activeRecord">查看Active Record</a></p>
 
@@ -2459,7 +2461,7 @@
 <td>在执行SQL语句之后触发的回调方法</td>
 </tr>
 </tbody>
-</table><h4>不同驱动连接到数据库的私有选项</h4>
+</table><h4>不同驱动连接到数据库的连接选项</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -3959,6 +3961,149 @@
 <p>获取当前查询的完整SQL语句</p>
 
 <p><strong>返回:</strong> <code>string</code></p>
+  </section>
+
+<!-- api/activeRecord
+  ================================================== -->
+  <section id="activeRecord">
+  <div class="page-header"><h1>Active Record</h1></div>
+
+<div class="page-header"><h1>案例</h1></div>
+
+<h3>创建一条新记录并保存</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 创建一个新的用户记录对象</span>
+<span class="cm">/* @var $user \Widget\Db\Record */</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">;</span>
+
+<span class="c1">// 或是通过`create`方法创建</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'groupId'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
+
+<span class="c1">// 设置对象的值</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">username</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">createdAt</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">);</span>
+
+<span class="c1">// 保存到数据库中</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+</code></pre></div>
+
+<h3>查找并更新记录数据</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 查找主键为1的用户</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="s1">'1'</span><span class="p">);</span>
+
+<span class="c1">// 或是通过魔术方法更自然地获取对象</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="c1">// 更新对象的值</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">username</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
+
+<span class="c1">// 保存到数据库中 </span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+</code></pre></div>
+
+<h3>删除记录</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 查找主键为1的用户</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="c1">// 删除该记录</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
+</code></pre></div>
+
+<h3>Active Recrod</h3>
+
+<p>表: user</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>id</th>
+<th>username</th>
+<th>password</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>twin</td>
+<td>xxx</td>
+</tr>
+<tr>
+<td>2</td>
+<td>cami</td>
+<td>xxx</td>
+</tr>
+</tbody>
+</table><h2>调用方式</h2>
+
+<h3>属性</h3>
+
+<h3>方法</h3>
+
+<h4>$record-&gt;getTable()</h4>
+
+<p>获取数据表名称</p>
+
+<h4>$record-&gt;setTable($table)</h4>
+
+<p>设置数据表名称</p>
+
+<h4>$record-&gt;setPrimaryKey($primaryKey)</h4>
+
+<p>设置主键字段的名称</p>
+
+<h4>$record-&gt;getPrimaryKey()</h4>
+
+<p>获取主键字段的名称</p>
+
+<h4>$record-&gt;toArray()</h4>
+
+<p>以数组形式返回记录里的数据</p>
+
+<h4>$record-&gt;toJson()</h4>
+
+<p>以JSON字符串形式返回记录里的数据</p>
+
+<h4>$record-&gt;fromArray($data)</h4>
+
+<p>批量设置记录数据</p>
+
+<h4>$record-&gt;setData($data)</h4>
+
+<p>批量设置记录数据,同<code>fromArray</code></p>
+
+<h4>$record-&gt;save()</h4>
+
+<p>保存记录数据到数据库中</p>
+
+<h4>$record-&gt;delete()</h4>
+
+<p>从数据库中删除该记录数据</p>
+
+<h4>$record-&gt;remove($field)</h4>
+
+<p>删除指定字段的值</p>
+
+<h4>$record-&gt;isNew()</h4>
+
+<p>判断当前记录是否为新建,并且未保存到数据库</p>
+
+<h4>$record-&gt;isModified()</h4>
+
+<p>判断当前记录的字段值是否修改过</p>
+
+<h3>动态属性和方法</h3>
+
+<h4>$record-&gt;$field</h4>
+
+<p>获取字段的值</p>
+
+<h4>$record-&gt;$field = 'xxx'</h4>
+
+<p>设置字段的值</p>
+
+<h4>unset($record-&gt;$field)</h4>
+
+<p>删除字段的值</p>
   </section>
 
 <!-- api/call
@@ -10604,6 +10749,14 @@
 
 <p>设置会话信息的值,同<code>session($key, $value)</code></p>
 
+<h4>session-&gt;remove($key)</h4>
+
+<p>删除指定会话名称</p>
+
+<h4>session-&gt;exists($key)</h4>
+
+<p>检查指定会话名称是否存在</p>
+
 <h4>session-&gt;clear()</h4>
 
 <p>删除当前命名空间的会话信息</p>
@@ -10612,10 +10765,9 @@
 
 <p>删除所有的会话消息</p>
 
-<h4>session-&gt;setInis(array $inis)</h4>
+<h4>session-&gt;toArray();</h4>
 
-<p>设置会话相关的ini配置,配置名称会自定加上<code>session.</code>前缀
-详细配置可以查看<a href="http://php.net/manual/en/session.configuration.php" target="_blank">http://php.net/manual/en/session.configuration.php</a></p>
+<p>获取当前命名空间下所有会话</p>
   </section>
 
 <!-- api/ua
@@ -11378,7 +11530,7 @@
 
 <h2>案例</h2>
 
-<h3>等待3秒后跳转d到谷歌首页</h3>
+<h3>等待3秒后跳转到谷歌首页</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">'http://www.google.com'</span><span class="p">,</span> <span class="mi">302</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">'wait'</span> <span class="o">=&gt;</span> <span class="mi">3</span>
@@ -11389,6 +11541,38 @@
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">'http://www.google.com'</span><span class="p">);</span>
 </code></pre></div>
+
+<h3>自定义跳转视图</h3>
+
+<p>设置全局跳转视图文件</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'redirect'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'view'</span> <span class="o">=&gt;</span> <span class="s1">'path/to/redirect.php'</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</code></pre></div>
+
+<p>文件<code>path/to/redirect.php</code></p>
+
+<div class="highlight"><pre><code class="php"><span class="o">&lt;!</span><span class="nx">DOCTYPE</span> <span class="nx">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">charset</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">http</span><span class="o">-</span><span class="nx">equiv</span><span class="o">=</span><span class="s2">"refresh"</span> <span class="nx">content</span><span class="o">=</span><span class="s2">"&lt;?= </span><span class="si">$wait</span><span class="s2"> ?&gt;;url=&lt;?= </span><span class="si">$escapedUrl</span><span class="s2"> ?&gt;"</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="err">正在跳转到</span> <span class="o">&lt;?=</span> <span class="nv">$escapedUrl</span> <span class="cp">?&gt;</span><span class="x">&lt;/title&gt;</span>
+<span class="x">  &lt;/head&gt;</span>
+<span class="x">  &lt;body&gt;</span>
+<span class="x">    &lt;h1&gt;跳转到&lt;a href="</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$escapedUrl</span> <span class="cp">?&gt;</span><span class="x">"&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$escapedUrl</span> <span class="cp">?&gt;</span><span class="x">&lt;/a&gt;&lt;/h1&gt;</span>
+<span class="x">  &lt;/body&gt;</span>
+<span class="x">&lt;/html&gt;</span>
+</code></pre></div>
+
+<blockquote>
+<h4>注意</h4>
+
+<p>使用<code>view</code>选项自定义视图时,需要自行处理跳转逻辑</p>
+</blockquote>
 
 <h2>调用方式</h2>
 
@@ -11407,6 +11591,18 @@
 <td>int</td>
 <td>0</td>
 <td>等待跳转的秒数,如果wait为0,使用的是HTTP header跳转,如果不为0,因为HTTP header不支持延迟跳转,所以使用的是HTML <a href="http://en.wikipedia.org/wiki/Meta_refresh" target="_blank">Meta refresh</a>跳转</td>
+</tr>
+<tr>
+<td>statusCode</td>
+<td>int</td>
+<td>302</td>
+<td>跳转的HTTP状态码</td>
+</tr>
+<tr>
+<td>cache</td>
+<td>bool</td>
+<td>false</td>
+<td>默认为false,表示向URL增加时间截参数,不让浏览器缓存URL跳转地址</td>
 </tr>
 <tr>
 <td>view</td>
