@@ -146,6 +146,17 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     }
 
     /**
+     * Check if the session is exists
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function exists($name)
+    {
+        return array_key_exists($name, $this->data);
+    }
+
+    /**
      * Clear session data in current namespace
      *
      * @return Session
