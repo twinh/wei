@@ -688,6 +688,6 @@ namespace
      */
     function wei()
     {
-        return Widget\Widget::create();
+        return call_user_func_array(array('Widget\Widget', 'create'), func_get_args());
     }
 }
