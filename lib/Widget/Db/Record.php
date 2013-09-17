@@ -130,6 +130,11 @@ class Record extends Base implements \ArrayAccess
      */
     protected $afterDelete;
 
+    /**
+     * Constructor
+     *
+     * @param array $options
+     */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
