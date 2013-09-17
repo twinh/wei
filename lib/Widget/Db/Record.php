@@ -75,6 +75,13 @@ class Record extends Base implements \ArrayAccess
     protected $db;
 
     /**
+     * The callback triggered after load a record
+     *
+     * @var callable
+     */
+    protected $afterLoad;
+
+    /**
      * The callback triggered before save a record
      *
      * @var callable
@@ -143,6 +150,8 @@ class Record extends Base implements \ArrayAccess
         // Clear modified status after created
         $this->isModified = false;
         $this->modifiedData = array();
+
+        $this->trigger('afterLoad');
     }
 
     /**
@@ -474,6 +483,13 @@ class Record extends Base implements \ArrayAccess
     public function offsetUnset($name)
     {
         $this->__unset($name);
+    }
+
+    /**
+     * The method called after load a record
+     */
+    protected function afterLoad()
+    {
     }
 
     /**
