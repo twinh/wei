@@ -49,14 +49,29 @@ $user = widget()->db->user(1);
 $user->delete();
 ```
 
-### Active Recrod
+### 回调调用顺序
 
-表: user
+#### 创建新记录并保存
 
-id | username | password
----|----------|----------
-1  | twin     | xxx
-2  | cami     | xxx
+* afterLoad
+* beforeSave
+* beforeInsert
+* afterInsert
+* afterSave
+
+#### 更新已有记录并保存
+
+* afterLoad
+* beforeSave
+* beforeUpdate
+* afterUpdate
+* afterSave
+
+#### 删除记录
+
+* afterLoad
+* beforeDelete
+* afterDelete
 
 调用方式
 --------
@@ -65,6 +80,9 @@ id | username | password
 
 #### Widget\Db $db
 数据库连接对象
+
+#### Widget\Widget $widget
+微件管理对象
 
 ### 回调
 
