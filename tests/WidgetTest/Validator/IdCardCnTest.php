@@ -10,7 +10,7 @@ class IdCardCnTest extends TestCase
     public function testIdCardCn($input)
     {
         $this->assertTrue($this->is('idCardCn', $input));
-        
+
         $this->assertFalse($this->is('notIdCardCn', $input));
     }
 
@@ -20,7 +20,7 @@ class IdCardCnTest extends TestCase
     public function testNotIdCardCn($input)
     {
         $this->assertFalse($this->is('idCardCn', $input));
-        
+
         $this->assertTrue($this->is('notIdCardCn', $input));
     }
 
@@ -30,6 +30,7 @@ class IdCardCnTest extends TestCase
             array('632801197908170036'),
             array('34052419800101001X'),
             array('34262219840209049X'),
+            array('34262219840209049x'),
             array('310109198002147295'),
             array('342622840209049')
         );

@@ -56,9 +56,9 @@ class IdCardCn extends BaseValidator
         }
 
         // Verify checksum
-        $checksum = $this->calcChecksum($input);
         if (isset($input[17])) {
-            if ($input[17] !== $checksum) {
+            $checksum = $this->calcChecksum($input);
+            if (strtoupper($input[17]) !== $checksum) {
                 $this->addError('invalid');
                 return false;
             }
