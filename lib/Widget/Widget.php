@@ -684,7 +684,7 @@ namespace
     /**
      * Get widget container instance
      *
-     * @return \Widget\Widget
+     * @return Widget\Widget
      */
     function wei()
     {
