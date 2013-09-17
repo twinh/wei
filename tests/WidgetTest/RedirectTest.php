@@ -29,6 +29,8 @@ class RedirectTest extends TestCase
     {
         $this->expectOutputRegex('/http:\/\/www\.google\.com/');
 
+        $this->redirect->setOption('cache', true);
+
         $this->redirect('http://www.google.com');
 
         $this->assertEquals('http://www.google.com', $this->redirect->getHeader('Location'));
@@ -36,7 +38,7 @@ class RedirectTest extends TestCase
 
     public function testWait()
     {
-        $this->expectOutputRegex('/content=\"5;url=http:\/\/www\.google\.com"/');
+        $this->expectOutputRegex('/content=\"5;url=http:\/\/www\.google\.com/');
 
         $this->redirect->setWait(5);
 
