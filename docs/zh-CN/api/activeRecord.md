@@ -63,6 +63,38 @@ id | username | password
 
 ### 属性
 
+#### Widget\Db $db
+数据库连接对象
+
+### 回调
+
+#### afterLoad($record, $widget)
+加载记录后触发的回调
+
+#### beforeSave($record, $widget)
+保存记录前触发的回调
+
+#### afterSave($record, $widget)
+保存记录后触发的回调
+
+#### beforeInsert($record, $widget)
+插入记录到数据库前触发的回调
+
+#### afterInsert($record, $widget)
+插入记录到数据库后触发的回调
+
+#### beforeUpdate($record, $widget)
+更新记录到数据库前触发的回调
+
+#### afterUpdate($record, $widget)
+更新记录到数据库后触发的回调
+
+#### beforeDelete($record, $widget)
+删除记录前触发的回调
+
+#### afterDelete($record, $widget)
+删除记录后触发的回调
+
 ### 方法
 
 #### $record->getTable()
