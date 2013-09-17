@@ -4011,35 +4011,41 @@
 <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
 </code></pre></div>
 
-<h3>Active Recrod</h3>
+<h3>回调调用顺序</h3>
 
-<p>表: user</p>
+<h4>创建新记录并保存</h4>
 
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>id</th>
-<th>username</th>
-<th>password</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>twin</td>
-<td>xxx</td>
-</tr>
-<tr>
-<td>2</td>
-<td>cami</td>
-<td>xxx</td>
-</tr>
-</tbody>
-</table><h2>调用方式</h2>
+<ul>
+<li>afterLoad</li>
+<li>beforeSave</li>
+<li>beforeInsert</li>
+<li>afterInsert</li>
+<li>afterSave</li>
+</ul><h4>更新已有记录并保存</h4>
+
+<ul>
+<li>afterLoad</li>
+<li>beforeSave</li>
+<li>beforeUpdate</li>
+<li>afterUpdate</li>
+<li>afterSave</li>
+</ul><h4>删除记录</h4>
+
+<ul>
+<li>afterLoad</li>
+<li>beforeDelete</li>
+<li>afterDelete</li>
+</ul><h2>调用方式</h2>
 
 <h3>属性</h3>
 
 <h4>Widget\Db $db</h4>
 
 <p>数据库连接对象</p>
+
+<h4>Widget\Widget $widget</h4>
+
+<p>微件管理对象</p>
 
 <h3>回调</h3>
 
