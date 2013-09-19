@@ -73,7 +73,7 @@ class Ua extends Base
         parent::__construct($options);
 
         if (!$this->server) {
-            $this->server = $_SERVER;
+            $this->server = &$_SERVER;
         }
 
         if (!$this->userAgent) {

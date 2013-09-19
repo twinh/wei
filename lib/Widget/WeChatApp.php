@@ -131,7 +131,7 @@ class WeChatApp extends Base
         parent::__construct($options);
 
         if (!$this->query) {
-            $this->query = $_GET;
+            $this->query = &$_GET;
         }
 
         if (is_null($this->postData) && isset($GLOBALS['HTTP_RAW_POST_DATA'])) {

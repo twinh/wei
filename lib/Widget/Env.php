@@ -66,7 +66,7 @@ class Env extends Base
         parent::__construct($options);
 
         if (!$this->server) {
-            $this->server = $_SERVER;
+            $this->server = &$_SERVER;
         }
 
         // Detect environment name if not set
