@@ -15,10 +15,26 @@ Start using Widget in 3 steps, it's easier than any frameworks you've seen befor
 require 'path/to/widget/lib/Widget/Widget.php';
 
 // 2. Create the default widget container instance
-$widget = widget();
+$widget = widget(array(
+    // Options for widget container
+    'widget' => array(
+        'debug' => true,
+        // ... other options
+    ),
+    // Options for database
+    'db' => array(
+        'driver'    => 'mysql',
+        'host'      => 'localhost',
+        'dbname'    => 'widget',
+        'charset'   => 'utf8',
+        'user'      => 'root',
+        'password'  => 'xxxxxx',
+    ),
+    // More options
+));
 
-// 3. Invoke the "request" widget to receive the HTTP request parameter
-$id = $widget->request('id');
+// 3. Using "db" widget to execute SQL query
+$result = $widget->db->fetch("SELEC 1 + 2");
 ```
 
 ## Installation
