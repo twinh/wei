@@ -133,7 +133,7 @@ namespace Widget
          *
          * @var Widget[]
          */
-        protected static $instances = array();
+        protected static $containers = array();
 
         /**
          * Instance widget container
@@ -166,8 +166,8 @@ namespace Widget
         public static function create($config = array(), $name = 'default')
         {
             // Most of time, it's called after instanced and without any arguments
-            if (!$config && isset(static::$instances[$name])) {
-                return static::$instances[$name];
+            if (!$config && isset(static::$containers[$name])) {
+                return static::$containers[$name];
             }
 
             switch (true) {
@@ -182,13 +182,13 @@ namespace Widget
                     throw new \InvalidArgumentException('Configuration should be array or file');
             }
 
-            if (!isset(static::$instances[$name])) {
-                static::$instances[$name] = new static($config);
+            if (!isset(static::$containers[$name])) {
+                static::$containers[$name] = new static($config);
             } else {
-                static::$instances[$name]->setConfig($config);
+                static::$containers[$name]->setConfig($config);
             }
 
-            return static::$instances[$name];
+            return static::$containers[$name];
         }
 
         /**
@@ -200,10 +200,10 @@ namespace Widget
         public static function reset($name = null)
         {
             if (is_null($name)) {
-                static::$instances = array();
+                static::$containers = array();
                 return true;
-            } elseif (isset(static::$instances[$name])) {
-                unset(static::$instances[$name]);
+            } elseif (isset(static::$containers[$name])) {
+                unset(static::$containers[$name]);
                 return true;
             } else {
                 return false;
