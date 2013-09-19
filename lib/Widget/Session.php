@@ -35,12 +35,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * @var array
      * @link http://php.net/manual/en/session.configuration.php
      */
-    protected $inis = array(
-        'cache_limiter'     => 'private_no_expire',
-        'cookie_lifetime'   => 86400,
-        'cache_expire'      => 86400,
-        'gc_maxlifetime'    => 86400
-    );
+    protected $inis = array();
 
     /**
      * Constructor
@@ -49,10 +44,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function __construct(array $options = array())
     {
-        parent::__construct($options + array(
-            'inis' => $this->inis,
-        ));
-
+        parent::__construct($options);
         $this->start();
     }
 
