@@ -32,18 +32,7 @@ if (widget()->session('verfiyCode') == widget()->request('verfiyCode')) {
 名称      | 类型         | 默认值    | 说明
 ----------|--------------|-----------|------
 namespace | string,false | false     | 存储会话信息的命名空间,默认不启用
-inis      | array        | 见下表    | PHP会话配置选项
-
-#### inis选项的值
-
-所有的配置选项和默认值请查阅 http://php.net/manual/en/session.configuration.php
-
-名称 			| 值
-----------------|----
-cache_limiter   | private_no_expire
-cookie_lifetime | 86400
-cache_expire 	| 86400
-gc_maxlifetime	| 86400
+inis      | array        | array()   | PHP会话配置选项, http://php.net/manual/en/session.configuration.php
 
 ### 方法
 
