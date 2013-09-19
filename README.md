@@ -34,7 +34,7 @@ $widget = widget(array(
 ));
 
 // 3. Using "db" widget to execute SQL query
-$result = $widget->db->fetch("SELEC 1 + 2");
+$result = $widget->db->fetch("SELECT 1 + 2");
 ```
 
 ## Installation
