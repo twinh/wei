@@ -37,13 +37,6 @@ class Redirect extends Response
     protected $statusCode = 302;
 
     /**
-     * If set to false, it will append parameter "_=time()" to the redirect URL
-     *
-     * @var bool
-     */
-    protected $cache = false;
-
-    /**
      * The default view content
      *
      * @var string
@@ -70,12 +63,6 @@ class Redirect extends Response
     public function __invoke($url = null, $options = array())
     {
         $this->setOption($options);
-
-        // Append timestamp parameter for redirect URL
-        if (!$this->cache) {
-            $url .= false === strpos($url, '?') ? '?' : '&';
-            $url .= '_=' . time();
-        }
 
         // The variables for custom redirect view
         $escapedUrl = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
