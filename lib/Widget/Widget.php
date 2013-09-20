@@ -155,6 +155,18 @@ namespace Widget
             $this->setOption($options);
         }
 
+        protected static $container;
+
+        public static function getContainer()
+        {
+
+        }
+
+        public static function setContainer(Widget $container)
+        {
+            static::$container = $container;
+        }
+
         /**
          * Get widget container instance
          *

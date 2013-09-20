@@ -54,11 +54,14 @@ class UaTest extends TestCase
 
     public function testNotIn()
     {
-        $this->ua->setOption('servers', array(
-            'HTTP_USER_AGENT' => 'fale',
+        $ua = new \Widget\Ua(array(
+            'widget' => $this->widget,
+            'server' => array(
+                'HTTP_USER_AGENT' => 'test'
+            )
         ));
 
-        $this->assertFalse($this->ua->inIPad());
+        $this->assertFalse($ua->inIPad());
     }
 
     public function testMagicCall()
