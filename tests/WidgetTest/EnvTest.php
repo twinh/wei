@@ -28,30 +28,34 @@ class EnvTest extends TestCase
 
     public function testSetEnv()
     {
-        $this->env->setOption('envMap', array(
-            '127.0.0.1'  => 'dev',
-            '127.0.0.2' => 'beta',
-            '192.168.25.2' => 'prod'
+        $env = $this->widget->newInstance('env', array(
+            'envMap' => array(
+                '127.0.0.1'  => 'dev',
+                '127.0.0.2' => 'beta',
+                '192.168.25.2' => 'prod'
+            ),
+            'server' => array(
+                'SERVER_ADDR' => '127.0.0.1'
+            )
         ));
 
-        $this->env->setOption('server', array('SERVER_ADDR' => '127.0.0.1'));
-        $this->env->detectEnvName();
-        $this->assertEquals('dev', $this->env->getEnv());
+        $env->detectEnvName();
+        $this->assertEquals('dev', $env->getEnv());
 
-        $this->env->setOption('server', array('SERVER_ADDR' => '127.0.0.2'));
-        $this->env->detectEnvName();
-        $this->assertEquals('beta', $this->env->getEnv());
+        $env->setOption('server', array('SERVER_ADDR' => '127.0.0.2'));
+        $env->detectEnvName();
+        $this->assertEquals('beta', $env->getEnv());
 
-        $this->env->setOption('server', array('SERVER_ADDR' => '192.168.25.2'));
-        $this->env->detectEnvName();
-        $this->assertEquals('prod', $this->env->getEnv());
+        $env->setOption('server', array('SERVER_ADDR' => '192.168.25.2'));
+        $env->detectEnvName();
+        $this->assertEquals('prod', $env->getEnv());
 
-        $this->env->setOption('server', array('SERVER_ADDR' => '192.168.25.3'));
-        $this->env->detectEnvName();
-        $this->assertEquals('prod', $this->env->getEnv());
+        $env->setOption('server', array('SERVER_ADDR' => '192.168.25.3'));
+        $env->detectEnvName();
+        $this->assertEquals('prod', $env->getEnv());
 
-        $this->env->setEnv('myMachine');
-        $this->assertEquals('myMachine', $this->env->getEnv());
+        $env->setEnv('myMachine');
+        $this->assertEquals('myMachine', $env->getEnv());
     }
 
     public function testInvoker()
