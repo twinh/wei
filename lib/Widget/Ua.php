@@ -89,7 +89,7 @@ class Ua extends Base
      */
     public function __invoke($name)
     {
-        return $this->in($name);
+        return $this->is($name);
     }
 
     /**
@@ -99,7 +99,7 @@ class Ua extends Base
      * @throws \InvalidArgumentException When name is not defined in patterns array
      * @return bool
      */
-    public function in($name)
+    public function is($name)
     {
         $name = strtolower($name);
 
@@ -126,7 +126,7 @@ class Ua extends Base
     {
         $name = strtolower($name);
         if (!isset($this->versions[$name])) {
-            $this->in($name);
+            $this->is($name);
         }
         return $this->versions[$name];
     }
@@ -141,7 +141,7 @@ class Ua extends Base
     public function __call($name, $args)
     {
         if('in' == substr($name, 0, 2)) {
-            return $this->in(substr($name, 2));
+            return $this->is(substr($name, 2));
         }
         return parent::__call($name, $args);
     }
@@ -153,7 +153,7 @@ class Ua extends Base
      * @license MIT License https://github.com/serbanghita/Mobile-Detect/blob/master/LICENSE.txt
      * @return bool
      */
-    public function inMobile()
+    public function isMobile()
     {
         $s = $this->server;
         if (

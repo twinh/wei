@@ -493,7 +493,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * @param string $method The method name to be compared
      * @return bool
      */
-    public function inMethod($method)
+    public function isMethod($method)
     {
         return !strcasecmp($method, $this->getMethod());
     }
@@ -503,9 +503,9 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      *
      * @return bool
      */
-    public function inGet()
+    public function isGet()
     {
-        return $this->inMethod('GET');
+        return $this->isMethod('GET');
     }
 
     /**
@@ -513,9 +513,9 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      *
      * @return bool
      */
-    public function inPost()
+    public function isPost()
     {
-        return $this->inMethod('POST');
+        return $this->isMethod('POST');
     }
 
     /**
@@ -523,7 +523,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      *
      * @return bool
      */
-    public function inAjax()
+    public function isAjax()
     {
         return 'xmlhttprequest' == strtolower($this->getServer('HTTP_X_REQUESTED_WITH'));
     }

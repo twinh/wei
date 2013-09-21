@@ -466,10 +466,10 @@ class WidgetTest extends TestCase
     public function testDebug()
     {
         $this->widget->setDebug(false);
-        $this->assertFalse($this->widget->inDebug());
+        $this->assertFalse($this->widget->isDebug());
 
         $this->widget->setDebug(true);
-        $this->assertTrue($this->widget->inDebug());
+        $this->assertTrue($this->widget->isDebug());
     }
 
     public function testSetAlias()

@@ -68,8 +68,8 @@ class RequestTest extends TestCase
             ));
             $this->widget->set('request', $request);
 
-            $this->assertTrue($request->{'in' . $method}());
-            $this->assertTrue($request->inMethod($method));
+            $this->assertTrue($request->{'is' . $method}());
+            $this->assertTrue($request->isMethod($method));
         }
     }
 

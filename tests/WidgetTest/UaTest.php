@@ -32,7 +32,7 @@ class UaTest extends TestCase
             'Unrecognized browser, OS, mobile or tablet name "unknown"'
         );
 
-        $this->ua->in('unknown');
+        $this->ua->is('unknown');
     }
 
     public function testInvalidException2()
@@ -61,7 +61,7 @@ class UaTest extends TestCase
             )
         ));
 
-        $this->assertFalse($ua->inIPad());
+        $this->assertFalse($ua->isIPad());
     }
 
     public function testMagicCall()
@@ -279,7 +279,7 @@ class UaTest extends TestCase
                 'HTTP_USER_AGENT' => 'test'
             )
         ));
-        $this->assertFalse($ua->inMobile());
+        $this->assertFalse($ua->isMobile());
     }
 
     /**
@@ -291,7 +291,7 @@ class UaTest extends TestCase
             'widget' => $this->widget,
             'server' => $servers
         ));
-        $this->assertTrue($ua->inMobile());
+        $this->assertTrue($ua->isMobile());
     }
 
     public function providerForInMobile()
