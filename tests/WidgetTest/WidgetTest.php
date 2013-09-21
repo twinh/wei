@@ -397,17 +397,9 @@ class WidgetTest extends TestCase
         $this->assertArrayHasKey('\WidgetTest\Fixtures\Import', $map);
     }
 
-    public function testNewWidgetFromFactoryMethod()
-    {
-        $widget = Widget::create(array(), 'otherName');
-
-        $this->assertInstanceOf('\Widget\Widget', $widget);
-        $this->assertSame($widget, Widget::create(array(), 'otherName'));
-    }
-
     public function testFileAsConfiguration()
     {
-        $widget = Widget::create(__DIR__ . '/Fixtures/env/twin.php');
+        $widget = Widget::getContainer(__DIR__ . '/Fixtures/env/twin.php');
 
         $this->assertTrue($widget->getConfig('twin'));
     }
@@ -418,7 +410,7 @@ class WidgetTest extends TestCase
      */
     public function testInvalidArgumentExceptionOnCreate()
     {
-        Widget::create(new \stdClass);
+        Widget::getContainer(new \stdClass);
     }
 
     /**
@@ -427,34 +419,29 @@ class WidgetTest extends TestCase
      */
     public function testInvalidArgumentExceptionWhenFileNotFind()
     {
-        Widget::create('not existing file');
+        Widget::getContainer('not existing file');
     }
 
-    public function testReset()
+    public function testSetContainer()
     {
-        $first = Widget::create(array(), 'first');
-        $second = Widget::create(array(), 'second');
+        $widget = Widget::getContainer();
+        $newWidget = new Widget();
 
-        $this->assertTrue(Widget::reset('first'));
+        Widget::setContainer($newWidget);
+        $this->assertSame($newWidget, Widget::getContainer());
 
-        $this->assertNotSame($first, Widget::create(array(), 'second'));
-        $this->assertSame($second, Widget::create(array(), 'second'));
-
-        $this->assertTrue(Widget::reset());
-        $this->assertNotSame($first, Widget::create(array(), 'second'));
-        $this->assertNotSame($second, Widget::create(array(), 'second'));
-
-        $this->assertFalse(Widget::reset('NotInstance'));
+        // reset
+        Widget::setContainer($widget);
     }
 
     public function testWidgetFunction()
     {
-        $this->assertSame(Widget::create(), widget());
+        $this->assertSame(Widget::getContainer(), widget());
     }
 
     public function testWeiFunction()
     {
-        $this->assertSame(Widget::create(), wei());
+        $this->assertSame(Widget::getContainer(), wei());
     }
 
     public function testGetSelf()

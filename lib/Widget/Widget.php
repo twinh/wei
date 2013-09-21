@@ -129,11 +129,11 @@ namespace Widget
         protected $widgets = array();
 
         /**
-         * The instances of widget container
+         * The current widget container
          *
-         * @var Widget[]
+         * @var Widget
          */
-        protected static $containers = array();
+        protected static $container;
 
         /**
          * Instance widget container
@@ -155,31 +155,18 @@ namespace Widget
             $this->setOption($options);
         }
 
-        protected static $container;
-
-        public static function getContainer()
-        {
-
-        }
-
-        public static function setContainer(Widget $container)
-        {
-            static::$container = $container;
-        }
-
         /**
-         * Get widget container instance
+         * Get the widget container instance
          *
          * @param array $config                 The array or file configuration
-         * @param string $name                  The name of the instance
          * @return $this
          * @throws \InvalidArgumentException    When the configuration parameter is not array or file
          */
-        public static function create($config = array(), $name = 'default')
+        public static function getContainer($config = array())
         {
             // Most of time, it's called after instanced and without any arguments
-            if (!$config && isset(static::$containers[$name])) {
-                return static::$containers[$name];
+            if (!$config && static::$container) {
+                return static::$container;
             }
 
             switch (true) {
@@ -194,32 +181,22 @@ namespace Widget
                     throw new \InvalidArgumentException('Configuration should be array or file');
             }
 
-            if (!isset(static::$containers[$name])) {
-                static::$containers[$name] = new static($config);
+            if (!isset(static::$container)) {
+                static::$container = new static($config);
             } else {
-                static::$containers[$name]->setConfig($config);
+                static::$container->setConfig($config);
             }
-
-            return static::$containers[$name];
+            return static::$container;
         }
 
         /**
-         * Reset the internal widget container instance
+         * Set the widget container
          *
-         * @param string|null $name The name of the instance, if $name is null, reset all instances
-         * @return bool
+         * @param Widget $container
          */
-        public static function reset($name = null)
+        public static function setContainer(Widget $container = null)
         {
-            if (is_null($name)) {
-                static::$containers = array();
-                return true;
-            } elseif (isset(static::$containers[$name])) {
-                unset(static::$containers[$name]);
-                return true;
-            } else {
-                return false;
-            }
+            static::$container = $container;
         }
 
         /**
@@ -682,24 +659,22 @@ namespace Widget
 namespace
 {
     /**
-     * Get widget container instance
+     * Get the widget container instance
      *
-     * @param array $config                 The array or file configuration
-     * @param string $name                  The name of the instance
      * @return Widget\Widget
      */
-    function widget($config = array(), $name = 'default')
+    function widget()
     {
-        return Widget\Widget::create($config, $name);
+        return call_user_func_array(array('Widget\Widget', 'getContainer'), func_get_args());
     }
 
     /**
-     * Get widget container instance
+     * Get the widget container instance
      *
      * @return Widget\Widget
      */
     function wei()
     {
-        return call_user_func_array(array('Widget\Widget', 'create'), func_get_args());
+        return call_user_func_array(array('Widget\Widget', 'getContainer'), func_get_args());
     }
 }

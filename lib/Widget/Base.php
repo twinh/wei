@@ -268,7 +268,7 @@ abstract class Base
         $this->setOption($options);
 
         if (!isset($this->widget)) {
-            $this->widget = Widget::create();
+            $this->widget = Widget::getContainer();
         } elseif (!$this->widget instanceof Widget) {
             throw new \InvalidArgumentException(sprintf('Option "widget" of class "%s" should be an instance of "Widget\Widget"', get_class($this)));
         }
