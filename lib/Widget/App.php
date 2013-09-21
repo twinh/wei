@@ -125,7 +125,7 @@ class App extends Base
 
         // Prepare exception message
         $message = 'The page you requested was not found';
-        if ($this->widget->inDebug()) {
+        if ($this->widget->isDebug()) {
             $message .= ' - ';
             switch ($notFound) {
                 case 'controller':

@@ -14,12 +14,12 @@ class UaTest extends TestCase
         // Compatible for old tests
         if (is_string($os)) {
             $this->assertTrue($this->ua($os));
-            $this->assertTrue($this->ua->{'in' . $os}());
+            $this->assertTrue($this->ua->{'is' . $os}());
             $this->assertEquals($version, $this->ua->getVersion($os));
         } else {
             foreach ($os as $value) {
                 $this->assertTrue($this->ua($value[0]));
-                $this->assertTrue($this->ua->{'in' . $value[0]}());
+                $this->assertTrue($this->ua->{'is' . $value[0]}());
                 $this->assertEquals($value[1], $this->ua->getVersion($value[0]));
             }
         }
@@ -32,7 +32,7 @@ class UaTest extends TestCase
             'Unrecognized browser, OS, mobile or tablet name "unknown"'
         );
 
-        $this->ua->in('unknown');
+        $this->ua->is('unknown');
     }
 
     public function testInvalidException2()
@@ -61,7 +61,7 @@ class UaTest extends TestCase
             )
         ));
 
-        $this->assertFalse($ua->inIPad());
+        $this->assertFalse($ua->isIPad());
     }
 
     public function testMagicCall()
@@ -279,7 +279,7 @@ class UaTest extends TestCase
                 'HTTP_USER_AGENT' => 'test'
             )
         ));
-        $this->assertFalse($ua->inMobile());
+        $this->assertFalse($ua->isMobile());
     }
 
     /**
@@ -291,7 +291,7 @@ class UaTest extends TestCase
             'widget' => $this->widget,
             'server' => $servers
         ));
-        $this->assertTrue($ua->inMobile());
+        $this->assertTrue($ua->isMobile());
     }
 
     public function providerForInMobile()

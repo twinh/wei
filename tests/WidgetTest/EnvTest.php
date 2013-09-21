@@ -15,9 +15,9 @@ class EnvTest extends TestCase
     {
         $this->env->setEnv('dev');
 
-        $this->assertTrue($this->env->inDev());
-        $this->assertFalse($this->env->inTest());
-        $this->assertFalse($this->env->inProd());
+        $this->assertTrue($this->env->isDev());
+        $this->assertFalse($this->env->isTest());
+        $this->assertFalse($this->env->isProd());
     }
 
     public function testLoadCliConfig()
@@ -97,7 +97,7 @@ class EnvTest extends TestCase
             )
         ));
 
-        $this->assertFalse($widget->inDebug());
+        $this->assertFalse($widget->isDebug());
         $this->assertFalse($widget->getConfig('widget:debug'));
     }
 }

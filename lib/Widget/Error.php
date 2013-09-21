@@ -215,7 +215,7 @@ class Error extends Base
 
     public function internalHandleException(\Exception $exception)
     {
-        $debug = $this->widget->inDebug();
+        $debug = $this->widget->isDebug();
         $code = $exception->getCode();
 
         // HTTP status code

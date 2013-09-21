@@ -24,7 +24,7 @@ class UrlDebugger extends Base
     {
         parent::__construct($options);
 
-        if ($this->widget->inDebug()) {
+        if ($this->widget->isDebug()) {
             $this->inject();
         }
     }

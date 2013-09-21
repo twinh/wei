@@ -7,6 +7,7 @@ Request
 ----
 
 ### 获取HTTP请求参数的值
+
 ```php
 // 假设 $_REQUEST['id'] = 5;
 
@@ -15,11 +16,13 @@ $id = widget()->request('id');
 ```
 
 ### 获取当前请求的URL地址
+
 ```php
 $url = widget()->request->getUrl();
 ```
 
 ### 检查当前请求是否由Ajax发起
+
 ```php
 if (widget()->request->inAjax()) {
 	// do something
@@ -27,6 +30,7 @@ if (widget()->request->inAjax()) {
 ```
 
 ### 获取服务器IP地址
+
 ```php
 // 假设 $_SERVER['SERVER_ADDR'] = '127.0.0.1';
 
@@ -39,16 +43,16 @@ $ip = widget()->request->getServer('SERVER_ADDR');
 
 ### 选项
 
-| 名称          | 类型      | 默认值    | 说明                                                                    |
-|---------------|-----------|-----------|-------------------------------------------------------------------------|
-| fromGlobal    | bool      | true      | 是否将PHP全局变量作为请求参数,设置为`false`的话,可以自行构造请求数据    |
-| gets          | array     | array()   | 当`fromGlobal`为true时,相当于`$_GET`,否则为空                           |
-| posts         | array     | array()   | 当`fromGlobal`为true时,相当于`$_POST`,否则为空                          |
-| cookies       | array     | array()   | 当`fromGlobal`为true时,相当于`$_COOKIE`,否则为空                        |
-| servers       | array     | array()   | 当`fromGlobal`为true时,相当于`$_SERVER`,否则为空                        |
-| files         | array     | array()   | 当`fromGlobal`为true时,相当于`$_FILES`,否则为空                         |
-| data          | array     | array()   | 当`fromGlobal`为true时,相当于`$_REQUEST`,否则为空                       |                                                    |
-| method        | string    | null      | HTTP请求方式                                                            |
+名称          | 类型      | 默认值    | 说明
+--------------|-----------|-----------|------
+fromGlobal    | bool      | true      | 是否将PHP全局变量作为请求参数,设置为`false`的话,可以自行构造请求数据
+gets          | array     | array()   | 当`fromGlobal`为true时,相当于`$_GET`,否则为空
+posts         | array     | array()   | 当`fromGlobal`为true时,相当于`$_POST`,否则为空
+cookies       | array     | array()   | 当`fromGlobal`为true时,相当于`$_COOKIE`,否则为空
+servers       | array     | array()   | 当`fromGlobal`为true时,相当于`$_SERVER`,否则为空
+files         | array     | array()   | 当`fromGlobal`为true时,相当于`$_FILES`,否则为空
+data          | array     | array()   | 当`fromGlobal`为true时,相当于`$_REQUEST`,否则为空
+method        | string    | null      | HTTP请求方式
 
 ### 方法
 
@@ -85,14 +89,14 @@ $ip = widget()->request->getServer('SERVER_ADDR');
 #### request->setMethod($method)
 设置HTTP请求方式,可以通过该接口设置请求为`PUT`,`DELETE`等等
 
-#### request->inMethod($method)
+#### request->isMethod($method)
 检查HTTP请求方式是否为$method
 
-#### request->inGet()
+#### request->isGet()
 检查HTTP请求方式是否为`GET`
 
-#### request->inPost()
+#### request->isPost()
 检查HTTP请求方式是否为`POST`
 
-#### request->inAjax()
+#### request->isAjax()
 检查当前是否为ajax(XMLHttpRequest)请求
