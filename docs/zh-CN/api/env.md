@@ -7,6 +7,7 @@ Env
 ----
 
 ### 在Widget初始化时根据环境加载配置
+
 ```php
 widget(array(
     'widget' => array(
@@ -23,8 +24,9 @@ widget(array(
 ```
 
 ### 判断当前是否在开发环境
+
 ```php
-if (widget()->env->inDev()) {
+if (widget()->env->isDev()) {
     // do something
 }
 ```
@@ -56,11 +58,11 @@ configDir | string    | config/config_%env%.php     | 配置环境的目录,`%en
 #### env->getEnv()
 获取环境名称
 
-#### env->inDev()
+#### env->isDev()
 检查是否为开发环境
 
-#### env->inTest()
+#### env->isTest()
 检查是否为测试(Beta,演示)环境
 
-#### env->inProd()
+#### env->isProd()
 检查是否为生产(线上)环境

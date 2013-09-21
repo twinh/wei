@@ -68,8 +68,8 @@ class RequestTest extends TestCase
             ));
             $this->widget->set('request', $request);
 
-            $this->assertTrue($request->{'in' . $method}());
-            $this->assertTrue($request->inMethod($method));
+            $this->assertTrue($request->{'is' . $method}());
+            $this->assertTrue($request->isMethod($method));
         }
     }
 
@@ -77,16 +77,16 @@ class RequestTest extends TestCase
     {
         $this->request->setServer('HTTP_X_REQUESTED_WITH', 'xmlhttprequest');
 
-        $this->assertTrue($this->request->inAjax());
+        $this->assertTrue($this->request->isAjax());
 
         $this->request->setServer('HTTP_X_REQUESTED_WITH', 'json');
 
-        $this->assertFalse($this->request->inAjax());
+        $this->assertFalse($this->request->isAjax());
 
         $servers = $this->request->getParameterReference('server');
         unset($servers['HTTP_X_REQUESTED_WITH']);
 
-        $this->assertFalse($this->request->inAjax());
+        $this->assertFalse($this->request->isAjax());
     }
 
     /**

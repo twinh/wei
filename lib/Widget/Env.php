@@ -135,7 +135,7 @@ class Env extends Base
      *
      * @return bool
      */
-    public function inDev()
+    public function isDev()
     {
         return $this->env === 'dev';
     }
@@ -145,7 +145,7 @@ class Env extends Base
      *
      * @return bool
      */
-    public function inTest()
+    public function isTest()
     {
         return $this->env === 'test';
     }
@@ -155,7 +155,7 @@ class Env extends Base
      *
      * @return bool
      */
-    public function inProd()
+    public function isProd()
     {
         return $this->env === 'prod';
     }

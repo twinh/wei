@@ -518,7 +518,7 @@ namespace Widget
          *
          * @return bool
          */
-        public function inDebug()
+        public function isDebug()
         {
             return $this->debug;
         }
