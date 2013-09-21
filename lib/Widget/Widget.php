@@ -686,7 +686,7 @@ namespace
      *
      * @param array $config                 The array or file configuration
      * @param string $name                  The name of the instance
-     * @return $this\Widget
+     * @return Widget\Widget
      */
     function widget($config = array(), $name = 'default')
     {
@@ -696,7 +696,7 @@ namespace
     /**
      * Get widget container instance
      *
-     * @return $this\Widget
+     * @return Widget\Widget
      */
     function wei()
     {
