@@ -10638,19 +10638,19 @@
 
 <p>设置HTTP请求方式,可以通过该接口设置请求为<code>PUT</code>,<code>DELETE</code>等等</p>
 
-<h4>request-&gt;inMethod($method)</h4>
+<h4>request-&gt;isMethod($method)</h4>
 
 <p>检查HTTP请求方式是否为$method</p>
 
-<h4>request-&gt;inGet()</h4>
+<h4>request-&gt;isGet()</h4>
 
 <p>检查HTTP请求方式是否为<code>GET</code></p>
 
-<h4>request-&gt;inPost()</h4>
+<h4>request-&gt;isPost()</h4>
 
 <p>检查HTTP请求方式是否为<code>POST</code></p>
 
-<h4>request-&gt;inAjax()</h4>
+<h4>request-&gt;isAjax()</h4>
 
 <p>检查当前是否为ajax(XMLHttpRequest)请求</p>
   </section>
@@ -10813,9 +10813,9 @@
 
 <h3>根据用户设备跳转到相应的页面</h3>
 
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">inIphone</span><span class="p">())</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">isIphone</span><span class="p">())</span> <span class="p">{</span>
     <span class="c1">// 跳转到iPhone定制页面</span>
-<span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">inIpad</span><span class="p">())</span> <span class="p">{</span>
+<span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">isIpad</span><span class="p">())</span> <span class="p">{</span>
     <span class="c1">// 跳转到iPad定制页面</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="c1">// 展示默认页面</span>
@@ -10829,7 +10829,7 @@
 
 <h3>如果用户为IE浏览器,输出用浏览器版本</h3>
 
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">inIe</span><span class="p">())</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">isIe</span><span class="p">())</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">getVersion</span><span class="p">(</span><span class="s1">'ie'</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -10851,7 +10851,7 @@
 
 <p>检测客户端是否为指定的浏览器,操作系统和手持设备</p>
 
-<h4>ua-&gt;in($name)</h4>
+<h4>ua-&gt;is($name)</h4>
 
 <p>同<code>ua($name)</code></p>
 
@@ -10859,39 +10859,39 @@
 
 <p>获取客户端浏览器,操作系统或手持设备的版本</p>
 
-<h4>ua-&gt;inMobile()</h4>
+<h4>ua-&gt;isMobile()</h4>
 
 <p>检查用户是否通过移动设备访问</p>
 
-<h4>ua-&gt;inIe()</h4>
+<h4>ua-&gt;isIe()</h4>
 
 <p>检查用户是否通过IE浏览器访问</p>
 
-<h4>ua-&gt;inChrome()</h4>
+<h4>ua-&gt;isChrome()</h4>
 
 <p>检查用户是否通过Chrome浏览器访问</p>
 
-<h4>ua-&gt;inFirefox()</h4>
+<h4>ua-&gt;isFirefox()</h4>
 
 <p>检查用户是否通过Firefox浏览器访问</p>
 
-<h4>ua-&gt;inIos()</h4>
+<h4>ua-&gt;isIos()</h4>
 
 <p>检查用户是否使用苹果iOS系统</p>
 
-<h4>ua-&gt;inAndroid()</h4>
+<h4>ua-&gt;isAndroid()</h4>
 
 <p>检查用户是否使用谷歌安卓系统</p>
 
-<h4>ua-&gt;inWindowsPhone()</h4>
+<h4>ua-&gt;isWindowsPhone()</h4>
 
 <p>检查用户是否使用微软Windows Phone系统</p>
 
-<h4>ua-&gt;inIphone()</h4>
+<h4>ua-&gt;isIphone()</h4>
 
 <p>检查用户是否使用iPhone/iPod访问网站</p>
 
-<h4>ua-&gt;inIpad()</h4>
+<h4>ua-&gt;isIpad()</h4>
 
 <p>检查用户是否使用iPad访问网站</p>
   </section>
@@ -12078,7 +12078,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h3>判断当前是否在开发环境</h3>
 
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">env</span><span class="o">-&gt;</span><span class="na">inDev</span><span class="p">())</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">env</span><span class="o">-&gt;</span><span class="na">isDev</span><span class="p">())</span> <span class="p">{</span>
     <span class="c1">// do something</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -12137,15 +12137,15 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <p>获取环境名称</p>
 
-<h4>env-&gt;inDev()</h4>
+<h4>env-&gt;isDev()</h4>
 
 <p>检查是否为开发环境</p>
 
-<h4>env-&gt;inTest()</h4>
+<h4>env-&gt;isTest()</h4>
 
 <p>检查是否为测试(Beta,演示)环境</p>
 
-<h4>env-&gt;inProd()</h4>
+<h4>env-&gt;isProd()</h4>
 
 <p>检查是否为生产(线上)环境</p>
   </section>
