@@ -13,16 +13,16 @@ namespace Widget;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  *
- * @method      bool inIe() Check if the user is browsing in Internet Explorer browser
- * @method      bool inChrome() Check if the user is browsing in Chrome browser
- * @method      bool inFirefox() Check if the user is browsing in Firefox browser
+ * @method      bool isIe() Check if the user is browsing in Internet Explorer browser
+ * @method      bool isChrome() Check if the user is browsing in Chrome browser
+ * @method      bool isFirefox() Check if the user is browsing in Firefox browser
  *
- * @method      bool inIos()  Check if the device is running on Apple's iOS platform
- * @method      bool inAndroid() Check if the device is running on Google's Android platform
- * @method      bool inWindowsPhone() Check if the device is running on Windows Phone platform
+ * @method      bool isIos()  Check if the device is running on Apple's iOS platform
+ * @method      bool isAndroid() Check if the device is running on Google's Android platform
+ * @method      bool isWindowsPhone() Check if the device is running on Windows Phone platform
  *
- * @method      bool inIphone() Check if the user is browsing by iPhone/iPod
- * @method      bool inIpad() Check if the user is browsing by iPad
+ * @method      bool isIphone() Check if the user is browsing by iPhone/iPod
+ * @method      bool isIpad() Check if the user is browsing by iPad
  */
 class Ua extends Base
 {
