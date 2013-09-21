@@ -242,6 +242,22 @@ $object     | Widget\Base   | 当前初始化的微件
 $config | string,array | 微件的配置数组或配置文件
 $name   | string       | 微件对象的名称
 
+#### widget()->isDebug()
+检查是否启用了调试
+
+**返回:** `bool`
+
+#### widget()->setDebug($debug)
+设置调试状态
+
+**返回:** `Widget\Widget` 微件管理器对象
+
+**参数**
+
+名称    | 类型         | 说明
+--------|--------------|------
+$debug  | bool         | 是否启用调试
+
 #### widget()->setConfig($name, $vlaue = array())
 设置微件的配置
 
