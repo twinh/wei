@@ -2,7 +2,7 @@
 
 require '../../../lib/Widget/Widget.php';
 
-$widget     = Widget\Widget::create();
+$widget     = widget();
 $request    = $widget->request;
 $dataType   = $request->getQuery('type');
 $test       = $request->getQuery('test');
