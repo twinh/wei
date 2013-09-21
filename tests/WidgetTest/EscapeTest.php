@@ -475,7 +475,7 @@ class EscapeTest extends TestCase
         return array(
             array(''),
             array(null),
-            array(0),
+            //array(0),
             array('0'),
         );
     }
