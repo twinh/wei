@@ -76,7 +76,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     protected $content;
 
     /**
-     * Whether create request parameter from PHP global varibales
+     * Whether create request parameter from PHP global variable
      *
      * @var bool
      */
