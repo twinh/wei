@@ -173,7 +173,7 @@ class View extends Base
      * Set layout for current view
      *
      * @param string $name The name of layout template
-     * @param string $variable The variable name that
+     * @param string $variable The variable name of layout content
      * @return $this
      */
     public function layout($name, $variable = 'content')
