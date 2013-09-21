@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * A widget that handles the HTTP request data
  *
- * The methods are deviced from code of the Zend Framework (2.1-dev 2013-04-01)
+ * The methods are derived from code of the Zend Framework (2.1-dev 2013-04-01)
  *   * getBaseUrl
  *   * getRequestUri
  *   * detectBaseUrl
