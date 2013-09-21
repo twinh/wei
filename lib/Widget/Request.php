@@ -189,7 +189,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      *
      * @param string|array $name The parameter name or A key-value array
      * @param mixed $value The parameter value
-     * @return Request
+     * @return $this
      */
     public function set($name, $value = null)
     {
@@ -207,7 +207,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * Remove parameter by specified name
      *
      * @param string $name The parameter name
-     * @return Request
+     * @return $this
      */
     public function remove($name)
     {
@@ -218,7 +218,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     /**
      * Clear all parameter data
      *
-     * @return Request
+     * @return $this
      */
     public function clear()
     {
@@ -274,7 +274,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * Merge data from array
      *
      * @param  array            $array
-     * @return Request
+     * @return $this
      */
     public function fromArray(array $array = array())
     {
@@ -382,7 +382,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * Set the path info
      *
      * @param string $pathInfo
-     * @return Request
+     * @return $this
      */
     public function setPathInfo($pathInfo)
     {
@@ -479,7 +479,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * Set the HTTP request method
      *
      * @param string $method The value of method
-     * @return Request
+     * @return $this
      */
     public function setMethod($method)
     {
@@ -561,7 +561,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * Set the request message body
      *
      * @param string $content
-     * @return Request
+     * @return $this
      */
     public function setContent($content)
     {
@@ -603,7 +603,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      *
      * @param string $name
      * @param string $value
-     * @return Request
+     * @return $this
      */
     public function setServer($name, $value)
     {

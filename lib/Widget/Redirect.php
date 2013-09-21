@@ -58,7 +58,7 @@ class Redirect extends Response
      *
      * @param  string         $url     The url redirect to
      * @param  array          $options The redirect widget options
-     * @return Redirect
+     * @return $this
      */
     public function __invoke($url = null, $options = array())
     {
@@ -89,7 +89,7 @@ class Redirect extends Response
      * Set redirect view file
      *
      * @param string $view The view file
-     * @return Redirect
+     * @return $this
      * @throws \RuntimeException When view file not found
      */
     public function setView($view)
@@ -105,7 +105,7 @@ class Redirect extends Response
      * Set wait seconds
      *
      * @param int $wait
-     * @return Redirect
+     * @return $this
      */
     public function setWait($wait)
     {

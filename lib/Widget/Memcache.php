@@ -200,7 +200,7 @@ class Memcache extends BaseCache
      * Set memcache object
      *
      * @param \Memcache $object
-     * @return \Memcache
+     * @return $this
      */
     public function setObject(\Memcache $object)
     {

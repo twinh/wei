@@ -81,7 +81,7 @@ class Error extends Base
      * Attach a handler to exception error
      *
      * @param callback $fn The error handler
-     * @return Error
+     * @return $this
      */
     public function __invoke($fn)
     {
@@ -93,7 +93,7 @@ class Error extends Base
      * Attach a handler to not found error
      *
      * @param callback $fn The error handler
-     * @return Error
+     * @return $this
      */
     public function notFound($fn)
     {
@@ -105,7 +105,7 @@ class Error extends Base
      * Attach a handler to fatal error
      *
      * @param callback $fn The error handler
-     * @return Error
+     * @return $this
      */
     public function fatal($fn)
     {

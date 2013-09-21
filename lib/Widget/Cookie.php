@@ -71,7 +71,7 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
      * @param  string       $key     The name of cookie
      * @param  mixed        $value   The value of cookie
      * @param  array        $options
-     * @return Cookie
+     * @return $this
      */
     public function set($key, $value = null, array $options = array())
     {
@@ -90,7 +90,7 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
      * Remove response cookie
      *
      * @param string $key the name of cookie
-     * @return Cookie
+     * @return $this
      */
     public function remove($key)
     {
@@ -102,7 +102,7 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
     /**
      * Clear all cookie data
      *
-     * @return Cookie
+     * @return $this
      */
     public function clear()
     {
@@ -158,7 +158,7 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
      * Unset the offset
      *
      * @param string $offset
-     * @return Cookie
+     * @return $this
      */
     public function offsetUnset($offset)
     {

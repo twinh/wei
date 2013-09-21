@@ -198,7 +198,7 @@ class Memcached extends BaseCache
      * Set memcached object
      *
      * @param \Memcached $object
-     * @return Memcached
+     * @return $this
      */
     public function setObject(\Memcached $object)
     {

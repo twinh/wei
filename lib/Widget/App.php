@@ -69,7 +69,7 @@ class App extends Base
      * Startup application
      *
      * @param  array     $options
-     * @return App|null
+     * @return $this|null
      */
     public function __invoke(array $options = array())
     {
@@ -90,7 +90,7 @@ class App extends Base
      *
      * @param  string    $controller The name of controller
      * @param  string    $action     The name of action
-     * @return App
+     * @return $this
      * @throws \RuntimeException When controller or action not found
      */
     public function dispatch($controller, $action = 'index')

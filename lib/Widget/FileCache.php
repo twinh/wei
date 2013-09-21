@@ -240,7 +240,7 @@ class FileCache extends BaseCache
      * Set the cache directory
      *
      * @param string $dir
-     * @return FileCache
+     * @return $this
      * @throws \RuntimeException When failed to create the cache directory
      */
     public function setDir($dir)
@@ -252,7 +252,6 @@ class FileCache extends BaseCache
         }
 
         $this->dir = $dir;
-
         return $this;
     }
 

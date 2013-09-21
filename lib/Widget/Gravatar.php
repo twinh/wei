@@ -112,7 +112,7 @@ class Gravatar extends Base
      * Sets the default image type or URL
      *
      * @param string $default
-     * @return Gravatar
+     * @return $this
      */
     public function setDefault($default)
     {

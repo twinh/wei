@@ -191,7 +191,7 @@ class Response extends Base
      *
      * @param  string         $content
      * @param  int            $status
-     * @return Response
+     * @return $this
      */
     public function __invoke($content = null, $status = null)
     {
@@ -203,7 +203,7 @@ class Response extends Base
      *
      * @param  string         $content
      * @param  int            $status
-     * @return Response
+     * @return $this
      */
     public function send($content = null, $status = null)
     {
@@ -237,7 +237,7 @@ class Response extends Base
      * Set response content
      *
      * @param  mixed          $content
-     * @return Response
+     * @return $this
      */
     public function setContent($content)
     {
@@ -258,7 +258,7 @@ class Response extends Base
     /**
      * Send response content
      *
-     * @return Response
+     * @return $this
      */
     public function sendContent()
     {
@@ -271,7 +271,7 @@ class Response extends Base
      *
      * @param  int          $code The status code
      * @param  string|null       $text The status text
-     * @return Response
+     * @return $this
      */
     public function setStatusCode($code, $text = null)
     {
@@ -300,7 +300,7 @@ class Response extends Base
      * Set the HTTP version
      *
      * @param  string       $version The HTTP version
-     * @return Response
+     * @return $this
      */
     public function setVersion($version)
     {
@@ -324,7 +324,7 @@ class Response extends Base
      * @param  string       $name    The header name
      * @param  string|array $values  The header values
      * @param  bool         $replace Whether replace the exists values or not
-     * @return Response
+     * @return $this
      */
     public function setHeader($name, $values = null, $replace = true)
     {
@@ -371,7 +371,7 @@ class Response extends Base
      * Remove header by specified name
      *
      * @param string $name The header name
-     * @return Response
+     * @return $this
      */
     public function removeHeader($name)
     {
@@ -457,7 +457,7 @@ class Response extends Base
      * @param  string       $key     The name of cookie
      * @param  mixed        $value   The value of cookie
      * @param  array        $options The options of cookie
-     * @return Response
+     * @return $this
      */
     public function setCookie($key, $value , array $options = array())
     {
@@ -470,7 +470,7 @@ class Response extends Base
      * Remove response cookie
      *
      * @param string $key The name of cookie
-     * @return Response
+     * @return $this
      */
     public function removeCookie($key)
     {
@@ -545,7 +545,7 @@ class Response extends Base
      * Set response sent status
      *
      * @param  bool           $bool
-     * @return Response
+     * @return $this
      */
     public function setSentStatus($bool)
     {

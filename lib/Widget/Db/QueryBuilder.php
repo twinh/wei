@@ -308,7 +308,7 @@ class QueryBuilder
      * @param string|integer $key The parameter position or name
      * @param mixed $value The parameter value
      * @param string|null $type PDO::PARAM_*
-     * @return QueryBuilder
+     * @return $this
      */
     public function setParameter($key, $value, $type = null)
     {
@@ -337,7 +337,7 @@ class QueryBuilder
      *
      * @param array $params The query parameters to set
      * @param array $types  The query parameters types to set
-     * @return QueryBuilder
+     * @return $this
      */
     public function setParameters(array $params, array $types = array())
     {
@@ -372,7 +372,7 @@ class QueryBuilder
      * Sets the position of the first result to retrieve (the "offset")
      *
      * @param integer $offset The first result to return
-     * @return QueryBuilder
+     * @return $this
      */
     public function offset($offset)
     {
@@ -383,7 +383,7 @@ class QueryBuilder
      * Sets the maximum number of results to retrieve (the "limit")
      *
      * @param integer $limit The maximum number of results to retrieve
-     * @return QueryBuilder
+     * @return $this
      */
     public function limit($limit)
     {
@@ -421,7 +421,7 @@ class QueryBuilder
      * @param string $sqlPart
      * @param boolean $append
      * @param string $type
-     * @return QueryBuilder
+     * @return $this
      */
     public function add($sqlPartName, $sqlPart, $append = false, $type = null)
     {
@@ -473,7 +473,7 @@ class QueryBuilder
      * ```
      *
      * @param mixed $select The selection expressions.
-     * @return QueryBuilder
+     * @return $this
      */
     public function select($select = null)
     {
@@ -500,7 +500,7 @@ class QueryBuilder
      * ```
      *
      * @param mixed $select The selection expression.
-     * @return QueryBuilder
+     * @return $this
      */
     public function addSelect($select = null)
     {
@@ -527,7 +527,7 @@ class QueryBuilder
      * ```
      *
      * @param string $table The table whose rows are subject to the deletion.
-     * @return QueryBuilder
+     * @return $this
      */
     public function delete($table = null)
     {
@@ -552,7 +552,7 @@ class QueryBuilder
      * ```
      *
      * @param string $table The table whose rows are subject to the update
-     * @return QueryBuilder
+     * @return $this
      */
     public function update($table = null)
     {
@@ -581,7 +581,7 @@ class QueryBuilder
      * ```
      *
      * @param string $from   The table
-     * @return QueryBuilder
+     * @return $this
      */
     public function from($from)
     {
@@ -606,7 +606,7 @@ class QueryBuilder
      *
      * @param string $table The table name to join
      * @param string $on The condition for the join
-     * @return QueryBuilder
+     * @return $this
      */
     public function join($table, $on = null)
     {
@@ -628,7 +628,7 @@ class QueryBuilder
      *
      * @param string $table The table name to join
      * @param string $on The condition for the join
-     * @return QueryBuilder
+     * @return $this
      */
     public function innerJoin($table, $on = null)
     {
@@ -650,7 +650,7 @@ class QueryBuilder
      *
      * @param string $table The table name to join
      * @param string $on The condition for the join
-     * @return QueryBuilder
+     * @return $this
      */
     public function leftJoin($table, $on = null)
     {
@@ -672,7 +672,7 @@ class QueryBuilder
      *
      * @param string $table The table name to join
      * @param string $on The condition for the join
-     * @return QueryBuilder
+     * @return $this
      */
     public function rightJoin($table, $on = null)
     {
@@ -694,7 +694,7 @@ class QueryBuilder
      * ```
      *
      * @param string $set The SET clause
-     * @return QueryBuilder
+     * @return $this
      */
     public function set($set)
     {
@@ -727,7 +727,7 @@ class QueryBuilder
      * @param string $conditions The WHERE conditions
      * @param array $params The condition parameters
      * @param array $types The parameter types
-     * @return QueryBuilder
+     * @return $this
      */
     public function where($conditions, $params = array(), $types = array())
     {
@@ -751,7 +751,7 @@ class QueryBuilder
      * @param string $conditions The WHERE conditions
      * @param array $params The condition parameters
      * @param array $types The parameter types
-     * @return QueryBuilder
+     * @return $this
      */
     public function andWhere($conditions, $params = array(), $types = array())
     {
@@ -775,7 +775,7 @@ class QueryBuilder
      * @param string $conditions The WHERE conditions
      * @param array $params The condition parameters
      * @param array $types The parameter types
-     * @return QueryBuilder
+     * @return $this
      */
     public function orWhere($conditions, $params = array(), $types = array())
     {
@@ -796,7 +796,7 @@ class QueryBuilder
      * ```
      *
      * @param mixed $groupBy The grouping expression.
-     * @return QueryBuilder
+     * @return $this
      */
     public function groupBy($groupBy)
     {
@@ -822,7 +822,7 @@ class QueryBuilder
      * ```
      *
      * @param mixed $groupBy The grouping expression.
-     * @return QueryBuilder
+     * @return $this
      */
     public function addGroupBy($groupBy)
     {
@@ -842,7 +842,7 @@ class QueryBuilder
      * @param string $conditions The having conditions
      * @param array $params The condition parameters
      * @param array $types The parameter types
-     * @return QueryBuilder
+     * @return $this
      */
     public function having($conditions, $params = array(), $types = array())
     {
@@ -858,7 +858,7 @@ class QueryBuilder
      * @param string $conditions The HAVING conditions to append
      * @param array $params The condition parameters
      * @param array $types The parameter types
-     * @return QueryBuilder
+     * @return $this
      */
     public function andHaving($conditions, $params = array(), $types = array())
     {
@@ -874,7 +874,7 @@ class QueryBuilder
      * @param string $conditions The HAVING conditions to add
      * @param array $params The condition parameters
      * @param array $types The parameter types
-     * @return QueryBuilder
+     * @return $this
      */
     public function orHaving($conditions, $params = array(), $types = array())
     {
@@ -889,7 +889,7 @@ class QueryBuilder
      *
      * @param string $sort The ordering expression.
      * @param string $order The ordering direction.
-     * @return QueryBuilder
+     * @return $this
      */
     public function orderBy($sort, $order = 'ASC')
     {
@@ -901,7 +901,7 @@ class QueryBuilder
      *
      * @param string $sort The ordering expression.
      * @param string $order The ordering direction.
-     * @return QueryBuilder
+     * @return $this
      */
     public function addOrderBy($sort, $order = 'ASC')
     {
@@ -945,7 +945,7 @@ class QueryBuilder
      * Reset all SQL parts
      *
      * @param array $queryPartNames
-     * @return QueryBuilder
+     * @return $this
      */
     public function resetAll($queryPartNames = null)
     {
@@ -964,7 +964,7 @@ class QueryBuilder
      * Reset single SQL part
      *
      * @param string $queryPartName
-     * @return QueryBuilder
+     * @return $this
      */
     public function reset($queryPartName)
     {

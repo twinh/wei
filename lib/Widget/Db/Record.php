@@ -168,7 +168,7 @@ class Record extends Base implements \ArrayAccess
      * Set the record table name
      *
      * @param string $table
-     * @return Record
+     * @return $this
      */
     public function setTable($table)
     {
@@ -212,7 +212,7 @@ class Record extends Base implements \ArrayAccess
      * Import a PHP array in this record
      *
      * @param $data
-     * @return Record
+     * @return $this
      */
     public function fromArray($data)
     {
@@ -226,7 +226,7 @@ class Record extends Base implements \ArrayAccess
      * Import a PHP array in this record
      *
      * @param array $data
-     * @return Record
+     * @return $this
      */
     public function setData(array $data)
     {
@@ -357,7 +357,7 @@ class Record extends Base implements \ArrayAccess
      * Remove field value
      *
      * @param string $name The name of field
-     * @return Record
+     * @return $this
      */
     public function __unset($name)
     {
@@ -379,7 +379,7 @@ class Record extends Base implements \ArrayAccess
      * Remove field value
      *
      * @param string $name The name of field
-     * @return Record
+     * @return $this
      */
     public function remove($name)
     {

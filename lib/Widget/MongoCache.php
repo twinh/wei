@@ -172,7 +172,7 @@ class MongoCache extends BaseCache
      * Set couchbase object
      *
      * @param \MongoCollection $object
-     * @return MongoCache
+     * @return $this
      */
     public function setObject(\MongoCollection $object)
     {

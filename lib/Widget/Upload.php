@@ -278,7 +278,7 @@ class Upload extends Image
      * Set upload directory
      *
      * @param string $dir
-     * @return Upload
+     * @return $this
      */
     public function setDir($dir)
     {

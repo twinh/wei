@@ -52,7 +52,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * Start session
      *
      * @throws \RuntimeException When header has been sent
-     * @return Session
+     * @return $this
      */
     protected function start()
     {
@@ -111,7 +111,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      *
      * @param string|array $name The session name or A key-value array
      * @param mixed $value The session value
-     * @return Session
+     * @return $this
      */
     public function set($name, $value = null)
     {
@@ -129,7 +129,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * Remove session data by specified name
      *
      * @param string $name The name of session
-     * @return Session
+     * @return $this
      */
     public function remove($name)
     {
@@ -151,7 +151,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     /**
      * Clear session data in current namespace
      *
-     * @return Session
+     * @return $this
      */
     public function clear()
     {
@@ -162,7 +162,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     /**
      * Destroy all session data, including session in other namespaces
      *
-     * @return Session
+     * @return $this
      */
     public function destroy()
     {
@@ -186,7 +186,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * Set session configuration options
      *
      * @param array $inis
-     * @return Session
+     * @return $this
      */
     public function setInis($inis)
     {

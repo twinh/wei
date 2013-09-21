@@ -75,7 +75,7 @@ class T extends Base
      * Sets the current locale
      *
      * @param string $locale
-     * @return T
+     * @return $this
      */
     public function setLocale($locale)
     {
@@ -97,7 +97,7 @@ class T extends Base
      * Set the fallback locale
      *
      * @param string $locale
-     * @return T
+     * @return $this
      */
     public function setDefaultLocale($locale)
     {
@@ -119,7 +119,7 @@ class T extends Base
      * Loads translator messages from file
      *
      * @param string $pattern The file path, which can contains %s that would be convert the current locale or fallback locale
-     * @return T
+     * @return $this
      * @throws \InvalidArgumentException When file not found or not readable
      */
     public function loadFromFile($pattern)
@@ -147,7 +147,7 @@ class T extends Base
      * Loads translator messages from array
      *
      * @param array $messages
-     * @return T
+     * @return $this
      */
     public function loadFromArray(array $messages)
     {
@@ -159,7 +159,7 @@ class T extends Base
      * Loads translator messages from closure
      *
      * @param \Closure $fn
-     * @return T
+     * @return $this
      */
     public function load(\Closure $fn)
     {

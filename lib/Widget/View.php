@@ -129,7 +129,7 @@ class View extends Base
      *
      * @param string $name  The name of the variable
      * @param mixed  $value The value of the variable
-     * @return View
+     * @return $this
      */
     public function assign($name, $value = null)
     {
@@ -174,7 +174,7 @@ class View extends Base
      *
      * @param string $name The name of layout template
      * @param string $variable The variable name that
-     * @return View
+     * @return $this
      */
     public function layout($name, $variable = 'content')
     {
@@ -189,7 +189,7 @@ class View extends Base
      * Set base directory for views
      *
      * @param string|array $dirs
-     * @return View
+     * @return $this
      */
     public function setDirs($dirs)
     {

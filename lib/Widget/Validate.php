@@ -149,7 +149,7 @@ class Validate extends Base
      * Create a new validator and validate by specified options
      *
      * @param array $options
-     * @return Validate
+     * @return $this
      */
     public function __invoke(array $options = array())
     {
@@ -346,7 +346,7 @@ class Validate extends Base
      *
      * @param string $field The field name
      * @param string $rule The rule name
-     * @return Validate
+     * @return $this
      */
     public function addValidRule($field, $rule)
     {
@@ -359,7 +359,7 @@ class Validate extends Base
      *
      * @param string $field The field name
      * @param string $rule The rule name
-     * @return Validate
+     * @return $this
      */
     public function addInvalidRule($field, $rule)
     {
@@ -413,7 +413,7 @@ class Validate extends Base
      * Set field rules
      *
      * @param array $rules
-     * @return Validate
+     * @return $this
      */
     public function setRules(array $rules = null)
     {
@@ -538,7 +538,7 @@ class Validate extends Base
      *
      * @param array|object $data
      * @throws \InvalidArgumentException when argument type is not array or object
-     * @return Validate
+     * @return $this
      */
     public function setData($data)
     {
@@ -589,7 +589,7 @@ class Validate extends Base
      *
      * @param string $field The name of field
      * @param mixed $data The data of field
-     * @return Validate
+     * @return $this
      */
     public function setFieldData($field, $data)
     {
@@ -605,7 +605,7 @@ class Validate extends Base
      * Set custom messages
      *
      * @param array $messages
-     * @return Validate
+     * @return $this
      */
     public function setMessages(array $messages = null)
     {

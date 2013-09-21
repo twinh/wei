@@ -240,7 +240,7 @@ class Redis extends BaseCache
      * Set the redis object
      *
      * @param \Redis $object
-     * @return Redis
+     * @return $this
      */
     public function setObject(\Redis $object)
     {

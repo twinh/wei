@@ -81,7 +81,7 @@ class Router extends Base
      * Set routes
      *
      * @param array $routes
-     * @return Router
+     * @return $this
      */
     public function setRoutes($routes)
     {
@@ -107,7 +107,7 @@ class Router extends Base
      *
      * @param  array $route the options of the route
      * @throws \InvalidArgumentException When argument is not string or array
-     * @return Router
+     * @return $this
      */
     public function set($route)
     {
@@ -142,7 +142,7 @@ class Router extends Base
      * Remove the route
      *
      * @param  string      $id The id of the route
-     * @return Router
+     * @return $this
      */
     public function remove($id)
     {
@@ -378,7 +378,7 @@ class Router extends Base
      *
      * @param string $pattern
      * @param callback $fn
-     * @return Router
+     * @return $this
      */
     public function get($pattern, $fn)
     {
@@ -390,7 +390,7 @@ class Router extends Base
      *
      * @param string $pattern
      * @param callback $fn
-     * @return Router
+     * @return $this
      */
     public function post($pattern, $fn)
     {
@@ -402,7 +402,7 @@ class Router extends Base
      *
      * @param string $pattern
      * @param callback $fn
-     * @return Router
+     * @return $this
      */
     public function delete($pattern, $fn)
     {
@@ -414,7 +414,7 @@ class Router extends Base
      *
      * @param string $pattern
      * @param callback $fn
-     * @return Router
+     * @return $this
      */
     public function put($pattern, $fn)
     {
@@ -427,7 +427,7 @@ class Router extends Base
      * @param string $pattern The route pattern
      * @param string $method The route method
      * @param callback $fn The callback invoke then route is matched
-     * @return Router
+     * @return $this
      */
     public function request($pattern, $method, $fn = null)
     {

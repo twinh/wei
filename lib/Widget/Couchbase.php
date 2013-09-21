@@ -180,7 +180,7 @@ class Couchbase extends BaseCache
      * Set couchbase object
      *
      * @param \Couchbase $object
-     * @return Couchbase
+     * @return $this
      */
     public function setObject(\Couchbase $object)
     {

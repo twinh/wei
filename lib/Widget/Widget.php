@@ -172,7 +172,7 @@ namespace Widget
          *
          * @param array $config                 The array or file configuration
          * @param string $name                  The name of the instance
-         * @return Widget
+         * @return $this
          * @throws \InvalidArgumentException    When the configuration parameter is not array or file
          */
         public static function create($config = array(), $name = 'default')
@@ -250,7 +250,7 @@ namespace Widget
          *
          * @param string|array $name
          * @param mixed $value
-         * @return Widget
+         * @return $this
          */
         public function setConfig($name, $value = null)
         {
@@ -446,7 +446,7 @@ namespace Widget
          *
          * @param string $name The name of widget
          * @param Base $widget The widget object
-         * @return Widget
+         * @return $this
          */
         public function set($name, Base $widget)
         {
@@ -505,7 +505,7 @@ namespace Widget
          * Set debug flag
          *
          * @param $bool
-         * @return Widget
+         * @return $this
          */
         public function setDebug($bool)
         {
@@ -527,7 +527,7 @@ namespace Widget
          * Whether enable autoload or not
          *
          * @param bool $enable
-         * @return Widget
+         * @return $this
          */
         public function setAutoload($enable)
         {
@@ -545,7 +545,7 @@ namespace Widget
          * Set autoload directories for autoload method
          *
          * @param array $map
-         * @return Widget
+         * @return $this
          */
         public function setAutoloadMap(array $map)
         {
@@ -565,7 +565,7 @@ namespace Widget
          * Sets the value of PHP configuration options
          *
          * @param array $inis
-         * @return Widget
+         * @return $this
          */
         public function setInis(array $inis)
         {
@@ -580,7 +580,7 @@ namespace Widget
          * Merge widget aliases
          *
          * @param array $aliases
-         * @return Widget
+         * @return $this
          */
         public function setAliases(array $aliases)
         {
@@ -593,7 +593,7 @@ namespace Widget
          *
          * @param string $name The name of widget
          * @param string $class The class that the widget reference to
-         * @return Widget
+         * @return $this
          */
         public function setAlias($name, $class)
         {
@@ -609,7 +609,7 @@ namespace Widget
          * @param null $format The widget name format, eg 'is%s'
          * @param bool $autoload Whether add namespace and directory to `autoloadMap` or nor
          * @throws \InvalidArgumentException When the first parameter is not a directory
-         * @return Widget
+         * @return $this
          */
         public function import($dir, $namespace, $format = null, $autoload = false)
         {
@@ -635,7 +635,7 @@ namespace Widget
          * Set import widgets
          *
          * @param array $import
-         * @return Widget
+         * @return $this
          */
         protected function setImport(array $import = array())
         {
@@ -686,7 +686,7 @@ namespace
      *
      * @param array $config                 The array or file configuration
      * @param string $name                  The name of the instance
-     * @return Widget\Widget
+     * @return $this\Widget
      */
     function widget($config = array(), $name = 'default')
     {
@@ -696,7 +696,7 @@ namespace
     /**
      * Get widget container instance
      *
-     * @return Widget\Widget
+     * @return $this\Widget
      */
     function wei()
     {

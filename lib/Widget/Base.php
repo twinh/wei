@@ -279,7 +279,7 @@ abstract class Base
      *
      * @param string|array $name
      * @param mixed $value
-     * @return Base
+     * @return $this
      */
     public function setOption($name, $value = null)
     {
@@ -345,7 +345,7 @@ abstract class Base
      * Get the widget object by the given name
      *
      * @param  string $name The name of widget
-     * @return Base
+     * @return $this
      */
     public function __get($name)
     {

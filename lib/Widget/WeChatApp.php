@@ -144,7 +144,7 @@ class WeChatApp extends Base
     /**
      * Start up WeChat application and output the matched rule message
      *
-     * @return WeChatApp
+     * @return $this
      */
     public function __invoke()
     {
@@ -215,7 +215,7 @@ class WeChatApp extends Base
      * Attach a callback which triggered when user subscribed you
      *
      * @param \Closure $fn
-     * @return WeChatApp
+     * @return $this
      */
     public function subscribe(Closure $fn)
     {
@@ -226,7 +226,7 @@ class WeChatApp extends Base
      * Attach a callback which triggered when user unsubscribed you
      *
      * @param \Closure $fn
-     * @return WeChatApp
+     * @return $this
      */
     public function unsubscribe(Closure $fn)
     {
@@ -238,7 +238,7 @@ class WeChatApp extends Base
      *
      * @param string $key The key of event
      * @param \Closure $fn
-     * @return WeChatApp
+     * @return $this
      */
     public function click($key, Closure $fn)
     {
@@ -250,7 +250,7 @@ class WeChatApp extends Base
      *
      * @param string $keyword The keyword to compare with user input
      * @param \Closure $fn
-     * @return WeChatApp
+     * @return $this
      */
     public function is($keyword, Closure $fn)
     {
@@ -262,7 +262,7 @@ class WeChatApp extends Base
      *
      * @param string $keyword The keyword to search in user input
      * @param \Closure $fn
-     * @return WeChatApp
+     * @return $this
      */
     public function has($keyword, Closure $fn)
     {
@@ -274,7 +274,7 @@ class WeChatApp extends Base
      *
      * @param string $keyword The keyword to search in user input
      * @param \Closure $fn
-     * @return WeChatApp
+     * @return $this
      */
     public function startsWith($keyword, Closure $fn)
     {
@@ -286,7 +286,7 @@ class WeChatApp extends Base
      *
      * @param string $pattern The pattern to match
      * @param \Closure $fn
-     * @return WeChatApp
+     * @return $this
      */
     public function match($pattern, Closure $fn)
     {
@@ -297,7 +297,7 @@ class WeChatApp extends Base
      * Attach a callback to handle image message
      *
      * @param \Closure $fn
-     * @return WeChatApp
+     * @return $this
      */
     public function receiveImage(Closure $fn)
     {
@@ -309,7 +309,7 @@ class WeChatApp extends Base
      * Attach a callback to handle location message
      *
      * @param \Closure $fn
-     * @return WeChatApp
+     * @return $this
      */
     public function receiveLocation(Closure $fn)
     {
@@ -321,7 +321,7 @@ class WeChatApp extends Base
      * Attach a callback to handle voice message
      *
      * @param \Closure $fn
-     * @return WeChatApp
+     * @return $this
      */
     public function receiveVoice(Closure $fn)
     {
@@ -333,7 +333,7 @@ class WeChatApp extends Base
      * Attach a callback to handle video message
      *
      * @param Closure $fn
-     * @return WeChatApp
+     * @return $this
      */
     public function receiveVideo(Closure $fn)
     {
@@ -345,7 +345,7 @@ class WeChatApp extends Base
      * Attach a callback to handle link message
      *
      * @param Closure $fn
-     * @return WeChatApp
+     * @return $this
      */
     public function receiveLink(Closure $fn)
     {
@@ -719,7 +719,7 @@ class WeChatApp extends Base
      * @param \SimpleXMLElement $xml
      * @param string $name
      * @param string $value
-     * @return WeChatApp
+     * @return $this
      */
     protected function addCDataChild(SimpleXMLElement $xml, $name, $value)
     {
@@ -735,7 +735,7 @@ class WeChatApp extends Base
      * @param string $type
      * @param string $keyword
      * @param \Closure $fn
-     * @return WeChatApp
+     * @return $this
      */
     protected function addRule($type, $keyword, Closure $fn)
     {
