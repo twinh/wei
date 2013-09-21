@@ -273,14 +273,13 @@ class UaTest extends TestCase
 
     public function testNotInMobile()
     {
-        $request = new \Widget\Request(array(
-            'fromGlobal' => false,
-            'servers' => array(),
+        $ua = new \Widget\Ua(array(
+            'widget' => $this->widget,
+            'server' => array(
+                'HTTP_USER_AGENT' => 'test'
+            )
         ));
-
-        $this->ua->request = $request;
-
-        $this->assertFalse($this->ua->inMobile());
+        $this->assertFalse($ua->inMobile());
     }
 
     /**
@@ -288,8 +287,11 @@ class UaTest extends TestCase
      */
     public function testInMobile($servers)
     {
-        $this->ua->setOption('server', $servers);
-        $this->assertTrue($this->ua->inMobile());
+        $ua = new \Widget\Ua(array(
+            'widget' => $this->widget,
+            'server' => $servers
+        ));
+        $this->assertTrue($ua->inMobile());
     }
 
     public function providerForInMobile()
