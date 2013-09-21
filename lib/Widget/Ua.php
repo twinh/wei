@@ -132,7 +132,7 @@ class Ua extends Base
     }
 
     /**
-     * Magic call for method inXXX
+     * Magic call for method isXXX
      *
      * @param string $name
      * @param array $args

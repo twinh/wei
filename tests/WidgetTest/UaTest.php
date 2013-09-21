@@ -14,12 +14,12 @@ class UaTest extends TestCase
         // Compatible for old tests
         if (is_string($os)) {
             $this->assertTrue($this->ua($os));
-            $this->assertTrue($this->ua->{'in' . $os}());
+            $this->assertTrue($this->ua->{'is' . $os}());
             $this->assertEquals($version, $this->ua->getVersion($os));
         } else {
             foreach ($os as $value) {
                 $this->assertTrue($this->ua($value[0]));
-                $this->assertTrue($this->ua->{'in' . $value[0]}());
+                $this->assertTrue($this->ua->{'is' . $value[0]}());
                 $this->assertEquals($value[1], $this->ua->getVersion($value[0]));
             }
         }
