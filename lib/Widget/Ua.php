@@ -140,7 +140,7 @@ class Ua extends Base
      */
     public function __call($name, $args)
     {
-        if('in' == substr($name, 0, 2)) {
+        if('is' == substr($name, 0, 2)) {
             return $this->is(substr($name, 2));
         }
         return parent::__call($name, $args);

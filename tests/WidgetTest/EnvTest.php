@@ -97,7 +97,7 @@ class EnvTest extends TestCase
             )
         ));
 
-        $this->assertFalse($widget->inDebug());
+        $this->assertFalse($widget->isDebug());
         $this->assertFalse($widget->getConfig('widget:debug'));
     }
 }
