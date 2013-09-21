@@ -11,12 +11,29 @@ use PDO;
  */
 class DbTest extends TestCase
 {
-    public function setUp()
+    protected function createTable()
     {
-        parent::setUp();
-
         $db = $this->db;
+        $db->query("CREATE TABLE member_group (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
+        $db->query("CREATE TABLE member (id INTEGER NOT NULL, group_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
+        $db->query("CREATE TABLE post (id INTEGER NOT NULL, member_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
+        $db->query("CREATE TABLE tag (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
+        $db->query("CREATE TABLE post_tag (post_id INTEGER NOT NULL, tag_id INTEGER NOT NULL)");
+    }
 
+    protected function dropTable()
+    {
+        $db = $this->db;
+        $db->query('DROP TABLE IF EXISTS member_group');
+        $db->query('DROP TABLE IF EXISTS member');
+        $db->query('DROP TABLE IF EXISTS post');
+        $db->query('DROP TABLE IF EXISTS tag');
+        $db->query('DROP TABLE IF EXISTS post_tag');
+    }
+
+    public function initFixtures()
+    {
+        $db = $this->db;
         $this->dropTable();
         $this->createTable();
 
@@ -73,34 +90,14 @@ class DbTest extends TestCase
         ));
     }
 
-    protected function createTable()
-    {
-        $db = $this->db;
-        $db->query("CREATE TABLE member_group (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE member (id INTEGER NOT NULL, group_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE post (id INTEGER NOT NULL, member_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE tag (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE post_tag (post_id INTEGER NOT NULL, tag_id INTEGER NOT NULL)");
-    }
-
-    protected function dropTable()
-    {
-        $db = $this->db;
-        $db->query('DROP TABLE IF EXISTS member_group');
-        $db->query('DROP TABLE IF EXISTS member');
-        $db->query('DROP TABLE IF EXISTS post');
-        $db->query('DROP TABLE IF EXISTS tag');
-        $db->query('DROP TABLE IF EXISTS post_tag');
-    }
-
     public function testIsConnected()
     {
         $db = $this->db;
 
+        $db->connect();
         $this->assertTrue($db->isConnected());
 
         $db->close();
-
         $this->assertFalse($db->isConnected());
     }
 
@@ -111,6 +108,8 @@ class DbTest extends TestCase
 
     public function testRelation()
     {
+        $this->initFixtures();
+
         $db = $this->db;
 
         $db->setOption('recordNamespace', 'WidgetTest\DbTest');
@@ -157,6 +156,8 @@ class DbTest extends TestCase
 
     public function testSet()
     {
+        $this->initFixtures();
+
         $member = $this->db->member('1');
 
         $this->assertEquals('1', $member->id);
@@ -168,6 +169,8 @@ class DbTest extends TestCase
 
     public function testRecordArrayAccess()
     {
+        $this->initFixtures();
+
         /** @var $member \WidgetTest\DbTest\Member */
         $member = $this->db->member('1');
 
@@ -187,6 +190,8 @@ class DbTest extends TestCase
 
     public function testGetRelation()
     {
+        $this->initFixtures();
+
         $db = $this->db;
 
         $member = $db->member('1');
@@ -202,6 +207,8 @@ class DbTest extends TestCase
 
     public function testUpdate()
     {
+        $this->initFixtures();
+
         $this->db->update('member', array('name' => 'hello'), array('id' => '1'));
 
         $member = $this->db->find('member', '1');
@@ -211,6 +218,8 @@ class DbTest extends TestCase
 
     public function testDelete()
     {
+        $this->initFixtures();
+
         $this->db->delete('member', array('id' => '1'));
 
         $member = $this->db->find('member', 1);
@@ -220,6 +229,8 @@ class DbTest extends TestCase
 
     public function testFind()
     {
+        $this->initFixtures();
+
         $member = $this->db->find('member', '1');
 
         $this->assertEquals('1', $member->id);
@@ -227,6 +238,8 @@ class DbTest extends TestCase
 
     public function testFindOrCreate()
     {
+        $this->initFixtures();
+
         $member = $this->db->find('member', '3');
         $this->assertFalse($member);
 
@@ -261,6 +274,8 @@ class DbTest extends TestCase
 
     public function testRecordSave()
     {
+        $this->initFixtures();
+
         $db = $this->db;
 
         // Existing member
@@ -295,6 +310,8 @@ class DbTest extends TestCase
 
     public function testSelect()
     {
+        $this->initFixtures();
+
         $data = $this->db->select('member', 1);
         $this->assertEquals('twin', $data['name']);
 
@@ -305,6 +322,8 @@ class DbTest extends TestCase
 
     public function testSelectWithField()
     {
+        $this->initFixtures();
+
         $data = $this->db->select('member', 1, 'id, name');
 
         $this->assertArrayHasKey('id', $data);
@@ -314,6 +333,8 @@ class DbTest extends TestCase
 
     public function testSelectAll()
     {
+        $this->initFixtures();
+
         $data = $this->db->selectAll('member', array('name' => 'twin'));
 
         $this->assertCount(1, $data);
@@ -325,6 +346,8 @@ class DbTest extends TestCase
 
     public function testFetch()
     {
+        $this->initFixtures();
+
         $data = $this->db->fetch("SELECT * FROM member WHERE name = ?", 'twin');
         $this->assertInternalType('array', $data);
         $this->assertEquals('twin', $data['name']);
@@ -345,6 +368,8 @@ class DbTest extends TestCase
 
     public function testFetchAll()
     {
+        $this->initFixtures();
+
         $data = $this->db->fetchAll("SELECT * FROM member WHERE group_id = ?", '1');
 
         $this->assertInternalType('array', $data);
@@ -353,6 +378,8 @@ class DbTest extends TestCase
 
     public function testQueryFetch()
     {
+        $this->initFixtures();
+
         $data = $this->db('member')->where('id = 1')->fetch();
         $this->assertInternalType('array', $data);
         $this->assertEquals('1', $data['id']);
@@ -360,6 +387,8 @@ class DbTest extends TestCase
 
     public function testQueryFetchAll()
     {
+        $this->initFixtures();
+
         $data = $this->db('member')->fetchAll();
 
         $this->assertInternalType('array', $data);
@@ -384,6 +413,8 @@ class DbTest extends TestCase
      */
     public function testQuery()
     {
+        $this->initFixtures();
+
         // Pure string conditions
         $query = $this->db('member')->where("name = 'twin'");
         $member = $query->find();
@@ -560,6 +591,8 @@ class DbTest extends TestCase
 
     public function testIndexBy()
     {
+        $this->initFixtures();
+
         $members = $this->db('member')
             ->indexBy('name')
             ->fetchAll();
@@ -587,6 +620,8 @@ class DbTest extends TestCase
 
     public function testQueryUpdate()
     {
+        $this->initFixtures();
+
         $query = $this->db
             ->createQueryBuilder()
             ->update('member')
@@ -603,6 +638,8 @@ class DbTest extends TestCase
 
     public function testBindValue()
     {
+        $this->initFixtures();
+
         // Not array parameter
         $member = $this->db->fetch("SELECT * FROM member WHERE id = ?", 1, PDO::PARAM_INT);
 
@@ -647,12 +684,16 @@ class DbTest extends TestCase
 
     public function testFetchColumn()
     {
+        $this->initFixtures();
+
         $count = $this->db->fetchColumn("SELECT COUNT(id) FROM member");
         $this->assertEquals(2, $count);
     }
 
     public function testRecordNamespace()
     {
+        $this->initFixtures();
+
         $this->db->setOption('recordNamespace', 'WidgetTest\DbTest');
 
         $member = $this->db->find('member', 1);
@@ -663,6 +704,8 @@ class DbTest extends TestCase
 
     public function testCustomRecordClass()
     {
+        $this->initFixtures();
+
         $this->db->setOption('recordClasses', array(
             'member' => 'WidgetTest\DbTest\Member'
         ));
@@ -675,6 +718,8 @@ class DbTest extends TestCase
 
     public function testRecordToArray()
     {
+        $this->initFixtures();
+
         $member = $this->db->find('member', 1)->toArray();
 
         $this->assertInternalType('array', $member);
@@ -706,6 +751,8 @@ class DbTest extends TestCase
 
     public function testDeleteRecord()
     {
+        $this->initFixtures();
+
         $member = $this->db->find('member', 1);
 
         $result = $member->delete();
@@ -719,6 +766,8 @@ class DbTest extends TestCase
 
     public function testGetTable()
     {
+        $this->initFixtures();
+
         $member = $this->db->member('1');
 
         $this->assertEquals('member', $member->getTable());
@@ -726,6 +775,8 @@ class DbTest extends TestCase
 
     public function testFieldNotFound()
     {
+        $this->initFixtures();
+
         $member = $this->db->member('1');
 
         $this->setExpectedException('\InvalidArgumentException', 'Field "notFound" not found in record class "Widget\Db\Record"');
@@ -735,6 +786,8 @@ class DbTest extends TestCase
 
     public function testCollection()
     {
+        $this->initFixtures();
+
         $members = $this->db->findAll('member');
 
         $this->assertInstanceOf('\Widget\Db\Collection', $members);
@@ -743,7 +796,7 @@ class DbTest extends TestCase
         $this->assertInternalType('array', $members->toArray());
 
         // Filter
-        $firstGroupmembers = $members->filter(function($member){
+        $firstGroupMembers = $members->filter(function($member){
             if ('1' == $member->group_id) {
                 return true;
             } else {
@@ -751,9 +804,9 @@ class DbTest extends TestCase
             }
         });
 
-        $this->assertEquals('1', $firstGroupmembers[0]->group_id);
-        $this->assertInstanceOf('\Widget\Db\Collection', $firstGroupmembers);
-        $this->assertNotSame($members, $firstGroupmembers);
+        $this->assertEquals('1', $firstGroupMembers[0]->group_id);
+        $this->assertInstanceOf('\Widget\Db\Collection', $firstGroupMembers);
+        $this->assertNotSame($members, $firstGroupMembers);
 
         // Reduce
         $count = $members->reduce(function($count, $member){
@@ -765,6 +818,8 @@ class DbTest extends TestCase
 
     public function testRecordUnset()
     {
+        $this->initFixtures();
+
         $member = $this->db->member('1');
 
         $this->assertEquals('twin', $member->name);
@@ -789,6 +844,8 @@ class DbTest extends TestCase
 
     public function testBeforeAndAfterQuery()
     {
+        $this->initFixtures();
+
         $this->expectOutputString('beforeQueryafterQuery');
 
         $this->db->setOption(array(
@@ -805,6 +862,8 @@ class DbTest extends TestCase
 
     public function testBeforeAndAfterQueryForUpdate()
     {
+        $this->initFixtures();
+
         $this->expectOutputString('beforeQueryafterQuery');
 
         $this->db->setOption(array(
@@ -830,6 +889,8 @@ class DbTest extends TestCase
 
     public function testUpdateWithoutParameters()
     {
+        $this->initFixtures();
+
         $result = $this->db->executeUpdate("UPDATE member SET name = 'twin2' WHERE id = 1");
 
         $this->assertEquals(1, $result);
@@ -837,6 +898,8 @@ class DbTest extends TestCase
 
     public function testCount()
     {
+        $this->initFixtures();
+
         $count = $this->db('member')->count();
 
         $this->assertInternalType('int', $count);
@@ -850,6 +913,8 @@ class DbTest extends TestCase
 
     public function testParameters()
     {
+        $this->initFixtures();
+
         $db = $this->db;
 
         $query = $db('member')
@@ -897,6 +962,8 @@ class DbTest extends TestCase
      */
     public function testParameterValue($value)
     {
+        $this->initFixtures();
+
         $query = $this
             ->db('member')
             ->where('id = ?', $value)
@@ -961,6 +1028,8 @@ class DbTest extends TestCase
 
     public function testDbCount()
     {
+        $this->initFixtures();
+
         $db = $this->db;
 
         $count = $db->count('member');
@@ -978,6 +1047,8 @@ class DbTest extends TestCase
 
     public function testTablePrefix()
     {
+        $this->initFixtures();
+
         $db = $this->db;
 
         $db->setOption('tablePrefix', 'tbl_');
@@ -1096,6 +1167,8 @@ class DbTest extends TestCase
 
     public function testReload()
     {
+        $this->initFixtures();
+
         $member = $this->db->find('member', 1);
         $member2 = $this->db->find('member', 1);
 

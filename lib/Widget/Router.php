@@ -149,7 +149,6 @@ class Router extends Base
         if (isset($this->routes[$id])) {
             unset($this->routes[$id]);
         }
-
         return $this;
     }
 
@@ -200,7 +199,6 @@ class Router extends Base
                 return $parameters;
             }
         }
-
         return false;
     }
 
