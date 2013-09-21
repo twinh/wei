@@ -131,23 +131,34 @@ class Env extends Base
     }
 
     /**
+     * Check if in specified environment
+     *
+     * @param string $env
+     * @return bool
+     */
+    public function is($env)
+    {
+        return $this->env === $env;
+    }
+
+    /**
      * Check if in the development environment
      *
      * @return bool
      */
     public function isDev()
     {
-        return $this->env === 'dev';
+        return $this->is('dev');
     }
 
     /**
-     * Check if in the test environment
+     * Check if is the test environment
      *
      * @return bool
      */
     public function isTest()
     {
-        return $this->env === 'test';
+        return $this->is('test');
     }
 
     /**
@@ -157,7 +168,7 @@ class Env extends Base
      */
     public function isProd()
     {
-        return $this->env === 'prod';
+        return $this->is('prod');
     }
 
     /**
