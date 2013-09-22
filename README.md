@@ -19,7 +19,7 @@ $widget = widget(array(
     // Options for widget container
     'widget' => array(
         'debug' => true,
-        // ... other options
+        // Other options ...
     ),
     // Options for database
     'db' => array(
@@ -30,7 +30,7 @@ $widget = widget(array(
         'user'      => 'root',
         'password'  => 'xxxxxx',
     ),
-    // More options
+    // More options ...
 ));
 
 // 3. Using "db" object to execute SQL query

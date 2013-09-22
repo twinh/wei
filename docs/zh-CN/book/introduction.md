@@ -5,14 +5,30 @@ Widget是一个PHP微框架,提供了强大又简洁的接口,让PHP开发更快
 Widget的使用比任何框架都要简单,只需3步,加载=>创建=>调用!
 
 ```php
-// 加载核心类文件
+// 1. 加载核心类文件
 require 'path/to/widget/lib/Widget/Widget.php';
 
-// 创建对象管理器对象
-$widget = widget();
+// 2. 创建对象管理器对象
+$widget = widget(array(
+    // 对象管理器选项
+    'widget' => array(
+        'debug' => true,
+        // 其他选项...
+    ),
+    // 数据库选项
+    'db' => array(
+        'driver'    => 'mysql',
+        'host'      => 'localhost',
+        'dbname'    => 'widget',
+        'charset'   => 'utf8',
+        'user'      => 'root',
+        'password'  => 'xxxxxx',
+    ),
+    // 更多选项...
+));
 
-// 调用query对象,获取HTTP请求中id参数
-$id = $widget->request('id');
+// 3. 调用"db"对象执行SQL查询
+$result = $widget->db->fetch("SELECT 1 + 2");
 ```
 
 ## 功能特性
