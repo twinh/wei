@@ -293,13 +293,13 @@
   <section id="widget">
   <div class="page-header"><h1>Widget</h1></div>
 
-<p>微件管理器,所有微件对象的入口.</p>
+<p>对象管理器,所有对象的入口.</p>
 
-<p>用于获取微件对象,设置自动加载,设置别名,设置配置等.</p>
+<p>用于获取对象,设置自动加载,设置别名,设置配置等.</p>
 
 <h2>案例</h2>
 
-<h3>获取微件管理器对象</h3>
+<h3>获取对象管理器对象</h3>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 通过widget函数获取</span>
 <span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">();</span>
@@ -308,9 +308,9 @@
 <span class="nv">$widget</span> <span class="o">=</span> <span class="nx">\Widget\Widget</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
 </code></pre></div>
 
-<h3>设置微件配置</h3>
+<h3>设置对象配置</h3>
 
-<p>微件配置可以通过widget函数的第一个参数来设置,</p>
+<p>对象配置可以通过widget函数的第一个参数来设置,</p>
 
 <p>完整配置请查看<a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/configuration.md" target="_blank">配置</a>章节.</p>
 
@@ -338,7 +338,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="c1">// 启用自动加载</span>
-        <span class="s1">'autoload'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> 
+        <span class="s1">'autoload'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
         <span class="c1">// 设置自动加载的类的命名空间和类所在的目录</span>
         <span class="s1">'autoloadMap'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">'命名空间'</span> <span class="o">=&gt;</span> <span class="s1">'类所在路径'</span><span class="p">,</span>
@@ -398,9 +398,9 @@
 <span class="p">));</span>
 </code></pre></div>
 
-<h3>通过<code>aliases</code>选项加载自定义微件</h3>
+<h3>通过<code>aliases</code>选项加载自定义对象</h3>
 
-<p>除了系统自带的微件之外,你也可以自定义微件类.</p>
+<p>除了系统自带的对象之外,你也可以自定义对象类.</p>
 
 <ol>
 <li>
@@ -418,12 +418,12 @@
 </code></pre></div>
 </li>
 <li>
-<p>设置<code>aliases</code>选项,指定您定义的类的微件名称</p>
+<p>设置<code>aliases</code>选项,指定您定义的类的对象名称</p>
 
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-            <span class="s1">'微件名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span><span class="p">,</span>
+            <span class="s1">'对象名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span><span class="p">,</span>
             <span class="s1">'app'</span> <span class="o">=&gt;</span> <span class="s1">'MyProject\Application'</span>
         <span class="p">)</span>
     <span class="p">)</span>
@@ -431,9 +431,9 @@
 </code></pre></div>
 </li>
 <li>
-<p>调用您的微件</p>
+<p>调用您的对象</p>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 获取自定义微件对象</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 获取自定义对象</span>
 <span class="cm">/* @var $app \MyProject\Application */</span>
 <span class="nv">$app</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">app</span><span class="p">;</span>
 
@@ -441,7 +441,7 @@
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </code></pre></div>
 </li>
-</ol><h3>通过<code>import</code>选项导入目录下的自定义微件</h3>
+</ol><h3>通过<code>import</code>选项导入目录下的自定义对象</h3>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// TODO more detail message</span>
 <span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
@@ -450,7 +450,7 @@
             <span class="k">array</span><span class="p">(</span>
                 <span class="s1">'dir'</span> <span class="o">=&gt;</span> <span class="s1">'要导入的类文件所在的目录'</span><span class="p">,</span>
                 <span class="s1">'namespace'</span> <span class="o">=&gt;</span> <span class="s1">'要导入的类文件所在的命名空间'</span><span class="p">,</span>
-                <span class="s1">'format'</span> <span class="o">=&gt;</span> <span class="s1">'导入的微件名格式'</span>
+                <span class="s1">'format'</span> <span class="o">=&gt;</span> <span class="s1">'导入的类名格式'</span>
             <span class="p">),</span>
             <span class="k">array</span><span class="p">(</span>
                 <span class="s1">'dir'</span> <span class="o">=&gt;</span> <span class="s1">'path/to/MyProject'</span><span class="p">,</span>
@@ -467,16 +467,16 @@
 
 <ol>
 <li>
-<code>aliases</code>选项数组的key是微件名称,value是类名称</li>
+<code>aliases</code>选项数组的key是对象名称,value是类名称</li>
 <li>
-<code>deps</code>选项数组的key是微件名称,value也是微件名称</li>
+<code>deps</code>选项数组的key是对象名称,value也是对象名称</li>
 </ol><div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-            <span class="s1">'微件名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span>
+            <span class="s1">'对象名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span>
         <span class="p">),</span>
         <span class="s1">'deps'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-            <span class="s1">'微件名称'</span> <span class="o">=&gt;</span> <span class="s1">'微件名称'</span>
+            <span class="s1">'对象名称'</span> <span class="o">=&gt;</span> <span class="s1">'对象名称'</span>
         <span class="p">)</span>
     <span class="p">)</span>
 <span class="p">));</span>
@@ -522,31 +522,31 @@
 <td>aliases</td>
 <td>array</td>
 <td>无</td>
-<td>微件别名列表</td>
+<td>对象别名列表</td>
 </tr>
 <tr>
 <td>import</td>
 <td>array</td>
 <td>无</td>
-<td>导入指定目录下的微件类</td>
+<td>导入指定目录下的对象类</td>
 </tr>
 <tr>
 <td>preload</td>
 <td>array</td>
 <td>array('is')</td>
-<td>预加载的微件列表</td>
+<td>预加载的对象列表</td>
 </tr>
 <tr>
 <td>beforeConstruct</td>
 <td>callbale</td>
 <td>无</td>
-<td>每个微件初始化前的回调</td>
+<td>每个对象初始化前的回调</td>
 </tr>
 <tr>
 <td>afterConstruct</td>
 <td>callbale</td>
 <td>无</td>
-<td>每个微件初始化后的回调</td>
+<td>每个对象初始化后的回调</td>
 </tr>
 </tbody>
 </table><h3>回调</h3>
@@ -563,18 +563,18 @@
 <tr>
 <td>$widget</td>
 <td>Widget\Widget</td>
-<td>微件容器对象</td>
+<td>对象管理器</td>
 </tr>
 <tr>
 <td>$full</td>
 <td>string</td>
-<td>完整的微件名称,包含<code>.</code>连接符,如<code>db</code>,<code>user.db</code>
+<td>完整的对象名称,包含<code>.</code>连接符,如<code>db</code>,<code>user.db</code>
 </td>
 </tr>
 <tr>
 <td>$name</td>
 <td>string</td>
-<td>微件名称,不包含<code>.</code>连接符,如<code>db</code>,<code>request</code>
+<td>对象名称,不包含<code>.</code>连接符,如<code>db</code>,<code>request</code>
 </td>
 </tr>
 </tbody>
@@ -590,33 +590,33 @@
 <tr>
 <td>$widget</td>
 <td>Widget\Widget</td>
-<td>微件容器对象</td>
+<td>对象管理器</td>
 </tr>
 <tr>
 <td>$full</td>
 <td>string</td>
-<td>完整的微件名称,包含<code>.</code>连接符,如<code>db</code>,<code>user.db</code>
+<td>完整的对象名称,包含<code>.</code>连接符,如<code>db</code>,<code>user.db</code>
 </td>
 </tr>
 <tr>
 <td>$name</td>
 <td>string</td>
-<td>微件名称,不包含<code>.</code>连接符,如<code>db</code>,<code>request</code>
+<td>对象名称,不包含<code>.</code>连接符,如<code>db</code>,<code>request</code>
 </td>
 </tr>
 <tr>
 <td>$object</td>
 <td>Widget\Base</td>
-<td>当前初始化的微件</td>
+<td>当前初始化的对象</td>
 </tr>
 </tbody>
 </table><h3>方法</h3>
 
 <h4>widget($config, $name = 'default')</h4>
 
-<p>获取指定名称的微件管理器,如果不存在,将创建一个新的对象</p>
+<p>获取指定名称的对象管理器,如果不存在,将创建一个新的对象</p>
 
-<p><strong>返回:</strong> <code>Widget\Widget</code> 微件管理器对象</p>
+<p><strong>返回:</strong> <code>Widget\Widget</code> 对象管理器</p>
 
 <p><strong>参数</strong></p>
 
@@ -630,12 +630,12 @@
 <tr>
 <td>$config</td>
 <td>string,array</td>
-<td>微件的配置数组或配置文件</td>
+<td>对象的配置数组或配置文件</td>
 </tr>
 <tr>
 <td>$name</td>
 <td>string</td>
-<td>微件对象的名称</td>
+<td>对象的名称</td>
 </tr>
 </tbody>
 </table><h4>widget()-&gt;isDebug()</h4>
@@ -648,7 +648,7 @@
 
 <p>设置调试状态</p>
 
-<p><strong>返回:</strong> <code>Widget\Widget</code> 微件管理器对象</p>
+<p><strong>返回:</strong> <code>Widget\Widget</code> 对象管理器</p>
 
 <p><strong>参数</strong></p>
 
@@ -665,9 +665,9 @@
 </tr></tbody>
 </table><h4>widget()-&gt;setConfig($name, $vlaue = array())</h4>
 
-<p>设置微件的配置</p>
+<p>设置对象的配置</p>
 
-<p><strong>返回:</strong> <code>Widget\Widget</code> 微件管理器对象</p>
+<p><strong>返回:</strong> <code>Widget\Widget</code> 对象管理器</p>
 
 <p><strong>参数</strong></p>
 
@@ -683,21 +683,21 @@
 <td>$name</td>
 <td>string</td>
 <td>无</td>
-<td>微件的名称,如<code>request</code>, <code>request.sub</code>
+<td>对象的名称,如<code>request</code>, <code>request.sub</code>
 </td>
 </tr>
 <tr>
 <td>$value</td>
 <td>array</td>
 <td>无</td>
-<td>微件的配置选项</td>
+<td>对象的配置选项</td>
 </tr>
 </tbody>
 </table><h4>widget()-&gt;setConfig($array = array())</h4>
 
-<p>设置微件所有配置</p>
+<p>设置对象所有配置</p>
 
-<p><strong>返回:</strong> <code>Widget\Widget</code> 微件管理器对象</p>
+<p><strong>返回:</strong> <code>Widget\Widget</code> 对象管理器</p>
 
 <p><strong>参数</strong></p>
 
@@ -712,11 +712,11 @@
 <td>$array</td>
 <td>array</td>
 <td>无</td>
-<td>微件的完整配置</td>
+<td>对象的完整配置</td>
 </tr></tbody>
 </table><h4>widget()-&gt;getConfig($name)</h4>
 
-<p>获取微件的选项配置</p>
+<p>获取对象的选项配置</p>
 
 <p><strong>返回:</strong> <code>mixed</code> 配置的值,如果配置不存在,返回<code>null</code></p>
 
@@ -737,7 +737,7 @@
 </tr></tbody>
 </table><h4>widget()-&gt;get($name, $options = array(), $deps = array())</h4>
 
-<p>获取一个微件对象</p>
+<p>获取一个对象</p>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -751,7 +751,7 @@
 <td>$name</td>
 <td>string</td>
 <td>无</td>
-<td>微件的名称</td>
+<td>对象的名称</td>
 </tr>
 <tr>
 <td>$options</td>
@@ -763,12 +763,12 @@
 <td>$deps</td>
 <td>array</td>
 <td>无</td>
-<td>指定微件的依赖关系</td>
+<td>指定对象的依赖关系</td>
 </tr>
 </tbody>
 </table><h4>widget()-&gt;import($dir, $namespace, $format = null)</h4>
 
-<p>导入指定目录下的微件类文件</p>
+<p>导入指定目录下的类文件</p>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -799,23 +799,23 @@
 </tbody>
 </table><h4>widget()-&gt;newInstance($name, $options = array(), $deps = array())</h4>
 
-<p>初始化一个新的微件对象</p>
+<p>初始化一个新的对象</p>
 
 <h4>widget()-&gt;set($name, widget())</h4>
 
-<p>设置微件对象</p>
+<p>设置对象</p>
 
 <h4>widget()-&gt;remove($name)</h4>
 
-<p>移出微件对象,如果对象存在,返回<code>true</code>,否则返回<code>false</code></p>
+<p>移除对象,如果对象存在,返回<code>true</code>,否则返回<code>false</code></p>
 
 <h4>widget()-&gt;getClass($name)</h4>
 
-<p>根据微件名称获取微件类名</p>
+<p>根据对象名称获取对象类名</p>
 
 <h4>widget()-&gt;has($name)</h4>
 
-<p>检查微件是否存在</p>
+<p>检查对象是否存在</p>
 
 <h4>widget()-&gt;setAutoload($bool)</h4>
 
@@ -1088,7 +1088,7 @@
 <code>ArrayCache</code>使用PHP数组存储数据,每次请求结束后销毁,因此不具备持久化特性</li>
 </ul><h3>通用方法</h3>
 
-<p>在下面的方法中,<code>cache</code>表示缓存微件的名称,可以替换为其他任意缓存,如<code>redis</code>, <code>memcached</code>等</p>
+<p>在下面的方法中,<code>cache</code>表示缓存类的名称,可以替换为其他任意缓存,如<code>redis</code>, <code>memcached</code>等</p>
 
 <h4>cache($key, $value, $expire = 0)</h4>
 
@@ -1386,7 +1386,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">apc</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看<a href="#cache">Cache</a>微件</p>
+<p>更多案例请查看<a href="#cache">Cache</a>类</p>
 
 <h2>调用方式</h2>
 
@@ -1396,7 +1396,7 @@
 
 <h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="#cache">Cache</a>微件</p>
+<p>通用方法请查看<a href="#cache">Cache</a>类</p>
 
 <h3>方法</h3>
 
@@ -1426,7 +1426,7 @@
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">arrayCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看<a href="#cache">Cache</a>微件</p>
+<p>更多案例请查看<a href="#cache">Cache</a>类</p>
 
 <h2>调用方式</h2>
 
@@ -1436,7 +1436,7 @@
 
 <h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="#cache">Cache</a>微件</p>
+<p>通用方法请查看<a href="#cache">Cache</a>类</p>
 
 <h3>方法</h3>
 
@@ -1471,7 +1471,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">bicache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看<a href="#cache">Cache</a>微件</p>
+<p>更多案例请查看<a href="#cache">Cache</a>类</p>
 
 <h2>调用方式</h2>
 
@@ -1512,7 +1512,7 @@
 </tbody>
 </table><h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="#cache">Cache</a>微件</p>
+<p>通用方法请查看<a href="#cache">Cache</a>类</p>
 
 <h3>方法</h3>
 
@@ -1542,7 +1542,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">couchbase</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看<a href="#cache">Cache</a>微件</p>
+<p>更多案例请查看<a href="#cache">Cache</a>对象</p>
 
 <h2>调用方式</h2>
 
@@ -1589,7 +1589,7 @@
 </tbody>
 </table><h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="#cache">Cache</a>微件</p>
+<p>通用方法请查看<a href="#cache">Cache</a>对象</p>
 
 <h3>方法</h3>
 
@@ -1609,7 +1609,7 @@
 
 <p>设置或获取一项缓存,缓存数据存储于数据库中</p>
 
-<p>dbCache微件依赖于<a href="#db">db</a>微件</p>
+<p>dbCache对象依赖于<a href="#db">db</a>对象</p>
 
 <h2>案例</h2>
 
@@ -1627,7 +1627,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">dbCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看<a href="#cache">Cache</a>微件</p>
+<p>更多案例请查看<a href="#cache">Cache</a>对象</p>
 
 <h2>调用方式</h2>
 
@@ -1648,7 +1648,7 @@
 </tr></tbody>
 </table><h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="#cache">Cache</a>微件</p>
+<p>通用方法请查看<a href="#cache">Cache</a>对象</p>
 
 <h3>方法</h3>
 
@@ -1673,7 +1673,7 @@
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">fileCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看<a href="#cache">Cache</a>微件</p>
+<p>更多案例请查看<a href="#cache">Cache</a>对象</p>
 
 <h2>调用方式</h2>
 
@@ -1694,7 +1694,7 @@
 </tr></tbody>
 </table><h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="#cache">Cache</a>微件</p>
+<p>通用方法请查看<a href="#cache">Cache</a>对象</p>
 
 <h3>方法</h3>
 
@@ -1734,7 +1734,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">memcache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看<a href="#cache">Cache</a>微件</p>
+<p>更多案例请查看<a href="#cache">Cache</a>对象</p>
 
 <h2>调用方式</h2>
 
@@ -1799,7 +1799,7 @@
 </tbody>
 </table><h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="#cache">Cache</a>微件</p>
+<p>通用方法请查看<a href="#cache">Cache</a>对象</p>
 
 <h3>方法</h3>
 
@@ -1835,7 +1835,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">memcached</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看<a href="#cache">Cache</a>微件</p>
+<p>更多案例请查看<a href="#cache">Cache</a>对象</p>
 
 <h2>调用方式</h2>
 
@@ -1888,7 +1888,7 @@
 </tbody>
 </table><h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="#cache">Cache</a>微件</p>
+<p>通用方法请查看<a href="#cache">Cache</a>对象</p>
 
 <h3>方法</h3>
 
@@ -1924,7 +1924,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">mongoCache</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看<a href="#cache">Cache</a>微件</p>
+<p>更多案例请查看<a href="#cache">Cache</a>对象</p>
 
 <h2>调用方式</h2>
 
@@ -1965,7 +1965,7 @@
 </tbody>
 </table><h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="#cache">Cache</a>微件</p>
+<p>通用方法请查看<a href="#cache">Cache</a>对象</p>
 
 <h3>方法</h3>
 
@@ -1995,7 +1995,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">redis</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
 </code></pre></div>
 
-<p>更多案例请查看<a href="#cache">Cache</a>微件</p>
+<p>更多案例请查看<a href="#cache">Cache</a>对象</p>
 
 <h2>调用方式</h2>
 
@@ -2054,7 +2054,7 @@
 </tbody>
 </table><h3>继承的方法</h3>
 
-<p>通用方法请查看<a href="#cache">Cache</a>微件</p>
+<p>通用方法请查看<a href="#cache">Cache</a>对象</p>
 
 <h3>方法</h3>
 
@@ -2072,7 +2072,7 @@
   <section id="db">
   <div class="page-header"><h1>Db</h1></div>
 
-<p>基于PDO的数据库操作微件,支持基本的增删查改(CRUD)和流行的Active Record模式的数据库操作.</p>
+<p>基于PDO的数据库操作对象,支持基本的增删查改(CRUD)和流行的Active Record模式的数据库操作.</p>
 
 <p>目前主要支持<code>MySQL</code>,<code>SQLite</code>和<code>PostgreSQL</code>数据库.</p>
 
@@ -2083,13 +2083,13 @@
 <div class="highlight"><pre><code class="php"><span class="c1">// 插入数据</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="s1">'twin'</span><span class="p">,</span>
-    <span class="s1">'createdAt'</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">)</span> 
+    <span class="s1">'createdAt'</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">)</span>
 <span class="p">));</span>
 
 <span class="c1">// 更新数据</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span>
-    <span class="s1">'user'</span><span class="p">,</span> 
-    <span class="k">array</span><span class="p">(</span><span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="s1">'twin'</span><span class="p">),</span> 
+    <span class="s1">'user'</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="s1">'twin'</span><span class="p">),</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="s1">'1'</span><span class="p">)</span>
 <span class="p">);</span>
 
@@ -2135,7 +2135,7 @@
 <span class="c1">// 更新对象的值</span>
 <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">username</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
 
-<span class="c1">// 保存到数据库中 </span>
+<span class="c1">// 保存到数据库中</span>
 <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
 </code></pre></div>
 
@@ -2157,7 +2157,7 @@
 <h3>连接到多个数据库</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="c1">// 数据库微件的配置</span>
+    <span class="c1">// 数据库对象的配置</span>
     <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
         <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'localhost'</span><span class="p">,</span>
@@ -2166,7 +2166,7 @@
         <span class="s1">'user'</span>      <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
         <span class="s1">'password'</span>  <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="c1">// 备机数据库微件的配置</span>
+    <span class="c1">// 备机数据库对象的配置</span>
     <span class="s1">'slave.db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
         <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'slave-host'</span><span class="p">,</span>
@@ -2175,7 +2175,7 @@
         <span class="s1">'user'</span>      <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
         <span class="s1">'password'</span>  <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="c1">// 日志数据库微件的配置</span>
+    <span class="c1">// 日志数据库对象的配置</span>
     <span class="s1">'logger.db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
         <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'logger-host'</span><span class="p">,</span>
@@ -2186,22 +2186,22 @@
     <span class="p">)</span>
 <span class="p">));</span>
 
-<span class="c1">// 获取默认数据库微件</span>
+<span class="c1">// 获取默认数据库对象</span>
 <span class="nv">$db</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">;</span>
 
-<span class="c1">// 获取备机数据库微件</span>
+<span class="c1">// 获取备机数据库对象</span>
 <span class="nv">$slaveDb</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">slaveDb</span><span class="p">;</span>
 
-<span class="c1">// 获取日志数据库微件</span>
+<span class="c1">// 获取日志数据库对象</span>
 <span class="nv">$loggerDb</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">loggerDb</span><span class="p">;</span>
 
-<span class="c1">// 使用日志数据库微件查询用户编号为1的操作日志</span>
+<span class="c1">// 使用日志数据库对象查询用户编号为1的操作日志</span>
 <span class="nv">$loggerDb</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">(</span><span class="s1">'userLog'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'userId'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
 </code></pre></div>
 
 <h3>区分<code>fetch</code>,<code>select</code>和<code>find</code>方法</h3>
 
-<p>在db微件,<code>fetch</code>,<code>select</code>和<code>find</code>方法都是用于查询数据库数据,他们共同的特征是只返回第一行数据,不同点在于:</p>
+<p>在db对象,<code>fetch</code>,<code>select</code>和<code>find</code>方法都是用于查询数据库数据,他们共同的特征是只返回第一行数据,不同点在于:</p>
 
 <ul>
 <li>
@@ -2289,7 +2289,7 @@
     <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'beforeQuery'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$sql</span><span class="p">,</span> <span class="nv">$params</span><span class="p">,</span> <span class="nv">$types</span><span class="p">,</span> <span class="nv">$db</span><span class="p">)</span> <span class="p">{</span>
             <span class="nv">$log</span> <span class="o">=</span> <span class="nv">$sql</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">.</span> <span class="nb">var_export</span><span class="p">(</span><span class="nv">$params</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
-            <span class="c1">// 通过db微件获取logger微件,并调用debug方法记录SQL日志</span>
+            <span class="c1">// 通过db对象获取logger对象,并调用debug方法记录SQL日志</span>
             <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="nv">$log</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">)</span>
@@ -2311,7 +2311,7 @@
 <li>读操作使用slave数据库</li>
 <li>写操作使用master数据库</li>
 </ul><div class="highlight"><pre><code class="php"><span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="c1">// 主数据库微件的配置</span>
+    <span class="c1">// 主数据库对象的配置</span>
     <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
         <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'localhost'</span><span class="p">,</span>
@@ -2322,7 +2322,7 @@
         <span class="c1">// 重要: 通过`slaveDb`选项指定备机数据库的配置名称</span>
         <span class="s1">'slaveDb'</span>   <span class="o">=&gt;</span> <span class="s1">'slave.db'</span>
     <span class="p">),</span>
-    <span class="c1">// 备机数据库微件的配置</span>
+    <span class="c1">// 备机数据库对象的配置</span>
     <span class="s1">'slave.db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
         <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'slave-host'</span><span class="p">,</span>
@@ -2333,7 +2333,7 @@
     <span class="p">),</span>
 <span class="p">));</span>
 
-<span class="c1">// 获取主数据库微件对象</span>
+<span class="c1">// 获取主数据库对象</span>
 <span class="nv">$db</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">;</span>
 
 <span class="c1">// 执行写操作,使用主数据库</span>
@@ -2344,7 +2344,7 @@
 <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">'table'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">));</span>
 <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'table'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">));</span>
 
-<span class="c1">// 获取备数据库微件对象</span>
+<span class="c1">// 获取备数据库对象</span>
 <span class="nv">$slaveDb</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">slaveDb</span><span class="p">;</span>
 
 <span class="c1">// 直接使用备数据库操作</span>
@@ -2522,7 +2522,7 @@
 <tbody><tr>
 <td>$db</td>
 <td>Widget\Db</td>
-<td>当前Db微件对象</td>
+<td>当前Db对象</td>
 </tr></tbody>
 </table><h4>connectFails</h4>
 
@@ -2538,7 +2538,7 @@
 <tr>
 <td>$db</td>
 <td>Widget\Db</td>
-<td>当前Db微件对象</td>
+<td>当前Db对象</td>
 </tr>
 <tr>
 <td>$e</td>
@@ -2560,7 +2560,7 @@
 <tr>
 <td>$db</td>
 <td>Widget\Db</td>
-<td>当前Db微件对象</td>
+<td>当前Db对象</td>
 </tr>
 <tr>
 <td>$pdo</td>
@@ -2597,7 +2597,7 @@
 <tr>
 <td>$db</td>
 <td>Widget\Db</td>
-<td>当前Db微件对象</td>
+<td>当前Db对象</td>
 </tr>
 </tbody>
 </table><h4>afterQuery</h4>
@@ -2613,7 +2613,7 @@
 <tbody><tr>
 <td>$db</td>
 <td>Widget\Db</td>
-<td>当前Db微件对象</td>
+<td>当前Db对象</td>
 </tr></tbody>
 </table><h3>方法</h3>
 
@@ -4023,7 +4023,7 @@
 <span class="c1">// 更新对象的值</span>
 <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">username</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
 
-<span class="c1">// 保存到数据库中 </span>
+<span class="c1">// 保存到数据库中</span>
 <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
 </code></pre></div>
 
@@ -4070,7 +4070,7 @@
 
 <h4>Widget\Widget $widget</h4>
 
-<p>微件管理对象</p>
+<p>对象管理器</p>
 
 <h3>回调</h3>
 
@@ -4900,7 +4900,7 @@
 
 <p>所有的验证规则请查看<a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../#api%E5%8F%82%E8%80%83%E7%9B%AE%E5%BD%95" target="_blank">API目录</a>-<a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../#%E9%AA%8C%E8%AF%81%E5%99%A8" target="_blank">验证器</a>章节.</p>
 
-<p><strong>注意:</strong> </p>
+<p><strong>注意:</strong></p>
 
 <ol>
 <li>所有数据项默认都是 <strong>必选</strong> 的,如果某一个数据项是选填的,只需增加 <strong><code>required =&gt; false</code></strong> 的验证规则</li>
@@ -4933,15 +4933,15 @@
                 <span class="s1">'验证器选项名称1'</span> <span class="o">=&gt;</span> <span class="s1">'验证器选项值1'</span><span class="p">,</span>
                 <span class="s1">'验证器选项名称2'</span> <span class="o">=&gt;</span> <span class="s1">'验证器选项值2'</span><span class="p">,</span>
             <span class="p">)</span>
-        <span class="p">)</span> 
+        <span class="p">)</span>
     <span class="p">)</span>
 <span class="p">));</span>
 </code></pre></div>
 
-<h5>案例:区分验证规则和验证微件的名称</h5>
+<h5>案例:区分验证规则和验证对象的名称</h5>
 
 <ol>
-<li>验证微件均是以<code>is</code>开头,如<code>isDigit</code>,<code>isAlnum</code>
+<li>验证对象均是以<code>is</code>开头,如<code>isDigit</code>,<code>isAlnum</code>
 </li>
 <li>作为验证规则时,需使用原始的名称,如<code>digit</code>,<code>alnum</code>
 </li>
@@ -4959,10 +4959,10 @@
     <span class="p">)</span>
 <span class="p">));</span>
 
-<span class="c1">// 通过isDigit验证微件,验证数据</span>
+<span class="c1">// 通过isDigit验证对象,验证数据</span>
 <span class="nv">$bool</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isDigit</span><span class="p">(</span><span class="nv">$age</span><span class="p">);</span>
 
-<span class="c1">// 通过is微件,指定验证规则验证数据</span>
+<span class="c1">// 通过is对象,指定验证规则验证数据</span>
 <span class="nv">$bool</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">'digit'</span><span class="p">,</span> <span class="nv">$age</span><span class="p">);</span>
 </code></pre></div>
 
@@ -4987,7 +4987,7 @@
 </code></pre></div>
 </li>
 <li>
-<p><code>notEmpty</code>和<code>notBlank</code>既可以用于验证器规则中,又可以独立作为验证微件</p>
+<p><code>notEmpty</code>和<code>notBlank</code>既可以用于验证器规则中,又可以独立作为验证对象</p>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 作为验证器规则</span>
 <span class="nv">$validator</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
@@ -5227,7 +5227,7 @@
 <tr>
 <td>$widget</td>
 <td>Widget\Widget</td>
-<td>微件管理器</td>
+<td>对象管理器</td>
 </tr>
 </tbody>
 </table><p>如果<code>ruleValid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
@@ -5290,7 +5290,7 @@
 <tr>
 <td>$widget</td>
 <td>Widget\Widget</td>
-<td>微件管理器</td>
+<td>对象管理器</td>
 </tr>
 </tbody>
 </table><p><code>ruleInvalid</code>与<code>ruleValid</code>的行为一致.
@@ -5349,7 +5349,7 @@
 <tr>
 <td>$widget</td>
 <td>Widget\Widget</td>
-<td>微件管理器</td>
+<td>对象管理器</td>
 </tr>
 </tbody>
 </table><p>如果<code>fieldValid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
@@ -5405,7 +5405,7 @@
 <tr>
 <td>$widget</td>
 <td>Widget\Widget</td>
-<td>微件管理器</td>
+<td>对象管理器</td>
 </tr>
 </tbody>
 </table><p>如果<code>fieldInvalid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
@@ -5454,7 +5454,7 @@
 <tr>
 <td>$widget</td>
 <td>Widget\Widget</td>
-<td>微件管理器</td>
+<td>对象管理器</td>
 </tr>
 </tbody>
 </table><h5>案例</h5>
@@ -5499,7 +5499,7 @@
 <tr>
 <td>$widget</td>
 <td>Widget\Widget</td>
-<td>微件管理器</td>
+<td>对象管理器</td>
 </tr>
 </tbody>
 </table><h5>案例</h5>
@@ -5732,19 +5732,19 @@
 
 <p>获取自定义的错误信息</p>
 
-<p>返回: <code>array</code> </p>
+<p>返回: <code>array</code></p>
 
 <h4>validate-&gt;getDetailMessages()</h4>
 
 <p>获取详细的验证错误信息</p>
 
-<p>返回: <code>array</code> </p>
+<p>返回: <code>array</code></p>
 
 <h4>validate-&gt;getSummaryMessages()</h4>
 
 <p>获取简洁的验证错误信息</p>
 
-<p>返回: <code>array</code> </p>
+<p>返回: <code>array</code></p>
 
 <h4>validate-&gt;getJoinedMessage($separator = "\n")</h4>
 
@@ -5947,7 +5947,7 @@
 <td>widget()</td>
 <td>\Widget\Widget</td>
 <td>无</td>
-<td>微件管理器</td>
+<td>对象管理器</td>
 </tr>
 </tbody>
 </table><h4>is($rules, $input)</h4>
@@ -11742,8 +11742,8 @@
 
 <h2>说明</h2>
 
-<p>Escape微件是基于<a href="https://github.com/zendframework/zf2/tree/master/library/Zend/Escaper" target="_blank">Zend\Escaper</a>组件的字符串安全转义器.
-Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可以查看这里
+<p>Escape对象是基于<a href="https://github.com/zendframework/zf2/tree/master/library/Zend/Escaper" target="_blank">Zend\Escaper</a>组件的字符串安全转义器.
+Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可以查看这里
 <a href="http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html" target="_blank">http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html</a></p>
 
 <h2>调用方式</h2>
@@ -11784,7 +11784,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
   <section id="view">
   <div class="page-header"><h1>View</h1></div>
 
-<p>渲染指定名称的模板或获取视图微件对象</p>
+<p>渲染指定名称的模板或获取视图对象</p>
 
 <h2>案例</h2>
 
@@ -11794,7 +11794,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <div class="highlight"><pre><code class="php"><span class="c1">// 设置模板所在的目录</span>
 <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">setDirs</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/fixtures'</span><span class="p">);</span>
 
-<span class="c1">// View微件将先渲染`template.php`文件,再把渲染结果存储到变量`$content`中,再渲染layout.php文件,并输出运行结果</span>
+<span class="c1">// View对象将先渲染`template.php`文件,再把渲染结果存储到变量`$content`中,再渲染layout.php文件,并输出运行结果</span>
 <span class="k">echo</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'template.php'</span><span class="p">);</span>
 </code></pre></div>
 
@@ -11857,7 +11857,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h4>view()</h4>
 
-<p>获取视图微件对象</p>
+<p>获取视图对象</p>
 
 <h4>view-&gt;render($name, $vars = array())</h4>
 
@@ -11893,7 +11893,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
   <section id="arr">
   <div class="page-header"><h1>Arr</h1></div>
 
-<p>数组工具微件,提供一些实用的数组操作方法</p>
+<p>数组工具类,提供一些实用的数组操作方法</p>
 
 <h2>案例</h2>
 
@@ -11985,7 +11985,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <li>如果<code>$data</code>是对象且方法<code>get. $key</code>存在,返回<code>$data-&gt;{'get' . $key}</code>
 </li>
 <li>如果以上均不存在,返回null</li>
-</ol><p>使用<code>attr()</code>微件的好处在于你不用关心要取值的变量类型,不管它是数组,对象数组(\ArrayAccess),还是
+</ol><p>使用<code>attr()</code>方法的好处在于你不用关心要取值的变量类型,不管它是数组,对象数组(\ArrayAccess),还是
 其他对象</p>
 
 <h4>arr-&gt;sort($array, $key = 'order', $type = SORT_ASC)</h4>
@@ -12090,10 +12090,10 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'preload'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-            <span class="s1">'env'</span> <span class="c1">// 在预加载选项增加Env微件</span>
+            <span class="s1">'env'</span> <span class="c1">// 在预加载选项增加env对象</span>
         <span class="p">)</span>
     <span class="p">),</span>
-    <span class="c1">// 配置Env微件的选项</span>
+    <span class="c1">// 配置env对象的选项</span>
     <span class="s1">'env'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="c1">// 配置环境的目录,%env%会替换成当前的环境名称</span>
         <span class="s1">'configDir'</span> <span class="o">=&gt;</span> <span class="s1">'config/config_%env%.php'</span>
@@ -12256,7 +12256,7 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <tr>
 <td>widget()</td>
 <td>Widget\Widget</td>
-<td>微件管理器</td>
+<td>对象管理器</td>
 </tr>
 </tbody>
 </table><h3>error-&gt;notFound($fn)</h3>
@@ -12688,10 +12688,10 @@ Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'preload'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-            <span class="s1">'phpError'</span> <span class="c1">// 在预加载选项增加phpError微件</span>
+            <span class="s1">'phpError'</span> <span class="c1">// 在预加载选项增加phpError对象</span>
         <span class="p">)</span>
     <span class="p">),</span>
-    <span class="c1">// 配置PHP Error微件的选项</span>
+    <span class="c1">// 配置phpError对象的选项</span>
     <span class="s1">'phpError'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'catch_ajax_errors'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
         <span class="s1">'catch_class_not_found'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
