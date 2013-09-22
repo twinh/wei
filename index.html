@@ -301,11 +301,8 @@
 
 <h3>获取对象管理器对象</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 通过widget函数获取</span>
+<div class="highlight"><pre><code class="php"><span class="cm">/* @var $widget \Widget\Widget */</span>
 <span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">();</span>
-
-<span class="c1">// 完整的获取方法如下,您可以根据自己的编码习惯选择适合您的方式</span>
-<span class="nv">$widget</span> <span class="o">=</span> <span class="nx">\Widget\Widget</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
 </code></pre></div>
 
 <h3>设置对象配置</h3>
@@ -612,9 +609,9 @@
 </tbody>
 </table><h3>方法</h3>
 
-<h4>widget($config, $name = 'default')</h4>
+<h4>widget($config)</h4>
 
-<p>获取指定名称的对象管理器,如果不存在,将创建一个新的对象</p>
+<p>获取对象管理器,如果不存在,将创建一个新的对象</p>
 
 <p><strong>返回:</strong> <code>Widget\Widget</code> 对象管理器</p>
 
@@ -626,27 +623,20 @@
 <th>类型</th>
 <th>说明</th>
 </tr></thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>$config</td>
 <td>string,array</td>
 <td>对象的配置数组或配置文件</td>
-</tr>
-<tr>
-<td>$name</td>
-<td>string</td>
-<td>对象的名称</td>
-</tr>
-</tbody>
+</tr></tbody>
 </table><h4>widget()-&gt;isDebug()</h4>
 
-<p>检查是否启用了调试</p>
+<p>检查是否启用了调试模式</p>
 
 <p><strong>返回:</strong> <code>bool</code></p>
 
 <h4>widget()-&gt;setDebug($debug)</h4>
 
-<p>设置调试状态</p>
+<p>开启或关闭调试模式</p>
 
 <p><strong>返回:</strong> <code>Widget\Widget</code> 对象管理器</p>
 
