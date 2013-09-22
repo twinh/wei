@@ -33,7 +33,7 @@ $widget = widget(array(
     // More options
 ));
 
-// 3. Using "db" widget to execute SQL query
+// 3. Using "db" object to execute SQL query
 $result = $widget->db->fetch("SELECT 1 + 2");
 ```
 
@@ -67,7 +67,7 @@ Define the following requirement in your `composer.json` file and run `php compo
 ### Cache
 
 ```php
-// Available cache widgets
+// Available cache objects
 $widget->cache;
 $widget->apc;
 $widget->arrayCache;
@@ -155,7 +155,7 @@ $qb->getSql();
 ### Validator
 
 ```php
-// Available validator widgets
+// Available validator objects
 
 // Data type and composition
 $widget->isAlnum($input);
