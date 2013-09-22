@@ -22,7 +22,7 @@ widget()->memcache('key');
 widget()->memcache('key', 'value', 60);
 ```
 
-更多案例请查看[Cache](cache.md)微件
+更多案例请查看[Cache](cache.md)对象
 
 调用方式
 -------
@@ -45,7 +45,7 @@ persistent | bool         | true                   | 是否使用长连接
 
 ### 继承的方法
 
-通用方法请查看[Cache](cache.md#通用方法)微件
+通用方法请查看[Cache](cache.md#通用方法)对象
 
 ### 方法
 

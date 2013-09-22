@@ -178,7 +178,7 @@ driver    | string | apc       | 缓存的类型
 
 ### 通用方法
 
-在下面的方法中,`cache`表示缓存微件的名称,可以替换为其他任意缓存,如`redis`, `memcached`等
+在下面的方法中,`cache`表示缓存类的名称,可以替换为其他任意缓存,如`redis`, `memcached`等
 
 #### cache($key, $value, $expire = 0)
 

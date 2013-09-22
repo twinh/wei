@@ -174,7 +174,7 @@ widget()->validate(array(
 
 所有的验证规则请查看[API目录](../#api参考目录)-[验证器](../#验证器)章节.
 
-**注意:** 
+**注意:**
 
 1. 所有数据项默认都是 **必选** 的,如果某一个数据项是选填的,只需增加 **`required => false`** 的验证规则
 2. 验证规则会被转换成对应的类.如`email`规则将被转换为`\Widget\Validator\Email`类,如果类不存在,将抛出异常提醒开发人员规则不存在.
@@ -208,14 +208,14 @@ widget()->validate(array(
                 '验证器选项名称1' => '验证器选项值1',
                 '验证器选项名称2' => '验证器选项值2',
             )
-        ) 
+        )
     )
 ));
 ```
 
-##### 案例:区分验证规则和验证微件的名称
+##### 案例:区分验证规则和验证对象的名称
 
-1. 验证微件均是以`is`开头,如`isDigit`,`isAlnum`
+1. 验证对象均是以`is`开头,如`isDigit`,`isAlnum`
 2. 作为验证规则时,需使用原始的名称,如`digit`,`alnum`
 
 ```php
@@ -233,10 +233,10 @@ widget()->validate(array(
     )
 ));
 
-// 通过isDigit验证微件,验证数据
+// 通过isDigit验证对象,验证数据
 $bool = widget()->isDigit($age);
 
-// 通过is微件,指定验证规则验证数据
+// 通过is对象,指定验证规则验证数据
 $bool = widget()->is('digit', $age);
 ```
 
@@ -258,7 +258,7 @@ $bool = widget()->is('digit', $age);
         )
     ));
     ```
-* `notEmpty`和`notBlank`既可以用于验证器规则中,又可以独立作为验证微件
+* `notEmpty`和`notBlank`既可以用于验证器规则中,又可以独立作为验证对象
 
     ```php
     // 作为验证器规则
@@ -448,7 +448,7 @@ ruleValid($rule, $field, $validator, $widget)
 $rule       | string                | 验证规则的名称
 $field      | string                | 当前验证的数据项名称
 $validator  | Widget\Validate       | 验证器对象
-$widget     | Widget\Widget         | 微件管理器
+$widget     | Widget\Widget         | 对象管理器
 
 如果`ruleValid`回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
@@ -493,7 +493,7 @@ ruleInvalid($rule, $field, $validator, $widget)
 $rule       | string                | 验证规则的名称
 $field      | string                | 当前验证的数据项名称
 $validator  | Widget\Validate       | 验证器对象
-$widget     | Widget\Widget         | 微件管理器
+$widget     | Widget\Widget         | 对象管理器
 
 `ruleInvalid`与`ruleValid`的行为一致.
 同样的,如果`ruleInvalid`回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
@@ -538,7 +538,7 @@ fieldValid($field, $validator, $widget)
 ------------|-----------------------|------
 $rule       | string                | 验证规则的名称
 $validator  | Widget\Validate       | 验证器对象
-$widget     | Widget\Widget         | 微件管理器
+$widget     | Widget\Widget         | 对象管理器
 
 如果`fieldValid`回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
@@ -580,7 +580,7 @@ fieldInvalid($field, $validator, $widget)
 ------------|-----------------------|------
 $rule       | string                | 验证规则的名称
 $validator  | Widget\Validate       | 验证器对象
-$widget     | Widget\Widget         | 微件管理器
+$widget     | Widget\Widget         | 对象管理器
 
 如果`fieldInvalid`回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
@@ -619,7 +619,7 @@ success($validator, $widget)
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $validator  | Widget\Validate       | 验证器对象
-$widget     | Widget\Widget         | 微件管理器
+$widget     | Widget\Widget         | 对象管理器
 
 ##### 案例
 
@@ -654,7 +654,7 @@ failure ( $event, $widget, $validator )
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $validator  | Widget\Validate       | 验证器对象
-$widget     | Widget\Widget         | 微件管理器
+$widget     | Widget\Widget         | 对象管理器
 
 ##### 案例
 
@@ -811,19 +811,19 @@ $messages   | array        | 错误信息数组
 
 获取自定义的错误信息
 
-返回: `array` 
+返回: `array`
 
 #### validate->getDetailMessages()
 
 获取详细的验证错误信息
 
-返回: `array` 
+返回: `array`
 
 #### validate->getSummaryMessages()
 
 获取简洁的验证错误信息
 
-返回: `array` 
+返回: `array`
 
 #### validate->getJoinedMessage($separator = "\n")
 

@@ -86,7 +86,7 @@ $input     | mixed    | 无       | 待验证的数据配置选项
 -----------|----------------------------|----------|------
 $input     | mixed                      | 无       | 待验证的数据
 $callback  | \Widget\Validator\Callback | 无       | 回调验证器对象
-widget()    | \Widget\Widget             | 无       | 微件管理器
+widget()    | \Widget\Widget             | 无       | 对象管理器
 
 
 #### is($rules, $input)

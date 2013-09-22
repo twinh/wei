@@ -22,7 +22,7 @@ widget()->memcached('key');
 widget()->memcached('key', 'value', 60);
 ```
 
-更多案例请查看[Cache](cache.md)微件
+更多案例请查看[Cache](cache.md)对象
 
 调用方式
 -------
@@ -43,7 +43,7 @@ port       | int          | 11211                  | memcached服务器端口
 
 ### 继承的方法
 
-通用方法请查看[Cache](cache.md#通用方法)微件
+通用方法请查看[Cache](cache.md#通用方法)对象
 
 ### 方法
 

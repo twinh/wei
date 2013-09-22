@@ -1,14 +1,14 @@
 Widget
 ======
 
-微件管理器,所有微件对象的入口.
+对象管理器,所有对象的入口.
 
-用于获取微件对象,设置自动加载,设置别名,设置配置等.
+用于获取对象,设置自动加载,设置别名,设置配置等.
 
 案例
 ----
 
-### 获取微件管理器对象
+### 获取对象管理器对象
 ```php
 // 通过widget函数获取
 $widget = widget();
@@ -17,9 +17,9 @@ $widget = widget();
 $widget = \Widget\Widget::create();
 ```
 
-### 设置微件配置
+### 设置对象配置
 
-微件配置可以通过widget函数的第一个参数来设置,
+对象配置可以通过widget函数的第一个参数来设置,
 
 完整配置请查看[配置](../book/configuration.md)章节.
 
@@ -49,7 +49,7 @@ Widget支持[PRS-0](https://github.com/php-fig/fig-standards/blob/master/accepte
 widget(array(
     'widget' => array(
         // 启用自动加载
-        'autoload' => true, 
+        'autoload' => true,
         // 设置自动加载的类的命名空间和类所在的目录
         'autoloadMap' => array(
             '命名空间' => '类所在路径',
@@ -111,9 +111,9 @@ widget(array(
 ));
 ```
 
-### 通过`aliases`选项加载自定义微件
+### 通过`aliases`选项加载自定义对象
 
-除了系统自带的微件之外,你也可以自定义微件类.
+除了系统自带的对象之外,你也可以自定义对象类.
 
 1. 定义您的类,继承于`\Widget\Base`
 
@@ -128,23 +128,23 @@ widget(array(
         }
     }
     ```
-2. 设置`aliases`选项,指定您定义的类的微件名称
+2. 设置`aliases`选项,指定您定义的类的对象名称
 
     ```php
     widget(array(
         'widget' => array(
             'aliases' => array(
-                '微件名称' => '类名称',
+                '对象名称' => '类名称',
                 'app' => 'MyProject\Application'
             )
         )
     ));
     ```
 
-3. 调用您的微件
+3. 调用您的对象
 
     ```php
-    // 获取自定义微件对象
+    // 获取自定义对象
     /* @var $app \MyProject\Application */
     $app = widget()->app;
 
@@ -152,7 +152,7 @@ widget(array(
     $app->run();
     ```
 
-### 通过`import`选项导入目录下的自定义微件
+### 通过`import`选项导入目录下的自定义对象
 
 ```php
 // TODO more detail message
@@ -162,7 +162,7 @@ widget(array(
             array(
                 'dir' => '要导入的类文件所在的目录',
                 'namespace' => '要导入的类文件所在的命名空间',
-                'format' => '导入的微件名格式'
+                'format' => '导入的类名格式'
             ),
             array(
                 'dir' => 'path/to/MyProject',
@@ -176,17 +176,17 @@ widget(array(
 
 ### 区分`aliases`和`deps`
 
-1. `aliases`选项数组的key是微件名称,value是类名称
-2. `deps`选项数组的key是微件名称,value也是微件名称
+1. `aliases`选项数组的key是对象名称,value是类名称
+2. `deps`选项数组的key是对象名称,value也是对象名称
 
 ```php
 widget(array(
     'widget' => array(
         'aliases' => array(
-            '微件名称' => '类名称'
+            '对象名称' => '类名称'
         ),
         'deps' => array(
-            '微件名称' => '微件名称'
+            '对象名称' => '对象名称'
         )
     )
 ));
@@ -203,11 +203,11 @@ debug           | bool     | true          | 是否启用调试模式
 inis            | array    | 无            | PHP的ini配置选项
 autoload        | bool     | true          | 是否启用自动加载
 autoloadMap     | array    | 无            | 自动加载的命名空间和路径地址
-aliases         | array    | 无            | 微件别名列表
-import          | array    | 无            | 导入指定目录下的微件类
-preload         | array    | array('is')   | 预加载的微件列表
-beforeConstruct | callbale | 无            | 每个微件初始化前的回调
-afterConstruct  | callbale | 无            | 每个微件初始化后的回调
+aliases         | array    | 无            | 对象别名列表
+import          | array    | 无            | 导入指定目录下的对象类
+preload         | array    | array('is')   | 预加载的对象列表
+beforeConstruct | callbale | 无            | 每个对象初始化前的回调
+afterConstruct  | callbale | 无            | 每个对象初始化后的回调
 
 ### 回调
 
@@ -215,32 +215,32 @@ afterConstruct  | callbale | 无            | 每个微件初始化后的回调
 
 名称        | 类型          | 说明
 ------------|---------------|------
-$widget     | Widget\Widget | 微件容器对象
-$full       | string        | 完整的微件名称,包含`.`连接符,如`db`,`user.db` 
-$name       | string        | 微件名称,不包含`.`连接符,如`db`,`request`
+$widget     | Widget\Widget | 对象管理器
+$full       | string        | 完整的对象名称,包含`.`连接符,如`db`,`user.db`
+$name       | string        | 对象名称,不包含`.`连接符,如`db`,`request`
 
 #### afterConstruct($widget, $full, $name, $object)
 
 名称        | 类型          | 说明
 ------------|---------------|------
-$widget     | Widget\Widget | 微件容器对象
-$full       | string        | 完整的微件名称,包含`.`连接符,如`db`,`user.db` 
-$name       | string        | 微件名称,不包含`.`连接符,如`db`,`request`
-$object     | Widget\Base   | 当前初始化的微件
+$widget     | Widget\Widget | 对象管理器
+$full       | string        | 完整的对象名称,包含`.`连接符,如`db`,`user.db`
+$name       | string        | 对象名称,不包含`.`连接符,如`db`,`request`
+$object     | Widget\Base   | 当前初始化的对象
 
 ### 方法
 
 #### widget($config, $name = 'default')
-获取指定名称的微件管理器,如果不存在,将创建一个新的对象
+获取指定名称的对象管理器,如果不存在,将创建一个新的对象
 
-**返回:** `Widget\Widget` 微件管理器对象
+**返回:** `Widget\Widget` 对象管理器
 
 **参数**
 
 名称    | 类型         | 说明
 --------|--------------|------
-$config | string,array | 微件的配置数组或配置文件
-$name   | string       | 微件对象的名称
+$config | string,array | 对象的配置数组或配置文件
+$name   | string       | 对象的名称
 
 #### widget()->isDebug()
 检查是否启用了调试
@@ -250,7 +250,7 @@ $name   | string       | 微件对象的名称
 #### widget()->setDebug($debug)
 设置调试状态
 
-**返回:** `Widget\Widget` 微件管理器对象
+**返回:** `Widget\Widget` 对象管理器
 
 **参数**
 
@@ -259,30 +259,30 @@ $name   | string       | 微件对象的名称
 $debug  | bool         | 是否启用调试
 
 #### widget()->setConfig($name, $vlaue = array())
-设置微件的配置
+设置对象的配置
 
-**返回:** `Widget\Widget` 微件管理器对象
+**返回:** `Widget\Widget` 对象管理器
 
 **参数**
 
 名称        | 类型   | 默认值        | 说明
 ------------|--------|---------------|------
-$name       | string | 无            | 微件的名称,如`request`, `request.sub`
-$value      | array  | 无            | 微件的配置选项
+$name       | string | 无            | 对象的名称,如`request`, `request.sub`
+$value      | array  | 无            | 对象的配置选项
 
 #### widget()->setConfig($array = array())
-设置微件所有配置
+设置对象所有配置
 
-**返回:** `Widget\Widget` 微件管理器对象
+**返回:** `Widget\Widget` 对象管理器
 
 **参数**
 
 名称        | 类型   | 默认值        | 说明
 ------------|--------|---------------|------
-$array      | array  | 无            | 微件的完整配置
+$array      | array  | 无            | 对象的完整配置
 
 #### widget()->getConfig($name)
-获取微件的选项配置
+获取对象的选项配置
 
 **返回:** `mixed` 配置的值,如果配置不存在,返回`null`
 
@@ -293,16 +293,16 @@ $array      | array  | 无            | 微件的完整配置
 $name       | string | 无            | 配置的名称
 
 #### widget()->get($name, $options = array(), $deps = array())
-获取一个微件对象
+获取一个对象
 
 名称        | 类型   | 默认值        | 说明
 ------------|--------|---------------|------
-$name       | string | 无            | 微件的名称
+$name       | string | 无            | 对象的名称
 $options    | array  | 无            | 除了会通过`config`方法获取配置选项之外的附加的配置选项
-$deps       | array  | 无            | 指定微件的依赖关系
+$deps       | array  | 无            | 指定对象的依赖关系
 
 #### widget()->import($dir, $namespace, $format = null)
-导入指定目录下的微件类文件
+导入指定目录下的类文件
 
 名称        | 类型   | 默认值        | 说明
 ------------|--------|---------------|------
@@ -311,19 +311,19 @@ $namespace  | string | 无            | 类名对应的命名空间
 $format     | string | 无            | 类文件的格式
 
 #### widget()->newInstance($name, $options = array(), $deps = array())
-初始化一个新的微件对象
+初始化一个新的对象
 
 #### widget()->set($name, widget())
-设置微件对象
+设置对象
 
 #### widget()->remove($name)
-移出微件对象,如果对象存在,返回`true`,否则返回`false`
+移除对象,如果对象存在,返回`true`,否则返回`false`
 
 #### widget()->getClass($name)
-根据微件名称获取微件类名
+根据对象名称获取对象类名
 
 #### widget()->has($name)
-检查微件是否存在
+检查对象是否存在
 
 #### widget()->setAutoload($bool)
 启用或禁用PSR-0类自动加载

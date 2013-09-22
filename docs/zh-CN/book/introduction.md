@@ -8,10 +8,10 @@ Widget的使用比任何框架都要简单,只需3步,加载=>创建=>调用!
 // 加载核心类文件
 require 'path/to/widget/lib/Widget/Widget.php';
 
-// 创建微件管理器对象
+// 创建对象管理器对象
 $widget = widget();
 
-// 调用query微件,获取HTTP请求中id参数
+// 调用query对象,获取HTTP请求中id参数
 $id = $widget->request('id');
 ```
 

@@ -3,7 +3,7 @@ DbCache
 
 设置或获取一项缓存,缓存数据存储于数据库中
 
-dbCache微件依赖于[db](db.md)微件
+dbCache对象依赖于[db](db.md)对象
 
 案例
 ----
@@ -24,7 +24,7 @@ widget()->dbCache('key');
 widget()->dbCache('key', 'value', 60);
 ```
 
-更多案例请查看[Cache](cache.md)微件
+更多案例请查看[Cache](cache.md)对象
 
 调用方式
 --------
@@ -37,7 +37,7 @@ table     | string    | cache     | 缓存数据表名称
 
 ### 继承的方法
 
-通用方法请查看[Cache](cache.md#通用方法)微件
+通用方法请查看[Cache](cache.md#通用方法)对象
 
 ### 方法
 

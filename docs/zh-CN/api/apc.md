@@ -22,7 +22,7 @@ widget()->apc('key');
 widget()->apc('key', 'value', 60);
 ```
 
-更多案例请查看[Cache](cache.md)微件
+更多案例请查看[Cache](cache.md)类
 
 调用方式
 -------
@@ -33,7 +33,7 @@ widget()->apc('key', 'value', 60);
 
 ### 继承的方法
 
-通用方法请查看[Cache](cache.md#通用方法)微件
+通用方法请查看[Cache](cache.md#通用方法)类
 
 ### 方法
 

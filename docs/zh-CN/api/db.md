@@ -1,7 +1,7 @@
 Db
 ==
 
-基于PDO的数据库操作微件,支持基本的增删查改(CRUD)和流行的Active Record模式的数据库操作.
+基于PDO的数据库操作对象,支持基本的增删查改(CRUD)和流行的Active Record模式的数据库操作.
 
 目前主要支持`MySQL`,`SQLite`和`PostgreSQL`数据库.
 
@@ -14,13 +14,13 @@ Db
 // 插入数据
 widget()->db->insert('user', array(
     'username' => 'twin',
-    'createdAt' => date('Y-m-d H:i:s') 
+    'createdAt' => date('Y-m-d H:i:s')
 ));
 
 // 更新数据
 widget()->db->update(
-    'user', 
-    array('username' => 'twin'), 
+    'user',
+    array('username' => 'twin'),
     array('id' => '1')
 );
 
@@ -68,7 +68,7 @@ $user = widget()->db->user(1);
 // 更新对象的值
 $user->username = 'twin';
 
-// 保存到数据库中 
+// 保存到数据库中
 $user->save();
 ```
 
@@ -92,7 +92,7 @@ $user->delete();
 
 ```php
 $widget = widget(array(
-    // 数据库微件的配置
+    // 数据库对象的配置
     'db' => array(
         'driver'    => 'mysql',
         'host'      => 'localhost',
@@ -101,7 +101,7 @@ $widget = widget(array(
         'user'      => 'root',
         'password'  => '123456',
     ),
-    // 备机数据库微件的配置
+    // 备机数据库对象的配置
     'slave.db' => array(
         'driver'    => 'mysql',
         'host'      => 'slave-host',
@@ -110,7 +110,7 @@ $widget = widget(array(
         'user'      => 'root',
         'password'  => '123456',
     ),
-    // 日志数据库微件的配置
+    // 日志数据库对象的配置
     'logger.db' => array(
         'driver'    => 'mysql',
         'host'      => 'logger-host',
@@ -121,22 +121,22 @@ $widget = widget(array(
     )
 ));
 
-// 获取默认数据库微件
+// 获取默认数据库对象
 $db = $widget->db;
 
-// 获取备机数据库微件
+// 获取备机数据库对象
 $slaveDb = $widget->slaveDb;
 
-// 获取日志数据库微件
+// 获取日志数据库对象
 $loggerDb = $widget->loggerDb;
 
-// 使用日志数据库微件查询用户编号为1的操作日志
+// 使用日志数据库对象查询用户编号为1的操作日志
 $loggerDb->findAll('userLog', array('userId' => 1));
 ```
 
 ### 区分`fetch`,`select`和`find`方法
 
-在db微件,`fetch`,`select`和`find`方法都是用于查询数据库数据,他们共同的特征是只返回第一行数据,不同点在于:
+在db对象,`fetch`,`select`和`find`方法都是用于查询数据库数据,他们共同的特征是只返回第一行数据,不同点在于:
 
 * `fetch`方法的第一个参数是完整的SQL语句,返回的是数组
 * `select`方法的第一个参数是数据表名称,返回的是数组
@@ -186,7 +186,7 @@ $widget = widget(array(
     'db' => array(
         'beforeQuery' => function($sql, $params, $types, $db) {
             $log = $sql . "\n" . var_export($params, true);
-            // 通过db微件获取logger微件,并调用debug方法记录SQL日志
+            // 通过db对象获取logger对象,并调用debug方法记录SQL日志
             widget()->logger->debug($log);
         }
     )
@@ -209,7 +209,7 @@ $widget->db->query("SELECT DATE('now')");
 
 ```php
 $widget = widget(array(
-    // 主数据库微件的配置
+    // 主数据库对象的配置
     'db' => array(
         'driver'    => 'mysql',
         'host'      => 'localhost',
@@ -220,7 +220,7 @@ $widget = widget(array(
         // 重要: 通过`slaveDb`选项指定备机数据库的配置名称
         'slaveDb'   => 'slave.db'
     ),
-    // 备机数据库微件的配置
+    // 备机数据库对象的配置
     'slave.db' => array(
         'driver'    => 'mysql',
         'host'      => 'slave-host',
@@ -231,7 +231,7 @@ $widget = widget(array(
     ),
 ));
 
-// 获取主数据库微件对象
+// 获取主数据库对象
 $db = $widget->db;
 
 // 执行写操作,使用主数据库
@@ -242,7 +242,7 @@ $db->update('table', array('set' => 'value'), array('where' => 'value'))
 $db->select('table', array('key' => 'value'));
 $db->find('table', array('key' => 'value'));
 
-// 获取备数据库微件对象
+// 获取备数据库对象
 $slaveDb = $widget->slaveDb;
 
 // 直接使用备数据库操作
@@ -293,7 +293,7 @@ sqlite   | path
 
 名称    | 类型      | 说明
 --------|-----------|------
-$db     | Widget\Db | 当前Db微件对象
+$db     | Widget\Db | 当前Db对象
 
 #### connectFails
 
@@ -301,7 +301,7 @@ $db     | Widget\Db | 当前Db微件对象
 
 名称    | 类型         | 说明
 --------|--------------|------
-$db     | Widget\Db    | 当前Db微件对象
+$db     | Widget\Db    | 当前Db对象
 $e      | PDOException | PDO异常对象
 
 #### afterConnect
@@ -310,7 +310,7 @@ $e      | PDOException | PDO异常对象
 
 名称    | 类型         | 说明
 --------|--------------|------
-$db     | Widget\Db    | 当前Db微件对象
+$db     | Widget\Db    | 当前Db对象
 $pdo    | PDO          | PDO对象
 
 #### beforeQuery
@@ -322,7 +322,7 @@ $pdo    | PDO          | PDO对象
 $sql    | string    | 当前执行的SQL语句
 $params | array     | 执行语句的参数
 $types  | array     | 执行语句的参数类型
-$db     | Widget\Db | 当前Db微件对象
+$db     | Widget\Db | 当前Db对象
 
 #### afterQuery
 
@@ -330,7 +330,7 @@ $db     | Widget\Db | 当前Db微件对象
 
 名称    | 类型      | 说明
 --------|-----------|------
-$db     | Widget\Db | 当前Db微件对象
+$db     | Widget\Db | 当前Db对象
 
 ### 方法
 

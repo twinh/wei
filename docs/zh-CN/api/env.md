@@ -12,10 +12,10 @@ Env
 widget(array(
     'widget' => array(
         'preload' => array(
-            'env' // 在预加载选项增加Env微件
+            'env' // 在预加载选项增加env对象
         )
     ),
-    // 配置Env微件的选项
+    // 配置env对象的选项
     'env' => array(
         // 配置环境的目录,%env%会替换成当前的环境名称
         'configDir' => 'config/config_%env%.php'

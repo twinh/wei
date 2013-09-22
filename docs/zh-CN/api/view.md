@@ -1,7 +1,7 @@
 View
 ====
 
-渲染指定名称的模板或获取视图微件对象
+渲染指定名称的模板或获取视图对象
 
 案例
 ----
@@ -11,7 +11,7 @@ View
 // 设置模板所在的目录
 widget()->view->setDirs(__DIR__ . '/fixtures');
 
-// View微件将先渲染`template.php`文件,再把渲染结果存储到变量`$content`中,再渲染layout.php文件,并输出运行结果
+// View对象将先渲染`template.php`文件,再把渲染结果存储到变量`$content`中,再渲染layout.php文件,并输出运行结果
 echo widget()->view->render('template.php');
 ```
 
@@ -54,7 +54,7 @@ Layout Footer'
 渲染指定名称的模板
 
 #### view()
-获取视图微件对象
+获取视图对象
 
 #### view->render($name, $vars = array())
 渲染指定名称的模板,同`view($name, $vars = array())`

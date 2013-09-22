@@ -7,7 +7,7 @@
 1. [简介](book/introduction.md)
 2. [安装](book/installation.md)
 3. [配置](book/configuration.md)
-4. [微件管理器](api/widget.md)
+4. [Widget管理器](api/widget.md)
 5. [缓存](api/cache.md)
 6. [数据库操作](api/db.md)
 7. [数据校验](api/validate.md)
@@ -23,7 +23,7 @@ API参考目录
 
 #### Widget管理器
 
-* [widget](api/widget.md) - 微件管理器,用于获取微件对象,设置配置等
+* [widget](api/widget.md) - 对象管理器,用于获取各种服务对象,设置配置等
 
 #### 缓存
 * [cache](api/cache.md) - 通用缓存
@@ -39,7 +39,7 @@ API参考目录
 * [bicache](api/bicache.md) - 二级缓存
 
 #### 数据库
-* [db](api/db.md) - 数据库操作微件,支持基本的增删查改(CRUD)和流行的Active Record模式等数据库操作
+* [db](api/db.md) - 数据库操作类,支持基本的增删查改(CRUD)和流行的Active Record模式等数据库操作
   * [Active Record](api/activeRecord.md) - Active Record操作
   * [Query Builder](api/queryBuilder.md) - 简洁高效的SQL查询构建器
 
@@ -150,7 +150,7 @@ API参考目录
 * [view](api/view.md) - 渲染指定名称的PHP模板
 
 #### 其他
-* [arr](api/arr.md) - 数组工具微件,提供一些实用的数组操作方法
+* [arr](api/arr.md) - 数组工具类,提供一些实用的数组操作方法
 * [config](api/config.md) - 配置信息管理
 * [env](api/env.md) - 环境检测及根据不同环境加载不同的配置文件
 * [error](api/error.md) - 提供简洁友好的错误界面

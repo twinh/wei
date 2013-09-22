@@ -63,8 +63,8 @@ echo '">Click here!</a>';
 说明
 ----
 
-Escape微件是基于[Zend\Escaper](https://github.com/zendframework/zf2/tree/master/library/Zend/Escaper)组件的字符串安全转义器.
-Escape微件的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可以查看这里
+Escape对象是基于[Zend\Escaper](https://github.com/zendframework/zf2/tree/master/library/Zend/Escaper)组件的字符串安全转义器.
+Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可以查看这里
 http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html
 
 调用方式

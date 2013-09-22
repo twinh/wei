@@ -16,7 +16,7 @@ widget()->fileCache('key', 'value');
 widget()->fileCache('key');
 ```
 
-更多案例请查看[Cache](cache.md)微件
+更多案例请查看[Cache](cache.md)对象
 
 调用方式
 --------
@@ -29,7 +29,7 @@ dir       | string | cache     | 缓存文件存储的目录
 
 ### 继承的方法
 
-通用方法请查看[Cache](cache.md#通用方法)微件
+通用方法请查看[Cache](cache.md#通用方法)对象
 
 ### 方法
 

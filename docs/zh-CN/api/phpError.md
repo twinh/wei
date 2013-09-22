@@ -9,10 +9,10 @@ PHP Error
 widget(array(
     'widget' => array(
         'preload' => array(
-            'phpError' // 在预加载选项增加phpError微件
+            'phpError' // 在预加载选项增加phpError对象
         )
     ),
-    // 配置PHP Error微件的选项
+    // 配置phpError对象的选项
     'phpError' => array(
         'catch_ajax_errors' => true,
         'catch_class_not_found' => true,

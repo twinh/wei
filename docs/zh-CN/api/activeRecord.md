@@ -35,7 +35,7 @@ $user = widget()->db->user(1);
 // 更新对象的值
 $user->username = 'twin';
 
-// 保存到数据库中 
+// 保存到数据库中
 $user->save();
 ```
 
@@ -82,7 +82,7 @@ $user->delete();
 数据库连接对象
 
 #### Widget\Widget $widget
-微件管理对象
+对象管理器
 
 ### 回调
 
