@@ -9,12 +9,10 @@ Widget
 ----
 
 ### 获取对象管理器对象
-```php
-// 通过widget函数获取
-$widget = widget();
 
-// 完整的获取方法如下,您可以根据自己的编码习惯选择适合您的方式
-$widget = \Widget\Widget::create();
+```php
+/* @var $widget \Widget\Widget */
+$widget = widget();
 ```
 
 ### 设置对象配置
@@ -230,8 +228,8 @@ $object     | Widget\Base   | 当前初始化的对象
 
 ### 方法
 
-#### widget($config, $name = 'default')
-获取指定名称的对象管理器,如果不存在,将创建一个新的对象
+#### widget($config)
+获取对象管理器,如果不存在,将创建一个新的对象
 
 **返回:** `Widget\Widget` 对象管理器
 
@@ -240,15 +238,14 @@ $object     | Widget\Base   | 当前初始化的对象
 名称    | 类型         | 说明
 --------|--------------|------
 $config | string,array | 对象的配置数组或配置文件
-$name   | string       | 对象的名称
 
 #### widget()->isDebug()
-检查是否启用了调试
+检查是否启用了调试模式
 
 **返回:** `bool`
 
 #### widget()->setDebug($debug)
-设置调试状态
+开启或关闭调试模式
 
 **返回:** `Widget\Widget` 对象管理器
 
