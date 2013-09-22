@@ -220,7 +220,7 @@
   ================================================== -->
   <div id="welcome" class="bs-docs-section-header">
     <h1>欢迎</h1>
-    <p class="lead">欢迎来到PHP微框架Widget的文档.这里将为您展示丰富全面的Widget代码指导和案例.</p>
+    <p class="lead">欢迎来到PHP微框架Widget的文档.这里将为您展示丰富全面的代码指导和案例.</p>
   </div>
 
 <!-- Getting started
@@ -234,11 +234,27 @@
     <div class="highlight"><pre><code class="php"><span class="c1">// 1. 加载核心类文件</span>
 <span class="k">require</span> <span class="s1">'path/to/widget/lib/Widget/Widget.php'</span><span class="p">;</span>
 
-<span class="c1">// 2. 创建微件管理器对象</span>
-<span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">();</span>
+<span class="c1">// 2. 创建对象管理器对象</span>
+<span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="c1">// 对象管理器选项</span>
+    <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'debug'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="c1">// 其他选项...</span>
+    <span class="p">),</span>
+    <span class="c1">// 数据库选项</span>
+    <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
+        <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'localhost'</span><span class="p">,</span>
+        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'widget'</span><span class="p">,</span>
+        <span class="s1">'charset'</span>   <span class="o">=&gt;</span> <span class="s1">'utf8'</span><span class="p">,</span>
+        <span class="s1">'user'</span>      <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
+        <span class="s1">'password'</span>  <span class="o">=&gt;</span> <span class="s1">'xxxxxx'</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="c1">// 更多选项...</span>
+<span class="p">));</span>
 
-<span class="c1">// 3. 调用request微件,获取HTTP请求的id参数</span>
-<span class="nv">$id</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">'id'</span><span class="p">);</span>
+<span class="c1">// 3. 调用"db"对象执行SQL查询</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="s2">"SELECT 1 + 2"</span><span class="p">);</span>
 </code></pre></div>
   </div>
 
@@ -272,7 +288,7 @@
     <div class="page-header">
       <h1>随时关注最新消息</h1>
     </div>
-    <p class="lead">Widget每天都有新的提交,欢迎关注,了解最新趋势!</p>
+    <p class="lead">微框架每天都有新的提交,欢迎关注,了解最新趋势!</p>
     <p>
       <iframe src="http://ghbtns.com/github-btn.html?user=twinh&repo=widget&type=watch"
         allowtransparency="true" frameborder="0" scrolling="0" width="53" height="20"></iframe>
@@ -284,8 +300,8 @@
   <!-- Widget
   ================================================== -->
   <div id="apis" class="bs-docs-section-header">
-    <h1>微件列表</h1>
-    <p class="lead">提供了上百个各具特色的微件,包括缓存,数据库操作,验证器,HTTP请求,HTTP响应等</p>
+    <h1>对象列表</h1>
+    <p class="lead">提供了上百个各具特色的对象,包括缓存,数据库操作,验证器,HTTP请求,HTTP响应等</p>
   </div>
 
 <!-- api/widget
