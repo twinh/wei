@@ -422,12 +422,22 @@ class Validate extends Base
     }
 
     /**
-     * Get valid rules by field name
+     * Get validator rules
      *
-     * @param string $field The valid field
      * @return array
      */
-    public function getRules($field)
+    public function getRules()
+    {
+        return $this->rules;
+    }
+
+    /**
+     * Get validator rules by specified field
+     *
+     * @param string $field
+     * @return array
+     */
+    public function getFieldRules($field)
     {
         return isset($this->rules[$field]) ? $this->rules[$field] : array();
     }

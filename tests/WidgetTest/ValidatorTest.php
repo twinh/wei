@@ -217,7 +217,7 @@ class ValidatorTest extends TestCase
 
         $this->assertEquals(array('between'), $validator->getInvalidRules('age'));
 
-        $this->assertEquals(array('between'), array_keys($validator->getRules('age')));
+        $this->assertEquals(array('between'), array_keys($validator->getFieldRules('age')));
 
         $this->assertEquals(array(
             'min' => 20,
