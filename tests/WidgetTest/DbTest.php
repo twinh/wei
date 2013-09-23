@@ -735,7 +735,6 @@ class DbTest extends TestCase
         $this->assertArrayNotHasKey('name', $member);
         $this->assertArrayNotHasKey('address', $member);
 
-
         $this->db->setOption('recordClasses', array(
             'member' => 'WidgetTest\DbTest\Member'
         ));

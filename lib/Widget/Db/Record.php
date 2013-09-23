@@ -184,19 +184,11 @@ class Record extends Base implements \ArrayAccess
      */
     public function toArray($returnFields = array())
     {
-        $data = array();
-        foreach ($this->data as $field => $value) {
-            if ($returnFields && !in_array($field, $returnFields)) {
-                continue;
-            }
-            $data[$field] = $value;
-            if ($value instanceof Record || $value instanceof Collection) {
-                $data[$field] = $value->toArray();
-            } else {
-
-            }
+        if (!$returnFields) {
+            return $this->data;
+        } else {
+            return array_intersect($this->data, array_flip($returnFields));
         }
-        return $data;
     }
 
     /**
