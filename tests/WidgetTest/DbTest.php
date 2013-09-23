@@ -103,6 +103,7 @@ class DbTest extends TestCase
 
     public function testGetRecord()
     {
+        $this->initFixtures();
         $this->assertInstanceOf('\Widget\Db\Record', $this->db->create('member'));
     }
 
