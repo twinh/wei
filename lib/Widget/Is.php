@@ -29,19 +29,7 @@ class Is extends Base
      *
      * @var array
      */
-    protected $rules = array(
-        'All', 'AllOf', 'Alnum', 'Alpha', 'Between', 'Blank', 'Callback',
-        'CharLength', 'Chinese', 'Color', 'CreditCard', 'Date', 'DateTime',
-        'Decimal', 'Digit', 'Dir', 'DivisibleBy', 'DoubleByte', 'Email',
-        'EndsWith', 'Exists', 'File', 'IdCardCn', 'IdCardHk',
-        'IdCardMo', 'IdCardTw', 'Image', 'In', 'Ip', 'Length', 'Lowercase',
-        'Max', 'MaxLength', 'Min', 'MinLength', 'MobileCn', 'NoneOf', 'Null',
-        'Number', 'OneOf', 'PhoneCn', 'PlateNumberCn', 'Postcode', 'QQ',
-        'RecordExists', 'Regex', 'Required', 'SomeOf', 'StartsWith', 'Time',
-        'Tld', 'Type', 'Uppercase', 'Url', 'Uuid',
-        // Comparison
-        'EqualTo', 'IdenticalTo', 'GreaterThan', 'GreaterThanOrEqual', 'LessThan', 'LessThanOrEqual'
-    );
+    protected $rules = array();
 
     /**
      * Constructor

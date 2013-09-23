@@ -345,9 +345,7 @@ namespace Widget
          *
          * @var array
          */
-        protected $preload = array(
-            'is'
-        );
+        protected $preload = array();
 
         /**
          * An array contains the instanced widget objects
@@ -687,6 +685,8 @@ namespace Widget
         {
             if (isset($this->aliases[$name])) {
                 $class = $this->aliases[$name];
+            } elseif ('is' == substr($name, 0, 2) && strlen($name) > 2) {
+                $class = 'Widget\Validator\\' . ucfirst(substr($name, 2));
             } else {
                 $class = 'Widget\\' . ucfirst($name);
             }
