@@ -576,7 +576,7 @@ class DbTest extends TestCase
             ->db('member')
             ->select('member.*, member_group.name AS group_name')
             ->leftJoin('member_group', 'member_group.id = member.group_id');
-        $member = $query->find()->toArray();
+        $member = $query->fetch();
 
         $this->assertEquals("SELECT member.*, member_group.name AS group_name FROM member LEFT JOIN member_group ON member_group.id = member.group_id LIMIT 1", $query->getSql());
         $this->assertArrayHasKey('group_name', $member);
@@ -739,14 +739,6 @@ class DbTest extends TestCase
         $this->db->setOption('recordClasses', array(
             'member' => 'WidgetTest\DbTest\Member'
         ));
-
-        $member = $this->db->find('member', 1);
-        $posts = $member->getPosts();
-        $data = $member->toArray();
-
-        $this->assertInternalType('array', $data);
-        $this->assertInternalType('array', $data['posts']);
-        $this->assertInternalType('array', $data['posts'][0]);
     }
 
     public function testDeleteRecord()
@@ -846,7 +838,7 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $this->expectOutputString('beforeQueryafterQuery');
+        $this->expectOutputRegex('/beforeQueryafterQuery/');
 
         $this->db->setOption(array(
             'beforeQuery' => function(){

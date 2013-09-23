@@ -208,6 +208,10 @@ class Db extends Base
      */
     protected $slaveDb;
 
+    protected $deps = array(
+        'cache' => 'arrayCache',
+    );
+
     /**
      * Constructor
      *
@@ -626,11 +630,16 @@ class Db extends Base
      */
     public function create($table, $data = array(), $isNew = true)
     {
+        $db = $this;
         $class = $this->getRecordClass($table);
+        $fields = $this->cache->get("db-fields-$table", function() use($db, $table) {
+            return $db->getTableFields($table);
+        });
         return new $class(array(
             'widget'    => $this->widget,
             'db'        => $this,
             'table'     => $this->getTable($table),
+            'fields'    => $fields,
             'isNew'     => $isNew,
             'data'      => $data,
         ));
@@ -852,6 +861,49 @@ class Db extends Base
                 throw new \RuntimeException(sprintf('Unsupported database driver: %s', $this->driver));
         }
         return $this->dsn = $dsn;
+    }
+
+    /**
+     * Returns table fields
+     *
+     * @param $table
+     * @return array
+     * @internal
+     */
+    public function getTableFields($table)
+    {
+        $table = $this->getTable($table);
+        $fields = array();
+        switch ($this->driver) {
+            case 'mysql':
+                $tableInfo = $this->fetchAll("SHOW COLUMNS FROM $table");
+                $fields = $this->filter($tableInfo, 'Field');
+                break;
+
+            case 'sqlite':
+                $tableInfo = $this->fetchAll("PRAGMA table_info($table)");
+                $fields = $this->filter($tableInfo, 'name');
+                break;
+
+            case 'pgsql':
+                $tableInfo = $this->fetchAll(
+                    "SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS
+                    WHERE table_catalog = ? AND table_name = ?
+                    ORDER BY dtd_identifier ASC",
+                    array($this->dbname, $table)
+                );
+                $fields = $this->filter($tableInfo, 'column_name');
+        }
+        return $fields;
+    }
+
+    protected function filter($data, $name)
+    {
+        $fields = array();
+        foreach ($data as $row) {
+            $fields[] = $row[$name];
+        }
+        return $fields;
     }
 
     /**

@@ -189,10 +189,11 @@ class Record extends Base implements \ArrayAccess
             if ($returnFields && !in_array($field, $returnFields)) {
                 continue;
             }
+            $data[$field] = $value;
             if ($value instanceof Record || $value instanceof Collection) {
                 $data[$field] = $value->toArray();
             } else {
-                $data[$field] = $value;
+
             }
         }
         return $data;
