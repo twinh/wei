@@ -746,6 +746,18 @@ $rule       | string       | 验证规则的名称
 $field      | string       | 数据项的名称
 $rule       | string       | 验证规则的名称
 
+#### validate->setRules(array $rules)
+
+设置验证规则
+
+返回: `Widget\Validate` 验证器对象
+
+#### validate->getRules()
+
+获取验证规则
+
+返回: `array` 验证规则数组
+
 #### validate->setData($data)
 
 设置要验证的数据
