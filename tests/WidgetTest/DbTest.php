@@ -743,6 +743,17 @@ class DbTest extends TestCase
         $this->assertArrayNotHasKey('name', $member);
         $this->assertArrayNotHasKey('address', $member);
 
+        $member = $this->db->create('member')->toArray();
+        $this->assertInternalType('array', $member);
+        $this->assertArrayHasKey('id', $member);
+        $this->assertArrayHasKey('group_id', $member);
+        $this->assertArrayHasKey('name', $member);
+        $this->assertArrayHasKey('address', $member);
+        $this->assertNull($member['id']);
+        $this->assertNull($member['group_id']);
+        $this->assertNull($member['name']);
+        $this->assertNull($member['address']);
+
         $this->db->setOption('recordClasses', array(
             'member' => 'WidgetTest\DbTest\Member'
         ));

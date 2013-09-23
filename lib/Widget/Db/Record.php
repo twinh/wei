@@ -177,7 +177,7 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
-     * Returns the record and relative records data as array
+     * Returns the record data as array
      *
      * @param array $returnFields A indexed array specified the fields to return
      * @return array
@@ -185,7 +185,7 @@ class Record extends Base implements \ArrayAccess
     public function toArray($returnFields = array())
     {
         if (!$returnFields) {
-            return $this->data;
+            return $this->data + array_combine($this->fields, array_pad(array(), count($this->fields), null));
         } else {
             return array_intersect($this->data, array_flip($returnFields));
         }
