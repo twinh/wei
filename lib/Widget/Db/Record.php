@@ -19,11 +19,32 @@ use Widget\Base;
 class Record extends Base implements \ArrayAccess
 {
     /**
+     * The database widget
+     *
+     * @var Db
+     */
+    protected $db;
+
+    /**
      * The record table name
      *
      * @var string
      */
     protected $table;
+
+    /**
+     * The table fields
+     *
+     * @var array
+     */
+    protected $fields = array();
+
+    /**
+     * The primary key field
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
 
     /**
      * Whether it's a new record and has not save to database
@@ -40,20 +61,6 @@ class Record extends Base implements \ArrayAccess
     protected $isModified = false;
 
     /**
-     * The primary key field
-     *
-     * @var string
-     */
-    protected $primaryKey = 'id';
-
-    /**
-     * The table fields
-     *
-     * @var array
-     */
-    protected $fields = array();
-
-    /**
      * The record data
      *
      * @var array
@@ -66,13 +73,6 @@ class Record extends Base implements \ArrayAccess
      * @var array
      */
     protected $modifiedData = array();
-
-    /**
-     * The database widget
-     *
-     * @var Db
-     */
-    protected $db;
 
     /**
      * The callback triggered after load a record

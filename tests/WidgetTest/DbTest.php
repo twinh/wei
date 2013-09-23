@@ -513,7 +513,7 @@ class DbTest extends TestCase
 
         // Select
         $query = $this->db('member')->select('id, group_id');
-        $member = $query->find()->toArray();
+        $member = $query->fetch();
 
         $this->assertEquals("SELECT id, group_id FROM member LIMIT 1", $query->getSql());
         $this->assertArrayHasKey('id', $member);
@@ -522,7 +522,7 @@ class DbTest extends TestCase
 
         // Add select
         $query = $this->db('member')->select('id')->addSelect('group_id');
-        $member = $query->find()->toArray();
+        $member = $query->fetch();
 
         $this->assertEquals("SELECT id, group_id FROM member LIMIT 1", $query->getSql());
         $this->assertArrayHasKey('id', $member);
