@@ -87,7 +87,7 @@ class TestCase extends PHPUnit_Framework_TestCase
             return;
         }
 
-        foreach ($widget->getOption('widgets') as $key => $value) {
+        foreach ($widget->getOption('objects') as $key => $value) {
             if ('widget' == $key) {
                 continue;
             }
