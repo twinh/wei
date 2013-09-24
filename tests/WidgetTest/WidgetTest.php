@@ -108,11 +108,9 @@ class WidgetTest extends TestCase
         $this->assertInternalType('array', $configs);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidArgumentExceptionForWidgetOption()
     {
+        $this->setExpectedException('InvalidArgumentException');
         new \Widget\Request(array(
             'widget' => new \stdClass
         ));
@@ -174,39 +172,39 @@ class WidgetTest extends TestCase
         $this->assertSame($arrayCache, $this->widget->get('myArrayCache'));
     }
 
-    /**
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Property or object "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file
-     */
     public function testInstanceNotFoundWidgetFromWidgetManager()
     {
+        $this->setExpectedException(
+            'BadMethodCallException',
+            'Property or object "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file'
+        );
         $this->widget->notFoundWidget;
     }
 
-    /**
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Property or object "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file
-     */
     public function testInstanceNotFoundWidget()
     {
+        $this->setExpectedException(
+            'BadMethodCallException',
+            'Property or object "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file'
+        );
         $this->widget->request->notFoundWidget;
     }
 
-    /**
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Method "Widget\Widget->notFoundWidget" or object "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file
-     */
     public function testInvokeNotFoundWidget()
     {
+        $this->setExpectedException(
+            'BadMethodCallException',
+            'Method "Widget\Widget->notFoundWidget" or object "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file'
+        );
         $this->widget->notFoundWidget();
     }
 
-    /**
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Property or method "notFoundWidget" not found
-     */
     public function testInvokeNotFoundWidgetByCallUserFunc()
     {
+        $this->setExpectedException(
+            'BadMethodCallException',
+            'Property or method "notFoundWidget" not found'
+        );
         $this->widget->get('notFoundWidget');
     }
 
@@ -368,12 +366,12 @@ class WidgetTest extends TestCase
         $this->assertFalse($this->widget->has('testWidget3'));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Fail to import classes from non-exists directory
-     */
     public function testImportInvalidDir()
     {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'Fail to import classes from non-exists directory'
+        );
         $this->widget->import(__DIR__ . '/not found/', 'test');
     }
 
@@ -404,21 +402,21 @@ class WidgetTest extends TestCase
         $this->assertTrue($widget->getConfig('twin'));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Configuration should be array or file
-     */
     public function testInvalidArgumentExceptionOnCreate()
     {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'Configuration should be array or file'
+        );
         Widget::getContainer(new \stdClass);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Configuration should be array or file
-     */
     public function testInvalidArgumentExceptionWhenFileNotFind()
     {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'Configuration should be array or file'
+        );
         Widget::getContainer('not existing file');
     }
 
