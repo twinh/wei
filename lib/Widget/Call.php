@@ -279,9 +279,9 @@ class Call extends Base
             $options += get_object_vars($this);
         } else {
             $options = array(
-                    'widget' => $this->widget,
-                    'global' => false
-                ) + $options;
+                'widget' => $this->widget,
+                'global' => false
+            ) + $options;
         }
 
         $call = new self($options);
