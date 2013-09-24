@@ -135,10 +135,12 @@ class Is extends Base
             $rule = substr($rule, 3);
         }
 
-        $object = 'is' . $rule;
-        if (!$class = $this->widget->getClass($rule)) {
+        $object = 'is' . ucfirst($rule);
+        $class = $this->widget->getClass($object);
+        if (!$class || !class_exists($class)) {
             throw new \InvalidArgumentException(sprintf('Validator "%s" not found', $rule));
         }
+
 
         $options = $options + array('widget' => $this->widget) + (array)$this->widget->getConfig('is' . ucfirst($rule));
 
