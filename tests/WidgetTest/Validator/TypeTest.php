@@ -23,22 +23,22 @@ class TypeTest extends TestCase
     {
         $this->assertFalse($this->isType->__invoke($input, $type));
     }
-    
+
     public function testResource()
     {
         $res = $this->createResource();
         $this->assertInternalType('resource', $res);
         $this->assertTrue($this->isType->__invoke($res, 'resource'));
     }
-    
+
     public function testGetMessages()
     {
-        $type = $this->is->createRuleValidator('type', array(
+        $type = $this->validate->createRuleValidator('type', array(
             'typeMessage' => 'type message',
         ));
-        
+
         $type('string', 'float');
-        
+
         $this->assertContains('type message', $type->getMessages());
     }
 

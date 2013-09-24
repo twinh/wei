@@ -5,7 +5,7 @@ namespace WidgetTest\Validator;
 class LengthTest extends TestCase
 {
     protected $ao;
-    
+
     public function __construct($name = NULL, array $data = array(), $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
@@ -14,7 +14,7 @@ class LengthTest extends TestCase
             1, 2,
         ));
     }
-    
+
     /**
      * @dataProvider providerForLength
      */
@@ -30,24 +30,24 @@ class LengthTest extends TestCase
     {
         $this->assertFalse($this->isLength($input, $option1, $option2));
     }
-    
+
     /**
      * @dataProvider providerForSpecifiedLength
      */
     public function testSpecifiedLength($input, $length)
     {
-        $this->assertTrue($this->is('length', $input, $length));
+        $this->assertTrue($this->isLength($input, $length));
     }
-    
+
     /**
-     * 
+     *
      * @dataProvider providerForSpecifiedLengthNotPass
      */
     public function testSpecifiedLengthNotPass($input, $length)
     {
-        $this->assertFalse($this->is('length', $input, $length));
+        $this->assertFalse($this->isLength($input, $length));
     }
-    
+
     public function providerForSpecifiedLength()
     {
         return array(
@@ -56,7 +56,7 @@ class LengthTest extends TestCase
             array($this->ao, 2)
         );
     }
-    
+
     public function providerForSpecifiedLengthNotPass()
     {
         return array(
@@ -65,7 +65,7 @@ class LengthTest extends TestCase
             array($this->ao, 3)
         );
     }
-    
+
     public function providerForLength()
     {
         return array(

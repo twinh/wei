@@ -9,9 +9,7 @@ class PhoneCnTest extends TestCase
      */
     public function testPhoneCn($input)
     {
-        $this->assertTrue($this->is('phoneCn', $input));
-        
-        $this->assertFalse($this->is('notPhoneCn', $input));
+        $this->assertTrue($this->isPhoneCn($input));
     }
 
     /**
@@ -19,9 +17,7 @@ class PhoneCnTest extends TestCase
      */
     public function testNotPhoneCn($input)
     {
-        $this->assertFalse($this->is('phoneCn', $input));
-        
-        $this->assertTrue($this->is('notPhoneCn', $input));
+        $this->assertFalse($this->isPhoneCn($input));
     }
 
     public function providerForPhoneCn()

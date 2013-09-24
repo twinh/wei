@@ -9,9 +9,7 @@ class IdCardCnTest extends TestCase
      */
     public function testIdCardCn($input)
     {
-        $this->assertTrue($this->is('idCardCn', $input));
-
-        $this->assertFalse($this->is('notIdCardCn', $input));
+        $this->assertTrue($this->isIdCardCn($input));
     }
 
     /**
@@ -19,9 +17,7 @@ class IdCardCnTest extends TestCase
      */
     public function testNotIdCardCn($input)
     {
-        $this->assertFalse($this->is('idCardCn', $input));
-
-        $this->assertTrue($this->is('notIdCardCn', $input));
+        $this->assertFalse($this->isIdCardCn($input));
     }
 
     public function providerForIdCardCn()

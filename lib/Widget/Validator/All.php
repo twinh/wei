@@ -12,7 +12,6 @@ namespace Widget\Validator;
  * Check if all of the element in the input is valid by all specified rules
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\Is $is The validator manager
  */
 class All extends BaseValidator
 {
@@ -64,7 +63,7 @@ class All extends BaseValidator
         $validator = null;
         foreach ($input as $item) {
             foreach ($this->rules as $rule => $options) {
-                if (!$this->is->validateOne($rule, $item, $options, $validator)) {
+                if (!$this->validate->validateOne($rule, $item, $options, $validator)) {
                     $this->validators[$index][$rule] = $validator;
                 }
             }

@@ -12,7 +12,6 @@ namespace Widget\Validator;
  * Check if the input is NOT valid by all of specified rules
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\Is $is The validator manager
  */
 class NoneOf extends SomeOf
 {
@@ -44,7 +43,7 @@ class NoneOf extends SomeOf
             'negative' => true
         );
         foreach ($this->rules as $rule => $options) {
-            if (!$this->is->validateOne($rule, $input, $options, $validator, $props)) {
+            if (!$this->validate->validateOne($rule, $input, $options, $validator, $props)) {
                 $this->validators[$rule] = $validator;
             }
         }

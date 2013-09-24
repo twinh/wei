@@ -17,26 +17,8 @@ class ValidatorTest extends TestCase
         $this->isIn('apple', 'not array');
     }
 
-    public function testClosureAsParameter()
-    {
-        $this->assertTrue($this->is(function($data){
-            return 'abc' === $data;
-        }, 'abc'));
-
-        $this->assertFalse($this->is(function(
-            $data, \Widget\Validator\Callback $callback, \Widget\Widget $widget
-        ){
-            return false;
-        }, 'data'));
-    }
-
-
     public function testValidator()
     {
-        $this->assertTrue($this->is('digit', '123'));
-
-        $this->assertFalse($this->is('digit', 'abc'));
-
         $result = $this->validate(array(
             'data' => array(
                 'email' => 'twinhuang@qq.com',
@@ -79,17 +61,15 @@ class ValidatorTest extends TestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testUnexpectedType()
-    {
-        $this->is(new \stdClass());
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testRuleNotDefined()
     {
-        $this->is('noThisRule', 'test');
+        $this->validate(array(
+            'rules' => array(
+                'username' => array(
+                    'noThisRule' => true,
+                )
+            )
+        ));
     }
 
     public function testBreakOne()
@@ -168,23 +148,6 @@ class ValidatorTest extends TestCase
         ));
 
         $this->assertEquals('email', $lastField);
-    }
-
-    public function testIsOne()
-    {
-        $this->assertTrue($this->is(array(
-            'email' => true,
-            'endsWith' => array(
-                'findMe' => 'example.com',
-            ),
-        ), 'example@example.com'));
-    }
-
-    public function testNotPrefix()
-    {
-        $this->assertTrue($this->is('notDigit', 'string'));
-
-        $this->assertFalse($this->is('notDigit', '123'));
     }
 
     public function testIsFieldInvalidated()
@@ -398,7 +361,7 @@ class ValidatorTest extends TestCase
             ),
             'rules' => array(
                 'username' => array(
-                    $this->is->createRuleValidator('email')
+                    $this->validate->createRuleValidator('email')
                 )
             )
         ));
@@ -408,7 +371,7 @@ class ValidatorTest extends TestCase
                 'username' => '',
             ),
             'rules' => array(
-                'username' => $this->is->createRuleValidator('email')
+                'username' => $this->validate->createRuleValidator('email')
             ),
         ));
 
@@ -656,7 +619,7 @@ class ValidatorTest extends TestCase
      */
     public function testInvalidArgumentException()
     {
-        $email = $this->is->createRuleValidator('email', array(
+        $email = $this->validate->createRuleValidator('email', array(
             'formatMessage' => '%noThisProperty%'
         ));
 
@@ -667,7 +630,7 @@ class ValidatorTest extends TestCase
 
     public function testGetNotMessages()
     {
-        $email = $this->is->createRuleValidator('notEmail', array(
+        $email = $this->validate->createRuleValidator('notEmail', array(
             'negativeMessage' => 'this value must not be an email address'
         ));
 
@@ -678,7 +641,7 @@ class ValidatorTest extends TestCase
 
     public function testSetMessages()
     {
-        $email = $this->is->createRuleValidator('email');
+        $email = $this->validate->createRuleValidator('email');
 
         $email->setMessages(array(
             'format' => 'please provide a valid email address'
@@ -691,7 +654,7 @@ class ValidatorTest extends TestCase
 
     public function testGetName()
     {
-        $email = $this->is->createRuleValidator('email');
+        $email = $this->validate->createRuleValidator('email');
 
         $email->setName('email');
 

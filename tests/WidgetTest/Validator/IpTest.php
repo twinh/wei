@@ -9,7 +9,7 @@ class IpTest extends TestCase
      */
     public function testIp($input, $options = null)
     {
-        $this->assertTrue($this->is('ip', $input, $options));
+        $this->assertTrue($this->isIp($input, $options));
     }
 
     /**
@@ -17,7 +17,7 @@ class IpTest extends TestCase
      */
     public function testNotIp($input, $options = null)
     {
-        $this->assertFalse($this->is('ip', $input, $options));
+        $this->assertFalse($this->isIp($input, $options));
     }
 
     public function providerForIp()

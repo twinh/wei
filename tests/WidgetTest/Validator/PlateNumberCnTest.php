@@ -9,9 +9,7 @@ class PlateNumberCnTest extends TestCase
      */
     public function testPlateNumberCn($input)
     {
-        $this->assertTrue($this->is('plateNumberCn', $input));
-        
-        $this->assertFalse($this->is('notPlateNumberCn', $input));
+        $this->assertTrue($this->isPlateNumberCn($input));
     }
 
     /**
@@ -19,9 +17,7 @@ class PlateNumberCnTest extends TestCase
      */
     public function testNotPlateNumberCn($input)
     {
-        $this->assertFalse($this->is('plateNumberCn', $input));
-        
-        $this->assertTrue($this->is('notPlateNumberCn', $input));
+        $this->assertFalse($this->isPlateNumberCn($input));
     }
 
     public function providerForPlateNumberCn()

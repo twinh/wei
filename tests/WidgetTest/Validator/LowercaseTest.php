@@ -9,7 +9,7 @@ class LowercaseTest extends TestCase
      */
     public function testLowercase($input, $options = null)
     {
-        $this->assertTrue($this->is('lowercase', $input, $options));
+        $this->assertTrue($this->isLowercase($input, $options));
     }
 
     /**
@@ -17,7 +17,7 @@ class LowercaseTest extends TestCase
      */
     public function testNotLowercase($input, $options = null)
     {
-        $this->assertFalse($this->is('lowercase', $input, $options));
+        $this->assertFalse($this->isLowercase($input, $options));
     }
 
     public function providerForLowercase()

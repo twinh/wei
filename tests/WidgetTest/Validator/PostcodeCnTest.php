@@ -9,9 +9,7 @@ class PostcodeCnTest extends TestCase
      */
     public function testPostcodeCn($input)
     {
-        $this->assertTrue($this->is('postcodeCn', $input));
-
-        $this->assertFalse($this->is('notPostcodeCn', $input));
+        $this->assertTrue($this->isPostcodeCn($input));
     }
 
     /**
@@ -19,15 +17,14 @@ class PostcodeCnTest extends TestCase
      */
     public function testNotPostcodeCn($input)
     {
-        $this->assertFalse($this->is('postcodeCn', $input));
-
-        $this->assertTrue($this->is('notPostcodeCn', $input));
+        $this->assertFalse($this->isPostcodeCn($input));
     }
 
     public function providerForPostcodeCn()
     {
         return array(
             array('123456'),
+            array('515638')
         );
     }
 

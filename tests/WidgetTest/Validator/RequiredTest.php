@@ -9,9 +9,7 @@ class RequiredTest extends TestCase
      */
     public function testRequired($input)
     {
-        $this->assertTrue($this->is('Required', $input));
-        
-        $this->assertFalse($this->is('notRequired', $input));
+        $this->assertTrue($this->isRequired($input));
     }
 
     /**
@@ -19,9 +17,7 @@ class RequiredTest extends TestCase
      */
     public function testNotRequired($input)
     {
-        $this->assertFalse($this->is('Required', $input));
-        
-        $this->assertTrue($this->is('notRequired', $input));
+        $this->assertFalse($this->isRequired($input));
     }
 
     public function providerForRequired()

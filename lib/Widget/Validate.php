@@ -216,7 +216,7 @@ class Validate extends Base
                 // The current rule validation result
                 /* @var $validator Validator\BaseValidator */
                 $validator = null;
-                $result = $this->is->validateOne($rule, $data, $params, $validator, $props);
+                $result = $this->validateOne($rule, $data, $params, $validator, $props);
 
                 if (is_object($params)) {
                     $rule = get_class($params);
@@ -731,5 +731,74 @@ class Validate extends Base
     public function getNames()
     {
         return $this->names;
+    }
+
+    /**
+     * @param string|Validator\BaseValidator|int $rule
+     * @param array|null $input
+     * @param mixed $options
+     * @param null &$validator
+     * @param array $props
+     * @return bool
+     * @internal Do NOT use this method for it may be changed in the future
+     */
+    public function validateOne($rule, $input, $options = array(), &$validator = null, $props = array())
+    {
+        // Process simple array rules, eg 'username' => ['required', 'email']
+        if (is_int($rule)) {
+            $rule = $options;
+            if (is_string($options)) {
+                $options = true;
+            }
+        }
+
+        if ($rule instanceof Validator\BaseValidator) {
+            $validator = $rule;
+            return $rule($input);
+        }
+
+        $validator = $this->createRuleValidator($rule, $props);
+
+        if (!is_array($options)) {
+            $options = array($options);
+        }
+
+        if (is_int(key($options))) {
+            array_unshift($options, $input);
+            $result = call_user_func_array($validator, $options);
+        } else {
+            $validator->setOption($options);
+            $result = $validator($input);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Create a rule validator instance by specified rule name
+     *
+     * @param string $rule The name of rule validator
+     * @param array $options The property options for rule validator
+     * @return Validator\BaseValidator
+     * @throws \InvalidArgumentException When validator not found
+     */
+    public function createRuleValidator($rule, array $options = array())
+    {
+        // Starts with "not", such as notDigit, notEqual
+        if (0 === stripos($rule, 'not')) {
+            $options['negative'] = true;
+            $rule = substr($rule, 3);
+        }
+
+        $object = 'is' . ucfirst($rule);
+        $class = $this->widget->getClass($object);
+        if (!$class || !class_exists($class)) {
+            throw new \InvalidArgumentException(sprintf('Validator "%s" not found', $rule));
+        }
+
+
+        $options = $options + array('widget' => $this->widget) + (array)$this->widget->getConfig('is' . ucfirst($rule));
+
+        return new $class($options);
     }
 }

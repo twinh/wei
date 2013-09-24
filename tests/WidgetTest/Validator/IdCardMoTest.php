@@ -9,9 +9,7 @@ class IdCardMoTest extends TestCase
      */
     public function testIdCardMo($input)
     {
-        $this->assertTrue($this->is('idCardMo', $input));
-        
-        $this->assertFalse($this->is('notIdCardMo', $input));
+        $this->assertTrue($this->isIdCardMo($input));
     }
 
     /**
@@ -19,9 +17,7 @@ class IdCardMoTest extends TestCase
      */
     public function testNotIdCardMo($input)
     {
-        $this->assertFalse($this->is('idCardMo', $input));
-        
-        $this->assertTrue($this->is('notIdCardMo', $input));
+        $this->assertFalse($this->isIdCardMo($input));
     }
 
     public function providerForIdCardMo()
@@ -37,7 +33,7 @@ class IdCardMoTest extends TestCase
     {
         return array(
             array('00000000'), // first digit should be 1,5,7
-            array('22222222'), 
+            array('22222222'),
             array('33333333'),
             array('44444444'),
             array('66666666'),

@@ -9,9 +9,7 @@ class UrlTest extends TestCase
      */
     public function testUrl($input, $options = array())
     {
-        $this->assertTrue($this->is('url', $input, $options));
-        
-        $this->assertFalse($this->is('notUrl', $input, $options));
+        $this->assertTrue($this->isUrl($input, $options));
     }
 
     /**
@@ -19,9 +17,7 @@ class UrlTest extends TestCase
      */
     public function testNotUrl($input, $options = array())
     {
-        $this->assertFalse($this->is('url', $input, $options));
-        
-        $this->assertTrue($this->is('notUrl', $input, $options));
+        $this->assertFalse($this->isUrl($input, $options));
     }
 
     public function providerForUrl()
@@ -40,7 +36,7 @@ class UrlTest extends TestCase
                 'path' => true
             )),
             array('http://www.example.com/index.html?q=123', array(
-                'query' => true 
+                'query' => true
             ))
         );
     }

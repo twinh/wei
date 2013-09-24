@@ -25,7 +25,7 @@ class CharLengthTest extends TestCase
      */
     public function testSpecifiedLength($input, $length)
     {
-        $this->assertTrue($this->is('charLength', $input, $length));
+        $this->assertTrue($this->isCharLength($input, $length));
     }
 
     /**
@@ -34,7 +34,7 @@ class CharLengthTest extends TestCase
      */
     public function testSpecifiedLengthNotPass($input, $length)
     {
-        $this->assertFalse($this->is('charLength', $input, $length));
+        $this->assertFalse($this->isCharLength($input, $length));
     }
 
     public function providerForSpecifiedLength()

@@ -10,7 +10,6 @@ class ColorTest extends TestCase
     public function testColor($input, $options = array())
     {
         $this->assertTrue($this->isColor($input, $options));
-        $this->assertTrue($this->is('color', $input, $options));
     }
 
     /**
@@ -19,7 +18,6 @@ class ColorTest extends TestCase
     public function testNotColor($input, $options = array())
     {
         $this->assertFalse($this->isColor($input, $options));
-        $this->assertTrue($this->is('notColor', $input, $options));
     }
 
     public function providerForColor()

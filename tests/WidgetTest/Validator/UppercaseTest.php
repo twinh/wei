@@ -9,7 +9,7 @@ class UppercaseTest extends TestCase
      */
     public function testUppercase($input, $options = null)
     {
-        $this->assertTrue($this->is('uppercase', $input, $options));
+        $this->assertTrue($this->isUppercase($input, $options));
     }
 
     /**
@@ -17,7 +17,7 @@ class UppercaseTest extends TestCase
      */
     public function testNotUppercase($input, $options = null)
     {
-        $this->assertFalse($this->is('uppercase', $input, $options));
+        $this->assertFalse($this->isUppercase($input, $options));
     }
 
     public function providerForUppercase()

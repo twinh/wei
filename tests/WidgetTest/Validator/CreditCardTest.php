@@ -9,10 +9,7 @@ class CreditCardTest extends TestCase
      */
     public function testCreditCard($input, $type = null)
     {
-        if (is_array($type)) {
-            $type = array('type' => $type);
-        }
-        $this->assertTrue($this->is('creditCard', $input, $type));
+        $this->assertTrue($this->isCreditCard($input, $type));
     }
 
     /**
@@ -20,7 +17,7 @@ class CreditCardTest extends TestCase
      */
     public function testNotCreditCard($input, $type = null)
     {
-        $this->assertFalse($this->is('creditCard', $input, $type));
+        $this->assertFalse($this->isCreditCard($input, $type));
     }
 
     public function providerForCreditCard()
@@ -88,7 +85,7 @@ class CreditCardTest extends TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testException()
     {

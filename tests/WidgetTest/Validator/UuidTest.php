@@ -9,9 +9,7 @@ class UuidTest extends TestCase
      */
     public function testUuid($input)
     {
-        $this->assertTrue($this->is('Uuid', $input));
-        
-        $this->assertFalse($this->is('notUuid', $input));
+        $this->assertTrue($this->isUuid($input));
     }
 
     /**
@@ -19,9 +17,7 @@ class UuidTest extends TestCase
      */
     public function testNotUuid($input)
     {
-        $this->assertFalse($this->is('Uuid', $input));
-        
-        $this->assertTrue($this->is('notUuid', $input));
+        $this->assertFalse($this->isUuid($input));
     }
 
     public function providerForUuid()

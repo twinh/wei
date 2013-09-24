@@ -22,14 +22,6 @@ class TestCase extends BaseTestCase
 
     protected static $resource;
 
-    public function setUp()
-    {
-        parent::setUp();
-
-        // Instance validator manager widget
-        $this->is;
-    }
-
     public function getInputs()
     {
         return array(
@@ -58,7 +50,7 @@ class TestCase extends BaseTestCase
     {
         // Gets validator name WidgetTest\Validator\LengthTest => Length
         $name = $this->name ?: substr(get_class($this), strrpos(get_class($this), '\\') + 1, -4);
-        $validator = $this->is->createRuleValidator($name, $this->inputTestOptions);
+        $validator = $this->validate->createRuleValidator($name, $this->inputTestOptions);
 
         // The validator should accept any type of INPUT and do NOT raise any
         // exceptions or errors

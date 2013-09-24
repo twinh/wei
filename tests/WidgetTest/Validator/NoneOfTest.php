@@ -26,7 +26,7 @@ class NoneOfTest extends TestCase
 
     public function testGetMessages()
     {
-        $noneOf = $this->is->createRuleValidator('noneOf');
+        $noneOf = $this->validate->createRuleValidator('noneOf');
 
         $noneOf('abc', array(
             'equalTo' => 'abc',
