@@ -257,7 +257,7 @@ class Call extends Base
      *
      * @param array|string $url A options array or the request URL
      * @param array $options A options array if the first parameter is string
-     * @return $this A new call object
+     * @return Call A new call object
      */
     public function __invoke($url = null, array $options = array())
     {
@@ -273,9 +273,9 @@ class Call extends Base
             $options += get_object_vars($this);
         } else {
             $options = array(
-                'widget' => $this->widget,
-                'global' => false
-            ) + $options;
+                    'widget' => $this->widget,
+                    'global' => false
+                ) + $options;
         }
 
         $call = new self($options);
@@ -414,9 +414,17 @@ class Call extends Base
         $ch = $this->ch;
 
         if (false !== $response) {
-            // Split to two parts: header and body
-            list($this->responseHeader, $this->responseText) = explode("\r\n\r\n", $response, 2);
-            $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            // Fixes header size error when use proxy and CURLOPT_HTTPPROXYTUNNEL is true
+            // http://sourceforge.net/p/curl/bugs/1204/
+            if (false !== stripos($response, "HTTP/1.1 200 Connection established\r\n\r\n")) {
+                $response = str_ireplace("HTTP/1.1 200 Connection established\r\n\r\n", '', $response);
+            }
+
+            $curlInfo = curl_getinfo($ch);
+            $this->responseHeader = substr($response, 0, $curlInfo['header_size']);
+            $this->responseText = substr($response, $curlInfo['header_size']);
+
+            $statusCode = $curlInfo['http_code'];
             $isSuccess = $statusCode >= 200 && $statusCode < 300 || $statusCode === 304;
             if ($isSuccess) {
                 $this->response = $response = $this->parse($this->responseText, $this->dataType, $exception);
@@ -584,7 +592,7 @@ class Call extends Base
      *
      * @param string $name
      * @param string $value
-     * @return $this
+     * @return Call
      */
     public function setRequestHeader($name, $value)
     {
@@ -645,7 +653,7 @@ class Call extends Base
      * Set request method
      *
      * @param string $method
-     * @return $this
+     * @return Call
      */
     public function setMethod($method)
     {
@@ -659,7 +667,7 @@ class Call extends Base
      * @param string $url
      * @param array $data
      * @param callback $callback
-     * @return $this
+     * @return Call
      */
     public function getJson($url, $data, $callback = null)
     {
@@ -672,7 +680,7 @@ class Call extends Base
      * @param string $url
      * @param array $data
      * @param callback $callback
-     * @return $this
+     * @return Call
      */
     public function getJsonObject($url, $data, $callback = null)
     {
@@ -686,9 +694,9 @@ class Call extends Base
      * @param array $data
      * @param callback $callback
      * @param string $dataType
-     * @return $this
+     * @return Call
      */
-    public function get($url, $data, $callback = null, $dataType = null)
+    public function get($url, $data = array(), $callback = null, $dataType = null)
     {
         return $this->processMethod($url, $data, $callback, $dataType, 'GET');
     }
@@ -700,7 +708,7 @@ class Call extends Base
      * @param array $data
      * @param callback $callback
      * @param string $dataType
-     * @return $this
+     * @return Call
      */
     public function post($url, $data, $callback = null, $dataType = null)
     {
@@ -714,7 +722,7 @@ class Call extends Base
      * @param array $data
      * @param callback $callback
      * @param string $dataType
-     * @return $this
+     * @return Call
      */
     public function put($url, $data, $callback = null, $dataType = null)
     {
@@ -728,7 +736,7 @@ class Call extends Base
      * @param array $data
      * @param callback $callback
      * @param string $dataType
-     * @return $this
+     * @return Call
      */
     public function delete($url, $data, $callback = null, $dataType = null)
     {
@@ -742,7 +750,7 @@ class Call extends Base
      * @param array $data
      * @param callback $callback
      * @param string $dataType
-     * @return $this
+     * @return Call
      */
     public function patch($url, $data, $callback = null, $dataType = null)
     {
@@ -757,7 +765,7 @@ class Call extends Base
      * @param callback $callback
      * @param string $dataType
      * @param string $method
-     * @return $this
+     * @return Call
      */
     protected function processMethod($url, $data, $callback, $dataType, $method)
     {
@@ -780,7 +788,7 @@ class Call extends Base
      * Set success callback
      *
      * @param \Closure $fn
-     * @return $this
+     * @return Call
      */
     public function success(\Closure $fn)
     {
@@ -792,7 +800,7 @@ class Call extends Base
      * Set error callback
      *
      * @param \Closure $fn
-     * @return $this
+     * @return Call
      */
     public function error(\Closure $fn)
     {
@@ -804,7 +812,7 @@ class Call extends Base
      * Set complete callback
      *
      * @param \Closure $fn
-     * @return $this
+     * @return Call
      */
     public function complete(\Closure $fn)
     {
