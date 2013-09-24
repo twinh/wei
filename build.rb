@@ -49,7 +49,7 @@ widgets = [
     'db', 'queryBuilder', 'activeRecord',
     'call',
   # validation
-    'validate',  'is',
+    'validate'
     #
     'isAlnum', 'isAlpha', 'isBlank', 'isDecimal', 'isDigit', 'isDivisibleby', 'isDoubleByte', 'isEmpty', 'isEndsWith', 'isIn', 'isLowercase', 'isNull', 'isNumber', 'isRegex', 'isRequired', 'isStartsWith', 'isType', 'isUppercase',
     # Length
