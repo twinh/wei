@@ -25,13 +25,6 @@ class Is extends Base
     );
 
     /**
-     * The available validator rules name
-     *
-     * @var array
-     */
-    protected $rules = array();
-
-    /**
      * Constructor
      *
      * @param array $options
@@ -42,9 +35,6 @@ class Is extends Base
 
         // Adds widget alias for validators
         $rules = array();
-        foreach ($this->rules as $rule) {
-            $rules['is' . $rule] = 'Widget\Validator\\' . $rule;
-        }
         foreach ($this->aliases as $rule => $class) {
             $rules['is' . ucfirst($rule)] = $class;
         }
@@ -130,27 +120,6 @@ class Is extends Base
     }
 
     /**
-     * Check if the validator rule exists
-     *
-     * @param string $rule
-     * @return string|false
-     */
-    public function hasRule($rule)
-    {
-        $rule = lcfirst($rule);
-        if (isset($this->aliases[$rule])) {
-            $class = $this->aliases[$rule];
-        } else {
-            $class = 'Widget\Validator\\' . ucfirst($rule);
-        }
-        if (class_exists($class)) {
-            return $class;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Create a rule validator instance by specified rule name
      *
      * @param string $rule The name of rule validator
@@ -166,7 +135,8 @@ class Is extends Base
             $rule = substr($rule, 3);
         }
 
-        if (!$class = $this->hasRule($rule)) {
+        $object = 'is' . $rule;
+        if (!$class = $this->widget->getClass($rule)) {
             throw new \InvalidArgumentException(sprintf('Validator "%s" not found', $rule));
         }
 

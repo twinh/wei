@@ -19,92 +19,92 @@ namespace Widget
      * @author      Twin Huang <twinhuang@qq.com>
      *
      * Cache
-     * @property Cache      $cache A cache widget proxy
+     * @property Cache      $cache A cache object proxy
      * @method   mixed      cache($key, $value = null, $expire = 0) Retrieve or store an item by cache
-     * @property ArrayCache $arrayCache  A cache widget that stored data in PHP array
+     * @property ArrayCache $arrayCache  A cache object that stored data in PHP array
      * @method   mixed      arrayCache($key, $value = null, $expire = 0) Retrieve or store an item by array cache
-     * @property Apc        $apc A cache widget that stored data in PHP APC
+     * @property Apc        $apc A cache object that stored data in PHP APC
      * @method   mixed      apc($key, $value = null, $expire = 0) Retrieve or store an item
-     * @property DbCache    $dbCache A cache widget that stored data in databases
+     * @property DbCache    $dbCache A cache object that stored data in databases
      * @method   mixed      dbCache($key, $value = null, $expire = 0) Retrieve or store an item by database cache
-     * @property FileCache  $fileCache A cache widget that stored data in files
+     * @property FileCache  $fileCache A cache object that stored data in files
      * @method   mixed      fileCache($key, $value = null, $expire = 0) Retrieve or store an item by file
-     * @property Memcache   $memcache A cache widget that stored data in Memcache
+     * @property Memcache   $memcache A cache object that stored data in Memcache
      * @method   mixed      memcache($key, $value = null, $expire = 0) Retrieve or store an item by Memcache
-     * @property Memcached  $memcached A cache widget that stored data in Memcached
+     * @property Memcached  $memcached A cache object that stored data in Memcached
      * @method   mixed      memcached($key, $value = null, $expire = 0) Retrieve or store an item by Memcached
-     * @property MongoCache $mongoCache A cache widget that stores data in MongoDB
+     * @property MongoCache $mongoCache A cache object that stores data in MongoDB
      * @method   mixed      mongoCache($key, $value = null, $expire = 0) Retrieve or store an item by MongoDB
-     * @property Couchbase  $couchbase A cache widget base on Couchbase
+     * @property Couchbase  $couchbase A cache object base on Couchbase
      * @method   mixed      couchbase($key, $value = null, $expire = 0) Retrieve or store an item by Couchbase
-     * @property Redis      $redis A cache widget that stores data in Redis
+     * @property Redis      $redis A cache object that stores data in Redis
      * @method   mixed      redis($key = null, $value = null, $expire = 0) Retrieve or store an item by Redis
-     * @property Bicache    $bicache A two-level cache widget
+     * @property Bicache    $bicache A two-level cache object
      * @method   mixed      bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
      *
      * Database
-     * @property Db                      $db A database widget
+     * @property Db                      $db A database object
      * @method   \Widget\Db\QueryBuilder db($table = null) Create a new instance of a SQL query builder with specified table name
      *
-     * @property Call           $call A widget handles HTTP request like jQuery Ajax
+     * @property Call           $call A object handles HTTP request like jQuery Ajax
      * @method   \Widget\Call   call(array $options) Create a new call object and execute
      *
      * HTTP Request
-     * @property Request    $request A widget that handles the HTTP request data
+     * @property Request    $request A object that handles the HTTP request data
      * @method   mixed      request($name, $default = null) Returns a stringify request parameter value
-     * @property Cookie     $cookie A widget that handles the HTTP request and response cookies
+     * @property Cookie     $cookie A object that handles the HTTP request and response cookies
      * @method   mixed      cookie($key, $value = null, $options = array()) Get or set cookie
-     * @property Session    $session A widget that session parameters ($_SESSION)
+     * @property Session    $session A object that session parameters ($_SESSION)
      * @method   mixed      session($name, $default = null) Returns a stringify session parameter value
-     * @property Ua         $ua A widget to detect user OS, device and browser name and version
+     * @property Ua         $ua A object to detect user OS, device and browser name and version
      * @method   bool       ua() Check if in the specified browser, OS or device
-     * @property Upload     $upload A widget that handles the uploaded files
+     * @property Upload     $upload A object that handles the uploaded files
      * @method   bool       upload(array $options = array()) Upload a file
      *
      * HTTP Response
-     * @property Response           $response A widget that handles the HTTP response data
+     * @property Response           $response A object that handles the HTTP response data
      * @method   \Widget\Response   response($content = null, $status = null) Send response header and content
-     * @property Json               $json A widget to response json
+     * @property Json               $json A object to response json
      * @method   \Widget\Json       json($message = null, $code = 1, array $append = array(), $jsonp = false) Send JSON(P) response
-     * @property Redirect           $redirect A widget that send a redirect response
+     * @property Redirect           $redirect A object that send a redirect response
      * @method   \Widget\Redirect   redirect($url = null, array $options = array()) Send a redirect response
      *
      * View
-     * @property Escape             $escape A widget to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
+     * @property Escape             $escape A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
      * @method   string             escape($string, $type = 'html') Escapes a string by specified type for secure output
-     * @property View               $view A widget that use to render PHP template
-     * @method   string             view($name = null, $vars = array()) Returns view widget or render a PHP template
+     * @property View               $view A object that use to render PHP template
+     * @method   string             view($name = null, $vars = array()) Returns view object or render a PHP template
      *
      * Application
-     * @property WeChatApp          $weChatApp A widget handles WeChat(WeiXin) callback message
+     * @property WeChatApp          $weChatApp A object handles WeChat(WeiXin) callback message
      * @method   \Widget\WeChatApp  weChatApp() Start up WeChat application and output the matched rule message
-     * @property App                $app The application widget
+     * @property App                $app The application object
      * @method   \Widget\App        app(array $options = array()) Startup application
-     * @property Router             $router A widget that build a simple REST application
+     * @property Router             $router A object that build a simple REST application
      * @method   \Widget\Router     router($pathInfo = null, $method = null) Run the application
-     * @property Url                $url A util widget to build URL
+     * @property Url                $url A util object to build URL
      * @method   string             url($uri) Build URL by specified uri and parameters
      *
      * Other
-     * @property Arr            $arr An util widget provides some useful method to manipulation array
-     * @property Config         $config A widget to manage widget configurations
-     * @property Env            $env A widget to detect the environment name and load configuration by environment name
+     * @property Arr            $arr An util object provides some useful method to manipulation array
+     * @property Config         $config A object to manage object configurations
+     * @property Env            $env A object to detect the environment name and load configuration by environment name
      * @method   string         env() Returns the environment name
-     * @property Error          $error A widget that handles exception and display pretty exception message
+     * @property Error          $error A object that handles exception and display pretty exception message
      * @method   \Widget\Error  error($fn) Attach a handler to exception error
-     * @property Gravatar       $gravatar A widget that generates a Gravatar URL for a specified email address
+     * @property Gravatar       $gravatar A object that generates a Gravatar URL for a specified email address
      * @method   string         gravatar($email, $size = null, $default = null, $rating = null) Generates a Gravatar URL for a specified email address
-     * @property Logger         $logger A simple logger widget, which is base on the Monolog
+     * @property Logger         $logger A simple logger object, which is base on the Monolog
      * @method   bool           logger($level, $message) Logs with an arbitrary level
-     * @property Pinyin         $pinyin An util widget that converts Chinese words to phonetic alphabets
+     * @property Pinyin         $pinyin An util object that converts Chinese words to phonetic alphabets
      * @method   string         pinyin($word) Converts Chinese words to phonetic alphabets
-     * @property Uuid           $uuid A util widget that generates a RANDOM UUID(universally unique identifier)
+     * @property Uuid           $uuid A util object that generates a RANDOM UUID(universally unique identifier)
      * @method   string         uuid() generates a RANDOM UUID(universally unique identifier)
-     * @property T              $t A translator widget
+     * @property T              $t A translator object
      * @method   string         t($message, array $parameters = array()) Translate the message
      *
      * Third Party
-     * @property Monolog        $monolog A wrapper widget for Monolog
+     * @property Monolog        $monolog A wrapper object for Monolog
      * @method   bool           monolog($level = null, $message = null, array $context = array()) Get monolog logger object or add a log record
      *
      * Validation
@@ -254,7 +254,7 @@ namespace Widget
         const VERSION = '0.9.5';
 
         /**
-         * The configurations for all widgets
+         * The configurations for all objects
          *
          * @var array
          */
@@ -268,7 +268,7 @@ namespace Widget
         protected $debug = true;
 
         /**
-         * The PHP configuration options that will be set when widget container constructing
+         * The PHP configuration options that will be set when the service container constructing
          *
          * @var array
          * @see http://www.php.net/manual/en/ini.php
@@ -291,14 +291,14 @@ namespace Widget
         protected $autoloadMap = array();
 
         /**
-         * The widget name to class name map
+         * The object name to class name map
          *
          * @var array
          */
         protected $aliases = array();
 
         /**
-         * The widget name dependence map
+         * The object name dependence map
          *
          * @var array
          */
@@ -327,48 +327,48 @@ namespace Widget
         protected $import = array();
 
         /**
-         * The callback executes *before* widget constructed
+         * The callback executes *before* object constructed
          *
          * @var callable
          */
         protected $beforeConstruct;
 
         /**
-         * The callback executes *after* widget constructed
+         * The callback executes *after* object constructed
          *
          * @var callable
          */
         protected $afterConstruct;
 
         /**
-         * The widgets that will be instanced after widget container constructed
+         * The objects that will be instanced after service container constructed
          *
          * @var array
          */
         protected $preload = array();
 
         /**
-         * An array contains the instanced widget objects
+         * An array contains the instanced objects
          *
          * @var Base[]
          */
-        protected $widgets = array();
+        protected $objects = array();
 
         /**
-         * The current widget container
+         * The current service container
          *
          * @var Widget
          */
         protected static $container;
 
         /**
-         * Instance widget container
+         * Instance service container
          *
          * @param array $config
          */
         public function __construct(array $config = array())
         {
-            // Set configurations for all widget
+            // Set configurations for all objects
             $this->setConfig($config);
 
             $this->set('widget', $this);
@@ -382,7 +382,7 @@ namespace Widget
         }
 
         /**
-         * Get the widget container instance
+         * Get the service container instance
          *
          * @param array $config                 The array or file configuration
          * @return $this
@@ -416,7 +416,7 @@ namespace Widget
         }
 
         /**
-         * Set the widget container
+         * Set the service container
          *
          * @param Widget $container
          */
@@ -449,7 +449,7 @@ namespace Widget
         }
 
         /**
-         * Set widget's configuration
+         * Set object's configuration
          *
          * @param string|array $name
          * @param mixed $value
@@ -498,22 +498,22 @@ namespace Widget
              */
             if (false !== strpos($first, '.')) {
                 $parts = explode('.', $first, 2);
-                $widgetName = $parts[0] . ucfirst($parts[1]);
-                if (!isset($this->deps[$widgetName])) {
-                    $this->deps[$widgetName] = $first;
+                $objectName = $parts[0] . ucfirst($parts[1]);
+                if (!isset($this->deps[$objectName])) {
+                    $this->deps[$objectName] = $first;
                 }
             }
 
-            // Set options for existing widget
-            if (isset($this->widgets[$first])) {
-                $this->widgets[$first]->setOption($value);
+            // Set options for existing object
+            if (isset($this->objects[$first])) {
+                $this->objects[$first]->setOption($value);
             }
 
             return $this;
         }
 
         /**
-         * Get widget's configuration
+         * Get object's configuration
          *
          * @param string $name The name of configuration
          * @param mixed $default The default value if configuration not found
@@ -541,31 +541,31 @@ namespace Widget
         }
 
         /**
-         * Get a widget object and call its "__invoke" method
+         * Get a object and call its "__invoke" method
          *
-         * @param string $name  The name of the widget
+         * @param string $name  The name of the object
          * @param array $args   The arguments for "__invoke" method
          * @param array $deps   The dependent configuration
          * @return mixed
          */
         public function invoke($name, array $args = array(), $deps = array())
         {
-            $widget = $this->get($name, $deps);
-            return call_user_func_array(array($widget, '__invoke'), $args);
+            $object = $this->get($name, $deps);
+            return call_user_func_array(array($object, '__invoke'), $args);
         }
 
         /**
-         * Get a widget object
+         * Get a object
          *
-         * @param string $name  The name of the widget, without class prefix "Widget\"
-         * @param array $options The option properties for widget
+         * @param string $name  The name of the object, without class prefix "Widget\"
+         * @param array $options The option properties for object
          * @param array $deps The dependent configuration
          * @throws \BadMethodCallException
          * @return Base
          */
         public function get($name, array $options = array(), array $deps = array())
         {
-            // Resolve the widget name in dependent configuration
+            // Resolve the object name in dependent configuration
             if (isset($deps[$name])) {
                 $name = $deps[$name];
             }
@@ -574,31 +574,31 @@ namespace Widget
                 $name = $this->deps[$name];
             }
 
-            if (isset($this->widgets[$name])) {
-                return $this->widgets[$name];
+            if (isset($this->objects[$name])) {
+                return $this->objects[$name];
             }
 
-            // Resolve the real widget name and the config name($full)
+            // Resolve the real object name and the config name($full)
             $full = $name;
             if (false !== ($pos = strpos($name, '.'))) {
                 $name = substr($name, $pos + 1);
             }
 
-            // Get the widget class and instance
+            // Get the object class and instance
             $class = $this->getClass($name);
             if (class_exists($class)) {
                 // Trigger the before construct callback
                 $this->beforeConstruct && call_user_func($this->beforeConstruct, $this, $full, $name);
 
-                // Load the widget configuration and make sure "widget" option at first
+                // Load the object configuration and make sure "widget" option at first
                 $options = array('widget' => $this) + $options + (array)$this->getConfig($full);
 
-                $this->widgets[$full] = new $class($options);
+                $this->objects[$full] = new $class($options);
 
                 // Trigger the after construct callback
-                $this->afterConstruct && call_user_func($this->afterConstruct, $this, $full, $name, $this->widgets[$full]);
+                $this->afterConstruct && call_user_func($this->afterConstruct, $this, $full, $name, $this->objects[$full]);
 
-                return $this->widgets[$full];
+                return $this->objects[$full];
             }
 
             // Build the error message
@@ -609,10 +609,10 @@ namespace Widget
                 // For call_user_func/call_user_func_array
                 $file = isset($traces[3]['file']) ? $traces[3]['file'] : $traces[4]['file'];
                 $line = isset($traces[3]['line']) ? $traces[3]['line'] : $traces[4]['line'];
-                throw new \BadMethodCallException(sprintf('Method "%s->%2$s" or widget "%s" (class "%s") not found, called in file "%s" at line %s', $traces[3]['class'], $traces[3]['function'], $class, $file, $line));
+                throw new \BadMethodCallException(sprintf('Method "%s->%2$s" or object "%s" (class "%s") not found, called in file "%s" at line %s', $traces[3]['class'], $traces[3]['function'], $class, $file, $line));
             // $widget->notFound
             } elseif (isset($traces[1]) && '__get' == $traces[1]['function'] && $name == $traces[1]['args'][0]) {
-                throw new \BadMethodCallException(sprintf('Property or widget "%s" (class "%s") not found, called in file "%s" at line %s', $traces[1]['args'][0], $class, $traces[1]['file'], $traces[1]['line']));
+                throw new \BadMethodCallException(sprintf('Property or object "%s" (class "%s") not found, called in file "%s" at line %s', $traces[1]['args'][0], $class, $traces[1]['file'], $traces[1]['line']));
             // $widget->get('notFound');
             } else {
                 throw new \BadMethodCallException(sprintf('Property or method "%s" not found', $name));
@@ -620,23 +620,23 @@ namespace Widget
         }
 
         /**
-         * Check if the widget is instanced
+         * Check if the object is instanced
          *
-         * @param string $name The name of widget
+         * @param string $name The name of object
          * @return bool
          */
         public function isInstanced($name)
         {
-            return isset($this->widgets[$name]);
+            return isset($this->objects[$name]);
         }
 
         /**
-         * Initialize a new instance of widget, with the specified name
+         * Initialize a new instance of object, with the specified name
          *
-         * @param string $name The name of the widget
-         * @param array $options The option properties for widget
+         * @param string $name The name of the object
+         * @param array $options The option properties for object
          * @param array $deps The dependent configuration
-         * @return Base The widget object
+         * @return Base The instanced object
          */
         public function newInstance($name, array $options = array(), array $deps = array())
         {
@@ -645,28 +645,28 @@ namespace Widget
         }
 
         /**
-         * Add a widget
+         * Add a object to service container
          *
-         * @param string $name The name of widget
-         * @param Base $widget The widget object
+         * @param string $name The name of object
+         * @param Base $object The service object
          * @return $this
          */
-        public function set($name, Base $widget)
+        public function set($name, Base $object)
         {
-            $this->$name = $this->widgets[$name] = $widget;
+            $this->$name = $this->objects[$name] = $object;
             return $this;
         }
 
         /**
-         * Remove the widget instance by the given name
+         * Remove the service by the specified name
          *
-         * @param  string  $name The name of widget
+         * @param  string  $name The name of service
          * @return bool
          */
         public function remove($name)
         {
-            if (isset($this->widgets[$name])) {
-                unset($this->widgets[$name]);
+            if (isset($this->objects[$name])) {
+                unset($this->objects[$name]);
                 if (isset($this->$name) && $this->$name instanceof Base) {
                     unset($this->$name);
                 }
@@ -676,9 +676,9 @@ namespace Widget
         }
 
         /**
-         * Get the widget class by the given name
+         * Get the object class by the given name
          *
-         * @param string $name The name of widget
+         * @param string $name The name of service
          * @return string
          */
         public function getClass($name)
@@ -694,10 +694,10 @@ namespace Widget
         }
 
         /**
-         * Check if the widget exists by the given name, if the widget exists,
+         * Check if the service exists by the specified name, if the service exists,
          * returns the full class name, else return false
          *
-         * @param string $name The name of widget
+         * @param string $name The name of service
          * @return string|false
          */
         public function has($name)
@@ -782,7 +782,7 @@ namespace Widget
         }
 
         /**
-         * Merge widget aliases
+         * Merge service aliases
          *
          * @param array $aliases
          * @return $this
@@ -794,10 +794,10 @@ namespace Widget
         }
 
         /**
-         * Set widget alias
+         * Set service alias
          *
-         * @param string $name The name of widget
-         * @param string $class The class that the widget reference to
+         * @param string $name The name of service
+         * @param string $class The class that the service reference to
          * @return $this
          */
         public function setAlias($name, $class)
@@ -807,11 +807,11 @@ namespace Widget
         }
 
         /**
-         * Import classes in the specified directory as widgets
+         * Import classes in the specified directory as services
          *
          * @param string $dir The directory to search class
          * @param string $namespace The prefix namespace of the class
-         * @param null $format The widget name format, eg 'is%s'
+         * @param null $format The service name format, eg 'is%s'
          * @param bool $autoload Whether add namespace and directory to `autoloadMap` or nor
          * @throws \InvalidArgumentException When the first parameter is not a directory
          * @return $this
@@ -819,7 +819,7 @@ namespace Widget
         public function import($dir, $namespace, $format = null, $autoload = false)
         {
             if (!is_dir($dir)) {
-                throw new \InvalidArgumentException(sprintf('Fail to import widgets from non-exists directory "%s"', $dir));
+                throw new \InvalidArgumentException(sprintf('Fail to import classes from non-exists directory "%s"', $dir));
             }
 
             if ($autoload) {
@@ -837,7 +837,7 @@ namespace Widget
         }
 
         /**
-         * Set import widgets
+         * Set import services
          *
          * @param array $import
          * @return $this
@@ -867,15 +867,15 @@ namespace Widget
         }
 
         /**
-         * Instance preload widgets
+         * Instance preload services
          *
          * @param array $preload
          */
         protected function setPreload(array $preload)
         {
             $this->preload = array_merge($this->preload, $preload);
-            foreach ($preload as $widgetName) {
-                $this->set($widgetName, $this->get($widgetName));
+            foreach ($preload as $service) {
+                $this->set($service, $this->get($service));
             }
         }
     }
@@ -887,7 +887,7 @@ namespace Widget
 namespace
 {
     /**
-     * Get the widget container instance
+     * Get the service container instance
      *
      * @return Widget\Widget
      */
@@ -897,7 +897,7 @@ namespace
     }
 
     /**
-     * Get the widget container instance
+     * Get the service container instance
      *
      * @return Widget\Widget
      */
