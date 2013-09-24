@@ -24,13 +24,15 @@ class CallTest extends TestCase
 
         $this->triggeredEvents = array();
 
-        $this->url = $this->call->getOption('url');
+        $this->url = $this->call->getUrl();
 
         if (false === @fopen($this->url, 'r')) {
             $this->markTestSkipped(sprintf('URL %s is not available', $this->url));
         }
 
-        $this->call->setOption('error', function($call, $type, $e){
+        $this->call->setCurlOption(CURLOPT_HEADER, true);
+
+        $this->call->error(function($call, $type, $e){
             throw $e;
         });
     }
