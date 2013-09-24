@@ -176,7 +176,7 @@ class WidgetTest extends TestCase
 
     /**
      * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Property or widget "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file
+     * @expectedExceptionMessage Property or object "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file
      */
     public function testInstanceNotFoundWidgetFromWidgetManager()
     {
@@ -185,7 +185,7 @@ class WidgetTest extends TestCase
 
     /**
      * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Property or widget "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file
+     * @expectedExceptionMessage Property or object "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file
      */
     public function testInstanceNotFoundWidget()
     {
@@ -194,7 +194,7 @@ class WidgetTest extends TestCase
 
     /**
      * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Method "Widget\Widget->notFoundWidget" or widget "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file
+     * @expectedExceptionMessage Method "Widget\Widget->notFoundWidget" or object "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file
      */
     public function testInvokeNotFoundWidget()
     {
@@ -370,7 +370,7 @@ class WidgetTest extends TestCase
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Fail to import widgets from non-exists directory
+     * @expectedExceptionMessage Fail to import classes from non-exists directory
      */
     public function testImportInvalidDir()
     {
