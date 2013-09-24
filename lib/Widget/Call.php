@@ -179,6 +179,23 @@ class Call extends Base
     protected $complete;
 
     /**
+     * The user define options for cURL handle
+     *
+     * @var array
+     */
+    protected $curlOptions = array();
+
+    /**
+     * The predefined options for cURL handle
+     *
+     * @var array
+     */
+    protected $defaultCurlOptions = array(
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_FOLLOWLOCATION => true,
+    );
+
+    /**
      * The request result
      *
      * @var bool
@@ -240,17 +257,6 @@ class Call extends Base
      * @var \ErrorException
      */
     protected $errorException;
-
-    /**
-     * The predefined cURL options
-     *
-     * @var array
-     */
-    protected $curlOpts = array(
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_HEADER => true,
-        CURLOPT_FOLLOWLOCATION => true,
-    );
 
     /**
      * Create a new call object and execute
@@ -400,8 +406,7 @@ class Call extends Base
         }
 
         $opts[CURLOPT_URL] = $url;
-
-        return $this->curlOpts + $opts;
+        return $this->curlOptions + $opts + $this->defaultCurlOptions;
     }
 
     /**
@@ -414,15 +419,21 @@ class Call extends Base
         $ch = $this->ch;
 
         if (false !== $response) {
-            // Fixes header size error when use CURLOPT_PROXY and CURLOPT_HTTPPROXYTUNNEL is true
-            // http://sourceforge.net/p/curl/bugs/1204/
-            if (false !== stripos($response, "HTTP/1.1 200 Connection established\r\n\r\n")) {
-                $response = str_ireplace("HTTP/1.1 200 Connection established\r\n\r\n", '', $response);
-            }
-
             $curlInfo = curl_getinfo($ch);
-            $this->responseHeader = substr($response, 0, $curlInfo['header_size']);
-            $this->responseText = substr($response, $curlInfo['header_size']);
+
+            // Parse response header
+            if ($this->getCurlOption(CURLOPT_HEADER)) {
+                // Fixes header size error when use CURLOPT_PROXY and CURLOPT_HTTPPROXYTUNNEL is true
+                // http://sourceforge.net/p/curl/bugs/1204/
+                if (false !== stripos($response, "HTTP/1.1 200 Connection established\r\n\r\n")) {
+                    $response = str_ireplace("HTTP/1.1 200 Connection established\r\n\r\n", '', $response);
+                }
+
+                $this->responseHeader = substr($response, 0, $curlInfo['header_size']);
+                $this->responseText = substr($response, $curlInfo['header_size']);
+            } else {
+                $this->responseText = $response;
+            }
 
             $statusCode = $curlInfo['http_code'];
             $isSuccess = $statusCode >= 200 && $statusCode < 300 || $statusCode === 304;
@@ -515,6 +526,30 @@ class Call extends Base
         }
 
         return $data;
+    }
+
+    /**
+     * Sets an option on the current cURL handle
+     *
+     * @param int $option
+     * @param mixed $value
+     * @return $this
+     */
+    public function setCurlOption($option, $value)
+    {
+        $this->curlOptions[$option] = $value;
+        return $this;
+    }
+
+    /**
+     * Returns an option value of the current cURL handle
+     *
+     * @param int $option
+     * @return null
+     */
+    public function getCurlOption($option)
+    {
+        return isset($this->curlOptions[$option]) ? $this->curlOptions[$option] : null;
     }
 
     /**
