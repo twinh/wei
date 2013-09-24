@@ -257,7 +257,7 @@ class Call extends Base
      *
      * @param array|string $url A options array or the request URL
      * @param array $options A options array if the first parameter is string
-     * @return Call A new call object
+     * @return $this A new call object
      */
     public function __invoke($url = null, array $options = array())
     {
@@ -414,7 +414,7 @@ class Call extends Base
         $ch = $this->ch;
 
         if (false !== $response) {
-            // Fixes header size error when use proxy and CURLOPT_HTTPPROXYTUNNEL is true
+            // Fixes header size error when use CURLOPT_PROXY and CURLOPT_HTTPPROXYTUNNEL is true
             // http://sourceforge.net/p/curl/bugs/1204/
             if (false !== stripos($response, "HTTP/1.1 200 Connection established\r\n\r\n")) {
                 $response = str_ireplace("HTTP/1.1 200 Connection established\r\n\r\n", '', $response);
@@ -592,7 +592,7 @@ class Call extends Base
      *
      * @param string $name
      * @param string $value
-     * @return Call
+     * @return $this
      */
     public function setRequestHeader($name, $value)
     {
@@ -653,7 +653,7 @@ class Call extends Base
      * Set request method
      *
      * @param string $method
-     * @return Call
+     * @return $this
      */
     public function setMethod($method)
     {
@@ -667,7 +667,7 @@ class Call extends Base
      * @param string $url
      * @param array $data
      * @param callback $callback
-     * @return Call
+     * @return $this
      */
     public function getJson($url, $data, $callback = null)
     {
@@ -680,7 +680,7 @@ class Call extends Base
      * @param string $url
      * @param array $data
      * @param callback $callback
-     * @return Call
+     * @return $this
      */
     public function getJsonObject($url, $data, $callback = null)
     {
@@ -694,7 +694,7 @@ class Call extends Base
      * @param array $data
      * @param callback $callback
      * @param string $dataType
-     * @return Call
+     * @return $this
      */
     public function get($url, $data = array(), $callback = null, $dataType = null)
     {
@@ -708,7 +708,7 @@ class Call extends Base
      * @param array $data
      * @param callback $callback
      * @param string $dataType
-     * @return Call
+     * @return $this
      */
     public function post($url, $data, $callback = null, $dataType = null)
     {
@@ -722,7 +722,7 @@ class Call extends Base
      * @param array $data
      * @param callback $callback
      * @param string $dataType
-     * @return Call
+     * @return $this
      */
     public function put($url, $data, $callback = null, $dataType = null)
     {
@@ -736,7 +736,7 @@ class Call extends Base
      * @param array $data
      * @param callback $callback
      * @param string $dataType
-     * @return Call
+     * @return $this
      */
     public function delete($url, $data, $callback = null, $dataType = null)
     {
@@ -750,7 +750,7 @@ class Call extends Base
      * @param array $data
      * @param callback $callback
      * @param string $dataType
-     * @return Call
+     * @return $this
      */
     public function patch($url, $data, $callback = null, $dataType = null)
     {
@@ -765,7 +765,7 @@ class Call extends Base
      * @param callback $callback
      * @param string $dataType
      * @param string $method
-     * @return Call
+     * @return $this
      */
     protected function processMethod($url, $data, $callback, $dataType, $method)
     {
@@ -788,7 +788,7 @@ class Call extends Base
      * Set success callback
      *
      * @param \Closure $fn
-     * @return Call
+     * @return $this
      */
     public function success(\Closure $fn)
     {
@@ -800,7 +800,7 @@ class Call extends Base
      * Set error callback
      *
      * @param \Closure $fn
-     * @return Call
+     * @return $this
      */
     public function error(\Closure $fn)
     {
@@ -812,7 +812,7 @@ class Call extends Base
      * Set complete callback
      *
      * @param \Closure $fn
-     * @return Call
+     * @return $this
      */
     public function complete(\Closure $fn)
     {
