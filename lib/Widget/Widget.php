@@ -109,8 +109,6 @@ namespace Widget
      *
      * Validation
      * @method   \Widget\Validate   validate(array $option) Create a new validator and validate by specified options
-     * @property Is                 $is The validator manager, use to validate input quickly, create validator
-     * @method   bool               is($rule = null, $input = null, $options = array()) Validate input by given rule
      *
      * Data type and composition
      * @property Validator\Alnum        $isAlnum
