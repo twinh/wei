@@ -102,12 +102,14 @@ widget()->get('http://example.com', function($data, $call){
 
     curl SSL certificate problem, verify that the CA cert is OK. Details: error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed
 
-我们可以设置`disableSslVerification`选项来禁用SSL证书验证.当然该方法不建议在正式环境使用.
+我们可以设置cURL的`CURLOPT_SSL_VERIFYPEER`选项来禁用SSL证书验证.当然该方法不建议在正式环境使用.
 
 ```php
 widget()->call(array(
     'url' => 'https://api.github.com/gists',
-    'disableSslVerification' => true,
+    'curlOptions' => array(
+        CURLOPT_SSL_VERIFYPEER => false
+    )
 ));
 ```
 

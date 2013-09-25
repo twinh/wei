@@ -108,15 +108,6 @@ class Call extends Base
     protected $userAgent;
 
     /**
-     * Whether disable cURL from verifying the peer's certificate
-     *
-     * @var bool
-     * @link http://unitstep.net/blog/2009/05/05/using-curl-in-php-to-access-https-ssltls-protected-sites/
-     * @link http://stackoverflow.com/questions/6400300/php-curl-https-causing-exception-ssl-certificate-problem-verify-that-the-ca-cer
-     */
-    protected $disableSslVerification = false;
-
-    /**
      * An callback triggered after prepared the data and before the process the request
      *
      * ```php
@@ -399,10 +390,6 @@ class Call extends Base
                 $headers[] = $key . ': ' . $value;
             }
             $opts[CURLOPT_HTTPHEADER] = $headers;
-        }
-
-        if ($this->disableSslVerification) {
-            $opts[CURLOPT_SSL_VERIFYPEER] = false;
         }
 
         $opts[CURLOPT_URL] = $url;
