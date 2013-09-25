@@ -37,6 +37,7 @@ class UuidTest extends TestCase
     {
         return array(
             array('550e84001e29b241d43a7164446655440000'),
+            array('00010203-0405-0607-0809-0A0B0C0D0E0+'),
             array('550e8400-e29b-41d4-a716-44665544000'),
             array('550e8400-e29b-41d4-a716-446655440中文'),
         );
