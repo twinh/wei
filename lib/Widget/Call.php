@@ -704,7 +704,7 @@ class Call extends Base
      * @param callback $callback
      * @return $this
      */
-    public function getJson($url, $data, $callback = null)
+    public function getJson($url, $data = array(), $callback = null)
     {
         return $this->processMethod($url, $data, $callback, 'json', 'GET');
     }
@@ -717,7 +717,7 @@ class Call extends Base
      * @param callback $callback
      * @return $this
      */
-    public function getJsonObject($url, $data, $callback = null)
+    public function getJsonObject($url, $data = array(), $callback = null)
     {
         return $this->processMethod($url, $data, $callback, 'jsonObject', 'GET');
     }
@@ -745,7 +745,7 @@ class Call extends Base
      * @param string $dataType
      * @return $this
      */
-    public function post($url, $data, $callback = null, $dataType = null)
+    public function post($url, $data = array(), $callback = null, $dataType = null)
     {
         return $this->processMethod($url, $data, $callback, $dataType, 'POST');
     }
@@ -759,7 +759,7 @@ class Call extends Base
      * @param string $dataType
      * @return $this
      */
-    public function put($url, $data, $callback = null, $dataType = null)
+    public function put($url, $data = array(), $callback = null, $dataType = null)
     {
         return $this->processMethod($url, $data, $callback, $dataType, 'PUT');
     }
@@ -773,7 +773,7 @@ class Call extends Base
      * @param string $dataType
      * @return $this
      */
-    public function delete($url, $data, $callback = null, $dataType = null)
+    public function delete($url, $data = array(), $callback = null, $dataType = null)
     {
         return $this->processMethod($url, $data, $callback, $dataType, 'DELETE');
     }
@@ -787,7 +787,7 @@ class Call extends Base
      * @param string $dataType
      * @return $this
      */
-    public function patch($url, $data, $callback = null, $dataType = null)
+    public function patch($url, $data = array(), $callback = null, $dataType = null)
     {
         return $this->processMethod($url, $data, $callback, $dataType, 'PATCH');
     }
@@ -810,7 +810,7 @@ class Call extends Base
             $data = array();
         }
 
-        return $this(array(
+        return $this->__invoke(array(
             'url' => $url,
             'method' => $method,
             'dataType' => $dataType,
