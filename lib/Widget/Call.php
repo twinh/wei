@@ -11,6 +11,10 @@ namespace Widget;
 /**
  * A widget handles HTTP request which inspired by jQuery Ajax
  *
+ * ## Example
+ *
+ * ### Using
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://api.jquery.com/jQuery.ajax/
  */
@@ -468,7 +472,7 @@ class Call extends Base
      *
      * @param string $data
      * @param string $type
-     * @param null $exception A variable to store exception when parser error
+     * @param null $exception A variable to store exception when parsing error
      * @return mixed
      */
     protected function parse($data, $type, &$exception)
@@ -477,14 +481,14 @@ class Call extends Base
             case 'json' :
                 $data = json_decode($data, true);
                 if (null === $data && json_last_error() != JSON_ERROR_NONE) {
-                    $exception = new \ErrorException('Parser error', json_last_error());
+                    $exception = new \ErrorException('JSON Parsing error', json_last_error());
                 }
                 break;
 
             case 'jsonObject' :
                 $data = json_decode($data);
                 if (null === $data && json_last_error() != JSON_ERROR_NONE) {
-                    $exception = new \ErrorException('Parser error', json_last_error());
+                    $exception = new \ErrorException('JSON Parsing error', json_last_error());
                 }
                 break;
 
