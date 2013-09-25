@@ -4251,16 +4251,13 @@
 
 <h3>通过切换IP地址实现负载均衡</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$call</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'http://google.com'</span><span class="p">,</span>
     <span class="c1">// 随机使用其中一个IP地址</span>
     <span class="s1">'ip'</span> <span class="o">=&gt;</span> <span class="nb">array_rand</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
         <span class="s1">'74.125.128.147'</span><span class="p">,</span>
         <span class="s1">'74.125.128.105'</span>
-    <span class="p">)),</span>
-    <span class="s1">'success'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$data</span><span class="p">){</span>
-        <span class="c1">// do something</span>
-    <span class="p">}</span>
+    <span class="p">))</span>
 <span class="p">));</span>
 </code></pre></div>
 
@@ -4282,7 +4279,7 @@
 <h3>通过HTTP方法发送请求</h3>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 此处的`get`还可以是`post`, `delete`, `put`或`patch`,表示通过相应的HTTP方法发送请求</span>
-<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'http://example.com'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nv">$call</span><span class="p">){</span>
+<span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'http://example.com'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nv">$call</span><span class="p">){</span>
     <span class="c1">// 成功时打印出服务器返回的结果</span>
     <span class="nb">print_r</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
 <span class="p">});</span>
