@@ -4289,8 +4289,9 @@
 
 <p>在开发环境中,如果我们未安装SSL证书,访问HTTPS网站会提示如下错误.</p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">curl</span> <span class="nx">SSL</span> <span class="nx">certificate</span> <span class="nx">problem</span><span class="p">,</span> <span class="nx">verify</span> <span class="nx">that</span> <span class="nx">the</span> <span class="nx">CA</span> <span class="nx">cert</span> <span class="nx">is</span> <span class="nx">OK</span><span class="o">.</span> <span class="nx">Details</span><span class="o">:</span> <span class="nx">error</span><span class="o">:</span><span class="mi">14090086</span><span class="o">:</span><span class="nx">SSL</span> <span class="nx">routines</span><span class="o">:</span><span class="nx">SSL3_GET_SERVER_CERTIFICATE</span><span class="o">:</span><span class="nx">certificate</span> <span class="nx">verify</span> <span class="nx">failed</span>
-</code></pre></div>
+<blockquote>
+<p>curl SSL certificate problem, verify that the CA cert is OK. Details: error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed</p>
+</blockquote>
 
 <p>我们可以设置cURL的<code>CURLOPT_SSL_VERIFYPEER</code>选项来禁用SSL证书验证.当然该方法不建议在正式环境使用.</p>
 
