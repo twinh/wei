@@ -97,7 +97,7 @@ widget()->call->get('http://example.com', function($data, $call){
 
 在开发环境中,如果我们未安装SSL证书,访问HTTPS网站会提示如下错误.
 
-    curl SSL certificate problem, verify that the CA cert is OK. Details: error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed
+>    curl SSL certificate problem, verify that the CA cert is OK. Details: error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed
 
 我们可以设置cURL的`CURLOPT_SSL_VERIFYPEER`选项来禁用SSL证书验证.当然该方法不建议在正式环境使用.
 
@@ -119,7 +119,6 @@ http://unitstep.net/blog/2009/05/05/using-curl-in-php-to-access-https-ssltls-pro
 StackOverflow上关于该问题的讨论和解决方法
 
 http://stackoverflow.com/questions/6400300/php-curl-https-causing-exception-ssl-certificate-problem-verify-that-the-ca-cer
-
 
 调用方式
 --------
