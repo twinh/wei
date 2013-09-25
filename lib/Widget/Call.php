@@ -108,7 +108,7 @@ class Call extends Base
     protected $userAgent;
 
     /**
-     * An callback triggered after prepared the data and before the process the request
+     * A callback triggered after prepared the data and before the process the request
      *
      * ```php
      * $widget->call(array(
@@ -123,7 +123,7 @@ class Call extends Base
     protected $beforeSend;
 
     /**
-     * An callback triggered after the request is called success
+     * A callback triggered after the request is called success
      *
      * ```php
      * $widget->call(array(
@@ -138,7 +138,7 @@ class Call extends Base
     protected $success;
 
     /**
-     * An callback triggered when the request fails
+     * A callback triggered when the request fails
      *
      * The `$textStatus` could be `curl`, `http`, and `parser`
      *
@@ -155,7 +155,7 @@ class Call extends Base
     protected $error;
 
     /**
-     * An callback triggered when finishes (after `success` and `error` callbacks are executed)
+     * A callback triggered when finishes (after `success` and `error` callbacks are executed)
      *
      * ```php
      * $widget->call(array(

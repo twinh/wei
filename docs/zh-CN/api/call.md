@@ -57,16 +57,13 @@ widget()->call(array(
 ### 通过切换IP地址实现负载均衡
 
 ```php
-widget()->call(array(
+$call = widget()->call(array(
     'url' => 'http://google.com',
     // 随机使用其中一个IP地址
     'ip' => array_rand(array(
         '74.125.128.147',
         '74.125.128.105'
-    )),
-    'success' => function($data){
-        // do something
-    }
+    ))
 ));
 ```
 
@@ -90,7 +87,7 @@ widget()->call(array(
 
 ```php
 // 此处的`get`还可以是`post`, `delete`, `put`或`patch`,表示通过相应的HTTP方法发送请求
-widget()->get('http://example.com', function($data, $call){
+widget()->call->get('http://example.com', function($data, $call){
     // 成功时打印出服务器返回的结果
     print_r($data);
 });
