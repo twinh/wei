@@ -125,24 +125,23 @@ http://stackoverflow.com/questions/6400300/php-curl-https-causing-exception-ssl-
 
 ### 选项
 
-名称                   | 类型         | 默认值  | 说明
------------------------|--------------|---------|------
-method                 | string       | GET     | HTTP的请求方式,可以是`GET`, `POST`, `DELETE`, `PUT`, `PATCH`或任意其他服务器支持的方式
-contentType            | string       | application/x-www-form-urlencoded; charset=UTF-8 | HTTP请求头内容类型
-cookies                | array        | array() | cookie数组,key是cookie的名称,value是cookie的值,cookie的值只能是字符串
-data                   | array,string | array() | 要发送到服务器的数据
-global                 | bool         | true    | 是否使用全局配置选项
-headers                | array        | array   | 要发送的HTTP头
-ip                     | string       | 无      | 要请求的URL地址中域名的IP地址,注意不是您的服务器IP地址
-timeout                | int          | 0       | 整个请求的最大运行时间,单位是毫秒,默认是无限制
-dataType               | string       | text    | 请求完成后,要对返回数据解析的类型,可以是`json`(数组),`jsonObject`,`xml`,`query`,`serialize`和`text`
-referer                | string       | 无      | 请求HTTP头中的referer值
-userAgent              | string       | 无      | 请求HTTP头中的userAgent值
-disableSslVerification | bool         | false   | 是否禁用SSL证书验证
-beforeSend             | callback     | 无      | 在发送请求前触发的回调,可通过该回调更改任意配置
-success                | callback     | 无      | 请求并解析数据成功后触发的回调
-error                  | callback     | 无      | 请求或解析失败后触发的回调,可用于记录日志,展示错误信息等
-complete               | callback     | 无      | 请求完成后,不论是否成功都触发的回调,可用于数据记录等
+名称        | 类型         | 默认值  | 说明
+------------|--------------|---------|------
+method      | string       | GET     | HTTP的请求方式,可以是`GET`, `POST`, `DELETE`, `PUT`, `PATCH`或任意其他服务器支持的方式
+contentType | string       | application/x-www-form-urlencoded; charset=UTF-8 | HTTP请求头内容类型
+cookies     | array        | array() | cookie数组,key是cookie的名称,value是cookie的值,cookie的值只能是字符串
+data        | array,string | array() | 要发送到服务器的数据
+global      | bool         | true    | 是否使用全局配置选项
+headers     | array        | array   | 要发送的HTTP头
+ip          | string       | 无      | 要请求的URL地址中域名的IP地址,注意不是您的服务器IP地址
+timeout     | int          | 0       | 整个请求的最大运行时间,单位是毫秒,默认是无限制
+dataType    | string       | text    | 请求完成后,要对返回数据解析的类型,可以是`json`(数组),`jsonObject`,`xml`,`query`,`serialize`和`text`
+referer     | string       | 无      | 请求HTTP头中的referer值
+userAgent   | string       | 无      | 请求HTTP头中的userAgent值
+beforeSend  | callable     | 无      | 在发送请求前触发的回调,可通过该回调更改任意配置
+success     | callable     | 无      | 请求并解析数据成功后触发的回调
+error       | callable     | 无      | 请求或解析失败后触发的回调,可用于记录日志,展示错误信息等
+complete    | callable     | 无      | 请求完成后,不论是否成功都触发的回调,可用于数据记录等
 
 ### 回调
 
