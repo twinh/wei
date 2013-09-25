@@ -393,12 +393,16 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
-     * Check if the record's data is modified
+     * Check if the record's data or specified field is modified
      *
+     * @param string $field
      * @return bool
      */
-    public function isModified()
+    public function isModified($field = null)
     {
+        if ($field) {
+            return array_key_exists($field, $this->modifiedData);
+        }
         return $this->isModified;
     }
 
