@@ -4216,10 +4216,6 @@
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'time'</span> <span class="o">=&gt;</span> <span class="nb">time</span><span class="p">(),</span>
     <span class="p">),</span>
-    <span class="s1">'beforeSend'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$call</span><span class="p">,</span> <span class="nv">$ch</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// 在发送前额外设置cURL选项</span>
-        <span class="c1">//curl_setopt($ch, 'xx', 'xx');</span>
-    <span class="p">}</span>
 <span class="p">));</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">isSuccess</span><span class="p">())</span> <span class="p">{</span>
