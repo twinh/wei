@@ -4285,6 +4285,46 @@
 <span class="p">});</span>
 </code></pre></div>
 
+<h3>通过回调方法记录请求日志</h3>
+
+<p>Call对象提供了<code>beforeSend</code>, <code>success</code>, <code>error</code>, <code>complete</code>四个回调方法,可以用来记录日志,上报请求耗时等.</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'call'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="c1">// cURL请求发送前的回调,记录请求的方式和地址参数</span>
+        <span class="s1">'beforeSend'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">\Widget\Call</span> <span class="nv">$call</span><span class="p">,</span> <span class="nv">$ch</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+                <span class="s1">'Request URL'</span>       <span class="o">=&gt;</span> <span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getUrl</span><span class="p">(),</span>
+                <span class="s1">'Request Method'</span>    <span class="o">=&gt;</span> <span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">(),</span>
+                <span class="s1">'Parameters'</span>        <span class="o">=&gt;</span> <span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">(),</span>
+            <span class="p">));</span>
+        <span class="p">},</span>
+        <span class="c1">// cURL请求发送成功的回调</span>
+        <span class="s1">'success'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nx">\Widget\Call</span> <span class="nv">$call</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// 按需记录</span>
+        <span class="p">},</span>
+        <span class="c1">// cURL请求发送失败的回调,记录错误原因和异常堆栈</span>
+        <span class="s1">'error'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">\Widget\Call</span> <span class="nv">$call</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+                <span class="s1">'Error status'</span>  <span class="o">=&gt;</span> <span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getErrorStatus</span><span class="p">(),</span>
+                <span class="s1">'Exception'</span>     <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getErrorException</span><span class="p">(),</span>
+            <span class="p">));</span>
+        <span class="p">},</span>
+        <span class="c1">// cURL请求发送完成的回调,记录返回状态码,花费时间等</span>
+        <span class="s1">'complete'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">\Widget\Call</span> <span class="nv">$call</span><span class="p">,</span> <span class="nv">$ch</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$curlInfo</span> <span class="o">=</span> <span class="nb">curl_getinfo</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
+
+            <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+                <span class="s1">'Status Code'</span> <span class="o">=&gt;</span> <span class="nv">$curlInfo</span><span class="p">[</span><span class="s1">'http_code'</span><span class="p">],</span>
+                <span class="s1">'Server IP'</span>     <span class="o">=&gt;</span> <span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getIp</span><span class="p">()</span> <span class="o">?:</span> <span class="s1">'(Not specified)'</span><span class="p">,</span>
+                <span class="s1">'Total Time'</span>    <span class="o">=&gt;</span> <span class="nv">$curlInfo</span><span class="p">[</span><span class="s1">'total_time'</span><span class="p">]</span> <span class="o">.</span> <span class="s1">'s'</span><span class="p">,</span>
+                <span class="s1">'Response Body'</span> <span class="o">=&gt;</span> <span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">(),</span>
+            <span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</code></pre></div>
+
 <h3>禁用SSL证书验证</h3>
 
 <p>在开发环境中,如果我们未安装SSL证书,访问HTTPS网站会提示如下错误.</p>
