@@ -4596,59 +4596,51 @@
 
 <p>设置HTTP请求头的值</p>
 
-<h4>call-&gt;success($callback)</h4>
-
-<p>设置请求并解析数据成功后触发的回调</p>
-
-<h4>call-&gt;error($callback)</h4>
-
-<p>设置请求或解析失败后触发的回调</p>
-
-<h4>call-&gt;complete($callback)</h4>
-
-<p>设置请求完成后触发的回调</p>
-
-<h4>call-&gt;get($url, $data, $callback, $dataType)</h4>
-
-<p>通过GET方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
-
-<h4>call-&gt;get($url, $callback, $dataType)</h4>
+<h4>call-&gt;get($url, $callback = null, $dataType = null)</h4>
 
 <p>通过GET方式发送请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;getJson($url, $callback)</h4>
+<h4>call-&gt;get($url, $data = array(), $callback = null, $dataType = null)</h4>
+
+<p>通过GET方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
+
+<h4>call-&gt;getJson($url, $callback = null)</h4>
 
 <p>通过GET方式发送请求,并以JSON格式解析返回数据,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;post($url, $data, $callback, $dataType)</h4>
+<h4>call-&gt;getJson($url, $data = array(), $callback = null)</h4>
+
+<p>通过GET方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
+
+<h4>call-&gt;post($url, $data = array(), $callback = null, $dataType = null)</h4>
 
 <p>通过POST方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;post($url, $callback, $dataType)</h4>
+<h4>call-&gt;post($url, $callback = null, $dataType = null)</h4>
 
 <p>通过POST方式发送请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;put($url, $data, $callback, $dataType)</h4>
+<h4>call-&gt;put($url, $data = array(), $callback = null, $dataType = null)</h4>
 
 <p>通过PUT方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;put($url, $callback, $dataType)</h4>
+<h4>call-&gt;put($url, $callback = null, $dataType = null)</h4>
 
 <p>通过PUT方式发送请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;delete($url, $data, $callback, $dataType)</h4>
+<h4>call-&gt;delete($url, $data = array(), $callback = null, $dataType = null)</h4>
 
 <p>通过DELETE方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;delete($url, $callback, $dataType)</h4>
+<h4>call-&gt;delete($url, $callback = null, $dataType = null)</h4>
 
 <p>通过DELETE方式发送请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;patch($url, $data, $callback, $dataType)</h4>
+<h4>call-&gt;patch($url, $data = array(), $callback = null, $dataType = null)</h4>
 
 <p>通过PATCH方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
 
-<h4>call-&gt;patch($url, $callback, $dataType)</h4>
+<h4>call-&gt;patch($url, $callback = null, $dataType = null)</h4>
 
 <p>通过PATCH方式发送请求,成功时触发<code>$callback</code>回调</p>
   </section>
