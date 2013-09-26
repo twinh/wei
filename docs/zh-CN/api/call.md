@@ -221,44 +221,38 @@ $ch         | resource     | cUrl会话的变量
 #### call->setRequestHeader($name, $value)
 设置HTTP请求头的值
 
-#### call->success($callback)
-设置请求并解析数据成功后触发的回调
-
-#### call->error($callback)
-设置请求或解析失败后触发的回调
-
-#### call->complete($callback)
-设置请求完成后触发的回调
-
-#### call->get($url, $data, $callback, $dataType)
-通过GET方式发送带数据的请求,成功时触发`$callback`回调
-
-#### call->get($url, $callback, $dataType)
+#### call->get($url, $callback = null, $dataType = null)
 通过GET方式发送请求,成功时触发`$callback`回调
 
-#### call->getJson($url, $callback)
+#### call->get($url, $data = array(), $callback = null, $dataType = null)
+通过GET方式发送带数据的请求,成功时触发`$callback`回调
+
+#### call->getJson($url, $callback = null)
 通过GET方式发送请求,并以JSON格式解析返回数据,成功时触发`$callback`回调
 
-#### call->post($url, $data, $callback, $dataType)
+#### call->getJson($url, $data = array(), $callback = null)
+通过GET方式发送带数据的请求,成功时触发`$callback`回调
+
+#### call->post($url, $data = array(), $callback = null, $dataType = null)
 通过POST方式发送带数据的请求,成功时触发`$callback`回调
 
-#### call->post($url, $callback, $dataType)
+#### call->post($url, $callback = null, $dataType = null)
 通过POST方式发送请求,成功时触发`$callback`回调
 
-#### call->put($url, $data, $callback, $dataType)
+#### call->put($url, $data = array(), $callback = null, $dataType = null)
 通过PUT方式发送带数据的请求,成功时触发`$callback`回调
 
-#### call->put($url, $callback, $dataType)
+#### call->put($url, $callback = null, $dataType = null)
 通过PUT方式发送请求,成功时触发`$callback`回调
 
-#### call->delete($url, $data, $callback, $dataType)
+#### call->delete($url, $data = array(), $callback = null, $dataType = null)
 通过DELETE方式发送带数据的请求,成功时触发`$callback`回调
 
-#### call->delete($url, $callback, $dataType)
+#### call->delete($url, $callback = null, $dataType = null)
 通过DELETE方式发送请求,成功时触发`$callback`回调
 
-#### call->patch($url, $data, $callback, $dataType)
+#### call->patch($url, $data = array(), $callback = null, $dataType = null)
 通过PATCH方式发送带数据的请求,成功时触发`$callback`回调
 
-#### call->patch($url, $callback, $dataType)
+#### call->patch($url, $callback = null, $dataType = null)
 通过PATCH方式发送请求,成功时触发`$callback`回调
