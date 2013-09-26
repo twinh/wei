@@ -1,7 +1,7 @@
 Call
 ====
 
-A widget handles HTTP request which inspired by jQuery Ajax
+A widget handles HTTP request which inspired by [jQuery Ajax](http://api.jquery.com/jQuery.ajax/)
 
 Example
 -------

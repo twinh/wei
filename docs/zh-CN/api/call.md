@@ -1,7 +1,7 @@
 Call
 ====
 
-象jQuery Ajax一样调用您的接口
+象[jQuery Ajax](http://api.jquery.com/jQuery.ajax/)一样调用您的接口
 
 案例
 ----
