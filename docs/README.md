@@ -1,5 +1,5 @@
 Widget Framework Documentation
 ==============================
 
-* [中文](zh-CN#widget)
-* English(TODO)
+* [Simplified Chinese 简体中文](zh-CN#widget)
+* [English](en#widget)
