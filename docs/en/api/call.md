@@ -9,7 +9,7 @@ Example
 ### Using callbacks to record cURL request log
 
 `call` service provides four callbacks, which are `beforeSend`, `success`, `error` and `complete`, and
-could be use for recording request log, reporting request time and so on.
+could be use for recording request log, reporting request time, etc.
 
 ```php
 wei(array(
