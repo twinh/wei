@@ -114,30 +114,14 @@ class Call extends Base
     /**
      * A callback triggered after prepared the data and before the process the request
      *
-     * ```php
-     * $widget->call(array(
-     *     'beforeSend' => function(Call $call, $ch){
-     *
-     *     }
-     * ));
-     * ```
-     *
-     * @var callback
+     * @var callable
      */
     protected $beforeSend;
 
     /**
      * A callback triggered after the request is called success
      *
-     * ```php
-     * $widget->call(array(
-     *     'success' => function($data, Call $call){
-     *
-     *     }
-     * ));
-     * ```
-     *
-     * @var callback
+     * @var callable
      */
     protected $success;
 
@@ -146,30 +130,14 @@ class Call extends Base
      *
      * The `$textStatus` could be `curl`, `http`, and `parser`
      *
-     * ```php
-     * $widget->call(array(
-     *     'error' => function(Call $call, $textStatus, \ErrorException $exception){
-     *
-     *     }
-     * ));
-     * ```
-     *
-     * @var callback
+     * @var callable
      */
     protected $error;
 
     /**
-     * A callback triggered when finishes (after `success` and `error` callbacks are executed)
+     * A callback triggered when finishes (after `success` and `error` callbacks are executed
      *
-     * ```php
-     * $widget->call(array(
-     *     'complete' => function(Call $call, $ch){
-     *
-     *     }
-     * ));
-     * ```
-     *
-     * @var callback
+     * @var callable
      */
     protected $complete;
 
