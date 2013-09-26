@@ -93,6 +93,47 @@ widget()->call->get('http://example.com', function($data, $call){
 });
 ```
 
+### 通过回调方法记录请求日志
+
+Call对象提供了`beforeSend`, `success`, `error`, `complete`四个回调方法,可以用来记录日志,上报请求耗时等.
+
+```php
+wei(array(
+    'call' => array(
+        // cURL请求发送前的回调,记录请求的方式和地址参数
+        'beforeSend' => function (\Widget\Call $call, $ch) {
+            wei()->logger->debug(array(
+                'Request URL'       => $call->getUrl(),
+                'Request Method'    => $call->getMethod(),
+                'Parameters'        => $call->getData(),
+            ));
+        },
+        // cURL请求发送成功的回调
+        'success' => function ($data, \Widget\Call $call) {
+            // 按需记录
+        },
+        // cURL请求发送失败的回调,记录错误原因和异常堆栈
+        'error' => function (\Widget\Call $call) {
+            wei()->logger->error(array(
+                'Error status'  => $call->getErrorStatus(),
+                'Exception'     => (string)$call->getErrorException(),
+            ));
+        },
+        // cURL请求发送完成的回调,记录返回状态码,花费时间等
+        'complete' => function (\Widget\Call $call, $ch) {
+            $curlInfo = curl_getinfo($ch);
+
+            wei()->logger->debug(array(
+                'Status Code' => $curlInfo['http_code'],
+                'Server IP'     => $call->getIp() ?: '(Not specified)',
+                'Total Time'    => $curlInfo['total_time'] . 's',
+                'Response Body' => $call->getResponse(),
+            ));
+        }
+    )
+));
+```
+
 ### 禁用SSL证书验证
 
 在开发环境中,如果我们未安装SSL证书,访问HTTPS网站会提示如下错误.
