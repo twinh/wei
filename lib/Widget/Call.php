@@ -11,10 +11,6 @@ namespace Widget;
 /**
  * A widget handles HTTP request which inspired by jQuery Ajax
  *
- * ## Example
- *
- * ### Using
- *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://api.jquery.com/jQuery.ajax/
  */
@@ -144,7 +140,7 @@ class Call extends Base
     protected $error;
 
     /**
-     * A callback triggered when finishes (after `success` and `error` callbacks are executed
+     * A callback triggered when request finishes (after `success` and `error` callbacks are executed)
      *
      * @var callable
      */
