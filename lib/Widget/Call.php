@@ -112,6 +112,15 @@ class Call extends Base
     protected $userAgent;
 
     /**
+     * Whether throw exception or keep silent when request error
+     *
+     * Note that the exception is thrown after triggered complete callback, rather than triggered error callback
+     *
+     * @var bool
+     */
+    protected $throwException = true;
+
+    /**
      * A callback triggered after prepared the data and before the process the request
      *
      * @var callable
@@ -259,19 +268,22 @@ class Call extends Base
      */
     public function execute()
     {
+        // Prepare request
         $ch = $this->ch = curl_init();
-
         curl_setopt_array($ch, $this->prepareCurlOpts());
-
         $this->beforeSend && call_user_func($this->beforeSend, $this, $ch);
 
+        // Execute request
         $response = curl_exec($ch);
 
+        // Handle response
         $this->handleResponse($response);
-
         $this->complete && call_user_func($this->complete, $this, $ch);
-
         curl_close($ch);
+
+        if ($this->throwException && $this->errorException) {
+            throw $this->errorException;
+        }
     }
 
     /**
