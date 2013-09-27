@@ -188,11 +188,11 @@ class Db extends Base
     protected $tablePrefix;
 
     /**
-     * Whether use the callbacks from default db widget
+     * Whether use the options from the default db service
      *
      * @var bool
      */
-    protected $globalCallback = false;
+    protected $global = false;
 
     /**
      * All executed SQL queries
@@ -208,6 +208,9 @@ class Db extends Base
      */
     protected $slaveDb;
 
+    /**
+     * @var array
+     */
     protected $deps = array(
         'cache' => 'arrayCache',
     );
@@ -219,18 +222,10 @@ class Db extends Base
      */
     public function __construct(array $options = array())
     {
-        parent::__construct($options);
-
-        // Uses callbacks from default db widget if global option is true
-        if (true == $this->globalCallback && $this !== $this->db) {
-            $callbacks = array(
-                'beforeConnect', 'connectFails', 'afterConnect',
-                'beforeQuery', 'afterQuery'
-            );
-            foreach ($callbacks as $callback) {
-                $this->$callback = $this->db->getOption($callback);
-            }
+        if (isset($options['global']) && true == $options['global']) {
+            $options += $options['widget']->getConfig('db');
         }
+        return parent::__construct($options);
     }
 
     /**
