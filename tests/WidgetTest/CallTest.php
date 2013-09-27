@@ -31,6 +31,7 @@ class CallTest extends TestCase
         }
 
         $this->call->setCurlOption(CURLOPT_HEADER, true);
+        $this->call->setOption('throwException', false);
 
         $this->call->error(function($call, $type, $e){
             throw $e;
@@ -563,9 +564,13 @@ class CallTest extends TestCase
     public function testGlobal()
     {
         $test = $this;
-        $this->call->setMethod('POST');
+        $this->widget->setConfig('call', array(
+            'method' => 'POST',
+        ));
 
-       $call = $this->call(array(
+        /** @var $myCall \Widget\Call */
+        $myCall = $this->widget->get('my.call');
+        $call = $myCall(array(
             'url' => $this->url . '?test=methods',
             'global' => true,
             'dataType' => 'jsonObject',
@@ -581,7 +586,7 @@ class CallTest extends TestCase
         $this->assertCalledEvents(array('success'));
 
         $this->triggeredEvents = array();
-        $call = $this->call(array(
+        $call = $this->{'your.call'}(array(
             'url' => $this->url . '?test=methods',
             'dataType' => 'jsonObject',
             'global' => false,
