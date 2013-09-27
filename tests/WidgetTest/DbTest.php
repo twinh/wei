@@ -1085,14 +1085,16 @@ class DbTest extends TestCase
         $db->connect();
     }
 
-    public function testGlobalEvent()
+    public function testGlobalOption()
     {
         $cb = 'pi';
-        $this->db->setOption('beforeConnect', $cb);
         $this->widget->setConfig(array(
+            'db' => array(
+                'beforeConnect' => $cb,
+            ),
             'cb.db' => array(
                 'db' => $this->db,
-                'globalCallback' => true
+                'global' => true
             )
         ));
 
