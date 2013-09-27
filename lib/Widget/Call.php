@@ -227,6 +227,22 @@ class Call extends Base
     protected $errorException;
 
     /**
+     * Constructor
+     *
+     * @param array $options
+     */
+    public function __construct($options)
+    {
+        parent::__construct($options);
+
+        // Merges options from default call service
+        if (true == $this->global && $this !== $this->widget->call) {
+            $options = $this->widget->getConfig('call');
+            $this->setOption($options);
+        }
+    }
+
+    /**
      * Create a new call object and execute
      *
      * @param array|string $url A options array or the request URL
@@ -241,19 +257,9 @@ class Call extends Base
         } else {
             $options['url'] = $url;
         }
-
-        // Merge options from parent options
-        if (!isset($options['global']) || $options['global'] === true) {
-            $options += get_object_vars($this);
-        } else {
-            $options = array(
-                'widget' => $this->widget,
-                'global' => false
-            ) + $options;
-        }
+        $options = $options + get_object_vars($this);
 
         $call = new self($options);
-
         $call->execute();
 
         return $call;
