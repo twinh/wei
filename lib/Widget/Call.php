@@ -235,12 +235,12 @@ class Call extends Base
      */
     public function __construct($options)
     {
-        $this->defaultOptions = $options;
         // Merges options from default call service
-        if (isset($options['global']) && true == $options['global']) {
+        if (!isset($options['global']) || true == $options['global']) {
             $options += $options['widget']->getConfig('call');
         }
         parent::__construct($options);
+        $this->defaultOptions = $options;
     }
 
     /**

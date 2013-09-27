@@ -30,12 +30,15 @@ class CallTest extends TestCase
             $this->markTestSkipped(sprintf('URL %s is not available', $this->url));
         }
 
-        $this->call->setCurlOption(CURLOPT_HEADER, true);
-        $this->call->setOption('throwException', false);
-
-        $this->call->error(function($call, $type, $e){
-            throw $e;
-        });
+        $this->widget->setConfig('call', array(
+            'throwException' => false,
+            'curlOptions' => array(
+                CURLOPT_HEADER => true
+            ),
+            'error' => function($call, $type, $e){
+                throw $e;
+            }
+        ));
     }
 
     /**
