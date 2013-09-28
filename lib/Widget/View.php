@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A widget that use to render PHP template
+ * A service that use to render PHP template
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

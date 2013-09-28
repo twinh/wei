@@ -11,11 +11,11 @@ namespace Widget;
 use Widget\Response;
 
 /**
- * A widget to build simple MVC application
+ * A service to build simple MVC application
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @method      Response response(string $content, int $status = 200) Send headers and output content
- * @property    View $view A widget that use to render PHP template
+ * @property    View $view A service that use to render PHP template
  * @property    Logger $logger The logger widget
  * @property    Request $request The HTTP request widget
  */

@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A widget to response JSON or JSONP format string
+ * A service to response JSON or JSONP format string
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

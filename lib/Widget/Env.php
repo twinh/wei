@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A widget to detect the environment name and load configuration by environment name
+ * A service to detect the environment name and load configuration by environment name
  *
  * The environment name detect order:
  *

@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A widget that handles session data ($_SESSION)
+ * A service that handles session data ($_SESSION)
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

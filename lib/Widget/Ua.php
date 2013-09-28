@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A widget to detect user OS, browser and device name and version
+ * A service to detect user OS, browser and device name and version
  *
  * @author      Twin Huang <twinhuang@qq.com>
  *

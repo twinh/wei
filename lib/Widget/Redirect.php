@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A widget that send a redirect response
+ * A service that send a redirect response
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

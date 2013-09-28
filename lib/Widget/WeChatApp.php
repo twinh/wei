@@ -12,7 +12,7 @@ use \Closure;
 use \SimpleXMLElement;
 
 /**
- * A widget handles WeChat(WeiXin) callback message
+ * A service handles WeChat(WeiXin) callback message
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://mp.weixin.qq.com/wiki/index.php?title=%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3%E6%8C%87%E5%8D%97

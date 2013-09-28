@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A widget to manage widget configurations
+ * A service to manage service container configurations
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

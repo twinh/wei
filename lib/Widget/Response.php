@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A widget that handles the HTTP response data
+ * A service that handles the HTTP response data
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Logger $logger The logger widget

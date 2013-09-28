@@ -9,11 +9,11 @@
 namespace Widget;
 
 /**
- * A widget that handles the HTTP request and response cookies
+ * A service that handles the HTTP request and response cookies
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Request $request A widget that handles the HTTP request data
- * @property    Response $response A widget that handles the HTTP response data
+ * @property    Request $request A service that handles the HTTP request data
+ * @property    Response $response A service that handles the HTTP response data
  */
 class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
 {

@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A widget that build a simple REST application
+ * A service that build a simple REST application
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        The code is base on the awesome framework - Kohana
