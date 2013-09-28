@@ -498,7 +498,6 @@ class Call extends Base
             default :
                 break;
         }
-
         return $data;
     }
 
@@ -606,7 +605,6 @@ class Call extends Base
     public function setRequestHeader($name, $value)
     {
         $this->headers[$name] = $value;
-
         return $this;
     }
 
@@ -647,7 +645,6 @@ class Call extends Base
                 $headers[strtoupper($line[0])] = trim($line[1]);
             }
         }
-
         return $headers;
     }
 
