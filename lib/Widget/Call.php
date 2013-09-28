@@ -797,42 +797,6 @@ class Call extends Base
     }
 
     /**
-     * Set success callback
-     *
-     * @param \Closure $fn
-     * @return $this
-     */
-    public function success(\Closure $fn)
-    {
-        $this->success = $fn;
-        return $this;
-    }
-
-    /**
-     * Set error callback
-     *
-     * @param \Closure $fn
-     * @return $this
-     */
-    public function error(\Closure $fn)
-    {
-        $this->error = $fn;
-        return $this;
-    }
-
-    /**
-     * Set complete callback
-     *
-     * @param \Closure $fn
-     * @return $this
-     */
-    public function complete(\Closure $fn)
-    {
-        $this->complete = $fn;
-        return $this;
-    }
-
-    /**
      * Returns the error status text
      *
      * @return string

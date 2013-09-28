@@ -176,26 +176,6 @@ class CallTest extends TestCase
         $this->assertTrue($call->isSuccess());
     }
 
-    public function testLateBindingCallbacks()
-    {
-        $test = $this;
-
-        $call = $this->call(array(
-            'url' => $this->url,
-            'beforeSend' => function(Call $call) use($test) {
-                $test->triggeredEvents[] = 'beforeSend';
-                $call->success(function() use($test) {
-                    $test->triggeredEvents[] = 'success';
-                })->complete(function() use($test) {
-                    $test->triggeredEvents[] = 'complete';
-                });
-            }
-        ));
-
-        $this->assertTrue($call->isSuccess());
-        $this->assertCalledEvents(array('beforeSend', 'success', 'complete'));
-    }
-
     public function testCustomOptions()
     {
         $test = $this;
