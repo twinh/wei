@@ -6,6 +6,37 @@ A service handles HTTP request which inspired by [jQuery Ajax](http://api.jquery
 Example
 -------
 
+### A complete example: Get public gists
+
+```php
+$call = widget()->call(array(
+    // Set the request URL
+    'url' => 'https://api.github.com/gists',
+    // The default request method is GET, could be set to `post`, `put`, or any other valid methods
+    'method' => 'get',
+    // Parse the response data from JSON string to array
+    'dataType' => 'json',
+    // Set the request parameters
+    'data' => array(
+        'time' => time(),
+    ),
+));
+
+if ($call->isSuccess()) {
+    // Receive parsed data when request success
+    $response = $call->getResponse();
+
+    // Output the first URL in response data, such as https://api.github.com/gists/xxxxxxx
+    var_dump($response[0]['url']);
+} else {
+    // Output the error status, such as `curl`, for all error statuses, please refer to the `Option` section
+    var_dump($call->getErrorStatus());
+
+    // Output the exception message, such as `Couldn't resolve host '404.php.net'`
+    var_dump($call->getErrorException()->getMessage());
+}
+```
+
 ### Using callbacks to record cURL request log
 
 `call` service provides four callbacks, including `beforeSend`, `success`, `error` and `complete`, 

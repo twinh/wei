@@ -12,7 +12,6 @@ namespace Widget\Validator;
  * Check if the input is valid by all of the rules
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\Is $is The validator manager
  */
 class AllOf extends SomeOf
 {
