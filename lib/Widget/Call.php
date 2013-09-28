@@ -60,7 +60,7 @@ class Call extends Base
      *
      * @var bool
      */
-    protected $global = true;
+    protected $global = false;
 
     /**
      * A key-value array to store request headers
@@ -616,8 +616,11 @@ class Call extends Base
      * @param string $name
      * @return string
      */
-    public function getResponseHeader($name)
+    public function getResponseHeader($name = null)
     {
+        if (is_null($name)) {
+            return $this->responseHeader;
+        }
         if (!is_array($this->responseHeaders)) {
             if ($this->responseHeader) {
                 $this->responseHeaders = $this->parseHeader($this->responseHeader);
