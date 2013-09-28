@@ -34,10 +34,7 @@ class CallTest extends TestCase
             'throwException' => false,
             'curlOptions' => array(
                 CURLOPT_HEADER => true
-            ),
-            'error' => function($call, $type, $e){
-                throw $e;
-            }
+            )
         ));
     }
 
