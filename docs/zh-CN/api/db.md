@@ -271,6 +271,7 @@ collectionClass | string   | Widget\Db\Collection | 记录集合类的基础类�
 recordClasses   | array    | array()              | 自定义记录类的数组,键名为数据表名称,值为记录类名称
 recordNamespace | string   | 无                   | 自定义记录类的命名空间
 slaveDb         | string   | 无                   | Slave数据库(用于读查询)的配置名称
+global          | bool     | false                | 新创建的db服务是否使用默认`db`的选项
 beforeConnect   | callback | 无                   | 在连接PDO之前触发的回调方法
 connectFails    | callback | 无                   | 连接PDO失败时触发的回调方法
 afterConnect    | callback | 无                   | 连接PDO完成(成功)时触发的回调方法
