@@ -12,7 +12,7 @@ Example
 $call = widget()->call(array(
     // Set the request URL
     'url' => 'https://api.github.com/gists',
-    // The default request method is GET, could be set to `post`, `put`, or any other valid methods
+    // The default request method is `get`, could be set to `post`, `put`, or any other valid methods
     'method' => 'get',
     // Parse the response data from JSON string to array
     'dataType' => 'json',
@@ -23,7 +23,7 @@ $call = widget()->call(array(
 ));
 
 if ($call->isSuccess()) {
-    // Receive parsed data when request success
+    // Receive parsed data when HTTP response success
     $response = $call->getResponse();
 
     // Output the first URL in response data, such as https://api.github.com/gists/xxxxxxx
