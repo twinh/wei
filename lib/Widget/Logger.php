@@ -161,6 +161,12 @@ class Logger extends Base
      */
     protected function formatLog($level, $message, array $context = array())
     {
+        if (is_array($message)) {
+            $message = print_r($message, true);
+        } else {
+            $message = (string)$message;
+        }
+
         $content = str_replace(array(
             '%datetime%', '%channel%', '%level%', '%message%',
         ), array(
