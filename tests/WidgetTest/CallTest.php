@@ -567,13 +567,19 @@ class CallTest extends TestCase
     public function testGlobal()
     {
         $test = $this;
-        $this->widget->setConfig('call', array(
-            'method' => 'POST',
+        $this->widget->setConfig(array(
+            'call' => array(
+                'method' => 'post',
+            ),
+            'global.call' => array(
+                'global' => true,
+            ),
+            'notGlobal.call' => array(
+                'global' => false
+            ),
         ));
 
-        /** @var $myCall \Widget\Call */
-        $myCall = $this->widget->get('my.call');
-        $call = $myCall(array(
+        $call = $this->widget->globalCall(array(
             'url' => $this->url . '?test=methods',
             'global' => true,
             'dataType' => 'jsonObject',
@@ -589,17 +595,22 @@ class CallTest extends TestCase
         $this->assertCalledEvents(array('success'));
 
         $this->triggeredEvents = array();
-        $call = $this->{'your.call'}(array(
+        $call = $this->widget->notGlobalCall(array(
             'url' => $this->url . '?test=methods',
             'dataType' => 'jsonObject',
             'global' => false,
             'success' => function($data) use($test) {
                 $test->triggeredEvents[] = 'success';
                 $test->assertEquals('GET', $data->method);
-            }
+            },
         ));
         $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
+
+        // reset method
+        $this->widget->setConfig('call', array(
+            'method' => 'get',
+        ));
     }
 
     public function testStringAsData()
