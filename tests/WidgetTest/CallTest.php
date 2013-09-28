@@ -507,7 +507,7 @@ class CallTest extends TestCase
     {
         return array(
             array('GET'),
-            // array('POST'), ?
+            //array('POST'), Malformed HTTP request why?
             array('DELETE'),
             array('PUT'),
             array('PATCH')
