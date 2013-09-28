@@ -245,26 +245,21 @@ class CallTest extends TestCase
 
     public function testGetJsonObject()
     {
-        $test = $this;
-        $call = $this->call->getJsonObject($this->url . '?type=json', function($data) use($test) {
-            $test->triggeredEvents[] = 'success';
-            $test->assertEquals(0, $data->code);
-            $test->assertEquals('success', $data->message);
-        });
+        $call = $this->call->getJsonObject($this->url . '?type=json');
+        $this->assertEquals(0, $call->getResponse()->code);
+        $this->assertEquals('success', $call->getResponse()->message);
+
         $this->assertTrue($call->isSuccess());
-        $this->assertCalledEvents(array('success'));
     }
 
     public function testGetJson()
     {
-        $test = $this;
-        $call = $this->call->getJson($this->url . '?type=json', function($data) use($test) {
-            $test->triggeredEvents[] = 'success';
-            $test->assertEquals(0, $data['code']);
-            $test->assertEquals('success', $data['message']);
-        });
+        $call = $this->call->getJson($this->url . '?type=json');
+        $data = $call->getResponse();
+
         $this->assertTrue($call->isSuccess());
-        $this->assertCalledEvents(array('success'));
+        $this->assertEquals(0, $data['code']);
+        $this->assertEquals('success', $data['message']);
     }
 
     public function testSerializeDataType()
@@ -420,16 +415,14 @@ class CallTest extends TestCase
                 'string' => 'value'
             )
         );
-        $call = $this->call->post($this->url . '?test=post', $data, function($data) use($test) {
-            $test->triggeredEvents[] = 'success';
-            $test->assertEquals('value', $data->key);
-            $test->assertEquals('1', $data->post);
-            $test->assertEquals('1', $data->array->{0});
-            $test->assertEquals('value', $data->array->string);
-        }, 'jsonObject');
+        $call = $this->call->post($this->url . '?test=post', $data, 'jsonObject');
 
+        $data = $call->getResponse();
         $this->assertTrue($call->isSuccess());
-        $this->assertCalledEvents(array('success'));
+        $test->assertEquals('value', $data->key);
+        $test->assertEquals('1', $data->post);
+        $test->assertEquals('1', $data->array->{0});
+        $test->assertEquals('value', $data->array->string);
     }
 
     /**
@@ -505,13 +498,9 @@ class CallTest extends TestCase
      */
     public function testAliasMethod($method)
     {
-        $test = $this;
-        $call = $this->call->{strtolower($method)}($this->url . '?test=methods', function($data) use($test, $method) {
-            $test->triggeredEvents[] = 'success';
-            $test->assertEquals($method, $data->method);
-        }, 'jsonObject');
+        $call = $this->call->{strtolower($method)}($this->url . '?test=methods', array(), 'jsonObject');
+        $this->assertEquals($method, $call->getResponse()->method);
         $this->assertTrue($call->isSuccess());
-        $this->assertCalledEvents(array('success'));
     }
 
     public function providerForAliasMethods()
