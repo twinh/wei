@@ -316,9 +316,7 @@
 
 <h3>获取对象管理器对象</h3>
 
-<div class="highlight"><pre><code class="php"><span class="cm">/* @var $widget \Widget\Widget */</span>
-<span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">();</span>
-</code></pre></div>
+
 
 <h3>设置对象配置</h3>
 
@@ -2459,6 +2457,12 @@
 <td>string</td>
 <td>无</td>
 <td>Slave数据库(用于读查询)的配置名称</td>
+</tr>
+<tr>
+<td>global</td>
+<td>bool</td>
+<td>false</td>
+<td>新创建的db服务是否使用默认<code>db</code>的选项</td>
 </tr>
 <tr>
 <td>beforeConnect</td>
