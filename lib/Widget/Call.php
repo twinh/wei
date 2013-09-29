@@ -407,21 +407,17 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             if ($isSuccess) {
                 $this->response = $this->parse($this->responseText, $this->dataType, $exception);
                 if (!$exception) {
-                    $this->result = true;
                     $this->success && call_user_func($this->success, $this->response, $this);
                 } else {
-                    $this->result = false;
                     $this->triggerError('parser', $exception);
                 }
             } else {
                 preg_match('/[\d]{3} (.+?)\r/', $this->responseHeader, $matches);
                 $exception = new \ErrorException($matches[1], $statusCode);
-                $this->result = false;
                 $this->triggerError('http', $exception);
             }
         } else {
             $exception = new \ErrorException(curl_error($ch), curl_errno($ch));
-            $this->result = false;
             $this->triggerError('curl', $exception);
         }
     }
@@ -434,6 +430,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     protected function triggerError($status, \ErrorException $exception)
     {
+        $this->result = false;
         $this->errorStatus = $status;
         $this->errorException = $exception;
         $this->error && call_user_func($this->error, $this, $status, $exception);
