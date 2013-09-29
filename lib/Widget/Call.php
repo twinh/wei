@@ -860,4 +860,26 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     {
         return new \ArrayIterator($this->response);
     }
+
+    /**
+     * Get the property value in response
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        return isset($this->response->$name) ? $this->response->$name : null;
+    }
+
+    /**
+     * Set the property value in response
+     *
+     * @param string $name
+     * @param mixed $value
+     */
+    public function __set($name, $value)
+    {
+        $this->response->$name = $value;
+    }
 }

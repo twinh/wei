@@ -726,6 +726,21 @@ class CallTest extends TestCase
         }
     }
 
+    public function testMagicGetAndSet()
+    {
+        $data = $this->call(array(
+            'url' => $this->url . '?test=get',
+            'data' => 'key=value&number=10',
+            'dataType' => 'jsonObject',
+        ));
+        $this->assertTrue($data->isSuccess());
+        $response = $data->getResponse();
+
+        foreach ($data as $key => $value) {
+            $this->assertEquals($value, $response->$key);
+        }
+    }
+
     public function assertCalledEvents($events)
     {
         foreach ((array)$events as $event) {
