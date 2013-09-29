@@ -407,6 +407,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             if ($isSuccess) {
                 $this->response = $this->parse($this->responseText, $this->dataType, $exception);
                 if (!$exception) {
+                    $this->result = true;
                     $this->success && call_user_func($this->success, $this->response, $this);
                 } else {
                     $this->triggerError('parser', $exception);
