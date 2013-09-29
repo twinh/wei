@@ -405,7 +405,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             $statusCode = $curlInfo['http_code'];
             $isSuccess = $statusCode >= 200 && $statusCode < 300 || $statusCode === 304;
             if ($isSuccess) {
-                $this->response = $this->parse($this->responseText, $this->dataType, $exception);
+                $this->response = $this->parseResponse($this->responseText, $exception);
                 if (!$exception) {
                     $this->result = true;
                     $this->success && call_user_func($this->success, $this->response, $this);
@@ -438,19 +438,18 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
-     * Parse data by specified type
+     * Parse response data by specified type
      *
      * @param string $data
-     * @param string $type
      * @param null $exception A variable to store exception when parsing error
      * @return mixed
      */
-    protected function parse($data, $type, &$exception)
+    protected function parseResponse($data, &$exception)
     {
-        switch ($type) {
+        switch ($this->dataType) {
             case 'json' :
             case 'jsonObject' :
-                $data = json_decode($data, $type === 'json');
+                $data = json_decode($data, $this->dataType === 'json');
                 if (null === $data && json_last_error() != JSON_ERROR_NONE) {
                     $exception = new \ErrorException('JSON Parsing error', json_last_error());
                 }
@@ -462,7 +461,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
                     'xml' => 'simplexml_load_string',
                     'serialize' => 'unserialize',
                 );
-                $data = @$methods[$type]($data);
+                $data = @$methods[$this->dataType]($data);
                 if (false === $data && $e = error_get_last()) {
                     $exception = new \ErrorException($e['message'], $e['type'], 0, $e['file'], $e['line']);
                 }
