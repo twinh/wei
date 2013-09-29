@@ -678,6 +678,54 @@ class CallTest extends TestCase
         $this->assertEquals('string', $call->getData());
     }
 
+    public function testArrayAccess()
+    {
+        $data = $this->call(array(
+            'url' => $this->url . '?test=get',
+            'data' => 'key=value&number=10',
+            'dataType' => 'json',
+        ));
+        $this->assertTrue($data->isSuccess());
+
+        $this->assertTrue(isset($data['key']));
+        $this->assertFalse(isset($data['notExits']));
+
+        $this->assertEquals('value', $data['key']);
+        $this->assertEquals('10', $data['number']);
+
+        unset($data['key']);
+        $this->assertNull($data['key']);
+
+        $data['key'] = 'v2';
+        $this->assertEquals('v2', $data['key']);
+    }
+
+    public function testCountable()
+    {
+        $data = $this->call(array(
+            'url' => $this->url . '?test=get',
+            'data' => 'key=value&number=10',
+            'dataType' => 'json',
+        ));
+        $this->assertTrue($data->isSuccess());
+        $this->assertEquals(3, count($data));
+    }
+
+    public function testIteratorAggregate()
+    {
+        $data = $this->call(array(
+            'url' => $this->url . '?test=get',
+            'data' => 'key=value&number=10',
+            'dataType' => 'json',
+        ));
+        $this->assertTrue($data->isSuccess());
+        $response = $data->getResponse();
+
+        foreach ($data as $key => $value) {
+            $this->assertEquals($value, $response[$key]);
+        }
+    }
+
     public function assertCalledEvents($events)
     {
         foreach ((array)$events as $event) {
