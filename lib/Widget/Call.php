@@ -226,11 +226,11 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param array $options
      */
-    public function __construct($options)
+    public function __construct(array $options = array())
     {
         // Merges options from default call service
         if (!isset($options['global']) || true == $options['global']) {
-            $options += $options['widget']->getConfig('call');
+            $options += (array)$options['widget']->getConfig('call');
         }
         parent::__construct($options);
         $this->defaultOptions = $options;
