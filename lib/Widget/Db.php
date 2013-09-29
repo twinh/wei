@@ -223,7 +223,7 @@ class Db extends Base
     public function __construct(array $options = array())
     {
         if (!isset($options['global']) || true == $options['global']) {
-            $options += $options['widget']->getConfig('db');
+            $options += (array)$options['widget']->getConfig('db');
         }
         return parent::__construct($options);
     }
