@@ -218,17 +218,13 @@ class Response extends Base
         }
 
         // Trigger the after send callback
-        if ($this->beforeSend) {
-            call_user_func($this->beforeSend, $this, $content);
-        }
+        $this->beforeSend && call_user_func($this->beforeSend, $this, $content);
 
         $this->sendHeader();
         $this->sendContent();
 
         // Trigger the after send callback
-        if ($this->afterSend) {
-            call_user_func($this->afterSend, $this);
-        }
+        $this->afterSend && call_user_func($this->afterSend, $this);
 
         return $this;
     }
