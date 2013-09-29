@@ -565,7 +565,7 @@ class Response extends Base
          * Disable zlib to compress output
          * @link http://www.php.net/manual/en/zlib.configuration.php
          */
-        if (!headers_sent() &&extension_loaded('zlib')) {
+        if (!headers_sent() && extension_loaded('zlib')) {
             ini_set('zlib.output_compression', '0');
         }
 
