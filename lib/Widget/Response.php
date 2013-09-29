@@ -502,16 +502,6 @@ class Response extends Base
     }
 
     /**
-     * Returns the response headers variable reference
-     *
-     * @return array
-     */
-    public function &getHeaderReference()
-    {
-        return $this->headers;
-    }
-
-    /**
      * Returns response header as string
      *
      * @return string
