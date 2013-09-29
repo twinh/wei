@@ -347,7 +347,7 @@ class Response extends Base
      *
      * @param  string $name    The header name
      * @param  mixed  $default The default value
-     * @param  bool   $first   return the first element or the whole header values
+     * @param  bool   $first   Return the first element or the whole header values
      * @return mixed
      */
     public function getHeader($name, $default = null, $first = true)

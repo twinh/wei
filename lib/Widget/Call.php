@@ -353,7 +353,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 
         if ($this->cookies) {
             $cookies = array();
-            foreach($this->cookies as $key => $value) {
+            foreach ($this->cookies as $key => $value) {
                 $cookies[] = $key . '=' . urlencode($value);
             }
             $opts[CURLOPT_COOKIE] = implode('; ', $cookies);
@@ -579,14 +579,18 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Returns request header value
      *
-     * @param string $name
+     * @param string $name The header name
+     * @param bool $first Return the first element or the whole header values
      * @return string
      */
-    public function getResponseHeader($name = null)
+    public function getResponseHeader($name = null, $first = true)
     {
+        // Return response header string when parameter is not provided
         if (is_null($name)) {
             return $this->responseHeader;
         }
+
+        // Parse response header into a key-value array
         if (!is_array($this->responseHeaders)) {
             if ($this->responseHeader) {
                 $this->responseHeaders = $this->parseHeader($this->responseHeader);
@@ -594,12 +598,21 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
                 $this->responseHeaders = array();
             }
         }
+
         $name = strtoupper($name);
-        return isset($this->responseHeaders[$name]) ? $this->responseHeaders[$name] : null;
+        if (!isset($this->responseHeaders[$name])) {
+            return null;
+        }
+
+        if (is_array($this->headers[$name]) && $first) {
+            return current($this->headers[$name]);
+        } else {
+            return $this->headers[$name];
+        }
     }
 
     /**
-     * Parse the HTTP response header to key-value array
+     * Parse the HTTP response header into a key-value array
      *
      * @param string $header
      * @return array
@@ -609,8 +622,15 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         $headers = array();
         foreach (explode("\n", $header) as $line) {
             $line = explode(':', $line, 2);
-            if (isset($line[1])) {
-                $headers[strtoupper($line[0])] = trim($line[1]);
+            $name = strtoupper($line[0]);
+            $value = isset($line[1]) ? trim($line[1]) : null;
+
+            if (!isset($headers[$name])) {
+                $headers[$name] = $value;
+            } elseif (is_array($headers[$name])) {
+                $headers[$name] = array_merge($headers[$name], array($value));
+            } else {
+                $headers[$name] = array_merge(array($headers[$name]), array($value));
             }
         }
         return $headers;
