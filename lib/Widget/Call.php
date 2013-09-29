@@ -457,7 +457,12 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
                 break;
 
             case 'xml' :
-                $data = @simplexml_load_string($data);
+            case 'serialize' :
+                $methods = array(
+                    'xml' => 'simplexml_load_string',
+                    'serialize' => 'unserialize',
+                );
+                $data = @$methods[$type]($data);
                 if (false === $data && $e = error_get_last()) {
                     $exception = new \ErrorException($e['message'], $e['type'], 0, $e['file'], $e['line']);
                 }
@@ -466,13 +471,6 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             case 'query' :
                 // Parse $data(string) and assign the result to $data(array)
                 parse_str($data, $data);
-                break;
-
-            case 'serialize' :
-                $data = @unserialize($data);
-                if (false === $data && $e = error_get_last()) {
-                    $exception = new \ErrorException($e['message'], $e['type'], 0, $e['file'], $e['line']);
-                }
                 break;
 
             case 'text':
