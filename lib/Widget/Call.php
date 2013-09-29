@@ -405,10 +405,10 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             $statusCode = $curlInfo['http_code'];
             $isSuccess = $statusCode >= 200 && $statusCode < 300 || $statusCode === 304;
             if ($isSuccess) {
-                $this->response = $response = $this->parse($this->responseText, $this->dataType, $exception);
+                $this->response = $this->parse($this->responseText, $this->dataType, $exception);
                 if (!$exception) {
                     $this->result = true;
-                    $this->success && call_user_func($this->success, $response, $this);
+                    $this->success && call_user_func($this->success, $this->response, $this);
                 } else {
                     $this->result = false;
                     $this->triggerError('parser', $exception);
