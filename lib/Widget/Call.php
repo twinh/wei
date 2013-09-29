@@ -185,13 +185,6 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     protected $response;
 
     /**
-     * The parsed response JSON array
-     *
-     * @var array
-     */
-    protected $responseJson;
-
-    /**
      * The response header string
      *
      * @var string
@@ -415,10 +408,6 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
                 $this->response = $response = $this->parse($this->responseText, $this->dataType, $exception);
                 if (!$exception) {
                     $this->result = true;
-                    $property = 'response' . ucfirst($this->dataType);
-                    if (property_exists($this, $property)) {
-                        $this->$property = $response;
-                    }
                     $this->success && call_user_func($this->success, $response, $this);
                 } else {
                     $this->result = false;
@@ -533,16 +522,6 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function getResponseText()
     {
         return $this->responseText;
-    }
-
-    /**
-     * Returns the response json data
-     *
-     * @return array
-     */
-    public function getResponseJson()
-    {
-        return $this->responseJson;
     }
 
     /**
@@ -859,27 +838,5 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function getIterator()
     {
         return new \ArrayIterator($this->response);
-    }
-
-    /**
-     * Get the property value in response
-     *
-     * @param string $name
-     * @return mixed
-     */
-    public function __get($name)
-    {
-        return isset($this->response->$name) ? $this->response->$name : null;
-    }
-
-    /**
-     * Set the property value in response
-     *
-     * @param string $name
-     * @param mixed $value
-     */
-    public function __set($name, $value)
-    {
-        $this->response->$name = $value;
     }
 }

@@ -596,20 +596,6 @@ class CallTest extends TestCase
         $this->assertCalledEvents(array('success'));
     }
 
-    public function testGetResponseJson()
-    {
-        $call = $this->call(array(
-            'url' => $this->url . '?type=json',
-            'data' => array(),
-            'dataType' => 'json',
-        ));
-
-        $data = $call->getResponseJson();
-
-        $this->assertEquals(0, $data['code']);
-        $this->assertEquals('success', $data['message']);
-    }
-
     public function testFlatApi()
     {
         // Success
@@ -723,21 +709,6 @@ class CallTest extends TestCase
 
         foreach ($data as $key => $value) {
             $this->assertEquals($value, $response[$key]);
-        }
-    }
-
-    public function testMagicGetAndSet()
-    {
-        $data = $this->call(array(
-            'url' => $this->url . '?test=get',
-            'data' => 'key=value&number=10',
-            'dataType' => 'jsonObject',
-        ));
-        $this->assertTrue($data->isSuccess());
-        $response = $data->getResponse();
-
-        foreach ($data as $key => $value) {
-            $this->assertEquals($value, $response->$key);
         }
     }
 
