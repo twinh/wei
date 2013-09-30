@@ -169,6 +169,7 @@ timeout     | int          | 0       | 整个请求的最大运行时间,单位�
 dataType    | string       | text    | 请求完成后,要对返回数据解析的类型,可以是`json`(数组),`jsonObject`,`xml`,`query`,`serialize`和`text`
 referer     | string       | 无      | 请求HTTP头中的referer值
 userAgent   | string       | 无      | 请求HTTP头中的userAgent值
+curlOptions | array        | array() | 批量设置cURL会话的选项,供`curl_setopt_array`函数调用
 beforeSend  | callable     | 无      | 在发送请求前触发的回调,可通过该回调更改任意配置
 success     | callable     | 无      | 请求并解析数据成功后触发的回调
 error       | callable     | 无      | 请求或解析失败后触发的回调,可用于记录日志,展示错误信息等
