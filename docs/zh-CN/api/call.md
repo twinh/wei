@@ -252,38 +252,20 @@ $ch         | resource     | cUrl会话的变量
 #### call->setRequestHeader($name, $value)
 设置HTTP请求头的值
 
-#### call->get($url, $callback = null, $dataType = null)
-通过GET方式发送请求,成功时触发`$callback`回调
-
-#### call->get($url, $data = array(), $callback = null, $dataType = null)
+#### call->get($url, $data = array(), $dataType = null)
 通过GET方式发送带数据的请求,成功时触发`$callback`回调
 
-#### call->getJson($url, $callback = null)
-通过GET方式发送请求,并以JSON格式解析返回数据,成功时触发`$callback`回调
-
-#### call->getJson($url, $data = array(), $callback = null)
+#### call->getJson($url, $data = array())
 通过GET方式发送带数据的请求,成功时触发`$callback`回调
 
-#### call->post($url, $data = array(), $callback = null, $dataType = null)
+#### call->post($url, $data = array(), $dataType = null)
 通过POST方式发送带数据的请求,成功时触发`$callback`回调
 
-#### call->post($url, $callback = null, $dataType = null)
-通过POST方式发送请求,成功时触发`$callback`回调
-
-#### call->put($url, $data = array(), $callback = null, $dataType = null)
+#### call->put($url, $data = array(), $dataType = null)
 通过PUT方式发送带数据的请求,成功时触发`$callback`回调
 
-#### call->put($url, $callback = null, $dataType = null)
-通过PUT方式发送请求,成功时触发`$callback`回调
-
-#### call->delete($url, $data = array(), $callback = null, $dataType = null)
+#### call->delete($url, $data = array(), $dataType = null)
 通过DELETE方式发送带数据的请求,成功时触发`$callback`回调
 
-#### call->delete($url, $callback = null, $dataType = null)
-通过DELETE方式发送请求,成功时触发`$callback`回调
-
-#### call->patch($url, $data = array(), $callback = null, $dataType = null)
+#### call->patch($url, $data = array(), $dataType = null)
 通过PATCH方式发送带数据的请求,成功时触发`$callback`回调
-
-#### call->patch($url, $callback = null, $dataType = null)
-通过PATCH方式发送请求,成功时触发`$callback`回调
