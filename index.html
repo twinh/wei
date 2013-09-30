@@ -316,7 +316,9 @@
 
 <h3>获取对象管理器对象</h3>
 
-
+<div class="highlight"><pre><code class="php"><span class="cm">/* @var $widget \Widget\Widget */</span>
+<span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">();</span>
+</code></pre></div>
 
 <h3>设置对象配置</h3>
 
@@ -4006,11 +4008,8 @@
 
 <h3>创建一条新记录并保存</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 创建一个新的用户记录对象</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 通过`create`方法创建一个新的用户记录对象</span>
 <span class="cm">/* @var $user \Widget\Db\Record */</span>
-<span class="nv">$user</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">;</span>
-
-<span class="c1">// 或是通过`create`方法创建</span>
 <span class="nv">$user</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'groupId'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
 
 <span class="c1">// 设置对象的值</span>
