@@ -4605,9 +4605,13 @@
 
 <p>初始化一个新的Call对象,并执行HTTP请求</p>
 
+<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
+
 <h4>call($url, $options = array())</h4>
 
 <p>根据给定的URL地址,初始化一个Call对象,并执行HTTP请求</p>
+
+<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
 
 <h4>call-&gt;isSuccess()</h4>
 
@@ -4617,7 +4621,9 @@
 
 <h4>call-&gt;getCh()</h4>
 
-<p>获取cURL的资源变量</p>
+<p>获取cURL的会话变量</p>
+
+<p>返回: <code>resource</code></p>
 
 <h4>call-&gt;getResponseHeader($name)</h4>
 
@@ -4637,27 +4643,39 @@
 
 <h4>call-&gt;get($url, $data = array(), $dataType = null)</h4>
 
-<p>通过GET方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
+<p>通过GET方式发送带数据的请求</p>
+
+<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
 
 <h4>call-&gt;getJson($url, $data = array())</h4>
 
-<p>通过GET方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
+<p>通过GET方式发送带数据的请求</p>
+
+<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
 
 <h4>call-&gt;post($url, $data = array(), $dataType = null)</h4>
 
-<p>通过POST方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
+<p>通过POST方式发送带数据的请求</p>
+
+<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
 
 <h4>call-&gt;put($url, $data = array(), $dataType = null)</h4>
 
-<p>通过PUT方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
+<p>通过PUT方式发送带数据的请求</p>
+
+<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
 
 <h4>call-&gt;delete($url, $data = array(), $dataType = null)</h4>
 
-<p>通过DELETE方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
+<p>通过DELETE方式发送带数据的请求</p>
+
+<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
 
 <h4>call-&gt;patch($url, $data = array(), $dataType = null)</h4>
 
-<p>通过PATCH方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
+<p>通过PATCH方式发送带数据的请求</p>
+
+<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
   </section>
 
 <!-- api/validate
