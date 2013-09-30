@@ -42,7 +42,7 @@ abstract class Base
         if (!isset($this->widget)) {
             $this->widget = Widget::getContainer();
         } elseif (!$this->widget instanceof Widget) {
-            throw new \InvalidArgumentException(sprintf('Option "widget" of class "%s" should be an instance of "Widget\Widget"', get_class($this)));
+            throw new \InvalidArgumentException(sprintf('Option "widget" of class "%s" should be an instance of "Widget\Widget"', get_class($this)), 1000);
         }
     }
 

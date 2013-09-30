@@ -110,7 +110,11 @@ class WidgetTest extends TestCase
 
     public function testInvalidArgumentExceptionForWidgetOption()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'Option "widget" of class "Widget\Request" should be an instance of "Widget\Widget"',
+            1000
+        );
         new \Widget\Request(array(
             'widget' => new \stdClass
         ));
@@ -176,7 +180,8 @@ class WidgetTest extends TestCase
     {
         $this->setExpectedException(
             'BadMethodCallException',
-            'Property or object "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file'
+            'Property or object "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file',
+            1012
         );
         $this->widget->notFoundWidget;
     }
@@ -185,7 +190,8 @@ class WidgetTest extends TestCase
     {
         $this->setExpectedException(
             'BadMethodCallException',
-            'Property or object "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file'
+            'Property or object "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file',
+            1012
         );
         $this->widget->request->notFoundWidget;
     }
@@ -194,7 +200,8 @@ class WidgetTest extends TestCase
     {
         $this->setExpectedException(
             'BadMethodCallException',
-            'Method "Widget\Widget->notFoundWidget" or object "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file'
+            'Method "Widget\Widget->notFoundWidget" or object "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file',
+            1011
         );
         $this->widget->notFoundWidget();
     }
@@ -203,7 +210,8 @@ class WidgetTest extends TestCase
     {
         $this->setExpectedException(
             'BadMethodCallException',
-            'Property or method "notFoundWidget" not found'
+            'Property or method "notFoundWidget" not found',
+            1013
         );
         $this->widget->get('notFoundWidget');
     }
@@ -370,7 +378,8 @@ class WidgetTest extends TestCase
     {
         $this->setExpectedException(
             'InvalidArgumentException',
-            'Fail to import classes from non-exists directory'
+            'Fail to import classes from non-exists directory',
+            1014
         );
         $this->widget->import(__DIR__ . '/not found/', 'test');
     }
@@ -406,7 +415,8 @@ class WidgetTest extends TestCase
     {
         $this->setExpectedException(
             'InvalidArgumentException',
-            'Configuration should be array or file'
+            'Configuration should be array or file',
+            1010
         );
         Widget::getContainer(new \stdClass);
     }
@@ -415,7 +425,8 @@ class WidgetTest extends TestCase
     {
         $this->setExpectedException(
             'InvalidArgumentException',
-            'Configuration should be array or file'
+            'Configuration should be array or file',
+            1010
         );
         Widget::getContainer('not existing file');
     }
