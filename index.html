@@ -316,9 +316,7 @@
 
 <h3>获取对象管理器对象</h3>
 
-<div class="highlight"><pre><code class="php"><span class="cm">/* @var $widget \Widget\Widget */</span>
-<span class="nv">$widget</span> <span class="o">=</span> <span class="nx">widget</span><span class="p">();</span>
-</code></pre></div>
+
 
 <h3>设置对象配置</h3>
 
@@ -4225,9 +4223,6 @@
 <span class="p">));</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">isSuccess</span><span class="p">())</span> <span class="p">{</span>
-    <span class="c1">// 请求成功,获取解析后的返回值</span>
-    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
-
     <span class="c1">// 输出第一条的地址,如https://api.github.com/gists/xxxxxxx</span>
     <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$response</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'url'</span><span class="p">]);</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
