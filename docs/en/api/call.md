@@ -23,9 +23,6 @@ $call = widget()->call(array(
 ));
 
 if ($call->isSuccess()) {
-    // Receive parsed data when HTTP response success
-    $response = $call->getResponse();
-
     // Output the first URL in response data, such as https://api.github.com/gists/xxxxxxx
     var_dump($response[0]['url']);
 } else {

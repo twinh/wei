@@ -23,9 +23,6 @@ $call = widget()->call(array(
 ));
 
 if ($call->isSuccess()) {
-    // 请求成功,获取解析后的返回值
-    $response = $call->getResponse();
-
     // 输出第一条的地址,如https://api.github.com/gists/xxxxxxx
     var_dump($response[0]['url']);
 } else {
