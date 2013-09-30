@@ -41,9 +41,6 @@ widget()->call(array(
     'url' => 'http://google.com',
     'ip' => '74.125.128.105', // 线上运营环境
     //'ip' => '127.0.0.1', // 本地开发环境
-    'success' => function($data){
-        // do something
-    }
 ));
 ```
 
