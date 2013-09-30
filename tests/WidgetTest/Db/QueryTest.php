@@ -1,6 +1,6 @@
 <?php
 
-namespace WidgetTest\DbTest;
+namespace WidgetTest\Db;
 
 use WidgetTest\TestCase;
 use Widget\Db\QueryBuilder;

@@ -11,10 +11,10 @@ class AppTest extends TestCase
     {
         parent::setUp();
 
-        $this->view->setDirs(__DIR__ . '/AppTest/views');
+        $this->view->setDirs(__DIR__ . '/App/views');
 
         $this->app
-            ->setOption('namespace', 'WidgetTest\AppTest');
+            ->setOption('namespace', 'WidgetTest\App');
     }
 
     protected function tearDown()
@@ -25,7 +25,7 @@ class AppTest extends TestCase
 
     public function testBaseApp()
     {
-        // WidgetTest\AppTest\Controller\Test::testAction
+        // WidgetTest\App\Controller\Test::testAction
         $this->request->set(array(
             'controller' => 'test',
             'action' => 'test'
@@ -39,7 +39,7 @@ class AppTest extends TestCase
     /**
      * @expectedException \RuntimeException
      * @expectedExceptionCode 404
-     * @expectedExceptionMessage The page you requested was not found - controller "ControllerNotFound" (class "WidgetTest\AppTest\ControllerNotFound") not found
+     * @expectedExceptionMessage The page you requested was not found - controller "ControllerNotFound" (class "WidgetTest\App\ControllerNotFound") not found
      */
     public function testControllerNotFound()
     {
@@ -62,7 +62,7 @@ class AppTest extends TestCase
     /**
      * @expectedException \RuntimeException
      * @expectedExceptionCode 404
-     * @expectedExceptionMessage The page you requested was not found - controller "Controller\Admin" (class "WidgetTest\AppTest\Controller\Admin") not found
+     * @expectedExceptionMessage The page you requested was not found - controller "Controller\Admin" (class "WidgetTest\App\Controller\Admin") not found
      */
     public function testNestedControllerNotFound()
     {
@@ -74,7 +74,7 @@ class AppTest extends TestCase
     /**
      * @expectedException \RuntimeException
      * @expectedExceptionCode 404
-     * @expectedExceptionMessage The page you requested was not found - action method "ActionNotFound" not found in controller "test" (class "WidgetTest\AppTest\Test")
+     * @expectedExceptionMessage The page you requested was not found - action method "ActionNotFound" not found in controller "test" (class "WidgetTest\App\Test")
      */
     public function testActionNotFound()
     {
@@ -85,7 +85,7 @@ class AppTest extends TestCase
 
     public function testActionReturnArrayAsViewParameter()
     {
-        // WidgetTest\AppTest\Controller\TestController::returnArrayAction
+        // WidgetTest\App\Controller\TestController::returnArrayAction
         $this->request->set(array(
             'controller' => 'test',
             'action' => 'returnArray'
@@ -98,7 +98,7 @@ class AppTest extends TestCase
 
     public function testActionReturnResponseWidget()
     {
-        // WidgetTest\AppTest\Controller\TestController::returnResponseAction
+        // WidgetTest\App\Controller\TestController::returnResponseAction
         $this->request->set(array(
             'controller' => 'test',
             'action' => 'returnResponse'
@@ -114,7 +114,7 @@ class AppTest extends TestCase
      */
     public function testActionReturnUnexpectedType()
     {
-        // WidgetTest\AppTest\Controller\TestController::returnUnexpectedTypeAction
+        // WidgetTest\App\Controller\TestController::returnUnexpectedTypeAction
         $this->request->set(array(
             'controller' => 'test',
             'action' => 'returnUnexpectedType'
@@ -146,7 +146,7 @@ class AppTest extends TestCase
         $this->assertFalse($this->app->getControllerInstance('../invalid/controller', 'index'));
 
         $controller = $this->app->getControllerInstance('test', 'index');
-        $this->assertInstanceOf('WidgetTest\AppTest\Test', $controller);
+        $this->assertInstanceOf('WidgetTest\App\Test', $controller);
 
         $controller2 = $this->app->getControllerInstance('test', 'index');
         $this->assertSame($controller2, $controller);

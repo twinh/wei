@@ -1,6 +1,6 @@
 <?php
 
-namespace WidgetTest\AppTest\Admin;
+namespace WidgetTest\App\Admin;
 
 class Index extends \Widget\Base
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace WidgetTest\DbTest;
+namespace WidgetTest\Db;
 
 
 class MemberGroup extends \Widget\Db\Record

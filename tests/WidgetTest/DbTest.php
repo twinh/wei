@@ -113,9 +113,9 @@ class DbTest extends TestCase
 
         $db = $this->db;
 
-        $db->setOption('recordNamespace', 'WidgetTest\DbTest');
+        $db->setOption('recordNamespace', 'WidgetTest\Db');
 
-        /** @var $member \WidgetTest\DbTest\Member */
+        /** @var $member \WidgetTest\Db\Member */
         $member = $db->member('1');
 
         $this->assertInstanceOf('\Widget\Db\Record', $member);
@@ -172,7 +172,7 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        /** @var $member \WidgetTest\DbTest\Member */
+        /** @var $member \WidgetTest\Db\Member */
         $member = $this->db->member('1');
 
         $this->assertEquals(1, $member['id']);
@@ -400,13 +400,13 @@ class DbTest extends TestCase
     {
         $db = $this->db;
 
-        $db->setOption('recordNamespace', 'WidgetTest\DbTest');
+        $db->setOption('recordNamespace', 'WidgetTest\Db');
 
-        $this->assertEquals('WidgetTest\DbTest\Member', $db->getRecordClass('member'));
-        $this->assertEquals('WidgetTest\DbTest\Member', $db->getRecordClass('member'));
-        $this->assertEquals('WidgetTest\DbTest\MemberGroup', $db->getRecordClass('member_group'));
-        $this->assertEquals('WidgetTest\DbTest\MemberGroup', $db->getRecordClass('memberGroup'));
-        $this->assertEquals('WidgetTest\DbTest\MemberGroup', $db->getRecordClass('member_Group'));
+        $this->assertEquals('WidgetTest\Db\Member', $db->getRecordClass('member'));
+        $this->assertEquals('WidgetTest\Db\Member', $db->getRecordClass('member'));
+        $this->assertEquals('WidgetTest\Db\MemberGroup', $db->getRecordClass('member_group'));
+        $this->assertEquals('WidgetTest\Db\MemberGroup', $db->getRecordClass('memberGroup'));
+        $this->assertEquals('WidgetTest\Db\MemberGroup', $db->getRecordClass('member_Group'));
     }
 
     /**
@@ -695,12 +695,12 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $this->db->setOption('recordNamespace', 'WidgetTest\DbTest');
+        $this->db->setOption('recordNamespace', 'WidgetTest\Db');
 
         $member = $this->db->find('member', 1);
 
-        $this->assertEquals('WidgetTest\DbTest\Member', $this->db->getRecordClass('member'));
-        $this->assertInstanceOf('WidgetTest\DbTest\Member', $member);
+        $this->assertEquals('WidgetTest\Db\Member', $this->db->getRecordClass('member'));
+        $this->assertInstanceOf('WidgetTest\Db\Member', $member);
     }
 
     public function testCustomRecordClass()
@@ -708,13 +708,13 @@ class DbTest extends TestCase
         $this->initFixtures();
 
         $this->db->setOption('recordClasses', array(
-            'member' => 'WidgetTest\DbTest\Member'
+            'member' => 'WidgetTest\Db\Member'
         ));
 
         $member = $this->db->find('member', 1);
 
-        $this->assertEquals('WidgetTest\DbTest\Member', $this->db->getRecordClass('member'));
-        $this->assertInstanceOf('WidgetTest\DbTest\Member', $member);
+        $this->assertEquals('WidgetTest\Db\Member', $this->db->getRecordClass('member'));
+        $this->assertInstanceOf('WidgetTest\Db\Member', $member);
     }
 
     public function testRecordToArray()
@@ -755,7 +755,7 @@ class DbTest extends TestCase
         $this->assertNull($member['address']);
 
         $this->db->setOption('recordClasses', array(
-            'member' => 'WidgetTest\DbTest\Member'
+            'member' => 'WidgetTest\Db\Member'
         ));
     }
 

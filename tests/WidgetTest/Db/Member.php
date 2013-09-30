@@ -1,6 +1,6 @@
 <?php
 
-namespace WidgetTest\DbTest;
+namespace WidgetTest\Db;
 
 class Member extends Record
 {

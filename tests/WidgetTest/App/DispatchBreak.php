@@ -1,6 +1,6 @@
 <?php
 
-namespace WidgetTest\AppTest;
+namespace WidgetTest\App;
 
 class DispatchBreak extends \Widget\Base
 {
