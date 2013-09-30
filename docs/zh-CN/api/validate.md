@@ -859,7 +859,7 @@ $separator  | string       | 合并错误信息数组的分隔符
 
 获取规则验证器对象
 
-返回: `Widget\Validator\AbstractValidator`|`null` 验证器不存在时返回null
+返回: `Widget\Validator\BaseValidator`|`null` 验证器不存在时返回null
 
 参数
 
