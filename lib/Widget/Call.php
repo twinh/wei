@@ -604,10 +604,10 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             return null;
         }
 
-        if (is_array($this->headers[$name]) && $first) {
-            return current($this->headers[$name]);
+        if (is_array($this->responseHeaders[$name]) && $first) {
+            return current($this->responseHeaders[$name]);
         } else {
-            return $this->headers[$name];
+            return $this->responseHeaders[$name];
         }
     }
 
