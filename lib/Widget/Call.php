@@ -199,6 +199,13 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     protected $responseHeaders;
 
     /**
+     * A key-value array contains the response cookies
+     *
+     * @var string
+     */
+    protected $responseCookies;
+
+    /**
      * The cURL session
      *
      * @var resource
@@ -581,7 +588,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param string $name The header name
      * @param bool $first Return the first element or the whole header values
-     * @return string
+     * @return string|array
      */
     public function getResponseHeader($name = null, $first = true)
     {
@@ -634,6 +641,60 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             }
         }
         return $headers;
+    }
+
+    /**
+     * Returns a key-value array contains the response cookies, like $_COOKIE
+     *
+     * @return array
+     */
+    public function getResponseCookies()
+    {
+        if (!is_array($this->responseCookies)) {
+            $cookies = $this->getResponseHeader('SET-COOKIE', false);
+            $this->responseCookies = array();
+            foreach ($cookies as $cookie) {
+                $this->responseCookies += $this->parseCookie($cookie);
+            }
+        }
+        return $this->responseCookies;
+    }
+
+    /**
+     * Returns the cookie value by specified name
+     *
+     * @param string $name
+     * @return string|null
+     */
+    public function getResponseCookie($name)
+    {
+        $cookies = $this->getResponseCookies();
+        return isset($cookies[$name]) ? $cookies[$name] : null;
+    }
+
+    /**
+     * Parse cookie from header, returns result like $_COOKIE
+     *
+     * @param string $header
+     * @return array
+     */
+    public function parseCookie($header)
+    {
+        $elements = explode(';', $header);
+        $cookies = array();
+        foreach($elements as $element) {
+            $pieces = explode('=', trim($element), 2);
+            if (!isset($pieces[1])) {
+                continue;
+            }
+            list($name, $value) = $pieces;
+            if (in_array($name, array('domain', 'path', 'comment', 'expires', 'secure'))) {
+                continue;
+            } else {
+                $cookies[$name] = trim($value);
+            }
+        }
+        return $cookies;
     }
 
     /**
