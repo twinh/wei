@@ -230,8 +230,12 @@ $ch         | resource     | cUrl会话的变量
 #### call($options = array())
 初始化一个新的Call对象,并执行HTTP请求
 
+返回:  `Widget\Call` 新的call服务对象
+
 #### call($url, $options = array())
 根据给定的URL地址,初始化一个Call对象,并执行HTTP请求
+
+返回:  `Widget\Call` 新的call服务对象
 
 #### call->isSuccess()
 返回请求及数据解析是否成功
@@ -239,7 +243,9 @@ $ch         | resource     | cUrl会话的变量
 返回: `bool`
 
 #### call->getCh()
-获取cURL的资源变量
+获取cURL的会话变量
+
+返回: `resource`
 
 #### call->getResponseHeader($name)
 获取HTTP响应头的值
@@ -254,19 +260,31 @@ $ch         | resource     | cUrl会话的变量
 设置HTTP请求头的值
 
 #### call->get($url, $data = array(), $dataType = null)
-通过GET方式发送带数据的请求,成功时触发`$callback`回调
+通过GET方式发送带数据的请求
+
+返回:  `Widget\Call` 新的call服务对象
 
 #### call->getJson($url, $data = array())
-通过GET方式发送带数据的请求,成功时触发`$callback`回调
+通过GET方式发送带数据的请求
+
+返回:  `Widget\Call` 新的call服务对象
 
 #### call->post($url, $data = array(), $dataType = null)
-通过POST方式发送带数据的请求,成功时触发`$callback`回调
+通过POST方式发送带数据的请求
+
+返回:  `Widget\Call` 新的call服务对象
 
 #### call->put($url, $data = array(), $dataType = null)
-通过PUT方式发送带数据的请求,成功时触发`$callback`回调
+通过PUT方式发送带数据的请求
+
+返回:  `Widget\Call` 新的call服务对象
 
 #### call->delete($url, $data = array(), $dataType = null)
-通过DELETE方式发送带数据的请求,成功时触发`$callback`回调
+通过DELETE方式发送带数据的请求
+
+返回:  `Widget\Call` 新的call服务对象
 
 #### call->patch($url, $data = array(), $dataType = null)
-通过PATCH方式发送带数据的请求,成功时触发`$callback`回调
+通过PATCH方式发送带数据的请求
+
+返回:  `Widget\Call` 新的call服务对象
