@@ -8,11 +8,8 @@ Active Record
 ### 创建一条新记录并保存
 
 ```php
-// 创建一个新的用户记录对象
+// 通过`create`方法创建一个新的用户记录对象
 /* @var $user \Widget\Db\Record */
-$user = widget()->db->user;
-
-// 或是通过`create`方法创建
 $user = widget()->db->create('user', array('groupId' => 1));
 
 // 设置对象的值
