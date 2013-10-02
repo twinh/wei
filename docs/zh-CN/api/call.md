@@ -83,6 +83,21 @@ widget()->call->get('http://example.com', function($data, $call){
 });
 ```
 
+### 通过`curlOptions`选项设置cURL会话选项
+
+call服务基于cURL实现,所有的cURL的会话选项都可以通过`curlOptions`批量设置.
+
+如设置请求代理:
+
+```php
+$call = $wei->call(array(
+    'url' => 'http://www.google.com/',
+    'curlOptions' => array(
+        CURLOPT_PROXY => '192.168.18.1:8087',
+    )
+));
+```
+
 ### 通过回调方法记录请求日志
 
 Call对象提供了`beforeSend`, `success`, `error`, `complete`四个回调方法,可以用来记录日志,上报请求耗时等.
