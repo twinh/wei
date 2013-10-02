@@ -205,6 +205,8 @@ namespace Widget
      * Region
      * @property Validator\CreditCard   $isCreditCard
      * @method   bool                   isCreditCard($input, $type = null) Check if the input is valid credit card number
+     * @property Validator\Phone        $isPhone
+     * @method   bool                   isPhone($input) Check if the input is valid phone number, contains only digit, +, - and spaces
      * @property Validator\Chinese      $isChinese
      * @method   bool                   isChinese($input) Check if the input contains only Chinese characters
      * @property Validator\IdCardCn     $isIdCardCn

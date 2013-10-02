@@ -196,7 +196,7 @@ return array(
     // oneOf
     '%name% must be passed by at least one rule' => '%name%至少需要满足以下任何一条规则',
 
-    // phoneCn
+    // phone, phoneCn
     '%name% must be valid phone number' => '%name%必须是有效的电话号码',
     '%name% must not be phone number' => '%name%不能是电话号码',
 
