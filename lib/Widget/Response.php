@@ -371,6 +371,7 @@ class Response extends Base
      */
     public function removeHeader($name)
     {
+        header_remove($name);
         unset($this->headers[$name]);
         return $this;
     }
