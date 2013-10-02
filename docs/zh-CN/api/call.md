@@ -158,6 +158,7 @@ http://stackoverflow.com/questions/6400300/php-curl-https-causing-exception-ssl-
 
 名称        | 类型         | 默认值  | 说明
 ------------|--------------|---------|------
+url         | string       | 无      | 请求的URL地址
 method      | string       | GET     | HTTP的请求方式,可以是`GET`, `POST`, `DELETE`, `PUT`, `PATCH`或任意其他服务器支持的方式
 contentType | string       | application/x-www-form-urlencoded; charset=UTF-8 | HTTP请求头内容类型
 cookies     | array        | array() | cookie数组,key是cookie的名称,value是cookie的值,cookie的值只能是字符串
