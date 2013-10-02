@@ -4278,6 +4278,20 @@
 <span class="p">});</span>
 </code></pre></div>
 
+<h3>通过<code>curlOptions</code>选项设置cURL会话选项</h3>
+
+<p>call服务基于cURL实现,所有的cURL的会话选项都可以通过<code>curlOptions</code>批量设置.</p>
+
+<p>如设置请求代理:</p>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$call</span> <span class="o">=</span> <span class="nv">$wei</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'http://www.google.com/'</span><span class="p">,</span>
+    <span class="s1">'curlOptions'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="nx">CURLOPT_PROXY</span> <span class="o">=&gt;</span> <span class="s1">'192.168.18.1:8087'</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</code></pre></div>
+
 <h3>通过回调方法记录请求日志</h3>
 
 <p>Call对象提供了<code>beforeSend</code>, <code>success</code>, <code>error</code>, <code>complete</code>四个回调方法,可以用来记录日志,上报请求耗时等.</p>
