@@ -420,8 +420,13 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
                     $this->triggerError('parser', $exception);
                 }
             } else {
-                preg_match('/[\d]{3} (.+?)\r/', $this->responseHeader, $matches);
-                $exception = new \ErrorException($matches[1], $statusCode);
+                if ($this->responseHeader) {
+                    preg_match('/[\d]{3} (.+?)\r/', $this->responseHeader, $matches);
+                    $statusText = $matches[1];
+                } else {
+                    $statusText = 'HTTP request error';
+                }
+                $exception = new \ErrorException($statusText, $statusCode);
                 $this->triggerError('http', $exception);
             }
         } else {
