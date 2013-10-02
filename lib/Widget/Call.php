@@ -273,7 +273,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     {
         // Prepare request
         $ch = $this->ch = curl_init();
-        curl_setopt_array($ch, $this->prepareCurlOpts());
+        curl_setopt_array($ch, $this->prepareCurlOptions());
         $this->beforeSend && call_user_func($this->beforeSend, $this, $ch);
 
         // Execute request
@@ -294,7 +294,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @return array
      */
-    protected function prepareCurlOpts()
+    protected function prepareCurlOptions()
     {
         $opts = array();
         $url = $this->url;
