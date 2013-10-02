@@ -95,7 +95,7 @@ API参考目录
 
 * [isDate](api/isDate.md) - 检查数据是否为合法的日期
 * [isDateTime](api/isDateTime.md) - 检查数据是否为合法的日期时间
-* [isTime](api/isTime) - 检查数据是否为合法的时间
+* [isTime](api/isTime.md) - 检查数据是否为合法的时间
 
 ##### 文件目录
 
