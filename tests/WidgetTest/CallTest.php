@@ -712,6 +712,14 @@ class CallTest extends TestCase
         }
     }
 
+    public function testToString()
+    {
+        $call = $this->call($this->url, array(
+            'data' => 'type=text'
+        ));
+        $this->assertEquals('default text', (string)$call);
+    }
+
     public function assertCalledEvents($events)
     {
         foreach ((array)$events as $event) {
