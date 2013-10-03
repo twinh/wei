@@ -193,7 +193,7 @@ class Validate extends Base
                 $rules = array($rules);
             } elseif (!is_array($rules)) {
                 throw new \InvalidArgumentException(sprintf(
-                    'Expected argument of type array, string or instance of ValidatorInterface, "%s" given',
+                    'Expected argument of type array, string or instance of Widget\Validator\BaseValidator, "%s" given',
                     is_object($rules) ? get_class($rules) : gettype($rules)
                 ));
             }
