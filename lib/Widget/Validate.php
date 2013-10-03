@@ -241,6 +241,7 @@ class Validate extends Base
 
                 if ($result) {
                     // The field data is empty and optional, skip the remaining validation rules
+                    /** @var $validator Validator\Required */
                     if ('required' === $rule && $validator->isInvalid($data)) {
                         break;
                     }
