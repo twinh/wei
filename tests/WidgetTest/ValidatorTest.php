@@ -64,6 +64,9 @@ class ValidatorTest extends TestCase
     public function testRuleNotDefined()
     {
         $this->validate(array(
+            'data' => array(
+                'username' => 'test'
+            ),
             'rules' => array(
                 'username' => array(
                     'noThisRule' => true,
@@ -597,6 +600,9 @@ class ValidatorTest extends TestCase
     public function testSetDetailMessageForValidator()
     {
         $validator = $this->validate(array(
+            'data' => array(
+                'username' => 'test'
+            ),
             'rules' => array(
                 'username' => array(
                     'email' => true,    // not valid
@@ -731,5 +737,26 @@ class ValidatorTest extends TestCase
         $this->assertContains('ABC', current($this->isLength->getMessages('ABC')));
         $this->assertContains('ABC', $this->isLength->getJoinedMessage("\n", 'ABC'));
         $this->assertEquals('This value', $this->isLength->getName());
+    }
+
+    public function testRequiredRuleNotBreakError()
+    {
+        $validator = $this->validate(array(
+            'data' => array(
+                'username' => null,
+            ),
+            'rules' => array(
+                'username' => array(
+                    'required' => true,
+                    'minLength' => 3
+                ),
+            )
+        ));
+
+        $this->assertFalse($validator->isValid());
+        // not call yet
+        $this->assertNull($validator->getRuleValidator('username', 'minLength'));
+        $invalidRules = $validator->getInvalidRules('username');
+        $this->assertEquals(array('required'), $invalidRules);
     }
 }

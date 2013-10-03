@@ -247,7 +247,7 @@ class Validate extends Base
                     }
                 } else {
                     // Break the validation flow when any field's rule is invalid
-                    if ($this->breakRule || $this->skip) {
+                    if ('required' === $rule || $this->breakRule || $this->skip) {
                         break;
                     }
                 }
