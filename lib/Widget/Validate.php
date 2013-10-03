@@ -11,10 +11,9 @@ namespace Widget;
 use Widget\Validator\BaseValidator;
 
 /**
- * The validator widget
+ * A validator service
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Is $is The validator manager, use to validate input quickly, create validator
  */
 class Validate extends Base
 {
