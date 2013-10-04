@@ -10,7 +10,7 @@ return array(
     // Type
     // is_xxx
     'array'     => 'array',
-    'bool'      => 'boolen',
+    'bool'      => 'boolean',
     'float'     => 'float',
     'int'       => 'integer',
     'integer'   => 'integer',
