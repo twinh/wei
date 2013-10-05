@@ -24,9 +24,9 @@ $password = '12@Wer@34';
 $hash = '$2y$10$fY5aEqo6uzXme2.6jIfFnei.J95RVOwZBKR3ueAkBIVCgpP2XbAga';
 
 if (wei()->password->verify($password, $hash)) {
-    echo '密码正确';
     // 通过session设置用户登录态
     wei()->session['user'] = 'xxx';
+    echo '密码正确';
 } else {
     echo '密码错误';
 }
@@ -46,11 +46,19 @@ cost      | int       | 10      | 加密密码所消耗的时间,应该在4~32�
 #### password->hash($password, $salt = null)
 加密密码
 
+返回: `string` 60个字符长度的字符串
+
 #### password->verify($password, $hash)
 检查密码是否正确
+
+返回: `boolean`
 
 #### password->generateSalt()
 生成适合密码加密的盐
 
+返回: `string` 22个字符长度的字符串
+
 #### password->getInfo($hash)
 获取加密密码的加密信息
+
+返回: `array`
