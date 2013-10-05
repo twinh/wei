@@ -12438,9 +12438,9 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <span class="nv">$hash</span> <span class="o">=</span> <span class="s1">'$2y$10$fY5aEqo6uzXme2.6jIfFnei.J95RVOwZBKR3ueAkBIVCgpP2XbAga'</span><span class="p">;</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">password</span><span class="o">-&gt;</span><span class="na">verify</span><span class="p">(</span><span class="nv">$password</span><span class="p">,</span> <span class="nv">$hash</span><span class="p">))</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'密码正确'</span><span class="p">;</span>
     <span class="c1">// 通过session设置用户登录态</span>
     <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">session</span><span class="p">[</span><span class="s1">'user'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'xxx'</span><span class="p">;</span>
+    <span class="k">echo</span> <span class="s1">'密码正确'</span><span class="p">;</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'密码错误'</span><span class="p">;</span>
 <span class="p">}</span>
@@ -12469,17 +12469,25 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <p>加密密码</p>
 
+<p>返回: <code>string</code> 60个字符长度的字符串</p>
+
 <h4>password-&gt;verify($password, $hash)</h4>
 
 <p>检查密码是否正确</p>
+
+<p>返回: <code>boolean</code></p>
 
 <h4>password-&gt;generateSalt()</h4>
 
 <p>生成适合密码加密的盐</p>
 
+<p>返回: <code>string</code> 22个字符长度的字符串</p>
+
 <h4>password-&gt;getInfo($hash)</h4>
 
 <p>获取加密密码的加密信息</p>
+
+<p>返回: <code>array</code></p>
   </section>
 
 <!-- api/pinyin
