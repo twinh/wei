@@ -96,6 +96,7 @@ namespace Widget
      * @method   string         gravatar($email, $size = null, $default = null, $rating = null) Generates a Gravatar URL for a specified email address
      * @property Logger         $logger A simple logger object, which is base on the Monolog
      * @method   bool           logger($level, $message) Logs with an arbitrary level
+     * @property Password       $password A wrapper class for password hashing functions
      * @property Pinyin         $pinyin An util object that converts Chinese words to phonetic alphabets
      * @method   string         pinyin($word) Converts Chinese words to phonetic alphabets
      * @property Uuid           $uuid A util object that generates a RANDOM UUID(universally unique identifier)
