@@ -203,7 +203,7 @@ class QueryBuilder
 
         $records = array();
         foreach ($data as $key => $row) {
-            $records[$key] = $this->db->create($this->table, $row);
+            $records[$key] = $this->db->create($this->table, $row, false);
         }
 
         return new Collection($records);
