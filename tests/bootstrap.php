@@ -10,9 +10,6 @@ if (is_file($file = __DIR__ . '/../vendor/autoload.php')) {
 
 // Localhost configuration
 $widget = widget(array(
-    't' => array(
-        'locale' => 'zh-CN'
-    ),
     'widget' => array(
         // Display all PHP error message
         'inis' => array(

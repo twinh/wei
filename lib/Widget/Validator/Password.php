@@ -149,7 +149,7 @@ class Password extends BaseValidator
 
             if ($needPresent > 0) {
                 $this->missingTypes = array_intersect_key($this->trans, $missing);
-                if (count($missing) == 1) {
+                if (count($missing) == $needPresent) {
                     $this->addError('missingCharType');
                 } else {
                     $this->missingCount = $needPresent;
