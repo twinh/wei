@@ -22,12 +22,13 @@ class TestCase extends BaseTestCase
 
     protected static $resource;
 
-    public function getInputs()
+    public function providerForInput()
     {
-        return array(
-            // boolen
+        // Initial test fixtures
+        $data = array(
+            // boolean
             true, false,
-            // interger
+            // integer
             1234, -123, 0123, 0x1A,
             // float
             1.234, 1.2e3, 7E-10,
@@ -35,8 +36,6 @@ class TestCase extends BaseTestCase
             'this is a simple string',
             // object
             new \stdClass, new \ArrayObject(array(1, 3)), new \DateTime(),
-            // FIXME
-            //new \SplFileInfo(__FILE__),
             // resource
             $this->createResource(),
             // null
@@ -44,9 +43,19 @@ class TestCase extends BaseTestCase
             // callback
             function(){}
         );
+
+        // Convert to test data
+        foreach ($data as &$value) {
+            $value = array($value);
+        }
+        
+        return $data;
     }
 
-    public function testInput()
+    /**
+     * @dataProvider providerForInput
+     */
+    public function testInput($input)
     {
         // Gets validator name WidgetTest\Validator\LengthTest => Length
         $name = $this->name ?: substr(get_class($this), strrpos(get_class($this), '\\') + 1, -4);
@@ -54,9 +63,9 @@ class TestCase extends BaseTestCase
 
         // The validator should accept any type of INPUT and do NOT raise any
         // exceptions or errors
-        foreach ($this->getInputs() as $input) {
+       // foreach ($this->getInputs() as $input) {
             $this->assertInternalType('boolean', $validator($input));
-        }
+        //}
     }
 
     public function createResource()
