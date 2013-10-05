@@ -237,6 +237,13 @@ class PasswordTest extends TestCase
                     'atLeastPresent' => 4
                 ),
                 'missingCharType'
+            ),
+            array(
+                '123@#$',
+                array(
+                    'atLeastPresent' => 4
+                ),
+                'missingChar'
             )
         );
     }

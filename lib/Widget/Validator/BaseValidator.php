@@ -225,7 +225,7 @@ abstract class BaseValidator extends Base
      */
     protected function loadTranslationMessages()
     {
-        if (!static::$translationMessagesLoaded) {
+        if (!static::$translationMessagesLoaded || 1) {
             $this->t->loadFromFile(dirname(__DIR__) . '/Resource/i18n/%s/validator.php');
             static::$translationMessagesLoaded = true;
         }

@@ -93,6 +93,8 @@ class Password extends BaseValidator
      */
     protected $missingType;
 
+    protected $missingTypes = array();
+
 
     /**
      * {@inheritdoc}
@@ -133,8 +135,7 @@ class Password extends BaseValidator
         }
 
         if (count($needTypes)) {
-            $txt = array_intersect_key($this->trans, array_flip($needTypes));
-            $this->missingType = implode(', ', $txt);
+            $this->missingTypes = array_intersect_key($this->trans, array_flip($needTypes));
             $this->addError('missingCharType');
             return false;
         }
@@ -147,13 +148,11 @@ class Password extends BaseValidator
             $needPresent = $this->atLeastPresent - ($total - $remains);
 
             if ($needPresent > 0) {
+                $this->missingTypes = array_intersect_key($this->trans, $missing);
                 if (count($missing) == 1) {
-                    $this->missingType = key($missing);
                     $this->addError('missingCharType');
                 } else {
                     $this->missingCount = $needPresent;
-                    $txt = array_intersect_key($this->trans, $missing);
-                    $this->missingType = implode(', ', $txt);
                     $this->addError('missingChar');
                 }
                 return false;
@@ -161,5 +160,21 @@ class Password extends BaseValidator
         }
 
         return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMessages($name = null)
+    {
+        if ($this->missingTypes) {
+            $this->loadTranslationMessages();
+            $types = array();
+            foreach ($this->missingTypes as $type) {
+                $types[] = $this->t($type);
+            }
+            $this->missingType = implode(', ', $types);
+        }
+        return parent::getMessages($name);
     }
 }

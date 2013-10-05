@@ -196,6 +196,18 @@ return array(
     // oneOf
     '%name% must be passed by at least one rule' => '%name%至少需要满足以下任何一条规则',
 
+    // password
+    'Password' => '密码',
+    '%name% must have a length greater than %minLength%' => '%name%的长度必须大于等于%minLength%',
+    '%name% must have a length lower than %maxLength%' => '%name%的长度必须小于等于%maxLength%',
+    '%name% must contains %missingType%' => '%name%必须包含%missingType%',
+    '%name% must contains %missingCount% of these characters : %missingType%' => '%name%必须包含%missingType%中的%missingCount%种',
+    'digits (0-9)' => '数字(0-9)',
+    'letters (a-z)' => '字母(a-z)',
+    'lowercase letters (a-z)' => '小写字母(a-z)',
+    'uppercase letters (A-Z)' => '大写字母(A-Z)',
+    'non-alphanumeric (For example: !, @, or #) characters' => '非字母数组字符(如!,@,#等)',
+
     // phone, phoneCn
     '%name% must be valid phone number' => '%name%必须是有效的电话号码',
     '%name% must not be phone number' => '%name%不能是电话号码',

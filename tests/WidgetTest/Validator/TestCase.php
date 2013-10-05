@@ -48,7 +48,7 @@ class TestCase extends BaseTestCase
         foreach ($data as &$value) {
             $value = array($value);
         }
-        
+
         return $data;
     }
 
