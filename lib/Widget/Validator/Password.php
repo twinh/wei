@@ -30,7 +30,7 @@ class Password extends BaseValidator
     /**
      * @var int
      */
-    protected $minLength = 6;
+    protected $minLength;
 
     /**
      * @var int
@@ -94,7 +94,8 @@ class Password extends BaseValidator
         }
 
         $length = strlen($input);
-        if ($length < $this->minLength) {
+
+        if ($this->minLength && $length < $this->minLength) {
             $this->addError('lengthTooShort');
             return false;
         }
@@ -136,7 +137,7 @@ class Password extends BaseValidator
 
             if ($needPresent > 0) {
                 if (count($missing) == 1) {
-                    $this->type = key($missing);
+                    $this->missingType = key($missing);
                     $this->addError('missingCharType');
                 } else {
                     $this->missingCount = $needPresent;
