@@ -73,7 +73,7 @@ widgets = [
   # view
     'escape', 'view',
   # others
-    'arr', 'config', 'env', 'error', 'gravatar', 'logger', 'pinyin', 'uuid',
+    'arr', 'config', 'env', 'error', 'gravatar', 'logger', 'password', 'pinyin', 'uuid',
   # third party
     'monolog', 
     'phpError'

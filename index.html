@@ -198,6 +198,7 @@
         <li><a href="#error">error</a></li>
         <li><a href="#gravatar">gravatar</a></li>
         <li><a href="#logger">logger</a></li>
+        <li><a href="#password">password</a></li>
         <li><a href="#pinyin">pinyin</a></li>
         <li><a href="#uuid">uuid</a></li>
       </ul>
@@ -12410,6 +12411,75 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <h4>logger-&gt;setLevel()</h4>
 
 <p>设置默认的日志级别</p>
+  </section>
+
+<!-- api/password
+  ================================================== -->
+  <section id="password">
+  <div class="page-header"><h1>Password</h1></div>
+
+<p>安全简单的密码加密,校验服务</p>
+
+<h2>代码范例</h2>
+
+<h3>加密密码</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$password</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">password</span><span class="o">-&gt;</span><span class="na">hash</span><span class="p">(</span><span class="s1">'12@Wer@34'</span><span class="p">);</span>
+
+<span class="c1">// 输出结果为60字节的字符串,类似如下</span>
+<span class="s1">'$2y$10$fY5aEqo6uzXme2.6jIfFnei.J95RVOwZBKR3ueAkBIVCgpP2XbAga'</span>
+</code></pre></div>
+
+<h3>校验密码是否正确</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 密码,一般从前台表单中获取</span>
+<span class="nv">$password</span> <span class="o">=</span> <span class="s1">'12@Wer@34'</span><span class="p">;</span>
+<span class="c1">// 加密过的密码,一般从数据库中取出来</span>
+<span class="nv">$hash</span> <span class="o">=</span> <span class="s1">'$2y$10$fY5aEqo6uzXme2.6jIfFnei.J95RVOwZBKR3ueAkBIVCgpP2XbAga'</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">password</span><span class="o">-&gt;</span><span class="na">verify</span><span class="p">(</span><span class="nv">$password</span><span class="p">,</span> <span class="nv">$hash</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'密码正确'</span><span class="p">;</span>
+    <span class="c1">// 通过session设置用户登录态</span>
+    <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">session</span><span class="p">[</span><span class="s1">'user'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'xxx'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'密码错误'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>cost</td>
+<td>int</td>
+<td>10</td>
+<td>加密密码所消耗的时间,应该在4~32之间</td>
+</tr></tbody>
+</table><h3>方法</h3>
+
+<h4>password-&gt;hash($password, $salt = null)</h4>
+
+<p>加密密码</p>
+
+<h4>password-&gt;verify($password, $hash)</h4>
+
+<p>检查密码是否正确</p>
+
+<h4>password-&gt;generateSalt()</h4>
+
+<p>生成适合密码加密的盐</p>
+
+<h4>password-&gt;getInfo($hash)</h4>
+
+<p>获取加密密码的加密信息</p>
   </section>
 
 <!-- api/pinyin
