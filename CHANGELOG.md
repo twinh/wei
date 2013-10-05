@@ -3,9 +3,47 @@ Changelog
 
 ## 0.9.6 (WIP)
 
+## 0.9.6-RC1 (2013-10-05)
+
 * Added ArrayAccess support for db record class
 * Fixed create db record error when key name is class property name
-* Added `getIterator` method for session widget
+* Added `getIterator` method for session service
+* Removed `weChatApp` deprecated FuncFlag
+* Added `beforeSend`/`afterSend` callback for response service
+* Added `reconnect` method for db service
+* Added `insertBatch` method for db service, refs #137
+* Added master-salve db support for db service, refs #133
+* Updated query exception to `PDOException`, while previous is `RuntimeException` and hard to catch
+* Added `toJson` method for record class
+* Added callbacks for record class
+* Added `reload` method for record class
+* Added `beforeValidate` callback for validate service
+* Added `removeField` method for validator service
+* Added `toArray` method for session service
+* Added `exists` method for session service
+* Fixed record status error after created
+* Renamed all methods from `inXxx` to `isXxx`
+* Updated return annotation from class name to $this for better code hint
+* Added `is` method for env service to detect custom env name
+* Renamed Widget::create to Widget::getContainer, add Widget::setContainer method
+* Improve record class `toArray` method
+* Added support to generate database table fields
+* Renamed inconsistent method from getRules to getFieldRules
+* Merged `is` validator into `validate` service
+* Removed developer option `disableSslVerification`, use cURL option `CURLOPT_SSL_VERIFYPEER` instead
+* Added support to parse response header only when CURLOPT_HEADER is true
+* Added `getCurlOption` and `setCurlOption` methods for call service
+* Added optional parameter $field for record class `isModified` method
+* Added `throwException` option for call service
+* Renamed db service globalCallbacks option to global
+* Added array parameters support for logging message
+* Added support for parsing and return muliti response headers
+* Added arrayAccess, count, foreach support for call service
+* Added `__toString` method for call service to return the response body
+* Added `phone` validator
+* Added `password` service to genrate secure password
+* Fixed validate flow not break when required rule is invalid
+* Added `password` validator
 
 ## 0.9.5 (2013-09-08)
 
