@@ -924,4 +924,12 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     {
         return $this->responseText;
     }
+
+    /**
+     * @return array
+     */
+    public function getCurlInfo()
+    {
+        return curl_getinfo($this->ch);
+    }
 }
