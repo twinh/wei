@@ -282,7 +282,6 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         // Handle response
         $this->handleResponse($response);
         $this->complete && call_user_func($this->complete, $this, $ch);
-        curl_close($ch);
 
         if ($this->throwException && $this->errorException) {
             throw $this->errorException;
@@ -931,5 +930,16 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function getCurlInfo()
     {
         return curl_getinfo($this->ch);
+    }
+
+    /**
+     * Close the cURL session
+     */
+    public function __destruct()
+    {
+        if ($this->ch) {
+            curl_close($this->ch);
+            unset($this->ch);
+        }
     }
 }
