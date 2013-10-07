@@ -30,7 +30,12 @@ class Password extends BaseValidator
      */
     protected $name = 'Password';
 
-    protected $trans = array(
+    /**
+     * The names of character type
+     *
+     * @var array
+     */
+    protected $typeNames = array(
         'digit' => 'digits (0-9)',
         'letter' => 'letters (a-z)',
         'lower' => 'lowercase letters (a-z)',
@@ -103,6 +108,15 @@ class Password extends BaseValidator
     /**
      * {@inheritdoc}
      */
+    public function __invoke($input, array $options = array())
+    {
+        $options && $this->storeOption($options);
+        return $this->isValid($input);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function doValidate($input)
     {
         if (!$this->isString($input)) {
@@ -139,7 +153,7 @@ class Password extends BaseValidator
         }
 
         if (count($needTypes)) {
-            $this->missingTypes = array_intersect_key($this->trans, array_flip($needTypes));
+            $this->missingTypes = array_intersect_key($this->typeNames, array_flip($needTypes));
             $this->addError('missingCharType');
             return false;
         }
@@ -152,7 +166,7 @@ class Password extends BaseValidator
             $needPresent = $this->atLeastPresent - ($total - $remains);
 
             if ($needPresent > 0) {
-                $this->missingTypes = array_intersect_key($this->trans, $missing);
+                $this->missingTypes = array_intersect_key($this->typeNames, $missing);
                 if (count($missing) == $needPresent) {
                     $this->addError('missingCharType');
                 } else {

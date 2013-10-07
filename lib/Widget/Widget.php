@@ -247,7 +247,7 @@ namespace Widget
      * @property Validator\Color        $isColor
      * @method   bool                   isColor($input) Check if the input is valid Hex color
      * @property Validator\Password     $isPassword
-     * @method   bool                   isPassword($input) Check if the input password is secure enough
+     * @method   bool                   isPassword($input, array $options = array()) Check if the input password is secure enough
      */
     class Widget extends Base
     {

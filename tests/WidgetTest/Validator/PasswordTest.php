@@ -7,7 +7,7 @@ class PasswordTest extends TestCase
     /**
      * @dataProvider providerForPassword
      */
-    public function testPassword($password, array $params)
+    public function testPassword($password, array $options)
     {
         $validator = $this->validate(array(
             'data' => array(
@@ -15,18 +15,19 @@ class PasswordTest extends TestCase
             ),
             'rules' => array(
                 'password' => array(
-                    'password' => $params
+                    'password' => $options
                 )
             )
         ));
 
         $this->assertTrue($validator->isValid());
+        $this->assertTrue($this->widget->isPassword($password, $options));
     }
 
     /**
      * @dataProvider providerForNotPassword
      */
-    public function testNotPassword($password, array $params, $messageTypes)
+    public function testNotPassword($password, array $options, $messageTypes)
     {
         /** @var $validator \Widget\Validate */
         $validator = $this->validate(array(
@@ -35,7 +36,7 @@ class PasswordTest extends TestCase
             ),
             'rules' => array(
                 'password' => array(
-                    'password' => $params
+                    'password' => $options
                 )
             )
         ));
@@ -46,6 +47,7 @@ class PasswordTest extends TestCase
         }
 
         $this->assertFalse($validator->isValid());
+        $this->assertFalse($this->widget->isPassword($password, $options));
     }
 
     public function providerForPassword()
