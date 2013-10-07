@@ -65,7 +65,7 @@ widgets = [
     'isChinese', 'isIdCardCn', 'isIdCardHk', 'isIdCardMo', 'isIdCardTw', 'isPhoneCn', 'isPostcodeCn', 'isQQ', 'isMobileCn',
     'isAllof', 'isNoneof', 'isOneof', 'isSomeof',
     'isRecordExists',
-    'isAll', 'isCallback', 'isColor',
+    'isAll', 'isCallback', 'isColor', 'isPassword',
   # request
     'request', 'cookie', 'session', 'ua', 'upload',
   # response
