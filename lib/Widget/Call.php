@@ -612,7 +612,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 
         $name = strtoupper($name);
         if (!isset($this->responseHeaders[$name])) {
-            return null;
+            return $first ? null : array();
         }
 
         if (is_array($this->responseHeaders[$name]) && $first) {
