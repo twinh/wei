@@ -144,6 +144,7 @@ API参考目录
 * [isAll](api/isAll.md) - 检查集合里的每一项是否符合指定的规则
 * [isCallback](api/isCallback.md) - 检查数据是否通过指定回调方法验证
 * [isColor](api/isColor.md) - 检查数据是否为有效的十六进制颜色
+* [isPassword](api/isPassword.md) - 检查组成密码的字符是否符合要求格式
 
 #### HTTP请求
 
