@@ -93,8 +93,12 @@ class Password extends BaseValidator
      */
     protected $missingType;
 
+    /**
+     * The temp variable for message parameter
+     *
+     * @var array
+     */
     protected $missingTypes = array();
-
 
     /**
      * {@inheritdoc}
