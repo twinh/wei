@@ -246,6 +246,8 @@ namespace Widget
      * @method   bool                   isCallback($input, \Closure $fn, $message = null) Check if the input is valid by specified callback
      * @property Validator\Color        $isColor
      * @method   bool                   isColor($input) Check if the input is valid Hex color
+     * @property Validator\Password     $isPassword
+     * @method   bool                   isPassword($input) Check if the input password is secure enough
      */
     class Widget extends Base
     {
