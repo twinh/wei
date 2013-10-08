@@ -3,6 +3,8 @@ Password
 
 安全简单的密码加密,校验服务
 
+基于[ircmaxell/password_compat](https://github.com/ircmaxell/password_compat)
+
 案例
 ----
 
@@ -62,3 +64,9 @@ cost      | int       | 10      | 加密密码所消耗的时间,应该在4~32�
 获取加密密码的加密信息
 
 返回: `array`
+
+相关链接
+--------
+
+* PHP密码加密相关函数 http://php.net/password
+* 兼容PHP5.5以下的密码加密函数 https://github.com/ircmaxell/password_compat
