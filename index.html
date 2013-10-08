@@ -10442,7 +10442,29 @@
 <span class="s1">'Yes'</span><span class="p">;</span>
 </code></pre></div>
 
-<h2>调用方式</h2>
+<h4>推荐的选项组合</h4>
+
+<ul>
+<li>
+<p>密码最少由6个字符组成,必须包含数字和字母</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isPassword</span><span class="p">(</span><span class="nv">$input</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'minLength'</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="s1">'needDigit'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="s1">'needLetter'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+<span class="p">));</span>
+</code></pre></div>
+</li>
+<li>
+<p>密码最少由6个字符组成,必须包含<code>数字</code>,<code>小写字母</code>,<code>大写字母</code>和<code>非数字字母的其他字符</code>中的3种</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isPassword</span><span class="p">(</span><span class="nv">$input</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'minLength'</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="s1">'atLeastPresent'</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+<span class="p">));</span>
+</code></pre></div>
+</li>
+</ul><h2>调用方式</h2>
 
 <h3>选项</h3>
 
@@ -10520,6 +10542,8 @@
 </table><h3>方法</h3>
 
 <h4>isPassword($input)</h4>
+
+<p>检查组成密码的字符是否符合要求格式</p>
   </section>
 
 <!-- api/request
