@@ -9842,19 +9842,15 @@
 <tr>
 <td>patternMessage</td>
 <td>string</td>
-<td>%name%必须是13位长度的数字,以13,15或18开头</td>
-<td>-</td>
-</tr>
-<tr>
-<td>negativeMessage</td>
-<td>string</td>
-<td>%name%必须不匹配模式"%pattern%"</td>
+<td>%name%必须是11位长度的数字,以13,14,15或18开头</td>
 <td>-</td>
 </tr>
 </tbody>
 </table><h3>方法</h3>
 
 <h4>isMobileCn($input)</h4>
+
+<p>检查数据是否为有效的中国手机号码</p>
   </section>
 
 <!-- api/isAllof
@@ -10401,6 +10397,46 @@
 <p>检查组成密码的字符是否符合要求格式</p>
 
 <h2>案例</h2>
+
+<h3>检查密码是否最少包含6个字符,由数字和字母组成</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$passwords</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'abc'</span><span class="p">,</span>
+    <span class="s1">'abcdef'</span><span class="p">,</span>
+    <span class="s1">'123456'</span><span class="p">,</span>
+    <span class="s1">'abc123'</span>
+<span class="p">);</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$passwords</span> <span class="k">as</span> <span class="nv">$password</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isPassword</span><span class="p">(</span><span class="nv">$password</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'minLength'</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">,</span>
+        <span class="s1">'needDigit'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="s1">'needLetter'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$result</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nb">print_r</span><span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isPassword</span><span class="o">-&gt;</span><span class="na">getMessages</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>输出结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="nx">lengthTooShort</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">密码的长度必须大于等于</span><span class="mi">6</span>
+<span class="p">)</span>
+<span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="nx">missingCharType</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">密码必须包含数字</span><span class="p">(</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="nx">missingCharType</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">密码必须包含字母</span><span class="p">(</span><span class="nx">a</span><span class="o">-</span><span class="nx">z</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nx">Yes</span>
+</code></pre></div>
 
 <h2>调用方式</h2>
 
