@@ -52,6 +52,27 @@ array(
 'Yes';
 ```
 
+#### 推荐的选项组合
+
+* 密码最少由6个字符组成,必须包含数字和字母
+    
+    ```php
+    wei()->isPassword($input, array(
+        'minLength' => 6,
+        'needDigit' => true,
+        'needLetter' => true,
+    ));
+    ```
+
+* 密码最少由6个字符组成,必须包含`数字`,`小写字母`,`大写字母`和`非数字字母的其他字符`中的3种
+    
+    ```php
+    wei()->isPassword($input, array(
+        'minLength' => 6,
+        'atLeastPresent' => 3,
+    ));
+    ```
+
 调用方式
 --------
 
@@ -78,3 +99,4 @@ missingChar            | %name%必须包含%missingType%中的%missingCount%种
 ### 方法
 
 #### isPassword($input)
+检查组成密码的字符是否符合要求格式
