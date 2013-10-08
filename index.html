@@ -10423,26 +10423,101 @@
 
 <h4>输出结果</h4>
 
-<div class="highlight"><pre><code class="php"><span class="k">Array</span>
-<span class="p">(</span>
-    <span class="p">[</span><span class="nx">lengthTooShort</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">密码的长度必须大于等于</span><span class="mi">6</span>
-<span class="p">)</span>
-<span class="k">Array</span>
-<span class="p">(</span>
-    <span class="p">[</span><span class="nx">missingCharType</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">密码必须包含数字</span><span class="p">(</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="p">)</span>
-<span class="p">)</span>
-<span class="k">Array</span>
-<span class="p">(</span>
-    <span class="p">[</span><span class="nx">missingCharType</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="err">密码必须包含字母</span><span class="p">(</span><span class="nx">a</span><span class="o">-</span><span class="nx">z</span><span class="p">)</span>
-<span class="p">)</span>
-<span class="nx">Yes</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// abc</span>
+<span class="k">array</span><span class="p">(</span>
+    <span class="s1">'lengthTooShort'</span> <span class="o">=&gt;</span> <span class="s1">'密码的长度必须大于等于6'</span>
+<span class="p">);</span>
+
+<span class="c1">// abcdef</span>
+<span class="k">array</span><span class="p">(</span>
+    <span class="s1">'missingCharType'</span> <span class="o">=&gt;</span> <span class="s1">'密码必须包含数字(0-9)'</span>
+<span class="p">);</span>
+
+<span class="c1">// 123456</span>
+<span class="k">array</span><span class="p">(</span>
+    <span class="s1">'missingCharType'</span> <span class="o">=&gt;</span> <span class="s1">'密码必须包含字母(a-z)'</span>
+<span class="p">);</span>
+
+<span class="c1">// abc123</span>
+<span class="s1">'Yes'</span><span class="p">;</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
 
 <h3>选项</h3>
 
-<h3>方法</h3>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>minLength</td>
+<td>int</td>
+<td>无</td>
+<td>密码的最小长度,常用<code>6</code>和<code>8</code>
+</td>
+</tr>
+<tr>
+<td>maxLength</td>
+<td>int</td>
+<td>无</td>
+<td>密码的最大长度</td>
+</tr>
+<tr>
+<td>needDigit</td>
+<td>bool</td>
+<td>false</td>
+<td>密码是否必须包含数字</td>
+</tr>
+<tr>
+<td>needLetter</td>
+<td>bool</td>
+<td>false</td>
+<td>密码是否必须包含字母</td>
+</tr>
+<tr>
+<td>needNonAlnum</td>
+<td>bool</td>
+<td>false</td>
+<td>密码是否必须包含非数字字母的其他字符,如!@#</td>
+</tr>
+<tr>
+<td>atLeastPresent</td>
+<td>int</td>
+<td>0</td>
+<td>密码必须包含<code>数字</code>,<code>小写字母</code>,<code>大写字母</code>和<code>非数字字母的其他字符</code>中的几种</td>
+</tr>
+</tbody>
+</table><h3>错误信息</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>信息</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>lengthTooShortMessage</td>
+<td>%name%的长度必须大于等于%minLength%</td>
+</tr>
+<tr>
+<td>lengthTooLongMessage</td>
+<td>%name%的长度必须小于等于%maxLength%</td>
+</tr>
+<tr>
+<td>missingCharTypeMessage</td>
+<td>%name%必须包含%missingType%</td>
+</tr>
+<tr>
+<td>missingChar</td>
+<td>%name%必须包含%missingType%中的%missingCount%种</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
 
 <h4>isPassword($input)</h4>
   </section>
