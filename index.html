@@ -12578,7 +12578,31 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h2>案例</h2>
 
-<h3>加密密码</h3>
+<h3>保存注册用户的密码</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 获取表单提交的密码字符串</span>
+<span class="nv">$password</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">'password'</span><span class="p">);</span>
+
+<span class="c1">// 生成在加密(散列)密码用的盐(干扰字符串)</span>
+<span class="nv">$salt</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">password</span><span class="o">-&gt;</span><span class="na">generateSalt</span><span class="p">();</span>
+
+<span class="c1">// 通过密码和盐加密密码</span>
+<span class="nv">$password</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">password</span><span class="o">-&gt;</span><span class="na">hash</span><span class="p">(</span><span class="nv">$password</span><span class="p">,</span> <span class="nv">$salt</span><span class="p">);</span>
+
+<span class="c1">// 构造用户信息数组,注意保存盐供后续使用</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="s1">'xxx'</span><span class="p">,</span>
+    <span class="s1">'salt'</span> <span class="o">=&gt;</span> <span class="nv">$salt</span><span class="p">,</span>
+    <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="nv">$password</span><span class="p">,</span>
+<span class="p">);</span>
+
+<span class="c1">// 保存到数据库</span>
+<span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="nv">$user</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>加密字符串</h3>
+
+<p>如果盐为空将自动生成</p>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$password</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">password</span><span class="o">-&gt;</span><span class="na">hash</span><span class="p">(</span><span class="s1">'12@Wer@34'</span><span class="p">);</span>
 
@@ -12617,7 +12641,7 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <td>cost</td>
 <td>int</td>
 <td>10</td>
-<td>加密密码所消耗的时间,应该在4~32之间</td>
+<td>加密算法递归的层数,应该在4~32之间</td>
 </tr></tbody>
 </table><h3>方法</h3>
 
@@ -12635,7 +12659,7 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h4>password-&gt;generateSalt()</h4>
 
-<p>生成适合密码加密的盐</p>
+<p>生成适合密码加密的盐(干扰字符串)</p>
 
 <p>返回: <code>string</code> 22个字符长度的字符串</p>
 
