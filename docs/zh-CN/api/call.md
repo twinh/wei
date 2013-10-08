@@ -75,12 +75,10 @@ widget()->call(array(
 
 ### 通过HTTP方法发送请求
 
+此处的`get`还可以是`post`, `delete`, `put`或`patch`,表示通过相应的HTTP方法发送请求
+
 ```php
-// 此处的`get`还可以是`post`, `delete`, `put`或`patch`,表示通过相应的HTTP方法发送请求
-widget()->call->get('http://example.com', function($data, $call){
-    // 成功时打印出服务器返回的结果
-    print_r($data);
-});
+$call = widget()->call->get('http://example.com', $data);
 ```
 
 ### 通过`curlOptions`选项设置cURL会话选项
