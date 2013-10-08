@@ -24,7 +24,7 @@ $call = widget()->call(array(
 
 if ($call->isSuccess()) {
     // 输出第一条的地址,如https://api.github.com/gists/xxxxxxx
-    var_dump($response[0]['url']);
+    var_dump($call[0]['url']);
 } else {
     // 输出错误的类型,如`curl`,完全错误类型请查看选项
     var_dump($call->getErrorStatus());
@@ -263,6 +263,26 @@ $ch         | resource     | cUrl会话的变量
 
 返回: `resource`
 
+#### call->getData()
+获取要发送到服务器的数据
+
+返回: `array`|`string`
+
+#### call->getIp()
+获取设置的服务器IP地址
+
+返回: `string`
+
+#### call->getMethod()
+获取HTTP请求的方式
+
+返回: `string`
+
+#### call->getUrl()
+获取HTTP请求的URL地址
+
+返回: `string`
+
 #### call->getResponseHeader($name)
 获取HTTP响应头的值
 
@@ -281,7 +301,12 @@ $ch         | resource     | cUrl会话的变量
 返回:  `Widget\Call` 新的call服务对象
 
 #### call->getJson($url, $data = array())
-通过GET方式发送带数据的请求
+通过GET方式发送带数据的请求,并将返回数据解析为JSON数组
+
+返回:  `Widget\Call` 新的call服务对象
+
+#### call->getJsonObject($url, $data = array())
+通过GET方式发送带数据的请求,并将返回数据解析为JSON对象
 
 返回:  `Widget\Call` 新的call服务对象
 
