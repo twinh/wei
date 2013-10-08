@@ -4225,7 +4225,7 @@
 
 <span class="k">if</span> <span class="p">(</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">isSuccess</span><span class="p">())</span> <span class="p">{</span>
     <span class="c1">// 输出第一条的地址,如https://api.github.com/gists/xxxxxxx</span>
-    <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$response</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'url'</span><span class="p">]);</span>
+    <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$call</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'url'</span><span class="p">]);</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="c1">// 输出错误的类型,如`curl`,完全错误类型请查看选项</span>
     <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getErrorStatus</span><span class="p">());</span>
@@ -4647,6 +4647,30 @@
 
 <p>返回: <code>resource</code></p>
 
+<h4>call-&gt;getData()</h4>
+
+<p>获取要发送到服务器的数据</p>
+
+<p>返回: <code>array</code>|<code>string</code></p>
+
+<h4>call-&gt;getIp()</h4>
+
+<p>获取设置的服务器IP地址</p>
+
+<p>返回: <code>string</code></p>
+
+<h4>call-&gt;getMethod()</h4>
+
+<p>获取HTTP请求的方式</p>
+
+<p>返回: <code>string</code></p>
+
+<h4>call-&gt;getUrl()</h4>
+
+<p>获取HTTP请求的URL地址</p>
+
+<p>返回: <code>string</code></p>
+
 <h4>call-&gt;getResponseHeader($name)</h4>
 
 <p>获取HTTP响应头的值</p>
@@ -4671,7 +4695,13 @@
 
 <h4>call-&gt;getJson($url, $data = array())</h4>
 
-<p>通过GET方式发送带数据的请求</p>
+<p>通过GET方式发送带数据的请求,并将返回数据解析为JSON数组</p>
+
+<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
+
+<h4>call-&gt;getJsonObject($url, $data = array())</h4>
+
+<p>通过GET方式发送带数据的请求,并将返回数据解析为JSON对象</p>
 
 <p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
 
