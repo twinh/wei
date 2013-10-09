@@ -55,10 +55,21 @@ class DateTime extends BaseValidator
      */
     protected $format = null;
 
+    /**
+     * @var string
+     */
     protected $before;
 
+    /**
+     * @var string
+     */
     protected $after;
 
+    /**
+     * The example datetime parameter for error message
+     *
+     * @var string
+     */
     protected $example;
 
     /**
@@ -66,7 +77,12 @@ class DateTime extends BaseValidator
      */
     public function __invoke($input, $format = null)
     {
-        $format && $this->storeOption('format', $format);
+        // Options
+        if (is_array($format)) {
+            $this->storeOption($format);
+        } elseif ($format) {
+            $this->storeOption('format', $format);
+        }
 
         return $this->isValid($input);
     }
