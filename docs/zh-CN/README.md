@@ -62,12 +62,12 @@ API参考目录
 * [isDigit](api/isDigit.md) - 检查数据是否只由数字组成
 * [isDivisibleBy](api/isDivisibleBy.md) - 检查数据是否能被指定的除数整除
 * [isDoubleByte](api/isDoubleByte.md) - 检查数据是否只由双字节字符组成
-* [isEmpty](api/isEmpty.md) - 检查数据是否为空(允许空格)
 * [isEndsWith](api/isEndsWith.md) - 检查数据是否以指定字符串结尾
 * [isIn](api/isIn.md) - 检查数据是否在指定的数组中
 * [isLowercase](api/isLowercase.md) - 检查数据是否为小写
 * [isNull](api/isNull.md) - 检查数据是否为null
 * [isNumber](api/isNumber.md) - 检查数据是否为有效数字
+* [isPresent](api/isPresent.md) - 检查数据是否不为空(允许空格)
 * [isRegex](api/isRegex.md) - 检查数据是否匹配指定的正则表达式
 * [isRequired](api/isRequired.md) - 检查数据是否为空(用于组合验证,如果允许为空且数据为空,则不对数据进行剩余规则的校验)
 * [isStartsWith](api/isStartsWith.md) - 检查数据是否以指定字符串开头

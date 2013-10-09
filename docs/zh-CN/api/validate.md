@@ -240,7 +240,7 @@ $bool = widget()->isDigit($age);
 $bool = widget()->is('digit', $age);
 ```
 
-##### 案例:区分`required`,`notBlank`和`notEmpty`验证规则
+##### 案例:区分`required`,`notBlank`和`present`验证规则
 
 这三个验证规则都用于检查数据不能为空,它们在使用场景和检查的数据内容稍有不同.
 
@@ -258,7 +258,7 @@ $bool = widget()->is('digit', $age);
         )
     ));
     ```
-* `notEmpty`和`notBlank`既可以用于验证器规则中,又可以独立作为验证对象
+* `present`和`notBlank`既可以用于验证器规则中,又可以独立作为验证对象
 
     ```php
     // 作为验证器规则
@@ -266,7 +266,7 @@ $bool = widget()->is('digit', $age);
         'rules' => array(
             'email' => array(
                 'required' => true,
-                'notEmpty' => true,
+                'present' => true,
                 'email' => true,
             )
         )
@@ -276,8 +276,8 @@ $bool = widget()->is('digit', $age);
     if ($this->isBlank($input)) {
         print_r($this->isBlank->getMessages());
     }
-    if ($this->isEmpty($input)) {
-        print_r($this->isEmpty->getMessages());
+    if ($this->isPresent($input)) {
+        print_r($this->isPresent->getMessages());
     }
     ```
 
