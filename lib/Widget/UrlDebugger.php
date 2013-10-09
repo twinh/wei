@@ -9,9 +9,10 @@
 namespace Widget;
 
 /**
- * The widget allows inject data from URL query string
+ * A service that allows inject data from HTTP request parameters
  *
  * @author      Twin Huang <twinhuang@qq.com>
+ * @property    Request    $request A service that handles the HTTP request data
  */
 class UrlDebugger extends Base
 {
@@ -23,14 +24,11 @@ class UrlDebugger extends Base
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-
-        if ($this->widget->isDebug()) {
-            $this->inject();
-        }
+        $this->inject();
     }
 
     /**
-     * Inject widget parameter by specified query parameter
+     * Inject request parameters
      */
     public function inject()
     {

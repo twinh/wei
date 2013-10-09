@@ -50,7 +50,7 @@ namespace Widget
      * @method   \Widget\Call   call(array $options) Create a new call object and execute
      *
      * HTTP Request
-     * @property Request    $request A object that handles the HTTP request data
+     * @property Request    $request A service that handles the HTTP request data
      * @method   mixed      request($name, $default = null) Returns a stringify request parameter value
      * @property Cookie     $cookie A object that handles the HTTP request and response cookies
      * @method   mixed      cookie($key, $value = null, $options = array()) Get or set cookie
