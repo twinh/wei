@@ -8099,7 +8099,35 @@
 
 <h3>检查"2013-01-01"是否为合法的日期</h3>
 
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isDate</span><span class="p">(</span><span class="s1">'2013-01-01'</span><span class="p">))</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isDate</span><span class="p">(</span><span class="s1">'2013-01-01'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
+</code></pre></div>
+
+<h3>检查"2046-01-01"是否在今天之前(不包含今天)</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isDate</span><span class="p">(</span><span class="s1">'2046-01-01'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'before'</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d'</span><span class="p">))))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'No'</span>
+</code></pre></div>
+
+<h3>检查"2046-01-01"是否在今天之后(不包含今天)</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isDate</span><span class="p">(</span><span class="s1">'2046-01-01'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'after'</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d'</span><span class="p">))))</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
@@ -8133,13 +8161,13 @@
 <td>before</td>
 <td>string</td>
 <td>无</td>
-<td>日期的最晚时间</td>
+<td>输入的日期应该早于<code>before</code>的值</td>
 </tr>
 <tr>
 <td>after</td>
 <td>string</td>
 <td>无</td>
-<td>日期的最早时间</td>
+<td>输入的日期应该晚于<code>after</code>的值</td>
 </tr>
 </tbody>
 </table><p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php" target="_blank">date</a>函数的格式说明.</p>
