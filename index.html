@@ -90,12 +90,12 @@
         <li><a href="#isDigit">isDigit</a></li>
         <li><a href="#isDivisibleby">isDivisibleBy</a></li>
         <li><a href="#isDoubleByte">isDoubleByte</a></li>
-        <li><a href="#isEmpty">isEmpty</a></li>
         <li><a href="#isEndsWith">isEndsWith</a></li>
         <li><a href="#isIn">isIn</a></li>
         <li><a href="#isLowercase">isLowercase</a></li>
         <li><a href="#isNull">isNull</a></li>
         <li><a href="#isNumber">isNumber</a></li>
+        <li><a href="#isPresent">isPresent</a></li>
         <li><a href="#isRegex">isRegex</a></li>
         <li><a href="#isRequired">isRequired</a></li>
         <li><a href="#isStartsWith">isStartsWith</a></li>
@@ -6323,75 +6323,6 @@
 <p>检查数据是否只由双字节字符组成</p>
   </section>
 
-<!-- api/isEmpty
-  ================================================== -->
-  <section id="isEmpty">
-  <div class="page-header"><h1>isEmpty()</h1></div>
-
-<p>检查数据是否为空(允许空格)</p>
-
-<h2>案例</h2>
-
-<h3>检查"abc"是否为空</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isEmpty</span><span class="p">(</span><span class="s1">'abc'</span><span class="p">))</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<h4>运行结果</h4>
-
-<div class="highlight"><pre><code class="php"><span class="s1">'No'</span>
-</code></pre></div>
-
-<h3>检查空格字符串是否为空</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isEmpty</span><span class="p">(</span><span class="s1">' '</span><span class="p">))</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<h4>运行结果</h4>
-
-<div class="highlight"><pre><code class="php"><span class="s1">'No'</span>
-</code></pre></div>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>emptyMessage</td>
-<td>string</td>
-<td>%name%必须为空</td>
-<td>-</td>
-</tr>
-<tr>
-<td>negativeMessage</td>
-<td>string</td>
-<td>%name%不能为空</td>
-<td>-</td>
-</tr>
-</tbody>
-</table><h3>方法</h3>
-
-<h4>isEmpty($input)</h4>
-
-<p>检查数据是否为空(允许空格)</p>
-  </section>
-
 <!-- api/isEndsWith
   ================================================== -->
   <section id="isEndsWith">
@@ -6744,6 +6675,73 @@
 <h4>isNumber($input)</h4>
 
 <p>检查数据是否为有效数字</p>
+  </section>
+
+<!-- api/isPresent
+  ================================================== -->
+  <section id="isPresent">
+  <div class="page-header"><h1>isPresent</h1></div>
+
+<p>检查数据是否为空(允许空格)</p>
+
+<h2>案例</h2>
+
+<h3>检查"abc"是否不为空</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isPresent</span><span class="p">(</span><span class="s1">'abc'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
+</code></pre></div>
+
+<h3>检查空格字符串是否不为空</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">widget</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isPresent</span><span class="p">(</span><span class="s1">' '</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>错误信息</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>信息</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>emptyMessage</td>
+<td>%name%必须为空</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>%name%不能为空</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
+
+<h4>isPresent($input)</h4>
+
+<p>检查数据是否不为空(允许空格)</p>
   </section>
 
 <!-- api/isRegex
