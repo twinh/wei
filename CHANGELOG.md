@@ -1,7 +1,16 @@
 Changelog
 =========
 
-## 0.9.6 (WIP)
+## 0.9.7 (WIP)
+
+## 0.9.6 (2013-10-09)
+
+* Fixed record status error when record is created from query builder
+* Added `getCurlInfo` method for call service
+* Close the cURL session on call service destruct
+* Added doc for password service and isPassword validator
+* Added options parameter for datetime validators
+* Renamed isEmpty validator to isPresent
 
 ## 0.9.6-RC1 (2013-10-05)
 
