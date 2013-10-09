@@ -254,6 +254,7 @@ class Db extends Base
         if (!$this->pdo) {
             $this->beforeConnect && call_user_func($this->beforeConnect, $this);
 
+            $dsn = $this->getDsn();
             $attrs = $this->attrs + array(
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_STRINGIFY_FETCHES => true,
@@ -261,7 +262,6 @@ class Db extends Base
             );
 
             try {
-                $dsn = $this->getDsn();
                 $this->pdo = new PDO($dsn, $this->user, $this->password, $attrs);
             } catch (\PDOException $e) {
                 $this->connectFails && call_user_func($this->connectFails, $this, $e);
