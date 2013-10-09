@@ -3,9 +3,9 @@ Validate
 
 检查数组或对象中每一个元素是否能通过指定规则的验证
 
-Widget验证器是参考[jQuery Validation](http://bassistance.de/jquery-plugins/jquery-plugin-validation/)
+`Validate`服务是参考[jQuery Validation](http://bassistance.de/jquery-plugins/jquery-plugin-validation/)
 开发的数据验证器,她与`jQuery Validation`有着很多相似的地方,所以如果你使用过
-`jQuery Validation`,使用Widget验证器将非常容易上手.
+`jQuery Validation`,使用`Validate`服务将非常容易上手.
 
 案例
 ----
