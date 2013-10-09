@@ -126,8 +126,8 @@ namespace Widget
      * @method   bool                   isDivisibleBy($input, $divisor) Check if the input could be divisible by specified divisor
      * @property Validator\DoubleByte   $isDoubleByte
      * @method   bool                   isDoubleByte($input) Check if the input contains only double characters
-     * @property Validator\EmptyValue   $isEmpty
-     * @method   bool                   isEmpty($input) Check if the input is empty
+     * @property Validator\Present      $isPresent
+     * @method   bool                   isPresent($input) Check if the input is empty
      * @property Validator\EndsWith     $isEndsWith
      * @method   bool                   isEndsWith($input, $findMe, $case = false) Check if the input is ends with specified string
      * @property Validator\In           $isIn
