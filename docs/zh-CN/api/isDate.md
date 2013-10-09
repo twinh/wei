@@ -9,7 +9,39 @@ isDate
 ### 检查"2013-01-01"是否为合法的日期
 
 ```php
-if (widget()->isDate('2013-01-01')) {
+if (wei()->isDate('2013-01-01')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+
+#### 运行结果
+
+```php
+'Yes'
+```
+
+### 检查"2046-01-01"是否在今天之前(不包含今天)
+
+```php
+if (wei()->isDate('2046-01-01', array('before' => date('Y-m-d')))) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+
+#### 运行结果
+
+```php
+'No'
+```
+
+### 检查"2046-01-01"是否在今天之后(不包含今天)
+
+```php
+if (wei()->isDate('2046-01-01', array('after' => date('Y-m-d')))) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -30,8 +62,8 @@ if (widget()->isDate('2013-01-01')) {
 名称    | 类型    | 默认值  | 说明
 --------|---------|---------|------
 format  | string  | Y-m-d   | 用于匹配数据的日期格式
-before  | string  | 无      | 日期的最晚时间
-after   | string  | 无      | 日期的最早时间
+before  | string  | 无      | 输入的日期应该早于`before`的值
+after   | string  | 无      | 输入的日期应该晚于`after`的值
 
 完整的日期格式可以查看PHP官方文档中关于[date](http://php.net/manual/zh/function.date.php)函数的格式说明.
 
