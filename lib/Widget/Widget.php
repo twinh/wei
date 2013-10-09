@@ -254,7 +254,7 @@ namespace Widget
         /**
          * Version
          */
-        const VERSION = '0.9.6-RC1';
+        const VERSION = '0.9.6';
 
         /**
          * The configurations for all objects
