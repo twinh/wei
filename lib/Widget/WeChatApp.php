@@ -212,6 +212,16 @@ class WeChatApp extends Base
     }
 
     /**
+     * Check if the request is verify the token string
+     *
+     * @return bool
+     */
+    public function isVerifyToken()
+    {
+        return isset($this->query['echostr']);
+    }
+
+    /**
      * Attach a callback which triggered when user subscribed you
      *
      * @param \Closure $fn
