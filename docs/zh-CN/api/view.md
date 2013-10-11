@@ -16,14 +16,14 @@ widget()->view->setDirs(__DIR__ . '/fixtures');
 echo widget()->view->render('template.php');
 ```
 
-文件`template.php`
+**文件`template.php`**
 
 ```php
 <?php $this->layout('layout.php') ?>
 Template Content
 ```
 
-文件`layout.php`
+**文件`layout.php`**
 
 ```php
 Layout Header
@@ -31,7 +31,7 @@ Layout Header
 Layout Footer
 ```
 
-#### 运行结果
+**运行结果**
 
 ```php
 'Layout Header
@@ -41,25 +41,25 @@ Layout Footer'
 
 > #### 注意
 >
-> 模板的名称要带上文件后缀
+> 模板的名称要包含文件后缀,如`template.php`
 
 ### 预定义视图变量
 
 在视图文件中,已经预定义了服务容器对象`$wei`,可以直接调用任意服务.
 
-加载视图文件
+**加载视图文件**
 
 ```php
 echo wei()->view->render('index.php');
 ```
 
-视图文件`index.php`
+**视图文件`index.php`**
 
 ```php
 <?= $wei->escape('<a href="xss">Click me!</a>') ?>
 ```
 
-输出结果
+**输出结果的源码**
 
 ```php
 &lt;a href=&quot;xss&quot;&gt;Click me!&lt;/a&gt;
