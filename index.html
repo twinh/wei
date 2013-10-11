@@ -11918,7 +11918,7 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>模板的名称要包含文件后缀,如<code>template.php</code></p>
 </blockquote>
 
-<h3>预定义视图变量</h3>
+<h3>使用预定义视图变量</h3>
 
 <p>在视图文件中,已经预定义了服务容器对象<code>$wei</code>,可以直接调用任意服务.</p>
 
@@ -11935,6 +11935,17 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p><strong>输出结果的源码</strong></p>
 
 <div class="highlight"><pre><code class="php"><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=&amp;</span><span class="nx">quot</span><span class="p">;</span><span class="nx">xss</span><span class="o">&amp;</span><span class="nx">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">Click</span> <span class="nx">me</span><span class="o">!&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="o">/</span><span class="nx">a</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</code></pre></div>
+
+<h3>自定义视图助手</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 定义名称为`loginUrl`的视图助手方法</span>
+<span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">loginUrl</span>  <span class="o">=</span> <span class="k">function</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="s1">'/user/login?from='</span> <span class="o">.</span> <span class="nb">urlencode</span><span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">getUrl</span><span class="p">());</span>
+<span class="p">};</span>
+
+<span class="c1">// 在视图文件中调用</span>
+<span class="k">echo</span> <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">loginUrl</span><span class="p">();</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
