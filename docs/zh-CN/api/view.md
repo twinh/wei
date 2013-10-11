@@ -61,13 +61,13 @@ echo wei()->view->render('index.php');
 
 **输出结果的源码**
 
-```php
+```
 &lt;a href=&quot;xss&quot;&gt;Click me!&lt;/a&gt;
 ```
 
 ### 自定义视图助手
 
-```
+```php
 // 定义名称为`loginUrl`的视图助手方法
 wei()->view->loginUrl  = function(){
     return '/user/login?from=' . urlencode(wei()->request->getUrl());
