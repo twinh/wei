@@ -7,6 +7,7 @@ View
 ----
 
 ### 渲染带布局的模板`template.php`
+
 ```php
 // 设置模板所在的目录
 widget()->view->setDirs(__DIR__ . '/fixtures');
@@ -31,10 +32,33 @@ Layout Footer
 ```
 
 #### 运行结果
+
 ```php
 'Layout Header
 Template Content
 Layout Footer'
+```
+
+### 预定义视图变量
+
+在视图文件中,已经预定义了服务容器对象`$wei`,可以直接调用任意服务.
+
+加载视图文件
+
+```php
+echo wei()->view->render('index.php');
+```
+
+视图文件`index.php`
+
+```php
+<?= $wei->escape('<a href="xss">Click me!</a>') ?>
+```
+
+输出结果
+
+```php
+&lt;a href=&quot;xss&quot;&gt;Click me!&lt;/a&gt;
 ```
 
 调用方式
