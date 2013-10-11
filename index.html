@@ -11912,6 +11912,25 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <span class="s1">Layout Footer'</span>
 </code></pre></div>
 
+<h3>预定义视图变量</h3>
+
+<p>在视图文件中,已经预定义了服务容器对象<code>$wei</code>,可以直接调用任意服务.</p>
+
+<p>加载视图文件</p>
+
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'index.php'</span><span class="p">);</span>
+</code></pre></div>
+
+<p>视图文件<code>index.php</code></p>
+
+<div class="highlight"><pre><code class="php"><span class="o">&lt;?=</span> <span class="nv">$wei</span><span class="o">-&gt;</span><span class="na">escape</span><span class="p">(</span><span class="s1">'&lt;a href="xss"&gt;Click me!&lt;/a&gt;'</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+
+<p>输出结果</p>
+
+<div class="highlight"><pre><code class="php"><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=&amp;</span><span class="nx">quot</span><span class="p">;</span><span class="nx">xss</span><span class="o">&amp;</span><span class="nx">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">Click</span> <span class="nx">me</span><span class="o">!&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="o">/</span><span class="nx">a</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</code></pre></div>
+
 <h2>调用方式</h2>
 
 <h3>选项</h3>
