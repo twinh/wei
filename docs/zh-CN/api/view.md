@@ -43,7 +43,7 @@ Layout Footer'
 >
 > 模板的名称要包含文件后缀,如`template.php`
 
-### 预定义视图变量
+### 使用预定义视图变量
 
 在视图文件中,已经预定义了服务容器对象`$wei`,可以直接调用任意服务.
 
@@ -63,6 +63,18 @@ echo wei()->view->render('index.php');
 
 ```php
 &lt;a href=&quot;xss&quot;&gt;Click me!&lt;/a&gt;
+```
+
+### 自定义视图助手
+
+```
+// 定义名称为`loginUrl`的视图助手方法
+wei()->view->loginUrl  = function(){
+    return '/user/login?from=' . urlencode(wei()->request->getUrl());
+};
+
+// 在视图文件中调用
+echo $view->loginUrl();
 ```
 
 调用方式
