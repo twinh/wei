@@ -11912,6 +11912,12 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <span class="s1">Layout Footer'</span>
 </code></pre></div>
 
+<blockquote>
+<h4>注意</h4>
+
+<p>模板的名称要带上文件后缀</p>
+</blockquote>
+
 <h3>预定义视图变量</h3>
 
 <p>在视图文件中,已经预定义了服务容器对象<code>$wei</code>,可以直接调用任意服务.</p>
@@ -11926,7 +11932,7 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <div class="highlight"><pre><code class="php"><span class="o">&lt;?=</span> <span class="nv">$wei</span><span class="o">-&gt;</span><span class="na">escape</span><span class="p">(</span><span class="s1">'&lt;a href="xss"&gt;Click me!&lt;/a&gt;'</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
 
-<p>输出结果</p>
+<p>输出结果的源码</p>
 
 <div class="highlight"><pre><code class="php"><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=&amp;</span><span class="nx">quot</span><span class="p">;</span><span class="nx">xss</span><span class="o">&amp;</span><span class="nx">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">Click</span> <span class="nx">me</span><span class="o">!&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="o">/</span><span class="nx">a</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span>
 </code></pre></div>
@@ -11947,7 +11953,7 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <td>vars</td>
 <td>array</td>
 <td>无</td>
-<td>模板变量</td>
+<td>模板变量数组</td>
 </tr>
 <tr>
 <td>dirs</td>
@@ -11967,10 +11973,6 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <h4>view($name, $vars = array())</h4>
 
 <p>渲染指定名称的模板</p>
-
-<h4>view()</h4>
-
-<p>获取视图对象</p>
 
 <h4>view-&gt;render($name, $vars = array())</h4>
 
