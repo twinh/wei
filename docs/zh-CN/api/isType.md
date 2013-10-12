@@ -9,7 +9,7 @@ isType
 ### 检查"abc"是否为字符串
 
 ```php
-if (widget()->isType('abc', 'string')) {
+if (wei()->isType('abc', 'string')) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -25,7 +25,7 @@ if (widget()->isType('abc', 'string')) {
 ### 检查new ArrayObject()是否为Traversable类型
 
 ```php
-if (widget()->isType(new ArrayObject(), 'Traversable')) {
+if (wei()->isType(new ArrayObject(), 'Traversable')) {
     echo 'Yes';
 } else {
     echo 'No';

@@ -10,7 +10,7 @@ Active Record
 ```php
 // 通过`create`方法创建一个新的用户记录对象
 /* @var $user \Widget\Db\Record */
-$user = widget()->db->create('user', array('groupId' => 1));
+$user = wei()->db->create('user', array('groupId' => 1));
 
 // 设置对象的值
 $user->username = 'twin';
@@ -24,10 +24,10 @@ $user->save();
 
 ```php
 // 查找主键为1的用户
-$user = widget()->db->find('user', '1');
+$user = wei()->db->find('user', '1');
 
 // 或是通过魔术方法更自然地获取对象
-$user = widget()->db->user(1);
+$user = wei()->db->user(1);
 
 // 更新对象的值
 $user->username = 'twin';
@@ -40,7 +40,7 @@ $user->save();
 
 ```php
 // 查找主键为1的用户
-$user = widget()->db->user(1);
+$user = wei()->db->user(1);
 
 // 删除该记录
 $user->delete();

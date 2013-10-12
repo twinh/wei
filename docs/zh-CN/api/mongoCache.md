@@ -10,16 +10,16 @@ MongoCache
 
 ```php
 // 设置缓存,返回true
-widget()->mongoCache('key', 'value');
+wei()->mongoCache('key', 'value');
 
 // 获取缓存,返回'value'
-widget()->mongoCache('key');
+wei()->mongoCache('key');
 ```
 
 ### 设置60秒后就过期的缓存
 
 ```php
-widget()->mongoCache('key', 'value', 60);
+wei()->mongoCache('key', 'value', 60);
 ```
 
 更多案例请查看[Cache](cache.md)对象

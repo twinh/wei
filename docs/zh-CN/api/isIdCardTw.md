@@ -8,7 +8,7 @@ isIdCardTw
 
 ### 检查"A122501945"是否为有效的台湾身份证
 ```php
-if (widget()->isIdCardTw('A122501945')) {
+if (wei()->isIdCardTw('A122501945')) {
     echo 'Yes';
 } else {
     echo 'No';

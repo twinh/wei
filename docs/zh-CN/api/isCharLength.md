@@ -9,7 +9,7 @@ isCharLength
 ### 检查"微框架"的长度是否为3
 
 ```php
-if (widget()->isCharLength('微框架', 3)) {
+if (wei()->isCharLength('微框架', 3)) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -25,7 +25,7 @@ if (widget()->isCharLength('微框架', 3)) {
 ### 检查"微框架"的长度是否在3到6之间
 
 ```php
-if (widget()->isCharLength('微框架', 3, 6)) {
+if (wei()->isCharLength('微框架', 3, 6)) {
     echo 'Yes';
 } else {
     echo 'No';

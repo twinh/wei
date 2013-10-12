@@ -8,7 +8,7 @@ isDigit
 
 ### 检查"abc123"是否为数字
 ```php
-if (widget()->isDigit('abc123')) {
+if (wei()->isDigit('abc123')) {
     echo 'Yes';
 } else {
     echo 'No';

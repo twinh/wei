@@ -8,7 +8,7 @@ isUuid
 
 ### 检查"00010203-0405-0607-0809-0A0B0C0D0E0F"是否为有效的UUID
 ```php
-if (widget()->isUuid('00010203-0405-0607-0809-0A0B0C0D0E0F')) {
+if (wei()->isUuid('00010203-0405-0607-0809-0A0B0C0D0E0F')) {
     echo 'Yes';
 } else {
     echo 'No';

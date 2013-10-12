@@ -9,7 +9,7 @@ isPresent
 ### 检查"abc"是否不为空
 
 ```php
-if (widget()->isPresent('abc')) {
+if (wei()->isPresent('abc')) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -25,7 +25,7 @@ if (widget()->isPresent('abc')) {
 ### 检查空格字符串是否不为空
 
 ```php
-if (widget()->isPresent(' ')) {
+if (wei()->isPresent(' ')) {
     echo 'Yes';
 } else {
     echo 'No';

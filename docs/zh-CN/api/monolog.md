@@ -8,7 +8,7 @@ Monolog
 
 ### 记录一条DEBUG级别的日志
 ```php
-widget()->monolog()->debug('The logger is called');
+wei()->monolog()->debug('The logger is called');
 ```
 
 调用方式

@@ -11,13 +11,13 @@ Session
 验证码页面
 
 ```php
-widget()->session('verfiyCode', 'WIDG');
+wei()->session('verfiyCode', 'WIDG');
 ```
 
 校验页面
 
 ```php
-if (widget()->session('verfiyCode') == widget()->request('verfiyCode')) {
+if (wei()->session('verfiyCode') == wei()->request('verfiyCode')) {
     echo '验证码正确';
 } else {
     echo '验证码错误';

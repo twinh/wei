@@ -8,7 +8,7 @@ isExists
 
 ### 检查路径"/notfound/directory"是否存在
 ```php
-if (widget()->isExists('/notfound/directory')) {
+if (wei()->isExists('/notfound/directory')) {
     echo 'Yes';
 } else {
     echo 'No';

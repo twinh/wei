@@ -12,7 +12,7 @@ $rules = array(
     'digit' => true,
     'maxLength' => 2
 );
-if (widget()->isOneOf('abc', $rules)) {
+if (wei()->isOneOf('abc', $rules)) {
     echo 'Yes';
 } else {
     echo 'No';

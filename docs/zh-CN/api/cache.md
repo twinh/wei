@@ -10,16 +10,16 @@ Cache
 
 ```php
 // 设置缓存,成功返回true,失败返回false
-widget()->cache('key', 'value');
+wei()->cache('key', 'value');
 
 // 获取缓存,返回'value'
-widget()->cache('key');
+wei()->cache('key');
 ```
 
 ### 设置60秒后就过期的缓存
 
 ```php
-widget()->cache('key', 'value', 60);
+wei()->cache('key', 'value', 60);
 ```
 
 ### 配置缓存驱动为`Redis`
@@ -27,7 +27,7 @@ widget()->cache('key', 'value', 60);
 ```php
 
 // 配置缓存驱动为`redis`,同时配置redis的服务器地址
-widget(array(
+wei(array(
 	'cache' => array(
 		'driver' => 'redis'
 	),
@@ -37,7 +37,7 @@ widget(array(
 ));
 
 // 获取缓存对象
-$cache = widget()->cache;
+$cache = wei()->cache;
 
 // 输出缓存驱动, 输出为`redis`
 echo $cache->getDriver();
@@ -46,7 +46,7 @@ echo $cache->getDriver();
 ### 缓存数据库查询,如缓存用户总数,每30秒更新一次
 
 ```php
-$totalUsers = widget()->cache->get('totalUsers', 30, function($widget){
+$totalUsers = wei()->cache->get('totalUsers', 30, function($widget){
 	return $widget->db->fetchColumn("SELECT COUNT(1) FROM user");
 });
 ```
@@ -54,7 +54,7 @@ $totalUsers = widget()->cache->get('totalUsers', 30, function($widget){
 ### 将缓存作为计数器,记录文章访问次数
 
 ```php
-$cache = widget()->cache;
+$cache = wei()->cache;
 
 // 设置文章访问次数增加1,返回增加后的总次数
 // 注意: 开发人员无需预先判断该键名的缓存是否存在,如果缓存不存在,将自动从0开始计算
@@ -69,14 +69,14 @@ echo '该文章已被访问' . $hits . '次';
 
 ```php
 // 设置APC缓存的键名前缀
-widget(array(
+wei(array(
     'memcached' => array(
         'keyPrefix' => 'project-'
     )
 ));
 
 // 缓存键名将自动转换为'project-key'
-widget()->memcached->set('key', 'value');
+wei()->memcached->set('key', 'value');
 ```
 
 ### 批量设置和获取缓存
@@ -84,7 +84,7 @@ widget()->memcached->set('key', 'value');
 **注意:** 目前只有`redis`和`couchbase`支持原生的批量设置,其他的缓存实际都是通过`foreach`语句逐个设置.
 
 ```php
-$cache = widget()->cache;
+$cache = wei()->cache;
 
 // 批量设置缓存
 $result = $cache->setMulti(array(

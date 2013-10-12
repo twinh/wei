@@ -9,7 +9,7 @@ Example
 ### A complete example: Get public gists
 
 ```php
-$call = widget()->call(array(
+$call = wei()->call(array(
     // Set the request URL
     'url' => 'https://api.github.com/gists',
     // The default request method is `get`, could be set to `post`, `put`, or any other valid methods

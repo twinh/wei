@@ -8,7 +8,7 @@ isIp
 
 ### 检查"192.168.0.1"是否为有效的IP地址
 ```php
-if (widget()->isIp('192.168.0.1')) {
+if (wei()->isIp('192.168.0.1')) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -22,7 +22,7 @@ if (widget()->isIp('192.168.0.1')) {
 
 ### 检查"192.168.0.1"是否不在私有的IP地址中
 ```php
-if (widget()->isIp('192.168.0.1', array('noPrivRange' => true))) {
+if (wei()->isIp('192.168.0.1', array('noPrivRange' => true))) {
     echo 'Yes';
 } else {
     echo 'No';

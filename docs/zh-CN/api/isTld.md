@@ -8,7 +8,7 @@ isTld
 
 ### 检查"cn"是否为存在的顶级域名
 ```php
-if (widget()->isTld('cn')) {
+if (wei()->isTld('cn')) {
     echo 'Yes';
 } else {
     echo 'No';

@@ -8,7 +8,7 @@ isIdCardMo
 
 ### 检查"11111111"是否为有效的澳门身份证
 ```php
-if (widget()->isIdCardMo('11111111')) {
+if (wei()->isIdCardMo('11111111')) {
     echo 'Yes';
 } else {
     echo 'No';

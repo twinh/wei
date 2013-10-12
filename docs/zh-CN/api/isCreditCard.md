@@ -10,13 +10,13 @@ isCreditCard
 ```php
 $input = '4111111111111111'; // Visa
 
-if (widget()->isCreditCard($input, 'UnionPay,Visa')) {
+if (wei()->isCreditCard($input, 'UnionPay,Visa')) {
     echo 'Yes';
 } else {
     echo 'No';
 }
 
-if (widget()->isCreditCard($input, array('UnionPay', 'Visa'))) {
+if (wei()->isCreditCard($input, array('UnionPay', 'Visa'))) {
     echo 'Yes';
 } else {
     echo 'No';

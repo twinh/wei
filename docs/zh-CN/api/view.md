@@ -10,10 +10,10 @@ View
 
 ```php
 // 设置模板所在的目录
-widget()->view->setDirs(__DIR__ . '/fixtures');
+wei()->view->setDirs(__DIR__ . '/fixtures');
 
 // View对象将先渲染`template.php`文件,再把渲染结果存储到变量`$content`中,再渲染layout.php文件,并输出运行结果
-echo widget()->view->render('template.php');
+echo wei()->view->render('template.php');
 ```
 
 **文件`template.php`**

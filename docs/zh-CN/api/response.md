@@ -9,7 +9,7 @@ Response
 ### 发送内容为"Hello World"的HTTP响应
 
 ```php
-widget()->response('Hello World');
+wei()->response('Hello World');
 ```
 
 #### 运行结果
@@ -21,7 +21,7 @@ widget()->response('Hello World');
 ### 获取上面案例中HTTP响应的完整内容
 
 ```php
-echo (string)widget()->response;
+echo (string)wei()->response;
 ```
 
 #### 运行结果
@@ -35,7 +35,7 @@ Hello World'
 ### 让浏览器弹出下载对话框,下载指定的文件
 
 ```php
-widget()->response->download(__FILE__);
+wei()->response->download(__FILE__);
 ```
 
 #### 运行结果
@@ -46,7 +46,7 @@ widget()->response->download(__FILE__);
 
 ```php
 // 关闭缓冲区,发送HTTP响应等
-widget()->response->flush();
+wei()->response->flush();
 
 for ($i = 1; $i <= 10; $i++) {
     echo $i;

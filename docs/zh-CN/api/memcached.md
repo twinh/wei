@@ -10,16 +10,16 @@ Memcached
 
 ```php
 // 设置缓存,返回true
-widget()->memcached('key', 'value');
+wei()->memcached('key', 'value');
 
 // 获取缓存,返回'value'
-widget()->memcached('key');
+wei()->memcached('key');
 ```
 
 ### 设置60秒后就过期的缓存
 
 ```php
-widget()->memcached('key', 'value', 60);
+wei()->memcached('key', 'value', 60);
 ```
 
 更多案例请查看[Cache](cache.md)对象
