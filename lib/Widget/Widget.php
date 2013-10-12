@@ -70,11 +70,13 @@ namespace Widget
      * @method   \Widget\Redirect   redirect($url = null, array $options = array()) Send a redirect response
      *
      * View
-     * @property Escape             $escape A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
-     * @method   string             escape($string, $type = 'html') Escapes a string by specified type for secure output
      * @property View               $view A object that use to render PHP template
      * @method   string             view($name = null, $vars = array()) Returns view object or render a PHP template
-     *
+     * @property Asset              $asset A service to generate assets' URL
+     * @method   string             asset($file) Returns the asset URL by specified file
+     * @property Escape             $escape A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
+     * @method   string             escape($string, $type = 'html') Escapes a string by specified type for secure output
+     * 
      * Application
      * @property WeChatApp          $weChatApp A object handles WeChat(WeiXin) callback message
      * @method   \Widget\WeChatApp  weChatApp() Start up WeChat application and output the matched rule message
@@ -86,8 +88,6 @@ namespace Widget
      * @method   string             url($uri) Build URL by specified uri and parameters
      *
      * Other
-     * @property Asset          $asset A service to generate assets' URL
-     * @method   string         asset($file) Returns the asset URL by specified file
      * @property Arr            $arr An util object provides some useful method to manipulation array
      * @property Config         $config A object to manage object configurations
      * @property Env            $env A object to detect the environment name and load configuration by environment name
