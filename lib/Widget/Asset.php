@@ -36,7 +36,7 @@ class Asset extends Base
      * @param string $file
      * @return string
      */
-    protected function __invoke($file)
+    public function __invoke($file)
     {
         $url = $this->request->getBaseUrl() . '/' . $this->dir . '/' . $file;
         if ($this->version) {
