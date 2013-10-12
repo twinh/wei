@@ -76,7 +76,7 @@ namespace Widget
      * @method   string             asset($file) Returns the asset URL by specified file
      * @property Escape             $escape A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
      * @method   string             escape($string, $type = 'html') Escapes a string by specified type for secure output
-     * 
+     *
      * Application
      * @property WeChatApp          $weChatApp A object handles WeChat(WeiXin) callback message
      * @method   \Widget\WeChatApp  weChatApp() Start up WeChat application and output the matched rule message

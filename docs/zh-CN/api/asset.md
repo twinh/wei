@@ -15,7 +15,7 @@ echo wei()->asset('jquery.js');
 '/assets/jquery.js';
 ```
 
-### 通过配置版本号,解决浏览器缓存资源文件的问题
+### 生成带版本号的资源URL地址,解决浏览器缓存资源文件的问题
 
 ```php
 // 在配置文件中设置资源版本号
@@ -39,8 +39,8 @@ echo wei()->asset('style.css');
 
 名称                | 类型    | 默认值    | 说明
 --------------------|---------|-----------|------
-dir                 | string  | assets    | 资源所在的目录
-version             | string  | 无        | 自动附加到URL结尾的版本号码
+dir                 | string  | 无        | 资源所在的目录
+version             | string  | 1         | 自动附加到URL结尾的版本号码
 
 ### 方法
 

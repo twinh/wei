@@ -162,8 +162,9 @@ API参考目录
 
 #### 视图
 
-* [escape](api/escape.md) - 转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义
 * [view](api/view.md) - 渲染指定名称的PHP模板
+* [asset](api/asset.md) - 
+* [escape](api/escape.md) - 转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义
 
 #### 其他
 

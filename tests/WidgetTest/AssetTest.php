@@ -21,18 +21,18 @@ class AssetTest extends TestCase
         return array(
             array(
                 'jquery.js',
-                '/assets/jquery.js',
+                '/jquery.js?v=1',
             ),
             array(
                 'file.js',
-                '/js/file.js',
+                '/js/file.js?v=1',
                 array(
                     'dir' => 'js'
                 )
             ),
             array(
                 'version.js',
-                '/assets/version.js?v=1',
+                '/version.js?v=1',
                 array(
                     'version' => '1'
                 ),

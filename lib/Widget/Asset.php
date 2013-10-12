@@ -21,14 +21,14 @@ class Asset extends Base
      *
      * @var string
      */
-    protected $dir = 'assets';
+    protected $dir;
 
     /**
      * The version number append to the URL
      *
      * @var string
      */
-    protected $version;
+    protected $version = '1';
 
     /**
      * Returns the asset URL by specified file
@@ -38,7 +38,10 @@ class Asset extends Base
      */
     public function __invoke($file)
     {
-        $url = $this->request->getBaseUrl() . '/' . $this->dir . '/' . $file;
+        $url = $this->request->getBaseUrl() . '/';
+        $this->dir && $url .= $this->dir . '/';
+        $url .= $file;
+
         if ($this->version) {
             $url .= '?v=' . $this->version;
         }
