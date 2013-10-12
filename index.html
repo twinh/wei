@@ -11799,7 +11799,7 @@
 
 <h3>自定义资源的基础URL地址</h3>
 
-<p>如果生成的资源地址不符合您的项目路径,你可以<code>baseUrl</code>更改资源路径</p>
+<p>如果生成的资源地址不符合您的项目路径,你可以通过<code>baseUrl</code>选项来更改资源路径</p>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'asset'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -11835,16 +11835,19 @@
 <span class="c1">// 输出默认的资源地址</span>
 <span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">asset</span><span class="p">(</span><span class="s1">'style.css'</span><span class="p">);</span>
 
+<span class="c1">// 输出</span>
 <span class="s1">'/assets/style.css?v=1'</span><span class="p">;</span>
 
 <span class="c1">// 输出模块1的资源地址</span>
 <span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">mod1Asset</span><span class="p">(</span><span class="s1">'style.css'</span><span class="p">);</span>
 
+<span class="c1">// 输出</span>
 <span class="s1">'/assets/mod1/style.css?v=1'</span><span class="p">;</span>
 
 <span class="c1">// 输出模块2的资源地址</span>
 <span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">mod2Asset</span><span class="p">(</span><span class="s1">'style.css'</span><span class="p">);</span>
 
+<span class="c1">// 输出</span>
 <span class="s1">'/assets/mod2/style.css?v=1'</span><span class="p">;</span>
 </code></pre></div>
 
