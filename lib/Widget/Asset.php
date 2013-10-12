@@ -12,16 +12,15 @@ namespace Widget;
  * A service to generate assets' URL
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Request $request A service that handles the HTTP request data
  */
 class Asset extends Base
 {
     /**
-     * The base directory of assets
+     * The base URL of assets
      *
      * @var string
      */
-    protected $dir;
+    protected $baseUrl = '/';
 
     /**
      * The version number append to the URL
@@ -38,10 +37,7 @@ class Asset extends Base
      */
     public function __invoke($file)
     {
-        $url = $this->request->getBaseUrl() . '/';
-        $this->dir && $url .= $this->dir . '/';
-        $url .= $file;
-
+        $url = $this->baseUrl . $file;
         if ($this->version) {
             $url .= '?v=' . $this->version;
         }

@@ -25,9 +25,9 @@ class AssetTest extends TestCase
             ),
             array(
                 'file.js',
-                '/js/file.js?v=1',
+                'js/file.js?v=1',
                 array(
-                    'dir' => 'js'
+                    'baseUrl' => 'js/'
                 )
             ),
             array(

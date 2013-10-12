@@ -20,7 +20,7 @@ wei(array(
 echo wei()->asset('style.css');
 
 // 输出的URL地址类似
-`/style.css?v=1`
+'/style.css?v=1'
 ```
 
 调用方式
@@ -30,7 +30,7 @@ echo wei()->asset('style.css');
 
 名称                | 类型    | 默认值    | 说明
 --------------------|---------|-----------|------
-dir                 | string  | 无        | 资源所在的目录
+baseUrl             | string  | /         | 资源的基础URL地址
 version             | string  | 1         | 自动附加到URL结尾的版本号码
 
 ### 方法
