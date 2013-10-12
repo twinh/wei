@@ -1,19 +1,10 @@
 Asset
 =====
 
-资源(CSS, JS, 图片等素材文件)URL地址生成
+生成带版本号的资源(CSS, JS, 图片等素材文件)URL地址,解决浏览器缓存资源文件的问题
 
 案例
 ----
-
-### 生成文件`jquery.js`的资源路径
-
-```php
-echo wei()->asset('jquery.js');
-
-// 输出类似如下
-'/assets/jquery.js';
-```
 
 ### 生成带版本号的资源URL地址,解决浏览器缓存资源文件的问题
 
@@ -29,7 +20,7 @@ wei(array(
 echo wei()->asset('style.css');
 
 // 输出的URL地址类似
-`/assets/style.css?v=1`
+`/style.css?v=1`
 ```
 
 调用方式
