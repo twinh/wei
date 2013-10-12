@@ -86,6 +86,7 @@ class ViewTest extends TestCase
 
     public function testGetVarWidget()
     {
-        $this->assertEquals($this->widget, $this->object->get('widget'));
+        $this->assertEquals($this->widget, $this->object->get('wei'));
+        $this->assertEquals($this->widget->view, $this->object->get('view'));
     }
 }
