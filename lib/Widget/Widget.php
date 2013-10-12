@@ -86,6 +86,8 @@ namespace Widget
      * @method   string             url($uri) Build URL by specified uri and parameters
      *
      * Other
+     * @property Asset          $asset A service to generate assets' URL
+     * @method   string         asset($file) Returns the asset URL by specified file
      * @property Arr            $arr An util object provides some useful method to manipulation array
      * @property Config         $config A object to manage object configurations
      * @property Env            $env A object to detect the environment name and load configuration by environment name

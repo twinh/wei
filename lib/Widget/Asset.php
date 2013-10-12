@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A service to manage to assets' URL
+ * A service to generate assets' URL
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request A service that handles the HTTP request data
@@ -31,7 +31,7 @@ class Asset extends Base
     protected $version;
 
     /**
-     * Returns the asset URL specified file
+     * Returns the asset URL by specified file
      *
      * @param string $file
      * @return string
