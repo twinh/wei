@@ -25,7 +25,7 @@ echo wei()->asset('style.css');
 
 ### 自定义资源的基础URL地址
 
-如果生成的资源地址不符合您的项目路径,你可以`baseUrl`更改资源路径
+如果生成的资源地址不符合您的项目路径,你可以通过`baseUrl`选项来更改资源路径
 
 ```php
 wei(array(
@@ -63,16 +63,19 @@ wei(array(
 // 输出默认的资源地址
 echo wei()->asset('style.css');
 
+// 输出
 '/assets/style.css?v=1';
 
 // 输出模块1的资源地址
 echo wei()->mod1Asset('style.css');
 
+// 输出
 '/assets/mod1/style.css?v=1';
 
 // 输出模块2的资源地址
 echo wei()->mod2Asset('style.css');
 
+// 输出
 '/assets/mod2/style.css?v=1';
 ```
 
