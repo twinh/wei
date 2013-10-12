@@ -184,10 +184,11 @@
       </ul>
     </li>
     <li>
-      <a href="#escape">视图</a>
+      <a href="#view">视图</a>
       <ul class="nav">
-        <li><a href="#escape">escape</a></li>
         <li><a href="#view">view</a></li>
+        <li><a href="#asset">asset</a></li>
+        <li><a href="#escape">escape</a></li>
       </ul>
     </li>
     <li>
@@ -11769,6 +11770,71 @@
 <h4>redirect-&gt;setView($view)</h4>
 
 <p>设置默认的跳转视图</p>
+  </section>
+
+<!-- api/asset
+  ================================================== -->
+  <section id="asset">
+  <div class="page-header"><h1>Asset</h1></div>
+
+<p>资源(CSS, JS, 图片等素材文件)URL地址生成</p>
+
+<h2>案例</h2>
+
+<h3>生成文件<code>jquery.js</code>的资源路径</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">asset</span><span class="p">(</span><span class="s1">'jquery.js'</span><span class="p">);</span>
+
+<span class="c1">// 输出类似如下</span>
+<span class="s1">'/assets/jquery.js'</span><span class="p">;</span>
+</code></pre></div>
+
+<h3>通过配置版本号,解决浏览器缓存资源文件的问题</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 在配置文件中设置资源版本号</span>
+<span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'asset'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'version'</span> <span class="o">=&gt;</span> <span class="s1">'1'</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+
+<span class="c1">// 在视图中使用asset服务生成URL地址</span>
+<span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">asset</span><span class="p">(</span><span class="s1">'style.css'</span><span class="p">);</span>
+
+<span class="c1">// 输出的URL地址类似</span>
+<span class="sb">`/assets/style.css?v=1`</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>dir</td>
+<td>string</td>
+<td>assets</td>
+<td>资源所在的目录</td>
+</tr>
+<tr>
+<td>version</td>
+<td>string</td>
+<td>无</td>
+<td>自动附加到URL结尾的版本号码</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
+
+<h4>asset($file)</h4>
+
+<p>生成指定文件的资源URL地址</p>
   </section>
 
 <!-- api/escape

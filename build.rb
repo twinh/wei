@@ -71,7 +71,7 @@ widgets = [
   # response
     'response', 'json', 'redirect',
   # view
-    'escape', 'view',
+    'asset', 'escape', 'view',
   # others
     'arr', 'config', 'env', 'error', 'gravatar', 'logger', 'password', 'pinyin', 'uuid',
   # third party
