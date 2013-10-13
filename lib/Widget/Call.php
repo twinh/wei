@@ -201,7 +201,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * A key-value array contains the response cookies
      *
-     * @var string
+     * @var array
      */
     protected $responseCookies;
 
@@ -226,6 +226,11 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     protected $errorException;
 
+    /**
+     * The default options of current object
+     *
+     * @var array
+     */
     private $defaultOptions;
 
     /**
