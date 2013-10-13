@@ -75,6 +75,8 @@ class WeChatApp extends Base
      */
     protected $handled = false;
 
+    protected $beforeSend;
+
     /**
      * Available when the matched the "startsWith" rule
      *
@@ -690,6 +692,8 @@ class WeChatApp extends Base
             $content = $this->sendText($content);
         }
 
+        $this->beforeSend && call_user_func($this->beforeSend, $this, $content, $this->widget);
+
         return $content->asXML();
     }
 
@@ -731,7 +735,7 @@ class WeChatApp extends Base
      * @param string $value
      * @return $this
      */
-    protected function addCDataChild(SimpleXMLElement $xml, $name, $value)
+    public function addCDataChild(SimpleXMLElement $xml, $name, $value)
     {
         $child = $xml->addChild($name);
         $node = dom_import_simplexml($child);
