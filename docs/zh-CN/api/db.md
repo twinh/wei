@@ -12,26 +12,26 @@ Db
 
 ```php
 // 插入数据
-widget()->db->insert('user', array(
+wei()->db->insert('user', array(
     'username' => 'twin',
     'createdAt' => date('Y-m-d H:i:s')
 ));
 
 // 更新数据
-widget()->db->update(
+wei()->db->update(
     'user',
     array('username' => 'twin'),
     array('id' => '1')
 );
 
 // 删除数据
-widget()->db->delete('user', array('id' => '1'));
+wei()->db->delete('user', array('id' => '1'));
 
 // 查找id为1的用户
-widget()->db->select('user', 1);
+wei()->db->select('user', 1);
 
 // 查找所有分组编号为1的用户
-widget()->db->selectAll('user', array('groupId' => '1'));
+wei()->db->selectAll('user', array('groupId' => '1'));
 ```
 
 ### Active Record模式
@@ -46,7 +46,7 @@ Active Record模式是将数据表的每一行映射为一个对象,数据表的
 
 ```php
 // 创建一个新的用户记录对象
-$user = widget()->db->create('user', array('groupId' => 1));
+$user = wei()->db->create('user', array('groupId' => 1));
 
 // 设置对象的值
 $user->username = 'twin';
@@ -60,10 +60,10 @@ $user->save();
 
 ```php
 // 查找主键为1的用户
-$user = widget()->db->find('user', '1');
+$user = wei()->db->find('user', '1');
 
 // 或是通过魔术方法更自然地获取对象
-$user = widget()->db->user(1);
+$user = wei()->db->user(1);
 
 // 更新对象的值
 $user->username = 'twin';
@@ -76,7 +76,7 @@ $user->save();
 
 ```php
 // 查找主键为1的用户
-$user = widget()->db->user(1);
+$user = wei()->db->user(1);
 
 // 删除该记录
 $user->delete();
@@ -91,7 +91,7 @@ $user->delete();
 ### 连接到多个数据库
 
 ```php
-$widget = widget(array(
+$widget = wei(array(
     // 数据库对象的配置
     'db' => array(
         'driver'    => 'mysql',
@@ -145,7 +145,7 @@ $loggerDb->findAll('userLog', array('userId' => 1));
 另外,如果要查询多条数据,对应的方法是`fetchAll`,`selectAll`和`findAll`.
 
 ```php
-$db = widget()->db;
+$db = wei()->db;
 
 // 根据SQL语句查询一行记录,返回一个一维数组
 $array = $db->fetch("SELECT * FROM user WHERE id = 1");
@@ -182,12 +182,12 @@ query       | $sql                | PDOStatement对象
 ### 通过beforeQuery回调记录SQL日志
 
 ```php
-$widget = widget(array(
+$widget = wei(array(
     'db' => array(
         'beforeQuery' => function($sql, $params, $types, $db) {
             $log = $sql . "\n" . var_export($params, true);
             // 通过db对象获取logger对象,并调用debug方法记录SQL日志
-            widget()->logger->debug($log);
+            wei()->logger->debug($log);
         }
     )
 ));
@@ -208,7 +208,7 @@ $widget->db->query("SELECT DATE('now')");
 * 写操作使用master数据库
 
 ```php
-$widget = widget(array(
+$widget = wei(array(
     // 主数据库对象的配置
     'db' => array(
         'driver'    => 'mysql',

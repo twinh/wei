@@ -9,7 +9,7 @@ isBlank
 ### 检查空白字符会返回成功
 ```php
 $input = '    ';
-if (widget()->isBlank($input)) {
+if (wei()->isBlank($input)) {
     echo 'Yes';
 } else {
     echo 'No';

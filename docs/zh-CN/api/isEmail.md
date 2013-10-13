@@ -8,7 +8,7 @@ isEmail
 
 ### 检查"example@example.com"是否为邮箱地址
 ```php
-if (widget()->isEmail('example@example.com')) {
+if (wei()->isEmail('example@example.com')) {
     echo 'Yes';
 } else {
     echo 'No';

@@ -9,7 +9,7 @@ Call
 ### 一个完整的例子:获取公开的gists列表
 
 ```php
-$call = widget()->call(array(
+$call = wei()->call(array(
     // 设置请求的URL地址
     'url' => 'https://api.github.com/gists',
     // 默认请求方式为GET,可以设置为POST,PUT等
@@ -24,7 +24,7 @@ $call = widget()->call(array(
 
 if ($call->isSuccess()) {
     // 输出第一条的地址,如https://api.github.com/gists/xxxxxxx
-    var_dump($response[0]['url']);
+    var_dump($call[0]['url']);
 } else {
     // 输出错误的类型,如`curl`,完全错误类型请查看选项
     var_dump($call->getErrorStatus());
@@ -37,7 +37,7 @@ if ($call->isSuccess()) {
 ### 指定请求域名的IP地址:通过指向不同的IP地址,访问不同的环境
 
 ```php
-widget()->call(array(
+wei()->call(array(
     'url' => 'http://google.com',
     'ip' => '74.125.128.105', // 线上运营环境
     //'ip' => '127.0.0.1', // 本地开发环境
@@ -47,7 +47,7 @@ widget()->call(array(
 ### 通过切换IP地址实现负载均衡
 
 ```php
-$call = widget()->call(array(
+$call = wei()->call(array(
     'url' => 'http://google.com',
     // 随机使用其中一个IP地址
     'ip' => array_rand(array(
@@ -60,14 +60,14 @@ $call = widget()->call(array(
 ### 自动设置请求地址为referer地址
 
 ```php
-widget()->call(array(
+wei()->call(array(
     'url' => 'http://google.com',
     'referer' => true
 ));
 
 // referer等于true时,相当于`url`的值
 
-widget()->call(array(
+wei()->call(array(
     'url' => 'http://google.com',
     'referer' => 'http://google.com',
 ));
@@ -75,12 +75,10 @@ widget()->call(array(
 
 ### 通过HTTP方法发送请求
 
+此处的`get`还可以是`post`, `delete`, `put`或`patch`,表示通过相应的HTTP方法发送请求
+
 ```php
-// 此处的`get`还可以是`post`, `delete`, `put`或`patch`,表示通过相应的HTTP方法发送请求
-widget()->call->get('http://example.com', function($data, $call){
-    // 成功时打印出服务器返回的结果
-    print_r($data);
-});
+$call = wei()->call->get('http://example.com', $data);
 ```
 
 ### 通过`curlOptions`选项设置cURL会话选项
@@ -148,7 +146,7 @@ wei(array(
 我们可以设置cURL的`CURLOPT_SSL_VERIFYPEER`选项来禁用SSL证书验证.当然该方法不建议在正式环境使用.
 
 ```php
-widget()->call(array(
+wei()->call(array(
     'url' => 'https://api.github.com/gists',
     'curlOptions' => array(
         CURLOPT_SSL_VERIFYPEER => false
@@ -263,6 +261,26 @@ $ch         | resource     | cUrl会话的变量
 
 返回: `resource`
 
+#### call->getData()
+获取要发送到服务器的数据
+
+返回: `array`|`string`
+
+#### call->getIp()
+获取设置的服务器IP地址
+
+返回: `string`
+
+#### call->getMethod()
+获取HTTP请求的方式
+
+返回: `string`
+
+#### call->getUrl()
+获取HTTP请求的URL地址
+
+返回: `string`
+
 #### call->getResponseHeader($name)
 获取HTTP响应头的值
 
@@ -281,7 +299,12 @@ $ch         | resource     | cUrl会话的变量
 返回:  `Widget\Call` 新的call服务对象
 
 #### call->getJson($url, $data = array())
-通过GET方式发送带数据的请求
+通过GET方式发送带数据的请求,并将返回数据解析为JSON数组
+
+返回:  `Widget\Call` 新的call服务对象
+
+#### call->getJsonObject($url, $data = array())
+通过GET方式发送带数据的请求,并将返回数据解析为JSON对象
 
 返回:  `Widget\Call` 新的call服务对象
 

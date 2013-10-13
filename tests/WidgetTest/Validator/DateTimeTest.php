@@ -45,8 +45,6 @@ class DateTimeTest extends TestCase
 
     public function testBeforeAndAfter()
     {
-        $this->markTestSkipped('TODO');
-
         $this->assertTrue($this->isDate('2013-02-19', array(
             'before' => '2013-03-01',
             'after' => '2013-01-01',

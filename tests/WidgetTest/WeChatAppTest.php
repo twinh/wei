@@ -524,4 +524,23 @@ class WeChatAppTest extends TestCase
         // Receive data not in callback Closure
         $this->assertEquals('hi', $app->getContent());
     }
+
+    public function testIsVerifyToken()
+    {
+        $app = $this->object;
+        $app->setOption('query', array(
+            'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+            'timestamp' => '1366032735',
+            'nonce'     => '1365872231',
+            'echostr'   => $rand = mt_rand(0, 100000)
+        ));
+        $this->assertTrue($app->isVerifyToken());
+
+        $app->setOption('query', array(
+            'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+            'timestamp' => '1366032735',
+            'nonce'     => '1365872231'
+        ));
+        $this->assertFalse($app->isVerifyToken());
+    }
 }

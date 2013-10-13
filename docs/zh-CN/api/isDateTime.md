@@ -8,7 +8,7 @@ isDateTime
 
 ### 检查"2013-01-01 10:00"是否为合法的日期时间
 ```php
-if (widget()->isDateTime('2013-01-01 10:00')) {
+if (wei()->isDateTime('2013-01-01 10:00')) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -22,7 +22,7 @@ if (widget()->isDateTime('2013-01-01 10:00')) {
 
 ### 检查"2013-01-01"是否为符合格式"Ymd"的日期时间
 ```php
-if (widget()->isDateTime('20130101', 'Ymd')) {
+if (wei()->isDateTime('20130101', 'Ymd')) {
     echo 'Yes';
 } else {
     echo 'No';

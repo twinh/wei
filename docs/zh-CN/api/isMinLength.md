@@ -8,7 +8,7 @@ isMinLength
 
 ### 检查"abc"的长度是否大于等于2
 ```php
-if (widget()->isMinLength('abc', 2)) {
+if (wei()->isMinLength('abc', 2)) {
     echo 'Yes';
 } else {
     echo 'No';

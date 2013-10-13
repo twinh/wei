@@ -7,7 +7,7 @@ isUrl
 
 ### 检查`http://www.example.com`是否为有效的URL地址
 ```php
-if (widget()->isUrl('http://www.example.com')) {
+if (wei()->isUrl('http://www.example.com')) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -17,7 +17,7 @@ if (widget()->isUrl('http://www.example.com')) {
 
 ### 检查`http://www.example.com`是否为有效的URL地址,要求带有查询参数
 ```php
-if (widget()->isUrl('http://www.example.com', array('query' => true))) {
+if (wei()->isUrl('http://www.example.com', array('query' => true))) {
     echo 'Yes';
 } else {
     echo 'No';

@@ -9,15 +9,15 @@ Redis
 ### 设置和获取缓存
 ```php
 // 设置缓存,返回true
-widget()->redis('key', 'value');
+wei()->redis('key', 'value');
 
 // 获取缓存,返回'value'
-widget()->redis('key');
+wei()->redis('key');
 ```
 
 ### 设置60秒后就过期的缓存
 ```php
-widget()->redis('key', 'value', 60);
+wei()->redis('key', 'value', 60);
 ```
 
 更多案例请查看[Cache](cache.md)对象

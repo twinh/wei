@@ -9,11 +9,11 @@ isRecordExists
 #### 检查主键为1的用户是否存在,和检查name为test的用户是否存在
 ```php
 // Set configuraion for db widget
-widget()->config('db', array(
+wei()->config('db', array(
     'dsn' => 'sqlite::memory:',
 ));
 
-$db = widget()->db;
+$db = wei()->db;
 
 $db->query("CREATE TABLE users (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
 
@@ -29,14 +29,14 @@ $db->insert('users', array(
 
 
 // Check if the id=1 user exists
-if (widget()->isRecordExists('1', 'users')) {
+if (wei()->isRecordExists('1', 'users')) {
     echo 'Yes';
 } else {
     echo 'No';
 }
 
 // Check if the name=test user exists
-if (widget()->isRecordExists('test', 'users', 'name')) {
+if (wei()->isRecordExists('test', 'users', 'name')) {
     echo 'Yes';
 } else {
     echo 'No';

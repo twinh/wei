@@ -61,8 +61,8 @@ class View extends Base
 
         // Adds widget to template variable
         $this->assign(array(
-            'widget' => $this->widget,
-            'wei'    => $this->widget
+            'wei'   => $this->widget,
+            'view'  => $this,
         ));
     }
 

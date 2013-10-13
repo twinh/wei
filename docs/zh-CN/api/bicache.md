@@ -15,16 +15,16 @@ Bicache
 
 ```php
 // 设置缓存,返回true
-widget()->bicache('key', 'value');
+wei()->bicache('key', 'value');
 
 // 获取缓存,返回'value'
-widget()->bicache('key');
+wei()->bicache('key');
 ```
 
 ### 设置60秒后就过期的缓存
 
 ```php
-widget()->bicache('key', 'value', 60);
+wei()->bicache('key', 'value', 60);
 ```
 
 更多案例请查看[Cache](cache.md)类

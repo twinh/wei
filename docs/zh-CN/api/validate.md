@@ -3,9 +3,9 @@ Validate
 
 检查数组或对象中每一个元素是否能通过指定规则的验证
 
-Widget验证器是参考[jQuery Validation](http://bassistance.de/jquery-plugins/jquery-plugin-validation/)
+`Validate`服务是参考[jQuery Validation](http://bassistance.de/jquery-plugins/jquery-plugin-validation/)
 开发的数据验证器,她与`jQuery Validation`有着很多相似的地方,所以如果你使用过
-`jQuery Validation`,使用Widget验证器将非常容易上手.
+`jQuery Validation`,使用`Validate`服务将非常容易上手.
 
 案例
 ----
@@ -13,7 +13,7 @@ Widget验证器是参考[jQuery Validation](http://bassistance.de/jquery-plugins
 ### 检查数据是否符合指定的验证规则
 
 ```php
-$validator = widget()->validate(array(
+$validator = wei()->validate(array(
     // 待验证的数据
     'data' => array(
         'username' => 'tw',
@@ -145,7 +145,7 @@ class User
 }
 
 // 以数组为验证数据
-widget()->validate(array(
+wei()->validate(array(
     'data' => array(
         'name' => 'twin',
         'email' => 'test@test.com'
@@ -153,7 +153,7 @@ widget()->validate(array(
 ));
 
 // 以数组对象为验证数据
-widget()->validate(array(
+wei()->validate(array(
     'data' => new \ArrayObject(array(
         'name' => 'twin',
         'email' => 'test@test.com'
@@ -161,7 +161,7 @@ widget()->validate(array(
 ));
 
 // 以对象为验证数据
-widget()->validate(array(
+wei()->validate(array(
     'data' => new User
 ));
 ```
@@ -183,7 +183,7 @@ widget()->validate(array(
 ##### 案例:验证规则格式
 
 ```php
-widget()->validate(array(
+wei()->validate(array(
     'rules' => array(
         // 简单规则,将会被转换为 array('required' => true)
         'name' => 'required',
@@ -221,7 +221,7 @@ widget()->validate(array(
 ```php
 $age = 18;
 
-widget()->validate(array(
+wei()->validate(array(
     'data' => array(
         'age' => $age
     ),
@@ -234,13 +234,13 @@ widget()->validate(array(
 ));
 
 // 通过isDigit验证对象,验证数据
-$bool = widget()->isDigit($age);
+$bool = wei()->isDigit($age);
 
 // 通过is对象,指定验证规则验证数据
-$bool = widget()->is('digit', $age);
+$bool = wei()->is('digit', $age);
 ```
 
-##### 案例:区分`required`,`notBlank`和`notEmpty`验证规则
+##### 案例:区分`required`,`notBlank`和`present`验证规则
 
 这三个验证规则都用于检查数据不能为空,它们在使用场景和检查的数据内容稍有不同.
 
@@ -249,7 +249,7 @@ $bool = widget()->is('digit', $age);
 * `required`通常用于验证器的规则中,表示某一项是不能为空或是可选
 
     ```php
-    $validator = widget()->validate(array(
+    $validator = wei()->validate(array(
         'rules' => array(
             'email' => array(
                 'required' => true,
@@ -258,15 +258,15 @@ $bool = widget()->is('digit', $age);
         )
     ));
     ```
-* `notEmpty`和`notBlank`既可以用于验证器规则中,又可以独立作为验证对象
+* `present`和`notBlank`既可以用于验证器规则中,又可以独立作为验证对象
 
     ```php
     // 作为验证器规则
-    $validator = widget()->validate(array(
+    $validator = wei()->validate(array(
         'rules' => array(
             'email' => array(
                 'required' => true,
-                'notEmpty' => true,
+                'present' => true,
                 'email' => true,
             )
         )
@@ -276,8 +276,8 @@ $bool = widget()->is('digit', $age);
     if ($this->isBlank($input)) {
         print_r($this->isBlank->getMessages());
     }
-    if ($this->isEmpty($input)) {
-        print_r($this->isEmpty->getMessages());
+    if ($this->isPresent($input)) {
+        print_r($this->isPresent->getMessages());
     }
     ```
 
@@ -318,7 +318,7 @@ $bool = widget()->is('digit', $age);
 
 ```php
 $input = array(3, 2, 5);
-if (widget()->isAll($input, array(
+if (wei()->isAll($input, array(
     'digit' => true,
     'lessThan' => 8
 ))) {
@@ -333,7 +333,7 @@ if (widget()->isAll($input, array(
 
 ```php
 $input = 3;
-if (widget()->isAllOf($input, array(
+if (wei()->isAllOf($input, array(
     'digit' => true,
     'lessThan' => 8
 ))) {
@@ -351,7 +351,7 @@ if (widget()->isAllOf($input, array(
 ##### 案例:提示信息的格式
 
 ```php
-widget()->validate(array(
+wei()->validate(array(
     'rules' => array(
         'name' => 'required',
         'email' => array(
@@ -405,7 +405,7 @@ widget()->validate(array(
 ##### 案例
 
 ```php
-widget()->validate(array(
+wei()->validate(array(
     'rules' => array(
         'name' => 'required',
         'email' => array(
@@ -455,7 +455,7 @@ $widget     | Widget\Widget         | 对象管理器
 ##### 案例
 
 ```php
-widget()->validate(array(
+wei()->validate(array(
     'data' => array(
         'name' => 'twin'
     ),
@@ -501,7 +501,7 @@ $widget     | Widget\Widget         | 对象管理器
 ##### 案例
 
 ```php
-widget()->validate(array(
+wei()->validate(array(
     'data' => array(
         'name' => null
     ),
@@ -545,7 +545,7 @@ $widget     | Widget\Widget         | 对象管理器
 ##### 案例
 
 ```php
-widget()->validate(array(
+wei()->validate(array(
     'data' => array(
         'name' => 'twin'
     ),
@@ -587,7 +587,7 @@ $widget     | Widget\Widget         | 对象管理器
 ##### 案例
 
 ```php
-widget()->validate(array(
+wei()->validate(array(
     'data' => array(
         'name' => null
     ),
@@ -624,7 +624,7 @@ $widget     | Widget\Widget         | 对象管理器
 ##### 案例
 
 ```php
-widget()->validate(array(
+wei()->validate(array(
     'data' => array(
         'name' => 'twin'
     ),
@@ -659,7 +659,7 @@ $widget     | Widget\Widget         | 对象管理器
 ##### 案例
 
 ```php
-widget()->validate(array(
+wei()->validate(array(
     'data' => array(
         'name' => null
     ),

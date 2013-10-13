@@ -9,7 +9,7 @@ isGreaterThanOrEqual
 ### 检查10是否大于等于20
 
 ```php
-if (widget()->isGreaterThanOrEqual(10, 20)) {
+if (wei()->isGreaterThanOrEqual(10, 20)) {
     echo 'Yes';
 } else {
     echo 'No';

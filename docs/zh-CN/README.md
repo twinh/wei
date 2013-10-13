@@ -62,12 +62,12 @@ API参考目录
 * [isDigit](api/isDigit.md) - 检查数据是否只由数字组成
 * [isDivisibleBy](api/isDivisibleBy.md) - 检查数据是否能被指定的除数整除
 * [isDoubleByte](api/isDoubleByte.md) - 检查数据是否只由双字节字符组成
-* [isEmpty](api/isEmpty.md) - 检查数据是否为空(允许空格)
 * [isEndsWith](api/isEndsWith.md) - 检查数据是否以指定字符串结尾
 * [isIn](api/isIn.md) - 检查数据是否在指定的数组中
 * [isLowercase](api/isLowercase.md) - 检查数据是否为小写
 * [isNull](api/isNull.md) - 检查数据是否为null
 * [isNumber](api/isNumber.md) - 检查数据是否为有效数字
+* [isPresent](api/isPresent.md) - 检查数据是否不为空(允许空格)
 * [isRegex](api/isRegex.md) - 检查数据是否匹配指定的正则表达式
 * [isRequired](api/isRequired.md) - 检查数据是否为空(用于组合验证,如果允许为空且数据为空,则不对数据进行剩余规则的校验)
 * [isStartsWith](api/isStartsWith.md) - 检查数据是否以指定字符串开头
@@ -144,6 +144,7 @@ API参考目录
 * [isAll](api/isAll.md) - 检查集合里的每一项是否符合指定的规则
 * [isCallback](api/isCallback.md) - 检查数据是否通过指定回调方法验证
 * [isColor](api/isColor.md) - 检查数据是否为有效的十六进制颜色
+* [isPassword](api/isPassword.md) - 检查组成密码的字符是否符合要求格式
 
 #### HTTP请求
 
@@ -161,8 +162,9 @@ API参考目录
 
 #### 视图
 
-* [escape](api/escape.md) - 转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义
 * [view](api/view.md) - 渲染指定名称的PHP模板
+* [asset](api/asset.md) - 生成带版本号的资源(CSS, JS, 图片等素材文件)URL地址,解决浏览器缓存资源文件的问题
+* [escape](api/escape.md) - 转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义
 
 #### 其他
 

@@ -9,7 +9,7 @@ isBetween
 ### 检查18是否在1到10之间
 
 ```php
-if (widget()->isBetween(18, 1, 10)) {
+if (wei()->isBetween(18, 1, 10)) {
     echo 'Yes';
 } else {
     echo 'No';

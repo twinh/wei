@@ -10,16 +10,16 @@ Couchbase
 
 ```php
 // 设置缓存,返回true
-widget()->couchbase('key', 'value');
+wei()->couchbase('key', 'value');
 
 // 获取缓存,返回'value'
-widget()->couchbase('key');
+wei()->couchbase('key');
 ```
 
 ### 设置60秒后就过期的缓存
 
 ```php
-widget()->couchbase('key', 'value', 60);
+wei()->couchbase('key', 'value', 60);
 ```
 
 更多案例请查看[Cache](cache.md)对象

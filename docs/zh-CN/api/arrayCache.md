@@ -15,10 +15,10 @@ ArrayCache
 
 ```php
 // 设置缓存,返回true
-widget()->arrayCache('key', 'value');
+wei()->arrayCache('key', 'value');
 
 // 获取缓存,返回'value'
-widget()->arrayCache('key');
+wei()->arrayCache('key');
 ```
 
 更多案例请查看[Cache](cache.md)类

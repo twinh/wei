@@ -12,16 +12,16 @@ dbCache对象依赖于[db](db.md)对象
 
 ```php
 // 设置缓存,返回true
-widget()->dbCache('key', 'value');
+wei()->dbCache('key', 'value');
 
 // 获取缓存,返回'value'
-widget()->dbCache('key');
+wei()->dbCache('key');
 ```
 
 ### 设置60秒后就过期的缓存
 
 ```php
-widget()->dbCache('key', 'value', 60);
+wei()->dbCache('key', 'value', 60);
 ```
 
 更多案例请查看[Cache](cache.md)对象

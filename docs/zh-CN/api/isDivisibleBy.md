@@ -8,7 +8,7 @@ isDivisibleBy
 
 ### 检查10能否被3整除
 ```php
-if (widget()->isDivisibleBy(10, 3)) {
+if (wei()->isDivisibleBy(10, 3)) {
     echo 'Yes';
 } else {
     echo 'No';

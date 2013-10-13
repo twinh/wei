@@ -8,7 +8,7 @@ isCallback
 
 ### 通过回调方法检查数据是否能被3整除
 ```php
-if (widget()->isCallback(3, function($input) {
+if (wei()->isCallback(3, function($input) {
     return 0 === 10 % $input;
 })) {
     echo 'Yes';

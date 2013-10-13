@@ -4,38 +4,35 @@ namespace WidgetTest;
 
 class UrlTest extends TestCase
 {
-    public function testOnePart()
+    /**
+     * @dataProvider providerForUrl
+     */
+    public function testUrl($url)
     {
-        $url = $this->url('user', array('id' => 'twin'));
-        
-        $this->assertEquals('?controller=user&id=twin', $url);
+        $this->request->setBaseUrl('/');
+
+        $args = func_get_args();
+        array_pop($args);
+        $this->assertEquals($url, call_user_func_array(array($this, 'url'), $args));
     }
-    
-    public function testTwoPart()
+
+    public function providerForUrl()
     {
-        $url = $this->url('user/edit', array('id' => 'twin'));
-        
-        $this->assertEquals('?controller=user&action=edit&id=twin', $url);
-    }
-    
-    public function testModule()
-    {
-        $url = $this->url('api/user/edit', array('id' => 'twin'));
-        
-        $this->assertEquals('?module=api&controller=user&action=edit&id=twin', $url);
-    }
-    
-    public function testStringAsParameter()
-    {
-        $url = $this->url('user', 'id=twin&from=test');
-        
-        $this->assertEquals('?controller=user&id=twin&from=test', $url);
-    }
-    
-    public function testMultiParameters()
-    {
-        $url = $this->url('user', 'id=twin', 'from=test');
-        
-        $this->assertEquals('?controller=user&id=twin&from=test', $url);
+        return array(
+            array(
+                'users?id=twin',
+                'users?id=twin'
+            ),
+            array(
+                'user?id=twin',
+                'user',
+                array('id' => 'twin')
+            ),
+            array(
+                '?id=twin',
+                '',
+                array('id' => 'twin')
+            )
+        );
     }
 }

@@ -8,7 +8,7 @@ isNumber
 
 ### 检查-123.4是否为数字
 ```php
-if (widget()->isNumber(-123.4)) {
+if (wei()->isNumber(-123.4)) {
     echo 'Yes';
 } else {
     echo 'No';

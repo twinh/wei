@@ -8,7 +8,7 @@ isChinese
 
 ### 检查数据是否只由汉字组成
 ```php
-if (widget()->isChinese('中文')) {
+if (wei()->isChinese('中文')) {
     echo 'Yes';
 } else {
     echo 'No';

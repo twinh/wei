@@ -9,7 +9,7 @@ isAlpha
 ### 检查数据是否只由字母组成
 ```php
 $input = 'abc123';
-if (widget()->isAlpha($input)) {
+if (wei()->isAlpha($input)) {
     echo 'Yes';
 } else {
     echo 'No';

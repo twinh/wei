@@ -16,7 +16,7 @@ isRequired
 ### 检查null是否为空
 
 ```php
-if (widget()->isRequired(null)) {
+if (wei()->isRequired(null)) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -32,7 +32,7 @@ if (widget()->isRequired(null)) {
 ### 检查0是否为空
 
 ```php
-if (widget()->isRequired(0)) {
+if (wei()->isRequired(0)) {
     echo 'Yes';
 } else {
     echo 'No';

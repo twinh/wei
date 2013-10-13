@@ -12,7 +12,7 @@ Widget
 
 ```php
 /* @var $widget \Widget\Widget */
-$widget = widget();
+$widget = wei();
 ```
 
 ### 设置对象配置
@@ -22,7 +22,7 @@ $widget = widget();
 完整配置请查看[配置](../book/configuration.md)章节.
 
 ```php
-$widget = widget(array(
+$widget = wei(array(
     // 类`Widget\Widget`的属性值
     'widget' => array(
         'debug' => true,
@@ -44,7 +44,7 @@ $widget = widget(array(
 Widget支持[PRS-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)风格的类自动加载器.
 
 ```php
-widget(array(
+wei(array(
     'widget' => array(
         // 启用自动加载
         'autoload' => true,
@@ -76,7 +76,7 @@ Widget的错误调试可通过`debug`选项开启,PHP的调试可通过`inis`选
 **注意:** 两者的配置相互独立,不互相影响
 
 ```php
-widget(array(
+wei(array(
     'widget' => array(
         // 通过PHP ini配置,开启PHP错误信息提示
         'inis' => array(
@@ -96,7 +96,7 @@ widget(array(
 [PHP的配置](http://www.php.net/manual/zh/ini.php)可以通过`inis`选项来设置.
 
 ```php
-widget(array(
+wei(array(
     'widget' => array(
         'inis' => array(
             'date.timezone' => 'Asia/Shanghai', // 设置时区为上海
@@ -129,7 +129,7 @@ widget(array(
 2. 设置`aliases`选项,指定您定义的类的对象名称
 
     ```php
-    widget(array(
+    wei(array(
         'widget' => array(
             'aliases' => array(
                 '对象名称' => '类名称',
@@ -144,7 +144,7 @@ widget(array(
     ```php
     // 获取自定义对象
     /* @var $app \MyProject\Application */
-    $app = widget()->app;
+    $app = wei()->app;
 
     // 和平常一样调用类的方法
     $app->run();
@@ -154,7 +154,7 @@ widget(array(
 
 ```php
 // TODO more detail message
-widget(array(
+wei(array(
     'widget' => array(
         'import' => array(
             array(
@@ -178,7 +178,7 @@ widget(array(
 2. `deps`选项数组的key是对象名称,value也是对象名称
 
 ```php
-widget(array(
+wei(array(
     'widget' => array(
         'aliases' => array(
             '对象名称' => '类名称'
@@ -228,7 +228,7 @@ $object     | Widget\Base   | 当前初始化的对象
 
 ### 方法
 
-#### widget($config)
+#### wei($config)
 获取对象管理器,如果不存在,将创建一个新的对象
 
 **返回:** `Widget\Widget` 对象管理器
@@ -239,12 +239,12 @@ $object     | Widget\Base   | 当前初始化的对象
 --------|--------------|------
 $config | string,array | 对象的配置数组或配置文件
 
-#### widget()->isDebug()
+#### wei()->isDebug()
 检查是否启用了调试模式
 
 **返回:** `bool`
 
-#### widget()->setDebug($debug)
+#### wei()->setDebug($debug)
 开启或关闭调试模式
 
 **返回:** `Widget\Widget` 对象管理器
@@ -255,7 +255,7 @@ $config | string,array | 对象的配置数组或配置文件
 --------|--------------|------
 $debug  | bool         | 是否启用调试
 
-#### widget()->setConfig($name, $vlaue = array())
+#### wei()->setConfig($name, $vlaue = array())
 设置对象的配置
 
 **返回:** `Widget\Widget` 对象管理器
@@ -267,7 +267,7 @@ $debug  | bool         | 是否启用调试
 $name       | string | 无            | 对象的名称,如`request`, `request.sub`
 $value      | array  | 无            | 对象的配置选项
 
-#### widget()->setConfig($array = array())
+#### wei()->setConfig($array = array())
 设置对象所有配置
 
 **返回:** `Widget\Widget` 对象管理器
@@ -278,7 +278,7 @@ $value      | array  | 无            | 对象的配置选项
 ------------|--------|---------------|------
 $array      | array  | 无            | 对象的完整配置
 
-#### widget()->getConfig($name)
+#### wei()->getConfig($name)
 获取对象的选项配置
 
 **返回:** `mixed` 配置的值,如果配置不存在,返回`null`
@@ -289,7 +289,7 @@ $array      | array  | 无            | 对象的完整配置
 ------------|--------|---------------|------
 $name       | string | 无            | 配置的名称
 
-#### widget()->get($name, $options = array(), $deps = array())
+#### wei()->get($name, $options = array(), $deps = array())
 获取一个对象
 
 名称        | 类型   | 默认值        | 说明
@@ -298,7 +298,7 @@ $name       | string | 无            | 对象的名称
 $options    | array  | 无            | 除了会通过`config`方法获取配置选项之外的附加的配置选项
 $deps       | array  | 无            | 指定对象的依赖关系
 
-#### widget()->import($dir, $namespace, $format = null)
+#### wei()->import($dir, $namespace, $format = null)
 导入指定目录下的类文件
 
 名称        | 类型   | 默认值        | 说明
@@ -307,20 +307,20 @@ $dir        | string | 无            | 类文件所在的目录
 $namespace  | string | 无            | 类名对应的命名空间
 $format     | string | 无            | 类文件的格式
 
-#### widget()->newInstance($name, $options = array(), $deps = array())
+#### wei()->newInstance($name, $options = array(), $deps = array())
 初始化一个新的对象
 
-#### widget()->set($name, widget())
+#### wei()->set($name, wei())
 设置对象
 
-#### widget()->remove($name)
+#### wei()->remove($name)
 移除对象,如果对象存在,返回`true`,否则返回`false`
 
-#### widget()->getClass($name)
+#### wei()->getClass($name)
 根据对象名称获取对象类名
 
-#### widget()->has($name)
+#### wei()->has($name)
 检查对象是否存在
 
-#### widget()->setAutoload($bool)
+#### wei()->setAutoload($bool)
 启用或禁用PSR-0类自动加载

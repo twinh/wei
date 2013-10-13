@@ -50,7 +50,7 @@ namespace Widget
      * @method   \Widget\Call   call(array $options) Create a new call object and execute
      *
      * HTTP Request
-     * @property Request    $request A object that handles the HTTP request data
+     * @property Request    $request A service that handles the HTTP request data
      * @method   mixed      request($name, $default = null) Returns a stringify request parameter value
      * @property Cookie     $cookie A object that handles the HTTP request and response cookies
      * @method   mixed      cookie($key, $value = null, $options = array()) Get or set cookie
@@ -70,10 +70,12 @@ namespace Widget
      * @method   \Widget\Redirect   redirect($url = null, array $options = array()) Send a redirect response
      *
      * View
-     * @property Escape             $escape A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
-     * @method   string             escape($string, $type = 'html') Escapes a string by specified type for secure output
      * @property View               $view A object that use to render PHP template
      * @method   string             view($name = null, $vars = array()) Returns view object or render a PHP template
+     * @property Asset              $asset A service to generate assets' URL
+     * @method   string             asset($file) Returns the asset URL by specified file
+     * @property Escape             $escape A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
+     * @method   string             escape($string, $type = 'html') Escapes a string by specified type for secure output
      *
      * Application
      * @property WeChatApp          $weChatApp A object handles WeChat(WeiXin) callback message
@@ -126,8 +128,8 @@ namespace Widget
      * @method   bool                   isDivisibleBy($input, $divisor) Check if the input could be divisible by specified divisor
      * @property Validator\DoubleByte   $isDoubleByte
      * @method   bool                   isDoubleByte($input) Check if the input contains only double characters
-     * @property Validator\EmptyValue   $isEmpty
-     * @method   bool                   isEmpty($input) Check if the input is empty
+     * @property Validator\Present      $isPresent
+     * @method   bool                   isPresent($input) Check if the input is empty
      * @property Validator\EndsWith     $isEndsWith
      * @method   bool                   isEndsWith($input, $findMe, $case = false) Check if the input is ends with specified string
      * @property Validator\In           $isIn
@@ -246,13 +248,15 @@ namespace Widget
      * @method   bool                   isCallback($input, \Closure $fn, $message = null) Check if the input is valid by specified callback
      * @property Validator\Color        $isColor
      * @method   bool                   isColor($input) Check if the input is valid Hex color
+     * @property Validator\Password     $isPassword
+     * @method   bool                   isPassword($input, array $options = array()) Check if the input password is secure enough
      */
     class Widget extends Base
     {
         /**
          * Version
          */
-        const VERSION = '0.9.6-RC1';
+        const VERSION = '0.9.6';
 
         /**
          * The configurations for all objects

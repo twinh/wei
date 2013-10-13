@@ -10,7 +10,7 @@ Widget提供了强大又简单的配置方式,您可以通过配置指定每个�
 
 ```php
 // 通过`widget`函数的第一个参数设置配置
-$widget = widget(array(
+$widget = wei(array(
     // 对象管理器的配置
     'widget' => array(
         'debug' => true,
@@ -67,7 +67,7 @@ Widget目前接受两种配置参数,一种是PHP数组,另一种是返回PHP数
 ### 通过PHP数组加载配置
 
 ```php
-$widget = widget(array(
+$widget = wei(array(
     'widget' => array(
         'debug' => true,
     ),
@@ -85,7 +85,7 @@ $widget = widget(array(
 ### 通过PHP文件加载配置
 
 ```php
-$widget = widget('config/default.php');
+$widget = wei('config/default.php');
 ```
 
 文件`config/default.php`的内容
@@ -117,7 +117,7 @@ return array(
 ### 获取配置
 
 ```php
-$widget = widget();
+$widget = wei();
 
 // 获取数据库对象的配置数组
 $db = $widget->getConfig('db');
@@ -151,7 +151,7 @@ $user = 'root';
 下面的例子展示了多个数据库的配置和数据库对象的获取.
 
 ```php
-$widget = widget(array(
+$widget = wei(array(
     // 默认数据库对象的配置
     'db' => array(
         'driver'    => 'mysql',

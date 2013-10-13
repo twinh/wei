@@ -8,7 +8,7 @@ isTime
 
 ### 检查"12:00:00"是否为合法的时间
 ```php
-if (widget()->isTime('12:00:00')) {
+if (wei()->isTime('12:00:00')) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -22,7 +22,7 @@ if (widget()->isTime('12:00:00')) {
 
 ### 检查"12:00"是否为符合格式"i:s"的时间
 ```php
-if (widget()->isTime('12:00', 'i:s')) {
+if (wei()->isTime('12:00', 'i:s')) {
     echo 'Yes';
 } else {
     echo 'No';

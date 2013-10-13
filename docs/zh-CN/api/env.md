@@ -9,7 +9,7 @@ Env
 ### 在Widget初始化时根据环境加载配置
 
 ```php
-widget(array(
+wei(array(
     'widget' => array(
         'preload' => array(
             'env' // 在预加载选项增加env对象
@@ -26,7 +26,7 @@ widget(array(
 ### 判断当前是否在开发环境
 
 ```php
-if (widget()->env->isDev()) {
+if (wei()->env->isDev()) {
     // do something
 }
 ```

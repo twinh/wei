@@ -8,7 +8,7 @@ isQQ
 
 ### 检查"123456"是否为有效的QQ号码
 ```php
-if (widget()->isQQ('123456')) {
+if (wei()->isQQ('123456')) {
     echo 'Yes';
 } else {
     echo 'No';

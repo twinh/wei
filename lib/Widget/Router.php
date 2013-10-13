@@ -14,7 +14,7 @@ namespace Widget;
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        The code is base on the awesome framework - Kohana
  *              http://kohanaframework.org/3.0/guide/api/Kohana_Route
- * @property    Request $request The HTTP request widget
+ * @property    Request $request A service that handles the HTTP request data
  * @method      Response response(string $content) Send response header and content
  */
 class Router extends Base
@@ -27,18 +27,18 @@ class Router extends Base
     protected $routes = array();
 
     /**
-     * @var array route options
+     * The default route options
      *
-     *      -- pattern          string  the string to be complied to regex
+     * @var array
      *
-     *      -- rules            array   the regex rules
-     *
-     *      -- defaults         array   the defaults params of the route
-     *
-     *      -- method           regex   the request method
-     *
-     *      -- regex            string  the regex complied from the pattern, just leave it blank when
-     *                                  set a new route
+     * Name     | Type     | Description
+     * ---------|----------|-------------
+     * pattern  | string   | The string to be complied to regex
+     * rules    | array    | The regex rules
+     * defaults | array    | The defaults params of the route
+     * method   | string   | The required request method of the route
+     * callback | callable | The callback execute when the route is matched
+     * regex    | string   | The regex complied from the pattern, just leave it blank when set a new route
      */
     protected $routeOptions = array(
         'pattern'   => null,
@@ -88,7 +88,6 @@ class Router extends Base
         foreach ($routes as $route) {
             $this->set($route);
         }
-
         return $this;
     }
 

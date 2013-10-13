@@ -10,16 +10,16 @@ Config
 
 ```php
 // 设置配置项'title'的值为'Widget Documentation'
-widget()->setConfig('title', 'Widget Documentation');
+wei()->setConfig('title', 'Widget Documentation');
 
 // 输出配置项'title'的值
-echo widget()->getConfig('title');
+echo wei()->getConfig('title');
 ```
 
 ### 批量设置配置数据
 
 ```php
-widget()->setConfig(array(
+wei()->setConfig(array(
 	'yesOrNo' => array(
         'y' => '是',
         'n' => '否'
@@ -44,7 +44,7 @@ widget()->setConfig(array(
 ### 输出HTML option标签
 
 ```php
-echo widget()->config->toOptions('yesOrNo');
+echo wei()->config->toOptions('yesOrNo');
 
 // 输出
 '<option value="y">是</option><option value="n">否</option>';
@@ -53,7 +53,7 @@ echo widget()->config->toOptions('yesOrNo');
 ### 输出JSON数据
 
 ```php
-echo widget()->config->toJson('yesOrNo');
+echo wei()->config->toJson('yesOrNo');
 
 // 输出
 '{"y":"\u662f","n":"\u5426"}';

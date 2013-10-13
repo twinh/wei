@@ -8,7 +8,7 @@ isEndsWith
 
 ### 检查"abc"是否以"C"结尾
 ```php
-if (widget()->isEndsWith('abc', 'C')) {
+if (wei()->isEndsWith('abc', 'C')) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -22,7 +22,7 @@ if (widget()->isEndsWith('abc', 'C')) {
 
 ### 以区分大小写的方式,检查"abc"是否以"C"结尾
 ```php
-if (widget()->isEndsWith('abc', 'C', true)) {
+if (wei()->isEndsWith('abc', 'C', true)) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -36,7 +36,7 @@ if (widget()->isEndsWith('abc', 'C', true)) {
 
 ### 检查"abc"是否以数组array('a', 'b', 'c')中的任意元素结尾
 ```php
-if (widget()->isEndsWith('abc', array('a', 'b', 'c'))) {
+if (wei()->isEndsWith('abc', array('a', 'b', 'c'))) {
     echo 'Yes';
 } else {
     echo 'No';

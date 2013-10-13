@@ -14,7 +14,7 @@ $post = array(
     'password_confirmation' => '123456',
 );
 
-if (widget()->isIdenticalTo($post['password'], $post['password_confirmation'])) {
+if (wei()->isIdenticalTo($post['password'], $post['password_confirmation'])) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -30,7 +30,7 @@ if (widget()->isIdenticalTo($post['password'], $post['password_confirmation'])) 
 ### 检查`0`和`false`是否完全相等
 
 ```php
-if (widget()->isIdenticalTo(0, false)) {
+if (wei()->isIdenticalTo(0, false)) {
     echo 'Yes';
 } else {
     echo 'No';

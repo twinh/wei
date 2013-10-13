@@ -13,7 +13,7 @@ $rules = array(
     'maxLength' => 5,
     'email' => true
 );
-if (widget()->isSomeOf('abc', $rules)) {
+if (wei()->isSomeOf('abc', $rules)) {
     echo 'Yes';
 } else {
     echo 'No';

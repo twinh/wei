@@ -10,7 +10,7 @@ Pinyin
 
 ```php
 // 输出`PHPweikuangjia`
-echo widget()->pinyin('PHP微框架');
+echo wei()->pinyin('PHP微框架');
 ```
 
 调用方式

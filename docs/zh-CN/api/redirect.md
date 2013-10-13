@@ -9,7 +9,7 @@ Redirect
 ### 等待3秒后跳转到谷歌首页
 
 ```php
-widget()->redirect('http://www.google.com', 302, array(
+wei()->redirect('http://www.google.com', 302, array(
     'wait' => 3
 ));
 ```
@@ -17,7 +17,7 @@ widget()->redirect('http://www.google.com', 302, array(
 ### 直接跳转到谷歌首页
 
 ```php
-widget()->redirect('http://www.google.com');
+wei()->redirect('http://www.google.com');
 ```
 
 ### 自定义跳转视图
@@ -25,7 +25,7 @@ widget()->redirect('http://www.google.com');
 设置全局跳转视图文件
 
 ```php
-widget(array(
+wei(array(
     'redirect' => array(
         'view' => 'path/to/redirect.php'
     )

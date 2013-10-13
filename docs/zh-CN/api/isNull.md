@@ -5,7 +5,7 @@ isNull
 
 ### 检查0是否为null
 ```php
-if (widget()->isNull(0)) {
+if (wei()->isNull(0)) {
     echo 'Yes';
 } else {
     echo 'No';

@@ -12,19 +12,19 @@ Request
 // 假设 $_REQUEST['id'] = 5;
 
 // 返回5
-$id = widget()->request('id');
+$id = wei()->request('id');
 ```
 
 ### 获取当前请求的URL地址
 
 ```php
-$url = widget()->request->getUrl();
+$url = wei()->request->getUrl();
 ```
 
 ### 检查当前请求是否由Ajax发起
 
 ```php
-if (widget()->request->inAjax()) {
+if (wei()->request->inAjax()) {
 	// do something
 }
 ```
@@ -35,7 +35,7 @@ if (widget()->request->inAjax()) {
 // 假设 $_SERVER['SERVER_ADDR'] = '127.0.0.1';
 
 // 返回127.0.0.1
-$ip = widget()->request->getServer('SERVER_ADDR');
+$ip = wei()->request->getServer('SERVER_ADDR');
 ```
 
 调用方式

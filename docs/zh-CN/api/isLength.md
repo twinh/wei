@@ -8,7 +8,7 @@ isLength
 
 ### 检查"abc"的长度是否为3
 ```php
-if (widget()->isLength('abc', 3)) {
+if (wei()->isLength('abc', 3)) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -22,7 +22,7 @@ if (widget()->isLength('abc', 3)) {
 
 ### 检查"abc"的长度是否在3到6之间
 ```php
-if (widget()->isLength('abc', 3, 6)) {
+if (wei()->isLength('abc', 3, 6)) {
     echo 'Yes';
 } else {
     echo 'No';

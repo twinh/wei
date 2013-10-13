@@ -8,7 +8,7 @@ Error
 
 ### 自定义404错误页面
 ```php
-widget()->error->notFound(function($exception){
+wei()->error->notFound(function($exception){
     // 输出错误提醒,这里可以改成加载错误视图,记录错误日志等
     echo 'Page not found';
 

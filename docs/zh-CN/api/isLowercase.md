@@ -8,7 +8,7 @@ isLowercase
 
 ### 检查"abc"是否为小写字符
 ```php
-if (widget()->isLowercase('abc')) {
+if (wei()->isLowercase('abc')) {
     echo 'Yes';
 } else {
     echo 'No';

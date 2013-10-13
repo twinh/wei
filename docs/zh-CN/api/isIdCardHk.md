@@ -8,7 +8,7 @@ isIdCardHk
 
 ### 检查"Z437626A"是否为有效的香港身份证
 ```php
-if (widget()->isIdCardHk('Z437626A')) {
+if (wei()->isIdCardHk('Z437626A')) {
     echo 'Yes';
 } else {
     echo 'No';

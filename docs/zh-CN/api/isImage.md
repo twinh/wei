@@ -8,7 +8,7 @@ isImage
 
 ### 检查文件"5x5.gif"是否为图片且最大高度不能超过5px
 ```php
-if (widget()->isImage('./5x5.gif', array('maxWidth' => 5))) {
+if (wei()->isImage('./5x5.gif', array('maxWidth' => 5))) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -22,7 +22,7 @@ if (widget()->isImage('./5x5.gif', array('maxWidth' => 5))) {
 
 ### 检查文件"5x5.gif"是否为图片且后缀名不能为"gif"
 ```php
-if (widget()->isImage('./5x5.gif', array('excludeExts' => 'gif'))) {
+if (wei()->isImage('./5x5.gif', array('excludeExts' => 'gif'))) {
     echo 'Yes';
 } else {
     echo 'No';

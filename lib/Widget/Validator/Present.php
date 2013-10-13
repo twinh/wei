@@ -9,18 +9,18 @@
 namespace Widget\Validator;
 
 /**
- * Check if the input is empty
+ * Check if the input is not empty
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class EmptyValue extends BaseValidator
+class Present extends BaseValidator
 {
-    protected $emptyMessage = '%name% must be empty';
+    protected $emptyMessage = '%name% must not be empty';
 
-    protected $negativeMessage = '%name% must not be empty';
+    protected $negativeMessage = '%name% must be empty';
 
     /**
-     * The invalid variable values
+     * The invalid variables
      *
      * @var array
      */
@@ -32,10 +32,10 @@ class EmptyValue extends BaseValidator
     protected function doValidate($input)
     {
         if (in_array($input, $this->invalid, true)) {
-            return true;
-        } else {
             $this->addError('empty');
             return false;
+        } else {
+            return true;
         }
     }
 }

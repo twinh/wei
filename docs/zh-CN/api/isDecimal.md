@@ -8,7 +8,7 @@ isDecimal
 
 ### 检查"1.0.0"是否为小数
 ```php
-if (widget()->isDecimal('1.0.0')) {
+if (wei()->isDecimal('1.0.0')) {
     echo 'Yes';
 } else {
     echo 'No';
