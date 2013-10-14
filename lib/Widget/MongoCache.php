@@ -60,7 +60,7 @@ class MongoCache extends BaseCache
         parent::__construct($options);
 
         if (!$this->object) {
-            $mongo = new \Mongo($this->host . ':' . $this->port);
+            $mongo = new \MongoClient($this->host . ':' . $this->port);
             $this->object = $mongo->selectCollection($this->db, $this->collection);
         }
     }
