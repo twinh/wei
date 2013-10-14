@@ -6,7 +6,7 @@ class MongoCacheTest extends CacheTestCase
 {
     public function setUp()
     {
-        if (!extension_loaded('mongo') || !class_exists('\Mongo')) {
+        if (!extension_loaded('mongo') || !class_exists('MongoClient')) {
             $this->markTestSkipped('The mongo extension is not loaded');
         }
 

@@ -84,12 +84,13 @@ class MongoCache extends BaseCache
      */
     protected function doSet($key, $value, $expire = 0)
     {
-        return $this->object->save(array(
+        $result = $this->object->save(array(
             '_id' => $key,
             'value' => serialize($value),
             'expire' => $expire ? time() + $expire : 2147483647,
             'lastModified' => time()
         ));
+        return $result['ok'] === 1.0;
     }
 
     /**
@@ -97,7 +98,8 @@ class MongoCache extends BaseCache
      */
     protected function doRemove($key)
     {
-        return $this->object->remove(array('_id' => $key));
+        $result = $this->object->remove(array('_id' => $key));
+        return $result['ok'] === 1.0;
     }
 
     /**
