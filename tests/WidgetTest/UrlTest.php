@@ -7,24 +7,28 @@ class UrlTest extends TestCase
     /**
      * @dataProvider providerForUrl
      */
-    public function testUrl($url)
+    public function testUrl($result, $url, $params = array())
     {
+        $wei = $this->widget;
+        $wei->request->setBaseUrl('/');
+        $wei->router->setRoutes(array(
+            '/<controller>/<action>',
+            '/<controller>'
+        ));
         $this->request->setBaseUrl('/');
 
-        $args = func_get_args();
-        array_pop($args);
-        $this->assertEquals($url, call_user_func_array(array($this, 'url'), $args));
+        $this->assertEquals($result, $this->url($url, $params));
     }
 
     public function providerForUrl()
     {
         return array(
             array(
-                'users?id=twin',
+                '/users?id=twin',
                 'users?id=twin'
             ),
             array(
-                'user?id=twin',
+                '/user?id=twin',
                 'user',
                 array('id' => 'twin')
             ),

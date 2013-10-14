@@ -13,33 +13,49 @@ namespace Widget;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request A service that handles the HTTP request data
+ * @property    Router $router
  */
 class Url extends Base
 {
     /**
-     * Generate the URL and automatic prepend the base URL
+     * Generate the URL by specified URL and parameters
      *
      * @param string $url
      * @param array $params
      * @return string
      */
-    public function __invoke($url = null, $params = array())
+    public function __invoke($url, $params = array())
     {
-        if (is_array($params)) {
-            $url .= http_build_query($params);
-        }
-        return $this->request->getBaseUrl() . $url;
+        return $this->router->generatePath($this->parse($url) + $params);
     }
 
     /**
-     * Build full URL by specified uri and parameters
+     * Generate the full URL path by specified URL and parameters
      *
+     * @param string $url
+     * @param array $params
      * @return string
      */
-    public function full()
+    public function full($url, $params = array())
     {
-        $arr = call_user_func_array(array($this, 'parse'), func_get_args());
+        return $this->request->getUrlFor($this->__invoke($url, $params));
+    }
 
-        return $this->router->generateUrl($arr);
+    /**
+     * Parse the URL by router
+     *
+     * @param string $url
+     * @return array
+     */
+    protected function parse($url)
+    {
+        $url = $this->request->getBaseUrl() . '/' . $url;
+        $params = $this->router->match($url);
+        if (is_array($params)) {
+            unset($params['_id']);
+            return $params;
+        } else {
+            return array();
+        }
     }
 }
