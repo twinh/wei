@@ -185,7 +185,6 @@ class Couchbase extends BaseCache
     public function setObject(\Couchbase $object)
     {
         $this->object = $object;
-
         return $this;
     }
 }
