@@ -287,7 +287,9 @@ $bool = wei()->isDigit($age);
     * false
     * array() (空数组)
 
-* 当数据完全由以下任意字符组成时,`notBlank`规则会验证不通过,返回`false`
+* 当数据完全由空白字符组成时,`notBlank`规则会验证不通过,返回`false`
+
+    空白字符如下表:
 
     字符   | ASCII | 说明
     -------|-------|------
@@ -300,7 +302,7 @@ $bool = wei()->isDigit($age);
 
     来源参见[trim](http://www.php.net/manual/zh/function.trim.php)函数
 
-* 当数据由其他字符组成(包括0),所有规则均验证通过,返回`true`
+* 当数据由其他字符组成(包括字符串`'0'`和数字`0`),所有规则均验证通过,返回`true`
 
 ##### 案例:区分`all`和`allOf`验证规则
 
