@@ -5095,7 +5095,9 @@
 </ul>
 </li>
 <li>
-<p>当数据完全由以下任意字符组成时,<code>notBlank</code>规则会验证不通过,返回<code>false</code></p>
+<p>当数据完全由空白字符组成时,<code>notBlank</code>规则会验证不通过,返回<code>false</code></p>
+
+<p>空白字符如下表:</p>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -5138,7 +5140,7 @@
 </table>
 <p>来源参见<a href="http://www.php.net/manual/zh/function.trim.php" target="_blank">trim</a>函数</p>
 </li>
-<li><p>当数据由其他字符组成(包括0),所有规则均验证通过,返回<code>true</code></p></li>
+<li><p>当数据由其他字符组成(包括字符串<code>'0'</code>和数字<code>0</code>),所有规则均验证通过,返回<code>true</code></p></li>
 </ul><h5>案例:区分<code>all</code>和<code>allOf</code>验证规则</h5>
 
 <p>规则说明:</p>
