@@ -43,7 +43,7 @@ namespace Widget
      * @method   mixed      bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
      *
      * Database
-     * @property Db                      $db A database object
+     * @property Db                      $db A database service inspired by Doctrine DBAL
      * @method   \Widget\Db\QueryBuilder db($table = null) Create a new instance of a SQL query builder with specified table name
      *
      * @property Call           $call A object handles HTTP request like jQuery Ajax

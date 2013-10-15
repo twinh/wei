@@ -12,7 +12,7 @@ use PDO;
 use Widget\Db\Collection;
 
 /**
- * A database widget that compatible with Doctrine DBAL
+ * A database service inspired by Doctrine DBAL
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
