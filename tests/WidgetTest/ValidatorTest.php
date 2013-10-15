@@ -759,4 +759,13 @@ class ValidatorTest extends TestCase
         $invalidRules = $validator->getInvalidRules('username');
         $this->assertEquals(array('required'), $invalidRules);
     }
+
+    public function testValidatorRuleGetFirstMessage()
+    {
+        $wei = $this->widget;
+        $wei->isIn('apple', array('pear', 'orange'));
+
+        $this->assertInternalType('string', $wei->isIn->getFirstMessage());
+        $this->assertContains('name', $wei->isIn->getFirstMessage('name'));
+    }
 }

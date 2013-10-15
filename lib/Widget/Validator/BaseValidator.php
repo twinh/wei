@@ -219,6 +219,17 @@ abstract class BaseValidator extends Base
     }
 
     /**
+     * Returns the first error message
+     *
+     * @param string $name
+     * @return string
+     */
+    public function getFirstMessage($name = null)
+    {
+        return current($this->getMessages($name));
+    }
+
+    /**
      * Loads the validator translation messages
      *
      * @todo better way?
