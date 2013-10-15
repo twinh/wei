@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A cache widget proxy
+ * A cache service proxy
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
@@ -36,14 +36,18 @@ class Cache extends BaseCache
      */
     public function __construct(array $options = array())
     {
-        parent::__construct($options + get_object_vars($this));
+        parent::__construct($options);
+
+        if (!$this->object) {
+            $this->setDriver($this->driver);
+        }
     }
 
     /**
      * Set cache driver
      *
      * @param string $driver
-     * @return Cache
+     * @return $this
      * @throws \InvalidArgumentException
      */
     public function setDriver($driver)
@@ -59,9 +63,7 @@ class Cache extends BaseCache
         }
 
         $this->driver = $driver;
-
         $this->object = $this->widget->get($driver);
-
         return $this;
     }
 
