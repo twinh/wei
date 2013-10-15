@@ -302,7 +302,7 @@ $bool = wei()->isDigit($age);
 
     来源参见[trim](http://www.php.net/manual/zh/function.trim.php)函数
 
-* 当数据由其他字符组成(包括字符串`'0'`和数字`0`),所有规则均验证通过,返回`true`
+* 当数据由其他字符组成(包括字符串`"0"`和数字`0`),所有规则均验证通过,返回`true`
 
 ##### 案例:区分`all`和`allOf`验证规则
 
