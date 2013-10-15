@@ -655,21 +655,39 @@ class Db extends Base
      * ```
      *
      * @param string $table The name of table
-     * @param string|array $id The primary key value
+     * @param string|array $id The primary key value or an associative array containing column-value pairs
      * @return Db\Record|false
      */
     public function find($table, $id)
     {
         $data = $this->select($table, $id);
-
         return $data ? $this->create($table, $data, false) : false;
+    }
+
+    /**
+     * Find a record from specified table and conditions
+     * and throws 404 exception when record not found
+     *
+     * @param string $table
+     * @param string|arrray $id The primary key value or an associative array containing column-value pairs
+     * @return Db\Record|false
+     * @throws \Exception
+     */
+    public function findOne($table, $id)
+    {
+        $record = $this->find($table, $id);
+        if ($record) {
+            return $record;
+        } else {
+            throw new \Exception('Record not found', 404);
+        }
     }
 
     /**
      * Find a record, if not found, create a new one from specified data
      *
      * @param string $table The name of table
-     * @param string $id The primary key value
+     * @param string $id The primary key value or an associative array containing column-value pairs
      * @param array $data The data to create a new record when record not found
      * @return Db\Record
      */

@@ -1192,4 +1192,13 @@ class DbTest extends TestCase
         $member2->reload();
         $this->assertEquals($member->group_id, $member2->group_id);
     }
+
+    public function testFindOne()
+    {
+        $this->initFixtures();
+
+        $this->setExpectedException('Exception', 'Record not found', 404);
+
+        $this->db->findOne('member', 999);
+    }
 }
