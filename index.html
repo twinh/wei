@@ -4930,7 +4930,7 @@
 <li>如果<code>$data</code>是对象且方法<code>get. $key</code>存在,返回<code>$data-&gt;{'get' . $key}</code>
 </li>
 <li>如果以上均不存在,返回null</li>
-</ol><h5>案例:使用数组和对象作为验证数据</h5>
+</ol><h5>案例:使用数组或对象作为验证数据</h5>
 
 <div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">User</span>
 <span class="p">{</span>
@@ -5036,9 +5036,6 @@
 
 <span class="c1">// 通过isDigit验证对象,验证数据</span>
 <span class="nv">$bool</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isDigit</span><span class="p">(</span><span class="nv">$age</span><span class="p">);</span>
-
-<span class="c1">// 通过is对象,指定验证规则验证数据</span>
-<span class="nv">$bool</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">'digit'</span><span class="p">,</span> <span class="nv">$age</span><span class="p">);</span>
 </code></pre></div>
 
 <h5>案例:区分<code>required</code>,<code>notBlank</code>和<code>present</code>验证规则</h5>
