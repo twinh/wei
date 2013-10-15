@@ -62,7 +62,7 @@ abstract class BaseValidator extends Base
      * negative validator. The negative validator will returns $this->negativeMessage
      * as the error message currently
      *
-     * @var string
+     * @var bool
      */
     protected $negative = false;
 
