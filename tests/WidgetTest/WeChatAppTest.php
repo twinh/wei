@@ -14,17 +14,18 @@ class WeChatAppTest extends TestCase
     public function testForbiddenForInvalidSignature()
     {
         $app = $this->object;
+
         $app->setOption('query', array(
             'signature' => 'invalid',
             'timestamp' => 'invalid',
             'nonce'     => 'invalid',
         ));
-
-        $this->expectOutputString('Forbidden');
-
         $app->parse();
-        $return = $app();
 
+        $this->assertFalse($app->run());
+
+        $this->expectOutputString('');
+        $return = $app();
         $this->assertInstanceOf('\Widget\WeChatApp', $return);
     }
 
