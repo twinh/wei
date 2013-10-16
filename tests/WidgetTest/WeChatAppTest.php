@@ -52,7 +52,7 @@ class WeChatAppTest extends TestCase
     {
         $app = $this->object;
 
-        $app->fallback(function(){
+        $app->defaults(function(){
             return 'never see me';
         });
 
@@ -94,7 +94,7 @@ class WeChatAppTest extends TestCase
         // Inject user input message
         $app->setOption('postData', $input);
 
-        $app->fallback(function($app){
+        $app->defaults(function($app){
             return "Your input is " . $app->getContent();
         });
 

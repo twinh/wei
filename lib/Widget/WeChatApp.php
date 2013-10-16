@@ -56,10 +56,11 @@ class WeChatApp extends Base
     );
 
     /**
-     * @var string
-     * @todo better name
+     * A handler executes when none of the rule handled the input
+     *
+     * @var callable
      */
-    protected $fallback;
+    protected $defaults;
 
     /**
      * Whether the signature is valid
@@ -213,8 +214,8 @@ class WeChatApp extends Base
                 break;
         }
 
-        if (!$this->handled && $this->fallback) {
-            return $this->handle($this->fallback);
+        if (!$this->handled && $this->defaults) {
+            return $this->handle($this->defaults);
         }
     }
 
@@ -371,14 +372,14 @@ class WeChatApp extends Base
     }
 
     /**
-     *  Attach a callback which triggered when none of the rule handled the input
+     * Attach a handler which executes when none of the rule handled the input
      *
-     * @param \Closure $fn
+     * @param Closure $fn
      * @return boolean
      */
-    public function fallback(Closure $fn)
+    public function defaults(Closure $fn)
     {
-        $this->fallback = $fn;
+        $this->defaults = $fn;
         return $this;
     }
 
@@ -386,7 +387,7 @@ class WeChatApp extends Base
      * Generate text message for output
      *
      * @param string $content
-     * @return \SimpleXMLElement
+     * @return SimpleXMLElement
      */
     public function sendText($content)
     {
