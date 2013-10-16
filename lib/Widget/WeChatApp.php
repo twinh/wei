@@ -160,6 +160,9 @@ class WeChatApp extends Base
         return $this;
     }
 
+    /**
+     * Parse request data
+     */
     public function parse()
     {
         // Check if it's requested from the WeChat server
@@ -695,20 +698,6 @@ class WeChatApp extends Base
         return $this->url;
     }
 
-    protected function handle($fn)
-    {
-        $this->handled = true;
-
-        $content = $fn($this, $this->widget);
-        if (!$content instanceof SimpleXMLElement) {
-            $content = $this->sendText($content);
-        }
-
-        $this->beforeSend && call_user_func($this->beforeSend, $this, $content, $this->widget);
-
-        return $content->asXML();
-    }
-
     /**
      * Generate message for output
      *
@@ -778,7 +767,7 @@ class WeChatApp extends Base
      *
      * @param string $name
      * @param string $key
-     * @param callable $fn
+     * @param Closure $fn
      * @return $this
      */
     protected function addEventRule($name, $key, Closure $fn)
@@ -842,32 +831,44 @@ class WeChatApp extends Base
      */
     protected function handleText()
     {
-        $matched = false;
         foreach ($this->rules['text'] as $rule) {
-            switch ($rule['type']) {
-                case 'is':
-                    $matched = 0 === strcasecmp($this->content, $rule['keyword']);
-                    break;
-
-                case 'has' :
-                    $matched = false !== mb_stripos($this->content, $rule['keyword']);
-                    break;
-
-                case 'startsWith':
-                    if (0 === mb_stripos($this->content, $rule['keyword'])) {
-                        $matched = true;
-                        $this->keyword = substr($this->content, strlen($rule['keyword']));
-                    }
-                    break;
-
-                case 'match':
-                    $matched = preg_match($rule['keyword'], $this->content);
-                    break;
+            if ($rule['type'] == 'is' && 0 === strcasecmp($this->content, $rule['keyword'])) {
+                return $this->handle($rule['fn']);
             }
-            if ($matched) {
+
+            if ($rule['type'] == 'has' && false !== mb_stripos($this->content, $rule['keyword'])) {
+                return $this->handle($rule['fn']);
+            }
+
+            if ($rule['type'] == 'startsWith' && 0 === mb_stripos($this->content, $rule['keyword'])) {
+                $this->keyword = substr($this->content, strlen($rule['keyword']));
+                return $this->handle($rule['fn']);
+            }
+
+            if ($rule['type'] == 'match' && preg_match($rule['keyword'], $this->content)) {
                 return $this->handle($rule['fn']);
             }
         }
         return false;
+    }
+
+    /**
+     * Executes callback handler
+     *
+     * @param Closure $fn
+     * @return string
+     */
+    protected function handle($fn)
+    {
+        $this->handled = true;
+
+        $content = $fn($this, $this->widget);
+        if (!$content instanceof SimpleXMLElement) {
+            $content = $this->sendText($content);
+        }
+
+        $this->beforeSend && call_user_func($this->beforeSend, $this, $content, $this->widget);
+
+        return $content->asXML();
     }
 }
