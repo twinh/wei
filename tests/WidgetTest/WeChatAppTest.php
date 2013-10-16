@@ -53,7 +53,7 @@ class WeChatAppTest extends TestCase
         $app = $this->object;
 
         $app->fallback(function(){
-            return 'nerver see me';
+            return 'never see me';
         });
 
         $app->setOption('query', array(
@@ -73,7 +73,8 @@ class WeChatAppTest extends TestCase
     public function testHttpRawPostData()
     {
         $GLOBALS['HTTP_RAW_POST_DATA'] = 'test';
-        $app = new \Widget\WeChatApp();
+
+        $app = new WeChatApp(array('widget' => $this->widget));
 
         $this->assertEquals('test', $app->getOption('postData'));
     }
@@ -542,5 +543,63 @@ class WeChatAppTest extends TestCase
             'nonce'     => '1365872231'
         ));
         $this->assertFalse($app->isVerifyToken());
+    }
+
+    /**
+     * @dataProvider providerForCase
+     */
+    public function testCase($input, $output)
+    {
+        $app = $this->object;
+
+        $app->is('abc', function(){
+            return 'abc';
+        });
+
+        $app->startsWith('d', function(){
+            return 'd';
+        });
+
+        $app->has('e', function(){
+            return 'e';
+        });
+
+        $this->assertEquals($output, $this->runWithInput($input));
+    }
+
+    public function providerForCase()
+    {
+        return array(
+            array('abc', 'abc'),
+            array('ABC', 'abc'), // Case insensitive
+            array('Abc', 'abc'),
+            array('dabc', 'd'),
+            array('Dabc', 'd'),
+            array('d中文', 'd'),
+            array('e', 'e'),
+            array('EAbc', 'e'),
+            array('ARE', 'e'),
+        );
+    }
+
+    protected function runWithInput($text)
+    {
+        $app = $this->object;
+
+        // Set request parameters
+        $app->setOption('query', array(
+            'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+            'timestamp' => '1366032735',
+            'nonce'     => '1365872231',
+        ));
+        $app->setOption('postData', $this->inputTextMessage($text));
+
+        // Re-parse
+        $app->parse();
+
+        // Execute and parse result
+        $result = $app->run();
+        $result = simplexml_load_string($result);
+        return $result->Content;
     }
 }

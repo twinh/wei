@@ -821,15 +821,15 @@ class WeChatApp extends Base
             $matched = false;
             switch ($rule['type']) {
                 case 'is':
-                    $matched = $this->content == $rule['keyword'];
+                    $matched = 0 === strcasecmp($this->content, $rule['keyword']);
                     break;
 
                 case 'has' :
-                    $matched = false !== strpos($this->content, $rule['keyword']);
+                    $matched = false !== mb_stripos($this->content, $rule['keyword']);
                     break;
 
                 case 'startsWith':
-                    if (0 === stripos($this->content, $rule['keyword'])) {
+                    if (0 === mb_stripos($this->content, $rule['keyword'])) {
                         $matched = true;
                         $this->keyword = substr($this->content, strlen($rule['keyword']));
                     }
