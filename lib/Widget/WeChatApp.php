@@ -237,7 +237,7 @@ class WeChatApp extends Base
     /**
      * Attach a callback which triggered when user subscribed you
      *
-     * @param \Closure $fn
+     * @param Closure $fn
      * @return $this
      */
     public function subscribe(Closure $fn)
@@ -248,7 +248,7 @@ class WeChatApp extends Base
     /**
      * Attach a callback which triggered when user unsubscribed you
      *
-     * @param \Closure $fn
+     * @param Closure $fn
      * @return $this
      */
     public function unsubscribe(Closure $fn)
@@ -260,7 +260,7 @@ class WeChatApp extends Base
      * Attach a callback which triggered when user click the custom menu
      *
      * @param string $key The key of event
-     * @param \Closure $fn
+     * @param Closure $fn
      * @return $this
      */
     public function click($key, Closure $fn)
@@ -272,7 +272,7 @@ class WeChatApp extends Base
      * Attach a callback which triggered when user input equals to the keyword
      *
      * @param string $keyword The keyword to compare with user input
-     * @param \Closure $fn
+     * @param Closure $fn
      * @return $this
      */
     public function is($keyword, Closure $fn)
@@ -284,7 +284,7 @@ class WeChatApp extends Base
      * Attach a callback with a keyword, which triggered when user input contains the keyword
      *
      * @param string $keyword The keyword to search in user input
-     * @param \Closure $fn
+     * @param Closure $fn
      * @return $this
      */
     public function has($keyword, Closure $fn)
@@ -296,7 +296,7 @@ class WeChatApp extends Base
      * Attach a callback with a keyword, which triggered when user input starts with the keyword (case insensitive)
      *
      * @param string $keyword The keyword to search in user input
-     * @param \Closure $fn
+     * @param Closure $fn
      * @return $this
      */
     public function startsWith($keyword, Closure $fn)
@@ -308,7 +308,7 @@ class WeChatApp extends Base
      * Attach a callback with a regex pattern which triggered when user input match the pattern
      *
      * @param string $pattern The pattern to match
-     * @param \Closure $fn
+     * @param Closure $fn
      * @return $this
      */
     public function match($pattern, Closure $fn)
@@ -319,7 +319,7 @@ class WeChatApp extends Base
     /**
      * Attach a callback to handle image message
      *
-     * @param \Closure $fn
+     * @param Closure $fn
      * @return $this
      */
     public function receiveImage(Closure $fn)
@@ -331,7 +331,7 @@ class WeChatApp extends Base
     /**
      * Attach a callback to handle location message
      *
-     * @param \Closure $fn
+     * @param Closure $fn
      * @return $this
      */
     public function receiveLocation(Closure $fn)
@@ -343,7 +343,7 @@ class WeChatApp extends Base
     /**
      * Attach a callback to handle voice message
      *
-     * @param \Closure $fn
+     * @param Closure $fn
      * @return $this
      */
     public function receiveVoice(Closure $fn)
