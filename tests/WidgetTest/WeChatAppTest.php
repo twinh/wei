@@ -22,6 +22,7 @@ class WeChatAppTest extends TestCase
         ));
         $app->parse();
 
+        $this->assertFalse($app->isValid());
         $this->assertFalse($app->run());
 
         $this->expectOutputString('');
@@ -39,7 +40,6 @@ class WeChatAppTest extends TestCase
             'echostr'   => $rand = mt_rand(0, 100000)
         ));
 
-        //$this->expectOutputString($rand);
         ob_start();
         $app->parse();
         $return = $app();
@@ -64,7 +64,6 @@ class WeChatAppTest extends TestCase
             'echostr'   => $rand = mt_rand(0, 100000)
         ));
 
-        //$this->expectOutputString($rand);
         ob_start();
         $app->parse();
         $app();
@@ -183,6 +182,7 @@ class WeChatAppTest extends TestCase
         $return = $app();
         $content = ob_get_clean();
 
+        $this->assertTrue($app->isValid());
         $this->assertInstanceOf('\Widget\WeChatApp', $return);
 
         foreach ($data as $name => $value) {
