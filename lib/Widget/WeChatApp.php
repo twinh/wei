@@ -75,6 +75,11 @@ class WeChatApp extends Base
      */
     protected $handled = false;
 
+    /**
+     * The callback executes before send the xml data
+     *
+     * @var callable
+     */
     protected $beforeSend;
 
     /**
@@ -701,8 +706,8 @@ class WeChatApp extends Base
      * Generate message for output
      *
      * @param string $type The type of message
-     * @param \SimpleXMLElement $xml The xml object
-     * @return \SimpleXMLElement
+     * @param SimpleXMLElement $xml The xml object
+     * @return SimpleXMLElement
      */
     protected function send($type, SimpleXMLElement $xml)
     {
@@ -744,7 +749,7 @@ class WeChatApp extends Base
     }
 
     /**
-     * Adds rule to handle user input
+     * Adds a rule to handle user text input
      *
      * @param string $type
      * @param string $keyword
@@ -761,6 +766,14 @@ class WeChatApp extends Base
         return $this;
     }
 
+    /**
+     * Adds a rule to handle user event, such as click, subscribe
+     *
+     * @param string $name
+     * @param string $key
+     * @param callable $fn
+     * @return $this
+     */
     protected function addEventRule($name, $key, Closure $fn)
     {
         $this->rules['event'][$name][$key] = $fn;
