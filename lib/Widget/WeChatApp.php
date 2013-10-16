@@ -815,10 +815,15 @@ class WeChatApp extends Base
         return isset($query['signature']) && $tmpStr === $query['signature'];
     }
 
+    /**
+     * Handle text rule
+     *
+     * @return string|false
+     */
     protected function handleText()
     {
+        $matched = false;
         foreach ($this->rules['text'] as $rule) {
-            $matched = false;
             switch ($rule['type']) {
                 case 'is':
                     $matched = 0 === strcasecmp($this->content, $rule['keyword']);
@@ -843,5 +848,6 @@ class WeChatApp extends Base
                 return $this->handle($rule['fn']);
             }
         }
+        return false;
     }
 }
