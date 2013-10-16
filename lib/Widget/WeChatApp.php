@@ -487,6 +487,11 @@ class WeChatApp extends Base
         return $this->send('news', $xml);
     }
 
+    /**
+     * Returns if the token is valid
+     *
+     * @return bool
+     */
     public function isValid()
     {
         return $this->valid;
