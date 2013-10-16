@@ -409,7 +409,7 @@ class WeChatApp extends Base
      * @param string $description The description display blow the title
      * @param string $url The music URL for player
      * @param string $hqUrl The HQ music URL for player when user in WIFI
-     * @return \SimpleXMLElement
+     * @return SimpleXMLElement
      */
     public function sendMusic($title, $description, $url, $hqUrl = null)
     {
@@ -456,7 +456,7 @@ class WeChatApp extends Base
      * ```
      *
      * @param array $articles The article array
-     * @return \SimpleXMLElement
+     * @return SimpleXMLElement
      */
     public function sendArticle(array $articles)
     {
@@ -731,7 +731,7 @@ class WeChatApp extends Base
     /**
      * Create a root xml object
      *
-     * @return \SimpleXMLElement
+     * @return SimpleXMLElement
      */
     protected function createXml()
     {
@@ -742,7 +742,7 @@ class WeChatApp extends Base
     /**
      * Adds a cdata section to specified xml object
      *
-     * @param \SimpleXMLElement $xml
+     * @param SimpleXMLElement $xml
      * @param string $name
      * @param string $value
      * @return $this
@@ -760,7 +760,7 @@ class WeChatApp extends Base
      *
      * @param string $type
      * @param string $keyword
-     * @param \Closure $fn
+     * @param Closure $fn
      * @return $this
      */
     protected function addRule($type, $keyword, Closure $fn)
