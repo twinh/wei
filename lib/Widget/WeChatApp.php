@@ -172,14 +172,17 @@ class WeChatApp extends Base
     }
 
     /**
-     * Parse the user input message and return matched rule message
+     * Execute the matched rule and returns the rule result
      *
-     * @return string|null
+     * Returns false when the token is invalid or no rules matched
+     *
+     * @return string|false
      */
     public function run()
     {
+        // The token is invalid
         if (!$this->valid) {
-            return 'Forbidden';
+            return false;
         }
 
         // Output 'echostr' for fist time authentication
@@ -214,9 +217,12 @@ class WeChatApp extends Base
                 break;
         }
 
+        // Fallback to the default rule
         if (!$this->handled && $this->defaults) {
             return $this->handle($this->defaults);
         }
+
+        return false;
     }
 
     /**
