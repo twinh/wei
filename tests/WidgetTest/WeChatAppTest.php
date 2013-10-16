@@ -603,4 +603,54 @@ class WeChatAppTest extends TestCase
         $result = simplexml_load_string($result);
         return $result->Content;
     }
+
+    public function testNoRuleHandled()
+    {
+        $app = $this->object;
+
+        // Set request parameters
+        $app->setOption('query', array(
+            'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+            'timestamp' => '1366032735',
+            'nonce'     => '1365872231',
+        ));
+        $app->setOption('postData', $this->inputTextMessage('test'));
+
+        // Re-parse
+        $app->parse();
+
+        // Execute and parse result
+        $result = $app->run();
+
+        $this->assertFalse($result);
+    }
+
+    public function testHasEventButNotMatch()
+    {
+        $app = $this->object;
+
+        // Set request parameters
+        $app->setOption('query', array(
+            'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+            'timestamp' => '1366032735',
+            'nonce'     => '1365872231',
+        ));
+        $app->setOption('postData', '<xml>
+                    <ToUserName><![CDATA[toUser]]></ToUserName>
+                    <FromUserName><![CDATA[fromUser]]></FromUserName>
+                    <CreateTime>1366131865</CreateTime>
+                    <MsgType><![CDATA[event]]></MsgType>
+                    <Event><![CDATA[CLICK]]></Event>
+                    <EventKey><![CDATA[index]]></EventKey>
+                 </xml>');
+
+        // Re-parse
+        $app->parse();
+
+        $app->click('my', function(){
+            return 'My info';
+        });
+
+        $this->assertFalse($app->run());
+    }
 }

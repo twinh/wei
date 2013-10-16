@@ -200,7 +200,7 @@ class WeChatApp extends Base
                 }
                 break;
 
-            case  'event':
+            case 'event':
                 $eventRule = $this->rules['event'];
                 $event = strtolower($this->event);
                 if (isset($eventRule[$event])
@@ -209,15 +209,11 @@ class WeChatApp extends Base
                 }
                 break;
 
-            case 'location':
-            case 'image':
-            case 'voice':
-            case 'video':
-            case 'link':
+            // including location, image, voice, video, link
+            default:
                 if (isset($this->rules[$this->msgType])) {
                     return $this->handle($this->rules[$this->msgType]);
                 }
-                break;
         }
 
         // Fallback to the default rule
