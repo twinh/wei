@@ -58,4 +58,29 @@ class Test extends \Widget\Base
     {
         return 'target';
     }
+
+    public function returnInt()
+    {
+        return 123;
+    }
+
+    public function returnNull()
+    {
+        return null;
+    }
+
+    public function returnFloat()
+    {
+        return 1.1;
+    }
+
+    public function returnTrue()
+    {
+        return true;
+    }
+
+    public function returnFalse()
+    {
+        return false;
+    }
 }

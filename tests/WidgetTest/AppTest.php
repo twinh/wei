@@ -187,4 +187,45 @@ class AppTest extends TestCase
 
         $this->app();
     }
+
+    /**
+     * @dataProvider providerForActionReturnValue
+     */
+    public function testActionReturnValue($action, $output)
+    {
+        $this->expectOutputString($output);
+
+        $this->request->set(array(
+            'controller' => 'test',
+            'action' => $action
+        ));
+
+        $this->app();
+    }
+
+    public function providerForActionReturnValue()
+    {
+        return array(
+            array(
+                'returnInt',
+                '123'
+            ),
+            array(
+                'returnNull',
+                '',
+            ),
+            array(
+                'returnFloat',
+                '1.1',
+            ),
+            array(
+                'returnTrue',
+                '1'
+            ),
+            array(
+                'returnFalse',
+                ''
+            )
+        );
+    }
 }
