@@ -156,7 +156,7 @@ class App extends Base
                 // No break here, $response is use for next case detect
 
             // Response directly
-            case is_string($response) :
+            case is_scalar($response) :
             case is_null($response) :
                 return $this->response->send($response);
 
