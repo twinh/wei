@@ -7,6 +7,7 @@ isFile
 ----
 
 ### 检查文件"5x5.gif"是否为存在且大小小于1.2mb
+
 ```php
 if (wei()->isImage('./5x5.gif', array('maxSize' => '1.2mb'))) {
     echo 'Yes';
@@ -16,6 +17,7 @@ if (wei()->isImage('./5x5.gif', array('maxSize' => '1.2mb'))) {
 ```
 
 #### 运行结果
+
 ```php
 'Yes'
 ```
@@ -25,24 +27,29 @@ if (wei()->isImage('./5x5.gif', array('maxSize' => '1.2mb'))) {
 
 ### 选项
 
-| 名称                           | 类型       | 默认值    |  说明                                                           |
-|--------------------------------|------------|-----------|-----------------------------------------------------------------|
-| maxSize                        | int        | 0         | 允许的文件最大字节数,允许使用类似`10.5MB`, `500KB`的文件大小值  |
-| minSize                        | int        | 0         | 允许的文件最小字节数,允许使用类似`10.5MB`, `500KB`的文件大小值  |
-| exts                           | array      | array()   | 允许的文件扩展名                                                |
-| excludeExts                    | array      | array()   | 不允许的文件扩展名                                              |
-| mimeTypes                      | array      | array()   | 允许的文件媒体类型                                              |
-| excludeMimeTypes               | array      | array()   | 不允许的文件媒体类型                                            |
-| notFoundMessage                | string     | %name%不存在或不可读                                           | -          |
-| maxSizeMessage                 | string     | %name%太大了(%sizeString%),允许的最大文件大小为%maxSizeString% | -          |
-| minSizeMessage                 | string     | %name%太小了(%sizeString%),允许的最小文件大小为%minSizeString% | -          |
-| extsMessage                    | string     | %name%的扩展名(%ext%)不合法,只允许扩展名为:%exts%              | -          |
-| excludeExtsMessage             | string     | %name%的扩展名(%ext%)不合法,不允许扩展名为:%excludeExts%       | -          |
-| mimeTypeNotDetectedMessage     | string     | 无法检测%name%的媒体类型                                       | -          |
-| mimeTypesMessage               | string     | %name%的媒体类型不合法                                         | -          |
-| excludeMimeTypesMessage        | string     | %name%的媒体类型不合法                                         | -          |
-| negativeMessage                | string     | %name%必须是不存在的文件                                       | -          |
-| notStringMessage               | string     | %name%必须是字符串                                             | -          |
+名称             | 类型       | 默认值    |  说明
+-----------------|------------|-----------|-------
+maxSize          | int        | 0         | 允许的文件最大字节数,允许使用类似`10.5MB`, `500KB`的文件大小值
+minSize          | int        | 0         | 允许的文件最小字节数,允许使用类似`10.5MB`, `500KB`的文件大小值
+exts             | array      | array()   | 允许的文件扩展名
+excludeExts      | array      | array()   | 不允许的文件扩展名
+mimeTypes        | array      | array()   | 允许的文件媒体类型
+excludeMimeTypes | array      | array()   | 不允许的文件媒体类型
+
+### 错误信息
+
+名称                       | 信息
+---------------------------|------
+notStringMessage           | %name%必须是字符串
+notFoundMessage            | %name%不存在或不可读
+maxSizeMessage             | %name%太大了(%sizeString%),允许的最大文件大小为%maxSizeString%
+minSizeMessage             | %name%太小了(%sizeString%),允许的最小文件大小为%minSizeString%
+extsMessage                | %name%的扩展名(%ext%)不合法,只允许扩展名为:%exts%
+excludeExtsMessage         | %name%的扩展名(%ext%)不合法,不允许扩展名为:%excludeExts%
+mimeTypeNotDetectedMessage | 无法检测%name%的媒体类型
+mimeTypesMessage           | %name%的媒体类型不合法
+excludeMimeTypesMessage    | %name%的媒体类型不合法
+negativeMessage            | %name%必须是不存在的文件
 
 ### 方法
 
