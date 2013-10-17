@@ -55,7 +55,6 @@ class T extends Base
         if (isset($this->data[$message])) {
             $message = $this->data[$message];
         }
-
         return $parameters ? strtr($message, $parameters) : $message;
     }
 
