@@ -8,16 +8,14 @@
 
 namespace Widget;
 
-use Widget\Response;
-
 /**
  * A service to build simple MVC application
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @method      Response response(string $content, int $status = 200) Send headers and output content
+ * @property    Request $request A service that handles the HTTP request data
+ * @property    Response $response A service that handles the HTTP response data
  * @property    View $view A service that use to render PHP template
- * @property    Logger $logger The logger widget
- * @property    Request $request The HTTP request widget
+ * @property    Logger $logger A simple logger service, which is inspired by Monolog
  */
 class App extends Base
 {
@@ -159,7 +157,7 @@ class App extends Base
             // Response directly
             case is_string($response) :
             case is_null($response) :
-                return $this->response($response);
+                return $this->response->send($response);
 
             // Response if not sent
             case $response instanceof Response :

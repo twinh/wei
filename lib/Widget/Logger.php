@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A simple logger widget, which is base on the Monolog
+ * A simple logger service, which is base on the Monolog
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        https://github.com/Seldaek/monolog
