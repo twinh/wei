@@ -41,13 +41,6 @@ abstract class BaseValidator extends Base
     protected $name = 'This value';
 
     /**
-     * The error definition
-     *
-     * @var array
-     */
-    protected $errors = array();
-
-    /**
      * The summary message that would overwrite all $this->xxxMessage messages
      * when called addError, which MAY useful when you want to set message for
      * the validator
@@ -65,6 +58,13 @@ abstract class BaseValidator extends Base
      * @var bool
      */
     protected $negative = false;
+
+    /**
+     * The error definition
+     *
+     * @var array
+     */
+    protected $errors = array();
 
     /**
      * The validate widget, available when this rule validator is invoked from validate widget
@@ -117,53 +117,6 @@ abstract class BaseValidator extends Base
      * @return boolean
      */
     abstract protected function doValidate($input);
-
-    /**
-     * Set property value
-     *
-     * @param string|array $name The name of property
-     * @param mixed $value The value of property
-     * @internal This method should be use to set __invoke arguments only
-     */
-    protected function storeOption($name, $value = null)
-    {
-        // Handle array
-        if (is_array($name)) {
-            foreach ($name as $key => $value) {
-                $this->storeOption($key, $value);
-            }
-            return;
-        }
-
-        if (property_exists($this, $name)) {
-            if (!array_key_exists($name, $this->backup)) {
-                $this->backup[$name] = $this->$name;
-            }
-            $this->store[count($this->store) - 1][$name] = $value;
-        }
-        $this->setOption($name, $value);
-    }
-
-    /**
-     * Reset validator status
-     *
-     * @internal
-     */
-    protected function reset()
-    {
-        $this->errors = array();
-
-        if (count($this->store) >= 2) {
-            $last = end($this->store);
-            foreach ($this->backup as $name => $value) {
-                if (!array_key_exists($name, $last)) {
-                    $this->$name = $value;
-                }
-            }
-            array_shift($this->store);
-        }
-        $this->store[] = array();
-    }
 
     /**
      * Returns the error messages
@@ -223,14 +176,6 @@ abstract class BaseValidator extends Base
     }
 
     /**
-     * Loads the validator translation messages
-     */
-    protected function loadTranslationMessages()
-    {
-        $this->t->loadFromFile(dirname(__DIR__) . '/Resource/i18n/%s/validator.php');
-    }
-
-    /**
      * Sets the specified messages
      *
      * @param array $messages
@@ -277,17 +222,6 @@ abstract class BaseValidator extends Base
     }
 
     /**
-     * Adds error definition
-     *
-     * @param string $name The name of error
-     * @param string $customMessage The custom error message
-     */
-    protected function addError($name, $customMessage = null)
-    {
-        $this->errors[$name] = $customMessage ?: $this->message ?: $this->{$name . 'Message'};
-    }
-
-    /**
      * Returns whether the error defined
      *
      * @param string $name
@@ -299,6 +233,25 @@ abstract class BaseValidator extends Base
     }
 
     /**
+     * Adds error definition
+     *
+     * @param string $name The name of error
+     * @param string $customMessage The custom error message
+     */
+    protected function addError($name, $customMessage = null)
+    {
+        $this->errors[$name] = $customMessage ?: $this->message ?: $this->{$name . 'Message'};
+    }
+
+    /**
+     * Loads the validator translation messages
+     */
+    protected function loadTranslationMessages()
+    {
+        $this->t->loadFromFile(dirname(__DIR__) . '/Resource/i18n/%s/validator.php');
+    }
+
+    /**
      * Checks if the input value could be convert to string
      *
      * @param mixed $input
@@ -307,5 +260,52 @@ abstract class BaseValidator extends Base
     protected function isString($input)
     {
         return is_scalar($input) || is_null($input) || (is_object($input) && method_exists($input, '__toString'));
+    }
+
+    /**
+     * Set property value
+     *
+     * @param string|array $name The name of property
+     * @param mixed $value The value of property
+     * @internal This method should be use to set __invoke arguments only
+     */
+    protected function storeOption($name, $value = null)
+    {
+        // Handle array
+        if (is_array($name)) {
+            foreach ($name as $key => $value) {
+                $this->storeOption($key, $value);
+            }
+            return;
+        }
+
+        if (property_exists($this, $name)) {
+            if (!array_key_exists($name, $this->backup)) {
+                $this->backup[$name] = $this->$name;
+            }
+            $this->store[count($this->store) - 1][$name] = $value;
+        }
+        $this->setOption($name, $value);
+    }
+
+    /**
+     * Reset validator status
+     *
+     * @internal
+     */
+    protected function reset()
+    {
+        $this->errors = array();
+
+        if (count($this->store) >= 2) {
+            $last = end($this->store);
+            foreach ($this->backup as $name => $value) {
+                if (!array_key_exists($name, $last)) {
+                    $this->$name = $value;
+                }
+            }
+            array_shift($this->store);
+        }
+        $this->store[] = array();
     }
 }
