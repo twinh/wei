@@ -13,6 +13,7 @@ namespace Widget;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request A service that handles the HTTP request data
+ * @property    Router $router A simple router
  * @property    Response $response A service that handles the HTTP response data
  * @property    View $view A service that use to render PHP template
  * @property    Logger $logger A simple logger service, which is inspired by Monolog
