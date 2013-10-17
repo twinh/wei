@@ -52,4 +52,20 @@ name                   | 该项
 
 ### 通用方法
 
-// TODO
+#### getMessages
+
+`getMessages($name = null)`
+
+获取验证错误信息
+
+#### getJoinedMessage
+
+`getJoinedMessage($separator = "\n", $name = null)`
+
+获取合并的错误信息
+
+#### getFirstMessage
+
+`getFirstMessage($name = null)`
+
+获取第一条错误信息

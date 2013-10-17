@@ -497,6 +497,11 @@ class WeChatApp extends Base
         return $this->valid;
     }
 
+    public function getAttrs()
+    {
+
+    }
+
     /**
      * Returns the keyword
      *
