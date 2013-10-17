@@ -52,20 +52,38 @@ name                   | 该项
 
 ### 通用方法
 
-#### getMessages
-
-`getMessages($name = null)`
+#### getMessages($name = null)
 
 获取验证错误信息
 
-#### getJoinedMessage
+返回: `array`
 
-`getJoinedMessage($separator = "\n", $name = null)`
+#### getJoinedMessage($separator = "\n", $name = null)
 
-获取合并的错误信息
+获取合并的验证错误信息
 
-#### getFirstMessage
+返回: `string`
 
-`getFirstMessage($name = null)`
+#### getFirstMessage($name = null)
 
 获取第一条错误信息
+
+返回: `string`
+
+#### setMessages(array $messages)
+
+设置错误时的提示信息
+
+返回: `Widget\Validator\BaseValidator`
+
+#### getName()
+
+获取错误信息中的数据项名称
+
+返回: `string`
+
+#### setName()
+
+设置错误信息中的数据项名称
+
+返回: `string`
