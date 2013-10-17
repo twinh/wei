@@ -90,13 +90,6 @@ abstract class BaseValidator extends Base
     protected $store = array(array());
 
     /**
-     * Whether the translation widget has loaded the validator messages
-     *
-     * @var bool
-     */
-    protected static $translationMessagesLoaded;
-
-    /**
      * Validate the input value
      *
      * @param mixed $input
@@ -231,15 +224,10 @@ abstract class BaseValidator extends Base
 
     /**
      * Loads the validator translation messages
-     *
-     * @todo better way?
      */
     protected function loadTranslationMessages()
     {
-        if (!static::$translationMessagesLoaded) {
-            $this->t->loadFromFile(dirname(__DIR__) . '/Resource/i18n/%s/validator.php');
-            static::$translationMessagesLoaded = true;
-        }
+        $this->t->loadFromFile(dirname(__DIR__) . '/Resource/i18n/%s/validator.php');
     }
 
     /**
