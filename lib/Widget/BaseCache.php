@@ -74,7 +74,7 @@ abstract class BaseCache extends Base
 
             $setResult = $this->doSet($key, $result, $expire);
             if (false === $setResult) {
-                throw new \RuntimeException('Fail to store cache from callback');
+                throw new \RuntimeException('Fail to store cache from callback', 1020);
             }
         }
 
