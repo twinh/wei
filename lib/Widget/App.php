@@ -20,7 +20,10 @@ namespace Widget;
  */
 class App extends Base
 {
-    const FORWARD_CODE = 1000;
+    /**
+     * The exception code for forward action
+     */
+    const FORWARD = 1302;
 
     /**
      * The root PHP namespace of application
@@ -114,7 +117,7 @@ class App extends Base
                 $notFound = 'controller';
             }
         } catch (\RuntimeException $e) {
-            if ($e->getCode() === self::FORWARD_CODE) {
+            if ($e->getCode() === self::FORWARD) {
                 $this->logger->debug(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
                 return $this;
             } else {
@@ -267,7 +270,7 @@ class App extends Base
      */
     public function preventPreviousDispatch()
     {
-        throw new \RuntimeException(null, self::FORWARD_CODE);
+        throw new \RuntimeException('', self::FORWARD);
     }
 
     /**
