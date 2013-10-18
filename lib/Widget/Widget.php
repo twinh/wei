@@ -303,11 +303,11 @@ namespace Widget
         protected $aliases = array();
 
         /**
-         * The object name dependence map
+         * The service provider map
          *
          * @var array
          */
-        protected $deps = array();
+        protected $providers = array();
 
         /**
          * The import configuration
@@ -499,13 +499,13 @@ namespace Widget
              *    'mysql.db' => array(),
              * );
              * =>
-             * $this->deps['mysqlDb'] = 'mysql.db';
+             * $this->providers['mysqlDb'] = 'mysql.db';
              */
             if (false !== strpos($first, '.')) {
                 $parts = explode('.', $first, 2);
                 $objectName = $parts[0] . ucfirst($parts[1]);
-                if (!isset($this->deps[$objectName])) {
-                    $this->deps[$objectName] = $first;
+                if (!isset($this->providers[$objectName])) {
+                    $this->providers[$objectName] = $first;
                 }
             }
 
@@ -548,35 +548,35 @@ namespace Widget
         /**
          * Get a object and call its "__invoke" method
          *
-         * @param string $name  The name of the object
-         * @param array $args   The arguments for "__invoke" method
-         * @param array $deps   The dependent configuration
+         * @param string $name The name of the object
+         * @param array $args The arguments for "__invoke" method
+         * @param array $providers The service providers map
          * @return mixed
          */
-        public function invoke($name, array $args = array(), $deps = array())
+        public function invoke($name, array $args = array(), $providers = array())
         {
-            $object = $this->get($name, $deps);
+            $object = $this->get($name, $providers);
             return call_user_func_array(array($object, '__invoke'), $args);
         }
 
         /**
          * Get a object
          *
-         * @param string $name  The name of the object, without class prefix "Widget\"
+         * @param string $name The name of the object, without class prefix "Widget\"
          * @param array $options The option properties for object
-         * @param array $deps The dependent configuration
+         * @param array $providers The dependent configuration
          * @throws \BadMethodCallException
          * @return Base
          */
-        public function get($name, array $options = array(), array $deps = array())
+        public function get($name, array $options = array(), array $providers = array())
         {
             // Resolve the object name in dependent configuration
-            if (isset($deps[$name])) {
-                $name = $deps[$name];
+            if (isset($providers[$name])) {
+                $name = $providers[$name];
             }
 
-            if (isset($this->deps[$name])) {
-                $name = $this->deps[$name];
+            if (isset($this->providers[$name])) {
+                $name = $this->providers[$name];
             }
 
             if (isset($this->objects[$name])) {
@@ -640,13 +640,13 @@ namespace Widget
          *
          * @param string $name The name of the object
          * @param array $options The option properties for object
-         * @param array $deps The dependent configuration
+         * @param array $providers The dependent configuration
          * @return Base The instanced object
          */
-        public function newInstance($name, array $options = array(), array $deps = array())
+        public function newInstance($name, array $options = array(), array $providers = array())
         {
             $name .= uniqid() . '.' . $name;
-            return $this->widget->get($name, $options, $deps);
+            return $this->widget->get($name, $options, $providers);
         }
 
         /**
@@ -864,11 +864,11 @@ namespace Widget
         /**
          * Merge the dependence map
          *
-         * @param array $deps
+         * @param array $providers
          */
-        protected function setDeps(array $deps)
+        protected function setProviders(array $providers)
         {
-            $this->deps = $deps + $this->deps;
+            $this->providers = $providers + $this->providers;
         }
 
         /**

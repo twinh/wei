@@ -4,9 +4,9 @@ namespace WidgetTest\Fixtures;
 
 use Widget\Base;
 
-class WidgetHasDeps extends Base
+class ServiceWithProvider extends Base
 {
-    protected $deps = array(
+    protected $providers = array(
         'request' => 'sub.request'
     );
 }

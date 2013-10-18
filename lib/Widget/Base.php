@@ -9,21 +9,21 @@
 namespace Widget;
 
 /**
- * The base class for all widgets
+ * The base class for all services
  *
  * @author   Twin Huang <twinhuang@qq.com>
  */
 abstract class Base
 {
     /**
-     * The widget name dependence map
+     * The service provider map
      *
      * @var array
      */
-    protected $deps = array();
+    protected $providers = array();
 
     /**
-     * The widget container object
+     * The service container object
      *
      * @var Widget
      */
@@ -121,6 +121,6 @@ abstract class Base
      */
     public function __get($name)
     {
-        return $this->$name = $this->widget->get($name, array(), $this->deps);
+        return $this->$name = $this->widget->get($name, array(), $this->providers);
     }
 }

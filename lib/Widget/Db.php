@@ -211,7 +211,7 @@ class Db extends Base
     /**
      * @var array
      */
-    protected $deps = array(
+    protected $providers = array(
         'cache' => 'arrayCache',
     );
 

@@ -18,11 +18,9 @@ namespace Widget;
 class Bicache extends BaseCache
 {
     /**
-     * The dependence map
-     *
      * @var array
      */
-    protected $deps = array(
+    protected $providers = array(
         'master' => 'apc',
         'slave' => 'fileCache',
     );

@@ -46,9 +46,9 @@ class WidgetTest extends TestCase
         $this->assertSame('c', $widget->getConfig('test2:a:b'));
 
         $widget->setConfig('test.request', array());
-        $deps = $widget->getOption('deps');
-        $this->assertArrayHasKey('testRequest', $deps);
-        $this->assertSame('test.request', $deps['testRequest']);
+        $providers = $widget->getOption('providers');
+        $this->assertArrayHasKey('testRequest', $providers);
+        $this->assertSame('test.request', $providers['testRequest']);
     }
 
     public function testMergeConfig()
@@ -132,7 +132,7 @@ class WidgetTest extends TestCase
 
         $this->assertArrayHasKey('name', $options);
         $this->assertArrayHasKey('widget', $options);
-        $this->assertArrayHasKey('deps', $options);
+        $this->assertArrayHasKey('providers', $options);
     }
 
     public function testSetInis()
@@ -216,7 +216,7 @@ class WidgetTest extends TestCase
         $this->widget->get('notFoundWidget');
     }
 
-    public function testGetFromDeps()
+    public function testGetFromproviders()
     {
         // Set options for sub request
         $this->widget->setConfig('sub.request', array(
@@ -229,22 +229,22 @@ class WidgetTest extends TestCase
         $request = $this->widget->request;
         $request->set('id', 'fromOrigin');
 
-        $widgetHasDeps = new \WidgetTest\Fixtures\WidgetHasDeps(array(
+        $serviceWithProvider = new \WidgetTest\Fixtures\ServiceWithProvider(array(
             'widget' => $this->widget
         ));
 
         // Instance request widget from 'request.sub' configuration
-        $subRequest = $widgetHasDeps->request;
+        $subRequest = $serviceWithProvider->request;
         $this->assertEquals('fromSubRequest', $subRequest->get('id'));
 
         $this->assertEquals('fromOrigin', $request->get('id'));
     }
 
-    public function testDeps()
+    public function testProviders()
     {
         $widget = $this->widget;
 
-        $widget->setOption('deps', array(
+        $widget->setOption('providers', array(
             'subRequest' => 'sub.request'
         ));
 
@@ -260,7 +260,7 @@ class WidgetTest extends TestCase
     {
         $widget = new Widget(array(
             'widget' => array(
-                'deps' => array(
+                'providers' => array(
                     'request' => 'sub.request',
                 ),
                 'preload' => array(
