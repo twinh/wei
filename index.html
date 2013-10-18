@@ -477,20 +477,20 @@
 <span class="p">));</span>
 </code></pre></div>
 
-<h3>区分<code>aliases</code>和<code>deps</code>
+<h3>区分<code>aliases</code>和<code>providers</code>
 </h3>
 
 <ol>
 <li>
 <code>aliases</code>选项数组的key是对象名称,value是类名称</li>
 <li>
-<code>deps</code>选项数组的key是对象名称,value也是对象名称</li>
+<code>providers</code>选项数组的key是对象名称,value也是对象名称</li>
 </ol><div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">'对象名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span>
         <span class="p">),</span>
-        <span class="s1">'deps'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'providers'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">'对象名称'</span> <span class="o">=&gt;</span> <span class="s1">'对象名称'</span>
         <span class="p">)</span>
     <span class="p">)</span>
@@ -743,7 +743,7 @@
 <td>无</td>
 <td>配置的名称</td>
 </tr></tbody>
-</table><h4>wei()-&gt;get($name, $options = array(), $deps = array())</h4>
+</table><h4>wei()-&gt;get($name, $options = array(), $providers = array())</h4>
 
 <p>获取一个对象</p>
 
@@ -768,7 +768,7 @@
 <td>除了会通过<code>config</code>方法获取配置选项之外的附加的配置选项</td>
 </tr>
 <tr>
-<td>$deps</td>
+<td>$providers</td>
 <td>array</td>
 <td>无</td>
 <td>指定对象的依赖关系</td>
@@ -805,7 +805,7 @@
 <td>类文件的格式</td>
 </tr>
 </tbody>
-</table><h4>wei()-&gt;newInstance($name, $options = array(), $deps = array())</h4>
+</table><h4>wei()-&gt;newInstance($name, $options = array(), $providers = array())</h4>
 
 <p>初始化一个新的对象</p>
 
