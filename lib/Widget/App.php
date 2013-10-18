@@ -70,21 +70,31 @@ class App extends Base
     /**
      * Startup application
      *
-     * @param  array     $options
-     * @return $this|null
+     * @param array $options
+     * @throws \RuntimeException
+     * @return $this
      */
     public function __invoke(array $options = array())
     {
-        $options && $this->setOption($options);
+        try {
+            $options && $this->setOption($options);
 
-        $request = $this->request;
-        $parameters = (array)$this->router->match($request->getPathInfo(), $request->getMethod());
-        $request->set($parameters);
+            $request = $this->request;
+            $parameters = (array)$this->router->match($request->getPathInfo(), $request->getMethod());
+            $request->set($parameters);
 
-        return $this->dispatch(
-            $this->getController(),
-            $this->getAction()
-        );
+            return $this->dispatch(
+                $this->getController(),
+                $this->getAction()
+            );
+        } catch (\RuntimeException $e) {
+            if ($e->getCode() === self::FORWARD) {
+                $this->logger->debug(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
+                return $this;
+            } else {
+                throw $e;
+            }
+        }
     }
 
     /**
@@ -97,32 +107,23 @@ class App extends Base
      */
     public function dispatch($controller, $action = 'index')
     {
-        try {
-            $object = $this->getControllerInstance($controller, $action);
-            if ($object) {
-                // Check if action is exists and public
-                if (method_exists($object, $action)) {
-                    $ref = new \ReflectionMethod($object, $action);
-                    if ($ref->isPublic()) {
-                        $response = $object->$action();
-                        $this->handleResponse($response);
-                        return $this;
-                    } else {
-                        $notFound = 'action';
-                    }
+        $object = $this->getControllerInstance($controller, $action);
+        if ($object) {
+            // Check if action is exists and public
+            if (method_exists($object, $action)) {
+                $ref = new \ReflectionMethod($object, $action);
+                if ($ref->isPublic()) {
+                    $response = $object->$action();
+                    $this->handleResponse($response);
+                    return $this;
                 } else {
                     $notFound = 'action';
                 }
             } else {
-                $notFound = 'controller';
+                $notFound = 'action';
             }
-        } catch (\RuntimeException $e) {
-            if ($e->getCode() === self::FORWARD) {
-                $this->logger->debug(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
-                return $this;
-            } else {
-                throw $e;
-            }
+        } else {
+            $notFound = 'controller';
         }
 
         // Prepare exception message
@@ -139,6 +140,7 @@ class App extends Base
                     break;
             }
         }
+
         // You can use `$widget->error->notFound(function(){});` to custom the 404 page
         throw new \RuntimeException($message, 404);
     }
