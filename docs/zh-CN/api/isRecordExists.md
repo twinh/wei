@@ -8,9 +8,12 @@ isRecordExists
 
 #### 检查主键为1的用户是否存在,和检查name为test的用户是否存在
 ```php
-// Set configuraion for db widget
-wei()->config('db', array(
-    'dsn' => 'sqlite::memory:',
+// 配置db服务
+wei(array(
+    'db' => array(
+        'driver' => 'sqlite',
+        'path' => ':memory:',
+    )
 ));
 
 $db = wei()->db;
@@ -28,14 +31,14 @@ $db->insert('users', array(
 ));
 
 
-// Check if the id=1 user exists
+// 检查id为1的用户是否存在
 if (wei()->isRecordExists('1', 'users')) {
     echo 'Yes';
 } else {
     echo 'No';
 }
 
-// Check if the name=test user exists
+// 检查name为test的用户是否存在
 if (wei()->isRecordExists('test', 'users', 'name')) {
     echo 'Yes';
 } else {
@@ -55,12 +58,17 @@ if (wei()->isRecordExists('test', 'users', 'name')) {
 
 ### 选项
 
-| 名称                | 类型    | 默认值                 | 说明              |
-|---------------------|---------|------------------------|-------------------|
-| table               | string  | 无                     | 记录所在的数据表  |
-| field               | string  | id                     | 要查找的字段名称  |
-| notFoundMessage     | string  | %name%不存在           | -                 |
-| negativeMessage     | string  | %name%已存在           | -                 |
+名称                | 类型    | 默认值                 | 说明
+--------------------|---------|------------------------|------
+table               | string  | 无                     | 记录所在的数据表
+field               | string  | id                     | 要查找的字段名称
+
+### 错误信息
+
+名称                   | 信息
+-----------------------|------
+notFoundMessage        | %name%不存在
+negativeMessage        | %name%已存在
 
 ### 方法
 
