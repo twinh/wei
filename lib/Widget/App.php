@@ -260,6 +260,7 @@ class App extends Base
 
         return $this->controllers[$class] = new $class(array(
             'widget' => $this->widget,
+            'app' => $this,
             'controller' => $controller,
             'action' => $action,
         ));
