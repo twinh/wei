@@ -172,10 +172,10 @@ wei(array(
 ));
 ```
 
-### 区分`aliases`和`deps`
+### 区分`aliases`和`providers`
 
 1. `aliases`选项数组的key是对象名称,value是类名称
-2. `deps`选项数组的key是对象名称,value也是对象名称
+2. `providers`选项数组的key是对象名称,value也是对象名称
 
 ```php
 wei(array(
@@ -183,7 +183,7 @@ wei(array(
         'aliases' => array(
             '对象名称' => '类名称'
         ),
-        'deps' => array(
+        'providers' => array(
             '对象名称' => '对象名称'
         )
     )
@@ -289,14 +289,14 @@ $array      | array  | 无            | 对象的完整配置
 ------------|--------|---------------|------
 $name       | string | 无            | 配置的名称
 
-#### wei()->get($name, $options = array(), $deps = array())
+#### wei()->get($name, $options = array(), $providers = array())
 获取一个对象
 
 名称        | 类型   | 默认值        | 说明
 ------------|--------|---------------|------
 $name       | string | 无            | 对象的名称
 $options    | array  | 无            | 除了会通过`config`方法获取配置选项之外的附加的配置选项
-$deps       | array  | 无            | 指定对象的依赖关系
+$providers       | array  | 无            | 指定对象的依赖关系
 
 #### wei()->import($dir, $namespace, $format = null)
 导入指定目录下的类文件
@@ -307,7 +307,7 @@ $dir        | string | 无            | 类文件所在的目录
 $namespace  | string | 无            | 类名对应的命名空间
 $format     | string | 无            | 类文件的格式
 
-#### wei()->newInstance($name, $options = array(), $deps = array())
+#### wei()->newInstance($name, $options = array(), $providers = array())
 初始化一个新的对象
 
 #### wei()->set($name, wei())
