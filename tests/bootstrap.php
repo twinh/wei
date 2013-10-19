@@ -62,7 +62,7 @@ $widget = widget(array(
         )
     ),
     'bicache' => array(
-        'deps' => array(
+        'providers' => array(
             'master' => 'arrayCache',
             'slave' => 'fileCache',
         )
