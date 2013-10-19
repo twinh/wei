@@ -1015,7 +1015,6 @@ class QueryBuilder implements \ArrayAccess
             . ($parts['orderBy'] ? ' ORDER BY ' . implode(', ', $parts['orderBy']) : '');
 
         if (false === $count) {
-            // TODO mssql & oracle
             if ($parts['limit'] !== null) {
                 $query .= ' LIMIT ' . $parts['limit'];
             }
