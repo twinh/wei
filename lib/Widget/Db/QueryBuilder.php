@@ -1092,7 +1092,7 @@ class QueryBuilder implements \ArrayAccess
     public function __set($name, $value)
     {
         $this->loadRecord($name);
-        $this->record->__set($name);
+        $this->record->__set($name, $value);
     }
 
     /**
