@@ -1057,9 +1057,7 @@ class QueryBuilder implements \ArrayAccess
      */
     protected function getSqlForDelete()
     {
-        $query = 'DELETE FROM ' . $this->sqlParts['from'] . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '');
-
-        return $query;
+        return 'DELETE FROM ' . $this->sqlParts['from'] . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '');
     }
 
     /**
