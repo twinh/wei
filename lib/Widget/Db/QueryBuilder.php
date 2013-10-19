@@ -40,7 +40,7 @@ use Widget\Db\Collection;
  * @author      Benjamin Eberlei <kontakt@beberlei.de>
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class QueryBuilder
+class QueryBuilder implements \ArrayAccess
 {
     /* The query types. */
     const SELECT = 0;
@@ -113,6 +113,16 @@ class QueryBuilder
      * @var integer The state of the query object. Can be dirty or clean.
      */
     protected $state = self::STATE_CLEAN;
+
+    /**
+     * @var Record
+     */
+    protected $record;
+
+    /**
+     * @var Collection
+     */
+    protected $records;
 
     /**
      * Initializes a new QueryBuilder
@@ -1064,6 +1074,50 @@ class QueryBuilder
     }
 
     /**
+     * Check if the offset exists
+     *
+     * @param  string $offset
+     * @return bool
+     */
+    public function offsetExists($offset)
+    {
+        $this->loadRecord($offset);
+        return isset($this->record[$offset]);
+    }
+
+    /**
+     * Get the offset value
+     *
+     * @param  string $offset
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        $this->loadRecord($offset);
+        return $this->record[$offset];
+    }
+
+    /**
+     * Set the offset value
+     *
+     * @param string $offset
+     * @param mixed $value
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->record[$offset] = $value;
+    }
+
+    /**
+     * Unset the offset
+     *
+     * @param string $offset
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->record[$offset]);
+    }
+    /**
      * Generate condition string for WHERE or Having statement
      *
      * @param $conditions
@@ -1101,5 +1155,23 @@ class QueryBuilder
         }
 
         return $conditions;
+    }
+
+    /**
+     * Load record by array offset
+     *
+     * @param int|string $offset
+     * @return false|Collection|Record
+     */
+    protected function loadRecord($offset)
+    {
+        if (!$this->record) {
+            if (is_int($offset)) {
+                $this->record = $this->findAll();
+            } else {
+                $this->record = $this->find();
+            }
+        }
+        return $this->record;
     }
 }
