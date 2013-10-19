@@ -1071,6 +1071,31 @@ class QueryBuilder implements \ArrayAccess
     }
 
     /**
+     * Receives the record field value
+     *
+     * @param string $name
+     * @throws \InvalidArgumentException When field not found
+     * @return string
+     */
+    public function __get($name)
+    {
+        $this->loadRecord($name);
+        $this->record->__get($name);
+    }
+
+    /**
+     * Set field value
+     *
+     * @param string $name
+     * @param mixed $value
+     */
+    public function __set($name, $value)
+    {
+        $this->loadRecord($name);
+        $this->record->__set($name);
+    }
+
+    /**
      * Check if the offset exists
      *
      * @param  string $offset
@@ -1116,7 +1141,7 @@ class QueryBuilder implements \ArrayAccess
         $this->loadRecord($offset);
         unset($this->record[$offset]);
     }
-    
+
     /**
      * Generate condition string for WHERE or Having statement
      *

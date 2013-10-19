@@ -305,7 +305,7 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
-     * Receives record field value
+     * Receives the record field value
      *
      * @param string $name
      * @throws \InvalidArgumentException When field not found
@@ -330,7 +330,7 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
-     * Set field value
+     * Set the record field value
      *
      * @param string $name
      * @param mixed $value
