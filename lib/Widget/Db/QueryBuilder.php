@@ -1102,6 +1102,7 @@ class QueryBuilder implements \ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
+        $this->loadRecord($offset);
         $this->record[$offset] = $value;
     }
 
@@ -1112,8 +1113,10 @@ class QueryBuilder implements \ArrayAccess
      */
     public function offsetUnset($offset)
     {
+        $this->loadRecord($offset);
         unset($this->record[$offset]);
     }
+    
     /**
      * Generate condition string for WHERE or Having statement
      *
