@@ -9926,25 +9926,33 @@
 <th>默认值</th>
 <th>说明</th>
 </tr></thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>rules</td>
 <td>array</td>
 <td>-</td>
 <td>验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</td>
-</tr>
-<tr>
+</tr></tbody>
+</table><h3>错误信息</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>信息</th>
+</tr></thead>
+<tbody><tr>
 <td>atLeastMessage</td>
-<td>string</td>
 <td>%name%必须满足以下所有规则</td>
-<td>-</td>
-</tr>
-</tbody>
+</tr></tbody>
 </table><h3>方法</h3>
 
 <h4>isAllOf($input, $rules)</h4>
 
 <p>检查数据是否通过所有的规则校验</p>
+
+<h2>相关链接</h2>
+
+<p><a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a>
+<a href="#validate">区分all和allOf验证规则</a></p>
   </section>
 
 <!-- api/isNoneof
@@ -10297,7 +10305,8 @@
 
 <h2>相关链接</h2>
 
-<p><a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></p>
+<p><a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a>
+<a href="#validate">区分all和allOf验证规则</a></p>
   </section>
 
 <!-- api/isCallback
