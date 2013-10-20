@@ -42,3 +42,8 @@ negativeMessage   | string  | %name%不能是URL地址       | -
 
 #### isUrl($input, $options = array())
 检查数据是否为有效的URL地址
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

@@ -59,3 +59,8 @@ negativeMessage   | string  | %name%不能等于%value%    | -
 #### isIdenticalTo($input, $value)
 
 检查数据是否完全等于(===)指定的值
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

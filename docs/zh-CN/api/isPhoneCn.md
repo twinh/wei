@@ -35,3 +35,8 @@ if (wei()->isPhoneCn('020-1234567')) {
 
 #### isPhoneCn($input)
 检查数据是否为有效的电话号码
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

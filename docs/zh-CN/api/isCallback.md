@@ -41,3 +41,8 @@ if (wei()->isCallback(3, function($input) {
 | $input              | mixed    | 无      | 待验证的数据                               |
 | $fn                 | callback | 无      | 指定验证的回调结构                         |
 | $message            | string   | 无      | 自定义验证不通过的提示信息                 |
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

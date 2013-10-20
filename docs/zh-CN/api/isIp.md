@@ -52,3 +52,8 @@ if (wei()->isIp('192.168.0.1', array('noPrivRange' => true))) {
 
 #### isIp($input, $options = array())
 检查数据是否为有效的IP地址
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

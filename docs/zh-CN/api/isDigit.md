@@ -31,3 +31,8 @@ notStringSring  | string | %name%必须是字符串          |
 
 #### isDigit($input)
 检查数据是否只由数字组成
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

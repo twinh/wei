@@ -36,3 +36,8 @@ if (wei()->isIn(1, array(1, 2, 3))) {
 
 #### isIn($input, $array, $strict = false)
 检查数据是否在指定的数组中
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

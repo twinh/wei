@@ -35,3 +35,8 @@ if (wei()->isLowercase('abc')) {
 
 #### isUppercase($input)
 检查数据是否为大写字符
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

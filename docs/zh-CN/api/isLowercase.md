@@ -43,3 +43,8 @@ if (wei()->isLowercase('abc')) {
 名称   | 类型   | 说明
 -------|--------|------
 $input | string | 要检查的数据
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

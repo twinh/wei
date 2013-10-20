@@ -36,3 +36,8 @@ if (wei()->isAlnum($input)) {
 
 #### isAlnum($input)
 检查数据是否只由字母(a-z)和数字(0-9)组成
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

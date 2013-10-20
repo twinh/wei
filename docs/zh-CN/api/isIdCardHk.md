@@ -35,3 +35,8 @@ if (wei()->isIdCardHk('Z437626A')) {
 
 #### isIdCardHk($input)
 检查数据是否为有效的香港身份证
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

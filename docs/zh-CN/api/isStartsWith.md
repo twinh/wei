@@ -65,3 +65,8 @@ if (wei()->isEndsWith('abc', array('a', 'b', 'c'))) {
 
 #### isStartsWith($input, $findMe, $case = false)
 检查数据是否以指定字符串开头
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

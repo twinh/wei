@@ -38,3 +38,8 @@ if (wei()->isNoneOf('abc', $rules)) {
 
 ####  isNoneOf($input, $rules)
 检查数据是否不符合所有指定的规则校验
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

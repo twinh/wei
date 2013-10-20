@@ -35,3 +35,8 @@ if (wei()->isPostcodeCn('123456')) {
 
 #### isPostcodeCn($input)
 检查数据是否为有效的中国邮政编码
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

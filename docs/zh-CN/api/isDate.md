@@ -87,3 +87,8 @@ negativeMessage        | %name%不能是合法的日期
 #### isDate($input, $options = array())
 
 检查数据是否为合法的日期,第二个参数为选项数组
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

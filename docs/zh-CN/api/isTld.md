@@ -35,3 +35,8 @@ if (wei()->isTld('cn')) {
 
 #### isTld($input)
 检查数据是否为存在的顶级域名
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

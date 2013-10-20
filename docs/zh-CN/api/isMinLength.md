@@ -37,3 +37,8 @@ if (wei()->isMinLength('abc', 2)) {
 
 #### isMinLength($input, $min)
 检查数据的长度是否大于等于指定数值
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

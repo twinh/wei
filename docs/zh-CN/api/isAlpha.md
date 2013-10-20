@@ -36,3 +36,8 @@ if (wei()->isAlpha($input)) {
 
 #### isAlpha($input)
 检查数据是否只由字母(a-z)组成
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

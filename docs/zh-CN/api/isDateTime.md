@@ -54,3 +54,8 @@ if (wei()->isDateTime('20130101', 'Ymd')) {
 
 #### isDateTime($input, $format = 'Y-m-d H:i:s')
 检查数据是否为合法的日期时间
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

@@ -73,3 +73,8 @@ charset           | string  | UTF-8   | 验证数据的字符集
 | length            | int     | 无                                 | 指定长度的值         |
 | notDetectdMessage | string  | 无法检测到%name%的长度             | -                    |
 | lengthMessage     | string  | %name%的长度必须是%length%         | -                    |
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

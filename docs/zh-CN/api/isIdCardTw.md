@@ -35,3 +35,8 @@ if (wei()->isIdCardTw('A122501945')) {
 
 #### isIdCardTw($input)
 检查数据是否为有效的台湾身份证
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

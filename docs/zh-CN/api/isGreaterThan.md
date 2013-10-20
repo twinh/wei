@@ -37,3 +37,8 @@ negativeMessage   | string  | %name%不合法                       | -
 
 #### isGreaterThan($input, $value)
 检查数据是否大于(>)指定的值
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

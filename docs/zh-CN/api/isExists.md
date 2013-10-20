@@ -40,3 +40,8 @@ if (wei()->isExists('/notfound/directory')) {
 ```php
 bool isExists( $input )
 ```
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

@@ -35,3 +35,8 @@ if (wei()->isQQ('123456')) {
 
 #### isQQ($input)
 检查数据是否为有效的QQ号码
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

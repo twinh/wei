@@ -56,3 +56,8 @@ negativeMessage        | %name%不能为空
 
 #### isPresent($input)
 检查数据是否不为空(允许空格)
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

@@ -40,3 +40,8 @@ if (wei()->isSomeOf('abc', $rules)) {
 
 #### isSomeOf($input, $rules, $atLeast)
 检查数据是否通过指定数量规则的验证
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

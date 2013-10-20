@@ -72,3 +72,8 @@ if (wei()->isLength('abc', 3, 6)) {
 | lengthItemMessage | string  | %name%必须包含%length%项           | -                    |
 
     注意: 当检查的数据是字符串时,返回的错误信息是`length`,当数据是数组时,返回的是`lengthItem`
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

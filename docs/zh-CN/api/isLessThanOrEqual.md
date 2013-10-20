@@ -37,3 +37,8 @@ negativeMessage   | string  | %name%必须不小于等于%max%          | -
 
 #### isLessThanOrEqual($input, $value)
 检查数据是否在指定的两个值之间
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

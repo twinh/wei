@@ -74,3 +74,8 @@ negativeMessage        | %name%已存在
 
 #### isRecordExists($input, $table, $field = 'id')
 检查数据表是否存在指定的记录
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

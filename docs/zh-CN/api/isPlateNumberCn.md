@@ -19,10 +19,10 @@ bool isPlateNumberCn( $input )
 | `notString`           | %name%必须是字符串                                             |
 
 ##### 代码范例
+
 检查"京A12345"是否为有效的车牌号码
-```php
-<?php
- 
+
+```php 
 if (wei()->isPlateNumberCn('京A12345')) {
     echo 'Yes';
 } else {
@@ -33,3 +33,8 @@ if (wei()->isPlateNumberCn('京A12345')) {
 ```php
 'Yes'
 ```
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

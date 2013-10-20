@@ -100,3 +100,8 @@ missingChar            | %name%必须包含%missingType%中的%missingCount%种
 
 #### isPassword($input)
 检查组成密码的字符是否符合要求格式
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

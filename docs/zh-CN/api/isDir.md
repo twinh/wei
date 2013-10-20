@@ -35,3 +35,8 @@ if (wei()->isDir('/notfound/directory')) {
 
 #### isDir($input)
 检查数据是否为存在的目录
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

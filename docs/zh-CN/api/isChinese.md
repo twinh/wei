@@ -35,3 +35,8 @@ if (wei()->isChinese('中文')) {
 
 #### isChinese($input)
 检查数据是否只由汉字组成
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

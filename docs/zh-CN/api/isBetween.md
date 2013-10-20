@@ -39,3 +39,8 @@ if (wei()->isBetween(18, 1, 10)) {
 
 #### isBetween($input, $min, $max)
 检查数据是否在指定的两个值之间
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

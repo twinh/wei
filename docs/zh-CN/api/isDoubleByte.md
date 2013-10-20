@@ -34,3 +34,8 @@ if (wei()->isDoubleByte('中文abc')) {
 
 #### isDoubleByte($input)
 检查数据是否只由双字节字符组成
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

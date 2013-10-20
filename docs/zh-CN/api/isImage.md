@@ -83,3 +83,8 @@ heightTooSmallMessage      | %name%的高度太小(%height%px), 允许的最小�
 
 图片验证器是文件验证器[isFile](isFile.md)的子类,其中选项`maxSize`, `minSize`, `exts`,
 `excludeExts`, `mimeTypes`, `excludeMimeTypes`继承自父类.
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

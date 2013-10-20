@@ -69,3 +69,8 @@ string   | 字符串               | xdigit   | 16进制数字
 
 #### isType($input, $type)
 检查数据是否为指定的类型
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

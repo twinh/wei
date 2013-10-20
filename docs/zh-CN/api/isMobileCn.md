@@ -37,3 +37,8 @@ patternMessage    | string  | %name%必须是11位长度的数字,以13,14,15或
 #### isMobileCn($input)
 
 检查数据是否为有效的中国手机号码
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

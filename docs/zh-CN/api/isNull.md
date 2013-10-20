@@ -31,3 +31,8 @@ if (wei()->isNull(0)) {
 
 #### isNull($input)
 检查数据是否为null
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

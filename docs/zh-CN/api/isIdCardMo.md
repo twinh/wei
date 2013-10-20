@@ -35,3 +35,8 @@ if (wei()->isIdCardMo('11111111')) {
 
 #### isIdCardMo($input)
 检查数据是否为有效的澳门身份证
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

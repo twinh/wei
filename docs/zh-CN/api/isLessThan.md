@@ -37,3 +37,8 @@ negativeMessage   | string  | %name%必须不小于等于%max%          | -
 
 #### isLessThan($input, $value)
 检查数据是否小于(<)指定的值
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

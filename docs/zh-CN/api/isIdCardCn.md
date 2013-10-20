@@ -35,3 +35,8 @@ if (wei()->isIdCardCn('342622840209049')) {
 
 #### isIdCardCn($input)
 检查数据是否为有效的中国身份证
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

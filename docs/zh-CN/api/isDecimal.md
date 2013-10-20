@@ -35,3 +35,8 @@ if (wei()->isDecimal('1.0.0')) {
 
 #### isDecimal($input)
 检查数据是否为小数
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

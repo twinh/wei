@@ -35,3 +35,8 @@ if (wei()->isUuid('00010203-0405-0607-0809-0A0B0C0D0E0F')) {
 
 #### isUuid($input)
 检查数据是否为有效的UUID
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

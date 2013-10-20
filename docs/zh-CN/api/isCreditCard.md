@@ -58,3 +58,8 @@ if (wei()->isCreditCard($input, array('UnionPay', 'Visa'))) {
 ### 方法
 
 #### isCreditCard($input, $type)
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

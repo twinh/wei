@@ -38,3 +38,8 @@ if (wei()->isOneOf('abc', $rules)) {
 
 #### isOneOf($input, $rules)
 检查数据是否满足指定规则中的任何一条
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

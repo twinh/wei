@@ -35,3 +35,8 @@ if (wei()->isEmail('example@example.com')) {
 
 #### isEmail($input)
 检查数据是否为有效的邮箱地址
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)

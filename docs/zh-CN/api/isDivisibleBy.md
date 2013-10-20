@@ -35,3 +35,8 @@ if (wei()->isDivisibleBy(10, 3)) {
 
 #### isDivisibleBy($input)
 检查数据是否能被指定的除数整除
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)
