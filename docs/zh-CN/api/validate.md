@@ -3,9 +3,8 @@ Validate
 
 检查数组或对象中每一个元素是否能通过指定规则的验证
 
-`Validate`服务是参考[jQuery Validation](http://bassistance.de/jquery-plugins/jquery-plugin-validation/)
-开发的数据验证器,她与`jQuery Validation`有着很多相似的地方,所以如果你使用过
-`jQuery Validation`,使用`Validate`服务将非常容易上手.
+`validate`服务是参考[jQuery Validation](http://jqueryvalidation.org/)开发的数据验证器,如果你使用过
+`jQuery Validation`,使用`validate`服务将非常容易上手.
 
 案例
 ----
@@ -866,3 +865,9 @@ $separator  | string       | 合并错误信息数组的分隔符
 ------------|--------------|------
 $field      | string       | 数据项的名称
 $rule       | string       | 验证规则的名称
+
+
+相关链接
+--------
+
+* [验证器概览](../book/validators.md)
