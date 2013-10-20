@@ -49,3 +49,4 @@ notArrayMessage        | %name%必须是数组
 --------
 
 [验证器概览](../book/validators.md)
+[区分all和allOf验证规则](validate.md#案例:区分all和allOf验证规则)
