@@ -1,10 +1,40 @@
 验证器概览
 ==========
 
-所有的验证规则请查看[API目录](../#api参考目录)-[验证器](../#验证器)章节.
+微框架提供了两种验证器.
+
+一种用于验证表单提交的数据,使用的是[validate服务](../api/validate.md).
+
+另外一种用于单个变量的验证,如检查变量的值是否为邮箱地址,手机号码等,所有的验证规则请查看[API目录](../#api参考目录)-[验证器](../#验证器)章节.
 
 案例
 ----
+
+### 检查表单提交的数据是否符合指定的验证规则
+
+```php
+$validator = wei()->validate(array(
+    // 待验证的数据
+    'data' => $_POST,
+    // 验证规则数组
+    'rules' => array(
+        'username' => array(
+            'minLength' => 3,
+            'alnum' => true,
+        ),
+        'email' => array(
+            'email' => true
+        )
+    )
+));
+
+// 如果验证不通过,输出详细的错误信息
+if ($validator->isValid()) {
+    print_r($validator->getDetailMessages());
+}
+```
+
+完整的例子请查看[validate服务](../api/validate.md)-[案例](../api/validate.md#案例)章节
 
 ### 检查"example@example"是否为邮箱地址,如果不是,输出错误信息
 
