@@ -62,7 +62,7 @@ widgets = [
     'isDir', 'isExists', 'isFile', 'isImage',
     'isEmail', 'isIp', 'isTld', 'isUrl', 'isUuid',
     'isCreditCard',
-    'isChinese', 'isIdCardCn', 'isIdCardHk', 'isIdCardMo', 'isIdCardTw', 'isPhoneCn', 'isPostcodeCn', 'isQQ', 'isMobileCn',
+    'isChinese', 'isIdCardCn', 'isIdCardHk', 'isIdCardMo', 'isIdCardTw', 'isPhoneCn', 'isPlateNumberCn', 'isPostcodeCn', 'isQQ', 'isMobileCn',
     'isAllof', 'isNoneof', 'isOneof', 'isSomeof',
     'isRecordExists',
     'isAll', 'isCallback', 'isColor', 'isPassword',

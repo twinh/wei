@@ -145,6 +145,7 @@
         <li><a href="#isIdCardMo">isIdCardMo</a></li>
         <li><a href="#isIdCardTw">isIdCardTw</a></li>
         <li><a href="#isPhoneCn">isPhoneCn</a></li>
+        <li><a href="#isPlateNumberCn">isPlateNumberCn</a><li>
         <li><a href="#isPostcodeCn">isPostcodeCn</a></li>
         <li><a href="#isQQ">isQQ</a></li>
         <li><a href="#isMobileCn">isMobileCn</a></li>
@@ -9987,6 +9988,69 @@
 <h4>isPhoneCn($input)</h4>
 
 <p>检查数据是否为有效的电话号码</p>
+
+<h2>相关链接</h2>
+
+<ul>
+<li><a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
+</ul>
+  </section>
+
+<!-- api/isPlateNumberCn
+  ================================================== -->
+  <section id="isPlateNumberCn">
+  <div class="page-header"><h1>isPlateNumberCn</h1></div>
+
+<p>检查数据是否为有效的中国车牌号码</p>
+
+<h2>案例</h2>
+
+<h3>检查"京A12345"是否为有效的车牌号码</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isPlateNumberCn</span><span class="p">(</span><span class="s1">'京A12345'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h5>运行结果</h5>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>错误信息</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>信息</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>patternMessage</td>
+<td>%name%必须是正确的车牌格式</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>%name%不能是正确的车牌格式</td>
+</tr>
+<tr>
+<td>notStringMessage</td>
+<td>%name%必须是字符串</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
+
+<h4>isPlateNumberCn($input)</h4>
+
+<p>检查数据是否为有效的中国车牌号码</p>
 
 <h2>相关链接</h2>
 
