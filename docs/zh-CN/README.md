@@ -125,6 +125,7 @@ API参考目录
 * [isIdCardTw](api/isIdCardTw.md) - 检查数据是否为有效的台湾身份证
 * [isPhoneCn](api/isPhoneCn.md) - 检查数据是否为有效的电话号码
 * [isPostcodeCn](api/isPostcodeCn.md) - 检查数据是否为有效的邮政编码
+* [isPlateNumberCn](api/isPlateNumberCn.md) - 检查数据是否为有效的中国车牌号码
 * [isQQ](api/isQQ.md) - 检查数据是否为有效的QQ号码
 * [isMobileCn](api/isMobileCn.md) - 检查数据是否为有效的手机号码
 
