@@ -10019,6 +10019,21 @@
 <div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
 </code></pre></div>
 
+<h3>检查"粤A12345"是否为广东的车牌号码</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$number</span> <span class="o">=</span> <span class="s1">'粤A12345'</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isStartsWith</span><span class="p">(</span><span class="nv">$number</span><span class="p">,</span> <span class="s1">'粤'</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isPlateNumberCn</span><span class="p">(</span><span class="nv">$number</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h5>运行结果</h5>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
+</code></pre></div>
+
 <h2>调用方式</h2>
 
 <h3>选项</h3>
