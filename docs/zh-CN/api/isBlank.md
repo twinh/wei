@@ -48,3 +48,4 @@ $input | string | 要检查的数据
 --------
 
 * [验证器概览](../book/validators.md)
+* [区分required,notBlank和present验证规则](validate.md#%E6%A1%88%E4%BE%8B%E5%8C%BA%E5%88%86requirednotblank%E5%92%8Cpresent%E9%AA%8C%E8%AF%81%E8%A7%84%E5%88%99)
