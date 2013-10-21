@@ -22,6 +22,23 @@ if (wei()->isPlateNumberCn('京A12345')) {
 'Yes'
 ```
 
+### 检查"粤A12345"是否为广东的车牌号码
+
+```php
+$number = '粤A12345';
+if (wei()->isStartsWith($number, '粤') && wei()->isPlateNumberCn($number)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+
+##### 运行结果
+
+```php
+'Yes'
+```
+
 调用方式
 --------
 
