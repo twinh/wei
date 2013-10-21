@@ -222,6 +222,8 @@ namespace Widget
      * @method   bool                   isIdCardTw($input) Check if the input is valid Taiwan identity card
      * @property Validator\PhoneCn      $isPhoneCn
      * @method   bool                   isPhoneCn($input) Check if the input is valid Chinese phone number
+     * @property Validator\PlateNumberCn $isPlateNumberCn
+     * @method   bool                   isPlateNumberCn($input) Check if the input is valid Chinese plate number
      * @property Validator\PostcodeCn   $isPostcodeCn
      * @method   bool                   isPostcodeCn($input) Check if the input is valid Chinese postcode
      * @property Validator\QQ           $isQQ
