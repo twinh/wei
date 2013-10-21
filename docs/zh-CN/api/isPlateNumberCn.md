@@ -1,26 +1,12 @@
-[isPlateNumberCn()](http://twinh.github.io/widget/api/isPlateNumberCn)
-======================================================================
+isPlateNumberCn
+===============
 
 检查数据是否为有效的中国车牌号码
 
-### 
-```php
-bool isPlateNumberCn( $input )
-```
+案例
+----
 
-##### 参数
-* **$input** `mixed` 待验证的数据
-
-##### 错误信息
-| **名称**              | **信息**                                                       | 
-|-----------------------|----------------------------------------------------------------|
-| `pattern`             | %name%必须是正确的车牌格式                                     |
-| `negative`            | %name%不能是正确的车牌格式                                     |
-| `notString`           | %name%必须是字符串                                             |
-
-##### 代码范例
-
-检查"京A12345"是否为有效的车牌号码
+### 检查"京A12345"是否为有效的车牌号码
 
 ```php 
 if (wei()->isPlateNumberCn('京A12345')) {
@@ -29,10 +15,32 @@ if (wei()->isPlateNumberCn('京A12345')) {
     echo 'No';
 }
 ```
+
 ##### 运行结果
+
 ```php
 'Yes'
 ```
+
+调用方式
+--------
+
+### 选项
+
+*无*
+
+### 错误信息
+
+名称                   | 信息
+-----------------------|------
+patternMessage         | %name%必须是正确的车牌格式
+negativeMessage        | %name%不能是正确的车牌格式
+notStringMessage       | %name%必须是字符串
+
+### 方法
+
+#### isPlateNumberCn($input)
+检查数据是否为有效的中国车牌号码
 
 相关链接
 --------
