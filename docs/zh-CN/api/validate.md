@@ -236,6 +236,42 @@ wei()->validate(array(
 $bool = wei()->isDigit($age);
 ```
 
+##### 案例:使用`反`验证规则
+
+```php
+// 配置数据库
+wei(array(
+    'db' => array(
+        'dbname' => 'project',
+        'user' => 'root',
+        'password' => 'xxxxxx'
+    )
+));
+
+$validator = wei()->validate(array(
+    'data' => array(
+        'username' => 'twin'
+    ),
+    'rules' => array(
+        'username' => array(
+            // 在user表中查询userame字段的值为twin,如果找到就返回false,找不到返回true
+            'notRecordExists' => array('user', 'username'),
+        )
+    )
+));
+
+if (!$validator->isValid()) {
+    print_r($validator->getSummaryMessages());
+}
+
+// 如果user表已经存在username为twin的记录,将输出如下错误信息
+array(
+    'username' => array(
+        '该项已存在'
+    )
+);
+```
+
 ##### 案例:区分`required`,`notBlank`和`present`验证规则
 
 这三个验证规则都用于检查数据不能为空,它们在使用场景和检查的数据内容稍有不同.
