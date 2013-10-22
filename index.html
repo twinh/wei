@@ -5040,6 +5040,10 @@
 
 <h5>案例:使用<code>反</code>验证规则</h5>
 
+<p>在验证规则前面加<code>not</code>,即可使验证规则返回相反的结果.</p>
+
+<p>如注册表单中,要求检查用户名不存在,只需使用<code>notRecordExists</code>规则.</p>
+
 <div class="highlight"><pre><code class="php"><span class="c1">// 配置数据库</span>
 <span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -5069,6 +5073,34 @@
 <span class="k">array</span><span class="p">(</span>
     <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'该项已存在'</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<p>检查输入内容不能为空(不允许所有空白字符)</p>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$validator</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'content'</span> <span class="o">=&gt;</span> <span class="s1">' '</span>
+    <span class="p">),</span>
+    <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'content'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'notBlank'</span> <span class="o">=&gt;</span> <span class="k">true</span>
+        <span class="p">)</span>
+    <span class="p">),</span>
+    <span class="s1">'names'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'content'</span> <span class="o">=&gt;</span> <span class="s1">'内容'</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">isValid</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nb">print_r</span><span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">getSummaryMessages</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出结果</span>
+<span class="k">array</span><span class="p">(</span>
+    <span class="s1">'content'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'内容不能为空'</span>
     <span class="p">)</span>
 <span class="p">);</span>
 </code></pre></div>
