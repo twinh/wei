@@ -877,4 +877,34 @@ class WeChatApp extends Base
 
         return $content->asXML();
     }
+
+    /**
+     * Convert to XML element
+     *
+     * @param $array
+     * @param SimpleXMLElement $xml
+     * @return SimpleXMLElement
+     */
+    public function arrayToXml($array, SimpleXMLElement $xml = null)
+    {
+        if ($xml === null) {
+            $xml = new SimpleXMLElement('<xml/>');
+        }
+        foreach($array as $key => $value) {
+            if(is_array($value)) {
+                if (isset($value[0])) {
+                    foreach ($value as $subValue) {
+                        $subNode = $xml->addChild($key);
+                        $this->arrayToXml($subValue, $subNode);
+                    }
+                } else {
+                    $subNode = $xml->addChild($key);
+                    $this->arrayToXml($value, $subNode);
+                }
+            } else {
+                $xml->addChild($key, $value);
+            }
+        }
+        return $xml;
+    }
 }
