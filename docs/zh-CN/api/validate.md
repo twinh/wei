@@ -238,6 +238,10 @@ $bool = wei()->isDigit($age);
 
 ##### 案例:使用`反`验证规则
 
+在验证规则前面加`not`,即可使验证规则返回相反的结果.
+
+如注册表单中,要求检查用户名不存在,只需使用`notRecordExists`规则.
+
 ```php
 // 配置数据库
 wei(array(
@@ -268,6 +272,35 @@ if (!$validator->isValid()) {
 array(
     'username' => array(
         '该项已存在'
+    )
+);
+```
+
+检查输入内容不能为空(不允许所有空白字符)
+
+```php
+$validator = wei()->validate(array(
+    'data' => array(
+        'content' => ' '
+    ),
+    'rules' => array(
+        'content' => array(
+            'notBlank' => true
+        )
+    ),
+    'names' => array(
+        'content' => '内容'
+    )
+));
+
+if (!$validator->isValid()) {
+    print_r($validator->getSummaryMessages());
+}
+
+// 输出结果
+array(
+    'content' => array(
+        '内容不能为空'
     )
 );
 ```

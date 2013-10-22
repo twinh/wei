@@ -104,7 +104,7 @@ return array(
 
     // greaterThan
     '%name% must be greater than %value%' => '%name%必须大于%value%',
-    '%name% must not be greater than %value%' => '%name%必须不大于%$value%',
+    '%name% must not be greater than %value%' => '%name%不能大于%$value%',
 
     // greaterThanOrEqual
     '%name% must be greater than or equal to %value%' => '%name%必须大于或等于%value%',
@@ -112,7 +112,7 @@ return array(
 
     // lessThan
     '%name% must be less than %value%' => '%name%必须小于%value%',
-    '%name% must not be less than %value%' => '%name%必须不小于%value%',
+    '%name% must not be less than %value%' => '%name%不能小于%value%',
 
     // lessThanOrEqual
     '%name% must be less than or equal to %value%' => '%name%必须小于或等于%value%',
