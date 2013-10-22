@@ -5040,7 +5040,7 @@
 
 <h5>案例:使用<code>反</code>验证规则</h5>
 
-<p>在验证规则前面加<code>not</code>,即可使验证规则返回相反的结果.</p>
+<p>在验证规则前面加<code>not</code>,即可使验证规则返回相反的结果,同时输出的错误信息也会做相应的改变.</p>
 
 <p>如注册表单中,要求检查用户名不存在,只需使用<code>notRecordExists</code>规则.</p>
 
@@ -5077,7 +5077,7 @@
 <span class="p">);</span>
 </code></pre></div>
 
-<p>检查输入内容不能为空(不允许所有空白字符)</p>
+<p>使用<code>notBlank</code>规则检查输入内容不能为空(不允许空白字符)</p>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$validator</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
