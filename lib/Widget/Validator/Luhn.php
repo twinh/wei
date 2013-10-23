@@ -38,7 +38,7 @@ class Luhn extends BaseValidator
     /**
      * Return the checksum char of luhn algorithm
      *
-     * @param $string
+     * @param string $string
      * @return string
      */
     protected function getChecksum($string)

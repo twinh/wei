@@ -174,6 +174,9 @@ return array(
     '%name% must be lowercase' => '%name%不能包含大写字母',
     '%name% must not be lowercase' => '%name%不能包含小写字母',
 
+    // luhn
+    '%name% is not a valid number' => '%name%不是有效的数字',
+
     // maxLength
     '%name% must have a length lower than %max%' => '%name%的长度必须小于等于%max%',
     '%name% must contain no more than %max% items' => '%name%最多只能包含%max%项',
