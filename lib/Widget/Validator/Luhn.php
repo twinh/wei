@@ -15,6 +15,8 @@ namespace Widget\Validator;
  */
 class Luhn extends BaseValidator
 {
+    protected $invalidMessage = '%name% is not a valid number';
+
     /**
      * {@inheritdoc}
      */
@@ -41,19 +43,10 @@ class Luhn extends BaseValidator
      */
     protected function getChecksum($string)
     {
-        $len    = strlen($string);
-        $sum    = 0;
-        $offset = $len % 2;
-
-        for ($i = 0; $i < $len; $i++) {
-            if (0 == ($i + $offset) % 2) {
-                $add = $string[$i] * 2;
-                $sum += $add > 9 ? $add - 9 : $add;
-            } else {
-                $sum += $string[$i];
-            }
+        $checksum = '';
+        foreach (str_split(strrev($string)) as $i => $d) {
+            $checksum .= ($i % 2 === 0) ? ($d * 2) : $d;
         }
-
-        return 10 - $sum % 10;
+        return (10 - array_sum(str_split($checksum)) % 10) % 10;
     }
 }
