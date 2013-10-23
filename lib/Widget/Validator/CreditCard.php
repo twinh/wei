@@ -102,7 +102,7 @@ class CreditCard extends BaseValidator
     /**
      * Check if the input is valid luhn number
      *
-     * @param $input
+     * @param string $input
      * @return bool
      * @link https://gist.github.com/troelskn/1287893
      */
