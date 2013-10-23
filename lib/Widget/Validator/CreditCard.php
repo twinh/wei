@@ -99,22 +99,20 @@ class CreditCard extends BaseValidator
         return true;
     }
 
+    /**
+     * Check if the input is valid luhn number
+     *
+     * @param $input
+     * @return bool
+     * @link https://gist.github.com/troelskn/1287893
+     */
     public function validateLuhn($input)
     {
-        $len    = strlen($input);
-        $sum    = 0;
-        $offset = $len % 2;
-
-        for ($i = 0; $i < $len; $i++) {
-            if (0 == ($i + $offset) % 2) {
-                $add = $input[$i] * 2;
-                $sum += $add > 9 ? $add - 9 : $add;
-            } else {
-                $sum += $input[$i];
-            }
+        $checksum = '';
+        foreach (str_split(strrev($input)) as $i => $d) {
+            $checksum .= ($i %2 !== 0) ? ($d * 2) : $d;
         }
-
-        return 0 == $sum % 10;
+        return array_sum(str_split($checksum)) % 10 === 0;
     }
 
     public function validateType($input)
