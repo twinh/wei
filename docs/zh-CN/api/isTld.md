@@ -7,6 +7,7 @@ isTld
 ----
 
 ### 检查"cn"是否为存在的顶级域名
+
 ```php
 if (wei()->isTld('cn')) {
     echo 'Yes';
@@ -16,6 +17,7 @@ if (wei()->isTld('cn')) {
 ```
 
 #### 运行结果
+
 ```php
 'Yes'
 ```
@@ -25,11 +27,15 @@ if (wei()->isTld('cn')) {
 
 ### 选项
 
-| 名称              | 类型    | 默认值                           | 说明                       |
-|-------------------|---------|----------------------------------|----------------------------|
-| notStringMessage  | string  | %name%必须是字符串               | -                          |
-| notInMessage      | string  | %name%必须是有效的顶级域名       | -                          |
-| negativeMessage   | string  | %name%不能是有效的顶级域名       | -                          |
+无
+
+### 错误信息
+
+名称                   | 信息
+-----------------------|------
+notStringMessage       |%name%必须是字符串
+notInMessage           | %name%必须是有效的顶级域名
+negativeMessage        | %name%不能是有效的顶级域名
 
 ### 方法
 

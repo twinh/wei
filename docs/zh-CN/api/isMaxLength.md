@@ -7,6 +7,7 @@ isMaxLength
 ----
 
 ### 检查"abc"的长度是否小于等于2
+
 ```php
 if (wei()->isMaxLength('abc', 2)) {
     echo 'Yes';
@@ -16,19 +17,25 @@ if (wei()->isMaxLength('abc', 2)) {
 ```
 
 #### 运行结果
+
 ```php
 'No'
 ```
 
 ### 选项
 
-| 名称              | 类型    | 默认值                             | 说明                 |
-|-------------------|---------|------------------------------------|----------------------|
-| max               | int     | 无                                 | 待比较的数值         |
-| notDetectdMessage | string  | 无法检测到%name%的长度             | -                    |
-| tooLongMessage    | string  | %name%的长度必须小于等于%max%      | 当数据为字符串时出现 |
-| tooManayMessage   | string  | %name%最多包含%max%项              | 当数据为数组时出现   |
-| negativeMessage   | string  | %name%不合法                       | -                    |
+名称              | 类型    | 默认值                             | 说明                 |
+------------------|---------|------------------------------------|----------------------|
+max               | int     | 无                                 | 待比较的数值         |
+
+### 错误信息
+
+名称                   | 信息                               | 说明
+-----------------------|------------------------------------|------
+notDetectdMessage      | 无法检测到%name%的长度             |
+tooLongMessage         | %name%的长度必须小于等于%max%      | 当数据为字符串时出现
+tooManayMessage        | %name%最多包含%max%项              | 当数据为数组时出现
+negativeMessage        | %name%不合法                       |
 
 ### 方法
 
