@@ -136,6 +136,8 @@ namespace Widget
      * @method   bool                   isIn($input, array $array, $strict = false) Check if the input is in specified array
      * @property Validator\Lowercase    $isLowercase
      * @method   bool                   isLowercase($input) Check if the input is lowercase
+     * @property Validator\Luhn         $isLuhn
+     * @method   bool                   isLuhn($input) Check if the input is valid by the Luhn algorithm
      * @property Validator\Null         $isNull
      * @method   bool                   isNull($input) Check if the input is null
      * @property Validator\Number       $isNumber

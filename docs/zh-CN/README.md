@@ -65,6 +65,7 @@ API参考目录
 * [isEndsWith](api/isEndsWith.md) - 检查数据是否以指定字符串结尾
 * [isIn](api/isIn.md) - 检查数据是否在指定的数组中
 * [isLowercase](api/isLowercase.md) - 检查数据是否为小写
+* [isLuhn](api/isLuhn.md) - 检查数据是否符合Luhn算法
 * [isNull](api/isNull.md) - 检查数据是否为null
 * [isNumber](api/isNumber.md) - 检查数据是否为有效数字
 * [isPresent](api/isPresent.md) - 检查数据是否不为空(允许空格)
