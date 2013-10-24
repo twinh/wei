@@ -1,9 +1,9 @@
 isLuhn
 ======
 
-检查数据是否符合Luhn算法
+检查数据是否符合[Luhn算法](http://zh.wikipedia.org/wiki/Luhn%E7%AE%97%E6%B3%95)
 
-Luhn算法常用于信用卡号,防伪码校验
+Luhn算法常用于信用卡号,防伪码校验.
 
 案例
 ----
