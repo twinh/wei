@@ -51,7 +51,7 @@ widgets = [
   # validation
     'validate',
     #
-    'isAlnum', 'isAlpha', 'isBlank', 'isDecimal', 'isDigit', 'isDivisibleby', 'isDoubleByte', 'isEndsWith', 'isIn', 'isLowercase', 'isNull', 'isNumber', 'isPresent', 'isRegex', 'isRequired', 'isStartsWith', 'isType', 'isUppercase',
+    'isAlnum', 'isAlpha', 'isBlank', 'isDecimal', 'isDigit', 'isDivisibleby', 'isDoubleByte', 'isEndsWith', 'isIn', 'isLowercase', 'isLuhn', 'isNull', 'isNumber', 'isPresent', 'isRegex', 'isRequired', 'isStartsWith', 'isType', 'isUppercase',
     # Length
     'isLength', 'isCharLength', 'isMaxLength', 'isMinLength',
     # Comparison

@@ -93,6 +93,7 @@
         <li><a href="#isEndsWith">isEndsWith</a></li>
         <li><a href="#isIn">isIn</a></li>
         <li><a href="#isLowercase">isLowercase</a></li>
+        <li><a href="#isLuhn">isLuhn</a></li>
         <li><a href="#isNull">isNull</a></li>
         <li><a href="#isNumber">isNumber</a></li>
         <li><a href="#isPresent">isPresent</a></li>
@@ -6702,6 +6703,82 @@
 </ul>
   </section>
 
+<!-- api/isLuhn
+  ================================================== -->
+  <section id="isLuhn">
+  <div class="page-header"><h1>isLuhn</h1></div>
+
+<p>检查数据是否符合Luhn算法</p>
+
+<p>Luhn算法常用于信用卡号,防伪码校验</p>
+
+<h2>案例</h2>
+
+<h3>检查信用卡号是否符合Luhn算法</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isLuhn</span><span class="p">(</span><span class="s1">'4111111111111111'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'No'</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p>无</p>
+
+<h3>错误信息</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>信息</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>%name%必须是字符串</td>
+</tr>
+<tr>
+<td>invalidMessage</td>
+<td>%name%不是有效的数字</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
+
+<h4>isLuhn($input)</h4>
+
+<p>检查数据是否符合Luhn算法</p>
+
+<p><strong>返回:</strong> <code>bool</code> 检查结果</p>
+
+<p><strong>参数</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$input</td>
+<td>string</td>
+<td>要检查的数据</td>
+</tr></tbody>
+</table><h2>相关链接</h2>
+
+<ul>
+<li><a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
+</ul>
+  </section>
+
 <!-- api/isNull
   ================================================== -->
   <section id="isNull">
@@ -9663,6 +9740,7 @@
 
 <ul>
 <li><a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
+<li><a href="#isLuhn">isLuhn验证器</a></li>
 </ul>
   </section>
 
