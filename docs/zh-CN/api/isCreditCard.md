@@ -63,3 +63,4 @@ if (wei()->isCreditCard($input, array('UnionPay', 'Visa'))) {
 --------
 
 * [验证器概览](../book/validators.md)
+* [Luhn算法验证器:isLuhn](isLuhn.md)

@@ -55,3 +55,4 @@ $input | string | 要检查的数据
 --------
 
 * [验证器概览](../book/validators.md)
+* [信用卡号验证器:isCreditCard](isCreditCard.md)
