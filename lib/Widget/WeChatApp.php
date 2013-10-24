@@ -872,7 +872,7 @@ class WeChatApp extends Base
      * @param SimpleXMLElement $xml
      * @return SimpleXMLElement
      */
-    public function arrayToXml($array, SimpleXMLElement $xml = null)
+    protected function arrayToXml($array, SimpleXMLElement $xml = null)
     {
         if ($xml === null) {
             $xml = new SimpleXMLElement('<xml/>');
