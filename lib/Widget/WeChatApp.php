@@ -392,13 +392,13 @@ class WeChatApp extends Base
      * Generate text message for output
      *
      * @param string $content
-     * @return SimpleXMLElement
+     * @return array
      */
     public function sendText($content)
     {
-        $xml = $this->createXml();
-        $this->addCDataChild($xml, 'Content', $content);
-        return $this->send('text', $xml);
+        return $this->send('text', array(
+            'Content' => $content
+        ));
     }
 
     /**
@@ -412,16 +412,14 @@ class WeChatApp extends Base
      */
     public function sendMusic($title, $description, $url, $hqUrl = null)
     {
-        $xml    = $this->createXml();
-        $music  = $xml->addChild('Music');
-
-        $this
-            ->addCDataChild($music, 'Title', $title)
-            ->addCDataChild($music, 'Description', $description)
-            ->addCDataChild($music, 'MusicUrl', $url)
-            ->addCDataChild($music, 'HQMusicUrl', $hqUrl);
-
-        return $this->send('music', $xml);
+        return $this->send('music', array(
+            'Music' => array(
+                'Title' => $title,
+                'Description' => $description,
+                'MusicUrl' => $url,
+                'HQMusicUrl' => $hqUrl
+            )
+        ));
     }
 
     /**
@@ -459,16 +457,18 @@ class WeChatApp extends Base
      */
     public function sendArticle(array $articles)
     {
-        $xml = $this->createXml();
-
         // Convert single article array
         if (!is_int(key($articles))) {
             $articles = array($articles);
         }
 
-        $xml->addChild('ArticleCount', count($articles));
+        $array = array(
+            'ArticleCount' => count($articles),
+            'Articles' => array(
+                'item' => array()
+            )
+        );
 
-        $items = $xml->addChild('Articles');
         foreach ($articles as $article) {
             $article += array(
                 'title' => null,
@@ -476,15 +476,15 @@ class WeChatApp extends Base
                 'picUrl' => null,
                 'url' => null
             );
-            $item = $items->addChild('item');
-            $this
-                ->addCDataChild($item, 'Title', $article['title'])
-                ->addCDataChild($item, 'Description', $article['description'])
-                ->addCDataChild($item, 'PicUrl', $article['picUrl'])
-                ->addCDataChild($item, 'Url', $article['url']);
+            $array['Articles']['item'][] = array(
+                'Title' => $article['title'],
+                'Description' => $article['description'],
+                'PicUrl' => $article['picUrl'],
+                'Url' => $article['url']
+            );
         }
 
-        return $this->send('news', $xml);
+        return $this->send('news', $array);
     }
 
     /**
@@ -708,30 +708,18 @@ class WeChatApp extends Base
      * Generate message for output
      *
      * @param string $type The type of message
-     * @param SimpleXMLElement $xml The xml object
-     * @return SimpleXMLElement
+     * @param array $xml The xml object
+     * @return array
      */
-    protected function send($type, SimpleXMLElement $xml)
+    protected function send($type, array $array)
     {
-        $this
-            ->addCDataChild($xml, 'ToUserName', $this->fromUserName)
-            ->addCDataChild($xml, 'FromUserName', $this->toUserName)
-            ->addCDataChild($xml, 'MsgType', $type);
-
-        $xml->addChild('CreateTime', time());
-
-        return $xml;
-    }
-
-    /**
-     * Create a root xml object
-     *
-     * @return SimpleXMLElement
-     */
-    protected function createXml()
-    {
-        $xml = new SimpleXMLElement('<xml/>');
-        return $xml;
+        $array += array(
+            'ToUserName' => $this->fromUserName,
+            'FromUserName' => $this->toUserName,
+            'MsgType' => $type,
+            'CreateTime' => time()
+        );
+        return $array;
     }
 
     /**
@@ -869,13 +857,13 @@ class WeChatApp extends Base
         $this->handled = true;
 
         $content = $fn($this, $this->widget);
-        if (!$content instanceof SimpleXMLElement) {
+        if (!is_array($content)) {
             $content = $this->sendText($content);
         }
 
         $this->beforeSend && call_user_func($this->beforeSend, $this, $content, $this->widget);
 
-        return $content->asXML();
+        return $this->arrayToXml($content)->asXML();
     }
 
     /**
