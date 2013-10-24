@@ -497,11 +497,6 @@ class WeChatApp extends Base
         return $this->valid;
     }
 
-    public function getAttrs()
-    {
-
-    }
-
     /**
      * Returns the keyword
      *
@@ -722,22 +717,6 @@ class WeChatApp extends Base
     }
 
     /**
-     * Adds a cdata section to specified xml object
-     *
-     * @param SimpleXMLElement $xml
-     * @param string $name
-     * @param string $value
-     * @return $this
-     */
-    public function addCDataChild(SimpleXMLElement $xml, $name, $value)
-    {
-        $child = $xml->addChild($name);
-        $node = dom_import_simplexml($child);
-        $node->appendChild($node->ownerDocument->createCDATASection($value));
-        return $this;
-    }
-
-    /**
      * Adds a rule to handle user text input
      *
      * @param string $type
@@ -893,5 +872,21 @@ class WeChatApp extends Base
             }
         }
         return $xml;
+    }
+
+    /**
+     * Adds a cdata section to specified xml object
+     *
+     * @param SimpleXMLElement $xml
+     * @param string $name
+     * @param string $value
+     * @return $this
+     */
+    public function addCDataChild(SimpleXMLElement $xml, $name, $value)
+    {
+        $child = $xml->addChild($name);
+        $node = dom_import_simplexml($child);
+        $node->appendChild($node->ownerDocument->createCDATASection($value));
+        return $this;
     }
 }
