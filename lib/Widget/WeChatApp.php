@@ -277,7 +277,7 @@ class WeChatApp extends Base
      */
     public function is($keyword, Closure $fn)
     {
-        return $this->addRule('is', $keyword, $fn);
+        return $this->addTextRule('is', $keyword, $fn);
     }
 
     /**
@@ -289,7 +289,7 @@ class WeChatApp extends Base
      */
     public function has($keyword, Closure $fn)
     {
-        return $this->addRule('has', $keyword, $fn);
+        return $this->addTextRule('has', $keyword, $fn);
     }
 
     /**
@@ -301,7 +301,7 @@ class WeChatApp extends Base
      */
     public function startsWith($keyword, Closure $fn)
     {
-        return $this->addRule('startsWith', $keyword, $fn);
+        return $this->addTextRule('startsWith', $keyword, $fn);
     }
 
     /**
@@ -313,7 +313,7 @@ class WeChatApp extends Base
      */
     public function match($pattern, Closure $fn)
     {
-        return $this->addRule('match', $pattern, $fn);
+        return $this->addTextRule('match', $pattern, $fn);
     }
 
     /**
@@ -724,7 +724,7 @@ class WeChatApp extends Base
      * @param Closure $fn
      * @return $this
      */
-    protected function addRule($type, $keyword, Closure $fn)
+    protected function addTextRule($type, $keyword, Closure $fn)
     {
         $this->rules['text'][] = array(
             'type' => $type,
