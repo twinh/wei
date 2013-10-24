@@ -408,7 +408,7 @@ class WeChatApp extends Base
      * @param string $description The description display blow the title
      * @param string $url The music URL for player
      * @param string $hqUrl The HQ music URL for player when user in WIFI
-     * @return SimpleXMLElement
+     * @return array
      */
     public function sendMusic($title, $description, $url, $hqUrl = null)
     {
@@ -453,7 +453,7 @@ class WeChatApp extends Base
      * ```
      *
      * @param array $articles The article array
-     * @return SimpleXMLElement
+     * @return array
      */
     public function sendArticle(array $articles)
     {
@@ -462,7 +462,7 @@ class WeChatApp extends Base
             $articles = array($articles);
         }
 
-        $array = array(
+        $response = array(
             'ArticleCount' => count($articles),
             'Articles' => array(
                 'item' => array()
@@ -476,7 +476,7 @@ class WeChatApp extends Base
                 'picUrl' => null,
                 'url' => null
             );
-            $array['Articles']['item'][] = array(
+            $response['Articles']['item'][] = array(
                 'Title' => $article['title'],
                 'Description' => $article['description'],
                 'PicUrl' => $article['picUrl'],
@@ -484,7 +484,7 @@ class WeChatApp extends Base
             );
         }
 
-        return $this->send('news', $array);
+        return $this->send('news', $response);
     }
 
     /**
@@ -708,18 +708,17 @@ class WeChatApp extends Base
      * Generate message for output
      *
      * @param string $type The type of message
-     * @param array $xml The xml object
+     * @param array $response The response content
      * @return array
      */
-    protected function send($type, array $array)
+    protected function send($type, array $response)
     {
-        $array += array(
+        return $response + array(
             'ToUserName' => $this->fromUserName,
             'FromUserName' => $this->toUserName,
             'MsgType' => $type,
             'CreateTime' => time()
         );
-        return $array;
     }
 
     /**
