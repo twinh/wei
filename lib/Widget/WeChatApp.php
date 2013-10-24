@@ -847,11 +847,11 @@ class WeChatApp extends Base
     /**
      * Convert to XML element
      *
-     * @param $array
+     * @param array $array
      * @param SimpleXMLElement $xml
      * @return SimpleXMLElement
      */
-    protected function arrayToXml($array, SimpleXMLElement $xml = null)
+    protected function arrayToXml(array $array, SimpleXMLElement $xml = null)
     {
         if ($xml === null) {
             $xml = new SimpleXMLElement('<xml/>');
@@ -868,25 +868,16 @@ class WeChatApp extends Base
                     $this->arrayToXml($value, $subNode);
                 }
             } else {
-                $xml->addChild($key, $value);
+                // Wrap cdata for non-numeric string
+                if (is_numeric($value)) {
+                    $xml->addChild($key, $value);
+                } else {
+                    $child = $xml->addChild($key);
+                    $node = dom_import_simplexml($child);
+                    $node->appendChild($node->ownerDocument->createCDATASection($value));
+                }
             }
         }
         return $xml;
-    }
-
-    /**
-     * Adds a cdata section to specified xml object
-     *
-     * @param SimpleXMLElement $xml
-     * @param string $name
-     * @param string $value
-     * @return $this
-     */
-    public function addCDataChild(SimpleXMLElement $xml, $name, $value)
-    {
-        $child = $xml->addChild($name);
-        $node = dom_import_simplexml($child);
-        $node->appendChild($node->ownerDocument->createCDATASection($value));
-        return $this;
     }
 }
