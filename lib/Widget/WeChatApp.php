@@ -755,35 +755,7 @@ class WeChatApp extends Base
      */
     protected function parsePostData()
     {
-        if ($this->checkSignature()) {
-            $this->valid = true;
-            if ($this->postData) {
-                $attrs = @simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
-                if (!$attrs) {
-                    return;
-                }
-                $attrs = json_decode(json_encode($attrs), true);
-                foreach ($attrs as $name => $value) {
-                    if (in_array($name, $this->attrNames)) {
-                        // Fix the issue that xml parse empty data to array
-                        is_array($value) && $value = null;
-                        $property = lcfirst(strtr($name, array('_' => '')));
-                        $this->$property = $value;
-                    }
-                }
-            }
-        } else {
-            $this->valid = false;
-        }
-    }
-
-    /**
-     * Check if the WeChat server signature is valid
-     *
-     * @return bool
-     */
-    protected function checkSignature()
-    {
+            // Check if the WeChat server signature is valid
         $query = $this->query;
         $tmpArr = array(
             $this->token,
@@ -792,7 +764,23 @@ class WeChatApp extends Base
         );
         sort($tmpArr);
         $tmpStr = sha1(implode($tmpArr));
-        return isset($query['signature']) && $tmpStr === $query['signature'];
+        $this->valid = (isset($query['signature']) && $tmpStr === $query['signature']);
+
+        // Parse the message data
+        if ($this->valid && $this->postData) {
+            $attrs = @simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
+            if (!$attrs) {
+                return;
+            }
+            $attrs = json_decode(json_encode($attrs), true);
+            foreach ($attrs as $name => $value) {
+                if (in_array($name, $this->attrNames)) {
+                    // Fix the issue that xml parse empty data to array
+                    is_array($value) && $value = null;
+                    $this->{lcfirst(strtr($name, array('_' => '')))} = $value;
+                }
+            }
+        }
     }
 
     /**
