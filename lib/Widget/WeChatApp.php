@@ -90,6 +90,22 @@ class WeChatApp extends Base
      */
     protected $keyword;
 
+    /**
+     * The valid attr name of post XML data
+     *
+     * @var array
+     */
+    protected $attrNames = array(
+        'MsgType', 'FromUserName', 'ToUserName', 'MsgId', 'CreateTime', // common
+        'Content', // text
+        'PicUrl', // image
+        'Location_X', 'Location_Y', 'Scale', 'Label', // location
+        'MediaId', 'Format', // voice
+        'Event', 'EventKey', // event
+        'MediaId', 'ThumbMediaId', // video
+        'Title', 'Description', 'Url' // link
+    );
+
     protected $fromUserName;
 
     protected $toUserName;
@@ -742,23 +758,13 @@ class WeChatApp extends Base
         if ($this->checkSignature()) {
             $this->valid = true;
             if ($this->postData) {
-                $attrNames = array(
-                    'MsgType', 'FromUserName', 'ToUserName', 'MsgId', 'CreateTime', // default
-                    'Content', // text
-                    'PicUrl', // image
-                    'Location_X', 'Location_Y', 'Scale', 'Label', // location
-                    'MediaId', 'Format', // voice
-                    'Event', 'EventKey', // event
-                    'MediaId', 'ThumbMediaId', // video
-                    'Title', 'Description', 'Url' // link
-                );
                 $attrs = @simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
                 if (!$attrs) {
                     return;
                 }
                 $attrs = json_decode(json_encode($attrs), true);
                 foreach ($attrs as $name => $value) {
-                    if (in_array($name, $attrNames)) {
+                    if (in_array($name, $this->attrNames)) {
                         // Fix the issue that xml parse empty data to array
                         is_array($value) && $value = null;
                         $property = lcfirst(strtr($name, array('_' => '')));
