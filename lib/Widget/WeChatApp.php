@@ -146,7 +146,7 @@ class WeChatApp extends Base
             $this->postData = $GLOBALS['HTTP_RAW_POST_DATA'];
         }
 
-        $this->parse();
+        $this->parsePostData();
     }
 
     /**
@@ -735,46 +735,38 @@ class WeChatApp extends Base
     }
 
     /**
-     * Parse request data
-     */
-    protected function parse()
-    {
-        // Check if it's requested from the WeChat server
-        if ($this->checkSignature()) {
-            $this->valid = true;
-            $this->parsePostData();
-        } else {
-            $this->valid = false;
-        }
-    }
-
-    /**
      * Parse post data to receive user OpenID and input content and more
      */
     protected function parsePostData()
     {
-        $defaults = array('FromUserName', 'ToUserName', 'MsgId', 'CreateTime');
-        $attrs = array(
-            'text'      => array('Content'),
-            'image'     => array('PicUrl'),
-            'location'  => array('Location_X', 'Location_Y', 'Scale', 'Label'),
-            'voice'     => array('MediaId', 'Format'),
-            'event'     => array('Event', 'EventKey'),
-            'video'     => array('MediaId', 'ThumbMediaId'),
-            'link'      => array('Title', 'Description', 'Url')
-        );
+        // Check if it's requested from the WeChat server
+        if ($this->checkSignature()) {
+            $this->valid = true;
+            $defaults = array('FromUserName', 'ToUserName', 'MsgId', 'CreateTime');
+            $attrs = array(
+                'text'      => array('Content'),
+                'image'     => array('PicUrl'),
+                'location'  => array('Location_X', 'Location_Y', 'Scale', 'Label'),
+                'voice'     => array('MediaId', 'Format'),
+                'event'     => array('Event', 'EventKey'),
+                'video'     => array('MediaId', 'ThumbMediaId'),
+                'link'      => array('Title', 'Description', 'Url')
+            );
 
-        if ($this->postData) {
-            $postObj        = @simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
-            $this->msgType  = isset($postObj->MsgType) ? (string)$postObj->MsgType : null;
-            if (isset($attrs[$this->msgType])) {
-                foreach (array_merge($defaults, $attrs[$this->msgType]) as $field) {
-                    if (isset($postObj->$field)) {
-                        $name = lcfirst(strtr($field, array('_' => '')));
-                        $this->$name = (string)$postObj->$field;
+            if ($this->postData) {
+                $postObj        = @simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
+                $this->msgType  = isset($postObj->MsgType) ? (string)$postObj->MsgType : null;
+                if (isset($attrs[$this->msgType])) {
+                    foreach (array_merge($defaults, $attrs[$this->msgType]) as $field) {
+                        if (isset($postObj->$field)) {
+                            $name = lcfirst(strtr($field, array('_' => '')));
+                            $this->$name = (string)$postObj->$field;
+                        }
                     }
                 }
             }
+        } else {
+            $this->valid = false;
         }
     }
 
