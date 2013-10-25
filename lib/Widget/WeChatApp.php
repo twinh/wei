@@ -735,33 +735,34 @@ class WeChatApp extends Base
     }
 
     /**
-     * Parse post data to receive user OpenID and input content and more
+     * Parse post data to receive user OpenID and input content and message attr
      */
     protected function parsePostData()
     {
-        // Check if it's requested from the WeChat server
         if ($this->checkSignature()) {
             $this->valid = true;
-            $defaults = array('FromUserName', 'ToUserName', 'MsgId', 'CreateTime');
-            $attrs = array(
-                'text'      => array('Content'),
-                'image'     => array('PicUrl'),
-                'location'  => array('Location_X', 'Location_Y', 'Scale', 'Label'),
-                'voice'     => array('MediaId', 'Format'),
-                'event'     => array('Event', 'EventKey'),
-                'video'     => array('MediaId', 'ThumbMediaId'),
-                'link'      => array('Title', 'Description', 'Url')
-            );
-
             if ($this->postData) {
-                $postObj        = @simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
-                $this->msgType  = isset($postObj->MsgType) ? (string)$postObj->MsgType : null;
-                if (isset($attrs[$this->msgType])) {
-                    foreach (array_merge($defaults, $attrs[$this->msgType]) as $field) {
-                        if (isset($postObj->$field)) {
-                            $name = lcfirst(strtr($field, array('_' => '')));
-                            $this->$name = (string)$postObj->$field;
-                        }
+                $attrNames = array(
+                    'MsgType', 'FromUserName', 'ToUserName', 'MsgId', 'CreateTime', // default
+                    'Content', // text
+                    'PicUrl', // image
+                    'Location_X', 'Location_Y', 'Scale', 'Label', // location
+                    'MediaId', 'Format', // voice
+                    'Event', 'EventKey', // event
+                    'MediaId', 'ThumbMediaId', // video
+                    'Title', 'Description', 'Url' // link
+                );
+                $attrs = @simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
+                if (!$attrs) {
+                    return;
+                }
+                $attrs = json_decode(json_encode($attrs), true);
+                foreach ($attrs as $name => $value) {
+                    if (in_array($name, $attrNames)) {
+                        // Fix the issue that xml parse empty data to array
+                        is_array($value) && $value = null;
+                        $property = lcfirst(strtr($name, array('_' => '')));
+                        $this->$property = $value;
                     }
                 }
             }
@@ -771,7 +772,7 @@ class WeChatApp extends Base
     }
 
     /**
-     * Check if the signature is valid
+     * Check if the WeChat server signature is valid
      *
      * @return bool
      */
