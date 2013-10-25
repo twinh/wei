@@ -56,7 +56,7 @@ class WeChatApp extends Base
     );
 
     /**
-     * A handler executes when none of the rule handled the input
+     * A handler executes when none of rules handled the input
      *
      * @var callable
      */
@@ -158,20 +158,6 @@ class WeChatApp extends Base
     {
         echo $this->run();
         return $this;
-    }
-
-    /**
-     * Parse request data
-     */
-    public function parse()
-    {
-        // Check if it's requested from the WeChat server
-        if ($this->checkSignature()) {
-            $this->valid = true;
-            $this->parsePostData();
-        } else {
-            $this->valid = false;
-        }
     }
 
     /**
@@ -746,6 +732,20 @@ class WeChatApp extends Base
     {
         $this->rules['event'][$name][$key] = $fn;
         return $this;
+    }
+
+    /**
+     * Parse request data
+     */
+    protected function parse()
+    {
+        // Check if it's requested from the WeChat server
+        if ($this->checkSignature()) {
+            $this->valid = true;
+            $this->parsePostData();
+        } else {
+            $this->valid = false;
+        }
     }
 
     /**

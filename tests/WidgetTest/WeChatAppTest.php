@@ -13,14 +13,14 @@ class WeChatAppTest extends TestCase
 
     public function testForbiddenForInvalidSignature()
     {
-        $app = $this->object;
-
-        $app->setOption('query', array(
-            'signature' => 'invalid',
-            'timestamp' => 'invalid',
-            'nonce'     => 'invalid',
+        $app = new \Widget\WeChatApp(array(
+            'widget' => $this->widget,
+            'query' => array(
+                'signature' => 'invalid',
+                'timestamp' => 'invalid',
+                'nonce'     => 'invalid',
+            )
         ));
-        $app->parse();
 
         $this->assertFalse($app->isValid());
         $this->assertFalse($app->run());
@@ -32,40 +32,37 @@ class WeChatAppTest extends TestCase
 
     public function testEchostr()
     {
-        $app = $this->object;
-        $app->setOption('query', array(
-            'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
-            'timestamp' => '1366032735',
-            'nonce'     => '1365872231',
-            'echostr'   => $rand = mt_rand(0, 100000)
+        $app = new \Widget\WeChatApp(array(
+            'widget' => $this->widget,
+            'query' => array(
+                'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+                'timestamp' => '1366032735',
+                'nonce'     => '1365872231',
+                'echostr'   => $rand = mt_rand(0, 100000)
+            )
         ));
 
-        ob_start();
-        $app->parse();
-        $return = $app();
-        $this->assertEquals($rand, ob_get_clean());
-
-        $this->assertInstanceOf('\Widget\WeChatApp', $return);
-        $this->assertEquals(200, $this->response->getStatusCode());
+        $return = $app->run();
+        $this->assertEquals($rand, $return);
     }
 
     public function testEchorStrOnlyWhenAuth()
     {
-        $app = $this->object;
+        $app = new \Widget\WeChatApp(array(
+            'widget' => $this->widget,
+            'query' => array(
+                'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+                'timestamp' => '1366032735',
+                'nonce'     => '1365872231',
+                'echostr'   => $rand = mt_rand(0, 100000)
+            )
+        ));
 
         $app->defaults(function(){
             return 'never see me';
         });
 
-        $app->setOption('query', array(
-            'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
-            'timestamp' => '1366032735',
-            'nonce'     => '1365872231',
-            'echostr'   => $rand = mt_rand(0, 100000)
-        ));
-
         ob_start();
-        $app->parse();
         $app();
         $this->assertEquals($rand, ob_get_clean());
     }
@@ -84,15 +81,15 @@ class WeChatAppTest extends TestCase
      */
     public function testInputAndOutput($query, $input, $data, $outputContent = null)
     {
-        $app = $this->object;
-
         // Inject HTTP query
         $gets = array();
         parse_str($query, $gets);
-        $app->setOption('query', $gets);
 
-        // Inject user input message
-        $app->setOption('postData', $input);
+        $app = new \Widget\WeChatApp(array(
+            'widget' => $this->widget,
+            'query' => $gets,
+            'postData' => $input,
+        ));
 
         $app->defaults(function($app){
             return "Your input is " . $app->getContent();
@@ -178,7 +175,6 @@ class WeChatAppTest extends TestCase
         });
 
         ob_start();
-        $app->parse();
         $return = $app();
         $content = ob_get_clean();
 
@@ -513,15 +509,16 @@ class WeChatAppTest extends TestCase
 
     public function testFlatMode()
     {
-        $app = $this->object;
-        $app->setOption('query', array(
-            'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
-            'timestamp' => '1366032735',
-            'nonce'     => '1365872231',
-            'echostr'   => $rand = mt_rand(0, 100000)
+        $app = new \Widget\WeChatApp(array(
+            'widget' => $this->widget,
+            'query' => array(
+                'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+                'timestamp' => '1366032735',
+                'nonce'     => '1365872231',
+                'echostr'   => $rand = mt_rand(0, 100000)
+            ),
+            'postData' => $this->inputTextMessage('hi')
         ));
-        $app->setOption('postData', $this->inputTextMessage('hi'));
-        $app->parse();
 
         // Receive data not in callback Closure
         $this->assertEquals('hi', $app->getContent());
@@ -529,19 +526,29 @@ class WeChatAppTest extends TestCase
 
     public function testIsVerifyToken()
     {
-        $app = $this->object;
-        $app->setOption('query', array(
-            'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
-            'timestamp' => '1366032735',
-            'nonce'     => '1365872231',
-            'echostr'   => $rand = mt_rand(0, 100000)
+        $app = new \Widget\WeChatApp(array(
+            'widget' => $this->widget,
+            'query' => array(
+                'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+                'timestamp' => '1366032735',
+                'nonce'     => '1365872231',
+                'echostr'   => $rand = mt_rand(0, 100000)
+            ),
+            'postData' => $this->inputTextMessage('hi')
         ));
         $this->assertTrue($app->isVerifyToken());
+    }
 
-        $app->setOption('query', array(
-            'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
-            'timestamp' => '1366032735',
-            'nonce'     => '1365872231'
+    public function testIsNotVerifyToken()
+    {
+        $app = new \Widget\WeChatApp(array(
+            'widget' => $this->widget,
+            'query' => array(
+                'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+                'timestamp' => '1366032735',
+                'nonce'     => '1365872231',
+            ),
+            'postData' => $this->inputTextMessage('hi')
         ));
         $this->assertFalse($app->isVerifyToken());
     }
@@ -551,7 +558,15 @@ class WeChatAppTest extends TestCase
      */
     public function testCase($input, $output)
     {
-        $app = $this->object;
+        $app = new \Widget\WeChatApp(array(
+            'widget' => $this->widget,
+            'query' => array(
+                'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+                'timestamp' => '1366032735',
+                'nonce'     => '1365872231',
+            ),
+            'postData' => $this->inputTextMessage($input)
+        ));
 
         $app->is('abc', function(){
             return 'abc';
@@ -565,7 +580,11 @@ class WeChatAppTest extends TestCase
             return 'e';
         });
 
-        $this->assertEquals($output, $this->runWithInput($input));
+        // Execute and parse result
+        $result = $app->run();
+        $result = simplexml_load_string($result);
+
+        $this->assertEquals($output, $result->Content);
     }
 
     public function providerForCase()
@@ -583,41 +602,17 @@ class WeChatAppTest extends TestCase
         );
     }
 
-    protected function runWithInput($text)
-    {
-        $app = $this->object;
-
-        // Set request parameters
-        $app->setOption('query', array(
-            'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
-            'timestamp' => '1366032735',
-            'nonce'     => '1365872231',
-        ));
-        $app->setOption('postData', $this->inputTextMessage($text));
-
-        // Re-parse
-        $app->parse();
-
-        // Execute and parse result
-        $result = $app->run();
-        $result = simplexml_load_string($result);
-        return $result->Content;
-    }
-
     public function testNoRuleHandled()
     {
-        $app = $this->object;
-
-        // Set request parameters
-        $app->setOption('query', array(
-            'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
-            'timestamp' => '1366032735',
-            'nonce'     => '1365872231',
+        $app = new \Widget\WeChatApp(array(
+            'widget' => $this->widget,
+            'query' => array(
+                'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+                'timestamp' => '1366032735',
+                'nonce'     => '1365872231',
+            ),
+            'postData' => $this->inputTextMessage('test')
         ));
-        $app->setOption('postData', $this->inputTextMessage('test'));
-
-        // Re-parse
-        $app->parse();
 
         // Execute and parse result
         $result = $app->run();
@@ -627,25 +622,23 @@ class WeChatAppTest extends TestCase
 
     public function testHasEventButNotMatch()
     {
-        $app = $this->object;
-
-        // Set request parameters
-        $app->setOption('query', array(
-            'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
-            'timestamp' => '1366032735',
-            'nonce'     => '1365872231',
-        ));
-        $app->setOption('postData', '<xml>
+        $app = new \Widget\WeChatApp(array(
+            'widget' => $this->widget,
+            'query' => array(
+                'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+                'timestamp' => '1366032735',
+                'nonce'     => '1365872231',
+            ),
+            'postData' => '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
                     <FromUserName><![CDATA[fromUser]]></FromUserName>
                     <CreateTime>1366131865</CreateTime>
                     <MsgType><![CDATA[event]]></MsgType>
                     <Event><![CDATA[CLICK]]></Event>
                     <EventKey><![CDATA[index]]></EventKey>
-                 </xml>');
+                 </xml>'
+        ));
 
-        // Re-parse
-        $app->parse();
 
         $app->click('my', function(){
             return 'My info';
