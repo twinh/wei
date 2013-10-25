@@ -755,7 +755,7 @@ class WeChatApp extends Base
      */
     protected function parsePostData()
     {
-            // Check if the WeChat server signature is valid
+        // Check if the WeChat server signature is valid
         $query = $this->query;
         $tmpArr = array(
             $this->token,
