@@ -83,6 +83,20 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     protected $fromGlobal = true;
 
     /**
+     * Whether overwrite the request method when "_method" request parameter is present
+     *
+     * @var bool
+     */
+    protected $overwriteMethod = true;
+
+    /**
+     * Whether add "X-Requested-With: XMLHttpRequest" header when "_ajax" request parameter is present
+     *
+     * @var
+     */
+    protected $overwriteAjax = true;
+
+    /**
      * @var string
      */
     protected $baseUrl;
@@ -121,6 +135,14 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
             $this->servers  = &$_SERVER;
             $this->files    = &$_FILES;
             $this->data     = &$_REQUEST;
+        }
+
+        if ($this->overwriteMethod && $method = $this->get('_method')) {
+            $this->setMethod($method);
+        }
+
+        if ($this->overwriteAjax && $this->get('_ajax')) {
+            $this->setServer('HTTP_X_REQUESTED_WITH', 'XMLHttpRequest');
         }
     }
 
