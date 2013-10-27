@@ -211,7 +211,7 @@ class WeChatApp extends Base
                 }
                 break;
 
-            // including location, image, voice, video, link
+            // including location, image, voice, video and link
             default:
                 if (isset($this->rules[$this->msgType])) {
                     return $this->handle($this->rules[$this->msgType]);
