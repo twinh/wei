@@ -29,6 +29,16 @@ class WeChatApp extends Base
     /**
      * The HTTP raw post data, equals to $GLOBALS['HTTP_RAW_POST_DATA'] on default
      *
+     * Most of the available elements name in post XML data
+     * Common  : MsgType, FromUserName, ToUserName, MsgId, CreateTime
+     * text    : Content
+     * image   : PicUrl
+     * location: Location_X, Location_Y, Scale, Label
+     * voice   : MediaId, Format
+     * event   : Event, EventKey
+     * video   : MediaId, ThumbMediaId
+     * link    : Title, Description
+     *
      * @var string
      */
     protected $postData;
@@ -77,7 +87,7 @@ class WeChatApp extends Base
     protected $handled = false;
 
     /**
-     * The callback executes before send the xml data
+     * The callback executes before send the XML data
      *
      * @var callable
      */
@@ -91,58 +101,11 @@ class WeChatApp extends Base
     protected $keyword;
 
     /**
-     * The valid attr name of post XML data
-     *
+     * The element values of post XML data
+
      * @var array
      */
-    protected $attrNames = array(
-        'MsgType', 'FromUserName', 'ToUserName', 'MsgId', 'CreateTime', // common
-        'Content', // text
-        'PicUrl', // image
-        'Location_X', 'Location_Y', 'Scale', 'Label', // location
-        'MediaId', 'Format', // voice
-        'Event', 'EventKey', // event
-        'MediaId', 'ThumbMediaId', // video
-        'Title', 'Description', 'Url' // link
-    );
-
-    protected $fromUserName;
-
-    protected $toUserName;
-
-    protected $createTime;
-
-    protected $msgId;
-
-    protected $msgType;
-
-    protected $content;
-
-    protected $picUrl;
-
-    protected $locationX;
-
-    protected $locationY;
-
-    protected $scale;
-
-    protected $label;
-
-    protected $mediaId;
-
-    protected $format;
-
-    protected $event;
-
-    protected $eventKey;
-
-    protected $thumbMediaId;
-
-    protected $title;
-
-    protected $description;
-
-    protected $url;
+    protected $attrs = array();
 
     /**
      * Constructor
@@ -195,7 +158,7 @@ class WeChatApp extends Base
             return htmlspecialchars($this->query['echostr'], \ENT_QUOTES, 'UTF-8');
         }
 
-        switch ($this->msgType) {
+        switch ($this->getMsgType()) {
             case 'text' :
                 if ($result = $this->handleText()) {
                     return $result;
@@ -204,17 +167,17 @@ class WeChatApp extends Base
 
             case 'event':
                 $eventRule = $this->rules['event'];
-                $event = strtolower($this->event);
+                $event = strtolower($this->getEvent());
                 if (isset($eventRule[$event])
-                    && isset($eventRule[$event][$this->eventKey])) {
-                    return $this->handle($eventRule[$event][$this->eventKey]);
+                    && isset($eventRule[$event][$this->getEventKey()])) {
+                    return $this->handle($eventRule[$event][$this->getEventKey()]);
                 }
                 break;
 
             // including location, image, voice, video and link
             default:
-                if (isset($this->rules[$this->msgType])) {
-                    return $this->handle($this->rules[$this->msgType]);
+                if (isset($this->rules[$this->getMsgType()])) {
+                    return $this->handle($this->rules[$this->getMsgType()]);
                 }
         }
 
@@ -510,13 +473,24 @@ class WeChatApp extends Base
     }
 
     /**
+     * Returns the XML element value
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function getAttr($name)
+    {
+        return isset($this->attrs[$name]) ? $this->attrs[$name] : null;
+    }
+
+    /**
      * Returns your user id
      *
      * @return string
      */
     public function getToUserName()
     {
-        return $this->toUserName;
+        return $this->getAttr('toUserName');
     }
 
     /**
@@ -526,7 +500,7 @@ class WeChatApp extends Base
      */
     public function getFromUserName()
     {
-        return $this->fromUserName;
+        return $this->getAttr('fromUserName');
     }
 
     /**
@@ -536,7 +510,7 @@ class WeChatApp extends Base
      */
     public function getCreateTime()
     {
-        return $this->createTime;
+        return $this->getAttr('createTime');
     }
 
     /**
@@ -546,7 +520,7 @@ class WeChatApp extends Base
      */
     public function getContent()
     {
-        return $this->content;
+        return $this->getAttr('content');
     }
 
     /**
@@ -556,7 +530,7 @@ class WeChatApp extends Base
      */
     public function getMsgId()
     {
-        return $this->msgId;
+        return $this->getAttr('msgId');
     }
 
     /**
@@ -568,7 +542,7 @@ class WeChatApp extends Base
      */
     public function getMsgType()
     {
-        return $this->msgType;
+        return $this->getAttr('msgType');
     }
 
     /**
@@ -578,7 +552,7 @@ class WeChatApp extends Base
      */
     public function getPicUrl()
     {
-        return $this->picUrl;
+        return $this->getAttr('picUrl');
     }
 
     /**
@@ -588,7 +562,7 @@ class WeChatApp extends Base
      */
     public function getLocationX()
     {
-        return $this->locationX;
+        return $this->getAttr('locationX');
     }
 
     /**
@@ -598,7 +572,7 @@ class WeChatApp extends Base
      */
     public function getLocationY()
     {
-        return $this->locationY;
+        return $this->getAttr('locationY');
     }
 
     /**
@@ -608,7 +582,7 @@ class WeChatApp extends Base
      */
     public function getLabel()
     {
-        return $this->label;
+        return $this->getAttr('label');
     }
 
     /**
@@ -618,7 +592,7 @@ class WeChatApp extends Base
      */
     public function getScale()
     {
-        return $this->scale;
+        return $this->getAttr('scale');
     }
 
     /**
@@ -628,7 +602,7 @@ class WeChatApp extends Base
      */
     public function getMediaId()
     {
-        return $this->mediaId;
+        return $this->getAttr('mediaId');
     }
 
     /**
@@ -638,7 +612,7 @@ class WeChatApp extends Base
      */
     public function getFormat()
     {
-        return $this->format;
+        return $this->getAttr('format');
     }
 
     /**
@@ -648,7 +622,7 @@ class WeChatApp extends Base
      */
     public function getEvent()
     {
-        return $this->event;
+        return $this->getAttr('event');
     }
 
     /**
@@ -658,7 +632,7 @@ class WeChatApp extends Base
      */
     public function getEventKey()
     {
-        return $this->eventKey;
+        return $this->getAttr('eventKey');
     }
 
     /**
@@ -668,7 +642,7 @@ class WeChatApp extends Base
      */
     public function getThumbMediaId()
     {
-        return $this->thumbMediaId;
+        return $this->getAttr('thumbMediaId');
     }
 
     /**
@@ -678,7 +652,7 @@ class WeChatApp extends Base
      */
     public function getTitle()
     {
-        return $this->title;
+        return $this->getAttr('title');
     }
 
     /**
@@ -688,7 +662,7 @@ class WeChatApp extends Base
      */
     public function getDescription()
     {
-        return $this->description;
+        return $this->getAttr('description');
     }
 
     /**
@@ -698,7 +672,7 @@ class WeChatApp extends Base
      */
     public function getUrl()
     {
-        return $this->url;
+        return $this->getAttr('url');
     }
 
     /**
@@ -711,8 +685,8 @@ class WeChatApp extends Base
     protected function send($type, array $response)
     {
         return $response + array(
-            'ToUserName' => $this->fromUserName,
-            'FromUserName' => $this->toUserName,
+            'ToUserName' => $this->getFromUserName(),
+            'FromUserName' => $this->getToUserName(),
             'MsgType' => $type,
             'CreateTime' => time()
         );
@@ -769,16 +743,11 @@ class WeChatApp extends Base
         // Parse the message data
         if ($this->valid && $this->postData) {
             $attrs = @simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
-            if (!$attrs) {
-                return;
-            }
             $attrs = json_decode(json_encode($attrs), true);
-            foreach ($attrs as $name => $value) {
-                if (in_array($name, $this->attrNames)) {
-                    // Fix the issue that xml parse empty data to array
-                    is_array($value) && $value = null;
-                    $this->{lcfirst(strtr($name, array('_' => '')))} = $value;
-                }
+            foreach ((array)$attrs as $name => $value) {
+                // Fix the issue that XML parse empty data to array
+                is_array($value) && $value = null;
+                $this->attrs[lcfirst(strtr($name, array('_' => '')))] = $value;
             }
         }
     }
@@ -790,21 +759,22 @@ class WeChatApp extends Base
      */
     protected function handleText()
     {
+        $content = $this->getContent();
         foreach ($this->rules['text'] as $rule) {
-            if ($rule['type'] == 'is' && 0 === strcasecmp($this->content, $rule['keyword'])) {
+            if ($rule['type'] == 'is' && 0 === strcasecmp($content, $rule['keyword'])) {
                 return $this->handle($rule['fn']);
             }
 
-            if ($rule['type'] == 'has' && false !== mb_stripos($this->content, $rule['keyword'])) {
+            if ($rule['type'] == 'has' && false !== mb_stripos($content, $rule['keyword'])) {
                 return $this->handle($rule['fn']);
             }
 
-            if ($rule['type'] == 'startsWith' && 0 === mb_stripos($this->content, $rule['keyword'])) {
-                $this->keyword = substr($this->content, strlen($rule['keyword']));
+            if ($rule['type'] == 'startsWith' && 0 === mb_stripos($content, $rule['keyword'])) {
+                $this->keyword = substr($content, strlen($rule['keyword']));
                 return $this->handle($rule['fn']);
             }
 
-            if ($rule['type'] == 'match' && preg_match($rule['keyword'], $this->content)) {
+            if ($rule['type'] == 'match' && preg_match($rule['keyword'], $content)) {
                 return $this->handle($rule['fn']);
             }
         }
