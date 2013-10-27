@@ -29,7 +29,7 @@ class WeChatApp extends Base
     /**
      * The HTTP raw post data, equals to $GLOBALS['HTTP_RAW_POST_DATA'] on default
      *
-     * Most of the available elements name in post XML data
+     * Most of the available element names in post XML data
      * Common  : MsgType, FromUserName, ToUserName, MsgId, CreateTime
      * text    : Content
      * image   : PicUrl
