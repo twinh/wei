@@ -122,4 +122,4 @@ name                   | 该项
 相关链接
 --------
 
-* [案例:使用反验证规则](../api/validate.md#%E6%A1%88%E4%BE%8B%E4%BD%BF%E7%94%A8%E5%8F%8D%E9%AA%8C%E8%AF%81%E8%A7%84%E5%88%99)
+* [案例:使用`反`验证规则](../api/validate.md#%E6%A1%88%E4%BE%8B%E4%BD%BF%E7%94%A8%E5%8F%8D%E9%AA%8C%E8%AF%81%E8%A7%84%E5%88%99)
