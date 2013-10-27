@@ -30,7 +30,7 @@ class App extends Base
      *
      * @var string
      */
-    protected $namespace = 'App';
+    protected $namespace = 'Controller';
 
     /**
      * The default controller name
