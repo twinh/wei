@@ -26,6 +26,11 @@ namespace Widget;
  */
 class Password extends Base
 {
+    /**
+     * The cost parameter for bcrypt
+     *
+     * @var int
+     */
     protected $cost = 10;
 
     /**
@@ -155,6 +160,13 @@ class Password extends Base
         return $status === 0;
     }
 
+    /**
+     * Set the cost parameter for bcrypt
+     *
+     * @param int $cost
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
     public function setCost($cost)
     {
         if ($cost < 4 || $cost > 31) {
