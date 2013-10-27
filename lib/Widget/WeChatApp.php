@@ -94,13 +94,6 @@ class WeChatApp extends Base
     protected $beforeSend;
 
     /**
-     * Available when the matched the "startsWith" rule
-     *
-     * @var string
-     */
-    protected $keyword;
-
-    /**
      * The element values of post XML data
 
      * @var array
@@ -463,16 +456,6 @@ class WeChatApp extends Base
     }
 
     /**
-     * Returns the keyword
-     *
-     * @return string
-     */
-    public function getKeyword()
-    {
-        return $this->keyword;
-    }
-
-    /**
      * Returns the XML element value
      *
      * @param string $name
@@ -770,7 +753,6 @@ class WeChatApp extends Base
             }
 
             if ($rule['type'] == 'startsWith' && 0 === mb_stripos($content, $rule['keyword'])) {
-                $this->keyword = substr($content, strlen($rule['keyword']));
                 return $this->handle($rule['fn']);
             }
 

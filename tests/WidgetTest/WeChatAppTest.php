@@ -162,7 +162,6 @@ class WeChatAppTest extends TestCase
 
         $that = $this;
         $app->startsWith('t', function($app) use($that){
-            $that->assertEquals(' xx', $app->getKeyword());
             return 'The translation result is: xx';
         });
 
