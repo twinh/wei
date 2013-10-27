@@ -2,6 +2,8 @@
 
 namespace WidgetTest;
 
+use Widget\Request;
+
 class RequestTest extends TestCase
 {
     /**
@@ -677,5 +679,34 @@ class RequestTest extends TestCase
 
             $this->assertEquals(4, $parameter->getInt('int', 1, 4));
         }
+    }
+
+    public function testOverwriteAjax()
+    {
+        $request = new Request(array(
+            'widget' => $this->widget,
+            'data' => array()
+        ));
+        $this->assertFalse($request->isAjax());
+
+        $request = new Request(array(
+            'widget' => $this->widget,
+            'data' => array(
+                '_ajax' => true
+            )
+        ));
+        $this->assertFalse($request->isAjax());
+    }
+
+    public function testOverwriteMethod()
+    {
+        $request = new Request(array(
+            'widget' => $this->widget,
+            'fromGlobal' => false,
+            'data' => array(
+                '_method' => 'PUT'
+            )
+        ));
+        $this->assertTrue($request->isMethod('PUT'));
     }
 }
