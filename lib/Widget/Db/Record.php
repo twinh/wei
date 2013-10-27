@@ -185,7 +185,8 @@ class Record extends Base implements \ArrayAccess
     public function toArray($returnFields = array())
     {
         if (!$returnFields) {
-            return $this->data + array_combine($this->fields, array_pad(array(), count($this->fields), null));
+            $fields = $this->getFields();
+            return $this->data + array_combine($fields, array_pad(array(), count($fields), null));
         } else {
             return array_intersect($this->data, array_flip($returnFields));
         }
@@ -318,7 +319,7 @@ class Record extends Base implements \ArrayAccess
             return $this->data[$name];
         }
 
-        if (in_array($name, $this->fields)) {
+        if (in_array($name, $this->getFields())) {
             return null;
         }
 
@@ -337,7 +338,7 @@ class Record extends Base implements \ArrayAccess
      */
     public function __set($name, $value)
     {
-        if (!$this->fields || in_array($name, $this->fields)) {
+        if (in_array($name, $this->getFields())) {
             $this->data[$name] = $value;
             $this->modifiedData[$name] = $value;
             $this->isModified = true;
@@ -426,6 +427,19 @@ class Record extends Base implements \ArrayAccess
     public function getPrimaryKey()
     {
         return $this->primaryKey;
+    }
+
+    /**
+     * Returns the name of fields of current table
+     *
+     * @return array
+     */
+    public function getFields()
+    {
+        if (empty($this->fields)) {
+            $this->fields = $this->db->getTableFields($this->table);
+        }
+        return $this->fields;
     }
 
     /**

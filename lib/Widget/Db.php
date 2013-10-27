@@ -209,13 +209,6 @@ class Db extends Base
     protected $slaveDb;
 
     /**
-     * @var array
-     */
-    protected $providers = array(
-        'cache' => 'arrayCache',
-    );
-
-    /**
      * Constructor
      *
      * @param array $options
@@ -625,16 +618,11 @@ class Db extends Base
      */
     public function create($table, $data = array(), $isNew = true)
     {
-        $db = $this;
         $class = $this->getRecordClass($table);
-        $fields = $this->cache->get("db-fields-$table", function() use($db, $table) {
-            return $db->getTableFields($table);
-        });
         return new $class(array(
             'widget'    => $this->widget,
             'db'        => $this,
             'table'     => $this->getTable($table),
-            'fields'    => $fields,
             'isNew'     => $isNew,
             'data'      => $data,
         ));
@@ -877,11 +865,10 @@ class Db extends Base
     }
 
     /**
-     * Returns table fields
+     *  Returns the name of fields of specified table
      *
      * @param $table
      * @return array
-     * @internal
      */
     public function getTableFields($table)
     {
