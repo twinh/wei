@@ -506,7 +506,7 @@ class WeChatApp extends Base
     /**
      * Returns the timestamp when message created
      *
-     * @var string
+     * @return string
      */
     public function getCreateTime()
     {
@@ -516,7 +516,7 @@ class WeChatApp extends Base
     /**
      * Returns the user input string, available when the message type is text
      *
-     * @var string
+     * @return string
      */
     public function getContent()
     {
@@ -548,7 +548,7 @@ class WeChatApp extends Base
     /**
      * Returns the picture URL, available when the message type is image
      *
-     * @var string
+     * @return string
      */
     public function getPicUrl()
     {
