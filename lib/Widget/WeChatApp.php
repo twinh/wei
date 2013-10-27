@@ -155,7 +155,7 @@ class WeChatApp extends Base
 
         // Output 'echostr' for fist time authentication
         if (isset($this->query['echostr'])) {
-            return htmlspecialchars($this->query['echostr'], \ENT_QUOTES, 'UTF-8');
+            return htmlspecialchars($this->query['echostr'], ENT_QUOTES, 'UTF-8');
         }
 
         switch ($this->getMsgType()) {
