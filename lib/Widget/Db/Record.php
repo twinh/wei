@@ -429,6 +429,16 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
+     * Return the modified data
+     *
+     * @return array
+     */
+    public function getModifiedData()
+    {
+        return $this->modifiedData;
+    }
+
+    /**
      * Trigger a callback
      *
      * @param string $name
