@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-class Index
+class Index extends Base
 {
     public function index()
     {
