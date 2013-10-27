@@ -9,7 +9,6 @@
 namespace Widget;
 
 use PDO;
-use Widget\Db\Collection;
 
 /**
  * A database service inspired by Doctrine DBAL
