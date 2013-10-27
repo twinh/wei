@@ -313,11 +313,11 @@ class WeChatAppTest extends TestCase
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
-                $this->inputTextMessage('I want a ipad'),
+                $this->inputTextMessage('I want a iPad'),
                 array(
-                    'content' => 'I want a ipad',
+                    'content' => 'I want a iPad',
                 ),
-                'Find a ipad ? ok, i will remember u',
+                'Find a iPad ? ok, i will remember u',
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
