@@ -441,7 +441,7 @@ class Db extends Base
     public function count($table, $conditions = false)
     {
         $data = $this->selectAll($table, $conditions, 'COUNT(1)');
-        return $data ? current($data[0]) : 0;
+        return $data ? (int)current($data[0]) : 0;
     }
 
     /**

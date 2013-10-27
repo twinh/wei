@@ -1049,10 +1049,10 @@ class DbTest extends TestCase
         $this->assertEquals(1, $count);
 
         $count = $db->count('member', array('id' => '1'));
-        $this->assertEquals(1, $count);
+        $this->assertSame(1, $count);
 
         $count = $db->count('member', array('id' => '123'));
-        $this->assertEquals(0, $count);
+        $this->assertSame(0, $count);
     }
 
     public function testTablePrefix()
