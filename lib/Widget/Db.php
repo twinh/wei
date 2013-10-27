@@ -435,7 +435,7 @@ class Db extends Base
      * Returns the rows number of table search by specified parameters
      *
      * @param string $table
-     * @param array $conditions
+     * @param array|false $conditions
      * @return int
      */
     public function count($table, $conditions = false)
@@ -669,7 +669,7 @@ class Db extends Base
      * and throws 404 exception when record not found
      *
      * @param string $table
-     * @param string|arrray $id The primary key value or an associative array containing column-value pairs
+     * @param string|array $id The primary key value or an associative array containing column-value pairs
      * @return Db\Record|false
      * @throws \Exception
      */
