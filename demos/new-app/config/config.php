@@ -25,6 +25,6 @@ return array(
         )
     ),
     'app' => array(
-        
+
     )
 );
