@@ -157,7 +157,7 @@ class WeChatAppTest extends TestCase
         });
 
         $app->has('ipad', function(WeChatApp $app){
-            return $app->sendText('Find a ipad ? ok, i will remember u', true);
+            return $app->sendText('Find a iPad ? ok, i will remember u', true);
         });
 
         $that = $this;
