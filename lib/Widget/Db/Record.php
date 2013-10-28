@@ -19,7 +19,7 @@ use Widget\Base;
 class Record extends Base implements \ArrayAccess
 {
     /**
-     * The database widget
+     * The database service
      *
      * @var Db
      */
@@ -146,7 +146,6 @@ class Record extends Base implements \ArrayAccess
     {
         parent::__construct($options);
 
-        // TODO better way
         // Clear modified status after created
         $this->isModified = false;
         $this->modifiedData = array();
@@ -205,7 +204,7 @@ class Record extends Base implements \ArrayAccess
     /**
      * Import a PHP array in this record
      *
-     * @param $data
+     * @param array|\ArrayAccess $data
      * @return $this
      */
     public function fromArray($data)
@@ -222,7 +221,7 @@ class Record extends Base implements \ArrayAccess
      * @param array $data
      * @return $this
      */
-    public function setData(array $data)
+    protected function setData(array $data)
     {
         return $this->fromArray($data);
     }
