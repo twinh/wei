@@ -467,6 +467,16 @@ class WeChatApp extends Base
     }
 
     /**
+     * Returns all of XML element values
+     *
+     * @return array
+     */
+    public function getAttrs()
+    {
+        return $this->attrs;
+    }
+
+    /**
      * Returns your user id
      *
      * @return string
