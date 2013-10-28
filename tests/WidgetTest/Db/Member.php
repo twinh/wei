@@ -10,6 +10,8 @@ class Member extends Record
 
     protected $scopes;
 
+    protected $loadTimes;
+
     // default value
     protected $data = array(
         'age' => 0,
@@ -29,5 +31,15 @@ class Member extends Record
     {
         $this->posts = $this->db->findAll('post', array('member_id' => $this->data['id']));
         return $this->posts;
+    }
+
+    public function afterLoad()
+    {
+        $this->loadTimes++;
+    }
+
+    public function getLoadTimes()
+    {
+        return $this->loadTimes;
     }
 }

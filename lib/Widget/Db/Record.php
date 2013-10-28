@@ -301,6 +301,7 @@ class Record extends Base implements \ArrayAccess
         $this->data = (array)$this->db->select($this->table, $this->__get($this->primaryKey));
         $this->isModified = false;
         $this->modifiedData = array();
+        $this->trigger('afterLoad');
         return $this;
     }
 

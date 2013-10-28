@@ -1179,18 +1179,23 @@ class DbTest extends TestCase
 
     public function testReload()
     {
+        $this->db->setOption('recordNamespace', 'WidgetTest\Db');
         $this->initFixtures();
 
+        /** @var $member2 \WidgetTest\Db\Member */
         $member = $this->db->find('member', 1);
+        /** @var $member2 \WidgetTest\Db\Member */
         $member2 = $this->db->find('member', 1);
 
         $member->group_id = 2;
         $member->save();
 
         $this->assertNotEquals($member->group_id, $member2->group_id);
+        $this->assertEquals(1, $member->getLoadTimes());
 
         $member2->reload();
         $this->assertEquals($member->group_id, $member2->group_id);
+        $this->assertEquals(2, $member2->getLoadTimes());
     }
 
     public function testFindOne()
