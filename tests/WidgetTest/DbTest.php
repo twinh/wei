@@ -759,6 +759,12 @@ class DbTest extends TestCase
         ));
     }
 
+    public function testToJson()
+    {
+        $member = $this->db->create('member');
+        $this->assertInternalType('string', $member->toJson());
+    }
+
     public function testDeleteRecord()
     {
         $this->initFixtures();
@@ -1217,6 +1223,8 @@ class DbTest extends TestCase
         $member->name = 'tt';
         $member->group_id = '1';
         $member->address = 'address';
+        $this->assertFalse($member->isModified('id'));
+        $this->assertTrue($member->isModified('name'));
         $this->assertTrue($member->isModified());
         $this->assertNull($member->getOldData('name'));
 
