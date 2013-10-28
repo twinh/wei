@@ -255,7 +255,8 @@ class Record extends Base implements \ArrayAccess
             $this->trigger('beforeUpdate');
 
             if ($this->isModified) {
-                $affectedRows = $this->db->update($this->table, $this->modifiedData, array(
+                $data = array_intersect_key($this->data, $this->modifiedData);
+                $affectedRows = $this->db->update($this->table, $data, array(
                     $this->primaryKey => $this->data[$this->primaryKey]
                 ));
                 $result = $affectedRows || '0000' == $this->db->errorCode();
@@ -334,8 +335,8 @@ class Record extends Base implements \ArrayAccess
     public function __set($name, $value)
     {
         if (in_array($name, $this->getFields())) {
+            $this->modifiedData[$name] = isset($this->data[$name]) ? $this->data[$name] : null;
             $this->data[$name] = $value;
-            $this->modifiedData[$name] = $value;
             $this->isModified = true;
         } else {
             $this->$name = $value;
@@ -440,10 +441,14 @@ class Record extends Base implements \ArrayAccess
     /**
      * Return the modified data
      *
-     * @return array
+     * @param string $field
+     * @return string|array
      */
-    public function getModifiedData()
+    public function getModifiedData($field = null)
     {
+        if ($field) {
+            return isset($this->modifiedData[$field]) ? $this->modifiedData[$field] : null;
+        }
         return $this->modifiedData;
     }
 
