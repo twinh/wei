@@ -260,15 +260,16 @@ class Record extends Base implements \ArrayAccess
                     $this->primaryKey => $this->data[$this->primaryKey]
                 ));
                 $result = $affectedRows || '0000' == $this->db->errorCode();
-                if ($result) {
-                    $this->oldData = array();
-                    $this->isModified = false;
-                }
             } else {
                 $result = true;
             }
 
             $this->trigger('afterUpdate');
+        }
+
+        if ($result) {
+            $this->oldData = array();
+            $this->isModified = false;
         }
 
         $this->trigger('afterSave');

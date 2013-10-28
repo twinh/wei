@@ -1206,4 +1206,26 @@ class DbTest extends TestCase
 
         $this->db->findOne('member', 999);
     }
+
+    public function testIsModified()
+    {
+        $this->initFixtures();
+
+        $member = $this->db->create('member');
+        $this->assertFalse($member->isModified());
+
+        $member->name = 'tt';
+        $member->group_id = '1';
+        $member->address = 'address';
+        $this->assertTrue($member->isModified());
+        $this->assertNull($member->getOldData('name'));
+
+        $member->name = 'aa';
+        $this->assertTrue($member->isModified());
+        $this->assertEquals('tt', $member->getOldData('name'));
+
+        $member->save();
+        $this->assertFalse($member->isModified());
+        $this->assertEmpty($member->getOldData());
+    }
 }
