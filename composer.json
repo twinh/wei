@@ -1,7 +1,7 @@
 {
     "name": "widget/widget",
     "description": "A micro-framework provided powerful but simple APIs for faster and easier PHP 5.3+ development.",
-    "version": "0.9.6",
+    "version": "0.9.7-RC1",
     "type": "library",
     "keywords": ["framework", "cache", "database", "validator"],
     "homepage": "https://github.com/twinh/widget",
