@@ -9,7 +9,7 @@ if (is_file($file = __DIR__ . '/../vendor/autoload.php')) {
 }
 
 // Localhost configuration
-$widget = widget(array(
+widget(array(
     'widget' => array(
         // Display all PHP error message
         'inis' => array(
@@ -78,5 +78,3 @@ foreach (array('TRAVIS', 'CODESHIP') as $ci) {
         widget(__DIR__ . '/config/' . strtolower($ci) . '.php');
     }
 }
-
-return $widget;
