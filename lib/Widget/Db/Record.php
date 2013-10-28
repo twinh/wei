@@ -233,27 +233,20 @@ class Record extends Base implements \ArrayAccess
      */
     public function save()
     {
+        $isNew = $this->isNew;
         $this->trigger('beforeSave');
+        $this->trigger($isNew ? 'beforeInsert' : 'beforeUpdate');
 
         // Insert
         if ($this->isNew) {
-
-            $this->trigger('beforeInsert');
-
             $result = (bool)$this->db->insert($this->table, $this->data);
             if ($result) {
                 $this->isNew = false;
                 $name = sprintf('%s_%s_seq', $this->table, $this->primaryKey);
                 $this->data[$this->primaryKey] = $this->db->lastInsertId($name);
             }
-
-            $this->trigger('afterInsert');
-
-            // Update
+        // Update
         } else {
-
-            $this->trigger('beforeUpdate');
-
             if ($this->isModified) {
                 $data = array_intersect_key($this->data, $this->oldData);
                 $affectedRows = $this->db->update($this->table, $data, array(
@@ -263,15 +256,12 @@ class Record extends Base implements \ArrayAccess
             } else {
                 $result = true;
             }
-
-            $this->trigger('afterUpdate');
         }
 
-        if ($result) {
-            $this->oldData = array();
-            $this->isModified = false;
-        }
+        $this->oldData = array();
+        $this->isModified = false;
 
+        $this->trigger($isNew ? 'afterInsert' : 'afterUpdate');
         $this->trigger('afterSave');
 
         return $result;
