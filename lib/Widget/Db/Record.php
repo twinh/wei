@@ -54,13 +54,6 @@ class Record extends Base implements \ArrayAccess
     protected $isNew = true;
 
     /**
-     * Whether the record's data is modified
-     *
-     * @var bool
-     */
-    protected $isModified = false;
-
-    /**
      * The record data
      *
      * @var array
@@ -68,11 +61,18 @@ class Record extends Base implements \ArrayAccess
     protected $data = array();
 
     /**
-     * The modified record data
+     * Whether the record's data is modified
+     *
+     * @var bool
+     */
+    protected $isModified = false;
+
+    /**
+     * The record data before modified
      *
      * @var array
      */
-    protected $modifiedData = array();
+    protected $oldData = array();
 
     /**
      * The callback triggered after load a record
@@ -147,8 +147,8 @@ class Record extends Base implements \ArrayAccess
         parent::__construct($options);
 
         // Clear modified status after created
+        $this->oldData = array();
         $this->isModified = false;
-        $this->modifiedData = array();
 
         $this->trigger('afterLoad');
     }
@@ -255,14 +255,14 @@ class Record extends Base implements \ArrayAccess
             $this->trigger('beforeUpdate');
 
             if ($this->isModified) {
-                $data = array_intersect_key($this->data, $this->modifiedData);
+                $data = array_intersect_key($this->data, $this->oldData);
                 $affectedRows = $this->db->update($this->table, $data, array(
                     $this->primaryKey => $this->data[$this->primaryKey]
                 ));
                 $result = $affectedRows || '0000' == $this->db->errorCode();
                 if ($result) {
+                    $this->oldData = array();
                     $this->isModified = false;
-                    $this->modifiedData = array();
                 }
             } else {
                 $result = true;
@@ -300,8 +300,8 @@ class Record extends Base implements \ArrayAccess
     public function reload()
     {
         $this->data = (array)$this->db->select($this->table, $this->__get($this->primaryKey));
+        $this->oldData = array();
         $this->isModified = false;
-        $this->modifiedData = array();
         $this->trigger('afterLoad');
         return $this;
     }
@@ -335,7 +335,7 @@ class Record extends Base implements \ArrayAccess
     public function __set($name, $value)
     {
         if (in_array($name, $this->getFields())) {
-            $this->modifiedData[$name] = isset($this->data[$name]) ? $this->data[$name] : null;
+            $this->oldData[$name] = isset($this->data[$name]) ? $this->data[$name] : null;
             $this->data[$name] = $value;
             $this->isModified = true;
         } else {
@@ -398,7 +398,7 @@ class Record extends Base implements \ArrayAccess
     public function isModified($field = null)
     {
         if ($field) {
-            return array_key_exists($field, $this->modifiedData);
+            return array_key_exists($field, $this->oldData);
         }
         return $this->isModified;
     }
@@ -439,17 +439,17 @@ class Record extends Base implements \ArrayAccess
     }
 
     /**
-     * Return the modified data
+     * Return the field data before modified
      *
      * @param string $field
      * @return string|array
      */
-    public function getModifiedData($field = null)
+    public function getOldData($field = null)
     {
         if ($field) {
-            return isset($this->modifiedData[$field]) ? $this->modifiedData[$field] : null;
+            return isset($this->oldData[$field]) ? $this->oldData[$field] : null;
         }
-        return $this->modifiedData;
+        return $this->oldData;
     }
 
     /**
