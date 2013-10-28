@@ -761,6 +761,7 @@ class DbTest extends TestCase
 
     public function testToJson()
     {
+        $this->initFixtures();
         $member = $this->db->create('member');
         $this->assertInternalType('string', $member->toJson());
     }
