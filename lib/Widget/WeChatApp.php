@@ -473,7 +473,7 @@ class WeChatApp extends Base
      */
     public function getToUserName()
     {
-        return $this->getAttr('toUserName');
+        return $this->getAttr('ToUserName');
     }
 
     /**
@@ -483,7 +483,7 @@ class WeChatApp extends Base
      */
     public function getFromUserName()
     {
-        return $this->getAttr('fromUserName');
+        return $this->getAttr('FromUserName');
     }
 
     /**
@@ -493,7 +493,7 @@ class WeChatApp extends Base
      */
     public function getCreateTime()
     {
-        return $this->getAttr('createTime');
+        return $this->getAttr('CreateTime');
     }
 
     /**
@@ -503,7 +503,7 @@ class WeChatApp extends Base
      */
     public function getContent()
     {
-        return $this->getAttr('content');
+        return $this->getAttr('Content');
     }
 
     /**
@@ -513,7 +513,7 @@ class WeChatApp extends Base
      */
     public function getMsgId()
     {
-        return $this->getAttr('msgId');
+        return $this->getAttr('MsgId');
     }
 
     /**
@@ -525,7 +525,7 @@ class WeChatApp extends Base
      */
     public function getMsgType()
     {
-        return $this->getAttr('msgType');
+        return $this->getAttr('MsgType');
     }
 
     /**
@@ -535,7 +535,7 @@ class WeChatApp extends Base
      */
     public function getPicUrl()
     {
-        return $this->getAttr('picUrl');
+        return $this->getAttr('PicUrl');
     }
 
     /**
@@ -545,7 +545,7 @@ class WeChatApp extends Base
      */
     public function getLocationX()
     {
-        return $this->getAttr('locationX');
+        return $this->getAttr('Location_X');
     }
 
     /**
@@ -555,7 +555,7 @@ class WeChatApp extends Base
      */
     public function getLocationY()
     {
-        return $this->getAttr('locationY');
+        return $this->getAttr('Location_Y');
     }
 
     /**
@@ -565,7 +565,7 @@ class WeChatApp extends Base
      */
     public function getLabel()
     {
-        return $this->getAttr('label');
+        return $this->getAttr('Label');
     }
 
     /**
@@ -575,7 +575,7 @@ class WeChatApp extends Base
      */
     public function getScale()
     {
-        return $this->getAttr('scale');
+        return $this->getAttr('Scale');
     }
 
     /**
@@ -585,7 +585,7 @@ class WeChatApp extends Base
      */
     public function getMediaId()
     {
-        return $this->getAttr('mediaId');
+        return $this->getAttr('MediaId');
     }
 
     /**
@@ -595,7 +595,7 @@ class WeChatApp extends Base
      */
     public function getFormat()
     {
-        return $this->getAttr('format');
+        return $this->getAttr('Format');
     }
 
     /**
@@ -605,7 +605,7 @@ class WeChatApp extends Base
      */
     public function getEvent()
     {
-        return $this->getAttr('event');
+        return $this->getAttr('Event');
     }
 
     /**
@@ -615,7 +615,7 @@ class WeChatApp extends Base
      */
     public function getEventKey()
     {
-        return $this->getAttr('eventKey');
+        return $this->getAttr('EventKey');
     }
 
     /**
@@ -625,7 +625,7 @@ class WeChatApp extends Base
      */
     public function getThumbMediaId()
     {
-        return $this->getAttr('thumbMediaId');
+        return $this->getAttr('ThumbMediaId');
     }
 
     /**
@@ -635,7 +635,7 @@ class WeChatApp extends Base
      */
     public function getTitle()
     {
-        return $this->getAttr('title');
+        return $this->getAttr('Title');
     }
 
     /**
@@ -645,7 +645,7 @@ class WeChatApp extends Base
      */
     public function getDescription()
     {
-        return $this->getAttr('description');
+        return $this->getAttr('Description');
     }
 
     /**
@@ -655,7 +655,7 @@ class WeChatApp extends Base
      */
     public function getUrl()
     {
-        return $this->getAttr('url');
+        return $this->getAttr('Url');
     }
 
     /**
@@ -726,11 +726,9 @@ class WeChatApp extends Base
         // Parse the message data
         if ($this->valid && $this->postData) {
             $attrs = @simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
-            $attrs = json_decode(json_encode($attrs), true);
             foreach ((array)$attrs as $name => $value) {
-                // Fix the issue that XML parse empty data to array
-                is_array($value) && $value = null;
-                $this->attrs[lcfirst(strtr($name, array('_' => '')))] = $value;
+                // Fix the issue that XML parse empty data to new SimpleXMLElement object
+                $this->attrs[$name] = strval($value);
             }
         }
     }
