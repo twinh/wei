@@ -313,13 +313,8 @@ class Record extends Base implements \ArrayAccess
      */
     public function __get($name)
     {
-        // Get table field value
-        if (array_key_exists($name, $this->data)) {
-            return $this->data[$name];
-        }
-
         if (in_array($name, $this->getFields())) {
-            return null;
+            return isset($this->data[$name]) ? $this->data[$name] : null;
         }
 
         throw new \InvalidArgumentException(sprintf(
