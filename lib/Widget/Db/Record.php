@@ -245,7 +245,7 @@ class Record extends Base implements \ArrayAccess
                 $name = sprintf('%s_%s_seq', $this->table, $this->primaryKey);
                 $this->data[$this->primaryKey] = $this->db->lastInsertId($name);
             }
-        // Update
+            // Update
         } else {
             if ($this->isModified) {
                 $data = array_intersect_key($this->data, $this->oldData);
