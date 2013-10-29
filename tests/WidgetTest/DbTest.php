@@ -1096,7 +1096,14 @@ class DbTest extends TestCase
     {
         $cb = 'pi';
         $this->widget->setConfig(array(
+            // sqlite
             'db' => array(
+                'beforeConnect' => $cb,
+            ),
+            'mysql.db' => array(
+                'beforeConnect' => $cb,
+            ),
+            'pgsql.db' => array(
                 'beforeConnect' => $cb,
             ),
             'cb.db' => array(
