@@ -784,7 +784,7 @@ class WeChatApp extends Base
             $content = $this->sendText($content);
         }
 
-        $this->beforeSend && call_user_func($this->beforeSend, $this, $content, $this->widget);
+        $this->beforeSend && call_user_func_array($this->beforeSend, array($this, &$content, $this->widget));
 
         return $this->arrayToXml($content)->asXML();
     }
