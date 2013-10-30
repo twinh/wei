@@ -606,17 +606,13 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             return $this->responseHeader;
         }
 
+        $name = strtoupper($name);
         $headers = $this->getResponseHeaders();
 
-        $name = strtoupper($name);
         if (!isset($headers[$name])) {
             return $first ? null : array();
-        }
-
-        if (is_array($headers[$name]) && $first) {
-            return current($headers[$name]);
         } else {
-            return $headers[$name];
+            return $first ? current($headers[$name]) : $headers[$name];
         }
     }
 
@@ -647,7 +643,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function getResponseCookies()
     {
         if (!is_array($this->responseCookies)) {
-            $cookies = (array)$this->getResponseHeader('SET-COOKIE', false);
+            $cookies = $this->getResponseHeader('SET-COOKIE', false);
             $this->responseCookies = array();
             foreach ($cookies as $cookie) {
                 $this->responseCookies += $this->parseCookie($cookie);
