@@ -96,7 +96,9 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * The custom HTTP referer string
      *
-     * @var string
+     * If set to true, it will use the request URL as referer string
+     *
+     * @var string|true
      */
     protected $referer;
 
