@@ -660,7 +660,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function getResponseCookies()
     {
         if (!is_array($this->responseCookies)) {
-            $cookies = $this->getResponseHeader('SET-COOKIE', false);
+            $cookies = (array)$this->getResponseHeader('SET-COOKIE', false);
             $this->responseCookies = array();
             foreach ($cookies as $cookie) {
                 $this->responseCookies += $this->parseCookie($cookie);
