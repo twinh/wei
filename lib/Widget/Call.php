@@ -628,34 +628,15 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function getResponseHeaders()
     {
         if (!is_array($this->responseHeaders)) {
-            $this->responseHeaders = $this->parseHeader($this->responseHeader);
-        }
-        return $this->responseHeaders;
-    }
-
-    /**
-     * Parse the HTTP response header into a key-value array
-     *
-     * @param string $header
-     * @return array
-     */
-    protected function parseHeader($header)
-    {
-        $headers = array();
-        foreach (explode("\n", $header) as $line) {
-            $line = explode(':', $line, 2);
-            $name = strtoupper($line[0]);
-            $value = isset($line[1]) ? trim($line[1]) : null;
-
-            if (!isset($headers[$name])) {
-                $headers[$name] = $value;
-            } elseif (is_array($headers[$name])) {
-                $headers[$name] = array_merge($headers[$name], array($value));
-            } else {
-                $headers[$name] = array_merge(array($headers[$name]), array($value));
+            $this->responseHeaders = array();
+            foreach (explode("\n", $this->responseHeader) as $line) {
+                $line = explode(':', $line, 2);
+                $name = strtoupper($line[0]);
+                $value = isset($line[1]) ? trim($line[1]) : null;
+                $this->responseHeaders[$name][] = $value;
             }
         }
-        return $headers;
+        return $this->responseHeaders;
     }
 
     /**
