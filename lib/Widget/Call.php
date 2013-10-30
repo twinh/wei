@@ -407,7 +407,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
                     $response = str_ireplace("HTTP/1.1 200 Connection established\r\n\r\n", '', $response);
                 }
 
-                $this->responseHeader = substr($response, 0, $curlInfo['header_size']);
+                $this->responseHeader = trim(substr($response, 0, $curlInfo['header_size']));
                 $this->responseText = substr($response, $curlInfo['header_size']);
             } else {
                 $this->responseText = $response;
