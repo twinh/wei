@@ -4335,6 +4335,30 @@
 <span class="p">));</span>
 </code></pre></div>
 
+<h3>获取响应头,Cookie等数据</h3>
+
+<p>为提高响应和解析速度,默认请求是不输出响应头的.</p>
+
+<p>如果需要获取响应头,Cookie的值,可以设置<code>header</code>选项的值为<code>true</code></p>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$call</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'http://www.google.com.hk'</span><span class="p">,</span>
+    <span class="s1">'header'</span> <span class="o">=&gt;</span> <span class="k">true</span>
+<span class="p">));</span>
+
+<span class="c1">// 输出所有的响应头</span>
+<span class="nb">print_r</span><span class="p">(</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getResponseHeaders</span><span class="p">());</span>
+
+<span class="c1">// 输出指定响应头的值</span>
+<span class="nb">print_r</span><span class="p">(</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getResponseHeader</span><span class="p">(</span><span class="s1">'CONTENT-LENGTH'</span><span class="p">));</span>
+
+<span class="c1">// 输出所有Cookie的值</span>
+<span class="nb">print_r</span><span class="p">(</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getResponseCookies</span><span class="p">());</span>
+
+<span class="c1">// 输出指定Cookie的值</span>
+<span class="nb">print_r</span><span class="p">(</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getResponseCookie</span><span class="p">(</span><span class="s1">'name'</span><span class="p">));</span>
+</code></pre></div>
+
 <h3>禁用SSL证书验证</h3>
 
 <p>在开发环境中,如果我们未安装SSL证书,访问HTTPS网站会提示如下错误.</p>
@@ -4416,6 +4440,12 @@
 <td>array</td>
 <td>array</td>
 <td>要发送的HTTP头</td>
+</tr>
+<tr>
+<td>header</td>
+<td>bool</td>
+<td>false</td>
+<td>是否要返回响应头,等于<code>CURLOPT_HEADER</code>选项</td>
 </tr>
 <tr>
 <td>ip</td>
