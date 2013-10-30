@@ -606,25 +606,31 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             return $this->responseHeader;
         }
 
-        // Parse response header into a key-value array
-        if (!is_array($this->responseHeaders)) {
-            if ($this->responseHeader) {
-                $this->responseHeaders = $this->parseHeader($this->responseHeader);
-            } else {
-                $this->responseHeaders = array();
-            }
-        }
+        $headers = $this->getResponseHeaders();
 
         $name = strtoupper($name);
-        if (!isset($this->responseHeaders[$name])) {
+        if (!isset($headers[$name])) {
             return $first ? null : array();
         }
 
-        if (is_array($this->responseHeaders[$name]) && $first) {
-            return current($this->responseHeaders[$name]);
+        if (is_array($headers[$name]) && $first) {
+            return current($headers[$name]);
         } else {
-            return $this->responseHeaders[$name];
+            return $headers[$name];
         }
+    }
+
+    /**
+     * Returns response headers array
+     *
+     * @return array
+     */
+    public function getResponseHeaders()
+    {
+        if (!is_array($this->responseHeaders)) {
+            $this->responseHeaders = $this->parseHeader($this->responseHeader);
+        }
+        return $this->responseHeaders;
     }
 
     /**
