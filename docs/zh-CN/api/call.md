@@ -22,16 +22,8 @@ $call = wei()->call(array(
     ),
 ));
 
-if ($call->isSuccess()) {
-    // 输出第一条的地址,如https://api.github.com/gists/xxxxxxx
-    var_dump($call[0]['url']);
-} else {
-    // 输出错误的类型,如`curl`,完全错误类型请查看选项
-    var_dump($call->getErrorStatus());
-
-    // 输出异常的信息,如`Couldn't resolve host '404.php.net'`
-    var_dump($call->getErrorException()->getMessage());
-}
+// 输出第一条的地址,如https://api.github.com/gists/xxxxxxx
+print_r($call[0]['url']);
 ```
 
 ### 指定请求域名的IP地址:通过指向不同的IP地址,访问不同的环境
