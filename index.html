@@ -4226,16 +4226,8 @@
     <span class="p">),</span>
 <span class="p">));</span>
 
-<span class="k">if</span> <span class="p">(</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">isSuccess</span><span class="p">())</span> <span class="p">{</span>
-    <span class="c1">// 输出第一条的地址,如https://api.github.com/gists/xxxxxxx</span>
-    <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$call</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'url'</span><span class="p">]);</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="c1">// 输出错误的类型,如`curl`,完全错误类型请查看选项</span>
-    <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getErrorStatus</span><span class="p">());</span>
-
-    <span class="c1">// 输出异常的信息,如`Couldn't resolve host '404.php.net'`</span>
-    <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getErrorException</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
-<span class="p">}</span>
+<span class="c1">// 输出第一条的地址,如https://api.github.com/gists/xxxxxxx</span>
+<span class="nb">print_r</span><span class="p">(</span><span class="nv">$call</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'url'</span><span class="p">]);</span>
 </code></pre></div>
 
 <h3>指定请求域名的IP地址:通过指向不同的IP地址,访问不同的环境</h3>
