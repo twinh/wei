@@ -137,6 +137,31 @@ wei(array(
 ));
 ```
 
+### 获取响应头,Cookie等数据
+
+为提高响应和解析速度,默认请求是不输出响应头的.
+
+如果需要获取响应头,Cookie的值,可以设置`header`选项的值为`true`
+
+```php
+$call = wei()->call(array(
+    'url' => 'http://www.google.com.hk',
+    'header' => true
+));
+
+// 输出所有的响应头
+print_r($call->getResponseHeaders());
+
+// 输出指定响应头的值
+print_r($call->getResponseHeader('CONTENT-LENGTH'));
+
+// 输出所有Cookie的值
+print_r($call->getResponseCookies());
+
+// 输出指定Cookie的值
+print_r($call->getResponseCookie('name'));
+```
+
 ### 禁用SSL证书验证
 
 在开发环境中,如果我们未安装SSL证书,访问HTTPS网站会提示如下错误.
@@ -178,6 +203,7 @@ cookies     | array        | array() | cookie数组,key是cookie的名称,value�
 data        | array,string | array() | 要发送到服务器的数据
 global      | bool         | true    | 是否使用全局配置选项
 headers     | array        | array   | 要发送的HTTP头
+header      | bool         | false   | 是否要返回响应头,等于`CURLOPT_HEADER`选项
 ip          | string       | 无      | 要请求的URL地址中域名的IP地址,注意不是您的服务器IP地址
 timeout     | int          | 0       | 整个请求的最大运行时间,单位是毫秒,默认是无限制
 dataType    | string       | text    | 请求完成后,要对返回数据解析的类型,可以是`json`(数组),`jsonObject`,`xml`,`query`,`serialize`和`text`
