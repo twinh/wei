@@ -597,7 +597,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param string $name The header name
      * @param bool $first Return the first element or the whole header values
-     * @return string|array
+     * @return string|array When $first is true, returns string, otherwise, returns array
      */
     public function getResponseHeader($name = null, $first = true)
     {

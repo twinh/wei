@@ -332,7 +332,6 @@ class Response extends Base
         }
 
         $values = (array) $values;
-
         if (true === $replace || !isset($this->headers[$name])) {
             $this->headers[$name] = $values;
         } else {
@@ -459,7 +458,6 @@ class Response extends Base
     public function setCookie($key, $value , array $options = array())
     {
         $this->cookies[$key] = array('value' => $value) + $options;
-
         return $this;
     }
 
@@ -474,19 +472,21 @@ class Response extends Base
         return $this->setCookie($key, '', array('expires' => -1));
     }
 
+    /**
+     * Send cookie
+     *
+     * @return $this
+     */
     public function sendCookie()
     {
         $time = time();
-
         // Anonymous function for unit test
         $setCookie = function(){};
-
         foreach ($this->cookies as $name => $o) {
             $o += $this->cookieOption;
             $fn = $this->unitTest ? $setCookie : ($o['raw'] ? 'setrawcookie' : 'setcookie');
             $fn($name, $o['value'], $time + $o['expires'], $o['path'], $o['domain'], $o['secure'], $o['httpOnly']);
         }
-
         return $this;
     }
 
