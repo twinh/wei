@@ -70,6 +70,17 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     protected $headers = array();
 
     /**
+     * Whether includes the header in the response string,
+     * equals the CURLOPT_HEADER option
+
+     * Set to true when you need to call getResponseHeaders, getResponseHeader,
+     * getResponseCookies or getResponseCookie methods
+     *
+     * @var bool
+     */
+    protected $header = false;
+
+    /**
      * The IP address for the host name in URL, NOT your client IP
      *
      * @var string
@@ -385,6 +396,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             $opts[CURLOPT_HTTPHEADER] = $headers;
         }
 
+        $opts[CURLOPT_HEADER] = $this->header;
         $opts[CURLOPT_URL] = $url;
         return $this->curlOptions + $opts + $this->defaultCurlOptions;
     }
@@ -402,7 +414,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             $curlInfo = curl_getinfo($ch);
 
             // Parse response header
-            if ($this->getCurlOption(CURLOPT_HEADER)) {
+            if ($this->header) {
                 // Fixes header size error when use CURLOPT_PROXY and CURLOPT_HTTPPROXYTUNNEL is true
                 // http://sourceforge.net/p/curl/bugs/1204/
                 if (false !== stripos($response, "HTTP/1.1 200 Connection established\r\n\r\n")) {
