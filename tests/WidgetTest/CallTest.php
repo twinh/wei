@@ -32,9 +32,7 @@ class CallTest extends TestCase
 
         $this->widget->setConfig('call', array(
             'throwException' => false,
-            'curlOptions' => array(
-                CURLOPT_HEADER => true
-            )
+            'header' => true
         ));
     }
 
