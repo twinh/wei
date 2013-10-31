@@ -1223,6 +1223,14 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
+        $record = $this->db->findOne('member', 1);
+        $this->assertInstanceOf('\Widget\Db\Record', $record);
+    }
+
+    public function testFindOneWithException()
+    {
+        $this->initFixtures();
+
         $this->setExpectedException('Exception', 'Record not found', 404);
 
         $this->db->findOne('member', 999);
