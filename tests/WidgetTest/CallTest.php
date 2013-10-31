@@ -153,10 +153,22 @@ class CallTest extends TestCase
 
     public function testThrowException()
     {
-        $this->setExpectedException('\ErrorException');
+        $this->setExpectedException('\ErrorException', 'Not Found');
 
-        $url = $this->call->getOption('url');
-        $this->call($url . '?code=404');
+        $this->call(array(
+            'url' => $this->call->getOption('url') . '?code=404',
+            'header' => true,
+        ));
+    }
+
+    public function testHttpErrorWithoutStatusText()
+    {
+        $this->setExpectedException('\ErrorException', 'HTTP request error');
+
+        $this->call(array(
+            'url' => $this->call->getOption('url') . '?code=404',
+            'header' => false,
+        ));
     }
 
     public function testHeaders()
