@@ -87,13 +87,8 @@ abstract class Base
      * @param string $name The name of property
      * @return mixed
      */
-    public function getOption($name = null)
+    public function getOption($name)
     {
-        // Returns all property options
-        if (null === $name) {
-            return get_object_vars($this);
-        }
-
         if (method_exists($this, $method = 'get' . $name)) {
             return $this->$method();
         } else {

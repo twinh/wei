@@ -127,12 +127,6 @@ class WidgetTest extends TestCase
         $this->assertEquals('twin', $user->getName());
 
         $this->assertEquals('twin', $user->getOption('name'));
-
-        $options = $user->getOption();
-
-        $this->assertArrayHasKey('name', $options);
-        $this->assertArrayHasKey('widget', $options);
-        $this->assertArrayHasKey('providers', $options);
     }
 
     public function testSetInis()
