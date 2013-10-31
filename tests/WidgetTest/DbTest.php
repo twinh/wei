@@ -1244,4 +1244,16 @@ class DbTest extends TestCase
         $this->assertFalse($member->isModified());
         $this->assertEmpty($member->getOldData());
     }
+
+    public function testReconnect()
+    {
+        $this->db->connect();
+        $pdo = $this->db->getOption('pdo');
+        
+        $this->db->reconnect();
+        $newPdo = $this->db->getOption('pdo');
+
+        $this->assertEquals($pdo, $newPdo);
+        $this->assertNotSame($pdo, $newPdo);
+    }
 }
