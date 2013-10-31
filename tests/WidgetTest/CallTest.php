@@ -158,6 +158,7 @@ class CallTest extends TestCase
         $this->call(array(
             'url' => $this->call->getOption('url') . '?code=404',
             'header' => true,
+            'throwException' => true,
         ));
     }
 
@@ -168,6 +169,7 @@ class CallTest extends TestCase
         $this->call(array(
             'url' => $this->call->getOption('url') . '?code=404',
             'header' => false,
+            'throwException' => true,
         ));
     }
 
