@@ -738,6 +738,13 @@ class CallTest extends TestCase
         $this->assertEquals('default text', (string)$call);
     }
 
+    public function testGetCurlInfo()
+    {
+        $call = $this->call($this->url);
+        $info = $call->getCurlInfo();
+        $this->assertInternalType('array', $info);
+    }
+
     public function assertCalledEvents($events)
     {
         foreach ((array)$events as $event) {
