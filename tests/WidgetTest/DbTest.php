@@ -904,6 +904,13 @@ class DbTest extends TestCase
         $this->db->query("SELECT * FROM noThis table");
     }
 
+    public function testExceptionWithParams()
+    {
+        $this->setExpectedException('PDOException', 'An exception occurred while executing "SELECT * FROM noThis table WHERE id = ?"');
+
+        $this->db->query("SELECT * FROM noThis table WHERE id = ?", array(1));
+    }
+
     public function testUpdateWithoutParameters()
     {
         $this->initFixtures();
@@ -1249,7 +1256,7 @@ class DbTest extends TestCase
     {
         $this->db->connect();
         $pdo = $this->db->getOption('pdo');
-        
+
         $this->db->reconnect();
         $newPdo = $this->db->getOption('pdo');
 
