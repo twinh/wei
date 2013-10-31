@@ -12877,6 +12877,12 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <span class="p">));</span>
 </code></pre></div>
 
+<blockquote>
+<h4>注意</h4>
+
+<p>wei()-&gt;setConfig($array) 等同于 wei($array);</p>
+</blockquote>
+
 <h3>输出HTML option标签</h3>
 
 <div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">config</span><span class="o">-&gt;</span><span class="na">toOptions</span><span class="p">(</span><span class="s1">'yesOrNo'</span><span class="p">);</span>
