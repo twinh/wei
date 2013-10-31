@@ -541,6 +541,39 @@ class Response extends Base
     }
 
     /**
+     * Response JSON or JSONP format string
+     *
+     * @param mixed $data The variable to be convert to JSON string
+     * @param bool $jsonp Whether allow response json format on demand
+     * @return $this
+     */
+    public function json($data, $jsonp = false)
+    {
+        $result = json_encode($data);
+
+        if ($jsonp && $name = $this->request['callback']) {
+            $this->setHeader('Content-Type', 'application/javascript');
+            $jsonp = $this->escape->js((string)$name);
+            $result = $jsonp . '(' . $result . ')';
+        } else {
+            $this->setHeader('Content-Type', 'application/json');
+        }
+
+        return $this->send($result);
+    }
+
+    /**
+     * Response JSONP format string
+     *
+     * @param mixed $data
+     * @return $this
+     */
+    public function jsonp($data)
+    {
+        return $this->json($data, true);
+    }
+
+    /**
      * Flushes content to browser immediately
      *
      * @param string $content
