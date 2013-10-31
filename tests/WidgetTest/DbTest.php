@@ -1271,4 +1271,26 @@ class DbTest extends TestCase
         $this->assertEquals($pdo, $newPdo);
         $this->assertNotSame($pdo, $newPdo);
     }
+
+    public function testGetter()
+    {
+        wei(array(
+            'test.db' => array(
+                'user' => 'user',
+                'password' => 'password',
+                'host' => 'host',
+                'port' => 'port',
+                'dbname' => 'dbname'
+            )
+        ));
+
+        /** @var $testDb \Widget\Db */
+        $testDb = $this->testDb;
+
+        $this->assertEquals('user', $testDb->getUser());
+        $this->assertEquals('password', $testDb->getPassword());
+        $this->assertEquals('host', $testDb->getHost());
+        $this->assertEquals('port', $testDb->getPort());
+        $this->assertEquals('dbname', $testDb->getDbname());
+    }
 }
