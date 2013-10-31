@@ -151,6 +151,14 @@ class CallTest extends TestCase
         );
     }
 
+    public function testThrowException()
+    {
+        $this->setExpectedException('\ErrorException');
+
+        $url = $this->call->getOption('url');
+        $this->call($url . '?code=404');
+    }
+
     public function testHeaders()
     {
         $test = $this;
