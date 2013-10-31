@@ -1,6 +1,16 @@
 Changelog
 =========
 
+## 0.9.7 (2013-10-31)
+
+* Added field parameter for record class getModifiedData to receive the old value
+* Fixed call and db service "global" option logic error
+* Pass weChatApp service $content variable by reference
+* Added getResponseHeaders for call service
+* Returns array when getResponseHeader's second parameter is false
+* Added header option (equals to CURLOPT_HEADER) for call service
+* Added json and jsonp method for response
+
 ## 0.9.7-RC1 (2013-10-28)
 
 * Merged urlDebugger service into request service, added overwriteMethod and overwriteAjax options for request service
