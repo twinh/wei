@@ -43,11 +43,11 @@ namespace Wei
      * @method   mixed      bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
      *
      * Database
-     * @property Db                      $db A database service inspired by Doctrine DBAL
-     * @method   \Wei\Db\QueryBuilder db($table = null) Create a new instance of a SQL query builder with specified table name
+     * @property Db                     $db A database service inspired by Doctrine DBAL
+     * @method   \Wei\Db\QueryBuilder   db($table = null) Create a new instance of a SQL query builder with specified table name
      *
-     * @property Call           $call A object handles HTTP request like jQuery Ajax
-     * @method   \Wei\Call   call(array $options) Create a new call object and execute
+     * @property Call       $call A object handles HTTP request like jQuery Ajax
+     * @method   \Wei\Call  call(array $options) Create a new call object and execute
      *
      * HTTP Request
      * @property Request    $request A service that handles the HTTP request data
@@ -62,51 +62,51 @@ namespace Wei
      * @method   bool       upload(array $options = array()) Upload a file
      *
      * HTTP Response
-     * @property Response           $response A object that handles the HTTP response data
-     * @method   \Wei\Response   response($content = null, $status = null) Send response header and content
-     * @property Redirect           $redirect A object that send a redirect response
-     * @method   \Wei\Redirect   redirect($url = null, array $options = array()) Send a redirect response
+     * @property Response       $response A object that handles the HTTP response data
+     * @method   \Wei\Response  response($content = null, $status = null) Send response header and content
+     * @property Redirect       $redirect A object that send a redirect response
+     * @method   \Wei\Redirect  redirect($url = null, array $options = array()) Send a redirect response
      *
      * View
-     * @property View               $view A object that use to render PHP template
-     * @method   string             view($name = null, $vars = array()) Returns view object or render a PHP template
-     * @property Asset              $asset A service to generate assets' URL
-     * @method   string             asset($file) Returns the asset URL by specified file
-     * @property Escape             $escape A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
-     * @method   string             escape($string, $type = 'html') Escapes a string by specified type for secure output
+     * @property View       $view A object that use to render PHP template
+     * @method   string     view($name = null, $vars = array()) Returns view object or render a PHP template
+     * @property Asset      $asset A service to generate assets' URL
+     * @method   string     asset($file) Returns the asset URL by specified file
+     * @property Escape     $escape A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
+     * @method   string     escape($string, $type = 'html') Escapes a string by specified type for secure output
      *
      * Application
-     * @property WeChatApp          $weChatApp A object handles WeChat(WeiXin) callback message
-     * @method   \Wei\WeChatApp  weChatApp() Start up WeChat application and output the matched rule message
-     * @property App                $app The application object
-     * @method   \Wei\App        app(array $options = array()) Startup application
-     * @property Router             $router A object that build a simple REST application
-     * @method   \Wei\Router     router($pathInfo = null, $method = null) Run the application
-     * @property Url                $url A util object to build URL
-     * @method   string             url($uri) Build URL by specified uri and parameters
+     * @property WeChatApp      $weChatApp A object handles WeChat(WeiXin) callback message
+     * @method   \Wei\WeChatApp weChatApp() Start up WeChat application and output the matched rule message
+     * @property App            $app The application object
+     * @method   \Wei\App       app(array $options = array()) Startup application
+     * @property Router         $router A object that build a simple REST application
+     * @method   \Wei\Router    router($pathInfo = null, $method = null) Run the application
+     * @property Url            $url A util object to build URL
+     * @method   string         url($uri) Build URL by specified uri and parameters
      *
      * Other
-     * @property Arr            $arr An util object provides some useful method to manipulation array
-     * @property Config         $config A object to manage object configurations
-     * @property Env            $env A object to detect the environment name and load configuration by environment name
-     * @method   string         env() Returns the environment name
-     * @property Error          $error A object that handles exception and display pretty exception message
-     * @method   \Wei\Error  error($fn) Attach a handler to exception error
-     * @property Gravatar       $gravatar A object that generates a Gravatar URL for a specified email address
-     * @method   string         gravatar($email, $size = null, $default = null, $rating = null) Generates a Gravatar URL for a specified email address
-     * @property Logger         $logger A simple logger service, which is inspired by Monolog
-     * @method   bool           logger($level, $message) Logs with an arbitrary level
-     * @property Password       $password A wrapper class for password hashing functions
-     * @property Pinyin         $pinyin An util object that converts Chinese words to phonetic alphabets
-     * @method   string         pinyin($word) Converts Chinese words to phonetic alphabets
-     * @property Uuid           $uuid A util object that generates a RANDOM UUID(universally unique identifier)
-     * @method   string         uuid() generates a RANDOM UUID(universally unique identifier)
-     * @property T              $t A translator object
-     * @method   string         t($message, array $parameters = array()) Translate the message
+     * @property Arr        $arr An util object provides some useful method to manipulation array
+     * @property Config     $config A object to manage object configurations
+     * @property Env        $env A object to detect the environment name and load configuration by environment name
+     * @method   string     env() Returns the environment name
+     * @property Error      $error A object that handles exception and display pretty exception message
+     * @method   \Wei\Error error($fn) Attach a handler to exception error
+     * @property Gravatar   $gravatar A object that generates a Gravatar URL for a specified email address
+     * @method   string     gravatar($email, $size = null, $default = null, $rating = null) Generates a Gravatar URL for a specified email address
+     * @property Logger     $logger A simple logger service, which is inspired by Monolog
+     * @method   bool       logger($level, $message) Logs with an arbitrary level
+     * @property Password   $password A wrapper class for password hashing functions
+     * @property Pinyin     $pinyin An util object that converts Chinese words to phonetic alphabets
+     * @method   string     pinyin($word) Converts Chinese words to phonetic alphabets
+     * @property Uuid       $uuid A util object that generates a RANDOM UUID(universally unique identifier)
+     * @method   string     uuid() generates a RANDOM UUID(universally unique identifier)
+     * @property T          $t A translator object
+     * @method   string     t($message, array $parameters = array()) Translate the message
      *
      * Third Party
-     * @property Monolog        $monolog A wrapper object for Monolog
-     * @method   bool           monolog($level = null, $message = null, array $context = array()) Get monolog logger object or add a log record
+     * @property Monolog    $monolog A wrapper object for Monolog
+     * @method   bool       monolog($level = null, $message = null, array $context = array()) Get monolog logger object or add a log record
      *
      * Validation
      * @method   \Wei\Validate   validate(array $option) Create a new validator and validate by specified options
