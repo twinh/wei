@@ -57,9 +57,6 @@ abstract class Base
     {
         // Set options
         if (is_array($name)) {
-            if (is_array($value)) {
-                $name += array_intersect_key(get_object_vars($this), array_flip($value));
-            }
             foreach ($name as $k => $v) {
                 $this->setOption($k, $v);
             }
