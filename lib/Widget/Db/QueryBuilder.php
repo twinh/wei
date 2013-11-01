@@ -194,12 +194,7 @@ class QueryBuilder implements \ArrayAccess
     public function find()
     {
         $data = $this->fetch();
-
-        if ($data) {
-            return $this->db->create($this->table, $data);
-        } else  {
-            return false;
-        }
+        return $data ? $this->db->create($this->table, $data, false) : false;
     }
 
     /**
