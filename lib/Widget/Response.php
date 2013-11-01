@@ -332,7 +332,6 @@ class Response extends Base
         }
 
         $values = (array) $values;
-
         if (true === $replace || !isset($this->headers[$name])) {
             $this->headers[$name] = $values;
         } else {
@@ -459,7 +458,6 @@ class Response extends Base
     public function setCookie($key, $value , array $options = array())
     {
         $this->cookies[$key] = array('value' => $value) + $options;
-
         return $this;
     }
 
@@ -474,19 +472,21 @@ class Response extends Base
         return $this->setCookie($key, '', array('expires' => -1));
     }
 
+    /**
+     * Send cookie
+     *
+     * @return $this
+     */
     public function sendCookie()
     {
         $time = time();
-
         // Anonymous function for unit test
         $setCookie = function(){};
-
         foreach ($this->cookies as $name => $o) {
             $o += $this->cookieOption;
             $fn = $this->unitTest ? $setCookie : ($o['raw'] ? 'setrawcookie' : 'setcookie');
             $fn($name, $o['value'], $time + $o['expires'], $o['path'], $o['domain'], $o['secure'], $o['httpOnly']);
         }
-
         return $this;
     }
 
@@ -538,6 +538,39 @@ class Response extends Base
     {
         $this->isSent = (bool) $bool;
         return $this;
+    }
+
+    /**
+     * Response JSON or JSONP format string
+     *
+     * @param mixed $data The variable to be convert to JSON string
+     * @param bool $jsonp Whether allow response json format on demand
+     * @return $this
+     */
+    public function json($data, $jsonp = false)
+    {
+        $result = json_encode($data);
+
+        if ($jsonp && $name = $this->request['callback']) {
+            $this->setHeader('Content-Type', 'application/javascript');
+            $jsonp = $this->escape->js((string)$name);
+            $result = $jsonp . '(' . $result . ')';
+        } else {
+            $this->setHeader('Content-Type', 'application/json');
+        }
+
+        return $this->send($result);
+    }
+
+    /**
+     * Response JSONP format string
+     *
+     * @param mixed $data
+     * @return $this
+     */
+    public function jsonp($data)
+    {
+        return $this->json($data, true);
     }
 
     /**

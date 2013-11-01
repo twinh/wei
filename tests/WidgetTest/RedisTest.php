@@ -51,4 +51,9 @@ class RedisTest extends CacheTestCase
     {
         $this->assertInstanceOf('\Redis', $this->redis());
     }
+
+    public function testConnectWithExistsObject()
+    {
+        $this->assertTrue($this->object->connect());
+    }
 }

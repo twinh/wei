@@ -45,14 +45,14 @@ Define the following requirement in your `composer.json` file and run `php compo
 ```json
 {
     "require": {
-        "widget/widget": "0.9.6"
+        "widget/widget": "0.9.7"
     }
 }
 ```
 
 ### Download source code
 
-* [Stable Version](https://github.com/twinh/widget/archive/v0.9.6.zip)
+* [Stable Version](https://github.com/twinh/widget/archive/v0.9.7.zip)
 * [Develop Version](https://github.com/twinh/widget/archive/master.zip)
 
 ## Resources

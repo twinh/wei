@@ -260,7 +260,7 @@ namespace Widget
         /**
          * Version
          */
-        const VERSION = '0.9.6';
+        const VERSION = '0.9.7';
 
         /**
          * The configurations for all objects

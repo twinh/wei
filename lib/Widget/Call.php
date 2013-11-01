@@ -70,6 +70,17 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     protected $headers = array();
 
     /**
+     * Whether includes the header in the response string,
+     * equals the CURLOPT_HEADER option
+
+     * Set to true when you need to call getResponseHeaders, getResponseHeader,
+     * getResponseCookies or getResponseCookie methods
+     *
+     * @var bool
+     */
+    protected $header = false;
+
+    /**
      * The IP address for the host name in URL, NOT your client IP
      *
      * @var string
@@ -96,7 +107,9 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * The custom HTTP referer string
      *
-     * @var string
+     * If set to true, it will use the request URL as referer string
+     *
+     * @var string|true
      */
     protected $referer;
 
@@ -241,7 +254,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function __construct(array $options = array())
     {
         // Merges options from default call service
-        if (!isset($options['global']) || true == $options['global']) {
+        if (isset($options['global']) && true == $options['global']) {
             $options += (array)$options['widget']->getConfig('call');
         }
         parent::__construct($options);
@@ -383,6 +396,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             $opts[CURLOPT_HTTPHEADER] = $headers;
         }
 
+        $opts[CURLOPT_HEADER] = $this->header;
         $opts[CURLOPT_URL] = $url;
         return $this->curlOptions + $opts + $this->defaultCurlOptions;
     }
@@ -400,14 +414,14 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             $curlInfo = curl_getinfo($ch);
 
             // Parse response header
-            if ($this->getCurlOption(CURLOPT_HEADER)) {
+            if ($this->header) {
                 // Fixes header size error when use CURLOPT_PROXY and CURLOPT_HTTPPROXYTUNNEL is true
                 // http://sourceforge.net/p/curl/bugs/1204/
                 if (false !== stripos($response, "HTTP/1.1 200 Connection established\r\n\r\n")) {
                     $response = str_ireplace("HTTP/1.1 200 Connection established\r\n\r\n", '', $response);
                 }
 
-                $this->responseHeader = substr($response, 0, $curlInfo['header_size']);
+                $this->responseHeader = trim(substr($response, 0, $curlInfo['header_size']));
                 $this->responseText = substr($response, $curlInfo['header_size']);
             } else {
                 $this->responseText = $response;
@@ -597,7 +611,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param string $name The header name
      * @param bool $first Return the first element or the whole header values
-     * @return string|array
+     * @return string|array When $first is true, returns string, otherwise, returns array
      */
     public function getResponseHeader($name = null, $first = true)
     {
@@ -606,50 +620,33 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             return $this->responseHeader;
         }
 
-        // Parse response header into a key-value array
-        if (!is_array($this->responseHeaders)) {
-            if ($this->responseHeader) {
-                $this->responseHeaders = $this->parseHeader($this->responseHeader);
-            } else {
-                $this->responseHeaders = array();
-            }
-        }
-
         $name = strtoupper($name);
-        if (!isset($this->responseHeaders[$name])) {
-            return $first ? null : array();
-        }
+        $headers = $this->getResponseHeaders();
 
-        if (is_array($this->responseHeaders[$name]) && $first) {
-            return current($this->responseHeaders[$name]);
+        if (!isset($headers[$name])) {
+            return $first ? null : array();
         } else {
-            return $this->responseHeaders[$name];
+            return $first ? current($headers[$name]) : $headers[$name];
         }
     }
 
     /**
-     * Parse the HTTP response header into a key-value array
+     * Returns response headers array
      *
-     * @param string $header
      * @return array
      */
-    protected function parseHeader($header)
+    public function getResponseHeaders()
     {
-        $headers = array();
-        foreach (explode("\n", $header) as $line) {
-            $line = explode(':', $line, 2);
-            $name = strtoupper($line[0]);
-            $value = isset($line[1]) ? trim($line[1]) : null;
-
-            if (!isset($headers[$name])) {
-                $headers[$name] = $value;
-            } elseif (is_array($headers[$name])) {
-                $headers[$name] = array_merge($headers[$name], array($value));
-            } else {
-                $headers[$name] = array_merge(array($headers[$name]), array($value));
+        if (!is_array($this->responseHeaders)) {
+            $this->responseHeaders = array();
+            foreach (explode("\n", $this->responseHeader) as $line) {
+                $line = explode(':', $line, 2);
+                $name = strtoupper($line[0]);
+                $value = isset($line[1]) ? trim($line[1]) : null;
+                $this->responseHeaders[$name][] = $value;
             }
         }
-        return $headers;
+        return $this->responseHeaders;
     }
 
     /**

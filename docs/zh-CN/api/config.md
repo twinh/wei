@@ -41,6 +41,10 @@ wei()->setConfig(array(
 ));
 ```
 
+> #### 注意
+> 
+> wei()->setConfig($array) 等同于 wei($array);
+
 ### 输出HTML option标签
 
 ```php

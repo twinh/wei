@@ -11,8 +11,8 @@ class RecordTest extends TestCase
 {
     public function testSaveOnNoFiledChanged()
     {
-        //$record = $this->db->create('test', array('id' => 1), false);
-        //$this->assertTrue($record->save());
+        $record = $this->db->create('test', array('id' => 1), false);
+        $this->assertTrue($record->save());
     }
 
     public function testPrimaryKey()

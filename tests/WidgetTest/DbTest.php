@@ -759,6 +759,13 @@ class DbTest extends TestCase
         ));
     }
 
+    public function testToJson()
+    {
+        $this->initFixtures();
+        $member = $this->db->create('member');
+        $this->assertInternalType('string', $member->toJson());
+    }
+
     public function testDeleteRecord()
     {
         $this->initFixtures();
@@ -895,6 +902,13 @@ class DbTest extends TestCase
         $this->setExpectedException('PDOException');
 
         $this->db->query("SELECT * FROM noThis table");
+    }
+
+    public function testExceptionWithParams()
+    {
+        $this->setExpectedException('PDOException', 'An exception occurred while executing "SELECT * FROM noThis table WHERE id = ?"');
+
+        $this->db->query("SELECT * FROM noThis table WHERE id = ?", array(1));
     }
 
     public function testUpdateWithoutParameters()
@@ -1089,7 +1103,14 @@ class DbTest extends TestCase
     {
         $cb = 'pi';
         $this->widget->setConfig(array(
+            // sqlite
             'db' => array(
+                'beforeConnect' => $cb,
+            ),
+            'mysql.db' => array(
+                'beforeConnect' => $cb,
+            ),
+            'pgsql.db' => array(
                 'beforeConnect' => $cb,
             ),
             'cb.db' => array(
@@ -1179,26 +1200,97 @@ class DbTest extends TestCase
 
     public function testReload()
     {
+        $this->db->setOption('recordNamespace', 'WidgetTest\Db');
         $this->initFixtures();
 
+        /** @var $member2 \WidgetTest\Db\Member */
         $member = $this->db->find('member', 1);
+        /** @var $member2 \WidgetTest\Db\Member */
         $member2 = $this->db->find('member', 1);
 
         $member->group_id = 2;
         $member->save();
 
         $this->assertNotEquals($member->group_id, $member2->group_id);
+        $this->assertEquals(1, $member->getLoadTimes());
 
         $member2->reload();
         $this->assertEquals($member->group_id, $member2->group_id);
+        $this->assertEquals(2, $member2->getLoadTimes());
     }
 
     public function testFindOne()
     {
         $this->initFixtures();
 
+        $record = $this->db->findOne('member', 1);
+        $this->assertInstanceOf('\Widget\Db\Record', $record);
+    }
+
+    public function testFindOneWithException()
+    {
+        $this->initFixtures();
+
         $this->setExpectedException('Exception', 'Record not found', 404);
 
         $this->db->findOne('member', 999);
+    }
+
+    public function testIsModified()
+    {
+        $this->initFixtures();
+
+        $member = $this->db->create('member');
+        $this->assertFalse($member->isModified());
+
+        $member->name = 'tt';
+        $member->group_id = '1';
+        $member->address = 'address';
+        $this->assertFalse($member->isModified('id'));
+        $this->assertTrue($member->isModified('name'));
+        $this->assertTrue($member->isModified());
+        $this->assertNull($member->getOldData('name'));
+
+        $member->name = 'aa';
+        $this->assertTrue($member->isModified());
+        $this->assertEquals('tt', $member->getOldData('name'));
+
+        $member->save();
+        $this->assertFalse($member->isModified());
+        $this->assertEmpty($member->getOldData());
+    }
+
+    public function testReconnect()
+    {
+        $this->db->connect();
+        $pdo = $this->db->getOption('pdo');
+
+        $this->db->reconnect();
+        $newPdo = $this->db->getOption('pdo');
+
+        $this->assertEquals($pdo, $newPdo);
+        $this->assertNotSame($pdo, $newPdo);
+    }
+
+    public function testGetter()
+    {
+        wei(array(
+            'test.db' => array(
+                'user' => 'user',
+                'password' => 'password',
+                'host' => 'host',
+                'port' => 'port',
+                'dbname' => 'dbname'
+            )
+        ));
+
+        /** @var $testDb \Widget\Db */
+        $testDb = $this->testDb;
+
+        $this->assertEquals('user', $testDb->getUser());
+        $this->assertEquals('password', $testDb->getPassword());
+        $this->assertEquals('host', $testDb->getHost());
+        $this->assertEquals('port', $testDb->getPort());
+        $this->assertEquals('dbname', $testDb->getDbname());
     }
 }

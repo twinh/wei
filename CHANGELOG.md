@@ -1,7 +1,42 @@
 Changelog
 =========
 
-## 0.9.7 (WIP)
+## 0.9.7 (2013-10-31)
+
+* Added field parameter for record class getModifiedData to receive the old value
+* Fixed call and db service "global" option logic error
+* Pass weChatApp service $content variable by reference
+* Added getResponseHeaders for call service
+* Returns array when getResponseHeader's second parameter is false
+* Added header option (equals to CURLOPT_HEADER) for call service
+* Added json and jsonp method for response
+
+## 0.9.7-RC1 (2013-10-28)
+
+* Merged urlDebugger service into request service, added overwriteMethod and overwriteAjax options for request service
+* Added isVerifyToken method for weChatApp service, close #146
+* Added beforeSend callback for WeChatApp service
+* Added asset service to resolve javascript and css file cache
+* Make sure all WeChatApp service text rules is case insensitive
+* Renamed WeChatApp service "fallback" method to "defaults"
+* Simplified WeChatApp service parse XML logic
+* Refactored WeChatApp service to use array instead of SimpleXMLElement to construct response content
+* Removed keyword property in WeChatApp service
+* Refactored class from Mongo to MongoClient, refs #129
+* Refactored url service to generate URL by specified URL and parameters instead of predefined template
+* Fixed cache object is null when set new driver for cache service
+* Added getFirstMessage for base validator
+* Added findOne for db service
+* Injects app service into controller object
+* Renamed service property from "deps" to "providers"
+* Added exception code (1020) for store callback cache error
+* Automatic loads record in query builder when called magic get/set or array access
+* Added luhn validator, refs #148
+* Added getModifiedData method for record class
+* Decoupled db and cache service, moved get fields logic to record class
+* Added skeleton application demo "new-app"
+* Triggers "afterLoad" callback when calls record's reload method
+* Added getAttrs method for WeChatApp service
 
 ## 0.9.6 (2013-10-09)
 

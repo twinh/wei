@@ -32,9 +32,7 @@ class CallTest extends TestCase
 
         $this->widget->setConfig('call', array(
             'throwException' => false,
-            'curlOptions' => array(
-                CURLOPT_HEADER => true
-            )
+            'header' => true
         ));
     }
 
@@ -151,6 +149,28 @@ class CallTest extends TestCase
                 'ip' => null,
             ), null),
         );
+    }
+
+    public function testThrowException()
+    {
+        $this->setExpectedException('\ErrorException', 'Not Found');
+
+        $this->call(array(
+            'url' => $this->call->getOption('url') . '?code=404',
+            'header' => true,
+            'throwException' => true,
+        ));
+    }
+
+    public function testHttpErrorWithoutStatusText()
+    {
+        $this->setExpectedException('\ErrorException', 'HTTP request error');
+
+        $this->call(array(
+            'url' => $this->call->getOption('url') . '?code=404',
+            'header' => false,
+            'throwException' => true,
+        ));
     }
 
     public function testHeaders()
@@ -718,6 +738,13 @@ class CallTest extends TestCase
             'data' => 'type=text'
         ));
         $this->assertEquals('default text', (string)$call);
+    }
+
+    public function testGetCurlInfo()
+    {
+        $call = $this->call($this->url);
+        $info = $call->getCurlInfo();
+        $this->assertInternalType('array', $info);
     }
 
     public function assertCalledEvents($events)
