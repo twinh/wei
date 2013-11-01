@@ -37,13 +37,12 @@ abstract class Base
      */
     public function __construct(array $options = array())
     {
-        $this->setOption($options);
-
-        if (!isset($this->widget)) {
+        if (!isset($options['widget'])) {
             $this->widget = Widget::getContainer();
-        } elseif (!$this->widget instanceof Widget) {
+        } elseif (!$options['widget'] instanceof Widget) {
             throw new \InvalidArgumentException(sprintf('Option "widget" of class "%s" should be an instance of "Widget\Widget"', get_class($this)), 1000);
         }
+        $this->setOption($options);
     }
 
     /**
