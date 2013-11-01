@@ -66,13 +66,6 @@ abstract class Base
             return $this;
         }
 
-        // Append option
-        if (isset($name[0]) && '+' == $name[0]) {
-            $name = substr($name, 1);
-            $this->$name = (array)$this->$name + $value;
-            return $this;
-        }
-
         if (method_exists($this, $method = 'set' . $name)) {
             return $this->$method($value);
         } else {

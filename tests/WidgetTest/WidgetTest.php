@@ -304,9 +304,7 @@ class WidgetTest extends TestCase
 
     public function testGetClassFromAliases()
     {
-        $this->widget->setOption('+aliases', array(
-            'request' => '\Widget\Request'
-        ));
+        $this->widget->setAlias('request', '\Widget\Request');
 
         $this->assertEquals('\Widget\Request', $this->widget->getClass('request'));
     }
