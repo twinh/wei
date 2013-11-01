@@ -12,7 +12,6 @@ namespace Wei\Validator;
  * Check if the input is existing table record
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @method      \Doctrine\DBAL\Connection db() The Doctrine DBAL connection object
  */
 class RecordExists extends BaseValidator
 {
