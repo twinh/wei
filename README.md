@@ -1,23 +1,23 @@
-# Widget
+# Wei
 
-[![Build Status](https://travis-ci.org/twinh/widget.png?branch=master)](https://travis-ci.org/twinh/widget)
-[![Coverage Status](https://coveralls.io/repos/twinh/widget/badge.png?branch=master)](https://coveralls.io/r/twinh/widget?branch=master)
-[![Latest Stable Version](https://poser.pugx.org/widget/widget/v/stable.png)](https://packagist.org/packages/widget/widget)
+[![Build Status](https://travis-ci.org/twinh/wei.png?branch=master)](https://travis-ci.org/twinh/wei)
+[![Coverage Status](https://coveralls.io/repos/twinh/wei/badge.png?branch=master)](https://coveralls.io/r/twinh/wei?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/wei/wei/v/stable.png)](https://packagist.org/packages/wei/wei)
 
-Widget is a micro-framework provided powerful but simple APIs for faster and easier PHP 5.3+ development.
+Wei is a micro-framework provided powerful but simple APIs for faster and easier PHP 5.3+ development.
 
 ## Getting started
 
-Start using Widget in 3 steps, it's easier than any frameworks you've seen before!
+Start using Wei in 3 steps, it's easier than any frameworks you've seen before!
 
 ```php
-// 1. Include the widget container class
-require 'path/to/widget/lib/Widget/Widget.php';
+// 1. Include the wei container class
+require 'path/to/wei/lib/Wei/Wei.php';
 
-// 2. Create the default widget container instance
-$widget = widget(array(
-    // Options for widget container
-    'widget' => array(
+// 2. Create the default wei container instance
+$wei = wei(array(
+    // Options for wei container
+    'wei' => array(
         'debug' => true,
         // Other options ...
     ),
@@ -25,7 +25,7 @@ $widget = widget(array(
     'db' => array(
         'driver'    => 'mysql',
         'host'      => 'localhost',
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf8',
         'user'      => 'root',
         'password'  => 'xxxxxx',
@@ -34,7 +34,7 @@ $widget = widget(array(
 ));
 
 // 3. Using "db" object to execute SQL query
-$result = $widget->db->fetch("SELECT 1 + 2");
+$result = $wei->db->fetch("SELECT 1 + 2");
 ```
 
 ## Installation
@@ -45,21 +45,21 @@ Define the following requirement in your `composer.json` file and run `php compo
 ```json
 {
     "require": {
-        "widget/widget": "0.9.7"
+        "wei/wei": "0.9.7"
     }
 }
 ```
 
 ### Download source code
 
-* [Stable Version](https://github.com/twinh/widget/archive/v0.9.7.zip)
-* [Develop Version](https://github.com/twinh/widget/archive/master.zip)
+* [Stable Version](https://github.com/twinh/wei/archive/v0.9.7.zip)
+* [Develop Version](https://github.com/twinh/wei/archive/master.zip)
 
 ## Resources
 
 * [Documentation](docs/zh-CN) (Chinese, GitHub online markdown)
-* [Documentation](http://twinh.github.io/widget/) (Chinese, single HTML file)
-* [API Documentation](http://twinh.github.io/widget/apidoc/) (English)
+* [Documentation](http://twinh.github.io/wei/) (Chinese, single HTML file)
+* [API Documentation](http://twinh.github.io/wei/apidoc/) (English)
 * [Demo](demos) (English, GitHub online markdown)
 
 ## API Overview
@@ -68,18 +68,18 @@ Define the following requirement in your `composer.json` file and run `php compo
 
 ```php
 // Available cache objects
-$widget->cache;
-$widget->apc;
-$widget->arrayCache;
-$widget->couchbase;
-$widget->dbCache;
-$widget->fileCache;
-$widget->memcache;
-$widget->memcached;
-$widget->mongoCache;
-$widget->redis;
+$wei->cache;
+$wei->apc;
+$wei->arrayCache;
+$wei->couchbase;
+$wei->dbCache;
+$wei->fileCache;
+$wei->memcache;
+$wei->memcached;
+$wei->mongoCache;
+$wei->redis;
 
-$cache = $widget->memcached;
+$cache = $wei->memcached;
 
 // Cache APIs
 $cache->get('key');
@@ -100,7 +100,7 @@ $cache->clear();
 ### Database
 
 ```php
-$db = $widget->db;
+$db = $wei->db;
 
 // Basic CRUD and Active Recrod support
 $db->query();
@@ -158,86 +158,86 @@ $qb->getSql();
 // Available validator objects
 
 // Data type and composition
-$widget->isAlnum($input);
-$widget->isAlpha($input);
-$widget->isBlank($input);
-$widget->isDecimal($input);
-$widget->isDigit($input);
-$widget->isDivisibleBy($input);
-$widget->isDoubleByte($input);
-$widget->isEmpty($input);
-$widget->isEndsWith($input);
-$widget->isIn($input);
-$widget->isLowercase($input);
-$widget->isNull($input);
-$widget->isNumber($input);
-$widget->isRegex($input);
-$widget->isRequired($input);
-$widget->isStartsWith($input);
-$widget->isType($input);
-$widget->isUppercase($input);
+$wei->isAlnum($input);
+$wei->isAlpha($input);
+$wei->isBlank($input);
+$wei->isDecimal($input);
+$wei->isDigit($input);
+$wei->isDivisibleBy($input);
+$wei->isDoubleByte($input);
+$wei->isEmpty($input);
+$wei->isEndsWith($input);
+$wei->isIn($input);
+$wei->isLowercase($input);
+$wei->isNull($input);
+$wei->isNumber($input);
+$wei->isRegex($input);
+$wei->isRequired($input);
+$wei->isStartsWith($input);
+$wei->isType($input);
+$wei->isUppercase($input);
 
 // Length
-$widget->isLength($input);
-$widget->isCharLength($input);
-$widget->isMaxLength($input);
-$widget->isMinLength($input);
+$wei->isLength($input);
+$wei->isCharLength($input);
+$wei->isMaxLength($input);
+$wei->isMinLength($input);
 
 // Comparison
-$widget->isEqualTo($input);
-$widget->isIdenticalTo($input);
-$widget->isGreaterThan($input);
-$widget->isGreaterThanOrEqual($input);
-$widget->isLessThan($input);
-$widget->isLessThanOrEqual($input);
-$widget->isBetween($input);
+$wei->isEqualTo($input);
+$wei->isIdenticalTo($input);
+$wei->isGreaterThan($input);
+$wei->isGreaterThanOrEqual($input);
+$wei->isLessThan($input);
+$wei->isLessThanOrEqual($input);
+$wei->isBetween($input);
 
 // Date and time
-$widget->isDate($input);
-$widget->isDateTime($input);
-$widget->isTime($input);
+$wei->isDate($input);
+$wei->isDateTime($input);
+$wei->isTime($input);
 
 // File and directory
-$widget->isDir($input);
-$widget->isExists($input);
-$widget->isFile($input);
-$widget->isImage($input);
+$wei->isDir($input);
+$wei->isExists($input);
+$wei->isFile($input);
+$wei->isImage($input);
 
 // Network
-$widget->isEmail($input);
-$widget->isIp($input);
-$widget->isTld($input);
-$widget->isUrl($input);
-$widget->isUuid($input);
+$wei->isEmail($input);
+$wei->isIp($input);
+$wei->isTld($input);
+$wei->isUrl($input);
+$wei->isUuid($input);
 
 // Region: All
-$widget->isCreditCard($input);
+$wei->isCreditCard($input);
 
 // Region: Chinese
-$widget->isChinese($input);
-$widget->isIdCardCn($input);
-$widget->isIdCardHk($input);
-$widget->isIdCardMo($input);
-$widget->isIdCardTw($input);
-$widget->isPhoneCn($input);
-$widget->isPostcodeCn($input);
-$widget->isQQ($input);
-$widget->isMobileCn($input);
+$wei->isChinese($input);
+$wei->isIdCardCn($input);
+$wei->isIdCardHk($input);
+$wei->isIdCardMo($input);
+$wei->isIdCardTw($input);
+$wei->isPhoneCn($input);
+$wei->isPostcodeCn($input);
+$wei->isQQ($input);
+$wei->isMobileCn($input);
 
 // Group
-$widget->isAllOf($input);
-$widget->isNoneOf($input);
-$widget->isOneOf($input);
-$widget->isSomeOf($input);
+$wei->isAllOf($input);
+$wei->isNoneOf($input);
+$wei->isOneOf($input);
+$wei->isSomeOf($input);
 
 // Others
-$widget->isAll($input);
-$widget->isCallback($input);
-$widget->isColor($input);
+$wei->isAll($input);
+$wei->isCallback($input);
+$wei->isColor($input);
 
 // Validate and get error message
-if (!$widget->isDigit('abc')) {
-    print_r($widget->isDigit->getMessages());
+if (!$wei->isDigit('abc')) {
+    print_r($wei->isDigit->getMessages());
 }
 
 // ...
@@ -246,17 +246,17 @@ if (!$widget->isDigit('abc')) {
 ### [More](docs/zh-CN#api)
 
 ```php
-$widget->request;
-$widget->cookie;
-$widget->session;
-$widget->ua;
-$widget->upload;
-$widget->response;
-$widget->escape;
-$widget->logger;
-$widget->call;
-$widget->env;
-$widget->error;
+$wei->request;
+$wei->cookie;
+$wei->session;
+$wei->ua;
+$wei->upload;
+$wei->response;
+$wei->escape;
+$wei->logger;
+$wei->call;
+$wei->env;
+$wei->error;
 
 // ...
 ```
@@ -271,4 +271,4 @@ $ phpunit
 
 ## License
 
-Widget is an open-source project released MIT license. See the LICENSE file for details.
+Wei is an open-source project released MIT license. See the LICENSE file for details.
