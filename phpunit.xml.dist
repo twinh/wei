@@ -13,8 +13,8 @@
 >
 
     <testsuites>
-        <testsuite name="widget">
-            <directory>./tests/WidgetTest</directory>
+        <testsuite name="wei">
+            <directory>./tests/WeiTest</directory>
         </testsuite>
     </testsuites>
     <filter>
