@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Wei\Ua | Wei Framework</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
+						<ul>
+				<li><a href="namespace-Wei.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Wei.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Wei.Apc.html">Apc</a></li>
+				<li><a href="class-Wei.App.html">App</a></li>
+				<li><a href="class-Wei.Arr.html">Arr</a></li>
+				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
+				<li><a href="class-Wei.Asset.html">Asset</a></li>
+				<li><a href="class-Wei.Base.html">Base</a></li>
+				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
+				<li><a href="class-Wei.Cache.html">Cache</a></li>
+				<li><a href="class-Wei.Call.html">Call</a></li>
+				<li><a href="class-Wei.Config.html">Config</a></li>
+				<li><a href="class-Wei.Controller.html">Controller</a></li>
+				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
+				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
+				<li><a href="class-Wei.Db.html">Db</a></li>
+				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
+				<li><a href="class-Wei.Env.html">Env</a></li>
+				<li><a href="class-Wei.Error.html">Error</a></li>
+				<li><a href="class-Wei.Escape.html">Escape</a></li>
+				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
+				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
+				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Logger.html">Logger</a></li>
+				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
+				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
+				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
+				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
+				<li><a href="class-Wei.Password.html">Password</a></li>
+				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
+				<li><a href="class-Wei.Redis.html">Redis</a></li>
+				<li><a href="class-Wei.Request.html">Request</a></li>
+				<li><a href="class-Wei.Response.html">Response</a></li>
+				<li><a href="class-Wei.Router.html">Router</a></li>
+				<li><a href="class-Wei.Session.html">Session</a></li>
+				<li><a href="class-Wei.T.html">T</a></li>
+				<li class="active"><a href="class-Wei.Ua.html">Ua</a></li>
+				<li><a href="class-Wei.Upload.html">Upload</a></li>
+				<li><a href="class-Wei.Url.html">Url</a></li>
+				<li><a href="class-Wei.Uuid.html">Uuid</a></li>
+				<li><a href="class-Wei.Validate.html">Validate</a></li>
+				<li><a href="class-Wei.View.html">View</a></li>
+				<li><a href="class-Wei.WeChatApp.html">WeChatApp</a></li>
+				<li><a href="class-Wei.Wei.html">Wei</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Wei.html" title="Summary of Wei"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Ua</h1>
+
+
+	<div class="description">
+	
+<p>A service to detect user OS, browser and device name and version</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Wei.Base.html"><span>Wei\Base</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Wei\Ua</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+		<b>Located at</b> <a href="source-class-Wei.Ua.html#11-187" title="Go to source code">Ua.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Wei.Ua.html#66-82" title="Go to source code">__construct</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Constructor</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructor</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When option "wei" is not an instance of "Wei\Wei"<br />
+				</div>
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Wei.Base.html#___construct">Wei\Base::__construct()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Wei.Ua.html#84-93" title="Go to source code">__invoke</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if in the specified browser, OS or device</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if in the specified browser, OS or device</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The name of browser, OS or device</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="is" id="_is">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_is">#</a>
+		<code><a href="source-class-Wei.Ua.html#95-117" title="Go to source code">is</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if in the specified browser, OS or device</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if in the specified browser, OS or device</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The name of browser, OS or device</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When name is not defined in patterns array<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getVersion" id="_getVersion">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getVersion">#</a>
+		<code><a href="source-class-Wei.Ua.html#119-132" title="Go to source code">getVersion</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the version of specified browser, OS or device</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the version of specified browser, OS or device</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__call" id="___call">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___call">#</a>
+		<code><a href="source-class-Wei.Ua.html#134-147" title="Go to source code">__call</a>( <span>string <var>$name</var></span>, <span>array <var>$args</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Magic call for method isXXX</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Magic call for method isXXX</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name</dd>
+					<dt><var>$args</var></dt>
+					<dd><code>array</code><br>$args</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Wei.Base.html#___call">Wei\Base::__call()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isMobile" id="_isMobile">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isMobile">#</a>
+		<code><a href="source-class-Wei.Ua.html#149-186" title="Go to source code">isMobile</a>( )</code>
+
+		<div class="description short">
+			
+<p>Check if the device is mobile</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the device is mobile</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+				<h4>License</h4>
+				<div class="list">
+						<a href="MIT">License https://github.com/serbanghita/Mobile-Detect/blob/master/LICENSE.txt</a><br />
+				</div>
+				<h4>Link</h4>
+				<div class="list">
+						<a href="https://github.com/serbanghita/Mobile-Detect">https://github.com/serbanghita/Mobile-Detect</a><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Wei.Base.html#methods">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#___get">__get()</a>, 
+			<a href="class-Wei.Base.html#_getOption">getOption()</a>, 
+			<a href="class-Wei.Base.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+	<table class="summary" id="methods">
+	<caption>Magic methods summary</caption>
+	<tr data-order="isIe" id="m_isIe">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isIe">#</a>
+		<code><a href="source-class-Wei.Ua.html#16" title="Go to source code">isIe</a>( )</code>
+
+		<div class="description short">
+			
+<p>Check if the user is browsing in Internet Explorer browser</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the user is browsing in Internet Explorer browser</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isChrome" id="m_isChrome">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isChrome">#</a>
+		<code><a href="source-class-Wei.Ua.html#17" title="Go to source code">isChrome</a>( )</code>
+
+		<div class="description short">
+			
+<p>Check if the user is browsing in Chrome browser</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the user is browsing in Chrome browser</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isFirefox" id="m_isFirefox">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isFirefox">#</a>
+		<code><a href="source-class-Wei.Ua.html#18" title="Go to source code">isFirefox</a>( )</code>
+
+		<div class="description short">
+			
+<p>Check if the user is browsing in Firefox browser</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the user is browsing in Firefox browser</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isIos" id="m_isIos">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isIos">#</a>
+		<code><a href="source-class-Wei.Ua.html#20" title="Go to source code">isIos</a>( )</code>
+
+		<div class="description short">
+			
+<p>Check if the device is running on Apple's iOS platform</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the device is running on Apple's iOS platform</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isAndroid" id="m_isAndroid">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isAndroid">#</a>
+		<code><a href="source-class-Wei.Ua.html#21" title="Go to source code">isAndroid</a>( )</code>
+
+		<div class="description short">
+			
+<p>Check if the device is running on Google's Android platform</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the device is running on Google's Android platform</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isWindowsPhone" id="m_isWindowsPhone">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isWindowsPhone">#</a>
+		<code><a href="source-class-Wei.Ua.html#22" title="Go to source code">isWindowsPhone</a>( )</code>
+
+		<div class="description short">
+			
+<p>Check if the device is running on Windows Phone platform</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the device is running on Windows Phone platform</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isIphone" id="m_isIphone">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isIphone">#</a>
+		<code><a href="source-class-Wei.Ua.html#24" title="Go to source code">isIphone</a>( )</code>
+
+		<div class="description short">
+			
+<p>Check if the user is browsing by iPhone/iPod</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the user is browsing by iPhone/iPod</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isIpad" id="m_isIpad">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isIpad">#</a>
+		<code><a href="source-class-Wei.Ua.html#25" title="Go to source code">isIpad</a>( )</code>
+
+		<div class="description short">
+			
+<p>Check if the user is browsing by iPad</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the user is browsing by iPad</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="patterns" id="$patterns">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Ua.html#29-43" title="Go to source code"><var>$patterns</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+    <span class="php-comment">// Browser</span>
+    <span class="php-quote">'ie'</span>            =&gt; <span class="php-quote">'MSIE ([\w.]+)'</span>,
+    <span class="php-quote">'chrome'</span>        =&gt; <span class="php-quote">'Chrome\/([\w.]+)'</span>,
+    <span class="php-quote">'firefox'</span>       =&gt; <span class="php-quote">'Firefox\/([\w.]+)'</span>,
+
+    <span class="php-comment">// OS</span>
+    <span class="php-quote">'ios'</span>           =&gt; <span class="php-quote">'iP(?:hone|ad).*OS ([\d_]+)'</span>, <span class="php-comment">// Contains iPod</span>
+    <span class="php-quote">'android'</span>       =&gt; <span class="php-quote">'Android ([\w.]+)'</span>,
+    <span class="php-quote">'windowsphone'</span>  =&gt; <span class="php-quote">'Windows Phone (?:OS )?([\w.]+)'</span>,
+
+    <span class="php-comment">// Device (Mobile &amp; Tablet)</span>
+    <span class="php-quote">'iphone'</span>        =&gt; <span class="php-quote">'iPhone OS ([\d_]+)'</span>,
+    <span class="php-quote">'ipad'</span>          =&gt; <span class="php-quote">'iPad.*OS ([\d_]+)'</span>
+)</code></td>
+		<td class="description"><div>
+			<a href="#$patterns" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="versions" id="$versions">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Ua.html#45-50" title="Go to source code"><var>$versions</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$versions" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The versions of detected os</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The versions of detected os</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="userAgent" id="$userAgent">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Ua.html#52-57" title="Go to source code"><var>$userAgent</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$userAgent" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The user agent string from request header</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The user agent string from request header</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="server" id="$server">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Ua.html#59-64" title="Go to source code"><var>$server</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$server" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The server and execution environment parameters, equals to $_SERVER on
+default</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The server and execution environment parameters, equals to $_SERVER on
+default</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Wei.Base.html#properties">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#$providers"><var>$providers</var></a>, 
+			<a href="class-Wei.Base.html#$wei"><var>$wei</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Wei Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

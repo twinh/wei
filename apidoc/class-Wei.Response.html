@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Wei\Response | Wei Framework</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
+						<ul>
+				<li><a href="namespace-Wei.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Wei.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Wei.Apc.html">Apc</a></li>
+				<li><a href="class-Wei.App.html">App</a></li>
+				<li><a href="class-Wei.Arr.html">Arr</a></li>
+				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
+				<li><a href="class-Wei.Asset.html">Asset</a></li>
+				<li><a href="class-Wei.Base.html">Base</a></li>
+				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
+				<li><a href="class-Wei.Cache.html">Cache</a></li>
+				<li><a href="class-Wei.Call.html">Call</a></li>
+				<li><a href="class-Wei.Config.html">Config</a></li>
+				<li><a href="class-Wei.Controller.html">Controller</a></li>
+				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
+				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
+				<li><a href="class-Wei.Db.html">Db</a></li>
+				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
+				<li><a href="class-Wei.Env.html">Env</a></li>
+				<li><a href="class-Wei.Error.html">Error</a></li>
+				<li><a href="class-Wei.Escape.html">Escape</a></li>
+				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
+				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
+				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Logger.html">Logger</a></li>
+				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
+				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
+				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
+				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
+				<li><a href="class-Wei.Password.html">Password</a></li>
+				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
+				<li><a href="class-Wei.Redis.html">Redis</a></li>
+				<li><a href="class-Wei.Request.html">Request</a></li>
+				<li class="active"><a href="class-Wei.Response.html">Response</a></li>
+				<li><a href="class-Wei.Router.html">Router</a></li>
+				<li><a href="class-Wei.Session.html">Session</a></li>
+				<li><a href="class-Wei.T.html">T</a></li>
+				<li><a href="class-Wei.Ua.html">Ua</a></li>
+				<li><a href="class-Wei.Upload.html">Upload</a></li>
+				<li><a href="class-Wei.Url.html">Url</a></li>
+				<li><a href="class-Wei.Uuid.html">Uuid</a></li>
+				<li><a href="class-Wei.Validate.html">Validate</a></li>
+				<li><a href="class-Wei.View.html">View</a></li>
+				<li><a href="class-Wei.WeChatApp.html">WeChatApp</a></li>
+				<li><a href="class-Wei.Wei.html">Wei</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Wei.html" title="Summary of Wei"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Response</h1>
+
+
+	<div class="description">
+	
+<p>A service that handles the HTTP response data</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Wei.Base.html"><span>Wei\Base</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Wei\Response</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+	<div>
+		<h4>Direct known subclasses</h4>
+			<a href="class-Wei.Json.html">Wei\Json</a>, 
+			<a href="class-Wei.Redirect.html">Wei\Redirect</a>
+	</div>
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+		<b>Located at</b> <a href="source-class-Wei.Response.html#11-665" title="Go to source code">Response.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Wei.Response.html#189-199" title="Go to source code">__invoke</a>( <span>string <var>$content</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$status</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Send response header and content</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Send response header and content</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$content</var></dt>
+					<dd><code>string</code><br>$content</dd>
+					<dt><var>$status</var></dt>
+					<dd><code>integer</code><br>$status</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="send" id="_send">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_send">#</a>
+		<code><a href="source-class-Wei.Response.html#201-230" title="Go to source code">send</a>( <span>string <var>$content</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$status</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Send response header and content</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Send response header and content</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$content</var></dt>
+					<dd><code>string</code><br>$content</dd>
+					<dt><var>$status</var></dt>
+					<dd><code>integer</code><br>$status</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setContent" id="_setContent">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setContent">#</a>
+		<code><a href="source-class-Wei.Response.html#232-242" title="Go to source code">setContent</a>( <span>mixed <var>$content</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set response content</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set response content</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$content</var></dt>
+					<dd><code>mixed</code><br>$content</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getContent" id="_getContent">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getContent">#</a>
+		<code><a href="source-class-Wei.Response.html#244-252" title="Go to source code">getContent</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get response content</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get response content</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sendContent" id="_sendContent">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sendContent">#</a>
+		<code><a href="source-class-Wei.Response.html#254-263" title="Go to source code">sendContent</a>( )</code>
+
+		<div class="description short">
+			
+<p>Send response content</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Send response content</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setStatusCode" id="_setStatusCode">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setStatusCode">#</a>
+		<code><a href="source-class-Wei.Response.html#265-283" title="Go to source code">setStatusCode</a>( <span>integer <var>$code</var></span>, <span>string|null <var>$text</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the header status code</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the header status code</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$code</var></dt>
+					<dd><code>integer</code><br>$code The status code</dd>
+					<dt><var>$text</var></dt>
+					<dd><code>string|null</code><br>$text The status text</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getStatusCode" id="_getStatusCode">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getStatusCode">#</a>
+		<code><a href="source-class-Wei.Response.html#285-293" title="Go to source code">getStatusCode</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the status code</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the status code</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setVersion" id="_setVersion">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setVersion">#</a>
+		<code><a href="source-class-Wei.Response.html#295-305" title="Go to source code">setVersion</a>( <span>string <var>$version</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the HTTP version</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the HTTP version</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$version</var></dt>
+					<dd><code>string</code><br>$version The HTTP version</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getVersion" id="_getVersion">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getVersion">#</a>
+		<code><a href="source-class-Wei.Response.html#307-315" title="Go to source code">getVersion</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the HTTP version</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the HTTP version</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setHeader" id="_setHeader">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setHeader">#</a>
+		<code><a href="source-class-Wei.Response.html#317-342" title="Go to source code">setHeader</a>( <span>string <var>$name</var></span>, <span>string|array <var>$values</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$replace</var> = <span class="php-keyword1">true</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the header string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the header string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The header name</dd>
+					<dt><var>$values</var></dt>
+					<dd><code>string|array</code><br>$values The header values</dd>
+					<dt><var>$replace</var></dt>
+					<dd><code>boolean</code><br>$replace Whether replace the exists values or not</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getHeader" id="_getHeader">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getHeader">#</a>
+		<code><a href="source-class-Wei.Response.html#344-363" title="Go to source code">getHeader</a>( <span>string <var>$name</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$first</var> = <span class="php-keyword1">true</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Get the header string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the header string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The header name</dd>
+					<dt><var>$default</var></dt>
+					<dd><code>mixed</code><br>$default The default value</dd>
+					<dt><var>$first</var></dt>
+					<dd><code>boolean</code><br>$first Return the first element or the whole header values</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeHeader" id="_removeHeader">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeHeader">#</a>
+		<code><a href="source-class-Wei.Response.html#365-376" title="Go to source code">removeHeader</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Remove header by specified name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Remove header by specified name</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The header name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sendHeader" id="_sendHeader">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sendHeader">#</a>
+		<code><a href="source-class-Wei.Response.html#378-406" title="Go to source code">sendHeader</a>( )</code>
+
+		<div class="description short">
+			
+<p>Send HTTP headers, including HTTP status, raw headers and cookies</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Send HTTP headers, including HTTP status, raw headers and cookies</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>If the header has been seen, return false, otherwise, return true<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sendRawHeader" id="_sendRawHeader">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sendRawHeader">#</a>
+		<code><a href="source-class-Wei.Response.html#408-419" title="Go to source code">sendRawHeader</a>( <span>string <var>$header</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Send a raw HTTP header</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Send a raw HTTP header</p>
+
+<p>If in unit test mode, the response will store header string into
+<code>sentHeaders</code> property without send it for testing purpose</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$header</var></dt>
+					<dd><code>string</code><br>$header</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isHeaderSent" id="_isHeaderSent">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isHeaderSent">#</a>
+		<code><a href="source-class-Wei.Response.html#421-436" title="Go to source code">isHeaderSent</a>( <span>string <var>&amp; $file</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>&amp; $line</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Checks if or where headers have been sent</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Checks if or where headers have been sent</p>
+
+<p>If NOT in unit test mode and the optional <code>file</code> and
+<code>line</code> parameters are set, <code>isHeaderSent()</code> will put the
+PHP source file name and line number where output started in the file and line
+variables</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$file</var></dt>
+					<dd><code>string</code><br>$file</dd>
+					<dt><var>$line</var></dt>
+					<dd><code>integer</code><br>$line The line number where the output started</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+				<h4>Link</h4>
+				<div class="list">
+						<a href="http://php.net/manual/en/function.headers-sent.php">http://php.net/manual/en/function.headers-sent.php</a><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getCookie" id="_getCookie">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getCookie">#</a>
+		<code><a href="source-class-Wei.Response.html#438-448" title="Go to source code">getCookie</a>( <span>string <var>$key</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Get response cookie</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get response cookie</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of cookie</dd>
+					<dt><var>$default</var></dt>
+					<dd><code>mixed</code><br>$default The default value when cookie not exists</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setCookie" id="_setCookie">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setCookie">#</a>
+		<code><a href="source-class-Wei.Response.html#450-462" title="Go to source code">setCookie</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Set response cookie</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set response cookie</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of cookie</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value The value of cookie</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options The options of cookie</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeCookie" id="_removeCookie">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeCookie">#</a>
+		<code><a href="source-class-Wei.Response.html#464-473" title="Go to source code">removeCookie</a>( <span>string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Remove response cookie</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Remove response cookie</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of cookie</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sendCookie" id="_sendCookie">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sendCookie">#</a>
+		<code><a href="source-class-Wei.Response.html#475-491" title="Go to source code">sendCookie</a>( )</code>
+
+		<div class="description short">
+			
+<p>Send cookie</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Send cookie</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__toString" id="___toString">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___toString">#</a>
+		<code><a href="source-class-Wei.Response.html#493-503" title="Go to source code">__toString</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns response status, headers and content as string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns response status, headers and content as string</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getHeaderString" id="_getHeaderString">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getHeaderString">#</a>
+		<code><a href="source-class-Wei.Response.html#505-519" title="Go to source code">getHeaderString</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns response header as string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns response header as string</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isSent" id="_isSent">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isSent">#</a>
+		<code><a href="source-class-Wei.Response.html#521-529" title="Go to source code">isSent</a>( )</code>
+
+		<div class="description short">
+			
+<p>Check if response has been sent</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if response has been sent</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setSentStatus" id="_setSentStatus">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setSentStatus">#</a>
+		<code><a href="source-class-Wei.Response.html#531-541" title="Go to source code">setSentStatus</a>( <span>boolean <var>$bool</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set response sent status</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set response sent status</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bool</var></dt>
+					<dd><code>boolean</code><br>$bool</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="json" id="_json">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_json">#</a>
+		<code><a href="source-class-Wei.Response.html#543-563" title="Go to source code">json</a>( <span>mixed <var>$data</var></span>, <span>boolean <var>$jsonp</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Response JSON or JSONP format string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Response JSON or JSONP format string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd><code>mixed</code><br>$data The variable to be convert to JSON string</dd>
+					<dt><var>$jsonp</var></dt>
+					<dd><code>boolean</code><br>$jsonp Whether allow response json format on demand</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="jsonp" id="_jsonp">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_jsonp">#</a>
+		<code><a href="source-class-Wei.Response.html#565-574" title="Go to source code">jsonp</a>( <span>mixed <var>$data</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Response JSONP format string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Response JSONP format string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd><code>mixed</code><br>$data</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="flush" id="_flush">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_flush">#</a>
+		<code><a href="source-class-Wei.Response.html#576-617" title="Go to source code">flush</a>( <span>string <var>$content</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Flushes content to browser immediately</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Flushes content to browser immediately</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$content</var></dt>
+					<dd><code>string</code><br>$content</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="download" id="_download">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_download">#</a>
+		<code><a href="source-class-Wei.Response.html#619-664" title="Go to source code">download</a>( <span>string <var>$file</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$downloadOptions</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Send file download response</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Send file download response</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$file</var></dt>
+					<dd><code>string</code><br>$file The path of file</dd>
+					<dt><var>$downloadOptions</var></dt>
+					<dd><code>array</code><br>$downloadOptions The download options</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-RuntimeException.html">RuntimeException</a></code></code><br>When file not found<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Wei.Base.html#methods">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#___call">__call()</a>, 
+			<a href="class-Wei.Base.html#___construct">__construct()</a>, 
+			<a href="class-Wei.Base.html#___get">__get()</a>, 
+			<a href="class-Wei.Base.html#_getOption">getOption()</a>, 
+			<a href="class-Wei.Base.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="codeTexts" id="$codeTexts">
+		<td class="attributes"><code>
+			protected static 
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Response.html#19-65" title="Go to source code"><var>$codeTexts</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+    <span class="php-comment">// Successful Requests</span>
+    <span class="php-num">200</span> =&gt; <span class="php-quote">'OK'</span>,
+    <span class="php-num">201</span> =&gt; <span class="php-quote">'Created'</span>,
+    <span class="php-num">202</span> =&gt; <span class="php-quote">'Accepted'</span>,
+    <span class="php-num">203</span> =&gt; <span class="php-quote">'Non-Authoritative Information'</span>,
+    <span class="php-num">204</span> =&gt; <span class="php-quote">'No Content'</span>,
+    <span class="php-num">205</span> =&gt; <span class="php-quote">'Reset Content'</span>,
+    <span class="php-num">206</span> =&gt; <span class="php-quote">'Partial Content'</span>,
+    <span class="php-comment">// Redirects</span>
+    <span class="php-num">300</span> =&gt; <span class="php-quote">'Multiple Choices'</span>,
+    <span class="php-num">301</span> =&gt; <span class="php-quote">'Moved Permanently'</span>,
+    <span class="php-num">302</span> =&gt; <span class="php-quote">'Found'</span>,
+    <span class="php-num">303</span> =&gt; <span class="php-quote">'See Other'</span>,
+    <span class="php-num">304</span> =&gt; <span class="php-quote">'Not Modified'</span>,
+    <span class="php-num">305</span> =&gt; <span class="php-quote">'Use Proxy'</span>,
+    <span class="php-num">307</span> =&gt; <span class="php-quote">'Temporary Redirect'</span>,
+    <span class="php-comment">// Client Errors</span>
+    <span class="php-num">401</span> =&gt; <span class="php-quote">'Unauthorized'</span>,
+    <span class="php-num">403</span> =&gt; <span class="php-quote">'Forbidden'</span>,
+    <span class="php-num">404</span> =&gt; <span class="php-quote">'Not Found'</span>,
+    <span class="php-num">405</span> =&gt; <span class="php-quote">'Method Not Allowed'</span>,
+    <span class="php-num">406</span> =&gt; <span class="php-quote">'Not Acceptable'</span>,
+    <span class="php-num">407</span> =&gt; <span class="php-quote">'Proxy Authentication Required'</span>,
+    <span class="php-num">408</span> =&gt; <span class="php-quote">'Request Timeout'</span>,
+    <span class="php-num">409</span> =&gt; <span class="php-quote">'Conflict'</span>,
+    <span class="php-num">410</span> =&gt; <span class="php-quote">'Gone'</span>,
+    <span class="php-num">411</span> =&gt; <span class="php-quote">'Length Required'</span>,
+    <span class="php-num">412</span> =&gt; <span class="php-quote">'Precondition Failed'</span>,
+    <span class="php-num">413</span> =&gt; <span class="php-quote">'Request Entity Too Large'</span>,
+    <span class="php-num">414</span> =&gt; <span class="php-quote">'Request-URI Too Long'</span>,
+    <span class="php-num">415</span> =&gt; <span class="php-quote">'Unsupported Media Type'</span>,
+    <span class="php-num">416</span> =&gt; <span class="php-quote">'Requested Range Not Satisfiable'</span>,
+    <span class="php-num">417</span> =&gt; <span class="php-quote">'Expectation Failed'</span>,
+    <span class="php-comment">// Server Errors</span>
+    <span class="php-num">500</span> =&gt; <span class="php-quote">'Internal Server Error'</span>,
+    <span class="php-num">501</span> =&gt; <span class="php-quote">'Not Implemented'</span>,
+    <span class="php-num">502</span> =&gt; <span class="php-quote">'Bad Gateway'</span>,
+    <span class="php-num">503</span> =&gt; <span class="php-quote">'Service Unavailable'</span>,
+    <span class="php-num">504</span> =&gt; <span class="php-quote">'Gateway Timeout'</span>,
+    <span class="php-num">505</span> =&gt; <span class="php-quote">'HTTP Version Not Supported'</span>
+)</code></td>
+		<td class="description"><div>
+			<a href="#$codeTexts" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Common use HTTP status code and text</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Common use HTTP status code and text</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="version" id="$version">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Response.html#67-72" title="Go to source code"><var>$version</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'1.1'</span></code></td>
+		<td class="description"><div>
+			<a href="#$version" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The HTTP version, current is 1.0 or 1.1</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The HTTP version, current is 1.0 or 1.1</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="statusCode" id="$statusCode">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Response.html#74-79" title="Go to source code"><var>$statusCode</var></a>
+		</td>
+		<td class="value"><code><span class="php-num">200</span></code></td>
+		<td class="description"><div>
+			<a href="#$statusCode" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The status code</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The status code</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="statusText" id="$statusText">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Response.html#81-86" title="Go to source code"><var>$statusText</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'OK'</span></code></td>
+		<td class="description"><div>
+			<a href="#$statusText" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The status text for status code</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The status text for status code</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="content" id="$content">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Response.html#88-93" title="Go to source code"><var>$content</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$content" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The response content</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The response content</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="headers" id="$headers">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Response.html#95-100" title="Go to source code"><var>$headers</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$headers" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The response headers</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The response headers</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="sentHeaders" id="$sentHeaders">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Response.html#102-107" title="Go to source code"><var>$sentHeaders</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$sentHeaders" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The sent response headers</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The sent response headers</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="cookies" id="$cookies">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Response.html#109-114" title="Go to source code"><var>$cookies</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$cookies" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The response cookies</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The response cookies</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="cookieOption" id="$cookieOption">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Response.html#116-138" title="Go to source code"><var>$cookieOption</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+    <span class="php-quote">'expires'</span>   =&gt; <span class="php-num">864000</span>,
+    <span class="php-quote">'path'</span>      =&gt; <span class="php-quote">'/'</span>,
+    <span class="php-quote">'domain'</span>    =&gt; <span class="php-keyword1">null</span>,
+    <span class="php-quote">'secure'</span>    =&gt; <span class="php-keyword1">false</span>,
+    <span class="php-quote">'httpOnly'</span>  =&gt; <span class="php-keyword1">false</span>,
+    <span class="php-quote">'raw'</span>       =&gt; <span class="php-keyword1">false</span>,
+)</code></td>
+		<td class="description"><div>
+			<a href="#$cookieOption" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The cookie options</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The cookie options</p>
+
+<p>Name | Type | Description ---------|--------|------------- expires | int |
+The lifetime of cookie (seconds) path | string | The path on the server in which
+the cookie will be available on domain | string | The domain that the cookie is
+available to secure | bool | Indicates that the cookie should only be
+transmitted over a secure HTTPS connection from the client httpOnly | bool |
+When TRUE the cookie will be made accessible only through the HTTP protocol raw
+| bool | Whether send a cookie without urlencoding the cookie value</p>
+
+
+					<h4>Link</h4>
+					<div class="list">
+							<a href="http://php.net/manual/en/function.setcookie.php">http://php.net/manual/en/function.setcookie.php</a><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="downloadOption" id="$downloadOption">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Response.html#140-159" title="Go to source code"><var>$downloadOption</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+    <span class="php-quote">'type'</span>          =&gt; <span class="php-quote">'application/x-download'</span>,
+    <span class="php-quote">'disposition'</span>   =&gt; <span class="php-quote">'attachment'</span>,
+    <span class="php-quote">'filename'</span>      =&gt; <span class="php-keyword1">null</span>,
+)</code></td>
+		<td class="description"><div>
+			<a href="#$downloadOption" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The download options</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The download options</p>
+
+<p>Name | Type | Description ------------|--------|------------- type | string |
+The HTTP content type disposition | string | The type of disposition, could be
+"attachment" or "inline", filename | string | The file name to display in
+download dialog</p>
+
+<p>When disposition is "inline", the browser will try to open file within the
+browser, while "attachment" will force it to download</p>
+
+
+					<h4>Link</h4>
+					<div class="list">
+							<a href="http://stackoverflow.com/questions/1395151/content-dispositionwhat-are-the-differences-between-inline-and-attachment">http://stackoverflow.com/questions/1395151/content-dispositionwhat-are-the-differences-between-inline-and-attachment</a><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isSent" id="$isSent">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Response.html#161-166" title="Go to source code"><var>$isSent</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$isSent" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether response content has been sent</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether response content has been sent</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="unitTest" id="$unitTest">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Response.html#168-173" title="Go to source code"><var>$unitTest</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$unitTest" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether in unit test mode</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether in unit test mode</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="beforeSend" id="$beforeSend">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Response.html#175-180" title="Go to source code"><var>$beforeSend</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$beforeSend" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback executes <em>before</em> send response</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback executes <em>before</em> send response</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="afterSend" id="$afterSend">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Response.html#182-187" title="Go to source code"><var>$afterSend</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$afterSend" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback executes <em>after</em> sent response</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback executes <em>after</em> sent response</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Wei.Base.html#properties">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#$providers"><var>$providers</var></a>, 
+			<a href="class-Wei.Base.html#$wei"><var>$wei</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+	<table class="summary" id="magicProperties">
+	<caption>Magic properties summary</caption>
+	<tr data-order="logger" id="m$logger">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Logger.html">Wei\Logger</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Response.html#15" title="Go to source code"><var>$logger</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$logger" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The logger wei</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The logger wei</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+</div>
+
+	<div id="footer">
+		Wei Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,8339 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Wei\Wei | Wei Framework</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
+						<ul>
+				<li><a href="namespace-Wei.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Wei.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Wei.Apc.html">Apc</a></li>
+				<li><a href="class-Wei.App.html">App</a></li>
+				<li><a href="class-Wei.Arr.html">Arr</a></li>
+				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
+				<li><a href="class-Wei.Asset.html">Asset</a></li>
+				<li><a href="class-Wei.Base.html">Base</a></li>
+				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
+				<li><a href="class-Wei.Cache.html">Cache</a></li>
+				<li><a href="class-Wei.Call.html">Call</a></li>
+				<li><a href="class-Wei.Config.html">Config</a></li>
+				<li><a href="class-Wei.Controller.html">Controller</a></li>
+				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
+				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
+				<li><a href="class-Wei.Db.html">Db</a></li>
+				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
+				<li><a href="class-Wei.Env.html">Env</a></li>
+				<li><a href="class-Wei.Error.html">Error</a></li>
+				<li><a href="class-Wei.Escape.html">Escape</a></li>
+				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
+				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
+				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Logger.html">Logger</a></li>
+				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
+				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
+				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
+				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
+				<li><a href="class-Wei.Password.html">Password</a></li>
+				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
+				<li><a href="class-Wei.Redis.html">Redis</a></li>
+				<li><a href="class-Wei.Request.html">Request</a></li>
+				<li><a href="class-Wei.Response.html">Response</a></li>
+				<li><a href="class-Wei.Router.html">Router</a></li>
+				<li><a href="class-Wei.Session.html">Session</a></li>
+				<li><a href="class-Wei.T.html">T</a></li>
+				<li><a href="class-Wei.Ua.html">Ua</a></li>
+				<li><a href="class-Wei.Upload.html">Upload</a></li>
+				<li><a href="class-Wei.Url.html">Url</a></li>
+				<li><a href="class-Wei.Uuid.html">Uuid</a></li>
+				<li><a href="class-Wei.Validate.html">Validate</a></li>
+				<li><a href="class-Wei.View.html">View</a></li>
+				<li><a href="class-Wei.WeChatApp.html">WeChatApp</a></li>
+				<li class="active"><a href="class-Wei.Wei.html">Wei</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Wei.html" title="Summary of Wei"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Wei</h1>
+
+
+	<div class="description">
+	
+<p>The root object and service container</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Wei.Base.html"><span>Wei\Base</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Wei\Wei</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt; Cache<br />
+		<b>Located at</b> <a href="source-class-Wei.Wei.html#16-890" title="Go to source code">Wei.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Wei.Wei.html#373-391" title="Go to source code">__construct</a>( <span>array <var>$config</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Instance service container</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Instance service container</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$config</var></dt>
+					<dd><code>array</code><br>$config</dd>
+				</dl></div>
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When option "wei" is not an instance of "Wei\Wei"<br />
+				</div>
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Wei.Base.html#___construct">Wei\Base::__construct()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getContainer" id="_getContainer">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getContainer">#</a>
+		<code><a href="source-class-Wei.Wei.html#393-425" title="Go to source code">getContainer</a>( <span>array <var>$config</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Get the service container instance</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the service container instance</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$config</var></dt>
+					<dd><code>array</code><br>$config The array or file configuration</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When the configuration parameter is not array or file<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setContainer" id="_setContainer">
+
+		<td class="attributes"><code>
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setContainer">#</a>
+		<code><a href="source-class-Wei.Wei.html#427-435" title="Go to source code">setContainer</a>( <span><code><a href="class-Wei.Wei.html">Wei\Wei</a></code> <var>$container</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the service container</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the service container</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$container</var></dt>
+					<dd><code><code><a href="class-Wei.Wei.html">Wei\Wei</a></code></code><br>$container</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="autoload" id="_autoload">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_autoload">#</a>
+		<code><a href="source-class-Wei.Wei.html#437-458" title="Go to source code">autoload</a>( <span>string <var>$class</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Autoload the PSR-0 class</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Autoload the PSR-0 class</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$class</var></dt>
+					<dd><code>string</code><br>$class the name of the class</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setConfig" id="_setConfig">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setConfig">#</a>
+		<code><a href="source-class-Wei.Wei.html#460-522" title="Go to source code">setConfig</a>( <span>string|array <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Set object's configuration</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set object's configuration</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string|array</code><br>$name</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getConfig" id="_getConfig">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getConfig">#</a>
+		<code><a href="source-class-Wei.Wei.html#524-550" title="Go to source code">getConfig</a>( <span>string <var>$name</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Get object's configuration</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get object's configuration</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The name of configuration</dd>
+					<dt><var>$default</var></dt>
+					<dd><code>mixed</code><br>$default The default value if configuration not found</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="invoke" id="_invoke">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_invoke">#</a>
+		<code><a href="source-class-Wei.Wei.html#552-564" title="Go to source code">invoke</a>( <span>string <var>$name</var></span>, <span>array <var>$args</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$providers</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Get a object and call its "__invoke" method</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get a object and call its "__invoke" method</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The name of the object</dd>
+					<dt><var>$args</var></dt>
+					<dd><code>array</code><br>$args The arguments for "__invoke" method</dd>
+					<dt><var>$providers</var></dt>
+					<dd><code>array</code><br>$providers The service providers map</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="get" id="_get">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Base.html">Wei\Base</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_get">#</a>
+		<code><a href="source-class-Wei.Wei.html#566-629" title="Go to source code">get</a>( <span>string <var>$name</var></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$providers</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Get a object</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get a object</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The name of the object, without class prefix "Wei\"</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options The option properties for object</dd>
+					<dt><var>$providers</var></dt>
+					<dd><code>array</code><br>$providers The dependent configuration</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Base.html">Wei\Base</a></code></code><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-BadMethodCallException.html">BadMethodCallException</a></code></code><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isInstanced" id="_isInstanced">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isInstanced">#</a>
+		<code><a href="source-class-Wei.Wei.html#631-640" title="Go to source code">isInstanced</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the object is instanced</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the object is instanced</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The name of object</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="newInstance" id="_newInstance">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Base.html">Wei\Base</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_newInstance">#</a>
+		<code><a href="source-class-Wei.Wei.html#642-654" title="Go to source code">newInstance</a>( <span>string <var>$name</var></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$providers</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Initialize a new instance of object, with the specified name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Initialize a new instance of object, with the specified name</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The name of the object</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options The option properties for object</dd>
+					<dt><var>$providers</var></dt>
+					<dd><code>array</code><br>$providers The dependent configuration</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Base.html">Wei\Base</a></code></code><br>The instanced object<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="set" id="_set">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_set">#</a>
+		<code><a href="source-class-Wei.Wei.html#656-667" title="Go to source code">set</a>( <span>string <var>$name</var></span>, <span><code><a href="class-Wei.Base.html">Wei\Base</a></code> <var>$object</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Add a object to service container</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Add a object to service container</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The name of object</dd>
+					<dt><var>$object</var></dt>
+					<dd><code><code><a href="class-Wei.Base.html">Wei\Base</a></code></code><br>$object The service object</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="remove" id="_remove">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_remove">#</a>
+		<code><a href="source-class-Wei.Wei.html#669-685" title="Go to source code">remove</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Remove the service by the specified name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Remove the service by the specified name</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The name of service</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getClass" id="_getClass">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getClass">#</a>
+		<code><a href="source-class-Wei.Wei.html#687-703" title="Go to source code">getClass</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get the object class by the given name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the object class by the given name</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The name of service</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="has" id="_has">
+
+		<td class="attributes"><code>
+			 public 
+			string|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_has">#</a>
+		<code><a href="source-class-Wei.Wei.html#705-716" title="Go to source code">has</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the service exists by the specified name, if the service exists,
+returns the full class name, else return false</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the service exists by the specified name, if the service exists,
+returns the full class name, else return false</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The name of service</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string|false</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setDebug" id="_setDebug">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setDebug">#</a>
+		<code><a href="source-class-Wei.Wei.html#718-728" title="Go to source code">setDebug</a>( <span>mixed <var>$bool</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set debug flag</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set debug flag</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$bool</var></dt>
+					<dd><code>mixed</code><br>$bool</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isDebug" id="_isDebug">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isDebug">#</a>
+		<code><a href="source-class-Wei.Wei.html#730-738" title="Go to source code">isDebug</a>( )</code>
+
+		<div class="description short">
+			
+<p>Whether in debug mode or not</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Whether in debug mode or not</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setAutoload" id="_setAutoload">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setAutoload">#</a>
+		<code><a href="source-class-Wei.Wei.html#740-756" title="Go to source code">setAutoload</a>( <span>boolean <var>$enable</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Whether enable autoload or not</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Whether enable autoload or not</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$enable</var></dt>
+					<dd><code>boolean</code><br>$enable</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setAutoloadMap" id="_setAutoloadMap">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setAutoloadMap">#</a>
+		<code><a href="source-class-Wei.Wei.html#758-776" title="Go to source code">setAutoloadMap</a>( <span>array <var>$map</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set autoload directories for autoload method</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set autoload directories for autoload method</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$map</var></dt>
+					<dd><code>array</code><br>$map</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setInis" id="_setInis">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setInis">#</a>
+		<code><a href="source-class-Wei.Wei.html#778-791" title="Go to source code">setInis</a>( <span>array <var>$inis</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets the value of PHP configuration options</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets the value of PHP configuration options</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$inis</var></dt>
+					<dd><code>array</code><br>$inis</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setAliases" id="_setAliases">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setAliases">#</a>
+		<code><a href="source-class-Wei.Wei.html#793-803" title="Go to source code">setAliases</a>( <span>array <var>$aliases</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Merge service aliases</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Merge service aliases</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$aliases</var></dt>
+					<dd><code>array</code><br>$aliases</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setAlias" id="_setAlias">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setAlias">#</a>
+		<code><a href="source-class-Wei.Wei.html#805-816" title="Go to source code">setAlias</a>( <span>string <var>$name</var></span>, <span>string <var>$class</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set service alias</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set service alias</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The name of service</dd>
+					<dt><var>$class</var></dt>
+					<dd><code>string</code><br>$class The class that the service reference to</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="import" id="_import">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_import">#</a>
+		<code><a href="source-class-Wei.Wei.html#818-846" title="Go to source code">import</a>( <span>string <var>$dir</var></span>, <span>string <var>$namespace</var></span>, <span>null <var>$format</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$autoload</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Import classes in the specified directory as services</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Import classes in the specified directory as services</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dir</var></dt>
+					<dd><code>string</code><br>$dir The directory to search class</dd>
+					<dt><var>$namespace</var></dt>
+					<dd><code>string</code><br>$namespace The prefix namespace of the class</dd>
+					<dt><var>$format</var></dt>
+					<dd><code>null</code><br>$format The service name format, eg 'is%s'</dd>
+					<dt><var>$autoload</var></dt>
+					<dd><code>boolean</code><br>$autoload Whether add namespace and directory to <code>autoloadMap</code> or nor</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When the first parameter is not a directory<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setImport" id="_setImport">
+
+		<td class="attributes"><code>
+			 protected 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setImport">#</a>
+		<code><a href="source-class-Wei.Wei.html#848-866" title="Go to source code">setImport</a>( <span>array <var>$import</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Set import services</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set import services</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$import</var></dt>
+					<dd><code>array</code><br>$import</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setProviders" id="_setProviders">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setProviders">#</a>
+		<code><a href="source-class-Wei.Wei.html#868-876" title="Go to source code">setProviders</a>( <span>array <var>$providers</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Merge the dependence map</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Merge the dependence map</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$providers</var></dt>
+					<dd><code>array</code><br>$providers</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setPreload" id="_setPreload">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setPreload">#</a>
+		<code><a href="source-class-Wei.Wei.html#878-889" title="Go to source code">setPreload</a>( <span>array <var>$preload</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Instance preload services</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Instance preload services</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$preload</var></dt>
+					<dd><code>array</code><br>$preload</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Wei.Base.html#methods">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#___call">__call()</a>, 
+			<a href="class-Wei.Base.html#___get">__get()</a>, 
+			<a href="class-Wei.Base.html#_getOption">getOption()</a>, 
+			<a href="class-Wei.Base.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+	<table class="summary" id="methods">
+	<caption>Magic methods summary</caption>
+	<tr data-order="cache" id="m_cache">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_cache">#</a>
+		<code><a href="source-class-Wei.Wei.html#23" title="Go to source code">cache</a>( <span>mixed <var>$key</var> = </span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve or store an item by cache</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve or store an item by cache</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>mixed</code><br>$expire</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="arrayCache" id="m_arrayCache">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_arrayCache">#</a>
+		<code><a href="source-class-Wei.Wei.html#25" title="Go to source code">arrayCache</a>( <span>mixed <var>$key</var> = </span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve or store an item by array cache</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve or store an item by array cache</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>mixed</code><br>$expire</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="apc" id="m_apc">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_apc">#</a>
+		<code><a href="source-class-Wei.Wei.html#27" title="Go to source code">apc</a>( <span>mixed <var>$key</var> = </span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve or store an item</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve or store an item</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>mixed</code><br>$expire</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="dbCache" id="m_dbCache">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_dbCache">#</a>
+		<code><a href="source-class-Wei.Wei.html#29" title="Go to source code">dbCache</a>( <span>mixed <var>$key</var> = </span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve or store an item by database cache</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve or store an item by database cache</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>mixed</code><br>$expire</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="fileCache" id="m_fileCache">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_fileCache">#</a>
+		<code><a href="source-class-Wei.Wei.html#31" title="Go to source code">fileCache</a>( <span>mixed <var>$key</var> = </span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve or store an item by file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve or store an item by file</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>mixed</code><br>$expire</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="memcache" id="m_memcache">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_memcache">#</a>
+		<code><a href="source-class-Wei.Wei.html#33" title="Go to source code">memcache</a>( <span>mixed <var>$key</var> = </span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve or store an item by Memcache</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve or store an item by Memcache</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>mixed</code><br>$expire</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="memcached" id="m_memcached">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_memcached">#</a>
+		<code><a href="source-class-Wei.Wei.html#35" title="Go to source code">memcached</a>( <span>mixed <var>$key</var> = </span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve or store an item by Memcached</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve or store an item by Memcached</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>mixed</code><br>$expire</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="mongoCache" id="m_mongoCache">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_mongoCache">#</a>
+		<code><a href="source-class-Wei.Wei.html#37" title="Go to source code">mongoCache</a>( <span>mixed <var>$key</var> = </span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve or store an item by MongoDB</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve or store an item by MongoDB</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>mixed</code><br>$expire</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="couchbase" id="m_couchbase">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_couchbase">#</a>
+		<code><a href="source-class-Wei.Wei.html#39" title="Go to source code">couchbase</a>( <span>mixed <var>$key</var> = </span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve or store an item by Couchbase</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve or store an item by Couchbase</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>mixed</code><br>$expire</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="redis" id="m_redis">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_redis">#</a>
+		<code><a href="source-class-Wei.Wei.html#41" title="Go to source code">redis</a>( <span>mixed <var>$key</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve or store an item by Redis</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve or store an item by Redis</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>mixed</code><br>$expire</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="bicache" id="m_bicache">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_bicache">#</a>
+		<code><a href="source-class-Wei.Wei.html#43-45" title="Go to source code">bicache</a>( <span>mixed <var>$key</var> = </span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve or store an item by two-level cache Database</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve or store an item by two-level cache Database</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>mixed</code><br>$expire</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="db" id="m_db">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Db.QueryBuilder.html">Wei\Db\QueryBuilder</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_db">#</a>
+		<code><a href="source-class-Wei.Wei.html#47" title="Go to source code">db</a>( <span>mixed <var>$table</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Create a new instance of a SQL query builder with specified table name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a new instance of a SQL query builder with specified table name</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>mixed</code><br>$table</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Db.QueryBuilder.html">Wei\Db\QueryBuilder</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="call" id="m_call">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Call.html">Wei\Call</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_call">#</a>
+		<code><a href="source-class-Wei.Wei.html#50-52" title="Go to source code">call</a>( <span>array <var>$options</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Create a new call object and execute HTTP Request</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a new call object and execute HTTP Request</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Call.html">Wei\Call</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="request" id="m_request">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_request">#</a>
+		<code><a href="source-class-Wei.Wei.html#54" title="Go to source code">request</a>( <span>mixed <var>$name</var> = </span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns a stringify request parameter value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a stringify request parameter value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>mixed</code><br>$name</dd>
+					<dt><var>$default</var></dt>
+					<dd><code>mixed</code><br>$default</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="cookie" id="m_cookie">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_cookie">#</a>
+		<code><a href="source-class-Wei.Wei.html#56" title="Go to source code">cookie</a>( <span>mixed <var>$key</var> = </span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Get or set cookie</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get or set cookie</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>mixed</code><br>$options</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="session" id="m_session">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_session">#</a>
+		<code><a href="source-class-Wei.Wei.html#58" title="Go to source code">session</a>( <span>mixed <var>$name</var> = </span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns a stringify session parameter value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a stringify session parameter value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>mixed</code><br>$name</dd>
+					<dt><var>$default</var></dt>
+					<dd><code>mixed</code><br>$default</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="ua" id="m_ua">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_ua">#</a>
+		<code><a href="source-class-Wei.Wei.html#60" title="Go to source code">ua</a>( )</code>
+
+		<div class="description short">
+			
+<p>Check if in the specified browser, OS or device</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if in the specified browser, OS or device</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="upload" id="m_upload">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_upload">#</a>
+		<code><a href="source-class-Wei.Wei.html#62-64" title="Go to source code">upload</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Upload a file HTTP Response</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Upload a file HTTP Response</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="response" id="m_response">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Response.html">Wei\Response</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_response">#</a>
+		<code><a href="source-class-Wei.Wei.html#66" title="Go to source code">response</a>( <span>mixed <var>$content</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$status</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Send response header and content</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Send response header and content</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$content</var></dt>
+					<dd><code>mixed</code><br>$content</dd>
+					<dt><var>$status</var></dt>
+					<dd><code>mixed</code><br>$status</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Response.html">Wei\Response</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="json" id="m_json">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Json.html">Wei\Json</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_json">#</a>
+		<code><a href="source-class-Wei.Wei.html#68" title="Go to source code">json</a>( <span>mixed <var>$message</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$code</var> = <span class="php-num">1</span></span>, <span>array <var>$append</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed <var>$jsonp</var> = <span class="php-keyword1">false</span>) Send JSON(P</span> )</code>
+
+		<div class="description short">
+			
+<p>response</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>response</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$message</var></dt>
+					<dd><code>mixed</code><br>$message</dd>
+					<dt><var>$code</var></dt>
+					<dd><code>mixed</code><br>$code</dd>
+					<dt><var>$append</var></dt>
+					<dd><code>array</code><br>$append</dd>
+					<dt><var>$jsonp</var></dt>
+					<dd><code>mixed</code><br>$jsonp</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Json.html">Wei\Json</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="redirect" id="m_redirect">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Redirect.html">Wei\Redirect</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_redirect">#</a>
+		<code><a href="source-class-Wei.Wei.html#70-72" title="Go to source code">redirect</a>( <span>mixed <var>$url</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Send a redirect response View</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Send a redirect response View</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>mixed</code><br>$url</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Redirect.html">Wei\Redirect</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="view" id="m_view">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_view">#</a>
+		<code><a href="source-class-Wei.Wei.html#74" title="Go to source code">view</a>( <span>mixed <var>$name</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$vars</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Returns view object or render a PHP template</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns view object or render a PHP template</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>mixed</code><br>$name</dd>
+					<dt><var>$vars</var></dt>
+					<dd><code>mixed</code><br>$vars</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="asset" id="m_asset">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_asset">#</a>
+		<code><a href="source-class-Wei.Wei.html#76" title="Go to source code">asset</a>( <span>mixed <var>$file</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the asset URL by specified file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the asset URL by specified file</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$file</var></dt>
+					<dd><code>mixed</code><br>$file</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="escape" id="m_escape">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_escape">#</a>
+		<code><a href="source-class-Wei.Wei.html#78-80" title="Go to source code">escape</a>( <span>mixed <var>$string</var> = </span>, <span>mixed <var>$type</var> = <span class="php-quote">'html'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Escapes a string by specified type for secure output Application</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Escapes a string by specified type for secure output Application</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$string</var></dt>
+					<dd><code>mixed</code><br>$string</dd>
+					<dt><var>$type</var></dt>
+					<dd><code>mixed</code><br>$type</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="weChatApp" id="m_weChatApp">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.WeChatApp.html">Wei\WeChatApp</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_weChatApp">#</a>
+		<code><a href="source-class-Wei.Wei.html#82" title="Go to source code">weChatApp</a>( )</code>
+
+		<div class="description short">
+			
+<p>Start up WeChat application and output the matched rule message</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Start up WeChat application and output the matched rule message</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.WeChatApp.html">Wei\WeChatApp</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="app" id="m_app">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.App.html">Wei\App</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_app">#</a>
+		<code><a href="source-class-Wei.Wei.html#84" title="Go to source code">app</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Startup application</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Startup application</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.App.html">Wei\App</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="router" id="m_router">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Router.html">Wei\Router</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_router">#</a>
+		<code><a href="source-class-Wei.Wei.html#86" title="Go to source code">router</a>( <span>mixed <var>$pathInfo</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$method</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Run the application</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Run the application</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$pathInfo</var></dt>
+					<dd><code>mixed</code><br>$pathInfo</dd>
+					<dt><var>$method</var></dt>
+					<dd><code>mixed</code><br>$method</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Router.html">Wei\Router</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="url" id="m_url">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_url">#</a>
+		<code><a href="source-class-Wei.Wei.html#88-90" title="Go to source code">url</a>( <span>mixed <var>$uri</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Build URL by specified uri and parameters Other</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Build URL by specified uri and parameters Other</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$uri</var></dt>
+					<dd><code>mixed</code><br>$uri</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="env" id="m_env">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_env">#</a>
+		<code><a href="source-class-Wei.Wei.html#94" title="Go to source code">env</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the environment name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the environment name</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="error" id="m_error">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Error.html">Wei\Error</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_error">#</a>
+		<code><a href="source-class-Wei.Wei.html#96" title="Go to source code">error</a>( <span>mixed <var>$fn</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Attach a handler to exception error</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Attach a handler to exception error</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$fn</var></dt>
+					<dd><code>mixed</code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Error.html">Wei\Error</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="gravatar" id="m_gravatar">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_gravatar">#</a>
+		<code><a href="source-class-Wei.Wei.html#98" title="Go to source code">gravatar</a>( <span>mixed <var>$email</var> = </span>, <span>mixed <var>$size</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$rating</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Generates a Gravatar URL for a specified email address</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Generates a Gravatar URL for a specified email address</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$email</var></dt>
+					<dd><code>mixed</code><br>$email</dd>
+					<dt><var>$size</var></dt>
+					<dd><code>mixed</code><br>$size</dd>
+					<dt><var>$default</var></dt>
+					<dd><code>mixed</code><br>$default</dd>
+					<dt><var>$rating</var></dt>
+					<dd><code>mixed</code><br>$rating</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="logger" id="m_logger">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_logger">#</a>
+		<code><a href="source-class-Wei.Wei.html#100" title="Go to source code">logger</a>( <span>mixed <var>$level</var> = </span>, <span>mixed <var>$message</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Logs with an arbitrary level</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Logs with an arbitrary level</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$level</var></dt>
+					<dd><code>mixed</code><br>$level</dd>
+					<dt><var>$message</var></dt>
+					<dd><code>mixed</code><br>$message</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="pinyin" id="m_pinyin">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_pinyin">#</a>
+		<code><a href="source-class-Wei.Wei.html#103" title="Go to source code">pinyin</a>( <span>mixed <var>$word</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Converts Chinese words to phonetic alphabets</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Converts Chinese words to phonetic alphabets</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$word</var></dt>
+					<dd><code>mixed</code><br>$word</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="uuid" id="m_uuid">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_uuid">#</a>
+		<code><a href="source-class-Wei.Wei.html#105" title="Go to source code">uuid</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="t" id="m_t">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_t">#</a>
+		<code><a href="source-class-Wei.Wei.html#107-109" title="Go to source code">t</a>( <span>mixed <var>$message</var> = </span>, <span>array <var>$parameters</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Translate the message Third Party</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Translate the message Third Party</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$message</var></dt>
+					<dd><code>mixed</code><br>$message</dd>
+					<dt><var>$parameters</var></dt>
+					<dd><code>array</code><br>$parameters</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="monolog" id="m_monolog">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_monolog">#</a>
+		<code><a href="source-class-Wei.Wei.html#111-113" title="Go to source code">monolog</a>( <span>mixed <var>$level</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$message</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Get monolog logger object or add a log record Validation</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get monolog logger object or add a log record Validation</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$level</var></dt>
+					<dd><code>mixed</code><br>$level</dd>
+					<dt><var>$message</var></dt>
+					<dd><code>mixed</code><br>$message</dd>
+					<dt><var>$context</var></dt>
+					<dd><code>array</code><br>$context</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="validate" id="m_validate">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Validate.html">Wei\Validate</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_validate">#</a>
+		<code><a href="source-class-Wei.Wei.html#114-116" title="Go to source code">validate</a>( <span>array <var>$option</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Create a new validator and validate by specified options Data type and
+composition</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a new validator and validate by specified options Data type and
+composition</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$option</var></dt>
+					<dd><code>array</code><br>$option</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Validate.html">Wei\Validate</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isAlnum" id="m_isAlnum">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isAlnum">#</a>
+		<code><a href="source-class-Wei.Wei.html#118" title="Go to source code">isAlnum</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isAlpha" id="m_isAlpha">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isAlpha">#</a>
+		<code><a href="source-class-Wei.Wei.html#120" title="Go to source code">isAlpha</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isBlank" id="m_isBlank">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isBlank">#</a>
+		<code><a href="source-class-Wei.Wei.html#122" title="Go to source code">isBlank</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is blank</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is blank</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isDecimal" id="m_isDecimal">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isDecimal">#</a>
+		<code><a href="source-class-Wei.Wei.html#124" title="Go to source code">isDecimal</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is decimal</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is decimal</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isDigit" id="m_isDigit">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isDigit">#</a>
+		<code><a href="source-class-Wei.Wei.html#126" title="Go to source code">isDigit</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isDivisibleBy" id="m_isDivisibleBy">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isDivisibleBy">#</a>
+		<code><a href="source-class-Wei.Wei.html#128" title="Go to source code">isDivisibleBy</a>( <span>mixed <var>$input</var> = </span>, <span>mixed <var>$divisor</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input could be divisible by specified divisor</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input could be divisible by specified divisor</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$divisor</var></dt>
+					<dd><code>mixed</code><br>$divisor</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isDoubleByte" id="m_isDoubleByte">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isDoubleByte">#</a>
+		<code><a href="source-class-Wei.Wei.html#130" title="Go to source code">isDoubleByte</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input contains only double characters</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input contains only double characters</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPresent" id="m_isPresent">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isPresent">#</a>
+		<code><a href="source-class-Wei.Wei.html#132" title="Go to source code">isPresent</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is empty</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is empty</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isEndsWith" id="m_isEndsWith">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isEndsWith">#</a>
+		<code><a href="source-class-Wei.Wei.html#134" title="Go to source code">isEndsWith</a>( <span>mixed <var>$input</var> = </span>, <span>mixed <var>$findMe</var> = </span>, <span>mixed <var>$case</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is ends with specified string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is ends with specified string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$findMe</var></dt>
+					<dd><code>mixed</code><br>$findMe</dd>
+					<dt><var>$case</var></dt>
+					<dd><code>mixed</code><br>$case</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isIn" id="m_isIn">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isIn">#</a>
+		<code><a href="source-class-Wei.Wei.html#136" title="Go to source code">isIn</a>( <span>mixed <var>$input</var> = </span>, <span>array <var>$array</var> = </span>, <span>mixed <var>$strict</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is in specified array</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is in specified array</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$array</var></dt>
+					<dd><code>array</code><br>$array</dd>
+					<dt><var>$strict</var></dt>
+					<dd><code>mixed</code><br>$strict</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isLowercase" id="m_isLowercase">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isLowercase">#</a>
+		<code><a href="source-class-Wei.Wei.html#138" title="Go to source code">isLowercase</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is lowercase</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is lowercase</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isLuhn" id="m_isLuhn">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isLuhn">#</a>
+		<code><a href="source-class-Wei.Wei.html#140" title="Go to source code">isLuhn</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid by the Luhn algorithm</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid by the Luhn algorithm</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isNull" id="m_isNull">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isNull">#</a>
+		<code><a href="source-class-Wei.Wei.html#142" title="Go to source code">isNull</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is null</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is null</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isNumber" id="m_isNumber">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isNumber">#</a>
+		<code><a href="source-class-Wei.Wei.html#144" title="Go to source code">isNumber</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is number</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is number</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isRegex" id="m_isRegex">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isRegex">#</a>
+		<code><a href="source-class-Wei.Wei.html#146" title="Go to source code">isRegex</a>( <span>mixed <var>$input</var> = </span>, <span>mixed <var>$pattern</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid by specified regular expression</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid by specified regular expression</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$pattern</var></dt>
+					<dd><code>mixed</code><br>$pattern</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isStartsWith" id="m_isStartsWith">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isStartsWith">#</a>
+		<code><a href="source-class-Wei.Wei.html#148" title="Go to source code">isStartsWith</a>( <span>mixed <var>$input</var> = </span>, <span>mixed <var>$findMe</var> = </span>, <span>mixed <var>$case</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is starts with specified string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is starts with specified string</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$findMe</var></dt>
+					<dd><code>mixed</code><br>$findMe</dd>
+					<dt><var>$case</var></dt>
+					<dd><code>mixed</code><br>$case</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isType" id="m_isType">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isType">#</a>
+		<code><a href="source-class-Wei.Wei.html#150" title="Go to source code">isType</a>( <span>mixed <var>$input</var> = </span>, <span>mixed <var>$type</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the type of input is equals specified type name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the type of input is equals specified type name</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$type</var></dt>
+					<dd><code>mixed</code><br>$type</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isUppercase" id="m_isUppercase">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isUppercase">#</a>
+		<code><a href="source-class-Wei.Wei.html#152-154" title="Go to source code">isUppercase</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is uppercase Length</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is uppercase Length</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isLength" id="m_isLength">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isLength">#</a>
+		<code><a href="source-class-Wei.Wei.html#156" title="Go to source code">isLength</a>( <span>mixed <var>$input</var> = </span>, <span>mixed <var>$length</var> = </span>, <span>mixed <var>$max</var> = <span class="php-keyword1">null</span>) Check <span class="php-keyword1">if</span> the length (<span class="php-keyword1">or</span> size</span> )</code>
+
+		<div class="description short">
+			
+<p>of input is equals specified length or in specified length range</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>of input is equals specified length or in specified length range</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$length</var></dt>
+					<dd><code>mixed</code><br>$length</dd>
+					<dt><var>$max</var></dt>
+					<dd><code>mixed</code><br>$max</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isCharLength" id="m_isCharLength">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isCharLength">#</a>
+		<code><a href="source-class-Wei.Wei.html#158" title="Go to source code">isCharLength</a>( <span>mixed <var>$input</var> = </span>, <span>mixed <var>$length</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the characters length of input is equals specified length</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the characters length of input is equals specified length</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$length</var></dt>
+					<dd><code>mixed</code><br>$length</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isMinLength" id="m_isMinLength">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isMinLength">#</a>
+		<code><a href="source-class-Wei.Wei.html#160" title="Go to source code">isMinLength</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>of input is greater than specified length</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>of input is greater than specified length</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isMaxLength" id="m_isMaxLength">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isMaxLength">#</a>
+		<code><a href="source-class-Wei.Wei.html#162-164" title="Go to source code">isMaxLength</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>of input is lower than specified length Comparison</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>of input is lower than specified length Comparison</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isEqualTo" id="m_isEqualTo">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isEqualTo">#</a>
+		<code><a href="source-class-Wei.Wei.html#166" title="Go to source code">isEqualTo</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>the specified value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>the specified value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isIdenticalTo" id="m_isIdenticalTo">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isIdenticalTo">#</a>
+		<code><a href="source-class-Wei.Wei.html#168" title="Go to source code">isIdenticalTo</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>the specified value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>the specified value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isGreaterThan" id="m_isGreaterThan">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isGreaterThan">#</a>
+		<code><a href="source-class-Wei.Wei.html#170" title="Go to source code">isGreaterThan</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>the specified value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>the specified value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isGreaterThanOrEqual" id="m_isGreaterThanOrEqual">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isGreaterThanOrEqual">#</a>
+		<code><a href="source-class-Wei.Wei.html#172" title="Go to source code">isGreaterThanOrEqual</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>the specified value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>the specified value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isLessThan" id="m_isLessThan">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isLessThan">#</a>
+		<code><a href="source-class-Wei.Wei.html#174" title="Go to source code">isLessThan</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>the specified value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>the specified value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isLessThanOrEqual" id="m_isLessThanOrEqual">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isLessThanOrEqual">#</a>
+		<code><a href="source-class-Wei.Wei.html#176" title="Go to source code">isLessThanOrEqual</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>the specified value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>the specified value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isBetween" id="m_isBetween">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isBetween">#</a>
+		<code><a href="source-class-Wei.Wei.html#178-180" title="Go to source code">isBetween</a>( <span>mixed <var>$input</var> = </span>, <span>mixed <var>$min</var> = </span>, <span>mixed <var>$max</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is between the specified minimum and maximum value Date
+and time</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is between the specified minimum and maximum value Date
+and time</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$min</var></dt>
+					<dd><code>mixed</code><br>$min</dd>
+					<dt><var>$max</var></dt>
+					<dd><code>mixed</code><br>$max</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isDate" id="m_isDate">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isDate">#</a>
+		<code><a href="source-class-Wei.Wei.html#182" title="Go to source code">isDate</a>( <span>mixed <var>$input</var> = </span>, <span>mixed <var>$format</var> = <span class="php-quote">'Y-m-d'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is a valid date</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is a valid date</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$format</var></dt>
+					<dd><code>mixed</code><br>$format</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isDateTime" id="m_isDateTime">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isDateTime">#</a>
+		<code><a href="source-class-Wei.Wei.html#184" title="Go to source code">isDateTime</a>( <span>mixed <var>$input</var> = </span>, <span>mixed <var>$format</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is a valid datetime</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is a valid datetime</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$format</var></dt>
+					<dd><code>mixed</code><br>$format</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isTime" id="m_isTime">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isTime">#</a>
+		<code><a href="source-class-Wei.Wei.html#186-188" title="Go to source code">isTime</a>( <span>mixed <var>$input</var> = </span>, <span>mixed <var>$format</var> = <span class="php-quote">'H:i:s'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is a valid time File and directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is a valid time File and directory</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$format</var></dt>
+					<dd><code>mixed</code><br>$format</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isDir" id="m_isDir">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isDir">#</a>
+		<code><a href="source-class-Wei.Wei.html#190" title="Go to source code">isDir</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is existing directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is existing directory</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isExists" id="m_isExists">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isExists">#</a>
+		<code><a href="source-class-Wei.Wei.html#192" title="Go to source code">isExists</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is existing file or directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is existing file or directory</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isFile" id="m_isFile">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isFile">#</a>
+		<code><a href="source-class-Wei.Wei.html#194" title="Go to source code">isFile</a>( <span>mixed <var>$input</var> = </span>, <span>array <var>$options</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid file</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isImage" id="m_isImage">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isImage">#</a>
+		<code><a href="source-class-Wei.Wei.html#196-198" title="Go to source code">isImage</a>( <span>mixed <var>$input</var> = </span>, <span>array <var>$options</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid image Network</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid image Network</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isEmail" id="m_isEmail">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isEmail">#</a>
+		<code><a href="source-class-Wei.Wei.html#200" title="Go to source code">isEmail</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid email address</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid email address</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isIp" id="m_isIp">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isIp">#</a>
+		<code><a href="source-class-Wei.Wei.html#202" title="Go to source code">isIp</a>( <span>mixed <var>$input</var> = </span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid IP address</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid IP address</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isTld" id="m_isTld">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isTld">#</a>
+		<code><a href="source-class-Wei.Wei.html#204" title="Go to source code">isTld</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is a valid top-level domain</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is a valid top-level domain</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isUrl" id="m_isUrl">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isUrl">#</a>
+		<code><a href="source-class-Wei.Wei.html#206" title="Go to source code">isUrl</a>( <span>mixed <var>$input</var> = </span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid URL address</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid URL address</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isUuid" id="m_isUuid">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isUuid">#</a>
+		<code><a href="source-class-Wei.Wei.html#208-210" title="Go to source code">isUuid</a>( )</code>
+
+		<div class="description short">
+			
+<p>Region</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Region</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isCreditCard" id="m_isCreditCard">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isCreditCard">#</a>
+		<code><a href="source-class-Wei.Wei.html#212" title="Go to source code">isCreditCard</a>( <span>mixed <var>$input</var> = </span>, <span>mixed <var>$type</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid credit card number</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid credit card number</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$type</var></dt>
+					<dd><code>mixed</code><br>$type</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPhone" id="m_isPhone">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isPhone">#</a>
+		<code><a href="source-class-Wei.Wei.html#214" title="Go to source code">isPhone</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid phone number, contains only digit, +, - and
+spaces</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid phone number, contains only digit, +, - and
+spaces</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isChinese" id="m_isChinese">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isChinese">#</a>
+		<code><a href="source-class-Wei.Wei.html#216" title="Go to source code">isChinese</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input contains only Chinese characters</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input contains only Chinese characters</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isIdCardCn" id="m_isIdCardCn">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isIdCardCn">#</a>
+		<code><a href="source-class-Wei.Wei.html#218" title="Go to source code">isIdCardCn</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid Chinese identity card</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid Chinese identity card</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isIdCardHk" id="m_isIdCardHk">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isIdCardHk">#</a>
+		<code><a href="source-class-Wei.Wei.html#220" title="Go to source code">isIdCardHk</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid Hong Kong identity card</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid Hong Kong identity card</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isIdCardMo" id="m_isIdCardMo">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isIdCardMo">#</a>
+		<code><a href="source-class-Wei.Wei.html#222" title="Go to source code">isIdCardMo</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid Macau identity card</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid Macau identity card</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isIdCardTw" id="m_isIdCardTw">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isIdCardTw">#</a>
+		<code><a href="source-class-Wei.Wei.html#224" title="Go to source code">isIdCardTw</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid Taiwan identity card</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid Taiwan identity card</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPhoneCn" id="m_isPhoneCn">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isPhoneCn">#</a>
+		<code><a href="source-class-Wei.Wei.html#226" title="Go to source code">isPhoneCn</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid Chinese phone number</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid Chinese phone number</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPlateNumberCn" id="m_isPlateNumberCn">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isPlateNumberCn">#</a>
+		<code><a href="source-class-Wei.Wei.html#228" title="Go to source code">isPlateNumberCn</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid Chinese plate number</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid Chinese plate number</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPostcodeCn" id="m_isPostcodeCn">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isPostcodeCn">#</a>
+		<code><a href="source-class-Wei.Wei.html#230" title="Go to source code">isPostcodeCn</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid Chinese postcode</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid Chinese postcode</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isQQ" id="m_isQQ">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isQQ">#</a>
+		<code><a href="source-class-Wei.Wei.html#232" title="Go to source code">isQQ</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid QQ number</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid QQ number</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isMobileCn" id="m_isMobileCn">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isMobileCn">#</a>
+		<code><a href="source-class-Wei.Wei.html#234-236" title="Go to source code">isMobileCn</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid Chinese mobile number Group</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid Chinese mobile number Group</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isAllOf" id="m_isAllOf">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isAllOf">#</a>
+		<code><a href="source-class-Wei.Wei.html#238" title="Go to source code">isAllOf</a>( <span>mixed <var>$input</var> = </span>, <span>array <var>$rules</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid by all of the rules</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid by all of the rules</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$rules</var></dt>
+					<dd><code>array</code><br>$rules</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isNoneOf" id="m_isNoneOf">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isNoneOf">#</a>
+		<code><a href="source-class-Wei.Wei.html#240" title="Go to source code">isNoneOf</a>( <span>mixed <var>$input</var> = </span>, <span>array <var>$rules</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is NOT valid by all of specified rules</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is NOT valid by all of specified rules</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$rules</var></dt>
+					<dd><code>array</code><br>$rules</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isOneOf" id="m_isOneOf">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isOneOf">#</a>
+		<code><a href="source-class-Wei.Wei.html#242" title="Go to source code">isOneOf</a>( <span>mixed <var>$input</var> = </span>, <span>array <var>$rules</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid by any of the rules</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid by any of the rules</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$rules</var></dt>
+					<dd><code>array</code><br>$rules</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isSomeOf" id="m_isSomeOf">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isSomeOf">#</a>
+		<code><a href="source-class-Wei.Wei.html#244-246" title="Go to source code">isSomeOf</a>( <span>mixed <var>$input</var> = </span>, <span>array <var>$rules</var> = </span>, <span>mixed <var>$atLeast</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid by specified number of the rules Others</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid by specified number of the rules Others</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$rules</var></dt>
+					<dd><code>array</code><br>$rules</dd>
+					<dt><var>$atLeast</var></dt>
+					<dd><code>mixed</code><br>$atLeast</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isRecordExists" id="m_isRecordExists">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isRecordExists">#</a>
+		<code><a href="source-class-Wei.Wei.html#248" title="Go to source code">isRecordExists</a>( <span>mixed <var>$input</var> = </span>, <span>mixed <var>$table</var> = </span>, <span>mixed <var>$field</var> = <span class="php-quote">'id'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is existing table record</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is existing table record</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$table</var></dt>
+					<dd><code>mixed</code><br>$table</dd>
+					<dt><var>$field</var></dt>
+					<dd><code>mixed</code><br>$field</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isAll" id="m_isAll">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isAll">#</a>
+		<code><a href="source-class-Wei.Wei.html#250" title="Go to source code">isAll</a>( <span>mixed <var>$input</var> = </span>, <span>array <var>$rules</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if all of the element in the input is valid by all specified rules</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if all of the element in the input is valid by all specified rules</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$rules</var></dt>
+					<dd><code>array</code><br>$rules</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isCallback" id="m_isCallback">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isCallback">#</a>
+		<code><a href="source-class-Wei.Wei.html#252" title="Go to source code">isCallback</a>( <span>mixed <var>$input</var> = </span>, <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var> = </span>, <span>mixed <var>$message</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid by specified callback</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid by specified callback</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+					<dt><var>$message</var></dt>
+					<dd><code>mixed</code><br>$message</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isColor" id="m_isColor">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isColor">#</a>
+		<code><a href="source-class-Wei.Wei.html#254" title="Go to source code">isColor</a>( <span>mixed <var>$input</var> = </span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input is valid Hex color</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input is valid Hex color</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPassword" id="m_isPassword">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#m_isPassword">#</a>
+		<code><a href="source-class-Wei.Wei.html#256" title="Go to source code">isPassword</a>( <span>mixed <var>$input</var> = </span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the input password is secure enough</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the input password is secure enough</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd><code>mixed</code><br>$input</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="VERSION" id="VERSION">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-Wei.Wei.html#260-263" title="Go to source code"><b>VERSION</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'0.9.7'</span></code></td>
+		<td class="description"><div>
+			<a href="#VERSION" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Version</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Version</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="configs" id="$configs">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#265-270" title="Go to source code"><var>$configs</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$configs" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The configurations for all objects</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The configurations for all objects</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="debug" id="$debug">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#272-277" title="Go to source code"><var>$debug</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">true</span></code></td>
+		<td class="description"><div>
+			<a href="#$debug" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether in debug mode or not</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether in debug mode or not</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="inis" id="$inis">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#279-286" title="Go to source code"><var>$inis</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$inis" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The PHP configuration options that will be set when the service container
+constructing</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The PHP configuration options that will be set when the service container
+constructing</p>
+
+
+					<h4>See</h4>
+					<div class="list">
+							<a
+href="http://www.php.net/manual/en/ini.php">http://www.php.net/manual/en/ini.php</a><br />
+							<a
+href="http://www.php.net/manual/en/function.ini-set.php">http://www.php.net/manual/en/function.ini-set.php</a><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="autoload" id="$autoload">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#288-293" title="Go to source code"><var>$autoload</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">true</span></code></td>
+		<td class="description"><div>
+			<a href="#$autoload" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether enable class autoload or not</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether enable class autoload or not</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="autoloadMap" id="$autoloadMap">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#295-300" title="Go to source code"><var>$autoloadMap</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$autoloadMap" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The directories for autoload</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The directories for autoload</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="aliases" id="$aliases">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#302-307" title="Go to source code"><var>$aliases</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$aliases" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The object name to class name map</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The object name to class name map</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="providers" id="$providers">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#309-314" title="Go to source code"><var>$providers</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$providers" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The service provider map</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The service provider map</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="import" id="$import">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#316-336" title="Go to source code"><var>$import</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$import" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The import configuration</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The import configuration</p>
+
+<p>Format: array( array( 'dir' =&gt; 'lib/Wei/Validator', 'namespace' =&gt;
+'Wei\Validator', 'format' =&gt; 'is%s', 'autoload' =&gt; false ), array( 'dir'
+=&gt; 'src/MyProject/Wei', 'namespace' =&gt; 'MyProject\Wei', 'format' =&gt;
+'%s', 'autoload' =&gt; true ) );</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="beforeConstruct" id="$beforeConstruct">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#338-343" title="Go to source code"><var>$beforeConstruct</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$beforeConstruct" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback executes <em>before</em> object constructed</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback executes <em>before</em> object constructed</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="afterConstruct" id="$afterConstruct">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#345-350" title="Go to source code"><var>$afterConstruct</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$afterConstruct" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback executes <em>after</em> object constructed</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback executes <em>after</em> object constructed</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="preload" id="$preload">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#352-357" title="Go to source code"><var>$preload</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$preload" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The objects that will be instanced after service container constructed</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The objects that will be instanced after service container constructed</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="objects" id="$objects">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-Wei.Base.html">Wei\Base</a>[]</code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#359-364" title="Go to source code"><var>$objects</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$objects" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>An array contains the instanced objects</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>An array contains the instanced objects</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="container" id="$container">
+		<td class="attributes"><code>
+			protected static 
+			<code><a href="class-Wei.Wei.html">Wei\Wei</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#366-371" title="Go to source code"><var>$container</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$container" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The current service container</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The current service container</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Wei.Base.html#properties">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#$wei"><var>$wei</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+	<table class="summary" id="magicProperties">
+	<caption>Magic properties summary</caption>
+	<tr data-order="cache" id="m$cache">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Cache.html">Wei\Cache</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#22" title="Go to source code"><var>$cache</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$cache" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A cache object proxy</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A cache object proxy</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="arrayCache" id="m$arrayCache">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.ArrayCache.html">Wei\ArrayCache</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#24" title="Go to source code"><var>$arrayCache</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$arrayCache" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A cache object that stored data in PHP array</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A cache object that stored data in PHP array</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="apc" id="m$apc">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Apc.html">Wei\Apc</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#26" title="Go to source code"><var>$apc</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$apc" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A cache object that stored data in PHP APC</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A cache object that stored data in PHP APC</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="dbCache" id="m$dbCache">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.DbCache.html">Wei\DbCache</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#28" title="Go to source code"><var>$dbCache</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$dbCache" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A cache object that stored data in databases</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A cache object that stored data in databases</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="fileCache" id="m$fileCache">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.FileCache.html">Wei\FileCache</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#30" title="Go to source code"><var>$fileCache</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$fileCache" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A cache object that stored data in files</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A cache object that stored data in files</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="memcache" id="m$memcache">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Memcache.html">Wei\Memcache</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#32" title="Go to source code"><var>$memcache</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$memcache" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A cache object that stored data in Memcache</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A cache object that stored data in Memcache</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="memcached" id="m$memcached">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Memcached.html">Wei\Memcached</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#34" title="Go to source code"><var>$memcached</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$memcached" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A cache object that stored data in Memcached</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A cache object that stored data in Memcached</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="mongoCache" id="m$mongoCache">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.MongoCache.html">Wei\MongoCache</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#36" title="Go to source code"><var>$mongoCache</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$mongoCache" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A cache object that stores data in MongoDB</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A cache object that stores data in MongoDB</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="couchbase" id="m$couchbase">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Couchbase.html">Wei\Couchbase</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#38" title="Go to source code"><var>$couchbase</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$couchbase" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A cache object base on Couchbase</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A cache object base on Couchbase</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="redis" id="m$redis">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Redis.html">Wei\Redis</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#40" title="Go to source code"><var>$redis</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$redis" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A cache object that stores data in Redis</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A cache object that stores data in Redis</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="bicache" id="m$bicache">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Bicache.html">Wei\Bicache</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#42" title="Go to source code"><var>$bicache</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$bicache" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A two-level cache object</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A two-level cache object</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="db" id="m$db">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Db.html">Wei\Db</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#46" title="Go to source code"><var>$db</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$db" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A database service inspired by Doctrine DBAL</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A database service inspired by Doctrine DBAL</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="call" id="m$call">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Call.html">Wei\Call</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#49" title="Go to source code"><var>$call</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$call" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A object handles HTTP request like jQuery Ajax</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A object handles HTTP request like jQuery Ajax</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="request" id="m$request">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Request.html">Wei\Request</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#53" title="Go to source code"><var>$request</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$request" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A service that handles the HTTP request data</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A service that handles the HTTP request data</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="cookie" id="m$cookie">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Cookie.html">Wei\Cookie</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#55" title="Go to source code"><var>$cookie</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$cookie" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A object that handles the HTTP request and response cookies</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A object that handles the HTTP request and response cookies</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="session" id="m$session">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Session.html">Wei\Session</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#57" title="Go to source code"><var>$session</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$session" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A object that session parameters ($_SESSION)</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A object that session parameters ($_SESSION)</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="ua" id="m$ua">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Ua.html">Wei\Ua</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#59" title="Go to source code"><var>$ua</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$ua" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A object to detect user OS, device and browser name and version</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A object to detect user OS, device and browser name and version</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="upload" id="m$upload">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Upload.html">Wei\Upload</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#61" title="Go to source code"><var>$upload</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$upload" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A object that handles the uploaded files</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A object that handles the uploaded files</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="response" id="m$response">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Response.html">Wei\Response</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#65" title="Go to source code"><var>$response</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$response" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A object that handles the HTTP response data</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A object that handles the HTTP response data</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="json" id="m$json">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Json.html">Wei\Json</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#67" title="Go to source code"><var>$json</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$json" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A object to response json</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A object to response json</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="redirect" id="m$redirect">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Redirect.html">Wei\Redirect</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#69" title="Go to source code"><var>$redirect</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$redirect" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A object that send a redirect response</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A object that send a redirect response</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="view" id="m$view">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.View.html">Wei\View</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#73" title="Go to source code"><var>$view</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$view" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A object that use to render PHP template</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A object that use to render PHP template</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="asset" id="m$asset">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Asset.html">Wei\Asset</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#75" title="Go to source code"><var>$asset</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$asset" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A service to generate assets' URL</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A service to generate assets' URL</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="escape" id="m$escape">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Escape.html">Wei\Escape</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#77" title="Go to source code"><var>$escape</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$escape" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure
+output</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure
+output</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="weChatApp" id="m$weChatApp">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.WeChatApp.html">Wei\WeChatApp</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#81" title="Go to source code"><var>$weChatApp</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$weChatApp" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A object handles WeChat(WeiXin) callback message</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A object handles WeChat(WeiXin) callback message</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="app" id="m$app">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.App.html">Wei\App</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#83" title="Go to source code"><var>$app</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$app" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The application object</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The application object</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="router" id="m$router">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Router.html">Wei\Router</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#85" title="Go to source code"><var>$router</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$router" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A object that build a simple REST application</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A object that build a simple REST application</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="url" id="m$url">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Url.html">Wei\Url</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#87" title="Go to source code"><var>$url</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$url" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A util object to build URL</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A util object to build URL</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="arr" id="m$arr">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Arr.html">Wei\Arr</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#91" title="Go to source code"><var>$arr</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$arr" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>An util object provides some useful method to manipulation array</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>An util object provides some useful method to manipulation array</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="config" id="m$config">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Config.html">Wei\Config</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#92" title="Go to source code"><var>$config</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$config" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A object to manage object configurations</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A object to manage object configurations</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="env" id="m$env">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Env.html">Wei\Env</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#93" title="Go to source code"><var>$env</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$env" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A object to detect the environment name and load configuration by environment
+name</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A object to detect the environment name and load configuration by environment
+name</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="error" id="m$error">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Error.html">Wei\Error</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#95" title="Go to source code"><var>$error</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$error" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A object that handles exception and display pretty exception message</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A object that handles exception and display pretty exception message</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="gravatar" id="m$gravatar">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Gravatar.html">Wei\Gravatar</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#97" title="Go to source code"><var>$gravatar</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$gravatar" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A object that generates a Gravatar URL for a specified email address</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A object that generates a Gravatar URL for a specified email address</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="logger" id="m$logger">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Logger.html">Wei\Logger</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#99" title="Go to source code"><var>$logger</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$logger" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A simple logger service, which is inspired by Monolog</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A simple logger service, which is inspired by Monolog</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="password" id="m$password">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Password.html">Wei\Password</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#101" title="Go to source code"><var>$password</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$password" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A wrapper class for password hashing functions</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A wrapper class for password hashing functions</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="pinyin" id="m$pinyin">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Pinyin.html">Wei\Pinyin</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#102" title="Go to source code"><var>$pinyin</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$pinyin" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>An util object that converts Chinese words to phonetic alphabets</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>An util object that converts Chinese words to phonetic alphabets</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="uuid" id="m$uuid">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Uuid.html">Wei\Uuid</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#104" title="Go to source code"><var>$uuid</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$uuid" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A util object that generates a RANDOM UUID(universally unique identifier)</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A util object that generates a RANDOM UUID(universally unique identifier)</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="t" id="m$t">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.T.html">Wei\T</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#106" title="Go to source code"><var>$t</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$t" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A translator object</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A translator object</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="monolog" id="m$monolog">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Monolog.html">Wei\Monolog</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#110" title="Go to source code"><var>$monolog</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$monolog" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A wrapper object for Monolog</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A wrapper object for Monolog</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isAlnum" id="m$isAlnum">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Alnum.html">Wei\Validator\Alnum</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#117" title="Go to source code"><var>$isAlnum</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isAlnum" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isAlpha" id="m$isAlpha">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Alpha.html">Wei\Validator\Alpha</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#119" title="Go to source code"><var>$isAlpha</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isAlpha" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isBlank" id="m$isBlank">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Blank.html">Wei\Validator\Blank</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#121" title="Go to source code"><var>$isBlank</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isBlank" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isDecimal" id="m$isDecimal">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Decimal.html">Wei\Validator\Decimal</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#123" title="Go to source code"><var>$isDecimal</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isDecimal" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isDigit" id="m$isDigit">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Digit.html">Wei\Validator\Digit</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#125" title="Go to source code"><var>$isDigit</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isDigit" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isDivisibleBy" id="m$isDivisibleBy">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.DivisibleBy.html">Wei\Validator\DivisibleBy</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#127" title="Go to source code"><var>$isDivisibleBy</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isDivisibleBy" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isDoubleByte" id="m$isDoubleByte">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.DoubleByte.html">Wei\Validator\DoubleByte</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#129" title="Go to source code"><var>$isDoubleByte</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isDoubleByte" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPresent" id="m$isPresent">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Present.html">Wei\Validator\Present</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#131" title="Go to source code"><var>$isPresent</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isPresent" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isEndsWith" id="m$isEndsWith">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.EndsWith.html">Wei\Validator\EndsWith</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#133" title="Go to source code"><var>$isEndsWith</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isEndsWith" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isIn" id="m$isIn">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.In.html">Wei\Validator\In</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#135" title="Go to source code"><var>$isIn</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isIn" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isLowercase" id="m$isLowercase">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Lowercase.html">Wei\Validator\Lowercase</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#137" title="Go to source code"><var>$isLowercase</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isLowercase" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isLuhn" id="m$isLuhn">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Luhn.html">Wei\Validator\Luhn</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#139" title="Go to source code"><var>$isLuhn</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isLuhn" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isNull" id="m$isNull">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Null.html">Wei\Validator\Null</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#141" title="Go to source code"><var>$isNull</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isNull" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isNumber" id="m$isNumber">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Number.html">Wei\Validator\Number</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#143" title="Go to source code"><var>$isNumber</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isNumber" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isRegex" id="m$isRegex">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Regex.html">Wei\Validator\Regex</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#145" title="Go to source code"><var>$isRegex</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isRegex" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isStartsWith" id="m$isStartsWith">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.StartsWith.html">Wei\Validator\StartsWith</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#147" title="Go to source code"><var>$isStartsWith</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isStartsWith" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isType" id="m$isType">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Type.html">Wei\Validator\Type</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#149" title="Go to source code"><var>$isType</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isType" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isUppercase" id="m$isUppercase">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Uppercase.html">Wei\Validator\Uppercase</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#151" title="Go to source code"><var>$isUppercase</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isUppercase" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isLength" id="m$isLength">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Length.html">Wei\Validator\Length</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#155" title="Go to source code"><var>$isLength</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isLength" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isCharLength" id="m$isCharLength">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.CharLength.html">Wei\Validator\CharLength</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#157" title="Go to source code"><var>$isCharLength</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isCharLength" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isMinLength" id="m$isMinLength">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.MinLength.html">Wei\Validator\MinLength</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#159" title="Go to source code"><var>$isMinLength</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isMinLength" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isMaxLength" id="m$isMaxLength">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.MaxLength.html">Wei\Validator\MaxLength</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#161" title="Go to source code"><var>$isMaxLength</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isMaxLength" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isEqualTo" id="m$isEqualTo">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.EqualTo.html">Wei\Validator\EqualTo</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#165" title="Go to source code"><var>$isEqualTo</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isEqualTo" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="identicalTo" id="m$identicalTo">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.IdenticalTo.html">Wei\Validator\IdenticalTo</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#167" title="Go to source code"><var>$identicalTo</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$identicalTo" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isGreaterThan" id="m$isGreaterThan">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.GreaterThan.html">Wei\Validator\GreaterThan</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#169" title="Go to source code"><var>$isGreaterThan</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isGreaterThan" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isGreaterThanOrEqual" id="m$isGreaterThanOrEqual">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.GreaterThanOrEqual.html">Wei\Validator\GreaterThanOrEqual</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#171" title="Go to source code"><var>$isGreaterThanOrEqual</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isGreaterThanOrEqual" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isLessThan" id="m$isLessThan">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.LessThan.html">Wei\Validator\LessThan</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#173" title="Go to source code"><var>$isLessThan</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isLessThan" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isLessThanOrEqual" id="m$isLessThanOrEqual">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.LessThanOrEqual.html">Wei\Validator\LessThanOrEqual</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#175" title="Go to source code"><var>$isLessThanOrEqual</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isLessThanOrEqual" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isBetween" id="m$isBetween">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Between.html">Wei\Validator\Between</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#177" title="Go to source code"><var>$isBetween</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isBetween" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isDate" id="m$isDate">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Date.html">Wei\Validator\Date</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#181" title="Go to source code"><var>$isDate</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isDate" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isDateTime" id="m$isDateTime">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.DateTime.html">Wei\Validator\DateTime</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#183" title="Go to source code"><var>$isDateTime</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isDateTime" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isTime" id="m$isTime">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Time.html">Wei\Validator\Time</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#185" title="Go to source code"><var>$isTime</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isTime" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isDir" id="m$isDir">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Dir.html">Wei\Validator\Dir</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#189" title="Go to source code"><var>$isDir</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isDir" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isExists" id="m$isExists">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Exists.html">Wei\Validator\Exists</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#191" title="Go to source code"><var>$isExists</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isExists" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isFile" id="m$isFile">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.File.html">Wei\Validator\File</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#193" title="Go to source code"><var>$isFile</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isFile" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isImage" id="m$isImage">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Image.html">Wei\Validator\Image</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#195" title="Go to source code"><var>$isImage</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isImage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isEmail" id="m$isEmail">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Email.html">Wei\Validator\Email</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#199" title="Go to source code"><var>$isEmail</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isEmail" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isIp" id="m$isIp">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Ip.html">Wei\Validator\Ip</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#201" title="Go to source code"><var>$isIp</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isIp" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isTld" id="m$isTld">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Tld.html">Wei\Validator\Tld</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#203" title="Go to source code"><var>$isTld</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isTld" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isUrl" id="m$isUrl">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Url.html">Wei\Validator\Url</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#205" title="Go to source code"><var>$isUrl</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isUrl" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isUuid" id="m$isUuid">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Uuid.html">Wei\Validator\Uuid</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#207" title="Go to source code"><var>$isUuid</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isUuid" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isCreditCard" id="m$isCreditCard">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.CreditCard.html">Wei\Validator\CreditCard</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#211" title="Go to source code"><var>$isCreditCard</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isCreditCard" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPhone" id="m$isPhone">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Phone.html">Wei\Validator\Phone</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#213" title="Go to source code"><var>$isPhone</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isPhone" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isChinese" id="m$isChinese">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Chinese.html">Wei\Validator\Chinese</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#215" title="Go to source code"><var>$isChinese</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isChinese" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isIdCardCn" id="m$isIdCardCn">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.IdCardCn.html">Wei\Validator\IdCardCn</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#217" title="Go to source code"><var>$isIdCardCn</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isIdCardCn" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isIdCardHk" id="m$isIdCardHk">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.IdCardHk.html">Wei\Validator\IdCardHk</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#219" title="Go to source code"><var>$isIdCardHk</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isIdCardHk" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isIdCardMo" id="m$isIdCardMo">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.IdCardMo.html">Wei\Validator\IdCardMo</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#221" title="Go to source code"><var>$isIdCardMo</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isIdCardMo" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isIdCardTw" id="m$isIdCardTw">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.IdCardTw.html">Wei\Validator\IdCardTw</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#223" title="Go to source code"><var>$isIdCardTw</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isIdCardTw" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPhoneCn" id="m$isPhoneCn">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.PhoneCn.html">Wei\Validator\PhoneCn</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#225" title="Go to source code"><var>$isPhoneCn</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isPhoneCn" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPlateNumberCn" id="m$isPlateNumberCn">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.PlateNumberCn.html">Wei\Validator\PlateNumberCn</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#227" title="Go to source code"><var>$isPlateNumberCn</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isPlateNumberCn" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPostcodeCn" id="m$isPostcodeCn">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.PostcodeCn.html">Wei\Validator\PostcodeCn</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#229" title="Go to source code"><var>$isPostcodeCn</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isPostcodeCn" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isQQ" id="m$isQQ">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.QQ.html">Wei\Validator\QQ</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#231" title="Go to source code"><var>$isQQ</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isQQ" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isMobileCn" id="m$isMobileCn">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.MobileCn.html">Wei\Validator\MobileCn</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#233" title="Go to source code"><var>$isMobileCn</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isMobileCn" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isAllOf" id="m$isAllOf">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.AllOf.html">Wei\Validator\AllOf</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#237" title="Go to source code"><var>$isAllOf</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isAllOf" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isNoneOf" id="m$isNoneOf">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.NoneOf.html">Wei\Validator\NoneOf</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#239" title="Go to source code"><var>$isNoneOf</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isNoneOf" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isOneOf" id="m$isOneOf">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.OneOf.html">Wei\Validator\OneOf</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#241" title="Go to source code"><var>$isOneOf</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isOneOf" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isSomeOf" id="m$isSomeOf">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.SomeOf.html">Wei\Validator\SomeOf</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#243" title="Go to source code"><var>$isSomeOf</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isSomeOf" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isRecordExists" id="m$isRecordExists">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.RecordExists.html">Wei\Validator\RecordExists</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#247" title="Go to source code"><var>$isRecordExists</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isRecordExists" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isAll" id="m$isAll">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.All.html">Wei\Validator\All</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#249" title="Go to source code"><var>$isAll</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isAll" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isCallback" id="m$isCallback">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Callback.html">Wei\Validator\Callback</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#251" title="Go to source code"><var>$isCallback</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isCallback" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isColor" id="m$isColor">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Color.html">Wei\Validator\Color</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#253" title="Go to source code"><var>$isColor</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isColor" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPassword" id="m$isPassword">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Validator.Password.html">Wei\Validator\Password</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Wei.html#255" title="Go to source code"><var>$isPassword</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$isPassword" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+</div>
+
+	<div id="footer">
+		Wei Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

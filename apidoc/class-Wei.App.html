@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Wei\App | Wei Framework</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
+						<ul>
+				<li><a href="namespace-Wei.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Wei.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Wei.Apc.html">Apc</a></li>
+				<li class="active"><a href="class-Wei.App.html">App</a></li>
+				<li><a href="class-Wei.Arr.html">Arr</a></li>
+				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
+				<li><a href="class-Wei.Asset.html">Asset</a></li>
+				<li><a href="class-Wei.Base.html">Base</a></li>
+				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
+				<li><a href="class-Wei.Cache.html">Cache</a></li>
+				<li><a href="class-Wei.Call.html">Call</a></li>
+				<li><a href="class-Wei.Config.html">Config</a></li>
+				<li><a href="class-Wei.Controller.html">Controller</a></li>
+				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
+				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
+				<li><a href="class-Wei.Db.html">Db</a></li>
+				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
+				<li><a href="class-Wei.Env.html">Env</a></li>
+				<li><a href="class-Wei.Error.html">Error</a></li>
+				<li><a href="class-Wei.Escape.html">Escape</a></li>
+				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
+				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
+				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Logger.html">Logger</a></li>
+				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
+				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
+				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
+				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
+				<li><a href="class-Wei.Password.html">Password</a></li>
+				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
+				<li><a href="class-Wei.Redis.html">Redis</a></li>
+				<li><a href="class-Wei.Request.html">Request</a></li>
+				<li><a href="class-Wei.Response.html">Response</a></li>
+				<li><a href="class-Wei.Router.html">Router</a></li>
+				<li><a href="class-Wei.Session.html">Session</a></li>
+				<li><a href="class-Wei.T.html">T</a></li>
+				<li><a href="class-Wei.Ua.html">Ua</a></li>
+				<li><a href="class-Wei.Upload.html">Upload</a></li>
+				<li><a href="class-Wei.Url.html">Url</a></li>
+				<li><a href="class-Wei.Uuid.html">Uuid</a></li>
+				<li><a href="class-Wei.Validate.html">Validate</a></li>
+				<li><a href="class-Wei.View.html">View</a></li>
+				<li><a href="class-Wei.WeChatApp.html">WeChatApp</a></li>
+				<li><a href="class-Wei.Wei.html">Wei</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Wei.html" title="Summary of Wei"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class App</h1>
+
+
+	<div class="description">
+	
+<p>A service to build simple MVC application</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Wei.Base.html"><span>Wei\Base</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Wei\App</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+		<b>Located at</b> <a href="source-class-Wei.App.html#11-303" title="Go to source code">App.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Wei.App.html#70-98" title="Go to source code">__invoke</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Startup application</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Startup application</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-RuntimeException.html">RuntimeException</a></code></code><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="dispatch" id="_dispatch">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_dispatch">#</a>
+		<code><a href="source-class-Wei.App.html#100-146" title="Go to source code">dispatch</a>( <span>string <var>$controller</var></span>, <span>string <var>$action</var> = <span class="php-quote">'index'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Load and execute the controller action</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Load and execute the controller action</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$controller</var></dt>
+					<dd><code>string</code><br>$controller The name of controller</dd>
+					<dt><var>$action</var></dt>
+					<dd><code>string</code><br>$action The name of action</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-RuntimeException.html">RuntimeException</a></code></code><br>When controller or action not found<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="handleResponse" id="_handleResponse">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Response.html">Wei\Response</a></code>|boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_handleResponse">#</a>
+		<code><a href="source-class-Wei.App.html#148-178" title="Go to source code">handleResponse</a>( <span>mixed <var>$response</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Handle the response variable returned by controller action</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Handle the response variable returned by controller action</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$response</var></dt>
+					<dd><code>mixed</code><br>$response</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Response.html">Wei\Response</a></code>|boolean</code><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getController" id="_getController">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getController">#</a>
+		<code><a href="source-class-Wei.App.html#180-191" title="Go to source code">getController</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the of name controller</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the of name controller</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The name of controller<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setController" id="_setController">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setController">#</a>
+		<code><a href="source-class-Wei.App.html#193-203" title="Go to source code">setController</a>( <span>string <var>$controller</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the name of controller</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the name of controller</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$controller</var></dt>
+					<dd><code>string</code><br>$controller The name of controller</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAction" id="_getAction">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAction">#</a>
+		<code><a href="source-class-Wei.App.html#205-216" title="Go to source code">getAction</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the name of action</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the name of action</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setAction" id="_setAction">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setAction">#</a>
+		<code><a href="source-class-Wei.App.html#218-228" title="Go to source code">setAction</a>( <span>string <var>$action</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the name of action</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the name of action</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$action</var></dt>
+					<dd><code>string</code><br>$action The name of action</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getControllerClass" id="_getControllerClass">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getControllerClass">#</a>
+		<code><a href="source-class-Wei.App.html#230-240" title="Go to source code">getControllerClass</a>( <span>string <var>$controller</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Return the controller class name (without validate if the class exists)'</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Return the controller class name (without validate if the class exists)'</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$controller</var></dt>
+					<dd><code>string</code><br>$controller The name of class</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getControllerInstance" id="_getControllerInstance">
+
+		<td class="attributes"><code>
+			 public 
+			object|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getControllerInstance">#</a>
+		<code><a href="source-class-Wei.App.html#242-267" title="Go to source code">getControllerInstance</a>( <span>string <var>$controller</var></span>, <span>string <var>$action</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get the controller instance, if not found, return false instead</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the controller instance, if not found, return false instead</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$controller</var></dt>
+					<dd><code>string</code><br>$controller The name of controller</dd>
+					<dt><var>$action</var></dt>
+					<dd><code>string</code><br>$action The name of action</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>object|false</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="preventPreviousDispatch" id="_preventPreviousDispatch">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_preventPreviousDispatch">#</a>
+		<code><a href="source-class-Wei.App.html#269-277" title="Go to source code">preventPreviousDispatch</a>( )</code>
+
+		<div class="description short">
+			
+<p>Throws a exception to prevent the previous dispatch process</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Throws a exception to prevent the previous dispatch process</p>
+
+
+
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-RuntimeException.html">RuntimeException</a></code></code><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDefaultTemplate" id="_getDefaultTemplate">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDefaultTemplate">#</a>
+		<code><a href="source-class-Wei.App.html#279-288" title="Go to source code">getDefaultTemplate</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get default template file according to the controller, action and file
+extension provided by the view engine</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get default template file according to the controller, action and file
+extension provided by the view engine</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="forward" id="_forward">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_forward">#</a>
+		<code><a href="source-class-Wei.App.html#290-302" title="Go to source code">forward</a>( <span>string <var>$action</var> = <span class="php-quote">'index'</span></span>, <span>string|null <var>$controller</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Forwards to the given controller and action</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Forwards to the given controller and action</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$action</var></dt>
+					<dd><code>string</code><br>$action The name of action</dd>
+					<dt><var>$controller</var></dt>
+					<dd><code>string|null</code><br>$controller The name of controller</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Wei.Base.html#methods">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#___call">__call()</a>, 
+			<a href="class-Wei.Base.html#___construct">__construct()</a>, 
+			<a href="class-Wei.Base.html#___get">__get()</a>, 
+			<a href="class-Wei.Base.html#_getOption">getOption()</a>, 
+			<a href="class-Wei.Base.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="FORWARD" id="FORWARD">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-Wei.App.html#23-26" title="Go to source code"><b>FORWARD</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">1302</span></code></td>
+		<td class="description"><div>
+			<a href="#FORWARD" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The exception code for forward action</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The exception code for forward action</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="namespace" id="$namespace">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.App.html#28-33" title="Go to source code"><var>$namespace</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'Controller'</span></code></td>
+		<td class="description"><div>
+			<a href="#$namespace" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The root PHP namespace of application</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The root PHP namespace of application</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="defaultController" id="$defaultController">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.App.html#35-40" title="Go to source code"><var>$defaultController</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'index'</span></code></td>
+		<td class="description"><div>
+			<a href="#$defaultController" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The default controller name</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The default controller name</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="defaultAction" id="$defaultAction">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.App.html#42-47" title="Go to source code"><var>$defaultAction</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'index'</span></code></td>
+		<td class="description"><div>
+			<a href="#$defaultAction" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The default action name</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The default action name</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="controller" id="$controller">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.App.html#49-54" title="Go to source code"><var>$controller</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$controller" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The name of controller</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The name of controller</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="action" id="$action">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.App.html#56-61" title="Go to source code"><var>$action</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$action" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The name of action</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The name of action</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="controllers" id="$controllers">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.App.html#63-68" title="Go to source code"><var>$controllers</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$controllers" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The controller instances</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The controller instances</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Wei.Base.html#properties">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#$providers"><var>$providers</var></a>, 
+			<a href="class-Wei.Base.html#$wei"><var>$wei</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+	<table class="summary" id="magicProperties">
+	<caption>Magic properties summary</caption>
+	<tr data-order="request" id="m$request">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Request.html">Wei\Request</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.App.html#15" title="Go to source code"><var>$request</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$request" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A service that handles the HTTP request data</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A service that handles the HTTP request data</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="router" id="m$router">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Router.html">Wei\Router</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.App.html#16" title="Go to source code"><var>$router</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$router" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A simple router</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A simple router</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="response" id="m$response">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Response.html">Wei\Response</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.App.html#17" title="Go to source code"><var>$response</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$response" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A service that handles the HTTP response data</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A service that handles the HTTP response data</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="view" id="m$view">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.View.html">Wei\View</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.App.html#18" title="Go to source code"><var>$view</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$view" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A service that use to render PHP template</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A service that use to render PHP template</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="logger" id="m$logger">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Logger.html">Wei\Logger</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.App.html#19" title="Go to source code"><var>$logger</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$logger" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A simple logger service, which is inspired by Monolog</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A simple logger service, which is inspired by Monolog</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+</div>
+
+	<div id="footer">
+		Wei Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

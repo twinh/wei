@@ -1,0 +1,3094 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Wei\Db\QueryBuilder | Wei Framework</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-Wei.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Wei.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Wei.Db.Collection.html">Collection</a></li>
+				<li class="active"><a href="class-Wei.Db.QueryBuilder.html">QueryBuilder</a></li>
+				<li><a href="class-Wei.Db.Record.html">Record</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Wei.Db.html" title="Summary of Wei\Db"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class QueryBuilder</h1>
+
+
+	<div class="description">
+	
+<p>A minimalist version of Doctrine DBAL QueryBuilder</p>
+
+<p>QueryBuilder class is responsible to dynamically create SQL queries.</p>
+
+<p>Important: Verify that every feature you use will work with your database
+vendor. SQL Query Builder does not attempt to validate the generated SQL at
+all.</p>
+
+<p>The query builder does no validation whatsoever if certain features even work
+with the underlying database vendor. Limit queries and joins are NOT applied to
+UPDATE and DELETE statements even if some vendors such as MySQL support it.</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+<b><span>Wei\Db\QueryBuilder</span></b>			
+			 implements 
+				<a href="class-ArrayAccess.html"><span>ArrayAccess</span></a>
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a>\<a href="namespace-Wei.Db.html">Db</a><br />
+		
+
+				<b>License:</b>
+				<a href="http://opensource.org/licenses/mit-license.php">MIT License</a><br />
+				<b>Author:</b>
+				Guilherme Blanco &lt;<a
+href="mailto:guilhermeblanco&#64;hotmail.com">guilhermeblanco&#64;<!---->hotmail.com</a>&gt;<br />
+				<b>Author:</b>
+				Benjamin Eberlei &lt;<a
+href="mailto:kontakt&#64;beberlei.de">kontakt&#64;<!---->beberlei.de</a>&gt;<br />
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+				<b>Link:</b>
+				<a href="http://www.doctrine-project.com">http://www.doctrine-project.com</a><br />
+		<b>Located at</b> <a href="source-class-Wei.Db.QueryBuilder.html#25-1197" title="Go to source code">Db/QueryBuilder.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#127-135" title="Go to source code">__construct</a>( <span><code><a href="class-Wei.Db.html">Wei\Db</a></code> <var>$db</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Initializes a new QueryBuilder</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Initializes a new QueryBuilder</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$db</var></dt>
+					<dd><code><code><a href="class-Wei.Db.html">Wei\Db</a></code></code><br>$db The database wei</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getType" id="_getType">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getType">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#137-145" title="Go to source code">getType</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the type of the currently built query</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the type of the currently built query</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDb" id="_getDb">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Db.html">Wei\Db</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDb">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#147-155" title="Go to source code">getDb</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the associated database wei for this query builder</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the associated database wei for this query builder</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Db.html">Wei\Db</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getState" id="_getState">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getState">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#157-165" title="Go to source code">getState</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the state of this query builder instance</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the state of this query builder instance</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>Either QueryBuilder::STATE_DIRTY or QueryBuilder::STATE_CLEAN<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getTable" id="_getTable">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getTable">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#167-173" title="Go to source code">getTable</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the table name in query</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the table name in query</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="execute" id="_execute">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_execute">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#175-187" title="Go to source code">execute</a>( )</code>
+
+		<div class="description short">
+			
+<p>Execute this query using the bound parameters and their types</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute this query using the bound parameters and their types</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="find" id="_find">
+
+		<td class="attributes"><code>
+			 public 
+			false|<code><a href="class-Wei.Db.Record.html">Wei\Db\Record</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_find">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#189-198" title="Go to source code">find</a>( )</code>
+
+		<div class="description short">
+			
+<p>Executes the generated SQL and returns the found record object or false</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes the generated SQL and returns the found record object or false</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>false|<code><a href="class-Wei.Db.Record.html">Wei\Db\Record</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="findAll" id="_findAll">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Db.Collection.html">Wei\Db\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_findAll">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#200-215" title="Go to source code">findAll</a>( )</code>
+
+		<div class="description short">
+			
+<p>Executes the generated SQL and returns the found record collection object or
+false</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes the generated SQL and returns the found record collection object or
+false</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Db.Collection.html">Wei\Db\Collection</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="fetch" id="_fetch">
+
+		<td class="attributes"><code>
+			 public 
+			array|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_fetch">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#217-227" title="Go to source code">fetch</a>( )</code>
+
+		<div class="description short">
+			
+<p>Executes the generated query and returns the first array result</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes the generated query and returns the first array result</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array|false</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="fetchAll" id="_fetchAll">
+
+		<td class="attributes"><code>
+			 public 
+			array|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_fetchAll">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#229-251" title="Go to source code">fetchAll</a>( )</code>
+
+		<div class="description short">
+			
+<p>Executes the generated query and returns all array results</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes the generated query and returns all array results</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array|false</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="count" id="_count">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_count">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#253-261" title="Go to source code">count</a>( )</code>
+
+		<div class="description short">
+			
+<p>Execute a COUNT query to receive the rows number</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a COUNT query to receive the rows number</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSql" id="_getSql">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSql">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#263-300" title="Go to source code">getSql</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the complete SQL string formed by the current specifications of this
+QueryBuilder</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the complete SQL string formed by the current specifications of this
+QueryBuilder</p>
+
+<p><code>`</code>php $qb = $db-&gt;createQueryBuilder() -&gt;select('id,
+group_id') -&gt;from('user');</p>
+
+<p>echo $qb-&gt;getSql(); // SELECT id, group_id FROM user u <code>`</code></p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The sql query string<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setParameter" id="_setParameter">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setParameter">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#302-327" title="Go to source code">setParameter</a>( <span>string|integer <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>string|null <var>$type</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets a query parameter for the query being constructed</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets a query parameter for the query being constructed</p>
+
+<p><code>`</code>php $qb = $db-&gt;createQueryBuilder() -&gt;select('*')
+-&gt;from('user', 'u') -&gt;where('u.id = :userId') -&gt;setParameter(':userId',
+1); <code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string|integer</code><br>$key The parameter position or name</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value The parameter value</dd>
+					<dt><var>$type</var></dt>
+					<dd><code>string|null</code><br>$type PDO::PARAM_*</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setParameters" id="_setParameters">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setParameters">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#329-353" title="Go to source code">setParameters</a>( <span>array <var>$params</var></span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Sets a collection of query parameters for the query being constructed</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets a collection of query parameters for the query being constructed</p>
+
+<p><code>`</code>php $qb = $db-&gt;createQueryBuilder() -&gt;select('*')
+-&gt;from('user', 'u') -&gt;where('u.id = :userId1 OR u.id = :userId2')
+-&gt;setParameters(array( ':userId1' =&gt; 1, ':userId2' =&gt; 2 ));
+<code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params The query parameters to set</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types The query parameters types to set</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getParameters" id="_getParameters">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getParameters">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#355-363" title="Go to source code">getParameters</a>( )</code>
+
+		<div class="description short">
+			
+<p>Gets all defined query parameters for the query being constructed.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Gets all defined query parameters for the query being constructed.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>The currently defined query parameters.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getParameter" id="_getParameter">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getParameter">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#365-374" title="Go to source code">getParameter</a>( <span>mixed <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Gets a (previously set) query parameter of the query being constructed</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Gets a (previously set) query parameter of the query being constructed</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>mixed</code><br>$key The key (index or name) of the bound parameter</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>The value of the bound parameter<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offset" id="_offset">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offset">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#376-385" title="Go to source code">offset</a>( <span>integer <var>$offset</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets the position of the first result to retrieve (the "offset")</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets the position of the first result to retrieve (the "offset")</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd><code>integer</code><br>$offset The first result to return</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="limit" id="_limit">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_limit">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#387-396" title="Go to source code">limit</a>( <span>integer <var>$limit</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets the maximum number of results to retrieve (the "limit")</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets the maximum number of results to retrieve (the "limit")</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$limit</var></dt>
+					<dd><code>integer</code><br>$limit The maximum number of results to retrieve</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="page" id="_page">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_page">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#398-417" title="Go to source code">page</a>( <span>integer <var>$page</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets the page number</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets the page number</p>
+
+<p>The "OFFSET" value is equals "($page - 1) * $this-&gt;rows" The "LIMIT" value
+is equals "$this-&gt;rows"</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$page</var></dt>
+					<dd><code>integer</code><br>$page The page number</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="add" id="_add">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_add">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#419-467" title="Go to source code">add</a>( <span>string <var>$sqlPartName</var></span>, <span>string <var>$sqlPart</var></span>, <span>boolean <var>$append</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$type</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Either appends to or replaces a single, generic query part.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Either appends to or replaces a single, generic query part.</p>
+
+<p>The available parts are: 'select', 'from', 'set', 'where', 'groupBy',
+'having', 'orderBy', 'limit' and 'offset'.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sqlPartName</var></dt>
+					<dd><code>string</code><br>$sqlPartName</dd>
+					<dt><var>$sqlPart</var></dt>
+					<dd><code>string</code><br>$sqlPart</dd>
+					<dt><var>$append</var></dt>
+					<dd><code>boolean</code><br>$append</dd>
+					<dt><var>$type</var></dt>
+					<dd><code>string</code><br>$type</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="select" id="_select">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_select">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#469-494" title="Go to source code">select</a>( <span>mixed <var>$select</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Specifies an item that is to be returned in the query result. Replaces any
+previously specified selections, if any.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Specifies an item that is to be returned in the query result. Replaces any
+previously specified selections, if any.</p>
+
+<p><code>`</code> $qb = $db-&gt;createQueryBuilder() -&gt;select('u.id', 'p.id')
+-&gt;from('users u') -&gt;leftJoin('phones p', 'u.id = p.user_id');
+<code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$select</var></dt>
+					<dd><code>mixed</code><br>$select The selection expressions.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addSelect" id="_addSelect">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addSelect">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#496-521" title="Go to source code">addSelect</a>( <span>mixed <var>$select</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds an item that is to be returned in the query result.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds an item that is to be returned in the query result.</p>
+
+<p><code>`</code> $qb = $db-&gt;createQueryBuilder() -&gt;select('u.id')
+-&gt;addSelect('p.id') -&gt;from('users u') -&gt;leftJoin('phones p', 'u.id =
+p.user_id'); <code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$select</var></dt>
+					<dd><code>mixed</code><br>$select The selection expression.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="delete" id="_delete">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_delete">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#523-546" title="Go to source code">delete</a>( <span>string <var>$table</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Turns the query being built into a bulk delete query that ranges over a
+certain table.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Turns the query being built into a bulk delete query that ranges over a
+certain table.</p>
+
+<p><code>`</code> $qb = $db-&gt;createQueryBuilder() -&gt;delete('users u')
+-&gt;where('u.id = :user_id'); -&gt;setParameter(':user_id', 1);
+<code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The table whose rows are subject to the deletion.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="update" id="_update">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_update">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#548-571" title="Go to source code">update</a>( <span>string <var>$table</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Turns the query being built into a bulk update query that ranges over a
+certain table</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Turns the query being built into a bulk update query that ranges over a
+certain table</p>
+
+<p><code>`</code> $qb = $db-&gt;createQueryBuilder() -&gt;update('users u')
+-&gt;set('u.password', md5('password')) -&gt;where('u.id = ?');
+<code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The table whose rows are subject to the update</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="from" id="_from">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_from">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#573-601" title="Go to source code">from</a>( <span>string <var>$from</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets table for FROM query</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets table for FROM query</p>
+
+<p><code>`</code>php // SELECT * FROM users $qb = $db-&gt;createQueryBuilder()
+-&gt;select('*') -&gt;from('users');</p>
+
+<p>// SELECT * FROM users u $qb = $qb-&gt;createQueryBuilder() -&gt;select('*')
+-&gt;from('users u'); <code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$from</var></dt>
+					<dd><code>string</code><br>$from The table</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="join" id="_join">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_join">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#603-623" title="Go to source code">join</a>( <span>string <var>$table</var></span>, <span>string <var>$on</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds a inner join to the query</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds a inner join to the query</p>
+
+<p><code>`</code>php $qb = $db-&gt;createQueryBuilder() -&gt;from('user')
+-&gt;join('post', 'post.user_id = user.id'); <code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The table name to join</dd>
+					<dt><var>$on</var></dt>
+					<dd><code>string</code><br>$on The condition for the join</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="innerJoin" id="_innerJoin">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_innerJoin">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#625-645" title="Go to source code">innerJoin</a>( <span>string <var>$table</var></span>, <span>string <var>$on</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds a inner join to the query</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds a inner join to the query</p>
+
+<p><code>`</code>php $qb = $db-&gt;createQueryBuilder() -&gt;from('user')
+-&gt;innerJoin('post', 'post.user_id = user.id'); <code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The table name to join</dd>
+					<dt><var>$on</var></dt>
+					<dd><code>string</code><br>$on The condition for the join</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="leftJoin" id="_leftJoin">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_leftJoin">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#647-667" title="Go to source code">leftJoin</a>( <span>string <var>$table</var></span>, <span>string <var>$on</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds a left join to the query</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds a left join to the query</p>
+
+<p><code>`</code>php $qb = $db-&gt;createQueryBuilder() -&gt;from('user')
+-&gt;leftJoin('post', 'post.user_id = user.id'); <code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The table name to join</dd>
+					<dt><var>$on</var></dt>
+					<dd><code>string</code><br>$on The condition for the join</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="rightJoin" id="_rightJoin">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_rightJoin">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#669-689" title="Go to source code">rightJoin</a>( <span>string <var>$table</var></span>, <span>string <var>$on</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds a right join to the query</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds a right join to the query</p>
+
+<p><code>`</code>php $qb = $db-&gt;createQueryBuilder() -&gt;from('user')
+-&gt;rightJoin('post', 'post.user_id = user.id'); <code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The table name to join</dd>
+					<dt><var>$on</var></dt>
+					<dd><code>string</code><br>$on The condition for the join</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="set" id="_set">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_set">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#691-707" title="Go to source code">set</a>( <span>string <var>$set</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets a new value for a field in a bulk update query.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets a new value for a field in a bulk update query.</p>
+
+<p><code>`</code> $qb = $db-&gt;createQueryBuilder() -&gt;update('users u')
+-&gt;set('u.password = ?') -&gt;where('u.id = ?'); <code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$set</var></dt>
+					<dd><code>string</code><br>$set The SET clause</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="where" id="_where">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_where">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#709-742" title="Go to source code">where</a>( <span>string <var>$conditions</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Specifies one or more restrictions to the query result. Replaces any
+previously specified restrictions, if any.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Specifies one or more restrictions to the query result. Replaces any
+previously specified restrictions, if any.</p>
+
+<p><code>`</code>php $qb = $db-&gt;createQueryBuilder() -&gt;from('user')
+-&gt;where('id = ?', '1');</p>
+
+<p>$qb = $db-&gt;createQueryBuilder() -&gt;from('user') -&gt;where(array( 'id'
+=&gt; '1', 'username' =&gt; 'twin' ));</p>
+
+<p>$qb = $db-&gt;createQueryBuilder() -&gt;from('user') -&gt;where(array( 'id'
+=&gt; array('1', '2', '3') )); <code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conditions</var></dt>
+					<dd><code>string</code><br>$conditions The WHERE conditions</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params The condition parameters</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types The parameter types</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="andWhere" id="_andWhere">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_andWhere">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#744-766" title="Go to source code">andWhere</a>( <span>string <var>$conditions</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Adds one or more restrictions to the query results, forming a logical
+conjunction with any previously specified restrictions</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds one or more restrictions to the query results, forming a logical
+conjunction with any previously specified restrictions</p>
+
+<p><code>`</code>php $qb = $db-&gt;createQueryBuilder() -&gt;select('*')
+-&gt;from('users u') -&gt;where('u.username LIKE ?') -&gt;andWhere('u.is_active
+= 1'); <code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conditions</var></dt>
+					<dd><code>string</code><br>$conditions The WHERE conditions</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params The condition parameters</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types The parameter types</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="orWhere" id="_orWhere">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_orWhere">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#768-790" title="Go to source code">orWhere</a>( <span>string <var>$conditions</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Adds one or more restrictions to the query results, forming a logical
+disjunction with any previously specified restrictions.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds one or more restrictions to the query results, forming a logical
+disjunction with any previously specified restrictions.</p>
+
+<p><code>`</code>php $qb = $db-&gt;createQueryBuilder() -&gt;select('u.name')
+-&gt;from('users u') -&gt;where('u.id = 1') -&gt;orWhere('u.id = 2');
+<code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conditions</var></dt>
+					<dd><code>string</code><br>$conditions The WHERE conditions</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params The condition parameters</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types The parameter types</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="groupBy" id="_groupBy">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_groupBy">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#792-815" title="Go to source code">groupBy</a>( <span>mixed <var>$groupBy</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Specifies a grouping over the results of the query. Replaces any previously
+specified groupings, if any.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Specifies a grouping over the results of the query. Replaces any previously
+specified groupings, if any.</p>
+
+<p><code>`</code> $qb = $db-&gt;createQueryBuilder() -&gt;select('u.name')
+-&gt;from('users u') -&gt;groupBy('u.id'); <code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$groupBy</var></dt>
+					<dd><code>mixed</code><br>$groupBy The grouping expression.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addGroupBy" id="_addGroupBy">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addGroupBy">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#818-841" title="Go to source code">addGroupBy</a>( <span>mixed <var>$groupBy</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds a grouping expression to the query.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds a grouping expression to the query.</p>
+
+<p><code>`</code> $qb = $db-&gt;createQueryBuilder() -&gt;select('u.name')
+-&gt;from('users u') -&gt;groupBy('u.lastLogin'); -&gt;addGroupBy('u.createdAt')
+<code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$groupBy</var></dt>
+					<dd><code>mixed</code><br>$groupBy The grouping expression.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="having" id="_having">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_having">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#843-857" title="Go to source code">having</a>( <span>string <var>$conditions</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Specifies a restriction over the groups of the query. Replaces any previous
+having restrictions, if any.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Specifies a restriction over the groups of the query. Replaces any previous
+having restrictions, if any.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conditions</var></dt>
+					<dd><code>string</code><br>$conditions The having conditions</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params The condition parameters</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types The parameter types</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="andHaving" id="_andHaving">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_andHaving">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#859-873" title="Go to source code">andHaving</a>( <span>string <var>$conditions</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Adds a restriction over the groups of the query, forming a logical
+conjunction with any existing having restrictions.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds a restriction over the groups of the query, forming a logical
+conjunction with any existing having restrictions.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conditions</var></dt>
+					<dd><code>string</code><br>$conditions The HAVING conditions to append</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params The condition parameters</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types The parameter types</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="orHaving" id="_orHaving">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_orHaving">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#875-889" title="Go to source code">orHaving</a>( <span>string <var>$conditions</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Adds a restriction over the groups of the query, forming a logical
+disjunction with any existing having restrictions.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds a restriction over the groups of the query, forming a logical
+disjunction with any existing having restrictions.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conditions</var></dt>
+					<dd><code>string</code><br>$conditions The HAVING conditions to add</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params The condition parameters</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types The parameter types</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="orderBy" id="_orderBy">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_orderBy">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#891-902" title="Go to source code">orderBy</a>( <span>string <var>$sort</var></span>, <span>string <var>$order</var> = <span class="php-quote">'ASC'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Specifies an ordering for the query results. Replaces any previously
+specified orderings, if any.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Specifies an ordering for the query results. Replaces any previously
+specified orderings, if any.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sort</var></dt>
+					<dd><code>string</code><br>$sort The ordering expression.</dd>
+					<dt><var>$order</var></dt>
+					<dd><code>string</code><br>$order The ordering direction.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addOrderBy" id="_addOrderBy">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addOrderBy">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#904-914" title="Go to source code">addOrderBy</a>( <span>string <var>$sort</var></span>, <span>string <var>$order</var> = <span class="php-quote">'ASC'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds an ordering to the query results.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds an ordering to the query results.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sort</var></dt>
+					<dd><code>string</code><br>$sort The ordering expression.</dd>
+					<dt><var>$order</var></dt>
+					<dd><code>string</code><br>$order The ordering direction.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="indexBy" id="_indexBy">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_indexBy">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#916-926" title="Go to source code">indexBy</a>( <span>string <var>$field</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Specifies a field to be the key of the fetched array</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Specifies a field to be the key of the fetched array</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="get" id="_get">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_get">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#928-937" title="Go to source code">get</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns a SQL query part by its name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a SQL query part by its name</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The name of SQL part</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAll" id="_getAll">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAll">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#939-947" title="Go to source code">getAll</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get all query parts.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get all query parts.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>$sqlParts<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="resetAll" id="_resetAll">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_resetAll">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#949-966" title="Go to source code">resetAll</a>( <span>array <var>$queryPartNames</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Reset all SQL parts</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Reset all SQL parts</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$queryPartNames</var></dt>
+					<dd><code>array</code><br>$queryPartNames</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="reset" id="_reset">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_reset">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#968-982" title="Go to source code">reset</a>( <span>string <var>$queryPartName</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Reset single SQL part</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Reset single SQL part</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$queryPartName</var></dt>
+					<dd><code>string</code><br>$queryPartName</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSqlForSelect" id="_getSqlForSelect">
+
+		<td class="attributes"><code>
+			 protected 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSqlForSelect">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#984-1023" title="Go to source code">getSqlForSelect</a>( <span>boolean <var>$count</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Converts this instance into an SELECT string in SQL</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Converts this instance into an SELECT string in SQL</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$count</var></dt>
+					<dd><code>boolean</code><br>$count</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSqlForCount" id="_getSqlForCount">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSqlForCount">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#1025-1031" title="Go to source code">getSqlForCount</a>( )</code>
+
+		<div class="description short">
+			
+<p>Converts this instance into an SELECT COUNT string in SQL</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Converts this instance into an SELECT COUNT string in SQL</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSqlForUpdate" id="_getSqlForUpdate">
+
+		<td class="attributes"><code>
+			 protected 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSqlForUpdate">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#1033-1045" title="Go to source code">getSqlForUpdate</a>( )</code>
+
+		<div class="description short">
+			
+<p>Converts this instance into an UPDATE string in SQL.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Converts this instance into an UPDATE string in SQL.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSqlForDelete" id="_getSqlForDelete">
+
+		<td class="attributes"><code>
+			 protected 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSqlForDelete">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#1047-1055" title="Go to source code">getSqlForDelete</a>( )</code>
+
+		<div class="description short">
+			
+<p>Converts this instance into a DELETE string in SQL.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Converts this instance into a DELETE string in SQL.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__toString" id="___toString">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___toString">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#1057-1066" title="Go to source code">__toString</a>( )</code>
+
+		<div class="description short">
+			
+<p>Gets a string representation of this QueryBuilder which corresponds to the
+final SQL query being constructed.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Gets a string representation of this QueryBuilder which corresponds to the
+final SQL query being constructed.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The string representation of this QueryBuilder.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__get" id="___get">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___get">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#1068-1079" title="Go to source code">__get</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Receives the record field value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Receives the record field value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When field not found<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__set" id="___set">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___set">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#1081-1091" title="Go to source code">__set</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set field value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set field value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetExists" id="_offsetExists">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetExists">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#1093-1103" title="Go to source code">offsetExists</a>( <span>string <var>$offset</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the offset exists</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the offset exists</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd><code>string</code><br>$offset</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-ArrayAccess.html#_offsetExists">ArrayAccess::offsetExists()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetGet" id="_offsetGet">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetGet">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#1105-1115" title="Go to source code">offsetGet</a>( <span>string <var>$offset</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get the offset value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the offset value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd><code>string</code><br>$offset</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-ArrayAccess.html#_offsetGet">ArrayAccess::offsetGet()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetSet" id="_offsetSet">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetSet">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#1117-1127" title="Go to source code">offsetSet</a>( <span>string <var>$offset</var></span>, <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the offset value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the offset value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd><code>string</code><br>$offset</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+				</dl></div>
+
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-ArrayAccess.html#_offsetSet">ArrayAccess::offsetSet()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetUnset" id="_offsetUnset">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetUnset">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#1129-1138" title="Go to source code">offsetUnset</a>( <span>string <var>$offset</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Unset the offset</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Unset the offset</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd><code>string</code><br>$offset</dd>
+				</dl></div>
+
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-ArrayAccess.html#_offsetUnset">ArrayAccess::offsetUnset()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="processCondition" id="_processCondition">
+
+		<td class="attributes"><code>
+			 protected 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_processCondition">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#1140-1178" title="Go to source code">processCondition</a>( <span>mixed <var>$conditions</var></span>, <span>mixed <var>$params</var></span>, <span>mixed <var>$types</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Generate condition string for WHERE or Having statement</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Generate condition string for WHERE or Having statement</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$conditions</var></dt>
+					<dd><code>mixed</code><br>$conditions</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>mixed</code><br>$params</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>mixed</code><br>$types</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="loadRecord" id="_loadRecord">
+
+		<td class="attributes"><code>
+			 protected 
+			false|<code><a href="class-Wei.Db.Collection.html">Wei\Db\Collection</a></code>|<code><a href="class-Wei.Db.Record.html">Wei\Db\Record</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_loadRecord">#</a>
+		<code><a href="source-class-Wei.Db.QueryBuilder.html#1180-1196" title="Go to source code">loadRecord</a>( <span>integer|string <var>$offset</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Load record by array offset</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Load record by array offset</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd><code>integer|string</code><br>$offset</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>false|<code><a href="class-Wei.Db.Collection.html">Wei\Db\Collection</a></code>|<code><a href="class-Wei.Db.Record.html">Wei\Db\Record</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="SELECT" id="SELECT">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-Wei.Db.QueryBuilder.html#46" title="Go to source code"><b>SELECT</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">0</span></code></td>
+		<td class="description"><div>
+			<a href="#SELECT" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="DELETE" id="DELETE">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-Wei.Db.QueryBuilder.html#47" title="Go to source code"><b>DELETE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">1</span></code></td>
+		<td class="description"><div>
+			<a href="#DELETE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="UPDATE" id="UPDATE">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-Wei.Db.QueryBuilder.html#48" title="Go to source code"><b>UPDATE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">2</span></code></td>
+		<td class="description"><div>
+			<a href="#UPDATE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="STATE_DIRTY" id="STATE_DIRTY">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-Wei.Db.QueryBuilder.html#50-51" title="Go to source code"><b>STATE_DIRTY</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">0</span></code></td>
+		<td class="description"><div>
+			<a href="#STATE_DIRTY" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The builder states.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The builder states.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="STATE_CLEAN" id="STATE_CLEAN">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-Wei.Db.QueryBuilder.html#52" title="Go to source code"><b>STATE_CLEAN</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">1</span></code></td>
+		<td class="description"><div>
+			<a href="#STATE_CLEAN" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="db" id="$db">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-Wei.Db.html">Wei\Db</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.QueryBuilder.html#54-59" title="Go to source code"><var>$db</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">null</span></code></td>
+		<td class="description"><div>
+			<a href="#$db" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The database wei</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The database wei</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="sqlParts" id="$sqlParts">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.QueryBuilder.html#61-75" title="Go to source code"><var>$sqlParts</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+    <span class="php-quote">'select'</span>  =&gt; <span class="php-keyword1">array</span>(),
+    <span class="php-quote">'from'</span>    =&gt; <span class="php-keyword1">null</span>,
+    <span class="php-quote">'join'</span>    =&gt; <span class="php-keyword1">array</span>(),
+    <span class="php-quote">'set'</span>     =&gt; <span class="php-keyword1">array</span>(),
+    <span class="php-quote">'where'</span>   =&gt; <span class="php-keyword1">null</span>,
+    <span class="php-quote">'groupBy'</span> =&gt; <span class="php-keyword1">array</span>(),
+    <span class="php-quote">'having'</span>  =&gt; <span class="php-keyword1">null</span>,
+    <span class="php-quote">'orderBy'</span> =&gt; <span class="php-keyword1">array</span>(),
+    <span class="php-quote">'limit'</span>   =&gt; <span class="php-keyword1">null</span>,
+    <span class="php-quote">'offset'</span>  =&gt; <span class="php-keyword1">null</span>,
+)</code></td>
+		<td class="description"><div>
+			<a href="#$sqlParts" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The array of SQL parts collected.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The array of SQL parts collected.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="indexBy" id="$indexBy">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.QueryBuilder.html#77-83" title="Go to source code"><var>$indexBy</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$indexBy" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A field to be the key of the fetched array, if not provided, return default
+number index array</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A field to be the key of the fetched array, if not provided, return default
+number index array</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="sql" id="$sql">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.QueryBuilder.html#85-88" title="Go to source code"><var>$sql</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$sql" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The complete SQL string for this query.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The complete SQL string for this query.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="table" id="$table">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.QueryBuilder.html#90-95" title="Go to source code"><var>$table</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$table" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The main table in SQL query</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The main table in SQL query</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="params" id="$params">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.QueryBuilder.html#97-100" title="Go to source code"><var>$params</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$params" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The query parameters.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The query parameters.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="paramTypes" id="$paramTypes">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.QueryBuilder.html#102-105" title="Go to source code"><var>$paramTypes</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$paramTypes" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The parameter type map of this query.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The parameter type map of this query.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="type" id="$type">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.QueryBuilder.html#107-110" title="Go to source code"><var>$type</var></a>
+		</td>
+		<td class="value"><code><code><a href="class-Wei.Db.QueryBuilder.html#SELECT">Wei\Db\QueryBuilder::<b>SELECT</b></a></code></code></td>
+		<td class="description"><div>
+			<a href="#$type" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The type of query this is. Can be select, update or delete.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The type of query this is. Can be select, update or delete.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="state" id="$state">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.QueryBuilder.html#112-115" title="Go to source code"><var>$state</var></a>
+		</td>
+		<td class="value"><code><code><a href="class-Wei.Db.QueryBuilder.html#STATE_CLEAN">Wei\Db\QueryBuilder::<b>STATE_CLEAN</b></a></code></code></td>
+		<td class="description"><div>
+			<a href="#$state" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The state of the query object. Can be dirty or clean.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The state of the query object. Can be dirty or clean.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="record" id="$record">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-Wei.Db.Record.html">Wei\Db\Record</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.QueryBuilder.html#117-120" title="Go to source code"><var>$record</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$record" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="records" id="$records">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-Wei.Db.Collection.html">Wei\Db\Collection</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.QueryBuilder.html#122-125" title="Go to source code"><var>$records</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$records" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Wei Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

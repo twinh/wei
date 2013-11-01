@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Wei\Logger | Wei Framework</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
+						<ul>
+				<li><a href="namespace-Wei.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Wei.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Wei.Apc.html">Apc</a></li>
+				<li><a href="class-Wei.App.html">App</a></li>
+				<li><a href="class-Wei.Arr.html">Arr</a></li>
+				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
+				<li><a href="class-Wei.Asset.html">Asset</a></li>
+				<li><a href="class-Wei.Base.html">Base</a></li>
+				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
+				<li><a href="class-Wei.Cache.html">Cache</a></li>
+				<li><a href="class-Wei.Call.html">Call</a></li>
+				<li><a href="class-Wei.Config.html">Config</a></li>
+				<li><a href="class-Wei.Controller.html">Controller</a></li>
+				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
+				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
+				<li><a href="class-Wei.Db.html">Db</a></li>
+				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
+				<li><a href="class-Wei.Env.html">Env</a></li>
+				<li><a href="class-Wei.Error.html">Error</a></li>
+				<li><a href="class-Wei.Escape.html">Escape</a></li>
+				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
+				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
+				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li class="active"><a href="class-Wei.Logger.html">Logger</a></li>
+				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
+				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
+				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
+				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
+				<li><a href="class-Wei.Password.html">Password</a></li>
+				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
+				<li><a href="class-Wei.Redis.html">Redis</a></li>
+				<li><a href="class-Wei.Request.html">Request</a></li>
+				<li><a href="class-Wei.Response.html">Response</a></li>
+				<li><a href="class-Wei.Router.html">Router</a></li>
+				<li><a href="class-Wei.Session.html">Session</a></li>
+				<li><a href="class-Wei.T.html">T</a></li>
+				<li><a href="class-Wei.Ua.html">Ua</a></li>
+				<li><a href="class-Wei.Upload.html">Upload</a></li>
+				<li><a href="class-Wei.Url.html">Url</a></li>
+				<li><a href="class-Wei.Uuid.html">Uuid</a></li>
+				<li><a href="class-Wei.Validate.html">Validate</a></li>
+				<li><a href="class-Wei.View.html">View</a></li>
+				<li><a href="class-Wei.WeChatApp.html">WeChatApp</a></li>
+				<li><a href="class-Wei.Wei.html">Wei</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Wei.html" title="Summary of Wei"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Logger</h1>
+
+
+	<div class="description">
+	
+<p>A simple logger service, which is base on the Monolog</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Wei.Base.html"><span>Wei\Base</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Wei\Logger</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+				<b>Link:</b>
+				<a href="https://github.com/Seldaek/monolog">https://github.com/Seldaek/monolog</a><br />
+		<b>Located at</b> <a href="source-class-Wei.Logger.html#11-414" title="Go to source code">Logger.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="log" id="_log">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_log">#</a>
+		<code><a href="source-class-Wei.Logger.html#115-135" title="Go to source code">log</a>( <span>mixed <var>$level</var></span>, <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Logs with an arbitrary level</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Logs with an arbitrary level</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$level</var></dt>
+					<dd><code>mixed</code><br>$level</dd>
+					<dt><var>$message</var></dt>
+					<dd><code>string</code><br>$message</dd>
+					<dt><var>$context</var></dt>
+					<dd><code>array</code><br>$context</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>Whether the log record has been handled<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="writeLog" id="_writeLog">
+
+		<td class="attributes"><code>
+			 protected 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_writeLog">#</a>
+		<code><a href="source-class-Wei.Logger.html#137-152" title="Go to source code">writeLog</a>( <span>string <var>$level</var></span>, <span>string <var>$message</var></span>, <span>array <var>$context</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Write the log message</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Write the log message</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$level</var></dt>
+					<dd><code>string</code><br>$level</dd>
+					<dt><var>$message</var></dt>
+					<dd><code>string</code><br>$message</dd>
+					<dt><var>$context</var></dt>
+					<dd><code>array</code><br>$context</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="formatLog" id="_formatLog">
+
+		<td class="attributes"><code>
+			 protected 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_formatLog">#</a>
+		<code><a href="source-class-Wei.Logger.html#154-179" title="Go to source code">formatLog</a>( <span>string <var>$level</var></span>, <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Format the log message</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Format the log message</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$level</var></dt>
+					<dd><code>string</code><br>$level</dd>
+					<dt><var>$message</var></dt>
+					<dd><code>string</code><br>$message</dd>
+					<dt><var>$context</var></dt>
+					<dd><code>array</code><br>$context</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Wei.Logger.html#181-192" title="Go to source code">__invoke</a>( <span>mixed <var>$level</var></span>, <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Logs with an arbitrary level</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Logs with an arbitrary level</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$level</var></dt>
+					<dd><code>mixed</code><br>$level</dd>
+					<dt><var>$message</var></dt>
+					<dd><code>string</code><br>$message</dd>
+					<dt><var>$context</var></dt>
+					<dd><code>array</code><br>$context</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="emergency" id="_emergency">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_emergency">#</a>
+		<code><a href="source-class-Wei.Logger.html#194-204" title="Go to source code">emergency</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>System is unusable.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>System is unusable.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$message</var></dt>
+					<dd><code>string</code><br>$message</dd>
+					<dt><var>$context</var></dt>
+					<dd><code>array</code><br>$context</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="alert" id="_alert">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_alert">#</a>
+		<code><a href="source-class-Wei.Logger.html#206-219" title="Go to source code">alert</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Action must be taken immediately.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Action must be taken immediately.</p>
+
+<p>Example: Entire website down, database unavailable, etc. This should trigger
+the SMS alerts and wake you up.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$message</var></dt>
+					<dd><code>string</code><br>$message</dd>
+					<dt><var>$context</var></dt>
+					<dd><code>array</code><br>$context</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="critical" id="_critical">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_critical">#</a>
+		<code><a href="source-class-Wei.Logger.html#221-233" title="Go to source code">critical</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Critical conditions.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Critical conditions.</p>
+
+<p>Example: Application component unavailable, unexpected exception.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$message</var></dt>
+					<dd><code>string</code><br>$message</dd>
+					<dt><var>$context</var></dt>
+					<dd><code>array</code><br>$context</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="error" id="_error">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_error">#</a>
+		<code><a href="source-class-Wei.Logger.html#235-246" title="Go to source code">error</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Runtime errors that do not require immediate action but should typically be
+logged and monitored.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Runtime errors that do not require immediate action but should typically be
+logged and monitored.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$message</var></dt>
+					<dd><code>string</code><br>$message</dd>
+					<dt><var>$context</var></dt>
+					<dd><code>array</code><br>$context</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="warning" id="_warning">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_warning">#</a>
+		<code><a href="source-class-Wei.Logger.html#248-261" title="Go to source code">warning</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Exceptional occurrences that are not errors.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Exceptional occurrences that are not errors.</p>
+
+<p>Example: Use of deprecated APIs, poor use of an API, undesirable things that
+are not necessarily wrong.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$message</var></dt>
+					<dd><code>string</code><br>$message</dd>
+					<dt><var>$context</var></dt>
+					<dd><code>array</code><br>$context</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="notice" id="_notice">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_notice">#</a>
+		<code><a href="source-class-Wei.Logger.html#263-273" title="Go to source code">notice</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Normal but significant events.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Normal but significant events.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$message</var></dt>
+					<dd><code>string</code><br>$message</dd>
+					<dt><var>$context</var></dt>
+					<dd><code>array</code><br>$context</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="info" id="_info">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_info">#</a>
+		<code><a href="source-class-Wei.Logger.html#275-287" title="Go to source code">info</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Interesting events.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Interesting events.</p>
+
+<p>Example: User logs in, SQL logs.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$message</var></dt>
+					<dd><code>string</code><br>$message</dd>
+					<dt><var>$context</var></dt>
+					<dd><code>array</code><br>$context</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="debug" id="_debug">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_debug">#</a>
+		<code><a href="source-class-Wei.Logger.html#289-299" title="Go to source code">debug</a>( <span>string <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Detailed debug information.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Detailed debug information.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$message</var></dt>
+					<dd><code>string</code><br>$message</dd>
+					<dt><var>$context</var></dt>
+					<dd><code>array</code><br>$context</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getFile" id="_getFile">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getFile">#</a>
+		<code><a href="source-class-Wei.Logger.html#301-345" title="Go to source code">getFile</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get log file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get log file</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-RuntimeException.html">RuntimeException</a></code></code><br>When unable to create logging directory<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setLevel" id="_setLevel">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Logger.html">Wei\Logger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setLevel">#</a>
+		<code><a href="source-class-Wei.Logger.html#347-357" title="Go to source code">setLevel</a>( <span>string <var>$level</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set default log level</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set default log level</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$level</var></dt>
+					<dd><code>string</code><br>$level</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Logger.html">Wei\Logger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setHandledLevel" id="_setHandledLevel">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Logger.html">Wei\Logger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setHandledLevel">#</a>
+		<code><a href="source-class-Wei.Logger.html#359-369" title="Go to source code">setHandledLevel</a>( <span>integer <var>$handledLevel</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set handled level</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set handled level</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$handledLevel</var></dt>
+					<dd><code>integer</code><br>$handledLevel The handled level</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Logger.html">Wei\Logger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="clean" id="_clean">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Logger.html">Wei\Logger</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_clean">#</a>
+		<code><a href="source-class-Wei.Logger.html#371-394" title="Go to source code">clean</a>( )</code>
+
+		<div class="description short">
+			
+<p>Clear up all log file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Clear up all log file</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Logger.html">Wei\Logger</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="close" id="_close">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_close">#</a>
+		<code><a href="source-class-Wei.Logger.html#396-405" title="Go to source code">close</a>( )</code>
+
+		<div class="description short">
+			
+<p>Close the file handle and reset to null</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Close the file handle and reset to null</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__destruct" id="___destruct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___destruct">#</a>
+		<code><a href="source-class-Wei.Logger.html#407-413" title="Go to source code">__destruct</a>( )</code>
+
+		<div class="description short">
+			
+<p>Destructor</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Destructor</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Wei.Base.html#methods">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#___call">__call()</a>, 
+			<a href="class-Wei.Base.html#___construct">__construct()</a>, 
+			<a href="class-Wei.Base.html#___get">__get()</a>, 
+			<a href="class-Wei.Base.html#_getOption">getOption()</a>, 
+			<a href="class-Wei.Base.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="name" id="$name">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Logger.html#19-24" title="Go to source code"><var>$name</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'wei'</span></code></td>
+		<td class="description"><div>
+			<a href="#$name" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The name of channel</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The name of channel</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="level" id="$level">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Logger.html#26-31" title="Go to source code"><var>$level</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'debug'</span></code></td>
+		<td class="description"><div>
+			<a href="#$level" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The default level for log record which level is not specified</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The default level for log record which level is not specified</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="handledLevel" id="$handledLevel">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Logger.html#33-38" title="Go to source code"><var>$handledLevel</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'debug'</span></code></td>
+		<td class="description"><div>
+			<a href="#$handledLevel" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The lowest level to be handled</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The lowest level to be handled</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="levels" id="$levels">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Logger.html#40-54" title="Go to source code"><var>$levels</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+    <span class="php-quote">'debug'</span>     =&gt; <span class="php-num">100</span>,
+    <span class="php-quote">'info'</span>      =&gt; <span class="php-num">200</span>,
+    <span class="php-quote">'notice'</span>    =&gt; <span class="php-num">250</span>,
+    <span class="php-quote">'warning'</span>   =&gt; <span class="php-num">300</span>,
+    <span class="php-quote">'error'</span>     =&gt; <span class="php-num">400</span>,
+    <span class="php-quote">'critical'</span>  =&gt; <span class="php-num">500</span>,
+    <span class="php-quote">'alert'</span>     =&gt; <span class="php-num">550</span>,
+    <span class="php-quote">'emergency'</span> =&gt; <span class="php-num">600</span>
+)</code></td>
+		<td class="description"><div>
+			<a href="#$levels" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The log levels and priorities</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The log levels and priorities</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="format" id="$format">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Logger.html#56-61" title="Go to source code"><var>$format</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">&quot;[%datetime%] %channel%.%level%: %message%\n&quot;</span></code></td>
+		<td class="description"><div>
+			<a href="#$format" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The format for log message</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The format for log message</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="dateFormat" id="$dateFormat">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Logger.html#63-68" title="Go to source code"><var>$dateFormat</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'Y-m-d H:i:s'</span></code></td>
+		<td class="description"><div>
+			<a href="#$dateFormat" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The date format for log message</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The date format for log message</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="file" id="$file">
+		<td class="attributes"><code>
+			protected  
+			null|string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Logger.html#70-76" title="Go to source code"><var>$file</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">null</span></code></td>
+		<td class="description"><div>
+			<a href="#$file" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The log file name, if specify this parameter, the "dir" and "fileFormat"
+parameters would be ignored</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The log file name, if specify this parameter, the "dir" and "fileFormat"
+parameters would be ignored</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="dir" id="$dir">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Logger.html#78-83" title="Go to source code"><var>$dir</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'log'</span></code></td>
+		<td class="description"><div>
+			<a href="#$dir" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The directory to store log files</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The directory to store log files</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="fileFormat" id="$fileFormat">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Logger.html#85-90" title="Go to source code"><var>$fileFormat</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'Ymd.\l\o\g'</span></code></td>
+		<td class="description"><div>
+			<a href="#$fileFormat" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The log file name, formatted by date</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The log file name, formatted by date</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="fileSize" id="$fileSize">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Logger.html#92-98" title="Go to source code"><var>$fileSize</var></a>
+		</td>
+		<td class="value"><code><span class="php-num">134217728</span></code></td>
+		<td class="description"><div>
+			<a href="#$fileSize" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The max file size for log file, default to 128mb, set 0 to ignore this
+property</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The max file size for log file, default to 128mb, set 0 to ignore this
+property</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="handle" id="$handle">
+		<td class="attributes"><code>
+			protected  
+			resource|null
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Logger.html#100-105" title="Go to source code"><var>$handle</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$handle" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The log file handle</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The log file handle</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="fileDetected" id="$fileDetected">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Logger.html#107-113" title="Go to source code"><var>$fileDetected</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$fileDetected" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether log file's exact path has been detected, when set dir, fileFormat or
+fileSize options, log file should be detected again</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether log file's exact path has been detected, when set dir, fileFormat or
+fileSize options, log file should be detected again</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Wei.Base.html#properties">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#$providers"><var>$providers</var></a>, 
+			<a href="class-Wei.Base.html#$wei"><var>$wei</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Wei Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,2170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Wei\Validate | Wei Framework</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
+						<ul>
+				<li><a href="namespace-Wei.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Wei.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Wei.Apc.html">Apc</a></li>
+				<li><a href="class-Wei.App.html">App</a></li>
+				<li><a href="class-Wei.Arr.html">Arr</a></li>
+				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
+				<li><a href="class-Wei.Asset.html">Asset</a></li>
+				<li><a href="class-Wei.Base.html">Base</a></li>
+				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
+				<li><a href="class-Wei.Cache.html">Cache</a></li>
+				<li><a href="class-Wei.Call.html">Call</a></li>
+				<li><a href="class-Wei.Config.html">Config</a></li>
+				<li><a href="class-Wei.Controller.html">Controller</a></li>
+				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
+				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
+				<li><a href="class-Wei.Db.html">Db</a></li>
+				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
+				<li><a href="class-Wei.Env.html">Env</a></li>
+				<li><a href="class-Wei.Error.html">Error</a></li>
+				<li><a href="class-Wei.Escape.html">Escape</a></li>
+				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
+				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
+				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Logger.html">Logger</a></li>
+				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
+				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
+				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
+				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
+				<li><a href="class-Wei.Password.html">Password</a></li>
+				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
+				<li><a href="class-Wei.Redis.html">Redis</a></li>
+				<li><a href="class-Wei.Request.html">Request</a></li>
+				<li><a href="class-Wei.Response.html">Response</a></li>
+				<li><a href="class-Wei.Router.html">Router</a></li>
+				<li><a href="class-Wei.Session.html">Session</a></li>
+				<li><a href="class-Wei.T.html">T</a></li>
+				<li><a href="class-Wei.Ua.html">Ua</a></li>
+				<li><a href="class-Wei.Upload.html">Upload</a></li>
+				<li><a href="class-Wei.Url.html">Url</a></li>
+				<li><a href="class-Wei.Uuid.html">Uuid</a></li>
+				<li class="active"><a href="class-Wei.Validate.html">Validate</a></li>
+				<li><a href="class-Wei.View.html">View</a></li>
+				<li><a href="class-Wei.WeChatApp.html">WeChatApp</a></li>
+				<li><a href="class-Wei.Wei.html">Wei</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Wei.html" title="Summary of Wei"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Validate</h1>
+
+
+	<div class="description">
+	
+<p>A validator service</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Wei.Base.html"><span>Wei\Base</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Wei\Validate</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+		<b>Located at</b> <a href="source-class-Wei.Validate.html#13-804" title="Go to source code">Validate.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Wei.Validate.html#147-160" title="Go to source code">__invoke</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Create a new validator and validate by specified options</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a new validator and validate by specified options</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="valid" id="_valid">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_valid">#</a>
+		<code><a href="source-class-Wei.Validate.html#162-277" title="Go to source code">valid</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Validate the data by the given options</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Validate the data by the given options</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options The options for validation</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>Whether pass the validation or not<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When validation rule is not array, string or instance of BaseValidator<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="prepareProps" id="_prepareProps">
+
+		<td class="attributes"><code>
+			 protected 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_prepareProps">#</a>
+		<code><a href="source-class-Wei.Validate.html#279-342" title="Go to source code">prepareProps</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Prepare name and messages property option for rule validator</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Prepare name and messages property option for rule validator</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field</dd>
+					<dt><var>$rule</var></dt>
+					<dd><code>string</code><br>$rule</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addValidRule" id="_addValidRule">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addValidRule">#</a>
+		<code><a href="source-class-Wei.Validate.html#344-355" title="Go to source code">addValidRule</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Add valid rule</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Add valid rule</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field The field name</dd>
+					<dt><var>$rule</var></dt>
+					<dd><code>string</code><br>$rule The rule name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addInvalidRule" id="_addInvalidRule">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addInvalidRule">#</a>
+		<code><a href="source-class-Wei.Validate.html#357-368" title="Go to source code">addInvalidRule</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Add invalid rule</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Add invalid rule</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field The field name</dd>
+					<dt><var>$rule</var></dt>
+					<dd><code>string</code><br>$rule The rule name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getValidFields" id="_getValidFields">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getValidFields">#</a>
+		<code><a href="source-class-Wei.Validate.html#370-378" title="Go to source code">getValidFields</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the valid fields</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the valid fields</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getInvalidFields" id="_getInvalidFields">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getInvalidFields">#</a>
+		<code><a href="source-class-Wei.Validate.html#380-388" title="Go to source code">getInvalidFields</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the invalid fields</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the invalid fields</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isFieldValid" id="_isFieldValid">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isFieldValid">#</a>
+		<code><a href="source-class-Wei.Validate.html#390-399" title="Go to source code">isFieldValid</a>( <span>string <var>$field</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if field is valid</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if field is valid</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isFieldInvalid" id="_isFieldInvalid">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isFieldInvalid">#</a>
+		<code><a href="source-class-Wei.Validate.html#401-410" title="Go to source code">isFieldInvalid</a>( <span>string <var>$field</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if field is invalid</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if field is invalid</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setRules" id="_setRules">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setRules">#</a>
+		<code><a href="source-class-Wei.Validate.html#412-422" title="Go to source code">setRules</a>( <span>array <var>$rules</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Set field rules</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set field rules</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$rules</var></dt>
+					<dd><code>array</code><br>$rules</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRules" id="_getRules">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getRules">#</a>
+		<code><a href="source-class-Wei.Validate.html#424-432" title="Go to source code">getRules</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get validator rules</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get validator rules</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getFieldRules" id="_getFieldRules">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getFieldRules">#</a>
+		<code><a href="source-class-Wei.Validate.html#434-443" title="Go to source code">getFieldRules</a>( <span>string <var>$field</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get validator rules by specified field</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get validator rules by specified field</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRuleParams" id="_getRuleParams">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getRuleParams">#</a>
+		<code><a href="source-class-Wei.Validate.html#445-455" title="Go to source code">getRuleParams</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get validation rule parameters</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get validation rule parameters</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field The validation field</dd>
+					<dt><var>$rule</var></dt>
+					<dd><code>string</code><br>$rule The validation rule</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getValidRules" id="_getValidRules">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getValidRules">#</a>
+		<code><a href="source-class-Wei.Validate.html#457-466" title="Go to source code">getValidRules</a>( <span>string <var>$field</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get valid rules by field</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get valid rules by field</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getInvalidRules" id="_getInvalidRules">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getInvalidRules">#</a>
+		<code><a href="source-class-Wei.Validate.html#468-479" title="Go to source code">getInvalidRules</a>( <span>string <var>$field</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Get invalid rules by field</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get invalid rules by field</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isValid" id="_isValid">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isValid">#</a>
+		<code><a href="source-class-Wei.Validate.html#481-489" title="Go to source code">isValid</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the validation result</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the validation result</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addRule" id="_addRule">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addRule">#</a>
+		<code><a href="source-class-Wei.Validate.html#491-501" title="Go to source code">addRule</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span>, <span>mixed <var>$parameters</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds rule for specified field</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds rule for specified field</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field The name of field</dd>
+					<dt><var>$rule</var></dt>
+					<dd><code>string</code><br>$rule The name of rule</dd>
+					<dt><var>$parameters</var></dt>
+					<dd><code>mixed</code><br>$parameters The parameters for rule</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="hasRule" id="_hasRule">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_hasRule">#</a>
+		<code><a href="source-class-Wei.Validate.html#503-513" title="Go to source code">hasRule</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns whether the validation rule exists in specified field</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns whether the validation rule exists in specified field</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field</dd>
+					<dt><var>$rule</var></dt>
+					<dd><code>string</code><br>$rule</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeRule" id="_removeRule">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeRule">#</a>
+		<code><a href="source-class-Wei.Validate.html#515-529" title="Go to source code">removeRule</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Removes the rule in field</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Removes the rule in field</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field The name of field</dd>
+					<dt><var>$rule</var></dt>
+					<dd><code>string</code><br>$rule The name of rule</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeField" id="_removeField">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeField">#</a>
+		<code><a href="source-class-Wei.Validate.html#531-544" title="Go to source code">removeField</a>( <span>string <var>$field</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Removes the validate field</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Removes the validate field</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setData" id="_setData">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setData">#</a>
+		<code><a href="source-class-Wei.Validate.html#546-563" title="Go to source code">setData</a>( <span>array|object <var>$data</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets data for validation</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets data for validation</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd><code>array|object</code><br>$data</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>when argument type is not array or object<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getData" id="_getData">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getData">#</a>
+		<code><a href="source-class-Wei.Validate.html#565-573" title="Go to source code">getData</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns validation data</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns validation data</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getFieldData" id="_getFieldData">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getFieldData">#</a>
+		<code><a href="source-class-Wei.Validate.html#575-595" title="Go to source code">getFieldData</a>( <span>string <var>$field</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns validation field data</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns validation field data</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field The name of field</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setFieldData" id="_setFieldData">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setFieldData">#</a>
+		<code><a href="source-class-Wei.Validate.html#597-612" title="Go to source code">setFieldData</a>( <span>string <var>$field</var></span>, <span>mixed <var>$data</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets data for validation field</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets data for validation field</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field The name of field</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>mixed</code><br>$data The data of field</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setMessages" id="_setMessages">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setMessages">#</a>
+		<code><a href="source-class-Wei.Validate.html#614-624" title="Go to source code">setMessages</a>( <span>array <var>$messages</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Set custom messages</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set custom messages</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$messages</var></dt>
+					<dd><code>array</code><br>$messages</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMessages" id="_getMessages">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMessages">#</a>
+		<code><a href="source-class-Wei.Validate.html#626-634" title="Go to source code">getMessages</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns custom message</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns custom message</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDetailMessages" id="_getDetailMessages">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDetailMessages">#</a>
+		<code><a href="source-class-Wei.Validate.html#636-650" title="Go to source code">getDetailMessages</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns detail invalid messages</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns detail invalid messages</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSummaryMessages" id="_getSummaryMessages">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSummaryMessages">#</a>
+		<code><a href="source-class-Wei.Validate.html#652-669" title="Go to source code">getSummaryMessages</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns summary invalid messages</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns summary invalid messages</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getJoinedMessage" id="_getJoinedMessage">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getJoinedMessage">#</a>
+		<code><a href="source-class-Wei.Validate.html#671-689" title="Go to source code">getJoinedMessage</a>( <span>string <var>$separator</var> = <span class="php-quote">&quot;\n&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns error message string connected by specified separator</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns error message string connected by specified separator</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$separator</var></dt>
+					<dd><code>string</code><br>$separator</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getFirstMessage" id="_getFirstMessage">
+
+		<td class="attributes"><code>
+			 public 
+			false|string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getFirstMessage">#</a>
+		<code><a href="source-class-Wei.Validate.html#691-702" title="Go to source code">getFirstMessage</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the first error message string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the first error message string</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>false|string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRuleValidator" id="_getRuleValidator">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Validator.BaseValidator.html">Wei\Validator\BaseValidator</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getRuleValidator">#</a>
+		<code><a href="source-class-Wei.Validate.html#704-714" title="Go to source code">getRuleValidator</a>( <span>string <var>$field</var></span>, <span>string <var>$rule</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the rule validator object</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the rule validator object</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field</dd>
+					<dt><var>$rule</var></dt>
+					<dd><code>string</code><br>$rule</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Validator.BaseValidator.html">Wei\Validator\BaseValidator</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setNames" id="_setNames">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setNames">#</a>
+		<code><a href="source-class-Wei.Validate.html#716-724" title="Go to source code">setNames</a>( <span>array <var>$names</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets field names</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets field names</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$names</var></dt>
+					<dd><code>array</code><br>$names</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getNames" id="_getNames">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getNames">#</a>
+		<code><a href="source-class-Wei.Validate.html#726-734" title="Go to source code">getNames</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns field names</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns field names</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="validateOne" id="_validateOne">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_validateOne">#</a>
+		<code><a href="source-class-Wei.Validate.html#736-775" title="Go to source code">validateOne</a>( <span>string|<code><a href="class-Wei.Validator.BaseValidator.html">Wei\Validator\BaseValidator</a></code>|integer <var>$rule</var></span>, <span>array|null <var>$input</var></span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span>, <span>null <var>&amp; $validator</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$props</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$rule</var></dt>
+					<dd><code>string|<code><a href="class-Wei.Validator.BaseValidator.html">Wei\Validator\BaseValidator</a></code>|integer</code><br>$rule</dd>
+					<dt><var>$input</var></dt>
+					<dd><code>array|null</code><br>$input</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>mixed</code><br>$options</dd>
+					<dt><var>$validator</var></dt>
+					<dd><code>null</code><br>&amp;$validator</dd>
+					<dt><var>$props</var></dt>
+					<dd><code>array</code><br>$props</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="createRuleValidator" id="_createRuleValidator">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Validator.BaseValidator.html">Wei\Validator\BaseValidator</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createRuleValidator">#</a>
+		<code><a href="source-class-Wei.Validate.html#777-803" title="Go to source code">createRuleValidator</a>( <span>string <var>$rule</var></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Create a rule validator instance by specified rule name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a rule validator instance by specified rule name</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$rule</var></dt>
+					<dd><code>string</code><br>$rule The name of rule validator</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options The property options for rule validator</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Validator.BaseValidator.html">Wei\Validator\BaseValidator</a></code></code><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When validator not found<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Wei.Base.html#methods">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#___call">__call()</a>, 
+			<a href="class-Wei.Base.html#___construct">__construct()</a>, 
+			<a href="class-Wei.Base.html#___get">__get()</a>, 
+			<a href="class-Wei.Base.html#_getOption">getOption()</a>, 
+			<a href="class-Wei.Base.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="rules" id="$rules">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#20-25" title="Go to source code"><var>$rules</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$rules" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The validation rules</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The validation rules</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="data" id="$data">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#27-32" title="Go to source code"><var>$data</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$data" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The data to be validated</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The data to be validated</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="messages" id="$messages">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#34-39" title="Go to source code"><var>$messages</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$messages" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The invalid messages</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The invalid messages</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="names" id="$names">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#41-46" title="Go to source code"><var>$names</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$names" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The names for messages</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The names for messages</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="beforeValidate" id="$beforeValidate">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#48-53" title="Go to source code"><var>$beforeValidate</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$beforeValidate" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback triggered before validation</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback triggered before validation</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="ruleValid" id="$ruleValid">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#55-60" title="Go to source code"><var>$ruleValid</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$ruleValid" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback triggered when every rule is valid</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback triggered when every rule is valid</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="ruleInvalid" id="$ruleInvalid">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#62-67" title="Go to source code"><var>$ruleInvalid</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$ruleInvalid" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback triggered when every rule is invalid</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback triggered when every rule is invalid</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="fieldValid" id="$fieldValid">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#69-74" title="Go to source code"><var>$fieldValid</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$fieldValid" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback triggered when every field is valid</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback triggered when every field is valid</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="fieldInvalid" id="$fieldInvalid">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#76-81" title="Go to source code"><var>$fieldInvalid</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$fieldInvalid" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback triggered when every field is invalid</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback triggered when every field is invalid</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="success" id="$success">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#83-88" title="Go to source code"><var>$success</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$success" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback triggered after all rules are valid</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback triggered after all rules are valid</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="failure" id="$failure">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#90-95" title="Go to source code"><var>$failure</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$failure" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback triggered when the validation is invalid</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback triggered when the validation is invalid</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="breakRule" id="$breakRule">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#97-102" title="Go to source code"><var>$breakRule</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$breakRule" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether break the validation flow when any field's rule is not valid</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether break the validation flow when any field's rule is not valid</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="breakField" id="$breakField">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#104-109" title="Go to source code"><var>$breakField</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$breakField" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether break the validation flow when any field is not valid</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether break the validation flow when any field is not valid</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="skip" id="$skip">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#111-117" title="Go to source code"><var>$skip</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$skip" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether skip the current field validation when the filed's rule is not valid,
+so every field contains one invalid rule at most</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether skip the current field validation when the filed's rule is not valid,
+so every field contains one invalid rule at most</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="validRules" id="$validRules">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#119-124" title="Go to source code"><var>$validRules</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$validRules" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The valid rules array, which use the field as key, and the rules as value</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The valid rules array, which use the field as key, and the rules as value</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="invalidRules" id="$invalidRules">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#126-131" title="Go to source code"><var>$invalidRules</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$invalidRules" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The invalid rules array, which use the field as key, and the rules as
+value</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The invalid rules array, which use the field as key, and the rules as
+value</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="result" id="$result">
+		<td class="attributes"><code>
+			protected  
+			boolean|null
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#133-138" title="Go to source code"><var>$result</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$result" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The validation result</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The validation result</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="ruleValidators" id="$ruleValidators">
+		<td class="attributes"><code>
+			protected  
+			array&lt;Validator\BaseValidator&gt;
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validate.html#140-145" title="Go to source code"><var>$ruleValidators</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$ruleValidators" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The rule validator instances</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The rule validator instances</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Wei.Base.html#properties">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#$providers"><var>$providers</var></a>, 
+			<a href="class-Wei.Base.html#$wei"><var>$wei</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Wei Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

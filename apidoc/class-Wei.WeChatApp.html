@@ -1,0 +1,2477 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Wei\WeChatApp | Wei Framework</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
+						<ul>
+				<li><a href="namespace-Wei.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Wei.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Wei.Apc.html">Apc</a></li>
+				<li><a href="class-Wei.App.html">App</a></li>
+				<li><a href="class-Wei.Arr.html">Arr</a></li>
+				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
+				<li><a href="class-Wei.Asset.html">Asset</a></li>
+				<li><a href="class-Wei.Base.html">Base</a></li>
+				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
+				<li><a href="class-Wei.Cache.html">Cache</a></li>
+				<li><a href="class-Wei.Call.html">Call</a></li>
+				<li><a href="class-Wei.Config.html">Config</a></li>
+				<li><a href="class-Wei.Controller.html">Controller</a></li>
+				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
+				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
+				<li><a href="class-Wei.Db.html">Db</a></li>
+				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
+				<li><a href="class-Wei.Env.html">Env</a></li>
+				<li><a href="class-Wei.Error.html">Error</a></li>
+				<li><a href="class-Wei.Escape.html">Escape</a></li>
+				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
+				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
+				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Logger.html">Logger</a></li>
+				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
+				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
+				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
+				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
+				<li><a href="class-Wei.Password.html">Password</a></li>
+				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
+				<li><a href="class-Wei.Redis.html">Redis</a></li>
+				<li><a href="class-Wei.Request.html">Request</a></li>
+				<li><a href="class-Wei.Response.html">Response</a></li>
+				<li><a href="class-Wei.Router.html">Router</a></li>
+				<li><a href="class-Wei.Session.html">Session</a></li>
+				<li><a href="class-Wei.T.html">T</a></li>
+				<li><a href="class-Wei.Ua.html">Ua</a></li>
+				<li><a href="class-Wei.Upload.html">Upload</a></li>
+				<li><a href="class-Wei.Url.html">Url</a></li>
+				<li><a href="class-Wei.Uuid.html">Uuid</a></li>
+				<li><a href="class-Wei.Validate.html">Validate</a></li>
+				<li><a href="class-Wei.View.html">View</a></li>
+				<li class="active"><a href="class-Wei.WeChatApp.html">WeChatApp</a></li>
+				<li><a href="class-Wei.Wei.html">Wei</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Wei.html" title="Summary of Wei"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class WeChatApp</h1>
+
+
+	<div class="description">
+	
+<p>A service handles WeChat(WeiXin) callback message</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Wei.Base.html"><span>Wei\Base</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Wei\WeChatApp</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+				<b>Link:</b>
+				<a href="http://mp.weixin.qq.com/wiki/index.php?title=%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3%E6%8C%87%E5%8D%97">http://mp.weixin.qq.com/wiki/index.php?title=%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3%E6%8C%87%E5%8D%97</a><br />
+		<b>Located at</b> <a href="source-class-Wei.WeChatApp.html#14-828" title="Go to source code">WeChatApp.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#103-122" title="Go to source code">__construct</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Constructor</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructor</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When option "wei" is not an instance of "Wei\Wei"<br />
+				</div>
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Wei.Base.html#___construct">Wei\Base::__construct()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#124-133" title="Go to source code">__invoke</a>( )</code>
+
+		<div class="description short">
+			
+<p>Start up WeChat application and output the matched rule message</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Start up WeChat application and output the matched rule message</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="run" id="_run">
+
+		<td class="attributes"><code>
+			 public 
+			string|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_run">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#135-183" title="Go to source code">run</a>( )</code>
+
+		<div class="description short">
+			
+<p>Execute the matched rule and returns the rule result</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute the matched rule and returns the rule result</p>
+
+<p>Returns false when the token is invalid or no rules matched</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string|false</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isVerifyToken" id="_isVerifyToken">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isVerifyToken">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#185-193" title="Go to source code">isVerifyToken</a>( )</code>
+
+		<div class="description short">
+			
+<p>Check if the request is verify the token string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the request is verify the token string</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="subscribe" id="_subscribe">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_subscribe">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#195-204" title="Go to source code">subscribe</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Attach a callback which triggered when user subscribed you</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Attach a callback which triggered when user subscribed you</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="unsubscribe" id="_unsubscribe">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_unsubscribe">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#206-215" title="Go to source code">unsubscribe</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Attach a callback which triggered when user unsubscribed you</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Attach a callback which triggered when user unsubscribed you</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="click" id="_click">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_click">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#217-227" title="Go to source code">click</a>( <span>string <var>$key</var></span>, <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Attach a callback which triggered when user click the custom menu</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Attach a callback which triggered when user click the custom menu</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The key of event</dd>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="is" id="_is">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_is">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#229-239" title="Go to source code">is</a>( <span>string <var>$keyword</var></span>, <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Attach a callback which triggered when user input equals to the keyword</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Attach a callback which triggered when user input equals to the keyword</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$keyword</var></dt>
+					<dd><code>string</code><br>$keyword The keyword to compare with user input</dd>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="has" id="_has">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_has">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#241-251" title="Go to source code">has</a>( <span>string <var>$keyword</var></span>, <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Attach a callback with a keyword, which triggered when user input contains
+the keyword</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Attach a callback with a keyword, which triggered when user input contains
+the keyword</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$keyword</var></dt>
+					<dd><code>string</code><br>$keyword The keyword to search in user input</dd>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="startsWith" id="_startsWith">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_startsWith">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#253-263" title="Go to source code">startsWith</a>( <span>string <var>$keyword</var></span>, <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Attach a callback with a keyword, which triggered when user input starts with
+the keyword (case insensitive)</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Attach a callback with a keyword, which triggered when user input starts with
+the keyword (case insensitive)</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$keyword</var></dt>
+					<dd><code>string</code><br>$keyword The keyword to search in user input</dd>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="match" id="_match">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_match">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#265-275" title="Go to source code">match</a>( <span>string <var>$pattern</var></span>, <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Attach a callback with a regex pattern which triggered when user input match
+the pattern</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Attach a callback with a regex pattern which triggered when user input match
+the pattern</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$pattern</var></dt>
+					<dd><code>string</code><br>$pattern The pattern to match</dd>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="receiveImage" id="_receiveImage">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_receiveImage">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#277-287" title="Go to source code">receiveImage</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Attach a callback to handle image message</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Attach a callback to handle image message</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="receiveLocation" id="_receiveLocation">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_receiveLocation">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#289-299" title="Go to source code">receiveLocation</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Attach a callback to handle location message</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Attach a callback to handle location message</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="receiveVoice" id="_receiveVoice">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_receiveVoice">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#301-311" title="Go to source code">receiveVoice</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Attach a callback to handle voice message</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Attach a callback to handle voice message</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="receiveVideo" id="_receiveVideo">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_receiveVideo">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#313-323" title="Go to source code">receiveVideo</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Attach a callback to handle video message</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Attach a callback to handle video message</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="receiveLink" id="_receiveLink">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_receiveLink">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#325-335" title="Go to source code">receiveLink</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Attach a callback to handle link message</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Attach a callback to handle link message</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="defaults" id="_defaults">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_defaults">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#337-347" title="Go to source code">defaults</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Attach a handler which executes when none of the rule handled the input</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Attach a handler which executes when none of the rule handled the input</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sendText" id="_sendText">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sendText">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#349-360" title="Go to source code">sendText</a>( <span>string <var>$content</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Generate text message for output</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Generate text message for output</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$content</var></dt>
+					<dd><code>string</code><br>$content</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sendMusic" id="_sendMusic">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sendMusic">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#362-381" title="Go to source code">sendMusic</a>( <span>string <var>$title</var></span>, <span>string <var>$description</var></span>, <span>string <var>$url</var></span>, <span>string <var>$hqUrl</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Generate music message for output</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Generate music message for output</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$title</var></dt>
+					<dd><code>string</code><br>$title The title of music</dd>
+					<dt><var>$description</var></dt>
+					<dd><code>string</code><br>$description The description display blow the title</dd>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url The music URL for player</dd>
+					<dt><var>$hqUrl</var></dt>
+					<dd><code>string</code><br>$hqUrl The HQ music URL for player when user in WIFI</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sendArticle" id="_sendArticle">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sendArticle">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#383-446" title="Go to source code">sendArticle</a>( <span>array <var>$articles</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Generate article message for output</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Generate article message for output</p>
+
+<p><code>`</code> // Sends one article $app-&gt;sendArticle(array( 'title' =&gt;
+'The title of article', 'description' =&gt; 'The description of article',
+'picUrl' =&gt; 'The picture URL of article', 'url' =&gt; 'The URL link to of
+article' ));</p>
+
+<p>// Sends two or more articles $app-&gt;sendArticle(array( array( 'title'
+=&gt; 'The title of article', 'description' =&gt; 'The description of article',
+'picUrl' =&gt; 'The picture URL of article', 'url' =&gt; 'The URL link to of
+article' ), array( 'title' =&gt; 'The title of article', 'description' =&gt;
+'The description of article', 'picUrl' =&gt; 'Te picture URL of article', 'url'
+=&gt; 'The URL link to of article' ), // more... )); <code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$articles</var></dt>
+					<dd><code>array</code><br>$articles The article array</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isValid" id="_isValid">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isValid">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#448-456" title="Go to source code">isValid</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns if the token is valid</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns if the token is valid</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAttr" id="_getAttr">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAttr">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#458-467" title="Go to source code">getAttr</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the XML element value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the XML element value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAttrs" id="_getAttrs">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAttrs">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#469-477" title="Go to source code">getAttrs</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns all of XML element values</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns all of XML element values</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getToUserName" id="_getToUserName">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getToUserName">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#479-487" title="Go to source code">getToUserName</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns your user id</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns your user id</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getFromUserName" id="_getFromUserName">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getFromUserName">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#489-497" title="Go to source code">getFromUserName</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the user openID who sent message to you</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the user openID who sent message to you</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getCreateTime" id="_getCreateTime">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getCreateTime">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#499-507" title="Go to source code">getCreateTime</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the timestamp when message created</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the timestamp when message created</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getContent" id="_getContent">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getContent">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#509-517" title="Go to source code">getContent</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the user input string, available when the message type is text</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the user input string, available when the message type is text</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMsgId" id="_getMsgId">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMsgId">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#519-527" title="Go to source code">getMsgId</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the message id</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the message id</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMsgType" id="_getMsgType">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMsgType">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#529-539" title="Go to source code">getMsgType</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the message type</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the message type</p>
+
+<p>Currently could be text, image, location, link, event, voice, video</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPicUrl" id="_getPicUrl">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getPicUrl">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#541-549" title="Go to source code">getPicUrl</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the picture URL, available when the message type is image</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the picture URL, available when the message type is image</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getLocationX" id="_getLocationX">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getLocationX">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#551-559" title="Go to source code">getLocationX</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the latitude of location, available when the message type is
+location</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the latitude of location, available when the message type is
+location</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getLocationY" id="_getLocationY">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getLocationY">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#561-569" title="Go to source code">getLocationY</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the longitude of location, available when the message type is
+location</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the longitude of location, available when the message type is
+location</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getLabel" id="_getLabel">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getLabel">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#571-579" title="Go to source code">getLabel</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the detail address of location, available when the message type is
+location</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the detail address of location, available when the message type is
+location</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getScale" id="_getScale">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getScale">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#581-589" title="Go to source code">getScale</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the scale of map, available when the message type is location</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the scale of map, available when the message type is location</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMediaId" id="_getMediaId">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMediaId">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#591-599" title="Go to source code">getMediaId</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the media id, available when the message type is voice or video</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the media id, available when the message type is voice or video</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getFormat" id="_getFormat">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getFormat">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#601-609" title="Go to source code">getFormat</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the media format, available when the message type is voice</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the media format, available when the message type is voice</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getEvent" id="_getEvent">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getEvent">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#611-619" title="Go to source code">getEvent</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the type of event, could be subscribe, unsubscribe or CLICK,
+available when the message type is event</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the type of event, could be subscribe, unsubscribe or CLICK,
+available when the message type is event</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getEventKey" id="_getEventKey">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getEventKey">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#621-629" title="Go to source code">getEventKey</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the key value of custom menu, available when the message type is
+event</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the key value of custom menu, available when the message type is
+event</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getThumbMediaId" id="_getThumbMediaId">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getThumbMediaId">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#631-639" title="Go to source code">getThumbMediaId</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the thumbnail id of video, available when the message type is
+video</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the thumbnail id of video, available when the message type is
+video</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getTitle" id="_getTitle">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getTitle">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#641-649" title="Go to source code">getTitle</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the title of URL, available when the message type is link</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the title of URL, available when the message type is link</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDescription" id="_getDescription">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDescription">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#651-659" title="Go to source code">getDescription</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the description of URL, available when the message type is link</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the description of URL, available when the message type is link</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getUrl" id="_getUrl">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getUrl">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#661-669" title="Go to source code">getUrl</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the URL link, available when the message type is link</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the URL link, available when the message type is link</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="send" id="_send">
+
+		<td class="attributes"><code>
+			 protected 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_send">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#671-686" title="Go to source code">send</a>( <span>string <var>$type</var></span>, <span>array <var>$response</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Generate message for output</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Generate message for output</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$type</var></dt>
+					<dd><code>string</code><br>$type The type of message</dd>
+					<dt><var>$response</var></dt>
+					<dd><code>array</code><br>$response The response content</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addTextRule" id="_addTextRule">
+
+		<td class="attributes"><code>
+			 protected 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addTextRule">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#688-704" title="Go to source code">addTextRule</a>( <span>string <var>$type</var></span>, <span>string <var>$keyword</var></span>, <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds a rule to handle user text input</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds a rule to handle user text input</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$type</var></dt>
+					<dd><code>string</code><br>$type</dd>
+					<dt><var>$keyword</var></dt>
+					<dd><code>string</code><br>$keyword</dd>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addEventRule" id="_addEventRule">
+
+		<td class="attributes"><code>
+			 protected 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addEventRule">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#706-718" title="Go to source code">addEventRule</a>( <span>string <var>$name</var></span>, <span>string <var>$key</var></span>, <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds a rule to handle user event, such as click, subscribe</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds a rule to handle user event, such as click, subscribe</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name</dd>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key</dd>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parsePostData" id="_parsePostData">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_parsePostData">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#720-742" title="Go to source code">parsePostData</a>( )</code>
+
+		<div class="description short">
+			
+<p>Parse post data to receive user OpenID and input content and message attr</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Parse post data to receive user OpenID and input content and message attr</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="handleText" id="_handleText">
+
+		<td class="attributes"><code>
+			 protected 
+			string|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_handleText">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#744-770" title="Go to source code">handleText</a>( )</code>
+
+		<div class="description short">
+			
+<p>Handle text rule</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Handle text rule</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string|false</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="handle" id="_handle">
+
+		<td class="attributes"><code>
+			 protected 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_handle">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#772-790" title="Go to source code">handle</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Executes callback handler</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes callback handler</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$fn</var></dt>
+					<dd><code><code><a href="class-Closure.html">Closure</a></code></code><br>$fn</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="arrayToXml" id="_arrayToXml">
+
+		<td class="attributes"><code>
+			 protected 
+			<code><a href="class-SimpleXMLElement.html">SimpleXMLElement</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_arrayToXml">#</a>
+		<code><a href="source-class-Wei.WeChatApp.html#792-827" title="Go to source code">arrayToXml</a>( <span>array <var>$array</var></span>, <span><code><a href="class-SimpleXMLElement.html">SimpleXMLElement</a></code> <var>$xml</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Convert to XML element</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Convert to XML element</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$array</var></dt>
+					<dd><code>array</code><br>$array</dd>
+					<dt><var>$xml</var></dt>
+					<dd><code><code><a href="class-SimpleXMLElement.html">SimpleXMLElement</a></code></code><br>$xml</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-SimpleXMLElement.html">SimpleXMLElement</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Wei.Base.html#methods">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#___call">__call()</a>, 
+			<a href="class-Wei.Base.html#___get">__get()</a>, 
+			<a href="class-Wei.Base.html#_getOption">getOption()</a>, 
+			<a href="class-Wei.Base.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="token" id="$token">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.WeChatApp.html#22-27" title="Go to source code"><var>$token</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'wei'</span></code></td>
+		<td class="description"><div>
+			<a href="#$token" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The WeChat token to generate signature</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The WeChat token to generate signature</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="postData" id="$postData">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.WeChatApp.html#29-44" title="Go to source code"><var>$postData</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$postData" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The HTTP raw post data, equals to $GLOBALS['HTTP_RAW_POST_DATA'] on
+default</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The HTTP raw post data, equals to $GLOBALS['HTTP_RAW_POST_DATA'] on
+default</p>
+
+<p>Most of the available element names in post XML data Common : MsgType,
+FromUserName, ToUserName, MsgId, CreateTime text : Content image : PicUrl
+location: Location_X, Location_Y, Scale, Label voice : MediaId, Format event :
+Event, EventKey video : MediaId, ThumbMediaId link : Title, Description</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="query" id="$query">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.WeChatApp.html#46-51" title="Go to source code"><var>$query</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$query" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The URL query parameters, equals to $_GET on default</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The URL query parameters, equals to $_GET on default</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="rules" id="$rules">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.WeChatApp.html#53-66" title="Go to source code"><var>$rules</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+    <span class="php-quote">'text'</span>      =&gt; <span class="php-keyword1">array</span>(),
+    <span class="php-quote">'event'</span>     =&gt; <span class="php-keyword1">array</span>(),
+    <span class="php-quote">'image'</span>     =&gt; <span class="php-keyword1">null</span>,
+    <span class="php-quote">'location'</span>  =&gt; <span class="php-keyword1">null</span>,
+    <span class="php-quote">'voice'</span>     =&gt; <span class="php-keyword1">null</span>,
+    <span class="php-quote">'video'</span>     =&gt; <span class="php-keyword1">null</span>,
+    <span class="php-quote">'link'</span>      =&gt; <span class="php-keyword1">null</span>
+)</code></td>
+		<td class="description"><div>
+			<a href="#$rules" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The rules to generate output message</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The rules to generate output message</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="defaults" id="$defaults">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.WeChatApp.html#68-73" title="Go to source code"><var>$defaults</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$defaults" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A handler executes when none of rules handled the input</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A handler executes when none of rules handled the input</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="valid" id="$valid">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.WeChatApp.html#75-80" title="Go to source code"><var>$valid</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$valid" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether the signature is valid</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether the signature is valid</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="handled" id="$handled">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.WeChatApp.html#82-87" title="Go to source code"><var>$handled</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$handled" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Are there any callbacks handled the message ?</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Are there any callbacks handled the message ?</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="beforeSend" id="$beforeSend">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.WeChatApp.html#89-94" title="Go to source code"><var>$beforeSend</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$beforeSend" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback executes before send the XML data</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback executes before send the XML data</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="attrs" id="$attrs">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.WeChatApp.html#96-101" title="Go to source code"><var>$attrs</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$attrs" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The element values of post XML data</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The element values of post XML data</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Wei.Base.html#properties">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#$providers"><var>$providers</var></a>, 
+			<a href="class-Wei.Base.html#$wei"><var>$wei</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Wei Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,2744 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Wei\Db | Wei Framework</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
+						<ul>
+				<li><a href="namespace-Wei.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Wei.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Wei.Apc.html">Apc</a></li>
+				<li><a href="class-Wei.App.html">App</a></li>
+				<li><a href="class-Wei.Arr.html">Arr</a></li>
+				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
+				<li><a href="class-Wei.Asset.html">Asset</a></li>
+				<li><a href="class-Wei.Base.html">Base</a></li>
+				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
+				<li><a href="class-Wei.Cache.html">Cache</a></li>
+				<li><a href="class-Wei.Call.html">Call</a></li>
+				<li><a href="class-Wei.Config.html">Config</a></li>
+				<li><a href="class-Wei.Controller.html">Controller</a></li>
+				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
+				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
+				<li class="active"><a href="class-Wei.Db.html">Db</a></li>
+				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
+				<li><a href="class-Wei.Env.html">Env</a></li>
+				<li><a href="class-Wei.Error.html">Error</a></li>
+				<li><a href="class-Wei.Escape.html">Escape</a></li>
+				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
+				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
+				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Logger.html">Logger</a></li>
+				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
+				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
+				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
+				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
+				<li><a href="class-Wei.Password.html">Password</a></li>
+				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
+				<li><a href="class-Wei.Redis.html">Redis</a></li>
+				<li><a href="class-Wei.Request.html">Request</a></li>
+				<li><a href="class-Wei.Response.html">Response</a></li>
+				<li><a href="class-Wei.Router.html">Router</a></li>
+				<li><a href="class-Wei.Session.html">Session</a></li>
+				<li><a href="class-Wei.T.html">T</a></li>
+				<li><a href="class-Wei.Ua.html">Ua</a></li>
+				<li><a href="class-Wei.Upload.html">Upload</a></li>
+				<li><a href="class-Wei.Url.html">Url</a></li>
+				<li><a href="class-Wei.Uuid.html">Uuid</a></li>
+				<li><a href="class-Wei.Validate.html">Validate</a></li>
+				<li><a href="class-Wei.View.html">View</a></li>
+				<li><a href="class-Wei.WeChatApp.html">WeChatApp</a></li>
+				<li><a href="class-Wei.Wei.html">Wei</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Wei.html" title="Summary of Wei"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Db</h1>
+
+
+	<div class="description">
+	
+<p>A database service inspired by Doctrine DBAL</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Wei.Base.html"><span>Wei\Base</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Wei\Db</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+		<b>Located at</b> <a href="source-class-Wei.Db.html#13-966" title="Go to source code">Db.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Wei.Db.html#210-221" title="Go to source code">__construct</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Constructor</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructor</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When option "wei" is not an instance of "Wei\Wei"<br />
+				</div>
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Wei.Base.html#___construct">Wei\Base::__construct()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Db.QueryBuilder.html">Wei\Db\QueryBuilder</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Wei.Db.html#223-232" title="Go to source code">__invoke</a>( <span>string <var>$table</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Create a new instance of a SQL query builder with specified table name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a new instance of a SQL query builder with specified table name</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of database table</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Db.QueryBuilder.html">Wei\Db\QueryBuilder</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="connect" id="_connect">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_connect">#</a>
+		<code><a href="source-class-Wei.Db.html#234-269" title="Go to source code">connect</a>( )</code>
+
+		<div class="description short">
+			
+<p>Connect to the database server</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Connect to the database server</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-PDOException.html">PDOException</a></code></code><br>When fails to connect to database server<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isConnected" id="_isConnected">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isConnected">#</a>
+		<code><a href="source-class-Wei.Db.html#271-279" title="Go to source code">isConnected</a>( )</code>
+
+		<div class="description short">
+			
+<p>Check if has connected to the database server</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if has connected to the database server</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="close" id="_close">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_close">#</a>
+		<code><a href="source-class-Wei.Db.html#281-288" title="Go to source code">close</a>( )</code>
+
+		<div class="description short">
+			
+<p>Close the database connection</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Close the database connection</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="reconnect" id="_reconnect">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_reconnect">#</a>
+		<code><a href="source-class-Wei.Db.html#290-297" title="Go to source code">reconnect</a>( )</code>
+
+		<div class="description short">
+			
+<p>Close the current connection and create a new one</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Close the current connection and create a new one</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="insert" id="_insert">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_insert">#</a>
+		<code><a href="source-class-Wei.Db.html#299-315" title="Go to source code">insert</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Executes an INSERT query to insert specified data into table</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes an INSERT query to insert specified data into table</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data An associative array containing column-value pairs</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>The number of affected rows<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="insertBatch" id="_insertBatch">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_insertBatch">#</a>
+		<code><a href="source-class-Wei.Db.html#317-341" title="Go to source code">insertBatch</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Insert batch data into table</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Insert batch data into table</p>
+
+<p>NOTE: The method is not working for SQLite</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data A two-dimensional array</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="update" id="_update">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_update">#</a>
+		<code><a href="source-class-Wei.Db.html#343-361" title="Go to source code">update</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var></span>, <span>array <var>$conditions</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Executes a UPDATE query</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes a UPDATE query</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data An associative array containing column-value pairs</dd>
+					<dt><var>$conditions</var></dt>
+					<dd><code>array</code><br>$conditions The conditions to search records</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>The number of affected rows<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="delete" id="_delete">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_delete">#</a>
+		<code><a href="source-class-Wei.Db.html#363-377" title="Go to source code">delete</a>( <span>string <var>$table</var></span>, <span>array <var>$conditions</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Executes a DELETE query</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes a DELETE query</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+					<dt><var>$conditions</var></dt>
+					<dd><code>array</code><br>$conditions The conditions to search records</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>The number of affected rows<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="select" id="_select">
+
+		<td class="attributes"><code>
+			 public 
+			array|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_select">#</a>
+		<code><a href="source-class-Wei.Db.html#379-393" title="Go to source code">select</a>( <span>string <var>$table</var></span>, <span>string|array <var>$conditions</var></span>, <span>string <var>$select</var> = <span class="php-quote">'*'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Executes a SELECT query and return the first result</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes a SELECT query and return the first result</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+					<dt><var>$conditions</var></dt>
+					<dd><code>string|array</code><br>$conditions The primary key value or an associative array containing
+column-value pairs</dd>
+					<dt><var>$select</var></dt>
+					<dd><code>string</code><br>$select The table columns to select</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array|false</code><br>An associative array containing column-value pairs<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="selectAll" id="_selectAll">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_selectAll">#</a>
+		<code><a href="source-class-Wei.Db.html#395-424" title="Go to source code">selectAll</a>( <span>string <var>$table</var></span>, <span>boolean <var>$conditions</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$select</var> = <span class="php-quote">'*'</span></span>, <span>integer <var>$limit</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Executes a SELECT query and return all results</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes a SELECT query and return all results</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+					<dt><var>$conditions</var></dt>
+					<dd><code>boolean</code><br>$conditions The primary key value or an associative array containing
+column-value pairs</dd>
+					<dt><var>$select</var></dt>
+					<dd><code>string</code><br>$select The table columns to select</dd>
+					<dt><var>$limit</var></dt>
+					<dd><code>integer</code><br>$limit The record number to retrieve</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="count" id="_count">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_count">#</a>
+		<code><a href="source-class-Wei.Db.html#426-437" title="Go to source code">count</a>( <span>string <var>$table</var></span>, <span>array|false <var>$conditions</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the rows number of table search by specified parameters</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the rows number of table search by specified parameters</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table</dd>
+					<dt><var>$conditions</var></dt>
+					<dd><code>array|false</code><br>$conditions</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="fetch" id="_fetch">
+
+		<td class="attributes"><code>
+			 public 
+			array|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_fetch">#</a>
+		<code><a href="source-class-Wei.Db.html#439-450" title="Go to source code">fetch</a>( <span>string <var>$sql</var></span>, <span>array|string <var>$params</var> = <span class="php-keyword1">false</span></span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Executes a query and returns the first array result</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes a query and returns the first array result</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sql</var></dt>
+					<dd><code>string</code><br>$sql The SQL query</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array|string</code><br>$params The query parameters</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types The parameter types to bind</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array|false</code><br>Return an array or false when no result found<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="fetchAll" id="_fetchAll">
+
+		<td class="attributes"><code>
+			 public 
+			array|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_fetchAll">#</a>
+		<code><a href="source-class-Wei.Db.html#452-463" title="Go to source code">fetchAll</a>( <span>string <var>$sql</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Executes a query and returns all array results</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes a query and returns all array results</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sql</var></dt>
+					<dd><code>string</code><br>$sql The SQL query</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params The query parameters</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types The parameter types to bind</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array|false</code><br>Return an array or false when no result found<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="fetchColumn" id="_fetchColumn">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_fetchColumn">#</a>
+		<code><a href="source-class-Wei.Db.html#465-476" title="Go to source code">fetchColumn</a>( <span>string <var>$sql</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>integer <var>$column</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Executes a query and returns a column value of the first row</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes a query and returns a column value of the first row</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sql</var></dt>
+					<dd><code>string</code><br>$sql The SQL query</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params The query parameters</dd>
+					<dt><var>$column</var></dt>
+					<dd><code>integer</code><br>$column The index of column</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="executeUpdate" id="_executeUpdate">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_executeUpdate">#</a>
+		<code><a href="source-class-Wei.Db.html#478-490" title="Go to source code">executeUpdate</a>( <span>string <var>$sql</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Executes an SQL INSERT/UPDATE/DELETE query with the given parameters and
+returns the number of affected rows</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes an SQL INSERT/UPDATE/DELETE query with the given parameters and
+returns the number of affected rows</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sql</var></dt>
+					<dd><code>string</code><br>$sql The SQL query</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params The query parameters</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types The parameter types to bind</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>The number of affected rows<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="query" id="_query">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-PDOStatement.html">PDOStatement</a></code>|integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_query">#</a>
+		<code><a href="source-class-Wei.Db.html#492-563" title="Go to source code">query</a>( <span>string <var>$sql</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>array <var>$types</var> = <span class="php-keyword1">array</span>()</span>, <span>boolean <var>$returnRows</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Executes an SQL statement, returning a PDOStatement object or the number of
+affected rows</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes an SQL statement, returning a PDOStatement object or the number of
+affected rows</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sql</var></dt>
+					<dd><code>string</code><br>$sql The SQL query</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params The SQL parameters</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types The parameter types to bind</dd>
+					<dt><var>$returnRows</var></dt>
+					<dd><code>boolean</code><br>$returnRows Whether returns a PDOStatement object or the number of affected rows</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-PDOStatement.html">PDOStatement</a></code>|integer</code><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-PDOException.html">PDOException</a></code></code><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="lastInsertId" id="_lastInsertId">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_lastInsertId">#</a>
+		<code><a href="source-class-Wei.Db.html#565-574" title="Go to source code">lastInsertId</a>( <span>string <var>$sequence</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the ID of the last inserted row or sequence value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the ID of the last inserted row or sequence value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sequence</var></dt>
+					<dd><code>string</code><br>$sequence The name of PostgreSQL sequence</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="errorCode" id="_errorCode">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_errorCode">#</a>
+		<code><a href="source-class-Wei.Db.html#576-585" title="Go to source code">errorCode</a>( )</code>
+
+		<div class="description short">
+			
+<p>Fetch the SQLSTATE associated with the last operation on the database
+handle</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Fetch the SQLSTATE associated with the last operation on the database
+handle</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="errorInfo" id="_errorInfo">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_errorInfo">#</a>
+		<code><a href="source-class-Wei.Db.html#587-596" title="Go to source code">errorInfo</a>( )</code>
+
+		<div class="description short">
+			
+<p>Fetch extended error information associated with the last operation on the
+database handle</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Fetch extended error information associated with the last operation on the
+database handle</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="createQueryBuilder" id="_createQueryBuilder">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Db.QueryBuilder.html">Wei\Db\QueryBuilder</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createQueryBuilder">#</a>
+		<code><a href="source-class-Wei.Db.html#598-608" title="Go to source code">createQueryBuilder</a>( <span>string <var>$table</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Create a new instance of a SQL query builder</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a new instance of a SQL query builder</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of database table</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Db.QueryBuilder.html">Wei\Db\QueryBuilder</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="create" id="_create">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Db.Record.html">Wei\Db\Record</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_create">#</a>
+		<code><a href="source-class-Wei.Db.html#610-628" title="Go to source code">create</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>boolean <var>$isNew</var> = <span class="php-keyword1">true</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Create a new record instance</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a new record instance</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of database table</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data The data for table record</dd>
+					<dt><var>$isNew</var></dt>
+					<dd><code>boolean</code><br>$isNew Whether it's a new record and have not save to database</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Db.Record.html">Wei\Db\Record</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="find" id="_find">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Db.Record.html">Wei\Db\Record</a></code>|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_find">#</a>
+		<code><a href="source-class-Wei.Db.html#630-652" title="Go to source code">find</a>( <span>string <var>$table</var></span>, <span>string|array <var>$id</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Find a record from specified table and conditions</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Find a record from specified table and conditions</p>
+
+<p><code>`</code>php // Find by primary key $db-&gt;find('user', 1);</p>
+
+<p>// Find by specified column $db-&gt;find('user', array('username' =&gt;
+'twin'));</p>
+
+<p>// Find in list $db-&gt;find('user', array('id' =&gt; array(1, 2, 3)));
+<code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+					<dt><var>$id</var></dt>
+					<dd><code>string|array</code><br>$id The primary key value or an associative array containing column-value pairs</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Db.Record.html">Wei\Db\Record</a></code>|false</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="findOne" id="_findOne">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Db.Record.html">Wei\Db\Record</a></code>|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_findOne">#</a>
+		<code><a href="source-class-Wei.Db.html#654-671" title="Go to source code">findOne</a>( <span>string <var>$table</var></span>, <span>string|array <var>$id</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Find a record from specified table and conditions and throws 404 exception
+when record not found</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Find a record from specified table and conditions and throws 404 exception
+when record not found</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table</dd>
+					<dt><var>$id</var></dt>
+					<dd><code>string|array</code><br>$id The primary key value or an associative array containing column-value pairs</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Db.Record.html">Wei\Db\Record</a></code>|false</code><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-Exception.html">Exception</a></code></code><br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="findOrCreate" id="_findOrCreate">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Db.Record.html">Wei\Db\Record</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_findOrCreate">#</a>
+		<code><a href="source-class-Wei.Db.html#673-691" title="Go to source code">findOrCreate</a>( <span>string <var>$table</var></span>, <span>string <var>$id</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Find a record, if not found, create a new one from specified data</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Find a record, if not found, create a new one from specified data</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+					<dt><var>$id</var></dt>
+					<dd><code>string</code><br>$id The primary key value or an associative array containing column-value pairs</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data The data to create a new record when record not found</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Db.Record.html">Wei\Db\Record</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="findAll" id="_findAll">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Db.Collection.html">Wei\Db\Collection</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_findAll">#</a>
+		<code><a href="source-class-Wei.Db.html#693-721" title="Go to source code">findAll</a>( <span>string <var>$table</var></span>, <span>array|false <var>$where</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Find records from specified table and conditions</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Find records from specified table and conditions</p>
+
+<p><code>`</code>php // Find by primary key $db-&gt;findAll('user', 1);</p>
+
+<p>// Find by specified column $db-&gt;findAll('user', array('username' =&gt;
+'twin'));</p>
+
+<p>// Find in list $db-&gt;findAll('user', array('id' =&gt; array(1, 2, 3)));
+<code>`</code></p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of database table</dd>
+					<dt><var>$where</var></dt>
+					<dd><code>array|false</code><br>$where The primary key value or an associative array containing column-value
+pairs</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Db.Collection.html">Wei\Db\Collection</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__call" id="___call">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Wei.Db.Record.html">Wei\Db\Record</a></code>|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___call">#</a>
+		<code><a href="source-class-Wei.Db.html#723-733" title="Go to source code">__call</a>( <span>string <var>$name</var></span>, <span>array <var>$args</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Find a record from specified table and conditions</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Find a record from specified table and conditions</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name</dd>
+					<dt><var>$args</var></dt>
+					<dd><code>array</code><br>$args</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Wei.Db.Record.html">Wei\Db\Record</a></code>|false</code><br />
+				</div>
+
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Wei.Base.html#___call">Wei\Base::__call()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRecordClass" id="_getRecordClass">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getRecordClass">#</a>
+		<code><a href="source-class-Wei.Db.html#735-755" title="Go to source code">getRecordClass</a>( <span>string <var>$table</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the record class name of table</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the record class name of table</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table The name of table</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The record class name for table<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getTable" id="_getTable">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getTable">#</a>
+		<code><a href="source-class-Wei.Db.html#757-766" title="Go to source code">getTable</a>( <span>string <var>$table</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the full table name with prefix</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the full table name with prefix</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>$table</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getUser" id="_getUser">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getUser">#</a>
+		<code><a href="source-class-Wei.Db.html#768-776" title="Go to source code">getUser</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the database username</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the database username</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPassword" id="_getPassword">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getPassword">#</a>
+		<code><a href="source-class-Wei.Db.html#778-786" title="Go to source code">getPassword</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the database password</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the database password</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getHost" id="_getHost">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getHost">#</a>
+		<code><a href="source-class-Wei.Db.html#788-796" title="Go to source code">getHost</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the hostname on which the database server resides</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the hostname on which the database server resides</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPort" id="_getPort">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getPort">#</a>
+		<code><a href="source-class-Wei.Db.html#798-806" title="Go to source code">getPort</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the port on which the database server is running</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the port on which the database server is running</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDbname" id="_getDbname">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDbname">#</a>
+		<code><a href="source-class-Wei.Db.html#808-816" title="Go to source code">getDbname</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the name of the database</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the name of the database</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDriver" id="_getDriver">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDriver">#</a>
+		<code><a href="source-class-Wei.Db.html#818-826" title="Go to source code">getDriver</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the name of PDO driver</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the name of PDO driver</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDsn" id="_getDsn">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDsn">#</a>
+		<code><a href="source-class-Wei.Db.html#828-864" title="Go to source code">getDsn</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the PDO DSN</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the PDO DSN</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-RuntimeException.html">RuntimeException</a></code></code><br>When database driver is unsupported<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getTableFields" id="_getTableFields">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getTableFields">#</a>
+		<code><a href="source-class-Wei.Db.html#866-897" title="Go to source code">getTableFields</a>( <span>mixed <var>$table</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the name of fields of specified table</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the name of fields of specified table</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>mixed</code><br>$table</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="filter" id="_filter">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_filter">#</a>
+		<code><a href="source-class-Wei.Db.html#899-906" title="Go to source code">filter</a>( <span>mixed <var>$data</var></span>, <span>mixed <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getLastSql" id="_getLastSql">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getLastSql">#</a>
+		<code><a href="source-class-Wei.Db.html#908-916" title="Go to source code">getLastSql</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the last executed SQL query</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the last executed SQL query</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getQueries" id="_getQueries">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getQueries">#</a>
+		<code><a href="source-class-Wei.Db.html#918-926" title="Go to source code">getQueries</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns all executed SQL queries</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns all executed SQL queries</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="bindParameter" id="_bindParameter">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_bindParameter">#</a>
+		<code><a href="source-class-Wei.Db.html#928-965" title="Go to source code">bindParameter</a>( <span><code><a href="class-PDOStatement.html">PDOStatement</a></code> <var>$stmt</var></span>, <span>array <var>$params</var></span>, <span>array <var>$types</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Bind parameters to statement object</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Bind parameters to statement object</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$stmt</var></dt>
+					<dd><code><code><a href="class-PDOStatement.html">PDOStatement</a></code></code><br>$stmt</dd>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params</dd>
+					<dt><var>$types</var></dt>
+					<dd><code>array</code><br>$types</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Wei.Base.html#methods">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#___get">__get()</a>, 
+			<a href="class-Wei.Base.html#_getOption">getOption()</a>, 
+			<a href="class-Wei.Base.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="driver" id="$driver">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#20-25" title="Go to source code"><var>$driver</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'mysql'</span></code></td>
+		<td class="description"><div>
+			<a href="#$driver" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The name of PDO driver, could be mysql, sqlite or pgsql</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The name of PDO driver, could be mysql, sqlite or pgsql</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="user" id="$user">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#27-32" title="Go to source code"><var>$user</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$user" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The database username</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The database username</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="password" id="$password">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#34-39" title="Go to source code"><var>$password</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$password" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The database password</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The database password</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="host" id="$host">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#41-46" title="Go to source code"><var>$host</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'127.0.0.1'</span></code></td>
+		<td class="description"><div>
+			<a href="#$host" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The hostname on which the database server resides, for mysql and pgsql</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The hostname on which the database server resides, for mysql and pgsql</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="port" id="$port">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#48-53" title="Go to source code"><var>$port</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$port" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The port on which the database server is running, for mysql and pgsql</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The port on which the database server is running, for mysql and pgsql</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="dbname" id="$dbname">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#55-60" title="Go to source code"><var>$dbname</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$dbname" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The name of the database, for mysql and pgsql</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The name of the database, for mysql and pgsql</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="unixSocket" id="$unixSocket">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#62-67" title="Go to source code"><var>$unixSocket</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$unixSocket" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The MySQL Unix socket (shouldn't be used with host or port), for mysql
+only</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The MySQL Unix socket (shouldn't be used with host or port), for mysql
+only</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="charset" id="$charset">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#69-74" title="Go to source code"><var>$charset</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$charset" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The character set, for mysql only</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The character set, for mysql only</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="path" id="$path">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#76-81" title="Go to source code"><var>$path</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$path" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The path for sqlite database</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The path for sqlite database</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="dsn" id="$dsn">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#83-88" title="Go to source code"><var>$dsn</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$dsn" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The dsn parameter for PDO constructor</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The dsn parameter for PDO constructor</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="attrs" id="$attrs">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#90-96" title="Go to source code"><var>$attrs</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$attrs" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A key=&gt;value array of driver-specific connection attributes</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A key=&gt;value array of driver-specific connection attributes</p>
+
+
+					<h4>Link</h4>
+					<div class="list">
+							<a href="http://www.php.net/manual/zh/pdo.setattribute.php">http://www.php.net/manual/zh/pdo.setattribute.php</a><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="pdo" id="$pdo">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-PDO.html">PDO</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#98-103" title="Go to source code"><var>$pdo</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$pdo" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The PDO object</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The PDO object</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="beforeConnect" id="$beforeConnect">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#105-110" title="Go to source code"><var>$beforeConnect</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$beforeConnect" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback triggers before connect to database</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback triggers before connect to database</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="connectFails" id="$connectFails">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#112-117" title="Go to source code"><var>$connectFails</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$connectFails" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback triggers when fails to connect to database</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback triggers when fails to connect to database</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="afterConnect" id="$afterConnect">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#119-124" title="Go to source code"><var>$afterConnect</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$afterConnect" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback triggers after connect to database</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback triggers after connect to database</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="beforeQuery" id="$beforeQuery">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#126-131" title="Go to source code"><var>$beforeQuery</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$beforeQuery" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback triggers before execute query</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback triggers before execute query</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="afterQuery" id="$afterQuery">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#133-138" title="Go to source code"><var>$afterQuery</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$afterQuery" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The callback triggers after execute query</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The callback triggers after execute query</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isConnected" id="$isConnected">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#140-145" title="Go to source code"><var>$isConnected</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$isConnected" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether connected to the database server</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether connected to the database server</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="tables" id="$tables">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#147-152" title="Go to source code"><var>$tables</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$tables" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The database table definitions</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The database table definitions</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="recordClass" id="$recordClass">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#154-159" title="Go to source code"><var>$recordClass</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'Wei\Db\Record'</span></code></td>
+		<td class="description"><div>
+			<a href="#$recordClass" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The base record class when instance a new record object</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The base record class when instance a new record object</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="collectionClass" id="$collectionClass">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#161-166" title="Go to source code"><var>$collectionClass</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'Wei\Db\Collection'</span></code></td>
+		<td class="description"><div>
+			<a href="#$collectionClass" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The collection class to store database records</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The collection class to store database records</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="recordClasses" id="$recordClasses">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#168-173" title="Go to source code"><var>$recordClasses</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$recordClasses" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>An associative array that the key is table name and the value is class
+name</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>An associative array that the key is table name and the value is class
+name</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="recordNamespace" id="$recordNamespace">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#175-180" title="Go to source code"><var>$recordNamespace</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$recordNamespace" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The record namespace without ending "\"</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The record namespace without ending "\"</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="tablePrefix" id="$tablePrefix">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#182-187" title="Go to source code"><var>$tablePrefix</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$tablePrefix" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The prefix of table name</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The prefix of table name</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="global" id="$global">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#189-194" title="Go to source code"><var>$global</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$global" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether use the options from the default db service</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether use the options from the default db service</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="queries" id="$queries">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#196-201" title="Go to source code"><var>$queries</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$queries" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>All executed SQL queries</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>All executed SQL queries</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="slaveDb" id="$slaveDb">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Db.html#203-208" title="Go to source code"><var>$slaveDb</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$slaveDb" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The salve db configuration name</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The salve db configuration name</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Wei.Base.html#properties">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#$providers"><var>$providers</var></a>, 
+			<a href="class-Wei.Base.html#$wei"><var>$wei</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Wei Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

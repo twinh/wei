@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Wei\Upload | Wei Framework</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
+						<ul>
+				<li><a href="namespace-Wei.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Wei.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Wei.Apc.html">Apc</a></li>
+				<li><a href="class-Wei.App.html">App</a></li>
+				<li><a href="class-Wei.Arr.html">Arr</a></li>
+				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
+				<li><a href="class-Wei.Asset.html">Asset</a></li>
+				<li><a href="class-Wei.Base.html">Base</a></li>
+				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
+				<li><a href="class-Wei.Cache.html">Cache</a></li>
+				<li><a href="class-Wei.Call.html">Call</a></li>
+				<li><a href="class-Wei.Config.html">Config</a></li>
+				<li><a href="class-Wei.Controller.html">Controller</a></li>
+				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
+				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
+				<li><a href="class-Wei.Db.html">Db</a></li>
+				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
+				<li><a href="class-Wei.Env.html">Env</a></li>
+				<li><a href="class-Wei.Error.html">Error</a></li>
+				<li><a href="class-Wei.Escape.html">Escape</a></li>
+				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
+				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
+				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Logger.html">Logger</a></li>
+				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
+				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
+				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
+				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
+				<li><a href="class-Wei.Password.html">Password</a></li>
+				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
+				<li><a href="class-Wei.Redis.html">Redis</a></li>
+				<li><a href="class-Wei.Request.html">Request</a></li>
+				<li><a href="class-Wei.Response.html">Response</a></li>
+				<li><a href="class-Wei.Router.html">Router</a></li>
+				<li><a href="class-Wei.Session.html">Session</a></li>
+				<li><a href="class-Wei.T.html">T</a></li>
+				<li><a href="class-Wei.Ua.html">Ua</a></li>
+				<li class="active"><a href="class-Wei.Upload.html">Upload</a></li>
+				<li><a href="class-Wei.Url.html">Url</a></li>
+				<li><a href="class-Wei.Uuid.html">Uuid</a></li>
+				<li><a href="class-Wei.Validate.html">Validate</a></li>
+				<li><a href="class-Wei.View.html">View</a></li>
+				<li><a href="class-Wei.WeChatApp.html">WeChatApp</a></li>
+				<li><a href="class-Wei.Wei.html">Wei</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Wei.html" title="Summary of Wei"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Upload</h1>
+
+
+	<div class="description">
+	
+<p>A service that handles the uploaded files</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Wei.Base.html"><span>Wei\Base</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+			<a href="class-Wei.Validator.BaseValidator.html"><span>Wei\Validator\BaseValidator</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:60px">
+			<img src="resources/inherit.png" alt="Extended by" />
+			<a href="class-Wei.Validator.File.html"><span>Wei\Validator\File</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:90px">
+			<img src="resources/inherit.png" alt="Extended by" />
+			<a href="class-Wei.Validator.Image.html"><span>Wei\Validator\Image</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:120px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Wei\Upload</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+		<b>Located at</b> <a href="source-class-Wei.Upload.html#14-341" title="Go to source code">Upload.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Wei.Upload.html#112-122" title="Go to source code">__construct</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Constructor</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructor</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When option "wei" is not an instance of "Wei\Wei"<br />
+				</div>
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Wei.Base.html#___construct">Wei\Base::__construct()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Wei.Upload.html#124-230" title="Go to source code">__invoke</a>( <span>string|array <var>$field</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Upload a file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Upload a file</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$field</var></dt>
+					<dd><code>string|array</code><br>$field The name of file input or options of wei</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options The options of wei</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Wei.Validator.File.html#___invoke">Wei\Validator\File::__invoke()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="saveFile" id="_saveFile">
+
+		<td class="attributes"><code>
+			 protected 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_saveFile">#</a>
+		<code><a href="source-class-Wei.Upload.html#232-264" title="Go to source code">saveFile</a>( <span>array <var>$uploadedFile</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Save uploaded file to upload directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Save uploaded file to upload directory</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$uploadedFile</var></dt>
+					<dd><code>array</code><br>$uploadedFile</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getFile" id="_getFile">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getFile">#</a>
+		<code><a href="source-class-Wei.Upload.html#266-274" title="Go to source code">getFile</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the uploaded file path</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the uploaded file path</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setDir" id="_setDir">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setDir">#</a>
+		<code><a href="source-class-Wei.Upload.html#277-292" title="Go to source code">setDir</a>( <span>string <var>$dir</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set upload directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set upload directory</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dir</var></dt>
+					<dd><code>string</code><br>$dir</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDir" id="_getDir">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDir">#</a>
+		<code><a href="source-class-Wei.Upload.html#294-302" title="Go to source code">getDir</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns upload directory</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns upload directory</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getIniSize" id="_getIniSize">
+
+		<td class="attributes"><code>
+			 protected 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getIniSize">#</a>
+		<code><a href="source-class-Wei.Upload.html#304-315" title="Go to source code">getIniSize</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns a human readable file size (e.g. 1.2MB, 10KB), which recive from the
+ini configuration</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a human readable file size (e.g. 1.2MB, 10KB), which recive from the
+ini configuration</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The name of ini configuration</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isUploadedFile" id="_isUploadedFile">
+
+		<td class="attributes"><code>
+			 protected 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isUploadedFile">#</a>
+		<code><a href="source-class-Wei.Upload.html#317-327" title="Go to source code">isUploadedFile</a>( <span>string <var>$file</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the file was uploaded via HTTP POST, if $this-&gt;unitTest is
+enable, it will always return true</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the file was uploaded via HTTP POST, if $this-&gt;unitTest is
+enable, it will always return true</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$file</var></dt>
+					<dd><code>string</code><br>$file</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="moveUploadedFile" id="_moveUploadedFile">
+
+		<td class="attributes"><code>
+			 protected 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_moveUploadedFile">#</a>
+		<code><a href="source-class-Wei.Upload.html#329-340" title="Go to source code">moveUploadedFile</a>( <span>string <var>$from</var></span>, <span>string <var>$to</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Moves an uploaded file to a new location, if $this-&gt;unitTest is enable, it
+will use <code>copy</code> function instead</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Moves an uploaded file to a new location, if $this-&gt;unitTest is enable, it
+will use <code>copy</code> function instead</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$from</var></dt>
+					<dd><code>string</code><br>$from The uploaded file name</dd>
+					<dt><var>$to</var></dt>
+					<dd><code>string</code><br>$to The destination of the moved file.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Wei.Validator.Image.html#methods">Wei\Validator\Image</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Validator.Image.html#_doValidate">doValidate()</a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Wei.Validator.File.html#methods">Wei\Validator\File</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Validator.File.html#_convertToArray">convertToArray()</a>, 
+			<a href="class-Wei.Validator.File.html#_fromBytes">fromBytes()</a>, 
+			<a href="class-Wei.Validator.File.html#_getExt">getExt()</a>, 
+			<a href="class-Wei.Validator.File.html#_getMimeType">getMimeType()</a>, 
+			<a href="class-Wei.Validator.File.html#_inMimeType">inMimeType()</a>, 
+			<a href="class-Wei.Validator.File.html#_setExcludeExts">setExcludeExts()</a>, 
+			<a href="class-Wei.Validator.File.html#_setExcludeMimeTypes">setExcludeMimeTypes()</a>, 
+			<a href="class-Wei.Validator.File.html#_setExts">setExts()</a>, 
+			<a href="class-Wei.Validator.File.html#_setMaxSize">setMaxSize()</a>, 
+			<a href="class-Wei.Validator.File.html#_setMimeTypes">setMimeTypes()</a>, 
+			<a href="class-Wei.Validator.File.html#_setMinSize">setMinSize()</a>, 
+			<a href="class-Wei.Validator.File.html#_toBytes">toBytes()</a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Wei.Validator.BaseValidator.html#methods">Wei\Validator\BaseValidator</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Validator.BaseValidator.html#_addError">addError()</a>, 
+			<a href="class-Wei.Validator.BaseValidator.html#_getErrors">getErrors()</a>, 
+			<a href="class-Wei.Validator.BaseValidator.html#_getFirstMessage">getFirstMessage()</a>, 
+			<a href="class-Wei.Validator.BaseValidator.html#_getJoinedMessage">getJoinedMessage()</a>, 
+			<a href="class-Wei.Validator.BaseValidator.html#_getMessages">getMessages()</a>, 
+			<a href="class-Wei.Validator.BaseValidator.html#_getName">getName()</a>, 
+			<a href="class-Wei.Validator.BaseValidator.html#_hasError">hasError()</a>, 
+			<a href="class-Wei.Validator.BaseValidator.html#_isString">isString()</a>, 
+			<a href="class-Wei.Validator.BaseValidator.html#_isValid">isValid()</a>, 
+			<a href="class-Wei.Validator.BaseValidator.html#_loadTranslationMessages">loadTranslationMessages()</a>, 
+			<a href="class-Wei.Validator.BaseValidator.html#_setMessages">setMessages()</a>, 
+			<a href="class-Wei.Validator.BaseValidator.html#_setName">setName()</a>, 
+			<a href="class-Wei.Validator.BaseValidator.html#_storeOption">storeOption()</a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Wei.Base.html#methods">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#___call">__call()</a>, 
+			<a href="class-Wei.Base.html#___get">__get()</a>, 
+			<a href="class-Wei.Base.html#_getOption">getOption()</a>, 
+			<a href="class-Wei.Base.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+	<table class="summary inherited">
+	<caption>Magic methods inherited from <a href="class-Wei.Validator.BaseValidator.html#methods">Wei\Validator\BaseValidator</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Validator.BaseValidator.html#m_t">t()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="postSizeMessage" id="$postSizeMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#22-27" title="Go to source code"><var>$postSizeMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'No file uploaded or the total file size is too large, allowed maximum size is %postMaxSize%'</span></code></td>
+		<td class="description"><div>
+			<a href="#$postSizeMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Seems that the total post data size is too large</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Seems that the total post data size is too large</p>
+
+
+					<h4>Link</h4>
+					<div class="list">
+							<a href="http://php.net/manual/en/ini.core.php#ini.post-max-size">http://php.net/manual/en/ini.core.php#ini.post-max-size</a><br />
+					</div>
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="noFileMessage" id="$noFileMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#29-32" title="Go to source code"><var>$noFileMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'No file uploaded, please select a file to upload'</span></code></td>
+		<td class="description"><div>
+			<a href="#$noFileMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The uploaded file array do not contain the key "$this-&gt;field", or error
+code not available</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The uploaded file array do not contain the key "$this-&gt;field", or error
+code not available</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="formLimitMessage" id="$formLimitMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#34" title="Go to source code"><var>$formLimitMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'%name% is larger than the MAX_FILE_SIZE value in the HTML form'</span></code></td>
+		<td class="description"><div>
+			<a href="#$formLimitMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="partialMessage" id="$partialMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#36" title="Go to source code"><var>$partialMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'%name% was partial uploaded, please try again'</span></code></td>
+		<td class="description"><div>
+			<a href="#$partialMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="noTmpDirMessage" id="$noTmpDirMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#38" title="Go to source code"><var>$noTmpDirMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'The temporary upload directory is missing'</span></code></td>
+		<td class="description"><div>
+			<a href="#$noTmpDirMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="cantWriteMessage" id="$cantWriteMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#40" title="Go to source code"><var>$cantWriteMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'Cannot write %name% to disk'</span></code></td>
+		<td class="description"><div>
+			<a href="#$cantWriteMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="extensionMessage" id="$extensionMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#42" title="Go to source code"><var>$extensionMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'File upload stopped by extension'</span></code></td>
+		<td class="description"><div>
+			<a href="#$extensionMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="notUploadedFileMessage" id="$notUploadedFileMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#44" title="Go to source code"><var>$notUploadedFileMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'No file uploaded'</span></code></td>
+		<td class="description"><div>
+			<a href="#$notUploadedFileMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="cantMoveMessage" id="$cantMoveMessage">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#46" title="Go to source code"><var>$cantMoveMessage</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'Cannot move uploaded file'</span></code></td>
+		<td class="description"><div>
+			<a href="#$cantMoveMessage" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="name" id="$name">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#48-53" title="Go to source code"><var>$name</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'file'</span></code></td>
+		<td class="description"><div>
+			<a href="#$name" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The name for error message</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The name for error message</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="field" id="$field">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#55-61" title="Go to source code"><var>$field</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$field" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The name defined in the file input, if it's not specified, use the first key
+in upload files array (equals to $_FILES on default)</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The name defined in the file input, if it's not specified, use the first key
+in upload files array (equals to $_FILES on default)</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="dir" id="$dir">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#63-68" title="Go to source code"><var>$dir</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'uploads'</span></code></td>
+		<td class="description"><div>
+			<a href="#$dir" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The directory to save file, automatic create it if not exist</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The directory to save file, automatic create it if not exist</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="fileName" id="$fileName">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#70-75" title="Go to source code"><var>$fileName</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$fileName" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The custom file name (without extension) as upload file name to save</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The custom file name (without extension) as upload file name to save</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="isImage" id="$isImage">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#77-88" title="Go to source code"><var>$isImage</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$isImage" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether check if the upload file is valid image or not</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether check if the upload file is valid image or not</p>
+
+<p>You can specify any one of the following options to enable image detect</p>
+
+<ul>
+	<li>maxWidth</li>
+
+	<li>maxHeight</li>
+
+	<li>minWidth</li>
+
+	<li>minHeight</li>
+</ul>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="overwrite" id="$overwrite">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#90-96" title="Go to source code"><var>$overwrite</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$overwrite" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether overwrite existing file, if set to false, the uploader will add a
+number between file name and extension, like file-1.jpg, file-2.jpg</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether overwrite existing file, if set to false, the uploader will add a
+number between file name and extension, like file-1.jpg, file-2.jpg</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="unitTest" id="$unitTest">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#98-103" title="Go to source code"><var>$unitTest</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$unitTest" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether in unit test mode</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether in unit test mode</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="postMaxSize" id="$postMaxSize">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#105-110" title="Go to source code"><var>$postMaxSize</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$postMaxSize" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The max size of post data, for $this-&gt;postMaxSize</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The max size of post data, for $this-&gt;postMaxSize</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Wei.Validator.Image.html#properties">Wei\Validator\Image</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Validator.Image.html#$height"><var>$height</var></a>, 
+			<a href="class-Wei.Validator.Image.html#$heightTooBigMessage"><var>$heightTooBigMessage</var></a>, 
+			<a href="class-Wei.Validator.Image.html#$heightTooSmallMessage"><var>$heightTooSmallMessage</var></a>, 
+			<a href="class-Wei.Validator.Image.html#$maxHeight"><var>$maxHeight</var></a>, 
+			<a href="class-Wei.Validator.Image.html#$maxWidth"><var>$maxWidth</var></a>, 
+			<a href="class-Wei.Validator.Image.html#$minHeight"><var>$minHeight</var></a>, 
+			<a href="class-Wei.Validator.Image.html#$minWidth"><var>$minWidth</var></a>, 
+			<a href="class-Wei.Validator.Image.html#$notDetectedMessage"><var>$notDetectedMessage</var></a>, 
+			<a href="class-Wei.Validator.Image.html#$width"><var>$width</var></a>, 
+			<a href="class-Wei.Validator.Image.html#$widthTooBigMessage"><var>$widthTooBigMessage</var></a>, 
+			<a href="class-Wei.Validator.Image.html#$widthTooSmallMessage"><var>$widthTooSmallMessage</var></a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Wei.Validator.File.html#properties">Wei\Validator\File</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Validator.File.html#$excludeExts"><var>$excludeExts</var></a>, 
+			<a href="class-Wei.Validator.File.html#$excludeExtsMessage"><var>$excludeExtsMessage</var></a>, 
+			<a href="class-Wei.Validator.File.html#$excludeMimeTypes"><var>$excludeMimeTypes</var></a>, 
+			<a href="class-Wei.Validator.File.html#$excludeMimeTypesMessage"><var>$excludeMimeTypesMessage</var></a>, 
+			<a href="class-Wei.Validator.File.html#$ext"><var>$ext</var></a>, 
+			<a href="class-Wei.Validator.File.html#$exts"><var>$exts</var></a>, 
+			<a href="class-Wei.Validator.File.html#$extsMessage"><var>$extsMessage</var></a>, 
+			<a href="class-Wei.Validator.File.html#$file"><var>$file</var></a>, 
+			<a href="class-Wei.Validator.File.html#$magicFile"><var>$magicFile</var></a>, 
+			<a href="class-Wei.Validator.File.html#$maxSize"><var>$maxSize</var></a>, 
+			<a href="class-Wei.Validator.File.html#$maxSizeMessage"><var>$maxSizeMessage</var></a>, 
+			<a href="class-Wei.Validator.File.html#$maxSizeString"><var>$maxSizeString</var></a>, 
+			<a href="class-Wei.Validator.File.html#$mimeType"><var>$mimeType</var></a>, 
+			<a href="class-Wei.Validator.File.html#$mimeTypeNotDetectedMessage"><var>$mimeTypeNotDetectedMessage</var></a>, 
+			<a href="class-Wei.Validator.File.html#$mimeTypes"><var>$mimeTypes</var></a>, 
+			<a href="class-Wei.Validator.File.html#$mimeTypesMessage"><var>$mimeTypesMessage</var></a>, 
+			<a href="class-Wei.Validator.File.html#$minSize"><var>$minSize</var></a>, 
+			<a href="class-Wei.Validator.File.html#$minSizeMessage"><var>$minSizeMessage</var></a>, 
+			<a href="class-Wei.Validator.File.html#$minSizeString"><var>$minSizeString</var></a>, 
+			<a href="class-Wei.Validator.File.html#$negativeMessage"><var>$negativeMessage</var></a>, 
+			<a href="class-Wei.Validator.File.html#$notFoundMessage"><var>$notFoundMessage</var></a>, 
+			<a href="class-Wei.Validator.File.html#$originFile"><var>$originFile</var></a>, 
+			<a href="class-Wei.Validator.File.html#$size"><var>$size</var></a>, 
+			<a href="class-Wei.Validator.File.html#$sizeString"><var>$sizeString</var></a>, 
+			<a href="class-Wei.Validator.File.html#$units"><var>$units</var></a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Wei.Validator.BaseValidator.html#properties">Wei\Validator\BaseValidator</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Validator.BaseValidator.html#$errors"><var>$errors</var></a>, 
+			<a href="class-Wei.Validator.BaseValidator.html#$negative"><var>$negative</var></a>, 
+			<a href="class-Wei.Validator.BaseValidator.html#$notStringMessage"><var>$notStringMessage</var></a>, 
+			<a href="class-Wei.Validator.BaseValidator.html#$validator"><var>$validator</var></a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Wei.Base.html#properties">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#$providers"><var>$providers</var></a>, 
+			<a href="class-Wei.Base.html#$wei"><var>$wei</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+	<table class="summary" id="magicProperties">
+	<caption>Magic properties summary</caption>
+	<tr data-order="request" id="m$request">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Request.html">Wei\Request</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Upload.html#18" title="Go to source code"><var>$request</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$request" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The HTTP request wei</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The HTTP request wei</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Magic properties inherited from <a href="class-Wei.Validator.BaseValidator.html#properties">Wei\Validator\BaseValidator</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Validator.BaseValidator.html#m$t"><var>$t</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+</div>
+
+	<div id="footer">
+		Wei Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

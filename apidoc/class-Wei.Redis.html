@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Wei\Redis | Wei Framework</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
+						<ul>
+				<li><a href="namespace-Wei.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Wei.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Wei.Apc.html">Apc</a></li>
+				<li><a href="class-Wei.App.html">App</a></li>
+				<li><a href="class-Wei.Arr.html">Arr</a></li>
+				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
+				<li><a href="class-Wei.Asset.html">Asset</a></li>
+				<li><a href="class-Wei.Base.html">Base</a></li>
+				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
+				<li><a href="class-Wei.Cache.html">Cache</a></li>
+				<li><a href="class-Wei.Call.html">Call</a></li>
+				<li><a href="class-Wei.Config.html">Config</a></li>
+				<li><a href="class-Wei.Controller.html">Controller</a></li>
+				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
+				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
+				<li><a href="class-Wei.Db.html">Db</a></li>
+				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
+				<li><a href="class-Wei.Env.html">Env</a></li>
+				<li><a href="class-Wei.Error.html">Error</a></li>
+				<li><a href="class-Wei.Escape.html">Escape</a></li>
+				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
+				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
+				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Logger.html">Logger</a></li>
+				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
+				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
+				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
+				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
+				<li><a href="class-Wei.Password.html">Password</a></li>
+				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
+				<li class="active"><a href="class-Wei.Redis.html">Redis</a></li>
+				<li><a href="class-Wei.Request.html">Request</a></li>
+				<li><a href="class-Wei.Response.html">Response</a></li>
+				<li><a href="class-Wei.Router.html">Router</a></li>
+				<li><a href="class-Wei.Session.html">Session</a></li>
+				<li><a href="class-Wei.T.html">T</a></li>
+				<li><a href="class-Wei.Ua.html">Ua</a></li>
+				<li><a href="class-Wei.Upload.html">Upload</a></li>
+				<li><a href="class-Wei.Url.html">Url</a></li>
+				<li><a href="class-Wei.Uuid.html">Uuid</a></li>
+				<li><a href="class-Wei.Validate.html">Validate</a></li>
+				<li><a href="class-Wei.View.html">View</a></li>
+				<li><a href="class-Wei.WeChatApp.html">WeChatApp</a></li>
+				<li><a href="class-Wei.Wei.html">Wei</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Wei.html" title="Summary of Wei"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Redis</h1>
+
+
+	<div class="description">
+	
+<p>A cache wei that stored data in Redis</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Wei.Base.html"><span>Wei\Base</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+			<a href="class-Wei.BaseCache.html"><span>Wei\BaseCache</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:60px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Wei\Redis</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+		<b>Located at</b> <a href="source-class-Wei.Redis.html#11-250" title="Go to source code">Redis.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Wei.Redis.html#69-78" title="Go to source code">__construct</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Constructor</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructor</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When option "wei" is not an instance of "Wei\Wei"<br />
+				</div>
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Wei.Base.html#___construct">Wei\Base::__construct()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Wei.Redis.html#80-98" title="Go to source code">__invoke</a>( <span>string <var>$key</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the redis object, retrieve or store an item</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the redis object, retrieve or store an item</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of item</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value The value of item</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>integer</code><br>$expire The expire seconds, defaults to 0, means never expired</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Wei.BaseCache.html#___invoke">Wei\BaseCache::__invoke()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="connect" id="_connect">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_connect">#</a>
+		<code><a href="source-class-Wei.Redis.html#100-126" title="Go to source code">connect</a>( )</code>
+
+		<div class="description short">
+			
+<p>Connect the redis server and set redis options</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Connect the redis server and set redis options</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true on success, false on error<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="doGet" id="_doGet">
+
+		<td class="attributes"><code>
+			 protected 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_doGet">#</a>
+		<code><a href="source-class-Wei.Redis.html#128-134" title="Go to source code">doGet</a>( <span>string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve an item</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve an item</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of item</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="doSet" id="_doSet">
+
+		<td class="attributes"><code>
+			 protected 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_doSet">#</a>
+		<code><a href="source-class-Wei.Redis.html#136-142" title="Go to source code">doSet</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Store an item</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Store an item</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of item</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value The value of item</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>integer</code><br>$expire The expire seconds, defaults to 0, means never expired</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMulti" id="_getMulti">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMulti">#</a>
+		<code><a href="source-class-Wei.Redis.html#144-151" title="Go to source code">getMulti</a>( <span>array <var>$keys</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve multiple items</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve multiple items</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$keys</var></dt>
+					<dd><code>array</code><br>$keys The name of items</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Wei.BaseCache.html#_getMulti">Wei\BaseCache::getMulti()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setMulti" id="_setMulti">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setMulti">#</a>
+		<code><a href="source-class-Wei.Redis.html#153-170" title="Go to source code">setMulti</a>( <span>array <var>$items</var></span>, <span>mixed <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Note:</p>
+
+<ol>
+	<li>The "$expire" parameter is not support by redis MSET command</li>
+
+	<li>The elements in returning values are all true or false, see links for more
+	detail</li>
+</ol>
+
+
+
+
+
+
+				<h4>Link</h4>
+				<div class="list">
+						<a href="http://redis.io/commands/mset">http://redis.io/commands/mset</a><br />
+						<a href="https://github.com/nicolasff/phpredis/blob/master/redis_array.c#L844">https://github.com/nicolasff/phpredis/blob/master/redis_array.c#L844</a><br />
+				</div>
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Wei.BaseCache.html#_setMulti">Wei\BaseCache::setMulti()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="doRemove" id="_doRemove">
+
+		<td class="attributes"><code>
+			 protected 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_doRemove">#</a>
+		<code><a href="source-class-Wei.Redis.html#172-178" title="Go to source code">doRemove</a>( <span>string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Remove an item</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Remove an item</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of item</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="doExists" id="_doExists">
+
+		<td class="attributes"><code>
+			 protected 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_doExists">#</a>
+		<code><a href="source-class-Wei.Redis.html#180-186" title="Go to source code">doExists</a>( <span>string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if an item is exists</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if an item is exists</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="doAdd" id="_doAdd">
+
+		<td class="attributes"><code>
+			 protected 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_doAdd">#</a>
+		<code><a href="source-class-Wei.Redis.html#188-198" title="Go to source code">doAdd</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Add an item</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Add an item</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of item</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value The value of item</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>integer</code><br>$expire The expire seconds, defaults to 0, means never expired</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="doReplace" id="_doReplace">
+
+		<td class="attributes"><code>
+			 protected 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_doReplace">#</a>
+		<code><a href="source-class-Wei.Redis.html#200-211" title="Go to source code">doReplace</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Note: This method is not an atomic operation</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Note: This method is not an atomic operation</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of item</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value The value of item</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>integer</code><br>$expire The expire seconds, defaults to 0, means never expired</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="doIncr" id="_doIncr">
+
+		<td class="attributes"><code>
+			 protected 
+			integer|false
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_doIncr">#</a>
+		<code><a href="source-class-Wei.Redis.html#213-219" title="Go to source code">doIncr</a>( <span>string <var>$key</var></span>, <span>integer <var>$offset</var> = <span class="php-num">1</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Increment an item</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Increment an item</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The name of item</dd>
+					<dt><var>$offset</var></dt>
+					<dd><code>integer</code><br>$offset The value to increased</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer|false</code><br>Returns the new value on success, or false on failure<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="clear" id="_clear">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_clear">#</a>
+		<code><a href="source-class-Wei.Redis.html#221-227" title="Go to source code">clear</a>( )</code>
+
+		<div class="description short">
+			
+<p>Clear all items</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Clear all items</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getObject" id="_getObject">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Redis.html">Redis</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getObject">#</a>
+		<code><a href="source-class-Wei.Redis.html#229-237" title="Go to source code">getObject</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the redis object</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the redis object</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Redis.html">Redis</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setObject" id="_setObject">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setObject">#</a>
+		<code><a href="source-class-Wei.Redis.html#239-249" title="Go to source code">setObject</a>( <span><code><a href="class-Wei.Redis.html">Wei\Redis</a></code> <var>$object</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the redis object</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the redis object</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$object</var></dt>
+					<dd><code><code><a href="class-Redis.html">Redis</a></code></code><br>$object</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Wei.BaseCache.html#methods">Wei\BaseCache</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.BaseCache.html#_add">add()</a>, 
+			<a href="class-Wei.BaseCache.html#_decr">decr()</a>, 
+			<a href="class-Wei.BaseCache.html#_exists">exists()</a>, 
+			<a href="class-Wei.BaseCache.html#_get">get()</a>, 
+			<a href="class-Wei.BaseCache.html#_getFileContent">getFileContent()</a>, 
+			<a href="class-Wei.BaseCache.html#_getKeyPrefix">getKeyPrefix()</a>, 
+			<a href="class-Wei.BaseCache.html#_getKeyWithPrefix">getKeyWithPrefix()</a>, 
+			<a href="class-Wei.BaseCache.html#_incr">incr()</a>, 
+			<a href="class-Wei.BaseCache.html#_remove">remove()</a>, 
+			<a href="class-Wei.BaseCache.html#_replace">replace()</a>, 
+			<a href="class-Wei.BaseCache.html#_set">set()</a>, 
+			<a href="class-Wei.BaseCache.html#_setKeyPrefix">setKeyPrefix()</a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Wei.Base.html#methods">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#___call">__call()</a>, 
+			<a href="class-Wei.Base.html#___get">__get()</a>, 
+			<a href="class-Wei.Base.html#_getOption">getOption()</a>, 
+			<a href="class-Wei.Base.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="object" id="$object">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-Redis.html">Redis</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Redis.html#18-23" title="Go to source code"><var>$object</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$object" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The redis object</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The redis object</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="host" id="$host">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Redis.html#25-30" title="Go to source code"><var>$host</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'127.0.0.1'</span></code></td>
+		<td class="description"><div>
+			<a href="#$host" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The host, or the path to a unix domain socket</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The host, or the path to a unix domain socket</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="port" id="$port">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Redis.html#32-37" title="Go to source code"><var>$port</var></a>
+		</td>
+		<td class="value"><code><span class="php-num">6379</span></code></td>
+		<td class="description"><div>
+			<a href="#$port" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The port of the host</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The port of the host</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="timeout" id="$timeout">
+		<td class="attributes"><code>
+			protected  
+			float|integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Redis.html#39-44" title="Go to source code"><var>$timeout</var></a>
+		</td>
+		<td class="value"><code><span class="php-num">0.0</span></code></td>
+		<td class="description"><div>
+			<a href="#$timeout" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The timeout seconds</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The timeout seconds</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="persistent" id="$persistent">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Redis.html#46-51" title="Go to source code"><var>$persistent</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">true</span></code></td>
+		<td class="description"><div>
+			<a href="#$persistent" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether persistent connection or not</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether persistent connection or not</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="auth" id="$auth">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Redis.html#53-58" title="Go to source code"><var>$auth</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$auth" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A password to authenticate the connection</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A password to authenticate the connection</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="options" id="$options">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Redis.html#60-67" title="Go to source code"><var>$options</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+    \Redis::OPT_SERIALIZER =&gt; \Redis::SERIALIZER_PHP
+)</code></td>
+		<td class="description"><div>
+			<a href="#$options" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The options for \Redis::setOptions()</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The options for \Redis::setOptions()</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Wei.BaseCache.html#properties">Wei\BaseCache</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.BaseCache.html#$keyPrefix"><var>$keyPrefix</var></a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Wei.Base.html#properties">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#$providers"><var>$providers</var></a>, 
+			<a href="class-Wei.Base.html#$wei"><var>$wei</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Wei Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

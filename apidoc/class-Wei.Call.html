@@ -1,0 +1,2756 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Wei\Call | Wei Framework</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
+						<ul>
+				<li><a href="namespace-Wei.Db.html">Db</a>
+						</li>
+				<li><a href="namespace-Wei.Validator.html">Validator</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Wei.Apc.html">Apc</a></li>
+				<li><a href="class-Wei.App.html">App</a></li>
+				<li><a href="class-Wei.Arr.html">Arr</a></li>
+				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
+				<li><a href="class-Wei.Asset.html">Asset</a></li>
+				<li><a href="class-Wei.Base.html">Base</a></li>
+				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
+				<li><a href="class-Wei.Cache.html">Cache</a></li>
+				<li class="active"><a href="class-Wei.Call.html">Call</a></li>
+				<li><a href="class-Wei.Config.html">Config</a></li>
+				<li><a href="class-Wei.Controller.html">Controller</a></li>
+				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
+				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
+				<li><a href="class-Wei.Db.html">Db</a></li>
+				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
+				<li><a href="class-Wei.Env.html">Env</a></li>
+				<li><a href="class-Wei.Error.html">Error</a></li>
+				<li><a href="class-Wei.Escape.html">Escape</a></li>
+				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
+				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
+				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Logger.html">Logger</a></li>
+				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
+				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
+				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
+				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
+				<li><a href="class-Wei.Password.html">Password</a></li>
+				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
+				<li><a href="class-Wei.Redis.html">Redis</a></li>
+				<li><a href="class-Wei.Request.html">Request</a></li>
+				<li><a href="class-Wei.Response.html">Response</a></li>
+				<li><a href="class-Wei.Router.html">Router</a></li>
+				<li><a href="class-Wei.Session.html">Session</a></li>
+				<li><a href="class-Wei.T.html">T</a></li>
+				<li><a href="class-Wei.Ua.html">Ua</a></li>
+				<li><a href="class-Wei.Upload.html">Upload</a></li>
+				<li><a href="class-Wei.Url.html">Url</a></li>
+				<li><a href="class-Wei.Uuid.html">Uuid</a></li>
+				<li><a href="class-Wei.Validate.html">Validate</a></li>
+				<li><a href="class-Wei.View.html">View</a></li>
+				<li><a href="class-Wei.WeChatApp.html">WeChatApp</a></li>
+				<li><a href="class-Wei.Wei.html">Wei</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Wei.html" title="Summary of Wei"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Call</h1>
+
+
+	<div class="description">
+	
+<p>A service handles HTTP request which inspired by jQuery Ajax</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Wei.Base.html"><span>Wei\Base</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Wei\Call</span></b>			
+			 implements 
+				<a href="class-ArrayAccess.html"><span>ArrayAccess</span></a>, 
+			
+				<a href="class-Countable.html"><span>Countable</span></a>, 
+			
+				<a href="class-IteratorAggregate.html"><span>IteratorAggregate</span></a>
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br />
+		
+
+				<b>Author:</b>
+				Twin Huang &lt;<a
+href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
+				<b>Link:</b>
+				<a href="http://api.jquery.com/jQuery.ajax/">http://api.jquery.com/jQuery.ajax/</a><br />
+		<b>Located at</b> <a href="source-class-Wei.Call.html#11-947" title="Go to source code">Call.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Wei.Call.html#249-262" title="Go to source code">__construct</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Constructor</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructor</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>When option "wei" is not an instance of "Wei\Wei"<br />
+				</div>
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Wei.Base.html#___construct">Wei\Base::__construct()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-Wei.Call.html#264-285" title="Go to source code">__invoke</a>( <span>array|string <var>$url</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Create a new call object and execute</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a new call object and execute</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>array|string</code><br>$url A options array or the request URL</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options A options array if the first parameter is string</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this A new call object<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="execute" id="_execute">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_execute">#</a>
+		<code><a href="source-class-Wei.Call.html#287-307" title="Go to source code">execute</a>( )</code>
+
+		<div class="description short">
+			
+<p>Execute the request, parse the response data and trigger relative
+callbacks</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute the request, parse the response data and trigger relative
+callbacks</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="prepareCurlOptions" id="_prepareCurlOptions">
+
+		<td class="attributes"><code>
+			 protected 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_prepareCurlOptions">#</a>
+		<code><a href="source-class-Wei.Call.html#309-402" title="Go to source code">prepareCurlOptions</a>( )</code>
+
+		<div class="description short">
+			
+<p>Prepare cURL options</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Prepare cURL options</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="handleResponse" id="_handleResponse">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_handleResponse">#</a>
+		<code><a href="source-class-Wei.Call.html#404-454" title="Go to source code">handleResponse</a>( <span>string <var>$response</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Parse response text</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Parse response text</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$response</var></dt>
+					<dd><code>string</code><br>$response</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="triggerError" id="_triggerError">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_triggerError">#</a>
+		<code><a href="source-class-Wei.Call.html#456-468" title="Go to source code">triggerError</a>( <span>string <var>$status</var></span>, <span><code><a href="class-ErrorException.html">ErrorException</a></code> <var>$exception</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Trigger error callback</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Trigger error callback</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$status</var></dt>
+					<dd><code>string</code><br>$status</dd>
+					<dt><var>$exception</var></dt>
+					<dd><code><code><a href="class-ErrorException.html">ErrorException</a></code></code><br>$exception</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parseResponse" id="_parseResponse">
+
+		<td class="attributes"><code>
+			 protected 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_parseResponse">#</a>
+		<code><a href="source-class-Wei.Call.html#470-510" title="Go to source code">parseResponse</a>( <span>string <var>$data</var></span>, <span>null <var>&amp; $exception</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Parse response data by specified type</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Parse response data by specified type</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd><code>string</code><br>$data</dd>
+					<dt><var>$exception</var></dt>
+					<dd><code>null</code><br>$exception A variable to store exception when parsing error</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setCurlOption" id="_setCurlOption">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setCurlOption">#</a>
+		<code><a href="source-class-Wei.Call.html#512-523" title="Go to source code">setCurlOption</a>( <span>integer <var>$option</var></span>, <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets an option on the current cURL handle</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets an option on the current cURL handle</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$option</var></dt>
+					<dd><code>integer</code><br>$option</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getCurlOption" id="_getCurlOption">
+
+		<td class="attributes"><code>
+			 public 
+			null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getCurlOption">#</a>
+		<code><a href="source-class-Wei.Call.html#525-534" title="Go to source code">getCurlOption</a>( <span>integer <var>$option</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns an option value of the current cURL handle</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns an option value of the current cURL handle</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$option</var></dt>
+					<dd><code>integer</code><br>$option</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>null</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponseText" id="_getResponseText">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getResponseText">#</a>
+		<code><a href="source-class-Wei.Call.html#536-544" title="Go to source code">getResponseText</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the response text</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the response text</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponse" id="_getResponse">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getResponse">#</a>
+		<code><a href="source-class-Wei.Call.html#546-554" title="Go to source code">getResponse</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the parsed response data</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the parsed response data</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getUrl" id="_getUrl">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getUrl">#</a>
+		<code><a href="source-class-Wei.Call.html#556-564" title="Go to source code">getUrl</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the request URL</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the request URL</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMethod" id="_getMethod">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMethod">#</a>
+		<code><a href="source-class-Wei.Call.html#566-574" title="Go to source code">getMethod</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the request method</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the request method</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getIp" id="_getIp">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getIp">#</a>
+		<code><a href="source-class-Wei.Call.html#576-584" title="Go to source code">getIp</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the IP address for the host name in URL</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the IP address for the host name in URL</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getData" id="_getData">
+
+		<td class="attributes"><code>
+			 public 
+			array|string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getData">#</a>
+		<code><a href="source-class-Wei.Call.html#586-594" title="Go to source code">getData</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the data to send to the server</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the data to send to the server</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array|string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setRequestHeader" id="_setRequestHeader">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setRequestHeader">#</a>
+		<code><a href="source-class-Wei.Call.html#596-607" title="Go to source code">setRequestHeader</a>( <span>string <var>$name</var></span>, <span>string <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set request header value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set request header value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponseHeader" id="_getResponseHeader">
+
+		<td class="attributes"><code>
+			 public 
+			string|array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getResponseHeader">#</a>
+		<code><a href="source-class-Wei.Call.html#609-631" title="Go to source code">getResponseHeader</a>( <span>string <var>$name</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$first</var> = <span class="php-keyword1">true</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns request header value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns request header value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name The header name</dd>
+					<dt><var>$first</var></dt>
+					<dd><code>boolean</code><br>$first Return the first element or the whole header values</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string|array</code><br>When $first is true, returns string, otherwise, returns array<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponseHeaders" id="_getResponseHeaders">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getResponseHeaders">#</a>
+		<code><a href="source-class-Wei.Call.html#633-650" title="Go to source code">getResponseHeaders</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns response headers array</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns response headers array</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponseCookies" id="_getResponseCookies">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getResponseCookies">#</a>
+		<code><a href="source-class-Wei.Call.html#652-667" title="Go to source code">getResponseCookies</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns a key-value array contains the response cookies, like $_COOKIE</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a key-value array contains the response cookies, like $_COOKIE</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResponseCookie" id="_getResponseCookie">
+
+		<td class="attributes"><code>
+			 public 
+			string|null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getResponseCookie">#</a>
+		<code><a href="source-class-Wei.Call.html#669-679" title="Go to source code">getResponseCookie</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the cookie value by specified name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the cookie value by specified name</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br>$name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string|null</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parseCookie" id="_parseCookie">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_parseCookie">#</a>
+		<code><a href="source-class-Wei.Call.html#681-704" title="Go to source code">parseCookie</a>( <span>string <var>$header</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Parse cookie from header, returns result like $_COOKIE</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Parse cookie from header, returns result like $_COOKIE</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$header</var></dt>
+					<dd><code>string</code><br>$header</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isSuccess" id="_isSuccess">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isSuccess">#</a>
+		<code><a href="source-class-Wei.Call.html#706-714" title="Go to source code">isSuccess</a>( )</code>
+
+		<div class="description short">
+			
+<p>Return if the request is success</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Return if the request is success</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setMethod" id="_setMethod">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setMethod">#</a>
+		<code><a href="source-class-Wei.Call.html#716-726" title="Go to source code">setMethod</a>( <span>string <var>$method</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set request method</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set request method</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$method</var></dt>
+					<dd><code>string</code><br>$method</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getJson" id="_getJson">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getJson">#</a>
+		<code><a href="source-class-Wei.Call.html#728-738" title="Go to source code">getJson</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a GET method request and parser response data to JSON array</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a GET method request and parser response data to JSON array</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getJsonObject" id="_getJsonObject">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getJsonObject">#</a>
+		<code><a href="source-class-Wei.Call.html#740-750" title="Go to source code">getJsonObject</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a GET method request and parser response data to JSON object</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a GET method request and parser response data to JSON object</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="get" id="_get">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_get">#</a>
+		<code><a href="source-class-Wei.Call.html#752-763" title="Go to source code">get</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a GET method request</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a GET method request</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+					<dt><var>$dataType</var></dt>
+					<dd><code>string</code><br>$dataType</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="post" id="_post">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_post">#</a>
+		<code><a href="source-class-Wei.Call.html#765-776" title="Go to source code">post</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a POST method request</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a POST method request</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+					<dt><var>$dataType</var></dt>
+					<dd><code>string</code><br>$dataType</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="put" id="_put">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_put">#</a>
+		<code><a href="source-class-Wei.Call.html#778-789" title="Go to source code">put</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a PUT method request</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a PUT method request</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+					<dt><var>$dataType</var></dt>
+					<dd><code>string</code><br>$dataType</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="delete" id="_delete">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_delete">#</a>
+		<code><a href="source-class-Wei.Call.html#791-802" title="Go to source code">delete</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a DELETE method request</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a DELETE method request</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+					<dt><var>$dataType</var></dt>
+					<dd><code>string</code><br>$dataType</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="patch" id="_patch">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_patch">#</a>
+		<code><a href="source-class-Wei.Call.html#804-815" title="Go to source code">patch</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a PATCH method request</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a PATCH method request</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+					<dt><var>$dataType</var></dt>
+					<dd><code>string</code><br>$dataType</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="processMethod" id="_processMethod">
+
+		<td class="attributes"><code>
+			 protected 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_processMethod">#</a>
+		<code><a href="source-class-Wei.Call.html#817-834" title="Go to source code">processMethod</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>string <var>$dataType</var></span>, <span>string <var>$method</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a specified method request</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a specified method request</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>array</code><br>$data</dd>
+					<dt><var>$dataType</var></dt>
+					<dd><code>string</code><br>$dataType</dd>
+					<dt><var>$method</var></dt>
+					<dd><code>string</code><br>$method</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>$this<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getErrorStatus" id="_getErrorStatus">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getErrorStatus">#</a>
+		<code><a href="source-class-Wei.Call.html#836-844" title="Go to source code">getErrorStatus</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the error status text</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the error status text</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getErrorException" id="_getErrorException">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-ErrorException.html">ErrorException</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getErrorException">#</a>
+		<code><a href="source-class-Wei.Call.html#846-854" title="Go to source code">getErrorException</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the error exception object</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the error exception object</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-ErrorException.html">ErrorException</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetExists" id="_offsetExists">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetExists">#</a>
+		<code><a href="source-class-Wei.Call.html#856-865" title="Go to source code">offsetExists</a>( <span>string <var>$offset</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if the offset exists</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if the offset exists</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd><code>string</code><br>$offset</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-ArrayAccess.html#_offsetExists">ArrayAccess::offsetExists()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetGet" id="_offsetGet">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetGet">#</a>
+		<code><a href="source-class-Wei.Call.html#867-876" title="Go to source code">offsetGet</a>( <span>string <var>$offset</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get the offset value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the offset value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd><code>string</code><br>$offset</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-ArrayAccess.html#_offsetGet">ArrayAccess::offsetGet()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetSet" id="_offsetSet">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetSet">#</a>
+		<code><a href="source-class-Wei.Call.html#878-887" title="Go to source code">offsetSet</a>( <span>string <var>$offset</var></span>, <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the offset value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the offset value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd><code>string</code><br>$offset</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value</dd>
+				</dl></div>
+
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-ArrayAccess.html#_offsetSet">ArrayAccess::offsetSet()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetUnset" id="_offsetUnset">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetUnset">#</a>
+		<code><a href="source-class-Wei.Call.html#889-897" title="Go to source code">offsetUnset</a>( <span>string <var>$offset</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Unset the offset</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Unset the offset</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd><code>string</code><br>$offset</dd>
+				</dl></div>
+
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-ArrayAccess.html#_offsetUnset">ArrayAccess::offsetUnset()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="count" id="_count">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_count">#</a>
+		<code><a href="source-class-Wei.Call.html#899-907" title="Go to source code">count</a>( )</code>
+
+		<div class="description short">
+			
+<p>Return the length of data</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Return the length of data</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>the length of data<br />
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Countable.html#_count">Countable::count()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getIterator" id="_getIterator">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-ArrayIterator.html">ArrayIterator</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getIterator">#</a>
+		<code><a href="source-class-Wei.Call.html#909-917" title="Go to source code">getIterator</a>( )</code>
+
+		<div class="description short">
+			
+<p>Retrieve an array iterator</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve an array iterator</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-ArrayIterator.html">ArrayIterator</a></code></code><br />
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-IteratorAggregate.html#_getIterator">IteratorAggregate::getIterator()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__toString" id="___toString">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___toString">#</a>
+		<code><a href="source-class-Wei.Call.html#919-927" title="Go to source code">__toString</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns to response body string</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns to response body string</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getCurlInfo" id="_getCurlInfo">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getCurlInfo">#</a>
+		<code><a href="source-class-Wei.Call.html#929-935" title="Go to source code">getCurlInfo</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__destruct" id="___destruct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___destruct">#</a>
+		<code><a href="source-class-Wei.Call.html#937-946" title="Go to source code">__destruct</a>( )</code>
+
+		<div class="description short">
+			
+<p>Close the cURL session</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Close the cURL session</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Wei.Base.html#methods">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#___call">__call()</a>, 
+			<a href="class-Wei.Base.html#___get">__get()</a>, 
+			<a href="class-Wei.Base.html#_getOption">getOption()</a>, 
+			<a href="class-Wei.Base.html#_setOption">setOption()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="url" id="$url">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#19-24" title="Go to source code"><var>$url</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$url" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The request URL</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The request URL</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="method" id="$method">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#26-34" title="Go to source code"><var>$method</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'GET'</span></code></td>
+		<td class="description"><div>
+			<a href="#$method" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The HTTP request method</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The HTTP request method</p>
+
+<p>The method could be <code>GET</code>, <code>POST</code>, <code>DELETE</code>,
+<code>PUT</code>, <code>PATCH</code> or any other methods that the server is
+supported</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="contentType" id="$contentType">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#36-41" title="Go to source code"><var>$contentType</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'application/x-www-form-urlencoded; charset=UTF-8'</span></code></td>
+		<td class="description"><div>
+			<a href="#$contentType" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The content type in HTTP request header</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The content type in HTTP request header</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="cookies" id="$cookies">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#43-48" title="Go to source code"><var>$cookies</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$cookies" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A key-value array to store cookies</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A key-value array to store cookies</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="data" id="$data">
+		<td class="attributes"><code>
+			protected  
+			array|string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#50-55" title="Go to source code"><var>$data</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$data" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The data to send to the server</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The data to send to the server</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="global" id="$global">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#57-63" title="Go to source code"><var>$global</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$global" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether use the global options in <code>$wei-&gt;call</code> object when
+create a new object</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether use the global options in <code>$wei-&gt;call</code> object when
+create a new object</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="headers" id="$headers">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#65-70" title="Go to source code"><var>$headers</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$headers" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A key-value array to store request headers</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A key-value array to store request headers</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="header" id="$header">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#72-81" title="Go to source code"><var>$header</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$header" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether includes the header in the response string, equals the CURLOPT_HEADER
+option</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether includes the header in the response string, equals the CURLOPT_HEADER
+option</p>
+
+<p>Set to true when you need to call getResponseHeaders, getResponseHeader,
+getResponseCookies or getResponseCookie methods</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="ip" id="$ip">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#83-88" title="Go to source code"><var>$ip</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$ip" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The IP address for the host name in URL, NOT your client IP</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The IP address for the host name in URL, NOT your client IP</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="timeout" id="$timeout">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#90-95" title="Go to source code"><var>$timeout</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$timeout" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A number of milliseconds to wait in the whole connection</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A number of milliseconds to wait in the whole connection</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="dataType" id="$dataType">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#97-105" title="Go to source code"><var>$dataType</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'text'</span></code></td>
+		<td class="description"><div>
+			<a href="#$dataType" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The data type to parse the response body</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The data type to parse the response body</p>
+
+<p>The data type could by <code>json</code>, <code>jsonObject</code>,
+<code>xml</code>, <code>query</code>(URL query string), <code>serialize</code>
+and <code>text</code></p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="referer" id="$referer">
+		<td class="attributes"><code>
+			protected  
+			string|true
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#107-114" title="Go to source code"><var>$referer</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$referer" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The custom HTTP referer string</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The custom HTTP referer string</p>
+
+<p>If set to true, it will use the request URL as referer string</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="userAgent" id="$userAgent">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#116-121" title="Go to source code"><var>$userAgent</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$userAgent" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The custom HTTP user agent string</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The custom HTTP user agent string</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="throwException" id="$throwException">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#123-130" title="Go to source code"><var>$throwException</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">true</span></code></td>
+		<td class="description"><div>
+			<a href="#$throwException" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Whether throw exception or keep silent when request error</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Whether throw exception or keep silent when request error</p>
+
+<p>Note that the exception is thrown after triggered complete callback, rather
+than triggered error callback</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="beforeSend" id="$beforeSend">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#132-137" title="Go to source code"><var>$beforeSend</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$beforeSend" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A callback triggered after prepared the data and before the process the
+request</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A callback triggered after prepared the data and before the process the
+request</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="success" id="$success">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#139-144" title="Go to source code"><var>$success</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$success" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A callback triggered after the request is called success</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A callback triggered after the request is called success</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="error" id="$error">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#146-153" title="Go to source code"><var>$error</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$error" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A callback triggered when the request fails</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A callback triggered when the request fails</p>
+
+<p>The <code>$textStatus</code> could be <code>curl</code>, <code>http</code>,
+and <code>parser</code></p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="complete" id="$complete">
+		<td class="attributes"><code>
+			protected  
+			callable
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#155-160" title="Go to source code"><var>$complete</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$complete" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A callback triggered when request finishes (after <code>success</code> and
+<code>error</code> callbacks are executed)</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A callback triggered when request finishes (after <code>success</code> and
+<code>error</code> callbacks are executed)</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="curlOptions" id="$curlOptions">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#162-167" title="Go to source code"><var>$curlOptions</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$curlOptions" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The user define options for cURL handle</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The user define options for cURL handle</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="defaultCurlOptions" id="$defaultCurlOptions">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#169-177" title="Go to source code"><var>$defaultCurlOptions</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>(
+    CURLOPT_RETURNTRANSFER =&gt; <span class="php-keyword1">true</span>,
+    CURLOPT_FOLLOWLOCATION =&gt; <span class="php-keyword1">true</span>,
+)</code></td>
+		<td class="description"><div>
+			<a href="#$defaultCurlOptions" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The predefined options for cURL handle</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The predefined options for cURL handle</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="result" id="$result">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#179-184" title="Go to source code"><var>$result</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$result" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The request result</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The request result</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="responseText" id="$responseText">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#186-191" title="Go to source code"><var>$responseText</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">''</span></code></td>
+		<td class="description"><div>
+			<a href="#$responseText" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The response body string</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The response body string</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="response" id="$response">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#193-198" title="Go to source code"><var>$response</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$response" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The parsed response data</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The parsed response data</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="responseHeader" id="$responseHeader">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#200-205" title="Go to source code"><var>$responseHeader</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$responseHeader" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The response header string</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The response header string</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="responseHeaders" id="$responseHeaders">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#207-212" title="Go to source code"><var>$responseHeaders</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$responseHeaders" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The parsed response header array</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The parsed response header array</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="responseCookies" id="$responseCookies">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#214-219" title="Go to source code"><var>$responseCookies</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$responseCookies" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A key-value array contains the response cookies</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A key-value array contains the response cookies</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="ch" id="$ch">
+		<td class="attributes"><code>
+			protected  
+			resource
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#221-226" title="Go to source code"><var>$ch</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$ch" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The cURL session</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The cURL session</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="errorStatus" id="$errorStatus">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#228-233" title="Go to source code"><var>$errorStatus</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">''</span></code></td>
+		<td class="description"><div>
+			<a href="#$errorStatus" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The error text status</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The error text status</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="errorException" id="$errorException">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-ErrorException.html">ErrorException</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Call.html#235-240" title="Go to source code"><var>$errorException</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$errorException" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The error exception object</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The error exception object</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Wei.Base.html#properties">Wei\Base</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Wei.Base.html#$providers"><var>$providers</var></a>, 
+			<a href="class-Wei.Base.html#$wei"><var>$wei</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Wei Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
