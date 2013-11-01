@@ -1,6 +1,6 @@
 # 词汇表
 
-## widget
+## wei
 
 	TODO
 

@@ -91,12 +91,12 @@ $user->delete();
 ### 连接到多个数据库
 
 ```php
-$widget = wei(array(
+$wei = wei(array(
     // 数据库对象的配置
     'db' => array(
         'driver'    => 'mysql',
         'host'      => 'localhost',
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf8',
         'user'      => 'root',
         'password'  => '123456',
@@ -105,7 +105,7 @@ $widget = wei(array(
     'slave.db' => array(
         'driver'    => 'mysql',
         'host'      => 'slave-host',
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf-8',
         'user'      => 'root',
         'password'  => '123456',
@@ -114,7 +114,7 @@ $widget = wei(array(
     'logger.db' => array(
         'driver'    => 'mysql',
         'host'      => 'logger-host',
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf-8',
         'user'      => 'root',
         'password'  => '123456',
@@ -122,13 +122,13 @@ $widget = wei(array(
 ));
 
 // 获取默认数据库对象
-$db = $widget->db;
+$db = $wei->db;
 
 // 获取备机数据库对象
-$slaveDb = $widget->slaveDb;
+$slaveDb = $wei->slaveDb;
 
 // 获取日志数据库对象
-$loggerDb = $widget->loggerDb;
+$loggerDb = $wei->loggerDb;
 
 // 使用日志数据库对象查询用户编号为1的操作日志
 $loggerDb->findAll('userLog', array('userId' => 1));
@@ -140,7 +140,7 @@ $loggerDb->findAll('userLog', array('userId' => 1));
 
 * `fetch`方法的第一个参数是完整的SQL语句,返回的是数组
 * `select`方法的第一个参数是数据表名称,返回的是数组
-* `find`方法的第一个参数也是数据表名称,但返回的是`Widget\Db\Record`对象
+* `find`方法的第一个参数也是数据表名称,但返回的是`Wei\Db\Record`对象
 
 另外,如果要查询多条数据,对应的方法是`fetchAll`,`selectAll`和`findAll`.
 
@@ -153,7 +153,7 @@ $array = $db->fetch("SELECT * FROM user WHERE id = 1");
 // 根据表名和条件查询一行记录,返回一个一维数组
 $array = $db->select('user', 1);
 
-// 根据表名和条件查询一行记录,返回一个`Widget\Db\Record`对象
+// 根据表名和条件查询一行记录,返回一个`Wei\Db\Record`对象
 $record = $db->find('user', 1);
 
 // 根据SQL语句查询多行记录,返回一个二维数组
@@ -162,7 +162,7 @@ $array = $db->fetchAll("SELECT * FROM user WHERE groupId = 1");
 // 根据表名和条件查询多行记录,返回一个二维数组
 $array = $db->select('user');
 
-// 根据表名和条件查询多行记录,返回一个`Widget\Db\Collection`对象
+// 根据表名和条件查询多行记录,返回一个`Wei\Db\Collection`对象
 $collection = $db->find('user');
 ```
 
@@ -175,14 +175,14 @@ selectAll   | $table, $conditions | 二维数组
 fetch       | $sql                | 数组
 fetchAll    | $sql                | 二维数组
 fetchColumn | $sql                | 字符串,返回指定栏的值
-find        | $table, $conditions | Widget\Db\Record对象
-findAll     | $table, $conditions | Widget\Db\Collection对象
+find        | $table, $conditions | Wei\Db\Record对象
+findAll     | $table, $conditions | Wei\Db\Collection对象
 query       | $sql                | PDOStatement对象
 
 ### 通过beforeQuery回调记录SQL日志
 
 ```php
-$widget = wei(array(
+$wei = wei(array(
     'db' => array(
         'beforeQuery' => function($sql, $params, $types, $db) {
             $log = $sql . "\n" . var_export($params, true);
@@ -192,10 +192,10 @@ $widget = wei(array(
     )
 ));
 
-$widget->db->query("SELECT DATE('now')");
+$wei->db->query("SELECT DATE('now')");
 
 // 日志文件内容
-//[2013-07-10 23:15:38] widget.DEBUG: SELECT DATE('now')
+//[2013-07-10 23:15:38] wei.DEBUG: SELECT DATE('now')
 //array (
 //)
 ```
@@ -208,12 +208,12 @@ $widget->db->query("SELECT DATE('now')");
 * 写操作使用master数据库
 
 ```php
-$widget = wei(array(
+$wei = wei(array(
     // 主数据库对象的配置
     'db' => array(
         'driver'    => 'mysql',
         'host'      => 'localhost',
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf8',
         'user'      => 'root',
         'password'  => '123456',
@@ -224,7 +224,7 @@ $widget = wei(array(
     'slave.db' => array(
         'driver'    => 'mysql',
         'host'      => 'slave-host',
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf-8',
         'user'      => 'root',
         'password'  => '123456',
@@ -232,7 +232,7 @@ $widget = wei(array(
 ));
 
 // 获取主数据库对象
-$db = $widget->db;
+$db = $wei->db;
 
 // 执行写操作,使用主数据库
 $db->insert('table', array('key' => 'value'));
@@ -243,7 +243,7 @@ $db->select('table', array('key' => 'value'));
 $db->find('table', array('key' => 'value'));
 
 // 获取备数据库对象
-$slaveDb = $widget->slaveDb;
+$slaveDb = $wei->slaveDb;
 
 // 直接使用备数据库操作
 $slaveDb->select('table', array('key' => 'value'));
@@ -266,8 +266,8 @@ unixSocket      | string   | 无                   | MySQL数据库的Unix socke
 charset         | string   | 无                   | 连接数据库的字符集,仅驱动为mysql时有效
 path            | string   | 无                   | SQLite数据库所在的路径,如果存储在内存中,使用`:memory:`
 attrs           | array    | array()              | PDO的属性配置
-recordClass     | string   | Widget\Db\Record     | 记录类的基础类名称
-collectionClass | string   | Widget\Db\Collection | 记录集合类的基础类名称
+recordClass     | string   | Wei\Db\Record     | 记录类的基础类名称
+collectionClass | string   | Wei\Db\Collection | 记录集合类的基础类名称
 recordClasses   | array    | array()              | 自定义记录类的数组,键名为数据表名称,值为记录类名称
 recordNamespace | string   | 无                   | 自定义记录类的命名空间
 slaveDb         | string   | 无                   | Slave数据库(用于读查询)的配置名称
@@ -294,7 +294,7 @@ sqlite   | path
 
 名称    | 类型      | 说明
 --------|-----------|------
-$db     | Widget\Db | 当前Db对象
+$db     | Wei\Db | 当前Db对象
 
 #### connectFails
 
@@ -302,7 +302,7 @@ $db     | Widget\Db | 当前Db对象
 
 名称    | 类型         | 说明
 --------|--------------|------
-$db     | Widget\Db    | 当前Db对象
+$db     | Wei\Db    | 当前Db对象
 $e      | PDOException | PDO异常对象
 
 #### afterConnect
@@ -311,7 +311,7 @@ $e      | PDOException | PDO异常对象
 
 名称    | 类型         | 说明
 --------|--------------|------
-$db     | Widget\Db    | 当前Db对象
+$db     | Wei\Db    | 当前Db对象
 $pdo    | PDO          | PDO对象
 
 #### beforeQuery
@@ -323,7 +323,7 @@ $pdo    | PDO          | PDO对象
 $sql    | string    | 当前执行的SQL语句
 $params | array     | 执行语句的参数
 $types  | array     | 执行语句的参数类型
-$db     | Widget\Db | 当前Db对象
+$db     | Wei\Db | 当前Db对象
 
 #### afterQuery
 
@@ -331,14 +331,14 @@ $db     | Widget\Db | 当前Db对象
 
 名称    | 类型      | 说明
 --------|-----------|------
-$db     | Widget\Db | 当前Db对象
+$db     | Wei\Db | 当前Db对象
 
 ### 方法
 
 #### db($table = null)
 根据数据表名称,创建一个新Query Builder对象
 
-**返回:** `Widget\Db\QueryBuilder`
+**返回:** `Wei\Db\QueryBuilder`
 
 **参数**
 
@@ -470,7 +470,7 @@ $column     | int          | 返回第几项的值
 #### db->find($table, $conditions)
 根据条件查找数据表的一条记录
 
-**返回:** `Widget\Db\Record`|`false` 如果记录存在,返回记录对象,否则返回`false`
+**返回:** `Wei\Db\Record`|`false` 如果记录存在,返回记录对象,否则返回`false`
 
 **参数**
 
@@ -482,7 +482,7 @@ $conditions | string,array | 查询条件,如果类型是字符串,表示主键�
 #### db->findAll($table, $conditions)
 根据条件查找数据表的所有匹配记录
 
-**返回:** `Widget\Db\Collection`|`false` 如果记录存在,返回集合对象,否则返回`false`
+**返回:** `Wei\Db\Collection`|`false` 如果记录存在,返回集合对象,否则返回`false`
 
 **参数**
 
@@ -494,7 +494,7 @@ $conditions | string,array | 查询条件,如果类型是字符串,表示主键�
 #### db->create($table, $data = array())
 创建一个新的数据表记录对象
 
-**返回:** `Widget\Db\Record` 记录对象
+**返回:** `Wei\Db\Record` 记录对象
 
 **参数**
 
@@ -506,7 +506,7 @@ $data       | array        | 初始化的数据
 #### db->findOrCreate($table, $id, $data = array())
 根据条件查找数据表的一条记录,如果记录不存在,将根据`$data`创建一条新的数据表记录对象
 
-**返回:** `Widget\Db\Record` 记录对象
+**返回:** `Wei\Db\Record` 记录对象
 
 **参数**
 
@@ -556,7 +556,7 @@ $params     | array        | 绑定到SQL的参数
 #### db->getRecordClass($table)
 根据数据表名称获取记录类名称
 
-**返回:** `string` 如果记录类不存在,返回默认类`Widget\Db\Record`
+**返回:** `string` 如果记录类不存在,返回默认类`Wei\Db\Record`
 
 #### db->getUser()
 获取连接数据库的用户名称
@@ -596,6 +596,6 @@ $params     | array        | 绑定到SQL的参数
 ### 魔术方法
 
 #### db->$table($conditions)
-根据条件查找数据表的一行记录,返回的是一个`Widget\Db\Record`对象,等于`db->find($table, $conditions)`
+根据条件查找数据表的一行记录,返回的是一个`Wei\Db\Record`对象,等于`db->find($table, $conditions)`
 
-**返回:** `Widget\Db\Record`
+**返回:** `Wei\Db\Record`

@@ -2,7 +2,7 @@
 
 namespace Demo;
 
-use Widget\Base;
+use Wei\Base;
 
 class Hello extends Base
 {

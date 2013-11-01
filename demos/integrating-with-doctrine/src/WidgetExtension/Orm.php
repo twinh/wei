@@ -11,7 +11,7 @@ namespace WidgetExtension;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager as BaseEntityManager;
 use Doctrine\Common\Cache\Cache as DoctrineCache;
-use Widget\Base;
+use Wei\Base;
 
 /**
  * A container widget for Doctrine ORM entity manager object

@@ -28,7 +28,7 @@ $handlers = array(
     // 如`stream`表示`Monolog\Handler\StreamHandler`,`chromePHP`表示`Monolog\Handler\ChromePHPHandler`
     'stream' => array(
         // 数组的值表示处理器类的初始化参数
-        'stream' => 'log/widget.log', // 日志所在的文件
+        'stream' => 'log/wei.log', // 日志所在的文件
         'level' => MonologLogger::DEBUG, // 最低记录的等级
     )
 );

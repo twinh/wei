@@ -5,12 +5,12 @@ return array(
         'driver'    => 'mysql',
         'user'      => 'travis',
         'password'  => '',
-        'dbname'    => 'widget_tests',
+        'dbname'    => 'wei_tests',
     ),
     'pgsql.db' => array(
         'driver'    => 'pgsql',
         'user'      => 'travis',
         'password'  => '',
-        'dbname'    => 'widget_tests'
+        'dbname'    => 'wei_tests'
     ),
 );

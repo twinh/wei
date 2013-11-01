@@ -9,7 +9,7 @@ Active Record
 
 ```php
 // 通过`create`方法创建一个新的用户记录对象
-/* @var $user \Widget\Db\Record */
+/* @var $user \Wei\Db\Record */
 $user = wei()->db->create('user', array('groupId' => 1));
 
 // 设置对象的值
@@ -75,39 +75,39 @@ $user->delete();
 
 ### 属性
 
-#### Widget\Db $db
+#### Wei\Db $db
 数据库连接对象
 
-#### Widget\Widget $widget
+#### Wei\Wei $wei
 对象管理器
 
 ### 回调
 
-#### afterLoad($record, $widget)
+#### afterLoad($record, $wei)
 加载记录后触发的回调
 
-#### beforeSave($record, $widget)
+#### beforeSave($record, $wei)
 保存记录前触发的回调
 
-#### afterSave($record, $widget)
+#### afterSave($record, $wei)
 保存记录后触发的回调
 
-#### beforeInsert($record, $widget)
+#### beforeInsert($record, $wei)
 插入记录到数据库前触发的回调
 
-#### afterInsert($record, $widget)
+#### afterInsert($record, $wei)
 插入记录到数据库后触发的回调
 
-#### beforeUpdate($record, $widget)
+#### beforeUpdate($record, $wei)
 更新记录到数据库前触发的回调
 
-#### afterUpdate($record, $widget)
+#### afterUpdate($record, $wei)
 更新记录到数据库后触发的回调
 
-#### beforeDelete($record, $widget)
+#### beforeDelete($record, $wei)
 删除记录前触发的回调
 
-#### afterDelete($record, $widget)
+#### afterDelete($record, $wei)
 删除记录后触发的回调
 
 ### 方法

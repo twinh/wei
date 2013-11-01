@@ -14,7 +14,7 @@ wei()->logger->debug('The logger is called');
 echo wei()->logger->getFile();
 
 // 可以在日志文件看到类似格式的一条日志
-// [XXXX-XX-XX XX:XX:XX] widget.DEBUG: The logger is called
+// [XXXX-XX-XX XX:XX:XX] wei.DEBUG: The logger is called
 ```
 
 调用方式
@@ -24,7 +24,7 @@ echo wei()->logger->getFile();
 
 名称         | 类型     | 默认值                                      | 说明
 -------------|----------|---------------------------------------------|------
-name         | string   | widget                                      | 日志的名称,可以每个模块设定一个名称进行区分
+name         | string   | wei                                      | 日志的名称,可以每个模块设定一个名称进行区分
 level        | string   | debug                                       | 默认的日志级别
 handledLevel | string   | debug                                       | 记录到文件的最低日志等级,低于该等级的日志将不记录到文件中
 format       | string   | [%datetime%] %channel%.%level%: %message%\n | 日志的格式

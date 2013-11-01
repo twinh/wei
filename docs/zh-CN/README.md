@@ -7,7 +7,7 @@
 1. [简介](book/introduction.md)
 2. [安装](book/installation.md)
 3. [配置](book/configuration.md)
-4. [对象管理器](api/widget.md)
+4. [对象管理器](api/wei.md)
 5. [缓存](api/cache.md)
 6. [数据库操作](api/db.md)
 7. [数据校验](api/validate.md)
@@ -16,14 +16,14 @@
 演示案例
 --------
 
-https://github.com/twinh/widget/tree/master/demos
+https://github.com/twinh/wei/tree/master/demos
 
 API参考目录
 -----------
 
 #### 对象管理器
 
-* [widget](api/widget.md) - 对象管理器,用于获取各种服务对象,设置配置等
+* [wei](api/wei.md) - 对象管理器,用于获取各种服务对象,设置配置等
 
 #### 缓存
 

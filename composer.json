@@ -1,5 +1,5 @@
 {
-    "name": "widget/widget",
+    "name": "wei/wei",
     "description": "A micro-framework provided powerful but simple APIs for faster and easier PHP 5.3+ development.",
     "version": "0.9.7",
     "type": "library",
@@ -23,8 +23,8 @@
     ],
     "autoload": {
         "psr-0": {
-            "Widget": "lib"
+            "Wei": "lib"
         },
-        "files": ["lib/Widget/Widget.php"]
+        "files": ["lib/Wei/Wei.php"]
     }
 }

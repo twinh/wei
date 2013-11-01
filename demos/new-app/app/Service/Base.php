@@ -5,7 +5,7 @@ namespace Service;
 /**
  *
  */
-class Base extends \Widget\Base
+class Base extends \Wei\Base
 {
 
 }

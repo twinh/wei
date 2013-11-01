@@ -94,14 +94,14 @@ disposition   | string | attachment             | 下载的方式,可选项为`i
 
 名称        | 类型            | 说明
 ------------|-----------------|------
-$response   | Widget\Response | 当前HTTP响应对象
+$response   | Wei\Response | 当前HTTP响应对象
 $content    | string          | 发送响应的内容
 
 #### 回调: afterSend($response)
 
 名称        | 类型            | 说明
 ------------|-----------------|------
-$response   | Widget\Response | 当前HTTP响应对象
+$response   | Wei\Response | 当前HTTP响应对象
 
 ### 方法
 

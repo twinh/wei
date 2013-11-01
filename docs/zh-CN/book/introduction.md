@@ -1,17 +1,17 @@
 # 简介
 
-Widget是一个PHP微框架,提供了强大又简洁的接口,让PHP开发更快速,更简单.
+Wei是一个PHP微框架,提供了强大又简洁的接口,让PHP开发更快速,更简单.
 
-Widget的使用比任何框架都要简单,只需3步,加载=>创建=>调用!
+Wei的使用比任何框架都要简单,只需3步,加载=>创建=>调用!
 
 ```php
 // 1. 加载核心类文件
-require 'path/to/widget/lib/Widget/Widget.php';
+require 'path/to/wei/lib/Wei/Wei.php';
 
 // 2. 创建对象管理器对象
-$widget = wei(array(
+$wei = wei(array(
     // 对象管理器选项
-    'widget' => array(
+    'wei' => array(
         'debug' => true,
         // 其他选项...
     ),
@@ -19,7 +19,7 @@ $widget = wei(array(
     'db' => array(
         'driver'    => 'mysql',
         'host'      => 'localhost',
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf8',
         'user'      => 'root',
         'password'  => 'xxxxxx',
@@ -28,7 +28,7 @@ $widget = wei(array(
 ));
 
 // 3. 调用"db"对象执行SQL查询
-$result = $widget->db->fetch("SELECT 1 + 2");
+$result = $wei->db->fetch("SELECT 1 + 2");
 ```
 
 ## 功能特性

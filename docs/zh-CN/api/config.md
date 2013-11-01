@@ -9,8 +9,8 @@ Config
 ### 设置和获取配置
 
 ```php
-// 设置配置项'title'的值为'Widget Documentation'
-wei()->setConfig('title', 'Widget Documentation');
+// 设置配置项'title'的值为'Wei Documentation'
+wei()->setConfig('title', 'Wei Documentation');
 
 // 输出配置项'title'的值
 echo wei()->getConfig('title');
@@ -72,10 +72,10 @@ echo wei()->config->toJson('yesOrNo');
 
 ### 方法
 
-#### widget->setConfig($name, $default = null)
+#### wei->setConfig($name, $default = null)
 设置配置
 
-#### widget->getConfig($name, $value)
+#### wei->getConfig($name, $value)
 获取配置
 
 #### config->toJson($name)

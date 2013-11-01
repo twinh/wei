@@ -176,7 +176,7 @@ wei()->validate(array(
 **注意:**
 
 1. 所有数据项默认都是 **必选** 的,如果某一个数据项是选填的,只需增加 **`required => false`** 的验证规则
-2. 验证规则会被转换成对应的类.如`email`规则将被转换为`\Widget\Validator\Email`类,如果类不存在,将抛出异常提醒开发人员规则不存在.
+2. 验证规则会被转换成对应的类.如`email`规则将被转换为`\Wei\Validator\Email`类,如果类不存在,将抛出异常提醒开发人员规则不存在.
 3. 验证规则都是 **不** 以`is`开头的,`email`,`digit`是正确的规则名称,`isEmail`,`isDigit`是错误的规则名称
 
 ##### 案例:验证规则格式
@@ -507,15 +507,15 @@ wei()->validate(array(
 **参数**
 
 ```php
-ruleValid($rule, $field, $validator, $widget)
+ruleValid($rule, $field, $validator, $wei)
 ```
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $rule       | string                | 验证规则的名称
 $field      | string                | 当前验证的数据项名称
-$validator  | Widget\Validate       | 验证器对象
-$widget     | Widget\Widget         | 对象管理器
+$validator  | Wei\Validate       | 验证器对象
+$wei     | Wei\Wei         | 对象管理器
 
 如果`ruleValid`回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
@@ -529,7 +529,7 @@ wei()->validate(array(
     'rules' => array(
         'name' => 'required'
     ),
-    'ruleValid' => function($rule, $field, $validator, $widget) {
+    'ruleValid' => function($rule, $field, $validator, $wei) {
         echo $rule;
         echo $field;
         echo 'Yes';
@@ -552,15 +552,15 @@ wei()->validate(array(
 **参数**
 
 ```php
-ruleInvalid($rule, $field, $validator, $widget)
+ruleInvalid($rule, $field, $validator, $wei)
 ```
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $rule       | string                | 验证规则的名称
 $field      | string                | 当前验证的数据项名称
-$validator  | Widget\Validate       | 验证器对象
-$widget     | Widget\Widget         | 对象管理器
+$validator  | Wei\Validate       | 验证器对象
+$wei     | Wei\Wei         | 对象管理器
 
 `ruleInvalid`与`ruleValid`的行为一致.
 同样的,如果`ruleInvalid`回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
@@ -575,7 +575,7 @@ wei()->validate(array(
     'rules' => array(
         'name' => 'required'
     ),
-    'ruleInvalid' => function($rule, $field, $validator, $widget) {
+    'ruleInvalid' => function($rule, $field, $validator, $wei) {
         echo $rule;
         echo $field;
         echo 'No';
@@ -598,14 +598,14 @@ wei()->validate(array(
 **参数**
 
 ```php
-fieldValid($field, $validator, $widget)
+fieldValid($field, $validator, $wei)
 ```
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $rule       | string                | 验证规则的名称
-$validator  | Widget\Validate       | 验证器对象
-$widget     | Widget\Widget         | 对象管理器
+$validator  | Wei\Validate       | 验证器对象
+$wei     | Wei\Wei         | 对象管理器
 
 如果`fieldValid`回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
@@ -619,7 +619,7 @@ wei()->validate(array(
     'rules' => array(
         'name' => 'required'
     ),
-    'fieldValid' => function($field, $validator, $widget) {
+    'fieldValid' => function($field, $validator, $wei) {
         echo $field;
         echo 'Yes';
     }
@@ -640,14 +640,14 @@ wei()->validate(array(
 **参数**
 
 ```php
-fieldInvalid($field, $validator, $widget)
+fieldInvalid($field, $validator, $wei)
 ```
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
 $rule       | string                | 验证规则的名称
-$validator  | Widget\Validate       | 验证器对象
-$widget     | Widget\Widget         | 对象管理器
+$validator  | Wei\Validate       | 验证器对象
+$wei     | Wei\Wei         | 对象管理器
 
 如果`fieldInvalid`回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
@@ -661,7 +661,7 @@ wei()->validate(array(
     'rules' => array(
         'name' => 'required'
     ),
-    'fieldValid' => function($field, $validator, $widget) {
+    'fieldValid' => function($field, $validator, $wei) {
         echo $field;
         echo 'No';
     }
@@ -680,13 +680,13 @@ wei()->validate(array(
 验证结束时,如果最终验证结果为通过,验证器就触发`success`回调.
 
 ```php
-success($validator, $widget)
+success($validator, $wei)
 ```
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
-$validator  | Widget\Validate       | 验证器对象
-$widget     | Widget\Widget         | 对象管理器
+$validator  | Wei\Validate       | 验证器对象
+$wei     | Wei\Wei         | 对象管理器
 
 ##### 案例
 
@@ -698,7 +698,7 @@ wei()->validate(array(
     'rules' => array(
         'name' => 'required'
     ),
-    'success' => function($validator, $widget) {
+    'success' => function($validator, $wei) {
         echo 'Yes';
     }
 ));
@@ -715,13 +715,13 @@ wei()->validate(array(
 验证结束时,如果最终验证结果为 **不** 通过,验证器就触发`failure`回调.
 
 ```php
-failure ( $event, $widget, $validator )
+failure ( $event, $wei, $validator )
 ```
 
 名称        | 类型                  | 说明
 ------------|-----------------------|------
-$validator  | Widget\Validate       | 验证器对象
-$widget     | Widget\Widget         | 对象管理器
+$validator  | Wei\Validate       | 验证器对象
+$wei     | Wei\Wei         | 对象管理器
 
 ##### 案例
 
@@ -733,7 +733,7 @@ wei()->validate(array(
     'rules' => array(
         'name' => 'required'
     ),
-    'failure' => function($validator, $widget) {
+    'failure' => function($validator, $wei) {
         echo 'No';
     }
 ));
@@ -765,7 +765,7 @@ wei()->validate(array(
 
 检查数组或对象中每一个元素是否能通过指定规则的验证
 
-返回: `Widget\Validate` 新的验证器对象
+返回: `Wei\Validate` 新的验证器对象
 
 参数
 
@@ -777,7 +777,7 @@ $options    | array        | 验证器的选项,完整内容请查看"调用方�
 
 为数据项增加新的验证规则
 
-返回: `Widget\Validate` 验证器对象
+返回: `Wei\Validate` 验证器对象
 
 参数
 
@@ -817,7 +817,7 @@ $rule       | string       | 验证规则的名称
 
 设置验证规则
 
-返回: `Widget\Validate` 验证器对象
+返回: `Wei\Validate` 验证器对象
 
 #### validate->getRules()
 
@@ -829,7 +829,7 @@ $rule       | string       | 验证规则的名称
 
 设置要验证的数据
 
-返回: `Widget\Validate` 验证器对象
+返回: `Wei\Validate` 验证器对象
 
 #### validate->getData()
 
@@ -841,7 +841,7 @@ $rule       | string       | 验证规则的名称
 
 设置数据项的名称
 
-返回: `Widget\Validate` 验证器对象
+返回: `Wei\Validate` 验证器对象
 
 #### validate->getNames()
 
@@ -865,7 +865,7 @@ $field      | string       | 数据项的名称
 
 设置要验证的数据项的值
 
-返回: `Widget\Validate`
+返回: `Wei\Validate`
 
 参数
 
@@ -878,7 +878,7 @@ $value      | mixed        | 数据项的值
 
 设置自定义的错误信息
 
-返回: `Widget\Validate`
+返回: `Wei\Validate`
 
 参数
 
@@ -926,7 +926,7 @@ $separator  | string       | 合并错误信息数组的分隔符
 
 获取规则验证器对象
 
-返回: `Widget\Validator\BaseValidator`|`null` 验证器不存在时返回null
+返回: `Wei\Validator\BaseValidator`|`null` 验证器不存在时返回null
 
 参数
 

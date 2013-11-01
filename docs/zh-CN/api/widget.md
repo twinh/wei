@@ -1,4 +1,4 @@
-Widget
+Wei
 ======
 
 对象管理器,所有对象的入口.
@@ -11,27 +11,27 @@ Widget
 ### 获取对象管理器对象
 
 ```php
-/* @var $widget \Widget\Widget */
-$widget = wei();
+/* @var $wei \Wei\Wei */
+$wei = wei();
 ```
 
 ### 设置对象配置
 
-对象配置可以通过widget函数的第一个参数来设置,
+对象配置可以通过wei函数的第一个参数来设置,
 
 完整配置请查看[配置](../book/configuration.md)章节.
 
 ```php
-$widget = wei(array(
-    // 类`Widget\Widget`的属性值
-    'widget' => array(
+$wei = wei(array(
+    // 类`Wei\Wei`的属性值
+    'wei' => array(
         'debug' => true,
     ),
-    // 类`Widget\Db`的属性值
+    // 类`Wei\Db`的属性值
     'db' => array(
         'driver'    => 'mysql',
         'host'      => 'localhost',
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf8',
         'user'      => 'root',
         'password'  => '123456',
@@ -41,11 +41,11 @@ $widget = wei(array(
 
 ### 设置类自动加载
 
-Widget支持[PRS-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)风格的类自动加载器.
+Wei支持[PRS-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)风格的类自动加载器.
 
 ```php
 wei(array(
-    'widget' => array(
+    'wei' => array(
         // 启用自动加载
         'autoload' => true,
         // 设置自动加载的类的命名空间和类所在的目录
@@ -71,13 +71,13 @@ var_dump(class_exists('MyClass\MyClass'));
 
 ### 开启错误调试
 
-Widget的错误调试可通过`debug`选项开启,PHP的调试可通过`inis`选项配置
+Wei的错误调试可通过`debug`选项开启,PHP的调试可通过`inis`选项配置
 
 **注意:** 两者的配置相互独立,不互相影响
 
 ```php
 wei(array(
-    'widget' => array(
+    'wei' => array(
         // 通过PHP ini配置,开启PHP错误信息提示
         'inis' => array(
             // 在屏幕上输出错误信息
@@ -85,7 +85,7 @@ wei(array(
             // 设置错误报告的级别
             'error_reporting' => -1,
         ),
-        // 开启Widget的调试模式
+        // 开启Wei的调试模式
         'debug' => true,
     )
 ));
@@ -97,7 +97,7 @@ wei(array(
 
 ```php
 wei(array(
-    'widget' => array(
+    'wei' => array(
         'inis' => array(
             'date.timezone' => 'Asia/Shanghai', // 设置时区为上海
             'memory_limit'  => '128M',          // 设置最大限制为128M
@@ -113,12 +113,12 @@ wei(array(
 
 除了系统自带的对象之外,你也可以自定义对象类.
 
-1. 定义您的类,继承于`\Widget\Base`
+1. 定义您的类,继承于`\Wei\Base`
 
     ```php
     namespace MyProject;
 
-    class Application extends \Widget\Base
+    class Application extends \Wei\Base
     {
         public function run()
         {
@@ -130,7 +130,7 @@ wei(array(
 
     ```php
     wei(array(
-        'widget' => array(
+        'wei' => array(
             'aliases' => array(
                 '对象名称' => '类名称',
                 'app' => 'MyProject\Application'
@@ -155,7 +155,7 @@ wei(array(
 ```php
 // TODO more detail message
 wei(array(
-    'widget' => array(
+    'wei' => array(
         'import' => array(
             array(
                 'dir' => '要导入的类文件所在的目录',
@@ -179,7 +179,7 @@ wei(array(
 
 ```php
 wei(array(
-    'widget' => array(
+    'wei' => array(
         'aliases' => array(
             '对象名称' => '类名称'
         ),
@@ -209,29 +209,29 @@ afterConstruct  | callbale | 无            | 每个对象初始化后的回调
 
 ### 回调
 
-#### beforeConstruct($widget, $full, $name)
+#### beforeConstruct($wei, $full, $name)
 
 名称        | 类型          | 说明
 ------------|---------------|------
-$widget     | Widget\Widget | 对象管理器
+$wei     | Wei\Wei | 对象管理器
 $full       | string        | 完整的对象名称,包含`.`连接符,如`db`,`user.db`
 $name       | string        | 对象名称,不包含`.`连接符,如`db`,`request`
 
-#### afterConstruct($widget, $full, $name, $object)
+#### afterConstruct($wei, $full, $name, $object)
 
 名称        | 类型          | 说明
 ------------|---------------|------
-$widget     | Widget\Widget | 对象管理器
+$wei     | Wei\Wei | 对象管理器
 $full       | string        | 完整的对象名称,包含`.`连接符,如`db`,`user.db`
 $name       | string        | 对象名称,不包含`.`连接符,如`db`,`request`
-$object     | Widget\Base   | 当前初始化的对象
+$object     | Wei\Base   | 当前初始化的对象
 
 ### 方法
 
 #### wei($config)
 获取对象管理器,如果不存在,将创建一个新的对象
 
-**返回:** `Widget\Widget` 对象管理器
+**返回:** `Wei\Wei` 对象管理器
 
 **参数**
 
@@ -247,7 +247,7 @@ $config | string,array | 对象的配置数组或配置文件
 #### wei()->setDebug($debug)
 开启或关闭调试模式
 
-**返回:** `Widget\Widget` 对象管理器
+**返回:** `Wei\Wei` 对象管理器
 
 **参数**
 
@@ -258,7 +258,7 @@ $debug  | bool         | 是否启用调试
 #### wei()->setConfig($name, $vlaue = array())
 设置对象的配置
 
-**返回:** `Widget\Widget` 对象管理器
+**返回:** `Wei\Wei` 对象管理器
 
 **参数**
 
@@ -270,7 +270,7 @@ $value      | array  | 无            | 对象的配置选项
 #### wei()->setConfig($array = array())
 设置对象所有配置
 
-**返回:** `Widget\Widget` 对象管理器
+**返回:** `Wei\Wei` 对象管理器
 
 **参数**
 

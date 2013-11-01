@@ -39,7 +39,7 @@ ignorePrevHandler   | bool   | false                                            
 名称        | 类型          | 说明
 ------------|---------------|------
 $exception  | Exception     | 异常对象
-$widget     | Widget\Widget | 对象管理器
+$wei     | Wei\Wei | 对象管理器
 
 ### error->notFound($fn)
 设置404的错误处理器

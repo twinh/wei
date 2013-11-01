@@ -44,7 +44,7 @@ wei(array(
     'call' => array(
         // The callback triggered after prepared the data and before the process the request,
         // could be use to recod the request URL, method and parameters.
-        'beforeSend' => function (\Widget\Call $call, $ch) {
+        'beforeSend' => function (\Wei\Call $call, $ch) {
             wei()->logger->debug(array(
                 'Request URL'       => $call->getUrl(),
                 'Request Method'    => $call->getMethod(),
@@ -52,12 +52,12 @@ wei(array(
             ));
         },
         // The callback triggered after the request is called success
-        'success' => function ($data, \Widget\Call $call) {
+        'success' => function ($data, \Wei\Call $call) {
             // Record it on demand
         },
         // The callback triggered when the request fails,
         // could be use to record the error status and exception message.
-        'error' => function (\Widget\Call $call) {
+        'error' => function (\Wei\Call $call) {
             wei()->logger->error(array(
                 'Error status'  => $call->getErrorStatus(),
                 'Exception'     => (string)$call->getErrorException(),
@@ -65,7 +65,7 @@ wei(array(
         },
         // The callback triggered when request finishes
         // could be use to record response status code, and the cost time.
-        'complete' => function (\Widget\Call $call, $ch) {
+        'complete' => function (\Wei\Call $call, $ch) {
             $curlInfo = curl_getinfo($ch);
 
             wei()->logger->debug(array(

@@ -104,7 +104,7 @@ name                   | 该项
 
 设置错误时的提示信息
 
-返回: `Widget\Validator\BaseValidator`
+返回: `Wei\Validator\BaseValidator`
 
 #### getName()
 

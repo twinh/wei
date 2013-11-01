@@ -1,0 +1,42 @@
+<?php
+
+namespace WeiTest;
+
+class AssetTest extends TestCase
+{
+    /**
+     * @dataProvider providerForAsset
+     */
+    public function testAsset($from, $to, $options = array())
+    {
+        $asset = new \Wei\Asset(array(
+            'wei' => $this->wei,
+        ) + $options);
+
+        $this->assertEquals($asset($from), $to);
+    }
+
+    public function providerForAsset()
+    {
+        return array(
+            array(
+                'jquery.js',
+                '/jquery.js?v=1',
+            ),
+            array(
+                'file.js',
+                'js/file.js?v=1',
+                array(
+                    'baseUrl' => 'js/'
+                )
+            ),
+            array(
+                'version.js',
+                '/version.js?v=1',
+                array(
+                    'version' => '1'
+                ),
+            )
+        );
+    }
+}

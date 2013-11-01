@@ -1,6 +1,6 @@
 # 安装
 
-Widget支持通过[Composer](https://getcomposer.org)下载和直接下载源文件两种安装方式.
+Wei支持通过[Composer](https://getcomposer.org)下载和直接下载源文件两种安装方式.
 
 如果您的开发环境支持命令行,并且具有网络链接,推荐您通过Composer下载.
 
@@ -21,7 +21,7 @@ Widget支持通过[Composer](https://getcomposer.org)下载和直接下载源文
     ```json
     {
         "require": {
-            "widget/widget": "0.9.7"
+            "wei/wei": "0.9.7"
         }
     }
     ```
@@ -38,12 +38,12 @@ Widget支持通过[Composer](https://getcomposer.org)下载和直接下载源文
 
 ### 稳定版
 
-Zip文件下载: https://github.com/twinh/widget/archive/v0.9.7.zip
+Zip文件下载: https://github.com/twinh/wei/archive/v0.9.7.zip
 
 ### 开发尝鲜版
 
-Zip文件下载: https://github.com/twinh/widget/archive/master.zip
+Zip文件下载: https://github.com/twinh/wei/archive/master.zip
 
 ### 更多历史版本
 
-更多历史版本请前往GitHub查看 https://github.com/twinh/widget/releases
+更多历史版本请前往GitHub查看 https://github.com/twinh/wei/releases

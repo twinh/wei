@@ -46,8 +46,8 @@ echo $cache->getDriver();
 ### 缓存数据库查询,如缓存用户总数,每30秒更新一次
 
 ```php
-$totalUsers = wei()->cache->get('totalUsers', 30, function($widget){
-	return $widget->db->fetchColumn("SELECT COUNT(1) FROM user");
+$totalUsers = wei()->cache->get('totalUsers', 30, function($wei){
+	return $wei->db->fetchColumn("SELECT COUNT(1) FROM user");
 });
 ```
 

@@ -96,7 +96,7 @@ Call对象提供了`beforeSend`, `success`, `error`, `complete`四个回调方�
 wei(array(
     'call' => array(
         // cURL请求发送前的回调,记录请求的方式和地址参数
-        'beforeSend' => function (\Widget\Call $call, $ch) {
+        'beforeSend' => function (\Wei\Call $call, $ch) {
             wei()->logger->debug(array(
                 'Request URL'       => $call->getUrl(),
                 'Request Method'    => $call->getMethod(),
@@ -104,18 +104,18 @@ wei(array(
             ));
         },
         // cURL请求发送成功的回调
-        'success' => function ($data, \Widget\Call $call) {
+        'success' => function ($data, \Wei\Call $call) {
             // 按需记录
         },
         // cURL请求发送失败的回调,记录错误原因和异常堆栈
-        'error' => function (\Widget\Call $call) {
+        'error' => function (\Wei\Call $call) {
             wei()->logger->error(array(
                 'Error status'  => $call->getErrorStatus(),
                 'Exception'     => (string)$call->getErrorException(),
             ));
         },
         // cURL请求发送完成的回调,记录返回状态码,花费时间等
-        'complete' => function (\Widget\Call $call, $ch) {
+        'complete' => function (\Wei\Call $call, $ch) {
             $curlInfo = curl_getinfo($ch);
 
             wei()->logger->debug(array(
@@ -213,7 +213,7 @@ complete    | callable     | 无      | 请求完成后,不论是否成功都触
 
 名称        | 类型         | 说明
 ------------|--------------|------
-$call       | Widget\Call  | 当前的Call对象
+$call       | Wei\Call  | 当前的Call对象
 $ch         | resource     | cUrl会话的变量
 
 #### success($data, $call)
@@ -221,7 +221,7 @@ $ch         | resource     | cUrl会话的变量
 名称        | 类型         | 说明
 ------------|--------------|------
 $data       | mixed        | 解析过的HTTP响应数据,数据类型与`dataType`选项相关,如下表所示
-$call       | \Widget\Call | 当前的Call对象
+$call       | \Wei\Call | 当前的Call对象
 
 ##### `dataType`的值与$data返回的类型
 
@@ -238,7 +238,7 @@ text       | string
 
 名称        | 类型         | 说明
 ------------|--------------|------
-$call       | Widget\Call  | 当前的Call对象
+$call       | Wei\Call  | 当前的Call对象
 $textStatus | string       | 简单的错误说明,可能出现的值及出现情况如下表
 $exception  | Exception    | 错误的异常对象,可通过该对象获取详细的错误信息
 
@@ -254,7 +254,7 @@ parser      | 数据解析错误,如返回的数据不是正确的json格式
 
 名称        | 类型         | 说明
 ------------|--------------|------
-$call       | Widget\Call  | 当前的Call对象
+$call       | Wei\Call  | 当前的Call对象
 $ch         | resource     | cUrl会话的变量
 
 ### 方法
@@ -262,12 +262,12 @@ $ch         | resource     | cUrl会话的变量
 #### call($options = array())
 初始化一个新的Call对象,并执行HTTP请求
 
-返回:  `Widget\Call` 新的call服务对象
+返回:  `Wei\Call` 新的call服务对象
 
 #### call($url, $options = array())
 根据给定的URL地址,初始化一个Call对象,并执行HTTP请求
 
-返回:  `Widget\Call` 新的call服务对象
+返回:  `Wei\Call` 新的call服务对象
 
 #### call->isSuccess()
 返回请求及数据解析是否成功
@@ -314,34 +314,34 @@ $ch         | resource     | cUrl会话的变量
 #### call->get($url, $data = array(), $dataType = null)
 通过GET方式发送带数据的请求
 
-返回:  `Widget\Call` 新的call服务对象
+返回:  `Wei\Call` 新的call服务对象
 
 #### call->getJson($url, $data = array())
 通过GET方式发送带数据的请求,并将返回数据解析为JSON数组
 
-返回:  `Widget\Call` 新的call服务对象
+返回:  `Wei\Call` 新的call服务对象
 
 #### call->getJsonObject($url, $data = array())
 通过GET方式发送带数据的请求,并将返回数据解析为JSON对象
 
-返回:  `Widget\Call` 新的call服务对象
+返回:  `Wei\Call` 新的call服务对象
 
 #### call->post($url, $data = array(), $dataType = null)
 通过POST方式发送带数据的请求
 
-返回:  `Widget\Call` 新的call服务对象
+返回:  `Wei\Call` 新的call服务对象
 
 #### call->put($url, $data = array(), $dataType = null)
 通过PUT方式发送带数据的请求
 
-返回:  `Widget\Call` 新的call服务对象
+返回:  `Wei\Call` 新的call服务对象
 
 #### call->delete($url, $data = array(), $dataType = null)
 通过DELETE方式发送带数据的请求
 
-返回:  `Widget\Call` 新的call服务对象
+返回:  `Wei\Call` 新的call服务对象
 
 #### call->patch($url, $data = array(), $dataType = null)
 通过PATCH方式发送带数据的请求
 
-返回:  `Widget\Call` 新的call服务对象
+返回:  `Wei\Call` 新的call服务对象

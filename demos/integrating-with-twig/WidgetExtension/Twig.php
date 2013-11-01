@@ -7,7 +7,7 @@
  */
 
 namespace WidgetExtension;
-use Widget\Base;
+use Wei\Base;
 
 /**
  * A wrapper widget for Twig object

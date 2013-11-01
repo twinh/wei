@@ -3,8 +3,8 @@
 namespace Controller;
 
 /**
- * @property    \Widget\Request $request
- * @property    \Widget\Response $response
+ * @property    \Wei\Request $request
+ * @property    \Wei\Response $response
  */
 abstract class Base extends \Service\Base
 {

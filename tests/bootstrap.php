@@ -3,31 +3,31 @@
 // Autoloading for Composer
 if (is_file($file = __DIR__ . '/../vendor/autoload.php')) {
     require $file;
-// Fallback to widget container
+// Fallback to wei container
 } else {
-    require dirname(__DIR__) . '/lib/Widget/Widget.php';
+    require dirname(__DIR__) . '/lib/Wei/Wei.php';
 }
 
 // Localhost configuration
 wei(array(
-    'widget' => array(
+    'wei' => array(
         // Display all PHP error message
         'inis' => array(
             'error_reporting' => -1,
             'display_errors' => true,
             'date.timezone' => 'UTC',
         ),
-        // Enable widget debug option
+        // Enable wei debug option
         'debug' => true,
-        // Set up autoload for WidgetTest namespace
+        // Set up autoload for WeiTest namespace
         'autoloadMap' => array(
-            'WidgetTest' => __DIR__,
+            'WeiTest' => __DIR__,
             '' => __DIR__ . '/fallback',
         ),
     ),
     'call' => array(
         'url' => 'http://localhost:8000/call.php',
-        // Set ip for WidgetTest\CallTest\::testIp
+        // Set ip for WeiTest\CallTest\::testIp
         'ip' => '127.0.0.1'
     ),
     'db' => array(
@@ -40,7 +40,7 @@ wei(array(
         'password'  => '123456',
         'host'      => '127.0.0.1',
         'port'      => 3306,
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf8'
     ),
     'pgsql.db' => array(

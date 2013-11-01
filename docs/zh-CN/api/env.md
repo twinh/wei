@@ -10,7 +10,7 @@ Env
 
 ```php
 wei(array(
-    'widget' => array(
+    'wei' => array(
         'preload' => array(
             'env' // 在预加载选项增加env对象
         )

@@ -9,7 +9,7 @@
 namespace WidgetExtension;
 
 use Doctrine\DBAL\DriverManager;
-use Widget\Base;
+use Wei\Base;
 
 /**
  * A container widget for Doctrine dbal connection object

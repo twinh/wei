@@ -1,18 +1,18 @@
 # 配置
 
-Widget提供了强大又简单的配置方式,您可以通过配置指定每个对象的选项值.
+Wei提供了强大又简单的配置方式,您可以通过配置指定每个对象的选项值.
 
 在Widget中,每个对象都有一个单独的配置数组,数组的键名表示对象的选项名称,数组的值表示对象的选项值.
 
-下面我们通过一个完整的配置例子,了解Widget的配置方式.
+下面我们通过一个完整的配置例子,了解Wei的配置方式.
 
 ### 一个完整的配置例子
 
 ```php
-// 通过`widget`函数的第一个参数设置配置
-$widget = wei(array(
+// 通过`wei`函数的第一个参数设置配置
+$wei = wei(array(
     // 对象管理器的配置
-    'widget' => array(
+    'wei' => array(
         'debug' => true,
         // ... 其他选项
     ),
@@ -20,7 +20,7 @@ $widget = wei(array(
     'db' => array(
         'driver'    => 'mysql',
         'host'      => 'localhost',
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf8',
         'user'      => 'root',
         'password'  => '123456',
@@ -29,7 +29,7 @@ $widget = wei(array(
     'slave.db' => array(
         'driver'    => 'mysql',
         'host'      => 'slave-host',
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf8',
         'user'      => 'root',
         'password'  => '123456',
@@ -53,28 +53,28 @@ $widget = wei(array(
 
 通过上面的例子我们可以了解到:
 
-1. 配置通过`widget`函数设置
-2. 配置数组的第一级键名是对象名称,如上面例子中的`widget`,`db`,`redis`,`view`都是对象名称
+1. 配置通过`wei`函数设置
+2. 配置数组的第一级键名是对象名称,如上面例子中的`wei`,`db`,`redis`,`view`都是对象名称
 3. 配置数组的第二级键名是对象的选项名称,如`db`对象的`user`选项,`logger`对象的`dir`选项
 4. 每个对象都有多个 **选项** ,可以在[对象目录](README.md)查找到相应对象文档,在文档中查阅`选项`章节
 
 ## 设置和获取配置
 
-Widget目前接受两种配置参数,一种是PHP数组,另一种是返回PHP数组的文件.
+Wei目前接受两种配置参数,一种是PHP数组,另一种是返回PHP数组的文件.
 
 其他的类型的配置,可以查看最后的 **扩展** 章节了解
 
 ### 通过PHP数组加载配置
 
 ```php
-$widget = wei(array(
-    'widget' => array(
+$wei = wei(array(
+    'wei' => array(
         'debug' => true,
     ),
     'db' => array(
         'driver'    => 'mysql',
         'host'      => 'localhost',
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf8',
         'user'      => 'root',
         'password'  => '123456',
@@ -85,7 +85,7 @@ $widget = wei(array(
 ### 通过PHP文件加载配置
 
 ```php
-$widget = wei('config/default.php');
+$wei = wei('config/default.php');
 ```
 
 文件`config/default.php`的内容
@@ -97,13 +97,13 @@ $debug = true;
 
 // 返回配置数组
 return array(
-    'widget' => array(
+    'wei' => array(
         'debug' => $debug
     ),
     'db' => array(
         'driver'    => 'mysql',
         'host'      => 'localhost',
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf8',
         'user'      => 'root',
         'password'  => '123456',
@@ -117,16 +117,16 @@ return array(
 ### 获取配置
 
 ```php
-$widget = wei();
+$wei = wei();
 
 // 获取数据库对象的配置数组
-$db = $widget->getConfig('db');
+$db = $wei->getConfig('db');
 
 // 返回的数组如下
 $db = array(
     'driver'    => 'mysql',
     'host'      => 'localhost',
-    'dbname'    => 'widget',
+    'dbname'    => 'wei',
     'charset'   => 'utf8',
     'user'      => 'root',
     'password'  => '123456',
@@ -134,7 +134,7 @@ $db = array(
 
 // 获取数据库对象配置中的`user`选项
 // 注意,不同级别的配置名称应该通过冒号":"隔开
-$user = $widget->getConfig('db:user');
+$user = $wei->getConfig('db:user');
 
 // 返回的变量值如下
 $user = 'root';
@@ -146,17 +146,17 @@ $user = 'root';
 
 配置项命名规则为`自定义名称.对象名称`,如`slave.db`,`slave`表示业务名称,按需命名,`db`表示数据库对象,两者通过`.`连接
 
-在添加了该配置后,微框架会 **自动** 进行映射,可以通过`$widget->slaveDb`获取到`slave.db`配置的数据库对象
+在添加了该配置后,微框架会 **自动** 进行映射,可以通过`$wei->slaveDb`获取到`slave.db`配置的数据库对象
 
 下面的例子展示了多个数据库的配置和数据库对象的获取.
 
 ```php
-$widget = wei(array(
+$wei = wei(array(
     // 默认数据库对象的配置
     'db' => array(
         'driver'    => 'mysql',
         'host'      => 'localhost',
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf8',
         'user'      => 'root',
         'password'  => '123456',
@@ -165,7 +165,7 @@ $widget = wei(array(
     'slave.db' => array(
         'driver'    => 'mysql',
         'host'      => 'slave-host',
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf8',
         'user'      => 'root',
         'password'  => '123456',
@@ -174,7 +174,7 @@ $widget = wei(array(
     'logger.db' => array(
         'driver'    => 'mysql',
         'host'      => 'logger-host',
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf8',
         'user'      => 'root',
         'password'  => '123456',
@@ -182,13 +182,13 @@ $widget = wei(array(
 ));
 
 // 获取默认数据库对象
-$db = $widget->db;
+$db = $wei->db;
 
 // 获取备机数据库对象
-$slaveDb = $widget->slaveDb;
+$slaveDb = $wei->slaveDb;
 
 // 获取日志数据库对象
-$loggerDb = $widget->loggerDb;
+$loggerDb = $wei->loggerDb;
 
 // 使用日志数据库对象查询用户编号为1的操作日志
 $loggerDb->findAll('userLog', array('userId' => 1));
@@ -200,8 +200,8 @@ $loggerDb->findAll('userLog', array('userId' => 1));
 
 ### 使用YAML作为配置文件
 
-[查看演示案例](../../../demos/using-yaml-as-widget-configuration)
+[查看演示案例](../../../demos/using-yaml-as-wei-configuration)
 
 ### 使用JSON作为配置文件
 
-[查看演示案例](../../../demos/using-json-as-widget-configuration)
+[查看演示案例](../../../demos/using-json-as-wei-configuration)
