@@ -64,8 +64,6 @@ namespace Wei
      * HTTP Response
      * @property Response           $response A object that handles the HTTP response data
      * @method   \Wei\Response   response($content = null, $status = null) Send response header and content
-     * @property Json               $json A object to response json
-     * @method   \Wei\Json       json($message = null, $code = 1, array $append = array(), $jsonp = false) Send JSON(P) response
      * @property Redirect           $redirect A object that send a redirect response
      * @method   \Wei\Redirect   redirect($url = null, array $options = array()) Send a redirect response
      *
