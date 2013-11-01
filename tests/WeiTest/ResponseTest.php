@@ -138,6 +138,26 @@ namespace WeiTest
                 ob_start();
             }
         }
+
+        public function testJson()
+        {
+            $this->expectOutputString('{"code":-1,"message":"error"}');
+
+            $this->object->json(array('code' => -1, 'message' => 'error'));
+
+            $this->assertEquals('application/json', $this->object->getHeader('Content-Type'));
+        }
+
+        public function testJsonp()
+        {
+            $this->request->set('callback', 'callback');
+
+            $this->expectOutputString('callback({"code":-1,"message":"error"})');
+
+            $this->object->jsonp(array('code' => -1, 'message' => 'error'));
+
+            $this->assertEquals('application/javascript', $this->object->getHeader('Content-Type'));
+        }
     }
 }
 
