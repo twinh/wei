@@ -159,7 +159,6 @@ API参考目录
 #### HTTP响应
 
 * [response](api/response.md) - 发送HTTP响应头和内容
-* [json](api/json.md) - 输出JSON或JSONP格式的数据到浏览器
 * [redirect](api/redirect.md) - 跳转到指定地址
 
 #### 视图
