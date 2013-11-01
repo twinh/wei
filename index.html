@@ -181,7 +181,6 @@
       <a href="#response">HTTP响应</a>
       <ul class="nav">
         <li><a href="#response">Response</a></li>
-        <li><a href="#json">Json</a></li>
         <li><a href="#redirect">Redirect</a></li>
       </ul>
     </li>
@@ -12205,76 +12204,6 @@
 <h4>response-&gt;flush($content = null, $status = null)</h4>
 
 <p>关闭缓冲区,让后台脚本实时输出内容到浏览器</p>
-  </section>
-
-<!-- api/json
-  ================================================== -->
-  <section id="json">
-  <div class="page-header"><h1>Json</h1></div>
-
-<p>输出JSON或JSONP格式的数据到浏览器</p>
-
-<h2>代码范例</h2>
-
-<h3>输出JSON格式的数据</h3>
-
-<div class="highlight"><pre><code class="php"><span class="c1">// 输出 {"code":1,"message":"success"}</span>
-<span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">(</span><span class="s1">'success'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-</code></pre></div>
-
-<h3>输出JSONP格式的数据</h3>
-
-<div class="highlight"><pre><code class="php"><span class="c1">// 假设URL请求地址为 index.php?callback=callback</span>
-<span class="c1">// 下面的调用将输出 callback({"code":1,"message":"success"})</span>
-<span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">(</span><span class="s1">'success'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="k">array</span><span class="p">(),</span> <span class="k">true</span><span class="p">);</span>
-</code></pre></div>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<p><em>无</em></p>
-
-<h3>方法</h3>
-
-<h4>json($message, $code = 1, $append = array(), $jsonp = false)</h4>
-
-<p>参数</p>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>$message</td>
-<td>string</td>
-<td>无</td>
-<td>返回message的值</td>
-</tr>
-<tr>
-<td>$code</td>
-<td>int</td>
-<td>1</td>
-<td>返回code的值</td>
-</tr>
-<tr>
-<td>$append</td>
-<td>array</td>
-<td>array()</td>
-<td>附加的数据</td>
-</tr>
-<tr>
-<td>$jsonp</td>
-<td>bool</td>
-<td>false</td>
-<td>是否允许返回JSONP格式的数据</td>
-</tr>
-</tbody>
-</table>
   </section>
 
 <!-- api/redirect
