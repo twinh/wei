@@ -19,7 +19,7 @@ def syntax_highlighter(html, lexer = 'php')
       link['target'] = '_blank'
     elsif link['href'].start_with? "../"
       link['target'] = '_blank'
-      link['href'] = 'https://github.com/twinh/widget/tree/master/docs/zh-CN/api/' + link['href']
+      link['href'] = 'https://github.com/twinh/wei/tree/master/docs/zh-CN/api/' + link['href']
     else
       url = "#" + link['href'].split('#')[0]
       link['href'] = url[0..-4]
@@ -40,9 +40,9 @@ def markdown(text)
   syntax_highlighter(Markdown.new(text, *options).to_html)
 end
 
-widgets = [
-  # widget manager
-    'widget',
+weis = [
+  # wei manager
+    'wei',
   # cache
     'cache', 'apc', 'arrayCache', 'bicache', 'couchbase', 'dbCache', 'fileCache', 'memcache', 'memcached', 'mongoCache', 'redis',
   # database
@@ -81,14 +81,14 @@ widgets = [
 
 sections = {}
 
-widgets.each do |name|
+weis.each do |name|
   if name.index("/")
     id = name.gsub("/", "-")
   else
     id = name
     name = "api/" + name
   end
-  content = File.read("../widget/docs/zh-CN/#{name}.md")
+  content = File.read("../wei/docs/zh-CN/#{name}.md")
   content = markdown(content)
   sections[name] = {
     "id" => id,

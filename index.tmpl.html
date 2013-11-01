@@ -12,7 +12,7 @@
 
 <title>
 
-    Widget Documentation
+    Wei Documentation
 
 </title>
 
@@ -37,7 +37,7 @@
     <!-- Docs nav -->
     <div class="bs-docs-sidebar">
   <ul class="nav bs-docs-sidenav">
-    <h3 class="bs-docs-sidenav-heading"><a href="/">Widget·微框架</a></h3>
+    <h3 class="bs-docs-sidenav-heading"><a href="/">Wei·微框架</a></h3>
 
     <li><a href="#welcome">欢迎</a></li>
     <li><a href="#getting-started">入门</a></li>
@@ -48,7 +48,7 @@
       <a class="nav-header" href="#apis">对象列表</a>
     </li>
     <li>
-      <a href="#widget">对象管理器</a>
+      <a href="#wei">对象管理器</a>
     </li>
     <li>
       <a href="#cache">缓存</a>
@@ -224,7 +224,7 @@
   ================================================== -->
   <div id="welcome" class="bs-docs-section-header">
     <h1>欢迎</h1>
-    <p class="lead">欢迎来到PHP微框架Widget的文档.这里将为您展示丰富全面的代码指导和案例.</p>
+    <p class="lead">欢迎来到PHP微框架Wei的文档.这里将为您展示丰富全面的代码指导和案例.</p>
   </div>
 
 <!-- Getting started
@@ -233,15 +233,15 @@
     <div class="page-header">
       <h1>入门</h1>
     </div>
-    <p class="lead">Widget是一个PHP微框架,提供了强大又简洁的接口,让PHP开发更快速,更简单.<p>
-    <p>Widget的使用比任何框架都要简单,只需3步,<code>加载</code>=><code>创建</code>=><code>调用</code>!</p>
+    <p class="lead">Wei是一个PHP微框架,提供了强大又简洁的接口,让PHP开发更快速,更简单.<p>
+    <p>Wei的使用比任何框架都要简单,只需3步,<code>加载</code>=><code>创建</code>=><code>调用</code>!</p>
     <%= syntax_highlighter("<pre class=\"php\"><code>// 1. 加载核心类文件
-require 'path/to/widget/lib/Widget/Widget.php';
+require 'path/to/wei/lib/Wei/Wei.php';
 
 // 2. 创建对象管理器对象
-$widget = widget(array(
+$wei = wei(array(
     // 对象管理器选项
-    'widget' => array(
+    'wei' => array(
         'debug' => true,
         // 其他选项...
     ),
@@ -249,7 +249,7 @@ $widget = widget(array(
     'db' => array(
         'driver'    => 'mysql',
         'host'      => 'localhost',
-        'dbname'    => 'widget',
+        'dbname'    => 'wei',
         'charset'   => 'utf8',
         'user'      => 'root',
         'password'  => 'xxxxxx',
@@ -258,7 +258,7 @@ $widget = widget(array(
 ));
 
 // 3. 调用\"db\"对象执行SQL查询
-$result = $widget->db->fetch(\"SELECT 1 + 2\");</code></pre>") %>
+$result = $wei->db->fetch(\"SELECT 1 + 2\");</code></pre>") %>
   </div>
 
 <!-- Download
@@ -272,14 +272,14 @@ $result = $widget->db->fetch(\"SELECT 1 + 2\");</code></pre>") %>
         <h3>1. 通过<a href="http://getcomposer.org/" target="_blank">Composer</a>下载</h3>
         <p><%= syntax_highlighter('<pre class="json"><code>{
     "require": {
-        "widget/widget": "0.9.7"
+        "wei/wei": "0.9.7"
     }
 }</code></pre>', 'json') %></p>
       </div>
       <div class="col-span-6">
         <h3>2. 直接下载</h3>
-        <p><a class="btn btn-large btn-primary btn-block" href="https://github.com/twinh/widget/archive/v0.9.7.zip">稳定版 v0.9.7</a></p>
-        <p><a class="btn btn-large btn-block" href="https://github.com/twinh/widget/archive/master.zip">开发版</a></p>
+        <p><a class="btn btn-large btn-primary btn-block" href="https://github.com/twinh/wei/archive/v0.9.7.zip">稳定版 v0.9.7</a></p>
+        <p><a class="btn btn-large btn-block" href="https://github.com/twinh/wei/archive/master.zip">开发版</a></p>
       </div>
     </div>
   </div>
@@ -292,14 +292,14 @@ $result = $widget->db->fetch(\"SELECT 1 + 2\");</code></pre>") %>
     </div>
     <p class="lead">微框架每天都有新的提交,欢迎关注,了解最新趋势!</p>
     <p>
-      <iframe src="http://ghbtns.com/github-btn.html?user=twinh&repo=widget&type=watch"
+      <iframe src="http://ghbtns.com/github-btn.html?user=twinh&repo=wei&type=watch"
         allowtransparency="true" frameborder="0" scrolling="0" width="53" height="20"></iframe>
       <iframe src="http://ghbtns.com/github-btn.html?user=twinh&type=follow"
         allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>
     </p>
   </div>
 
-  <!-- Widget
+  <!-- Wei
   ================================================== -->
   <div id="apis" class="bs-docs-section-header">
     <h1>对象列表</h1>
@@ -328,7 +328,7 @@ $result = $widget->db->fetch(\"SELECT 1 + 2\");</code></pre>") %>
     <div class="bs-docs-social">
       <ul class="bs-docs-social-buttons">
         <li>
-          <iframe src="http://ghbtns.com/github-btn.html?user=twinh&repo=widget&type=watch"
+          <iframe src="http://ghbtns.com/github-btn.html?user=twinh&repo=wei&type=watch"
             allowtransparency="true" frameborder="0" scrolling="0" width="53" height="20"></iframe>
         <li>
           <iframe src="http://ghbtns.com/github-btn.html?user=twinh&type=follow"
@@ -340,9 +340,9 @@ $result = $widget->db->fetch(\"SELECT 1 + 2\");</code></pre>") %>
     <p>页面主题来自<a href="https://github.com/twitter/bootstrap">Bootstrap 3.0</a>,感谢Bootstrap 3.0!</p>
     <p>Code licensed under <a href="http://opensource.org/licenses/mit-license.php" target="_blank">MIT License</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
     <ul class="footer-links">
-      <li><a href="https://github.com/twinh/widget/issues?state=open">Issues</a></li>
+      <li><a href="https://github.com/twinh/wei/issues?state=open">Issues</a></li>
       <li class="muted">&middot;</li>
-      <li><a href="https://github.com/twinh/widget/">Github</a></li>
+      <li><a href="https://github.com/twinh/wei/">Github</a></li>
     </ul>
   </div>
 </footer>

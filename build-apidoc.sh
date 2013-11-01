@@ -1,1 +1,1 @@
-apigen --source /widget/lib/Widget/ --destination ./apidoc --title "Widget Framework"
+apigen --source /wei/lib/Wei/ --destination ./apidoc --title "Wei Framework"
