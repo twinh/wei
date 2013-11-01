@@ -77,11 +77,7 @@ class RecordExists extends BaseValidator
             return false;
         }
 
-        $this->data = $this->db
-            ->createQueryBuilder()
-            ->from($this->table)
-            ->where($this->field . ' = ?', $input)
-            ->fetch();
+        $this->data = $this->db->find($this->table, array($this->field => $input));
 
         if (empty($this->data)) {
             $this->addError('notFound');
