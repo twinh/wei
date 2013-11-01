@@ -210,7 +210,7 @@ class Record extends Base implements \ArrayAccess
     public function fromArray($data)
     {
         foreach ($data as $key => $value) {
-            $this->__set($key, $value);
+            $this->set($key, $value);
         }
         return $this;
     }
@@ -290,7 +290,7 @@ class Record extends Base implements \ArrayAccess
      */
     public function reload()
     {
-        $this->data = (array)$this->db->select($this->table, $this->__get($this->primaryKey));
+        $this->data = (array)$this->db->select($this->table, $this->get($this->primaryKey));
         $this->oldData = array();
         $this->isModified = false;
         $this->trigger('afterLoad');
@@ -304,7 +304,7 @@ class Record extends Base implements \ArrayAccess
      * @throws \InvalidArgumentException When field not found
      * @return string
      */
-    public function __get($name)
+    public function get($name)
     {
         if (in_array($name, $this->getFields())) {
             return isset($this->data[$name]) ? $this->data[$name] : null;
@@ -323,7 +323,7 @@ class Record extends Base implements \ArrayAccess
      * @param string $name
      * @param mixed $value
      */
-    public function __set($name, $value)
+    public function set($name, $value)
     {
         if (in_array($name, $this->getFields())) {
             $this->oldData[$name] = isset($this->data[$name]) ? $this->data[$name] : null;
@@ -332,28 +332,6 @@ class Record extends Base implements \ArrayAccess
         } else {
             $this->$name = $value;
         }
-    }
-
-    /**
-     * Remove field value
-     *
-     * @param string $name The name of field
-     * @return $this
-     */
-    public function __unset($name)
-    {
-        return $this->remove($name);
-    }
-
-    /**
-     * Check if field exists
-     *
-     * @param string $name
-     * @return bool
-     */
-    public function __isset($name)
-    {
-        return isset($this->data[$name]);
     }
 
     /**
@@ -462,7 +440,7 @@ class Record extends Base implements \ArrayAccess
      */
     public function offsetExists($name)
     {
-        return $this->__isset($name);
+        return isset($this->data[$name]);
     }
 
     /**
@@ -473,7 +451,7 @@ class Record extends Base implements \ArrayAccess
      */
     public function offsetGet($name)
     {
-        return $this->__get($name);
+        return $this->get($name);
     }
 
     /**
@@ -484,7 +462,7 @@ class Record extends Base implements \ArrayAccess
      */
     public function offsetSet($name, $value)
     {
-        $this->__set($name, $value);
+        $this->set($name, $value);
     }
 
     /**
@@ -494,7 +472,7 @@ class Record extends Base implements \ArrayAccess
      */
     public function offsetUnset($name)
     {
-        $this->__unset($name);
+        $this->remove($name);
     }
 
     /**
