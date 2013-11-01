@@ -35,7 +35,7 @@ class WeChatAppTest extends TestCase
         $app = new \Wei\WeChatApp(array(
             'wei' => $this->wei,
             'query' => array(
-                'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
                 'nonce'     => '1365872231',
                 'echostr'   => $rand = mt_rand(0, 100000)
@@ -51,7 +51,7 @@ class WeChatAppTest extends TestCase
         $app = new \Wei\WeChatApp(array(
             'wei' => $this->wei,
             'query' => array(
-                'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
                 'nonce'     => '1365872231',
                 'echostr'   => $rand = mt_rand(0, 100000)
@@ -260,7 +260,7 @@ class WeChatAppTest extends TestCase
     {
         return array(
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('0'),
                 array(
                     'content' => '0',
@@ -270,7 +270,7 @@ class WeChatAppTest extends TestCase
                 'your input is 0'
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('1'),
                 array(
                     'content' => '1',
@@ -280,7 +280,7 @@ class WeChatAppTest extends TestCase
                 'your input is 1'
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('2'),
                 array(
                     'content' => '2',
@@ -288,7 +288,7 @@ class WeChatAppTest extends TestCase
                 '', // return music
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('99999'),
                 array(
 
@@ -296,7 +296,7 @@ class WeChatAppTest extends TestCase
                'Your input is 99999'
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('t xx'),
                 array(
 
@@ -304,7 +304,7 @@ class WeChatAppTest extends TestCase
                'The translation result is: xx'
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('3'),
                 array(
                     'content' => '3',
@@ -312,7 +312,7 @@ class WeChatAppTest extends TestCase
                 '', // return news
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('I want a iPad'),
                 array(
                     'content' => 'I want a iPad',
@@ -320,7 +320,7 @@ class WeChatAppTest extends TestCase
                 'Find a iPad ? ok, i will remember u',
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('Are u Twin?'),
                 array(
                     'content' => 'Are u Twin?',
@@ -328,7 +328,7 @@ class WeChatAppTest extends TestCase
                 'Yes, I\'m here',
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                  <ToUserName><![CDATA[toUser]]></ToUserName>
                  <FromUserName><![CDATA[fromUser]]></FromUserName>
@@ -345,7 +345,7 @@ class WeChatAppTest extends TestCase
                 ),
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
                     <FromUserName><![CDATA[fromUser]]></FromUserName>
@@ -367,7 +367,7 @@ class WeChatAppTest extends TestCase
                 ),
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
                     <FromUserName><![CDATA[fromUser]]></FromUserName>
@@ -385,7 +385,7 @@ class WeChatAppTest extends TestCase
                 ),
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
                     <FromUserName><![CDATA[fromUser]]></FromUserName>
@@ -401,7 +401,7 @@ class WeChatAppTest extends TestCase
                 ),
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
                     <FromUserName><![CDATA[fromUser]]></FromUserName>
@@ -417,7 +417,7 @@ class WeChatAppTest extends TestCase
                 ),
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
                     <FromUserName><![CDATA[fromUser]]></FromUserName>
@@ -433,7 +433,7 @@ class WeChatAppTest extends TestCase
                 ),
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
                     <FromUserName><![CDATA[fromUser]]></FromUserName>
@@ -449,7 +449,7 @@ class WeChatAppTest extends TestCase
                 ),
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
                     <FromUserName><![CDATA[fromUser]]></FromUserName>
@@ -466,7 +466,7 @@ class WeChatAppTest extends TestCase
                 ),
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
                     <FromUserName><![CDATA[fromUser]]></FromUserName>
@@ -485,7 +485,7 @@ class WeChatAppTest extends TestCase
                 ),
             ),
             array(
-                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 'invalid xml',
                 array(
                     'msgType' => null
@@ -511,7 +511,7 @@ class WeChatAppTest extends TestCase
         $app = new \Wei\WeChatApp(array(
             'wei' => $this->wei,
             'query' => array(
-                'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
                 'nonce'     => '1365872231',
                 'echostr'   => $rand = mt_rand(0, 100000)
@@ -528,7 +528,7 @@ class WeChatAppTest extends TestCase
         $app = new \Wei\WeChatApp(array(
             'wei' => $this->wei,
             'query' => array(
-                'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
                 'nonce'     => '1365872231',
                 'echostr'   => $rand = mt_rand(0, 100000)
@@ -543,7 +543,7 @@ class WeChatAppTest extends TestCase
         $app = new \Wei\WeChatApp(array(
             'wei' => $this->wei,
             'query' => array(
-                'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
                 'nonce'     => '1365872231',
             ),
@@ -560,7 +560,7 @@ class WeChatAppTest extends TestCase
         $app = new \Wei\WeChatApp(array(
             'wei' => $this->wei,
             'query' => array(
-                'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
                 'nonce'     => '1365872231',
             ),
@@ -581,6 +581,7 @@ class WeChatAppTest extends TestCase
 
         // Execute and parse result
         $result = $app->run();
+
         $result = simplexml_load_string($result);
 
         $this->assertEquals($output, $result->Content);
@@ -606,7 +607,7 @@ class WeChatAppTest extends TestCase
         $app = new \Wei\WeChatApp(array(
             'wei' => $this->wei,
             'query' => array(
-                'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
                 'nonce'     => '1365872231',
             ),
@@ -624,7 +625,7 @@ class WeChatAppTest extends TestCase
         $app = new \Wei\WeChatApp(array(
             'wei' => $this->wei,
             'query' => array(
-                'signature' => 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583',
+                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
                 'nonce'     => '1365872231',
             ),
