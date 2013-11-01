@@ -311,7 +311,7 @@
 <!-- api/widget
   ================================================== -->
   <section id="widget">
-  <div class="page-header"><h1>Widget</h1></div>
+  <div class="page-header"><h1>Wei</h1></div>
 
 <p>对象管理器,所有对象的入口.</p>
 
@@ -321,26 +321,26 @@
 
 <h3>获取对象管理器对象</h3>
 
-<div class="highlight"><pre><code class="php"><span class="cm">/* @var $widget \Widget\Widget */</span>
-<span class="nv">$widget</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">();</span>
+<div class="highlight"><pre><code class="php"><span class="cm">/* @var $wei \Wei\Wei */</span>
+<span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">();</span>
 </code></pre></div>
 
 <h3>设置对象配置</h3>
 
-<p>对象配置可以通过widget函数的第一个参数来设置,</p>
+<p>对象配置可以通过wei函数的第一个参数来设置,</p>
 
 <p>完整配置请查看<a href="https://github.com/twinh/widget/tree/master/docs/zh-CN/api/../book/configuration.md" target="_blank">配置</a>章节.</p>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$widget</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="c1">// 类`Widget\Widget`的属性值</span>
-    <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="c1">// 类`Wei\Wei`的属性值</span>
+    <span class="s1">'wei'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'debug'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="c1">// 类`Widget\Db`的属性值</span>
+    <span class="c1">// 类`Wei\Db`的属性值</span>
     <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
         <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'localhost'</span><span class="p">,</span>
-        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'widget'</span><span class="p">,</span>
+        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'wei'</span><span class="p">,</span>
         <span class="s1">'charset'</span>   <span class="o">=&gt;</span> <span class="s1">'utf8'</span><span class="p">,</span>
         <span class="s1">'user'</span>      <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
         <span class="s1">'password'</span>  <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
@@ -350,10 +350,10 @@
 
 <h3>设置类自动加载</h3>
 
-<p>Widget支持<a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md" target="_blank">PRS-0</a>风格的类自动加载器.</p>
+<p>Wei支持<a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md" target="_blank">PRS-0</a>风格的类自动加载器.</p>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'wei'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="c1">// 启用自动加载</span>
         <span class="s1">'autoload'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
         <span class="c1">// 设置自动加载的类的命名空间和类所在的目录</span>
@@ -379,12 +379,12 @@
 
 <h3>开启错误调试</h3>
 
-<p>Widget的错误调试可通过<code>debug</code>选项开启,PHP的调试可通过<code>inis</code>选项配置</p>
+<p>Wei的错误调试可通过<code>debug</code>选项开启,PHP的调试可通过<code>inis</code>选项配置</p>
 
 <p><strong>注意:</strong> 两者的配置相互独立,不互相影响</p>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'wei'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="c1">// 通过PHP ini配置,开启PHP错误信息提示</span>
         <span class="s1">'inis'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="c1">// 在屏幕上输出错误信息</span>
@@ -392,7 +392,7 @@
             <span class="c1">// 设置错误报告的级别</span>
             <span class="s1">'error_reporting'</span> <span class="o">=&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
         <span class="p">),</span>
-        <span class="c1">// 开启Widget的调试模式</span>
+        <span class="c1">// 开启Wei的调试模式</span>
         <span class="s1">'debug'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
     <span class="p">)</span>
 <span class="p">));</span>
@@ -403,7 +403,7 @@
 <p><a href="http://www.php.net/manual/zh/ini.php" target="_blank">PHP的配置</a>可以通过<code>inis</code>选项来设置.</p>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'wei'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'inis'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">'date.timezone'</span> <span class="o">=&gt;</span> <span class="s1">'Asia/Shanghai'</span><span class="p">,</span> <span class="c1">// 设置时区为上海</span>
             <span class="s1">'memory_limit'</span>  <span class="o">=&gt;</span> <span class="s1">'128M'</span><span class="p">,</span>          <span class="c1">// 设置最大限制为128M</span>
@@ -421,11 +421,11 @@
 
 <ol>
 <li>
-<p>定义您的类,继承于<code>\Widget\Base</code></p>
+<p>定义您的类,继承于<code>\Wei\Base</code></p>
 
 <div class="highlight"><pre><code class="php"><span class="k">namespace</span> <span class="nx">MyProject</span><span class="p">;</span>
 
-<span class="k">class</span> <span class="nc">Application</span> <span class="k">extends</span> <span class="nx">\Widget\Base</span>
+<span class="k">class</span> <span class="nc">Application</span> <span class="k">extends</span> <span class="nx">\Wei\Base</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span>
     <span class="p">{</span>
@@ -438,7 +438,7 @@
 <p>设置<code>aliases</code>选项,指定您定义的类的对象名称</p>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'wei'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">'对象名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span><span class="p">,</span>
             <span class="s1">'app'</span> <span class="o">=&gt;</span> <span class="s1">'MyProject\Application'</span>
@@ -462,7 +462,7 @@
 
 <div class="highlight"><pre><code class="php"><span class="c1">// TODO more detail message</span>
 <span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'wei'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'import'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="k">array</span><span class="p">(</span>
                 <span class="s1">'dir'</span> <span class="o">=&gt;</span> <span class="s1">'要导入的类文件所在的目录'</span><span class="p">,</span>
@@ -488,7 +488,7 @@
 <li>
 <code>providers</code>选项数组的key是对象名称,value也是对象名称</li>
 </ol><div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'wei'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">'对象名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span>
         <span class="p">),</span>
@@ -568,7 +568,7 @@
 </tbody>
 </table><h3>回调</h3>
 
-<h4>beforeConstruct($widget, $full, $name)</h4>
+<h4>beforeConstruct($wei, $full, $name)</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -578,8 +578,8 @@
 </tr></thead>
 <tbody>
 <tr>
-<td>$widget</td>
-<td>Widget\Widget</td>
+<td>$wei</td>
+<td>Wei\Wei</td>
 <td>对象管理器</td>
 </tr>
 <tr>
@@ -595,7 +595,7 @@
 </td>
 </tr>
 </tbody>
-</table><h4>afterConstruct($widget, $full, $name, $object)</h4>
+</table><h4>afterConstruct($wei, $full, $name, $object)</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -605,8 +605,8 @@
 </tr></thead>
 <tbody>
 <tr>
-<td>$widget</td>
-<td>Widget\Widget</td>
+<td>$wei</td>
+<td>Wei\Wei</td>
 <td>对象管理器</td>
 </tr>
 <tr>
@@ -623,7 +623,7 @@
 </tr>
 <tr>
 <td>$object</td>
-<td>Widget\Base</td>
+<td>Wei\Base</td>
 <td>当前初始化的对象</td>
 </tr>
 </tbody>
@@ -633,7 +633,7 @@
 
 <p>获取对象管理器,如果不存在,将创建一个新的对象</p>
 
-<p><strong>返回:</strong> <code>Widget\Widget</code> 对象管理器</p>
+<p><strong>返回:</strong> <code>Wei\Wei</code> 对象管理器</p>
 
 <p><strong>参数</strong></p>
 
@@ -658,7 +658,7 @@
 
 <p>开启或关闭调试模式</p>
 
-<p><strong>返回:</strong> <code>Widget\Widget</code> 对象管理器</p>
+<p><strong>返回:</strong> <code>Wei\Wei</code> 对象管理器</p>
 
 <p><strong>参数</strong></p>
 
@@ -677,7 +677,7 @@
 
 <p>设置对象的配置</p>
 
-<p><strong>返回:</strong> <code>Widget\Widget</code> 对象管理器</p>
+<p><strong>返回:</strong> <code>Wei\Wei</code> 对象管理器</p>
 
 <p><strong>参数</strong></p>
 
@@ -707,7 +707,7 @@
 
 <p>设置对象所有配置</p>
 
-<p><strong>返回:</strong> <code>Widget\Widget</code> 对象管理器</p>
+<p><strong>返回:</strong> <code>Wei\Wei</code> 对象管理器</p>
 
 <p><strong>参数</strong></p>
 
@@ -877,8 +877,8 @@
 
 <h3>缓存数据库查询,如缓存用户总数,每30秒更新一次</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$totalUsers</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'totalUsers'</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$widget</span><span class="p">){</span>
-    <span class="k">return</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">fetchColumn</span><span class="p">(</span><span class="s2">"SELECT COUNT(1) FROM user"</span><span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$totalUsers</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'totalUsers'</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$wei</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nv">$wei</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">fetchColumn</span><span class="p">(</span><span class="s2">"SELECT COUNT(1) FROM user"</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -2166,12 +2166,12 @@
 
 <h3>连接到多个数据库</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$widget</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="c1">// 数据库对象的配置</span>
     <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
         <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'localhost'</span><span class="p">,</span>
-        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'widget'</span><span class="p">,</span>
+        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'wei'</span><span class="p">,</span>
         <span class="s1">'charset'</span>   <span class="o">=&gt;</span> <span class="s1">'utf8'</span><span class="p">,</span>
         <span class="s1">'user'</span>      <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
         <span class="s1">'password'</span>  <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
@@ -2180,7 +2180,7 @@
     <span class="s1">'slave.db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
         <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'slave-host'</span><span class="p">,</span>
-        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'widget'</span><span class="p">,</span>
+        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'wei'</span><span class="p">,</span>
         <span class="s1">'charset'</span>   <span class="o">=&gt;</span> <span class="s1">'utf-8'</span><span class="p">,</span>
         <span class="s1">'user'</span>      <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
         <span class="s1">'password'</span>  <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
@@ -2189,7 +2189,7 @@
     <span class="s1">'logger.db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
         <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'logger-host'</span><span class="p">,</span>
-        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'widget'</span><span class="p">,</span>
+        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'wei'</span><span class="p">,</span>
         <span class="s1">'charset'</span>   <span class="o">=&gt;</span> <span class="s1">'utf-8'</span><span class="p">,</span>
         <span class="s1">'user'</span>      <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
         <span class="s1">'password'</span>  <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
@@ -2197,13 +2197,13 @@
 <span class="p">));</span>
 
 <span class="c1">// 获取默认数据库对象</span>
-<span class="nv">$db</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">;</span>
+<span class="nv">$db</span> <span class="o">=</span> <span class="nv">$wei</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">;</span>
 
 <span class="c1">// 获取备机数据库对象</span>
-<span class="nv">$slaveDb</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">slaveDb</span><span class="p">;</span>
+<span class="nv">$slaveDb</span> <span class="o">=</span> <span class="nv">$wei</span><span class="o">-&gt;</span><span class="na">slaveDb</span><span class="p">;</span>
 
 <span class="c1">// 获取日志数据库对象</span>
-<span class="nv">$loggerDb</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">loggerDb</span><span class="p">;</span>
+<span class="nv">$loggerDb</span> <span class="o">=</span> <span class="nv">$wei</span><span class="o">-&gt;</span><span class="na">loggerDb</span><span class="p">;</span>
 
 <span class="c1">// 使用日志数据库对象查询用户编号为1的操作日志</span>
 <span class="nv">$loggerDb</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">(</span><span class="s1">'userLog'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'userId'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
@@ -2219,7 +2219,7 @@
 <li>
 <code>select</code>方法的第一个参数是数据表名称,返回的是数组</li>
 <li>
-<code>find</code>方法的第一个参数也是数据表名称,但返回的是<code>Widget\Db\Record</code>对象</li>
+<code>find</code>方法的第一个参数也是数据表名称,但返回的是<code>Wei\Db\Record</code>对象</li>
 </ul><p>另外,如果要查询多条数据,对应的方法是<code>fetchAll</code>,<code>selectAll</code>和<code>findAll</code>.</p>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$db</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">;</span>
@@ -2230,7 +2230,7 @@
 <span class="c1">// 根据表名和条件查询一行记录,返回一个一维数组</span>
 <span class="nv">$array</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
-<span class="c1">// 根据表名和条件查询一行记录,返回一个`Widget\Db\Record`对象</span>
+<span class="c1">// 根据表名和条件查询一行记录,返回一个`Wei\Db\Record`对象</span>
 <span class="nv">$record</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
 <span class="c1">// 根据SQL语句查询多行记录,返回一个二维数组</span>
@@ -2239,7 +2239,7 @@
 <span class="c1">// 根据表名和条件查询多行记录,返回一个二维数组</span>
 <span class="nv">$array</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">'user'</span><span class="p">);</span>
 
-<span class="c1">// 根据表名和条件查询多行记录,返回一个`Widget\Db\Collection`对象</span>
+<span class="c1">// 根据表名和条件查询多行记录,返回一个`Wei\Db\Collection`对象</span>
 <span class="nv">$collection</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'user'</span><span class="p">);</span>
 </code></pre></div>
 
@@ -2280,12 +2280,12 @@
 <tr>
 <td>find</td>
 <td>$table, $conditions</td>
-<td>Widget\Db\Record对象</td>
+<td>Wei\Db\Record对象</td>
 </tr>
 <tr>
 <td>findAll</td>
 <td>$table, $conditions</td>
-<td>Widget\Db\Collection对象</td>
+<td>Wei\Db\Collection对象</td>
 </tr>
 <tr>
 <td>query</td>
@@ -2295,7 +2295,7 @@
 </tbody>
 </table><h3>通过beforeQuery回调记录SQL日志</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$widget</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'beforeQuery'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$sql</span><span class="p">,</span> <span class="nv">$params</span><span class="p">,</span> <span class="nv">$types</span><span class="p">,</span> <span class="nv">$db</span><span class="p">)</span> <span class="p">{</span>
             <span class="nv">$log</span> <span class="o">=</span> <span class="nv">$sql</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">.</span> <span class="nb">var_export</span><span class="p">(</span><span class="nv">$params</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
@@ -2305,10 +2305,10 @@
     <span class="p">)</span>
 <span class="p">));</span>
 
-<span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">"SELECT DATE('now')"</span><span class="p">);</span>
+<span class="nv">$wei</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">"SELECT DATE('now')"</span><span class="p">);</span>
 
 <span class="c1">// 日志文件内容</span>
-<span class="c1">//[2013-07-10 23:15:38] widget.DEBUG: SELECT DATE('now')</span>
+<span class="c1">//[2013-07-10 23:15:38] wei.DEBUG: SELECT DATE('now')</span>
 <span class="c1">//array (</span>
 <span class="c1">//)</span>
 </code></pre></div>
@@ -2320,12 +2320,12 @@
 <ul>
 <li>读操作使用slave数据库</li>
 <li>写操作使用master数据库</li>
-</ul><div class="highlight"><pre><code class="php"><span class="nv">$widget</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+</ul><div class="highlight"><pre><code class="php"><span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="c1">// 主数据库对象的配置</span>
     <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
         <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'localhost'</span><span class="p">,</span>
-        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'widget'</span><span class="p">,</span>
+        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'wei'</span><span class="p">,</span>
         <span class="s1">'charset'</span>   <span class="o">=&gt;</span> <span class="s1">'utf8'</span><span class="p">,</span>
         <span class="s1">'user'</span>      <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
         <span class="s1">'password'</span>  <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
@@ -2336,7 +2336,7 @@
     <span class="s1">'slave.db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
         <span class="s1">'host'</span>      <span class="o">=&gt;</span> <span class="s1">'slave-host'</span><span class="p">,</span>
-        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'widget'</span><span class="p">,</span>
+        <span class="s1">'dbname'</span>    <span class="o">=&gt;</span> <span class="s1">'wei'</span><span class="p">,</span>
         <span class="s1">'charset'</span>   <span class="o">=&gt;</span> <span class="s1">'utf-8'</span><span class="p">,</span>
         <span class="s1">'user'</span>      <span class="o">=&gt;</span> <span class="s1">'root'</span><span class="p">,</span>
         <span class="s1">'password'</span>  <span class="o">=&gt;</span> <span class="s1">'123456'</span><span class="p">,</span>
@@ -2344,7 +2344,7 @@
 <span class="p">));</span>
 
 <span class="c1">// 获取主数据库对象</span>
-<span class="nv">$db</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">;</span>
+<span class="nv">$db</span> <span class="o">=</span> <span class="nv">$wei</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">;</span>
 
 <span class="c1">// 执行写操作,使用主数据库</span>
 <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="s1">'table'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">));</span>
@@ -2355,7 +2355,7 @@
 <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'table'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">));</span>
 
 <span class="c1">// 获取备数据库对象</span>
-<span class="nv">$slaveDb</span> <span class="o">=</span> <span class="nv">$widget</span><span class="o">-&gt;</span><span class="na">slaveDb</span><span class="p">;</span>
+<span class="nv">$slaveDb</span> <span class="o">=</span> <span class="nv">$wei</span><span class="o">-&gt;</span><span class="na">slaveDb</span><span class="p">;</span>
 
 <span class="c1">// 直接使用备数据库操作</span>
 <span class="nv">$slaveDb</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">'table'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">));</span>
@@ -2438,13 +2438,13 @@
 <tr>
 <td>recordClass</td>
 <td>string</td>
-<td>Widget\Db\Record</td>
+<td>Wei\Db\Record</td>
 <td>记录类的基础类名称</td>
 </tr>
 <tr>
 <td>collectionClass</td>
 <td>string</td>
-<td>Widget\Db\Collection</td>
+<td>Wei\Db\Collection</td>
 <td>记录集合类的基础类名称</td>
 </tr>
 <tr>
@@ -2537,7 +2537,7 @@
 </tr></thead>
 <tbody><tr>
 <td>$db</td>
-<td>Widget\Db</td>
+<td>Wei\Db</td>
 <td>当前Db对象</td>
 </tr></tbody>
 </table><h4>connectFails</h4>
@@ -2553,7 +2553,7 @@
 <tbody>
 <tr>
 <td>$db</td>
-<td>Widget\Db</td>
+<td>Wei\Db</td>
 <td>当前Db对象</td>
 </tr>
 <tr>
@@ -2575,7 +2575,7 @@
 <tbody>
 <tr>
 <td>$db</td>
-<td>Widget\Db</td>
+<td>Wei\Db</td>
 <td>当前Db对象</td>
 </tr>
 <tr>
@@ -2612,7 +2612,7 @@
 </tr>
 <tr>
 <td>$db</td>
-<td>Widget\Db</td>
+<td>Wei\Db</td>
 <td>当前Db对象</td>
 </tr>
 </tbody>
@@ -2628,7 +2628,7 @@
 </tr></thead>
 <tbody><tr>
 <td>$db</td>
-<td>Widget\Db</td>
+<td>Wei\Db</td>
 <td>当前Db对象</td>
 </tr></tbody>
 </table><h3>方法</h3>
@@ -2637,7 +2637,7 @@
 
 <p>根据数据表名称,创建一个新Query Builder对象</p>
 
-<p><strong>返回:</strong> <code>Widget\Db\QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Db\QueryBuilder</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -2920,7 +2920,7 @@
 
 <p>根据条件查找数据表的一条记录</p>
 
-<p><strong>返回:</strong> <code>Widget\Db\Record</code>|<code>false</code> 如果记录存在,返回记录对象,否则返回<code>false</code></p>
+<p><strong>返回:</strong> <code>Wei\Db\Record</code>|<code>false</code> 如果记录存在,返回记录对象,否则返回<code>false</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -2946,7 +2946,7 @@
 
 <p>根据条件查找数据表的所有匹配记录</p>
 
-<p><strong>返回:</strong> <code>Widget\Db\Collection</code>|<code>false</code> 如果记录存在,返回集合对象,否则返回<code>false</code></p>
+<p><strong>返回:</strong> <code>Wei\Db\Collection</code>|<code>false</code> 如果记录存在,返回集合对象,否则返回<code>false</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -2972,7 +2972,7 @@
 
 <p>创建一个新的数据表记录对象</p>
 
-<p><strong>返回:</strong> <code>Widget\Db\Record</code> 记录对象</p>
+<p><strong>返回:</strong> <code>Wei\Db\Record</code> 记录对象</p>
 
 <p><strong>参数</strong></p>
 
@@ -2998,7 +2998,7 @@
 
 <p>根据条件查找数据表的一条记录,如果记录不存在,将根据<code>$data</code>创建一条新的数据表记录对象</p>
 
-<p><strong>返回:</strong> <code>Widget\Db\Record</code> 记录对象</p>
+<p><strong>返回:</strong> <code>Wei\Db\Record</code> 记录对象</p>
 
 <p><strong>参数</strong></p>
 
@@ -3097,7 +3097,7 @@
 
 <p>根据数据表名称获取记录类名称</p>
 
-<p><strong>返回:</strong> <code>string</code> 如果记录类不存在,返回默认类<code>Widget\Db\Record</code></p>
+<p><strong>返回:</strong> <code>string</code> 如果记录类不存在,返回默认类<code>Wei\Db\Record</code></p>
 
 <h4>db-&gt;getUser()</h4>
 
@@ -3145,9 +3145,9 @@
 
 <h4>db-&gt;$table($conditions)</h4>
 
-<p>根据条件查找数据表的一行记录,返回的是一个<code>Widget\Db\Record</code>对象,等于<code>db-&gt;find($table, $conditions)</code></p>
+<p>根据条件查找数据表的一行记录,返回的是一个<code>Wei\Db\Record</code>对象,等于<code>db-&gt;find($table, $conditions)</code></p>
 
-<p><strong>返回:</strong> <code>Widget\Db\Record</code></p>
+<p><strong>返回:</strong> <code>Wei\Db\Record</code></p>
   </section>
 
 <!-- api/queryBuilder
@@ -4014,7 +4014,7 @@
 <h3>创建一条新记录并保存</h3>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 通过`create`方法创建一个新的用户记录对象</span>
-<span class="cm">/* @var $user \Widget\Db\Record */</span>
+<span class="cm">/* @var $user \Wei\Db\Record */</span>
 <span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'groupId'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
 
 <span class="c1">// 设置对象的值</span>
@@ -4077,49 +4077,49 @@
 
 <h3>属性</h3>
 
-<h4>Widget\Db $db</h4>
+<h4>Wei\Db $db</h4>
 
 <p>数据库连接对象</p>
 
-<h4>Widget\Widget $widget</h4>
+<h4>Wei\Wei $wei</h4>
 
 <p>对象管理器</p>
 
 <h3>回调</h3>
 
-<h4>afterLoad($record, $widget)</h4>
+<h4>afterLoad($record, $wei)</h4>
 
 <p>加载记录后触发的回调</p>
 
-<h4>beforeSave($record, $widget)</h4>
+<h4>beforeSave($record, $wei)</h4>
 
 <p>保存记录前触发的回调</p>
 
-<h4>afterSave($record, $widget)</h4>
+<h4>afterSave($record, $wei)</h4>
 
 <p>保存记录后触发的回调</p>
 
-<h4>beforeInsert($record, $widget)</h4>
+<h4>beforeInsert($record, $wei)</h4>
 
 <p>插入记录到数据库前触发的回调</p>
 
-<h4>afterInsert($record, $widget)</h4>
+<h4>afterInsert($record, $wei)</h4>
 
 <p>插入记录到数据库后触发的回调</p>
 
-<h4>beforeUpdate($record, $widget)</h4>
+<h4>beforeUpdate($record, $wei)</h4>
 
 <p>更新记录到数据库前触发的回调</p>
 
-<h4>afterUpdate($record, $widget)</h4>
+<h4>afterUpdate($record, $wei)</h4>
 
 <p>更新记录到数据库后触发的回调</p>
 
-<h4>beforeDelete($record, $widget)</h4>
+<h4>beforeDelete($record, $wei)</h4>
 
 <p>删除记录前触发的回调</p>
 
-<h4>afterDelete($record, $widget)</h4>
+<h4>afterDelete($record, $wei)</h4>
 
 <p>删除记录后触发的回调</p>
 
@@ -4294,7 +4294,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'call'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="c1">// cURL请求发送前的回调,记录请求的方式和地址参数</span>
-        <span class="s1">'beforeSend'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">\Widget\Call</span> <span class="nv">$call</span><span class="p">,</span> <span class="nv">$ch</span><span class="p">)</span> <span class="p">{</span>
+        <span class="s1">'beforeSend'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">\Wei\Call</span> <span class="nv">$call</span><span class="p">,</span> <span class="nv">$ch</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
                 <span class="s1">'Request URL'</span>       <span class="o">=&gt;</span> <span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getUrl</span><span class="p">(),</span>
                 <span class="s1">'Request Method'</span>    <span class="o">=&gt;</span> <span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">(),</span>
@@ -4302,18 +4302,18 @@
             <span class="p">));</span>
         <span class="p">},</span>
         <span class="c1">// cURL请求发送成功的回调</span>
-        <span class="s1">'success'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nx">\Widget\Call</span> <span class="nv">$call</span><span class="p">)</span> <span class="p">{</span>
+        <span class="s1">'success'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nx">\Wei\Call</span> <span class="nv">$call</span><span class="p">)</span> <span class="p">{</span>
             <span class="c1">// 按需记录</span>
         <span class="p">},</span>
         <span class="c1">// cURL请求发送失败的回调,记录错误原因和异常堆栈</span>
-        <span class="s1">'error'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">\Widget\Call</span> <span class="nv">$call</span><span class="p">)</span> <span class="p">{</span>
+        <span class="s1">'error'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">\Wei\Call</span> <span class="nv">$call</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
                 <span class="s1">'Error status'</span>  <span class="o">=&gt;</span> <span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getErrorStatus</span><span class="p">(),</span>
                 <span class="s1">'Exception'</span>     <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getErrorException</span><span class="p">(),</span>
             <span class="p">));</span>
         <span class="p">},</span>
         <span class="c1">// cURL请求发送完成的回调,记录返回状态码,花费时间等</span>
-        <span class="s1">'complete'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">\Widget\Call</span> <span class="nv">$call</span><span class="p">,</span> <span class="nv">$ch</span><span class="p">)</span> <span class="p">{</span>
+        <span class="s1">'complete'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">\Wei\Call</span> <span class="nv">$call</span><span class="p">,</span> <span class="nv">$ch</span><span class="p">)</span> <span class="p">{</span>
             <span class="nv">$curlInfo</span> <span class="o">=</span> <span class="nb">curl_getinfo</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
 
             <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
@@ -4514,7 +4514,7 @@
 <tbody>
 <tr>
 <td>$call</td>
-<td>Widget\Call</td>
+<td>Wei\Call</td>
 <td>当前的Call对象</td>
 </tr>
 <tr>
@@ -4539,7 +4539,7 @@
 </tr>
 <tr>
 <td>$call</td>
-<td>\Widget\Call</td>
+<td>\Wei\Call</td>
 <td>当前的Call对象</td>
 </tr>
 </tbody>
@@ -4588,7 +4588,7 @@
 <tbody>
 <tr>
 <td>$call</td>
-<td>Widget\Call</td>
+<td>Wei\Call</td>
 <td>当前的Call对象</td>
 </tr>
 <tr>
@@ -4635,7 +4635,7 @@
 <tbody>
 <tr>
 <td>$call</td>
-<td>Widget\Call</td>
+<td>Wei\Call</td>
 <td>当前的Call对象</td>
 </tr>
 <tr>
@@ -4650,13 +4650,13 @@
 
 <p>初始化一个新的Call对象,并执行HTTP请求</p>
 
-<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
 
 <h4>call($url, $options = array())</h4>
 
 <p>根据给定的URL地址,初始化一个Call对象,并执行HTTP请求</p>
 
-<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
 
 <h4>call-&gt;isSuccess()</h4>
 
@@ -4714,43 +4714,43 @@
 
 <p>通过GET方式发送带数据的请求</p>
 
-<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
 
 <h4>call-&gt;getJson($url, $data = array())</h4>
 
 <p>通过GET方式发送带数据的请求,并将返回数据解析为JSON数组</p>
 
-<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
 
 <h4>call-&gt;getJsonObject($url, $data = array())</h4>
 
 <p>通过GET方式发送带数据的请求,并将返回数据解析为JSON对象</p>
 
-<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
 
 <h4>call-&gt;post($url, $data = array(), $dataType = null)</h4>
 
 <p>通过POST方式发送带数据的请求</p>
 
-<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
 
 <h4>call-&gt;put($url, $data = array(), $dataType = null)</h4>
 
 <p>通过PUT方式发送带数据的请求</p>
 
-<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
 
 <h4>call-&gt;delete($url, $data = array(), $dataType = null)</h4>
 
 <p>通过DELETE方式发送带数据的请求</p>
 
-<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
 
 <h4>call-&gt;patch($url, $data = array(), $dataType = null)</h4>
 
 <p>通过PATCH方式发送带数据的请求</p>
 
-<p>返回:  <code>Widget\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
   </section>
 
 <!-- api/validate
@@ -5002,7 +5002,7 @@
 
 <ol>
 <li>所有数据项默认都是 <strong>必选</strong> 的,如果某一个数据项是选填的,只需增加 <strong><code>required =&gt; false</code></strong> 的验证规则</li>
-<li>验证规则会被转换成对应的类.如<code>email</code>规则将被转换为<code>\Widget\Validator\Email</code>类,如果类不存在,将抛出异常提醒开发人员规则不存在.</li>
+<li>验证规则会被转换成对应的类.如<code>email</code>规则将被转换为<code>\Wei\Validator\Email</code>类,如果类不存在,将抛出异常提醒开发人员规则不存在.</li>
 <li>验证规则都是 <strong>不</strong> 以<code>is</code>开头的,<code>email</code>,<code>digit</code>是正确的规则名称,<code>isEmail</code>,<code>isDigit</code>是错误的规则名称</li>
 </ol><h5>案例:验证规则格式</h5>
 
@@ -5363,7 +5363,7 @@
 
 <p><strong>参数</strong></p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">ruleValid</span><span class="p">(</span><span class="nv">$rule</span><span class="p">,</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="nx">ruleValid</span><span class="p">(</span><span class="nv">$rule</span><span class="p">,</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$wei</span><span class="p">)</span>
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
@@ -5385,12 +5385,12 @@
 </tr>
 <tr>
 <td>$validator</td>
-<td>Widget\Validate</td>
+<td>Wei\Validate</td>
 <td>验证器对象</td>
 </tr>
 <tr>
-<td>$widget</td>
-<td>Widget\Widget</td>
+<td>$wei</td>
+<td>Wei\Wei</td>
 <td>对象管理器</td>
 </tr>
 </tbody>
@@ -5405,7 +5405,7 @@
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'required'</span>
     <span class="p">),</span>
-    <span class="s1">'ruleValid'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$rule</span><span class="p">,</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">'ruleValid'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$rule</span><span class="p">,</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$wei</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">echo</span> <span class="nv">$rule</span><span class="p">;</span>
         <span class="k">echo</span> <span class="nv">$field</span><span class="p">;</span>
         <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
@@ -5426,7 +5426,7 @@
 
 <p><strong>参数</strong></p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">ruleInvalid</span><span class="p">(</span><span class="nv">$rule</span><span class="p">,</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="nx">ruleInvalid</span><span class="p">(</span><span class="nv">$rule</span><span class="p">,</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$wei</span><span class="p">)</span>
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
@@ -5448,12 +5448,12 @@
 </tr>
 <tr>
 <td>$validator</td>
-<td>Widget\Validate</td>
+<td>Wei\Validate</td>
 <td>验证器对象</td>
 </tr>
 <tr>
-<td>$widget</td>
-<td>Widget\Widget</td>
+<td>$wei</td>
+<td>Wei\Wei</td>
 <td>对象管理器</td>
 </tr>
 </tbody>
@@ -5469,7 +5469,7 @@
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'required'</span>
     <span class="p">),</span>
-    <span class="s1">'ruleInvalid'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$rule</span><span class="p">,</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">'ruleInvalid'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$rule</span><span class="p">,</span> <span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$wei</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">echo</span> <span class="nv">$rule</span><span class="p">;</span>
         <span class="k">echo</span> <span class="nv">$field</span><span class="p">;</span>
         <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
@@ -5490,7 +5490,7 @@
 
 <p><strong>参数</strong></p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">fieldValid</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="nx">fieldValid</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$wei</span><span class="p">)</span>
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
@@ -5507,12 +5507,12 @@
 </tr>
 <tr>
 <td>$validator</td>
-<td>Widget\Validate</td>
+<td>Wei\Validate</td>
 <td>验证器对象</td>
 </tr>
 <tr>
-<td>$widget</td>
-<td>Widget\Widget</td>
+<td>$wei</td>
+<td>Wei\Wei</td>
 <td>对象管理器</td>
 </tr>
 </tbody>
@@ -5527,7 +5527,7 @@
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'required'</span>
     <span class="p">),</span>
-    <span class="s1">'fieldValid'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">'fieldValid'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$wei</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">echo</span> <span class="nv">$field</span><span class="p">;</span>
         <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
     <span class="p">}</span>
@@ -5546,7 +5546,7 @@
 
 <p><strong>参数</strong></p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">fieldInvalid</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="nx">fieldInvalid</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$wei</span><span class="p">)</span>
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
@@ -5563,12 +5563,12 @@
 </tr>
 <tr>
 <td>$validator</td>
-<td>Widget\Validate</td>
+<td>Wei\Validate</td>
 <td>验证器对象</td>
 </tr>
 <tr>
-<td>$widget</td>
-<td>Widget\Widget</td>
+<td>$wei</td>
+<td>Wei\Wei</td>
 <td>对象管理器</td>
 </tr>
 </tbody>
@@ -5583,7 +5583,7 @@
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'required'</span>
     <span class="p">),</span>
-    <span class="s1">'fieldValid'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">'fieldValid'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span> <span class="nv">$validator</span><span class="p">,</span> <span class="nv">$wei</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">echo</span> <span class="nv">$field</span><span class="p">;</span>
         <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
     <span class="p">}</span>
@@ -5600,7 +5600,7 @@
 
 <p>验证结束时,如果最终验证结果为通过,验证器就触发<code>success</code>回调.</p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">success</span><span class="p">(</span><span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="nx">success</span><span class="p">(</span><span class="nv">$validator</span><span class="p">,</span> <span class="nv">$wei</span><span class="p">)</span>
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
@@ -5612,12 +5612,12 @@
 <tbody>
 <tr>
 <td>$validator</td>
-<td>Widget\Validate</td>
+<td>Wei\Validate</td>
 <td>验证器对象</td>
 </tr>
 <tr>
-<td>$widget</td>
-<td>Widget\Widget</td>
+<td>$wei</td>
+<td>Wei\Wei</td>
 <td>对象管理器</td>
 </tr>
 </tbody>
@@ -5630,7 +5630,7 @@
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'required'</span>
     <span class="p">),</span>
-    <span class="s1">'success'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">'success'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$validator</span><span class="p">,</span> <span class="nv">$wei</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">));</span>
@@ -5645,7 +5645,7 @@
 
 <p>验证结束时,如果最终验证结果为 <strong>不</strong> 通过,验证器就触发<code>failure</code>回调.</p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">failure</span> <span class="p">(</span> <span class="nv">$event</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">,</span> <span class="nv">$validator</span> <span class="p">)</span>
+<div class="highlight"><pre><code class="php"><span class="nx">failure</span> <span class="p">(</span> <span class="nv">$event</span><span class="p">,</span> <span class="nv">$wei</span><span class="p">,</span> <span class="nv">$validator</span> <span class="p">)</span>
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
@@ -5657,12 +5657,12 @@
 <tbody>
 <tr>
 <td>$validator</td>
-<td>Widget\Validate</td>
+<td>Wei\Validate</td>
 <td>验证器对象</td>
 </tr>
 <tr>
-<td>$widget</td>
-<td>Widget\Widget</td>
+<td>$wei</td>
+<td>Wei\Wei</td>
 <td>对象管理器</td>
 </tr>
 </tbody>
@@ -5675,7 +5675,7 @@
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'required'</span>
     <span class="p">),</span>
-    <span class="s1">'failure'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$validator</span><span class="p">,</span> <span class="nv">$widget</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">'failure'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$validator</span><span class="p">,</span> <span class="nv">$wei</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">));</span>
@@ -5706,7 +5706,7 @@
 
 <p>检查数组或对象中每一个元素是否能通过指定规则的验证</p>
 
-<p>返回: <code>Widget\Validate</code> 新的验证器对象</p>
+<p>返回: <code>Wei\Validate</code> 新的验证器对象</p>
 
 <p>参数</p>
 
@@ -5725,7 +5725,7 @@
 
 <p>为数据项增加新的验证规则</p>
 
-<p>返回: <code>Widget\Validate</code> 验证器对象</p>
+<p>返回: <code>Wei\Validate</code> 验证器对象</p>
 
 <p>参数</p>
 
@@ -5808,7 +5808,7 @@
 
 <p>设置验证规则</p>
 
-<p>返回: <code>Widget\Validate</code> 验证器对象</p>
+<p>返回: <code>Wei\Validate</code> 验证器对象</p>
 
 <h4>validate-&gt;getRules()</h4>
 
@@ -5820,7 +5820,7 @@
 
 <p>设置要验证的数据</p>
 
-<p>返回: <code>Widget\Validate</code> 验证器对象</p>
+<p>返回: <code>Wei\Validate</code> 验证器对象</p>
 
 <h4>validate-&gt;getData()</h4>
 
@@ -5832,7 +5832,7 @@
 
 <p>设置数据项的名称</p>
 
-<p>返回: <code>Widget\Validate</code> 验证器对象</p>
+<p>返回: <code>Wei\Validate</code> 验证器对象</p>
 
 <h4>validate-&gt;getNames()</h4>
 
@@ -5863,7 +5863,7 @@
 
 <p>设置要验证的数据项的值</p>
 
-<p>返回: <code>Widget\Validate</code></p>
+<p>返回: <code>Wei\Validate</code></p>
 
 <p>参数</p>
 
@@ -5889,7 +5889,7 @@
 
 <p>设置自定义的错误信息</p>
 
-<p>返回: <code>Widget\Validate</code></p>
+<p>返回: <code>Wei\Validate</code></p>
 
 <p>参数</p>
 
@@ -5951,7 +5951,7 @@
 
 <p>获取规则验证器对象</p>
 
-<p>返回: <code>Widget\Validator\BaseValidator</code>|<code>null</code> 验证器不存在时返回null</p>
+<p>返回: <code>Wei\Validator\BaseValidator</code>|<code>null</code> 验证器不存在时返回null</p>
 
 <p>参数</p>
 
@@ -12125,7 +12125,7 @@
 <tbody>
 <tr>
 <td>$response</td>
-<td>Widget\Response</td>
+<td>Wei\Response</td>
 <td>当前HTTP响应对象</td>
 </tr>
 <tr>
@@ -12144,7 +12144,7 @@
 </tr></thead>
 <tbody><tr>
 <td>$response</td>
-<td>Widget\Response</td>
+<td>Wei\Response</td>
 <td>当前HTTP响应对象</td>
 </tr></tbody>
 </table><h3>方法</h3>
@@ -12846,8 +12846,8 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h3>设置和获取配置</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 设置配置项'title'的值为'Widget Documentation'</span>
-<span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setConfig</span><span class="p">(</span><span class="s1">'title'</span><span class="p">,</span> <span class="s1">'Widget Documentation'</span><span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 设置配置项'title'的值为'Wei Documentation'</span>
+<span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setConfig</span><span class="p">(</span><span class="s1">'title'</span><span class="p">,</span> <span class="s1">'Wei Documentation'</span><span class="p">);</span>
 
 <span class="c1">// 输出配置项'title'的值</span>
 <span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getConfig</span><span class="p">(</span><span class="s1">'title'</span><span class="p">);</span>
@@ -12907,11 +12907,11 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h3>方法</h3>
 
-<h4>widget-&gt;setConfig($name, $default = null)</h4>
+<h4>wei-&gt;setConfig($name, $default = null)</h4>
 
 <p>设置配置</p>
 
-<h4>widget-&gt;getConfig($name, $value)</h4>
+<h4>wei-&gt;getConfig($name, $value)</h4>
 
 <p>获取配置</p>
 
@@ -12936,7 +12936,7 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <h3>在Widget初始化时根据环境加载配置</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'wei'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'preload'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">'env'</span> <span class="c1">// 在预加载选项增加env对象</span>
         <span class="p">)</span>
@@ -13102,8 +13102,8 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <td>异常对象</td>
 </tr>
 <tr>
-<td>$widget</td>
-<td>Widget\Widget</td>
+<td>$wei</td>
+<td>Wei\Wei</td>
 <td>对象管理器</td>
 </tr>
 </tbody>
@@ -13235,7 +13235,7 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">getFile</span><span class="p">();</span>
 
 <span class="c1">// 可以在日志文件看到类似格式的一条日志</span>
-<span class="c1">// [XXXX-XX-XX XX:XX:XX] widget.DEBUG: The logger is called</span>
+<span class="c1">// [XXXX-XX-XX XX:XX:XX] wei.DEBUG: The logger is called</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
@@ -13253,7 +13253,7 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <tr>
 <td>name</td>
 <td>string</td>
-<td>widget</td>
+<td>wei</td>
 <td>日志的名称,可以每个模块设定一个名称进行区分</td>
 </tr>
 <tr>
@@ -13613,7 +13613,7 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
     <span class="c1">// 如`stream`表示`Monolog\Handler\StreamHandler`,`chromePHP`表示`Monolog\Handler\ChromePHPHandler`</span>
     <span class="s1">'stream'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="c1">// 数组的值表示处理器类的初始化参数</span>
-        <span class="s1">'stream'</span> <span class="o">=&gt;</span> <span class="s1">'log/widget.log'</span><span class="p">,</span> <span class="c1">// 日志所在的文件</span>
+        <span class="s1">'stream'</span> <span class="o">=&gt;</span> <span class="s1">'log/wei.log'</span><span class="p">,</span> <span class="c1">// 日志所在的文件</span>
         <span class="s1">'level'</span> <span class="o">=&gt;</span> <span class="nx">MonologLogger</span><span class="o">::</span><span class="na">DEBUG</span><span class="p">,</span> <span class="c1">// 最低记录的等级</span>
     <span class="p">)</span>
 <span class="p">);</span>
@@ -13646,7 +13646,7 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <h3>在Widget初始化时加载PHP Error</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'widget'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'wei'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'preload'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">'phpError'</span> <span class="c1">// 在预加载选项增加phpError对象</span>
         <span class="p">)</span>
