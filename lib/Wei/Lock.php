@@ -9,7 +9,7 @@
 namespace Wei;
 
 /**
- * A service that generates a Gravatar URL for a specified email address
+ * A service that provide the functionality of exclusive Lock
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Cache $cache A cache service
