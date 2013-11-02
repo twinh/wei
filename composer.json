@@ -1,10 +1,10 @@
 {
     "name": "wei/wei",
-    "description": "A micro-framework provided powerful but simple APIs for faster and easier PHP 5.3+ development.",
+    "description": "A micro-framework provided powerful and simple APIs for faster and easier PHP 5.3+ development.",
     "version": "0.9.7",
     "type": "library",
     "keywords": ["framework", "cache", "database", "validator"],
-    "homepage": "https://github.com/twinh/widget",
+    "homepage": "https://github.com/twinh/wei",
     "license": "MIT",
     "require": {
         "php": ">=5.3.0"
@@ -18,7 +18,7 @@
         {
             "name": "Twin Huang",
             "email": "twinhuang@qq.com",
-            "homepage": "https://github.com/twinh/widget"
+            "homepage": "https://github.com/twinh/wei"
         }
     ],
     "autoload": {
