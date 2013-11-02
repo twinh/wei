@@ -8,23 +8,16 @@
 
 namespace Wei\Db;
 
-use Wei\Db;
 use Wei\Base;
 
 /**
  * A base database record class
  *
  * @author      Twin Huang <twinhuang@qq.com>
+ * @property    $db A database service inspired by Doctrine DBAL
  */
 class Record extends Base implements \ArrayAccess
 {
-    /**
-     * The database service
-     *
-     * @var Db
-     */
-    protected $db;
-
     /**
      * The record table name
      *
