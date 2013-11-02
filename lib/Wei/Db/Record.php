@@ -14,7 +14,7 @@ use Wei\Base;
  * A base database record class
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    $db A database service inspired by Doctrine DBAL
+ * @property    \Wei\Db $db A database service inspired by Doctrine DBAL
  */
 class Record extends Base implements \ArrayAccess
 {
@@ -27,6 +27,8 @@ class Record extends Base implements \ArrayAccess
 
     /**
      * The table fields
+     * If leave it blank, it will automatic generate form the database table,
+     * or fill it to speed up the record
      *
      * @var array
      */
