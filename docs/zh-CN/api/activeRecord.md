@@ -112,6 +112,12 @@ $user->delete();
 
 ### 方法
 
+#### $record->get($field)
+获取字段的值
+
+#### $record->set($field, $value)
+设置字段的值
+
 #### $record->getTable()
 获取数据表名称
 
@@ -150,17 +156,6 @@ $user->delete();
 
 #### $record->isModified()
 判断当前记录的字段值是否修改过
-
-### 动态属性和方法
-
-#### $record->$field
-获取字段的值
-
-#### $record->$field = 'xxx'
-设置字段的值
-
-#### unset($record->$field)
-删除字段的值
 
 ### 数组操作方式
 
