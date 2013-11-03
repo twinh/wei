@@ -1,6 +1,6 @@
-Widget Framework Documentation
-==============================
+Wei Framework Documentation
+===========================
 
-Documentation: http://twinh.github.io/widget/
+Documentation: http://twinh.github.io/wei/
 
-API Documentaton: http://twinh.github.io/widget/apidoc/
+API Documentaton: http://twinh.github.io/wei/apidoc/
