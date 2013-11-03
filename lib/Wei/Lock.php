@@ -56,7 +56,14 @@ class Lock extends Base
      */
     public function release($key)
     {
-        return $this->cache->remove($key);
+        if ($this->cache->remove($key)) {
+            if(($index = array_search($key, $this->keys)) !== false) {
+                unset($this->keys[$index]);
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
