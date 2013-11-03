@@ -69,6 +69,11 @@ wei(array(
     ),
     'response' => array(
         'unitTest' => true
+    ),
+    'lock' => array(
+        'providers' => array(
+            'cache' => 'memcached'
+        )
     )
 ));
 
