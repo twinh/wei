@@ -62,4 +62,15 @@ class Counter extends Base
     {
         return $this->cache->set($key, $value);
     }
+
+    /**
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
+     */
+    public function exits($key)
+    {
+        return $this->cache->exists($key);
+    }
 }
