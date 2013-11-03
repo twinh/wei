@@ -200,6 +200,7 @@
         <li><a href="#env">env</a></li>
         <li><a href="#error">error</a></li>
         <li><a href="#gravatar">gravatar</a></li>
+        <li><a href="#lock">lock</a></li>
         <li><a href="#logger">logger</a></li>
         <li><a href="#password">password</a></li>
         <li><a href="#pinyin">pinyin</a></li>
@@ -13139,6 +13140,60 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <h4>gravatar-&gt;large($email, $default = null, $rating = null)</h4>
 
 <p>根据邮箱地址生成较大尺寸(200px)的Gravatar头像</p>
+  </section>
+
+<!-- api/lock
+  ================================================== -->
+  <section id="lock">
+  <div class="page-header"><h1>Lock</h1></div>
+
+<p>对指定的键名加锁</p>
+
+<h2>案例</h2>
+
+<h3>对请求进行加锁,防止重复操作</h3>
+
+<p>在一些长时间的请求,或者一次重要的请求(如领取礼包,增加积分),可以通过加锁防止重复提交,导致数据重复.</p>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">lock</span><span class="p">(</span><span class="s1">'longTimeJob'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'您的请求还在执行中,请稍后再试'</span><span class="p">;</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 执行长时间的任务</span>
+<span class="nb">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s1">'操作成功'</span><span class="p">;</span>
+</code></pre></div>
+
+<blockquote>
+<h3>注意</h3>
+
+<p>在请求结束后,所有的锁都会被自动释放</p>
+</blockquote>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p>无</p>
+
+<h3>方法</h3>
+
+<h4>lock($key)</h4>
+
+<p>对指定的键名加锁</p>
+
+<p>返回 <code>bool</code> 成功时返回<code>true</code>,失败返回<code>false</code></p>
+
+<h4>lock-&gt;release($key)</h4>
+
+<p>对指定的键名解锁</p>
+
+<p>返回 <code>bool</code> 键名存在时返回<code>true</code>,不存在时返回<code>false</code></p>
+
+<h4>lock-&gt;releaseAll()</h4>
+
+<p>释放当前请求所有的锁</p>
   </section>
 
 <!-- api/logger

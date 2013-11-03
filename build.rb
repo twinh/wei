@@ -73,7 +73,7 @@ weis = [
   # view
     'asset', 'escape', 'view',
   # others
-    'arr', 'config', 'env', 'error', 'gravatar', 'logger', 'password', 'pinyin', 'uuid',
+    'arr', 'config', 'env', 'error', 'gravatar', 'lock', 'logger', 'password', 'pinyin', 'uuid',
   # third party
     'monolog', 
     'phpError'
