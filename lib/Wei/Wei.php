@@ -94,6 +94,8 @@ namespace Wei
      * @method   \Wei\Error error($fn) Attach a handler to exception error
      * @property Gravatar   $gravatar A object that generates a Gravatar URL for a specified email address
      * @method   string     gravatar($email, $size = null, $default = null, $rating = null) Generates a Gravatar URL for a specified email address
+     * @property Lock       $lock A service that provide the functionality of exclusive Lock
+     * @method   bool       lock($key) Acquire a lock key
      * @property Logger     $logger A simple logger service, which is inspired by Monolog
      * @method   bool       logger($level, $message) Logs with an arbitrary level
      * @property Password   $password A wrapper class for password hashing functions
