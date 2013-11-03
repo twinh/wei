@@ -12,30 +12,54 @@ namespace Widget;
  * A counter widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
+ * @property    Cache $cache A cache service
  */
 class Counter extends Base
 {
-    protected $deps = array(
-        'cache' => ''
-    );
-
-    public function incr()
+    /**
+     * Increment an item
+     *
+     * @param string $key The name of item
+     * @param int $offset The value to increased
+     * @return int|false Returns the new value on success, or false on failure
+     */
+    public function incr($key, $offset = 1)
     {
-        $this->cache;
+        return $this->cache->incr($key, $offset);
     }
 
-    public function decr()
+    /**
+     * Decrement an item
+     *
+     * @param string $key The name of item
+     * @param int $offset The value to be decreased
+     * @return int|false Returns the new value on success, or false on failure
+     */
+    public function decr($key, $offset = 1)
     {
-
+        return $this->cache->decr($key, $offset);
     }
 
-    public function get()
+    /**
+     * Retrieve an item
+     *
+     * @param string $key The name of item
+     * @return mixed
+     */
+    public function get($key)
     {
-
+        return $this->cache->get($key);
     }
 
-    public function set()
+    /**
+     * Store an item
+     *
+     * @param string $key The name of item
+     * @param mixed $value The value of item
+     * @return bool
+     */
+    public function set($key, $value)
     {
-
+        return $this->cache->set($key, $value);
     }
 }
