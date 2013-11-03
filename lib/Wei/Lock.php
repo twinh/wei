@@ -29,11 +29,7 @@ class Lock extends Base
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-
-        $self = $this;
-        register_shutdown_function(function() use($self) {
-            $self->releaseAll();
-        });
+        register_shutdown_function(array($this, 'releaseAll'));
     }
 
     /**
