@@ -1,12 +1,12 @@
 <?php
 /**
- * Widget Framework
+ * Wei Framework
  *
  * @copyright   Copyright (c) 2008-2013 Twin Huang
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Widget;
+namespace Wei;
 
 /**
  * A counter widget
