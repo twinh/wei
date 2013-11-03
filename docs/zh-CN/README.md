@@ -174,6 +174,7 @@ API参考目录
 * [env](api/env.md) - 环境检测及根据不同环境加载不同的配置文件
 * [error](api/error.md) - 提供简洁友好的错误界面
 * [gravatar](api/gravatar.md) - 根据邮箱地址生成自定义大小的Gravatar头像
+* [lock](api/lock.md) - 锁服务,用于对请求,资源进行加锁,防止重复操作
 * [logger](api/logger.md) - 记录日志
 * [password](api/password.md) - 安全简单的密码加密,校验服务
 * [pinyin](api/pinyin.md) - 将中文转换为拼音字母
