@@ -61,7 +61,7 @@ weis = [
     # File & Directory
     'isDir', 'isExists', 'isFile', 'isImage',
     'isEmail', 'isIp', 'isTld', 'isUrl', 'isUuid',
-    'isCreditCard',
+    'isCreditCard', 'isPhone',
     'isChinese', 'isIdCardCn', 'isIdCardHk', 'isIdCardMo', 'isIdCardTw', 'isPhoneCn', 'isPlateNumberCn', 'isPostcodeCn', 'isQQ', 'isMobileCn',
     'isAllof', 'isNoneof', 'isOneof', 'isSomeof',
     'isRecordExists',
