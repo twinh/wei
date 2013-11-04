@@ -43,10 +43,6 @@ class Password extends Base
     {
         parent::__construct($options);
 
-        if (!function_exists('crypt')) {
-            throw new \Exception('Crypt must be loaded for password_hash to function');
-        }
-
         if (!defined('PASSWORD_BCRYPT')) {
             define('PASSWORD_BCRYPT', 1);
             define('PASSWORD_DEFAULT', PASSWORD_BCRYPT);
