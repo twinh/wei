@@ -6,10 +6,10 @@ Env
 案例
 ----
 
-### 在Widget初始化时根据环境加载配置
+### 在初始化时根据环境加载配置
 
 ```php
-wei(array(
+$wei = wei(array(
     'wei' => array(
         'preload' => array(
             'env' // 在预加载选项增加env对象
