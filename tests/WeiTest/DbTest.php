@@ -1272,4 +1272,14 @@ class DbTest extends TestCase
         $this->assertEquals('port', $testDb->getPort());
         $this->assertEquals('dbname', $testDb->getDbname());
     }
+
+    public function testQueryBuilderForEach()
+    {
+        $this->initFixtures();
+
+        $members = $this->db('member')->where('group_id = 1');
+        foreach ($members as $member) {
+            $this->assertEquals(1, $member['group_id']);
+        }
+    }
 }
