@@ -7,6 +7,7 @@ isPhoneCn
 ----
 
 ### 检查"020-1234567"是否为电话号码
+
 ```php
 if (wei()->isPhoneCn('020-1234567')) {
     echo 'Yes';
@@ -16,6 +17,7 @@ if (wei()->isPhoneCn('020-1234567')) {
 ```
 
 #### 运行结果
+
 ```php
 'Yes'
 ```
@@ -23,13 +25,13 @@ if (wei()->isPhoneCn('020-1234567')) {
 调用方式
 --------
 
-### 选项
+### 错误信息
 
-| 名称                | 类型    | 默认值                                      | 说明              |
-|---------------------|---------|---------------------------------------------|-------------------|
-| notStringMessage    | string  | %name%必须是字符串                          | -                 |
-| patternMessage      | string  | %name%必须是有效的电话号码                  | -                 |
-| negativeMessage     | string  | %name%不能是电话号码                        | -                 |
+名称                | 信息
+--------------------|------
+notStringMessage    | %name%必须是字符串
+patternMessage      | %name%必须是有效的电话号码
+negativeMessage     | %name%不能是电话号码
 
 ### 方法
 
@@ -40,3 +42,4 @@ if (wei()->isPhoneCn('020-1234567')) {
 --------
 
 * [验证器概览](../book/validators.md)
+* [检查数据是否为通用电话号码:isPhone](isPhone.md)
