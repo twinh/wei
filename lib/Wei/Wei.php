@@ -88,6 +88,7 @@ namespace Wei
      * Other
      * @property Arr        $arr An util object provides some useful method to manipulation array
      * @property Config     $config A object to manage object configurations
+     * @property Counter    $counter A counter service
      * @property Env        $env A object to detect the environment name and load configuration by environment name
      * @method   string     env() Returns the environment name
      * @property Error      $error A object that handles exception and display pretty exception message

@@ -9,7 +9,7 @@
 namespace Wei;
 
 /**
- * A counter widget
+ * A counter service
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Cache $cache A cache service
