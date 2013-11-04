@@ -837,7 +837,7 @@
   <section id="cache">
   <div class="page-header"><h1>Cache</h1></div>
 
-<p>缓存数据管理,可设定Memcached,Redis,APC,文件等作为缓存驱动</p>
+<p>缓存数据服务,可设定Memcached,Redis,APC,文件等作为缓存驱动</p>
 
 <h2>案例</h2>
 
@@ -1370,7 +1370,17 @@
 <td>无</td>
 <td>要缓存的数据</td>
 </tr></tbody>
-</table>
+</table><h4>cache-&gt;clear()</h4>
+
+<p>清除所有的缓存</p>
+
+<p>返回: bool</p>
+
+<blockquote>
+<h3>注意</h3>
+
+<p>该方法会把所有的缓存内容都清空,不仅仅是以$keyPrefix开头的缓存.</p>
+</blockquote>
   </section>
 
 <!-- api/apc
