@@ -40,7 +40,7 @@ use Wei\Db\Collection;
  * @author      Benjamin Eberlei <kontakt@beberlei.de>
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class QueryBuilder implements \ArrayAccess
+class QueryBuilder implements \ArrayAccess, \IteratorAggregate
 {
     /* The query types. */
     const SELECT = 0;
@@ -1135,6 +1135,17 @@ class QueryBuilder implements \ArrayAccess
     {
         $this->loadRecord($offset);
         unset($this->record[$offset]);
+    }
+
+    /**
+     * Retrieve an array iterator
+     *
+     * @return \ArrayIterator
+     */
+    public function getIterator()
+    {
+        $this->loadRecord(0);
+        return new \ArrayIterator($this->record);
     }
 
     /**
