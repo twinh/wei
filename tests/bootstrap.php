@@ -74,6 +74,11 @@ wei(array(
         'providers' => array(
             'cache' => 'memcached'
         )
+    ),
+    'counter' => array(
+        'providers' => array(
+            'cache' => 'memcached'
+        )
     )
 ));
 
