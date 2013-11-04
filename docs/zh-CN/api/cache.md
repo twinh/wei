@@ -1,7 +1,7 @@
 Cache
 =====
 
-缓存数据管理,可设定Memcached,Redis,APC,文件等作为缓存驱动
+缓存数据服务,可设定Memcached,Redis,APC,文件等作为缓存驱动
 
 案例
 ----
