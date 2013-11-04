@@ -40,3 +40,5 @@ if (wei()->isDir('/notfound/directory')) {
 --------
 
 * [验证器概览](../book/validators.md)
+* [检查文件或目录是否存在:isExists](isExists.md)
+* [检查文件是否存在:isFile](isFile.md)

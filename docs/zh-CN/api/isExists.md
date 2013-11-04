@@ -45,3 +45,5 @@ bool isExists( $input )
 --------
 
 * [验证器概览](../book/validators.md)
+* [检查目录是否存在:isDir](isDir.md)
+* [检查文件是否存在:isFile](isFile.md)

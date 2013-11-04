@@ -66,3 +66,5 @@ negativeMessage            | %name%必须是不存在的文件
 --------
 
 * [验证器概览](../book/validators.md)
+* [检查目录是否存在:isDir](isDir.md)
+* [检查文件或目录是否存在:isExists](isExists.md)
