@@ -73,4 +73,15 @@ class Counter extends Base
     {
         return $this->cache->exists($key);
     }
+
+    /**
+     * Remove an item
+     *
+     * @param  string $key The name of item
+     * @return bool
+     */
+    public function remove($key)
+    {
+        return $this->cache->remove($key);
+    }
 }
