@@ -914,6 +914,28 @@ class QueryBuilder implements \ArrayAccess, \IteratorAggregate
     }
 
     /**
+     * Adds a DESC ordering to the query
+     *
+     * @param string $field The name of field
+     * @return $this
+     */
+    public function desc($field)
+    {
+        return $this->addOrderBy($field, 'DESC');
+    }
+
+    /**
+     * Add an ASC ordering to the query
+     *
+     * @param string $field The name of field
+     * @return $this
+     */
+    public function asc($field)
+    {
+        return $this->addOrderBy($field, 'ASC');
+    }
+
+    /**
      * Specifies a field to be the key of the fetched array
      *
      * @param string $field
