@@ -10,11 +10,8 @@ Response
 
 ```php
 wei()->response('Hello World');
-```
 
-#### 运行结果
-
-```php
+// 运行结果
 'Hello World'
 ```
 
@@ -22,11 +19,8 @@ wei()->response('Hello World');
 
 ```php
 echo (string)wei()->response;
-```
 
-#### 运行结果
-
-```php
+// 运行结果
 'HTTP/1.1 200 OK
 
 Hello World'
@@ -39,13 +33,12 @@ wei()->response(array(
     'code' => 1,
     'message' => '操作成功!'
 ));
-```
 
-#### 运行结果
-
-```php
+// 运行结果
 '{"code":1,"message":"\u64cd\u4f5c\u6210\u529f!"}'
 ```
+
+结果截图:
 
 ![发送JSON数据](resources/response-json.jpg)
 
@@ -55,7 +48,7 @@ wei()->response(array(
 wei()->response->download(__FILE__);
 ```
 
-#### 运行结果
+结果截图:
 
 ![弹出下载对话框](resources/download.png)
 
