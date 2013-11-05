@@ -158,6 +158,15 @@ namespace WeiTest
 
             $this->assertEquals('application/javascript', $this->object->getHeader('Content-Type'));
         }
+
+        public function testSendArrayAsJson()
+        {
+            $this->expectOutputString('{"code":1,"message":"success"}');
+
+            $this->object->send(array('code' => 1, 'message' => 'success'));
+
+            $this->assertEquals('application/json', $this->object->getHeader('Content-Type'));
+        }
     }
 }
 
