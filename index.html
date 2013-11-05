@@ -12010,21 +12010,17 @@
 <h3>发送内容为"Hello World"的HTTP响应</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">response</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
-</code></pre></div>
 
-<h4>运行结果</h4>
-
-<div class="highlight"><pre><code class="php"><span class="s1">'Hello World'</span>
+<span class="c1">// 运行结果</span>
+<span class="s1">'Hello World'</span>
 </code></pre></div>
 
 <h3>获取上面案例中HTTP响应的完整内容</h3>
 
 <div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">response</span><span class="p">;</span>
-</code></pre></div>
 
-<h4>运行结果</h4>
-
-<div class="highlight"><pre><code class="php"><span class="s1">'HTTP/1.1 200 OK</span>
+<span class="c1">// 运行结果</span>
+<span class="s1">'HTTP/1.1 200 OK</span>
 
 <span class="s1">Hello World'</span>
 </code></pre></div>
@@ -12035,12 +12031,12 @@
     <span class="s1">'code'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s1">'message'</span> <span class="o">=&gt;</span> <span class="s1">'操作成功!'</span>
 <span class="p">));</span>
+
+<span class="c1">// 运行结果</span>
+<span class="s1">'{"code":1,"message":"\u64cd\u4f5c\u6210\u529f!"}'</span>
 </code></pre></div>
 
-<h4>运行结果</h4>
-
-<div class="highlight"><pre><code class="php"><span class="s1">'{"code":1,"message":"\u64cd\u4f5c\u6210\u529f!"}'</span>
-</code></pre></div>
+<p>结果截图:</p>
 
 <p><img src="resources/response-json.jpg" alt="发送JSON数据"></p>
 
@@ -12049,7 +12045,7 @@
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">download</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">);</span>
 </code></pre></div>
 
-<h4>运行结果</h4>
+<p>结果截图:</p>
 
 <p><img src="resources/download.png" alt="弹出下载对话框"></p>
 
