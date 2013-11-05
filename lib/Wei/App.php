@@ -113,7 +113,7 @@ class App extends Base
             if (method_exists($object, $action)) {
                 $ref = new \ReflectionMethod($object, $action);
                 if ($ref->isPublic()) {
-                    $response = $object->$action();
+                    $response = $object->$action($this->request, $this->response);
                     $this->handleResponse($response);
                     return $this;
                 } else {
