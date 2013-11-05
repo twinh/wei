@@ -12025,7 +12025,7 @@
 <span class="s1">Hello World'</span>
 </code></pre></div>
 
-<h3>发送JSON数据</h3>
+<h3>输出JSON格式的数据</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">response</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'code'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
@@ -12039,6 +12039,21 @@
 <p>结果截图:</p>
 
 <p><img src="resources/response-json.jpg" alt="发送JSON数据"></p>
+
+<h3>输出JSONP格式的数据</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">jsonp</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'code'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">'message'</span> <span class="o">=&gt;</span> <span class="s1">'操作成功!'</span>
+<span class="p">));</span>
+
+<span class="c1">// 假设URL请求地址为 index.php?callback=callback,运行结果为</span>
+<span class="nx">callback</span><span class="p">({</span><span class="s2">"code"</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">"message"</span><span class="o">:</span><span class="s2">"\u64cd\u4f5c\u6210\u529f!"</span><span class="p">})</span>
+</code></pre></div>
+
+<p>结果截图:</p>
+
+<p><img src="resources/response-jsonp.jpg" alt="发送JSON数据"></p>
 
 <h3>让浏览器弹出下载对话框,下载指定的文件</h3>
 
@@ -12294,6 +12309,14 @@
 <h4>response-&gt;flush($content = null, $status = null)</h4>
 
 <p>关闭缓冲区,让后台脚本实时输出内容到浏览器</p>
+
+<h4>json($data)</h4>
+
+<p>输出JSON格式的数据到浏览器</p>
+
+<h4>jsonp($data)</h4>
+
+<p>输出JSON或JSONP格式的数据到浏览器</p>
   </section>
 
 <!-- api/redirect
