@@ -32,6 +32,23 @@ echo (string)wei()->response;
 Hello World'
 ```
 
+### 发送JSON数据
+
+```php
+wei()->response(array(
+    'code' => 1,
+    'message' => '操作成功!'
+));
+```
+
+#### 运行结果
+
+```php
+'{"code":1,"message":"\u64cd\u4f5c\u6210\u529f!"}'
+```
+
+![发送JSON数据](resources/response-json.jpg)
+
 ### 让浏览器弹出下载对话框,下载指定的文件
 
 ```php
