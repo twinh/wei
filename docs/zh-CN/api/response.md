@@ -51,7 +51,7 @@ wei()->response->jsonp(array(
 ));
 
 // 假设URL请求地址为 index.php?callback=callback,运行结果为
-callback({"code":1,"message":"\u64cd\u4f5c\u6210\u529f!"})
+'callback({"code":1,"message":"\u64cd\u4f5c\u6210\u529f!"})'
 ```
 
 结果截图:
