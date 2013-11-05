@@ -209,7 +209,10 @@ class Response extends Base
     {
         $this->isSent = true;
 
-        if (null !== $content) {
+        // Render json when content is array
+        if (is_array($content)) {
+            return $this->json($content);
+        } elseif (null !== $content) {
             $this->setContent($content);
         }
 
