@@ -400,8 +400,18 @@ class Db extends Base
     {
         $table = $this->getTable($table);
 
-        $query = "DELETE FROM $table WHERE " . implode(' = ? AND ', array_keys($conditions)) . ' = ?';
+        $where = array();
+        foreach ($conditions as $field => $value) {
+            if ($value instanceof \stdClass && isset($value->scalar)) {
+                $where[] = $field . ' = ' . $value->scalar;
+                unset($conditions[$field]);
+            } else {
+                $where[] = $field . ' = ?';
+            }
+        }
+        $where = implode(' AND ', $where);
 
+        $query = "DELETE FROM $table WHERE " . $where;
         return $this->executeUpdate($query, array_values($conditions));
     }
 
