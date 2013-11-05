@@ -8,6 +8,7 @@
 
 namespace Wei;
 
+use MyProject\Proxies\__CG__\OtherProject\Proxies\__CG__\stdClass;
 use PDO;
 
 /**
@@ -307,10 +308,19 @@ class Db extends Base
     {
         $table = $this->getTable($table);
         $field = implode(', ', array_keys($data));
-        $placeholder = implode(', ', array_pad(array(), count($data), '?'));
+
+        $placeholder = array();
+        foreach ($data as $key => $value) {
+            if ($value instanceof \stdClass && isset($value->scalar)) {
+                $placeholder[] = $value->scalar;
+                unset($data[$key]);
+            } else {
+                $placeholder[] = '?';
+            }
+        }
+        $placeholder = implode(', ', $placeholder);
 
         $query = "INSERT INTO $table ($field) VALUES ($placeholder)";
-
         return $this->executeUpdate($query, array_values($data));
     }
 
@@ -351,12 +361,31 @@ class Db extends Base
     public function update($table, array $data, array $conditions)
     {
         $table = $this->getTable($table);
-        $set = implode(' = ?, ', array_keys($data)) . ' = ?';
-        $where = implode(' = ? AND ', array_keys($conditions)) . ' = ?';
+
+        $set = array();
+        foreach ($data as $field => $value) {
+            if ($value instanceof \stdClass && isset($value->scalar)) {
+                $set[] = $field . ' = ' . $value->scalar;
+                unset($data[$field]);
+            } else {
+                $set[] = $field . ' = ?';
+            }
+        }
+        $set = implode(', ', $set);
+
+        $where = array();
+        foreach ($conditions as $field => $value) {
+            if ($value instanceof \stdClass && isset($value->scalar)) {
+                $where[] = $field . ' = ' . $value->scalar;
+                unset($conditions[$field]);
+            } else {
+                $where[] = $field . ' = ?';
+            }
+        }
+        $where = implode(' AND ', $where);
 
         $query = "UPDATE $table SET $set WHERE $where";
         $params = array_merge(array_values($data), array_values($conditions));
-
         return $this->executeUpdate($query, $params);
     }
 
