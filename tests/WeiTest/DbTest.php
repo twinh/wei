@@ -1320,4 +1320,18 @@ class DbTest extends TestCase
         $this->assertEquals(1, $result);
         $this->assertFalse($this->db->select('member', 1));
     }
+
+    public function testRecordWithSqlObject()
+    {
+        $this->initFixtures();
+
+        $member = $this->db->find('member', 1);
+        $groupId = $member['group_id'];
+
+        $member['group_id'] = (object)'group_id + 1';
+        $member->save();
+        $member->reload();
+
+        $this->assertEquals($groupId + 1, $member['group_id']);
+    }
 }
