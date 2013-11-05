@@ -83,4 +83,9 @@ class Test extends \Wei\Base
     {
         return false;
     }
+
+    public function parameter($req, $res)
+    {
+        return $res($req['id']);
+    }
 }

@@ -228,4 +228,17 @@ class AppTest extends TestCase
             )
         );
     }
+
+    public function testActionParameters()
+    {
+        $this->expectOutputString('1');
+
+        $this->request->set(array(
+            'controller' => 'test',
+            'action' => 'parameter',
+            'id' => '1'
+        ));
+
+        $this->app();
+    }
 }
