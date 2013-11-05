@@ -26,7 +26,7 @@ echo (string)wei()->response;
 Hello World'
 ```
 
-### 发送JSON数据
+### 输出JSON格式的数据
 
 ```php
 wei()->response(array(
@@ -41,6 +41,22 @@ wei()->response(array(
 结果截图:
 
 ![发送JSON数据](resources/response-json.jpg)
+
+### 输出JSONP格式的数据
+
+```php
+wei()->response->jsonp(array(
+    'code' => 1,
+    'message' => '操作成功!'
+));
+
+// 假设URL请求地址为 index.php?callback=callback,运行结果为
+callback({"code":1,"message":"\u64cd\u4f5c\u6210\u529f!"})
+```
+
+结果截图:
+
+![发送JSON数据](resources/response-jsonp.jpg)
 
 ### 让浏览器弹出下载对话框,下载指定的文件
 
@@ -146,3 +162,9 @@ $stateCode    | int       | 200       | HTTP响应的状态码
 
 #### response->flush($content = null, $status = null)
 关闭缓冲区,让后台脚本实时输出内容到浏览器
+
+#### json($data)
+输出JSON格式的数据到浏览器
+
+#### jsonp($data)
+输出JSON或JSONP格式的数据到浏览器
