@@ -1282,4 +1282,42 @@ class DbTest extends TestCase
             $this->assertEquals(1, $member['group_id']);
         }
     }
+
+    public function testInsertWithSqlObject()
+    {
+        $this->initFixtures();
+
+        $this->db->insert('member', array(
+            'group_id' => '1',
+            'name' => (object)'1 + 1',
+            'address' => 'test'
+        ));
+
+        $id = $this->db->lastInsertId();
+        $member = $this->db->select('member', $id);
+
+        $this->assertNotEquals('1 + 1', $member['name']);
+        $this->assertEquals('2', $member['name']);
+    }
+
+    public function testUpdateWithSqlObject()
+    {
+        $this->initFixtures();
+
+        $this->db->update('member', array('group_id' => (object)'group_id + 1'), array('id' => (object)'0.5 + 0.5'));
+
+        $member = $this->db->select('member', 1);
+
+        $this->assertEquals('2', $member['group_id']);
+    }
+
+    public function testDeleteWithSqlObject()
+    {
+        $this->initFixtures();
+
+        $result = $this->db->delete('member', array('id' => (object)'0.5 + 0.5'));
+
+        $this->assertEquals(1, $result);
+        $this->assertFalse($this->db->select('member', 1));
+    }
 }
