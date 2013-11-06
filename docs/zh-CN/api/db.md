@@ -249,6 +249,40 @@ $slaveDb = $wei->slaveDb;
 $slaveDb->select('table', array('key' => 'value'));
 ```
 
+### 使用`(object)`加强增删查改(CRUD)操作
+
+传统的数据库框架中,要增加文章点击数,为用户增减积分等操作,CRUD是无法一步实现的.
+
+一般的做法是先将数据取出来,再保存回去.这种写法简单,但是在请求并发时会造成数据丢失.
+
+```php
+// 从数据库取出数据
+$article = wei()->db->select('article', 1);
+
+// 将数据加1后更新回数据库
+wei()->db->update('article', array('hit' => $article['hit']++), array('id' => 1));
+```
+
+另外一种做法是改为直接写原始的SQL操作,避免并发问题.
+
+```php
+wei()->db->executeUpdate("UPDATE article SET hit = hit + 1 WHERE id = ?", array('id' => 1));
+```
+
+在微框架中提供了一种非常简洁的方法,只需在要插入的值前面加上`(object)`,即可实现一步更新数据,同时避免并发问题.
+
+```php
+wei()->db->update('article', hit' => (object)'hit + 1', array('id' => 1));
+```
+
+**对比**
+
+写法                                                                        | 生成的SQL语句
+----------------------------------------------------------------------------|---------------
+wei()->db->update('article', hit' => 'hit + 1', array('id' => 1));          | UPDATE article SET hit = ? WHERE id = ?
+wei()->db->update('article', hit' => (object)'hit + 1', array('id' => 1));  | UPDATE article SET hit = hit + 1 WHERE id = ?
+
+
 调用方式
 --------
 
