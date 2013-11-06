@@ -361,28 +361,8 @@ class Db extends Base
     public function update($table, array $data, array $conditions)
     {
         $table = $this->getTable($table);
-
-        $set = array();
-        foreach ($data as $field => $value) {
-            if ($value instanceof \stdClass && isset($value->scalar)) {
-                $set[] = $field . ' = ' . $value->scalar;
-                unset($data[$field]);
-            } else {
-                $set[] = $field . ' = ?';
-            }
-        }
-        $set = implode(', ', $set);
-
-        $where = array();
-        foreach ($conditions as $field => $value) {
-            if ($value instanceof \stdClass && isset($value->scalar)) {
-                $where[] = $field . ' = ' . $value->scalar;
-                unset($conditions[$field]);
-            } else {
-                $where[] = $field . ' = ?';
-            }
-        }
-        $where = implode(' AND ', $where);
+        $set = $this->buildSqlObject($data, ', ');
+        $where = $this->buildSqlObject($conditions, ' AND ');
 
         $query = "UPDATE $table SET $set WHERE $where";
         $params = array_merge(array_values($data), array_values($conditions));
@@ -399,17 +379,7 @@ class Db extends Base
     public function delete($table, array $conditions)
     {
         $table = $this->getTable($table);
-
-        $where = array();
-        foreach ($conditions as $field => $value) {
-            if ($value instanceof \stdClass && isset($value->scalar)) {
-                $where[] = $field . ' = ' . $value->scalar;
-                unset($conditions[$field]);
-            } else {
-                $where[] = $field . ' = ?';
-            }
-        }
-        $where = implode(' AND ', $where);
+        $where = $this->buildSqlObject($conditions, ' AND ');
 
         $query = "DELETE FROM $table WHERE " . $where;
         return $this->executeUpdate($query, array_values($conditions));
@@ -942,6 +912,20 @@ class Db extends Base
             $fields[] = $row[$name];
         }
         return $fields;
+    }
+
+    protected function buildSqlObject(array &$data, $glue)
+    {
+        $query = array();
+        foreach ($data as $field => $value) {
+            if ($value instanceof \stdClass && isset($value->scalar)) {
+                $query[] = $field . ' = ' . $value->scalar;
+                unset($data[$field]);
+            } else {
+                $query[] = $field . ' = ?';
+            }
+        }
+        return implode($glue, $query);
     }
 
     /**
