@@ -2372,7 +2372,47 @@
 <span class="nv">$slaveDb</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">'table'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">));</span>
 </code></pre></div>
 
-<h2>调用方式</h2>
+<h3>使用<code>(object)</code>加强增删查改(CRUD)操作</h3>
+
+<p>传统的数据库框架中,要增加文章点击数,为用户增减积分等操作,CRUD是无法一步实现的.</p>
+
+<p>一般的做法是先将数据取出来,再保存回去.这种写法简单,但是在请求并发时会造成数据丢失.</p>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 从数据库取出数据</span>
+<span class="nv">$article</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">'article'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="c1">// 将数据加1后更新回数据库</span>
+<span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="s1">'article'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'hit'</span> <span class="o">=&gt;</span> <span class="nv">$article</span><span class="p">[</span><span class="s1">'hit'</span><span class="p">]</span><span class="o">++</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
+</code></pre></div>
+
+<p>另外一种做法是改为直接写原始的SQL操作,避免并发问题.</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">executeUpdate</span><span class="p">(</span><span class="s2">"UPDATE article SET hit = hit + 1 WHERE id = ?"</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
+</code></pre></div>
+
+<p>在微框架中提供了一种非常简洁的方法,只需在要插入的值前面加上<code>(object)</code>,即可实现一步更新数据,同时避免并发问题.</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="s1">'article'</span><span class="p">,</span> <span class="nx">hit</span><span class="s1">' =&gt; (object)'</span><span class="nx">hit</span> <span class="o">+</span> <span class="mi">1</span><span class="s1">', array('</span><span class="nx">id</span><span class="err">'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
+</code></pre></div>
+
+<p><strong>对比</strong></p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>写法</th>
+<th>生成的SQL语句</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>wei()-&gt;db-&gt;update('article', hit' =&gt; 'hit + 1', array('id' =&gt; 1));</td>
+<td>UPDATE article SET hit = ? WHERE id = ?</td>
+</tr>
+<tr>
+<td>wei()-&gt;db-&gt;update('article', hit' =&gt; (object)'hit + 1', array('id' =&gt; 1));</td>
+<td>UPDATE article SET hit = hit + 1 WHERE id = ?</td>
+</tr>
+</tbody>
+</table><h2>调用方式</h2>
 
 <h3>选项</h3>
 
