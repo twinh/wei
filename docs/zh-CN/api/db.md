@@ -272,16 +272,19 @@ wei()->db->executeUpdate("UPDATE article SET hit = hit + 1 WHERE id = ?", array(
 在微框架中提供了一种非常简洁的方法,只需在要插入的值前面加上`(object)`,即可实现一步更新数据,同时避免并发问题.
 
 ```php
-wei()->db->update('article', hit' => (object)'hit + 1', array('id' => 1));
+wei()->db->update('article', array(hit' => (object)'hit + 1'), array('id' => 1));
 ```
 
-**对比**
+**使用`(object)`对比**
 
-写法                                                                        | 生成的SQL语句
-----------------------------------------------------------------------------|---------------
-wei()->db->update('article', hit' => 'hit + 1', array('id' => 1));          | UPDATE article SET hit = ? WHERE id = ?
-wei()->db->update('article', hit' => (object)'hit + 1', array('id' => 1));  | UPDATE article SET hit = hit + 1 WHERE id = ?
+写法                                                                        | 生成的SQL语句                                 | PDO绑定的参数
+----------------------------------------------------------------------------|-----------------------------------------------|---------------
+wei()->db->update('article', hit' => 'hit + 1', array('id' => 1));          | UPDATE article SET hit = ? WHERE id = ?       | array('hit' => 'hit + 1', 'id' => 1)
+wei()->db->update('article', hit' => (object)'hit + 1', array('id' => 1));  | UPDATE article SET hit = hit + 1 WHERE id = ? | array('id' => 1)
 
+> #### 注意
+>
+> 目前只有`insert`, `update`, `delete`方法支持
 
 调用方式
 --------
