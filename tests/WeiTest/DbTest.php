@@ -1293,7 +1293,7 @@ class DbTest extends TestCase
             'address' => 'test'
         ));
 
-        $id = $this->db->lastInsertId();
+        $id = $this->db->lastInsertId('member_id_seq');
         $member = $this->db->select('member', $id);
 
         $this->assertNotEquals('1 + 1', $member['name']);
