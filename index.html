@@ -2421,12 +2421,23 @@
 <h4>在Active Record中使用<code>(object)</code>
 </h4>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 为文章增加1点击数</span>
-<span class="nv">$article</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'article'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-<span class="nv">$article</span><span class="p">[</span><span class="s1">'hit'</span><span class="p">]</span>  <span class="o">=</span> <span class="p">(</span><span class="nx">object</span><span class="p">)</span><span class="s1">'hit + 1'</span><span class="p">;</span>
+<p>为文章增加1点击数</p>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$article</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'article'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="c1">// 记录原始点击数,可供后续输出使用</span>
+<span class="nv">$hit</span> <span class="o">=</span> <span class="nv">$article</span><span class="p">[</span><span class="s1">'hit'</span><span class="p">];</span>
+
+<span class="c1">// 更改点击数并保存</span>
+<span class="nv">$article</span><span class="p">[</span><span class="s1">'hit'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nx">object</span><span class="p">)</span><span class="s1">'hit + 1'</span><span class="p">;</span>
 <span class="nv">$article</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
 
-<span class="c1">// 如果后续需要用到`hit`字段的值,需要重新加载,获取`hit`在数据库中的值</span>
+<span class="c1">// 如果后续需要用到`hit`字段的值,有两种方法</span>
+
+<span class="c1">// 1. 使用原来预存的值,硬编码输出</span>
+<span class="k">echo</span> <span class="nv">$hit</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">// 2. 重新加载,获取`hit`在数据库中的真实值</span>
 <span class="nv">$article</span><span class="o">-&gt;</span><span class="na">reload</span><span class="p">();</span>
 
 <span class="c1">// 输出增加后的点击数</span>
