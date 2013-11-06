@@ -288,13 +288,24 @@ wei()->db->update('article', hit' => (object)'hit + 1', array('id' => 1));  | UP
 
 #### 在Active Record中使用`(object)`
 
+为文章增加1点击数
+
 ```php
-// 为文章增加1点击数
 $article = wei()->db->find('article', 1);
-$article['hit']  = (object)'hit + 1';
+
+// 记录原始点击数,可供后续输出使用
+$hit = $article['hit'];
+
+// 更改点击数并保存
+$article['hit'] = (object)'hit + 1';
 $article->save();
 
-// 如果后续需要用到`hit`字段的值,需要重新加载,获取`hit`在数据库中的值
+// 如果后续需要用到`hit`字段的值,有两种方法
+
+// 1. 使用原来预存的值,硬编码输出
+echo $hit + 1;
+
+// 2. 重新加载,获取`hit`在数据库中的真实值
 $article->reload();
 
 // 输出增加后的点击数
