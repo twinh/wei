@@ -8,7 +8,6 @@
 
 namespace Wei;
 
-use MyProject\Proxies\__CG__\OtherProject\Proxies\__CG__\stdClass;
 use PDO;
 
 /**
