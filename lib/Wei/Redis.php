@@ -136,9 +136,9 @@ class Redis extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doSet($key, $value, $expire = 0)
+    public function set($key, $value, $expire = 0)
     {
-        return $this->object->set($key, $value, $expire);
+        return $this->object->set($this->keyPrefix . $key, $value, $expire);
     }
 
     /**
@@ -172,9 +172,9 @@ class Redis extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doRemove($key)
+    public function remove($key)
     {
-        return (bool)$this->object->del($key);
+        return (bool)$this->object->del($this->keyPrefix . $key);
     }
 
     /**
@@ -214,9 +214,9 @@ class Redis extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doIncr($key, $offset = 1)
+    public function incr($key, $offset = 1)
     {
-        return $this->object->incrBy($key, $offset);
+        return $this->object->incrBy($this->keyPrefix . $key, $offset);
     }
 
     /**
