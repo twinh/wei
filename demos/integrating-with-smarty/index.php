@@ -1,21 +1,21 @@
 <?php
 
 require 'vendor/autoload.php';
-require '../../lib/Widget/Widget.php';
+require '../../lib/Wei/Wei.php';
 
-// Get widget container
-$widget = widget();
+// Get wei container
+$wei = wei();
 
-$widget->setConfig(array(
-    'widget' => array(
+$wei->setConfig(array(
+    'wei' => array(
         'autoloadMap' => array(
-            'WidgetExtension' => 'src'
+            'WeiExtension' => 'src'
         ),
         'aliases' => array(
-            'smarty' => 'WidgetExtension\Smarty'
+            'smarty' => 'WeiExtension\Smarty'
         )
     ),
-    // Set options for WidgetExtension\Smarty class
+    // Set options for WeiExtension\Smarty class
     'smarty' => array(
         'options' => array(
             'template_dir'      => array(
@@ -33,9 +33,9 @@ $widget->setConfig(array(
 
 // Get Smarty object
 /** @var $smarty \Smarty */
-$smarty = $widget->smarty();
+$smarty = $wei->smarty();
 
 // Display template
 $smarty->display('index.tpl', array(
-    'value' => 'widget'
+    'value' => 'wei'
 ));

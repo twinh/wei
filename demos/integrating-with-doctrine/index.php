@@ -1,26 +1,26 @@
 <?php
 
 require 'vendor/autoload.php';
-require '../../lib/Widget/Widget.php';
+require '../../lib/Wei/Wei.php';
 
-// Get widget container
-$widget = widget(array(
-    'widget' => array(
+// Get wei container
+$wei = wei(array(
+    'wei' => array(
         'autoloadMap' => array(
-            'WidgetExtension' => 'src',
+            'WeiExtension' => 'src',
             'Entity'          => 'src',
         ),
         'aliases' => array(
-            'dbal' => 'WidgetExtension\Dbal',
-            'orm' => 'WidgetExtension\Orm'
+            'dbal' => 'WeiExtension\Dbal',
+            'orm' => 'WeiExtension\Orm'
         )
     ),
-    // Doctrine DBAL widget configuration
+    // Doctrine DBAL wei configuration
     'dbal' => array(
         'driver' => 'pdo_sqlite',
         'memory' => true
     ),
-    // Doctrine ORM widget configuration
+    // Doctrine ORM wei configuration
     'orm' => array(
         'config' => array(
             'proxyDir' => './',
@@ -32,12 +32,12 @@ $widget = widget(array(
 ));
 
 /** @var $dbal \Doctrine\DBAL\Connection */
-$dbal = $widget->dbal();
+$dbal = $wei->dbal();
 
 var_dump($dbal->fetchArray("SELECT MAX(1, 2)"));
 
 /** @var $orm \Doctrine\ORM\EntityManager */
-$orm = $widget->orm();
+$orm = $wei->orm();
 
 $tool = new \Doctrine\ORM\Tools\SchemaTool($orm);
 

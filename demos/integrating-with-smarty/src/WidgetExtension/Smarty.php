@@ -1,17 +1,17 @@
 <?php
 /**
- * Widget Framework
+ * Wei Framework
  *
  * @copyright   Copyright (c) 2008-2013 Twin Huang
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace WidgetExtension;
+namespace WeiExtension;
 
 use Wei\Base;
 
 /**
- * A wrapper widget for Smarty object
+ * A wrapper wei for Smarty object
  *
  * @author Twin Huang <twinhuang@qq.com>
  */
@@ -51,8 +51,8 @@ class Smarty extends Base
             'options' => $this->options
         ), $options));
 
-        // Adds widget to template variable
-        $this->object->assign('widget', $this->widget);
+        // Adds wei to template variable
+        $this->object->assign('wei', $this->wei);
     }
 
     /**

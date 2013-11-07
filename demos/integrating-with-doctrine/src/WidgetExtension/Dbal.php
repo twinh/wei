@@ -1,18 +1,18 @@
 <?php
 /**
- * Widget Framework
+ * Wei Framework
  *
  * @copyright   Copyright (c) 2008-2013 Twin Huang
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace WidgetExtension;
+namespace WeiExtension;
 
 use Doctrine\DBAL\DriverManager;
 use Wei\Base;
 
 /**
- * A container widget for Doctrine dbal connection object
+ * A container wei for Doctrine dbal connection object
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

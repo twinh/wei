@@ -3,7 +3,7 @@
 $rootDir = dirname(__DIR__);
 
 return array(
-    'widget' => array(
+    'wei' => array(
         'debug' => true,
         'inis' => array(
             'display_errors' => true,

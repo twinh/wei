@@ -8,27 +8,27 @@ if (!is_file('vendor/autoload.php')) {
 }
 
 require 'vendor/autoload.php';
-require '../../lib/Widget/Widget.php';
+require '../../lib/Wei/Wei.php';
 
-// Get widget container
-$widget = widget();
+// Get wei container
+$wei = wei();
 
 // Get current environment name
-$env = $widget->env();
+$env = $wei->env();
 
 // Load configuration by environment name
 $file = 'config/config_' . $env . '.yml';
 
 if (is_file($file)) {
     // Load file content and store it in cache
-    $config = $widget->cache->getFileContent($file, function($file) {
+    $config = $wei->cache->getFileContent($file, function($file) {
         return Yaml::parse($file);
     });
-    widget($config);
+    wei($config);
 } else {
     echo sprintf('YAML configuration file "%s" not found', $file);
     return;
 }
 
 // Output configuration
-var_dump($widget->getConfig('widget'));
+var_dump($wei->getConfig('wei'));

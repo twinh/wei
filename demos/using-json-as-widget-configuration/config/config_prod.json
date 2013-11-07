@@ -1,6 +1,6 @@
 {
-    "_comment": "Configuration for widget container",
-    "widget": {
+    "_comment": "Configuration for wei container",
+    "wei": {
         "inis": {
             "error_reporting": 0,
             "display_errors": "off"

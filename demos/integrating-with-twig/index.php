@@ -1,21 +1,21 @@
 <?php
 
 require 'vendor/autoload.php';
-require '../../lib/Widget/Widget.php';
+require '../../lib/Wei/Wei.php';
 
-// Get widget container
-$widget = widget();
+// Get wei container
+$wei = wei();
 
-$widget->setConfig(array(
-    'widget' => array(
+$wei->setConfig(array(
+    'wei' => array(
         'autoloadMap' => array(
-            'WidgetExtension' => '.'
+            'WeiExtension' => '.'
         ),
         'aliases' => array(
-            'twig' => 'WidgetExtension\Twig'
+            'twig' => 'WeiExtension\Twig'
         )
     ),
-    // Set options for WidgetExtension\Twig class
+    // Set options for WeiExtension\Twig class
     'twig' => array(
         'envOptions' => array(
             'debug'                 => false,
@@ -35,8 +35,8 @@ $widget->setConfig(array(
 
 // Get Twig environment object
 /** @var $twig Twig_Environment */
-$twig = $widget->twig();
+$twig = $wei->twig();
 
 $twig->display('index.html.twig', array(
-    'value' => 'widget'
+    'value' => 'wei'
 ));

@@ -1,12 +1,12 @@
 <?php
 /**
- * Widget Framework
+ * Wei Framework
  *
  * @copyright   Copyright (c) 2008-2013 Twin Huang
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace WidgetExtension;
+namespace WeiExtension;
 use Wei\Base;
 
 /**
@@ -58,8 +58,8 @@ class Twig extends Base
             $this->object = new \Twig_Environment(new \Twig_Loader_Filesystem($this->paths), $this->envOptions);
         }
 
-        // Adds widget to template variable
-        $this->object->addGlobal('widget', $this->widget);
+        // Adds wei to template variable
+        $this->object->addGlobal('wei', $this->wei);
     }
 
     /**

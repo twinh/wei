@@ -1,6 +1,6 @@
 <?php
 
-require '../../lib/Widget/Widget.php';
+require '../../lib/Wei/Wei.php';
 
 $wei = wei('config/config.php');
 

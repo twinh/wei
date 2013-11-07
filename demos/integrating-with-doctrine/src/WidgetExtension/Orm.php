@@ -1,12 +1,12 @@
 <?php
 /**
- * Widget Framework
+ * Wei Framework
  *
  * @copyright   Copyright (c) 2008-2013 Twin Huang
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace WidgetExtension;
+namespace WeiExtension;
 
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager as BaseEntityManager;
@@ -14,7 +14,7 @@ use Doctrine\Common\Cache\Cache as DoctrineCache;
 use Wei\Base;
 
 /**
- * A container widget for Doctrine ORM entity manager object
+ * A container wei for Doctrine ORM entity manager object
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @method      \Doctrine\DBAL\Connection dbal() Returns the Doctrine DBAL connection object

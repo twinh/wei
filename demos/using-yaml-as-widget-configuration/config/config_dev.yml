@@ -1,11 +1,11 @@
-# Configuration for widget container
-widget:
+# Configuration for wei container
+wei:
   inis:
     error_reporting: -1
     display_errors: on
   debug: true
-  # More option for widget container here ...
-# Configuration for logger widget
+  # More option for wei container here ...
+# Configuration for logger wei
 logger:
   dir: log
-# More configuration for other widgets here ...
+# More configuration for other weis here ...
