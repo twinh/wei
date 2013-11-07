@@ -144,12 +144,12 @@ class DbCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doAdd($key, $value, $expire = 0)
+    public function add($key, $value, $expire = 0)
     {
-        if ($this->doExists($key)) {
+        if ($this->exists($key)) {
             return false;
         } else {
-            return $this->doSet($key, $value, $expire);
+            return $this->set($key, $value, $expire);
         }
     }
 

@@ -126,9 +126,9 @@ class Memcache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doAdd($key, $value, $expire = 0)
+    public function add($key, $value, $expire = 0)
     {
-        return $this->object->add($key, $value, $this->flag, $expire);
+        return $this->object->add($this->keyPrefix . $key, $value, $this->flag, $expire);
     }
 
     /**
