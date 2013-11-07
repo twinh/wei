@@ -180,16 +180,17 @@ class Redis extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doExists($key)
+    public function exists($key)
     {
-        return $this->object->exists($key);
+        return $this->object->exists($this->keyPrefix . $key);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doAdd($key, $value, $expire = 0)
+    public function add($key, $value, $expire = 0)
     {
+        $key = $this->keyPrefix . $key;
         $result = $this->object->setnx($key, $value);
         if (true === $result) {
             $this->object->expire($key, $expire === 0 ? -1 : $expire);

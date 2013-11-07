@@ -270,7 +270,10 @@ abstract class BaseCache extends Base
      * @param  int    $expire The expire seconds, defaults to 0, means never expired
      * @return bool
      */
-    abstract protected function doSet($key, $value, $expire = 0);
+    protected function doSet($key, $value, $expire = 0)
+    {
+
+    }
 
     /**
      * Remove an item
@@ -278,7 +281,10 @@ abstract class BaseCache extends Base
      * @param  string $key The name of item
      * @return bool
      */
-    abstract protected function doRemove($key);
+    protected function doRemove($key)
+    {
+
+    }
 
     /**
      * Check if an item is exists
@@ -286,7 +292,10 @@ abstract class BaseCache extends Base
      * @param string $key
      * @return bool
      */
-    abstract protected function doExists($key);
+    protected function doExists($key)
+    {
+
+    }
 
     /**
      * Add an item
@@ -309,7 +318,10 @@ abstract class BaseCache extends Base
      * @param  int    $expire The expire seconds, defaults to 0, means never expired
      * @return bool
      */
-    abstract protected function doReplace($key, $value, $expire = 0);
+    protected function doReplace($key, $value, $expire = 0)
+    {
+
+    }
 
     /**
      * Increment an item
@@ -318,7 +330,10 @@ abstract class BaseCache extends Base
      * @param  int       $offset The value to increased
      * @return int|false Returns the new value on success, or false on failure
      */
-    abstract protected function doIncr($key, $offset = 1);
+    protected function doIncr($key, $offset = 1)
+    {
+
+    }
 
     /**
      * Clear all items
