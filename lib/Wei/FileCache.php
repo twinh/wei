@@ -130,9 +130,7 @@ class FileCache extends BaseCache
                 return false;
             }
 
-            $content = $this->prepareContent($value, $expire);
-
-            return $this->writeAndRelease($handle, $content);
+            $rewrite = false;
         } else {
             // Open file for reading and rewriting
             if (!$handle = $this->openAndLock($file, 'r+b', LOCK_EX)) {
@@ -145,10 +143,11 @@ class FileCache extends BaseCache
                 return false;
             }
 
-            $content = $this->prepareContent($value, $expire);
-
-            return $this->writeAndRelease($handle, $content, true);
+            $rewrite = true;
         }
+
+        $content = $this->prepareContent($value, $expire);
+        return $this->writeAndRelease($handle, $content, $rewrite);
     }
 
     /**
