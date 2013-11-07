@@ -257,7 +257,10 @@ abstract class BaseCache extends Base
      * @param  string      $key The name of item
      * @return mixed
      */
-    abstract protected function doGet($key);
+    protected function doGet($key)
+    {
+
+    }
 
     /**
      * Store an item
@@ -293,7 +296,10 @@ abstract class BaseCache extends Base
      * @param  int    $expire The expire seconds, defaults to 0, means never expired
      * @return bool
      */
-    abstract protected function doAdd($key, $value, $expire = 0);
+    protected function doAdd($key, $value, $expire = 0)
+    {
+
+    }
 
     /**
      * Replace an existing item
