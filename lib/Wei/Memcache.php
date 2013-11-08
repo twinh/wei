@@ -90,32 +90,34 @@ class Memcache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doGet($key)
+    public function get($key, $expire = null, $fn = null)
     {
-        return $this->object->get($key);
+        $result = $this->object->get($this->keyPrefix . $key);
+        return $this->processGetResult($key, $result, $expire, $fn);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doSet($key, $value, $expire = 0)
+    public function set($key, $value, $expire = 0)
     {
-        return $this->object->set($key, $value, $this->flag, $expire);
+        return $this->object->set($this->keyPrefix . $key, $value, $this->flag, $expire);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doRemove($key)
+    public function remove($key)
     {
-        return $this->object->delete($key);
+        return $this->object->delete($this->keyPrefix . $key);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doExists($key)
+    public function exists($key)
     {
+        $key = $this->keyPrefix . $key;
         if ($this->object->add($key, true)) {
             $this->object->delete($key);
             return false;
@@ -134,15 +136,15 @@ class Memcache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doReplace($key, $value, $expire = 0)
+    public function replace($key, $value, $expire = 0)
     {
-        return $this->object->replace($key, $value, $this->flag, $expire);
+        return $this->object->replace($this->keyPrefix . $key, $value, $this->flag, $expire);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doIncr($key, $offset = 1)
+    public function incr($key, $offset = 1)
     {
         return $this->incDec($key, $offset, $offset > 0);
     }
@@ -152,7 +154,7 @@ class Memcache extends BaseCache
      */
     public function decr($key, $offset = 1)
     {
-        return $this->incDec($this->getKeyWithPrefix($key), $offset, $offset < 0);
+        return $this->incDec($key, $offset, $offset < 0);
     }
 
     /**
@@ -168,6 +170,7 @@ class Memcache extends BaseCache
      */
     protected function incDec($key, $offset, $inc = true)
     {
+        $key = $this->keyPrefix . $key;
         $method = $inc ? 'increment' : 'decrement';
         $offset = abs($offset);
         // IMPORTANT: memcache may return 0 in some 3.0.x beta version
