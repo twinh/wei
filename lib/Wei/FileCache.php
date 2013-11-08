@@ -319,21 +319,15 @@ class FileCache extends BaseCache
      *
      * @param  resouce $handle  file handle
      * @param  string  $content the value of cache
-     * @param  bool    $rewirte whether rewrite the whole file
+     * @param  bool    $rewrite whether rewrite the whole file
      * @return boolean
      */
-    protected function writeAndRelease($handle, $content, $rewirte = false)
+    protected function writeAndRelease($handle, $content, $rewrite = false)
     {
-        if ($rewirte) {
-            rewind($handle);
-        }
-
+        $rewrite && rewind($handle);
         $result = fwrite($handle, $content);
-
         flock($handle, LOCK_UN);
-
         fclose($handle);
-
         return (bool) $result;
     }
 }
