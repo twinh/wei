@@ -74,37 +74,31 @@ class FileCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doSet($key, $value, $expire = 0)
+    public function set($key, $value, $expire = 0)
     {
-        $file = $this->getFile($key, false);
-
+        $file = $this->getFile($key);
         $content = $this->prepareContent($value, $expire);
-
         return (bool) file_put_contents($file, $content, LOCK_EX);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doRemove($key)
+    public function remove($key)
     {
-        $file = $this->getFile($key, false);
-
-        if (is_file($file)) {
+        if (is_file($file = $this->getFile($key))) {
             return unlink($file);
+        } else {
+            return false;
         }
-
-        return false;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doExists($key)
+    public function exists($key)
     {
-        $file = $this->getFile($key, false);
-
-        if (!is_file($file)) {
+        if (!is_file($file = $this->getFile($key))) {
             return false;
         }
 
@@ -153,11 +147,9 @@ class FileCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doReplace($key, $value, $expire = 0)
+    public function replace($key, $value, $expire = 0)
     {
-        $file = $this->getFile($key, false);
-
-        if (!is_file($file)) {
+        if (!is_file($file = $this->getFile($key))) {
             return false;
         }
 
@@ -172,19 +164,18 @@ class FileCache extends BaseCache
         }
 
         $content = $this->prepareContent($value, $expire);
-
         return $this->writeAndRelease($handle, $content, true);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doIncr($key, $offset = 1)
+    public function incr($key, $offset = 1)
     {
-        $file = $this->getFile($key, false);
+        $file = $this->getFile($key);
 
         if (!is_file($file)) {
-            return $this->doSet($key, $offset) ? $offset : false;
+            return $this->set($key, $offset) ? $offset : false;
         }
 
         // Open file for reading and rewriting
@@ -212,11 +203,9 @@ class FileCache extends BaseCache
     public function clear()
     {
         $result = true;
-
         foreach (glob($this->dir . '/' . '*.' . $this->ext) as $file) {
             $result = $result && @unlink($file);
         }
-
         return $result;
     }
 
@@ -280,7 +269,6 @@ class FileCache extends BaseCache
 
         if (!flock($handle, $operation)) {
             fclose($handle);
-
             return false;
         }
 
