@@ -12,6 +12,7 @@ namespace Wei;
  * A cache wei that stored data in databases
  *
  * @author  Twin Huang <twinhuang@qq.com>
+ * @property Db $db A database service
  */
 class DbCache extends BaseCache
 {
@@ -67,13 +68,11 @@ class DbCache extends BaseCache
      */
     public function prepareTable()
     {
-        $db = $this->db;
-        $driver = $db->getDriver();
-
+        $driver = $this->db->getDriver();
         $tableExistsSql = sprintf($this->checkTableSqls[$driver], $this->table);
         if ($this->checkTable && !$this->db->fetchColumn($tableExistsSql)) {
             $createTableSql = sprintf($this->createTableSqls[$driver], $this->table);
-            $db->executeUpdate($createTableSql);
+            $this->db->executeUpdate($createTableSql);
         }
     }
 
@@ -111,7 +110,6 @@ class DbCache extends BaseCache
         } else {
             $result = $this->db->insert($this->table, $data + $identifier);
         }
-
         return (bool)$result;
     }
 
