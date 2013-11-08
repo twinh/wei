@@ -18,9 +18,10 @@ class Apc extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doGet($key)
+    public function get($key, $expire = null, $fn = null)
     {
-        return apc_fetch($key);
+        $result = apc_fetch($this->keyPrefix . $key);
+        return $this->processGetResult($key, $result, $expire, $fn);
     }
 
     /**
