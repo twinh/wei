@@ -22,12 +22,12 @@ class ArrayCache extends BaseCache
      */
     protected $data = array();
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function doGet($key)
+    public function get($key, $expire = null, $fn = null)
     {
-        return array_key_exists($key, $this->data) ? $this->data[$key] : false;
+        $oriKey = $key;
+        $key = $this->keyPrefix . $key;
+        $result = array_key_exists($key, $this->data) ? $this->data[$key] : false;
+        return $this->processGetResult($oriKey, $result, $expire, $fn);
     }
 
     /**

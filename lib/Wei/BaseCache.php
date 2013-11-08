@@ -81,6 +81,23 @@ abstract class BaseCache extends Base
         return $result;
     }
 
+    protected function processGetResult($key, $result, $expire, $fn)
+    {
+        if (false === $result && null !== $expire) {
+            if (is_callable($expire)) {
+                $fn = $expire;
+                $expire = 0;
+            }
+            $result = call_user_func($fn, $this->wei);
+
+            $setResult = $this->set($key, $result, $expire);
+            if (false === $setResult) {
+                throw new \RuntimeException('Fail to store cache from callback', 1020);
+            }
+        }
+        return $result;
+    }
+
     /**
      * Store an item
      *
