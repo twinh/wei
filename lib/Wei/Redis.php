@@ -128,9 +128,10 @@ class Redis extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doGet($key)
+    public function get($key, $expire = null, $fn = null)
     {
-        return $this->object->get($key);
+        $result = $this->object->get($this->keyPrefix . $key);
+        return $this->processGetResult($key, $result, $expire, $fn);
     }
 
     /**
@@ -203,12 +204,12 @@ class Redis extends BaseCache
      *
      * {@inheritdoc}
      */
-    protected function doReplace($key, $value, $expire = 0)
+    public function replace($key, $value, $expire = 0)
     {
-        if (false === $this->object->get($key)) {
+        if (false === $this->object->get($this->keyPrefix . $key)) {
             return false;
         }
-        return $this->object->set($key, $value, $expire);
+        return $this->object->set($this->keyPrefix . $key, $value, $expire);
     }
 
     /**

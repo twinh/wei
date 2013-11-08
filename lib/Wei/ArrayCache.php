@@ -22,6 +22,9 @@ class ArrayCache extends BaseCache
      */
     protected $data = array();
 
+    /**
+     * {@inheritdoc}
+     */
     public function get($key, $expire = null, $fn = null)
     {
         $oriKey = $key;
