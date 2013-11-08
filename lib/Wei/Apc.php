@@ -59,8 +59,9 @@ class Apc extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doReplace($key, $value, $expire = 0)
+    public function replace($key, $value, $expire = 0)
     {
+        $key = $this->keyPrefix . $key;
         if (apc_exists($key)) {
             return apc_store($key, $value, $expire);
         } else {
@@ -71,8 +72,9 @@ class Apc extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doIncr($key, $offset = 1)
+    public function incr($key, $offset = 1)
     {
+        $key = $this->keyPrefix . $key;
         if (false === apc_inc($key, $offset)) {
             return apc_store($key, $offset) ? $offset : false;
         }
