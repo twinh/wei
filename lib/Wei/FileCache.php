@@ -53,22 +53,20 @@ class FileCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doGet($key)
+    public function get($key, $expire = null, $fn = null)
     {
-        $file = $this->getFile($key, false);
-
-        if (!is_file($file)) {
-            return false;
-        }
-
-        $content = @unserialize(file_get_contents($file));
-        if ($content && is_array($content) && time() < $content[0]) {
-            return $content[1];
+        if (!is_file($file = $this->getFile($key))) {
+            $result = false;
         } else {
-            $this->remove($key);
-
-            return false;
+            $content = @unserialize(file_get_contents($file));
+            if ($content && is_array($content) && time() < $content[0]) {
+                $result = $content[1];
+            } else {
+                $this->remove($key);
+                $result = false;
+            }
         }
+        return $this->processGetResult($key, $result, $expire, $fn);
     }
 
     /**
@@ -213,14 +211,11 @@ class FileCache extends BaseCache
      * Get cache file by key
      *
      * @param  string $key
-     * @param bool $withPrefix
      * @return string
      */
-    public function getFile($key, $withPrefix = true)
+    public function getFile($key)
     {
-        $withPrefix && $key = $this->getKeyWithPrefix($key);
-        $key = str_replace($this->illegalChars, '_', $key);
-
+        $key = str_replace($this->illegalChars, '_', $this->keyPrefix . $key);
         return $this->dir . '/' . $key . '.' . $this->ext;
     }
 
@@ -238,7 +233,6 @@ class FileCache extends BaseCache
                 throw new \RuntimeException(sprintf('Failed to create directory: "%s"', $dir));
             }
         }
-
         $this->dir = $dir;
         return $this;
     }
