@@ -80,15 +80,16 @@ class Cache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doGet($key)
+    public function get($key, $expire = null, $fn = null)
     {
-        return $this->object->get($key);
+        $result = $this->object->get($key);
+        return $this->processGetResult($key, $result, $expire, $fn);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doSet($key, $value, $expire = 0)
+    public function set($key, $value, $expire = 0)
     {
         return $this->object->set($key, $value, $expire);
     }
@@ -96,7 +97,7 @@ class Cache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doRemove($key)
+    public function remove($key)
     {
         return $this->object->remove($key);
     }
@@ -104,7 +105,7 @@ class Cache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doExists($key)
+    public function exists($key)
     {
         return $this->object->exists($key);
     }
@@ -112,7 +113,7 @@ class Cache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doAdd($key, $value, $expire = 0)
+    public function add($key, $value, $expire = 0)
     {
         return $this->object->add($key, $value, $expire);
     }
@@ -120,7 +121,7 @@ class Cache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doReplace($key, $value, $expire = 0)
+    public function replace($key, $value, $expire = 0)
     {
         return $this->object->replace($key, $value, $expire);
     }
@@ -128,7 +129,7 @@ class Cache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doIncr($key, $offset = 1)
+    public function incr($key, $offset = 1)
     {
         return $this->object->incr($key, $offset);
     }

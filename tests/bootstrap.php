@@ -61,6 +61,9 @@ wei(array(
             'db' => 'pgsql.db'
         )
     ),
+    'cache' => array(
+        'driver' => 'memcached'
+    ),
     'bicache' => array(
         'providers' => array(
             'master' => 'arrayCache',
