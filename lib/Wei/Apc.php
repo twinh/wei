@@ -26,25 +26,26 @@ class Apc extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doSet($key, $value, $expire = 0)
+    public function set($key, $value, $expire = 0)
     {
+        $key = $this->keyPrefix . $key;
         return $expire >= 0 ? apc_store($key, $value, $expire) : apc_delete($key);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doRemove($key)
+    public function remove($key)
     {
-        return apc_delete($key);
+        return apc_delete($this->keyPrefix . $key);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doExists($key)
+    public function exists($key)
     {
-        return apc_exists($key);
+        return apc_exists($this->keyPrefix . $key);
     }
 
     /**
