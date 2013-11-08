@@ -73,16 +73,6 @@ wei(array(
     'response' => array(
         'unitTest' => true
     ),
-    'lock' => array(
-        'providers' => array(
-            'cache' => 'memcached'
-        )
-    ),
-    'counter' => array(
-        'providers' => array(
-            'cache' => 'memcached'
-        )
-    )
 ));
 
 // Load configuration for CI
