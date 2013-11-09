@@ -15,6 +15,7 @@ use Wei\Base;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    \Wei\Db $db A database service inspired by Doctrine DBAL
+ * @method      \Wei\Db\QueryBuilder db($table = null) Create a new query builder
  */
 class Record extends Base implements \ArrayAccess
 {
