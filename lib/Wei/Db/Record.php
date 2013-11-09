@@ -237,8 +237,10 @@ class Record extends Base implements \ArrayAccess
             $result = (bool)$this->db->insert($this->table, $this->data);
             if ($result) {
                 $this->isNew = false;
-                $name = sprintf('%s_%s_seq', $this->table, $this->primaryKey);
-                $this->data[$this->primaryKey] = $this->db->lastInsertId($name);
+                if (!isset($this->data[$this->primaryKey])) {
+                    $name = sprintf('%s_%s_seq', $this->table, $this->primaryKey);
+                    $this->data[$this->primaryKey] = $this->db->lastInsertId($name);
+                }
             }
             // Update
         } else {
