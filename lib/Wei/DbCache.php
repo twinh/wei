@@ -79,20 +79,21 @@ class DbCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doGet($key)
+    public function get($key, $expire = null, $fn = null)
     {
-        if ($this->doExists($key)) {
-            $result = $this->db->select($this->table, $key);
-            return unserialize($result['value']);
+        if ($this->exists($key)) {
+            $result = $this->db->select($this->table, $this->prefix . $key);
+            $result = unserialize($result['value']);
         } else {
-            return false;
+            $result = false;
         }
+        return $this->processGetResult($key, $result, $expire, $fn);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doSet($key, $value, $expire = 0)
+    public function set($key, $value, $expire = 0)
     {
         $data = array(
             'value' => serialize($value),
@@ -100,10 +101,10 @@ class DbCache extends BaseCache
             'expire' => date('Y-m-d H:i:s', $expire ? time() + $expire : 2147483647)
         );
         $identifier = array(
-            'id' => $key
+            'id' => $this->prefix . $key
         );
 
-        if ($this->doExists($key)) {
+        if ($this->exists($key)) {
             // In MySQL, the rowCount method return 0 when data is not modified,
             // so check errorCode to make sure it executed success
             $result = $this->db->update($this->table, $data, $identifier) || '0000' == $this->db->errorCode();
@@ -116,23 +117,23 @@ class DbCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doRemove($key)
+    public function remove($key)
     {
-        return (bool)$this->db->delete($this->table, array('id' => $key));
+        return (bool)$this->db->delete($this->table, array('id' => $this->prefix . $key));
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doExists($key)
+    public function exists($key)
     {
-        $result = $this->db->select($this->table, $key);
+        $result = $this->db->select($this->table, $this->prefix . $key);
 
         if (!$result) {
             return false;
         }
         if ($result['expire'] < date('Y-m-d H:i:s')) {
-            $this->doRemove($key);
+            $this->remove($key);
             return false;
         }
 
@@ -154,12 +155,12 @@ class DbCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doReplace($key, $value, $expire = 0)
+    public function replace($key, $value, $expire = 0)
     {
-        if (!$this->doExists($key)) {
+        if (!$this->exists($key)) {
             return false;
         } else {
-            return $this->doSet($key, $value, $expire);
+            return $this->set($key, $value, $expire);
         }
     }
 
@@ -168,10 +169,10 @@ class DbCache extends BaseCache
      *
      * {@inheritdoc}
      */
-    protected function doIncr($key, $offset = 1)
+    public function incr($key, $offset = 1)
     {
-        $value = $this->doGet($key) + $offset;
-        return $this->doSet($key, $value) ? $value : false;
+        $value = $this->get($key) + $offset;
+        return $this->set($key, $value) ? $value : false;
     }
 
     /**
