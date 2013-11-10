@@ -68,24 +68,24 @@ class MongoCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doGet($key)
+    public function get($key, $expire = null, $fn = null)
     {
-        $result = $this->object->findOne(array('_id' => $key), array('value', 'expire'));
-
+        $result = $this->object->findOne(array('_id' => $this->prefix . $key), array('value', 'expire'));
         if (null === $result || $result['expire'] < time()) {
-            return false;
+            $result = false;
         } else {
-            return unserialize($result['value']);
+            $result = unserialize($result['value']);
         }
+        return $this->processGetResult($key, $result, $expire, $fn);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doSet($key, $value, $expire = 0)
+    public function set($key, $value, $expire = 0)
     {
         $result = $this->object->save(array(
-            '_id' => $key,
+            '_id' => $this->prefix . $key,
             'value' => serialize($value),
             'expire' => $expire ? time() + $expire : 2147483647,
             'lastModified' => time()
@@ -96,19 +96,18 @@ class MongoCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doRemove($key)
+    public function remove($key)
     {
-        $result = $this->object->remove(array('_id' => $key));
+        $result = $this->object->remove(array('_id' => $this->prefix . $key));
         return $result['ok'] === 1.0;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doExists($key)
+    public function exists($key)
     {
-        $result = $this->object->findOne(array('_id' => $key), array('expire'));
-
+        $result = $this->object->findOne(array('_id' => $this->prefix . $key), array('expire'));
         if (null === $result || $result['expire'] < time()) {
             return false;
         } else {
@@ -119,22 +118,22 @@ class MongoCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doAdd($key, $value, $expire = 0)
+    public function add($key, $value, $expire = 0)
     {
-        if ($this->doExists($key)) {
+        if ($this->exists($key)) {
             return false;
         } else {
-            return $this->doSet($key, $value, $expire);
+            return $this->set($key, $value, $expire);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doReplace($key, $value, $expire = 0)
+    public function replace($key, $value, $expire = 0)
     {
-        if ($this->doExists($key)) {
-            return $this->doSet($key, $value, $expire);
+        if ($this->exists($key)) {
+            return $this->set($key, $value, $expire);
         } else {
             return false;
         }
@@ -145,11 +144,10 @@ class MongoCache extends BaseCache
      *
      * {@inheritdoc}
      */
-    protected function doIncr($key, $offset = 1)
+    public function incr($key, $offset = 1)
     {
-        $value = $this->doGet($key) + $offset;
-
-        return $this->doSet($key, $value) ? $value : false;
+        $value = $this->get($key) + $offset;
+        return $this->set($key, $value) ? $value : false;
     }
 
     /**
