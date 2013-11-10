@@ -77,31 +77,32 @@ class Couchbase extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doGet($key)
+    public function get($key, $expire = null, $fn = null)
     {
-        return $this->object->get($key);
+        $result = $this->object->get($this->prefix . $key);
+        return $this->processGetResult($key, $result, $expire, $fn);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doSet($key, $value, $expire = 0)
+    public function set($key, $value, $expire = 0)
     {
-        return $this->object->set($key, $value, $expire);
+        return $this->object->set($this->prefix . $key, $value, $expire);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doRemove($key)
+    public function remove($key)
     {
-        return $this->object->delete($key);
+        return $this->object->delete($this->prefix . $key);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doExists($key)
+    public function exists($key)
     {
         if ($this->object->add($key, true)) {
             $this->object->delete($key);
@@ -113,25 +114,25 @@ class Couchbase extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doAdd($key, $value, $expire = 0)
+    public function add($key, $value, $expire = 0)
     {
-        return (bool)$this->object->add($key, $value, $expire);
+        return (bool)$this->object->add($this->prefix . $key, $value, $expire);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doReplace($key, $value, $expire = 0)
+    public function replace($key, $value, $expire = 0)
     {
-        return (bool)$this->object->replace($key, $value, $expire);
+        return (bool)$this->object->replace($this->prefix . $key, $value, $expire);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doIncr($key, $offset = 1)
+    public function incr($key, $offset = 1)
     {
-        return $this->object->inc($key, $offset, true, 0, $offset);
+        return $this->object->inc($this->prefix . $key, $offset, true, 0, $offset);
     }
 
     /**
