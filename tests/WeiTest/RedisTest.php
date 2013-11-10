@@ -27,12 +27,12 @@ class RedisTest extends CacheTestCase
         parent::testIncrAndDecr();
     }
 
-    public function testKeyPrefix()
+    public function testPrefix()
     {
         $redis = $this->object->getObject();
         $redis->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_NONE);
 
-        parent::testKeyPrefix();
+        parent::testPrefix();
     }
 
     public function testGetAndSetObject()

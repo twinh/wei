@@ -20,7 +20,7 @@ class Apc extends BaseCache
      */
     public function get($key, $expire = null, $fn = null)
     {
-        $result = apc_fetch($this->keyPrefix . $key);
+        $result = apc_fetch($this->prefix . $key);
         return $this->processGetResult($key, $result, $expire, $fn);
     }
 
@@ -29,7 +29,7 @@ class Apc extends BaseCache
      */
     public function set($key, $value, $expire = 0)
     {
-        $key = $this->keyPrefix . $key;
+        $key = $this->prefix . $key;
         return $expire >= 0 ? apc_store($key, $value, $expire) : apc_delete($key);
     }
 
@@ -38,7 +38,7 @@ class Apc extends BaseCache
      */
     public function remove($key)
     {
-        return apc_delete($this->keyPrefix . $key);
+        return apc_delete($this->prefix . $key);
     }
 
     /**
@@ -46,7 +46,7 @@ class Apc extends BaseCache
      */
     public function exists($key)
     {
-        return apc_exists($this->keyPrefix . $key);
+        return apc_exists($this->prefix . $key);
     }
 
     /**
@@ -54,7 +54,7 @@ class Apc extends BaseCache
      */
     public function add($key, $value, $expire = 0)
     {
-        return apc_add($this->keyPrefix . $key, $value, $expire);
+        return apc_add($this->prefix . $key, $value, $expire);
     }
 
     /**
@@ -62,7 +62,7 @@ class Apc extends BaseCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        $key = $this->keyPrefix . $key;
+        $key = $this->prefix . $key;
         if (apc_exists($key)) {
             return apc_store($key, $value, $expire);
         } else {
@@ -75,7 +75,7 @@ class Apc extends BaseCache
      */
     public function incr($key, $offset = 1)
     {
-        $key = $this->keyPrefix . $key;
+        $key = $this->prefix . $key;
         if (false === apc_inc($key, $offset)) {
             return apc_store($key, $offset) ? $offset : false;
         }

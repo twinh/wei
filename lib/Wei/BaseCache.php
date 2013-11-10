@@ -20,7 +20,7 @@ abstract class BaseCache extends Base
      *
      * @var string
      */
-    protected $keyPrefix = '';
+    protected $prefix = '';
 
     /**
      * Retrieve or store an item
@@ -240,20 +240,20 @@ abstract class BaseCache extends Base
      *
      * @return string
      */
-    public function getKeyPrefix()
+    public function getPrefix()
     {
-        return $this->keyPrefix;
+        return $this->prefix;
     }
 
     /**
      * Set the cache key prefix
      *
-     * @param string $keyPrefix
+     * @param string $prefix
      * @return $this
      */
-    public function setKeyPrefix($keyPrefix)
+    public function setPrefix($prefix)
     {
-        $this->keyPrefix = $keyPrefix;
+        $this->prefix = $prefix;
         return $this;
     }
 
@@ -265,7 +265,7 @@ abstract class BaseCache extends Base
      */
     protected function getKeyWithPrefix($key)
     {
-        return $this->keyPrefix . $key;
+        return $this->prefix . $key;
     }
 
     /**

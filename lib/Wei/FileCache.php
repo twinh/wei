@@ -215,7 +215,7 @@ class FileCache extends BaseCache
      */
     public function getFile($key)
     {
-        $key = str_replace($this->illegalChars, '_', $this->keyPrefix . $key);
+        $key = str_replace($this->illegalChars, '_', $this->prefix . $key);
         return $this->dir . '/' . $key . '.' . $this->ext;
     }
 

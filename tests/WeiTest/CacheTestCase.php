@@ -12,7 +12,7 @@ class CacheTestCase extends TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->object->setKeyPrefix('test-');
+        $this->object->setPrefix('test-');
     }
 
     /**
@@ -157,11 +157,11 @@ class CacheTestCase extends TestCase
         $this->assertEquals(2, $result2);
     }
 
-    public function testKeyPrefix()
+    public function testPrefix()
     {
         $cache = $this->object;
-        $cache->setKeyPrefix('prefix-');
-        $this->assertEquals('prefix-', $cache->getKeyPrefix());
+        $cache->setPrefix('prefix-');
+        $this->assertEquals('prefix-', $cache->getPrefix());
 
         $cache->set('test', 1);
         $this->assertEquals(1, $cache->get('test'));

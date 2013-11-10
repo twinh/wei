@@ -130,7 +130,7 @@ class Redis extends BaseCache
      */
     public function get($key, $expire = null, $fn = null)
     {
-        $result = $this->object->get($this->keyPrefix . $key);
+        $result = $this->object->get($this->prefix . $key);
         return $this->processGetResult($key, $result, $expire, $fn);
     }
 
@@ -139,7 +139,7 @@ class Redis extends BaseCache
      */
     public function set($key, $value, $expire = 0)
     {
-        return $this->object->set($this->keyPrefix . $key, $value, $expire);
+        return $this->object->set($this->prefix . $key, $value, $expire);
     }
 
     /**
@@ -175,7 +175,7 @@ class Redis extends BaseCache
      */
     public function remove($key)
     {
-        return (bool)$this->object->del($this->keyPrefix . $key);
+        return (bool)$this->object->del($this->prefix . $key);
     }
 
     /**
@@ -183,7 +183,7 @@ class Redis extends BaseCache
      */
     public function exists($key)
     {
-        return $this->object->exists($this->keyPrefix . $key);
+        return $this->object->exists($this->prefix . $key);
     }
 
     /**
@@ -191,7 +191,7 @@ class Redis extends BaseCache
      */
     public function add($key, $value, $expire = 0)
     {
-        $key = $this->keyPrefix . $key;
+        $key = $this->prefix . $key;
         $result = $this->object->setnx($key, $value);
         if (true === $result) {
             $this->object->expire($key, $expire === 0 ? -1 : $expire);
@@ -206,10 +206,10 @@ class Redis extends BaseCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        if (false === $this->object->get($this->keyPrefix . $key)) {
+        if (false === $this->object->get($this->prefix . $key)) {
             return false;
         }
-        return $this->object->set($this->keyPrefix . $key, $value, $expire);
+        return $this->object->set($this->prefix . $key, $value, $expire);
     }
 
     /**
@@ -217,7 +217,7 @@ class Redis extends BaseCache
      */
     public function incr($key, $offset = 1)
     {
-        return $this->object->incrBy($this->keyPrefix . $key, $offset);
+        return $this->object->incrBy($this->prefix . $key, $offset);
     }
 
     /**

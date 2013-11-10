@@ -75,7 +75,7 @@ class Memcached extends BaseCache
      */
     public function get($key, $expire = null, $fn = null)
     {
-        $result = $this->object->get($this->keyPrefix . $key);
+        $result = $this->object->get($this->prefix . $key);
         return $this->processGetResult($key, $result, $expire, $fn);
     }
 
@@ -84,7 +84,7 @@ class Memcached extends BaseCache
      */
     public function set($key, $value, $expire = 0)
     {
-        return $this->object->set($this->keyPrefix . $key, $value, $expire);
+        return $this->object->set($this->prefix . $key, $value, $expire);
     }
 
     /**
@@ -109,7 +109,7 @@ class Memcached extends BaseCache
      */
     public function remove($key)
     {
-        return $this->object->delete($this->keyPrefix . $key);
+        return $this->object->delete($this->prefix . $key);
     }
 
     /**
@@ -117,7 +117,7 @@ class Memcached extends BaseCache
      */
     public function exists($key)
     {
-        $key = $this->keyPrefix . $key;
+        $key = $this->prefix . $key;
         if ($this->object->add($key, true)) {
             $this->object->delete($key);
             return false;
@@ -130,7 +130,7 @@ class Memcached extends BaseCache
      */
     public function add($key, $value, $expire = 0)
     {
-        return $this->object->add($this->keyPrefix . $key, $value, $expire);
+        return $this->object->add($this->prefix . $key, $value, $expire);
     }
 
     /**
@@ -138,7 +138,7 @@ class Memcached extends BaseCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        return $this->object->replace($this->keyPrefix . $key, $value, $expire);
+        return $this->object->replace($this->prefix . $key, $value, $expire);
     }
 
     /**
@@ -170,7 +170,7 @@ class Memcached extends BaseCache
      */
     protected function incDec($key, $offset, $inc = true)
     {
-        $key = $this->keyPrefix . $key;
+        $key = $this->prefix . $key;
         $method = $inc ? 'increment' : 'decrement';
         $offset = abs($offset);
         if (false === $this->object->$method($key, $offset)) {

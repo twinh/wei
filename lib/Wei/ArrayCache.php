@@ -28,7 +28,7 @@ class ArrayCache extends BaseCache
     public function get($key, $expire = null, $fn = null)
     {
         $oriKey = $key;
-        $key = $this->keyPrefix . $key;
+        $key = $this->prefix . $key;
         $result = array_key_exists($key, $this->data) ? $this->data[$key] : false;
         return $this->processGetResult($oriKey, $result, $expire, $fn);
     }
@@ -38,7 +38,7 @@ class ArrayCache extends BaseCache
      */
     public function set($key, $value, $expire = 0)
     {
-        $this->data[$this->keyPrefix . $key] = $value;
+        $this->data[$this->prefix . $key] = $value;
         return true;
     }
 
@@ -47,7 +47,7 @@ class ArrayCache extends BaseCache
      */
     public function remove($key)
     {
-        unset($this->data[$this->keyPrefix . $key]);
+        unset($this->data[$this->prefix . $key]);
         return true;
     }
 
@@ -56,7 +56,7 @@ class ArrayCache extends BaseCache
      */
     public function exists($key)
     {
-        return array_key_exists($this->keyPrefix . $key, $this->data);
+        return array_key_exists($this->prefix . $key, $this->data);
     }
 
     /**
@@ -67,7 +67,7 @@ class ArrayCache extends BaseCache
         if ($this->exists($key)) {
             return false;
         } else {
-            $this->data[$this->keyPrefix . $key] = $value;
+            $this->data[$this->prefix . $key] = $value;
             return true;
         }
     }
@@ -80,7 +80,7 @@ class ArrayCache extends BaseCache
         if (!$this->exists($key)) {
             return false;
         } else {
-            $this->data[$this->keyPrefix . $key] = $value;
+            $this->data[$this->prefix . $key] = $value;
             return true;
         }
     }
@@ -91,9 +91,9 @@ class ArrayCache extends BaseCache
     public function incr($key, $offset = 1)
     {
         if ($this->exists($key)) {
-            return $this->data[$this->keyPrefix . $key] += $offset;
+            return $this->data[$this->prefix . $key] += $offset;
         } else {
-            return $this->data[$this->keyPrefix . $key] = $offset;
+            return $this->data[$this->prefix . $key] = $offset;
         }
     }
 
