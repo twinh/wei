@@ -9,11 +9,11 @@
 namespace Wei;
 
 /**
- * A two-level cache wei
+ * A two-level cache service
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    BaseCache $master The master(faster) cache object
- * @property    BaseCache $slave The slave(slower) cache object
+ * @property    BaseCache $master The master(faster) cache service
+ * @property    BaseCache $slave The slave(slower) cache service
  */
 class Bicache extends BaseCache
 {
