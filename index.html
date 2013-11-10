@@ -901,7 +901,7 @@
 <div class="highlight"><pre><code class="php"><span class="c1">// 设置APC缓存的键名前缀</span>
 <span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'memcached'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'keyPrefix'</span> <span class="o">=&gt;</span> <span class="s1">'project-'</span>
+        <span class="s1">'prefix'</span> <span class="o">=&gt;</span> <span class="s1">'project-'</span>
     <span class="p">)</span>
 <span class="p">));</span>
 
@@ -968,7 +968,7 @@
 <th>说明</th>
 </tr></thead>
 <tbody><tr>
-<td>keyPrefix</td>
+<td>prefix</td>
 <td>string</td>
 <td>无</td>
 <td>缓存名称的前缀</td>
@@ -1380,7 +1380,7 @@
 <blockquote>
 <h3>注意</h3>
 
-<p>该方法会把所有的缓存内容都清空,不仅仅是以$keyPrefix开头的缓存.</p>
+<p>该方法会把所有的缓存内容都清空,不仅仅是以$prefix开头的缓存.</p>
 </blockquote>
   </section>
 
