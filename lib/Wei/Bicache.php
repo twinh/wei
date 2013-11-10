@@ -35,22 +35,22 @@ class Bicache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doGet($key)
+    public function get($key, $expire = null, $fn = null)
     {
-        $value = $this->master->get($key);
-
-        if (false === $value) {
-            return $this->slave->get($key);
+        $key = $this->prefix . $key;
+        $result = $this->master->get($key);
+        if (false === $result) {
+            $result = $this->slave->get($key);
         }
-
-        return $value;
+        return $this->processGetResult($key, $result, $expire, $fn);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doSet($key, $value, $expire = 0)
+    public function set($key, $value, $expire = 0)
     {
+        $key = $this->prefix . $key;
         $result = $this->master->set($key, $value, $expire);
 
         if ($result && $this->needUpdate($key)) {
@@ -65,8 +65,9 @@ class Bicache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doRemove($key)
+    public function remove($key)
     {
+        $key = $this->prefix . $key;
         $result1 = $this->master->remove($key);
         $result2 = $this->slave->remove($key);
 
@@ -76,16 +77,18 @@ class Bicache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doExists($key)
+    public function exists($key)
     {
+        $key = $this->prefix . $key;
         return $this->master->exists($key) || $this->slave->exists($key);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doAdd($key, $value, $expire = 0)
+    public function add($key, $value, $expire = 0)
     {
+        $key = $this->prefix . $key;
         $result = $this->master->add($key, $value, $expire);
 
         // The cache can be added only one time, when added success, set it to the slave cache
@@ -101,8 +104,9 @@ class Bicache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doReplace($key, $value, $expire = 0)
+    public function replace($key, $value, $expire = 0)
     {
+        $key = $this->prefix . $key;
         $result = $this->master->replace($key, $value, $expire);
 
         // The cache can always be replaced when it's exists, so check for update
@@ -116,8 +120,9 @@ class Bicache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    protected function doIncr($key, $offset = 1)
+    public function incr($key, $offset = 1)
     {
+        $key = $this->prefix . $key;
         $result = $this->master->incr($key, $offset);
 
         if (false !== $result && $this->needUpdate($key)) {
@@ -134,7 +139,6 @@ class Bicache extends BaseCache
     {
         $result1 = $this->master->clear();
         $result2 = $this->slave->clear();
-
         return $result1 && $result2;
     }
 
