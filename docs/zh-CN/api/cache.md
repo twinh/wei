@@ -71,7 +71,7 @@ echo '该文章已被访问' . $hits . '次';
 // 设置APC缓存的键名前缀
 wei(array(
     'memcached' => array(
-        'keyPrefix' => 'project-'
+        'prefix' => 'project-'
     )
 ));
 
@@ -134,7 +134,7 @@ $result = array (
 
 名称      | 类型   | 默认值    | 说明
 ----------|--------|-----------|------
-keyPrefix | string | 无        | 缓存名称的前缀
+prefix    | string | 无        | 缓存名称的前缀
 
 ### 选项
 
@@ -323,4 +323,4 @@ $values   | array     | 无        | 要缓存的数据
 
 > ### 注意
 >
-> 该方法会把所有的缓存内容都清空,不仅仅是以$keyPrefix开头的缓存.
+> 该方法会把所有的缓存内容都清空,不仅仅是以$prefix开头的缓存.
