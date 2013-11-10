@@ -67,8 +67,7 @@ class ArrayCache extends BaseCache
         if ($this->exists($key)) {
             return false;
         } else {
-            $this->data[$this->prefix . $key] = $value;
-            return true;
+            return $this->set($key, $value);
         }
     }
 
