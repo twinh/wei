@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @link http://www.couchbase.com/autodocs/couchbase-php-client-1.1.5/files/couchbase-api.php.html
+ */
 class Couchbase
 {
     public function get()
