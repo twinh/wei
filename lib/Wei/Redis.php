@@ -147,7 +147,10 @@ class Redis extends BaseCache
      */
     public function getMulti(array $keys)
     {
-        $keysWithPrefix = array_map(array($this, 'getKeyWithPrefix'), $keys);
+        $keysWithPrefix = array();
+        foreach ($keys as $key) {
+            $keysWithPrefix[] = $this->prefix . $key;
+        }
         return array_combine($keys, $this->object->mGet($keysWithPrefix));
     }
 
@@ -164,7 +167,10 @@ class Redis extends BaseCache
     public function setMulti(array $items, $expire = 0)
     {
         $keys = array_keys($items);
-        $keysWithPrefix = array_map(array($this, 'getKeyWithPrefix'), $keys);
+        $keysWithPrefix = array();
+        foreach ($keys as $key) {
+            $keysWithPrefix[] = $this->prefix . $key;
+        }
         $items = array_combine($keysWithPrefix, $items);
         $result = $this->object->mset($items);
         return array_combine($keys, array_pad(array(), count($items), $result));

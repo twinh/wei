@@ -99,7 +99,10 @@ class Memcached extends BaseCache
     public function getMulti(array $keys)
     {
         $cas = null;
-        $keysWithPrefix = array_map(array($this, 'getKeyWithPrefix'), $keys);
+        $keysWithPrefix = array();
+        foreach ($keys as $key) {
+            $keysWithPrefix[] = $this->prefix . $key;
+        }
         $values = $this->object->getMulti($keysWithPrefix, $cas, \Memcached::GET_PRESERVE_ORDER);
         return array_combine($keys, $values);
     }
