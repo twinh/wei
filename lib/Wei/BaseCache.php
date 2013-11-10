@@ -60,26 +60,7 @@ abstract class BaseCache extends Base
      * @throws \RuntimeException When set cache return false
      * @return mixed
      */
-    public function get($key, $expire = null, $fn = null)
-    {
-        $key = $this->getKeyWithPrefix($key);
-        $result = $this->doGet($key);
-
-        if (false === $result && null !== $expire) {
-            if (is_callable($expire)) {
-                $fn = $expire;
-                $expire = 0;
-            }
-            $result = call_user_func($fn, $this->wei);
-
-            $setResult = $this->doSet($key, $result, $expire);
-            if (false === $setResult) {
-                throw new \RuntimeException('Fail to store cache from callback', 1020);
-            }
-        }
-
-        return $result;
-    }
+    abstract public function get($key, $expire = null, $fn = null);
 
     protected function processGetResult($key, $result, $expire, $fn)
     {
@@ -106,10 +87,7 @@ abstract class BaseCache extends Base
      * @param  int    $expire The expire seconds, defaults to 0, means never expired
      * @return bool
      */
-    public function set($key, $value, $expire = 0)
-    {
-        return $this->doSet($this->getKeyWithPrefix($key), $value, $expire);
-    }
+    abstract public function set($key, $value, $expire = 0);
 
     /**
      * Remove an item
@@ -117,10 +95,7 @@ abstract class BaseCache extends Base
      * @param  string $key The name of item
      * @return bool
      */
-    public function remove($key)
-    {
-        return $this->doRemove($this->getKeyWithPrefix($key));
-    }
+    abstract public function remove($key);
 
     /**
      * Check if an item is exists
@@ -128,10 +103,7 @@ abstract class BaseCache extends Base
      * @param string $key
      * @return bool
      */
-    public function exists($key)
-    {
-        return $this->doExists($this->getKeyWithPrefix($key));
-    }
+    abstract public function exists($key);
 
     /**
      * Add an item
@@ -141,10 +113,7 @@ abstract class BaseCache extends Base
      * @param  int    $expire The expire seconds, defaults to 0, means never expired
      * @return bool
      */
-    public function add($key, $value, $expire = 0)
-    {
-        return $this->doAdd($this->getKeyWithPrefix($key), $value, $expire);
-    }
+    abstract public function add($key, $value, $expire = 0);
 
     /**
      * Replace an existing item
@@ -154,10 +123,7 @@ abstract class BaseCache extends Base
      * @param  int    $expire The expire seconds, defaults to 0, means never expired
      * @return bool
      */
-    public function replace($key, $value, $expire = 0)
-    {
-        return $this->doReplace($this->getKeyWithPrefix($key), $value, $expire);
-    }
+    abstract public function replace($key, $value, $expire = 0);
 
     /**
      * Increment an item
@@ -166,10 +132,7 @@ abstract class BaseCache extends Base
      * @param  int       $offset The value to increased
      * @return int|false Returns the new value on success, or false on failure
      */
-    public function incr($key, $offset = 1)
-    {
-        return $this->doIncr($this->getKeyWithPrefix($key), $offset);
-    }
+    abstract public function incr($key, $offset = 1);
 
     /**
      * Decrement an item
@@ -255,101 +218,6 @@ abstract class BaseCache extends Base
     {
         $this->prefix = $prefix;
         return $this;
-    }
-
-    /**
-     * Returns the cache key with key prefix
-     *
-     * @param string $key
-     * @return string
-     */
-    protected function getKeyWithPrefix($key)
-    {
-        return $this->prefix . $key;
-    }
-
-    /**
-     * Retrieve an item
-     *
-     * @param  string      $key The name of item
-     * @return mixed
-     */
-    protected function doGet($key)
-    {
-
-    }
-
-    /**
-     * Store an item
-     *
-     * @param  string $key    The name of item
-     * @param  mixed  $value  The value of item
-     * @param  int    $expire The expire seconds, defaults to 0, means never expired
-     * @return bool
-     */
-    protected function doSet($key, $value, $expire = 0)
-    {
-
-    }
-
-    /**
-     * Remove an item
-     *
-     * @param  string $key The name of item
-     * @return bool
-     */
-    protected function doRemove($key)
-    {
-
-    }
-
-    /**
-     * Check if an item is exists
-     *
-     * @param string $key
-     * @return bool
-     */
-    protected function doExists($key)
-    {
-
-    }
-
-    /**
-     * Add an item
-     *
-     * @param  string $key    The name of item
-     * @param  mixed  $value  The value of item
-     * @param  int    $expire The expire seconds, defaults to 0, means never expired
-     * @return bool
-     */
-    protected function doAdd($key, $value, $expire = 0)
-    {
-
-    }
-
-    /**
-     * Replace an existing item
-     *
-     * @param  string $key    The name of item
-     * @param  mixed  $value  The value of item
-     * @param  int    $expire The expire seconds, defaults to 0, means never expired
-     * @return bool
-     */
-    protected function doReplace($key, $value, $expire = 0)
-    {
-
-    }
-
-    /**
-     * Increment an item
-     *
-     * @param  string    $key    The name of item
-     * @param  int       $offset The value to increased
-     * @return int|false Returns the new value on success, or false on failure
-     */
-    protected function doIncr($key, $offset = 1)
-    {
-
     }
 
     /**
