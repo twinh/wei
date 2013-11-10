@@ -9,7 +9,7 @@
 namespace Wei;
 
 /**
- * A cache wei that stored data in databases
+ * A cache service that stored data in databases
  *
  * @author  Twin Huang <twinhuang@qq.com>
  * @property Db $db A database service
