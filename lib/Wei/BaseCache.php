@@ -47,11 +47,17 @@ abstract class BaseCache extends Base
      *
      * $cache->get('key'); // => false
      *
+     * // Get cache value from callback
      * $cache->get('key', function($wei){
      *      return 'value';
      * }); // => "value"
      *
      * $cache->get('key'); // => "value"
+     *
+     * // Get cache value from callback with timeout
+     * $cache->get('key', 10, function($wei){
+     *      return 'value';
+     * }); // => "value"
      * ```
      *
      * @param string $key The name of item
@@ -62,6 +68,16 @@ abstract class BaseCache extends Base
      */
     abstract public function get($key, $expire = null, $fn = null);
 
+    /**
+     * Store data to cache when data is not false and callback is provided
+     *
+     * @param string $key
+     * @param mixed $result
+     * @param int $expire
+     * @param callable $fn
+     * @return mixed
+     * @throws \RuntimeException
+     */
     protected function processGetResult($key, $result, $expire, $fn)
     {
         if (false === $result && null !== $expire) {
