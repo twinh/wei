@@ -7,6 +7,7 @@ Logger
 ----
 
 ### 记录一条DEBUG级别的日志
+
 ```php
 wei()->logger->debug('The logger is called');
 
@@ -15,6 +16,20 @@ echo wei()->logger->getFile();
 
 // 可以在日志文件看到类似格式的一条日志
 // [XXXX-XX-XX XX:XX:XX] wei.DEBUG: The logger is called
+```
+
+### 直接输出日志到浏览器
+
+```php
+wei(array(
+    'logger' => array(
+        'fileDetected' => true,  // 表示文件路径已经指定,不用再去检测获取
+        'file' => 'php://output' // 配置输出的文件为'php://output'
+    )
+));
+
+wei()->logger->debug('Output in screen');
+wei()->logger->alert('An alert message');
 ```
 
 调用方式
