@@ -15,8 +15,8 @@ return array(
         ),
         'import' => array(
             array(
-                'dir' => $rootDir . '/app/Service',
-                'namespace' => 'Service'
+                'dir' => $rootDir . '/app/Model',
+                'namespace' => 'Model'
             )
         ),
         'preload' => array(
