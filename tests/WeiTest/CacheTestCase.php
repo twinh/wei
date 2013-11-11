@@ -186,7 +186,7 @@ class CacheTestCase extends TestCase
 
     public function testGetFileContent()
     {
-        $file = __DIR__ . '/Fixtures/5x5.gif';
+        $file = __DIR__ . '/Fixtures/User.php';
         $cache = $this->object->getFileContent($file, function($file){
             return file_get_contents($file);
         });
