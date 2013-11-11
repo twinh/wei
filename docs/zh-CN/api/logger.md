@@ -15,7 +15,7 @@ wei()->logger->debug('The logger is called');
 echo wei()->logger->getFile();
 
 // 可以在日志文件看到类似格式的一条日志
-// [XXXX-XX-XX XX:XX:XX] wei.DEBUG: The logger is called
+// [XXXX-XX-XX XX:XX:XX] DEBUG: The logger is called
 ```
 
 ### 直接输出日志到浏览器
@@ -41,17 +41,17 @@ wei()->logger->alert('An alert message');
 
 ### 选项
 
-名称         | 类型     | 默认值                                      | 说明
--------------|----------|---------------------------------------------|------
-name         | string   | wei                                         | 日志的名称,可以每个模块设定一个名称进行区分
-level        | string   | debug                                       | 默认的日志级别
-handledLevel | string   | debug                                       | 记录到文件的最低日志等级,低于该等级的日志将不记录到文件中
-format       | string   | [%datetime%] %channel%.%level%: %message%\n | 日志的格式
-dateFormat   | string   | Y-m-d H:i:s                                 | 日志中日期的格式,使用[date](http://php.net/manual/en/function.date.php)函数转换
-file         | string   | 无                                          | 日志文件的路径,留空是根据日志目录和文件名称生成
-dir          | string   | log                                         | 日志文件的目录
-fileFormat   | string   | Ymd.\l\o\g                                  | 日志文件名称的格式
-fileSize     | int      | 134217728                                   | 日志文件最大容量,单位是字节,默认是128mb,设为0表示不限制大小
+名称         | 类型     | 默认值                            | 说明
+-------------|----------|-----------------------------------|------
+name         | string   | wei                               | 日志的名称,可以每个模块设定一个名称进行区分
+level        | string   | debug                             | 默认的日志级别
+handledLevel | string   | debug                             | 记录到文件的最低日志等级,低于该等级的日志将不记录到文件中
+format       | string   | [%datetime%] %level%: %message%\n | 日志的格式
+dateFormat   | string   | Y-m-d H:i:s                       | 日志中日期的格式,使用[date](http://php.net/manual/en/function.date.php)函数转换
+file         | string   | 无                                | 日志文件的路径,留空是根据日志目录和文件名称生成
+dir          | string   | log                               | 日志文件的目录
+fileFormat   | string   | Ymd.\l\o\g                        | 日志文件名称的格式
+fileSize     | int      | 134217728                         | 日志文件最大容量,单位是字节,默认是128mb,设为0表示不限制大小
 
 #### 日志等级及使用场景
 
@@ -94,5 +94,11 @@ alert     | 高   | 必须马上处理的情况,如网站打不开,数据库连�
 #### logger->getFile()
 获取日志文件
 
-#### logger->setLevel()
-设置默认的日志级别
+#### logger->setLevel($level)
+设置默认的日志等级
+
+#### logger->setHandledLevel($level)
+设置记录的最低日志等级
+
+#### logger->clean()
+删除日志目录下的所有文件(注意谨慎使用)
