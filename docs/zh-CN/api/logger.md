@@ -28,9 +28,13 @@ wei(array(
     )
 ));
 
-wei()->logger->debug('Output in screen');
+wei()->logger->debug('Output in browser');
 wei()->logger->alert('An alert message');
 ```
+
+输出结果
+
+![输出日志到浏览器](resources/log-to-browser.jpg)
 
 调用方式
 --------
