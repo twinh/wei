@@ -58,7 +58,7 @@ class Logger extends Base
      *
      * @var string
      */
-    protected $format = "[%datetime%] %channel%.%level%: %message%\n";
+    protected $format = "[%datetime%] %level%: %message%\n";
 
     /**
      * The date format for log message
