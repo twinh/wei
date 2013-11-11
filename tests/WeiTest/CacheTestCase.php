@@ -183,4 +183,16 @@ class CacheTestCase extends TestCase
 
         $this->assertEquals(2, $cache->get('test'));
     }
+
+    public function testGetFileContent()
+    {
+        $file = __DIR__ . '/Fixtures/5x5.gif';
+        $cache = $this->object->getFileContent($file, function($file){
+            return file_get_contents($file);
+        });
+        $cache2 = $this->object->getFileContent($file, function($file){
+            return file_get_contents($file);
+        });
+        $this->assertEquals($cache, $cache2);
+    }
 }
