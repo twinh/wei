@@ -65,7 +65,7 @@ class Logger extends Base
      *
      * @var string
      */
-    protected $dateFormat = 'Y-m-d H:i:s';
+    protected $dateFormat = 'H:i:s';
 
     /**
      * The log file name, if specify this parameter, the "dir" and "fileFormat"

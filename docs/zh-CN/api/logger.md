@@ -47,7 +47,7 @@ name         | string   | wei                               | 日志的名称,�
 level        | string   | debug                             | 默认的日志级别
 handledLevel | string   | debug                             | 记录到文件的最低日志等级,低于该等级的日志将不记录到文件中
 format       | string   | [%datetime%] %level%: %message%\n | 日志的格式
-dateFormat   | string   | Y-m-d H:i:s                       | 日志中日期的格式,使用[date](http://php.net/manual/en/function.date.php)函数转换
+dateFormat   | string   | H:i:s                             | 日志中日期的格式,使用[date](http://php.net/manual/en/function.date.php)函数转换
 file         | string   | 无                                | 日志文件的路径,留空是根据日志目录和文件名称生成
 dir          | string   | log                               | 日志文件的目录
 fileFormat   | string   | Ymd.\l\o\g                        | 日志文件名称的格式
