@@ -52,10 +52,13 @@ class EndsWith extends BaseValidator
                 return false;
             }
         } elseif (is_array($this->findMe)) {
-            $pattern = '/' . implode('|', $this->findMe) . '$/';
-            if (!$this->case) {
-                $pattern = $pattern . 'i';
+            $pattern = array();
+            foreach ($this->findMe as $value) {
+                $pattern[] = preg_quote($value, '/');
             }
+            $pattern = '/' . implode('|', $pattern) . '$/';
+            $this->case || $pattern .= 'i';
+
             if (!preg_match($pattern, $input)) {
                 $this->addError('notFound');
                 return false;

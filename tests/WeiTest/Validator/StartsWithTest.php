@@ -28,6 +28,8 @@ class StartsWithTest extends TestCase
             array('abc', '', false),
             array('abc', array('A', 'B', 'C'), false),
             array('hello word', array('hel', 'hell'), false),
+            array('/abc', array('a', 'b', '/')),
+            array('#abc', array('#', 'a', '?')),
             array(123, 1),
         );
     }
