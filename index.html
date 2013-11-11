@@ -13406,6 +13406,19 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <span class="c1">// [XXXX-XX-XX XX:XX:XX] wei.DEBUG: The logger is called</span>
 </code></pre></div>
 
+<h3>直接输出日志到浏览器</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'logger'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'fileDetected'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>  <span class="c1">// 表示文件路径已经指定,不用再去检测获取</span>
+        <span class="s1">'file'</span> <span class="o">=&gt;</span> <span class="s1">'php://output'</span> <span class="c1">// 配置输出的文件为'php://output'</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+
+<span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="s1">'Output in screen'</span><span class="p">);</span>
+<span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">alert</span><span class="p">(</span><span class="s1">'An alert message'</span><span class="p">);</span>
+</code></pre></div>
+
 <h2>调用方式</h2>
 
 <h3>选项</h3>
