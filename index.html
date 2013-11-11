@@ -13403,7 +13403,7 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">getFile</span><span class="p">();</span>
 
 <span class="c1">// 可以在日志文件看到类似格式的一条日志</span>
-<span class="c1">// [XXXX-XX-XX XX:XX:XX] wei.DEBUG: The logger is called</span>
+<span class="c1">// [XXXX-XX-XX XX:XX:XX] DEBUG: The logger is called</span>
 </code></pre></div>
 
 <h3>直接输出日志到浏览器</h3>
@@ -13456,7 +13456,7 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <tr>
 <td>format</td>
 <td>string</td>
-<td>[%datetime%] %channel%.%level%: %message%\n</td>
+<td>[%datetime%] %level%: %message%\n</td>
 <td>日志的格式</td>
 </tr>
 <tr>
@@ -13568,9 +13568,17 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <p>获取日志文件</p>
 
-<h4>logger-&gt;setLevel()</h4>
+<h4>logger-&gt;setLevel($level)</h4>
 
-<p>设置默认的日志级别</p>
+<p>设置默认的日志等级</p>
+
+<h4>logger-&gt;setHandledLevel($level)</h4>
+
+<p>设置记录的最低日志等级</p>
+
+<h4>logger-&gt;clean()</h4>
+
+<p>删除日志目录下的所有文件(注意谨慎使用)</p>
   </section>
 
 <!-- api/password
