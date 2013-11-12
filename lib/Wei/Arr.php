@@ -38,29 +38,6 @@ class Arr extends Base
     }
 
     /**
-     * Returns the value of specified key in $data
-     *
-     * @param mixed $data The data, could be array, instance of \ArrayAccess,
-     *                    object or object with getter method
-     * @param string $key The key of data
-     * @return mixed|null Returns null on not found
-     */
-    public function attr($data, $key)
-    {
-        if ((is_array($data) && array_key_exists($key, $data))
-            || ($data instanceof \ArrayAccess && $data->offsetExists($key))
-        ) {
-            return $data[$key];
-        } elseif (isset($data->$key)) {
-            return $data->$key;
-        } elseif (method_exists($data, 'get' . $key)) {
-            return $data->{'get' . $key}();
-        } else {
-            return null;
-        }
-    }
-
-    /**
      * Returns a new array that the key from the array rows
      *
      * @param array $array A two-dimensional array

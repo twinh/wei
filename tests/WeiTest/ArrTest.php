@@ -4,29 +4,6 @@ namespace WeiTest;
 
 class ArrTest extends TestCase
 {
-    public function testArray()
-    {
-        $array = array(
-            'key' => 'value',
-            1 => '10',
-            11,
-        );
-
-        $arrayObject = new \ArrayObject($array);
-
-        foreach ($array as $key => $value) {
-            $this->assertEquals($value, $this->arr->attr($array, $key));
-            $this->assertEquals($value, $this->arr->attr($arrayObject, $key));
-        }
-    }
-
-    public function testPropertyAndGetter()
-    {
-        $this->assertEquals('pv', $this->arr->attr($this, 'propertyValue'));
-        $this->assertEquals('value', $this->arr->attr($this, 'value'));
-        $this->assertEquals(null, $this->arr->attr($this, 'no this property'));
-    }
-
     /**
      * test fixture for testPropertyAndGetter()
      */
