@@ -118,7 +118,7 @@ class CallTest extends TestCase
                 $test->triggeredEvents[] = 'error';
                 $test->assertTrue(true);
             },
-            'complete' => function($call) use($test, $responseText) {
+            'complete' => function(Call $call) use($test, $responseText) {
                 $test->triggeredEvents[] = 'complete';
                 $test->assertEquals($responseText, $call->getResponseText());
             }
@@ -185,7 +185,7 @@ class CallTest extends TestCase
                 'Key-Name' => 'Value',
                 'Key_Name' => 'Value with space' // overwrite previous header
             ),
-            'success' => function($data, $call) use($test) {
+            'success' => function($data, Call $call) use($test) {
                 // header set by php script
                 $test->assertEquals('value', $call->getResponseHeader('customHeader'));
 
@@ -303,7 +303,7 @@ class CallTest extends TestCase
         $call = $this->call(array(
             'url' => $this->url . '?type=json',
             'dataType' => 'serialize',
-            'error' => function($call, $textStatus, $exception) use($test) {
+            'error' => function(Call $call, $textStatus, $exception) use($test) {
                 $test->triggeredEvents[] = 'error';
                 $test->assertEquals('parser', $textStatus);
                 $test->assertInstanceOf('\ErrorException', $exception);
@@ -519,6 +519,7 @@ class CallTest extends TestCase
      */
     public function testAliasMethod($method)
     {
+        /** @var $call Call */
         $call = $this->call->{strtolower($method)}($this->url . '?test=methods', array(), 'jsonObject');
         $this->assertEquals($method, $call->getResponse()->method);
         $this->assertTrue($call->isSuccess());
@@ -542,7 +543,7 @@ class CallTest extends TestCase
             'url' => $this->url . '?wait=0.1',
             'dataType' => 'jsonObject',
             'timeout' => 50,
-            'error' => function($call, $textStatus) use($test) {
+            'error' => function(Call $call, $textStatus) use($test) {
                 $test->triggeredEvents[] = 'error';
                 $test->assertEquals('curl', $textStatus);
             }
