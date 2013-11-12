@@ -70,3 +70,4 @@ if (wei()->isEndsWith('abc', array('a', 'b', 'c'))) {
 --------
 
 * [验证器概览](../book/validators.md)
+* [检查数据是否以指定字符串开头:isStartsWith](isStartsWith.md)
