@@ -80,3 +80,4 @@ negativeMessage            | %name%不能以%findMe%开头
 --------
 
 * [验证器概览](../book/validators.md)
+* [检查数据是否以指定字符串结尾:isEndsWith](isEndsWith.md)
