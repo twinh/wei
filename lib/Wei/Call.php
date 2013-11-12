@@ -398,7 +398,9 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 
         $opts[CURLOPT_HEADER] = $this->header;
         $opts[CURLOPT_URL] = $url;
-        return $this->curlOptions + $opts + $this->defaultCurlOptions;
+
+        $this->curlOptions += $opts + $this->defaultCurlOptions;
+        return $this->curlOptions;
     }
 
     /**

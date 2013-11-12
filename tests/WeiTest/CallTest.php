@@ -2,10 +2,9 @@
 
 namespace WeiTest;
 
-use Wei\Call;
-
 /**
- * @method Call call($options)
+ * @method \Wei\Call call($options)
+ * @property \Wei\Call $call
  */
 class CallTest extends TestCase
 {
@@ -745,6 +744,14 @@ class CallTest extends TestCase
         $call = $this->call($this->url);
         $info = $call->getCurlInfo();
         $this->assertInternalType('array', $info);
+    }
+
+    public function testGetCurlOption()
+    {
+        $call = $this->call($this->url, array(
+            'header' => true
+        ));
+        $this->assertEquals(true, $call->getCurlOption(CURLOPT_HEADER));
     }
 
     public function assertCalledEvents($events)
