@@ -2,6 +2,8 @@
 
 namespace WeiTest;
 
+use \Wei\Call;
+
 /**
  * @method \Wei\Call call($options)
  * @property \Wei\Call $call

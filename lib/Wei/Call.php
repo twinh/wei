@@ -416,7 +416,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             $curlInfo = curl_getinfo($ch);
 
             // Parse response header
-            if ($this->header) {
+            if ($this->getCurlOption(CURLOPT_HEADER)) {
                 // Fixes header size error when use CURLOPT_PROXY and CURLOPT_HTTPPROXYTUNNEL is true
                 // http://sourceforge.net/p/curl/bugs/1204/
                 if (false !== stripos($response, "HTTP/1.1 200 Connection established\r\n\r\n")) {
