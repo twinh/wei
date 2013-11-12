@@ -28,6 +28,7 @@ class EndsWithTest extends TestCase
             array('abc', '', false),
             array('abc', array('C', 'B', 'A'), false),
             array('hello word', array('wo', 'word'), true),
+            array('#?\\', array('#', '?', '\\')),
             array(123, 3)
         );
     }
