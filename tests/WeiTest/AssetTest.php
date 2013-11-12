@@ -36,6 +36,13 @@ class AssetTest extends TestCase
                 array(
                     'version' => '1'
                 ),
+            ),
+            array(
+                'version.js?a=b',
+                '/version.js?a=b&v=1',
+                array(
+                    'version' => '1'
+                ),
             )
         );
     }

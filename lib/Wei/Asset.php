@@ -39,7 +39,7 @@ class Asset extends Base
     {
         $url = $this->baseUrl . $file;
         if ($this->version) {
-            $url .= '?v=' . $this->version;
+            $url .= ((false === strpos($url, '?')) ? '?' : '&') . 'v=' . $this->version;
         }
         return $url;
     }
