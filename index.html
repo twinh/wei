@@ -12861,47 +12861,6 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h2>案例</h2>
 
-<h3>获取数组或对象中指定键名的值</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">Getter</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">getKey</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="s1">'Get from Getter'</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-    <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'Get from array'</span><span class="p">,</span>
-    <span class="p">),</span>
-    <span class="k">new</span> <span class="nx">\ArrayObject</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-        <span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'Get from ArrayObject'</span>
-    <span class="p">)),</span>
-    <span class="nb">call_user_func</span><span class="p">(</span><span class="k">function</span><span class="p">(){</span>
-        <span class="nv">$object</span> <span class="o">=</span> <span class="k">new</span> <span class="k">stdClass</span><span class="p">();</span>
-        <span class="nv">$object</span><span class="o">-&gt;</span><span class="na">key</span> <span class="o">=</span> <span class="s1">'Get from stdClass'</span><span class="p">;</span>
-        <span class="k">return</span> <span class="nv">$object</span><span class="p">;</span>
-    <span class="p">}),</span>
-    <span class="k">new</span> <span class="nx">Getter</span><span class="p">()</span>
-<span class="p">);</span>
-
-<span class="k">foreach</span> <span class="p">(</span><span class="nv">$data</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">arr</span><span class="o">-&gt;</span><span class="na">attr</span><span class="p">(</span><span class="nv">$row</span><span class="p">,</span> <span class="s1">'key'</span><span class="p">)</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<h3>运行结果</h3>
-
-<div class="highlight"><pre><code class="php"><span class="s1">'Get from array'</span>
-
-<span class="s1">'Get from ArrayObject'</span>
-
-<span class="s1">'Get from stdClass'</span>
-
-<span class="s1">'Get from Getter'</span>
-</code></pre></div>
-
 <h3>对二维数组进行按order键名,从大到小排序</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -12936,21 +12895,6 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p><em>无</em></p>
 
 <h3>方法</h3>
-
-<h4>arr-&gt;attr($data, $key)</h4>
-
-<p>获取数组或对象中指定键名的值</p>
-
-<p>取值的顺序如下</p>
-
-<ol>
-<li>如果<code>$data</code>是数组或<code>\ArrayAccess</code>的实例化对象,检查并返回<code>$data[$key]</code>的值</li>
-<li>如果<code>$data</code>是对象,检查属性<code>$key</code>是否存在,存在则返回<code>$data-&gt;$key</code>的值</li>
-<li>如果<code>$data</code>是对象且方法<code>get. $key</code>存在,返回<code>$data-&gt;{'get' . $key}</code>
-</li>
-<li>如果以上均不存在,返回null</li>
-</ol><p>使用<code>attr()</code>方法的好处在于你不用关心要取值的变量类型,不管它是数组,对象数组(\ArrayAccess),还是
-其他对象</p>
 
 <h4>arr-&gt;sort($array, $key = 'order', $type = SORT_ASC)</h4>
 
