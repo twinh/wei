@@ -15,7 +15,7 @@ wei()->logger->debug('The logger is called');
 echo wei()->logger->getFile();
 
 // 可以在日志文件看到类似格式的一条日志
-// [XXXX-XX-XX XX:XX:XX] DEBUG: The logger is called
+// [XX:XX:XX] DEBUG: The logger is called
 ```
 
 ### 直接输出日志到浏览器
