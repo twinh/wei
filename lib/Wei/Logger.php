@@ -314,7 +314,9 @@ class Logger extends Base
         $file = &$this->file;
 
         if (!is_dir($this->dir) && false === @mkdir($this->dir, 0777, true)) {
-            throw new \RuntimeException(sprintf('Unable to create directory "%s"', $this->dir));
+            $message = sprintf('Unable to create directory "%s"', $this->dir);
+            ($e = error_get_last()) && $message .= ': ' . $e['message'];
+            throw new \RuntimeException($message);
         }
 
         $file = realpath($this->dir) . '/' . date($this->fileFormat);
