@@ -228,10 +228,10 @@ class FileCache extends BaseCache
      */
     public function setDir($dir)
     {
-        if (!is_dir($dir)) {
-            if (true !== @mkdir($dir, 0777, true)) {
-                throw new \RuntimeException(sprintf('Failed to create directory: "%s"', $dir));
-            }
+        if (!is_dir($dir) && !@mkdir($dir, 0777, true)) {
+            $message = sprintf('Failed to create directory "%s"', $dir);
+            ($e = error_get_last()) && $message .= ': ' . $e['message'];
+            throw new \RuntimeException($message);
         }
         $this->dir = $dir;
         return $this;

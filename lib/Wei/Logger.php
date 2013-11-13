@@ -313,8 +313,8 @@ class Logger extends Base
         $this->handle = null;
         $file = &$this->file;
 
-        if (!is_dir($this->dir) && false === @mkdir($this->dir, 0777, true)) {
-            $message = sprintf('Unable to create directory "%s"', $this->dir);
+        if (!is_dir($this->dir) && !@mkdir($this->dir, 0777, true)) {
+            $message = sprintf('Fail to create directory "%s"', $this->dir);
             ($e = error_get_last()) && $message .= ': ' . $e['message'];
             throw new \RuntimeException($message);
         }
