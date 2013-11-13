@@ -194,9 +194,8 @@
       </ul>
     </li>
     <li>
-      <a href="#arr">其他</a>
+      <a href="#config">其他</a>
       <ul class="nav">
-        <li><a href="#arr">arr</a></li>
         <li><a href="#config">config</a></li>
         <li><a href="#env">env</a></li>
         <li><a href="#error">error</a></li>
@@ -12850,55 +12849,6 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <h4>view-&gt;setDirs($dirs)</h4>
 
 <p>设置模板所在的目录</p>
-  </section>
-
-<!-- api/arr
-  ================================================== -->
-  <section id="arr">
-  <div class="page-header"><h1>Arr</h1></div>
-
-<p>数组工具类,提供一些实用的数组操作方法</p>
-
-<h2>案例</h2>
-
-<h3>对二维数组进行按order键名,从大到小排序</h3>
-
-<div class="highlight"><pre><code class="php"><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-    <span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'order'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'order'</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">)</span>
-<span class="p">);</span>
-
-<span class="nb">print_r</span><span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">arr</span><span class="o">-&gt;</span><span class="na">sort</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="s1">'order'</span><span class="p">,</span> <span class="nx">SORT_DESC</span><span class="p">));</span>
-</code></pre></div>
-
-<h3>运行结果</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">Array</span>
-<span class="p">(</span>
-    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
-        <span class="p">(</span>
-            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
-            <span class="p">[</span><span class="nx">order</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2</span>
-        <span class="p">)</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
-        <span class="p">(</span>
-            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2</span>
-            <span class="p">[</span><span class="nx">order</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
-        <span class="p">)</span>
-<span class="p">)</span>
-</code></pre></div>
-
-<h2>调用方法</h2>
-
-<h3>选项</h3>
-
-<p><em>无</em></p>
-
-<h3>方法</h3>
-
-<h4>arr-&gt;sort($array, $key = 'order', $type = SORT_ASC)</h4>
-
-<p>对一个二维数组进行排序,类似SQL的ORDER BY语句</p>
   </section>
 
 <!-- api/config
