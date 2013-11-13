@@ -42,7 +42,12 @@ class WeiTest extends TestCase
         $this->assertSame('b', $wei->getConfig('test2:a'));
         $this->assertSame(array('a' => 'b'), $wei->getConfig('test2'));
 
+        $wei->setConfig('test2', 'a', 'b');
+
         $wei->setConfig('test2:a:b', 'c');
+
+        $wei->setConfig('test2', 'a', 'b', 'c');
+
         $this->assertSame('c', $wei->getConfig('test2:a:b'));
 
         $wei->setConfig('test.request', array());

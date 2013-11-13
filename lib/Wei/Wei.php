@@ -523,7 +523,7 @@ namespace Wei
         }
 
         /**
-         * Get object's configuration
+         * Get services' configuration
          *
          * @param string $name The name of configuration
          * @param mixed $default The default value if configuration not found

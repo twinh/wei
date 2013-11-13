@@ -9,7 +9,7 @@
 namespace Wei;
 
 /**
- * A simple implementation of Cache\CacheInterface
+ * The base class for cache services
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
