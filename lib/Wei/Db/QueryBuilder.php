@@ -229,6 +229,7 @@ class QueryBuilder implements \ArrayAccess, \IteratorAggregate
     /**
      * Executes the generated query and returns all array results
      *
+     * @throws \RuntimeException When index field not in fetched data
      * @return array|false
      */
     public function fetchAll()
