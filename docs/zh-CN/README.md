@@ -169,7 +169,6 @@ API参考目录
 
 #### 其他
 
-* [arr](api/arr.md) - 数组工具类,提供一些实用的数组操作方法
 * [config](api/config.md) - 配置信息管理
 * [env](api/env.md) - 环境检测及根据不同环境加载不同的配置文件
 * [error](api/error.md) - 提供简洁友好的错误界面

@@ -86,7 +86,6 @@ namespace Wei
      * @method   string         url($uri) Build URL by specified uri and parameters
      *
      * Other
-     * @property Arr        $arr An util object provides some useful method to manipulation array
      * @property Config     $config A object to manage object configurations
      * @property Counter    $counter A counter service
      * @property Env        $env A object to detect the environment name and load configuration by environment name
