@@ -260,12 +260,10 @@ class FileCache extends BaseCache
         if (!$handle = fopen($file, $mode)) {
             return false;
         }
-
         if (!flock($handle, $operation)) {
             fclose($handle);
             return false;
         }
-
         return $handle;
     }
 
@@ -311,9 +309,9 @@ class FileCache extends BaseCache
     /**
      * Write content, release lock and close file
      *
-     * @param  resouce $handle  file handle
-     * @param  string  $content the value of cache
-     * @param  bool    $rewrite whether rewrite the whole file
+     * @param  resource $handle  file handle
+     * @param  string   $content the value of cache
+     * @param  bool     $rewrite whether rewrite the whole file
      * @return boolean
      */
     protected function writeAndRelease($handle, $content, $rewrite = false)
