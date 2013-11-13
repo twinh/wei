@@ -13362,8 +13362,8 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'logger'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'fileDetected'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>  <span class="c1">// 表示文件路径已经指定,不用再去检测获取</span>
         <span class="s1">'file'</span> <span class="o">=&gt;</span> <span class="s1">'php://output'</span> <span class="c1">// 配置输出的文件为'php://output'</span>
+        <span class="s1">'fileDetected'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>  <span class="c1">// 表示文件路径已经指定,不用再去检测获取</span>
     <span class="p">)</span>
 <span class="p">));</span>
 
@@ -13418,12 +13418,6 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <td>日志中日期的格式,使用<a href="http://php.net/manual/en/function.date.php" target="_blank">date</a>函数转换</td>
 </tr>
 <tr>
-<td>file</td>
-<td>string</td>
-<td>无</td>
-<td>日志文件的路径,留空是根据日志目录和文件名称生成</td>
-</tr>
-<tr>
 <td>dir</td>
 <td>string</td>
 <td>log</td>
@@ -13440,6 +13434,18 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <td>int</td>
 <td>134217728</td>
 <td>日志文件最大容量,单位是字节,默认是128mb,设为0表示不限制大小</td>
+</tr>
+<tr>
+<td>file</td>
+<td>string</td>
+<td>无</td>
+<td>日志文件的路径,留空表示根据<code>dir</code>,<code>fileFormat</code>和<code>fileSize</code>选项生成,不留空的话需设置<code>fileDetected</code>才有效</td>
+</tr>
+<tr>
+<td>fileDetected</td>
+<td>bool</td>
+<td>false</td>
+<td>日志文件路径是否已确认,与<code>file</code>选项搭配使用</td>
 </tr>
 </tbody>
 </table><h4>日志等级及使用场景</h4>
