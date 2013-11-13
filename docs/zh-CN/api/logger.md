@@ -23,8 +23,8 @@ echo wei()->logger->getFile();
 ```php
 wei(array(
     'logger' => array(
-        'fileDetected' => true,  // 表示文件路径已经指定,不用再去检测获取
         'file' => 'php://output' // 配置输出的文件为'php://output'
+        'fileDetected' => true,  // 表示文件路径已经指定,不用再去检测获取
     )
 ));
 
@@ -41,17 +41,18 @@ wei()->logger->alert('An alert message');
 
 ### 选项
 
-名称         | 类型     | 默认值                            | 说明
--------------|----------|-----------------------------------|------
-name         | string   | wei                               | 日志的名称,可以每个模块设定一个名称进行区分
-level        | string   | debug                             | 默认的日志级别
-handledLevel | string   | debug                             | 记录到文件的最低日志等级,低于该等级的日志将不记录到文件中
-format       | string   | [%datetime%] %level%: %message%\n | 日志的格式
-dateFormat   | string   | H:i:s                             | 日志中日期的格式,使用[date](http://php.net/manual/en/function.date.php)函数转换
-file         | string   | 无                                | 日志文件的路径,留空是根据日志目录和文件名称生成
-dir          | string   | log                               | 日志文件的目录
-fileFormat   | string   | Ymd.\l\o\g                        | 日志文件名称的格式
-fileSize     | int      | 134217728                         | 日志文件最大容量,单位是字节,默认是128mb,设为0表示不限制大小
+名称         | 类型   | 默认值                            | 说明
+-------------|--------|-----------------------------------|------
+name         | string | wei                               | 日志的名称,可以每个模块设定一个名称进行区分
+level        | string | debug                             | 默认的日志级别
+handledLevel | string | debug                             | 记录到文件的最低日志等级,低于该等级的日志将不记录到文件中
+format       | string | [%datetime%] %level%: %message%\n | 日志的格式
+dateFormat   | string | H:i:s                             | 日志中日期的格式,使用[date](http://php.net/manual/en/function.date.php)函数转换
+dir          | string | log                               | 日志文件的目录
+fileFormat   | string | Ymd.\l\o\g                        | 日志文件名称的格式
+fileSize     | int    | 134217728                         | 日志文件最大容量,单位是字节,默认是128mb,设为0表示不限制大小
+file         | string | 无                                | 日志文件的路径,留空表示根据`dir`,`fileFormat`和`fileSize`选项生成,不留空的话需设置`fileDetected`才有效
+fileDetected | bool   | false                             | 日志文件路径是否已确认,与`file`选项搭配使用
 
 #### 日志等级及使用场景
 
