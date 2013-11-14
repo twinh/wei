@@ -1334,4 +1334,24 @@ class DbTest extends TestCase
 
         $this->assertEquals($groupId + 1, $member['group_id']);
     }
+
+    public function testNewRecord()
+    {
+        $this->initFixtures();
+
+        // Use record as array
+        $member = $this->db('member')->where('id = 1');
+        $this->assertEquals('1', $member['id']);
+
+        // Use record as 2d array
+        $members = $this->db('member')->where('group_id = 1');
+        foreach ($members as $member) {
+            $this->assertEquals(1, $member['group_id']);
+        }
+
+        $member1 = $this->db('member');
+        $member2 = $this->db('member');
+        $this->assertEquals($member1, $member2);
+        $this->assertNotSame($member1, $member2);
+    }
 }

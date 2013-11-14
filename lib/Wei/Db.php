@@ -156,7 +156,7 @@ class Db extends Base
      *
      * @var string
      */
-    protected $recordClass = 'Wei\Db\Record';
+    protected $recordClass = 'Wei\Record';
 
     /**
      * The collection class to store database records
@@ -611,8 +611,7 @@ class Db extends Base
      */
     public function createQueryBuilder($table = null)
     {
-        $qb = new Db\QueryBuilder($this);
-        return $qb->from($table);
+        return $this->create($table);
     }
 
     /**
@@ -627,7 +626,7 @@ class Db extends Base
     {
         $class = $this->getRecordClass($table);
         return new $class(array(
-            'wei'    => $this->wei,
+            'wei'       => $this->wei,
             'db'        => $this,
             'table'     => $this->getTable($table),
             'isNew'     => $isNew,

@@ -127,16 +127,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate
     protected $state = self::STATE_CLEAN;
 
     /**
-     * @var Record
-     */
-    protected $record;
-
-    /**
-     * @var Collection
-     */
-    protected $records;
-
-    /**
      * The callback triggered after load a record
      *
      * @var callable
@@ -233,8 +223,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate
      */
     public function setTable($table)
     {
-        $this->table = $table;
-        return $this;
+        return $this->from($table);
     }
 
     /**
@@ -537,13 +526,14 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate
     public function find()
     {
         $data = $this->fetch();
-        return $data ? $this->db->create($this->table, $data, false) : false;
+        $this->data = $data ? $this->db->create($this->table, $data, false) : false;
+        return $this;
     }
 
     /**
      * Executes the generated SQL and returns the found record collection object or false
      *
-     * @return Collection
+     * @return $this
      */
     public function findAll()
     {
@@ -553,8 +543,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate
         foreach ($data as $key => $row) {
             $records[$key] = $this->db->create($this->table, $row, false);
         }
-
-        return new Collection($records);
+        $this->data = $records;
+        return $this;
     }
 
     /**
@@ -1539,9 +1529,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate
     {
         if (!$this->data) {
             if (is_int($offset)) {
-                $this->data = $this->findAll();
+                $this->findAll();
             } else {
-                $this->data = $this->fetch();
+                $this->find();
             }
         }
     }
