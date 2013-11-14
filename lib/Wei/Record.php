@@ -70,6 +70,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected $oldData = array();
 
+    protected $loaded = false;
+
     /* The query types. */
     const SELECT = 0;
     const DELETE = 1;
@@ -402,6 +404,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function set($name, $value = null)
     {
+        $this->loaded = true;
         if (1 == func_num_args()) {
             return $this->add('set', $name, true);
         } else {
@@ -554,7 +557,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function find()
     {
         $data = $this->fetch();
-        $this->data = $data ? $this->db->create($this->table, $data, false) : false;
+        $this->data = $data ?: array();
         return $data ? $this : false;
     }
 
@@ -1538,7 +1541,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected function loadData($offset)
     {
-        if (!$this->isNew && !$this->data) {
+        if (!$this->loaded && !$this->isNew) {
+            $this->loaded = true;
             if (is_int($offset)) {
                 $this->findAll();
             } else {
