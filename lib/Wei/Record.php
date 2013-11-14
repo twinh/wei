@@ -371,7 +371,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function get($name)
     {
-        $isColl = is_array(current($this->data));
+        $isColl = current($this->data) instanceof static;
 
         // Check if field exists when it is not a collection
         if (!$isColl && !in_array($name, $this->getFields())) {
