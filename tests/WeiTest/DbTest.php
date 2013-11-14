@@ -949,7 +949,6 @@ class DbTest extends TestCase
         $member = $query->find();
         $this->assertFalse($member);
 
-
         $query = $this
             ->db('member')
             ->andWhere('id = ?', '1', PDO::PARAM_INT);

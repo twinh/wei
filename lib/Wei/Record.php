@@ -527,7 +527,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     {
         $data = $this->fetch();
         $this->data = $data ? $this->db->create($this->table, $data, false) : false;
-        return $this;
+        return $data ? $this : false;
     }
 
     /**
