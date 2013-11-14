@@ -15,7 +15,7 @@ namespace Wei;
  * @property    \Wei\Db $db A database service inspired by Doctrine DBAL
  * @method      \Wei\Db\QueryBuilder db($table = null) Create a new query builder
  */
-class Record extends Base implements \ArrayAccess, \IteratorAggregate
+class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countable
 {
     /**
      * The record table name
