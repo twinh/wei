@@ -1429,7 +1429,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate
      */
     public function offsetExists($offset)
     {
-        $this->loadRecord($offset);
+        $this->loadData($offset);
         return isset($this->data[$offset]);
     }
 
@@ -1441,7 +1441,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate
      */
     public function offsetGet($offset)
     {
-        $this->loadRecord($offset);
+        $this->loadData($offset);
         return $this->get($offset);
     }
 
@@ -1453,7 +1453,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate
      */
     public function offsetSet($offset, $value)
     {
-        $this->loadRecord($offset);
+        $this->loadData($offset);
         $this->set($offset, $value);
     }
 
@@ -1464,7 +1464,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate
      */
     public function offsetUnset($offset)
     {
-        $this->loadRecord($offset);
+        $this->loadData($offset);
         $this->remove($offset);
     }
 
@@ -1475,7 +1475,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate
      */
     public function getIterator()
     {
-        $this->loadRecord(0);
+        $this->loadData(0);
         return new \ArrayIterator($this->record);
     }
 
@@ -1525,7 +1525,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate
      * @param int|string $offset
      * @return false|Record
      */
-    protected function loadRecord($offset)
+    protected function loadData($offset)
     {
         if (!$this->data) {
             if (is_int($offset)) {
