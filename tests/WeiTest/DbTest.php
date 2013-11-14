@@ -1222,6 +1222,7 @@ class DbTest extends TestCase
         $this->assertFalse($member->isModified('id'));
         $this->assertTrue($member->isModified('name'));
         $this->assertTrue($member->isModified());
+
         $this->assertNull($member->getOldData('name'));
 
         $member['name'] = 'aa';

@@ -1543,7 +1543,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected function loadData($offset)
     {
-        if (!$this->data) {
+        if (!$this->isNew && !$this->data) {
             if (is_int($offset)) {
                 $this->findAll();
             } else {
