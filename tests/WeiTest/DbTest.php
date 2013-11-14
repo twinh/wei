@@ -2,12 +2,11 @@
 
 namespace WeiTest;
 
-use Wei\DB\QueryBuilder;
 use PDO;
 
 /**
  * @property \Wei\Db db
- * @method \Wei\Db\QueryBuilder db($table)
+ * @method \Wei\Record db($table)
  */
 class DbTest extends TestCase
 {
@@ -602,8 +601,7 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $query = $this->db
-            ->createQueryBuilder()
+        $query = $this->db()
             ->update('member')
             ->set('name = ?')
             ->where('id = 1')

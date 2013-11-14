@@ -221,7 +221,7 @@ class Db extends Base
      */
     public function __invoke($table = null)
     {
-        return $this->createQueryBuilder($table);
+        return $this->create($table);
     }
 
     /**
@@ -594,17 +594,6 @@ class Db extends Base
     {
         $this->connect();
         return $this->pdo->errorInfo();
-    }
-
-    /**
-     * Create a new instance of a SQL query builder
-     *
-     * @param string $table The name of database table
-     * @return Record
-     */
-    public function createQueryBuilder($table = null)
-    {
-        return $this->create($table);
     }
 
     /**
