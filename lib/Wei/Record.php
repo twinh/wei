@@ -387,18 +387,31 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
     /**
      * Set the record field value
+     * /Sets a new value for a field in a bulk update query.
+     *
+     *  * ```
+     * $qb = $db->createQueryBuilder()
+     *     ->update('users u')
+     *     ->set('u.password = ?')
+     *     ->where('u.id = ?');
+     * ```
      *
      * @param string $name
      * @param mixed $value
+     * @return $this
      */
-    public function set($name, $value)
+    public function set($name, $value = null)
     {
-        if (in_array($name, $this->getFields())) {
-            $this->oldData[$name] = isset($this->data[$name]) ? $this->data[$name] : null;
-            $this->data[$name] = $value;
-            $this->isModified = true;
+        if (1 == func_num_args()) {
+            return $this->add('set', $name, true);
         } else {
-            $this->$name = $value;
+            if (in_array($name, $this->getFields())) {
+                $this->oldData[$name] = isset($this->data[$name]) ? $this->data[$name] : null;
+                $this->data[$name] = $value;
+                $this->isModified = true;
+            } else {
+                $this->$name = $value;
+            }
         }
     }
 
@@ -1036,24 +1049,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             'table'     => $table,
             'condition' => $on
         ), true);
-    }
-
-    /**
-     * Sets a new value for a field in a bulk update query.
-     *
-     * ```
-     * $qb = $db->createQueryBuilder()
-     *     ->update('users u')
-     *     ->set('u.password = ?')
-     *     ->where('u.id = ?');
-     * ```
-     *
-     * @param string $set The SET clause
-     * @return $this
-     */
-    public function TODOset($set)
-    {
-        return $this->add('set', $set, true);
     }
 
     /**
