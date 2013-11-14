@@ -1476,7 +1476,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate
     public function getIterator()
     {
         $this->loadData(0);
-        return new \ArrayIterator($this->record);
+        return new \ArrayIterator($this->data);
     }
 
     /**
