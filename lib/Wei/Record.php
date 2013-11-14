@@ -796,6 +796,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function add($sqlPartName, $sqlPart, $append = false, $type = null)
     {
+        // TODO is it OK ?
+        $this->isNew = false;
+
         if (!$sqlPart) {
             return $this;
         }
