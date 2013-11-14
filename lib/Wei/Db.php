@@ -159,13 +159,6 @@ class Db extends Base
     protected $recordClass = 'Wei\Record';
 
     /**
-     * The collection class to store database records
-     *
-     * @var string
-     */
-    protected $collectionClass = 'Wei\Db\Collection';
-
-    /**
      * An associative array that the key is table name and the value is class name
      *
      * @var array
@@ -224,7 +217,7 @@ class Db extends Base
      * Create a new instance of a SQL query builder with specified table name
      *
      * @param string $table The name of database table
-     * @return Db\QueryBuilder
+     * @return Record
      */
     public function __invoke($table = null)
     {
@@ -607,7 +600,7 @@ class Db extends Base
      * Create a new instance of a SQL query builder
      *
      * @param string $table The name of database table
-     * @return Db\QueryBuilder
+     * @return Record
      */
     public function createQueryBuilder($table = null)
     {
@@ -620,7 +613,7 @@ class Db extends Base
      * @param string $table The name of database table
      * @param array $data The data for table record
      * @param bool $isNew Whether it's a new record and have not save to database
-     * @return Db\Record
+     * @return Record
      */
     public function create($table, $data = array(), $isNew = true)
     {
@@ -650,7 +643,7 @@ class Db extends Base
      *
      * @param string $table The name of table
      * @param string|array $id The primary key value or an associative array containing column-value pairs
-     * @return Db\Record|false
+     * @return Record|false
      */
     public function find($table, $id)
     {
@@ -664,7 +657,7 @@ class Db extends Base
      *
      * @param string $table
      * @param string|array $id The primary key value or an associative array containing column-value pairs
-     * @return Db\Record|false
+     * @return Record|false
      * @throws \Exception
      */
     public function findOne($table, $id)
@@ -683,7 +676,7 @@ class Db extends Base
      * @param string $table The name of table
      * @param string $id The primary key value or an associative array containing column-value pairs
      * @param array $data The data to create a new record when record not found
-     * @return Db\Record
+     * @return Record
      */
     public function findOrCreate($table, $id, $data = array())
     {
@@ -713,7 +706,7 @@ class Db extends Base
      *
      * @param string $table The name of database table
      * @param array|false $where The primary key value or an associative array containing column-value pairs
-     * @return Db\Collection
+     * @return Record
      */
     public function findAll($table, $where = false)
     {
@@ -724,7 +717,7 @@ class Db extends Base
             $records[] = $this->create($table, $row, false);
         }
 
-        return new $this->collectionClass($records);
+        return $this->create($this->table, $records, false);
     }
 
     /**
@@ -732,7 +725,7 @@ class Db extends Base
      *
      * @param string $name
      * @param array $args
-     * @return Db\Record|false
+     * @return Record|false
      */
     public function __call($name, $args)
     {
