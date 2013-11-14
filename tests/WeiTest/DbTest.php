@@ -787,7 +787,11 @@ class DbTest extends TestCase
         $this->assertInstanceOf('\Wei\Record', $members);
 
         // ToArray
-        $this->assertInternalType('array', $members->toArray());
+        $memberArray = $members->toArray();
+        $this->assertInternalType('array', $memberArray);
+        foreach ($memberArray as $member) {
+            $this->assertInternalType('array', $member);
+        }
 
         // Filter
         $firstGroupMembers = $members->filter(function($member){
@@ -991,17 +995,17 @@ class DbTest extends TestCase
     {
         $query = $this->db('member')->offset(1)->limit(1);
 
-        $this->assertEquals(1, $query->get('offset'));
-        $this->assertEquals(1, $query->get('limit'));
+        $this->assertEquals(1, $query->getSqlPart('offset'));
+        $this->assertEquals(1, $query->getSqlPart('limit'));
 
-        $queryParts = $query->getAll();
+        $queryParts = $query->getSqlParts();
         $this->assertArrayHasKey('offset', $queryParts);
         $this->assertArrayHasKey('limit', $queryParts);
 
         $query->resetAll();
 
-        $this->assertEquals(null, $query->get('offset'));
-        $this->assertEquals(null, $query->get('limit'));
+        $this->assertEquals(null, $query->getSqlPart('offset'));
+        $this->assertEquals(null, $query->getSqlPart('limit'));
     }
 
     public function testGetTableFromQueryBuilder()

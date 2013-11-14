@@ -43,8 +43,8 @@ namespace Wei
      * @method   mixed      bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
      *
      * Database
-     * @property Db                     $db A database service inspired by Doctrine DBAL
-     * @method   \Wei\Db\QueryBuilder   db($table = null) Create a new instance of a SQL query builder with specified table name
+     * @property Db             $db A database service inspired by Doctrine DBAL
+     * @method   \Wei\Record    db($table = null) Create a new instance of a SQL query builder with specified table name
      *
      * @property Call       $call A object handles HTTP request like jQuery Ajax
      * @method   \Wei\Call  call(array $options) Create a new call object and execute
