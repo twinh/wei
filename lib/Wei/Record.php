@@ -890,31 +890,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Turns the query being built into a bulk delete query that ranges over
-     * a certain table.
-     *
-     * ```
-     * $qb = $db->createQueryBuilder()
-     *     ->delete('users u')
-     *     ->where('u.id = :user_id');
-     *     ->setParameter(':user_id', 1);
-     * ```
-     *
-     * @param string $table The table whose rows are subject to the deletion.
-     * @return $this
-     */
-    public function TODOdelete($table = null)
-    {
-        $this->type = self::DELETE;
-
-        if ($table) {
-            return $this->from($table);
-        } else {
-            return $this;
-        }
-    }
-
-    /**
      * Turns the query being built into a bulk update query that ranges over
      * a certain table
      *
