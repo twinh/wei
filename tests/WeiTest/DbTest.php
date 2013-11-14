@@ -103,7 +103,7 @@ class DbTest extends TestCase
     public function testGetRecord()
     {
         $this->initFixtures();
-        $this->assertInstanceOf('\Wei\Db\Record', $this->db->create('member'));
+        $this->assertInstanceOf('\Wei\Record', $this->db->create('member'));
     }
 
     public function testRelation()
@@ -117,7 +117,7 @@ class DbTest extends TestCase
         /** @var $member \WeiTest\Db\Member */
         $member = $db->member('1');
 
-        $this->assertInstanceOf('\Wei\Db\Record', $member);
+        $this->assertInstanceOf('\Wei\Record', $member);
 
         $this->assertEquals('1', $member['id']);
         $this->assertEquals('twin', $member['name']);
@@ -127,7 +127,7 @@ class DbTest extends TestCase
         // Relation one-to-one
         $post = $member->getPost();
 
-        $this->assertInstanceOf('\Wei\Db\Record', $post);
+        $this->assertInstanceOf('\Wei\Record', $post);
 
         $this->assertEquals('1', $post['id']);
         $this->assertEquals('my first post', $post['name']);
@@ -136,7 +136,7 @@ class DbTest extends TestCase
         // Relation belong-to
         $group = $member->getGroup();
 
-        $this->assertInstanceOf('\Wei\Db\Record', $group);
+        $this->assertInstanceOf('\Wei\Record', $group);
 
         $this->assertEquals('1', $group['id']);
         $this->assertEquals('vip', $group['name']);
@@ -147,7 +147,7 @@ class DbTest extends TestCase
         $this->assertInstanceOf('\Wei\Db\Collection', $posts);
 
         $firstPost = $posts[0];
-        $this->assertInstanceOf('\Wei\Db\Record', $firstPost);
+        $this->assertInstanceOf('\Wei\Record', $firstPost);
 
         $this->assertEquals('1', $firstPost['id']);
         $this->assertEquals('my first post', $firstPost['name']);
@@ -177,7 +177,7 @@ class DbTest extends TestCase
 
         $post = $member->post = $db->find('post', array('member_id' => $member['id']));
 
-        $this->assertInstanceOf('\Wei\Db\Record', $post);
+        $this->assertInstanceOf('\Wei\Record', $post);
 
         $this->assertEquals('1', $post['id']);
         $this->assertEquals('my first post', $post['name']);
@@ -583,8 +583,8 @@ class DbTest extends TestCase
             ->indexBy('name')
             ->findAll();
 
-        $this->assertInstanceOf('\Wei\Db\Record', $members['twin']);
-        $this->assertInstanceOf('\Wei\Db\Record', $members['test']);
+        $this->assertInstanceOf('\Wei\Record', $members['twin']);
+        $this->assertInstanceOf('\Wei\Record', $members['test']);
 
         $members = $members->toArray();
 
@@ -1200,7 +1200,7 @@ class DbTest extends TestCase
         $this->initFixtures();
 
         $record = $this->db->findOne('member', 1);
-        $this->assertInstanceOf('\Wei\Db\Record', $record);
+        $this->assertInstanceOf('\Wei\Record', $record);
     }
 
     public function testFindOneWithException()

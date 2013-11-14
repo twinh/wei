@@ -361,15 +361,18 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function get($name)
     {
-        if (in_array($name, $this->getFields())) {
-            return isset($this->data[$name]) ? $this->data[$name] : null;
+        $isColl = is_array(current($this->data));
+
+        // Check if field exists when it is not a collection
+        if (!$isColl && !in_array($name, $this->getFields())) {
+            throw new \InvalidArgumentException(sprintf(
+                'Field "%s" not found in record class "%s"',
+                $name,
+                get_class($this)
+            ));
         }
 
-        throw new \InvalidArgumentException(sprintf(
-            'Field "%s" not found in record class "%s"',
-            $name,
-            get_class($this)
-        ));
+        return isset($this->data[$name]) ? $this->data[$name] : null;
     }
 
     /**
@@ -545,6 +548,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         foreach ($data as $key => $row) {
             $records[$key] = $this->db->create($this->table, $row, false);
         }
+
         $this->data = $records;
         return $this;
     }
