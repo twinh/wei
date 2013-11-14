@@ -773,7 +773,7 @@ class DbTest extends TestCase
 
         $member = $this->db->member('1');
 
-        $this->setExpectedException('\InvalidArgumentException', 'Field "notFound" not found in record class "Wei\Db\Record"');
+        $this->setExpectedException('\InvalidArgumentException', 'Field "notFound" not found in record class "Wei\Record"');
 
         $member['notFound'];
     }
@@ -784,7 +784,7 @@ class DbTest extends TestCase
 
         $members = $this->db->findAll('member');
 
-        $this->assertInstanceOf('\Wei\Db\Collection', $members);
+        $this->assertInstanceOf('\Wei\Record', $members);
 
         // ToArray
         $this->assertInternalType('array', $members->toArray());

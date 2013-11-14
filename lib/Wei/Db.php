@@ -706,7 +706,7 @@ class Db extends Base
             $records[] = $this->create($table, $row, false);
         }
 
-        return $this->create($this->table, $records, false);
+        return $this->create($table, $records, false);
     }
 
     /**
