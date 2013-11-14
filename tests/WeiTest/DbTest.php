@@ -144,7 +144,7 @@ class DbTest extends TestCase
         // Relation one-to-many
         $posts = $member->getPosts();
 
-        $this->assertInstanceOf('\Wei\Db\Collection', $posts);
+        $this->assertInstanceOf('\Wei\Record', $posts);
 
         $firstPost = $posts[0];
         $this->assertInstanceOf('\Wei\Record', $firstPost);
@@ -799,15 +799,8 @@ class DbTest extends TestCase
         });
 
         $this->assertEquals('1', $firstGroupMembers[0]['group_id']);
-        $this->assertInstanceOf('\Wei\Db\Collection', $firstGroupMembers);
+        $this->assertInstanceOf('\Wei\Record', $firstGroupMembers);
         $this->assertNotSame($members, $firstGroupMembers);
-
-        // Reduce
-        $count = $members->reduce(function($count, $member){
-            return ++$count;
-        });
-
-        $this->assertEquals(2, $count);
     }
 
     public function testRecordUnset()

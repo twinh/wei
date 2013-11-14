@@ -746,7 +746,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function page($page)
     {
-        $limit = $this->get('limit');
+        $limit = $this->getSqlPart('limit');
 
         if (!$limit) {
             $limit = 10;
