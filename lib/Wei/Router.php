@@ -145,9 +145,7 @@ class Router extends Base
      */
     public function remove($id)
     {
-        if (isset($this->routes[$id])) {
-            unset($this->routes[$id]);
-        }
+        unset($this->routes[$id]);
         return $this;
     }
 
@@ -366,7 +364,6 @@ class Router extends Base
                 return $uri;
             }
         }
-
         return $this->buildQuery($parameters);
     }
 
