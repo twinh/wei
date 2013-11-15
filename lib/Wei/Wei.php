@@ -763,15 +763,11 @@ namespace Wei
          */
         public function setAutoloadMap(array $map)
         {
-            foreach ($map as &$dir) {
-                $dir = realpath($dir);
-            }
-
-            // The autoload directories will always contain the wei directory
+            $map = array_map('realpath', $map);
+            // The autoload directories will always contain the library directory
             $map['Wei'] = dirname(dirname(__FILE__));
 
             $this->autoloadMap = $map;
-
             return $this;
         }
 
