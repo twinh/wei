@@ -368,12 +368,6 @@ class QueryTest extends TestCase
         $this->assertSame($qb2, $qb);
     }
 
-    public function testGetDb()
-    {
-        $qb   = $this->record;
-        $this->assertSame($this->db, $qb->getDb());
-    }
-
     public function testGetState()
     {
         $qb   = $this->record;
