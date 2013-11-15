@@ -44,7 +44,7 @@ namespace Wei
      *
      * Database
      * @property Db             $db A database service inspired by Doctrine DBAL
-     * @method   \Wei\Record    db($table = null) Create a new instance of a SQL query builder with specified table name
+     * @method   \Wei\Record    db($table = null) Create a new record object
      *
      * @property Call       $call A object handles HTTP request like jQuery Ajax
      * @method   \Wei\Call  call(array $options) Create a new call object and execute

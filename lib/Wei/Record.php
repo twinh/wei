@@ -14,8 +14,8 @@ use Closure;
  * A base database record class
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Wei\Db $db A database service inspired by Doctrine DBAL
- * @method      \Wei\Record db($table = null) Create a new query builder
+ * @property    Db $db A database service inspired by Doctrine DBAL
+ * @method      \Wei\Record db($table = null) Create a new record object
  */
 class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countable
 {
