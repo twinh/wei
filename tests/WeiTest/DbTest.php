@@ -1349,4 +1349,14 @@ class DbTest extends TestCase
         $this->assertEquals($member1, $member2);
         $this->assertNotSame($member1, $member2);
     }
+
+    public function testModelDelete()
+    {
+        $this->db('member')->where('id = 1')->delete();
+
+
+        //$this->db('member')->delete();
+
+
+    }
 }

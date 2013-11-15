@@ -9,10 +9,10 @@
 namespace Wei;
 
 /**
- * A service that build a simple REST application
+ * A service that parse the URL to request data
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @link        The code is base on the awesome framework - Kohana
+ * @link        The code is inspired by the awesome framework - Kohana
  *              http://kohanaframework.org/3.0/guide/api/Kohana_Route
  * @property    Request $request A service that handles the HTTP request data
  * @method      Response response(string $content) Send response header and content

@@ -13,7 +13,7 @@ namespace Wei;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request A service that handles the HTTP request data
- * @property    Router $router
+ * @property    Router $router A service that parse the URL to request data
  */
 class Url extends Base
 {
