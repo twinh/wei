@@ -516,16 +516,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Get the associated database wei for this query builder
-     *
-     * @return \Wei\Db
-     */
-    public function getDb()
-    {
-        return $this->db;
-    }
-
-    /**
      * Get the state of this query builder instance
      *
      * @return integer Either QueryBuilder::STATE_DIRTY or QueryBuilder::STATE_CLEAN
