@@ -188,7 +188,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @var string
      */
-    protected $responseText = '';
+    protected $responseText;
 
     /**
      * The parsed response data
@@ -925,7 +925,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     public function __toString()
     {
-        return $this->responseText;
+        return (string)$this->responseText;
     }
 
     /**
