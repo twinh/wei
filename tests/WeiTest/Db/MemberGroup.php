@@ -3,7 +3,7 @@
 namespace WeiTest\Db;
 
 
-class MemberGroup extends \Wei\Db\Record
+class MemberGroup extends \Wei\Record
 {
 
 }

@@ -2,12 +2,11 @@
 
 namespace WeiTest;
 
-use Wei\DB\QueryBuilder;
 use PDO;
 
 /**
  * @property \Wei\Db db
- * @method \Wei\Db\QueryBuilder db($table)
+ * @method \Wei\Record db($table = null)
  */
 class DbTest extends TestCase
 {
@@ -104,7 +103,7 @@ class DbTest extends TestCase
     public function testGetRecord()
     {
         $this->initFixtures();
-        $this->assertInstanceOf('\Wei\Db\Record', $this->db->create('member'));
+        $this->assertInstanceOf('\Wei\Record', $this->db->create('member'));
     }
 
     public function testRelation()
@@ -118,7 +117,7 @@ class DbTest extends TestCase
         /** @var $member \WeiTest\Db\Member */
         $member = $db->member('1');
 
-        $this->assertInstanceOf('\Wei\Db\Record', $member);
+        $this->assertInstanceOf('\Wei\Record', $member);
 
         $this->assertEquals('1', $member['id']);
         $this->assertEquals('twin', $member['name']);
@@ -128,7 +127,7 @@ class DbTest extends TestCase
         // Relation one-to-one
         $post = $member->getPost();
 
-        $this->assertInstanceOf('\Wei\Db\Record', $post);
+        $this->assertInstanceOf('\Wei\Record', $post);
 
         $this->assertEquals('1', $post['id']);
         $this->assertEquals('my first post', $post['name']);
@@ -137,7 +136,7 @@ class DbTest extends TestCase
         // Relation belong-to
         $group = $member->getGroup();
 
-        $this->assertInstanceOf('\Wei\Db\Record', $group);
+        $this->assertInstanceOf('\Wei\Record', $group);
 
         $this->assertEquals('1', $group['id']);
         $this->assertEquals('vip', $group['name']);
@@ -145,10 +144,10 @@ class DbTest extends TestCase
         // Relation one-to-many
         $posts = $member->getPosts();
 
-        $this->assertInstanceOf('\Wei\Db\Collection', $posts);
+        $this->assertInstanceOf('\Wei\Record', $posts);
 
         $firstPost = $posts[0];
-        $this->assertInstanceOf('\Wei\Db\Record', $firstPost);
+        $this->assertInstanceOf('\Wei\Record', $firstPost);
 
         $this->assertEquals('1', $firstPost['id']);
         $this->assertEquals('my first post', $firstPost['name']);
@@ -178,7 +177,7 @@ class DbTest extends TestCase
 
         $post = $member->post = $db->find('post', array('member_id' => $member['id']));
 
-        $this->assertInstanceOf('\Wei\Db\Record', $post);
+        $this->assertInstanceOf('\Wei\Record', $post);
 
         $this->assertEquals('1', $post['id']);
         $this->assertEquals('my first post', $post['name']);
@@ -584,8 +583,8 @@ class DbTest extends TestCase
             ->indexBy('name')
             ->findAll();
 
-        $this->assertInstanceOf('\Wei\Db\Record', $members['twin']);
-        $this->assertInstanceOf('\Wei\Db\Record', $members['test']);
+        $this->assertInstanceOf('\Wei\Record', $members['twin']);
+        $this->assertInstanceOf('\Wei\Record', $members['test']);
 
         $members = $members->toArray();
 
@@ -602,8 +601,7 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $query = $this->db
-            ->createQueryBuilder()
+        $query = $this->db()
             ->update('member')
             ->set('name = ?')
             ->where('id = 1')
@@ -775,7 +773,7 @@ class DbTest extends TestCase
 
         $member = $this->db->member('1');
 
-        $this->setExpectedException('\InvalidArgumentException', 'Field "notFound" not found in record class "Wei\Db\Record"');
+        $this->setExpectedException('\InvalidArgumentException', 'Field "notFound" not found in record class "Wei\Record"');
 
         $member['notFound'];
     }
@@ -786,10 +784,14 @@ class DbTest extends TestCase
 
         $members = $this->db->findAll('member');
 
-        $this->assertInstanceOf('\Wei\Db\Collection', $members);
+        $this->assertInstanceOf('\Wei\Record', $members);
 
         // ToArray
-        $this->assertInternalType('array', $members->toArray());
+        $memberArray = $members->toArray();
+        $this->assertInternalType('array', $memberArray);
+        foreach ($memberArray as $member) {
+            $this->assertInternalType('array', $member);
+        }
 
         // Filter
         $firstGroupMembers = $members->filter(function($member){
@@ -801,15 +803,8 @@ class DbTest extends TestCase
         });
 
         $this->assertEquals('1', $firstGroupMembers[0]['group_id']);
-        $this->assertInstanceOf('\Wei\Db\Collection', $firstGroupMembers);
+        $this->assertInstanceOf('\Wei\Record', $firstGroupMembers);
         $this->assertNotSame($members, $firstGroupMembers);
-
-        // Reduce
-        $count = $members->reduce(function($count, $member){
-            return ++$count;
-        });
-
-        $this->assertEquals(2, $count);
     }
 
     public function testRecordUnset()
@@ -951,7 +946,6 @@ class DbTest extends TestCase
         $member = $query->find();
         $this->assertFalse($member);
 
-
         $query = $this
             ->db('member')
             ->andWhere('id = ?', '1', PDO::PARAM_INT);
@@ -1001,17 +995,17 @@ class DbTest extends TestCase
     {
         $query = $this->db('member')->offset(1)->limit(1);
 
-        $this->assertEquals(1, $query->get('offset'));
-        $this->assertEquals(1, $query->get('limit'));
+        $this->assertEquals(1, $query->getSqlPart('offset'));
+        $this->assertEquals(1, $query->getSqlPart('limit'));
 
-        $queryParts = $query->getAll();
+        $queryParts = $query->getSqlParts();
         $this->assertArrayHasKey('offset', $queryParts);
         $this->assertArrayHasKey('limit', $queryParts);
 
         $query->resetAll();
 
-        $this->assertEquals(null, $query->get('offset'));
-        $this->assertEquals(null, $query->get('limit'));
+        $this->assertEquals(null, $query->getSqlPart('offset'));
+        $this->assertEquals(null, $query->getSqlPart('limit'));
     }
 
     public function testGetTableFromQueryBuilder()
@@ -1203,7 +1197,7 @@ class DbTest extends TestCase
         $this->initFixtures();
 
         $record = $this->db->findOne('member', 1);
-        $this->assertInstanceOf('\Wei\Db\Record', $record);
+        $this->assertInstanceOf('\Wei\Record', $record);
     }
 
     public function testFindOneWithException()
@@ -1228,6 +1222,7 @@ class DbTest extends TestCase
         $this->assertFalse($member->isModified('id'));
         $this->assertTrue($member->isModified('name'));
         $this->assertTrue($member->isModified());
+
         $this->assertNull($member->getOldData('name'));
 
         $member['name'] = 'aa';
@@ -1333,5 +1328,25 @@ class DbTest extends TestCase
         $member->reload();
 
         $this->assertEquals($groupId + 1, $member['group_id']);
+    }
+
+    public function testNewRecord()
+    {
+        $this->initFixtures();
+
+        // Use record as array
+        $member = $this->db('member')->where('id = 1');
+        $this->assertEquals('1', $member['id']);
+
+        // Use record as 2d array
+        $members = $this->db('member')->where('group_id = 1');
+        foreach ($members as $member) {
+            $this->assertEquals(1, $member['group_id']);
+        }
+
+        $member1 = $this->db('member');
+        $member2 = $this->db('member');
+        $this->assertEquals($member1, $member2);
+        $this->assertNotSame($member1, $member2);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace WeiTest\Db;
 
-use Wei\Db\Record as BaseRecord;
+use Wei\Record as BaseRecord;
 
 class Record extends BaseRecord
 {
