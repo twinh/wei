@@ -677,7 +677,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         }
 
         $this->params[$key] = $value;
-
         return $this;
     }
 
@@ -703,7 +702,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     {
         $this->paramTypes = $types;
         $this->params = $params;
-
         return $this;
     }
 
@@ -767,7 +765,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             $limit = 10;
             $this->add('limit', $limit);
         }
-
         return $this->add('offset', ($page - 1) * $limit);
     }
 
@@ -847,7 +844,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         }
 
         $selects = is_array($select) ? $select : func_get_args();
-
         return $this->add('select', $selects, false);
     }
 
@@ -874,7 +870,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         }
 
         $selects = is_array($select) ? $select : func_get_args();
-
         return $this->add('select', $selects, true);
     }
 
@@ -895,7 +890,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function update($table = null)
     {
         $this->type = self::UPDATE;
-
         if ($table) {
             return $this->from($table);
         } else {
@@ -929,7 +923,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         } else {
             $this->table = $from;
         }
-
         return $this->add('from', $from);
     }
 
@@ -1052,7 +1045,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function where($conditions, $params = array(), $types = array())
     {
         $conditions = $this->processCondition($conditions, $params, $types);
-
         return $this->add('where', $conditions);
     }
 
@@ -1076,7 +1068,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function andWhere($conditions, $params = array(), $types = array())
     {
         $conditions = $this->processCondition($conditions, $params, $types);
-
         return $this->add('where', $conditions, true, 'AND');
     }
 
@@ -1100,7 +1091,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function orWhere($conditions, $params = array(), $types = array())
     {
         $conditions = $this->processCondition($conditions, $params, $types);
-
         return $this->add('where', $conditions, true, 'OR');
     }
 
@@ -1167,7 +1157,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function having($conditions, $params = array(), $types = array())
     {
         $conditions = $this->processCondition($conditions, $params, $types);
-
         return $this->add('having', $conditions);
     }
 
@@ -1183,7 +1172,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function andHaving($conditions, $params = array(), $types = array())
     {
         $conditions = $this->processCondition($conditions, $params, $types);
-
         return $this->add('having', $conditions, true, 'AND');
     }
 
