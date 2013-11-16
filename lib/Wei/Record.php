@@ -85,16 +85,16 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @var array The array of SQL parts collected.
      */
     protected $sqlParts = array(
-        'select'  => array(),
-        'from'    => null,
-        'join'    => array(),
-        'set'     => array(),
-        'where'   => null,
+        'select' => array(),
+        'from' => null,
+        'join' => array(),
+        'set' => array(),
+        'where' => null,
         'groupBy' => array(),
-        'having'  => null,
+        'having' => null,
         'orderBy' => array(),
-        'limit'   => null,
-        'offset'  => null,
+        'limit' => null,
+        'offset' => null,
     );
 
     /**
@@ -339,15 +339,14 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @return int
      */
-    public function delete()
+    public function delete($conditions = null)
     {
+        $conditions && $this->andWhere($conditions);
+
         $this->trigger('beforeDelete');
-
-        $result = (bool)$this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
-
+        $result = $this->db->executeUpdate($this->getSqlForDelete(), $this->params, $this->paramTypes);
         $this->trigger('afterDelete');
-
-        return $result;
+        return (bool)$result;
     }
 
     /**
@@ -547,7 +546,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function find()
     {
         $data = $this->fetch();
-        $this->data = $data ?: array();
+        $this->data = $data ? : array();
         return $data ? $this : false;
     }
 
@@ -697,7 +696,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * ```
      *
      * @param array $params The query parameters to set
-     * @param array $types  The query parameters types to set
+     * @param array $types The query parameters types to set
      * @return $this
      */
     public function setParameters(array $params, array $types = array())
@@ -805,7 +804,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         if ($append) {
             if ($sqlPartName == 'where' || $sqlPartName == 'having') {
                 if ($this->sqlParts[$sqlPartName]) {
-                    $this->sqlParts[$sqlPartName] = '(' . $this->sqlParts[$sqlPartName] .  ') ' . $type . ' (' . $sqlPart  . ')';
+                    $this->sqlParts[$sqlPartName] = '(' . $this->sqlParts[$sqlPartName] . ') ' . $type . ' (' . $sqlPart . ')';
                 } else {
                     $this->sqlParts[$sqlPartName] = $sqlPart;
                 }
@@ -919,7 +918,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *     ->from('users u');
      * ```
      *
-     * @param string $from   The table
+     * @param string $from The table
      * @return $this
      */
     public function from($from)
@@ -950,8 +949,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function join($table, $on = null)
     {
         return $this->add('join', array(
-            'type'      => 'inner',
-            'table'     => $table,
+            'type' => 'inner',
+            'table' => $table,
             'condition' => $on
         ), true);
     }
@@ -972,8 +971,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function innerJoin($table, $on = null)
     {
         return $this->add('join', array(
-            'type'      => 'inner',
-            'table'     => $table,
+            'type' => 'inner',
+            'table' => $table,
             'condition' => $on
         ), true);
     }
@@ -994,8 +993,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function leftJoin($table, $on = null)
     {
         return $this->add('join', array(
-            'type'      => 'left',
-            'table'     => $table,
+            'type' => 'left',
+            'table' => $table,
             'condition' => $on
         ), true);
     }
@@ -1016,8 +1015,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function rightJoin($table, $on = null)
     {
         return $this->add('join', array(
-            'type'      => 'right',
-            'table'     => $table,
+            'type' => 'right',
+            'table' => $table,
             'condition' => $on
         ), true);
     }
@@ -1214,7 +1213,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function orderBy($sort, $order = 'ASC')
     {
-        return $this->add('orderBy', $sort . ' ' . ($order ?: 'ASC'), false);
+        return $this->add('orderBy', $sort . ' ' . ($order ? : 'ASC'), false);
     }
 
     /**
@@ -1226,7 +1225,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function addOrderBy($sort, $order = 'ASC')
     {
-        return $this->add('orderBy', $sort . ' ' . ($order ?: 'ASC'), true);
+        return $this->add('orderBy', $sort . ' ' . ($order ? : 'ASC'), true);
     }
 
     /**
@@ -1342,9 +1341,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                 . ' ON ' . $join['condition'];
         }
 
-        $query .= ($parts['where'] !== null ? ' WHERE ' . ((string) $parts['where']) : '')
+        $query .= ($parts['where'] !== null ? ' WHERE ' . ((string)$parts['where']) : '')
             . ($parts['groupBy'] ? ' GROUP BY ' . implode(', ', $parts['groupBy']) : '')
-            . ($parts['having'] !== null ? ' HAVING ' . ((string) $parts['having']) : '')
+            . ($parts['having'] !== null ? ' HAVING ' . ((string)$parts['having']) : '')
             . ($parts['orderBy'] ? ' ORDER BY ' . implode(', ', $parts['orderBy']) : '');
 
         if (false === $count) {
@@ -1377,7 +1376,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     {
         $query = 'UPDATE ' . $this->sqlParts['from']
             . ' SET ' . implode(", ", $this->sqlParts['set'])
-            . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '');
+            . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string)$this->sqlParts['where']) : '');
 
         return $query;
     }
@@ -1389,7 +1388,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected function getSqlForDelete()
     {
-        return 'DELETE FROM ' . $this->sqlParts['from'] . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '');
+        $this->type = static::DELETE;
+        return 'DELETE FROM ' . $this->sqlParts['from'] . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string)$this->sqlParts['where']) : '');
     }
 
     /**
