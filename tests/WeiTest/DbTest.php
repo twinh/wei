@@ -1330,6 +1330,12 @@ class DbTest extends TestCase
         $this->assertEquals($groupId + 1, $member['group_id']);
     }
 
+    public function testGetTableFieldsButTableNotExists()
+    {
+        $this->setExpectedException('PDOException');
+        $this->db->getTableFields('notExists');
+    }
+
     public function testNewRecord()
     {
         $this->initFixtures();
@@ -1364,12 +1370,33 @@ class DbTest extends TestCase
 
         $member->fromArray(array(
             'group_id' => 1,
-            'name' => 'new member',
+            'name' => 'John',
             'address' => 'xx street'
         ));
         $result = $member->save();
 
         $this->assertTrue($result);
+    }
+
+    public function testCreateCollection()
+    {
+        // TODO
+        $this->initFixtures();
+
+        $members = $this->db('member');
+
+        $members->fromArray(array(
+            array(
+                'group_id' => 1,
+                'name' => 'John',
+                'address' => 'xx street'
+            ),
+            array(
+                'group_id' => 2,
+                'name' => 'Tome',
+                'address' => 'xx street'
+            )
+        ));
     }
 
     public function testDeleteRecord2()
