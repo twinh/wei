@@ -1452,6 +1452,45 @@ class DbTest extends TestCase
         $this->assertEquals(2, $members->length());
     }
 
+    public function testCreateCollectionAndSave()
+    {
+        $this->initFixtures();
+
+        // Creates a member collection
+        $members = $this->db('member');
+
+        $john = $this->db('member')->fromArray(array(
+            'group_id' => 2,
+            'name' => 'John',
+            'address' => 'xx street',
+        ));
+
+        $larry = $this->db('member')->fromArray(array(
+            'group_id' => 3,
+            'name' => 'Larry',
+            'address' => 'xx street',
+        ));
+
+        // Adds record to collection
+        $members->fromArray(array(
+            $john
+        ));
+
+        // Or adds by [] operator
+        $members[] = $larry;
+
+        /** @var $members \Wei\Record */
+        $result = $members->save();
+
+        $this->assertTrue($result);
+
+        // Find out member by id
+        $members = $this->db('member')->indexBy('id')->where(array('id' => array($john['id'], $larry['id'])));
+
+        $this->assertEquals('John', $members[$john['id']]['name']);
+        $this->assertEquals('Larry', $members[$larry['id']]['name']);
+    }
+
     public function testDeleteRecord2()
     {
         $this->initFixtures();

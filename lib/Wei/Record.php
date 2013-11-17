@@ -413,17 +413,32 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function set($name, $value = null)
     {
-        $this->loaded = true;
         if (1 == func_num_args()) {
             return $this->add('set', $name, true);
         } else {
-            if (in_array($name, $this->getFields())) {
-                $this->oldData[$name] = isset($this->data[$name]) ? $this->data[$name] : null;
-                $this->data[$name] = $value;
-                $this->isModified = true;
-            } else {
-                $this->$name = $value;
+
+            $this->loaded = true;
+            if (!$this->data && $value instanceof static) {
+                $this->isColl = true;
             }
+
+            if ($this->isColl) {
+                if (!$value instanceof static) {
+                    throw new \InvalidArgumentException('Value for collection must be a instance of Wei\Record');
+                } else {
+                    $this->data[$name] = $value;
+                }
+            } else {
+                if (in_array($name, $this->getFields())) {
+                    $this->oldData[$name] = isset($this->data[$name]) ? $this->data[$name] : null;
+                    $this->data[$name] = $value;
+                    $this->isModified = true;
+                } else {
+                    $this->$name = $value;
+                }
+            }
+
+            return $this;
         }
     }
 
@@ -555,6 +570,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function find($conditions = array())
     {
+        $this->isColl = false;
         $conditions && $this->andWhere($conditions);
         $data = $this->fetch();
         $this->data = $data ? : array();
@@ -569,6 +585,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function findAll($conditions = null)
     {
+        $this->isColl = true;
         $conditions && $this->andWhere($conditions);
         $data = $this->fetchAll();
 
@@ -1523,11 +1540,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     {
         if (!$this->loaded && !$this->isNew) {
             $this->loaded = true;
-            if (is_int($offset)) {
-                $this->isColl = true;
+            if (is_numeric($offset) || is_null($offset)) {
                 $this->findAll();
             } else {
-                $this->isColl = false;
                 $this->find();
             }
         }
