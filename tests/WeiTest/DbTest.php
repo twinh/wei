@@ -1411,6 +1411,17 @@ class DbTest extends TestCase
         $this->assertFalse($member);
     }
 
+    public function testFindCollectionAndDelete()
+    {
+        $this->initFixtures();
+
+        $members = $this->db('member')->where('group_id = 1');
+        $members->delete();
+
+        $members = $this->db('member')->where('group_id = 1');
+        $this->assertEquals(0, count($members));
+    }
+
     public function testFindRecordAndUpdate()
     {
         $this->initFixtures();
@@ -1424,6 +1435,23 @@ class DbTest extends TestCase
         $this->assertEquals('William', $member['name']);
     }
 
+    public function testFindCollectionAndUpdate()
+    {
+        $this->initFixtures();
+
+        $members = $this->db('member')->where('group_id = 1');
+        $number = $members->length();
+        $this->assertEquals(2, $number);
+
+        foreach ($members as $member) {
+            $member['group_id'] = 2;
+        }
+        $members->save();
+
+        $members = $this->db('member')->where('group_id = 2');
+        $this->assertEquals(2, $members->length());
+    }
+
     public function testDeleteRecord2()
     {
         $this->initFixtures();
@@ -1432,16 +1460,5 @@ class DbTest extends TestCase
         $result = $member->delete(array('id' => 1));
         $this->assertTrue($result);
         $this->assertEquals("DELETE FROM member WHERE id = ?", $member->getSql());
-    }
-
-    public function testDeleteCollection()
-    {
-        $this->initFixtures();
-
-        $members = $this->db('member')->findAll();
-        $members->delete();
-
-        $members = $this->db('member')->findAll();
-        $this->assertEquals(0, count($members));
     }
 }

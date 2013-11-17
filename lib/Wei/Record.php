@@ -305,43 +305,49 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function save()
     {
+        if ($this->isColl) {
+            /** @var $record Record */
+            foreach ($this->data as $record) {
+                $record->save();
+            }
+            // TODO
+            return true;
+        } else {
+            $isNew = $this->isNew;
+            $this->trigger('beforeSave');
+            $this->trigger($isNew ? 'beforeInsert' : 'beforeUpdate');
 
-
-
-        $isNew = $this->isNew;
-        $this->trigger('beforeSave');
-        $this->trigger($isNew ? 'beforeInsert' : 'beforeUpdate');
-
-        // Insert
-        if ($this->isNew) {
-            $result = (bool)$this->db->insert($this->table, $this->data);
-            if ($result) {
-                $this->isNew = false;
-                if (!isset($this->data[$this->primaryKey])) {
-                    $name = sprintf('%s_%s_seq', $this->table, $this->primaryKey);
-                    $this->data[$this->primaryKey] = $this->db->lastInsertId($name);
+            // Insert
+            if ($this->isNew) {
+                $result = (bool)$this->db->insert($this->table, $this->data);
+                if ($result) {
+                    $this->isNew = false;
+                    if (!isset($this->data[$this->primaryKey])) {
+                        $name = sprintf('%s_%s_seq', $this->table, $this->primaryKey);
+                        $this->data[$this->primaryKey] = $this->db->lastInsertId($name);
+                    }
+                }
+                // Update
+            } else {
+                if ($this->isModified) {
+                    $data = array_intersect_key($this->data, $this->oldData);
+                    $affectedRows = $this->db->update($this->table, $data, array(
+                        $this->primaryKey => $this->data[$this->primaryKey]
+                    ));
+                    $result = $affectedRows || '0000' == $this->db->errorCode();
+                } else {
+                    $result = true;
                 }
             }
-            // Update
-        } else {
-            if ($this->isModified) {
-                $data = array_intersect_key($this->data, $this->oldData);
-                $affectedRows = $this->db->update($this->table, $data, array(
-                    $this->primaryKey => $this->data[$this->primaryKey]
-                ));
-                $result = $affectedRows || '0000' == $this->db->errorCode();
-            } else {
-                $result = true;
-            }
+
+            $this->oldData = array();
+            $this->isModified = false;
+
+            $this->trigger($isNew ? 'afterInsert' : 'afterUpdate');
+            $this->trigger('afterSave');
+
+            return $result;
         }
-
-        $this->oldData = array();
-        $this->isModified = false;
-
-        $this->trigger($isNew ? 'afterInsert' : 'afterUpdate');
-        $this->trigger('afterSave');
-
-        return $result;
     }
 
     /**
