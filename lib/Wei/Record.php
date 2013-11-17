@@ -347,18 +347,25 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Delete the current record
      *
      * @param mixed $conditions
-     * @return int
+     * @return bool
      */
     public function delete($conditions = null)
     {
         $conditions && $this->andWhere($conditions);
-        $this->loadData(0);
+        !$this->loaded && $this->loadData(0);
 
-        $this->trigger('beforeDelete');
-
-        $result = $this->db->executeUpdate($this->getSqlForDelete(), $this->params, $this->paramTypes);
-        $this->trigger('afterDelete');
-        return (bool)$result;
+        if (!$this->isColl) {
+            $this->trigger('beforeDelete');
+            $result = (bool)$this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
+            $this->trigger('afterDelete');
+            return $result;
+        } else {
+            /** @var $record Record */
+            foreach ($this->data as $record) {
+                $record->delete();
+            }
+            return true;
+        }
     }
 
     /**
@@ -1417,7 +1424,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected function getSqlForDelete()
     {
-        $this->type = static::DELETE;
         return 'DELETE FROM ' . $this->sqlParts['from'] . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string)$this->sqlParts['where']) : '');
     }
 

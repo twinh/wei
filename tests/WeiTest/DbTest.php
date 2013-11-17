@@ -1491,14 +1491,16 @@ class DbTest extends TestCase
         $this->assertEquals('Larry', $members[$larry['id']]['name']);
     }
 
-    public function testDeleteRecord2()
+    public function testDeleteRecordAndFindAgainReturnFalse()
     {
         $this->initFixtures();
 
         $member = $this->db('member');
         $result = $member->delete(array('id' => 1));
         $this->assertTrue($result);
-        $this->assertEquals("DELETE FROM member WHERE id = ?", $member->getSql());
+
+        $member = $this->db('member')->find(array('id' => 1));
+        $this->assertFalse($member);
     }
 
     public function testSaveOnNoFiledChanged()
