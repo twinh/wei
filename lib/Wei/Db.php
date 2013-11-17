@@ -856,6 +856,7 @@ class Db extends Base
      *  Returns the name of fields of specified table
      *
      * @param $table
+     * @throws \PDOException
      * @return array
      */
     public function getTableFields($table)
@@ -881,6 +882,10 @@ class Db extends Base
                     array($this->dbname, $table)
                 );
                 $fields = $this->filter($tableInfo, 'column_name');
+        }
+        if (empty($fields)) {
+            // For sqlite and pgsql
+            throw new \PDOException(sprintf('Table or view "%s" not found', $table));
         }
         return $fields;
     }
