@@ -1399,6 +1399,18 @@ class DbTest extends TestCase
         ));
     }
 
+    public function testFindRecordAndDelete()
+    {
+        $this->initFixtures();
+        $member = $this->db('member')->find(1);
+
+        $result = $member->delete();
+        $this->assertTrue($result);
+
+        $member = $this->db('member')->find(1);
+        $this->assertFalse($member);
+    }
+
     public function testDeleteRecord2()
     {
         $this->initFixtures();

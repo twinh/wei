@@ -545,8 +545,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @return false|Record
      */
-    public function find()
+    public function find($conditions = array())
     {
+        $conditions && $this->andWhere($conditions);
         $data = $this->fetch();
         $this->data = $data ? : array();
         return $data ? $this : false;
