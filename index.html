@@ -3299,6 +3299,13 @@
 <span class="nv">$member</span> <span class="o">=</span> <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">();</span>
 </code></pre></div>
 
+<blockquote>
+<h4>说明</h4>
+
+<p>使用问号占位符<code>?</code>有助于提高开发效率,而使用命名占位符<code>:</code>有助于增加可读性.
+在同一条SQL语句中只能使用一种占位符.</p>
+</blockquote>
+
 <h3>构造范围查询</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$qb</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'member'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">'group_id BETWEEN ? AND ?'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'2'</span><span class="p">));</span>
