@@ -5,6 +5,12 @@
  * @copyright   Copyright (c) 2008-2013 Twin Huang
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
+/**
+ * Wei Framework
+ *
+ * @copyright   Copyright (c) 2008-2013 Twin Huang
+ * @license     http://opensource.org/licenses/mit-license.php MIT License
+ */
 
 namespace Wei;
 
@@ -71,6 +77,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     protected $oldData = array();
 
     protected $loaded = false;
+
+    protected $isColl;
 
     /* The query types. */
     const SELECT = 0;
@@ -238,8 +246,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function toArray($returnFields = array())
     {
-        $isColl = current($this->data) instanceof static;
-        if ($isColl) {
+        if ($this->isColl) {
             $data = array();
             /** @var $record Record */
             foreach ($this->data as $key => $record) {
@@ -298,6 +305,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function save()
     {
+
+
+
         $isNew = $this->isNew;
         $this->trigger('beforeSave');
         $this->trigger($isNew ? 'beforeInsert' : 'beforeUpdate');
@@ -375,10 +385,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function get($name)
     {
-        $isColl = current($this->data) instanceof static;
-
         // Check if field exists when it is not a collection
-        if (!$isColl && !in_array($name, $this->getFields())) {
+        if (!$this->isColl && !in_array($name, $this->getFields())) {
             throw new \InvalidArgumentException(sprintf(
                 'Field "%s" not found in record class "%s"',
                 $name,
@@ -1517,8 +1525,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         if (!$this->loaded && !$this->isNew) {
             $this->loaded = true;
             if (is_int($offset)) {
+                $this->isColl = true;
                 $this->findAll();
             } else {
+                $this->isColl = false;
                 $this->find();
             }
         }
