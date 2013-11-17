@@ -94,6 +94,7 @@
         <li><a href="#isIn">isIn</a></li>
         <li><a href="#isLowercase">isLowercase</a></li>
         <li><a href="#isLuhn">isLuhn</a></li>
+        <li><a href="#isNaturalNumber">isNaturalNumber</a></li>
         <li><a href="#isNull">isNull</a></li>
         <li><a href="#isNumber">isNumber</a></li>
         <li><a href="#isPresent">isPresent</a></li>
@@ -6903,6 +6904,71 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 <li><a href="#isCreditCard">信用卡号验证器:isCreditCard</a></li>
+</ul>
+  </section>
+
+<!-- api/isNaturalNumber
+  ================================================== -->
+  <section id="isNaturalNumber">
+  <div class="page-header"><h1>isNaturalNumber</h1></div>
+
+<p>检查数据是否为自然数(大于等于0的整数)</p>
+
+<h2>案例</h2>
+
+<h3>检查"0"是否为自然数</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isNaturalNumber</span><span class="p">(</span><span class="s1">'0'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 输出了'Yes'</span>
+</code></pre></div>
+
+<h3>检查"-1"是否为自然数</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isNaturalNumber</span><span class="p">(</span><span class="s1">'-1'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 输出了'No'</span>
+</code></pre></div>
+
+<h3>使用场景</h3>
+
+<ul>
+<li>商品数量</li>
+<li>容器宽高</li>
+<li>邀请好友数量等</li>
+</ul><h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>错误信息</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>信息</th>
+</tr></thead>
+<tbody><tr>
+<td>invalidMessage</td>
+<td>%name%必须是正整数或0</td>
+</tr></tbody>
+</table><h3>方法</h3>
+
+<h4>isNaturalNumber($input)</h4>
+
+<p>检查数据是否为自然数(大于等于0的整数)</p>
+
+<h2>相关链接</h2>
+
+<ul>
+<li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
   </section>
 
