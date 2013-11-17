@@ -337,6 +337,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Delete the current record
      *
+     * @param mixed $conditions
      * @return int
      */
     public function delete($conditions = null)
@@ -556,10 +557,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Executes the generated SQL and returns the found record collection object or false
      *
+     * @param mixed $conditions
      * @return $this
      */
-    public function findAll()
+    public function findAll($conditions = null)
     {
+        $conditions && $this->andWhere($conditions);
         $data = $this->fetchAll();
 
         $records = array();
@@ -616,6 +619,17 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function count()
     {
         return (int)$this->db->fetchColumn($this->getSqlForCount(), $this->params);
+    }
+
+    /**
+     * Returns the record number in collection
+     *
+     * @return int
+     */
+    public function length()
+    {
+        $this->loadData(0);
+        return count($this->data);
     }
 
     /**
