@@ -342,8 +342,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function delete($conditions = null)
     {
         $conditions && $this->andWhere($conditions);
+        $this->loadData(0);
 
         $this->trigger('beforeDelete');
+
         $result = $this->db->executeUpdate($this->getSqlForDelete(), $this->params, $this->paramTypes);
         $this->trigger('afterDelete');
         return (bool)$result;

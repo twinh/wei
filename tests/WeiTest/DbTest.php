@@ -1350,7 +1350,29 @@ class DbTest extends TestCase
         $this->assertNotSame($member1, $member2);
     }
 
-    public function testRecordDelete()
+    public function testCreateRecord()
+    {
+        $this->initFixtures();
+
+        $member = $this->db('member');
+
+        $data = $member->toArray();
+        $this->assertArrayHasKey('id', $data);
+        $this->assertArrayHasKey('group_id', $data);
+        $this->assertArrayHasKey('name', $data);
+        $this->assertArrayHasKey('address', $data);
+
+        $member->fromArray(array(
+            'group_id' => 1,
+            'name' => 'new member',
+            'address' => 'xx street'
+        ));
+        $result = $member->save();
+
+        $this->assertTrue($result);
+    }
+
+    public function testDeleteRecord2()
     {
         $this->initFixtures();
 
@@ -1358,5 +1380,16 @@ class DbTest extends TestCase
         $result = $member->delete(array('id' => 1));
         $this->assertTrue($result);
         $this->assertEquals("DELETE FROM member WHERE id = ?", $member->getSql());
+    }
+
+    public function testDeleteCollection()
+    {
+        $this->initFixtures();
+
+        $members = $this->db('member')->findAll();
+        $members->delete();
+
+        $members = $this->db('member')->findAll();
+        $this->assertEquals(0, count($members));
     }
 }
