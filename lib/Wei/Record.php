@@ -351,7 +351,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function delete($conditions = null)
     {
-        $conditions && $this->andWhere($conditions);
+        $this->andWhere($conditions);
         !$this->loaded && $this->loadData(0);
 
         if (!$this->isColl) {
@@ -573,12 +573,13 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Executes the generated SQL and returns the found record object or false
      *
+     * @param mixed $conditions
      * @return false|Record
      */
-    public function find($conditions = array())
+    public function find($conditions = null)
     {
         $this->isColl = false;
-        $conditions && $this->andWhere($conditions);
+        $this->andWhere($conditions);
         $data = $this->fetch();
         $this->data = $data ? : array();
         return $data ? $this : false;
@@ -593,7 +594,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function findAll($conditions = null)
     {
         $this->isColl = true;
-        $conditions && $this->andWhere($conditions);
+        $this->andWhere($conditions);
         $data = $this->fetchAll();
 
         $records = array();
@@ -1115,8 +1116,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function andWhere($conditions, $params = array(), $types = array())
     {
-        $conditions = $this->processCondition($conditions, $params, $types);
-        return $this->add('where', $conditions, true, 'AND');
+        if (!$conditions) {
+            return $this;
+        } else {
+            $conditions = $this->processCondition($conditions, $params, $types);
+            return $this->add('where', $conditions, true, 'AND');
+        }
     }
 
     /**
