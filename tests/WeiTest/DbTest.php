@@ -1426,12 +1426,12 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $member = $this->db('member')->find(1);
+        $member = $this->db('member')->find(array('id' => 1));
         $member['name'] = 'William';
         $result = $member->save();
         $this->assertTrue($result);
 
-        $member = $this->db('member')->find(1);
+        $member = $this->db('member')->find(array('id' => 1));
         $this->assertEquals('William', $member['name']);
     }
 
