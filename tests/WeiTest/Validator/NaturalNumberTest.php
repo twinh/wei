@@ -30,10 +30,6 @@ class NaturalNumberTest extends TestCase
             array('100'),
             array('+1'),
             array(+1),
-            array('+0'),
-            array(+0),
-            array(-0),
-            array('-0')
         );
     }
 
