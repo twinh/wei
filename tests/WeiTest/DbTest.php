@@ -1505,13 +1505,16 @@ class DbTest extends TestCase
 
     public function testSaveOnNoFiledChanged()
     {
-        $record = $this->db->create('test', array('id' => 1), false);
+        $this->initFixtures();
+        $record = $this->db->create('member', array('id' => 1), false);
         $this->assertTrue($record->save());
     }
 
     public function testPrimaryKey()
     {
-        $record = $this->db->create('test');
+        $this->initFixtures();
+
+        $record = $this->db->create('member');
         $this->assertEquals('id', $record->getPrimaryKey());
 
         $record->setPrimaryKey('testId');
@@ -1520,10 +1523,12 @@ class DbTest extends TestCase
 
     public function testIsNew()
     {
-        $record = $this->db->create('test', array('id' => 1), true);
+        $this->initFixtures();
+
+        $record = $this->db->create('member', array('id' => 1), true);
         $this->assertTrue($record->isNew());
 
-        $record = $this->db->create('test', array('id' => 1), false);
+        $record = $this->db->create('member', array('id' => 1), false);
         $this->assertFalse($record->isNew());
     }
 }
