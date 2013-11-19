@@ -4121,14 +4121,11 @@
 
 <h3>查找并更新记录数据</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 查找主键为1的用户</span>
-<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="s1">'1'</span><span class="p">);</span>
-
-<span class="c1">// 或是通过魔术方法更自然地获取对象</span>
-<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 查找主键为1的用户,如果存在返回用户对象,不存在返回`false`</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
 
 <span class="c1">// 更新对象的值</span>
-<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">username</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
+<span class="nv">$user</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
 
 <span class="c1">// 保存到数据库中</span>
 <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
@@ -4136,11 +4133,11 @@
 
 <h3>删除记录</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 查找主键为1的用户</span>
-<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 删除id为1的用户</span>
+<span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
 
-<span class="c1">// 删除该记录</span>
-<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
+<span class="c1">// 执行的SQL语句</span>
+<span class="s1">'DELETE FROM user WHERE id = ?'</span><span class="p">;</span>
 </code></pre></div>
 
 <h3>回调调用顺序</h3>
