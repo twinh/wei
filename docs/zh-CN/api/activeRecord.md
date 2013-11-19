@@ -8,13 +8,12 @@ Active Record
 ### 创建一条新记录并保存
 
 ```php
-// 通过`create`方法创建一个新的用户记录对象
-/* @var $user \Wei\Db\Record */
-$user = wei()->db->create('user', array('groupId' => 1));
+// 通过`db`方法创建一个新的用户对象
+$user = wei()->db('user');
 
 // 设置对象的值
-$user->username = 'twin';
-$user->createdAt = date('Y-m-d H:i:s');
+$user['username'] = 'twin';
+$user['createdAt'] = date('Y-m-d H:i:s');
 
 // 保存到数据库中
 $user->save();
