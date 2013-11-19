@@ -22,14 +22,11 @@ $user->save();
 ### 查找并更新记录数据
 
 ```php
-// 查找主键为1的用户
-$user = wei()->db->find('user', '1');
-
-// 或是通过魔术方法更自然地获取对象
-$user = wei()->db->user(1);
+// 查找主键为1的用户,如果存在返回用户对象,不存在返回`false`
+$user = wei()->db('user')->find(array('id' => 1));
 
 // 更新对象的值
-$user->username = 'twin';
+$user['username'] = 'twin';
 
 // 保存到数据库中
 $user->save();
@@ -38,11 +35,11 @@ $user->save();
 ### 删除记录
 
 ```php
-// 查找主键为1的用户
-$user = wei()->db->user(1);
+// 删除id为1的用户
+wei()->db('user')->delete(array('id' => 1));
 
-// 删除该记录
-$user->delete();
+// 执行的SQL语句
+'DELETE FROM user WHERE id = ?';
 ```
 
 ### 回调调用顺序
