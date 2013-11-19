@@ -1510,6 +1510,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected function processCondition($conditions, $params, $types)
     {
+        if (is_numeric($conditions)) {
+            $conditions = array($this->primaryKey => $conditions);
+        }
+
         if (is_array($conditions)) {
             $where = array();
             $params = array();

@@ -1531,4 +1531,15 @@ class DbTest extends TestCase
         $record = $this->db->create('member', array('id' => 1), false);
         $this->assertFalse($record->isNew());
     }
+
+    public function testFindByPrimaryKey()
+    {
+        $this->initFixtures();
+
+        $record = $this->db('member')->find(1);
+        $this->assertEquals(1, $record['id']);
+
+        $record = $this->db('member')->find('1');
+        $this->assertEquals(1, $record['id']);
+    }
 }
