@@ -4108,13 +4108,12 @@
 
 <h3>创建一条新记录并保存</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 通过`create`方法创建一个新的用户记录对象</span>
-<span class="cm">/* @var $user \Wei\Db\Record */</span>
-<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'groupId'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 通过`db`方法创建一个新的用户对象</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">);</span>
 
 <span class="c1">// 设置对象的值</span>
-<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">username</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
-<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">createdAt</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">);</span>
+<span class="nv">$user</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
+<span class="nv">$user</span><span class="p">[</span><span class="s1">'createdAt'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">);</span>
 
 <span class="c1">// 保存到数据库中</span>
 <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
