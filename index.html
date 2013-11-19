@@ -2220,9 +2220,9 @@
 <span class="nv">$loggerDb</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">(</span><span class="s1">'userLog'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'userId'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
 </code></pre></div>
 
-<h3>区分<code>fetch</code>,<code>select</code>和<code>find</code>方法</h3>
+<h3>区分<code>fetch</code>,<code>select</code>,<code>find</code>和<code>findOne</code>方法</h3>
 
-<p>在db对象,<code>fetch</code>,<code>select</code>和<code>find</code>方法都是用于查询数据库数据,他们共同的特征是只返回第一行数据,不同点在于:</p>
+<p>在db对象,<code>fetch</code>,<code>select</code>和<code>find</code>,<code>findOne</code>方法都是用于查询数据库数据,他们共同的特征是只返回第一行数据,不同点在于:</p>
 
 <ul>
 <li>
@@ -2231,6 +2231,8 @@
 <code>select</code>方法的第一个参数是数据表名称,返回的是数组</li>
 <li>
 <code>find</code>方法的第一个参数也是数据表名称,但返回的是<code>Wei\Db\Record</code>对象</li>
+<li>
+<code>findOne</code>方法参数和返回值与<code>find</code>一样,但是当记录不存在时,会抛出一个代码为404的异常</li>
 </ul><p>另外,如果要查询多条数据,对应的方法是<code>fetchAll</code>,<code>selectAll</code>和<code>findAll</code>.</p>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$db</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">;</span>
