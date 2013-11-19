@@ -651,12 +651,7 @@ class Db extends Base
      */
     public function findOne($table, $id)
     {
-        $record = $this->find($table, $id);
-        if ($record) {
-            return $record;
-        } else {
-            throw new \Exception('Record not found', 404);
-        }
+        return $this->create($table)->findOne($id);
     }
 
     /**
