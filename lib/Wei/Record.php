@@ -585,6 +585,23 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
+     * Find a record by specified conditions and throws 404 exception if record not found
+     *
+     * @param mixed $conditions
+     * @throws \Exception
+     * @return $this
+     */
+    public function findOne($conditions = null)
+    {
+        $record = $this->find($conditions);
+        if ($record) {
+            return $record;
+        } else {
+            throw new \Exception('Record not found', 404);
+        }
+    }
+
+    /**
      * Executes the generated SQL and returns the found record collection object or false
      *
      * @param mixed $conditions
