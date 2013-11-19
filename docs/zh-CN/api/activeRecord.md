@@ -37,9 +37,6 @@ $user->save();
 ```php
 // 删除id为1的用户
 wei()->db('user')->delete(array('id' => 1));
-
-// 执行的SQL语句
-'DELETE FROM user WHERE id = ?';
 ```
 
 ### 回调调用顺序
@@ -75,7 +72,7 @@ wei()->db('user')->delete(array('id' => 1));
 数据库连接对象
 
 #### Wei\Wei $wei
-对象管理器
+服务管理器
 
 ### 回调
 
@@ -108,6 +105,12 @@ wei()->db('user')->delete(array('id' => 1));
 
 ### 方法
 
+#### $record[$field]
+获取字段的值
+
+#### $record[$field] = 'xxx'
+设置字段的值
+
 #### $record->get($field)
 获取字段的值
 
@@ -135,9 +138,6 @@ wei()->db('user')->delete(array('id' => 1));
 #### $record->fromArray($data)
 批量设置记录数据
 
-#### $record->setData($data)
-批量设置记录数据,同`fromArray`
-
 #### $record->save()
 保存记录数据到数据库中
 
@@ -152,11 +152,3 @@ wei()->db('user')->delete(array('id' => 1));
 
 #### $record->isModified()
 判断当前记录的字段值是否修改过
-
-### 数组操作方式
-
-#### $record[$field]
-获取字段的值
-
-#### $record[$field] = 'xxx'
-设置字段的值
