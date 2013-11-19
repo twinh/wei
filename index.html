@@ -4135,9 +4135,6 @@
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 删除id为1的用户</span>
 <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
-
-<span class="c1">// 执行的SQL语句</span>
-<span class="s1">'DELETE FROM user WHERE id = ?'</span><span class="p">;</span>
 </code></pre></div>
 
 <h3>回调调用顺序</h3>
@@ -4174,7 +4171,7 @@
 
 <h4>Wei\Wei $wei</h4>
 
-<p>对象管理器</p>
+<p>服务管理器</p>
 
 <h3>回调</h3>
 
@@ -4216,6 +4213,14 @@
 
 <h3>方法</h3>
 
+<h4>$record[$field]</h4>
+
+<p>获取字段的值</p>
+
+<h4>$record[$field] = 'xxx'</h4>
+
+<p>设置字段的值</p>
+
 <h4>$record-&gt;get($field)</h4>
 
 <p>获取字段的值</p>
@@ -4252,10 +4257,6 @@
 
 <p>批量设置记录数据</p>
 
-<h4>$record-&gt;setData($data)</h4>
-
-<p>批量设置记录数据,同<code>fromArray</code></p>
-
 <h4>$record-&gt;save()</h4>
 
 <p>保存记录数据到数据库中</p>
@@ -4275,16 +4276,6 @@
 <h4>$record-&gt;isModified()</h4>
 
 <p>判断当前记录的字段值是否修改过</p>
-
-<h3>数组操作方式</h3>
-
-<h4>$record[$field]</h4>
-
-<p>获取字段的值</p>
-
-<h4>$record[$field] = 'xxx'</h4>
-
-<p>设置字段的值</p>
   </section>
 
 <!-- api/call
