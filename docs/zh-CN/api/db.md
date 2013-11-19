@@ -134,13 +134,14 @@ $loggerDb = $wei->loggerDb;
 $loggerDb->findAll('userLog', array('userId' => 1));
 ```
 
-### 区分`fetch`,`select`和`find`方法
+### 区分`fetch`,`select`,`find`和`findOne`方法
 
-在db对象,`fetch`,`select`和`find`方法都是用于查询数据库数据,他们共同的特征是只返回第一行数据,不同点在于:
+在db对象,`fetch`,`select`和`find`,`findOne`方法都是用于查询数据库数据,他们共同的特征是只返回第一行数据,不同点在于:
 
 * `fetch`方法的第一个参数是完整的SQL语句,返回的是数组
 * `select`方法的第一个参数是数据表名称,返回的是数组
 * `find`方法的第一个参数也是数据表名称,但返回的是`Wei\Db\Record`对象
+* `findOne`方法参数和返回值与`find`一样,但是当记录不存在时,会抛出一个代码为404的异常
 
 另外,如果要查询多条数据,对应的方法是`fetchAll`,`selectAll`和`findAll`.
 

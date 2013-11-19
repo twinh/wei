@@ -423,7 +423,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         if (1 == func_num_args()) {
             return $this->add('set', $name, true);
         } else {
-
             $this->loaded = true;
             if (!$this->data && $value instanceof static) {
                 $this->isColl = true;
