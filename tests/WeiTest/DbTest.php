@@ -115,7 +115,7 @@ class DbTest extends TestCase
         $db->setOption('recordNamespace', 'WeiTest\Db');
 
         /** @var $member \WeiTest\Db\Member */
-        $member = $db->member('1');
+        $member = $this->db('member')->find('1');
 
         $this->assertInstanceOf('\Wei\Record', $member);
 
@@ -158,7 +158,7 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $member = $this->db->member('1');
+        $member = $this->db('member')->find('1');
 
         $this->assertEquals('1', $member['id']);
 
@@ -171,11 +171,9 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $db = $this->db;
+        $member = $this->db('member')->find('1');
 
-        $member = $db->member('1');
-
-        $post = $member->post = $db->find('post', array('member_id' => $member['id']));
+        $post = $member->post = $this->db->find('post', array('member_id' => $member['id']));
 
         $this->assertInstanceOf('\Wei\Record', $post);
 
@@ -258,7 +256,7 @@ class DbTest extends TestCase
         $db = $this->db;
 
         // Existing member
-        $member = $db->member('1');
+        $member = $db('member')->find(1);
         $member->address = 'address';
         $result = $member->save();
 
@@ -762,7 +760,7 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $member = $this->db->member('1');
+        $member = $this->db('member')->find('1');
 
         $this->assertEquals('member', $member->getTable());
     }
@@ -771,7 +769,7 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $member = $this->db->member('1');
+        $member = $this->db('member')->find('1');
 
         $this->setExpectedException('\InvalidArgumentException', 'Field "notFound" not found in record class "Wei\Record"');
 
@@ -811,7 +809,7 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $member = $this->db->member('1');
+        $member = $this->db('member')->find('1');
 
         $this->assertEquals('twin', $member['name']);
         $this->assertEquals('1', $member['group_id']);

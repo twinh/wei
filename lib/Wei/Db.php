@@ -705,18 +705,6 @@ class Db extends Base
     }
 
     /**
-     * Find a record from specified table and conditions
-     *
-     * @param string $name
-     * @param array $args
-     * @return Record|false
-     */
-    public function __call($name, $args)
-    {
-        return $this->find($name, isset($args[0]) ? $args[0] : false);
-    }
-
-    /**
      * Returns the record class name of table
      *
      * @param string $table The name of table

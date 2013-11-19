@@ -649,10 +649,3 @@ $params     | array        | 绑定到SQL的参数
 获取最后执行的SQL语句
 
 **返回:** `string`
-
-### 魔术方法
-
-#### db->$table($conditions)
-根据条件查找数据表的一行记录,返回的是一个`Wei\Record`对象,等于`db->find($table, $conditions)`
-
-**返回:** `Wei\Record`
