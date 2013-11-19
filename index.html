@@ -2130,16 +2130,16 @@
 
 <p>完整的介绍请查看维基百科的说明<a href="http://zh.wikipedia.org/wiki/Active_Record" target="_blank">Active Record</a></p>
 
-<p><a href="#activeRecord">查看Active Record</a></p>
+<p><a href="#activeRecord">查看Active Record API</a></p>
 
-<p><strong>创建记录并保存</strong></p>
+<p><strong>创建一条新记录并保存</strong></p>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 创建一个新的用户记录对象</span>
-<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'groupId'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 通过`db`方法创建一个新的用户对象</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">);</span>
 
 <span class="c1">// 设置对象的值</span>
-<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">username</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
-<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">createdAt</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">);</span>
+<span class="nv">$user</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
+<span class="nv">$user</span><span class="p">[</span><span class="s1">'createdAt'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">);</span>
 
 <span class="c1">// 保存到数据库中</span>
 <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
@@ -2147,14 +2147,11 @@
 
 <p><strong>查找并更新记录数据</strong></p>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 查找主键为1的用户</span>
-<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="s1">'1'</span><span class="p">);</span>
-
-<span class="c1">// 或是通过魔术方法更自然地获取对象</span>
-<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 查找主键为1的用户,如果存在返回用户对象,不存在返回`false`</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
 
 <span class="c1">// 更新对象的值</span>
-<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">username</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
+<span class="nv">$user</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
 
 <span class="c1">// 保存到数据库中</span>
 <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
@@ -2162,18 +2159,15 @@
 
 <p><strong>删除记录</strong></p>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 查找主键为1的用户</span>
-<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-
-<span class="c1">// 删除该记录</span>
-<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 删除id为1的用户</span>
+<span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
 </code></pre></div>
 
 <h3>SQL查询构建器</h3>
 
 <p>如果增删查改(CRUD)操作和Active Record模式还不能满足您的需求,你可以尝试使用QueryBuilder来生成更复杂的SQL语句</p>
 
-<p><a href="#queryBuilder">查看QueryBuilder</a></p>
+<p><a href="#queryBuilder">查看QueryBuilder API</a></p>
 
 <h3>连接到多个数据库</h3>
 
@@ -2230,7 +2224,7 @@
 <li>
 <code>select</code>方法的第一个参数是数据表名称,返回的是数组</li>
 <li>
-<code>find</code>方法的第一个参数也是数据表名称,但返回的是<code>Wei\Db\Record</code>对象</li>
+<code>find</code>方法的第一个参数也是数据表名称,但返回的是<code>Wei\Record</code>对象</li>
 <li>
 <code>findOne</code>方法参数和返回值与<code>find</code>一样,但是当记录不存在时,会抛出一个代码为404的异常</li>
 </ul><p>另外,如果要查询多条数据,对应的方法是<code>fetchAll</code>,<code>selectAll</code>和<code>findAll</code>.</p>
@@ -2243,7 +2237,7 @@
 <span class="c1">// 根据表名和条件查询一行记录,返回一个一维数组</span>
 <span class="nv">$array</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
-<span class="c1">// 根据表名和条件查询一行记录,返回一个`Wei\Db\Record`对象</span>
+<span class="c1">// 根据表名和条件查询一行记录,返回一个`Wei\Record`对象</span>
 <span class="nv">$record</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
 <span class="c1">// 根据SQL语句查询多行记录,返回一个二维数组</span>
@@ -2252,7 +2246,7 @@
 <span class="c1">// 根据表名和条件查询多行记录,返回一个二维数组</span>
 <span class="nv">$array</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">'user'</span><span class="p">);</span>
 
-<span class="c1">// 根据表名和条件查询多行记录,返回一个`Wei\Db\Collection`对象</span>
+<span class="c1">// 根据表名和条件查询多行记录,返回一个`Wei\Record`对象</span>
 <span class="nv">$collection</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'user'</span><span class="p">);</span>
 </code></pre></div>
 
@@ -2293,12 +2287,12 @@
 <tr>
 <td>find</td>
 <td>$table, $conditions</td>
-<td>Wei\Db\Record对象</td>
+<td>Wei\Record对象</td>
 </tr>
 <tr>
 <td>findAll</td>
 <td>$table, $conditions</td>
-<td>Wei\Db\Collection对象</td>
+<td>Wei\Record对象</td>
 </tr>
 <tr>
 <td>query</td>
@@ -2425,7 +2419,7 @@
 
 <p>为文章增加1点击数</p>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$article</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'article'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$article</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'article'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 
 <span class="c1">// 记录原始点击数,可供后续输出使用</span>
 <span class="nv">$hit</span> <span class="o">=</span> <span class="nv">$article</span><span class="p">[</span><span class="s1">'hit'</span><span class="p">];</span>
@@ -2523,14 +2517,8 @@
 <tr>
 <td>recordClass</td>
 <td>string</td>
-<td>Wei\Db\Record</td>
+<td>Wei\Record</td>
 <td>记录类的基础类名称</td>
-</tr>
-<tr>
-<td>collectionClass</td>
-<td>string</td>
-<td>Wei\Db\Collection</td>
-<td>记录集合类的基础类名称</td>
 </tr>
 <tr>
 <td>recordClasses</td>
@@ -2720,9 +2708,9 @@
 
 <h4>db($table = null)</h4>
 
-<p>根据数据表名称,创建一个新Query Builder对象</p>
+<p>根据数据表名称,创建一个新的Active Record对象</p>
 
-<p><strong>返回:</strong> <code>Wei\Db\QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -2766,7 +2754,7 @@
 </tbody>
 </table><h4>db-&gt;insertBatch($table, $data = array())</h4>
 
-<p>向指定的数据表插入多条数据(目前不支持<code>SQLite</code>)</p>
+<p>向指定的数据表插入多条数据(目前暂不支持<code>SQLite</code>)</p>
 
 <p><strong>返回:</strong> <code>int</code> 受影响的行数</p>
 
@@ -3005,7 +2993,7 @@
 
 <p>根据条件查找数据表的一条记录</p>
 
-<p><strong>返回:</strong> <code>Wei\Db\Record</code>|<code>false</code> 如果记录存在,返回记录对象,否则返回<code>false</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code>|<code>false</code> 如果记录存在,返回记录对象,否则返回<code>false</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3031,7 +3019,7 @@
 
 <p>根据条件查找数据表的所有匹配记录</p>
 
-<p><strong>返回:</strong> <code>Wei\Db\Collection</code>|<code>false</code> 如果记录存在,返回集合对象,否则返回<code>false</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code>|<code>false</code> 如果记录存在,返回集合对象,否则返回<code>false</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3057,7 +3045,7 @@
 
 <p>创建一个新的数据表记录对象</p>
 
-<p><strong>返回:</strong> <code>Wei\Db\Record</code> 记录对象</p>
+<p><strong>返回:</strong> <code>Wei\Record</code> 记录对象</p>
 
 <p><strong>参数</strong></p>
 
@@ -3083,7 +3071,7 @@
 
 <p>根据条件查找数据表的一条记录,如果记录不存在,将根据<code>$data</code>创建一条新的数据表记录对象</p>
 
-<p><strong>返回:</strong> <code>Wei\Db\Record</code> 记录对象</p>
+<p><strong>返回:</strong> <code>Wei\Record</code> 记录对象</p>
 
 <p><strong>参数</strong></p>
 
@@ -3182,7 +3170,7 @@
 
 <p>根据数据表名称获取记录类名称</p>
 
-<p><strong>返回:</strong> <code>string</code> 如果记录类不存在,返回默认类<code>Wei\Db\Record</code></p>
+<p><strong>返回:</strong> <code>string</code> 如果记录类不存在,返回默认类<code>Wei\Record</code></p>
 
 <h4>db-&gt;getUser()</h4>
 
@@ -3230,9 +3218,9 @@
 
 <h4>db-&gt;$table($conditions)</h4>
 
-<p>根据条件查找数据表的一行记录,返回的是一个<code>Wei\Db\Record</code>对象,等于<code>db-&gt;find($table, $conditions)</code></p>
+<p>根据条件查找数据表的一行记录,返回的是一个<code>Wei\Record</code>对象,等于<code>db-&gt;find($table, $conditions)</code></p>
 
-<p><strong>返回:</strong> <code>Wei\Db\Record</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
   </section>
 
 <!-- api/queryBuilder
