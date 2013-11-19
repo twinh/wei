@@ -23,10 +23,6 @@ $member = wei()->db('member')
 ### 创建一个新的QueryBuilder
 
 ```php
-// 创建一个新的QueryBuilder
-$qb = wei()->db->createQueryBuilder()
-
-// 创建一个指定数据表的QueryBuilder
 $qb = wei()->db('member');
 ```
 
@@ -246,11 +242,6 @@ $data = array(
 
 #### db($table)
 根据数据表名称,创建一个新Query Builder对象
-
-**返回:** `QueryBuilder`
-
-#### db->createQueryBuilder()
-创建一个新Query Builder对象
 
 **返回:** `QueryBuilder`
 
