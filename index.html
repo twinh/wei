@@ -3239,11 +3239,7 @@
 
 <h3>创建一个新的QueryBuilder</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 创建一个新的QueryBuilder</span>
-<span class="nv">$qb</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">createQueryBuilder</span><span class="p">()</span>
-
-<span class="c1">// 创建一个指定数据表的QueryBuilder</span>
-<span class="nv">$qb</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'member'</span><span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$qb</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'member'</span><span class="p">);</span>
 </code></pre></div>
 
 <h3>字符串查询条件</h3>
@@ -3453,12 +3449,6 @@
 <h4>db($table)</h4>
 
 <p>根据数据表名称,创建一个新Query Builder对象</p>
-
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
-
-<h4>db-&gt;createQueryBuilder()</h4>
-
-<p>创建一个新Query Builder对象</p>
 
 <p><strong>返回:</strong> <code>QueryBuilder</code></p>
 
