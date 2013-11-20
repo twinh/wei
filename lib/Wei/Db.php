@@ -646,7 +646,7 @@ class Db extends Base
      *
      * @param string $table
      * @param string|array $id The primary key value or an associative array containing column-value pairs
-     * @return Record|false
+     * @return Record
      * @throws \Exception
      */
     public function findOne($table, $id)
@@ -664,10 +664,9 @@ class Db extends Base
      */
     public function findOrCreate($table, $id, $data = array())
     {
-        $record = $this->select($table, $id);
-
+        $record = $this->find($table, $id, $data);
         if ($record) {
-            return $this->create($table, $record, false);
+            return $record;
         } else {
             !is_array($id) && $id = array('id' => $id);
             return $this->create($table, $id + $data);
