@@ -461,11 +461,11 @@ class Db extends Base
      * Executes a query and returns the first array result
      *
      * @param string $sql The SQL query
-     * @param array|string $params The query parameters
+     * @param mixed $params The query parameters
      * @param array $types The parameter types to bind
      * @return array|false Return an array or false when no result found
      */
-    public function fetch($sql, $params = false, $types = array())
+    public function fetch($sql, $params = array(), $types = array())
     {
         return $this->query($sql, $params, $types)->fetch();
     }
@@ -474,7 +474,7 @@ class Db extends Base
      * Executes a query and returns all array results
      *
      * @param string $sql The SQL query
-     * @param array $params The query parameters
+     * @param mixed $params The query parameters
      * @param array $types The parameter types to bind
      * @return array|false Return an array or false when no result found
      */
@@ -487,7 +487,7 @@ class Db extends Base
      * Executes a query and returns a column value of the first row
      *
      * @param string $sql The SQL query
-     * @param array $params The query parameters
+     * @param mixed $params The query parameters
      * @param int $column The index of column
      * @return string
      */
