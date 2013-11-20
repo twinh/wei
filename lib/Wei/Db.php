@@ -859,7 +859,7 @@ class Db extends Base
                 $fields = $this->filter($tableInfo, 'column_name');
         }
         if (empty($fields)) {
-            // For sqlite and pgsql
+            // For SQLite and PostgreSQL
             throw new \PDOException(sprintf('Table or view "%s" not found', $table));
         }
         return $fields;
@@ -917,13 +917,9 @@ class Db extends Base
      */
     protected function bindParameter(\PDOStatement $stmt, $params, $types)
     {
-        if (!is_array($params)) {
-            $params = array($params);
-        }
-        if (!is_array($types)) {
-            $types = array($types);
-        }
-
+        !is_array($params) && $params = array($params);
+        !is_array($types) && $types = array($types);
+        
         $isIndex = is_int(key($params));
         $index = 1;
 
