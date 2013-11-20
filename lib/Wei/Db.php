@@ -665,12 +665,11 @@ class Db extends Base
     public function findOrCreate($table, $id, $data = array())
     {
         $record = $this->find($table, $id, $data);
-        if ($record) {
-            return $record;
-        } else {
+        if (!$record) {
             !is_array($id) && $id = array('id' => $id);
-            return $this->create($table, $id + $data);
+            $record = $this->create($table, $id + $data);
         }
+        return $record;
     }
 
     /**
