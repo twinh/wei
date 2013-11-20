@@ -560,14 +560,8 @@ class Db extends Base
             }
         } catch (\PDOException $e) {
             // Builder exception message
-            $msg = sprintf(
-                "An exception occurred while executing \"%s\" : \n\n %s",
-                $sql,
-                $e->getMessage()
-            );
-            if ($params) {
-                $msg .= ', with parameters ' . json_encode($params);
-            }
+            $msg = sprintf("An exception occurred while executing \"%s\" : \n\n %s", $sql, $e->getMessage());
+            $params && $msg .= ', with parameters ' . json_encode($params);
 
             // Reset exception message
             $message = new \ReflectionProperty($e, 'message');
