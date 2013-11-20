@@ -687,20 +687,13 @@ class Db extends Base
      * $db->findAll('user', array('id' => array(1, 2, 3)));
      * ```
      *
-     * @param string $table The name of database table
-     * @param array|false $where The primary key value or an associative array containing column-value pairs
+     * @param string $table The name of table
+     * @param mixed $where The primary key value or an associative array containing column-value pairs
      * @return Record
      */
     public function findAll($table, $where = false)
     {
-        $data = $this->selectAll($table, $where);
-
-        $records = array();
-        foreach ($data as $row) {
-            $records[] = $this->create($table, $row, false);
-        }
-
-        return $this->create($table, $records, false);
+        return $this->create($table)->findAll($where);
     }
 
     /**
