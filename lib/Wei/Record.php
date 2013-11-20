@@ -399,7 +399,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                 get_class($this)
             ));
         }
-
         return isset($this->data[$name]) ? $this->data[$name] : null;
     }
 
@@ -407,15 +406,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Set the record field value
      * /Sets a new value for a field in a bulk update query.
      *
-     *  * ```
-     * $qb = $db->createQueryBuilder()
-     *     ->update('users u')
-     *     ->set('u.password = ?')
-     *     ->where('u.id = ?');
-     * ```
-     *
      * @param string $name
      * @param mixed $value
+     * @throws \InvalidArgumentException
      * @return $this
      */
     public function set($name, $value = null)
@@ -683,14 +676,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Get the complete SQL string formed by the current specifications of this QueryBuilder
      *
-     * ```php
-     * $qb = $db->createQueryBuilder()
-     *     ->select('id, group_id')
-     *     ->from('user');
-     *
-     * echo $qb->getSql(); // SELECT id, group_id FROM user u
-     * ```
-     *
      * @return string The sql query string
      */
     public function getSql()
@@ -722,14 +707,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Sets a query parameter for the query being constructed
      *
-     * ```php
-     * $qb = $db->createQueryBuilder()
-     *     ->select('*')
-     *     ->from('user', 'u')
-     *     ->where('u.id = :userId')
-     *     ->setParameter(':userId', 1);
-     * ```
-     *
      * @param string|integer $key The parameter position or name
      * @param mixed $value The parameter value
      * @param string|null $type PDO::PARAM_*
@@ -747,17 +724,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
     /**
      * Sets a collection of query parameters for the query being constructed
-     *
-     * ```php
-     * $qb = $db->createQueryBuilder()
-     *     ->select('*')
-     *     ->from('user', 'u')
-     *     ->where('u.id = :userId1 OR u.id = :userId2')
-     *     ->setParameters(array(
-     *         ':userId1' => 1,
-     *         ':userId2' => 2
-     *     ));
-     * ```
      *
      * @param array $params The query parameters to set
      * @param array $types The query parameters types to set
@@ -890,13 +856,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Specifies an item that is to be returned in the query result.
      * Replaces any previously specified selections, if any.
      *
-     * ```
-     * $qb = $db->createQueryBuilder()
-     *     ->select('u.id', 'p.id')
-     *     ->from('users u')
-     *     ->leftJoin('phones p', 'u.id = p.user_id');
-     * ```
-     *
      * @param mixed $select The selection expressions.
      * @return $this
      */
@@ -914,14 +873,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
     /**
      * Adds an item that is to be returned in the query result.
-     *
-     * ```
-     * $qb = $db->createQueryBuilder()
-     *     ->select('u.id')
-     *     ->addSelect('p.id')
-     *     ->from('users u')
-     *     ->leftJoin('phones p', 'u.id = p.user_id');
-     * ```
      *
      * @param mixed $select The selection expression.
      * @return $this
@@ -942,13 +893,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Turns the query being built into a bulk update query that ranges over
      * a certain table
      *
-     * ```
-     * $qb = $db->createQueryBuilder()
-     *     ->update('users u')
-     *     ->set('u.password', md5('password'))
-     *     ->where('u.id = ?');
-     * ```
-     *
      * @param string $table The table whose rows are subject to the update
      * @return $this
      */
@@ -964,18 +908,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
     /**
      * Sets table for FROM query
-     *
-     * ```php
-     * // SELECT * FROM users
-     * $qb = $db->createQueryBuilder()
-     *     ->select('*')
-     *     ->from('users');
-     *
-     * // SELECT * FROM users u
-     * $qb = $qb->createQueryBuilder()
-     *     ->select('*')
-     *     ->from('users u');
-     * ```
      *
      * @param string $from The table
      * @return $this
@@ -994,12 +926,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Adds a inner join to the query
      *
-     * ```php
-     * $qb = $db->createQueryBuilder()
-     *     ->from('user')
-     *     ->join('post', 'post.user_id = user.id');
-     * ```
-     *
      * @param string $table The table name to join
      * @param string $on The condition for the join
      * @return $this
@@ -1015,12 +941,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
     /**
      * Adds a inner join to the query
-     *
-     * ```php
-     * $qb = $db->createQueryBuilder()
-     *     ->from('user')
-     *     ->innerJoin('post', 'post.user_id = user.id');
-     * ```
      *
      * @param string $table The table name to join
      * @param string $on The condition for the join
@@ -1038,12 +958,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Adds a left join to the query
      *
-     * ```php
-     * $qb = $db->createQueryBuilder()
-     *     ->from('user')
-     *     ->leftJoin('post', 'post.user_id = user.id');
-     * ```
-     *
      * @param string $table The table name to join
      * @param string $on The condition for the join
      * @return $this
@@ -1059,12 +973,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
     /**
      * Adds a right join to the query
-     *
-     * ```php
-     * $qb = $db->createQueryBuilder()
-     *     ->from('user')
-     *     ->rightJoin('post', 'post.user_id = user.id');
-     * ```
      *
      * @param string $table The table name to join
      * @param string $on The condition for the join
@@ -1149,10 +1057,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         }
 
         $groupBy = is_array($groupBy) ? $groupBy : func_get_args();
-
         return $this->add('groupBy', $groupBy, false);
     }
-
 
     /**
      * Adds a grouping expression to the query.
@@ -1211,7 +1117,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function orHaving($conditions, $params = array(), $types = array())
     {
         $conditions = $this->processCondition($conditions, $params, $types);
-
         return $this->add('having', $conditions, true, 'OR');
     }
 
@@ -1389,7 +1294,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $query = 'UPDATE ' . $this->sqlParts['from']
             . ' SET ' . implode(", ", $this->sqlParts['set'])
             . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string)$this->sqlParts['where']) : '');
-
         return $query;
     }
 
@@ -1535,7 +1439,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     *  Filters elements of the collection using a callback function
+     * Filters elements of the collection using a callback function
      *
      * @param Closure $fn
      * @return $this
