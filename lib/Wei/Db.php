@@ -380,11 +380,20 @@ class Db extends Base
     /**
      * Executes a SELECT query and return the first result
      *
+     * ```php
+     * // Find by the "id" key
+     * $db->select('user', 1);
+     *
+     * // Find by specified column
+     * $db->select('user', array('username' => 'twin'));
+     *
+     * // Find in list
+     * $db->select('user', array('id' => array(1, 2, 3)));
+     * ```
+     *
      * @param string $table The name of table
-     * @param string|array $conditions The primary key value or an associative array containing column-value pairs
+     * @param string|array $conditions The "id" key value or an associative array containing column-value pairs
      * @param string $select The table columns to select
-     * @internal param array|string $value The criteria to search record
-     * @internal param string $column The table column to search
      * @return array|false An associative array containing column-value pairs
      */
     public function select($table, $conditions, $select = '*')
@@ -396,10 +405,21 @@ class Db extends Base
     /**
      * Executes a SELECT query and return all results
      *
+     * ```php
+     * // Find by the "id" key
+     * $db->selectAll('user', 1);
+     *
+     * // Find by specified column
+     * $db->selectAll('user', array('username' => 'twin'));
+     *
+     * // Find in list
+     * $db->selectAll('user', array('id' => array(1, 2, 3)));
+     * ```
+     *
      * @param string $table The name of table
-     * @param bool $conditions The primary key value or an associative array containing column-value pairs
+     * @param bool $conditions The "id" key value or an associative array containing column-value pairs
      * @param string $select The table columns to select
-     * @param int $limit The record number to retrieve
+     * @param int $limit The row number to retrieve
      * @return array
      */
     public function selectAll($table, $conditions = false, $select = '*', $limit = null)
@@ -428,7 +448,7 @@ class Db extends Base
      * Returns the rows number of table search by specified parameters
      *
      * @param string $table
-     * @param array|false $conditions
+     * @param mixed $conditions
      * @return int
      */
     public function count($table, $conditions = false)
@@ -619,17 +639,6 @@ class Db extends Base
     /**
      * Find a record from specified table and conditions
      *
-     * ```php
-     * // Find by primary key
-     * $db->find('user', 1);
-     *
-     * // Find by specified column
-     * $db->find('user', array('username' => 'twin'));
-     *
-     * // Find in list
-     * $db->find('user', array('id' => array(1, 2, 3)));
-     * ```
-     *
      * @param string $table The name of table
      * @param string|array $id The primary key value or an associative array containing column-value pairs
      * @return Record|false
@@ -674,17 +683,6 @@ class Db extends Base
 
     /**
      * Find records from specified table and conditions
-     *
-     * ```php
-     * // Find by primary key
-     * $db->findAll('user', 1);
-     *
-     * // Find by specified column
-     * $db->findAll('user', array('username' => 'twin'));
-     *
-     * // Find in list
-     * $db->findAll('user', array('id' => array(1, 2, 3)));
-     * ```
      *
      * @param string $table The name of table
      * @param mixed $where The primary key value or an associative array containing column-value pairs
