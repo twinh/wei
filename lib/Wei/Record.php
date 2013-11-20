@@ -1084,25 +1084,13 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Replaces any previously specified restrictions, if any.
      *
      * ```php
-     * $qb = $db->createQueryBuilder()
-     *     ->from('user')
-     *     ->where('id = ?', '1');
-     *
-     * $qb = $db->createQueryBuilder()
-     *     ->from('user')
-     *     ->where(array(
-     *         'id' => '1',
-     *         'username' => 'twin'
-     *      ));
-     *
-     * $qb = $db->createQueryBuilder()
-     *     ->from('user')
-     *     ->where(array(
-     *          'id' => array('1', '2', '3')
-     *     ));
+     * $user = wei()->db('user')->where('id = 1');
+     * $user = wei()->db('user')->where('id = ?', 1);
+     * $users = wei()->db('user')->where(array('id' => '1', 'username' => 'twin'));
+     * $users = wei()->where(array('id' => array('1', '2', '3')));
      * ```
      *
-     * @param string $conditions The WHERE conditions
+     * @param mixed $conditions The WHERE conditions
      * @param array $params The condition parameters
      * @param array $types The parameter types
      * @return $this
@@ -1116,14 +1104,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Adds one or more restrictions to the query results, forming a logical
      * conjunction with any previously specified restrictions
-     *
-     * ```php
-     * $qb = $db->createQueryBuilder()
-     *     ->select('*')
-     *     ->from('users u')
-     *     ->where('u.username LIKE ?')
-     *     ->andWhere('u.is_active = 1');
-     * ```
      *
      * @param string $conditions The WHERE conditions
      * @param array $params The condition parameters
@@ -1144,14 +1124,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Adds one or more restrictions to the query results, forming a logical
      * disjunction with any previously specified restrictions.
      *
-     * ```php
-     * $qb = $db->createQueryBuilder()
-     *     ->select('u.name')
-     *     ->from('users u')
-     *     ->where('u.id = 1')
-     *     ->orWhere('u.id = 2');
-     * ```
-     *
      * @param string $conditions The WHERE conditions
      * @param array $params The condition parameters
      * @param array $types The parameter types
@@ -1166,13 +1138,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Specifies a grouping over the results of the query.
      * Replaces any previously specified groupings, if any.
-     *
-     * ```
-     * $qb = $db->createQueryBuilder()
-     *     ->select('u.name')
-     *     ->from('users u')
-     *     ->groupBy('u.id');
-     * ```
      *
      * @param mixed $groupBy The grouping expression.
      * @return $this
@@ -1192,14 +1157,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Adds a grouping expression to the query.
      *
-     * ```
-     * $qb = $db->createQueryBuilder()
-     *     ->select('u.name')
-     *     ->from('users u')
-     *     ->groupBy('u.lastLogin');
-     *     ->addGroupBy('u.createdAt')
-     * ```
-     *
      * @param mixed $groupBy The grouping expression.
      * @return $this
      */
@@ -1208,9 +1165,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         if (empty($groupBy)) {
             return $this;
         }
-
         $groupBy = is_array($groupBy) ? $groupBy : func_get_args();
-
         return $this->add('groupBy', $groupBy, true);
     }
 
@@ -1331,7 +1286,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Get all query parts.
+     * Get all SQL parts
      *
      * @return array $sqlParts
      */
