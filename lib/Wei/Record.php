@@ -19,6 +19,15 @@ use Closure;
  */
 class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countable
 {
+    /* The query types. */
+    const SELECT = 0;
+    const DELETE = 1;
+    const UPDATE = 2;
+
+    /** The builder states. */
+    const STATE_DIRTY = 0;
+    const STATE_CLEAN = 1;
+
     /**
      * The record table name
      *
@@ -70,21 +79,24 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected $oldData = array();
 
+    /**
+     * Whether the data is loaded
+     *
+     * @var bool
+     */
     protected $loaded = false;
 
+    /**
+     * Whether it contains multiple or single row data
+     *
+     * @var bool
+     */
     protected $isColl;
 
-    /* The query types. */
-    const SELECT = 0;
-    const DELETE = 1;
-    const UPDATE = 2;
-
-    /** The builder states. */
-    const STATE_DIRTY = 0;
-    const STATE_CLEAN = 1;
-
     /**
-     * @var array The array of SQL parts collected.
+     * The parts of SQL
+     *
+     * @var array
      */
     protected $sqlParts = array(
         'select' => array(),
