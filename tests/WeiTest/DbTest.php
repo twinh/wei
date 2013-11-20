@@ -328,11 +328,11 @@ class DbTest extends TestCase
         $data = $this->db->fetch("SELECT * FROM member WHERE name = ?", 'twin');
         $this->assertInternalType('array', $data);
         $this->assertEquals('twin', $data['name']);
-        $this->assertEquals("SELECT * FROM member WHERE name = ?", $this->db->getLastSql());
+        $this->assertEquals("SELECT * FROM member WHERE name = ?", $this->db->getLastQuery());
 
         $data = $this->db->fetch("SELECT * FROM member WHERE name = ?", 'notFound');
         $this->assertFalse($data);
-        $this->assertEquals("SELECT * FROM member WHERE name = ?", $this->db->getLastSql());
+        $this->assertEquals("SELECT * FROM member WHERE name = ?", $this->db->getLastQuery());
 
         $data = $this->db->fetch("SELECT * FROM member WHERE name = :name", array('name' => 'twin'));
         $this->assertInternalType('array', $data);
@@ -866,7 +866,7 @@ class DbTest extends TestCase
 
         $this->db->executeUpdate("UPDATE member SET name = 'twin2' WHERE id = 1");
 
-        $this->assertEquals("UPDATE member SET name = 'twin2' WHERE id = 1", $this->db->getLastSql());
+        $this->assertEquals("UPDATE member SET name = 'twin2' WHERE id = 1", $this->db->getLastQuery());
     }
 
     public function testException()

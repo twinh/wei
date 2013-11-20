@@ -893,7 +893,7 @@ class Db extends Base
      *
      * @return string
      */
-    public function getLastSql()
+    public function getLastQuery()
     {
         return end($this->queries);
     }
@@ -919,7 +919,7 @@ class Db extends Base
     {
         !is_array($params) && $params = array($params);
         !is_array($types) && $types = array($types);
-        
+
         $isIndex = is_int(key($params));
         $index = 1;
 
