@@ -3450,43 +3450,43 @@
 
 <p>根据数据表名称,创建一个新Query Builder对象</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <h4>$qb-&gt;select($select = null)</h4>
 
 <p>设置SELECT字句要查询的字段名称</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <h4>$qb-&gt;addSelect($select = null)</h4>
 
 <p>增加SELECT子句要查询的字段名称</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <h4>$qb-&gt;delete($table = null)</h4>
 
 <p>设置SQL语句为DELETE操作</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <h4>$qb-&gt;update($table = null)</h4>
 
 <p>设置SQL语句为UPDATE操作</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <h4>$qb-&gt;from($table)</h4>
 
 <p>设置<code>FROM</code>字句的数据表名称</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <h4>$qb-&gt;where($conditions, $params = null, $types = array())</h4>
 
 <p>设置<code>WHERE</code>查询条件</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3518,7 +3518,7 @@
 
 <p>增加<code>AND</code>类型的<code>WHERE</code>条件到当前查询中</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3550,7 +3550,7 @@
 
 <p>增加<code>OR</code>类型的<code>WHERE</code>条件到当前查询中</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3582,7 +3582,7 @@
 
 <p>设置<code>ORDER BY</code>字句</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3609,7 +3609,7 @@
 
 <p>添加<code>ORDER BY</code>字句到当前查询中</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3636,7 +3636,7 @@
 
 <p>设置<code>OFFSET</code>字句</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3656,7 +3656,7 @@
 
 <p>设置<code>LIMIT</code>字句</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3678,7 +3678,7 @@
 
 <p>通过该方法设置<code>$page</code>的值之后,<code>OFFSET</code>的值等于<code>($page - 1) * $limit</code>,如果<code>$limit</code>为空,<code>$limit</code>会被设置为<code>10</code></p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3697,7 +3697,7 @@
 
 <p>增加<code>INNER JOIN</code>字句到当前查询中</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3729,7 +3729,7 @@
 
 <p>增加<code>LEFT JOIN</code>字句到当前查询中</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3757,7 +3757,7 @@
 
 <p>增加<code>RIGHT JOIN</code>字句到当前查询中</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3785,7 +3785,7 @@
 
 <p>设置<code>GROUP BY</code>字句</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3805,7 +3805,7 @@
 
 <p>添加<code>GROUP BY</code>字句到当前查询中</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3825,7 +3825,7 @@
 
 <p>设置<code>HAVING</code>字句</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3857,7 +3857,7 @@
 
 <p>添加<code>AND</code>类型<code>HAVING</code>字句到当前查询中</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3889,7 +3889,7 @@
 
 <p>添加<code>OR</code>类型的<code>HAVING</code>字句到当前查询中</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3921,7 +3921,7 @@
 
 <p>控制返回二维数组的键名为指定字段的值</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3940,7 +3940,7 @@
 
 <p>重置某一部分SQL字句</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3960,7 +3960,7 @@
 
 <p>重置某一部分或全部SQL字句</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -3977,15 +3977,15 @@
 </tr></tbody>
 </table><h4>$qb-&gt;find()</h4>
 
-<p>执行构造的SQL语句,并返回一个<code>Record</code>对象,如果结果为空,返回<code>false</code></p>
+<p>执行构造的SQL语句,并返回一个<code>Wei\Record</code>对象,如果结果为空,返回<code>false</code></p>
 
-<p><strong>返回:</strong> <code>Record</code>|<code>false</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code>|<code>false</code></p>
 
 <h4>$qb-&gt;findAll()</h4>
 
-<p>执行构造的SQL语句,并返回一个<code>Collection</code>对象</p>
+<p>执行构造的SQL语句,并返回一个<code>Wei\Record</code>对象</p>
 
-<p><strong>返回:</strong> <code>Collection</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <h4>$qb-&gt;fetch()</h4>
 
@@ -4009,7 +4009,7 @@
 
 <p>设置绑定参数的值和类型</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <p><strong>参数</strong></p>
 
@@ -4042,7 +4042,7 @@
 
 <p>设置多个绑定参数的值和类型</p>
 
-<p><strong>返回:</strong> <code>QueryBuilder</code></p>
+<p><strong>返回:</strong> <code>Wei\Record</code></p>
 
 <h4>$qb-&gt;getParameter($key)</h4>
 
