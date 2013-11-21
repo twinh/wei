@@ -139,13 +139,13 @@ namespace Wei
      * @property Validator\Luhn             $isLuhn
      * @method   bool                       isLuhn($input) Check if the input is valid by the Luhn algorithm
      * @property Validator\NaturalNumber    $isNaturalNumber
-     * @method   bool                       isNaturalNumber($input) Check if the input is a natural number(integer that greater or equals 0)
+     * @method   bool                       isNaturalNumber($input) Check if the input is a natural number (integer that greater than or equals 0)
      * @property Validator\Null             $isNull
      * @method   bool                       isNull($input) Check if the input is null
      * @property Validator\Number           $isNumber
      * @method   bool                       isNumber($input) Check if the input is number
      * @property Validator\PositiveInteger  $isPositiveInteger
-     * @method   bool                       isPositiveInteger($input) Check if the input is a positive integer
+     * @method   bool                       isPositiveInteger($input) Check if the input is a positive integer (integer that greater than 0)
      * @property Validator\Regex            $isRegex
      * @method   bool                       isRegex($input, $pattern) Check if the input is valid by specified regular expression
      * @property Validator\StartsWith       $isStartsWith

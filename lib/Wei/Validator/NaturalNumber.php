@@ -9,7 +9,7 @@
 namespace Wei\Validator;
 
 /**
- * Check if the input is a natural number(integer that greater or equals 0)
+ * Check if the input is a natural number (integer that greater than or equals 0)
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://en.wikipedia.org/wiki/Natural_number

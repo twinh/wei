@@ -9,7 +9,7 @@
 namespace Wei\Validator;
 
 /**
- * Check if the input is a positive integer
+ * Check if the input is a positive integer (integer that greater than 0)
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
