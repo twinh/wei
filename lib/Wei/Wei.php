@@ -114,42 +114,46 @@ namespace Wei
      * @method   \Wei\Validate   validate(array $option) Create a new validator and validate by specified options
      *
      * Data type and composition
-     * @property Validator\Alnum        $isAlnum
-     * @method   bool                   isAlnum($input) Check if the input contains letters (a-z) and digits (0-9)
-     * @property Validator\Alpha        $isAlpha
-     * @method   bool                   isAlpha($input) Check if the input contains only letters (a-z)
-     * @property Validator\Blank        $isBlank
-     * @method   bool                   isBlank($input) Check if the input is blank
-     * @property Validator\Decimal      $isDecimal
-     * @method   bool                   isDecimal($input) Check if the input is decimal
-     * @property Validator\Digit        $isDigit
-     * @method   bool                   isDigit($input) Check if the input contains only digits (0-9)
-     * @property Validator\DivisibleBy  $isDivisibleBy
-     * @method   bool                   isDivisibleBy($input, $divisor) Check if the input could be divisible by specified divisor
-     * @property Validator\DoubleByte   $isDoubleByte
-     * @method   bool                   isDoubleByte($input) Check if the input contains only double characters
-     * @property Validator\Present      $isPresent
-     * @method   bool                   isPresent($input) Check if the input is empty
-     * @property Validator\EndsWith     $isEndsWith
-     * @method   bool                   isEndsWith($input, $findMe, $case = false) Check if the input is ends with specified string
-     * @property Validator\In           $isIn
-     * @method   bool                   isIn($input, array $array, $strict = false) Check if the input is in specified array
-     * @property Validator\Lowercase    $isLowercase
-     * @method   bool                   isLowercase($input) Check if the input is lowercase
-     * @property Validator\Luhn         $isLuhn
-     * @method   bool                   isLuhn($input) Check if the input is valid by the Luhn algorithm
-     * @property Validator\Null         $isNull
-     * @method   bool                   isNull($input) Check if the input is null
-     * @property Validator\Number       $isNumber
-     * @method   bool                   isNumber($input) Check if the input is number
-     * @property Validator\Regex        $isRegex
-     * @method   bool                   isRegex($input, $pattern) Check if the input is valid by specified regular expression
-     * @property Validator\StartsWith   $isStartsWith
-     * @method   bool                   isStartsWith($input, $findMe, $case = false) Check if the input is starts with specified string
-     * @property Validator\Type         $isType
-     * @method   bool                   isType($input, $type) Check if the type of input is equals specified type name
-     * @property Validator\Uppercase    $isUppercase
-     * @method   bool                   isUppercase($input) Check if the input is uppercase
+     * @property Validator\Alnum            $isAlnum
+     * @method   bool                       isAlnum($input) Check if the input contains letters (a-z) and digits (0-9)
+     * @property Validator\Alpha            $isAlpha
+     * @method   bool                       isAlpha($input) Check if the input contains only letters (a-z)
+     * @property Validator\Blank            $isBlank
+     * @method   bool                       isBlank($input) Check if the input is blank
+     * @property Validator\Decimal          $isDecimal
+     * @method   bool                       isDecimal($input) Check if the input is decimal
+     * @property Validator\Digit            $isDigit
+     * @method   bool                       isDigit($input) Check if the input contains only digits (0-9)
+     * @property Validator\DivisibleBy      $isDivisibleBy
+     * @method   bool                       isDivisibleBy($input, $divisor) Check if the input could be divisible by specified divisor
+     * @property Validator\DoubleByte       $isDoubleByte
+     * @method   bool                       isDoubleByte($input) Check if the input contains only double characters
+     * @property Validator\Present          $isPresent
+     * @method   bool                       isPresent($input) Check if the input is empty
+     * @property Validator\EndsWith         $isEndsWith
+     * @method   bool                       isEndsWith($input, $findMe, $case = false) Check if the input is ends with specified string
+     * @property Validator\In               $isIn
+     * @method   bool                       isIn($input, array $array, $strict = false) Check if the input is in specified array
+     * @property Validator\Lowercase        $isLowercase
+     * @method   bool                       isLowercase($input) Check if the input is lowercase
+     * @property Validator\Luhn             $isLuhn
+     * @method   bool                       isLuhn($input) Check if the input is valid by the Luhn algorithm
+     * @property Validator\NaturalNumber    $isNaturalNumber
+     * @method   bool                       isNaturalNumber($input) Check if the input is a natural number(integer that greater or equals 0)
+     * @property Validator\Null             $isNull
+     * @method   bool                       isNull($input) Check if the input is null
+     * @property Validator\Number           $isNumber
+     * @method   bool                       isNumber($input) Check if the input is number
+     * @property Validator\PositiveInteger  $isPositiveInteger
+     * @method   bool                       isPositiveInteger($input) Check if the input is a positive integer
+     * @property Validator\Regex            $isRegex
+     * @method   bool                       isRegex($input, $pattern) Check if the input is valid by specified regular expression
+     * @property Validator\StartsWith       $isStartsWith
+     * @method   bool                       isStartsWith($input, $findMe, $case = false) Check if the input is starts with specified string
+     * @property Validator\Type             $isType
+     * @method   bool                       isType($input, $type) Check if the type of input is equals specified type name
+     * @property Validator\Uppercase        $isUppercase
+     * @method   bool                       isUppercase($input) Check if the input is uppercase
      *
      * Length
      * @property Validator\Length       $isLength
