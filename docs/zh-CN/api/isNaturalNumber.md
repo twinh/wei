@@ -45,7 +45,7 @@ if (wei()->isNaturalNumber('-1')) {
 
 名称                       | 信息
 ---------------------------|------
-invalidMessage             | %name%必须是正整数或0
+invalidMessage             | %name%必须是大于等于0的整数
 
 ### 方法
 

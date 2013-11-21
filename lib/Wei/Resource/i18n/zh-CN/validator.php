@@ -197,7 +197,7 @@ return array(
     '%name% must not be number' => '%name%不能是数字',
 
     // naturalNumber
-    '%name% must be positive integer or zero' => '%name%必须是正整数或0',
+    '%name% must be positive integer or zero' => '%name%必须是大于等于0的整数',
 
     // oneOf
     '%name% must be passed by at least one rule' => '%name%至少需要满足以下任何一条规则',
