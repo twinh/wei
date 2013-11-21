@@ -59,7 +59,7 @@ class View extends Base
     {
         parent::__construct($options);
 
-        // Adds wei to template variable
+        // Adds service container and view service to template variables
         $this->assign(array(
             'wei'   => $this->wei,
             'view'  => $this,
