@@ -97,6 +97,7 @@
         <li><a href="#isNaturalNumber">isNaturalNumber</a></li>
         <li><a href="#isNull">isNull</a></li>
         <li><a href="#isNumber">isNumber</a></li>
+        <li><a href="#isPositiveInteger">isPositiveInteger</a></li>
         <li><a href="#isPresent">isPresent</a></li>
         <li><a href="#isRegex">isRegex</a></li>
         <li><a href="#isRequired">isRequired</a></li>
@@ -7043,6 +7044,71 @@
 <h4>isNumber($input)</h4>
 
 <p>检查数据是否为有效数字</p>
+
+<h2>相关链接</h2>
+
+<ul>
+<li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
+</ul>
+  </section>
+
+<!-- api/isPositiveInteger
+  ================================================== -->
+  <section id="isPositiveInteger">
+  <div class="page-header"><h1>isPositiveInteger</h1></div>
+
+<p>检查数据是否为正整数(大于0的整数)</p>
+
+<h2>案例</h2>
+
+<h3>检查"1"是否为正整数</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isNaturalNumber</span><span class="p">(</span><span class="s1">'1'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 输出了'Yes'</span>
+</code></pre></div>
+
+<h3>检查"0"是否为自然数</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isNaturalNumber</span><span class="p">(</span><span class="s1">'0'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 输出了'No'</span>
+</code></pre></div>
+
+<h3>使用场景</h3>
+
+<ul>
+<li>加入购物车的商品数量</li>
+<li>用户年龄</li>
+<li>积分、金币数量等</li>
+</ul><h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>错误信息</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>信息</th>
+</tr></thead>
+<tbody><tr>
+<td>invalidMessage</td>
+<td>%name%必须是大于0的整数</td>
+</tr></tbody>
+</table><h3>方法</h3>
+
+<h4>isPositiveInteger($input)</h4>
+
+<p>检查数据是否为正整数(大于0的整数)</p>
 
 <h2>相关链接</h2>
 
