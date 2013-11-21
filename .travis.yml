@@ -8,6 +8,7 @@ php:
 
 services:
   - mongodb
+  - memcached
 
 before_script:
   - composer self-update
