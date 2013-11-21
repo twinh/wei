@@ -23,9 +23,9 @@ class View extends Base
     protected $vars = array();
 
     /**
-     * Template directory
+     * The directories to find template
      *
-     * @var string|array
+     * @var array
      */
     protected $dirs = array('.');
 
@@ -39,9 +39,9 @@ class View extends Base
     /**
      * The layout configuration
      *
-     * @var array|null
+     * @var array
      */
-    protected $layout;
+    protected $layout = array();
 
     /**
      * The current render view name
@@ -103,7 +103,7 @@ class View extends Base
         // Render layout
         if ($this->layout) {
             $layout = $this->layout;
-            $this->layout = null;
+            $this->layout = array();
             $content = $this->render($layout['name'], array(
                 $layout['variable'] => $content
             ) + $vars);
