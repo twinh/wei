@@ -222,6 +222,9 @@ return array(
     '%name% must be valid Chinese plate number' => '%name%必须是正确的车牌格式',
     '%name% must not be valid Chinese plate number' => '%name%不能是正确的车牌格式',
 
+    // positiveInteger
+    '%name% must be positive integer' => '%name%必须是大于0的整数',
+
     // postcode
     '%name% must be six length of digit' => '%name%必须是6位长度的数字',
     '%name% must not be postcode' => '%name%不能是邮政编码',
