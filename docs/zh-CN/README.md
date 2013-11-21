@@ -69,6 +69,7 @@ API参考目录
 * [isNaturalNumber](api/isNaturalNumber.md) - 检查数据是否为自然数(大于等于0的整数)
 * [isNull](api/isNull.md) - 检查数据是否为null
 * [isNumber](api/isNumber.md) - 检查数据是否为有效数字
+* [isPositiveInteger](api/isPositiveInteger.md) - 检查数据是否为正整数(大于0的整数)
 * [isPresent](api/isPresent.md) - 检查数据是否不为空(允许空格)
 * [isRegex](api/isRegex.md) - 检查数据是否匹配指定的正则表达式
 * [isRequired](api/isRequired.md) - 检查数据是否为空(用于组合验证,如果允许为空且数据为空,则不对数据进行剩余规则的校验)
