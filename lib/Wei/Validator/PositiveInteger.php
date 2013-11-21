@@ -22,7 +22,7 @@ class PositiveInteger extends BaseValidator
      */
     protected function doValidate($input)
     {
-        if (false !== filter_var($input, FILTER_VALIDATE_INT)) {
+        if (false !== filter_var($input, FILTER_VALIDATE_INT) && $input > 0) {
             return true;
         } else {
             $this->addError('invalid');
