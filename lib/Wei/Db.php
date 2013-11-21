@@ -194,6 +194,13 @@ class Db extends Base
     protected $queries = array();
 
     /**
+     * The field names of table
+     *
+     * @var array
+     */
+    protected $tableFields = array();
+
+    /**
      * The salve db configuration name
      *
      * @var string
@@ -821,39 +828,43 @@ class Db extends Base
     /**
      *  Returns the name of fields of specified table
      *
-     * @param $table
+     * @param string $table
      * @throws \PDOException
      * @return array
      */
     public function getTableFields($table)
     {
-        $table = $this->getTable($table);
-        $fields = array();
-        switch ($this->driver) {
-            case 'mysql':
-                $tableInfo = $this->fetchAll("SHOW COLUMNS FROM $table");
-                $fields = $this->filter($tableInfo, 'Field');
-                break;
+        if (isset($this->tableFields[$table])) {
+            return $this->tableFields[$table];
+        } else {
+            $fullTable = $this->getTable($table);
+            $fields = array();
+            switch ($this->driver) {
+                case 'mysql':
+                    $tableInfo = $this->fetchAll("SHOW COLUMNS FROM $fullTable");
+                    $fields = $this->filter($tableInfo, 'Field');
+                    break;
 
-            case 'sqlite':
-                $tableInfo = $this->fetchAll("PRAGMA table_info($table)");
-                $fields = $this->filter($tableInfo, 'name');
-                break;
+                case 'sqlite':
+                    $tableInfo = $this->fetchAll("PRAGMA table_info($fullTable)");
+                    $fields = $this->filter($tableInfo, 'name');
+                    break;
 
-            case 'pgsql':
-                $tableInfo = $this->fetchAll(
-                    "SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS
-                    WHERE table_catalog = ? AND table_name = ?
-                    ORDER BY dtd_identifier ASC",
-                    array($this->dbname, $table)
-                );
-                $fields = $this->filter($tableInfo, 'column_name');
+                case 'pgsql':
+                    $tableInfo = $this->fetchAll(
+                        "SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS
+                        WHERE table_catalog = ? AND table_name = ?
+                        ORDER BY dtd_identifier ASC",
+                        array($this->dbname, $fullTable)
+                    );
+                    $fields = $this->filter($tableInfo, 'column_name');
+            }
+            if (empty($fields)) {
+                // For SQLite and PostgreSQL
+                throw new \PDOException(sprintf('Table or view "%s" not found', $fullTable));
+            }
+            return $this->tableFields[$table] = $fields;
         }
-        if (empty($fields)) {
-            // For SQLite and PostgreSQL
-            throw new \PDOException(sprintf('Table or view "%s" not found', $table));
-        }
-        return $fields;
     }
 
     protected function filter($data, $name)
