@@ -56,3 +56,4 @@ invalidMessage             | %name%必须是大于0的整数
 --------
 
 * [验证器概览](../book/validators.md)
+* [检查数据是否为自然数(大于等于0的整数):isNaturalNumber](isNaturalNumber.md)
