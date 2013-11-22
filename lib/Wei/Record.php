@@ -416,7 +416,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
     /**
      * Set the record field value
-     * /Sets a new value for a field in a bulk update query.
      *
      * @param string $name
      * @param mixed $value
@@ -425,32 +424,27 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function set($name, $value = null)
     {
-        if (1 == func_num_args()) {
-            return $this->add('set', $name, true);
-        } else {
-            $this->loaded = true;
-            if (!$this->data && $value instanceof static) {
-                $this->isColl = true;
-            }
-
-            if ($this->isColl) {
-                if (!$value instanceof static) {
-                    throw new \InvalidArgumentException('Value for collection must be a instance of Wei\Record');
-                } else {
-                    $this->data[$name] = $value;
-                }
-            } else {
-                if (in_array($name, $this->getFields())) {
-                    $this->oldData[$name] = isset($this->data[$name]) ? $this->data[$name] : null;
-                    $this->data[$name] = $value;
-                    $this->isModified = true;
-                } else {
-                    $this->$name = $value;
-                }
-            }
-
-            return $this;
+        $this->loaded = true;
+        if (!$this->data && $value instanceof static) {
+            $this->isColl = true;
         }
+
+        if ($this->isColl) {
+            if (!$value instanceof static) {
+                throw new \InvalidArgumentException('Value for collection must be a instance of Wei\Record');
+            } else {
+                $this->data[$name] = $value;
+            }
+        } else {
+            if (in_array($name, $this->getFields())) {
+                $this->oldData[$name] = isset($this->data[$name]) ? $this->data[$name] : null;
+                $this->data[$name] = $value;
+                $this->isModified = true;
+            } else {
+                $this->$name = $value;
+            }
+        }
+        return $this;
     }
 
     /**
@@ -902,20 +896,16 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Turns the query being built into a bulk update query that ranges over
-     * a certain table
+     * Execute a update query with specified data
      *
-     * @param string $table The table whose rows are subject to the update
-     * @return $this
+     * @param array $set
+     * @return int
      */
-    public function update($table = null)
+    public function update($set = array())
     {
         $this->type = self::UPDATE;
-        if ($table) {
-            return $this->from($table);
-        } else {
-            return $this;
-        }
+        $this->add('set', $set, true);
+        return $this->execute();
     }
 
     /**

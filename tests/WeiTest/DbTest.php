@@ -599,15 +599,13 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $query = $this->db()
-            ->update('member')
-            ->set('name = ?')
-            ->where('id = 1')
-            ->setParameter(0, 'twin2');
-        $result = $query->execute();
-        $member = $this->db->find('member', 1);
+        $member = $this->db('member')->where('id = 1');
+        $result = $member->update("name = 'twin2'");
 
-        $this->assertEquals("UPDATE member SET name = ? WHERE id = 1", $query->getSql());
+        $this->assertGreaterThan(0, $result);
+        $this->assertEquals("UPDATE member SET name = 'twin2' WHERE id = 1", $member->getSql());
+
+        $member = $this->db->find('member', 1);
         $this->assertEquals(1, $result);
         $this->assertEquals('twin2', $member['name']);
     }
