@@ -73,7 +73,7 @@ $user->save();
 
 ```php
 // 删除id为1的用户
-wei()->db('user')->delete(array('id' => 1));
+wei()->db('user')->destroy(array('id' => 1));
 ```
 
 ### SQL查询构建器

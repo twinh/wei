@@ -36,7 +36,7 @@ $user->save();
 
 ```php
 // 删除id为1的用户
-wei()->db('user')->delete(array('id' => 1));
+wei()->db('user')->destroy(array('id' => 1));
 ```
 
 ### 回调调用顺序
@@ -141,7 +141,7 @@ wei()->db('user')->delete(array('id' => 1));
 #### $record->save()
 保存记录数据到数据库中
 
-#### $record->delete()
+#### $record->destroy()
 从数据库中删除该记录数据
 
 #### $record->remove($field)
