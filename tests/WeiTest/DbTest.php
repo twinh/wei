@@ -739,13 +739,13 @@ class DbTest extends TestCase
         $this->assertInternalType('string', $member->toJson());
     }
 
-    public function testDeleteRecord()
+    public function testDestroyRecord()
     {
         $this->initFixtures();
 
         $member = $this->db->find('member', 1);
 
-        $result = $member->delete();
+        $result = $member->destroy();
 
         $this->assertTrue($result);
 
@@ -1395,24 +1395,24 @@ class DbTest extends TestCase
         ));
     }
 
-    public function testFindRecordAndDelete()
+    public function testFindRecordAndDestroy()
     {
         $this->initFixtures();
 
         $member = $this->db('member')->find(array('id' => 1));
-        $result = $member->delete();
+        $result = $member->destroy();
         $this->assertTrue($result);
 
         $member = $this->db('member')->find(array('id' => 1));
         $this->assertFalse($member);
     }
 
-    public function testFindCollectionAndDelete()
+    public function testFindCollectionAndDestroy()
     {
         $this->initFixtures();
 
         $members = $this->db('member')->where('group_id = 1');
-        $members->delete();
+        $members->destroy();
 
         $members = $this->db('member')->where('group_id = 1');
         $this->assertEquals(0, count($members));
@@ -1487,12 +1487,12 @@ class DbTest extends TestCase
         $this->assertEquals('Larry', $members[$larry['id']]['name']);
     }
 
-    public function testDeleteRecordAndFindAgainReturnFalse()
+    public function testDestroyRecordAndFindAgainReturnFalse()
     {
         $this->initFixtures();
 
         $member = $this->db('member');
-        $result = $member->delete(array('id' => 1));
+        $result = $member->find(array('id' => 1))->destroy();
         $this->assertTrue($result);
 
         $member = $this->db('member')->find(array('id' => 1));

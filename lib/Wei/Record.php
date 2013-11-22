@@ -356,14 +356,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Delete the current record
+     * Delete the current record and trigger the beforeDelete and afterDelete callback
      *
-     * @param mixed $conditions
      * @return bool
      */
-    public function delete($conditions = null)
+    public function destroy()
     {
-        $this->andWhere($conditions);
         !$this->loaded && $this->loadData(0);
 
         if (!$this->isColl) {
@@ -374,7 +372,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         } else {
             /** @var $record Record */
             foreach ($this->data as $record) {
-                $record->delete();
+                $record->destroy();
             }
             return true;
         }
@@ -903,8 +901,19 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function update($set = array())
     {
-        $this->type = self::UPDATE;
         $this->add('set', $set, true);
+        $this->type = self::UPDATE;
+        return $this->execute();
+    }
+
+    /**
+     * @param mixed $conditions
+     * @return mixed
+     */
+    public function delete($conditions = null)
+    {
+        $this->andWhere($conditions);
+        $this->type = self::DELETE;
         return $this->execute();
     }
 
