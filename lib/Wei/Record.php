@@ -1214,35 +1214,30 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Reset all SQL parts
      *
-     * @param array $queryPartNames
+     * @param array $name
      * @return $this
      */
-    public function resetAll($queryPartNames = null)
+    public function resetSqlParts($name = null)
     {
-        if (is_null($queryPartNames)) {
-            $queryPartNames = array_keys($this->sqlParts);
+        if (is_null($name)) {
+            $name = array_keys($this->sqlParts);
         }
-
-        foreach ($queryPartNames as $queryPartName) {
-            $this->reset($queryPartName);
+        foreach ($name as $queryPartName) {
+            $this->resetSqlPart($queryPartName);
         }
-
         return $this;
     }
 
     /**
      * Reset single SQL part
      *
-     * @param string $queryPartName
+     * @param string $name
      * @return $this
      */
-    public function reset($queryPartName)
+    public function resetSqlPart($name)
     {
-        $this->sqlParts[$queryPartName] = is_array($this->sqlParts[$queryPartName])
-            ? array() : null;
-
+        $this->sqlParts[$name] = is_array($this->sqlParts[$name]) ? array() : null;
         $this->state = self::STATE_DIRTY;
-
         return $this;
     }
 

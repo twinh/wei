@@ -369,7 +369,7 @@ class QueryTest extends TestCase
         $qb->select('u.*')->from('users u')->where('u.name = ?');
 
         $this->assertEquals('SELECT u.* FROM users u WHERE u.name = ?', $qb->getSql());
-        $qb->reset('where');
+        $qb->resetSqlPart('where');
         $this->assertEquals('SELECT u.* FROM users u', $qb->getSql());
     }
 
@@ -380,7 +380,7 @@ class QueryTest extends TestCase
         $qb->select('u.*')->from('users u')->where('u.name = ?')->orderBy('u.name');
 
         $this->assertEquals('SELECT u.* FROM users u WHERE u.name = ? ORDER BY u.name ASC', $qb->getSql());
-        $qb->resetAll(array('where', 'orderBy'));
+        $qb->resetSqlParts(array('where', 'orderBy'));
         $this->assertEquals('SELECT u.* FROM users u', $qb->getSql());
     }
 

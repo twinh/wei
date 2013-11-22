@@ -1005,7 +1005,7 @@ class DbTest extends TestCase
         );
     }
 
-    public function testGetAndResetAll()
+    public function testGetAndResetAllSqlParts()
     {
         $query = $this->db('member')->offset(1)->limit(1);
 
@@ -1016,7 +1016,7 @@ class DbTest extends TestCase
         $this->assertArrayHasKey('offset', $queryParts);
         $this->assertArrayHasKey('limit', $queryParts);
 
-        $query->resetAll();
+        $query->resetSqlParts();
 
         $this->assertEquals(null, $query->getSqlPart('offset'));
         $this->assertEquals(null, $query->getSqlPart('limit'));
