@@ -305,7 +305,6 @@ class QueryTest extends TestCase
         $qb2 = $qb->select();
 
         $this->assertSame($qb, $qb2);
-        $this->assertEquals(Record::SELECT, $qb->getType());
     }
 
     public function testSelectAddSelect()
@@ -325,7 +324,6 @@ class QueryTest extends TestCase
         $qb2 = $qb->addSelect();
 
         $this->assertSame($qb, $qb2);
-        $this->assertEquals(Record::SELECT, $qb->getType());
     }
 
     public function testGetState()
