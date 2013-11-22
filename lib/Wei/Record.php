@@ -678,87 +678,27 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Get the complete SQL string formed by the current specifications of this QueryBuilder
+     * Execute a update query with specified data
      *
-     * @return string The sql query string
+     * @param array $set
+     * @return int
      */
-    public function getSql()
+    public function update($set = array())
     {
-        if ($this->sql !== null && $this->state === self::STATE_CLEAN) {
-            return $this->sql;
-        }
-
-        switch ($this->type) {
-            case self::DELETE:
-                $this->sql = $this->getSqlForDelete();
-                break;
-
-            case self::UPDATE:
-                $this->sql = $this->getSqlForUpdate();
-                break;
-
-            case self::SELECT:
-            default:
-                $this->sql = $this->getSqlForSelect();
-                break;
-        }
-
-        $this->state = self::STATE_CLEAN;
-
-        return $this->sql;
+        $this->add('set', $set, true);
+        $this->type = self::UPDATE;
+        return $this->execute();
     }
 
     /**
-     * Sets a query parameter for the query being constructed
-     *
-     * @param string|integer $key The parameter position or name
-     * @param mixed $value The parameter value
-     * @param string|null $type PDO::PARAM_*
-     * @return $this
+     * @param mixed $conditions
+     * @return mixed
      */
-    public function setParameter($key, $value, $type = null)
+    public function delete($conditions = null)
     {
-        if ($type !== null) {
-            $this->paramTypes[$key] = $type;
-        }
-
-        $this->params[$key] = $value;
-        return $this;
-    }
-
-    /**
-     * Sets a collection of query parameters for the query being constructed
-     *
-     * @param array $params The query parameters to set
-     * @param array $types The query parameters types to set
-     * @return $this
-     */
-    public function setParameters(array $params, array $types = array())
-    {
-        $this->paramTypes = $types;
-        $this->params = $params;
-        return $this;
-    }
-
-    /**
-     * Gets all defined query parameters for the query being constructed.
-     *
-     * @return array The currently defined query parameters.
-     */
-    public function getParameters()
-    {
-        return $this->params;
-    }
-
-    /**
-     * Gets a (previously set) query parameter of the query being constructed
-     *
-     * @param mixed $key The key (index or name) of the bound parameter
-     * @return mixed The value of the bound parameter
-     */
-    public function getParameter($key)
-    {
-        return isset($this->params[$key]) ? $this->params[$key] : null;
+        $this->andWhere($conditions);
+        $this->type = self::DELETE;
+        return $this->execute();
     }
 
     /**
@@ -804,59 +744,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Either appends to or replaces a single, generic query part.
-     *
-     * The available parts are: 'select', 'from', 'set', 'where',
-     * 'groupBy', 'having', 'orderBy', 'limit' and 'offset'.
-     *
-     * @param string $sqlPartName
-     * @param string $sqlPart
-     * @param boolean $append
-     * @param string $type
-     * @return $this
-     */
-    public function add($sqlPartName, $sqlPart, $append = false, $type = null)
-    {
-        // TODO is it OK ?
-        $this->isNew = false;
-
-        if (!$sqlPart) {
-            return $this;
-        }
-
-        $isArray = is_array($sqlPart);
-        $isMultiple = is_array($this->sqlParts[$sqlPartName]);
-
-        if ($isMultiple && !$isArray) {
-            $sqlPart = array($sqlPart);
-        }
-
-        $this->state = self::STATE_DIRTY;
-
-        if ($append) {
-            if ($sqlPartName == 'where' || $sqlPartName == 'having') {
-                if ($this->sqlParts[$sqlPartName]) {
-                    $this->sqlParts[$sqlPartName] = '(' . $this->sqlParts[$sqlPartName] . ') ' . $type . ' (' . $sqlPart . ')';
-                } else {
-                    $this->sqlParts[$sqlPartName] = $sqlPart;
-                }
-            } elseif ($sqlPartName == 'orderBy' || $sqlPartName == 'groupBy' || $sqlPartName == 'select' || $sqlPartName == 'set') {
-                foreach ($sqlPart as $part) {
-                    $this->sqlParts[$sqlPartName][] = $part;
-                }
-            } elseif ($isMultiple) {
-                $this->sqlParts[$sqlPartName][] = $sqlPart;
-            }
-
-            return $this;
-        }
-
-        $this->sqlParts[$sqlPartName] = $sqlPart;
-
-        return $this;
-    }
-
-    /**
      * Specifies an item that is to be returned in the query result.
      * Replaces any previously specified selections, if any.
      *
@@ -891,30 +778,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
         $selects = is_array($select) ? $select : func_get_args();
         return $this->add('select', $selects, true);
-    }
-
-    /**
-     * Execute a update query with specified data
-     *
-     * @param array $set
-     * @return int
-     */
-    public function update($set = array())
-    {
-        $this->add('set', $set, true);
-        $this->type = self::UPDATE;
-        return $this->execute();
-    }
-
-    /**
-     * @param mixed $conditions
-     * @return mixed
-     */
-    public function delete($conditions = null)
-    {
-        $this->andWhere($conditions);
-        $this->type = self::DELETE;
-        return $this->execute();
     }
 
     /**
@@ -1242,6 +1105,90 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
+     * Sets a query parameter for the query being constructed
+     *
+     * @param string|integer $key The parameter position or name
+     * @param mixed $value The parameter value
+     * @param string|null $type PDO::PARAM_*
+     * @return $this
+     */
+    public function setParameter($key, $value, $type = null)
+    {
+        if ($type !== null) {
+            $this->paramTypes[$key] = $type;
+        }
+
+        $this->params[$key] = $value;
+        return $this;
+    }
+
+    /**
+     * Gets a (previously set) query parameter of the query being constructed
+     *
+     * @param mixed $key The key (index or name) of the bound parameter
+     * @return mixed The value of the bound parameter
+     */
+    public function getParameter($key)
+    {
+        return isset($this->params[$key]) ? $this->params[$key] : null;
+    }
+
+    /**
+     * Sets a collection of query parameters for the query being constructed
+     *
+     * @param array $params The query parameters to set
+     * @param array $types The query parameters types to set
+     * @return $this
+     */
+    public function setParameters(array $params, array $types = array())
+    {
+        $this->paramTypes = $types;
+        $this->params = $params;
+        return $this;
+    }
+
+    /**
+     * Gets all defined query parameters for the query being constructed.
+     *
+     * @return array The currently defined query parameters.
+     */
+    public function getParameters()
+    {
+        return $this->params;
+    }
+
+    /**
+     * Get the complete SQL string formed by the current specifications of this QueryBuilder
+     *
+     * @return string The sql query string
+     */
+    public function getSql()
+    {
+        if ($this->sql !== null && $this->state === self::STATE_CLEAN) {
+            return $this->sql;
+        }
+
+        switch ($this->type) {
+            case self::DELETE:
+                $this->sql = $this->getSqlForDelete();
+                break;
+
+            case self::UPDATE:
+                $this->sql = $this->getSqlForUpdate();
+                break;
+
+            case self::SELECT:
+            default:
+                $this->sql = $this->getSqlForSelect();
+                break;
+        }
+
+        $this->state = self::STATE_CLEAN;
+
+        return $this->sql;
+    }
+
+    /**
      * Converts this instance into an SELECT string in SQL
      *
      * @param bool $count
@@ -1369,6 +1316,56 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     {
         $this->loadData(0);
         return new \ArrayIterator($this->data);
+    }
+
+    /**
+     * Either appends to or replaces a single, generic query part.
+     *
+     * The available parts are: 'select', 'from', 'set', 'where',
+     * 'groupBy', 'having', 'orderBy', 'limit' and 'offset'.
+     *
+     * @param string $sqlPartName
+     * @param string $sqlPart
+     * @param boolean $append
+     * @param string $type
+     * @return $this
+     */
+    protected function add($sqlPartName, $sqlPart, $append = false, $type = null)
+    {
+        $this->isNew = false;
+
+        if (!$sqlPart) {
+            return $this;
+        }
+
+        $isArray = is_array($sqlPart);
+        $isMultiple = is_array($this->sqlParts[$sqlPartName]);
+
+        if ($isMultiple && !$isArray) {
+            $sqlPart = array($sqlPart);
+        }
+
+        $this->state = self::STATE_DIRTY;
+
+        if ($append) {
+            if ($sqlPartName == 'where' || $sqlPartName == 'having') {
+                if ($this->sqlParts[$sqlPartName]) {
+                    $this->sqlParts[$sqlPartName] = '(' . $this->sqlParts[$sqlPartName] . ') ' . $type . ' (' . $sqlPart . ')';
+                } else {
+                    $this->sqlParts[$sqlPartName] = $sqlPart;
+                }
+            } elseif ($sqlPartName == 'orderBy' || $sqlPartName == 'groupBy' || $sqlPartName == 'select' || $sqlPartName == 'set') {
+                foreach ($sqlPart as $part) {
+                    $this->sqlParts[$sqlPartName][] = $part;
+                }
+            } elseif ($isMultiple) {
+                $this->sqlParts[$sqlPartName][] = $sqlPart;
+            }
+            return $this;
+        }
+
+        $this->sqlParts[$sqlPartName] = $sqlPart;
+        return $this;
     }
 
     /**
