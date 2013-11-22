@@ -754,6 +754,24 @@ class DbTest extends TestCase
         $this->assertFalse($member);
     }
 
+    public function testBeforeAndAfterDestroy()
+    {
+        $this->initFixtures();
+
+        $member = $this->db->find('member', 1);
+        $member->setOption(array(
+            'beforeDestroy' => function() {
+                echo 'beforeDestroy';
+            },
+            'afterDestroy' => function() {
+                echo 'afterDestroy';
+            }
+        ));
+
+        $this->expectOutputString('beforeDestroyafterDestroy');
+        $member->destroy();
+    }
+
     public function testGetTable()
     {
         $this->initFixtures();
