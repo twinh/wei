@@ -198,14 +198,14 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @var callable
      */
-    protected $beforeDelete;
+    protected $beforeDestroy;
 
     /**
      * The callback triggered after delete a record
      *
      * @var callable
      */
-    protected $afterDelete;
+    protected $afterDestroy;
 
     /**
      * Constructor
@@ -356,7 +356,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Delete the current record and trigger the beforeDelete and afterDelete callback
+     * Delete the current record and trigger the beforeDestroy and afterDestroy callback
      *
      * @return bool
      */
@@ -365,9 +365,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         !$this->loaded && $this->loadData(0);
 
         if (!$this->isColl) {
-            $this->trigger('beforeDelete');
+            $this->trigger('beforeDestroy');
             $result = (bool)$this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
-            $this->trigger('afterDelete');
+            $this->trigger('afterDestroy');
             return $result;
         } else {
             /** @var $record Record */
@@ -1513,14 +1513,14 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * The method called before delete a record
      */
-    public function beforeDelete()
+    public function beforeDestroy()
     {
     }
 
     /**
      * The method called after delete a record
      */
-    public function afterDelete()
+    public function afterDestroy()
     {
     }
 }

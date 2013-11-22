@@ -60,8 +60,8 @@ wei()->db('user')->destroy(array('id' => 1));
 #### 删除记录
 
 * afterLoad
-* beforeDelete
-* afterDelete
+* beforeDestroy
+* afterDestroy
 
 调用方式
 --------
@@ -97,10 +97,10 @@ wei()->db('user')->destroy(array('id' => 1));
 #### afterUpdate($record, $wei)
 更新记录到数据库后触发的回调
 
-#### beforeDelete($record, $wei)
+#### beforeDestroy($record, $wei)
 删除记录前触发的回调
 
-#### afterDelete($record, $wei)
+#### afterDestroy($record, $wei)
 删除记录后触发的回调
 
 ### 方法
