@@ -22,7 +22,7 @@ class QueryTest extends TestCase
         $qb->select('u.id')
             ->from('users u');
 
-        $this->assertEquals('SELECT u.id FROM users u', (string) $qb);
+        $this->assertEquals('SELECT u.id FROM users u', $qb->getSql());
     }
 
     public function testSelectWithSimpleWhere()
@@ -33,7 +33,7 @@ class QueryTest extends TestCase
             ->from('users u')
             ->where('u.nickname = ?', '1');
 
-        $this->assertEquals("SELECT u.id FROM users u WHERE u.nickname = ?", (string) $qb);
+        $this->assertEquals("SELECT u.id FROM users u WHERE u.nickname = ?", $qb->getSql());
     }
 
     public function testSelectWithLeftJoin()
@@ -55,7 +55,7 @@ class QueryTest extends TestCase
             ->from('users u')
             ->join('phones p', 'p.user_id = u.id');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u INNER JOIN phones p ON p.user_id = u.id', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u INNER JOIN phones p ON p.user_id = u.id', $qb->getSql());
     }
 
     public function testSelectWithInnerJoin()
@@ -66,7 +66,7 @@ class QueryTest extends TestCase
             ->from('users u')
             ->innerJoin('phones p', 'p.user_id = u.id');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u INNER JOIN phones p ON p.user_id = u.id', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u INNER JOIN phones p ON p.user_id = u.id', $qb->getSql());
     }
 
     public function testSelectWithRightJoin()
@@ -77,7 +77,7 @@ class QueryTest extends TestCase
             ->from('users u')
             ->rightJoin('phones p', 'p.user_id = u.id');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u RIGHT JOIN phones p ON p.user_id = u.id', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u RIGHT JOIN phones p ON p.user_id = u.id', $qb->getSql());
     }
 
     public function testSelectWithAndWhereConditions()
@@ -89,7 +89,7 @@ class QueryTest extends TestCase
             ->where('u.username = ?')
             ->andWhere('u.name = ?');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u WHERE (u.username = ?) AND (u.name = ?)', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u WHERE (u.username = ?) AND (u.name = ?)', $qb->getSql());
     }
 
     public function testSelectWithOrWhereConditions()
@@ -101,7 +101,7 @@ class QueryTest extends TestCase
             ->where('u.username = ?')
             ->orWhere('u.name = ?');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u WHERE (u.username = ?) OR (u.name = ?)', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u WHERE (u.username = ?) OR (u.name = ?)', $qb->getSql());
     }
 
     public function testSelectWithOrOrWhereConditions()
@@ -113,7 +113,7 @@ class QueryTest extends TestCase
             ->orWhere('u.username = ?')
             ->orWhere('u.name = ?');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u WHERE (u.username = ?) OR (u.name = ?)', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u WHERE (u.username = ?) OR (u.name = ?)', $qb->getSql());
     }
 
     public function testSelectWithAndOrWhereConditions()
@@ -127,7 +127,7 @@ class QueryTest extends TestCase
             ->orWhere('u.name = ?')
             ->andWhere('u.name = ?');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u WHERE (((u.username = ?) AND (u.username = ?)) OR (u.name = ?)) AND (u.name = ?)', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u WHERE (((u.username = ?) AND (u.username = ?)) OR (u.name = ?)) AND (u.name = ?)', $qb->getSql());
     }
 
     public function testSelectGroupBy()
@@ -138,7 +138,7 @@ class QueryTest extends TestCase
             ->from('users u')
             ->groupBy('u.id');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id', $qb->getSql());
     }
 
     public function testSelectEmptyGroupBy()
@@ -149,7 +149,7 @@ class QueryTest extends TestCase
             ->groupBy(array())
             ->from('users u');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u', $qb->getSql());
     }
 
     public function testSelectEmptyAddGroupBy()
@@ -160,7 +160,7 @@ class QueryTest extends TestCase
             ->addGroupBy(array())
             ->from('users u');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u', $qb->getSql());
     }
 
     public function testSelectAddGroupBy()
@@ -172,7 +172,7 @@ class QueryTest extends TestCase
             ->groupBy('u.id')
             ->addGroupBy('u.foo');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id, u.foo', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id, u.foo', $qb->getSql());
     }
 
     public function testSelectAddGroupBys()
@@ -184,7 +184,7 @@ class QueryTest extends TestCase
             ->groupBy('u.id')
             ->addGroupBy('u.foo', 'u.bar');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id, u.foo, u.bar', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id, u.foo, u.bar', $qb->getSql());
     }
 
     public function testSelectHaving()
@@ -196,7 +196,7 @@ class QueryTest extends TestCase
             ->groupBy('u.id')
             ->having('u.name = ?');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING u.name = ?', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING u.name = ?', $qb->getSql());
     }
 
     public function testSelectAndHaving()
@@ -208,7 +208,7 @@ class QueryTest extends TestCase
             ->groupBy('u.id')
             ->andHaving('u.name = ?');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING u.name = ?', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING u.name = ?', $qb->getSql());
     }
 
     public function testSelectHavingAndHaving()
@@ -221,7 +221,7 @@ class QueryTest extends TestCase
             ->having('u.name = ?')
             ->andHaving('u.username = ?');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING (u.name = ?) AND (u.username = ?)', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING (u.name = ?) AND (u.username = ?)', $qb->getSql());
     }
 
     public function testSelectHavingOrHaving()
@@ -234,7 +234,7 @@ class QueryTest extends TestCase
             ->having('u.name = ?')
             ->orHaving('u.username = ?');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING (u.name = ?) OR (u.username = ?)', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING (u.name = ?) OR (u.username = ?)', $qb->getSql());
     }
 
     public function testSelectOrHavingOrHaving()
@@ -247,7 +247,7 @@ class QueryTest extends TestCase
             ->orHaving('u.name = ?')
             ->orHaving('u.username = ?');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING (u.name = ?) OR (u.username = ?)', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING (u.name = ?) OR (u.username = ?)', $qb->getSql());
     }
 
     public function testSelectHavingAndOrHaving()
@@ -261,7 +261,7 @@ class QueryTest extends TestCase
             ->orHaving('u.username = ?')
             ->andHaving('u.username = ?');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING ((u.name = ?) OR (u.username = ?)) AND (u.username = ?)', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING ((u.name = ?) OR (u.username = ?)) AND (u.username = ?)', $qb->getSql());
     }
 
     public function testSelectOrderBy()
@@ -272,7 +272,7 @@ class QueryTest extends TestCase
             ->from('users u')
             ->orderBy('u.name');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u ORDER BY u.name ASC', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u ORDER BY u.name ASC', $qb->getSql());
     }
 
     public function testSelectAddOrderBy()
@@ -284,7 +284,7 @@ class QueryTest extends TestCase
             ->orderBy('u.name')
             ->addOrderBy('u.username', 'DESC');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u ORDER BY u.name ASC, u.username DESC', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u ORDER BY u.name ASC, u.username DESC', $qb->getSql());
     }
 
     public function testSelectAddAddOrderBy()
@@ -296,7 +296,7 @@ class QueryTest extends TestCase
             ->addOrderBy('u.name')
             ->addOrderBy('u.username', 'DESC');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u ORDER BY u.name ASC, u.username DESC', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u ORDER BY u.name ASC, u.username DESC', $qb->getSql());
     }
 
     public function testEmptySelect()
@@ -316,7 +316,7 @@ class QueryTest extends TestCase
             ->addSelect('p.*')
             ->from('users u');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u', (string) $qb);
+        $this->assertEquals('SELECT u.*, p.* FROM users u', $qb->getSql());
     }
 
     public function testEmptyAddSelect()
@@ -368,9 +368,9 @@ class QueryTest extends TestCase
 
         $qb->select('u.*')->from('users u')->where('u.name = ?');
 
-        $this->assertEquals('SELECT u.* FROM users u WHERE u.name = ?', (string)$qb);
+        $this->assertEquals('SELECT u.* FROM users u WHERE u.name = ?', $qb->getSql());
         $qb->reset('where');
-        $this->assertEquals('SELECT u.* FROM users u', (string)$qb);
+        $this->assertEquals('SELECT u.* FROM users u', $qb->getSql());
     }
 
     public function testResetQueryParts()
@@ -379,9 +379,9 @@ class QueryTest extends TestCase
 
         $qb->select('u.*')->from('users u')->where('u.name = ?')->orderBy('u.name');
 
-        $this->assertEquals('SELECT u.* FROM users u WHERE u.name = ? ORDER BY u.name ASC', (string)$qb);
+        $this->assertEquals('SELECT u.* FROM users u WHERE u.name = ? ORDER BY u.name ASC', $qb->getSql());
         $qb->resetAll(array('where', 'orderBy'));
-        $this->assertEquals('SELECT u.* FROM users u', (string)$qb);
+        $this->assertEquals('SELECT u.* FROM users u', $qb->getSql());
     }
 
     public function testFrom()

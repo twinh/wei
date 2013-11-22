@@ -1310,17 +1310,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Gets a string representation of this QueryBuilder which corresponds to
-     * the final SQL query being constructed.
-     *
-     * @return string The string representation of this QueryBuilder.
-     */
-    public function __toString()
-    {
-        return $this->getSql();
-    }
-
-    /**
      * Check if the offset exists
      *
      * @param  string $offset
