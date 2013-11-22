@@ -53,7 +53,7 @@ class QueryTest extends TestCase
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
-            ->Join('phones p', 'p.user_id = u.id');
+            ->join('phones p', 'p.user_id = u.id');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u INNER JOIN phones p ON p.user_id = u.id', (string) $qb);
     }
@@ -326,46 +326,6 @@ class QueryTest extends TestCase
 
         $this->assertSame($qb, $qb2);
         $this->assertEquals(Record::SELECT, $qb->getType());
-    }
-
-    public function testUpdate()
-    {
-        $qb   = $this->record;
-        $qb->update('users u')
-            ->set('u.foo = ?')
-            ->set('u.bar = ?');
-
-        $this->assertEquals(Record::UPDATE, $qb->getType());
-        $this->assertEquals('UPDATE users u SET u.foo = ?, u.bar = ?', (string) $qb);
-    }
-
-    public function testUpdateWithoutAlias()
-    {
-        $qb   = $this->record;
-        $qb->update('users')
-            ->set('foo = ?')
-            ->set('bar = ?');
-
-        $this->assertEquals('UPDATE users SET foo = ?, bar = ?', (string) $qb);
-    }
-
-    public function testUpdateWhere()
-    {
-        $qb   = $this->record;
-        $qb->update('users u')
-            ->set('u.foo = ?')
-            ->where('u.foo = ?');
-
-        $this->assertEquals('UPDATE users u SET u.foo = ? WHERE u.foo = ?', (string) $qb);
-    }
-
-    public function testEmptyUpdate()
-    {
-        $qb   = $this->record;
-        $qb2 = $qb->update();
-
-        $this->assertEquals(Record::UPDATE, $qb->getType());
-        $this->assertSame($qb2, $qb);
     }
 
     public function testGetState()
