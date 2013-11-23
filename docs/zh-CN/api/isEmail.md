@@ -7,6 +7,7 @@ isEmail
 ----
 
 ### 检查"example@example.com"是否为邮箱地址
+
 ```php
 if (wei()->isEmail('example@example.com')) {
     echo 'Yes';
@@ -16,6 +17,7 @@ if (wei()->isEmail('example@example.com')) {
 ```
 
 #### 运行结果
+
 ```php
 'Yes'
 ```
@@ -25,11 +27,15 @@ if (wei()->isEmail('example@example.com')) {
 
 ### 选项
 
-| 名称              | 类型    | 默认值                           | 说明                                             |
-|-------------------|---------|----------------------------------|--------------------------------------------------|
-| notStringMessage  | string  | %name%必须是字符串               | -                                                |
-| formatMessage     | string  | %name%必须是有效的邮箱地址       | -                                                |
-| negativeMessage   | string  | %name%不能是数字                 | -                                                |
+*无*
+
+### 错误信息
+
+名称                   | 信息
+-----------------------|------
+notStringMessage       | %name%必须是字符串
+formatMessage          | %name%必须是有效的邮箱地址
+negativeMessage        | %name%不能是数字
 
 ### 方法
 
