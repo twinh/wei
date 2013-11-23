@@ -796,11 +796,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function join($table, $on = null)
     {
-        return $this->add('join', array(
-            'type' => 'inner',
-            'table' => $table,
-            'condition' => $on
-        ), true);
+        return $this->innerJoin($table, $on);
     }
 
     /**
@@ -812,11 +808,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function innerJoin($table, $on = null)
     {
-        return $this->add('join', array(
-            'type' => 'inner',
-            'table' => $table,
-            'condition' => $on
-        ), true);
+        return $this->add('join', array('type' => 'inner', 'table' => $table, 'on' => $on), true);
     }
 
     /**
@@ -828,11 +820,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function leftJoin($table, $on = null)
     {
-        return $this->add('join', array(
-            'type' => 'left',
-            'table' => $table,
-            'condition' => $on
-        ), true);
+        return $this->add('join', array('type' => 'left', 'table' => $table, 'on' => $on), true);
     }
 
     /**
@@ -844,11 +832,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function rightJoin($table, $on = null)
     {
-        return $this->add('join', array(
-            'type' => 'right',
-            'table' => $table,
-            'condition' => $on
-        ), true);
+        return $this->add('join', array('type' => 'right', 'table' => $table, 'on' => $on), true);
     }
 
     /**
@@ -1198,7 +1182,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         foreach ($parts['join'] as $join) {
             $query .= ' ' . strtoupper($join['type'])
                 . ' JOIN ' . $join['table']
-                . ' ON ' . $join['condition'];
+                . ' ON ' . $join['on'];
         }
 
         $query .= ($parts['where'] !== null ? ' WHERE ' . ((string)$parts['where']) : '')
