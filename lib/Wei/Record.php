@@ -573,6 +573,22 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
+     * Find a record by specified conditions and init with the specified data if record not found
+     *
+     * @param mixed $conditions
+     * @param array $data
+     * @return $this
+     */
+    public function findOrInit($conditions = null, array $data)
+    {
+        if (!$this->find($conditions)) {
+            !is_array($conditions) && $conditions = array($this->primaryKey => $conditions);
+            $this->fromArray($conditions + $data);
+        }
+        return $this;
+    }
+
+    /**
      * Find a record by specified conditions and throws 404 exception if record not found
      *
      * @param mixed $conditions

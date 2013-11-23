@@ -674,12 +674,7 @@ class Db extends Base
      */
     public function findOrCreate($table, $id, $data = array())
     {
-        $record = $this->create($table);
-        if (!$record->find($id)) {
-            !is_array($id) && $id = array($record->getPrimaryKey() => $id);
-            $record->fromArray($id + $data);
-        }
-        return $record;
+        return $this->create($table)->findOrInit($id, $data);
     }
 
     /**
