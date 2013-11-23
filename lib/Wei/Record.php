@@ -319,11 +319,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             // TODO
             return true;
         } else {
+            $isNew = $this->isNew;
             $this->trigger('beforeSave');
             $this->trigger($this->isNew ? 'beforeCreate' : 'beforeUpdate');
 
             // Insert
-            if ($this->isNew) {
+            if ($isNew) {
                 $result = (bool)$this->db->insert($this->table, $this->data);
                 if ($result) {
                     $this->isNew = false;
@@ -348,7 +349,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             $this->oldData = array();
             $this->isModified = false;
 
-            $this->trigger($this->isNew ? 'afterCreate' : 'afterUpdate');
+            $this->trigger($isNew ? 'afterCreate' : 'afterUpdate');
             $this->trigger('afterSave');
 
             return $result;

@@ -1392,9 +1392,38 @@ class DbTest extends TestCase
         $this->assertTrue($result);
     }
 
+    public function testBeforeAndAfterCreateCallbacks()
+    {
+        $this->initFixtures();
+
+        $member = $this->db('member')->fromArray(array(
+            'group_id' => 1,
+            'name' => 'twin',
+            'address' => 'xx street',
+        ));
+
+        $member->setOption(array(
+            'beforeCreate' => function(){
+                echo 'beforeCreate->';
+            },
+            'afterCreate' => function() {
+                echo 'afterCreate->';
+            },
+            'beforeSave' => function() {
+                echo 'beforeSave->';
+            },
+            'afterSave' => function() {
+                echo 'afterSave';
+            },
+        ));
+
+        $this->expectOutputString('beforeSave->beforeCreate->afterCreate->afterSave');
+
+        $member->save();
+    }
+
     public function testCreateCollection()
     {
-        // TODO
         $this->initFixtures();
 
         $members = $this->db('member');
