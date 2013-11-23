@@ -45,8 +45,8 @@ wei()->db('user')->destroy(array('id' => 1));
 
 * afterLoad
 * beforeSave
-* beforeInsert
-* afterInsert
+* beforeCreate
+* afterCreate
 * afterSave
 
 #### 更新已有记录并保存
@@ -85,10 +85,10 @@ wei()->db('user')->destroy(array('id' => 1));
 #### afterSave($record, $wei)
 保存记录后触发的回调
 
-#### beforeInsert($record, $wei)
+#### beforeCreate($record, $wei)
 插入记录到数据库前触发的回调
 
-#### afterInsert($record, $wei)
+#### afterCreate($record, $wei)
 插入记录到数据库后触发的回调
 
 #### beforeUpdate($record, $wei)

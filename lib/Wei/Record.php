@@ -170,14 +170,14 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @var callable
      */
-    protected $beforeInsert;
+    protected $beforeCreate;
 
     /**
      * The callback triggered after insert a record
      *
      * @var callable
      */
-    protected $afterInsert;
+    protected $afterCreate;
 
     /**
      * The callback triggered after update a record
@@ -320,7 +320,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             return true;
         } else {
             $this->trigger('beforeSave');
-            $this->trigger($this->isNew ? 'beforeInsert' : 'beforeUpdate');
+            $this->trigger($this->isNew ? 'beforeCreate' : 'beforeUpdate');
 
             // Insert
             if ($this->isNew) {
@@ -348,7 +348,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             $this->oldData = array();
             $this->isModified = false;
 
-            $this->trigger($this->isNew ? 'afterInsert' : 'afterUpdate');
+            $this->trigger($this->isNew ? 'afterCreate' : 'afterUpdate');
             $this->trigger('afterSave');
 
             return $result;
@@ -1451,14 +1451,14 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * The method called before insert a record
      */
-    public function beforeInsert()
+    public function beforeCreate()
     {
     }
 
     /**
      * The method called after insert a record
      */
-    public function afterInsert()
+    public function afterCreate()
     {
     }
 
