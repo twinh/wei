@@ -254,7 +254,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             $data = array();
             /** @var $record Record */
             foreach ($this->data as $key => $record) {
-                $data[$key] = $record->toArray();
+                $data[$key] = $record->toArray($returnFields);
             }
             return $data;
         } else {
@@ -262,7 +262,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                 $fields = $this->getFields();
                 return $this->data + array_combine($fields, array_pad(array(), count($fields), null));
             } else {
-                return array_intersect($this->data, array_flip($returnFields));
+                return array_intersect_key($this->data, array_flip($returnFields));
             }
         }
     }
