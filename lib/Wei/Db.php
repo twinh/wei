@@ -826,6 +826,26 @@ class Db extends Base
     }
 
     /**
+     * Returns the last executed SQL query
+     *
+     * @return string
+     */
+    public function getLastQuery()
+    {
+        return end($this->queries);
+    }
+
+    /**
+     * Returns all executed SQL queries
+     *
+     * @return array
+     */
+    public function getQueries()
+    {
+        return $this->queries;
+    }
+
+    /**
      *  Returns the name of fields of specified table
      *
      * @param string $table
@@ -888,26 +908,6 @@ class Db extends Base
             }
         }
         return implode($glue, $query);
-    }
-
-    /**
-     * Returns the last executed SQL query
-     *
-     * @return string
-     */
-    public function getLastQuery()
-    {
-        return end($this->queries);
-    }
-
-    /**
-     * Returns all executed SQL queries
-     *
-     * @return array
-     */
-    public function getQueries()
-    {
-        return $this->queries;
     }
 
     /**
