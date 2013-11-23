@@ -1362,9 +1362,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Generate condition string for WHERE or Having statement
      *
-     * @param $conditions
-     * @param $params
-     * @param $types
+     * @param mixed $conditions
+     * @param array $params
+     * @param array $types
      * @return string
      */
     protected function processCondition($conditions, $params, $types)
