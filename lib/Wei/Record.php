@@ -8,8 +8,6 @@
 
 namespace Wei;
 
-use Closure;
-
 /**
  * A base database record class
  *
@@ -1424,10 +1422,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Filters elements of the collection using a callback function
      *
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return $this
      */
-    public function filter(Closure $fn)
+    public function filter(\Closure $fn)
     {
         $data = array_filter($this->data, $fn);
         return $this->db->create($this->table, $data, $this->isNew);
