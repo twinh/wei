@@ -323,9 +323,7 @@
 
 <h3>获取对象管理器对象</h3>
 
-<div class="highlight"><pre><code class="php"><span class="cm">/* @var $wei \Wei\Wei */</span>
-<span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">();</span>
-</code></pre></div>
+
 
 <h3>设置对象配置</h3>
 
@@ -4115,8 +4113,8 @@
 <ul>
 <li>afterLoad</li>
 <li>beforeSave</li>
-<li>beforeInsert</li>
-<li>afterInsert</li>
+<li>beforeCreate</li>
+<li>afterCreate</li>
 <li>afterSave</li>
 </ul><h4>更新已有记录并保存</h4>
 
@@ -4158,11 +4156,11 @@
 
 <p>保存记录后触发的回调</p>
 
-<h4>beforeInsert($record, $wei)</h4>
+<h4>beforeCreate($record, $wei)</h4>
 
 <p>插入记录到数据库前触发的回调</p>
 
-<h4>afterInsert($record, $wei)</h4>
+<h4>afterCreate($record, $wei)</h4>
 
 <p>插入记录到数据库后触发的回调</p>
 
