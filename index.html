@@ -3363,6 +3363,12 @@
 <span class="k">echo</span> <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">getSql</span><span class="p">();</span>
 </code></pre></div>
 
+<blockquote>
+<h4>注意</h4>
+
+<p>wei()-&gt;db('member')-&gt;limit(0);</p>
+</blockquote>
+
 <h3>构造GROUP BY语句</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$qb</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'member'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">groupBy</span><span class="p">(</span><span class="s1">'id, group_id'</span><span class="p">);</span>
