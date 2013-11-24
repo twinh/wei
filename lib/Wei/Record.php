@@ -64,14 +64,14 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     protected $data = array();
 
     /**
-     * Whether the record's data is modified
+     * Whether the record's data is changed
      *
      * @var bool
      */
-    protected $isModified = false;
+    protected $isChanged = false;
 
     /**
-     * The record data before modified
+     * The record data before changed
      *
      * @var array
      */
@@ -214,9 +214,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     {
         parent::__construct($options);
 
-        // Clear modified status after created
+        // Clear changed status after created
         $this->oldData = array();
-        $this->isModified = false;
+        $this->isChanged = false;
 
         $this->trigger('afterLoad');
     }
@@ -326,7 +326,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                 }
                 // Update
             } else {
-                if ($this->isModified) {
+                if ($this->isChanged) {
                     $data = array_intersect_key($this->data, $this->oldData);
                     $affectedRows = $this->db->update($this->table, $data, array(
                         $this->primaryKey => $this->data[$this->primaryKey]
@@ -338,7 +338,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             }
 
             $this->oldData = array();
-            $this->isModified = false;
+            $this->isChanged = false;
 
             $this->trigger($isNew ? 'afterCreate' : 'afterUpdate');
             $this->trigger('afterSave');
@@ -385,7 +385,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     {
         $this->data = (array)$this->db->select($this->table, $this->get($this->primaryKey));
         $this->oldData = array();
-        $this->isModified = false;
+        $this->isChanged = false;
         $this->trigger('afterLoad');
         return $this;
     }
@@ -429,7 +429,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             if (in_array($name, $this->getFields())) {
                 $this->oldData[$name] = isset($this->data[$name]) ? $this->data[$name] : null;
                 $this->data[$name] = $value;
-                $this->isModified = true;
+                $this->isChanged = true;
             } else {
                 $this->$name = $value;
             }
@@ -468,17 +468,17 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Check if the record's data or specified field is modified
+     * Check if the record's data or specified field is changed
      *
      * @param string $field
      * @return bool
      */
-    public function isModified($field = null)
+    public function isChanged($field = null)
     {
         if ($field) {
             return array_key_exists($field, $this->oldData);
         }
-        return $this->isModified;
+        return $this->isChanged;
     }
 
     /**
@@ -517,7 +517,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Return the field data before modified
+     * Return the field data before changed
      *
      * @param string $field
      * @return string|array
