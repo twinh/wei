@@ -3366,7 +3366,7 @@
 <blockquote>
 <h4>注意</h4>
 
-<p>wei()-&gt;db('member')-&gt;limit(0);</p>
+<p>LIMIT的最小值为1,OFFSET的最小值为0,如果提供了无法解析的数值,将被转换为最小值.</p>
 </blockquote>
 
 <h3>构造GROUP BY语句</h3>
