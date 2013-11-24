@@ -1244,15 +1244,15 @@ class DbTest extends TestCase
         $this->assertTrue($member->isChanged('name'));
         $this->assertTrue($member->isChanged());
 
-        $this->assertNull($member->getOldData('name'));
+        $this->assertNull($member->getChangedData('name'));
 
         $member['name'] = 'aa';
         $this->assertTrue($member->isChanged());
-        $this->assertEquals('tt', $member->getOldData('name'));
+        $this->assertEquals('tt', $member->getChangedData('name'));
 
         $member->save();
         $this->assertFalse($member->isChanged());
-        $this->assertEmpty($member->getOldData());
+        $this->assertEmpty($member->getChangedData());
     }
 
     public function testReconnect()
