@@ -250,20 +250,20 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function toArray($returnFields = array())
     {
-        if ($this->isColl) {
-            $data = array();
-            /** @var $record Record */
-            foreach ($this->data as $key => $record) {
-                $data[$key] = $record->toArray($returnFields);
-            }
-            return $data;
-        } else {
+        if (!$this->isColl) {
             if (!$returnFields) {
                 $fields = $this->getFields();
                 return $this->data + array_combine($fields, array_pad(array(), count($fields), null));
             } else {
                 return array_intersect_key($this->data, array_flip($returnFields));
             }
+        } else {
+            $data = array();
+            /** @var $record Record */
+            foreach ($this->data as $key => $record) {
+                $data[$key] = $record->toArray($returnFields);
+            }
+            return $data;
         }
     }
 
@@ -309,14 +309,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function save()
     {
-        if ($this->isColl) {
-            /** @var $record Record */
-            foreach ($this->data as $record) {
-                $record->save();
-            }
-            // TODO
-            return true;
-        } else {
+        if (!$this->isColl) {
             $isNew = $this->isNew;
             $this->trigger('beforeSave');
             $this->trigger($this->isNew ? 'beforeCreate' : 'beforeUpdate');
@@ -351,6 +344,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             $this->trigger('afterSave');
 
             return $result;
+        } else {
+            /** @var $record Record */
+            foreach ($this->data as $record) {
+                $record->save();
+            }
+            return true;
         }
     }
 
@@ -426,19 +425,19 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             $this->isColl = true;
         }
 
-        if ($this->isColl) {
-            if (!$value instanceof static) {
-                throw new \InvalidArgumentException('Value for collection must be a instance of Wei\Record');
-            } else {
-                $this->data[$name] = $value;
-            }
-        } else {
+        if (!$this->isColl) {
             if (in_array($name, $this->getFields())) {
                 $this->oldData[$name] = isset($this->data[$name]) ? $this->data[$name] : null;
                 $this->data[$name] = $value;
                 $this->isModified = true;
             } else {
                 $this->$name = $value;
+            }
+        } else {
+            if (!$value instanceof static) {
+                throw new \InvalidArgumentException('Value for collection must be a instance of Wei\Record');
+            } else {
+                $this->data[$name] = $value;
             }
         }
         return $this;
