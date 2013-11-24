@@ -156,9 +156,8 @@ echo $qb->getSql();
 ```
 
 > #### 注意
-> 
-> wei()->db('member')->limit(0);
 >
+> LIMIT的最小值为1,OFFSET的最小值为0,如果提供了无法解析的数值,将被转换为最小值.
 
 ### 构造GROUP BY语句
 
