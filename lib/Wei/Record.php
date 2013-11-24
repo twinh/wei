@@ -594,9 +594,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function findOne($conditions = null)
     {
-        $record = $this->find($conditions);
-        if ($record) {
-            return $record;
+        if ($this->find($conditions)) {
+            return $this;
         } else {
             throw new \Exception('Record not found', 404);
         }
