@@ -1607,4 +1607,19 @@ class DbTest extends TestCase
         $member->limit('string');
         $this->assertEquals(1, $member->getSqlPart('limit'));
     }
+
+    public function testInvalidOffset()
+    {
+        $this->initFixtures();
+        $member = $this->db('member');
+
+        $member->offset(-1);
+        $this->assertEquals(0, $member->getSqlPart('offset'));
+
+        $member->offset(-1.1);
+        $this->assertEquals(0, $member->getSqlPart('offset'));
+
+        $member->offset('string');
+        $this->assertEquals(0, $member->getSqlPart('offset'));
+    }
 }

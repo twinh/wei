@@ -712,7 +712,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function offset($offset)
     {
-        return $this->add('offset', $offset);
+        $offset < 0 && $offset = 0;
+        return $this->add('offset', (int)$offset);
     }
 
     /**
@@ -728,23 +729,19 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Sets the page number
-     *
-     * The "OFFSET" value is equals "($page - 1) * $this->rows"
-     * The "LIMIT" value is equals "$this->rows"
-     *
+     * Sets the page number, the "OFFSET" value is equals "($page - 1) * LIMIT"
+
      * @param int $page The page number
      * @return $this
      */
     public function page($page)
     {
         $limit = $this->getSqlPart('limit');
-
         if (!$limit) {
             $limit = 10;
             $this->add('limit', $limit);
         }
-        return $this->add('offset', ($page - 1) * $limit);
+        return $this->offset(($page - 1) * $limit);
     }
 
     /**

@@ -155,6 +155,11 @@ $qb = wei()->db('member')->limit(3)->page(3);
 echo $qb->getSql();
 ```
 
+> #### 注意
+> 
+> wei()->db('member')->limit(0);
+>
+
 ### 构造GROUP BY语句
 
 ```php
