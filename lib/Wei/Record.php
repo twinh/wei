@@ -723,7 +723,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function limit($limit)
     {
-        return $this->add('limit', $limit);
+        $limit < 1 && $limit = 1;
+        return $this->add('limit', (int)$limit);
     }
 
     /**

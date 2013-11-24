@@ -1592,4 +1592,19 @@ class DbTest extends TestCase
         $record = $this->db('member')->find('1');
         $this->assertEquals(1, $record['id']);
     }
+
+    public function testInvalidLimit()
+    {
+        $this->initFixtures();
+        $member = $this->db('member');
+
+        $member->limit(-1);
+        $this->assertEquals(1, $member->getSqlPart('limit'));
+
+        $member->limit(0);
+        $this->assertEquals(1, $member->getSqlPart('limit'));
+
+        $member->limit('string');
+        $this->assertEquals(1, $member->getSqlPart('limit'));
+    }
 }
