@@ -150,5 +150,8 @@ wei()->db('user')->destroy(array('id' => 1));
 #### $record->isNew()
 判断当前记录是否为新建,并且未保存到数据库
 
-#### $record->isModified()
+#### $record->isChanged()
 判断当前记录的字段值是否修改过
+
+#### $record->getChangedData($field = null)
+获取指定字段或所有字段修改前的值
