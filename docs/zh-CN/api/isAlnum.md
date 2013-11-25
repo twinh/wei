@@ -7,6 +7,7 @@ isAlnum
 ----
 
 ### 检查数据是否只由字母和数字组成
+
 ```php
 $input = 'abc123';
 if (wei()->isAlnum($input)) {
@@ -17,6 +18,7 @@ if (wei()->isAlnum($input)) {
 ```
 
 #### 运行结果
+
 ```php
 'Yes'
 ```
@@ -26,11 +28,15 @@ if (wei()->isAlnum($input)) {
 
 ### 选项
 
-| 名称                | 类型    | 默认值                                 | 说明              |
-|---------------------|---------|----------------------------------------|-------------------|
-| notStringMessage    | string  | %name%必须是字符串                     | -                 |
-| patternMessage      | string  | %name%只能由字母(a-z)和数字(0-9)组成   | -                 |
-| negativeMessage     | string  | %name%不能只由字母(a-z)和数字(0-9)组成 | -                 |
+*无*
+
+### 错误信息
+
+名称                   | 信息
+-----------------------|------
+notStringMessage       | %name%必须是字符串
+patternMessage         | %name%只能由字母(a-z)和数字(0-9)组成
+negativeMessage        | %name%不能只由字母(a-z)和数字(0-9)组成
 
 ### 方法
 
