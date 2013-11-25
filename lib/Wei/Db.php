@@ -723,7 +723,7 @@ class Db extends Base
      * @param array $data The data to create a new record when record not found
      * @return Record
      */
-    public function findOrCreate($table, $id, $data = array())
+    public function findOrInit($table, $id, $data = array())
     {
         return $this->create($table)->findOrInit($id, $data);
     }

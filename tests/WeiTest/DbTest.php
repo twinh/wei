@@ -213,7 +213,7 @@ class DbTest extends TestCase
         $this->assertEquals('1', $member['id']);
     }
 
-    public function testFindOrCreate()
+    public function testFindOrInit()
     {
         $this->initFixtures();
 
@@ -221,18 +221,18 @@ class DbTest extends TestCase
         $this->assertFalse($member);
 
         // Not found and create new object
-        $member = $this->db->findOrCreate('member', '3', array(
+        $member = $this->db->findOrInit('member', '3', array(
             'name' => 'name'
         ));
         $this->assertEquals('name', $member['name']);
         $this->assertEquals('3', $member['id']);
 
         // Found
-        $member = $this->db->findOrCreate('member', '2');
+        $member = $this->db->findOrInit('member', '2');
 
         $this->assertEquals('2', $member['id']);
 
-        $member = $this->db->findOrCreate('member', '3', array(
+        $member = $this->db->findOrInit('member', '3', array(
             'id' => '1', // Would be overwrite
             'name' => 'twin'
         ));
@@ -240,7 +240,7 @@ class DbTest extends TestCase
         $this->assertNotEquals('1', $member['id']);
         $this->assertEquals('3', $member['id']);
 
-        $member = $this->db->findOrCreate('member', array(
+        $member = $this->db->findOrInit('member', array(
             'group_id' => '1',
             'name' => 'twin2',
         ));
