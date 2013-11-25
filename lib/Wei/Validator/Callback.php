@@ -52,4 +52,16 @@ class Callback extends BaseValidator
 
         return true;
     }
+
+    /**
+     * Set the invalid message
+     *
+     * @param string $message
+     * @return $this
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+        return $this;
+    }
 }
