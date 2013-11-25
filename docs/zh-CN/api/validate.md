@@ -411,6 +411,37 @@ if (wei()->isAllOf($input, array(
 // 输出Yes
 ```
 
+##### 案例:使用`callback`验证器自定义验证逻辑
+
+如果自带的验证规则不满足要求,可以是使用`callback`规则,自定义验证逻辑和错误信息.
+
+```php
+$validator = wei()->validate(array(
+    'data' => array(
+        'age' => 10
+    ),
+    'rules' => array(
+        'age' => array(
+            'callback' => function($data, \Wei\Validator\Callback $callback, $wei) {
+                if ($data < 18) {
+                    $callback->setMessage('您还未满18周岁');
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        )
+    )
+));
+
+if ($validator->isValid()) {
+    echo '$validator->getFirstMessage()';
+}
+
+// 输出
+'您还未满18周岁'
+```
+
 #### 选项:messages
 
 验证错误时的提示信息.提示信息的格式与验证规则类似.
