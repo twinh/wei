@@ -5357,6 +5357,36 @@
 <span class="c1">// 输出Yes</span>
 </code></pre></div>
 
+<h5>案例:使用<code>callback</code>验证器自定义验证逻辑</h5>
+
+<p>如果自带的验证规则不满足要求,可以是使用<code>callback</code>规则,自定义验证逻辑和错误信息.</p>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$validator</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'age'</span> <span class="o">=&gt;</span> <span class="mi">10</span>
+    <span class="p">),</span>
+    <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'age'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'callback'</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nx">\Wei\Validator\Callback</span> <span class="nv">$callback</span><span class="p">,</span> <span class="nv">$wei</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nv">$data</span> <span class="o">&lt;</span> <span class="mi">18</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nv">$callback</span><span class="o">-&gt;</span><span class="na">setMessage</span><span class="p">(</span><span class="s1">'您还未满18周岁'</span><span class="p">);</span>
+                    <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">isValid</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'$validator-&gt;getFirstMessage()'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出</span>
+<span class="s1">'您还未满18周岁'</span>
+</code></pre></div>
+
 <h4>选项:messages</h4>
 
 <p>验证错误时的提示信息.提示信息的格式与验证规则类似.</p>
