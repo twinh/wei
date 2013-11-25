@@ -1051,16 +1051,20 @@ class DbTest extends TestCase
         $db = $this->db;
 
         $count = $db->count('member');
+        $this->assertInternalType('float', $count);
         $this->assertEquals(2, $count);
 
         $count = $db->count('member', array('id' => '1'));
+        $this->assertInternalType('float', $count);
         $this->assertEquals(1, $count);
 
         $count = $db->count('member', array('id' => '1'));
-        $this->assertSame(1, $count);
+        $this->assertInternalType('float', $count);
+        $this->assertEquals(1, $count);
 
         $count = $db->count('member', array('id' => '123'));
-        $this->assertSame(0, $count);
+        $this->assertInternalType('float', $count);
+        $this->assertEquals(0, $count);
     }
 
     public function testTablePrefix()
@@ -1628,7 +1632,7 @@ class DbTest extends TestCase
         $this->initFixtures();
 
         $result = $this->db->max('member', 'id');
-        $this->assertInternalType('int', $result);
+        $this->assertInternalType('float', $result);
         $this->assertEquals(2, $result);
     }
 
@@ -1637,7 +1641,16 @@ class DbTest extends TestCase
         $this->initFixtures();
 
         $result = $this->db->min('member', 'id');
-        $this->assertInternalType('int', $result);
+        $this->assertInternalType('float', $result);
         $this->assertEquals(1, $result);
+    }
+
+    public function testAvg()
+    {
+        $this->initFixtures();
+
+        $result = $this->db->avg('member', 'id');
+        $this->assertInternalType('float', $result);
+        $this->assertEquals(1.5, $result);
     }
 }

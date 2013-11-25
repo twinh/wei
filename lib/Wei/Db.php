@@ -962,6 +962,6 @@ class Db extends Base
     protected function executeAggregate($fn, $table, $field, $conditions)
     {
         $data = $this->selectAll($table, $conditions, $fn . '(' . $field . ')');
-        return $data ? (int)current($data[0]) : 0;
+        return $data ? (float)current($data[0]) : 0;
     }
 }
