@@ -452,38 +452,6 @@ class Db extends Base
     }
 
     /**
-     * Returns the rows number of table search by specified parameters
-     *
-     * @param string $table
-     * @param mixed $conditions
-     * @return int
-     */
-    public function count($table, $conditions = false)
-    {
-        return (int)$this->executeAggregate('COUNT', $table, '1', $conditions);
-    }
-
-    public function sum($table, $field, $conditions = false)
-    {
-        return $this->executeAggregate('SUM', $table, $field, $conditions);
-    }
-
-    public function max($table, $field, $conditions = false)
-    {
-        return $this->executeAggregate('MAX', $table, $field, $conditions);
-    }
-
-    public function min($table, $field, $conditions = false)
-    {
-        return $this->executeAggregate('MIN', $table, $field, $conditions);
-    }
-
-    public function avg($table, $field, $conditions = false)
-    {
-        return $this->executeAggregate('AVG', $table, $field, $conditions);
-    }
-
-    /**
      * Executes a query and returns the first array result
      *
      * @param string $sql The SQL query
@@ -601,6 +569,70 @@ class Db extends Base
         }
 
         return $result;
+    }
+
+    /**
+     * Returns the rows number of table search by specified parameters
+     *
+     * @param string $table
+     * @param mixed $conditions
+     * @return int
+     */
+    public function count($table, $conditions = false)
+    {
+        return (int)$this->executeAggregate('COUNT', $table, '1', $conditions);
+    }
+
+    /**
+     * Returns the sum of specified table field and conditions
+     *
+     * @param string $table
+     * @param string $field
+     * @param mixed $conditions
+     * @return float
+     */
+    public function sum($table, $field, $conditions = false)
+    {
+        return $this->executeAggregate('SUM', $table, $field, $conditions);
+    }
+
+    /**
+     * Returns the max value of specified table field and conditions
+     *
+     * @param string $table
+     * @param string $field
+     * @param mixed $conditions
+     * @return float
+     */
+    public function max($table, $field, $conditions = false)
+    {
+        return $this->executeAggregate('MAX', $table, $field, $conditions);
+    }
+
+    /**
+     * Returns the min value of specified table field and conditions
+     *
+     * @param string $table
+     * @param string $field
+     * @param mixed $conditions
+     * @return float
+     */
+    public function min($table, $field, $conditions = false)
+    {
+        return $this->executeAggregate('MIN', $table, $field, $conditions);
+    }
+
+    /**
+     * Returns the avg value of specified table field and conditions
+     *
+     * @param string $table
+     * @param string $field
+     * @param mixed $conditions
+     * @return float
+     */
+    public function avg($table, $field, $conditions = false)
+    {
+        return $this->executeAggregate('AVG', $table, $field, $conditions);
     }
 
     /**
@@ -959,9 +991,18 @@ class Db extends Base
         }
     }
 
+    /**
+     * Execute a query with aggregate function
+     *
+     * @param string $fn
+     * @param string $table
+     * @param string $field
+     * @param mixed $conditions
+     * @return float
+     */
     protected function executeAggregate($fn, $table, $field, $conditions)
     {
         $data = $this->selectAll($table, $conditions, $fn . '(' . $field . ')');
-        return $data ? (float)current($data[0]) : 0;
+        return $data ? (float)current($data[0]) : 0.0;
     }
 }
