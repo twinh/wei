@@ -560,7 +560,7 @@ $conditions | string,array | 查询条件,如果类型是字符串,表示主键�
 $table      | string       | 记录的数据表名称
 $data       | array        | 初始化的数据
 
-#### db->findOrCreate($table, $id, $data = array())
+#### db->findOrInit($table, $id, $data = array())
 根据条件查找数据表的一条记录,如果记录不存在,将根据`$data`创建一条新的数据表记录对象
 
 **返回:** `Wei\Record` 记录对象
