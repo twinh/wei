@@ -460,7 +460,7 @@ class Db extends Base
      */
     public function count($table, $conditions = false)
     {
-        return $this->executeAggregate('COUNT', $table, '1', $conditions);
+        return (int)$this->executeAggregate('COUNT', $table, '1', $conditions);
     }
 
     public function sum($table, $field, $conditions = false)

@@ -1051,19 +1051,19 @@ class DbTest extends TestCase
         $db = $this->db;
 
         $count = $db->count('member');
-        $this->assertInternalType('float', $count);
+        $this->assertInternalType('int', $count);
         $this->assertEquals(2, $count);
 
         $count = $db->count('member', array('id' => '1'));
-        $this->assertInternalType('float', $count);
+        $this->assertInternalType('int', $count);
         $this->assertEquals(1, $count);
 
         $count = $db->count('member', array('id' => '1'));
-        $this->assertInternalType('float', $count);
+        $this->assertInternalType('int', $count);
         $this->assertEquals(1, $count);
 
         $count = $db->count('member', array('id' => '123'));
-        $this->assertInternalType('float', $count);
+        $this->assertInternalType('int', $count);
         $this->assertEquals(0, $count);
     }
 
