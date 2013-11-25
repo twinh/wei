@@ -460,8 +460,27 @@ class Db extends Base
      */
     public function count($table, $conditions = false)
     {
-        $data = $this->selectAll($table, $conditions, 'COUNT(1)');
-        return $data ? (int)current($data[0]) : 0;
+        return $this->executeAggregate('COUNT', $table, '1', $conditions);
+    }
+
+    public function sum($table, $field, $conditions = false)
+    {
+        return $this->executeAggregate('SUM', $table, $field, $conditions);
+    }
+
+    public function max($table, $field, $conditions = false)
+    {
+        return $this->executeAggregate('MAX', $table, $field, $conditions);
+    }
+
+    public function min($table, $field, $conditions = false)
+    {
+        return $this->executeAggregate('MAX', $table, $field, $conditions);
+    }
+
+    public function avg($table, $field, $conditions = false)
+    {
+        return $this->executeAggregate('AVG', $table, $field, $conditions);
     }
 
     /**
@@ -938,5 +957,11 @@ class Db extends Base
                 }
             }
         }
+    }
+
+    protected function executeAggregate($fn, $table, $field, $conditions)
+    {
+        $data = $this->selectAll($table, $conditions, $fn . '(' . $field . ')');
+        return $data ? (int)current($data[0]) : 0;
     }
 }
