@@ -1622,4 +1622,22 @@ class DbTest extends TestCase
         $member->offset('string');
         $this->assertEquals(0, $member->getSqlPart('offset'));
     }
+
+    public function testMax()
+    {
+        $this->initFixtures();
+
+        $result = $this->db->max('member', 'id');
+        $this->assertInternalType('int', $result);
+        $this->assertEquals(2, $result);
+    }
+
+    public function testMin()
+    {
+        $this->initFixtures();
+
+        $result = $this->db->min('member', 'id');
+        $this->assertInternalType('int', $result);
+        $this->assertEquals(1, $result);
+    }
 }

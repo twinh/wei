@@ -475,7 +475,7 @@ class Db extends Base
 
     public function min($table, $field, $conditions = false)
     {
-        return $this->executeAggregate('MAX', $table, $field, $conditions);
+        return $this->executeAggregate('MIN', $table, $field, $conditions);
     }
 
     public function avg($table, $field, $conditions = false)
