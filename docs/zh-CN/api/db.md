@@ -649,3 +649,28 @@ $params     | array        | 绑定到SQL的参数
 获取最后执行的SQL语句
 
 **返回:** `string`
+
+#### db->count($table, $conditions = false)
+根据条件获取表的数据量
+
+**返回:** `int`
+
+#### db->sum($table, $field, $conditions = false)
+获取指定字段的数值总和
+
+**返回:** `float`
+
+#### db->max($table, $field, $conditions = false)
+获取指定字段的最大数值
+
+**返回:** `float`
+
+#### db->min($table, $field, $conditions = false)
+获取指定字段的最小数值
+
+**返回:** `float`
+
+#### db->avg($table, $field, $conditions = false)
+获取指定字段的平均数值
+
+**返回:** `float`
