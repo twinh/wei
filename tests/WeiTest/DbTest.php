@@ -1465,6 +1465,17 @@ class DbTest extends TestCase
         $this->assertFalse($member);
     }
 
+    public function testDeleteRecordByQueryBuilder()
+    {
+        $this->initFixtures();
+
+        $result = $this->db('member')->where('group_id = ?', 1)->delete();
+        $this->assertEquals(2, $result);
+
+        $result = $this->db('member')->delete(array('group_id' => 1));
+        $this->assertEquals(0, $result);
+    }
+
     public function testFindCollectionAndDestroy()
     {
         $this->initFixtures();
