@@ -17,15 +17,13 @@ before_script:
   - pecl install redis
   - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -gt 4 ]; then sed -i 1d "tests/config/php.ini"; fi;'
   - phpenv config-add tests/config/php.ini
-  - php -m
-  - php -i
   - mysql -e 'CREATE DATABASE IF NOT EXISTS wei_tests;'
   - psql -c 'CREATE DATABASE wei_tests;' -U postgres
   - mkdir -p build/logs
   - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -gt 3 ]; then php -S 0.0.0.0:8000 -t tests/WeiTest/Fixtures/; fi;' > /dev/null &
 
 script:
-  - sh -c 'if [ $(php -r "echo version_compare(PHP_VERSION, \"5.3.3\");") -eq 0 ]; then phpunit --verbose --debug --coverage-clover build/logs/clover.xml; else phpunit --verbose --coverage-clover build/logs/clover.xml; fi;'
+  - phpunit --verbose --coverage-clover build/logs/clover.xml
 
 after_script:
   - pkill php
