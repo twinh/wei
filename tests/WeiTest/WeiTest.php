@@ -500,4 +500,16 @@ class WeiTest extends TestCase
         $this->assertContains('request', $beforeConstruct);
         $this->assertContains('sub.request', $afterConstruct);
     }
+
+    public function testCreateNewContainer()
+    {
+        $origContainer = wei();
+        Wei::setContainer(null);
+        $container = Wei::getContainer();
+
+        $this->assertNotSame($origContainer, $container);
+
+        // Reset container
+        Wei::setContainer($origContainer);
+    }
 }
