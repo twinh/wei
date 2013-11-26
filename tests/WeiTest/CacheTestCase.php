@@ -195,4 +195,13 @@ class CacheTestCase extends TestCase
         });
         $this->assertEquals($cache, $cache2);
     }
+
+    public function testRemove()
+    {
+        $result = $this->object->set('key', 'value');
+        $this->assertTrue($result);
+
+        $this->assertTrue($this->object->remove('key'));
+        $this->assertFalse($this->object->remove('key'));
+    }
 }
