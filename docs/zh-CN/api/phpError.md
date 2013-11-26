@@ -1,10 +1,13 @@
 PHP Error
 =========
+
 [PHP Error](http://phperror.net/)提供了更友好的错误提示信息,完整的语法和代码片段高亮,同时支持Ajax错误提示
 
 案例
 ----
+
 ### 在Widget初始化时加载PHP Error
+
 ```php
 wei(array(
     'wei' => array(
