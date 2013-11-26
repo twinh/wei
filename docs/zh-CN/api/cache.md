@@ -25,12 +25,12 @@ wei()->cache('key', 'value', 60);
 ### 配置缓存驱动为`Redis`
 
 ```php
-
-// 配置缓存驱动为`redis`,同时配置redis的服务器地址
 wei(array(
+    // 配置缓存驱动为`redis`
 	'cache' => array(
 		'driver' => 'redis'
 	),
+    // 配置redis的服务器地址
 	'redis' => array(
 		'host' => '127.0.0.1',
 	)
