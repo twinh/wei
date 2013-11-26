@@ -35,8 +35,13 @@ if (wei()->isEqualTo($post['password'], $post['password_confirmation'])) {
 名称              | 类型    | 默认值                   | 说明
 ------------------|---------|--------------------------|------
 value             | mixed   | 无                       | 与数据比较的值
-invalidMessage    | string  | %name%必须等于%value%    | -
-negativeMessage   | string  | %name%不能等于%value%    | -
+
+### 错误信息
+
+名称                   | 信息
+-----------------------|------
+invalidMessage         | %name%必须等于%value%
+negativeMessage        | %name%不能等于%value%
 
 ### 方法
 
