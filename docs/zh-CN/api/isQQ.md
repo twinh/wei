@@ -7,6 +7,7 @@ isQQ
 ----
 
 ### 检查"123456"是否为有效的QQ号码
+
 ```php
 if (wei()->isQQ('123456')) {
     echo 'Yes';
@@ -16,8 +17,25 @@ if (wei()->isQQ('123456')) {
 ```
 
 #### 运行结果
+
 ```php
 'Yes'
+```
+
+### 检查"0123456"是否为有效的QQ号码
+
+```php
+if (wei()->isQQ('0123456')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+
+#### 运行结果
+
+```php
+'No'
 ```
 
 调用方式
@@ -25,11 +43,15 @@ if (wei()->isQQ('123456')) {
 
 ### 选项
 
-| 名称                | 类型    | 默认值                                 | 说明              |
-|---------------------|---------|----------------------------------------|-------------------|
-| notStringMessage    | string  | %name%必须是字符串                     | -                 |
-| patternMessage      | string  | %name%必须是有效的QQ号码               | -                 |
-| negativeMessage     | string  | %name%不能是QQ号码                     | -                 |
+*无*
+
+### 错误信息
+
+名称                   | 信息
+-----------------------|------
+notStringMessage       | %name%必须是字符串
+patternMessage         | %name%必须是有效的QQ号码
+negativeMessage        | %name%不能是QQ号码
 
 ### 方法
 
