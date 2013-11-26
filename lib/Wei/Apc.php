@@ -9,7 +9,7 @@
 namespace Wei;
 
 /**
- * A cache wei that stored data in PHP APC
+ * A cache service that stored data in PHP APC
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

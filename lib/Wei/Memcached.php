@@ -9,7 +9,7 @@
 namespace Wei;
 
 /**
- * A cache wei that stored data in Memcached
+ * A cache service that stored data in Memcached
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

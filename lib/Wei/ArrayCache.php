@@ -9,7 +9,7 @@
 namespace Wei;
 
 /**
- * A cache wei that stored data in PHP array
+ * A cache service that stored data in PHP array
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

@@ -9,7 +9,7 @@
 namespace Wei;
 
 /**
- * A cache wei that stored data in Couchbase
+ * A cache service that stored data in Couchbase
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        https://github.com/couchbase/php-ext-couchbase

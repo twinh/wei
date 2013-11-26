@@ -9,7 +9,7 @@
 namespace Wei;
 
 /**
- * A cache wei that stored data in Redis
+ * A cache service that stored data in Redis
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

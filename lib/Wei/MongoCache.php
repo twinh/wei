@@ -9,7 +9,7 @@
 namespace Wei;
 
 /**
- * A cache wei that stores data in MongoDB
+ * A cache service that stores data in MongoDB
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
