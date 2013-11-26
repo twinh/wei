@@ -49,7 +49,6 @@ class Callback extends BaseValidator
             $this->addError('invalid');
             return false;
         }
-
         return true;
     }
 

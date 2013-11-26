@@ -18,8 +18,6 @@ class CallbackTest extends TestCase
         }));
     }
 
-    //public function tes
-
     public function testNotCallback()
     {
         $this->assertFalse($this->isCallback('data', function(){
@@ -30,5 +28,13 @@ class CallbackTest extends TestCase
             // convert to boolen(false)
             return  null;
         }));
+    }
+
+    public function testCallbackMessage()
+    {
+        $this->isCallback('data', function(){
+            return false;
+        }, 'invalid message');
+        $this->assertEquals('invalid message', $this->isCallback->getFirstMessage());
     }
 }
