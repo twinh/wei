@@ -323,9 +323,7 @@
 
 <h3>获取对象管理器对象</h3>
 
-<div class="highlight"><pre><code class="php"><span class="cm">/* @var $wei \Wei\Wei */</span>
-<span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">();</span>
-</code></pre></div>
+
 
 <h3>设置对象配置</h3>
 
@@ -860,11 +858,12 @@
 <h3>配置缓存驱动为<code>Redis</code>
 </h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 配置缓存驱动为`redis`,同时配置redis的服务器地址</span>
-<span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="c1">// 配置缓存驱动为`redis`</span>
     <span class="s1">'cache'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'driver'</span> <span class="o">=&gt;</span> <span class="s1">'redis'</span>
     <span class="p">),</span>
+    <span class="c1">// 配置redis的服务器地址</span>
     <span class="s1">'redis'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'host'</span> <span class="o">=&gt;</span> <span class="s1">'127.0.0.1'</span><span class="p">,</span>
     <span class="p">)</span>
@@ -1170,7 +1169,7 @@
 
 <p>移除一项缓存</p>
 
-<p>返回: <code>bool</code> 是否移除成功</p>
+<p>返回: <code>bool</code> 缓存存在时返回<code>true</code>,不存在返回<code>false</code></p>
 
 <p>参数</p>
 
@@ -1379,7 +1378,7 @@
 <p>返回: bool</p>
 
 <blockquote>
-<h3>注意</h3>
+<h4>注意</h4>
 
 <p>该方法会把所有的缓存内容都清空,不仅仅是以$prefix开头的缓存.</p>
 </blockquote>
