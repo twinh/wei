@@ -47,8 +47,12 @@ class ArrayCache extends BaseCache
      */
     public function remove($key)
     {
-        unset($this->data[$this->prefix . $key]);
-        return true;
+        if (isset($this->data[$this->prefix . $key])) {
+            unset($this->data[$this->prefix . $key]);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
