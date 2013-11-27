@@ -674,6 +674,17 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     }
 
     /**
+     * Check if the request page is specified page
+     *
+     * @param string $page
+     * @return bool
+     */
+    public function isPage($page)
+    {
+        return ltrim($this->getPathInfo()) === $page;
+    }
+
+    /**
      * Detect the base URI for the request
      *
      * Looks at a variety of criteria in order to attempt to autodetect a base
