@@ -78,6 +78,13 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     protected $changedData = array();
 
     /**
+     * Whether the record has been removed from database
+     *
+     * @var bool
+     */
+    protected $isDestroyed = false;
+
+    /**
      * Whether the data is loaded
      *
      * @var bool
@@ -365,6 +372,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         if (!$this->isColl) {
             $this->trigger('beforeDestroy');
             $result = (bool)$this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
+            $this->isDestroyed = true;
             $this->trigger('afterDestroy');
             return $result;
         } else {
@@ -479,6 +487,16 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             return array_key_exists($field, $this->changedData);
         }
         return $this->isChanged;
+    }
+
+    /**
+     * Check if the record has been removed from the database
+     *
+     * @return bool
+     */
+    public function isDestroyed()
+    {
+        return $this->isDestroyed;
     }
 
     /**

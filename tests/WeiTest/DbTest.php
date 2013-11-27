@@ -1665,3 +1665,4 @@ class DbTest extends TestCase
         $this->assertEquals(1.5, $result);
     }
 }
+
