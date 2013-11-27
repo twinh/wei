@@ -106,9 +106,6 @@ namespace Wei
      * @property T          $t A translator object
      * @method   string     t($message, array $parameters = array()) Translate the message
      *
-     * Third Party
-     * @method   bool       monolog($level = null, $message = null, array $context = array()) Get monolog logger object or add a log record
-     *
      * Validation
      * @method   \Wei\Validate   validate(array $option) Create a new validator and validate by specified options
      *

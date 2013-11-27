@@ -183,5 +183,4 @@ API参考目录
 
 #### 第三方
 
-* [monolog](api/monolog.md) - 获取[Monolog](https://github.com/Seldaek/monolog)对象或记录一条日志
 * [phpError](api/phpError.md) - 启用[PHPError](http://phperror.net/)的错误视图
