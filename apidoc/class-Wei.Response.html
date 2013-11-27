@@ -7,7 +7,7 @@
 	<title>Class Wei\Response | Wei Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<script type="text/javascript" src="elementlist.js?3712690943"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -27,8 +27,6 @@
 						</li>
 				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
 						<ul>
-				<li><a href="namespace-Wei.Db.html">Db</a>
-						</li>
 				<li><a href="namespace-Wei.Validator.html">Validator</a>
 						</li>
 							</ul></li>
@@ -43,7 +41,6 @@
 			<ul>
 				<li><a href="class-Wei.Apc.html">Apc</a></li>
 				<li><a href="class-Wei.App.html">App</a></li>
-				<li><a href="class-Wei.Arr.html">Arr</a></li>
 				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
@@ -55,6 +52,7 @@
 				<li><a href="class-Wei.Controller.html">Controller</a></li>
 				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
 				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Counter.html">Counter</a></li>
 				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
 				<li><a href="class-Wei.Db.html">Db</a></li>
 				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
@@ -63,15 +61,15 @@
 				<li><a href="class-Wei.Escape.html">Escape</a></li>
 				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
 				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
-				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Lock.html">Lock</a></li>
 				<li><a href="class-Wei.Logger.html">Logger</a></li>
 				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
 				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
-				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
 				<li><a href="class-Wei.Request.html">Request</a></li>
@@ -156,7 +154,6 @@
 
 	<div>
 		<h4>Direct known subclasses</h4>
-			<a href="class-Wei.Json.html">Wei\Json</a>, 
 			<a href="class-Wei.Redirect.html">Wei\Redirect</a>
 	</div>
 
@@ -174,7 +171,7 @@
 				<b>Author:</b>
 				Twin Huang &lt;<a
 href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-Wei.Response.html#11-665" title="Go to source code">Response.php</a><br />
+		<b>Located at</b> <a href="source-class-Wei.Response.html#11-668" title="Go to source code">Response.php</a><br />
 	</div>
 
 
@@ -236,7 +233,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_send">#</a>
-		<code><a href="source-class-Wei.Response.html#201-230" title="Go to source code">send</a>( <span>string <var>$content</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$status</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Wei.Response.html#201-233" title="Go to source code">send</a>( <span>string <var>$content</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$status</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -280,7 +277,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setContent">#</a>
-		<code><a href="source-class-Wei.Response.html#232-242" title="Go to source code">setContent</a>( <span>mixed <var>$content</var></span> )</code>
+		<code><a href="source-class-Wei.Response.html#235-245" title="Go to source code">setContent</a>( <span>mixed <var>$content</var></span> )</code>
 
 		<div class="description short">
 			
@@ -322,7 +319,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getContent">#</a>
-		<code><a href="source-class-Wei.Response.html#244-252" title="Go to source code">getContent</a>( )</code>
+		<code><a href="source-class-Wei.Response.html#247-255" title="Go to source code">getContent</a>( )</code>
 
 		<div class="description short">
 			
@@ -359,7 +356,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_sendContent">#</a>
-		<code><a href="source-class-Wei.Response.html#254-263" title="Go to source code">sendContent</a>( )</code>
+		<code><a href="source-class-Wei.Response.html#257-266" title="Go to source code">sendContent</a>( )</code>
 
 		<div class="description short">
 			
@@ -396,7 +393,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setStatusCode">#</a>
-		<code><a href="source-class-Wei.Response.html#265-283" title="Go to source code">setStatusCode</a>( <span>integer <var>$code</var></span>, <span>string|null <var>$text</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Wei.Response.html#268-286" title="Go to source code">setStatusCode</a>( <span>integer <var>$code</var></span>, <span>string|null <var>$text</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -440,7 +437,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getStatusCode">#</a>
-		<code><a href="source-class-Wei.Response.html#285-293" title="Go to source code">getStatusCode</a>( )</code>
+		<code><a href="source-class-Wei.Response.html#288-296" title="Go to source code">getStatusCode</a>( )</code>
 
 		<div class="description short">
 			
@@ -477,7 +474,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setVersion">#</a>
-		<code><a href="source-class-Wei.Response.html#295-305" title="Go to source code">setVersion</a>( <span>string <var>$version</var></span> )</code>
+		<code><a href="source-class-Wei.Response.html#298-308" title="Go to source code">setVersion</a>( <span>string <var>$version</var></span> )</code>
 
 		<div class="description short">
 			
@@ -519,7 +516,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getVersion">#</a>
-		<code><a href="source-class-Wei.Response.html#307-315" title="Go to source code">getVersion</a>( )</code>
+		<code><a href="source-class-Wei.Response.html#310-318" title="Go to source code">getVersion</a>( )</code>
 
 		<div class="description short">
 			
@@ -556,7 +553,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setHeader">#</a>
-		<code><a href="source-class-Wei.Response.html#317-342" title="Go to source code">setHeader</a>( <span>string <var>$name</var></span>, <span>string|array <var>$values</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$replace</var> = <span class="php-keyword1">true</span></span> )</code>
+		<code><a href="source-class-Wei.Response.html#320-345" title="Go to source code">setHeader</a>( <span>string <var>$name</var></span>, <span>string|array <var>$values</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$replace</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -602,7 +599,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getHeader">#</a>
-		<code><a href="source-class-Wei.Response.html#344-363" title="Go to source code">getHeader</a>( <span>string <var>$name</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$first</var> = <span class="php-keyword1">true</span></span> )</code>
+		<code><a href="source-class-Wei.Response.html#347-366" title="Go to source code">getHeader</a>( <span>string <var>$name</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$first</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -648,7 +645,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_removeHeader">#</a>
-		<code><a href="source-class-Wei.Response.html#365-376" title="Go to source code">removeHeader</a>( <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-Wei.Response.html#368-379" title="Go to source code">removeHeader</a>( <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -690,7 +687,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_sendHeader">#</a>
-		<code><a href="source-class-Wei.Response.html#378-406" title="Go to source code">sendHeader</a>( )</code>
+		<code><a href="source-class-Wei.Response.html#381-409" title="Go to source code">sendHeader</a>( )</code>
 
 		<div class="description short">
 			
@@ -727,7 +724,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_sendRawHeader">#</a>
-		<code><a href="source-class-Wei.Response.html#408-419" title="Go to source code">sendRawHeader</a>( <span>string <var>$header</var></span> )</code>
+		<code><a href="source-class-Wei.Response.html#411-422" title="Go to source code">sendRawHeader</a>( <span>string <var>$header</var></span> )</code>
 
 		<div class="description short">
 			
@@ -768,7 +765,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isHeaderSent">#</a>
-		<code><a href="source-class-Wei.Response.html#421-436" title="Go to source code">isHeaderSent</a>( <span>string <var>&amp; $file</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>&amp; $line</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Wei.Response.html#424-439" title="Go to source code">isHeaderSent</a>( <span>string <var>&amp; $file</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>&amp; $line</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -821,7 +818,7 @@ variables</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCookie">#</a>
-		<code><a href="source-class-Wei.Response.html#438-448" title="Go to source code">getCookie</a>( <span>string <var>$key</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Wei.Response.html#441-451" title="Go to source code">getCookie</a>( <span>string <var>$key</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -865,7 +862,7 @@ variables</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setCookie">#</a>
-		<code><a href="source-class-Wei.Response.html#450-462" title="Go to source code">setCookie</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Wei.Response.html#453-465" title="Go to source code">setCookie</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -911,7 +908,7 @@ variables</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_removeCookie">#</a>
-		<code><a href="source-class-Wei.Response.html#464-473" title="Go to source code">removeCookie</a>( <span>string <var>$key</var></span> )</code>
+		<code><a href="source-class-Wei.Response.html#467-476" title="Go to source code">removeCookie</a>( <span>string <var>$key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -953,7 +950,7 @@ variables</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_sendCookie">#</a>
-		<code><a href="source-class-Wei.Response.html#475-491" title="Go to source code">sendCookie</a>( )</code>
+		<code><a href="source-class-Wei.Response.html#478-494" title="Go to source code">sendCookie</a>( )</code>
 
 		<div class="description short">
 			
@@ -990,7 +987,7 @@ variables</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___toString">#</a>
-		<code><a href="source-class-Wei.Response.html#493-503" title="Go to source code">__toString</a>( )</code>
+		<code><a href="source-class-Wei.Response.html#496-506" title="Go to source code">__toString</a>( )</code>
 
 		<div class="description short">
 			
@@ -1027,7 +1024,7 @@ variables</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getHeaderString">#</a>
-		<code><a href="source-class-Wei.Response.html#505-519" title="Go to source code">getHeaderString</a>( )</code>
+		<code><a href="source-class-Wei.Response.html#508-522" title="Go to source code">getHeaderString</a>( )</code>
 
 		<div class="description short">
 			
@@ -1064,7 +1061,7 @@ variables</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isSent">#</a>
-		<code><a href="source-class-Wei.Response.html#521-529" title="Go to source code">isSent</a>( )</code>
+		<code><a href="source-class-Wei.Response.html#524-532" title="Go to source code">isSent</a>( )</code>
 
 		<div class="description short">
 			
@@ -1101,7 +1098,7 @@ variables</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setSentStatus">#</a>
-		<code><a href="source-class-Wei.Response.html#531-541" title="Go to source code">setSentStatus</a>( <span>boolean <var>$bool</var></span> )</code>
+		<code><a href="source-class-Wei.Response.html#534-544" title="Go to source code">setSentStatus</a>( <span>boolean <var>$bool</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1143,7 +1140,7 @@ variables</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_json">#</a>
-		<code><a href="source-class-Wei.Response.html#543-563" title="Go to source code">json</a>( <span>mixed <var>$data</var></span>, <span>boolean <var>$jsonp</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-Wei.Response.html#546-566" title="Go to source code">json</a>( <span>mixed <var>$data</var></span>, <span>boolean <var>$jsonp</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1187,7 +1184,7 @@ variables</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_jsonp">#</a>
-		<code><a href="source-class-Wei.Response.html#565-574" title="Go to source code">jsonp</a>( <span>mixed <var>$data</var></span> )</code>
+		<code><a href="source-class-Wei.Response.html#568-577" title="Go to source code">jsonp</a>( <span>mixed <var>$data</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1229,7 +1226,7 @@ variables</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_flush">#</a>
-		<code><a href="source-class-Wei.Response.html#576-617" title="Go to source code">flush</a>( <span>string <var>$content</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Wei.Response.html#579-620" title="Go to source code">flush</a>( <span>string <var>$content</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1271,7 +1268,7 @@ variables</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_download">#</a>
-		<code><a href="source-class-Wei.Response.html#619-664" title="Go to source code">download</a>( <span>string <var>$file</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$downloadOptions</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Wei.Response.html#622-667" title="Go to source code">download</a>( <span>string <var>$file</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$downloadOptions</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			

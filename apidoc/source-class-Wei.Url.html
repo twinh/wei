@@ -8,7 +8,7 @@
 	<title>File Url.php | Wei Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<script type="text/javascript" src="elementlist.js?3712690943"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -28,8 +28,6 @@
 						</li>
 				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
 						<ul>
-				<li><a href="namespace-Wei.Db.html">Db</a>
-						</li>
 				<li><a href="namespace-Wei.Validator.html">Validator</a>
 						</li>
 							</ul></li>
@@ -44,7 +42,6 @@
 			<ul>
 				<li><a href="class-Wei.Apc.html">Apc</a></li>
 				<li><a href="class-Wei.App.html">App</a></li>
-				<li><a href="class-Wei.Arr.html">Arr</a></li>
 				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
@@ -56,6 +53,7 @@
 				<li><a href="class-Wei.Controller.html">Controller</a></li>
 				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
 				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Counter.html">Counter</a></li>
 				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
 				<li><a href="class-Wei.Db.html">Db</a></li>
 				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
@@ -64,15 +62,15 @@
 				<li><a href="class-Wei.Escape.html">Escape</a></li>
 				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
 				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
-				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Lock.html">Lock</a></li>
 				<li><a href="class-Wei.Logger.html">Logger</a></li>
 				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
 				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
-				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
 				<li><a href="class-Wei.Request.html">Request</a></li>
@@ -145,7 +143,7 @@
 </span></span><span id="13" class="l"><a class="l" href="#13">13: </a><span class="php-comment"> *
 </span></span><span id="14" class="l"><a class="l" href="#14">14: </a><span class="php-comment"> * @author      Twin Huang &lt;twinhuang@qq.com&gt;
 </span></span><span id="15" class="l"><a class="l" href="#15">15: </a><span class="php-comment"> * @property    Request $request A service that handles the HTTP request data
-</span></span><span id="16" class="l"><a class="l" href="#16">16: </a><span class="php-comment"> * @property    Router $router
+</span></span><span id="16" class="l"><a class="l" href="#16">16: </a><span class="php-comment"> * @property    Router $router A service that parse the URL to request data
 </span></span><span id="17" class="l"><a class="l" href="#17">17: </a><span class="php-comment"> */</span>
 </span><span id="18" class="l"><a class="l" href="#18">18: </a><span class="php-keyword1">class</span> <a id="Url" href="#Url">Url</a> <span class="php-keyword1">extends</span> Base
 </span><span id="19" class="l"><a class="l" href="#19">19: </a>{

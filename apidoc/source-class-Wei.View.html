@@ -8,7 +8,7 @@
 	<title>File View.php | Wei Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<script type="text/javascript" src="elementlist.js?3712690943"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -28,8 +28,6 @@
 						</li>
 				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
 						<ul>
-				<li><a href="namespace-Wei.Db.html">Db</a>
-						</li>
 				<li><a href="namespace-Wei.Validator.html">Validator</a>
 						</li>
 							</ul></li>
@@ -44,7 +42,6 @@
 			<ul>
 				<li><a href="class-Wei.Apc.html">Apc</a></li>
 				<li><a href="class-Wei.App.html">App</a></li>
-				<li><a href="class-Wei.Arr.html">Arr</a></li>
 				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
@@ -56,6 +53,7 @@
 				<li><a href="class-Wei.Controller.html">Controller</a></li>
 				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
 				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Counter.html">Counter</a></li>
 				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
 				<li><a href="class-Wei.Db.html">Db</a></li>
 				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
@@ -64,15 +62,15 @@
 				<li><a href="class-Wei.Escape.html">Escape</a></li>
 				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
 				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
-				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Lock.html">Lock</a></li>
 				<li><a href="class-Wei.Logger.html">Logger</a></li>
 				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
 				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
-				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
 				<li><a href="class-Wei.Request.html">Request</a></li>
@@ -155,9 +153,9 @@
 </span><span id="23" class="l"><a class="l" href="#23"> 23: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$vars" href="#$vars">$vars</a></span> = <span class="php-keyword1">array</span>();
 </span><span id="24" class="l"><a class="l" href="#24"> 24: </a>
 </span><span id="25" class="l"><a class="l" href="#25"> 25: </a>    <span class="php-comment">/**
-</span></span><span id="26" class="l"><a class="l" href="#26"> 26: </a><span class="php-comment">     * Template directory
+</span></span><span id="26" class="l"><a class="l" href="#26"> 26: </a><span class="php-comment">     * The directories to find template
 </span></span><span id="27" class="l"><a class="l" href="#27"> 27: </a><span class="php-comment">     *
-</span></span><span id="28" class="l"><a class="l" href="#28"> 28: </a><span class="php-comment">     * @var string|array
+</span></span><span id="28" class="l"><a class="l" href="#28"> 28: </a><span class="php-comment">     * @var array
 </span></span><span id="29" class="l"><a class="l" href="#29"> 29: </a><span class="php-comment">     */</span>
 </span><span id="30" class="l"><a class="l" href="#30"> 30: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$dirs" href="#$dirs">$dirs</a></span> = <span class="php-keyword1">array</span>(<span class="php-quote">'.'</span>);
 </span><span id="31" class="l"><a class="l" href="#31"> 31: </a>
@@ -171,9 +169,9 @@
 </span><span id="39" class="l"><a class="l" href="#39"> 39: </a>    <span class="php-comment">/**
 </span></span><span id="40" class="l"><a class="l" href="#40"> 40: </a><span class="php-comment">     * The layout configuration
 </span></span><span id="41" class="l"><a class="l" href="#41"> 41: </a><span class="php-comment">     *
-</span></span><span id="42" class="l"><a class="l" href="#42"> 42: </a><span class="php-comment">     * @var array|null
+</span></span><span id="42" class="l"><a class="l" href="#42"> 42: </a><span class="php-comment">     * @var array
 </span></span><span id="43" class="l"><a class="l" href="#43"> 43: </a><span class="php-comment">     */</span>
-</span><span id="44" class="l"><a class="l" href="#44"> 44: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$layout" href="#$layout">$layout</a></span>;
+</span><span id="44" class="l"><a class="l" href="#44"> 44: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$layout" href="#$layout">$layout</a></span> = <span class="php-keyword1">array</span>();
 </span><span id="45" class="l"><a class="l" href="#45"> 45: </a>
 </span><span id="46" class="l"><a class="l" href="#46"> 46: </a>    <span class="php-comment">/**
 </span></span><span id="47" class="l"><a class="l" href="#47"> 47: </a><span class="php-comment">     * The current render view name
@@ -191,7 +189,7 @@
 </span><span id="59" class="l"><a class="l" href="#59"> 59: </a>    {
 </span><span id="60" class="l"><a class="l" href="#60"> 60: </a>        parent::__construct(<span class="php-var">$options</span>);
 </span><span id="61" class="l"><a class="l" href="#61"> 61: </a>
-</span><span id="62" class="l"><a class="l" href="#62"> 62: </a>        <span class="php-comment">// Adds wei to template variable</span>
+</span><span id="62" class="l"><a class="l" href="#62"> 62: </a>        <span class="php-comment">// Adds service container and view service to template variables</span>
 </span><span id="63" class="l"><a class="l" href="#63"> 63: </a>        <span class="php-var">$this</span>-&gt;assign(<span class="php-keyword1">array</span>(
 </span><span id="64" class="l"><a class="l" href="#64"> 64: </a>            <span class="php-quote">'wei'</span>   =&gt; <span class="php-var">$this</span>-&gt;wei,
 </span><span id="65" class="l"><a class="l" href="#65"> 65: </a>            <span class="php-quote">'view'</span>  =&gt; <span class="php-var">$this</span>,
@@ -235,7 +233,7 @@
 </span><span id="103" class="l"><a class="l" href="#103">103: </a>        <span class="php-comment">// Render layout</span>
 </span><span id="104" class="l"><a class="l" href="#104">104: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;layout) {
 </span><span id="105" class="l"><a class="l" href="#105">105: </a>            <span class="php-var">$layout</span> = <span class="php-var">$this</span>-&gt;layout;
-</span><span id="106" class="l"><a class="l" href="#106">106: </a>            <span class="php-var">$this</span>-&gt;layout = <span class="php-keyword1">null</span>;
+</span><span id="106" class="l"><a class="l" href="#106">106: </a>            <span class="php-var">$this</span>-&gt;layout = <span class="php-keyword1">array</span>();
 </span><span id="107" class="l"><a class="l" href="#107">107: </a>            <span class="php-var">$content</span> = <span class="php-var">$this</span>-&gt;render(<span class="php-var">$layout</span>[<span class="php-quote">'name'</span>], <span class="php-keyword1">array</span>(
 </span><span id="108" class="l"><a class="l" href="#108">108: </a>                <span class="php-var">$layout</span>[<span class="php-quote">'variable'</span>] =&gt; <span class="php-var">$content</span>
 </span><span id="109" class="l"><a class="l" href="#109">109: </a>            ) + <span class="php-var">$vars</span>);

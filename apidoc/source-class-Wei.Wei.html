@@ -8,7 +8,7 @@
 	<title>File Wei.php | Wei Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<script type="text/javascript" src="elementlist.js?3712690943"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -28,8 +28,6 @@
 						</li>
 				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
 						<ul>
-				<li><a href="namespace-Wei.Db.html">Db</a>
-						</li>
 				<li><a href="namespace-Wei.Validator.html">Validator</a>
 						</li>
 							</ul></li>
@@ -44,7 +42,6 @@
 			<ul>
 				<li><a href="class-Wei.Apc.html">Apc</a></li>
 				<li><a href="class-Wei.App.html">App</a></li>
-				<li><a href="class-Wei.Arr.html">Arr</a></li>
 				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
@@ -56,6 +53,7 @@
 				<li><a href="class-Wei.Controller.html">Controller</a></li>
 				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
 				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Counter.html">Counter</a></li>
 				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
 				<li><a href="class-Wei.Db.html">Db</a></li>
 				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
@@ -64,15 +62,15 @@
 				<li><a href="class-Wei.Escape.html">Escape</a></li>
 				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
 				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
-				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Lock.html">Lock</a></li>
 				<li><a href="class-Wei.Logger.html">Logger</a></li>
 				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
 				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
-				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
 				<li><a href="class-Wei.Request.html">Request</a></li>
@@ -175,11 +173,11 @@
 </span></span><span id="43" class="l"><a class="l" href="#43"> 43: </a><span class="php-comment">     * @method   mixed      bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
 </span></span><span id="44" class="l"><a class="l" href="#44"> 44: </a><span class="php-comment">     *
 </span></span><span id="45" class="l"><a class="l" href="#45"> 45: </a><span class="php-comment">     * Database
-</span></span><span id="46" class="l"><a class="l" href="#46"> 46: </a><span class="php-comment">     * @property Db                      $db A database service inspired by Doctrine DBAL
-</span></span><span id="47" class="l"><a class="l" href="#47"> 47: </a><span class="php-comment">     * @method   \Wei\Db\QueryBuilder db($table = null) Create a new instance of a SQL query builder with specified table name
+</span></span><span id="46" class="l"><a class="l" href="#46"> 46: </a><span class="php-comment">     * @property Db             $db A database service inspired by Doctrine DBAL
+</span></span><span id="47" class="l"><a class="l" href="#47"> 47: </a><span class="php-comment">     * @method   \Wei\Record    db($table = null) Create a new record object
 </span></span><span id="48" class="l"><a class="l" href="#48"> 48: </a><span class="php-comment">     *
-</span></span><span id="49" class="l"><a class="l" href="#49"> 49: </a><span class="php-comment">     * @property Call           $call A object handles HTTP request like jQuery Ajax
-</span></span><span id="50" class="l"><a class="l" href="#50"> 50: </a><span class="php-comment">     * @method   \Wei\Call   call(array $options) Create a new call object and execute
+</span></span><span id="49" class="l"><a class="l" href="#49"> 49: </a><span class="php-comment">     * @property Call       $call A object handles HTTP request like jQuery Ajax
+</span></span><span id="50" class="l"><a class="l" href="#50"> 50: </a><span class="php-comment">     * @method   \Wei\Call  call(array $options) Create a new call object and execute
 </span></span><span id="51" class="l"><a class="l" href="#51"> 51: </a><span class="php-comment">     *
 </span></span><span id="52" class="l"><a class="l" href="#52"> 52: </a><span class="php-comment">     * HTTP Request
 </span></span><span id="53" class="l"><a class="l" href="#53"> 53: </a><span class="php-comment">     * @property Request    $request A service that handles the HTTP request data
@@ -194,94 +192,94 @@
 </span></span><span id="62" class="l"><a class="l" href="#62"> 62: </a><span class="php-comment">     * @method   bool       upload(array $options = array()) Upload a file
 </span></span><span id="63" class="l"><a class="l" href="#63"> 63: </a><span class="php-comment">     *
 </span></span><span id="64" class="l"><a class="l" href="#64"> 64: </a><span class="php-comment">     * HTTP Response
-</span></span><span id="65" class="l"><a class="l" href="#65"> 65: </a><span class="php-comment">     * @property Response           $response A object that handles the HTTP response data
-</span></span><span id="66" class="l"><a class="l" href="#66"> 66: </a><span class="php-comment">     * @method   \Wei\Response   response($content = null, $status = null) Send response header and content
-</span></span><span id="67" class="l"><a class="l" href="#67"> 67: </a><span class="php-comment">     * @property Json               $json A object to response json
-</span></span><span id="68" class="l"><a class="l" href="#68"> 68: </a><span class="php-comment">     * @method   \Wei\Json       json($message = null, $code = 1, array $append = array(), $jsonp = false) Send JSON(P) response
-</span></span><span id="69" class="l"><a class="l" href="#69"> 69: </a><span class="php-comment">     * @property Redirect           $redirect A object that send a redirect response
-</span></span><span id="70" class="l"><a class="l" href="#70"> 70: </a><span class="php-comment">     * @method   \Wei\Redirect   redirect($url = null, array $options = array()) Send a redirect response
-</span></span><span id="71" class="l"><a class="l" href="#71"> 71: </a><span class="php-comment">     *
-</span></span><span id="72" class="l"><a class="l" href="#72"> 72: </a><span class="php-comment">     * View
-</span></span><span id="73" class="l"><a class="l" href="#73"> 73: </a><span class="php-comment">     * @property View               $view A object that use to render PHP template
-</span></span><span id="74" class="l"><a class="l" href="#74"> 74: </a><span class="php-comment">     * @method   string             view($name = null, $vars = array()) Returns view object or render a PHP template
-</span></span><span id="75" class="l"><a class="l" href="#75"> 75: </a><span class="php-comment">     * @property Asset              $asset A service to generate assets' URL
-</span></span><span id="76" class="l"><a class="l" href="#76"> 76: </a><span class="php-comment">     * @method   string             asset($file) Returns the asset URL by specified file
-</span></span><span id="77" class="l"><a class="l" href="#77"> 77: </a><span class="php-comment">     * @property Escape             $escape A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
-</span></span><span id="78" class="l"><a class="l" href="#78"> 78: </a><span class="php-comment">     * @method   string             escape($string, $type = 'html') Escapes a string by specified type for secure output
-</span></span><span id="79" class="l"><a class="l" href="#79"> 79: </a><span class="php-comment">     *
-</span></span><span id="80" class="l"><a class="l" href="#80"> 80: </a><span class="php-comment">     * Application
-</span></span><span id="81" class="l"><a class="l" href="#81"> 81: </a><span class="php-comment">     * @property WeChatApp          $weChatApp A object handles WeChat(WeiXin) callback message
-</span></span><span id="82" class="l"><a class="l" href="#82"> 82: </a><span class="php-comment">     * @method   \Wei\WeChatApp  weChatApp() Start up WeChat application and output the matched rule message
-</span></span><span id="83" class="l"><a class="l" href="#83"> 83: </a><span class="php-comment">     * @property App                $app The application object
-</span></span><span id="84" class="l"><a class="l" href="#84"> 84: </a><span class="php-comment">     * @method   \Wei\App        app(array $options = array()) Startup application
-</span></span><span id="85" class="l"><a class="l" href="#85"> 85: </a><span class="php-comment">     * @property Router             $router A object that build a simple REST application
-</span></span><span id="86" class="l"><a class="l" href="#86"> 86: </a><span class="php-comment">     * @method   \Wei\Router     router($pathInfo = null, $method = null) Run the application
-</span></span><span id="87" class="l"><a class="l" href="#87"> 87: </a><span class="php-comment">     * @property Url                $url A util object to build URL
-</span></span><span id="88" class="l"><a class="l" href="#88"> 88: </a><span class="php-comment">     * @method   string             url($uri) Build URL by specified uri and parameters
-</span></span><span id="89" class="l"><a class="l" href="#89"> 89: </a><span class="php-comment">     *
-</span></span><span id="90" class="l"><a class="l" href="#90"> 90: </a><span class="php-comment">     * Other
-</span></span><span id="91" class="l"><a class="l" href="#91"> 91: </a><span class="php-comment">     * @property Arr            $arr An util object provides some useful method to manipulation array
-</span></span><span id="92" class="l"><a class="l" href="#92"> 92: </a><span class="php-comment">     * @property Config         $config A object to manage object configurations
-</span></span><span id="93" class="l"><a class="l" href="#93"> 93: </a><span class="php-comment">     * @property Env            $env A object to detect the environment name and load configuration by environment name
-</span></span><span id="94" class="l"><a class="l" href="#94"> 94: </a><span class="php-comment">     * @method   string         env() Returns the environment name
-</span></span><span id="95" class="l"><a class="l" href="#95"> 95: </a><span class="php-comment">     * @property Error          $error A object that handles exception and display pretty exception message
-</span></span><span id="96" class="l"><a class="l" href="#96"> 96: </a><span class="php-comment">     * @method   \Wei\Error  error($fn) Attach a handler to exception error
-</span></span><span id="97" class="l"><a class="l" href="#97"> 97: </a><span class="php-comment">     * @property Gravatar       $gravatar A object that generates a Gravatar URL for a specified email address
-</span></span><span id="98" class="l"><a class="l" href="#98"> 98: </a><span class="php-comment">     * @method   string         gravatar($email, $size = null, $default = null, $rating = null) Generates a Gravatar URL for a specified email address
-</span></span><span id="99" class="l"><a class="l" href="#99"> 99: </a><span class="php-comment">     * @property Logger         $logger A simple logger service, which is inspired by Monolog
-</span></span><span id="100" class="l"><a class="l" href="#100">100: </a><span class="php-comment">     * @method   bool           logger($level, $message) Logs with an arbitrary level
-</span></span><span id="101" class="l"><a class="l" href="#101">101: </a><span class="php-comment">     * @property Password       $password A wrapper class for password hashing functions
-</span></span><span id="102" class="l"><a class="l" href="#102">102: </a><span class="php-comment">     * @property Pinyin         $pinyin An util object that converts Chinese words to phonetic alphabets
-</span></span><span id="103" class="l"><a class="l" href="#103">103: </a><span class="php-comment">     * @method   string         pinyin($word) Converts Chinese words to phonetic alphabets
-</span></span><span id="104" class="l"><a class="l" href="#104">104: </a><span class="php-comment">     * @property Uuid           $uuid A util object that generates a RANDOM UUID(universally unique identifier)
-</span></span><span id="105" class="l"><a class="l" href="#105">105: </a><span class="php-comment">     * @method   string         uuid() generates a RANDOM UUID(universally unique identifier)
-</span></span><span id="106" class="l"><a class="l" href="#106">106: </a><span class="php-comment">     * @property T              $t A translator object
-</span></span><span id="107" class="l"><a class="l" href="#107">107: </a><span class="php-comment">     * @method   string         t($message, array $parameters = array()) Translate the message
+</span></span><span id="65" class="l"><a class="l" href="#65"> 65: </a><span class="php-comment">     * @property Response       $response A object that handles the HTTP response data
+</span></span><span id="66" class="l"><a class="l" href="#66"> 66: </a><span class="php-comment">     * @method   \Wei\Response  response($content = null, $status = null) Send response header and content
+</span></span><span id="67" class="l"><a class="l" href="#67"> 67: </a><span class="php-comment">     * @property Redirect       $redirect A object that send a redirect response
+</span></span><span id="68" class="l"><a class="l" href="#68"> 68: </a><span class="php-comment">     * @method   \Wei\Redirect  redirect($url = null, array $options = array()) Send a redirect response
+</span></span><span id="69" class="l"><a class="l" href="#69"> 69: </a><span class="php-comment">     *
+</span></span><span id="70" class="l"><a class="l" href="#70"> 70: </a><span class="php-comment">     * View
+</span></span><span id="71" class="l"><a class="l" href="#71"> 71: </a><span class="php-comment">     * @property View       $view A object that use to render PHP template
+</span></span><span id="72" class="l"><a class="l" href="#72"> 72: </a><span class="php-comment">     * @method   string     view($name = null, $vars = array()) Returns view object or render a PHP template
+</span></span><span id="73" class="l"><a class="l" href="#73"> 73: </a><span class="php-comment">     * @property Asset      $asset A service to generate assets' URL
+</span></span><span id="74" class="l"><a class="l" href="#74"> 74: </a><span class="php-comment">     * @method   string     asset($file) Returns the asset URL by specified file
+</span></span><span id="75" class="l"><a class="l" href="#75"> 75: </a><span class="php-comment">     * @property Escape     $escape A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
+</span></span><span id="76" class="l"><a class="l" href="#76"> 76: </a><span class="php-comment">     * @method   string     escape($string, $type = 'html') Escapes a string by specified type for secure output
+</span></span><span id="77" class="l"><a class="l" href="#77"> 77: </a><span class="php-comment">     *
+</span></span><span id="78" class="l"><a class="l" href="#78"> 78: </a><span class="php-comment">     * Application
+</span></span><span id="79" class="l"><a class="l" href="#79"> 79: </a><span class="php-comment">     * @property WeChatApp      $weChatApp A object handles WeChat(WeiXin) callback message
+</span></span><span id="80" class="l"><a class="l" href="#80"> 80: </a><span class="php-comment">     * @method   \Wei\WeChatApp weChatApp() Start up WeChat application and output the matched rule message
+</span></span><span id="81" class="l"><a class="l" href="#81"> 81: </a><span class="php-comment">     * @property App            $app The application object
+</span></span><span id="82" class="l"><a class="l" href="#82"> 82: </a><span class="php-comment">     * @method   \Wei\App       app(array $options = array()) Startup application
+</span></span><span id="83" class="l"><a class="l" href="#83"> 83: </a><span class="php-comment">     * @property Router         $router A object that build a simple REST application
+</span></span><span id="84" class="l"><a class="l" href="#84"> 84: </a><span class="php-comment">     * @method   \Wei\Router    router($pathInfo = null, $method = null) Run the application
+</span></span><span id="85" class="l"><a class="l" href="#85"> 85: </a><span class="php-comment">     * @property Url            $url A util object to build URL
+</span></span><span id="86" class="l"><a class="l" href="#86"> 86: </a><span class="php-comment">     * @method   string         url($uri) Build URL by specified uri and parameters
+</span></span><span id="87" class="l"><a class="l" href="#87"> 87: </a><span class="php-comment">     *
+</span></span><span id="88" class="l"><a class="l" href="#88"> 88: </a><span class="php-comment">     * Other
+</span></span><span id="89" class="l"><a class="l" href="#89"> 89: </a><span class="php-comment">     * @property Config     $config A object to manage object configurations
+</span></span><span id="90" class="l"><a class="l" href="#90"> 90: </a><span class="php-comment">     * @property Counter    $counter A counter service
+</span></span><span id="91" class="l"><a class="l" href="#91"> 91: </a><span class="php-comment">     * @property Env        $env A object to detect the environment name and load configuration by environment name
+</span></span><span id="92" class="l"><a class="l" href="#92"> 92: </a><span class="php-comment">     * @method   string     env() Returns the environment name
+</span></span><span id="93" class="l"><a class="l" href="#93"> 93: </a><span class="php-comment">     * @property Error      $error A object that handles exception and display pretty exception message
+</span></span><span id="94" class="l"><a class="l" href="#94"> 94: </a><span class="php-comment">     * @method   \Wei\Error error($fn) Attach a handler to exception error
+</span></span><span id="95" class="l"><a class="l" href="#95"> 95: </a><span class="php-comment">     * @property Gravatar   $gravatar A object that generates a Gravatar URL for a specified email address
+</span></span><span id="96" class="l"><a class="l" href="#96"> 96: </a><span class="php-comment">     * @method   string     gravatar($email, $size = null, $default = null, $rating = null) Generates a Gravatar URL for a specified email address
+</span></span><span id="97" class="l"><a class="l" href="#97"> 97: </a><span class="php-comment">     * @property Lock       $lock A service that provide the functionality of exclusive Lock
+</span></span><span id="98" class="l"><a class="l" href="#98"> 98: </a><span class="php-comment">     * @method   bool       lock($key) Acquire a lock key
+</span></span><span id="99" class="l"><a class="l" href="#99"> 99: </a><span class="php-comment">     * @property Logger     $logger A simple logger service, which is inspired by Monolog
+</span></span><span id="100" class="l"><a class="l" href="#100">100: </a><span class="php-comment">     * @method   bool       logger($level, $message) Logs with an arbitrary level
+</span></span><span id="101" class="l"><a class="l" href="#101">101: </a><span class="php-comment">     * @property Password   $password A wrapper class for password hashing functions
+</span></span><span id="102" class="l"><a class="l" href="#102">102: </a><span class="php-comment">     * @property Pinyin     $pinyin An util object that converts Chinese words to phonetic alphabets
+</span></span><span id="103" class="l"><a class="l" href="#103">103: </a><span class="php-comment">     * @method   string     pinyin($word) Converts Chinese words to phonetic alphabets
+</span></span><span id="104" class="l"><a class="l" href="#104">104: </a><span class="php-comment">     * @property Uuid       $uuid A util object that generates a RANDOM UUID(universally unique identifier)
+</span></span><span id="105" class="l"><a class="l" href="#105">105: </a><span class="php-comment">     * @method   string     uuid() generates a RANDOM UUID(universally unique identifier)
+</span></span><span id="106" class="l"><a class="l" href="#106">106: </a><span class="php-comment">     * @property T          $t A translator object
+</span></span><span id="107" class="l"><a class="l" href="#107">107: </a><span class="php-comment">     * @method   string     t($message, array $parameters = array()) Translate the message
 </span></span><span id="108" class="l"><a class="l" href="#108">108: </a><span class="php-comment">     *
-</span></span><span id="109" class="l"><a class="l" href="#109">109: </a><span class="php-comment">     * Third Party
-</span></span><span id="110" class="l"><a class="l" href="#110">110: </a><span class="php-comment">     * @property Monolog        $monolog A wrapper object for Monolog
-</span></span><span id="111" class="l"><a class="l" href="#111">111: </a><span class="php-comment">     * @method   bool           monolog($level = null, $message = null, array $context = array()) Get monolog logger object or add a log record
-</span></span><span id="112" class="l"><a class="l" href="#112">112: </a><span class="php-comment">     *
-</span></span><span id="113" class="l"><a class="l" href="#113">113: </a><span class="php-comment">     * Validation
-</span></span><span id="114" class="l"><a class="l" href="#114">114: </a><span class="php-comment">     * @method   \Wei\Validate   validate(array $option) Create a new validator and validate by specified options
-</span></span><span id="115" class="l"><a class="l" href="#115">115: </a><span class="php-comment">     *
-</span></span><span id="116" class="l"><a class="l" href="#116">116: </a><span class="php-comment">     * Data type and composition
-</span></span><span id="117" class="l"><a class="l" href="#117">117: </a><span class="php-comment">     * @property Validator\Alnum        $isAlnum
-</span></span><span id="118" class="l"><a class="l" href="#118">118: </a><span class="php-comment">     * @method   bool                   isAlnum($input) Check if the input contains letters (a-z) and digits (0-9)
-</span></span><span id="119" class="l"><a class="l" href="#119">119: </a><span class="php-comment">     * @property Validator\Alpha        $isAlpha
-</span></span><span id="120" class="l"><a class="l" href="#120">120: </a><span class="php-comment">     * @method   bool                   isAlpha($input) Check if the input contains only letters (a-z)
-</span></span><span id="121" class="l"><a class="l" href="#121">121: </a><span class="php-comment">     * @property Validator\Blank        $isBlank
-</span></span><span id="122" class="l"><a class="l" href="#122">122: </a><span class="php-comment">     * @method   bool                   isBlank($input) Check if the input is blank
-</span></span><span id="123" class="l"><a class="l" href="#123">123: </a><span class="php-comment">     * @property Validator\Decimal      $isDecimal
-</span></span><span id="124" class="l"><a class="l" href="#124">124: </a><span class="php-comment">     * @method   bool                   isDecimal($input) Check if the input is decimal
-</span></span><span id="125" class="l"><a class="l" href="#125">125: </a><span class="php-comment">     * @property Validator\Digit        $isDigit
-</span></span><span id="126" class="l"><a class="l" href="#126">126: </a><span class="php-comment">     * @method   bool                   isDigit($input) Check if the input contains only digits (0-9)
-</span></span><span id="127" class="l"><a class="l" href="#127">127: </a><span class="php-comment">     * @property Validator\DivisibleBy  $isDivisibleBy
-</span></span><span id="128" class="l"><a class="l" href="#128">128: </a><span class="php-comment">     * @method   bool                   isDivisibleBy($input, $divisor) Check if the input could be divisible by specified divisor
-</span></span><span id="129" class="l"><a class="l" href="#129">129: </a><span class="php-comment">     * @property Validator\DoubleByte   $isDoubleByte
-</span></span><span id="130" class="l"><a class="l" href="#130">130: </a><span class="php-comment">     * @method   bool                   isDoubleByte($input) Check if the input contains only double characters
-</span></span><span id="131" class="l"><a class="l" href="#131">131: </a><span class="php-comment">     * @property Validator\Present      $isPresent
-</span></span><span id="132" class="l"><a class="l" href="#132">132: </a><span class="php-comment">     * @method   bool                   isPresent($input) Check if the input is empty
-</span></span><span id="133" class="l"><a class="l" href="#133">133: </a><span class="php-comment">     * @property Validator\EndsWith     $isEndsWith
-</span></span><span id="134" class="l"><a class="l" href="#134">134: </a><span class="php-comment">     * @method   bool                   isEndsWith($input, $findMe, $case = false) Check if the input is ends with specified string
-</span></span><span id="135" class="l"><a class="l" href="#135">135: </a><span class="php-comment">     * @property Validator\In           $isIn
-</span></span><span id="136" class="l"><a class="l" href="#136">136: </a><span class="php-comment">     * @method   bool                   isIn($input, array $array, $strict = false) Check if the input is in specified array
-</span></span><span id="137" class="l"><a class="l" href="#137">137: </a><span class="php-comment">     * @property Validator\Lowercase    $isLowercase
-</span></span><span id="138" class="l"><a class="l" href="#138">138: </a><span class="php-comment">     * @method   bool                   isLowercase($input) Check if the input is lowercase
-</span></span><span id="139" class="l"><a class="l" href="#139">139: </a><span class="php-comment">     * @property Validator\Luhn         $isLuhn
-</span></span><span id="140" class="l"><a class="l" href="#140">140: </a><span class="php-comment">     * @method   bool                   isLuhn($input) Check if the input is valid by the Luhn algorithm
-</span></span><span id="141" class="l"><a class="l" href="#141">141: </a><span class="php-comment">     * @property Validator\Null         $isNull
-</span></span><span id="142" class="l"><a class="l" href="#142">142: </a><span class="php-comment">     * @method   bool                   isNull($input) Check if the input is null
-</span></span><span id="143" class="l"><a class="l" href="#143">143: </a><span class="php-comment">     * @property Validator\Number       $isNumber
-</span></span><span id="144" class="l"><a class="l" href="#144">144: </a><span class="php-comment">     * @method   bool                   isNumber($input) Check if the input is number
-</span></span><span id="145" class="l"><a class="l" href="#145">145: </a><span class="php-comment">     * @property Validator\Regex        $isRegex
-</span></span><span id="146" class="l"><a class="l" href="#146">146: </a><span class="php-comment">     * @method   bool                   isRegex($input, $pattern) Check if the input is valid by specified regular expression
-</span></span><span id="147" class="l"><a class="l" href="#147">147: </a><span class="php-comment">     * @property Validator\StartsWith   $isStartsWith
-</span></span><span id="148" class="l"><a class="l" href="#148">148: </a><span class="php-comment">     * @method   bool                   isStartsWith($input, $findMe, $case = false) Check if the input is starts with specified string
-</span></span><span id="149" class="l"><a class="l" href="#149">149: </a><span class="php-comment">     * @property Validator\Type         $isType
-</span></span><span id="150" class="l"><a class="l" href="#150">150: </a><span class="php-comment">     * @method   bool                   isType($input, $type) Check if the type of input is equals specified type name
-</span></span><span id="151" class="l"><a class="l" href="#151">151: </a><span class="php-comment">     * @property Validator\Uppercase    $isUppercase
-</span></span><span id="152" class="l"><a class="l" href="#152">152: </a><span class="php-comment">     * @method   bool                   isUppercase($input) Check if the input is uppercase
+</span></span><span id="109" class="l"><a class="l" href="#109">109: </a><span class="php-comment">     * Validation
+</span></span><span id="110" class="l"><a class="l" href="#110">110: </a><span class="php-comment">     * @method   \Wei\Validate   validate(array $option) Create a new validator and validate by specified options
+</span></span><span id="111" class="l"><a class="l" href="#111">111: </a><span class="php-comment">     *
+</span></span><span id="112" class="l"><a class="l" href="#112">112: </a><span class="php-comment">     * Data type and composition
+</span></span><span id="113" class="l"><a class="l" href="#113">113: </a><span class="php-comment">     * @property Validator\Alnum            $isAlnum
+</span></span><span id="114" class="l"><a class="l" href="#114">114: </a><span class="php-comment">     * @method   bool                       isAlnum($input) Check if the input contains letters (a-z) and digits (0-9)
+</span></span><span id="115" class="l"><a class="l" href="#115">115: </a><span class="php-comment">     * @property Validator\Alpha            $isAlpha
+</span></span><span id="116" class="l"><a class="l" href="#116">116: </a><span class="php-comment">     * @method   bool                       isAlpha($input) Check if the input contains only letters (a-z)
+</span></span><span id="117" class="l"><a class="l" href="#117">117: </a><span class="php-comment">     * @property Validator\Blank            $isBlank
+</span></span><span id="118" class="l"><a class="l" href="#118">118: </a><span class="php-comment">     * @method   bool                       isBlank($input) Check if the input is blank
+</span></span><span id="119" class="l"><a class="l" href="#119">119: </a><span class="php-comment">     * @property Validator\Decimal          $isDecimal
+</span></span><span id="120" class="l"><a class="l" href="#120">120: </a><span class="php-comment">     * @method   bool                       isDecimal($input) Check if the input is decimal
+</span></span><span id="121" class="l"><a class="l" href="#121">121: </a><span class="php-comment">     * @property Validator\Digit            $isDigit
+</span></span><span id="122" class="l"><a class="l" href="#122">122: </a><span class="php-comment">     * @method   bool                       isDigit($input) Check if the input contains only digits (0-9)
+</span></span><span id="123" class="l"><a class="l" href="#123">123: </a><span class="php-comment">     * @property Validator\DivisibleBy      $isDivisibleBy
+</span></span><span id="124" class="l"><a class="l" href="#124">124: </a><span class="php-comment">     * @method   bool                       isDivisibleBy($input, $divisor) Check if the input could be divisible by specified divisor
+</span></span><span id="125" class="l"><a class="l" href="#125">125: </a><span class="php-comment">     * @property Validator\DoubleByte       $isDoubleByte
+</span></span><span id="126" class="l"><a class="l" href="#126">126: </a><span class="php-comment">     * @method   bool                       isDoubleByte($input) Check if the input contains only double characters
+</span></span><span id="127" class="l"><a class="l" href="#127">127: </a><span class="php-comment">     * @property Validator\Present          $isPresent
+</span></span><span id="128" class="l"><a class="l" href="#128">128: </a><span class="php-comment">     * @method   bool                       isPresent($input) Check if the input is empty
+</span></span><span id="129" class="l"><a class="l" href="#129">129: </a><span class="php-comment">     * @property Validator\EndsWith         $isEndsWith
+</span></span><span id="130" class="l"><a class="l" href="#130">130: </a><span class="php-comment">     * @method   bool                       isEndsWith($input, $findMe, $case = false) Check if the input is ends with specified string
+</span></span><span id="131" class="l"><a class="l" href="#131">131: </a><span class="php-comment">     * @property Validator\In               $isIn
+</span></span><span id="132" class="l"><a class="l" href="#132">132: </a><span class="php-comment">     * @method   bool                       isIn($input, array $array, $strict = false) Check if the input is in specified array
+</span></span><span id="133" class="l"><a class="l" href="#133">133: </a><span class="php-comment">     * @property Validator\Lowercase        $isLowercase
+</span></span><span id="134" class="l"><a class="l" href="#134">134: </a><span class="php-comment">     * @method   bool                       isLowercase($input) Check if the input is lowercase
+</span></span><span id="135" class="l"><a class="l" href="#135">135: </a><span class="php-comment">     * @property Validator\Luhn             $isLuhn
+</span></span><span id="136" class="l"><a class="l" href="#136">136: </a><span class="php-comment">     * @method   bool                       isLuhn($input) Check if the input is valid by the Luhn algorithm
+</span></span><span id="137" class="l"><a class="l" href="#137">137: </a><span class="php-comment">     * @property Validator\NaturalNumber    $isNaturalNumber
+</span></span><span id="138" class="l"><a class="l" href="#138">138: </a><span class="php-comment">     * @method   bool                       isNaturalNumber($input) Check if the input is a natural number (integer that greater than or equals 0)
+</span></span><span id="139" class="l"><a class="l" href="#139">139: </a><span class="php-comment">     * @property Validator\Null             $isNull
+</span></span><span id="140" class="l"><a class="l" href="#140">140: </a><span class="php-comment">     * @method   bool                       isNull($input) Check if the input is null
+</span></span><span id="141" class="l"><a class="l" href="#141">141: </a><span class="php-comment">     * @property Validator\Number           $isNumber
+</span></span><span id="142" class="l"><a class="l" href="#142">142: </a><span class="php-comment">     * @method   bool                       isNumber($input) Check if the input is number
+</span></span><span id="143" class="l"><a class="l" href="#143">143: </a><span class="php-comment">     * @property Validator\PositiveInteger  $isPositiveInteger
+</span></span><span id="144" class="l"><a class="l" href="#144">144: </a><span class="php-comment">     * @method   bool                       isPositiveInteger($input) Check if the input is a positive integer (integer that greater than 0)
+</span></span><span id="145" class="l"><a class="l" href="#145">145: </a><span class="php-comment">     * @property Validator\Regex            $isRegex
+</span></span><span id="146" class="l"><a class="l" href="#146">146: </a><span class="php-comment">     * @method   bool                       isRegex($input, $pattern) Check if the input is valid by specified regular expression
+</span></span><span id="147" class="l"><a class="l" href="#147">147: </a><span class="php-comment">     * @property Validator\StartsWith       $isStartsWith
+</span></span><span id="148" class="l"><a class="l" href="#148">148: </a><span class="php-comment">     * @method   bool                       isStartsWith($input, $findMe, $case = false) Check if the input is starts with specified string
+</span></span><span id="149" class="l"><a class="l" href="#149">149: </a><span class="php-comment">     * @property Validator\Type             $isType
+</span></span><span id="150" class="l"><a class="l" href="#150">150: </a><span class="php-comment">     * @method   bool                       isType($input, $type) Check if the type of input is equals specified type name
+</span></span><span id="151" class="l"><a class="l" href="#151">151: </a><span class="php-comment">     * @property Validator\Uppercase        $isUppercase
+</span></span><span id="152" class="l"><a class="l" href="#152">152: </a><span class="php-comment">     * @method   bool                       isUppercase($input) Check if the input is uppercase
 </span></span><span id="153" class="l"><a class="l" href="#153">153: </a><span class="php-comment">     *
 </span></span><span id="154" class="l"><a class="l" href="#154">154: </a><span class="php-comment">     * Length
 </span></span><span id="155" class="l"><a class="l" href="#155">155: </a><span class="php-comment">     * @property Validator\Length       $isLength
@@ -654,7 +652,7 @@
 </span><span id="522" class="l"><a class="l" href="#522">522: </a>        }
 </span><span id="523" class="l"><a class="l" href="#523">523: </a>
 </span><span id="524" class="l"><a class="l" href="#524">524: </a>        <span class="php-comment">/**
-</span></span><span id="525" class="l"><a class="l" href="#525">525: </a><span class="php-comment">         * Get object's configuration
+</span></span><span id="525" class="l"><a class="l" href="#525">525: </a><span class="php-comment">         * Get services' configuration
 </span></span><span id="526" class="l"><a class="l" href="#526">526: </a><span class="php-comment">         *
 </span></span><span id="527" class="l"><a class="l" href="#527">527: </a><span class="php-comment">         * @param string $name The name of configuration
 </span></span><span id="528" class="l"><a class="l" href="#528">528: </a><span class="php-comment">         * @param mixed $default The default value if configuration not found
@@ -895,159 +893,155 @@
 </span></span><span id="763" class="l"><a class="l" href="#763">763: </a><span class="php-comment">         */</span>
 </span><span id="764" class="l"><a class="l" href="#764">764: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setAutoloadMap" href="#_setAutoloadMap">setAutoloadMap</a>(<span class="php-keyword1">array</span> <span class="php-var">$map</span>)
 </span><span id="765" class="l"><a class="l" href="#765">765: </a>        {
-</span><span id="766" class="l"><a class="l" href="#766">766: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$map</span> <span class="php-keyword1">as</span> &amp;<span class="php-var">$dir</span>) {
-</span><span id="767" class="l"><a class="l" href="#767">767: </a>                <span class="php-var">$dir</span> = <span class="php-keyword2">realpath</span>(<span class="php-var">$dir</span>);
-</span><span id="768" class="l"><a class="l" href="#768">768: </a>            }
+</span><span id="766" class="l"><a class="l" href="#766">766: </a>            <span class="php-var">$map</span> = <span class="php-keyword2">array_map</span>(<span class="php-quote">'realpath'</span>, <span class="php-var">$map</span>);
+</span><span id="767" class="l"><a class="l" href="#767">767: </a>            <span class="php-comment">// The autoload directories will always contain the library directory</span>
+</span><span id="768" class="l"><a class="l" href="#768">768: </a>            <span class="php-var">$map</span>[<span class="php-quote">'Wei'</span>] = <span class="php-keyword2">dirname</span>(<span class="php-keyword2">dirname</span>(__FILE__));
 </span><span id="769" class="l"><a class="l" href="#769">769: </a>
-</span><span id="770" class="l"><a class="l" href="#770">770: </a>            <span class="php-comment">// The autoload directories will always contain the wei directory</span>
-</span><span id="771" class="l"><a class="l" href="#771">771: </a>            <span class="php-var">$map</span>[<span class="php-quote">'Wei'</span>] = <span class="php-keyword2">dirname</span>(<span class="php-keyword2">dirname</span>(__FILE__));
-</span><span id="772" class="l"><a class="l" href="#772">772: </a>
-</span><span id="773" class="l"><a class="l" href="#773">773: </a>            <span class="php-var">$this</span>-&gt;autoloadMap = <span class="php-var">$map</span>;
-</span><span id="774" class="l"><a class="l" href="#774">774: </a>
-</span><span id="775" class="l"><a class="l" href="#775">775: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
-</span><span id="776" class="l"><a class="l" href="#776">776: </a>        }
-</span><span id="777" class="l"><a class="l" href="#777">777: </a>
-</span><span id="778" class="l"><a class="l" href="#778">778: </a>        <span class="php-comment">/**
-</span></span><span id="779" class="l"><a class="l" href="#779">779: </a><span class="php-comment">         * Sets the value of PHP configuration options
-</span></span><span id="780" class="l"><a class="l" href="#780">780: </a><span class="php-comment">         *
-</span></span><span id="781" class="l"><a class="l" href="#781">781: </a><span class="php-comment">         * @param array $inis
-</span></span><span id="782" class="l"><a class="l" href="#782">782: </a><span class="php-comment">         * @return $this
-</span></span><span id="783" class="l"><a class="l" href="#783">783: </a><span class="php-comment">         */</span>
-</span><span id="784" class="l"><a class="l" href="#784">784: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setInis" href="#_setInis">setInis</a>(<span class="php-keyword1">array</span> <span class="php-var">$inis</span>)
-</span><span id="785" class="l"><a class="l" href="#785">785: </a>        {
-</span><span id="786" class="l"><a class="l" href="#786">786: </a>            <span class="php-var">$this</span>-&gt;inis = <span class="php-var">$inis</span> + <span class="php-var">$this</span>-&gt;inis;
-</span><span id="787" class="l"><a class="l" href="#787">787: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$inis</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$value</span>) {
-</span><span id="788" class="l"><a class="l" href="#788">788: </a>                <span class="php-keyword2">ini_set</span>(<span class="php-var">$key</span>, <span class="php-var">$value</span>);
-</span><span id="789" class="l"><a class="l" href="#789">789: </a>            }
-</span><span id="790" class="l"><a class="l" href="#790">790: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
-</span><span id="791" class="l"><a class="l" href="#791">791: </a>        }
-</span><span id="792" class="l"><a class="l" href="#792">792: </a>
-</span><span id="793" class="l"><a class="l" href="#793">793: </a>        <span class="php-comment">/**
-</span></span><span id="794" class="l"><a class="l" href="#794">794: </a><span class="php-comment">         * Merge service aliases
-</span></span><span id="795" class="l"><a class="l" href="#795">795: </a><span class="php-comment">         *
-</span></span><span id="796" class="l"><a class="l" href="#796">796: </a><span class="php-comment">         * @param array $aliases
-</span></span><span id="797" class="l"><a class="l" href="#797">797: </a><span class="php-comment">         * @return $this
-</span></span><span id="798" class="l"><a class="l" href="#798">798: </a><span class="php-comment">         */</span>
-</span><span id="799" class="l"><a class="l" href="#799">799: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setAliases" href="#_setAliases">setAliases</a>(<span class="php-keyword1">array</span> <span class="php-var">$aliases</span>)
-</span><span id="800" class="l"><a class="l" href="#800">800: </a>        {
-</span><span id="801" class="l"><a class="l" href="#801">801: </a>            <span class="php-var">$this</span>-&gt;aliases = <span class="php-var">$aliases</span> + <span class="php-var">$this</span>-&gt;aliases;
-</span><span id="802" class="l"><a class="l" href="#802">802: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
-</span><span id="803" class="l"><a class="l" href="#803">803: </a>        }
-</span><span id="804" class="l"><a class="l" href="#804">804: </a>
-</span><span id="805" class="l"><a class="l" href="#805">805: </a>        <span class="php-comment">/**
-</span></span><span id="806" class="l"><a class="l" href="#806">806: </a><span class="php-comment">         * Set service alias
-</span></span><span id="807" class="l"><a class="l" href="#807">807: </a><span class="php-comment">         *
-</span></span><span id="808" class="l"><a class="l" href="#808">808: </a><span class="php-comment">         * @param string $name The name of service
-</span></span><span id="809" class="l"><a class="l" href="#809">809: </a><span class="php-comment">         * @param string $class The class that the service reference to
-</span></span><span id="810" class="l"><a class="l" href="#810">810: </a><span class="php-comment">         * @return $this
-</span></span><span id="811" class="l"><a class="l" href="#811">811: </a><span class="php-comment">         */</span>
-</span><span id="812" class="l"><a class="l" href="#812">812: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setAlias" href="#_setAlias">setAlias</a>(<span class="php-var">$name</span>, <span class="php-var">$class</span>)
-</span><span id="813" class="l"><a class="l" href="#813">813: </a>        {
-</span><span id="814" class="l"><a class="l" href="#814">814: </a>            <span class="php-var">$this</span>-&gt;aliases[<span class="php-var">$name</span>] = <span class="php-var">$class</span>;
-</span><span id="815" class="l"><a class="l" href="#815">815: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
-</span><span id="816" class="l"><a class="l" href="#816">816: </a>        }
-</span><span id="817" class="l"><a class="l" href="#817">817: </a>
-</span><span id="818" class="l"><a class="l" href="#818">818: </a>        <span class="php-comment">/**
-</span></span><span id="819" class="l"><a class="l" href="#819">819: </a><span class="php-comment">         * Import classes in the specified directory as services
-</span></span><span id="820" class="l"><a class="l" href="#820">820: </a><span class="php-comment">         *
-</span></span><span id="821" class="l"><a class="l" href="#821">821: </a><span class="php-comment">         * @param string $dir The directory to search class
-</span></span><span id="822" class="l"><a class="l" href="#822">822: </a><span class="php-comment">         * @param string $namespace The prefix namespace of the class
-</span></span><span id="823" class="l"><a class="l" href="#823">823: </a><span class="php-comment">         * @param null $format The service name format, eg 'is%s'
-</span></span><span id="824" class="l"><a class="l" href="#824">824: </a><span class="php-comment">         * @param bool $autoload Whether add namespace and directory to `autoloadMap` or nor
-</span></span><span id="825" class="l"><a class="l" href="#825">825: </a><span class="php-comment">         * @throws \InvalidArgumentException When the first parameter is not a directory
-</span></span><span id="826" class="l"><a class="l" href="#826">826: </a><span class="php-comment">         * @return $this
-</span></span><span id="827" class="l"><a class="l" href="#827">827: </a><span class="php-comment">         */</span>
-</span><span id="828" class="l"><a class="l" href="#828">828: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_import" href="#_import">import</a>(<span class="php-var">$dir</span>, <span class="php-var">$namespace</span>, <span class="php-var">$format</span> = <span class="php-keyword1">null</span>, <span class="php-var">$autoload</span> = <span class="php-keyword1">false</span>)
-</span><span id="829" class="l"><a class="l" href="#829">829: </a>        {
-</span><span id="830" class="l"><a class="l" href="#830">830: </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_dir</span>(<span class="php-var">$dir</span>)) {
-</span><span id="831" class="l"><a class="l" href="#831">831: </a>                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'Fail to import classes from non-exists directory &quot;%s&quot;'</span>, <span class="php-var">$dir</span>), <span class="php-num">1014</span>);
+</span><span id="770" class="l"><a class="l" href="#770">770: </a>            <span class="php-var">$this</span>-&gt;autoloadMap = <span class="php-var">$map</span>;
+</span><span id="771" class="l"><a class="l" href="#771">771: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="772" class="l"><a class="l" href="#772">772: </a>        }
+</span><span id="773" class="l"><a class="l" href="#773">773: </a>
+</span><span id="774" class="l"><a class="l" href="#774">774: </a>        <span class="php-comment">/**
+</span></span><span id="775" class="l"><a class="l" href="#775">775: </a><span class="php-comment">         * Sets the value of PHP configuration options
+</span></span><span id="776" class="l"><a class="l" href="#776">776: </a><span class="php-comment">         *
+</span></span><span id="777" class="l"><a class="l" href="#777">777: </a><span class="php-comment">         * @param array $inis
+</span></span><span id="778" class="l"><a class="l" href="#778">778: </a><span class="php-comment">         * @return $this
+</span></span><span id="779" class="l"><a class="l" href="#779">779: </a><span class="php-comment">         */</span>
+</span><span id="780" class="l"><a class="l" href="#780">780: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setInis" href="#_setInis">setInis</a>(<span class="php-keyword1">array</span> <span class="php-var">$inis</span>)
+</span><span id="781" class="l"><a class="l" href="#781">781: </a>        {
+</span><span id="782" class="l"><a class="l" href="#782">782: </a>            <span class="php-var">$this</span>-&gt;inis = <span class="php-var">$inis</span> + <span class="php-var">$this</span>-&gt;inis;
+</span><span id="783" class="l"><a class="l" href="#783">783: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$inis</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$value</span>) {
+</span><span id="784" class="l"><a class="l" href="#784">784: </a>                <span class="php-keyword2">ini_set</span>(<span class="php-var">$key</span>, <span class="php-var">$value</span>);
+</span><span id="785" class="l"><a class="l" href="#785">785: </a>            }
+</span><span id="786" class="l"><a class="l" href="#786">786: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="787" class="l"><a class="l" href="#787">787: </a>        }
+</span><span id="788" class="l"><a class="l" href="#788">788: </a>
+</span><span id="789" class="l"><a class="l" href="#789">789: </a>        <span class="php-comment">/**
+</span></span><span id="790" class="l"><a class="l" href="#790">790: </a><span class="php-comment">         * Merge service aliases
+</span></span><span id="791" class="l"><a class="l" href="#791">791: </a><span class="php-comment">         *
+</span></span><span id="792" class="l"><a class="l" href="#792">792: </a><span class="php-comment">         * @param array $aliases
+</span></span><span id="793" class="l"><a class="l" href="#793">793: </a><span class="php-comment">         * @return $this
+</span></span><span id="794" class="l"><a class="l" href="#794">794: </a><span class="php-comment">         */</span>
+</span><span id="795" class="l"><a class="l" href="#795">795: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setAliases" href="#_setAliases">setAliases</a>(<span class="php-keyword1">array</span> <span class="php-var">$aliases</span>)
+</span><span id="796" class="l"><a class="l" href="#796">796: </a>        {
+</span><span id="797" class="l"><a class="l" href="#797">797: </a>            <span class="php-var">$this</span>-&gt;aliases = <span class="php-var">$aliases</span> + <span class="php-var">$this</span>-&gt;aliases;
+</span><span id="798" class="l"><a class="l" href="#798">798: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="799" class="l"><a class="l" href="#799">799: </a>        }
+</span><span id="800" class="l"><a class="l" href="#800">800: </a>
+</span><span id="801" class="l"><a class="l" href="#801">801: </a>        <span class="php-comment">/**
+</span></span><span id="802" class="l"><a class="l" href="#802">802: </a><span class="php-comment">         * Set service alias
+</span></span><span id="803" class="l"><a class="l" href="#803">803: </a><span class="php-comment">         *
+</span></span><span id="804" class="l"><a class="l" href="#804">804: </a><span class="php-comment">         * @param string $name The name of service
+</span></span><span id="805" class="l"><a class="l" href="#805">805: </a><span class="php-comment">         * @param string $class The class that the service reference to
+</span></span><span id="806" class="l"><a class="l" href="#806">806: </a><span class="php-comment">         * @return $this
+</span></span><span id="807" class="l"><a class="l" href="#807">807: </a><span class="php-comment">         */</span>
+</span><span id="808" class="l"><a class="l" href="#808">808: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setAlias" href="#_setAlias">setAlias</a>(<span class="php-var">$name</span>, <span class="php-var">$class</span>)
+</span><span id="809" class="l"><a class="l" href="#809">809: </a>        {
+</span><span id="810" class="l"><a class="l" href="#810">810: </a>            <span class="php-var">$this</span>-&gt;aliases[<span class="php-var">$name</span>] = <span class="php-var">$class</span>;
+</span><span id="811" class="l"><a class="l" href="#811">811: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="812" class="l"><a class="l" href="#812">812: </a>        }
+</span><span id="813" class="l"><a class="l" href="#813">813: </a>
+</span><span id="814" class="l"><a class="l" href="#814">814: </a>        <span class="php-comment">/**
+</span></span><span id="815" class="l"><a class="l" href="#815">815: </a><span class="php-comment">         * Import classes in the specified directory as services
+</span></span><span id="816" class="l"><a class="l" href="#816">816: </a><span class="php-comment">         *
+</span></span><span id="817" class="l"><a class="l" href="#817">817: </a><span class="php-comment">         * @param string $dir The directory to search class
+</span></span><span id="818" class="l"><a class="l" href="#818">818: </a><span class="php-comment">         * @param string $namespace The prefix namespace of the class
+</span></span><span id="819" class="l"><a class="l" href="#819">819: </a><span class="php-comment">         * @param null $format The service name format, eg 'is%s'
+</span></span><span id="820" class="l"><a class="l" href="#820">820: </a><span class="php-comment">         * @param bool $autoload Whether add namespace and directory to `autoloadMap` or nor
+</span></span><span id="821" class="l"><a class="l" href="#821">821: </a><span class="php-comment">         * @throws \InvalidArgumentException When the first parameter is not a directory
+</span></span><span id="822" class="l"><a class="l" href="#822">822: </a><span class="php-comment">         * @return $this
+</span></span><span id="823" class="l"><a class="l" href="#823">823: </a><span class="php-comment">         */</span>
+</span><span id="824" class="l"><a class="l" href="#824">824: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_import" href="#_import">import</a>(<span class="php-var">$dir</span>, <span class="php-var">$namespace</span>, <span class="php-var">$format</span> = <span class="php-keyword1">null</span>, <span class="php-var">$autoload</span> = <span class="php-keyword1">false</span>)
+</span><span id="825" class="l"><a class="l" href="#825">825: </a>        {
+</span><span id="826" class="l"><a class="l" href="#826">826: </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_dir</span>(<span class="php-var">$dir</span>)) {
+</span><span id="827" class="l"><a class="l" href="#827">827: </a>                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'Fail to import classes from non-exists directory &quot;%s&quot;'</span>, <span class="php-var">$dir</span>), <span class="php-num">1014</span>);
+</span><span id="828" class="l"><a class="l" href="#828">828: </a>            }
+</span><span id="829" class="l"><a class="l" href="#829">829: </a>
+</span><span id="830" class="l"><a class="l" href="#830">830: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$autoload</span>) {
+</span><span id="831" class="l"><a class="l" href="#831">831: </a>                <span class="php-var">$this</span>-&gt;autoloadMap[<span class="php-var">$namespace</span>] = <span class="php-keyword2">dirname</span>(<span class="php-var">$dir</span>);
 </span><span id="832" class="l"><a class="l" href="#832">832: </a>            }
 </span><span id="833" class="l"><a class="l" href="#833">833: </a>
-</span><span id="834" class="l"><a class="l" href="#834">834: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$autoload</span>) {
-</span><span id="835" class="l"><a class="l" href="#835">835: </a>                <span class="php-var">$this</span>-&gt;autoloadMap[<span class="php-var">$namespace</span>] = <span class="php-keyword2">dirname</span>(<span class="php-var">$dir</span>);
-</span><span id="836" class="l"><a class="l" href="#836">836: </a>            }
-</span><span id="837" class="l"><a class="l" href="#837">837: </a>
-</span><span id="838" class="l"><a class="l" href="#838">838: </a>            <span class="php-var">$files</span> = <span class="php-keyword2">glob</span>(<span class="php-var">$dir</span> . <span class="php-quote">'/*.php'</span>) ?: <span class="php-keyword1">array</span>();
-</span><span id="839" class="l"><a class="l" href="#839">839: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$files</span> <span class="php-keyword1">as</span> <span class="php-var">$file</span>) {
-</span><span id="840" class="l"><a class="l" href="#840">840: </a>                <span class="php-var">$class</span> = <span class="php-keyword2">substr</span>(<span class="php-keyword2">basename</span>(<span class="php-var">$file</span>), <span class="php-num">0</span>, -<span class="php-num">4</span>);
-</span><span id="841" class="l"><a class="l" href="#841">841: </a>                <span class="php-var">$name</span> = <span class="php-var">$format</span> ? <span class="php-keyword2">sprintf</span>(<span class="php-var">$format</span>, <span class="php-var">$class</span>) : <span class="php-var">$class</span>;
-</span><span id="842" class="l"><a class="l" href="#842">842: </a>                <span class="php-var">$this</span>-&gt;aliases[<span class="php-keyword2">lcfirst</span>(<span class="php-var">$name</span>)] = <span class="php-var">$namespace</span> . <span class="php-quote">'\\'</span> . <span class="php-var">$class</span>;
-</span><span id="843" class="l"><a class="l" href="#843">843: </a>            }
-</span><span id="844" class="l"><a class="l" href="#844">844: </a>
-</span><span id="845" class="l"><a class="l" href="#845">845: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
-</span><span id="846" class="l"><a class="l" href="#846">846: </a>        }
-</span><span id="847" class="l"><a class="l" href="#847">847: </a>
-</span><span id="848" class="l"><a class="l" href="#848">848: </a>        <span class="php-comment">/**
-</span></span><span id="849" class="l"><a class="l" href="#849">849: </a><span class="php-comment">         * Set import services
-</span></span><span id="850" class="l"><a class="l" href="#850">850: </a><span class="php-comment">         *
-</span></span><span id="851" class="l"><a class="l" href="#851">851: </a><span class="php-comment">         * @param array $import
-</span></span><span id="852" class="l"><a class="l" href="#852">852: </a><span class="php-comment">         * @return $this
-</span></span><span id="853" class="l"><a class="l" href="#853">853: </a><span class="php-comment">         */</span>
-</span><span id="854" class="l"><a class="l" href="#854">854: </a>        <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_setImport" href="#_setImport">setImport</a>(<span class="php-keyword1">array</span> <span class="php-var">$import</span> = <span class="php-keyword1">array</span>())
-</span><span id="855" class="l"><a class="l" href="#855">855: </a>        {
-</span><span id="856" class="l"><a class="l" href="#856">856: </a>            <span class="php-var">$this</span>-&gt;import = <span class="php-var">$import</span> + <span class="php-var">$this</span>-&gt;import;
-</span><span id="857" class="l"><a class="l" href="#857">857: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$import</span> <span class="php-keyword1">as</span> <span class="php-var">$option</span>) {
-</span><span id="858" class="l"><a class="l" href="#858">858: </a>                <span class="php-var">$option</span> += <span class="php-keyword1">array</span>(
-</span><span id="859" class="l"><a class="l" href="#859">859: </a>                    <span class="php-quote">'dir'</span> =&gt; <span class="php-keyword1">null</span>,
-</span><span id="860" class="l"><a class="l" href="#860">860: </a>                    <span class="php-quote">'namespace'</span> =&gt; <span class="php-keyword1">null</span>,
-</span><span id="861" class="l"><a class="l" href="#861">861: </a>                    <span class="php-quote">'format'</span> =&gt; <span class="php-keyword1">null</span>,
-</span><span id="862" class="l"><a class="l" href="#862">862: </a>                    <span class="php-quote">'autoload'</span> =&gt; <span class="php-keyword1">false</span>,
-</span><span id="863" class="l"><a class="l" href="#863">863: </a>                );
-</span><span id="864" class="l"><a class="l" href="#864">864: </a>                <span class="php-var">$this</span>-&gt;import(<span class="php-var">$option</span>[<span class="php-quote">'dir'</span>], <span class="php-var">$option</span>[<span class="php-quote">'namespace'</span>], <span class="php-var">$option</span>[<span class="php-quote">'format'</span>], <span class="php-var">$option</span>[<span class="php-quote">'autoload'</span>]);
-</span><span id="865" class="l"><a class="l" href="#865">865: </a>            }
-</span><span id="866" class="l"><a class="l" href="#866">866: </a>        }
-</span><span id="867" class="l"><a class="l" href="#867">867: </a>
-</span><span id="868" class="l"><a class="l" href="#868">868: </a>        <span class="php-comment">/**
-</span></span><span id="869" class="l"><a class="l" href="#869">869: </a><span class="php-comment">         * Merge the dependence map
-</span></span><span id="870" class="l"><a class="l" href="#870">870: </a><span class="php-comment">         *
-</span></span><span id="871" class="l"><a class="l" href="#871">871: </a><span class="php-comment">         * @param array $providers
-</span></span><span id="872" class="l"><a class="l" href="#872">872: </a><span class="php-comment">         */</span>
-</span><span id="873" class="l"><a class="l" href="#873">873: </a>        <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_setProviders" href="#_setProviders">setProviders</a>(<span class="php-keyword1">array</span> <span class="php-var">$providers</span>)
-</span><span id="874" class="l"><a class="l" href="#874">874: </a>        {
-</span><span id="875" class="l"><a class="l" href="#875">875: </a>            <span class="php-var">$this</span>-&gt;providers = <span class="php-var">$providers</span> + <span class="php-var">$this</span>-&gt;providers;
-</span><span id="876" class="l"><a class="l" href="#876">876: </a>        }
-</span><span id="877" class="l"><a class="l" href="#877">877: </a>
-</span><span id="878" class="l"><a class="l" href="#878">878: </a>        <span class="php-comment">/**
-</span></span><span id="879" class="l"><a class="l" href="#879">879: </a><span class="php-comment">         * Instance preload services
-</span></span><span id="880" class="l"><a class="l" href="#880">880: </a><span class="php-comment">         *
-</span></span><span id="881" class="l"><a class="l" href="#881">881: </a><span class="php-comment">         * @param array $preload
-</span></span><span id="882" class="l"><a class="l" href="#882">882: </a><span class="php-comment">         */</span>
-</span><span id="883" class="l"><a class="l" href="#883">883: </a>        <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_setPreload" href="#_setPreload">setPreload</a>(<span class="php-keyword1">array</span> <span class="php-var">$preload</span>)
-</span><span id="884" class="l"><a class="l" href="#884">884: </a>        {
-</span><span id="885" class="l"><a class="l" href="#885">885: </a>            <span class="php-var">$this</span>-&gt;preload = <span class="php-keyword2">array_merge</span>(<span class="php-var">$this</span>-&gt;preload, <span class="php-var">$preload</span>);
-</span><span id="886" class="l"><a class="l" href="#886">886: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$preload</span> <span class="php-keyword1">as</span> <span class="php-var">$service</span>) {
-</span><span id="887" class="l"><a class="l" href="#887">887: </a>                <span class="php-var">$this</span>-&gt;set(<span class="php-var">$service</span>, <span class="php-var">$this</span>-&gt;get(<span class="php-var">$service</span>));
-</span><span id="888" class="l"><a class="l" href="#888">888: </a>            }
-</span><span id="889" class="l"><a class="l" href="#889">889: </a>        }
-</span><span id="890" class="l"><a class="l" href="#890">890: </a>    }
-</span><span id="891" class="l"><a class="l" href="#891">891: </a>}
-</span><span id="892" class="l"><a class="l" href="#892">892: </a>
-</span><span id="893" class="l"><a class="l" href="#893">893: </a><span class="php-comment">/**
-</span></span><span id="894" class="l"><a class="l" href="#894">894: </a><span class="php-comment"> * Define function in global namespace
-</span></span><span id="895" class="l"><a class="l" href="#895">895: </a><span class="php-comment"> */</span>
-</span><span id="896" class="l"><a class="l" href="#896">896: </a><span class="php-keyword1">namespace</span>
-</span><span id="897" class="l"><a class="l" href="#897">897: </a>{
-</span><span id="898" class="l"><a class="l" href="#898">898: </a>    <span class="php-comment">/**
-</span></span><span id="899" class="l"><a class="l" href="#899">899: </a><span class="php-comment">     * Get the service container instance
-</span></span><span id="900" class="l"><a class="l" href="#900">900: </a><span class="php-comment">     *
-</span></span><span id="901" class="l"><a class="l" href="#901">901: </a><span class="php-comment">     * @return Wei\Wei
-</span></span><span id="902" class="l"><a class="l" href="#902">902: </a><span class="php-comment">     */</span>
-</span><span id="903" class="l"><a class="l" href="#903">903: </a>    <span class="php-keyword1">function</span> <a id="_wei" href="#_wei">wei</a>()
-</span><span id="904" class="l"><a class="l" href="#904">904: </a>    {
-</span><span id="905" class="l"><a class="l" href="#905">905: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">call_user_func_array</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'Wei\Wei'</span>, <span class="php-quote">'getContainer'</span>), <span class="php-keyword2">func_get_args</span>());
-</span><span id="906" class="l"><a class="l" href="#906">906: </a>    }
-</span><span id="907" class="l"><a class="l" href="#907">907: </a>
-</span><span id="908" class="l"><a class="l" href="#908">908: </a>    <span class="php-comment">/**
-</span></span><span id="909" class="l"><a class="l" href="#909">909: </a><span class="php-comment">     * Get the service container instance
-</span></span><span id="910" class="l"><a class="l" href="#910">910: </a><span class="php-comment">     *
-</span></span><span id="911" class="l"><a class="l" href="#911">911: </a><span class="php-comment">     * @return Wei\Wei
-</span></span><span id="912" class="l"><a class="l" href="#912">912: </a><span class="php-comment">     */</span>
-</span><span id="913" class="l"><a class="l" href="#913">913: </a>    <span class="php-keyword1">function</span> <a id="_widget" href="#_widget">widget</a>()
-</span><span id="914" class="l"><a class="l" href="#914">914: </a>    {
-</span><span id="915" class="l"><a class="l" href="#915">915: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">call_user_func_array</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'Wei\Wei'</span>, <span class="php-quote">'getContainer'</span>), <span class="php-keyword2">func_get_args</span>());
-</span><span id="916" class="l"><a class="l" href="#916">916: </a>    }
-</span><span id="917" class="l"><a class="l" href="#917">917: </a>}
-</span><span id="918" class="l"><a class="l" href="#918">918: </a></span></code></pre>
+</span><span id="834" class="l"><a class="l" href="#834">834: </a>            <span class="php-var">$files</span> = <span class="php-keyword2">glob</span>(<span class="php-var">$dir</span> . <span class="php-quote">'/*.php'</span>) ?: <span class="php-keyword1">array</span>();
+</span><span id="835" class="l"><a class="l" href="#835">835: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$files</span> <span class="php-keyword1">as</span> <span class="php-var">$file</span>) {
+</span><span id="836" class="l"><a class="l" href="#836">836: </a>                <span class="php-var">$class</span> = <span class="php-keyword2">substr</span>(<span class="php-keyword2">basename</span>(<span class="php-var">$file</span>), <span class="php-num">0</span>, -<span class="php-num">4</span>);
+</span><span id="837" class="l"><a class="l" href="#837">837: </a>                <span class="php-var">$name</span> = <span class="php-var">$format</span> ? <span class="php-keyword2">sprintf</span>(<span class="php-var">$format</span>, <span class="php-var">$class</span>) : <span class="php-var">$class</span>;
+</span><span id="838" class="l"><a class="l" href="#838">838: </a>                <span class="php-var">$this</span>-&gt;aliases[<span class="php-keyword2">lcfirst</span>(<span class="php-var">$name</span>)] = <span class="php-var">$namespace</span> . <span class="php-quote">'\\'</span> . <span class="php-var">$class</span>;
+</span><span id="839" class="l"><a class="l" href="#839">839: </a>            }
+</span><span id="840" class="l"><a class="l" href="#840">840: </a>
+</span><span id="841" class="l"><a class="l" href="#841">841: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="842" class="l"><a class="l" href="#842">842: </a>        }
+</span><span id="843" class="l"><a class="l" href="#843">843: </a>
+</span><span id="844" class="l"><a class="l" href="#844">844: </a>        <span class="php-comment">/**
+</span></span><span id="845" class="l"><a class="l" href="#845">845: </a><span class="php-comment">         * Set import services
+</span></span><span id="846" class="l"><a class="l" href="#846">846: </a><span class="php-comment">         *
+</span></span><span id="847" class="l"><a class="l" href="#847">847: </a><span class="php-comment">         * @param array $import
+</span></span><span id="848" class="l"><a class="l" href="#848">848: </a><span class="php-comment">         * @return $this
+</span></span><span id="849" class="l"><a class="l" href="#849">849: </a><span class="php-comment">         */</span>
+</span><span id="850" class="l"><a class="l" href="#850">850: </a>        <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_setImport" href="#_setImport">setImport</a>(<span class="php-keyword1">array</span> <span class="php-var">$import</span> = <span class="php-keyword1">array</span>())
+</span><span id="851" class="l"><a class="l" href="#851">851: </a>        {
+</span><span id="852" class="l"><a class="l" href="#852">852: </a>            <span class="php-var">$this</span>-&gt;import = <span class="php-var">$import</span> + <span class="php-var">$this</span>-&gt;import;
+</span><span id="853" class="l"><a class="l" href="#853">853: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$import</span> <span class="php-keyword1">as</span> <span class="php-var">$option</span>) {
+</span><span id="854" class="l"><a class="l" href="#854">854: </a>                <span class="php-var">$option</span> += <span class="php-keyword1">array</span>(
+</span><span id="855" class="l"><a class="l" href="#855">855: </a>                    <span class="php-quote">'dir'</span> =&gt; <span class="php-keyword1">null</span>,
+</span><span id="856" class="l"><a class="l" href="#856">856: </a>                    <span class="php-quote">'namespace'</span> =&gt; <span class="php-keyword1">null</span>,
+</span><span id="857" class="l"><a class="l" href="#857">857: </a>                    <span class="php-quote">'format'</span> =&gt; <span class="php-keyword1">null</span>,
+</span><span id="858" class="l"><a class="l" href="#858">858: </a>                    <span class="php-quote">'autoload'</span> =&gt; <span class="php-keyword1">false</span>,
+</span><span id="859" class="l"><a class="l" href="#859">859: </a>                );
+</span><span id="860" class="l"><a class="l" href="#860">860: </a>                <span class="php-var">$this</span>-&gt;import(<span class="php-var">$option</span>[<span class="php-quote">'dir'</span>], <span class="php-var">$option</span>[<span class="php-quote">'namespace'</span>], <span class="php-var">$option</span>[<span class="php-quote">'format'</span>], <span class="php-var">$option</span>[<span class="php-quote">'autoload'</span>]);
+</span><span id="861" class="l"><a class="l" href="#861">861: </a>            }
+</span><span id="862" class="l"><a class="l" href="#862">862: </a>        }
+</span><span id="863" class="l"><a class="l" href="#863">863: </a>
+</span><span id="864" class="l"><a class="l" href="#864">864: </a>        <span class="php-comment">/**
+</span></span><span id="865" class="l"><a class="l" href="#865">865: </a><span class="php-comment">         * Merge the dependence map
+</span></span><span id="866" class="l"><a class="l" href="#866">866: </a><span class="php-comment">         *
+</span></span><span id="867" class="l"><a class="l" href="#867">867: </a><span class="php-comment">         * @param array $providers
+</span></span><span id="868" class="l"><a class="l" href="#868">868: </a><span class="php-comment">         */</span>
+</span><span id="869" class="l"><a class="l" href="#869">869: </a>        <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_setProviders" href="#_setProviders">setProviders</a>(<span class="php-keyword1">array</span> <span class="php-var">$providers</span>)
+</span><span id="870" class="l"><a class="l" href="#870">870: </a>        {
+</span><span id="871" class="l"><a class="l" href="#871">871: </a>            <span class="php-var">$this</span>-&gt;providers = <span class="php-var">$providers</span> + <span class="php-var">$this</span>-&gt;providers;
+</span><span id="872" class="l"><a class="l" href="#872">872: </a>        }
+</span><span id="873" class="l"><a class="l" href="#873">873: </a>
+</span><span id="874" class="l"><a class="l" href="#874">874: </a>        <span class="php-comment">/**
+</span></span><span id="875" class="l"><a class="l" href="#875">875: </a><span class="php-comment">         * Instance preload services
+</span></span><span id="876" class="l"><a class="l" href="#876">876: </a><span class="php-comment">         *
+</span></span><span id="877" class="l"><a class="l" href="#877">877: </a><span class="php-comment">         * @param array $preload
+</span></span><span id="878" class="l"><a class="l" href="#878">878: </a><span class="php-comment">         */</span>
+</span><span id="879" class="l"><a class="l" href="#879">879: </a>        <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_setPreload" href="#_setPreload">setPreload</a>(<span class="php-keyword1">array</span> <span class="php-var">$preload</span>)
+</span><span id="880" class="l"><a class="l" href="#880">880: </a>        {
+</span><span id="881" class="l"><a class="l" href="#881">881: </a>            <span class="php-var">$this</span>-&gt;preload = <span class="php-keyword2">array_merge</span>(<span class="php-var">$this</span>-&gt;preload, <span class="php-var">$preload</span>);
+</span><span id="882" class="l"><a class="l" href="#882">882: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$preload</span> <span class="php-keyword1">as</span> <span class="php-var">$service</span>) {
+</span><span id="883" class="l"><a class="l" href="#883">883: </a>                <span class="php-var">$this</span>-&gt;set(<span class="php-var">$service</span>, <span class="php-var">$this</span>-&gt;get(<span class="php-var">$service</span>));
+</span><span id="884" class="l"><a class="l" href="#884">884: </a>            }
+</span><span id="885" class="l"><a class="l" href="#885">885: </a>        }
+</span><span id="886" class="l"><a class="l" href="#886">886: </a>    }
+</span><span id="887" class="l"><a class="l" href="#887">887: </a>}
+</span><span id="888" class="l"><a class="l" href="#888">888: </a>
+</span><span id="889" class="l"><a class="l" href="#889">889: </a><span class="php-comment">/**
+</span></span><span id="890" class="l"><a class="l" href="#890">890: </a><span class="php-comment"> * Define function in global namespace
+</span></span><span id="891" class="l"><a class="l" href="#891">891: </a><span class="php-comment"> */</span>
+</span><span id="892" class="l"><a class="l" href="#892">892: </a><span class="php-keyword1">namespace</span>
+</span><span id="893" class="l"><a class="l" href="#893">893: </a>{
+</span><span id="894" class="l"><a class="l" href="#894">894: </a>    <span class="php-comment">/**
+</span></span><span id="895" class="l"><a class="l" href="#895">895: </a><span class="php-comment">     * Get the service container instance
+</span></span><span id="896" class="l"><a class="l" href="#896">896: </a><span class="php-comment">     *
+</span></span><span id="897" class="l"><a class="l" href="#897">897: </a><span class="php-comment">     * @return Wei\Wei
+</span></span><span id="898" class="l"><a class="l" href="#898">898: </a><span class="php-comment">     */</span>
+</span><span id="899" class="l"><a class="l" href="#899">899: </a>    <span class="php-keyword1">function</span> <a id="_wei" href="#_wei">wei</a>()
+</span><span id="900" class="l"><a class="l" href="#900">900: </a>    {
+</span><span id="901" class="l"><a class="l" href="#901">901: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">call_user_func_array</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'Wei\Wei'</span>, <span class="php-quote">'getContainer'</span>), <span class="php-keyword2">func_get_args</span>());
+</span><span id="902" class="l"><a class="l" href="#902">902: </a>    }
+</span><span id="903" class="l"><a class="l" href="#903">903: </a>
+</span><span id="904" class="l"><a class="l" href="#904">904: </a>    <span class="php-comment">/**
+</span></span><span id="905" class="l"><a class="l" href="#905">905: </a><span class="php-comment">     * Get the service container instance
+</span></span><span id="906" class="l"><a class="l" href="#906">906: </a><span class="php-comment">     *
+</span></span><span id="907" class="l"><a class="l" href="#907">907: </a><span class="php-comment">     * @return Wei\Wei
+</span></span><span id="908" class="l"><a class="l" href="#908">908: </a><span class="php-comment">     */</span>
+</span><span id="909" class="l"><a class="l" href="#909">909: </a>    <span class="php-keyword1">function</span> <a id="_widget" href="#_widget">widget</a>()
+</span><span id="910" class="l"><a class="l" href="#910">910: </a>    {
+</span><span id="911" class="l"><a class="l" href="#911">911: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">call_user_func_array</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'Wei\Wei'</span>, <span class="php-quote">'getContainer'</span>), <span class="php-keyword2">func_get_args</span>());
+</span><span id="912" class="l"><a class="l" href="#912">912: </a>    }
+</span><span id="913" class="l"><a class="l" href="#913">913: </a>}
+</span><span id="914" class="l"><a class="l" href="#914">914: </a></span></code></pre>
 
 	<div id="footer">
 		Wei Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

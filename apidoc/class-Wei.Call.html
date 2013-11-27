@@ -7,7 +7,7 @@
 	<title>Class Wei\Call | Wei Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<script type="text/javascript" src="elementlist.js?3712690943"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -27,8 +27,6 @@
 						</li>
 				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
 						<ul>
-				<li><a href="namespace-Wei.Db.html">Db</a>
-						</li>
 				<li><a href="namespace-Wei.Validator.html">Validator</a>
 						</li>
 							</ul></li>
@@ -43,7 +41,6 @@
 			<ul>
 				<li><a href="class-Wei.Apc.html">Apc</a></li>
 				<li><a href="class-Wei.App.html">App</a></li>
-				<li><a href="class-Wei.Arr.html">Arr</a></li>
 				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
@@ -55,6 +52,7 @@
 				<li><a href="class-Wei.Controller.html">Controller</a></li>
 				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
 				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Counter.html">Counter</a></li>
 				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
 				<li><a href="class-Wei.Db.html">Db</a></li>
 				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
@@ -63,15 +61,15 @@
 				<li><a href="class-Wei.Escape.html">Escape</a></li>
 				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
 				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
-				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Lock.html">Lock</a></li>
 				<li><a href="class-Wei.Logger.html">Logger</a></li>
 				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
 				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
-				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
 				<li><a href="class-Wei.Request.html">Request</a></li>
@@ -177,7 +175,7 @@
 href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 				<b>Link:</b>
 				<a href="http://api.jquery.com/jQuery.ajax/">http://api.jquery.com/jQuery.ajax/</a><br />
-		<b>Located at</b> <a href="source-class-Wei.Call.html#11-947" title="Go to source code">Call.php</a><br />
+		<b>Located at</b> <a href="source-class-Wei.Call.html#11-949" title="Go to source code">Call.php</a><br />
 	</div>
 
 
@@ -318,7 +316,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_prepareCurlOptions">#</a>
-		<code><a href="source-class-Wei.Call.html#309-402" title="Go to source code">prepareCurlOptions</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#309-404" title="Go to source code">prepareCurlOptions</a>( )</code>
 
 		<div class="description short">
 			
@@ -355,7 +353,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_handleResponse">#</a>
-		<code><a href="source-class-Wei.Call.html#404-454" title="Go to source code">handleResponse</a>( <span>string <var>$response</var></span> )</code>
+		<code><a href="source-class-Wei.Call.html#406-456" title="Go to source code">handleResponse</a>( <span>string <var>$response</var></span> )</code>
 
 		<div class="description short">
 			
@@ -393,7 +391,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_triggerError">#</a>
-		<code><a href="source-class-Wei.Call.html#456-468" title="Go to source code">triggerError</a>( <span>string <var>$status</var></span>, <span><code><a href="class-ErrorException.html">ErrorException</a></code> <var>$exception</var></span> )</code>
+		<code><a href="source-class-Wei.Call.html#458-470" title="Go to source code">triggerError</a>( <span>string <var>$status</var></span>, <span><code><a href="class-ErrorException.html">ErrorException</a></code> <var>$exception</var></span> )</code>
 
 		<div class="description short">
 			
@@ -433,7 +431,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_parseResponse">#</a>
-		<code><a href="source-class-Wei.Call.html#470-510" title="Go to source code">parseResponse</a>( <span>string <var>$data</var></span>, <span>null <var>&amp; $exception</var></span> )</code>
+		<code><a href="source-class-Wei.Call.html#472-512" title="Go to source code">parseResponse</a>( <span>string <var>$data</var></span>, <span>null <var>&amp; $exception</var></span> )</code>
 
 		<div class="description short">
 			
@@ -477,7 +475,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setCurlOption">#</a>
-		<code><a href="source-class-Wei.Call.html#512-523" title="Go to source code">setCurlOption</a>( <span>integer <var>$option</var></span>, <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-Wei.Call.html#514-525" title="Go to source code">setCurlOption</a>( <span>integer <var>$option</var></span>, <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -521,7 +519,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCurlOption">#</a>
-		<code><a href="source-class-Wei.Call.html#525-534" title="Go to source code">getCurlOption</a>( <span>integer <var>$option</var></span> )</code>
+		<code><a href="source-class-Wei.Call.html#527-536" title="Go to source code">getCurlOption</a>( <span>integer <var>$option</var></span> )</code>
 
 		<div class="description short">
 			
@@ -563,7 +561,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getResponseText">#</a>
-		<code><a href="source-class-Wei.Call.html#536-544" title="Go to source code">getResponseText</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#538-546" title="Go to source code">getResponseText</a>( )</code>
 
 		<div class="description short">
 			
@@ -600,7 +598,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getResponse">#</a>
-		<code><a href="source-class-Wei.Call.html#546-554" title="Go to source code">getResponse</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#548-556" title="Go to source code">getResponse</a>( )</code>
 
 		<div class="description short">
 			
@@ -637,7 +635,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUrl">#</a>
-		<code><a href="source-class-Wei.Call.html#556-564" title="Go to source code">getUrl</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#558-566" title="Go to source code">getUrl</a>( )</code>
 
 		<div class="description short">
 			
@@ -674,7 +672,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getMethod">#</a>
-		<code><a href="source-class-Wei.Call.html#566-574" title="Go to source code">getMethod</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#568-576" title="Go to source code">getMethod</a>( )</code>
 
 		<div class="description short">
 			
@@ -711,7 +709,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getIp">#</a>
-		<code><a href="source-class-Wei.Call.html#576-584" title="Go to source code">getIp</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#578-586" title="Go to source code">getIp</a>( )</code>
 
 		<div class="description short">
 			
@@ -748,7 +746,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getData">#</a>
-		<code><a href="source-class-Wei.Call.html#586-594" title="Go to source code">getData</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#588-596" title="Go to source code">getData</a>( )</code>
 
 		<div class="description short">
 			
@@ -785,7 +783,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setRequestHeader">#</a>
-		<code><a href="source-class-Wei.Call.html#596-607" title="Go to source code">setRequestHeader</a>( <span>string <var>$name</var></span>, <span>string <var>$value</var></span> )</code>
+		<code><a href="source-class-Wei.Call.html#598-609" title="Go to source code">setRequestHeader</a>( <span>string <var>$name</var></span>, <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -829,7 +827,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getResponseHeader">#</a>
-		<code><a href="source-class-Wei.Call.html#609-631" title="Go to source code">getResponseHeader</a>( <span>string <var>$name</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$first</var> = <span class="php-keyword1">true</span></span> )</code>
+		<code><a href="source-class-Wei.Call.html#611-633" title="Go to source code">getResponseHeader</a>( <span>string <var>$name</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$first</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -873,7 +871,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getResponseHeaders">#</a>
-		<code><a href="source-class-Wei.Call.html#633-650" title="Go to source code">getResponseHeaders</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#635-652" title="Go to source code">getResponseHeaders</a>( )</code>
 
 		<div class="description short">
 			
@@ -910,7 +908,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getResponseCookies">#</a>
-		<code><a href="source-class-Wei.Call.html#652-667" title="Go to source code">getResponseCookies</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#654-669" title="Go to source code">getResponseCookies</a>( )</code>
 
 		<div class="description short">
 			
@@ -947,7 +945,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getResponseCookie">#</a>
-		<code><a href="source-class-Wei.Call.html#669-679" title="Go to source code">getResponseCookie</a>( <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-Wei.Call.html#671-681" title="Go to source code">getResponseCookie</a>( <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -989,7 +987,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_parseCookie">#</a>
-		<code><a href="source-class-Wei.Call.html#681-704" title="Go to source code">parseCookie</a>( <span>string <var>$header</var></span> )</code>
+		<code><a href="source-class-Wei.Call.html#683-706" title="Go to source code">parseCookie</a>( <span>string <var>$header</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1031,7 +1029,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isSuccess">#</a>
-		<code><a href="source-class-Wei.Call.html#706-714" title="Go to source code">isSuccess</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#708-716" title="Go to source code">isSuccess</a>( )</code>
 
 		<div class="description short">
 			
@@ -1068,7 +1066,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setMethod">#</a>
-		<code><a href="source-class-Wei.Call.html#716-726" title="Go to source code">setMethod</a>( <span>string <var>$method</var></span> )</code>
+		<code><a href="source-class-Wei.Call.html#718-728" title="Go to source code">setMethod</a>( <span>string <var>$method</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1110,7 +1108,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getJson">#</a>
-		<code><a href="source-class-Wei.Call.html#728-738" title="Go to source code">getJson</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Wei.Call.html#730-740" title="Go to source code">getJson</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -1154,7 +1152,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getJsonObject">#</a>
-		<code><a href="source-class-Wei.Call.html#740-750" title="Go to source code">getJsonObject</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Wei.Call.html#742-752" title="Go to source code">getJsonObject</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -1198,7 +1196,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_get">#</a>
-		<code><a href="source-class-Wei.Call.html#752-763" title="Go to source code">get</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Wei.Call.html#754-765" title="Go to source code">get</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1244,7 +1242,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_post">#</a>
-		<code><a href="source-class-Wei.Call.html#765-776" title="Go to source code">post</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Wei.Call.html#767-778" title="Go to source code">post</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1290,7 +1288,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_put">#</a>
-		<code><a href="source-class-Wei.Call.html#778-789" title="Go to source code">put</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Wei.Call.html#780-791" title="Go to source code">put</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1336,7 +1334,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_delete">#</a>
-		<code><a href="source-class-Wei.Call.html#791-802" title="Go to source code">delete</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Wei.Call.html#793-804" title="Go to source code">delete</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1382,7 +1380,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_patch">#</a>
-		<code><a href="source-class-Wei.Call.html#804-815" title="Go to source code">patch</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Wei.Call.html#806-817" title="Go to source code">patch</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$dataType</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1428,7 +1426,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_processMethod">#</a>
-		<code><a href="source-class-Wei.Call.html#817-834" title="Go to source code">processMethod</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>string <var>$dataType</var></span>, <span>string <var>$method</var></span> )</code>
+		<code><a href="source-class-Wei.Call.html#819-836" title="Go to source code">processMethod</a>( <span>string <var>$url</var></span>, <span>array <var>$data</var></span>, <span>string <var>$dataType</var></span>, <span>string <var>$method</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1476,7 +1474,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getErrorStatus">#</a>
-		<code><a href="source-class-Wei.Call.html#836-844" title="Go to source code">getErrorStatus</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#838-846" title="Go to source code">getErrorStatus</a>( )</code>
 
 		<div class="description short">
 			
@@ -1513,7 +1511,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getErrorException">#</a>
-		<code><a href="source-class-Wei.Call.html#846-854" title="Go to source code">getErrorException</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#848-856" title="Go to source code">getErrorException</a>( )</code>
 
 		<div class="description short">
 			
@@ -1550,7 +1548,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_offsetExists">#</a>
-		<code><a href="source-class-Wei.Call.html#856-865" title="Go to source code">offsetExists</a>( <span>string <var>$offset</var></span> )</code>
+		<code><a href="source-class-Wei.Call.html#858-867" title="Go to source code">offsetExists</a>( <span>string <var>$offset</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1594,7 +1592,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_offsetGet">#</a>
-		<code><a href="source-class-Wei.Call.html#867-876" title="Go to source code">offsetGet</a>( <span>string <var>$offset</var></span> )</code>
+		<code><a href="source-class-Wei.Call.html#869-878" title="Go to source code">offsetGet</a>( <span>string <var>$offset</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1638,7 +1636,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_offsetSet">#</a>
-		<code><a href="source-class-Wei.Call.html#878-887" title="Go to source code">offsetSet</a>( <span>string <var>$offset</var></span>, <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-Wei.Call.html#880-889" title="Go to source code">offsetSet</a>( <span>string <var>$offset</var></span>, <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1680,7 +1678,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_offsetUnset">#</a>
-		<code><a href="source-class-Wei.Call.html#889-897" title="Go to source code">offsetUnset</a>( <span>string <var>$offset</var></span> )</code>
+		<code><a href="source-class-Wei.Call.html#891-899" title="Go to source code">offsetUnset</a>( <span>string <var>$offset</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1720,7 +1718,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_count">#</a>
-		<code><a href="source-class-Wei.Call.html#899-907" title="Go to source code">count</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#901-909" title="Go to source code">count</a>( )</code>
 
 		<div class="description short">
 			
@@ -1759,7 +1757,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getIterator">#</a>
-		<code><a href="source-class-Wei.Call.html#909-917" title="Go to source code">getIterator</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#911-919" title="Go to source code">getIterator</a>( )</code>
 
 		<div class="description short">
 			
@@ -1798,7 +1796,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___toString">#</a>
-		<code><a href="source-class-Wei.Call.html#919-927" title="Go to source code">__toString</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#921-929" title="Go to source code">__toString</a>( )</code>
 
 		<div class="description short">
 			
@@ -1835,7 +1833,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCurlInfo">#</a>
-		<code><a href="source-class-Wei.Call.html#929-935" title="Go to source code">getCurlInfo</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#931-937" title="Go to source code">getCurlInfo</a>( )</code>
 
 		<div class="description short">
 			
@@ -1868,7 +1866,7 @@ callbacks</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___destruct">#</a>
-		<code><a href="source-class-Wei.Call.html#937-946" title="Go to source code">__destruct</a>( )</code>
+		<code><a href="source-class-Wei.Call.html#939-948" title="Go to source code">__destruct</a>( )</code>
 
 		<div class="description short">
 			
@@ -2522,7 +2520,7 @@ and <code>parser</code></p>
 		<td class="name">
 				<a href="source-class-Wei.Call.html#186-191" title="Go to source code"><var>$responseText</var></a>
 		</td>
-		<td class="value"><code><span class="php-quote">''</span></code></td>
+		<td class="value"><code></code></td>
 		<td class="description"><div>
 			<a href="#$responseText" class="anchor">#</a>
 

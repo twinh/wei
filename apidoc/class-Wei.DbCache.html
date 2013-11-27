@@ -7,7 +7,7 @@
 	<title>Class Wei\DbCache | Wei Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<script type="text/javascript" src="elementlist.js?3712690943"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -27,8 +27,6 @@
 						</li>
 				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
 						<ul>
-				<li><a href="namespace-Wei.Db.html">Db</a>
-						</li>
 				<li><a href="namespace-Wei.Validator.html">Validator</a>
 						</li>
 							</ul></li>
@@ -43,7 +41,6 @@
 			<ul>
 				<li><a href="class-Wei.Apc.html">Apc</a></li>
 				<li><a href="class-Wei.App.html">App</a></li>
-				<li><a href="class-Wei.Arr.html">Arr</a></li>
 				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
@@ -55,6 +52,7 @@
 				<li><a href="class-Wei.Controller.html">Controller</a></li>
 				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
 				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Counter.html">Counter</a></li>
 				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
 				<li><a href="class-Wei.Db.html">Db</a></li>
 				<li class="active"><a href="class-Wei.DbCache.html">DbCache</a></li>
@@ -63,15 +61,15 @@
 				<li><a href="class-Wei.Escape.html">Escape</a></li>
 				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
 				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
-				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Lock.html">Lock</a></li>
 				<li><a href="class-Wei.Logger.html">Logger</a></li>
 				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
 				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
-				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
 				<li><a href="class-Wei.Request.html">Request</a></li>
@@ -134,7 +132,7 @@
 
 	<div class="description">
 	
-<p>A cache wei that stored data in databases</p>
+<p>A cache service that stored data in databases</p>
 
 	</div>
 
@@ -176,7 +174,7 @@
 				<b>Author:</b>
 				Twin Huang &lt;<a
 href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-Wei.DbCache.html#11-186" title="Go to source code">DbCache.php</a><br />
+		<b>Located at</b> <a href="source-class-Wei.DbCache.html#11-185" title="Go to source code">DbCache.php</a><br />
 	</div>
 
 
@@ -194,7 +192,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Wei.DbCache.html#54-63" title="Go to source code">__construct</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Wei.DbCache.html#55-64" title="Go to source code">__construct</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -238,7 +236,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_prepareTable">#</a>
-		<code><a href="source-class-Wei.DbCache.html#65-78" title="Go to source code">prepareTable</a>( )</code>
+		<code><a href="source-class-Wei.DbCache.html#66-77" title="Go to source code">prepareTable</a>( )</code>
 
 		<div class="description short">
 			
@@ -260,18 +258,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="doGet" id="_doGet">
+	<tr data-order="get" id="_get">
 
 		<td class="attributes"><code>
-			 protected 
+			 public 
 			mixed
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_doGet">#</a>
-		<code><a href="source-class-Wei.DbCache.html#80-91" title="Go to source code">doGet</a>( <span>string <var>$key</var></span> )</code>
+		<a class="anchor" href="#_get">#</a>
+		<code><a href="source-class-Wei.DbCache.html#79-91" title="Go to source code">get</a>( <span>string <var>$key</var></span>, <span>integer <var>$expire</var> = <span class="php-keyword1">null</span></span>, <span>callable <var>$fn</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -289,6 +287,10 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
 					<dd><code>string</code><br>$key The name of item</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>integer</code><br>$expire The expire seconds of callback return value</dd>
+					<dt><var>$fn</var></dt>
+					<dd><code>callable</code><br>$fn The callback to execute when cache not found</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -296,24 +298,28 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 					<code>mixed</code><br />
 				</div>
 
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-RuntimeException.html">RuntimeException</a></code></code><br>When set cache return false<br />
+				</div>
 
 
 
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="doSet" id="_doSet">
+	<tr data-order="set" id="_set">
 
 		<td class="attributes"><code>
-			 protected 
+			 public 
 			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_doSet">#</a>
-		<code><a href="source-class-Wei.DbCache.html#93-116" title="Go to source code">doSet</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+		<a class="anchor" href="#_set">#</a>
+		<code><a href="source-class-Wei.DbCache.html#93-115" title="Go to source code">set</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
 
 		<div class="description short">
 			
@@ -348,18 +354,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="doRemove" id="_doRemove">
+	<tr data-order="remove" id="_remove">
 
 		<td class="attributes"><code>
-			 protected 
+			 public 
 			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_doRemove">#</a>
-		<code><a href="source-class-Wei.DbCache.html#118-124" title="Go to source code">doRemove</a>( <span>string <var>$key</var></span> )</code>
+		<a class="anchor" href="#_remove">#</a>
+		<code><a href="source-class-Wei.DbCache.html#117-123" title="Go to source code">remove</a>( <span>string <var>$key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -390,18 +396,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="doExists" id="_doExists">
+	<tr data-order="exists" id="_exists">
 
 		<td class="attributes"><code>
-			 protected 
+			 public 
 			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_doExists">#</a>
-		<code><a href="source-class-Wei.DbCache.html#126-142" title="Go to source code">doExists</a>( <span>string <var>$key</var></span> )</code>
+		<a class="anchor" href="#_exists">#</a>
+		<code><a href="source-class-Wei.DbCache.html#125-141" title="Go to source code">exists</a>( <span>string <var>$key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -432,18 +438,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="doAdd" id="_doAdd">
+	<tr data-order="add" id="_add">
 
 		<td class="attributes"><code>
-			 protected 
+			 public 
 			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_doAdd">#</a>
-		<code><a href="source-class-Wei.DbCache.html#144-154" title="Go to source code">doAdd</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+		<a class="anchor" href="#_add">#</a>
+		<code><a href="source-class-Wei.DbCache.html#143-153" title="Go to source code">add</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
 
 		<div class="description short">
 			
@@ -478,18 +484,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="doReplace" id="_doReplace">
+	<tr data-order="replace" id="_replace">
 
 		<td class="attributes"><code>
-			 protected 
+			 public 
 			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_doReplace">#</a>
-		<code><a href="source-class-Wei.DbCache.html#156-166" title="Go to source code">doReplace</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+		<a class="anchor" href="#_replace">#</a>
+		<code><a href="source-class-Wei.DbCache.html#155-165" title="Go to source code">replace</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
 
 		<div class="description short">
 			
@@ -524,18 +530,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="doIncr" id="_doIncr">
+	<tr data-order="incr" id="_incr">
 
 		<td class="attributes"><code>
-			 protected 
+			 public 
 			integer|false
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_doIncr">#</a>
-		<code><a href="source-class-Wei.DbCache.html#168-177" title="Go to source code">doIncr</a>( <span>string <var>$key</var></span>, <span>integer <var>$offset</var> = <span class="php-num">1</span></span> )</code>
+		<a class="anchor" href="#_incr">#</a>
+		<code><a href="source-class-Wei.DbCache.html#167-176" title="Go to source code">incr</a>( <span>string <var>$key</var></span>, <span>integer <var>$offset</var> = <span class="php-num">1</span></span> )</code>
 
 		<div class="description short">
 			
@@ -579,7 +585,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_clear">#</a>
-		<code><a href="source-class-Wei.DbCache.html#179-185" title="Go to source code">clear</a>( )</code>
+		<code><a href="source-class-Wei.DbCache.html#178-184" title="Go to source code">clear</a>( )</code>
 
 		<div class="description short">
 			
@@ -612,20 +618,13 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 	<tr>
 		<td><code>
 			<a href="class-Wei.BaseCache.html#___invoke">__invoke()</a>, 
-			<a href="class-Wei.BaseCache.html#_add">add()</a>, 
 			<a href="class-Wei.BaseCache.html#_decr">decr()</a>, 
-			<a href="class-Wei.BaseCache.html#_exists">exists()</a>, 
-			<a href="class-Wei.BaseCache.html#_get">get()</a>, 
 			<a href="class-Wei.BaseCache.html#_getFileContent">getFileContent()</a>, 
-			<a href="class-Wei.BaseCache.html#_getKeyPrefix">getKeyPrefix()</a>, 
-			<a href="class-Wei.BaseCache.html#_getKeyWithPrefix">getKeyWithPrefix()</a>, 
 			<a href="class-Wei.BaseCache.html#_getMulti">getMulti()</a>, 
-			<a href="class-Wei.BaseCache.html#_incr">incr()</a>, 
-			<a href="class-Wei.BaseCache.html#_remove">remove()</a>, 
-			<a href="class-Wei.BaseCache.html#_replace">replace()</a>, 
-			<a href="class-Wei.BaseCache.html#_set">set()</a>, 
-			<a href="class-Wei.BaseCache.html#_setKeyPrefix">setKeyPrefix()</a>, 
-			<a href="class-Wei.BaseCache.html#_setMulti">setMulti()</a>
+			<a href="class-Wei.BaseCache.html#_getPrefix">getPrefix()</a>, 
+			<a href="class-Wei.BaseCache.html#_processGetResult">processGetResult()</a>, 
+			<a href="class-Wei.BaseCache.html#_setMulti">setMulti()</a>, 
+			<a href="class-Wei.BaseCache.html#_setPrefix">setPrefix()</a>
 		</code></td>
 	</tr>
 	</table>
@@ -660,7 +659,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Wei.DbCache.html#18-23" title="Go to source code"><var>$table</var></a>
+				<a href="source-class-Wei.DbCache.html#19-24" title="Go to source code"><var>$table</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">'cache'</span></code></td>
 		<td class="description"><div>
@@ -687,7 +686,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Wei.DbCache.html#25-30" title="Go to source code"><var>$checkTable</var></a>
+				<a href="source-class-Wei.DbCache.html#26-31" title="Go to source code"><var>$checkTable</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">true</span></code></td>
 		<td class="description"><div>
@@ -714,7 +713,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Wei.DbCache.html#32-41" title="Go to source code"><var>$checkTableSqls</var></a>
+				<a href="source-class-Wei.DbCache.html#33-42" title="Go to source code"><var>$checkTableSqls</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">array</span>(
     <span class="php-quote">'mysql'</span>     =&gt; <span class="php-quote">&quot;SHOW TABLES LIKE '%s'&quot;</span>,
@@ -745,7 +744,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Wei.DbCache.html#43-52" title="Go to source code"><var>$createTableSqls</var></a>
+				<a href="source-class-Wei.DbCache.html#44-53" title="Go to source code"><var>$createTableSqls</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">array</span>(
     <span class="php-quote">'mysql'</span>  =&gt; <span class="php-quote">&quot;CREATE TABLE %s (id VARCHAR(255) NOT NULL, value LONGTEXT NOT NULL, expire DATETIME NOT NULL, lastModified DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB&quot;</span>,
@@ -775,7 +774,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 	<caption>Properties inherited from <a href="class-Wei.BaseCache.html#properties">Wei\BaseCache</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-Wei.BaseCache.html#$keyPrefix"><var>$keyPrefix</var></a>
+			<a href="class-Wei.BaseCache.html#$prefix"><var>$prefix</var></a>
 		</code></td>
 	</tr>
 	</table>
@@ -790,6 +789,35 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 	</table>
 
 
+	<table class="summary" id="magicProperties">
+	<caption>Magic properties summary</caption>
+	<tr data-order="db" id="m$db">
+		<td class="attributes"><code>
+			public  
+			<code><a href="class-Wei.Db.html">Wei\Db</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.DbCache.html#15" title="Go to source code"><var>$db</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$db" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A database service</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A database service</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
 
 
 

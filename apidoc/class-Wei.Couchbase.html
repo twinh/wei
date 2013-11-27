@@ -7,7 +7,7 @@
 	<title>Class Wei\Couchbase | Wei Framework</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?3780550707"></script>
+	<script type="text/javascript" src="elementlist.js?3712690943"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -27,8 +27,6 @@
 						</li>
 				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
 						<ul>
-				<li><a href="namespace-Wei.Db.html">Db</a>
-						</li>
 				<li><a href="namespace-Wei.Validator.html">Validator</a>
 						</li>
 							</ul></li>
@@ -43,7 +41,6 @@
 			<ul>
 				<li><a href="class-Wei.Apc.html">Apc</a></li>
 				<li><a href="class-Wei.App.html">App</a></li>
-				<li><a href="class-Wei.Arr.html">Arr</a></li>
 				<li><a href="class-Wei.ArrayCache.html">ArrayCache</a></li>
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
@@ -55,6 +52,7 @@
 				<li><a href="class-Wei.Controller.html">Controller</a></li>
 				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
 				<li class="active"><a href="class-Wei.Couchbase.html">Couchbase</a></li>
+				<li><a href="class-Wei.Counter.html">Counter</a></li>
 				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
 				<li><a href="class-Wei.Db.html">Db</a></li>
 				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
@@ -63,15 +61,15 @@
 				<li><a href="class-Wei.Escape.html">Escape</a></li>
 				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
 				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
-				<li><a href="class-Wei.Json.html">Json</a></li>
+				<li><a href="class-Wei.Lock.html">Lock</a></li>
 				<li><a href="class-Wei.Logger.html">Logger</a></li>
 				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
 				<li><a href="class-Wei.Memcached.html">Memcached</a></li>
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
-				<li><a href="class-Wei.Monolog.html">Monolog</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
+				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
 				<li><a href="class-Wei.Request.html">Request</a></li>
@@ -134,7 +132,7 @@
 
 	<div class="description">
 	
-<p>A cache wei that stored data in Couchbase</p>
+<p>A cache service that stored data in Couchbase</p>
 
 	</div>
 
@@ -178,7 +176,7 @@
 href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 				<b>Link:</b>
 				<a href="https://github.com/couchbase/php-ext-couchbase">https://github.com/couchbase/php-ext-couchbase</a><br />
-		<b>Located at</b> <a href="source-class-Wei.Couchbase.html#11-190" title="Go to source code">Couchbase.php</a><br />
+		<b>Located at</b> <a href="source-class-Wei.Couchbase.html#11-191" title="Go to source code">Couchbase.php</a><br />
 	</div>
 
 
@@ -229,18 +227,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="doGet" id="_doGet">
+	<tr data-order="get" id="_get">
 
 		<td class="attributes"><code>
-			 protected 
+			 public 
 			mixed
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_doGet">#</a>
-		<code><a href="source-class-Wei.Couchbase.html#77-83" title="Go to source code">doGet</a>( <span>string <var>$key</var></span> )</code>
+		<a class="anchor" href="#_get">#</a>
+		<code><a href="source-class-Wei.Couchbase.html#77-84" title="Go to source code">get</a>( <span>string <var>$key</var></span>, <span>integer <var>$expire</var> = <span class="php-keyword1">null</span></span>, <span>callable <var>$fn</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -258,6 +256,10 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
 					<dd><code>string</code><br>$key The name of item</dd>
+					<dt><var>$expire</var></dt>
+					<dd><code>integer</code><br>$expire The expire seconds of callback return value</dd>
+					<dt><var>$fn</var></dt>
+					<dd><code>callable</code><br>$fn The callback to execute when cache not found</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -265,24 +267,28 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 					<code>mixed</code><br />
 				</div>
 
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-RuntimeException.html">RuntimeException</a></code></code><br>When set cache return false<br />
+				</div>
 
 
 
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="doSet" id="_doSet">
+	<tr data-order="set" id="_set">
 
 		<td class="attributes"><code>
-			 protected 
+			 public 
 			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_doSet">#</a>
-		<code><a href="source-class-Wei.Couchbase.html#85-91" title="Go to source code">doSet</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+		<a class="anchor" href="#_set">#</a>
+		<code><a href="source-class-Wei.Couchbase.html#86-92" title="Go to source code">set</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
 
 		<div class="description short">
 			
@@ -317,18 +323,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="doRemove" id="_doRemove">
+	<tr data-order="remove" id="_remove">
 
 		<td class="attributes"><code>
-			 protected 
+			 public 
 			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_doRemove">#</a>
-		<code><a href="source-class-Wei.Couchbase.html#93-99" title="Go to source code">doRemove</a>( <span>string <var>$key</var></span> )</code>
+		<a class="anchor" href="#_remove">#</a>
+		<code><a href="source-class-Wei.Couchbase.html#94-100" title="Go to source code">remove</a>( <span>string <var>$key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -359,18 +365,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="doExists" id="_doExists">
+	<tr data-order="exists" id="_exists">
 
 		<td class="attributes"><code>
-			 protected 
+			 public 
 			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_doExists">#</a>
-		<code><a href="source-class-Wei.Couchbase.html#101-111" title="Go to source code">doExists</a>( <span>string <var>$key</var></span> )</code>
+		<a class="anchor" href="#_exists">#</a>
+		<code><a href="source-class-Wei.Couchbase.html#102-112" title="Go to source code">exists</a>( <span>string <var>$key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -401,18 +407,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="doAdd" id="_doAdd">
+	<tr data-order="add" id="_add">
 
 		<td class="attributes"><code>
-			 protected 
+			 public 
 			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_doAdd">#</a>
-		<code><a href="source-class-Wei.Couchbase.html#113-119" title="Go to source code">doAdd</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+		<a class="anchor" href="#_add">#</a>
+		<code><a href="source-class-Wei.Couchbase.html#114-120" title="Go to source code">add</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
 
 		<div class="description short">
 			
@@ -447,18 +453,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="doReplace" id="_doReplace">
+	<tr data-order="replace" id="_replace">
 
 		<td class="attributes"><code>
-			 protected 
+			 public 
 			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_doReplace">#</a>
-		<code><a href="source-class-Wei.Couchbase.html#121-127" title="Go to source code">doReplace</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+		<a class="anchor" href="#_replace">#</a>
+		<code><a href="source-class-Wei.Couchbase.html#122-128" title="Go to source code">replace</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span>, <span>integer <var>$expire</var> = <span class="php-num">0</span></span> )</code>
 
 		<div class="description short">
 			
@@ -493,18 +499,18 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="doIncr" id="_doIncr">
+	<tr data-order="incr" id="_incr">
 
 		<td class="attributes"><code>
-			 protected 
+			 public 
 			integer|false
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_doIncr">#</a>
-		<code><a href="source-class-Wei.Couchbase.html#129-135" title="Go to source code">doIncr</a>( <span>string <var>$key</var></span>, <span>integer <var>$offset</var> = <span class="php-num">1</span></span> )</code>
+		<a class="anchor" href="#_incr">#</a>
+		<code><a href="source-class-Wei.Couchbase.html#130-136" title="Go to source code">incr</a>( <span>string <var>$key</var></span>, <span>integer <var>$offset</var> = <span class="php-num">1</span></span> )</code>
 
 		<div class="description short">
 			
@@ -548,7 +554,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_clear">#</a>
-		<code><a href="source-class-Wei.Couchbase.html#137-147" title="Go to source code">clear</a>( )</code>
+		<code><a href="source-class-Wei.Couchbase.html#138-148" title="Go to source code">clear</a>( )</code>
 
 		<div class="description short">
 			
@@ -594,7 +600,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getMulti">#</a>
-		<code><a href="source-class-Wei.Couchbase.html#149-155" title="Go to source code">getMulti</a>( <span>array <var>$keys</var></span> )</code>
+		<code><a href="source-class-Wei.Couchbase.html#150-156" title="Go to source code">getMulti</a>( <span>array <var>$keys</var></span> )</code>
 
 		<div class="description short">
 			
@@ -638,7 +644,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setMulti">#</a>
-		<code><a href="source-class-Wei.Couchbase.html#157-167" title="Go to source code">setMulti</a>( <span>array <var>$items</var></span>, <span>mixed <var>$expire</var> = <span class="php-num">0</span></span> )</code>
+		<code><a href="source-class-Wei.Couchbase.html#158-168" title="Go to source code">setMulti</a>( <span>array <var>$items</var></span>, <span>mixed <var>$expire</var> = <span class="php-num">0</span></span> )</code>
 
 		<div class="description short">
 			
@@ -669,7 +675,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getObject">#</a>
-		<code><a href="source-class-Wei.Couchbase.html#169-177" title="Go to source code">getObject</a>( )</code>
+		<code><a href="source-class-Wei.Couchbase.html#170-178" title="Go to source code">getObject</a>( )</code>
 
 		<div class="description short">
 			
@@ -706,7 +712,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setObject">#</a>
-		<code><a href="source-class-Wei.Couchbase.html#179-189" title="Go to source code">setObject</a>( <span><code><a href="class-Wei.Couchbase.html">Wei\Couchbase</a></code> <var>$object</var></span> )</code>
+		<code><a href="source-class-Wei.Couchbase.html#180-190" title="Go to source code">setObject</a>( <span><code><a href="class-Wei.Couchbase.html">Wei\Couchbase</a></code> <var>$object</var></span> )</code>
 
 		<div class="description short">
 			
@@ -744,18 +750,11 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 	<tr>
 		<td><code>
 			<a href="class-Wei.BaseCache.html#___invoke">__invoke()</a>, 
-			<a href="class-Wei.BaseCache.html#_add">add()</a>, 
 			<a href="class-Wei.BaseCache.html#_decr">decr()</a>, 
-			<a href="class-Wei.BaseCache.html#_exists">exists()</a>, 
-			<a href="class-Wei.BaseCache.html#_get">get()</a>, 
 			<a href="class-Wei.BaseCache.html#_getFileContent">getFileContent()</a>, 
-			<a href="class-Wei.BaseCache.html#_getKeyPrefix">getKeyPrefix()</a>, 
-			<a href="class-Wei.BaseCache.html#_getKeyWithPrefix">getKeyWithPrefix()</a>, 
-			<a href="class-Wei.BaseCache.html#_incr">incr()</a>, 
-			<a href="class-Wei.BaseCache.html#_remove">remove()</a>, 
-			<a href="class-Wei.BaseCache.html#_replace">replace()</a>, 
-			<a href="class-Wei.BaseCache.html#_set">set()</a>, 
-			<a href="class-Wei.BaseCache.html#_setKeyPrefix">setKeyPrefix()</a>
+			<a href="class-Wei.BaseCache.html#_getPrefix">getPrefix()</a>, 
+			<a href="class-Wei.BaseCache.html#_processGetResult">processGetResult()</a>, 
+			<a href="class-Wei.BaseCache.html#_setPrefix">setPrefix()</a>
 		</code></td>
 	</tr>
 	</table>
@@ -953,7 +952,7 @@ number is optional (and only needed if you're using a non-standard port).</p>
 	<caption>Properties inherited from <a href="class-Wei.BaseCache.html#properties">Wei\BaseCache</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-Wei.BaseCache.html#$keyPrefix"><var>$keyPrefix</var></a>
+			<a href="class-Wei.BaseCache.html#$prefix"><var>$prefix</var></a>
 		</code></td>
 	</tr>
 	</table>
