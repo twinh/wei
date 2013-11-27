@@ -210,9 +210,8 @@
       </ul>
     </li>
     <li>
-      <a href="#monolog">第三方</a>
+      <a href="#phpError">第三方</a>
       <ul class="nav">
-        <li><a href="#monolog">monolog</a></li>
         <li><a href="#phpError">phpError</a></li>
       </ul>
     </li>
@@ -13856,65 +13855,6 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>生成一个随机的UUID</p>
 
 <p>生成的UUID可用于数据表主键,相比通过SQL语句<code>SELECT UUID</code>生成的UUID要快很多,而且调用更加方便.</p>
-  </section>
-
-<!-- api/monolog
-  ================================================== -->
-  <section id="monolog">
-  <div class="page-header"><h1>Monolog</h1></div>
-
-<p>获取Monolog对象或记录一条日志</p>
-
-<h2>案例</h2>
-
-<h3>记录一条DEBUG级别的日志</h3>
-
-<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">monolog</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="s1">'The logger is called'</span><span class="p">);</span>
-</code></pre></div>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody><tr>
-<td>handlers</td>
-<td>array</td>
-<td>见下面</td>
-<td>Monolog的日志处理器</td>
-</tr></tbody>
-</table><p>handlers的默认值是</p>
-
-<div class="highlight"><pre><code class="php"><span class="nv">$handlers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-    <span class="c1">// 键名表示处理器类的名称</span>
-    <span class="c1">// 如`stream`表示`Monolog\Handler\StreamHandler`,`chromePHP`表示`Monolog\Handler\ChromePHPHandler`</span>
-    <span class="s1">'stream'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="c1">// 数组的值表示处理器类的初始化参数</span>
-        <span class="s1">'stream'</span> <span class="o">=&gt;</span> <span class="s1">'log/wei.log'</span><span class="p">,</span> <span class="c1">// 日志所在的文件</span>
-        <span class="s1">'level'</span> <span class="o">=&gt;</span> <span class="nx">MonologLogger</span><span class="o">::</span><span class="na">DEBUG</span><span class="p">,</span> <span class="c1">// 最低记录的等级</span>
-    <span class="p">)</span>
-<span class="p">);</span>
-</code></pre></div>
-
-<p>您可以查看monolog的项目主页,了解更多处理器和配置</p>
-
-<p><a href="https://github.com/Seldaek/monolog" target="_blank">https://github.com/Seldaek/monolog</a></p>
-
-<h3>方法</h3>
-
-<h4>monolog()</h4>
-
-<p>获取Monolog对象</p>
-
-<h4>monolog($level, $message)</h4>
-
-<p>记录一条日志</p>
   </section>
 
 <!-- api/phpError

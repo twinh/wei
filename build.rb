@@ -75,7 +75,6 @@ weis = [
   # others
     'config', 'env', 'error', 'gravatar', 'lock', 'logger', 'password', 'pinyin', 'uuid',
   # third party
-    'monolog', 
     'phpError'
 ]
 
