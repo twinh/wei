@@ -99,7 +99,7 @@ class MongoCache extends BaseCache
     public function remove($key)
     {
         $result = $this->object->remove(array('_id' => $this->prefix . $key));
-        return $result['ok'] === 1.0;
+        return $result['n'] === 1;
     }
 
     /**
