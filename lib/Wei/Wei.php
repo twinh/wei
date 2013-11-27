@@ -107,7 +107,6 @@ namespace Wei
      * @method   string     t($message, array $parameters = array()) Translate the message
      *
      * Third Party
-     * @property Monolog    $monolog A wrapper object for Monolog
      * @method   bool       monolog($level = null, $message = null, array $context = array()) Get monolog logger object or add a log record
      *
      * Validation
