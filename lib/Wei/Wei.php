@@ -381,6 +381,7 @@ namespace Wei
             $this->setConfig($config);
 
             $this->set('wei', $this);
+            $this->wei = $this;
 
             // Set all options
             $options = get_object_vars($this);
@@ -654,15 +655,15 @@ namespace Wei
         }
 
         /**
-         * Add a object to service container
+         * Add a object to the service container
          *
          * @param string $name The name of object
-         * @param Base $object The service object
+         * @param Base $service The service object
          * @return $this
          */
-        public function set($name, Base $object)
+        public function set($name, Base $service)
         {
-            $this->$name = $this->objects[$name] = $object;
+            $this->objects[$name] = $service;
             return $this;
         }
 
@@ -809,6 +810,18 @@ namespace Wei
         {
             $this->aliases[$name] = $class;
             return $this;
+        }
+
+        /**
+         * Add a object to the service container
+         *
+         * @param string $name The name of object
+         * @param Base $service The service object
+         * @return $this
+         */
+        public function __set($name, Base $service)
+        {
+            return $this->set($name, $service);
         }
 
         /**
