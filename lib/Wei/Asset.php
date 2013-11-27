@@ -43,4 +43,26 @@ class Asset extends Base
         }
         return $url;
     }
+
+    /**
+     * Returns the base url of assets
+     *
+     * @return string
+     */
+    public function getBaseUrl()
+    {
+        return $this->baseUrl;
+    }
+
+    /**
+     * Sets the base url of assets
+     *
+     * @param string $baseUrl
+     * @return $this
+     */
+    public function setBaseUrl($baseUrl)
+    {
+        $this->baseUrl = $baseUrl;
+        return $this;
+    }
 }
