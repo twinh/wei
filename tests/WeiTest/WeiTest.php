@@ -6,7 +6,7 @@ use Wei\Wei;
 
 class WeiTest extends TestCase
 {
-    public function createUserWei()
+    public function createUserService()
     {
         return new \WeiTest\Fixtures\User(array(
             'wei' => $this->wei,
@@ -122,7 +122,7 @@ class WeiTest extends TestCase
 
     public function testGetOption()
     {
-        $user = $this->createUserWei();
+        $user = $this->createUserService();
 
         $this->assertEquals('twin', $user->getName());
 
@@ -194,10 +194,10 @@ class WeiTest extends TestCase
     {
         $this->setExpectedException(
             'BadMethodCallException',
-            'Method "Wei\Wei->notFoundWei" or object "notFoundWei" (class "Wei\NotFoundWei") not found, called in file',
+            'Method "Wei\Wei->notFoundService" or object "notFoundService" (class "Wei\NotFoundService") not found, called in file',
             1011
         );
-        $this->wei->notFoundWei();
+        $this->wei->notFoundService();
     }
 
     public function testInvokeNotFoundWeiByCallUserFunc()
@@ -210,7 +210,7 @@ class WeiTest extends TestCase
         $this->wei->get('notFoundWei');
     }
 
-    public function testGetFromproviders()
+    public function testGetFromProviders()
     {
         // Set options for sub request
         $this->wei->setConfig('sub.request', array(
