@@ -317,6 +317,11 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function save()
     {
         if (!$this->isColl) {
+            // Return false when record has been destroy to avoid dirty data
+            if ($this->isDestroyed) {
+                return false;
+            }
+
             $isNew = $this->isNew;
             $this->trigger('beforeSave');
             $this->trigger($this->isNew ? 'beforeCreate' : 'beforeUpdate');
