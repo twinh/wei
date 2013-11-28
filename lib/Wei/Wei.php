@@ -677,9 +677,6 @@ namespace Wei
         {
             if (isset($this->objects[$name])) {
                 unset($this->objects[$name]);
-                if (isset($this->$name) && $this->$name instanceof Base) {
-                    unset($this->$name);
-                }
                 return true;
             }
             return false;
