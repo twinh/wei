@@ -222,10 +222,17 @@ class Error extends Base
             $code = 500;
         }
 
+        // Logger level
+        if ($code >= 500) {
+            $level = 'critical';
+        } else {
+            $level = 'info';
+        }
+
         try {
             // The flowing services may throw exception too
             $this->response->setStatusCode($code)->send();
-            $this->logger->critical((string)$exception);
+            $this->logger->log($level, (string)$exception);
 
             $this->renderException($exception, $debug);
         } catch (\Exception $e) {
