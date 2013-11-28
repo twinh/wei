@@ -46,4 +46,10 @@ class AssetTest extends TestCase
             )
         );
     }
+
+    public function testGetAndSetBaseUrl()
+    {
+        $this->asset->setBaseUrl('abc');
+        $this->assertEquals('abc', $this->asset->getBaseUrl());
+    }
 }
