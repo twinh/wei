@@ -130,22 +130,30 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     protected $sql;
 
     /**
-     * @var array The query parameters.
+     * The query parameters
+     *
+     * @var array
      */
     protected $params = array();
 
     /**
-     * @var array The parameter type map of this query.
+     * The parameter type map of this query
+     *
+     * @var array
      */
     protected $paramTypes = array();
 
     /**
-     * @var integer The type of query this is. Can be select, update or delete.
+     * The type of query this is. Can be select, update or delete
+     *
+     * @var integer
      */
     protected $type = self::SELECT;
 
     /**
-     * @var integer The state of the query object. Can be dirty or clean.
+     * The state of the query object. Can be dirty or clean
+     *
+     * @var integer
      */
     protected $state = self::STATE_CLEAN;
 
