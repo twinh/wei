@@ -361,7 +361,7 @@ namespace Wei
          *
          * @var Base[]
          */
-        protected $objects = array();
+        protected $services = array();
 
         /**
          * The current service container
@@ -508,15 +508,15 @@ namespace Wei
              */
             if (false !== strpos($first, '.')) {
                 $parts = explode('.', $first, 2);
-                $objectName = $parts[0] . ucfirst($parts[1]);
-                if (!isset($this->providers[$objectName])) {
-                    $this->providers[$objectName] = $first;
+                $serviceName = $parts[0] . ucfirst($parts[1]);
+                if (!isset($this->providers[$serviceName])) {
+                    $this->providers[$serviceName] = $first;
                 }
             }
 
-            // Set options for existing object
-            if (isset($this->objects[$first])) {
-                $this->objects[$first]->setOption($value);
+            // Set options for existing service
+            if (isset($this->services[$first])) {
+                $this->services[$first]->setOption($value);
             }
 
             return $this;
@@ -551,31 +551,31 @@ namespace Wei
         }
 
         /**
-         * Get a object and call its "__invoke" method
+         * Get a service and call its "__invoke" method
          *
-         * @param string $name The name of the object
+         * @param string $name The name of the service
          * @param array $args The arguments for "__invoke" method
          * @param array $providers The service providers map
          * @return mixed
          */
         public function invoke($name, array $args = array(), $providers = array())
         {
-            $object = $this->get($name, $providers);
-            return call_user_func_array(array($object, '__invoke'), $args);
+            $service = $this->get($name, $providers);
+            return call_user_func_array(array($service, '__invoke'), $args);
         }
 
         /**
-         * Get a object
+         * Get a service
          *
-         * @param string $name The name of the object, without class prefix "Wei\"
-         * @param array $options The option properties for object
+         * @param string $name The name of the service, without class prefix "Wei\"
+         * @param array $options The option properties for service
          * @param array $providers The dependent configuration
          * @throws \BadMethodCallException
          * @return Base
          */
         public function get($name, array $options = array(), array $providers = array())
         {
-            // Resolve the object name in dependent configuration
+            // Resolve the service name in dependent configuration
             if (isset($providers[$name])) {
                 $name = $providers[$name];
             }
@@ -584,31 +584,31 @@ namespace Wei
                 $name = $this->providers[$name];
             }
 
-            if (isset($this->objects[$name])) {
-                return $this->objects[$name];
+            if (isset($this->services[$name])) {
+                return $this->services[$name];
             }
 
-            // Resolve the real object name and the config name($full)
+            // Resolve the real service name and the config name($full)
             $full = $name;
             if (false !== ($pos = strpos($name, '.'))) {
                 $name = substr($name, $pos + 1);
             }
 
-            // Get the object class and instance
+            // Get the service class and instance
             $class = $this->getClass($name);
             if (class_exists($class)) {
                 // Trigger the before construct callback
                 $this->beforeConstruct && call_user_func($this->beforeConstruct, $this, $full, $name);
 
-                // Load the object configuration and make sure "wei" option at first
+                // Load the service configuration and make sure "wei" option at first
                 $options = array('wei' => $this) + $options + (array)$this->getConfig($full);
 
-                $this->objects[$full] = new $class($options);
+                $this->services[$full] = new $class($options);
 
                 // Trigger the after construct callback
-                $this->afterConstruct && call_user_func($this->afterConstruct, $this, $full, $name, $this->objects[$full]);
+                $this->afterConstruct && call_user_func($this->afterConstruct, $this, $full, $name, $this->services[$full]);
 
-                return $this->objects[$full];
+                return $this->services[$full];
             }
 
             // Build the error message
@@ -630,23 +630,23 @@ namespace Wei
         }
 
         /**
-         * Check if the object is instanced
+         * Check if the service is instanced
          *
-         * @param string $name The name of object
+         * @param string $name The name of service
          * @return bool
          */
         public function isInstanced($name)
         {
-            return isset($this->objects[$name]);
+            return isset($this->services[$name]);
         }
 
         /**
-         * Initialize a new instance of object, with the specified name
+         * Initialize a new instance of service, with the specified name
          *
-         * @param string $name The name of the object
-         * @param array $options The option properties for object
+         * @param string $name The name of the service
+         * @param array $options The option properties for service
          * @param array $providers The dependent configuration
-         * @return Base The instanced object
+         * @return Base The instanced service
          */
         public function newInstance($name, array $options = array(), array $providers = array())
         {
@@ -655,15 +655,15 @@ namespace Wei
         }
 
         /**
-         * Add a object to the service container
+         * Add a service to the service container
          *
-         * @param string $name The name of object
-         * @param Base $service The service object
+         * @param string $name The name of service
+         * @param Base $service The object of service
          * @return $this
          */
         public function set($name, Base $service)
         {
-            $this->objects[$name] = $service;
+            $this->services[$name] = $service;
             return $this;
         }
 
@@ -675,15 +675,15 @@ namespace Wei
          */
         public function remove($name)
         {
-            if (isset($this->objects[$name])) {
-                unset($this->objects[$name]);
+            if (isset($this->services[$name])) {
+                unset($this->services[$name]);
                 return true;
             }
             return false;
         }
 
         /**
-         * Get the object class by the given name
+         * Get the service class by the given name
          *
          * @param string $name The name of service
          * @return string
@@ -810,10 +810,10 @@ namespace Wei
         }
 
         /**
-         * Add a object to the service container
+         * Add a service to the service container
          *
-         * @param string $name The name of object
-         * @param Base $service The service object
+         * @param string $name The name of service
+         * @param Base $service The service service
          * @return $this
          */
         public function __set($name, Base $service)
