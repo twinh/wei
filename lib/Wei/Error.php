@@ -223,7 +223,7 @@ class Error extends Base
         }
 
         try {
-            // This weis may show exception too
+            // The flowing services may throw exception too
             $this->response->setStatusCode($code)->send();
             $this->logger->critical((string)$exception);
 
