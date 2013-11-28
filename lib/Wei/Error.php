@@ -176,7 +176,6 @@ class Error extends Base
      * @param string $type The type of error handlers
      * @param \Exception $exception
      * @return bool
-     * @internal description
      */
     public function triggerHandler($type, \Exception $exception)
     {
