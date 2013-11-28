@@ -1664,5 +1664,20 @@ class DbTest extends TestCase
         $this->assertInternalType('float', $result);
         $this->assertEquals(1.5, $result);
     }
+
+    public function testSaveDestroyRecord()
+    {
+        $this->initFixtures();
+
+        $member = $this->db->find('member', 1);
+        $result = $member->destroy();
+
+        $this->assertTrue($result);
+        $result = $member->save();
+        $this->assertFalse($result);
+
+        $member = $this->db->find('member', 1);
+        $this->assertFalse($member);
+    }
 }
 

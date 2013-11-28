@@ -87,7 +87,7 @@ class TestCase extends PHPUnit_Framework_TestCase
             return;
         }
 
-        foreach ($wei->getOption('objects') as $key => $value) {
+        foreach ($wei->getServices() as $key => $value) {
             if ('wei' == $key) {
                 continue;
             }
