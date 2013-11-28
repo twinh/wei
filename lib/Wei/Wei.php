@@ -630,6 +630,16 @@ namespace Wei
         }
 
         /**
+         * Returns all instanced services
+         *
+         * @return Base[]
+         */
+        public function getServices()
+        {
+            return $this->services;
+        }
+
+        /**
          * Check if the service is instanced
          *
          * @param string $name The name of service
