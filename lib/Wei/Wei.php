@@ -14,32 +14,32 @@ namespace Wei
     require_once 'Base.php';
 
     /**
-     * The root object and service container
+     * The service container
      *
      * @author      Twin Huang <twinhuang@qq.com>
      *
      * Cache
-     * @property Cache      $cache A cache object proxy
+     * @property Cache      $cache A cache service proxy
      * @method   mixed      cache($key, $value = null, $expire = 0) Retrieve or store an item by cache
-     * @property ArrayCache $arrayCache  A cache object that stored data in PHP array
+     * @property ArrayCache $arrayCache  A cache service that stored data in PHP array
      * @method   mixed      arrayCache($key, $value = null, $expire = 0) Retrieve or store an item by array cache
-     * @property Apc        $apc A cache object that stored data in PHP APC
+     * @property Apc        $apc A cache service that stored data in PHP APC
      * @method   mixed      apc($key, $value = null, $expire = 0) Retrieve or store an item
-     * @property DbCache    $dbCache A cache object that stored data in databases
+     * @property DbCache    $dbCache A cache service that stored data in databases
      * @method   mixed      dbCache($key, $value = null, $expire = 0) Retrieve or store an item by database cache
-     * @property FileCache  $fileCache A cache object that stored data in files
+     * @property FileCache  $fileCache A cache service that stored data in files
      * @method   mixed      fileCache($key, $value = null, $expire = 0) Retrieve or store an item by file
-     * @property Memcache   $memcache A cache object that stored data in Memcache
+     * @property Memcache   $memcache A cache service that stored data in Memcache
      * @method   mixed      memcache($key, $value = null, $expire = 0) Retrieve or store an item by Memcache
-     * @property Memcached  $memcached A cache object that stored data in Memcached
+     * @property Memcached  $memcached A cache service that stored data in Memcached
      * @method   mixed      memcached($key, $value = null, $expire = 0) Retrieve or store an item by Memcached
-     * @property MongoCache $mongoCache A cache object that stores data in MongoDB
+     * @property MongoCache $mongoCache A cache service that stores data in MongoDB
      * @method   mixed      mongoCache($key, $value = null, $expire = 0) Retrieve or store an item by MongoDB
-     * @property Couchbase  $couchbase A cache object base on Couchbase
+     * @property Couchbase  $couchbase A cache service base on Couchbase
      * @method   mixed      couchbase($key, $value = null, $expire = 0) Retrieve or store an item by Couchbase
-     * @property Redis      $redis A cache object that stores data in Redis
+     * @property Redis      $redis A cache service that stores data in Redis
      * @method   mixed      redis($key = null, $value = null, $expire = 0) Retrieve or store an item by Redis
-     * @property Bicache    $bicache A two-level cache object
+     * @property Bicache    $bicache A two-level cache service
      * @method   mixed      bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
      *
      * Database
@@ -300,7 +300,7 @@ namespace Wei
         protected $autoloadMap = array();
 
         /**
-         * The object name to class name map
+         * The service name to class name map
          *
          * @var array
          */
@@ -336,28 +336,28 @@ namespace Wei
         protected $import = array();
 
         /**
-         * The callback executes *before* object constructed
+         * The callback executes *before* service constructed
          *
          * @var callable
          */
         protected $beforeConstruct;
 
         /**
-         * The callback executes *after* object constructed
+         * The callback executes *after* service constructed
          *
          * @var callable
          */
         protected $afterConstruct;
 
         /**
-         * The objects that will be instanced after service container constructed
+         * The services that will be instanced after service container constructed
          *
          * @var array
          */
         protected $preload = array();
 
         /**
-         * An array contains the instanced objects
+         * An array contains the instanced services
          *
          * @var Base[]
          */
@@ -377,7 +377,7 @@ namespace Wei
          */
         public function __construct(array $config = array())
         {
-            // Set configurations for all objects
+            // Set configurations for all services
             $this->setConfig($config);
 
             $this->set('wei', $this);
@@ -459,7 +459,7 @@ namespace Wei
         }
 
         /**
-         * Set object's configuration
+         * Set service's configuration
          *
          * @param string|array $name
          * @param mixed $value
