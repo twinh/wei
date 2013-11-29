@@ -45,24 +45,23 @@ abstract class BaseCache extends Base
      * ```php
      * $cache = wei()->cache;
      *
-     * $cache->get('key'); // => false
+     * // Retrieve cache by key
+     * $cache->get('key');
      *
      * // Get cache value from callback
      * $cache->get('key', function($wei){
      *      return 'value';
-     * }); // => "value"
-     *
-     * $cache->get('key'); // => "value"
+     * });
      *
      * // Get cache value from callback with timeout
      * $cache->get('key', 10, function($wei){
      *      return 'value';
-     * }); // => "value"
+     * });
      * ```
      *
      * @param string $key The name of item
      * @param int $expire The expire seconds of callback return value
-     * @param callback $fn The callback to execute when cache not found
+     * @param callable $fn The callback to execute when cache not found
      * @throws \RuntimeException When set cache return false
      * @return mixed
      */
