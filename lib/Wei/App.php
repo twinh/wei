@@ -292,7 +292,7 @@ class App extends Base
      */
     public function getDefaultTemplate()
     {
-        return strtolower($this->controller . '/' . $this->action) . $this->view->getExtension();
+        return lcfirst($this->controller) . '/' . $this->action . $this->view->getExtension();
     }
 
     /**
