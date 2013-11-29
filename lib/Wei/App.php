@@ -260,6 +260,15 @@ class App extends Base
         ));
     }
 
+    /**
+     * Check if action name is available
+     *
+     * Returns false when method is not found, starts with '_' or protected.
+     *
+     * @param object $object The object of controller
+     * @param string $action The name of action
+     * @return bool
+     */
     public function isActionAvailable($object, $action)
     {
         try {
