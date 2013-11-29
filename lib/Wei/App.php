@@ -109,16 +109,10 @@ class App extends Base
     {
         $object = $this->getControllerInstance($controller, $action);
         if ($object) {
-            // Check if action is exists and public
-            if (method_exists($object, $action)) {
-                $ref = new \ReflectionMethod($object, $action);
-                if ($ref->isPublic()) {
-                    $response = $object->$action($this->request, $this->response);
-                    $this->handleResponse($response);
-                    return $this;
-                } else {
-                    $notFound = 'action';
-                }
+            if ($this->isActionAvailable($object, $action)) {
+                $response = $object->$action($this->request, $this->response);
+                $this->handleResponse($response);
+                return $this;
             } else {
                 $notFound = 'action';
             }
@@ -264,6 +258,20 @@ class App extends Base
             'controller' => $controller,
             'action' => $action,
         ));
+    }
+
+    public function isActionAvailable($object, $action)
+    {
+        try {
+            $ref = new \ReflectionMethod($object, $action);
+            if ($ref->isPublic() && $action === $ref->name && $action[0] !== '_') {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\ReflectionException $e) {
+            return false;
+        }
     }
 
     /**
