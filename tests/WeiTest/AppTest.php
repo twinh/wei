@@ -241,4 +241,64 @@ class AppTest extends TestCase
 
         $this->app();
     }
+
+    public function testActionStartWithUnderscore()
+    {
+        $this->setExpectedException(
+            'RuntimeException',
+            'The page you requested was not found - action method "_action" not found in controller "test" (class "WeiTest\App\Test")',
+            '404'
+        );
+
+        $this->request->set(array(
+            'controller' => 'test',
+            'action' => '_action',
+        ));
+
+        $this->app();
+    }
+
+    public function testActionIsProtected()
+    {
+        $this->setExpectedException(
+            'RuntimeException',
+            'The page you requested was not found - action method "protect" not found in controller "test" (class "WeiTest\App\Test")',
+            '404'
+        );
+
+        $this->request->set(array(
+            'controller' => 'test',
+            'action' => 'protect',
+        ));
+
+        $this->app();
+    }
+
+    public function testActionNameCaseSensitive()
+    {
+        $this->expectOutputString('caseInsensitive');
+
+        $this->request->set(array(
+            'controller' => 'test',
+            'action' => 'caseInsensitive',
+        ));
+
+        $this->app();
+    }
+
+    public function testActionNameCaseSensitiveException()
+    {
+        $this->setExpectedException(
+            'RuntimeException',
+            'The page you requested was not found - action method "caseinsensitive" not found in controller "test" (class "WeiTest\App\Test")',
+            '404'
+        );
+
+        $this->request->set(array(
+            'controller' => 'test',
+            'action' => 'caseinsensitive',
+        ));
+
+        $this->app();
+    }
 }

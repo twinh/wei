@@ -88,4 +88,19 @@ class Test extends \Wei\Base
     {
         return $res($req['id']);
     }
+
+    public function _action()
+    {
+        throw new \Exception('Never call me');
+    }
+
+    protected function protect()
+    {
+        throw new \Exception('Never call me');
+    }
+
+    public function caseInsensitive()
+    {
+        return __FUNCTION__;
+    }
 }
