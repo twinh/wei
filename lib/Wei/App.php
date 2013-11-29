@@ -9,7 +9,7 @@
 namespace Wei;
 
 /**
- * A service to build simple MVC application
+ * A service to build an MVC application
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request A service that handles the HTTP request data
