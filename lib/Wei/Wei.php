@@ -76,10 +76,10 @@ namespace Wei
      * @method   string     escape($string, $type = 'html') Escapes a string by specified type for secure output
      *
      * Application
+     * @property App            $app An MVC application service
+     * @method   \Wei\App       app(array $options = array()) Startup an MVC application
      * @property WeChatApp      $weChatApp A object handles WeChat(WeiXin) callback message
      * @method   \Wei\WeChatApp weChatApp() Start up WeChat application and output the matched rule message
-     * @property App            $app The application object
-     * @method   \Wei\App       app(array $options = array()) Startup application
      * @property Router         $router A object that build a simple REST application
      * @method   \Wei\Router    router($pathInfo = null, $method = null) Run the application
      * @property Url            $url A util object to build URL

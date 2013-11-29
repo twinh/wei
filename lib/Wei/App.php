@@ -68,7 +68,7 @@ class App extends Base
     protected $controllers = array();
 
     /**
-     * Startup application
+     * Startup an MVC application
      *
      * @param array $options
      * @throws \RuntimeException
