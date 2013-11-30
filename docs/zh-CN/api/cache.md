@@ -63,12 +63,12 @@ $hits = $cache->incr('article-1', 1);
 echo '该文章已被访问' . $hits . '次';
 ```
 
-### 使用缓存前缀来避免缓存名称冲突
+### 使用键名前缀来避免缓存名称冲突
 
-有些时候,我们会在多个应用中,共享同一个memcched服务,共享同一个APC,这时可以通过设置缓存名称前缀,避免数据冲突
+有些时候,我们会在多个应用中,共享同一个memcched服务,共享同一个APC,这时可以通过设置键名前缀,来避免数据冲突
 
 ```php
-// 设置APC缓存的键名前缀
+// 设置memcached缓存的键名前缀
 wei(array(
     'memcached' => array(
         'prefix' => 'project-'
