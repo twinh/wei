@@ -371,7 +371,7 @@ class Router extends Base
      * Add a GET route
      *
      * @param string $pattern
-     * @param callback $fn
+     * @param callable $fn
      * @return $this
      */
     public function get($pattern, $fn)
@@ -383,7 +383,7 @@ class Router extends Base
      * Add a POST route
      *
      * @param string $pattern
-     * @param callback $fn
+     * @param callable $fn
      * @return $this
      */
     public function post($pattern, $fn)
@@ -395,7 +395,7 @@ class Router extends Base
      * Add a DELETE route
      *
      * @param string $pattern
-     * @param callback $fn
+     * @param callable $fn
      * @return $this
      */
     public function delete($pattern, $fn)
@@ -407,7 +407,7 @@ class Router extends Base
      * Add a PUT route
      *
      * @param string $pattern
-     * @param callback $fn
+     * @param callable $fn
      * @return $this
      */
     public function put($pattern, $fn)
@@ -420,7 +420,7 @@ class Router extends Base
      *
      * @param string $pattern The route pattern
      * @param string $method The route method
-     * @param callback $fn The callback invoke then route is matched
+     * @param callable $fn The callback invoke then route is matched
      * @return $this
      */
     public function request($pattern, $method, $fn = null)

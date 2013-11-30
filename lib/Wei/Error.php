@@ -92,7 +92,7 @@ class Error extends Base
     /**
      * Attach a handler to not found error
      *
-     * @param callback $fn The error handler
+     * @param callable $fn The error handler
      * @return $this
      */
     public function notFound($fn)
@@ -104,7 +104,7 @@ class Error extends Base
     /**
      * Attach a handler to fatal error
      *
-     * @param callback $fn The error handler
+     * @param callable $fn The error handler
      * @return $this
      */
     public function fatal($fn)

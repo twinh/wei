@@ -192,7 +192,7 @@ abstract class BaseCache extends Base
      * Get file content with cache
 
      * @param string $file The path of file
-     * @param callback $fn The callback to get and parse file content
+     * @param callable $fn The callback to get and parse file content
      * @return mixed
      */
     public function getFileContent($file, $fn)
