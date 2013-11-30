@@ -324,3 +324,15 @@ $values   | array     | 无        | 要缓存的数据
 > #### 注意
 >
 > 该方法会把所有的缓存内容都清空,不仅仅是以$prefix开头的缓存.因为大部分缓存未提供按前缀清空缓存的功能.
+
+#### cache->getFileContent($file, $fn)
+
+获取文件内容缓存
+
+#### cache->getPrefix()
+
+获取键名前缀
+
+#### cache->setPrefix($prefix)
+
+设置键名前缀
