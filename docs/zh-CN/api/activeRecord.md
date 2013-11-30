@@ -42,8 +42,19 @@ wei()->db('user')->destroy(array('id' => 1));
 ### 实现软删除
 
 ```php
+class User extends \Wei\Record
+{
+    public function softDelete()
+    {
+        $this['delete'] = true;
+        $this['deleteTime'] = date('Y-m-d H:i:s');
+        return $this->save();
+    }
+}
 
+$user = wei()->db('user')->find(1);
 
+$user->softDelete();
 ```
 
 ### 回调调用顺序
