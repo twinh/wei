@@ -196,6 +196,12 @@
       </ul>
     </li>
     <li>
+      <a href="#app">应用</a>
+      <ul class="nav">
+        <li><a href="#app">app</a></li>
+      </ul>
+    </li>
+    <li>
       <a href="#config">其他</a>
       <ul class="nav">
         <li><a href="#config">config</a></li>
@@ -895,11 +901,11 @@
 <span class="k">echo</span> <span class="s1">'该文章已被访问'</span> <span class="o">.</span> <span class="nv">$hits</span> <span class="o">.</span> <span class="s1">'次'</span><span class="p">;</span>
 </code></pre></div>
 
-<h3>使用缓存前缀来避免缓存名称冲突</h3>
+<h3>使用键名前缀来避免缓存名称冲突</h3>
 
-<p>有些时候,我们会在多个应用中,共享同一个memcched服务,共享同一个APC,这时可以通过设置缓存名称前缀,避免数据冲突</p>
+<p>有些时候,我们会在多个应用中,共享同一个memcched服务,共享同一个APC,这时可以通过设置键名前缀,来避免数据冲突</p>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 设置APC缓存的键名前缀</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 设置memcached缓存的键名前缀</span>
 <span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'memcached'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'prefix'</span> <span class="o">=&gt;</span> <span class="s1">'project-'</span>
@@ -13030,6 +13036,88 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <h4>view-&gt;setDirs($dirs)</h4>
 
 <p>设置模板所在的目录</p>
+  </section>
+
+<!-- api/app
+  ================================================== -->
+  <section id="app">
+  <div class="page-header"><h1>App</h1></div>
+
+<p>创建并运行一个MVC应用</p>
+
+<h2>案例</h2>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// TODO</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>namespace</td>
+<td>string</td>
+<td>Controller</td>
+<td>控制器所在的命名空间</td>
+</tr>
+<tr>
+<td>defaultController</td>
+<td>string</td>
+<td>index</td>
+<td>默认的控制器名称</td>
+</tr>
+<tr>
+<td>defaultAction</td>
+<td>string</td>
+<td>index</td>
+<td>默认的行为名称</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
+
+<h4>app($options)</h4>
+
+<p>根据提供的选项,创建一个MVC应用,执行相应的行为方法,并输出视图数据</p>
+
+<h4>getController()</h4>
+
+<p>获取当前应用的控制器名称</p>
+
+<h4>setController($controller)</h4>
+
+<p>设置当前应用的控制器名称</p>
+
+<h4>getAction()</h4>
+
+<p>获取当前应用的行为名称</p>
+
+<h4>setAction($action)</h4>
+
+<p>设置当前应用的行为名称</p>
+
+<h4>getControllerClass($controller)</h4>
+
+<p>获取指定控制器的完整类名(不检查类名是否存在)</p>
+
+<h4>getDefaultTemplate()</h4>
+
+<p>获取当前控制器和行为对应的视图文件路径</p>
+
+<h4>preventPreviousDispatch()</h4>
+
+<p>中断当前的应用逻辑</p>
+
+<h4>forward($action, $controller = null)</h4>
+
+<p>中断当前的应用逻辑,并跳转到指定的控制器和行为</p>
   </section>
 
 <!-- api/config

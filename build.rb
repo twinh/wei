@@ -72,6 +72,8 @@ weis = [
     'response', 'redirect',
   # view
     'asset', 'escape', 'view',
+  # app
+    'app',
   # others
     'config', 'env', 'error', 'gravatar', 'lock', 'logger', 'password', 'pinyin', 'uuid',
   # third party
