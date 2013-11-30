@@ -1389,6 +1389,18 @@
 
 <p>该方法会把所有的缓存内容都清空,不仅仅是以$prefix开头的缓存.因为大部分缓存未提供按前缀清空缓存的功能.</p>
 </blockquote>
+
+<h4>cache-&gt;getFileContent($file, $fn)</h4>
+
+<p>获取文件内容缓存</p>
+
+<h4>cache-&gt;getPrefix()</h4>
+
+<p>获取键名前缀</p>
+
+<h4>cache-&gt;setPrefix($prefix)</h4>
+
+<p>设置键名前缀</p>
   </section>
 
 <!-- api/apc
@@ -4149,6 +4161,10 @@
 <div class="highlight"><pre><code class="php"><span class="c1">// 删除id为1的用户</span>
 <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">destroy</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
 </code></pre></div>
+
+<h3>实现软删除</h3>
+
+
 
 <h3>回调调用顺序</h3>
 
