@@ -145,6 +145,20 @@ $result = array (
 );
 ```
 
+### 根据文件路径和最后修改时间,生成缓存内容
+
+常用场景
+
+1. 缓存JSON,YAML,INI等非PHP原生支持文件的解析结果
+2.  在自定义视图引擎中,缓存模板文件的编译结果
+
+```php
+wei()->cache->getFileContent($file, function($file) {
+    return json_decode(file_get_contents($file), true);
+    //return \Symfony\Component\Yaml\Yaml::parse($file);
+});
+```
+
 调用方式
 --------
 
@@ -345,7 +359,7 @@ $values   | array     | 无        | 要缓存的数据
 
 #### cache->getFileContent($file, $fn)
 
-获取文件内容缓存
+根据文件路径和最后修改时间,生成缓存内容
 
 #### cache->getPrefix()
 
