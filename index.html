@@ -907,14 +907,18 @@
 
 <h3>将缓存作为计数器,记录文章访问次数</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$cache</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="p">;</span>
+<p>设置文章访问次数增加1,返回增加后的总次数</p>
 
-<span class="c1">// 设置文章访问次数增加1,返回增加后的总次数</span>
-<span class="c1">// 注意: 开发人员无需预先判断该键名的缓存是否存在,如果缓存不存在,将自动从0开始计算</span>
-<span class="nv">$hits</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">incr</span><span class="p">(</span><span class="s1">'article-1'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$hits</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">incr</span><span class="p">(</span><span class="s1">'article-1'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
 <span class="k">echo</span> <span class="s1">'该文章已被访问'</span> <span class="o">.</span> <span class="nv">$hits</span> <span class="o">.</span> <span class="s1">'次'</span><span class="p">;</span>
 </code></pre></div>
+
+<blockquote>
+<h4>注意</h4>
+
+<p>您无需预先判断该键名的缓存是否存在,如果缓存不存在,将自动从0开始计算</p>
+</blockquote>
 
 <h3>使用键名前缀来避免缓存名称冲突</h3>
 
