@@ -607,7 +607,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $data
      * @return $this
      */
-    public function findOrInit($conditions = null, array $data)
+    public function findOrInit($conditions = null, array $data = array())
     {
         if (!$this->find($conditions)) {
             !is_array($conditions) && $conditions = array($this->primaryKey => $conditions);
