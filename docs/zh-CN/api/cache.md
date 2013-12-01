@@ -43,11 +43,27 @@ $cache = wei()->cache;
 echo $cache->getDriver();
 ```
 
-### 缓存数据库查询,如缓存用户总数,每30秒更新一次
+### 缓存数据库查询等耗时较长的操作
+
+如缓存用户总数,每30秒缓存过期,并重新拉取
 
 ```php
 $totalUsers = wei()->cache->get('totalUsers', 30, function($wei){
 	return $wei->db->fetchColumn("SELECT COUNT(1) FROM user");
+});
+```
+
+将用户编号和最后更新时间作为缓存键名,省略过期时间参数
+
+```php
+$user = array(
+    'id' => 1,
+    'updateTime' => '2013-12-01 12:00:00'
+);
+
+wei()->cache->get($user['id'] . $user['updateTime'], function($wei){
+    // 渲染复杂的视图,拉取远程接口等耗时较长的操作
+    return $wei->view->render('userInfo.php');
 });
 ```
 
