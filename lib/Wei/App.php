@@ -142,8 +142,8 @@ class App extends Base
     /**
      * Handle the response variable returned by controller action
      *
-     * @param  mixed                     $response
-     * @return Response|boolean
+     * @param  mixed $response
+     * @return Response
      * @throws \InvalidArgumentException
      */
     public function handleResponse($response)
@@ -161,7 +161,8 @@ class App extends Base
 
             // Response if not sent
             case $response instanceof Response :
-                return !$response->isSent() && $response->send();
+                !$response->isSent() && $response->send();
+                return $response;
 
             default :
                 throw new \InvalidArgumentException(sprintf(
