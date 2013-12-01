@@ -883,10 +883,25 @@
 <span class="k">echo</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">getDriver</span><span class="p">();</span>
 </code></pre></div>
 
-<h3>缓存数据库查询,如缓存用户总数,每30秒更新一次</h3>
+<h3>缓存数据库查询等耗时较长的操作</h3>
+
+<p>如缓存用户总数,每30秒缓存过期,并重新拉取</p>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$totalUsers</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'totalUsers'</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$wei</span><span class="p">){</span>
     <span class="k">return</span> <span class="nv">$wei</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">fetchColumn</span><span class="p">(</span><span class="s2">"SELECT COUNT(1) FROM user"</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<p>将用户编号和最后更新时间作为缓存键名,省略过期时间参数</p>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$user</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">'updateTime'</span> <span class="o">=&gt;</span> <span class="s1">'2013-12-01 12:00:00'</span>
+<span class="p">);</span>
+
+<span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$user</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span> <span class="o">.</span> <span class="nv">$user</span><span class="p">[</span><span class="s1">'updateTime'</span><span class="p">],</span> <span class="k">function</span><span class="p">(</span><span class="nv">$wei</span><span class="p">){</span>
+    <span class="c1">// 渲染复杂的视图,拉取远程接口等耗时较长的操作</span>
+    <span class="k">return</span> <span class="nv">$wei</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'userInfo.php'</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
 
