@@ -982,6 +982,19 @@
 <span class="p">);</span>
 </code></pre></div>
 
+<h3>根据文件路径和最后修改时间,生成缓存内容</h3>
+
+<p>常用场景</p>
+
+<ol>
+<li>缓存JSON,YAML,INI等非PHP原生支持文件的解析结果</li>
+<li> 在自定义视图引擎中,缓存模板文件的编译结果</li>
+</ol><div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">getFileContent</span><span class="p">(</span><span class="nv">$file</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$file</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nb">file_get_contents</span><span class="p">(</span><span class="nv">$file</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
+    <span class="c1">//return \Symfony\Component\Yaml\Yaml::parse($file);</span>
+<span class="p">});</span>
+</code></pre></div>
+
 <h2>调用方式</h2>
 
 <h3>通用选项</h3>
@@ -1411,7 +1424,7 @@
 
 <h4>cache-&gt;getFileContent($file, $fn)</h4>
 
-<p>获取文件内容缓存</p>
+<p>根据文件路径和最后修改时间,生成缓存内容</p>
 
 <h4>cache-&gt;getPrefix()</h4>
 
