@@ -84,7 +84,7 @@ abstract class BaseCache extends Base
                 $fn = $expire;
                 $expire = 0;
             }
-            $result = call_user_func($fn, $this->wei);
+            $result = call_user_func($fn, $this->wei, $this);
 
             $setResult = $this->set($key, $result, $expire);
             if (false === $setResult) {
@@ -198,8 +198,8 @@ abstract class BaseCache extends Base
     public function getFileContent($file, $fn)
     {
         $key = $file . filemtime($file);
-        return $this->get($key, function() use ($file, $fn) {
-            return $fn($file);
+        return $this->get($key, function($wei, $cache) use ($file, $fn) {
+            return $fn($file, $wei, $cache);
         });
     }
 

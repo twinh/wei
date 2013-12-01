@@ -155,6 +155,13 @@ class CacheTestCase extends TestCase
         });
 
         $this->assertEquals(2, $result2);
+
+        $that = $this;
+        $result3 = $cache->get($key, function($wei, $cache) use($that) {
+            $that->assertInstanceOf('\Wei\Wei', $wei);
+            $that->assertInstanceOf('\Wei\BaseCache', $cache);
+        });
+        $this->assertEquals(2, $result3);
     }
 
     public function testPrefix()
