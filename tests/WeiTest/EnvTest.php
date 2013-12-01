@@ -13,7 +13,7 @@ class EnvTest extends TestCase
 
     public function testEnvDetect()
     {
-        $this->env->setEnv('dev');
+        $this->env->setName('dev');
 
         $this->assertTrue($this->env->isDev());
         $this->assertFalse($this->env->isTest());
@@ -26,7 +26,7 @@ class EnvTest extends TestCase
         $this->assertTrue($this->wei->getConfig('cli'));
     }
 
-    public function testSetEnv()
+    public function testsetName()
     {
         $env = $this->wei->newInstance('env', array(
             'envMap' => array(
@@ -40,27 +40,27 @@ class EnvTest extends TestCase
         ));
 
         $env->detectEnvName();
-        $this->assertEquals('dev', $env->getEnv());
+        $this->assertEquals('dev', $env->getName());
 
         $env->setOption('server', array('SERVER_ADDR' => '127.0.0.2'));
         $env->detectEnvName();
-        $this->assertEquals('beta', $env->getEnv());
+        $this->assertEquals('beta', $env->getName());
 
         $env->setOption('server', array('SERVER_ADDR' => '192.168.25.2'));
         $env->detectEnvName();
-        $this->assertEquals('prod', $env->getEnv());
+        $this->assertEquals('prod', $env->getName());
 
         $env->setOption('server', array('SERVER_ADDR' => '192.168.25.3'));
         $env->detectEnvName();
-        $this->assertEquals('prod', $env->getEnv());
+        $this->assertEquals('prod', $env->getName());
 
-        $env->setEnv('myMachine');
-        $this->assertEquals('myMachine', $env->getEnv());
+        $env->setName('myMachine');
+        $this->assertEquals('myMachine', $env->getName());
     }
 
     public function testInvoker()
     {
-        $this->env->setEnv('prod');
+        $this->env->setName('prod');
 
         $this->assertEquals('prod', $this->env());
     }
@@ -74,7 +74,7 @@ class EnvTest extends TestCase
             }
         ));
 
-        $this->assertEquals('test', $env->getEnv());
+        $this->assertEquals('test', $env->getName());
     }
 
     public function testPreloadEnvWeiOverwriteConfigError()

@@ -13,7 +13,7 @@ namespace Wei;
  *
  * The environment name detect order:
  *
- *     user defined $env > $envDetect callback > $envMap
+ *     user defined $name > $envDetect callback > $envMap
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
@@ -24,7 +24,7 @@ class Env extends Base
      *
      * @var string
      */
-    protected $env;
+    protected $name;
 
     /**
      * A callback to detect the environment name
@@ -70,12 +70,12 @@ class Env extends Base
         }
 
         // Detect environment name if not set
-        if (!$this->env) {
+        if (!$this->name) {
             $this->detectEnvName();
         }
 
         // Load configuration by environment name
-        $file = str_replace('%env%', $this->env, $this->configDir);
+        $file = str_replace('%env%', $this->name, $this->configDir);
         $this->loadConfigFile($file);
 
         // Load CLI configuration when run in CLI mode
@@ -92,7 +92,7 @@ class Env extends Base
      */
     public function __invoke()
     {
-        return $this->env;
+        return $this->name;
     }
 
     /**
@@ -101,7 +101,7 @@ class Env extends Base
     public function detectEnvName()
     {
         if ($this->detector) {
-            $this->env = call_user_func($this->detector);
+            $this->name = call_user_func($this->detector);
             return;
         }
 
@@ -109,9 +109,9 @@ class Env extends Base
         if (isset($this->server['SERVER_ADDR'])) {
             $ip = $this->server['SERVER_ADDR'];
             if (isset($this->envMap[$ip])) {
-                $this->env = $this->envMap[$ip];
+                $this->name = $this->envMap[$ip];
             } else {
-                $this->env = 'prod';
+                $this->name = 'prod';
             }
             return;
         }
@@ -120,13 +120,13 @@ class Env extends Base
         if (php_sapi_name() == 'cli' && $ips = $this->getServerIps()) {
             foreach ($ips as $ip) {
                 if (isset($this->envMap[$ip])) {
-                    $this->env = $this->envMap[$ip];
+                    $this->name = $this->envMap[$ip];
                     return;
                 }
             }
         }
 
-        $this->env = 'prod';
+        $this->name = 'prod';
         return;
     }
 
@@ -138,7 +138,7 @@ class Env extends Base
      */
     public function is($env)
     {
-        return $this->env === $env;
+        return $this->name === $env;
     }
 
     /**
@@ -176,9 +176,9 @@ class Env extends Base
      *
      * @return string
      */
-    public function getEnv()
+    public function getName()
     {
-        return $this->env;
+        return $this->name;
     }
 
     /**
@@ -187,10 +187,9 @@ class Env extends Base
      * @param string $env
      * @return $this
      */
-    public function setEnv($env)
+    public function setName($env)
     {
-        $this->env = $env;
-
+        $this->name = $env;
         return $this;
     }
 
