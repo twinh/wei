@@ -6,7 +6,7 @@ class EnvTest extends TestCase
 {
     public function setUp()
     {
-        $this->wei->setConfig('env:configDir', __DIR__ . '/Fixtures/env/%env%.php');
+        $this->wei->setConfig('env:configFile', __DIR__ . '/Fixtures/env/%env%.php');
 
         parent::setUp();
     }

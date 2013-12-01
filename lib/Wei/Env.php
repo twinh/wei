@@ -43,11 +43,11 @@ class Env extends Base
     );
 
     /**
-     * The configuration directory pattern
+     * The configuration file pattern
      *
      * @var string
      */
-    protected $configDir = 'config/config_%env%.php';
+    protected $configFile = 'config/config_%env%.php';
 
     /**
      * The server and execution environment parameters, equals to $_SERVER on default
@@ -75,13 +75,13 @@ class Env extends Base
         }
 
         // Load configuration by environment name
-        $file = str_replace('%env%', $this->name, $this->configDir);
+        $file = str_replace('%env%', $this->name, $this->configFile);
         $this->loadConfigFile($file);
 
         // Load CLI configuration when run in CLI mode
         if (php_sapi_name() === 'cli') {
-            $file = str_replace('%env%', 'cli', $this->configDir);
-            $this->loadConfigFile($file);
+            $file = str_replace('%env%', 'cli', $this->configFile);
+            $this->loadconfigFile($file);
         }
     }
 
