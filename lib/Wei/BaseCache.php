@@ -197,20 +197,10 @@ abstract class BaseCache extends Base
      */
     public function getFileContent($file, $fn)
     {
-        $modifiedTimeKey = $file . '-modifiedTime';
-        $contentKey      = $file . '-content';
-        $modifiedTime    = filemtime($file);
-
-        if ($modifiedTime > $this->get($modifiedTimeKey)) {
-            $content = call_user_func($fn, $file, $this->wei);
-            $this->setMulti(array(
-                $modifiedTimeKey => $modifiedTime,
-                $contentKey      => $content,
-            ));
-        }  else {
-            $content = $this->get($contentKey);
-        }
-        return $content;
+        $key = $file . filemtime($file);
+        return $this->get($key, function() use ($file, $fn) {
+            return $fn($file);
+        });
     }
 
     /**
