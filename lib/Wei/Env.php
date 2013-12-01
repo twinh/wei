@@ -184,12 +184,12 @@ class Env extends Base
     /**
      * Set application environment name
      *
-     * @param string $env
+     * @param string $name
      * @return $this
      */
-    public function setName($env)
+    public function setName($name)
     {
-        $this->name = $env;
+        $this->name = $name;
         return $this;
     }
 
