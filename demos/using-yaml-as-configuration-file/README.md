@@ -1,1 +1,1 @@
-# Using YAML as widget configuration
+# Using YAML as configuration file

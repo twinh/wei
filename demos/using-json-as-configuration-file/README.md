@@ -1,1 +1,1 @@
-# Using JSON as widget configuration
+# Using JSON as configuration file
