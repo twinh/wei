@@ -47,7 +47,7 @@ weis = [
     'cache', 'apc', 'arrayCache', 'bicache', 'couchbase', 'dbCache', 'fileCache', 'memcache', 'memcached', 'mongoCache', 'redis',
   # database
     'db',
-    'book/active-record-basic', 'book/active-recrod-query-builder',
+    'book/active-record-basic', 'book/active-record-query-builder',
     'call',
   # validation
     'validate',
