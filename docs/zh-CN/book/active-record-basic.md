@@ -3,22 +3,32 @@ Active Record 基本操作
 
 > Active Record是一种领域模型模式，特点是一个模型类对应关系型数据库中的一个表，而模型类的一个实例对应表中的一行记录。
 >
-> -- <cite>[Active Record](http://zh.wikipedia.org/wiki/Active_Record)</cite>
+> -- <cite>[维基百科 Active Record](http://zh.wikipedia.org/wiki/Active_Record)</cite>
 
 案例
 ====
 
 ### Active Record是什么?
 
-在常规的数据库查询中,我们需要写一个完整的SELECT语句,
+### Active Record与常规数据库查询的区别
+
+在常规的数据库查询中,我们需要写一个完整的语句,
 
 ```php
-$db->fetchAll("SELECT * FROM table WHERE id = 1");
+$record = wei()->db->fetchAll("SELECT * FROM table WHERE id = 1");
+```
+
+在Active Record
+
+```php
+$record = wei()->db('table')->find(1);
 ```
 
 ```php
 
 ```
+
+Active Record
 
 ### 创建一条新记录并保存
 
@@ -49,9 +59,16 @@ $user->save();
 
 ### 删除记录
 
+删除主键为1的用户
+
 ```php
-// 删除id为1的用户
-wei()->db('user')->destroy(array('id' => 1));
+wei()->db('user')->destroy(1);
+```
+
+删除username为"twin"的用户
+
+```php
+wei()->db('user')->destroy(array('username' => 'twin'));
 ```
 
 ### 实现软删除
