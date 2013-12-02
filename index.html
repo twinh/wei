@@ -3299,9 +3299,24 @@
 <!-- book/active-record-basic
   ================================================== -->
   <section id="book-active-record-basic">
-  <div class="page-header"><h1>Active Record</h1></div>
+  <div class="page-header"><h1>Active Record 基本操作</h1></div>
+
+<blockquote>
+<p>Active Record是一种领域模型模式，特点是一个模型类对应关系型数据库中的一个表，而模型类的一个实例对应表中的一行记录。</p>
+
+<p>-- <a href="http://zh.wikipedia.org/wiki/Active_Record" target="_blank">Active Record</a></p>
+</blockquote>
 
 <div class="page-header"><h1>案例</h1></div>
+
+<h3>Active Record是什么?</h3>
+
+<p>在常规的数据库查询中,我们需要写一个完整的SELECT语句,</p>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$db</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">(</span><span class="s2">"SELECT * FROM table WHERE id = 1"</span><span class="p">);</span>
+</code></pre></div>
+
+
 
 <h3>创建一条新记录并保存</h3>
 
