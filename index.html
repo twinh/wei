@@ -3309,24 +3309,6 @@
 
 <div class="page-header"><h1>案例</h1></div>
 
-<h3>Active Record是什么?</h3>
-
-<h3>Active Record与常规数据库查询的区别</h3>
-
-<p>在常规的数据库查询中,我们需要写一个完整的语句,</p>
-
-<div class="highlight"><pre><code class="php"><span class="nv">$record</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">(</span><span class="s2">"SELECT * FROM table WHERE id = 1"</span><span class="p">);</span>
-</code></pre></div>
-
-<p>在Active Record</p>
-
-<div class="highlight"><pre><code class="php"><span class="nv">$record</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'table'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</code></pre></div>
-
-
-
-<p>Active Record</p>
-
 <h3>创建一条新记录并保存</h3>
 
 <div class="highlight"><pre><code class="php"><span class="c1">// 通过`db`方法创建一个新的用户对象</span>
@@ -3381,31 +3363,7 @@
 <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">softDelete</span><span class="p">();</span>
 </code></pre></div>
 
-<h3>回调调用顺序</h3>
-
-<h4>创建新记录并保存</h4>
-
-<ul>
-<li>afterLoad</li>
-<li>beforeSave</li>
-<li>beforeCreate</li>
-<li>afterCreate</li>
-<li>afterSave</li>
-</ul><h4>更新已有记录并保存</h4>
-
-<ul>
-<li>afterLoad</li>
-<li>beforeSave</li>
-<li>beforeUpdate</li>
-<li>afterUpdate</li>
-<li>afterSave</li>
-</ul><h4>删除记录</h4>
-
-<ul>
-<li>afterLoad</li>
-<li>beforeDestroy</li>
-<li>afterDestroy</li>
-</ul><h2>调用方式</h2>
+<h2>调用方式</h2>
 
 <h3>属性</h3>
 
@@ -4389,7 +4347,66 @@
 <!-- book/active-record-callbacks
   ================================================== -->
   <section id="book-active-record-callbacks">
-  
+  <div class="page-header"><h1>Active Record Callbacks</h1></div>
+
+<p>在Record对象从创建,更新到销毁的生命周期中,会触发相应的回调,以便我们更灵活的控制对象数据.</p>
+
+<h2>案例</h2>
+
+<h4>使用<code>beforeSave</code>回调为对象自动加上创建和修改时间</h4>
+
+<div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">\Wei\Record</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeSave</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isNew</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nv">$this</span><span class="p">[</span><span class="s1">'createTime'</span><span class="p">])</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="p">[</span><span class="s1">'createTime'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="p">[</span><span class="s1">'updateTime'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 创建一个新的记录对象并保存</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">);</span>
+<span class="nv">$user</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+
+<span class="c1">// 输出创建时间</span>
+<span class="k">echo</span> <span class="nv">$user</span><span class="p">[</span><span class="s1">'createTime'</span><span class="p">];</span>
+
+<span class="c1">// 输出结果类似</span>
+<span class="s1">'2013-12-12 14:30:00'</span>
+</code></pre></div>
+
+<h4>通过<code>afterLoad</code>和<code>beforeSave</code>控制对象数据格式</h4>
+
+
+
+<h2>回调调用顺序</h2>
+
+<h4>创建新记录并保存</h4>
+
+<ul>
+<li>afterLoad</li>
+<li>beforeSave</li>
+<li>beforeCreate</li>
+<li>afterCreate</li>
+<li>afterSave</li>
+</ul><h4>更新已有记录并保存</h4>
+
+<ul>
+<li>afterLoad</li>
+<li>beforeSave</li>
+<li>beforeUpdate</li>
+<li>afterUpdate</li>
+<li>afterSave</li>
+</ul><h4>删除记录</h4>
+
+<ul>
+<li>afterLoad</li>
+<li>beforeDestroy</li>
+<li>afterDestroy</li>
+</ul>
   </section>
 
 <!-- api/call
