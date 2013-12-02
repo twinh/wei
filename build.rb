@@ -41,12 +41,13 @@ def markdown(text)
 end
 
 weis = [
-  # wei manager
+  # service manager
     'wei',
   # cache
     'cache', 'apc', 'arrayCache', 'bicache', 'couchbase', 'dbCache', 'fileCache', 'memcache', 'memcached', 'mongoCache', 'redis',
   # database
-    'db', 'queryBuilder', 'activeRecord',
+    'db',
+    'book/active-record-basic', 'book/active-recrod-query-builder',
     'call',
   # validation
     'validate',
