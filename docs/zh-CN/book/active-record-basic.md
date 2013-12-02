@@ -1,10 +1,24 @@
-Active Record
-=============
+Active Record 基本操作
+====================
 
-
+> Active Record是一种领域模型模式，特点是一个模型类对应关系型数据库中的一个表，而模型类的一个实例对应表中的一行记录。
+>
+> -- <cite>[Active Record](http://zh.wikipedia.org/wiki/Active_Record)</cite>
 
 案例
 ====
+
+### Active Record是什么?
+
+在常规的数据库查询中,我们需要写一个完整的SELECT语句,
+
+```php
+$db->fetchAll("SELECT * FROM table WHERE id = 1");
+```
+
+```php
+
+```
 
 ### 创建一条新记录并保存
 
