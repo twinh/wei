@@ -87,7 +87,7 @@ class EnvTest extends TestCase
                 )
             ),
             'env' => array(
-                'configDir' => __DIR__ . '/Fixtures/env/%env%.php',
+                'configFile' => __DIR__ . '/Fixtures/env/%env%.php',
                 'server' => array(
                     'SERVER_ADDR' => '1.2.3.4'
                 ),
