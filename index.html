@@ -3296,10 +3296,210 @@
 <p><strong>返回:</strong> <code>float</code></p>
   </section>
 
-<!-- api/queryBuilder
+<!-- book/active-record-basic
   ================================================== -->
-  <section id="queryBuilder">
-  <div class="page-header"><h1>Query Builder</h1></div>
+  <section id="book-active-record-basic">
+  <div class="page-header"><h1>Active Record</h1></div>
+
+<div class="page-header"><h1>案例</h1></div>
+
+<h3>创建一条新记录并保存</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 通过`db`方法创建一个新的用户对象</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">);</span>
+
+<span class="c1">// 设置对象的值</span>
+<span class="nv">$user</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
+<span class="nv">$user</span><span class="p">[</span><span class="s1">'createdAt'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">);</span>
+
+<span class="c1">// 保存到数据库中</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+</code></pre></div>
+
+<h3>查找并更新记录数据</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 查找主键为1的用户,如果存在返回用户对象,不存在返回`false`</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
+
+<span class="c1">// 更新对象的值</span>
+<span class="nv">$user</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
+
+<span class="c1">// 保存到数据库中</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+</code></pre></div>
+
+<h3>删除记录</h3>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 删除id为1的用户</span>
+<span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">destroy</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
+</code></pre></div>
+
+<h3>实现软删除</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">\Wei\Record</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">softDelete</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="p">[</span><span class="s1">'delete'</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="p">[</span><span class="s1">'deleteTime'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">softDelete</span><span class="p">();</span>
+</code></pre></div>
+
+<h3>回调调用顺序</h3>
+
+<h4>创建新记录并保存</h4>
+
+<ul>
+<li>afterLoad</li>
+<li>beforeSave</li>
+<li>beforeCreate</li>
+<li>afterCreate</li>
+<li>afterSave</li>
+</ul><h4>更新已有记录并保存</h4>
+
+<ul>
+<li>afterLoad</li>
+<li>beforeSave</li>
+<li>beforeUpdate</li>
+<li>afterUpdate</li>
+<li>afterSave</li>
+</ul><h4>删除记录</h4>
+
+<ul>
+<li>afterLoad</li>
+<li>beforeDestroy</li>
+<li>afterDestroy</li>
+</ul><h2>调用方式</h2>
+
+<h3>属性</h3>
+
+<h4>Wei\Db $db</h4>
+
+<p>数据库连接对象</p>
+
+<h4>Wei\Wei $wei</h4>
+
+<p>服务管理器</p>
+
+<h3>回调</h3>
+
+<h4>afterLoad($record, $wei)</h4>
+
+<p>加载记录后触发的回调</p>
+
+<h4>beforeSave($record, $wei)</h4>
+
+<p>保存记录前触发的回调</p>
+
+<h4>afterSave($record, $wei)</h4>
+
+<p>保存记录后触发的回调</p>
+
+<h4>beforeCreate($record, $wei)</h4>
+
+<p>插入记录到数据库前触发的回调</p>
+
+<h4>afterCreate($record, $wei)</h4>
+
+<p>插入记录到数据库后触发的回调</p>
+
+<h4>beforeUpdate($record, $wei)</h4>
+
+<p>更新记录到数据库前触发的回调</p>
+
+<h4>afterUpdate($record, $wei)</h4>
+
+<p>更新记录到数据库后触发的回调</p>
+
+<h4>beforeDestroy($record, $wei)</h4>
+
+<p>删除记录前触发的回调</p>
+
+<h4>afterDestroy($record, $wei)</h4>
+
+<p>删除记录后触发的回调</p>
+
+<h3>方法</h3>
+
+<h4>$record[$field]</h4>
+
+<p>获取字段的值</p>
+
+<h4>$record[$field] = 'xxx'</h4>
+
+<p>设置字段的值</p>
+
+<h4>$record-&gt;get($field)</h4>
+
+<p>获取字段的值</p>
+
+<h4>$record-&gt;set($field, $value)</h4>
+
+<p>设置字段的值</p>
+
+<h4>$record-&gt;getTable()</h4>
+
+<p>获取数据表名称</p>
+
+<h4>$record-&gt;setTable($table)</h4>
+
+<p>设置数据表名称</p>
+
+<h4>$record-&gt;setPrimaryKey($primaryKey)</h4>
+
+<p>设置主键字段的名称</p>
+
+<h4>$record-&gt;getPrimaryKey()</h4>
+
+<p>获取主键字段的名称</p>
+
+<h4>$record-&gt;toArray()</h4>
+
+<p>以数组形式返回记录里的数据</p>
+
+<h4>$record-&gt;toJson()</h4>
+
+<p>以JSON字符串形式返回记录里的数据</p>
+
+<h4>$record-&gt;fromArray($data)</h4>
+
+<p>批量设置记录数据</p>
+
+<h4>$record-&gt;save()</h4>
+
+<p>保存记录数据到数据库中</p>
+
+<h4>$record-&gt;destroy()</h4>
+
+<p>从数据库中删除该记录数据</p>
+
+<h4>$record-&gt;remove($field)</h4>
+
+<p>删除指定字段的值</p>
+
+<h4>$record-&gt;isNew()</h4>
+
+<p>判断当前记录是否为新建,并且未保存到数据库</p>
+
+<h4>$record-&gt;isChanged()</h4>
+
+<p>判断当前记录的字段值是否修改过</p>
+
+<h4>$record-&gt;getChangedData($field = null)</h4>
+
+<p>获取指定字段或所有字段修改前的值</p>
+  </section>
+
+<!-- book/active-record-query-builder
+  ================================================== -->
+  <section id="book-active-record-query-builder">
+  <div class="page-header"><h1>Active Record Query Builder</h1></div>
 
 <p>Query Builder是一个简单的SQL查询构建器.</p>
 
@@ -4156,204 +4356,10 @@
 <p><strong>返回:</strong> <code>string</code></p>
   </section>
 
-<!-- api/activeRecord
+<!-- book/active-record-callbacks
   ================================================== -->
-  <section id="activeRecord">
-  <div class="page-header"><h1>Active Record</h1></div>
-
-<div class="page-header"><h1>案例</h1></div>
-
-<h3>创建一条新记录并保存</h3>
-
-<div class="highlight"><pre><code class="php"><span class="c1">// 通过`db`方法创建一个新的用户对象</span>
-<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">);</span>
-
-<span class="c1">// 设置对象的值</span>
-<span class="nv">$user</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
-<span class="nv">$user</span><span class="p">[</span><span class="s1">'createdAt'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">);</span>
-
-<span class="c1">// 保存到数据库中</span>
-<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
-</code></pre></div>
-
-<h3>查找并更新记录数据</h3>
-
-<div class="highlight"><pre><code class="php"><span class="c1">// 查找主键为1的用户,如果存在返回用户对象,不存在返回`false`</span>
-<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
-
-<span class="c1">// 更新对象的值</span>
-<span class="nv">$user</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
-
-<span class="c1">// 保存到数据库中</span>
-<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
-</code></pre></div>
-
-<h3>删除记录</h3>
-
-<div class="highlight"><pre><code class="php"><span class="c1">// 删除id为1的用户</span>
-<span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">destroy</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
-</code></pre></div>
-
-<h3>实现软删除</h3>
-
-<div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">\Wei\Record</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">softDelete</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="p">[</span><span class="s1">'delete'</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
-        <span class="nv">$this</span><span class="p">[</span><span class="s1">'deleteTime'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">);</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-
-<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">softDelete</span><span class="p">();</span>
-</code></pre></div>
-
-<h3>回调调用顺序</h3>
-
-<h4>创建新记录并保存</h4>
-
-<ul>
-<li>afterLoad</li>
-<li>beforeSave</li>
-<li>beforeCreate</li>
-<li>afterCreate</li>
-<li>afterSave</li>
-</ul><h4>更新已有记录并保存</h4>
-
-<ul>
-<li>afterLoad</li>
-<li>beforeSave</li>
-<li>beforeUpdate</li>
-<li>afterUpdate</li>
-<li>afterSave</li>
-</ul><h4>删除记录</h4>
-
-<ul>
-<li>afterLoad</li>
-<li>beforeDestroy</li>
-<li>afterDestroy</li>
-</ul><h2>调用方式</h2>
-
-<h3>属性</h3>
-
-<h4>Wei\Db $db</h4>
-
-<p>数据库连接对象</p>
-
-<h4>Wei\Wei $wei</h4>
-
-<p>服务管理器</p>
-
-<h3>回调</h3>
-
-<h4>afterLoad($record, $wei)</h4>
-
-<p>加载记录后触发的回调</p>
-
-<h4>beforeSave($record, $wei)</h4>
-
-<p>保存记录前触发的回调</p>
-
-<h4>afterSave($record, $wei)</h4>
-
-<p>保存记录后触发的回调</p>
-
-<h4>beforeCreate($record, $wei)</h4>
-
-<p>插入记录到数据库前触发的回调</p>
-
-<h4>afterCreate($record, $wei)</h4>
-
-<p>插入记录到数据库后触发的回调</p>
-
-<h4>beforeUpdate($record, $wei)</h4>
-
-<p>更新记录到数据库前触发的回调</p>
-
-<h4>afterUpdate($record, $wei)</h4>
-
-<p>更新记录到数据库后触发的回调</p>
-
-<h4>beforeDestroy($record, $wei)</h4>
-
-<p>删除记录前触发的回调</p>
-
-<h4>afterDestroy($record, $wei)</h4>
-
-<p>删除记录后触发的回调</p>
-
-<h3>方法</h3>
-
-<h4>$record[$field]</h4>
-
-<p>获取字段的值</p>
-
-<h4>$record[$field] = 'xxx'</h4>
-
-<p>设置字段的值</p>
-
-<h4>$record-&gt;get($field)</h4>
-
-<p>获取字段的值</p>
-
-<h4>$record-&gt;set($field, $value)</h4>
-
-<p>设置字段的值</p>
-
-<h4>$record-&gt;getTable()</h4>
-
-<p>获取数据表名称</p>
-
-<h4>$record-&gt;setTable($table)</h4>
-
-<p>设置数据表名称</p>
-
-<h4>$record-&gt;setPrimaryKey($primaryKey)</h4>
-
-<p>设置主键字段的名称</p>
-
-<h4>$record-&gt;getPrimaryKey()</h4>
-
-<p>获取主键字段的名称</p>
-
-<h4>$record-&gt;toArray()</h4>
-
-<p>以数组形式返回记录里的数据</p>
-
-<h4>$record-&gt;toJson()</h4>
-
-<p>以JSON字符串形式返回记录里的数据</p>
-
-<h4>$record-&gt;fromArray($data)</h4>
-
-<p>批量设置记录数据</p>
-
-<h4>$record-&gt;save()</h4>
-
-<p>保存记录数据到数据库中</p>
-
-<h4>$record-&gt;destroy()</h4>
-
-<p>从数据库中删除该记录数据</p>
-
-<h4>$record-&gt;remove($field)</h4>
-
-<p>删除指定字段的值</p>
-
-<h4>$record-&gt;isNew()</h4>
-
-<p>判断当前记录是否为新建,并且未保存到数据库</p>
-
-<h4>$record-&gt;isChanged()</h4>
-
-<p>判断当前记录的字段值是否修改过</p>
-
-<h4>$record-&gt;getChangedData($field = null)</h4>
-
-<p>获取指定字段或所有字段修改前的值</p>
+  <section id="book-active-record-callbacks">
+  
   </section>
 
 <!-- api/call
