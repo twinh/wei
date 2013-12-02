@@ -43,7 +43,7 @@ API参考目录
 
 * [db](api/db.md) - 数据库操作类,支持基本的增删查改(CRUD)和流行的Active Record模式等数据库操作
   * [Active Record Basic](book/active-record-basic.md) - Active Record基本操作
-  * [Query Builder](book/active-record-query-builder.md) - 简洁高效的SQL查询构建器
+  * [Active Record Query Builder](book/active-record-query-builder.md) - 简洁高效的SQL查询构建器
   * [Active Record Callbacks](book/active-record-callbacks.md) - Active Recrod回调
 
 #### 接口调用
