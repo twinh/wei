@@ -78,35 +78,6 @@ $user->softDelete();
 #### Wei\Wei $wei
 服务管理器
 
-### 回调
-
-#### afterLoad($record, $wei)
-加载记录后触发的回调
-
-#### beforeSave($record, $wei)
-保存记录前触发的回调
-
-#### afterSave($record, $wei)
-保存记录后触发的回调
-
-#### beforeCreate($record, $wei)
-插入记录到数据库前触发的回调
-
-#### afterCreate($record, $wei)
-插入记录到数据库后触发的回调
-
-#### beforeUpdate($record, $wei)
-更新记录到数据库前触发的回调
-
-#### afterUpdate($record, $wei)
-更新记录到数据库后触发的回调
-
-#### beforeDestroy($record, $wei)
-删除记录前触发的回调
-
-#### afterDestroy($record, $wei)
-删除记录后触发的回调
-
 ### 方法
 
 #### $record[$field]
