@@ -8,28 +8,6 @@ Active Record 基本操作
 案例
 ====
 
-### Active Record是什么?
-
-### Active Record与常规数据库查询的区别
-
-在常规的数据库查询中,我们需要写一个完整的语句,
-
-```php
-$record = wei()->db->fetchAll("SELECT * FROM table WHERE id = 1");
-```
-
-在Active Record
-
-```php
-$record = wei()->db('table')->find(1);
-```
-
-```php
-
-```
-
-Active Record
-
 ### 创建一条新记录并保存
 
 ```php
@@ -88,30 +66,6 @@ $user = wei()->db('user')->find(1);
 
 $user->softDelete();
 ```
-
-### 回调调用顺序
-
-#### 创建新记录并保存
-
-* afterLoad
-* beforeSave
-* beforeCreate
-* afterCreate
-* afterSave
-
-#### 更新已有记录并保存
-
-* afterLoad
-* beforeSave
-* beforeUpdate
-* afterUpdate
-* afterSave
-
-#### 删除记录
-
-* afterLoad
-* beforeDestroy
-* afterDestroy
 
 调用方式
 --------
