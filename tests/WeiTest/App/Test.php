@@ -46,12 +46,12 @@ class Test extends \Wei\Base
 
     public function forwardAction()
     {
-        return $this->app->forward('target');
+        return $this->app->forward('forward', 'target');
     }
 
     public function forwardController()
     {
-        return $this->app->forward('target', 'forward');
+        return $this->app->forward('forward');
     }
 
     public function target()

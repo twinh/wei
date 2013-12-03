@@ -308,14 +308,13 @@ class App extends Base
     /**
      * Forwards to the given controller and action
      *
-     * @param string $action            The name of action
-     * @param string|null $controller   The name of controller
+     * @param string $controller    The name of controller
+     * @param string $action        The name of action
      */
-    public function forward($action = 'index', $controller = null)
+    public function forward($controller, $action = 'index')
     {
+        $this->setController($controller);
         $this->setAction($action);
-        $controller && $this->setController($controller);
-
         $this()->preventPreviousDispatch();
     }
 }

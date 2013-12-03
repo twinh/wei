@@ -166,7 +166,7 @@ class AppTest extends TestCase
 
     public function testForwardController()
     {
-        $this->expectOutputString('target');
+        $this->expectOutputString('index');
 
         $this->request->set(array(
             'controller' => 'test',
