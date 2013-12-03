@@ -13340,8 +13340,8 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
     <span class="p">),</span>
     <span class="c1">// 配置env对象的选项</span>
     <span class="s1">'env'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="c1">// 配置环境的目录,%env%会替换成当前的环境名称</span>
-        <span class="s1">'configDir'</span> <span class="o">=&gt;</span> <span class="s1">'config/config_%env%.php'</span>
+        <span class="c1">// 配置文件的路径,%env%会替换成当前的环境名称</span>
+        <span class="s1">'configFile'</span> <span class="o">=&gt;</span> <span class="s1">'config/config_%env%.php'</span>
     <span class="p">)</span>
 <span class="p">));</span>
 </code></pre></div>
@@ -13378,13 +13378,13 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <td>检测环境名称的回调结构</td>
 </tr>
 <tr>
-<td>envMap</td>
+<td>ipMap</td>
 <td>array</td>
 <td>array('127.0.0.1' =&gt; 'dev')</td>
 <td>服务器IP地址与环境名称的对应列表,键名为服务器IP地址,值为环境名称</td>
 </tr>
 <tr>
-<td>configDir</td>
+<td>configFile</td>
 <td>string</td>
 <td>config/config_%env%.php</td>
 <td>配置环境的目录,<code>%env%</code>会替换成当前的环境名称</td>
@@ -13395,7 +13395,7 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <ol>
 <li>如果用户设置了<code>env</code>选项,使用<code>env</code>作为环境名称</li>
 <li>如果用户设置了回调结构<code>detector</code>选项,调用<code>detector</code>获取返回值作为环境名称</li>
-<li>如果当前的服务器IP地址在<code>envMap</code>的键名之中,使用对应的值作为环境名称</li>
+<li>如果当前的服务器IP地址在<code>ipMap</code>的键名之中,使用对应的值作为环境名称</li>
 <li>使用<code>prod</code>作为环境名称</li>
 </ol><h3>方法</h3>
 
@@ -13406,6 +13406,10 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <h4>env-&gt;getEnv()</h4>
 
 <p>获取环境名称</p>
+
+<h4>env-&gt;is($env)</h4>
+
+<p>检查是否为指定的环境名称</p>
 
 <h4>env-&gt;isDev()</h4>
 
