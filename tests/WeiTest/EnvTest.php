@@ -29,7 +29,7 @@ class EnvTest extends TestCase
     public function testsetName()
     {
         $env = $this->wei->newInstance('env', array(
-            'envMap' => array(
+            'ipMap' => array(
                 '127.0.0.1'  => 'dev',
                 '127.0.0.2' => 'beta',
                 '192.168.25.2' => 'prod'
@@ -91,7 +91,7 @@ class EnvTest extends TestCase
                 'server' => array(
                     'SERVER_ADDR' => '1.2.3.4'
                 ),
-                'envMap' => array(
+                'ipMap' => array(
                     '1.2.3.4' => 'test'
                 )
             )

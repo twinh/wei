@@ -13,7 +13,7 @@ namespace Wei;
  *
  * The environment name detect order:
  *
- *     user defined $name > $envDetect callback > $envMap
+ *     user defined $name > $envDetect callback > $ipMap
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
@@ -38,7 +38,7 @@ class Env extends Base
      *
      * @var array
      */
-    protected $envMap = array(
+    protected $ipMap = array(
         '127.0.0.1' => 'dev'
     );
 
@@ -108,8 +108,8 @@ class Env extends Base
         // Executes in web server, like Apache, Nginx
         if (isset($this->server['SERVER_ADDR'])) {
             $ip = $this->server['SERVER_ADDR'];
-            if (isset($this->envMap[$ip])) {
-                $this->name = $this->envMap[$ip];
+            if (isset($this->ipMap[$ip])) {
+                $this->name = $this->ipMap[$ip];
             } else {
                 $this->name = 'prod';
             }
@@ -119,8 +119,8 @@ class Env extends Base
         // Executes in CLI
         if (php_sapi_name() == 'cli' && $ips = $this->getServerIps()) {
             foreach ($ips as $ip) {
-                if (isset($this->envMap[$ip])) {
-                    $this->name = $this->envMap[$ip];
+                if (isset($this->ipMap[$ip])) {
+                    $this->name = $this->ipMap[$ip];
                     return;
                 }
             }
