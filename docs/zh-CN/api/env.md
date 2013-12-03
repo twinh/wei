@@ -69,3 +69,9 @@ configFile | string    | config/config_%env%.php     | 配置环境的目录,`%e
 
 #### env->isProd()
 检查是否为生产(线上)环境
+
+#### env->setName($name)
+设置环境名称
+
+#### env->getName()
+获取当前环境名称
