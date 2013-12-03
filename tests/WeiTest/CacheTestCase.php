@@ -212,4 +212,12 @@ class CacheTestCase extends TestCase
         $this->assertTrue($this->object->remove('key'));
         $this->assertFalse($this->object->remove('key'));
     }
+
+    public function testInvalidExpireTimeForGetWithCallback()
+    {
+        $this->setExpectedException('\InvalidArgumentException', 'Expire time for cache "key" must be numeric, NULL given');
+        $this->object->get('key', null, function(){
+
+        });
+    }
 }

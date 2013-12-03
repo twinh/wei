@@ -74,12 +74,22 @@ abstract class BaseCache extends Base
      * @param mixed $result
      * @param int $expire
      * @param callable $fn
-     * @return mixed
      * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     * @return mixed
      */
     protected function processGetResult($key, $result, $expire, $fn)
     {
-        if (false === $result && null !== $expire) {
+        if (false === $result && ($expire || $fn)) {
+            // Avoid using null as expire second, for null will be convert to 0
+            // which means that store the cache forever, and make it hart to debug.
+            if (!is_numeric($expire) && $fn) {
+                throw new \InvalidArgumentException(sprintf(
+                    'Expire time for cache "%s" must be numeric, %s given',
+                    $key,
+                    is_object($expire) ? get_class($expire) : gettype($expire)
+                ));
+            }
             if (is_callable($expire)) {
                 $fn = $expire;
                 $expire = 0;
