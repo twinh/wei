@@ -216,6 +216,8 @@ class CacheTestCase extends TestCase
     public function testInvalidExpireTimeForGetWithCallback()
     {
         $this->setExpectedException('\InvalidArgumentException', 'Expire time for cache "key" must be numeric, NULL given');
+
+        $this->object->setPrefix('');
         $this->object->get('key', null, function(){
 
         });
