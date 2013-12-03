@@ -17,8 +17,8 @@ $wei = wei(array(
     ),
     // 配置env对象的选项
     'env' => array(
-        // 配置环境的目录,%env%会替换成当前的环境名称
-        'configDir' => 'config/config_%env%.php'
+        // 配置文件的路径,%env%会替换成当前的环境名称
+        'configFile' => 'config/config_%env%.php'
     )
 ));
 ```
@@ -36,18 +36,18 @@ if (wei()->env->isDev()) {
 
 ### 选项
 
-名称      | 类型      | 默认值                      | 说明
-----------|-----------|-----------------------------|------
-env       | string    | 无                          | 当前环境名称
-detector  | callable  | 无                          | 检测环境名称的回调结构
-envMap    | array     | array('127.0.0.1' => 'dev') | 服务器IP地址与环境名称的对应列表,键名为服务器IP地址,值为环境名称
-configDir | string    | config/config_%env%.php     | 配置环境的目录,`%env%`会替换成当前的环境名称
+名称       | 类型      | 默认值                      | 说明
+-----------|-----------|-----------------------------|------
+env        | string    | 无                          | 当前环境名称
+detector   | callable  | 无                          | 检测环境名称的回调结构
+ipMap      | array     | array('127.0.0.1' => 'dev') | 服务器IP地址与环境名称的对应列表,键名为服务器IP地址,值为环境名称
+configFile | string    | config/config_%env%.php     | 配置环境的目录,`%env%`会替换成当前的环境名称
 
 #### 环境名称的检测顺序
 
 1. 如果用户设置了`env`选项,使用`env`作为环境名称
 2. 如果用户设置了回调结构`detector`选项,调用`detector`获取返回值作为环境名称
-3. 如果当前的服务器IP地址在`envMap`的键名之中,使用对应的值作为环境名称
+3. 如果当前的服务器IP地址在`ipMap`的键名之中,使用对应的值作为环境名称
 4. 使用`prod`作为环境名称
 
 ### 方法
@@ -57,6 +57,9 @@ configDir | string    | config/config_%env%.php     | 配置环境的目录,`%en
 
 #### env->getEnv()
 获取环境名称
+
+#### env->is($env)
+检查是否为指定的环境名称
 
 #### env->isDev()
 检查是否为开发环境
