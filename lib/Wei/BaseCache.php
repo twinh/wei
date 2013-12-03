@@ -90,13 +90,16 @@ abstract class BaseCache extends Base
                     is_object($expire) ? get_class($expire) : gettype($expire)
                 ));
             }
-            if (is_callable($expire)) {
-                $fn = $expire;
+
+            // get($key, function(){});
+            if ($expire && !$fn) {
+                $fn     = $expire;
                 $expire = 0;
             }
-            $result = call_user_func($fn, $this->wei, $this);
 
-            $setResult = $this->set($key, $result, $expire);
+            $result     = call_user_func($fn, $this->wei, $this);
+            $setResult  = $this->set($key, $result, $expire);
+
             if (false === $setResult) {
                 throw new \RuntimeException('Fail to store cache from callback', 1020);
             }
