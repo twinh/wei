@@ -203,7 +203,6 @@ class Env extends Base
         if (!is_file($file)) {
             return;
         }
-
         $config = (array)require $file;
         $this->wei->setConfig($config);
     }
