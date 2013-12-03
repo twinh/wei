@@ -13,7 +13,7 @@ namespace Wei;
  *
  * The environment name detect order:
  *
- *     user defined $name > $envDetect callback > $ipMap
+ *     user defined $name > $detector callback > $ipMap
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
