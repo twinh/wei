@@ -13159,7 +13159,9 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h2>案例</h2>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// TODO</span>
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">''</span>
+<span class="p">));</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
@@ -13175,10 +13177,10 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 </tr></thead>
 <tbody>
 <tr>
-<td>namespace</td>
+<td>controllerFormat</td>
 <td>string</td>
-<td>Controller</td>
-<td>控制器所在的命名空间</td>
+<td>Controller\%s</td>
+<td>控制器的类名格式,%s会被替换为类名</td>
 </tr>
 <tr>
 <td>defaultController</td>
