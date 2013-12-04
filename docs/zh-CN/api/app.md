@@ -15,11 +15,11 @@ App
 
 ### 选项
 
-名称                | 类型    | 默认值     | 说明
---------------------|---------|------------|------
-namespace           | string  | Controller | 控制器所在的命名空间
-defaultController   | string  | index      | 默认的控制器名称
-defaultAction       | string  | index      | 默认的行为名称
+名称                | 类型    | 默认值        | 说明
+--------------------|---------|---------------|------
+controllerFormat    | string  | Controller\%s | 控制器的类名格式,%s会被替换为类名
+defaultController   | string  | index         | 默认的控制器名称
+defaultAction       | string  | index         | 默认的行为名称
 
 ### 方法
 
