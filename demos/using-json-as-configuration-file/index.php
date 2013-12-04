@@ -9,7 +9,7 @@ $wei = wei();
 $env = $wei->env();
 
 // Load configuration by environment name
-$file = 'config/config_' . $env . '.json';
+$file = 'config/config-' . $env . '.json';
 
 if (is_file($file)) {
     // Load file content and store it in cache
