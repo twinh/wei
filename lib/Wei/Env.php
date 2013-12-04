@@ -47,7 +47,7 @@ class Env extends Base
      *
      * @var string
      */
-    protected $configFile = 'config/config_%env%.php';
+    protected $configFile = 'config/config-%env%.php';
 
     /**
      * The server and execution environment parameters, equals to $_SERVER on default
