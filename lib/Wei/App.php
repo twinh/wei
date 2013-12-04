@@ -26,11 +26,11 @@ class App extends Base
     const FORWARD = 1302;
 
     /**
-     * The root PHP namespace of application
+     * The format of controller class
      *
      * @var string
      */
-    protected $namespace = 'Controller';
+    protected $controllerClassFormat = 'Controller\%s';
 
     /**
      * The default controller name
@@ -231,7 +231,7 @@ class App extends Base
     public function getControllerClass($controller)
     {
         $controller = implode('\\', array_map('ucfirst', explode('/', $controller)));
-        return $this->namespace . '\\' . $controller;
+        return sprintf($this->controllerClassFormat, $controller);
     }
 
     /**
