@@ -32,10 +32,31 @@ echo $user['createTime'];
 '2013-12-12 14:30:00'
 ```
 
-#### 通过`afterLoad`和`beforeSave`控制对象数据格式
+#### 通过`beforeSave`和`afterSave`使数据表字段支持数组格式数据
 
 ```php
+class Article extends \Wei\Record
+{
+    public function beforeSave()
+    {
+        // 将数组转换为字符串以便保存到数据库
+        $this['images'] = json_encode($this['images']);
+    }
+    
+    public function afterSave()
+    {
+        // 转换回数组以便后续使用
+        $this['images'] = json_decode($this['images'], true);
+    }
+}
 
+$article = wei()->db('article');
+
+$article['title'] = 'This is title';
+$article['content'] = 'This is content';
+$article['images'] = array('...', '...', '...');
+
+$article->save();
 ```
 
 回调调用顺序

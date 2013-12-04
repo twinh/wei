@@ -494,7 +494,7 @@ $column     | string       | 字段的名称,必须存在select语句中
 ---------------|--------------|------
 $queryPartName | string       | 允许的值为`select`,`from`,`join`,`set`,`where`,`groupBy`,`having`,`orderBy`,`limit`或`offset`
 
-#### $qb->resetSqlParts($queryPartNames = null)
+#### $qb->resetSqlParts($names = null)
 重置某一部分或全部SQL字句
 
 **返回:** `Wei\Record`
