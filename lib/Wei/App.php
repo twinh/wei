@@ -30,7 +30,7 @@ class App extends Base
      *
      * @var string
      */
-    protected $controllerClassFormat = 'Controller\%s';
+    protected $controllerFormat = 'Controller\%s';
 
     /**
      * The default controller name
@@ -231,7 +231,7 @@ class App extends Base
     public function getControllerClass($controller)
     {
         $controller = implode('\\', array_map('ucfirst', explode('/', $controller)));
-        return sprintf($this->controllerClassFormat, $controller);
+        return sprintf($this->controllerFormat, $controller);
     }
 
     /**
