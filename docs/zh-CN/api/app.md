@@ -7,7 +7,9 @@ App
 ----
 
 ```php
-// TODO
+wei(array(
+    ''
+));
 ```
 
 调用方式
