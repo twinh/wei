@@ -196,7 +196,7 @@ $qb = wei()->db('member')->where('id = 1')->orderBy('id', 'DESC');
 // 生成SQL: SELECT * FROM member WHERE id = 1 ORDER BY id DESC
 echo $qb->getSql();
 
-$qb->reset('where');
+$qb->resetSqlPart('where');
 
 // 生成SQL: SELECT * FROM member ORDER BY id DESC
 echo $qb->getSql();
@@ -483,7 +483,7 @@ $types      | array        | 参数的类型
 ------------|--------------|------
 $column     | string       | 字段的名称,必须存在select语句中
 
-#### $qb->reset($queryPartName)
+#### $qb->resetSqlPart($name)
 重置某一部分SQL字句
 
 **返回:** `Wei\Record`
@@ -494,7 +494,7 @@ $column     | string       | 字段的名称,必须存在select语句中
 ---------------|--------------|------
 $queryPartName | string       | 允许的值为`select`,`from`,`join`,`set`,`where`,`groupBy`,`having`,`orderBy`,`limit`或`offset`
 
-#### $qb->resetAll($queryPartNames = null)
+#### $qb->resetSqlParts($queryPartNames = null)
 重置某一部分或全部SQL字句
 
 **返回:** `Wei\Record`
