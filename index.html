@@ -4193,7 +4193,7 @@
 <td>允许的值为<code>select</code>,<code>from</code>,<code>join</code>,<code>set</code>,<code>where</code>,<code>groupBy</code>,<code>having</code>,<code>orderBy</code>,<code>limit</code>或<code>offset</code>
 </td>
 </tr></tbody>
-</table><h4>$qb-&gt;resetSqlParts($queryPartNames = null)</h4>
+</table><h4>$qb-&gt;resetSqlParts($names = null)</h4>
 
 <p>重置某一部分或全部SQL字句</p>
 
@@ -4340,9 +4340,31 @@
 <span class="s1">'2013-12-12 14:30:00'</span>
 </code></pre></div>
 
-<h4>通过<code>afterLoad</code>和<code>beforeSave</code>控制对象数据格式</h4>
+<h4>通过<code>beforeSave</code>和<code>afterSave</code>使数据表字段支持数组格式数据</h4>
 
+<div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">Article</span> <span class="k">extends</span> <span class="nx">\Wei\Record</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeSave</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// 将数组转换为字符串以便保存到数据库</span>
+        <span class="nv">$this</span><span class="p">[</span><span class="s1">'images'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$this</span><span class="p">[</span><span class="s1">'images'</span><span class="p">]);</span>
+    <span class="p">}</span>
 
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">afterSave</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// 转换回数组以便后续使用</span>
+        <span class="nv">$this</span><span class="p">[</span><span class="s1">'images'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nv">$this</span><span class="p">[</span><span class="s1">'images'</span><span class="p">],</span> <span class="k">true</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$article</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'article'</span><span class="p">);</span>
+
+<span class="nv">$article</span><span class="p">[</span><span class="s1">'title'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'This is title'</span><span class="p">;</span>
+<span class="nv">$article</span><span class="p">[</span><span class="s1">'content'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'This is content'</span><span class="p">;</span>
+<span class="nv">$article</span><span class="p">[</span><span class="s1">'images'</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'...'</span><span class="p">,</span> <span class="s1">'...'</span><span class="p">,</span> <span class="s1">'...'</span><span class="p">);</span>
+
+<span class="nv">$article</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+</code></pre></div>
 
 <h2>回调调用顺序</h2>
 
