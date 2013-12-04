@@ -13342,7 +13342,7 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
     <span class="c1">// 配置env对象的选项</span>
     <span class="s1">'env'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="c1">// 配置文件的路径,%env%会替换成当前的环境名称</span>
-        <span class="s1">'configFile'</span> <span class="o">=&gt;</span> <span class="s1">'config/config_%env%.php'</span>
+        <span class="s1">'configFile'</span> <span class="o">=&gt;</span> <span class="s1">'config/config-%env%.php'</span>
     <span class="p">)</span>
 <span class="p">));</span>
 </code></pre></div>
@@ -13387,7 +13387,7 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <tr>
 <td>configFile</td>
 <td>string</td>
-<td>config/config_%env%.php</td>
+<td>config/config-%env%.php</td>
 <td>配置环境的目录,<code>%env%</code>会替换成当前的环境名称</td>
 </tr>
 </tbody>
