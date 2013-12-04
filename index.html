@@ -3632,7 +3632,7 @@
 <span class="c1">// 生成SQL: SELECT * FROM member WHERE id = 1 ORDER BY id DESC</span>
 <span class="k">echo</span> <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">getSql</span><span class="p">();</span>
 
-<span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">reset</span><span class="p">(</span><span class="s1">'where'</span><span class="p">);</span>
+<span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">resetSqlPart</span><span class="p">(</span><span class="s1">'where'</span><span class="p">);</span>
 
 <span class="c1">// 生成SQL: SELECT * FROM member ORDER BY id DESC</span>
 <span class="k">echo</span> <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">getSql</span><span class="p">();</span>
@@ -4173,7 +4173,7 @@
 <td>string</td>
 <td>字段的名称,必须存在select语句中</td>
 </tr></tbody>
-</table><h4>$qb-&gt;reset($queryPartName)</h4>
+</table><h4>$qb-&gt;resetSqlPart($name)</h4>
 
 <p>重置某一部分SQL字句</p>
 
@@ -4193,7 +4193,7 @@
 <td>允许的值为<code>select</code>,<code>from</code>,<code>join</code>,<code>set</code>,<code>where</code>,<code>groupBy</code>,<code>having</code>,<code>orderBy</code>,<code>limit</code>或<code>offset</code>
 </td>
 </tr></tbody>
-</table><h4>$qb-&gt;resetAll($queryPartNames = null)</h4>
+</table><h4>$qb-&gt;resetSqlParts($queryPartNames = null)</h4>
 
 <p>重置某一部分或全部SQL字句</p>
 
@@ -13161,7 +13161,7 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h3>创建一个MVC应用</h3>
 
-<p><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../../../demos/new-app" target="_blank">创建一个MVC应用</a></p>
+<p><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../../../demos/new-app" target="_blank">演示:创建一个MVC应用</a></p>
 
 <h2>调用方式</h2>
 
