@@ -113,13 +113,14 @@ $db->fetch();
 $db->fetchAll();
 $db->fetchColumn();
 $db->find();
+$db->findOne();
 $db->findAll();
 $db->execute();
 
-// Using QueryBuilder to build SQL
-$qb = $db->createQueryBuilder();
+// Using query builder to build SQL
+$record = $db('table');
 
-$qb
+$record
     ->select()
     ->addSelect()
     ->update()
@@ -140,14 +141,14 @@ $qb
     ->page()
     ->indexBy();
 
-$qb->find();
-$qb->findAll();
-$qb->fetch();
-$qb->fetchAll();
-$qb->fetchColumn();
-$qb->count();
-$qb->execute();
-$qb->getSql();
+$record->find();
+$record->findAll();
+$record->fetch();
+$record->fetchAll();
+$record->fetchColumn();
+$record->count();
+$record->execute();
+$record->getSql();
 
 // ...
 ```
