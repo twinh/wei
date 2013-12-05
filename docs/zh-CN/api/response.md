@@ -163,8 +163,8 @@ $stateCode    | int       | 200       | HTTP响应的状态码
 #### response->flush($content = null, $status = null)
 关闭缓冲区,让后台脚本实时输出内容到浏览器
 
-#### json($data)
+#### response->json($data)
 输出JSON格式的数据到浏览器
 
-#### jsonp($data)
+#### response->jsonp($data)
 输出JSON或JSONP格式的数据到浏览器
