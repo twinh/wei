@@ -58,6 +58,48 @@ wei()->response->jsonp(array(
 
 ![发送JSON数据](resources/response-jsonp.jpg)
 
+### 等待3秒后跳转到谷歌首页
+
+```php
+wei()->response->redirect('http://www.google.com', 302, array(
+    'redirectWait' => 3
+));
+```
+
+### 直接跳转到谷歌首页
+
+```php
+wei()->response->redirect('http://www.google.com');
+```
+
+### 自定义跳转视图
+
+设置全局跳转视图文件
+
+```php
+wei(array(
+    'response' => array(
+        'redirectView' => 'path/to/redirect.php'
+    )
+));
+```
+
+文件`path/to/redirect.php`
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="<?= $wait ?>;url=<?= $escapedUrl ?>">
+    <title>正在跳转到 <?= $escapedUrl ?></title>
+  </head>
+  <body>
+    <h1>跳转到<a href="<?= $escapedUrl ?>"><?= $escapedUrl ?></a></h1>
+  </body>
+</html>
+```
+
 ### 让浏览器弹出下载对话框,下载指定的文件
 
 ```php
@@ -94,6 +136,8 @@ content        | string    | 无        | HTTP响应内容
 isSent         | bool      | false     | HTTP响应内容是否已发送
 cookieOption   | array     | 见下表    | 设置cookie的相关选项
 downloadOption | array     | 见下表    | 调用`download`方法的相关选项
+redirectView   | string    | 无        | 自定义跳转视图的文件,可以设置该选项以展示更加友好的跳转视图
+redirectWait   | int       | 0         | 等待跳转的秒数,如果wait为0,使用的是HTTP header跳转,如果不为0,因为HTTP header不支持延迟跳转,所以使用的是HTML [Meta refresh](http://en.wikipedia.org/wiki/Meta_refresh)跳转
 beforeSend     | callable  | 无        | 在发送响应前调用的回调
 afterSend      | callable  | 无        | 在发送响应后调用的回调
 
@@ -168,3 +212,6 @@ $stateCode    | int       | 200       | HTTP响应的状态码
 
 #### response->jsonp($data)
 输出JSON或JSONP格式的数据到浏览器
+
+#### response->redirect($url, $statusCode = 302, $options)
+跳转到指定的网址
