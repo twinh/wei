@@ -129,12 +129,12 @@ class Response extends Base
      * @link http://php.net/manual/en/function.setcookie.php
      */
     protected $cookieOption = array(
-        'expires'   => 864000,
-        'path'      => '/',
-        'domain'    => null,
-        'secure'    => false,
-        'httpOnly'  => false,
-        'raw'       => false,
+        'expires' => 864000,
+        'path' => '/',
+        'domain' => null,
+        'secure' => false,
+        'httpOnly' => false,
+        'raw' => false,
     );
 
     /**
@@ -153,9 +153,9 @@ class Response extends Base
      * @link http://stackoverflow.com/questions/1395151/content-dispositionwhat-are-the-differences-between-inline-and-attachment
      */
     protected $downloadOption = array(
-        'type'          => 'application/x-download',
-        'disposition'   => 'attachment',
-        'filename'      => null,
+        'type' => 'application/x-download',
+        'disposition' => 'attachment',
+        'filename' => null,
     );
 
     /**
@@ -203,8 +203,8 @@ class Response extends Base
     /**
      * Send response header and content
      *
-     * @param  string         $content
-     * @param  int            $status
+     * @param  string $content
+     * @param  int $status
      * @return $this
      */
     public function __invoke($content = null, $status = null)
@@ -215,8 +215,8 @@ class Response extends Base
     /**
      * Send response header and content
      *
-     * @param  string         $content
-     * @param  int            $status
+     * @param  string $content
+     * @param  int $status
      * @return $this
      */
     public function send($content = null, $status = null)
@@ -249,7 +249,7 @@ class Response extends Base
     /**
      * Set response content
      *
-     * @param  mixed          $content
+     * @param  mixed $content
      * @return $this
      */
     public function setContent($content)
@@ -282,13 +282,13 @@ class Response extends Base
     /**
      * Set the header status code
      *
-     * @param  int          $code The status code
-     * @param  string|null       $text The status text
+     * @param  int $code The status code
+     * @param  string|null $text The status text
      * @return $this
      */
     public function setStatusCode($code, $text = null)
     {
-        $this->statusCode = (int) $code;
+        $this->statusCode = (int)$code;
 
         if ($text) {
             $this->statusText = $text;
@@ -312,7 +312,7 @@ class Response extends Base
     /**
      * Set the HTTP version
      *
-     * @param  string       $version The HTTP version
+     * @param  string $version The HTTP version
      * @return $this
      */
     public function setVersion($version)
@@ -334,9 +334,9 @@ class Response extends Base
     /**
      * Set the header string
      *
-     * @param  string       $name    The header name
-     * @param  string|array $values  The header values
-     * @param  bool         $replace Whether replace the exists values or not
+     * @param  string $name The header name
+     * @param  string|array $values The header values
+     * @param  bool $replace Whether replace the exists values or not
      * @return $this
      */
     public function setHeader($name, $values = null, $replace = true)
@@ -348,7 +348,7 @@ class Response extends Base
             return $this;
         }
 
-        $values = (array) $values;
+        $values = (array)$values;
         if (true === $replace || !isset($this->headers[$name])) {
             $this->headers[$name] = $values;
         } else {
@@ -361,9 +361,9 @@ class Response extends Base
     /**
      * Get the header string
      *
-     * @param  string $name    The header name
-     * @param  mixed  $default The default value
-     * @param  bool   $first   Return the first element or the whole header values
+     * @param  string $name The header name
+     * @param  mixed $default The default value
+     * @param  bool $first Return the first element or the whole header values
      * @return mixed
      */
     public function getHeader($name, $default = null, $first = true)
@@ -456,7 +456,7 @@ class Response extends Base
      * Get response cookie
      *
      * @param  string $key The name of cookie
-     * @param  mixed  $default The default value when cookie not exists
+     * @param  mixed $default The default value when cookie not exists
      * @return mixed
      */
     public function getCookie($key, $default = null)
@@ -467,12 +467,12 @@ class Response extends Base
     /**
      * Set response cookie
      *
-     * @param  string       $key     The name of cookie
-     * @param  mixed        $value   The value of cookie
-     * @param  array        $options The options of cookie
+     * @param  string $key The name of cookie
+     * @param  mixed $value The value of cookie
+     * @param  array $options The options of cookie
      * @return $this
      */
-    public function setCookie($key, $value , array $options = array())
+    public function setCookie($key, $value, array $options = array())
     {
         $this->cookies[$key] = array('value' => $value) + $options;
         return $this;
@@ -498,7 +498,8 @@ class Response extends Base
     {
         $time = time();
         // Anonymous function for unit test
-        $setCookie = function(){};
+        $setCookie = function () {
+        };
         foreach ($this->cookies as $name => $o) {
             $o += $this->cookieOption;
             $fn = $this->unitTest ? $setCookie : ($o['raw'] ? 'setrawcookie' : 'setcookie');
@@ -515,8 +516,8 @@ class Response extends Base
     public function __toString()
     {
         return sprintf('HTTP/%s %d %s', $this->version, $this->statusCode, $this->statusText) . "\r\n"
-            . $this->getHeaderString() . "\r\n"
-            . $this->content;
+        . $this->getHeaderString() . "\r\n"
+        . $this->content;
     }
 
     /**
@@ -548,12 +549,12 @@ class Response extends Base
     /**
      * Set response sent status
      *
-     * @param  bool           $bool
+     * @param  bool $bool
      * @return $this
      */
     public function setSentStatus($bool)
     {
-        $this->isSent = (bool) $bool;
+        $this->isSent = (bool)$bool;
         return $this;
     }
 
@@ -577,8 +578,8 @@ class Response extends Base
      * Send a redirect response
      *
      * @param string $url The url redirect to
-     * @param int $statusCode The resposne status code
-     * @param  array $options The redirect wei options
+     * @param int $statusCode The response status code
+     * @param array $options The redirect wei options
      * @return $this
      */
     public function redirect($url = null, $statusCode = 302, $options = array())
@@ -614,7 +615,7 @@ class Response extends Base
 </html>', $wait, $escapedUrl);
         }
 
-        return $this->send($content, $this->statusCode);
+        return $this->send($content);
     }
 
     /**
@@ -709,7 +710,7 @@ class Response extends Base
             throw new \RuntimeException('File not found', 404);
         }
 
-        $name = $o['filename'] ?: basename($file);
+        $name = $o['filename'] ? : basename($file);
         $name = rawurlencode($name);
 
         // For IE
@@ -721,14 +722,14 @@ class Response extends Base
         }
 
         $this->setHeader(array(
-            'Content-Description'       => 'File Transfer',
-            'Content-Type'              => $o['type'],
-            'Content-Disposition'       => $o['disposition'] . ';filename' . $filename,
+            'Content-Description' => 'File Transfer',
+            'Content-Type' => $o['type'],
+            'Content-Disposition' => $o['disposition'] . ';filename' . $filename,
             'Content-Transfer-Encoding' => 'binary',
-            'Expires'                   => '0',
-            'Cache-Control'             => 'must-revalidate',
-            'Pragma'                    => 'public',
-            'Content-Length'            => filesize($file),
+            'Expires' => '0',
+            'Cache-Control' => 'must-revalidate',
+            'Pragma' => 'public',
+            'Content-Length' => filesize($file),
         ));
 
         // Send headers
