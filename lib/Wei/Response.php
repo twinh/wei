@@ -187,23 +187,6 @@ class Response extends Base
     protected $redirectWait = 0;
 
     /**
-     * The default view content
-     *
-     * @var string
-     */
-    protected $redirectHtml = '<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="refresh" content="%d;url=%2$s">
-    <title>Redirect to %s</title>
-  </head>
-  <body>
-    <h1>Redirecting to <a href="%2$s">%2$s</a></h1>
-  </body>
-</html>';
-
-    /**
      * The callback executes *before* send response
      *
      * @var callable
@@ -593,12 +576,14 @@ class Response extends Base
     /**
      * Send a redirect response
      *
-     * @param  string         $url     The url redirect to
-     * @param  array          $options The redirect wei options
+     * @param string $url The url redirect to
+     * @param int $statusCode The resposne status code
+     * @param  array $options The redirect wei options
      * @return $this
      */
-    public function redirect($url = null, $options = array())
+    public function redirect($url = null, $statusCode = 302, $options = array())
     {
+        $this->setStatusCode($statusCode);
         $this->setOption($options);
 
         // The variables for custom redirect view
@@ -616,7 +601,17 @@ class Response extends Base
             require $this->redirectView;
             $content = ob_get_clean();
         } else {
-            $content = sprintf($this->redirectHtml, $wait, $escapedUrl);
+            $content = sprintf('<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="%d;url=%2$s">
+    <title>Redirect to %s</title>
+  </head>
+  <body>
+    <h1>Redirecting to <a href="%2$s">%2$s</a></h1>
+  </body>
+</html>', $wait, $escapedUrl);
         }
 
         return $this->send($content, $this->statusCode);

@@ -197,7 +197,7 @@ namespace WeiTest
         {
             $this->expectOutputRegex('/content=\"5;url=http:\/\/www\.google\.com/');
 
-            $this->response->redirect('http://www.google.com', array('redirectWait' => 5));
+            $this->response->redirect('http://www.google.com', 302, array('redirectWait' => 5));
         }
     }
 }
