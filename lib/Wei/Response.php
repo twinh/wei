@@ -21,7 +21,7 @@ class Response extends Base
      *
      * @var array
      */
-    protected $codeTexts = array(
+    protected $statusTexts = array(
         // Successful Requests
         200 => 'OK',
         201 => 'Created',
@@ -309,8 +309,8 @@ class Response extends Base
 
         if ($text) {
             $this->statusText = $text;
-        } elseif (isset($this->codeTexts[$code])) {
-            $this->statusText = $this->codeTexts[$code];
+        } elseif (isset($this->statusTexts[$code])) {
+            $this->statusText = $this->statusTexts[$code];
         }
 
         return $this;
