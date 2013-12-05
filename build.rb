@@ -70,7 +70,7 @@ weis = [
   # request
     'request', 'cookie', 'session', 'ua', 'upload',
   # response
-    'response', 'redirect',
+    'response',
   # view
     'asset', 'escape', 'view',
   # app

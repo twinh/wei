@@ -12455,6 +12455,44 @@
 
 <p><img src="resources/response-jsonp.jpg" alt="发送JSON数据"></p>
 
+<h3>等待3秒后跳转到谷歌首页</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">'http://www.google.com'</span><span class="p">,</span> <span class="mi">302</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'redirectWait'</span> <span class="o">=&gt;</span> <span class="mi">3</span>
+<span class="p">));</span>
+</code></pre></div>
+
+<h3>直接跳转到谷歌首页</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">'http://www.google.com'</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>自定义跳转视图</h3>
+
+<p>设置全局跳转视图文件</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'response'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'redirectView'</span> <span class="o">=&gt;</span> <span class="s1">'path/to/redirect.php'</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</code></pre></div>
+
+<p>文件<code>path/to/redirect.php</code></p>
+
+<div class="highlight"><pre><code class="php"><span class="o">&lt;!</span><span class="nx">DOCTYPE</span> <span class="nx">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">charset</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">http</span><span class="o">-</span><span class="nx">equiv</span><span class="o">=</span><span class="s2">"refresh"</span> <span class="nx">content</span><span class="o">=</span><span class="s2">"&lt;?= </span><span class="si">$wait</span><span class="s2"> ?&gt;;url=&lt;?= </span><span class="si">$escapedUrl</span><span class="s2"> ?&gt;"</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="err">正在跳转到</span> <span class="o">&lt;?=</span> <span class="nv">$escapedUrl</span> <span class="cp">?&gt;</span><span class="x">&lt;/title&gt;</span>
+<span class="x">  &lt;/head&gt;</span>
+<span class="x">  &lt;body&gt;</span>
+<span class="x">    &lt;h1&gt;跳转到&lt;a href="</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$escapedUrl</span> <span class="cp">?&gt;</span><span class="x">"&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$escapedUrl</span> <span class="cp">?&gt;</span><span class="x">&lt;/a&gt;&lt;/h1&gt;</span>
+<span class="x">  &lt;/body&gt;</span>
+<span class="x">&lt;/html&gt;</span>
+</code></pre></div>
+
 <h3>让浏览器弹出下载对话框,下载指定的文件</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">download</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">);</span>
@@ -12528,6 +12566,18 @@
 <td>array</td>
 <td>见下表</td>
 <td>调用<code>download</code>方法的相关选项</td>
+</tr>
+<tr>
+<td>redirectView</td>
+<td>string</td>
+<td>无</td>
+<td>自定义跳转视图的文件,可以设置该选项以展示更加友好的跳转视图</td>
+</tr>
+<tr>
+<td>redirectWait</td>
+<td>int</td>
+<td>0</td>
+<td>等待跳转的秒数,如果wait为0,使用的是HTTP header跳转,如果不为0,因为HTTP header不支持延迟跳转,所以使用的是HTML <a href="http://en.wikipedia.org/wiki/Meta_refresh" target="_blank">Meta refresh</a>跳转</td>
 </tr>
 <tr>
 <td>beforeSend</td>
@@ -12717,105 +12767,10 @@
 <h4>response-&gt;jsonp($data)</h4>
 
 <p>输出JSON或JSONP格式的数据到浏览器</p>
-  </section>
 
-<!-- api/redirect
-  ================================================== -->
-  <section id="redirect">
-  <div class="page-header"><h1>Redirect</h1></div>
+<h4>response-&gt;redirect($url, $statusCode = 302, $options)</h4>
 
-<p>跳转到指定地址</p>
-
-<h2>案例</h2>
-
-<h3>等待3秒后跳转到谷歌首页</h3>
-
-<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">'http://www.google.com'</span><span class="p">,</span> <span class="mi">302</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s1">'wait'</span> <span class="o">=&gt;</span> <span class="mi">3</span>
-<span class="p">));</span>
-</code></pre></div>
-
-<h3>直接跳转到谷歌首页</h3>
-
-<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">'http://www.google.com'</span><span class="p">);</span>
-</code></pre></div>
-
-<h3>自定义跳转视图</h3>
-
-<p>设置全局跳转视图文件</p>
-
-<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'redirect'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'view'</span> <span class="o">=&gt;</span> <span class="s1">'path/to/redirect.php'</span>
-    <span class="p">)</span>
-<span class="p">));</span>
-</code></pre></div>
-
-<p>文件<code>path/to/redirect.php</code></p>
-
-<div class="highlight"><pre><code class="php"><span class="o">&lt;!</span><span class="nx">DOCTYPE</span> <span class="nx">html</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
-  <span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">charset</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">http</span><span class="o">-</span><span class="nx">equiv</span><span class="o">=</span><span class="s2">"refresh"</span> <span class="nx">content</span><span class="o">=</span><span class="s2">"&lt;?= </span><span class="si">$wait</span><span class="s2"> ?&gt;;url=&lt;?= </span><span class="si">$escapedUrl</span><span class="s2"> ?&gt;"</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="err">正在跳转到</span> <span class="o">&lt;?=</span> <span class="nv">$escapedUrl</span> <span class="cp">?&gt;</span><span class="x">&lt;/title&gt;</span>
-<span class="x">  &lt;/head&gt;</span>
-<span class="x">  &lt;body&gt;</span>
-<span class="x">    &lt;h1&gt;跳转到&lt;a href="</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$escapedUrl</span> <span class="cp">?&gt;</span><span class="x">"&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$escapedUrl</span> <span class="cp">?&gt;</span><span class="x">&lt;/a&gt;&lt;/h1&gt;</span>
-<span class="x">  &lt;/body&gt;</span>
-<span class="x">&lt;/html&gt;</span>
-</code></pre></div>
-
-<blockquote>
-<h4>注意</h4>
-
-<p>使用<code>view</code>选项自定义视图时,需要自行处理跳转逻辑</p>
-</blockquote>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>wait</td>
-<td>int</td>
-<td>0</td>
-<td>等待跳转的秒数,如果wait为0,使用的是HTTP header跳转,如果不为0,因为HTTP header不支持延迟跳转,所以使用的是HTML <a href="http://en.wikipedia.org/wiki/Meta_refresh" target="_blank">Meta refresh</a>跳转</td>
-</tr>
-<tr>
-<td>statusCode</td>
-<td>int</td>
-<td>302</td>
-<td>跳转的HTTP状态码</td>
-</tr>
-<tr>
-<td>view</td>
-<td>string</td>
-<td>无</td>
-<td>自定义跳转视图的文件,可以设置该选项以展示更加友好的跳转视图</td>
-</tr>
-</tbody>
-</table><h3>方法</h3>
-
-<h4>redirect($url, $status = 302, $options = array())</h4>
-
-<p>跳转到指定地址</p>
-
-<h4>redirect-&gt;setWait($wait)</h4>
-
-<p>设置默认的等待时间</p>
-
-<h4>redirect-&gt;setView($view)</h4>
-
-<p>设置默认的跳转视图</p>
+<p>跳转到指定的网址</p>
   </section>
 
 <!-- api/asset
