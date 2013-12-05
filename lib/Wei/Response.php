@@ -173,6 +173,37 @@ class Response extends Base
     protected $unitTest = false;
 
     /**
+     * The custom redirect view file
+     *
+     * @var string
+     */
+    protected $redirectView;
+
+    /**
+     * The seconds to wait before redirect
+     *
+     * @var int
+     */
+    protected $redirectWait = 0;
+
+    /**
+     * The default view content
+     *
+     * @var string
+     */
+    protected $redirectHtml = '<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="%d;url=%2$s">
+    <title>Redirect to %s</title>
+  </head>
+  <body>
+    <h1>Redirecting to <a href="%2$s">%2$s</a></h1>
+  </body>
+</html>';
+
+    /**
      * The callback executes *before* send response
      *
      * @var callable
@@ -541,6 +572,54 @@ class Response extends Base
     {
         $this->isSent = (bool) $bool;
         return $this;
+    }
+
+    /**
+     * Set redirect view file
+     *
+     * @param string $redirectView The view file
+     * @return $this
+     * @throws \RuntimeException When view file not found
+     */
+    public function setRedirectView($redirectView)
+    {
+        if (!is_file($redirectView)) {
+            throw new \RuntimeException(sprintf('Redirect view file "%s" not found', $redirectView));
+        }
+        $this->redirectView = $redirectView;
+        return $this;
+    }
+
+    /**
+     * Send a redirect response
+     *
+     * @param  string         $url     The url redirect to
+     * @param  array          $options The redirect wei options
+     * @return $this
+     */
+    public function redirect($url = null, $options = array())
+    {
+        $this->setOption($options);
+
+        // The variables for custom redirect view
+        $escapedUrl = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
+        $wait = (int)$this->redirectWait;
+
+        // Location header does not support delay
+        if (0 === $wait) {
+            $this->setHeader('Location', $url);
+        }
+
+        // Prepare response content
+        if ($this->redirectView) {
+            ob_start();
+            require $this->redirectView;
+            $content = ob_get_clean();
+        } else {
+            $content = sprintf($this->redirectHtml, $wait, $escapedUrl);
+        }
+
+        return $this->send($content, $this->statusCode);
     }
 
     /**

@@ -167,6 +167,38 @@ namespace WeiTest
 
             $this->assertEquals('application/json', $this->object->getHeader('Content-Type'));
         }
+
+        public function testCustomView()
+        {
+            $this->expectOutputString('redirect');
+
+            $this->response->setRedirectView(__DIR__ . '/Fixtures/redirect.php');
+
+            $this->response->redirect();
+        }
+        /**
+         * @expectedException \RuntimeException
+         */
+        public function testViewNotFound()
+        {
+            $this->response->setRedirectView('not found');
+        }
+
+        public function testRedirectByHeader()
+        {
+            $this->expectOutputRegex('/http:\/\/www\.google\.com/');
+
+            $this->response->redirect('http://www.google.com');
+
+            $this->assertEquals('http://www.google.com', $this->response->getHeader('Location'));
+        }
+
+        public function testWait()
+        {
+            $this->expectOutputRegex('/content=\"5;url=http:\/\/www\.google\.com/');
+
+            $this->response->redirect('http://www.google.com', array('redirectWait' => 5));
+        }
     }
 }
 
