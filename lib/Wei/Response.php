@@ -607,7 +607,7 @@ class Response extends Base
   <head>
     <meta charset="utf-8">
     <meta http-equiv="refresh" content="%d;url=%2$s">
-    <title>Redirect to %s</title>
+    <title>Redirecting to %s</title>
   </head>
   <body>
     <h1>Redirecting to <a href="%2$s">%2$s</a></h1>
