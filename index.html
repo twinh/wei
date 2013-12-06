@@ -328,7 +328,9 @@
 
 <h3>获取对象管理器对象</h3>
 
-
+<div class="highlight"><pre><code class="php"><span class="cm">/* @var $wei \Wei\Wei */</span>
+<span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">();</span>
+</code></pre></div>
 
 <h3>设置对象配置</h3>
 
@@ -4425,6 +4427,39 @@
 <h4>afterDestroy($record, $wei)</h4>
 
 <p>删除记录后触发的回调</p>
+  </section>
+
+<!-- book/active-record-status
+  ================================================== -->
+  <section id="book-active-record-status">
+  <div class="page-header"><h1>Active Record Status</h1></div>
+
+<p>在Record对象数据更新,保存时,内部状态会跟随改变.</p>
+
+<h2>案例</h2>
+
+<div class="highlight"><pre><code class="php"><span class="nx">TODO</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>方法</h3>
+
+<h4>$record-&gt;isNew()</h4>
+
+<p>判断当前记录是否为新建,并且未保存到数据库</p>
+
+<h4>$record-&gt;isChanged($field = null)</h4>
+
+<p>判断当前记录,或指定的字段值是否修改过</p>
+
+<h4>$record-&gt;getChangedData($field = null)</h4>
+
+<p>获取当前记录所有,或指定字段被修改过的值</p>
+
+<h4>$record-&gt;isDestroyed()</h4>
+
+<p>判断当前记录是否已被删除</p>
   </section>
 
 <!-- api/call
