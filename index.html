@@ -4315,15 +4315,17 @@
 
 <h2>案例</h2>
 
-<h4>使用<code>beforeSave</code>回调为对象自动加上创建和修改时间</h4>
+<h4>使用<code>beforeSave</code>和<code>beforeSave</code>回调为对象自动加上创建和修改时间</h4>
 
 <div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">\Wei\Record</span>
 <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeCreate</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="p">[</span><span class="s1">'createTime'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">);</span>
+    <span class="p">}</span>
+
     <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeSave</span><span class="p">()</span>
     <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isNew</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nv">$this</span><span class="p">[</span><span class="s1">'createTime'</span><span class="p">])</span> <span class="p">{</span>
-            <span class="nv">$this</span><span class="p">[</span><span class="s1">'createTime'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">);</span>
-        <span class="p">}</span>
         <span class="nv">$this</span><span class="p">[</span><span class="s1">'updateTime'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
