@@ -6,16 +6,18 @@ Active Record Callbacks
 案例
 ----
 
-#### 使用`beforeSave`回调为对象自动加上创建和修改时间
+#### 使用`beforeSave`和`beforeSave`回调为对象自动加上创建和修改时间
 
 ```php
 class User extends \Wei\Record
 {
+    public function beforeCreate()
+    {
+        $this['createTime'] = date('Y-m-d H:i:s');
+    }
+
     public function beforeSave()
     {
-        if ($this->isNew && !$this['createTime']) {
-            $this['createTime'] = date('Y-m-d H:i:s');
-        }
         $this['updateTime'] = date('Y-m-d H:i:s');
     }
 }
