@@ -3,6 +3,58 @@ Changelog
 
 ## 0.9.8 (WIP)
 
+## 0.9.8-RC1 (2013-12-06)
+
+* Simplifed isRecordExists validator logic
+* Renamed namespace to `Wei`
+* Merged json service into response service
+* Renamed record class __get and __set methods to get and set
+* Added lock service
+* Addded counter serviced, with incr, decr, get, set & exists methods
+* Added foreach support for record query builder
+* Added request and response service as parameters for application action method
+* Added desc and asc methods for query builder
+* Fixed primary key value error when primary key value is set
+* Renamed cache service "keyPrefix" option to "prefix"
+* Simplified all cache services, removed all "doXXX" methods
+* Added example for logger service to ouput in browser
+* Removed %channel% from default log format
+* Fixed startWith and endsWith valdiators test error when "findMe" option is array and contains special regular expression characters
+* Added original error message for mkdir error
+* Removed arr service
+* Added IteratorAggregate support for record class
+* Added countable for record class
+* Merged query builder, collection class into record class
+* Updated record class to returns false when no data found for find method
+* Added toArray support for collection record
+* Removed getDb method in record class, receive db service on demand
+* Added findOne method for record class, when record not found, findOne method throw a 404 exception
+* Renamed getLastSql to getLastQuery, be consistent with getQueries
+* Speed up findOrCreate method, created only one record object
+* Added PHP memory cache for table field names
+* Added isPositiveInteger validator
+* Added isNaturalNumber validator
+* Renamed db service findOrCreate method to findOrInit
+* Added setMessage for callback validator
+* Fixed arrayCache service remove method always return true issuse
+* Fixed mongoCache service remove non-exits cache return true issuse
+* Removed monolog serivce
+* Added isDestroyed method for recrod class
+* Added setBaseUrl & getBaseUrl methods for asset service
+* Added isPage for request service
+* Added magic set method for service container
+* Added getServices method for service container
+* Check if record is destroy before save
+* Uses "info" level for normal HTTP exceptions
+* Make sure app service action method must not starts with "_" and case sensitive
+* Make sure app service handleResponse return a response service
+* Renamed env service "env" option to "name"
+* Renamed env serivce "configDir" option to "configFile"
+* Renamed env serivce "envMap" option to "ipMap"
+* Added exception for cache service when providered a invalid expiore time
+* Renamed app service namesapce option to controllerFormat
+* Merged redirect into resposne service
+
 ## 0.9.7 (2013-10-31)
 
 * Added field parameter for record class getModifiedData to receive the old value
