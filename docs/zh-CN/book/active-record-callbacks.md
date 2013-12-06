@@ -32,6 +32,21 @@ echo $user['createTime'];
 '2013-12-12 14:30:00'
 ```
 
+#### 通过`beforeCreate`回调,使用UUID作为主键的值
+
+```php
+class User extends \Wei\Record
+{
+    public function beforeCreate()
+    {
+        if (!$this['id']) {
+            // 调用uuid服务生成一个新的uuid
+            $this['id'] = wei()->uuid();
+        }
+    }
+}
+```
+
 #### 通过`beforeSave`和`afterSave`使数据表字段支持数组格式数据
 
 ```php
