@@ -4340,6 +4340,20 @@
 <span class="s1">'2013-12-12 14:30:00'</span>
 </code></pre></div>
 
+<h4>通过<code>beforeCreate</code>回调,使用UUID作为主键的值</h4>
+
+<div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">\Wei\Record</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeCreate</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="p">[</span><span class="s1">'id'</span><span class="p">])</span> <span class="p">{</span>
+            <span class="c1">// 调用uuid服务生成一个新的uuid</span>
+            <span class="nv">$this</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">uuid</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
 <h4>通过<code>beforeSave</code>和<code>afterSave</code>使数据表字段支持数组格式数据</h4>
 
 <div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">Article</span> <span class="k">extends</span> <span class="nx">\Wei\Record</span>
