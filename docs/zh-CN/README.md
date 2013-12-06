@@ -163,7 +163,6 @@ API参考目录
 #### HTTP响应
 
 * [response](api/response.md) - 发送HTTP响应头和内容
-* [redirect](api/redirect.md) - 跳转到指定地址
 
 #### 视图
 

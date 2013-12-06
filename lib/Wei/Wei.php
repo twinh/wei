@@ -64,8 +64,6 @@ namespace Wei
      * HTTP Response
      * @property Response       $response A object that handles the HTTP response data
      * @method   \Wei\Response  response($content = null, $status = null) Send response header and content
-     * @property Redirect       $redirect A object that send a redirect response
-     * @method   \Wei\Redirect  redirect($url = null, array $options = array()) Send a redirect response
      *
      * View
      * @property View       $view A object that use to render PHP template
