@@ -23,7 +23,7 @@ API参考目录
 
 #### 对象管理器
 
-* [wei](api/wei.md) - 对象管理器,用于获取各种服务对象,设置配置等
+* [wei](api/wei.md) - 对象管理器,用于获取各种服务对象,获取和设置配置等
 
 #### 缓存
 
@@ -43,7 +43,7 @@ API参考目录
 
 * [db](api/db.md) - 数据库操作类,支持基本的增删查改(CRUD)和流行的Active Record模式等数据库操作
   * [Active Record Basic](book/active-record-basic.md) - Active Record基本操作
-  * [Active Record Query Builder](book/active-record-query-builder.md) - Active Record简洁高效的SQL查询构建器
+  * [Active Record Query Builder](book/active-record-query-builder.md) - Active Record SQL查询构建器
   * [Active Record Callbacks](book/active-record-callbacks.md) - Active Recrod回调
   * [Active Record Status](book/active-record-status.md) - Active Record对象状态
 
@@ -152,17 +152,15 @@ API参考目录
 * [isColor](api/isColor.md) - 检查数据是否为有效的十六进制颜色
 * [isPassword](api/isPassword.md) - 检查组成密码的字符是否符合要求格式
 
-#### HTTP请求
+#### 应用
 
+* [app](api/app.md) - 创建并运行一个MVC应用
 * [request](api/request.md) - 管理HTTP请求数据,包括$_REQUEST,$_GET,$_POST和$_SERVER)
+* [response](api/response.md) - 发送HTTP响应头和内容
 * [cookie](api/cookie.md) - 写入,读取和删除cookie($_COOKIE)
 * [session](api/session.md) - 获取一项会话($_SESSION)的值
-* [ua](api/ua.md) - 检测客户端浏览器,操作系统和设备是否为指定的名称和版本
-* [upload](api/upload.md) - 保存客户端上传的文件到指定目录
-
-#### HTTP响应
-
-* [response](api/response.md) - 发送HTTP响应头和内容
+* [env](api/env.md) - 环境检测及根据不同环境加载不同的配置文件
+* [logger](api/logger.md) - 记录日志
 
 #### 视图
 
@@ -170,19 +168,15 @@ API参考目录
 * [asset](api/asset.md) - 生成带版本号的资源(CSS, JS, 图片等素材文件)URL地址,解决浏览器缓存资源文件的问题
 * [escape](api/escape.md) - 转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义
 
-#### 应用
-
-* [app](api/app.md) - 创建并运行一个MVC应用
-
 #### 其他
 
 * [config](api/config.md) - 配置信息管理
-* [env](api/env.md) - 环境检测及根据不同环境加载不同的配置文件
 * [error](api/error.md) - 提供简洁友好的错误界面
 * [gravatar](api/gravatar.md) - 根据邮箱地址生成自定义大小的Gravatar头像
 * [lock](api/lock.md) - 锁服务,用于对请求,资源进行加锁,防止重复操作
-* [logger](api/logger.md) - 记录日志
 * [password](api/password.md) - 安全简单的密码加密,校验服务
+* [ua](api/ua.md) - 检测客户端浏览器,操作系统和设备是否为指定的名称和版本
+* [upload](api/upload.md) - 保存客户端上传的文件到指定目录
 * [pinyin](api/pinyin.md) - 将中文转换为拼音字母
 * [uuid](api/uuid.md) - 生成一个随机的UUID
 
