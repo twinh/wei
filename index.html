@@ -442,12 +442,12 @@
 </code></pre></div>
 </li>
 <li>
-<p>设置<code>aliases</code>选项,指定您定义的类的对象名称</p>
+<p>设置<code>aliases</code>选项,指定您的类所作为的服务名称</p>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'wei'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-            <span class="s1">'对象名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span><span class="p">,</span>
+            <span class="s1">'服务名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span><span class="p">,</span>
             <span class="s1">'app'</span> <span class="o">=&gt;</span> <span class="s1">'MyProject\Application'</span>
         <span class="p">)</span>
     <span class="p">)</span>
@@ -457,7 +457,7 @@
 <li>
 <p>调用您的对象</p>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 获取自定义对象</span>
+<div class="highlight"><pre><code class="php"><span class="c1">// 获取自定义服务</span>
 <span class="cm">/* @var $app \MyProject\Application */</span>
 <span class="nv">$app</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">app</span><span class="p">;</span>
 
@@ -485,8 +485,7 @@
 <span class="p">));</span>
 </code></pre></div>
 
-<h3>区分<code>aliases</code>和<code>providers</code>
-</h3>
+<h3>区分<code>aliases</code>和<code>providers</code>选项</h3>
 
 <ol>
 <li>
