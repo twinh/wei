@@ -328,9 +328,7 @@
 
 <h3>获取对象管理器对象</h3>
 
-<div class="highlight"><pre><code class="php"><span class="cm">/* @var $wei \Wei\Wei */</span>
-<span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">();</span>
-</code></pre></div>
+
 
 <h3>设置对象配置</h3>
 
@@ -13188,6 +13186,25 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <h3>创建一个MVC应用</h3>
 
 <p><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../../../demos/new-app" target="_blank">演示:创建一个MVC应用</a></p>
+
+<h3>提示"action method "%s" not found in controller "%s" (class "%s")"的解决方法</h3>
+
+<ol>
+<li>检查控制器类是否存在与action名称一样的方法</li>
+<li>检查方法名称是否为<code>public</code>
+</li>
+<li><strong>检查方法名称和action名称的大小写是否一致</strong></li>
+<li>检查方法名称是否不以下划线"_"开头</li>
+</ol><div class="highlight"><pre><code class="php"><span class="nx">namesapce</span> <span class="nx">Controller</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Index</span> <span class="nx">extend</span> <span class="nx">\Wei\Base</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <h2>调用方式</h2>
 
