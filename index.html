@@ -13189,7 +13189,14 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <p><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../../../demos/new-app" target="_blank">演示:创建一个MVC应用</a></p>
 
-<h3>提示"action method "%s" not found in controller "%s" (class "%s")"的解决方法</h3>
+<h3>提示"controller "xxx" (class "yyy") not found"的解决的方法</h3>
+
+<ol>
+<li>检查类"yyy"是否存在</li>
+<li>检查类是否设置了自动加载</li>
+</ol><p>链接: <a href="#wei">设置类自动加载</a></p>
+
+<h3>提示"action method "xxx" not found in controller "xxx" (class "xxx")"的解决方法</h3>
 
 <ol>
 <li>检查控制器类是否存在与action名称一样的方法</li>
