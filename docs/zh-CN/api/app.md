@@ -10,7 +10,14 @@ App
 
 [演示:创建一个MVC应用](../../../demos/new-app)
 
-### 提示"action method "%s" not found in controller "%s" (class "%s")"的解决方法
+### 提示"controller "xxx" (class "yyy") not found"的解决的方法
+
+1. 检查类"yyy"是否存在
+2. 检查类是否设置了自动加载
+
+链接: [设置类自动加载](wei.md#设置类自动加载)
+
+### 提示"action method "xxx" not found in controller "xxx" (class "xxx")"的解决方法
 
 1. 检查控制器类是否存在与action名称一样的方法
 2. 检查方法名称是否为`public`
