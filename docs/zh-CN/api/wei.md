@@ -126,13 +126,13 @@ wei(array(
         }
     }
     ```
-2. 设置`aliases`选项,指定您定义的类的对象名称
+2. 设置`aliases`选项,指定您的类所作为的服务名称
 
     ```php
     wei(array(
         'wei' => array(
             'aliases' => array(
-                '对象名称' => '类名称',
+                '服务名称' => '类名称',
                 'app' => 'MyProject\Application'
             )
         )
@@ -142,7 +142,7 @@ wei(array(
 3. 调用您的对象
 
     ```php
-    // 获取自定义对象
+    // 获取自定义服务
     /* @var $app \MyProject\Application */
     $app = wei()->app;
 
@@ -171,7 +171,7 @@ wei(array(
 ));
 ```
 
-### 区分`aliases`和`providers`
+### 区分`aliases`和`providers`选项
 
 1. `aliases`选项数组的key是服务名称,value是类名称
 2. `providers`选项数组的key是服务名称,value也是服务名称
