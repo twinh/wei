@@ -322,17 +322,17 @@
 
 <p>对象管理器,所有对象的入口.</p>
 
-<p>用于获取对象,设置自动加载,设置别名,设置配置等.</p>
+<p>用于获取服务对象,设置自动加载,设置别名,设置配置等.</p>
 
 <h2>案例</h2>
 
-<h3>获取对象管理器对象</h3>
+<h3>获取对象管理器</h3>
 
 <div class="highlight"><pre><code class="php"><span class="cm">/* @var $wei \Wei\Wei */</span>
 <span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">();</span>
 </code></pre></div>
 
-<h3>设置对象配置</h3>
+<h3>设置服务配置</h3>
 
 <p>对象配置可以通过wei函数的第一个参数来设置,</p>
 
@@ -357,7 +357,7 @@
 
 <h3>设置类自动加载</h3>
 
-<p>Wei支持<a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md" target="_blank">PRS-0</a>风格的类自动加载器.</p>
+<p>微框架支持<a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md" target="_blank">PRS-0</a>风格的类自动加载器.</p>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'wei'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -386,12 +386,14 @@
 
 <h3>开启错误调试</h3>
 
-<p>Wei的错误调试可通过<code>debug</code>选项开启,PHP的调试可通过<code>inis</code>选项配置</p>
+<p>错误调试可通过<code>debug</code>选项开启,PHP的调试可通过<code>inis</code>选项配置</p>
 
 <p><strong>注意:</strong> 两者的配置相互独立,不互相影响</p>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'wei'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="c1">// 开启调试模式</span>
+        <span class="s1">'debug'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
         <span class="c1">// 通过PHP ini配置,开启PHP错误信息提示</span>
         <span class="s1">'inis'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="c1">// 在屏幕上输出错误信息</span>
@@ -399,8 +401,6 @@
             <span class="c1">// 设置错误报告的级别</span>
             <span class="s1">'error_reporting'</span> <span class="o">=&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
         <span class="p">),</span>
-        <span class="c1">// 开启Wei的调试模式</span>
-        <span class="s1">'debug'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
     <span class="p">)</span>
 <span class="p">));</span>
 </code></pre></div>
@@ -465,16 +465,15 @@
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </code></pre></div>
 </li>
-</ol><h3>通过<code>import</code>选项导入目录下的自定义对象</h3>
+</ol><h3>通过<code>import</code>导入目录下的类为服务对象</h3>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// TODO more detail message</span>
-<span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'wei'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'import'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="k">array</span><span class="p">(</span>
                 <span class="s1">'dir'</span> <span class="o">=&gt;</span> <span class="s1">'要导入的类文件所在的目录'</span><span class="p">,</span>
                 <span class="s1">'namespace'</span> <span class="o">=&gt;</span> <span class="s1">'要导入的类文件所在的命名空间'</span><span class="p">,</span>
-                <span class="s1">'format'</span> <span class="o">=&gt;</span> <span class="s1">'导入的类名格式'</span>
+                <span class="s1">'format'</span> <span class="o">=&gt;</span> <span class="s1">'导入后服务的名称格式,%s将被替换为文件名称'</span>
             <span class="p">),</span>
             <span class="k">array</span><span class="p">(</span>
                 <span class="s1">'dir'</span> <span class="o">=&gt;</span> <span class="s1">'path/to/MyProject'</span><span class="p">,</span>
@@ -491,16 +490,16 @@
 
 <ol>
 <li>
-<code>aliases</code>选项数组的key是对象名称,value是类名称</li>
+<code>aliases</code>选项数组的key是服务名称,value是类名称</li>
 <li>
-<code>providers</code>选项数组的key是对象名称,value也是对象名称</li>
+<code>providers</code>选项数组的key是服务名称,value也是服务名称</li>
 </ol><div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'wei'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-            <span class="s1">'对象名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span>
+            <span class="s1">'服务名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span>
         <span class="p">),</span>
         <span class="s1">'providers'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-            <span class="s1">'对象名称'</span> <span class="o">=&gt;</span> <span class="s1">'对象名称'</span>
+            <span class="s1">'服务名称'</span> <span class="o">=&gt;</span> <span class="s1">'服务名称'</span>
         <span class="p">)</span>
     <span class="p">)</span>
 <span class="p">));</span>
@@ -546,7 +545,7 @@
 <td>aliases</td>
 <td>array</td>
 <td>无</td>
-<td>对象别名列表</td>
+<td>服务别名列表</td>
 </tr>
 <tr>
 <td>import</td>
@@ -557,8 +556,8 @@
 <tr>
 <td>preload</td>
 <td>array</td>
-<td>array('is')</td>
-<td>预加载的对象列表</td>
+<td>无</td>
+<td>预加载的服务列表</td>
 </tr>
 <tr>
 <td>beforeConstruct</td>
