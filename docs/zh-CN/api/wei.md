@@ -1,21 +1,21 @@
 Wei
-======
+===
 
 对象管理器,所有对象的入口.
 
-用于获取对象,设置自动加载,设置别名,设置配置等.
+用于获取服务对象,设置自动加载,设置别名,设置配置等.
 
 案例
 ----
 
-### 获取对象管理器对象
+### 获取对象管理器
 
 ```php
 /* @var $wei \Wei\Wei */
 $wei = wei();
 ```
 
-### 设置对象配置
+### 设置服务配置
 
 对象配置可以通过wei函数的第一个参数来设置,
 
@@ -41,7 +41,7 @@ $wei = wei(array(
 
 ### 设置类自动加载
 
-Wei支持[PRS-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)风格的类自动加载器.
+微框架支持[PRS-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)风格的类自动加载器.
 
 ```php
 wei(array(
@@ -71,13 +71,15 @@ var_dump(class_exists('MyClass\MyClass'));
 
 ### 开启错误调试
 
-Wei的错误调试可通过`debug`选项开启,PHP的调试可通过`inis`选项配置
+错误调试可通过`debug`选项开启,PHP的调试可通过`inis`选项配置
 
 **注意:** 两者的配置相互独立,不互相影响
 
 ```php
 wei(array(
     'wei' => array(
+        // 开启调试模式
+        'debug' => true,
         // 通过PHP ini配置,开启PHP错误信息提示
         'inis' => array(
             // 在屏幕上输出错误信息
@@ -85,8 +87,6 @@ wei(array(
             // 设置错误报告的级别
             'error_reporting' => -1,
         ),
-        // 开启Wei的调试模式
-        'debug' => true,
     )
 ));
 ```
@@ -150,17 +150,16 @@ wei(array(
     $app->run();
     ```
 
-### 通过`import`选项导入目录下的自定义对象
+### 通过`import`导入目录下的类为服务对象
 
 ```php
-// TODO more detail message
 wei(array(
     'wei' => array(
         'import' => array(
             array(
                 'dir' => '要导入的类文件所在的目录',
                 'namespace' => '要导入的类文件所在的命名空间',
-                'format' => '导入的类名格式'
+                'format' => '导入后服务的名称格式,%s将被替换为文件名称'
             ),
             array(
                 'dir' => 'path/to/MyProject',
@@ -174,17 +173,17 @@ wei(array(
 
 ### 区分`aliases`和`providers`
 
-1. `aliases`选项数组的key是对象名称,value是类名称
-2. `providers`选项数组的key是对象名称,value也是对象名称
+1. `aliases`选项数组的key是服务名称,value是类名称
+2. `providers`选项数组的key是服务名称,value也是服务名称
 
 ```php
 wei(array(
     'wei' => array(
         'aliases' => array(
-            '对象名称' => '类名称'
+            '服务名称' => '类名称'
         ),
         'providers' => array(
-            '对象名称' => '对象名称'
+            '服务名称' => '服务名称'
         )
     )
 ));
@@ -201,9 +200,9 @@ debug           | bool     | true          | 是否启用调试模式
 inis            | array    | 无            | PHP的ini配置选项
 autoload        | bool     | true          | 是否启用自动加载
 autoloadMap     | array    | 无            | 自动加载的命名空间和路径地址
-aliases         | array    | 无            | 对象别名列表
+aliases         | array    | 无            | 服务别名列表
 import          | array    | 无            | 导入指定目录下的对象类
-preload         | array    | array('is')   | 预加载的对象列表
+preload         | array    | 无            | 预加载的服务列表
 beforeConstruct | callbale | 无            | 每个对象初始化前的回调
 afterConstruct  | callbale | 无            | 每个对象初始化后的回调
 
@@ -213,7 +212,7 @@ afterConstruct  | callbale | 无            | 每个对象初始化后的回调
 
 名称        | 类型          | 说明
 ------------|---------------|------
-$wei     | Wei\Wei | 对象管理器
+$wei        | Wei\Wei       | 对象管理器
 $full       | string        | 完整的对象名称,包含`.`连接符,如`db`,`user.db`
 $name       | string        | 对象名称,不包含`.`连接符,如`db`,`request`
 
@@ -221,10 +220,10 @@ $name       | string        | 对象名称,不包含`.`连接符,如`db`,`reques
 
 名称        | 类型          | 说明
 ------------|---------------|------
-$wei     | Wei\Wei | 对象管理器
+$wei        | Wei\Wei       | 对象管理器
 $full       | string        | 完整的对象名称,包含`.`连接符,如`db`,`user.db`
 $name       | string        | 对象名称,不包含`.`连接符,如`db`,`request`
-$object     | Wei\Base   | 当前初始化的对象
+$object     | Wei\Base      | 当前初始化的对象
 
 ### 方法
 
