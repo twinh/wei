@@ -10,6 +10,13 @@ App
 
 [演示:创建一个MVC应用](../../../demos/new-app)
 
+### 提示"action method "%s" not found in controller "%s" (class "%s")"的解决方法
+
+1. 检查控制器类是否存在与action名称一样的方法
+2. 检查方法名称是否为`public`
+3. **检查方法名称和action名称的大小写是否一致**
+4. 检查方法名称是否不以下划线"_"开头
+
 调用方式
 --------
 
