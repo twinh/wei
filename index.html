@@ -13197,11 +13197,11 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 </li>
 <li><strong>检查方法名称和action名称的大小写是否一致</strong></li>
 <li>检查方法名称是否不以下划线"_"开头</li>
-</ol><p>如下控制器,假设访问"<a href="http://example.com/index/index%22%E5%8D%B3%E8%B0%83%E7%94%A8%22Controller%5CIndex%22%E7%B1%BB%E7%9A%84%22index%22%E6%96%B9%E6%B3%95" target="_blank">http://example.com/index/index"即调用"Controller\Index"类的"index"方法</a>.</p>
+</ol><p>如下控制器,假设访问 <a href="http://example.com/index/index" target="_blank">http://example.com/index/index</a> 即调用<code>Controller\Index</code>类的<code>index</code>方法.</p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">namesapce</span> <span class="nx">Controller</span><span class="p">;</span>
+<div class="highlight"><pre><code class="php"><span class="k">namespace</span> <span class="nx">Controller</span><span class="p">;</span>
 
-<span class="k">class</span> <span class="nc">Index</span> <span class="nx">extend</span> <span class="nx">\Wei\Base</span>
+<span class="k">class</span> <span class="nc">Index</span> <span class="k">extends</span> <span class="nx">\Wei\Base</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">()</span>
     <span class="p">{</span>
