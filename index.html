@@ -328,7 +328,9 @@
 
 <h3>获取对象管理器对象</h3>
 
-
+<div class="highlight"><pre><code class="php"><span class="cm">/* @var $wei \Wei\Wei */</span>
+<span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">();</span>
+</code></pre></div>
 
 <h3>设置对象配置</h3>
 
@@ -13195,7 +13197,9 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 </li>
 <li><strong>检查方法名称和action名称的大小写是否一致</strong></li>
 <li>检查方法名称是否不以下划线"_"开头</li>
-</ol><div class="highlight"><pre><code class="php"><span class="nx">namesapce</span> <span class="nx">Controller</span><span class="p">;</span>
+</ol><p>如下控制器,假设访问"<a href="http://example.com/index/index%22%E5%8D%B3%E8%B0%83%E7%94%A8%22Controller%5CIndex%22%E7%B1%BB%E7%9A%84%22index%22%E6%96%B9%E6%B3%95" target="_blank">http://example.com/index/index"即调用"Controller\Index"类的"index"方法</a>.</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">namesapce</span> <span class="nx">Controller</span><span class="p">;</span>
 
 <span class="k">class</span> <span class="nc">Index</span> <span class="nx">extend</span> <span class="nx">\Wei\Base</span>
 <span class="p">{</span>
@@ -13203,10 +13207,50 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
     <span class="p">{</span>
 
     <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span>
+    <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">aboutUs</span><span class="p">()</span>
+    <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">initSomething</span><span class="p">()</span>
+    <span class="p">{</span>
+
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 
-<h2>调用方式</h2>
+<p>访问以下路径均会提示action不存在.</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>地址</th>
+<th>原因</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>/index/notFound</td>
+<td>方法<code>notFound</code>不存在</td>
+</tr>
+<tr>
+<td>/index/initSomething</td>
+<td>方法<code>initSomething</code>不是"public"</td>
+</tr>
+<tr>
+<td>/index/aboutus</td>
+<td>方法名称大小写错误,地址应改为"/index/aboutUs"</td>
+</tr>
+<tr>
+<td>/index/__construct</td>
+<td>方法<code>__construct</code>以下划线开头,不允许访问</td>
+</tr>
+</tbody>
+</table><h2>调用方式</h2>
 
 <h3>选项</h3>
 
