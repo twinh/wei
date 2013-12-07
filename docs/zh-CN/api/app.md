@@ -72,26 +72,26 @@ defaultAction       | string  | index         | 默认的行为名称
 #### app($options)
 根据提供的选项,创建一个MVC应用,执行相应的行为方法,并输出视图数据
 
-#### getController()
+#### app->getController()
 获取当前应用的控制器名称
 
-#### setController($controller)
+#### app->setController($controller)
 设置当前应用的控制器名称
 
-#### getAction()
+#### app->getAction()
 获取当前应用的行为名称
 
-#### setAction($action)
+#### app->setAction($action)
 设置当前应用的行为名称
 
-#### getControllerClass($controller)
+#### app->getControllerClass($controller)
 获取指定控制器的完整类名(不检查类名是否存在)
 
-#### getDefaultTemplate()
+#### app->getDefaultTemplate()
 获取当前控制器和行为对应的视图文件路径
 
-#### preventPreviousDispatch()
+#### app->preventPreviousDispatch()
 中断当前的应用逻辑
 
-#### forward($action, $controller = null)
+#### app->forward($action, $controller = null)
 中断当前的应用逻辑,并跳转到指定的控制器和行为
