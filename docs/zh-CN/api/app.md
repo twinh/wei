@@ -17,12 +17,12 @@ App
 3. **检查方法名称和action名称的大小写是否一致**
 4. 检查方法名称是否不以下划线"_"开头
 
-如下控制器,假设访问"http://example.com/index/index"即调用"Controller\Index"类的"index"方法.
+如下控制器,假设访问 http://example.com/index/index 即调用`Controller\Index`类的`index`方法.
 
 ```php
-namesapce Controller;
+namespace Controller;
 
-class Index extend \Wei\Base
+class Index extends \Wei\Base
 {
     public function __construct()
     {
@@ -95,3 +95,4 @@ defaultAction       | string  | index         | 默认的行为名称
 
 #### app->forward($action, $controller = null)
 中断当前的应用逻辑,并跳转到指定的控制器和行为
+
