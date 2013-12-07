@@ -13287,35 +13287,35 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <p>根据提供的选项,创建一个MVC应用,执行相应的行为方法,并输出视图数据</p>
 
-<h4>getController()</h4>
+<h4>app-&gt;getController()</h4>
 
 <p>获取当前应用的控制器名称</p>
 
-<h4>setController($controller)</h4>
+<h4>app-&gt;setController($controller)</h4>
 
 <p>设置当前应用的控制器名称</p>
 
-<h4>getAction()</h4>
+<h4>app-&gt;getAction()</h4>
 
 <p>获取当前应用的行为名称</p>
 
-<h4>setAction($action)</h4>
+<h4>app-&gt;setAction($action)</h4>
 
 <p>设置当前应用的行为名称</p>
 
-<h4>getControllerClass($controller)</h4>
+<h4>app-&gt;getControllerClass($controller)</h4>
 
 <p>获取指定控制器的完整类名(不检查类名是否存在)</p>
 
-<h4>getDefaultTemplate()</h4>
+<h4>app-&gt;getDefaultTemplate()</h4>
 
 <p>获取当前控制器和行为对应的视图文件路径</p>
 
-<h4>preventPreviousDispatch()</h4>
+<h4>app-&gt;preventPreviousDispatch()</h4>
 
 <p>中断当前的应用逻辑</p>
 
-<h4>forward($action, $controller = null)</h4>
+<h4>app-&gt;forward($action, $controller = null)</h4>
 
 <p>中断当前的应用逻辑,并跳转到指定的控制器和行为</p>
   </section>
