@@ -264,7 +264,11 @@ class App extends Base
     /**
      * Check if action name is available
      *
-     * Returns false when method is not found, starts with '_' or protected.
+     * Returns false when
+     * 1. method is not found
+     * 2. method is not public
+     * 3. method letters case error
+     * 4. method is starts with '_'
      *
      * @param object $object The object of controller
      * @param string $action The name of action
