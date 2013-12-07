@@ -17,6 +17,45 @@ App
 3. **检查方法名称和action名称的大小写是否一致**
 4. 检查方法名称是否不以下划线"_"开头
 
+如下控制器,假设访问"http://example.com/index/index"即调用"Controller\Index"类的"index"方法.
+
+```php
+namesapce Controller;
+
+class Index extend \Wei\Base
+{
+    public function __construct()
+    {
+
+    }
+
+    public function index()
+    {
+
+    }
+
+    public function aboutUs()
+    {
+
+    }
+
+    protected function initSomething()
+    {
+
+    }
+}
+```
+
+访问以下路径均会提示action不存在.
+
+地址                  | 原因
+----------------------|------
+/index/notFound       | 方法`notFound`不存在
+/index/initSomething  | 方法`initSomething`不是"public"
+/index/aboutus        | 方法名称大小写错误,地址应改为"/index/aboutUs"
+/index/__construct    | 方法`__construct`以下划线开头,不允许访问
+
+
 调用方式
 --------
 
