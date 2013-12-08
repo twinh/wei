@@ -100,4 +100,9 @@ class EnvTest extends TestCase
         $this->assertFalse($wei->isDebug());
         $this->assertFalse($wei->getConfig('wei:debug'));
     }
+
+    public function testLodConfigFileReturnsEnvService()
+    {
+        $this->assertInstanceOf('\Wei\Env', $this->object->loadConfigFile('some file'));
+    }
 }

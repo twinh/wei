@@ -197,14 +197,15 @@ class Env extends Base
      * Load wei config by specified file
      *
      * @param string $file
+     * @return $this
      */
     public function loadConfigFile($file)
     {
-        if (!is_file($file)) {
-            return;
+        if (is_file($file)) {
+            $config = (array)require $file;
+            $this->wei->setConfig($config);
         }
-        $config = (array)require $file;
-        $this->wei->setConfig($config);
+        return $this;
     }
 
     /**
