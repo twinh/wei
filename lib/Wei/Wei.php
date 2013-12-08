@@ -444,6 +444,14 @@ namespace Wei
             $class = strtr($class, array('_' => DIRECTORY_SEPARATOR, '\\' => DIRECTORY_SEPARATOR)) . '.php';
 
             foreach ($this->autoloadMap as $prefix => $dir) {
+                if (isset($prefix[0]) && $prefix[0] == '\\' && 0 === strpos($class, ltrim($prefix, '\\'))) {
+                    $file = $dir . DIRECTORY_SEPARATOR . substr($class, strlen($prefix));
+                    if (file_exists($file)) {
+                        require_once $file;
+                        return true;
+                    }
+                }
+
                 // Allow empty class prefix
                 if (!$prefix || 0 === strpos($class, $prefix)) {
                     if (file_exists($file = $dir . DIRECTORY_SEPARATOR . $class)) {
