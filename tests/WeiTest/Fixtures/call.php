@@ -1,8 +1,8 @@
 <?php
 
-require '../../../lib/Wei/Wei.php';
+require '../../../lib/Wei.php';
 
-$wei     = wei();
+$wei        = wei();
 $request    = $wei->request;
 $dataType   = $request->getQuery('type');
 $test       = $request->getQuery('test');
