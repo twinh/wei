@@ -3,9 +3,9 @@
 // Autoloading for Composer
 if (is_file($file = __DIR__ . '/../vendor/autoload.php')) {
     require $file;
-// Fallback to wei container
+// Fallback to the main class
 } else {
-    require dirname(__DIR__) . '/lib/Wei/Wei.php';
+    require dirname(__DIR__) . '/lib/Wei.php';
 }
 
 // Localhost configuration
