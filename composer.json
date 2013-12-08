@@ -24,6 +24,6 @@
         "psr-0": {
             "Wei": "lib"
         },
-        "files": ["lib/Wei/Wei.php"]
+        "files": ["lib/Wei.php"]
     }
 }

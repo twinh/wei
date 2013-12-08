@@ -779,7 +779,7 @@ namespace Wei
         {
             $map = array_map('realpath', $map);
             // The autoload directories will always contain the library directory
-            $map['Wei'] = dirname(dirname(__FILE__));
+            $map['\Wei'] = dirname(__FILE__);
 
             $this->autoloadMap = $map;
             return $this;
