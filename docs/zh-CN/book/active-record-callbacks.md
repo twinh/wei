@@ -6,7 +6,7 @@ Active Record Callbacks
 案例
 ----
 
-#### 使用`beforeCreate`和`beforeSave`回调为对象自动加上创建和修改时间
+### 通过`beforeCreate`和`beforeSave`回调,为对象自动加上创建和修改时间
 
 ```php
 class User extends \Wei\Record
@@ -34,7 +34,7 @@ echo $user['createTime'];
 '2013-12-12 14:30:00'
 ```
 
-#### 通过`beforeCreate`回调,使用UUID作为主键的值
+### 通过`beforeCreate`回调,使用UUID作为主键的值
 
 ```php
 class User extends \Wei\Record
@@ -49,7 +49,7 @@ class User extends \Wei\Record
 }
 ```
 
-#### 通过`beforeSave`和`afterSave`使数据表字段支持数组格式数据
+### 通过`beforeSave`和`afterSave`回调,使数据表字段支持数组格式数据
 
 ```php
 class Article extends \Wei\Record
@@ -71,9 +71,22 @@ $article = wei()->db('article');
 
 $article['title'] = 'This is title';
 $article['content'] = 'This is content';
-$article['images'] = array('...', '...', '...');
+$article['images'] = array('1.jpg', '2.jpg', '3.jpg');
 
 $article->save();
+```
+
+### 通过`afterDestroy`回调,在对象删除后,同时删除相关数据
+
+```php
+class User extends \Wei\Record
+{
+    public function afterDestroy()
+    {
+        // 在用户对象删除后,同时删除用户详细信息表里的数据
+        $this->db->destroy('userDetail', array('userId' => $this['id']));
+    }
+}
 ```
 
 回调调用顺序
