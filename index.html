@@ -4313,7 +4313,7 @@
 
 <h2>案例</h2>
 
-<h4>使用<code>beforeCreate</code>和<code>beforeSave</code>回调为对象自动加上创建和修改时间</h4>
+<h3>通过<code>beforeCreate</code>和<code>beforeSave</code>回调,为对象自动加上创建和修改时间</h3>
 
 <div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">\Wei\Record</span>
 <span class="p">{</span>
@@ -4340,7 +4340,7 @@
 <span class="s1">'2013-12-12 14:30:00'</span>
 </code></pre></div>
 
-<h4>通过<code>beforeCreate</code>回调,使用UUID作为主键的值</h4>
+<h3>通过<code>beforeCreate</code>回调,使用UUID作为主键的值</h3>
 
 <div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">\Wei\Record</span>
 <span class="p">{</span>
@@ -4354,7 +4354,7 @@
 <span class="p">}</span>
 </code></pre></div>
 
-<h4>通过<code>beforeSave</code>和<code>afterSave</code>使数据表字段支持数组格式数据</h4>
+<h3>通过<code>beforeSave</code>和<code>afterSave</code>回调,使数据表字段支持数组格式数据</h3>
 
 <div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">Article</span> <span class="k">extends</span> <span class="nx">\Wei\Record</span>
 <span class="p">{</span>
@@ -4375,9 +4375,21 @@
 
 <span class="nv">$article</span><span class="p">[</span><span class="s1">'title'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'This is title'</span><span class="p">;</span>
 <span class="nv">$article</span><span class="p">[</span><span class="s1">'content'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'This is content'</span><span class="p">;</span>
-<span class="nv">$article</span><span class="p">[</span><span class="s1">'images'</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'...'</span><span class="p">,</span> <span class="s1">'...'</span><span class="p">,</span> <span class="s1">'...'</span><span class="p">);</span>
+<span class="nv">$article</span><span class="p">[</span><span class="s1">'images'</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'1.jpg'</span><span class="p">,</span> <span class="s1">'2.jpg'</span><span class="p">,</span> <span class="s1">'3.jpg'</span><span class="p">);</span>
 
 <span class="nv">$article</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+</code></pre></div>
+
+<h3>通过<code>afterDestroy</code>回调,在对象删除后,同时删除相关数据</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">\Wei\Record</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">afterDestroy</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// 在用户对象删除后,同时删除用户详细信息表里的数据</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">destroy</span><span class="p">(</span><span class="s1">'userDetail'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'userId'</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <h2>回调调用顺序</h2>
