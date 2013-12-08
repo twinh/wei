@@ -6,7 +6,7 @@ Active Record Callbacks
 案例
 ----
 
-#### 使用`beforeSave`和`beforeSave`回调为对象自动加上创建和修改时间
+#### 使用`beforeCreate`和`beforeSave`回调为对象自动加上创建和修改时间
 
 ```php
 class User extends \Wei\Record
