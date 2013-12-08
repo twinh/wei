@@ -6,7 +6,7 @@ Active Record 基本操作
 > -- <cite>[维基百科 Active Record](http://zh.wikipedia.org/wiki/Active_Record)</cite>
 
 案例
-====
+----
 
 ### 创建一条新记录并保存
 
