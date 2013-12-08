@@ -21,9 +21,6 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "Wei": "lib"
-        },
         "files": ["lib/Wei.php"]
     }
 }
