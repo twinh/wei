@@ -81,7 +81,7 @@ class Env extends Base
         // Load CLI configuration when run in CLI mode
         if (php_sapi_name() === 'cli') {
             $file = str_replace('%env%', 'cli', $this->configFile);
-            $this->loadconfigFile($file);
+            $this->loadConfigFile($file);
         }
     }
 
