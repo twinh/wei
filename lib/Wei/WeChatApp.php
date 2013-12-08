@@ -29,16 +29,6 @@ class WeChatApp extends Base
     /**
      * The HTTP raw post data, equals to $GLOBALS['HTTP_RAW_POST_DATA'] on default
      *
-     * Most of the available element names in post XML data
-     * Common  : MsgType, FromUserName, ToUserName, MsgId, CreateTime
-     * text    : Content
-     * image   : PicUrl
-     * location: Location_X, Location_Y, Scale, Label
-     * voice   : MediaId, Format
-     * event   : Event, EventKey
-     * video   : MediaId, ThumbMediaId
-     * link    : Title, Description
-     *
      * @var string
      */
     protected $postData;
@@ -95,7 +85,17 @@ class WeChatApp extends Base
 
     /**
      * The element values of post XML data
-
+     *
+     * Most of the available element names in post XML data
+     * common  : MsgType, FromUserName, ToUserName, MsgId, CreateTime
+     * text    : Content
+     * image   : PicUrl
+     * location: Location_X, Location_Y, Scale, Label
+     * voice   : MediaId, Format
+     * event   : Event, EventKey
+     * video   : MediaId, ThumbMediaId
+     * link    : Title, Description
+     *
      * @var array
      */
     protected $attrs = array();
