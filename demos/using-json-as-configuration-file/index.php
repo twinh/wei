@@ -1,6 +1,6 @@
 <?php
 
-require '../../lib/Wei/Wei.php';
+require '../../lib/Wei.php';
 
 // Get wei container
 $wei = wei();
