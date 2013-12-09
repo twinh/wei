@@ -9,9 +9,9 @@ Ua
 ### 根据用户设备跳转到相应的页面
 
 ```php
-if (wei()->ua->isIphone()) {
+if (wei()->ua->isIPhone()) {
     // 跳转到iPhone定制页面
-} elseif (wei()->ua->isIpad()) {
+} elseif (wei()->ua->isIPad()) {
     // 跳转到iPad定制页面
 } else {
     // 展示默认页面
@@ -34,6 +34,7 @@ if (wei()->ua->isIe()) {
 ```
 
 ### 运行结果
+
 ```php
 '10.0'
 ```
@@ -59,7 +60,7 @@ if (wei()->ua->isIe()) {
 #### ua->isMobile()
 检查用户是否通过移动设备访问
 
-#### ua->isIe()
+#### ua->isIE()
 检查用户是否通过IE浏览器访问
 
 #### ua->isChrome()
@@ -68,7 +69,7 @@ if (wei()->ua->isIe()) {
 #### ua->isFirefox()
 检查用户是否通过Firefox浏览器访问
 
-#### ua->isIos()
+#### ua->isIOS()
 检查用户是否使用苹果iOS系统
 
 #### ua->isAndroid()
@@ -77,8 +78,8 @@ if (wei()->ua->isIe()) {
 #### ua->isWindowsPhone()
 检查用户是否使用微软Windows Phone系统
 
-#### ua->isIphone()
+#### ua->isIPhone()
 检查用户是否使用iPhone/iPod访问网站
 
-#### ua->isIpad()
+#### ua->isIPad()
 检查用户是否使用iPad访问网站

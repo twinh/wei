@@ -13,16 +13,16 @@ namespace Wei;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  *
- * @method      bool isIe() Check if the user is browsing in Internet Explorer browser
+ * @method      bool isIE() Check if the user is browsing in Internet Explorer browser
  * @method      bool isChrome() Check if the user is browsing in Chrome browser
  * @method      bool isFirefox() Check if the user is browsing in Firefox browser
  *
- * @method      bool isIos()  Check if the device is running on Apple's iOS platform
+ * @method      bool isIOS()  Check if the device is running on Apple's iOS platform
  * @method      bool isAndroid() Check if the device is running on Google's Android platform
  * @method      bool isWindowsPhone() Check if the device is running on Windows Phone platform
  *
- * @method      bool isIphone() Check if the user is browsing by iPhone/iPod
- * @method      bool isIpad() Check if the user is browsing by iPad
+ * @method      bool isIPhone() Check if the user is browsing by iPhone/iPod
+ * @method      bool isIPad() Check if the user is browsing by iPad
  */
 class Ua extends Base
 {
