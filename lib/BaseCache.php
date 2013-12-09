@@ -190,12 +190,16 @@ abstract class BaseCache extends Base
     }
 
     /**
-     * {@inheritdoc}
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int $expire
+     * @return array
      */
-    public function setMulti(array $items, $expire = 0)
+    public function setMulti(array $keys, $expire = 0)
     {
         $results = array();
-        foreach ($items as $key => $value) {
+        foreach ($keys as $key => $value) {
             $results[$key] = $this->set($key, $value, $expire);
         }
         return $results;
