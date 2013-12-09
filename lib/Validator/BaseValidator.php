@@ -248,7 +248,7 @@ abstract class BaseValidator extends Base
      */
     protected function loadTranslationMessages()
     {
-        $this->t->loadFromFile(dirname(__DIR__) . '/Resource/i18n/%s/validator.php');
+        $this->t->loadFromFile(__DIR__ . '/i18n/%s.php');
     }
 
     /**
