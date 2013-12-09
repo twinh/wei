@@ -206,7 +206,7 @@ abstract class BaseCache extends Base
     }
 
     /**
-     * Store an item from a callback by the file modified time
+     * Use the file modify time as cache key to store an item from a callback
      *
      * @param string $file The path of file
      * @param callable $fn The callback to get and parse file content
