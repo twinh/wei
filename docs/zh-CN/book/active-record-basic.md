@@ -67,6 +67,23 @@ $user = wei()->db('user')->find(1);
 $user->softDelete();
 ```
 
+### Active Record与常规数据库查询的最大区别
+
+在我个人看来,两者的最大区别在于返回的数据结构.
+
+1. 常规查询将数据存储在`数组`中.
+2. Active Record将数据存储在`数组对象(Array Object)`中,除了拥有数组所有特性外,在`数据层分离`,`缓存`,`延迟加载(Lazy load)`等都有很大的想象空间.
+
+```php
+/* @var $data array */
+$data = wei()->db->fetch("SELECT * FROM table WHERE field = 'value'");
+```
+
+```php
+/* @var $record \Wei\Record */
+$record = wei()->db('table')->find(array('field' => 'value'));
+```
+
 调用方式
 --------
 
