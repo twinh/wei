@@ -3361,6 +3361,21 @@
 <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">softDelete</span><span class="p">();</span>
 </code></pre></div>
 
+<h3>Active Record与常规数据库查询的最大区别</h3>
+
+<p>在我个人看来,两者的最大区别在于返回的数据结构.</p>
+
+<ol>
+<li>常规查询将数据存储在<code>数组</code>中.</li>
+<li>Active Record将数据存储在<code>数组对象(Array Object)</code>中,除了拥有数组所有特性外,在<code>数据层分离</code>,<code>缓存</code>,<code>延迟加载(Lazy load)</code>等都有很大的想象空间.</li>
+</ol><div class="highlight"><pre><code class="php"><span class="cm">/* @var $data array */</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="s2">"SELECT * FROM table WHERE field = 'value'"</span><span class="p">);</span>
+</code></pre></div>
+
+<div class="highlight"><pre><code class="php"><span class="cm">/* @var $record \Wei\Record */</span>
+<span class="nv">$record</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'table'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'field'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">));</span>
+</code></pre></div>
+
 <h2>调用方式</h2>
 
 <h3>属性</h3>
