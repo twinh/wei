@@ -206,8 +206,8 @@ abstract class BaseCache extends Base
     }
 
     /**
-     * Get file content with cache
-
+     * Store an item from a callback by the file modified time
+     *
      * @param string $file The path of file
      * @param callable $fn The callback to get and parse file content
      * @return mixed
