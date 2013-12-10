@@ -318,7 +318,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Save the record or collection data to database
+     * Save the record or data to database
      *
      * @return bool
      */

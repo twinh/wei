@@ -929,6 +929,7 @@ namespace
      * Get the service container instance
      *
      * @return Wei\Wei
+     * @deprecated Remove in 0.9.9
      */
     function widget()
     {

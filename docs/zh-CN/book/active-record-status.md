@@ -33,6 +33,10 @@ if ($user->isChagned('username')) {
 'No'
 ```
 
+### 各方法对状态的改变
+
+    TODO 
+
 
 调用方式
 --------
