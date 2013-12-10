@@ -190,20 +190,24 @@ abstract class BaseCache extends Base
     }
 
     /**
-     * {@inheritdoc}
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int $expire
+     * @return array
      */
-    public function setMulti(array $items, $expire = 0)
+    public function setMulti(array $keys, $expire = 0)
     {
         $results = array();
-        foreach ($items as $key => $value) {
+        foreach ($keys as $key => $value) {
             $results[$key] = $this->set($key, $value, $expire);
         }
         return $results;
     }
 
     /**
-     * Get file content with cache
-
+     * Use the file modify time as cache key to store an item from a callback
+     *
      * @param string $file The path of file
      * @param callable $fn The callback to get and parse file content
      * @return mixed

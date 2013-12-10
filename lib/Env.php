@@ -75,13 +75,11 @@ class Env extends Base
         }
 
         // Load configuration by environment name
-        $file = str_replace('%env%', $this->name, $this->configFile);
-        $this->loadConfigFile($file);
+        $this->loadConfigFile($this->configFile, $this->name);
 
         // Load CLI configuration when run in CLI mode
         if (php_sapi_name() === 'cli') {
-            $file = str_replace('%env%', 'cli', $this->configFile);
-            $this->loadconfigFile($file);
+            $this->loadConfigFile($this->configFile, 'cli');
         }
     }
 
@@ -194,17 +192,20 @@ class Env extends Base
     }
 
     /**
-     * Load wei config by specified file
+     * Loads configs from specified file to service container
      *
-     * @param string $file
+     * @param string $file The config file path
+     * @param string $env The value to replace the %env% placeholder, default to the env name
+     * @return $this
      */
-    public function loadConfigFile($file)
+    public function loadConfigFile($file, $env = null)
     {
-        if (!is_file($file)) {
-            return;
+        $file = str_replace('%env%', $env ?: $this->name, $file);
+        if (is_file($file)) {
+            $config = (array)require $file;
+            $this->wei->setConfig($config);
         }
-        $config = (array)require $file;
-        $this->wei->setConfig($config);
+        return $this;
     }
 
     /**
