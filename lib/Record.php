@@ -412,6 +412,17 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
+     * Init a record and save to database
+     *
+     * @param array $data
+     * @return bool
+     */
+    public function create($data)
+    {
+        return $this->fromArray($data)->save();
+    }
+
+    /**
      * Receives the record field value
      *
      * @param string $name
