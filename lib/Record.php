@@ -320,12 +320,14 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Save record data to database
+     * Save the record or data to database
      *
      * @return bool
      */
-    public function save()
+    public function save($data = array())
     {
+        $data && $this->fromArray($data);
+
         if (!$this->isColl) {
             // Return false when record has been destroy to avoid dirty data
             if ($this->isDestroyed) {

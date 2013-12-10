@@ -45,7 +45,7 @@ Define the following requirement in your `composer.json` file and run `php compo
 ```json
 {
     "require": {
-        "wei/wei": "0.9.7"
+        "wei/wei": "0.9.8"
     }
 }
 ```

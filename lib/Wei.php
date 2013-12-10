@@ -258,7 +258,7 @@ namespace Wei
         /**
          * Version
          */
-        const VERSION = '0.9.8-RC1';
+        const VERSION = '0.9.8';
 
         /**
          * The configurations for all objects
@@ -929,6 +929,7 @@ namespace
      * Get the service container instance
      *
      * @return Wei\Wei
+     * @deprecated Remove in 0.9.9
      */
     function widget()
     {

@@ -324,6 +324,7 @@ unixSocket      | string   | 无           | MySQL数据库的Unix socket连接�
 charset         | string   | 无           | 连接数据库的字符集,仅驱动为mysql时有效
 path            | string   | 无           | SQLite数据库所在的路径,如果存储在内存中,使用`:memory:`
 attrs           | array    | array()      | PDO的属性配置
+tablePrefix     | string   | 无           | 数据表名称前缀
 recordClass     | string   | Wei\Record   | 记录类的基础类名称
 recordClasses   | array    | array()      | 自定义记录类的数组,键名为数据表名称,值为记录类名称
 recordNamespace | string   | 无           | 自定义记录类的命名空间

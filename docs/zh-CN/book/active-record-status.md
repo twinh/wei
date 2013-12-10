@@ -6,7 +6,37 @@ Active Record Status
 案例
 ----
 
-    TODO
+### 检查字段的值是否被更改过
+
+```php
+$user = wei()->db('user')->find(1);
+
+if ($user->isChanged('username')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+
+$user['username'] = 'twin';
+
+if ($user->isChagned('username')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+
+输出结果
+
+```php
+'Yes'
+'No'
+```
+
+### 各方法对状态的改变
+
+    TODO 
+
 
 调用方式
 --------
