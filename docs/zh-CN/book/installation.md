@@ -21,7 +21,7 @@ Wei支持通过[Composer](https://getcomposer.org)下载和直接下载源文件
     ```json
     {
         "require": {
-            "wei/wei": "0.9.7"
+            "wei/wei": "0.9.8"
         }
     }
     ```
@@ -38,7 +38,7 @@ Wei支持通过[Composer](https://getcomposer.org)下载和直接下载源文件
 
 ### 稳定版
 
-Zip文件下载: https://github.com/twinh/wei/archive/v0.9.7.zip
+Zip文件下载: https://github.com/twinh/wei/archive/v0.9.8.zip
 
 ### 开发尝鲜版
 
