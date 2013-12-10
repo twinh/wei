@@ -1,7 +1,16 @@
 Changelog
 =========
 
-## 0.9.8 (WIP)
+## 0.9.9 (WIP)
+
+## 0.9.8 (2013-12-10)
+
+* Added PSR-4 autoload suppoort
+* Moved all classes to lib directory, use PSR-4 to load classes
+* Simplified setAutoloadMap method
+* Enhances env service loadConfigFile method, allows to pass the file format to load config file
+* Added $data parameter for record class save method
+* Marks widget functnion as deprecated and will remove in 0.9.9
 
 ## 0.9.8-RC1 (2013-12-06)
 
