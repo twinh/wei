@@ -4485,7 +4485,29 @@
 
 <h2>案例</h2>
 
-<div class="highlight"><pre><code class="php"><span class="nx">TODO</span>
+<h3>检查字段的值是否被更改过</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$user</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">isChanged</span><span class="p">(</span><span class="s1">'username'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nv">$user</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'twin'</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">isChagned</span><span class="p">(</span><span class="s1">'username'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>输出结果</p>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
+<span class="s1">'No'</span>
 </code></pre></div>
 
 <h2>调用方式</h2>
