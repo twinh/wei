@@ -22,6 +22,7 @@
             <directory>./lib</directory>
             <exclude>
                 <directory>./lib/Resource</directory>
+                <directory>./lib/Validator/i18n</directory>
             </exclude>
         </whitelist>
     </filter>
