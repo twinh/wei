@@ -33,6 +33,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected $table;
 
+    protected $fullTable;
+
     /**
      * The table fields
      * If leave it blank, it will automatic generate form the database table,
@@ -542,7 +544,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function getFields()
     {
         if (empty($this->fields)) {
-            $this->fields = $this->db->getTableFields($this->table);
+            $this->fields = $this->db->getTableFields($this->fullTable, true);
         }
         return $this->fields;
     }
@@ -826,7 +828,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         } else {
             $this->table = $from;
         }
-        return $this->add('from', $from);
+        $this->fullTable = $this->db->getTable($this->table);
+        // return $this->add('from', $from);
+        return $this->add('from', $this->fullTable);
     }
 
     /**
