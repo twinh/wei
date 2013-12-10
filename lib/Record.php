@@ -322,8 +322,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @return bool
      */
-    public function save()
+    public function save($data = array())
     {
+        $data && $this->fromArray($data);
+
         if (!$this->isColl) {
             // Return false when record has been destroy to avoid dirty data
             if ($this->isDestroyed) {
@@ -409,17 +411,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $this->isChanged = false;
         $this->trigger('afterLoad');
         return $this;
-    }
-
-    /**
-     * Init a record and save to database
-     *
-     * @param array $data
-     * @return bool
-     */
-    public function create($data)
-    {
-        return $this->fromArray($data)->save();
     }
 
     /**
