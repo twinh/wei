@@ -328,8 +328,22 @@
 
 <h3>获取对象管理器</h3>
 
-<div class="highlight"><pre><code class="php"><span class="cm">/* @var $wei \Wei\Wei */</span>
-<span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">();</span>
+
+
+<h3>获取和调用服务</h3>
+
+<p>在微框架中,我们将提供功能的对象称为"服务",如缓存服务(cache),数据库服务(db).</p>
+
+<p>获取服务对象使用<code>wei()-&gt;服务名称</code>即可.</p>
+
+<div class="highlight"><pre><code class="php"><span class="c1">// 获取数据库操作服务</span>
+<span class="nv">$db</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">;</span>
+
+<span class="c1">// 获取redis缓存服务</span>
+<span class="nv">$redis</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">redis</span><span class="p">;</span>
+
+<span class="c1">// 使用验证服务检查数据</span>
+<span class="nv">$validator</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">());</span>
 </code></pre></div>
 
 <h3>设置服务配置</h3>
