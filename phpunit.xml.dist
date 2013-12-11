@@ -14,7 +14,7 @@
 
     <testsuites>
         <testsuite name="wei">
-            <directory>./tests/WeiTest</directory>
+            <directory>./tests/unit</directory>
         </testsuite>
     </testsuites>
     <filter>

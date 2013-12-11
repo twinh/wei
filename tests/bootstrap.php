@@ -21,7 +21,7 @@ wei(array(
         'debug' => true,
         // Set up autoload for WeiTest namespace
         'autoloadMap' => array(
-            '\WeiTest' => __DIR__ . '/WeiTest',
+            '\WeiTest' => __DIR__ . '/unit',
             '' => __DIR__ . '/fallback',
         ),
     ),
