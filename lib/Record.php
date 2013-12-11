@@ -33,6 +33,11 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected $table;
 
+    /**
+     * The complete record table name with table prefix
+     *
+     * @var string
+     */
     protected $fullTable;
 
     /**
