@@ -20,9 +20,6 @@
     <filter>
         <whitelist>
             <directory>./lib</directory>
-            <exclude>
-                <directory>./lib/Resource</directory>
-            </exclude>
         </whitelist>
     </filter>
 </phpunit>
