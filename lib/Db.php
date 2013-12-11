@@ -682,7 +682,7 @@ class Db extends Base
         return new $class(array(
             'wei'       => $this->wei,
             'db'        => $this,
-            'table'     => $this->getTable($table),
+            'table'     => $table,
             'isNew'     => $isNew,
             'data'      => $data,
         ));
@@ -898,12 +898,12 @@ class Db extends Base
      * @throws \PDOException
      * @return array
      */
-    public function getTableFields($table)
+    public function getTableFields($table, $withPrefix = false)
     {
         if (isset($this->tableFields[$table])) {
             return $this->tableFields[$table];
         } else {
-            $fullTable = $this->getTable($table);
+            $fullTable = $withPrefix ? $table : $this->getTable($table);
             $fields = array();
             switch ($this->driver) {
                 case 'mysql':
