@@ -828,13 +828,11 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $pos = strpos($from, ' ');
         if (false !== $pos) {
             $this->table = substr($from, 0, $pos);
-            $this->fullTable = $this->db->getTable($this->table);
-            $from = $this->fullTable . substr($from, $pos);
         } else {
             $this->table = $from;
-            $this->fullTable = $this->db->getTable($this->table);
         }
-        return $this->add('from', $from);
+        $this->fullTable = $this->db->getTable($this->table);
+        return $this->add('from', $this->db->getTable($from));
     }
 
     /**
