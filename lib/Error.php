@@ -254,22 +254,16 @@ class Error extends Base
         $class      = get_class($exception);
 
         // Prepare message
-        if ($debug || 404 == $code) {
+        if ($debug || $code == 404) {
             $message = $exception->getMessage();
+            $detail = sprintf('Threw by %s in %s on line %s', $class, $file, $line);
         } else {
             $message = $this->message;
+            $detail = $this->detail;
         }
         $message = htmlspecialchars($message, ENT_QUOTES);
 
-        // Prepare detail message
-        if ($debug) {
-            $detail = sprintf('Threw by %s in %s on line %s', $class, $file, $line);
-        } elseif (404 == $code) {
-            $detail = $this->notFoundDetail;
-        } else {
-            $detail = $this->detail;
-        }
-
+        // Render error views
         if ($debug) {
             $mtime      = date('Y-m-d H:i:s', filemtime($file));
             $fileInfo   = $this->getFileCode($file, $line);
