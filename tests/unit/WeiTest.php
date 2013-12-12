@@ -338,7 +338,7 @@ class WeiTest extends TestCase
         $this->assertContains(array($this->wei, 'autoload'), spl_autoload_functions());
 
         $this->wei->setAutoloadMap(array(
-            'WeiTest' => dirname(__DIR__)
+            '\WeiTest' => __DIR__
         ));
 
         $this->assertTrue(class_exists('WeiTest\Fixtures\Autoload'));
