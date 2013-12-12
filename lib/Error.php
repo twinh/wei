@@ -251,12 +251,11 @@ class Error extends Base
         $code       = $exception->getCode();
         $file       = $exception->getFile();
         $line       = $exception->getLine();
-        $class      = get_class($exception);
 
         // Prepare message
         if ($debug || $code == 404) {
             $message = $exception->getMessage();
-            $detail = sprintf('Threw by %s in %s on line %s', $class, $file, $line);
+            $detail = sprintf('Threw by %s in %s on line %s', get_class($exception), $file, $line);
         } else {
             $message = $this->message;
             $detail = $this->detail;
