@@ -243,19 +243,19 @@ class Error extends Base
     /**
      * Render exception message
      *
-     * @param \Exception $exception
+     * @param \Exception $e
      * @param bool $debug Whether show debug trace
      */
-    public function renderException(\Exception $exception, $debug)
+    public function renderException(\Exception $e, $debug)
     {
-        $code       = $exception->getCode();
-        $file       = $exception->getFile();
-        $line       = $exception->getLine();
+        $code = $e->getCode();
+        $file = $e->getFile();
+        $line = $e->getLine();
 
         // Prepare message
         if ($debug || $code == 404) {
-            $message = $exception->getMessage();
-            $detail = sprintf('Threw by %s in %s on line %s', get_class($exception), $file, $line);
+            $message = $e->getMessage();
+            $detail = sprintf('Threw by %s in %s on line %s', get_class($e), $file, $line);
         } else {
             $message = $this->message;
             $detail = $this->detail;
@@ -266,7 +266,7 @@ class Error extends Base
         if ($debug) {
             $mtime      = date('Y-m-d H:i:s', filemtime($file));
             $fileInfo   = $this->getFileCode($file, $line);
-            $trace      = htmlspecialchars($exception->getTraceAsString(), ENT_QUOTES);
+            $trace      = htmlspecialchars($e->getTraceAsString(), ENT_QUOTES);
 
             $detail = <<<HTML
 <h2>File</h2>
