@@ -252,7 +252,6 @@ class Error extends Base
         $file       = $exception->getFile();
         $line       = $exception->getLine();
         $class      = get_class($exception);
-        $trace      = htmlspecialchars($exception->getTraceAsString(), ENT_QUOTES);
 
         // Prepare message
         if ($debug || 404 == $code) {
@@ -271,11 +270,11 @@ class Error extends Base
             $detail = $this->detail;
         }
 
-        // File Information
-        $mtime = date('Y-m-d H:i:s', filemtime($file));
-        $fileInfo = $this->getFileCode($file, $line);
-
         if ($debug) {
+            $mtime      = date('Y-m-d H:i:s', filemtime($file));
+            $fileInfo   = $this->getFileCode($file, $line);
+            $trace      = htmlspecialchars($exception->getTraceAsString(), ENT_QUOTES);
+
             $detail = <<<HTML
 <h2>File</h2>
     <p class="error-text">{$file} modified at {$mtime}</p>
