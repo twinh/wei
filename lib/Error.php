@@ -268,17 +268,14 @@ class Error extends Base
             $fileInfo   = $this->getFileCode($file, $line);
             $trace      = htmlspecialchars($e->getTraceAsString(), ENT_QUOTES);
 
-            $detail = <<<HTML
-<h2>File</h2>
-    <p class="error-text">{$file} modified at {$mtime}</p>
-    <p><pre>{$fileInfo}</pre></p>
-
-    <h2>Trace</h2>
-    <p class="error-text">{$detail}</p>
-    <p><pre>{$trace}</pre></p>
-HTML;
+            $detail = "<h2>File</h2>"
+                . "<p class=\"error-text\">$file modified at $mtime</p>"
+                . "<p><pre>$fileInfo</pre></p>"
+                . "<h2>Trace</h2>"
+                . "<p class=\"error-text\">$detail</p>"
+                . "<p><pre>$trace</pre></p>";
         } else {
-            $detail = "<p>{$detail}</p>";
+            $detail = "<p>$detail</p>";
         }
 
         $html = <<<HTML
