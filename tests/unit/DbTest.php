@@ -761,6 +761,15 @@ class DbTest extends TestCase
         $this->assertFalse($member);
     }
 
+    public function testDestroyByCondition()
+    {
+        $this->initFixtures();
+
+        $result = $this->db('member')->destroy(1);
+
+        $this->assertFalse($this->db('member')->find(1));
+    }
+
     public function testBeforeAndAfterDestroy()
     {
         $this->initFixtures();

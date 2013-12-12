@@ -386,10 +386,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Delete the current record and trigger the beforeDestroy and afterDestroy callback
      *
+     * @param mixed $conditions
      * @return bool
      */
-    public function destroy()
+    public function destroy($conditions = null)
     {
+        $conditions && $this->andWhere($conditions);
         !$this->loaded && $this->loadData(0);
 
         if (!$this->isColl) {
