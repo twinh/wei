@@ -9,12 +9,12 @@
 
 namespace WeiTest;
 
-use Wei\Escape as Escaper;
+use Wei\E as Escaper;
 
 /**
  * The test case derived from https://raw.github.com/zendframework/zf2/master/tests/ZendTest/Escaper/EscaperTest.php
  */
-class EscapeTest extends TestCase
+class ETest extends TestCase
 {
     /**
      * All character encodings supported by htmlspecialchars()
@@ -220,7 +220,7 @@ class EscapeTest extends TestCase
             // call by wei
             $this->assertEquals(
                 $value,
-                $this->escape($key, 'html')
+                $this->e($key, 'html')
             );
         }
     }
@@ -237,7 +237,7 @@ class EscapeTest extends TestCase
             // call by wei
             $this->assertEquals(
                 $value,
-                $this->escape($key, 'attr')
+                $this->e($key, 'attr')
             );
         }
     }
@@ -255,7 +255,7 @@ class EscapeTest extends TestCase
             // call by wei
             $this->assertEquals(
                 $value,
-                $this->escape($key, 'js')
+                $this->e($key, 'js')
             );
     }
 
@@ -281,7 +281,7 @@ class EscapeTest extends TestCase
             // call by wei
             $this->assertEquals(
                 $value,
-                $this->escape($key, 'css')
+                $this->e($key, 'css')
             );
         }
     }
@@ -308,7 +308,7 @@ class EscapeTest extends TestCase
             // call by wei
             $this->assertEquals(
                 $value,
-                $this->escape($key, 'url')
+                $this->e($key, 'url')
             );
         }
     }
@@ -437,7 +437,7 @@ class EscapeTest extends TestCase
      */
     public function testInvokeUnsupportedTypeShouldThrowException()
     {
-        $this->escape('string', 'unsupport-type');
+        $this->e('string', 'unsupport-type');
     }
 
     public function providerForEmptyVar()
