@@ -213,14 +213,8 @@ class EscapeTest extends TestCase
         foreach ($this->htmlSpecialChars as $key => $value) {
             $this->assertEquals(
                 $value,
-                $this->escaper->escapeHtml($key),
+                $this->escaper->html($key),
                 'Failed to escape: ' . $key
-            );
-
-            // call by alias
-            $this->assertEquals(
-                $value,
-                $this->escaper->html($key)
             );
 
             // call by wei
@@ -236,14 +230,8 @@ class EscapeTest extends TestCase
         foreach ($this->htmlAttrSpecialChars as $key => $value) {
             $this->assertEquals(
                 $value,
-                $this->escaper->escapeHtmlAttr($key),
+                $this->escaper->attr($key),
                 'Failed to escape: ' . $key
-            );
-
-            // call by alias
-            $this->assertEquals(
-                $value,
-                $this->escaper->attr($key)
             );
 
             // call by wei
@@ -259,16 +247,10 @@ class EscapeTest extends TestCase
         foreach ($this->jsSpecialChars as $key => $value) {
             $this->assertEquals(
                 $value,
-                $this->escaper->escapeJs($key),
+                $this->escaper->js($key),
                 'Failed to escape: ' . $key
             );
         }
-
-        // call by alias
-            $this->assertEquals(
-                $value,
-                $this->escaper->js($key)
-            );
 
             // call by wei
             $this->assertEquals(
@@ -279,12 +261,12 @@ class EscapeTest extends TestCase
 
     public function testJavascriptEscapingReturnsStringIfZeroLength()
     {
-        $this->assertEquals('', $this->escaper->escapeJs(''));
+        $this->assertEquals('', $this->escaper->js(''));
     }
 
     public function testJavascriptEscapingReturnsStringIfContainsOnlyDigits()
     {
-        $this->assertEquals('123', $this->escaper->escapeJs('123'));
+        $this->assertEquals('123', $this->escaper->js('123'));
     }
 
     public function testCssEscapingConvertsSpecialChars()
@@ -292,14 +274,8 @@ class EscapeTest extends TestCase
         foreach ($this->cssSpecialChars as $key => $value) {
             $this->assertEquals(
                 $value,
-                $this->escaper->escapeCss($key),
+                $this->escaper->css($key),
                 'Failed to escape: ' . $key
-            );
-
-            // call by alias
-            $this->assertEquals(
-                $value,
-                $this->escaper->css($key)
             );
 
             // call by wei
@@ -312,12 +288,12 @@ class EscapeTest extends TestCase
 
     public function testCssEscapingReturnsStringIfZeroLength()
     {
-        $this->assertEquals('', $this->escaper->escapeCss(''));
+        $this->assertEquals('', $this->escaper->css(''));
     }
 
     public function testCssEscapingReturnsStringIfContainsOnlyDigits()
     {
-        $this->assertEquals('123', $this->escaper->escapeCss('123'));
+        $this->assertEquals('123', $this->escaper->css('123'));
     }
 
     public function testUrlEscapingConvertsSpecialChars()
@@ -325,14 +301,8 @@ class EscapeTest extends TestCase
         foreach ($this->urlSpecialChars as $key => $value) {
             $this->assertEquals(
                 $value,
-                $this->escaper->escapeUrl($key),
+                $this->escaper->url($key),
                 'Failed to escape: ' . $key
-            );
-
-            // call by alias
-            $this->assertEquals(
-                $value,
-                $this->escaper->url($key)
             );
 
             // call by wei
@@ -400,15 +370,15 @@ class EscapeTest extends TestCase
                 || $chr >= 0x61 && $chr <= 0x7A
             ) {
                 $literal = $this->codepointToUtf8($chr);
-                $this->assertEquals($literal, $this->escaper->escapeJs($literal));
+                $this->assertEquals($literal, $this->escaper->js($literal));
             } else {
                 $literal = $this->codepointToUtf8($chr);
                 if (in_array($literal, $immune)) {
-                    $this->assertEquals($literal, $this->escaper->escapeJs($literal));
+                    $this->assertEquals($literal, $this->escaper->js($literal));
                 } else {
                     $this->assertNotEquals(
                         $literal,
-                        $this->escaper->escapeJs($literal),
+                        $this->escaper->js($literal),
                         $literal . ' should be escaped!'
                     );
                 }
@@ -425,15 +395,15 @@ class EscapeTest extends TestCase
                 || $chr >= 0x61 && $chr <= 0x7A
             ) {
                 $literal = $this->codepointToUtf8($chr);
-                $this->assertEquals($literal, $this->escaper->escapeHtmlAttr($literal));
+                $this->assertEquals($literal, $this->escaper->attr($literal));
             } else {
                 $literal = $this->codepointToUtf8($chr);
                 if (in_array($literal, $immune)) {
-                    $this->assertEquals($literal, $this->escaper->escapeHtmlAttr($literal));
+                    $this->assertEquals($literal, $this->escaper->attr($literal));
                 } else {
                     $this->assertNotEquals(
                         $literal,
-                        $this->escaper->escapeHtmlAttr($literal),
+                        $this->escaper->attr($literal),
                         $literal . ' should be escaped!'
                     );
                 }
@@ -450,12 +420,12 @@ class EscapeTest extends TestCase
                 || $chr >= 0x61 && $chr <= 0x7A
             ) {
                 $literal = $this->codepointToUtf8($chr);
-                $this->assertEquals($literal, $this->escaper->escapeCss($literal));
+                $this->assertEquals($literal, $this->escaper->css($literal));
             } else {
                 $literal = $this->codepointToUtf8($chr);
                 $this->assertNotEquals(
                     $literal,
-                    $this->escaper->escapeCss($literal),
+                    $this->escaper->css($literal),
                     $literal . ' should be escaped!'
                 );
             }
