@@ -760,12 +760,10 @@ namespace Wei
         public function setAutoload($enable)
         {
             $this->autoload = (bool) $enable;
-
             call_user_func(
                 $enable ? 'spl_autoload_register' : 'spl_autoload_unregister',
                 array($this, 'autoload')
             );
-
             return $this;
         }
 
