@@ -13807,9 +13807,9 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h2>案例</h2>
 
-<h3>对请求进行加锁,防止重复操作</h3>
+<h3>对长时间请求进行加锁,防止重复操作</h3>
 
-<p>在一些长时间的请求,或者一次重要的请求(如领取礼包,增加积分),可以通过加锁防止重复提交,导致数据重复.</p>
+<p>在一些长时间的请求(如提交表单,上传文件,实时发送邮件等),可以通过加锁防止重复提交,导致数据重复.</p>
 
 <div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">lock</span><span class="p">(</span><span class="s1">'longTimeJob'</span><span class="p">))</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'您的请求还在执行中,请稍后再试'</span><span class="p">;</span>
@@ -13818,11 +13818,27 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <span class="c1">// 执行长时间的任务</span>
 <span class="nb">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
 <span class="k">echo</span> <span class="s1">'操作成功'</span><span class="p">;</span>
 </code></pre></div>
 
+<h3>对包含多个重要操作的请求进行加锁,实现请求原子化</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$userId</span> <span class="o">=</span> <span class="s1">'123456'</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">lock</span><span class="p">(</span><span class="s1">'lottery-'</span> <span class="o">.</span> <span class="nv">$userId</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'您的请求还在执行中,请稍后再试'</span><span class="p">;</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 重要请求1: 扣除用户抽奖次数</span>
+<span class="c1">// lotteryCounter-&gt;</span>
+
+<span class="c1">// 重要请求2: 执行抽奖操作</span>
+<span class="c1">// lottery-&gt;draw();</span>
+</code></pre></div>
+
 <blockquote>
-<h3>注意</h3>
+<h4>注意</h4>
 
 <p>在请求结束后,所有的锁都会被自动释放</p>
 </blockquote>
