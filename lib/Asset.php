@@ -33,12 +33,13 @@ class Asset extends Base
      * Returns the asset URL by specified file
      *
      * @param string $file
+     * @param bool $version Whether append version or not
      * @return string
      */
-    public function __invoke($file)
+    public function __invoke($file, $version = true)
     {
         $url = $this->baseUrl . $file;
-        if ($this->version) {
+        if ($version && $this->version) {
             $url .= ((false === strpos($url, '?')) ? '?' : '&') . 'v=' . $this->version;
         }
         return $url;
