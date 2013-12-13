@@ -773,13 +773,22 @@ namespace Wei
          * Set autoload directories for autoload method
          *
          * @param array $map
+         * @throws \InvalidArgumentException
          * @return $this
          */
         public function setAutoloadMap(array $map)
         {
-            // Append the "\Wei" namespace to avoid class not found error
+            foreach ($map as &$dir) {
+                if (!is_dir($dir)) {
+                    throw new \InvalidArgumentException(sprintf('Directory "%s" for autoloading is not found', $dir));
+                }
+                $dir = realpath($dir);
+            }
+
+            // Automatic add PSR-4 autoloading for "\Wei" namespace
             $map['\Wei'] = __DIR__;
-            $this->autoloadMap = array_map('realpath', $map);
+
+            $this->autoloadMap = $map;
             return $this;
         }
 
