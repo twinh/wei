@@ -166,7 +166,8 @@ API参考目录
 
 * [view](api/view.md) - 渲染指定名称的PHP模板
 * [asset](api/asset.md) - 生成带版本号的资源(CSS, JS, 图片等素材文件)URL地址,解决浏览器缓存资源文件的问题
-* [escape](api/escape.md) - 转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义
+* [escape](api/escape.md) - 转义特殊字符,以便安全的输出到网页中,防止XSS攻击.支持HTML,JS,CSS,HTML属性和URL的转义.
+
 
 #### 其他
 
