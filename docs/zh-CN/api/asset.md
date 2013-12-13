@@ -79,6 +79,18 @@ echo wei()->mod2Asset('style.css');
 '/assets/mod2/style.css?v=1';
 ```
 
+### 生成不带版本号的URL地址
+
+有时为了检查资源文件是否存在,可以设置第二个参数为`false`,即生成不带版本号的路径.
+
+```php
+$file = wei()->asset('styele.css', false);
+
+if (file_exists($file)) {
+    // do something
+}
+```
+
 调用方式
 --------
 
@@ -91,5 +103,5 @@ version             | string  | 1         | 自动附加到URL结尾的版本号
 
 ### 方法
 
-#### asset($file)
+#### asset($file, $version = true)
 生成指定文件的资源URL地址
