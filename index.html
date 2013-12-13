@@ -13807,9 +13807,15 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 
 <h2>案例</h2>
 
-<h3>对长时间请求进行加锁,防止重复操作</h3>
+<h3>常用场景</h3>
 
-<p>在一些长时间的请求(如提交表单,上传文件,实时发送邮件等),可以通过加锁防止重复提交,导致数据重复.</p>
+<ul>
+<li>限制用户只能领取一个礼包</li>
+<li>对用户增加或减少积分</li>
+<li>限制用户只能购买一件商品</li>
+</ul><h3>对耗时较长的请求进行加锁,防止重复操作</h3>
+
+<p>在一些耗时长的请求(如提交表单,上传文件,实时发送邮件等),可以通过加锁防止重复提交,导致数据重复.</p>
 
 <div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">lock</span><span class="p">(</span><span class="s1">'longTimeJob'</span><span class="p">))</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">'您的请求还在执行中,请稍后再试'</span><span class="p">;</span>
@@ -13830,11 +13836,11 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
     <span class="k">return</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="c1">// 重要请求1: 扣除用户抽奖次数</span>
-<span class="c1">// lotteryCounter-&gt;</span>
+<span class="c1">// 重要操作1: 扣除用户抽奖次数</span>
+<span class="c1">// $lotteryCounter-&gt;decr($userId)</span>
 
-<span class="c1">// 重要请求2: 执行抽奖操作</span>
-<span class="c1">// lottery-&gt;draw();</span>
+<span class="c1">// 重要操作2: 执行抽奖操作</span>
+<span class="c1">// $lottery-&gt;draw();</span>
 </code></pre></div>
 
 <blockquote>
@@ -13843,17 +13849,26 @@ Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可�
 <p>在请求结束后,所有的锁都会被自动释放</p>
 </blockquote>
 
-<h3>常用场景</h3>
+<h3>配置锁服务</h3>
 
-<ul>
-<li>限制用户只能领取一个礼包</li>
-<li>对用户增加或减少积分</li>
-<li>限制用户只能购买一件商品</li>
-</ul><h2>调用方式</h2>
+<p>锁服务依赖于缓存服务,您可以通过<code>providers</code>选项配置.</p>
+
+<p>推荐配置的缓存服务:<code>apc</code>(单台服务器),<code>memcached</code>,<code>redis</code>等.</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'lock'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'providers'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'cache'</span> <span class="o">=&gt;</span> <span class="s1">'memcached'</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
 
 <h3>选项</h3>
 
-<p>无</p>
+<p><em>无</em></p>
 
 <h3>方法</h3>
 
