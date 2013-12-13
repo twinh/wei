@@ -70,8 +70,8 @@ namespace Wei
      * @method   string     view($name = null, $vars = array()) Returns view object or render a PHP template
      * @property Asset      $asset A service to generate assets' URL
      * @method   string     asset($file) Returns the asset URL by specified file
-     * @property Escape     $escape A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
-     * @method   string     escape($string, $type = 'html') Escapes a string by specified type for secure output
+     * @property E          $e A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
+     * @method   string     e($string, $type = 'html') Escapes a string by specified type for secure output
      *
      * Application
      * @property App            $app An MVC application service
