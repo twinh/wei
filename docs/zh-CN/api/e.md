@@ -1,7 +1,7 @@
-E(Escape)
-=========
+E
+=
 
-转义特殊字符,以便安全的输出到网页中,防止XSS攻击.
+E,即Escaper,用于转义特殊字符,以便安全的输出到网页中,防止XSS攻击.
 
 支持HTML,JS,CSS,HTML属性和URL的转义.
 
@@ -60,8 +60,10 @@ echo '">Click here!</a>';
 说明
 ----
 
-Escape对象是基于[Zend\Escaper](https://github.com/zendframework/zf2/tree/master/library/Zend/Escaper)组件的字符串安全转义器.
-Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可以查看这里
+Escaper服务是基于[Zend\Escaper][1]组件的字符串安全转义器.
+
+Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可以查看以下链接.
+
 http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html
 
 调用方式
@@ -92,3 +94,6 @@ encoding            | string  | utf-8     | 要转义内容的编码,应该与�
 
 #### e->url($input)
 转义URL字符串
+
+
+[1]: https://github.com/zendframework/zf2/tree/master/library/Zend/Escaper
