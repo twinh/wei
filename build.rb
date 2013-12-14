@@ -72,7 +72,7 @@ weis = [
   # response
     'response',
   # view
-    'asset', 'escape', 'view',
+    'asset', 'e', 'view',
   # app
     'app',
   # others
