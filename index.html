@@ -13018,12 +13018,108 @@
 <p>生成指定文件的资源URL地址</p>
   </section>
 
-<!-- api/escape
+<!-- api/e
   ================================================== -->
-  <section id="escape">
-  <div class="page-header"><h1>Escape</h1></div>
+  <section id="e">
+  <div class="page-header"><h1>E(Escape)</h1></div>
 
-<p>Moved to <a href="#e">e.md</a></p>
+<p>转义特殊字符,以便安全的输出到网页中,防止XSS攻击.</p>
+
+<p>支持HTML,JS,CSS,HTML属性和URL的转义.</p>
+
+<h2>案例</h2>
+
+<h3>转义HTML字符串</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">e</span><span class="p">(</span><span class="s1">'&lt;script&gt;alert("xss")&lt;/script&gt;'</span><span class="p">);</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'&amp;lt;script&amp;gt;alert(&amp;quot;xss&amp;quot;)&amp;lt;/script&amp;gt;'</span>
+</code></pre></div>
+
+<h3>转义Javascript字符串</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">e</span><span class="o">-&gt;</span><span class="na">js</span><span class="p">(</span><span class="s1">'bar&amp;quot;; alert(&amp;quot;Meow!&amp;quot;); var xss=&amp;quot;true'</span><span class="p">);</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'bar\x26quot\x3B\x3B\x20alert\x28\x26quot\x3BMeow\x21\x26quot\x3B\x29\x3B\x20var\x20xss\x3D\x26quot\x3Btrue'</span>
+</code></pre></div>
+
+<h3>转义CSS字符串</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">e</span><span class="o">-&gt;</span><span class="na">css</span><span class="p">(</span><span class="s2">"background-image: url('http://example.com/foo.jpg?&lt;/style&gt;&lt;script&gt;alert(1)&lt;/script&gt;');"</span><span class="p">);</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'background\2D image\3A \20 url\28 \27 http\3A \2F \2F example\2E com\2F foo\2E jpg\3F \3C \2F style\3E \3C script\3E alert\28 1\29 \3C \2F script\3E \27 \29 \3B '</span>
+</code></pre></div>
+
+<h3>转义HTML属性字符串</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="s1">'&lt;span title='</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">e</span><span class="o">-&gt;</span><span class="na">attr</span><span class="p">(</span><span class="s2">"faketitle onmouseover=alert(/xss/);"</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s1">'&gt;hi&lt;/span&gt;'</span><span class="p">;</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'&lt;span title=faketitle&amp;#x20;onmouseover&amp;#x3D;alert&amp;#x28;&amp;#x2F;xss&amp;#x2F;&amp;#x29;&amp;#x3B;&gt;hi&lt;/span&gt;'</span>
+</code></pre></div>
+
+<h3>转义URL字符串</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">echo</span> <span class="s1">'&lt;a href="http://example.com/?name='</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">e</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="s2">"onmouseover= </span><span class="se">\"</span><span class="s2">alert('zf2')"</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s1">'"&gt;Click here!&lt;/a&gt;'</span><span class="p">;</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'&lt;a href="http://example.com/?name=onmouseover%3D%20%22alert%28%27zf2%27%29"&gt;Click here!&lt;/a&gt;'</span>
+</code></pre></div>
+
+<h2>说明</h2>
+
+<p>Escape对象是基于<a href="https://github.com/zendframework/zf2/tree/master/library/Zend/Escaper" target="_blank">Zend\Escaper</a>组件的字符串安全转义器.
+Escape对象的用法与Zend\Escaper基本一致.关于Zend\Escaper的文档可以查看这里
+<a href="http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html" target="_blank">http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html</a></p>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>方法</h3>
+
+<h4>e($input, $type = 'html')</h4>
+
+<p>转义HTML字符串</p>
+
+<h4>e-&gt;html($input)</h4>
+
+<p>转义HTML字符串</p>
+
+<h4>e-&gt;js($input)</h4>
+
+<p>转义Javascript字符串</p>
+
+<h4>e-&gt;css($input)</h4>
+
+<p>转义CSS字符串</p>
+
+<h4>e-&gt;attr($input)</h4>
+
+<p>转义HTML属性字符串</p>
+
+<h4>e-&gt;url($input)</h4>
+
+<p>转义URL字符串</p>
   </section>
 
 <!-- api/view
