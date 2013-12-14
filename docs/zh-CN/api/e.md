@@ -69,7 +69,9 @@ http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html
 
 ### 选项
 
-*无*
+名称                | 类型    | 默认值    | 说明
+--------------------|---------|-----------|------
+encoding            | string  | utf-8     | 要转义内容的编码,应该与页面编码一致
 
 ### 方法
 
