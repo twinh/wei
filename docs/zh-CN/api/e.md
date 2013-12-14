@@ -12,11 +12,8 @@ E(Escape)
 
 ```php
 echo wei()->e('<script>alert("xss")</script>');
-```
 
-#### 运行结果
-
-```php
+// 运行结果
 '&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;'
 ```
 
@@ -24,11 +21,8 @@ echo wei()->e('<script>alert("xss")</script>');
 
 ```php
 echo wei()->e->js('bar&quot;; alert(&quot;Meow!&quot;); var xss=&quot;true');
-```
 
-#### 运行结果
-
-```php
+// 运行结果
 'bar\x26quot\x3B\x3B\x20alert\x28\x26quot\x3BMeow\x21\x26quot\x3B\x29\x3B\x20var\x20xss\x3D\x26quot\x3Btrue'
 ```
 
@@ -36,11 +30,8 @@ echo wei()->e->js('bar&quot;; alert(&quot;Meow!&quot;); var xss=&quot;true');
 
 ```php
 echo wei()->e->css("background-image: url('http://example.com/foo.jpg?</style><script>alert(1)</script>');");
-```
 
-#### 运行结果
-
-```php
+// 运行结果
 'background\2D image\3A \20 url\28 \27 http\3A \2F \2F example\2E com\2F foo\2E jpg\3F \3C \2F style\3E \3C script\3E alert\28 1\29 \3C \2F script\3E \27 \29 \3B '
 ```
 
@@ -50,11 +41,8 @@ echo wei()->e->css("background-image: url('http://example.com/foo.jpg?</style><s
 echo '<span title=';
 echo wei()->e->attr("faketitle onmouseover=alert(/xss/);");
 echo '>hi</span>';
-```
 
-#### 运行结果
-
-```php
+// 运行结果
 '<span title=faketitle&#x20;onmouseover&#x3D;alert&#x28;&#x2F;xss&#x2F;&#x29;&#x3B;>hi</span>'
 ```
 
@@ -64,11 +52,8 @@ echo '>hi</span>';
 echo '<a href="http://example.com/?name=';
 echo wei()->e->url("onmouseover= \"alert('zf2')");
 echo '">Click here!</a>';
-```
 
-#### 运行结果
-
-```php
+// 运行结果
 '<a href="http://example.com/?name=onmouseover%3D%20%22alert%28%27zf2%27%29">Click here!</a>'
 ```
 
