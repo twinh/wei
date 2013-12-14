@@ -1,5 +1,5 @@
-Escape
-======
+E(Escape)
+=========
 
 转义特殊字符,以便安全的输出到网页中,防止XSS攻击.
 
@@ -11,7 +11,7 @@ Escape
 ### 转义HTML字符串
 
 ```php
-echo wei()->escape('<script>alert("xss")</script>');
+echo wei()->e('<script>alert("xss")</script>');
 ```
 
 #### 运行结果
@@ -23,7 +23,7 @@ echo wei()->escape('<script>alert("xss")</script>');
 ### 转义Javascript字符串
 
 ```php
-echo wei()->escape->js('bar&quot;; alert(&quot;Meow!&quot;); var xss=&quot;true');
+echo wei()->e->js('bar&quot;; alert(&quot;Meow!&quot;); var xss=&quot;true');
 ```
 
 #### 运行结果
@@ -35,7 +35,7 @@ echo wei()->escape->js('bar&quot;; alert(&quot;Meow!&quot;); var xss=&quot;true'
 ### 转义CSS字符串
 
 ```php
-echo wei()->escape->css("background-image: url('http://example.com/foo.jpg?</style><script>alert(1)</script>');");
+echo wei()->e->css("background-image: url('http://example.com/foo.jpg?</style><script>alert(1)</script>');");
 ```
 
 #### 运行结果
@@ -48,7 +48,7 @@ echo wei()->escape->css("background-image: url('http://example.com/foo.jpg?</sty
 
 ```php
 echo '<span title=';
-echo wei()->escape->attr("faketitle onmouseover=alert(/xss/);");
+echo wei()->e->attr("faketitle onmouseover=alert(/xss/);");
 echo '>hi</span>';
 ```
 
@@ -62,7 +62,7 @@ echo '>hi</span>';
 
 ```php
 echo '<a href="http://example.com/?name=';
-echo wei()->escape->url("onmouseover= \"alert('zf2')");
+echo wei()->e->url("onmouseover= \"alert('zf2')");
 echo '">Click here!</a>';
 ```
 
@@ -88,20 +88,20 @@ http://framework.zend.com/manual/2.1/en/modules/zend.escaper.introduction.html
 
 ### 方法
 
-#### escape($input, $type = 'html')
+#### e($input, $type = 'html')
 转义HTML字符串
 
-#### escape->html($input)
+#### e->html($input)
 转义HTML字符串
 
-#### escape->js($input)
+#### e->js($input)
 转义Javascript字符串
 
-#### escape->css($input)
+#### e->css($input)
 转义CSS字符串
 
-#### escape->attr($input)
+#### e->attr($input)
 转义HTML属性字符串
 
-#### escape->url($input)
+#### e->url($input)
 转义URL字符串
