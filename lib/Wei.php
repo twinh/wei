@@ -46,8 +46,8 @@ namespace Wei
      * @property Db             $db A database service inspired by Doctrine DBAL
      * @method   \Wei\Record    db($table = null) Create a new record object
      *
-     * @property Call       $call A object handles HTTP request like jQuery Ajax
-     * @method   \Wei\Call  call(array $options) Create a new call object and execute
+     * @property Call       $call An HTTP client that inspired by jQuery Ajax
+     * @method   \Wei\Call  call(array $options) Create a new call service and execute
      *
      * HTTP Request
      * @property Request    $request A service that handles the HTTP request data
@@ -70,8 +70,8 @@ namespace Wei
      * @method   string     view($name = null, $vars = array()) Returns view object or render a PHP template
      * @property Asset      $asset A service to generate assets' URL
      * @method   string     asset($file) Returns the asset URL by specified file
-     * @property Escape     $escape A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
-     * @method   string     escape($string, $type = 'html') Escapes a string by specified type for secure output
+     * @property E          $e A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
+     * @method   string     e($string, $type = 'html') Escapes a string by specified type for secure output
      *
      * Application
      * @property App            $app An MVC application service
@@ -94,7 +94,7 @@ namespace Wei
      * @method   string     gravatar($email, $size = null, $default = null, $rating = null) Generates a Gravatar URL for a specified email address
      * @property Lock       $lock A service that provide the functionality of exclusive Lock
      * @method   bool       lock($key) Acquire a lock key
-     * @property Logger     $logger A simple logger service, which is inspired by Monolog
+     * @property Logger     $logger A logger service, which is inspired by Monolog
      * @method   bool       logger($level, $message) Logs with an arbitrary level
      * @property Password   $password A wrapper class for password hashing functions
      * @property Pinyin     $pinyin An util object that converts Chinese words to phonetic alphabets
@@ -760,12 +760,10 @@ namespace Wei
         public function setAutoload($enable)
         {
             $this->autoload = (bool) $enable;
-
             call_user_func(
                 $enable ? 'spl_autoload_register' : 'spl_autoload_unregister',
                 array($this, 'autoload')
             );
-
             return $this;
         }
 
@@ -773,13 +771,22 @@ namespace Wei
          * Set autoload directories for autoload method
          *
          * @param array $map
+         * @throws \InvalidArgumentException
          * @return $this
          */
         public function setAutoloadMap(array $map)
         {
-            // Append the "\Wei" namespace to avoid class not found error
+            foreach ($map as &$dir) {
+                if (!is_dir($dir)) {
+                    throw new \InvalidArgumentException(sprintf('Directory "%s" for autoloading is not found', $dir));
+                }
+                $dir = realpath($dir);
+            }
+
+            // Automatic add PSR-4 autoloading for "\Wei" namespace
             $map['\Wei'] = __DIR__;
-            $this->autoloadMap = array_map('realpath', $map);
+
+            $this->autoloadMap = $map;
             return $this;
         }
 

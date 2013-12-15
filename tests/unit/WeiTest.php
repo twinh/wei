@@ -512,4 +512,15 @@ class WeiTest extends TestCase
         // Reset container
         Wei::setContainer($origContainer);
     }
+
+    public function testAutoloadMapDirNotFoundException()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'Directory "abc" for autoloading is not found'
+        );
+        $this->wei->setAutoloadMap(array(
+            'namespace' => 'abc'
+        ));
+    }
 }

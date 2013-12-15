@@ -16,7 +16,7 @@ namespace Wei;
  *
  * @link https://github.com/zendframework/zf2/blob/master/library/Zend/Escaper/Escaper.php
  */
-class Escape extends Base
+class E extends Base
 {
     /**
      * Entity Map mapping Unicode codepoints to any available named HTML entities.
@@ -151,7 +151,7 @@ class Escape extends Base
      * @param string $string
      * @return string
      */
-    public function escapeHtml($string)
+    public function html($string)
     {
         if (!$string) {
             return $string;
@@ -169,7 +169,7 @@ class Escape extends Base
      * @param string $string
      * @return string
      */
-    public function escapeHtmlAttr($string)
+    public function attr($string)
     {
         if (!$string) {
             return $string;
@@ -196,7 +196,7 @@ class Escape extends Base
      * @param string $string
      * @return string
      */
-    public function escapeJs($string)
+    public function js($string)
     {
         if (!$string) {
             return $string;
@@ -219,7 +219,7 @@ class Escape extends Base
      * @param string $string
      * @return string
      */
-    public function escapeUrl($string)
+    public function url($string)
     {
         if (!$string) {
             return $string;
@@ -235,7 +235,7 @@ class Escape extends Base
      * @param string $string
      * @return string
      */
-    public function escapeCss($string)
+    public function css($string)
     {
         if (!$string) {
             return $string;
@@ -425,74 +425,8 @@ class Escape extends Base
     public function __invoke($string, $type = 'html')
     {
         if (in_array($type, array('html', 'js', 'css', 'attr', 'url'))) {
-            return $this->{'escape' . $type}($string);
+            return $this->$type($string);
         }
         throw new \InvalidArgumentException(sprintf('Unsupported escape type "%s"', $type));
-    }
-
-    /**
-     * The alias of escapeHtml method
-     *
-     * @param string $string
-     * @return string
-     */
-    public function html($string)
-    {
-        return $this->escapeHtml($string);
-    }
-
-    /**
-     * The alias of escapeJs method
-     *
-     * @param string $string
-     * @return string
-     */
-    public function js($string)
-    {
-        return $this->escapeJs($string);
-    }
-
-    /**
-     * The alias of escapeCss method
-     *
-     * @param string $string
-     * @return string
-     */
-    public function css($string)
-    {
-        return $this->escapeCss($string);
-    }
-
-    /**
-     * The alias of escapeHtmlAttr method
-     *
-     * @param string $string
-     * @return string
-     */
-    public function attr($string)
-    {
-        return $this->escapeHtmlAttr($string);
-    }
-
-    /**
-     * The alias of escapeHtmlAttr method
-     *
-     * @param string $string
-     * @return string
-     */
-    public function escapeAttr($string)
-    {
-        return $this->escapeHtmlAttr($string);
-    }
-
-    /**
-     * The alias of escapeUrl method
-     *
-     * @param string $string
-     * @return string
-     */
-    public function url($string)
-    {
-        return $this->escapeUrl($string);
     }
 }

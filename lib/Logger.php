@@ -9,7 +9,7 @@
 namespace Wei;
 
 /**
- * A simple logger service, which is base on the Monolog
+ * A logger service, which is inspired by Monolog
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        https://github.com/Seldaek/monolog

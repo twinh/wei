@@ -12,7 +12,8 @@ namespace Wei;
  * A service that handles the HTTP response data
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Logger $logger The logger wei
+ * @property    Logger $logger The logger service
+ * @property    Request $request The request service
  */
 class Response extends Base
 {
@@ -629,10 +630,9 @@ class Response extends Base
     {
         $result = json_encode($data);
 
-        if ($jsonp && $name = $this->request['callback']) {
+        if ($jsonp && preg_match('/^[$A-Z_][0-9A-Z_$]*$/', $this->request['callback']) !== false) {
             $this->setHeader('Content-Type', 'application/javascript');
-            $jsonp = $this->escape->js((string)$name);
-            $result = $jsonp . '(' . $result . ')';
+            $result = $this->request['callback'] . '(' . $result . ')';
         } else {
             $this->setHeader('Content-Type', 'application/json');
         }

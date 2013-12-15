@@ -9,14 +9,6 @@ class UrlTest extends TestCase
      */
     public function testUrl($result, $url, $params = array())
     {
-        $wei = $this->wei;
-        $wei->request->setBaseUrl('/');
-        $wei->router->setRoutes(array(
-            '/<controller>/<action>',
-            '/<controller>'
-        ));
-        $this->request->setBaseUrl('/');
-
         $this->assertEquals($result, $this->url($url, $params));
     }
 
@@ -33,7 +25,7 @@ class UrlTest extends TestCase
                 array('id' => 'twin')
             ),
             array(
-                '?id=twin',
+                '/?id=twin',
                 '',
                 array('id' => 'twin')
             )

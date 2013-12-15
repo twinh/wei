@@ -15,6 +15,9 @@ namespace Wei\Validator;
  */
 class All extends BaseValidator
 {
+    /**
+     * @var string
+     */
     protected $notArrayMessage = '%name% must be of type array';
 
     /**
@@ -24,8 +27,14 @@ class All extends BaseValidator
      */
     protected $invalidMessage = 'Some of the items is not valid';
 
+    /**
+     * @var string
+     */
     protected $itemName = '%name%\'s %index% item';
 
+    /**
+     * @var array
+     */
     protected $rules = array();
 
     /**

@@ -12,11 +12,11 @@ namespace Wei;
  * A service to build an MVC application
  *
  * @author      Twin Huang <twinhuang@qq.com>
+ * @property    Router $router A service that parse the URL to request data
  * @property    Request $request A service that handles the HTTP request data
- * @property    Router $router A simple router
  * @property    Response $response A service that handles the HTTP response data
  * @property    View $view A service that use to render PHP template
- * @property    Logger $logger A simple logger service, which is inspired by Monolog
+ * @property    Logger $logger A logger service, which is inspired by Monolog
  */
 class App extends Base
 {

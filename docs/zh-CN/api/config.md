@@ -72,10 +72,10 @@ echo wei()->config->toJson('yesOrNo');
 
 ### 方法
 
-#### wei->setConfig($name, $default = null)
+#### wei()->setConfig($name, $default = null)
 设置配置
 
-#### wei->getConfig($name, $value)
+#### wei()->getConfig($name, $value)
 获取配置
 
 #### config->toJson($name)
