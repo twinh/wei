@@ -48,4 +48,16 @@ class Config extends Base
         }
         return $html;
     }
+
+    /**
+     * Returns the value by the map name and key
+     *
+     * @param string $name The name of the map
+     * @param string $key The key name in the map
+     * @return mixed
+     */
+    public function getMap($name, $key)
+    {
+        return $this->wei->getConfig($name . ':' . $key);
+    }
 }

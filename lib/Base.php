@@ -71,7 +71,7 @@ abstract class Base
     }
 
     /**
-     * Returns option property value
+     * Returns the value of option
      *
      * @param string $name The name of property
      * @return mixed
