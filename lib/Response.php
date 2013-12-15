@@ -12,7 +12,8 @@ namespace Wei;
  * A service that handles the HTTP response data
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Logger $logger The logger wei
+ * @property    Logger $logger The logger service
+ * @property    Request $request The request service
  */
 class Response extends Base
 {
