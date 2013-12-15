@@ -629,10 +629,9 @@ class Response extends Base
     {
         $result = json_encode($data);
 
-        if ($jsonp && $name = $this->request['callback']) {
+        if ($jsonp && preg_match('/^[$A-Z_][0-9A-Z_$]*$/', $this->request['callback']) !== false) {
             $this->setHeader('Content-Type', 'application/javascript');
-            $jsonp = $this->escape->js((string)$name);
-            $result = $jsonp . '(' . $result . ')';
+            $result = $this->request['callback'] . '(' . $result . ')';
         } else {
             $this->setHeader('Content-Type', 'application/json');
         }
