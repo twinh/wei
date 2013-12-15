@@ -13,7 +13,7 @@ namespace Wei;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class View extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
+class View extends Base implements \ArrayAccess
 {
     /**
      * The template variables
@@ -250,25 +250,5 @@ class View extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function offsetUnset($offset)
     {
         unset($this->vars[$offset]);
-    }
-
-    /**
-     * Return the length of data
-     *
-     * @return int the length of data
-     */
-    public function count()
-    {
-        return count($this->vars);
-    }
-
-    /**
-     * Retrieve an array iterator
-     *
-     * @return \ArrayIterator
-     */
-    public function getIterator()
-    {
-        return new \ArrayIterator($this->vars);
     }
 }
