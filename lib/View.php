@@ -238,7 +238,6 @@ class View extends Base implements \ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
-        var_dump($offset);die;
         $this->vars[$offset] = $value;
     }
 
