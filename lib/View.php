@@ -13,7 +13,7 @@ namespace Wei;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class View extends Base
+class View extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
      * The template variables
@@ -206,5 +206,69 @@ class View extends Base
     public function getExtension()
     {
         return $this->extension;
+    }
+
+    /**
+     * Check if the offset exists
+     *
+     * @param  string $offset
+     * @return bool
+     */
+    public function offsetExists($offset)
+    {
+        return array_key_exists($offset, $this->vars);
+    }
+
+    /**
+     * Get the offset value
+     *
+     * @param  string $offset
+     * @return mixed
+     */
+    public function &offsetGet($offset)
+    {
+        return isset($this->vars[$offset]) ? $ret = &$this->vars[$offset] : null;
+    }
+
+    /**
+     * Set the offset value
+     *
+     * @param string $offset
+     * @param mixed $value
+     */
+    public function offsetSet($offset, $value)
+    {
+        var_dump($offset);die;
+        $this->vars[$offset] = $value;
+    }
+
+    /**
+     * Unset the offset
+     *
+     * @param string $offset
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->vars[$offset]);
+    }
+
+    /**
+     * Return the length of data
+     *
+     * @return int the length of data
+     */
+    public function count()
+    {
+        return count($this->vars);
+    }
+
+    /**
+     * Retrieve an array iterator
+     *
+     * @return \ArrayIterator
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->vars);
     }
 }
