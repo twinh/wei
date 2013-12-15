@@ -46,8 +46,8 @@ namespace Wei
      * @property Db             $db A database service inspired by Doctrine DBAL
      * @method   \Wei\Record    db($table = null) Create a new record object
      *
-     * @property Call       $call A object handles HTTP request like jQuery Ajax
-     * @method   \Wei\Call  call(array $options) Create a new call object and execute
+     * @property Call       $call An HTTP client that inspired by jQuery Ajax
+     * @method   \Wei\Call  call(array $options) Create a new call service and execute
      *
      * HTTP Request
      * @property Request    $request A service that handles the HTTP request data

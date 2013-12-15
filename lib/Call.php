@@ -9,7 +9,7 @@
 namespace Wei;
 
 /**
- * A service handles HTTP request which inspired by jQuery Ajax
+ * An HTTP client that inspired by jQuery Ajax
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://api.jquery.com/jQuery.ajax/
