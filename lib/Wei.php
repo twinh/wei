@@ -94,7 +94,7 @@ namespace Wei
      * @method   string     gravatar($email, $size = null, $default = null, $rating = null) Generates a Gravatar URL for a specified email address
      * @property Lock       $lock A service that provide the functionality of exclusive Lock
      * @method   bool       lock($key) Acquire a lock key
-     * @property Logger     $logger A simple logger service, which is inspired by Monolog
+     * @property Logger     $logger A logger service, which is inspired by Monolog
      * @method   bool       logger($level, $message) Logs with an arbitrary level
      * @property Password   $password A wrapper class for password hashing functions
      * @property Pinyin     $pinyin An util object that converts Chinese words to phonetic alphabets
