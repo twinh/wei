@@ -20,7 +20,7 @@ class View extends Base implements \ArrayAccess
      *
      * @var array
      */
-    protected $vars = array();
+    protected $data = array();
 
     /**
      * The directories to find template
@@ -70,32 +70,32 @@ class View extends Base implements \ArrayAccess
      * Render a PHP template
      *
      * @param string $name The name of template
-     * @param array $vars The variables pass to template
+     * @param array $data The variables pass to template
      *
      * @return string
      */
-    public function __invoke($name = null, $vars = array())
+    public function __invoke($name = null, $data = array())
     {
-        return $this->render($name, $vars);
+        return $this->render($name, $data);
     }
 
     /**
      * Render a template
      *
      * @param string $name  The name of template
-     * @param array  $vars  The variables pass to template
+     * @param array  $data  The variables pass to template
      * @return string|null
      */
-    public function render($name, $vars = array())
+    public function render($name, $data = array())
     {
         // Set extra view variables
-        $vars = $vars ? $vars + $this->vars : $this->vars;
+        $data = $data ? $data + $this->data : $this->data;
 
         // Assign $name to $this->currentName to avoid conflict with view parameter
         $this->currentName = $name;
 
         // Render view
-        extract($vars, EXTR_OVERWRITE);
+        extract($data, EXTR_OVERWRITE);
         ob_start();
         require $this->getFile($this->currentName);
         $content = ob_get_clean();
@@ -106,7 +106,7 @@ class View extends Base implements \ArrayAccess
             $this->layout = array();
             $content = $this->render($layout['name'], array(
                 $layout['variable'] => $content
-            ) + $vars);
+            ) + $data);
         }
 
         return $content;
@@ -116,12 +116,12 @@ class View extends Base implements \ArrayAccess
      * Output a rendered template
      *
      * @param string $name  The name of template
-     * @param array  $vars  The variables pass to template
+     * @param array  $data  The variables pass to template
      * @return void
      */
-    public function display($name, $vars = array())
+    public function display($name, $data = array())
     {
-        echo $this->render($name, $vars);
+        echo $this->render($name, $data);
     }
 
     /**
@@ -134,9 +134,9 @@ class View extends Base implements \ArrayAccess
     public function assign($name, $value = null)
     {
         if (is_array($name)) {
-            $this->vars = $name + $this->vars;
+            $this->data = $name + $this->data;
         } else {
-            $this->vars[$name] = $value;
+            $this->data[$name] = $value;
         }
         return $this;
     }
@@ -149,7 +149,7 @@ class View extends Base implements \ArrayAccess
      */
     public function get($name)
     {
-        return isset($this->vars[$name]) ? $this->vars[$name] : null;
+        return isset($this->data[$name]) ? $this->data[$name] : null;
     }
 
     /**
@@ -216,7 +216,7 @@ class View extends Base implements \ArrayAccess
      */
     public function offsetExists($offset)
     {
-        return array_key_exists($offset, $this->vars);
+        return array_key_exists($offset, $this->data);
     }
 
     /**
@@ -227,7 +227,7 @@ class View extends Base implements \ArrayAccess
      */
     public function &offsetGet($offset)
     {
-        return isset($this->vars[$offset]) ? $ret = &$this->vars[$offset] : null;
+        return isset($this->data[$offset]) ? $ret = &$this->data[$offset] : null;
     }
 
     /**
@@ -238,7 +238,7 @@ class View extends Base implements \ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
-        $this->vars[$offset] = $value;
+        $this->data[$offset] = $value;
     }
 
     /**
@@ -248,6 +248,6 @@ class View extends Base implements \ArrayAccess
      */
     public function offsetUnset($offset)
     {
-        unset($this->vars[$offset]);
+        unset($this->data[$offset]);
     }
 }
