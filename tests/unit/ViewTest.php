@@ -89,4 +89,30 @@ class ViewTest extends TestCase
         $this->assertEquals($this->wei, $this->object->get('wei'));
         $this->assertEquals($this->wei->view, $this->object->get('view'));
     }
+
+    public function testArrayAccess()
+    {
+        $view = $this->view;
+
+        $view['name'] = 'value';
+        $this->assertEquals('value', $view['name']);
+
+        $view['name'] = 'value2';
+        $this->assertEquals('value2', $view['name']);
+
+        unset($view['name']);
+        $this->assertNull($view['name']);
+
+        $this->assertFalse(isset($view['name']));
+    }
+
+    public function testReferenceArrayAccess()
+    {
+        $view['items'] = array();
+        $view['items'][] = 'item 1';
+        $view['items'][] = 'item 2';
+
+        $this->assertEquals('item 1', $view['items'][0]);
+        $this->assertEquals('item 2', $view['items'][1]);
+    }
 }
