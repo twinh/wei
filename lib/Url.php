@@ -13,7 +13,6 @@ namespace Wei;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request A service that handles the HTTP request data
- * @property    Router $router A service that parse the URL to request data
  */
 class Url extends Base
 {
@@ -26,7 +25,8 @@ class Url extends Base
      */
     public function __invoke($url, $params = array())
     {
-        return $this->router->generatePath($this->parse($url) + $params);
+        $url = $url . (false == strpos($url, '?') ? '?' : '&');
+        return $this->request->getBaseUrl() . '/' . $url . (is_array($params) ? http_build_query($params) : $params);
     }
 
     /**
@@ -39,23 +39,5 @@ class Url extends Base
     public function full($url, $params = array())
     {
         return $this->request->getUrlFor($this->__invoke($url, $params));
-    }
-
-    /**
-     * Parse the URL by router
-     *
-     * @param string $url
-     * @return array
-     */
-    protected function parse($url)
-    {
-        $url = $this->request->getBaseUrl() . '/' . $url;
-        $params = $this->router->match($url);
-        if (is_array($params)) {
-            unset($params['_id']);
-            return $params;
-        } else {
-            return array();
-        }
     }
 }
