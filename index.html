@@ -13925,6 +13925,8 @@
 
 <h3>直接输出日志到浏览器</h3>
 
+<p>为了快速调试,有时我们需要把日志打印在浏览器上,只需简单配置文件路径即可.</p>
+
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'logger'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'file'</span> <span class="o">=&gt;</span> <span class="s1">'php://output'</span> <span class="c1">// 配置输出的文件为'php://output'</span>
@@ -14012,6 +14014,12 @@
 <td>false</td>
 <td>日志文件路径是否已确认,与<code>file</code>选项搭配使用</td>
 </tr>
+<tr>
+<td>context</td>
+<td>array</td>
+<td>array()</td>
+<td>附加到每条日志的默认内容,如用户IP地址,请求URL地址等</td>
+</tr>
 </tbody>
 </table><h4>日志等级及使用场景</h4>
 
@@ -14098,6 +14106,14 @@
 <h4>logger-&gt;setHandledLevel($level)</h4>
 
 <p>设置记录的最低日志等级</p>
+
+<h4>logger-&gt;setContext($name, $value)</h4>
+
+<p>设置一项日志附加信息</p>
+
+<h4>logger-&gt;setContext(array $context)</h4>
+
+<p>设置多项日志附加信息</p>
 
 <h4>logger-&gt;clean()</h4>
 
