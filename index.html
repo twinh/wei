@@ -13942,6 +13942,33 @@
 
 <p><img src="resources/log-to-browser.jpg" alt="输出日志到浏览器"></p>
 
+<h3>将请求URL地址等信息附加到每条日志中</h3>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$logger</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="p">;</span>
+
+<span class="c1">// 附加一项信息到日志中</span>
+<span class="nv">$logger</span><span class="o">-&gt;</span><span class="na">setContext</span><span class="p">(</span><span class="s1">'reqUrl'</span><span class="p">,</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">getUrl</span><span class="p">());</span>
+
+<span class="c1">// 附加多项信息到日志中</span>
+<span class="nv">$logger</span><span class="o">-&gt;</span><span class="na">setContext</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'clientIp'</span> <span class="o">=&gt;</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">getIp</span><span class="p">(),</span>
+    <span class="s1">'serviceIp'</span> <span class="o">=&gt;</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">'SERVER_ADDR'</span><span class="p">]</span>
+<span class="p">));</span>
+
+<span class="nv">$logger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">'User %s logined.'</span><span class="p">,</span> <span class="s1">'twin'</span><span class="p">));</span>
+</code></pre></div>
+
+<p><strong>输出结果</strong></p>
+
+<div class="highlight"><pre><code class="php"><span class="p">[</span><span class="mo">05</span><span class="o">:</span><span class="mi">56</span><span class="o">:</span><span class="mi">16</span><span class="p">]</span> <span class="nx">INFO</span><span class="o">:</span> <span class="nx">User</span> <span class="nx">twin</span> <span class="nx">logged</span> <span class="nx">in</span><span class="o">.</span>
+<span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="nx">clientIp</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
+    <span class="p">[</span><span class="nx">serviceIp</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
+    <span class="p">[</span><span class="nx">reqUrl</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">http</span><span class="o">://</span><span class="nx">localhost</span><span class="o">/</span><span class="nx">index</span><span class="o">.</span><span class="nx">php</span>
+<span class="p">)</span>
+</code></pre></div>
+
 <h2>调用方式</h2>
 
 <h3>选项</h3>
