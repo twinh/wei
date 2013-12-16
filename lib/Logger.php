@@ -175,6 +175,11 @@ class Logger extends Base
             strtoupper($level),
             $message,
         ), $this->format);
+
+        if ($context) {
+            $content .= "\n" . print_r($context, true);
+        }
+        
         return $content;
     }
 
