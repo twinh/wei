@@ -20,6 +20,8 @@ echo wei()->logger->getFile();
 
 ### 直接输出日志到浏览器
 
+为了快速调试,有时我们需要把日志打印在浏览器上,只需简单配置文件路径即可.
+
 ```php
 wei(array(
     'logger' => array(
@@ -53,6 +55,7 @@ fileFormat   | string | Ymd.\l\o\g                        | 日志文件名称�
 fileSize     | int    | 134217728                         | 日志文件最大容量,单位是字节,默认是128mb,设为0表示不限制大小
 file         | string | 无                                | 日志文件的路径,留空表示根据`dir`,`fileFormat`和`fileSize`选项生成,不留空的话需设置`fileDetected`才有效
 fileDetected | bool   | false                             | 日志文件路径是否已确认,与`file`选项搭配使用
+context      | array  | array()                           | 附加到每条日志的默认内容,如用户IP地址,请求URL地址等
 
 #### 日志等级及使用场景
 
@@ -100,6 +103,12 @@ alert     | 高   | 必须马上处理的情况,如网站打不开,数据库连�
 
 #### logger->setHandledLevel($level)
 设置记录的最低日志等级
+
+#### logger->setContext($name, $value)
+设置一项日志附加信息
+
+#### logger->setContext(array $context)
+设置多项日志附加信息
 
 #### logger->clean()
 删除日志目录下的所有文件(注意谨慎使用)
