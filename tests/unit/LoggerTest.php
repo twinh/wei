@@ -131,12 +131,31 @@ class LoggerTest extends TestCase
 
     public function testLogWithContext()
     {
-        $this->logger->debug('debug', array('key' => 'value'));
+        $this->logger->debug('debug', array('name' => 'value'));
 
         $content = file_get_contents($this->logger->getFile());
 
         $this->assertContains('debug', $content);
-        $this->assertContains('key', $content);
+        $this->assertContains('name', $content);
         $this->assertContains('value', $content);
+    }
+
+    public function testLogWithDefaultContext()
+    {
+        $this->logger->setContext('name', 'value');
+
+        $this->logger->setContext(array(
+            'clientIp' => '127.0.0.1',
+            'serverIp' => '127.0.0.1'
+        ));
+
+        $this->logger->debug('log with default context');
+
+        $content = file_get_contents($this->logger->getFile());
+
+        $this->assertContains('log with default context', $content);
+        $this->assertContains('name', $content);
+        $this->assertContains('clientIp', $content);
+        $this->assertContains('serverIp', $content);
     }
 }
