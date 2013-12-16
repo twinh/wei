@@ -98,19 +98,19 @@ class Logger extends Base
     protected $fileSize = 134217728;
 
     /**
-     * The log file handle
-     *
-     * @var resource|null
-     */
-    protected $handle;
-
-    /**
      * Whether log file's exact path has been detected, when set dir, fileFormat
      * or fileSize options, log file should be detected again
      *
      * @var bool
      */
     protected $fileDetected = false;
+
+    /**
+     * The log file handle
+     *
+     * @var resource|null
+     */
+    private $handle;
 
     /**
      * Logs with an arbitrary level
