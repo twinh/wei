@@ -106,6 +106,13 @@ class Logger extends Base
     protected $fileDetected = false;
 
     /**
+     * A key-value array that append to the log message
+     *
+     * @var array
+     */
+    protected $context = array();
+
+    /**
      * The log file handle
      *
      * @var resource|null
@@ -167,6 +174,7 @@ class Logger extends Base
             $message = (string)$message;
         }
 
+        // Format log message
         $content = str_replace(array(
             '%datetime%', '%channel%', '%level%', '%message%',
         ), array(
@@ -176,8 +184,9 @@ class Logger extends Base
             $message,
         ), $this->format);
 
-        if ($context) {
-            $content .= "\n" . print_r($context, true);
+        // Format extra context
+        if ($this->context || $context) {
+            $content .= "\n" . print_r($this->context + $context, true);
         }
 
         return $content;
@@ -372,6 +381,23 @@ class Logger extends Base
     public function setHandledLevel($handledLevel)
     {
         $this->handledLevel = $handledLevel;
+        return $this;
+    }
+
+    /**
+     * Add one or multi item for log message
+     *
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function setContext($name, $value)
+    {
+        if (is_array($name)) {
+            $this->context = $name + $this->context;
+        } else {
+            $this->context[$name] = $value;
+        }
         return $this;
     }
 
