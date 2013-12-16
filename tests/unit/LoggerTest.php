@@ -23,7 +23,7 @@ class LoggerTest extends TestCase
 
         $this->assertContains(__METHOD__, file_get_contents($file));
 
-        // clean all file in log diretory
+        // clean all file in log directory
         $logger->clean();
 
         $logger->setHandledLevel('info');
