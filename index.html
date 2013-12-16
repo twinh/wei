@@ -12977,7 +12977,7 @@
 
 <h3>生成不带版本号的URL地址</h3>
 
-<p>有时为了检查资源文件是否存在,可以设置第二个参数为<code>false</code>,即生成不带版本号的路径.</p>
+<p>有时生成文件路径用于检查资源文件是否存在,可以设置第二个参数为<code>false</code>,即生成不带版本号的路径.</p>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$file</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">asset</span><span class="p">(</span><span class="s1">'styele.css'</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
 
@@ -13016,6 +13016,14 @@
 <h4>asset($file, $version = true)</h4>
 
 <p>生成指定文件的资源URL地址</p>
+
+<h4>asset-&gt;getBaseUrl()</h4>
+
+<p>获取资源的基础URL地址</p>
+
+<h4>asset-&gt;setBaseUrl($baseUrl)</h4>
+
+<p>设置资源的基础URL地址</p>
   </section>
 
 <!-- api/e
