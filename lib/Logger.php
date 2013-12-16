@@ -179,7 +179,7 @@ class Logger extends Base
         if ($context) {
             $content .= "\n" . print_r($context, true);
         }
-        
+
         return $content;
     }
 

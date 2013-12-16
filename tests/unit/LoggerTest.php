@@ -139,4 +139,15 @@ class LoggerTest extends TestCase
         ));
         $logger->getFile();
     }
+
+    public function testLogWithContext()
+    {
+        $this->object->debug('debug', array('key' => 'value'));
+
+        $content = file_get_contents($this->object->getFile());
+
+        $this->assertContains('debug', $content);
+        $this->assertContains('key', $content);
+        $this->assertContains('value', $content);
+    }
 }
