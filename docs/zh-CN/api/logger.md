@@ -38,6 +38,36 @@ wei()->logger->alert('An alert message');
 
 ![输出日志到浏览器](resources/log-to-browser.jpg)
 
+
+### 将请求URL地址等信息附加到每条日志中
+
+```php
+$logger = wei()->logger;
+
+// 附加一项信息到日志中
+$logger->setContext('reqUrl', wei()->request->getUrl());
+
+// 附加多项信息到日志中
+$logger->setContext(array(
+    'clientIp' => wei()->request->getIp(),
+    'serviceIp' => $_SERVER['SERVER_ADDR']
+));
+
+$logger->info(sprintf('User %s logined.', 'twin'));
+```
+
+**输出结果**
+
+```
+[05:56:16] INFO: User twin logged in.
+Array
+(
+    [clientIp] => 127.0.0.1
+    [serviceIp] => 127.0.0.1
+    [reqUrl] => http://localhost/index.php
+)
+````
+
 调用方式
 --------
 

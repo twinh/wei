@@ -186,7 +186,7 @@ class Logger extends Base
 
         // Format extra context
         if ($this->context || $context) {
-            $content .= "\n" . print_r($this->context + $context, true);
+            $content .= print_r($this->context + $context, true) . "\n";
         }
 
         return $content;
