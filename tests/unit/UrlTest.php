@@ -9,6 +9,9 @@ class UrlTest extends TestCase
      */
     public function testUrl($result, $url, $params = array())
     {
+        // Reset url to root path
+        $this->request->setBaseUrl('/');
+
         $this->assertEquals($result, $this->url($url, $params));
     }
 

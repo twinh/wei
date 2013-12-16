@@ -25,7 +25,9 @@ class Url extends Base
      */
     public function __invoke($url, $params = array())
     {
-        $url = $url . (false == strpos($url, '?') ? '?' : '&');
+        if ($params) {
+            $url = $url . (false === strpos($url, '?') ? '?' : '&');
+        }
         return $this->request->getBaseUrl() . '/' . $url . (is_array($params) ? http_build_query($params) : $params);
     }
 
