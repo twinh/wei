@@ -2,31 +2,20 @@
 
 namespace WeiTest;
 
+/**
+ * @property \Wei\Logger $logger
+ */
 class LoggerTest extends TestCase
 {
-    //protected static $logger;
-
-    /**
-     * @var \Wei\Logger
-     */
-    protected $logger;
-
     protected function tearDown()
     {
-        $this->object->clean();
-
+        $this->logger->clean();
         parent::tearDown();
-
-        // TODO remove dir after test
-//        $dir = static::$logger->getOption('dir');
-//        if (is_dir($dir)) {
-//            rmdir($dir);
-//        }
     }
 
     public function testLog()
     {
-        $logger = $this->object;
+        $logger = $this->logger;
 
         $logger->debug(__METHOD__);
 
@@ -72,7 +61,7 @@ class LoggerTest extends TestCase
 
     public function testAllLevel()
     {
-        $logger = $this->object;
+        $logger = $this->logger;
 
         $logger->setHandledLevel('debug');
 
@@ -108,7 +97,7 @@ class LoggerTest extends TestCase
 
     public function testSetLevel()
     {
-        $logger = $this->object;
+        $logger = $this->logger;
 
         $file = $logger->getFile();
 
@@ -142,9 +131,9 @@ class LoggerTest extends TestCase
 
     public function testLogWithContext()
     {
-        $this->object->debug('debug', array('key' => 'value'));
+        $this->logger->debug('debug', array('key' => 'value'));
 
-        $content = file_get_contents($this->object->getFile());
+        $content = file_get_contents($this->logger->getFile());
 
         $this->assertContains('debug', $content);
         $this->assertContains('key', $content);
