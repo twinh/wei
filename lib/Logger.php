@@ -387,11 +387,11 @@ class Logger extends Base
     /**
      * Add one or multi item for log message
      *
-     * @param string $name
+     * @param array|string $name
      * @param mixed $value
      * @return $this
      */
-    public function setContext($name, $value)
+    public function setContext($name, $value = null)
     {
         if (is_array($name)) {
             $this->context = $name + $this->context;
