@@ -15,7 +15,7 @@ services:
 before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction
-  - pecl install redis
+  - sh -c 'if [ $(php -r "echo (int)defined(\"HHVM_VERSION\");") -eq 0 ]; then pecl install redis; fi;'
   - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -gt 4 ]; then sed -i 1d "tests/config/php.ini"; fi;'
   - phpenv config-add tests/config/php.ini
   - mysql -e 'CREATE DATABASE IF NOT EXISTS wei_tests;'
