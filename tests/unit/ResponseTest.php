@@ -159,6 +159,17 @@ namespace WeiTest
             $this->assertEquals('application/javascript', $this->object->getHeader('Content-Type'));
         }
 
+        public function testJsonpCallbackNameWithDot()
+        {
+            $this->request->set('callback', 'call.back');
+
+            $this->expectOutputString('call.back({"code":-1,"message":"error"})');
+
+            $this->object->jsonp(array('code' => -1, 'message' => 'error'));
+
+            $this->assertEquals('application/javascript', $this->object->getHeader('Content-Type'));
+        }
+
         public function testSendArrayAsJson()
         {
             $this->expectOutputString('{"code":1,"message":"success"}');
