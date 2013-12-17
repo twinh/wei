@@ -12581,8 +12581,7 @@
 <blockquote>
 <h4>注意</h4>
 
-<p>只要以<code>$A-Z_</code>中任意字符开头,后续由<code>0-9A-Z_$</code>组成的字符串,即符合正则<code>[$A-Z_][0-9A-Z_$]</code>
-都会认为是合法的<code>callback</code>值.</p>
+<p>只要符合正则<code>/^[$A-Z_][0-9A-Z_$]*$/</code>都会认为是合法的<code>callback</code>值.</p>
 </blockquote>
 
 <h3>等待3秒后跳转到谷歌首页</h3>
