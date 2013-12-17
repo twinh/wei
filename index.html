@@ -12578,6 +12578,13 @@
 
 <p><img src="resources/response-jsonp.jpg" alt="发送JSON数据"></p>
 
+<blockquote>
+<h4>注意</h4>
+
+<p>只要以<code>$A-Z_</code>中任意字符开头,后续由<code>0-9A-Z_$</code>组成的字符串,即符合正则<code>[$A-Z_][0-9A-Z_$]</code>
+都会认为是合法的<code>callback</code>值.</p>
+</blockquote>
+
 <h3>等待3秒后跳转到谷歌首页</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">'http://www.google.com'</span><span class="p">,</span> <span class="mi">302</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
