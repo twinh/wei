@@ -630,7 +630,7 @@ class Response extends Base
     {
         $result = json_encode($data);
 
-        if ($jsonp && preg_match('/^[$A-Z_][0-9A-Z_$]*$/', $this->request['callback']) !== false) {
+        if ($jsonp && preg_match('/^[$A-Z_][0-9A-Z_$.]*$/i', $this->request['callback']) === 1) {
             $this->setHeader('Content-Type', 'application/javascript');
             $result = $this->request['callback'] . '(' . $result . ')';
         } else {
