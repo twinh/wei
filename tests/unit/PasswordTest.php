@@ -40,22 +40,15 @@ class PasswordTest extends TestCase
 
     public function testKnownSalt()
     {
-        $hash = password_hash("rasmuslerdorf", PASSWORD_BCRYPT, array("cost" => 7, "salt" => "usesomesillystringforsalt"));
+        $this->password->setCost(7);
+        $hash = $this->password->hash('rasmuslerdorf', 'usesomesillystringforsalt');
         $this->assertEquals('$2y$07$usesomesillystringfore2uDLvp1Ii2e./U9C8sBjqp8I90dH6hi', $hash);
     }
 
-    public function testRawSalt()
-    {
-        $hash = password_hash("test", PASSWORD_BCRYPT, array("salt" => "123456789012345678901" . chr(0)));
-        $this->assertEquals('$2y$10$MTIzNDU2Nzg5MDEyMzQ1Nej0NmcAWSLR.oP7XOR9HD/vjUuOj100y', $hash);
-    }
-
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testInvalidBcryptCostLow()
     {
-        password_hash('foo', PASSWORD_BCRYPT, array('cost' => 3));
+        $this->setExpectedException('InvalidArgumentException');
+        $this->password->setCost(3);
     }
 
     /**
