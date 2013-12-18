@@ -2,15 +2,8 @@
 
 namespace WeiTest;
 
-use Wei\Wei;
 use PHPUnit_Framework_TestCase;
 
-/**
- * TestCase
- *
- * @package     Wei
- * @author      Twin Huang <twinhuang@qq.com>
- */
 class TestCase extends PHPUnit_Framework_TestCase
 {
     /**
@@ -19,23 +12,22 @@ class TestCase extends PHPUnit_Framework_TestCase
     protected $object;
 
     /**
-     * The wei container
+     * The service container
      *
      * @var \Wei\Wei
      */
     protected $wei;
 
     /**
-     * The wei name of current test case
+     * The service name of current test case
      *
      * @var string
      */
-    protected $weiName;
+    protected $serviceName;
 
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-
         $this->wei = wei();
     }
 
@@ -44,15 +36,14 @@ class TestCase extends PHPUnit_Framework_TestCase
      *
      * @return string
      */
-    protected function getWeiName()
+    protected function getServiceName()
     {
-        if (empty($this->weiName)) {
+        if (empty($this->serviceName)) {
             $names = explode('\\', get_class($this));
             $class = array_pop($names);
-            $this->weiName = substr($class, 0, -4);
+            $this->serviceName = substr($class, 0, -4);
         }
-
-        return $this->weiName;
+        return $this->serviceName;
     }
 
     /**
@@ -62,14 +53,14 @@ class TestCase extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $wei = $this->wei;
-        $name = $this->getWeiName();
+        $name = $this->getServiceName();
 
         if ('wei' == strtolower($name)) {
             return;
         }
 
         if ($wei->has($name)) {
-            // Reinstance
+            // Re-instance
             $this->object = $wei->{lcfirst($name)};
         }
     }
@@ -81,7 +72,7 @@ class TestCase extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $wei = $this->wei;
-        $name = $this->getWeiName();
+        $name = $this->getServiceName();
 
         if ('wei' == strtolower($name)) {
             return;
@@ -95,12 +86,12 @@ class TestCase extends PHPUnit_Framework_TestCase
         }
 
         foreach (get_object_vars($this->wei) as $name => $property) {
-            // Preserve the wei container
+            // Preserve the service container
             if ('wei' == $name) {
                 continue;
             }
 
-            // Remove all wei instanced by current test object
+            // Remove all service instanced by current test object
             if ($property instanceof \Wei\Base) {
                 unset($this->$name);
                 $wei->remove($name);
@@ -115,7 +106,7 @@ class TestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Invoke the wei by the given name
+     * Invoke the service by the given name
      *
      * @param string $name The name of wei
      * @param array $args The arguments for wei's __invoke method
@@ -127,7 +118,7 @@ class TestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get the wei object by the given name
+     * Get the service object by the given name
      *
      * @param string $name The name of wei
      * @return \Wei\Base
