@@ -225,7 +225,7 @@ class View extends Base implements \ArrayAccess
      * @param  string $offset
      * @return mixed
      */
-    public function &offsetGet($offset)
+    public function offsetGet($offset)
     {
         if (isset($this->data[$offset])) {
             return $this->data[$offset];
