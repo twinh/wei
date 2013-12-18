@@ -47,7 +47,7 @@ class PasswordTest extends TestCase
 
     public function testInvalidBcryptCostLow()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->setExpectedException('InvalidArgumentException', 'Invalid bcrypt cost parameter specified: 3');
         $this->password->setCost(3);
     }
 

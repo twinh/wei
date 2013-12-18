@@ -166,7 +166,7 @@ class Password extends Base
     public function setCost($cost)
     {
         if ($cost < 4 || $cost > 31) {
-            throw new \InvalidArgumentException(sprintf("password_hash(): Invalid bcrypt cost parameter specified: %d", $cost));
+            throw new \InvalidArgumentException(sprintf("Invalid bcrypt cost parameter specified: %d", $cost));
         }
         $this->cost = $cost;
         return $this;
