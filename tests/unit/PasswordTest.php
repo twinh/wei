@@ -51,27 +51,21 @@ class PasswordTest extends TestCase
         $this->password->setCost(3);
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testInvalidBcryptCostHigh()
     {
-        password_hash('foo', PASSWORD_BCRYPT, array('cost' => 32));
+        $this->setExpectedException('InvalidArgumentException', 'Invalid bcrypt cost parameter specified: 32');
+        $this->password->setCost(32);
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testInvalidBcryptCostInvalid()
     {
-        password_hash('foo', PASSWORD_BCRYPT, array('cost' => 'foo'));
+        $this->setExpectedException('InvalidArgumentException', 'Invalid bcrypt cost parameter specified: foo');
+        $this->password->setCost('foo');
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
     public function testInvalidBcryptSaltShort()
     {
-        password_hash('foo', PASSWORD_BCRYPT, array('salt' => 'abc'));
+        $this->setExpectedException('InvalidArgumentException', 'Provided salt is too short: 3 expecting 22');
+        $this->password->hash('foo', 'abc');
     }
 }
