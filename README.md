@@ -12,7 +12,7 @@ Start using Wei in 3 steps, it's easier than any frameworks you've seen before!
 
 ```php
 // 1. Include the wei container class
-require 'path/to/wei/lib/Wei/Wei.php';
+require 'path/to/wei/lib/Wei.php';
 
 // 2. Create the default wei container instance
 $wei = wei(array(
