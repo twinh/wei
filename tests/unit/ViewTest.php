@@ -108,6 +108,8 @@ class ViewTest extends TestCase
 
     public function testReferenceArrayAccess()
     {
+        $view = $this->view;
+
         $view['items'] = array();
         $view['items'][] = 'item 1';
         $view['items'][] = 'item 2';
