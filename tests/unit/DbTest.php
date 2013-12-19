@@ -249,6 +249,17 @@ class DbTest extends TestCase
         $this->assertEquals('twin2', $member['name']);
     }
 
+    public function testFindOrInitAndStatusIsNew()
+    {
+        $this->initFixtures();
+
+        $member = $this->db->findOrInit('member', '3', array(
+            'name' => 'name'
+        ));
+        $this->assertTrue($member->isNew());
+        $this->assertFalse($member->isDestroyed());
+    }
+
     public function testRecordSave()
     {
         $this->initFixtures();
