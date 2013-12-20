@@ -13526,11 +13526,32 @@
 
 <h2>案例</h2>
 
+<h3>配置计数器服务</h3>
 
+<p>计数器服务依赖于缓存服务,您可以通过<code>providers</code>选项配置.</p>
+
+<p>推荐配置的缓存服务:<code>redis</code>,<code>dbCache</code>等.</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'lock'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'providers'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'cache'</span> <span class="o">=&gt;</span> <span class="s1">'redis'</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</code></pre></div>
+
+<blockquote>
+<h4>注意</h4>
+
+<p>应根据计数数据的重要性,选择持久性缓存或非持久性缓存.</p>
+</blockquote>
 
 <h2>调用方式</h2>
 
 <h3>选项</h3>
+
+<p><em>无</em></p>
 
 <h3>方法</h3>
 
