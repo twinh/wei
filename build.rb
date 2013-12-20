@@ -76,7 +76,7 @@ weis = [
   # app
     'app',
   # others
-    'config', 'env', 'error', 'gravatar', 'lock', 'logger', 'password', 'pinyin', 'uuid',
+    'config', 'counter', 'env', 'error', 'gravatar', 'lock', 'logger', 'password', 'pinyin', 'uuid',
   # third party
     'phpError'
 ]

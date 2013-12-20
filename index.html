@@ -205,6 +205,7 @@
       <a href="#config">其他</a>
       <ul class="nav">
         <li><a href="#config">config</a></li>
+        <li><a href="#counter">counter</a></li>
         <li><a href="#env">env</a></li>
         <li><a href="#error">error</a></li>
         <li><a href="#gravatar">gravatar</a></li>
@@ -13514,6 +13515,48 @@
 <h4>config-&gt;toOptions($name)</h4>
 
 <p>转换配置为HTML下拉菜单选项</p>
+  </section>
+
+<!-- api/counter
+  ================================================== -->
+  <section id="counter">
+  <div class="page-header"><h1>Counter</h1></div>
+
+<p>计数器服务,可用于记录用户操作次数,判断用户是否执行了某项操作等</p>
+
+<h2>案例</h2>
+
+
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<h3>方法</h3>
+
+<h4>counter-&gt;incr($key, $offset = 1)</h4>
+
+<p>增加一个计数器的值</p>
+
+<h4>counter-&gt;decr($key, $offset = 1)</h4>
+
+<p>减少一个计数器的值</p>
+
+<h4>counter-&gt;get($key)</h4>
+
+<p>获取一个计数器的值</p>
+
+<h4>counter-&gt;set($key, $value)</h4>
+
+<p>设置一个计数器的值</p>
+
+<h4>counter-&gt;exits($key)</h4>
+
+<p>检查一个计数器是否存在</p>
+
+<h4>counter-&gt;remove($key)</h4>
+
+<p>移除一个计数器</p>
   </section>
 
 <!-- api/env
