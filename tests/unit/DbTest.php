@@ -1702,5 +1702,19 @@ class DbTest extends TestCase
         $member = $this->db->find('member', 1);
         $this->assertFalse($member);
     }
+
+    public function testSaveWithNullPrimaryKey()
+    {
+        $this->initFixtures();
+
+        $member = $this->db('member')->save(array(
+            'id' => null,
+            'group_id' => '1',
+            'name' => 'twin',
+            'address' => 'test'
+        ));
+
+        $this->assertNotNull($member['id']);
+    }
 }
 
