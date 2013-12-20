@@ -31,10 +31,10 @@ class PgsqlDbTest extends DbTest
     protected function dropTable()
     {
         $db = $this->db;
-        $db->query('DROP TABLE IF EXISTS member_group');
-        $db->query('DROP TABLE IF EXISTS member');
-        $db->query('DROP TABLE IF EXISTS post');
-        $db->query('DROP TABLE IF EXISTS tag');
-        $db->query('DROP TABLE IF EXISTS post_tag');
+        $db->query('DROP TABLE IF EXISTS prefix_member_group');
+        $db->query('DROP TABLE IF EXISTS prefix_member');
+        $db->query('DROP TABLE IF EXISTS prefix_post');
+        $db->query('DROP TABLE IF EXISTS prefix_tag');
+        $db->query('DROP TABLE IF EXISTS prefix_post_tag');
     }
 }
