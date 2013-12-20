@@ -1179,7 +1179,7 @@ class DbTest extends TestCase
             $this->markTestSkipped('batch insert is not supported by SQLite');
         }
 
-        $result = $this->db->insertBatch('member', array(
+        $result = $this->db->insertBatch('prefix_member', array(
             array(
                 'group_id' => '1',
                 'name' => 'twin',
