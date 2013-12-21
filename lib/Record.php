@@ -470,7 +470,11 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             if (!$value instanceof static) {
                 throw new \InvalidArgumentException('Value for collection must be a instance of Wei\Record');
             } else {
-                $this->data[$name] = $value;
+                if ($name === null) {
+                    $this->data[] = $value;
+                } else {
+                    $this->data[$name] = $value;
+                }
             }
         }
         return $this;
@@ -622,6 +626,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function findOrInit($conditions = null, array $data = array())
     {
         if (!$this->find($conditions)) {
+            // Reset status when record not found
+            $this->isNew = true;
             !is_array($conditions) && $conditions = array($this->primaryKey => $conditions);
             $this->fromArray($conditions + $data);
         }
