@@ -425,6 +425,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
     public function saveColl($data, Record $coll, $extraData = array())
     {
+        if (!is_array($data)) {
+            return $this;
+        }
+
         // 1. Remove extra rows
         foreach ($data as $index => $row) {
             if (!array_filter($row)) {
