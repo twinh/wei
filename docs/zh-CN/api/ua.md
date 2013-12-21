@@ -6,6 +6,16 @@ Ua
 案例
 ----
 
+### 检查用户是否为iPhone或Android手机
+
+```php
+if (wei()->ua->isIPhone()) {
+    // do something
+} elseif (wei()->ua->isAndroid()) {
+    // do something
+}
+```
+
 ### 根据用户设备跳转到相应的页面
 
 ```php
@@ -16,7 +26,6 @@ if (wei()->ua->isIPhone()) {
 } else {
     // 展示默认页面
 }
-
 ```
 
 ### 获取Windows Phone手机用户的版本
@@ -28,7 +37,7 @@ echo wei()->ua->getVersion('WindowsPhone');
 ### 如果用户为IE浏览器,输出用浏览器版本
 
 ```php
-if (wei()->ua->isIe()) {
+if (wei()->ua->isIE()) {
     echo wei()->ua->getVersion('ie');
 }
 ```
