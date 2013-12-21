@@ -349,7 +349,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                 $result = (bool)$this->db->insert($this->table, $this->data);
                 if ($result) {
                     $this->isNew = false;
-                    if (!isset($this->data[$this->primaryKey]) || $this->data[$this->primaryKey] === null) {
+                    if (!isset($this->data[$this->primaryKey]) || !$this->data[$this->primaryKey]) {
                         $name = sprintf('%s_%s_seq', $this->fullTable, $this->primaryKey);
                         $this->data[$this->primaryKey] = $this->db->lastInsertId($name);
                     }
