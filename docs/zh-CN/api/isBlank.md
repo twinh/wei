@@ -7,6 +7,7 @@ isBlank
 ----
 
 ### 检查空白字符会返回成功
+
 ```php
 $input = '    ';
 if (wei()->isBlank($input)) {
@@ -17,6 +18,7 @@ if (wei()->isBlank($input)) {
 ```
 
 #### 运行结果
+
 ```php
 'Yes'
 ```
@@ -26,10 +28,14 @@ if (wei()->isBlank($input)) {
 
 ### 选项
 
-| 名称                | 类型    | 默认值                                 | 说明              |
-|---------------------|---------|----------------------------------------|-------------------|
-| blankMessage        | string  | %name%必须为空                         | -                 |
-| negativeMessage     | string  | %name%不能为空                         | -                 |
+无
+
+### 错误信息
+
+名称                   | 信息
+-----------------------|------
+blankMessage           | %name%必须为空
+negativeMessage        | %name%不能为空
 
 ### 方法
 
