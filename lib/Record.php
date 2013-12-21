@@ -423,6 +423,43 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         return $this;
     }
 
+    public function saveColl($data, Record $coll, $extraData = array())
+    {
+        // 1. Remove extra rows
+        foreach ($data as $index => $row) {
+            if (!array_filter($row)) {
+                unset($data[$index]);
+            }
+        }
+
+        // 2. 删除提交后,Relation中没有的行
+        $existIds = array();
+        foreach ($data as $row) {
+            if (isset($row['id']) && $row['id'] !== null) {
+                $existIds[] = $row['id'];
+            }
+        }
+
+        foreach ($coll as $record) {
+            if (!in_array($record['id'], $existIds)) {
+                $record->destroy();
+            }
+        }
+
+        // 3. Merge
+        foreach ($data as $row) {
+            if (isset($row['id']) && isset($coll[$row['id']])) {
+                $coll[$row['id']]->fromArray($row);
+            } else {
+                $coll[] = wei()->db($coll->getTable())->fromArray($extraData + $row);
+            }
+        }
+
+        $coll->save();
+
+        return $this;
+    }
+
     /**
      * Receives the record field value
      *
