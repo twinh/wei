@@ -12133,6 +12133,15 @@
 
 <h2>案例</h2>
 
+<h3>检查用户是否为iPhone或Android手机</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">isIPhone</span><span class="p">())</span> <span class="p">{</span>
+    <span class="c1">// do something</span>
+<span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">isAndroid</span><span class="p">())</span> <span class="p">{</span>
+    <span class="c1">// do something</span>
+<span class="p">}</span>
+</code></pre></div>
+
 <h3>根据用户设备跳转到相应的页面</h3>
 
 <div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">isIPhone</span><span class="p">())</span> <span class="p">{</span>
@@ -12151,7 +12160,7 @@
 
 <h3>如果用户为IE浏览器,输出用浏览器版本</h3>
 
-<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">isIe</span><span class="p">())</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">isIE</span><span class="p">())</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">ua</span><span class="o">-&gt;</span><span class="na">getVersion</span><span class="p">(</span><span class="s1">'ie'</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
