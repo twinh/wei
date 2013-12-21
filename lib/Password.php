@@ -54,6 +54,7 @@ class Password extends Base
      *
      * @param string $password The password to hash
      * @param string $salt The salt string for the algorithm to use
+     * @throws \InvalidArgumentException
      * @return string|false The hashed password, or false on error.
      */
     public function hash($password, $salt = null)
@@ -61,9 +62,11 @@ class Password extends Base
         $hash_format = sprintf("$2y$%02d$", $this->cost);
 
         !$salt && $salt = $this->generateSalt();
+        if (strlen($salt) < 22) {
+            throw new \InvalidArgumentException(sprintf("Provided salt is too short: %d expecting %d", strlen($salt), 22));
+        }
 
         $hash = $hash_format . $salt;
-
         $ret = crypt($password, $hash);
 
         if (!is_string($ret) || strlen($ret) <= 13) {
@@ -166,7 +169,7 @@ class Password extends Base
     public function setCost($cost)
     {
         if ($cost < 4 || $cost > 31) {
-            throw new \InvalidArgumentException(sprintf("password_hash(): Invalid bcrypt cost parameter specified: %d", $cost));
+            throw new \InvalidArgumentException(sprintf("Invalid bcrypt cost parameter specified: %s", $cost));
         }
         $this->cost = $cost;
         return $this;

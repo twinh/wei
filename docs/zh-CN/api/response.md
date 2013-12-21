@@ -58,6 +58,10 @@ wei()->response->jsonp(array(
 
 ![发送JSON数据](resources/response-jsonp.jpg)
 
+> #### 注意
+> 
+> 只要符合正则`/^[$A-Z_][0-9A-Z_$.]*$/i`都会认为是合法的`callback`值.
+
 ### 等待3秒后跳转到谷歌首页
 
 ```php

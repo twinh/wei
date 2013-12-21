@@ -172,6 +172,7 @@ API参考目录
 #### 其他
 
 * [config](api/config.md) - 配置信息管理
+* [counter](api/counter.md) - 计数器服务
 * [error](api/error.md) - 提供简洁友好的错误界面
 * [gravatar](api/gravatar.md) - 根据邮箱地址生成自定义大小的Gravatar头像
 * [lock](api/lock.md) - 锁服务,用于对请求,资源进行加锁,防止重复操作
