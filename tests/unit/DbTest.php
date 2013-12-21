@@ -1716,5 +1716,19 @@ class DbTest extends TestCase
 
         $this->assertNotNull($member['id']);
     }
+
+    public function testNullAsCollectionKey()
+    {
+        $this->initFixtures();
+
+        $members = $this->db('member');
+
+        $members[] = $this->db('member');
+        $members[] = $this->db('member');
+        $members[] = $this->db('member');
+        $members[] = $this->db('member');
+
+        $this->assertEquals(4, $members->length());
+    }
 }
 
