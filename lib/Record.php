@@ -423,10 +423,16 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         return $this;
     }
 
-    public function saveColl($data, Record $coll, $extraData = array())
+    public function saveColl($data, $extraData = array())
     {
         if (!is_array($data)) {
             return $this;
+        }
+
+        // 0. using primary key as data index
+        foreach ($this as $key => $record) {
+            $coll[$record['id']] = $record;
+            unset($coll[$key]);
         }
 
         // 1. Remove extra rows
@@ -444,7 +450,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             }
         }
 
-        foreach ($coll as $record) {
+        foreach ($this as $record) {
             if (!in_array($record['id'], $existIds)) {
                 $record->destroy();
             }
@@ -453,13 +459,13 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         // 3. Merge
         foreach ($data as $row) {
             if (isset($row['id']) && isset($coll[$row['id']])) {
-                $coll[$row['id']]->fromArray($row);
+                $this[$row['id']]->fromArray($row);
             } else {
-                $coll[] = wei()->db($coll->getTable())->fromArray($extraData + $row);
+                $this[] = wei()->db($this->table)->fromArray($extraData + $row);
             }
         }
 
-        $coll->save();
+        $this->save();
 
         return $this;
     }
