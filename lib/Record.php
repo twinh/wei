@@ -66,7 +66,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * The record data
      *
-     * @var array
+     * @var array|Record[]
      */
     protected $data = array();
 
@@ -332,14 +332,18 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function save($data = array())
     {
+        // 1. Merges data from parameters
         $data && $this->fromArray($data);
 
+        // 2.1 Saves non collection record
         if (!$this->isColl) {
-            // Return false when record has been destroy to avoid dirty data
+
+            // 2.1.1 Return false when record has been destroy to avoid dirty data
             if ($this->isDestroyed) {
                 return false;
             }
 
+            // 2.1.2 Triggers before callbacks
             $isNew = $this->isNew;
             $this->trigger('beforeSave');
             $this->trigger($this->isNew ? 'beforeCreate' : 'beforeUpdate');
@@ -349,14 +353,14 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                 if (array_key_exists($this->primaryKey, $this->data) && !$this->data[$this->primaryKey]) {
                     unset($this->data[$this->primaryKey]);
                 }
-                $result = (bool)$this->db->insert($this->table, $this->data);
-                if ($result) {
-                    $this->isNew = false;
-                    if (!isset($this->data[$this->primaryKey]) || !$this->data[$this->primaryKey]) {
-                        // Prepare sequence name for PostgreSQL
-                        $sequence = sprintf('%s_%s_seq', $this->fullTable, $this->primaryKey);
-                        $this->data[$this->primaryKey] = $this->db->lastInsertId($sequence);
-                    }
+
+                $this->db->insert($this->table, $this->data);
+
+                $this->isNew = false;
+                if (!isset($this->data[$this->primaryKey]) || !$this->data[$this->primaryKey]) {
+                    // Prepare sequence name for PostgreSQL
+                    $sequence = sprintf('%s_%s_seq', $this->fullTable, $this->primaryKey);
+                    $this->data[$this->primaryKey] = $this->db->lastInsertId($sequence);
                 }
             // Update
             } else {
@@ -373,8 +377,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
             $this->trigger($isNew ? 'afterCreate' : 'afterUpdate');
             $this->trigger('afterSave');
+        // 2.2 Loop and save records
         } else {
-            /** @var $record Record */
             foreach ($this->data as $record) {
                 $record->save();
             }
