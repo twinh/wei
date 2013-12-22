@@ -1707,7 +1707,8 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $member = $this->db('member')->save(array(
+        $member = $this->db('member');
+        $member->save(array(
             'id' => null,
             'group_id' => '1',
             'name' => 'twin',
@@ -1716,7 +1717,8 @@ class DbTest extends TestCase
 
         $this->assertNotNull($member['id']);
 
-        $member = $this->db('member')->save(array(
+        $member = $this->db('member');
+        $member->save(array(
             'id' => '',
             'group_id' => '1',
             'name' => 'twin',
