@@ -362,12 +362,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             } else {
                 if ($this->isChanged) {
                     $data = array_intersect_key($this->data, $this->changedData);
-                    $affectedRows = $this->db->update($this->table, $data, array(
+                    $this->db->update($this->table, $data, array(
                         $this->primaryKey => $this->data[$this->primaryKey]
                     ));
-                    $result = $affectedRows || '0000' == $this->db->errorCode();
-                } else {
-                    $result = true;
                 }
             }
 
@@ -376,15 +373,14 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
             $this->trigger($isNew ? 'afterCreate' : 'afterUpdate');
             $this->trigger('afterSave');
-
-            return $result;
         } else {
             /** @var $record Record */
             foreach ($this->data as $record) {
                 $record->save();
             }
-            return true;
         }
+
+        return true;
     }
 
     /**
