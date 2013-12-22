@@ -1715,6 +1715,15 @@ class DbTest extends TestCase
         ));
 
         $this->assertNotNull($member['id']);
+
+        $member = $this->db('member')->save(array(
+            'id' => '',
+            'group_id' => '1',
+            'name' => 'twin',
+            'address' => 'test'
+        ));
+
+        $this->assertNotNull($member['id']);
     }
 
     public function testNullAsCollectionKey()

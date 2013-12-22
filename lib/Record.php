@@ -335,10 +335,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         // 1. Merges data from parameters
         $data && $this->fromArray($data);
 
-        // 2.1 Saves non collection record
+        // 2.1 Saves single record
         if (!$this->isColl) {
 
-            // 2.1.1 Return false when record has been destroy to avoid dirty data
+            // 2.1.1 Returns false when record has been destroy to avoid dirty data
             if ($this->isDestroyed) {
                 return false;
             }
@@ -348,7 +348,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             $this->trigger('beforeSave');
             $this->trigger($this->isNew ? 'beforeCreate' : 'beforeUpdate');
 
-            // Insert
+            // 2.1.3.1 Insert
             if ($isNew) {
                 if (array_key_exists($this->primaryKey, $this->data) && !$this->data[$this->primaryKey]) {
                     unset($this->data[$this->primaryKey]);
@@ -362,7 +362,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                     $sequence = sprintf('%s_%s_seq', $this->fullTable, $this->primaryKey);
                     $this->data[$this->primaryKey] = $this->db->lastInsertId($sequence);
                 }
-            // Update
+            // 2.1.3.2 Update
             } else {
                 if ($this->isChanged) {
                     $data = array_intersect_key($this->data, $this->changedData);
@@ -372,18 +372,21 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                 }
             }
 
+            // 2.1.4 Reset changed data and changed status
             $this->changedData = array();
             $this->isChanged = false;
 
+            // 2.1.5. Triggers after callbacks
             $this->trigger($isNew ? 'afterCreate' : 'afterUpdate');
             $this->trigger('afterSave');
-        // 2.2 Loop and save records
+        // 2.2 Loop and save collection records
         } else {
             foreach ($this->data as $record) {
                 $record->save();
             }
         }
 
+        // 3. Returns result
         return true;
     }
 
