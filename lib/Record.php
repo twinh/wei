@@ -346,6 +346,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
             // Insert
             if ($isNew) {
+                if (array_key_exists($this->primaryKey, $this->data) && !$this->data[$this->primaryKey]) {
+                    unset($this->data[$this->primaryKey]);
+                }
                 $result = (bool)$this->db->insert($this->table, $this->data);
                 if ($result) {
                     $this->isNew = false;
