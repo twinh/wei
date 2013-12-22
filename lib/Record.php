@@ -433,34 +433,33 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             return $this;
         }
 
-        // 0. using primary key as data index
+        // 1. Uses primary key as data index
         foreach ($this as $key => $record) {
             $coll[$record['id']] = $record;
             unset($coll[$key]);
         }
 
-        // 1. Remove extra rows
+        // 2. Removes empty rows from data
         foreach ($data as $index => $row) {
             if (!array_filter($row)) {
                 unset($data[$index]);
             }
         }
 
-        // 2. 删除提交后,Relation中没有的行
+        // 3. Removes missing rows
         $existIds = array();
         foreach ($data as $row) {
             if (isset($row['id']) && $row['id'] !== null) {
                 $existIds[] = $row['id'];
             }
         }
-
         foreach ($this as $record) {
             if (!in_array($record['id'], $existIds)) {
                 $record->destroy();
             }
         }
 
-        // 3. Merge
+        // 4. Merges existing rows or create new rows
         foreach ($data as $row) {
             if (isset($row['id']) && isset($coll[$row['id']])) {
                 $this[$row['id']]->fromArray($row);
@@ -469,8 +468,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             }
         }
 
+        // 5. Save and return
         $this->save();
-
         return $this;
     }
 
