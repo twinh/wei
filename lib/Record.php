@@ -457,7 +457,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                 $existIds[] = $row['id'];
             }
         }
-        foreach ($this as $record) {
+        foreach ($this->data as $record) {
             if (!in_array($record['id'], $existIds)) {
                 $record->destroy();
             }
@@ -466,7 +466,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         // 4. Merges existing rows or create new rows
         foreach ($data as $row) {
             if (isset($row['id']) && isset($coll[$row['id']])) {
-                $this[$row['id']]->fromArray($row);
+                $this->data[$row['id']]->fromArray($row);
             } else {
                 $this[] = wei()->db($this->table)->fromArray($extraData + $row);
             }
