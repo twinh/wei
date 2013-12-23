@@ -431,6 +431,13 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         return $this;
     }
 
+    /**
+     * Merges data into collection and save to database, including insert, update and delete
+     *
+     * @param array $data A two-dimensional array
+     * @param array $extraData The extra data for new rows
+     * @return $this
+     */
     public function saveColl($data, $extraData = array())
     {
         if (!is_array($data)) {
