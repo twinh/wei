@@ -348,21 +348,23 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             $this->trigger('beforeSave');
             $this->trigger($this->isNew ? 'beforeCreate' : 'beforeUpdate');
 
-            // 2.1.3.1 Insert
+            // 2.1.3.1 Inserts new record
             if ($isNew) {
+                // Removes primary key value when it's empty to avoid SQL error
                 if (array_key_exists($this->primaryKey, $this->data) && !$this->data[$this->primaryKey]) {
                     unset($this->data[$this->primaryKey]);
                 }
 
                 $this->db->insert($this->table, $this->data);
-
                 $this->isNew = false;
+
+                // Receives primary key value when it's empty
                 if (!isset($this->data[$this->primaryKey]) || !$this->data[$this->primaryKey]) {
                     // Prepare sequence name for PostgreSQL
                     $sequence = sprintf('%s_%s_seq', $this->fullTable, $this->primaryKey);
                     $this->data[$this->primaryKey] = $this->db->lastInsertId($sequence);
                 }
-            // 2.1.3.2 Update
+            // 2.1.3.2 Updates existing record
             } else {
                 if ($this->isChanged) {
                     $data = array_intersect_key($this->data, $this->changedData);
