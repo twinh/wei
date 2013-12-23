@@ -410,7 +410,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             $this->trigger('afterDestroy');
             return $result;
         } else {
-            /** @var $record Record */
             foreach ($this->data as $record) {
                 $record->destroy();
             }
