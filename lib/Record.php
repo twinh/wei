@@ -468,7 +468,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             if (isset($row['id']) && isset($coll[$row['id']])) {
                 $this->data[$row['id']]->fromArray($row);
             } else {
-                $this[] = wei()->db($this->table)->fromArray($extraData + $row);
+                $this[] = $this->db($this->table)->fromArray($extraData + $row);
             }
         }
 
