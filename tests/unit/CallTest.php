@@ -787,6 +787,16 @@ class CallTest extends TestCase
         $this->assertEquals(true, $call->getCurlOption(CURLOPT_HEADER));
     }
 
+    public function testParseJsonError()
+    {
+        $this->setExpectedException('ErrorException', 'JSON Parsing error');
+
+        $this->call(array(
+            'url' => $this->url,
+            'dataType' => 'json',
+        ));
+    }
+
     public function assertCalledEvents($events)
     {
         foreach ((array)$events as $event) {
