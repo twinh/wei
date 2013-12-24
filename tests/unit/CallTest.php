@@ -425,6 +425,32 @@ class CallTest extends TestCase
         $this->assertCalledEvents(array('success'));
     }
 
+    public function testGetCookie()
+    {
+        $test = $this;
+        $call = $this->call(array(
+            'url' => $this->url . '?test=responseCookies',
+            'header' => true,
+            'dataType' => 'json',
+            'cookies' => array(
+                'key' => 'value',
+                'bool' => true,
+                'invalid' => ';"',
+                'space' => 'S P'
+            ),
+            'success' => function($data, Call $call) use($test) {
+                $test->triggeredEvents[] = 'success';
+                $cookies = $call->getResponseCookies();
+                $test->assertEquals('value', $cookies['key']);
+                $test->assertEquals('1', $cookies['bool']);
+                $test->assertEquals(';"', urldecode($cookies['invalid']));
+                $test->assertEquals('S P', urldecode($cookies['space']));
+            }
+        ));
+        $this->assertTrue($call->isSuccess());
+        $this->assertCalledEvents(array('success'));
+    }
+
     public function testPost()
     {
         $test = $this;
