@@ -441,10 +441,14 @@ class CallTest extends TestCase
             'success' => function($data, Call $call) use($test) {
                 $test->triggeredEvents[] = 'success';
                 $cookies = $call->getResponseCookies();
+                $test->assertInternalType('array', $cookies);
+
                 $test->assertEquals('value', $cookies['key']);
                 $test->assertEquals('1', $cookies['bool']);
                 $test->assertEquals(';"', $cookies['invalid']);
                 $test->assertEquals('S P', $cookies['space']);
+
+                $test->assertEquals('value', $call->getResponseCookie('key'));
             }
         ));
         $this->assertTrue($call->isSuccess());
