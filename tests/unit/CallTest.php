@@ -443,8 +443,8 @@ class CallTest extends TestCase
                 $cookies = $call->getResponseCookies();
                 $test->assertEquals('value', $cookies['key']);
                 $test->assertEquals('1', $cookies['bool']);
-                $test->assertEquals(';"', urldecode($cookies['invalid']));
-                $test->assertEquals('S P', urldecode($cookies['space']));
+                $test->assertEquals(';"', $cookies['invalid']);
+                $test->assertEquals('S P', $cookies['space']);
             }
         ));
         $this->assertTrue($call->isSuccess());
