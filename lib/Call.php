@@ -596,19 +596,6 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
-     * Set request header value
-     *
-     * @param string $name
-     * @param string $value
-     * @return $this
-     */
-    public function setRequestHeader($name, $value)
-    {
-        $this->headers[$name] = $value;
-        return $this;
-    }
-
-    /**
      * Returns request header value
      *
      * @param string $name The header name
