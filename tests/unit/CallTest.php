@@ -197,6 +197,32 @@ class CallTest extends TestCase
         $this->assertTrue($call->isSuccess());
     }
 
+    public function testSetRequestHeader()
+    {
+        $test = $this;
+        $call = $this->call(array(
+            'url' => $this->url . '?test=headers',
+            'dataType' => 'json',
+            'headers' => array(
+                'Key' => 'Value',
+                'Key-Name' => 'Value',
+                'Key_Name' => 'Value with space' // overwrite previous header
+            ),
+            'beforeSend' => function(Call $call) {
+                $call->setRequestHeader('Key', 'Test');
+            },
+            'success' => function($data, Call $call) use($test) {
+                // header set by php script
+                $test->assertEquals('value', $call->getResponseHeader('customHeader'));
+
+                $test->assertEquals('Test', $data['KEY']);
+                $test->assertEquals('Value with space', $data['KEY_NAME']);
+            }
+        ));
+
+        $this->assertTrue($call->isSuccess());
+    }
+
     public function testCustomOptions()
     {
         $test = $this;
@@ -454,6 +480,29 @@ class CallTest extends TestCase
         $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
     }
+
+    /*public function testGetEmptyCookie()
+    {
+        $test = $this;
+        $call = $this->call(array(
+            'url' => $this->url . '?test=responseCookies',
+            'header' => true,
+            'dataType' => 'json',
+            'cookies' => array(
+                'key' => '',
+            ),
+            'success' => function($data, Call $call) use($test) {
+                $test->triggeredEvents[] = 'success';
+
+                $cookies = $call->getResponseCookies();
+                $test->assertInternalType('array', $cookies);
+
+                $test->assertEquals('', $cookies['key']);
+            }
+        ));
+        $this->assertTrue($call->isSuccess());
+        $this->assertCalledEvents(array('success'));
+    }*/
 
     public function testPost()
     {
@@ -794,6 +843,7 @@ class CallTest extends TestCase
         $this->call(array(
             'url' => $this->url,
             'dataType' => 'json',
+            'throwException' => true,
         ));
     }
 
