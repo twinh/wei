@@ -789,7 +789,7 @@ class CallTest extends TestCase
 
     public function testParseJsonError()
     {
-        $this->setExpectedException('ErrorException', 'JSON Parsing error');
+        $this->setExpectedException('ErrorException', 'JSON parsing error');
 
         $this->call(array(
             'url' => $this->url,

@@ -483,7 +483,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             case 'jsonObject' :
                 $data = json_decode($data, $this->dataType === 'json');
                 if (null === $data && json_last_error() != JSON_ERROR_NONE) {
-                    $exception = new \ErrorException('JSON Parsing error', json_last_error());
+                    $exception = new \ErrorException('JSON parsing error', json_last_error());
                 }
                 break;
 
