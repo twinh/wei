@@ -797,6 +797,12 @@ class CallTest extends TestCase
         ));
     }
 
+    public function testSetCurlOption()
+    {
+        $this->call->setCurlOption(CURLOPT_HEADER, 1);
+        $this->assertEquals(1, $this->call->getCurlOption(CURLOPT_HEADER));
+    }
+
     public function assertCalledEvents($events)
     {
         foreach ((array)$events as $event) {
