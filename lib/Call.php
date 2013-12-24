@@ -696,7 +696,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
                 continue;
             }
             list($name, $value) = $pieces;
-            if (in_array(strtolower($name), array('domain', 'path', 'comment', 'expires', 'secure'))) {
+            if (in_array(strtolower($name), array('domain', 'path', 'comment', 'expires', 'secure', 'max-age'))) {
                 continue;
             } else {
                 $cookies[$name] = trim($value);
