@@ -1753,6 +1753,21 @@ class DbTest extends TestCase
         $this->assertNotEquals(234, $member->getTable());
         $this->assertEquals('member', $member->getTable());
     }
+
+    public function testAddNotRecordToCollection()
+    {
+        $this->initFixtures();
+
+        $members = $this->db('member');
+        $member = $this->db('member');
+
+        // Make sure $members is a collection
+        $members[] = $member;
+
+        $this->setExpectedException('InvalidArgumentException', 'Value for collection must be an instance of Wei\Record');
+
+        $members[] = 234;
+    }
 }
 
 
