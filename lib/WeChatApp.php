@@ -477,6 +477,16 @@ class WeChatApp extends Base
     }
 
     /**
+     * Returns the HTTP raw post data
+     *
+     * @return string
+     */
+    public function getPostData()
+    {
+        return $this->postData;
+    }
+
+    /**
      * Returns your user id
      *
      * @return string
