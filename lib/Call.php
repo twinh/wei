@@ -673,7 +673,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param string $header
      * @return array
      */
-    public function parseCookie($header)
+    protected function parseCookie($header)
     {
         $elements = explode(';', $header);
         $cookies = array();
