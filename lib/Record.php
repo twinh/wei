@@ -531,6 +531,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             if (!$value instanceof static) {
                 throw new \InvalidArgumentException('Value for collection must be a instance of Wei\Record');
             } else {
+                // Support $coll[] = $value;
                 if ($name === null) {
                     $this->data[] = $value;
                 } else {
