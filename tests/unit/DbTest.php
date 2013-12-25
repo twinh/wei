@@ -1750,7 +1750,6 @@ class DbTest extends TestCase
 
         $member['table'] = 234;
 
-
         $this->assertNotEquals(234, $member->getTable());
         $this->assertEquals('member', $member->getTable());
     }

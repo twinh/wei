@@ -515,6 +515,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function set($name, $value = null)
     {
         $this->loaded = true;
+
+        // Set record for collection
         if (!$this->data && $value instanceof static) {
             $this->isColl = true;
         }
