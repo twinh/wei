@@ -455,7 +455,7 @@ class CallTest extends TestCase
         $this->assertCalledEvents(array('success'));
     }
 
-    /*public function testGetEmptyCookie()
+    public function testIgnoreDeletedCookie()
     {
         $test = $this;
         $call = $this->call(array(
@@ -463,7 +463,12 @@ class CallTest extends TestCase
             'header' => true,
             'dataType' => 'json',
             'cookies' => array(
-                'key' => '',
+                'key' => 'value',
+                'key1' => '',
+                'key2' => false,
+                'key3' => null,
+                'key4' => 0,
+                'key5' => 'deleted'
             ),
             'success' => function($data, Call $call) use($test) {
                 $test->triggeredEvents[] = 'success';
@@ -471,12 +476,19 @@ class CallTest extends TestCase
                 $cookies = $call->getResponseCookies();
                 $test->assertInternalType('array', $cookies);
 
-                $test->assertEquals('', $cookies['key']);
+                $test->assertEquals('value', $cookies['key']);
+
+                $test->assertArrayNotHasKey('key1', $cookies);
+                $test->assertArrayNotHasKey('key2', $cookies);
+                $test->assertArrayNotHasKey('key3', $cookies);
+
+                $test->assertEquals('0', $cookies['key4']);
+                $test->assertEquals('deleted', $cookies['key5']);
             }
         ));
         $this->assertTrue($call->isSuccess());
         $this->assertCalledEvents(array('success'));
-    }*/
+    }
 
     public function testPost()
     {
