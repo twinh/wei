@@ -1741,5 +1741,19 @@ class DbTest extends TestCase
 
         $this->assertEquals(4, $members->length());
     }
+
+    public function testSetDataWithProperty()
+    {
+        $this->initFixtures();
+
+        $member = $this->db('member');
+
+        $member['table'] = 234;
+
+
+        $this->assertNotEquals(234, $member->getTable());
+        $this->assertEquals('member', $member->getTable());
+    }
 }
+
 
