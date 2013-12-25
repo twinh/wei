@@ -524,8 +524,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                 $this->changedData[$name] = isset($this->data[$name]) ? $this->data[$name] : null;
                 $this->data[$name] = $value;
                 $this->isChanged = true;
-            } else {
-                $this->$name = $value;
             }
         } else {
             if (!$value instanceof static) {
