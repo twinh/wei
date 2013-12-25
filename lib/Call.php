@@ -72,7 +72,6 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Whether includes the header in the response string,
      * equals the CURLOPT_HEADER option
-
      * Set to true when you need to call getResponseHeaders, getResponseHeader,
      * getResponseCookies or getResponseCookie methods
      *
@@ -677,16 +676,24 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     {
         $elements = explode(';', $header);
         $cookies = array();
-        foreach($elements as $element) {
+
+        $currentName = null;
+        foreach ($elements as $element) {
             $pieces = explode('=', trim($element), 2);
             if (!isset($pieces[1])) {
                 continue;
             }
             list($name, $value) = $pieces;
-            if (in_array(strtolower($name), array('domain', 'path', 'comment', 'expires', 'secure', 'max-age'))) {
+
+            if (strtolower($name) == 'expires' && strtotime($value) < time()) {
+                // Removes expired cookie
+                unset($cookies[$currentName]);
+            } elseif (in_array(strtolower($name), array('domain', 'path', 'comment', 'expires', 'secure', 'max-age'))) {
+                // Ignore cookie attribute
                 continue;
             } else {
                 $cookies[$name] = trim(urldecode($value));
+                $currentName = $name;
             }
         }
         return $cookies;
