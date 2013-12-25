@@ -425,6 +425,59 @@ class CallTest extends TestCase
         $this->assertCalledEvents(array('success'));
     }
 
+    public function testGetCookie()
+    {
+        $test = $this;
+        $call = $this->call(array(
+            'url' => $this->url . '?test=responseCookies',
+            'header' => true,
+            'dataType' => 'json',
+            'cookies' => array(
+                'key' => 'value',
+                'bool' => true,
+                'invalid' => ';"',
+                'space' => 'S P'
+            ),
+            'success' => function($data, Call $call) use($test) {
+                $test->triggeredEvents[] = 'success';
+                $cookies = $call->getResponseCookies();
+                $test->assertInternalType('array', $cookies);
+
+                $test->assertEquals('value', $cookies['key']);
+                $test->assertEquals('1', $cookies['bool']);
+                $test->assertEquals(';"', $cookies['invalid']);
+                $test->assertEquals('S P', $cookies['space']);
+
+                $test->assertEquals('value', $call->getResponseCookie('key'));
+            }
+        ));
+        $this->assertTrue($call->isSuccess());
+        $this->assertCalledEvents(array('success'));
+    }
+
+    /*public function testGetEmptyCookie()
+    {
+        $test = $this;
+        $call = $this->call(array(
+            'url' => $this->url . '?test=responseCookies',
+            'header' => true,
+            'dataType' => 'json',
+            'cookies' => array(
+                'key' => '',
+            ),
+            'success' => function($data, Call $call) use($test) {
+                $test->triggeredEvents[] = 'success';
+
+                $cookies = $call->getResponseCookies();
+                $test->assertInternalType('array', $cookies);
+
+                $test->assertEquals('', $cookies['key']);
+            }
+        ));
+        $this->assertTrue($call->isSuccess());
+        $this->assertCalledEvents(array('success'));
+    }*/
+
     public function testPost()
     {
         $test = $this;
@@ -755,6 +808,23 @@ class CallTest extends TestCase
             'header' => true
         ));
         $this->assertEquals(true, $call->getCurlOption(CURLOPT_HEADER));
+    }
+
+    public function testParseJsonError()
+    {
+        $this->setExpectedException('ErrorException', 'JSON parsing error');
+
+        $this->call(array(
+            'url' => $this->url,
+            'dataType' => 'json',
+            'throwException' => true,
+        ));
+    }
+
+    public function testSetCurlOption()
+    {
+        $this->call->setCurlOption(CURLOPT_HEADER, 1);
+        $this->assertEquals(1, $this->call->getCurlOption(CURLOPT_HEADER));
     }
 
     public function assertCalledEvents($events)

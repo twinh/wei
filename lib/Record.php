@@ -66,7 +66,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * The record data
      *
-     * @var array
+     * @var array|Record[]
      */
     protected $data = array();
 
@@ -332,55 +332,64 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function save($data = array())
     {
+        // 1. Merges data from parameters
         $data && $this->fromArray($data);
 
+        // 2.1 Saves single record
         if (!$this->isColl) {
-            // Return false when record has been destroy to avoid dirty data
+
+            // 2.1.1 Returns false when record has been destroy to avoid dirty data
             if ($this->isDestroyed) {
                 return false;
             }
 
+            // 2.1.2 Triggers before callbacks
             $isNew = $this->isNew;
             $this->trigger('beforeSave');
             $this->trigger($this->isNew ? 'beforeCreate' : 'beforeUpdate');
 
-            // Insert
+            // 2.1.3.1 Inserts new record
             if ($isNew) {
-                $result = (bool)$this->db->insert($this->table, $this->data);
-                if ($result) {
-                    $this->isNew = false;
-                    if (!isset($this->data[$this->primaryKey]) || !$this->data[$this->primaryKey]) {
-                        $name = sprintf('%s_%s_seq', $this->fullTable, $this->primaryKey);
-                        $this->data[$this->primaryKey] = $this->db->lastInsertId($name);
-                    }
+                // Removes primary key value when it's empty to avoid SQL error
+                if (array_key_exists($this->primaryKey, $this->data) && !$this->data[$this->primaryKey]) {
+                    unset($this->data[$this->primaryKey]);
                 }
-            // Update
+
+                $this->db->insert($this->table, $this->data);
+                $this->isNew = false;
+
+                // Receives primary key value when it's empty
+                if (!isset($this->data[$this->primaryKey]) || !$this->data[$this->primaryKey]) {
+                    // Prepare sequence name for PostgreSQL
+                    $sequence = sprintf('%s_%s_seq', $this->fullTable, $this->primaryKey);
+                    $this->data[$this->primaryKey] = $this->db->lastInsertId($sequence);
+                }
+            // 2.1.3.2 Updates existing record
             } else {
                 if ($this->isChanged) {
                     $data = array_intersect_key($this->data, $this->changedData);
-                    $affectedRows = $this->db->update($this->table, $data, array(
+                    $this->db->update($this->table, $data, array(
                         $this->primaryKey => $this->data[$this->primaryKey]
                     ));
-                    $result = $affectedRows || '0000' == $this->db->errorCode();
-                } else {
-                    $result = true;
                 }
             }
 
+            // 2.1.4 Reset changed data and changed status
             $this->changedData = array();
             $this->isChanged = false;
 
+            // 2.1.5. Triggers after callbacks
             $this->trigger($isNew ? 'afterCreate' : 'afterUpdate');
             $this->trigger('afterSave');
-
-            return $result;
+        // 2.2 Loop and save collection records
         } else {
-            /** @var $record Record */
             foreach ($this->data as $record) {
                 $record->save();
             }
-            return true;
         }
+
+        // 3. Returns result
+        return true;
     }
 
     /**
@@ -401,7 +410,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             $this->trigger('afterDestroy');
             return $result;
         } else {
-            /** @var $record Record */
             foreach ($this->data as $record) {
                 $record->destroy();
             }
@@ -423,50 +431,56 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         return $this;
     }
 
+    /**
+     * Merges data into collection and save to database, including insert, update and delete
+     *
+     * @param array $data A two-dimensional array
+     * @param array $extraData The extra data for new rows
+     * @return $this
+     */
     public function saveColl($data, $extraData = array())
     {
         if (!is_array($data)) {
             return $this;
         }
 
-        // 0. using primary key as data index
+        // 1. Uses primary key as data index
         foreach ($this as $key => $record) {
             $coll[$record['id']] = $record;
             unset($coll[$key]);
         }
 
-        // 1. Remove extra rows
+        // 2. Removes empty rows from data
         foreach ($data as $index => $row) {
             if (!array_filter($row)) {
                 unset($data[$index]);
             }
         }
 
-        // 2. 删除提交后,Relation中没有的行
+        // 3. Removes missing rows
         $existIds = array();
         foreach ($data as $row) {
             if (isset($row['id']) && $row['id'] !== null) {
                 $existIds[] = $row['id'];
             }
         }
-
-        foreach ($this as $record) {
+        foreach ($this->data as $record) {
             if (!in_array($record['id'], $existIds)) {
                 $record->destroy();
             }
         }
 
-        // 3. Merge
+        // 4. Merges existing rows or create new rows
         foreach ($data as $row) {
             if (isset($row['id']) && isset($coll[$row['id']])) {
-                $this[$row['id']]->fromArray($row);
+                $this->data[$row['id']]->fromArray($row);
             } else {
-                $this[] = wei()->db($this->table)->fromArray($extraData + $row);
+                $this[] = $this->db($this->table)->fromArray($extraData + $row);
             }
         }
 
+        // 5. Save and return
         $this->save();
-
         return $this;
     }
 

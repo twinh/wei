@@ -32,6 +32,13 @@ switch ($test) {
         $result = json_encode($wei->cookie->toArray());
         break;
 
+    case 'responseCookies':
+        foreach ($wei->cookie->toArray() as $name => $value) {
+            $wei->response->setCookie($name, $value);
+        }
+        $result = json_encode($wei->cookie->toArray());
+        break;
+
     case 'methods':
         $result = array(
             'method' => $request->getMethod(),

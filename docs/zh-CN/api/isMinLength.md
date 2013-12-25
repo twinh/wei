@@ -7,6 +7,7 @@ isMinLength
 ----
 
 ### 检查"abc"的长度是否大于等于2
+
 ```php
 if (wei()->isMinLength('abc', 2)) {
     echo 'Yes';
@@ -16,6 +17,7 @@ if (wei()->isMinLength('abc', 2)) {
 ```
 
 #### 运行结果
+
 ```php
 'Yes'
 ```
@@ -25,13 +27,18 @@ if (wei()->isMinLength('abc', 2)) {
 
 ### 选项
 
-| 名称              | 类型    | 默认值                             | 说明                 |
-|-------------------|---------|------------------------------------|----------------------|
-| max               | int     | 无                                 | 待比较的数值         |
-| notDetectdMessage | string  | 无法检测到%name%的长度             | -                    |
-| tooShortMessage   | string  | %name%的长度必须大于等于%min%      | 当数据为字符串时出现 |
-| tooFewMessage     | string  | %name%至少需要包括%min%项          | 当数据为数组时出现   |
-| negativeMessage   | string  | %name%不合法                       | -                    |
+名称              | 类型    | 默认值                             | 说明                 |
+------------------|---------|------------------------------------|----------------------|
+max               | int     | 无                                 | 待比较的数值         |
+
+### 错误信息
+
+名称                   | 信息                               | 说明
+-----------------------|------------------------------------|------
+notDetectdMessage      | 无法检测到%name%的长度             |
+tooShortMessage        | %name%的长度必须大于等于%min%      | 当数据为字符串时出现
+tooFewMessage          | %name%至少需要包括%min%项          | 当数据为数组时出现
+negativeMessage        | %name%不合法                       |
 
 ### 方法
 

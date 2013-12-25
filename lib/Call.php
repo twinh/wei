@@ -483,7 +483,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             case 'jsonObject' :
                 $data = json_decode($data, $this->dataType === 'json');
                 if (null === $data && json_last_error() != JSON_ERROR_NONE) {
-                    $exception = new \ErrorException('JSON Parsing error', json_last_error());
+                    $exception = new \ErrorException('JSON parsing error', json_last_error());
                 }
                 break;
 
@@ -596,19 +596,6 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
-     * Set request header value
-     *
-     * @param string $name
-     * @param string $value
-     * @return $this
-     */
-    public function setRequestHeader($name, $value)
-    {
-        $this->headers[$name] = $value;
-        return $this;
-    }
-
-    /**
      * Returns request header value
      *
      * @param string $name The header name
@@ -696,10 +683,10 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
                 continue;
             }
             list($name, $value) = $pieces;
-            if (in_array(strtolower($name), array('domain', 'path', 'comment', 'expires', 'secure'))) {
+            if (in_array(strtolower($name), array('domain', 'path', 'comment', 'expires', 'secure', 'max-age'))) {
                 continue;
             } else {
-                $cookies[$name] = trim($value);
+                $cookies[$name] = trim(urldecode($value));
             }
         }
         return $cookies;
