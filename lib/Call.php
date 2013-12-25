@@ -693,7 +693,7 @@ class Call extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
-     * Return if the request is success
+     * Returns if the request is success
      *
      * @return bool
      */
