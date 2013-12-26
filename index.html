@@ -14048,6 +14048,25 @@
 <span class="p">)</span>
 </code></pre></div>
 
+<h3>使用数组作为日志信息</h3>
+
+<p>除了字符串之外,日志信息还可以是数组</p>
+
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'code'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">'message'</span> <span class="o">=&gt;</span> <span class="s1">'操作成功'</span>
+<span class="p">));</span>
+</code></pre></div>
+
+<p><strong>输出结果</strong></p>
+
+<div class="highlight"><pre><code class="php"><span class="p">[</span><span class="mo">05</span><span class="o">:</span><span class="mi">58</span><span class="o">:</span><span class="mi">10</span><span class="p">]</span> <span class="nx">DEBUG</span><span class="o">:</span> <span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="nx">code</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+    <span class="p">[</span><span class="nx">message</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="err">操作成功</span>
+<span class="p">)</span>
+</code></pre></div>
+
 <h2>调用方式</h2>
 
 <h3>选项</h3>
