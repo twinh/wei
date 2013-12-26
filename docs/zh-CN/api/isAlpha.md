@@ -7,6 +7,7 @@ isAlpha
 ----
 
 ### 检查数据是否只由字母组成
+
 ```php
 $input = 'abc123';
 if (wei()->isAlpha($input)) {
@@ -17,6 +18,7 @@ if (wei()->isAlpha($input)) {
 ```
 
 #### 运行结果
+
 ```php
 'No'
 ```
@@ -26,11 +28,15 @@ if (wei()->isAlpha($input)) {
 
 ### 选项
 
-| 名称                | 类型    | 默认值                           | 说明              |
-|---------------------|---------|----------------------------------|-------------------|
-| notStringMessage    | string  | %name%必须是字符串               | -                 |
-| patternMessage      | string  | %name%只能由字母(a-z)组成        | -                 |
-| negativeMessage     | string  | %name%必须不匹配模式"%pattern%"  | -                 |
+*无*
+
+### 错误信息
+
+名称                   | 信息
+-----------------------|------
+notStringMessage       | %name%必须是字符串
+patternMessage         | %name%只能由字母(a-z)组成
+negativeMessage        | %name%必须不匹配模式"%pattern%"
 
 ### 方法
 
