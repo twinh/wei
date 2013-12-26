@@ -197,6 +197,32 @@ class CallTest extends TestCase
         $this->assertTrue($call->isSuccess());
     }
 
+    public function testGetResponseHeader()
+    {
+        $test = $this;
+        $call = $this->call(array(
+            'url' => $this->url . '?test=headers',
+            'dataType' => 'json',
+            'headers' => array(
+                'Key' => 'Value',
+                'Key-Name' => 'Value',
+                'Key_Name' => 'Value with space' // overwrite previous header
+            ),
+            'success' => function($data, Call $call) use($test) {
+                    $header = $call->getResponseHeader();
+
+                    $test->assertContains('KEY', $header);
+                    $test->assertContains('Value with space', $header);
+                    $test->assertContains('KEY-NAME: Value with space', $header);
+
+                    $test->assertEquals('Value', $data['KEY']);
+                    $test->assertEquals('Value with space', $data['KEY_NAME']);
+                }
+        ));
+
+        $this->assertTrue($call->isSuccess());
+    }
+
     public function testCustomOptions()
     {
         $test = $this;
