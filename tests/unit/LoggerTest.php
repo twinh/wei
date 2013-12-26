@@ -158,4 +158,14 @@ class LoggerTest extends TestCase
         $this->assertContains('clientIp', $content);
         $this->assertContains('serverIp', $content);
     }
+
+    public function testLogWithArrayMessage()
+    {
+        $this->logger->debug(array('key' => 'value'));
+
+        $content = file_get_contents($this->logger->getFile());
+
+        $this->assertContains('key', $content);
+        $this->assertContains('value', $content);
+    }
 }
