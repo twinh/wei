@@ -27,13 +27,18 @@ if (wei()->isBetween(18, 1, 10)) {
 
 ### 选项
 
-| 名称                | 类型    | 默认值                                 | 说明              |
-|---------------------|---------|----------------------------------------|-------------------|
-| min                 | int     | 无                                     | 用于比较的较小值  |
-| max                 | int     | 无                                     | 用于比较的较大值  |
-| notStringMessage    | string  | %name%必须是字符串                     | -                 |
-| betweenMessage      | string  | %name%必须在%min%到%max%之间           | -                 |
-| negativeMessage     | string  | %name%不能在%min%到%max%之间           | -                 |
+名称   | 类型    | 默认值  | 说明
+-------|---------|---------|------
+min    | int     | 无      | 用于比较的较小值
+max    | int     | 无      | 用于比较的较大值
+
+### 错误信息
+
+名称                   | 信息
+-----------------------|------
+notStringMessage       | %name%必须是字符串
+betweenMessage         | %name%必须在%min%到%max%之间
+negativeMessage        | %name%不能在%min%到%max%之间
 
 ### 方法
 
