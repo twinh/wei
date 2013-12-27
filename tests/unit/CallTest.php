@@ -211,12 +211,8 @@ class CallTest extends TestCase
             'success' => function($data, Call $call) use($test) {
                     $header = $call->getResponseHeader();
 
-                    $test->assertContains('KEY', $header);
-                    $test->assertContains('Value with space', $header);
-                    $test->assertContains('KEY-NAME: Value with space', $header);
-
-                    $test->assertEquals('Value', $data['KEY']);
-                    $test->assertEquals('Value with space', $data['KEY_NAME']);
+                    $test->assertContains('customHeader', $header);
+                    $test->assertContains('value', $header);
                 }
         ));
 

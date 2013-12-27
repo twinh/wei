@@ -170,7 +170,7 @@ class View extends Base implements \ArrayAccess
     }
 
     /**
-     * Set layout for current view
+     * Set layout file for current view
      *
      * @param string $name The name of layout template
      * @param string $variable The variable name of layout content
