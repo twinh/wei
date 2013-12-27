@@ -872,6 +872,17 @@ class Db extends Base
     }
 
     /**
+     * Returns the original PDO object
+     *
+     * @return PDO
+     */
+    public function getPdo()
+    {
+        $this->connect();
+        return $this->pdo;
+    }
+
+    /**
      * Returns the last executed SQL query
      *
      * @return string
