@@ -1766,6 +1766,7 @@ class DbTest extends TestCase
 
         $this->setExpectedException('InvalidArgumentException', 'Value for collection must be an instance of Wei\Record');
 
+        // Assign non record value to raise an exception
         $members[] = 234;
     }
 }
