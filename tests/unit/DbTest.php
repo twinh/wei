@@ -1769,6 +1769,11 @@ class DbTest extends TestCase
         // Assign non record value to raise an exception
         $members[] = 234;
     }
+
+    public function testGetPdo()
+    {
+        $this->assertInstanceOf('PDO', $this->db->getPdo());
+    }
 }
 
 
