@@ -27,11 +27,15 @@ if (wei()->isChinese('中文')) {
 
 ### 选项
 
-| 名称                | 类型    | 默认值                           | 说明              |
-|---------------------|---------|----------------------------------|-------------------|
-| notStringMessage    | string  | %name%必须是字符串               | -                 |
-| patternMessage      | string  | %name%只能由中文组成             | -                 |
-| negativeMessage     | string  | %name%不能只由中文组成           | -                 |
+*无*
+
+### 错误信息
+
+名称                    | 信息
+------------------------|------
+notStringMessage        | %name%必须是字符串
+patternMessage          | %name%只能由中文组成
+negativeMessage         | %name%不能只由中文组成
 
 ### 方法
 
