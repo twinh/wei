@@ -7,6 +7,7 @@ isDigit
 ----
 
 ### 检查"abc123"是否为数字
+
 ```php
 if (wei()->isDigit('abc123')) {
     echo 'Yes';
@@ -21,11 +22,15 @@ if (wei()->isDigit('abc123')) {
 
 ### 选项
 
-名称            | 类型   | 默认值                      | 说明
-----------------|--------|-----------------------------|------
-patternMessage  | string | %name%只能由数字(0-9)组成   |
-negativeMessage | string | %name%不能只由数字(0-9)组成 |
-notStringSring  | string | %name%必须是字符串          |
+*无*
+
+### 错误信息
+
+名称                    | 信息
+------------------------|------
+patternMessage          | %name%只能由数字(0-9)组成
+negativeMessage         | %name%不能只由数字(0-9)组成
+notStringSring          | %name%必须是字符串
 
 ### 方法
 
