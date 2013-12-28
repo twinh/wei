@@ -906,6 +906,7 @@ class Db extends Base
      *  Returns the name of fields of specified table
      *
      * @param string $table
+     * @param bool $withPrefix
      * @throws \PDOException
      * @return array
      */
