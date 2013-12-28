@@ -25,11 +25,15 @@ if (wei()->isDivisibleBy(10, 3)) {
 
 ### 选项
 
-| 名称                | 类型    | 默认值                           | 说明              |
-|---------------------|---------|----------------------------------|-------------------|
-| notStringMessage    | string  | %name%必须是字符串               | -                 |
-| notDivisibleMessage | string  | %name%必须被%divisor%整除        | -                 |
-| negativeMessage     | string  | %name%不可以被%divisor%整除      | -                 |
+*无*
+
+### 错误信息
+
+名称                    | 信息
+------------------------|------
+notStringMessage        | %name%必须是字符串
+notDivisibleMessage     | %name%必须被%divisor%整除
+negativeMessage         | %name%不可以被%divisor%整除
 
 ### 方法
 
