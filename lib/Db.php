@@ -912,10 +912,10 @@ class Db extends Base
      */
     public function getTableFields($table, $withPrefix = false)
     {
-        if (isset($this->tableFields[$table])) {
-            return $this->tableFields[$table];
+        $fullTable = $withPrefix ? $table : $this->getTable($table);
+        if (isset($this->tableFields[$fullTable])) {
+            return $this->tableFields[$fullTable];
         } else {
-            $fullTable = $withPrefix ? $table : $this->getTable($table);
             $fields = array();
             switch ($this->driver) {
                 case 'mysql':
