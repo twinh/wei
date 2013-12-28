@@ -228,7 +228,7 @@ class Db extends Base
      */
     public function __invoke($table = null)
     {
-        return $this->create($table);
+        return $this->init($table);
     }
 
     /**
@@ -675,14 +675,14 @@ class Db extends Base
     }
 
     /**
-     * Create a new record instance
+     * Init a record instance
      *
      * @param string $table The name of database table
      * @param array $data The data for table record
      * @param bool $isNew Whether it's a new record and have not save to database
      * @return Record
      */
-    public function create($table, $data = array(), $isNew = true)
+    public function init($table, $data = array(), $isNew = true)
     {
         $class = $this->getRecordClass($table);
         return new $class(array(
@@ -704,7 +704,7 @@ class Db extends Base
     public function find($table, $id)
     {
         $data = $this->select($table, $id);
-        return $data ? $this->create($table, $data, false) : false;
+        return $data ? $this->init($table, $data, false) : false;
     }
 
     /**
@@ -718,7 +718,7 @@ class Db extends Base
      */
     public function findOne($table, $id)
     {
-        return $this->create($table)->findOne($id);
+        return $this->init($table)->findOne($id);
     }
 
     /**
@@ -731,7 +731,7 @@ class Db extends Base
      */
     public function findOrInit($table, $id, $data = array())
     {
-        return $this->create($table)->findOrInit($id, $data);
+        return $this->init($table)->findOrInit($id, $data);
     }
 
     /**
@@ -743,7 +743,7 @@ class Db extends Base
      */
     public function findAll($table, $where = false)
     {
-        return $this->create($table)->findAll($where);
+        return $this->init($table)->findAll($where);
     }
 
     /**

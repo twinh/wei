@@ -726,7 +726,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
         $records = array();
         foreach ($data as $key => $row) {
-            $records[$key] = $this->db->create($this->table, $row, false);
+            $records[$key] = $this->db->init($this->table, $row, false);
         }
 
         $this->data = $records;
@@ -1537,7 +1537,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function filter(\Closure $fn)
     {
         $data = array_filter($this->data, $fn);
-        return $this->db->create($this->table, $data, $this->isNew);
+        return $this->db->init($this->table, $data, $this->isNew);
     }
 
     /**
