@@ -889,6 +889,16 @@ class Db extends Base
     }
 
     /**
+     * Returns the prefix string of table name
+     *
+     * @return string
+     */
+    public function getTablePrefix()
+    {
+        return $this->tablePrefix;
+    }
+
+    /**
      * Returns the last executed SQL query
      *
      * @return string
