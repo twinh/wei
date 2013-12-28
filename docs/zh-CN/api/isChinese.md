@@ -7,6 +7,7 @@ isChinese
 ----
 
 ### 检查数据是否只由汉字组成
+
 ```php
 if (wei()->isChinese('中文')) {
     echo 'Yes';
@@ -16,6 +17,7 @@ if (wei()->isChinese('中文')) {
 ```
 
 #### 运行结果
+
 ```php
 'Yes'
 ```
