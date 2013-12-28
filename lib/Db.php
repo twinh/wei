@@ -334,19 +334,25 @@ class Db extends Base
      */
     public function insertBatch($table, array $data)
     {
-        $table = $this->getTable($table);
-        $field = implode(', ', array_keys($data[0]));
-        $placeholders = array();
-        $values = array();
+        switch ($this->driver) {
+            case 'mysql':
+            case 'pgsql':
+                $table = $this->getTable($table);
+                $field = implode(', ', array_keys($data[0]));
+                $placeholders = array();
+                $values = array();
 
-        foreach ($data as $row) {
-            $placeholders[] = '(' . implode(', ', array_pad(array(), count($row), '?')) . ')';
-            $values = array_merge($values, array_values($row));
+                foreach ($data as $row) {
+                    $placeholders[] = '(' . implode(', ', array_pad(array(), count($row), '?')) . ')';
+                    $values = array_merge($values, array_values($row));
+                }
+                $placeholder = implode(', ', $placeholders);
+
+                $query = "INSERT INTO $table ($field) VALUES $placeholder";
+                return $this->executeUpdate($query, $values);
+            case 'sqlite':
+                throw new \RuntimeException('Sqlite is not supported yet');
         }
-        $placeholder = implode(', ', $placeholders);
-
-        $query = "INSERT INTO $table ($field) VALUES $placeholder";
-        return $this->executeUpdate($query, $values);
     }
 
     /**
