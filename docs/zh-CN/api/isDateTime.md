@@ -55,7 +55,7 @@ invalidMessage          | %name%必须是合法的日期时间(当日期无法�
 formatMessage           | %name%不是合法的日期,格式应该是%format%,例如:%example%
 tooEarlyMessage         | %name%必须晚于%after%
 tooLateMessage          | %name%必须早于%before%
-negativeMessage         |%name%不能是合法的日期
+negativeMessage         | %name%不能是合法的日期
 
 完整的日期格式可以查看PHP官方文档中关于[date](http://php.net/manual/zh/function.date.php)函数的格式说明. 
 
