@@ -602,11 +602,39 @@ class DbTest extends TestCase
 
         $this->assertArrayHasKey('twin', $members);
         $this->assertArrayHasKey('test', $members);
+    }
 
+    public function testIndexByException()
+    {
+        $this->initFixtures();
+        
         $this->setExpectedException('RuntimeException', 'Index field "test" not found in fetched data');
         $members = $this->db('member')
             ->indexBy('test')
             ->fetchAll();
+    }
+
+    public function testRealTimeIndexBy()
+    {
+        $this->initFixtures();
+
+        $members = $this->db('member')->findAll();
+
+        $members = $members->indexBy('name')->toArray();
+
+        $this->assertArrayHasKey('twin', $members);
+        $this->assertArrayHasKey('test', $members);
+    }
+
+    public function testIndexByExceptionAfterLoaded()
+    {
+        $this->initFixtures();
+
+        $members = $this->db('member')->findAll();
+
+        $this->setExpectedException('RuntimeException', 'Index field "test" not found in fetched data');
+
+        $members->indexBy('test');
     }
 
     public function testQueryUpdate()
