@@ -23,7 +23,7 @@ class Url extends Base
      * @param array $params
      * @return string
      */
-    public function __invoke($url, $params = array())
+    public function __invoke($url = '', $params = array())
     {
         if ($params) {
             $url = $url . (false === strpos($url, '?') ? '?' : '&');
