@@ -607,7 +607,7 @@ class DbTest extends TestCase
     public function testIndexByException()
     {
         $this->initFixtures();
-        
+
         $this->setExpectedException('RuntimeException', 'Index field "test" not found in fetched data');
         $members = $this->db('member')
             ->indexBy('test')
