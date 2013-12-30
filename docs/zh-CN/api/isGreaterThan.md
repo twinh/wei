@@ -35,7 +35,7 @@ value    | mixed   | 无        | 待比较的数值
 
 名称                    | 信息
 ------------------------|------
-invalidMessage          | %name%必须大于等于%value%
+invalidMessage          | %name%必须大于%value%
 negativeMessage         | %name%不合法
 
 ### 方法
