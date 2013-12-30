@@ -754,20 +754,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function fetchAll()
     {
         $data = $this->execute();
-
-        if ($data && $this->indexBy && !array_key_exists($this->indexBy, $data[0])) {
-            throw new \RuntimeException(sprintf('Index field "%s" not found in fetched data', $this->indexBy));
-        }
-
         if ($this->indexBy) {
-            $newData = array();
-            foreach ($data as $row) {
-                $newData[$row[$this->indexBy]] = $row;
-            }
-            return $newData;
-        } else {
-            return $data;
+            $data = $this->executeIndexBy($data, $this->indexBy);
         }
+        return $data;
     }
 
     /**
@@ -1148,6 +1138,25 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     {
         $this->indexBy = $field;
         return $this;
+    }
+
+    /**
+     * @param array $data
+     * @param string $field
+     * @return array
+     * @throws \RuntimeException
+     */
+    protected function executeIndexBy($data, $field)
+    {
+        if (!array_key_exists($field, $data[0])) {
+            throw new \RuntimeException(sprintf('Index field "%s" not found in fetched data', $field));
+        }
+
+        $newData = array();
+        foreach ($data as $row) {
+            $newData[$row[$this->indexBy]] = $row;
+        }
+        return $newData;
     }
 
     /**
