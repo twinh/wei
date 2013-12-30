@@ -117,6 +117,8 @@ namespace Wei
      * @method   bool                       isAlpha($input) Check if the input contains only letters (a-z)
      * @property Validator\Blank            $isBlank
      * @method   bool                       isBlank($input) Check if the input is blank
+     * @property Validator\Contains         $isContains
+     * @method   bool                       isContains($input, $search, $regex = false) Check if the input is contains the specified string or pattern
      * @property Validator\Decimal          $isDecimal
      * @method   bool                       isDecimal($input) Check if the input is decimal
      * @property Validator\Digit            $isDigit
