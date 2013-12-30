@@ -1136,6 +1136,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function indexBy($field)
     {
+        // Real time index after data loaded
+        if (!empty($this->data)) {
+            $this->data = $this->executeIndexBy($this->data, $field);
+        }
         $this->indexBy = $field;
         return $this;
     }
@@ -1148,15 +1152,16 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected function executeIndexBy($data, $field)
     {
-        if (!array_key_exists($field, $data[0])) {
+        if (!array_key_exists($field, $data[0]) && !($data[0] instanceof \ArrayAccess && $data[0]->offsetExists($field))) {
             throw new \RuntimeException(sprintf('Index field "%s" not found in fetched data', $field));
         }
 
-        $newData = array();
-        foreach ($data as $row) {
-            $newData[$row[$this->indexBy]] = $row;
+        foreach ($data as $key => $row) {
+            $data[$row[$field]] = $row;
+            unset($data[$key]);
         }
-        return $newData;
+
+        return $data;
     }
 
     /**
