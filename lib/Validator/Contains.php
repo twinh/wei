@@ -33,7 +33,7 @@ class Contains extends BaseValidator
      */
     public function __invoke($input, $search = null, $regex = false)
     {
-        $search && $this->storeOption('search', $search);
+        $search && $this->storeOption('search', (string)$search);
         $this->storeOption('regex', $regex);
 
         return $this->isValid($input);
