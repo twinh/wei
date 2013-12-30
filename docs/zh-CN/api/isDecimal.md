@@ -7,6 +7,7 @@ isDecimal
 ----
 
 ### 检查"1.0.0"是否为小数
+
 ```php
 if (wei()->isDecimal('1.0.0')) {
     echo 'Yes';
@@ -16,6 +17,7 @@ if (wei()->isDecimal('1.0.0')) {
 ```
 
 #### 运行结果
+
 ```php
 'No'
 ```
@@ -25,11 +27,15 @@ if (wei()->isDecimal('1.0.0')) {
 
 ### 选项
 
-| 名称                | 类型    | 默认值                                 | 说明              |
-|---------------------|---------|----------------------------------------|-------------------|
-| notStringMessage    | string  | %name%必须是字符串                     | -                 |
-| invalidMessage      | string  | %name%必须是小数                       | -                 |
-| negativeMessage     | string  | %name%不能是小数                       | -                 |
+*无*
+
+### 错误信息
+
+名称                    | 信息
+------------------------|------
+notStringMessage        | %name%必须是字符串
+invalidMessage          | %name%必须是小数
+negativeMessage         | %name%不能是小数
 
 ### 方法
 

@@ -106,7 +106,7 @@ class DbTest extends TestCase
     public function testGetRecord()
     {
         $this->initFixtures();
-        $this->assertInstanceOf('\Wei\Record', $this->db->create('member'));
+        $this->assertInstanceOf('\Wei\Record', $this->db->init('member'));
     }
 
     public function testRelation()
@@ -278,7 +278,7 @@ class DbTest extends TestCase
         $this->assertEquals('1', $member['id']);
 
         // New member save with data
-        $member = $db->create('member');
+        $member = $db->init('member');
         $this->assertTrue($member->isNew());
         $member->fromArray(array(
             'group_id' => '1',
@@ -602,11 +602,39 @@ class DbTest extends TestCase
 
         $this->assertArrayHasKey('twin', $members);
         $this->assertArrayHasKey('test', $members);
+    }
+
+    public function testIndexByException()
+    {
+        $this->initFixtures();
 
         $this->setExpectedException('RuntimeException', 'Index field "test" not found in fetched data');
         $members = $this->db('member')
             ->indexBy('test')
             ->fetchAll();
+    }
+
+    public function testRealTimeIndexBy()
+    {
+        $this->initFixtures();
+
+        $members = $this->db('member')->findAll();
+
+        $members = $members->indexBy('name')->toArray();
+
+        $this->assertArrayHasKey('twin', $members);
+        $this->assertArrayHasKey('test', $members);
+    }
+
+    public function testIndexByExceptionAfterLoaded()
+    {
+        $this->initFixtures();
+
+        $members = $this->db('member')->findAll();
+
+        $this->setExpectedException('RuntimeException', 'Index field "test" not found in fetched data');
+
+        $members->indexBy('test');
     }
 
     public function testQueryUpdate()
@@ -730,7 +758,7 @@ class DbTest extends TestCase
         $this->assertArrayNotHasKey('name', $member);
         $this->assertArrayNotHasKey('address', $member);
 
-        $member = $this->db->create('member')->toArray();
+        $member = $this->db->init('member')->toArray();
         $this->assertInternalType('array', $member);
         $this->assertArrayHasKey('id', $member);
         $this->assertArrayHasKey('group_id', $member);
@@ -756,7 +784,7 @@ class DbTest extends TestCase
     public function testToJson()
     {
         $this->initFixtures();
-        $member = $this->db->create('member');
+        $member = $this->db->init('member');
         $this->assertInternalType('string', $member->toJson());
     }
 
@@ -1261,7 +1289,7 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $member = $this->db->create('member');
+        $member = $this->db->init('member');
         $this->assertFalse($member->isChanged());
 
         $member['name'] = 'tt';
@@ -1594,7 +1622,7 @@ class DbTest extends TestCase
     public function testSaveOnNoFiledChanged()
     {
         $this->initFixtures();
-        $record = $this->db->create('member', array('id' => 1), false);
+        $record = $this->db->init('member', array('id' => 1), false);
         $this->assertTrue($record->save());
     }
 
@@ -1602,7 +1630,7 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $record = $this->db->create('member');
+        $record = $this->db->init('member');
         $this->assertEquals('id', $record->getPrimaryKey());
 
         $record->setPrimaryKey('testId');
@@ -1613,10 +1641,10 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $record = $this->db->create('member', array('id' => 1), true);
+        $record = $this->db->init('member', array('id' => 1), true);
         $this->assertTrue($record->isNew());
 
-        $record = $this->db->create('member', array('id' => 1), false);
+        $record = $this->db->init('member', array('id' => 1), false);
         $this->assertFalse($record->isNew());
     }
 

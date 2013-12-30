@@ -228,7 +228,7 @@ class Db extends Base
      */
     public function __invoke($table = null)
     {
-        return $this->create($table);
+        return $this->init($table);
     }
 
     /**
@@ -334,19 +334,25 @@ class Db extends Base
      */
     public function insertBatch($table, array $data)
     {
-        $table = $this->getTable($table);
-        $field = implode(', ', array_keys($data[0]));
-        $placeholders = array();
-        $values = array();
+        switch ($this->driver) {
+            case 'mysql':
+            case 'pgsql':
+                $table = $this->getTable($table);
+                $field = implode(', ', array_keys($data[0]));
+                $placeholders = array();
+                $values = array();
 
-        foreach ($data as $row) {
-            $placeholders[] = '(' . implode(', ', array_pad(array(), count($row), '?')) . ')';
-            $values = array_merge($values, array_values($row));
+                foreach ($data as $row) {
+                    $placeholders[] = '(' . implode(', ', array_pad(array(), count($row), '?')) . ')';
+                    $values = array_merge($values, array_values($row));
+                }
+                $placeholder = implode(', ', $placeholders);
+
+                $query = "INSERT INTO $table ($field) VALUES $placeholder";
+                return $this->executeUpdate($query, $values);
+            case 'sqlite':
+                throw new \RuntimeException('Sqlite is not supported yet');
         }
-        $placeholder = implode(', ', $placeholders);
-
-        $query = "INSERT INTO $table ($field) VALUES $placeholder";
-        return $this->executeUpdate($query, $values);
     }
 
     /**
@@ -669,14 +675,14 @@ class Db extends Base
     }
 
     /**
-     * Create a new record instance
+     * Init a record instance
      *
      * @param string $table The name of database table
      * @param array $data The data for table record
      * @param bool $isNew Whether it's a new record and have not save to database
      * @return Record
      */
-    public function create($table, $data = array(), $isNew = true)
+    public function init($table, $data = array(), $isNew = true)
     {
         $class = $this->getRecordClass($table);
         return new $class(array(
@@ -698,7 +704,7 @@ class Db extends Base
     public function find($table, $id)
     {
         $data = $this->select($table, $id);
-        return $data ? $this->create($table, $data, false) : false;
+        return $data ? $this->init($table, $data, false) : false;
     }
 
     /**
@@ -712,7 +718,7 @@ class Db extends Base
      */
     public function findOne($table, $id)
     {
-        return $this->create($table)->findOne($id);
+        return $this->init($table)->findOne($id);
     }
 
     /**
@@ -725,7 +731,7 @@ class Db extends Base
      */
     public function findOrInit($table, $id, $data = array())
     {
-        return $this->create($table)->findOrInit($id, $data);
+        return $this->init($table)->findOrInit($id, $data);
     }
 
     /**
@@ -737,7 +743,7 @@ class Db extends Base
      */
     public function findAll($table, $where = false)
     {
-        return $this->create($table)->findAll($where);
+        return $this->init($table)->findAll($where);
     }
 
     /**
@@ -883,6 +889,16 @@ class Db extends Base
     }
 
     /**
+     * Returns the prefix string of table name
+     *
+     * @return string
+     */
+    public function getTablePrefix()
+    {
+        return $this->tablePrefix;
+    }
+
+    /**
      * Returns the last executed SQL query
      *
      * @return string
@@ -906,15 +922,16 @@ class Db extends Base
      *  Returns the name of fields of specified table
      *
      * @param string $table
+     * @param bool $withPrefix
      * @throws \PDOException
      * @return array
      */
     public function getTableFields($table, $withPrefix = false)
     {
-        if (isset($this->tableFields[$table])) {
-            return $this->tableFields[$table];
+        $fullTable = $withPrefix ? $table : $this->getTable($table);
+        if (isset($this->tableFields[$fullTable])) {
+            return $this->tableFields[$fullTable];
         } else {
-            $fullTable = $withPrefix ? $table : $this->getTable($table);
             $fields = array();
             switch ($this->driver) {
                 case 'mysql':

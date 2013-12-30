@@ -33,9 +33,9 @@ if (wei()->isExists('/notfound/directory')) {
 
 名称                   | 信息
 -----------------------|------
-| notStringMessage     | %name%必须是字符串
-| notFoundMessage      | %name%必须是存在的文件或目录
-| negativeMessage      | %name%必须是不存在的文件或目录
+notStringMessage       | %name%必须是字符串
+notFoundMessage        | %name%必须是存在的文件或目录
+negativeMessage        | %name%必须是不存在的文件或目录
 
 ### 方法
 

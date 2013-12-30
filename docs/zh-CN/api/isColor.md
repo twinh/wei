@@ -7,6 +7,7 @@ isColor
 ----
 
 ### 检查"#FF0000"是否为有效的十六进制颜色
+
 ```php
 if (wei()->isColor('#FF0000')) {
     echo 'Yes';
@@ -16,6 +17,7 @@ if (wei()->isColor('#FF0000')) {
 ```
 
 #### 运行结果
+
 ```php
 'Yes'
 ```
@@ -25,11 +27,15 @@ if (wei()->isColor('#FF0000')) {
 
 ### 选项
 
-| 名称                | 类型    | 默认值                                      | 说明              |
-|---------------------|---------|---------------------------------------------|-------------------|
-| notStringMessage    | string  | %name%必须是字符串                          | -                 |
-| patternMessage      | string  | %name%必须是有效的十六进制颜色,例如#FF0000  | -                 |
-| negativeMessage     | string  | %name%不能是有效的十六进制颜色              | -                 |
+*无*
+
+### 错误信息
+
+名称                    | 信息
+------------------------|------
+notStringMessage        | %name%必须是字符串
+patternMessage          | %name%必须是有效的十六进制颜色,例如#FF0000
+negativeMessage         | %name%不能是有效的十六进制颜色
 
 ### 方法
 
