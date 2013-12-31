@@ -328,7 +328,7 @@ class Db extends Base
      *
      * @param string $table The name of table
      * @param array $data A two-dimensional array
-     * @return int
+     * @return int The number of inserted rows
      */
     public function insertBatch($table, array $data)
     {
