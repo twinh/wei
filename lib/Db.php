@@ -348,6 +348,7 @@ class Db extends Base
                 $placeholder = 'VALUES ' . implode(', ', $placeholders);
                 break;
 
+            // For SQLite before 3.7.11, http://www.sqlite.org/releaselog/3_7_11.html
             case 'sqlite':
                 foreach ($data as $row) {
                     $placeholders[] = 'SELECT ' . implode(', ', array_pad(array(), count($row), '?'));
