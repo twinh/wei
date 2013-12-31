@@ -1150,7 +1150,7 @@ class DbTest extends TestCase
 
     public function testGlobalOption()
     {
-        $cb = 'pi';
+        $cb = function(){};
         $this->wei->setConfig(array(
             // sqlite
             'db' => array(
