@@ -334,11 +334,12 @@ class Db extends Base
      */
     public function insertBatch($table, array $data)
     {
+        $table = $this->getTable($table);
+        $field = implode(', ', array_keys($data[0]));
         switch ($this->driver) {
             case 'mysql':
             case 'pgsql':
-                $table = $this->getTable($table);
-                $field = implode(', ', array_keys($data[0]));
+            case 'sqlite':
                 $placeholders = array();
                 $values = array();
 
@@ -350,8 +351,6 @@ class Db extends Base
 
                 $query = "INSERT INTO $table ($field) VALUES $placeholder";
                 return $this->executeUpdate($query, $values);
-            case 'sqlite':
-                throw new \RuntimeException('Sqlite is not supported yet');
         }
     }
 
