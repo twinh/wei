@@ -646,10 +646,15 @@ $params     | array        | 绑定到SQL的参数
 
 **返回:** `string`
 
-#### db->getLastSql()
+#### db->getLastQuery()
 获取最后执行的SQL语句
 
 **返回:** `string`
+
+#### db->getQueries()
+获取所有执行过的SQL语句
+
+**返回:** `array`
 
 #### db->count($table, $conditions = false)
 根据条件获取表的数据量
