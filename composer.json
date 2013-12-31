@@ -6,7 +6,6 @@
     "keywords": ["framework", "cache", "database", "validator"],
     "homepage": "https://github.com/twinh/wei",
     "license": "MIT",
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3"
     },
