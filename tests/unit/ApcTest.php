@@ -81,12 +81,12 @@ class ApcTest extends CacheTestCase
     {
         $apc = $this->object;
 
-        /* $apc->set(__METHOD__, 1);
+        $apc->set(__METHOD__, 1);
 
-         $apc->incr(__METHOD__);
+        $apc->incr(__METHOD__);
 
-         $this->assertEquals($apc->get(__METHOD__), 2);
- */
+        $this->assertEquals($apc->get(__METHOD__), 2);
+
         $apc->remove(__METHOD__);
 
         $result = $apc->incr(__METHOD__);
