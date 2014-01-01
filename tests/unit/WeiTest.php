@@ -137,7 +137,7 @@ class WeiTest extends TestCase
             'date.timezone' => 'Asia/Shanghai'
         ));
 
-        $this->assertEquals('Asia/Shanghai', date_default_timezone_get('date.timezone'));
+        $this->assertEquals('Asia/Shanghai', date_default_timezone_get());
         $this->assertIsSubset(array('date.timezone' => 'Asia/Shanghai'), $wei->getOption('inis'));
 
         $wei->setInis(array(
