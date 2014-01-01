@@ -76,10 +76,12 @@ class Apc extends BaseCache
     public function incr($key, $offset = 1)
     {
         $key = $this->prefix . $key;
-        if (false === apc_inc($key, $offset)) {
+        $value = apc_inc($key, $offset, $success);
+        if ($success) {
+            return $value;
+        } else {
             return apc_store($key, $offset) ? $offset : false;
         }
-        return apc_fetch($key);
     }
 
     /**
