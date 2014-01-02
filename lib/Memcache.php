@@ -41,7 +41,7 @@ class Memcache extends BaseCache
      *
      * @var int
      */
-    protected $flag = 2;
+    protected $flag = 0;
 
     /**
      * Constructor
