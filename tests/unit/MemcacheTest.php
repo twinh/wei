@@ -12,11 +12,6 @@ class MemcacheTest extends CacheTestCase
 
         parent::setUp();
 
-        // HHVM: Unable to handle compressed values yet
-        if (defined('HHVM_VERSION')) {
-            $this->object->setOption('flag', 0);
-        }
-
         if (false === @$this->object->getObject()->getStats()) {
             $this->markTestSkipped('The memcache is not running');
         }
