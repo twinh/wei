@@ -109,6 +109,7 @@ class SessionTest extends TestCase
 
     /**
      * @dataProvider providerForGetterAndSetter
+     * @runInSeparateProcess
      */
     public function testValues($value, $key)
     {

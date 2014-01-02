@@ -29,7 +29,10 @@ class Dir extends BaseValidator
             return false;
         }
 
+        var_dump(stream_resolve_include_path(basename(__DIR__)));die;
+
         $dir = stream_resolve_include_path($input);
+        var_dump($dir);die;
         if (!$dir || !is_dir($dir)) {
             $this->addError('notFound');
             return false;
