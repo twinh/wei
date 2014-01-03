@@ -981,6 +981,19 @@ class DbTest extends TestCase
         $this->assertEquals(2, $count);
     }
 
+    public function testCountWithCondition()
+    {
+        $this->initFixtures();
+
+        $count = $this->db('member')->count(1);
+        $this->assertInternalType('int', $count);
+        $this->assertEquals(1, $count);
+
+        $count = $this->db('member')->count(array('id' => 1));
+        $this->assertInternalType('int', $count);
+        $this->assertEquals(1, $count);
+    }
+
     public function testParameters()
     {
         $this->initFixtures();
