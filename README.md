@@ -253,7 +253,7 @@ $wei->session;
 $wei->ua;
 $wei->upload;
 $wei->response;
-$wei->escape;
+$wei->e;
 $wei->logger;
 $wei->call;
 $wei->env;
