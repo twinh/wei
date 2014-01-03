@@ -37,11 +37,11 @@ class Memcache extends BaseCache
     );
 
     /**
-     * MEMCACHE_COMPRESSED
+     * The flag that use MEMCACHE_COMPRESSED to store the item compressed (uses zlib).
      *
      * @var int
      */
-    protected $flag = 2;
+    protected $flag = 0;
 
     /**
      * Constructor

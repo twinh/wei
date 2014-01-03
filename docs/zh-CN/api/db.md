@@ -417,7 +417,7 @@ $table | string | 要插入的数据表名称
 $data  | array  | 要插入的数据,数组的键名是数据表的字段名称,值是字段的值
 
 #### db->insertBatch($table, $data = array())
-向指定的数据表插入多条数据(目前暂不支持`SQLite`)
+向指定的数据表插入多条数据
 
 **返回:** `int` 受影响的行数
 
@@ -646,10 +646,15 @@ $params     | array        | 绑定到SQL的参数
 
 **返回:** `string`
 
-#### db->getLastSql()
+#### db->getLastQuery()
 获取最后执行的SQL语句
 
 **返回:** `string`
+
+#### db->getQueries()
+获取所有执行过的SQL语句
+
+**返回:** `array`
 
 #### db->count($table, $conditions = false)
 根据条件获取表的数据量

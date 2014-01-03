@@ -15,16 +15,16 @@ services:
 before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction
-  - sh -c 'if [ $(php -r "echo (int)defined(\"HHVM_VERSION\");") -eq 0 ]; then pecl install redis; fi;'
+  - sh -c 'if [ $(php -r "echo (int) defined(\"HHVM_VERSION\");") -eq 0 ]; then pecl install redis; fi;'
   - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -gt 4 ]; then sed -i 1d "tests/config/php.ini"; fi;'
-  - phpenv config-add tests/config/php.ini
+  - sh -c 'if [ $(php -r "echo (int) defined(\"HHVM_VERSION\");") -eq 0 ]; then phpenv config-add tests/config/php.ini; fi;'
   - mysql -e 'CREATE DATABASE IF NOT EXISTS wei_tests;'
   - psql -c 'CREATE DATABASE wei_tests;' -U postgres
   - mkdir -p build/logs
   - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -gt 3 ]; then php -S 0.0.0.0:8000 -t tests/unit/Fixtures/; fi;' > /dev/null &
 
 script:
-  - phpunit --verbose --coverage-clover build/logs/clover.xml
+  - ./vendor/bin/phpunit --verbose --coverage-clover build/logs/clover.xml
 
 after_script:
   - pkill php

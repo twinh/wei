@@ -326,33 +326,39 @@ class Db extends Base
     /**
      * Insert batch data into table
      *
-     * NOTE: The method is not working for SQLite
-     *
      * @param string $table The name of table
      * @param array $data A two-dimensional array
-     * @return int
+     * @return int The number of inserted rows
      */
     public function insertBatch($table, array $data)
     {
+        $table = $this->getTable($table);
+        $field = implode(', ', array_keys($data[0]));
+        $placeholders = array();
+        $values = array();
+
         switch ($this->driver) {
+            default:
             case 'mysql':
             case 'pgsql':
-                $table = $this->getTable($table);
-                $field = implode(', ', array_keys($data[0]));
-                $placeholders = array();
-                $values = array();
-
                 foreach ($data as $row) {
                     $placeholders[] = '(' . implode(', ', array_pad(array(), count($row), '?')) . ')';
                     $values = array_merge($values, array_values($row));
                 }
-                $placeholder = implode(', ', $placeholders);
+                $placeholder = 'VALUES ' . implode(', ', $placeholders);
+                break;
 
-                $query = "INSERT INTO $table ($field) VALUES $placeholder";
-                return $this->executeUpdate($query, $values);
+            // For SQLite before 3.7.11, http://www.sqlite.org/releaselog/3_7_11.html
             case 'sqlite':
-                throw new \RuntimeException('Sqlite is not supported yet');
+                foreach ($data as $row) {
+                    $placeholders[] = 'SELECT ' . implode(', ', array_pad(array(), count($row), '?'));
+                    $values = array_merge($values, array_values($row));
+                }
+                $placeholder = implode(' UNION ', $placeholders);
+                break;
         }
+        $query = "INSERT INTO $table ($field) $placeholder";
+        return $this->executeUpdate($query, $values);
     }
 
     /**

@@ -118,11 +118,10 @@ class LoggerTest extends TestCase
         $this->assertContains('INFO', file_get_contents($file));
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
-    public function testMkdirException()
+    public function testMkDirException()
     {
+        $this->setExpectedException('RuntimeException', 'Fail to create directory "http://example/"');
+
         $logger = $this->wei->newInstance('logger', array(
             'dir' => 'http://example/'
         ));

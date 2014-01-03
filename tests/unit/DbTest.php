@@ -1150,7 +1150,7 @@ class DbTest extends TestCase
 
     public function testGlobalOption()
     {
-        $cb = 'pi';
+        $cb = function(){};
         $this->wei->setConfig(array(
             // sqlite
             'db' => array(
@@ -1203,11 +1203,9 @@ class DbTest extends TestCase
 
     public function testInsertBatch()
     {
-        if ('sqlite' == $this->db->getDriver()) {
-            $this->markTestSkipped('batch insert is not supported by SQLite');
-        }
+        $this->initFixtures();
 
-        $result = $this->db->insertBatch('prefix_member', array(
+        $result = $this->db->insertBatch('member', array(
             array(
                 'group_id' => '1',
                 'name' => 'twin',
