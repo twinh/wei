@@ -62,7 +62,7 @@ wei(array(
         )
     ),
     'cache' => array(
-        'driver' => 'memcached'
+        'driver' => 'fileCache'
     ),
     'bicache' => array(
         'providers' => array(
