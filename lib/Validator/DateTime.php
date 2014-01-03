@@ -107,7 +107,7 @@ class DateTime extends BaseValidator
             $date = false;
         }
 
-        // Case 1: cannot parse time by specified format($this->foramt)
+        // Case 1: cannot parse time by specified format($this->format)
         // Case 2: thrown exception "Failed to parse time string..."
         if (false === $date) {
             $this->addError('invalid');
