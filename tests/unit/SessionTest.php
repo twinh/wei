@@ -11,6 +11,10 @@ class SessionTest extends TestCase
 
     protected function setUp()
     {
+        if (headers_sent($file, $line)) {
+            $this->markTestSkipped(sprintf('Unable to start session, output started at %s:%s', $file, $line));
+        }
+
         parent::setUp();
         $data = array();
         session_set_save_handler(
