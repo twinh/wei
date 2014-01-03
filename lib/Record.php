@@ -763,10 +763,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Execute a COUNT query to receive the rows number
      *
+     * @param mixed $conditions
      * @return int
      */
-    public function count()
+    public function count($conditions = array())
     {
+        $this->andWhere($conditions);
         return (int)$this->db->fetchColumn($this->getSqlForCount(), $this->params);
     }
 
