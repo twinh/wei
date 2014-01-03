@@ -126,7 +126,10 @@ namespace WeiTest
         {
             $this->assertInstanceOf('\Wei\Response', $this->response->flush());
 
-            $this->assertEquals('1', ini_get('implicit_flush'));
+            // FIXME https://github.com/facebook/hhvm/issues/1284
+            if (!defined('HHVN_VERSION')) {
+                $this->assertEquals('1', ini_get('implicit_flush'));
+            }
 
             $this->assertEquals(0, ob_get_level());
 
