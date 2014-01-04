@@ -50,10 +50,14 @@ if (wei()->isRequired(0)) {
 
 ### 选项
 
-名称              | 类型    | 默认值           | 说明
-------------------|---------|------------------|------
-requiredMessage   | string  | %name%不能为空   | -
-negativeMessage   | string  | %name%不合法     | -
+*无*
+
+### 错误信息
+
+名称                    | 信息
+------------------------|------
+requiredMessage         | %name%不能为空
+negativeMessage         | %name%不合法
 
 ### 方法
 
