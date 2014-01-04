@@ -8,8 +8,6 @@
 
 namespace Wei\Validator;
 
-use DateTime as Dt;
-
 /**
  * Check if the input is a valid datetime
  *
@@ -99,9 +97,9 @@ class DateTime extends BaseValidator
 
         try {
             if ($this->format) {
-                $date = Dt::createFromFormat($this->format, $input);
+                $date = date_create_from_format($this->format, $input);
             } else {
-                $date = new Dt($input);
+                $date = date_create($input);
             }
         } catch (\Exception $e) {
             $date = false;
@@ -121,14 +119,14 @@ class DateTime extends BaseValidator
         }
 
         if ($this->before) {
-            $before = new Dt($this->before);
+            $before = date_create($this->before);
             if ($before < $date) {
                 $this->addError('tooLate');
             }
         }
 
         if ($this->after) {
-            $after = new Dt($this->after);
+            $after = date_create($this->after);
             if ($after > $date) {
                 $this->addError('tooEarly');
             }
