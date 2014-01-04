@@ -95,26 +95,15 @@ class DateTime extends BaseValidator
             return false;
         }
 
-        try {
-            if ($this->format) {
-                $date = date_create_from_format($this->format, $input);
-            } else {
-                $date = date_create($input);
-            }
-        } catch (\Exception $e) {
-            $date = false;
+        if ($this->format) {
+            $date = date_create_from_format($this->format, $input);
+        } else {
+            $date = date_create($input);
         }
 
-        // Case 1: cannot parse time by specified format($this->format)
-        // Case 2: thrown exception "Failed to parse time string..."
-        if (false === $date) {
+        $lastErrors = date_get_last_errors();
+        if ($lastErrors['warning_count'] || $lastErrors['error_count']) {
             $this->addError('invalid');
-            return false;
-        }
-
-        if ($this->format && $input != $date->format($this->format)) {
-            $this->example = date($this->format);
-            $this->addError('format');
             return false;
         }
 
