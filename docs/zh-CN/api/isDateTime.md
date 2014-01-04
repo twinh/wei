@@ -68,3 +68,5 @@ negativeMessage         | %name%不能是合法的日期
 --------
 
 * [验证器概览](../book/validators.md)
+* [检查数据是否为合法的日期:isDate](isDate.md)
+* [检查数据是否为合法的时间:isTime](isTime.md)

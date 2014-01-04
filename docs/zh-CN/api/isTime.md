@@ -54,9 +54,11 @@ if (wei()->isTime('12:00', 'i:s')) {
 ### 方法
 
 #### isTime($input, $format = 'H:i:s')
-检查数据是否为合法的日期
+检查数据是否为合法的时间
 
 相关链接
 --------
 
 * [验证器概览](../book/validators.md)
+* [检查数据是否为合法的日期时间:isDateTime](isDateTime.md)
+* [检查数据是否为合法的日期:isDate](isDate.md)
