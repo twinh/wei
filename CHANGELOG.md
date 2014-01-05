@@ -1,7 +1,52 @@
 Changelog
 =========
 
-## 0.9.9 (WIP)
+## 0.9.9-RC (2014-01-05)
+
+* Added fullTable property for record class
+* Fixed db test error when table name contains alias
+* Merged error view file into error service
+* Moved unit tests to `tests/unit` directroy
+* Added condition parameter for record class desctroy method
+* Added version parameter for asset service
+* Renamed escape servie to "e"
+* Throws exception when autoload directroy not found
+* Decouple response servie with escape service
+* Simplified url service to generate url without router service
+* Added array access for view service
+* Added getMap method for config service
+* Renamed view service vars property to data
+* Append logger context to log message
+* Added http service, which is an alias of call service
+* Throws InvalidArgumentException when password service salt option is too short
+* Fixed record class findOrInit method returns error isNew flag when record not found
+* Fixed test error when primary key is null
+* Added saveColl method for record class
+* Added support for collection record to auto increment array key when key is null
+* Fixed primary key not receive when primary key value is null
+* Removed max-age in call service resposned cookie
+* Automatic decode call service responsed cookie value
+* Added getPostData method for weChatApp service
+* Removed call service setRequestHeader method
+* Removes call service deleted cookie, ref #155
+* Added getPdo method for db servcie
+* Uses full table name as db service tableFields key
+* Added getTablePrefix method for db service, close #154
+* Renamed db service create method to init
+* Added real time indexBy support for record class, refs #158
+* Added isContains validator, refs #149
+* Allows url service url parameter be empty
+* Added batch insert for SQLite before 3.7.11, closes #159
+* Added HHVM test env and fixed some unit test error in HHVM, refs #153
+* Updated phpunit version for HHVM test, refs #153
+* Fixed HHVM test error "Too many arguments for pi()", refs #153
+* Fixed HHVM memcache extension test error: "Unable to handle compressed values yet", refs #153
+* Fixed HHVM APC incr method test error, refs #153
+* Changed memcache service flag option default to 0, for zlib is not installedadded conditions parameter for record class by default
+* Added conditions parameter for record class count method
+* Removed runInSeparateProcess annotation for session test
+* Uses fileCache as default cache driver, make sure it avaiable for all unit tests
+* Simplified isDateTime validator, fixed isDateTime test error in HHVM, refs #153, closes #160
 
 ## 0.9.8 (2013-12-10)
 
