@@ -52,8 +52,8 @@ regex             | bool    | false   | 是否用正则匹配
 
 名称                       | 信息
 ---------------------------|------
-notContainsMessage         | %name% must contains %search%
-negativeMessage            | %name% must not contains %search%
+notContainsMessage         | %name%必须包含%search%
+negativeMessage            | %name%不能包含%search%
 
 ### 方法
 
