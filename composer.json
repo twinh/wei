@@ -1,7 +1,7 @@
 {
     "name": "wei/wei",
     "description": "A micro-framework provided powerful and simple APIs for faster and easier PHP 5.3+ development.",
-    "version": "0.9.8",
+    "version": "0.9.9-RC1",
     "type": "library",
     "keywords": ["framework", "cache", "database", "validator"],
     "homepage": "https://github.com/twinh/wei",

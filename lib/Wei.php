@@ -263,7 +263,7 @@ namespace Wei
         /**
          * Version
          */
-        const VERSION = '0.9.8';
+        const VERSION = '0.9.9-RC1';
 
         /**
          * The configurations for all objects
