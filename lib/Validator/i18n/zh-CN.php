@@ -32,7 +32,7 @@ return array(
     '%name% must not be blank' => '%name%不能为空',
 
     // charLength
-    '%name% must be %length% characters' => '%name%必须是6个字符',
+    '%name% must be %length% characters' => '%name%必须是%length%个字符',
     '%name% must be between %min% to %max% characters' => '%name%必须包含%min%-%max%个字符',
 
     // chinese
