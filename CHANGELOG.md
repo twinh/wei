@@ -6,12 +6,12 @@ Changelog
 * Added fullTable property for record class
 * Fixed db test error when table name contains alias
 * Merged error view file into error service
-* Moved unit tests to `tests/unit` directroy
-* Added condition parameter for record class desctroy method
+* Moved unit tests to `tests/unit` directory
+* Added condition parameter for record class destroy method
 * Added version parameter for asset service
-* Renamed escape servie to "e"
-* Throws exception when autoload directroy not found
-* Decouple response servie with escape service
+* Renamed escape service to "e"
+* Throws exception when autoload directory not found
+* Decouple response service with escape service
 * Simplified url service to generate url without router service
 * Added array access for view service
 * Added getMap method for config service
@@ -24,12 +24,12 @@ Changelog
 * Added saveColl method for record class
 * Added support for collection record to auto increment array key when key is null
 * Fixed primary key not receive when primary key value is null
-* Removed max-age in call service resposned cookie
-* Automatic decode call service responsed cookie value
+* Removed max-age in call service responded cookie
+* Automatic decode call service responded cookie value
 * Added getPostData method for weChatApp service
 * Removed call service setRequestHeader method
 * Removes call service deleted cookie, ref #155
-* Added getPdo method for db servcie
+* Added getPdo method for db service
 * Uses full table name as db service tableFields key
 * Added getTablePrefix method for db service, close #154
 * Renamed db service create method to init
@@ -42,10 +42,10 @@ Changelog
 * Fixed HHVM test error "Too many arguments for pi()", refs #153
 * Fixed HHVM memcache extension test error: "Unable to handle compressed values yet", refs #153
 * Fixed HHVM APC incr method test error, refs #153
-* Changed memcache service flag option default to 0, for zlib is not installedadded conditions parameter for record class by default
+* Changed memcache service flag option default to 0, for zlib is not installed conditions parameter for record class by default
 * Added conditions parameter for record class count method
 * Removed runInSeparateProcess annotation for session test
-* Uses fileCache as default cache driver, make sure it avaiable for all unit tests
+* Uses fileCache as default cache driver, make sure it available for all unit tests
 * Simplified isDateTime validator, fixed isDateTime test error in HHVM, refs #153, closes #160
 
 ## 0.9.8 (2013-12-10)
