@@ -52,7 +52,7 @@ Define the following requirement in your `composer.json` file and run `php compo
 
 ### Download source code
 
-* [Stable Version](https://github.com/twinh/wei/archive/v0.9.7.zip)
+* [Stable Version](https://github.com/twinh/wei/archive/v0.9.8.zip)
 * [Develop Version](https://github.com/twinh/wei/archive/master.zip)
 
 ## Resources
