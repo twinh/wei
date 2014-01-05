@@ -86,6 +86,7 @@
         <li><a href="#isAlnum">isAlnum</a></li>
         <li><a href="#isAlpha">isAlpha</a></li>
         <li><a href="#isBlank">isBlank</a></li>
+        <li><a href="#isContains">isContains</a></li>
         <li><a href="#isDecimal">isDecimal</a></li>
         <li><a href="#isDigit">isDigit</a></li>
         <li><a href="#isDivisibleby">isDivisibleBy</a></li>
@@ -329,9 +330,7 @@
 
 <h3>获取对象管理器</h3>
 
-<div class="highlight"><pre><code class="php"><span class="cm">/* @var $wei \Wei\Wei */</span>
-<span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">();</span>
-</code></pre></div>
+
 
 <h3>获取和调用服务</h3>
 
@@ -339,15 +338,7 @@
 
 <p>获取服务对象使用<code>wei()-&gt;服务名称</code>即可.</p>
 
-<div class="highlight"><pre><code class="php"><span class="c1">// 获取数据库操作服务</span>
-<span class="nv">$db</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">;</span>
 
-<span class="c1">// 获取redis缓存服务</span>
-<span class="nv">$redis</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">redis</span><span class="p">;</span>
-
-<span class="c1">// 使用验证服务检查数据</span>
-<span class="nv">$validator</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">());</span>
-</code></pre></div>
 
 <h3>设置服务配置</h3>
 
@@ -6553,6 +6544,98 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 <li><a href="#validate">区分required,notBlank和present验证规则</a></li>
+</ul>
+  </section>
+
+<!-- api/isContains
+  ================================================== -->
+  <section id="isContains">
+  <div class="page-header"><h1>isContains</h1></div>
+
+<p>检查数据是否在指定的字符串或正则中</p>
+
+<h2>案例</h2>
+
+<h3>检查"h"是否在"hello"之中</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isContains</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">,</span> <span class="s1">'h'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
+</code></pre></div>
+
+<h3>检查"hello"是否匹配正则"/H/i"</h3>
+
+<div class="highlight"><pre><code class="php"><span class="k">if</span> <span class="p">(</span><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isContains</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">,</span> <span class="s1">'/H/i'</span><span class="p">,</span> <span class="k">true</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Yes'</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'No'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>运行结果</h4>
+
+<div class="highlight"><pre><code class="php"><span class="s1">'Yes'</span>
+</code></pre></div>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>search</td>
+<td>array</td>
+<td>array()</td>
+<td>用于搜索的字符串或正则</td>
+</tr>
+<tr>
+<td>regex</td>
+<td>bool</td>
+<td>false</td>
+<td>是否用正则匹配</td>
+</tr>
+</tbody>
+</table><h3>错误信息</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>信息</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notContainsMessage</td>
+<td>%name% must contains %search%</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>%name% must not contains %search%</td>
+</tr>
+</tbody>
+</table><h3>方法</h3>
+
+<h4>isContains($input, $search, $regex = false)</h4>
+
+<p>检查数据是否在指定的字符串或正则中</p>
+
+<h2>相关链接</h2>
+
+<ul>
+<li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
   </section>
 

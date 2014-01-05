@@ -52,7 +52,7 @@ weis = [
   # validation
     'validate',
     #
-    'isAlnum', 'isAlpha', 'isBlank', 'isDecimal', 'isDigit', 'isDivisibleby', 'isDoubleByte', 'isEndsWith', 'isIn', 'isLowercase', 'isLuhn', 'isNaturalNumber', 'isNull', 'isNumber', 'isPositiveInteger', 'isPresent', 'isRegex', 'isRequired', 'isStartsWith', 'isType', 'isUppercase',
+    'isAlnum', 'isAlpha', 'isBlank', 'isContains', 'isDecimal', 'isDigit', 'isDivisibleby', 'isDoubleByte', 'isEndsWith', 'isIn', 'isLowercase', 'isLuhn', 'isNaturalNumber', 'isNull', 'isNumber', 'isPositiveInteger', 'isPresent', 'isRegex', 'isRequired', 'isStartsWith', 'isType', 'isUppercase',
     # Length
     'isLength', 'isCharLength', 'isMaxLength', 'isMinLength',
     # Comparison
