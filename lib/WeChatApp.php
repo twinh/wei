@@ -745,7 +745,11 @@ class WeChatApp extends Base
 
         // Parse the message data
         if ($this->valid && $this->postData) {
-            $attrs = @simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
+            // Do not output libxml error messages to screen
+            $useErrors = libxml_use_internal_errors(true);
+            $attrs = simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
+            libxml_use_internal_errors($useErrors);
+
             // Fix the issue that XML parse empty data to new SimpleXMLElement object
             $this->attrs = array_map('strval', (array)$attrs);
         }
