@@ -4,7 +4,12 @@ use WeiTest\TestCase;
 
 class CookieTest extends TestCase
 {
-    public function testInvoker() 
+    /**
+     * @var \Wei\Cookie
+     */
+    protected $object;
+
+    public function testInvoker()
     {
         $cookie = $this->object;
 
@@ -12,39 +17,63 @@ class CookieTest extends TestCase
 
         $this->assertEquals(__METHOD__, $cookie('test'));
     }
-    
-    public function testGet() 
+
+    public function testGet()
     {
-        $wei = $this->object;
+        $cookie = $this->object;
 
-        $wei->set('test', __METHOD__);
+        $cookie->set('test', __METHOD__);
 
-        $this->assertEquals(__METHOD__, $wei->get('test'));
+        $this->assertEquals(__METHOD__, $cookie->get('test'));
     }
 
-    public function testSet() 
+    public function testSet()
     {
-        $wei = $this->object;
+        $cookie = $this->object;
 
-        $wei->set('test', __METHOD__, array('expires' => 1));
+        $cookie->set('test', __METHOD__, array('expires' => 1));
 
-        $this->assertEquals(__METHOD__, $wei->get('test'));
+        $this->assertEquals(__METHOD__, $cookie->get('test'));
 
-        $wei->set('test', __METHOD__, array('expires' => -1));
+        $cookie->set('test', __METHOD__, array('expires' => -1));
 
-        $this->assertEquals(null, $wei->get('test'), 'test expiresd cookie');
+        $this->assertEquals(null, $cookie->get('test'), 'test expiresd cookie');
     }
 
-    public function testRemove() 
+    public function testRemove()
     {
-        $wei = $this->object;
+        $cookie = $this->object;
 
-        $wei->set('test', __METHOD__);
+        $cookie->set('test', __METHOD__);
 
-        $this->assertEquals(__METHOD__, $wei->get('test'));
+        $this->assertEquals(__METHOD__, $cookie->get('test'));
 
-        $wei->offsetUnset('test');
+        $cookie->offsetUnset('test');
 
-        $this->assertEquals(null, $wei->get('test'));
+        $this->assertEquals(null, $cookie->get('test'));
+    }
+
+    public function testClear()
+    {
+        $cookie = $this->object;
+
+        $cookie->set('test', __METHOD__);
+
+        $cookie->clear();
+
+        $this->assertNull($cookie->get('test'));
+    }
+
+    public function testToArray()
+    {
+        $cookie = $this->object;
+
+        $cookie->set('test', __METHOD__);
+
+        $array = $cookie->toArray();
+
+        $this->assertInternalType('array', $array);
+
+        $this->assertArrayHasKey('test', $array);
     }
 }
