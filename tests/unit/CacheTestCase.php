@@ -222,4 +222,18 @@ class CacheTestCase extends TestCase
 
         });
     }
+
+    public function testFailToStoreCacheFromCallback()
+    {
+        $this->setExpectedException('\RuntimeException', 'Fail to store cache from callback', 1020);
+
+        $mock = $this->getMock(get_class($this->object), array('set'));
+
+        $mock->expects($this->any())
+            ->method('set')
+            ->will($this->returnValue(false));
+
+        $mock->remove('key');
+        $mock->get('key', function(){});
+    }
 }
