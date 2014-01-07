@@ -213,6 +213,8 @@ class CallTest extends TestCase
 
                     $test->assertContains('customHeader', $header);
                     $test->assertContains('value', $header);
+
+                    $test->assertNull($call->getResponseHeader('no this key'));
                 }
         ));
 
