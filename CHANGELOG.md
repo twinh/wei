@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 0.9.9 (2014-01-08)
+
+* Do not output libxml error messages to screen in weChatApp service, refs #153 
+
 ## 0.9.9-RC (2014-01-05)
 
 * Added fullTable property for record class
