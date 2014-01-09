@@ -1,4 +1,4 @@
-Call
+Http
 ====
 
 象[jQuery Ajax](http://api.jquery.com/jQuery.ajax/)一样调用您的接口
@@ -9,7 +9,7 @@ Call
 ### 一个完整的例子:获取公开的gists列表
 
 ```php
-$call = wei()->call(array(
+$http = wei()->http(array(
     // 设置请求的URL地址
     'url' => 'https://api.github.com/gists',
     // 默认请求方式为GET,可以设置为POST,PUT等
@@ -23,13 +23,13 @@ $call = wei()->call(array(
 ));
 
 // 输出第一条的地址,如https://api.github.com/gists/xxxxxxx
-print_r($call[0]['url']);
+print_r($http[0]['url']);
 ```
 
 ### 指定请求域名的IP地址:通过指向不同的IP地址,访问不同的环境
 
 ```php
-wei()->call(array(
+wei()->http(array(
     'url' => 'http://google.com',
     'ip' => '74.125.128.105', // 线上运营环境
     //'ip' => '127.0.0.1', // 本地开发环境
@@ -39,7 +39,7 @@ wei()->call(array(
 ### 通过切换IP地址实现负载均衡
 
 ```php
-$call = wei()->call(array(
+$http = wei()->http(array(
     'url' => 'http://google.com',
     // 随机使用其中一个IP地址
     'ip' => array_rand(array(
@@ -52,14 +52,14 @@ $call = wei()->call(array(
 ### 自动设置请求地址为referer地址
 
 ```php
-wei()->call(array(
+wei()->http(array(
     'url' => 'http://google.com',
     'referer' => true
 ));
 
 // referer等于true时,相当于`url`的值
 
-wei()->call(array(
+wei()->http(array(
     'url' => 'http://google.com',
     'referer' => 'http://google.com',
 ));
@@ -70,17 +70,17 @@ wei()->call(array(
 此处的`get`还可以是`post`, `delete`, `put`或`patch`,表示通过相应的HTTP方法发送请求
 
 ```php
-$call = wei()->call->get('http://example.com', $data);
+$http = wei()->http->get('http://example.com', $data);
 ```
 
 ### 通过`curlOptions`选项设置cURL会话选项
 
-call服务基于cURL实现,所有的cURL的会话选项都可以通过`curlOptions`批量设置.
+http服务基于cURL实现,所有的cURL的会话选项都可以通过`curlOptions`批量设置.
 
 如设置请求代理:
 
 ```php
-$call = $wei->call(array(
+$http = $wei->http(array(
     'url' => 'http://www.google.com/',
     'curlOptions' => array(
         CURLOPT_PROXY => '192.168.18.1:8087',
@@ -90,39 +90,39 @@ $call = $wei->call(array(
 
 ### 通过回调方法记录请求日志
 
-Call对象提供了`beforeSend`, `success`, `error`, `complete`四个回调方法,可以用来记录日志,上报请求耗时等.
+Http对象提供了`beforeSend`, `success`, `error`, `complete`四个回调方法,可以用来记录日志,上报请求耗时等.
 
 ```php
 wei(array(
-    'call' => array(
+    'http' => array(
         // cURL请求发送前的回调,记录请求的方式和地址参数
-        'beforeSend' => function (\Wei\Call $call, $ch) {
+        'beforeSend' => function (\Wei\Http $http, $ch) {
             wei()->logger->debug(array(
-                'Request URL'       => $call->getUrl(),
-                'Request Method'    => $call->getMethod(),
-                'Parameters'        => $call->getData(),
+                'Request URL'       => $http->getUrl(),
+                'Request Method'    => $http->getMethod(),
+                'Parameters'        => $http->getData(),
             ));
         },
         // cURL请求发送成功的回调
-        'success' => function ($data, \Wei\Call $call) {
+        'success' => function ($data, \Wei\Http $http) {
             // 按需记录
         },
         // cURL请求发送失败的回调,记录错误原因和异常堆栈
-        'error' => function (\Wei\Call $call) {
+        'error' => function (\Wei\Http $http) {
             wei()->logger->error(array(
-                'Error status'  => $call->getErrorStatus(),
-                'Exception'     => (string)$call->getErrorException(),
+                'Error status'  => $http->getErrorStatus(),
+                'Exception'     => (string)$http->getErrorException(),
             ));
         },
         // cURL请求发送完成的回调,记录返回状态码,花费时间等
-        'complete' => function (\Wei\Call $call, $ch) {
+        'complete' => function (\Wei\Http $http, $ch) {
             $curlInfo = curl_getinfo($ch);
 
             wei()->logger->debug(array(
                 'Status Code' => $curlInfo['http_code'],
-                'Server IP'     => $call->getIp() ?: '(Not specified)',
+                'Server IP'     => $http->getIp() ?: '(Not specified)',
                 'Total Time'    => $curlInfo['total_time'] . 's',
-                'Response Body' => $call->getResponse(),
+                'Response Body' => $http->getResponse(),
             ));
         }
     )
@@ -136,22 +136,22 @@ wei(array(
 如果需要获取响应头,Cookie的值,可以设置`header`选项的值为`true`
 
 ```php
-$call = wei()->call(array(
+$http = wei()->http(array(
     'url' => 'http://www.google.com.hk',
     'header' => true
 ));
 
 // 输出所有的响应头
-print_r($call->getResponseHeaders());
+print_r($http->getResponseHeaders());
 
 // 输出指定响应头的值
-print_r($call->getResponseHeader('CONTENT-LENGTH'));
+print_r($http->getResponseHeader('CONTENT-LENGTH'));
 
 // 输出所有Cookie的值
-print_r($call->getResponseCookies());
+print_r($http->getResponseCookies());
 
 // 输出指定Cookie的值
-print_r($call->getResponseCookie('name'));
+print_r($http->getResponseCookie('name'));
 ```
 
 ### 禁用SSL证书验证
@@ -163,7 +163,7 @@ print_r($call->getResponseCookie('name'));
 我们可以设置cURL的`CURLOPT_SSL_VERIFYPEER`选项来禁用SSL证书验证.当然该方法不建议在正式环境使用.
 
 ```php
-wei()->call(array(
+wei()->http(array(
     'url' => 'https://api.github.com/gists',
     'curlOptions' => array(
         CURLOPT_SSL_VERIFYPEER => false
@@ -209,19 +209,19 @@ complete    | callable     | 无      | 请求完成后,不论是否成功都触
 
 ### 回调
 
-#### beforeSend($call, $ch)
+#### beforeSend($http, $ch)
 
 名称        | 类型         | 说明
 ------------|--------------|------
-$call       | Wei\Call  | 当前的Call对象
+$http       | Wei\Http     | 当前的Http对象
 $ch         | resource     | cUrl会话的变量
 
-#### success($data, $call)
+#### success($data, $http)
 
 名称        | 类型         | 说明
 ------------|--------------|------
 $data       | mixed        | 解析过的HTTP响应数据,数据类型与`dataType`选项相关,如下表所示
-$call       | \Wei\Call | 当前的Call对象
+$http       | \Wei\Http    | 当前的Http对象
 
 ##### `dataType`的值与$data返回的类型
 
@@ -234,11 +234,11 @@ query      | array
 serialize  | 任意PHP合法类型
 text       | string
 
-#### error($call, $textStatus, $exception)
+#### error($http, $textStatus, $exception)
 
 名称        | 类型         | 说明
 ------------|--------------|------
-$call       | Wei\Call  | 当前的Call对象
+$http       | Wei\Http     | 当前的Http对象
 $textStatus | string       | 简单的错误说明,可能出现的值及出现情况如下表
 $exception  | Exception    | 错误的异常对象,可通过该对象获取详细的错误信息
 
@@ -250,98 +250,98 @@ curl        | cURL内部错误,如无法解析域名IP地址
 http        | HTTP状态码错误,如404页面不存在,500内部错误
 parser      | 数据解析错误,如返回的数据不是正确的json格式
 
-#### complete($call, $ch)
+#### complete($http, $ch)
 
 名称        | 类型         | 说明
 ------------|--------------|------
-$call       | Wei\Call  | 当前的Call对象
+$http       | Wei\Http     | 当前的Http对象
 $ch         | resource     | cUrl会话的变量
 
 ### 方法
 
-#### call($options = array())
-初始化一个新的Call对象,并执行HTTP请求
+#### http($options = array())
+初始化一个新的Http对象,并执行HTTP请求
 
-返回:  `Wei\Call` 新的call服务对象
+返回:  `Wei\Http` 新的http服务对象
 
-#### call($url, $options = array())
-根据给定的URL地址,初始化一个Call对象,并执行HTTP请求
+#### http($url, $options = array())
+根据给定的URL地址,初始化一个Http对象,并执行HTTP请求
 
-返回:  `Wei\Call` 新的call服务对象
+返回:  `Wei\Http` 新的http服务对象
 
-#### call->isSuccess()
+#### http->isSuccess()
 返回请求及数据解析是否成功
 
 返回: `bool`
 
-#### call->getCh()
+#### http->getCh()
 获取cURL的会话变量
 
 返回: `resource`
 
-#### call->getData()
+#### http->getData()
 获取要发送到服务器的数据
 
 返回: `array`|`string`
 
-#### call->getIp()
+#### http->getIp()
 获取设置的服务器IP地址
 
 返回: `string`
 
-#### call->getMethod()
+#### http->getMethod()
 获取HTTP请求的方式
 
 返回: `string`
 
-#### call->getUrl()
+#### http->getUrl()
 获取HTTP请求的URL地址
 
 返回: `string`
 
-#### call->getResponseHeader($name)
+#### http->getResponseHeader($name)
 获取HTTP响应头的值
 
-#### call->getResponseText()
+#### http->getResponseText()
 获取HTTP响应的文本数据
 
-#### call->setMethod($method)
+#### http->setMethod($method)
 设置HTTP的请求方式
 
-#### call->setRequestHeader($name, $value)
+#### http->setRequestHeader($name, $value)
 设置HTTP请求头的值
 
-#### call->get($url, $data = array(), $dataType = null)
+#### http->get($url, $data = array(), $dataType = null)
 通过GET方式发送带数据的请求
 
-返回:  `Wei\Call` 新的call服务对象
+返回:  `Wei\Http` 新的http服务对象
 
-#### call->getJson($url, $data = array())
+#### http->getJson($url, $data = array())
 通过GET方式发送带数据的请求,并将返回数据解析为JSON数组
 
-返回:  `Wei\Call` 新的call服务对象
+返回:  `Wei\Http` 新的http服务对象
 
-#### call->getJsonObject($url, $data = array())
+#### http->getJsonObject($url, $data = array())
 通过GET方式发送带数据的请求,并将返回数据解析为JSON对象
 
-返回:  `Wei\Call` 新的call服务对象
+返回:  `Wei\Http` 新的http服务对象
 
-#### call->post($url, $data = array(), $dataType = null)
+#### http->post($url, $data = array(), $dataType = null)
 通过POST方式发送带数据的请求
 
-返回:  `Wei\Call` 新的call服务对象
+返回:  `Wei\Http` 新的http服务对象
 
-#### call->put($url, $data = array(), $dataType = null)
+#### http->put($url, $data = array(), $dataType = null)
 通过PUT方式发送带数据的请求
 
-返回:  `Wei\Call` 新的call服务对象
+返回:  `Wei\Http` 新的http服务对象
 
-#### call->delete($url, $data = array(), $dataType = null)
+#### http->delete($url, $data = array(), $dataType = null)
 通过DELETE方式发送带数据的请求
 
-返回:  `Wei\Call` 新的call服务对象
+返回:  `Wei\Http` 新的http服务对象
 
-#### call->patch($url, $data = array(), $dataType = null)
+#### http->patch($url, $data = array(), $dataType = null)
 通过PATCH方式发送带数据的请求
 
-返回:  `Wei\Call` 新的call服务对象
+返回:  `Wei\Http` 新的http服务对象
