@@ -47,8 +47,6 @@ namespace Wei
      * @method   \Wei\Record    db($table = null) Create a new record object
      *
      * HTTP Client
-     * @property Call       $call An HTTP client that inspired by jQuery Ajax
-     * @method   \Wei\Call  call(array $options) Create a new call service and execute
      * @property Http       $http An alias of call service
      * @method   \Wei\Http  http(array $options) Create a new HTTP service and execute
      *
