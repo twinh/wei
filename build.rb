@@ -48,7 +48,7 @@ weis = [
   # database
     'db',
     'book/active-record-basic', 'book/active-record-query-builder', 'book/active-record-callbacks', 'book/active-record-status',
-    'call',
+    'http',
   # validation
     'validate',
     #
