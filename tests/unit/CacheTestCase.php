@@ -230,7 +230,7 @@ class CacheTestCase extends TestCase
         $mock = $this->getMock(get_class($this->object), array('set'));
 
         // fix bicache driver not found error
-        if ('Wei\Bicache' == ltrim(get_class($this->object)), '\\') {
+        if ('Wei\Bicache' == ltrim(get_class($this->object), '\\')) {
             $mock->setOption('providers', array(
                 'master' => 'arrayCache',
                 'slave' => 'fileCache',
