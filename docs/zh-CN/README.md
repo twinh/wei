@@ -49,7 +49,7 @@ API参考目录
 
 #### 接口调用
 
-* [call](api/call.md) - 象jQuery Ajax一样调用您的接口
+* [http](api/http.md) - 象jQuery Ajax一样调用您的接口
 
 #### 验证器
 
