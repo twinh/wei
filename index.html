@@ -330,7 +330,9 @@
 
 <h3>获取对象管理器</h3>
 
-
+<div class="highlight"><pre><code class="php"><span class="cm">/* @var $wei \Wei\Wei */</span>
+<span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">();</span>
+</code></pre></div>
 
 <h3>获取和调用服务</h3>
 
@@ -4561,7 +4563,7 @@
 <!-- api/http
   ================================================== -->
   <section id="http">
-  <div class="page-header"><h1>Call</h1></div>
+  <div class="page-header"><h1>Http</h1></div>
 
 <p>象<a href="http://api.jquery.com/jQuery.ajax/" target="_blank">jQuery Ajax</a>一样调用您的接口</p>
 
@@ -4569,7 +4571,7 @@
 
 <h3>一个完整的例子:获取公开的gists列表</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$call</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$http</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">http</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="c1">// 设置请求的URL地址</span>
     <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'https://api.github.com/gists'</span><span class="p">,</span>
     <span class="c1">// 默认请求方式为GET,可以设置为POST,PUT等</span>
@@ -4583,12 +4585,12 @@
 <span class="p">));</span>
 
 <span class="c1">// 输出第一条的地址,如https://api.github.com/gists/xxxxxxx</span>
-<span class="nb">print_r</span><span class="p">(</span><span class="nv">$call</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'url'</span><span class="p">]);</span>
+<span class="nb">print_r</span><span class="p">(</span><span class="nv">$http</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'url'</span><span class="p">]);</span>
 </code></pre></div>
 
 <h3>指定请求域名的IP地址:通过指向不同的IP地址,访问不同的环境</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">http</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'http://google.com'</span><span class="p">,</span>
     <span class="s1">'ip'</span> <span class="o">=&gt;</span> <span class="s1">'74.125.128.105'</span><span class="p">,</span> <span class="c1">// 线上运营环境</span>
     <span class="c1">//'ip' =&gt; '127.0.0.1', // 本地开发环境</span>
@@ -4597,7 +4599,7 @@
 
 <h3>通过切换IP地址实现负载均衡</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$call</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$http</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">http</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'http://google.com'</span><span class="p">,</span>
     <span class="c1">// 随机使用其中一个IP地址</span>
     <span class="s1">'ip'</span> <span class="o">=&gt;</span> <span class="nb">array_rand</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
@@ -4609,14 +4611,14 @@
 
 <h3>自动设置请求地址为referer地址</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">http</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'http://google.com'</span><span class="p">,</span>
     <span class="s1">'referer'</span> <span class="o">=&gt;</span> <span class="k">true</span>
 <span class="p">));</span>
 
 <span class="c1">// referer等于true时,相当于`url`的值</span>
 
-<span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">http</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'http://google.com'</span><span class="p">,</span>
     <span class="s1">'referer'</span> <span class="o">=&gt;</span> <span class="s1">'http://google.com'</span><span class="p">,</span>
 <span class="p">));</span>
@@ -4626,16 +4628,16 @@
 
 <p>此处的<code>get</code>还可以是<code>post</code>, <code>delete</code>, <code>put</code>或<code>patch</code>,表示通过相应的HTTP方法发送请求</p>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$call</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'http://example.com'</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$http</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">http</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'http://example.com'</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
 </code></pre></div>
 
 <h3>通过<code>curlOptions</code>选项设置cURL会话选项</h3>
 
-<p>call服务基于cURL实现,所有的cURL的会话选项都可以通过<code>curlOptions</code>批量设置.</p>
+<p>http服务基于cURL实现,所有的cURL的会话选项都可以通过<code>curlOptions</code>批量设置.</p>
 
 <p>如设置请求代理:</p>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$call</span> <span class="o">=</span> <span class="nv">$wei</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$http</span> <span class="o">=</span> <span class="nv">$wei</span><span class="o">-&gt;</span><span class="na">http</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'http://www.google.com/'</span><span class="p">,</span>
     <span class="s1">'curlOptions'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="nx">CURLOPT_PROXY</span> <span class="o">=&gt;</span> <span class="s1">'192.168.18.1:8087'</span><span class="p">,</span>
@@ -4645,38 +4647,38 @@
 
 <h3>通过回调方法记录请求日志</h3>
 
-<p>Call对象提供了<code>beforeSend</code>, <code>success</code>, <code>error</code>, <code>complete</code>四个回调方法,可以用来记录日志,上报请求耗时等.</p>
+<p>Http对象提供了<code>beforeSend</code>, <code>success</code>, <code>error</code>, <code>complete</code>四个回调方法,可以用来记录日志,上报请求耗时等.</p>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">'call'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'http'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="c1">// cURL请求发送前的回调,记录请求的方式和地址参数</span>
-        <span class="s1">'beforeSend'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">\Wei\Call</span> <span class="nv">$call</span><span class="p">,</span> <span class="nv">$ch</span><span class="p">)</span> <span class="p">{</span>
+        <span class="s1">'beforeSend'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">\Wei\Http</span> <span class="nv">$http</span><span class="p">,</span> <span class="nv">$ch</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-                <span class="s1">'Request URL'</span>       <span class="o">=&gt;</span> <span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getUrl</span><span class="p">(),</span>
-                <span class="s1">'Request Method'</span>    <span class="o">=&gt;</span> <span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">(),</span>
-                <span class="s1">'Parameters'</span>        <span class="o">=&gt;</span> <span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">(),</span>
+                <span class="s1">'Request URL'</span>       <span class="o">=&gt;</span> <span class="nv">$http</span><span class="o">-&gt;</span><span class="na">getUrl</span><span class="p">(),</span>
+                <span class="s1">'Request Method'</span>    <span class="o">=&gt;</span> <span class="nv">$http</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">(),</span>
+                <span class="s1">'Parameters'</span>        <span class="o">=&gt;</span> <span class="nv">$http</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">(),</span>
             <span class="p">));</span>
         <span class="p">},</span>
         <span class="c1">// cURL请求发送成功的回调</span>
-        <span class="s1">'success'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nx">\Wei\Call</span> <span class="nv">$call</span><span class="p">)</span> <span class="p">{</span>
+        <span class="s1">'success'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nx">\Wei\Http</span> <span class="nv">$http</span><span class="p">)</span> <span class="p">{</span>
             <span class="c1">// 按需记录</span>
         <span class="p">},</span>
         <span class="c1">// cURL请求发送失败的回调,记录错误原因和异常堆栈</span>
-        <span class="s1">'error'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">\Wei\Call</span> <span class="nv">$call</span><span class="p">)</span> <span class="p">{</span>
+        <span class="s1">'error'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">\Wei\Http</span> <span class="nv">$http</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-                <span class="s1">'Error status'</span>  <span class="o">=&gt;</span> <span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getErrorStatus</span><span class="p">(),</span>
-                <span class="s1">'Exception'</span>     <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getErrorException</span><span class="p">(),</span>
+                <span class="s1">'Error status'</span>  <span class="o">=&gt;</span> <span class="nv">$http</span><span class="o">-&gt;</span><span class="na">getErrorStatus</span><span class="p">(),</span>
+                <span class="s1">'Exception'</span>     <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span><span class="nv">$http</span><span class="o">-&gt;</span><span class="na">getErrorException</span><span class="p">(),</span>
             <span class="p">));</span>
         <span class="p">},</span>
         <span class="c1">// cURL请求发送完成的回调,记录返回状态码,花费时间等</span>
-        <span class="s1">'complete'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">\Wei\Call</span> <span class="nv">$call</span><span class="p">,</span> <span class="nv">$ch</span><span class="p">)</span> <span class="p">{</span>
+        <span class="s1">'complete'</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">\Wei\Http</span> <span class="nv">$http</span><span class="p">,</span> <span class="nv">$ch</span><span class="p">)</span> <span class="p">{</span>
             <span class="nv">$curlInfo</span> <span class="o">=</span> <span class="nb">curl_getinfo</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
 
             <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
                 <span class="s1">'Status Code'</span> <span class="o">=&gt;</span> <span class="nv">$curlInfo</span><span class="p">[</span><span class="s1">'http_code'</span><span class="p">],</span>
-                <span class="s1">'Server IP'</span>     <span class="o">=&gt;</span> <span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getIp</span><span class="p">()</span> <span class="o">?:</span> <span class="s1">'(Not specified)'</span><span class="p">,</span>
+                <span class="s1">'Server IP'</span>     <span class="o">=&gt;</span> <span class="nv">$http</span><span class="o">-&gt;</span><span class="na">getIp</span><span class="p">()</span> <span class="o">?:</span> <span class="s1">'(Not specified)'</span><span class="p">,</span>
                 <span class="s1">'Total Time'</span>    <span class="o">=&gt;</span> <span class="nv">$curlInfo</span><span class="p">[</span><span class="s1">'total_time'</span><span class="p">]</span> <span class="o">.</span> <span class="s1">'s'</span><span class="p">,</span>
-                <span class="s1">'Response Body'</span> <span class="o">=&gt;</span> <span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">(),</span>
+                <span class="s1">'Response Body'</span> <span class="o">=&gt;</span> <span class="nv">$http</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">(),</span>
             <span class="p">));</span>
         <span class="p">}</span>
     <span class="p">)</span>
@@ -4689,22 +4691,22 @@
 
 <p>如果需要获取响应头,Cookie的值,可以设置<code>header</code>选项的值为<code>true</code></p>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$call</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$http</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">http</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'http://www.google.com.hk'</span><span class="p">,</span>
     <span class="s1">'header'</span> <span class="o">=&gt;</span> <span class="k">true</span>
 <span class="p">));</span>
 
 <span class="c1">// 输出所有的响应头</span>
-<span class="nb">print_r</span><span class="p">(</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getResponseHeaders</span><span class="p">());</span>
+<span class="nb">print_r</span><span class="p">(</span><span class="nv">$http</span><span class="o">-&gt;</span><span class="na">getResponseHeaders</span><span class="p">());</span>
 
 <span class="c1">// 输出指定响应头的值</span>
-<span class="nb">print_r</span><span class="p">(</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getResponseHeader</span><span class="p">(</span><span class="s1">'CONTENT-LENGTH'</span><span class="p">));</span>
+<span class="nb">print_r</span><span class="p">(</span><span class="nv">$http</span><span class="o">-&gt;</span><span class="na">getResponseHeader</span><span class="p">(</span><span class="s1">'CONTENT-LENGTH'</span><span class="p">));</span>
 
 <span class="c1">// 输出所有Cookie的值</span>
-<span class="nb">print_r</span><span class="p">(</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getResponseCookies</span><span class="p">());</span>
+<span class="nb">print_r</span><span class="p">(</span><span class="nv">$http</span><span class="o">-&gt;</span><span class="na">getResponseCookies</span><span class="p">());</span>
 
 <span class="c1">// 输出指定Cookie的值</span>
-<span class="nb">print_r</span><span class="p">(</span><span class="nv">$call</span><span class="o">-&gt;</span><span class="na">getResponseCookie</span><span class="p">(</span><span class="s1">'name'</span><span class="p">));</span>
+<span class="nb">print_r</span><span class="p">(</span><span class="nv">$http</span><span class="o">-&gt;</span><span class="na">getResponseCookie</span><span class="p">(</span><span class="s1">'name'</span><span class="p">));</span>
 </code></pre></div>
 
 <h3>禁用SSL证书验证</h3>
@@ -4717,7 +4719,7 @@
 
 <p>我们可以设置cURL的<code>CURLOPT_SSL_VERIFYPEER</code>选项来禁用SSL证书验证.当然该方法不建议在正式环境使用.</p>
 
-<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">http</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'https://api.github.com/gists'</span><span class="p">,</span>
     <span class="s1">'curlOptions'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="nx">CURLOPT_SSL_VERIFYPEER</span> <span class="o">=&gt;</span> <span class="k">false</span>
@@ -4859,7 +4861,7 @@
 </tbody>
 </table><h3>回调</h3>
 
-<h4>beforeSend($call, $ch)</h4>
+<h4>beforeSend($http, $ch)</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -4869,9 +4871,9 @@
 </tr></thead>
 <tbody>
 <tr>
-<td>$call</td>
-<td>Wei\Call</td>
-<td>当前的Call对象</td>
+<td>$http</td>
+<td>Wei\Http</td>
+<td>当前的Http对象</td>
 </tr>
 <tr>
 <td>$ch</td>
@@ -4879,7 +4881,7 @@
 <td>cUrl会话的变量</td>
 </tr>
 </tbody>
-</table><h4>success($data, $call)</h4>
+</table><h4>success($data, $http)</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -4894,9 +4896,9 @@
 <td>解析过的HTTP响应数据,数据类型与<code>dataType</code>选项相关,如下表所示</td>
 </tr>
 <tr>
-<td>$call</td>
-<td>\Wei\Call</td>
-<td>当前的Call对象</td>
+<td>$http</td>
+<td>\Wei\Http</td>
+<td>当前的Http对象</td>
 </tr>
 </tbody>
 </table><h5>
@@ -4933,7 +4935,7 @@
 <td>string</td>
 </tr>
 </tbody>
-</table><h4>error($call, $textStatus, $exception)</h4>
+</table><h4>error($http, $textStatus, $exception)</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -4943,9 +4945,9 @@
 </tr></thead>
 <tbody>
 <tr>
-<td>$call</td>
-<td>Wei\Call</td>
-<td>当前的Call对象</td>
+<td>$http</td>
+<td>Wei\Http</td>
+<td>当前的Http对象</td>
 </tr>
 <tr>
 <td>$textStatus</td>
@@ -4980,7 +4982,7 @@
 <td>数据解析错误,如返回的数据不是正确的json格式</td>
 </tr>
 </tbody>
-</table><h4>complete($call, $ch)</h4>
+</table><h4>complete($http, $ch)</h4>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
@@ -4990,9 +4992,9 @@
 </tr></thead>
 <tbody>
 <tr>
-<td>$call</td>
-<td>Wei\Call</td>
-<td>当前的Call对象</td>
+<td>$http</td>
+<td>Wei\Http</td>
+<td>当前的Http对象</td>
 </tr>
 <tr>
 <td>$ch</td>
@@ -5002,111 +5004,111 @@
 </tbody>
 </table><h3>方法</h3>
 
-<h4>call($options = array())</h4>
+<h4>http($options = array())</h4>
 
-<p>初始化一个新的Call对象,并执行HTTP请求</p>
+<p>初始化一个新的Http对象,并执行HTTP请求</p>
 
-<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Http</code> 新的http服务对象</p>
 
-<h4>call($url, $options = array())</h4>
+<h4>http($url, $options = array())</h4>
 
-<p>根据给定的URL地址,初始化一个Call对象,并执行HTTP请求</p>
+<p>根据给定的URL地址,初始化一个Http对象,并执行HTTP请求</p>
 
-<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Http</code> 新的http服务对象</p>
 
-<h4>call-&gt;isSuccess()</h4>
+<h4>http-&gt;isSuccess()</h4>
 
 <p>返回请求及数据解析是否成功</p>
 
 <p>返回: <code>bool</code></p>
 
-<h4>call-&gt;getCh()</h4>
+<h4>http-&gt;getCh()</h4>
 
 <p>获取cURL的会话变量</p>
 
 <p>返回: <code>resource</code></p>
 
-<h4>call-&gt;getData()</h4>
+<h4>http-&gt;getData()</h4>
 
 <p>获取要发送到服务器的数据</p>
 
 <p>返回: <code>array</code>|<code>string</code></p>
 
-<h4>call-&gt;getIp()</h4>
+<h4>http-&gt;getIp()</h4>
 
 <p>获取设置的服务器IP地址</p>
 
 <p>返回: <code>string</code></p>
 
-<h4>call-&gt;getMethod()</h4>
+<h4>http-&gt;getMethod()</h4>
 
 <p>获取HTTP请求的方式</p>
 
 <p>返回: <code>string</code></p>
 
-<h4>call-&gt;getUrl()</h4>
+<h4>http-&gt;getUrl()</h4>
 
 <p>获取HTTP请求的URL地址</p>
 
 <p>返回: <code>string</code></p>
 
-<h4>call-&gt;getResponseHeader($name)</h4>
+<h4>http-&gt;getResponseHeader($name)</h4>
 
 <p>获取HTTP响应头的值</p>
 
-<h4>call-&gt;getResponseText()</h4>
+<h4>http-&gt;getResponseText()</h4>
 
 <p>获取HTTP响应的文本数据</p>
 
-<h4>call-&gt;setMethod($method)</h4>
+<h4>http-&gt;setMethod($method)</h4>
 
 <p>设置HTTP的请求方式</p>
 
-<h4>call-&gt;setRequestHeader($name, $value)</h4>
+<h4>http-&gt;setRequestHeader($name, $value)</h4>
 
 <p>设置HTTP请求头的值</p>
 
-<h4>call-&gt;get($url, $data = array(), $dataType = null)</h4>
+<h4>http-&gt;get($url, $data = array(), $dataType = null)</h4>
 
 <p>通过GET方式发送带数据的请求</p>
 
-<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Http</code> 新的http服务对象</p>
 
-<h4>call-&gt;getJson($url, $data = array())</h4>
+<h4>http-&gt;getJson($url, $data = array())</h4>
 
 <p>通过GET方式发送带数据的请求,并将返回数据解析为JSON数组</p>
 
-<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Http</code> 新的http服务对象</p>
 
-<h4>call-&gt;getJsonObject($url, $data = array())</h4>
+<h4>http-&gt;getJsonObject($url, $data = array())</h4>
 
 <p>通过GET方式发送带数据的请求,并将返回数据解析为JSON对象</p>
 
-<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Http</code> 新的http服务对象</p>
 
-<h4>call-&gt;post($url, $data = array(), $dataType = null)</h4>
+<h4>http-&gt;post($url, $data = array(), $dataType = null)</h4>
 
 <p>通过POST方式发送带数据的请求</p>
 
-<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Http</code> 新的http服务对象</p>
 
-<h4>call-&gt;put($url, $data = array(), $dataType = null)</h4>
+<h4>http-&gt;put($url, $data = array(), $dataType = null)</h4>
 
 <p>通过PUT方式发送带数据的请求</p>
 
-<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Http</code> 新的http服务对象</p>
 
-<h4>call-&gt;delete($url, $data = array(), $dataType = null)</h4>
+<h4>http-&gt;delete($url, $data = array(), $dataType = null)</h4>
 
 <p>通过DELETE方式发送带数据的请求</p>
 
-<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Http</code> 新的http服务对象</p>
 
-<h4>call-&gt;patch($url, $data = array(), $dataType = null)</h4>
+<h4>http-&gt;patch($url, $data = array(), $dataType = null)</h4>
 
 <p>通过PATCH方式发送带数据的请求</p>
 
-<p>返回:  <code>Wei\Call</code> 新的call服务对象</p>
+<p>返回:  <code>Wei\Http</code> 新的http服务对象</p>
   </section>
 
 <!-- api/validate
