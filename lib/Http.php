@@ -31,7 +31,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @var string
      */
-    protected $contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
+    protected $contentType;
 
     /**
      * A key-value array to store cookies
