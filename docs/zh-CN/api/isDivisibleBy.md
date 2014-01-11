@@ -7,6 +7,7 @@ isDivisibleBy
 ----
 
 ### 检查10能否被3整除
+
 ```php
 if (wei()->isDivisibleBy(10, 3)) {
     echo 'Yes';
@@ -16,6 +17,7 @@ if (wei()->isDivisibleBy(10, 3)) {
 ```
 
 #### 运行结果
+
 ```php
 'No'
 ```
