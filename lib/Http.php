@@ -803,6 +803,11 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         return $this->processMethod($url, $data, $dataType, 'PATCH');
     }
 
+    public function upload($url, $data = array(), $dataType = null)
+    {
+        return $this->processMethod($url, $data, $dataType, 'POST');
+    }
+
     /**
      * Execute a specified method request
      *
