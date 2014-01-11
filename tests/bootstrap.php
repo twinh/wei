@@ -25,7 +25,7 @@ wei(array(
             '' => __DIR__ . '/fallback',
         ),
     ),
-    'call' => array(
+    'http' => array(
         'url' => 'http://localhost:8000/call.php',
         // Set ip for WeiTest\CallTest\::testIp
         'ip' => '127.0.0.1'
