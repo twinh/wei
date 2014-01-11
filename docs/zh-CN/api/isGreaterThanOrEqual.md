@@ -30,8 +30,13 @@ if (wei()->isGreaterThanOrEqual(10, 20)) {
 名称              | 类型    | 默认值                             | 说明
 ------------------|---------|------------------------------------|------
 value             | mixed   | 无                                 | 待比较的数值
-invalidMessage    | string  | %name%必须大于等于%value%          | -
-negativeMessage   | string  | %name%不合法                       | -
+
+### 错误信息
+
+名称                    | 信息
+------------------------|------
+invalidMessage          | %name%必须大于等于%value%
+negativeMessage         | %name%不合法
 
 ### 方法
 
