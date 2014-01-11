@@ -30,8 +30,13 @@ if (wei()->isLessThanOrEqual(10, 20)) {
 名称              | 类型    | 默认值                             | 说明
 ------------------|---------|------------------------------------|------
 value             | mixed   | 无                                 | 待比较的数值
-invalidMessage    | string  | %name%必须小于等于%max%            | -
-negativeMessage   | string  | %name%必须不小于等于%max%          | -
+
+### 错误信息
+
+名称                    | 信息
+------------------------|------
+invalidMessage          | %name%必须小于等于%max%
+negativeMessage         | %name%必须不小于等于%max%
 
 ### 方法
 
