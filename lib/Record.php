@@ -685,7 +685,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $data
      * @return $this
      */
-        public function findOrInit($conditions = null, $data = array())
+    public function findOrInit($conditions = null, $data = array())
     {
         if (!$this->find($conditions)) {
             // Reset status when record not found
@@ -983,7 +983,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function andWhere($conditions, $params = array(), $types = array())
     {
-        if (!$conditions) {
+        if ($conditions === false) {
             return $this;
         } else {
             $conditions = $this->processCondition($conditions, $params, $types);
