@@ -690,7 +690,14 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         if (!$this->find($conditions)) {
             // Reset status when record not found
             $this->isNew = true;
+
             !is_array($conditions) && $conditions = array($this->primaryKey => $conditions);
+
+            // Convert to object to array
+            if (is_object($data) && method_exists($data, 'toArray')) {
+                $data = $data->toArray();
+            }
+
             $this->fromArray($conditions + $data);
         }
         return $this;
