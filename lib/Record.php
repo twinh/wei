@@ -556,6 +556,18 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         return $this;
     }
 
+    public function incr($name, $offset)
+    {
+        $this[$name] = (object)($name . ' + ' . $offset);
+        return $this;
+    }
+
+    public function decr($name, $offset)
+    {
+        $this[$name] = (object)($name . ' - ' . $offset);
+        return $this;
+    }
+
     /**
      * Check if it's a new record and has not save to database
      *
