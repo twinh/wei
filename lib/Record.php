@@ -397,9 +397,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param mixed $conditions
      * @return bool
      */
-    public function destroy($conditions = null)
+    public function destroy($conditions = false)
     {
-        $conditions && $this->andWhere($conditions);
+        $this->andWhere($conditions);
         !$this->loaded && $this->loadData(0);
 
         if (!$this->isColl) {
@@ -699,7 +699,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param mixed $conditions
      * @return false|Record
      */
-    public function find($conditions = null)
+    public function find($conditions = false)
     {
         $this->isColl = false;
         $this->andWhere($conditions);
@@ -715,7 +715,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $data
      * @return $this
      */
-    public function findOrInit($conditions = null, $data = array())
+    public function findOrInit($conditions, $data = array())
     {
         if (!$this->find($conditions)) {
             // Reset status when record not found
@@ -740,7 +740,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @throws \Exception
      * @return $this
      */
-    public function findOne($conditions = null)
+    public function findOne($conditions = false)
     {
         if ($this->find($conditions)) {
             return $this;
@@ -755,7 +755,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param mixed $conditions
      * @return $this
      */
-    public function findAll($conditions = null)
+    public function findAll($conditions = false)
     {
         $this->isColl = true;
         $this->andWhere($conditions);
@@ -803,7 +803,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param mixed $conditions
      * @return int
      */
-    public function count($conditions = array())
+    public function count($conditions = false)
     {
         $this->andWhere($conditions);
         return (int)$this->db->fetchColumn($this->getSqlForCount(), $this->params);
@@ -837,7 +837,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param mixed $conditions
      * @return mixed
      */
-    public function delete($conditions = null)
+    public function delete($conditions = false)
     {
         $this->andWhere($conditions);
         $this->type = self::DELETE;
@@ -1020,7 +1020,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function andWhere($conditions, $params = array(), $types = array())
     {
-        if (!$conditions) {
+        if ($conditions === false) {
             return $this;
         } else {
             $conditions = $this->processCondition($conditions, $params, $types);
