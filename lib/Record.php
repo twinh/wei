@@ -338,9 +338,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         // 2.1 Saves single record
         if (!$this->isColl) {
 
-            // 2.1.1 Returns false when record has been destroy to avoid dirty data
+            // 2.1.1 Returns when record has been destroy to avoid dirty data
             if ($this->isDestroyed) {
-                return false;
+                return $this;
             }
 
             // 2.1.2 Triggers before callbacks
@@ -388,8 +388,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             }
         }
 
-        // 3. Returns result
-        return true;
+        return $this;
     }
 
     /**

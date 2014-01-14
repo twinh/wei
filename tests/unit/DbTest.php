@@ -274,7 +274,7 @@ class DbTest extends TestCase
         $member->address = 'address';
         $result = $member->save();
 
-        $this->assertTrue($result);
+        $this->assertSame($result, $member);
         $this->assertEquals('1', $member['id']);
 
         // New member save with data
@@ -286,16 +286,16 @@ class DbTest extends TestCase
             'address' => 'save'
         ));
         $result = $member->save();
-        $this->assertFalse($member->isNew());
 
-        $this->assertTrue($result);
+        $this->assertFalse($member->isNew());
+        $this->assertSame($result, $member);
         $this->assertEquals('3', $member['id']);
         $this->assertEquals('save', $member['name']);
 
         // Save again
         $member->address = 'address3';
         $result = $member->save();
-        $this->assertTrue($result);
+        $this->assertSame($result, $member);
         $this->assertEquals('3', $member['id']);
     }
 
@@ -1462,7 +1462,7 @@ class DbTest extends TestCase
         ));
         $result = $member->save();
 
-        $this->assertTrue($result);
+        $this->assertSame($result, $member);
     }
 
     public function testBeforeAndAfterCreateCallbacks()
@@ -1556,7 +1556,7 @@ class DbTest extends TestCase
         $member = $this->db('member')->find(array('id' => 1));
         $member['name'] = 'William';
         $result = $member->save();
-        $this->assertTrue($result);
+        $this->assertSame($result, $member);
 
         $member = $this->db('member')->find(array('id' => 1));
         $this->assertEquals('William', $member['name']);
@@ -1609,7 +1609,7 @@ class DbTest extends TestCase
         /** @var $members \Wei\Record */
         $result = $members->save();
 
-        $this->assertTrue($result);
+        $this->assertSame($result, $members);
 
         // Find out member by id
         $members = $this->db('member')->indexBy('id')->where(array('id' => array($john['id'], $larry['id'])));
@@ -1634,7 +1634,9 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
         $record = $this->db->init('member', array('id' => 1), false);
-        $this->assertTrue($record->save());
+        $record = $record->save();
+
+        $this->assertInstanceOf('\Wei\Record', $record);
     }
 
     public function testPrimaryKey()
@@ -1732,11 +1734,9 @@ class DbTest extends TestCase
         $this->initFixtures();
 
         $member = $this->db->find('member', 1);
-        $result = $member->destroy();
+        $member->destroy();
 
-        $this->assertTrue($result);
-        $result = $member->save();
-        $this->assertFalse($result);
+        $member->save();
 
         $member = $this->db->find('member', 1);
         $this->assertFalse($member);
