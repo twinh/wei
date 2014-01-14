@@ -556,6 +556,18 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         return $this;
     }
 
+    public function incr($name, $offset)
+    {
+        $this[$name] = (object)($name . ' + ' . $offset);
+        return $this;
+    }
+
+    public function decr($name, $offset)
+    {
+        $this[$name] = (object)($name . ' - ' . $offset);
+        return $this;
+    }
+
     /**
      * Check if it's a new record and has not save to database
      *
@@ -685,12 +697,19 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $data
      * @return $this
      */
-    public function findOrInit($conditions = null, array $data = array())
+    public function findOrInit($conditions = null, $data = array())
     {
         if (!$this->find($conditions)) {
             // Reset status when record not found
             $this->isNew = true;
+
             !is_array($conditions) && $conditions = array($this->primaryKey => $conditions);
+
+            // Convert to object to array
+            if (is_object($data) && method_exists($data, 'toArray')) {
+                $data = $data->toArray();
+            }
+
             $this->fromArray($conditions + $data);
         }
         return $this;
@@ -983,7 +1002,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function andWhere($conditions, $params = array(), $types = array())
     {
-        if (!$conditions) {
+        if ($conditions === false) {
             return $this;
         } else {
             $conditions = $this->processCondition($conditions, $params, $types);
