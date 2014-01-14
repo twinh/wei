@@ -1813,6 +1813,27 @@ class DbTest extends TestCase
     {
         $this->assertInstanceOf('PDO', $this->db->getPdo());
     }
+
+    public function testIncrAndDecr()
+    {
+        $this->initFixtures();
+
+        $member = $this->db('member')->find(1);
+
+        $groupId = $member['group_id'];
+
+        $member->incr('group_id', 2);
+        $member->save();
+        $member->reload();
+
+        $this->assertEquals($groupId + 2, $member['group_id']);
+
+        $member->decr('group_id', 1);
+        $member->save();
+        $member->reload();
+
+        $this->assertEquals($groupId + 2 - 1, $member['group_id']);
+    }
 }
 
 
