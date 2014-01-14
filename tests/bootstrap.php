@@ -27,7 +27,7 @@ wei(array(
     ),
     'http' => array(
         'url' => 'http://localhost:8000/call.php',
-        // Set ip for WeiTest\CallTest\::testIp
+        // Set ip for WeiTest\HttpTest\::testIp
         'ip' => '127.0.0.1'
     ),
     'db' => array(
