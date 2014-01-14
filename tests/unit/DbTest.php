@@ -1834,6 +1834,29 @@ class DbTest extends TestCase
 
         $this->assertEquals($groupId + 2 - 1, $member['group_id']);
     }
+
+    public function testCreateOrUpdate()
+    {
+        $this->initFixtures();
+
+        $id = null;
+        $member = $this->db('member')->findOrInit($id, array(
+            'group_id' => 2,
+            'name' => 'twin',
+            'address' => 'xx street'
+        ));
+
+        $this->assertTrue($member->isNew());
+        $this->assertEquals(2, $member['group_id']);
+
+        $member = $this->db('member')->findOrInit(1, array(
+            'group_id' => 2,
+            'name' => 'twin',
+            'address' => 'xx street'
+        ));
+
+        $this->assertFalse($member->isNew());
+    }
 }
 
 

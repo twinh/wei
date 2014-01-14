@@ -1528,8 +1528,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected function processCondition($conditions, $params, $types)
     {
-        // Regard numeric conditions as primary key value
-        if (is_numeric($conditions)) {
+        // Regard numeric and null as primary key value
+        if (is_numeric($conditions) || is_null($conditions)) {
             $conditions = array($this->primaryKey => $conditions);
         }
 
