@@ -614,6 +614,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         return $this->isDestroyed;
     }
 
+
+    public function isColl()
+    {
+        return $this->isColl;
+    }
+
     /**
      * Sets the primary key field
      *
