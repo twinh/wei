@@ -556,12 +556,26 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         return $this;
     }
 
+    /**
+     * Increment a field
+     *
+     * @param string $name
+     * @param int $offset
+     * @return $this
+     */
     public function incr($name, $offset)
     {
         $this[$name] = (object)($name . ' + ' . $offset);
         return $this;
     }
 
+    /**
+     * Decrement a field
+     *
+     * @param string $name
+     * @param int $offset
+     * @return $this
+     */
     public function decr($name, $offset)
     {
         $this[$name] = (object)($name . ' - ' . $offset);
