@@ -770,6 +770,21 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         return $this;
     }
 
+    public function findById($value)
+    {
+        return $this->find(array($this->primaryKey => $value));
+    }
+
+    public function findOneById($value)
+    {
+        return $this->findOne(array($this->primaryKey => $value));
+    }
+
+    public function findOrInitById($value, $data = array())
+    {
+        return $this->findOrInit(array($this->primaryKey => $value), $data);
+    }
+
     /**
      * Executes the generated query and returns the first array result
      *
