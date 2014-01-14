@@ -479,8 +479,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         }
 
         // 5. Save and return
-        $this->save();
-        return $this;
+        return $this->save();
     }
 
     /**
