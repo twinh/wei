@@ -1016,7 +1016,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function andWhere($conditions, $params = array(), $types = array())
     {
-        if ($conditions === false) {
+        if (!$conditions) {
             return $this;
         } else {
             $conditions = $this->processCondition($conditions, $params, $types);
