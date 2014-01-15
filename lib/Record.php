@@ -831,6 +831,11 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function length()
     {
+        return $this->size();
+    }
+
+    public function size()
+    {
         $this->loadData(0);
         return count($this->data);
     }
