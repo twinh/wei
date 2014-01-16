@@ -770,16 +770,35 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         return $this;
     }
 
+    /**
+     * Find a record by primary key value
+     *
+     * @param mixed $value
+     * @return $this|false
+     */
     public function findById($value)
     {
         return $this->find(array($this->primaryKey => $value));
     }
 
+    /**
+     * Find a record by primary key value and throws 404 exception if record not found
+     *
+     * @param mixed $value
+     * @return $this
+     */
     public function findOneById($value)
     {
         return $this->findOne(array($this->primaryKey => $value));
     }
 
+    /**
+     * Find a record by primary key value and init with the specified data if record not found
+     *
+     * @param mixed $value
+     * @param array $data
+     * @return $this
+     */
     public function findOrInitById($value, $data = array())
     {
         return $this->findOrInit(array($this->primaryKey => $value), $data);
