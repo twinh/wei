@@ -704,7 +704,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $this->isColl = false;
         $this->andWhere($conditions);
         $data = $this->fetch();
-        $this->data = $data ? : array();
+        $this->data = (array)$data + $this->data;
         return $data ? $this : false;
     }
 
