@@ -395,7 +395,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Delete the current record and trigger the beforeDestroy and afterDestroy callback
      *
      * @param mixed $conditions
-     * @return bool
+     * @return $this
      */
     public function destroy($conditions = false)
     {
@@ -404,7 +404,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
         if (!$this->isColl) {
             $this->trigger('beforeDestroy');
-            $result = (bool)$this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
+            $this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
             $this->isDestroyed = true;
             $this->trigger('afterDestroy');
         } else {
@@ -412,6 +412,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                 $record->destroy();
             }
         }
+
+        return $this;
     }
 
     /**
