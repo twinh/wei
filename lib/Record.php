@@ -463,9 +463,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                 $existIds[] = $row['id'];
             }
         }
-        foreach ($this->data as $record) {
+        foreach ($this->data as $key => $record) {
             if (!in_array($record['id'], $existIds)) {
                 $record->destroy();
+                unset($this->data[$key]);
             }
         }
 
