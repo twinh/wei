@@ -435,9 +435,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @param array $data A two-dimensional array
      * @param array $extraData The extra data for new rows
+     * @param bool $sort
      * @return $this
      */
-    public function saveColl($data, $extraData = array())
+    public function saveColl($data, $extraData = array(), $sort = false)
     {
         if (!is_array($data)) {
             return $this;
@@ -471,7 +472,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         }
 
         // 4. Merges existing rows or create new rows
-        foreach ($data as $row) {
+        foreach ($data as $index => $row) {
+            if ($sort) {
+                $row[$sort] = $index;
+            }
             if (isset($row['id']) && isset($this->data[$row['id']])) {
                 $this->data[$row['id']]->fromArray($row);
             } else {
