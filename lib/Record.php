@@ -407,12 +407,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             $result = (bool)$this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
             $this->isDestroyed = true;
             $this->trigger('afterDestroy');
-            return $result;
         } else {
             foreach ($this->data as $record) {
                 $record->destroy();
             }
-            return true;
         }
     }
 
@@ -445,8 +443,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
         // 1. Uses primary key as data index
         foreach ($this as $key => $record) {
-            $coll[$record['id']] = $record;
-            unset($coll[$key]);
+            $this->data[$record['id']] = $record;
+            unset($this->data[$key]);
         }
 
         // 2. Removes empty rows from data
@@ -472,7 +470,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
         // 4. Merges existing rows or create new rows
         foreach ($data as $row) {
-            if (isset($row['id']) && isset($coll[$row['id']])) {
+            if (isset($row['id']) && isset($this->data[$row['id']])) {
                 $this->data[$row['id']]->fromArray($row);
             } else {
                 $this[] = $this->db($this->table)->fromArray($extraData + $row);
