@@ -553,8 +553,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function remove($name)
     {
-        if (array_key_exists($name, $this->data)) {
-            $this->data[$name] = null;
+        if (!$this->isColl) {
+            if (array_key_exists($name, $this->data)) {
+                $this->data[$name] = null;
+            }
+        } else {
+            unset($this->data[$name]);
         }
         return $this;
     }
