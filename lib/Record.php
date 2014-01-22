@@ -328,7 +328,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Save the record or data to database
      *
      * @param array $data
-     * @return bool
+     * @return $this
      */
     public function save($data = array())
     {
@@ -395,7 +395,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Delete the current record and trigger the beforeDestroy and afterDestroy callback
      *
      * @param mixed $conditions
-     * @return bool
+     * @return $this
      */
     public function destroy($conditions = false)
     {
@@ -404,16 +404,16 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
         if (!$this->isColl) {
             $this->trigger('beforeDestroy');
-            $result = (bool)$this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
+            $this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
             $this->isDestroyed = true;
             $this->trigger('afterDestroy');
-            return $result;
         } else {
             foreach ($this->data as $record) {
                 $record->destroy();
             }
-            return true;
         }
+
+        return $this;
     }
 
     /**
@@ -435,9 +435,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @param array $data A two-dimensional array
      * @param array $extraData The extra data for new rows
+     * @param bool $sort
      * @return $this
      */
-    public function saveColl($data, $extraData = array())
+    public function saveColl($data, $extraData = array(), $sort = false)
     {
         if (!is_array($data)) {
             return $this;
@@ -445,8 +446,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
         // 1. Uses primary key as data index
         foreach ($this as $key => $record) {
-            $coll[$record['id']] = $record;
-            unset($coll[$key]);
+            $this->data[$record['id']] = $record;
+            unset($this->data[$key]);
         }
 
         // 2. Removes empty rows from data
@@ -463,15 +464,19 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                 $existIds[] = $row['id'];
             }
         }
-        foreach ($this->data as $record) {
+        foreach ($this->data as $key => $record) {
             if (!in_array($record['id'], $existIds)) {
                 $record->destroy();
+                unset($this->data[$key]);
             }
         }
 
         // 4. Merges existing rows or create new rows
-        foreach ($data as $row) {
-            if (isset($row['id']) && isset($coll[$row['id']])) {
+        foreach ($data as $index => $row) {
+            if ($sort) {
+                $row[$sort] = $index;
+            }
+            if (isset($row['id']) && isset($this->data[$row['id']])) {
                 $this->data[$row['id']]->fromArray($row);
             } else {
                 $this[] = $this->db($this->table)->fromArray($extraData + $row);
@@ -548,8 +553,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function remove($name)
     {
-        if (array_key_exists($name, $this->data)) {
-            $this->data[$name] = null;
+        if (!$this->isColl) {
+            if (array_key_exists($name, $this->data)) {
+                $this->data[$name] = null;
+            }
+        } else {
+            unset($this->data[$name]);
         }
         return $this;
     }
@@ -704,8 +713,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $this->isColl = false;
         $this->andWhere($conditions);
         $data = $this->fetch();
-        $this->data = $data ? : array();
-        return $data ? $this : false;
+        if ($data) {
+            $this->data = $data + $this->data;
+            return $this;
+        } else {
+            return false;
+        }
     }
 
     /**

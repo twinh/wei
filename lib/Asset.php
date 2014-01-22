@@ -22,6 +22,8 @@ class Asset extends Base
      */
     protected $baseUrl = '/';
 
+    protected $concatUrl = '/concat';
+
     /**
      * The version number append to the URL
      *
@@ -43,6 +45,11 @@ class Asset extends Base
             $url .= ((false === strpos($url, '?')) ? '?' : '&') . 'v=' . $this->version;
         }
         return $url;
+    }
+
+    public function concat(array $files)
+    {
+        return $this->concatUrl . '?b=' . trim($this->baseUrl, '/') .'&f=' . implode(',', $files);
     }
 
     /**
