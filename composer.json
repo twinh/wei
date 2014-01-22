@@ -7,7 +7,7 @@
     "homepage": "https://github.com/twinh/wei",
     "license": "MIT",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.4"
     },
     "require-dev": {
         "joseph-lenton/php-error": "dev-master",
