@@ -628,7 +628,9 @@ class Response extends Base
      */
     public function json($data, $jsonp = false)
     {
-        $result = json_encode($data);
+        $options = 0;
+        defined('JSON_UNESCAPED_UNICODE') && $options = JSON_UNESCAPED_UNICODE;
+        $result = json_encode($data, $options);
 
         if ($jsonp && preg_match('/^[$A-Z_][0-9A-Z_$.]*$/i', $this->request['callback']) === 1) {
             $this->setHeader('Content-Type', 'application/javascript');
