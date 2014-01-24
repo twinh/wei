@@ -1521,8 +1521,9 @@ class DbTest extends TestCase
 
         $member = $this->db('member')->find(array('id' => 1));
         $result = $member->destroy();
-        $this->assertTrue($result);
 
+        $this->assertInstanceOf('\Wei\Record', $result);
+        
         $member = $this->db('member')->find(array('id' => 1));
         $this->assertFalse($member);
     }
