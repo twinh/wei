@@ -1057,8 +1057,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function where($conditions, $params = array(), $types = array())
     {
-        $conditions = $this->processCondition($conditions, $params, $types);
-        return $this->add('where', $conditions);
+        if ($conditions === false) {
+            return $this;
+        } else {
+            $conditions = $this->processCondition($conditions, $params, $types);
+            return $this->add('where', $conditions);
+        }
     }
 
     /**

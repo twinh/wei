@@ -484,7 +484,7 @@ class DbTest extends TestCase
         $this->assertEquals('1', $member['group_id']);
 
         // Where with empty content
-        $query = $this->db('member')->where(array());
+        $query = $this->db('member')->where(false);
         $this->assertEquals("SELECT * FROM prefix_member", $query->getSql());
 
         // Order
@@ -1523,7 +1523,7 @@ class DbTest extends TestCase
         $result = $member->destroy();
 
         $this->assertInstanceOf('\Wei\Record', $result);
-        
+
         $member = $this->db('member')->find(array('id' => 1));
         $this->assertFalse($member);
     }
