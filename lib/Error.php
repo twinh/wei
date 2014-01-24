@@ -253,12 +253,19 @@ class Error extends Base
         $line = $e->getLine();
 
         // Prepare message
-        if ($debug || $code == 404) {
+        if ($debug) {
             $message = $e->getMessage();
             $detail = sprintf('Threw by %s in %s on line %s', get_class($e), $file, $line);
         } else {
             $message = $this->message;
             $detail = $this->detail;
+        }
+
+        if ($code == 404) {
+            $message = $e->getMessage();
+            if (!$debug) {
+                $detail = $this->notFoundDetail;
+            }
         }
         $message = htmlspecialchars($message, ENT_QUOTES);
 
