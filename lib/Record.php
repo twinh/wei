@@ -172,6 +172,13 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     protected $afterLoad;
 
     /**
+     * The callback triggered after fetch a record from database
+     *
+     * @var callable
+     */
+    protected $afterFind;
+
+    /**
      * The callback triggered before save a record
      *
      * @var callable
@@ -696,6 +703,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function execute()
     {
         if ($this->type == self::SELECT) {
+            $this->loaded = true;
             return $this->db->fetchAll($this->getSql(), $this->params, $this->paramTypes);
         } else {
             return $this->db->executeUpdate($this->getSql(), $this->params, $this->paramTypes);
@@ -715,6 +723,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $data = $this->fetch();
         if ($data) {
             $this->data = $data + $this->data;
+            $this->trigger('afterFind');
             return $this;
         } else {
             return false;
@@ -777,6 +786,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $records = array();
         foreach ($data as $key => $row) {
             $records[$key] = $this->db->init($this->table, $row, false);
+            $records[$key]->trigger('afterFind');
         }
 
         $this->data = $records;
@@ -1628,7 +1638,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     protected function loadData($offset)
     {
         if (!$this->loaded && !$this->isNew) {
-            $this->loaded = true;
             if (is_numeric($offset) || is_null($offset)) {
                 $this->findAll();
             } else {
@@ -1664,6 +1673,13 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * The method called after load a record
      */
     protected function afterLoad()
+    {
+    }
+
+    /**
+     * The method called after find a record
+     */
+    protected function afterFind()
     {
     }
 
