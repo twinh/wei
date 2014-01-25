@@ -299,6 +299,19 @@ class DbTest extends TestCase
         $this->assertEquals('3', $member['id']);
     }
 
+    public function testRecordIsLoaded()
+    {
+        $this->initFixtures();
+
+        $member = $this->db('member');
+
+        $this->assertFalse($member->isLoaded());
+
+        $member->find('1');
+
+        $this->assertTrue($member->isLoaded());
+    }
+
     public function testSelect()
     {
         $this->initFixtures();
