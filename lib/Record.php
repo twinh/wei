@@ -637,6 +637,16 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
+     * Returns whether the data is loaded
+     *
+     * @return bool
+     */
+    public function isLoaded()
+    {
+        return $this->loaded;
+    }
+
+    /**
      * Sets the primary key field
      *
      * @param string $primaryKey
