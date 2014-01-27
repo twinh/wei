@@ -785,7 +785,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Executes the generated SQL and returns the found record collection object or false
      *
      * @param mixed $conditions
-     * @return $this
+     * @return $this[]
      */
     public function findAll($conditions = false)
     {
