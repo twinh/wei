@@ -1,6 +1,27 @@
 Changelog
 =========
 
+## 0.9.10 (2014-01-27)
+
+* Renamed "call" service to "http", refs #157
+* Removed default value for HTTP service content type
+* Install apcu for PHP 5.5 unit test, refs #161
+* Allows ArrayAccess as record class findOrInit method parameter
+* Ignores record class query condition when condition is false
+* Returns current record object instead of true/false in save, destroy method
+* Added isColl method for record class
+* Added findById, findOneById, findOrInitById methods for record class, refs #166
+* Added size method for recrod calss
+* Added concat method for asset service
+* Fixed missing default data when fetching non exists record
+* Removes destroy recrod from collection list, refs 14fea8b
+* Added sort support for record class saveColl method, refs be96a40
+* Fixed saveColl variable name error, refs 4024d8b
+* Drops PHP 5.3.3 support, requires at least 5.3.4, refs 05e4416e4239568ae5856783f269ca48c869aafb
+* Added JSON_UNESCAPED_UNICODE support for json response, refs 68bae3eb3797e4514ffee9d66b5a167cf6eb123b
+* Added afterFind callback for record , refs classb37d5040eec3601abddf25c6246fee0731473fde
+* Added isLoaded method for record class, refs 2ff3790a90d475aefc191dd73fb25d0693af0f48
+
 ## 0.9.9 (2014-01-08)
 
 * Do not output libxml error messages to screen in weChatApp service, refs #153 
