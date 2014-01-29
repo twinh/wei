@@ -44,6 +44,13 @@ class View extends Base implements \ArrayAccess
     protected $layout = array();
 
     /**
+     * The default layout path for layout method
+     *
+     * @var string
+     */
+    protected $defaultLayout;
+
+    /**
      * The current render view name
      *
      * @var string
@@ -176,12 +183,24 @@ class View extends Base implements \ArrayAccess
      * @param string $variable The variable name of layout content
      * @return $this
      */
-    public function layout($name, $variable = 'content')
+    public function layout($name = null, $variable = 'content')
     {
         $this->layout = array(
-            'name' => $name,
+            'name' => $name ?: $this->defaultLayout,
             'variable' => $variable
         );
+        return $this;
+    }
+
+    /**
+     * Set the default layout parameter
+     *
+     * @param string $defaultLayout
+     * @return $this
+     */
+    public function setDefaultLayout($defaultLayout)
+    {
+        $this->defaultLayout = $defaultLayout;
         return $this;
     }
 
