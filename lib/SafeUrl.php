@@ -10,12 +10,20 @@
 namespace Wei;
 
 /**
+ * Generate a URL with signature
+ *
  * @property \Wei\Request $request
  */
 class SafeUrl extends Base
 {
+    /**
+     * @var string
+     */
     protected $token;
 
+    /**
+     * @var int
+     */
     protected $expireTime = 60;
 
     public function __invoke($url, $keys = array())
