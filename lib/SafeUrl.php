@@ -26,11 +26,25 @@ class SafeUrl extends Base
      */
     protected $expireTime = 60;
 
+    /**
+     * Generate a URL with signature, alias of generate method
+     *
+     * @param $url
+     * @param array $keys
+     * @return string
+     */
     public function __invoke($url, $keys = array())
     {
         return $this->generate($url, $keys);
     }
 
+    /**
+     * Generate a URL with signature
+     *
+     * @param $url
+     * @param array $keys
+     * @return string
+     */
     public function generate($url, $keys = array())
     {
         $time = time();
@@ -45,16 +59,12 @@ class SafeUrl extends Base
         return $url . '&timestamp=' . $time . '&flag=' . $flag;
     }
 
-    public function generateToken($array)
-    {
-        return md5(implode('|', $array) . $this->token);
-    }
-
-    protected function filterKeys($query, $keys)
-    {
-        return $keys ? array_intersect_key($query, array_flip((array)$keys)) : $query;
-    }
-
+    /**
+     * Verify whether the URL signature is OK
+     *
+     * @param array $keys
+     * @return bool
+     */
     public function verify($keys = array())
     {
         // 检查时间是否已经超时
@@ -80,5 +90,28 @@ class SafeUrl extends Base
         } else {
             return false;
         }
+    }
+
+    /**
+     * Generate signature by specified array
+     *
+     * @param array $array
+     * @return string
+     */
+    protected function generateToken(array $array)
+    {
+        return md5(implode('|', $array) . $this->token);
+    }
+
+    /**
+     * Removes array element by keys
+     *
+     * @param string $query
+     * @param array $keys
+     * @return array
+     */
+    protected function filterKeys($query, $keys)
+    {
+        return $keys ? array_intersect_key($query, array_flip((array)$keys)) : $query;
     }
 }
