@@ -2,6 +2,9 @@
 
 namespace WeiTest;
 
+/**
+ * @property \Wei\Asset asset
+ */
 class AssetTest extends TestCase
 {
     /**
@@ -51,5 +54,14 @@ class AssetTest extends TestCase
     {
         $this->asset->setBaseUrl('abc');
         $this->assertEquals('abc', $this->asset->getBaseUrl());
+    }
+
+    public function testConcat()
+    {
+        $this->asset->setBaseUrl('abc');
+        $this->asset->setOption('concatUrl', '/c/');
+        $this->assertEquals('/c/?b=abc&f=a.js,b/b.js,c/c/c.js', $this->asset->concat(array(
+            'a.js', 'b/b.js', 'c/c/c.js'
+        )));
     }
 }
