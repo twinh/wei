@@ -22,6 +22,11 @@ class Asset extends Base
      */
     protected $baseUrl = '/';
 
+    /**
+     * The base concat URL of assets
+     *
+     * @var string
+     */
     protected $concatUrl = '/concat';
 
     /**
@@ -47,6 +52,12 @@ class Asset extends Base
         return $url;
     }
 
+    /**
+     * Returns the concat URL for list of files
+     *
+     * @param array $files
+     * @return string
+     */
     public function concat(array $files)
     {
         return $this->concatUrl . '?b=' . trim($this->baseUrl, '/') .'&f=' . implode(',', $files);
