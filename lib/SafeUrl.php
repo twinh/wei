@@ -67,13 +67,13 @@ class SafeUrl extends Base
      */
     public function verify($keys = array())
     {
-        // 检查时间是否已经超时
+        // Check if time is expired
         $time = $this->request->getQuery('timestamp');
         if ($this->expireTime && time() - $time > $this->expireTime) {
             return false;
         }
 
-        // 删除time和token参数
+        // Remove flag parameters
         $query = $this->request->getParameterReference('get');
         $token = $this->request->getQuery('flag');
         unset($query['flag']);
