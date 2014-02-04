@@ -942,7 +942,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
     /**
      * Sets the page number, the "OFFSET" value is equals "($page - 1) * LIMIT"
-
+     *
      * @param int $page The page number
      * @return $this
      */
