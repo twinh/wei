@@ -6,7 +6,7 @@ Wei的使用比任何框架都要简单,只需3步,加载=>创建=>调用!
 
 ```php
 // 1. 加载核心类文件
-require 'path/to/wei/lib/Wei/Wei.php';
+require 'path/to/wei/lib/Wei.php';
 
 // 2. 创建对象管理器对象
 $wei = wei(array(
@@ -41,4 +41,4 @@ $result = $wei->db->fetch("SELECT 1 + 2");
 
 ## 系统要求
 
-PHP 5.3.3+
+PHP 5.3.4+

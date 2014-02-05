@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 0.9.11 (2014-02-25)
+
+* Added safeUrl service, close #171
+* Added defaultLayout property for view service
+* Added postJson method for http service, close #172
+
 ## 0.9.10 (2014-01-27)
 
 * Renamed "call" service to "http", refs #157
