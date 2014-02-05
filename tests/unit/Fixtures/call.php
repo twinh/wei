@@ -57,7 +57,8 @@ switch ($test) {
             case 'json':
                 $result = json_encode(array(
                     'code' => 0,
-                    'message' => 'success'
+                    'message' => 'success',
+                    'method' => $request->getMethod()
                 ));
                 break;
 
