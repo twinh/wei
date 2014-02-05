@@ -717,6 +717,19 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
+     * Execute a GET method request
+     *
+     * @param string $url
+     * @param array $data
+     * @param string $dataType
+     * @return $this
+     */
+    public function get($url, $data = array(), $dataType = null)
+    {
+        return $this->processMethod($url, $data, $dataType, 'GET');
+    }
+
+    /**
      * Execute a GET method request and parser response data to JSON array
      *
      * @param string $url
@@ -741,19 +754,6 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
-     * Execute a GET method request
-     *
-     * @param string $url
-     * @param array $data
-     * @param string $dataType
-     * @return $this
-     */
-    public function get($url, $data = array(), $dataType = null)
-    {
-        return $this->processMethod($url, $data, $dataType, 'GET');
-    }
-
-    /**
      * Execute a POST method request
      *
      * @param string $url
@@ -764,6 +764,18 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function post($url, $data = array(), $dataType = null)
     {
         return $this->processMethod($url, $data, $dataType, 'POST');
+    }
+
+    /**
+     * Execute a POST method request and parser response data to JSON array
+     *
+     * @param string $url
+     * @param array $data
+     * @return $this
+     */
+    public function postJson($url, $data = array())
+    {
+        return $this->processMethod($url, $data, 'json', 'POST');
     }
 
     /**
