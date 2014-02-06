@@ -17,7 +17,7 @@ switch ($test) {
         break;
 
     case 'post':
-        $result = json_encode($_POST);
+        $result = json_encode($_POST + array('method' => 'POST'));
         break;
 
     case 'user-agent':

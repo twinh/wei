@@ -310,13 +310,24 @@ class HttpTest extends TestCase
 
     public function testPostJson()
     {
-        $http = $this->http->postJson($this->url . '?type=json');
-        $data = $http->getResponse();
+        $test = $this;
+        $data = array(
+            'key' => 'value',
+            'post' => true,
+            'array' => array(
+                1,
+                'string' => 'value'
+            )
+        );
+        $http = $this->http->postJson($this->url . '?test=post', $data);
 
+        $data = $http->getResponse();
         $this->assertTrue($http->isSuccess());
-        $this->assertEquals(0, $data['code']);
-        $this->assertEquals('success', $data['message']);
-        $this->assertEquals('POST', $data['method']);
+        $test->assertEquals('POST', $data['method']);
+        $test->assertEquals('value', $data['key']);
+        $test->assertEquals('1', $data['post']);
+        $test->assertEquals('1', $data['array'][0]);
+        $test->assertEquals('value', $data['array']['string']);
     }
 
     public function testSerializeDataType()
