@@ -17,11 +17,15 @@ namespace Wei;
 class SafeUrl extends Base
 {
     /**
+     * The token to generate the signature
+     *
      * @var string
      */
     protected $token;
 
     /**
+     * The expire seconds of signature
+     *
      * @var int
      */
     protected $expireTime = 60;
@@ -29,7 +33,7 @@ class SafeUrl extends Base
     /**
      * Generate a URL with signature, alias of generate method
      *
-     * @param $url
+     * @param string $url
      * @param array $keys
      * @return string
      */
@@ -41,7 +45,7 @@ class SafeUrl extends Base
     /**
      * Generate a URL with signature
      *
-     * @param $url
+     * @param string $url
      * @param array $keys
      * @return string
      */
