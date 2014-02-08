@@ -92,6 +92,13 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     protected $isDestroyed = false;
 
     /**
+     * Whether the record is waiting to remove from database
+     *
+     * @var bool
+     */
+    protected $detached = false;
+
+    /**
      * Whether the data is loaded
      *
      * @var bool
@@ -630,6 +637,15 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         return $this->isDestroyed;
     }
 
+    /**
+     * Check if the record is waiting to remove from database
+     *
+     * @return bool
+     */
+    public function isDetached()
+    {
+        return $this->detached;
+    }
 
     public function isColl()
     {
