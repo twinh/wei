@@ -560,6 +560,21 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
+     * Set field value for every record in collection
+     *
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function setAll($name, $value)
+    {
+        foreach ($this->data as $record) {
+            $record[$name] = $value;
+        }
+        return $this;
+    }
+
+    /**
      * Remove field value
      *
      * @param string $name The name of field
