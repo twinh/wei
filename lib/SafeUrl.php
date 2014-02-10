@@ -31,31 +31,36 @@ class SafeUrl extends Base
     protected $expireTime = 60;
 
     /**
+     * Generate signature for specified parameter names
+     *
+     * @var array
+     */
+    protected $params = array();
+
+    /**
      * Generate a URL with signature, alias of generate method
      *
      * @param string $url
-     * @param array $keys
      * @return string
      */
-    public function __invoke($url, $keys = array())
+    public function __invoke($url)
     {
-        return $this->generate($url, $keys);
+        return $this->generate($url);
     }
 
     /**
      * Generate a URL with signature
      *
      * @param string $url
-     * @param array $keys
      * @return string
      */
-    public function generate($url, $keys = array())
+    public function generate($url)
     {
         $time = time();
         $query = parse_url($url, PHP_URL_QUERY);
         parse_str($query, $query);
 
-        $query = $this->filterKeys($query, $keys);
+        $query = $this->filterKeys($query, $this->params);
         $query['timestamp'] = $time;
 
         $flag = $this->generateToken($query);
@@ -66,10 +71,9 @@ class SafeUrl extends Base
     /**
      * Verify whether the URL signature is OK
      *
-     * @param array $keys
      * @return bool
      */
-    public function verify($keys = array())
+    public function verify()
     {
         // Check if time is expired
         $time = $this->request->getQuery('timestamp');
@@ -84,7 +88,7 @@ class SafeUrl extends Base
 
         $timestamp = $query['timestamp'];
 
-        $query = $this->filterKeys($query, $keys);
+        $query = $this->filterKeys($query, $this->params);
 
         $query['timestamp'] = $timestamp;
 
