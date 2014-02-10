@@ -634,6 +634,18 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
+     * Set the detach status for current record
+     *
+     * @param bool $bool
+     * @return $this
+     */
+    public function detach($bool = true)
+    {
+        $this->detached = (bool)$bool;
+        return $this;
+    }
+
+    /**
      * Check if it's a new record and has not save to database
      *
      * @return bool
