@@ -575,6 +575,21 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
+     * Return the value of field from every record in collection
+     *
+     * @param string $name
+     * @return array
+     */
+    public function getAll($name)
+    {
+        $data = array();
+        foreach ($this->data as $record) {
+            $data[] = $record[$name];
+        }
+        return $data;
+    }
+
+    /**
      * Remove field value
      *
      * @param string $name The name of field
