@@ -26,7 +26,7 @@ class EnvTest extends TestCase
         $this->assertTrue($this->wei->getConfig('cli'));
     }
 
-    public function testsetName()
+    public function testSetName()
     {
         $env = $this->wei->newInstance('env', array(
             'ipMap' => array(
@@ -75,6 +75,24 @@ class EnvTest extends TestCase
         ));
 
         $this->assertEquals('test', $env->getName());
+    }
+
+    public function testEnvDetectorReturnsFalse()
+    {
+        $env = new \Wei\Env(array(
+            'wei' => $this->wei,
+            'detector' => function(){
+                return false;
+            },
+            'ipMap' => array(
+                '127.0.0.1'  => 'testing',
+            ),
+            'server' => array(
+                'SERVER_ADDR' => '127.0.0.1'
+            )
+        ));
+
+        $this->assertEquals('testing', $env->getName());
     }
 
     public function testPreloadEnvWeiOverwriteConfigError()
