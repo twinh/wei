@@ -98,8 +98,8 @@ class Env extends Base
      */
     public function detectEnvName()
     {
-        if ($this->detector) {
-            $this->name = call_user_func($this->detector);
+        // Return if env name is detected, or, or continue detecting by IP
+        if ($this->detector && $this->name == call_user_func($this->detector)) {
             return;
         }
 
