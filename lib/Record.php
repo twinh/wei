@@ -352,8 +352,15 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         // 2.1 Saves single record
         if (!$this->isColl) {
 
-            // 2.1.1 Returns when record has been destroy to avoid dirty data
+            // 2.1.1 Returns when record has been destroy to avoid store dirty data
             if ($this->isDestroyed) {
+                return $this;
+            }
+
+            // Deletes the record when it's waiting to remove from database
+            if ($this->detached) {
+                $this->db->delete($this->fullTable, array($this->primaryKey => $this->data[$this->primaryKey]));
+                $this->isDestroyed = true;
                 return $this;
             }
 
