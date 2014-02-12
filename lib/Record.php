@@ -360,7 +360,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             // 2.1.2 Triggers before callbacks
             $isNew = $this->isNew;
             $this->trigger('beforeSave');
-            $this->trigger($this->isNew ? 'beforeCreate' : 'beforeUpdate');
+            $this->trigger($isNew ? 'beforeCreate' : 'beforeUpdate');
 
             // 2.1.3.1 Inserts new record
             if ($isNew) {
