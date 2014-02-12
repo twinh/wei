@@ -1872,6 +1872,28 @@ class DbTest extends TestCase
 
         $this->assertFalse($member->isNew());
     }
+
+    public function testDetach()
+    {
+        $this->initFixtures();
+
+        /** @var $member \Wei\Record */
+        $member = $this->db('member')->findById(1);
+
+        $this->assertFalse($member->isDetached());
+
+        $member->detach();
+
+        $this->assertTrue($member->isDetached());
+
+        $member->save();
+
+        $this->assertTrue($member->isDestroyed());
+
+        $newMember = $this->db('member')->findById(1);
+
+        $this->assertFalse($newMember);
+    }
 }
 
 

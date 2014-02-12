@@ -359,7 +359,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
             // Deletes the record when it's waiting to remove from database
             if ($this->detached) {
-                $this->db->delete($this->fullTable, array($this->primaryKey => $this->data[$this->primaryKey]));
+                $this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
                 $this->isDestroyed = true;
                 return $this;
             }
