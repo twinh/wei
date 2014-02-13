@@ -1,7 +1,12 @@
 Changelog
 =========
 
-## 0.9.11 (2014-02-25)
+## 0.9.12 (2014-02-13)
+
+* Add "detach" support for record class, refs #164
+* Add setAll and setAll method for record class, refs #168
+
+## 0.9.11 (2014-02-05)
 
 * Added safeUrl service, close #171
 * Added defaultLayout property for view service
