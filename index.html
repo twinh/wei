@@ -13726,7 +13726,8 @@
 
 <ol>
 <li>如果用户设置了<code>env</code>选项,使用<code>env</code>作为环境名称</li>
-<li>如果用户设置了回调结构<code>detector</code>选项,调用<code>detector</code>获取返回值作为环境名称</li>
+<li>如果用户设置了回调结构<code>detector</code>选项,调用<code>detector</code>获取返回值</li>
+<li>如果返回值为<code>false</code>继续到第4步,否则将返回值作为环境名称</li>
 <li>如果当前的服务器IP地址在<code>ipMap</code>的键名之中,使用对应的值作为环境名称</li>
 <li>使用<code>prod</code>作为环境名称</li>
 </ol><h3>方法</h3>
