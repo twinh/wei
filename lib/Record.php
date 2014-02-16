@@ -860,6 +860,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
         $records = array();
         foreach ($data as $key => $row) {
+            /** @var $records Record[] */
             $records[$key] = $this->db->init($this->table, $row, false);
             $records[$key]->trigger('afterFind');
         }
