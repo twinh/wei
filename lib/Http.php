@@ -338,14 +338,12 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         }
 
         if ($this->data) {
-            if (is_string($this->data)) {
-                $data = $this->data;
-            } else {
-                $this->http_build_query_for_curl($this->data, $data);
-            }
+            $data = is_string($this->data) ? $this->data : http_build_query($this->data);
             if ($postData) {
                 $opts[CURLOPT_POSTFIELDS] = $data;
+                //$opts[CURLOPT_POSTFIELDS] = $this->data;
             } else {
+                //$data = is_string($this->data) ? $this->data : http_build_query($this->data);
                 if (false === strpos($url, '?')) {
                     $url .= '?' . $data;
                 } else {
@@ -397,22 +395,6 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 
         $this->curlOptions += $opts + $this->defaultCurlOptions;
         return $this->curlOptions;
-    }
-
-    protected function http_build_query_for_curl( $arrays, &$new = array(), $prefix = null ) {
-
-        if ( is_object( $arrays ) ) {
-            $arrays = get_object_vars( $arrays );
-        }
-
-        foreach ( $arrays AS $key => $value ) {
-            $k = isset( $prefix ) ? $prefix . '[' . $key . ']' : $key;
-            if ( is_array( $value ) OR is_object( $value )  ) {
-                $this->http_build_query_for_curl( $value, $new, $k );
-            } else {
-                $new[$k] = $value;
-            }
-        }
     }
 
     /**
