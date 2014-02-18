@@ -100,6 +100,7 @@ namespace Wei
      * @property Password   $password A wrapper class for password hashing functions
      * @property Pinyin     $pinyin An util object that converts Chinese words to phonetic alphabets
      * @method   string     pinyin($word) Converts Chinese words to phonetic alphabets
+     * @property SafeUrl    $safeUrl Generate a URL with signature
      * @property Uuid       $uuid A util object that generates a RANDOM UUID(universally unique identifier)
      * @method   string     uuid() generates a RANDOM UUID(universally unique identifier)
      * @property T          $t A translator object
