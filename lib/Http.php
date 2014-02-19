@@ -341,9 +341,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             $data = is_string($this->data) ? $this->data : http_build_query($this->data);
             if ($postData) {
                 $opts[CURLOPT_POSTFIELDS] = $data;
-                //$opts[CURLOPT_POSTFIELDS] = $this->data;
             } else {
-                //$data = is_string($this->data) ? $this->data : http_build_query($this->data);
                 if (false === strpos($url, '?')) {
                     $url .= '?' . $data;
                 } else {
