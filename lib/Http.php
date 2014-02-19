@@ -48,6 +48,13 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     protected $data = array();
 
     /**
+     * The files send to the server
+     *
+     * @var array
+     */
+    protected $files = array();
+
+    /**
      * Whether use the global options in `$wei->http` object when create a
      * new object
      *
