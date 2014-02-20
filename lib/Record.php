@@ -306,11 +306,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Returns the record and relative records data as JSON string
      *
-     * @return string
+     * @param array $returnFields A indexed array specified the fields to return
+     * @return array
      */
-    public function toJson()
+    public function toJson($returnFields = array())
     {
-        return json_encode($this->toArray());
+        return json_encode($this->toArray($returnFields));
     }
 
     /**
