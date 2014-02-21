@@ -542,20 +542,15 @@ class HttpTest extends TestCase
         $test = $this;
         $data = array(
             'key' => 'value',
-            'post' => true,
-            'array' => array(
-                1,
-                'string' => 'value'
-            )
+            'post' => true
         );
-        $http = $this->http->post($this->url . '?test=post', $data, 'jsonObject');
+        /** @var $http \Wei\Http */
+        $http = $this->wei->newInstance('http')->post('http://httpbin.org/post', $data, 'jsonObject');
 
         $data = $http->getResponse();
         $this->assertTrue($http->isSuccess());
-        $test->assertEquals('value', $data->key);
-        $test->assertEquals('1', $data->post);
-        $test->assertEquals('1', $data->array->{0});
-        $test->assertEquals('value', $data->array->string);
+        $test->assertEquals('value', $data->form->key);
+        $test->assertEquals('1', $data->form->post);
     }
 
     /**
