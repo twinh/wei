@@ -28,7 +28,9 @@ wei(array(
     'http' => array(
         'url' => 'http://localhost:8000/call.php',
         // Set ip for WeiTest\HttpTest\::testIp
-        'ip' => '127.0.0.1'
+        'ip' => '127.0.0.1',
+        'header' => true,
+        'throwException' => true,
     ),
     'db' => array(
         'driver'    => 'sqlite',
