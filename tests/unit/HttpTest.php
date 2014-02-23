@@ -152,7 +152,7 @@ class HttpTest extends TestCase
         $this->setExpectedException('\ErrorException', 'Not Found');
 
         $this->http(array(
-            'url' => $this->http->getOption('url') . '?code=404',
+            'url' => 'http://httpbin.org/status/404',
             'header' => true,
             'throwException' => true,
         ));
@@ -163,7 +163,7 @@ class HttpTest extends TestCase
         $this->setExpectedException('\ErrorException', 'HTTP request error');
 
         $this->http(array(
-            'url' => $this->http->getOption('url') . '?code=404',
+            'url' => 'http://httpbin.org/status/404',
             'header' => false,
             'throwException' => true,
         ));
