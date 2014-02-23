@@ -30,6 +30,11 @@ class HttpTest extends TestCase
         if (false === @fopen($this->url, 'r')) {
             $this->markTestSkipped(sprintf('URL %s is not available', $this->url));
         }
+
+        $this->wei->setConfig('http', array(
+            'throwException' => false,
+            'header' => true
+        ));
     }
 
     /**
