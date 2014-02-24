@@ -467,10 +467,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         }
 
         // 1. Uses primary key as data index
-        foreach ($this as $key => $record) {
-            $this->data[$record['id']] = $record;
+        $newData = array();
+        foreach ($this->data as $key => $record) {
             unset($this->data[$key]);
+            $newData[$record['id']] = $record;
         }
+        $this->data = $newData;
 
         // 2. Removes empty rows from data
         foreach ($data as $index => $row) {
