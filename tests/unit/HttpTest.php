@@ -158,6 +158,7 @@ class HttpTest extends TestCase
 
         $this->http(array(
             'url' => 'http://httpbin.org/status/404',
+            'ip' => false,
             'header' => true,
             'throwException' => true,
         ));
@@ -169,6 +170,7 @@ class HttpTest extends TestCase
 
         $this->http(array(
             'url' => 'http://httpbin.org/status/404',
+            'ip' => false,
             'header' => false,
             'throwException' => true,
         ));
