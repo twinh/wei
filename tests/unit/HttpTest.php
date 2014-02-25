@@ -154,14 +154,16 @@ class HttpTest extends TestCase
 
     public function testThrowException()
     {
-        $this->setExpectedException('\ErrorException', 'Not Found');
-
-        $this->http(array(
-            'url' => 'http://httpbin.org/status/404',
-            'ip' => false,
-            'header' => true,
-            'throwException' => true,
-        ));
+        try {
+            $this->http(array(
+                'url' => 'http://httpbin.org/status/404',
+                'ip' => false,
+                'header' => true,
+                'throwException' => true,
+            ));
+        } catch (\Exception $e) {
+            $this->assertEquals(strtoupper('Not Found'), strtoupper($e->getMessage()));
+        }
     }
 
     public function testHttpErrorWithoutStatusText()
