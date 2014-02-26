@@ -396,12 +396,14 @@ class HttpTest extends TestCase
     public function testUserAgent()
     {
         $test = $this;
-        $http = $this->http(array(
-            'url' => $this->url . '?test=user-agent',
+        $http = $this->wei->newInstance('http')->__invoke(array(
+            'url' => 'http://httpbin.org/user-agent',
+            'ip' => false,
             'userAgent' => 'Test',
+            'dataType' => 'json',
             'success' => function($data) use($test) {
                 $test->triggeredEvents[] = 'success';
-                $test->assertEquals('Test', $data);
+                $test->assertEquals('Test', $data['user-agent']);
             }
         ));
         $this->assertTrue($http->isSuccess());
@@ -409,11 +411,13 @@ class HttpTest extends TestCase
 
         $test->triggeredEvents = array();
         $http = $this->http(array(
-            'url' => $this->url . '?test=user-agent',
+            'url' => 'http://httpbin.org/user-agent',
+            'ip' => false,
             'userAgent' => false,
+            'dataType' => 'json',
             'success' => function($data) use($test) {
                 $test->triggeredEvents[] = 'success';
-                $test->assertEquals('', $data);
+                $test->assertEquals('', $data['user-agent']);
             }
         ));
         $this->assertTrue($http->isSuccess());
