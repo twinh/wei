@@ -429,11 +429,13 @@ class HttpTest extends TestCase
         $referer = 'http://google.com';
         $test = $this;
         $http = $this->http(array(
-            'url' => $this->url . '?test=referer',
+            'url' => 'http://httpbin.org/headers',
+            'ip' => false,
             'referer' => $referer,
+            'dataType' => 'json',
             'success' => function($data) use($test, $referer) {
                 $test->triggeredEvents[] = 'success';
-                $test->assertEquals($referer, $data);
+                $test->assertEquals($referer, $data['headers']['Referer']);
             }
         ));
         $this->assertTrue($http->isSuccess());
@@ -442,14 +444,15 @@ class HttpTest extends TestCase
 
     public function testAutoReferer()
     {
-        $url = $this->url . '?test=referer';
         $test = $this;
         $http = $this->http(array(
-            'url' => $url,
+            'url' => 'http://httpbin.org/headers',
+            'ip' => false,
             'referer' => true, // Equals to current request URL
-            'success' => function($data) use($test, $url) {
+            'dataType' => 'json',
+            'success' => function($data) use($test) {
                 $test->triggeredEvents[] = 'success';
-                $test->assertEquals($url, $data);
+                $test->assertEquals('http://httpbin.org/headers', $data['headers']['Referer']);
             }
         ));
         $this->assertTrue($http->isSuccess());
