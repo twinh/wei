@@ -182,19 +182,16 @@ class HttpTest extends TestCase
     {
         $test = $this;
         $http = $this->http(array(
-            'url' => $this->url . '?test=headers',
+            'url' => 'http://httpbin.org/headers',
+            'ip' => false,
             'dataType' => 'json',
             'headers' => array(
                 'Key' => 'Value',
-                'Key-Name' => 'Value',
-                'Key_Name' => 'Value with space' // overwrite previous header
+                'Key-Name' => 'Value with space'
             ),
             'success' => function($data, Http $http) use($test) {
-                // header set by php script
-                $test->assertEquals('value', $http->getResponseHeader('customHeader'));
-
-                $test->assertEquals('Value', $data['KEY']);
-                $test->assertEquals('Value with space', $data['KEY_NAME']);
+                $test->assertEquals('Value', $data['headers']['Key']);
+                $test->assertEquals('Value with space', $data['headers']['Key-Name']);
             }
         ));
 
