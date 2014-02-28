@@ -54,11 +54,11 @@ class Bicache extends BaseCache
         $result = $this->master->set($key, $value, $expire);
 
         if ($result && $this->needUpdate($key)) {
-            // $result is true, so return the slave cache result only
+            // $result is true, so return the slave cache result
             return $this->slave->set($key, $value, $expire);
         }
 
-        // No need to update, return mater result only
+        // No need to update, returns the master cache result
         return $result;
     }
 
