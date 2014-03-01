@@ -671,6 +671,19 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     }
 
     /**
+     * Set the HTTP request parameters value ($_POST)
+     *
+     * @param string $name
+     * @param string $value
+     * @return $this
+     */
+    public function setPost($name, $value)
+    {
+        $this->posts[$name] = $value;
+        return $this;
+    }
+
+    /**
      * Returns the HTTP request headers
      *
      * @return array
