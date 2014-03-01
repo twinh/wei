@@ -21,7 +21,7 @@ class SafeUrl extends Base
      *
      * @var string
      */
-    protected $token;
+    protected $token = 'wei';
 
     /**
      * The expire seconds of signature
