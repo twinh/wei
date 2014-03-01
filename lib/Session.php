@@ -16,13 +16,6 @@ namespace Wei;
 class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
-     * The namespace to store session data, disable on default
-     *
-     * @var string
-     */
-    protected $namespace = false;
-
-    /**
      * The session data
      *
      * @var array
@@ -67,14 +60,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
         }
 
         session_start();
-        if ($this->namespace) {
-            if (!isset($_SESSION[$this->namespace])) {
-                $_SESSION[$this->namespace] = array();
-            }
-            $this->data = &$_SESSION[$this->namespace];
-        } else {
-            $this->data = &$_SESSION;
-        }
+        $this->data = &$_SESSION;
         return $this;
     }
 
@@ -149,7 +135,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     }
 
     /**
-     * Clear session data in current namespace
+     * Clear session data
      *
      * @return $this
      */
@@ -160,7 +146,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     }
 
     /**
-     * Destroy all session data, including session in other namespaces
+     * Destroy all session data
      *
      * @return $this
      */
