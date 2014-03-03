@@ -751,7 +751,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     protected function detectBaseUrl()
     {
-        $baseUrl        = '';
+        $baseUrl        = null;
         $filename       = $this->getServer('SCRIPT_FILENAME', '');
         $scriptName     = $this->getServer('SCRIPT_NAME');
         $phpSelf        = $this->getServer('PHP_SELF');
