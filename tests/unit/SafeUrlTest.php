@@ -21,12 +21,12 @@ class SafeUrlTest extends TestCase
 
         $this->assertArrayHasKey('userId', $queries);
         $this->assertArrayHasKey('timestamp', $queries);
-        $this->assertArrayHasKey('flag', $queries);
+        $this->assertArrayHasKey('signature', $queries);
 
         $this->object->request
             ->setQuery('timestamp', $queries['timestamp'])
             ->setQuery('userId', $queries['userId'])
-            ->setQuery('flag', $queries['flag']);
+            ->setQuery('signature', $queries['signature']);
 
 
         $this->assertTrue($this->object->verify());

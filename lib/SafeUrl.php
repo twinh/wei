@@ -63,9 +63,9 @@ class SafeUrl extends Base
         $query = $this->filterKeys($query, $this->params);
         $query['timestamp'] = $time;
 
-        $flag = $this->generateToken($query);
+        $signature = $this->generateToken($query);
 
-        return $url . '&timestamp=' . $time . '&flag=' . $flag;
+        return $url . '&timestamp=' . $time . '&signature=' . $signature;
     }
 
     /**
@@ -81,10 +81,10 @@ class SafeUrl extends Base
             return false;
         }
 
-        // Remove flag parameters
+        // Remove signature parameters
         $query = $this->request->getParameterReference('get');
-        $token = $this->request->getQuery('flag');
-        unset($query['flag']);
+        $token = $this->request->getQuery('signature');
+        unset($query['signature']);
 
         $timestamp = $query['timestamp'];
 
