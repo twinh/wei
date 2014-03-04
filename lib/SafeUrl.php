@@ -101,6 +101,18 @@ class SafeUrl extends Base
     }
 
     /**
+     * Set parameter names to generate signature
+     *
+     * @param string|array $params
+     * @return $this
+     */
+    public function setParams($params)
+    {
+        $this->params = (array)$params;
+        return $this;
+    }
+
+    /**
      * Generate signature by specified array
      *
      * @param array $array
