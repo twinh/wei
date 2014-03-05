@@ -739,7 +739,7 @@ class WeChatApp extends Base
             isset($query['timestamp']) ? $query['timestamp'] : '',
             isset($query['nonce']) ? $query['nonce'] : ''
         );
-        sort($tmpArr);
+        sort($tmpArr, SORT_STRING);
         $tmpStr = sha1(implode($tmpArr));
         $this->valid = (isset($query['signature']) && $tmpStr === $query['signature']);
 
