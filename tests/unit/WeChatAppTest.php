@@ -491,6 +491,22 @@ class WeChatAppTest extends TestCase
                     'msgType' => null
                 ),
             ),
+            // Test for WeChat sort bug
+            // https://mp.weixin.qq.com/cgi-bin/readtemplate?t=news/php-sdk_tmpl&lang=zh_CN
+            array(
+                'signature=f73bdd6d07293461e27b2c3921e71df54ee1c3fc&timestamp=1393983248&nonce=1868297319',
+                '',
+                array(
+
+                ),
+            ),
+            array(
+                'signature=98cf92919c7a015019893e7967ef94972e3d0e38&timestamp=1393983225&nonce=986423648',
+                '',
+                array(
+
+                ),
+            )
         );
     }
 
