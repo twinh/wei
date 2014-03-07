@@ -45,13 +45,12 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * Start session
      *
      * @throws \RuntimeException When header has been sent
-     * @return $this
      */
     protected function start()
     {
         // If session started, ignored it
         if (session_id()) {
-            return $this;
+            return;
         }
 
         $file = $line = null;
@@ -61,7 +60,6 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
 
         session_start();
         $this->data = &$_SESSION;
-        return $this;
     }
 
     /**
