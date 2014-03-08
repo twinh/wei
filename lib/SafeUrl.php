@@ -92,12 +92,7 @@ class SafeUrl extends Base
 
         $query['timestamp'] = $timestamp;
 
-
-        if ($this->generateToken($query) == $token) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->generateToken($query) == $token;
     }
 
     /**
