@@ -48,7 +48,7 @@ class SessionTest extends TestCase
 
     protected function tearDown()
     {
-        // FIXME why sometime $this->obejct is NULL
+        // FIXME why sometime $this->object is NULL
         if ($this->object) {
             $this->object->destroy();
         }
@@ -123,5 +123,15 @@ class SessionTest extends TestCase
             array('1',      'numeric'),
             array($obj,     'object'),
         );
+    }
+
+    public function testArrayAccess()
+    {
+        $session = $this->object;
+
+        $session['a'] = array();
+        $session['a']['b'] = 'c';
+
+        $this->assertEquals('c', $session['a']['b']);
     }
 }

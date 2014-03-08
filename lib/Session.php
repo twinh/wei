@@ -198,9 +198,14 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * @param  string $offset
      * @return mixed
      */
-    public function offsetGet($offset)
+    public function &offsetGet($offset)
     {
-        return isset($this->data[$offset]) ? $this->data[$offset] : null;
+        if (isset($this->data[$offset])) {
+            return $this->data[$offset];
+        } else {
+            $ret = null;
+            return $ret;
+        }
     }
 
     /**
