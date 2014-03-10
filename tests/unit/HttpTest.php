@@ -277,12 +277,12 @@ class HttpTest extends TestCase
     {
         $test = $this;
         $http = $this->http(array(
-            'url' => $this->url . '?type=json',
+            'url' => 'http://httpbin.org/ip',
+            'ip' => false,
             'dataType' => 'jsonObject',
             'success' => function($data) use($test) {
                 $test->triggeredEvents[] = 'success';
-                $test->assertEquals(0, $data->code);
-                $test->assertEquals('success', $data->message);
+                $test->assertObjectHasAttribute('origin', $data);
             }
         ));
         $this->assertTrue($http->isSuccess());
