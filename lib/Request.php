@@ -202,7 +202,6 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     public function getInArray($name, array $array)
     {
         $value = $this->get($name);
-
         return in_array($value, $array) ? $value : $array[key($array)];
     }
 
@@ -450,7 +449,6 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
         } else {
             $port = ':' . $port;
         }
-
         return $this->getScheme() . '://' . $this->getHost() . $port;
     }
 
