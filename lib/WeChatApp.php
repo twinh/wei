@@ -87,7 +87,7 @@ class WeChatApp extends Base
      * The element values of post XML data
      *
      * Most of the available element names in post XML data
-     * common  : MsgType, FromUserName, ToUserName, MsgId, CreateTime
+     * common  : MsgType, FromUserName, ToUserName, MsgId, CreateTime, Ticket
      * text    : Content
      * image   : PicUrl
      * location: Location_X, Location_Y, Scale, Label
@@ -676,6 +676,16 @@ class WeChatApp extends Base
     public function getUrl()
     {
         return $this->getAttr('Url');
+    }
+
+    /**
+     * Returns the ticket string, available when user scan from the QR Code
+     *
+     * @return string
+     */
+    public function getTicket()
+    {
+        return $this->getAttr('Ticket');
     }
 
     /**
