@@ -689,6 +689,21 @@ class WeChatApp extends Base
     }
 
     /**
+     * Returns the text content or click event key
+     *
+     * @return bool|string
+     */
+    public function getKeyword()
+    {
+        if ($this->getMsgType() == 'text') {
+            return strtolower($this->getContent());
+        } elseif ($this->getMsgType() == 'event' && $this->getEvent() == 'click') {
+            return strtolower($this->getEventKey());
+        }
+        return false;
+    }
+
+    /**
      * Generate message for output
      *
      * @param string $type The type of message
