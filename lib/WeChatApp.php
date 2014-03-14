@@ -689,7 +689,7 @@ class WeChatApp extends Base
     }
 
     /**
-     * Returns the text content or click event key
+     * Returns the user inputted content or clicked button value
      *
      * @return bool|string
      */
