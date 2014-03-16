@@ -152,22 +152,22 @@ class WeChatApp extends Base
         }
 
         switch ($this->getMsgType()) {
-            case 'text' :
+            case 'text':
                 if ($result = $this->handleText()) {
                     return $result;
                 }
                 break;
 
             case 'event':
-                $eventRule = $this->rules['event'];
+                $eventRules = $this->rules['event'];
                 $event = strtolower($this->getEvent());
-                if (isset($eventRule[$event])
-                    && isset($eventRule[$event][$this->getEventKey()])) {
-                    return $this->handle($eventRule[$event][$this->getEventKey()]);
+                if (isset($eventRules[$event])
+                    && isset($eventRules[$event][$this->getEventKey()])) {
+                    return $this->handle($eventRules[$event][$this->getEventKey()]);
                 }
                 break;
 
-            // including location, image, voice, video and link
+            // Including location, image, voice, video and link
             default:
                 if (isset($this->rules[$this->getMsgType()])) {
                     return $this->handle($this->rules[$this->getMsgType()]);
@@ -224,6 +224,17 @@ class WeChatApp extends Base
     public function click($key, Closure $fn)
     {
         return $this->addEventRule('click', $key, $fn);
+    }
+
+    /**
+     * Attach a callback which triggered when user scan the QR Code
+     *
+     * @param Closure $fn
+     * @return $this
+     */
+    public function scan(Closure $fn)
+    {
+        return $this->addEventRule('scan', null, $fn);
     }
 
     /**
@@ -636,6 +647,16 @@ class WeChatApp extends Base
     public function getEventKey()
     {
         return $this->getAttr('EventKey');
+    }
+
+    /**
+     * Returns the scene id from the scan result, available when the message event is subscribe or scan
+     *
+     * @return string
+     */
+    public function getScanSceneId()
+    {
+        return $this->getEvent() == 'subscribe' ? substr($this->getEventKey(), 8) : $this->getEventKey();
     }
 
     /**

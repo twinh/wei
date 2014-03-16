@@ -662,4 +662,65 @@ class WeChatAppTest extends TestCase
 
         $this->assertFalse($app->run());
     }
+
+    public function providerForScan()
+    {
+        return array(
+            array(
+                // Scan after subscribe
+                'postData' => '<xml><ToUserName><![CDATA[ToUserName]]></ToUserName>
+<FromUserName><![CDATA[FromUserName]]></FromUserName>
+<CreateTime>1394729701</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[SCAN]]></Event>
+<EventKey><![CDATA[1]]></EventKey>
+<Ticket><![CDATA[gQGS8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL2FFMmtOc0hseEhpOU05YUdzR093AAIE0OAhUwMECAcAAA==]]></Ticket>
+</xml>',
+                'sceneId' => 1,
+            ),
+            array(
+                // Scan and subscribe
+                'postData' => '<xml><ToUserName><![CDATA[ToUserName]]></ToUserName>
+<FromUserName><![CDATA[FromUserName]]></FromUserName>
+<CreateTime>1394729846</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[subscribe]]></Event>
+<EventKey><![CDATA[qrscene_2]]></EventKey>
+<Ticket><![CDATA[gQGS8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL2FFMmtOc0hseEhpOU05YUdzR093AAIE0OAhUwMECAcAAA==]]></Ticket>
+</xml>',
+                'sceneId' => 2,
+            ),
+            array(
+                // subscribe
+                'postData' => '<xml><ToUserName><![CDATA[ToUserName]]></ToUserName>
+<FromUserName><![CDATA[FromUserName]]></FromUserName>
+<CreateTime>1394730389</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[subscribe]]></Event>
+<EventKey><![CDATA[]]></EventKey>
+</xml>',
+                'sceneId' => false,
+            )
+        );
+    }
+
+    /**
+     * @dataProvider providerForScan
+     */
+    public function testScan($postData, $sceneId)
+    {
+        $app = new \Wei\WeChatApp(array(
+            'wei' => $this->wei,
+            'query' => array(
+                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
+                'timestamp' => '1366032735',
+                'nonce'     => '1365872231',
+            ),
+            'postData' => $postData
+        ));
+
+        $this->assertEquals($sceneId, $app->getScanSceneId());
+
+        $app->run();
+    }
 }
