@@ -159,11 +159,29 @@ class WeChatApp extends Base
                 break;
 
             case 'event':
-                $eventRules = $this->rules['event'];
                 $event = strtolower($this->getEvent());
-                if (isset($eventRules[$event])
-                    && isset($eventRules[$event][$this->getEventKey()])) {
-                    return $this->handle($eventRules[$event][$this->getEventKey()]);
+                switch ($event) {
+                    case 'subscribe':
+                        $result = $this->handleEvent('subscribe');
+                        if ($this->getTicket()) {
+                            $result = $this->handleEvent('scan');
+                        }
+                        if ($result) {
+                            return $result;
+                        }
+                        break;
+
+                    case 'scan':
+                        if ($result = $this->handleEvent('scan')) {
+                            return $result;
+                        }
+                        break;
+
+                    default:
+                        if ($result = $this->handleEvent($event, $this->getEventKey())) {
+                            return $result;
+                        }
+                        break;
                 }
                 break;
 
@@ -824,6 +842,20 @@ class WeChatApp extends Base
 
             if ($rule['type'] == 'match' && preg_match($rule['keyword'], $content)) {
                 return $this->handle($rule['fn']);
+            }
+        }
+        return false;
+    }
+
+    protected function handleEvent($event, $eventKey = false)
+    {
+        if ($eventKey !== false) {
+            if (isset($this->rules['event'][$event][$eventKey])) {
+                return $this->handle($this->rules['event'][$event][$eventKey]);
+            }
+        } else {
+            if (isset($this->rules['event'][$event])) {
+                return $this->handle(end($this->rules['event'][$event]));
             }
         }
         return false;

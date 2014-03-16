@@ -677,6 +677,8 @@ class WeChatAppTest extends TestCase
 <Ticket><![CDATA[gQGS8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL2FFMmtOc0hseEhpOU05YUdzR093AAIE0OAhUwMECAcAAA==]]></Ticket>
 </xml>',
                 'sceneId' => 1,
+                'result' => 'scan',
+                'calledSubscribe' => false,
             ),
             array(
                 // Scan and subscribe
@@ -689,6 +691,8 @@ class WeChatAppTest extends TestCase
 <Ticket><![CDATA[gQGS8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL2FFMmtOc0hseEhpOU05YUdzR093AAIE0OAhUwMECAcAAA==]]></Ticket>
 </xml>',
                 'sceneId' => 2,
+                'result' => 'scan',
+                'calledSubscribe' => true,
             ),
             array(
                 // subscribe
@@ -700,6 +704,8 @@ class WeChatAppTest extends TestCase
 <EventKey><![CDATA[]]></EventKey>
 </xml>',
                 'sceneId' => false,
+                'result' => 'subscribe',
+                'calledSubscribe' => true,
             )
         );
     }
@@ -707,8 +713,9 @@ class WeChatAppTest extends TestCase
     /**
      * @dataProvider providerForScan
      */
-    public function testScan($postData, $sceneId)
+    public function testScan($postData, $sceneId, $result, $calledSubscribe)
     {
+        $test = $this;
         $app = new \Wei\WeChatApp(array(
             'wei' => $this->wei,
             'query' => array(
@@ -719,8 +726,29 @@ class WeChatAppTest extends TestCase
             'postData' => $postData
         ));
 
+        $subscribeFlag = false;
+
         $this->assertEquals($sceneId, $app->getScanSceneId());
 
-        $app->run();
+        $app->subscribe(function() use(&$subscribeFlag) {
+            $subscribeFlag = true;
+            return 'subscribe';
+        });
+
+        $app->scan(function(WeChatApp $app) use($test, $sceneId) {
+            $test->assertEquals($sceneId, $app->getScanSceneId());
+            return 'scan';
+        });
+
+        $app->defaults(function(){
+            return 'This is the default message';
+        });
+
+        $resultXml = $app->run();
+
+        $this->assertNotContains('This is the default message', $resultXml);
+        $this->assertContains($result, $resultXml);
+
+        $this->assertSame($calledSubscribe, $subscribeFlag);
     }
 }
