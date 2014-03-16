@@ -1,6 +1,16 @@
 Changelog
 =========
 
+## 0.9.13 (2014-03-16)
+
+* Added $returnFields parameters for toJson method
+* Fixed saveColl error when record id conflict with array key
+* Added setQuery, setPost methods for request service
+* Removes session namespace options
+* Fixed WeChat sort bug
+* Added getTicket, getKeyword, getScanSceneId methods for weChatApp service
+* Added scan and subscribe support for weChatApp service
+
 ## 0.9.12 (2014-02-13)
 
 * Add "detach" support for record class, refs #164
@@ -35,7 +45,7 @@ Changelog
 
 ## 0.9.9 (2014-01-08)
 
-* Do not output libxml error messages to screen in weChatApp service, refs #153 
+* Do not output libxml error messages to screen in weChatApp service, refs #153
 
 ## 0.9.9-RC (2014-01-05)
 
@@ -348,7 +358,7 @@ Changelog
 * Moved debug configuration to service class
 * Added [FieldExists](lib/Widget/Validator/FieldExists.php) validator
 * Removed WidgetInterface, ViewInterface, CacheInterface and ArrayWidget class, make it more esay
-* Integrated with [Coveralls](https://coveralls.io/‎), and [Codeship](https://www.codeship.io/)
+* Integrated with [Coveralls](https://coveralls.io/?), and [Codeship](https://www.codeship.io/)
 * Refactored [cookie](lib/Widget/Cookie.php) and [response](lib/Widget/Response.php) services
 * Added more tests and improved more documentation
 
