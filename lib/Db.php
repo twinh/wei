@@ -753,6 +753,19 @@ class Db extends Base
     }
 
     /**
+     * Set the record class for specified table
+     *
+     * @param string $table
+     * @param string $class
+     * @return $this
+     */
+    public function addRecordClass($table, $class)
+    {
+        $this->recordClasses[$table] = $class;
+        return $this;
+    }
+
+    /**
      * Returns the record class name of table
      *
      * @param string $table The name of table
