@@ -233,7 +233,7 @@ class FileCache extends BaseCache
             ($e = error_get_last()) && $message .= ': ' . $e['message'];
             throw new \RuntimeException($message);
         }
-        $this->dir = $dir;
+        $this->dir = realpath($dir);
         return $this;
     }
 
