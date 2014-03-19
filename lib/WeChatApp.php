@@ -736,7 +736,7 @@ class WeChatApp extends Base
     {
         if ($this->getMsgType() == 'text') {
             return strtolower($this->getContent());
-        } elseif ($this->getMsgType() == 'event' && $this->getEvent() == 'click') {
+        } elseif ($this->getMsgType() == 'event' && strtolower($this->getEvent()) == 'click') {
             return strtolower($this->getEventKey());
         }
         return false;
