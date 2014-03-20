@@ -272,6 +272,13 @@ namespace Wei
         protected $configs = array();
 
         /**
+         * The name of current application
+         *
+         * @var string
+         */
+        protected $name;
+
+        /**
          * Whether in debug mode or not
          *
          * @var bool
@@ -875,6 +882,28 @@ namespace Wei
             }
 
             return $this;
+        }
+
+        /**
+         * Set the name of current application
+         *
+         * @param string $name
+         * @return $this
+         */
+        public function setName($name)
+        {
+            $this->name = $name;
+            return $this;
+        }
+
+        /**
+         * Returns the name of current application
+         *
+         * @return string
+         */
+        public function getName()
+        {
+            return $this->name;
         }
 
         /**
