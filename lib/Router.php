@@ -192,6 +192,7 @@ class Router extends Base
     public function match($pathInfo, $method = null)
     {
         $pathInfo = rtrim($pathInfo, '/');
+        !$pathInfo && $pathInfo = '/';
         foreach ($this->routes as $id => $route) {
             if (false !== ($parameters = $this->matchRoute($pathInfo, $method, $id))) {
                 return $parameters;
