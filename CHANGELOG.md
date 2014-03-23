@@ -1,6 +1,13 @@
 Changelog
 =========
 
+## 0.9.14
+
+* Use full dir in file cache service
+* Added addRecordClass method for db service
+* Fixed weChatApp service getKeyword method return false when event key is "CLICK"
+* Added name property for service container
+
 ## 0.9.13 (2014-03-16)
 
 * Added $returnFields parameters for toJson method
