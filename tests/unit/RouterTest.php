@@ -344,7 +344,7 @@ class RouterTest extends TestCase
         ), 'blogList'));
     }
 
-    public function testNoRuleMatchd()
+    public function testNoRuleMatched()
     {
         $router = $this->object;
 
