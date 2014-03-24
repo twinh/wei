@@ -45,14 +45,14 @@ Define the following requirement in your `composer.json` file and run `php compo
 ```json
 {
     "require": {
-        "wei/wei": "0.9.13"
+        "wei/wei": "0.9.14"
     }
 }
 ```
 
 ### Download source code
 
-* [Stable Version](https://github.com/twinh/wei/archive/v0.9.13.zip)
+* [Stable Version](https://github.com/twinh/wei/archive/v0.9.14.zip)
 * [Develop Version](https://github.com/twinh/wei/archive/master.zip)
 
 ## Resources

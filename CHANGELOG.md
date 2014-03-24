@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## 0.9.14
+## 0.9.14 (2014-03-24)
 
 * Use full dir in file cache service
 * Added addRecordClass method for db service
