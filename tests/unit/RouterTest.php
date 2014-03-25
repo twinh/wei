@@ -422,63 +422,6 @@ class RouterTest extends TestCase
         $this->object->set(new \stdClass());
     }
 
-    public function testRestRouter()
-    {
-        $router = $this->object;
-
-        $router->get('/', function(){
-            return 'index';
-        });
-
-        $router->get('/docs', function(){
-            return 'docs';
-        });
-
-        $router->get('/docs/<name>', function($wei, $name){
-            return $name;
-        });
-
-        $router->get('/feedback', function(){
-            return 'write please';
-        });
-
-        $router->post('/feedback', function(){
-            return 'thanks';
-        });
-
-        $router->put('/article', function(){
-           return 'put';
-        });
-
-        $router->delete('/article', function(){
-            return 'delete';
-        });
-
-        $router->request('/page', function(){
-            return 'page';
-        });
-
-        $this->assertContains('index', $this->getRouterOutput('/'));
-
-        $this->assertContains('docs', $this->getRouterOutput('/docs'));
-
-        $this->assertContains('test-of-router', $this->getRouterOutput('/docs/test-of-router'));
-
-        $this->assertContains('write please', $this->getRouterOutput('/feedback'));
-
-        $this->assertContains('write please', $this->getRouterOutput('/feedback', 'GET'));
-
-        $this->assertContains('thanks', $this->getRouterOutput('/feedback', 'POST'));
-
-        $this->assertContains('put', $this->getRouterOutput('/article', 'PUT'));
-
-        $this->assertContains('delete', $this->getRouterOutput('/article', 'DELETE|POST'));
-
-        foreach (array('GET', 'POST', 'PUT', 'DELETE') as $method) {
-            $this->assertContains('page', $this->getRouterOutput('/page', $method));
-        }
-    }
-
     /**
      * @expectedException \RuntimeException
      */
