@@ -657,6 +657,16 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     }
 
     /**
+     * Return the URL query parameter values ($_GET)
+     *
+     * @return array
+     */
+    public function &getQueries()
+    {
+        return $this->gets;
+    }
+
+    /**
      * Return the HTTP request parameters value ($_POST)
      *
      * @param string $name The name of parameter
