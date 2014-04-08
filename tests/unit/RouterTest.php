@@ -434,20 +434,6 @@ class RouterTest extends TestCase
         $router('/pages');
     }
 
-    public function testPathInfoAndMethodFromRequest()
-    {
-        $router = $this->object;
-
-        $this->request->setPathInfo('/');
-        $this->request->setMethod('GET');
-
-        $router->get('/', function(){
-            return 'index';
-        });
-
-        $this->assertContains('index', $this->getRouterOutput());
-    }
-
     public function testControllerActionRoute()
     {
         $router = $this->object;
