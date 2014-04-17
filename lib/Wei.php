@@ -948,6 +948,16 @@ namespace Wei
                 $this->set($service, $this->get($service));
             }
         }
+
+        /**
+         * Merge service objects
+         *
+         * @param array $services
+         */
+        protected function setServices(array $services)
+        {
+            $this->services = $services + $this->services;
+        }
     }
 }
 
