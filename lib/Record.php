@@ -1517,17 +1517,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             . ($parts['having'] !== null ? ' HAVING ' . ((string)$parts['having']) : '');
 
         if (false === $count) {
-            if ($parts['orderBy'] !== null) {
-                $query .= ' ORDER BY ' . implode(', ', $parts['orderBy']);
-            }
-
-            if ($parts['limit'] !== null) {
-                $query .= ' LIMIT ' . $parts['limit'];
-            }
-
-            if ($parts['offset'] !== null) {
-                $query .= ' OFFSET ' . $parts['offset'];
-            }
+            $query .= ($parts['orderBy'] ? ' ORDER BY ' . implode(', ', $parts['orderBy']) : '')
+                . ($parts['limit'] !== null ? ' LIMIT ' . $parts['limit'] : '')
+                . ($parts['offset'] !== null ? ' OFFSET ' . $parts['offset'] : '');
         }
 
         return $query;
