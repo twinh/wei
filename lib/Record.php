@@ -1514,10 +1514,13 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
         $query .= ($parts['where'] !== null ? ' WHERE ' . ((string)$parts['where']) : '')
             . ($parts['groupBy'] ? ' GROUP BY ' . implode(', ', $parts['groupBy']) : '')
-            . ($parts['having'] !== null ? ' HAVING ' . ((string)$parts['having']) : '')
-            . ($parts['orderBy'] ? ' ORDER BY ' . implode(', ', $parts['orderBy']) : '');
+            . ($parts['having'] !== null ? ' HAVING ' . ((string)$parts['having']) : '');
 
         if (false === $count) {
+            if ($parts['orderBy'] !== null) {
+                $query .= ' ORDER BY ' . implode(', ', $parts['orderBy']);
+            }
+
             if ($parts['limit'] !== null) {
                 $query .= ' LIMIT ' . $parts['limit'];
             }
