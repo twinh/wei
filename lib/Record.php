@@ -943,7 +943,13 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function count($conditions = false)
     {
         $this->andWhere($conditions);
-        return (int)$this->db->fetchColumn($this->getSqlForCount(), $this->params);
+
+        $select = $this->sqlParts['select'];
+        $this->select('COUNT(1)');
+        $count = (int)$this->db->fetchColumn($this->getSqlForSelect(true), $this->params);
+        $this->sqlParts['select'] = $select;
+
+        return $count;
     }
 
     /**
