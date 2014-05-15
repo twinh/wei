@@ -23,6 +23,8 @@ namespace Wei;
  *
  * @method      bool isIPhone() Check if the user is browsing by iPhone/iPod
  * @method      bool isIPad() Check if the user is browsing by iPad
+ *
+ * @method      bool isWeChat() Check if the user is browsing in WeChat App
  */
 class Ua extends Base
 {
@@ -39,7 +41,10 @@ class Ua extends Base
 
         // Device (Mobile & Tablet)
         'iphone'        => 'iPhone OS ([\d_]+)',
-        'ipad'          => 'iPad.*OS ([\d_]+)'
+        'ipad'          => 'iPad.*OS ([\d_]+)',
+
+        // App
+        'wechat'        => 'MicroMessenger',
     );
 
     /**
