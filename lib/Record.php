@@ -939,14 +939,15 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Execute a COUNT query to receive the rows number
      *
      * @param mixed $conditions
+     * @param string $count The argument for SQL COUNT method
      * @return int
      */
-    public function count($conditions = false)
+    public function count($conditions = false, $count = '1')
     {
         $this->andWhere($conditions);
 
         $select = $this->sqlParts['select'];
-        $this->select('COUNT(1)');
+        $this->select('COUNT(' . $count . ')');
         $count = (int)$this->db->fetchColumn($this->getSqlForSelect(true), $this->params);
         $this->sqlParts['select'] = $select;
 
