@@ -1348,6 +1348,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected function executeIndexBy($data, $field)
     {
+        if (!$data) {
+            return $data;
+        }
+
         if (!array_key_exists($field, $data[0]) && !($data[0] instanceof \ArrayAccess && $data[0]->offsetExists($field))) {
             throw new \RuntimeException(sprintf('Index field "%s" not found in fetched data', $field));
         }
