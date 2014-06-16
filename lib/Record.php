@@ -798,8 +798,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function find($conditions = false)
     {
         $this->isColl = false;
-        $this->andWhere($conditions);
-        $data = $this->fetch();
+        $data = $this->fetch($conditions);
         if ($data) {
             $this->data = $data + $this->data;
             $this->trigger('afterFind');
@@ -859,7 +858,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function findAll($conditions = false)
     {
         $this->isColl = true;
-        $this->andWhere($conditions);
         $data = $this->fetchAll();
 
         $records = array();
@@ -910,10 +908,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Executes the generated query and returns the first array result
      *
+     * @param mixed $conditions
      * @return array|false
      */
-    public function fetch()
+    public function fetch($conditions = false)
     {
+        $this->andWhere($conditions);
         $this->limit(1);
         $data = $this->execute();
         return $data ? $data[0] : false;
@@ -922,11 +922,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Executes the generated query and returns all array results
      *
-     * @throws \RuntimeException When index field not in fetched data
+     * @param mixed $conditions
      * @return array|false
      */
-    public function fetchAll()
+    public function fetchAll($conditions = false)
     {
+        $this->andWhere($conditions);
         $data = $this->execute();
         if ($this->indexBy) {
             $data = $this->executeIndexBy($data, $this->indexBy);
@@ -1348,10 +1349,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected function executeIndexBy($data, $field)
     {
-        if (!$data) {
-            return $data;
-        }
-
         if (!array_key_exists($field, $data[0]) && !($data[0] instanceof \ArrayAccess && $data[0]->offsetExists($field))) {
             throw new \RuntimeException(sprintf('Index field "%s" not found in fetched data', $field));
         }
