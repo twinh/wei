@@ -36,16 +36,18 @@ wei()->http(array(
 ));
 ```
 
-### 通过切换IP地址实现负载均衡
+### 通过切换IP地址简单实现负载均衡
 
 ```php
+$ips = array(
+    '74.125.128.147',
+    '74.125.128.105'
+);
+
 $http = wei()->http(array(
     'url' => 'http://google.com',
     // 随机使用其中一个IP地址
-    'ip' => array_rand(array(
-        '74.125.128.147',
-        '74.125.128.105'
-    ))
+    'ip' => $ips[array_rand($ips)]
 ));
 ```
 
