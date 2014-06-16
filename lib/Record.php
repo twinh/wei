@@ -858,7 +858,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function findAll($conditions = false)
     {
         $this->isColl = true;
-        $data = $this->fetchAll();
+        $data = $this->fetchAll($conditions);
 
         $records = array();
         foreach ($data as $key => $row) {
