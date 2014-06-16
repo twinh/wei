@@ -989,6 +989,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
+     * Execute a delete query with specified conditions
+     *
      * @param mixed $conditions
      * @return mixed
      */
