@@ -674,7 +674,11 @@ class WeChatApp extends Base
      */
     public function getScanSceneId()
     {
-        return $this->getEvent() == 'subscribe' ? substr($this->getEventKey(), 8) : $this->getEventKey();
+        $eventKey = $this->getEventKey();
+        if (strpos($eventKey, 'qrscene_') === 0) {
+            $eventKey = substr($eventKey, 8);
+        }
+        return $eventKey;
     }
 
     /**
