@@ -29,7 +29,14 @@ class Lock extends Base
     public function __construct(array $options = array())
     {
         parent::__construct($options);
+
         register_shutdown_function(array($this, 'releaseAll'));
+
+        // Release all lock and exist when catch signal in CLI
+        if (function_exists('pcntl_signal')) {
+            pcntl_signal(SIGINT, array($this, 'catchSignal'));
+            pcntl_signal(SIGTERM, array($this, 'catchSignal'));
+        }
     }
 
     /**
@@ -57,7 +64,7 @@ class Lock extends Base
     public function release($key)
     {
         if ($this->cache->remove($key)) {
-            if(($index = array_search($key, $this->keys)) !== false) {
+            if (($index = array_search($key, $this->keys)) !== false) {
                 unset($this->keys[$index]);
             }
             return true;
@@ -74,5 +81,14 @@ class Lock extends Base
         foreach ($this->keys as $key) {
             $this->release($key);
         }
+    }
+
+    /**
+     * Release all lock keys and exit
+     */
+    public function catchSignal()
+    {
+        $this->releaseAll();
+        exit;
     }
 }

@@ -798,8 +798,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function find($conditions = false)
     {
         $this->isColl = false;
-        $this->andWhere($conditions);
-        $data = $this->fetch();
+        $data = $this->fetch($conditions);
         if ($data) {
             $this->data = $data + $this->data;
             $this->trigger('afterFind');
@@ -859,8 +858,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function findAll($conditions = false)
     {
         $this->isColl = true;
-        $this->andWhere($conditions);
-        $data = $this->fetchAll();
+        $data = $this->fetchAll($conditions);
 
         $records = array();
         foreach ($data as $key => $row) {
@@ -910,10 +908,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Executes the generated query and returns the first array result
      *
+     * @param mixed $conditions
      * @return array|false
      */
-    public function fetch()
+    public function fetch($conditions = false)
     {
+        $this->andWhere($conditions);
         $this->limit(1);
         $data = $this->execute();
         return $data ? $data[0] : false;
@@ -922,11 +922,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Executes the generated query and returns all array results
      *
-     * @throws \RuntimeException When index field not in fetched data
+     * @param mixed $conditions
      * @return array|false
      */
-    public function fetchAll()
+    public function fetchAll($conditions = false)
     {
+        $this->andWhere($conditions);
         $data = $this->execute();
         if ($this->indexBy) {
             $data = $this->executeIndexBy($data, $this->indexBy);
@@ -938,14 +939,15 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Execute a COUNT query to receive the rows number
      *
      * @param mixed $conditions
+     * @param string $count The argument for SQL COUNT method
      * @return int
      */
-    public function count($conditions = false)
+    public function count($conditions = false, $count = '1')
     {
         $this->andWhere($conditions);
 
         $select = $this->sqlParts['select'];
-        $this->select('COUNT(1)');
+        $this->select('COUNT(' . $count . ')');
         $count = (int)$this->db->fetchColumn($this->getSqlForSelect(true), $this->params);
         $this->sqlParts['select'] = $select;
 
@@ -987,6 +989,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
+     * Execute a delete query with specified conditions
+     *
      * @param mixed $conditions
      * @return mixed
      */
