@@ -1,10 +1,10 @@
 <?php
 /**
-* Wei Framework
-*
-* @copyright   Copyright (c) 2008-2013 Twin Huang
-* @license     http://opensource.org/licenses/mit-license.php MIT License
-*/
+ * Wei Framework
+ *
+ * @copyright   Copyright (c) 2008-2013 Twin Huang
+ * @license     http://opensource.org/licenses/mit-license.php MIT License
+ */
 
 namespace Wei;
 
@@ -37,7 +37,7 @@ class Asset extends Base
     protected $version = '1';
 
     /**
-     * Returns the asset URL by specified file
+     * Returns the asset or concat URL by specified file
      *
      * @param string $file
      * @param bool $version Whether append version or not
@@ -45,11 +45,15 @@ class Asset extends Base
      */
     public function __invoke($file, $version = true)
     {
-        $url = $this->baseUrl . $file;
-        if ($version && $this->version) {
-            $url .= ((false === strpos($url, '?')) ? '?' : '&') . 'v=' . $this->version;
+        if (is_array($file)) {
+            return $this->concat($file);
+        } else {
+            $url = $this->baseUrl . $file;
+            if ($version && $this->version) {
+                $url .= ((false === strpos($url, '?')) ? '?' : '&') . 'v=' . $this->version;
+            }
+            return $url;
         }
-        return $url;
     }
 
     /**
