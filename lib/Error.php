@@ -232,7 +232,7 @@ class Error extends Base
         try {
             // The flowing services may throw exception too
             $this->response->setStatusCode($code)->send();
-            $this->logger->log($level, (string)$exception);
+            $this->logger->log($level, $exception);
 
             $this->renderException($exception, $debug);
         } catch (\Exception $e) {

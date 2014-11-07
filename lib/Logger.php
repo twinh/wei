@@ -168,7 +168,15 @@ class Logger extends Base
      */
     protected function formatLog($level, $message, array $context = array())
     {
-        if (is_array($message)) {
+        if ($message instanceof \Exception) {
+            $context += array(
+                'code' => $message->getCode(),
+                'file' => $message->getFile(),
+                'line' => $message->getLine(),
+                'trace' => $message->getTraceAsString(),
+            );
+            $message = $message->getMessage();
+        } elseif (is_array($message)) {
             $message = print_r($message, true);
         } else {
             $message = (string)$message;
