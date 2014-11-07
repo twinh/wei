@@ -167,4 +167,15 @@ class LoggerTest extends TestCase
         $this->assertContains('key', $content);
         $this->assertContains('value', $content);
     }
+
+    public function testLogWithExceptionMessage()
+    {
+        $e = new \Exception('test exception');
+        $this->logger->error($e);
+
+        $content = file_get_contents($this->logger->getFile());
+
+        $this->assertContains('test exception', $content);
+        $this->assertContains('[file] => ' . __FILE__, $content);
+    }
 }
