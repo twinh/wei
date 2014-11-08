@@ -254,7 +254,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $this->changedData = array();
         $this->isChanged = false;
 
-        $this->trigger('afterLoad');
+        $this->triggerCallback('afterLoad');
     }
 
     /**
@@ -367,8 +367,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
             // 2.1.2 Triggers before callbacks
             $isNew = $this->isNew;
-            $this->trigger('beforeSave');
-            $this->trigger($isNew ? 'beforeCreate' : 'beforeUpdate');
+            $this->triggerCallback('beforeSave');
+            $this->triggerCallback($isNew ? 'beforeCreate' : 'beforeUpdate');
 
             // 2.1.3.1 Inserts new record
             if ($isNew) {
@@ -401,8 +401,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             $this->isChanged = false;
 
             // 2.1.5. Triggers after callbacks
-            $this->trigger($isNew ? 'afterCreate' : 'afterUpdate');
-            $this->trigger('afterSave');
+            $this->triggerCallback($isNew ? 'afterCreate' : 'afterUpdate');
+            $this->triggerCallback('afterSave');
         // 2.2 Loop and save collection records
         } else {
             foreach ($this->data as $record) {
@@ -425,10 +425,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         !$this->loaded && $this->loadData(0);
 
         if (!$this->isColl) {
-            $this->trigger('beforeDestroy');
+            $this->triggerCallback('beforeDestroy');
             $this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
             $this->isDestroyed = true;
-            $this->trigger('afterDestroy');
+            $this->triggerCallback('afterDestroy');
         } else {
             foreach ($this->data as $record) {
                 $record->destroy();
@@ -448,7 +448,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $this->data = (array)$this->db->select($this->table, $this->get($this->primaryKey));
         $this->changedData = array();
         $this->isChanged = false;
-        $this->trigger('afterLoad');
+        $this->triggerCallback('afterLoad');
         return $this;
     }
 
@@ -801,7 +801,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $data = $this->fetch($conditions);
         if ($data) {
             $this->data = $data + $this->data;
-            $this->trigger('afterFind');
+            $this->triggerCallback('afterFind');
             return $this;
         } else {
             return false;
@@ -864,7 +864,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         foreach ($data as $key => $row) {
             /** @var $records Record[] */
             $records[$key] = $this->db->init($this->table, $row, false);
-            $records[$key]->trigger('afterFind');
+            $records[$key]->triggerCallback('afterFind');
         }
 
         $this->data = $records;
@@ -1753,7 +1753,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @param string $name
      */
-    protected function trigger($name)
+    protected function triggerCallback($name)
     {
         $this->$name();
         $this->$name && call_user_func($this->$name, $this, $this->wei);
