@@ -16,6 +16,13 @@ namespace Wei;
 class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
+     * The namespace to store session data
+     *
+     * @var string|false
+     */
+    protected $namespace = false;
+
+    /**
      * The session data
      *
      * @var array
@@ -46,20 +53,24 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      *
      * @throws \RuntimeException When header has been sent
      */
-    protected function start()
+    public function start()
     {
-        // If session started, ignored it
-        if (session_id()) {
-            return;
+        if (!session_id()) {
+            $file = $line = null;
+            if (headers_sent($file, $line)) {
+                throw new \RuntimeException(sprintf('Unable to start session, output started at %s:%s', $file, $line));
+            }
+            session_start();
         }
 
-        $file = $line = null;
-        if (headers_sent($file, $line)) {
-            throw new \RuntimeException(sprintf('Unable to start session, output started at %s:%s', $file, $line));
+        if ($this->namespace) {
+            if (!isset($_SESSION[$this->namespace])) {
+                $_SESSION[$this->namespace] = array();
+            }
+            $this->data = &$_SESSION[$this->namespace];
+        } else {
+            $this->data = &$_SESSION;
         }
-
-        session_start();
-        $this->data = &$_SESSION;
     }
 
     /**

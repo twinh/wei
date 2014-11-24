@@ -134,4 +134,15 @@ class SessionTest extends TestCase
 
         $this->assertEquals('c', $session['a']['b']);
     }
+
+    public function testNamespace()
+    {
+        $this->session->setOption('namespace', 'test');
+        $this->session->start();
+
+        $this->session('k', 'v');
+        $this->assertEquals('v', $this->session('k'));
+        $this->assertArrayNotHasKey('k', $_SESSION);
+        $this->assertArrayHasKey('test', $_SESSION);
+    }
 }
