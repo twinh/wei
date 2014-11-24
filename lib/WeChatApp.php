@@ -875,14 +875,17 @@ class WeChatApp extends Base
     {
         $this->handled = true;
 
+        // Converts string to array
         $content = $fn($this, $this->wei);
-        if (!is_array($content)) {
+        if ($content && !is_array($content)) {
             $content = $this->sendText($content);
         }
 
         $this->beforeSend && call_user_func_array($this->beforeSend, array($this, &$content, $this->wei));
 
-        return $this->arrayToXml($content)->asXML();
+        // Returns empty string if no response
+        // http://mp.weixin.qq.com/wiki/index.php?title=%E5%8F%91%E9%80%81%E8%A2%AB%E5%8A%A8%E5%93%8D%E5%BA%94%E6%B6%88%E6%81%AF
+        return $content ? $this->arrayToXml($content)->asXML() : '';
     }
 
     /**

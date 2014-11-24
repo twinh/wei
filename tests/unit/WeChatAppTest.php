@@ -636,6 +636,28 @@ class WeChatAppTest extends TestCase
         $this->assertFalse($result);
     }
 
+    public function testNotHandleInDefault()
+    {
+        $app = new \Wei\WeChatApp(array(
+            'wei' => $this->wei,
+            'query' => array(
+                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
+                'timestamp' => '1366032735',
+                'nonce'     => '1365872231',
+            ),
+            'postData' => $this->inputTextMessage('test')
+        ));
+
+        $app->defaults(function() {
+
+        });
+
+        // Execute and parse result
+        $result = $app->run();
+
+        $this->assertEmpty($result);
+    }
+
     public function testHasEventButNotMatch()
     {
         $app = new \Wei\WeChatApp(array(
