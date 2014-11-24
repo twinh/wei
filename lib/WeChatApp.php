@@ -876,7 +876,7 @@ class WeChatApp extends Base
         $this->handled = true;
 
         // Converts string to array
-        $content = $fn($this, $this->wei);
+        $content = $fn($this, $this->wei) ?: array();
         if ($content && !is_array($content)) {
             $content = $this->sendText($content);
         }
