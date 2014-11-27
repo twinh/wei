@@ -1723,7 +1723,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Load record by array offset
      *
      * @param int|string $offset
-     * @return false|Record
      */
     protected function loadData($offset)
     {
