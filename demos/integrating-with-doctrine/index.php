@@ -60,4 +60,4 @@ $orm->flush();
 $user = $orm->find('Entity\User', 1);
 
 // Display user data
-var_dump($user);exit;
+var_dump($user);
