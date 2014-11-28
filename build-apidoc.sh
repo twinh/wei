@@ -1,1 +1,0 @@
-apigen --source /wei/lib/Wei/ --destination ./apidoc --title "Wei Framework"
