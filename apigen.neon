@@ -1,4 +1,5 @@
 destination: ./apidoc
 source:
 	- ../wei/lib/
+	
 title: Wei Framework
