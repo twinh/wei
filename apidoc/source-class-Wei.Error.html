@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 2.8.0" />
-	<meta name="robots" content="noindex" />
+	<meta charset="utf-8">
+	<meta name="robots" content="noindex">
 
-	<title>File Error.php | Wei Framework</title>
+	<title>File Error.php</title>
 
-	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?3712690943"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+	<link rel="stylesheet" href="resources/style.css?331665766">
 
 </head>
 
@@ -20,21 +17,34 @@
 
 
 		<div id="groups">
-			<h3>Namespaces</h3>
+				<h3>Namespaces</h3>
 			<ul>
-				<li><a href="namespace-None.html">None</a>
+				<li>
+					<a href="namespace-None.html">
+						None					</a>
+
 						</li>
-				<li><a href="namespace-PHP.html">PHP</a>
+				<li>
+					<a href="namespace-PHP.html">
+						PHP					</a>
+
 						</li>
-				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
+				<li class="active">
+					<a href="namespace-Wei.html">
+						Wei<span></span>
+					</a>
+
 						<ul>
-				<li><a href="namespace-Wei.Validator.html">Validator</a>
+				<li>
+					<a href="namespace-Wei.Validator.html">
+						Validator					</a>
+
 						</li>
 							</ul></li>
 			</ul>
 		</div>
 
-		<hr />
+		<hr>
 
 
 		<div id="elements">
@@ -48,20 +58,18 @@
 				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
 				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
 				<li><a href="class-Wei.Cache.html">Cache</a></li>
-				<li><a href="class-Wei.Call.html">Call</a></li>
 				<li><a href="class-Wei.Config.html">Config</a></li>
-				<li><a href="class-Wei.Controller.html">Controller</a></li>
 				<li><a href="class-Wei.Cookie.html">Cookie</a></li>
 				<li><a href="class-Wei.Couchbase.html">Couchbase</a></li>
 				<li><a href="class-Wei.Counter.html">Counter</a></li>
-				<li><a href="class-Wei.Csrf.html">Csrf</a></li>
 				<li><a href="class-Wei.Db.html">Db</a></li>
 				<li><a href="class-Wei.DbCache.html">DbCache</a></li>
+				<li><a href="class-Wei.E.html">E</a></li>
 				<li><a href="class-Wei.Env.html">Env</a></li>
 				<li class="active"><a href="class-Wei.Error.html">Error</a></li>
-				<li><a href="class-Wei.Escape.html">Escape</a></li>
 				<li><a href="class-Wei.FileCache.html">FileCache</a></li>
 				<li><a href="class-Wei.Gravatar.html">Gravatar</a></li>
+				<li><a href="class-Wei.Http.html">Http</a></li>
 				<li><a href="class-Wei.Lock.html">Lock</a></li>
 				<li><a href="class-Wei.Logger.html">Logger</a></li>
 				<li><a href="class-Wei.Memcache.html">Memcache</a></li>
@@ -71,12 +79,13 @@
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
 				<li><a href="class-Wei.Record.html">Record</a></li>
-				<li><a href="class-Wei.Redirect.html">Redirect</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
 				<li><a href="class-Wei.Request.html">Request</a></li>
 				<li><a href="class-Wei.Response.html">Response</a></li>
 				<li><a href="class-Wei.Router.html">Router</a></li>
+				<li><a href="class-Wei.SafeUrl.html">SafeUrl</a></li>
 				<li><a href="class-Wei.Session.html">Session</a></li>
+				<li><a href="class-wei.Soap.html">Soap</a></li>
 				<li><a href="class-Wei.T.html">T</a></li>
 				<li><a href="class-Wei.Ua.html">Ua</a></li>
 				<li><a href="class-Wei.Upload.html">Upload</a></li>
@@ -101,10 +110,9 @@
 <div id="right">
 <div id="rightInner">
 	<form id="search">
-		<input type="hidden" name="cx" value="" />
-		<input type="hidden" name="ie" value="UTF-8" />
-		<input type="text" name="q" class="text" />
-		<input type="submit" value="Search" />
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
 	</form>
 
 	<div id="navigation">
@@ -222,7 +230,7 @@
 </span><span id="92" class="l"><a class="l" href="#92"> 92: </a>    <span class="php-comment">/**
 </span></span><span id="93" class="l"><a class="l" href="#93"> 93: </a><span class="php-comment">     * Attach a handler to not found error
 </span></span><span id="94" class="l"><a class="l" href="#94"> 94: </a><span class="php-comment">     *
-</span></span><span id="95" class="l"><a class="l" href="#95"> 95: </a><span class="php-comment">     * @param callback $fn The error handler
+</span></span><span id="95" class="l"><a class="l" href="#95"> 95: </a><span class="php-comment">     * @param callable $fn The error handler
 </span></span><span id="96" class="l"><a class="l" href="#96"> 96: </a><span class="php-comment">     * @return $this
 </span></span><span id="97" class="l"><a class="l" href="#97"> 97: </a><span class="php-comment">     */</span>
 </span><span id="98" class="l"><a class="l" href="#98"> 98: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_notFound" href="#_notFound">notFound</a>(<span class="php-var">$fn</span>)
@@ -234,7 +242,7 @@
 </span><span id="104" class="l"><a class="l" href="#104">104: </a>    <span class="php-comment">/**
 </span></span><span id="105" class="l"><a class="l" href="#105">105: </a><span class="php-comment">     * Attach a handler to fatal error
 </span></span><span id="106" class="l"><a class="l" href="#106">106: </a><span class="php-comment">     *
-</span></span><span id="107" class="l"><a class="l" href="#107">107: </a><span class="php-comment">     * @param callback $fn The error handler
+</span></span><span id="107" class="l"><a class="l" href="#107">107: </a><span class="php-comment">     * @param callable $fn The error handler
 </span></span><span id="108" class="l"><a class="l" href="#108">108: </a><span class="php-comment">     * @return $this
 </span></span><span id="109" class="l"><a class="l" href="#109">109: </a><span class="php-comment">     */</span>
 </span><span id="110" class="l"><a class="l" href="#110">110: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_fatal" href="#_fatal">fatal</a>(<span class="php-var">$fn</span>)
@@ -306,165 +314,203 @@
 </span></span><span id="176" class="l"><a class="l" href="#176">176: </a><span class="php-comment">     * @param string $type The type of error handlers
 </span></span><span id="177" class="l"><a class="l" href="#177">177: </a><span class="php-comment">     * @param \Exception $exception
 </span></span><span id="178" class="l"><a class="l" href="#178">178: </a><span class="php-comment">     * @return bool
-</span></span><span id="179" class="l"><a class="l" href="#179">179: </a><span class="php-comment">     * @internal description
-</span></span><span id="180" class="l"><a class="l" href="#180">180: </a><span class="php-comment">     */</span>
-</span><span id="181" class="l"><a class="l" href="#181">181: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_triggerHandler" href="#_triggerHandler">triggerHandler</a>(<span class="php-var">$type</span>, \Exception <span class="php-var">$exception</span>)
-</span><span id="182" class="l"><a class="l" href="#182">182: </a>    {
-</span><span id="183" class="l"><a class="l" href="#183">183: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;handlers[<span class="php-var">$type</span>] <span class="php-keyword1">as</span> <span class="php-var">$handler</span>) {
-</span><span id="184" class="l"><a class="l" href="#184">184: </a>            <span class="php-var">$result</span> = <span class="php-keyword2">call_user_func_array</span>(<span class="php-var">$handler</span>, <span class="php-keyword1">array</span>(<span class="php-var">$exception</span>, <span class="php-var">$this</span>-&gt;wei));
-</span><span id="185" class="l"><a class="l" href="#185">185: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">true</span> === <span class="php-var">$result</span>) {
-</span><span id="186" class="l"><a class="l" href="#186">186: </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
-</span><span id="187" class="l"><a class="l" href="#187">187: </a>            }
-</span><span id="188" class="l"><a class="l" href="#188">188: </a>        }
-</span><span id="189" class="l"><a class="l" href="#189">189: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
-</span><span id="190" class="l"><a class="l" href="#190">190: </a>    }
-</span><span id="191" class="l"><a class="l" href="#191">191: </a>
-</span><span id="192" class="l"><a class="l" href="#192">192: </a>    <span class="php-comment">/**
-</span></span><span id="193" class="l"><a class="l" href="#193">193: </a><span class="php-comment">     * The exception handler to render pretty message
-</span></span><span id="194" class="l"><a class="l" href="#194">194: </a><span class="php-comment">     *
-</span></span><span id="195" class="l"><a class="l" href="#195">195: </a><span class="php-comment">     * @param \Exception $exception
-</span></span><span id="196" class="l"><a class="l" href="#196">196: </a><span class="php-comment">     */</span>
-</span><span id="197" class="l"><a class="l" href="#197">197: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_handleException" href="#_handleException">handleException</a>(\Exception <span class="php-var">$exception</span>)
-</span><span id="198" class="l"><a class="l" href="#198">198: </a>    {
-</span><span id="199" class="l"><a class="l" href="#199">199: </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$this</span>-&gt;ignorePrevHandler &amp;&amp; <span class="php-var">$this</span>-&gt;prevExceptionHandler) {
-</span><span id="200" class="l"><a class="l" href="#200">200: </a>            <span class="php-keyword2">call_user_func</span>(<span class="php-var">$this</span>-&gt;prevExceptionHandler, <span class="php-var">$exception</span>);
-</span><span id="201" class="l"><a class="l" href="#201">201: </a>        }
-</span><span id="202" class="l"><a class="l" href="#202">202: </a>
-</span><span id="203" class="l"><a class="l" href="#203">203: </a>        <span class="php-keyword1">if</span> (<span class="php-num">404</span> == <span class="php-var">$exception</span>-&gt;getCode()) {
-</span><span id="204" class="l"><a class="l" href="#204">204: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;triggerHandler(<span class="php-quote">'notFound'</span>, <span class="php-var">$exception</span>)) {
-</span><span id="205" class="l"><a class="l" href="#205">205: </a>                <span class="php-keyword1">return</span>;
-</span><span id="206" class="l"><a class="l" href="#206">206: </a>            }
-</span><span id="207" class="l"><a class="l" href="#207">207: </a>        }
-</span><span id="208" class="l"><a class="l" href="#208">208: </a>
-</span><span id="209" class="l"><a class="l" href="#209">209: </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$this</span>-&gt;triggerHandler(<span class="php-quote">'error'</span>, <span class="php-var">$exception</span>)) {
-</span><span id="210" class="l"><a class="l" href="#210">210: </a>            <span class="php-var">$this</span>-&gt;internalHandleException(<span class="php-var">$exception</span>);
-</span><span id="211" class="l"><a class="l" href="#211">211: </a>        }
-</span><span id="212" class="l"><a class="l" href="#212">212: </a>
-</span><span id="213" class="l"><a class="l" href="#213">213: </a>        <span class="php-keyword2">restore_exception_handler</span>();
-</span><span id="214" class="l"><a class="l" href="#214">214: </a>    }
-</span><span id="215" class="l"><a class="l" href="#215">215: </a>
-</span><span id="216" class="l"><a class="l" href="#216">216: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_internalHandleException" href="#_internalHandleException">internalHandleException</a>(\Exception <span class="php-var">$exception</span>)
-</span><span id="217" class="l"><a class="l" href="#217">217: </a>    {
-</span><span id="218" class="l"><a class="l" href="#218">218: </a>        <span class="php-var">$debug</span> = <span class="php-var">$this</span>-&gt;wei-&gt;isDebug();
-</span><span id="219" class="l"><a class="l" href="#219">219: </a>        <span class="php-var">$code</span> = <span class="php-var">$exception</span>-&gt;getCode();
-</span><span id="220" class="l"><a class="l" href="#220">220: </a>
-</span><span id="221" class="l"><a class="l" href="#221">221: </a>        <span class="php-comment">// HTTP status code</span>
-</span><span id="222" class="l"><a class="l" href="#222">222: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$code</span> &lt; <span class="php-num">100</span> || <span class="php-var">$code</span> &gt; <span class="php-num">600</span>) {
-</span><span id="223" class="l"><a class="l" href="#223">223: </a>            <span class="php-var">$code</span> = <span class="php-num">500</span>;
-</span><span id="224" class="l"><a class="l" href="#224">224: </a>        }
-</span><span id="225" class="l"><a class="l" href="#225">225: </a>
-</span><span id="226" class="l"><a class="l" href="#226">226: </a>        <span class="php-keyword1">try</span> {
-</span><span id="227" class="l"><a class="l" href="#227">227: </a>            <span class="php-comment">// This weis may show exception too</span>
-</span><span id="228" class="l"><a class="l" href="#228">228: </a>            <span class="php-var">$this</span>-&gt;response-&gt;setStatusCode(<span class="php-var">$code</span>)-&gt;send();
-</span><span id="229" class="l"><a class="l" href="#229">229: </a>            <span class="php-var">$this</span>-&gt;logger-&gt;critical((string)<span class="php-var">$exception</span>);
-</span><span id="230" class="l"><a class="l" href="#230">230: </a>
-</span><span id="231" class="l"><a class="l" href="#231">231: </a>            <span class="php-var">$this</span>-&gt;renderException(<span class="php-var">$exception</span>, <span class="php-var">$debug</span>);
-</span><span id="232" class="l"><a class="l" href="#232">232: </a>        } <span class="php-keyword1">catch</span> (\Exception <span class="php-var">$e</span>) {
-</span><span id="233" class="l"><a class="l" href="#233">233: </a>            <span class="php-var">$this</span>-&gt;renderException(<span class="php-var">$e</span>, <span class="php-var">$debug</span>);
-</span><span id="234" class="l"><a class="l" href="#234">234: </a>        }
-</span><span id="235" class="l"><a class="l" href="#235">235: </a>    }
+</span></span><span id="179" class="l"><a class="l" href="#179">179: </a><span class="php-comment">     */</span>
+</span><span id="180" class="l"><a class="l" href="#180">180: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_triggerHandler" href="#_triggerHandler">triggerHandler</a>(<span class="php-var">$type</span>, \Exception <span class="php-var">$exception</span>)
+</span><span id="181" class="l"><a class="l" href="#181">181: </a>    {
+</span><span id="182" class="l"><a class="l" href="#182">182: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;handlers[<span class="php-var">$type</span>] <span class="php-keyword1">as</span> <span class="php-var">$handler</span>) {
+</span><span id="183" class="l"><a class="l" href="#183">183: </a>            <span class="php-var">$result</span> = <span class="php-keyword2">call_user_func_array</span>(<span class="php-var">$handler</span>, <span class="php-keyword1">array</span>(<span class="php-var">$exception</span>, <span class="php-var">$this</span>-&gt;wei));
+</span><span id="184" class="l"><a class="l" href="#184">184: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">true</span> === <span class="php-var">$result</span>) {
+</span><span id="185" class="l"><a class="l" href="#185">185: </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
+</span><span id="186" class="l"><a class="l" href="#186">186: </a>            }
+</span><span id="187" class="l"><a class="l" href="#187">187: </a>        }
+</span><span id="188" class="l"><a class="l" href="#188">188: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span id="189" class="l"><a class="l" href="#189">189: </a>    }
+</span><span id="190" class="l"><a class="l" href="#190">190: </a>
+</span><span id="191" class="l"><a class="l" href="#191">191: </a>    <span class="php-comment">/**
+</span></span><span id="192" class="l"><a class="l" href="#192">192: </a><span class="php-comment">     * The exception handler to render pretty message
+</span></span><span id="193" class="l"><a class="l" href="#193">193: </a><span class="php-comment">     *
+</span></span><span id="194" class="l"><a class="l" href="#194">194: </a><span class="php-comment">     * @param \Exception $exception
+</span></span><span id="195" class="l"><a class="l" href="#195">195: </a><span class="php-comment">     */</span>
+</span><span id="196" class="l"><a class="l" href="#196">196: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_handleException" href="#_handleException">handleException</a>(\Exception <span class="php-var">$exception</span>)
+</span><span id="197" class="l"><a class="l" href="#197">197: </a>    {
+</span><span id="198" class="l"><a class="l" href="#198">198: </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$this</span>-&gt;ignorePrevHandler &amp;&amp; <span class="php-var">$this</span>-&gt;prevExceptionHandler) {
+</span><span id="199" class="l"><a class="l" href="#199">199: </a>            <span class="php-keyword2">call_user_func</span>(<span class="php-var">$this</span>-&gt;prevExceptionHandler, <span class="php-var">$exception</span>);
+</span><span id="200" class="l"><a class="l" href="#200">200: </a>        }
+</span><span id="201" class="l"><a class="l" href="#201">201: </a>
+</span><span id="202" class="l"><a class="l" href="#202">202: </a>        <span class="php-keyword1">if</span> (<span class="php-num">404</span> == <span class="php-var">$exception</span>-&gt;getCode()) {
+</span><span id="203" class="l"><a class="l" href="#203">203: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;triggerHandler(<span class="php-quote">'notFound'</span>, <span class="php-var">$exception</span>)) {
+</span><span id="204" class="l"><a class="l" href="#204">204: </a>                <span class="php-keyword1">return</span>;
+</span><span id="205" class="l"><a class="l" href="#205">205: </a>            }
+</span><span id="206" class="l"><a class="l" href="#206">206: </a>        }
+</span><span id="207" class="l"><a class="l" href="#207">207: </a>
+</span><span id="208" class="l"><a class="l" href="#208">208: </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$this</span>-&gt;triggerHandler(<span class="php-quote">'error'</span>, <span class="php-var">$exception</span>)) {
+</span><span id="209" class="l"><a class="l" href="#209">209: </a>            <span class="php-var">$this</span>-&gt;internalHandleException(<span class="php-var">$exception</span>);
+</span><span id="210" class="l"><a class="l" href="#210">210: </a>        }
+</span><span id="211" class="l"><a class="l" href="#211">211: </a>
+</span><span id="212" class="l"><a class="l" href="#212">212: </a>        <span class="php-keyword2">restore_exception_handler</span>();
+</span><span id="213" class="l"><a class="l" href="#213">213: </a>    }
+</span><span id="214" class="l"><a class="l" href="#214">214: </a>
+</span><span id="215" class="l"><a class="l" href="#215">215: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_internalHandleException" href="#_internalHandleException">internalHandleException</a>(\Exception <span class="php-var">$exception</span>)
+</span><span id="216" class="l"><a class="l" href="#216">216: </a>    {
+</span><span id="217" class="l"><a class="l" href="#217">217: </a>        <span class="php-var">$debug</span> = <span class="php-var">$this</span>-&gt;wei-&gt;isDebug();
+</span><span id="218" class="l"><a class="l" href="#218">218: </a>        <span class="php-var">$code</span> = <span class="php-var">$exception</span>-&gt;getCode();
+</span><span id="219" class="l"><a class="l" href="#219">219: </a>
+</span><span id="220" class="l"><a class="l" href="#220">220: </a>        <span class="php-comment">// HTTP status code</span>
+</span><span id="221" class="l"><a class="l" href="#221">221: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$code</span> &lt; <span class="php-num">100</span> || <span class="php-var">$code</span> &gt; <span class="php-num">600</span>) {
+</span><span id="222" class="l"><a class="l" href="#222">222: </a>            <span class="php-var">$code</span> = <span class="php-num">500</span>;
+</span><span id="223" class="l"><a class="l" href="#223">223: </a>        }
+</span><span id="224" class="l"><a class="l" href="#224">224: </a>
+</span><span id="225" class="l"><a class="l" href="#225">225: </a>        <span class="php-comment">// Logger level</span>
+</span><span id="226" class="l"><a class="l" href="#226">226: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$code</span> &gt;= <span class="php-num">500</span>) {
+</span><span id="227" class="l"><a class="l" href="#227">227: </a>            <span class="php-var">$level</span> = <span class="php-quote">'critical'</span>;
+</span><span id="228" class="l"><a class="l" href="#228">228: </a>        } <span class="php-keyword1">else</span> {
+</span><span id="229" class="l"><a class="l" href="#229">229: </a>            <span class="php-var">$level</span> = <span class="php-quote">'info'</span>;
+</span><span id="230" class="l"><a class="l" href="#230">230: </a>        }
+</span><span id="231" class="l"><a class="l" href="#231">231: </a>
+</span><span id="232" class="l"><a class="l" href="#232">232: </a>        <span class="php-keyword1">try</span> {
+</span><span id="233" class="l"><a class="l" href="#233">233: </a>            <span class="php-comment">// The flowing services may throw exception too</span>
+</span><span id="234" class="l"><a class="l" href="#234">234: </a>            <span class="php-var">$this</span>-&gt;response-&gt;setStatusCode(<span class="php-var">$code</span>)-&gt;send();
+</span><span id="235" class="l"><a class="l" href="#235">235: </a>            <span class="php-var">$this</span>-&gt;logger-&gt;<span class="php-keyword2">log</span>(<span class="php-var">$level</span>, <span class="php-var">$exception</span>);
 </span><span id="236" class="l"><a class="l" href="#236">236: </a>
-</span><span id="237" class="l"><a class="l" href="#237">237: </a>    <span class="php-comment">/**
-</span></span><span id="238" class="l"><a class="l" href="#238">238: </a><span class="php-comment">     * Render exception message
-</span></span><span id="239" class="l"><a class="l" href="#239">239: </a><span class="php-comment">     *
-</span></span><span id="240" class="l"><a class="l" href="#240">240: </a><span class="php-comment">     * @param \Exception $exception
-</span></span><span id="241" class="l"><a class="l" href="#241">241: </a><span class="php-comment">     * @param bool $debug Whether show debug trace
-</span></span><span id="242" class="l"><a class="l" href="#242">242: </a><span class="php-comment">     */</span>
-</span><span id="243" class="l"><a class="l" href="#243">243: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_renderException" href="#_renderException">renderException</a>(\Exception <span class="php-var">$exception</span>, <span class="php-var">$debug</span>)
-</span><span id="244" class="l"><a class="l" href="#244">244: </a>    {
-</span><span id="245" class="l"><a class="l" href="#245">245: </a>        <span class="php-var">$code</span>       = <span class="php-var">$exception</span>-&gt;getCode();
-</span><span id="246" class="l"><a class="l" href="#246">246: </a>        <span class="php-var">$file</span>       = <span class="php-var">$exception</span>-&gt;getFile();
-</span><span id="247" class="l"><a class="l" href="#247">247: </a>        <span class="php-var">$line</span>       = <span class="php-var">$exception</span>-&gt;getLine();
-</span><span id="248" class="l"><a class="l" href="#248">248: </a>        <span class="php-var">$class</span>      = <span class="php-keyword2">get_class</span>(<span class="php-var">$exception</span>);
-</span><span id="249" class="l"><a class="l" href="#249">249: </a>        <span class="php-var">$trace</span>      = <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$exception</span>-&gt;getTraceAsString(), ENT_QUOTES);
-</span><span id="250" class="l"><a class="l" href="#250">250: </a>
-</span><span id="251" class="l"><a class="l" href="#251">251: </a>        <span class="php-comment">// Prepare message</span>
-</span><span id="252" class="l"><a class="l" href="#252">252: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$debug</span> || <span class="php-num">404</span> == <span class="php-var">$code</span>) {
-</span><span id="253" class="l"><a class="l" href="#253">253: </a>            <span class="php-var">$message</span> = <span class="php-var">$exception</span>-&gt;getMessage();
-</span><span id="254" class="l"><a class="l" href="#254">254: </a>        } <span class="php-keyword1">else</span> {
-</span><span id="255" class="l"><a class="l" href="#255">255: </a>            <span class="php-var">$message</span> = <span class="php-var">$this</span>-&gt;message;
-</span><span id="256" class="l"><a class="l" href="#256">256: </a>        }
-</span><span id="257" class="l"><a class="l" href="#257">257: </a>        <span class="php-var">$message</span> = <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$message</span>, ENT_QUOTES);
-</span><span id="258" class="l"><a class="l" href="#258">258: </a>
-</span><span id="259" class="l"><a class="l" href="#259">259: </a>        <span class="php-comment">// Prepare detail message</span>
-</span><span id="260" class="l"><a class="l" href="#260">260: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$debug</span>) {
-</span><span id="261" class="l"><a class="l" href="#261">261: </a>            <span class="php-var">$detail</span> = <span class="php-keyword2">sprintf</span>(<span class="php-quote">'Threw by %s in %s on line %s'</span>, <span class="php-var">$class</span>, <span class="php-var">$file</span>, <span class="php-var">$line</span>);
-</span><span id="262" class="l"><a class="l" href="#262">262: </a>        } <span class="php-keyword1">elseif</span> (<span class="php-num">404</span> == <span class="php-var">$code</span>) {
-</span><span id="263" class="l"><a class="l" href="#263">263: </a>            <span class="php-var">$detail</span> = <span class="php-var">$this</span>-&gt;notFoundDetail;
-</span><span id="264" class="l"><a class="l" href="#264">264: </a>        } <span class="php-keyword1">else</span> {
-</span><span id="265" class="l"><a class="l" href="#265">265: </a>            <span class="php-var">$detail</span> = <span class="php-var">$this</span>-&gt;detail;
-</span><span id="266" class="l"><a class="l" href="#266">266: </a>        }
-</span><span id="267" class="l"><a class="l" href="#267">267: </a>
-</span><span id="268" class="l"><a class="l" href="#268">268: </a>        <span class="php-comment">// File Information</span>
-</span><span id="269" class="l"><a class="l" href="#269">269: </a>        <span class="php-var">$mtime</span> = <span class="php-keyword2">date</span>(<span class="php-quote">'Y-m-d H:i:s'</span>, <span class="php-keyword2">filemtime</span>(<span class="php-var">$file</span>));
-</span><span id="270" class="l"><a class="l" href="#270">270: </a>        <span class="php-var">$fileInfo</span> = <span class="php-var">$this</span>-&gt;getFileCode(<span class="php-var">$file</span>, <span class="php-var">$line</span>);
+</span><span id="237" class="l"><a class="l" href="#237">237: </a>            <span class="php-var">$this</span>-&gt;renderException(<span class="php-var">$exception</span>, <span class="php-var">$debug</span>);
+</span><span id="238" class="l"><a class="l" href="#238">238: </a>        } <span class="php-keyword1">catch</span> (\Exception <span class="php-var">$e</span>) {
+</span><span id="239" class="l"><a class="l" href="#239">239: </a>            <span class="php-var">$this</span>-&gt;renderException(<span class="php-var">$e</span>, <span class="php-var">$debug</span>);
+</span><span id="240" class="l"><a class="l" href="#240">240: </a>        }
+</span><span id="241" class="l"><a class="l" href="#241">241: </a>    }
+</span><span id="242" class="l"><a class="l" href="#242">242: </a>
+</span><span id="243" class="l"><a class="l" href="#243">243: </a>    <span class="php-comment">/**
+</span></span><span id="244" class="l"><a class="l" href="#244">244: </a><span class="php-comment">     * Render exception message
+</span></span><span id="245" class="l"><a class="l" href="#245">245: </a><span class="php-comment">     *
+</span></span><span id="246" class="l"><a class="l" href="#246">246: </a><span class="php-comment">     * @param \Exception $e
+</span></span><span id="247" class="l"><a class="l" href="#247">247: </a><span class="php-comment">     * @param bool $debug Whether show debug trace
+</span></span><span id="248" class="l"><a class="l" href="#248">248: </a><span class="php-comment">     */</span>
+</span><span id="249" class="l"><a class="l" href="#249">249: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_renderException" href="#_renderException">renderException</a>(\Exception <span class="php-var">$e</span>, <span class="php-var">$debug</span>)
+</span><span id="250" class="l"><a class="l" href="#250">250: </a>    {
+</span><span id="251" class="l"><a class="l" href="#251">251: </a>        <span class="php-var">$code</span> = <span class="php-var">$e</span>-&gt;getCode();
+</span><span id="252" class="l"><a class="l" href="#252">252: </a>        <span class="php-var">$file</span> = <span class="php-var">$e</span>-&gt;getFile();
+</span><span id="253" class="l"><a class="l" href="#253">253: </a>        <span class="php-var">$line</span> = <span class="php-var">$e</span>-&gt;getLine();
+</span><span id="254" class="l"><a class="l" href="#254">254: </a>
+</span><span id="255" class="l"><a class="l" href="#255">255: </a>        <span class="php-comment">// Prepare message</span>
+</span><span id="256" class="l"><a class="l" href="#256">256: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$debug</span>) {
+</span><span id="257" class="l"><a class="l" href="#257">257: </a>            <span class="php-var">$message</span> = <span class="php-var">$e</span>-&gt;getMessage();
+</span><span id="258" class="l"><a class="l" href="#258">258: </a>            <span class="php-var">$detail</span> = <span class="php-keyword2">sprintf</span>(<span class="php-quote">'Threw by %s in %s on line %s'</span>, <span class="php-keyword2">get_class</span>(<span class="php-var">$e</span>), <span class="php-var">$file</span>, <span class="php-var">$line</span>);
+</span><span id="259" class="l"><a class="l" href="#259">259: </a>        } <span class="php-keyword1">else</span> {
+</span><span id="260" class="l"><a class="l" href="#260">260: </a>            <span class="php-var">$message</span> = <span class="php-var">$this</span>-&gt;message;
+</span><span id="261" class="l"><a class="l" href="#261">261: </a>            <span class="php-var">$detail</span> = <span class="php-var">$this</span>-&gt;detail;
+</span><span id="262" class="l"><a class="l" href="#262">262: </a>        }
+</span><span id="263" class="l"><a class="l" href="#263">263: </a>
+</span><span id="264" class="l"><a class="l" href="#264">264: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$code</span> == <span class="php-num">404</span>) {
+</span><span id="265" class="l"><a class="l" href="#265">265: </a>            <span class="php-var">$message</span> = <span class="php-var">$e</span>-&gt;getMessage();
+</span><span id="266" class="l"><a class="l" href="#266">266: </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$debug</span>) {
+</span><span id="267" class="l"><a class="l" href="#267">267: </a>                <span class="php-var">$detail</span> = <span class="php-var">$this</span>-&gt;notFoundDetail;
+</span><span id="268" class="l"><a class="l" href="#268">268: </a>            }
+</span><span id="269" class="l"><a class="l" href="#269">269: </a>        }
+</span><span id="270" class="l"><a class="l" href="#270">270: </a>        <span class="php-var">$message</span> = <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$message</span>, ENT_QUOTES);
 </span><span id="271" class="l"><a class="l" href="#271">271: </a>
-</span><span id="272" class="l"><a class="l" href="#272">272: </a>        <span class="php-comment">// Display view file</span>
-</span><span id="273" class="l"><a class="l" href="#273">273: </a>        <span class="php-keyword1">require</span> __DIR__ . <span class="php-quote">'/Resource/views/error.php'</span>;
-</span><span id="274" class="l"><a class="l" href="#274">274: </a>    }
-</span><span id="275" class="l"><a class="l" href="#275">275: </a>
-</span><span id="276" class="l"><a class="l" href="#276">276: </a>    <span class="php-comment">/**
-</span></span><span id="277" class="l"><a class="l" href="#277">277: </a><span class="php-comment">     * The error handler convert PHP error to exception
-</span></span><span id="278" class="l"><a class="l" href="#278">278: </a><span class="php-comment">     *
-</span></span><span id="279" class="l"><a class="l" href="#279">279: </a><span class="php-comment">     * @param int $code The level of the error raised
-</span></span><span id="280" class="l"><a class="l" href="#280">280: </a><span class="php-comment">     * @param string $message The error message
-</span></span><span id="281" class="l"><a class="l" href="#281">281: </a><span class="php-comment">     * @param string $file The filename that the error was raised in
-</span></span><span id="282" class="l"><a class="l" href="#282">282: </a><span class="php-comment">     * @param int $line The line number the error was raised at
-</span></span><span id="283" class="l"><a class="l" href="#283">283: </a><span class="php-comment">     * @throws \ErrorException convert PHP error to exception
-</span></span><span id="284" class="l"><a class="l" href="#284">284: </a><span class="php-comment">     * @internal use for set_error_handler only
-</span></span><span id="285" class="l"><a class="l" href="#285">285: </a><span class="php-comment">     */</span>
-</span><span id="286" class="l"><a class="l" href="#286">286: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_handleError" href="#_handleError">handleError</a>(<span class="php-var">$code</span>, <span class="php-var">$message</span>, <span class="php-var">$file</span>, <span class="php-var">$line</span>)
-</span><span id="287" class="l"><a class="l" href="#287">287: </a>    {
-</span><span id="288" class="l"><a class="l" href="#288">288: </a>        <span class="php-keyword1">if</span> (!(<span class="php-keyword2">error_reporting</span>() &amp; <span class="php-var">$code</span>)) {
-</span><span id="289" class="l"><a class="l" href="#289">289: </a>            <span class="php-comment">// This error code is not included in error_reporting</span>
-</span><span id="290" class="l"><a class="l" href="#290">290: </a>            <span class="php-keyword1">return</span>;
-</span><span id="291" class="l"><a class="l" href="#291">291: </a>        }
-</span><span id="292" class="l"><a class="l" href="#292">292: </a>        <span class="php-keyword2">restore_error_handler</span>();
-</span><span id="293" class="l"><a class="l" href="#293">293: </a>        <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \ErrorException(<span class="php-var">$message</span>, <span class="php-var">$code</span>, <span class="php-num">500</span>, <span class="php-var">$file</span>, <span class="php-var">$line</span>);
-</span><span id="294" class="l"><a class="l" href="#294">294: </a>    }
-</span><span id="295" class="l"><a class="l" href="#295">295: </a>
-</span><span id="296" class="l"><a class="l" href="#296">296: </a>    <span class="php-comment">/**
-</span></span><span id="297" class="l"><a class="l" href="#297">297: </a><span class="php-comment">     * Get file code in specified range
-</span></span><span id="298" class="l"><a class="l" href="#298">298: </a><span class="php-comment">     *
-</span></span><span id="299" class="l"><a class="l" href="#299">299: </a><span class="php-comment">     * @param  string $file  The file name
-</span></span><span id="300" class="l"><a class="l" href="#300">300: </a><span class="php-comment">     * @param  int    $line  The file line
-</span></span><span id="301" class="l"><a class="l" href="#301">301: </a><span class="php-comment">     * @param  int    $range The line range
-</span></span><span id="302" class="l"><a class="l" href="#302">302: </a><span class="php-comment">     * @return string
-</span></span><span id="303" class="l"><a class="l" href="#303">303: </a><span class="php-comment">     */</span>
-</span><span id="304" class="l"><a class="l" href="#304">304: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getFileCode" href="#_getFileCode">getFileCode</a>(<span class="php-var">$file</span>, <span class="php-var">$line</span>, <span class="php-var">$range</span> = <span class="php-num">20</span>)
-</span><span id="305" class="l"><a class="l" href="#305">305: </a>    {
-</span><span id="306" class="l"><a class="l" href="#306">306: </a>        <span class="php-var">$code</span> = <span class="php-keyword2">file</span>(<span class="php-var">$file</span>);
-</span><span id="307" class="l"><a class="l" href="#307">307: </a>        <span class="php-var">$half</span> = (int) (<span class="php-var">$range</span> / <span class="php-num">2</span>);
+</span><span id="272" class="l"><a class="l" href="#272">272: </a>        <span class="php-comment">// Render error views</span>
+</span><span id="273" class="l"><a class="l" href="#273">273: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$debug</span>) {
+</span><span id="274" class="l"><a class="l" href="#274">274: </a>            <span class="php-var">$mtime</span>      = <span class="php-keyword2">date</span>(<span class="php-quote">'Y-m-d H:i:s'</span>, <span class="php-keyword2">filemtime</span>(<span class="php-var">$file</span>));
+</span><span id="275" class="l"><a class="l" href="#275">275: </a>            <span class="php-var">$fileInfo</span>   = <span class="php-var">$this</span>-&gt;getFileCode(<span class="php-var">$file</span>, <span class="php-var">$line</span>);
+</span><span id="276" class="l"><a class="l" href="#276">276: </a>            <span class="php-var">$trace</span>      = <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$e</span>-&gt;getTraceAsString(), ENT_QUOTES);
+</span><span id="277" class="l"><a class="l" href="#277">277: </a>
+</span><span id="278" class="l"><a class="l" href="#278">278: </a>            <span class="php-var">$detail</span> = <span class="php-quote">&quot;&lt;h2&gt;File&lt;/h2&gt;&quot;</span>
+</span><span id="279" class="l"><a class="l" href="#279">279: </a>                . <span class="php-quote">&quot;&lt;p class=\&quot;error-text\&quot;&gt;</span><span class="php-var">$file</span><span class="php-quote"> modified at </span><span class="php-var">$mtime</span><span class="php-quote">&lt;/p&gt;&quot;</span>
+</span><span id="280" class="l"><a class="l" href="#280">280: </a>                . <span class="php-quote">&quot;&lt;p&gt;&lt;pre&gt;</span><span class="php-var">$fileInfo</span><span class="php-quote">&lt;/pre&gt;&lt;/p&gt;&quot;</span>
+</span><span id="281" class="l"><a class="l" href="#281">281: </a>                . <span class="php-quote">&quot;&lt;h2&gt;Trace&lt;/h2&gt;&quot;</span>
+</span><span id="282" class="l"><a class="l" href="#282">282: </a>                . <span class="php-quote">&quot;&lt;p class=\&quot;error-text\&quot;&gt;</span><span class="php-var">$detail</span><span class="php-quote">&lt;/p&gt;&quot;</span>
+</span><span id="283" class="l"><a class="l" href="#283">283: </a>                . <span class="php-quote">&quot;&lt;p&gt;&lt;pre&gt;</span><span class="php-var">$trace</span><span class="php-quote">&lt;/pre&gt;&lt;/p&gt;&quot;</span>;
+</span><span id="284" class="l"><a class="l" href="#284">284: </a>        } <span class="php-keyword1">else</span> {
+</span><span id="285" class="l"><a class="l" href="#285">285: </a>            <span class="php-var">$detail</span> = <span class="php-quote">&quot;&lt;p&gt;</span><span class="php-var">$detail</span><span class="php-quote">&lt;/p&gt;&quot;</span>;
+</span><span id="286" class="l"><a class="l" href="#286">286: </a>        }
+</span><span id="287" class="l"><a class="l" href="#287">287: </a>
+</span><span id="288" class="l"><a class="l" href="#288">288: </a>        <span class="php-var">$html</span> = <span class="php-quote">'&lt;!DOCTYPE html&gt;'</span>
+</span><span id="289" class="l"><a class="l" href="#289">289: </a>            . <span class="php-quote">'&lt;html&gt;'</span>
+</span><span id="290" class="l"><a class="l" href="#290">290: </a>            . <span class="php-quote">'&lt;head&gt;'</span>
+</span><span id="291" class="l"><a class="l" href="#291">291: </a>            . <span class="php-quote">'&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;/&gt;'</span>
+</span><span id="292" class="l"><a class="l" href="#292">292: </a>            . <span class="php-quote">&quot;&lt;title&gt;</span><span class="php-var">$message</span><span class="php-quote">&lt;/title&gt;&quot;</span>
+</span><span id="293" class="l"><a class="l" href="#293">293: </a>            . <span class="php-quote">'&lt;style type=&quot;text/css&quot;&gt;'</span>
+</span><span id="294" class="l"><a class="l" href="#294">294: </a>            . <span class="php-quote">'body { font-size: 12px; color: #333; padding: 15px 20px 20px 20px; }'</span>
+</span><span id="295" class="l"><a class="l" href="#295">295: </a>            . <span class="php-quote">'h1, h2, p, pre { margin: 0; padding: 0; }'</span>
+</span><span id="296" class="l"><a class="l" href="#296">296: </a>            . <span class="php-quote">'body, pre { font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif, &quot;\5fae\8f6f\96c5\9ed1&quot;, &quot;\5b8b\4f53&quot;; }'</span>
+</span><span id="297" class="l"><a class="l" href="#297">297: </a>            . <span class="php-quote">'h1 { font-size: 36px; }'</span>
+</span><span id="298" class="l"><a class="l" href="#298">298: </a>            . <span class="php-quote">'h2 { font-size: 20px; margin: 20px 0 0; }'</span>
+</span><span id="299" class="l"><a class="l" href="#299">299: </a>            . <span class="php-quote">'pre { line-height: 18px; }'</span>
+</span><span id="300" class="l"><a class="l" href="#300">300: </a>            . <span class="php-quote">'strong, .error-text { color: #FF3000; }'</span>
+</span><span id="301" class="l"><a class="l" href="#301">301: </a>            . <span class="php-quote">'&lt;/style&gt;'</span>
+</span><span id="302" class="l"><a class="l" href="#302">302: </a>            . <span class="php-quote">'&lt;/head&gt;'</span>
+</span><span id="303" class="l"><a class="l" href="#303">303: </a>            . <span class="php-quote">'&lt;body&gt;'</span>
+</span><span id="304" class="l"><a class="l" href="#304">304: </a>            . <span class="php-quote">&quot;&lt;h1&gt;</span><span class="php-var">$message</span><span class="php-quote">&lt;/h1&gt;&quot;</span>
+</span><span id="305" class="l"><a class="l" href="#305">305: </a>            . <span class="php-var">$detail</span>
+</span><span id="306" class="l"><a class="l" href="#306">306: </a>            . <span class="php-quote">'&lt;/body&gt;'</span>
+</span><span id="307" class="l"><a class="l" href="#307">307: </a>            . <span class="php-quote">'&lt;/html&gt;'</span>;
 </span><span id="308" class="l"><a class="l" href="#308">308: </a>
-</span><span id="309" class="l"><a class="l" href="#309">309: </a>        <span class="php-var">$start</span> = <span class="php-var">$line</span> - <span class="php-var">$half</span>;
-</span><span id="310" class="l"><a class="l" href="#310">310: </a>        <span class="php-num">0</span> &gt; <span class="php-var">$start</span> &amp;&amp; <span class="php-var">$start</span> = <span class="php-num">0</span>;
+</span><span id="309" class="l"><a class="l" href="#309">309: </a>        <span class="php-keyword1">echo</span> <span class="php-var">$html</span>;
+</span><span id="310" class="l"><a class="l" href="#310">310: </a>    }
 </span><span id="311" class="l"><a class="l" href="#311">311: </a>
-</span><span id="312" class="l"><a class="l" href="#312">312: </a>        <span class="php-var">$total</span> = <span class="php-keyword2">count</span>(<span class="php-var">$code</span>);
-</span><span id="313" class="l"><a class="l" href="#313">313: </a>        <span class="php-var">$end</span> = <span class="php-var">$line</span> + <span class="php-var">$half</span>;
-</span><span id="314" class="l"><a class="l" href="#314">314: </a>        <span class="php-var">$total</span> &lt; <span class="php-var">$end</span> &amp;&amp; <span class="php-var">$end</span> = <span class="php-var">$total</span>;
-</span><span id="315" class="l"><a class="l" href="#315">315: </a>
-</span><span id="316" class="l"><a class="l" href="#316">316: </a>        <span class="php-var">$len</span> = <span class="php-keyword2">strlen</span>(<span class="php-var">$end</span>);
-</span><span id="317" class="l"><a class="l" href="#317">317: </a>
-</span><span id="318" class="l"><a class="l" href="#318">318: </a>        <span class="php-keyword2">array_unshift</span>(<span class="php-var">$code</span>, <span class="php-keyword1">null</span>);
-</span><span id="319" class="l"><a class="l" href="#319">319: </a>        <span class="php-var">$content</span> = <span class="php-quote">''</span>;
-</span><span id="320" class="l"><a class="l" href="#320">320: </a>        <span class="php-keyword1">for</span> (<span class="php-var">$i</span> = <span class="php-var">$start</span>; <span class="php-var">$i</span> &lt; <span class="php-var">$end</span>; <span class="php-var">$i</span>++) {
-</span><span id="321" class="l"><a class="l" href="#321">321: </a>            <span class="php-var">$temp</span> = <span class="php-keyword2">str_pad</span>(<span class="php-var">$i</span>, <span class="php-var">$len</span>, <span class="php-num">0</span>, STR_PAD_LEFT) . <span class="php-quote">':  '</span> . <span class="php-var">$code</span>[<span class="php-var">$i</span>];
-</span><span id="322" class="l"><a class="l" href="#322">322: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$line</span> != <span class="php-var">$i</span>) {
-</span><span id="323" class="l"><a class="l" href="#323">323: </a>                <span class="php-var">$content</span> .= <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$temp</span>, ENT_QUOTES);
-</span><span id="324" class="l"><a class="l" href="#324">324: </a>            } <span class="php-keyword1">else</span> {
-</span><span id="325" class="l"><a class="l" href="#325">325: </a>                <span class="php-var">$content</span> .= <span class="php-quote">'&lt;strong&gt;'</span> . <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$temp</span>, ENT_QUOTES) . <span class="php-quote">'&lt;/strong&gt;'</span>;
-</span><span id="326" class="l"><a class="l" href="#326">326: </a>            }
+</span><span id="312" class="l"><a class="l" href="#312">312: </a>    <span class="php-comment">/**
+</span></span><span id="313" class="l"><a class="l" href="#313">313: </a><span class="php-comment">     * The error handler convert PHP error to exception
+</span></span><span id="314" class="l"><a class="l" href="#314">314: </a><span class="php-comment">     *
+</span></span><span id="315" class="l"><a class="l" href="#315">315: </a><span class="php-comment">     * @param int $code The level of the error raised
+</span></span><span id="316" class="l"><a class="l" href="#316">316: </a><span class="php-comment">     * @param string $message The error message
+</span></span><span id="317" class="l"><a class="l" href="#317">317: </a><span class="php-comment">     * @param string $file The filename that the error was raised in
+</span></span><span id="318" class="l"><a class="l" href="#318">318: </a><span class="php-comment">     * @param int $line The line number the error was raised at
+</span></span><span id="319" class="l"><a class="l" href="#319">319: </a><span class="php-comment">     * @throws \ErrorException convert PHP error to exception
+</span></span><span id="320" class="l"><a class="l" href="#320">320: </a><span class="php-comment">     * @internal use for set_error_handler only
+</span></span><span id="321" class="l"><a class="l" href="#321">321: </a><span class="php-comment">     */</span>
+</span><span id="322" class="l"><a class="l" href="#322">322: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_handleError" href="#_handleError">handleError</a>(<span class="php-var">$code</span>, <span class="php-var">$message</span>, <span class="php-var">$file</span>, <span class="php-var">$line</span>)
+</span><span id="323" class="l"><a class="l" href="#323">323: </a>    {
+</span><span id="324" class="l"><a class="l" href="#324">324: </a>        <span class="php-keyword1">if</span> (!(<span class="php-keyword2">error_reporting</span>() &amp; <span class="php-var">$code</span>)) {
+</span><span id="325" class="l"><a class="l" href="#325">325: </a>            <span class="php-comment">// This error code is not included in error_reporting</span>
+</span><span id="326" class="l"><a class="l" href="#326">326: </a>            <span class="php-keyword1">return</span>;
 </span><span id="327" class="l"><a class="l" href="#327">327: </a>        }
-</span><span id="328" class="l"><a class="l" href="#328">328: </a>
-</span><span id="329" class="l"><a class="l" href="#329">329: </a>        <span class="php-keyword1">return</span> <span class="php-var">$content</span>;
+</span><span id="328" class="l"><a class="l" href="#328">328: </a>        <span class="php-keyword2">restore_error_handler</span>();
+</span><span id="329" class="l"><a class="l" href="#329">329: </a>        <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \ErrorException(<span class="php-var">$message</span>, <span class="php-var">$code</span>, <span class="php-num">500</span>, <span class="php-var">$file</span>, <span class="php-var">$line</span>);
 </span><span id="330" class="l"><a class="l" href="#330">330: </a>    }
-</span><span id="331" class="l"><a class="l" href="#331">331: </a>}
-</span><span id="332" class="l"><a class="l" href="#332">332: </a></span></code></pre>
+</span><span id="331" class="l"><a class="l" href="#331">331: </a>
+</span><span id="332" class="l"><a class="l" href="#332">332: </a>    <span class="php-comment">/**
+</span></span><span id="333" class="l"><a class="l" href="#333">333: </a><span class="php-comment">     * Get file code in specified range
+</span></span><span id="334" class="l"><a class="l" href="#334">334: </a><span class="php-comment">     *
+</span></span><span id="335" class="l"><a class="l" href="#335">335: </a><span class="php-comment">     * @param  string $file  The file name
+</span></span><span id="336" class="l"><a class="l" href="#336">336: </a><span class="php-comment">     * @param  int    $line  The file line
+</span></span><span id="337" class="l"><a class="l" href="#337">337: </a><span class="php-comment">     * @param  int    $range The line range
+</span></span><span id="338" class="l"><a class="l" href="#338">338: </a><span class="php-comment">     * @return string
+</span></span><span id="339" class="l"><a class="l" href="#339">339: </a><span class="php-comment">     */</span>
+</span><span id="340" class="l"><a class="l" href="#340">340: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getFileCode" href="#_getFileCode">getFileCode</a>(<span class="php-var">$file</span>, <span class="php-var">$line</span>, <span class="php-var">$range</span> = <span class="php-num">20</span>)
+</span><span id="341" class="l"><a class="l" href="#341">341: </a>    {
+</span><span id="342" class="l"><a class="l" href="#342">342: </a>        <span class="php-var">$code</span> = <span class="php-keyword2">file</span>(<span class="php-var">$file</span>);
+</span><span id="343" class="l"><a class="l" href="#343">343: </a>        <span class="php-var">$half</span> = (int) (<span class="php-var">$range</span> / <span class="php-num">2</span>);
+</span><span id="344" class="l"><a class="l" href="#344">344: </a>
+</span><span id="345" class="l"><a class="l" href="#345">345: </a>        <span class="php-var">$start</span> = <span class="php-var">$line</span> - <span class="php-var">$half</span>;
+</span><span id="346" class="l"><a class="l" href="#346">346: </a>        <span class="php-num">0</span> &gt; <span class="php-var">$start</span> &amp;&amp; <span class="php-var">$start</span> = <span class="php-num">0</span>;
+</span><span id="347" class="l"><a class="l" href="#347">347: </a>
+</span><span id="348" class="l"><a class="l" href="#348">348: </a>        <span class="php-var">$total</span> = <span class="php-keyword2">count</span>(<span class="php-var">$code</span>);
+</span><span id="349" class="l"><a class="l" href="#349">349: </a>        <span class="php-var">$end</span> = <span class="php-var">$line</span> + <span class="php-var">$half</span>;
+</span><span id="350" class="l"><a class="l" href="#350">350: </a>        <span class="php-var">$total</span> &lt; <span class="php-var">$end</span> &amp;&amp; <span class="php-var">$end</span> = <span class="php-var">$total</span>;
+</span><span id="351" class="l"><a class="l" href="#351">351: </a>
+</span><span id="352" class="l"><a class="l" href="#352">352: </a>        <span class="php-var">$len</span> = <span class="php-keyword2">strlen</span>(<span class="php-var">$end</span>);
+</span><span id="353" class="l"><a class="l" href="#353">353: </a>
+</span><span id="354" class="l"><a class="l" href="#354">354: </a>        <span class="php-keyword2">array_unshift</span>(<span class="php-var">$code</span>, <span class="php-keyword1">null</span>);
+</span><span id="355" class="l"><a class="l" href="#355">355: </a>        <span class="php-var">$content</span> = <span class="php-quote">''</span>;
+</span><span id="356" class="l"><a class="l" href="#356">356: </a>        <span class="php-keyword1">for</span> (<span class="php-var">$i</span> = <span class="php-var">$start</span>; <span class="php-var">$i</span> &lt; <span class="php-var">$end</span>; <span class="php-var">$i</span>++) {
+</span><span id="357" class="l"><a class="l" href="#357">357: </a>            <span class="php-var">$temp</span> = <span class="php-keyword2">str_pad</span>(<span class="php-var">$i</span>, <span class="php-var">$len</span>, <span class="php-num">0</span>, STR_PAD_LEFT) . <span class="php-quote">':  '</span> . <span class="php-var">$code</span>[<span class="php-var">$i</span>];
+</span><span id="358" class="l"><a class="l" href="#358">358: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$line</span> != <span class="php-var">$i</span>) {
+</span><span id="359" class="l"><a class="l" href="#359">359: </a>                <span class="php-var">$content</span> .= <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$temp</span>, ENT_QUOTES);
+</span><span id="360" class="l"><a class="l" href="#360">360: </a>            } <span class="php-keyword1">else</span> {
+</span><span id="361" class="l"><a class="l" href="#361">361: </a>                <span class="php-var">$content</span> .= <span class="php-quote">'&lt;strong&gt;'</span> . <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$temp</span>, ENT_QUOTES) . <span class="php-quote">'&lt;/strong&gt;'</span>;
+</span><span id="362" class="l"><a class="l" href="#362">362: </a>            }
+</span><span id="363" class="l"><a class="l" href="#363">363: </a>        }
+</span><span id="364" class="l"><a class="l" href="#364">364: </a>
+</span><span id="365" class="l"><a class="l" href="#365">365: </a>        <span class="php-keyword1">return</span> <span class="php-var">$content</span>;
+</span><span id="366" class="l"><a class="l" href="#366">366: </a>    }
+</span><span id="367" class="l"><a class="l" href="#367">367: </a>}
+</span><span id="368" class="l"><a class="l" href="#368">368: </a></span></code></pre>
 
 	<div id="footer">
-		Wei Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
 	</div>
 </div>
 </div>
+<script src="resources/combined.js?721046668"></script>
+<script src="elementlist.js?2192786340"></script>
 </body>
 </html>

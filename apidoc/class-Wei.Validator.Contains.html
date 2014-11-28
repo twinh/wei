@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 2.8.0" />
+	<meta charset="utf-8">
 
-	<title>Class Wei\Validator\Contains | Wei Framework</title>
+	<title>Class Wei\Validator\Contains</title>
 
-	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?3712690943"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+	<link rel="stylesheet" href="resources/style.css?331665766">
 
 </head>
 
@@ -19,21 +16,34 @@
 
 
 		<div id="groups">
-			<h3>Namespaces</h3>
+				<h3>Namespaces</h3>
 			<ul>
-				<li><a href="namespace-None.html">None</a>
+				<li>
+					<a href="namespace-None.html">
+						None					</a>
+
 						</li>
-				<li><a href="namespace-PHP.html">PHP</a>
+				<li>
+					<a href="namespace-PHP.html">
+						PHP					</a>
+
 						</li>
-				<li class="active"><a href="namespace-Wei.html">Wei<span></span></a>
+				<li class="active">
+					<a href="namespace-Wei.html">
+						Wei<span></span>
+					</a>
+
 						<ul>
-				<li class="active"><a href="namespace-Wei.Validator.html">Validator</a>
+				<li class="active">
+					<a href="namespace-Wei.Validator.html">
+						Validator					</a>
+
 						</li>
 							</ul></li>
 			</ul>
 		</div>
 
-		<hr />
+		<hr>
 
 
 		<div id="elements">
@@ -122,10 +132,9 @@
 <div id="right">
 <div id="rightInner">
 	<form id="search">
-		<input type="hidden" name="cx" value="" />
-		<input type="hidden" name="ie" value="UTF-8" />
-		<input type="text" name="q" class="text" />
-		<input type="submit" value="Search" />
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
 	</form>
 
 	<div id="navigation">
@@ -153,8 +162,7 @@
 
 
 	<div class="description">
-	
-<p>Check if the input is valid Hex color</p>
+	<p>Check if the input is contains the specified string or pattern</p>
 
 	</div>
 
@@ -166,21 +174,14 @@
 			
 		</dd>
 		<dd style="padding-left:30px">
-			<img src="resources/inherit.png" alt="Extended by" />
+			<img src="resources/inherit.png" alt="Extended by">
 			<a href="class-Wei.Validator.BaseValidator.html"><span>Wei\Validator\BaseValidator</span></a>
 			
 			
 			
 		</dd>
 		<dd style="padding-left:60px">
-			<img src="resources/inherit.png" alt="Extended by" />
-			<a href="class-Wei.Validator.Regex.html"><span>Wei\Validator\Regex</span></a>
-			
-			
-			
-		</dd>
-		<dd style="padding-left:90px">
-			<img src="resources/inherit.png" alt="Extended by" />
+			<img src="resources/inherit.png" alt="Extended by">
 <b><span>Wei\Validator\Contains</span></b>			
 			
 			
@@ -197,23 +198,24 @@
 	<div class="info">
 		
 		
-		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a>\<a href="namespace-Wei.Validator.html">Validator</a><br />
+		<b>Namespace:</b> Wei\Validator<br>
 		
 
 				<b>Author:</b>
-				Twin Huang &lt;<a
-href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-Wei.Validator.Contains.html#11-57" title="Go to source code">Validator/Contains.php</a><br />
+				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a>
+<br>
+		<b>Located at</b> <a href="source-class-Wei.Validator.Contains.html#11-66" title="Go to source code">Validator/Contains.php</a><br>
 	</div>
 
 
 
-	<table class="summary" id="methods">
+	<table class="summary methods" id="methods">
 	<caption>Methods summary</caption>
 	<tr data-order="__invoke" id="___invoke">
 
 		<td class="attributes"><code>
 			 public 
+
 			boolean
 			
 			</code>
@@ -221,37 +223,40 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#___invoke">#</a>
-		<code><a href="source-class-Wei.Validator.Contains.html#26-38" title="Go to source code">__invoke</a>( <span>mixed <var>$input</var></span>, <span>null|string <var>$pattern</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Wei.Validator.Contains.html#26-40" title="Go to source code">__invoke</a>( <span>mixed <var>$input</var></span>, <span>string <var>$search</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$regex</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
-			
-<p>Returns whether the $input value is valid</p>
+			<p>Returns whether the $input value is valid</p>
 
 		</div>
 
 		<div class="description detailed hidden">
-			
-<p>Returns whether the $input value is valid</p>
+			<p>Returns whether the $input value is valid</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$input</var></dt>
-					<dd><code>mixed</code><br>$input</dd>
-					<dt><var>$pattern</var></dt>
-					<dd><code>null|string</code><br>$pattern</dd>
+					<dd>
+</dd>
+					<dt><var>$search</var></dt>
+					<dd>
+</dd>
+					<dt><var>$regex</var></dt>
+					<dd>
+</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code><br />
+					<code>boolean</code>
 				</div>
 
 
 
 				<h4>Overrides</h4>
-				<div class="list"><code><a href="class-Wei.Validator.Regex.html#___invoke">Wei\Validator\Regex::__invoke()</a></code></div>
+				<div class="list"><code><a href="class-Wei.Validator.BaseValidator.html#___invoke">Wei\Validator\BaseValidator::__invoke()</a></code></div>
 
 		</div>
 		</div></td>
@@ -260,6 +265,7 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="attributes"><code>
 			 protected 
+
 			boolean
 			
 			</code>
@@ -267,35 +273,32 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_doValidate">#</a>
-		<code><a href="source-class-Wei.Validator.Contains.html#40-56" title="Go to source code">doValidate</a>( <span>mixed <var>$input</var></span> )</code>
+		<code><a href="source-class-Wei.Validator.Contains.html#42-65" title="Go to source code">doValidate</a>( <span>mixed <var>$input</var></span> )</code>
 
 		<div class="description short">
-			
-<p>Validate the input value (ignore the $negative property)</p>
+			<p>Validate the input value (ignore the $negative property)</p>
 
 		</div>
 
 		<div class="description detailed hidden">
-			
-<p>Validate the input value (ignore the $negative property)</p>
+			<p>Validate the input value (ignore the $negative property)</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$input</var></dt>
-					<dd><code>mixed</code><br>$input The input to be validated</dd>
+					<dd>The input to be validated
+</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code><br />
+					<code>boolean</code>
 				</div>
 
 
 
-				<h4>Overrides</h4>
-				<div class="list"><code><a href="class-Wei.Validator.Regex.html#_doValidate">Wei\Validator\Regex::doValidate()</a></code></div>
 
 		</div>
 		</div></td>
@@ -353,53 +356,34 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 
 
 
-	<table class="summary" id="properties">
+	<table class="summary properties" id="properties">
 	<caption>Properties summary</caption>
-	<tr data-order="notContains" id="$notContains">
+	<tr data-order="notContainsMessage" id="$notContainsMessage">
 		<td class="attributes"><code>
 			protected  
 			string
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Wei.Validator.Contains.html#18" title="Go to source code"><var>$notContains</var></a>
-		</td>
-		<td class="value"><code><span class="php-quote">''</span></code></td>
-		<td class="description"><div>
-			<a href="#$notContains" class="anchor">#</a>
+				<a href="source-class-Wei.Validator.Contains.html#18" title="Go to source code"><var>$notContainsMessage</var></a>
 
 			<div class="description short">
 				
+
 			</div>
 
 			<div class="description detailed hidden">
 				
 
-			</div>
-		</div></td>
-	</tr>
-	<tr data-order="patternMessage" id="$patternMessage">
-		<td class="attributes"><code>
-			protected  
-			string
-		</code></td>
 
-		<td class="name">
-				<a href="source-class-Wei.Validator.Contains.html#20" title="Go to source code"><var>$patternMessage</var></a>
+			</div>
 		</td>
-		<td class="value"><code><span class="php-quote">'%name% must be valid hex color, e.g. #FF0000'</span></code></td>
-		<td class="description"><div>
-			<a href="#$patternMessage" class="anchor">#</a>
-
-			<div class="description short">
-				
+		<td class="value">
+			<div>
+				<a href="#$notContainsMessage" class="anchor">#</a>
+				<code><span class="php-quote">'%name% must contains %search%'</span></code>
 			</div>
-
-			<div class="description detailed hidden">
-				
-
-			</div>
-		</div></td>
+		</td>
 	</tr>
 	<tr data-order="negativeMessage" id="$negativeMessage">
 		<td class="attributes"><code>
@@ -408,52 +392,79 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Wei.Validator.Contains.html#22" title="Go to source code"><var>$negativeMessage</var></a>
-		</td>
-		<td class="value"><code><span class="php-quote">'%name% must not be valid hex color'</span></code></td>
-		<td class="description"><div>
-			<a href="#$negativeMessage" class="anchor">#</a>
+				<a href="source-class-Wei.Validator.Contains.html#20" title="Go to source code"><var>$negativeMessage</var></a>
 
 			<div class="description short">
-				
-<p>The common message for negative validator</p>
+				<p>The common message for negative validator</p>
 
 			</div>
 
 			<div class="description detailed hidden">
-				
-<p>The common message for negative validator</p>
+				<p>The common message for negative validator</p>
 
 
 			</div>
-		</div></td>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$negativeMessage" class="anchor">#</a>
+				<code><span class="php-quote">'%name% must not contains %search%'</span></code>
+			</div>
+		</td>
 	</tr>
-	<tr data-order="pattern" id="$pattern">
+	<tr data-order="search" id="$search">
 		<td class="attributes"><code>
 			protected  
-			string
+			mixed
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Wei.Validator.Contains.html#24" title="Go to source code"><var>$pattern</var></a>
-		</td>
-		<td class="value"><code></code></td>
-		<td class="description"><div>
-			<a href="#$pattern" class="anchor">#</a>
+				<a href="source-class-Wei.Validator.Contains.html#22" title="Go to source code"><var>$search</var></a>
 
 			<div class="description short">
 				
-<p>The regex pattern</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>The regex pattern</p>
 
 
 			</div>
-		</div></td>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$search" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="regex" id="$regex">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Validator.Contains.html#24" title="Go to source code"><var>$regex</var></a>
+
+			<div class="description short">
+				
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$regex" class="anchor">#</a>
+				<code><span class="php-keyword1">false</span></code>
+			</div>
+		</td>
 	</tr>
 	</table>
 
@@ -494,9 +505,11 @@ href="mailto:twinhuang&#64;qq.com">twinhuang&#64;<!---->qq.com</a>&gt;<br />
 </div>
 
 	<div id="footer">
-		Wei Framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
 	</div>
 </div>
 </div>
+<script src="resources/combined.js?721046668"></script>
+<script src="elementlist.js?2192786340"></script>
 </body>
 </html>

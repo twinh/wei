@@ -1,0 +1,4 @@
+destination: ./apidoc
+source:
+	- ../wei/lib/
+	
