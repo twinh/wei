@@ -76,4 +76,34 @@ class CookieTest extends TestCase
 
         $this->assertArrayHasKey('test', $array);
     }
+
+    public function testArrayAccess()
+    {
+        $cookie = $this->cookie;
+
+        $cookie['name'] = 'value';
+        $this->assertEquals('value', $cookie['name']);
+
+        $cookie['name'] = 'value2';
+        $this->assertEquals('value2', $cookie['name']);
+
+        unset($cookie['name']);
+
+        $this->assertFalse(isset($cookie['name']));
+
+        // $cookie['name'] will cause key exists again
+        $this->assertNull($cookie['name']);
+
+        $this->assertTrue(isset($cookie['name']));
+
+        $cookie['a']['b'] = 'c';
+        $this->assertEquals('c', $cookie['a']['b']);
+
+        $cookie['d']['e']['f']['g'] = 'h';
+        $this->assertEquals('h', $cookie['d']['e']['f']['g']);
+
+        $cookie['i'] = array();
+        $cookie['i']['j'] = 'k';
+        $this->assertEquals('k', $cookie['i']['j']);
+    }
 }

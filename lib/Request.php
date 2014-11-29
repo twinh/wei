@@ -255,7 +255,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function offsetExists($offset)
     {
-        return isset($this->data[$offset]);
+        return array_key_exists($offset, $this->data);
     }
 
     /**
@@ -264,9 +264,9 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * @param  string $offset
      * @return mixed
      */
-    public function offsetGet($offset)
+    public function &offsetGet($offset)
     {
-        return isset($this->data[$offset]) ? $this->data[$offset] : null;
+        return $this->data[$offset];
     }
 
     /**

@@ -118,7 +118,6 @@ class ViewTest extends TestCase
         $view['i'] = array();
         $view['i']['j'] = 'k';
         $this->assertEquals('k', $view['i']['j']);
-
     }
 
     public function testReferenceArrayAccess()

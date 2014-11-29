@@ -494,7 +494,7 @@ class RequestTest extends TestCase
             'fromGlobal' => false
         ));
 
-        foreach (array('get', 'cookie', 'server', 'file') as $option) {
+        foreach (array('get', 'request', 'server', 'file') as $option) {
             $this->assertInternalType('array', $request->getParameterReference($option));
         }
     }
@@ -708,5 +708,35 @@ class RequestTest extends TestCase
             )
         ));
         $this->assertTrue($request->isMethod('PUT'));
+    }
+
+    public function testArrayAccess()
+    {
+        $request = $this->request;
+
+        $request['name'] = 'value';
+        $this->assertEquals('value', $request['name']);
+
+        $request['name'] = 'value2';
+        $this->assertEquals('value2', $request['name']);
+
+        unset($request['name']);
+
+        $this->assertFalse(isset($request['name']));
+
+        // $request['name'] will cause key exists again
+        $this->assertNull($request['name']);
+
+        $this->assertTrue(isset($request['name']));
+
+        $request['a']['b'] = 'c';
+        $this->assertEquals('c', $request['a']['b']);
+
+        $request['d']['e']['f']['g'] = 'h';
+        $this->assertEquals('h', $request['d']['e']['f']['g']);
+
+        $request['i'] = array();
+        $request['i']['j'] = 'k';
+        $this->assertEquals('k', $request['i']['j']);
     }
 }

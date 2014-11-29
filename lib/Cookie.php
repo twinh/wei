@@ -128,7 +128,7 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
      */
     public function offsetExists($offset)
     {
-        return isset($this->data[$offset]);
+        return array_key_exists($offset, $this->data);
     }
 
     /**
@@ -137,9 +137,9 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
      * @param  string $offset
      * @return mixed
      */
-    public function offsetGet($offset)
+    public function &offsetGet($offset)
     {
-        return isset($this->data[$offset]) ? $this->data[$offset] : null;
+        return $this->data[$offset];
     }
 
     /**
