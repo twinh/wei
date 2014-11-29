@@ -141,6 +141,9 @@ class SessionTest extends TestCase
 
         $session['a']['b'] = 'c';
         $this->assertEquals('c', $session['a']['b']);
+
+        $session['d']['e']['f']['g'] = 'h';
+        $this->assertEquals('h', $session['d']['e']['f']['g']);
     }
 
     public function testNamespace()
