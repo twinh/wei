@@ -135,6 +135,14 @@ class SessionTest extends TestCase
         $this->assertEquals('c', $session['a']['b']);
     }
 
+    public function testSetValueOnNonExistArray()
+    {
+        $session = $this->object;
+
+        $session['a']['b'] = 'c';
+        $this->assertEquals('c', $session['a']['b']);
+    }
+
     public function testNamespace()
     {
         $this->session->setOption('namespace', 'test');
