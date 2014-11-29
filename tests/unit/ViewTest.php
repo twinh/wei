@@ -101,9 +101,24 @@ class ViewTest extends TestCase
         $this->assertEquals('value2', $view['name']);
 
         unset($view['name']);
-        $this->assertNull($view['name']);
 
         $this->assertFalse(isset($view['name']));
+
+        // $view['name'] will cause key exists again
+        $this->assertNull($view['name']);
+
+        $this->assertTrue(isset($view['name']));
+
+        $view['a']['b'] = 'c';
+        $this->assertEquals('c', $view['a']['b']);
+
+        $view['d']['e']['f']['g'] = 'h';
+        $this->assertEquals('h', $view['d']['e']['f']['g']);
+
+        $view['i'] = array();
+        $view['i']['j'] = 'k';
+        $this->assertEquals('k', $view['i']['j']);
+
     }
 
     public function testReferenceArrayAccess()

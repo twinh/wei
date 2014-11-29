@@ -246,12 +246,7 @@ class View extends Base implements \ArrayAccess
      */
     public function &offsetGet($offset)
     {
-        if (isset($this->data[$offset])) {
-            return $this->data[$offset];
-        } else {
-            $ret = null;
-            return $ret;
-        }
+        return $this->data[$offset];
     }
 
     /**
