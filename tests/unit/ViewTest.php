@@ -131,4 +131,13 @@ class ViewTest extends TestCase
         $this->assertEquals('item 1', $view['items'][0]);
         $this->assertEquals('item 2', $view['items'][1]);
     }
+
+    public function testEmptyDir()
+    {
+        $this->view->setDirs('');
+        $testFile = 'tests/unit/ViewTest.php';
+        $fullFile = $this->view->getFile($testFile);
+
+        $this->assertEquals($fullFile, $testFile);
+    }
 }
