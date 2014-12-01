@@ -168,12 +168,27 @@ class View extends Base implements \ArrayAccess
      */
     public function getFile($name)
     {
+        if ($file = $this->resolveFile($name)) {
+            return $file;
+        } else {
+            throw new \RuntimeException(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->dirs)), 404);
+        }
+    }
+
+    /**
+     * Resolve the template file by name
+     *
+     * @param  string $name The name of template
+     * @return string|false The template file path or false if file not found
+     */
+    public function resolveFile($name)
+    {
         foreach ($this->dirs as $dir) {
             if (is_file($file = $dir . ($dir ? '/' : '') .  $name)) {
                 return $file;
             }
         }
-        throw new \RuntimeException(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->dirs)), 404);
+        return false;
     }
 
     /**
