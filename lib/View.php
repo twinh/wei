@@ -169,7 +169,7 @@ class View extends Base implements \ArrayAccess
     public function getFile($name)
     {
         foreach ($this->dirs as $dir) {
-            if (is_file($file = $dir . '/' .  $name)) {
+            if (is_file($file = $dir . ($dir ? '/' : '') .  $name)) {
                 return $file;
             }
         }
