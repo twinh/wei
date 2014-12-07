@@ -32,7 +32,7 @@ class Url extends Base
     }
 
     /**
-     * Generate the full URL path by specified URL and parameters
+     * Generate the absolute URL path by specified URL and parameters
      *
      * @param string $url
      * @param array $params
@@ -41,5 +41,17 @@ class Url extends Base
     public function full($url, $params = array())
     {
         return $this->request->getUrlFor($this->__invoke($url, $params));
+    }
+
+    /**
+     * Generate the URL path with current query parameters and specified parameters
+     *
+     * @param string $url
+     * @param array $params
+     * @return string
+     */
+    public function query($url = '', $params = array())
+    {
+        return $this->__invoke($url, $params + $this->request->getQueries());
     }
 }
