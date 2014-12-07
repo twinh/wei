@@ -223,6 +223,16 @@ class App extends Base
     }
 
     /**
+     * Returns the URI that contains controller and action
+     *
+     * @return string
+     */
+    public function getControllerAction()
+    {
+        return $this->getController() . '/' . $this->getAction();
+    }
+
+    /**
      * Return the controller class name (without validate if the class exists)'
      *
      * @param string $controller The name of class
