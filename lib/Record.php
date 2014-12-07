@@ -66,7 +66,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * The record data
      *
-     * @var array|Record[]
+     * @var array|$this[]
      */
     protected $data = array();
 
@@ -470,7 +470,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $newData = array();
         foreach ($this->data as $key => $record) {
             unset($this->data[$key]);
-            $newData[$record['id']] = $record;
+            // Ignore default data
+            if ($record instanceof $this) {
+                $newData[$record['id']] = $record;
+            }
         }
         $this->data = $newData;
 
@@ -793,7 +796,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Executes the generated SQL and returns the found record object or false
      *
      * @param mixed $conditions
-     * @return false|Record
+     * @return $this|false
      */
     public function find($conditions = false)
     {
@@ -853,7 +856,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Executes the generated SQL and returns the found record collection object or false
      *
      * @param mixed $conditions
-     * @return $this[]
+     * @return $this|$this[]
      */
     public function findAll($conditions = false)
     {
