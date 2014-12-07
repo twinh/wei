@@ -617,6 +617,14 @@ class DbTest extends TestCase
         $this->assertArrayHasKey('test', $members);
     }
 
+    public function testFixUndefinedOffset0WhenFetchEmptyData()
+    {
+        $this->initFixtures();
+
+        $emptyMembers = $this->db('member')->where(array('group_id' => '3'))->indexBy('id')->fetchAll();
+        $this->assertEmpty($emptyMembers);
+    }
+
     public function testIndexByException()
     {
         $this->initFixtures();
