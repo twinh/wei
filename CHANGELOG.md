@@ -1,6 +1,36 @@
 Changelog
 =========
 
+## 0.9.15 (2014-12-07)
+
+* Router: Drop REST router support, refs 56da468
+* Request: Added getQueries method, refs 82ac19f
+* Wei: Added setServices method, fixed preload services missing issue, refs 584b3b1
+* Record: Removed order by in count sql, refs 09798cf
+* Record: Speed up count query, refs 83630b9
+* Ua: Added isWeChat method to check if in WeChat app, refs 699995f
+* Record: Fixed indexBy error when fetched data is empty, refs 0fc9b37
+* Record: Added conditions parameter for fetch and fetchAll methods, refs c5fb556
+* Record: Added parameter for SQL COUNT function argument, refs 08302b8
+* Lock: Releases locks and exist when catch signal in CLI, refs ab4fb34
+* WeChatApp: Removed 'qrscene_' prefix in getScanSceneId method, refs e56ae98
+* Asset: Added array parameter support for __invoke method, refs 39870ed
+* Soap: Added soap service works like http service, refs 81798a6
+* Log: Allows to log exception as message, refs ab2d33f
+* WeChatApp: Returns empty string if no rule is handled, http://mp.weixin.qq.com/wiki/index.php?title=%E5%8F%91%E9%80%81%E8%A2%AB%E5%8A%A8%E5%93%8D%E5%BA%94%E6%B6%88%E6%81%AF , refs ab2d33f
+* App: Force response content to be array, refs 6b54527
+* Session: Added namespace support, refs 21da6ed
+* Session, Cookie, Request: Fixed the error "Indirect modification of overloaded element of Wei\Session has no effect" caused by set session on non exist key, refs a6f665b
+* View: Added empty view directory support, refs 506fa3d
+* Asset: Allows empty base url for concatenate files, refs 89899f2
+* Record: Ignores default data in saveColl, refs 14223e7
+* Url: Added query method for url service to generate url with current query parameters, refs e4139d4
+* App: Added getControllerAction, refs 84f89bb
+* Wei: Allows non \Wei\Base object as service, refs a0f5640
+* Record: Added fetchColumn method, refs 49dde48
+* Record: Added countBySubQuery method for record service, refs bb5e189
+* Record: Fixed undefined offset 0 when fetch empty data, refs 616bb9c
+
 ## 0.9.14 (2014-03-24)
 
 * Use full dir in file cache service
