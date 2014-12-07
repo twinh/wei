@@ -49,6 +49,8 @@ namespace Wei
      * HTTP Client
      * @property Http       $http An alias of call service
      * @method   \Wei\Http  http(array $options) Create a new HTTP service and execute
+     * @property Soap       $soap A Soap client that works like HTTP service
+     * @method   \Wei\Soap  soap(array $options) Create a new Soap service and execute
      *
      * HTTP Request
      * @property Request    $request A service that handles the HTTP request data
