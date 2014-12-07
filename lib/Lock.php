@@ -32,7 +32,7 @@ class Lock extends Base
 
         register_shutdown_function(array($this, 'releaseAll'));
 
-        // Release all lock and exist when catch signal in CLI
+        // Release locks and exist when catch signal in CLI
         if (function_exists('pcntl_signal')) {
             pcntl_signal(SIGINT, array($this, 'catchSignal'));
             pcntl_signal(SIGTERM, array($this, 'catchSignal'));
