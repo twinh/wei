@@ -57,14 +57,17 @@ class Asset extends Base
     }
 
     /**
-     * Returns the concat URL for list of files
+     * Returns the Minify concat URL for list of files
      *
      * @param array $files
      * @return string
+     * @link https://github.com/mrclay/minify
      */
     public function concat(array $files)
     {
-        return $this->concatUrl . '?b=' . trim($this->baseUrl, '/') .'&f=' . implode(',', $files);
+        $baseUrl = trim($this->baseUrl, '/');
+        $url = $this->concatUrl . '?f=' . implode(',', $files);
+        return $baseUrl ? $url . '&b=' . trim($this->baseUrl, '/') : $url;
     }
 
     /**
