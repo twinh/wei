@@ -923,6 +923,18 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
+     * Executes the generated query and returns a column value of the first row
+     *
+     * @param mixed $conditions
+     * @return array|false
+     */
+    public function fetchColumn($conditions = false)
+    {
+        $data = $this->fetch($conditions);
+        return $data ? current($data) : false;
+    }
+
+    /**
      * Executes the generated query and returns all array results
      *
      * @param mixed $conditions
@@ -942,7 +954,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Execute a COUNT query to receive the rows number
      *
      * @param mixed $conditions
-     * @param string $count The argument for SQL COUNT method
+     * @param string $count
      * @return int
      */
     public function count($conditions = false, $count = '1')

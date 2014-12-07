@@ -1894,6 +1894,17 @@ class DbTest extends TestCase
 
         $this->assertFalse($newMember);
     }
+
+    public function testRecordFetchColumn()
+    {
+        $this->initFixtures();
+
+        $count = $this->db('member')->select('COUNT(id)')->fetchColumn();
+        $this->assertEquals(2, $count);
+
+        $count = $this->db('member')->select('COUNT(id)')->fetchColumn(array('id' => 1));
+        $this->assertEquals(1, $count);
+    }
 }
 
 
