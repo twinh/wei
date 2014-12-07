@@ -951,7 +951,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Execute a COUNT query to receive the rows number
+     * Executes a COUNT query to receive the rows number
      *
      * @param mixed $conditions
      * @param string $count
@@ -967,6 +967,18 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $this->sqlParts['select'] = $select;
 
         return $count;
+    }
+
+    /**
+     * Executes a sub query to receive the rows number
+     *
+     * @param mixed $conditions
+     * @return int
+     */
+    public function countBySubQuery($conditions = false)
+    {
+        $this->andWhere($conditions);
+        return (int)$this->db->fetchColumn($this->getSqlForCount(), $this->params);
     }
 
     /**

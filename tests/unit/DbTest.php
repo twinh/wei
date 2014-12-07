@@ -994,6 +994,21 @@ class DbTest extends TestCase
         $this->assertEquals(2, $count);
     }
 
+    public function testCountBySubQuery()
+    {
+        $this->initFixtures();
+
+        $count = $this->db('member')->countBySubQuery();
+
+        $this->assertInternalType('int', $count);
+        $this->assertEquals(2, $count);
+
+        $count = $this->db('member')->select('id, name')->limit(1)->offset(2)->countBySubQuery();
+
+        $this->assertInternalType('int', $count);
+        $this->assertEquals(2, $count);
+    }
+
     public function testCountWithCondition()
     {
         $this->initFixtures();
