@@ -688,10 +688,10 @@ namespace Wei
          * Add a service to the service container
          *
          * @param string $name The name of service
-         * @param Base $service The object of service
+         * @param object $service The object of service
          * @return $this
          */
-        public function set($name, Base $service)
+        public function set($name, $service)
         {
             $this->services[$name] = $service;
             return $this;
