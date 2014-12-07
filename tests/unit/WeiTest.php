@@ -523,4 +523,10 @@ class WeiTest extends TestCase
             'namespace' => 'abc'
         ));
     }
+
+    public function testSetCustomService()
+    {
+        $this->wei->set('customService', new \stdClass());
+        $this->assertInstanceOf('stdClass', $this->wei->get('customService'));
+    }
 }
