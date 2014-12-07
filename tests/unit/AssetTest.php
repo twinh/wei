@@ -60,7 +60,7 @@ class AssetTest extends TestCase
     {
         $this->asset->setBaseUrl('abc');
         $this->asset->setOption('concatUrl', '/c/');
-        $this->assertEquals('/c/?b=abc&f=a.js,b/b.js,c/c/c.js', $this->asset->concat(array(
+        $this->assertEquals('/c/?f=a.js,b/b.js,c/c/c.js&b=abc', $this->asset->concat(array(
             'a.js', 'b/b.js', 'c/c/c.js'
         )));
     }
