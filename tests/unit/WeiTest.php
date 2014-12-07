@@ -491,7 +491,7 @@ class WeiTest extends TestCase
             )
         ));
 
-        // Instance weis
+        // service instances
         $wei->request;
         $wei->{'sub.request'};
 
@@ -528,5 +528,8 @@ class WeiTest extends TestCase
     {
         $this->wei->set('customService', new \stdClass());
         $this->assertInstanceOf('stdClass', $this->wei->get('customService'));
+
+        $this->wei->customService2 = new \stdClass();
+        $this->assertInstanceOf('stdClass', $this->wei->customService2);
     }
 }
