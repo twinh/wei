@@ -75,7 +75,7 @@ class Memcached extends BaseCache
      */
     public function get($key, $expire = null, $fn = null)
     {
-        $result = $this->object->get($this->prefix . $key);
+        $result = $this->object->get($this->namespace . $key);
         return $this->processGetResult($key, $result, $expire, $fn);
     }
 
@@ -84,7 +84,7 @@ class Memcached extends BaseCache
      */
     public function set($key, $value, $expire = 0)
     {
-        return $this->object->set($this->prefix . $key, $value, $expire);
+        return $this->object->set($this->namespace . $key, $value, $expire);
     }
 
     /**
@@ -101,7 +101,7 @@ class Memcached extends BaseCache
         $cas = null;
         $keysWithPrefix = array();
         foreach ($keys as $key) {
-            $keysWithPrefix[] = $this->prefix . $key;
+            $keysWithPrefix[] = $this->namespace . $key;
         }
         $values = $this->object->getMulti($keysWithPrefix, $cas, \Memcached::GET_PRESERVE_ORDER);
         return array_combine($keys, $values);
@@ -112,7 +112,7 @@ class Memcached extends BaseCache
      */
     public function remove($key)
     {
-        return $this->object->delete($this->prefix . $key);
+        return $this->object->delete($this->namespace . $key);
     }
 
     /**
@@ -120,7 +120,7 @@ class Memcached extends BaseCache
      */
     public function exists($key)
     {
-        $key = $this->prefix . $key;
+        $key = $this->namespace . $key;
         if ($this->object->add($key, true)) {
             $this->object->delete($key);
             return false;
@@ -133,7 +133,7 @@ class Memcached extends BaseCache
      */
     public function add($key, $value, $expire = 0)
     {
-        return $this->object->add($this->prefix . $key, $value, $expire);
+        return $this->object->add($this->namespace . $key, $value, $expire);
     }
 
     /**
@@ -141,7 +141,7 @@ class Memcached extends BaseCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        return $this->object->replace($this->prefix . $key, $value, $expire);
+        return $this->object->replace($this->namespace . $key, $value, $expire);
     }
 
     /**
@@ -173,7 +173,7 @@ class Memcached extends BaseCache
      */
     protected function incDec($key, $offset, $inc = true)
     {
-        $key = $this->prefix . $key;
+        $key = $this->namespace . $key;
         $method = $inc ? 'increment' : 'decrement';
         $offset = abs($offset);
         if (false === $this->object->$method($key, $offset)) {

@@ -79,7 +79,7 @@ class Couchbase extends BaseCache
      */
     public function get($key, $expire = null, $fn = null)
     {
-        $result = $this->object->get($this->prefix . $key);
+        $result = $this->object->get($this->namespace . $key);
         return $this->processGetResult($key, $result, $expire, $fn);
     }
 
@@ -88,7 +88,7 @@ class Couchbase extends BaseCache
      */
     public function set($key, $value, $expire = 0)
     {
-        return $this->object->set($this->prefix . $key, $value, $expire);
+        return $this->object->set($this->namespace . $key, $value, $expire);
     }
 
     /**
@@ -96,7 +96,7 @@ class Couchbase extends BaseCache
      */
     public function remove($key)
     {
-        return $this->object->delete($this->prefix . $key);
+        return $this->object->delete($this->namespace . $key);
     }
 
     /**
@@ -116,7 +116,7 @@ class Couchbase extends BaseCache
      */
     public function add($key, $value, $expire = 0)
     {
-        return (bool)$this->object->add($this->prefix . $key, $value, $expire);
+        return (bool)$this->object->add($this->namespace . $key, $value, $expire);
     }
 
     /**
@@ -124,7 +124,7 @@ class Couchbase extends BaseCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        return (bool)$this->object->replace($this->prefix . $key, $value, $expire);
+        return (bool)$this->object->replace($this->namespace . $key, $value, $expire);
     }
 
     /**
@@ -132,7 +132,7 @@ class Couchbase extends BaseCache
      */
     public function incr($key, $offset = 1)
     {
-        return $this->object->inc($this->prefix . $key, $offset, true, 0, $offset);
+        return $this->object->inc($this->namespace . $key, $offset, true, 0, $offset);
     }
 
     /**

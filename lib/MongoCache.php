@@ -70,7 +70,7 @@ class MongoCache extends BaseCache
      */
     public function get($key, $expire = null, $fn = null)
     {
-        $result = $this->object->findOne(array('_id' => $this->prefix . $key), array('value', 'expire'));
+        $result = $this->object->findOne(array('_id' => $this->namespace . $key), array('value', 'expire'));
         if (null === $result || $result['expire'] < time()) {
             $result = false;
         } else {
@@ -85,7 +85,7 @@ class MongoCache extends BaseCache
     public function set($key, $value, $expire = 0)
     {
         $result = $this->object->save(array(
-            '_id' => $this->prefix . $key,
+            '_id' => $this->namespace . $key,
             'value' => serialize($value),
             'expire' => $expire ? time() + $expire : 2147483647,
             'lastModified' => time()
@@ -98,7 +98,7 @@ class MongoCache extends BaseCache
      */
     public function remove($key)
     {
-        $result = $this->object->remove(array('_id' => $this->prefix . $key));
+        $result = $this->object->remove(array('_id' => $this->namespace . $key));
         return $result['n'] === 1;
     }
 
@@ -107,7 +107,7 @@ class MongoCache extends BaseCache
      */
     public function exists($key)
     {
-        $result = $this->object->findOne(array('_id' => $this->prefix . $key), array('expire'));
+        $result = $this->object->findOne(array('_id' => $this->namespace . $key), array('expire'));
         if (null === $result || $result['expire'] < time()) {
             return false;
         } else {

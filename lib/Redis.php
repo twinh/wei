@@ -130,7 +130,7 @@ class Redis extends BaseCache
      */
     public function get($key, $expire = null, $fn = null)
     {
-        $result = $this->object->get($this->prefix . $key);
+        $result = $this->object->get($this->namespace . $key);
         return $this->processGetResult($key, $result, $expire, $fn);
     }
 
@@ -139,7 +139,7 @@ class Redis extends BaseCache
      */
     public function set($key, $value, $expire = 0)
     {
-        return $this->object->set($this->prefix . $key, $value, $expire);
+        return $this->object->set($this->namespace . $key, $value, $expire);
     }
 
     /**
@@ -149,7 +149,7 @@ class Redis extends BaseCache
     {
         $keysWithPrefix = array();
         foreach ($keys as $key) {
-            $keysWithPrefix[] = $this->prefix . $key;
+            $keysWithPrefix[] = $this->namespace . $key;
         }
         return array_combine($keys, $this->object->mGet($keysWithPrefix));
     }
@@ -169,7 +169,7 @@ class Redis extends BaseCache
         $keys = array_keys($items);
         $keysWithPrefix = array();
         foreach ($keys as $key) {
-            $keysWithPrefix[] = $this->prefix . $key;
+            $keysWithPrefix[] = $this->namespace . $key;
         }
         $items = array_combine($keysWithPrefix, $items);
         $result = $this->object->mset($items);
@@ -181,7 +181,7 @@ class Redis extends BaseCache
      */
     public function remove($key)
     {
-        return (bool)$this->object->del($this->prefix . $key);
+        return (bool)$this->object->del($this->namespace . $key);
     }
 
     /**
@@ -189,7 +189,7 @@ class Redis extends BaseCache
      */
     public function exists($key)
     {
-        return $this->object->exists($this->prefix . $key);
+        return $this->object->exists($this->namespace . $key);
     }
 
     /**
@@ -197,7 +197,7 @@ class Redis extends BaseCache
      */
     public function add($key, $value, $expire = 0)
     {
-        $key = $this->prefix . $key;
+        $key = $this->namespace . $key;
         $result = $this->object->setnx($key, $value);
         if (true === $result) {
             $this->object->expire($key, $expire === 0 ? -1 : $expire);
@@ -212,10 +212,10 @@ class Redis extends BaseCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        if (false === $this->object->get($this->prefix . $key)) {
+        if (false === $this->object->get($this->namespace . $key)) {
             return false;
         }
-        return $this->object->set($this->prefix . $key, $value, $expire);
+        return $this->object->set($this->namespace . $key, $value, $expire);
     }
 
     /**
@@ -223,7 +223,7 @@ class Redis extends BaseCache
      */
     public function incr($key, $offset = 1)
     {
-        return $this->object->incrBy($this->prefix . $key, $offset);
+        return $this->object->incrBy($this->namespace . $key, $offset);
     }
 
     /**

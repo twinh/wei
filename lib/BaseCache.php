@@ -20,7 +20,7 @@ abstract class BaseCache extends Base
      *
      * @var string
      */
-    protected $prefix = '';
+    protected $namespace = '';
 
     /**
      * Retrieve or store an item
@@ -225,20 +225,20 @@ abstract class BaseCache extends Base
      *
      * @return string
      */
-    public function getPrefix()
+    public function getNamespace()
     {
-        return $this->prefix;
+        return $this->namespace;
     }
 
     /**
      * Set the cache key prefix
      *
-     * @param string $prefix
+     * @param string $namespace
      * @return $this
      */
-    public function setPrefix($prefix)
+    public function setNamespace($namespace)
     {
-        $this->prefix = $prefix;
+        $this->namespace = $namespace;
         return $this;
     }
 

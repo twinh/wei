@@ -12,7 +12,7 @@ class CacheTestCase extends TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->object->setPrefix('test-');
+        $this->object->setNamespace('test-');
     }
 
     /**
@@ -168,8 +168,8 @@ class CacheTestCase extends TestCase
     public function testPrefix()
     {
         $cache = $this->object;
-        $cache->setPrefix('prefix-');
-        $this->assertEquals('prefix-', $cache->getPrefix());
+        $cache->setNamespace('prefix-');
+        $this->assertEquals('prefix-', $cache->getNamespace());
 
         $cache->set('test', 1);
         $this->assertEquals(1, $cache->get('test'));
@@ -217,7 +217,7 @@ class CacheTestCase extends TestCase
     {
         $this->setExpectedException('\InvalidArgumentException', 'Expire time for cache "key" must be numeric, NULL given');
 
-        $this->object->setPrefix('');
+        $this->object->setNamespace('');
         $this->object->get('key', null, function(){
 
         });

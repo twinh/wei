@@ -28,7 +28,7 @@ class ArrayCache extends BaseCache
     public function get($key, $expire = null, $fn = null)
     {
         $oriKey = $key;
-        $key = $this->prefix . $key;
+        $key = $this->namespace . $key;
         $result = array_key_exists($key, $this->data) ? $this->data[$key] : false;
         return $this->processGetResult($oriKey, $result, $expire, $fn);
     }
@@ -38,7 +38,7 @@ class ArrayCache extends BaseCache
      */
     public function set($key, $value, $expire = 0)
     {
-        $this->data[$this->prefix . $key] = $value;
+        $this->data[$this->namespace . $key] = $value;
         return true;
     }
 
@@ -47,8 +47,8 @@ class ArrayCache extends BaseCache
      */
     public function remove($key)
     {
-        if (isset($this->data[$this->prefix . $key])) {
-            unset($this->data[$this->prefix . $key]);
+        if (isset($this->data[$this->namespace . $key])) {
+            unset($this->data[$this->namespace . $key]);
             return true;
         } else {
             return false;
@@ -60,7 +60,7 @@ class ArrayCache extends BaseCache
      */
     public function exists($key)
     {
-        return array_key_exists($this->prefix . $key, $this->data);
+        return array_key_exists($this->namespace . $key, $this->data);
     }
 
     /**
@@ -83,7 +83,7 @@ class ArrayCache extends BaseCache
         if (!$this->exists($key)) {
             return false;
         } else {
-            $this->data[$this->prefix . $key] = $value;
+            $this->data[$this->namespace . $key] = $value;
             return true;
         }
     }
@@ -94,9 +94,9 @@ class ArrayCache extends BaseCache
     public function incr($key, $offset = 1)
     {
         if ($this->exists($key)) {
-            return $this->data[$this->prefix . $key] += $offset;
+            return $this->data[$this->namespace . $key] += $offset;
         } else {
-            return $this->data[$this->prefix . $key] = $offset;
+            return $this->data[$this->namespace . $key] = $offset;
         }
     }
 

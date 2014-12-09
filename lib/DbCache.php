@@ -82,7 +82,7 @@ class DbCache extends BaseCache
     public function get($key, $expire = null, $fn = null)
     {
         if ($this->exists($key)) {
-            $result = $this->db->select($this->table, $this->prefix . $key);
+            $result = $this->db->select($this->table, $this->namespace . $key);
             $result = unserialize($result['value']);
         } else {
             $result = false;
@@ -101,7 +101,7 @@ class DbCache extends BaseCache
             'expire' => date('Y-m-d H:i:s', $expire ? time() + $expire : 2147483647)
         );
         $identifier = array(
-            'id' => $this->prefix . $key
+            'id' => $this->namespace . $key
         );
 
         if ($this->exists($key)) {
@@ -119,7 +119,7 @@ class DbCache extends BaseCache
      */
     public function remove($key)
     {
-        return (bool)$this->db->delete($this->table, array('id' => $this->prefix . $key));
+        return (bool)$this->db->delete($this->table, array('id' => $this->namespace . $key));
     }
 
     /**
@@ -127,7 +127,7 @@ class DbCache extends BaseCache
      */
     public function exists($key)
     {
-        $result = $this->db->select($this->table, $this->prefix . $key);
+        $result = $this->db->select($this->table, $this->namespace . $key);
 
         if (!$result) {
             return false;
