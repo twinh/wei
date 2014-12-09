@@ -28,9 +28,11 @@ class App extends Base
     /**
      * The format of controller class
      *
-     * @var string
+     * @var array
      */
-    protected $controllerFormat = 'Controller\%s';
+    protected $controllerFormats = array(
+        'Controller\%s'
+    );
 
     /**
      * The default controller name
@@ -45,6 +47,13 @@ class App extends Base
      * @var string
      */
     protected $defaultAction = 'index';
+
+    /**
+     * The name of current application
+     *
+     * @var string
+     */
+    protected $namespace;
 
     /**
      * The name of controller
@@ -152,7 +161,7 @@ class App extends Base
             // Render default template and using $result as template variables
             case is_array($response) :
                 $response = $this->view->render($this->getDefaultTemplate(), $response);
-                // No break here, $response is use for next case detect
+            // No break here, $response is use for next case detect
 
             // Response directly
             case is_scalar($response) :
@@ -170,6 +179,19 @@ class App extends Base
                     is_object($response) ? get_class($response) : gettype($response)
                 ));
         }
+    }
+
+    /**
+     * Returns the name of the application
+     *
+     * @return string
+     */
+    public function getNamespace()
+    {
+        if (!$this->namespace) {
+            $this->namespace = $this->request->get('namespace');
+        }
+        return $this->namespace;
     }
 
     /**

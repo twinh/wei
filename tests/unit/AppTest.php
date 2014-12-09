@@ -301,4 +301,14 @@ class AppTest extends TestCase
 
         $this->app();
     }
+
+    public function testNamespace()
+    {
+        $this->assertEquals('', $this->app->getNamespace());
+
+        $this->request->set(array(
+            'namespace' => 'test',
+        ));
+        $this->assertEquals('test', $this->app->getNamespace());
+    }
 }
