@@ -159,7 +159,7 @@ class App extends Base
             // Render default template and using $result as template variables
             case is_array($response) :
                 $response = $this->view->render($this->getDefaultTemplate(), $response);
-            // No break here, $response is use for next case detect
+                return $this->response->send($response);
 
             // Response directly
             case is_scalar($response) :
