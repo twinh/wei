@@ -86,18 +86,18 @@ class CouchbaseTest extends CacheTestCase
         $couchbase->expects($this->any())
             ->method('setMulti')
             ->will($this->returnCallback(function($items, $expire = 0) use($cache, $object) {
-                $cache->setPrefix($object->getPrefix());
+                $cache->setNamespace($object->getNamespace());
                 $result = $cache->setMulti($items, $expire);
-                $cache->setPrefix('');
+                $cache->setNamespace('');
                 return $result;
             }));
 
         $couchbase->expects($this->any())
             ->method('getMulti')
             ->will($this->returnCallback(function($items) use($cache, $object) {
-                $cache->setPrefix($object->getPrefix());
+                $cache->setNamespace($object->getNamespace());
                 $result = $cache->getMulti($items);
-                $cache->setPrefix('');
+                $cache->setNamespace('');
                 return $result;
             }));
     }
