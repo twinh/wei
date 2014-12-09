@@ -21,7 +21,7 @@ class Logger extends Base
      *
      * @var string
      */
-    protected $name = 'wei';
+    protected $namespace = '';
 
     /**
      * The default level for log record which level is not specified
@@ -184,10 +184,10 @@ class Logger extends Base
 
         // Format log message
         $content = str_replace(array(
-            '%datetime%', '%channel%', '%level%', '%message%',
+            '%datetime%', '%namespace%', '%level%', '%message%',
         ), array(
             date($this->dateFormat, microtime(true)),
-            $this->name,
+            $this->namespace,
             strtoupper($level),
             $message,
         ), $this->format);
