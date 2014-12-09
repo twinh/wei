@@ -178,4 +178,16 @@ class LoggerTest extends TestCase
         $this->assertContains('test exception', $content);
         $this->assertContains('[file] => ' . __FILE__, $content);
     }
+
+    public function testLoggerNamespace()
+    {
+        $this->logger->setOption(array(
+            'namespace' => 'test',
+            'format' => '%namespace% %message%'
+        ));
+        $this->logger->info('log message');
+
+        $content = file_get_contents($this->logger->getFile());
+        $this->assertContains('test log message', $content);
+    }
 }
