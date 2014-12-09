@@ -28,11 +28,9 @@ class App extends Base
     /**
      * The format of controller class
      *
-     * @var array
+     * @var string
      */
-    protected $controllerFormats = array(
-        'Controller\%s'
-    );
+    protected $controllerFormat = 'Controller\%s';
 
     /**
      * The default controller name
