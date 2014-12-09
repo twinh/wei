@@ -33,8 +33,8 @@ class PhpError extends Base
             'wei' => isset($options['wei']) ? $options['wei'] : null
         ));
 
-        // Avoid exception "Unknown option given wei"
-        unset($options['wei']);
+        // Avoid exception "Unknown option given XXX"
+        unset($options['wei'], $options['namespace']);
 
         $this->errorHandler = \php_error\reportErrors($options);
     }
