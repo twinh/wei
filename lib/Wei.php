@@ -278,7 +278,7 @@ namespace Wei
          *
          * @var string
          */
-        protected $name;
+        protected $namespace;
 
         /**
          * Whether in debug mode or not
@@ -621,7 +621,7 @@ namespace Wei
                 $this->beforeConstruct && call_user_func($this->beforeConstruct, $this, $full, $name);
 
                 // Load the service configuration and make sure "wei" option at first
-                $options = array('wei' => $this) + $options + (array)$this->getConfig($full);
+                $options = array('wei' => $this, 'namespace' => $this->namespace) + $options + (array)$this->getConfig($full);
 
                 $this->services[$full] = new $class($options);
 
@@ -889,12 +889,12 @@ namespace Wei
         /**
          * Set the name of current application
          *
-         * @param string $name
+         * @param string $namespace
          * @return $this
          */
-        public function setName($name)
+        public function setNamespace($namespace)
         {
-            $this->name = $name;
+            $this->namespace = $namespace;
             return $this;
         }
 
@@ -903,9 +903,9 @@ namespace Wei
          *
          * @return string
          */
-        public function getName()
+        public function getNamespace()
         {
-            return $this->name;
+            return $this->namespace;
         }
 
         /**

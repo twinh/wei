@@ -298,7 +298,6 @@ class WeiTest extends TestCase
         $newRequest = $this->wei->newInstance('request');
 
         $this->assertInstanceOf('\Wei\Request', $newRequest);
-        $this->assertEquals($this->request, $newRequest);
         $this->assertNotSame($this->request, $newRequest);
     }
 
@@ -531,5 +530,11 @@ class WeiTest extends TestCase
 
         $this->wei->customService2 = new \stdClass();
         $this->assertInstanceOf('stdClass', $this->wei->customService2);
+    }
+
+    public function testNamespace()
+    {
+        $this->wei->setNamespace('app1');
+        $this->assertEquals('app1', $this->wei->getNamespace());
     }
 }
