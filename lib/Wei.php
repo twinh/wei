@@ -621,8 +621,8 @@ namespace Wei
                 $this->beforeConstruct && call_user_func($this->beforeConstruct, $this, $full, $name);
 
                 // Load the service configuration and make sure "wei" option at first
-                $options = array('wei' => $this, 'namespace' => $this->namespace) + $options + (array)$this->getConfig($full);
-
+                $customOptions = $options + (array)$this->getConfig($full);
+                $options = array('wei' => $this) + (!isset($customOptions['namespace']) ? array('namespace' => $this->namespace) : array()) + $customOptions;
                 $this->services[$full] = new $class($options);
 
                 // Trigger the after construct callback

@@ -537,4 +537,15 @@ class WeiTest extends TestCase
         $this->wei->setNamespace('app1');
         $this->assertEquals('app1', $this->wei->getNamespace());
     }
+
+    public function testCustomServiceNamespace()
+    {
+        $this->wei->setNamespace('app1');
+        $this->wei->setConfig('namespace.request', array(
+            'namespace' => 'test'
+        ));
+        $req = $this->wei->get('namespace.request');
+        $this->assertNotEquals('app1', $req->getOption('namespace'));
+        $this->assertEquals('test', $req->getOption('namespace'));
+    }
 }
