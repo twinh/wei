@@ -25,10 +25,7 @@ class Url extends Base
      */
     public function __invoke($url = '', $params = array())
     {
-        if ($params) {
-            $url = $url . (false === strpos($url, '?') ? '?' : '&');
-        }
-        return $this->request->getBaseUrl() . '/' . $url . (is_array($params) ? http_build_query($params) : $params);
+        return $this->request->getBaseUrl() . '/' . $this->append($url, $params);
     }
 
     /**
@@ -53,5 +50,20 @@ class Url extends Base
     public function query($url = '', $params = array())
     {
         return $this->__invoke($url, $params + $this->request->getQueries());
+    }
+
+    /**
+     * Append parameters to specified URL
+     *
+     * @param string $url
+     * @param array $params
+     * @return string
+     */
+    public function append($url = '', $params = array())
+    {
+        if ($params) {
+            $url .= (false === strpos($url, '?') ? '?' : '&');
+        }
+        return $url . (is_array($params) ? http_build_query($params) : $params);
     }
 }

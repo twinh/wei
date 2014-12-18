@@ -34,4 +34,18 @@ class UrlTest extends TestCase
             )
         );
     }
+
+    public function testAppend()
+    {
+        // Reset url to root path
+        $this->request->setBaseUrl('/');
+
+        $this->assertEquals('xx?a=b&c=d', $this->url->append('xx', array('a' => 'b', 'c' => 'd')));
+
+        $this->assertEquals('xx?a=b&c=d', $this->url->append('xx?a=b', array('c' => 'd')));
+
+        $this->assertEquals('xx&a=b?c=d', $this->url->append('xx&a=b', array('c' => 'd')));
+
+        $this->assertEquals('xx?a=b&c=d', $this->url->append('xx?a=b', 'c=d'));
+    }
 }
