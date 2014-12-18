@@ -4,6 +4,9 @@ namespace WeiTest;
 
 use Wei\Request;
 
+/**
+ * @property Request $request
+ */
 class RequestTest extends TestCase
 {
     /**
@@ -738,5 +741,65 @@ class RequestTest extends TestCase
         $request['i'] = array();
         $request['i']['j'] = 'k';
         $this->assertEquals('k', $request['i']['j']);
+    }
+
+    public function testAcceptJson()
+    {
+        $request = $this->request;
+        $request->setServer('HTTP_ACCEPT', 'application/json, text/javascript, */*; q=0.01');
+        $this->assertTrue($request->acceptJson());
+
+        $request->setServer('HTTP_ACCEPT', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+        $this->assertFalse($request->acceptJson());
+    }
+
+    public function testAcceptJsonByOverwriteFormat()
+    {
+        $request = $this->request;
+        $request->setServer('HTTP_ACCEPT', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+        $this->assertFalse($request->acceptJson());
+
+        $request->set('_format', 'json');
+        $this->assertTrue($request->acceptJson());
+    }
+
+    /**
+     * @dataProvider acceptProvider
+     */
+    public function testAccept($mime, $header, $result)
+    {
+        $this->request->setServer('HTTP_ACCEPT', $header);
+        $this->assertSame($result, $this->request->accept($mime));
+    }
+
+    public function acceptProvider()
+    {
+        return array(
+            array(
+                'application/json',
+                'application/json, text/javascript, */*; q=0.01',
+                true,
+            ),
+            array(
+                'text/javascript',
+                'application/json, text/javascript, */*; q=0.01',
+                false,
+            ),
+            array(
+                'text/html',
+                'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                true,
+            ),
+            array(
+                'application/xml',
+                'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                false,
+            ),
+            array(
+                'application/xml',
+                '*/*',
+                false,
+            ),
+        );
     }
 }

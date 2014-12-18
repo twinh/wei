@@ -884,7 +884,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     }
 
     /**
-     * Check if the accept header contains the specified MIME type
+     * Check if the accept header is *starts* with the specified MIME type
      *
      * @param string $mine
      * @return bool
