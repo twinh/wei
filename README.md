@@ -1,7 +1,7 @@
 # Wei
 
 [![Build Status](https://travis-ci.org/twinh/wei.png?branch=master)](https://travis-ci.org/twinh/wei)
-[![Coverage Status](https://coveralls.io/repos/twinh/wei/badge.png?branch=master)](https://coveralls.io/r/twinh/wei?branch=master)
+[![Coverage Status](https://img.shields.io/coveralls/twinh/wei.svg?style=flat-square)](https://coveralls.io/r/twinh/wei?branch=master)
 [![Latest Stable Version](http://img.shields.io/packagist/v/wei/wei.svg?style=flat-square)](https://packagist.org/packages/wei/wei)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](http://www.opensource.org/licenses/MIT)
 
