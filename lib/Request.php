@@ -97,6 +97,13 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     protected $overwriteAjax = true;
 
     /**
+     * Whether allow detect accept MIME type by "_format" request parameter
+     *
+     * @var bool
+     */
+    protected $overwriteFormat = true;
+
+    /**
      * @var string
      */
     protected $baseUrl;
@@ -874,5 +881,29 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     public function getIterator()
     {
         return new \ArrayIterator($this->data);
+    }
+
+    /**
+     * Check if the accept header contains the specified MIME type
+     *
+     * @param string $mine
+     * @return bool
+     */
+    public function accept($mine)
+    {
+        return 0 === strpos($this->getServer('HTTP_ACCEPT'), $mine);
+    }
+
+    /**
+     * Check if the request is accept a JSON response
+     *
+     * @return bool
+     */
+    public function acceptJson()
+    {
+        if ($this->overwriteFormat && $this->get('_format') == 'json') {
+            return true;
+        }
+        return $this->accept('application/json');
     }
 }
