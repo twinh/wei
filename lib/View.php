@@ -178,7 +178,7 @@ class View extends Base implements \ArrayAccess
         if ($file = $this->resolveFile($name)) {
             return $file;
         } else {
-            throw new \RuntimeException(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->dirs)), 404);
+            throw new \RuntimeException(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->dirs)));
         }
     }
 
