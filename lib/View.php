@@ -50,6 +50,13 @@ class View extends Base implements \ArrayAccess
      */
     protected $defaultLayout;
 
+    /*
+     * The current render view variables
+     *
+     * @var array
+     */
+    private $currentData = array();
+
     /**
      * The current render view name
      *
@@ -95,14 +102,14 @@ class View extends Base implements \ArrayAccess
      */
     public function render($name, $data = array())
     {
-        // Set extra view variables
-        $data = $data ? $data + $this->data : $this->data;
-
         // Assign $name to $this->currentName to avoid conflict with view parameter
         $this->currentName = $name;
 
+        // Set extra view variables
+        $this->currentData = $data + $this->data;
+
         // Render view
-        extract($data, EXTR_OVERWRITE);
+        extract($this->currentData, EXTR_OVERWRITE);
         ob_start();
         require $this->getFile($this->currentName);
         $content = ob_get_clean();
@@ -113,7 +120,7 @@ class View extends Base implements \ArrayAccess
             $this->layout = array();
             $content = $this->render($layout['name'], array(
                 $layout['variable'] => $content
-            ) + $data);
+            ) + $this->currentData);
         }
 
         return $content;

@@ -2,6 +2,9 @@
 
 namespace WeiTest;
 
+/**
+ * @property \Wei\View $view
+ */
 class ViewTest extends TestCase
 {
     /**
@@ -139,5 +142,18 @@ class ViewTest extends TestCase
         $fullFile = $this->view->getFile($testFile);
 
         $this->assertEquals($fullFile, $testFile);
+    }
+
+    public function testKeywordVarsOverwrite()
+    {
+        $this->view->assign(array(
+            'data' => 'data'
+        ));
+
+        // No error occur. Fatal error: Unsupported operand types in xxx
+        $content = $this->object->render('view.php');
+
+        $this->assertContains('layout start', $content);
+        $this->assertContains('layout end', $content);
     }
 }
