@@ -38,7 +38,7 @@ class ViewTest extends TestCase
         $this->assertContains($value, $content);
     }
 
-    public function testAssinArray()
+    public function testAssignArray()
     {
         $view = $this->object;
 
