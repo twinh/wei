@@ -2,14 +2,14 @@
 /**
  * Wei Framework
  *
- * @copyright   Copyright (c) 2008-2013 Twin Huang
+ * @copyright   Copyright (c) 2008-2015 Twin Huang
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace Wei;
 
-use Wei\Validator\Image;
 use Wei\Validator\File as FileValidator;
+use Wei\Validator\Image;
 
 /**
  * A service that handles the uploaded files

@@ -2,15 +2,15 @@
 /**
  * Wei Framework
  *
- * @copyright   Copyright (c) 2008-2013 Twin Huang
+ * @copyright   Copyright (c) 2008-2015 Twin Huang
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace WeiExtension;
 
+use Doctrine\Common\Cache\Cache as DoctrineCache;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager as BaseEntityManager;
-use Doctrine\Common\Cache\Cache as DoctrineCache;
 use Wei\Base;
 
 /**
