@@ -17,5 +17,5 @@ class MobileCn extends Regex
 {
     protected $patternMessage = '%name% must be valid mobile number';
 
-    protected $pattern = '/^1[3458][\d]{9}$/';
+    protected $pattern = '/^1[34578][\d]{9}$/';
 }
