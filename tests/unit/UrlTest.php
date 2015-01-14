@@ -64,10 +64,4 @@ class UrlTest extends TestCase
 
         $this->assertEquals('/articles/b/comments/d', $this->url('articles/%s/comments/%s', array('a' => 'b', 'c' => 'd', 'e' => 'f')));
     }
-
-    public function testFormatError()
-    {
-        $this->setExpectedException('PHPUnit_Framework_Error_Warning', 'vsprintf(): Too few arguments');
-        $this->assertEquals('/articles/b/comments/d', $this->url('articles/%s/comments/%s', array('a' => 'b')));
-    }
 }
