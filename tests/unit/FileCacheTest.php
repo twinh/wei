@@ -98,23 +98,23 @@ class FileCacheTest extends CacheTestCase
 
     public function testReplace()
     {
-        $wei = $this->object;
+        $cache = $this->object;
 
-        $wei->set('test', __METHOD__);
+        $cache->set('test', __METHOD__);
 
-        $wei->replace('test', __CLASS__);
+        $cache->replace('test', __CLASS__);
 
-        $this->assertEquals(__CLASS__, $wei->get('test'), 'cache replaced');
+        $this->assertEquals(__CLASS__, $cache->get('test'), 'cache replaced');
 
-        $wei->remove('test');
+        $cache->remove('test');
 
-        $wei->replace('test', __CLASS__);
+        $cache->replace('test', __CLASS__);
 
-        $this->assertFalse($wei->get('test'), 'cache not found');
+        $this->assertFalse($cache->get('test'), 'cache not found');
 
-        $wei->set(__METHOD__, true, -1);
+        $cache->set(__METHOD__, true, -1);
 
-        $this->assertFalse($wei->replace(__METHOD__, true), 'replace expired cache');
+        $this->assertFalse($cache->replace(__METHOD__, true), 'replace expired cache');
     }
 
     public function testRemove()

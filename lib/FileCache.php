@@ -187,7 +187,7 @@ class FileCache extends BaseCache
             $result = $offset;
         } else {
             $result = $content[1] += $offset;
-            $content = serialize($content);
+            $content = $this->prepareContent($content[1], $content[0]);
         }
 
         // Rewrite content
