@@ -23,28 +23,13 @@ class PhpFileCache extends FileCache
     /**
      * {@inheritdoc}
      */
-    public function get($key, $expire = null, $fn = null)
+    protected function getContent($file)
     {
-        if (!is_file($file = $this->getFile($key))) {
-            $result = false;
-        } else {
-            $content = require $file;
-            if ($content && is_array($content) && time() < $content[0]) {
-                $result = $content[1];
-            } else {
-                $this->remove($key);
-                $result = false;
-            }
-        }
-        return $this->processGetResult($key, $result, $expire, $fn);
+        return require $file;
     }
 
     /**
-     * Prepare content for writing
-     *
-     * @param  string $content the value of cache
-     * @param  int    $expire  expire time
-     * @return string file content
+     * {@inheritdoc}
      */
     protected function prepareContent($content, $expire)
     {

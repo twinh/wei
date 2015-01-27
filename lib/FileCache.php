@@ -58,7 +58,7 @@ class FileCache extends BaseCache
         if (!is_file($file = $this->getFile($key))) {
             $result = false;
         } else {
-            $content = @unserialize(file_get_contents($file));
+            $content = $this->getContent($file);;
             if ($content && is_array($content) && time() < $content[0]) {
                 $result = $content[1];
             } else {
@@ -100,7 +100,7 @@ class FileCache extends BaseCache
             return false;
         }
 
-        $content = @unserialize(file_get_contents($file));
+        $content = $this->getContent($file);
         if ($content && is_array($content) && time() < $content[0]) {
             return true;
         } else {
@@ -286,6 +286,17 @@ class FileCache extends BaseCache
         } else {
             return false;
         }
+    }
+
+    /**
+     * Receive file content by file name
+     *
+     * @param string $file
+     * @return array
+     */
+    protected function getContent($file)
+    {
+        return @unserialize(file_get_contents($file));
     }
 
     /**
