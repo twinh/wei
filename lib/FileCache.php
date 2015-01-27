@@ -253,7 +253,7 @@ class FileCache extends BaseCache
      * @param  string         $file      file path
      * @param  string         $mode      open mode
      * @param  int            $operation lock operation
-     * @return false false or file handle
+     * @return resource|false file handle or false
      */
     protected function openAndLock($file, $mode, $operation)
     {
@@ -327,7 +327,7 @@ class FileCache extends BaseCache
      */
     protected function writeAndRelease($handle, $content, $rewrite = false)
     {
-        $rewrite && rewind($handle);
+        $rewrite && rewind($handle) && ftruncate($handle, 0);
         $result = fwrite($handle, $content);
         flock($handle, LOCK_UN);
         fclose($handle);

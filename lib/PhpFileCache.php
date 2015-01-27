@@ -23,6 +23,21 @@ class PhpFileCache extends FileCache
     /**
      * {@inheritdoc}
      */
+    protected function readAndVerify($handle, $file)
+    {
+        $content = $this->getContent($file);
+
+        // Check if content is valid
+        if ($content && is_array($content) && time() < $content[0]) {
+            return $content;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getContent($file)
     {
         return require $file;
