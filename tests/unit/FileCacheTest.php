@@ -27,23 +27,6 @@ class FileCacheTest extends CacheTestCase
         $file->setDir($newDir);
 
         $this->assertFileExists($newDir);
-
-        /*ob_start();
-
-        $wei->error->option(array(
-            'exit' => false,
-            'error' => false,
-        ));
-
-        $this->setExpectedException('ErrorException');
-
-        // how about linux ?
-        $wei->setDirOption('./cache/|');
-
-        $output = ob_get_contents();
-        $output && ob_end_clean();
-
-        $this->assertContains('Failed to creat directory: ', $output);*/
     }
 
     public function testAdd()
