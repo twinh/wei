@@ -19,28 +19,30 @@ namespace Wei
      * @author      Twin Huang <twinhuang@qq.com>
      *
      * Cache
-     * @property Cache      $cache A cache service proxy
-     * @method   mixed      cache($key, $value = null, $expire = 0) Retrieve or store an item by cache
-     * @property ArrayCache $arrayCache  A cache service that stored data in PHP array
-     * @method   mixed      arrayCache($key, $value = null, $expire = 0) Retrieve or store an item by array cache
-     * @property Apc        $apc A cache service that stored data in PHP APC
-     * @method   mixed      apc($key, $value = null, $expire = 0) Retrieve or store an item
-     * @property DbCache    $dbCache A cache service that stored data in databases
-     * @method   mixed      dbCache($key, $value = null, $expire = 0) Retrieve or store an item by database cache
-     * @property FileCache  $fileCache A cache service that stored data in files
-     * @method   mixed      fileCache($key, $value = null, $expire = 0) Retrieve or store an item by file
-     * @property Memcache   $memcache A cache service that stored data in Memcache
-     * @method   mixed      memcache($key, $value = null, $expire = 0) Retrieve or store an item by Memcache
-     * @property Memcached  $memcached A cache service that stored data in Memcached
-     * @method   mixed      memcached($key, $value = null, $expire = 0) Retrieve or store an item by Memcached
-     * @property MongoCache $mongoCache A cache service that stores data in MongoDB
-     * @method   mixed      mongoCache($key, $value = null, $expire = 0) Retrieve or store an item by MongoDB
-     * @property Couchbase  $couchbase A cache service base on Couchbase
-     * @method   mixed      couchbase($key, $value = null, $expire = 0) Retrieve or store an item by Couchbase
-     * @property Redis      $redis A cache service that stores data in Redis
-     * @method   mixed      redis($key = null, $value = null, $expire = 0) Retrieve or store an item by Redis
-     * @property Bicache    $bicache A two-level cache service
-     * @method   mixed      bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
+     * @property Cache          $cache A cache service proxy
+     * @method   mixed          cache($key, $value = null, $expire = 0) Retrieve or store an item by cache
+     * @property ArrayCache     $arrayCache  A cache service that stored data in PHP array
+     * @method   mixed          arrayCache($key, $value = null, $expire = 0) Retrieve or store an item by array cache
+     * @property Apc            $apc A cache service that stored data in PHP APC
+     * @method   mixed          apc($key, $value = null, $expire = 0) Retrieve or store an item
+     * @property DbCache        $dbCache A cache service that stored data in databases
+     * @method   mixed          dbCache($key, $value = null, $expire = 0) Retrieve or store an item by database cache
+     * @property FileCache      $fileCache A cache service that stored data in files
+     * @method   mixed          fileCache($key, $value = null, $expire = 0) Retrieve or store an item by file
+     * @property PhpFileCache   $phpFileCache A cache service that stored data as PHP variables in files
+     * @method   mixed          phpFileCache($key, $value = null, $expire = 0) Retrieve or store an item by file
+     * @property Memcache       $memcache A cache service that stored data in Memcache
+     * @method   mixed          memcache($key, $value = null, $expire = 0) Retrieve or store an item by Memcache
+     * @property Memcached      $memcached A cache service that stored data in Memcached
+     * @method   mixed          memcached($key, $value = null, $expire = 0) Retrieve or store an item by Memcached
+     * @property MongoCache     $mongoCache A cache service that stores data in MongoDB
+     * @method   mixed          mongoCache($key, $value = null, $expire = 0) Retrieve or store an item by MongoDB
+     * @property Couchbase      $couchbase A cache service base on Couchbase
+     * @method   mixed          couchbase($key, $value = null, $expire = 0) Retrieve or store an item by Couchbase
+     * @property Redis          $redis A cache service that stores data in Redis
+     * @method   mixed          redis($key = null, $value = null, $expire = 0) Retrieve or store an item by Redis
+     * @property Bicache        $bicache A two-level cache service
+     * @method   mixed          bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
      *
      * Database
      * @property Db             $db A database service inspired by Doctrine DBAL
