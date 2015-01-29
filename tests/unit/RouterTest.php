@@ -180,183 +180,6 @@ class RouterTest extends TestCase
         ), $router->match('blog/list', null, 'default'));
     }
 
-    public function testUriForStaticRule()
-    {
-        $router = $this->object;
-
-        $router->set(array(
-            'pattern' => 'user/login',
-            'defaults' => array(
-                'controller' => 'user',
-                'action' => 'login',
-            ),
-        ));
-
-        $this->assertEquals('user/login?var1=value1', $router->generatePath(array(
-            'controller' => 'user',
-            'action' => 'login',
-            'var1' => 'value1',
-        )));
-    }
-
-    public function testUriForNotMatchStaticRule()
-    {
-        $router = $this->object;
-
-        $router->remove('default');
-
-        $router->set(array(
-            'pattern' => 'user/login',
-            'defaults' => array(
-                'controller' => 'user',
-                'action' => 'login',
-            ),
-        ));
-
-        $this->assertEquals('?controller=user&var1=value1', $router->generatePath(array(
-            'controller' => 'user',
-            'var1' => 'value1',
-        )));
-    }
-
-    public function testUriWithoutRule()
-    {
-        $router = $this->object;
-
-        $router->remove('default');
-
-        $this->assertEquals('?var1=value1&var2=value2', $router->generatePath(array(
-            'var1' => 'value1',
-            'var2' => 'value2',
-        )));
-    }
-
-    public function testUriForRequiredRule()
-    {
-        $router = $this->object;
-
-        $router->set(array(
-            'pattern' => 'blog/<page>',
-            'defaults' => array(
-                'matched' => true
-            ),
-        ));
-
-        $this->assertEquals('blog/1', $router->generatePath(array(
-            'matched' => true,
-            'page' => 1,
-        )));
-    }
-
-    public function testUriForRequiredRuleAndRequiredParameterNotPassed()
-    {
-        $router = $this->object;
-
-        $router->set(array(
-            'pattern' => 'blog/<page>',
-            'defaults' => array(
-                'matched' => true
-            ),
-        ));
-
-        $this->assertEquals('?matched=1', $router->generatePath(array(
-            'matched' => true,
-        )));
-    }
-
-    public function testUriForRequiredRuleAndParameterNotMatchRule()
-    {
-        $router = $this->object;
-
-        $router->remove('default');
-
-        $router->set(array(
-            'pattern' => 'blog/<page>',
-            'rules' => array(
-                'page' => '\d+',
-            ),
-            'defaults' => array(
-                'matched' => true
-            ),
-        ));
-
-        $this->assertEquals('?matched=1&page=notDigits', $router->generatePath(array(
-            'matched' => true,
-            'page' => 'notDigits',
-        )));
-    }
-
-    public function testUriForOptionalRule()
-    {
-        $router = $this->object;
-
-        $router->set(array(
-            'pattern' => 'blog(/<page>)',
-            'defaults' => array(
-                'controller' => 'blog',
-                'page' => '1'
-            ),
-        ));
-
-        $this->assertEquals('blog', $router->generatePath(array(
-            'controller' => 'blog',
-        )));
-    }
-
-    public function testUriForOptionalRuleAndParameterNotMatchRule()
-    {
-        $router = $this->object;
-
-        $router->remove('default');
-
-        $router->set(array(
-            'pattern' => 'blog(/<page>)',
-            'rules' => array(
-                'page' => '\d+',
-            ),
-            'defaults' => array(
-                'controller' => 'blog',
-                'page' => '1'
-            ),
-        ));
-
-        $this->assertEquals('?controller=blog&page=notDigits', $router->generatePath(array(
-            'controller' => 'blog',
-            'page' => 'notDigits'
-        )));
-    }
-
-    public function testUriWithNameParameter()
-    {
-        $router = $this->object;
-
-        $router->set(array(
-            'pattern' => 'blog(/<page>)',
-            'defaults' => array(
-                'controller' => 'blog',
-                'page' => '1'
-            ),
-        ));
-
-        $this->assertEquals('blog/2', $router->generatePath(array(
-            'controller' => 'blog',
-            'page' => '2',
-        ), 'blogList'));
-    }
-
-    public function testNoRuleMatched()
-    {
-        $router = $this->object;
-
-        $router->set(array(
-            'pattern' => 'blog/<page>'
-        ));
-
-        $this->assertEquals('?controller=blog', $router->generatePath(array(
-            'controller' => 'blog'
-        )));
-    }
-
     public function testRemove()
     {
         $router = $this->object;
@@ -370,23 +193,6 @@ class RouterTest extends TestCase
         $router->remove(0);
 
         $this->assertFalse($router->getRoute('test'));
-    }
-
-    public function testPatternIsOptional()
-    {
-        $router = $this->object;
-
-        $router->set(array(
-            'pattern' => '(<controller>(/<action>))',
-            'defaults' => array(
-                'controller' => 'index',
-                'action' => 'index'
-            ),
-        ));
-
-        $this->assertEquals('?key=value', $router->generatePath(array(
-            'key' => 'value'
-        )));
     }
 
     public function testSetRoutes()
@@ -487,7 +293,6 @@ class RouterTest extends TestCase
             'id' => '234'
         );
         $this->assertIsSubset($params, $router->match('/admin/posts/edit/234'));
-        $this->assertEquals('/admin/posts/edit/234', $router->generatePath($params));
 
         $params = array(
             'controller' => 'admin/posts',
@@ -496,7 +301,6 @@ class RouterTest extends TestCase
             'format' => 'html'
         );
         $this->assertIsSubset($params, $router->match('/admin/posts/edit/234.html'));
-        $this->assertEquals('/admin/posts/edit/234.html', $router->generatePath($params));
 
         $this->assertIsSubset(array(
             'controller' => 'admin/posts',
@@ -512,7 +316,6 @@ class RouterTest extends TestCase
         );
         $path = '/posts/edit/1';
         $this->assertIsSubset($params, $router->match($path));
-        $this->assertEquals($path, $router->generatePath($params));
 
         $params = array(
             'controller' => 'posts',
@@ -520,21 +323,18 @@ class RouterTest extends TestCase
         );
         $path = '/posts/index';
         $this->assertIsSubset($params, $router->match($path));
-        $this->assertEquals($path, $router->generatePath($params));
 
         $params = array(
             'controller' => 'posts',
         );
         $path = '/posts';
         $this->assertIsSubset($params, $router->match($path));
-        $this->assertEquals($path, $router->generatePath($params));
 
         $this->assertIsSubset(array(
             'controller' => null, // $this->request('controller', 'index'); => 'index'
             'action' => null,
             'id' => null
         ), $router->match('/'));
-        $this->assertEquals('/', $router->generatePath(array()));
     }
 
     /**
@@ -731,5 +531,1158 @@ class RouterTest extends TestCase
         ob_start();
         call_user_func_array($this->object, func_get_args());
         return ob_get_clean();
+    }
+
+
+    /**
+     * @dataProvider dataForMatchParamSet
+     */
+    public function testMatchParamSet($method, $path, $routes, $options = array())
+    {
+        if ($options) {
+            wei()->router->setOption($options);
+        }
+        $this->assertEquals(wei()->router->matchParamSet($path, $method), $routes);
+    }
+
+    public function dataForMatchParamSet()
+    {
+        return array(
+            // Seven basic routes
+            array(
+                'GET',
+                'photos',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'index'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'photos/new',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'new'
+                    ),
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'show',
+                        'id' => 'new'
+                    ),
+                )
+            ),
+            array(
+                'POST',
+                'photos',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'create'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'photos/1',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'show',
+                        'id' => '1'
+                    ),
+                )
+            ),
+            array(
+                'GET',
+                'photos/1/edit',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'edit',
+                        'id' => '1'
+                    ),
+                    array(
+                        'controller' => 'photos/edit',
+                        'action' => 'index',
+                        'photoId' => '1'
+                    ),
+                    array(
+                        'controller' => 'edit',
+                        'action' => 'index',
+                        'photoId' => '1'
+                    )
+                )
+            ),
+            array(
+                'PATCH',
+                'photos/1',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'update',
+                        'id' => '1'
+                    )
+                )
+            ),
+            array(
+                'PUT',
+                'photos/1',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'update',
+                        'id' => '1'
+                    )
+                )
+            ),
+            array(
+                'DELETE',
+                'photos/1',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'destroy',
+                        'id' => '1'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'photos/1/comments',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'comments',
+                        'id' => '1'
+                    ),
+                    array(
+                        'controller' => 'photos/comments',
+                        'action' => 'index',
+                        'photoId' => '1'
+                    ),
+                    array(
+                        'controller' => 'comments',
+                        'action' => 'index',
+                        'photoId' => '1'
+                    )
+                )
+            ),
+
+            // ID为字符串
+            array(
+                'GET',
+                'photos/my-first-photo',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'myFirstPhoto',
+                    ),
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'show',
+                        'id' => 'my-first-photo'
+                    ),
+                )
+            ),
+            array(
+                'GET',
+                'photos/my-first-photo/edit',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'edit',
+                        'id' => 'my-first-photo'
+                    ),
+                    array(
+                        'controller' => 'photos/edit',
+                        'action' => 'index',
+                        'photoId' => 'my-first-photo'
+                    ),
+                    array(
+                        'controller' => 'edit',
+                        'action' => 'index',
+                        'photoId' => 'my-first-photo'
+                    )
+                )
+            ),
+            array(
+                'PATCH',
+                'photos/my-first-photo',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'myFirstPhoto',
+                    ),
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'update',
+                        'id' => 'my-first-photo'
+                    )
+                )
+            ),
+            array(
+                'PUT',
+                'photos/my-first-photo',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'myFirstPhoto',
+                    ),
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'update',
+                        'id' => 'my-first-photo'
+                    )
+                )
+            ),
+            array(
+                'DELETE',
+                'photos/my-first-photo',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'myFirstPhoto',
+                    ),
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'destroy',
+                        'id' => 'my-first-photo'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'photos/my-first-photo/comments',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'comments',
+                        'id' => 'my-first-photo'
+                    ),
+                    array(
+                        // NOTICE 这里是photos/comments或comments,不是comments
+                        'controller' => 'photos/comments',
+                        'action' => 'index',
+                        'photoId' => 'my-first-photo'
+                    ),
+                    array(
+                        'controller' => 'comments',
+                        'action' => 'index',
+                        'photoId' => 'my-first-photo'
+                    )
+                )
+            ),
+
+            // 单数资源(控制器单双数由自己决定,一般是双数)
+            array(
+                'GET',
+                'geocoder/new',
+                array(
+                    array(
+                        'controller' => 'geocoder',
+                        'action' => 'new'
+                    ),
+                    array(
+                        'controller' => 'geocoder',
+                        'action' => 'show',
+                        'id' => 'new'
+                    ),
+                )
+            ),
+            array(
+                'POST',
+                'geocoder',
+                array(
+                    array(
+                        'controller' => 'geocoder',
+                        'action' => 'create'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'geocoder',
+                array(
+                    array(
+                        'controller' => 'geocoder',
+                        'action' => 'index' // 注意此处是index,而不是show
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'geocoder/edit',
+                array(
+                    array(
+                        'controller' => 'geocoder',
+                        'action' => 'edit'
+                    ),
+                    array(
+                        'controller' => 'geocoder',
+                        'action' => 'show',
+                        'id' => 'edit'
+                    )
+                )
+            ),
+            array(
+                'PATCH',
+                'geocoder',
+                array(
+                    array(
+                        'controller' => 'geocoder',
+                        'action' => 'update'
+                    )
+                )
+            ),
+            array(
+                'PUT',
+                'geocoder',
+                array(
+                    array(
+                        'controller' => 'geocoder',
+                        'action' => 'update'
+                    )
+                )
+            ),
+            array(
+                'DELETE',
+                'geocoder',
+                array(
+                    array(
+                        'controller' => 'geocoder',
+                        'action' => 'destroy'
+                    )
+                )
+            ),
+
+            // 命名空间
+            array(
+                'GET',
+                'admin/articles',
+                array(
+                    array(
+                        'controller' => 'admin/articles',
+                        'action' => 'index',
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'admin/articles/new',
+                array(
+                    array(
+                        'controller' => 'admin/articles',
+                        'action' => 'new'
+                    ),
+                    array(
+                        'controller' => 'admin/articles',
+                        'action' => 'show',
+                        'id' => 'new'
+                    ),
+                )
+            ),
+            array(
+                'POST',
+                'admin/articles',
+                array(
+                    array(
+                        'controller' => 'admin/articles',
+                        'action' => 'create'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'admin/articles/1',
+                array(
+                    array(
+                        'controller' => 'admin/articles',
+                        'action' => 'show',
+                        'id' => '1'
+                    ),
+                )
+            ),
+            array(
+                'GET',
+                'admin/articles/1/edit',
+                array(
+                    array(
+                        'controller' => 'admin/articles',
+                        'action' => 'edit',
+                        'id' => '1'
+                    ),
+                    array(
+                        'controller' => 'admin/articles/edit',
+                        'action' => 'index',
+                        'articleId' => '1'
+                    ),
+                    array(
+                        'controller' => 'edit',
+                        'action' => 'index',
+                        'articleId' => '1'
+                    )
+                )
+            ),
+            array(
+                'PATCH',
+                'admin/articles/1',
+                array(
+                    array(
+                        'controller' => 'admin/articles',
+                        'action' => 'update',
+                        'id' => '1'
+                    )
+                )
+            ),
+            array(
+                'PUT',
+                'admin/articles/1',
+                array(
+                    array(
+                        'controller' => 'admin/articles',
+                        'action' => 'update',
+                        'id' => '1'
+                    )
+                )
+            ),
+            array(
+                'DELETE',
+                'admin/articles/1',
+                array(
+                    array(
+                        'controller' => 'admin/articles',
+                        'action' => 'destroy',
+                        'id' => '1'
+                    )
+                )
+            ),
+
+            // Nested
+            array(
+                'GET',
+                'magazines/1/ads',
+                array(
+                    array(
+                        'controller' => 'magazines',
+                        'action' => 'ads',
+                        'id' => '1'
+                    ),
+                    array(
+                        'controller' => 'magazines/ads',
+                        'action' => 'index',
+                        'magazineId' => '1'
+                    ),
+                    array(
+                        'controller' => 'ads',
+                        'action' => 'index',
+                        'magazineId' => '1'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'magazines/1/ads/new',
+                array(
+                    array(
+                        'controller' => 'magazines/ads',
+                        'action' => 'new',
+                        'magazineId' => '1'
+                    ),
+                    array(
+                        'controller' => 'magazines/ads',
+                        'action' => 'show',
+                        'id' => 'new',
+                        'magazineId' => '1'
+                    )
+                )
+            ),
+            array(
+                'POST',
+                'magazines/1/ads',
+                array(
+                    array(
+                        'controller' => 'magazines',
+                        'action' => 'ads',
+                        'id' => '1'
+                    ),
+                    array(
+                        'controller' => 'magazines/ads',
+                        'action' => 'create',
+                        'magazineId' => '1'
+                    ),
+                    array(
+                        'controller' => 'ads',
+                        'action' => 'create',
+                        'magazineId' => '1'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'magazines/1/ads/1',
+                array(
+                    array(
+                        'controller' => 'magazines/ads',
+                        'action' => 'show',
+                        'id' => '1',
+                        'magazineId' => '1'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'magazines/1/ads/1/edit',
+                array(
+                    array(
+                        'controller' => 'magazines/ads',
+                        'action' => 'edit',
+                        'id' => '1',
+                        'magazineId' => '1'
+                    ),
+                    array(
+                        'controller' => 'magazines/ads/edit',
+                        'action' => 'index',
+                        'adId' => '1',
+                        'magazineId' => '1'
+                    ),
+                    array(
+                        'controller' => 'edit',
+                        'action' => 'index',
+                        'magazineId' => '1',
+                        'adId' => '1'
+                    )
+                )
+            ),
+            array(
+                'PATCH',
+                'magazines/1/ads/1',
+                array(
+                    array(
+                        'controller' => 'magazines/ads',
+                        'action' => 'update',
+                        'id' => '1',
+                        'magazineId' => '1'
+                    )
+                )
+            ),
+            array(
+                'PUT',
+                'magazines/1/ads/1',
+                array(
+                    array(
+                        'controller' => 'magazines/ads',
+                        'action' => 'update',
+                        'id' => '1',
+                        'magazineId' => '1'
+                    )
+                )
+            ),
+            array(
+                'DELETE',
+                'magazines/1/ads/1',
+                array(
+                    array(
+                        'controller' => 'magazines/ads',
+                        'action' => 'destroy',
+                        'id' => '1',
+                        'magazineId' => '1'
+                    )
+                )
+            ),
+
+            // Nested, 3 levels (not recommended)
+            array(
+                'GET',
+                'publishers/1/magazines/1/ads',
+                array(
+                    array(
+                        'controller' => 'publishers/magazines',
+                        'action' => 'ads',
+                        'id' => '1',
+                        'publisherId' => '1'
+                    ),
+                    array(
+                        'controller' => 'publishers/magazines/ads',
+                        'action' => 'index',
+                        'magazineId' => '1',
+                        'publisherId' => '1'
+                    ),
+                    array(
+                        'controller' => 'ads',
+                        'action' => 'index',
+                        'magazineId' => '1',
+                        'publisherId' => '1'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'publishers/1/magazines/1/ads/new',
+                array(
+                    array(
+                        'controller' => 'publishers/magazines/ads',
+                        'action' => 'new',
+                        'magazineId' => '1',
+                        'publisherId' => '1'
+                    ),
+                    array(
+                        'controller' => 'publishers/magazines/ads',
+                        'action' => 'show',
+                        'id' => 'new',
+                        'magazineId' => '1',
+                        'publisherId' => '1'
+                    )
+                )
+            ),
+            array(
+                'POST',
+                'publishers/1/magazines/1/ads',
+                array(
+                    array(
+                        'controller' => 'publishers/magazines',
+                        'action' => 'ads',
+                        'id' => '1',
+                        'publisherId' => '1'
+                    ),
+                    array(
+                        'controller' => 'publishers/magazines/ads',
+                        'action' => 'create',
+                        'magazineId' => '1',
+                        'publisherId' => '1'
+                    ),
+                    array(
+                        'controller' => 'ads',
+                        'action' => 'create',
+                        'magazineId' => '1',
+                        'publisherId' => '1'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'publishers/1/magazines/1/ads/1',
+                array(
+                    array(
+                        'controller' => 'publishers/magazines/ads',
+                        'action' => 'show',
+                        'id' => '1',
+                        'magazineId' => '1',
+                        'publisherId' => '1'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'publishers/1/magazines/1/ads/1/edit',
+                array(
+                    array(
+                        'controller' => 'publishers/magazines/ads',
+                        'action' => 'edit',
+                        'id' => '1',
+                        'magazineId' => '1',
+                        'publisherId' => '1'
+                    ),
+                    array(
+                        'controller' => 'publishers/magazines/ads/edit',
+                        'action' => 'index',
+                        'adId' => '1',
+                        'magazineId' => '1',
+                        'publisherId' => '1'
+                    ),
+                    array(
+                        'controller' => 'edit',
+                        'action' => 'index',
+                        'magazineId' => '1',
+                        'adId' => '1',
+                        'publisherId' => '1'
+                    )
+                )
+            ),
+            array(
+                'PATCH',
+                'publishers/1/magazines/1/ads/1',
+                array(
+                    array(
+                        'controller' => 'publishers/magazines/ads',
+                        'action' => 'update',
+                        'id' => '1',
+                        'magazineId' => '1',
+                        'publisherId' => '1'
+                    )
+                )
+            ),
+            array(
+                'PUT',
+                'publishers/1/magazines/1/ads/1',
+                array(
+                    array(
+                        'controller' => 'publishers/magazines/ads',
+                        'action' => 'update',
+                        'id' => '1',
+                        'magazineId' => '1',
+                        'publisherId' => '1'
+                    )
+                )
+            ),
+            array(
+                'DELETE',
+                'publishers/1/magazines/1/ads/1',
+                array(
+                    array(
+                        'controller' => 'publishers/magazines/ads',
+                        'action' => 'destroy',
+                        'id' => '1',
+                        'magazineId' => '1',
+                        'publisherId' => '1'
+                    )
+                )
+            ),
+
+            // Format
+            array(
+                'GET',
+                'photos.html',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'index',
+                        '_format' => 'html',
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'photos/new.html',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'new',
+                        '_format' => 'html',
+                    ),
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'show',
+                        'id' => 'new',
+                        '_format' => 'html',
+                    ),
+                )
+            ),
+            array(
+                'POST',
+                'photos.html',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'create',
+                        '_format' => 'html',
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'photos/1.html',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'show',
+                        'id' => '1',
+                        '_format' => 'html',
+                    ),
+                )
+            ),
+            array(
+                'GET',
+                'photos/1/edit.html',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'edit',
+                        'id' => '1',
+                        '_format' => 'html',
+                    ),
+                    array(
+                        'controller' => 'photos/edit',
+                        'action' => 'index',
+                        'photoId' => '1',
+                        '_format' => 'html',
+                    ),
+                    array(
+                        'controller' => 'edit',
+                        'action' => 'index',
+                        'photoId' => '1',
+                        '_format' => 'html',
+                    )
+                )
+            ),
+            array(
+                'PATCH',
+                'photos/1.html',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'update',
+                        'id' => '1',
+                        '_format' => 'html',
+                    )
+                )
+            ),
+            array(
+                'PUT',
+                'photos/1.html',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'update',
+                        'id' => '1',
+                        '_format' => 'html',
+                    )
+                )
+            ),
+            array(
+                'DELETE',
+                'photos/1.html',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'destroy',
+                        'id' => '1',
+                        '_format' => 'html',
+                    )
+                )
+            ),
+
+            // JSON format
+            array(
+                'GET',
+                'photos/1/edit.json',
+                array(
+                    array(
+                        'controller' => 'photos',
+                        'action' => 'edit',
+                        'id' => '1',
+                        '_format' => 'json',
+                    ),
+                    array(
+                        'controller' => 'photos/edit',
+                        'action' => 'index',
+                        'photoId' => '1',
+                        '_format' => 'json',
+                    ),
+                    array(
+                        'controller' => 'edit',
+                        'action' => 'index',
+                        'photoId' => '1',
+                        '_format' => 'json',
+                    )
+                )
+            ),
+
+            // 复数转换
+            array(
+                'DELETE',
+                'lotteries/1/histories/1',
+                array(
+                    array(
+                        'controller' => 'lotteries/histories',
+                        'action' => 'destroy',
+                        'id' => '1',
+                        'lotteryId' => '1',
+                    )
+                )
+            ),
+
+            // 只有命名空间
+            array(
+                'GET',
+                'admin',
+                array(
+                    array(
+                        'controller' => 'admin',
+                        'action' => 'index'
+                    )
+                )
+            ),
+
+            // 根路径
+            array(
+                'GET',
+                '/',
+                array(
+                    array(
+                        'controller' => 'index',
+                        'action' => 'index'
+                    )
+                )
+            ),
+
+            // 不支持的method
+            array(
+                'ABC',
+                '/',
+                array(
+                    array(
+                        'controller' => 'index',
+                        'action' => 'index'
+                    )
+                )
+            ),
+
+            // 范围
+            array(
+                'GET',
+                'user/cards/1',
+                array(
+                    array(
+                        'controller' => 'user/cards',
+                        'action' => 'show',
+                        'id' => '1'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'user/cards/1/edit',
+                array(
+                    array(
+                        'controller' => 'user/cards',
+                        'action' => 'edit',
+                        'id' => '1'
+                    ),
+                    array(
+                        'controller' => 'user/cards/edit',
+                        'action' => 'index',
+                        'cardId' => '1'
+                    ),
+                    array(
+                        'controller' => 'edit',
+                        'action' => 'index',
+                        'cardId' => '1'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'user/emails', // 当前用户的邮件地址 https://developer.github.com/v3/users/emails/
+                array(
+                    array(
+                        'controller' => 'user/emails',
+                        'action' => 'index'
+                    )
+                )
+            ),
+
+            // 连接符,下划线转换为驼峰
+            array(
+                'GET',
+                'comic-books/new',
+                array(
+                    array(
+                        'controller' => 'comicBooks',
+                        'action' => 'new'
+                    ),
+                    array(
+                        'controller' => 'comicBooks',
+                        'action' => 'show',
+                        'id' => 'new'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'comic_books/new',
+                array(
+                    array(
+                        'controller' => 'comicBooks',
+                        'action' => 'new'
+                    ),
+                    array(
+                        'controller' => 'comicBooks',
+                        'action' => 'show',
+                        'id' => 'new'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'users/1/comic-books/new',
+                array(
+                    array(
+                        'controller' => 'users/comicBooks',
+                        'action' => 'new',
+                        'userId' => '1'
+                    ),
+                    array(
+                        'controller' => 'users/comicBooks',
+                        'action' => 'show',
+                        'id' => 'new',
+                        'userId' => '1'
+                    )
+                )
+            ),
+            array(
+                'GET',
+                'users/1/comic-books/sync-with-server',
+                array(
+                    array(
+                        'controller' => 'users/comicBooks',
+                        'action' => 'syncWithServer',
+                        'userId' => '1'
+                    ),
+                    array(
+                        'controller' => 'users/comicBooks',
+                        'action' => 'show',
+                        'id' => 'sync-with-server',
+                        'userId' => '1'
+                    )
+                )
+            ),
+
+            // 组合资源
+            array(
+                'GET',
+                'issues/comments',
+                array(
+                    array(
+                        'controller' => 'issues/comments',
+                        'action' => 'index'
+                    )
+                ),
+                array(
+                    'combinedResources' => array('issues/comments')
+                )
+            ),
+            array(
+                'GET',
+                'issues/comments/1',
+                array(
+                    array(
+                        'controller' => 'issues/comments',
+                        'action' => 'show',
+                        'id' => '1'
+                    )
+                ),
+                array(
+                    'combinedResources' => array('issues/comments')
+                )
+            ),
+            array(
+                'PUT',
+                'issues/comments/1',
+                array(
+                    array(
+                        'controller' => 'issues/comments',
+                        'action' => 'update',
+                        'id' => '1'
+                    )
+                ),
+                array(
+                    'combinedResources' => array('issues/comments')
+                )
+            ),
+            array(
+                'GET',
+                'users/twinh/repos/wei/issues/comments/1',
+                array(
+                    array(
+                        'controller' => 'users/repos/issues/comments',
+                        'action' => 'show',
+                        'id' => '1',
+                        'userId' => 'twinh',
+                        'repoId' => 'wei',
+                    )
+                ),
+                array(
+                    'combinedResources' => array('issues/comments')
+                )
+            )
+        );
+    }
+
+    /**
+     * @link http://zh.wiktionary.org/zh/%E9%99%84%E5%BD%95:%E8%8B%B1%E8%AF%AD%E4%B8%8D%E8%A7%84%E5%88%99%E5%A4%8D%E6%95%B0
+     * @link https://github.com/doctrine/inflector/blob/master/tests/Doctrine/Tests/Common/Inflector/InflectorTest.php
+     */
+    public function dataForSingularize()
+    {
+        return array(
+            array('life', 'lives'),
+
+            array('man', 'men'),
+
+            array('child', 'children'),
+
+            array('auto', 'autos'),
+            array('memo', 'memos'),
+            array('photo', 'photos'),
+            array('piano', 'pianos'),
+            array('pro', 'pros'),
+            array('solo', 'solos'),
+            array('studio', 'studios'),
+            array('tattoo', 'tattoos'),
+            array('video', 'videos'),
+            array('zoo', 'zoos'),
+
+            array('echo', 'echoes'),
+            array('hero', 'heroes'),
+            array('potato', 'potatoes'),
+            array('tomato', 'tomatoes'),
+
+            array('zero', 'zeros'),
+            array('zero', 'zeroes'),
+
+            array('deer', 'deer'),
+            array('fish', 'fish'),
+            array('sheep', 'sheep'),
+
+            array('formula', 'formulas'),
+
+            array('datum', 'data'),
+            array('analysis', 'analyses'),
+            array('money', 'monies'),
+            array('move', 'moves'),
+            array('sex', 'sexes'),
+            array('human', 'humans'),
+
+            array('appendix', 'appendixes'),
+            array('index', 'indexes'),
+            array('matrix', 'matrixes'),
+
+            array('history', 'histories'),
+            array('information', 'information'),
+
+            array('categoria', 'categorias'),
+            array('house', 'houses'),
+            array('bus', 'buses'),
+            array('menu', 'menus'),
+            array('news', 'news'),
+            array('quiz', 'quizzes'),
+            array('matrix_row', 'matrix_rows'),
+            array('matrix', 'matrices'),
+            array('alias', 'aliases'),
+            array('Media', 'Media'),
+            array('person', 'people'),
+            array('glove', 'gloves'),
+            array('wave', 'waves'),
+            array('cafe', 'cafes'),
+            array('roof', 'roofs'),
+            array('cookie', 'cookies'),
+            array('identity', 'identities'),
+            array('criterion', 'criteria'),
+            array('', ''),
+        );
+    }
+
+    /**
+     * @dataProvider dataForSingularize
+     */
+    public function testSingularize($singular, $plural)
+    {
+        $router = wei()->router;
+        $method = new \ReflectionMethod($router, 'singularize');
+        $method->setAccessible(true);
+        $this->assertEquals($singular, $method->invoke($router, $plural));
     }
 }
