@@ -1,6 +1,20 @@
 Changelog
 =========
 
+## 0.9.16 (2015-01-29)
+
+* Logger: Changed property "name" to "namespace", refs f1ac3e0
+* Cache: Changed property "prefix" to "namespace", refs 1d38b8d
+* Wei: Changed property "name" to "namespace", and injects namespace to services when instanced, refs 41c7b24
+* App: Added namespace property, refs 487cc9b
+* Url: Added append method to generate URL without base URL, refs c7ce111
+* Request: Added acceptJson method and overwriteFormat property to detect JSON request, refs b01182c
+* View: Uses property instead of local variables to avoid variables overwriting, refs ce37fdf
+* View: Throws 500 exception instead of 404 when template not found, refs b80f222
+* IsMobileCn: Allows Chinese mobile number starts with 17, refs 0a1217d
+* Url: Added sprintf support for URL generating, refs ac60d9f
+* PhpFileCache: added PhpFileCache service, refs 082275b
+
 ## 0.9.15 (2014-12-07)
 
 * Router: Drop REST router support, refs 56da468
