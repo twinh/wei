@@ -13,9 +13,7 @@ namespace Wei;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        The code is inspired by the awesome framework - Kohana
- *              http://kohanaframework.org/3.0/guide/api/Kohana_Route
- * @property    Request $request A service that handles the HTTP request data
- * @method      Response response(string $content) Send response header and content
+ *               http://kohanaframework.org/3.0/guide/api/Kohana_Route
  */
 class Router extends Base
 {

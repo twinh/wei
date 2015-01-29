@@ -83,8 +83,7 @@ namespace Wei
      * @method   \Wei\App       app(array $options = array()) Startup an MVC application
      * @property WeChatApp      $weChatApp A object handles WeChat(WeiXin) callback message
      * @method   \Wei\WeChatApp weChatApp() Start up WeChat application and output the matched rule message
-     * @property Router         $router A object that build a simple REST application
-     * @method   \Wei\Router    router($pathInfo = null, $method = null) Run the application
+     * @property Router         $router A service that parse the URL to request data
      * @property Url            $url A util object to build URL
      * @method   string         url($uri) Build URL by specified uri and parameters
      *
