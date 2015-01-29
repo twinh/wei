@@ -2,7 +2,7 @@
 /**
  * Wei Framework
  *
- * @copyright   Copyright (c) 2008-2013 Twin Huang
+ * @copyright   Copyright (c) 2008-2015 Twin Huang
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
@@ -37,7 +37,6 @@ class Router extends Base
      * rules    | array    | The regex rules
      * defaults | array    | The defaults params of the route
      * method   | string   | The required request method of the route
-     * callback | callable | The callback execute when the route is matched
      * regex    | string   | The regex complied from the pattern, just leave it blank when set a new route
      */
     protected $routeOptions = array(
@@ -45,7 +44,6 @@ class Router extends Base
         'rules'     => array(),
         'defaults'  => array(),
         'method'    => null,
-        'callback'  => null,
         'regex'     => null,
     );
 
@@ -127,34 +125,6 @@ class Router extends Base
         'people' => 'person',
         'quizzes' => 'quiz',
     );
-
-    /**
-     * Run the application
-     */
-    public function __invoke($pathInfo = null, $method = null)
-    {
-        if (0 === func_num_args()) {
-            $request = $this->request;
-            $pathInfo = $request->getPathInfo();
-            $method = $request->getMethod();
-        }
-
-        if (false !== ($parameters = $this->match($pathInfo, $method))) {
-            $route = $this->getRoute($parameters['_id']);
-            unset($parameters['_id']);
-
-            // Merge parameters to request query parameters
-            $query = $this->request->getParameterReference('get');
-            $query += $parameters;
-
-            array_unshift($parameters, $this->wei);
-            $result = call_user_func_array($route['callback'], $parameters);
-
-            return $this->response($result);
-        } else {
-            throw new \RuntimeException('The page you requested was not found', 404);
-        }
-    }
 
     /**
      * Set routes

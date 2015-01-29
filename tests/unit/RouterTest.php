@@ -228,18 +228,6 @@ class RouterTest extends TestCase
         $this->object->set(new \stdClass());
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
-    public function testNotFoundException()
-    {
-        $router = $this->object;
-
-        $router->request('/page', function(){});
-
-        $router('/pages');
-    }
-
     public function testControllerActionRoute()
     {
         $router = $this->object;
