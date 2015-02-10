@@ -344,16 +344,13 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
         }
     }
 
-    /**
-     * Returns the request host
-     *
-     * @return string
-     */
-    public function getHost()
+    public function testGetHttpHostWithPort()
     {
-        return $this->getServer('HTTP_HOST')
-            ?: $this->getServer('SERVER_NAME')
-            ?: $this->getServer('REMOTE_ADDR');
+        $server = array(
+            'HTTP_HOST' => '127.0.0.1:8080',
+        );
+        $this->request->setOption('servers', $server);
+        $this->assertEquals('127.0.0.1', $this->request->getHost());
     }
 
     /**

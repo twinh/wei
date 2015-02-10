@@ -396,6 +396,15 @@ class RequestTest extends TestCase
         $this->assertEquals('test.com', $this->request->getHost());
     }
 
+    public function testGetHttpHostWithPort()
+    {
+        $server = array(
+            'HTTP_HOST' => '127.0.0.1:8080',
+        );
+        $this->request->setOption('servers', $server);
+        $this->assertEquals('127.0.0.1', $this->request->getHost());
+    }
+
     public function testSetRequestUri()
     {
         $this->request->setRequestUri('/blog');
