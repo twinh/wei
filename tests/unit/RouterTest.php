@@ -1585,6 +1585,21 @@ class RouterTest extends TestCase
                 array(
                     'combinedResources' => array('issues/comments')
                 )
+            ),
+            // Combined resources with format
+            array(
+                'GET',
+                'issues/comments.json',
+                array(
+                    array(
+                        'controller' => 'issues/comments',
+                        'action' => 'index',
+                        '_format' => 'json',
+                    )
+                ),
+                array(
+                    'combinedResources' => array('issues/comments')
+                )
             )
         );
     }

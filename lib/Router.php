@@ -318,6 +318,13 @@ class Router extends Base
         $baseCtrl = '';
         $params = array();
         $routes = array();
+
+        // Split out format
+        if (strpos($path, '.') !== false) {
+            $params['_format'] = pathinfo($path, PATHINFO_EXTENSION);
+            $path = substr($path, 0, - strlen($params['_format']) - 1);
+        }
+
         $parts = $this->parsePath($path);
 
         // Split out namespace
@@ -328,13 +335,6 @@ class Router extends Base
         // Split out scope
         if (count($parts) > 1 && in_array($parts[0], $this->scopes)) {
             $baseCtrl .= array_shift($parts) . '/';
-        }
-
-        // Split out format
-        $lastPart = end($parts);
-        if (strpos($lastPart, '.') !== false) {
-            $params['_format'] = pathinfo($lastPart, PATHINFO_EXTENSION);
-            $parts[key($parts)] = substr($lastPart, 0, - strlen($params['_format']) - 1);
         }
 
         // The first parameter must be controller name,
