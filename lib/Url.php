@@ -52,7 +52,12 @@ class Url extends Base
      */
     public function query($url = '', $argsOrParams = array(), $params = array())
     {
-        return $this->__invoke($url, $argsOrParams, $params + $this->request->getQueries());
+        if (strpos($url, '%s') === false) {
+            $argsOrParams = $argsOrParams + $this->request->getQueries();
+        } else {
+            $params += $this->request->getQueries();
+        }
+        return $this->__invoke($url, $argsOrParams, $params);
     }
 
     /**

@@ -64,4 +64,20 @@ class UrlTest extends TestCase
 
         $this->assertEquals('/articles/b/comments/d', $this->url('articles/%s/comments/%s', array('a' => 'b', 'c' => 'd', 'e' => 'f')));
     }
+
+    public function testQueryUrl()
+    {
+        $this->request->setBaseUrl('/');
+
+        $gets = &$this->request->getQueries();
+        $gets = ['a' => 'b'];
+
+        $this->assertEquals('/articles?a=b', $this->url->query('articles'));
+
+        $this->assertEquals('/articles?c=d&a=b', $this->url->query('articles', ['c' => 'd']));
+
+        $this->assertEquals('/articles/1?a=b', $this->url->query('articles/%s', 1));
+
+        $this->assertEquals('/articles/1?c=d&a=b', $this->url->query('articles/%s', 1, ['c' => 'd']));
+    }
 }
