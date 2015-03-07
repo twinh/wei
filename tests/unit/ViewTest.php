@@ -16,7 +16,7 @@ class ViewTest extends TestCase
     {
         parent::setUp();
 
-        $this->object->setDirs(__DIR__ . '/Fixtures');
+        $this->object->setDirs(__DIR__ . '/Fixtures/views');
     }
 
     public function testInvoker()
@@ -65,7 +65,7 @@ class ViewTest extends TestCase
 
     public function testLayout()
     {
-        $content = $this->object->render('view.php');
+        $content = $this->object->render('content.php');
 
         $this->assertContains('layout start', $content);
         $this->assertContains('layout end', $content);
@@ -151,7 +151,7 @@ class ViewTest extends TestCase
         ));
 
         // No error occur. Fatal error: Unsupported operand types in xxx
-        $content = $this->object->render('view.php');
+        $content = $this->object->render('content.php');
 
         $this->assertContains('layout start', $content);
         $this->assertContains('layout end', $content);
