@@ -509,7 +509,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function setMethod($method)
     {
-        $this->method = $method;
+        $this->method = strtoupper($method);
         return $this;
     }
 

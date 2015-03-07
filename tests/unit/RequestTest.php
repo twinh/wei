@@ -811,4 +811,10 @@ class RequestTest extends TestCase
             ),
         );
     }
+
+    public function testSetMethodShouldBeUppercase()
+    {
+        $this->request->setMethod('put');
+        $this->assertEquals('PUT', $this->request->getMethod());
+    }
 }
