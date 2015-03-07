@@ -96,9 +96,10 @@ class View extends Base implements \ArrayAccess
     /**
      * Render a template
      *
-     * @param string $name  The name of template
-     * @param array  $data  The variables pass to template
-     * @return string|null
+     * @param string $name The name of template
+     * @param array $data The variables pass to template
+     * @return null|string
+     * @throws \Exception View file not found
      */
     public function render($name, $data = array())
     {
@@ -111,7 +112,12 @@ class View extends Base implements \ArrayAccess
         // Render view
         extract($this->currentData, EXTR_OVERWRITE);
         ob_start();
-        require $this->getFile($this->currentName);
+        try {
+            require $this->getFile($this->currentName);
+        } catch (\Exception $e) {
+            ob_end_clean();
+            throw $e;
+        }
         $content = ob_get_clean();
 
         // Render layout
