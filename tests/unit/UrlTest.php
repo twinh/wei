@@ -70,14 +70,14 @@ class UrlTest extends TestCase
         $this->request->setBaseUrl('/');
 
         $gets = &$this->request->getQueries();
-        $gets = ['a' => 'b'];
+        $gets = array('a' => 'b');
 
         $this->assertEquals('/articles?a=b', $this->url->query('articles'));
 
-        $this->assertEquals('/articles?c=d&a=b', $this->url->query('articles', ['c' => 'd']));
+        $this->assertEquals('/articles?c=d&a=b', $this->url->query('articles', array('c' => 'd')));
 
         $this->assertEquals('/articles/1?a=b', $this->url->query('articles/%s', 1));
 
-        $this->assertEquals('/articles/1?c=d&a=b', $this->url->query('articles/%s', 1, ['c' => 'd']));
+        $this->assertEquals('/articles/1?c=d&a=b', $this->url->query('articles/%s', 1, array('c' => 'd')));
     }
 }
