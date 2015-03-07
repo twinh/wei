@@ -50,20 +50,6 @@ class View extends Base implements \ArrayAccess
      */
     protected $defaultLayout;
 
-    /*
-     * The current render view variables
-     *
-     * @var array
-     */
-    private $currentData = array();
-
-    /**
-     * The current render view name
-     *
-     * @var string
-     */
-    private $currentName;
-
     /**
      * Constructor
      *
@@ -103,17 +89,15 @@ class View extends Base implements \ArrayAccess
      */
     public function render($name, $data = array())
     {
-        // Assign $name to $this->currentName to avoid conflict with view parameter
-        $this->currentName = $name;
-
-        // Set extra view variables
-        $this->currentData = $data + $this->data;
+        // Assign to double underscored variables to avoid conflict with view parameters
+        $__file = $this->getFile($name);
+        $__data = $data + $this->data;
 
         // Render view
-        extract($this->currentData, EXTR_OVERWRITE);
+        extract($__data, EXTR_OVERWRITE);
         ob_start();
         try {
-            require $this->getFile($this->currentName);
+            require $__file;
         } catch (\Exception $e) {
             ob_end_clean();
             throw $e;
@@ -124,9 +108,8 @@ class View extends Base implements \ArrayAccess
         if ($this->layout) {
             $layout = $this->layout;
             $this->layout = array();
-            $content = $this->render($layout['name'], array(
-                $layout['variable'] => $content
-            ) + $this->currentData);
+            $__data[$layout['variable']] = $content;
+            $content = $this->render($layout['name'], $__data);
         }
 
         return $content;

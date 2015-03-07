@@ -156,4 +156,10 @@ class ViewTest extends TestCase
         $this->assertContains('layout start', $content);
         $this->assertContains('layout end', $content);
     }
+
+    public function testAssignViewVarInViewFile()
+    {
+        $content = $this->view->render('assignViewVarInViewFile/content.php');
+        $this->assertContains('assign!', $content);
+    }
 }
