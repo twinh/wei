@@ -984,6 +984,11 @@ class RouterTest extends TestCase
                         'action' => 'show',
                         'id' => 'new',
                         'magazineId' => '1'
+                    ),
+                    array(
+                        'controller' => 'ads',
+                        'action' => 'new',
+                        'magazineId' => '1',
                     )
                 )
             ),
@@ -1120,6 +1125,12 @@ class RouterTest extends TestCase
                         'controller' => 'publishers/magazines/ads',
                         'action' => 'show',
                         'id' => 'new',
+                        'magazineId' => '1',
+                        'publisherId' => '1'
+                    ),
+                    array(
+                        'controller' => 'ads',
+                        'action' => 'new',
                         'magazineId' => '1',
                         'publisherId' => '1'
                     )
@@ -1507,7 +1518,12 @@ class RouterTest extends TestCase
                         'action' => 'show',
                         'id' => 'new',
                         'userId' => '1'
-                    )
+                    ),
+                    array(
+                        'controller' => 'comicBooks',
+                        'action' => 'new',
+                        'userId' => '1'
+                    ),
                 )
             ),
             array(
@@ -1523,6 +1539,11 @@ class RouterTest extends TestCase
                         'controller' => 'users/comicBooks',
                         'action' => 'show',
                         'id' => 'sync-with-server',
+                        'userId' => '1'
+                    ),
+                    array(
+                        'controller' => 'comicBooks',
+                        'action' => 'syncWithServer',
                         'userId' => '1'
                     )
                 )

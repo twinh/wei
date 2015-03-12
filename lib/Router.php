@@ -371,6 +371,14 @@ class Router extends Base
                 'action' => $this->methodToAction($method),
                 'id' => $actOrId
             );
+
+            // GET posts/1/comment/new => comment::new postId=1
+            if ($count >= 2 && $this->isAction($actOrId)) {
+                $routes[] = array(
+                    'controller' => $ctrl,
+                    'action' => $actOrId,
+                );
+            }
         } else {
             // GET posts/1/edit
             $routes[] = array(
