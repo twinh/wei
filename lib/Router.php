@@ -315,7 +315,7 @@ class Router extends Base
      */
     public function matchRestParamSet($path, $method = 'GET')
     {
-        $baseCtrl = '';
+        $rootCtrl = '';
         $params = array();
         $routes = array();
 
@@ -329,13 +329,15 @@ class Router extends Base
 
         // Split out namespace
         if (count($parts) > 1 && in_array($parts[0], $this->namespaces)) {
-            $baseCtrl .= array_shift($parts) . '/';
+            $rootCtrl .= array_shift($parts) . '/';
         }
 
         // Split out scope
         if (count($parts) > 1 && in_array($parts[0], $this->scopes)) {
-            $baseCtrl .= array_shift($parts) . '/';
+            $rootCtrl .= array_shift($parts) . '/';
         }
+
+        $baseCtrl = $rootCtrl;
 
         // The first parameter must be controller name,
         // the second parameter may be action name or id, eg posts/show, posts/1
@@ -375,7 +377,7 @@ class Router extends Base
             // GET posts/1/comment/new => comment::new postId=1
             if ($count >= 2 && $this->isAction($actOrId)) {
                 $routes[] = array(
-                    'controller' => $ctrl,
+                    'controller' => $rootCtrl . $ctrl,
                     'action' => $actOrId,
                 );
             }

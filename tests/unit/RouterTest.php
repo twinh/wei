@@ -1472,6 +1472,28 @@ class RouterTest extends TestCase
                     )
                 )
             ),
+            array(
+                'GET',
+                'user/products/1/transfers/add',
+                array(
+                    array(
+                        'controller' => 'user/products/transfers',
+                        'action' => 'add',
+                        'productId' => '1'
+                    ),
+                    array(
+                        'controller' => 'user/products/transfers',
+                        'action' => 'show',
+                        'id' => 'add',
+                        'productId' => '1'
+                    ),
+                    array(
+                        'controller' => 'user/transfers',
+                        'action' => 'add',
+                        'productId' => '1'
+                    )
+                )
+            ),
 
             // 连接符,下划线转换为驼峰
             array(
