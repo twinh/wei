@@ -1,1 +1,1 @@
-<?= $var;
+<?php echo $var;
