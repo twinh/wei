@@ -108,7 +108,7 @@ namespace WeiTest
         public function testDownload()
         {
             ob_start();
-            $this->response->download(__DIR__ . '/Fixtures/view.php');
+            $this->response->download(__DIR__ . '/Fixtures/views/content.php');
             $content = ob_get_clean();
 
             $this->assertContains('<?php $this->layout(\'layout.php\') ?>', $content);
