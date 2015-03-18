@@ -259,7 +259,7 @@ class Router extends Base
     {
         $params = $this->match($pathInfo, $method);
         $restParams = $this->matchRestParamSet($pathInfo, $method);
-        return $params ? array_merge($restParams, array($params)) : $restParams;
+        return $params ? array_merge(array($params), $restParams) : $restParams;
     }
 
     /**
