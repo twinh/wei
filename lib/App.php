@@ -75,6 +75,13 @@ class App extends Base
     protected $controllers = array();
 
     /**
+     * An array contains the pre-defined controller classes
+     *
+     * @var array
+     */
+    protected $controllerClasses = array();
+
+    /**
      * Startup an MVC application
      *
      * @param array $options
@@ -86,14 +93,13 @@ class App extends Base
         try {
             $options && $this->setOption($options);
 
+            // Step1 Parse the path info to parameter set
             $request = $this->request;
-            $parameters = (array)$this->router->match($request->getPathInfo(), $request->getMethod());
-            $request->set($parameters);
+            $paramSet = $this->router->matchParamSet($request->getPathInfo(), $request->getMethod());
 
-            return $this->dispatch(
-                $this->getController(),
-                $this->getAction()
-            );
+            // Step2 根据多组参数,找出对应的控制器和操作,并执行
+            return $this->dispatchParamSet($paramSet);
+
         } catch (\RuntimeException $e) {
             if ($e->getCode() === self::FORWARD) {
                 $this->logger->debug(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
@@ -105,45 +111,109 @@ class App extends Base
     }
 
     /**
-     * Load and execute the controller action
+     * Dispatch by specified parameter set
      *
-     * @param  string    $controller The name of controller
-     * @param  string    $action     The name of action
+     * @param array $paramSet
      * @return $this
-     * @throws \RuntimeException When controller or action not found
      */
-    public function dispatch($controller, $action = 'index')
+    protected function dispatchParamSet(array $paramSet)
     {
-        $object = $this->getControllerInstance($controller, $action);
-        if ($object) {
-            if ($this->isActionAvailable($object, $action)) {
-                $response = $object->$action($this->request, $this->response);
-                $this->handleResponse($response);
-                return $this;
-            } else {
-                $notFound = 'action';
+        $notFoundClasses = array();
+        $notFoundActions = array();
+
+        // 每组参数逐一尝试
+        foreach ($paramSet as $params) {
+            $controller = $params['controller'];
+            $action = $params['action'];
+
+            // 根据控制器格式,生成多个控制器类,逐个尝试
+            $controllerClasses = $this->getControllerClasses($controller);
+            foreach ($controllerClasses as $class) {
+                if (class_exists($class)) {
+                    if ($this->isActionAvailable($class, $action)) {
+                        // 找到符合的控制器和操作
+                        $this->request->set($params);
+                        return $this->dispatchClass($class, $controller, $action);
+                    } else {
+                        $notFoundActions[$action][$controller][] = $class;
+                    }
+                } else {
+                    $notFoundClasses[$controller][] = $class;
+                }
             }
-        } else {
-            $notFound = 'controller';
         }
 
+        // 所有的参数都不符合,构建错误提示
         // Prepare exception message
         $message = 'The page you requested was not found';
         if ($this->wei->isDebug()) {
-            $message .= ' - ';
-            switch ($notFound) {
-                case 'controller':
-                    $message .= sprintf('controller "%s" (class "%s") not found', $controller, $this->getControllerClass($controller));
-                    break;
-
-                case 'action':
-                    $message .= sprintf('action method "%s" not found in controller "%s" (class "%s")', $action, $controller, get_class($object));
-                    break;
+            $detail = $this->request->get('debug-detail');
+            foreach ($notFoundClasses as $controller => $classes) {
+                $message .= sprintf('%s - controller "%s" not found', "\n", $controller);
+                $detail && $message .= sprintf(' (class "%s")', implode($classes, '", "'));
+            }
+            foreach ($notFoundActions as $action => $controllers) {
+                foreach ($controllers as $controller => $classes) {
+                    $message .= sprintf('%s - action method "%s" not found in controller "%s"', "\n", $action, $controller);
+                    $detail && $message .= sprintf(' (class "%s")', implode($classes, '", "'));
+                }
             }
         }
 
         // You can use `$wei->error->notFound(function(){});` to custom the 404 page
         throw new \RuntimeException($message, 404);
+    }
+
+    /**
+     * Dispatch by specified class, controller and action name
+     *
+     * @param string $class
+     * @param string $controller
+     * @param string $action
+     * @return mixed
+     */
+    public function dispatchClass($class, $controller, $action)
+    {
+        $this->controllers[$class] = new $class(array(
+            'wei' => $this->wei,
+            'app' => $this,
+            'controller' => $controller,
+            'action' => $action,
+        ));
+        return $this->dispatchObject($this->controllers[$class], $action);
+    }
+
+    /**
+     * Dispatch by specified controller instance and action name
+     *
+     * @param object $object
+     * @param string $action
+     * @return $this
+     */
+    public function dispatchObject($object, $action)
+    {
+        $middleware = method_exists($object, 'getMiddleware') ? $object->getMiddleware() : array();
+        $that = $this;
+        $this->callMiddleware($middleware, function () use ($object, $action, $that) {
+            $response = $object->$action($that->request, $that->response);
+            $that->handleResponse($response);
+        });
+        return $this;
+    }
+
+    protected function callMiddleware(array $middleware, $callback)
+    {
+        $next = function () use (&$middleware, $callback, &$next) {
+            $config = array_splice($middleware, 0, 1);
+            if ($config) {
+                $class = key($config);
+                $service = new $class($config[$class]);
+                $service($next);
+            } else {
+                $callback();
+            }
+        };
+        $next();
     }
 
     /**
@@ -253,15 +323,35 @@ class App extends Base
     }
 
     /**
-     * Return the controller class name (without validate if the class exists)'
+     * Return the controller class names by controllers (without validate if the class exists)
      *
-     * @param string $controller The name of class
-     * @return string
+     * @param string $controller The name of controller
+     * @return array
      */
-    public function getControllerClass($controller)
+    public function getControllerClasses($controller)
     {
-        $controller = implode('\\', array_map('ucfirst', explode('/', $controller)));
-        return sprintf($this->controllerFormat, $controller);
+        $classes = array();
+
+        // Prepare parameters for replacing
+        $namespace = $this->getNamespace();
+        $controller = strtr($controller, array('/' => '\\'));
+
+        // Generate class from format
+        $class = str_replace(
+            array('%namespace%', '%controller%'),
+            array($namespace, $controller),
+            $this->controllerFormat
+        );
+        $upperLetter = strrpos($class, '\\') + 1;
+        $class[$upperLetter] = strtoupper($class[$upperLetter]);
+        $classes[] = $class;
+
+        // Add class from pre-defined classes
+        if (isset($this->controllerClasses[$controller])) {
+            $classes[] = $this->controllerClasses[$controller];
+        }
+
+        return $classes;
     }
 
     /**
