@@ -93,12 +93,8 @@ class App extends Base
         try {
             $options && $this->setOption($options);
 
-            // Step1 Parse the path info to parameter set
-            $request = $this->request;
-            $paramSet = $this->router->matchParamSet($request->getPathInfo(), $request->getMethod());
-
             // Step2 根据多组参数,找出对应的控制器和操作,并执行
-            return $this->dispatchParamSet($paramSet);
+            return $this->dispatchUrl($this->request->getPathInfo(), $this->request->getMethod());
 
         } catch (\RuntimeException $e) {
             if ($e->getCode() === self::FORWARD) {
@@ -111,13 +107,15 @@ class App extends Base
     }
 
     /**
-     * Dispatch by specified parameter set
+     * Dispatch by specified path info and request method
      *
-     * @param array $paramSet
+     * @param string $pathInfo
+     * @param string $method
      * @return $this
      */
-    public function dispatchParamSet(array $paramSet)
+    public function dispatchUrl($pathInfo, $method)
     {
+        $paramSet = $this->router->matchParamSet($pathInfo, $method);
         $notFound = array('classes' => array(), 'actions' => array());
 
         foreach ($paramSet as $params) {
@@ -202,7 +200,8 @@ class App extends Base
             if ($config) {
                 $class = key($config);
                 $service = new $class($config[$class]);
-                return $service($next);
+                // 如果是response,直接返回?
+                $service($next);
             } else {
                 return $callback();
             }

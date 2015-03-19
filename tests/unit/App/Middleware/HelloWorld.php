@@ -8,7 +8,7 @@ class HelloWorld extends \Wei\Base
     {
         echo 'hello';
 
-        $next();
+        $response = $next();
 
         echo 'world';
     }
