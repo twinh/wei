@@ -90,40 +90,41 @@ class App extends Base
      */
     public function __invoke(array $options = array())
     {
+        $options && $this->setOption($options);
+
+        // Step1 Parse the path info to parameter set
+        $request = $this->request;
+        $paramSet = $this->router->matchParamSet($request->getPathInfo(), $request->getMethod());
+
+        // Step2 根据多组参数,找出对应的控制器和操作,并执行
+        return $this->dispatchParamSet($paramSet);
+    }
+
+    /**
+     * Dispatch by specified parameter set
+     *
+     * @param array $paramSet
+     * @return $this
+     */
+    public function dispatchParamSet(array $paramSet)
+    {
+        $notFound = array('classes' => array(), 'actions' => array());
+
         try {
-            $options && $this->setOption($options);
-
-            // Step2 根据多组参数,找出对应的控制器和操作,并执行
-            return $this->dispatchUrl($this->request->getPathInfo(), $this->request->getMethod());
-
+            foreach ($paramSet as $params) {
+                $result = $this->dispatch($params['controller'], $params['action'], $params);
+                if (is_array($result)) {
+                    $notFound = array_merge_recursive($notFound, $result);
+                } else {
+                    return $this;
+                }
+            }
         } catch (\RuntimeException $e) {
             if ($e->getCode() === self::FORWARD) {
                 $this->logger->debug(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
                 return $this;
             } else {
                 throw $e;
-            }
-        }
-    }
-
-    /**
-     * Dispatch by specified path info and request method
-     *
-     * @param string $pathInfo
-     * @param string $method
-     * @return $this
-     */
-    public function dispatchUrl($pathInfo, $method)
-    {
-        $paramSet = $this->router->matchParamSet($pathInfo, $method);
-        $notFound = array('classes' => array(), 'actions' => array());
-
-        foreach ($paramSet as $params) {
-            $result = $this->dispatch($params['controller'], $params['action'], $params);
-            if (is_array($result)) {
-                $notFound = array_merge_recursive($notFound, $result);
-            } else {
-                return $this;
             }
         }
 
@@ -357,11 +358,11 @@ class App extends Base
     public function getControllerInstance($class, $controller, $action)
     {
         if (!isset($this->controllerInstances[$class])) {
-            $this->controllerInstances[$class] = $object = new $class(array(
+            $this->controllerInstances[$class] = new $class(array(
                 'wei' => $this->wei,
                 'app' => $this,
-                'controller' => $controller,
-                'action' => $action,
+                'controller' => $controller, /* deprecated */
+                'action' => $action, /* deprecated */
             ));
         }
         return $this->controllerInstances[$class];
@@ -423,8 +424,10 @@ class App extends Base
      */
     public function forward($controller, $action = 'index')
     {
-        $this->setController($controller);
-        $this->setAction($action);
-        $this()->preventPreviousDispatch();
+        $this->dispatchParamSet(array(array(
+            'controller' => $controller,
+            'action' => $action
+        )));
+        $this->preventPreviousDispatch();
     }
 }

@@ -143,12 +143,12 @@ class AppTest extends TestCase
     {
         $this->expectOutputString('target');
 
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'forwardAction'
+        $this->app->dispatchParamSet(array(
+            array(
+                'controller' => 'test',
+                'action' => 'forwardAction'
+            )
         ));
-
-        $this->app();
     }
 
     public function testForwardController()
