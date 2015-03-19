@@ -16,7 +16,6 @@ namespace Wei;
  * @property    Request $request A service that handles the HTTP request data
  * @property    Response $response A service that handles the HTTP response data
  * @property    View $view A service that use to render PHP template
- * @property    Logger $logger A logger service, which is inspired by Monolog
  */
 class App extends Base
 {
@@ -121,7 +120,6 @@ class App extends Base
             }
         } catch (\RuntimeException $e) {
             if ($e->getCode() === self::FORWARD) {
-                $this->logger->debug(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
                 return $this;
             } else {
                 throw $e;
@@ -402,7 +400,7 @@ class App extends Base
      */
     public function preventPreviousDispatch()
     {
-        throw new \RuntimeException('', self::FORWARD);
+        throw new \RuntimeException('Forwarding, please ignore me', self::FORWARD);
     }
 
     /**
