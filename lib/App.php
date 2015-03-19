@@ -118,36 +118,14 @@ class App extends Base
      */
     public function dispatchParamSet(array $paramSet)
     {
+        $notFound = array('classes' => array(), 'actions' => array());
+
         foreach ($paramSet as $params) {
-            $controller = $params['controller'];
-            $action = $params['action'];
-
-            $result = $this->dispatch($controller, $action, $params);
-            var_dump($result);die;
-        }
-
-        $notFoundClasses = array();
-        $notFoundActions = array();
-
-        // 每组参数逐一尝试
-        foreach ($paramSet as $params) {
-            $controller = $params['controller'];
-            $action = $params['action'];
-
-            // 根据控制器格式,生成多个控制器类,逐个尝试
-            $controllerClasses = $this->getControllerClasses($controller);
-            foreach ($controllerClasses as $class) {
-                if (class_exists($class)) {
-                    if ($this->isActionAvailable($class, $action)) {
-                        // 找到符合的控制器和操作
-                        $this->request->set($params);
-                        return $this->dispatchClass($class, $controller, $action);
-                    } else {
-                        $notFoundActions[$action][$controller][] = $class;
-                    }
-                } else {
-                    $notFoundClasses[$controller][] = $class;
-                }
+            $result = $this->dispatch($params['controller'], $params['action'], $params);
+            if (is_array($result)) {
+                $notFound = array_merge_recursive($notFound, $result);
+            } else {
+                return $this;
             }
         }
 
@@ -155,11 +133,12 @@ class App extends Base
         $message = 'The page you requested was not found';
         if ($this->wei->isDebug()) {
             $detail = $this->request->get('debug-detail');
-            foreach ($notFoundClasses as $controller => $classes) {
+            foreach ($notFound['classes'] as $controller) {
+                $classes = $this->getControllerClasses($controller);
                 $message .= sprintf('%s - controller "%s" not found', "\n", $controller);
                 $detail && $message .= sprintf(' (class "%s")', implode($classes, '", "'));
             }
-            foreach ($notFoundActions as $action => $controllers) {
+            foreach ($notFound['actions'] as $action => $controllers) {
                 foreach ($controllers as $controller => $classes) {
                     $message .= sprintf('%s - action method "%s" not found in controller "%s"', "\n", $action, $controller);
                     $detail && $message .= sprintf(' (class "%s")', implode($classes, '", "'));
@@ -173,7 +152,7 @@ class App extends Base
 
     public function dispatch($controller, $action, array $params = array())
     {
-        $result = array();
+        $notFound = array();
         $classes = $this->getControllerClasses($controller);
 
         foreach ($classes as $class) {
@@ -199,13 +178,13 @@ class App extends Base
                     return $this;
 
                 } else {
-                    $result['action'][$class] = $action;
+                    $notFound['actions'][$class] = $action;
                 }
             } else {
-                $result['class'] = $class;
+                $notFound['classes'] = $class;
             }
         }
-        return $result;
+        return $notFound;
     }
 
     protected function callMiddleware(array $middleware, $callback)
@@ -233,7 +212,7 @@ class App extends Base
     public function handleResponse($response)
     {
         switch (true) {
-            // Render default template and using $result as template variables
+            // Render default template and use $response as template variables
             case is_array($response) :
                 $response = $this->view->render($this->getDefaultTemplate(), $response);
                 return $this->response->send($response);
