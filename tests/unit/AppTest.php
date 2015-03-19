@@ -281,7 +281,7 @@ class AppTest extends TestCase
     {
         $this->assertEquals('index', $this->app->getAction());
 
-        $this->app->setController('newAction');
+        $this->app->setAction('newAction');
 
         $this->assertEquals('newAction', $this->app->getAction());
     }
