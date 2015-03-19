@@ -26,9 +26,9 @@ class AppTest extends TestCase
     public function testBaseApp()
     {
         // WeiTest\App\Controller\Test::testAction
-        $this->request->setPathInfo('test/test');
+        $this->app->dispatch('test', 'test');
 
-        $this->app();
+        var_dump($this->app->getController());die;
 
         $this->expectOutputString('test');
     }

@@ -158,8 +158,11 @@ class App extends Base
         foreach ($classes as $class) {
             if (class_exists($class)) {
                 if ($this->isActionAvailable($class, $action)) {
+
                     // 找到符合的控制器和操作
                     $this->request->set($params);
+                    $this->setController($controller);
+                    $this->setAction($action);
 
                     // Instance controller
                     $this->controllers[$class] = $object = new $class(array(
