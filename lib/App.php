@@ -162,7 +162,7 @@ class App extends Base
                     $this->request->set($params);
 
                     // Instance controller
-                    $this->controllers[$class] = new $class(array(
+                    $this->controllers[$class] = $object = new $class(array(
                         'wei' => $this->wei,
                         'app' => $this,
                         'controller' => $controller,

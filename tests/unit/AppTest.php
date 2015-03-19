@@ -3,7 +3,8 @@
 namespace WeiTest;
 
 /**
- * @property \Wei\App $app The application wei
+ * @property \Wei\App $app The application service
+ * @property \Wei\Request $request
  */
 class AppTest extends TestCase
 {
@@ -25,10 +26,7 @@ class AppTest extends TestCase
     public function testBaseApp()
     {
         // WeiTest\App\Controller\Test::testAction
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'test'
-        ));
+        $this->request->setPathInfo('test/test');
 
         $this->app();
 
