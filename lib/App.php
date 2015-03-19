@@ -352,7 +352,7 @@ class App extends Base
      * @param string $action The name of action
      * @return false|object
      */
-    public function getControllerInstance($class, $controller, $action)
+    protected function getControllerInstance($class, $controller, $action)
     {
         if (!isset($this->controllerInstances[$class])) {
             $this->controllerInstances[$class] = new $class(array(

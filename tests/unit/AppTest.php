@@ -37,7 +37,13 @@ class AppTest extends TestCase
 
         $this->assertInternalType('array', $result);
 
-        $this->assertEquals(array('classes' => 'WeiTest\App\ControllerNotFound'), $result);
+        $this->assertEquals(array(
+            'classes' => array(
+                'ControllerNotFound' => array(
+                    'WeiTest\App\ControllerNotFound'
+                )
+            )
+        ), $result);
     }
 
     public function testNestedController()
@@ -55,19 +61,27 @@ class AppTest extends TestCase
 
         $this->assertInternalType('array', $result);
 
-        $this->assertEquals(array('classes' => 'WeiTest\App\Controller\Admin'), $result);
+        $this->assertEquals(array(
+            'classes' => array(
+                'Controller\Admin' => array(
+                    'WeiTest\App\Controller\Admin'
+                )
+        )), $result);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionCode 404
-     * @expectedExceptionMessage The page you requested was not found - action method "ActionNotFound" not found in controller "test" (class "WeiTest\App\Test")
-     */
     public function testActionNotFound()
     {
-        $this->app->setAction('ActionNotFound');
+        $result = $this->app->dispatch('test', 'ActionNotFound');
 
-        $this->app();
+        $this->assertEquals(array(
+            'actions' => array(
+                'ActionNotFound' => array(
+                    'test' => array(
+                        'WeiTest\App\Test'
+                    )
+                )
+            )
+        ), $result);
     }
 
     public function testActionReturnArrayAsViewParameter()
@@ -96,18 +110,12 @@ class AppTest extends TestCase
         $this->app();
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testActionReturnUnexpectedType()
     {
-        // WeiTest\App\Controller\TestController::returnUnexpectedTypeAction
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'returnUnexpectedType'
-        ));
+        $this->setExpectedException('InvalidArgumentException');
 
-        $this->app();
+        // WeiTest\App\Controller\TestController::returnUnexpectedTypeAction
+        $this->app->dispatch('test', 'returnUnexpectedType');
     }
 
     public function testDispatchBreak()
@@ -126,17 +134,6 @@ class AppTest extends TestCase
         $this->expectOutputString('');
 
         $this->app();
-    }
-
-    public function testGetControllerInstance()
-    {
-        $this->assertFalse($this->app->getControllerInstance('../invalid/controller', 'index'));
-
-        $controller = $this->app->getControllerInstance('test', 'index');
-        $this->assertInstanceOf('WeiTest\App\Test', $controller);
-
-        $controller2 = $this->app->getControllerInstance('test', 'index');
-        $this->assertSame($controller2, $controller);
     }
 
     public function testForwardAction()
