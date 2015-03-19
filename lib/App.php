@@ -122,8 +122,7 @@ class App extends Base
         $message = 'The page you requested was not found';
         if ($this->wei->isDebug()) {
             $detail = $this->request->get('debug-detail');
-            foreach ($notFound['classes'] as $controller) {
-                $classes = $this->getControllerClasses($controller);
+            foreach ($notFound['classes'] as $controller => $classes) {
                 $message .= sprintf('%s - controller "%s" not found', "\n", $controller);
                 $detail && $message .= sprintf(' (class "%s")', implode($classes, '", "'));
             }
