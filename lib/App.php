@@ -68,11 +68,11 @@ class App extends Base
     protected $action;
 
     /**
-     * The controller instances
+     * The instanced controller objects
      *
      * @var array
      */
-    protected $controllers = array();
+    protected $controllerInstances = array();
 
     /**
      * An array contains the pre-defined controller classes
@@ -170,18 +170,12 @@ class App extends Base
                     $this->setController($controller);
                     $this->setAction($action);
 
-                    // Instance controller
-                    $this->controllers[$class] = $object = new $class(array(
-                        'wei' => $this->wei,
-                        'app' => $this,
-                        'controller' => $controller,
-                        'action' => $action,
-                    ));
+                    $instance = $this->getControllerInstance($class, $controller, $action);
 
-                    $middleware = method_exists($object, 'getMiddleware') ? $object->getMiddleware() : array();
+                    $middleware = method_exists($instance, 'getMiddleware') ? $instance->getMiddleware() : array();
                     $that = $this;
-                    return $this->callMiddleware($middleware, function () use ($object, $action, $that) {
-                        $response = $object->$action($that->request, $that->response);
+                    return $this->callMiddleware($middleware, function () use ($instance, $action, $that) {
+                        $response = $instance->$action($that->request, $that->response);
                         return $that->handleResponse($response);
                     });
 
@@ -350,28 +344,22 @@ class App extends Base
     /**
      * Get the controller instance, if not found, return false instead
      *
+     * @param string $class The class name of controller
      * @param string $controller The name of controller
      * @param string $action The name of action
-     * @return object|false
+     * @return false|object
      */
-    public function getControllerInstance($controller, $action)
+    public function getControllerInstance($class, $controller, $action)
     {
-        $class = $this->getControllerClass($controller);
-
-        if (isset($this->controllers[$class])) {
-            return $this->controllers[$class];
+        if (!isset($this->controllerInstances[$class])) {
+            $this->controllerInstances[$class] = $object = new $class(array(
+                'wei' => $this->wei,
+                'app' => $this,
+                'controller' => $controller,
+                'action' => $action,
+            ));
         }
-
-        if (!class_exists($class)) {
-            return false;
-        }
-
-        return $this->controllers[$class] = new $class(array(
-            'wei' => $this->wei,
-            'app' => $this,
-            'controller' => $controller,
-            'action' => $action,
-        ));
+        return $this->controllerInstances[$class];
     }
 
     /**
