@@ -30,7 +30,7 @@ class App extends Base
      *
      * @var string
      */
-    protected $controllerFormat = 'Controller\%s';
+    protected $controllerFormat = 'Controller\%controller%';
 
     /**
      * The default controller name
@@ -116,8 +116,16 @@ class App extends Base
      * @param array $paramSet
      * @return $this
      */
-    protected function dispatchParamSet(array $paramSet)
+    public function dispatchParamSet(array $paramSet)
     {
+        foreach ($paramSet as $params) {
+            $controller = $params['controller'];
+            $action = $params['action'];
+
+            $result = $this->dispatch($controller, $action, $params);
+            var_dump($result);die;
+        }
+
         $notFoundClasses = array();
         $notFoundActions = array();
 
@@ -143,8 +151,7 @@ class App extends Base
             }
         }
 
-        // 所有的参数都不符合,构建错误提示
-        // Prepare exception message
+        // All controllers and actions were not found, prepare exception message
         $message = 'The page you requested was not found';
         if ($this->wei->isDebug()) {
             $detail = $this->request->get('debug-detail');
@@ -164,41 +171,41 @@ class App extends Base
         throw new \RuntimeException($message, 404);
     }
 
-    /**
-     * Dispatch by specified class, controller and action name
-     *
-     * @param string $class
-     * @param string $controller
-     * @param string $action
-     * @return mixed
-     */
-    public function dispatchClass($class, $controller, $action)
+    public function dispatch($controller, $action, array $params = array())
     {
-        $this->controllers[$class] = new $class(array(
-            'wei' => $this->wei,
-            'app' => $this,
-            'controller' => $controller,
-            'action' => $action,
-        ));
-        return $this->dispatchObject($this->controllers[$class], $action);
-    }
+        $result = array();
+        $classes = $this->getControllerClasses($controller);
 
-    /**
-     * Dispatch by specified controller instance and action name
-     *
-     * @param object $object
-     * @param string $action
-     * @return $this
-     */
-    public function dispatchObject($object, $action)
-    {
-        $middleware = method_exists($object, 'getMiddleware') ? $object->getMiddleware() : array();
-        $that = $this;
-        $this->callMiddleware($middleware, function () use ($object, $action, $that) {
-            $response = $object->$action($that->request, $that->response);
-            $that->handleResponse($response);
-        });
-        return $this;
+        foreach ($classes as $class) {
+            if (class_exists($class)) {
+                if ($this->isActionAvailable($class, $action)) {
+                    // 找到符合的控制器和操作
+                    $this->request->set($params);
+
+                    // Instance controller
+                    $this->controllers[$class] = new $class(array(
+                        'wei' => $this->wei,
+                        'app' => $this,
+                        'controller' => $controller,
+                        'action' => $action,
+                    ));
+
+                    $middleware = method_exists($object, 'getMiddleware') ? $object->getMiddleware() : array();
+                    $that = $this;
+                    $this->callMiddleware($middleware, function () use ($object, $action, $that) {
+                        $response = $object->$action($that->request, $that->response);
+                        $that->handleResponse($response);
+                    });
+                    return $this;
+
+                } else {
+                    $result['action'][$class] = $action;
+                }
+            } else {
+                $result['class'] = $class;
+            }
+        }
+        return $result;
     }
 
     protected function callMiddleware(array $middleware, $callback)
