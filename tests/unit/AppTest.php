@@ -267,4 +267,22 @@ class AppTest extends TestCase
 
         $this->app->dispatch('middleware');
     }
+
+    public function testGetSetController()
+    {
+        $this->assertEquals('index', $this->app->getController());
+
+        $this->app->setController('newController');
+
+        $this->assertEquals('newController', $this->app->getController());
+    }
+
+    public function testGetSetAction()
+    {
+        $this->assertEquals('index', $this->app->getAction());
+
+        $this->app->setController('newAction');
+
+        $this->assertEquals('newAction', $this->app->getAction());
+    }
 }

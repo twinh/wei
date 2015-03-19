@@ -259,10 +259,7 @@ class App extends Base
      */
     public function getController()
     {
-        if (!$this->controller) {
-            $this->controller = $this->request->get('controller', $this->defaultController);
-        }
-        return $this->controller;
+        return $this->controller ?: $this->defaultController;
     }
 
     /**
@@ -284,10 +281,7 @@ class App extends Base
      */
     public function getAction()
     {
-        if (!$this->action) {
-            $this->action = $this->request->get('action', $this->defaultAction);
-        }
-        return $this->action;
+        return $this->action ?: $this->defaultAction;
     }
 
     /**
