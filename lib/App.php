@@ -150,7 +150,7 @@ class App extends Base
         throw new \RuntimeException($message, 404);
     }
 
-    public function dispatch($controller, $action, array $params = array())
+    public function dispatch($controller, $action = 'index', array $params = array())
     {
         $notFound = array();
         $classes = $this->getControllerClasses($controller);

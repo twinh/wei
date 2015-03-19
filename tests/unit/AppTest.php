@@ -28,44 +28,34 @@ class AppTest extends TestCase
         // WeiTest\App\Controller\Test::testAction
         $this->app->dispatch('test', 'test');
 
-        var_dump($this->app->getController());die;
-
         $this->expectOutputString('test');
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionCode 404
-     * @expectedExceptionMessage The page you requested was not found - controller "ControllerNotFound" (class "WeiTest\App\ControllerNotFound") not found
-     */
     public function testControllerNotFound()
     {
-        $this->app->setController('ControllerNotFound');
+        $result = $this->app->dispatch('ControllerNotFound');
 
-        $this->app();
+        $this->assertInternalType('array', $result);
+
+        $this->assertEquals(array('classes' => 'WeiTest\App\ControllerNotFound'), $result);
     }
 
     public function testNestedController()
     {
-        $this->app->setController('admin/index');
+        $result = $this->app->dispatch('admin/index');
 
-        $this->app->setAction('index');
-
-        $this->app();
+        $this->assertInstanceOf('\Wei\App', $result);
 
         $this->expectOutputString('admin.index');
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionCode 404
-     * @expectedExceptionMessage The page you requested was not found - controller "Controller\Admin" (class "WeiTest\App\Controller\Admin") not found
-     */
     public function testNestedControllerNotFound()
     {
-        $this->app->setController('Controller\Admin');
+        $result = $this->app->dispatch('Controller\Admin');
 
-        $this->app();
+        $this->assertInternalType('array', $result);
+
+        $this->assertEquals(array('classes' => 'WeiTest\App\Controller\Admin'), $result);
     }
 
     /**
@@ -177,12 +167,9 @@ class AppTest extends TestCase
     {
         $this->expectOutputString('value');
 
-        $this->request->set(array(
-            'controller' => 'admin/index',
-            'action' => 'view'
-        ));
+        $result = $this->app->dispatch('admin/index', 'view');
 
-        $this->app();
+        $this->assertInstanceOf('\Wei\App', $result);
     }
 
     /**
