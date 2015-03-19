@@ -112,7 +112,7 @@ class App extends Base
         foreach ($paramSet as $params) {
             $result = $this->dispatch($params['controller'], $params['action'], $params);
             if (is_array($result)) {
-                $notFound = array_merge_recursive($notFound, $result);
+                $notFound = array_merge($notFound, $result);
             } else {
                 return $this;
             }
@@ -178,10 +178,10 @@ class App extends Base
                     }
 
                 } else {
-                    $notFound['actions'][$class] = $action;
+                    $notFound['actions'][$action][$controller][] = $class;
                 }
             } else {
-                $notFound['classes'] = $class;
+                $notFound['classes'][$controller][]  = $class;
             }
         }
         return $notFound;
@@ -422,10 +422,7 @@ class App extends Base
      */
     public function forward($controller, $action = 'index')
     {
-        $this->dispatchParamSet(array(array(
-            'controller' => $controller,
-            'action' => $action
-        )));
+        $this->dispatch($controller, $action);
         $this->preventPreviousDispatch();
     }
 }

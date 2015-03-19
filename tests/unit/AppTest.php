@@ -222,26 +222,29 @@ class AppTest extends TestCase
     {
         $this->setExpectedException(
             'RuntimeException',
-            'The page you requested was not found - action method "_action" not found in controller "test" (class "WeiTest\App\Test")',
+            implode("\n", array(
+                'The page you requested was not found',
+                ' - action method "show" not found in controller "test"'
+            )),
             '404'
         );
 
-        $this->app->dispatch('test', '_action');
+        $this->request->setPathInfo('test/_action');
+        $this->app();
     }
 
     public function testActionIsProtected()
     {
         $this->setExpectedException(
             'RuntimeException',
-            'The page you requested was not found - action method "protect" not found in controller "test" (class "WeiTest\App\Test")',
+            implode("\n", array(
+                'The page you requested was not found',
+                ' - action method "show" not found in controller "test"'
+            )),
             '404'
         );
 
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'protect',
-        ));
-
+        $this->request->setPathInfo('test/protect');
         $this->app();
     }
 
