@@ -179,12 +179,7 @@ class AppTest extends TestCase
     {
         $this->expectOutputString($output);
 
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => $action
-        ));
-
-        $this->app();
+        $this->app->dispatch('test', $action);
     }
 
     public function providerForActionReturnValue()
@@ -217,13 +212,7 @@ class AppTest extends TestCase
     {
         $this->expectOutputString('1');
 
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'parameter',
-            'id' => '1'
-        ));
-
-        $this->app();
+        $this->app->dispatch('test', 'parameter', array('id' => '1'));
     }
 
     public function testActionStartWithUnderscore()
@@ -234,12 +223,7 @@ class AppTest extends TestCase
             '404'
         );
 
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => '_action',
-        ));
-
-        $this->app();
+        $this->app->dispatch('test', '_action');
     }
 
     public function testActionIsProtected()
