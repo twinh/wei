@@ -86,28 +86,20 @@ class AppTest extends TestCase
 
     public function testActionReturnArrayAsViewParameter()
     {
-        // WeiTest\App\Controller\TestController::returnArrayAction
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'returnArray'
-        ));
-
         $this->expectOutputString('value');
 
-        $this->app();
+        // WeiTest\App\Controller\TestController::returnArrayAction
+        $this->app->dispatch('test', 'returnArray');
     }
 
-    public function testActionReturnResponseWei()
+    public function testActionReturnResponseService()
     {
-        // WeiTest\App\Controller\TestController::returnResponseAction
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'returnResponse'
-        ));
-
         $this->expectOutputString('response content');
 
-        $this->app();
+        // WeiTest\App\Controller\TestController::returnResponseAction
+        $result = $this->app->dispatch('test', 'returnResponse');
+
+        $this->assertInstanceOf('\Wei\Response', $result);
     }
 
     public function testActionReturnUnexpectedType()
@@ -120,20 +112,16 @@ class AppTest extends TestCase
 
     public function testDispatchBreak()
     {
-        $this->request->set('action', 'dispatchBreak');
-
         $this->expectOutputString('stop');
 
-        $this->app();
+        $this->app->dispatch('test', 'dispatchBreak');
     }
 
     public function testDispatchBreakInConstructor()
     {
-        $this->request->set('controller', 'dispatchBreak');
-
         $this->expectOutputString('');
 
-        $this->app();
+        $this->app->dispatch('controller', 'dispatchBreak');
     }
 
     public function testForwardAction()
@@ -155,12 +143,7 @@ class AppTest extends TestCase
     {
         $this->expectOutputString('index');
 
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'forwardController'
-        ));
-
-        $this->app();
+        $this->app->dispatch('test', 'forwardController');
     }
 
     public function testNestedControllerView()
