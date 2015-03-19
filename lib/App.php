@@ -150,6 +150,12 @@ class App extends Base
         throw new \RuntimeException($message, 404);
     }
 
+    /**
+     * @param string $controller
+     * @param string $action
+     * @param array $params
+     * @return array|Response
+     */
     public function dispatch($controller, $action = 'index', array $params = array())
     {
         $notFound = array();
@@ -174,11 +180,10 @@ class App extends Base
 
                     $middleware = method_exists($object, 'getMiddleware') ? $object->getMiddleware() : array();
                     $that = $this;
-                    $this->callMiddleware($middleware, function () use ($object, $action, $that) {
+                    return $this->callMiddleware($middleware, function () use ($object, $action, $that) {
                         $response = $object->$action($that->request, $that->response);
-                        $that->handleResponse($response);
+                        return $that->handleResponse($response);
                     });
-                    return $this;
 
                 } else {
                     $notFound['actions'][$class] = $action;
@@ -197,12 +202,12 @@ class App extends Base
             if ($config) {
                 $class = key($config);
                 $service = new $class($config[$class]);
-                $service($next);
+                return $service($next);
             } else {
-                $callback();
+                return $callback();
             }
         };
-        $next();
+        return $next();
     }
 
     /**
@@ -221,8 +226,7 @@ class App extends Base
                 return $this->response->send($response);
 
             // Response directly
-            case is_scalar($response) :
-            case is_null($response) :
+            case is_scalar($response) || is_null($response) :
                 return $this->response->send($response);
 
             // Response if not sent

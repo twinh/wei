@@ -44,7 +44,7 @@ class AppTest extends TestCase
     {
         $result = $this->app->dispatch('admin/index');
 
-        $this->assertInstanceOf('\Wei\App', $result);
+        $this->assertInstanceOf('\Wei\Response', $result);
 
         $this->expectOutputString('admin.index');
     }
@@ -169,7 +169,7 @@ class AppTest extends TestCase
 
         $result = $this->app->dispatch('admin/index', 'view');
 
-        $this->assertInstanceOf('\Wei\App', $result);
+        $this->assertInstanceOf('\Wei\Response', $result);
     }
 
     /**
