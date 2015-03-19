@@ -279,4 +279,11 @@ class AppTest extends TestCase
         ));
         $this->assertEquals('test', $this->app->getNamespace());
     }
+
+    public function testMiddleware()
+    {
+        $this->expectOutputString('hello middleware world');
+
+        $this->app->dispatch('middleware');
+    }
 }
