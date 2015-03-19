@@ -109,20 +109,12 @@ class App extends Base
     {
         $notFound = array('classes' => array(), 'actions' => array());
 
-        try {
-            foreach ($paramSet as $params) {
-                $result = $this->dispatch($params['controller'], $params['action'], $params);
-                if (is_array($result)) {
-                    $notFound = array_merge_recursive($notFound, $result);
-                } else {
-                    return $this;
-                }
-            }
-        } catch (\RuntimeException $e) {
-            if ($e->getCode() === self::FORWARD) {
-                return $this;
+        foreach ($paramSet as $params) {
+            $result = $this->dispatch($params['controller'], $params['action'], $params);
+            if (is_array($result)) {
+                $notFound = array_merge_recursive($notFound, $result);
             } else {
-                throw $e;
+                return $this;
             }
         }
 
@@ -167,15 +159,23 @@ class App extends Base
                     $this->setAction($action);
                     $this->request->set($params);
 
-                    $instance = $this->getControllerInstance($class, $controller, $action);
+                    try {
+                        $instance = $this->getControllerInstance($class, $controller, $action);
 
-                    $that = $this;
-                    $middleware = method_exists($instance, 'getMiddleware') ? $instance->getMiddleware() : array();
-                    $response = $this->callMiddleware($middleware, function () use ($instance, $action, $that) {
-                        return $instance->$action($that->request, $that->response);
-                    });
+                        $that = $this;
+                        $middleware = method_exists($instance, 'getMiddleware') ? $instance->getMiddleware() : array();
+                        $response = $this->callMiddleware($middleware, function () use ($instance, $action, $that) {
+                            return $instance->$action($that->request, $that->response);
+                        });
 
-                    return $this->handleResponse($response);
+                        return $this->handleResponse($response);
+                    } catch (\RuntimeException $e) {
+                        if ($e->getCode() === self::FORWARD) {
+                            return $this;
+                        } else {
+                            throw $e;
+                        }
+                    }
 
                 } else {
                     $notFound['actions'][$class] = $action;
