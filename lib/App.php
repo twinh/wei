@@ -165,19 +165,20 @@ class App extends Base
             if (class_exists($class)) {
                 if ($this->isActionAvailable($class, $action)) {
 
-                    // 找到符合的控制器和操作
-                    $this->request->set($params);
+                    // Find existing controller and action
                     $this->setController($controller);
                     $this->setAction($action);
+                    $this->request->set($params);
 
                     $instance = $this->getControllerInstance($class, $controller, $action);
 
-                    $middleware = method_exists($instance, 'getMiddleware') ? $instance->getMiddleware() : array();
                     $that = $this;
-                    return $this->callMiddleware($middleware, function () use ($instance, $action, $that) {
-                        $response = $instance->$action($that->request, $that->response);
-                        return $that->handleResponse($response);
+                    $middleware = method_exists($instance, 'getMiddleware') ? $instance->getMiddleware() : array();
+                    $response = $this->callMiddleware($middleware, function () use ($instance, $action, $that) {
+                        return $instance->$action($that->request, $that->response);
                     });
+
+                    return $this->handleResponse($response);
 
                 } else {
                     $notFound['actions'][$class] = $action;
@@ -189,6 +190,11 @@ class App extends Base
         return $notFound;
     }
 
+    /**
+     * @param array $middleware
+     * @param callable $callback
+     * @return Response
+     */
     protected function callMiddleware(array $middleware, $callback)
     {
         $next = function () use (&$middleware, $callback, &$next) {
