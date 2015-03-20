@@ -428,7 +428,7 @@ class Router extends Base
     }
 
     /**
-     * ÉèÖÃ×éºÏ×ÊÔ´
+     * Set combined resources
      *
      * @param array $combinedResources
      * @return $this
@@ -447,7 +447,7 @@ class Router extends Base
      */
     public function setSingulars(array $singulars)
     {
-        $this->singulars = $singulars + $this->singulars;
+        $this->singulars += $this->singulars;
         return $this;
     }
 
