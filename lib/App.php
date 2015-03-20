@@ -29,7 +29,7 @@ class App extends Base
      *
      * @var string
      */
-    protected $controllerFormat = 'Controller\%controller%';
+    protected $controllerFormat = 'controllers\%controller%';
 
     /**
      * The default controller name
