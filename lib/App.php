@@ -110,7 +110,7 @@ class App extends Base
         $notFound = array('classes' => array(), 'actions' => array());
 
         foreach ($paramSet as $params) {
-            $result = $this->dispatch($params['controller'], $params['action'], $params);
+            $result = $this->dispatch($params['controller'], $params['action'], $params, false);
             if (is_array($result)) {
                 $notFound = array_merge($notFound, $result);
             } else {
@@ -118,33 +118,19 @@ class App extends Base
             }
         }
 
-        // All controllers and actions were not found, prepare exception message
-        $message = 'The page you requested was not found';
-        if ($this->wei->isDebug()) {
-            $detail = $this->request->get('debug-detail');
-            foreach ($notFound['classes'] as $controller => $classes) {
-                $message .= sprintf('%s - controller "%s" not found', "\n", $controller);
-                $detail && $message .= sprintf(' (class "%s")', implode($classes, '", "'));
-            }
-            foreach ($notFound['actions'] as $action => $controllers) {
-                foreach ($controllers as $controller => $classes) {
-                    $message .= sprintf('%s - action method "%s" not found in controller "%s"', "\n", $action, $controller);
-                    $detail && $message .= sprintf(' (class "%s")', implode($classes, '", "'));
-                }
-            }
-        }
-
-        // You can use `$wei->error->notFound(function(){});` to custom the 404 page
-        throw new \RuntimeException($message, 404);
+        $this->handleNotFound($notFound);
     }
 
     /**
+     * Dispatch by specified controller and action
+     *
      * @param string $controller
      * @param string $action
      * @param array $params
+     * @param bool $throwException
      * @return array|Response
      */
-    public function dispatch($controller, $action = 'index', array $params = array())
+    public function dispatch($controller, $action = 'index', array $params = array(), $throwException = true)
     {
         $notFound = array();
         $classes = $this->getControllerClasses($controller);
@@ -183,7 +169,36 @@ class App extends Base
                 $notFound['classes'][$controller][]  = $class;
             }
         }
-        return $notFound;
+
+        if ($throwException) {
+            $this->handleNotFound($notFound);
+        } else {
+            return $notFound;
+        }
+    }
+
+    protected function handleNotFound(array $notFound)
+    {
+        $notFound += array('classes' => array(), 'actions' => array())
+
+        // All controllers and actions were not found, prepare exception message
+        $message = 'The page you requested was not found';
+        if ($this->wei->isDebug()) {
+            $detail = $this->request->get('debug-detail');
+            foreach ($notFound['classes'] as $controller => $classes) {
+                $message .= sprintf('%s - controller "%s" not found', "\n", $controller);
+                $detail && $message .= sprintf(' (class "%s")', implode($classes, '", "'));
+            }
+            foreach ($notFound['actions'] as $action => $controllers) {
+                foreach ($controllers as $controller => $classes) {
+                    $message .= sprintf('%s - action method "%s" not found in controller "%s"', "\n", $action, $controller);
+                    $detail && $message .= sprintf(' (class "%s")', implode($classes, '", "'));
+                }
+            }
+        }
+
+        // You can use `$wei->error->notFound(function(){});` to custom the 404 page
+        throw new \RuntimeException($message, 404);
     }
 
     /**

@@ -33,7 +33,8 @@ class AppTest extends TestCase
 
     public function testControllerNotFound()
     {
-        $result = $this->app->dispatch('ControllerNotFound');
+        // Returns array result
+        $result = $this->app->dispatch('ControllerNotFound', 'index', array(), false);
 
         $this->assertInternalType('array', $result);
 
@@ -44,6 +45,17 @@ class AppTest extends TestCase
                 )
             )
         ), $result);
+
+        // Throw 404 exception when application not found
+        $this->setExpectedException(
+            'RuntimeException',
+            implode("\n", array(
+                'The page you requested was not found',
+                ' - controller "ControllerNotFound" not found'
+            )),
+            404
+        );
+        $this->app->dispatch('ControllerNotFound');
     }
 
     public function testNestedController()
@@ -57,7 +69,7 @@ class AppTest extends TestCase
 
     public function testNestedControllerNotFound()
     {
-        $result = $this->app->dispatch('Controller\Admin');
+        $result = $this->app->dispatch('Controller\Admin', 'index', array(), false);
 
         $this->assertInternalType('array', $result);
 
@@ -71,7 +83,7 @@ class AppTest extends TestCase
 
     public function testActionNotFound()
     {
-        $result = $this->app->dispatch('test', 'ActionNotFound');
+        $result = $this->app->dispatch('test', 'ActionNotFound', array(), false);
 
         $this->assertEquals(array(
             'actions' => array(
@@ -121,7 +133,7 @@ class AppTest extends TestCase
     {
         $this->expectOutputString('');
 
-        $this->app->dispatch('controller', 'dispatchBreak');
+        $this->app->dispatch('controller', 'dispatchBreak', array(), false);
     }
 
     public function testForwardAction()
