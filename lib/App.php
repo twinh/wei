@@ -112,8 +112,8 @@ class App extends Base
     /**
      * Dispatch by specified controller and action
      *
-     * @param string $controller
-     * @param string $action
+     * @param string $controller The name of controller
+     * @param string $action The name of action
      * @param array $params
      * @param bool $throwException
      * @return array|Response
@@ -133,7 +133,7 @@ class App extends Base
                     $this->request->set($params);
 
                     try {
-                        $instance = $this->getControllerInstance($class, $controller, $action);
+                        $instance = $this->getControllerInstance($class);
 
                         $that = $this;
                         $middleware = method_exists($instance, 'getMiddleware') ? $instance->getMiddleware() : array();
@@ -347,18 +347,14 @@ class App extends Base
      * Get the controller instance, if not found, return false instead
      *
      * @param string $class The class name of controller
-     * @param string $controller The name of controller
-     * @param string $action The name of action
-     * @return false|object
+     * @return object
      */
-    protected function getControllerInstance($class, $controller, $action)
+    protected function getControllerInstance($class)
     {
         if (!isset($this->controllerInstances[$class])) {
             $this->controllerInstances[$class] = new $class(array(
                 'wei' => $this->wei,
                 'app' => $this,
-                'controller' => $controller, /* deprecated */
-                'action' => $action, /* deprecated */
             ));
         }
         return $this->controllerInstances[$class];
