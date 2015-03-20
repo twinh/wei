@@ -1,6 +1,6 @@
 <?php
 
-namespace WeiTest\App\Middleware;
+namespace WeiTest\Fixtures\app\middleware;
 
 class HelloWorld extends \Wei\Base
 {

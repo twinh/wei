@@ -12,9 +12,9 @@ class AppTest extends TestCase
     {
         parent::setUp();
 
-        $this->view->setDirs(__DIR__ . '/App/views');
+        $this->view->setDirs(__DIR__ . '/Fixtures/app/views');
 
-        $this->app->setOption('controllerFormat', 'WeiTest\App\%controller%');
+        $this->app->setOption('controllerFormat', 'WeiTest\Fixtures\app\controllers\%controller%');
     }
 
     protected function tearDown()
@@ -41,7 +41,7 @@ class AppTest extends TestCase
         $this->assertEquals(array(
             'classes' => array(
                 'ControllerNotFound' => array(
-                    'WeiTest\App\ControllerNotFound'
+                    'WeiTest\Fixtures\app\controllers\ControllerNotFound'
                 )
             )
         ), $result);
@@ -76,7 +76,7 @@ class AppTest extends TestCase
         $this->assertEquals(array(
             'classes' => array(
                 'Controller\Admin' => array(
-                    'WeiTest\App\Controller\Admin'
+                    'WeiTest\Fixtures\app\controllers\Controller\Admin'
                 )
         )), $result);
     }
@@ -89,7 +89,7 @@ class AppTest extends TestCase
             'actions' => array(
                 'ActionNotFound' => array(
                     'test' => array(
-                        'WeiTest\App\Test'
+                        'WeiTest\Fixtures\app\controllers\Test'
                     )
                 )
             )

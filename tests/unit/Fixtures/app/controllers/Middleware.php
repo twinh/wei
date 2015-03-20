@@ -1,6 +1,6 @@
 <?php
 
-namespace WeiTest\App;
+namespace WeiTest\Fixtures\app\controllers;
 
 class Middleware extends \Wei\Base
 {
@@ -10,7 +10,7 @@ class Middleware extends \Wei\Base
     {
         parent::__construct($options);
 
-        $this->middleware('\WeiTest\App\Middleware\HelloWorld');
+        $this->middleware('WeiTest\Fixtures\app\middleware\HelloWorld');
     }
 
     public function index()

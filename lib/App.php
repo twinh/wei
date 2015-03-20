@@ -342,6 +342,8 @@ class App extends Base
             array($namespace, $controller),
             $this->controllerFormat
         );
+
+        // Make the class name's first letter uppercase
         $upperLetter = strrpos($class, '\\') + 1;
         $class[$upperLetter] = strtoupper($class[$upperLetter]);
         $classes[] = $class;
