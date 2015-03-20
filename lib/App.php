@@ -74,11 +74,12 @@ class App extends Base
     protected $controllerInstances = array();
 
     /**
-     * An array contains the pre-defined controller classes
+     * An array that stores predefined controller class,
+     * the key is controller name and value is controller class name
      *
      * @var array
      */
-    protected $controllerClasses = array();
+    protected $controllerMap = array();
 
     /**
      * Startup an MVC application
@@ -179,7 +180,7 @@ class App extends Base
 
     protected function handleNotFound(array $notFound)
     {
-        $notFound += array('classes' => array(), 'actions' => array())
+        $notFound += array('classes' => array(), 'actions' => array());
 
         // All controllers and actions were not found, prepare exception message
         $message = 'The page you requested was not found';
@@ -346,8 +347,8 @@ class App extends Base
         $classes[] = $class;
 
         // Add class from pre-defined classes
-        if (isset($this->controllerClasses[$controller])) {
-            $classes[] = $this->controllerClasses[$controller];
+        if (isset($this->controllerMap[$controller])) {
+            $classes[] = $this->controllerMap[$controller];
         }
 
         return $classes;
