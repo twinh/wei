@@ -92,24 +92,12 @@ class App extends Base
     {
         $options && $this->setOption($options);
 
-        // Step1 Parse the path info to parameter set
+        // Parse the path info to parameter set
         $request = $this->request;
         $paramSet = $this->router->matchParamSet($request->getPathInfo(), $request->getMethod());
 
-        // Step2 根据多组参数,找出对应的控制器和操作,并执行
-        return $this->dispatchParamSet($paramSet);
-    }
-
-    /**
-     * Dispatch by specified parameter set
-     *
-     * @param array $paramSet
-     * @return $this
-     */
-    public function dispatchParamSet(array $paramSet)
-    {
-        $notFound = array('classes' => array(), 'actions' => array());
-
+        // Find out exiting controller action and dispatch
+        $notFound = array();
         foreach ($paramSet as $params) {
             $result = $this->dispatch($params['controller'], $params['action'], $params, false);
             if (is_array($result)) {
@@ -118,7 +106,6 @@ class App extends Base
                 return $this;
             }
         }
-
         $this->handleNotFound($notFound);
     }
 
@@ -230,7 +217,7 @@ class App extends Base
      * @return Response
      * @throws \InvalidArgumentException
      */
-    public function handleResponse($response)
+    protected function handleResponse($response)
     {
         switch (true) {
             // Render default template and use $response as template variables
