@@ -4,6 +4,7 @@ namespace WeiTest;
 
 /**
  * @property \Wei\App $app The application service
+ * @method \Wei\App app()
  * @property \Wei\Request $request
  */
 class AppTest extends TestCase
@@ -296,5 +297,35 @@ class AppTest extends TestCase
         $this->app->setAction('newAction');
 
         $this->assertEquals('newAction', $this->app->getAction());
+    }
+
+    public function testDebugDetailMessageForController()
+    {
+        $this->setExpectedException(
+            'RuntimeException',
+            implode("\n", array(
+                'The page you requested was not found',
+                ' - controller "notFound" not found (class "WeiTest\Fixtures\app\controllers\NotFound")'
+            )),
+            404
+        );
+
+        $this->request->set('debug-detail', '1');
+        $this->app->dispatch('notFound');
+    }
+
+    public function testDebugDetailMessageForAction()
+    {
+        $this->setExpectedException(
+            'RuntimeException',
+            implode("\n", array(
+                'The page you requested was not found',
+                ' - action method "notFound" not found in controller "test" (class "WeiTest\Fixtures\app\controllers\Test")'
+            )),
+            404
+        );
+
+        $this->request->set('debug-detail', '1');
+        $this->app->dispatch('test', 'notFound');
     }
 }
