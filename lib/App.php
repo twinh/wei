@@ -113,14 +113,15 @@ class App extends Base
      * Dispatch by specified controller and action
      *
      * @param string $controller The name of controller
-     * @param string $action The name of action
+     * @param null|string $action The name of action
      * @param array $params
      * @param bool $throwException
      * @return array|Response
      */
-    public function dispatch($controller, $action = 'index', array $params = array(), $throwException = true)
+    public function dispatch($controller, $action = null, array $params = array(), $throwException = true)
     {
         $notFound = array();
+        $action || $action = $this->defaultAction;
         $classes = $this->getControllerClasses($controller);
 
         foreach ($classes as $class) {
@@ -411,10 +412,10 @@ class App extends Base
     /**
      * Forwards to the given controller and action
      *
-     * @param string $controller    The name of controller
-     * @param string $action        The name of action
+     * @param string $controller The name of controller
+     * @param null|string $action The name of action
      */
-    public function forward($controller, $action = 'index')
+    public function forward($controller, $action = null)
     {
         $this->dispatch($controller, $action);
         $this->preventPreviousDispatch();
