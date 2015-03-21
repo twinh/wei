@@ -133,7 +133,7 @@ namespace WeiTest
         {
             $this->expectOutputString('{"code":-1,"message":"error"}');
 
-            $this->object->json(array('code' => -1, 'message' => 'error'));
+            $this->object->json(array('code' => -1, 'message' => 'error'))->send();
 
             $this->assertEquals('application/json', $this->object->getHeader('Content-Type'));
         }
@@ -144,7 +144,7 @@ namespace WeiTest
 
             $this->expectOutputString('callback({"code":-1,"message":"error"})');
 
-            $this->object->jsonp(array('code' => -1, 'message' => 'error'));
+            $this->object->jsonp(array('code' => -1, 'message' => 'error'))->send();
 
             $this->assertEquals('application/javascript', $this->object->getHeader('Content-Type'));
         }
@@ -155,7 +155,7 @@ namespace WeiTest
 
             $this->expectOutputString('call.back({"code":-1,"message":"error"})');
 
-            $this->object->jsonp(array('code' => -1, 'message' => 'error'));
+            $this->object->jsonp(array('code' => -1, 'message' => 'error'))->send();
 
             $this->assertEquals('application/javascript', $this->object->getHeader('Content-Type'));
         }
@@ -175,7 +175,7 @@ namespace WeiTest
 
             $this->response->setRedirectView(__DIR__ . '/Fixtures/redirect.php');
 
-            $this->response->redirect();
+            $this->response->redirect()->send();
         }
         /**
          * @expectedException \RuntimeException
@@ -189,7 +189,7 @@ namespace WeiTest
         {
             $this->expectOutputRegex('/http:\/\/www\.google\.com/');
 
-            $this->response->redirect('http://www.google.com');
+            $this->response->redirect('http://www.google.com')->send();
 
             $this->assertEquals('http://www.google.com', $this->response->getHeader('Location'));
         }
@@ -198,7 +198,7 @@ namespace WeiTest
         {
             $this->expectOutputRegex('/content=\"5;url=http:\/\/www\.google\.com/');
 
-            $this->response->redirect('http://www.google.com', 302, array('redirectWait' => 5));
+            $this->response->redirect('http://www.google.com', 302, array('redirectWait' => 5))->send();
         }
     }
 }
