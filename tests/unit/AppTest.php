@@ -362,4 +362,14 @@ class AppTest extends TestCase
         $this->assertEquals(404, $response->getStatusCode());
         $this->assertEquals('Not Found', $response->getContent());
     }
+
+    public function testStackMiddleware()
+    {
+        $this->expectOutputString('start1-start2-start3-stack');
+
+        $response = $this->app->dispatch('middleware', 'stack');
+
+        $this->assertEquals('start1-start2-start3-stack-end3-end2-end1', $response->getContent());
+    }
+
 }
