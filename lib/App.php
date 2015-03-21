@@ -125,30 +125,28 @@ class App extends Base
         $classes = $this->getControllerClasses($controller);
 
         foreach ($classes as $class) {
-            if (class_exists($class)) {
-                if ($this->isActionAvailable($class, $action)) {
-
-                    // Find out existing controller and action
-                    $this->setController($controller);
-                    $this->setAction($action);
-                    $this->request->set($params);
-
-                    try {
-                        $instance = $this->getControllerInstance($class);
-                        return $this->execute($instance, $action);
-                    } catch (\RuntimeException $e) {
-                        if ($e->getCode() === self::FORWARD) {
-                            return $this;
-                        } else {
-                            throw $e;
-                        }
-                    }
-
-                } else {
-                    $notFound['actions'][$action][$controller][] = $class;
-                }
-            } else {
+            if (!class_exists($class)) {
                 $notFound['controllers'][$controller][]  = $class;
+                continue;
+            }
+            if (!$this->isActionAvailable($class, $action)) {
+                $notFound['actions'][$action][$controller][] = $class;
+                continue;
+            }
+
+            // Find out existing controller and action
+            $this->setController($controller);
+            $this->setAction($action);
+            $this->request->set($params);
+            try {
+                $instance = $this->getControllerInstance($class);
+                return $this->execute($instance, $action);
+            } catch (\RuntimeException $e) {
+                if ($e->getCode() === self::FORWARD) {
+                    return $this;
+                } else {
+                    throw $e;
+                }
             }
         }
 
@@ -198,26 +196,25 @@ class App extends Base
      */
     protected function execute($instance, $action)
     {
-        $that = $this;
-        $response = $this->response;
+        $app = $this;
+        $wei = $this->wei;
         $middleware = $this->getMiddleware($instance, $action);
 
-        $callback = function () use ($instance, $action, $that) {
-            $response = $instance->$action($that->request, $that->response);
-            return $that->handleResponse($response);
+        $callback = function () use ($instance, $action, $app) {
+            $response = $instance->$action($app->request, $app->response);
+            return $app->handleResponse($response);
         };
 
-        $next = function () use (&$middleware, &$next, $callback, $response) {
+        $next = function () use (&$middleware, &$next, $callback, $wei) {
             $config = array_splice($middleware, 0, 1);
             if ($config) {
                 $class = key($config);
-                $service = new $class($config[$class]);
+                $service = new $class(array('wei' => $wei) + $config[$class]);
                 $result = $service($next);
             } else {
                 $result = $callback();
             }
-            $result && $response = $result;
-            return $response;
+            return $result ?: $wei->response;
         };
 
         return $next()->send();
@@ -368,7 +365,7 @@ class App extends Base
         $class[$upperLetter] = strtoupper($class[$upperLetter]);
         $classes[] = $class;
 
-        // Add class from pre-defined classes
+        // Add class from predefined classes
         if (isset($this->controllerMap[$controller])) {
             $classes[] = $this->controllerMap[$controller];
         }
@@ -380,7 +377,7 @@ class App extends Base
      * Get the controller instance, if not found, return false instead
      *
      * @param string $class The class name of controller
-     * @return object
+     * @return \Wei\Base
      */
     protected function getControllerInstance($class)
     {

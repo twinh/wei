@@ -13,6 +13,8 @@ class Middleware extends \Wei\Base
     {
         parent::__construct($options);
 
+        $this->middleware('WeiTest\Fixtures\app\middleware\All');
+
         $this->middleware('WeiTest\Fixtures\app\middleware\Only', array('only' => 'only'));
 
         $this->middleware('WeiTest\Fixtures\app\middleware\Except', array('except' => array(
@@ -58,11 +60,6 @@ class Middleware extends \Wei\Base
     public function stack()
     {
         return $this->response->setContent($this->response->getContent() . 'stack');
-    }
-
-    public function getMiddleware()
-    {
-        return $this->middleware;
     }
 
     protected function middleware($name, array $options = array())
