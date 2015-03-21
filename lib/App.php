@@ -211,7 +211,6 @@ class App extends Base
             if ($config) {
                 $class = key($config);
                 $service = new $class($config[$class]);
-                // 如果是response,直接返回?
                 $service($next);
             } else {
                 return $callback();

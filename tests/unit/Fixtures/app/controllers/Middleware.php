@@ -10,12 +10,12 @@ class Middleware extends \Wei\Base
     {
         parent::__construct($options);
 
-        $this->middleware('WeiTest\Fixtures\app\middleware\HelloWorld');
+        $this->middleware('WeiTest\Fixtures\app\middleware\Before', array('only' => 'before'));
     }
 
-    public function index()
+    public function before()
     {
-        echo ' middleware ';
+        return 'not execute';
     }
 
     public function getMiddleware()

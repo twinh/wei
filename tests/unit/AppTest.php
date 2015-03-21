@@ -274,13 +274,6 @@ class AppTest extends TestCase
         $this->assertEquals('test', $this->app->getNamespace());
     }
 
-    public function testMiddleware()
-    {
-        $this->expectOutputString('hello middleware world');
-
-        $this->app->dispatch('middleware');
-    }
-
     public function testGetSetController()
     {
         $this->assertEquals('index', $this->app->getController());
@@ -327,5 +320,12 @@ class AppTest extends TestCase
 
         $this->request->set('debug-detail', '1');
         $this->app->dispatch('test', 'notFound');
+    }
+
+    public function testBeforeMiddleware()
+    {
+        $this->expectOutputString('Not auth');
+
+        $this->app->dispatch('middleware', 'before');
     }
 }
