@@ -135,7 +135,7 @@ class App extends Base
 
                     try {
                         $instance = $this->getControllerInstance($class);
-                        return $this->executeMiddleware($instance, $action);
+                        return $this->execute($instance, $action);
                     } catch (\RuntimeException $e) {
                         if ($e->getCode() === self::FORWARD) {
                             return $this;
@@ -192,11 +192,11 @@ class App extends Base
     /**
      * Execute action with middleware
      *
-     * @param object $instance
+     * @param \Wei\Base $instance
      * @param string $action
      * @return Response
      */
-    protected function executeMiddleware($instance, $action)
+    protected function execute($instance, $action)
     {
         $that = $this;
         $response = $this->response;
@@ -207,7 +207,7 @@ class App extends Base
             return $that->handleResponse($response);
         };
 
-        $next = function () use (&$middleware, $callback, &$next, $action, $response) {
+        $next = function () use (&$middleware, &$next, $callback, $response) {
             $config = array_splice($middleware, 0, 1);
             if ($config) {
                 $class = key($config);
@@ -223,6 +223,13 @@ class App extends Base
         return $next()->send();
     }
 
+    /**
+     * Returns middleware for specified action
+     *
+     * @param \Wei\Base $instance
+     * @param string $action
+     * @return array
+     */
     protected function getMiddleware($instance, $action)
     {
         $results = array();
