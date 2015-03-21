@@ -39,7 +39,7 @@ class AppTest extends TestCase
         $this->assertInternalType('array', $result);
 
         $this->assertEquals(array(
-            'classes' => array(
+            'controllers' => array(
                 'ControllerNotFound' => array(
                     'WeiTest\Fixtures\app\controllers\ControllerNotFound'
                 )
@@ -74,7 +74,7 @@ class AppTest extends TestCase
         $this->assertInternalType('array', $result);
 
         $this->assertEquals(array(
-            'classes' => array(
+            'controllers' => array(
                 'Controller\Admin' => array(
                     'WeiTest\Fixtures\app\controllers\Controller\Admin'
                 )

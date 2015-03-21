@@ -114,8 +114,8 @@ class App extends Base
      *
      * @param string $controller The name of controller
      * @param null|string $action The name of action
-     * @param array $params
-     * @param bool $throwException
+     * @param array $params The request parameters
+     * @param bool $throwException Whether throw exception when application not found
      * @return array|Response
      */
     public function dispatch($controller, $action = null, array $params = array(), $throwException = true)
@@ -135,13 +135,7 @@ class App extends Base
 
                     try {
                         $instance = $this->getControllerInstance($class);
-
-                        $that = $this;
-                        $middleware = method_exists($instance, 'getMiddleware') ? $instance->getMiddleware() : array();
-                        $response = $this->callMiddleware($middleware, function () use ($instance, $action, $that) {
-                            return $instance->$action($that->request, $that->response);
-                        });
-
+                        $response = $this->callMiddleware($instance, $action);
                         return $this->handleResponse($response);
                     } catch (\RuntimeException $e) {
                         if ($e->getCode() === self::FORWARD) {
@@ -155,7 +149,7 @@ class App extends Base
                     $notFound['actions'][$action][$controller][] = $class;
                 }
             } else {
-                $notFound['classes'][$controller][]  = $class;
+                $notFound['controllers'][$controller][]  = $class;
             }
         }
 
@@ -168,13 +162,13 @@ class App extends Base
 
     protected function handleNotFound(array $notFound)
     {
-        $notFound += array('classes' => array(), 'actions' => array());
+        $notFound += array('controllers' => array(), 'actions' => array());
 
         // All controllers and actions were not found, prepare exception message
         $message = 'The page you requested was not found';
         if ($this->wei->isDebug()) {
             $detail = $this->request->get('debug-detail');
-            foreach ($notFound['classes'] as $controller => $classes) {
+            foreach ($notFound['controllers'] as $controller => $classes) {
                 $message .= sprintf('%s - controller "%s" not found', "\n", $controller);
                 $detail && $message .= sprintf(' (class "%s")', implode($classes, '", "'));
             }
@@ -191,12 +185,19 @@ class App extends Base
     }
 
     /**
-     * @param array $middleware
-     * @param callable $callback
+     * @param $instance
+     * @param $action
      * @return Response
      */
-    protected function callMiddleware(array $middleware, $callback)
+    protected function callMiddleware($instance, $action)
     {
+        $that = $this;
+        $middleware = method_exists($instance, 'getMiddleware') ? $instance->getMiddleware() : array();
+
+        $callback = function () use ($instance, $action, $that) {
+            return $instance->$action($that->request, $that->response);
+        };
+
         $next = function () use (&$middleware, $callback, &$next) {
             $config = array_splice($middleware, 0, 1);
             if ($config) {
