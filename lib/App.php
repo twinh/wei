@@ -286,6 +286,18 @@ class App extends Base
     }
 
     /**
+     * Set namespace
+     *
+     * @param string $namespace
+     * @return $this
+     */
+    public function setNamespace($namespace)
+    {
+        $this->namespace = $namespace;
+        return $this;
+    }
+
+    /**
      * Get the of name controller
      *
      * @return string The name of controller
@@ -371,6 +383,11 @@ class App extends Base
         }
 
         return $classes;
+    }
+
+    public function setControllerMap(array $controllerMap)
+    {
+        $this->controllerMap += $controllerMap;
     }
 
     /**
