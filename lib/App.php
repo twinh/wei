@@ -96,17 +96,17 @@ class App extends Base
         $request = $this->request;
         $paramSet = $this->router->matchParamSet($request->getPathInfo(), $request->getMethod());
 
-        // Find out exiting controller action and dispatch
+        // Find out exiting controller action and execute
         $notFound = array();
         foreach ($paramSet as $params) {
-            $result = $this->dispatch($params['controller'], $params['action'], $params, false);
-            if (is_array($result)) {
-                $notFound = array_merge($notFound, $result);
+            $response = $this->dispatch($params['controller'], $params['action'], $params, false);
+            if (is_array($response)) {
+                $notFound = array_merge($notFound, $response);
             } else {
-                return $this;
+                return $response;
             }
         }
-        $this->handleNotFound($notFound);
+        throw $this->buildException($notFound);
     }
 
     /**
@@ -128,7 +128,7 @@ class App extends Base
             if (class_exists($class)) {
                 if ($this->isActionAvailable($class, $action)) {
 
-                    // Find existing controller and action
+                    // Find out existing controller and action
                     $this->setController($controller);
                     $this->setAction($action);
                     $this->request->set($params);
@@ -154,13 +154,19 @@ class App extends Base
         }
 
         if ($throwException) {
-            $this->handleNotFound($notFound);
+            throw $this->buildException($notFound);
         } else {
             return $notFound;
         }
     }
 
-    protected function handleNotFound(array $notFound)
+    /**
+     * Build 404 exception from notFound array
+     *
+     * @param array $notFound
+     * @return \RuntimeException
+     */
+    protected function buildException(array $notFound)
     {
         $notFound += array('controllers' => array(), 'actions' => array());
 
@@ -181,12 +187,14 @@ class App extends Base
         }
 
         // You can use `$wei->error->notFound(function(){});` to custom the 404 page
-        throw new \RuntimeException($message, 404);
+        return new \RuntimeException($message, 404);
     }
 
     /**
-     * @param $instance
-     * @param $action
+     * Execute action with middleware
+     *
+     * @param object $instance
+     * @param string $action
      * @return Response
      */
     protected function callMiddleware($instance, $action)
