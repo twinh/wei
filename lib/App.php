@@ -224,11 +224,12 @@ class App extends Base
             }
         };
 
-        $next();
-
-        if (!$this->response->isSent()) {
-            return $this->response->send();
+        /** @var \Wei\Response $response */
+        $response = $next();
+        if (!$response->isSent()) {
+            $response->send();
         }
+        return $response;
     }
 
     /**

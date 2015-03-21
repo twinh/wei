@@ -322,6 +322,20 @@ class AppTest extends TestCase
         $this->app->dispatch('test', 'notFound');
     }
 
+    public function testMiddlewareOnlyAction()
+    {
+        $this->expectOutputString('only');
+
+        $this->app->dispatch('middleware', 'only');
+    }
+
+    public function testMiddlewareExceptAction()
+    {
+        $this->expectOutputString('except');
+
+        $this->app->dispatch('middleware', 'except');
+    }
+
     public function testBeforeMiddleware()
     {
         $this->expectOutputString('Before Middleware');
