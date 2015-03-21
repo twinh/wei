@@ -223,7 +223,12 @@ class App extends Base
                 return $callback();
             }
         };
-        return $next();
+
+        $next();
+
+        if (!$this->response->isSent()) {
+            return $this->response->send();
+        }
     }
 
     /**
