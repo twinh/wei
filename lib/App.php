@@ -199,27 +199,20 @@ class App extends Base
     protected function executeMiddleware($instance, $action)
     {
         $that = $this;
-        $middleware = method_exists($instance, 'getMiddleware') ? $instance->getMiddleware() : array();
+        $response = $this->response;
+        $middleware = $this->getMiddleware($instance, $action);
 
         $callback = function () use ($instance, $action, $that) {
             $response = $instance->$action($that->request, $that->response);
             return $that->handleResponse($response);
         };
 
-        $response = $this->response;
         $next = function () use (&$middleware, $callback, &$next, $action, $response) {
             $config = array_splice($middleware, 0, 1);
             if ($config) {
                 $class = key($config);
-                $options = $config[$class];
-                if ((isset($options['only']) && in_array($action, (array)$options['only'])) ||
-                    (isset($options['except']) && !in_array($action, (array)$options['except']))
-                ) {
-                    $service = new $class($config[$class]);
-                    $result = $service($next);
-                } else {
-                    $result = $next();
-                }
+                $service = new $class($config[$class]);
+                $result = $service($next);
             } else {
                 $result = $callback();
             }
@@ -228,6 +221,20 @@ class App extends Base
         };
 
         return $next()->send();
+    }
+
+    protected function getMiddleware($instance, $action)
+    {
+        $results = array();
+        $middleware = (array)$instance->getOption('middleware');
+        foreach ($middleware as $class => $options) {
+            if ((isset($options['only']) && in_array($action, (array)$options['only'])) ||
+                (isset($options['except']) && !in_array($action, (array)$options['except']))
+            ) {
+                $results[$class] = $options;
+            }
+        }
+        return $results;
     }
 
     /**
