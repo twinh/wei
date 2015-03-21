@@ -13,6 +13,8 @@ class Middleware extends \Wei\Base
         $this->middleware('WeiTest\Fixtures\app\middleware\Before', array('only' => 'before'));
 
         $this->middleware('WeiTest\Fixtures\app\middleware\After', array('only' => 'after'));
+
+        $this->middleware('WeiTest\Fixtures\app\middleware\Around', array('only' => 'around'));
     }
 
     public function before()
@@ -22,7 +24,12 @@ class Middleware extends \Wei\Base
 
     public function after()
     {
-        return 'overwrite';
+        return 'after';
+    }
+
+    public function around()
+    {
+        return 'around';
     }
 
     public function getMiddleware()

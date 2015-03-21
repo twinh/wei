@@ -332,10 +332,20 @@ class AppTest extends TestCase
     public function testAfterMiddleware()
     {
         // FIXME response
-        $this->expectOutputString('overwrite');
+        $this->expectOutputString('after');
 
         $response = $this->app->dispatch('middleware', 'after');
 
         $this->assertEquals('After Middleware', $response->getContent());
+    }
+
+    public function testAroundMiddleware()
+    {
+        $this->expectOutputString('around');
+
+        $response = $this->app->dispatch('middleware', 'around');
+
+        $this->assertEquals(404, $response->getStatusCode());
+        $this->assertEquals('Not Found', $response->getContent());
     }
 }
