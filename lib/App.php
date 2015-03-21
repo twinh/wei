@@ -251,7 +251,7 @@ class App extends Base
      * @return Response
      * @throws \InvalidArgumentException
      */
-    public function handleResponse($response)
+    protected function handleResponse($response)
     {
         switch (true) {
             // Render default template and use $response as template variables
