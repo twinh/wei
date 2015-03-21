@@ -207,7 +207,7 @@ class App extends Base
         };
 
         $response = $this->response;
-        $next = function () use (&$middleware, $callback, &$next, $action, &$response) {
+        $next = function () use (&$middleware, $callback, &$next, $action, $response) {
             $config = array_splice($middleware, 0, 1);
             if ($config) {
                 $class = key($config);
@@ -227,12 +227,7 @@ class App extends Base
             return $response;
         };
 
-        /** @var \Wei\Response $response */
-        $response = $next();
-        if (!$response->isSent()) {
-            $response->send();
-        }
-        return $response;
+        return $next()->send();
     }
 
     /**
@@ -247,16 +242,15 @@ class App extends Base
         switch (true) {
             // Render default template and use $response as template variables
             case is_array($response) :
-                $response = $this->view->render($this->getDefaultTemplate(), $response);
-                return $this->response->send($response);
+                $content = $this->view->render($this->getDefaultTemplate(), $response);
+                return $this->response->setContent($content);
 
             // Response directly
             case is_scalar($response) || is_null($response) :
-                return $this->response->send($response);
+                return $this->response->setContent($response);
 
             // Response if not sent
             case $response instanceof Response :
-                !$response->isSent() && $response->send();
                 return $response;
 
             default :

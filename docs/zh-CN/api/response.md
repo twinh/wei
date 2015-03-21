@@ -59,7 +59,7 @@ wei()->response->jsonp(array(
 ![发送JSON数据](resources/response-jsonp.jpg)
 
 > #### 注意
-> 
+>
 > 只要符合正则`/^[$A-Z_][0-9A-Z_$.]*$/i`都会认为是合法的`callback`值.
 
 ### 等待3秒后跳转到谷歌首页
@@ -137,7 +137,6 @@ version        | string    | 1.1       | HTTP版本
 statusCode     | int       | 200       | HTTP状态码
 statusText     | string    | OK        | HTTP状态消息
 content        | string    | 无        | HTTP响应内容
-isSent         | bool      | false     | HTTP响应内容是否已发送
 cookieOption   | array     | 见下表    | 设置cookie的相关选项
 downloadOption | array     | 见下表    | 调用`download`方法的相关选项
 redirectView   | string    | 无        | 自定义跳转视图的文件,可以设置该选项以展示更加友好的跳转视图
@@ -198,9 +197,6 @@ $stateCode    | int       | 200       | HTTP响应的状态码
 
 #### response->setStatusCode()
 获取HTTP响应的状态码
-
-#### response->isSent()
-检查内容是否已发送
 
 #### response->setSentStatus($bool)
 设置内容是否已发送

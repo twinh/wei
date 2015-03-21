@@ -86,7 +86,7 @@ class Test extends \Wei\Base
 
     public function parameter($req, $res)
     {
-        return $res($req['id']);
+        return $req['id'];
     }
 
     public function _action()

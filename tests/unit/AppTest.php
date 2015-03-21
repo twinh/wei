@@ -345,8 +345,7 @@ class AppTest extends TestCase
 
     public function testAfterMiddleware()
     {
-        // FIXME response
-        $this->expectOutputString('after');
+        $this->expectOutputString('After Middleware');
 
         $response = $this->app->dispatch('middleware', 'after');
 
@@ -355,7 +354,7 @@ class AppTest extends TestCase
 
     public function testAroundMiddleware()
     {
-        $this->expectOutputString('around');
+        $this->expectOutputString('Not Found');
 
         $response = $this->app->dispatch('middleware', 'around');
 
@@ -365,7 +364,7 @@ class AppTest extends TestCase
 
     public function testStackMiddleware()
     {
-        $this->expectOutputString('start1-start2-start3-stack');
+        $this->expectOutputString('start1-start2-start3-stack-end3-end2-end1');
 
         $response = $this->app->dispatch('middleware', 'stack');
 

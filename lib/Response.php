@@ -160,13 +160,6 @@ class Response extends Base
     );
 
     /**
-     * Whether response content has been sent
-     *
-     * @var bool
-     */
-    protected $isSent = false;
-
-    /**
      * Whether in unit test mode
      *
      * @var bool
@@ -222,8 +215,6 @@ class Response extends Base
      */
     public function send($content = null, $status = null)
     {
-        $this->isSent = true;
-
         // Render json when content is array
         if (is_array($content)) {
             return $this->json($content);
@@ -535,28 +526,6 @@ class Response extends Base
             }
         }
         return $string;
-    }
-
-    /**
-     * Check if response has been sent
-     *
-     * @return bool
-     */
-    public function isSent()
-    {
-        return $this->isSent;
-    }
-
-    /**
-     * Set response sent status
-     *
-     * @param  bool $bool
-     * @return $this
-     */
-    public function setSentStatus($bool)
-    {
-        $this->isSent = (bool)$bool;
-        return $this;
     }
 
     /**

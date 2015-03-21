@@ -36,10 +36,8 @@ namespace WeiTest
         {
             $response = $this->object;
 
-            $this->assertFalse($response->isSent());
             $this->assertEquals('content', $this->getOutput($response, 'content', 304));
             $this->assertEquals(304, $response->getStatusCode());
-            $this->assertTrue($response->isSent());
         }
 
         public function testToString()
@@ -92,17 +90,6 @@ namespace WeiTest
 
             $this->assertTrue($response->sendHeader());
             $this->assertFalse($response->sendHeader());
-        }
-
-        public function testSendStatus()
-        {
-            $response = $this->object;
-
-            $response->setSentStatus(true);
-            $this->assertTrue($response->isSent());
-
-            $response->setSentStatus(false);
-            $this->assertFalse($response->isSent());
         }
 
         public function testDownload()
