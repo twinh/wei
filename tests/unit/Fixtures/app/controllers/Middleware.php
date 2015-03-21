@@ -15,7 +15,7 @@ class Middleware extends \Wei\Base
 
         $this->middleware('WeiTest\Fixtures\app\middleware\Only', array('only' => 'only'));
 
-        $this->middleware('WeiTest\Fixtures\app\middleware\except', array('except' => array(
+        $this->middleware('WeiTest\Fixtures\app\middleware\Except', array('except' => array(
             'only', 'before', 'after', 'around'
         )));
 
