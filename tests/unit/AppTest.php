@@ -324,8 +324,18 @@ class AppTest extends TestCase
 
     public function testBeforeMiddleware()
     {
-        $this->expectOutputString('Not auth');
+        $this->expectOutputString('Before Middleware');
 
         $this->app->dispatch('middleware', 'before');
+    }
+
+    public function testAfterMiddleware()
+    {
+        // FIXME response
+        $this->expectOutputString('overwrite');
+
+        $response = $this->app->dispatch('middleware', 'after');
+
+        $this->assertEquals('After Middleware', $response->getContent());
     }
 }

@@ -135,8 +135,7 @@ class App extends Base
 
                     try {
                         $instance = $this->getControllerInstance($class);
-                        $response = $this->callMiddleware($instance, $action);
-                        return $this->handleResponse($response);
+                        return $this->executeMiddleware($instance, $action);
                     } catch (\RuntimeException $e) {
                         if ($e->getCode() === self::FORWARD) {
                             return $this;
@@ -197,21 +196,29 @@ class App extends Base
      * @param string $action
      * @return Response
      */
-    protected function callMiddleware($instance, $action)
+    protected function executeMiddleware($instance, $action)
     {
         $that = $this;
         $middleware = method_exists($instance, 'getMiddleware') ? $instance->getMiddleware() : array();
 
         $callback = function () use ($instance, $action, $that) {
-            return $instance->$action($that->request, $that->response);
+            $response = $instance->$action($that->request, $that->response);
+            return $that->handleResponse($response);
         };
 
-        $next = function () use (&$middleware, $callback, &$next) {
+        $next = function () use (&$middleware, $callback, &$next, $action) {
             $config = array_splice($middleware, 0, 1);
             if ($config) {
                 $class = key($config);
-                $service = new $class($config[$class]);
-                $service($next);
+                $options = $config[$class];
+                if ((isset($options['only']) && in_array($action, (array)$options['only'])) ||
+                    (isset($options['except']) && !in_array($action, (array)$options['except']))
+                ) {
+                    $service = new $class($config[$class]);
+                    return $service($next);
+                } else {
+                    return $next();
+                }
             } else {
                 return $callback();
             }
@@ -226,7 +233,7 @@ class App extends Base
      * @return Response
      * @throws \InvalidArgumentException
      */
-    protected function handleResponse($response)
+    public function handleResponse($response)
     {
         switch (true) {
             // Render default template and use $response as template variables
