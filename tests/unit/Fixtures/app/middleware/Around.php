@@ -10,6 +10,6 @@ class Around extends \Wei\Base
 
         $next();
 
-        return $response->setContent('Not Found');
+        $response->setContent('Not Found');
     }
 }

@@ -14,7 +14,5 @@ class Stack3 extends \Wei\Base
         $response = $next();
 
         $response->setContent($response->getContent() . '-end3');
-
-        return $response;
     }
 }

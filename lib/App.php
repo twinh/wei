@@ -206,7 +206,8 @@ class App extends Base
             return $that->handleResponse($response);
         };
 
-        $next = function () use (&$middleware, $callback, &$next, $action) {
+        $response = $this->response;
+        $next = function () use (&$middleware, $callback, &$next, $action, &$response) {
             $config = array_splice($middleware, 0, 1);
             if ($config) {
                 $class = key($config);
@@ -215,13 +216,15 @@ class App extends Base
                     (isset($options['except']) && !in_array($action, (array)$options['except']))
                 ) {
                     $service = new $class($config[$class]);
-                    return $service($next);
+                    $result = $service($next);
                 } else {
-                    return $next();
+                    $result = $next();
                 }
             } else {
-                return $callback();
+                $result = $callback();
             }
+            $result && $response = $result;
+            return $response;
         };
 
         /** @var \Wei\Response $response */

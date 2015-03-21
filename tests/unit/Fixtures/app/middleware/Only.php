@@ -6,6 +6,6 @@ class Only extends \Wei\Base
 {
     public function __invoke($next)
     {
-        return $next();
+        $next();
     }
 }

@@ -6,6 +6,6 @@ class Before extends \Wei\Base
 {
     public function __invoke($next)
     {
-        return wei()->response->setContent('Before Middleware');
+        wei()->response->setContent('Before Middleware');
     }
 }

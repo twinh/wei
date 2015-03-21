@@ -9,6 +9,6 @@ class After extends \Wei\Base
         /** @var \Wei\Response $response */
         $response = $next();
 
-        return $response->setContent('After Middleware');
+        $response->setContent('After Middleware');
     }
 }
