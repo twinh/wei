@@ -232,8 +232,8 @@ class App extends Base
         $results = array();
         $middleware = (array)$instance->getOption('middleware');
         foreach ($middleware as $class => $options) {
-            if ((isset($options['only']) && in_array($action, (array)$options['only'])) ||
-                (isset($options['except']) && !in_array($action, (array)$options['except']))
+            if ((!isset($options['only']) || in_array($action, (array)$options['only'])) &&
+                (!isset($options['except']) || !in_array($action, (array)$options['except']))
             ) {
                 $results[$class] = $options;
             }
