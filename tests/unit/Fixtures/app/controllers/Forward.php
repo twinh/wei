@@ -2,7 +2,7 @@
 
 namespace WeiTest\Fixtures\app\controllers;
 
-class Forward extends \Wei\Base
+class Forward extends \Wei\BaseController
 {
     public function index()
     {

@@ -2,7 +2,7 @@
 
 namespace WeiTest\Fixtures\app\controllers\admin;
 
-class Index extends \Wei\Base
+class Index extends \Wei\BaseController
 {
     public function index()
     {

@@ -2,7 +2,7 @@
 
 namespace WeiTest\Fixtures\app\controllers;
 
-class DispatchBreak extends \Wei\Base
+class DispatchBreak extends \Wei\BaseController
 {
     public function __construct($options = array())
     {

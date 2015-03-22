@@ -5,7 +5,7 @@ namespace WeiTest\Fixtures\app\controllers;
 /**
  * @property \Wei\Response $response
  */
-class Middleware extends \Wei\Base
+class Middleware extends \Wei\BaseController
 {
     protected $middleware = array();
 
