@@ -2,7 +2,7 @@
 /**
  * Wei Framework
  *
- * @copyright   Copyright (c) 2008-2015 Twin Huang
+ * @copyright   Copyright (c) 2008-2013 Twin Huang
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
@@ -267,16 +267,16 @@ class Error extends Base
                 $detail = $this->notFoundDetail;
             }
         }
-        $message = htmlspecialchars($message, ENT_QUOTES);
+        $title = htmlspecialchars($message, ENT_QUOTES);
+        $message = nl2br($title);
 
         // Render error views
         if ($debug) {
-            $mtime      = date('Y-m-d H:i:s', filemtime($file));
             $fileInfo   = $this->getFileCode($file, $line);
             $trace      = htmlspecialchars($e->getTraceAsString(), ENT_QUOTES);
 
             $detail = "<h2>File</h2>"
-                . "<p class=\"error-text\">$file modified at $mtime</p>"
+                . "<p class=\"error-text\">$file</p>"
                 . "<p><pre>$fileInfo</pre></p>"
                 . "<h2>Trace</h2>"
                 . "<p class=\"error-text\">$detail</p>"
@@ -288,8 +288,9 @@ class Error extends Base
         $html = '<!DOCTYPE html>'
             . '<html>'
             . '<head>'
+            . '<meta name="viewport" content="width=device-width">'
             . '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>'
-            . "<title>$message</title>"
+            . "<title>$title</title>"
             . '<style type="text/css">'
             . 'body { font-size: 12px; color: #333; padding: 15px 20px 20px 20px; }'
             . 'h1, h2, p, pre { margin: 0; padding: 0; }'
