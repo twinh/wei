@@ -483,7 +483,9 @@
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </code></pre></div>
 </li>
-</ol><h3>通过<code>import</code>导入目录下的类为服务对象</h3>
+</ol>
+
+<h3>通过<code>import</code>导入目录下的类为服务对象</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'wei'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -510,7 +512,9 @@
 <code>aliases</code>选项数组的key是服务名称,value是类名称</li>
 <li>
 <code>providers</code>选项数组的key是服务名称,value也是服务名称</li>
-</ol><div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+</ol>
+
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'wei'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'aliases'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">'服务名称'</span> <span class="o">=&gt;</span> <span class="s1">'类名称'</span>
@@ -527,12 +531,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>debug</td>
@@ -589,16 +595,20 @@
 <td>每个对象初始化后的回调</td>
 </tr>
 </tbody>
-</table><h3>回调</h3>
+</table>
+
+<h3>回调</h3>
 
 <h4>beforeConstruct($wei, $full, $name)</h4>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$wei</td>
@@ -618,14 +628,18 @@
 </td>
 </tr>
 </tbody>
-</table><h4>afterConstruct($wei, $full, $name, $object)</h4>
+</table>
+
+<h4>afterConstruct($wei, $full, $name, $object)</h4>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$wei</td>
@@ -650,7 +664,9 @@
 <td>当前初始化的对象</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>wei($config)</h4>
 
@@ -661,17 +677,23 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$config</td>
 <td>string,array</td>
 <td>对象的配置数组或配置文件</td>
-</tr></tbody>
-</table><h4>wei()-&gt;isDebug()</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>wei()-&gt;isDebug()</h4>
 
 <p>检查是否启用了调试模式</p>
 
@@ -686,17 +708,23 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$debug</td>
 <td>bool</td>
 <td>是否启用调试</td>
-</tr></tbody>
-</table><h4>wei()-&gt;setConfig($name, $vlaue = array())</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>wei()-&gt;setConfig($name, $vlaue = array())</h4>
 
 <p>设置对象的配置</p>
 
@@ -705,12 +733,14 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$name</td>
@@ -726,7 +756,9 @@
 <td>对象的配置选项</td>
 </tr>
 </tbody>
-</table><h4>wei()-&gt;setConfig($array = array())</h4>
+</table>
+
+<h4>wei()-&gt;setConfig($array = array())</h4>
 
 <p>设置对象所有配置</p>
 
@@ -735,19 +767,25 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$array</td>
 <td>array</td>
 <td>无</td>
 <td>对象的完整配置</td>
-</tr></tbody>
-</table><h4>wei()-&gt;getConfig($name)</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>wei()-&gt;getConfig($name)</h4>
 
 <p>获取对象的选项配置</p>
 
@@ -756,29 +794,37 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$name</td>
 <td>string</td>
 <td>无</td>
 <td>配置的名称</td>
-</tr></tbody>
-</table><h4>wei()-&gt;get($name, $options = array(), $providers = array())</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>wei()-&gt;get($name, $options = array(), $providers = array())</h4>
 
 <p>获取一个对象</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$name</td>
@@ -799,17 +845,21 @@
 <td>指定对象的依赖关系</td>
 </tr>
 </tbody>
-</table><h4>wei()-&gt;import($dir, $namespace, $format = null)</h4>
+</table>
+
+<h4>wei()-&gt;import($dir, $namespace, $format = null)</h4>
 
 <p>导入指定目录下的类文件</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$dir</td>
@@ -830,7 +880,9 @@
 <td>类文件的格式</td>
 </tr>
 </tbody>
-</table><h4>wei()-&gt;newInstance($name, $options = array(), $providers = array())</h4>
+</table>
+
+<h4>wei()-&gt;newInstance($name, $options = array(), $providers = array())</h4>
 
 <p>初始化一个新的对象</p>
 
@@ -853,6 +905,7 @@
 <h4>wei()-&gt;setAutoload($bool)</h4>
 
 <p>启用或禁用PSR-0类自动加载</p>
+
   </section>
 
 <!-- api/cache
@@ -1005,7 +1058,9 @@
 <ol>
 <li>缓存JSON,YAML,INI等非PHP原生支持文件的解析结果</li>
 <li> 在自定义视图引擎中,缓存模板文件的编译结果</li>
-</ol><div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">getFileContent</span><span class="p">(</span><span class="nv">$file</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$file</span><span class="p">)</span> <span class="p">{</span>
+</ol>
+
+<div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">getFileContent</span><span class="p">(</span><span class="nv">$file</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$file</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nb">file_get_contents</span><span class="p">(</span><span class="nv">$file</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
     <span class="c1">//return \Symfony\Component\Yaml\Yaml::parse($file);</span>
 <span class="p">});</span>
@@ -1016,34 +1071,46 @@
 <h3>通用选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>prefix</td>
 <td>string</td>
 <td>无</td>
 <td>缓存名称的前缀</td>
-</tr></tbody>
-</table><h3>选项</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>driver</td>
 <td>string</td>
 <td>apc</td>
 <td>缓存的类型</td>
-</tr></tbody>
-</table><h4>支持的缓存类型</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>支持的缓存类型</h4>
 
 <ul>
 <li>
@@ -1069,10 +1136,13 @@
 </li>
 <li>
 <a href="#bicache">bicache</a> - 二级缓存</li>
-</ul><h4>特性对比</h4>
+</ul>
+
+<h4>特性对比</h4>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>特性</th>
 <th>Apc</th>
 <th>ArrayCache</th>
@@ -1083,7 +1153,8 @@
 <th>MongoCache</th>
 <th>Couchbase</th>
 <th>Redis</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>速度</td>
@@ -1134,14 +1205,18 @@
 <td>√</td>
 </tr>
 </tbody>
-</table><ul>
+</table>
+
+<ul>
 <li>
 <code>√</code> 表示支持</li>
 <li>
 <code>×</code> 表示不支持</li>
 <li>
 <code>-</code>  表示不具备该特性</li>
-</ul><p>说明:</p>
+</ul>
+
+<p>说明:</p>
 
 <ul>
 <li>速度:判断依据是缓存数据存储的介质,如果数据存储在内存中则<code>快</code>,如果存储在磁盘则<code>慢</code>
@@ -1152,7 +1227,9 @@
 <code>Cache</code>和<code>Bicache</code>为视配置而定,不列入比较</li>
 <li>
 <code>ArrayCache</code>使用PHP数组存储数据,每次请求结束后销毁,因此不具备持久化特性</li>
-</ul><h3>通用方法</h3>
+</ul>
+
+<h3>通用方法</h3>
 
 <p>在下面的方法中,<code>cache</code>表示缓存类的名称,可以替换为其他任意缓存,如<code>redis</code>, <code>memcached</code>等</p>
 
@@ -1165,12 +1242,14 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$key</td>
@@ -1191,7 +1270,9 @@
 <td>缓存的有效期,默认为0秒,表示永不过期</td>
 </tr>
 </tbody>
-</table><h4>cache($key)</h4>
+</table>
+
+<h4>cache($key)</h4>
 
 <p>获取指定名称的缓存</p>
 
@@ -1200,19 +1281,25 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$key</td>
 <td>string</td>
 <td>无</td>
 <td>缓存的键名</td>
-</tr></tbody>
-</table><h4>cache-&gt;set($key, $value, $expire = 0)</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>cache-&gt;set($key, $value, $expire = 0)</h4>
 
 <p>设置缓存的值,同<code>cache($key, $value, $expire = 0)</code></p>
 
@@ -1229,19 +1316,25 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$key</td>
 <td>string</td>
 <td>无</td>
 <td>缓存的键名</td>
-</tr></tbody>
-</table><h4>cache-&gt;exists($key)</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>cache-&gt;exists($key)</h4>
 
 <p>检查缓存是否存在</p>
 
@@ -1250,19 +1343,25 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$key</td>
 <td>string</td>
 <td>无</td>
 <td>缓存的键名</td>
-</tr></tbody>
-</table><h4>cache-&gt;add($key, $value, $expire = 0)</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>cache-&gt;add($key, $value, $expire = 0)</h4>
 
 <p>增加一项缓存,如果缓存已存在,返回false</p>
 
@@ -1271,12 +1370,14 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$key</td>
@@ -1297,7 +1398,9 @@
 <td>缓存的有效期,默认为0秒,表示永不过期</td>
 </tr>
 </tbody>
-</table><h4>cache-&gt;replace($key, $value)</h4>
+</table>
+
+<h4>cache-&gt;replace($key, $value)</h4>
 
 <p>替换一项缓存,如果缓存不存在,返回false</p>
 
@@ -1306,12 +1409,14 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$key</td>
@@ -1326,7 +1431,9 @@
 <td>缓存的值,允许任意变量类型</td>
 </tr>
 </tbody>
-</table><h4>cache-&gt;incr($key, $offset = 1)</h4>
+</table>
+
+<h4>cache-&gt;incr($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
@@ -1335,12 +1442,14 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$key</td>
@@ -1355,7 +1464,9 @@
 <td>增大的值</td>
 </tr>
 </tbody>
-</table><h4>cache-&gt;decr($key, $offset = 1)</h4>
+</table>
+
+<h4>cache-&gt;decr($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
@@ -1364,12 +1475,14 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$key</td>
@@ -1384,7 +1497,9 @@
 <td>减小的值</td>
 </tr>
 </tbody>
-</table><h4>cache-&gt;getMulti($keys)</h4>
+</table>
+
+<h4>cache-&gt;getMulti($keys)</h4>
 
 <p>批量获取缓存的值</p>
 
@@ -1393,19 +1508,25 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$keys</td>
 <td>array</td>
 <td>无</td>
 <td>缓存的键名数组</td>
-</tr></tbody>
-</table><h4>cache-&gt;setMulti($values)</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>cache-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
 
@@ -1414,19 +1535,25 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$values</td>
 <td>array</td>
 <td>无</td>
 <td>要缓存的数据</td>
-</tr></tbody>
-</table><h4>cache-&gt;clear()</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>cache-&gt;clear()</h4>
 
 <p>清除所有的缓存</p>
 
@@ -1449,6 +1576,7 @@
 <h4>cache-&gt;setPrefix($prefix)</h4>
 
 <p>设置键名前缀</p>
+
   </section>
 
 <!-- api/apc
@@ -1489,6 +1617,7 @@
 <h3>方法</h3>
 
 <p><em>无</em></p>
+
   </section>
 
 <!-- api/arrayCache
@@ -1503,7 +1632,9 @@
 <ol>
 <li>在开发环境使用,确保每次页面请求都会获得最新生成的数据</li>
 <li>对计算结果进行临时存储,以便在不同地方获取数据,减少重复计算消耗的时间</li>
-</ol><h2>案例</h2>
+</ol>
+
+<h2>案例</h2>
 
 <h3>设置和获取缓存</h3>
 
@@ -1529,6 +1660,7 @@
 <h3>方法</h3>
 
 <p><em>无</em></p>
+
   </section>
 
 <!-- api/bicache
@@ -1543,7 +1675,9 @@
 <ol>
 <li>每次读取数据时,如果主缓存读取不到数据,将从从缓存读取数据</li>
 <li>每次写入数据时,如果检查上次更新到从缓存的间隔秒数大于配置秒数,则同步数据到从缓存中</li>
-</ol><h2>案例</h2>
+</ol>
+
+<h2>案例</h2>
 
 <h3>设置和获取缓存</h3>
 
@@ -1566,12 +1700,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>time</td>
@@ -1598,13 +1734,16 @@
 <td>从缓存的类型,推荐使用文件类缓存,如fileCache或dbCache</td>
 </tr>
 </tbody>
-</table><h3>继承的方法</h3>
+</table>
+
+<h3>继承的方法</h3>
 
 <p>通用方法请查看<a href="#cache">Cache</a>类</p>
 
 <h3>方法</h3>
 
 <p><em>无</em></p>
+
   </section>
 
 <!-- api/couchbase
@@ -1637,12 +1776,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>host</td>
@@ -1675,7 +1816,9 @@
 <td>是否使用长连接</td>
 </tr>
 </tbody>
-</table><h3>继承的方法</h3>
+</table>
+
+<h3>继承的方法</h3>
 
 <p>通用方法请查看<a href="#cache">Cache</a>对象</p>
 
@@ -1688,6 +1831,7 @@
 <h4>couchbase-&gt;setObject($couchbase)</h4>
 
 <p>设置原生Couchbase对象</p>
+
   </section>
 
 <!-- api/dbCache
@@ -1722,25 +1866,32 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>table</td>
 <td>string</td>
 <td>cache</td>
 <td>缓存数据表名称</td>
-</tr></tbody>
-</table><h3>继承的方法</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>继承的方法</h3>
 
 <p>通用方法请查看<a href="#cache">Cache</a>对象</p>
 
 <h3>方法</h3>
 
 <p><em>无</em></p>
+
   </section>
 
 <!-- api/fileCache
@@ -1768,19 +1919,25 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>dir</td>
 <td>string</td>
 <td>cache</td>
 <td>缓存文件存储的目录</td>
-</tr></tbody>
-</table><h3>继承的方法</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>继承的方法</h3>
 
 <p>通用方法请查看<a href="#cache">Cache</a>对象</p>
 
@@ -1797,6 +1954,7 @@
 <h4>fileCache-&gt;getFile($key)</h4>
 
 <p>根据缓存名称获取缓存文件路径</p>
+
   </section>
 
 <!-- api/memcache
@@ -1829,12 +1987,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>servers</td>
@@ -1855,16 +2015,20 @@
 <td>原始的Memcache对象</td>
 </tr>
 </tbody>
-</table><h4>选项<code>servers</code>
+</table>
+
+<h4>选项<code>servers</code>
 </h4>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>host</td>
@@ -1885,7 +2049,9 @@
 <td>是否使用长连接</td>
 </tr>
 </tbody>
-</table><h3>继承的方法</h3>
+</table>
+
+<h3>继承的方法</h3>
 
 <p>通用方法请查看<a href="#cache">Cache</a>对象</p>
 
@@ -1898,6 +2064,7 @@
 <h4>memcache-&gt;setObject($memcache)</h4>
 
 <p>设置原生Memcache对象</p>
+
   </section>
 
 <!-- api/memcached
@@ -1930,12 +2097,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>servers</td>
@@ -1950,16 +2119,20 @@
 <td>原始的memcached对象</td>
 </tr>
 </tbody>
-</table><h4>选项<code>servers</code>
+</table>
+
+<h4>选项<code>servers</code>
 </h4>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>host</td>
@@ -1974,7 +2147,9 @@
 <td>memcached服务器端口</td>
 </tr>
 </tbody>
-</table><h3>继承的方法</h3>
+</table>
+
+<h3>继承的方法</h3>
 
 <p>通用方法请查看<a href="#cache">Cache</a>对象</p>
 
@@ -1987,6 +2162,7 @@
 <h4>memcached-&gt;setObject($memcached)</h4>
 
 <p>设置原生Memcached对象</p>
+
   </section>
 
 <!-- api/mongoCache
@@ -2019,12 +2195,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>host</td>
@@ -2051,13 +2229,16 @@
 <td>存储缓存数据的集合的名称</td>
 </tr>
 </tbody>
-</table><h3>继承的方法</h3>
+</table>
+
+<h3>继承的方法</h3>
 
 <p>通用方法请查看<a href="#cache">Cache</a>对象</p>
 
 <h3>方法</h3>
 
 <p><em>无</em></p>
+
   </section>
 
 <!-- api/redis
@@ -2090,12 +2271,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>host</td>
@@ -2140,7 +2323,9 @@
 <td>\Redis::setOption()方法的参数</td>
 </tr>
 </tbody>
-</table><h3>继承的方法</h3>
+</table>
+
+<h3>继承的方法</h3>
 
 <p>通用方法请查看<a href="#cache">Cache</a>对象</p>
 
@@ -2153,6 +2338,7 @@
 <h4>redis-&gt;setObject($redis)</h4>
 
 <p>设置原生Redis对象</p>
+
   </section>
 
 <!-- api/db
@@ -2294,7 +2480,9 @@
 <code>find</code>方法的第一个参数也是数据表名称,但返回的是<code>Wei\Record</code>对象</li>
 <li>
 <code>findOne</code>方法参数和返回值与<code>find</code>一样,但是当记录不存在时,会抛出一个代码为404的异常</li>
-</ul><p>另外,如果要查询多条数据,对应的方法是<code>fetchAll</code>,<code>selectAll</code>和<code>findAll</code>.</p>
+</ul>
+
+<p>另外,如果要查询多条数据,对应的方法是<code>fetchAll</code>,<code>selectAll</code>和<code>findAll</code>.</p>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$db</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">;</span>
 
@@ -2320,11 +2508,13 @@
 <h3>所有查询方法的参数和返回值类型比较</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>方法</th>
 <th>参数</th>
 <th>返回值类型</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>select</td>
@@ -2367,7 +2557,9 @@
 <td>PDOStatement对象</td>
 </tr>
 </tbody>
-</table><h3>通过beforeQuery回调记录SQL日志</h3>
+</table>
+
+<h3>通过beforeQuery回调记录SQL日志</h3>
 
 <div class="highlight"><pre><code class="php"><span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -2394,7 +2586,9 @@
 <ul>
 <li>读操作使用slave数据库</li>
 <li>写操作使用master数据库</li>
-</ul><div class="highlight"><pre><code class="php"><span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+</ul>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$wei</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="c1">// 主数据库对象的配置</span>
     <span class="s1">'db'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">'driver'</span>    <span class="o">=&gt;</span> <span class="s1">'mysql'</span><span class="p">,</span>
@@ -2461,10 +2655,12 @@
 <p><strong>使用<code>(object)</code>对比</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>写法</th>
 <th>生成的SQL语句</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>wei()-&gt;db-&gt;update('article', hit' =&gt; 'hit + 1', array('id' =&gt; 1));</td>
@@ -2475,7 +2671,9 @@
 <td>UPDATE article SET hit = hit + 1 WHERE id = ?</td>
 </tr>
 </tbody>
-</table><blockquote>
+</table>
+
+<blockquote>
 <h4>注意</h4>
 
 <p>目前只有<code>insert</code>, <code>update</code>, <code>delete</code>方法支持</p>
@@ -2512,12 +2710,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>dirver</td>
@@ -2648,13 +2848,17 @@
 <td>在执行SQL语句之后触发的回调方法</td>
 </tr>
 </tbody>
-</table><h4>不同驱动连接到数据库的连接选项</h4>
+</table>
+
+<h4>不同驱动连接到数据库的连接选项</h4>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>驱动类型</th>
 <th>选项</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>mysql</td>
@@ -2669,33 +2873,43 @@
 <td>path</td>
 </tr>
 </tbody>
-</table><h3>回调</h3>
+</table>
+
+<h3>回调</h3>
 
 <h4>beforeConnect</h4>
 
 <p>在连接PDO之前触发的回调方法</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$db</td>
 <td>Wei\Db</td>
 <td>当前Db对象</td>
-</tr></tbody>
-</table><h4>connectFails</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>connectFails</h4>
 
 <p>连接PDO失败时触发的回调方法</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$db</td>
@@ -2708,16 +2922,20 @@
 <td>PDO异常对象</td>
 </tr>
 </tbody>
-</table><h4>afterConnect</h4>
+</table>
+
+<h4>afterConnect</h4>
 
 <p>连接PDO完成(成功)时触发的回调方法</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$db</td>
@@ -2730,16 +2948,20 @@
 <td>PDO对象</td>
 </tr>
 </tbody>
-</table><h4>beforeQuery</h4>
+</table>
+
+<h4>beforeQuery</h4>
 
 <p>在执行SQL语句之前触发的回调方法</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$sql</td>
@@ -2762,22 +2984,30 @@
 <td>当前Db对象</td>
 </tr>
 </tbody>
-</table><h4>afterQuery</h4>
+</table>
+
+<h4>afterQuery</h4>
 
 <p>在执行SQL语句之后触发的回调方法</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$db</td>
 <td>Wei\Db</td>
 <td>当前Db对象</td>
-</tr></tbody>
-</table><h3>方法</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>方法</h3>
 
 <h4>db($table = null)</h4>
 
@@ -2788,18 +3018,24 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$table</td>
 <td>string</td>
 <td>数据表的名称,如<code>user</code>,或带别名形式的<code>user u</code>
 </td>
-</tr></tbody>
-</table><h4>db-&gt;insert($table, $data = array())</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>db-&gt;insert($table, $data = array())</h4>
 
 <p>向指定的数据表插入一条数据</p>
 
@@ -2808,11 +3044,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$table</td>
@@ -2825,7 +3063,9 @@
 <td>要插入的数据,数组的键名是数据表的字段名称,值是字段的值</td>
 </tr>
 </tbody>
-</table><h4>db-&gt;insertBatch($table, $data = array())</h4>
+</table>
+
+<h4>db-&gt;insertBatch($table, $data = array())</h4>
 
 <p>向指定的数据表插入多条数据</p>
 
@@ -2834,11 +3074,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$table</td>
@@ -2851,7 +3093,9 @@
 <td>要插入的二维数组数据</td>
 </tr>
 </tbody>
-</table><h4>db-&gt;lastInsertId($sequence = null)</h4>
+</table>
+
+<h4>db-&gt;lastInsertId($sequence = null)</h4>
 
 <p>获取最后插入数据表的自增编号</p>
 
@@ -2860,17 +3104,23 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$sequence</td>
 <td>string</td>
 <td>序列名称,数据库驱动为<code>PostgreSQL</code>时才需要提供该参数</td>
-</tr></tbody>
-</table><h4>db-&gt;update($table, $data = array(), $conditions = array())</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>db-&gt;update($table, $data = array(), $conditions = array())</h4>
 
 <p>根据条件更新数据表数据</p>
 
@@ -2879,11 +3129,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$table</td>
@@ -2901,7 +3153,9 @@
 <td>更新语句的查询条件</td>
 </tr>
 </tbody>
-</table><h4>db-&gt;delete($table, $conditions = array())</h4>
+</table>
+
+<h4>db-&gt;delete($table, $conditions = array())</h4>
 
 <p>根据条件删除数据表数据</p>
 
@@ -2910,11 +3164,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$table</td>
@@ -2927,7 +3183,9 @@
 <td>删除语句的查询条件</td>
 </tr>
 </tbody>
-</table><h4>db-&gt;select($table, $conditions = array())</h4>
+</table>
+
+<h4>db-&gt;select($table, $conditions = array())</h4>
 
 <p>根据条件查找数据表的一条记录</p>
 
@@ -2936,11 +3194,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$table</td>
@@ -2953,7 +3213,9 @@
 <td>查询条件,如果类型是字符串,表示主键的值,如果是数组,键名表示数据表字段,值表示字段的值</td>
 </tr>
 </tbody>
-</table><h4>db-&gt;selectAll($table, $conditions = array())</h4>
+</table>
+
+<h4>db-&gt;selectAll($table, $conditions = array())</h4>
 
 <p>根据条件查找数据表的所有匹配记录</p>
 
@@ -2962,11 +3224,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$table</td>
@@ -2979,7 +3243,9 @@
 <td>查询条件,如果类型是字符串,表示主键的值,如果是数组,键名表示数据表字段,值表示字段的值</td>
 </tr>
 </tbody>
-</table><h4>db-&gt;fetch($sql, $params = array())</h4>
+</table>
+
+<h4>db-&gt;fetch($sql, $params = array())</h4>
 
 <p>执行一条SQL语句并返回第一条记录,主要用于SELECT的SQL语句</p>
 
@@ -2988,11 +3254,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$sql</td>
@@ -3005,7 +3273,9 @@
 <td>绑定到SQL的参数</td>
 </tr>
 </tbody>
-</table><h4>db-&gt;fetchAll($sql, $params = array())</h4>
+</table>
+
+<h4>db-&gt;fetchAll($sql, $params = array())</h4>
 
 <p>执行一条SQL语句并返回所有记录</p>
 
@@ -3014,11 +3284,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$sql</td>
@@ -3031,7 +3303,9 @@
 <td>绑定到SQL的参数</td>
 </tr>
 </tbody>
-</table><h4>db-&gt;fetchColumn($sql, $params = array(), $column = 0)</h4>
+</table>
+
+<h4>db-&gt;fetchColumn($sql, $params = array(), $column = 0)</h4>
 
 <p>执行一条SQL语句,并返回指定项目的值</p>
 
@@ -3040,11 +3314,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$sql</td>
@@ -3062,7 +3338,9 @@
 <td>返回第几项的值</td>
 </tr>
 </tbody>
-</table><h4>db-&gt;find($table, $conditions)</h4>
+</table>
+
+<h4>db-&gt;find($table, $conditions)</h4>
 
 <p>根据条件查找数据表的一条记录</p>
 
@@ -3071,11 +3349,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$table</td>
@@ -3088,7 +3368,9 @@
 <td>查询条件,如果类型是字符串,表示主键的值,如果是数组,键名表示数据表字段,值表示字段的值</td>
 </tr>
 </tbody>
-</table><h4>db-&gt;findAll($table, $conditions)</h4>
+</table>
+
+<h4>db-&gt;findAll($table, $conditions)</h4>
 
 <p>根据条件查找数据表的所有匹配记录</p>
 
@@ -3097,11 +3379,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$table</td>
@@ -3114,7 +3398,9 @@
 <td>查询条件,如果类型是字符串,表示主键的值,如果是数组,键名表示数据表字段,值表示字段的值</td>
 </tr>
 </tbody>
-</table><h4>db-&gt;create($table, $data = array())</h4>
+</table>
+
+<h4>db-&gt;create($table, $data = array())</h4>
 
 <p>创建一个新的数据表记录对象</p>
 
@@ -3123,11 +3409,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$table</td>
@@ -3140,7 +3428,9 @@
 <td>初始化的数据</td>
 </tr>
 </tbody>
-</table><h4>db-&gt;findOrInit($table, $id, $data = array())</h4>
+</table>
+
+<h4>db-&gt;findOrInit($table, $id, $data = array())</h4>
 
 <p>根据条件查找数据表的一条记录,如果记录不存在,将根据<code>$data</code>创建一条新的数据表记录对象</p>
 
@@ -3149,11 +3439,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$table</td>
@@ -3171,7 +3463,9 @@
 <td>初始化的数据</td>
 </tr>
 </tbody>
-</table><h4>db-&gt;executeUpdate($sql, $params = array())</h4>
+</table>
+
+<h4>db-&gt;executeUpdate($sql, $params = array())</h4>
 
 <p>执行一条SQL语句,并返回影响的行数,主要用于INSERT/UPDATE/DELETE操作的SQL语句</p>
 
@@ -3180,11 +3474,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$sql</td>
@@ -3197,18 +3493,22 @@
 <td>绑定到SQL的参数</td>
 </tr>
 </tbody>
-</table><h4>db-&gt;query($sql, $params = array())</h4>
+</table>
+
+<h4>db-&gt;query($sql, $params = array())</h4>
 
 <p>执行一条SQL语句,并返回<code>PDOStatement</code>对象</p>
 
 <p><strong>返回:</strong> <code>PDOStatement</code></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$sql</td>
@@ -3221,7 +3521,9 @@
 <td>绑定到SQL的参数</td>
 </tr>
 </tbody>
-</table><h4>db-&gt;errorCode()</h4>
+</table>
+
+<h4>db-&gt;errorCode()</h4>
 
 <p>获取PDO错误代号</p>
 
@@ -3322,6 +3624,7 @@
 <p>获取指定字段的平均数值</p>
 
 <p><strong>返回:</strong> <code>float</code></p>
+
   </section>
 
 <!-- book/active-record-basic
@@ -3398,7 +3701,9 @@
 <ol>
 <li>常规查询将数据存储在<code>数组</code>中.</li>
 <li>Active Record将数据存储在<code>数组对象(Array Object)</code>中,除了拥有数组所有特性外,在<code>数据层分离</code>,<code>缓存</code>,<code>延迟加载(Lazy load)</code>等都有很大的想象空间.</li>
-</ol><div class="highlight"><pre><code class="php"><span class="cm">/* @var $data array */</span>
+</ol>
+
+<div class="highlight"><pre><code class="php"><span class="cm">/* @var $data array */</span>
 <span class="nv">$data</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="s2">"SELECT * FROM table WHERE field = 'value'"</span><span class="p">);</span>
 </code></pre></div>
 
@@ -3487,6 +3792,7 @@
 <h4>$record-&gt;getChangedData($field = null)</h4>
 
 <p>获取指定字段或所有字段修改前的值</p>
+
   </section>
 
 <!-- book/active-record-query-builder
@@ -3771,11 +4077,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$conditions</td>
@@ -3794,7 +4102,9 @@
 <td>参数的类型</td>
 </tr>
 </tbody>
-</table><h4>$qb-&gt;andWhere($conditions, $params = null, $types = array())</h4>
+</table>
+
+<h4>$qb-&gt;andWhere($conditions, $params = null, $types = array())</h4>
 
 <p>增加<code>AND</code>类型的<code>WHERE</code>条件到当前查询中</p>
 
@@ -3803,11 +4113,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$conditions</td>
@@ -3826,7 +4138,9 @@
 <td>参数的类型</td>
 </tr>
 </tbody>
-</table><h4>$qb-&gt;orWhere($conditions, $params = null, $types = array())</h4>
+</table>
+
+<h4>$qb-&gt;orWhere($conditions, $params = null, $types = array())</h4>
 
 <p>增加<code>OR</code>类型的<code>WHERE</code>条件到当前查询中</p>
 
@@ -3835,11 +4149,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$conditions</td>
@@ -3858,7 +4174,9 @@
 <td>参数的类型</td>
 </tr>
 </tbody>
-</table><h4>$qb-&gt;orderBy($sort, $order = 'ASC')</h4>
+</table>
+
+<h4>$qb-&gt;orderBy($sort, $order = 'ASC')</h4>
 
 <p>设置<code>ORDER BY</code>字句</p>
 
@@ -3867,11 +4185,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$sort</td>
@@ -3885,7 +4205,9 @@
 </td>
 </tr>
 </tbody>
-</table><h4>$qb-&gt;addOrderBy($sort, $order = 'ASC')</h4>
+</table>
+
+<h4>$qb-&gt;addOrderBy($sort, $order = 'ASC')</h4>
 
 <p>添加<code>ORDER BY</code>字句到当前查询中</p>
 
@@ -3894,11 +4216,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$sort</td>
@@ -3912,7 +4236,9 @@
 </td>
 </tr>
 </tbody>
-</table><h4>$qb-&gt;offset($offset)</h4>
+</table>
+
+<h4>$qb-&gt;offset($offset)</h4>
 
 <p>设置<code>OFFSET</code>字句</p>
 
@@ -3921,18 +4247,24 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$offset</td>
 <td>int</td>
 <td>
 <code>OFFSET</code>字句的值,如0,10</td>
-</tr></tbody>
-</table><h4>$qb-&gt;limit($limit)</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>$qb-&gt;limit($limit)</h4>
 
 <p>设置<code>LIMIT</code>字句</p>
 
@@ -3941,18 +4273,24 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$limit</td>
 <td>int</td>
 <td>
 <code>LIMIT</code>字句的值,如0,10</td>
-</tr></tbody>
-</table><h4>$qb-&gt;page($page)</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>$qb-&gt;page($page)</h4>
 
 <p>设置<code>OFFSET</code>和<code>LIMIT</code>字句</p>
 
@@ -3963,17 +4301,23 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$page</td>
 <td>int</td>
 <td>当前在第几页</td>
-</tr></tbody>
-</table><h4>$qb-&gt;join($table, $on = null)</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>$qb-&gt;join($table, $on = null)</h4>
 
 <p>增加<code>INNER JOIN</code>字句到当前查询中</p>
 
@@ -3982,11 +4326,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$table</td>
@@ -4001,7 +4347,9 @@
 </td>
 </tr>
 </tbody>
-</table><h4>$qb-&gt;innerJoin($table, $on = null)</h4>
+</table>
+
+<h4>$qb-&gt;innerJoin($table, $on = null)</h4>
 
 <p>同上,增加<code>INNER JOIN</code>字句到当前查询中</p>
 
@@ -4014,11 +4362,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$table</td>
@@ -4033,7 +4383,9 @@
 </td>
 </tr>
 </tbody>
-</table><h4>$qb-&gt;rightJoin($table, $on = null)</h4>
+</table>
+
+<h4>$qb-&gt;rightJoin($table, $on = null)</h4>
 
 <p>增加<code>RIGHT JOIN</code>字句到当前查询中</p>
 
@@ -4042,11 +4394,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$table</td>
@@ -4061,7 +4415,9 @@
 </td>
 </tr>
 </tbody>
-</table><h4>$qb-&gt;groupBy($groupBy)</h4>
+</table>
+
+<h4>$qb-&gt;groupBy($groupBy)</h4>
 
 <p>设置<code>GROUP BY</code>字句</p>
 
@@ -4070,18 +4426,24 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$groupBy</td>
 <td>string</td>
 <td>
 <code>GROUP BY</code>字句的值</td>
-</tr></tbody>
-</table><h4>$qb-&gt;addGroupBy($groupBy)</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>$qb-&gt;addGroupBy($groupBy)</h4>
 
 <p>添加<code>GROUP BY</code>字句到当前查询中</p>
 
@@ -4090,18 +4452,24 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$groupBy</td>
 <td>string</td>
 <td>
 <code>GROUP BY</code>字句的值</td>
-</tr></tbody>
-</table><h4>$qb-&gt;having($conditions, $params = array(), $types = array())</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>$qb-&gt;having($conditions, $params = array(), $types = array())</h4>
 
 <p>设置<code>HAVING</code>字句</p>
 
@@ -4110,11 +4478,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$conditions</td>
@@ -4133,7 +4503,9 @@
 <td>参数的类型</td>
 </tr>
 </tbody>
-</table><h4>$qb-&gt;andHaving($conditions, $params = array(), $types = array())</h4>
+</table>
+
+<h4>$qb-&gt;andHaving($conditions, $params = array(), $types = array())</h4>
 
 <p>添加<code>AND</code>类型<code>HAVING</code>字句到当前查询中</p>
 
@@ -4142,11 +4514,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$conditions</td>
@@ -4165,7 +4539,9 @@
 <td>参数的类型</td>
 </tr>
 </tbody>
-</table><h4>$qb-&gt;orHaving($conditions, $params = array(), $types = array())</h4>
+</table>
+
+<h4>$qb-&gt;orHaving($conditions, $params = array(), $types = array())</h4>
 
 <p>添加<code>OR</code>类型的<code>HAVING</code>字句到当前查询中</p>
 
@@ -4174,11 +4550,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$conditions</td>
@@ -4197,7 +4575,9 @@
 <td>参数的类型</td>
 </tr>
 </tbody>
-</table><h4>$qb-&gt;indexBy($column)</h4>
+</table>
+
+<h4>$qb-&gt;indexBy($column)</h4>
 
 <p>控制返回二维数组的键名为指定字段的值</p>
 
@@ -4206,17 +4586,23 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$column</td>
 <td>string</td>
 <td>字段的名称,必须存在select语句中</td>
-</tr></tbody>
-</table><h4>$qb-&gt;resetSqlPart($name)</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>$qb-&gt;resetSqlPart($name)</h4>
 
 <p>重置某一部分SQL字句</p>
 
@@ -4225,18 +4611,24 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$queryPartName</td>
 <td>string</td>
 <td>允许的值为<code>select</code>,<code>from</code>,<code>join</code>,<code>set</code>,<code>where</code>,<code>groupBy</code>,<code>having</code>,<code>orderBy</code>,<code>limit</code>或<code>offset</code>
 </td>
-</tr></tbody>
-</table><h4>$qb-&gt;resetSqlParts($names = null)</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>$qb-&gt;resetSqlParts($names = null)</h4>
 
 <p>重置某一部分或全部SQL字句</p>
 
@@ -4245,17 +4637,23 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$queryPartNames</td>
 <td>null</td>
 <td>array</td>
-</tr></tbody>
-</table><h4>$qb-&gt;find()</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>$qb-&gt;find()</h4>
 
 <p>执行构造的SQL语句,并返回一个<code>Wei\Record</code>对象,如果结果为空,返回<code>false</code></p>
 
@@ -4294,11 +4692,13 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$key</td>
@@ -4316,7 +4716,9 @@
 <td>参数的类型,使用 PDO::PARAM_* 常量明确地指定参数的类型</td>
 </tr>
 </tbody>
-</table><p>相关链接: <a href="http://php.net/manual/zh/pdostatement.bindvalue.php" target="_blank">http://php.net/manual/zh/pdostatement.bindvalue.php</a></p>
+</table>
+
+<p>相关链接: <a href="http://php.net/manual/zh/pdostatement.bindvalue.php" target="_blank">http://php.net/manual/zh/pdostatement.bindvalue.php</a></p>
 
 <h4>$qb-&gt;setParameters(array $params, array $types = array())</h4>
 
@@ -4347,6 +4749,7 @@
 <p>获取当前查询的完整SQL语句</p>
 
 <p><strong>返回:</strong> <code>string</code></p>
+
   </section>
 
 <!-- book/active-record-callbacks
@@ -4447,7 +4850,9 @@
 <li>beforeCreate</li>
 <li>afterCreate</li>
 <li>afterSave</li>
-</ul><h4>更新已有记录并保存</h4>
+</ul>
+
+<h4>更新已有记录并保存</h4>
 
 <ul>
 <li>afterLoad</li>
@@ -4455,13 +4860,17 @@
 <li>beforeUpdate</li>
 <li>afterUpdate</li>
 <li>afterSave</li>
-</ul><h4>删除记录</h4>
+</ul>
+
+<h4>删除记录</h4>
 
 <ul>
 <li>afterLoad</li>
 <li>beforeDestroy</li>
 <li>afterDestroy</li>
-</ul><h3>回调方法</h3>
+</ul>
+
+<h3>回调方法</h3>
 
 <h4>afterLoad($record, $wei)</h4>
 
@@ -4498,6 +4907,7 @@
 <h4>afterDestroy($record, $wei)</h4>
 
 <p>删除记录后触发的回调</p>
+
   </section>
 
 <!-- book/active-record-status
@@ -4558,6 +4968,7 @@
 <h4>$record-&gt;isDestroyed()</h4>
 
 <p>判断当前记录是否已被删除</p>
+
   </section>
 
 <!-- api/http
@@ -4597,15 +5008,17 @@
 <span class="p">));</span>
 </code></pre></div>
 
-<h3>通过切换IP地址实现负载均衡</h3>
+<h3>通过切换IP地址简单实现负载均衡</h3>
 
-<div class="highlight"><pre><code class="php"><span class="nv">$http</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">http</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight"><pre><code class="php"><span class="nv">$ips</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'74.125.128.147'</span><span class="p">,</span>
+    <span class="s1">'74.125.128.105'</span>
+<span class="p">);</span>
+
+<span class="nv">$http</span> <span class="o">=</span> <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">http</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'http://google.com'</span><span class="p">,</span>
     <span class="c1">// 随机使用其中一个IP地址</span>
-    <span class="s1">'ip'</span> <span class="o">=&gt;</span> <span class="nb">array_rand</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-        <span class="s1">'74.125.128.147'</span><span class="p">,</span>
-        <span class="s1">'74.125.128.105'</span>
-    <span class="p">))</span>
+    <span class="s1">'ip'</span> <span class="o">=&gt;</span> <span class="nv">$ips</span><span class="p">[</span><span class="nb">array_rand</span><span class="p">(</span><span class="nv">$ips</span><span class="p">)]</span>
 <span class="p">));</span>
 </code></pre></div>
 
@@ -4742,12 +5155,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>url</td>
@@ -4859,16 +5274,20 @@
 <td>请求完成后,不论是否成功都触发的回调,可用于数据记录等</td>
 </tr>
 </tbody>
-</table><h3>回调</h3>
+</table>
+
+<h3>回调</h3>
 
 <h4>beforeSend($http, $ch)</h4>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$http</td>
@@ -4881,14 +5300,18 @@
 <td>cUrl会话的变量</td>
 </tr>
 </tbody>
-</table><h4>success($data, $http)</h4>
+</table>
+
+<h4>success($data, $http)</h4>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$data</td>
@@ -4901,14 +5324,18 @@
 <td>当前的Http对象</td>
 </tr>
 </tbody>
-</table><h5>
+</table>
+
+<h5>
 <code>dataType</code>的值与$data返回的类型</h5>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>dataType</th>
 <th>返回数据类型</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>json</td>
@@ -4935,14 +5362,18 @@
 <td>string</td>
 </tr>
 </tbody>
-</table><h4>error($http, $textStatus, $exception)</h4>
+</table>
+
+<h4>error($http, $textStatus, $exception)</h4>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$http</td>
@@ -4960,14 +5391,18 @@
 <td>错误的异常对象,可通过该对象获取详细的错误信息</td>
 </tr>
 </tbody>
-</table><h5>
+</table>
+
+<h5>
 <code>$textStatus</code>的值与出现的情况</h5>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>值</th>
 <th>出现情况</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>curl</td>
@@ -4982,14 +5417,18 @@
 <td>数据解析错误,如返回的数据不是正确的json格式</td>
 </tr>
 </tbody>
-</table><h4>complete($http, $ch)</h4>
+</table>
+
+<h4>complete($http, $ch)</h4>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$http</td>
@@ -5002,7 +5441,9 @@
 <td>cUrl会话的变量</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>http($options = array())</h4>
 
@@ -5109,6 +5550,7 @@
 <p>通过PATCH方式发送带数据的请求</p>
 
 <p>返回:  <code>Wei\Http</code> 新的http服务对象</p>
+
   </section>
 
 <!-- api/validate
@@ -5211,12 +5653,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>data</td>
@@ -5297,7 +5741,9 @@
 <td>验证器验证不通过(任意验证规则不通过)时调用的回调函数</td>
 </tr>
 </tbody>
-</table><h4>选项详细说明</h4>
+</table>
+
+<h4>选项详细说明</h4>
 
 <h4>选项:data</h4>
 
@@ -5311,7 +5757,9 @@
 <li>如果<code>$data</code>是对象且方法<code>get. $key</code>存在,返回<code>$data-&gt;{'get' . $key}</code>
 </li>
 <li>如果以上均不存在,返回null</li>
-</ol><h5>案例:使用数组或对象作为验证数据</h5>
+</ol>
+
+<h5>案例:使用数组或对象作为验证数据</h5>
 
 <div class="highlight"><pre><code class="php"><span class="k">class</span> <span class="nc">User</span>
 <span class="p">{</span>
@@ -5362,7 +5810,9 @@
 <li>所有数据项默认都是 <strong>必选</strong> 的,如果某一个数据项是选填的,只需增加 <strong><code>required =&gt; false</code></strong> 的验证规则</li>
 <li>验证规则会被转换成对应的类.如<code>email</code>规则将被转换为<code>\Wei\Validator\Email</code>类,如果类不存在,将抛出异常提醒开发人员规则不存在.</li>
 <li>验证规则都是 <strong>不</strong> 以<code>is</code>开头的,<code>email</code>,<code>digit</code>是正确的规则名称,<code>isEmail</code>,<code>isDigit</code>是错误的规则名称</li>
-</ol><h5>案例:验证规则格式</h5>
+</ol>
+
+<h5>案例:验证规则格式</h5>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'rules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -5401,7 +5851,9 @@
 </li>
 <li>作为验证规则时,需使用原始的名称,如<code>digit</code>,<code>alnum</code>
 </li>
-</ol><div class="highlight"><pre><code class="php"><span class="nv">$age</span> <span class="o">=</span> <span class="mi">18</span><span class="p">;</span>
+</ol>
+
+<div class="highlight"><pre><code class="php"><span class="nv">$age</span> <span class="o">=</span> <span class="mi">18</span><span class="p">;</span>
 
 <span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -5529,7 +5981,9 @@
 <span class="p">}</span>
 </code></pre></div>
 </li>
-</ul><p><strong>检查内容的区别</strong></p>
+</ul>
+
+<p><strong>检查内容的区别</strong></p>
 
 <ul>
 <li>
@@ -5548,11 +6002,13 @@
 <p>空白字符如下表:</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>字符</th>
 <th>ASCII</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>" "</td>
@@ -5586,10 +6042,13 @@
 </tr>
 </tbody>
 </table>
+
 <p>来源参见<a href="http://www.php.net/manual/zh/function.trim.php" target="_blank">trim</a>函数</p>
 </li>
 <li><p>当数据由其他字符组成(包括字符串<code>"0"</code>和数字<code>0</code>),所有规则均验证通过,返回<code>true</code></p></li>
-</ul><h5>案例:区分<code>all</code>和<code>allOf</code>验证规则</h5>
+</ul>
+
+<h5>案例:区分<code>all</code>和<code>allOf</code>验证规则</h5>
 
 <p>规则说明:</p>
 
@@ -5598,7 +6057,9 @@
 <code>all</code>: 检查<code>数组</code>里的每一项是否符合指定的规则</li>
 <li>
 <code>allOf</code>: 检查数据是否通过所有的规则校验</li>
-</ul><p>它们的区别在于<code>all</code>的检查数据必须是数组,检查的对象是数组里的每一项,<code>allOf</code>可以是任意值</p>
+</ul>
+
+<p>它们的区别在于<code>all</code>的检查数据必须是数组,检查的对象是数组里的每一项,<code>allOf</code>可以是任意值</p>
 
 <p><strong>检查数组里的每一项是否都为数字,并且小于8</strong></p>
 
@@ -5755,11 +6216,13 @@
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$rule</td>
@@ -5782,7 +6245,9 @@
 <td>对象管理器</td>
 </tr>
 </tbody>
-</table><p>如果<code>ruleValid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
+</table>
+
+<p>如果<code>ruleValid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
 <h5>案例</h5>
 
@@ -5818,11 +6283,13 @@
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$rule</td>
@@ -5845,7 +6312,9 @@
 <td>对象管理器</td>
 </tr>
 </tbody>
-</table><p><code>ruleInvalid</code>与<code>ruleValid</code>的行为一致.
+</table>
+
+<p><code>ruleInvalid</code>与<code>ruleValid</code>的行为一致.
 同样的,如果<code>ruleInvalid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
 <h5>案例</h5>
@@ -5882,11 +6351,13 @@
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$rule</td>
@@ -5904,7 +6375,9 @@
 <td>对象管理器</td>
 </tr>
 </tbody>
-</table><p>如果<code>fieldValid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
+</table>
+
+<p>如果<code>fieldValid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
 <h5>案例</h5>
 
@@ -5938,11 +6411,13 @@
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$rule</td>
@@ -5960,7 +6435,9 @@
 <td>对象管理器</td>
 </tr>
 </tbody>
-</table><p>如果<code>fieldInvalid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
+</table>
+
+<p>如果<code>fieldInvalid</code>回调返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
 <h5>案例</h5>
 
@@ -5992,11 +6469,13 @@
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$validator</td>
@@ -6009,7 +6488,9 @@
 <td>对象管理器</td>
 </tr>
 </tbody>
-</table><h5>案例</h5>
+</table>
+
+<h5>案例</h5>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -6037,11 +6518,13 @@
 </code></pre></div>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$validator</td>
@@ -6054,7 +6537,9 @@
 <td>对象管理器</td>
 </tr>
 </tbody>
-</table><h5>案例</h5>
+</table>
+
+<h5>案例</h5>
 
 <div class="highlight"><pre><code class="php"><span class="nx">wei</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -6099,17 +6584,23 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$options</td>
 <td>array</td>
 <td>验证器的选项,完整内容请查看"调用方式"-"选项"章节</td>
-</tr></tbody>
-</table><h4>validate-&gt;addRule($field, $rule, $parameters)</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>validate-&gt;addRule($field, $rule, $parameters)</h4>
 
 <p>为数据项增加新的验证规则</p>
 
@@ -6118,11 +6609,13 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$field</td>
@@ -6140,7 +6633,9 @@
 <td>验证规则的参数</td>
 </tr>
 </tbody>
-</table><h4>validate-&gt;hasRule($field, $rule)</h4>
+</table>
+
+<h4>validate-&gt;hasRule($field, $rule)</h4>
 
 <p>检查数据项是否包含指定的验证规则</p>
 
@@ -6149,11 +6644,13 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$field</td>
@@ -6166,7 +6663,9 @@
 <td>验证规则的名称</td>
 </tr>
 </tbody>
-</table><h4>validate-&gt;removeRule($field, $rule)</h4>
+</table>
+
+<h4>validate-&gt;removeRule($field, $rule)</h4>
 
 <p>删除指定数据项的验证规则</p>
 
@@ -6175,11 +6674,13 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$field</td>
@@ -6192,7 +6693,9 @@
 <td>验证规则的名称</td>
 </tr>
 </tbody>
-</table><h4>validate-&gt;setRules(array $rules)</h4>
+</table>
+
+<h4>validate-&gt;setRules(array $rules)</h4>
 
 <p>设置验证规则</p>
 
@@ -6237,17 +6740,23 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$field</td>
 <td>string</td>
 <td>数据项的名称</td>
-</tr></tbody>
-</table><h4>validate-&gt;setFieldData($field, $value)</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>validate-&gt;setFieldData($field, $value)</h4>
 
 <p>设置要验证的数据项的值</p>
 
@@ -6256,11 +6765,13 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$field</td>
@@ -6273,7 +6784,9 @@
 <td>数据项的值</td>
 </tr>
 </tbody>
-</table><h4>validate-&gt;setMessages($messages)</h4>
+</table>
+
+<h4>validate-&gt;setMessages($messages)</h4>
 
 <p>设置自定义的错误信息</p>
 
@@ -6282,17 +6795,23 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$messages</td>
 <td>array</td>
 <td>错误信息数组</td>
-</tr></tbody>
-</table><h4>validate-&gt;getMessages()</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>validate-&gt;getMessages()</h4>
 
 <p>获取自定义的错误信息</p>
 
@@ -6319,17 +6838,23 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$separator</td>
 <td>string</td>
 <td>合并错误信息数组的分隔符</td>
-</tr></tbody>
-</table><h4>validate-&gt;getFirstMessage()</h4>
+</tr>
+</tbody>
+</table>
+
+<h4>validate-&gt;getFirstMessage()</h4>
 
 <p>获取第一条验证错误信息</p>
 
@@ -6344,11 +6869,13 @@
 <p>参数</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$field</td>
@@ -6361,11 +6888,14 @@
 <td>验证规则的名称</td>
 </tr>
 </tbody>
-</table><h2>相关链接</h2>
+</table>
+
+<h2>相关链接</h2>
 
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isAlnum
@@ -6401,10 +6931,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -6419,7 +6951,9 @@
 <td>%name%不能只由字母(a-z)和数字(0-9)组成</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isAlnum($input)</h4>
 
@@ -6430,6 +6964,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isAlpha
@@ -6465,10 +7000,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -6483,7 +7020,9 @@
 <td>%name%必须不匹配模式"%pattern%"</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isAlpha($input)</h4>
 
@@ -6494,6 +7033,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isBlank
@@ -6529,10 +7069,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>blankMessage</td>
@@ -6543,7 +7085,9 @@
 <td>%name%不能为空</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isBlank($input)</h4>
 
@@ -6555,6 +7099,7 @@
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 <li><a href="#validate">区分required,notBlank和present验证规则</a></li>
 </ul>
+
   </section>
 
 <!-- api/isContains
@@ -6599,12 +7144,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>search</td>
@@ -6619,13 +7166,17 @@
 <td>是否用正则匹配</td>
 </tr>
 </tbody>
-</table><h3>错误信息</h3>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notContainsMessage</td>
@@ -6636,7 +7187,9 @@
 <td>%name%不能包含%search%</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isContains($input, $search, $regex = false)</h4>
 
@@ -6647,6 +7200,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isDecimal
@@ -6681,10 +7235,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -6699,7 +7255,9 @@
 <td>%name%不能是小数</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isDecimal($input)</h4>
 
@@ -6710,6 +7268,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isDigit
@@ -6740,10 +7299,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>patternMessage</td>
@@ -6758,7 +7319,9 @@
 <td>%name%必须是字符串</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isDigit($input)</h4>
 
@@ -6769,6 +7332,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isDivisibleby
@@ -6803,10 +7367,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -6821,7 +7387,9 @@
 <td>%name%不可以被%divisor%整除</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isDivisibleBy($input)</h4>
 
@@ -6832,6 +7400,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isDoubleByte
@@ -6866,10 +7435,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -6884,7 +7455,9 @@
 <td>%name%不能只由双字节字符组成</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isDoubleByte($input)</h4>
 
@@ -6895,6 +7468,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isEndsWith
@@ -6953,12 +7527,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>findMe</td>
@@ -6973,13 +7549,17 @@
 <td>查找时是否区分大小写</td>
 </tr>
 </tbody>
-</table><h3>错误信息</h3>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -6994,7 +7574,9 @@
 <td>%name%不能以%findMe%结尾</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isEndsWith($input, $findMe, $case = false)</h4>
 
@@ -7006,6 +7588,7 @@
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 <li><a href="#isStartsWith">检查数据是否以指定字符串开头:isStartsWith</a></li>
 </ul>
+
   </section>
 
 <!-- api/isIn
@@ -7036,12 +7619,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>array</td>
@@ -7056,13 +7641,17 @@
 <td>是否使用全等(===)进行比较,默认使用等于(==)比较</td>
 </tr>
 </tbody>
-</table><h3>错误信息</h3>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notInMessage</td>
@@ -7073,7 +7662,9 @@
 <td>%name%不能在指定的数据中:%array%</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isIn($input, $array, $strict = false)</h4>
 
@@ -7084,6 +7675,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isLowercase
@@ -7114,12 +7706,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMesssage</td>
@@ -7140,7 +7734,9 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isLowercase($input)</h4>
 
@@ -7151,21 +7747,28 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$input</td>
 <td>string</td>
 <td>要检查的数据</td>
-</tr></tbody>
-</table><h2>相关链接</h2>
+</tr>
+</tbody>
+</table>
+
+<h2>相关链接</h2>
 
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isLuhn
@@ -7216,10 +7819,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -7230,7 +7835,9 @@
 <td>%name%不是有效的数字</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isLuhn($input)</h4>
 
@@ -7241,22 +7848,29 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$input</td>
 <td>string</td>
 <td>要检查的数据</td>
-</tr></tbody>
-</table><h2>相关链接</h2>
+</tr>
+</tbody>
+</table>
+
+<h2>相关链接</h2>
 
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 <li><a href="#isCreditCard">信用卡号验证器:isCreditCard</a></li>
 </ul>
+
   </section>
 
 <!-- api/isNaturalNumber
@@ -7294,7 +7908,9 @@
 <li>商品数量</li>
 <li>容器宽高</li>
 <li>邀请好友数量等</li>
-</ul><h2>调用方式</h2>
+</ul>
+
+<h2>调用方式</h2>
 
 <h3>选项</h3>
 
@@ -7303,15 +7919,21 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>invalidMessage</td>
 <td>%name%必须是大于等于0的整数</td>
-</tr></tbody>
-</table><h3>方法</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>方法</h3>
 
 <h4>isNaturalNumber($input)</h4>
 
@@ -7323,6 +7945,7 @@
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 <li><a href="#isPositiveInteger">检查数据是否为正整数(大于0的整数):isPositiveInteger</a></li>
 </ul>
+
   </section>
 
 <!-- api/isNull
@@ -7351,12 +7974,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notNullMesssage</td>
@@ -7371,7 +7996,9 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isNull($input)</h4>
 
@@ -7382,6 +8009,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isNumber
@@ -7412,12 +8040,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notNumberMessage</td>
@@ -7432,7 +8062,9 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isNumber($input)</h4>
 
@@ -7443,6 +8075,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isPositiveInteger
@@ -7480,7 +8113,9 @@
 <li>加入购物车的商品数量</li>
 <li>用户年龄</li>
 <li>积分、金币数量等</li>
-</ul><h2>调用方式</h2>
+</ul>
+
+<h2>调用方式</h2>
 
 <h3>选项</h3>
 
@@ -7489,15 +8124,21 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>invalidMessage</td>
 <td>%name%必须是大于0的整数</td>
-</tr></tbody>
-</table><h3>方法</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>方法</h3>
 
 <h4>isPositiveInteger($input)</h4>
 
@@ -7509,6 +8150,7 @@
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 <li><a href="#isNaturalNumber">检查数据是否为自然数(大于等于0的整数):isNaturalNumber</a></li>
 </ul>
+
   </section>
 
 <!-- api/isPresent
@@ -7557,10 +8199,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>emptyMessage</td>
@@ -7571,7 +8215,9 @@
 <td>%name%不能为空</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isPresent($input)</h4>
 
@@ -7583,6 +8229,7 @@
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 <li><a href="#validate">区分required,notBlank和present验证规则</a></li>
 </ul>
+
   </section>
 
 <!-- api/isRegex
@@ -7613,12 +8260,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -7639,7 +8288,9 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isRegex($input)</h4>
 
@@ -7650,21 +8301,28 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$input</td>
 <td>string</td>
 <td>要检查的数据</td>
-</tr></tbody>
-</table><h2>相关链接</h2>
+</tr>
+</tbody>
+</table>
+
+<h2>相关链接</h2>
 
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isRequired
@@ -7681,7 +8339,9 @@
 <li>'' (空字符串)</li>
 <li>false</li>
 <li>array() (空数组)</li>
-</ul><h2>案例</h2>
+</ul>
+
+<h2>案例</h2>
 
 <h3>检查null是否为空</h3>
 
@@ -7720,10 +8380,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>requiredMessage</td>
@@ -7734,7 +8396,9 @@
 <td>%name%不合法</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isRequired($input, $required = true)</h4>
 
@@ -7746,6 +8410,7 @@
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 <li><a href="#validate">区分required,notBlank和present验证规则</a></li>
 </ul>
+
   </section>
 
 <!-- api/isStartsWith
@@ -7804,12 +8469,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>findMe</td>
@@ -7824,13 +8491,17 @@
 <td>查找时是否区分大小写</td>
 </tr>
 </tbody>
-</table><h3>错误信息</h3>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -7845,7 +8516,9 @@
 <td>%name%不能以%findMe%开头</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isStartsWith($input, $findMe, $case = false)</h4>
 
@@ -7857,6 +8530,7 @@
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 <li><a href="#isEndsWith">检查数据是否以指定字符串结尾:isEndsWith</a></li>
 </ul>
+
   </section>
 
 <!-- api/isType
@@ -7901,12 +8575,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>type</td>
@@ -7927,15 +8603,19 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><p>如果<code>type</code>的值不在下表中,将检查数据是否为<code>type</code>的实例化对象($input instanceof $type)</p>
+</table>
+
+<p>如果<code>type</code>的值不在下表中,将检查数据是否为<code>type</code>的实例化对象($input instanceof $type)</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>值</th>
 <th>名称</th>
 <th>值</th>
 <th>名称</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>array</td>
@@ -8004,7 +8684,9 @@
 <td>16进制数字</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isType($input, $type)</h4>
 
@@ -8015,6 +8697,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isUppercase
@@ -8045,12 +8728,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -8071,7 +8756,9 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isUppercase($input)</h4>
 
@@ -8082,6 +8769,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isLength
@@ -8136,12 +8824,14 @@
 <h5>选项</h5>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>min</td>
@@ -8174,7 +8864,9 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><div class="highlight"><pre><code class="php"><span class="err">注意</span><span class="o">:</span> <span class="err">当检查的数据是字符串时</span><span class="p">,</span><span class="err">返回的错误信息是</span><span class="sb">`notIn`</span><span class="p">,</span><span class="err">当数据是数组时</span><span class="p">,</span><span class="err">返回的是</span><span class="sb">`notInItem`</span>
+</table>
+
+<div class="highlight"><pre><code class="php"><span class="nx">注意</span><span class="o">:</span> <span class="nx">当检查的数据是字符串时</span><span class="p">,</span><span class="nx">返回的错误信息是</span><span class="sb">`notIn`</span><span class="p">,</span><span class="nx">当数据是数组时</span><span class="p">,</span><span class="nx">返回的是</span><span class="sb">`notInItem`</span>
 </code></pre></div>
 
 <h4>isLength($input, $length)</h4>
@@ -8184,12 +8876,14 @@
 <h5>选项</h5>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>length</td>
@@ -8216,7 +8910,9 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><div class="highlight"><pre><code class="php"><span class="err">注意</span><span class="o">:</span> <span class="err">当检查的数据是字符串时</span><span class="p">,</span><span class="err">返回的错误信息是</span><span class="sb">`length`</span><span class="p">,</span><span class="err">当数据是数组时</span><span class="p">,</span><span class="err">返回的是</span><span class="sb">`lengthItem`</span>
+</table>
+
+<div class="highlight"><pre><code class="php"><span class="nx">注意</span><span class="o">:</span> <span class="nx">当检查的数据是字符串时</span><span class="p">,</span><span class="nx">返回的错误信息是</span><span class="sb">`length`</span><span class="p">,</span><span class="nx">当数据是数组时</span><span class="p">,</span><span class="nx">返回的是</span><span class="sb">`lengthItem`</span>
 </code></pre></div>
 
 <h2>相关链接</h2>
@@ -8224,6 +8920,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isCharLength
@@ -8268,19 +8965,25 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>charset</td>
 <td>string</td>
 <td>UTF-8</td>
 <td>验证数据的字符集</td>
-</tr></tbody>
-</table><h3>方法</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>方法</h3>
 
 <h4>isCharLength($input, $min, $max)</h4>
 
@@ -8289,12 +8992,14 @@
 <h5>选项</h5>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>min</td>
@@ -8309,13 +9014,17 @@
 <td>限制长度的最大值</td>
 </tr>
 </tbody>
-</table><h3>错误信息</h3>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notDetectdMessage</td>
@@ -8326,32 +9035,42 @@
 <td>%name%的长度必须在%min%和%max%之间</td>
 </tr>
 </tbody>
-</table><h4>isCharLength($input, $length)</h4>
+</table>
+
+<h4>isCharLength($input, $length)</h4>
 
 <p>检查数据的字符数是否为指定的数值</p>
 
 <h5>选项</h5>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>length</td>
 <td>int</td>
 <td>无</td>
 <td>指定长度的值</td>
-</tr></tbody>
-</table><h3>错误信息</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notDetectdMessage</td>
@@ -8362,11 +9081,14 @@
 <td>%name%的长度必须是%length%</td>
 </tr>
 </tbody>
-</table><h2>相关链接</h2>
+</table>
+
+<h2>相关链接</h2>
 
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isMaxLength
@@ -8395,26 +9117,34 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>max</td>
 <td>int</td>
 <td>无</td>
 <td>待比较的数值</td>
-</tr></tbody>
-</table><h3>错误信息</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notDetectdMessage</td>
@@ -8437,7 +9167,9 @@
 <td></td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isMaxLength($input, $max)</h4>
 
@@ -8448,6 +9180,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isMinLength
@@ -8478,26 +9211,34 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>max</td>
 <td>int</td>
 <td>无</td>
 <td>待比较的数值</td>
-</tr></tbody>
-</table><h3>错误信息</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notDetectdMessage</td>
@@ -8520,7 +9261,9 @@
 <td></td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isMinLength($input, $min)</h4>
 
@@ -8531,6 +9274,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isEqualTo
@@ -8566,25 +9310,33 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>value</td>
 <td>mixed</td>
 <td>无</td>
 <td>与数据比较的值</td>
-</tr></tbody>
-</table><h3>错误信息</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>invalidMessage</td>
@@ -8595,7 +9347,9 @@
 <td>%name%不能等于%value%</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isEqualTo($input, $value)</h4>
 
@@ -8606,6 +9360,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isIdenticalTo
@@ -8655,25 +9410,33 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>value</td>
 <td>mixed</td>
 <td>无</td>
 <td>与数据比较的值</td>
-</tr></tbody>
-</table><h3>错误信息</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>invalidMessage</td>
@@ -8684,7 +9447,9 @@
 <td>%name%不能等于%value%</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isIdenticalTo($input, $value)</h4>
 
@@ -8695,6 +9460,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isGreaterThan
@@ -8725,25 +9491,33 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>value</td>
 <td>mixed</td>
 <td>无</td>
 <td>待比较的数值</td>
-</tr></tbody>
-</table><h3>错误信息</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>invalidMessage</td>
@@ -8754,7 +9528,9 @@
 <td>%name%不合法</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isGreaterThan($input, $value)</h4>
 
@@ -8765,6 +9541,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isGreaterThanOrEqual
@@ -8795,25 +9572,33 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>value</td>
 <td>mixed</td>
 <td>无</td>
 <td>待比较的数值</td>
-</tr></tbody>
-</table><h3>错误信息</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>invalidMessage</td>
@@ -8824,7 +9609,9 @@
 <td>%name%不合法</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isGreaterThanOrEqual($input, $value)</h4>
 
@@ -8835,6 +9622,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isLessThan
@@ -8865,12 +9653,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>value</td>
@@ -8891,7 +9681,9 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isLessThan($input, $value)</h4>
 
@@ -8902,6 +9694,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isLessThanOrEqual
@@ -8932,25 +9725,33 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>value</td>
 <td>mixed</td>
 <td>无</td>
 <td>待比较的数值</td>
-</tr></tbody>
-</table><h3>错误信息</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>invalidMessage</td>
@@ -8961,7 +9762,9 @@
 <td>%name%必须不小于等于%max%</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isLessThanOrEqual($input, $value)</h4>
 
@@ -8972,6 +9775,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isBetween
@@ -9002,12 +9806,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>min</td>
@@ -9022,13 +9828,17 @@
 <td>用于比较的较大值</td>
 </tr>
 </tbody>
-</table><h3>错误信息</h3>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -9043,7 +9853,9 @@
 <td>%name%不能在%min%到%max%之间</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isBetween($input, $min, $max)</h4>
 
@@ -9054,6 +9866,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isDate
@@ -9112,12 +9925,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>format</td>
@@ -9138,15 +9953,19 @@
 <td>输入的日期应该晚于<code>after</code>的值</td>
 </tr>
 </tbody>
-</table><p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php" target="_blank">date</a>函数的格式说明.</p>
+</table>
+
+<p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php" target="_blank">date</a>函数的格式说明.</p>
 
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -9173,7 +9992,9 @@
 <td>%name%不能是合法的日期</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isDate($input, $format = 'Y-m-d')</h4>
 
@@ -9190,6 +10011,7 @@
 <li><a href="#isDateTime">检查数据是否为合法的日期时间:isDateTime</a></li>
 <li><a href="#isTime">检查数据是否为合法的时间:isTime</a></li>
 </ul>
+
   </section>
 
 <!-- api/isDateTime
@@ -9234,25 +10056,33 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>format</td>
 <td>string</td>
 <td>Y-m-d H:i:s</td>
 <td>日期时间格式</td>
-</tr></tbody>
-</table><h3>错误信息</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -9279,7 +10109,9 @@
 <td>%name%不能是合法的日期</td>
 </tr>
 </tbody>
-</table><p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php" target="_blank">date</a>函数的格式说明. </p>
+</table>
+
+<p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php" target="_blank">date</a>函数的格式说明. </p>
 
 <h3>方法</h3>
 
@@ -9294,6 +10126,7 @@
 <li><a href="#isDate">检查数据是否为合法的日期:isDate</a></li>
 <li><a href="#isTime">检查数据是否为合法的时间:isTime</a></li>
 </ul>
+
   </section>
 
 <!-- api/isTime
@@ -9338,25 +10171,33 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>format</td>
 <td>string</td>
 <td>H:i:s</td>
 <td>日期格式</td>
-</tr></tbody>
-</table><h3>错误信息</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -9383,7 +10224,9 @@
 <td>%name%不能是合法的日期</td>
 </tr>
 </tbody>
-</table><p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php" target="_blank">date</a>函数的格式说明. </p>
+</table>
+
+<p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php" target="_blank">date</a>函数的格式说明. </p>
 
 <h3>方法</h3>
 
@@ -9398,6 +10241,7 @@
 <li><a href="#isDateTime">检查数据是否为合法的日期时间:isDateTime</a></li>
 <li><a href="#isDate">检查数据是否为合法的日期:isDate</a></li>
 </ul>
+
   </section>
 
 <!-- api/isDir
@@ -9432,10 +10276,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -9450,7 +10296,9 @@
 <td>%name%必须是不存在的目录</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isDir($input)</h4>
 
@@ -9463,6 +10311,7 @@
 <li><a href="#isExists">检查文件或目录是否存在:isExists</a></li>
 <li><a href="#isFile">检查文件是否存在:isFile</a></li>
 </ul>
+
   </section>
 
 <!-- api/isExists
@@ -9497,10 +10346,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -9515,7 +10366,9 @@
 <td>%name%必须是不存在的文件或目录</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isExists($input)</h4>
 
@@ -9528,6 +10381,7 @@
 <li><a href="#isDir">检查目录是否存在:isDir</a></li>
 <li><a href="#isFile">检查文件是否存在:isFile</a></li>
 </ul>
+
   </section>
 
 <!-- api/isFile
@@ -9558,12 +10412,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>maxSize</td>
@@ -9602,13 +10458,17 @@
 <td>不允许的文件媒体类型</td>
 </tr>
 </tbody>
-</table><h3>错误信息</h3>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -9651,7 +10511,9 @@
 <td>%name%必须是不存在的文件</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isFile($input, $options)</h4>
 
@@ -9664,13 +10526,16 @@
 <li>数组,确切的说是来自文件上传变量<code>$_FILES</code>的子数组,该数组应该至少包括<code>tmp_name</code>和<code>name</code>两个键</li>
 <li>
 <code>\SplFile</code>对象</li>
-</ol><h2>相关链接</h2>
+</ol>
+
+<h2>相关链接</h2>
 
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 <li><a href="#isDir">检查目录是否存在:isDir</a></li>
 <li><a href="#isExists">检查文件或目录是否存在:isExists</a></li>
 </ul>
+
   </section>
 
 <!-- api/isImage
@@ -9715,12 +10580,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>maxSize</td>
@@ -9783,13 +10650,17 @@
 <td>允许的图片最小高度</td>
 </tr>
 </tbody>
-</table><h3>错误信息</h3>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -9852,7 +10723,9 @@
 <td>%name%的高度太小(%height%px), 允许的最小高度为%minHeight%px</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isImage($input, $options = array())</h4>
 
@@ -9866,6 +10739,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isEmail
@@ -9900,10 +10774,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -9918,7 +10794,9 @@
 <td>%name%不能是数字</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isEmail($input)</h4>
 
@@ -9929,6 +10807,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isIp
@@ -9973,12 +10852,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>ipv4</td>
@@ -10005,13 +10886,17 @@
 <td>是否不允许保留的IP地址</td>
 </tr>
 </tbody>
-</table><h3>错误信息</h3>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notAllowMessage</td>
@@ -10022,7 +10907,9 @@
 <td>%name%不能是IP地址</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isIp($input, $options = array())</h4>
 
@@ -10033,6 +10920,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isTld
@@ -10067,10 +10955,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -10085,7 +10975,9 @@
 <td>%name%不能是有效的顶级域名</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isTld($input)</h4>
 
@@ -10096,6 +10988,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isUrl
@@ -10134,12 +11027,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>path</td>
@@ -10156,13 +11051,17 @@
 </td>
 </tr>
 </tbody>
-</table><h3>错误信息</h3>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -10177,7 +11076,9 @@
 <td>%name%不能是URL地址</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isUrl($input, $options = array())</h4>
 
@@ -10188,6 +11089,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isUuid
@@ -10218,12 +11120,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -10244,7 +11148,9 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isUuid($input)</h4>
 
@@ -10255,6 +11161,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isCreditCard
@@ -10294,26 +11201,34 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>type</td>
 <td>string,array</td>
 <td>无</td>
 <td>指定信用卡类型,多个使用<code>,</code>隔开,或是使用数组,留空表示允许任意信用卡号</td>
-</tr></tbody>
-</table><p>下表为目前允许的信用卡类型</p>
+</tr>
+</tbody>
+</table>
+
+<p>下表为目前允许的信用卡类型</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>发卡机构</th>
 <th>中文名称</th>
 <th>值</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>American Express</td>
@@ -10351,13 +11266,17 @@
 <td><code>Visa</code></td>
 </tr>
 </tbody>
-</table><h3>错误信息</h3>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -10372,7 +11291,9 @@
 <td>%name%不能是有效的信用卡号</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isCreditCard($input, $type = null)</h4>
 
@@ -10384,6 +11305,7 @@
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 <li><a href="#isLuhn">Luhn算法验证器:isLuhn</a></li>
 </ul>
+
   </section>
 
 <!-- api/isPhone
@@ -10428,10 +11350,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -10446,7 +11370,9 @@
 <td>%name%不能是电话号码</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isPhone($input)</h4>
 
@@ -10458,6 +11384,7 @@
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 <li><a href="#isPhoneCn">检查数据是否为有效的中国电话号码:isPhoneCn</a></li>
 </ul>
+
   </section>
 
 <!-- api/isChinese
@@ -10492,10 +11419,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -10510,7 +11439,9 @@
 <td>%name%不能只由中文组成</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isChinese($input)</h4>
 
@@ -10521,6 +11452,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isIdCardCn
@@ -10555,10 +11487,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -10573,7 +11507,9 @@
 <td>%name%不能是有效的中国身份证</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isIdCardCn($input)</h4>
 
@@ -10584,6 +11520,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isIdCardHk
@@ -10618,10 +11555,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -10636,7 +11575,9 @@
 <td>%name%不能是有效的香港身份证</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isIdCardHk($input)</h4>
 
@@ -10647,6 +11588,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isIdCardMo
@@ -10677,12 +11619,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -10703,7 +11647,9 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isIdCardMo($input)</h4>
 
@@ -10714,6 +11660,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isIdCardTw
@@ -10748,10 +11695,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -10766,7 +11715,9 @@
 <td>%name%不能是有效的台湾身份证</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isIdCardTw($input)</h4>
 
@@ -10777,6 +11728,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isPhoneCn
@@ -10807,10 +11759,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -10825,7 +11779,9 @@
 <td>%name%不能是电话号码</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isPhoneCn($input)</h4>
 
@@ -10837,6 +11793,7 @@
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 <li><a href="#isPhone">检查数据是否为通用电话号码:isPhone</a></li>
 </ul>
+
   </section>
 
 <!-- api/isPlateNumberCn
@@ -10886,10 +11843,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>patternMessage</td>
@@ -10904,7 +11863,9 @@
 <td>%name%必须是字符串</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isPlateNumberCn($input)</h4>
 
@@ -10915,6 +11876,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isPostcodeCn
@@ -10945,12 +11907,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -10971,7 +11935,9 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isPostcodeCn($input)</h4>
 
@@ -10982,6 +11948,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isQQ
@@ -11030,10 +11997,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -11048,7 +12017,9 @@
 <td>%name%不能是QQ号码</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isQQ($input)</h4>
 
@@ -11059,6 +12030,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isMobileCn
@@ -11093,10 +12065,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -11107,7 +12081,9 @@
 <td>%name%必须是11位长度的数字,以13,14,15或18开头</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isMobileCn($input)</h4>
 
@@ -11118,6 +12094,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isAllof
@@ -11152,30 +12129,42 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>rules</td>
 <td>array</td>
 <td>-</td>
 <td>验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</td>
-</tr></tbody>
-</table><h3>错误信息</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>atLeastMessage</td>
 <td>%name%必须满足以下所有规则</td>
-</tr></tbody>
-</table><h3>方法</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>方法</h3>
 
 <h4>isAllOf($input, $rules)</h4>
 
@@ -11187,6 +12176,7 @@
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 <li><a href="#validate">区分all和allOf验证规则</a></li>
 </ul>
+
   </section>
 
 <!-- api/isNoneof
@@ -11221,12 +12211,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>rules</td>
@@ -11241,7 +12233,9 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isNoneOf($input, $rules)</h4>
 
@@ -11252,6 +12246,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isOneof
@@ -11286,30 +12281,42 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>rules</td>
 <td>array</td>
 <td>-</td>
 <td>验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</td>
-</tr></tbody>
-</table><h3>错误信息</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>atLeastMessage</td>
 <td>%name%至少需要满足以下任何一条规则</td>
-</tr></tbody>
-</table><h3>方法</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>方法</h3>
 
 <h4>isOneOf($input, $rules)</h4>
 
@@ -11320,6 +12327,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isSomeof
@@ -11355,12 +12363,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>rules</td>
@@ -11381,7 +12391,9 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isSomeOf($input, $rules, $atLeast)</h4>
 
@@ -11392,6 +12404,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isRecordExists
@@ -11454,12 +12467,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>table</td>
@@ -11474,13 +12489,17 @@
 <td>要查找的字段名称</td>
 </tr>
 </tbody>
-</table><h3>错误信息</h3>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notFoundMessage</td>
@@ -11491,7 +12510,9 @@
 <td>%name%已存在</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isRecordExists($input, $table, $field = 'id')</h4>
 
@@ -11502,6 +12523,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isAll
@@ -11535,30 +12557,42 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>rules</td>
 <td>array</td>
 <td>-</td>
 <td>验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</td>
-</tr></tbody>
-</table><h3>错误信息</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>notArrayMessage</td>
 <td>%name%必须是数组</td>
-</tr></tbody>
-</table><h3>方法</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>方法</h3>
 
 <h4>isAll($input, $rules)</h4>
 
@@ -11570,6 +12604,7 @@
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 <li><a href="#validate">区分all和allOf验证规则</a></li>
 </ul>
+
   </section>
 
 <!-- api/isCallback
@@ -11606,27 +12641,35 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>invalidMessage</td>
 <td>%name%不合法</td>
-</tr></tbody>
-</table><h3>方法</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>方法</h3>
 
 <h4>isCallback($input, $fn, $message = null)</h4>
 
 <p>检查数据是否通过指定回调方法验证</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$input</td>
@@ -11647,11 +12690,14 @@
 <td>自定义验证不通过的提示信息</td>
 </tr>
 </tbody>
-</table><h2>相关链接</h2>
+</table>
+
+<h2>相关链接</h2>
 
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isColor
@@ -11686,10 +12732,12 @@
 <h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>notStringMessage</td>
@@ -11704,7 +12752,9 @@
 <td>%name%不能是有效的十六进制颜色</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isColor($input)</h4>
 
@@ -11715,6 +12765,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/isPassword
@@ -11792,17 +12843,21 @@
 <span class="p">));</span>
 </code></pre></div>
 </li>
-</ul><h2>调用方式</h2>
+</ul>
+
+<h2>调用方式</h2>
 
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>minLength</td>
@@ -11842,13 +12897,17 @@
 <td>密码必须包含<code>数字</code>,<code>小写字母</code>,<code>大写字母</code>和<code>非数字字母的其他字符</code>中的几种</td>
 </tr>
 </tbody>
-</table><h3>错误信息</h3>
+</table>
+
+<h3>错误信息</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>信息</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>lengthTooShortMessage</td>
@@ -11867,7 +12926,9 @@
 <td>%name%必须包含%missingType%中的%missingCount%种</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>isPassword($input)</h4>
 
@@ -11878,6 +12939,7 @@
 <ul>
 <li><a href="https://github.com/twinh/wei/tree/master/docs/zh-CN/api/../book/validators.md" target="_blank">验证器概览</a></li>
 </ul>
+
   </section>
 
 <!-- api/request
@@ -11922,12 +12984,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>fromGlobal</td>
@@ -11978,7 +13042,9 @@
 <td>HTTP请求方式</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>request($name, $default = null)</h4>
 
@@ -12039,6 +13105,7 @@
 <h4>request-&gt;isAjax()</h4>
 
 <p>检查当前是否为ajax(XMLHttpRequest)请求</p>
+
   </section>
 
 <!-- api/cookie
@@ -12096,6 +13163,7 @@
 <h4>cookie-&gt;remove($key)</h4>
 
 <p>删除cookie</p>
+
   </section>
 
 <!-- api/session
@@ -12128,12 +13196,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>namespace</td>
@@ -12149,7 +13219,9 @@
 </td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>session($key)</h4>
 
@@ -12186,6 +13258,7 @@
 <h4>session-&gt;toArray();</h4>
 
 <p>获取当前命名空间下所有会话信息</p>
+
   </section>
 
 <!-- api/ua
@@ -12289,6 +13362,7 @@
 <h4>ua-&gt;isIPad()</h4>
 
 <p>检查用户是否使用iPad访问网站</p>
+
   </section>
 
 <!-- api/upload
@@ -12343,12 +13417,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>field</td>
@@ -12580,7 +13656,9 @@
 <td>-</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>upload($options)</h4>
 
@@ -12589,6 +13667,7 @@
 <h4>upload-&gt;getMessages()</h4>
 
 <p>获取错误信息</p>
+
   </section>
 
 <!-- api/response
@@ -12684,7 +13763,7 @@
   <span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">charset</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">http</span><span class="o">-</span><span class="nx">equiv</span><span class="o">=</span><span class="s2">"refresh"</span> <span class="nx">content</span><span class="o">=</span><span class="s2">"&lt;?= </span><span class="si">$wait</span><span class="s2"> ?&gt;;url=&lt;?= </span><span class="si">$escapedUrl</span><span class="s2"> ?&gt;"</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="err">正在跳转到</span> <span class="o">&lt;?=</span> <span class="nv">$escapedUrl</span> <span class="cp">?&gt;</span><span class="x">&lt;/title&gt;</span>
+    <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">正在跳转到</span> <span class="o">&lt;?=</span> <span class="nv">$escapedUrl</span> <span class="cp">?&gt;</span><span class="x">&lt;/title&gt;</span>
 <span class="x">  &lt;/head&gt;</span>
 <span class="x">  &lt;body&gt;</span>
 <span class="x">    &lt;h1&gt;跳转到&lt;a href="</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$escapedUrl</span> <span class="cp">?&gt;</span><span class="x">"&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$escapedUrl</span> <span class="cp">?&gt;</span><span class="x">&lt;/a&gt;&lt;/h1&gt;</span>
@@ -12717,12 +13796,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>version</td>
@@ -12747,12 +13828,6 @@
 <td>string</td>
 <td>无</td>
 <td>HTTP响应内容</td>
-</tr>
-<tr>
-<td>isSent</td>
-<td>bool</td>
-<td>false</td>
-<td>HTTP响应内容是否已发送</td>
 </tr>
 <tr>
 <td>cookieOption</td>
@@ -12791,15 +13866,19 @@
 <td>在发送响应后调用的回调</td>
 </tr>
 </tbody>
-</table><h4>选项: cookieOption</h4>
+</table>
+
+<h4>选项: cookieOption</h4>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>expires</td>
@@ -12838,15 +13917,19 @@
 <td>是否发送为不经过URL解码的cookie</td>
 </tr>
 </tbody>
-</table><h4>选项: downloadOption</h4>
+</table>
+
+<h4>选项: downloadOption</h4>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>filename</td>
@@ -12867,14 +13950,18 @@
 <td>下载的方式,可选项为<code>inline</code>或<code>attachment</code>,如果是<code>inline</code>,浏览器会先尝试直接在浏览器中打开,如果是<code>attachment</code>,浏览器将直接弹出下载对话框</td>
 </tr>
 </tbody>
-</table><h4>回调: beforeSend($response, $content)</h4>
+</table>
+
+<h4>回调: beforeSend($response, $content)</h4>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$response</td>
@@ -12887,32 +13974,42 @@
 <td>发送响应的内容</td>
 </tr>
 </tbody>
-</table><h4>回调: afterSend($response)</h4>
+</table>
+
+<h4>回调: afterSend($response)</h4>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$response</td>
 <td>Wei\Response</td>
 <td>当前HTTP响应对象</td>
-</tr></tbody>
-</table><h3>方法</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>方法</h3>
 
 <h4>response($content, $status = null)</h4>
 
 <p>发送HTTP响应头和响应内容</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$content</td>
@@ -12927,7 +14024,9 @@
 <td>HTTP响应的状态码</td>
 </tr>
 </tbody>
-</table><h4>response-&gt;setContent($content)</h4>
+</table>
+
+<h4>response-&gt;setContent($content)</h4>
 
 <p>设置HTTP响应的内容</p>
 
@@ -12942,10 +14041,6 @@
 <h4>response-&gt;setStatusCode()</h4>
 
 <p>获取HTTP响应的状态码</p>
-
-<h4>response-&gt;isSent()</h4>
-
-<p>检查内容是否已发送</p>
 
 <h4>response-&gt;setSentStatus($bool)</h4>
 
@@ -12970,6 +14065,7 @@
 <h4>response-&gt;redirect($url, $statusCode = 302, $options)</h4>
 
 <p>跳转到指定的网址</p>
+
   </section>
 
 <!-- api/asset
@@ -13067,12 +14163,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>baseUrl</td>
@@ -13087,7 +14185,9 @@
 <td>自动附加到URL结尾的版本号码,如果要关闭,设置为<code>false</code>即可</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>asset($file, $version = true)</h4>
 
@@ -13100,6 +14200,7 @@
 <h4>asset-&gt;setBaseUrl($baseUrl)</h4>
 
 <p>设置资源的基础URL地址</p>
+
   </section>
 
 <!-- api/e
@@ -13170,19 +14271,25 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>encoding</td>
 <td>string</td>
 <td>utf-8</td>
 <td>要转义内容的编码,应该与页面编码一致</td>
-</tr></tbody>
-</table><h3>方法</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>方法</h3>
 
 <h4>e($input, $type = 'html')</h4>
 
@@ -13207,6 +14314,7 @@
 <h4>e-&gt;url($input)</h4>
 
 <p>转义URL字符串</p>
+
   </section>
 
 <!-- api/view
@@ -13289,12 +14397,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>vars</td>
@@ -13315,7 +14425,9 @@
 <td>默认的模板扩展名</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>view($name, $vars = array())</h4>
 
@@ -13348,6 +14460,7 @@
 <h4>view-&gt;setDirs($dirs)</h4>
 
 <p>设置模板所在的目录</p>
+
   </section>
 
 <!-- api/app
@@ -13368,7 +14481,9 @@
 <ol>
 <li>检查类"yyy"是否存在</li>
 <li>检查类是否设置了自动加载</li>
-</ol><p>链接: <a href="#wei">设置类自动加载</a></p>
+</ol>
+
+<p>链接: <a href="#wei">设置类自动加载</a></p>
 
 <h3>提示"action method "xxx" not found in controller "xxx" (class "xxx")"的解决方法</h3>
 
@@ -13378,7 +14493,9 @@
 </li>
 <li><strong>检查方法名称和action名称的大小写是否一致</strong></li>
 <li>检查方法名称是否不以下划线"_"开头</li>
-</ol><p>如下控制器,假设访问 <a href="http://example.com/index/index" target="_blank">http://example.com/index/index</a> 即调用<code>Controller\Index</code>类的<code>index</code>方法.</p>
+</ol>
+
+<p>如下控制器,假设访问 <a href="http://example.com/index/index" target="_blank">http://example.com/index/index</a> 即调用<code>Controller\Index</code>类的<code>index</code>方法.</p>
 
 <div class="highlight"><pre><code class="php"><span class="k">namespace</span> <span class="nx">Controller</span><span class="p">;</span>
 
@@ -13409,10 +14526,12 @@
 <p>访问以下路径均会提示action不存在.</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>地址</th>
 <th>原因</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>/index/notFound</td>
@@ -13431,17 +14550,21 @@
 <td>方法<code>__construct</code>以下划线开头,不允许访问</td>
 </tr>
 </tbody>
-</table><h2>调用方式</h2>
+</table>
+
+<h2>调用方式</h2>
 
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>controllerFormat</td>
@@ -13462,7 +14585,9 @@
 <td>默认的行为名称</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>app($options)</h4>
 
@@ -13499,6 +14624,7 @@
 <h4>app-&gt;forward($action, $controller = null)</h4>
 
 <p>中断当前的应用逻辑,并跳转到指定的控制器和行为</p>
+
   </section>
 
 <!-- api/config
@@ -13588,6 +14714,7 @@
 <h4>config-&gt;toOptions($name)</h4>
 
 <p>转换配置为HTML下拉菜单选项</p>
+
   </section>
 
 <!-- api/counter
@@ -13651,6 +14778,7 @@
 <h4>counter-&gt;remove($key)</h4>
 
 <p>移除一个计数器</p>
+
   </section>
 
 <!-- api/env
@@ -13690,12 +14818,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>env</td>
@@ -13722,7 +14852,9 @@
 <td>配置环境的目录,<code>%env%</code>会替换成当前的环境名称</td>
 </tr>
 </tbody>
-</table><h4>环境名称的检测顺序</h4>
+</table>
+
+<h4>环境名称的检测顺序</h4>
 
 <ol>
 <li>如果用户设置了<code>env</code>选项,使用<code>env</code>作为环境名称</li>
@@ -13730,7 +14862,9 @@
 <li>如果返回值为<code>false</code>继续到第4步,否则将返回值作为环境名称</li>
 <li>如果当前的服务器IP地址在<code>ipMap</code>的键名之中,使用对应的值作为环境名称</li>
 <li>使用<code>prod</code>作为环境名称</li>
-</ol><h3>方法</h3>
+</ol>
+
+<h3>方法</h3>
 
 <h4>env()</h4>
 
@@ -13763,6 +14897,7 @@
 <h4>env-&gt;getName()</h4>
 
 <p>获取当前环境名称</p>
+
   </section>
 
 <!-- api/error
@@ -13791,12 +14926,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>message</td>
@@ -13823,7 +14960,9 @@
 <td>是否忽略已有的异常处理器</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>error($fn)</h4>
 
@@ -13832,11 +14971,13 @@
 <p>处理器的参数如下表.</p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>$exception</td>
@@ -13849,13 +14990,16 @@
 <td>对象管理器</td>
 </tr>
 </tbody>
-</table><h3>error-&gt;notFound($fn)</h3>
+</table>
+
+<h3>error-&gt;notFound($fn)</h3>
 
 <p>设置404的错误处理器</p>
 
 <h3>error-&gt;fatal($fn)</h3>
 
 <p>设置Fatal错误的处理器</p>
+
   </section>
 
 <!-- api/gravatar
@@ -13907,12 +15051,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>default</td>
@@ -13945,7 +15091,9 @@
 <td>自定义的大头像图片大小</td>
 </tr>
 </tbody>
-</table><h3>方法</h3>
+</table>
+
+<h3>方法</h3>
 
 <h4>gravatar($email, $size = null, $default = null, $rating = null)</h4>
 
@@ -13958,6 +15106,7 @@
 <h4>gravatar-&gt;large($email, $default = null, $rating = null)</h4>
 
 <p>根据邮箱地址生成较大尺寸(200px)的Gravatar头像</p>
+
   </section>
 
 <!-- api/lock
@@ -13975,7 +15124,9 @@
 <li>限制用户只能领取一个礼包</li>
 <li>对用户增加或减少积分</li>
 <li>限制用户只能购买一件商品</li>
-</ul><h3>对耗时较长的请求进行加锁,防止重复操作</h3>
+</ul>
+
+<h3>对耗时较长的请求进行加锁,防止重复操作</h3>
 
 <p>在一些耗时长的请求(如提交表单,上传文件,实时发送邮件等),可以通过加锁防止重复提交,导致数据重复.</p>
 
@@ -14049,6 +15200,7 @@
 <h4>lock-&gt;releaseAll()</h4>
 
 <p>释放当前请求所有的锁</p>
+
   </section>
 
 <!-- api/logger
@@ -14132,7 +15284,7 @@
 <div class="highlight"><pre><code class="php"><span class="p">[</span><span class="mo">05</span><span class="o">:</span><span class="mi">58</span><span class="o">:</span><span class="mi">10</span><span class="p">]</span> <span class="nx">DEBUG</span><span class="o">:</span> <span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="nx">code</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
-    <span class="p">[</span><span class="nx">message</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="err">操作成功</span>
+    <span class="p">[</span><span class="nx">message</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">操作成功</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -14141,12 +15293,14 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>name</td>
@@ -14215,14 +15369,18 @@
 <td>附加到每条日志的默认内容,如用户IP地址,请求URL地址等</td>
 </tr>
 </tbody>
-</table><h4>日志等级及使用场景</h4>
+</table>
+
+<h4>日志等级及使用场景</h4>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>级别</th>
 <th>使用场景</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr>
 <td>debug</td>
@@ -14255,7 +15413,9 @@
 <td>必须马上处理的情况,如网站打不开,数据库连不上,这种情况下应该发送短信通知你处理!</td>
 </tr>
 </tbody>
-</table><p>日志等级及说明来自于<a href="https://github.com/Seldaek/monolog" target="_blank">Monolog</a> </p>
+</table>
+
+<p>日志等级及说明来自于<a href="https://github.com/Seldaek/monolog" target="_blank">Monolog</a> </p>
 
 <p>除了上面之外,还有notice和emergency级别,因不推荐使用,且为避免混淆,不一一详细说明.</p>
 
@@ -14312,6 +15472,7 @@
 <h4>logger-&gt;clean()</h4>
 
 <p>删除日志目录下的所有文件(注意谨慎使用)</p>
+
   </section>
 
 <!-- api/password
@@ -14378,19 +15539,25 @@
 <h3>选项</h3>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>默认值</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>cost</td>
 <td>int</td>
 <td>10</td>
 <td>加密算法递归的层数,应该在4~32之间</td>
-</tr></tbody>
-</table><h3>方法</h3>
+</tr>
+</tbody>
+</table>
+
+<h3>方法</h3>
 
 <h4>password-&gt;hash($password, $salt = null)</h4>
 
@@ -14424,6 +15591,7 @@
 <li>兼容PHP5.5以下的密码加密函数 <a href="https://github.com/ircmaxell/password_compat" target="_blank">https://github.com/ircmaxell/password_compat</a>
 </li>
 </ul>
+
   </section>
 
 <!-- api/pinyin
@@ -14458,17 +15626,22 @@
 <p><strong>参数</strong></p>
 
 <table class="table table-bordered table-striped">
-<thead><tr>
+<thead>
+<tr>
 <th>名称</th>
 <th>类型</th>
 <th>说明</th>
-</tr></thead>
-<tbody><tr>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>$word</td>
 <td>string</td>
 <td>要转换的中文字符</td>
-</tr></tbody>
+</tr>
+</tbody>
 </table>
+
   </section>
 
 <!-- api/uuid
@@ -14499,6 +15672,7 @@
 <p>生成一个随机的UUID</p>
 
 <p>生成的UUID可用于数据表主键,相比通过SQL语句<code>SELECT UUID</code>生成的UUID要快很多,而且调用更加方便.</p>
+
   </section>
 
 <!-- api/phpError
@@ -14538,6 +15712,7 @@
 <h4>phpError()</h4>
 
 <p>获取\php_error\ErrorHandler对象</p>
+
   </section>
 
 </div><!-- /.container -->
