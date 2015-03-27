@@ -211,28 +211,13 @@ class AppTest extends TestCase
         $this->app->dispatch('test', 'parameter', array('id' => '1'));
     }
 
-    public function testActionStartWithUnderscore()
-    {
-        $this->setExpectedException(
-            'RuntimeException',
-            implode("\n", array(
-                'The page you requested was not found',
-                ' - action method "show" not found in controller "test"'
-            )),
-            '404'
-        );
-
-        $this->request->setPathInfo('test/_action');
-        $this->app();
-    }
-
     public function testActionIsProtected()
     {
         $this->setExpectedException(
             'RuntimeException',
             implode("\n", array(
                 'The page you requested was not found',
-                ' - action method "show" not found in controller "test"'
+                ' - method "showAction" not found in controller "test"'
             )),
             '404'
         );
@@ -255,7 +240,7 @@ class AppTest extends TestCase
             'RuntimeException',
             implode("\n", array(
                 'The page you requested was not found',
-                ' - action method "show" not found in controller "test"'
+                ' - method "showAction" not found in controller "test"'
             )),
             '404'
         );
@@ -313,7 +298,7 @@ class AppTest extends TestCase
             'RuntimeException',
             implode("\n", array(
                 'The page you requested was not found',
-                ' - action method "notFound" not found in controller "test" (class "WeiTest\Fixtures\app\controllers\Test")'
+                ' - method "notFoundAction" not found in controller "test" (class "WeiTest\Fixtures\app\controllers\Test")'
             )),
             404
         );

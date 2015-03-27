@@ -176,8 +176,9 @@ class App extends Base
                 $detail && $message .= sprintf(' (class "%s")', implode($classes, '", "'));
             }
             foreach ($notFound['actions'] as $action => $controllers) {
+                $method = $this->getActionMethod($action);
                 foreach ($controllers as $controller => $classes) {
-                    $message .= sprintf('%s - action method "%s" not found in controller "%s"', "\n", $action, $controller);
+                    $message .= sprintf('%s - method "%s" not found in controller "%s"', "\n", $method, $controller);
                     $detail && $message .= sprintf(' (class "%s")', implode($classes, '", "'));
                 }
             }
@@ -201,7 +202,7 @@ class App extends Base
         $middleware = $this->getMiddleware($instance, $action);
 
         $callback = function () use ($instance, $action, $app) {
-            $method = $action . 'Action';
+            $method = $app->getActionMethod($action);
             $response = $instance->$method($app->request, $app->response);
             return $app->handleResponse($response);
         };
@@ -342,6 +343,11 @@ class App extends Base
         return $this;
     }
 
+    public function getActionMethod($action)
+    {
+        return $action . 'Action';
+    }
+
     /**
      * Returns the URI that contains controller and action
      *
@@ -422,7 +428,7 @@ class App extends Base
      */
     public function isActionAvailable($object, $action)
     {
-        $method = $action . 'Action';
+        $method = $this->getActionMethod($action);
         try {
             $ref = new \ReflectionMethod($object, $method);
             if ($ref->isPublic() && $method === $ref->name) {
