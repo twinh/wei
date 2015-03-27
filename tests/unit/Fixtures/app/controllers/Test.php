@@ -4,38 +4,38 @@ namespace WeiTest\Fixtures\app\controllers;
 
 class Test extends \Wei\BaseController
 {
-    public function test()
+    public function testAction()
     {
         return 'test';
     }
 
-    public function returnArray()
+    public function returnArrayAction()
     {
         return array(
             'key' => 'value'
         );
     }
 
-    public function returnResponse()
+    public function returnResponseAction()
     {
         $this->response->setContent('response content');
 
         return $this->response;
     }
 
-    public function returnUnexpectedType()
+    public function returnUnexpectedTypeAction()
     {
         return new \stdClass();
     }
 
-    public function dispatchBreak()
+    public function dispatchBreakAction()
     {
-        $this->doSomethingNotInActions();
+        $this->doSomethingNotInActionsAction();
 
         throw new \RuntimeException('You can\'t see me');
     }
 
-    public function doSomethingNotInActions()
+    public function doSomethingNotInActionsAction()
     {
         echo 'stop';
 
@@ -44,62 +44,57 @@ class Test extends \Wei\BaseController
         throw new \RuntimeException('You can\'t see me too');
     }
 
-    public function forwardAction()
+    public function forwardActionAction()
     {
         return $this->app->forward('forward', 'target');
     }
 
-    public function forwardController()
+    public function forwardControllerAction()
     {
         return $this->app->forward('forward');
     }
 
-    public function target()
+    public function targetAction()
     {
         return 'target';
     }
 
-    public function returnInt()
+    public function returnIntAction()
     {
         return 123;
     }
 
-    public function returnNull()
+    public function returnNullAction()
     {
         return null;
     }
 
-    public function returnFloat()
+    public function returnFloatAction()
     {
         return 1.1;
     }
 
-    public function returnTrue()
+    public function returnTrueAction()
     {
         return true;
     }
 
-    public function returnFalse()
+    public function returnFalseAction()
     {
         return false;
     }
 
-    public function parameter($req, $res)
+    public function parameterAction($req, $res)
     {
         return $req['id'];
     }
 
-    public function _action()
+    public function _actionAction()
     {
         throw new \Exception('Never call me');
     }
 
-    protected function protect()
-    {
-        throw new \Exception('Never call me');
-    }
-
-    public function caseInsensitive()
+    public function caseInsensitiveAction()
     {
         return __FUNCTION__;
     }

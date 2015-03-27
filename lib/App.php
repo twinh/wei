@@ -176,8 +176,9 @@ class App extends Base
                 $detail && $message .= sprintf(' (class "%s")', implode($classes, '", "'));
             }
             foreach ($notFound['actions'] as $action => $controllers) {
+                $method = $this->getActionMethod($action);
                 foreach ($controllers as $controller => $classes) {
-                    $message .= sprintf('%s - action method "%s" not found in controller "%s"', "\n", $action, $controller);
+                    $message .= sprintf('%s - method "%s" not found in controller "%s"', "\n", $method, $controller);
                     $detail && $message .= sprintf(' (class "%s")', implode($classes, '", "'));
                 }
             }
@@ -201,7 +202,8 @@ class App extends Base
         $middleware = $this->getMiddleware($instance, $action);
 
         $callback = function () use ($instance, $action, $app) {
-            $response = $instance->$action($app->request, $app->response);
+            $method = $app->getActionMethod($action);
+            $response = $instance->$method($app->request, $app->response);
             return $app->handleResponse($response);
         };
 
@@ -341,6 +343,11 @@ class App extends Base
         return $this;
     }
 
+    public function getActionMethod($action)
+    {
+        return $action . 'Action';
+    }
+
     /**
      * Returns the URI that contains controller and action
      *
@@ -414,7 +421,6 @@ class App extends Base
      * 1. method is not found
      * 2. method is not public
      * 3. method letters case error
-     * 4. method is starts with "_"
      *
      * @param object $object The object of controller
      * @param string $action The name of action
@@ -422,9 +428,10 @@ class App extends Base
      */
     public function isActionAvailable($object, $action)
     {
+        $method = $this->getActionMethod($action);
         try {
-            $ref = new \ReflectionMethod($object, $action);
-            if ($ref->isPublic() && $action === $ref->name && $action[0] !== '_') {
+            $ref = new \ReflectionMethod($object, $method);
+            if ($ref->isPublic() && $method === $ref->name) {
                 return true;
             } else {
                 return false;

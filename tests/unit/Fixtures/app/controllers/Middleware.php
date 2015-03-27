@@ -32,32 +32,32 @@ class Middleware extends \Wei\BaseController
         $this->middleware('WeiTest\Fixtures\app\middleware\Stack3', array('only' => 'stack'));
     }
 
-    public function only()
+    public function onlyAction()
     {
         return 'only';
     }
 
-    public function except()
+    public function exceptAction()
     {
         return 'except';
     }
 
-    public function before()
+    public function beforeAction()
     {
         return 'before';
     }
 
-    public function after()
+    public function afterAction()
     {
         return 'after';
     }
 
-    public function around()
+    public function aroundAction()
     {
         return 'around';
     }
 
-    public function stack()
+    public function stackAction()
     {
         return $this->response->setContent($this->response->getContent() . 'stack');
     }
