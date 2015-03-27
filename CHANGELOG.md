@@ -1,6 +1,17 @@
 Changelog
 =========
 
+## 0.9.17 (2015-03-27)
+
+* Request: 修复当URL地址包含端口时,getHost返回值错误, refs b5478fc
+* Url: 修复生成查询地址错误, refs d7cd2aa
+* Request: 控制返回的HTTP方法为大写, refs b70df92
+* Test: 升级PHPUnit到4.5, refs e124661
+* Router: 重构路由器服务,支持解析Path info为多组controller和action参数 #178
+* App: 重构应用服务,支持传入多组controller和action参数,并查找存在的一组作为当前应用运行 #178
+* Middleware: App服务支持中间件,可以用来控制用户登录,限制IP,CSRF保护等 #178
+* 更新演示代码, refs 16fc1ab
+
 ## 0.9.16 (2015-01-29)
 
 * Logger: Changed property "name" to "namespace", refs f1ac3e0

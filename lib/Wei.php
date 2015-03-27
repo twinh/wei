@@ -265,7 +265,7 @@ namespace Wei
         /**
          * Version
          */
-        const VERSION = '0.9.16';
+        const VERSION = '0.9.17';
 
         /**
          * The configurations for all objects
