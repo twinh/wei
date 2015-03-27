@@ -343,6 +343,12 @@ class App extends Base
         return $this;
     }
 
+    /**
+     * Returns the method name of specified acion
+     *
+     * @param string $action
+     * @return string
+     */
     public function getActionMethod($action)
     {
         return $action . 'Action';
