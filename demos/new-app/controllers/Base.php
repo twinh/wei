@@ -1,12 +1,12 @@
 <?php
 
-namespace Controller;
+namespace controllers;
 
 /**
  * @property    \Wei\Request $request
  * @property    \Wei\Response $response
  */
-abstract class Base extends \Wei\Base
+abstract class Base extends \Wei\BaseController
 {
 
 }

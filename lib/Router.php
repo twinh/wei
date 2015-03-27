@@ -13,9 +13,7 @@ namespace Wei;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        The code is inspired by the awesome framework - Kohana
- *              http://kohanaframework.org/3.0/guide/api/Kohana_Route
- * @property    Request $request A service that handles the HTTP request data
- * @method      Response response(string $content) Send response header and content
+ *               http://kohanaframework.org/3.0/guide/api/Kohana_Route
  */
 class Router extends Base
 {
@@ -37,7 +35,6 @@ class Router extends Base
      * rules    | array    | The regex rules
      * defaults | array    | The defaults params of the route
      * method   | string   | The required request method of the route
-     * callback | callable | The callback execute when the route is matched
      * regex    | string   | The regex complied from the pattern, just leave it blank when set a new route
      */
     protected $routeOptions = array(
@@ -45,37 +42,87 @@ class Router extends Base
         'rules'     => array(),
         'defaults'  => array(),
         'method'    => null,
-        'callback'  => null,
         'regex'     => null,
     );
 
     /**
-     * Run the application
+     * The string to split out at the beginning of path
+     *
+     * @var array
      */
-    public function __invoke($pathInfo = null, $method = null)
-    {
-        if (0 === func_num_args()) {
-            $request = $this->request;
-            $pathInfo = $request->getPathInfo();
-            $method = $request->getMethod();
-        }
+    protected $namespaces = array('admin', 'api');
 
-        if (false !== ($parameters = $this->match($pathInfo, $method))) {
-            $route = $this->router->getRoute($parameters['_id']);
-            unset($parameters['_id']);
+    /**
+     * The string to split out after namespace string
+     *
+     * @var array
+     */
+    protected $scopes = array('user');
 
-            // Merge parameters to request query parameters
-            $query = $this->request->getParameterReference('get');
-            $query += $parameters;
+    /**
+     * The resources that contains "/", eg articles/categories, products/categories, issues/comments.
+     *
+     * @var array
+     */
+    protected $combinedResources = array();
 
-            array_unshift($parameters, $this->wei);
-            $result = call_user_func_array($route['callback'], $parameters);
+    /**
+     * @var string
+     */
+    protected $defaultController = 'index';
 
-            return $this->response($result);
-        } else {
-            throw new \RuntimeException('The page you requested was not found', 404);
-        }
-    }
+    /**
+     * @var string
+     */
+    protected $defaultAction = 'index';
+
+    /**
+     * An array contains the HTTP method and action name
+     *
+     * @var array
+     */
+    protected $methodToAction = array(
+        'GET-collection' => 'index',
+        'GET' => 'show',
+        'POST' => 'create',
+        'PATCH' => 'update',
+        'PUT' => 'update',
+        'DELETE' => 'destroy'
+    );
+
+    /**
+     * Singular inflector rules
+     *
+     * @var array
+     */
+    protected $singularRules = array(
+        '/(o|x|ch|ss|sh)es$/i' => '\1', // heroes, potatoes, tomatoes
+        '/([^aeiouy]|qu)ies$/i' => '\1y', // histories
+        '/s$/i' => '',
+    );
+
+    /**
+     * The plural to singular array
+     *
+     * @var array
+     */
+    protected $singulars = array(
+        'aliases' => 'alias',
+        'analyses' => 'analysis',
+        'buses' => 'bus',
+        'children' => 'child',
+        'cookies' => 'cookie',
+        'criteria' => 'criterion',
+        'data' => 'datum',
+        'lives' => 'life',
+        'matrices' => 'matrix',
+        'men' => 'man',
+        'menus' => 'menu',
+        'monies' => 'money',
+        'news' => 'news',
+        'people' => 'person',
+        'quizzes' => 'quiz',
+    );
 
     /**
      * Set routes
@@ -112,8 +159,8 @@ class Router extends Base
     {
         if (is_string($route)) {
             $this->routes[] = array(
-                'pattern' => $route
-            ) + $this->routeOptions;
+                    'pattern' => $route
+                ) + $this->routeOptions;
         } elseif (is_array($route)) {
             $this->routes[] = $route + $this->routeOptions;
         } else {
@@ -202,6 +249,20 @@ class Router extends Base
     }
 
     /**
+     * Parse the path info to parameter set
+     *
+     * @param  string $pathInfo    The path info to match
+     * @param  string|null $method The request method to match, maybe GET, POST, etc
+     * @return array
+     */
+    public function matchParamSet($pathInfo, $method = 'GET')
+    {
+        $params = $this->match($pathInfo, $method);
+        $restParams = $this->matchRestParamSet($pathInfo, $method);
+        return $params ? array_merge(array($params), $restParams) : $restParams;
+    }
+
+    /**
      * Check if the route matches the path info and method,
      * and return the parameters, or return false when not matched
      *
@@ -246,126 +307,209 @@ class Router extends Base
     }
 
     /**
-     * Build params to query string
+     * Parse the path info to multi REST parameters
      *
-     * @param array $parameters The array params to combine
-     * @return string
+     * @param string $path
+     * @param string $method
+     * @return array
      */
-    protected function buildQuery($parameters)
+    public function matchRestParamSet($path, $method = 'GET')
     {
-        return $parameters ? '?' . http_build_query($parameters) : '';
-    }
+        $rootCtrl = '';
+        $params = array();
+        $routes = array();
 
-    /**
-     * @param array $parameters
-     * @param string $id
-     * @return bool|string
-     */
-    protected function buildPath($parameters, $id)
-    {
-        $defaults = $this->routes[$id]['defaults'];
-        $pattern = $this->routes[$id]['pattern'];
+        // Split out format
+        if (strpos($path, '.') !== false) {
+            $params['_format'] = pathinfo($path, PATHINFO_EXTENSION);
+            $path = substr($path, 0, - strlen($params['_format']) - 1);
+        }
 
-        // Static route
-        if (false === strpos($pattern, '<') && false === strpos($pattern, '(')) {
-            // Check if $parameters contains all of the route default params
-            $intersect = array_intersect_assoc($parameters, $defaults);
-            if ($defaults == $intersect) {
-                return $pattern . $this->buildQuery(array_diff_assoc($parameters, $defaults));
+        $parts = $this->parsePath($path);
+
+        // Split out namespace
+        if (count($parts) > 1 && in_array($parts[0], $this->namespaces)) {
+            $rootCtrl .= array_shift($parts) . '/';
+        }
+
+        // Split out scope
+        if (count($parts) > 1 && in_array($parts[0], $this->scopes)) {
+            $rootCtrl .= array_shift($parts) . '/';
+        }
+
+        $baseCtrl = $rootCtrl;
+
+        // The first parameter must be controller name,
+        // the second parameter may be action name or id, eg posts/show, posts/1
+        // the last parameter may be controller name or action name or null, eg posts/1/comments, posts/1/edit
+        $lastParts = array_pad(array_splice($parts, count($parts) % 2 == 0 ? -2 : -3), 3, null);
+        list($ctrl, $actOrId, $ctrlOrAct) = $lastParts;
+
+        // Generate part of controller name and query parameters
+        $count = count($parts);
+        for ($i = 0; $i < $count; $i += 2) {
+            $baseCtrl .= $parts[$i] . '/';
+            $params[$this->singularize($parts[$i]) . 'Id'] = $parts[$i + 1];
+        }
+
+        if (is_null($actOrId)) {
+            // GET|POST|... /, GET|POST|... posts
+            $routes[] = array(
+                'controller' => $baseCtrl . ($ctrl ?: $this->defaultController),
+                'action' => $this->methodToAction($method, true),
+            );
+        } elseif (is_null($ctrlOrAct)) {
+            // GET posts/show
+            if ($this->isAction($actOrId)) {
+                $routes[] = array(
+                    'controller' => $baseCtrl . $ctrl,
+                    'action' => $actOrId,
+                );
             }
 
-            return false;
+            // GET|PUT|... posts/1
+            $routes[] = array(
+                'controller' => $baseCtrl . $ctrl,
+                'action' => $this->methodToAction($method),
+                'id' => $actOrId
+            );
+
+            // GET posts/1/comment/new => comment::new postId=1
+            if ($count >= 2 && $this->isAction($actOrId)) {
+                $routes[] = array(
+                    'controller' => $rootCtrl . $ctrl,
+                    'action' => $actOrId,
+                );
+            }
         } else {
-            $route = $this->compile($this->routes[$id]);
+            // GET posts/1/edit
+            $routes[] = array(
+                'controller' => $baseCtrl . $ctrl,
+                'action' => $ctrlOrAct,
+                'id' => $actOrId
+            );
 
-            $isMatched = false;
+            // GET|PUT|... posts/1/comments
+            $routes[] = array(
+                'controller' => $baseCtrl . $ctrl . '/' . $ctrlOrAct,
+                'action' => $this->methodToAction($method, true),
+                $this->singularize($ctrl) . 'Id' => $actOrId,
+            );
 
-            // Search the minimal optional parts
-            while (preg_match('#\([^()]++\)#', $pattern, $match)) {
-                // Search for the matched value
-                $search = $match[0];
-
-                // Remove the parenthesis from the match as the replace
-                $replace = substr($match[0], 1, -1);
-
-                // Search the required parts in the optional parts
-                while (preg_match('#<([a-zA-Z0-9_]++)>#', $replace, $match)) {
-                    list($key, $param) = $match;
-
-                    if (isset($parameters[$param])) {
-                        if (isset($route['rules'][$param])) {
-                            // The parameter not matched the rules
-                            if (!preg_match('#' . $route['rules'][$param] . '#', $parameters[$param])) {
-                                return false;
-                            }
-                        }
-
-                        // Replace the key with the parameter value
-                        $replace = str_replace($key, ($parameters[$param]), $replace);
-
-                        $isMatched = true;
-
-                        unset($parameters[$param]);
-                    } else {
-                        // This group has missing parameters
-                        $replace = '';
-                        break;
-                    }
-                }
-
-                // Replace the group in the pattern
-                $pattern = str_replace($search, $replace, $pattern);
-            }
-
-            if ('' === $pattern) {
-                return false;
-            }
-
-            // Search the required parts NOT in the optional parts
-            while (preg_match('#<([a-zA-Z0-9_]++)>#', $pattern, $match)) {
-                list($key, $param) = $match;
-
-                // Required route parameter not passed
-                if (!isset($parameters[$param])) {
-                    return false;
-                }
-
-                // Check if parameter value matches the regex rule
-                if (isset($route['rules'][$param])) {
-                    if (!preg_match('#' . $route['rules'][$param] . '#', $parameters[$param])) {
-                        return false;
-                    }
-                }
-
-                $pattern = str_replace($key, ($parameters[$param]), $pattern);
-
-                $isMatched = true;
-
-                unset($parameters[$param]);
-            }
-
-            // If nothing matched
-            if (!$isMatched && '' === $pattern) {
-                return false;
-            }
-
-            return $pattern . $this->buildQuery(array_diff_assoc($parameters, $defaults));
+            // GET|PUT|... posts/1/comments, use the last parameter as main controller name
+            $routes[] = array('controller' => $ctrlOrAct) + $routes[1];
         }
+
+        foreach ($routes as &$route) {
+            $route['controller'] = $this->camelize($route['controller']);
+            $route['action'] = $this->camelize($route['action']);
+            $route += $params;
+        }
+        return $routes;
     }
 
     /**
-     * Generate url path from the specified array
+     * Parse path to resource names, actions and ids
      *
-     * @param  array $parameters
-     * @return string
+     * @param string $path
+     * @return array
      */
-    public function generatePath(array $parameters)
+    protected function parsePath($path)
     {
-        foreach ($this->routes as $id => $route) {
-            if (false !== ($uri = $this->buildPath($parameters, $id))) {
-                return $uri;
+        $path = ltrim($path, '/');
+        foreach ($this->combinedResources as $resource) {
+            if (strpos($path, $resource) !== false) {
+                list($part1, $part2) = explode($resource, $path, 2);
+                $parts = array_merge(explode('/', $part1), array($resource), explode('/', $part2));
+                return array_values(array_filter($parts));
             }
         }
-        return $this->buildQuery($parameters);
+        return explode('/', $path);
+    }
+
+    /**
+     * Set combined resources
+     *
+     * @param array $combinedResources
+     * @return $this
+     */
+    public function setCombinedResources(array $combinedResources)
+    {
+        $this->combinedResources += $combinedResources;
+        return $this;
+    }
+
+    /**
+     * Append words to singulars
+     *
+     * @param array $singulars
+     * @return $this
+     */
+    public function setSingulars(array $singulars)
+    {
+        $this->singulars += $this->singulars;
+        return $this;
+    }
+
+    /**
+     * Returns a word in singular form.
+     *
+     * The implementation is borrowed from Doctrine Inflector
+     *
+     * @param string $word
+     * @return string
+     * @link https://github.com/doctrine/inflector
+     */
+    protected function singularize($word)
+    {
+        if (isset($this->singulars[$word])) {
+            return $this->singulars[$word];
+        }
+
+        foreach ($this->singularRules as $rule => $replacement) {
+            if (preg_match($rule, $word)) {
+                $this->singulars[$word] = preg_replace($rule, $replacement, $word);
+                return $this->singulars[$word];
+            }
+        }
+
+        $this->singulars[$word] = $word;
+        return $word;
+    }
+
+    /**
+     * Camelizes a word
+     *
+     * @param string $word The word to camelize.
+     *
+     * @return string The camelized word.
+     */
+    protected function camelize($word)
+    {
+        return lcfirst(str_replace(' ', '', ucwords(strtr($word, '_-', '  '))));
+    }
+
+    /**
+     * Convert HTTP method to action name
+     *
+     * @param string $method
+     * @param bool $collection
+     * @return string
+     */
+    protected function methodToAction($method, $collection = false)
+    {
+        if ($method == 'GET' && $collection) {
+            $method = $method . '-collection';
+        }
+        return isset($this->methodToAction[$method]) ? $this->methodToAction[$method] : $this->defaultAction;
+    }
+
+    /**
+     * @param string $action
+     * @return bool
+     */
+    protected function isAction($action)
+    {
+        return $action && !is_numeric($action[0]);
     }
 }

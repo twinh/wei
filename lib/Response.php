@@ -160,13 +160,6 @@ class Response extends Base
     );
 
     /**
-     * Whether response content has been sent
-     *
-     * @var bool
-     */
-    protected $isSent = false;
-
-    /**
      * Whether in unit test mode
      *
      * @var bool
@@ -222,11 +215,9 @@ class Response extends Base
      */
     public function send($content = null, $status = null)
     {
-        $this->isSent = true;
-
         // Render json when content is array
         if (is_array($content)) {
-            return $this->json($content);
+            return $this->json($content)->send();
         } elseif (null !== $content) {
             $this->setContent($content);
         }
@@ -538,28 +529,6 @@ class Response extends Base
     }
 
     /**
-     * Check if response has been sent
-     *
-     * @return bool
-     */
-    public function isSent()
-    {
-        return $this->isSent;
-    }
-
-    /**
-     * Set response sent status
-     *
-     * @param  bool $bool
-     * @return $this
-     */
-    public function setSentStatus($bool)
-    {
-        $this->isSent = (bool)$bool;
-        return $this;
-    }
-
-    /**
      * Set redirect view file
      *
      * @param string $redirectView The view file
@@ -616,7 +585,7 @@ class Response extends Base
 </html>', $wait, $escapedUrl);
         }
 
-        return $this->send($content);
+        return $this->setContent($content);
     }
 
     /**
@@ -630,16 +599,16 @@ class Response extends Base
     {
         $options = 0;
         defined('JSON_UNESCAPED_UNICODE') && $options = JSON_UNESCAPED_UNICODE;
-        $result = json_encode($data, $options);
+        $content = json_encode($data, $options);
 
         if ($jsonp && preg_match('/^[$A-Z_][0-9A-Z_$.]*$/i', $this->request['callback']) === 1) {
             $this->setHeader('Content-Type', 'application/javascript');
-            $result = $this->request['callback'] . '(' . $result . ')';
+            $content = $this->request['callback'] . '(' . $content . ')';
         } else {
             $this->setHeader('Content-Type', 'application/json');
         }
 
-        return $this->send($result);
+        return $this->setContent($content);
     }
 
     /**

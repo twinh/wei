@@ -11,12 +11,12 @@ return array(
             'date.timezone' => 'Asia/Shanghai'
         ),
         'autoloadMap' => array(
-            '' => $rootDir . '/app'
+            '' => $rootDir
         ),
         'import' => array(
             array(
-                'dir' => $rootDir . '/app/Model',
-                'namespace' => 'Model'
+                'dir' => $rootDir . '/services',
+                'namespace' => 'services'
             )
         ),
         'preload' => array(

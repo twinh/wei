@@ -3,7 +3,9 @@
 namespace WeiTest;
 
 /**
- * @property \Wei\App $app The application wei
+ * @property \Wei\App $app The application service
+ * @method \Wei\App app()
+ * @property \Wei\Request $request
  */
 class AppTest extends TestCase
 {
@@ -11,10 +13,9 @@ class AppTest extends TestCase
     {
         parent::setUp();
 
-        $this->view->setDirs(__DIR__ . '/App/views');
+        $this->view->setDirs(__DIR__ . '/Fixtures/app/views');
 
-        $this->app
-            ->setOption('controllerFormat', 'WeiTest\App\%s');
+        $this->app->setOption('controllerFormat', 'WeiTest\Fixtures\app\controllers\%controller%');
     }
 
     protected function tearDown()
@@ -26,166 +27,145 @@ class AppTest extends TestCase
     public function testBaseApp()
     {
         // WeiTest\App\Controller\Test::testAction
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'test'
-        ));
-
-        $this->app();
+        $this->app->dispatch('test', 'test');
 
         $this->expectOutputString('test');
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionCode 404
-     * @expectedExceptionMessage The page you requested was not found - controller "ControllerNotFound" (class "WeiTest\App\ControllerNotFound") not found
-     */
     public function testControllerNotFound()
     {
-        $this->app->setController('ControllerNotFound');
+        // Returns array result
+        $result = $this->app->dispatch('ControllerNotFound', 'index', array(), false);
 
-        $this->app();
+        $this->assertInternalType('array', $result);
+
+        $this->assertEquals(array(
+            'controllers' => array(
+                'ControllerNotFound' => array(
+                    'WeiTest\Fixtures\app\controllers\ControllerNotFound'
+                )
+            )
+        ), $result);
+
+        // Throw 404 exception when application not found
+        $this->setExpectedException(
+            'RuntimeException',
+            implode("\n", array(
+                'The page you requested was not found',
+                ' - controller "ControllerNotFound" not found'
+            )),
+            404
+        );
+        $this->app->dispatch('ControllerNotFound');
     }
 
     public function testNestedController()
     {
-        $this->app->setController('admin/index');
+        $result = $this->app->dispatch('admin/index');
 
-        $this->app->setAction('index');
-
-        $this->app();
+        $this->assertInstanceOf('\Wei\Response', $result);
 
         $this->expectOutputString('admin.index');
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionCode 404
-     * @expectedExceptionMessage The page you requested was not found - controller "Controller\Admin" (class "WeiTest\App\Controller\Admin") not found
-     */
     public function testNestedControllerNotFound()
     {
-        $this->app->setController('Controller\Admin');
+        $result = $this->app->dispatch('Controller\Admin', 'index', array(), false);
 
-        $this->app();
+        $this->assertInternalType('array', $result);
+
+        $this->assertEquals(array(
+            'controllers' => array(
+                'Controller\Admin' => array(
+                    'WeiTest\Fixtures\app\controllers\Controller\Admin'
+                )
+        )), $result);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionCode 404
-     * @expectedExceptionMessage The page you requested was not found - action method "ActionNotFound" not found in controller "test" (class "WeiTest\App\Test")
-     */
     public function testActionNotFound()
     {
-        $this->app->setAction('ActionNotFound');
+        $result = $this->app->dispatch('test', 'ActionNotFound', array(), false);
 
-        $this->app();
+        $this->assertEquals(array(
+            'actions' => array(
+                'ActionNotFound' => array(
+                    'test' => array(
+                        'WeiTest\Fixtures\app\controllers\Test'
+                    )
+                )
+            )
+        ), $result);
     }
 
     public function testActionReturnArrayAsViewParameter()
     {
-        // WeiTest\App\Controller\TestController::returnArrayAction
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'returnArray'
-        ));
-
         $this->expectOutputString('value');
 
-        $this->app();
+        // WeiTest\App\Controller\TestController::returnArrayAction
+        $this->app->dispatch('test', 'returnArray');
     }
 
-    public function testActionReturnResponseWei()
+    public function testActionReturnResponseService()
     {
-        // WeiTest\App\Controller\TestController::returnResponseAction
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'returnResponse'
-        ));
-
         $this->expectOutputString('response content');
 
-        $this->app();
+        // WeiTest\App\Controller\TestController::returnResponseAction
+        $result = $this->app->dispatch('test', 'returnResponse');
+
+        $this->assertInstanceOf('\Wei\Response', $result);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testActionReturnUnexpectedType()
     {
-        // WeiTest\App\Controller\TestController::returnUnexpectedTypeAction
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'returnUnexpectedType'
-        ));
+        $this->setExpectedException('InvalidArgumentException');
 
-        $this->app();
+        // WeiTest\App\Controller\TestController::returnUnexpectedTypeAction
+        $this->app->dispatch('test', 'returnUnexpectedType');
     }
 
     public function testDispatchBreak()
     {
-        $this->request->set('action', 'dispatchBreak');
-
         $this->expectOutputString('stop');
 
-        $this->app();
+        $this->app->dispatch('test', 'dispatchBreak');
     }
 
     public function testDispatchBreakInConstructor()
     {
-        $this->request->set('controller', 'dispatchBreak');
-
         $this->expectOutputString('');
 
-        $this->app();
-    }
-
-    public function testGetControllerInstance()
-    {
-        $this->assertFalse($this->app->getControllerInstance('../invalid/controller', 'index'));
-
-        $controller = $this->app->getControllerInstance('test', 'index');
-        $this->assertInstanceOf('WeiTest\App\Test', $controller);
-
-        $controller2 = $this->app->getControllerInstance('test', 'index');
-        $this->assertSame($controller2, $controller);
+        $this->app->dispatch('controller', 'dispatchBreak', array(), false);
     }
 
     public function testForwardAction()
     {
         $this->expectOutputString('target');
 
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'forwardAction'
-        ));
-
+        $this->request->setPathInfo('test/forwardAction');
         $this->app();
+    }
+
+    public function testForwardActionByDispatch()
+    {
+        $this->expectOutputString('target');
+
+        $this->app->dispatch('test', 'forwardAction');
     }
 
     public function testForwardController()
     {
         $this->expectOutputString('index');
 
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'forwardController'
-        ));
-
-        $this->app();
+        $this->app->dispatch('test', 'forwardController');
     }
 
     public function testNestedControllerView()
     {
         $this->expectOutputString('value');
 
-        $this->request->set(array(
-            'controller' => 'admin/index',
-            'action' => 'view'
-        ));
+        $result = $this->app->dispatch('admin/index', 'view');
 
-        $this->app();
+        $this->assertInstanceOf('\Wei\Response', $result);
     }
 
     /**
@@ -195,12 +175,7 @@ class AppTest extends TestCase
     {
         $this->expectOutputString($output);
 
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => $action
-        ));
-
-        $this->app();
+        $this->app->dispatch('test', $action);
     }
 
     public function providerForActionReturnValue()
@@ -233,28 +208,21 @@ class AppTest extends TestCase
     {
         $this->expectOutputString('1');
 
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'parameter',
-            'id' => '1'
-        ));
-
-        $this->app();
+        $this->app->dispatch('test', 'parameter', array('id' => '1'));
     }
 
     public function testActionStartWithUnderscore()
     {
         $this->setExpectedException(
             'RuntimeException',
-            'The page you requested was not found - action method "_action" not found in controller "test" (class "WeiTest\App\Test")',
+            implode("\n", array(
+                'The page you requested was not found',
+                ' - action method "show" not found in controller "test"'
+            )),
             '404'
         );
 
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => '_action',
-        ));
-
+        $this->request->setPathInfo('test/_action');
         $this->app();
     }
 
@@ -262,15 +230,14 @@ class AppTest extends TestCase
     {
         $this->setExpectedException(
             'RuntimeException',
-            'The page you requested was not found - action method "protect" not found in controller "test" (class "WeiTest\App\Test")',
+            implode("\n", array(
+                'The page you requested was not found',
+                ' - action method "show" not found in controller "test"'
+            )),
             '404'
         );
 
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'protect',
-        ));
-
+        $this->request->setPathInfo('test/protect');
         $this->app();
     }
 
@@ -278,11 +245,7 @@ class AppTest extends TestCase
     {
         $this->expectOutputString('caseInsensitive');
 
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'caseInsensitive',
-        ));
-
+        $this->request->setPathInfo('test/caseInsensitive');
         $this->app();
     }
 
@@ -290,15 +253,14 @@ class AppTest extends TestCase
     {
         $this->setExpectedException(
             'RuntimeException',
-            'The page you requested was not found - action method "caseinsensitive" not found in controller "test" (class "WeiTest\App\Test")',
+            implode("\n", array(
+                'The page you requested was not found',
+                ' - action method "show" not found in controller "test"'
+            )),
             '404'
         );
 
-        $this->request->set(array(
-            'controller' => 'test',
-            'action' => 'caseinsensitive',
-        ));
-
+        $this->request->setPathInfo('test/caseinsensitive');
         $this->app();
     }
 
@@ -311,4 +273,102 @@ class AppTest extends TestCase
         ));
         $this->assertEquals('test', $this->app->getNamespace());
     }
+
+    public function testGetSetController()
+    {
+        $this->assertEquals('index', $this->app->getController());
+
+        $this->app->setController('newController');
+
+        $this->assertEquals('newController', $this->app->getController());
+    }
+
+    public function testGetSetAction()
+    {
+        $this->assertEquals('index', $this->app->getAction());
+
+        $this->app->setAction('newAction');
+
+        $this->assertEquals('newAction', $this->app->getAction());
+    }
+
+    public function testDebugDetailMessageForController()
+    {
+        $this->setExpectedException(
+            'RuntimeException',
+            implode("\n", array(
+                'The page you requested was not found',
+                ' - controller "notFound" not found (class "WeiTest\Fixtures\app\controllers\NotFound")'
+            )),
+            404
+        );
+
+        $this->request->set('debug-detail', '1');
+        $this->app->dispatch('notFound');
+    }
+
+    public function testDebugDetailMessageForAction()
+    {
+        $this->setExpectedException(
+            'RuntimeException',
+            implode("\n", array(
+                'The page you requested was not found',
+                ' - action method "notFound" not found in controller "test" (class "WeiTest\Fixtures\app\controllers\Test")'
+            )),
+            404
+        );
+
+        $this->request->set('debug-detail', '1');
+        $this->app->dispatch('test', 'notFound');
+    }
+
+    public function testMiddlewareOnlyAction()
+    {
+        $this->expectOutputString('only');
+
+        $this->app->dispatch('middleware', 'only');
+    }
+
+    public function testMiddlewareExceptAction()
+    {
+        $this->expectOutputString('except');
+
+        $this->app->dispatch('middleware', 'except');
+    }
+
+    public function testBeforeMiddleware()
+    {
+        $this->expectOutputString('Before Middleware');
+
+        $this->app->dispatch('middleware', 'before');
+    }
+
+    public function testAfterMiddleware()
+    {
+        $this->expectOutputString('After Middleware');
+
+        $response = $this->app->dispatch('middleware', 'after');
+
+        $this->assertEquals('After Middleware', $response->getContent());
+    }
+
+    public function testAroundMiddleware()
+    {
+        $this->expectOutputString('Not Found');
+
+        $response = $this->app->dispatch('middleware', 'around');
+
+        $this->assertEquals(404, $response->getStatusCode());
+        $this->assertEquals('Not Found', $response->getContent());
+    }
+
+    public function testStackMiddleware()
+    {
+        $this->expectOutputString('start1-start2-start3-stack-end3-end2-end1');
+
+        $response = $this->app->dispatch('middleware', 'stack');
+
+        $this->assertEquals('start1-start2-start3-stack-end3-end2-end1', $response->getContent());
+    }
+
 }
