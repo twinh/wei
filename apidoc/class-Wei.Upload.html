@@ -5,7 +5,7 @@
 
 	<title>Class Wei\Upload | Wei Framework</title>
 
-	<link rel="stylesheet" href="resources/style.css?331665766">
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
 </head>
 
@@ -21,11 +21,6 @@
 				<li>
 					<a href="namespace-None.html">
 						None					</a>
-
-						</li>
-				<li>
-					<a href="namespace-PHP.html">
-						PHP					</a>
 
 						</li>
 				<li class="active">
@@ -55,6 +50,7 @@
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
 				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.BaseController.html">BaseController</a></li>
 				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
 				<li><a href="class-Wei.Cache.html">Cache</a></li>
 				<li><a href="class-Wei.Config.html">Config</a></li>
@@ -76,6 +72,7 @@
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.PhpFileCache.html">PhpFileCache</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
 				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
@@ -126,9 +123,6 @@
 <span>Class</span>			</li>
 		</ul>
 		<ul>
-			<li>
-				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
-			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -140,7 +134,6 @@
 
 	<div class="description">
 	<p>A service that handles the uploaded files</p>
-
 	</div>
 
 	<dl class="tree">
@@ -189,13 +182,13 @@
 	<div class="info">
 		
 		
-		<b>Namespace:</b> Wei<br>
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br>
 		
 
 				<b>Author:</b>
-				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a>
-<br>
-		<b>Located at</b> <a href="source-class-Wei.Upload.html#14-341" title="Go to source code">Upload.php</a><br>
+				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a><br>
+			<b>Located at</b> <a href="source-class-Wei.Upload.html#14-341" title="Go to source code">Upload.php</a>
+		<br>
 	</div>
 
 
@@ -218,26 +211,22 @@
 
 		<div class="description short">
 			<p>Constructor</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Constructor</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$options</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code><br>When option "wei" is not an instance of "Wei\Wei"
-
+					InvalidArgumentException<br>When option "wei" is not an instance of "Wei\Wei"
 				</div>
 
 
@@ -263,27 +252,23 @@
 
 		<div class="description short">
 			<p>Upload a file</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Upload a file</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$field</var></dt>
-					<dd>The name of file input or options of wei
-</dd>
+					<dd>The name of file input or options of wei</dd>
 					<dt><var>$options</var></dt>
-					<dd>The options of wei
-</dd>
+					<dd>The options of wei</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -310,24 +295,21 @@
 
 		<div class="description short">
 			<p>Save uploaded file to upload directory</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Save uploaded file to upload directory</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$uploadedFile</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -352,7 +334,6 @@
 
 		<div class="description short">
 			<p>Returns the uploaded file path</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -360,10 +341,9 @@
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -377,7 +357,7 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
@@ -388,25 +368,21 @@
 
 		<div class="description short">
 			<p>Set upload directory</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Set upload directory</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$dir</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -431,7 +407,6 @@
 
 		<div class="description short">
 			<p>Returns upload directory</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -439,10 +414,9 @@
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -468,7 +442,6 @@
 		<div class="description short">
 			<p>Returns a human readable file size (e.g. 1.2MB, 10KB), which recive from
 the ini configuration</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -476,17 +449,15 @@ the ini configuration</p>
 the ini configuration</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$name</var></dt>
-					<dd>The name of ini configuration
-</dd>
+					<dd>The name of ini configuration</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -512,7 +483,6 @@ the ini configuration</p>
 		<div class="description short">
 			<p>Check if the file was uploaded via HTTP POST, if $this->unitTest is
 enable, it will always return true</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -520,17 +490,15 @@ enable, it will always return true</p>
 enable, it will always return true</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$file</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -556,7 +524,6 @@ enable, it will always return true</p>
 		<div class="description short">
 			<p>Moves an uploaded file to a new location, if $this->unitTest is enable,
 it will use <code>copy</code> function instead</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -564,20 +531,17 @@ it will use <code>copy</code> function instead</p>
 it will use <code>copy</code> function instead</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$from</var></dt>
-					<dd>The uploaded file name
-</dd>
+					<dd>The uploaded file name</dd>
 					<dt><var>$to</var></dt>
-					<dd>The destination of the moved file.
-</dd>
+					<dd>The destination of the moved file.</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -678,12 +642,10 @@ it will use <code>copy</code> function instead</p>
 
 			<div class="description short">
 				<p>Seems that the total post data size is too large</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>Seems that the total post data size is too large</p>
-
 
 					<h4>Link</h4>
 					<div class="list">
@@ -709,12 +671,10 @@ it will use <code>copy</code> function instead</p>
 
 			<div class="description short">
 				<p>The uploaded file array do not contain the key "$this->field", or error code not available</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The uploaded file array do not contain the key "$this->field", or error code not available</p>
-
 
 			</div>
 		</td>
@@ -736,12 +696,10 @@ it will use <code>copy</code> function instead</p>
 
 			<div class="description short">
 				
-
 			</div>
 
 			<div class="description detailed hidden">
 				
-
 
 			</div>
 		</td>
@@ -763,12 +721,10 @@ it will use <code>copy</code> function instead</p>
 
 			<div class="description short">
 				
-
 			</div>
 
 			<div class="description detailed hidden">
 				
-
 
 			</div>
 		</td>
@@ -790,12 +746,10 @@ it will use <code>copy</code> function instead</p>
 
 			<div class="description short">
 				
-
 			</div>
 
 			<div class="description detailed hidden">
 				
-
 
 			</div>
 		</td>
@@ -817,12 +771,10 @@ it will use <code>copy</code> function instead</p>
 
 			<div class="description short">
 				
-
 			</div>
 
 			<div class="description detailed hidden">
 				
-
 
 			</div>
 		</td>
@@ -844,12 +796,10 @@ it will use <code>copy</code> function instead</p>
 
 			<div class="description short">
 				
-
 			</div>
 
 			<div class="description detailed hidden">
 				
-
 
 			</div>
 		</td>
@@ -871,12 +821,10 @@ it will use <code>copy</code> function instead</p>
 
 			<div class="description short">
 				
-
 			</div>
 
 			<div class="description detailed hidden">
 				
-
 
 			</div>
 		</td>
@@ -898,12 +846,10 @@ it will use <code>copy</code> function instead</p>
 
 			<div class="description short">
 				
-
 			</div>
 
 			<div class="description detailed hidden">
 				
-
 
 			</div>
 		</td>
@@ -925,12 +871,10 @@ it will use <code>copy</code> function instead</p>
 
 			<div class="description short">
 				<p>The name for error message</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The name for error message</p>
-
 
 			</div>
 		</td>
@@ -953,13 +897,11 @@ it will use <code>copy</code> function instead</p>
 			<div class="description short">
 				<p>The name defined in the file input, if it's not specified, use the first
 key in upload files array (equals to $_FILES on default)</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The name defined in the file input, if it's not specified, use the first
 key in upload files array (equals to $_FILES on default)</p>
-
 
 			</div>
 		</td>
@@ -981,12 +923,10 @@ key in upload files array (equals to $_FILES on default)</p>
 
 			<div class="description short">
 				<p>The directory to save file, automatic create it if not exist</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The directory to save file, automatic create it if not exist</p>
-
 
 			</div>
 		</td>
@@ -1008,12 +948,10 @@ key in upload files array (equals to $_FILES on default)</p>
 
 			<div class="description short">
 				<p>The custom file name (without extension) as upload file name to save</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The custom file name (without extension) as upload file name to save</p>
-
 
 			</div>
 		</td>
@@ -1035,7 +973,6 @@ key in upload files array (equals to $_FILES on default)</p>
 
 			<div class="description short">
 				<p>Whether check if the upload file is valid image or not</p>
-
 			</div>
 
 			<div class="description detailed hidden">
@@ -1046,7 +983,6 @@ key in upload files array (equals to $_FILES on default)</p>
 * maxHeight
 * minWidth
 * minHeight</p>
-
 
 			</div>
 		</td>
@@ -1069,13 +1005,11 @@ key in upload files array (equals to $_FILES on default)</p>
 			<div class="description short">
 				<p>Whether overwrite existing file, if set to false, the uploader will add
 a number between file name and extension, like file-1.jpg, file-2.jpg</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>Whether overwrite existing file, if set to false, the uploader will add
 a number between file name and extension, like file-1.jpg, file-2.jpg</p>
-
 
 			</div>
 		</td>
@@ -1097,12 +1031,10 @@ a number between file name and extension, like file-1.jpg, file-2.jpg</p>
 
 			<div class="description short">
 				<p>Whether in unit test mode</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>Whether in unit test mode</p>
-
 
 			</div>
 		</td>
@@ -1124,12 +1056,10 @@ a number between file name and extension, like file-1.jpg, file-2.jpg</p>
 
 			<div class="description short">
 				<p>The max size of post data, for $this->postMaxSize</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The max size of post data, for $this->postMaxSize</p>
-
 
 			</div>
 		</td>
@@ -1227,12 +1157,10 @@ a number between file name and extension, like file-1.jpg, file-2.jpg</p>
 
 			<div class="description short">
 				<p>The HTTP request wei</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				
-
 
 			</div>
 		</td>
@@ -1256,7 +1184,7 @@ a number between file name and extension, like file-1.jpg, file-2.jpg</p>
 	</div>
 </div>
 </div>
-<script src="resources/combined.js?721046668"></script>
-<script src="elementlist.js?2192786340"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 
 	<title>Class Wei\Redis | Wei Framework</title>
 
-	<link rel="stylesheet" href="resources/style.css?331665766">
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
 </head>
 
@@ -21,11 +21,6 @@
 				<li>
 					<a href="namespace-None.html">
 						None					</a>
-
-						</li>
-				<li>
-					<a href="namespace-PHP.html">
-						PHP					</a>
 
 						</li>
 				<li class="active">
@@ -55,6 +50,7 @@
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
 				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.BaseController.html">BaseController</a></li>
 				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
 				<li><a href="class-Wei.Cache.html">Cache</a></li>
 				<li><a href="class-Wei.Config.html">Config</a></li>
@@ -76,6 +72,7 @@
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.PhpFileCache.html">PhpFileCache</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
 				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li class="active"><a href="class-Wei.Redis.html">Redis</a></li>
@@ -126,9 +123,6 @@
 <span>Class</span>			</li>
 		</ul>
 		<ul>
-			<li>
-				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
-			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -140,7 +134,6 @@
 
 	<div class="description">
 	<p>A cache service that stored data in Redis</p>
-
 	</div>
 
 	<dl class="tree">
@@ -175,13 +168,13 @@
 	<div class="info">
 		
 		
-		<b>Namespace:</b> Wei<br>
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br>
 		
 
 				<b>Author:</b>
-				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a>
-<br>
-		<b>Located at</b> <a href="source-class-Wei.Redis.html#11-258" title="Go to source code">Redis.php</a><br>
+				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a><br>
+			<b>Located at</b> <a href="source-class-Wei.Redis.html#11-258" title="Go to source code">Redis.php</a>
+		<br>
 	</div>
 
 
@@ -204,26 +197,22 @@
 
 		<div class="description short">
 			<p>Constructor</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Constructor</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$options</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code><br>When option "wei" is not an instance of "Wei\Wei"
-
+					InvalidArgumentException<br>When option "wei" is not an instance of "Wei\Wei"
 				</div>
 
 
@@ -249,30 +238,25 @@
 
 		<div class="description short">
 			<p>Returns the redis object, retrieve or store an item</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Returns the redis object, retrieve or store an item</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>The name of item
-</dd>
+					<dd>The name of item</dd>
 					<dt><var>$value</var></dt>
-					<dd>The value of item
-</dd>
+					<dd>The value of item</dd>
 					<dt><var>$expire</var></dt>
-					<dd>The expire seconds, defaults to 0, means never expired
-</dd>
+					<dd>The expire seconds, defaults to 0, means never expired</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code>
+					mixed
 				</div>
 
 
@@ -299,7 +283,6 @@
 
 		<div class="description short">
 			<p>Connect the redis server and set redis options</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -307,11 +290,9 @@
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code><br>true on success, false on error
-
+					boolean<br>true on success, false on error
 				</div>
 
 
@@ -336,36 +317,30 @@
 
 		<div class="description short">
 			<p>Retrieve an item</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Retrieve an item</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>The name of item
-</dd>
+					<dd>The name of item</dd>
 					<dt><var>$expire</var></dt>
-					<dd>The expire seconds of callback return value
-</dd>
+					<dd>The expire seconds of callback return value</dd>
 					<dt><var>$fn</var></dt>
-					<dd>The callback to execute when cache not found
-</dd>
+					<dd>The callback to execute when cache not found</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code>
+					mixed
 				</div>
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-RuntimeException.html">RuntimeException</a></code><br>When set cache return false
-
+					RuntimeException<br>When set cache return false
 				</div>
 
 
@@ -389,30 +364,25 @@
 
 		<div class="description short">
 			<p>Store an item</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Store an item</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>The name of item
-</dd>
+					<dd>The name of item</dd>
 					<dt><var>$value</var></dt>
-					<dd>The value of item
-</dd>
+					<dd>The value of item</dd>
 					<dt><var>$expire</var></dt>
-					<dd>The expire seconds, defaults to 0, means never expired
-</dd>
+					<dd>The expire seconds, defaults to 0, means never expired</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -437,24 +407,21 @@
 
 		<div class="description short">
 			<p>Retrieve multiple items</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Retrieve multiple items</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$keys</var></dt>
-					<dd>The name of items
-</dd>
+					<dd>The name of items</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code>
+					array
 				</div>
 
 
@@ -481,7 +448,6 @@
 
 		<div class="description short">
 			<p>Store multiple items</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -492,20 +458,17 @@
 2. The elements in returning values are all true or false, see links for more detail</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$items</var></dt>
-					<dd>$keys The name of items
-</dd>
+					<dd>$keys The name of items</dd>
 					<dt><var>$expire</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code>
+					array
 				</div>
 
 
@@ -537,24 +500,21 @@
 
 		<div class="description short">
 			<p>Remove an item</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Remove an item</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>The name of item
-</dd>
+					<dd>The name of item</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -579,24 +539,21 @@
 
 		<div class="description short">
 			<p>Check if an item is exists</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Check if an item is exists</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -621,30 +578,25 @@
 
 		<div class="description short">
 			<p>Add an item</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Add an item</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>The name of item
-</dd>
+					<dd>The name of item</dd>
 					<dt><var>$value</var></dt>
-					<dd>The value of item
-</dd>
+					<dd>The value of item</dd>
 					<dt><var>$expire</var></dt>
-					<dd>The expire seconds, defaults to 0, means never expired
-</dd>
+					<dd>The expire seconds, defaults to 0, means never expired</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -669,30 +621,25 @@
 
 		<div class="description short">
 			<p>Note: This method is not an atomic operation</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Note: This method is not an atomic operation</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>The name of item
-</dd>
+					<dd>The name of item</dd>
 					<dt><var>$value</var></dt>
-					<dd>The value of item
-</dd>
+					<dd>The value of item</dd>
 					<dt><var>$expire</var></dt>
-					<dd>The expire seconds, defaults to 0, means never expired
-</dd>
+					<dd>The expire seconds, defaults to 0, means never expired</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -717,28 +664,23 @@
 
 		<div class="description short">
 			<p>Increment an item</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Increment an item</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>The name of item
-</dd>
+					<dd>The name of item</dd>
 					<dt><var>$offset</var></dt>
-					<dd>The value to increased
-</dd>
+					<dd>The value to increased</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>integer|false</code><br>Returns the new value on success, or false on failure
-
+					integer|false<br>Returns the new value on success, or false on failure
 				</div>
 
 
@@ -763,7 +705,6 @@
 
 		<div class="description short">
 			<p>Clear all items</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -771,10 +712,9 @@
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -799,7 +739,6 @@
 
 		<div class="description short">
 			<p>Get the redis object</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -807,10 +746,9 @@
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>Redis</code>
+					Redis
 				</div>
 
 
@@ -824,7 +762,7 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
@@ -835,25 +773,21 @@
 
 		<div class="description short">
 			<p>Set the redis object</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Set the redis object</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$object</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -870,9 +804,9 @@
 		<td><code>
 			<a href="class-Wei.BaseCache.html#_decr">decr()</a>, 
 			<a href="class-Wei.BaseCache.html#_getFileContent">getFileContent()</a>, 
-			<a href="class-Wei.BaseCache.html#_getPrefix">getPrefix()</a>, 
+			<a href="class-Wei.BaseCache.html#_getNamespace">getNamespace()</a>, 
 			<a href="class-Wei.BaseCache.html#_processGetResult">processGetResult()</a>, 
-			<a href="class-Wei.BaseCache.html#_setPrefix">setPrefix()</a>
+			<a href="class-Wei.BaseCache.html#_setNamespace">setNamespace()</a>
 		</code></td>
 	</tr>
 	</table>
@@ -911,12 +845,10 @@
 
 			<div class="description short">
 				<p>The redis object</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The redis object</p>
-
 
 			</div>
 		</td>
@@ -938,12 +870,10 @@
 
 			<div class="description short">
 				<p>The host, or the path to a unix domain socket</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The host, or the path to a unix domain socket</p>
-
 
 			</div>
 		</td>
@@ -965,12 +895,10 @@
 
 			<div class="description short">
 				<p>The port of the host</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The port of the host</p>
-
 
 			</div>
 		</td>
@@ -992,12 +920,10 @@
 
 			<div class="description short">
 				<p>The timeout seconds</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The timeout seconds</p>
-
 
 			</div>
 		</td>
@@ -1019,12 +945,10 @@
 
 			<div class="description short">
 				<p>Whether persistent connection or not</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>Whether persistent connection or not</p>
-
 
 			</div>
 		</td>
@@ -1046,12 +970,10 @@
 
 			<div class="description short">
 				<p>A password to authenticate the connection</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>A password to authenticate the connection</p>
-
 
 			</div>
 		</td>
@@ -1073,12 +995,10 @@
 
 			<div class="description short">
 				<p>The options for \Redis::setOptions()</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The options for \Redis::setOptions()</p>
-
 
 			</div>
 		</td>
@@ -1097,7 +1017,7 @@
 	<caption>Properties inherited from <a href="class-Wei.BaseCache.html#properties">Wei\BaseCache</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-Wei.BaseCache.html#$prefix"><var>$prefix</var></a>
+			<a href="class-Wei.BaseCache.html#$namespace"><var>$namespace</var></a>
 		</code></td>
 	</tr>
 	</table>
@@ -1122,7 +1042,7 @@
 	</div>
 </div>
 </div>
-<script src="resources/combined.js?721046668"></script>
-<script src="elementlist.js?2192786340"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
 </body>
 </html>

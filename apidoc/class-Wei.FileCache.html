@@ -5,7 +5,7 @@
 
 	<title>Class Wei\FileCache | Wei Framework</title>
 
-	<link rel="stylesheet" href="resources/style.css?331665766">
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
 </head>
 
@@ -21,11 +21,6 @@
 				<li>
 					<a href="namespace-None.html">
 						None					</a>
-
-						</li>
-				<li>
-					<a href="namespace-PHP.html">
-						PHP					</a>
 
 						</li>
 				<li class="active">
@@ -55,6 +50,7 @@
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
 				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.BaseController.html">BaseController</a></li>
 				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
 				<li><a href="class-Wei.Cache.html">Cache</a></li>
 				<li><a href="class-Wei.Config.html">Config</a></li>
@@ -76,6 +72,7 @@
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.PhpFileCache.html">PhpFileCache</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
 				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
@@ -126,9 +123,6 @@
 <span>Class</span>			</li>
 		</ul>
 		<ul>
-			<li>
-				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
-			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -140,7 +134,6 @@
 
 	<div class="description">
 	<p>A cache service that stored data in files</p>
-
 	</div>
 
 	<dl class="tree">
@@ -166,6 +159,10 @@
 	</dl>
 
 
+	<div>
+		<h4>Direct known subclasses</h4>
+			<a href="class-Wei.PhpFileCache.html">Wei\PhpFileCache</a>
+	</div>
 
 
 
@@ -175,13 +172,13 @@
 	<div class="info">
 		
 		
-		<b>Namespace:</b> Wei<br>
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br>
 		
 
 				<b>Author:</b>
-				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a>
-<br>
-		<b>Located at</b> <a href="source-class-Wei.FileCache.html#11-325" title="Go to source code">FileCache.php</a><br>
+				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a><br>
+			<b>Located at</b> <a href="source-class-Wei.FileCache.html#11-336" title="Go to source code">FileCache.php</a>
+		<br>
 	</div>
 
 
@@ -204,26 +201,22 @@
 
 		<div class="description short">
 			<p>Constructor</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Constructor</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$options</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code><br>When option "wei" is not an instance of "Wei\Wei"
-
+					InvalidArgumentException<br>When option "wei" is not an instance of "Wei\Wei"
 				</div>
 
 
@@ -249,36 +242,30 @@
 
 		<div class="description short">
 			<p>Retrieve an item</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Retrieve an item</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>The name of item
-</dd>
+					<dd>The name of item</dd>
 					<dt><var>$expire</var></dt>
-					<dd>The expire seconds of callback return value
-</dd>
+					<dd>The expire seconds of callback return value</dd>
 					<dt><var>$fn</var></dt>
-					<dd>The callback to execute when cache not found
-</dd>
+					<dd>The callback to execute when cache not found</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code>
+					mixed
 				</div>
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-RuntimeException.html">RuntimeException</a></code><br>When set cache return false
-
+					RuntimeException<br>When set cache return false
 				</div>
 
 
@@ -302,30 +289,25 @@
 
 		<div class="description short">
 			<p>Store an item</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Store an item</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>The name of item
-</dd>
+					<dd>The name of item</dd>
 					<dt><var>$value</var></dt>
-					<dd>The value of item
-</dd>
+					<dd>The value of item</dd>
 					<dt><var>$expire</var></dt>
-					<dd>The expire seconds, defaults to 0, means never expired
-</dd>
+					<dd>The expire seconds, defaults to 0, means never expired</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -350,24 +332,21 @@
 
 		<div class="description short">
 			<p>Remove an item</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Remove an item</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>The name of item
-</dd>
+					<dd>The name of item</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -392,24 +371,21 @@
 
 		<div class="description short">
 			<p>Check if an item is exists</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Check if an item is exists</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -434,30 +410,25 @@
 
 		<div class="description short">
 			<p>Add an item</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Add an item</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>The name of item
-</dd>
+					<dd>The name of item</dd>
 					<dt><var>$value</var></dt>
-					<dd>The value of item
-</dd>
+					<dd>The value of item</dd>
 					<dt><var>$expire</var></dt>
-					<dd>The expire seconds, defaults to 0, means never expired
-</dd>
+					<dd>The expire seconds, defaults to 0, means never expired</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -482,30 +453,25 @@
 
 		<div class="description short">
 			<p>Replace an existing item</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Replace an existing item</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>The name of item
-</dd>
+					<dd>The name of item</dd>
 					<dt><var>$value</var></dt>
-					<dd>The value of item
-</dd>
+					<dd>The value of item</dd>
 					<dt><var>$expire</var></dt>
-					<dd>The expire seconds, defaults to 0, means never expired
-</dd>
+					<dd>The expire seconds, defaults to 0, means never expired</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -530,28 +496,23 @@
 
 		<div class="description short">
 			<p>Increment an item</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Increment an item</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>The name of item
-</dd>
+					<dd>The name of item</dd>
 					<dt><var>$offset</var></dt>
-					<dd>The value to increased
-</dd>
+					<dd>The value to increased</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>integer|false</code><br>Returns the new value on success, or false on failure
-
+					integer|false<br>Returns the new value on success, or false on failure
 				</div>
 
 
@@ -576,7 +537,6 @@
 
 		<div class="description short">
 			<p>Clear all items</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -584,10 +544,9 @@
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -612,24 +571,21 @@
 
 		<div class="description short">
 			<p>Get cache file by key</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Get cache file by key</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -643,7 +599,7 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
@@ -654,31 +610,26 @@
 
 		<div class="description short">
 			<p>Set the cache directory</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Set the cache directory</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$dir</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-RuntimeException.html">RuntimeException</a></code><br>When failed to create the cache directory
-
+					RuntimeException<br>When failed to create the cache directory
 				</div>
 
 
@@ -702,7 +653,6 @@
 
 		<div class="description short">
 			<p>Returns the cache directory</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -710,10 +660,9 @@
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -727,7 +676,7 @@
 		<td class="attributes"><code>
 			 protected 
 
-			false
+			resource|false
 			
 			</code>
 		</td>
@@ -738,31 +687,25 @@
 
 		<div class="description short">
 			<p>Open and lock file</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Open and lock file</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$file</var></dt>
-					<dd>file path
-</dd>
+					<dd>file path</dd>
 					<dt><var>$mode</var></dt>
-					<dd>open mode
-</dd>
+					<dd>open mode</dd>
 					<dt><var>$operation</var></dt>
-					<dd>lock operation
-</dd>
+					<dd>lock operation</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>false</code><br>false or file handle
-
+					resource|false<br>file handle or false
 				</div>
 
 
@@ -787,28 +730,62 @@
 
 		<div class="description short">
 			<p>Read file by handle and verify if content is expired</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Read file by handle and verify if content is expired</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$handle</var></dt>
-					<dd>file handle
-</dd>
+					<dd>file handle</dd>
 					<dt><var>$file</var></dt>
-					<dd>file path
-</dd>
+					<dd>file path</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>false|array</code><br>false or file content array
+					false|array<br>false or file content array
+				</div>
 
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getContent" id="_getContent">
+
+		<td class="attributes"><code>
+			 protected 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getContent">#</a>
+		<code><a href="source-class-Wei.FileCache.html#291-300" title="Go to source code">getContent</a>( <span>string <var>$file</var></span> )</code>
+
+		<div class="description short">
+			<p>Receive file content by file name</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Receive file content by file name</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$file</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
 				</div>
 
 
@@ -829,32 +806,27 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_prepareContent">#</a>
-		<code><a href="source-class-Wei.FileCache.html#291-307" title="Go to source code">prepareContent</a>( <span>string <var>$content</var></span>, <span>integer <var>$expire</var></span> )</code>
+		<code><a href="source-class-Wei.FileCache.html#302-318" title="Go to source code">prepareContent</a>( <span>string <var>$content</var></span>, <span>integer <var>$expire</var></span> )</code>
 
 		<div class="description short">
 			<p>Prepare content for writing</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Prepare content for writing</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$content</var></dt>
-					<dd>the value of cache
-</dd>
+					<dd>the value of cache</dd>
 					<dt><var>$expire</var></dt>
-					<dd>expire time
-</dd>
+					<dd>expire time</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code><br>file content
-
+					string<br>file content
 				</div>
 
 
@@ -875,34 +847,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_writeAndRelease">#</a>
-		<code><a href="source-class-Wei.FileCache.html#309-324" title="Go to source code">writeAndRelease</a>( <span>resource <var>$handle</var></span>, <span>string <var>$content</var></span>, <span>boolean <var>$rewrite</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-Wei.FileCache.html#320-335" title="Go to source code">writeAndRelease</a>( <span>resource <var>$handle</var></span>, <span>string <var>$content</var></span>, <span>boolean <var>$rewrite</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			<p>Write content, release lock and close file</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Write content, release lock and close file</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$handle</var></dt>
-					<dd>file handle
-</dd>
+					<dd>file handle</dd>
 					<dt><var>$content</var></dt>
-					<dd>the value of cache
-</dd>
+					<dd>the value of cache</dd>
 					<dt><var>$rewrite</var></dt>
-					<dd>whether rewrite the whole file
-</dd>
+					<dd>whether rewrite the whole file</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -921,10 +888,10 @@
 			<a href="class-Wei.BaseCache.html#_decr">decr()</a>, 
 			<a href="class-Wei.BaseCache.html#_getFileContent">getFileContent()</a>, 
 			<a href="class-Wei.BaseCache.html#_getMulti">getMulti()</a>, 
-			<a href="class-Wei.BaseCache.html#_getPrefix">getPrefix()</a>, 
+			<a href="class-Wei.BaseCache.html#_getNamespace">getNamespace()</a>, 
 			<a href="class-Wei.BaseCache.html#_processGetResult">processGetResult()</a>, 
 			<a href="class-Wei.BaseCache.html#_setMulti">setMulti()</a>, 
-			<a href="class-Wei.BaseCache.html#_setPrefix">setPrefix()</a>
+			<a href="class-Wei.BaseCache.html#_setNamespace">setNamespace()</a>
 		</code></td>
 	</tr>
 	</table>
@@ -963,12 +930,10 @@
 
 			<div class="description short">
 				<p>The cache directory</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The cache directory</p>
-
 
 			</div>
 		</td>
@@ -990,12 +955,10 @@
 
 			<div class="description short">
 				<p>Illegal chars as the name of cache, would be replaced to "_"</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>Illegal chars as the name of cache, would be replaced to "_"</p>
-
 
 			</div>
 		</td>
@@ -1019,12 +982,10 @@
 
 			<div class="description short">
 				<p>The cache file extension</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The cache file extension</p>
-
 
 			</div>
 		</td>
@@ -1041,7 +1002,7 @@
 	<caption>Properties inherited from <a href="class-Wei.BaseCache.html#properties">Wei\BaseCache</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-Wei.BaseCache.html#$prefix"><var>$prefix</var></a>
+			<a href="class-Wei.BaseCache.html#$namespace"><var>$namespace</var></a>
 		</code></td>
 	</tr>
 	</table>
@@ -1066,7 +1027,7 @@
 	</div>
 </div>
 </div>
-<script src="resources/combined.js?721046668"></script>
-<script src="elementlist.js?2192786340"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
 </body>
 </html>

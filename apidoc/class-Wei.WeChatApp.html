@@ -5,7 +5,7 @@
 
 	<title>Class Wei\WeChatApp | Wei Framework</title>
 
-	<link rel="stylesheet" href="resources/style.css?331665766">
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
 </head>
 
@@ -21,11 +21,6 @@
 				<li>
 					<a href="namespace-None.html">
 						None					</a>
-
-						</li>
-				<li>
-					<a href="namespace-PHP.html">
-						PHP					</a>
 
 						</li>
 				<li class="active">
@@ -55,6 +50,7 @@
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
 				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.BaseController.html">BaseController</a></li>
 				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
 				<li><a href="class-Wei.Cache.html">Cache</a></li>
 				<li><a href="class-Wei.Config.html">Config</a></li>
@@ -76,6 +72,7 @@
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.PhpFileCache.html">PhpFileCache</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
 				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
@@ -126,9 +123,6 @@
 <span>Class</span>			</li>
 		</ul>
 		<ul>
-			<li>
-				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
-			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -140,7 +134,6 @@
 
 	<div class="description">
 	<p>A service handles WeChat(WeiXin) callback message</p>
-
 	</div>
 
 	<dl class="tree">
@@ -168,15 +161,15 @@
 	<div class="info">
 		
 		
-		<b>Namespace:</b> Wei<br>
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br>
 		
 
 				<b>Author:</b>
-				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a>
-<br>
+				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a><br>
 				<b>Link:</b>
 				<a href="http://mp.weixin.qq.com/wiki/index.php?title=%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3%E6%8C%87%E5%8D%97">http://mp.weixin.qq.com/wiki/index.php?title=%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3%E6%8C%87%E5%8D%97</a><br>
-		<b>Located at</b> <a href="source-class-Wei.WeChatApp.html#14-927" title="Go to source code">WeChatApp.php</a><br>
+			<b>Located at</b> <a href="source-class-Wei.WeChatApp.html#14-927" title="Go to source code">WeChatApp.php</a>
+		<br>
 	</div>
 
 
@@ -199,26 +192,22 @@
 
 		<div class="description short">
 			<p>Constructor</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Constructor</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$options</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code><br>When option "wei" is not an instance of "Wei\Wei"
-
+					InvalidArgumentException<br>When option "wei" is not an instance of "Wei\Wei"
 				</div>
 
 
@@ -233,7 +222,7 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
@@ -244,7 +233,6 @@
 
 		<div class="description short">
 			<p>Start up WeChat application and output the matched rule message</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -252,11 +240,9 @@
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -281,7 +267,6 @@
 
 		<div class="description short">
 			<p>Execute the matched rule and returns the rule result</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -291,10 +276,9 @@
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string|false</code>
+					string|false
 				</div>
 
 
@@ -319,7 +303,6 @@
 
 		<div class="description short">
 			<p>Check if the request is verify the token string</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -327,10 +310,9 @@
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -344,36 +326,32 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_subscribe">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#213-222" title="Go to source code">subscribe</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#213-222" title="Go to source code">subscribe</a>( <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Attach a callback which triggered when user subscribed you</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a callback which triggered when user subscribed you</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -387,36 +365,32 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_unsubscribe">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#224-233" title="Go to source code">unsubscribe</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#224-233" title="Go to source code">unsubscribe</a>( <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Attach a callback which triggered when user unsubscribed you</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a callback which triggered when user unsubscribed you</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -430,39 +404,34 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_click">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#235-245" title="Go to source code">click</a>( <span>string <var>$key</var></span>, <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#235-245" title="Go to source code">click</a>( <span>string <var>$key</var></span>, <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Attach a callback which triggered when user click the custom menu</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a callback which triggered when user click the custom menu</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$key</var></dt>
-					<dd>The key of event
-</dd>
+					<dd>The key of event</dd>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -476,36 +445,32 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_scan">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#247-256" title="Go to source code">scan</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#247-256" title="Go to source code">scan</a>( <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Attach a callback which triggered when user scan the QR Code</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a callback which triggered when user scan the QR Code</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -519,39 +484,34 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_is">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#258-268" title="Go to source code">is</a>( <span>string <var>$keyword</var></span>, <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#258-268" title="Go to source code">is</a>( <span>string <var>$keyword</var></span>, <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Attach a callback which triggered when user input equals to the keyword</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a callback which triggered when user input equals to the keyword</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$keyword</var></dt>
-					<dd>The keyword to compare with user input
-</dd>
+					<dd>The keyword to compare with user input</dd>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -565,39 +525,34 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_has">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#270-280" title="Go to source code">has</a>( <span>string <var>$keyword</var></span>, <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#270-280" title="Go to source code">has</a>( <span>string <var>$keyword</var></span>, <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Attach a callback with a keyword, which triggered when user input contains the keyword</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a callback with a keyword, which triggered when user input contains the keyword</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$keyword</var></dt>
-					<dd>The keyword to search in user input
-</dd>
+					<dd>The keyword to search in user input</dd>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -611,39 +566,34 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_startsWith">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#282-292" title="Go to source code">startsWith</a>( <span>string <var>$keyword</var></span>, <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#282-292" title="Go to source code">startsWith</a>( <span>string <var>$keyword</var></span>, <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Attach a callback with a keyword, which triggered when user input starts with the keyword (case insensitive)</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a callback with a keyword, which triggered when user input starts with the keyword (case insensitive)</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$keyword</var></dt>
-					<dd>The keyword to search in user input
-</dd>
+					<dd>The keyword to search in user input</dd>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -657,39 +607,34 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_match">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#294-304" title="Go to source code">match</a>( <span>string <var>$pattern</var></span>, <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#294-304" title="Go to source code">match</a>( <span>string <var>$pattern</var></span>, <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Attach a callback with a regex pattern which triggered when user input match the pattern</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a callback with a regex pattern which triggered when user input match the pattern</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$pattern</var></dt>
-					<dd>The pattern to match
-</dd>
+					<dd>The pattern to match</dd>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -703,36 +648,32 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_receiveImage">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#306-316" title="Go to source code">receiveImage</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#306-316" title="Go to source code">receiveImage</a>( <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Attach a callback to handle image message</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a callback to handle image message</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -746,36 +687,32 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_receiveLocation">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#318-328" title="Go to source code">receiveLocation</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#318-328" title="Go to source code">receiveLocation</a>( <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Attach a callback to handle location message</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a callback to handle location message</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -789,36 +726,32 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_receiveVoice">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#330-340" title="Go to source code">receiveVoice</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#330-340" title="Go to source code">receiveVoice</a>( <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Attach a callback to handle voice message</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a callback to handle voice message</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -832,36 +765,32 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_receiveVideo">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#342-352" title="Go to source code">receiveVideo</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#342-352" title="Go to source code">receiveVideo</a>( <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Attach a callback to handle video message</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a callback to handle video message</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -875,36 +804,32 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_receiveLink">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#354-364" title="Go to source code">receiveLink</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#354-364" title="Go to source code">receiveLink</a>( <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Attach a callback to handle link message</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a callback to handle link message</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -925,28 +850,25 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_defaults">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#366-376" title="Go to source code">defaults</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#366-376" title="Go to source code">defaults</a>( <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Attach a handler which executes when none of the rule handled the input</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a handler which executes when none of the rule handled the input</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -971,24 +893,21 @@
 
 		<div class="description short">
 			<p>Generate text message for output</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Generate text message for output</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$content</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code>
+					array
 				</div>
 
 
@@ -1013,33 +932,27 @@
 
 		<div class="description short">
 			<p>Generate music message for output</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Generate music message for output</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$title</var></dt>
-					<dd>The title of music
-</dd>
+					<dd>The title of music</dd>
 					<dt><var>$description</var></dt>
-					<dd>The description display blow the title
-</dd>
+					<dd>The description display blow the title</dd>
 					<dt><var>$url</var></dt>
-					<dd>The music URL for player
-</dd>
+					<dd>The music URL for player</dd>
 					<dt><var>$hqUrl</var></dt>
-					<dd>The HQ music URL for player when user in WIFI
-</dd>
+					<dd>The HQ music URL for player when user in WIFI</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code>
+					array
 				</div>
 
 
@@ -1064,7 +977,6 @@
 
 		<div class="description short">
 			<p>Generate article message for output</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1079,17 +991,15 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 </code></pre>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$articles</var></dt>
-					<dd>The article array
-</dd>
+					<dd>The article array</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code>
+					array
 				</div>
 
 
@@ -1114,7 +1024,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns if the token is valid</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1122,10 +1031,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -1150,24 +1058,21 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the XML element value</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Returns the XML element value</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$name</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code>
+					mixed
 				</div>
 
 
@@ -1192,7 +1097,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns all of XML element values</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1200,10 +1104,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code>
+					array
 				</div>
 
 
@@ -1228,7 +1131,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the HTTP raw post data</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1236,10 +1138,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1264,7 +1165,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns your user id</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1272,10 +1172,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1300,7 +1199,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the user openID who sent message to you</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1308,10 +1206,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1336,7 +1233,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the timestamp when message created</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1344,10 +1240,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1372,7 +1267,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the user input string, available when the message type is text</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1380,10 +1274,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1408,7 +1301,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the message id</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1416,10 +1308,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1444,7 +1335,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the message type</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1454,10 +1344,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1482,7 +1371,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the picture URL, available when the message type is image</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1490,10 +1378,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1518,7 +1405,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the latitude of location, available when the message type is location</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1526,10 +1412,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1554,7 +1439,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the longitude of location, available when the message type is location</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1562,10 +1446,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1590,7 +1473,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the detail address of location, available when the message type is location</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1598,10 +1480,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1626,7 +1507,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the scale of map, available when the message type is location</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1634,10 +1514,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1662,7 +1541,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the media id, available when the message type is voice or video</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1670,10 +1548,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1698,7 +1575,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the media format, available when the message type is voice</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1706,10 +1582,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1734,7 +1609,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the type of event, could be subscribe, unsubscribe or CLICK, available when the message type is event</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1742,10 +1616,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1770,7 +1643,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the key value of custom menu, available when the message type is event</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1778,10 +1650,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1806,7 +1677,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the scene id from the scan result, available when the message event is subscribe or scan</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1814,10 +1684,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1842,7 +1711,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the thumbnail id of video, available when the message type is video</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1850,10 +1718,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1878,7 +1745,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the title of URL, available when the message type is link</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1886,10 +1752,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1914,7 +1779,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the description of URL, available when the message type is link</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1922,10 +1786,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1950,7 +1813,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the URL link, available when the message type is link</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1958,10 +1820,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -1986,7 +1847,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the ticket string, available when user scan from the QR Code</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -1994,10 +1854,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -2022,7 +1881,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Returns the user inputted content or clicked button value</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -2030,10 +1888,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean|string</code>
+					boolean|string
 				</div>
 
 
@@ -2058,27 +1915,23 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Generate message for output</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Generate message for output</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$type</var></dt>
-					<dd>The type of message
-</dd>
+					<dd>The type of message</dd>
 					<dt><var>$response</var></dt>
-					<dd>The response content
-</dd>
+					<dd>The response content</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code>
+					array
 				</div>
 
 
@@ -2092,42 +1945,36 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 		<td class="attributes"><code>
 			 protected 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addTextRule">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#766-782" title="Go to source code">addTextRule</a>( <span>string <var>$type</var></span>, <span>string <var>$keyword</var></span>, <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#766-782" title="Go to source code">addTextRule</a>( <span>string <var>$type</var></span>, <span>string <var>$keyword</var></span>, <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Adds a rule to handle user text input</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Adds a rule to handle user text input</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$type</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$keyword</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -2141,42 +1988,36 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 		<td class="attributes"><code>
 			 protected 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addEventRule">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#784-796" title="Go to source code">addEventRule</a>( <span>string <var>$name</var></span>, <span>string <var>$key</var></span>, <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#784-796" title="Go to source code">addEventRule</a>( <span>string <var>$name</var></span>, <span>string <var>$key</var></span>, <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Adds a rule to handle user event, such as click, subscribe</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Adds a rule to handle user event, such as click, subscribe</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$name</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$key</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -2201,12 +2042,10 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Parse post data to receive user OpenID and input content and message attr</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Parse post data to receive user OpenID and input content and message attr</p>
-
 
 
 
@@ -2233,7 +2072,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<div class="description short">
 			<p>Handle text rule</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -2241,10 +2079,9 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string|false</code>
+					string|false
 				</div>
 
 
@@ -2265,16 +2102,14 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<td class="name"><div>
 		<a class="anchor" href="#_handleEvent">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#854-866" title="Go to source code">handleEvent</a>( <span>mixed <var>$event</var></span>, <span>mixed <var>$eventKey</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#854-866" title="Go to source code">handleEvent</a>( <span> <var>$event</var></span>, <span> <var>$eventKey</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
-
 		</div>
 
 		<div class="description detailed hidden">
 			
-
 
 
 
@@ -2297,28 +2132,25 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 		<td class="name"><div>
 		<a class="anchor" href="#_handle">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#868-889" title="Go to source code">handle</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$fn</var></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#868-889" title="Go to source code">handle</a>( <span>Closure <var>$fn</var></span> )</code>
 
 		<div class="description short">
 			<p>Executes callback handler</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Executes callback handler</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$fn</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -2332,38 +2164,34 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 		<td class="attributes"><code>
 			 protected 
 
-			<code><a href="class-SimpleXMLElement.html">SimpleXMLElement</a></code>
+			SimpleXMLElement
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_arrayToXml">#</a>
-		<code><a href="source-class-Wei.WeChatApp.html#891-926" title="Go to source code">arrayToXml</a>( <span>array <var>$array</var></span>, <span><code><a href="class-SimpleXMLElement.html">SimpleXMLElement</a></code> <var>$xml</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Wei.WeChatApp.html#891-926" title="Go to source code">arrayToXml</a>( <span>array <var>$array</var></span>, <span>SimpleXMLElement <var>$xml</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Convert to XML element</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Convert to XML element</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$array</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$xml</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-SimpleXMLElement.html">SimpleXMLElement</a></code></code>
+					SimpleXMLElement
 				</div>
 
 
@@ -2409,12 +2237,10 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 			<div class="description short">
 				<p>The WeChat token to generate signature</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The WeChat token to generate signature</p>
-
 
 			</div>
 		</td>
@@ -2436,12 +2262,10 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 			<div class="description short">
 				<p>The HTTP raw post data, equals to $GLOBALS['HTTP_RAW_POST_DATA'] on default</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The HTTP raw post data, equals to $GLOBALS['HTTP_RAW_POST_DATA'] on default</p>
-
 
 			</div>
 		</td>
@@ -2463,12 +2287,10 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 			<div class="description short">
 				<p>The URL query parameters, equals to $_GET on default</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The URL query parameters, equals to $_GET on default</p>
-
 
 			</div>
 		</td>
@@ -2490,12 +2312,10 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 			<div class="description short">
 				<p>The rules to generate output message</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The rules to generate output message</p>
-
 
 			</div>
 		</td>
@@ -2525,12 +2345,10 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 			<div class="description short">
 				<p>A handler executes when none of rules handled the input</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>A handler executes when none of rules handled the input</p>
-
 
 			</div>
 		</td>
@@ -2552,12 +2370,10 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 			<div class="description short">
 				<p>Whether the signature is valid</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>Whether the signature is valid</p>
-
 
 			</div>
 		</td>
@@ -2579,12 +2395,10 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 			<div class="description short">
 				<p>Are there any callbacks handled the message ?</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>Are there any callbacks handled the message ?</p>
-
 
 			</div>
 		</td>
@@ -2606,12 +2420,10 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 			<div class="description short">
 				<p>The callback executes before send the XML data</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The callback executes before send the XML data</p>
-
 
 			</div>
 		</td>
@@ -2633,7 +2445,6 @@ $app-&gt;sendArticle(array( array( 'title' =&gt; 'The title of article', 'descri
 
 			<div class="description short">
 				<p>The element values of post XML data</p>
-
 			</div>
 
 			<div class="description detailed hidden">
@@ -2648,7 +2459,6 @@ voice   : MediaId, Format
 event   : Event, EventKey
 video   : MediaId, ThumbMediaId
 link    : Title, Description</p>
-
 
 			</div>
 		</td>
@@ -2682,7 +2492,7 @@ link    : Title, Description</p>
 	</div>
 </div>
 </div>
-<script src="resources/combined.js?721046668"></script>
-<script src="elementlist.js?2192786340"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 
 	<title>Class wei\Soap | Wei Framework</title>
 
-	<link rel="stylesheet" href="resources/style.css?331665766">
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
 </head>
 
@@ -21,11 +21,6 @@
 				<li>
 					<a href="namespace-None.html">
 						None					</a>
-
-						</li>
-				<li>
-					<a href="namespace-PHP.html">
-						PHP					</a>
 
 						</li>
 				<li class="active">
@@ -55,6 +50,7 @@
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
 				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.BaseController.html">BaseController</a></li>
 				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
 				<li><a href="class-Wei.Cache.html">Cache</a></li>
 				<li><a href="class-Wei.Config.html">Config</a></li>
@@ -76,6 +72,7 @@
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.PhpFileCache.html">PhpFileCache</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
 				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
@@ -126,9 +123,6 @@
 <span>Class</span>			</li>
 		</ul>
 		<ul>
-			<li>
-				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
-			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -140,7 +134,6 @@
 
 	<div class="description">
 	<p>A Soap client that works like HTTP service</p>
-
 	</div>
 
 	<dl class="tree">
@@ -167,13 +160,13 @@ wei\Base
 	<div class="info">
 		
 		
-		<b>Namespace:</b> Wei<br>
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br>
 		
 
 				<b>Author:</b>
-				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a>
-<br>
-		<b>Located at</b> <a href="source-class-wei.Soap.html#7-234" title="Go to source code">Soap.php</a><br>
+				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a><br>
+			<b>Located at</b> <a href="source-class-wei.Soap.html#7-234" title="Go to source code">Soap.php</a>
+		<br>
 	</div>
 
 
@@ -196,19 +189,16 @@ wei\Base
 
 		<div class="description short">
 			<p>Constructor</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Constructor</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$options</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 
@@ -223,7 +213,7 @@ wei\Base
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
@@ -234,25 +224,21 @@ wei\Base
 
 		<div class="description short">
 			<p>Create a new Soap service and execute</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Create a new Soap service and execute</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$options</var></dt>
-					<dd>A options array if the first parameter is string
-</dd>
+					<dd>A options array if the first parameter is string</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this A new Soap object
-
+					<br>$this A new Soap object
 				</div>
 
 
@@ -277,12 +263,10 @@ wei\Base
 
 		<div class="description short">
 			<p>Execute the request, parse the response data and trigger relative callbacks</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Execute the request, parse the response data and trigger relative callbacks</p>
-
 
 
 
@@ -309,7 +293,6 @@ wei\Base
 
 		<div class="description short">
 			<p>Returns the parsed response data</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -317,10 +300,9 @@ wei\Base
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code>
+					mixed
 				</div>
 
 
@@ -345,7 +327,6 @@ wei\Base
 
 		<div class="description short">
 			<p>Returns the request URL</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -353,10 +334,9 @@ wei\Base
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -381,7 +361,6 @@ wei\Base
 
 		<div class="description short">
 			<p>Returns the request method</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -389,10 +368,9 @@ wei\Base
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -417,7 +395,6 @@ wei\Base
 
 		<div class="description short">
 			<p>Returns the data to send to the server</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -425,10 +402,9 @@ wei\Base
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array|string</code>
+					array|string
 				</div>
 
 
@@ -442,7 +418,7 @@ wei\Base
 		<td class="attributes"><code>
 			 public 
 
-			<code><a href="class-SoapFault.html">SoapFault</a></code>
+			SoapFault
 			
 			</code>
 		</td>
@@ -453,7 +429,6 @@ wei\Base
 
 		<div class="description short">
 			<p>Returns the error exception object</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -461,10 +436,9 @@ wei\Base
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-SoapFault.html">SoapFault</a></code></code>
+					SoapFault
 				</div>
 
 
@@ -499,12 +473,10 @@ wei\Base
 
 			<div class="description short">
 				<p>The request URL</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The request URL</p>
-
 
 			</div>
 		</td>
@@ -526,12 +498,10 @@ wei\Base
 
 			<div class="description short">
 				<p>The name of the SOAP function to call.</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The name of the SOAP function to call.</p>
-
 
 			</div>
 		</td>
@@ -553,12 +523,10 @@ wei\Base
 
 			<div class="description short">
 				<p>The parameters send to the SOAP function</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The parameters send to the SOAP function</p>
-
 
 			</div>
 		</td>
@@ -581,13 +549,11 @@ wei\Base
 			<div class="description short">
 				<p>Whether use the global options in <code>$wei-&gt;http</code> object when create a
 new object</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>Whether use the global options in <code>$wei-&gt;http</code> object when create a
 new object</p>
-
 
 			</div>
 		</td>
@@ -609,14 +575,12 @@ new object</p>
 
 			<div class="description short">
 				<p>Whether throw exception or keep silent when request error</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>Whether throw exception or keep silent when request error</p>
 
 <p>Note that the exception is thrown after triggered complete callback, rather than triggered error callback</p>
-
 
 			</div>
 		</td>
@@ -638,12 +602,10 @@ new object</p>
 
 			<div class="description short">
 				<p>A callback triggered after prepared the data and before the <code>beforeSend</code> callback</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>A callback triggered after prepared the data and before the <code>beforeSend</code> callback</p>
-
 
 			</div>
 		</td>
@@ -665,12 +627,10 @@ new object</p>
 
 			<div class="description short">
 				<p>A callback triggered after prepared the data and before the process the request</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>A callback triggered after prepared the data and before the process the request</p>
-
 
 			</div>
 		</td>
@@ -692,12 +652,10 @@ new object</p>
 
 			<div class="description short">
 				<p>A callback triggered after the request is called success</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>A callback triggered after the request is called success</p>
-
 
 			</div>
 		</td>
@@ -719,14 +677,12 @@ new object</p>
 
 			<div class="description short">
 				<p>A callback triggered when the request fails</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>A callback triggered when the request fails</p>
 
 <p>The <code>$textStatus</code> could be <code>curl</code>, <code>http</code>, and <code>parser</code></p>
-
 
 			</div>
 		</td>
@@ -748,12 +704,10 @@ new object</p>
 
 			<div class="description short">
 				<p>A callback triggered when request finishes (after <code>success</code> and <code>error</code> callbacks are executed)</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>A callback triggered when request finishes (after <code>success</code> and <code>error</code> callbacks are executed)</p>
-
 
 			</div>
 		</td>
@@ -775,12 +729,10 @@ new object</p>
 
 			<div class="description short">
 				<p>The parsed response data</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The parsed response data</p>
-
 
 			</div>
 		</td>
@@ -794,7 +746,7 @@ new object</p>
 	<tr data-order="soapClient" id="$soapClient">
 		<td class="attributes"><code>
 			protected  
-			<code><a href="class-SoapClient.html">SoapClient</a></code>
+			SoapClient
 		</code></td>
 
 		<td class="name">
@@ -802,12 +754,10 @@ new object</p>
 
 			<div class="description short">
 				<p>The instance of soap client</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The instance of soap client</p>
-
 
 			</div>
 		</td>
@@ -821,7 +771,7 @@ new object</p>
 	<tr data-order="errorException" id="$errorException">
 		<td class="attributes"><code>
 			protected  
-			<code><a href="class-ErrorException.html">ErrorException</a></code>
+			ErrorException
 		</code></td>
 
 		<td class="name">
@@ -829,12 +779,10 @@ new object</p>
 
 			<div class="description short">
 				<p>The error exception object</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The error exception object</p>
-
 
 			</div>
 		</td>
@@ -859,7 +807,7 @@ new object</p>
 	</div>
 </div>
 </div>
-<script src="resources/combined.js?721046668"></script>
-<script src="elementlist.js?2192786340"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 
 	<title>Class Wei\E | Wei Framework</title>
 
-	<link rel="stylesheet" href="resources/style.css?331665766">
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
 </head>
 
@@ -21,11 +21,6 @@
 				<li>
 					<a href="namespace-None.html">
 						None					</a>
-
-						</li>
-				<li>
-					<a href="namespace-PHP.html">
-						PHP					</a>
 
 						</li>
 				<li class="active">
@@ -55,6 +50,7 @@
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
 				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.BaseController.html">BaseController</a></li>
 				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
 				<li><a href="class-Wei.Cache.html">Cache</a></li>
 				<li><a href="class-Wei.Config.html">Config</a></li>
@@ -76,6 +72,7 @@
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.PhpFileCache.html">PhpFileCache</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
 				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
@@ -126,9 +123,6 @@
 <span>Class</span>			</li>
 		</ul>
 		<ul>
-			<li>
-				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
-			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -142,7 +136,6 @@
 	<p>Context specific methods for use in secure output escaping</p>
 
 <p>The escape is derived from code of the Zend Framework 2.1.5 - 2.2.2</p>
-
 	</div>
 
 	<dl class="tree">
@@ -170,12 +163,13 @@
 	<div class="info">
 		
 		
-		<b>Namespace:</b> Wei<br>
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br>
 		
 
 				<b>Link:</b>
 				<a href="https://github.com/zendframework/zf2/blob/master/library/Zend/Escaper/Escaper.php">https://github.com/zendframework/zf2/blob/master/library/Zend/Escaper/Escaper.php</a><br>
-		<b>Located at</b> <a href="source-class-Wei.E.html#12-432" title="Go to source code">E.php</a><br>
+			<b>Located at</b> <a href="source-class-Wei.E.html#12-432" title="Go to source code">E.php</a>
+		<br>
 	</div>
 
 
@@ -200,7 +194,6 @@
 			<p>Constructor: Single parameter allows setting of global encoding for use by
 the current object. If PHP 5.4 is detected, additional ENT_SUBSTITUTE flag
 is set for htmlspecialchars() calls.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -209,18 +202,16 @@ the current object. If PHP 5.4 is detected, additional ENT_SUBSTITUTE flag
 is set for htmlspecialchars() calls.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$options</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code>
+					InvalidArgumentException
 				</div>
 
 
@@ -246,7 +237,6 @@ is set for htmlspecialchars() calls.</p>
 
 		<div class="description short">
 			<p>Return the encoding that all output/input is expected to be encoded in.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -254,10 +244,9 @@ is set for htmlspecialchars() calls.</p>
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -283,7 +272,6 @@ is set for htmlspecialchars() calls.</p>
 		<div class="description short">
 			<p>Escape a string for the HTML Body context where there are very few characters
 of special meaning. Internally this will use htmlspecialchars().</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -291,17 +279,15 @@ of special meaning. Internally this will use htmlspecialchars().</p>
 of special meaning. Internally this will use htmlspecialchars().</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$string</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -328,7 +314,6 @@ of special meaning. Internally this will use htmlspecialchars().</p>
 			<p>Escape a string for the HTML Attribute context. We use an extended set of characters
 to escape that are not covered by htmlspecialchars() to cover cases where an attribute
 might be unquoted or quoted illegally (e.g. backticks are valid quotes for IE).</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -337,17 +322,15 @@ to escape that are not covered by htmlspecialchars() to cover cases where an att
 might be unquoted or quoted illegally (e.g. backticks are valid quotes for IE).</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$string</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -378,7 +361,6 @@ injection of special characters and entities. The escaping used should be tolera
 of cases where HTML escaping was not applied on top of Javascript escaping correctly.
 Backslash escaping is not used as it still leaves the escaped character as-is and so
 is not useful in a HTML context.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -391,17 +373,15 @@ Backslash escaping is not used as it still leaves the escaped character as-is an
 is not useful in a HTML context.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$string</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -428,7 +408,6 @@ is not useful in a HTML context.</p>
 			<p>Escape a string for the URI or Parameter contexts. This should not be used to escape
 an entire URI - only a subcomponent being inserted. The function is a simple proxy
 to rawurlencode() which now implements RFC 3986 since PHP 5.3 completely.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -437,17 +416,15 @@ an entire URI - only a subcomponent being inserted. The function is a simple pro
 to rawurlencode() which now implements RFC 3986 since PHP 5.3 completely.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$string</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -473,7 +450,6 @@ to rawurlencode() which now implements RFC 3986 since PHP 5.3 completely.</p>
 		<div class="description short">
 			<p>Escape a string for the CSS context. CSS escaping can be applied to any string being
 inserted into CSS and escapes everything except alphanumerics.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -481,17 +457,15 @@ inserted into CSS and escapes everything except alphanumerics.</p>
 inserted into CSS and escapes everything except alphanumerics.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$string</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -517,7 +491,6 @@ inserted into CSS and escapes everything except alphanumerics.</p>
 		<div class="description short">
 			<p>Callback function for preg_replace_callback that applies HTML Attribute
 escaping to all matches.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -525,17 +498,15 @@ escaping to all matches.</p>
 escaping to all matches.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$matches</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -561,7 +532,6 @@ escaping to all matches.</p>
 		<div class="description short">
 			<p>Callback function for preg_replace_callback that applies Javascript
 escaping to all matches.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -569,17 +539,15 @@ escaping to all matches.</p>
 escaping to all matches.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$matches</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -605,7 +573,6 @@ escaping to all matches.</p>
 		<div class="description short">
 			<p>Callback function for preg_replace_callback that applies CSS
 escaping to all matches.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -613,17 +580,15 @@ escaping to all matches.</p>
 escaping to all matches.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$matches</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -649,7 +614,6 @@ escaping to all matches.</p>
 		<div class="description short">
 			<p>Converts a string to UTF-8 from the base encoding. The base encoding is set via this
 class' constructor.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -657,22 +621,20 @@ class' constructor.</p>
 class' constructor.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$string</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-RuntimeException.html">RuntimeException</a></code>
+					RuntimeException
 				</div>
 
 
@@ -697,7 +659,6 @@ class' constructor.</p>
 		<div class="description short">
 			<p>Converts a string from UTF-8 to the base encoding. The base encoding is set via this
 class' constructor.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -705,17 +666,15 @@ class' constructor.</p>
 class' constructor.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$string</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -740,24 +699,21 @@ class' constructor.</p>
 
 		<div class="description short">
 			<p>Checks if a given string appears to be valid UTF-8 or not.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Checks if a given string appears to be valid UTF-8 or not.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$string</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -783,7 +739,6 @@ class' constructor.</p>
 		<div class="description short">
 			<p>Encoding conversion helper which wraps iconv and mbstring where they exist or throws
 and exception where neither is available.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -791,28 +746,24 @@ and exception where neither is available.</p>
 and exception where neither is available.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$string</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$to</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$from</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-RuntimeException.html">RuntimeException</a></code>
+					RuntimeException
 				</div>
 
 
@@ -836,32 +787,28 @@ and exception where neither is available.</p>
 
 		<div class="description short">
 			<p>Escapes a string by specified type for secure output</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Escapes a string by specified type for secure output</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$string</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$type</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code>
+					InvalidArgumentException
 				</div>
 
 
@@ -906,7 +853,6 @@ and exception where neither is available.</p>
 
 			<div class="description short">
 				<p>Entity Map mapping Unicode codepoints to any available named HTML entities.</p>
-
 			</div>
 
 			<div class="description detailed hidden">
@@ -915,7 +861,6 @@ and exception where neither is available.</p>
 <p>While HTML supports far more named entities, the lowest common denominator
 has become HTML5's XML Serialisation which is restricted to the those named
 entities that XML supports. Using HTML entities would result in this error: XML Parsing Error: undefined entity</p>
-
 
 			</div>
 		</td>
@@ -943,13 +888,11 @@ entities that XML supports. Using HTML entities would result in this error: XML 
 			<div class="description short">
 				<p>Current encoding for escaping. If not UTF-8, we convert strings from this encoding
 pre-escaping and back to this encoding post-escaping.</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>Current encoding for escaping. If not UTF-8, we convert strings from this encoding
 pre-escaping and back to this encoding post-escaping.</p>
-
 
 			</div>
 		</td>
@@ -974,7 +917,6 @@ pre-escaping and back to this encoding post-escaping.</p>
 htmlspecialchars(). We modify these for PHP 5.4 to take advantage
 of the new ENT_SUBSTITUTE flag for correctly dealing with invalid
 UTF-8 sequences.</p>
-
 			</div>
 
 			<div class="description detailed hidden">
@@ -982,7 +924,6 @@ UTF-8 sequences.</p>
 htmlspecialchars(). We modify these for PHP 5.4 to take advantage
 of the new ENT_SUBSTITUTE flag for correctly dealing with invalid
 UTF-8 sequences.</p>
-
 
 			</div>
 		</td>
@@ -1004,12 +945,10 @@ UTF-8 sequences.</p>
 
 			<div class="description short">
 				<p>Static Matcher which escapes characters for HTML Attribute contexts</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>Static Matcher which escapes characters for HTML Attribute contexts</p>
-
 
 			</div>
 		</td>
@@ -1031,12 +970,10 @@ UTF-8 sequences.</p>
 
 			<div class="description short">
 				<p>Static Matcher which escapes characters for Javascript contexts</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>Static Matcher which escapes characters for Javascript contexts</p>
-
 
 			</div>
 		</td>
@@ -1058,12 +995,10 @@ UTF-8 sequences.</p>
 
 			<div class="description short">
 				<p>Static Matcher which escapes characters for CSS Attribute contexts</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>Static Matcher which escapes characters for CSS Attribute contexts</p>
-
 
 			</div>
 		</td>
@@ -1085,12 +1020,10 @@ UTF-8 sequences.</p>
 
 			<div class="description short">
 				<p>List of all encoding supported by this class</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>List of all encoding supported by this class</p>
-
 
 			</div>
 		</td>
@@ -1134,7 +1067,7 @@ UTF-8 sequences.</p>
 	</div>
 </div>
 </div>
-<script src="resources/combined.js?721046668"></script>
-<script src="elementlist.js?2192786340"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
 </body>
 </html>

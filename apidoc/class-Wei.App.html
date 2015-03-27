@@ -5,7 +5,7 @@
 
 	<title>Class Wei\App | Wei Framework</title>
 
-	<link rel="stylesheet" href="resources/style.css?331665766">
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
 </head>
 
@@ -21,11 +21,6 @@
 				<li>
 					<a href="namespace-None.html">
 						None					</a>
-
-						</li>
-				<li>
-					<a href="namespace-PHP.html">
-						PHP					</a>
 
 						</li>
 				<li class="active">
@@ -55,6 +50,7 @@
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
 				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.BaseController.html">BaseController</a></li>
 				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
 				<li><a href="class-Wei.Cache.html">Cache</a></li>
 				<li><a href="class-Wei.Config.html">Config</a></li>
@@ -76,6 +72,7 @@
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.PhpFileCache.html">PhpFileCache</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
 				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
@@ -126,9 +123,6 @@
 <span>Class</span>			</li>
 		</ul>
 		<ul>
-			<li>
-				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
-			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -140,7 +134,6 @@
 
 	<div class="description">
 	<p>A service to build an MVC application</p>
-
 	</div>
 
 	<dl class="tree">
@@ -168,13 +161,13 @@
 	<div class="info">
 		
 		
-		<b>Namespace:</b> Wei<br>
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br>
 		
 
 				<b>Author:</b>
-				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a>
-<br>
-		<b>Located at</b> <a href="source-class-Wei.App.html#11-324" title="Go to source code">App.php</a><br>
+				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a><br>
+			<b>Located at</b> <a href="source-class-Wei.App.html#11-469" title="Go to source code">App.php</a>
+		<br>
 	</div>
 
 
@@ -186,41 +179,37 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___invoke">#</a>
-		<code><a href="source-class-Wei.App.html#70-98" title="Go to source code">__invoke</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Wei.App.html#84-110" title="Go to source code">__invoke</a>( <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			<p>Startup an MVC application</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Startup an MVC application</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$options</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-RuntimeException.html">RuntimeException</a></code>
+					RuntimeException
 				</div>
 
 
@@ -233,46 +222,161 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			array|<code><a href="class-Wei.Response.html">Wei\Response</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_dispatch">#</a>
-		<code><a href="source-class-Wei.App.html#100-140" title="Go to source code">dispatch</a>( <span>string <var>$controller</var></span>, <span>string <var>$action</var> = <span class="php-quote">'index'</span></span> )</code>
+		<code><a href="source-class-Wei.App.html#112-158" title="Go to source code">dispatch</a>( <span>string <var>$controller</var></span>, <span>null|string <var>$action</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span>boolean <var>$throwException</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
-			<p>Load and execute the controller action</p>
-
+			<p>Dispatch by specified controller and action</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Load and execute the controller action</p>
-
+			<p>Dispatch by specified controller and action</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$controller</var></dt>
-					<dd>The name of controller
-</dd>
+					<dd>The name of controller</dd>
 					<dt><var>$action</var></dt>
-					<dd>The name of action
-</dd>
+					<dd>The name of action</dd>
+					<dt><var>$params</var></dt>
+					<dd>The request parameters</dd>
+					<dt><var>$throwException</var></dt>
+					<dd>Whether throw exception when application not found</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					array|<code><a href="class-Wei.Response.html">Wei\Response</a></code>
 				</div>
 
-				<h4>Throws</h4>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="buildException" id="_buildException">
+
+		<td class="attributes"><code>
+			 protected 
+
+			RuntimeException
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_buildException">#</a>
+		<code><a href="source-class-Wei.App.html#160-188" title="Go to source code">buildException</a>( <span>array <var>$notFound</var></span> )</code>
+
+		<div class="description short">
+			<p>Build 404 exception from notFound array</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Build 404 exception from notFound array</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$notFound</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-RuntimeException.html">RuntimeException</a></code><br>When controller or action not found
-
+					RuntimeException
 				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="execute" id="_execute">
+
+		<td class="attributes"><code>
+			 protected 
+
+			<code><a href="class-Wei.Response.html">Wei\Response</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_execute">#</a>
+		<code><a href="source-class-Wei.App.html#190-221" title="Go to source code">execute</a>( <span><code><a href="class-Wei.Base.html">Wei\Base</a></code> <var>$instance</var></span>, <span>string <var>$action</var></span> )</code>
+
+		<div class="description short">
+			<p>Execute action with middleware</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Execute action with middleware</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$instance</var></dt>
+					<dd></dd>
+					<dt><var>$action</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Wei.Response.html">Wei\Response</a></code>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMiddleware" id="_getMiddleware">
+
+		<td class="attributes"><code>
+			 protected 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMiddleware">#</a>
+		<code><a href="source-class-Wei.App.html#223-242" title="Go to source code">getMiddleware</a>( <span><code><a href="class-Wei.Base.html">Wei\Base</a></code> <var>$instance</var></span>, <span>string <var>$action</var></span> )</code>
+
+		<div class="description short">
+			<p>Returns middleware for specified action</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Returns middleware for specified action</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$instance</var></dt>
+					<dd></dd>
+					<dt><var>$action</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
+				</div>
+
 
 
 
@@ -291,34 +395,104 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_handleResponse">#</a>
-		<code><a href="source-class-Wei.App.html#142-173" title="Go to source code">handleResponse</a>( <span>mixed <var>$response</var></span> )</code>
+		<code><a href="source-class-Wei.App.html#244-273" title="Go to source code">handleResponse</a>( <span>mixed <var>$response</var></span> )</code>
 
 		<div class="description short">
 			<p>Handle the response variable returned by controller action</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Handle the response variable returned by controller action</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$response</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Wei.Response.html">Wei\Response</a></code></code>
+					<code><a href="class-Wei.Response.html">Wei\Response</a></code>
 				</div>
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code>
+					InvalidArgumentException
 				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getNamespace" id="_getNamespace">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getNamespace">#</a>
+		<code><a href="source-class-Wei.App.html#275-286" title="Go to source code">getNamespace</a>( )</code>
+
+		<div class="description short">
+			<p>Returns the name of the application</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Returns the name of the application</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setNamespace" id="_setNamespace">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setNamespace">#</a>
+		<code><a href="source-class-Wei.App.html#288-298" title="Go to source code">setNamespace</a>( <span>string <var>$namespace</var></span> )</code>
+
+		<div class="description short">
+			<p>Set namespace</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Set namespace</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$namespace</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<br>$this
+				</div>
+
 
 
 
@@ -337,11 +511,10 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getController">#</a>
-		<code><a href="source-class-Wei.App.html#175-186" title="Go to source code">getController</a>( )</code>
+		<code><a href="source-class-Wei.App.html#300-308" title="Go to source code">getController</a>( )</code>
 
 		<div class="description short">
 			<p>Get the of name controller</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -349,11 +522,9 @@
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code><br>The name of controller
-
+					string<br>The name of controller
 				</div>
 
 
@@ -374,28 +545,25 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setController">#</a>
-		<code><a href="source-class-Wei.App.html#188-198" title="Go to source code">setController</a>( <span>string <var>$controller</var></span> )</code>
+		<code><a href="source-class-Wei.App.html#310-320" title="Go to source code">setController</a>( <span>string <var>$controller</var></span> )</code>
 
 		<div class="description short">
 			<p>Set the name of controller</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Set the name of controller</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$controller</var></dt>
-					<dd>The name of controller
-</dd>
+					<dd>The name of controller</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -416,11 +584,10 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAction">#</a>
-		<code><a href="source-class-Wei.App.html#200-211" title="Go to source code">getAction</a>( )</code>
+		<code><a href="source-class-Wei.App.html#322-330" title="Go to source code">getAction</a>( )</code>
 
 		<div class="description short">
 			<p>Get the name of action</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -428,10 +595,9 @@
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -452,28 +618,25 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setAction">#</a>
-		<code><a href="source-class-Wei.App.html#213-223" title="Go to source code">setAction</a>( <span>string <var>$action</var></span> )</code>
+		<code><a href="source-class-Wei.App.html#332-342" title="Go to source code">setAction</a>( <span>string <var>$action</var></span> )</code>
 
 		<div class="description short">
 			<p>Set the name of action</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Set the name of action</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$action</var></dt>
-					<dd>The name of action
-</dd>
+					<dd>The name of action</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -482,7 +645,7 @@
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="getControllerClass" id="_getControllerClass">
+	<tr data-order="getControllerAction" id="_getControllerAction">
 
 		<td class="attributes"><code>
 			 public 
@@ -493,30 +656,91 @@
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_getControllerClass">#</a>
-		<code><a href="source-class-Wei.App.html#225-235" title="Go to source code">getControllerClass</a>( <span>string <var>$controller</var></span> )</code>
+		<a class="anchor" href="#_getControllerAction">#</a>
+		<code><a href="source-class-Wei.App.html#344-352" title="Go to source code">getControllerAction</a>( )</code>
 
 		<div class="description short">
-			<p>Return the controller class name (without validate if the class exists)'</p>
-
+			<p>Returns the URI that contains controller and action</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Return the controller class name (without validate if the class exists)'</p>
+			<p>Returns the URI that contains controller and action</p>
 
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getControllerClasses" id="_getControllerClasses">
+
+		<td class="attributes"><code>
+			 public 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getControllerClasses">#</a>
+		<code><a href="source-class-Wei.App.html#354-386" title="Go to source code">getControllerClasses</a>( <span>string <var>$controller</var></span> )</code>
+
+		<div class="description short">
+			<p>Return the controller class names by controllers (without validate if the class exists)</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Return the controller class names by controllers (without validate if the class exists)</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$controller</var></dt>
-					<dd>The name of class
-</dd>
+					<dd>The name of controller</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					array
 				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setControllerMap" id="_setControllerMap">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setControllerMap">#</a>
+		<code><a href="source-class-Wei.App.html#388-391" title="Go to source code">setControllerMap</a>( <span>array <var>$controllerMap</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
 
 
 
@@ -527,40 +751,34 @@
 	<tr data-order="getControllerInstance" id="_getControllerInstance">
 
 		<td class="attributes"><code>
-			 public 
+			 protected 
 
-			object|false
+			<code><a href="class-Wei.Base.html">Wei\Base</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getControllerInstance">#</a>
-		<code><a href="source-class-Wei.App.html#237-262" title="Go to source code">getControllerInstance</a>( <span>string <var>$controller</var></span>, <span>string <var>$action</var></span> )</code>
+		<code><a href="source-class-Wei.App.html#393-408" title="Go to source code">getControllerInstance</a>( <span>string <var>$class</var></span> )</code>
 
 		<div class="description short">
 			<p>Get the controller instance, if not found, return false instead</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Get the controller instance, if not found, return false instead</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$controller</var></dt>
-					<dd>The name of controller
-</dd>
-					<dt><var>$action</var></dt>
-					<dd>The name of action
-</dd>
+					<dt><var>$class</var></dt>
+					<dd>The class name of controller</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>object|false</code>
+					<code><a href="class-Wei.Base.html">Wei\Base</a></code>
 				</div>
 
 
@@ -581,11 +799,10 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isActionAvailable">#</a>
-		<code><a href="source-class-Wei.App.html#264-289" title="Go to source code">isActionAvailable</a>( <span>object <var>$object</var></span>, <span>string <var>$action</var></span> )</code>
+		<code><a href="source-class-Wei.App.html#410-435" title="Go to source code">isActionAvailable</a>( <span>object <var>$object</var></span>, <span>string <var>$action</var></span> )</code>
 
 		<div class="description short">
 			<p>Check if action name is available</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -598,20 +815,17 @@
 4. method is starts with "_"</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$object</var></dt>
-					<dd>The object of controller
-</dd>
+					<dd>The object of controller</dd>
 					<dt><var>$action</var></dt>
-					<dd>The name of action
-</dd>
+					<dd>The name of action</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -632,11 +846,10 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_preventPreviousDispatch">#</a>
-		<code><a href="source-class-Wei.App.html#291-299" title="Go to source code">preventPreviousDispatch</a>( )</code>
+		<code><a href="source-class-Wei.App.html#437-445" title="Go to source code">preventPreviousDispatch</a>( )</code>
 
 		<div class="description short">
 			<p>Throws a exception to prevent the previous dispatch process</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -645,10 +858,9 @@
 
 
 
-
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-RuntimeException.html">RuntimeException</a></code>
+					RuntimeException
 				</div>
 
 
@@ -668,12 +880,11 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDefaultTemplate">#</a>
-		<code><a href="source-class-Wei.App.html#301-310" title="Go to source code">getDefaultTemplate</a>( )</code>
+		<code><a href="source-class-Wei.App.html#447-456" title="Go to source code">getDefaultTemplate</a>( )</code>
 
 		<div class="description short">
 			<p>Get default template file according to the controller, action and file
 extension provided by the view engine</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -682,10 +893,9 @@ extension provided by the view engine</p>
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -706,26 +916,22 @@ extension provided by the view engine</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_forward">#</a>
-		<code><a href="source-class-Wei.App.html#312-323" title="Go to source code">forward</a>( <span>string <var>$controller</var></span>, <span>string <var>$action</var> = <span class="php-quote">'index'</span></span> )</code>
+		<code><a href="source-class-Wei.App.html#458-468" title="Go to source code">forward</a>( <span>string <var>$controller</var></span>, <span>null|string <var>$action</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Forwards to the given controller and action</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Forwards to the given controller and action</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$controller</var></dt>
-					<dd>The name of controller
-</dd>
+					<dd>The name of controller</dd>
 					<dt><var>$action</var></dt>
-					<dd>The name of action
-</dd>
+					<dd>The name of action</dd>
 				</dl></div>
 
 
@@ -763,17 +969,15 @@ extension provided by the view engine</p>
 		<td class="attributes"><code>integer</code></td>
 		<td class="name">
 			<code>
-				<a href="source-class-Wei.App.html#23-26" title="Go to source code"><b>FORWARD</b></a>
+				<a href="source-class-Wei.App.html#22-25" title="Go to source code"><b>FORWARD</b></a>
 			</code>
 
 			<div class="description short">
 				<p>The exception code for forward action</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The exception code for forward action</p>
-
 
 			</div>
 		</td>
@@ -798,23 +1002,21 @@ extension provided by the view engine</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Wei.App.html#28-33" title="Go to source code"><var>$controllerFormat</var></a>
+				<a href="source-class-Wei.App.html#27-32" title="Go to source code"><var>$controllerFormat</var></a>
 
 			<div class="description short">
 				<p>The format of controller class</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The format of controller class</p>
-
 
 			</div>
 		</td>
 		<td class="value">
 			<div>
 				<a href="#$controllerFormat" class="anchor">#</a>
-				<code><span class="php-quote">'Controller\%s'</span></code>
+				<code><span class="php-quote">'controllers\%controller%'</span></code>
 			</div>
 		</td>
 	</tr>
@@ -825,16 +1027,14 @@ extension provided by the view engine</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Wei.App.html#35-40" title="Go to source code"><var>$defaultController</var></a>
+				<a href="source-class-Wei.App.html#34-39" title="Go to source code"><var>$defaultController</var></a>
 
 			<div class="description short">
 				<p>The default controller name</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The default controller name</p>
-
 
 			</div>
 		</td>
@@ -852,16 +1052,14 @@ extension provided by the view engine</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Wei.App.html#42-47" title="Go to source code"><var>$defaultAction</var></a>
+				<a href="source-class-Wei.App.html#41-46" title="Go to source code"><var>$defaultAction</var></a>
 
 			<div class="description short">
 				<p>The default action name</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The default action name</p>
-
 
 			</div>
 		</td>
@@ -872,6 +1070,31 @@ extension provided by the view engine</p>
 			</div>
 		</td>
 	</tr>
+	<tr data-order="namespace" id="$namespace">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.App.html#48-53" title="Go to source code"><var>$namespace</var></a>
+
+			<div class="description short">
+				<p>The name of current application</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The name of current application</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$namespace" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
 	<tr data-order="controller" id="$controller">
 		<td class="attributes"><code>
 			protected  
@@ -879,16 +1102,14 @@ extension provided by the view engine</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Wei.App.html#49-54" title="Go to source code"><var>$controller</var></a>
+				<a href="source-class-Wei.App.html#55-60" title="Go to source code"><var>$controller</var></a>
 
 			<div class="description short">
 				<p>The name of controller</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The name of controller</p>
-
 
 			</div>
 		</td>
@@ -906,16 +1127,14 @@ extension provided by the view engine</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Wei.App.html#56-61" title="Go to source code"><var>$action</var></a>
+				<a href="source-class-Wei.App.html#62-67" title="Go to source code"><var>$action</var></a>
 
 			<div class="description short">
 				<p>The name of action</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The name of action</p>
-
 
 			</div>
 		</td>
@@ -926,29 +1145,54 @@ extension provided by the view engine</p>
 			</div>
 		</td>
 	</tr>
-	<tr data-order="controllers" id="$controllers">
+	<tr data-order="controllerInstances" id="$controllerInstances">
 		<td class="attributes"><code>
 			protected  
 			array
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Wei.App.html#63-68" title="Go to source code"><var>$controllers</var></a>
+				<a href="source-class-Wei.App.html#69-74" title="Go to source code"><var>$controllerInstances</var></a>
 
 			<div class="description short">
-				<p>The controller instances</p>
-
+				<p>The instanced controller objects</p>
 			</div>
 
 			<div class="description detailed hidden">
-				<p>The controller instances</p>
-
+				<p>The instanced controller objects</p>
 
 			</div>
 		</td>
 		<td class="value">
 			<div>
-				<a href="#$controllers" class="anchor">#</a>
+				<a href="#$controllerInstances" class="anchor">#</a>
+				<code><span class="php-keyword1">array</span>()</code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="controllerMap" id="$controllerMap">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.App.html#76-82" title="Go to source code"><var>$controllerMap</var></a>
+
+			<div class="description short">
+				<p>An array that stores predefined controller class,
+the key is controller name and value is controller class name</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>An array that stores predefined controller class,
+the key is controller name and value is controller class name</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$controllerMap" class="anchor">#</a>
 				<code><span class="php-keyword1">array</span>()</code>
 			</div>
 		</td>
@@ -979,12 +1223,10 @@ extension provided by the view engine</p>
 
 			<div class="description short">
 				<p>A service that parse the URL to request data</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				
-
 
 			</div>
 		</td>
@@ -1000,12 +1242,10 @@ extension provided by the view engine</p>
 
 			<div class="description short">
 				<p>A service that handles the HTTP request data</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				
-
 
 			</div>
 		</td>
@@ -1021,12 +1261,10 @@ extension provided by the view engine</p>
 
 			<div class="description short">
 				<p>A service that handles the HTTP response data</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				
-
 
 			</div>
 		</td>
@@ -1042,33 +1280,10 @@ extension provided by the view engine</p>
 
 			<div class="description short">
 				<p>A service that use to render PHP template</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				
-
-
-			</div>
-		</td>
-	</tr>
-	<tr data-order="logger" id="m$logger">
-		<td class="attributes"><code>
-			public  
-			<code><a href="class-Wei.Logger.html">Wei\Logger</a></code>
-		</code></td>
-
-		<td class="name">
-				<a href="source-class-Wei.App.html#19" title="Go to source code"><var>$logger</var></a>
-
-			<div class="description short">
-				<p>A logger service, which is inspired by Monolog</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-
 
 			</div>
 		</td>
@@ -1084,7 +1299,7 @@ extension provided by the view engine</p>
 	</div>
 </div>
 </div>
-<script src="resources/combined.js?721046668"></script>
-<script src="elementlist.js?2192786340"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
 </body>
 </html>

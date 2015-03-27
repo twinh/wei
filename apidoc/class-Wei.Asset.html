@@ -5,7 +5,7 @@
 
 	<title>Class Wei\Asset | Wei Framework</title>
 
-	<link rel="stylesheet" href="resources/style.css?331665766">
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
 </head>
 
@@ -21,11 +21,6 @@
 				<li>
 					<a href="namespace-None.html">
 						None					</a>
-
-						</li>
-				<li>
-					<a href="namespace-PHP.html">
-						PHP					</a>
 
 						</li>
 				<li class="active">
@@ -55,6 +50,7 @@
 				<li class="active"><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
 				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.BaseController.html">BaseController</a></li>
 				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
 				<li><a href="class-Wei.Cache.html">Cache</a></li>
 				<li><a href="class-Wei.Config.html">Config</a></li>
@@ -76,6 +72,7 @@
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.PhpFileCache.html">PhpFileCache</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
 				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
@@ -126,9 +123,6 @@
 <span>Class</span>			</li>
 		</ul>
 		<ul>
-			<li>
-				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
-			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -140,7 +134,6 @@
 
 	<div class="description">
 	<p>A service to generate assets' URL</p>
-
 	</div>
 
 	<dl class="tree">
@@ -168,13 +161,13 @@
 	<div class="info">
 		
 		
-		<b>Namespace:</b> Wei<br>
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br>
 		
 
 				<b>Author:</b>
-				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a>
-<br>
-		<b>Located at</b> <a href="source-class-Wei.Asset.html#11-91" title="Go to source code">Asset.php</a><br>
+				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a><br>
+			<b>Located at</b> <a href="source-class-Wei.Asset.html#11-94" title="Go to source code">Asset.php</a>
+		<br>
 	</div>
 
 
@@ -197,27 +190,23 @@
 
 		<div class="description short">
 			<p>Returns the asset or concat URL by specified file</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Returns the asset or concat URL by specified file</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$file</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$version</var></dt>
-					<dd>Whether append version or not
-</dd>
+					<dd>Whether append version or not</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -238,31 +227,32 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_concat">#</a>
-		<code><a href="source-class-Wei.Asset.html#59-68" title="Go to source code">concat</a>( <span>array <var>$files</var></span> )</code>
+		<code><a href="source-class-Wei.Asset.html#59-71" title="Go to source code">concat</a>( <span>array <var>$files</var></span> )</code>
 
 		<div class="description short">
-			<p>Returns the concat URL for list of files</p>
-
+			<p>Returns the Minify concat URL for list of files</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Returns the concat URL for list of files</p>
-
+			<p>Returns the Minify concat URL for list of files</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$files</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
+				<h4>Link</h4>
+				<div class="list">
+						<a href="https://github.com/mrclay/minify">https://github.com/mrclay/minify</a><br>
+				</div>
 
 
 		</div>
@@ -280,11 +270,10 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getBaseUrl">#</a>
-		<code><a href="source-class-Wei.Asset.html#70-78" title="Go to source code">getBaseUrl</a>( )</code>
+		<code><a href="source-class-Wei.Asset.html#73-81" title="Go to source code">getBaseUrl</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the base url of assets</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -292,10 +281,9 @@
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -309,36 +297,32 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setBaseUrl">#</a>
-		<code><a href="source-class-Wei.Asset.html#80-90" title="Go to source code">setBaseUrl</a>( <span>string <var>$baseUrl</var></span> )</code>
+		<code><a href="source-class-Wei.Asset.html#83-93" title="Go to source code">setBaseUrl</a>( <span>string <var>$baseUrl</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the base url of assets</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Sets the base url of assets</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$baseUrl</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -385,12 +369,10 @@
 
 			<div class="description short">
 				<p>The base URL of assets</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The base URL of assets</p>
-
 
 			</div>
 		</td>
@@ -412,12 +394,10 @@
 
 			<div class="description short">
 				<p>The base concat URL of assets</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The base concat URL of assets</p>
-
 
 			</div>
 		</td>
@@ -439,12 +419,10 @@
 
 			<div class="description short">
 				<p>The version number append to the URL</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The version number append to the URL</p>
-
 
 			</div>
 		</td>
@@ -478,7 +456,7 @@
 	</div>
 </div>
 </div>
-<script src="resources/combined.js?721046668"></script>
-<script src="elementlist.js?2192786340"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
 </body>
 </html>

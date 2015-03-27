@@ -5,7 +5,7 @@
 
 	<title>Class Wei\Url | Wei Framework</title>
 
-	<link rel="stylesheet" href="resources/style.css?331665766">
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
 </head>
 
@@ -21,11 +21,6 @@
 				<li>
 					<a href="namespace-None.html">
 						None					</a>
-
-						</li>
-				<li>
-					<a href="namespace-PHP.html">
-						PHP					</a>
 
 						</li>
 				<li class="active">
@@ -55,6 +50,7 @@
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
 				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.BaseController.html">BaseController</a></li>
 				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
 				<li><a href="class-Wei.Cache.html">Cache</a></li>
 				<li><a href="class-Wei.Config.html">Config</a></li>
@@ -76,6 +72,7 @@
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.PhpFileCache.html">PhpFileCache</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
 				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
@@ -126,9 +123,6 @@
 <span>Class</span>			</li>
 		</ul>
 		<ul>
-			<li>
-				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
-			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -140,7 +134,6 @@
 
 	<div class="description">
 	<p>A helper service to generate the URL</p>
-
 	</div>
 
 	<dl class="tree">
@@ -168,13 +161,13 @@
 	<div class="info">
 		
 		
-		<b>Namespace:</b> Wei<br>
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br>
 		
 
 				<b>Author:</b>
-				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a>
-<br>
-		<b>Located at</b> <a href="source-class-Wei.Url.html#11-45" title="Go to source code">Url.php</a><br>
+				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a><br>
+			<b>Located at</b> <a href="source-class-Wei.Url.html#11-78" title="Go to source code">Url.php</a>
+		<br>
 	</div>
 
 
@@ -193,31 +186,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___invoke">#</a>
-		<code><a href="source-class-Wei.Url.html#19-32" title="Go to source code">__invoke</a>( <span>string <var>$url</var> = <span class="php-quote">''</span></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Wei.Url.html#19-30" title="Go to source code">__invoke</a>( <span>string <var>$url</var> = <span class="php-quote">''</span></span>, <span>string|array <var>$argsOrParams</var> = <span class="php-keyword1">array</span>()</span>, <span>string|array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			<p>Generate the URL by specified URL and parameters</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Generate the URL by specified URL and parameters</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$url</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
+					<dt><var>$argsOrParams</var></dt>
+					<dd></dd>
 					<dt><var>$params</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -238,31 +229,115 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_full">#</a>
-		<code><a href="source-class-Wei.Url.html#34-44" title="Go to source code">full</a>( <span>string <var>$url</var></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Wei.Url.html#32-43" title="Go to source code">full</a>( <span>string <var>$url</var></span>, <span>string|array <var>$argsOrParams</var> = <span class="php-keyword1">array</span>()</span>, <span>string|array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
-			<p>Generate the full URL path by specified URL and parameters</p>
-
+			<p>Generate the absolute URL path by specified URL and parameters</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Generate the full URL path by specified URL and parameters</p>
-
+			<p>Generate the absolute URL path by specified URL and parameters</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$url</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
+					<dt><var>$argsOrParams</var></dt>
+					<dd></dd>
 					<dt><var>$params</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="query" id="_query">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_query">#</a>
+		<code><a href="source-class-Wei.Url.html#45-56" title="Go to source code">query</a>( <span>string <var>$url</var> = <span class="php-quote">''</span></span>, <span>string|array <var>$argsOrParams</var> = <span class="php-keyword1">array</span>()</span>, <span>string|array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			<p>Generate the URL path with current query parameters and specified parameters</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Generate the URL path with current query parameters and specified parameters</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd></dd>
+					<dt><var>$argsOrParams</var></dt>
+					<dd></dd>
+					<dt><var>$params</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="append" id="_append">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_append">#</a>
+		<code><a href="source-class-Wei.Url.html#58-77" title="Go to source code">append</a>( <span>string <var>$url</var> = <span class="php-quote">''</span></span>, <span>string|array <var>$argsOrParams</var> = <span class="php-keyword1">array</span>()</span>, <span>string|array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			<p>Append parameters to specified URL</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Append parameters to specified URL</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$url</var></dt>
+					<dd></dd>
+					<dt><var>$argsOrParams</var></dt>
+					<dd>The arguments to replace in URL or the parameters append to the URL</dd>
+					<dt><var>$params</var></dt>
+					<dd>The parameters append to the URL</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
 				</div>
 
 
@@ -321,12 +396,10 @@
 
 			<div class="description short">
 				<p>A service that handles the HTTP request data</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				
-
 
 			</div>
 		</td>
@@ -342,7 +415,7 @@
 	</div>
 </div>
 </div>
-<script src="resources/combined.js?721046668"></script>
-<script src="elementlist.js?2192786340"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
 </body>
 </html>

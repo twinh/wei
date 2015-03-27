@@ -5,7 +5,7 @@
 
 	<title>Class Wei\Error | Wei Framework</title>
 
-	<link rel="stylesheet" href="resources/style.css?331665766">
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
 </head>
 
@@ -21,11 +21,6 @@
 				<li>
 					<a href="namespace-None.html">
 						None					</a>
-
-						</li>
-				<li>
-					<a href="namespace-PHP.html">
-						PHP					</a>
 
 						</li>
 				<li class="active">
@@ -55,6 +50,7 @@
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
 				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.BaseController.html">BaseController</a></li>
 				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
 				<li><a href="class-Wei.Cache.html">Cache</a></li>
 				<li><a href="class-Wei.Config.html">Config</a></li>
@@ -76,6 +72,7 @@
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.PhpFileCache.html">PhpFileCache</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
 				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
@@ -126,9 +123,6 @@
 <span>Class</span>			</li>
 		</ul>
 		<ul>
-			<li>
-				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
-			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -140,7 +134,6 @@
 
 	<div class="description">
 	<p>A service that handles exception and display pretty exception message</p>
-
 	</div>
 
 	<dl class="tree">
@@ -168,10 +161,11 @@
 	<div class="info">
 		
 		
-		<b>Namespace:</b> Wei<br>
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br>
 		
 
-		<b>Located at</b> <a href="source-class-Wei.Error.html#11-367" title="Go to source code">Error.php</a><br>
+			<b>Located at</b> <a href="source-class-Wei.Error.html#11-368" title="Go to source code">Error.php</a>
+		<br>
 	</div>
 
 
@@ -194,26 +188,22 @@
 
 		<div class="description short">
 			<p>Constructor</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Constructor</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$options</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code><br>When option "wei" is not an instance of "Wei\Wei"
-
+					InvalidArgumentException<br>When option "wei" is not an instance of "Wei\Wei"
 				</div>
 
 
@@ -228,7 +218,7 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
@@ -239,25 +229,21 @@
 
 		<div class="description short">
 			<p>Attach a handler to exception error</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a handler to exception error</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$fn</var></dt>
-					<dd>The error handler
-</dd>
+					<dd>The error handler</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -271,7 +257,7 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
@@ -282,25 +268,21 @@
 
 		<div class="description short">
 			<p>Attach a handler to not found error</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a handler to not found error</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$fn</var></dt>
-					<dd>The error handler
-</dd>
+					<dd>The error handler</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -314,7 +296,7 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
@@ -325,25 +307,21 @@
 
 		<div class="description short">
 			<p>Attach a handler to fatal error</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Attach a handler to fatal error</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$fn</var></dt>
-					<dd>The error handler
-</dd>
+					<dd>The error handler</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -368,12 +346,10 @@
 
 		<div class="description short">
 			<p>Register exception Handler</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Register exception Handler</p>
-
 
 
 
@@ -400,12 +376,10 @@
 
 		<div class="description short">
 			<p>Register error Handler</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Register error Handler</p>
-
 
 
 
@@ -432,12 +406,10 @@
 
 		<div class="description short">
 			<p>Detect fatal error and register fatal handler</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Detect fatal error and register fatal handler</p>
-
 
 
 
@@ -460,31 +432,27 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_triggerHandler">#</a>
-		<code><a href="source-class-Wei.Error.html#173-189" title="Go to source code">triggerHandler</a>( <span>string <var>$type</var></span>, <span><code><a href="class-Exception.html">Exception</a></code> <var>$exception</var></span> )</code>
+		<code><a href="source-class-Wei.Error.html#173-189" title="Go to source code">triggerHandler</a>( <span>string <var>$type</var></span>, <span>Exception <var>$exception</var></span> )</code>
 
 		<div class="description short">
 			<p>Trigger a error handler</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Trigger a error handler</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$type</var></dt>
-					<dd>The type of error handlers
-</dd>
+					<dd>The type of error handlers</dd>
 					<dt><var>$exception</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -505,23 +473,20 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_handleException">#</a>
-		<code><a href="source-class-Wei.Error.html#191-213" title="Go to source code">handleException</a>( <span><code><a href="class-Exception.html">Exception</a></code> <var>$exception</var></span> )</code>
+		<code><a href="source-class-Wei.Error.html#191-213" title="Go to source code">handleException</a>( <span>Exception <var>$exception</var></span> )</code>
 
 		<div class="description short">
 			<p>The exception handler to render pretty message</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>The exception handler to render pretty message</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$exception</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 
@@ -543,16 +508,14 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_internalHandleException">#</a>
-		<code><a href="source-class-Wei.Error.html#215-241" title="Go to source code">internalHandleException</a>( <span><code><a href="class-Exception.html">Exception</a></code> <var>$exception</var></span> )</code>
+		<code><a href="source-class-Wei.Error.html#215-241" title="Go to source code">internalHandleException</a>( <span>Exception <var>$exception</var></span> )</code>
 
 		<div class="description short">
 			
-
 		</div>
 
 		<div class="description detailed hidden">
 			
-
 
 
 
@@ -575,26 +538,22 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_renderException">#</a>
-		<code><a href="source-class-Wei.Error.html#243-310" title="Go to source code">renderException</a>( <span><code><a href="class-Exception.html">Exception</a></code> <var>$e</var></span>, <span>boolean <var>$debug</var></span> )</code>
+		<code><a href="source-class-Wei.Error.html#243-311" title="Go to source code">renderException</a>( <span>Exception <var>$e</var></span>, <span>boolean <var>$debug</var></span> )</code>
 
 		<div class="description short">
 			<p>Render exception message</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Render exception message</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$e</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$debug</var></dt>
-					<dd>Whether show debug trace
-</dd>
+					<dd>Whether show debug trace</dd>
 				</dl></div>
 
 
@@ -616,39 +575,32 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_handleError">#</a>
-		<code><a href="source-class-Wei.Error.html#312-330" title="Go to source code">handleError</a>( <span>integer <var>$code</var></span>, <span>string <var>$message</var></span>, <span>string <var>$file</var></span>, <span>integer <var>$line</var></span> )</code>
+		<code><a href="source-class-Wei.Error.html#313-331" title="Go to source code">handleError</a>( <span>integer <var>$code</var></span>, <span>string <var>$message</var></span>, <span>string <var>$file</var></span>, <span>integer <var>$line</var></span> )</code>
 
 		<div class="description short">
 			<p>The error handler convert PHP error to exception</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>The error handler convert PHP error to exception</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$code</var></dt>
-					<dd>The level of the error raised
-</dd>
+					<dd>The level of the error raised</dd>
 					<dt><var>$message</var></dt>
-					<dd>The error message
-</dd>
+					<dd>The error message</dd>
 					<dt><var>$file</var></dt>
-					<dd>The filename that the error was raised in
-</dd>
+					<dd>The filename that the error was raised in</dd>
 					<dt><var>$line</var></dt>
-					<dd>The line number the error was raised at
-</dd>
+					<dd>The line number the error was raised at</dd>
 				</dl></div>
 
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-ErrorException.html">ErrorException</a></code><br>convert PHP error to exception
-
+					ErrorException<br>convert PHP error to exception
 				</div>
 
 
@@ -668,34 +620,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getFileCode">#</a>
-		<code><a href="source-class-Wei.Error.html#332-366" title="Go to source code">getFileCode</a>( <span>string <var>$file</var></span>, <span>integer <var>$line</var></span>, <span>integer <var>$range</var> = <span class="php-num">20</span></span> )</code>
+		<code><a href="source-class-Wei.Error.html#333-367" title="Go to source code">getFileCode</a>( <span>string <var>$file</var></span>, <span>integer <var>$line</var></span>, <span>integer <var>$range</var> = <span class="php-num">20</span></span> )</code>
 
 		<div class="description short">
 			<p>Get file code in specified range</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Get file code in specified range</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$file</var></dt>
-					<dd>The file name
-</dd>
+					<dd>The file name</dd>
 					<dt><var>$line</var></dt>
-					<dd>The file line
-</dd>
+					<dd>The file line</dd>
 					<dt><var>$range</var></dt>
-					<dd>The line range
-</dd>
+					<dd>The line range</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -741,12 +688,10 @@
 
 			<div class="description short">
 				<p>The default error message display when debug is not enable</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The default error message display when debug is not enable</p>
-
 
 			</div>
 		</td>
@@ -768,12 +713,10 @@
 
 			<div class="description short">
 				<p>The detail error message display when debug is not enable</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The detail error message display when debug is not enable</p>
-
 
 			</div>
 		</td>
@@ -795,12 +738,10 @@
 
 			<div class="description short">
 				<p>The detail error message display when thrown 404 exception</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The detail error message display when thrown 404 exception</p>
-
 
 			</div>
 		</td>
@@ -823,13 +764,11 @@
 			<div class="description short">
 				<p>Whether ignore the previous exception handler or attach it again to the
 exception event</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>Whether ignore the previous exception handler or attach it again to the
 exception event</p>
-
 
 			</div>
 		</td>
@@ -851,12 +790,10 @@ exception event</p>
 
 			<div class="description short">
 				<p>The previous exception handler</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The previous exception handler</p>
-
 
 			</div>
 		</td>
@@ -878,12 +815,10 @@ exception event</p>
 
 			<div class="description short">
 				<p>The custom error handlers</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The custom error handlers</p>
-
 
 			</div>
 		</td>
@@ -924,12 +859,10 @@ exception event</p>
 
 			<div class="description short">
 				<p>The logger wei</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				
-
 
 			</div>
 		</td>
@@ -945,12 +878,10 @@ exception event</p>
 
 			<div class="description short">
 				<p>The HTTP response wei</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				
-
 
 			</div>
 		</td>
@@ -966,7 +897,7 @@ exception event</p>
 	</div>
 </div>
 </div>
-<script src="resources/combined.js?721046668"></script>
-<script src="elementlist.js?2192786340"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
 </body>
 </html>

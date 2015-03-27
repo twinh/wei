@@ -5,7 +5,7 @@
 
 	<title>Class Wei\Logger | Wei Framework</title>
 
-	<link rel="stylesheet" href="resources/style.css?331665766">
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
 </head>
 
@@ -21,11 +21,6 @@
 				<li>
 					<a href="namespace-None.html">
 						None					</a>
-
-						</li>
-				<li>
-					<a href="namespace-PHP.html">
-						PHP					</a>
 
 						</li>
 				<li class="active">
@@ -55,6 +50,7 @@
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
 				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.BaseController.html">BaseController</a></li>
 				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
 				<li><a href="class-Wei.Cache.html">Cache</a></li>
 				<li><a href="class-Wei.Config.html">Config</a></li>
@@ -76,6 +72,7 @@
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.PhpFileCache.html">PhpFileCache</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
 				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
@@ -126,9 +123,6 @@
 <span>Class</span>			</li>
 		</ul>
 		<ul>
-			<li>
-				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
-			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -140,7 +134,6 @@
 
 	<div class="description">
 	<p>A logger service, which is inspired by Monolog</p>
-
 	</div>
 
 	<dl class="tree">
@@ -168,15 +161,15 @@
 	<div class="info">
 		
 		
-		<b>Namespace:</b> Wei<br>
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br>
 		
 
 				<b>Author:</b>
-				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a>
-<br>
+				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a><br>
 				<b>Link:</b>
 				<a href="https://github.com/Seldaek/monolog">https://github.com/Seldaek/monolog</a><br>
-		<b>Located at</b> <a href="source-class-Wei.Logger.html#11-455" title="Go to source code">Logger.php</a><br>
+			<b>Located at</b> <a href="source-class-Wei.Logger.html#11-455" title="Go to source code">Logger.php</a>
+		<br>
 	</div>
 
 
@@ -199,31 +192,25 @@
 
 		<div class="description short">
 			<p>Logs with an arbitrary level</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Logs with an arbitrary level</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$level</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$message</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$context</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code><br>Whether the log record has been handled
-
+					boolean<br>Whether the log record has been handled
 				</div>
 
 
@@ -248,30 +235,25 @@
 
 		<div class="description short">
 			<p>Write the log message</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Write the log message</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$level</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$message</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$context</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -296,30 +278,25 @@
 
 		<div class="description short">
 			<p>Format the log message</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Format the log message</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$level</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$message</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$context</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 
@@ -344,30 +321,25 @@
 
 		<div class="description short">
 			<p>Logs with an arbitrary level</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Logs with an arbitrary level</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$level</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$message</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$context</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -392,27 +364,23 @@
 
 		<div class="description short">
 			<p>System is unusable.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>System is unusable.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$message</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$context</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -437,7 +405,6 @@
 
 		<div class="description short">
 			<p>Action must be taken immediately.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -447,20 +414,17 @@
 trigger the SMS alerts and wake you up.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$message</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$context</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -485,7 +449,6 @@ trigger the SMS alerts and wake you up.</p>
 
 		<div class="description short">
 			<p>Critical conditions.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -494,20 +457,17 @@ trigger the SMS alerts and wake you up.</p>
 <p>Example: Application component unavailable, unexpected exception.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$message</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$context</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -533,7 +493,6 @@ trigger the SMS alerts and wake you up.</p>
 		<div class="description short">
 			<p>Runtime errors that do not require immediate action but should typically
 be logged and monitored.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -541,20 +500,17 @@ be logged and monitored.</p>
 be logged and monitored.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$message</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$context</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -579,7 +535,6 @@ be logged and monitored.</p>
 
 		<div class="description short">
 			<p>Exceptional occurrences that are not errors.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -589,20 +544,17 @@ be logged and monitored.</p>
 that are not necessarily wrong.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$message</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$context</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -627,27 +579,23 @@ that are not necessarily wrong.</p>
 
 		<div class="description short">
 			<p>Normal but significant events.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Normal but significant events.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$message</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$context</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -672,7 +620,6 @@ that are not necessarily wrong.</p>
 
 		<div class="description short">
 			<p>Interesting events.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -681,20 +628,17 @@ that are not necessarily wrong.</p>
 <p>Example: User logs in, SQL logs.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$message</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$context</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -719,27 +663,23 @@ that are not necessarily wrong.</p>
 
 		<div class="description short">
 			<p>Detailed debug information.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Detailed debug information.</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$message</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$context</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code>
+					boolean
 				</div>
 
 
@@ -764,7 +704,6 @@ that are not necessarily wrong.</p>
 
 		<div class="description short">
 			<p>Get log file</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -772,16 +711,14 @@ that are not necessarily wrong.</p>
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
 				</div>
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-RuntimeException.html">RuntimeException</a></code><br>When unable to create logging directory
-
+					RuntimeException<br>When unable to create logging directory
 				</div>
 
 
@@ -805,24 +742,21 @@ that are not necessarily wrong.</p>
 
 		<div class="description short">
 			<p>Set default log level</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Set default log level</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$level</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Wei.Logger.html">Wei\Logger</a></code></code>
+					<code><a href="class-Wei.Logger.html">Wei\Logger</a></code>
 				</div>
 
 
@@ -847,24 +781,21 @@ that are not necessarily wrong.</p>
 
 		<div class="description short">
 			<p>Set handled level</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Set handled level</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$handledLevel</var></dt>
-					<dd>The handled level
-</dd>
+					<dd>The handled level</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Wei.Logger.html">Wei\Logger</a></code></code>
+					<code><a href="class-Wei.Logger.html">Wei\Logger</a></code>
 				</div>
 
 
@@ -878,7 +809,7 @@ that are not necessarily wrong.</p>
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
@@ -889,28 +820,23 @@ that are not necessarily wrong.</p>
 
 		<div class="description short">
 			<p>Add one or multi item for log message</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Add one or multi item for log message</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$name</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 					<dt><var>$value</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -935,7 +861,6 @@ that are not necessarily wrong.</p>
 
 		<div class="description short">
 			<p>Clear up all log file</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -943,10 +868,9 @@ that are not necessarily wrong.</p>
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Wei.Logger.html">Wei\Logger</a></code></code>
+					<code><a href="class-Wei.Logger.html">Wei\Logger</a></code>
 				</div>
 
 
@@ -971,12 +895,10 @@ that are not necessarily wrong.</p>
 
 		<div class="description short">
 			<p>Close the file handle and reset to null</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Close the file handle and reset to null</p>
-
 
 
 
@@ -1003,12 +925,10 @@ that are not necessarily wrong.</p>
 
 		<div class="description short">
 			<p>Destructor</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Destructor</p>
-
 
 
 
@@ -1046,30 +966,28 @@ that are not necessarily wrong.</p>
 
 	<table class="summary properties" id="properties">
 	<caption>Properties summary</caption>
-	<tr data-order="name" id="$name">
+	<tr data-order="namespace" id="$namespace">
 		<td class="attributes"><code>
 			protected  
 			string
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Wei.Logger.html#19-24" title="Go to source code"><var>$name</var></a>
+				<a href="source-class-Wei.Logger.html#19-24" title="Go to source code"><var>$namespace</var></a>
 
 			<div class="description short">
 				<p>The name of channel</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The name of channel</p>
 
-
 			</div>
 		</td>
 		<td class="value">
 			<div>
-				<a href="#$name" class="anchor">#</a>
-				<code><span class="php-quote">'wei'</span></code>
+				<a href="#$namespace" class="anchor">#</a>
+				<code><span class="php-quote">''</span></code>
 			</div>
 		</td>
 	</tr>
@@ -1084,12 +1002,10 @@ that are not necessarily wrong.</p>
 
 			<div class="description short">
 				<p>The default level for log record which level is not specified</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The default level for log record which level is not specified</p>
-
 
 			</div>
 		</td>
@@ -1111,12 +1027,10 @@ that are not necessarily wrong.</p>
 
 			<div class="description short">
 				<p>The lowest level to be handled</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The lowest level to be handled</p>
-
 
 			</div>
 		</td>
@@ -1138,12 +1052,10 @@ that are not necessarily wrong.</p>
 
 			<div class="description short">
 				<p>The log levels and priorities</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The log levels and priorities</p>
-
 
 			</div>
 		</td>
@@ -1174,12 +1086,10 @@ that are not necessarily wrong.</p>
 
 			<div class="description short">
 				<p>The format for log message</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The format for log message</p>
-
 
 			</div>
 		</td>
@@ -1201,12 +1111,10 @@ that are not necessarily wrong.</p>
 
 			<div class="description short">
 				<p>The date format for log message</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The date format for log message</p>
-
 
 			</div>
 		</td>
@@ -1229,13 +1137,11 @@ that are not necessarily wrong.</p>
 			<div class="description short">
 				<p>The log file name, if specify this parameter, the "dir" and "fileFormat"
 parameters would be ignored</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The log file name, if specify this parameter, the "dir" and "fileFormat"
 parameters would be ignored</p>
-
 
 			</div>
 		</td>
@@ -1257,12 +1163,10 @@ parameters would be ignored</p>
 
 			<div class="description short">
 				<p>The directory to store log files</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The directory to store log files</p>
-
 
 			</div>
 		</td>
@@ -1284,12 +1188,10 @@ parameters would be ignored</p>
 
 			<div class="description short">
 				<p>The log file name, formatted by date</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The log file name, formatted by date</p>
-
 
 			</div>
 		</td>
@@ -1312,13 +1214,11 @@ parameters would be ignored</p>
 			<div class="description short">
 				<p>The max file size for log file, default to 128mb, set 0 to ignore this
 property</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The max file size for log file, default to 128mb, set 0 to ignore this
 property</p>
-
 
 			</div>
 		</td>
@@ -1341,13 +1241,11 @@ property</p>
 			<div class="description short">
 				<p>Whether log file's exact path has been detected, when set dir, fileFormat
 or fileSize options, log file should be detected again</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>Whether log file's exact path has been detected, when set dir, fileFormat
 or fileSize options, log file should be detected again</p>
-
 
 			</div>
 		</td>
@@ -1369,12 +1267,10 @@ or fileSize options, log file should be detected again</p>
 
 			<div class="description short">
 				<p>A key-value array that append to the log message</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>A key-value array that append to the log message</p>
-
 
 			</div>
 		</td>
@@ -1408,7 +1304,7 @@ or fileSize options, log file should be detected again</p>
 	</div>
 </div>
 </div>
-<script src="resources/combined.js?721046668"></script>
-<script src="elementlist.js?2192786340"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 
 	<title>Class Wei\Router | Wei Framework</title>
 
-	<link rel="stylesheet" href="resources/style.css?331665766">
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
 </head>
 
@@ -21,11 +21,6 @@
 				<li>
 					<a href="namespace-None.html">
 						None					</a>
-
-						</li>
-				<li>
-					<a href="namespace-PHP.html">
-						PHP					</a>
 
 						</li>
 				<li class="active">
@@ -55,6 +50,7 @@
 				<li><a href="class-Wei.Asset.html">Asset</a></li>
 				<li><a href="class-Wei.Base.html">Base</a></li>
 				<li><a href="class-Wei.BaseCache.html">BaseCache</a></li>
+				<li><a href="class-Wei.BaseController.html">BaseController</a></li>
 				<li><a href="class-Wei.Bicache.html">Bicache</a></li>
 				<li><a href="class-Wei.Cache.html">Cache</a></li>
 				<li><a href="class-Wei.Config.html">Config</a></li>
@@ -76,6 +72,7 @@
 				<li><a href="class-Wei.MongoCache.html">MongoCache</a></li>
 				<li><a href="class-Wei.Password.html">Password</a></li>
 				<li><a href="class-Wei.PhpError.html">PhpError</a></li>
+				<li><a href="class-Wei.PhpFileCache.html">PhpFileCache</a></li>
 				<li><a href="class-Wei.Pinyin.html">Pinyin</a></li>
 				<li><a href="class-Wei.Record.html">Record</a></li>
 				<li><a href="class-Wei.Redis.html">Redis</a></li>
@@ -126,9 +123,6 @@
 <span>Class</span>			</li>
 		</ul>
 		<ul>
-			<li>
-				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
-			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -140,7 +134,6 @@
 
 	<div class="description">
 	<p>A service that parse the URL to request data</p>
-
 	</div>
 
 	<dl class="tree">
@@ -168,90 +161,53 @@
 	<div class="info">
 		
 		
-		<b>Namespace:</b> Wei<br>
+		<b>Namespace:</b> <a href="namespace-Wei.html">Wei</a><br>
 		
 
 				<b>Author:</b>
-				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a>
-<br>
+				Twin Huang <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;">&#116;&#119;&#x69;&#x6e;&#104;&#117;a&#x6e;&#x67;&#64;&#113;q&#x2e;&#x63;&#111;&#109;</a><br>
 				<b>Link:</b>
 				<p>The code is inspired by the awesome framework - Kohana
-             http://kohanaframework.org/3.0/guide/api/Kohana_Route</p>
-<br>
-		<b>Located at</b> <a href="source-class-Wei.Router.html#11-371" title="Go to source code">Router.php</a><br>
+              http://kohanaframework.org/3.0/guide/api/Kohana_Route</p><br>
+			<b>Located at</b> <a href="source-class-Wei.Router.html#11-515" title="Go to source code">Router.php</a>
+		<br>
 	</div>
 
 
 
 	<table class="summary methods" id="methods">
 	<caption>Methods summary</caption>
-	<tr data-order="__invoke" id="___invoke">
-
-		<td class="attributes"><code>
-			 public 
-
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#___invoke">#</a>
-		<code><a href="source-class-Wei.Router.html#52-78" title="Go to source code">__invoke</a>( <span>mixed <var>$pathInfo</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$method</var> = <span class="php-keyword1">null</span></span> )</code>
-
-		<div class="description short">
-			<p>Run the application</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			<p>Run the application</p>
-
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
 	<tr data-order="setRoutes" id="_setRoutes">
 
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setRoutes">#</a>
-		<code><a href="source-class-Wei.Router.html#80-92" title="Go to source code">setRoutes</a>( <span>array <var>$routes</var></span> )</code>
+		<code><a href="source-class-Wei.Router.html#127-139" title="Go to source code">setRoutes</a>( <span>array <var>$routes</var></span> )</code>
 
 		<div class="description short">
 			<p>Set routes</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Set routes</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$routes</var></dt>
-					<dd>
-</dd>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -272,11 +228,10 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getRoutes">#</a>
-		<code><a href="source-class-Wei.Router.html#94-102" title="Go to source code">getRoutes</a>( )</code>
+		<code><a href="source-class-Wei.Router.html#141-149" title="Go to source code">getRoutes</a>( )</code>
 
 		<div class="description short">
 			<p>Return routes</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -284,10 +239,9 @@
 
 
 
-
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code>
+					array
 				</div>
 
 
@@ -301,42 +255,37 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_set">#</a>
-		<code><a href="source-class-Wei.Router.html#104-127" title="Go to source code">set</a>( <span>array <var>$route</var></span> )</code>
+		<code><a href="source-class-Wei.Router.html#151-174" title="Go to source code">set</a>( <span>array <var>$route</var></span> )</code>
 
 		<div class="description short">
 			<p>Add one route</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Add one route</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$route</var></dt>
-					<dd>the options of the route
-</dd>
+					<dd>the options of the route</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code><br>When argument is not string or array
-
+					InvalidArgumentException<br>When argument is not string or array
 				</div>
 
 
@@ -356,28 +305,25 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getRoute">#</a>
-		<code><a href="source-class-Wei.Router.html#129-138" title="Go to source code">getRoute</a>( <span>string <var>$id</var></span> )</code>
+		<code><a href="source-class-Wei.Router.html#176-185" title="Go to source code">getRoute</a>( <span>string <var>$id</var></span> )</code>
 
 		<div class="description short">
 			<p>Get the route by id</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Get the route by id</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$id</var></dt>
-					<dd>The id of the route
-</dd>
+					<dd>The id of the route</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>false|array</code>
+					false|array
 				</div>
 
 
@@ -391,36 +337,32 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_remove">#</a>
-		<code><a href="source-class-Wei.Router.html#140-150" title="Go to source code">remove</a>( <span>string <var>$id</var></span> )</code>
+		<code><a href="source-class-Wei.Router.html#187-197" title="Go to source code">remove</a>( <span>string <var>$id</var></span> )</code>
 
 		<div class="description short">
 			<p>Remove the route</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Remove the route</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$id</var></dt>
-					<dd>The id of the route
-</dd>
+					<dd>The id of the route</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this
-
+					<br>$this
 				</div>
 
 
@@ -441,28 +383,25 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_compile">#</a>
-		<code><a href="source-class-Wei.Router.html#152-182" title="Go to source code">compile</a>( <span>array <var>&amp; $route</var></span> )</code>
+		<code><a href="source-class-Wei.Router.html#199-229" title="Go to source code">compile</a>( <span>array <var>&amp; $route</var></span> )</code>
 
 		<div class="description short">
 			<p>Prepare the route pattern to regex</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Prepare the route pattern to regex</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$route</var></dt>
-					<dd>the route array
-</dd>
+					<dd>the route array</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code>
+					array
 				</div>
 
 
@@ -483,12 +422,11 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_match">#</a>
-		<code><a href="source-class-Wei.Router.html#184-202" title="Go to source code">match</a>( <span>string <var>$pathInfo</var></span>, <span>string|null <var>$method</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Wei.Router.html#231-249" title="Go to source code">match</a>( <span>string <var>$pathInfo</var></span>, <span>string|null <var>$method</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Check if there is a route matches the path info and method,
 and return the parameters, or return false when not matched</p>
-
 		</div>
 
 		<div class="description detailed hidden">
@@ -496,20 +434,58 @@ and return the parameters, or return false when not matched</p>
 and return the parameters, or return false when not matched</p>
 
 
-
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$pathInfo</var></dt>
-					<dd>The path info to match
-</dd>
+					<dd>The path info to match</dd>
 					<dt><var>$method</var></dt>
-					<dd>The request method to match, maybe GET, POST, etc
-</dd>
+					<dd>The request method to match, maybe GET, POST, etc</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>false|array</code>
+					false|array
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="matchParamSet" id="_matchParamSet">
+
+		<td class="attributes"><code>
+			 public 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_matchParamSet">#</a>
+		<code><a href="source-class-Wei.Router.html#251-263" title="Go to source code">matchParamSet</a>( <span>string <var>$pathInfo</var></span>, <span>string|null <var>$method</var> = <span class="php-quote">'GET'</span></span> )</code>
+
+		<div class="description short">
+			<p>Parse the path info to parameter set</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Parse the path info to parameter set</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$pathInfo</var></dt>
+					<dd>The path info to match</dd>
+					<dt><var>$method</var></dt>
+					<dd>The request method to match, maybe GET, POST, etc</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
 				</div>
 
 
@@ -530,36 +506,31 @@ and return the parameters, or return false when not matched</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_matchRoute">#</a>
-		<code><a href="source-class-Wei.Router.html#204-246" title="Go to source code">matchRoute</a>( <span>string <var>$pathInfo</var></span>, <span>string <var>$method</var></span>, <span>string <var>$id</var></span> )</code>
+		<code><a href="source-class-Wei.Router.html#265-307" title="Go to source code">matchRoute</a>( <span>string <var>$pathInfo</var></span>, <span>string <var>$method</var></span>, <span>string <var>$id</var></span> )</code>
 
 		<div class="description short">
 			<p>Check if the route matches the path info and method,
 and return the parameters, or return false when not matched</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			<p>Check if the route matches the path info and method,
 and return the parameters, or return false when not matched</p>
-
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$pathInfo</var></dt>
-					<dd>The path info to match
-</dd>
+					<dd>The path info to match</dd>
 					<dt><var>$method</var></dt>
-					<dd>The request method to match
-</dd>
+					<dd>The request method to match</dd>
 					<dt><var>$id</var></dt>
-					<dd>The id of the route
-</dd>
+					<dd>The id of the route</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>false|array</code>
+					false|array
 				</div>
 
 
@@ -568,127 +539,320 @@ and return the parameters, or return false when not matched</p>
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="buildQuery" id="_buildQuery">
-
-		<td class="attributes"><code>
-			 protected 
-
-			string
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_buildQuery">#</a>
-		<code><a href="source-class-Wei.Router.html#248-257" title="Go to source code">buildQuery</a>( <span>array <var>$parameters</var></span> )</code>
-
-		<div class="description short">
-			<p>Build params to query string</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			<p>Build params to query string</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$parameters</var></dt>
-					<dd>The array params to combine
-</dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>string</code>
-				</div>
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="buildPath" id="_buildPath">
-
-		<td class="attributes"><code>
-			 protected 
-
-			boolean|string
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_buildPath">#</a>
-		<code><a href="source-class-Wei.Router.html#259-354" title="Go to source code">buildPath</a>( <span>array <var>$parameters</var></span>, <span>string <var>$id</var></span> )</code>
-
-		<div class="description short">
-			
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$parameters</var></dt>
-					<dd>
-</dd>
-					<dt><var>$id</var></dt>
-					<dd>
-</dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>boolean|string</code>
-				</div>
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="generatePath" id="_generatePath">
+	<tr data-order="matchRestParamSet" id="_matchRestParamSet">
 
 		<td class="attributes"><code>
 			 public 
 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_matchRestParamSet">#</a>
+		<code><a href="source-class-Wei.Router.html#309-409" title="Go to source code">matchRestParamSet</a>( <span>string <var>$path</var></span>, <span>string <var>$method</var> = <span class="php-quote">'GET'</span></span> )</code>
+
+		<div class="description short">
+			<p>Parse the path info to multi REST parameters</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Parse the path info to multi REST parameters</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd></dd>
+					<dt><var>$method</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parsePath" id="_parsePath">
+
+		<td class="attributes"><code>
+			 protected 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_parsePath">#</a>
+		<code><a href="source-class-Wei.Router.html#411-428" title="Go to source code">parsePath</a>( <span>string <var>$path</var></span> )</code>
+
+		<div class="description short">
+			<p>Parse path to resource names, actions and ids</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Parse path to resource names, actions and ids</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setCombinedResources" id="_setCombinedResources">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setCombinedResources">#</a>
+		<code><a href="source-class-Wei.Router.html#430-440" title="Go to source code">setCombinedResources</a>( <span>array <var>$combinedResources</var></span> )</code>
+
+		<div class="description short">
+			<p>Set combined resources</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Set combined resources</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$combinedResources</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<br>$this
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setSingulars" id="_setSingulars">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setSingulars">#</a>
+		<code><a href="source-class-Wei.Router.html#442-452" title="Go to source code">setSingulars</a>( <span>array <var>$singulars</var></span> )</code>
+
+		<div class="description short">
+			<p>Append words to singulars</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Append words to singulars</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$singulars</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<br>$this
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="singularize" id="_singularize">
+
+		<td class="attributes"><code>
+			 protected 
+
 			string
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_generatePath">#</a>
-		<code><a href="source-class-Wei.Router.html#356-370" title="Go to source code">generatePath</a>( <span>array <var>$parameters</var></span> )</code>
+		<a class="anchor" href="#_singularize">#</a>
+		<code><a href="source-class-Wei.Router.html#454-478" title="Go to source code">singularize</a>( <span>string <var>$word</var></span> )</code>
 
 		<div class="description short">
-			<p>Generate url path from the specified array</p>
-
+			<p>Returns a word in singular form.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Generate url path from the specified array</p>
+			<p>Returns a word in singular form.</p>
 
+<p>The implementation is borrowed from Doctrine Inflector</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$parameters</var></dt>
-					<dd>
-</dd>
+					<dt><var>$word</var></dt>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code>
+					string
+				</div>
+
+
+				<h4>Link</h4>
+				<div class="list">
+						<a href="https://github.com/doctrine/inflector">https://github.com/doctrine/inflector</a><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="camelize" id="_camelize">
+
+		<td class="attributes"><code>
+			 protected 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_camelize">#</a>
+		<code><a href="source-class-Wei.Router.html#480-490" title="Go to source code">camelize</a>( <span>string <var>$word</var></span> )</code>
+
+		<div class="description short">
+			<p>Camelizes a word</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Camelizes a word</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$word</var></dt>
+					<dd>The word to camelize.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					string<br>The camelized word.
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="methodToAction" id="_methodToAction">
+
+		<td class="attributes"><code>
+			 protected 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_methodToAction">#</a>
+		<code><a href="source-class-Wei.Router.html#492-505" title="Go to source code">methodToAction</a>( <span>string <var>$method</var></span>, <span>boolean <var>$collection</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			<p>Convert HTTP method to action name</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Convert HTTP method to action name</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$method</var></dt>
+					<dd></dd>
+					<dt><var>$collection</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isAction" id="_isAction">
+
+		<td class="attributes"><code>
+			 protected 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isAction">#</a>
+		<code><a href="source-class-Wei.Router.html#507-514" title="Go to source code">isAction</a>( <span>string <var>$action</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$action</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
 				</div>
 
 
@@ -713,51 +877,6 @@ and return the parameters, or return false when not matched</p>
 	</table>
 
 
-	<table class="summary methods" id="magicMethods">
-	<caption>Magic methods summary</caption>
-	<tr data-order="response" id="m_response">
-
-		<td class="attributes"><code>
-			 public 
-
-			<code><a href="class-Wei.Response.html">Wei\Response</a></code>
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#m_response">#</a>
-		<code><a href="source-class-Wei.Router.html#18" title="Go to source code">response</a>( <span>string <var>$content</var></span> )</code>
-
-		<div class="description short">
-			<p>Send response header and content</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			<p>Send response header and content</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$content</var></dt>
-					<dd>
-</dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code><code><a href="class-Wei.Response.html">Wei\Response</a></code></code>
-				</div>
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	</table>
 
 
 
@@ -776,16 +895,14 @@ and return the parameters, or return false when not matched</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Wei.Router.html#22-27" title="Go to source code"><var>$routes</var></a>
+				<a href="source-class-Wei.Router.html#20-25" title="Go to source code"><var>$routes</var></a>
 
 			<div class="description short">
 				<p>The routes configurations</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The routes configurations</p>
-
 
 			</div>
 		</td>
@@ -803,16 +920,14 @@ and return the parameters, or return false when not matched</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Wei.Router.html#29-50" title="Go to source code"><var>$routeOptions</var></a>
+				<a href="source-class-Wei.Router.html#27-46" title="Go to source code"><var>$routeOptions</var></a>
 
 			<div class="description short">
 				<p>The default route options</p>
-
 			</div>
 
 			<div class="description detailed hidden">
 				<p>The default route options</p>
-
 
 			</div>
 		</td>
@@ -824,8 +939,234 @@ and return the parameters, or return false when not matched</p>
     <span class="php-quote">'rules'</span>     =&gt; <span class="php-keyword1">array</span>(),
     <span class="php-quote">'defaults'</span>  =&gt; <span class="php-keyword1">array</span>(),
     <span class="php-quote">'method'</span>    =&gt; <span class="php-keyword1">null</span>,
-    <span class="php-quote">'callback'</span>  =&gt; <span class="php-keyword1">null</span>,
     <span class="php-quote">'regex'</span>     =&gt; <span class="php-keyword1">null</span>,
+)</code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="namespaces" id="$namespaces">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Router.html#48-53" title="Go to source code"><var>$namespaces</var></a>
+
+			<div class="description short">
+				<p>The string to split out at the beginning of path</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The string to split out at the beginning of path</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$namespaces" class="anchor">#</a>
+				<code><span class="php-keyword1">array</span>(<span class="php-quote">'admin'</span>, <span class="php-quote">'api'</span>)</code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="scopes" id="$scopes">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Router.html#55-60" title="Go to source code"><var>$scopes</var></a>
+
+			<div class="description short">
+				<p>The string to split out after namespace string</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The string to split out after namespace string</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$scopes" class="anchor">#</a>
+				<code><span class="php-keyword1">array</span>(<span class="php-quote">'user'</span>)</code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="combinedResources" id="$combinedResources">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Router.html#62-67" title="Go to source code"><var>$combinedResources</var></a>
+
+			<div class="description short">
+				<p>The resources that contains "/", eg articles/categories, products/categories, issues/comments.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The resources that contains "/", eg articles/categories, products/categories, issues/comments.</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$combinedResources" class="anchor">#</a>
+				<code><span class="php-keyword1">array</span>()</code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="defaultController" id="$defaultController">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Router.html#69-72" title="Go to source code"><var>$defaultController</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$defaultController" class="anchor">#</a>
+				<code><span class="php-quote">'index'</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="defaultAction" id="$defaultAction">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Router.html#74-77" title="Go to source code"><var>$defaultAction</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$defaultAction" class="anchor">#</a>
+				<code><span class="php-quote">'index'</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="methodToAction" id="$methodToAction">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Router.html#79-91" title="Go to source code"><var>$methodToAction</var></a>
+
+			<div class="description short">
+				<p>An array contains the HTTP method and action name</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>An array contains the HTTP method and action name</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$methodToAction" class="anchor">#</a>
+				<code><span class="php-keyword1">array</span>(
+    <span class="php-quote">'GET-collection'</span> =&gt; <span class="php-quote">'index'</span>,
+    <span class="php-quote">'GET'</span> =&gt; <span class="php-quote">'show'</span>,
+    <span class="php-quote">'POST'</span> =&gt; <span class="php-quote">'create'</span>,
+    <span class="php-quote">'PATCH'</span> =&gt; <span class="php-quote">'update'</span>,
+    <span class="php-quote">'PUT'</span> =&gt; <span class="php-quote">'update'</span>,
+    <span class="php-quote">'DELETE'</span> =&gt; <span class="php-quote">'destroy'</span>
+)</code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="singularRules" id="$singularRules">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Router.html#93-102" title="Go to source code"><var>$singularRules</var></a>
+
+			<div class="description short">
+				<p>Singular inflector rules</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Singular inflector rules</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$singularRules" class="anchor">#</a>
+				<code><span class="php-keyword1">array</span>(
+    <span class="php-quote">'/(o|x|ch|ss|sh)es$/i'</span> =&gt; <span class="php-quote">'\1'</span>, <span class="php-comment">// heroes, potatoes, tomatoes</span>
+    <span class="php-quote">'/([^aeiouy]|qu)ies$/i'</span> =&gt; <span class="php-quote">'\1y'</span>, <span class="php-comment">// histories</span>
+    <span class="php-quote">'/s$/i'</span> =&gt; <span class="php-quote">''</span>,
+)</code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="singulars" id="$singulars">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Wei.Router.html#104-125" title="Go to source code"><var>$singulars</var></a>
+
+			<div class="description short">
+				<p>The plural to singular array</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The plural to singular array</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$singulars" class="anchor">#</a>
+				<code><span class="php-keyword1">array</span>(
+    <span class="php-quote">'aliases'</span> =&gt; <span class="php-quote">'alias'</span>,
+    <span class="php-quote">'analyses'</span> =&gt; <span class="php-quote">'analysis'</span>,
+    <span class="php-quote">'buses'</span> =&gt; <span class="php-quote">'bus'</span>,
+    <span class="php-quote">'children'</span> =&gt; <span class="php-quote">'child'</span>,
+    <span class="php-quote">'cookies'</span> =&gt; <span class="php-quote">'cookie'</span>,
+    <span class="php-quote">'criteria'</span> =&gt; <span class="php-quote">'criterion'</span>,
+    <span class="php-quote">'data'</span> =&gt; <span class="php-quote">'datum'</span>,
+    <span class="php-quote">'lives'</span> =&gt; <span class="php-quote">'life'</span>,
+    <span class="php-quote">'matrices'</span> =&gt; <span class="php-quote">'matrix'</span>,
+    <span class="php-quote">'men'</span> =&gt; <span class="php-quote">'man'</span>,
+    <span class="php-quote">'menus'</span> =&gt; <span class="php-quote">'menu'</span>,
+    <span class="php-quote">'monies'</span> =&gt; <span class="php-quote">'money'</span>,
+    <span class="php-quote">'news'</span> =&gt; <span class="php-quote">'news'</span>,
+    <span class="php-quote">'people'</span> =&gt; <span class="php-quote">'person'</span>,
+    <span class="php-quote">'quizzes'</span> =&gt; <span class="php-quote">'quiz'</span>,
 )</code>
 			</div>
 		</td>
@@ -843,30 +1184,6 @@ and return the parameters, or return false when not matched</p>
 	</table>
 
 
-	<table class="summary properties" id="magicProperties">
-	<caption>Magic properties summary</caption>
-	<tr data-order="request" id="m$request">
-		<td class="attributes"><code>
-			public  
-			<code><a href="class-Wei.Request.html">Wei\Request</a></code>
-		</code></td>
-
-		<td class="name">
-				<a href="source-class-Wei.Router.html#17" title="Go to source code"><var>$request</var></a>
-
-			<div class="description short">
-				<p>A service that handles the HTTP request data</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-
-			</div>
-		</td>
-	</tr>
-	</table>
 
 
 
@@ -877,7 +1194,7 @@ and return the parameters, or return false when not matched</p>
 	</div>
 </div>
 </div>
-<script src="resources/combined.js?721046668"></script>
-<script src="elementlist.js?2192786340"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
 </body>
 </html>
