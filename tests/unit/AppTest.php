@@ -159,6 +159,13 @@ class AppTest extends TestCase
         $this->app->dispatch('test', 'forwardController');
     }
 
+    public function testForwardParams()
+    {
+        $this->expectOutputString('forwardParamsAction');
+
+        $this->app->dispatch('test', 'forwardParams');
+    }
+
     public function testNestedControllerView()
     {
         $this->expectOutputString('value');

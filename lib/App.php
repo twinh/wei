@@ -467,10 +467,11 @@ class App extends Base
      *
      * @param string $controller The name of controller
      * @param null|string $action The name of action
+     * @param array $params The request parameters
      */
-    public function forward($controller, $action = null)
+    public function forward($controller, $action = null, array $params = array())
     {
-        $this->dispatch($controller, $action);
+        $this->dispatch($controller, $action, $params);
         $this->preventPreviousDispatch();
     }
 }

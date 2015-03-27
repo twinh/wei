@@ -54,6 +54,11 @@ class Test extends \Wei\BaseController
         return $this->app->forward('forward');
     }
 
+    public function forwardParamsAction()
+    {
+        return $this->app->forward('forward', 'params', array('param' => __FUNCTION__));
+    }
+
     public function targetAction()
     {
         return 'target';

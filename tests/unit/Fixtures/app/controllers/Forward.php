@@ -13,4 +13,9 @@ class Forward extends \Wei\BaseController
     {
         return 'target';
     }
+
+    public function paramsAction($req)
+    {
+        return $req['param'];
+    }
 }
