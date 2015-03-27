@@ -24,7 +24,9 @@ return array(
             'env',
         )
     ),
-    'app' => array(
-
+    'view' => array(
+        'dirs' => array(
+            'views'
+        )
     )
 );

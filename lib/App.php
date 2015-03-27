@@ -201,7 +201,8 @@ class App extends Base
         $middleware = $this->getMiddleware($instance, $action);
 
         $callback = function () use ($instance, $action, $app) {
-            $response = $instance->$action($app->request, $app->response);
+            $method = $action . 'Action';
+            $response = $instance->$method($app->request, $app->response);
             return $app->handleResponse($response);
         };
 
@@ -414,7 +415,6 @@ class App extends Base
      * 1. method is not found
      * 2. method is not public
      * 3. method letters case error
-     * 4. method is starts with "_"
      *
      * @param object $object The object of controller
      * @param string $action The name of action
@@ -422,9 +422,10 @@ class App extends Base
      */
     public function isActionAvailable($object, $action)
     {
+        $method = $action . 'Action';
         try {
-            $ref = new \ReflectionMethod($object, $action);
-            if ($ref->isPublic() && $action === $ref->name && $action[0] !== '_') {
+            $ref = new \ReflectionMethod($object, $method);
+            if ($ref->isPublic() && $method === $ref->name) {
                 return true;
             } else {
                 return false;

@@ -243,7 +243,7 @@ class AppTest extends TestCase
 
     public function testActionNameCaseSensitive()
     {
-        $this->expectOutputString('caseInsensitive');
+        $this->expectOutputString('caseInsensitiveAction');
 
         $this->request->setPathInfo('test/caseInsensitive');
         $this->app();

@@ -12,7 +12,7 @@ class DispatchBreak extends \Wei\BaseController
         $this->app->preventPreviousDispatch();
     }
 
-    public function index()
+    public function indexAction()
     {
         return 'can not see me';
     }

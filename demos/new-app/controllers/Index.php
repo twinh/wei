@@ -4,13 +4,14 @@ namespace controllers;
 
 class Index extends Base
 {
-    public function index()
+    public function indexAction()
     {
         return 'Welcome!';
     }
 
-    public function hello()
+    public function viewAction()
     {
-        return 'Hello World';
+        $name = 'Hello World';
+        return get_defined_vars();
     }
 }
