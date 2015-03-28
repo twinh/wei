@@ -191,7 +191,7 @@ class App extends Base
     /**
      * Execute action with middleware
      *
-     * @param \Wei\Base $instance
+     * @param \Wei\BaseController $instance
      * @param string $action
      * @return Response
      */
@@ -202,9 +202,14 @@ class App extends Base
         $middleware = $this->getMiddleware($instance, $action);
 
         $callback = function () use ($instance, $action, $app) {
+            $instance->before($app->request, $app->response);
+
             $method = $app->getActionMethod($action);
             $response = $instance->$method($app->request, $app->response);
-            return $app->handleResponse($response);
+            $response = $app->handleResponse($response);
+
+            $instance->after($app->request, $response);
+            return $response;
         };
 
         $next = function () use (&$middleware, &$next, $callback, $wei) {
@@ -225,7 +230,7 @@ class App extends Base
     /**
      * Returns middleware for specified action
      *
-     * @param \Wei\Base $instance
+     * @param \Wei\BaseController $instance
      * @param string $action
      * @return array
      */
@@ -401,7 +406,7 @@ class App extends Base
      * Get the controller instance, if not found, return false instead
      *
      * @param string $class The class name of controller
-     * @return \Wei\Base
+     * @return \Wei\BaseController
      */
     protected function getControllerInstance($class)
     {

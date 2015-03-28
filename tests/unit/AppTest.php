@@ -373,4 +373,15 @@ class AppTest extends TestCase
 
         $this->assertEquals('start1-start2-start3-stack-end3-end2-end1', $response->getContent());
     }
+
+    public function testBeforeAndAfter()
+    {
+        $this->expectOutputString('callback');
+
+        $this->request->set(array('before' => 0, 'after' => 0));
+        $this->app->dispatch('callback');
+
+        $this->assertEquals(1, $this->request['before']);
+        $this->assertEquals(1, $this->request['after']);
+    }
 }

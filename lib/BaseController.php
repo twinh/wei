@@ -12,6 +12,9 @@ namespace Wei;
  * The base class for controller
  *
  * @author      Twin Huang <twinhuang@qq.com>
+ *
+ * @property Request    $request A service that handles the HTTP request data
+ * @property Response   $response A object that handles the HTTP response data
  */
 class BaseController extends Base
 {
@@ -33,5 +36,27 @@ class BaseController extends Base
     {
         $this->middleware[$name] = $options;
         return $this;
+    }
+
+    /**
+     * The callback triggered before execute the action
+     *
+     * @param Request $req
+     * @param Response $res
+     */
+    public function before($req, $res)
+    {
+
+    }
+
+    /**
+     * The callback triggered after execute the action
+     *
+     * @param Request $req
+     * @param Response $res
+     */
+    public function after($req, $res)
+    {
+
     }
 }
