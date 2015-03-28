@@ -166,6 +166,17 @@ class AppTest extends TestCase
         $this->app->dispatch('test', 'forwardParams');
     }
 
+    public function testForwardDispatchReturnsNewResponse()
+    {
+        $this->expectOutputString('forwardParamsAction');
+
+        $response = $this->app->dispatch('test', 'forwardParams');
+
+        $this->assertInstanceOf('\Wei\Response', $response);
+
+        $this->assertEquals('forwardParamsAction', $response->getContent());
+    }
+
     public function testNestedControllerView()
     {
         $this->expectOutputString('value');
@@ -362,5 +373,4 @@ class AppTest extends TestCase
 
         $this->assertEquals('start1-start2-start3-stack-end3-end2-end1', $response->getContent());
     }
-
 }

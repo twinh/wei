@@ -143,7 +143,7 @@ class App extends Base
                 return $this->execute($instance, $action);
             } catch (\RuntimeException $e) {
                 if ($e->getCode() === self::FORWARD) {
-                    return $this;
+                    return $this->response;
                 } else {
                     throw $e;
                 }
@@ -471,7 +471,7 @@ class App extends Base
      */
     public function forward($controller, $action = null, array $params = array())
     {
-        $this->dispatch($controller, $action, $params);
+        $this->response = $this->dispatch($controller, $action, $params);
         $this->preventPreviousDispatch();
     }
 }
