@@ -16,7 +16,7 @@ namespace Wei;
  * @property Request    $request A service that handles the HTTP request data
  * @property Response   $response A object that handles the HTTP response data
  */
-class BaseController extends Base
+abstract class BaseController extends Base
 {
     /**
      * The controller middleware config
