@@ -536,6 +536,27 @@ class RouterTest extends TestCase
     public function dataForMatchParamSet()
     {
         return array(
+            array(
+                'POST',
+                'admin/navs/3/links',
+                array(
+                    array(
+                        'controller' => 'admin/navs',
+                        'action' => 'links',
+                        'id' => '3'
+                    ),
+                    array(
+                        'controller' => 'admin/navs/links',
+                        'action' => 'create',
+                        'navId' => '3'
+                    ),
+                    array(
+                        'controller' => 'admin/links',
+                        'action' => 'create',
+                        'navId' => '3'
+                    )
+                )
+            ),
             // Seven basic routes
             array(
                 'GET',
@@ -908,7 +929,7 @@ class RouterTest extends TestCase
                         'articleId' => '1'
                     ),
                     array(
-                        'controller' => 'edit',
+                        'controller' => 'admin/edit',
                         'action' => 'index',
                         'articleId' => '1'
                     )
@@ -1456,7 +1477,7 @@ class RouterTest extends TestCase
                         'cardId' => '1'
                     ),
                     array(
-                        'controller' => 'edit',
+                        'controller' => 'user/edit',
                         'action' => 'index',
                         'cardId' => '1'
                     )
@@ -1643,7 +1664,7 @@ class RouterTest extends TestCase
                 array(
                     'combinedResources' => array('issues/comments')
                 )
-            )
+            ),
         );
     }
 

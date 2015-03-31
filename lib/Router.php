@@ -397,7 +397,7 @@ class Router extends Base
             );
 
             // GET|PUT|... posts/1/comments, use the last parameter as main controller name
-            $routes[] = array('controller' => $ctrlOrAct) + $routes[1];
+            $routes[] = array('controller' => $rootCtrl . $ctrlOrAct) + $routes[1];
         }
 
         foreach ($routes as &$route) {
