@@ -211,4 +211,12 @@ class Memcached extends BaseCache
         $this->object = $object;
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getResultCode()
+    {
+        return $this->object->getResultCode();
+    }
 }

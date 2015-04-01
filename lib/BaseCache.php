@@ -101,7 +101,7 @@ abstract class BaseCache extends Base
             $setResult  = $this->set($key, $result, $expire);
 
             if (false === $setResult) {
-                throw new \RuntimeException('Fail to store cache from callback', 1020);
+                throw new \RuntimeException('Fail to store cache from callback, the result code is ' . $this->getResultCode(), 1020);
             }
         }
         return $result;
@@ -240,6 +240,16 @@ abstract class BaseCache extends Base
     {
         $this->namespace = $namespace;
         return $this;
+    }
+
+    /**
+     * Return the result code of the last operation
+     *
+     * @return int
+     */
+    public function getResultCode()
+    {
+        return 0;
     }
 
     /**
