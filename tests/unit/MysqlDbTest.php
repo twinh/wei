@@ -30,7 +30,7 @@ class MysqlDbTest extends DbTest
 
     public function testUseDb()
     {
-        $this->db->useDb('test');
-        $this->assertEquals('test', $this->db->getDbname());
+        $this->db->useDb('information_schema');
+        $this->assertEquals('information_schema', $this->db->getDbname());
     }
 }
