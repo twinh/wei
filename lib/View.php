@@ -92,6 +92,7 @@ class View extends Base implements \ArrayAccess
         // Assign to double underscored variables to avoid conflict with view parameters
         $__file = $this->getFile($name);
         $__data = $data + $this->data;
+        $__layout = $this->layout;
 
         // Render view
         extract($__data, EXTR_OVERWRITE);
@@ -104,8 +105,8 @@ class View extends Base implements \ArrayAccess
         }
         $content = ob_get_clean();
 
-        // Render layout
-        if ($this->layout) {
+        // If layout is configured, render layout
+        if ($__layout != $this->layout) {
             $layout = $this->layout;
             $this->layout = array();
             $__data[$layout['variable']] = $content;

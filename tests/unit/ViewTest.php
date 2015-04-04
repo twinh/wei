@@ -162,4 +162,10 @@ class ViewTest extends TestCase
         $content = $this->view->render('assignViewVarInViewFile/content.php');
         $this->assertContains('assign!', $content);
     }
+
+    public function testRenderInContent()
+    {
+        $content = $this->view->render('renderInContent/content.php');
+        $this->assertContains("header\ncontent\nsub-content\nfooter", $content);
+    }
 }
