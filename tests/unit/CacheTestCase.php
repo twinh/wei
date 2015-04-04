@@ -227,7 +227,7 @@ class CacheTestCase extends TestCase
     {
         $this->setExpectedException('\RuntimeException', 'Fail to store cache from callback, the result code is 0', 1020);
 
-        $mock = $this->getMock(get_class($this->object), array('set'));
+        $mock = $this->getMock(get_class($this->object), array('set', 'getResultCode'));
 
         // fix bicache driver not found error
         if ('Wei\Bicache' == ltrim(get_class($this->object), '\\')) {
