@@ -27,4 +27,10 @@ class MysqlDbTest extends DbTest
         $db->query("CREATE TABLE prefix_tag (id INTEGER NOT NULL AUTO_INCREMENT, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
         $db->query("CREATE TABLE prefix_post_tag (post_id INTEGER NOT NULL, tag_id INTEGER NOT NULL)");
     }
+
+    public function testUseDb()
+    {
+        $this->db->useDb('test');
+        $this->assertEquals('test', $this->db->getDbname());
+    }
 }

@@ -1052,4 +1052,24 @@ class Db extends Base
         $data = $this->selectAll($table, $conditions, $fn . '(' . $field . ')');
         return $data ? (float)current($data[0]) : 0.0;
     }
+
+    /**
+     * Switch to specified database
+     *
+     * @param string $database
+     * @return $this
+     */
+    public function useDb($database)
+    {
+        switch ($this->driver) {
+            case 'mysql':
+                $this->query("USE `$database`");
+                $this->dbname = $database;
+                break;
+
+            default:
+                throw new \RuntimeException(sprintf('Unsupported switching database for current driver: %s', $this->driver));
+        }
+        return $this;
+    }
 }
