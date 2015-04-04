@@ -241,6 +241,10 @@ class CacheTestCase extends TestCase
             ->method('set')
             ->will($this->returnValue(false));
 
+        $mock->expects($this->any())
+            ->method('getResultCode')
+            ->will($this->returnValue(0));
+
         $mock->remove('key');
         $mock->get('key', function(){});
     }
