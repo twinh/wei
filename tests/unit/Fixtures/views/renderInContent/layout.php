@@ -1,3 +1,3 @@
 header
-<?= $content ?>
+<?php echo $content ?>
 footer

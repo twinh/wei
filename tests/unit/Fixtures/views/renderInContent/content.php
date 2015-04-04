@@ -1,3 +1,3 @@
 <?php $view->layout('renderInContent/layout.php') ?>
-<?= "content\n" ?>
-<?= $view->render('renderInContent/sub-content.php') ?>
+<?php echo "content\n" ?>
+<?php echo $view->render('renderInContent/sub-content.php') ?>
