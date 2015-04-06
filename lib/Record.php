@@ -291,7 +291,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $data
      * @return $this
      */
-    protected function setData(array $data)
+    public function setData(array $data)
     {
         foreach ($data as $field => $value) {
             $this->set($field, $value);
