@@ -12,10 +12,7 @@ class Member extends Record
 
     protected $loadTimes;
 
-    // default value
-    protected $data = array(
-        'age' => 0,
-    );
+    protected $eventResult;
 
     public function getPost()
     {
@@ -41,5 +38,40 @@ class Member extends Record
     public function getLoadTimes()
     {
         return $this->loadTimes;
+    }
+
+    public function beforeCreate()
+    {
+        $this->eventResult .= 'beforeCreate->';
+    }
+
+    public function afterCreate()
+    {
+        $this->eventResult .= 'afterCreate->';
+    }
+
+    public function beforeSave()
+    {
+        $this->eventResult .= 'beforeSave->';
+    }
+
+    public function afterSave()
+    {
+        $this->eventResult .= 'afterSave';
+    }
+
+    public function beforeDestroy()
+    {
+        $this->eventResult .= 'beforeDestroy->';
+    }
+
+    public function afterDestroy()
+    {
+        $this->eventResult .= 'afterDestroy';
+    }
+
+    public function getEventResult()
+    {
+        return $this->eventResult;
     }
 }

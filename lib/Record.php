@@ -186,76 +186,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     protected $state = self::STATE_CLEAN;
 
     /**
-     * The callback triggered after load a record
-     *
-     * @var callable
-     */
-    protected $afterLoad;
-
-    /**
-     * The callback triggered after fetch a record from database
-     *
-     * @var callable
-     */
-    protected $afterFind;
-
-    /**
-     * The callback triggered before save a record
-     *
-     * @var callable
-     */
-    protected $beforeSave;
-
-    /**
-     * The callback triggered after save a record
-     *
-     * @var callable
-     */
-    protected $afterSave;
-
-    /**
-     * The callback triggered before insert a record
-     *
-     * @var callable
-     */
-    protected $beforeCreate;
-
-    /**
-     * The callback triggered after insert a record
-     *
-     * @var callable
-     */
-    protected $afterCreate;
-
-    /**
-     * The callback triggered after update a record
-     *
-     * @var callable
-     */
-    protected $beforeUpdate;
-
-    /**
-     * The callback triggered after update a record
-     *
-     * @var callable
-     */
-    protected $afterUpdate;
-
-    /**
-     * The callback triggered before delete a record
-     *
-     * @var callable
-     */
-    protected $beforeDestroy;
-
-    /**
-     * The callback triggered after delete a record
-     *
-     * @var callable
-     */
-    protected $afterDestroy;
-
-    /**
      * Constructor
      *
      * @param array $options
@@ -1816,7 +1746,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     protected function triggerCallback($name)
     {
         $this->$name();
-        $this->$name && call_user_func($this->$name, $this, $this->wei);
     }
 
     /**

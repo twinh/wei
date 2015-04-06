@@ -833,24 +833,6 @@ class DbTest extends TestCase
         $this->assertFalse($this->db('member')->find(2));
     }
 
-    public function testBeforeAndAfterDestroy()
-    {
-        $this->initFixtures();
-
-        $member = $this->db->find('member', 1);
-        $member->setOption(array(
-            'beforeDestroy' => function() {
-                echo 'beforeDestroy';
-            },
-            'afterDestroy' => function() {
-                echo 'afterDestroy';
-            }
-        ));
-
-        $this->expectOutputString('beforeDestroyafterDestroy');
-        $member->destroy();
-    }
-
     public function testGetTable()
     {
         $this->initFixtures();
@@ -1505,30 +1487,30 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
+        $this->db->setOption('recordNamespace', 'WeiTest\Db');
+
         $member = $this->db('member')->fromArray(array(
             'group_id' => 1,
             'name' => 'twin',
             'address' => 'xx street',
         ));
 
-        $member->setOption(array(
-            'beforeCreate' => function(){
-                echo 'beforeCreate->';
-            },
-            'afterCreate' => function() {
-                echo 'afterCreate->';
-            },
-            'beforeSave' => function() {
-                echo 'beforeSave->';
-            },
-            'afterSave' => function() {
-                echo 'afterSave';
-            },
-        ));
-
-        $this->expectOutputString('beforeSave->beforeCreate->afterCreate->afterSave');
-
         $member->save();
+
+        $this->assertEquals('beforeSave->beforeCreate->afterCreate->afterSave', $member->getEventResult());
+    }
+
+    public function testBeforeAndAfterDestroyCallbacks()
+    {
+        $this->initFixtures();
+
+        $this->db->setOption('recordNamespace', 'WeiTest\Db');
+
+        $member = $this->db->find('member', 1);
+
+        $member->destroy();
+
+        $this->assertEquals('beforeDestroy->afterDestroy', $member->getEventResult());
     }
 
     public function testCreateCollection()
