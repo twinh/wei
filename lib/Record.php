@@ -71,6 +71,20 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     protected $data = array();
 
     /**
+     * The fields that are assignable through fromArray method
+     *
+     * @var array
+     */
+    protected $fillable = array();
+
+    /**
+     * The fields that aren't assignable through fromArray method
+     *
+     * @var array
+     */
+    protected $guarded = array();
+
+    /**
      * Whether the record's data is changed
      *
      * @var bool
@@ -322,10 +336,23 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function fromArray($data)
     {
-        foreach ($data as $key => $value) {
-            $this->set($key, $value);
+        foreach ($data as $field => $value) {
+            if ($this->isFillable($field)) {
+                $this->set($field, $value);
+            }
         }
         return $this;
+    }
+
+    /**
+     * Check if the field is assignable through fromArray method
+     *
+     * @param string $field
+     * @return bool
+     */
+    public function isFillable($field)
+    {
+        return !in_array($field, $this->guarded) && !$this->fillable || in_array($field, $this->fillable);
     }
 
     /**
@@ -336,7 +363,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected function setData(array $data)
     {
-        return $this->fromArray($data);
+        foreach ($data as $field => $value) {
+            $this->set($field, $value);
+        }
+        return $this;
     }
 
     /**

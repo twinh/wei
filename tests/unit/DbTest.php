@@ -1928,6 +1928,48 @@ class DbTest extends TestCase
         $count = $this->db('member')->select('COUNT(id)')->fetchColumn(array('id' => 1));
         $this->assertEquals(1, $count);
     }
+
+    public function testFillable()
+    {
+        $this->initFixtures();
+
+        /** @var $member \Wei\Record */
+        $member = $this->db('member');
+
+        $member->setOption('fillable', array('name'));
+        $this->assertEquals(true, $member->isFillable('name'));
+
+        $member->fromArray(array(
+            'id' => '1',
+            'name' => 'name'
+        ));
+
+        $this->assertNull($member['id']);
+        $this->assertEquals('name', $member['name']);
+    }
+
+    public function testGuarded()
+    {
+        $this->initFixtures();
+
+        /** @var $member \Wei\Record */
+        $member = $this->db('member');
+
+        $member->setOption('guarded', array('id', 'name'));
+
+        $this->assertEquals(false, $member->isFillable('id'));
+        $this->assertEquals(false, $member->isFillable('name'));
+
+        $member->fromArray(array(
+            'id' => '1',
+            'group_id' => '2',
+            'name' => 'name'
+        ));
+
+        $this->assertNull($member['id']);
+        $this->assertEquals('2', $member['group_id']);
+        $this->assertNull($member['name']);
+    }
 }
 
 
