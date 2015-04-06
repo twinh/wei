@@ -263,6 +263,17 @@ class DbTest extends TestCase
         $this->assertFalse($member->isDestroyed());
     }
 
+    public function testFindOrInitWithSameFields()
+    {
+        $this->initFixtures();
+
+        // The init data may from request, contains key like id, name
+        $member = $this->db('member')->findOrInit(array('id' => 3, 'name' => 'tom'), array('name' => 'name', 'id' => '5'));
+
+        $this->assertEquals(3, $member['id']);
+        $this->assertEquals('tom', $member['name']);
+    }
+
     public function testRecordSave()
     {
         $this->initFixtures();
