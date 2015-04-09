@@ -1,6 +1,21 @@
 Changelog
 =========
 
+## 0.9.18 (2015-04-09)
+
+* App: action的命名改为以Action结尾,以便不和关键字new, default,list冲突 refs be6f6f1
+* App: forward方法支持设置请求参数 refs 681f475
+* App: 修复dispatch接收到forward通知后,未返回response的问题 refs 96721a8
+* App: 控制器增加before和after方法 refs fed3425
+* Router: 修复路由解析出的控制器缺少根控制器的问题 refs 5940754
+* Cache: 增加getResultCode,用于缓存失败时,展示错误码 refs 98399d5
+* Block: 增加block服务,用于视图模板继承 refs decae8d
+* Db: 增加useDb,用来切换数据库 refs 42dd43f
+* View: 修复在view中再次调用render方法会导致布局渲染错误的问题 refs 08719ee
+* Record: 增加fillable和guarded,默认除了id,其他字段都可以接收外部数据(感谢Laravel) refs aa37be6
+* Record: 移除通过属性设置回调的功能 refs a6cec67
+* Record: 开放setData方法,允许设置任意字段的数据,不受fillable和guarded影响 refs cf6dd98
+
 ## 0.9.17 (2015-03-27)
 
 * Request: 修复当URL地址包含端口时,getHost返回值错误, refs b5478fc
