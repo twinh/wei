@@ -288,10 +288,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Import a PHP array in this record
      *
-     * @param array $data
+     * @param array|\ArrayAccess $data
      * @return $this
      */
-    public function setData(array $data)
+    public function setData($data)
     {
         foreach ($data as $field => $value) {
             $this->set($field, $value);
@@ -346,7 +346,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                     $sequence = sprintf('%s_%s_seq', $this->fullTable, $this->primaryKey);
                     $this->data[$this->primaryKey] = $this->db->lastInsertId($sequence);
                 }
-            // 2.1.3.2 Updates existing record
+                // 2.1.3.2 Updates existing record
             } else {
                 if ($this->isChanged) {
                     $data = array_intersect_key($this->data, $this->changedData);
@@ -363,7 +363,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             // 2.1.5. Triggers after callbacks
             $this->triggerCallback($isNew ? 'afterCreate' : 'afterUpdate');
             $this->triggerCallback('afterSave');
-        // 2.2 Loop and save collection records
+            // 2.2 Loop and save collection records
         } else {
             foreach ($this->data as $record) {
                 $record->save();
