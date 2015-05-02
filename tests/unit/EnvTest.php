@@ -32,7 +32,8 @@ class EnvTest extends TestCase
             'ipMap' => array(
                 '127.0.0.1'  => 'dev',
                 '127.0.0.2' => 'beta',
-                '192.168.25.2' => 'prod'
+                '192.168.25.2' => 'prod',
+                '127.0.0.3' => 'prod-project-name'
             ),
             'server' => array(
                 'SERVER_ADDR' => '127.0.0.1'
@@ -53,6 +54,11 @@ class EnvTest extends TestCase
         $env->setOption('server', array('SERVER_ADDR' => '192.168.25.3'));
         $env->detectEnvName();
         $this->assertEquals('prod', $env->getName());
+
+        $env->setOption('server', array('SERVER_ADDR' => '127.0.0.3'));
+        $env->detectEnvName();
+        $this->assertEquals('prod-project-name', $env->getName());
+        $this->assertTrue($env->isProd());
 
         $env->setName('myMachine');
         $this->assertEquals('myMachine', $env->getName());

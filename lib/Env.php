@@ -136,7 +136,7 @@ class Env extends Base
      */
     public function is($env)
     {
-        return $this->name === $env;
+        return $this->name == $env || strpos($this->name, $env . '-') === 0;
     }
 
     /**
