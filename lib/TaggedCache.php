@@ -12,6 +12,8 @@ namespace Wei;
  */
 class TaggedCache extends BaseCache
 {
+    protected $namespace = 'xx-';
+
     /**
      * The names of tag
      *
@@ -81,7 +83,7 @@ class TaggedCache extends BaseCache
     public function clear()
     {
         foreach ($this->tags as $tag) {
-            $this->cache->set($this->getTagKey($tag), $this->generateTagValue($tag));
+            $this->cache->set($this->getTagKey($tag), $this->generateTagValue());
         }
         return $this;
     }
@@ -102,9 +104,7 @@ class TaggedCache extends BaseCache
      */
     public function getTagsKey()
     {
-        $values = $this->getTagValues();
-        $key = implode('|', array_keys($values)) . '|' . md5(implode('-', $values));
-        return $key;
+        return implode('-', $this->tags) . '-' . md5(implode('-', $this->getTagValues()));
     }
 
     /**
@@ -129,6 +129,8 @@ class TaggedCache extends BaseCache
     }
 
     /**
+     * Init tag value by cache keys
+     *
      * @param array $keys
      * @return array
      */
@@ -136,7 +138,7 @@ class TaggedCache extends BaseCache
     {
         $values = array();
         foreach ($keys as $key => $value) {
-            $values[$key] = $this->generateTagValue($key);
+            $values[$key] = $this->generateTagValue();
         }
         $this->cache->setMulti($values);
         return $values;
@@ -153,8 +155,13 @@ class TaggedCache extends BaseCache
         return $this->namespace . 'tag-' . $name;
     }
 
-    protected function generateTagValue($key)
+    /**
+     * Generate a new tag value
+     *
+     * @return string
+     */
+    protected function generateTagValue()
     {
-        return $key . '-' . md5(uniqid('', true));
+        return strtr(uniqid('', true), array('.' => ''));
     }
 }

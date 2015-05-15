@@ -40,8 +40,8 @@ class TaggedCacheTest extends TestCase
 
         $this->assertFalse($postCache->get('1'));
 
-        $puCache->clear();
-        $postCache->clear();
+        //$puCache->clear();
+        //$postCache->clear();
     }
 
     public function testClear()
