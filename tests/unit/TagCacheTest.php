@@ -63,8 +63,6 @@ class TagCacheTest extends TestCase
 
     public function testClearTag()
     {
-        $cache = wei()->cache;
-
         $puCache = wei()->tagCache(array('posts', 'users'));
         $puCache->set('1-1', 'This is the first post, from admin');
 
@@ -80,7 +78,8 @@ class TagCacheTest extends TestCase
         $userCache->clear();
 
         $this->assertFalse($userCache->get('1'));
-        $this->assertFalse($puCache->get('1-1'));
+        $this->assertEquals('This is the first post, from admin', $puCache->get('1-1'));
+        $this->assertFalse($puCache->reload()->get('1-1'));
         $this->assertEquals('This is the first post', $postCache->get('1'));
 
         $puCache->clear();

@@ -15,11 +15,18 @@ namespace Wei;
 class TagCache extends BaseCache
 {
     /**
-     * The names of tag
+     * The tag names
      *
      * @var array
      */
     protected $tags = array();
+
+    /**
+     * The generated prefix of tags
+     *
+     * @var string
+     */
+    protected $tagsKey = '';
 
     /**
      * Create a new cache service with tagging support
@@ -102,16 +109,43 @@ class TagCache extends BaseCache
         foreach ($this->tags as $tag) {
             $this->cache->set($this->getTagKey($tag), $this->generateTagValue());
         }
+        $this->reload();
         return $this;
     }
 
     /**
+     * Sets tags name and generates tags' key
+     *
+     * @param array $tags
+     * @return $this
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+        $this->reload();
+        return $this;
+    }
+
+    /**
+     * Reload tags key
+     *
+     * @return $this
+     */
+    public function reload()
+    {
+        $this->tagsKey = $this->getTagsKey();
+        return $this;
+    }
+
+    /**
+     * Returns cache key of specified item key
+     *
      * @param string $key
      * @return string
      */
     protected function getKey($key)
     {
-        return $this->namespace . $this->getTagsKey() . '-' . $key;
+        return $this->namespace . $this->tagsKey . '-' . $key;
     }
 
     /**
@@ -119,7 +153,7 @@ class TagCache extends BaseCache
      *
      * @return string
      */
-    public function getTagsKey()
+    protected function getTagsKey()
     {
         return implode('-', $this->tags) . '-' . md5(implode('-', $this->getTagValues()));
     }
@@ -162,18 +196,18 @@ class TagCache extends BaseCache
     }
 
     /**
-     * Return the cache key of tag
+     * Returns the cache key of tag
      *
      * @param string $name
      * @return string
      */
-    public function getTagKey($name)
+    protected function getTagKey($name)
     {
         return $this->namespace . 'tag-' . $name;
     }
 
     /**
-     * Generate a new tag value
+     * Generates a new tag value
      *
      * @return string
      */
