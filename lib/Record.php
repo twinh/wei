@@ -22,7 +22,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     const DELETE = 1;
     const UPDATE = 2;
 
-    /** The builder states. */
+    /* The builder states. */
     const STATE_DIRTY = 0;
     const STATE_CLEAN = 1;
 
@@ -184,6 +184,11 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @var integer
      */
     protected $state = self::STATE_CLEAN;
+
+    /**
+     * @var int|false
+     */
+    protected $cacheTime;
 
     /**
      * Constructor
@@ -746,9 +751,28 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     {
         if ($this->type == self::SELECT) {
             $this->loaded = true;
-            return $this->db->fetchAll($this->getSql(), $this->params, $this->paramTypes);
+            if ($this->cacheTime) {
+                return $this->fetchFromCache();
+            } else {
+                return $this->db->fetchAll($this->getSql(), $this->params, $this->paramTypes);
+            }
         } else {
             return $this->db->executeUpdate($this->getSql(), $this->params, $this->paramTypes);
+        }
+    }
+
+    protected function fetchFromCache()
+    {
+        $key = $this->getCacheKey();
+        $tags = $this->getCacheTags();
+        $tagCache = $this->tagCache($tags);
+        $data = $tagCache->get($key);
+        if ($data) {
+            return $data;
+        } else {
+            $data = $this->db->fetchAll($this->getSql(), $this->params, $this->paramTypes);
+            $tagCache->set($key, $data);
+            return $data;
         }
     }
 
@@ -1738,6 +1762,40 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     {
         $data = array_filter($this->data, $fn);
         return $this->db->init($this->table, $data, $this->isNew);
+    }
+
+    /**
+     * Set cache time for the query
+     *
+     * @param int $seconds
+     * @return $this
+     */
+    public function cache($seconds = null)
+    {
+        $this->cacheTime = $seconds;
+        return $this;
+    }
+
+    /**
+     * Generate cache key form query and params
+     *
+     * @return string
+     */
+    public function getCacheKey()
+    {
+        return md5($this->getSql() . serialize($this->params) . serialize($this->paramTypes));
+    }
+
+    /**
+     * @return array
+     */
+    public function getCacheTags()
+    {
+        $tags[] = $this->sqlParts['from'];
+        foreach ($this->sqlParts['join'] as $join) {
+            $tags[] = $join['table'];
+        }
+        return $tags;
     }
 
     /**

@@ -1963,6 +1963,30 @@ class DbTest extends TestCase
         $this->assertEquals('2', $member['group_id']);
         $this->assertNull($member['name']);
     }
+
+    public function testCache()
+    {
+        $this->initFixtures();
+
+        $member = $this->getMemberFromCache(1);
+        $this->assertEquals('twin', $member['name']);
+
+        $member->save(array(
+            'name' => 'twin2'
+        ));
+
+        $member = $this->getMemberFromCache(1);
+        $this->assertEquals('twin', $member['name']);
+
+        wei()->tagCache('prefix_member')->clear();
+        $member = $this->getMemberFromCache(1);
+        $this->assertEquals('twin2', $member['name']);
+    }
+
+    protected function getMemberFromCache($id)
+    {
+        return $this->db('member')->cache(600)->findById($id);
+    }
 }
 
 
