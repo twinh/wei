@@ -21,6 +21,8 @@ class TagCache extends BaseCache
      */
     protected $tags = array();
 
+    protected $maxExpire = 0;
+
     /**
      * The generated prefix of tags
      *
@@ -50,7 +52,9 @@ class TagCache extends BaseCache
      */
     public function get($key, $expire = null, $fn = null)
     {
-        return $this->cache->get($this->getKey($key));
+        $key = $this->getKey($key);
+        $result = $this->cache->get($key);
+        return $this->processGetResult($key, $result, $expire, $fn);
     }
 
     /**

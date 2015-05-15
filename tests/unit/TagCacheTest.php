@@ -2,7 +2,7 @@
 
 namespace WeiTest;
 
-class TagCacheTest extends TestCase
+class TagCacheTest extends CacheTestCase
 {
     public function testOneTag()
     {
@@ -85,5 +85,20 @@ class TagCacheTest extends TestCase
 
         $puCache->clear();
         $postCache->clear();
+    }
+
+    public function testInvoker()
+    {
+        $this->assertInstanceOf('\Wei\TagCache', wei()->tagCache('posts'));
+    }
+
+    public function testInvalidExpireTimeForGetWithCallback()
+    {
+        $this->setExpectedException('\InvalidArgumentException', 'Expire time for cache "-key" must be numeric, NULL given');
+
+        $this->object->setNamespace('');
+        $this->object->get('key', null, function(){
+
+        });
     }
 }
