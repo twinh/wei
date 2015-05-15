@@ -8,15 +8,15 @@ class TaggedCacheTest extends TestCase
     {
         $cache = wei()->cache;
 
-        $cache->set('posts:1', 'The content of first post');
+        $cache->set('1', 'The content of first post');
 
         $postCache = $cache->tags('posts');
 
-        $postCache->set('posts:1', 'This is the first post.');
+        $postCache->set('1', 'This is the first post.');
 
-        $this->assertEquals('This is the first post.', $postCache->get('posts:1'));
+        $this->assertEquals('This is the first post.', $postCache->get('1'));
 
-        $this->assertEquals('The content of first post', $cache->get('posts:1'));
+        $this->assertEquals('The content of first post', $cache->get('1'));
 
         $postCache->clear();
     }
@@ -25,19 +25,19 @@ class TaggedCacheTest extends TestCase
     {
         $cache = wei()->cache;
 
-        $cache->set('posts:1', 'The content of first post');
+        $cache->set('1', 'The content of first post');
 
         $puCache = $cache->tags('posts', 'users');
         $postCache = $cache->tags('post');
 
-        $postCache->remove('posts:1');
-        $puCache->set('posts:1', 'This is the first post, from admin.');
+        $postCache->remove('1');
+        $puCache->set('1', 'This is the first post, from admin.');
 
-        $this->assertEquals('This is the first post, from admin.', $puCache->get('posts:1'));
+        $this->assertEquals('This is the first post, from admin.', $puCache->get('1'));
 
-        $this->assertEquals('The content of first post', $cache->get('posts:1'));
+        $this->assertEquals('The content of first post', $cache->get('1'));
 
-        $this->assertFalse($postCache->get('posts:1'));
+        $this->assertFalse($postCache->get('1'));
 
         $puCache->clear();
         $postCache->clear();
@@ -46,16 +46,16 @@ class TaggedCacheTest extends TestCase
     public function testClear()
     {
         $cache = wei()->cache;
-        $cache->set('posts:1', 'The content of first post');
+        $cache->set('1', 'The content of first post');
 
-        $postCache = $cache->tags('post');
-        $postCache->set('posts:1', 'This is the first post');
+        $postCache = $cache->tags('posts');
+        $postCache->set('1', 'This is the first post');
         $postCache->clear();
 
-        $this->assertFalse($postCache->get('posts:1'));
+        $this->assertFalse($postCache->get('1'));
 
         // Clear tag caches have no effect with other caches
-        $this->assertEquals('The content of first post', $cache->get('posts:1'));
+        $this->assertEquals('The content of first post', $cache->get('1'));
 
         $postCache->clear();
     }
