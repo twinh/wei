@@ -2,7 +2,7 @@
 
 namespace WeiTest;
 
-class TaggedCacheTest extends TestCase
+class TagCacheTest extends TestCase
 {
     public function testOneTag()
     {
@@ -10,7 +10,7 @@ class TaggedCacheTest extends TestCase
 
         $cache->set('1', 'The content of first post');
 
-        $postCache = $cache->tags('posts');
+        $postCache = wei()->tagCache('posts');
 
         $postCache->set('1', 'This is the first post.');
 
@@ -27,9 +27,9 @@ class TaggedCacheTest extends TestCase
 
         $cache->set('1', 'The content of first post');
 
-        $puCache = $cache->tags('posts', 'users');
+        $puCache = wei()->tagCache('posts', 'users');
         $puCache->get('x');
-        $postCache = $cache->tags('posts');
+        $postCache = wei()->tagCache('posts');
 
         $postCache->remove('1');
         $puCache->set('1', 'This is the first post, from admin.');
@@ -40,8 +40,8 @@ class TaggedCacheTest extends TestCase
 
         $this->assertFalse($postCache->get('1'));
 
-        //$puCache->clear();
-        //$postCache->clear();
+        $puCache->clear();
+        $postCache->clear();
     }
 
     public function testClear()
@@ -49,7 +49,7 @@ class TaggedCacheTest extends TestCase
         $cache = wei()->cache;
         $cache->set('1', 'The content of first post');
 
-        $postCache = $cache->tags('posts');
+        $postCache = wei()->tagCache('posts');
         $postCache->set('1', 'This is the first post');
         $postCache->clear();
 
@@ -65,13 +65,13 @@ class TaggedCacheTest extends TestCase
     {
         $cache = wei()->cache;
 
-        $puCache = $cache->tags(array('posts', 'users'));
+        $puCache = wei()->tagCache(array('posts', 'users'));
         $puCache->set('1-1', 'This is the first post, from admin');
 
-        $postCache = $cache->tags('posts');
+        $postCache = wei()->tagCache('posts');
         $postCache->set('1', 'This is the first post');
 
-        $userCache = $cache->tags('users');
+        $userCache = wei()->tagCache('users');
         $userCache->set('1', 'admin');
 
         $this->assertEquals('This is the first post, from admin', $puCache->get('1-1'));

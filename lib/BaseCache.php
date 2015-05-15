@@ -258,20 +258,4 @@ abstract class BaseCache extends Base
      * @return boolean
      */
     abstract public function clear();
-
-    /**
-     *
-     *
-     * @param  array|string  $names
-     * @return TaggedCache
-     */
-    public function tags($names)
-    {
-        $tags = is_array($names) ? $names : func_get_args();
-        return new TaggedCache(array(
-            'wei' => $this->wei,
-            'tags' => $tags,
-            'cache' => $this,
-        ));
-    }
 }

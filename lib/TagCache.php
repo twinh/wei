@@ -8,18 +8,35 @@
 namespace Wei;
 
 /**
+ * A cache service that support tagging
+ *
  * @property \Wei\BaseCache $cache
  */
-class TaggedCache extends BaseCache
+class TagCache extends BaseCache
 {
-    protected $namespace = 'xx-';
-
     /**
      * The names of tag
      *
      * @var array
      */
     protected $tags = array();
+
+    /**
+     * Create a new cache service with tagging support
+     *
+     * @param string $tag
+     * @param mixed $_
+     * @param mixed $_
+     * @return static
+     */
+    public function __invoke($tag, $_ = null, $_ = 0)
+    {
+        $tags = is_array($tag) ? $tag : func_get_args();
+        return new static(array(
+            'wei' => $this->wei,
+            'tags' => $tags
+        ));
+    }
 
     /**
      * {@inheritdoc}

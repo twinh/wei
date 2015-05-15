@@ -43,6 +43,8 @@ namespace Wei
      * @method   mixed          redis($key = null, $value = null, $expire = 0) Retrieve or store an item by Redis
      * @property Bicache        $bicache A two-level cache service
      * @method   mixed          bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
+     * @property TagCache       $tagCache A cache service with tagging support
+     * @method   TagCache       tagCache($tag, $_ = null) Create a new cache service with tagging support
      *
      * Database
      * @property Db             $db A database service inspired by Doctrine DBAL
