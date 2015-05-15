@@ -81,14 +81,18 @@ class TaggedCache extends BaseCache
     public function clear()
     {
         foreach ($this->tags as $tag) {
-            $this->cache->set($this->getTagKey($tag), $this->generateTagValue());
+            $this->cache->set($this->getTagKey($tag), $this->generateTagValue($tag));
         }
         return $this;
     }
 
+    /**
+     * @param string $key
+     * @return string
+     */
     protected function getKey($key)
     {
-        return $this->namespace . md5($this->getTagsKey()) . '-' . $key;
+        return $this->namespace . $this->getTagsKey() . '-' . $key;
     }
 
     /**
@@ -98,7 +102,9 @@ class TaggedCache extends BaseCache
      */
     public function getTagsKey()
     {
-        return implode('|', $this->getTagValues());
+        $values = $this->getTagValues();
+        $key = implode('|', array_keys($values)) . '|' . md5(implode('-', $values));
+        return $key;
     }
 
     /**
@@ -130,7 +136,7 @@ class TaggedCache extends BaseCache
     {
         $values = array();
         foreach ($keys as $key => $value) {
-            $values[$key] = $this->generateTagValue();
+            $values[$key] = $this->generateTagValue($key);
         }
         $this->cache->setMulti($values);
         return $values;
@@ -147,8 +153,8 @@ class TaggedCache extends BaseCache
         return $this->namespace . 'tag-' . $name;
     }
 
-    protected function generateTagValue()
+    protected function generateTagValue($key)
     {
-        return uniqid('', true);
+        return $key . '-' . md5(uniqid('', true));
     }
 }

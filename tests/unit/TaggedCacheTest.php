@@ -28,7 +28,8 @@ class TaggedCacheTest extends TestCase
         $cache->set('1', 'The content of first post');
 
         $puCache = $cache->tags('posts', 'users');
-        $postCache = $cache->tags('post');
+        $puCache->get('x');
+        $postCache = $cache->tags('posts');
 
         $postCache->remove('1');
         $puCache->set('1', 'This is the first post, from admin.');
