@@ -36,7 +36,7 @@ class TagCache extends BaseCache
      * @param mixed $_
      * @return static
      */
-    public function __invoke($tag, $_ = null, $_ = 0)
+    public function __invoke($tag, $_ = null, $_ = null)
     {
         $tags = is_array($tag) ? $tag : func_get_args();
         return new static(array(
@@ -82,7 +82,7 @@ class TagCache extends BaseCache
      */
     public function add($key, $value, $expire = 0)
     {
-        return $this->cache->exists($this->getKey($key));
+        return $this->cache->add($this->getKey($key), $value, $expire);
     }
 
     /**
@@ -90,7 +90,7 @@ class TagCache extends BaseCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        return $this->cache->exists($this->getKey($key));
+        return $this->cache->replace($this->getKey($key), $value, $expire);
     }
 
     /**
@@ -98,7 +98,7 @@ class TagCache extends BaseCache
      */
     public function incr($key, $offset = 1)
     {
-        return $this->cache->exists($this->getKey($key));
+        return $this->cache->incr($this->getKey($key), $offset);
     }
 
     /**

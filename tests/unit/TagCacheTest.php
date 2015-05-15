@@ -79,6 +79,7 @@ class TagCacheTest extends TestCase
 
         $this->assertFalse($userCache->get('1'));
         $this->assertEquals('This is the first post, from admin', $puCache->get('1-1'));
+
         $this->assertFalse($puCache->reload()->get('1-1'));
         $this->assertEquals('This is the first post', $postCache->get('1'));
 
