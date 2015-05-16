@@ -120,9 +120,11 @@ class TagCache extends BaseCache
      */
     public function clear()
     {
+        $data = array();
         foreach ($this->tags as $tag) {
-            $this->cache->set($this->getTagKey($tag), $this->generateTagValue());
+            $data[$this->getTagKey($tag)] = $this->generateTagValue();
         }
+        $this->cache->setMulti($data);
         $this->reload();
         return $this;
     }
