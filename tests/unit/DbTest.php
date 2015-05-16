@@ -1983,7 +1983,7 @@ class DbTest extends TestCase
         $member = $this->getMemberFromCache(1);
         $this->assertEquals('twin2', $member['name']);
 
-        wei()->tagCache('prefix_member')->clear();
+        wei()->cache->clear();
     }
 
     protected function getMemberFromCache($id)
