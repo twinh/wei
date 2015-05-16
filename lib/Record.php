@@ -14,6 +14,7 @@ namespace Wei;
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Db $db A database service inspired by Doctrine DBAL
  * @method      \Wei\Record db($table = null) Create a new record object
+ * @method      \Wei\TagCache tagCache($tags) Create a new cache service with tagging support (Optional)
  */
 class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countable
 {
@@ -766,14 +767,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $key = $this->getCacheKey();
         $tags = $this->getCacheTags();
         $tagCache = $this->tagCache($tags);
-        $data = $tagCache->get($key);
-        if ($data) {
-            return $data;
-        } else {
-            $data = $this->db->fetchAll($this->getSql(), $this->params, $this->paramTypes);
-            $tagCache->set($key, $data);
-            return $data;
-        }
+        $that = $this;
+        return $tagCache->get($key, $this->cacheTime, function () use ($that) {
+            return $that->db->fetchAll($that->getSql(), $that->params, $that->paramTypes);
+        });
     }
 
     /**
