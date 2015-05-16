@@ -31,6 +31,13 @@ class TagCache extends BaseCache
     protected $tagsKey = '';
 
     /**
+     * The instanced tagged cache objects
+     *
+     * @var array
+     */
+    protected $services = array();
+
+    /**
      * Create a new cache service with tagging support
      *
      * @param string $tag
@@ -41,10 +48,15 @@ class TagCache extends BaseCache
     public function __invoke($tag, $_ = null, $_ = null)
     {
         $tags = is_array($tag) ? $tag : func_get_args();
-        return new static(array(
-            'wei' => $this->wei,
-            'tags' => $tags
-        ));
+        $name = implode(':', $tags);
+
+        if (!isset($this->services[$name])) {
+            $this->services[$name] = new static(array(
+                'wei' => $this->wei,
+                'tags' => $tags
+            ));
+        }
+        return $this->services[$name];
     }
 
     /**
