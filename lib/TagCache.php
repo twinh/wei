@@ -52,9 +52,7 @@ class TagCache extends BaseCache
      */
     public function get($key, $expire = null, $fn = null)
     {
-        $key = $this->getKey($key);
-        $result = $this->cache->get($key);
-        return $this->processGetResult($key, $result, $expire, $fn);
+        return $this->cache->get($this->getKey($key), $expire, $fn);
     }
 
     /**
