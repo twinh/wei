@@ -1986,15 +1986,34 @@ class DbTest extends TestCase
         wei()->cache->clear();
     }
 
-    public function testCacheWithCustomTags()
+    public function testCacheWithJoin()
     {
-        return;
-        $this->db('member')->cache(600)->findById(1); // 直接缓存语句600s
-        $this->db('member')->tags()->cache(600)->findById(1); // 以当前表名为标签,缓存600s
-        $this->db('member')->tags('member2')->cache(600)->findById(1); // 指定标签名缓存
+        $this->initFixtures();
 
-        //$this->db('member')->tags()->
+        $member = $this->db('member')
+            ->select('prefix_member.*')
+            ->leftJoin('prefix_member_group', 'prefix_member.group_id = prefix_member_group.id')
+            ->where('prefix_member.id = 1')
+            ->tags()
+            ->cache();
 
+        // Fetch from db
+        $data = $member->fetch();
+        $this->assertEquals('twin', $data['name']);
+
+        $this->db('member')->where('id = 1')->update("name = 'twin2'");
+
+        // Fetch from cache
+        $data = $member->fetch();
+        $this->assertEquals('twin', $data['name']);
+
+        // Clear cache
+        wei()->tagCache('prefix_member')->clear();
+        wei()->tagCache('prefix_member', 'prefix_member_group')->reload();
+
+        // Fetch from db
+        $data = $member->fetch();
+        $this->assertEquals('twin2', $data['name']);
     }
 
     protected function getMemberFromCache($id)
