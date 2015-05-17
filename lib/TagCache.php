@@ -21,24 +21,22 @@ class TagCache extends BaseCache
      */
     protected $tags = array();
 
-    protected $maxExpire = 0;
-
     /**
-     * The generated prefix of tags
+     * The generated tags namespace
      *
      * @var string
      */
-    protected $tagsKey = '';
+    protected $tagsNamespace = '';
 
     /**
-     * The instanced tagged cache objects
+     * Manager: The instanced tagged cache objects
      *
      * @var array
      */
     protected $services = array();
 
     /**
-     * Create a new cache service with tagging support
+     * Manager: Create a new cache service with tagging support
      *
      * @param string $tag
      * @param mixed $_
@@ -130,7 +128,7 @@ class TagCache extends BaseCache
     }
 
     /**
-     * Sets tags name and generates tags' key
+     * Set tag names and reload tags namespace
      *
      * @param array $tags
      * @return $this
@@ -143,49 +141,49 @@ class TagCache extends BaseCache
     }
 
     /**
-     * Reload tags key
+     * Reload tags namespace
      *
      * @return $this
      */
     public function reload()
     {
-        $this->tagsKey = $this->getTagsKey();
+        $this->tagsNamespace = $this->getTagsNamespace();
         return $this;
     }
 
     /**
-     * Returns cache key of specified item key
+     * Returns the item cache key
      *
      * @param string $key
      * @return string
      */
     protected function getKey($key)
     {
-        return $this->namespace . $this->tagsKey . '-' . $key;
+        return $this->namespace . $this->tagsNamespace . '-' . $key;
     }
 
     /**
-     * Returns
+     * Returns tags namespace
      *
      * @return string
      */
-    protected function getTagsKey()
+    protected function getTagsNamespace()
     {
         return implode('-', $this->tags) . '-' . md5(implode('-', $this->getTagValues()));
     }
 
     /**
-     * Returns
+     * Returns tag values
      *
      * @return array
      */
     protected function getTagValues()
     {
-        // Step1 Get tag
+        // Step1 Get tags value from cache
         $keys = array_map(array($this, 'getTagKey'), $this->tags);
         $values = $this->cache->getMulti($keys);
 
-        // Step2 Init new tag value
+        // Step2 Initialize new tags value
         $emptyKeys = array_diff($values, array_filter($values));
         if ($emptyKeys) {
             $newValues = $this->setTagValues($emptyKeys);
@@ -196,7 +194,7 @@ class TagCache extends BaseCache
     }
 
     /**
-     * Init tag value by cache keys
+     * Initializes tag values by cache keys
      *
      * @param array $keys
      * @return array
@@ -212,7 +210,7 @@ class TagCache extends BaseCache
     }
 
     /**
-     * Returns the cache key of tag
+     * Returns the tag's cache key
      *
      * @param string $name
      * @return string
@@ -223,7 +221,7 @@ class TagCache extends BaseCache
     }
 
     /**
-     * Generates a new tag value
+     * Generates a tag value
      *
      * @return string
      */

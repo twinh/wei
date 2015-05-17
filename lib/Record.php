@@ -762,6 +762,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         }
     }
 
+    /**
+     * @return mixed
+     */
     protected function fetchFromCache()
     {
         $key = $this->getCacheKey();

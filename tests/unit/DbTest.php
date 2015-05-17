@@ -1979,7 +1979,7 @@ class DbTest extends TestCase
         $this->assertEquals('twin', $member['name']);
 
         wei()->tagCache('prefix_member')->clear();
-        var_dump("CLEAR\n");
+
         $member = $this->getMemberFromCache(1);
         $this->assertEquals('twin2', $member['name']);
 
