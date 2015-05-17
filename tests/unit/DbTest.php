@@ -2044,6 +2044,8 @@ class DbTest extends TestCase
         // Fetch from db
         $data = $member->fetch();
         $this->assertEquals('twin2', $data['name']);
+
+        wei()->cache->clear();
     }
 
     protected function getMemberFromCache($id)
