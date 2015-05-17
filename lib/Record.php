@@ -14,6 +14,7 @@ namespace Wei;
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Db $db A database service inspired by Doctrine DBAL
  * @method      \Wei\Record db($table = null) Create a new record object
+ * @property    \Wei\BaseCache $cache A cache service (Optional)
  * @method      \Wei\TagCache tagCache($tags) Create a new cache service with tagging support (Optional)
  */
 class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countable
@@ -187,9 +188,25 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     protected $state = self::STATE_CLEAN;
 
     /**
+     * The default cache time
+     *
+     * @var int
+     */
+    protected $defaultCacheTime = 60;
+
+    /**
+     * The specified cache time
+     *
      * @var int|false
      */
-    protected $cacheTime;
+    protected $cacheTime = false;
+
+    /**
+     * The cache tags
+     *
+     * @var array
+     */
+    protected $cacheTags = array();
 
     /**
      * Constructor
@@ -752,7 +769,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     {
         if ($this->type == self::SELECT) {
             $this->loaded = true;
-            if ($this->cacheTime) {
+            if ($this->cacheTime !== false) {
                 return $this->fetchFromCache();
             } else {
                 return $this->db->fetchAll($this->getSql(), $this->params, $this->paramTypes);
@@ -767,12 +784,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected function fetchFromCache()
     {
-        $key = $this->getCacheKey();
-        $tags = $this->getCacheTags();
-        $tagCache = $this->tagCache($tags);
+        $cache = $this->cacheTags === false ? $this->cache : $this->tagCache($this->cacheTags ?: $this->getCacheTags());
         $that = $this;
-        return $tagCache->get($key, $this->cacheTime, function () use ($that) {
-            return $that->db->fetchAll($that->getSql(), $that->params, $that->paramTypes);
+        $params = $this->params;
+        $paramTypes = $this->paramTypes;
+        return $cache->get($this->getCacheKey(), $this->cacheTime, function () use ($that, $params, $paramTypes) {
+            return $that->db->fetchAll($that->getSql(), $params, $paramTypes);
         });
     }
 
@@ -1765,14 +1782,32 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Set cache time for the query
+     * Set or remove cache time for the query
      *
-     * @param int $seconds
+     * @param int|null|false $seconds
      * @return $this
      */
     public function cache($seconds = null)
     {
-        $this->cacheTime = $seconds;
+        if ($seconds === null) {
+            $this->cacheTime = $this->defaultCacheTime;
+        } elseif ($seconds === false) {
+            $this->cacheTime = false;
+        } else {
+            $this->cacheTime = (int)$seconds;
+        }
+        return $this;
+    }
+
+    /**
+     * Set or remove cache tags
+     *
+     * @param array|null|false $tags
+     * @return $this
+     */
+    public function tags($tags = null)
+    {
+        $this->cacheTags = $tags === false ? false : $tags;
         return $this;
     }
 
@@ -1789,7 +1824,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * @return array
      */
-    public function getCacheTags()
+    protected function getCacheTags()
     {
         $tags[] = $this->sqlParts['from'];
         foreach ($this->sqlParts['join'] as $join) {

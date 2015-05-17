@@ -1986,6 +1986,17 @@ class DbTest extends TestCase
         wei()->cache->clear();
     }
 
+    public function testCacheWithCustomTags()
+    {
+        return;
+        $this->db('member')->cache(600)->findById(1); // 直接缓存语句600s
+        $this->db('member')->tags()->cache(600)->findById(1); // 以当前表名为标签,缓存600s
+        $this->db('member')->tags('member2')->cache(600)->findById(1); // 指定标签名缓存
+
+        //$this->db('member')->tags()->
+
+    }
+
     protected function getMemberFromCache($id)
     {
         return $this->db('member')->cache(600)->findById($id);
