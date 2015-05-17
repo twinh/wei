@@ -121,4 +121,15 @@ class TagCacheTest extends CacheTestCase
         $mock->remove('key');
         $mock->get('key', function(){});
     }
+
+    public function testTagsOrder()
+    {
+        wei()->tagCache('a', 'b')->clear();
+
+        wei()->tagCache('a', 'b')->set('c', 'd');
+
+        $this->assertEquals('d', wei()->tagCache('b', 'a')->get('c'));
+
+        wei()->cache->clear();
+    }
 }

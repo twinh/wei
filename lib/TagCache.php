@@ -46,6 +46,7 @@ class TagCache extends BaseCache
     public function __invoke($tag, $_ = null, $_ = null)
     {
         $tags = is_array($tag) ? $tag : func_get_args();
+        sort($tags);
         $name = implode(':', $tags);
 
         if (!isset($this->services[$name])) {
