@@ -160,7 +160,7 @@ class TagCache extends BaseCache
      */
     protected function getKey($key)
     {
-        return $this->namespace . $this->tagsNamespace . '-' . $key;
+        return $this->namespace . $this->tagsNamespace . ':' . $key;
     }
 
     /**
@@ -170,7 +170,7 @@ class TagCache extends BaseCache
      */
     protected function getTagsNamespace()
     {
-        return implode('-', $this->tags) . '-' . md5(implode('-', $this->getTagValues()));
+        return implode(':', $this->tags) . ':' . md5(implode(':', $this->getTagValues()));
     }
 
     /**
@@ -218,7 +218,7 @@ class TagCache extends BaseCache
      */
     protected function getTagKey($name)
     {
-        return $this->namespace . 'tag-' . $name;
+        return $this->namespace . 'tag:' . $name;
     }
 
     /**
