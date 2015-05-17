@@ -2016,6 +2016,36 @@ class DbTest extends TestCase
         $this->assertEquals('twin2', $data['name']);
     }
 
+    public function testCustomCacheTags()
+    {
+        $this->initFixtures();
+
+        $member = $this->db('member')
+            ->select('prefix_member.*')
+            ->leftJoin('prefix_member_group', 'prefix_member.group_id = prefix_member_group.id')
+            ->where('prefix_member.id = 1')
+            ->tags(array('member', 'member_group'))
+            ->cache();
+
+        // Fetch from db
+        $data = $member->fetch();
+        $this->assertEquals('twin', $data['name']);
+
+        $this->db('member')->where('id = 1')->update("name = 'twin2'");
+
+        // Fetch from cache
+        $data = $member->fetch();
+        $this->assertEquals('twin', $data['name']);
+
+        // Clear cache
+        wei()->tagCache('member')->clear();
+        wei()->tagCache('member', 'member_group')->reload();
+
+        // Fetch from db
+        $data = $member->fetch();
+        $this->assertEquals('twin2', $data['name']);
+    }
+
     protected function getMemberFromCache($id)
     {
         return $this->db('member')->cache(600)->findById($id);
