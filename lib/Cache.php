@@ -16,14 +16,14 @@ namespace Wei;
 class Cache extends BaseCache
 {
     /**
-     * The storage wei object
+     * The storage service object
      *
      * @var BaseCache
      */
     protected $object;
 
     /**
-     * The storage wei name
+     * The storage service name
      *
      * @ver string
      */

@@ -1963,6 +1963,95 @@ class DbTest extends TestCase
         $this->assertEquals('2', $member['group_id']);
         $this->assertNull($member['name']);
     }
+
+    public function testCache()
+    {
+        $this->initFixtures();
+
+        $member = $this->getMemberFromCache(1);
+        $this->assertEquals('twin', $member['name']);
+
+        $member->save(array(
+            'name' => 'twin2'
+        ));
+
+        $member = $this->getMemberFromCache(1);
+        $this->assertEquals('twin', $member['name']);
+
+        wei()->tagCache('prefix_member')->clear();
+
+        $member = $this->getMemberFromCache(1);
+        $this->assertEquals('twin2', $member['name']);
+
+        wei()->cache->clear();
+    }
+
+    public function testCacheWithJoin()
+    {
+        $this->initFixtures();
+
+        $member = $this->db('member')
+            ->select('prefix_member.*')
+            ->leftJoin('prefix_member_group', 'prefix_member.group_id = prefix_member_group.id')
+            ->where('prefix_member.id = 1')
+            ->tags()
+            ->cache();
+
+        // Fetch from db
+        $data = $member->fetch();
+        $this->assertEquals('twin', $data['name']);
+
+        $this->db('member')->where('id = 1')->update("name = 'twin2'");
+
+        // Fetch from cache
+        $data = $member->fetch();
+        $this->assertEquals('twin', $data['name']);
+
+        // Clear cache
+        wei()->tagCache('prefix_member')->clear();
+        wei()->tagCache('prefix_member', 'prefix_member_group')->reload();
+
+        // Fetch from db
+        $data = $member->fetch();
+        $this->assertEquals('twin2', $data['name']);
+    }
+
+    public function testCustomCacheTags()
+    {
+        $this->initFixtures();
+
+        $member = $this->db('member')
+            ->select('prefix_member.*')
+            ->leftJoin('prefix_member_group', 'prefix_member.group_id = prefix_member_group.id')
+            ->where('prefix_member.id = 1')
+            ->tags(array('member', 'member_group'))
+            ->cache();
+
+        // Fetch from db
+        $data = $member->fetch();
+        $this->assertEquals('twin', $data['name']);
+
+        $this->db('member')->where('id = 1')->update("name = 'twin2'");
+
+        // Fetch from cache
+        $data = $member->fetch();
+        $this->assertEquals('twin', $data['name']);
+
+        // Clear cache
+        wei()->tagCache('member')->clear();
+        wei()->tagCache('member', 'member_group')->reload();
+
+        // Fetch from db
+        $data = $member->fetch();
+        $this->assertEquals('twin2', $data['name']);
+
+        wei()->cache->clear();
+    }
+
+    protected function getMemberFromCache($id)
+    {
+        return $this->db('member')->cache(600)->findById($id);
+    }
 }
 
 
