@@ -18,25 +18,13 @@ class EventTest extends TestCase
 
     protected $callback;
 
-    public function tearDown()
-    {
-        // TODO added api in event wei to unregister
-        // Update to null to avoid "Serialization of 'Closure' is not allowed" in phpunit
-        // when session wei test "@runInSeparateProcess"
-        $this->wei->setOption(array(
-            'construct' => null,
-            'constructed' => null
-        ));
-        parent::tearDown();
-    }
-
     public function testGetter()
     {
         $that = $this;
         $event = $this->event;
 
         $event->off('test')
-            ->on('test.ns.ns2', function(\Wei\Stdlib\Event $event) use($that) {
+            ->on('test.ns.ns2', function(\Wei\Event $event) use($that) {
                 $that->assertEquals('test', $event->getType());
                 $that->assertEquals('ns.ns2', $event->getNamespace());
                 $that->assertEquals(array('ns', 'ns2'), $event->getNamespaces());

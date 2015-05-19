@@ -8,8 +8,6 @@
 
 namespace Wei;
 
-use Wei\Stdlib\Event as StdEvent;
-
 /**
  * The event manager to add, remove and trigger events
  *
@@ -18,52 +16,268 @@ use Wei\Stdlib\Event as StdEvent;
 class Event extends Base
 {
     /**
-     * The array contains the event handlers
+     * Manger: The array contains the event handlers
      *
      * @var array
      */
     protected $handlers = array();
 
     /**
-     * The available priorities text
+     * Manger: The available priorities text
      *
      * @var array
      */
     protected $priorities = array(
-        'low'       => -1000,
-        'normal'    => 0,
-        'high'      => 1000
+        'low' => -1000,
+        'normal' => 0,
+        'high' => 1000
     );
 
     /**
-     * Create a event object
+     * The name of event
+     *
+     * @var string
+     */
+    protected $type;
+
+    /**
+     * The namespaces of event
+     *
+     * @var array
+     */
+    protected $namespaces = array();
+
+    /**
+     * Time stamp with microseconds when object constructed
+     *
+     * @var float
+     */
+    protected $timeStamp;
+
+    /**
+     * Whether prevent the default action of event or not
+     *
+     * @var bool
+     */
+    protected $preventDefault = false;
+
+    /**
+     * Whether to trigger the next handler or not
+     *
+     * @var bool
+     */
+    protected $stopPropagation = false;
+
+    /**
+     * The last value returned by an event handler
+     *
+     * @var mixed
+     */
+    protected $result;
+
+    /**
+     * The data accepted from the handler
+     *
+     * @var array
+     */
+    protected $data = array();
+
+    /**
+     * Constructor
+     *
+     * @param array $options
+     */
+    public function __construct(array $options = array())
+    {
+        parent::__construct($options);
+
+        $this->timeStamp = microtime(true);
+    }
+
+    /**
+     * Returns the type of event
+     *
+     * @param bool $full Whether return type or type with with namespace
+     * @return string
+     */
+    public function getType($full = false)
+    {
+        if ($full && $this->namespaces) {
+            return $this->type . '.' . $this->getNamespace();
+        } else {
+            return $this->type;
+        }
+    }
+
+    /**
+     * Set the type of event
+     *
+     * @param  string $type
+     * @return Event
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * Returns the namespaces of event
+     *
+     * @return array
+     */
+    public function getNamespaces()
+    {
+        return $this->namespaces;
+    }
+
+    /**
+     * Set the namespaces of event
+     *
+     * @param array $namespaces
+     * @return Event
+     */
+    public function setNamespaces(array $namespaces)
+    {
+        $this->namespaces = $namespaces;
+        return $this;
+    }
+
+    /**
+     * Returns the event namespace
+     *
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return implode('.', $this->namespaces);
+    }
+
+    /**
+     * Returns the time stamp when event constructed
+     *
+     * @return string|double
+     */
+    public function getTimeStamp()
+    {
+        return $this->timeStamp;
+    }
+
+    /**
+     * Set a flag to prevent the default action
+     *
+     * @return Event
+     */
+    public function preventDefault()
+    {
+        $this->preventDefault = true;
+        return $this;
+    }
+
+    /**
+     * Whether prevent the default action of event or not
+     *
+     * @return bool
+     */
+    public function isDefaultPrevented()
+    {
+        return $this->preventDefault;
+    }
+
+    /**
+     * Sets the event result
+     *
+     * @param mixed $result
+     * @return Event
+     */
+    public function setResult($result)
+    {
+        $this->result = $result;
+        return $this;
+    }
+
+    /**
+     * Returns the last result returned by the event handler
+     *
+     * @return mixed
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    /**
+     * Set the event data
+     *
+     * @param array $data
+     * @return Event
+     */
+    public function setData($data = array())
+    {
+        $this->data = $data;
+        return $this;
+    }
+
+    /**
+     * Returns the event data
+     *
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * Set a flag to stop trigger the next handler
+     *
+     * @return Event
+     */
+    public function stopPropagation()
+    {
+        $this->stopPropagation = true;
+        return $this;
+    }
+
+    /**
+     * Whether to trigger the next handler or not
+     *
+     * @return bool
+     */
+    public function isPropagationStopped()
+    {
+        return $this->stopPropagation;
+    }
+
+    /**
+     * Manager: Create a event object
      *
      * @param string $type
-     * @return \Wei\Stdlib\Event
+     * @return $this
      */
     public function __invoke($type)
     {
         list($type, $namespaces) = $this->splitNamespace($type);
-        return new StdEvent(array(
-            'Wei'        => $this->wei,
-            'type'          => $type,
-            'namespaces'    => $namespaces,
+        return new static(array(
+            'wei' => $this->wei,
+            'type' => $type,
+            'namespaces' => $namespaces,
         ));
     }
 
     /**
-     * Trigger an event
+     * Manager: Trigger an event
      *
      * @param  string $type The name of event or an Event object
      * @param  array $args The arguments pass to the handle
      * @param null|Base $wei If the Wei contains the
      *                                     $type property, the event manager
      *                                     will trigger it too
-     * @return Stdlib\Event The event object
+     * @return $this The event object
      */
     public function trigger($type, $args = array(), Base $wei = null)
     {
-        if ($type instanceof StdEvent) {
+        if ($type instanceof static) {
             $event = $type;
         } else {
             $event = $this($type);
@@ -113,7 +327,7 @@ class Event extends Base
     }
 
     /**
-     * Attach a handler to an event
+     * Manger: Attach a handler to an event
      *
      * @param string|array $type The type of event, or an array that the key is event type and the value is event hanlder
      * @param callback $fn The event handler
@@ -155,7 +369,7 @@ class Event extends Base
     }
 
     /**
-     * Remove event handlers by specified type
+     * Manager: Remove event handlers by specified type
      *
      * @param string $type The type of event
      * @return Event
@@ -187,7 +401,7 @@ class Event extends Base
     }
 
     /**
-     * Check if has the given type of event handlers
+     * Manager: Check if has the given type of event handlers
      *
      * @param  string $type
      * @return bool
@@ -222,7 +436,7 @@ class Event extends Base
     }
 
     /**
-     * Returns the array with two elements, the first one is the event name and
+     * Manager: Returns the array with two elements, the first one is the event name and
      * the second one is the event namespaces
      *
      * @param string $type
