@@ -794,6 +794,17 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
+     * Clear cache that tagged with current table name
+     *
+     * @return $this
+     */
+    public function clearTagCache()
+    {
+        $this->tagCache($this->getCacheTags())->clear();
+        return $this;
+    }
+
+    /**
      * Executes the generated SQL and returns the found record object or false
      *
      * @param mixed $conditions
