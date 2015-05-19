@@ -2,13 +2,6 @@
 
 namespace WeiTest;
 
-
-class WeiWithCallbackEvent extends \Wei\Base
-{
-    protected $callback;
-}
-
-
 class EventTest extends TestCase
 {
     /**
@@ -21,7 +14,7 @@ class EventTest extends TestCase
     public function testGetter()
     {
         $that = $this;
-        $event = $this->event;
+        $event = $this->object;
 
         $event->off('test')
             ->on('test.ns.ns2', function(\Wei\Event $event) use($that) {
@@ -37,9 +30,9 @@ class EventTest extends TestCase
      */
     public function testAddHandler()
     {
-        $this->event->on('test', function(){});
+        $this->object->on('test', function(){});
 
-        $this->assertTrue($this->event->has('test'));
+        $this->assertTrue($this->object->has('test'));
     }
 
     /**
@@ -47,27 +40,28 @@ class EventTest extends TestCase
      */
     public function testAddInvalidHandler()
     {
-        $this->event->on('test', 'not callback');
+        $this->object->on('test', 'not callback');
     }
 
     public function testTriggerHandler()
     {
-        $event = $this->event->off('test')
+        $event = $this->object->off('test')
             ->on('test', function(){
                 return false;
             })
             ->trigger('test');
         $this->assertEquals(false, $event->getResult());
 
-        $event = $this->event('test');
-        $this->event->off('test')
+        /** @var \Wei\Event $event */
+        $event = $this->object('test');
+        $this->object->off('test')
             ->on('test', function(){
                 return 'result';
             })
             ->trigger($event);
         $this->assertEquals('result', $event->getResult());
 
-        $event = $this->event->off('test')
+        $event = $this->object->off('test')
             ->on('test', function($event){
                 $event->stopPropagation();
                 return 'first';
@@ -82,24 +76,15 @@ class EventTest extends TestCase
         $this->fn = function(){
             return false;
         };
-
-        $fixture = new WeiWithCallbackEvent(array(
-            'wei' => $this->wei,
-            'callback' => function(){
-                return false;
-            }
-        ));
-        $event = $this->event->trigger('callback', array(), $fixture);
-        $this->assertEquals(false, $event->getResult());
     }
 
 
     public function testHasHandler()
     {
         $fn = function(){};
-        $em = $this->event;
+        $em = $this->object;
 
-        $this->event->off('test')
+        $this->object->off('test')
             ->on('test', $fn)
             ->on('test.ns1', $fn)
             ->on('test.ns2', $fn)
@@ -124,7 +109,7 @@ class EventTest extends TestCase
     public function testRemoveHandler()
     {
         $that = $this;
-        $em = $this->event;
+        $em = $this->object;
 
         $init = function() use($that) {
             $fn = function(){};
@@ -137,29 +122,29 @@ class EventTest extends TestCase
 
         $init();
         $this->assertTrue($em->has('test'));
-        $this->event->off('test');
+        $this->object->off('test');
         $this->assertFalse($em->has('test'));
 
         $init();
         $this->assertTrue($em->has('test.ns1'));
-        $this->event->off('test.ns1');
+        $this->object->off('test.ns1');
         $this->assertFalse($em->has('test.ns1'));
 
         $init();
         $this->assertTrue($em->has('test.ns1.ns2'));
-        $this->event->off('test.ns1.ns2');
+        $this->object->off('test.ns1.ns2');
         $this->assertFalse($em->has('test.ns1.ns2'));
 
         $init();
         $this->assertTrue($em->has('.ns1'));
-        $this->event->off('.ns1');
+        $this->object->off('.ns1');
         $this->assertFalse($em->has('test.ns1'));
         $this->assertFalse($em->has('test.ns1.ns2'));
     }
 
     public function testGetterAndSetterInEvent()
     {
-        $event = $this->event('test.ns1.ns2');
+        $event = $this->object('test.ns1.ns2');
 
         $this->assertEquals('ns1.ns2', $event->getNamespace());
 
@@ -174,20 +159,20 @@ class EventTest extends TestCase
 
     public function testArrayAsOnParameters()
     {
-        $this->event->off('test')
+        $this->object->off('test')
             ->on(array(
                 'test.ns1' => function(){},
                 'test.ns2' => function(){}
             ));
 
-        $this->assertTrue($this->event->has('test'));
-        $this->assertTrue($this->event->has('test.ns1'));
-        $this->assertTrue($this->event->has('test.ns2'));
+        $this->assertTrue($this->object->has('test'));
+        $this->assertTrue($this->object->has('test.ns1'));
+        $this->assertTrue($this->object->has('test.ns2'));
     }
 
     public function testGetFullType()
     {
-        $event = $this->event('test.ns1');
+        $event = $this->object('test.ns1');
 
         $this->assertEquals('test', $event->getType());
 

@@ -270,12 +270,9 @@ class Event extends Base
      *
      * @param  string $type The name of event or an Event object
      * @param  array $args The arguments pass to the handle
-     * @param null|Base $wei If the Wei contains the
-     *                                     $type property, the event manager
-     *                                     will trigger it too
      * @return $this The event object
      */
-    public function trigger($type, $args = array(), Base $wei = null)
+    public function trigger($type, $args = array())
     {
         if ($type instanceof static) {
             $event = $type;
@@ -290,7 +287,7 @@ class Event extends Base
             $args = array($args);
         }
 
-        // Prepend the event and Wei container object to the beginning of the arguments
+        // Prepend the event and service container to the beginning of the arguments
         array_unshift($args, $event, $this->wei);
 
         if (isset($this->handlers[$type])) {
@@ -311,15 +308,6 @@ class Event extends Base
                         }
                     }
                 }
-            }
-        }
-
-        if ($wei && $selfEvent = $wei->getOption($type)) {
-            if (is_callable($selfEvent)) {
-                if (false === ($result = call_user_func_array($selfEvent, $args))) {
-                    $event->preventDefault();
-                }
-                $event->setResult($result);
             }
         }
 
