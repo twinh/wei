@@ -97,18 +97,6 @@ class Event extends Base
     }
 
     /**
-     * Set the name of event
-     *
-     * @param  string $name
-     * @return Event
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
      * Returns the time stamp when event constructed
      *
      * @return string|double
