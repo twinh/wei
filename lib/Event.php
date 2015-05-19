@@ -38,14 +38,7 @@ class Event extends Base
      *
      * @var string
      */
-    protected $type;
-
-    /**
-     * The namespaces of event
-     *
-     * @var array
-     */
-    protected $namespaces = array();
+    protected $name;
 
     /**
      * Time stamp with microseconds when object constructed
@@ -90,67 +83,29 @@ class Event extends Base
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-
         $this->timeStamp = microtime(true);
     }
 
     /**
-     * Returns the type of event
-     *
-     * @param bool $full Whether return type or type with with namespace
-     * @return string
-     */
-    public function getType($full = false)
-    {
-        if ($full && $this->namespaces) {
-            return $this->type . '.' . $this->getNamespace();
-        } else {
-            return $this->type;
-        }
-    }
-
-    /**
-     * Set the type of event
-     *
-     * @param  string $type
-     * @return Event
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-        return $this;
-    }
-
-    /**
-     * Returns the namespaces of event
-     *
-     * @return array
-     */
-    public function getNamespaces()
-    {
-        return $this->namespaces;
-    }
-
-    /**
-     * Set the namespaces of event
-     *
-     * @param array $namespaces
-     * @return Event
-     */
-    public function setNamespaces(array $namespaces)
-    {
-        $this->namespaces = $namespaces;
-        return $this;
-    }
-
-    /**
-     * Returns the event namespace
+     * Returns the name of event
      *
      * @return string
      */
-    public function getNamespace()
+    public function getName()
     {
-        return implode('.', $this->namespaces);
+        return $this->name;
+    }
+
+    /**
+     * Set the name of event
+     *
+     * @param  string $name
+     * @return Event
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
     }
 
     /**
@@ -252,36 +207,33 @@ class Event extends Base
     /**
      * Manager: Create a event object
      *
-     * @param string $type
+     * @param string $name
      * @return $this
      */
-    public function __invoke($type)
+    public function __invoke($name)
     {
-        list($type, $namespaces) = $this->splitNamespace($type);
         return new static(array(
             'wei' => $this->wei,
-            'type' => $type,
-            'namespaces' => $namespaces,
+            'name' => $name
         ));
     }
 
     /**
      * Manager: Trigger an event
      *
-     * @param  string $type The name of event or an Event object
+     * @param  string $name The name of event or an Event object
      * @param  array $args The arguments pass to the handle
      * @return $this The event object
      */
-    public function trigger($type, $args = array())
+    public function trigger($name, $args = array())
     {
-        if ($type instanceof static) {
-            $event = $type;
+        if ($name instanceof static) {
+            $event = $name;
         } else {
-            $event = $this($type);
+            $event = $this($name);
         }
 
-        $type = $event->getType();
-        $namespaces = $event->getNamespaces();
+        $name = $event->getName();
 
         if (!is_array($args)) {
             $args = array($args);
@@ -290,22 +242,20 @@ class Event extends Base
         // Prepend the event and service container to the beginning of the arguments
         array_unshift($args, $event, $this->wei);
 
-        if (isset($this->handlers[$type])) {
-            krsort($this->handlers[$type]);
-            foreach ($this->handlers[$type] as $handlers) {
+        if (isset($this->handlers[$name])) {
+            krsort($this->handlers[$name]);
+            foreach ($this->handlers[$name] as $handlers) {
                 foreach ($handlers as $handler) {
-                    if (!$namespaces || !$handler[2] || $namespaces == array_intersect($namespaces, $handler[2])) {
-                        list($fn, $data) = $handler;
-                        $event->setData($data);
+                    list($fn, $data) = $handler;
+                    $event->setData($data);
 
-                        if (false === ($result = call_user_func_array($fn, $args))) {
-                            $event->preventDefault();
-                        }
-                        $event->setResult($result);
+                    if (false === ($result = call_user_func_array($fn, $args))) {
+                        $event->preventDefault();
+                    }
+                    $event->setResult($result);
 
-                        if ($event->isPropagationStopped()) {
-                            break 2;
-                        }
+                    if ($event->isPropagationStopped()) {
+                        break 2;
                     }
                 }
             }
@@ -317,27 +267,27 @@ class Event extends Base
     /**
      * Manger: Attach a handler to an event
      *
-     * @param string|array $type The type of event, or an array that the key is event type and the value is event hanlder
+     * @param string|array $name The name of event, or an array that the key is event name and the value is event hanlder
      * @param callback $fn The event handler
      * @param int|string $priority The event priority, could be int or specify strings, the higer number, the higer priority
      * @param array $data The data pass to the event object, when the handler is triggered
      * @throws \InvalidArgumentException when the second argument is not callable
      * @return Event
      */
-    public function on($type, $fn = null, $priority = 0, $data = array())
+    public function on($name, $fn = null, $priority = 0, $data = array())
     {
-        // ( $types )
-        if (is_array($type)) {
-            foreach ($type as $name => $fn) {
-                $this->on($name, $fn);
+        // ( $names )
+        if (is_array($name)) {
+            foreach ($name as $item => $fn) {
+                $this->on($item, $fn);
             }
             return $this;
         }
 
-        // ( $type, $fn, $priority, $data )
+        // ( $name, $fn, $priority, $data )
         if (!is_callable($fn)) {
             throw new \InvalidArgumentException(sprintf(
-                'Expected argument of type callable, "%s" given',
+                'Expected argument of name callable, "%s" given',
                 is_object($fn) ? get_class($fn) : gettype($fn)
             ));
         }
@@ -345,102 +295,37 @@ class Event extends Base
         $priority = is_numeric($priority) ? $priority :
             (isset($this->priorities[$priority]) ? $this->priorities[$priority] : 0);
 
-        list($type, $namespaces) = $this->splitNamespace($type);
-
-        if (!isset($this->handlers[$type])) {
-            $this->handlers[$type] = array();
+        if (!isset($this->handlers[$name])) {
+            $this->handlers[$name] = array();
         }
 
-        $this->handlers[$type][$priority][] = array($fn, $data, $namespaces);
+        $this->handlers[$name][$priority][] = array($fn, $data);
 
         return $this;
     }
 
     /**
-     * Manager: Remove event handlers by specified type
+     * Manager: Remove event handlers by specified name
      *
-     * @param string $type The type of event
+     * @param string $name The name of event
      * @return Event
      */
-    public function off($type)
+    public function off($name)
     {
-        list($type, $namespaces) = $this->splitNamespace($type);
-
-        if ($type && isset($this->handlers[$type])) {
-            if (!$namespaces) {
-                unset($this->handlers[$type]);
-            } else {
-                foreach ($this->handlers[$type] as $i => $handlers) {
-                    foreach ($handlers as $j => $handler) {
-                        if ($namespaces == array_intersect($namespaces, $handler[2])) {
-                            unset($this->handlers[$type][$i][$j]);
-                        }
-                    }
-                }
-            }
-            // Unbind all event in namespace
-        } else {
-            foreach ($this->handlers as $type => $handlers) {
-                $this->off($type . '.' . implode('.', $namespaces));
-            }
+        if (isset($this->handlers[$name])) {
+            unset($this->handlers[$name]);
         }
-
         return $this;
     }
 
     /**
-     * Manager: Check if has the given type of event handlers
+     * Manager: Check if has the given name of event handlers
      *
-     * @param  string $type
+     * @param  string $name
      * @return bool
      */
-    public function has($type)
+    public function has($name)
     {
-        list($type, $namespaces) = $this->splitNamespace($type);
-
-        if (!$namespaces) {
-            return isset($this->handlers[$type]);
-        } elseif (!$type) {
-            foreach ($this->handlers as $type => $handlers) {
-                if (true === $this->has($type . '.' . implode('.', $namespaces))) {
-                    return true;
-                }
-            }
-            return false;
-        } else {
-            if (!isset($this->handlers[$type])) {
-                return false;
-            } else {
-                foreach ($this->handlers[$type] as $handlers) {
-                    foreach ($handlers as $handler) {
-                        if ($namespaces == array_intersect($namespaces, $handler[2])) {
-                            return true;
-                        }
-                    }
-                }
-                return false;
-            }
-        }
-    }
-
-    /**
-     * Manager: Returns the array with two elements, the first one is the event name and
-     * the second one is the event namespaces
-     *
-     * @param string $type
-     * @return array<string|array>
-     */
-    protected function splitNamespace($type)
-    {
-        if (false === ($pos = strpos($type, '.'))) {
-            return array($type, array());
-        } else {
-            $namespaces = array_unique(array_filter(explode('.', substr($type, $pos))));
-            sort($namespaces);
-            return array(
-                substr($type, 0, $pos),
-                $namespaces
-            );
-        }
+        return isset($this->handlers[$name]);
     }
 }

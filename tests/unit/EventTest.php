@@ -2,6 +2,8 @@
 
 namespace WeiTest;
 
+use Wei\Event;
+
 class EventTest extends TestCase
 {
     /**
@@ -9,20 +11,16 @@ class EventTest extends TestCase
      */
     protected $object;
 
-    protected $callback;
-
     public function testGetter()
     {
         $that = $this;
         $event = $this->object;
 
         $event->off('test')
-            ->on('test.ns.ns2', function(\Wei\Event $event) use($that) {
-                $that->assertEquals('test', $event->getType());
-                $that->assertEquals('ns.ns2', $event->getNamespace());
-                $that->assertEquals(array('ns', 'ns2'), $event->getNamespaces());
+            ->on('test', function(\Wei\Event $event) use($that) {
+                $that->assertEquals('test', $event->getName());
             })
-            ->trigger('test.ns.ns2');
+            ->trigger('test');
     }
 
     /**
@@ -62,7 +60,7 @@ class EventTest extends TestCase
         $this->assertEquals('result', $event->getResult());
 
         $event = $this->object->off('test')
-            ->on('test', function($event){
+            ->on('test', function(Event $event){
                 $event->stopPropagation();
                 return 'first';
             })
@@ -85,22 +83,15 @@ class EventTest extends TestCase
         $em = $this->object;
 
         $this->object->off('test')
+            ->off('test.before')
             ->on('test', $fn)
-            ->on('test.ns1', $fn)
-            ->on('test.ns2', $fn)
-            ->on('test.ns1.ns2', $fn);
+            ->on('test.before', $fn);
 
         $this->assertTrue($em->has('test'));
 
-        $this->assertTrue($em->has('.ns1'));
-
-        $this->assertTrue($em->has('test.ns1'));
-
-        $this->assertTrue($em->has('.ns1.ns2'));
+        $this->assertTrue($em->has('test.before'));
 
         $this->assertFalse($em->has('test2'));
-
-        $this->assertFalse($em->has('.ns3'));
 
         $this->assertFalse($em->has('test2.ns3'));
     }
@@ -115,9 +106,9 @@ class EventTest extends TestCase
             $fn = function(){};
             $that->event->off('test')
                 ->on('test', $fn)
-                ->on('test.ns1', $fn)
-                ->on('test.ns2', $fn)
-                ->on('test.ns1.ns2', $fn);
+                ->on('test.before', $fn)
+                ->on('test.after', $fn)
+                ->on('test.before.ns2', $fn);
         };
 
         $init();
@@ -126,27 +117,19 @@ class EventTest extends TestCase
         $this->assertFalse($em->has('test'));
 
         $init();
-        $this->assertTrue($em->has('test.ns1'));
-        $this->object->off('test.ns1');
-        $this->assertFalse($em->has('test.ns1'));
+        $this->assertTrue($em->has('test.before'));
+        $this->object->off('test.before');
+        $this->assertFalse($em->has('test.before'));
 
         $init();
-        $this->assertTrue($em->has('test.ns1.ns2'));
-        $this->object->off('test.ns1.ns2');
-        $this->assertFalse($em->has('test.ns1.ns2'));
-
-        $init();
-        $this->assertTrue($em->has('.ns1'));
-        $this->object->off('.ns1');
-        $this->assertFalse($em->has('test.ns1'));
-        $this->assertFalse($em->has('test.ns1.ns2'));
+        $this->assertTrue($em->has('test.before.ns2'));
+        $this->object->off('test.before.ns2');
+        $this->assertFalse($em->has('test.before.ns2'));
     }
 
     public function testGetterAndSetterInEvent()
     {
-        $event = $this->object('test.ns1.ns2');
-
-        $this->assertEquals('ns1.ns2', $event->getNamespace());
+        $event = $this->object('test.before');
 
         $this->assertEquals(false, $event->isDefaultPrevented());
 
@@ -161,21 +144,11 @@ class EventTest extends TestCase
     {
         $this->object->off('test')
             ->on(array(
-                'test.ns1' => function(){},
-                'test.ns2' => function(){}
+                'test.before' => function(){},
+                'test.after' => function(){}
             ));
 
-        $this->assertTrue($this->object->has('test'));
-        $this->assertTrue($this->object->has('test.ns1'));
-        $this->assertTrue($this->object->has('test.ns2'));
-    }
-
-    public function testGetFullType()
-    {
-        $event = $this->object('test.ns1');
-
-        $this->assertEquals('test', $event->getType());
-
-        $this->assertEquals('test.ns1', $event->getType(true));
+        $this->assertTrue($this->object->has('test.before'));
+        $this->assertTrue($this->object->has('test.after'));
     }
 }
