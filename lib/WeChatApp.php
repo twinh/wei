@@ -218,7 +218,7 @@ class WeChatApp extends Base
      */
     public function subscribe(Closure $fn)
     {
-        return $this->addEventRule('subscribe', null, $fn);
+        return $this->on('subscribe', $fn);
     }
 
     /**
@@ -229,7 +229,7 @@ class WeChatApp extends Base
      */
     public function unsubscribe(Closure $fn)
     {
-        return $this->addEventRule('unsubscribe', null, $fn);
+        return $this->on('unsubscribe', $fn);
     }
 
     /**
@@ -241,7 +241,7 @@ class WeChatApp extends Base
      */
     public function click($key, Closure $fn)
     {
-        return $this->addEventRule('click', $key, $fn);
+        return $this->on('click', $key, $fn);
     }
 
     /**
@@ -252,7 +252,25 @@ class WeChatApp extends Base
      */
     public function scan(Closure $fn)
     {
-        return $this->addEventRule('scan', null, $fn);
+        return $this->on('scan', $fn);
+    }
+
+    /**
+     * Adds a rule to handle user event, such as click, subscribe
+     *
+     * @param string $name
+     * @param Closure|string $key
+     * @param Closure $fn
+     * @return $this
+     */
+    public function on($name, $key, Closure $fn = null)
+    {
+        if ($key instanceof Closure) {
+            $this->rules['event'][$name][''] = $key;
+        } else {
+            $this->rules['event'][$name][$key] = $fn;
+        }
+        return $this;
     }
 
     /**
@@ -778,20 +796,6 @@ class WeChatApp extends Base
             'keyword' => $keyword,
             'fn' => $fn
         );
-        return $this;
-    }
-
-    /**
-     * Adds a rule to handle user event, such as click, subscribe
-     *
-     * @param string $name
-     * @param string $key
-     * @param Closure $fn
-     * @return $this
-     */
-    protected function addEventRule($name, $key, Closure $fn)
-    {
-        $this->rules['event'][$name][$key] = $fn;
         return $this;
     }
 
