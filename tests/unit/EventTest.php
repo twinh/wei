@@ -2,6 +2,13 @@
 
 namespace WeiTest;
 
+
+class WeiWithCallbackEvent extends \Wei\Base
+{
+    protected $callback;
+}
+
+
 class EventTest extends TestCase
 {
     /**
@@ -13,10 +20,10 @@ class EventTest extends TestCase
 
     public function tearDown()
     {
-        // TODO added api in event widget to unregister
+        // TODO added api in event wei to unregister
         // Update to null to avoid "Serialization of 'Closure' is not allowed" in phpunit
-        // when session widget test "@runInSeparateProcess"
-        $this->widget->setOption(array(
+        // when session wei test "@runInSeparateProcess"
+        $this->wei->setOption(array(
             'construct' => null,
             'constructed' => null
         ));
@@ -29,7 +36,7 @@ class EventTest extends TestCase
         $event = $this->event;
 
         $event->off('test')
-            ->on('test.ns.ns2', function(\Widget\Stdlib\Event $event) use($that) {
+            ->on('test.ns.ns2', function(\Wei\Stdlib\Event $event) use($that) {
                 $that->assertEquals('test', $event->getType());
                 $that->assertEquals('ns.ns2', $event->getNamespace());
                 $that->assertEquals(array('ns', 'ns2'), $event->getNamespaces());
@@ -88,8 +95,8 @@ class EventTest extends TestCase
             return false;
         };
 
-        $fixture = new \WidgetTest\Fixtures\WidgetWithCallbackEvent(array(
-            'widget' => $this->widget,
+        $fixture = new WeiWithCallbackEvent(array(
+            'wei' => $this->wei,
             'callback' => function(){
                 return false;
             }
