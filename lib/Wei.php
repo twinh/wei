@@ -98,6 +98,7 @@ namespace Wei
      * @method   string     env() Returns the environment name
      * @property Error      $error A object that handles exception and display pretty exception message
      * @method   \Wei\Error error($fn) Attach a handler to exception error
+     * @property Event      $event An event dispatch service
      * @property Gravatar   $gravatar A object that generates a Gravatar URL for a specified email address
      * @method   string     gravatar($email, $size = null, $default = null, $rating = null) Generates a Gravatar URL for a specified email address
      * @property Lock       $lock A service that provide the functionality of exclusive Lock

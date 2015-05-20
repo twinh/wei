@@ -11,16 +11,20 @@ class EventTest extends TestCase
      */
     protected $object;
 
-    public function testGetter()
+    public function testEvent()
     {
-        $that = $this;
         $event = $this->object;
 
-        $event->off('test')
-            ->on('test', function(\Wei\Event $event) use($that) {
-                $that->assertEquals('test', $event->getName());
+        $results = $event->off('test')
+            ->on('test', function() {
+                return 'a';
+            })
+            ->on('test', function () {
+                return 'b';
             })
             ->trigger('test');
+
+        $this->assertEquals(array('a', 'b'), $results);
     }
 
     /**
@@ -43,24 +47,15 @@ class EventTest extends TestCase
 
     public function testTriggerHandler()
     {
-        $event = $this->object->off('test')
+        $results = $event = $this->object->off('test')
             ->on('test', function(){
                 return false;
             })
             ->trigger('test');
-        $this->assertEquals(false, $event->getResult());
+        $this->assertEquals(false, $results[0]);
 
-        /** @var \Wei\Event $event */
-        $event = $this->object('test');
-        $this->object->off('test')
+        $results = $this->object->off('test')
             ->on('test', function(){
-                return 'result';
-            })
-            ->trigger($event);
-        $this->assertEquals('result', $event->getResult());
-
-        $event = $this->object->off('test')
-            ->on('test', function(Event $event){
                 return false;
             })
             // won't be triggered
@@ -68,11 +63,7 @@ class EventTest extends TestCase
                 return 'second';
             })
             ->trigger('test');
-        $this->assertEquals(false, $event->getResult());
-
-        $this->fn = function(){
-            return false;
-        };
+        $this->assertEquals(array(false), $results);
     }
 
 
@@ -124,15 +115,6 @@ class EventTest extends TestCase
         $this->assertTrue($em->has('test.before.ns2'));
         $this->object->off('test.before.ns2');
         $this->assertFalse($em->has('test.before.ns2'));
-    }
-
-    public function testGetterAndSetterInEvent()
-    {
-        $event = $this->object('test.before');
-
-        $this->assertEquals(array(), $event->getData());
-
-        $this->assertInternalType('float', $event->getTimeStamp());
     }
 
     public function testArrayAsOnParameters()
