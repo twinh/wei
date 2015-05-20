@@ -23,17 +23,6 @@ class Event extends Base
     protected $handlers = array();
 
     /**
-     * Manger: The available priorities text
-     *
-     * @var array
-     */
-    protected $priorities = array(
-        'low' => -1000,
-        'normal' => 0,
-        'high' => 1000
-    );
-
-    /**
      * The name of event
      *
      * @var string
@@ -257,7 +246,7 @@ class Event extends Base
      *
      * @param string|array $name The name of event, or an array that the key is event name and the value is event hanlder
      * @param callback $fn The event handler
-     * @param int|string $priority The event priority, could be int or specify strings, the higer number, the higer priority
+     * @param int $priority The event priority
      * @param array $data The data pass to the event object, when the handler is triggered
      * @throws \InvalidArgumentException when the second argument is not callable
      * @return Event
@@ -279,9 +268,6 @@ class Event extends Base
                 is_object($fn) ? get_class($fn) : gettype($fn)
             ));
         }
-
-        $priority = is_numeric($priority) ? $priority :
-            (isset($this->priorities[$priority]) ? $this->priorities[$priority] : 0);
 
         if (!isset($this->handlers[$name])) {
             $this->handlers[$name] = array();
