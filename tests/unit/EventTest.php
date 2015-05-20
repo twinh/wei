@@ -61,15 +61,14 @@ class EventTest extends TestCase
 
         $event = $this->object->off('test')
             ->on('test', function(Event $event){
-                $event->stopPropagation();
-                return 'first';
+                return false;
             })
             // won't be triggered
             ->on('test', function(){
                 return 'second';
             })
             ->trigger('test');
-        $this->assertEquals('first', $event->getResult());
+        $this->assertEquals(false, $event->getResult());
 
         $this->fn = function(){
             return false;
@@ -130,10 +129,6 @@ class EventTest extends TestCase
     public function testGetterAndSetterInEvent()
     {
         $event = $this->object('test.before');
-
-        $this->assertEquals(false, $event->isDefaultPrevented());
-
-        $this->assertEquals(true, $event->preventDefault()->isDefaultPrevented());
 
         $this->assertEquals(array(), $event->getData());
 

@@ -37,20 +37,6 @@ class Event extends Base
     protected $timeStamp;
 
     /**
-     * Whether prevent the default action of event or not
-     *
-     * @var bool
-     */
-    protected $preventDefault = false;
-
-    /**
-     * Whether to trigger the next handler or not
-     *
-     * @var bool
-     */
-    protected $stopPropagation = false;
-
-    /**
      * The last value returned by an event handler
      *
      * @var mixed
@@ -93,27 +79,6 @@ class Event extends Base
     public function getTimeStamp()
     {
         return $this->timeStamp;
-    }
-
-    /**
-     * Set a flag to prevent the default action
-     *
-     * @return $this
-     */
-    public function preventDefault()
-    {
-        $this->preventDefault = true;
-        return $this;
-    }
-
-    /**
-     * Whether prevent the default action of event or not
-     *
-     * @return bool
-     */
-    public function isDefaultPrevented()
-    {
-        return $this->preventDefault;
     }
 
     /**
@@ -161,27 +126,6 @@ class Event extends Base
     }
 
     /**
-     * Set a flag to stop trigger the next handler
-     *
-     * @return $this
-     */
-    public function stopPropagation()
-    {
-        $this->stopPropagation = true;
-        return $this;
-    }
-
-    /**
-     * Whether to trigger the next handler or not
-     *
-     * @return bool
-     */
-    public function isPropagationStopped()
-    {
-        return $this->stopPropagation;
-    }
-
-    /**
      * Manager: Create a event object
      *
      * @param string $name
@@ -225,13 +169,9 @@ class Event extends Base
                 foreach ($handlers as $handler) {
                     list($fn, $data) = $handler;
                     $event->setData($data);
-
-                    if (false === ($result = call_user_func_array($fn, $args))) {
-                        $event->preventDefault();
-                    }
+                    $result = call_user_func_array($fn, $args);
                     $event->setResult($result);
-
-                    if ($event->isPropagationStopped()) {
+                    if (false === $result) {
                         break 2;
                     }
                 }
