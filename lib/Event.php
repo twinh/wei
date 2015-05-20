@@ -9,7 +9,7 @@
 namespace Wei;
 
 /**
- * The event manager to add, remove and trigger events
+ * An event dispatch service
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
@@ -98,7 +98,7 @@ class Event extends Base
     /**
      * Set a flag to prevent the default action
      *
-     * @return Event
+     * @return $this
      */
     public function preventDefault()
     {
@@ -120,7 +120,7 @@ class Event extends Base
      * Sets the event result
      *
      * @param mixed $result
-     * @return Event
+     * @return $this
      */
     public function setResult($result)
     {
@@ -142,7 +142,7 @@ class Event extends Base
      * Set the event data
      *
      * @param array $data
-     * @return Event
+     * @return $this
      */
     public function setData($data = array())
     {
@@ -163,7 +163,7 @@ class Event extends Base
     /**
      * Set a flag to stop trigger the next handler
      *
-     * @return Event
+     * @return $this
      */
     public function stopPropagation()
     {
@@ -200,7 +200,7 @@ class Event extends Base
      *
      * @param  string $name The name of event or an Event object
      * @param  array $args The arguments pass to the handle
-     * @return $this The event object
+     * @return $this
      */
     public function trigger($name, $args = array())
     {
@@ -249,7 +249,7 @@ class Event extends Base
      * @param int $priority The event priority
      * @param array $data The data pass to the event object, when the handler is triggered
      * @throws \InvalidArgumentException when the second argument is not callable
-     * @return Event
+     * @return $this
      */
     public function on($name, $fn = null, $priority = 0, $data = array())
     {
@@ -282,7 +282,7 @@ class Event extends Base
      * Manager: Remove event handlers by specified name
      *
      * @param string $name The name of event
-     * @return Event
+     * @return $this
      */
     public function off($name)
     {
