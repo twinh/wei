@@ -32,7 +32,7 @@ class Memcache extends BaseCache
         array(
             'host'          => '127.0.0.1',
             'port'          => 11211,
-            'persistent'    => true
+            'persistent'    => false
         )
     );
 

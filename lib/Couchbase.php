@@ -51,7 +51,7 @@ class Couchbase extends BaseCache
      *
      * @var bool
      */
-    protected $persistent = true;
+    protected $persistent = false;
 
     /**
      * The couchbase object

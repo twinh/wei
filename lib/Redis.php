@@ -48,7 +48,7 @@ class Redis extends BaseCache
      *
      * @var bool
      */
-    protected $persistent = true;
+    protected $persistent = false;
 
     /**
      * A password to authenticate the connection

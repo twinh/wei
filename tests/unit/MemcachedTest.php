@@ -37,7 +37,7 @@ class MemcachedTest extends CacheTestCase
                     array(
                         'host'          => 'localhost',
                         'port'          => 11211,
-                        'persistent'    => true
+                        'persistent'    => false
                     )
                 )
             )
