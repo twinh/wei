@@ -202,6 +202,11 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     protected $cacheTime = false;
 
     /**
+     * @var string
+     */
+    protected $cacheKey = '';
+
+    /**
      * The cache tags
      *
      * @var array
@@ -1823,13 +1828,25 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
+     * Set cache key
+     *
+     * @param string $cacheKey
+     * @return $this
+     */
+    public function setCacheKey($cacheKey)
+    {
+        $this->cacheKey = $cacheKey;
+        return $this;
+    }
+
+    /**
      * Generate cache key form query and params
      *
      * @return string
      */
     public function getCacheKey()
     {
-        return md5($this->getSql() . serialize($this->params) . serialize($this->paramTypes));
+        return $this->cacheKey ?: md5($this->getSql() . serialize($this->params) . serialize($this->paramTypes));
     }
 
     /**

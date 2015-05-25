@@ -2048,6 +2048,20 @@ class DbTest extends TestCase
         wei()->cache->clear();
     }
 
+    public function testCustomCacheKey()
+    {
+        $this->initFixtures();
+
+        $member = $this->db('member')->cache()->setCacheKey('member-1')->tags(false)->find(array('id' => 1));
+
+        $this->assertEquals(1, $member['id']);
+
+        $cacheData = wei()->cache->get('member-1');
+        $this->assertEquals('1', $cacheData[0]['id']);
+
+        wei()->cache->clear();
+    }
+
     protected function getMemberFromCache($id)
     {
         return $this->db('member')->cache(600)->findById($id);
