@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## 0.9.19 (2015-05-25)
+
+* Record: setData可以传入数组或ArrayAccess refs 39588ce285624ffca23138a6b9aacf1ce3810fcc
+* Env: env支持多个服务器都设置为相同的环境名称 refs e96e7ff63919c80425d5b7733a5468f74f107cf0
+* TagCache: 增加标签缓存服务 #180
+* Record: 增加缓存和标签缓存支持,增加了cache, tags, setCacheKey, clearTagCache等缓存方法 #180
+* Event: 增加事件功能 #181
+
 ## 0.9.18 (2015-04-09)
 
 * App: action的命名改为以Action结尾,以便不和关键字new, default,list冲突 refs be6f6f1
