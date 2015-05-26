@@ -983,15 +983,4 @@ namespace
     {
         return call_user_func_array(array('Wei\Wei', 'getContainer'), func_get_args());
     }
-
-    /**
-     * Get the service container instance
-     *
-     * @return Wei\Wei
-     * @deprecated Remove in 0.9.9
-     */
-    function widget()
-    {
-        return call_user_func_array(array('Wei\Wei', 'getContainer'), func_get_args());
-    }
 }

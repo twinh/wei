@@ -439,11 +439,6 @@ class WeiTest extends TestCase
         $this->assertSame(Wei::getContainer(), wei());
     }
 
-    public function testWidgetFunction()
-    {
-        $this->assertSame(Wei::getContainer(), widget());
-    }
-
     public function testGetSelf()
     {
         $this->assertSame($this->wei, $this->wei->wei);

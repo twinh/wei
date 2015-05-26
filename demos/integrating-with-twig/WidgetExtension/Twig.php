@@ -10,7 +10,7 @@ namespace WeiExtension;
 use Wei\Base;
 
 /**
- * A wrapper widget for Twig object
+ * A wrapper service for Twig object
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
