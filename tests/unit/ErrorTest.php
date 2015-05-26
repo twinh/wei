@@ -86,4 +86,64 @@ class ErrorTest extends TestCase
         $this->assertContains('Oops!', $content);
         $this->assertContains('Something wrong', $content);
     }
+
+    public function testCustom404Message()
+    {
+        $this->error->setOption(array(
+            'message404' => '404',
+            'detail404' => 'The page not found'
+        ));
+
+        $exception = new \Exception('', 404);
+
+        ob_start();
+        $this->error->handleException($exception);
+        $content = ob_get_clean();
+
+        $this->assertContains('404', $content);
+        $this->assertContains('The page not found', $content);
+    }
+
+    public function testCustom403Message()
+    {
+        $this->error->setOption(array(
+            'message403' => '403',
+            'detail403' => 'Forbidden'
+        ));
+
+        $exception = new \Exception('', 403);
+
+        ob_start();
+        $this->error->handleException($exception);
+        $content = ob_get_clean();
+
+        $this->assertContains('403', $content);
+        $this->assertContains('Forbidden', $content);
+    }
+
+    public function testCustomErrorView()
+    {
+        $this->error->setOption('view', 'tests/unit/Fixtures/500.php');
+
+        $exception = new \Exception('');
+
+        ob_start();
+        $this->error->handleException($exception);
+        $content = ob_get_clean();
+
+        $this->assertContains('500', $content);
+    }
+
+    public function testCustom404View()
+    {
+        $this->error->setOption('view404', 'tests/unit/Fixtures/404.php');
+
+        $exception = new \Exception('', 404);
+
+        ob_start();
+        $this->error->handleException($exception);
+        $content = ob_get_clean();
+
+        $this->assertContains('404', $content);
+    }
 }
