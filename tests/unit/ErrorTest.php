@@ -18,7 +18,7 @@ class ErrorTest extends TestCase
     public function testFatalException()
     {
         $test = $this;
-        $this->error->fatal(function($exception) use($test) {
+        $this->error->fatal(function ($exception) use ($test) {
             $test->assertEquals('Class not found', $exception->getMessage());
         });
         $exception = new \ErrorException('Class not found', 0, 0, __FILE__, __LINE__);
@@ -68,5 +68,22 @@ class ErrorTest extends TestCase
         $exception = new \Exception();
 
         $this->error->handleException($exception);
+    }
+
+    public function testCustomErrorMessage()
+    {
+        $this->error->setOption(array(
+            'message' => 'Oops!',
+            'detail' => 'Something wrong'
+        ));
+
+        $exception = new \Exception('');
+
+        ob_start();
+        $this->error->handleException($exception);
+        $content = ob_get_clean();
+
+        $this->assertContains('Oops!', $content);
+        $this->assertContains('Something wrong', $content);
     }
 }

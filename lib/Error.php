@@ -17,6 +17,13 @@ namespace Wei;
 class Error extends Base
 {
     /**
+     * The default error view
+     *
+     * @var string
+     */
+    protected $view;
+
+    /**
      * The default error message display when debug is not enable
      *
      * @var string
@@ -31,11 +38,21 @@ class Error extends Base
     protected $detail = 'Unfortunately, an error occurred. Please try again later.';
 
     /**
+     * @var string
+     */
+    protected $view404;
+
+    /**
+     * @var string
+     */
+    protected $message404 = 'Page not found';
+
+    /**
      * The detail error message display when thrown 404 exception
      *
      * @var string
      */
-    protected $notFoundDetail = 'Sorry, the page you requested was not found. Please check the URL and try again.';
+    protected $detail404 = 'Sorry, the page you requested was not found. Please check the URL and try again.';
 
     /**
      * Whether ignore the previous exception handler or attach it again to the
@@ -212,10 +229,10 @@ class Error extends Base
         restore_exception_handler();
     }
 
-    public function internalHandleException(\Exception $exception)
+    public function internalHandleException(\Exception $e)
     {
+        $code = $e->getCode();
         $debug = $this->wei->isDebug();
-        $code = $exception->getCode();
 
         // HTTP status code
         if ($code < 100 || $code > 600) {
@@ -232,11 +249,11 @@ class Error extends Base
         try {
             // The flowing services may throw exception too
             $this->response->setStatusCode($code)->send();
-            $this->logger->log($level, $exception);
+            $this->logger->log($level, $e);
 
-            $this->renderException($exception, $debug);
+            $this->displayException($e, $debug);
         } catch (\Exception $e) {
-            $this->renderException($e, $debug);
+            $this->displayException($e, $debug);
         }
     }
 
@@ -246,44 +263,36 @@ class Error extends Base
      * @param \Exception $e
      * @param bool $debug Whether show debug trace
      */
-    public function renderException(\Exception $e, $debug)
+    public function displayException(\Exception $e, $debug)
     {
         $code = $e->getCode();
         $file = $e->getFile();
         $line = $e->getLine();
 
-        // Prepare message
-        if ($debug) {
+        if (!$debug) {
+            $view = isset($this->{'view' . $code}) ? $this->{'view' . $code} : $this->view;
+            $message = isset($this->{'message' . $code}) ? $this->{'message' . $code} : $this->message;
+            $detail = isset($this->{'detail' . $code}) ? $this->{'detail' . $code} : $this->detail;
+            if ($view) {
+                require $view;
+                return;
+            }
+        } else {
             $message = $e->getMessage();
             $detail = sprintf('Threw by %s in %s on line %s', get_class($e), $file, $line);
-        } else {
-            $message = $this->message;
-            $detail = $this->detail;
-        }
 
-        if ($code == 404) {
-            $message = $e->getMessage();
-            if (!$debug) {
-                $detail = $this->notFoundDetail;
-            }
-        }
-        $title = htmlspecialchars($message, ENT_QUOTES);
-        $message = nl2br($title);
-
-        // Render error views
-        if ($debug) {
             $fileInfo   = $this->getFileCode($file, $line);
             $trace      = htmlspecialchars($e->getTraceAsString(), ENT_QUOTES);
-
             $detail = "<h2>File</h2>"
-                . "<p class=\"error-text\">$file</p>"
+                . "<p class=\"text-danger\">$file</p>"
                 . "<p><pre>$fileInfo</pre></p>"
                 . "<h2>Trace</h2>"
-                . "<p class=\"error-text\">$detail</p>"
+                . "<p class=\"text-danger\">$detail</p>"
                 . "<p><pre>$trace</pre></p>";
-        } else {
-            $detail = "<p>$detail</p>";
         }
+
+        $title = htmlspecialchars($message, ENT_QUOTES);
+        $message = nl2br($title);
 
         $html = '<!DOCTYPE html>'
             . '<html>'
@@ -292,13 +301,13 @@ class Error extends Base
             . '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>'
             . "<title>$title</title>"
             . '<style type="text/css">'
-            . 'body { font-size: 12px; color: #333; padding: 15px 20px 20px 20px; }'
+            . 'body { font-size: 14px; color: #333; padding: 15px 20px 20px 20px; }'
             . 'h1, h2, p, pre { margin: 0; padding: 0; }'
             . 'body, pre { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "\5fae\8f6f\96c5\9ed1", "\5b8b\4f53"; }'
             . 'h1 { font-size: 36px; }'
             . 'h2 { font-size: 20px; margin: 20px 0 0; }'
-            . 'pre { line-height: 18px; }'
-            . 'strong, .error-text { color: #FF3000; }'
+            . 'pre { font-size:13px; line-height: 1.42857143; }'
+            . '.text-danger { color: #fa5b50 }'
             . '</style>'
             . '</head>'
             . '<body>'
@@ -359,7 +368,7 @@ class Error extends Base
             if ($line != $i) {
                 $content .= htmlspecialchars($temp, ENT_QUOTES);
             } else {
-                $content .= '<strong>' . htmlspecialchars($temp, ENT_QUOTES) . '</strong>';
+                $content .= '<strong class="text-danger">' . htmlspecialchars($temp, ENT_QUOTES) . '</strong>';
             }
         }
 
