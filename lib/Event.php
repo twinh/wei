@@ -25,34 +25,45 @@ class Event extends Base
     /**
      * Trigger an event
      *
-     * @param  string $name The name of event or an Event object
+     * @param  string $name The name of event
      * @param  array $args The arguments pass to the handle
-     * @return array
+     * @param bool $halt
+     * @return array|mixed
      */
-    public function trigger($name, $args = array())
+    public function trigger($name, $args = array(), $halt = false)
     {
         if (!is_array($args)) {
             $args = array($args);
         }
-
-        // Prepend the service container to the beginning of the arguments
-        array_unshift($args, $this->wei);
-
         $results = array();
-
         if (isset($this->handlers[$name])) {
             krsort($this->handlers[$name]);
             foreach ($this->handlers[$name] as $handlers) {
                 foreach ($handlers as $handler) {
                     $results[] = $result = call_user_func_array($handler, $args);
+                    if ($result !== null && $halt) {
+                        return $result;
+                    }
                     if (false === $result) {
                         break 2;
                     }
                 }
             }
         }
+        return $halt ? null : $results;
+    }
 
-        return $results;
+    /**
+     * Trigger an event until the first non-null response is returned
+     *
+     * @param string $name
+     * @param array $args
+     * @return mixed
+     * @link https://github.com/laravel/framework/blob/5.1/src/Illuminate/Events/Dispatcher.php#L161
+     */
+    public function until($name, $args = array())
+    {
+        return $this->trigger($name, $args, true);
     }
 
     /**
