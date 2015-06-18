@@ -35,9 +35,6 @@ class Event extends Base
             $args = array($args);
         }
 
-        // Prepend the service container to the beginning of the arguments
-        array_unshift($args, $this->wei);
-
         $results = array();
 
         if (isset($this->handlers[$name])) {
