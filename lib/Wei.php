@@ -270,7 +270,7 @@ namespace Wei
         /**
          * Version
          */
-        const VERSION = '0.9.19';
+        const VERSION = '0.9.20';
 
         /**
          * The configurations for all objects

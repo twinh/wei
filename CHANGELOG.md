@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## 0.9.20 (2015-06-18)
+
+* Event: 移除$wei作为事件的首个参数 #183
+* Event: 增加until方法,当获取到首个非null返回就停止执行剩下的事件 #183
+
 ## 0.9.19 (2015-05-25)
 
 * Record: setData可以传入数组或ArrayAccess refs 39588ce285624ffca23138a6b9aacf1ce3810fcc
