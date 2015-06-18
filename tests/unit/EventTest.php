@@ -150,4 +150,21 @@ class EventTest extends TestCase
 
         $this->assertEquals(array('test'), $result);
     }
+
+    public function testUntil()
+    {
+        $this->object->on(__FUNCTION__, function () {
+            return null;
+        });
+
+        $this->object->on(__FUNCTION__, function () {
+            return 'here';
+        });
+
+        $this->object->on(__FUNCTION__, function () {
+            return 'not here';
+        });
+
+        $this->assertEquals('here', $this->object->until(__FUNCTION__));
+    }
 }
