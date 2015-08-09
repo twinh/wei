@@ -35,21 +35,25 @@ class Event extends Base
         if (!is_array($args)) {
             $args = array($args);
         }
+
         $results = array();
         if (isset($this->handlers[$name])) {
             krsort($this->handlers[$name]);
             foreach ($this->handlers[$name] as $handlers) {
                 foreach ($handlers as $handler) {
                     $results[] = $result = call_user_func_array($handler, $args);
+
                     if ($result !== null && $halt) {
                         return $result;
                     }
+
                     if (false === $result) {
                         break 2;
                     }
                 }
             }
         }
+
         return $halt ? null : $results;
     }
 
