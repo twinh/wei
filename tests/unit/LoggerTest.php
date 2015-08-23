@@ -190,4 +190,30 @@ class LoggerTest extends TestCase
         $content = file_get_contents($this->logger->getFile());
         $this->assertContains('test log message', $content);
     }
+
+    public function providerForContexts()
+    {
+        return array(
+            array('debug'),
+            array('info'),
+            array('notice'),
+            array('warning'),
+            array('error'),
+            array('critical'),
+            array('alert'),
+            array('emergency'),
+        );
+    }
+
+    /**
+     * @dataProvider providerForContexts
+     */
+    public function testStringAsContext($method)
+    {
+        $this->logger->$method($method, $method);
+
+        $content = file_get_contents($this->logger->getFile());
+
+        $this->assertContains($method, $content);
+    }
 }

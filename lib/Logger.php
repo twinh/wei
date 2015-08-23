@@ -124,10 +124,10 @@ class Logger extends Base
      *
      * @param mixed $level
      * @param string $message
-     * @param array $context
+     * @param mixed $context
      * @return bool Whether the log record has been handled
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, $context = array())
     {
         $level = isset($this->levels[$level]) ? $level : $this->level;
 
@@ -146,7 +146,7 @@ class Logger extends Base
      *
      * @param string $level
      * @param string $message
-     * @param array $context
+     * @param mixed $context
      * @return bool
      */
     protected function writeLog($level, $message, $context)
@@ -166,8 +166,11 @@ class Logger extends Base
      * @param array $context
      * @return string
      */
-    protected function formatLog($level, $message, array $context = array())
+    protected function formatLog($level, $message, $context = array())
     {
+        if (!is_array($context)) {
+            $context = array('context' => $context);
+        }
         if ($message instanceof \Exception) {
             $context += array(
                 'code' => $message->getCode(),
@@ -205,10 +208,10 @@ class Logger extends Base
      *
      * @param mixed $level
      * @param string $message
-     * @param array $context
+     * @param mixed $context
      * @return bool
      */
-    public function __invoke($level, $message, array $context = array())
+    public function __invoke($level, $message, $context = array())
     {
         return $this->log($level, $message, $context);
     }
@@ -217,10 +220,10 @@ class Logger extends Base
      * System is unusable.
      *
      * @param string $message
-     * @param array $context
+     * @param mixed $context
      * @return bool
      */
-    public function emergency($message, array $context = array())
+    public function emergency($message, $context = array())
     {
         return $this('emergency', $message, $context);
     }
@@ -232,10 +235,10 @@ class Logger extends Base
      * trigger the SMS alerts and wake you up.
      *
      * @param string $message
-     * @param array $context
+     * @param mixed $context
      * @return bool
      */
-    public function alert($message, array $context = array())
+    public function alert($message, $context = array())
     {
         return $this->log('alert', $message, $context);
     }
@@ -246,10 +249,10 @@ class Logger extends Base
      * Example: Application component unavailable, unexpected exception.
      *
      * @param string $message
-     * @param array $context
+     * @param mixed $context
      * @return bool
      */
-    public function critical($message, array $context = array())
+    public function critical($message, $context = array())
     {
         return $this->log('critical', $message, $context);
     }
@@ -259,10 +262,10 @@ class Logger extends Base
      * be logged and monitored.
      *
      * @param string $message
-     * @param array $context
+     * @param mixed $context
      * @return bool
      */
-    public function error($message, array $context = array())
+    public function error($message, $context = array())
     {
         return $this->log('error', $message, $context);
     }
@@ -274,10 +277,10 @@ class Logger extends Base
      * that are not necessarily wrong.
      *
      * @param string $message
-     * @param array $context
+     * @param mixed $context
      * @return bool
      */
-    public function warning($message, array $context = array())
+    public function warning($message, $context = array())
     {
         return $this->log('warning', $message, $context);
     }
@@ -286,10 +289,10 @@ class Logger extends Base
      * Normal but significant events.
      *
      * @param string $message
-     * @param array $context
+     * @param mixed $context
      * @return bool
      */
-    public function notice($message, array $context = array())
+    public function notice($message, $context = array())
     {
         return $this->log('notice', $message, $context);
     }
@@ -300,10 +303,10 @@ class Logger extends Base
      * Example: User logs in, SQL logs.
      *
      * @param string $message
-     * @param array $context
+     * @param mixed $context
      * @return bool
      */
-    public function info($message, array $context = array())
+    public function info($message, $context = array())
     {
         return $this->log('info', $message, $context);
     }
@@ -312,10 +315,10 @@ class Logger extends Base
      * Detailed debug information.
      *
      * @param string $message
-     * @param array $context
+     * @param mixed $context
      * @return bool
      */
-    public function debug($message, array $context = array())
+    public function debug($message, $context = array())
     {
         return $this->log('debug', $message, $context);
     }
