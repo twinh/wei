@@ -89,7 +89,7 @@ namespace Wei
      * @method   \Wei\WeChatApp weChatApp() Start up WeChat application and output the matched rule message
      * @property Router         $router A service that parse the URL to request data
      * @property Url            $url A util object to build URL
-     * @method   string         url($uri) Build URL by specified uri and parameters
+     * @method   string         url($url = '', $argsOrParams = array(), $params = array()) Build URL by specified uri and parameters
      *
      * Other
      * @property Config     $config A object to manage object configurations

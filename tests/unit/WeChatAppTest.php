@@ -713,7 +713,7 @@ class WeChatAppTest extends TestCase
 <Ticket><![CDATA[gQGS8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL2FFMmtOc0hseEhpOU05YUdzR093AAIE0OAhUwMECAcAAA==]]></Ticket>
 </xml>',
                 'sceneId' => 2,
-                'result' => 'scan',
+                'result' => 'subscribe',
                 'calledSubscribe' => true,
             ),
             array(
@@ -772,5 +772,35 @@ class WeChatAppTest extends TestCase
         $this->assertContains($result, $resultXml);
 
         $this->assertSame($calledSubscribe, $subscribeFlag);
+    }
+
+    public function testScanAndSubscribe()
+    {
+        $test = $this;
+        $app = new \Wei\WeChatApp(array(
+            'wei' => $this->wei,
+            'query' => array(
+                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
+                'timestamp' => '1366032735',
+                'nonce'     => '1365872231',
+            ),
+            'postData' => '<xml><ToUserName><![CDATA[ToUserName]]></ToUserName>
+<FromUserName><![CDATA[FromUserName]]></FromUserName>
+<CreateTime>1394729846</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[subscribe]]></Event>
+<EventKey><![CDATA[qrscene_2]]></EventKey>
+<Ticket><![CDATA[gQGS8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL2FFMmtOc0hseEhpOU05YUdzR093AAIE0OAhUwMECAcAAA==]]></Ticket>
+</xml>'
+        ));
+
+        $app->scan(function(WeChatApp $app) use($test) {
+            $test->assertEquals('2', $app->getScanSceneId());
+            return 'scan';
+        });
+
+        $resultXml = $app->run();
+
+        $this->assertContains('scan', $resultXml);
     }
 }

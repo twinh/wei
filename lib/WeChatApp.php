@@ -163,11 +163,15 @@ class WeChatApp extends Base
                 switch ($event) {
                     case 'subscribe':
                         $result = $this->handleEvent('subscribe');
+                        $scanResult = null;
                         if ($this->getTicket()) {
-                            $result = $this->handleEvent('scan');
+                            $scanResult = $this->handleEvent('scan');
                         }
                         if ($result) {
                             return $result;
+                        }
+                        if ($scanResult) {
+                            return $scanResult;
                         }
                         break;
 
