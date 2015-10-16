@@ -917,6 +917,32 @@ class WeChatAppTest extends TestCase
         $this->assertEquals('签名验证错误', $ret['message']);
     }
 
+    public function testEncryptFromAppIdErr()
+    {
+        $app = new \Wei\WeChatApp(array(
+            'wei' => $this->wei,
+            'appId' => 'wxbad0b45542aa0b5e1',
+            'token' => 'weixin',
+            'encodingAesKey' => 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG',
+            'query' => array(
+                'encrypt_type' => 'aes',
+                'msg_signature' => '6147984331daf7a1a9eed6e0ec3ba69055256154',
+                'signature' => '35703636de2f9df2a77a662b68e521ce17c34db4',
+                'timestamp' => '1414243737',
+                'nonce' => '1792106704'
+            ),
+            'postData' => '<xml>
+    <ToUserName><![CDATA[gh_680bdefc8c5d]]></ToUserName>
+    <Encrypt><![CDATA[MNn4+jJ/VsFh2gUyKAaOJArwEVYCvVmyN0iXzNarP3O6vXzK62ft1/KG2/XPZ4y5bPWU/jfIfQxODRQ7sLkUsrDRqsWimuhIT8Eq+w4E/28m+XDAQKEOjWTQIOp1p6kNsIV1DdC3B+AtcKcKSNAeJDr7x7GHLx5DZYK09qQsYDOjP6R5NqebFjKt/NpEl/GU3gWFwG8LCtRNuIYdK5axbFSfmXbh5CZ6Bk5wSwj5fu5aS90cMAgUhGsxrxZTY562QR6c+3ydXxb+GHI5w+qA+eqJjrQqR7u5hS+1x5sEsA7vS+bZ5LYAR3+PZ243avQkGllQ+rg7a6TeSGDxxhvLw+mxxinyk88BNHkJnyK//hM1k9PuvuLAASdaud4vzRQlAmnYOslZl8CN7gjCjV41skUTZv3wwGPxvEqtm/nf5fQ=]]></Encrypt>
+</xml>'
+        ));
+
+        $ret = $app->parse();
+
+        $this->assertEquals(-2005, $ret['code']);
+        $this->assertEquals('AppId 校验错误', $ret['message']);
+    }
+
     public function testEncryptAesErr()
     {
         $app = new \Wei\WeChatApp(array(
@@ -941,6 +967,89 @@ class WeChatAppTest extends TestCase
         $this->assertEquals(-2002, $ret['code']);
         $this->assertEquals('AES解密失败', $ret['message']);
         $this->assertStringStartsWith('mcrypt_generic_init(): Key size is 0', $ret['e']);
+    }
+
+    public function testGetAttrs()
+    {
+        $app = new \Wei\WeChatApp(array(
+            'wei' => $this->wei,
+            'query' => array(
+                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
+                'timestamp' => '1366032735',
+                'nonce'     => '1365872231',
+            ),
+            'postData' => $this->inputTextMessage('hi')
+        ));
+
+        $attrs = $app->getAttrs();
+
+        $this->assertInternalType('array', $attrs);
+
+        $this->assertEquals('toUser', $attrs['ToUserName']);
+        $this->assertEquals('fromUser', $attrs['FromUserName']);
+        $this->assertEquals('1348831860', $attrs['CreateTime']);
+        $this->assertEquals('text', $attrs['MsgType']);
+        $this->assertEquals('hi', $attrs['Content']);
+        $this->assertEquals('1234567890123456', $attrs['MsgId']);
+    }
+
+    public function testGetKeyword()
+    {
+        $app = new \Wei\WeChatApp(array(
+            'wei' => $this->wei,
+            'query' => array(
+                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
+                'timestamp' => '1366032735',
+                'nonce'     => '1365872231',
+            ),
+            'postData' => $this->inputTextMessage('hi')
+        ));
+
+        $this->assertEquals('hi', $app->getKeyword());
+    }
+
+    public function testGetKeywordFromEvent()
+    {
+        $app = new \Wei\WeChatApp(array(
+            'wei' => $this->wei,
+            'query' => array(
+                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
+                'timestamp' => '1366032735',
+                'nonce'     => '1365872231',
+            ),
+            'postData' => '<xml>
+                    <ToUserName><![CDATA[toUser]]></ToUserName>
+                    <FromUserName><![CDATA[fromUser]]></FromUserName>
+                    <CreateTime>1366131865</CreateTime>
+                    <MsgType><![CDATA[event]]></MsgType>
+                    <Event><![CDATA[CLICK]]></Event>
+                    <EventKey><![CDATA[index]]></EventKey>
+                 </xml>'
+        ));
+
+        $this->assertEquals('index', $app->getKeyword());
+    }
+
+    public function testGetKeywordFromSubscribe()
+    {
+        $app = new \Wei\WeChatApp(array(
+            'wei' => $this->wei,
+            'query' => array(
+                'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
+                'timestamp' => '1366032735',
+                'nonce'     => '1365872231',
+            ),
+            'postData' => '<xml>
+<ToUserName><![CDATA[toUser]]></ToUserName>
+<FromUserName><![CDATA[fromUser]]></FromUserName>
+<CreateTime>1366131865</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[subscribe]]></Event>
+<EventKey><![CDATA[]]></EventKey>
+</xml>'
+        ));
+
+        $this->assertFalse($app->getKeyword());
     }
 
     /**

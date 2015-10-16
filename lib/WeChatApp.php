@@ -616,12 +616,6 @@ class WeChatApp extends Base
         return $this->postData;
     }
 
-
-    public function getQuery($key)
-    {
-        return $this->query[$key];
-    }
-
     /**
      * Returns your user id
      *
