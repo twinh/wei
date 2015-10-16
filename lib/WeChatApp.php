@@ -20,11 +20,25 @@ use SimpleXMLElement;
 class WeChatApp extends Base
 {
     /**
-     * The WeChat token to generate signature
+     * A string to generate signature
      *
      * @var string
      */
     protected $token = 'wei';
+
+    /**
+     * The App ID of WeChat account
+     *
+     * @var string
+     */
+    protected $appId;
+
+    /**
+     * A 43 length string to encrypt message
+     *
+     * @var string
+     */
+    protected $encodingAesKey;
 
     /**
      * The HTTP raw post data, equals to $GLOBALS['HTTP_RAW_POST_DATA'] on default
@@ -46,13 +60,13 @@ class WeChatApp extends Base
      * @var array
      */
     protected $rules = array(
-        'text'      => array(),
-        'event'     => array(),
-        'image'     => null,
-        'location'  => null,
-        'voice'     => null,
-        'video'     => null,
-        'link'      => null
+        'text' => array(),
+        'event' => array(),
+        'image' => null,
+        'location' => null,
+        'voice' => null,
+        'video' => null,
+        'link' => null
     );
 
     /**
@@ -63,11 +77,11 @@ class WeChatApp extends Base
     protected $defaults;
 
     /**
-     * Whether the signature is valid
+     * The message parse result
      *
-     * @var bool
+     * @var array
      */
-    protected $valid = false;
+    protected $parseRet = array('code' => 1, 'message' => '解析成功');
 
     /**
      * Are there any callbacks handled the message ?
@@ -104,7 +118,7 @@ class WeChatApp extends Base
      * Constructor
      *
      * @param array $options
-     * @global string $GLOBALS['HTTP_RAW_POST_DATA']
+     * @global string $GLOBALS ['HTTP_RAW_POST_DATA']
      */
     public function __construct($options = array())
     {
@@ -118,7 +132,45 @@ class WeChatApp extends Base
             $this->postData = $GLOBALS['HTTP_RAW_POST_DATA'];
         }
 
-        $this->parsePostData();
+        $this->parse();
+    }
+
+    /**
+     * Parse post data to message attributes
+     *
+     * @return array
+     */
+    public function parse()
+    {
+        if (!$this->checkToken()) {
+            return $this->parseRet = array('code' => -1, 'message' => 'Token不正确');
+        }
+
+        $attrs = $this->xmlToArray($this->postData);
+        if ($this->isEncrypted()) {
+            $ret = $this->decryptMsg($attrs['Encrypt']);
+            if ($ret['code'] !== 1) {
+                return $this->parseRet = $ret;
+            }
+            $attrs = $this->xmlToArray($ret['xml']);
+        }
+
+        $this->attrs = $attrs;
+        return $this->parseRet = array('code' => 1, 'message' => '解析成功');
+    }
+
+    /**
+     * Check if the WeChat server signature is valid
+     */
+    protected function checkToken()
+    {
+        $query = $this->query;
+        $signature = $this->sign(
+            $this->token,
+            isset($query['timestamp']) ? $query['timestamp'] : '',
+            isset($query['nonce']) ? $query['nonce'] : ''
+        );
+        return isset($query['signature']) && $signature === $query['signature'];
     }
 
     /**
@@ -141,8 +193,8 @@ class WeChatApp extends Base
      */
     public function run()
     {
-        // The token is invalid
-        if (!$this->valid) {
+        // The token or post data is invalid
+        if ($this->parseRet['code'] !== 1) {
             return false;
         }
 
@@ -151,6 +203,22 @@ class WeChatApp extends Base
             return htmlspecialchars($this->query['echostr'], ENT_QUOTES, 'UTF-8');
         }
 
+        $msg = $this->handleMsg();
+        if ($msg && $this->isEncrypted()) {
+            $msg = $this->encryptMsg($msg);
+        }
+        return $msg;
+    }
+
+    /**
+     * Executes the matched rule and returns the rule result
+     *
+     * Returns false when the token is invalid or no rules matched
+     *
+     * @return string|false
+     */
+    protected function handleMsg()
+    {
         switch ($this->getMsgType()) {
             case 'text':
                 if ($result = $this->handleText()) {
@@ -215,6 +283,16 @@ class WeChatApp extends Base
     }
 
     /**
+     * Check if the message is encrypted
+     *
+     * @return bool
+     */
+    public function isEncrypted()
+    {
+        return isset($this->query['encrypt_type']) && $this->query['encrypt_type'] == 'aes';
+    }
+
+    /**
      * Attach a callback which triggered when user subscribed you
      *
      * @param Closure $fn
@@ -269,6 +347,7 @@ class WeChatApp extends Base
      */
     public function on($name, $key, Closure $fn = null)
     {
+        $name = strtolower($name);
         if ($key instanceof Closure) {
             $this->rules['event'][$name][''] = $key;
         } else {
@@ -503,7 +582,7 @@ class WeChatApp extends Base
      */
     public function isValid()
     {
-        return $this->valid;
+        return $this->parseRet['code'] === 1;
     }
 
     /**
@@ -535,6 +614,12 @@ class WeChatApp extends Base
     public function getPostData()
     {
         return $this->postData;
+    }
+
+
+    public function getQuery($key)
+    {
+        return $this->query[$key];
     }
 
     /**
@@ -804,34 +889,6 @@ class WeChatApp extends Base
     }
 
     /**
-     * Parse post data to receive user OpenID and input content and message attr
-     */
-    protected function parsePostData()
-    {
-        // Check if the WeChat server signature is valid
-        $query = $this->query;
-        $tmpArr = array(
-            $this->token,
-            isset($query['timestamp']) ? $query['timestamp'] : '',
-            isset($query['nonce']) ? $query['nonce'] : ''
-        );
-        sort($tmpArr, SORT_STRING);
-        $tmpStr = sha1(implode($tmpArr));
-        $this->valid = (isset($query['signature']) && $tmpStr === $query['signature']);
-
-        // Parse the message data
-        if ($this->valid && $this->postData) {
-            // Do not output libxml error messages to screen
-            $useErrors = libxml_use_internal_errors(true);
-            $attrs = simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
-            libxml_use_internal_errors($useErrors);
-
-            // Fix the issue that XML parse empty data to new SimpleXMLElement object
-            $this->attrs = array_map('strval', (array)$attrs);
-        }
-    }
-
-    /**
      * Handle text rule
      *
      * @return string|false
@@ -884,15 +941,12 @@ class WeChatApp extends Base
         $this->handled = true;
 
         // Converts string to array
-        $content = $fn($this, $this->wei) ?: array();
+        $content = $fn($this, $this->wei) ?: '';
         if ($content && !is_array($content)) {
             $content = $this->sendText($content);
         }
-
         $this->beforeSend && call_user_func_array($this->beforeSend, array($this, &$content, $this->wei));
 
-        // Returns empty string if no response
-        // http://mp.weixin.qq.com/wiki/index.php?title=%E5%8F%91%E9%80%81%E8%A2%AB%E5%8A%A8%E5%93%8D%E5%BA%94%E6%B6%88%E6%81%AF
         return $content ? $this->arrayToXml($content)->asXML() : '';
     }
 
@@ -908,8 +962,8 @@ class WeChatApp extends Base
         if ($xml === null) {
             $xml = new SimpleXMLElement('<xml/>');
         }
-        foreach($array as $key => $value) {
-            if(is_array($value)) {
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
                 if (isset($value[0])) {
                     foreach ($value as $subValue) {
                         $subNode = $xml->addChild($key);
@@ -931,5 +985,204 @@ class WeChatApp extends Base
             }
         }
         return $xml;
+    }
+
+    /**
+     * Convert XML string to array
+     *
+     * @param string $xml
+     * @return array
+     */
+    protected function xmlToArray($xml)
+    {
+        // Do not output libxml error messages to screen
+        $useErrors = libxml_use_internal_errors(true);
+        $array = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+        libxml_use_internal_errors($useErrors);
+
+        // Fix the issue that XML parse empty data to new SimpleXMLElement object
+        return array_map('strval', (array)$array);
+    }
+
+    /**
+     * @param string $text
+     * @param string $encodingAesKey
+     * @param string $appId
+     * @return string
+     */
+    protected function prpcryptEncrypt($text, $encodingAesKey, $appId)
+    {
+        $key = base64_decode($encodingAesKey . '=');
+        // 获得16位随机字符串，填充到明文之前
+        $random = $this->getRandomStr();
+        $text = $random . pack('N', strlen($text)) . $text . $appId;
+        // 网络字节序
+        $module = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
+        $iv = substr($key, 0, 16);
+        // 使用自定义的填充方式对明文进行补位填充
+        $text = $this->pkcs7Encode($text);
+        mcrypt_generic_init($module, $key, $iv);
+        // 加密
+        $encrypted = mcrypt_generic($module, $text);
+        mcrypt_generic_deinit($module);
+        mcrypt_module_close($module);
+        return base64_encode($encrypted);
+    }
+
+    /**
+     * 对密文进行解密
+     *
+     * @param string $encrypted 需要解密的密文
+     * @param string $encodingAesKey
+     * @param string $appId
+     * @return string
+     */
+    protected function prpcryptDecrypt($encrypted, $encodingAesKey, $appId)
+    {
+        try {
+            $key = base64_decode($encodingAesKey . '=');
+            // 使用BASE64对需要解密的字符串进行解码
+            $cipherTextDec = base64_decode($encrypted);
+            $module = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
+            $iv = substr($key, 0, 16);
+            mcrypt_generic_init($module, $key, $iv);
+
+            // 解密
+            $decrypted = mdecrypt_generic($module, $cipherTextDec);
+            mcrypt_generic_deinit($module);
+            mcrypt_module_close($module);
+        } catch (\Exception $e) {
+            return array('code' => -2002, 'message' => 'AES解密失败', 'e' => (string)$e);
+        }
+
+        try {
+            // 去除补位字符
+            $result = $this->pkcs7Decode($decrypted);
+            // 去除16位随机字符串,网络字节序和AppId
+            if (strlen($result) < 16) {
+                return array('code' => -2003, 'message' => '解密后结果不能小于16位', 'result' => $result);
+            }
+            $content = substr($result, 16, strlen($result));
+            $lenList = unpack('N', substr($content, 0, 4));
+            $xmlLen = $lenList[1];
+            $xml = substr($content, 4, $xmlLen);
+            $fromAppId = substr($content, $xmlLen + 4);
+        } catch (\Exception $e) {
+            return array('code' => -2004, 'message' => '解密后得到的buffer非法', 'e' => (string)$e);
+        }
+
+        if ($fromAppId != $appId) {
+            return array('code' => -2005, 'message' => 'AppId 校验错误', 'fromAppId' => $fromAppId);
+        }
+
+        return array('code' => 1, 'message' => '解密成功', 'xml' => $xml);
+    }
+
+    /**
+     * @param string $replyMsg
+     * @return string
+     */
+    protected function encryptMsg($replyMsg)
+    {
+        $encrypt = $this->prpcryptEncrypt($replyMsg, $this->encodingAesKey, $this->appId);
+        $signature = $this->sign($encrypt, $this->token, $this->query['timestamp'], $this->query['nonce']);
+
+        $xml = $this->arrayToXml(array(
+            'Encrypt' => $encrypt,
+            'MsgSignature' => $signature,
+            'TimeStamp' => $this->query['timestamp'],
+            'Nonce' => $this->query['nonce']
+        ))->asXML();
+        return $xml;
+    }
+
+    /**
+     * @param string $encrypt
+     * @return array
+     */
+    protected function decryptMsg($encrypt)
+    {
+        $signature = $this->sign($encrypt, $this->token, $this->query['timestamp'], $this->query['nonce']);
+        if ($signature != $this->query['msg_signature']) {
+            return array('code' => -2001, 'message' => '签名验证错误');
+        }
+
+        $ret = $this->prpcryptDecrypt($encrypt, $this->encodingAesKey, $this->appId);
+        if ($ret['code'] !== 1) {
+            return $ret;
+        }
+
+        return array('code' => 1, 'message' => '解密成功', 'xml' => $ret['xml']);
+    }
+
+    /**
+     * Generate the signature
+     *
+     * @param string $_
+     * @return string
+     */
+    protected function sign($_ = null)
+    {
+        $arr = func_get_args();
+        sort($arr, SORT_STRING);
+        $str = implode($arr);
+        return sha1($str);
+    }
+
+    /**
+     * Generate random string
+     *
+     * @return string 生成的字符串
+     */
+    protected function getRandomStr()
+    {
+        $str = '';
+        $strPol = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
+        $max = strlen($strPol) - 1;
+        for ($i = 0; $i < 16; $i++) {
+            $str .= $strPol[mt_rand(0, $max)];
+        }
+        return $str;
+    }
+
+    /**
+     * 对需要加密的明文进行填充补位
+     *
+     * @param string $text 需要进行填充补位操作的明文
+     * @return string 补齐明文字符串
+     */
+    protected function pkcs7Encode($text)
+    {
+        $size = 32;
+        $textLength = strlen($text);
+
+        // 计算需要填充的位数
+        $amountToPad = $size - ($textLength % $size);
+        if ($amountToPad == 0) {
+            $amountToPad = $size;
+        }
+
+        // 获得补位所用的字符
+        $padChr = chr($amountToPad);
+        $tmp = '';
+        for ($index = 0; $index < $amountToPad; $index++) {
+            $tmp .= $padChr;
+        }
+        return $text . $tmp;
+    }
+
+    /**
+     * 对解密后的明文进行补位删除
+     *
+     * @param string $text 解密后的明文
+     * @return string 删除填充补位后的明文
+     */
+    protected function pkcs7Decode($text)
+    {
+        $pad = ord(substr($text, -1));
+        if ($pad < 1 || $pad > 32) {
+            $pad = 0;
+        }
+        return substr($text, 0, (strlen($text) - $pad));
     }
 }
