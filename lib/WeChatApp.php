@@ -198,16 +198,16 @@ class WeChatApp extends Base
             return false;
         }
 
-        // Output 'echostr' for fist time authentication
+        // Output 'echostr' for first time authentication
         if (isset($this->query['echostr'])) {
             return htmlspecialchars($this->query['echostr'], ENT_QUOTES, 'UTF-8');
         }
 
         $msg = $this->handleMsg();
-        if ($msg && $this->isEncrypted()) {
-            $msg = $this->encryptMsg($msg);
+        if (!$msg) {
+            return 'success';
         }
-        return $msg;
+        return $this->isEncrypted() ? $this->encryptMsg($msg) : $msg;
     }
 
     /**

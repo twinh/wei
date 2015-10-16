@@ -633,7 +633,7 @@ class WeChatAppTest extends TestCase
         // Execute and parse result
         $result = $app->run();
 
-        $this->assertFalse($result);
+        $this->assertEquals('success', $result);
     }
 
     public function testNotHandleInDefault()
@@ -655,7 +655,7 @@ class WeChatAppTest extends TestCase
         // Execute and parse result
         $result = $app->run();
 
-        $this->assertEmpty($result);
+        $this->assertEquals('success', $result);
     }
 
     public function testHasEventButNotMatch()
@@ -682,7 +682,7 @@ class WeChatAppTest extends TestCase
             return 'My info';
         });
 
-        $this->assertFalse($app->run());
+        $this->assertEquals('success', $app->run());
     }
 
     public function providerForScan()
@@ -804,7 +804,7 @@ class WeChatAppTest extends TestCase
         $this->assertContains('scan', $resultXml);
     }
 
-    public function testEncryptReply()
+    public function testEncrypt()
     {
         $app = new \Wei\WeChatApp(array(
             'wei' => $this->wei,
@@ -835,6 +835,112 @@ class WeChatAppTest extends TestCase
         $this->assertArrayHasKey('MsgSignature', $attrs);
         $this->assertArrayHasKey('TimeStamp', $attrs);
         $this->assertArrayHasKey('Nonce', $attrs);
+    }
+
+    public function testEncryptNoRuleReturnSuccess()
+    {
+        $app = new \Wei\WeChatApp(array(
+            'wei' => $this->wei,
+            'appId' => 'wxbad0b45542aa0b5e',
+            'token' => 'weixin',
+            'encodingAesKey' => 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG',
+            'query' => array(
+                'encrypt_type' => 'aes',
+                'msg_signature' => '6147984331daf7a1a9eed6e0ec3ba69055256154',
+                'signature' => '35703636de2f9df2a77a662b68e521ce17c34db4',
+                'timestamp' => '1414243737',
+                'nonce' => '1792106704'
+            ),
+            'postData' => '<xml>
+    <ToUserName><![CDATA[gh_680bdefc8c5d]]></ToUserName>
+    <Encrypt><![CDATA[MNn4+jJ/VsFh2gUyKAaOJArwEVYCvVmyN0iXzNarP3O6vXzK62ft1/KG2/XPZ4y5bPWU/jfIfQxODRQ7sLkUsrDRqsWimuhIT8Eq+w4E/28m+XDAQKEOjWTQIOp1p6kNsIV1DdC3B+AtcKcKSNAeJDr7x7GHLx5DZYK09qQsYDOjP6R5NqebFjKt/NpEl/GU3gWFwG8LCtRNuIYdK5axbFSfmXbh5CZ6Bk5wSwj5fu5aS90cMAgUhGsxrxZTY562QR6c+3ydXxb+GHI5w+qA+eqJjrQqR7u5hS+1x5sEsA7vS+bZ5LYAR3+PZ243avQkGllQ+rg7a6TeSGDxxhvLw+mxxinyk88BNHkJnyK//hM1k9PuvuLAASdaud4vzRQlAmnYOslZl8CN7gjCjV41skUTZv3wwGPxvEqtm/nf5fQ=]]></Encrypt>
+</xml>'
+        ));
+
+        $xml = $app->run();
+
+        $this->assertEquals('success', $xml);
+    }
+
+    public function testEncryptEmptyReturnSuccess()
+    {
+        $app = new \Wei\WeChatApp(array(
+            'wei' => $this->wei,
+            'appId' => 'wxbad0b45542aa0b5e',
+            'token' => 'weixin',
+            'encodingAesKey' => 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG',
+            'query' => array(
+                'encrypt_type' => 'aes',
+                'msg_signature' => '6147984331daf7a1a9eed6e0ec3ba69055256154',
+                'signature' => '35703636de2f9df2a77a662b68e521ce17c34db4',
+                'timestamp' => '1414243737',
+                'nonce' => '1792106704'
+            ),
+            'postData' => '<xml>
+    <ToUserName><![CDATA[gh_680bdefc8c5d]]></ToUserName>
+    <Encrypt><![CDATA[MNn4+jJ/VsFh2gUyKAaOJArwEVYCvVmyN0iXzNarP3O6vXzK62ft1/KG2/XPZ4y5bPWU/jfIfQxODRQ7sLkUsrDRqsWimuhIT8Eq+w4E/28m+XDAQKEOjWTQIOp1p6kNsIV1DdC3B+AtcKcKSNAeJDr7x7GHLx5DZYK09qQsYDOjP6R5NqebFjKt/NpEl/GU3gWFwG8LCtRNuIYdK5axbFSfmXbh5CZ6Bk5wSwj5fu5aS90cMAgUhGsxrxZTY562QR6c+3ydXxb+GHI5w+qA+eqJjrQqR7u5hS+1x5sEsA7vS+bZ5LYAR3+PZ243avQkGllQ+rg7a6TeSGDxxhvLw+mxxinyk88BNHkJnyK//hM1k9PuvuLAASdaud4vzRQlAmnYOslZl8CN7gjCjV41skUTZv3wwGPxvEqtm/nf5fQ=]]></Encrypt>
+</xml>'
+        ));
+
+        $app->is('?', function () {
+
+        });
+
+        $xml = $app->run();
+
+        $this->assertEquals('success', $xml);
+    }
+
+    public function testEncryptMsgSignatureErr()
+    {
+        $app = new \Wei\WeChatApp(array(
+            'wei' => $this->wei,
+            'appId' => 'wxbad0b45542aa0b5e',
+            'token' => 'weixin',
+            'encodingAesKey' => 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG',
+            'query' => array(
+                'encrypt_type' => 'aes',
+                'msg_signature' => '123',
+                'signature' => '35703636de2f9df2a77a662b68e521ce17c34db4',
+                'timestamp' => '1414243737',
+                'nonce' => '1792106704'
+            ),
+            'postData' => '<xml>
+    <ToUserName><![CDATA[gh_680bdefc8c5d]]></ToUserName>
+    <Encrypt><![CDATA[MNn4+jJ/VsFh2gUyKAaOJArwEVYCvVmyN0iXzNarP3O6vXzK62ft1/KG2/XPZ4y5bPWU/jfIfQxODRQ7sLkUsrDRqsWimuhIT8Eq+w4E/28m+XDAQKEOjWTQIOp1p6kNsIV1DdC3B+AtcKcKSNAeJDr7x7GHLx5DZYK09qQsYDOjP6R5NqebFjKt/NpEl/GU3gWFwG8LCtRNuIYdK5axbFSfmXbh5CZ6Bk5wSwj5fu5aS90cMAgUhGsxrxZTY562QR6c+3ydXxb+GHI5w+qA+eqJjrQqR7u5hS+1x5sEsA7vS+bZ5LYAR3+PZ243avQkGllQ+rg7a6TeSGDxxhvLw+mxxinyk88BNHkJnyK//hM1k9PuvuLAASdaud4vzRQlAmnYOslZl8CN7gjCjV41skUTZv3wwGPxvEqtm/nf5fQ=]]></Encrypt>
+</xml>'
+        ));
+
+        $ret = $app->parse();
+
+        $this->assertEquals(-2001, $ret['code']);
+        $this->assertEquals('签名验证错误', $ret['message']);
+    }
+
+    public function testEncryptAesErr()
+    {
+        $app = new \Wei\WeChatApp(array(
+            'wei' => $this->wei,
+            'appId' => 'wxbad0b45542aa0b5e',
+            'token' => 'weixin',
+            'encodingAesKey' => '',
+            'query' => array(
+                'encrypt_type' => 'aes',
+                'msg_signature' => '6147984331daf7a1a9eed6e0ec3ba69055256154',
+                'signature' => '35703636de2f9df2a77a662b68e521ce17c34db4',
+                'timestamp' => '1414243737',
+                'nonce' => '1792106704'
+            ),
+            'postData' => '<xml>
+    <ToUserName><![CDATA[gh_680bdefc8c5d]]></ToUserName>
+    <Encrypt><![CDATA[MNn4+jJ/VsFh2gUyKAaOJArwEVYCvVmyN0iXzNarP3O6vXzK62ft1/KG2/XPZ4y5bPWU/jfIfQxODRQ7sLkUsrDRqsWimuhIT8Eq+w4E/28m+XDAQKEOjWTQIOp1p6kNsIV1DdC3B+AtcKcKSNAeJDr7x7GHLx5DZYK09qQsYDOjP6R5NqebFjKt/NpEl/GU3gWFwG8LCtRNuIYdK5axbFSfmXbh5CZ6Bk5wSwj5fu5aS90cMAgUhGsxrxZTY562QR6c+3ydXxb+GHI5w+qA+eqJjrQqR7u5hS+1x5sEsA7vS+bZ5LYAR3+PZ243avQkGllQ+rg7a6TeSGDxxhvLw+mxxinyk88BNHkJnyK//hM1k9PuvuLAASdaud4vzRQlAmnYOslZl8CN7gjCjV41skUTZv3wwGPxvEqtm/nf5fQ=]]></Encrypt>
+</xml>'
+        ));
+
+        $ret = $app->parse();
+        $this->assertEquals(-2002, $ret['code']);
+        $this->assertEquals('AES解密失败', $ret['message']);
+        $this->assertStringStartsWith('mcrypt_generic_init(): Key size is 0', $ret['e']);
     }
 
     /**
