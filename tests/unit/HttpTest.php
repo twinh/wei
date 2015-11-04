@@ -311,10 +311,10 @@ class HttpTest extends TestCase
 
     public function testPostJson()
     {
-        $test = $this;
         $data = array(
             'key' => 'value',
             'post' => true,
+            'file' => '@dff', // not file
             'array' => array(
                 1,
                 'string' => 'value'
@@ -324,11 +324,60 @@ class HttpTest extends TestCase
 
         $data = $http->getResponse();
         $this->assertTrue($http->isSuccess());
-        $test->assertEquals('POST', $data['method']);
-        $test->assertEquals('value', $data['key']);
-        $test->assertEquals('1', $data['post']);
-        $test->assertEquals('1', $data['array'][0]);
-        $test->assertEquals('value', $data['array']['string']);
+        $this->assertEquals('POST', $data['method']);
+        $this->assertEquals('value', $data['key']);
+        $this->assertEquals('1', $data['post']);
+        $this->assertEquals('@dff', $data['file']);
+        $this->assertEquals('1', $data['array'][0]);
+        $this->assertEquals('value', $data['array']['string']);
+    }
+
+    public function testUpload()
+    {
+        $http = $this->http(array(
+            'method' => 'post',
+            'dataType' => 'json',
+            'url' => $this->url . '?test=post',
+            'files' => array(
+                'php' => __FILE__,
+            )
+        ));
+
+        $data = $http->getResponse();
+        $this->assertTrue($http->isSuccess());
+        $this->assertEquals('POST', $data['method']);
+        $this->assertEquals('HttpTest.php', $data['files']['php']['name']);
+    }
+
+    public function testUploadWithPostData()
+    {
+        $data = array(
+            'key' => 'value',
+            'post' => true,
+            //'file' => '@dff', // not support with upload
+            'array' => array(
+                1,
+                'string' => 'value'
+            )
+        );
+        $http = $this->http(array(
+            'method' => 'post',
+            'dataType' => 'json',
+            'url' => $this->url . '?test=post',
+            'data' => $data,
+            'files' => array(
+                'php' => __FILE__,
+            )
+        ));
+
+        $data = $http->getResponse();
+        $this->assertTrue($http->isSuccess());
+        $this->assertEquals('POST', $data['method']);
+        $this->assertEquals('value', $data['key']);
+        $this->assertEquals('1', $data['post']);
+        $this->assertEquals('1', $data['array'][0]);
+        $this->assertEquals('value', $data['array']['string']);
+        $this->assertEquals('HttpTest.php', $data['files']['php']['name']);
     }
 
     public function testSerializeDataType()

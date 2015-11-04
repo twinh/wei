@@ -363,6 +363,11 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             }
         }
 
+        if ($this->files) {
+            $postFields = isset($opts[CURLOPT_POSTFIELDS]) ? $opts[CURLOPT_POSTFIELDS] : '';
+            $opts[CURLOPT_POSTFIELDS] = $this->addFileField($postFields, $this->files);
+        }
+
         if ($this->timeout > 0) {
             $opts[CURLOPT_TIMEOUT_MS] = $this->timeout;
         }
@@ -406,6 +411,27 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 
         $this->curlOptions += $opts + $this->defaultCurlOptions;
         return $this->curlOptions;
+    }
+
+    /**
+     * @param string $data
+     * @param array $files
+     * @return array
+     */
+    protected function addFileField($data, array $files)
+    {
+        $newData = array();
+        if ($data) {
+            foreach (explode('&', $data) as $key => $value) {
+                list($key, $value) = explode('=', urldecode($value));
+                $newData[$key] = $value;
+            }
+        }
+        $hasCurlFile = class_exists('CURLFile');
+        foreach ($files as $name => $file) {
+            $newData[$name] = $hasCurlFile ? new \CURLFile($file) : '@' . $file;
+        }
+        return $newData;
     }
 
     /**
