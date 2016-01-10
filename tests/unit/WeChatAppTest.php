@@ -966,7 +966,7 @@ class WeChatAppTest extends TestCase
         $ret = $app->parse();
         $this->assertEquals(-2002, $ret['code']);
         $this->assertEquals('AES解密失败', $ret['message']);
-        $this->assertStringStartsWith('mcrypt_generic_init(): Key size is 0', $ret['e']);
+        $this->assertContains('mcrypt_generic_init(): Key size is 0', $ret['e']);
     }
 
     public function testGetAttrs()

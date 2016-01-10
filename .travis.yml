@@ -14,8 +14,9 @@ services:
   - redis-server
 
 before_script:
+  - php -m
   - composer install --prefer-source --no-interaction
-  - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -gt 5 ]; then printf "\n" | pecl install apcu-4.0.10; fi;'
+  - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -ge 5 ]; then printf "\n" | pecl install apcu-4.0.10; fi;'
   - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -gt 4 ]; then sed -i 1d "tests/config/php.ini"; fi;'
   - sh -c 'if [ $(php -r "echo (int) defined(\"HHVM_VERSION\");") -eq 0 ]; then phpenv config-add tests/config/php.ini; fi;'
   - mysql -e 'CREATE DATABASE IF NOT EXISTS wei_tests;'
