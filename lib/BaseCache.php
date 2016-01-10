@@ -91,7 +91,7 @@ abstract class BaseCache extends Base
                 ));
             }
 
-            // get($key, function(){});
+            // Example: get($key, function(){});
             if ($expire && !$fn) {
                 $fn     = $expire;
                 $expire = 0;

@@ -441,7 +441,8 @@ class Pinyin extends Base
     {
         $word = iconv('utf-8', 'gb2312', $word);
         $output = '';
-        for ($i = 0; $i < strlen($word); $i++) {
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++) {
             $letter = ord(substr($word, $i, 1));
             if ($letter > 160) {
                 $tmp = ord(substr($word, ++$i, 1));

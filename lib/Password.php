@@ -147,12 +147,13 @@ class Password extends Base
     public function verify($password, $hash)
     {
         $ret = crypt($password, $hash);
-        if (!is_string($ret) || strlen($ret) != strlen($hash) || strlen($ret) <= 13) {
+        $len = strlen($ret);
+        if (!is_string($ret) || $len != strlen($hash) || strlen($ret) <= 13) {
             return false;
         }
 
         $status = 0;
-        for ($i = 0; $i < strlen($ret); $i++) {
+        for ($i = 0; $i < $len; $i++) {
             $status |= (ord($ret[$i]) ^ ord($hash[$i]));
         }
 

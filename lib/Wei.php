@@ -640,16 +640,16 @@ namespace Wei
             // Build the error message
             $traces = debug_backtrace();
 
-            // $wei->notFound()
+            // Example: $wei->notFound()
             if (isset($traces[3]) && $name == $traces[3]['function']) {
                 // For call_user_func/call_user_func_array
                 $file = isset($traces[3]['file']) ? $traces[3]['file'] : $traces[4]['file'];
                 $line = isset($traces[3]['line']) ? $traces[3]['line'] : $traces[4]['line'];
                 throw new \BadMethodCallException(sprintf('Method "%s->%2$s" or object "%s" (class "%s") not found, called in file "%s" at line %s', $traces[3]['class'], $traces[3]['function'], $class, $file, $line), 1011);
-            // $wei->notFound
+            // Example: $wei->notFound
             } elseif (isset($traces[1]) && '__get' == $traces[1]['function'] && $name == $traces[1]['args'][0]) {
                 throw new \BadMethodCallException(sprintf('Property or object "%s" (class "%s") not found, called in file "%s" at line %s', $traces[1]['args'][0], $class, $traces[1]['file'], $traces[1]['line']), 1012);
-            // $wei->get('notFound');
+            // Example: $wei->get('notFound');
             } else {
                 throw new \BadMethodCallException(sprintf('Property or method "%s" not found', $name), 1013);
             }
