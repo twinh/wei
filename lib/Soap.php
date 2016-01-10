@@ -122,7 +122,7 @@ class Soap extends Base
     public function __construct(array $options = array())
     {
         // Merges options from default Soap service
-        if (isset($options['global']) && true == $options['global']) {
+        if (isset($options['global']) && true === $options['global']) {
             $options += (array)$options['wei']->getConfig('soap');
         }
         parent::__construct($options);

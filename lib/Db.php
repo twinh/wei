@@ -214,7 +214,7 @@ class Db extends Base
      */
     public function __construct(array $options = array())
     {
-        if (isset($options['global']) && true == $options['global']) {
+        if (isset($options['global']) && true === $options['global']) {
             $options += (array)$options['wei']->getConfig('db');
         }
         return parent::__construct($options);
