@@ -440,14 +440,14 @@ class Router extends Base
     }
 
     /**
-     * Append words to singulars
+     * Prepend words to singulars
      *
      * @param array $singulars
      * @return $this
      */
     public function setSingulars(array $singulars)
     {
-        $this->singulars += $this->singulars;
+        $this->singulars = $singulars + $this->singulars;
         return $this;
     }
 
