@@ -39,7 +39,8 @@ class EndsWithTest extends TestCase
             array('abc', 'b', false),
             array('ABC', 'c', true),
             array('ABC', array('a', 'b', 'c'), true),
-            array(123, 1)
+            array(123, 1),
+            array('abcd', array('abc', 'bc')),
         );
     }
 }

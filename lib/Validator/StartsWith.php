@@ -53,9 +53,9 @@ class StartsWith extends BaseValidator
         } elseif (is_array($this->findMe)) {
             $pattern = array();
             foreach ($this->findMe as $value) {
-                $pattern[] = preg_quote($value, '/');
+                $pattern[] = '^' . preg_quote($value, '/');
             }
-            $pattern = '/^' . implode('|', $pattern) . '/';
+            $pattern = '/' . implode('|', $pattern) . '/';
             $this->case || $pattern .= 'i';
 
             if (!preg_match($pattern, $input)) {

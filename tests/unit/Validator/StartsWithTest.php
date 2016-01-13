@@ -41,7 +41,8 @@ class StartsWithTest extends TestCase
             array('ABC', 'a', true),
             array('abc', array('A', 'B', 'C'), true),
             array(123, 3),
-            array('#abc', array('?', '\\', '/', '$', '^'))
+            array('#abc', array('?', '\\', '/', '$', '^')),
+            array('abcd', array('bc', 'cd', 'bcd')),
         );
     }
 }
