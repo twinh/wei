@@ -102,26 +102,6 @@ class TagCacheTest extends CacheTestCase
         });
     }
 
-    public function testFailToStoreCacheFromCallback()
-    {
-        $this->setExpectedException('\RuntimeException', 'Fail to store cache from callback, the result code is 0', 1020);
-
-        $this->object->cache = wei()->arrayCache;
-
-        $mock = $this->getMock(get_class($this->object->cache), array('set', 'getResultCode'));
-
-        $mock->expects($this->any())
-            ->method('set')
-            ->will($this->returnValue(false));
-
-        $mock->expects($this->any())
-            ->method('getResultCode')
-            ->will($this->returnValue(0));
-
-        $mock->remove('key');
-        $mock->get('key', function(){});
-    }
-
     public function testTagsOrder()
     {
         wei()->tagCache('a', 'b')->clear();
