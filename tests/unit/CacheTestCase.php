@@ -222,30 +222,4 @@ class CacheTestCase extends TestCase
 
         });
     }
-
-    public function testFailToStoreCacheFromCallback()
-    {
-        $this->setExpectedException('\RuntimeException', 'Fail to store cache from callback, the result code is 0', 1020);
-
-        $mock = $this->getMock(get_class($this->object), array('set', 'getResultCode'));
-
-        // fix bicache driver not found error
-        if ('Wei\Bicache' == ltrim(get_class($this->object), '\\')) {
-            $mock->setOption('providers', array(
-                'master' => 'arrayCache',
-                'slave' => 'fileCache',
-            ));
-        }
-
-        $mock->expects($this->any())
-            ->method('set')
-            ->will($this->returnValue(false));
-
-        $mock->expects($this->any())
-            ->method('getResultCode')
-            ->will($this->returnValue(0));
-
-        $mock->remove('key');
-        $mock->get('key', function(){});
-    }
 }

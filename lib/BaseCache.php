@@ -93,16 +93,12 @@ abstract class BaseCache extends Base
 
             // Example: get($key, function(){});
             if ($expire && !$fn) {
-                $fn     = $expire;
+                $fn = $expire;
                 $expire = 0;
             }
 
-            $result     = call_user_func($fn, $this->wei, $this);
-            $setResult  = $this->set($key, $result, $expire);
-
-            if (false === $setResult) {
-                throw new \RuntimeException('Fail to store cache from callback, the result code is ' . $this->getResultCode(), 1020);
-            }
+            $result = call_user_func($fn, $this->wei, $this);
+            $this->set($key, $result, $expire);
         }
         return $result;
     }
