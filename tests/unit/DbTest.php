@@ -2066,6 +2066,32 @@ class DbTest extends TestCase
     {
         return $this->db('member')->cache(600)->findById($id);
     }
+
+    public function testUpdateWithParam()
+    {
+        $this->initFixtures();
+
+        $row = $this->db('member')->update(array('address' => 'test address'));
+        $this->assertEquals(2, $row);
+
+        $member = $this->db('member')->find();
+        $this->assertEquals('test address', $member['address']);
+
+        // Update with where clause
+        $row = $this->db('member')->where(array('name' => 'twin'))->update(array('address' => 'test address 2'));
+        $this->assertEquals(1, $row);
+
+        $member = $this->db('member')->findOne(array('name' => 'twin'));
+        $this->assertEquals('test address 2', $member['address']);
+
+        // Update with two where clauses
+        $row = $this->db('member')
+            ->where(array('name' => 'twin'))
+            ->andWhere(array('group_id' => 1))
+            ->update(array('address' => 'test address 3'));
+        $this->assertEquals(1, $row);
+
+        $member = $this->db('member')->findOne(array('name' => 'twin'));
+        $this->assertEquals('test address 3', $member['address']);
+    }
 }
-
-

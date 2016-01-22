@@ -1024,12 +1024,21 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Execute a update query with specified data
      *
-     * @param array $set
+     * @param array|string $set
      * @return int
      */
     public function update($set = array())
     {
-        $this->add('set', $set, true);
+        if (is_array($set)) {
+            $params = array();
+            foreach ($set as $field => $param) {
+                $this->add('set', $field .' = ?', true);
+                $params[] = $param;
+            }
+            $this->params = array_merge($params, $this->params);
+        } else {
+            $this->add('set', $set, true);
+        }
         $this->type = self::UPDATE;
         return $this->execute();
     }
