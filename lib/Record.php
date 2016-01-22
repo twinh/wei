@@ -1874,14 +1874,14 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * The method called after load a record
      */
-    protected function afterLoad()
+    public function afterLoad()
     {
     }
 
     /**
      * The method called after find a record
      */
-    protected function afterFind()
+    public function afterFind()
     {
     }
 
