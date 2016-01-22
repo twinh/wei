@@ -3,6 +3,7 @@
 namespace WeiTest;
 
 use PDO;
+use WeiTest\Db\Member;
 
 /**
  * @property \Wei\Db db
@@ -2093,5 +2094,14 @@ class DbTest extends TestCase
 
         $member = $this->db('member')->findOne(array('name' => 'twin'));
         $this->assertEquals('test address 3', $member['address']);
+    }
+
+    public function testEmptyFrom()
+    {
+        $sql = $this->db('member')->resetSqlPart('from')->getSql();
+        $this->assertEquals('SELECT * FROM member', $sql);
+
+        $sql = $this->db('member')->from('member m')->getSql();
+        $this->assertEquals('SELECT * FROM member m', $sql);
     }
 }

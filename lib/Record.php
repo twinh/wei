@@ -1572,7 +1572,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             $parts['select'] = array('*');
         }
 
-        $query = 'SELECT ' . implode(', ', $parts['select']) . ' FROM ' . $parts['from'];
+        $query = 'SELECT ' . implode(', ', $parts['select']) . ' FROM ' . $this->getFrom();
 
         // JOIN
         foreach ($parts['join'] as $join) {
@@ -1609,7 +1609,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected function getSqlForUpdate()
     {
-        $query = 'UPDATE ' . $this->sqlParts['from']
+        $query = 'UPDATE ' . $this->getFrom()
             . ' SET ' . implode(", ", $this->sqlParts['set'])
             . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string)$this->sqlParts['where']) : '');
         return $query;
@@ -1622,7 +1622,20 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected function getSqlForDelete()
     {
-        return 'DELETE FROM ' . $this->sqlParts['from'] . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string)$this->sqlParts['where']) : '');
+        return 'DELETE FROM ' . $this->getFrom() . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string)$this->sqlParts['where']) : '');
+    }
+
+    /**
+     * Returns the from SQL part
+     *
+     * @return string
+     */
+    protected function getFrom()
+    {
+        if (!$this->sqlParts['from']) {
+            $this->from($this->table);
+        }
+        return $this->sqlParts['from'];
     }
 
     /**
@@ -1863,7 +1876,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected function getCacheTags()
     {
-        $tags[] = $this->sqlParts['from'];
+        $tags[] = $this->getFrom();
         foreach ($this->sqlParts['join'] as $join) {
             $tags[] = $join['table'];
         }
