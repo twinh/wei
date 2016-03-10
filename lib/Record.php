@@ -508,7 +508,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @param string $name
      * @throws \InvalidArgumentException When field not found
-     * @return string
+     * @return mixed|$this
      */
     public function get($name)
     {
