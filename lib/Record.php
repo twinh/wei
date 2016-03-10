@@ -259,11 +259,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function toArray($returnFields = array())
     {
         if (!$this->isColl) {
+            $data = array_fill_keys($returnFields ?: $this->getFields(), null);
             if (!$returnFields) {
-                $fields = $this->getFields();
-                return $this->data + array_combine($fields, array_pad(array(), count($fields), null));
+                return $this->data + $data;
             } else {
-                return array_intersect_key($this->data, array_flip($returnFields));
+                $data = array_fill_keys($returnFields, null);
+                return array_intersect_key($this->data, $data) + $data;
             }
         } else {
             $data = array();

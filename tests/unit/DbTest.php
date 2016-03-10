@@ -814,6 +814,36 @@ class DbTest extends TestCase
         ));
     }
 
+    public function testNewRecordToArrayWithoutReturnFields()
+    {
+        $this->initFixtures();
+
+        $member = $this->db('member')->findOrInit(array('id' => 'not-exists'));
+
+        $this->assertTrue($member->isNew());
+
+        $data = $member->toArray();
+
+        $this->assertArrayHasKey('id', $data);
+        $this->assertArrayHasKey('group_id', $data);
+        $this->assertArrayHasKey('name', $data);
+    }
+
+    public function testNewRecordToArrayWithReturnFields()
+    {
+        $this->initFixtures();
+
+        $member = $this->db('member')->findOrInit(array('id' => 'not-exists'));
+
+        $this->assertTrue($member->isNew());
+
+        $data = $member->toArray(array('group_id', 'name'));
+
+        $this->assertArrayNotHasKey('id', $data);
+        $this->assertArrayHasKey('group_id', $data);
+        $this->assertArrayHasKey('name', $data);
+    }
+
     public function testToJson()
     {
         $this->initFixtures();
