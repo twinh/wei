@@ -39,11 +39,9 @@ class TagCache extends BaseCache
      * Manager: Create a new cache service with tagging support
      *
      * @param string $tag
-     * @param mixed $_
-     * @param mixed $_
-     * @return static
+     * @return $this
      */
-    public function __invoke($tag, $_ = null, $_ = null)
+    public function __invoke($tag)
     {
         $tags = is_array($tag) ? $tag : func_get_args();
         sort($tags);
