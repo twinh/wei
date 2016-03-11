@@ -818,7 +818,7 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $member = $this->db('member')->findOrInit(array('id' => 'not-exists'));
+        $member = $this->db('member')->findOrInit(array('id' => 9999));
 
         $this->assertTrue($member->isNew());
 
@@ -833,7 +833,7 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $member = $this->db('member')->findOrInit(array('id' => 'not-exists'));
+        $member = $this->db('member')->findOrInit(array('id' => 9999));
 
         $this->assertTrue($member->isNew());
 
