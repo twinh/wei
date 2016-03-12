@@ -298,6 +298,7 @@ class WeiTest extends TestCase
         $newRequest = $this->wei->newInstance('request');
 
         $this->assertInstanceOf('\Wei\Request', $newRequest);
+        $this->assertEquals($this->request, $newRequest);
         $this->assertNotSame($this->request, $newRequest);
     }
 
