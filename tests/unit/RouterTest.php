@@ -1592,7 +1592,66 @@ class RouterTest extends TestCase
                 )
             ),
 
-            // 组合资源
+            // Camelize param name
+            array(
+                'GET',
+                'crm-users/1/comic-books/2',
+                array(
+                    array(
+                        'controller' => 'crmUsers/comicBooks',
+                        'action' => 'show',
+                        'id' => '2',
+                        'crmUserId' => '1',
+                    )
+                )
+            ),
+
+            array(
+                'GET',
+                'crm-users/1/comic-books',
+                array(
+                    array(
+                        'controller' => 'crmUsers',
+                        'action' => 'comicBooks',
+                        'id' => '1',
+                    ),
+                    array(
+                        'controller' => 'crmUsers/comicBooks',
+                        'action' => 'index',
+                        'crmUserId' => '1',
+                    ),
+                    array(
+                        'controller' => 'comicBooks',
+                        'action' => 'index',
+                        'crmUserId' => '1'
+                    )
+                )
+            ),
+
+            array(
+                'GET',
+                'crm-users/1/comic-books/new',
+                array(
+                    array(
+                        'controller' => 'crmUsers/comicBooks',
+                        'action' => 'new',
+                        'crmUserId' => '1',
+                    ),
+                    array(
+                        'controller' => 'crmUsers/comicBooks',
+                        'action' => 'show',
+                        'id' => 'new',
+                        'crmUserId' => '1',
+                    ),
+                    array(
+                        'controller' => 'comicBooks',
+                        'action' => 'new',
+                        'crmUserId' => '1'
+                    )
+                )
+            ),
+
+            // Combined resources
             array(
                 'GET',
                 'issues/comments',

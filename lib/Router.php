@@ -349,7 +349,7 @@ class Router extends Base
         $count = count($parts);
         for ($i = 0; $i < $count; $i += 2) {
             $baseCtrl .= $parts[$i] . '/';
-            $params[$this->singularize($parts[$i]) . 'Id'] = $parts[$i + 1];
+            $params[$this->camelize($this->singularize($parts[$i])) . 'Id'] = $parts[$i + 1];
         }
 
         if (is_null($actOrId)) {
@@ -393,7 +393,7 @@ class Router extends Base
             $routes[] = array(
                 'controller' => $baseCtrl . $ctrl . '/' . $ctrlOrAct,
                 'action' => $this->methodToAction($method, true),
-                $this->singularize($ctrl) . 'Id' => $actOrId,
+                $this->camelize($this->singularize($ctrl)) . 'Id' => $actOrId,
             );
 
             // GET|PUT|... posts/1/comments, use the last parameter as main controller name
