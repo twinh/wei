@@ -637,6 +637,23 @@ class RequestTest extends TestCase
         $this->assertEquals('value1', $wei['key']);
     }
 
+    public function testOffsetGetDiffWithArray() {
+        // For request service
+        $wei = $this->object;
+        $this->assertFalse(isset($wei['abc']));
+        $wei['abc'];
+        $this->assertTrue(isset($wei['abc']));
+
+        // For array
+        $arr = array();
+        $this->assertFalse(isset($arr['abc']));
+
+        // Undefined index: abc
+        @$arr['abc'];
+
+        $this->assertFalse(isset($arr['abc']));
+    }
+
     public function testOffsetUnset() {
         $wei = $this->object;
 
