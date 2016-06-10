@@ -159,7 +159,7 @@ class Logger extends Base
     }
 
     /**
-     * Format the log message
+     * Format the log content
      *
      * @param string $level
      * @param string $message
@@ -167,6 +167,38 @@ class Logger extends Base
      * @return string
      */
     protected function formatLog($level, $message, $context = array())
+    {
+        // Format message and content
+        $params = $this->formatParams($message, $context);
+        $message = $params['message'];
+        $context = $params['context'];
+
+        // Format log content
+        $content = str_replace(array(
+            '%datetime%', '%namespace%', '%level%', '%message%',
+        ), array(
+            date($this->dateFormat, microtime(true)),
+            $this->namespace,
+            strtoupper($level),
+            $message,
+        ), $this->format);
+
+        // Format extra context
+        if ($this->context || $context) {
+            $content .= print_r($this->context + $context, true) . "\n";
+        }
+
+        return $content;
+    }
+
+    /**
+     * Convert message to string and content to array for writing
+     *
+     * @param string|\Exception $message
+     * @param string|array $context
+     * @return array
+     */
+    protected function formatParams($message, $context)
     {
         if (!is_array($context)) {
             $context = array('context' => $context);
@@ -184,23 +216,7 @@ class Logger extends Base
         } else {
             $message = (string)$message;
         }
-
-        // Format log message
-        $content = str_replace(array(
-            '%datetime%', '%namespace%', '%level%', '%message%',
-        ), array(
-            date($this->dateFormat, microtime(true)),
-            $this->namespace,
-            strtoupper($level),
-            $message,
-        ), $this->format);
-
-        // Format extra context
-        if ($this->context || $context) {
-            $content .= print_r($this->context + $context, true) . "\n";
-        }
-
-        return $content;
+        return array('message' => $message, 'context' => $context);
     }
 
     /**
