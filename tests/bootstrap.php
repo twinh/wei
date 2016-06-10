@@ -25,6 +25,9 @@ wei(array(
             '' => __DIR__ . '/fallback',
         ),
     ),
+    'error' => array(
+        'enableCli' => false,
+    ),
     'http' => array(
         'url' => 'http://localhost:8000/call.php',
         // Set ip for WeiTest\HttpTest\::testIp

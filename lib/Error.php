@@ -2,7 +2,7 @@
 /**
  * Wei Framework
  *
- * @copyright   Copyright (c) 2008-2013 Twin Huang
+ * @copyright   Copyright (c) 2008-2015 Twin Huang
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
@@ -70,14 +70,21 @@ class Error extends Base
     protected $prevExceptionHandler;
 
     /**
+     * Whether render text error when PHP run in CLI mode
+     *
+     * @var bool
+     */
+    protected $enableCli = true;
+
+    /**
      * The custom error handlers
      *
      * @var array
      */
     protected $handlers = array(
-        'error'     => array(),
-        'fatal'     => array(),
-        'notFound'  => array()
+        'error' => array(),
+        'fatal' => array(),
+        'notFound' => array()
     );
 
     /**
@@ -157,7 +164,7 @@ class Error extends Base
         // server directory, store it for later use
         $cwd = getcwd();
 
-        register_shutdown_function(function() use($error, $cwd) {
+        register_shutdown_function(function () use ($error, $cwd) {
             $e = error_get_last();
             if (!$e || !in_array($e['type'], array(E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_PARSE))) {
                 // No error or not fatal error
@@ -265,6 +272,13 @@ class Error extends Base
      */
     public function displayException(\Exception $e, $debug)
     {
+        // Render CLI message
+        if ($this->enableCli && php_sapi_name() == 'cli') {
+            $this->displayCliException($e);
+            return;
+        }
+
+        // Render HTML message
         $code = $e->getCode();
         $file = $e->getFile();
         $line = $e->getLine();
@@ -281,8 +295,8 @@ class Error extends Base
             $message = $e->getMessage();
             $detail = sprintf('Threw by %s in %s on line %s', get_class($e), $file, $line);
 
-            $fileInfo   = $this->getFileCode($file, $line);
-            $trace      = htmlspecialchars($e->getTraceAsString(), ENT_QUOTES);
+            $fileInfo = $this->getFileCode($file, $line);
+            $trace = htmlspecialchars($e->getTraceAsString(), ENT_QUOTES);
             $detail = "<h2>File</h2>"
                 . "<p class=\"text-danger\">$file</p>"
                 . "<p><pre>$fileInfo</pre></p>"
@@ -320,6 +334,32 @@ class Error extends Base
     }
 
     /**
+     * Render exception message for CLI
+     *
+     * @param \Exception $e
+     */
+    protected function displayCliException(\Exception $e)
+    {
+        echo 'Exception', PHP_EOL,
+        $this->highlight($e->getMessage()),
+        'File', PHP_EOL,
+        $this->highlight($e->getFile() . ' on line ' . $e->getLine()),
+        'Trace', PHP_EOL,
+        $this->highlight($e->getTraceAsString());
+    }
+
+    /**
+     * Highlight text for CLI output
+     *
+     * @param string $text
+     * @return string
+     */
+    protected function highlight($text)
+    {
+        return sprintf("\033[1;31m%s\033[0m" . PHP_EOL . PHP_EOL, $text);
+    }
+
+    /**
      * The error handler convert PHP error to exception
      *
      * @param int $code The level of the error raised
@@ -342,15 +382,15 @@ class Error extends Base
     /**
      * Get file code in specified range
      *
-     * @param  string $file  The file name
-     * @param  int    $line  The file line
-     * @param  int    $range The line range
+     * @param  string $file The file name
+     * @param  int $line The file line
+     * @param  int $range The line range
      * @return string
      */
     public function getFileCode($file, $line, $range = 20)
     {
         $code = file($file);
-        $half = (int) ($range / 2);
+        $half = (int)($range / 2);
 
         $start = $line - $half;
         0 > $start && $start = 0;
