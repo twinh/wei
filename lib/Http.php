@@ -933,7 +933,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     public function offsetExists($offset)
     {
-        return array_key_exists($offset, $this->response);
+        return is_array($this->response) && array_key_exists($offset, $this->response);
     }
 
     /**
