@@ -273,7 +273,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function __construct(array $options = array())
     {
         // Merges options from default HTTP service
-        if (isset($options['global']) && true == $options['global']) {
+        if (isset($options['global']) && true === $options['global']) {
             $options += (array)$options['wei']->getConfig('http');
         }
         parent::__construct($options);

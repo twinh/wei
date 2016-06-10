@@ -203,7 +203,7 @@ namespace Wei
      * @property Validator\File         $isFile
      * @method   bool                   isFile($input, array $options) Check if the input is valid file
      * @property Validator\Image        $isImage
-     * @method   bool                   isImage($input, array $options) Check if the input is valid image
+     * @method   bool                   isImage($input, array $options = array()) Check if the input is valid image
      *
      * Network
      * @property Validator\Email        $isEmail
