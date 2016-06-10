@@ -972,11 +972,14 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
+     * Get information from curl
+     *
+     * @param null|int $option
      * @return array
      */
-    public function getCurlInfo()
+    public function getCurlInfo($option = null)
     {
-        return curl_getinfo($this->ch);
+        return $option ? curl_getinfo($this->ch, $option) : curl_getinfo($this->ch);
     }
 
     /**

@@ -913,6 +913,12 @@ class HttpTest extends TestCase
         $this->assertInternalType('array', $info);
     }
 
+    public function testGetCurlInfoWithOption()
+    {
+        $http = $this->http($this->url);
+        $this->assertEquals(200, $http->getCurlInfo(CURLINFO_HTTP_CODE));
+    }
+
     public function testGetCurlOption()
     {
         $http = $this->http($this->url, array(
