@@ -206,7 +206,6 @@ class App extends Base
 
             $method = $app->getActionMethod($action);
             $response = $instance->$method($app->request, $app->response);
-            $response = $app->handleResponse($response);
 
             $instance->after($app->request, $response);
             return $response;
@@ -221,10 +220,10 @@ class App extends Base
             } else {
                 $result = $callback();
             }
-            return $result ?: $wei->response;
+            return $result;
         };
 
-        return $next()->send();
+        return $this->handleResponse($next())->send();
     }
 
     /**

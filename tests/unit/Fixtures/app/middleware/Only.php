@@ -2,10 +2,10 @@
 
 namespace WeiTest\Fixtures\app\middleware;
 
-class Only extends \Wei\Base
+class Only extends Base
 {
     public function __invoke($next)
     {
-        $next();
+        return $next();
     }
 }

@@ -2,17 +2,18 @@
 
 namespace WeiTest\Fixtures\app\middleware;
 
-class Stack extends \Wei\Base
+class Stack extends Base
 {
     public function __invoke($next)
     {
-        /** @var \Wei\Response $response */
         $response = $this->response;
 
         $response->setContent($response->getContent() . 'start1-');
 
-        $response = $next();
+        $res = $next();
 
         $response->setContent($response->getContent() . '-end1');
+
+        return $res;
     }
 }

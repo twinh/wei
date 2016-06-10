@@ -2,13 +2,10 @@
 
 namespace WeiTest\Fixtures\app\middleware;
 
-class After extends \Wei\Base
+class After extends Base
 {
     public function __invoke($next)
     {
-        /** @var \Wei\Response $response */
-        $response = $next();
-
-        $response->setContent('After Middleware');
+        return 'After Middleware';
     }
 }

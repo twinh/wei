@@ -2,10 +2,10 @@
 
 namespace WeiTest\Fixtures\app\middleware;
 
-class Before extends \Wei\Base
+class Before extends Base
 {
     public function __invoke($next)
     {
-        wei()->response->setContent('Before Middleware');
+        return $this->response->setContent('Before Middleware');
     }
 }

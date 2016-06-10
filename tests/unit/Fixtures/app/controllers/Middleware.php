@@ -2,6 +2,18 @@
 
 namespace WeiTest\Fixtures\app\controllers;
 
+use WeiTest\Fixtures\app\middleware\After;
+use WeiTest\Fixtures\app\middleware\All;
+use WeiTest\Fixtures\app\middleware\Around;
+use WeiTest\Fixtures\app\middleware\Before;
+use WeiTest\Fixtures\app\middleware\Except;
+use WeiTest\Fixtures\app\middleware\Only;
+use WeiTest\Fixtures\app\middleware\ReturnArray;
+use WeiTest\Fixtures\app\middleware\ReturnString;
+use WeiTest\Fixtures\app\middleware\Stack;
+use WeiTest\Fixtures\app\middleware\Stack2;
+use WeiTest\Fixtures\app\middleware\Stack3;
+
 /**
  * @property \Wei\Response $response
  */
@@ -13,23 +25,27 @@ class Middleware extends \Wei\BaseController
     {
         parent::__construct($options);
 
-        $this->middleware('WeiTest\Fixtures\app\middleware\All');
+        $this->middleware(All::className());
 
-        $this->middleware('WeiTest\Fixtures\app\middleware\Only', array('only' => 'only'));
+        $this->middleware(Only::className(), array('only' => 'only'));
 
-        $this->middleware('WeiTest\Fixtures\app\middleware\Except', array('except' => array(
+        $this->middleware(Except::className(), array('except' => array(
             'only', 'before', 'after', 'around'
         )));
 
-        $this->middleware('WeiTest\Fixtures\app\middleware\Before', array('only' => 'before'));
+        $this->middleware(Before::className(), array('only' => 'before'));
 
-        $this->middleware('WeiTest\Fixtures\app\middleware\After', array('only' => 'after'));
+        $this->middleware(After::className(), array('only' => 'after'));
 
-        $this->middleware('WeiTest\Fixtures\app\middleware\Around', array('only' => 'around'));
+        $this->middleware(Around::className(), array('only' => 'around'));
 
-        $this->middleware('WeiTest\Fixtures\app\middleware\Stack', array('only' => 'stack'));
-        $this->middleware('WeiTest\Fixtures\app\middleware\Stack2', array('only' => 'stack'));
-        $this->middleware('WeiTest\Fixtures\app\middleware\Stack3', array('only' => 'stack'));
+        $this->middleware(Stack::className(), array('only' => 'stack'));
+        $this->middleware(Stack2::className(), array('only' => 'stack'));
+        $this->middleware(Stack3::className(), array('only' => 'stack'));
+
+        $this->middleware(ReturnString::className(), array('only' => 'returnString'));
+
+        $this->middleware(ReturnArray::className(), array('only' => 'returnArray'));
     }
 
     public function onlyAction()
@@ -62,8 +78,13 @@ class Middleware extends \Wei\BaseController
         return $this->response->setContent($this->response->getContent() . 'stack');
     }
 
-    protected function middleware($name, array $options = array())
+    public function returnStringAction()
     {
-        $this->middleware[$name] = $options;
+
+    }
+
+    public function returnArrayAction()
+    {
+
     }
 }

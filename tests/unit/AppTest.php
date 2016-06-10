@@ -384,4 +384,18 @@ class AppTest extends TestCase
         $this->assertEquals(1, $this->request['before']);
         $this->assertEquals(1, $this->request['after']);
     }
+
+    public function testReturnStringMiddleware()
+    {
+        $this->expectOutputString('string');
+
+        $this->app->dispatch('middleware', 'returnString');
+    }
+
+    public function testReturnArrayMiddleware()
+    {
+        $this->expectOutputString('arrayForView');
+
+        $this->app->dispatch('middleware', 'returnArray');
+    }
 }

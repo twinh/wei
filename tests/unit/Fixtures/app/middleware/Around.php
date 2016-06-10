@@ -2,7 +2,7 @@
 
 namespace WeiTest\Fixtures\app\middleware;
 
-class Around extends \Wei\Base
+class Around extends Base
 {
     public function __invoke($next)
     {
@@ -10,6 +10,6 @@ class Around extends \Wei\Base
 
         $next();
 
-        $response->setContent('Not Found');
+        return $response->setContent('Not Found');
     }
 }
