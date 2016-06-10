@@ -1,1 +1,1 @@
-<?= $arrayForView ?>
+<?php echo $arrayForView ?>

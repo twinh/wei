@@ -60,7 +60,7 @@ class HttpTest extends TestCase
 
         $this->assertTrue($http->isSuccess());
 
-        $this->assertHttpedEvents(array('beforeSend', 'success', 'complete'));
+        $this->assertTriggeredEvents(array('beforeSend', 'success', 'complete'));
     }
 
     public function providerForSuccess()
@@ -128,7 +128,7 @@ class HttpTest extends TestCase
 
         $this->assertInstanceOf('\ErrorException', $http->getErrorException());
 
-        $this->assertHttpedEvents(array('beforeSend', 'error', 'complete'));
+        $this->assertTriggeredEvents(array('beforeSend', 'error', 'complete'));
     }
 
     public function providerForError()
@@ -235,7 +235,7 @@ class HttpTest extends TestCase
             }
         ));
 
-        $this->assertHttpedEvents(array('beforeSend'));
+        $this->assertTriggeredEvents(array('beforeSend'));
     }
 
     public function testSetCustomOptions()
@@ -255,7 +255,7 @@ class HttpTest extends TestCase
         ));
 
         $this->assertTrue($http->isSuccess());
-        $this->assertHttpedEvents(array('beforeSend', 'success'));
+        $this->assertTriggeredEvents(array('beforeSend', 'success'));
     }
 
     public function testQueryDataType()
@@ -270,7 +270,7 @@ class HttpTest extends TestCase
                 $test->assertEquals('success', $data['message']);
             }
         ));
-        $this->assertHttpedEvents(array('success'));
+        $this->assertTriggeredEvents(array('success'));
     }
 
     public function testJsonDataType()
@@ -286,7 +286,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertTrue($http->isSuccess());
-        $this->assertHttpedEvents(array('success'));
+        $this->assertTriggeredEvents(array('success'));
     }
 
     public function testGetJsonObject()
@@ -393,7 +393,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertTrue($http->isSuccess());
-        $this->assertHttpedEvents(array('success'));
+        $this->assertTriggeredEvents(array('success'));
 
         // Parse error
         $test->triggeredEvents = array();
@@ -407,7 +407,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertFalse($http->isSuccess());
-        $this->assertHttpedEvents(array('error'));
+        $this->assertTriggeredEvents(array('error'));
     }
 
     public function testXmlDataType()
@@ -423,7 +423,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertTrue($http->isSuccess());
-        $this->assertHttpedEvents(array('success'));
+        $this->assertTriggeredEvents(array('success'));
 
         $this->triggeredEvents = array();
         $http = $this->http(array(
@@ -436,7 +436,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertFalse($http->isSuccess());
-        $this->assertHttpedEvents(array('error'));
+        $this->assertTriggeredEvents(array('error'));
     }
 
     public function testUserAgent()
@@ -453,7 +453,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertTrue($http->isSuccess());
-        $this->assertHttpedEvents(array('success'));
+        $this->assertTriggeredEvents(array('success'));
 
         $test->triggeredEvents = array();
         $http = $this->http(array(
@@ -467,7 +467,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertTrue($http->isSuccess());
-        $this->assertHttpedEvents(array('success'));
+        $this->assertTriggeredEvents(array('success'));
     }
 
     public function testReferer()
@@ -485,7 +485,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertTrue($http->isSuccess());
-        $this->assertHttpedEvents(array('success'));
+        $this->assertTriggeredEvents(array('success'));
     }
 
     public function testAutoReferer()
@@ -502,7 +502,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertTrue($http->isSuccess());
-        $this->assertHttpedEvents(array('success'));
+        $this->assertTriggeredEvents(array('success'));
     }
 
     public function testCookie()
@@ -526,7 +526,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertTrue($http->isSuccess());
-        $this->assertHttpedEvents(array('success'));
+        $this->assertTriggeredEvents(array('success'));
     }
 
     public function testGetCookie()
@@ -556,7 +556,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertTrue($http->isSuccess());
-        $this->assertHttpedEvents(array('success'));
+        $this->assertTriggeredEvents(array('success'));
     }
 
     public function testIgnoreDeletedCookie()
@@ -591,7 +591,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertTrue($http->isSuccess());
-        $this->assertHttpedEvents(array('success'));
+        $this->assertTriggeredEvents(array('success'));
     }
 
     public function testPost()
@@ -630,7 +630,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertTrue($http->isSuccess());
-        $this->assertHttpedEvents(array('success'));
+        $this->assertTriggeredEvents(array('success'));
     }
 
     /**
@@ -652,7 +652,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertTrue($http->isSuccess());
-        $this->assertHttpedEvents(array('success'));
+        $this->assertTriggeredEvents(array('success'));
     }
 
     public function providerForGetMethods()
@@ -713,7 +713,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertFalse($http->isSuccess());
-        $this->assertHttpedEvents(array('error'));
+        $this->assertTriggeredEvents(array('error'));
     }
 
     public function testGlobal()
@@ -744,7 +744,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertTrue($http->isSuccess());
-        $this->assertHttpedEvents(array('success'));
+        $this->assertTriggeredEvents(array('success'));
 
         $this->triggeredEvents = array();
         $http = $this->wei->notGlobalHttp(array(
@@ -757,7 +757,7 @@ class HttpTest extends TestCase
             },
         ));
         $this->assertTrue($http->isSuccess());
-        $this->assertHttpedEvents(array('success'));
+        $this->assertTriggeredEvents(array('success'));
 
         // reset method
         $this->wei->setConfig('http', array(
@@ -779,7 +779,7 @@ class HttpTest extends TestCase
             }
         ));
         $this->assertTrue($http->isSuccess());
-        $this->assertHttpedEvents(array('success'));
+        $this->assertTriggeredEvents(array('success'));
     }
 
     public function testFlatApi()
@@ -944,10 +944,62 @@ class HttpTest extends TestCase
         $this->assertEquals(1, $this->http->getCurlOption(CURLOPT_HEADER));
     }
 
-    public function assertHttpedEvents($events)
+    public function assertTriggeredEvents($events)
     {
         foreach ((array)$events as $event) {
             $this->assertContains($event, $this->triggeredEvents);
         }
+    }
+
+    public function testRetryTwoTimesAndFail()
+    {
+        $test = $this;
+        $http = $this->http(array(
+            'url' => $this->url . '?code=404',
+                'retries' => 1,
+                'throwException' => false,
+                'beforeSend' => function() use($test) {
+                    $test->triggeredEvents[] = 'beforeSend';
+                },
+                'error' => function() use($test) {
+                    $test->triggeredEvents[] = 'error';
+                },
+                'complete' => function(Http $http) use($test) {
+                    $test->triggeredEvents[] = 'complete';
+                }
+            ));
+
+        $this->assertFalse($http->isSuccess());
+
+        $this->assertTriggeredEvents(array(
+            'beforeSend', 'error', 'complete',
+            'beforeSend', 'error', 'complete', // Retry
+        ));
+
+        $this->assertEquals(0, $http->getOption('leftRetries'));
+    }
+
+    public function testRetryAndSuccess()
+    {
+        $http = $this->getMock('\Wei\Http', array('handleResponse'));
+
+        $http->expects($this->at(0))
+            ->method('handleResponse')
+            ->willReturnCallback(function () use ($http) {
+                $http->setOption('result', false);
+            });
+
+        $http->expects($this->at(1))
+            ->method('handleResponse')
+            ->willReturnCallback(function () use ($http) {
+                $http->setOption('result', true);
+            });
+
+        $http->setOption(array(
+            'retries' => 2,
+        ));
+        $http->execute();
+
+        $this->assertEquals(1, $http->getOption('leftRetries'));
     }
 }

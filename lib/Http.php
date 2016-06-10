@@ -135,6 +135,13 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     protected $throwException = true;
 
     /**
+     * The times to retry request if response is error
+     *
+     * @var int
+     */
+    protected $retries = 0;
+
+    /**
      * A callback triggered after prepared the data and before the process the request
      *
      * @var callable
@@ -245,6 +252,13 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     protected $errorException;
 
     /**
+     * The times left to retry request if response is error
+     *
+     * @var null|int
+     */
+    protected $leftRetries = null;
+
+    /**
      * The default options of current object
      *
      * @var array
@@ -259,7 +273,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function __construct(array $options = array())
     {
         // Merges options from default HTTP service
-        if (isset($options['global']) && true === $options['global']) {
+        if (isset($options['global']) && true == $options['global']) {
             $options += (array)$options['wei']->getConfig('http');
         }
         parent::__construct($options);
@@ -294,6 +308,11 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     public function execute()
     {
+        // Init the retry times
+        if ($this->retries && is_null($this->leftRetries)) {
+            $this->leftRetries = $this->retries;
+        }
+
         // Prepare request
         $ch = $this->ch = curl_init();
         curl_setopt_array($ch, $this->prepareCurlOptions());
@@ -305,6 +324,13 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         // Handle response
         $this->handleResponse($response);
         $this->complete && call_user_func($this->complete, $this, $ch);
+
+        // Retry if response error
+        if ($this->result === false && $this->leftRetries > 0) {
+            $this->leftRetries--;
+            $this->execute();
+            return;
+        }
 
         if ($this->throwException && $this->errorException) {
             throw $this->errorException;
@@ -512,9 +538,9 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         switch ($this->dataType) {
             case 'json' :
             case 'jsonObject' :
-                $data = json_decode($data, $this->dataType === 'json');
-                if (null === $data && json_last_error() != JSON_ERROR_NONE) {
-                    $exception = new \ErrorException('JSON parsing error', json_last_error());
+                $result = json_decode($data, $this->dataType === 'json');
+                if (null === $result && json_last_error() != JSON_ERROR_NONE) {
+                    $exception = new \ErrorException('JSON parsing error, the data is ' . $data, json_last_error());
                 }
                 break;
 
@@ -524,22 +550,23 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
                     'xml' => 'simplexml_load_string',
                     'serialize' => 'unserialize',
                 );
-                $data = @$methods[$this->dataType]($data);
-                if (false === $data && $e = error_get_last()) {
+                $result = @$methods[$this->dataType]($data);
+                if (false === $result && $e = error_get_last()) {
                     $exception = new \ErrorException($e['message'], $e['type'], 0, $e['file'], $e['line']);
                 }
                 break;
 
             case 'query' :
-                // Parse $data(string) and assign the result to $data(array)
-                parse_str($data, $data);
+                // Parse $data(string) and assign the result to $result(array)
+                parse_str($data, $result);
                 break;
 
             case 'text':
             default :
+                $result = $data;
                 break;
         }
-        return $data;
+        return $result;
     }
 
     /**
