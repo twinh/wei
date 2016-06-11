@@ -629,22 +629,29 @@ class DbTest extends TestCase
         $this->assertArrayHasKey('test', $members);
     }
 
+    public function testIndexByMoreThanOneTime()
+    {
+        $this->initFixtures();
+
+        $members = $this->db('member')
+            ->indexBy('id')
+            ->findAll();
+
+        $this->assertArrayHasKey(1, $members);
+
+        $members->indexBy('name');
+        $this->assertArrayHasKey('twin', $members);
+
+        $members->indexBy('id');
+        $this->assertArrayHasKey(1, $members);
+    }
+
     public function testFixUndefinedOffset0WhenFetchEmptyData()
     {
         $this->initFixtures();
 
         $emptyMembers = $this->db('member')->where(array('group_id' => '3'))->indexBy('id')->fetchAll();
         $this->assertEmpty($emptyMembers);
-    }
-
-    public function testIndexByException()
-    {
-        $this->initFixtures();
-
-        $this->setExpectedException('RuntimeException', 'Index field "test" not found in fetched data');
-        $members = $this->db('member')
-            ->indexBy('test')
-            ->fetchAll();
     }
 
     public function testRealTimeIndexBy()
@@ -657,17 +664,6 @@ class DbTest extends TestCase
 
         $this->assertArrayHasKey('twin', $members);
         $this->assertArrayHasKey('test', $members);
-    }
-
-    public function testIndexByExceptionAfterLoaded()
-    {
-        $this->initFixtures();
-
-        $members = $this->db('member')->findAll();
-
-        $this->setExpectedException('RuntimeException', 'Index field "test" not found in fetched data');
-
-        $members->indexBy('test');
     }
 
     public function testQueryUpdate()

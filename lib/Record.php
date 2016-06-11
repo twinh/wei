@@ -1033,7 +1033,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         if (is_array($set)) {
             $params = array();
             foreach ($set as $field => $param) {
-                $this->add('set', $field .' = ?', true);
+                $this->add('set', $field . ' = ?', true);
                 $params[] = $param;
             }
             $this->params = array_merge($params, $this->params);
@@ -1347,7 +1347,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function orderBy($sort, $order = 'ASC')
     {
-        return $this->add('orderBy', $sort . ' ' . ($order ? : 'ASC'), false);
+        return $this->add('orderBy', $sort . ' ' . ($order ?: 'ASC'), false);
     }
 
     /**
@@ -1359,7 +1359,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function addOrderBy($sort, $order = 'ASC')
     {
-        return $this->add('orderBy', $sort . ' ' . ($order ? : 'ASC'), true);
+        return $this->add('orderBy', $sort . ' ' . ($order ?: 'ASC'), true);
     }
 
     /**
@@ -1392,10 +1392,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function indexBy($field)
     {
-        // Real time index after data loaded
-        if (!empty($this->data)) {
-            $this->data = $this->executeIndexBy($this->data, $field);
-        }
+        $this->data = $this->executeIndexBy($this->data, $field);
         $this->indexBy = $field;
         return $this;
     }
@@ -1404,7 +1401,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $data
      * @param string $field
      * @return array
-     * @throws \RuntimeException
      */
     protected function executeIndexBy($data, $field)
     {
@@ -1412,16 +1408,11 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             return $data;
         }
 
-        if (!array_key_exists($field, $data[0]) && !($data[0] instanceof \ArrayAccess && $data[0]->offsetExists($field))) {
-            throw new \RuntimeException(sprintf('Index field "%s" not found in fetched data', $field));
+        $newData = array();
+        foreach ($data as $row) {
+            $newData[$row[$field]] = $row;
         }
-
-        foreach ($data as $key => $row) {
-            $data[$row[$field]] = $row;
-            unset($data[$key]);
-        }
-
-        return $data;
+        return $newData;
     }
 
     /**
