@@ -5,6 +5,8 @@ Changelog
 
 * App: 允许controllerFormat为空,使getControllerClasses方法返回正确的类名
 * App: 增加setControllerFormat方法
+* Event: 增加loadEvent回调,可用于加载或按需绑定事件
+* Event: 增加getCurName方法,获取当前事件名称
 
 ## 0.9.20 (2015-06-18)
 
