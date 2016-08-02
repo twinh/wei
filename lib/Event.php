@@ -23,6 +23,20 @@ class Event extends Base
     protected $handlers = array();
 
     /**
+     * The name of last triggered event
+     *
+     * @var string
+     */
+    protected $curName;
+
+    /**
+     * A callback that will called when an event triggered
+     *
+     * @var callable
+     */
+    protected $loadEvent;
+
+    /**
      * Trigger an event
      *
      * @param  string $name The name of event
@@ -32,6 +46,9 @@ class Event extends Base
      */
     public function trigger($name, $args = array(), $halt = false)
     {
+        $this->curName = $name;
+        $this->loadEvent && call_user_func($this->loadEvent, $name);
+
         if (!is_array($args)) {
             $args = array($args);
         }
@@ -128,5 +145,15 @@ class Event extends Base
     public function has($name)
     {
         return isset($this->handlers[$name]);
+    }
+
+    /**
+     * Returns the name of last triggered event
+     *
+     * @return string
+     */
+    public function getCurName()
+    {
+        return $this->curName;
     }
 }
