@@ -201,11 +201,43 @@ class Env extends Base
     public function loadConfigFile($file, $env = null)
     {
         $file = str_replace('%env%', $env ?: $this->name, $file);
-        if (is_file($file)) {
-            $config = (array)require $file;
+        $config = $this->getFileConfig($file);
+        if ($config) {
             $this->wei->setConfig($config);
         }
         return $this;
+    }
+
+    /**
+     * Loads two config files in specified directory to service container
+     *
+     * @param string $dir The config directory
+     * @param string $env
+     * @return $this
+     */
+    public function loadConfigDir($dir, $env = null)
+    {
+        !$env && $env = $this->name;
+        $config = $this->getFileConfig($dir . '/config.php');
+        $envConfig = $this->getFileConfig($dir . '/config-' . $env . '.php');
+        $config = array_replace_recursive($config, $envConfig);
+        $this->wei->setConfig($config);
+        return $this;
+    }
+
+    /**
+     * Returns the config array return by file or empty array if file not found
+     *
+     * @param string $file
+     * @return array
+     */
+    protected function getFileConfig($file)
+    {
+        if (is_file($file)) {
+            return (array)require $file;
+        } else {
+            return array();
+        }
     }
 
     /**

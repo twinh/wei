@@ -7,6 +7,7 @@ Changelog
 * App: 增加setControllerFormat方法
 * Event: 增加loadEvent回调,可用于加载或按需绑定事件
 * Event: 增加getCurName方法,获取当前事件名称
+* Env: 增加loadConfigDir方法,用于加载目录下的配置文件
 
 ## 0.9.20 (2015-06-18)
 
