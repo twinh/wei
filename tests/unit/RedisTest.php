@@ -24,6 +24,12 @@ class RedisTest extends CacheTestCase
         if ($error) {
             $this->markTestSkipped('Redis error: ' . $error);
         }
+
+        $redis = new \Redis();
+        $result = $redis->connect('127.0.0.1', '6379', 0.0);
+        if ($result) {
+            $this->markTestSkipped('Redis connect error: ' . $redis->getLastError());
+        }
     }
 
     public function testIncrAndDecr()
