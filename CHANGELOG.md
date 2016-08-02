@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## 0.9.21
+
+* App: 允许controllerFormat为空,使getControllerClasses方法返回正确的类名
+* App: 增加setControllerFormat方法
+
 ## 0.9.20 (2015-06-18)
 
 * Event: 移除$wei作为事件的首个参数 #183

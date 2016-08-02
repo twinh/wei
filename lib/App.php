@@ -379,20 +379,22 @@ class App extends Base
         $classes = array();
 
         // Prepare parameters for replacing
-        $namespace = $this->getNamespace();
         $controller = strtr($controller, array('/' => '\\'));
 
-        // Generate class from format
-        $class = str_replace(
-            array('%namespace%', '%controller%'),
-            array($namespace, $controller),
-            $this->controllerFormat
-        );
+        if ($this->controllerFormat) {
+            // Generate class from format
+            $namespace = $this->getNamespace();
+            $class = str_replace(
+                array('%namespace%', '%controller%'),
+                array($namespace, $controller),
+                $this->controllerFormat
+            );
 
-        // Make the class name's first letter uppercase
-        $upperLetter = strrpos($class, '\\') + 1;
-        $class[$upperLetter] = strtoupper($class[$upperLetter]);
-        $classes[] = $class;
+            // Make the class name's first letter uppercase
+            $upperLetter = strrpos($class, '\\') + 1;
+            $class[$upperLetter] = strtoupper($class[$upperLetter]);
+            $classes[] = $class;
+        }
 
         // Add class from predefined classes
         if (isset($this->controllerMap[$controller])) {
@@ -402,9 +404,28 @@ class App extends Base
         return $classes;
     }
 
+    /**
+     * Set the format of controller class
+     *
+     * @param string $controllerFormat
+     * @return $this
+     */
+    public function setControllerFormat($controllerFormat)
+    {
+        $this->controllerFormat = $controllerFormat;
+        return $this;
+    }
+
+    /**
+     * Set the map of controller classes
+     *
+     * @param array $controllerMap
+     * @return $this
+     */
     public function setControllerMap(array $controllerMap)
     {
-        $this->controllerMap += $controllerMap;
+        $this->controllerMap = $controllerMap + $this->controllerMap;
+        return $this;
     }
 
     /**
