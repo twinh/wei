@@ -17,6 +17,13 @@ class RedisTest extends CacheTestCase
         } catch (\RedisException $e) {
             $this->markTestSkipped('The redis server is not running');
         }
+
+        /** @var \Redis $redis */
+        $redis = $this->object->getObject();
+        $error = $redis->getLastError();
+        if ($error) {
+            $this->markTestSkipped('Redis error: ' . $error);
+        }
     }
 
     public function testIncrAndDecr()
