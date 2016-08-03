@@ -8,6 +8,7 @@ Changelog
 * Event: 增加loadEvent回调,可用于加载或按需绑定事件
 * Event: 增加getCurName方法,获取当前事件名称
 * Env: 增加loadConfigDir方法,用于加载目录下的配置文件
+* Redis: 解决使用redis扩展2.2.8,set方法传expire为0时,key会马上失效的问题
 
 ## 0.9.20 (2015-06-18)
 
