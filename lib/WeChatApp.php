@@ -227,6 +227,7 @@ class WeChatApp extends Base
                 break;
 
             case 'event':
+            case 'device_event':
                 $event = strtolower($this->getEvent());
                 switch ($event) {
                     case 'subscribe':
@@ -264,6 +265,11 @@ class WeChatApp extends Base
                 }
         }
 
+        // Check if enable to transfer to customer service
+        if (isset($this->rules['transferCustomer'])) {
+            return $this->handle($this->rules['transferCustomer']);
+        }
+
         // Fallback to the default rule
         if (!$this->handled && $this->defaults) {
             return $this->handle($this->defaults);
@@ -290,6 +296,18 @@ class WeChatApp extends Base
     public function isEncrypted()
     {
         return isset($this->query['encrypt_type']) && $this->query['encrypt_type'] == 'aes';
+    }
+
+    /**
+     * Attach a callback which triggered when transfer to customer service
+     *
+     * @param Closure $fn
+     * @return $this
+     */
+    public function transferCustomer(Closure $fn)
+    {
+        $this->rules['transferCustomer'] = $fn;
+        return $this;
     }
 
     /**
@@ -576,6 +594,17 @@ class WeChatApp extends Base
     }
 
     /**
+     * Generate message to transfer to customer service
+     *
+     * @param array $data
+     * @return array
+     */
+    public function sendTransferCustomerService($data = array())
+    {
+        return $this->send('transfer_customer_service', $data);
+    }
+
+    /**
      * Returns if the token is valid
      *
      * @return bool
@@ -854,7 +883,7 @@ class WeChatApp extends Base
      * @param array $response The response content
      * @return array
      */
-    protected function send($type, array $response)
+    public function send($type, array $response)
     {
         return $response + array(
             'ToUserName' => $this->getFromUserName(),
@@ -1004,7 +1033,7 @@ class WeChatApp extends Base
      * @param string $appId
      * @return string
      */
-    protected function prpcryptEncrypt($text, $encodingAesKey, $appId)
+    public function prpcryptEncrypt($text, $encodingAesKey, $appId)
     {
         $key = base64_decode($encodingAesKey . '=');
         // 获得16位随机字符串，填充到明文之前
@@ -1066,7 +1095,7 @@ class WeChatApp extends Base
         }
 
         if ($fromAppId != $appId) {
-            return array('code' => -2005, 'message' => 'AppId 校验错误', 'fromAppId' => $fromAppId);
+            return array('code' => -2005, 'message' => 'AppId 校验错误', 'appId' => $appId, 'fromAppId' => $fromAppId);
         }
 
         return array('code' => 1, 'message' => '解密成功', 'xml' => $xml);
