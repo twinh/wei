@@ -25,13 +25,6 @@ class RedisTest extends CacheTestCase
             $this->markTestSkipped('Redis error: ' . $error);
         }
 
-        $redis = new \Redis();
-        $result = $redis->connect('127.0.0.1', 6379, 0.0);
-        $redis->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_PHP);
-        if (!$result) {
-            $this->markTestSkipped('Redis connect error: ' . $redis->getLastError());
-        }
-
         $result = $redis->set('a', 'b');
         if (!$result) {
             $this->markTestSkipped('Redis set error: ' . $redis->getLastError());
@@ -41,6 +34,16 @@ class RedisTest extends CacheTestCase
         if ($result !== 'b') {
             $this->markTestSkipped('Redis get error: ' . $redis->getLastError());
         }
+    }
+
+    public function tearDown()
+    {
+        /** @var \Redis $redis */
+        $redis = $this->object->getObject();
+
+        var_dump('Redis last error', $redis->getLastError());
+
+        return parent::tearDown();
     }
 
     public function testIncrAndDecr()
