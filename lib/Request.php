@@ -916,4 +916,14 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
         }
         return $this->accept('application/json');
     }
+
+    /**
+     * Shorthand method to return referer url
+     *
+     * @return string
+     */
+    public function getReferer()
+    {
+        return $this->getServer('HTTP_REFERER');
+    }
 }
