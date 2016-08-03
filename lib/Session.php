@@ -55,7 +55,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function start()
     {
-        if (!session_id()) {
+        if (!session_id() || !$this->isActive()) {
             $file = $line = null;
             if (headers_sent($file, $line)) {
                 throw new \RuntimeException(sprintf('Unable to start session, output started at %s:%s', $file, $line));
@@ -92,8 +92,8 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     /**
      * Returns session value
      *
-     * @param  string $key    The name of session
-     * @param  mixed  $default The default parameter value if the session does not exist
+     * @param  string $key The name of session
+     * @param  mixed $default The default parameter value if the session does not exist
      * @return mixed
      */
     public function get($key, $default = null)
@@ -253,5 +253,24 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     public function getIterator()
     {
         return new \ArrayIterator($this->data);
+    }
+
+    /**
+     * Check if session is started
+     *
+     * For 5.4+, use session_status instead
+     *
+     * @return bool
+     * @link http://stackoverflow.com/questions/3788369/how-to-tell-if-a-session-is-active/7656468#7656468
+     */
+    protected function isActive()
+    {
+        $setting = 'session.use_trans_sid';
+        $current = ini_get($setting);
+        if (false === $current) {
+            throw new \UnexpectedValueException(sprintf('Setting %s does not exists.', $setting));
+        }
+        $result = @ini_set($setting, $current);
+        return $result !== $current;
     }
 }

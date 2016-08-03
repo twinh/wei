@@ -18,7 +18,7 @@ class SessionTest extends TestCase
         parent::setUp();
         $data = array();
         session_set_save_handler(
-        // open
+            // open
             function(){
                 return true;
             },
@@ -155,5 +155,18 @@ class SessionTest extends TestCase
         $this->assertEquals('v', $this->session('k'));
         $this->assertArrayNotHasKey('k', $_SESSION);
         $this->assertArrayHasKey('test', $_SESSION);
+    }
+
+    public function testRestart()
+    {
+        $this->session['test'] = 'test';
+
+        session_write_close();
+
+        unset($this->session['test']);
+        $this->assertNull($this->session['test']);
+
+        $this->session->start();
+        $this->assertEquals('test', $this->session['test']);
     }
 }
