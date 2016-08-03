@@ -24,29 +24,18 @@ class RedisTest extends TestCase
         } catch (\RedisException $e) {
             $this->markTestSkipped('The redis server is not running');
         }
-
-        /** @var \Redis $redis */
-        $redis = $this->object->getObject();
-        $error = $redis->getLastError();
-        if ($error) {
-            $this->markTestSkipped('Redis error: ' . $error);
-        }
-
-        $result = $redis->set('a', 'b');
-        if (!$result) {
-            $this->markTestSkipped('Redis set error: ' . $redis->getLastError());
-        }
-
-        $result = $redis->get('a');
-        if ($result !== 'b') {
-            $this->markTestSkipped('Redis get error: ' . $redis->getLastError());
-        }
     }
 
     public function testClear()
     {
         $cache = $this->object;
         $key = __FUNCTION__;
+
+        /** @var \Redis $redis */
+        $redis = $this->object->getObject();
+        $redis->set(__METHOD__, __METHOD__);
+        $result = $redis->get(__METHOD__);
+        $this->assertEquals(__METHOD__, $result);
 
         $cache->set($key, $key);
         $this->assertEquals($key, $cache->get($key));
