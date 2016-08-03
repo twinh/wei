@@ -9,6 +9,7 @@ Changelog
 * Event: 增加getCurName方法,获取当前事件名称
 * Env: 增加loadConfigDir方法,用于加载目录下的配置文件
 * Redis: 解决使用redis扩展2.2.8,set方法传expire为0时,key会马上失效的问题
+* View: 增加parseResource回调,可用于外部解析自定义视图路径
 
 ## 0.9.20 (2015-06-18)
 

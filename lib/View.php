@@ -51,6 +51,11 @@ class View extends Base implements \ArrayAccess
     protected $defaultLayout;
 
     /**
+     * @var callable
+     */
+    protected $parseResource;
+
+    /**
      * Constructor
      *
      * @param array $options
@@ -168,7 +173,8 @@ class View extends Base implements \ArrayAccess
         if ($file = $this->resolveFile($name)) {
             return $file;
         } else {
-            throw new \RuntimeException(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->dirs)));
+            $components = $this->parseResource($name);
+            throw new \RuntimeException(sprintf('Template "%s" not found in directories "%s"', $components['file'], implode('", "', $components['dirs'])));
         }
     }
 
@@ -180,12 +186,30 @@ class View extends Base implements \ArrayAccess
      */
     public function resolveFile($name)
     {
-        foreach ($this->dirs as $dir) {
-            if (is_file($file = $dir . ($dir ? '/' : '') .  $name)) {
+        $components = $this->parseResource($name);
+        foreach ($components['dirs'] as $dir) {
+            if (is_file($file = $dir . ($dir ? '/' : '') .  $components['file'])) {
                 return $file;
             }
         }
         return false;
+    }
+
+    /**
+     * @param string $name
+     * @return array
+     */
+    protected function parseResource($name)
+    {
+        $dirs = $this->dirs;
+        if ($this->parseResource) {
+            $components = call_user_func($this->parseResource, $name);
+            if ($components['path']) {
+                $dirs[] = $components['path'];
+            }
+            $name = $components['file'];
+        }
+        return array('dirs' => $dirs, 'file' => $name);
     }
 
     /**
@@ -217,7 +241,17 @@ class View extends Base implements \ArrayAccess
     }
 
     /**
-     * Set base directory for views
+     * Returns the base directories
+     *
+     * @return array
+     */
+    public function getDirs()
+    {
+        return $this->dirs;
+    }
+
+    /**
+     * Set the base directories
      *
      * @param string|array $dirs
      * @return $this
