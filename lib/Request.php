@@ -631,9 +631,13 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * @param string $value
      * @return $this
      */
-    public function setServer($name, $value)
+    public function setServer($name, $value = null)
     {
-        $this->servers[$name] = $value;
+        if (!is_array($name)) {
+            $this->servers[$name] = $value;
+        } else {
+            $this->servers = $name + $this->servers;
+        }
         return $this;
     }
 
@@ -656,9 +660,13 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * @param string $value
      * @return $this
      */
-    public function setQuery($name, $value)
+    public function setQuery($name, $value = null)
     {
-        $this->gets[$name] = $value;
+        if (!is_array($name)) {
+            $this->gets[$name] = $value;
+        } else {
+            $this->gets = $name + $this->gets;
+        }
         return $this;
     }
 
@@ -691,10 +699,13 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * @param string $value
      * @return $this
      */
-    public function setPost($name, $value)
+    public function setPost($name, $value = null)
     {
-        $this->posts[$name] = $value;
-        return $this;
+        if (!is_array($name)) {
+            $this->posts[$name] = $value;
+        } else {
+            $this->posts = $name + $this->posts;
+        }
     }
 
     /**
