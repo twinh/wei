@@ -37,7 +37,7 @@ class RedisTest extends TestCase
         $result = $redis->get(__METHOD__);
         $this->assertEquals(__METHOD__, $result);
 
-        $cache->set($key, $key);
+        $cache->set($key, $key, 60);
         $this->assertEquals($key, $cache->get($key));
 
         $cache->clear();
@@ -57,7 +57,7 @@ class RedisTest extends TestCase
         $this->assertFalse($cache->replace($key, $value));
         $this->assertTrue($cache->add($key, $value));
 
-        $cache->set($key, $value);
+        $cache->set($key, $value, 60);
         $this->assertEquals($value, $cache->get($key));
 
         $this->assertFalse($cache->add($key, $value));
