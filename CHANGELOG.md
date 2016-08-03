@@ -12,6 +12,7 @@ Changelog
 * View: 增加parseResource回调,可用于外部解析自定义视图路径
 * Ret: 增加Ret服务和trait,用于统一构造操作结果,如操作成功/失败
 * Asset: 增加fallback方法,用于生成当CDN加载失败时,回退到本地的素材地址
+* BaseController: middleware方法改为public,允许外部(如通过事件)设置middleware
 
 ## 0.9.20 (2015-06-18)
 

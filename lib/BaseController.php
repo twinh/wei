@@ -32,7 +32,7 @@ abstract class BaseController extends Base
      * @param array $options
      * @return $this
      */
-    protected function middleware($name, array $options = array())
+    public function middleware($name, array $options = array())
     {
         $this->middleware[$name] = $options;
         return $this;
