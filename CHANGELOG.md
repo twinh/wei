@@ -18,6 +18,7 @@ Changelog
 * Session: start方法支持session关闭后重新启动
 * Request: setServer,setQuery,setPost支持数组参数
 * Request: 增加getReferer快捷方法
+* Request: 修复HTTPS端口错误
 
 ## 0.9.20 (2015-06-18)
 

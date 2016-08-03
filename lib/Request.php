@@ -450,7 +450,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     public function getSchemeAndHost()
     {
         $port = $this->getServer('SERVER_PORT');
-        if ($port == 80 || $port == 433 || empty($port)) {
+        if ($port == 80 || $port == 443 || empty($port)) {
             $port = '';
         } else {
             $port = ':' . $port;
