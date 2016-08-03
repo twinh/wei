@@ -43,6 +43,18 @@ class RedisTest extends TestCase
         }
     }
 
+    public function testClear()
+    {
+        $cache = $this->object;
+        $key = __METHOD__;
+
+        $cache->set($key, $key);
+        $this->assertEquals($key, $cache->get($key));
+
+        $cache->clear();
+        $this->assertFalse($cache->get($key));
+    }
+
     /**
      * @dataProvider providerForGetterAndSetter
      */
@@ -81,15 +93,5 @@ class RedisTest extends TestCase
             array('1',      'numeric'),
             array($obj,     'object'),
         );
-    }
-
-    public function tearDown()
-    {
-        /** @var \Redis $redis */
-        $redis = $this->object->getObject();
-
-        var_dump('Redis last error', $redis->getLastError());
-
-        return parent::tearDown();
     }
 }
