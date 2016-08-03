@@ -90,6 +90,8 @@ namespace Wei
      * @property Router         $router A service that parse the URL to request data
      * @property Url            $url A util object to build URL
      * @method   string         url($url = '', $argsOrParams = array(), $params = array()) Build URL by specified uri and parameters
+     * @property \Wei\Ret $ret  A service that use to build operation result
+     * @method   string         ret($message, $code = 1, $type = 'success') Return operation result data
      *
      * Other
      * @property Config     $config A object to manage object configurations
