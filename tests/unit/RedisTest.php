@@ -2,13 +2,8 @@
 
 namespace WeiTest;
 
-class RedisTest extends TestCase
+class RedisTest extends CacheTestCase
 {
-    /**
-     * @var \Wei\BaseCache
-     */
-    protected $object;
-
     public function setUp()
     {
         if (!extension_loaded('redis') || !class_exists('\Redis')) {
@@ -17,8 +12,6 @@ class RedisTest extends TestCase
 
         parent::setUp();
 
-        $this->object->setNamespace('test-');
-
         try {
             $this->object->get('test');
         } catch (\RedisException $e) {
@@ -26,61 +19,54 @@ class RedisTest extends TestCase
         }
     }
 
-    public function testClear()
+    public function testIncrAndDecr()
     {
-        $cache = $this->object;
-        $key = __FUNCTION__;
-
-        /** @var \Redis $redis */
         $redis = $this->object->getObject();
-        $redis->set(__METHOD__, __METHOD__);
-        $result = $redis->get(__METHOD__);
-        $this->assertEquals(__METHOD__, $result);
+        $redis->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_NONE);
 
-        $cache->set($key, $key, 60);
-        $this->assertEquals($key, $cache->get($key));
-
-        $cache->clear();
-        $this->assertFalse($cache->get($key));
+        parent::testIncrAndDecr();
     }
 
-    /**
-     * @dataProvider providerForGetterAndSetter
-     */
-    public function testGetterAndSetter($value, $key)
+    public function testPrefix()
+    {
+        $redis = $this->object->getObject();
+        $redis->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_NONE);
+
+        parent::testPrefix();
+    }
+
+    public function testGetAndSetObject()
+    {
+        $cache = $this->object;
+        $redis = $cache->getObject();
+
+        $this->assertInstanceOf('\Redis', $redis);
+
+        $cache->setObject($redis);
+
+        $this->assertInstanceOf('\Redis', $cache->getObject());
+    }
+
+    public function testGetRedisObject()
+    {
+        $this->assertInstanceOf('\Redis', $this->redis());
+    }
+
+    public function testConnectWithExistsObject()
+    {
+        $this->assertTrue($this->object->connect());
+    }
+
+    public function testAddWithExpire()
     {
         $cache = $this->object;
 
-        $cache->remove($key);
-        $this->assertFalse($cache->get($key));
+        $cache->add(__METHOD__, __METHOD__, 1);
 
-        $this->assertFalse($cache->replace($key, $value));
-        $this->assertTrue($cache->add($key, $value));
+        $this->assertEquals(__METHOD__, $cache->get(__METHOD__));
 
-        $cache->set($key, $value, 60);
-        $this->assertEquals($value, $cache->get($key));
+        sleep(1);
 
-        $this->assertFalse($cache->add($key, $value));
-
-        // Replace with the same value for testing MySQL cache
-        $this->assertTrue($cache->replace($key, $value));
-
-        $this->assertTrue($cache->replace($key, uniqid()));
-    }
-
-    public function providerForGetterAndSetter()
-    {
-        $obj = new \stdClass;
-
-        return array(
-            array(array(),  'array'),
-            array(true,     'bool'),
-            array(1.2,      'float'),
-            array(1,        'int'),
-            array(1,        'integer'),
-            array(null,     'null'),
-            array('1',      'numeric'),
-            array($obj,     'object'),
-        );
+        $this->assertFalse($cache->get(__METHOD__));
     }
 }

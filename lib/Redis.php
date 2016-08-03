@@ -139,6 +139,7 @@ class Redis extends BaseCache
      */
     public function set($key, $value, $expire = 0)
     {
+        // Use null instead of 0 for redis extension 2.2.8, otherwise the key will expire after set
         return $this->object->set($this->namespace . $key, $value, $expire === 0 ? null : $expire);
     }
 
@@ -199,8 +200,8 @@ class Redis extends BaseCache
     {
         $key = $this->namespace . $key;
         $result = $this->object->setnx($key, $value);
-        if (true === $result) {
-            $this->object->expire($key, $expire === 0 ? -1 : $expire);
+        if (true === $result && $expire) {
+            $this->object->expire($key, $expire);
         }
         return $result;
     }
@@ -212,10 +213,10 @@ class Redis extends BaseCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        if (false === $this->object->get($this->namespace . $key)) {
+        if (false === $this->get($key)) {
             return false;
         }
-        return $this->object->set($this->namespace . $key, $value, $expire);
+        return $this->set($key, $value, $expire);
     }
 
     /**
