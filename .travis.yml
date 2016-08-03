@@ -5,29 +5,7 @@ php:
   - 5.5
 
 services:
-  - mongodb
-  - memcached
   - redis-server
 
-before_script:
-  - composer install --no-interaction
-  - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -ge 5 ]; then printf "\n" | pecl install apcu-4.0.10; fi;'
-  - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -gt 4 ]; then sed -i 1d "tests/config/php.ini"; fi;'
-  - sh -c 'if [ $(php -r "echo (int) defined(\"HHVM_VERSION\");") -eq 0 ]; then phpenv config-add tests/config/php.ini; fi;'
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS wei_tests;'
-  - psql -c 'CREATE DATABASE wei_tests;' -U postgres
-  - mkdir -p build/logs
-  - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -gt 3 ]; then php -S 0.0.0.0:8000 -t tests/unit/Fixtures/; fi;' > /dev/null &
-
 script:
-  - ./vendor/bin/phpunit tests/unit/RedisTest.php --debug --verbose --stderr --coverage-clover build/logs/clover.xml
-
-after_script:
-  - pkill php
-  - php vendor/bin/coveralls -v --exclude-no-stmt
-
-matrix:
-  fast_finish: true
-  allow_failures:
-    - php: hhvm
-    - php: 7.0
+  - phpunit tests/unit/RedisTest.php --debug --verbose --stderr --coverage-clover build/logs/clover.xml

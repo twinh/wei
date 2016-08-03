@@ -46,7 +46,7 @@ class RedisTest extends TestCase
     public function testClear()
     {
         $cache = $this->object;
-        $key = __METHOD__;
+        $key = __FUNCTION__;
 
         $cache->set($key, $key);
         $this->assertEquals($key, $cache->get($key));
