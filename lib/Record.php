@@ -1808,7 +1808,11 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function filter(\Closure $fn)
     {
         $data = array_filter($this->data, $fn);
-        return $this->db->init($this->table, $data, $this->isNew);
+        $records = $this->db->init($this->table, array(), $this->isNew);
+        $records->data = $data;
+        $records->isColl = true;
+        $records->loaded = $this->loaded;
+        return $records;
     }
 
     /**

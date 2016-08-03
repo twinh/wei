@@ -14,6 +14,7 @@ Changelog
 * Asset: 增加fallback方法,用于生成当CDN加载失败时,回退到本地的素材地址
 * BaseController: middleware方法改为public,允许外部(如通过事件)设置middleware
 * WeChatApp: 初步增加转发多客服功能
+* Record: 修复record有默认数据时,filter返回数据和默认数据混淆在一起的问题
 
 ## 0.9.20 (2015-06-18)
 

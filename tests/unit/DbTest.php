@@ -920,6 +920,28 @@ class DbTest extends TestCase
         $this->assertNotSame($members, $firstGroupMembers);
     }
 
+    public function testFilter()
+    {
+        $this->initFixtures();
+
+        $this->db->setOption('recordNamespace', 'WeiTest\Db');
+        $members = $this->db('member')->findAll();
+
+        $oneMembers =  $members->filter(function ($member) {
+            return $member['id'] == 1;
+        });
+
+        $this->assertEquals(1, $oneMembers->length());
+        $this->assertEquals(1, $oneMembers[0]['id']);
+
+        $noMembers = $members->filter(function () {
+            return false;
+        });
+
+        $this->assertEquals(0, $noMembers->length());
+        $this->assertEmpty($noMembers->toArray());
+    }
+
     public function testRecordUnset()
     {
         $this->initFixtures();

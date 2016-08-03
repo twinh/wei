@@ -14,6 +14,10 @@ class Member extends Record
 
     protected $eventResult;
 
+    protected $data = array(
+        'group_id' => 0
+    );
+
     public function getPost()
     {
         return $this->db->find('post', array('member_id' => $this->data['id']));
