@@ -11,6 +11,7 @@ Changelog
 * Redis: 解决使用redis扩展2.2.8,set方法传expire为0时,key会马上失效的问题
 * View: 增加parseResource回调,可用于外部解析自定义视图路径
 * Ret: 增加Ret服务和trait,用于统一构造操作结果,如操作成功/失败
+* Asset: 增加fallback方法,用于生成当CDN加载失败时,回退到本地的素材地址
 
 ## 0.9.20 (2015-06-18)
 

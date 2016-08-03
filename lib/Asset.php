@@ -91,4 +91,16 @@ class Asset extends Base
         $this->baseUrl = $baseUrl;
         return $this;
     }
+
+    /**
+     * Generate url for falling back from cdn to local host when asset loaded fail
+     *
+     * @param string $url
+     * @return string
+     */
+    public function fallback($url)
+    {
+        $parts = parse_url($url);
+        return $parts['path'] . ($parts['query'] ? '?' . $parts['query'] : '');
+    }
 }
