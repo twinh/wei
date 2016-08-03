@@ -37,6 +37,7 @@ class RedisTest extends CacheTestCase
         }
 
         $result = $redis->get('a');
+        var_dump($result);
         if ($result !== 'b') {
             $this->markTestSkipped('Redis get error: ' . $redis->getLastError());
         }
