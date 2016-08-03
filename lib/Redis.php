@@ -139,7 +139,7 @@ class Redis extends BaseCache
      */
     public function set($key, $value, $expire = 0)
     {
-        return $this->object->set($this->namespace . $key, $value, $expire);
+        return $this->object->set($this->namespace . $key, $value, $expire === 0 ? null : $expire);
     }
 
     /**

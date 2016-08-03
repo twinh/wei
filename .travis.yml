@@ -10,6 +10,7 @@ services:
 before_script:
   - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -gt 4 ]; then sed -i 1d "tests/config/php.ini"; fi;'
   - sh -c 'if [ $(php -r "echo (int) defined(\"HHVM_VERSION\");") -eq 0 ]; then phpenv config-add tests/config/php.ini; fi;'
+  - php -r "echo phpversion('redis');"
 
 script:
   - phpunit tests/unit/RedisTest.php --debug --verbose --stderr --coverage-clover build/logs/clover.xml
