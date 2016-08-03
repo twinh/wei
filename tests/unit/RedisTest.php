@@ -65,7 +65,8 @@ class RedisTest extends CacheTestCase
 
         $this->assertEquals(__METHOD__, $cache->get(__METHOD__));
 
-        sleep(1);
+        // sleep for 1.1s
+        usleep(1100000);
 
         $this->assertFalse($cache->get(__METHOD__));
     }
