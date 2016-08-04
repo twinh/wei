@@ -151,4 +151,50 @@ class TestCase extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(true);
     }
+
+    public function assertArrayBehaviour($arr)
+    {
+        // Behaviour 1
+        $arr['a']['b'] = true;
+        $this->assertTrue($arr['a']['b'], 'Assign multi level array directly');
+
+        // Behaviour 2
+        $hasException = false;
+        try {
+            $arr['b'];
+        } catch (\Exception $e) {
+            if ($e->getMessage() == 'Undefined index: b') {
+                $hasException = true;
+            } else {
+                throw $e;
+            }
+        }
+        if (gettype($arr) == 'array') {
+            $this->assertTrue($hasException, 'Access array\'s undefined index would cause error');
+        } else {
+            $this->assertFalse($hasException, 'Access object\'s undefined index won\'t cause error');
+        }
+
+        $this->assertFalse(isset($arr['b']), 'Access undefined index won\'t create key');
+
+        // Behaviour 3
+        $arr['c'] = array();
+        $arr['c']['d'] = 'e';
+        $this->assertEquals('e', $arr['c']['d'], 'Allow to create next level array');
+
+        // Behaviour 4
+        unset($arr['d']);
+        $this->assertFalse(isset($arr['d']));
+
+        $arr['d'] = null;
+        $this->assertFalse(isset($arr['d']), 'Call isset returns false when value is null');
+
+        // Behaviour 5
+        if (method_exists($arr, 'toArray')) {
+            $origArr = $arr->toArray();
+        } else {
+            $origArr = $arr;
+        }
+        $this->assertArrayHasKey('d', $origArr, 'Call array_key_exists returns true even if value is null');
+    }
 }

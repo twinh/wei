@@ -637,23 +637,6 @@ class RequestTest extends TestCase
         $this->assertEquals('value1', $wei['key']);
     }
 
-    public function testOffsetGetDiffWithArray() {
-        // For request service
-        $wei = $this->object;
-        $this->assertFalse(isset($wei['abc']));
-        $wei['abc'];
-        $this->assertTrue(isset($wei['abc']));
-
-        // For array
-        $arr = array();
-        $this->assertFalse(isset($arr['abc']));
-
-        // Undefined index: abc
-        @$arr['abc'];
-
-        $this->assertFalse(isset($arr['abc']));
-    }
-
     public function testOffsetUnset() {
         $wei = $this->object;
 
@@ -741,32 +724,8 @@ class RequestTest extends TestCase
 
     public function testArrayAccess()
     {
-        $request = $this->request;
-
-        $request['name'] = 'value';
-        $this->assertEquals('value', $request['name']);
-
-        $request['name'] = 'value2';
-        $this->assertEquals('value2', $request['name']);
-
-        unset($request['name']);
-
-        $this->assertFalse(isset($request['name']));
-
-        // $request['name'] will cause key exists again
-        $this->assertNull($request['name']);
-
-        $this->assertTrue(isset($request['name']));
-
-        $request['a']['b'] = 'c';
-        $this->assertEquals('c', $request['a']['b']);
-
-        $request['d']['e']['f']['g'] = 'h';
-        $this->assertEquals('h', $request['d']['e']['f']['g']);
-
-        $request['i'] = array();
-        $request['i']['j'] = 'k';
-        $this->assertEquals('k', $request['i']['j']);
+        $this->assertArrayBehaviour(array());
+        $this->assertArrayBehaviour($this->request);
     }
 
     public function testAcceptJson()

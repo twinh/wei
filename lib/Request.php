@@ -257,12 +257,16 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     /**
      * Check if the offset exists
      *
+     * Use isset to make sure ArrayAccess acts more like array
+     * To detect whether key exists, use `array_key_exists($key, $request->toArray())`
+     *
      * @param  string $offset
      * @return bool
+     * @see \WeiTest\RequestTest::assertArrayBehaviour
      */
     public function offsetExists($offset)
     {
-        return array_key_exists($offset, $this->data);
+        return isset($this->data[$offset]);
     }
 
     /**
