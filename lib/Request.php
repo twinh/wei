@@ -136,12 +136,12 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
 
         // Create parameters from super global variables on default
         if ($this->fromGlobal) {
-            $this->gets     = &$_GET;
-            $this->posts    = &$_POST;
-            $this->cookies  = &$_COOKIE;
-            $this->servers  = &$_SERVER;
-            $this->files    = &$_FILES;
-            $this->data     = &$_REQUEST;
+            $this->gets = &$_GET;
+            $this->posts = &$_POST;
+            $this->cookies = &$_COOKIE;
+            $this->servers = &$_SERVER;
+            $this->files = &$_FILES;
+            $this->data = &$_REQUEST;
         }
 
         if ($this->overwriteMethod && $method = $this->get('_method')) {
@@ -156,8 +156,8 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     /**
      * Returns a *stringify* or user defined($default) parameter value
      *
-     * @param  string $name    The parameter name
-     * @param  mixed  $default The default parameter value if the parameter does not exist
+     * @param  string $name The parameter name
+     * @param  mixed $default The default parameter value if the parameter does not exist
      * @return string|null  The parameter value
      */
     public function __invoke($name, $default = '')
@@ -168,8 +168,8 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     /**
      * Returns a *stringify* or user defined($default) parameter value
      *
-     * @param  string $name    The parameter name
-     * @param  mixed  $default The default parameter value if the parameter does not exist
+     * @param  string $name The parameter name
+     * @param  mixed $default The default parameter value if the parameter does not exist
      * @return string|null  The parameter value
      */
     public function get($name, $default = null)
@@ -187,7 +187,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function getInt($name, $min = null, $max = null)
     {
-        $value = (int) $this($name);
+        $value = (int)$this($name);
 
         if (!is_null($min) && $value < $min) {
             return $min;
@@ -280,7 +280,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * Set the offset value
      *
      * @param string $offset
-     * @param mixed  $value
+     * @param mixed $value
      * @return mixed
      */
     public function offsetSet($offset, $value)
@@ -301,7 +301,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     /**
      * Merge data from array
      *
-     * @param  array            $array
+     * @param  array $array
      * @return $this
      */
     public function fromArray(array $array = array())
@@ -483,7 +483,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     {
         $ip = $this->getServer('HTTP_X_FORWARDED_FOR')
             ? current(explode(',', $this->getServer('HTTP_X_FORWARDED_FOR'))) : $this->getServer('HTTP_CLIENT_IP')
-            ?: $this->getServer('REMOTE_ADDR');
+                ?: $this->getServer('REMOTE_ADDR');
 
         return filter_var($ip, FILTER_VALIDATE_IP) ? $ip : $default;
     }
@@ -608,8 +608,8 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
             $header .= $name . ': ' . $value . "\r\n";
         }
         return $this->getServer('REQUEST_METHOD') . ' ' . $this->getUrl() . ' ' . $this->getServer('SERVER_PROTOCOL') . "\r\n"
-            . $header
-            . $this->getContent();
+        . $header
+        . $this->getContent();
     }
 
     /**
@@ -762,7 +762,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
         // IIS7 with URL Rewrite: make sure we get the unencoded url
         // (double slash problem).
         $iisUrlRewritten = $this->getServer('IIS_WasUrlRewritten');
-        $unencodedUrl    = $this->getServer('UNENCODED_URL', '');
+        $unencodedUrl = $this->getServer('UNENCODED_URL', '');
         if ('1' == $iisUrlRewritten && '' !== $unencodedUrl) {
             return $unencodedUrl;
         }
@@ -802,10 +802,10 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     protected function detectBaseUrl()
     {
-        $baseUrl        = null;
-        $filename       = $this->getServer('SCRIPT_FILENAME', '');
-        $scriptName     = $this->getServer('SCRIPT_NAME');
-        $phpSelf        = $this->getServer('PHP_SELF');
+        $baseUrl = null;
+        $filename = $this->getServer('SCRIPT_FILENAME', '');
+        $scriptName = $this->getServer('SCRIPT_NAME');
+        $phpSelf = $this->getServer('PHP_SELF');
         $origScriptName = $this->getServer('ORIG_SCRIPT_NAME');
 
         if ($scriptName !== null && basename($scriptName) === $filename) {
@@ -819,10 +819,10 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
             // Backtrack up the SCRIPT_FILENAME to find the portion
             // matching PHP_SELF.
 
-            $baseUrl  = '/';
+            $baseUrl = '/';
             $basename = basename($filename);
             if ($basename) {
-                $path     = ($phpSelf ? trim($phpSelf, '/') : '');
+                $path = ($phpSelf ? trim($phpSelf, '/') : '');
                 $baseUrl .= substr($path, 0, strpos($path, $basename)) . $basename;
             }
         }
