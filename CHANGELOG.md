@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## 0.9.21
+## 0.9.21 (2016-08-04)
 
 * App: 允许controllerFormat为空,使getControllerClasses方法返回正确的类名
 * App: 增加setControllerFormat方法
@@ -19,6 +19,27 @@ Changelog
 * Request: setServer,setQuery,setPost支持数组参数
 * Request: 增加getReferer快捷方法
 * Request: 修复HTTPS端口错误
+* Logger: 记录日志时,$context参数允许非数组
+* WeChatApp: 增加加密支持
+* Http: 增加文件上传支持
+* Router: 修复设置单复数转换无效
+* IsStartsWith,IsEndsWith: 修复查找的对象是多个时,生成的正则不正确
+* Cache: 设置缓存失败时,不抛出异常,以免程序中止.设置失败时,需由set处理或调用方处理
+* Record: update方法增加数组参数支持
+* Record: 查询时如果没有设置FROM的数据表,使用当前数据表作为FROM的数据表
+* Bicache: 修复命名空间重复,因为master,slave已有命名空间
+* Record: 修复新对象中,toArray指定了字段却没有返回的问题
+* Record: 修复PostgreSQL不允许int id传入字符串导致测试错误
+* Record: SQL缓存key加上数据库名称,避免分/多库存在相同查询导致key冲突
+* Wei: 移除自动注入namespace功能,原因一是目前只有cache,session,app会用到,二是不便于namespace共享和切换
+* Router: 路由解析出的参数都转换为驼峰形式
+* Logger: 增加formatParams方法,方便子类调用
+* Http: getCurlInfo增加option参数
+* App: middleware支持返回字符串或数组,与action行为类似
+* Http: 增加重试支持
+* Http: 修复http服务未返回数组时,调用offsetExists出现array_key_exists() expects parameter 2 to be array, null given的问题
+* Error: 增加简单的cli错误视图
+* Record: 修复indexBy重复调用出错
 
 ## 0.9.20 (2015-06-18)
 
