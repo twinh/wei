@@ -76,12 +76,6 @@ class IpTest extends TestCase
             array('169.254.0.0', array(
                 'noResRange' => true,
             )),
-            array('192.0.2.0', array(
-                'noResRange' => true,
-            )),
-            array('224.0.0.0', array(
-                'noResRange' => true,
-            )),
             array('255.255.255.255', array(
                 'ipv6' => true
             )),
