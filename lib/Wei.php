@@ -111,6 +111,7 @@ namespace Wei
      * @property Pinyin     $pinyin An util object that converts Chinese words to phonetic alphabets
      * @method   string     pinyin($word) Converts Chinese words to phonetic alphabets
      * @property SafeUrl    $safeUrl Generate a URL with signature
+     * @property StatsD     $statsD Sends statistics to the stats daemon over UDP
      * @property Uuid       $uuid A util object that generates a RANDOM UUID(universally unique identifier)
      * @method   string     uuid() generates a RANDOM UUID(universally unique identifier)
      * @property T          $t A translator object
