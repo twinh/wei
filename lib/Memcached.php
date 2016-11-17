@@ -8,6 +8,8 @@
 
 namespace Wei;
 
+use ReflectionMethod;
+
 /**
  * A cache service that stored data in Memcached
  *
@@ -36,6 +38,15 @@ class Memcached extends BaseCache
     );
 
     /**
+     * Whether memcached version is >= 3.0.0
+     *
+     * @var bool
+     * @link https://github.com/php-memcached-dev/php-memcached/issues/229
+     * @link https://github.com/laravel/framework/pull/15739
+     */
+    protected $isMemcached3;
+
+    /**
      * Constructor
      *
      * @param array $options
@@ -48,6 +59,8 @@ class Memcached extends BaseCache
             $this->object = new \Memcached;
         }
         $this->object->addServers($this->servers);
+
+        $this->isMemcached3 = (new ReflectionMethod('Memcached', 'getMulti'))->getNumberOfParameters() == 2;
     }
 
     /**
@@ -103,7 +116,14 @@ class Memcached extends BaseCache
         foreach ($keys as $key) {
             $keysWithPrefix[] = $this->namespace . $key;
         }
-        $values = $this->object->getMulti($keysWithPrefix, $cas, \Memcached::GET_PRESERVE_ORDER);
+
+        if ($this->isMemcached3) {
+            $params = [$keysWithPrefix, \Memcached::GET_PRESERVE_ORDER];
+        } else {
+            $params = [$keysWithPrefix, $cas, \Memcached::GET_PRESERVE_ORDER];
+        }
+        $values = call_user_func_array([$this->object, 'getMulti'], $params);
+
         return array_combine($keys, $values);
     }
 

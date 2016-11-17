@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 0.9.22
+
+* Memcached: 兼容memcached 3.0 getMulti方法只支持两个参数的情况
+
 ## 0.9.21 (2016-08-04)
 
 * App: 允许controllerFormat为空,使getControllerClasses方法返回正确的类名
