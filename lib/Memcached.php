@@ -60,7 +60,8 @@ class Memcached extends BaseCache
         }
         $this->object->addServers($this->servers);
 
-        $this->isMemcached3 = (new ReflectionMethod('Memcached', 'getMulti'))->getNumberOfParameters() == 2;
+        $method = new ReflectionMethod('Memcached', 'getMulti');
+        $this->isMemcached3 = $method->getNumberOfParameters() === 2;
     }
 
     /**
