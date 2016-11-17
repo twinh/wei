@@ -24,7 +24,7 @@ before_script:
   - sh -c 'if [ $(php -r "echo PHP_MINOR_VERSION;") -gt 3 ]; then php -S 0.0.0.0:8000 -t tests/unit/Fixtures/; fi;' > /dev/null &
 
 script:
-  - ./vendor/bin/phpunit --verbose --stderr --coverage-clover build/logs/clover.xml
+  - phpunit --verbose --stderr --coverage-clover build/logs/clover.xml
 
 after_success:
   - wget https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar
