@@ -9,9 +9,7 @@
         "php": ">=5.3.4"
     },
     "require-dev": {
-        "joseph-lenton/php-error": "dev-master",
-        "satooshi/php-coveralls": "1.0.0",
-        "phpunit/phpunit": "4.5.*"
+        "joseph-lenton/php-error": "dev-master"
     },
     "authors": [
         {
