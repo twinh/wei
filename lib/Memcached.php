@@ -119,9 +119,9 @@ class Memcached extends BaseCache
         }
 
         if ($this->isMemcached3) {
-            $params = [$keysWithPrefix, \Memcached::GET_PRESERVE_ORDER];
+            $params = array($keysWithPrefix, \Memcached::GET_PRESERVE_ORDER);
         } else {
-            $params = [$keysWithPrefix, $cas, \Memcached::GET_PRESERVE_ORDER];
+            $params = array($keysWithPrefix, $cas, \Memcached::GET_PRESERVE_ORDER);
         }
         $values = call_user_func_array([$this->object, 'getMulti'], $params);
 
