@@ -123,7 +123,7 @@ class Memcached extends BaseCache
         } else {
             $params = array($keysWithPrefix, $cas, \Memcached::GET_PRESERVE_ORDER);
         }
-        $values = call_user_func_array([$this->object, 'getMulti'], $params);
+        $values = call_user_func_array(array($this->object, 'getMulti'), $params);
 
         return array_combine($keys, $values);
     }
