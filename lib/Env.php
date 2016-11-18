@@ -27,6 +27,13 @@ class Env extends Base
     protected $name;
 
     /**
+     * A PHP file returns the environment name
+     *
+     * @var string
+     */
+    protected $envFile = '.env.php';
+
+    /**
      * A callback to detect the environment name
      *
      * @var callable
@@ -98,6 +105,14 @@ class Env extends Base
      */
     public function detectEnvName()
     {
+        // Detect from local env file
+        if ($this->envFile && is_file($this->envFile)) {
+            $this->name = require $this->envFile;
+            if ($this->name) {
+                return;
+            }
+        }
+
         // Return if env name is detected, or, or continue detecting by IP
         if ($this->detector && $this->name = call_user_func($this->detector)) {
             return;

@@ -3,6 +3,7 @@ Changelog
 
 ## 0.9.22
 
+* Env: 允许通过本地的.env.php返回值获取环境名称
 * Memcached: 兼容memcached 3.0 getMulti方法只支持两个参数的情况
 
 ## 0.9.21 (2016-08-04)
