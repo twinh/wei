@@ -77,6 +77,13 @@ class Error extends Base
     protected $enableCli = true;
 
     /**
+     * Whether call exit after displayed CLI message
+     *
+     * @var bool
+     */
+    protected $autoExit = true;
+
+    /**
      * The custom error handlers
      *
      * @var array
@@ -346,6 +353,29 @@ class Error extends Base
         $this->highlight($e->getFile() . ' on line ' . $e->getLine()),
         'Trace', PHP_EOL,
         $this->highlight($e->getTraceAsString());
+
+        if ($this->autoExit) {
+            exit($this->getExitCode($e));
+        }
+    }
+
+    /**
+     * @param \Exception $e
+     * @return int
+     */
+    protected function getExitCode(\Exception $e)
+    {
+        $code = $e->getCode();
+        if (!$code || !is_numeric($code)) {
+            return 1;
+        }
+
+        $code = (int) $code;
+        if ($code > 255) {
+            return 255;
+        }
+
+        return $code;
     }
 
     /**
