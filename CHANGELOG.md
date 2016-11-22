@@ -3,6 +3,7 @@ Changelog
 
 ## 0.9.22
 
+# Record: 修复page传入过大值后,offset溢出变负数的问题 #184
 * Memcached: 兼容memcached 3.0 getMulti方法只支持两个参数的情况
 * Env: 允许通过本地的.env.php返回值获取环境名称
 * Error: 增加autoExit选项,在命令行下运行失败时,会调用exit返回错误码,以便外部程序判断运行结果

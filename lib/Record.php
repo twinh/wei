@@ -1065,8 +1065,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function offset($offset)
     {
+        $offset = (int)$offset;
         $offset < 0 && $offset = 0;
-        return $this->add('offset', (int)$offset);
+        return $this->add('offset', $offset);
     }
 
     /**
@@ -1077,8 +1078,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function limit($limit)
     {
+        $limit = (int)$limit;
         $limit < 1 && $limit = 1;
-        return $this->add('limit', (int)$limit);
+        return $this->add('limit', $limit);
     }
 
     /**
