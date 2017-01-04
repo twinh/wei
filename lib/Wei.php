@@ -49,6 +49,7 @@ namespace Wei
      * Database
      * @property Db             $db A database service inspired by Doctrine DBAL
      * @method   \Wei\Record    db($table = null) Create a new record object
+     * @property \Wei\Schema    $schema A MySQL schema builder
      *
      * HTTP Client
      * @property Http       $http An alias of call service
