@@ -84,12 +84,12 @@ class Schema extends Base
     /**
      * @var array
      */
-    protected $columns = [];
+    protected $columns = array();
 
     /**
      * @var array
      */
-    protected $indexes = [];
+    protected $indexes = array();
 
     /**
      * @var string
@@ -104,15 +104,15 @@ class Schema extends Base
     /**
      * @var array
      */
-    protected $columnDefaults = [
+    protected $columnDefaults = array(
         'nullable' => false,
         'unique' => false,
         'comment' => '',
         'unsigned' => false,
         'change' => false,
-    ];
+    );
 
-    protected $typeDefaults = [
+    protected $typeDefaults = array(
         self::TYPE_BIG_INT => '0',
         self::TYPE_BOOL => '0',
         self::TYPE_CHAR => '',
@@ -129,13 +129,13 @@ class Schema extends Base
         self::TYPE_STRING => '',
         self::TYPE_TEXT => false,
         self::TYPE_TIMESTAMP => "'0000-00-00 00:00:00'",
-    ];
+    );
 
     /**
      * @var array
      */
-    protected $typeMaps = [
-        'mysql' => [
+    protected $typeMaps = array(
+        'mysql' => array(
             self::TYPE_BIG_INT => 'bigint',
             self::TYPE_BOOL => 'tinyint(1)',
             self::TYPE_CHAR => 'char',
@@ -152,28 +152,28 @@ class Schema extends Base
             self::TYPE_STRING => 'varchar',
             self::TYPE_TEXT => 'text',
             self::TYPE_TIMESTAMP => 'timestamp',
-        ],
-    ];
+        ),
+    );
 
     /**
      * @var array
      */
-    protected $unsignedTypes = [
+    protected $unsignedTypes = array(
         self::TYPE_BIG_INT,
         self::TYPE_BOOL,
         self::TYPE_DOUBLE,
         self::TYPE_INT,
         self::TYPE_TINY_INT,
         self::TYPE_SMALL_INT,
-    ];
+    );
 
     /**
      * @var array
      */
-    protected $stringTypes = [
+    protected $stringTypes = array(
         self::TYPE_CHAR,
         self::TYPE_STRING,
-    ];
+    );
 
     public function table($table)
     {
@@ -186,8 +186,8 @@ class Schema extends Base
     protected function reset()
     {
         $this->table = '';
-        $this->columns = [];
-        $this->indexes = [];
+        $this->columns = array();
+        $this->indexes = array();
         $this->lastColumn = null;
         $this->autoIncrement = '';
         $this->tableComment = '';
@@ -200,17 +200,17 @@ class Schema extends Base
      * @param array $options
      * @return $this
      */
-    public function addColumn($column, $type, array $options = [])
+    public function addColumn($column, $type, array $options = array())
     {
         $this->lastColumn = $column;
-        $this->columns[$column] = ['type' => $type] + $options;
+        $this->columns[$column] = array('type' => $type) + $options;
 
         return $this;
     }
 
     public function dropColumn($column)
     {
-        $this->columns[$column] = ['drop' => true];
+        $this->columns[$column] = array('drop' => true);
 
         return $this;
     }
@@ -261,7 +261,7 @@ class Schema extends Base
 
     protected function getCreateDefinition()
     {
-        $columnSqls = [];
+        $columnSqls = array();
         foreach ($this->columns as $column => $options) {
             $columnSqls[] .= '  ' . $this->getColumnSql($column, $options);
         }
@@ -332,7 +332,7 @@ class Schema extends Base
 
         $sql .= $column . ' ' . $this->getTypeSql($options) . ' ';
         $sql .= $this->getUnsignedSql($options);
-        $sql .= $this->getNullSql($options['null']);
+        $sql .= $this->getNullSql(isset($options['null']) ? $options['null'] : false);
 
         // Auto increment do not have default value
         if ($this->autoIncrement == $column) {
@@ -344,7 +344,7 @@ class Schema extends Base
             }
         }
 
-        if ($options['comment']) {
+        if (isset($options['comment'])) {
             $sql .= " COMMENT '" . $options['comment'] . "'";
         }
 
@@ -360,8 +360,8 @@ class Schema extends Base
         $driver = $this->db->getDriver();
         $sql = $this->typeMaps[$driver][$options['type']];
 
-        if ($options['length']) {
-            if ($options['scale']) {
+        if (isset($options['length'])) {
+            if (isset($options['scale'])) {
                 $sql .= '(' . $options['length'] . ', ' . $options['scale'] . ')';
             } else {
                 $sql .= '(' . $options['length'] . ')';
@@ -487,12 +487,12 @@ class Schema extends Base
 
     public function char($column, $length = 255)
     {
-        return $this->addColumn($column, self::TYPE_CHAR, ['length' => $length]);
+        return $this->addColumn($column, self::TYPE_CHAR, array('length' => $length));
     }
 
     public function decimal($column, $length, $scale = 2)
     {
-        return $this->addColumn($column, self::TYPE_DECIMAL, ['length' => $length, 'scale' => $scale]);
+        return $this->addColumn($column, self::TYPE_DECIMAL, array('length' => $length, 'scale' => $scale));
     }
 
     public function double($column)
@@ -502,12 +502,12 @@ class Schema extends Base
 
     public function string($column, $length = 255)
     {
-        return $this->addColumn($column, self::TYPE_STRING, ['length' => $length]);
+        return $this->addColumn($column, self::TYPE_STRING, array('length' => $length));
     }
 
     public function int($column, $length = null)
     {
-        return $this->addColumn($column, self::TYPE_INT, ['length' => $length]);
+        return $this->addColumn($column, self::TYPE_INT, array('length' => $length));
     }
 
     public function longText($column)
@@ -527,12 +527,12 @@ class Schema extends Base
 
     public function tinyInt($column, $length = null)
     {
-        return $this->addColumn($column, self::TYPE_TINY_INT, ['length' => $length]);
+        return $this->addColumn($column, self::TYPE_TINY_INT, array('length' => $length));
     }
 
     public function smallInt($column, $length = null)
     {
-        return $this->addColumn($column, self::TYPE_SMALL_INT, ['length' => $length]);
+        return $this->addColumn($column, self::TYPE_SMALL_INT, array('length' => $length));
     }
 
     public function text($column)
@@ -626,10 +626,10 @@ class Schema extends Base
         $columns = (array) $columns;
         $name || $name = $this->generateIndexName($columns);
 
-        $this->indexes[$name] = [
+        $this->indexes[$name] = array(
             'columns' => $columns,
             'type' => $type,
-        ];
+        );
 
         return $this;
     }

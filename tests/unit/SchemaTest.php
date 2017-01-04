@@ -8,10 +8,11 @@ namespace WeiTest;
 class SchemaTest extends TestCase
 {
     /**
-     * 生成SQL语句
+     * Generate SQL
      */
     public function testGetSql()
     {
+        wei()->schema->db = wei()->mysqlDb;
         $sql = wei()->schema->table('test')->tableComment('Test')
             ->id()
             ->int('user_id')->comment('User ID')
