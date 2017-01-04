@@ -156,6 +156,15 @@ class Schema extends Base
     );
 
     /**
+     * The SQL to check if table exists
+     *
+     * @var array
+     */
+    protected $checkTableSqls = array(
+        'mysql'     => "SHOW TABLES LIKE '%s'"
+    );
+
+    /**
      * @var array
      */
     protected $unsignedTypes = array(
@@ -456,13 +465,17 @@ class Schema extends Base
         return $this->drop($table, true);
     }
 
+    /**
+     * Check if table exists
+     *
+     * @param string $table
+     * @return bool
+     */
     public function hasTable($table)
     {
-        try {
-            return (bool) $this->db->getTableFields($table);
-        } catch (\PDOException $e) {
-            return false;
-        }
+        $tableExistsSql = sprintf($this->checkTableSqls[$this->db->getDriver()], $table);
+
+        return (bool) $this->db->fetchColumn($tableExistsSql);
     }
 
     /**
