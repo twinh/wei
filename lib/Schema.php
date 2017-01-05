@@ -332,7 +332,7 @@ class Schema extends Base
         }
 
         if ($this->isChange) {
-            if ($options['change']) {
+            if (isset($options['change'])) {
                 $sql .= 'CHANGE COLUMN ' . $column . ' ';
             } else {
                 $sql .= 'ADD COLUMN ';
@@ -708,6 +708,13 @@ class Schema extends Base
     public function tableComment($comment)
     {
         $this->tableComment = $comment;
+
+        return $this;
+    }
+
+    public function rename($from, $to)
+    {
+        $this->columns[$from] = ['command' => 'rename', 'to' => $to];
 
         return $this;
     }

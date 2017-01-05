@@ -23,7 +23,7 @@ class SchemaTest extends TestCase
             ->tinyInt('type', 1)
             ->bigInt('big_id')
             ->char('id_card', 18)
-            ->double('lat', 10, 6)
+            ->double('lat')
             ->longText('long_description')
             ->mediumText('medium_description')
             ->smallInt('small_id')
@@ -72,4 +72,16 @@ class SchemaTest extends TestCase
   UNIQUE KEY name (name)
 ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Test'", $sql);
     }
+
+    public function testChange()
+    {
+        $sql = wei()->schema->table('products')
+            ->string('no', 64)->comment('商品编码')->change()
+            ->string('barcode', 64)->comment('条码')->after('no')
+            ->getSql();
+
+        $this->assertEquals("ALTER TABLE products
+  CHANGE COLUMN no no varchar(64) NOT NULL DEFAULT '' COMMENT '商品编码',
+  ADD COLUMN barcode varchar(64) NOT NULL DEFAULT '' COMMENT '条码' AFTER no
+", $sql);
 }
