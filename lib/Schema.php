@@ -160,7 +160,7 @@ class Schema extends Base
      * @var array
      */
     protected $checkTableSqls = array(
-        'mysql'     => "SHOW TABLES LIKE '%s'"
+        'mysql'     => "SELECT * FROM information_schema.tables WHERE table_schema = ? AND table_name = ? LIMIT 1;"
     );
 
     /**
@@ -522,9 +522,17 @@ class Schema extends Base
      */
     public function hasTable($table)
     {
-        $tableExistsSql = sprintf($this->checkTableSqls[$this->db->getDriver()], $table);
+        $parts = explode('.', $table);
+        if (count($parts) == 1) {
+            $db = $this->db->getDbname();
+            $table = $parts[0];
+        } else {
+            list($db, $table) = $parts;
+        }
 
-        return (bool) $this->db->fetchColumn($tableExistsSql);
+        $tableExistsSql = $this->checkTableSqls[$this->db->getDriver()];
+
+        return (bool) $this->db->fetchColumn($tableExistsSql, [$db, $table]);
     }
 
     /**
