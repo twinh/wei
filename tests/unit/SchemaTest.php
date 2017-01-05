@@ -2,17 +2,27 @@
 
 namespace WeiTest;
 
+use Wei\Schema;
+
 /**
  * Schema
+ *
+ * @property Schema $schema
  */
 class SchemaTest extends TestCase
 {
-    /**
-     * Generate SQL
-     */
-    public function testGetSql()
+    public function setUp()
     {
+        parent::setUp();
+
         wei()->schema->db = wei()->mysqlDb;
+    }
+
+    /**
+     * 生成SQL语句
+     */
+    public function testCreateTable()
+    {
         $sql = wei()->schema->table('test')->tableComment('Test')
             ->id()
             ->int('user_id')->comment('User ID')
@@ -84,4 +94,68 @@ class SchemaTest extends TestCase
   CHANGE COLUMN no no varchar(64) NOT NULL DEFAULT '' COMMENT '商品编码',
   ADD COLUMN barcode varchar(64) NOT NULL DEFAULT '' COMMENT '条码' AFTER no
 ", $sql);
+    }
+
+    public function testRename()
+    {
+        $this->createTestTable();
+
+        $sql = wei()->schema->table('test_products')
+            ->rename('name', 'new_name')
+            ->getSql();
+
+        $this->assertEquals("ALTER TABLE test_products
+  CHANGE COLUMN name new_name varchar(128) NOT NULL DEFAULT '' COMMENT '商品名称'
+", $sql);
+
+        $this->dropTestTable();
+    }
+
+    public function testDrop()
+    {
+        $sql = wei()->schema->table('test')
+            ->dropColumn('test')
+            ->getSql();
+
+        $this->assertEquals("ALTER TABLE test
+  DROP COLUMN test
+", $sql);
+    }
+
+    public function testMultiCommands()
+    {
+        $this->createTestTable();
+
+        $sql = wei()->schema->table('test_products')
+            ->string('new_description')->comment('product detail')
+            ->rename('name', 'new_name')
+            ->dropColumn('test')
+            ->getSql();
+
+        $this->assertEquals("ALTER TABLE test_products
+  ADD COLUMN new_description varchar(255) NOT NULL DEFAULT '' COMMENT 'product detail',
+  CHANGE COLUMN name new_name varchar(128) NOT NULL DEFAULT '' COMMENT '商品名称',
+  DROP COLUMN test
+", $sql);
+
+        wei()->schema->db->executeUpdate($sql);
+
+        $this->dropTestTable();
+    }
+
+    protected function createTestTable()
+    {
+        $this->schema->dropIfExists('test_products');
+        $this->schema->table('test_products')
+            ->id()
+            ->string('name', 128)->comment('商品名称')
+            ->text('description')
+            ->string('test')
+            ->exec();
+    }
+
+    protected function dropTestTable()
+    {
+        $this->schema->dropIfExists('test_products');
+    }
 }

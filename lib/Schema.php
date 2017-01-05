@@ -106,7 +106,6 @@ class Schema extends Base
      */
     protected $columnDefaults = array(
         'nullable' => false,
-        'unique' => false,
         'comment' => '',
         'unsigned' => false,
         'change' => false,
@@ -219,7 +218,8 @@ class Schema extends Base
 
     public function dropColumn($column)
     {
-        $this->columns[$column] = array('drop' => true);
+        $this->isChange = true;
+        $this->columns[$column] = array('command' => 'drop');
 
         return $this;
     }
@@ -325,21 +325,25 @@ class Schema extends Base
     {
         $sql = '';
 
-        if (isset($options['drop'])) {
-            $sql .= 'DROP COLUMN ' . $column;
-
-            return $sql;
+        if (isset($options['command'])) {
+            $method = 'get' . ucfirst($options['command']) .'ColumnSql';
+            return $this->$method($column, $options);
         }
 
         if ($this->isChange) {
             if (isset($options['change'])) {
-                $sql .= 'CHANGE COLUMN ' . $column . ' ';
+                $sql .= $this->getChangeColumnSql($column);
             } else {
                 $sql .= 'ADD COLUMN ';
             }
         }
 
-        $sql .= $column . ' ' . $this->getTypeSql($options) . ' ';
+        return $sql . $this->buildColumnSql($column, $options);
+    }
+
+    protected function buildColumnSql($column, $options)
+    {
+        $sql = $column . ' ' . $this->getTypeSql($options) . ' ';
         $sql .= $this->getUnsignedSql($options);
         $sql .= $this->getNullSql(isset($options['null']) ? $options['null'] : false);
 
@@ -364,10 +368,55 @@ class Schema extends Base
         return $sql;
     }
 
+    protected function getChangeColumnSql($column)
+    {
+        return 'CHANGE COLUMN ' . $column . ' ';
+    }
+
+    protected function getDropColumnSql($column)
+    {
+        return 'DROP COLUMN ' . $column;
+    }
+
+    protected function getRenameColumnSql($column, $options)
+    {
+        $dbColumns = $this->db->fetchAll("SHOW FULL COLUMNS FROM $this->table");
+        $fromColumn = null;
+        foreach ($dbColumns as $dbColumn) {
+            if ($dbColumn['Field'] == $options['from']) {
+                $fromColumn = $dbColumn;
+                break;
+            }
+        }
+        if (!$fromColumn) {
+            throw new \Exception(sprintf('Column "%s" not found in table "%s"', $options['from'], $this->table));
+        }
+
+        $newOptions = array();
+        $newOptions['type'] = $fromColumn['Type'];
+        $newOptions['nullable'] = $fromColumn['Null'] === 'YES';
+        $newOptions['comment'] = $fromColumn['Comment'];
+        $newOptions['default'] = $fromColumn['Default'];
+
+        $sql = $this->buildColumnSql($options['to'], $newOptions);
+        if ($fromColumn['Extra'] === 'auto_increment') {
+            $sql .= ' AUTO_INCREMENT';
+        }
+
+        return $this->getChangeColumnSql($column) . $sql;
+    }
+
     protected function getTypeSql($options)
     {
         $driver = $this->db->getDriver();
-        $sql = $this->typeMaps[$driver][$options['type']];
+        $typeMap = $this->typeMaps[$driver];
+
+        // Allow custom type (eg int(10) unsigned) from rename
+        if (!isset($typeMap[$options['type']])) {
+            return $options['type'];
+        }
+
+        $sql = $typeMap[$options['type']];
 
         if (isset($options['length'])) {
             if (isset($options['scale'])) {
@@ -714,7 +763,7 @@ class Schema extends Base
 
     public function rename($from, $to)
     {
-        $this->columns[$from] = ['command' => 'rename', 'to' => $to];
+        $this->columns[$from] = array('command' => 'rename', 'from' => $from, 'to' => $to);
 
         return $this;
     }

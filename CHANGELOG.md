@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 0.9.23
+
+* Schema: 增加MySQL表操作服务,支持创建修改数据表,字段等
+
 ## 0.9.22 (2016-11-22)
 
 * StatsD: 增加StatsD服务,用于发送统计数据到https://github.com/etsy/statsd
