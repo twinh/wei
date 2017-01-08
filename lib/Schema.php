@@ -532,7 +532,7 @@ class Schema extends Base
 
         $tableExistsSql = $this->checkTableSqls[$this->db->getDriver()];
 
-        return (bool) $this->db->fetchColumn($tableExistsSql, [$db, $table]);
+        return (bool) $this->db->fetchColumn($tableExistsSql, array($db, $table));
     }
 
     /**
