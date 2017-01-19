@@ -50,11 +50,13 @@ class Lock extends Base
      * Acquire a lock key
      *
      * @param string $key
+     * @param null|int $expire
      * @return bool
      */
-    public function __invoke($key)
+    public function __invoke($key, $expire = null)
     {
-        if ($this->cache->add($key, true, $this->expire)) {
+        $expire = $expire === null ? $this->expire : $expire;
+        if ($this->cache->add($key, true, $expire)) {
             $this->keys[] = $key;
             return true;
         } else {
