@@ -22,6 +22,13 @@ class Lock extends Base
     protected $keys = array();
 
     /**
+     * Expiration seconds to release lock, use to avoid deadlock when PHP crash
+     *
+     * @var int
+     */
+    protected $expire = 30;
+
+    /**
      * Constructor
      *
      * @param array $options
@@ -47,7 +54,7 @@ class Lock extends Base
      */
     public function __invoke($key)
     {
-        if ($this->cache->add($key, true)) {
+        if ($this->cache->add($key, true, $this->expire)) {
             $this->keys[] = $key;
             return true;
         } else {
