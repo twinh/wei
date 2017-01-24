@@ -1072,4 +1072,23 @@ class Db extends Base
         }
         return $this;
     }
+
+    /**
+     * Execute a function in a transaction
+     *
+     * @param callable $fn
+     * @throws \Exception
+     */
+    public function transactional(callable $fn)
+    {
+        $pdo = $this->getPdo();
+        $pdo->beginTransaction();
+        try {
+            call_user_func($fn);
+            $pdo->commit();
+        } catch (\Exception $e) {
+            $pdo->rollBack();
+            throw $e;
+        }
+    }
 }
