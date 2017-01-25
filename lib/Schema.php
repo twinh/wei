@@ -167,12 +167,14 @@ class Schema extends Base
      * @var array
      */
     protected $unsignedTypes = array(
-        self::TYPE_BIG_INT,
         self::TYPE_BOOL,
-        self::TYPE_DOUBLE,
-        self::TYPE_INT,
         self::TYPE_TINY_INT,
         self::TYPE_SMALL_INT,
+        self::TYPE_MEDIUM_INT,
+        self::TYPE_INT,
+        self::TYPE_BIG_INT,
+        self::TYPE_DECIMAL,
+        self::TYPE_DOUBLE,
     );
 
     /**
