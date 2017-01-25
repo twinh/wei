@@ -54,7 +54,7 @@ class SchemaTest extends TestCase
   user_id int unsigned NOT NULL DEFAULT 0 COMMENT 'User ID',
   name varchar(255) NOT NULL DEFAULT '',
   description text NOT NULL,
-  price decimal(10, 2) NOT NULL DEFAULT 0,
+  price decimal(10, 2) unsigned NOT NULL DEFAULT 0,
   is_default tinyint(1) unsigned NOT NULL DEFAULT 1,
   type tinyint(1) unsigned NOT NULL DEFAULT 0,
   big_id bigint unsigned NOT NULL DEFAULT 0,
