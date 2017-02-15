@@ -777,4 +777,12 @@ class Schema extends Base
 
         return $this;
     }
+
+    public function rename($from, $to)
+    {
+        $sql = sprintf('RENAME TABLE %s TO %s', $from, $to);
+        $this->db->executeUpdate($sql);
+
+        return $this;
+    }
 }
