@@ -128,7 +128,7 @@ class SchemaTest extends TestCase
 
         $sql = wei()->schema->table('test_products')
             ->string('new_description')->comment('product detail')
-            ->rename('name', 'new_name')
+            ->renameColumn('name', 'new_name')
             ->dropColumn('test')
             ->getSql();
 
