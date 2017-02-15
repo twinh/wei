@@ -771,7 +771,7 @@ class Schema extends Base
         return $this;
     }
 
-    public function rename($from, $to)
+    public function renameColumn($from, $to)
     {
         $this->columns[$from] = array('command' => 'rename', 'from' => $from, 'to' => $to);
 

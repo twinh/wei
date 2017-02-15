@@ -101,7 +101,7 @@ class SchemaTest extends TestCase
         $this->createTestTable();
 
         $sql = wei()->schema->table('test_products')
-            ->rename('name', 'new_name')
+            ->renameColumn('name', 'new_name')
             ->getSql();
 
         $this->assertEquals("ALTER TABLE test_products
