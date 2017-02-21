@@ -6,6 +6,7 @@ Changelog
 * Schema: 增加MySQL表操作服务,支持创建修改数据表,字段等
 * Lock: 增加expire选项,默认为30秒,用于避免PHP出错后没有解锁导致死锁
 * Db: 增加transactional方法,通过回调的方式调用事务
+* Record: 增加forUpdate,forShare,lock方法用于事务中的锁
 
 ## 0.9.22 (2016-11-22)
 

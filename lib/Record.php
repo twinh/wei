@@ -214,6 +214,11 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     protected $cacheTags = array();
 
     /**
+     * @var string|bool
+     */
+    protected $lock = '';
+
+    /**
      * Constructor
      *
      * @param array $options
@@ -1585,6 +1590,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                 . ($parts['offset'] !== null ? ' OFFSET ' . $parts['offset'] : '');
         }
 
+        $query .= $this->generateLockSql();
+
         return $query;
     }
 
@@ -1889,6 +1896,53 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     protected function triggerCallback($name)
     {
         $this->$name();
+    }
+
+    /**
+     * @return $this
+     */
+    public function forUpdate()
+    {
+        return $this->lock(true);
+    }
+
+    /**
+     * @return $this
+     */
+    public function forShare()
+    {
+        return $this->lock(false);
+    }
+
+    /**
+     * @param string $lock
+     * @return $this
+     */
+    public function lock($lock)
+    {
+        $this->lock = $lock;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    protected function generateLockSql()
+    {
+        if ($this->lock === '') {
+            return '';
+        }
+
+        if (is_string($this->lock)) {
+            return ' ' . $this->lock;
+        }
+
+        if ($this->lock) {
+            return ' FOR UPDATE';
+        } else {
+            return ' LOCK IN SHARE MODE';
+        }
     }
 
     /**
