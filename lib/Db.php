@@ -328,9 +328,10 @@ class Db extends Base
      *
      * @param string $table The name of table
      * @param array $data A two-dimensional array
+     * @param string $extra A extra string concat after sql, like "ON DUPLICATE KEY UPDATE ..."
      * @return int The number of inserted rows
      */
-    public function insertBatch($table, array $data)
+    public function insertBatch($table, array $data, $extra = null)
     {
         $table = $this->getTable($table);
         $field = implode(', ', array_keys($data[0]));
@@ -357,7 +358,10 @@ class Db extends Base
                 $placeholder = implode(' UNION ', $placeholders);
                 break;
         }
+
         $query = "INSERT INTO $table ($field) $placeholder";
+        $extra && $query .= ' ' . $extra;
+
         return $this->executeUpdate($query, $values);
     }
 
