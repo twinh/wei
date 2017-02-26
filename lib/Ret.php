@@ -94,7 +94,7 @@ class Ret extends Base
         // Record error result
         // TODO record more relative data
         if ($code !== 1) {
-            $this->logger->log($type, $message, $data);
+            $this->logger->log($type, $data['message'], $data);
         }
 
         return $data;
