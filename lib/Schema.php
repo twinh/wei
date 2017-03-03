@@ -398,7 +398,11 @@ class Schema extends Base
         $newOptions['type'] = $fromColumn['Type'];
         $newOptions['nullable'] = $fromColumn['Null'] === 'YES';
         $newOptions['comment'] = $fromColumn['Comment'];
-        $newOptions['default'] = $fromColumn['Default'];
+
+        $keys = array_keys($this->typeDefaults, [false], true);
+        if (!in_array($newOptions['type'], $keys)) {
+            $newOptions['default'] = $fromColumn['Default'];
+        }
 
         $sql = $this->buildColumnSql($options['to'], $newOptions);
         if ($fromColumn['Extra'] === 'auto_increment') {
