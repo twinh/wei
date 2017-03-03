@@ -399,7 +399,7 @@ class Schema extends Base
         $newOptions['nullable'] = $fromColumn['Null'] === 'YES';
         $newOptions['comment'] = $fromColumn['Comment'];
 
-        $keys = array_keys($this->typeDefaults, [false], true);
+        $keys = array_keys($this->typeDefaults, false, true);
         if (!in_array($newOptions['type'], $keys)) {
             $newOptions['default'] = $fromColumn['Default'];
         }
