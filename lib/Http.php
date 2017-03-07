@@ -503,7 +503,8 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
                 } else {
                     $statusText = 'HTTP request error';
                 }
-                $exception = new \ErrorException($statusText, $statusCode);
+                // + 1000 to avoid conflicts with error service 404 detection
+                $exception = new \ErrorException($statusText, $statusCode + 1000);
                 $this->triggerError('http', $exception);
             }
         } else {

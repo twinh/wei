@@ -8,6 +8,7 @@ Changelog
 * Db: 增加transactional方法,通过回调的方式调用事务
 * Record: 增加forUpdate,forShare,lock方法用于事务中的锁
 * Db: insertBatch增加extra参数,可用于在生成的语句后面增加"ON DUPLICATE KEY UPDATE"字句
+* Http: 网络请求失败时,抛出的异常code加2000(如404则异常code为2404),避免被error服务认为是当前页面404
 
 ## 0.9.22 (2016-11-22)
 
