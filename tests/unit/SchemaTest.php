@@ -105,10 +105,37 @@ class SchemaTest extends TestCase
             ->getSql();
 
         $this->assertEquals("ALTER TABLE test_products
-  CHANGE COLUMN name new_name varchar(128) NOT NULL DEFAULT '' COMMENT '商品名称'
+  CHANGE COLUMN name new_name varchar(128) NOT NULL DEFAULT '' COMMENT 'product name'
 ", $sql);
 
         $this->dropTestTable();
+    }
+
+    public function testRenameTextColumn()
+    {
+        $this->createTestTable();
+
+        $sql = wei()->schema->table('test_products')
+            ->renameColumn('description', 'new_description')
+            ->getSql();
+
+        // Text column don't support default value
+        $this->assertEquals("ALTER TABLE test_products
+  CHANGE COLUMN description new_description text NOT NULL COMMENT 'product description'
+", $sql);
+
+        $this->dropTestTable();
+    }
+
+    public function testRenameNotExistsColumn()
+    {
+        $this->createTestTable();
+
+        $this->setExpectedException('Exception', 'Column "not_exists" not found in table "test_products"');
+
+        wei()->schema->table('test_products')
+            ->renameColumn('not_exists', 'new_column')
+            ->exec();
     }
 
     public function testDrop()
@@ -134,7 +161,7 @@ class SchemaTest extends TestCase
 
         $this->assertEquals("ALTER TABLE test_products
   ADD COLUMN new_description varchar(255) NOT NULL DEFAULT '' COMMENT 'product detail',
-  CHANGE COLUMN name new_name varchar(128) NOT NULL DEFAULT '' COMMENT '商品名称',
+  CHANGE COLUMN name new_name varchar(128) NOT NULL DEFAULT '' COMMENT 'product name',
   DROP COLUMN test
 ", $sql);
 
@@ -148,8 +175,8 @@ class SchemaTest extends TestCase
         $this->schema->dropIfExists('test_products');
         $this->schema->table('test_products')
             ->id()
-            ->string('name', 128)->comment('商品名称')
-            ->text('description')
+            ->string('name', 128)->comment('product name')
+            ->text('description')->comment('product description')
             ->string('test')
             ->exec();
     }
