@@ -160,7 +160,7 @@ class Schema extends Base
      * @var array
      */
     protected $checkTableSqls = array(
-        'mysql'     => "SELECT * FROM information_schema.tables WHERE table_schema = ? AND table_name = ? LIMIT 1;"
+        'mysql' => "SELECT * FROM information_schema.tables WHERE table_schema = ? AND table_name = ? LIMIT 1;",
     );
 
     /**
@@ -185,6 +185,10 @@ class Schema extends Base
         self::TYPE_STRING,
     );
 
+    /**
+     * @param string $table
+     * @return $this
+     */
     public function table($table)
     {
         $this->reset();
@@ -328,7 +332,8 @@ class Schema extends Base
         $sql = '';
 
         if (isset($options['command'])) {
-            $method = 'get' . ucfirst($options['command']) .'ColumnSql';
+            $method = 'get' . ucfirst($options['command']) . 'ColumnSql';
+
             return $this->$method($column, $options);
         }
 
@@ -738,32 +743,41 @@ class Schema extends Base
         return $this->primary($column);
     }
 
-    public function timestampsV2()
+    public function timestamps()
     {
         return $this->timestamp('created_at')->timestamp('updated_at');
     }
 
-    public function userstampsV2()
+    public function userstamps()
     {
         return $this->int('created_by')->int('updated_by');
     }
 
-    public function softDeletableV2()
+    public function softDeletable()
     {
         return $this->timestamp('deleted_at')->int('deleted_by');
     }
 
-    public function timestamps()
+    /**
+     * @deprecated
+     */
+    public function timestampsV1()
     {
         return $this->timestamp('createTime')->timestamp('updateTime');
     }
 
-    public function userstamps()
+    /**
+     * @deprecated
+     */
+    public function userstampsV1()
     {
         return $this->int('createUser')->int('updateUser');
     }
 
-    public function softDeletable()
+    /**
+     * @deprecated
+     */
+    public function softDeletableV1()
     {
         return $this->timestamp('deleteTime')->int('deleteUser');
     }

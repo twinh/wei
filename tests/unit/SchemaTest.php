@@ -23,7 +23,7 @@ class SchemaTest extends TestCase
      */
     public function testCreateTable()
     {
-        $sql = wei()->schema->table('test')->tableComment('Test')
+        $sql = $this->schema->table('test')->tableComment('Test')
             ->id()
             ->int('user_id')->comment('User ID')
             ->string('name')
@@ -39,12 +39,12 @@ class SchemaTest extends TestCase
             ->smallInt('small_id')
             ->date('birthday')
             ->datetime('closed_at')
+            ->timestampsV1()
+            ->userstampsV1()
+            ->softDeletableV1()
             ->timestamps()
             ->userstamps()
             ->softDeletable()
-            ->timestampsV2()
-            ->userstampsV2()
-            ->softDeletableV2()
             ->index('user_id')
             ->unique('name')
             ->getSql();
