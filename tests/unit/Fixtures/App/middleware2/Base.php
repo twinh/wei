@@ -1,6 +1,6 @@
 <?php
 
-namespace WeiTest\Fixtures\app\middleware;
+namespace WeiTest\Fixtures\App\Middleware;
 
 /**
  * @property \Wei\Response $response

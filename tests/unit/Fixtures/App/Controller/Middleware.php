@@ -2,17 +2,17 @@
 
 namespace WeiTest\Fixtures\App\Controller;
 
-use WeiTest\Fixtures\app\middleware\After;
-use WeiTest\Fixtures\app\middleware\All;
-use WeiTest\Fixtures\app\middleware\Around;
-use WeiTest\Fixtures\app\middleware\Before;
-use WeiTest\Fixtures\app\middleware\Except;
-use WeiTest\Fixtures\app\middleware\Only;
-use WeiTest\Fixtures\app\middleware\ReturnArray;
-use WeiTest\Fixtures\app\middleware\ReturnString;
-use WeiTest\Fixtures\app\middleware\Stack;
-use WeiTest\Fixtures\app\middleware\Stack2;
-use WeiTest\Fixtures\app\middleware\Stack3;
+use WeiTest\Fixtures\App\Middleware\After;
+use WeiTest\Fixtures\App\Middleware\All;
+use WeiTest\Fixtures\App\Middleware\Around;
+use WeiTest\Fixtures\App\Middleware\Before;
+use WeiTest\Fixtures\App\Middleware\Except;
+use WeiTest\Fixtures\App\Middleware\Only;
+use WeiTest\Fixtures\App\Middleware\ReturnArray;
+use WeiTest\Fixtures\App\Middleware\ReturnString;
+use WeiTest\Fixtures\App\Middleware\Stack;
+use WeiTest\Fixtures\App\Middleware\Stack2;
+use WeiTest\Fixtures\App\Middleware\Stack3;
 
 /**
  * @property \Wei\Response $response
