@@ -2,7 +2,7 @@
 
 namespace WeiTest\Fixtures\App\Controller;
 
-class Test extends \Wei\BaseController
+class Example extends \Wei\BaseController
 {
     public function testAction()
     {

@@ -27,7 +27,7 @@ class AppTest extends TestCase
     public function testBaseApp()
     {
         // WeiTest\App\Controller\Test::testAction
-        $this->app->dispatch('test', 'test');
+        $this->app->dispatch('example', 'test');
 
         $this->expectOutputString('test');
     }
@@ -84,13 +84,13 @@ class AppTest extends TestCase
 
     public function testActionNotFound()
     {
-        $result = $this->app->dispatch('test', 'ActionNotFound', array(), false);
+        $result = $this->app->dispatch('example', 'ActionNotFound', array(), false);
 
         $this->assertEquals(array(
             'actions' => array(
                 'ActionNotFound' => array(
-                    'test' => array(
-                        'WeiTest\Fixtures\App\Controller\Test'
+                    'example' => array(
+                        'WeiTest\Fixtures\App\Controller\Example'
                     )
                 )
             )
@@ -101,16 +101,16 @@ class AppTest extends TestCase
     {
         $this->expectOutputString('value');
 
-        // WeiTest\App\Controller\TestController::returnArrayAction
-        $this->app->dispatch('test', 'returnArray');
+        // WeiTest\App\Controller\Example::returnArrayAction
+        $this->app->dispatch('example', 'returnArray');
     }
 
     public function testActionReturnResponseService()
     {
         $this->expectOutputString('response content');
 
-        // WeiTest\App\Controller\TestController::returnResponseAction
-        $result = $this->app->dispatch('test', 'returnResponse');
+        // WeiTest\App\Controller\Example::returnResponseAction
+        $result = $this->app->dispatch('example', 'returnResponse');
 
         $this->assertInstanceOf('\Wei\Response', $result);
     }
@@ -119,15 +119,15 @@ class AppTest extends TestCase
     {
         $this->setExpectedException('InvalidArgumentException');
 
-        // WeiTest\App\Controller\TestController::returnUnexpectedTypeAction
-        $this->app->dispatch('test', 'returnUnexpectedType');
+        // WeiTest\App\Controller\Example::returnUnexpectedTypeAction
+        $this->app->dispatch('example', 'returnUnexpectedType');
     }
 
     public function testDispatchBreak()
     {
         $this->expectOutputString('stop');
 
-        $this->app->dispatch('test', 'dispatchBreak');
+        $this->app->dispatch('example', 'dispatchBreak');
     }
 
     public function testDispatchBreakInConstructor()
@@ -141,7 +141,7 @@ class AppTest extends TestCase
     {
         $this->expectOutputString('target');
 
-        $this->request->setPathInfo('test/forwardAction');
+        $this->request->setPathInfo('example/forwardAction');
         $this->app();
     }
 
@@ -149,28 +149,28 @@ class AppTest extends TestCase
     {
         $this->expectOutputString('target');
 
-        $this->app->dispatch('test', 'forwardAction');
+        $this->app->dispatch('example', 'forwardAction');
     }
 
     public function testForwardController()
     {
         $this->expectOutputString('index');
 
-        $this->app->dispatch('test', 'forwardController');
+        $this->app->dispatch('example', 'forwardController');
     }
 
     public function testForwardParams()
     {
         $this->expectOutputString('forwardParamsAction');
 
-        $this->app->dispatch('test', 'forwardParams');
+        $this->app->dispatch('example', 'forwardParams');
     }
 
     public function testForwardDispatchReturnsNewResponse()
     {
         $this->expectOutputString('forwardParamsAction');
 
-        $response = $this->app->dispatch('test', 'forwardParams');
+        $response = $this->app->dispatch('example', 'forwardParams');
 
         $this->assertInstanceOf('\Wei\Response', $response);
 
@@ -193,7 +193,7 @@ class AppTest extends TestCase
     {
         $this->expectOutputString($output);
 
-        $this->app->dispatch('test', $action);
+        $this->app->dispatch('example', $action);
     }
 
     public function providerForActionReturnValue()
@@ -226,7 +226,7 @@ class AppTest extends TestCase
     {
         $this->expectOutputString('1');
 
-        $this->app->dispatch('test', 'parameter', array('id' => '1'));
+        $this->app->dispatch('example', 'parameter', array('id' => '1'));
     }
 
     public function testActionIsProtected()
@@ -235,12 +235,12 @@ class AppTest extends TestCase
             'RuntimeException',
             implode("\n", array(
                 'The page you requested was not found',
-                ' - method "showAction" not found in controller "test"'
+                ' - method "showAction" not found in controller "example"'
             )),
             '404'
         );
 
-        $this->request->setPathInfo('test/protect');
+        $this->request->setPathInfo('example/protect');
         $this->app();
     }
 
@@ -248,7 +248,7 @@ class AppTest extends TestCase
     {
         $this->expectOutputString('caseInsensitiveAction');
 
-        $this->request->setPathInfo('test/caseInsensitive');
+        $this->request->setPathInfo('example/caseInsensitive');
         $this->app();
     }
 
@@ -258,12 +258,12 @@ class AppTest extends TestCase
             'RuntimeException',
             implode("\n", array(
                 'The page you requested was not found',
-                ' - method "showAction" not found in controller "test"'
+                ' - method "showAction" not found in controller "example"'
             )),
             '404'
         );
 
-        $this->request->setPathInfo('test/caseinsensitive');
+        $this->request->setPathInfo('example/caseinsensitive');
         $this->app();
     }
 
@@ -316,13 +316,13 @@ class AppTest extends TestCase
             'RuntimeException',
             implode("\n", array(
                 'The page you requested was not found',
-                ' - method "notFoundAction" not found in controller "test" (class "WeiTest\Fixtures\App\Controller\Test")'
+                ' - method "notFoundAction" not found in controller "example" (class "WeiTest\Fixtures\App\Controller\Example")'
             )),
             404
         );
 
         $this->request->set('debug-detail', '1');
-        $this->app->dispatch('test', 'notFound');
+        $this->app->dispatch('example', 'notFound');
     }
 
     public function testMiddlewareOnlyAction()
