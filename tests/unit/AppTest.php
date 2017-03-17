@@ -13,7 +13,7 @@ class AppTest extends TestCase
     {
         parent::setUp();
 
-        $this->view->setDirs(__DIR__ . '/Fixtures/app/views');
+        $this->view->setDirs(__DIR__ . '/Fixtures/App/views');
 
         $this->app->setOption('controllerFormat', 'WeiTest\Fixtures\App\Controller\%controller%');
     }
@@ -42,7 +42,7 @@ class AppTest extends TestCase
         $this->assertEquals(array(
             'controllers' => array(
                 'ControllerNotFound' => array(
-                    'WeiTest\Fixtures\app\controllers\ControllerNotFound'
+                    'WeiTest\Fixtures\App\Controller\ControllerNotFound'
                 )
             )
         ), $result);
@@ -77,7 +77,7 @@ class AppTest extends TestCase
         $this->assertEquals(array(
             'controllers' => array(
                 'Controller\Admin' => array(
-                    'WeiTest\Fixtures\app\controllers\Controller\Admin'
+                    'WeiTest\Fixtures\App\Controller\Controller\Admin'
                 )
         )), $result);
     }
@@ -90,7 +90,7 @@ class AppTest extends TestCase
             'actions' => array(
                 'ActionNotFound' => array(
                     'test' => array(
-                        'WeiTest\Fixtures\app\controllers\Test'
+                        'WeiTest\Fixtures\App\Controller\Test'
                     )
                 )
             )
@@ -301,7 +301,7 @@ class AppTest extends TestCase
             'RuntimeException',
             implode("\n", array(
                 'The page you requested was not found',
-                ' - controller "notFound" not found (class "WeiTest\Fixtures\app\controllers\NotFound")'
+                ' - controller "notFound" not found (class "WeiTest\Fixtures\App\Controller\NotFound")'
             )),
             404
         );
@@ -316,7 +316,7 @@ class AppTest extends TestCase
             'RuntimeException',
             implode("\n", array(
                 'The page you requested was not found',
-                ' - method "notFoundAction" not found in controller "test" (class "WeiTest\Fixtures\app\controllers\Test")'
+                ' - method "notFoundAction" not found in controller "test" (class "WeiTest\Fixtures\App\Controller\Test")'
             )),
             404
         );

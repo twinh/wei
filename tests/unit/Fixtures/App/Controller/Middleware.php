@@ -1,6 +1,6 @@
 <?php
 
-namespace WeiTest\Fixtures\app\controllers;
+namespace WeiTest\Fixtures\App\Controller;
 
 use WeiTest\Fixtures\app\middleware\After;
 use WeiTest\Fixtures\app\middleware\All;

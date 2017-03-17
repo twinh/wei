@@ -1,6 +1,6 @@
 <?php
 
-namespace WeiTest\Fixtures\app\controllers\admin;
+namespace WeiTest\Fixtures\App\Controller\Admin;
 
 class Index extends \Wei\BaseController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace WeiTest\Fixtures\app\controllers;
+namespace WeiTest\Fixtures\App\Controller;
 
 class Test extends \Wei\BaseController
 {
