@@ -15,7 +15,7 @@ class AppTest extends TestCase
 
         $this->view->setDirs(__DIR__ . '/Fixtures/app/views');
 
-        $this->app->setOption('controllerFormat', 'WeiTest\Fixtures\app\controllers\%controller%');
+        $this->app->setOption('controllerFormat', 'WeiTest\Fixtures\App\Controller\%controller%');
     }
 
     protected function tearDown()
