@@ -386,7 +386,7 @@ class App extends Base
             $namespace = $this->getNamespace();
             $class = str_replace(
                 array('%namespace%', '%controller%'),
-                array($namespace, $controller),
+                array(ucfirst($namespace), ucfirst($controller)),
                 $this->controllerFormat
             );
 
