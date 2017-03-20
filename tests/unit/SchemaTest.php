@@ -16,10 +16,10 @@ class SchemaTest extends TestCase
         parent::setUp();
 
         wei()->schema->db = wei()->mysqlDb;
-        wei()->schema->setOption([
+        wei()->schema->setOption(array(
             'charset' => 'utf8mb4',
             'collate' => 'utf8mb4_unicode_ci',
-        ]);
+        ));
     }
 
     /**
