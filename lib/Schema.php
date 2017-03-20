@@ -54,12 +54,12 @@ class Schema extends Base
     /**
      * @var string
      */
-    protected $charset = 'utf8mb4';
+    protected $charset = '';
 
     /**
      * @var string
      */
-    protected $collate = 'utf8mb4_unicode_ci';
+    protected $collate = '';
 
     /**
      * @var string
@@ -111,6 +111,11 @@ class Schema extends Base
         'change' => false,
     );
 
+    /**
+     * The default values for types, false means no default value
+     *
+     * @var array
+     */
     protected $typeDefaults = array(
         self::TYPE_BIG_INT => '0',
         self::TYPE_BOOL => '0',
@@ -222,6 +227,12 @@ class Schema extends Base
         return $this;
     }
 
+    /**
+     * Add a drop column command
+     *
+     * @param string $column
+     * @return $this
+     */
     public function dropColumn($column)
     {
         $this->isChange = true;
@@ -230,11 +241,20 @@ class Schema extends Base
         return $this;
     }
 
+    /**
+     * Set position for current column
+     *
+     * @param string $column
+     * @return $this
+     */
     public function after($column)
     {
         return $this->updateLastColumn('after', $column);
     }
 
+    /**
+     * @return $this
+     */
     public function change()
     {
         $this->isChange = true;
@@ -254,6 +274,11 @@ class Schema extends Base
         return $this;
     }
 
+    /**
+     * Return create/change table sql
+     *
+     * @return string
+     */
     public function getSql()
     {
         $table = $this->table;
@@ -274,6 +299,9 @@ class Schema extends Base
         return $sql;
     }
 
+    /**
+     * @return string
+     */
     protected function getCreateDefinition()
     {
         $columnSqls = array();
@@ -290,7 +318,12 @@ class Schema extends Base
         return $sql;
     }
 
-    protected function getIndexSql($index, $options)
+    /**
+     * @param string $index
+     * @param array $options
+     * @return string
+     */
+    protected function getIndexSql($index, array $options)
     {
         $sql = ' ';
         if ($options['type'] != 'index') {
@@ -327,6 +360,11 @@ class Schema extends Base
         return $sql;
     }
 
+    /**
+     * @param string $column
+     * @param array $options
+     * @return string
+     */
     protected function getColumnSql($column, array $options)
     {
         $sql = '';
@@ -348,7 +386,12 @@ class Schema extends Base
         return $sql . $this->buildColumnSql($column, $options);
     }
 
-    protected function buildColumnSql($column, $options)
+    /**
+     * @param string $column
+     * @param array $options
+     * @return string
+     */
+    protected function buildColumnSql($column, array $options)
     {
         $sql = $column . ' ' . $this->getTypeSql($options) . ' ';
         $sql .= $this->getUnsignedSql($options);
@@ -375,16 +418,30 @@ class Schema extends Base
         return $sql;
     }
 
+    /**
+     * @param string $column
+     * @return string
+     */
     protected function getChangeColumnSql($column)
     {
         return 'CHANGE COLUMN ' . $column . ' ';
     }
 
+    /**
+     * @param string $column
+     * @return string
+     */
     protected function getDropColumnSql($column)
     {
         return 'DROP COLUMN ' . $column;
     }
 
+    /**
+     * @param string $column
+     * @param array $options
+     * @return string
+     * @throws \Exception when column not found in table
+     */
     protected function getRenameColumnSql($column, $options)
     {
         $dbColumns = $this->db->fetchAll("SHOW FULL COLUMNS FROM $this->table");
@@ -417,7 +474,11 @@ class Schema extends Base
         return $this->getChangeColumnSql($column) . $sql;
     }
 
-    protected function getTypeSql($options)
+    /**
+     * @param array $options
+     * @return string
+     */
+    protected function getTypeSql(array $options)
     {
         $driver = $this->db->getDriver();
         $typeMap = $this->typeMaps[$driver];
@@ -440,7 +501,11 @@ class Schema extends Base
         return $sql;
     }
 
-    protected function getUnsignedSql($options)
+    /**
+     * @param array $options
+     * @return string
+     */
+    protected function getUnsignedSql(array $options)
     {
         if (isset($options['unsigned'])) {
             return $options['unsigned'] ? 'unsigned ' : '';
@@ -453,12 +518,20 @@ class Schema extends Base
         return '';
     }
 
+    /**
+     * @param bool $null
+     * @return string
+     */
     protected function getNullSql($null)
     {
         return $null ? 'NULL' : 'NOT NULL';
     }
 
-    protected function getDefaultSql($options)
+    /**
+     * @param array $options
+     * @return string
+     */
+    protected function getDefaultSql(array $options)
     {
         $hasDefault = array_key_exists('default', $options);
         if (!$hasDefault && !$this->autoDefault) {
@@ -499,6 +572,8 @@ class Schema extends Base
     }
 
     /**
+     * Execute a drop table sql
+     *
      * @param string $table
      * @param bool $ifExists
      * @return $this
@@ -517,6 +592,8 @@ class Schema extends Base
     }
 
     /**
+     * Execute a drop table if exist sql
+     *
      * @param string $table
      * @return $this
      */
@@ -556,87 +633,192 @@ class Schema extends Base
         return $this;
     }
 
+    /**
+     * Add a big int column
+     *
+     * @param string $column
+     * @return $this
+     */
     public function bigInt($column)
     {
         return $this->addColumn($column, self::TYPE_BIG_INT);
     }
 
+    /**
+     * Add a char column
+     *
+     * @param string $column
+     * @return $this
+     */
     public function bool($column)
     {
         return $this->addColumn($column, self::TYPE_BOOL);
     }
 
+    /**
+     * Add a char column
+     *
+     * @param string $column
+     * @param int $length
+     * @return $this
+     */
     public function char($column, $length = 255)
     {
         return $this->addColumn($column, self::TYPE_CHAR, array('length' => $length));
     }
 
+    /**
+     * Add a decimal column
+     *
+     * @param string $column
+     * @param int $length
+     * @param int $scale
+     * @return $this
+     */
     public function decimal($column, $length, $scale = 2)
     {
         return $this->addColumn($column, self::TYPE_DECIMAL, array('length' => $length, 'scale' => $scale));
     }
 
+    /**
+     * Add a double column
+     *
+     * @param string $column
+     * @return $this
+     */
     public function double($column)
     {
         return $this->addColumn($column, self::TYPE_DOUBLE);
     }
 
+    /**
+     * Add a string(varchar) column
+     *
+     * @param string $column
+     * @param int $length
+     * @return $this
+     */
     public function string($column, $length = 255)
     {
         return $this->addColumn($column, self::TYPE_STRING, array('length' => $length));
     }
 
+    /**
+     * Add a int column
+     *
+     * @param string $column
+     * @param int|null $length
+     * @return $this
+     */
     public function int($column, $length = null)
     {
         return $this->addColumn($column, self::TYPE_INT, array('length' => $length));
     }
 
+    /**
+     * Add a long text column
+     *
+     * @param $column
+     * @return $this
+     */
     public function longText($column)
     {
         return $this->addColumn($column, self::TYPE_LONG_TEXT);
     }
 
+    /**
+     * Add a medium int column
+     *
+     * @param $column
+     * @return $this
+     */
     public function mediumInt($column)
     {
         return $this->addColumn($column, self::TYPE_MEDIUM_INT);
     }
 
+    /**
+     * Add a medium text column
+     *
+     * @param $column
+     * @return $this
+     */
     public function mediumText($column)
     {
         return $this->addColumn($column, self::TYPE_MEDIUM_TEXT);
     }
 
+    /**
+     * Add a tiny int column
+     *
+     * @param $column
+     * @param int|null $length
+     * @return $this
+     */
     public function tinyInt($column, $length = null)
     {
         return $this->addColumn($column, self::TYPE_TINY_INT, array('length' => $length));
     }
 
+    /**
+     * Add a small int column
+     *
+     * @param $column
+     * @param int|null $length
+     * @return $this
+     */
     public function smallInt($column, $length = null)
     {
         return $this->addColumn($column, self::TYPE_SMALL_INT, array('length' => $length));
     }
 
+    /**
+     * Add a text column
+     *
+     * @param $column
+     * @return $this
+     */
     public function text($column)
     {
         return $this->addColumn($column, self::TYPE_TEXT);
     }
 
+    /**
+     * Add a date column
+     *
+     * @param string $column
+     * @return $this
+     */
     public function date($column)
     {
         return $this->addColumn($column, self::TYPE_DATE);
     }
 
+    /**
+     * Add a datetime column
+     *
+     * @param string $column
+     * @return $this
+     */
     public function datetime($column)
     {
         return $this->addColumn($column, self::TYPE_DATETIME);
     }
 
+    /**
+     * Add a timestamp column
+     *
+     * @param string $column
+     * @return $this
+     */
     public function timestamp($column)
     {
         return $this->addColumn($column, self::TYPE_TIMESTAMP);
     }
 
     /**
+     * Set comment for current column
+     *
      * @param string $comment
      * @return $this
      */
@@ -646,6 +828,8 @@ class Schema extends Base
     }
 
     /**
+     * Set default value for current column
+     *
      * @param mixed $value
      * @return $this
      */
@@ -655,6 +839,8 @@ class Schema extends Base
     }
 
     /**
+     * Set nullable attribute for current column
+     *
      * @param bool $nullable
      * @return $this
      */
@@ -664,6 +850,8 @@ class Schema extends Base
     }
 
     /**
+     * Set unsigned attribute for current column
+     *
      * @param bool $unsigned
      * @return $this
      */
@@ -673,6 +861,8 @@ class Schema extends Base
     }
 
     /**
+     *  Add a unique index to specified column
+     *
      * @param string|array $columns
      * @param string|null $name
      * @return $this
@@ -683,6 +873,8 @@ class Schema extends Base
     }
 
     /**
+     * Add a primary index to specified column
+     *
      * @param string|array $columns
      * @param string|null $name
      * @return $this
@@ -693,6 +885,8 @@ class Schema extends Base
     }
 
     /**
+     * Add a index to specified column
+     *
      * @param string|array $columns
      * @param string|null $name
      * @return $this
@@ -702,6 +896,12 @@ class Schema extends Base
         return $this->addIndex($columns, $name, __FUNCTION__);
     }
 
+    /**
+     * @param string|array $columns
+     * @param string $name
+     * @param string $type
+     * @return $this
+     */
     protected function addIndex($columns, $name, $type)
     {
         $columns = (array) $columns;
@@ -715,12 +915,18 @@ class Schema extends Base
         return $this;
     }
 
-    protected function generateIndexName($columns)
+    /**
+     * @param array $columns
+     * @return string
+     */
+    protected function generateIndexName(array $columns)
     {
         return implode('_', $columns);
     }
 
     /**
+     * Set current column is auto increment
+     *
      * @return $this
      */
     public function autoIncrement()
@@ -731,7 +937,7 @@ class Schema extends Base
     }
 
     /**
-     * Helper
+     * Add a int auto increment id to table
      *
      * @param string $column
      * @return $this
@@ -743,16 +949,31 @@ class Schema extends Base
         return $this->primary($column);
     }
 
+    /**
+     * Add created_at and updated_at columns to current table
+     *
+     * @return $this
+     */
     public function timestamps()
     {
         return $this->timestamp('created_at')->timestamp('updated_at');
     }
 
+    /**
+     * Add created_by and updated_by columns to current table
+     *
+     * @return $this
+     */
     public function userstamps()
     {
         return $this->int('created_by')->int('updated_by');
     }
 
+    /**
+     * Add deleted_at and deleted_by columns to current table
+     *
+     * @return $this
+     */
     public function softDeletable()
     {
         return $this->timestamp('deleted_at')->int('deleted_by');
@@ -782,6 +1003,12 @@ class Schema extends Base
         return $this->timestamp('deleteTime')->int('deleteUser');
     }
 
+    /**
+     * Set the comment for current table
+     *
+     * @param string $comment
+     * @return $this
+     */
     public function tableComment($comment)
     {
         $this->tableComment = $comment;
@@ -789,6 +1016,13 @@ class Schema extends Base
         return $this;
     }
 
+    /**
+     * Add a rename column command
+     *
+     * @param string $from
+     * @param string $to
+     * @return $this
+     */
     public function renameColumn($from, $to)
     {
         $this->columns[$from] = array('command' => 'rename', 'from' => $from, 'to' => $to);
@@ -796,6 +1030,13 @@ class Schema extends Base
         return $this;
     }
 
+    /**
+     * Execute a rename table sql
+     *
+     * @param string $from
+     * @param string $to
+     * @return $this
+     */
     public function rename($from, $to)
     {
         $sql = sprintf('RENAME TABLE %s TO %s', $from, $to);
