@@ -1237,7 +1237,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Adds one or more restrictions to the query results, forming a logical
      * conjunction with any previously specified restrictions
      *
-     * @param string $conditions The WHERE conditions
+     * @param string|array $conditions The WHERE conditions
      * @param array $params The condition parameters
      * @param array $types The parameter types
      * @return $this
