@@ -420,7 +420,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
         if (!$this->isColl) {
             $this->triggerCallback('beforeDestroy');
-            $this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
+            $this->executeDestroy();
             $this->isDestroyed = true;
             $this->triggerCallback('afterDestroy');
         } else {
@@ -430,6 +430,11 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         }
 
         return $this;
+    }
+
+    protected function executeDestroy()
+    {
+        $this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
     }
 
     /**
