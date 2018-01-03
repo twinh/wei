@@ -136,7 +136,7 @@ class View extends Base implements \ArrayAccess
     /**
      * Assign variables to template
      *
-     * @param string $name  The name of the variable
+     * @param string|array $name  The name of the variable or variables array
      * @param mixed  $value The value of the variable
      * @return $this
      */
