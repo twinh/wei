@@ -326,7 +326,7 @@ class Response extends Base
     /**
      * Set the header string
      *
-     * @param  string $name The header name
+     * @param  string|array $name The header name or header array
      * @param  string|array $values The header values
      * @param  bool $replace Whether replace the exists values or not
      * @return $this
