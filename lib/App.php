@@ -126,7 +126,7 @@ class App extends Base
 
         foreach ($classes as $class) {
             if (!class_exists($class)) {
-                $notFound['controllers'][$controller][]  = $class;
+                $notFound['controllers'][$controller][] = $class;
                 continue;
             }
             if (!$this->isActionAvailable($class, $action)) {
@@ -140,6 +140,7 @@ class App extends Base
             $this->request->set($params);
             try {
                 $instance = $this->getControllerInstance($class);
+
                 return $this->execute($instance, $action);
             } catch (\RuntimeException $e) {
                 if ($e->getCode() === self::FORWARD) {
@@ -208,6 +209,7 @@ class App extends Base
             $response = $instance->$method($app->request, $app->response);
 
             $instance->after($app->request, $response);
+
             return $response;
         };
 
@@ -220,6 +222,7 @@ class App extends Base
             } else {
                 $result = $callback();
             }
+
             return $result;
         };
 
@@ -236,14 +239,15 @@ class App extends Base
     protected function getMiddleware($instance, $action)
     {
         $results = array();
-        $middleware = (array)$instance->getOption('middleware');
+        $middleware = (array) $instance->getOption('middleware');
         foreach ($middleware as $class => $options) {
-            if ((!isset($options['only']) || in_array($action, (array)$options['only'])) &&
-                (!isset($options['except']) || !in_array($action, (array)$options['except']))
+            if ((!isset($options['only']) || in_array($action, (array) $options['only'])) &&
+                (!isset($options['except']) || !in_array($action, (array) $options['except']))
             ) {
                 $results[$class] = $options;
             }
         }
+
         return $results;
     }
 
@@ -260,6 +264,7 @@ class App extends Base
             // Render default template and use $response as template variables
             case is_array($response) :
                 $content = $this->view->render($this->getDefaultTemplate(), $response);
+
                 return $this->response->setContent($content);
 
             // Response directly
@@ -288,6 +293,7 @@ class App extends Base
         if (!$this->namespace) {
             $this->namespace = $this->request->get('namespace');
         }
+
         return $this->namespace;
     }
 
@@ -300,6 +306,7 @@ class App extends Base
     public function setNamespace($namespace)
     {
         $this->namespace = $namespace;
+
         return $this;
     }
 
@@ -322,6 +329,7 @@ class App extends Base
     public function setController($controller)
     {
         $this->controller = $controller;
+
         return $this;
     }
 
@@ -344,6 +352,7 @@ class App extends Base
     public function setAction($action)
     {
         $this->action = $action;
+
         return $this;
     }
 
@@ -413,6 +422,7 @@ class App extends Base
     public function setControllerFormat($controllerFormat)
     {
         $this->controllerFormat = $controllerFormat;
+
         return $this;
     }
 
@@ -425,6 +435,7 @@ class App extends Base
     public function setControllerMap(array $controllerMap)
     {
         $this->controllerMap = $controllerMap + $this->controllerMap;
+
         return $this;
     }
 
@@ -442,6 +453,7 @@ class App extends Base
                 'app' => $this,
             ));
         }
+
         return $this->controllerInstances[$class];
     }
 
