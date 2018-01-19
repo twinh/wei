@@ -1296,7 +1296,7 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $result = $this->db->insertBatch('member', array(
+        $result = $this->db->batchInsert('member', array(
             array(
                 'group_id' => '1',
                 'name' => 'twin',
