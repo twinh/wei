@@ -331,7 +331,7 @@ class Db extends Base
      * @param string $extra A extra string concat after sql, like "ON DUPLICATE KEY UPDATE ..."
      * @return int The number of inserted rows
      */
-    public function insertBatch($table, array $data, $extra = null)
+    public function batchInsert($table, array $data, $extra = null)
     {
         $table = $this->getTable($table);
         $field = implode(', ', array_keys($data[0]));
@@ -363,6 +363,14 @@ class Db extends Base
         $extra && $query .= ' ' . $extra;
 
         return $this->executeUpdate($query, $values);
+    }
+
+    /**
+     * @deprecated Use batchInsert instead.
+     */
+    public function insertBatch($table, array $data, $extra = null)
+    {
+        return $this->batchInsert($table, $data, $extra);
     }
 
     /**
