@@ -444,7 +444,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function reload()
     {
-        $this->data = (array)$this->db->select($this->table, $this->get($this->primaryKey));
+        $this->data = (array)$this->db->select($this->table, array($this->primaryKey => $this->get($this->primaryKey)));
         $this->changedData = array();
         $this->isChanged = false;
         $this->triggerCallback('afterLoad');
@@ -471,7 +471,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             unset($this->data[$key]);
             // Ignore default data
             if ($record instanceof $this) {
-                $newData[$record['id']] = $record;
+                $newData[$record[$this->primaryKey]] = $record;
             }
         }
         $this->data = $newData;
@@ -486,13 +486,13 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         // 3. Removes missing rows
         $existIds = array();
         foreach ($data as $row) {
-            if (isset($row['id']) && $row['id'] !== null) {
-                $existIds[] = $row['id'];
+            if (isset($row[$this->primaryKey]) && $row[$this->primaryKey] !== null) {
+                $existIds[] = $row[$this->primaryKey];
             }
         }
         /** @var $record Record */
         foreach ($this->data as $key => $record) {
-            if (!in_array($record['id'], $existIds)) {
+            if (!in_array($record[$this->primaryKey], $existIds)) {
                 $record->destroy();
                 unset($this->data[$key]);
             }
@@ -503,8 +503,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             if ($sort) {
                 $row[$sort] = $index;
             }
-            if (isset($row['id']) && isset($this->data[$row['id']])) {
-                $this->data[$row['id']]->fromArray($row);
+            if (isset($row[$this->primaryKey]) && isset($this->data[$row[$this->primaryKey]])) {
+                $this->data[$row[$this->primaryKey]]->fromArray($row);
             } else {
                 $this[] = $this->db($this->table)->fromArray($extraData + $row);
             }
