@@ -7,6 +7,7 @@ Changelog
 * isCallback: 回调函数除了闭包,还允许传入字符串,数字
 * Record: reload,saveColl方法使用$this->primaryKey代替id字符串
 * Db: 废弃insertBatch方法，改名为batchInsert
+* Wei: 移除 PHP 5.3 的支持
 
 ## 0.9.23 (2017-03-20)
 

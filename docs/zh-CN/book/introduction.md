@@ -41,4 +41,4 @@ $result = $wei->db->fetch("SELECT 1 + 2");
 
 ## 系统要求
 
-PHP 5.3.4+
+PHP 5.4+
