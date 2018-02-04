@@ -793,4 +793,111 @@ class RequestTest extends TestCase
         $this->request->setMethod('put');
         $this->assertEquals('PUT', $this->request->getMethod());
     }
+
+    protected function initExtraKey()
+    {
+        // 移除数据避免干扰
+        unset($this->request['test']);
+        $this->assertArrayNotHasKey('test', $this->request);
+
+        $extraKeys = $this->request->getOption('extraKeys');
+        $this->assertArrayNotHasKey('test', $extraKeys);
+
+        // 触发了 &offsetGet 产生了 test 键名
+        $this->request['test'];
+    }
+
+    public function testExtraKeyInit()
+    {
+        $this->initExtraKey();
+
+        $extraKeys = $this->request->getOption('extraKeys');
+        $this->assertArrayHasKey('test', $extraKeys);
+
+        $this->assertArrayNotHasKey('test', $this->request);
+    }
+
+    public function testExtraKeyToArray()
+    {
+        $this->initExtraKey();
+
+        $array = $this->request->toArray();
+
+        $this->assertArrayNotHasKey('test', $array, 'toArray不会带上额外键名');
+    }
+
+    public function testExtraKeyForEach()
+    {
+        $this->initExtraKey();
+
+        $array = [];
+        foreach ($this->request as $key => $value) {
+            $array[$key] = $value;
+        }
+
+        $this->assertArrayNotHasKey('test', $array, 'forEach不会带上额外键名');
+    }
+
+    public function testExtraKeySet()
+    {
+        $this->initExtraKey();
+
+        // 触发的是offsetSet,因此不会生成extraKey
+        $this->request['test'] = 'value';
+
+        $this->assertArrayNotHasKey('test', $this->request->getOption('extraKeys'));
+
+        $this->assertEquals('value', $this->request->toArray()['test']);
+    }
+
+    public function testExtraKeySetMultiLevel()
+    {
+        $this->initExtraKey();
+
+        // 触发的是offsetGet,因此会生成extraKey
+        $this->request['test']['level2'] = 'value';
+
+        $this->assertArrayHasKey('test', $this->request->getOption('extraKeys'));
+
+        $this->assertEquals('value', $this->request['test']['level2']);
+
+        $this->assertEquals('value', $this->request->toArray()['test']['level2']);
+    }
+
+    public function testExtraKeyCount()
+    {
+        if (isset($this->request['test'])) {
+            unset($this->request['test']);
+        }
+
+        $count = count($this->request);
+
+        $this->initExtraKey();
+
+        $this->assertCount($count, $this->request);
+    }
+
+    public function testExtraKeyUnset()
+    {
+        $this->initExtraKey();
+
+        $this->request['test']['level2'] = 'value';
+
+        unset($this->request['test']);
+
+        $this->assertArrayNotHasKey('test', $this->request->getOption('extraKeys'));
+        $this->assertArrayNotHasKey('test', $this->request->toArray());
+    }
+
+    public function testExtraKeySetNull()
+    {
+        $this->initExtraKey();
+
+        // 主动设置了,不会在extraKey里面
+        $this->request['test'] = null;
+
+        $this->assertArrayNotHasKey('test', $this->request->getOption('extraKeys'));
+
+        $this->assertArrayHasKey('test', $this->request->toArray());
+    }
 }
