@@ -297,7 +297,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         }
         $options = $options + $this->defaultOptions;
 
-        $http = new self($options);
+        $http = new static($options);
         $http->execute();
 
         return $http;
