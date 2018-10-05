@@ -3,7 +3,6 @@
 namespace WeiTest;
 
 use PDO;
-use WeiTest\Db\Member;
 
 /**
  * @property \Wei\Db db
@@ -1926,7 +1925,7 @@ class DbTest extends TestCase
 
         $this->assertEquals($groupId + 2, $member['group_id']);
 
-        $member->decr('group_id', 1);
+        $member->decr('group_id');
         $member->save();
         $member->reload();
 
