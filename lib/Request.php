@@ -262,6 +262,19 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     }
 
     /**
+     * Check if the parameter has value
+     *
+     * For example, 0, ' ', 0.0 are all have value
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function has($name)
+    {
+        return isset($this->data[$name]) && !in_array($this->data[$name], ['', null, false, array()], true);
+    }
+
+    /**
      * Check if the offset exists
      *
      * Use isset to make sure ArrayAccess acts more like array
