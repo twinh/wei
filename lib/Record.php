@@ -846,7 +846,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $data
      * @return $this
      */
-    public function findOrInit($conditions, $data = array())
+    public function findOrInit($conditions = false, $data = array())
     {
         if (!$this->find($conditions)) {
             // Reset status when record not found
