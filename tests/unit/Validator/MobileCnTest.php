@@ -31,6 +31,8 @@ class MobileCnTest extends TestCase
             array('18812345678'),
             array('14012345678'),
             array('17012345678'),
+            array('16000000000'),
+            array('19000000000'),
         );
     }
 
@@ -40,8 +42,6 @@ class MobileCnTest extends TestCase
             array('10000000000'),
             array('11000000000'),
             array('12000000000'),
-            array('16000000000'),
-            array('19000000000'),
             array('88888888'),
             array('not digit'),
             array('0754-8888888'),
