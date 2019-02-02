@@ -205,10 +205,10 @@ class Error extends Base
      * Trigger a error handler
      *
      * @param string $type The type of error handlers
-     * @param \Exception $exception
+     * @param \Exception|\Throwable $exception
      * @return bool
      */
-    public function triggerHandler($type, \Exception $exception)
+    public function triggerHandler($type, $exception)
     {
         foreach ($this->handlers[$type] as $handler) {
             $result = call_user_func_array($handler, array($exception, $this->wei));
@@ -222,9 +222,9 @@ class Error extends Base
     /**
      * The exception handler to render pretty message
      *
-     * @param \Exception $exception
+     * @param \Exception|\Throwable $exception
      */
-    public function handleException(\Exception $exception)
+    public function handleException($exception)
     {
         if (!$this->ignorePrevHandler && $this->prevExceptionHandler) {
             call_user_func($this->prevExceptionHandler, $exception);
@@ -243,7 +243,10 @@ class Error extends Base
         restore_exception_handler();
     }
 
-    public function internalHandleException(\Exception $e)
+    /**
+     * @param \Exception|\Throwable $e
+     */
+    public function internalHandleException($e)
     {
         $code = $e->getCode();
         $debug = $this->wei->isDebug();
@@ -274,10 +277,10 @@ class Error extends Base
     /**
      * Render exception message
      *
-     * @param \Exception $e
+     * @param \Exception|\Throwable $e
      * @param bool $debug Whether show debug trace
      */
-    public function displayException(\Exception $e, $debug)
+    public function displayException($e, $debug)
     {
         // Render CLI message
         if ($this->enableCli && php_sapi_name() == 'cli') {
@@ -343,9 +346,9 @@ class Error extends Base
     /**
      * Render exception message for CLI
      *
-     * @param \Exception $e
+     * @param \Exception|\Throwable $e
      */
-    protected function displayCliException(\Exception $e)
+    protected function displayCliException($e)
     {
         echo 'Exception', PHP_EOL,
         $this->highlight($e->getMessage()),
@@ -360,10 +363,10 @@ class Error extends Base
     }
 
     /**
-     * @param \Exception $e
+     * @param \Exception|\Throwable $e
      * @return int
      */
-    protected function getExitCode(\Exception $e)
+    protected function getExitCode($e)
     {
         $code = $e->getCode();
         if (!$code || !is_numeric($code)) {
