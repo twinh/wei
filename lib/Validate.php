@@ -287,7 +287,7 @@ class Validate extends Base
     {
         $props = $messages = array();
 
-        $props['validator'] = $this;
+        $props['plugins/app/js/validation'] = $this;
 
         // Prepare name for validator
         if (isset($this->names[$field])) {
