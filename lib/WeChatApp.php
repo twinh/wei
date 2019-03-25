@@ -128,8 +128,8 @@ class WeChatApp extends Base
             $this->query = &$_GET;
         }
 
-        if (is_null($this->postData) && isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
-            $this->postData = $GLOBALS['HTTP_RAW_POST_DATA'];
+        if (is_null($this->postData)) {
+            $this->postData = file_get_contents('php://input');
         }
 
         $this->parse();
