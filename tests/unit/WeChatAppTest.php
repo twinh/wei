@@ -67,15 +67,6 @@ class WeChatAppTest extends TestCase
         $this->assertEquals($rand, ob_get_clean());
     }
 
-    public function testHttpRawPostData()
-    {
-        $GLOBALS['HTTP_RAW_POST_DATA'] = 'test';
-
-        $app = new WeChatApp(array('wei' => $this->wei));
-
-        $this->assertEquals('test', $app->getOption('postData'));
-    }
-
     /**
      * @dataProvider providerForInputAndOutput
      */

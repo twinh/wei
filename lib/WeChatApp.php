@@ -41,7 +41,7 @@ class WeChatApp extends Base
     protected $encodingAesKey;
 
     /**
-     * The HTTP raw post data, equals to $GLOBALS['HTTP_RAW_POST_DATA'] on default
+     * The HTTP raw post data
      *
      * @var string
      */
@@ -118,7 +118,6 @@ class WeChatApp extends Base
      * Constructor
      *
      * @param array $options
-     * @global string $GLOBALS ['HTTP_RAW_POST_DATA']
      */
     public function __construct($options = array())
     {
