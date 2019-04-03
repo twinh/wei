@@ -66,7 +66,7 @@ class WeChatApp extends Base
         'location' => null,
         'voice' => null,
         'video' => null,
-        'link' => null
+        'link' => null,
     );
 
     /**
@@ -502,7 +502,7 @@ class WeChatApp extends Base
     public function sendText($content)
     {
         return $this->send('text', array(
-            'Content' => $content
+            'Content' => $content,
         ));
     }
 
@@ -522,8 +522,8 @@ class WeChatApp extends Base
                 'Title' => $title,
                 'Description' => $description,
                 'MusicUrl' => $url,
-                'HQMusicUrl' => $hqUrl
-            )
+                'HQMusicUrl' => $hqUrl,
+            ),
         ));
     }
 
@@ -570,8 +570,8 @@ class WeChatApp extends Base
         $response = array(
             'ArticleCount' => count($articles),
             'Articles' => array(
-                'item' => array()
-            )
+                'item' => array(),
+            ),
         );
 
         foreach ($articles as $article) {
@@ -579,13 +579,13 @@ class WeChatApp extends Base
                 'title' => null,
                 'description' => null,
                 'picUrl' => null,
-                'url' => null
+                'url' => null,
             );
             $response['Articles']['item'][] = array(
                 'Title' => $article['title'],
                 'Description' => $article['description'],
                 'PicUrl' => $article['picUrl'],
-                'Url' => $article['url']
+                'Url' => $article['url'],
             );
         }
 
@@ -885,11 +885,11 @@ class WeChatApp extends Base
     public function send($type, array $response)
     {
         return $response + array(
-            'ToUserName' => $this->getFromUserName(),
-            'FromUserName' => $this->getToUserName(),
-            'MsgType' => $type,
-            'CreateTime' => time()
-        );
+                'ToUserName' => $this->getFromUserName(),
+                'FromUserName' => $this->getToUserName(),
+                'MsgType' => $type,
+                'CreateTime' => time(),
+            );
     }
 
     /**
@@ -905,7 +905,7 @@ class WeChatApp extends Base
         $this->rules['text'][] = array(
             'type' => $type,
             'keyword' => $keyword,
-            'fn' => $fn
+            'fn' => $fn,
         );
         return $this;
     }
@@ -1023,7 +1023,7 @@ class WeChatApp extends Base
         libxml_use_internal_errors($useErrors);
 
         // Fix the issue that XML parse empty data to new SimpleXMLElement object
-        return array_map('strval', (array)$array);
+        return array_map('strval', (array) $array);
     }
 
     /**
@@ -1035,20 +1035,13 @@ class WeChatApp extends Base
     public function prpcryptEncrypt($text, $encodingAesKey, $appId)
     {
         $key = base64_decode($encodingAesKey . '=');
+
         // 获得16位随机字符串，填充到明文之前
         $random = $this->getRandomStr();
-        $text = $random . pack('N', strlen($text)) . $text . $appId;
-        // 网络字节序
-        $module = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
+        $text = $random . pack("N", strlen($text)) . $text . $appId;
         $iv = substr($key, 0, 16);
-        // 使用自定义的填充方式对明文进行补位填充
         $text = $this->pkcs7Encode($text);
-        mcrypt_generic_init($module, $key, $iv);
-        // 加密
-        $encrypted = mcrypt_generic($module, $text);
-        mcrypt_generic_deinit($module);
-        mcrypt_module_close($module);
-        return base64_encode($encrypted);
+        return openssl_encrypt($text, 'AES-256-CBC', substr($key, 0, 32), OPENSSL_ZERO_PADDING, $iv);
     }
 
     /**
@@ -1057,24 +1050,16 @@ class WeChatApp extends Base
      * @param string $encrypted 需要解密的密文
      * @param string $encodingAesKey
      * @param string $appId
-     * @return string
+     * @return array
      */
     protected function prpcryptDecrypt($encrypted, $encodingAesKey, $appId)
     {
         try {
             $key = base64_decode($encodingAesKey . '=');
-            // 使用BASE64对需要解密的字符串进行解码
-            $cipherTextDec = base64_decode($encrypted);
-            $module = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
             $iv = substr($key, 0, 16);
-            mcrypt_generic_init($module, $key, $iv);
-
-            // 解密
-            $decrypted = mdecrypt_generic($module, $cipherTextDec);
-            mcrypt_generic_deinit($module);
-            mcrypt_module_close($module);
+            $decrypted = openssl_decrypt($encrypted, 'AES-256-CBC', substr($key, 0, 32), OPENSSL_ZERO_PADDING, $iv);
         } catch (\Exception $e) {
-            return array('code' => -2002, 'message' => 'AES解密失败', 'e' => (string)$e);
+            return array('code' => -2002, 'message' => 'AES解密失败', 'e' => (string) $e);
         }
 
         try {
@@ -1090,7 +1075,7 @@ class WeChatApp extends Base
             $xml = substr($content, 4, $xmlLen);
             $fromAppId = substr($content, $xmlLen + 4);
         } catch (\Exception $e) {
-            return array('code' => -2004, 'message' => '解密后得到的buffer非法', 'e' => (string)$e);
+            return array('code' => -2004, 'message' => '解密后得到的buffer非法', 'e' => (string) $e);
         }
 
         if ($fromAppId != $appId) {
@@ -1113,7 +1098,7 @@ class WeChatApp extends Base
             'Encrypt' => $encrypt,
             'MsgSignature' => $signature,
             'TimeStamp' => $this->query['timestamp'],
-            'Nonce' => $this->query['nonce']
+            'Nonce' => $this->query['nonce'],
         ))->asXML();
         return $xml;
     }
