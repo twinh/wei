@@ -2,7 +2,7 @@
 /**
  * Wei Framework
  *
- * @copyright   Copyright (c) 2008-2016 Twin Huang
+ * @copyright   Copyright (c) 2008-2020 Twin Huang
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
