@@ -126,6 +126,13 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     protected $method;
 
     /**
+     * The extra keys course by &offsetGet
+     *
+     * @var array
+     */
+    protected $extraKeys = [];
+
+    /**
      * Constructor
      *
      * @param array $options
@@ -162,7 +169,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function __invoke($name, $default = '')
     {
-        return isset($this->data[$name]) ? (string)$this->data[$name] : $default;
+        return isset($this->data[$name]) ? (string) $this->data[$name] : $default;
     }
 
     /**
@@ -187,7 +194,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function getInt($name, $min = null, $max = null)
     {
-        $value = (int)$this($name);
+        $value = (int) $this($name);
 
         if (!is_null($min) && $value < $min) {
             return $min;
@@ -255,6 +262,19 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     }
 
     /**
+     * Check if the parameter has value
+     *
+     * For example, 0, ' ', 0.0 are all have value
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function has($name)
+    {
+        return isset($this->data[$name]) && !in_array($this->data[$name], ['', null, false, array()], true);
+    }
+
+    /**
      * Check if the offset exists
      *
      * Use isset to make sure ArrayAccess acts more like array
@@ -277,6 +297,9 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function &offsetGet($offset)
     {
+        if (!isset($this->data[$offset])) {
+            $this->extraKeys[$offset] = true;
+        }
         return $this->data[$offset];
     }
 
@@ -289,6 +312,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function offsetSet($offset, $value)
     {
+        unset($this->extraKeys[$offset]);
         return $this->data[$offset] = $value;
     }
 
@@ -299,6 +323,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function offsetUnset($offset)
     {
+        unset($this->extraKeys[$offset]);
         unset($this->data[$offset]);
     }
 
@@ -315,12 +340,23 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     }
 
     /**
-     * Return the source array of the object
+     * Returns the request parameters
      *
      * @return array
      */
     public function toArray()
     {
+        return $this->getData();
+    }
+
+    /**
+     * Returns the request parameters
+     *
+     * @return array
+     */
+    public function getData()
+    {
+        $this->removeExtraKeys();
         return $this->data;
     }
 
@@ -331,7 +367,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function count()
     {
-        return count($this->data);
+        return count($this->getData());
     }
 
     /**
@@ -612,8 +648,8 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
             $header .= $name . ': ' . $value . "\r\n";
         }
         return $this->getServer('REQUEST_METHOD') . ' ' . $this->getUrl() . ' ' . $this->getServer('SERVER_PROTOCOL') . "\r\n"
-        . $header
-        . $this->getContent();
+            . $header
+            . $this->getContent();
     }
 
     /**
@@ -894,7 +930,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->data);
+        return new \ArrayIterator($this->getData());
     }
 
     /**
@@ -929,5 +965,18 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     public function getReferer()
     {
         return $this->getServer('HTTP_REFERER');
+    }
+
+    /**
+     * Removes extra keys in data
+     */
+    protected function removeExtraKeys()
+    {
+        foreach ($this->extraKeys as $offset => $value) {
+            if ($this->data[$offset] === null) {
+                unset($this->data[$offset]);
+            }
+        }
+        $this->extraKeys = [];
     }
 }

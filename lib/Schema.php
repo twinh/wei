@@ -675,7 +675,7 @@ class Schema extends Base
      * @param int $scale
      * @return $this
      */
-    public function decimal($column, $length, $scale = 2)
+    public function decimal($column, $length = 10, $scale = 2)
     {
         return $this->addColumn($column, self::TYPE_DECIMAL, array('length' => $length, 'scale' => $scale));
     }

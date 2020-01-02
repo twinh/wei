@@ -28,11 +28,11 @@ class Callback extends BaseValidator
      * Check if the input is valid by specified callback
      *
      * @param mixed $input The input value
-     * @param \Closure|null $fn  The callback to validate the input
+     * @param callable|null $fn  The callback to validate the input
      * @param string|null $message The custom invalid message
      * @return bool
      */
-    public function __invoke($input, \Closure $fn = null, $message = null)
+    public function __invoke($input, $fn = null, $message = null)
     {
         $fn && $this->storeOption('fn', $fn);
         $message && $this->storeOption('message', $message);

@@ -1,6 +1,15 @@
 Changelog
 =========
 
+## 0.9.24
+
+* Block: 增加js,css快捷方法
+* isCallback: 回调函数除了闭包,还允许传入字符串,数字
+* Record: reload,saveColl方法使用$this->primaryKey代替id字符串
+* Db: 废弃insertBatch方法，改名为batchInsert
+* Wei: 移除 PHP 5.3 的支持
+* Request: 解决 &offsetGet 导致 if (wei()->request['notExists']) 会在 request 内部的 data 产生额外键 notExists = null 的问题
+
 ## 0.9.23 (2017-03-20)
 
 * Schema: 增加MySQL表操作服务,支持创建修改数据表,字段等

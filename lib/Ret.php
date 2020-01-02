@@ -41,7 +41,7 @@ class Ret extends Base
     /**
      * Return operation failed result, and logs with an info level
      *
-     * @param string $message
+     * @param string|array $message
      * @param int $code
      * @param string $level
      * @return array

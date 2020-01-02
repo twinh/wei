@@ -107,4 +107,28 @@ class Block extends Base
     {
         return isset($this->data[$name]) ? $this->data[$name] : null;
     }
+
+    /**
+     * Start to capture a JavaScript block
+     *
+     * @param string $type
+     * @return string
+     * @throws \Exception
+     */
+    public function js($type = 'append')
+    {
+        return $this->start('js', $type);
+    }
+
+    /**
+     * Start to capture a CSS block
+     *
+     * @param string $type
+     * @return string
+     * @throws \Exception
+     */
+    public function css($type = 'append')
+    {
+        return $this->start('css', $type);
+    }
 }

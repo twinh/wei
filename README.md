@@ -5,7 +5,7 @@
 [![Latest Stable Version](http://img.shields.io/packagist/v/wei/wei.svg?style=flat-square)](https://packagist.org/packages/wei/wei)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](http://www.opensource.org/licenses/MIT)
 
-Wei is a micro-framework provided powerful but simple APIs for faster and easier PHP 5.3+ development.
+Wei is a micro-framework provided powerful but simple APIs for faster and easier PHP 5.4+ development.
 
 ## Getting started
 
