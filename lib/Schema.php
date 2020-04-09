@@ -328,8 +328,19 @@ class Schema extends Base
     protected function getIndexSql($index, array $options)
     {
         $sql = ' ';
-        if ($options['type'] != 'index') {
+
+        if (isset($options['command'])) {
+            $method = 'get' . ucfirst($options['command']) . 'IndexSql';
+
+            return $this->$method($index, $options);
+        }
+
+        if ($options['type'] !== 'index') {
             $sql .= strtoupper($options['type']) . ' ';
+        }
+
+        if ($this->isChange) {
+            $sql .= 'ADD ';
         }
 
         $sql .= 'KEY ' . $index . ' (' . implode(', ', $options['columns']) . ')';
@@ -474,6 +485,15 @@ class Schema extends Base
         }
 
         return $this->getChangeColumnSql($column) . $sql;
+    }
+
+    /**
+     * @param string $index
+     * @return string
+     */
+    protected function getDropIndexSql($index)
+    {
+        return 'DROP INDEX ' . $index;
     }
 
     /**
@@ -896,6 +916,22 @@ class Schema extends Base
     public function index($columns, $name = null)
     {
         return $this->addIndex($columns, $name, __FUNCTION__);
+    }
+
+    /**
+     * Add a drop index command
+     *
+     * @param string|array $index
+     * @return $this
+     */
+    public function dropIndex($index)
+    {
+        $this->isChange = true;
+        foreach ((array) $index as $item) {
+            $this->indexes[$item] = array('command' => 'drop');
+        }
+
+        return $this;
     }
 
     /**
