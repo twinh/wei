@@ -230,13 +230,15 @@ class Schema extends Base
     /**
      * Add a drop column command
      *
-     * @param string $column
+     * @param string|array $column
      * @return $this
      */
     public function dropColumn($column)
     {
         $this->isChange = true;
-        $this->columns[$column] = array('command' => 'drop');
+        foreach ((array) $column as $item) {
+            $this->columns[$item] = array('command' => 'drop');
+        }
 
         return $this;
     }
