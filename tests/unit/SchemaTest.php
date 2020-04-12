@@ -208,6 +208,36 @@ class SchemaTest extends TestCase
 ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", $sql);
     }
 
+    public function testNullableAndDefault()
+    {
+        wei()->schema->setOption('typeDefaults', [
+            Schema::TYPE_BIG_INT => '0',
+            Schema::TYPE_BOOL => '0',
+            Schema::TYPE_CHAR => '',
+            Schema::TYPE_DATE => null,
+            Schema::TYPE_DATETIME => null,
+            Schema::TYPE_DECIMAL => '0',
+            Schema::TYPE_DOUBLE => '0',
+            Schema::TYPE_INT => '0',
+            Schema::TYPE_LONG_TEXT => false,
+            Schema::TYPE_MEDIUM_INT => '0',
+            Schema::TYPE_MEDIUM_TEXT => false,
+            Schema::TYPE_TINY_INT => '0',
+            Schema::TYPE_SMALL_INT => '0',
+            Schema::TYPE_STRING => '',
+            Schema::TYPE_TEXT => false,
+            Schema::TYPE_TIMESTAMP => null,
+        ]);
+
+        $sql = wei()->schema->table('test')
+            ->timestamp('id')
+            ->getSql();
+
+        $this->assertEquals("CREATE TABLE test (
+  id timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", $sql);
+    }
+
     protected function createTestTable()
     {
         $this->schema->dropIfExists('test_products');

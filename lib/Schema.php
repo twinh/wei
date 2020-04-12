@@ -430,6 +430,15 @@ class Schema extends Base
     {
         $sql = $column . ' ' . $this->getTypeSql($options) . ' ';
         $sql .= $this->getUnsignedSql($options);
+
+        // Avoid automatic generate "NOT NULL DEFAULT NULL" error statement, convert it to "NULL DEFAULT NULL"
+        if (!array_key_exists('default', $options)
+            && $this->autoDefault
+            && $this->typeDefaults[$options['type']] === null
+            && !$this->defaultNullable) {
+            $options['nullable'] = true;
+        }
+
         $sql .= $this->getNullSql(isset($options['nullable']) ? $options['nullable'] : $this->defaultNullable);
 
         // Auto increment do not have default value
