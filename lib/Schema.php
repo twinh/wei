@@ -283,12 +283,11 @@ class Schema extends Base
      */
     public function getSql()
     {
-        $table = $this->table;
-
-        if ($this->hasTable($table)) {
+        if ($this->hasTable($this->table)) {
             $this->isChange = true;
         }
 
+        $table = $this->db->getTable($this->table);
         $columnSql = $this->getCreateDefinition();
 
         if ($this->isChange) {
@@ -606,7 +605,7 @@ class Schema extends Base
         if ($ifExists) {
             $sql .= 'IF EXISTS ';
         }
-        $sql .= $table;
+        $sql .= $this->db->getTable($table);
 
         $this->db->executeUpdate($sql);
 
@@ -633,12 +632,13 @@ class Schema extends Base
     public function hasTable($table)
     {
         $parts = explode('.', $table);
-        if (count($parts) == 1) {
+        if (count($parts) === 1) {
             $db = $this->db->getDbname();
             $table = $parts[0];
         } else {
             list($db, $table) = $parts;
         }
+        $table = $this->db->getTable($table);
 
         $tableExistsSql = $this->checkTableSqls[$this->db->getDriver()];
 
