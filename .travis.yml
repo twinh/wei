@@ -9,6 +9,7 @@ php:
   - 7.0
 
 services:
+  - mysql
   - mongodb
   - memcached
   - redis-server
