@@ -77,6 +77,11 @@ class Schema extends Base
     protected $autoUnsigned = true;
 
     /**
+     * @var bool
+     */
+    protected $defaultNullable = false;
+
+    /**
      * @var string
      */
     protected $autoIncrement = '';
@@ -399,6 +404,24 @@ class Schema extends Base
     }
 
     /**
+     * @param bool $defaultNullable
+     * @return $this
+     */
+    public function setDefaultNullable($defaultNullable)
+    {
+        $this->defaultNullable = (bool) $defaultNullable;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDefaultNullable()
+    {
+        return $this->defaultNullable;
+    }
+
+    /**
      * @param string $column
      * @param array $options
      * @return string
@@ -407,7 +430,7 @@ class Schema extends Base
     {
         $sql = $column . ' ' . $this->getTypeSql($options) . ' ';
         $sql .= $this->getUnsignedSql($options);
-        $sql .= $this->getNullSql(isset($options['nullable']) ? $options['nullable'] : false);
+        $sql .= $this->getNullSql(isset($options['nullable']) ? $options['nullable'] : $this->defaultNullable);
 
         // Auto increment do not have default value
         if ($this->autoIncrement == $column) {

@@ -185,6 +185,29 @@ class SchemaTest extends TestCase
 ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", $sql);
     }
 
+    public function testDefaultNullable()
+    {
+        $schema = wei()->schema;
+
+        $schema->setDefaultNullable(true);
+
+        $sql = $schema->table('test')
+            ->string('id')
+            ->getSql();
+        $this->assertEquals("CREATE TABLE test (
+  id varchar(255) NULL DEFAULT ''
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", $sql);
+
+        $schema->setDefaultNullable(false);
+
+        $sql = $schema->table('test')
+            ->string('id')
+            ->getSql();
+        $this->assertEquals("CREATE TABLE test (
+  id varchar(255) NOT NULL DEFAULT ''
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", $sql);
+    }
+
     protected function createTestTable()
     {
         $this->schema->dropIfExists('test_products');
