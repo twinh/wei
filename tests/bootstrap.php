@@ -84,3 +84,8 @@ foreach (array('TRAVIS', 'CODESHIP') as $ci) {
         wei(__DIR__ . '/config/' . strtolower($ci) . '.php');
     }
 }
+
+$localConfig = __DIR__ . '/config/local.php';
+if (is_file($localConfig)) {
+    wei($localConfig);
+}
