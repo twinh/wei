@@ -407,7 +407,7 @@ class Schema extends Base
     {
         $sql = $column . ' ' . $this->getTypeSql($options) . ' ';
         $sql .= $this->getUnsignedSql($options);
-        $sql .= $this->getNullSql(isset($options['null']) ? $options['null'] : false);
+        $sql .= $this->getNullSql(isset($options['nullable']) ? $options['nullable'] : false);
 
         // Auto increment do not have default value
         if ($this->autoIncrement == $column) {

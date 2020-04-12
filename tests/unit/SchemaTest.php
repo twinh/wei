@@ -174,6 +174,17 @@ class SchemaTest extends TestCase
         $this->dropTestTable();
     }
 
+    public function testNullable()
+    {
+        $sql = wei()->schema->table('test_null')
+            ->string('id')->nullable(true)
+            ->getSql();
+
+        $this->assertEquals("CREATE TABLE test_null (
+  id varchar(255) NULL DEFAULT ''
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", $sql);
+    }
+
     protected function createTestTable()
     {
         $this->schema->dropIfExists('test_products');
