@@ -12,6 +12,7 @@ services:
   - mysql
   - mongodb
   - memcached
+  - postgresql
   - redis-server
 
 before_script:
