@@ -327,26 +327,11 @@ class Db extends Base
         $placeholders = array();
         $values = array();
 
-        switch ($this->driver) {
-            default:
-            case 'mysql':
-            case 'pgsql':
-                foreach ($data as $row) {
-                    $placeholders[] = '(' . implode(', ', array_pad(array(), count($row), '?')) . ')';
-                    $values = array_merge($values, array_values($row));
-                }
-                $placeholder = 'VALUES ' . implode(', ', $placeholders);
-                break;
-
-            // For SQLite before 3.7.11, http://www.sqlite.org/releaselog/3_7_11.html
-            case 'sqlite':
-                foreach ($data as $row) {
-                    $placeholders[] = 'SELECT ' . implode(', ', array_pad(array(), count($row), '?'));
-                    $values = array_merge($values, array_values($row));
-                }
-                $placeholder = implode(' UNION ', $placeholders);
-                break;
+        foreach ($data as $row) {
+            $placeholders[] = '(' . implode(', ', array_pad(array(), count($row), '?')) . ')';
+            $values = array_merge($values, array_values($row));
         }
+        $placeholder = 'VALUES ' . implode(', ', $placeholders);
 
         $query = "INSERT INTO $table ($field) $placeholder";
         $extra && $query .= ' ' . $extra;
