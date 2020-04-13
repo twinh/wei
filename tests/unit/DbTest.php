@@ -1311,6 +1311,29 @@ class DbTest extends TestCase
         $this->assertEquals(2, $result);
     }
 
+    public function testInsertBatchFalseWillConvertTo0()
+    {
+        $this->initFixtures();
+
+        $result = $this->db->batchInsert('member', array(
+            array(
+                'group_id' => false,
+                'name' => 'twin',
+                'address' => 'test'
+            ),
+            array(
+                'group_id' => false,
+                'name' => 'test',
+                'address' => 'test'
+            )
+        ));
+        $this->assertEquals(2, $result);
+
+        $lastId = $this->db->lastInsertId();
+        $member = $this->db->select('member', $lastId);
+        $this->assertSame('0', $member['group_id']);
+    }
+
     public function testSlaveDb()
     {
         // Generate slave db configuration name

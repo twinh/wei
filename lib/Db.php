@@ -328,7 +328,7 @@ class Db extends Base
         $values = array();
 
         foreach ($data as $row) {
-            $placeholders[] = '(' . implode(', ', array_pad(array(), count($row), '?')) . ')';
+            $placeholders[] = '(' . $this->buildSqlObject($row, ', ', false) . ')';
             $values = array_merge($values, array_values($row));
         }
         $placeholder = 'VALUES ' . implode(', ', $placeholders);
