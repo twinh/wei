@@ -215,7 +215,7 @@ class Db extends Base
     public function __construct(array $options = array())
     {
         if (isset($options['global']) && true === $options['global']) {
-            $options += (array)$options['wei']->getConfig('db');
+            $options += (array) $options['wei']->getConfig('db');
         }
         return parent::__construct($options);
     }
@@ -234,8 +234,8 @@ class Db extends Base
     /**
      * Connect to the database server
      *
-     * @throws \PDOException When fails to connect to database server
      * @return boolean
+     * @throws \PDOException When fails to connect to database server
      */
     public function connect()
     {
@@ -248,10 +248,10 @@ class Db extends Base
 
             $dsn = $this->getDsn();
             $attrs = $this->attrs + array(
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_STRINGIFY_FETCHES => true,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-            );
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_STRINGIFY_FETCHES => true,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                );
 
             try {
                 $this->pdo = new PDO($dsn, $this->user, $this->password, $attrs);
@@ -307,18 +307,7 @@ class Db extends Base
     {
         $table = $this->getTable($table);
         $field = implode(', ', array_keys($data));
-
-        $placeholder = array();
-        foreach ($data as $key => $value) {
-            if ($value instanceof \stdClass && isset($value->scalar)) {
-                $placeholder[] = $value->scalar;
-                unset($data[$key]);
-            } else {
-                $placeholder[] = '?';
-            }
-        }
-        $placeholder = implode(', ', $placeholder);
-
+        $placeholder = $this->buildSqlObject($data, ', ', false);
         $query = "INSERT INTO $table ($field) VALUES ($placeholder)";
         return $this->executeUpdate($query, array_values($data));
     }
@@ -384,7 +373,7 @@ class Db extends Base
     public function update($table, array $data, array $conditions)
     {
         $table = $this->getTable($table);
-        $set = $this->buildSqlObject($data, ', ');
+        $set = $this->buildSqlObject($data);
         $where = $this->buildSqlObject($conditions, ' AND ');
 
         $query = "UPDATE $table SET $set WHERE $where";
@@ -535,8 +524,8 @@ class Db extends Base
      * @param array $params The SQL parameters
      * @param array $types The parameter types to bind
      * @param bool $returnRows Whether returns a PDOStatement object or the number of affected rows
-     * @throws \PDOException
      * @return \PDOStatement|int
+     * @throws \PDOException
      */
     public function query($sql, $params = array(), $types = array(), $returnRows = false)
     {
@@ -561,7 +550,7 @@ class Db extends Base
                         $this->bindParameter($stmt, $params, $types);
                         $stmt->execute();
                     } else {
-                        $stmt->execute((array)$params);
+                        $stmt->execute((array) $params);
                     }
                 } else {
                     $stmt = $this->pdo->query($sql);
@@ -604,7 +593,7 @@ class Db extends Base
      */
     public function count($table, $conditions = false)
     {
-        return (int)$this->executeAggregate('COUNT', $table, '1', $conditions);
+        return (int) $this->executeAggregate('COUNT', $table, '1', $conditions);
     }
 
     /**
@@ -704,11 +693,11 @@ class Db extends Base
     {
         $class = $this->getRecordClass($table);
         return new $class(array(
-            'wei'       => $this->wei,
-            'db'        => $this,
-            'table'     => $table,
-            'isNew'     => $isNew,
-            'data'      => $data,
+            'wei' => $this->wei,
+            'db' => $this,
+            'table' => $table,
+            'isNew' => $isNew,
+            'data' => $data,
         ));
     }
 
@@ -954,8 +943,8 @@ class Db extends Base
      *
      * @param string $table
      * @param bool $withPrefix
-     * @throws \PDOException
      * @return array
+     * @throws \PDOException
      */
     public function getTableFields($table, $withPrefix = false)
     {
@@ -1001,17 +990,25 @@ class Db extends Base
         return $fields;
     }
 
-    protected function buildSqlObject(array &$data, $glue)
+    protected function buildSqlObject(array &$data, $glue = ', ', $withColumn = true)
     {
         $query = array();
-        foreach ($data as $field => $value) {
-            if ($value instanceof \stdClass && isset($value->scalar)) {
-                $query[] = $field . ' = ' . $value->scalar;
-                unset($data[$field]);
+        foreach ($data as $key => $value) {
+            $column = ($withColumn ? ($key . ' = ') : '');
+
+            if ($value === false) {
+                // Avoid MySQL default sql mode "STRICT_TRANS_TABLES" complains "Incorrect integer value: '' for column ..."
+                // Note that if the column is string type, it will insert/update a "0" string
+                $data[$key] = 0;
+                $query[] = $column . '?';
+            } elseif ($value instanceof \stdClass && isset($value->scalar)) {
+                $query[] = $column . $value->scalar;
+                unset($data[$key]);
             } else {
-                $query[] = $field . ' = ?';
+                $query[] = $column . '?';
             }
         }
+
         return implode($glue, $query);
     }
 
@@ -1039,7 +1036,7 @@ class Db extends Base
                     $stmt->bindValue($index, $param);
                 }
                 $index++;
-            // Named parameters
+                // Named parameters
             } else {
                 if (isset($types[$name])) {
                     $stmt->bindValue($name, $param, $types[$name]);
@@ -1062,7 +1059,7 @@ class Db extends Base
     protected function executeAggregate($fn, $table, $field, $conditions)
     {
         $data = $this->selectAll($table, $conditions, $fn . '(' . $field . ')');
-        return $data ? (float)current($data[0]) : 0.0;
+        return $data ? (float) current($data[0]) : 0.0;
     }
 
     /**
@@ -1080,7 +1077,8 @@ class Db extends Base
                 break;
 
             default:
-                throw new \RuntimeException(sprintf('Unsupported switching database for current driver: %s', $this->driver));
+                throw new \RuntimeException(sprintf('Unsupported switching database for current driver: %s',
+                    $this->driver));
         }
         return $this;
     }

@@ -1459,6 +1459,35 @@ class DbTest extends TestCase
         $this->assertEquals('2', $member['name']);
     }
 
+    public function testInsertFalseWillConvertTo0()
+    {
+        $this->initFixtures();
+
+        $this->db->insert('member', array(
+            'group_id' => false,
+            'name' => false,
+            'address' => '',
+        ));
+
+        $id = $this->db->lastInsertId('prefix_member_id_seq');
+        $member = $this->db->select('member', $id);
+
+        $this->assertSame('0', $member['group_id']);
+        $this->assertSame('0', $member['name']);
+    }
+
+    public function testUpdateFalseWillConvertTo0()
+    {
+        $this->initFixtures();
+
+        $this->db->update('member', ['group_id' => false,'name' => false], ['id' => 1]);
+
+        $member = $this->db->select('member', 1);
+
+        $this->assertSame('0', $member['group_id']);
+        $this->assertSame('0', $member['name']);
+    }
+
     public function testUpdateWithSqlObject()
     {
         $this->initFixtures();
