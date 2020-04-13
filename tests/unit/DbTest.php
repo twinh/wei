@@ -117,7 +117,7 @@ class DbTest extends TestCase
 
         $db->setOption('recordNamespace', 'WeiTest\Db');
 
-        /** @var $member \WeiTest\Db\User */
+        /** @var $member \WeiTest\Db\Member */
         $member = $this->db('member')->find('1');
 
         $this->assertInstanceOf('\Wei\Record', $member);
@@ -416,11 +416,11 @@ class DbTest extends TestCase
 
         $db->setOption('recordNamespace', 'WeiTest\Db');
 
-        $this->assertEquals('WeiTest\Db\User', $db->getRecordClass('member'));
-        $this->assertEquals('WeiTest\Db\User', $db->getRecordClass('member'));
-        $this->assertEquals('WeiTest\Db\UserGroup', $db->getRecordClass('member_group'));
-        $this->assertEquals('WeiTest\Db\UserGroup', $db->getRecordClass('memberGroup'));
-        $this->assertEquals('WeiTest\Db\UserGroup', $db->getRecordClass('member_Group'));
+        $this->assertEquals('WeiTest\Db\Member', $db->getRecordClass('member'));
+        $this->assertEquals('WeiTest\Db\Member', $db->getRecordClass('member'));
+        $this->assertEquals('WeiTest\Db\MemberGroup', $db->getRecordClass('member_group'));
+        $this->assertEquals('WeiTest\Db\MemberGroup', $db->getRecordClass('memberGroup'));
+        $this->assertEquals('WeiTest\Db\MemberGroup', $db->getRecordClass('member_Group'));
     }
 
     /**
@@ -742,8 +742,8 @@ class DbTest extends TestCase
 
         $member = $this->db->find('member', 1);
 
-        $this->assertEquals('WeiTest\Db\User', $this->db->getRecordClass('member'));
-        $this->assertInstanceOf('WeiTest\Db\User', $member);
+        $this->assertEquals('WeiTest\Db\Member', $this->db->getRecordClass('member'));
+        $this->assertInstanceOf('WeiTest\Db\Member', $member);
     }
 
     public function testCustomRecordClass()
@@ -751,13 +751,13 @@ class DbTest extends TestCase
         $this->initFixtures();
 
         $this->db->setOption('recordClasses', array(
-            'member' => 'WeiTest\Db\User'
+            'member' => 'WeiTest\Db\Member'
         ));
 
         $member = $this->db->find('member', 1);
 
-        $this->assertEquals('WeiTest\Db\User', $this->db->getRecordClass('member'));
-        $this->assertInstanceOf('WeiTest\Db\User', $member);
+        $this->assertEquals('WeiTest\Db\Member', $this->db->getRecordClass('member'));
+        $this->assertInstanceOf('WeiTest\Db\Member', $member);
     }
 
     public function testRecordToArray()
@@ -805,7 +805,7 @@ class DbTest extends TestCase
         $this->assertArrayNotHasKey('name', $members[0]);
 
         $this->db->setOption('recordClasses', array(
-            'member' => 'WeiTest\Db\User'
+            'member' => 'WeiTest\Db\Member'
         ));
     }
 
@@ -1340,9 +1340,9 @@ class DbTest extends TestCase
         $this->db->setOption('recordNamespace', 'WeiTest\Db');
         $this->initFixtures();
 
-        /** @var $member2 \WeiTest\Db\User */
+        /** @var $member2 \WeiTest\Db\Member */
         $member = $this->db->find('member', 1);
-        /** @var $member2 \WeiTest\Db\User */
+        /** @var $member2 \WeiTest\Db\Member */
         $member2 = $this->db->find('member', 1);
 
         $member['group_id'] = 2;
