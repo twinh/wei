@@ -77,7 +77,7 @@ class TestCase extends BaseTestCase
         return static::$resource;
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         parent::tearDownAfterClass();
 

@@ -11,7 +11,7 @@ class UploadTest extends TestCase
         $this->upload->setOption('unitTest', true);
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         parent::tearDownAfterClass();
 

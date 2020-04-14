@@ -13,7 +13,7 @@ class DbCacheTest extends CacheTestCase
         }
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         @unlink('cache.sqlite');
         parent::tearDownAfterClass();
