@@ -190,7 +190,8 @@ class Redis extends BaseCache
      */
     public function exists($key)
     {
-        return $this->object->exists($this->namespace . $key);
+        // Redis >= 4.0 returned int, if < 4.0 returned bool
+        return (bool) $this->object->exists($this->namespace . $key);
     }
 
     /**
