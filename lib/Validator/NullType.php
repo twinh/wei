@@ -13,7 +13,7 @@ namespace Wei\Validator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Null extends BaseValidator
+class NullType extends BaseValidator
 {
     protected $notNullMessage = '%name% must be null';
 
