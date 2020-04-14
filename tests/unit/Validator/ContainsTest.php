@@ -4,6 +4,10 @@ namespace WeiTest\Validator;
 
 class ContainsTest extends TestCase
 {
+    protected $inputTestOptions = [
+        'search' => 'test'
+    ];
+
     /**
      * @dataProvider providerForContains
      */
