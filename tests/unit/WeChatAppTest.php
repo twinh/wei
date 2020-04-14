@@ -760,7 +760,7 @@ class WeChatAppTest extends TestCase
         $resultXml = $app->run();
 
         $this->assertNotContains('This is the default message', $resultXml);
-        $this->assertContains($result, $resultXml);
+        $this->assertStringContainsString($result, $resultXml);
 
         $this->assertSame($calledSubscribe, $subscribeFlag);
     }
@@ -792,7 +792,7 @@ class WeChatAppTest extends TestCase
 
         $resultXml = $app->run();
 
-        $this->assertContains('scan', $resultXml);
+        $this->assertStringContainsString('scan', $resultXml);
     }
 
     public function testEncrypt()
@@ -957,7 +957,7 @@ class WeChatAppTest extends TestCase
         $ret = $app->parse();
         $this->assertEquals(-2002, $ret['code']);
         $this->assertEquals('AES解密失败', $ret['message']);
-        $this->assertContains('mcrypt_generic_init(): Key size is 0', $ret['e']);
+        $this->assertStringContainsString('mcrypt_generic_init(): Key size is 0', $ret['e']);
     }
 
     public function testGetAttrs()

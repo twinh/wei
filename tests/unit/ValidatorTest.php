@@ -488,7 +488,7 @@ class ValidatorTest extends TestCase
 
         $messages = $validator->getSummaryMessages();
         foreach ($messages['email'] as $message) {
-            $this->assertContains('Your email', $message);
+            $this->assertStringContainsString('Your email', $message);
         }
     }
 
@@ -516,8 +516,8 @@ class ValidatorTest extends TestCase
         ));
 
         $message = $validator->getJoinedMessage('|');
-        $this->assertContains('error message 1', $message);
-        $this->assertContains('error message 2', $message);
+        $this->assertStringContainsString('error message 1', $message);
+        $this->assertStringContainsString('error message 2', $message);
         $this->assertEquals('error message 1|error message 2', $message);
     }
 
@@ -735,8 +735,8 @@ class ValidatorTest extends TestCase
     {
         $result = $this->isLength('abc', 4, 5);
         $this->assertFalse($result);
-        $this->assertContains('ABC', current($this->isLength->getMessages('ABC')));
-        $this->assertContains('ABC', $this->isLength->getJoinedMessage("\n", 'ABC'));
+        $this->assertStringContainsString('ABC', current($this->isLength->getMessages('ABC')));
+        $this->assertStringContainsString('ABC', $this->isLength->getJoinedMessage("\n", 'ABC'));
         $this->assertEquals('This value', $this->isLength->getName());
     }
 
@@ -767,6 +767,6 @@ class ValidatorTest extends TestCase
         $wei->isIn('apple', array('pear', 'orange'));
 
         $this->assertIsString($wei->isIn->getFirstMessage());
-        $this->assertContains('name', $wei->isIn->getFirstMessage('name'));
+        $this->assertStringContainsString('name', $wei->isIn->getFirstMessage('name'));
     }
 }

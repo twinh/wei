@@ -79,7 +79,7 @@ namespace WeiTest
 
             $parts = explode("\r\n", $response);
 
-            $this->assertContains('HTTP/1.1 200 Right!', $parts[0]);
+            $this->assertStringContainsString('HTTP/1.1 200 Right!', $parts[0]);
         }
 
         public function testSendHeader()
@@ -98,7 +98,7 @@ namespace WeiTest
             $this->response->download(__DIR__ . '/Fixtures/views/content.php');
             $content = ob_get_clean();
 
-            $this->assertContains('<?php $this->layout(\'layout.php\') ?>', $content);
+            $this->assertStringContainsString('<?php $this->layout(\'layout.php\') ?>', $content);
         }
 
         /**

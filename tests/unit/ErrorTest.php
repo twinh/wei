@@ -83,8 +83,8 @@ class ErrorTest extends TestCase
         $this->error->handleException($exception);
         $content = ob_get_clean();
 
-        $this->assertContains('Oops!', $content);
-        $this->assertContains('Something wrong', $content);
+        $this->assertStringContainsString('Oops!', $content);
+        $this->assertStringContainsString('Something wrong', $content);
     }
 
     public function testCustom404Message()
@@ -100,8 +100,8 @@ class ErrorTest extends TestCase
         $this->error->handleException($exception);
         $content = ob_get_clean();
 
-        $this->assertContains('404', $content);
-        $this->assertContains('The page not found', $content);
+        $this->assertStringContainsString('404', $content);
+        $this->assertStringContainsString('The page not found', $content);
     }
 
     public function testCustom403Message()
@@ -117,8 +117,8 @@ class ErrorTest extends TestCase
         $this->error->handleException($exception);
         $content = ob_get_clean();
 
-        $this->assertContains('403', $content);
-        $this->assertContains('Forbidden', $content);
+        $this->assertStringContainsString('403', $content);
+        $this->assertStringContainsString('Forbidden', $content);
     }
 
     public function testCustomErrorView()
@@ -131,7 +131,7 @@ class ErrorTest extends TestCase
         $this->error->handleException($exception);
         $content = ob_get_clean();
 
-        $this->assertContains('500', $content);
+        $this->assertStringContainsString('500', $content);
     }
 
     public function testCustom404View()
@@ -144,6 +144,6 @@ class ErrorTest extends TestCase
         $this->error->handleException($exception);
         $content = ob_get_clean();
 
-        $this->assertContains('404', $content);
+        $this->assertStringContainsString('404', $content);
     }
 }

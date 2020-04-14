@@ -27,7 +27,7 @@ class ViewTest extends TestCase
         $content = $view('layout.php', array(
             'content' => __METHOD__
         ));
-        $this->assertContains(__METHOD__, $content);
+        $this->assertStringContainsString(__METHOD__, $content);
     }
 
     public function testAssign()
@@ -38,7 +38,7 @@ class ViewTest extends TestCase
         $view->assign('content', $value);
         $content = $view->render('layout.php');
 
-        $this->assertContains($value, $content);
+        $this->assertStringContainsString($value, $content);
     }
 
     public function testAssignArray()
@@ -67,8 +67,8 @@ class ViewTest extends TestCase
     {
         $content = $this->object->render('content.php');
 
-        $this->assertContains('layout start', $content);
-        $this->assertContains('layout end', $content);
+        $this->assertStringContainsString('layout start', $content);
+        $this->assertStringContainsString('layout end', $content);
     }
 
     public function testDisplay()
@@ -153,19 +153,19 @@ class ViewTest extends TestCase
         // No error occur. Fatal error: Unsupported operand types in xxx
         $content = $this->object->render('content.php');
 
-        $this->assertContains('layout start', $content);
-        $this->assertContains('layout end', $content);
+        $this->assertStringContainsString('layout start', $content);
+        $this->assertStringContainsString('layout end', $content);
     }
 
     public function testAssignViewVarInViewFile()
     {
         $content = $this->view->render('assignViewVarInViewFile/content.php');
-        $this->assertContains('assign!', $content);
+        $this->assertStringContainsString('assign!', $content);
     }
 
     public function testRenderInContent()
     {
         $content = $this->view->render('renderInContent/content.php');
-        $this->assertContains("header\ncontent\nsub-content\nfooter", $content);
+        $this->assertStringContainsString("header\ncontent\nsub-content\nfooter", $content);
     }
 }

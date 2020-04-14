@@ -29,11 +29,11 @@ class AllTest extends TestCase
             )
         )));
     }
-    
+
     public function testGetMessages()
     {
         $this->isAll(array(
-            'apple', 
+            'apple',
             'pear', // length invalid
         ), array(
             'in' => array(
@@ -44,13 +44,13 @@ class AllTest extends TestCase
                 'max' => 10
             )
         ));
-        
+
         $itemName = 'custom item name';
-        $this->isAll->setOption('itemName', $itemName); 
-        
+        $this->isAll->setOption('itemName', $itemName);
+
         $messages = $this->isAll->getMessages();
         foreach ($messages as $message) {
-            $this->assertContains($itemName, $message);
+            $this->assertStringContainsString($itemName, $message);
         }
     }
 }

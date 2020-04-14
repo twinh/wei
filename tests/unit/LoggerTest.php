@@ -21,7 +21,7 @@ class LoggerTest extends TestCase
 
         $file = $logger->getFile();
 
-        $this->assertContains(__METHOD__, file_get_contents($file));
+        $this->assertStringContainsString(__METHOD__, file_get_contents($file));
 
         // clean all file in log directory
         $logger->clean();
@@ -70,7 +70,7 @@ class LoggerTest extends TestCase
         foreach ($logger->getOption('levels') as $level => $p) {
             $uid = uniqid();
             $logger->$level($uid);
-            $this->assertContains($uid, file_get_contents($file));
+            $this->assertStringContainsString($uid, file_get_contents($file));
         }
     }
 
@@ -106,7 +106,7 @@ class LoggerTest extends TestCase
         // call by __invoke method
         $logger('no this level', __METHOD__);
 
-        $this->assertContains('DEBUG', file_get_contents($file));
+        $this->assertStringContainsString('DEBUG', file_get_contents($file));
 
         $logger->clean();
 
@@ -115,7 +115,7 @@ class LoggerTest extends TestCase
         // call by log method
         $logger->log('no this level', __METHOD__);
 
-        $this->assertContains('INFO', file_get_contents($file));
+        $this->assertStringContainsString('INFO', file_get_contents($file));
     }
 
     public function testMkDirException()
@@ -134,9 +134,9 @@ class LoggerTest extends TestCase
 
         $content = file_get_contents($this->logger->getFile());
 
-        $this->assertContains('debug', $content);
-        $this->assertContains('name', $content);
-        $this->assertContains('value', $content);
+        $this->assertStringContainsString('debug', $content);
+        $this->assertStringContainsString('name', $content);
+        $this->assertStringContainsString('value', $content);
     }
 
     public function testLogWithDefaultContext()
@@ -152,10 +152,10 @@ class LoggerTest extends TestCase
 
         $content = file_get_contents($this->logger->getFile());
 
-        $this->assertContains('log with default context', $content);
-        $this->assertContains('name', $content);
-        $this->assertContains('clientIp', $content);
-        $this->assertContains('serverIp', $content);
+        $this->assertStringContainsString('log with default context', $content);
+        $this->assertStringContainsString('name', $content);
+        $this->assertStringContainsString('clientIp', $content);
+        $this->assertStringContainsString('serverIp', $content);
     }
 
     public function testLogWithArrayMessage()
@@ -164,8 +164,8 @@ class LoggerTest extends TestCase
 
         $content = file_get_contents($this->logger->getFile());
 
-        $this->assertContains('key', $content);
-        $this->assertContains('value', $content);
+        $this->assertStringContainsString('key', $content);
+        $this->assertStringContainsString('value', $content);
     }
 
     public function testLogWithExceptionMessage()
@@ -175,8 +175,8 @@ class LoggerTest extends TestCase
 
         $content = file_get_contents($this->logger->getFile());
 
-        $this->assertContains('test exception', $content);
-        $this->assertContains('[file] => ' . __FILE__, $content);
+        $this->assertStringContainsString('test exception', $content);
+        $this->assertStringContainsString('[file] => ' . __FILE__, $content);
     }
 
     public function testLoggerNamespace()
@@ -188,7 +188,7 @@ class LoggerTest extends TestCase
         $this->logger->info('log message');
 
         $content = file_get_contents($this->logger->getFile());
-        $this->assertContains('test log message', $content);
+        $this->assertStringContainsString('test log message', $content);
     }
 
     public function providerForContexts()
@@ -214,6 +214,6 @@ class LoggerTest extends TestCase
 
         $content = file_get_contents($this->logger->getFile());
 
-        $this->assertContains($method, $content);
+        $this->assertStringContainsString($method, $content);
     }
 }

@@ -212,8 +212,8 @@ class HttpTest extends TestCase
             'success' => function ($data, Http $http) use ($test) {
                 $header = $http->getResponseHeader();
 
-                $test->assertContains('customHeader', $header);
-                $test->assertContains('value', $header);
+                $test->assertStringContainsString('customHeader', $header);
+                $test->assertStringContainsString('value', $header);
 
                 $test->assertNull($http->getResponseHeader('no this key'));
             }
