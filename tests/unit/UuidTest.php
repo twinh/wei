@@ -6,8 +6,8 @@ class UuidTest extends TestCase
 {
     public function testUuid()
     {
-        for ($i = 0; $i < 100; $i++) {
-            $this->isUuid($this->uuid());
+        for ($i = 0; $i < 10; $i++) {
+            $this->assertTrue($this->isUuid($this->uuid()));
         }
     }
 }
