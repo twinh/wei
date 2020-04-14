@@ -101,11 +101,10 @@ namespace WeiTest
             $this->assertStringContainsString('<?php $this->layout(\'layout.php\') ?>', $content);
         }
 
-        /**
-         * @expectedException \RuntimeException
-         */
         public function testFileNotFoundException()
         {
+            $this->expectException(\RuntimeException::class);
+
             $this->response->download('not found file');
         }
 
@@ -177,11 +176,11 @@ namespace WeiTest
 
             $this->response->redirect()->send();
         }
-        /**
-         * @expectedException \RuntimeException
-         */
+
         public function testViewNotFound()
         {
+            $this->expectException(\RuntimeException::class);
+
             $this->response->setRedirectView('not found');
         }
 

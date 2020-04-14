@@ -55,11 +55,10 @@ class ViewTest extends TestCase
         $this->assertNull($view->get('not-defined-key'));
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testFileNotFoundException()
     {
+        $this->expectException(\RuntimeException::class);
+
         $this->object->render('not-found-file');
     }
 

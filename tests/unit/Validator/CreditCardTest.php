@@ -84,11 +84,10 @@ class CreditCardTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->isCreditCard->setType(new \stdClass());
     }
 }

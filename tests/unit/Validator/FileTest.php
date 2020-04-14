@@ -57,11 +57,10 @@ class FileTest extends TestCase
         $this->assertEquals(array('maxSize', 'minSize'), array_keys($file->getErrors()));
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testUnexpectedExts()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $file = $this->createFileValidator();
 
         $file->setExcludeExts(new \stdClass());

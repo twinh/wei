@@ -68,11 +68,10 @@ class TTest extends TestCase
         $this->assertEquals('zh-CN', $this->t->getLocale());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testFileNotFound()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->t->loadFromFile('not found file for locale %s');
     }
 }

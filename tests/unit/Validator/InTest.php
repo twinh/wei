@@ -20,11 +20,10 @@ class InTest extends TestCase
         $this->assertFalse($this->isIn($input, $array, $case));
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testUnexpectedType()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->isIn('abc', 'bcd');
     }
 

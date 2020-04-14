@@ -27,9 +27,6 @@ class EventTest extends TestCase
         $this->assertEquals(array('a', 'b'), $results);
     }
 
-    /**
-     * @expectedException
-     */
     public function testAddHandler()
     {
         $this->object->on('test', function(){});
@@ -37,11 +34,10 @@ class EventTest extends TestCase
         $this->assertTrue($this->object->has('test'));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testAddInvalidHandler()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->object->on('test', 'not callback');
     }
 

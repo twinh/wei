@@ -94,11 +94,10 @@ class RequestTest extends TestCase
         $this->assertFalse($this->request->isAjax());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidParameterReference()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->request->getParameterReference('exception');
     }
 

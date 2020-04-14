@@ -9,11 +9,10 @@ namespace WeiTest;
  */
 class ValidatorTest extends TestCase
 {
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testIsInException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->isIn('apple', 'not array');
     }
 
@@ -58,11 +57,10 @@ class ValidatorTest extends TestCase
         $this->assertTrue($result);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testRuleNotDefined()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->validate(array(
             'data' => array(
                 'username' => 'test',
@@ -458,11 +456,10 @@ class ValidatorTest extends TestCase
         $validator->setFieldData('age', 18);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testUnexpectedTypeException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $validator = $this->validate();
 
         $validator->setData('string');
@@ -585,11 +582,10 @@ class ValidatorTest extends TestCase
         $this->assertEquals(array('key' => 'value'), $validator->getNames());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidRule()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->validate(array(
             'rules' => array(
                 'key' => new \stdClass(),
@@ -621,11 +617,10 @@ class ValidatorTest extends TestCase
             $validator->getRuleValidator('username', 'email')->getOption('formatMessage'));
     }
 
-    /**
-     * @expectedException \UnexpectedValueException
-     */
     public function testInvalidArgumentException()
     {
+        $this->expectException(\UnexpectedValueException::class);
+
         $email = $this->validate->createRuleValidator('email', array(
             'formatMessage' => '%noThisProperty%',
         ));

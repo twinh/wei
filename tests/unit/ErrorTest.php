@@ -49,11 +49,10 @@ class ErrorTest extends TestCase
         error_reporting(-1);
     }
 
-    /**
-     * @expectedException \ErrorException
-     */
     public function testErrorToException()
     {
+        $this->expectException(\ErrorException::class);
+
         $array['key'];
     }
 

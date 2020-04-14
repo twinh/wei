@@ -174,11 +174,10 @@ class ETest extends TestCase
         ));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testSettingEncodingToEmptyStringShouldThrowException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $escaper = new Escaper(array(
             'encoding' => ''
         ));
@@ -193,11 +192,10 @@ class ETest extends TestCase
         }
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testSettingEncodingToInvalidValueShouldThrowException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $escaper = new Escaper(array(
             'encoding' => 'invalid-encoding'
         ));
@@ -432,11 +430,10 @@ class ETest extends TestCase
         }
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvokeUnsupportedTypeShouldThrowException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->e('string', 'unsupport-type');
     }
 

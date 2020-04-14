@@ -220,11 +220,10 @@ class RouterTest extends TestCase
         $this->assertNotEmpty($router->getRoutes());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testUnexpectedTypeExceptionForSetRoute()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->object->set(new \stdClass());
     }
 
