@@ -16,34 +16,6 @@ class SessionTest extends TestCase
         }
 
         parent::setUp();
-        $data = array();
-        session_set_save_handler(
-            // open
-            function(){
-                return true;
-            },
-            // close
-            function(){
-                return true;
-            },
-            // read
-            function($id) use($data){
-                return $data[$id];
-            },
-            // write
-            function($id, $value) use($data){
-                $data[$id] = $value;
-                return true;
-            },
-            // destroy
-            function(){
-                return true;
-            },
-            // gc
-            function(){
-                return true;
-            }
-        );
     }
 
     protected function tearDown(): void
