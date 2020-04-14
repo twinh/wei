@@ -174,13 +174,13 @@ class App extends Base
             $detail = $this->request->get('debug-detail');
             foreach ($notFound['controllers'] as $controller => $classes) {
                 $message .= sprintf('%s - controller "%s" not found', "\n", $controller);
-                $detail && $message .= sprintf(' (class "%s")', implode($classes, '", "'));
+                $detail && $message .= sprintf(' (class "%s")', implode('", "', $classes));
             }
             foreach ($notFound['actions'] as $action => $controllers) {
                 $method = $this->getActionMethod($action);
                 foreach ($controllers as $controller => $classes) {
                     $message .= sprintf('%s - method "%s" not found in controller "%s"', "\n", $method, $controller);
-                    $detail && $message .= sprintf(' (class "%s")', implode($classes, '", "'));
+                    $detail && $message .= sprintf(' (class "%s")', implode('", "', $classes));
                 }
             }
         }
