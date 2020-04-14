@@ -186,7 +186,7 @@ class FileCache extends BaseCache
             $content = $this->prepareContent($offset, 0);
             $result = $offset;
         } else {
-            $result = $content[1] += $offset;
+            $result = $content[1] = (int) $content[1] + $offset;
             $content = $this->prepareContent($content[1], $content[0]);
         }
 
