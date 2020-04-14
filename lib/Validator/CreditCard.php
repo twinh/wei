@@ -110,7 +110,7 @@ class CreditCard extends BaseValidator
     {
         $checksum = '';
         foreach (str_split(strrev($input)) as $i => $d) {
-            $checksum .= ($i %2 !== 0) ? ($d * 2) : $d;
+            $checksum .= ($i %2 !== 0) ? ((int) $d * 2) : $d;
         }
         return array_sum(str_split($checksum)) % 10 === 0;
     }
