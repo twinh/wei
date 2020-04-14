@@ -981,7 +981,7 @@ class HttpTest extends TestCase
 
     public function testRetryAndSuccess()
     {
-        $http = $this->getMock('\Wei\Http', array('handleResponse'));
+        $http = $this->createPartialMock('\Wei\Http', array('handleResponse'));
 
         $http->expects($this->at(0))
             ->method('handleResponse')
