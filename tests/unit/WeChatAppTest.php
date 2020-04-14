@@ -759,7 +759,7 @@ class WeChatAppTest extends TestCase
 
         $resultXml = $app->run();
 
-        $this->assertNotContains('This is the default message', $resultXml);
+        $this->assertStringNotContainsString('This is the default message', $resultXml);
         $this->assertStringContainsString($result, $resultXml);
 
         $this->assertSame($calledSubscribe, $subscribeFlag);
@@ -940,7 +940,7 @@ class WeChatAppTest extends TestCase
             'wei' => $this->wei,
             'appId' => 'wxbad0b45542aa0b5e',
             'token' => 'weixin',
-            'encodingAesKey' => '',
+            'encodingAesKey' => '12',
             'query' => array(
                 'encrypt_type' => 'aes',
                 'msg_signature' => '6147984331daf7a1a9eed6e0ec3ba69055256154',
@@ -957,7 +957,7 @@ class WeChatAppTest extends TestCase
         $ret = $app->parse();
         $this->assertEquals(-2002, $ret['code']);
         $this->assertEquals('AES解密失败', $ret['message']);
-        $this->assertStringContainsString('mcrypt_generic_init(): Key size is 0', $ret['e']);
+        $this->assertStringContainsString('openssl_decrypt(): IV passed is only 1 bytes long, cipher expects an IV of precisely 16 bytes, padding with \0', $ret['e']);
     }
 
     public function testGetAttrs()
