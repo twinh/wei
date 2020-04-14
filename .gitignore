@@ -2,3 +2,4 @@ vendor/
 composer.lock
 TODO.md
 tests/config/local.php
+/.phpunit.result.cache

@@ -195,4 +195,15 @@ class TestCase extends \PHPUnit\Framework\TestCase
         }
         $this->assertArrayHasKey('d', $origArr, 'Call array_key_exists returns true even if value is null');
     }
+
+    /**
+     * @param string $class
+     * @param string $message
+     * @deprecated
+     */
+    protected function setExpectedException($class, $message = null)
+    {
+        $this->expectException($class);
+        $message && $this->expectExceptionMessage($message);
+    }
 }
