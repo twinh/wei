@@ -27,6 +27,10 @@ class Luhn extends BaseValidator
             return false;
         }
 
+        if (!$input) {
+            return false;
+        }
+
         $checksum = $this->getChecksum(substr($input, 0, -1));
         if ($checksum != substr($input, -1)) {
             return false;
@@ -45,7 +49,7 @@ class Luhn extends BaseValidator
     {
         $checksum = '';
         foreach (str_split(strrev($string)) as $i => $d) {
-            $checksum .= ($i % 2 === 0) ? ($d * 2) : $d;
+            $checksum .= ($i % 2 === 0) ? ((int) $d * 2) : $d;
         }
         return (10 - array_sum(str_split($checksum)) % 10) % 10;
     }

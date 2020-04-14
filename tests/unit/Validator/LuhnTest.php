@@ -48,6 +48,7 @@ class LuhnTest extends TestCase
     public function providerForNotLuhn()
     {
         return array(
+            array(''),
             array('100035540'),
             array('100035541'),
             array('100035543'),
