@@ -64,7 +64,7 @@ class TestCase extends BaseTestCase
         // The validator should accept any type of INPUT and do NOT raise any
         // exceptions or errors
        // foreach ($this->getInputs() as $input) {
-            $this->assertInternalType('boolean', $validator($input));
+            $this->assertIsBool($validator($input));
         //}
     }
 

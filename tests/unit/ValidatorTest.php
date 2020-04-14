@@ -26,14 +26,14 @@ class ValidatorTest extends TestCase
             ),
             'rules' => array(
                 'email' => array(
-                    'email' => true
+                    'email' => true,
                 ),
                 'age' => array(
                     'digit' => true,
                     'between' => array(
                         'min' => 1,
-                        'max' => 150
-                    )
+                        'max' => 150,
+                    ),
                 ),
             ),
         ))->isValid();
@@ -45,13 +45,13 @@ class ValidatorTest extends TestCase
     {
         $result = $this->validate(array(
             'data' => array(
-                'email' => ''
+                'email' => '',
             ),
             'rules' => array(
                 'email' => array(
                     'required' => false,
                     'email' => true,
-                )
+                ),
             ),
         ))->isValid();
 
@@ -65,13 +65,13 @@ class ValidatorTest extends TestCase
     {
         $this->validate(array(
             'data' => array(
-                'username' => 'test'
+                'username' => 'test',
             ),
             'rules' => array(
                 'username' => array(
                     'noThisRule' => true,
-                )
-            )
+                ),
+            ),
         ));
     }
 
@@ -90,9 +90,9 @@ class ValidatorTest extends TestCase
                 ),
             ),
             'breakRule' => true,
-            'ruleInvalid' => function($rule, $field, $validator) use(&$breakRule) {
+            'ruleInvalid' => function ($rule, $field, $validator) use (&$breakRule) {
                 $breakRule = $rule;
-            }
+            },
         ));
 
         $this->assertEquals('length', $breakRule);
@@ -112,12 +112,12 @@ class ValidatorTest extends TestCase
                     'email' => true, // Will not valid
                 ),
             ),
-            'ruleValid' => function($rule, $field, $validator) use(&$lastRule) {
+            'ruleValid' => function ($rule, $field, $validator) use (&$lastRule) {
                 $lastRule = $rule;
 
                 // Return false to break the validation flow
                 return false;
-            }
+            },
         ));
 
         $this->assertEquals('required', $lastRule);
@@ -130,7 +130,7 @@ class ValidatorTest extends TestCase
         $this->validate(array(
             'data' => array(
                 'email' => 'twinhuang@qq.com',
-                'age' => 5
+                'age' => 5,
             ),
             'rules' => array(
                 // Will valid
@@ -139,15 +139,15 @@ class ValidatorTest extends TestCase
                 ),
                 // Will not valid
                 'age' => array(
-                    'between' => array(0, 150)
+                    'between' => array(0, 150),
                 ),
             ),
-            'fieldValid' => function($field, $validator) use(&$lastField) {
+            'fieldValid' => function ($field, $validator) use (&$lastField) {
                 $lastField = $field;
 
                 // Return false to break the validation flow
                 return false;
-            }
+            },
         ));
 
         $this->assertEquals('email', $lastField);
@@ -158,19 +158,19 @@ class ValidatorTest extends TestCase
         $validator = $this->validate(array(
             'data' => array(
                 'age' => 10,
-                'email' => 'example@example.com'
+                'email' => 'example@example.com',
             ),
             'rules' => array(
                 'age' => array(
                     'between' => array(
                         'min' => 20,
                         'max' => 30,
-                    )
+                    ),
                 ),
                 'email' => array(
-                    'email' => true
+                    'email' => true,
                 ),
-            )
+            ),
         ));
 
         $this->assertTrue($validator->isFieldInvalid('age'));
@@ -187,7 +187,7 @@ class ValidatorTest extends TestCase
 
         $this->assertEquals(array(
             'min' => 20,
-            'max' => 30
+            'max' => 30,
         ), $validator->getRuleParams('age', 'between'));
 
         $this->assertEmpty($validator->getRuleParams('age', 'noThisRule'));
@@ -217,7 +217,7 @@ class ValidatorTest extends TestCase
         $this->assertEmpty($validator->getData());
 
         $data = array(
-            'username' => 'example@example.com'
+            'username' => 'example@example.com',
         );
 
         $validator->setData($data);
@@ -234,16 +234,16 @@ class ValidatorTest extends TestCase
         $validator = $this->validate(array(
             'data' => array(
                 'email' => 'a@b.com',
-                'id' => 'xx'
+                'id' => 'xx',
             ),
             'rules' => array(
                 'email' => array(
                     'email' => true,
                 ),
                 'id' => array(
-                    'email' => true
-                )
-            )
+                    'email' => true,
+                ),
+            ),
         ));
 
         $this->assertContains('id', $validator->getInvalidFields());
@@ -257,39 +257,39 @@ class ValidatorTest extends TestCase
     {
         $validator = $this->validate(array(
             'data' => array(
-                'username'  => '',
-                'email'     => 'b.com',
-                'password'  => '',
-                'id'        => 'xx'
+                'username' => '',
+                'email' => 'b.com',
+                'password' => '',
+                'id' => 'xx',
             ),
             // All is invalid
             'rules' => array(
                 'username' => array(
-                    'required' => true
+                    'required' => true,
                 ),
                 'email' => array(
                     'required' => true,
                     'email' => true,
                 ),
                 'password' => array(
-                    'required' => true
+                    'required' => true,
                 ),
                 'id' => array(
                     'length' => array(
-                       'min' => 10,
-                       'max' => 20,
+                        'min' => 10,
+                        'max' => 20,
                     ),
-                    'email' => true
+                    'email' => true,
                 ),
             ),
             'messages' => array(
                 'username' => 'The username is required',
                 'email' => array(
-                    'email' => 'The email is invalid'
+                    'email' => 'The email is invalid',
                 ),
                 'id' => array(
                     'length' => 'The length must between 10 and 20',
-                )
+                ),
             ),
         ));
 
@@ -335,8 +335,8 @@ class ValidatorTest extends TestCase
                 'useranme' => '',
             ),
             'rules' => array(
-                'username' => 'required'
-            )
+                'username' => 'required',
+            ),
         ));
 
         $this->assertFalse($validator->isValid());
@@ -350,7 +350,7 @@ class ValidatorTest extends TestCase
                     'required',
                     'email',
                 ),
-            )
+            ),
         ));
 
         $this->assertFalse($validator2->isValid());
@@ -364,9 +364,9 @@ class ValidatorTest extends TestCase
             ),
             'rules' => array(
                 'username' => array(
-                    $this->validate->createRuleValidator('email')
-                )
-            )
+                    $this->validate->createRuleValidator('email'),
+                ),
+            ),
         ));
 
         $validator2 = $this->validate(array(
@@ -374,7 +374,7 @@ class ValidatorTest extends TestCase
                 'username' => '',
             ),
             'rules' => array(
-                'username' => $this->validate->createRuleValidator('email')
+                'username' => $this->validate->createRuleValidator('email'),
             ),
         ));
 
@@ -386,14 +386,14 @@ class ValidatorTest extends TestCase
         $validator = $this->validate(array(
             'data' => array(
                 'email' => 'error-email',
-                'username' => 'abc'
+                'username' => 'abc',
             ),
             'rules' => array(
                 'email' => array(
                     'required' => true, // valid
                     'length' => array(  // not valid
                         'min' => 1,
-                        'max' => 3
+                        'max' => 3,
                     ),
                     'email' => true,    // not valid
                 ),
@@ -401,12 +401,12 @@ class ValidatorTest extends TestCase
                     'required' => true, // valid
                     'length' => array(  // not valid
                         'min' => 5,
-                        'max' => 10
+                        'max' => 10,
                     ),
                     'alnum',            // not valid
                 ),
             ),
-            'skip' => true
+            'skip' => true,
         ));
 
         $this->assertCount(1, $validator->getInvalidRules('email'));
@@ -424,8 +424,8 @@ class ValidatorTest extends TestCase
         $validator = $this->validate(array(
             'data' => $data,
             'rules' => array(
-                'email' => 'email'
-            )
+                'email' => 'email',
+            ),
         ));
 
         $this->assertTrue($validator->isValid());
@@ -440,8 +440,8 @@ class ValidatorTest extends TestCase
         $validator = $this->validate(array(
             'data' => $user,
             'rules' => array(
-                'name' => 'email'
-            )
+                'name' => 'email',
+            ),
         ));
 
         $this->assertTrue($validator->isValid());
@@ -479,11 +479,11 @@ class ValidatorTest extends TestCase
                     'required' => true, // valid
                     'length' => array(1, 3), // not valid
                     'email' => true,    // not valid
-                )
+                ),
             ),
             'names' => array(
-                'email' => 'Your email'
-            )
+                'email' => 'Your email',
+            ),
         ));
 
         $messages = $validator->getSummaryMessages();
@@ -504,7 +504,7 @@ class ValidatorTest extends TestCase
                     'length' => array(1, 3),    // not valid
                     'email' => true,            // not valid
                     'endsWith' => '@gmail.com'  // not valid
-                )
+                ),
             ),
             'messages' => array(
                 'email' => array(
@@ -512,7 +512,7 @@ class ValidatorTest extends TestCase
                     'email' => 'error message 2',
                     'endsWith' => 'error message 2' // the same message would be combined
                 ),
-            )
+            ),
         ));
 
         $message = $validator->getJoinedMessage('|');
@@ -527,9 +527,9 @@ class ValidatorTest extends TestCase
             'data' => array(),
             'rules' => array(
                 'name' => array(
-                    'required' => false
-                )
-            )
+                    'required' => false,
+                ),
+            ),
         ));
         $this->assertFalse($validator->getFirstMessage());
 
@@ -537,12 +537,12 @@ class ValidatorTest extends TestCase
             'data' => array(),
             'rules' => array(
                 'name' => 'required',
-                'email' => 'required'
+                'email' => 'required',
             ),
             'messages' => array(
                 'name' => 'error message 1',
-                'email' => 'error message 2'
-            )
+                'email' => 'error message 2',
+            ),
         ));
         $firstMessage = $validator->getFirstMessage();
         $this->assertEquals('error message 1', $firstMessage);
@@ -559,11 +559,11 @@ class ValidatorTest extends TestCase
                     'required' => true,         // valid
                     'length' => array(1, 3),    // not valid
                     'email' => true,            // not valid
-                )
+                ),
             ),
             'names' => array(
-                'email' => 'Your email'
-            )
+                'email' => 'Your email',
+            ),
         ));
 
         $this->assertInstanceOf('\Wei\Validator\Required', $validator->getRuleValidator('email', 'required'));
@@ -575,11 +575,11 @@ class ValidatorTest extends TestCase
     {
         $validator = $this->validate(array(
             'rules' => array(
-                'key' => 'required'
+                'key' => 'required',
             ),
             'names' => array(
-                'key' => 'value'
-            )
+                'key' => 'value',
+            ),
         ));
 
         $this->assertEquals(array('key' => 'value'), $validator->getNames());
@@ -592,8 +592,8 @@ class ValidatorTest extends TestCase
     {
         $this->validate(array(
             'rules' => array(
-                'key' => new \stdClass()
-            )
+                'key' => new \stdClass(),
+            ),
         ));
     }
 
@@ -601,7 +601,7 @@ class ValidatorTest extends TestCase
     {
         $validator = $this->validate(array(
             'data' => array(
-                'username' => 'test'
+                'username' => 'test',
             ),
             'rules' => array(
                 'username' => array(
@@ -611,13 +611,14 @@ class ValidatorTest extends TestCase
             'messages' => array(
                 'username' => array(
                     'email' => array(
-                        'format' => 'custom format message'
-                    )
-                )
-            )
+                        'format' => 'custom format message',
+                    ),
+                ),
+            ),
         ));
 
-        $this->assertEquals('custom format message', $validator->getRuleValidator('username', 'email')->getOption('formatMessage'));
+        $this->assertEquals('custom format message',
+            $validator->getRuleValidator('username', 'email')->getOption('formatMessage'));
     }
 
     /**
@@ -626,7 +627,7 @@ class ValidatorTest extends TestCase
     public function testInvalidArgumentException()
     {
         $email = $this->validate->createRuleValidator('email', array(
-            'formatMessage' => '%noThisProperty%'
+            'formatMessage' => '%noThisProperty%',
         ));
 
         $email('not email');
@@ -637,7 +638,7 @@ class ValidatorTest extends TestCase
     public function testGetNotMessages()
     {
         $email = $this->validate->createRuleValidator('notEmail', array(
-            'negativeMessage' => 'this value must not be an email address'
+            'negativeMessage' => 'this value must not be an email address',
         ));
 
         $email('email@example.com');
@@ -650,7 +651,7 @@ class ValidatorTest extends TestCase
         $email = $this->validate->createRuleValidator('email');
 
         $email->setMessages(array(
-            'format' => 'please provide a valid email address'
+            'format' => 'please provide a valid email address',
         ));
 
         $email('not email');
@@ -688,12 +689,12 @@ class ValidatorTest extends TestCase
             ),
             'rules' => array(
                 'email' => array(
-                    'email' => true
+                    'email' => true,
                 ),
             ),
             'messages' => array(
                 'email' => 123,
-            )
+            ),
         ));
         $this->assertEquals(123, $validator->getFirstMessage());
     }
@@ -701,13 +702,13 @@ class ValidatorTest extends TestCase
     public function testNullRules()
     {
         $validator = $this->validate(array(
-            'rules' => null
+            'rules' => null,
         ));
         $this->assertTrue($validator->isValid());
 
         $validator = $this->validate(array(
             'rules' => null,
-            'messages' => null
+            'messages' => null,
         ));
         $this->assertTrue($validator->isValid());
     }
@@ -716,14 +717,14 @@ class ValidatorTest extends TestCase
     {
         $validator = $this->validate(array(
             'data' => array(
-                'email' => 0
+                'email' => 0,
             ),
             'rules' => array(
                 'email' => array(
                     'required' => false,
-                    'email' => true
-                )
-            )
+                    'email' => true,
+                ),
+            ),
         ));
 
         $this->assertFalse($validator->isValid());
@@ -748,9 +749,9 @@ class ValidatorTest extends TestCase
             'rules' => array(
                 'username' => array(
                     'required' => true,
-                    'minLength' => 3
+                    'minLength' => 3,
                 ),
-            )
+            ),
         ));
 
         $this->assertFalse($validator->isValid());
@@ -765,7 +766,7 @@ class ValidatorTest extends TestCase
         $wei = $this->wei;
         $wei->isIn('apple', array('pear', 'orange'));
 
-        $this->assertInternalType('string', $wei->isIn->getFirstMessage());
+        $this->assertIsString($wei->isIn->getFirstMessage());
         $this->assertContains('name', $wei->isIn->getFirstMessage('name'));
     }
 }

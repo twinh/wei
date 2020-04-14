@@ -364,7 +364,7 @@ class DbTest extends TestCase
         $this->initFixtures();
 
         $data = $this->db->fetch("SELECT * FROM prefix_member WHERE name = ?", 'twin');
-        $this->assertInternalType('array', $data);
+        $this->assertIsArray($data);
         $this->assertEquals('twin', $data['name']);
         $this->assertEquals("SELECT * FROM prefix_member WHERE name = ?", $this->db->getLastQuery());
 
@@ -373,11 +373,11 @@ class DbTest extends TestCase
         $this->assertEquals("SELECT * FROM prefix_member WHERE name = ?", $this->db->getLastQuery());
 
         $data = $this->db->fetch("SELECT * FROM prefix_member WHERE name = :name", array('name' => 'twin'));
-        $this->assertInternalType('array', $data);
+        $this->assertIsArray($data);
         $this->assertEquals('twin', $data['name']);
 
         $data = $this->db->fetch("SELECT * FROM prefix_member WHERE name = :name", array(':name' => 'twin'));
-        $this->assertInternalType('array', $data);
+        $this->assertIsArray($data);
         $this->assertEquals('twin', $data['name']);
     }
 
@@ -387,7 +387,7 @@ class DbTest extends TestCase
 
         $data = $this->db->fetchAll("SELECT * FROM prefix_member WHERE group_id = ?", '1');
 
-        $this->assertInternalType('array', $data);
+        $this->assertIsArray($data);
         $this->assertEquals('1', $data[0]['group_id']);
     }
 
@@ -396,7 +396,7 @@ class DbTest extends TestCase
         $this->initFixtures();
 
         $data = $this->db('member')->where('id = 1')->fetch();
-        $this->assertInternalType('array', $data);
+        $this->assertIsArray($data);
         $this->assertEquals('1', $data['id']);
     }
 
@@ -406,7 +406,7 @@ class DbTest extends TestCase
 
         $data = $this->db('member')->fetchAll();
 
-        $this->assertInternalType('array', $data);
+        $this->assertIsArray($data);
         $this->assertEquals('1', $data[0]['group_id']);
     }
 
@@ -766,28 +766,28 @@ class DbTest extends TestCase
 
         $member = $this->db->find('member', 1)->toArray();
 
-        $this->assertInternalType('array', $member);
+        $this->assertIsArray($member);
         $this->assertArrayHasKey('id', $member);
         $this->assertArrayHasKey('group_id', $member);
         $this->assertArrayHasKey('name', $member);
         $this->assertArrayHasKey('address', $member);
 
         $member = $this->db->find('member', 1)->toArray(array('id', 'group_id'));
-        $this->assertInternalType('array', $member);
+        $this->assertIsArray($member);
         $this->assertArrayHasKey('id', $member);
         $this->assertArrayHasKey('group_id', $member);
         $this->assertArrayNotHasKey('name', $member);
         $this->assertArrayNotHasKey('address', $member);
 
         $member = $this->db->find('member', 1)->toArray(array('id', 'group_id', 'notExistField'));
-        $this->assertInternalType('array', $member);
+        $this->assertIsArray($member);
         $this->assertArrayHasKey('id', $member);
         $this->assertArrayHasKey('group_id', $member);
         $this->assertArrayNotHasKey('name', $member);
         $this->assertArrayNotHasKey('address', $member);
 
         $member = $this->db->init('member')->toArray();
-        $this->assertInternalType('array', $member);
+        $this->assertIsArray($member);
         $this->assertArrayHasKey('id', $member);
         $this->assertArrayHasKey('group_id', $member);
         $this->assertArrayHasKey('name', $member);
@@ -798,7 +798,7 @@ class DbTest extends TestCase
         $this->assertNull($member['address']);
 
         $members = $this->db('member')->findAll()->toArray(array('id', 'group_id'));
-        $this->assertInternalType('array', $members);
+        $this->assertIsArray($members);
         $this->assertArrayHasKey(0, $members);
         $this->assertArrayHasKey('id', $members[0]);
         $this->assertArrayHasKey('group_id', $members[0]);
@@ -843,7 +843,7 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
         $member = $this->db->init('member');
-        $this->assertInternalType('string', $member->toJson());
+        $this->assertIsString($member->toJson());
     }
 
     public function testDestroyRecord()
@@ -900,9 +900,9 @@ class DbTest extends TestCase
 
         // ToArray
         $memberArray = $members->toArray();
-        $this->assertInternalType('array', $memberArray);
+        $this->assertIsArray($memberArray);
         foreach ($memberArray as $member) {
-            $this->assertInternalType('array', $member);
+            $this->assertIsArray($member);
         }
 
         // Filter
@@ -1034,12 +1034,12 @@ class DbTest extends TestCase
 
         $count = $this->db('member')->count();
 
-        $this->assertInternalType('int', $count);
+        $this->assertIsInt($count);
         $this->assertEquals(2, $count);
 
         $count = $this->db('member')->select('id, name')->limit(1)->offset(2)->count();
 
-        $this->assertInternalType('int', $count);
+        $this->assertIsInt($count);
         $this->assertEquals(2, $count);
     }
 
@@ -1049,12 +1049,12 @@ class DbTest extends TestCase
 
         $count = $this->db('member')->countBySubQuery();
 
-        $this->assertInternalType('int', $count);
+        $this->assertIsInt($count);
         $this->assertEquals(2, $count);
 
         $count = $this->db('member')->select('id, name')->limit(1)->offset(2)->countBySubQuery();
 
-        $this->assertInternalType('int', $count);
+        $this->assertIsInt($count);
         $this->assertEquals(2, $count);
     }
 
@@ -1063,11 +1063,11 @@ class DbTest extends TestCase
         $this->initFixtures();
 
         $count = $this->db('member')->count(1);
-        $this->assertInternalType('int', $count);
+        $this->assertIsInt($count);
         $this->assertEquals(1, $count);
 
         $count = $this->db('member')->count(array('id' => 1));
-        $this->assertInternalType('int', $count);
+        $this->assertIsInt($count);
         $this->assertEquals(1, $count);
     }
 
@@ -1139,7 +1139,7 @@ class DbTest extends TestCase
 
         // No error raise
         $array = $query->fetchAll();
-        $this->assertInternalType('array', $array);
+        $this->assertIsArray($array);
     }
 
     public function providerForParameterValue()
@@ -1192,19 +1192,19 @@ class DbTest extends TestCase
         $db = $this->db;
 
         $count = $db->count('member');
-        $this->assertInternalType('int', $count);
+        $this->assertIsInt($count);
         $this->assertEquals(2, $count);
 
         $count = $db->count('member', array('id' => '1'));
-        $this->assertInternalType('int', $count);
+        $this->assertIsInt($count);
         $this->assertEquals(1, $count);
 
         $count = $db->count('member', array('id' => '1'));
-        $this->assertInternalType('int', $count);
+        $this->assertIsInt($count);
         $this->assertEquals(1, $count);
 
         $count = $db->count('member', array('id' => '123'));
-        $this->assertInternalType('int', $count);
+        $this->assertIsInt($count);
         $this->assertEquals(0, $count);
     }
 
@@ -1856,7 +1856,7 @@ class DbTest extends TestCase
         $this->initFixtures();
 
         $result = $this->db->max('member', 'id');
-        $this->assertInternalType('float', $result);
+        $this->assertIsFloat($result);
         $this->assertEquals(2, $result);
     }
 
@@ -1865,7 +1865,7 @@ class DbTest extends TestCase
         $this->initFixtures();
 
         $result = $this->db->min('member', 'id');
-        $this->assertInternalType('float', $result);
+        $this->assertIsFloat($result);
         $this->assertEquals(1, $result);
     }
 
@@ -1874,7 +1874,7 @@ class DbTest extends TestCase
         $this->initFixtures();
 
         $result = $this->db->avg('member', 'id');
-        $this->assertInternalType('float', $result);
+        $this->assertIsFloat($result);
         $this->assertEquals(1.5, $result);
     }
 

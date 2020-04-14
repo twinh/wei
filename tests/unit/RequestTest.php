@@ -507,7 +507,7 @@ class RequestTest extends TestCase
         ));
 
         foreach (array('get', 'cookie', 'server', 'file') as $option) {
-            $this->assertInternalType('array', $request->getParameterReference($option));
+            $this->assertIsArray($request->getParameterReference($option));
         }
     }
 

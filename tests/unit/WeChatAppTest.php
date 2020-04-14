@@ -974,7 +974,7 @@ class WeChatAppTest extends TestCase
 
         $attrs = $app->getAttrs();
 
-        $this->assertInternalType('array', $attrs);
+        $this->assertIsArray($attrs);
 
         $this->assertEquals('toUser', $attrs['ToUserName']);
         $this->assertEquals('fromUser', $attrs['FromUserName']);

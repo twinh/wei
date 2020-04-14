@@ -545,7 +545,7 @@ class HttpTest extends TestCase
             'success' => function ($data, Http $http) use ($test) {
                 $test->triggeredEvents[] = 'success';
                 $cookies = $http->getResponseCookies();
-                $test->assertInternalType('array', $cookies);
+                $test->assertIsArray($cookies);
 
                 $test->assertEquals('value', $cookies['key']);
                 $test->assertEquals('1', $cookies['bool']);
@@ -578,7 +578,7 @@ class HttpTest extends TestCase
                 $test->triggeredEvents[] = 'success';
 
                 $cookies = $http->getResponseCookies();
-                $test->assertInternalType('array', $cookies);
+                $test->assertIsArray($cookies);
 
                 $test->assertEquals('value', $cookies['key']);
 
@@ -795,7 +795,7 @@ class HttpTest extends TestCase
 
         $result = $http->getResponse();
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
 
         // Error
         $http = $this->http(array(
@@ -910,7 +910,7 @@ class HttpTest extends TestCase
     {
         $http = $this->http($this->url);
         $info = $http->getCurlInfo();
-        $this->assertInternalType('array', $info);
+        $this->assertIsArray($info);
     }
 
     public function testGetCurlInfoWithOption()

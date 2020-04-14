@@ -72,7 +72,7 @@ class CookieTest extends TestCase
 
         $array = $cookie->toArray();
 
-        $this->assertInternalType('array', $array);
+        $this->assertIsArray($array);
 
         $this->assertArrayHasKey('test', $array);
     }

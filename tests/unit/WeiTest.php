@@ -105,7 +105,7 @@ class WeiTest extends TestCase
     public function testGetConfigs()
     {
         $configs = $this->wei->getConfig();
-        $this->assertInternalType('array', $configs);
+        $this->assertIsArray($configs);
     }
 
     public function testInvalidArgumentExceptionForWeiOption()

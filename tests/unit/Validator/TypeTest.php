@@ -27,7 +27,7 @@ class TypeTest extends TestCase
     public function testResource()
     {
         $res = $this->createResource();
-        $this->assertInternalType('resource', $res);
+        $this->assertIsResource($res);
         $this->assertTrue($this->isType->__invoke($res, 'resource'));
     }
 

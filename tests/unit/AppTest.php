@@ -37,7 +37,7 @@ class AppTest extends TestCase
         // Returns array result
         $result = $this->app->dispatch('ControllerNotFound', 'index', array(), false);
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
 
         $this->assertEquals(array(
             'controllers' => array(
@@ -72,7 +72,7 @@ class AppTest extends TestCase
     {
         $result = $this->app->dispatch('Controller\Admin', 'index', array(), false);
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
 
         $this->assertEquals(array(
             'controllers' => array(
