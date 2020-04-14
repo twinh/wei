@@ -49,7 +49,7 @@ class DivisibleBy extends BaseValidator
         if (is_float($this->divisor)) {
             $result = fmod($input, $this->divisor);
         } else {
-            $result = $input % $this->divisor;
+            $result = (int) $input % $this->divisor;
         }
 
         if (0 != $result) {
