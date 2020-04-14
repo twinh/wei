@@ -163,8 +163,8 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     /**
      * Returns a *stringify* or user defined($default) parameter value
      *
-     * @param  string $name The parameter name
-     * @param  mixed $default The default parameter value if the parameter does not exist
+     * @param string $name The parameter name
+     * @param mixed $default The default parameter value if the parameter does not exist
      * @return string|null  The parameter value
      */
     public function __invoke($name, $default = '')
@@ -175,8 +175,8 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     /**
      * Returns a *stringify* or user defined($default) parameter value
      *
-     * @param  string $name The parameter name
-     * @param  mixed $default The default parameter value if the parameter does not exist
+     * @param string $name The parameter name
+     * @param mixed $default The default parameter value if the parameter does not exist
      * @return string|null  The parameter value
      */
     public function get($name, $default = null)
@@ -280,7 +280,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * Use isset to make sure ArrayAccess acts more like array
      * To detect whether key exists, use `array_key_exists($key, $request->toArray())`
      *
-     * @param  string $offset
+     * @param string $offset
      * @return bool
      * @see \WeiTest\RequestTest::assertArrayBehaviour
      */
@@ -292,7 +292,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     /**
      * Get the offset value
      *
-     * @param  string $offset
+     * @param string $offset
      * @return mixed
      */
     public function &offsetGet($offset)
@@ -330,7 +330,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     /**
      * Merge data from array
      *
-     * @param  array $array
+     * @param array $array
      * @return $this
      */
     public function fromArray(array $array = array())
@@ -398,7 +398,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     /**
      * Set the request URI.
      *
-     * @param  string $requestUri
+     * @param string $requestUri
      * @return self
      */
     public function setRequestUri($requestUri)
@@ -423,7 +423,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     /**
      * Set the base URL.
      *
-     * @param  string $baseUrl
+     * @param string $baseUrl
      * @return self
      */
     public function setBaseUrl($baseUrl)
@@ -516,14 +516,15 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * is not valid, return the $default value instead
      *
      * @link http://en.wikipedia.org/wiki/X-Forwarded-For
-     * @param  string $default The default ip address
+     * @param string $default The default ip address
      * @return string
      */
     public function getIp($default = '0.0.0.0')
     {
-        $ip = $this->getServer('HTTP_X_FORWARDED_FOR')
-            ? current(explode(',', $this->getServer('HTTP_X_FORWARDED_FOR'))) : $this->getServer('HTTP_CLIENT_IP')
-                ?: $this->getServer('REMOTE_ADDR');
+        $ip = ($this->getServer('HTTP_X_FORWARDED_FOR') ?
+            current(explode(',', $this->getServer('HTTP_X_FORWARDED_FOR')))
+            : $this->getServer('HTTP_CLIENT_IP')
+        ) ?: $this->getServer('REMOTE_ADDR');
 
         return filter_var($ip, FILTER_VALIDATE_IP) ? $ip : $default;
     }
