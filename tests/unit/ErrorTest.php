@@ -47,6 +47,9 @@ class ErrorTest extends TestCase
         $array['key'];
 
         error_reporting(-1);
+
+        // Make sure have test
+        $this->assertNull(null);
     }
 
     public function testErrorToException()

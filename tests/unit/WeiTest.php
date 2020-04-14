@@ -335,7 +335,7 @@ class WeiTest extends TestCase
         $this->assertNotContains(array($this->wei, 'autoload'), spl_autoload_functions());
 
         $this->wei->setAutoload(true);
-        $this->assertStringContainsString(array($this->wei, 'autoload'), spl_autoload_functions());
+        $this->assertContains(array($this->wei, 'autoload'), spl_autoload_functions());
 
         $this->wei->setAutoloadMap(array(
             '\WeiTest' => __DIR__

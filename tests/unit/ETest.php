@@ -190,6 +190,8 @@ class ETest extends TestCase
                 'encoding' => $value
             ));
         }
+        // make sure have test
+        $this->assertNull(null);
     }
 
     public function testSettingEncodingToInvalidValueShouldThrowException()

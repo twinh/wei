@@ -1642,6 +1642,8 @@ class DbTest extends TestCase
                 'address' => 'xx street'
             )
         ));
+
+        $this->assertSame(1, $members[0]['group_id']);
     }
 
     public function testFindRecordAndDestroy()
