@@ -170,43 +170,70 @@ class WeiTest extends TestCase
         $this->assertSame($arrayCache, $this->wei->get('myArrayCache'));
     }
 
-    public function testInstanceNotFoundWeiFromWeiManager()
+    public function testInstanceNotFoundServiceFromContainer()
     {
-        $this->setExpectedException(
-            'BadMethodCallException',
-            'Property or object "notFoundWei" (class "Wei\NotFoundWei") not found, called in file',
-            1012
-        );
-        $this->wei->notFoundWei;
+        $this->expectExceptionObject(new \BadMethodCallException(implode([
+            'Property or object "notFoundService" (class "Wei\NotFoundService") not found, ',
+            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3)
+        ]), 1012));
+
+        $this->wei->notFoundService;
     }
 
-    public function testInstanceNotFoundWei()
+    public function testInstanceNotFoundServiceFromService()
     {
-        $this->setExpectedException(
-            'BadMethodCallException',
-            'Property or object "notFoundWei" (class "Wei\NotFoundWei") not found, called in file',
-            1012
-        );
-        $this->wei->request->notFoundWei;
+        $this->expectExceptionObject(new \BadMethodCallException(implode([
+            'Property or object "notFoundService" (class "Wei\NotFoundService") not found, ',
+            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3)
+        ]), 1012));
+
+        $this->wei->request->notFoundService;
     }
 
-    public function testInvokeNotFoundWei()
+    public function testInvokeNotFoundServiceFromContainer()
     {
-        $this->setExpectedException(
-            'BadMethodCallException',
-            'Method "Wei\Wei->notFoundService" or object "notFoundService" (class "Wei\NotFoundService") not found, called in file',
-            1011
-        );
+        $this->expectExceptionObject(new \BadMethodCallException(implode([
+            'Method "Wei\Wei->notFoundService" (class "Wei\NotFoundService") not found, ',
+            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3)
+        ]), 1014));
+
         $this->wei->notFoundService();
     }
 
-    public function testInvokeNotFoundWeiByCallUserFunc()
+    public function testInvokeNotFoundServiceFromService()
     {
-        $this->setExpectedException(
-            'BadMethodCallException',
-            'Property or method "notFoundWei" not found',
-            1013
-        );
+        $this->expectExceptionObject(new \BadMethodCallException(implode([
+            'Method "Wei\Request->notFoundService" (class "Wei\NotFoundService") not found, ',
+            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3)
+        ]), 1014));
+
+        $this->wei->request->notFoundService();
+    }
+
+    public function testInvokeNotFoundServiceByCallUserFuncFromContainer()
+    {
+        $this->expectExceptionObject(new \BadMethodCallException(implode([
+            'Method "Wei\Wei->notFoundService" (class "Wei\NotFoundService") not found, ',
+            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3)
+        ]), 1014));
+
+        call_user_func([$this->wei, 'notFoundService']);
+    }
+
+    public function testInvokeNotFoundServiceByCallUserFuncFromService()
+    {
+        $this->expectExceptionObject(new \BadMethodCallException(implode([
+            'Method "Wei\Request->notFoundService" (class "Wei\NotFoundService") not found, ',
+            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3)
+        ]), 1014));
+
+        call_user_func([$this->wei->request, 'notFoundService']);
+    }
+
+    public function testInvokeNotFoundServiceByGetMethod()
+    {
+        $this->expectExceptionObject(new \BadMethodCallException('Property or method "notFoundWei" not found', 1013));
+
         $this->wei->get('notFoundWei');
     }
 

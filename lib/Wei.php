@@ -6,8 +6,8 @@
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Wei
-{
+namespace Wei {
+
     /**
      * @see Wei\Base
      */
@@ -19,254 +19,254 @@ namespace Wei
      * @author      Twin Huang <twinhuang@qq.com>
      *
      * Cache
-     * @property Cache          $cache A cache service proxy
+     * @property Cache $cache A cache service proxy
      * @method   mixed          cache($key, $value = null, $expire = 0) Retrieve or store an item by cache
-     * @property ArrayCache     $arrayCache  A cache service that stored data in PHP array
+     * @property ArrayCache $arrayCache  A cache service that stored data in PHP array
      * @method   mixed          arrayCache($key, $value = null, $expire = 0) Retrieve or store an item by array cache
-     * @property Apc            $apc A cache service that stored data in PHP APC
+     * @property Apc $apc A cache service that stored data in PHP APC
      * @method   mixed          apc($key, $value = null, $expire = 0) Retrieve or store an item
-     * @property DbCache        $dbCache A cache service that stored data in databases
+     * @property DbCache $dbCache A cache service that stored data in databases
      * @method   mixed          dbCache($key, $value = null, $expire = 0) Retrieve or store an item by database cache
-     * @property FileCache      $fileCache A cache service that stored data in files
+     * @property FileCache $fileCache A cache service that stored data in files
      * @method   mixed          fileCache($key, $value = null, $expire = 0) Retrieve or store an item by file
-     * @property PhpFileCache   $phpFileCache A cache service that stored data as PHP variables in files
+     * @property PhpFileCache $phpFileCache A cache service that stored data as PHP variables in files
      * @method   mixed          phpFileCache($key, $value = null, $expire = 0) Retrieve or store an item by file
-     * @property Memcache       $memcache A cache service that stored data in Memcache
+     * @property Memcache $memcache A cache service that stored data in Memcache
      * @method   mixed          memcache($key, $value = null, $expire = 0) Retrieve or store an item by Memcache
-     * @property Memcached      $memcached A cache service that stored data in Memcached
+     * @property Memcached $memcached A cache service that stored data in Memcached
      * @method   mixed          memcached($key, $value = null, $expire = 0) Retrieve or store an item by Memcached
-     * @property MongoCache     $mongoCache A cache service that stores data in MongoDB
+     * @property MongoCache $mongoCache A cache service that stores data in MongoDB
      * @method   mixed          mongoCache($key, $value = null, $expire = 0) Retrieve or store an item by MongoDB
-     * @property Couchbase      $couchbase A cache service base on Couchbase
+     * @property Couchbase $couchbase A cache service base on Couchbase
      * @method   mixed          couchbase($key, $value = null, $expire = 0) Retrieve or store an item by Couchbase
-     * @property Redis          $redis A cache service that stores data in Redis
+     * @property Redis $redis A cache service that stores data in Redis
      * @method   mixed          redis($key = null, $value = null, $expire = 0) Retrieve or store an item by Redis
-     * @property Bicache        $bicache A two-level cache service
+     * @property Bicache $bicache A two-level cache service
      * @method   mixed          bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
-     * @property TagCache       $tagCache A cache service with tagging support
+     * @property TagCache $tagCache A cache service with tagging support
      * @method   TagCache       tagCache($tag, $_ = null) Create a new cache service with tagging support
      *
      * Database
-     * @property Db             $db A database service inspired by Doctrine DBAL
+     * @property Db $db A database service inspired by Doctrine DBAL
      * @method   \Wei\Record    db($table = null) Create a new record object
-     * @property \Wei\Schema    $schema A MySQL schema builder
+     * @property \Wei\Schema $schema A MySQL schema builder
      *
      * HTTP Client
-     * @property Http       $http An alias of call service
+     * @property Http $http An alias of call service
      * @method   \Wei\Http  http(array $options) Create a new HTTP service and execute
-     * @property Soap       $soap A Soap client that works like HTTP service
+     * @property Soap $soap A Soap client that works like HTTP service
      * @method   \Wei\Soap  soap(array $options) Create a new Soap service and execute
      *
      * HTTP Request
-     * @property Request    $request A service that handles the HTTP request data
+     * @property Request $request A service that handles the HTTP request data
      * @method   mixed      request($name, $default = null) Returns a stringify request parameter value
-     * @property Cookie     $cookie A object that handles the HTTP request and response cookies
+     * @property Cookie $cookie A object that handles the HTTP request and response cookies
      * @method   mixed      cookie($key, $value = null, $options = array()) Get or set cookie
-     * @property Session    $session A object that session parameters ($_SESSION)
+     * @property Session $session A object that session parameters ($_SESSION)
      * @method   mixed      session($name, $default = null) Returns a stringify session parameter value
-     * @property Ua         $ua A object to detect user OS, device and browser name and version
+     * @property Ua $ua A object to detect user OS, device and browser name and version
      * @method   bool       ua() Check if in the specified browser, OS or device
-     * @property Upload     $upload A object that handles the uploaded files
+     * @property Upload $upload A object that handles the uploaded files
      * @method   bool       upload(array $options = array()) Upload a file
      *
      * HTTP Response
-     * @property Response       $response A object that handles the HTTP response data
+     * @property Response $response A object that handles the HTTP response data
      * @method   \Wei\Response  response($content = null, $status = null) Send response header and content
      *
      * View
-     * @property View       $view A object that use to render PHP template
+     * @property View $view A object that use to render PHP template
      * @method   string     view($name = null, $vars = array()) Returns view object or render a PHP template
-     * @property Asset      $asset A service to generate assets' URL
+     * @property Asset $asset A service to generate assets' URL
      * @method   string     asset($file) Returns the asset URL by specified file
-     * @property Block      $block A service that stores view content for template inheritance
+     * @property Block $block A service that stores view content for template inheritance
      * @method   string     block($name, $type) Start to capture a block
-     * @property E          $e A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
+     * @property E $e A object to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
      * @method   string     e($string, $type = 'html') Escapes a string by specified type for secure output
      *
      * Application
-     * @property App            $app An MVC application service
+     * @property App $app An MVC application service
      * @method   \Wei\App       app(array $options = array()) Startup an MVC application
-     * @property WeChatApp      $weChatApp A object handles WeChat(WeiXin) callback message
+     * @property WeChatApp $weChatApp A object handles WeChat(WeiXin) callback message
      * @method   \Wei\WeChatApp weChatApp() Start up WeChat application and output the matched rule message
-     * @property Router         $router A service that parse the URL to request data
-     * @property Url            $url A util object to build URL
+     * @property Router $router A service that parse the URL to request data
+     * @property Url $url A util object to build URL
      * @method   string         url($url = '', $argsOrParams = array(), $params = array()) Build URL by specified uri and parameters
      * @property \Wei\Ret $ret  A service that use to build operation result
      * @method   string         ret($message, $code = 1, $type = 'success') Return operation result data
      *
      * Other
-     * @property Config     $config A object to manage object configurations
-     * @property Counter    $counter A counter service
-     * @property Env        $env A object to detect the environment name and load configuration by environment name
+     * @property Config $config A object to manage object configurations
+     * @property Counter $counter A counter service
+     * @property Env $env A object to detect the environment name and load configuration by environment name
      * @method   string     env() Returns the environment name
-     * @property Error      $error A object that handles exception and display pretty exception message
+     * @property Error $error A object that handles exception and display pretty exception message
      * @method   \Wei\Error error($fn) Attach a handler to exception error
-     * @property Event      $event An event dispatch service
-     * @property Gravatar   $gravatar A object that generates a Gravatar URL for a specified email address
+     * @property Event $event An event dispatch service
+     * @property Gravatar $gravatar A object that generates a Gravatar URL for a specified email address
      * @method   string     gravatar($email, $size = null, $default = null, $rating = null) Generates a Gravatar URL for a specified email address
-     * @property Lock       $lock A service that provide the functionality of exclusive Lock
+     * @property Lock $lock A service that provide the functionality of exclusive Lock
      * @method   bool       lock($key, $expire = null) Acquire a lock key
-     * @property Logger     $logger A logger service, which is inspired by Monolog
+     * @property Logger $logger A logger service, which is inspired by Monolog
      * @method   bool       logger($level, $message) Logs with an arbitrary level
-     * @property Password   $password A wrapper class for password hashing functions
-     * @property Pinyin     $pinyin An util object that converts Chinese words to phonetic alphabets
+     * @property Password $password A wrapper class for password hashing functions
+     * @property Pinyin $pinyin An util object that converts Chinese words to phonetic alphabets
      * @method   string     pinyin($word) Converts Chinese words to phonetic alphabets
-     * @property SafeUrl    $safeUrl Generate a URL with signature
-     * @property StatsD     $statsD Sends statistics to the stats daemon over UDP
-     * @property Uuid       $uuid A util object that generates a RANDOM UUID(universally unique identifier)
+     * @property SafeUrl $safeUrl Generate a URL with signature
+     * @property StatsD $statsD Sends statistics to the stats daemon over UDP
+     * @property Uuid $uuid A util object that generates a RANDOM UUID(universally unique identifier)
      * @method   string     uuid() generates a RANDOM UUID(universally unique identifier)
-     * @property T          $t A translator object
+     * @property T $t A translator object
      * @method   string     t($message, array $parameters = array()) Translate the message
      *
      * Validation
      * @method   \Wei\Validate   validate(array $option) Create a new validator and validate by specified options
      *
      * Data type and composition
-     * @property Validator\Alnum            $isAlnum
+     * @property Validator\Alnum $isAlnum
      * @method   bool                       isAlnum($input) Check if the input contains letters (a-z) and digits (0-9)
-     * @property Validator\Alpha            $isAlpha
+     * @property Validator\Alpha $isAlpha
      * @method   bool                       isAlpha($input) Check if the input contains only letters (a-z)
-     * @property Validator\Blank            $isBlank
+     * @property Validator\Blank $isBlank
      * @method   bool                       isBlank($input) Check if the input is blank
-     * @property Validator\Contains         $isContains
+     * @property Validator\Contains $isContains
      * @method   bool                       isContains($input, $search, $regex = false) Check if the input is contains the specified string or pattern
-     * @property Validator\Decimal          $isDecimal
+     * @property Validator\Decimal $isDecimal
      * @method   bool                       isDecimal($input) Check if the input is decimal
-     * @property Validator\Digit            $isDigit
+     * @property Validator\Digit $isDigit
      * @method   bool                       isDigit($input) Check if the input contains only digits (0-9)
-     * @property Validator\DivisibleBy      $isDivisibleBy
+     * @property Validator\DivisibleBy $isDivisibleBy
      * @method   bool                       isDivisibleBy($input, $divisor) Check if the input could be divisible by specified divisor
-     * @property Validator\DoubleByte       $isDoubleByte
+     * @property Validator\DoubleByte $isDoubleByte
      * @method   bool                       isDoubleByte($input) Check if the input contains only double characters
-     * @property Validator\Present          $isPresent
+     * @property Validator\Present $isPresent
      * @method   bool                       isPresent($input) Check if the input is empty
-     * @property Validator\EndsWith         $isEndsWith
+     * @property Validator\EndsWith $isEndsWith
      * @method   bool                       isEndsWith($input, $findMe, $case = false) Check if the input is ends with specified string
-     * @property Validator\In               $isIn
+     * @property Validator\In $isIn
      * @method   bool                       isIn($input, array $array, $strict = false) Check if the input is in specified array
-     * @property Validator\Lowercase        $isLowercase
+     * @property Validator\Lowercase $isLowercase
      * @method   bool                       isLowercase($input) Check if the input is lowercase
-     * @property Validator\Luhn             $isLuhn
+     * @property Validator\Luhn $isLuhn
      * @method   bool                       isLuhn($input) Check if the input is valid by the Luhn algorithm
-     * @property Validator\NaturalNumber    $isNaturalNumber
+     * @property Validator\NaturalNumber $isNaturalNumber
      * @method   bool                       isNaturalNumber($input) Check if the input is a natural number (integer that greater than or equals 0)
-     * @property Validator\Null             $isNull
+     * @property Validator\Null $isNull
      * @method   bool                       isNull($input) Check if the input is null
-     * @property Validator\Number           $isNumber
+     * @property Validator\Number $isNumber
      * @method   bool                       isNumber($input) Check if the input is number
-     * @property Validator\PositiveInteger  $isPositiveInteger
+     * @property Validator\PositiveInteger $isPositiveInteger
      * @method   bool                       isPositiveInteger($input) Check if the input is a positive integer (integer that greater than 0)
-     * @property Validator\Regex            $isRegex
+     * @property Validator\Regex $isRegex
      * @method   bool                       isRegex($input, $pattern) Check if the input is valid by specified regular expression
-     * @property Validator\StartsWith       $isStartsWith
+     * @property Validator\StartsWith $isStartsWith
      * @method   bool                       isStartsWith($input, $findMe, $case = false) Check if the input is starts with specified string
-     * @property Validator\Type             $isType
+     * @property Validator\Type $isType
      * @method   bool                       isType($input, $type) Check if the type of input is equals specified type name
-     * @property Validator\Uppercase        $isUppercase
+     * @property Validator\Uppercase $isUppercase
      * @method   bool                       isUppercase($input) Check if the input is uppercase
      *
      * Length
-     * @property Validator\Length       $isLength
-     * @method   bool                   isLength($input, $length, $max = null) Check if the length (or size) of input is equals specified length or in specified length range
-     * @property Validator\CharLength   $isCharLength
+     * @property Validator\Length $isLength
+     * @method   bool                   isLength($input, $length, $max = null) Check if the length ( or size) of input is equals specified length or in specified length range
+     * @property Validator\CharLength $isCharLength
      * @method   bool                   isCharLength($input, $length) Check if the characters length of input is equals specified length
-     * @property Validator\MinLength    $isMinLength
-     * @method   bool                   isMinLength($input, $min) Check if the length (or size) of input is greater than specified length
-     * @property Validator\MaxLength    $isMaxLength
-     * @method   bool                   isMaxLength($input, $max) Check if the length (or size) of input is lower than specified length
+     * @property Validator\MinLength $isMinLength
+     * @method   bool                   isMinLength($input, $min) Check if the length ( or size) of input is greater than specified length
+     * @property Validator\MaxLength $isMaxLength
+     * @method   bool                   isMaxLength($input, $max) Check if the length ( or size) of input is lower than specified length
      *
      * Comparison
-     * @property Validator\EqualTo              $isEqualTo
+     * @property Validator\EqualTo $isEqualTo
      * @method   bool                           isEqualTo($input, $value) Check if the input is equals to (==) the specified value
-     * @property Validator\IdenticalTo          $identicalTo
+     * @property Validator\IdenticalTo $identicalTo
      * @method   bool                           isIdenticalTo($input, $value) Check if the input is equals to (==) the specified value
-     * @property Validator\GreaterThan          $isGreaterThan
+     * @property Validator\GreaterThan $isGreaterThan
      * @method   bool                           isGreaterThan($input, $value) Check if the input is greater than (>=) the specified value
-     * @property Validator\GreaterThanOrEqual   $isGreaterThanOrEqual
+     * @property Validator\GreaterThanOrEqual $isGreaterThanOrEqual
      * @method   bool                           isGreaterThanOrEqual($input, $value) Check if the input is greater than or equal to (>=) the specified value
-     * @property Validator\LessThan             $isLessThan
+     * @property Validator\LessThan $isLessThan
      * @method   bool                           isLessThan($input, $value) Check if the input is less than (<) the specified value
-     * @property Validator\LessThanOrEqual      $isLessThanOrEqual
+     * @property Validator\LessThanOrEqual $isLessThanOrEqual
      * @method   bool                           isLessThanOrEqual($input, $value) Check if the input is less than or equal to (<=) the specified value
-     * @property Validator\Between              $isBetween
+     * @property Validator\Between $isBetween
      * @method   bool                           isBetween($input, $min, $max) Check if the input is between the specified minimum and maximum value
      *
      * Date and time
-     * @property Validator\Date         $isDate
+     * @property Validator\Date $isDate
      * @method   bool                   isDate($input, $format = 'Y-m-d') Check if the input is a valid date
-     * @property Validator\DateTime     $isDateTime
+     * @property Validator\DateTime $isDateTime
      * @method   bool                   isDateTime($input, $format = null) Check if the input is a valid datetime
-     * @property Validator\Time         $isTime
+     * @property Validator\Time $isTime
      * @method   bool                   isTime($input, $format = 'H:i:s') Check if the input is a valid time
      *
      * File and directory
-     * @property Validator\Dir          $isDir
+     * @property Validator\Dir $isDir
      * @method   bool                   isDir($input) Check if the input is existing directory
-     * @property Validator\Exists       $isExists
+     * @property Validator\Exists $isExists
      * @method   bool                   isExists($input) Check if the input is existing file or directory
-     * @property Validator\File         $isFile
+     * @property Validator\File $isFile
      * @method   bool                   isFile($input, array $options) Check if the input is valid file
-     * @property Validator\Image        $isImage
+     * @property Validator\Image $isImage
      * @method   bool                   isImage($input, array $options = array()) Check if the input is valid image
      *
      * Network
-     * @property Validator\Email        $isEmail
+     * @property Validator\Email $isEmail
      * @method   bool                   isEmail($input) Check if the input is valid email address
-     * @property Validator\Ip           $isIp
+     * @property Validator\Ip $isIp
      * @method   bool                   isIp($input, array $options = array()) Check if the input is valid IP address
-     * @property Validator\Tld          $isTld
+     * @property Validator\Tld $isTld
      * @method   bool                   isTld($input) Check if the input is a valid top-level domain
-     * @property Validator\Url          $isUrl
+     * @property Validator\Url $isUrl
      * @method   bool                   isUrl($input, array $options = array()) Check if the input is valid URL address
-     * @property Validator\Uuid         $isUuid
+     * @property Validator\Uuid $isUuid
      * @method   bool                   isUuid($input) Check if the input is valid UUID(v4)
      *
      * Region
-     * @property Validator\CreditCard   $isCreditCard
+     * @property Validator\CreditCard $isCreditCard
      * @method   bool                   isCreditCard($input, $type = null) Check if the input is valid credit card number
-     * @property Validator\Phone        $isPhone
+     * @property Validator\Phone $isPhone
      * @method   bool                   isPhone($input) Check if the input is valid phone number, contains only digit, +, - and spaces
-     * @property Validator\Chinese      $isChinese
+     * @property Validator\Chinese $isChinese
      * @method   bool                   isChinese($input) Check if the input contains only Chinese characters
-     * @property Validator\IdCardCn     $isIdCardCn
+     * @property Validator\IdCardCn $isIdCardCn
      * @method   bool                   isIdCardCn($input) Check if the input is valid Chinese identity card
-     * @property Validator\IdCardHk     $isIdCardHk
+     * @property Validator\IdCardHk $isIdCardHk
      * @method   bool                   isIdCardHk($input) Check if the input is valid Hong Kong identity card
-     * @property Validator\IdCardMo     $isIdCardMo
+     * @property Validator\IdCardMo $isIdCardMo
      * @method   bool                   isIdCardMo($input) Check if the input is valid Macau identity card
-     * @property Validator\IdCardTw     $isIdCardTw
+     * @property Validator\IdCardTw $isIdCardTw
      * @method   bool                   isIdCardTw($input) Check if the input is valid Taiwan identity card
-     * @property Validator\PhoneCn      $isPhoneCn
+     * @property Validator\PhoneCn $isPhoneCn
      * @method   bool                   isPhoneCn($input) Check if the input is valid Chinese phone number
      * @property Validator\PlateNumberCn $isPlateNumberCn
      * @method   bool                   isPlateNumberCn($input) Check if the input is valid Chinese plate number
-     * @property Validator\PostcodeCn   $isPostcodeCn
+     * @property Validator\PostcodeCn $isPostcodeCn
      * @method   bool                   isPostcodeCn($input) Check if the input is valid Chinese postcode
-     * @property Validator\QQ           $isQQ
+     * @property Validator\QQ $isQQ
      * @method   bool                   isQQ($input) Check if the input is valid QQ number
-     * @property Validator\MobileCn     $isMobileCn
+     * @property Validator\MobileCn $isMobileCn
      * @method   bool                   isMobileCn($input) Check if the input is valid Chinese mobile number
      *
      * Group
-     * @property Validator\AllOf        $isAllOf
+     * @property Validator\AllOf $isAllOf
      * @method   bool                   isAllOf($input, array $rules) Check if the input is valid by all of the rules
-     * @property Validator\NoneOf       $isNoneOf
+     * @property Validator\NoneOf $isNoneOf
      * @method   bool                   isNoneOf($input, array $rules) Check if the input is NOT valid by all of specified rules
-     * @property Validator\OneOf        $isOneOf
+     * @property Validator\OneOf $isOneOf
      * @method   bool                   isOneOf($input, array $rules) Check if the input is valid by any of the rules
-     * @property Validator\SomeOf       $isSomeOf
+     * @property Validator\SomeOf $isSomeOf
      * @method   bool                   isSomeOf($input, array $rules, $atLeast) Check if the input is valid by specified number of the rules
      *
      * Others
      * @property Validator\RecordExists $isRecordExists
      * @method   bool                   isRecordExists($input, $table, $field = 'id') Check if the input is existing table record
-     * @property Validator\All          $isAll
+     * @property Validator\All $isAll
      * @method   bool                   isAll($input, array $rules) Check if all of the element in the input is valid by all specified rules
-     * @property Validator\Callback     $isCallback
+     * @property Validator\Callback $isCallback
      * @method   bool                   isCallback($input, \Closure $fn, $message = null) Check if the input is valid by specified callback
-     * @property Validator\Color        $isColor
+     * @property Validator\Color $isColor
      * @method   bool                   isColor($input) Check if the input is valid Hex color
-     * @property Validator\Password     $isPassword
+     * @property Validator\Password $isPassword
      * @method   bool                   isPassword($input, array $options = array()) Check if the input password is secure enough
      */
     class Wei extends Base
@@ -415,7 +415,7 @@ namespace Wei
         /**
          * Get the service container instance
          *
-         * @param array $config                 The array or file configuration
+         * @param array $config The array or file configuration
          * @return $this
          * @throws \InvalidArgumentException    When the configuration parameter is not array or file
          */
@@ -459,7 +459,7 @@ namespace Wei
         /**
          * Autoload the PSR-0 class
          *
-         * @param  string $class the name of the class
+         * @param string $class the name of the class
          * @return bool
          */
         public function autoload($class)
@@ -631,32 +631,37 @@ namespace Wei
                 $this->beforeConstruct && call_user_func($this->beforeConstruct, $this, $full, $name);
 
                 // Load the service configuration and make sure "wei" option at first
-                $options = array('wei' => $this) + $options + (array)$this->getConfig($full);
+                $options = array('wei' => $this) + $options + (array) $this->getConfig($full);
 
                 $this->services[$full] = new $class($options);
 
                 // Trigger the after construct callback
-                $this->afterConstruct && call_user_func($this->afterConstruct, $this, $full, $name, $this->services[$full]);
+                $this->afterConstruct && call_user_func($this->afterConstruct, $this, $full, $name,
+                    $this->services[$full]);
 
                 return $this->services[$full];
             }
 
             // Build the error message
-            $traces = debug_backtrace();
+            $traces = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 4);
 
-            // Example: $wei->notFound()
-            if (isset($traces[3]) && $name == $traces[3]['function']) {
+            // Example: $wei->notFound(), call_user_func([$wei, 'notFound'])
+            if (isset($traces[2]) && '__call' === $traces[2]['function'] && $name === $traces[2]['args'][0]) {
                 // For call_user_func/call_user_func_array
-                $file = isset($traces[3]['file']) ? $traces[3]['file'] : $traces[4]['file'];
-                $line = isset($traces[3]['line']) ? $traces[3]['line'] : $traces[4]['line'];
-                throw new \BadMethodCallException(sprintf('Method "%s->%2$s" or object "%s" (class "%s") not found, called in file "%s" at line %s', $traces[3]['class'], $traces[3]['function'], $class, $file, $line), 1011);
-            // Example: $wei->notFound
-            } elseif (isset($traces[1]) && '__get' == $traces[1]['function'] && $name == $traces[1]['args'][0]) {
-                throw new \BadMethodCallException(sprintf('Property or object "%s" (class "%s") not found, called in file "%s" at line %s', $traces[1]['args'][0], $class, $traces[1]['file'], $traces[1]['line']), 1012);
-            // Example: $wei->get('notFound');
-            } else {
-                throw new \BadMethodCallException(sprintf('Property or method "%s" not found', $name), 1013);
+                $file = $traces[2]['file'] ?? $traces[3]['file'];
+                $line = $traces[2]['line'] ?? $traces[3]['line'];
+                throw new \BadMethodCallException(sprintf('Method "%s->%s" (class "%s") not found, called in file "%s" at line %s',
+                    get_class($traces[2]['object']), $traces[2]['args'][0], $class, $file, $line), 1014);
             }
+
+            // Example: $wei->notFound
+            if (isset($traces[1]) && '__get' === $traces[1]['function'] && $name === $traces[1]['args'][0]) {
+                throw new \BadMethodCallException(sprintf('Property or object "%s" (class "%s") not found, called in file "%s" at line %s',
+                    $traces[1]['args'][0], $class, $traces[1]['file'], $traces[1]['line']), 1012);
+            }
+
+            // Example: $wei->get('notFound');
+            throw new \BadMethodCallException(sprintf('Property or method "%s" not found', $name), 1013);
         }
 
         /**
@@ -710,7 +715,7 @@ namespace Wei
         /**
          * Remove the service by the specified name
          *
-         * @param  string  $name The name of service
+         * @param string $name The name of service
          * @return bool
          */
         public function remove($name)
@@ -795,8 +800,8 @@ namespace Wei
          * Set autoload directories for autoload method
          *
          * @param array $map
-         * @throws \InvalidArgumentException
          * @return $this
+         * @throws \InvalidArgumentException
          */
         public function setAutoloadMap(array $map)
         {
@@ -873,13 +878,14 @@ namespace Wei
          * @param string $namespace The prefix namespace of the class
          * @param null $format The service name format, eg 'is%s'
          * @param bool $autoload Whether add namespace and directory to `autoloadMap` or nor
-         * @throws \InvalidArgumentException When the first parameter is not a directory
          * @return $this
+         * @throws \InvalidArgumentException When the first parameter is not a directory
          */
         public function import($dir, $namespace, $format = null, $autoload = false)
         {
             if (!is_dir($dir)) {
-                throw new \InvalidArgumentException(sprintf('Fail to import classes from non-exists directory "%s"', $dir), 1014);
+                throw new \InvalidArgumentException(sprintf('Fail to import classes from non-exists directory "%s"',
+                    $dir), 1014);
             }
 
             if ($autoload) {
@@ -976,8 +982,9 @@ namespace Wei
 /**
  * Define function in global namespace
  */
-namespace
-{
+
+namespace {
+
     /**
      * Get the service container instance
      *
