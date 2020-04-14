@@ -9,7 +9,7 @@ namespace WeiTest;
  */
 class ErrorTest extends TestCase
 {
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->logger->clean();
         parent::tearDown();

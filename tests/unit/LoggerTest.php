@@ -7,7 +7,7 @@ namespace WeiTest;
  */
 class LoggerTest extends TestCase
 {
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->logger->clean();
         parent::tearDown();

@@ -4,7 +4,7 @@ namespace WeiTest;
 
 class MemcacheTest extends CacheTestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         if (!extension_loaded('memcache') || !class_exists('\Memcache')) {
             $this->markTestSkipped('The memcache extension is not loaded');

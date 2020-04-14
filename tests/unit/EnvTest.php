@@ -4,7 +4,7 @@ namespace WeiTest;
 
 class EnvTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->wei->setConfig('env:configFile', __DIR__ . '/Fixtures/env/%env%.php');
 

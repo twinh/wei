@@ -5,7 +5,7 @@ namespace WeiTest;
 
 class MysqlDbTest extends DbTest
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->db = $this->mysqlDb;
 

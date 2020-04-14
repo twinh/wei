@@ -1,15 +1,16 @@
 {
     "name": "wei/wei",
-    "description": "A micro-framework provided powerful and simple APIs for faster and easier PHP 5.4+ development.",
+    "description": "A micro-framework provided powerful and simple APIs for faster and easier PHP development.",
     "type": "library",
     "keywords": ["framework", "cache", "database", "validator"],
     "homepage": "https://github.com/twinh/wei",
     "license": "MIT",
     "require": {
-        "php": ">=5.4"
+        "php": ">=7.2"
     },
     "require-dev": {
-        "joseph-lenton/php-error": "dev-master"
+        "joseph-lenton/php-error": "dev-master",
+        "phpunit/phpunit": "^8 || ^9"
     },
     "authors": [
         {

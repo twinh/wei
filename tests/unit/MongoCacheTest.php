@@ -4,7 +4,7 @@ namespace WeiTest;
 
 class MongoCacheTest extends CacheTestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         if (!extension_loaded('mongo') || !class_exists('MongoClient')) {
             $this->markTestSkipped('The mongo extension is not loaded');

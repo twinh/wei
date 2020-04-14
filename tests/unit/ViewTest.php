@@ -12,7 +12,7 @@ class ViewTest extends TestCase
      */
     protected $object;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

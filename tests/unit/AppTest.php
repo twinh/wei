@@ -9,7 +9,7 @@ namespace WeiTest;
  */
 class AppTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -18,7 +18,7 @@ class AppTest extends TestCase
         $this->app->setOption('controllerFormat', 'WeiTest\Fixtures\App\Controller\%controller%');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->logger->clean();
         parent::tearDown();

@@ -9,7 +9,7 @@ class SessionTest extends TestCase
      */
     protected $object;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (headers_sent($file, $line)) {
             $this->markTestSkipped(sprintf('Unable to start session, output started at %s:%s', $file, $line));
@@ -46,7 +46,7 @@ class SessionTest extends TestCase
         );
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         // FIXME why sometime $this->object is NULL
         if ($this->object) {

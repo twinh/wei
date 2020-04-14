@@ -4,7 +4,7 @@ namespace WeiTest;
 
 class PgsqlCacheTest extends CacheTestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         try {
             $this->object = $this->wei->pgsqlDbCache;

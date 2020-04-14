@@ -167,7 +167,7 @@ class ETest extends TestCase
     );
 
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->escaper = new Escaper(array(
             'encoding' => 'utf-8'

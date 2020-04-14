@@ -8,7 +8,7 @@ class RecordExistsTest extends TestCase
         'table' => 'users'
     );
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

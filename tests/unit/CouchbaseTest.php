@@ -4,7 +4,7 @@ namespace WeiTest;
 
 class CouchbaseTest extends CacheTestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $mock = false;
 

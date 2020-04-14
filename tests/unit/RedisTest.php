@@ -4,7 +4,7 @@ namespace WeiTest;
 
 class RedisTest extends CacheTestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         if (!extension_loaded('redis') || !class_exists('\Redis')) {
             $this->markTestSkipped('The "redis" extension is not loaded');

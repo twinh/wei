@@ -19,7 +19,7 @@ class HttpTest extends TestCase
 
     public $triggeredEvents;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

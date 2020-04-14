@@ -9,7 +9,7 @@ class FileCacheTest extends CacheTestCase
      */
     protected $object;
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->object->clear();
 

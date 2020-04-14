@@ -4,7 +4,7 @@ namespace WeiTest;
 
 class LockTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->lock->releaseAll();
     }
