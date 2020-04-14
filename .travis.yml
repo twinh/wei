@@ -22,7 +22,7 @@ before_script:
   - php -S 0.0.0.0:8000 -t tests/unit/Fixtures/ > /dev/null &
 
 script:
-  - vendor/bin/phpunit --verbose --stderr --coverage-clover build/logs/clover.xml
+  - vendor/bin/phpunit --verbose --coverage-clover build/logs/clover.xml
 
 after_success:
   - wget https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar
