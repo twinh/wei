@@ -453,7 +453,10 @@ class ValidatorTest extends TestCase
         $validator = $this->validate();
 
         $validator->setData($data);
+        $this->assertSame('test@example.com', $validator->getFieldData('email'));
+
         $validator->setFieldData('age', 18);
+        $this->assertSame(18, $validator->getFieldData('age'));
     }
 
     public function testUnexpectedTypeException()
