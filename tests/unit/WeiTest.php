@@ -586,7 +586,6 @@ class WeiTest extends TestCase
     {
         $wei = $this->wei;
         $wei->setCheckServiceMethod(true);
-        $wei->setAlias('staticService', StaticService::class);
 
         $service = StaticService::staticHasTag();
         $this->assertInstanceOf(StaticService::class, $service);
@@ -606,7 +605,6 @@ class WeiTest extends TestCase
     public function testStaticCallWithoutCheckServiceMethod()
     {
         $wei = $this->wei;
-        $wei->setAlias('staticService', StaticService::class);
 
         $result = StaticService::staticHasTag();
         $this->assertInstanceOf(StaticService::class, $result);
@@ -619,7 +617,6 @@ class WeiTest extends TestCase
     {
         $wei = $this->wei;
         $wei->setCheckServiceMethod(true);
-        $wei->setAlias('staticService', StaticService::class);
 
         $result = StaticService::staticHasTag()->dynamicHasTag();
         $this->assertSame('dynamicHasTag', $result);
@@ -641,9 +638,6 @@ class WeiTest extends TestCase
 
     public function testDynamicCallWithoutCheckServiceMethod()
     {
-        $wei = $this->wei;
-        $wei->setAlias('staticService', StaticService::class);
-
         $result = StaticService::staticHasTag()->dynamicHasTag();
         $this->assertSame('dynamicHasTag', $result);
 

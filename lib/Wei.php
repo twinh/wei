@@ -691,10 +691,13 @@ namespace Wei {
                 throw new \BadMethodCallException(sprintf('Service method "%s" not found', $method));
             }
 
-            if (isset($class::$createNewInstance) && $class::$createNewInstance) {
-                $instance = $wei->newInstance($wei->getServiceName($class));
+            $name = $wei->getServiceName($class);
+            if ($wei->has($name)) {
+                /** @var string|Base $class */
+                $instance = $class::$createNewInstance ? $wei->newInstance($name) : $wei->get($name);
             } else {
-                $instance = $wei->get($wei->getServiceName($class));
+                // Not a registered service, simply create a new instance
+                $instance = new $class(['wei' => $wei]);
             }
 
             return [$instance, $method];

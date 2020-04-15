@@ -22,7 +22,7 @@ abstract class Base
      *
      * @var bool
      */
-    protected static $createNewInstance = false;
+    public static $createNewInstance = false;
 
     /**
      * The service provider map
