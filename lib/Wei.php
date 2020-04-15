@@ -494,8 +494,9 @@ namespace Wei {
          * @param string|array $name
          * @param mixed $value
          * @return $this
+         * @svc
          */
-        public function setConfig($name, $value = null)
+        protected function setConfig($name, $value = null)
         {
             // Set array configurations
             if (is_array($name)) {
@@ -558,8 +559,9 @@ namespace Wei {
          * @param string $name The name of configuration
          * @param mixed $default The default value if configuration not found
          * @return mixed
+         * @svc
          */
-        public function getConfig($name = null, $default = null)
+        protected function getConfig($name = null, $default = null)
         {
             if (is_null($name)) {
                 return $this->configs;

@@ -571,4 +571,13 @@ class WeiTest extends TestCase
         $this->assertNotEquals('app1', $req->getOption('namespace'));
         $this->assertEquals('test', $req->getOption('namespace'));
     }
+
+    public function testStaticCall()
+    {
+        $wei = Wei::setConfig('staticCall', 'test');
+        $this->assertInstanceOf(Wei::class, $wei);
+
+        $value = Wei::getConfig('staticCall', 'test');
+        $this->assertSame('test', $value);
+    }
 }
