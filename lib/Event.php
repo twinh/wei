@@ -43,8 +43,9 @@ class Event extends Base
      * @param  array $args The arguments pass to the handle
      * @param bool $halt
      * @return array|mixed
+     * @svc
      */
-    public function trigger($name, $args = array(), $halt = false)
+    protected function trigger($name, $args = array(), $halt = false)
     {
         $this->curName = $name;
         $this->loadEvent && call_user_func($this->loadEvent, $name);
@@ -81,8 +82,9 @@ class Event extends Base
      * @param array $args
      * @return mixed
      * @link https://github.com/laravel/framework/blob/5.1/src/Illuminate/Events/Dispatcher.php#L161
+     * @svc
      */
-    public function until($name, $args = array())
+    protected function until($name, $args = array())
     {
         return $this->trigger($name, $args, true);
     }
@@ -95,8 +97,9 @@ class Event extends Base
      * @param int $priority The event priority
      * @throws \InvalidArgumentException when the second argument is not callable
      * @return $this
+     * @svc
      */
-    public function on($name, $fn = null, $priority = 0)
+    protected function on($name, $fn = null, $priority = 0)
     {
         // ( $names )
         if (is_array($name)) {
@@ -127,8 +130,9 @@ class Event extends Base
      *
      * @param string $name The name of event
      * @return $this
+     * @svc
      */
-    public function off($name)
+    protected function off($name)
     {
         if (isset($this->handlers[$name])) {
             unset($this->handlers[$name]);
@@ -141,8 +145,9 @@ class Event extends Base
      *
      * @param  string $name
      * @return bool
+     * @svc
      */
-    public function has($name)
+    protected function has($name)
     {
         return isset($this->handlers[$name]);
     }
@@ -151,8 +156,9 @@ class Event extends Base
      * Returns the name of last triggered event
      *
      * @return string
+     * @svc
      */
-    public function getCurName()
+    protected function getCurName()
     {
         return $this->curName;
     }
