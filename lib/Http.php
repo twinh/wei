@@ -414,7 +414,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         if ($this->cookies) {
             $cookies = array();
             foreach ($this->cookies as $key => $value) {
-                $cookies[] = $key . '=' . urlencode($value);
+                $cookies[] = $key . '=' . rawurlencode($value);
             }
             $opts[CURLOPT_COOKIE] = implode('; ', $cookies);
         }
