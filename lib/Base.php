@@ -136,7 +136,7 @@ abstract class Base
         }
 
         if (isset(static::$createNewInstance) && static::$createNewInstance) {
-            $instance = static::newInstance();
+            $instance = static::createNewInstance();
         } else {
             $instance = wei()->get(static::getServiceName());
         }
@@ -173,6 +173,17 @@ abstract class Base
     public function __get($name)
     {
         return $this->$name = $this->wei->get($name, array(), $this->providers);
+    }
+
+    /**
+     * Initialize a new instance of current service
+     *
+     * @param array $options
+     * @return static
+     */
+    public static function createNewInstance($options = [])
+    {
+        return new static($options);
     }
 
     /**
