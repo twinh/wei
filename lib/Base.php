@@ -18,11 +18,11 @@ use ReflectionException;
 abstract class Base
 {
     /**
-     * Whether to check if the service method exists
+     * Whether to create a new instance on static call
      *
      * @var bool
      */
-    protected static $checkServiceMethod = false;
+    protected static $createNewInstance = false;
 
     /**
      * The service provider map
@@ -49,7 +49,8 @@ abstract class Base
         if (!isset($options['wei'])) {
             $this->wei = Wei::getContainer();
         } elseif (!$options['wei'] instanceof Wei) {
-            throw new \InvalidArgumentException(sprintf('Option "wei" of class "%s" should be an instance of "Wei\Wei"', get_class($this)), 1000);
+            throw new \InvalidArgumentException(sprintf('Option "wei" of class "%s" should be an instance of "Wei\Wei"',
+                get_class($this)), 1000);
         }
         $this->setOption($options);
     }
@@ -95,33 +96,6 @@ abstract class Base
     }
 
     /**
-     * @param string $method
-     * @return bool
-     * @throws ReflectionException
-     * @noinspection UselessReturnInspection
-     */
-    protected static function isServiceMethod(string $method): bool
-    {
-        static $cache = [];
-        $exists = &$cache[static::class][$method];
-
-        if (isset($exists)) {
-            return $exists;
-        }
-
-        if (!method_exists(static::class, $method)) {
-            return $exists = false;
-        }
-
-        $ref = new \ReflectionMethod(static::class, $method);
-        if (!$ref->isProtected()) {
-            return $exists = false;
-        }
-
-        return $exists = strpos($ref->getDocComment(), "* @svc\n") !== false;
-    }
-
-    /**
      * Call a service method through static call
      *
      * @param string $method
@@ -131,16 +105,7 @@ abstract class Base
      */
     public static function __callStatic(string $method, array $args)
     {
-        if (static::$checkServiceMethod && !static::isServiceMethod($method)) {
-            throw new \BadMethodCallException(sprintf('Service method "%s" not found', $method));
-        }
-
-        if (isset(static::$createNewInstance) && static::$createNewInstance) {
-            $instance = static::createNewInstance();
-        } else {
-            $instance = wei()->get(static::getServiceName());
-        }
-        return $instance->$method(...$args);
+        return Wei::staticCaller(static::class, $method)(...$args);
     }
 
     /**
@@ -151,17 +116,9 @@ abstract class Base
      * @return mixed
      * @throws ReflectionException
      */
-    public function __call($name, $args)
+    public function __call(string $name, array $args)
     {
-        if (static::$checkServiceMethod) {
-            if (static::isServiceMethod($name)) {
-                return $this->$name(...$args);
-            }
-        } elseif (method_exists($this, $name)) {
-            return $this->$name(...$args);
-        }
-
-        return call_user_func_array($this->$name, $args);
+        return $this->wei->caller($this, $name)(...$args);
     }
 
     /**
@@ -173,27 +130,5 @@ abstract class Base
     public function __get($name)
     {
         return $this->$name = $this->wei->get($name, array(), $this->providers);
-    }
-
-    /**
-     * Initialize a new instance of current service
-     *
-     * @param array $options
-     * @return static
-     */
-    public static function createNewInstance($options = [])
-    {
-        return new static($options);
-    }
-
-    /**
-     * Receive the base name of current class
-     *
-     * @return string
-     */
-    protected static function getServiceName()
-    {
-        $parts = explode('\\', static::class);
-        return lcfirst(end($parts));
     }
 }

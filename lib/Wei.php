@@ -8,6 +8,8 @@
 
 namespace Wei {
 
+    use ReflectionException;
+
     /**
      * @see Wei\Base
      */
@@ -385,6 +387,13 @@ namespace Wei {
         protected $services = array();
 
         /**
+         * Whether to check if the service method exists
+         *
+         * @var bool
+         */
+        protected $checkServiceMethod = false;
+
+        /**
          * The current service container
          *
          * @var Wei
@@ -645,15 +654,15 @@ namespace Wei {
             }
 
             // Build the error message
-            $traces = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 4);
+            $traces = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 5);
 
             // Example: $wei->notFound(), call_user_func([$wei, 'notFound'])
-            if (isset($traces[2]) && '__call' === $traces[2]['function'] && $name === $traces[2]['args'][0]) {
+            if (isset($traces[3]) && '__call' === $traces[3]['function'] && $name === $traces[3]['args'][0]) {
                 // For call_user_func/call_user_func_array
-                $file = $traces[2]['file'] ?? $traces[3]['file'];
-                $line = $traces[2]['line'] ?? $traces[3]['line'];
+                $file = $traces[3]['file'] ?? $traces[4]['file'];
+                $line = $traces[3]['line'] ?? $traces[4]['line'];
                 throw new \BadMethodCallException(sprintf('Method "%s->%s" (class "%s") not found, called in file "%s" at line %s',
-                    get_class($traces[2]['object']), $traces[2]['args'][0], $class, $file, $line), 1014);
+                    get_class($traces[3]['object']), $traces[3]['args'][0], $class, $file, $line), 1014);
             }
 
             // Example: $wei->notFound
@@ -664,6 +673,51 @@ namespace Wei {
 
             // Example: $wei->get('notFound');
             throw new \BadMethodCallException(sprintf('Property or method "%s" not found', $name), 1013);
+        }
+
+        /**
+         * Returns a callable for "__callStatic" method
+         *
+         * @param string $class
+         * @param string $method
+         * @return callable
+         * @throws ReflectionException
+         */
+        public static function staticCaller($class, $method)
+        {
+            $wei = static::getContainer();
+
+            if ($wei->checkServiceMethod && !$wei->isServiceMethod($class, $method)) {
+                throw new \BadMethodCallException(sprintf('Service method "%s" not found', $method));
+            }
+
+            if (isset($class::$createNewInstance) && $class::$createNewInstance) {
+                $instance = $wei->newInstance($wei->getServiceName($class));
+            } else {
+                $instance = $wei->get($wei->getServiceName($class));
+            }
+
+            return [$instance, $method];
+        }
+
+        /**
+         * Returns a callable for "__call" method
+         *
+         * @param Base $service
+         * @param string $method
+         * @return callable
+         * @throws ReflectionException
+         */
+        public function caller(Base $service, $method)
+        {
+            if ($this->checkServiceMethod) {
+                if ($this->isServiceMethod(get_class($service), $method)) {
+                    return [$service, $method];
+                }
+            } elseif (method_exists($service, $method)) {
+                return [$service, $method];
+            }
+            return $service->$method;
         }
 
         /**
@@ -977,6 +1031,64 @@ namespace Wei {
         protected function setServices(array $services)
         {
             $this->services = $services + $this->services;
+        }
+
+        /**
+         * @param bool $checkServiceMethod
+         * @return $this
+         */
+        public function setCheckServiceMethod(bool $checkServiceMethod)
+        {
+            $this->checkServiceMethod = $checkServiceMethod;
+            return $this;
+        }
+
+        /**
+         * @return bool
+         */
+        public function isCheckServiceMethod()
+        {
+            return $this->checkServiceMethod;
+        }
+
+        /**
+         * @param string $class
+         * @param $method
+         * @return bool|mixed
+         * @throws ReflectionException
+         * @noinspection UselessReturnInspection
+         */
+        public function isServiceMethod($class, $method)
+        {
+            static $cache = [];
+            $exists = &$cache[$class][$method];
+
+            if (isset($exists)) {
+                return $exists;
+            }
+
+            if (!method_exists($class, $method)) {
+                return $exists = false;
+            }
+
+            $ref = new \ReflectionMethod($class, $method);
+            if (!$ref->isProtected()) {
+                return $exists = false;
+            }
+
+            return $exists = strpos($ref->getDocComment(), "* @svc\n") !== false;
+        }
+
+        /**
+         * Receive the base name of specified class
+         *
+         * @param string $class
+         * @return string
+         */
+        public function getServiceName($class)
+        {
+            $parts = explode('\\', $class);
+            return lcfirst(end($parts));
         }
     }
 }

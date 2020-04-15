@@ -3,6 +3,7 @@
 namespace WeiTest;
 
 use Wei\Wei;
+use WeiTest\Fixtures\StaticService;
 
 class WeiTest extends TestCase
 {
@@ -579,5 +580,74 @@ class WeiTest extends TestCase
 
         $value = Wei::getConfig('staticCall', 'test');
         $this->assertSame('test', $value);
+    }
+
+    public function testStaticCallWithCheckServiceMethod()
+    {
+        $wei = $this->wei;
+        $wei->setCheckServiceMethod(true);
+        $wei->setAlias('staticService', StaticService::class);
+
+        $service = StaticService::staticHasTag();
+        $this->assertInstanceOf(StaticService::class, $service);
+
+        $hasException = false;
+        try {
+            StaticService::staticDontHaveTag();
+        } catch (\BadMethodCallException $e) {
+            $hasException = true;
+            $this->assertSame('Service method "staticDontHaveTag" not found', $e->getMessage());
+        }
+        $this->assertTrue($hasException);
+
+        $wei->setCheckServiceMethod(false);
+    }
+
+    public function testStaticCallWithoutCheckServiceMethod()
+    {
+        $wei = $this->wei;
+        $wei->setAlias('staticService', StaticService::class);
+
+        $result = StaticService::staticHasTag();
+        $this->assertInstanceOf(StaticService::class, $result);
+
+        $result = StaticService::staticDontHaveTag();
+        $this->assertInstanceOf(StaticService::class, $result);
+    }
+
+    public function testDynamicCallWithCheckServiceMethod()
+    {
+        $wei = $this->wei;
+        $wei->setCheckServiceMethod(true);
+        $wei->setAlias('staticService', StaticService::class);
+
+        $result = StaticService::staticHasTag()->dynamicHasTag();
+        $this->assertSame('dynamicHasTag', $result);
+
+        $hasException = false;
+        try {
+            StaticService::staticHasTag()->dynamicDontHaveTag();
+        } catch (\BadMethodCallException $e) {
+            $hasException = true;
+            $this->assertStringContainsString(implode([
+                'Method "WeiTest\Fixtures\StaticService->dynamicDontHaveTag" ',
+                '(class "Wei\DynamicDontHaveTag") not found, called in file '
+            ]), $e->getMessage());
+        }
+        $this->assertTrue($hasException);
+
+        $wei->setCheckServiceMethod(false);
+    }
+
+    public function testDynamicCallWithoutCheckServiceMethod()
+    {
+        $wei = $this->wei;
+        $wei->setAlias('staticService', StaticService::class);
+
+        $result = StaticService::staticHasTag()->dynamicHasTag();
+        $this->assertSame('dynamicHasTag', $result);
+
+        $result = StaticService::staticHasTag()->dynamicDontHaveTag();
+        $this->assertSame('dynamicDontHaveTag', $result);
     }
 }
