@@ -293,7 +293,7 @@ class SessionMixin {
 
 /**
  * @property    Wei\Soap $soap A Soap client that works like HTTP service
- * @method      wei\Soap soap($options = []) Create a new Soap service and execute
+ * @method      Wei\Soap soap($options = []) Create a new Soap service and execute
  */
 class SoapMixin {
 }
