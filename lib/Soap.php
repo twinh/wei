@@ -1,6 +1,6 @@
 <?php
 
-namespace wei;
+namespace Wei;
 
 use SoapClient;
 
