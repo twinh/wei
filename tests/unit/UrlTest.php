@@ -5,17 +5,17 @@ namespace WeiTest;
 class UrlTest extends TestCase
 {
     /**
-     * @dataProvider providerForUrl
+     * @dataProvider providerForTo
      */
-    public function testUrl($result, $url, $params = array())
+    public function testTo($result, $url, $params = array())
     {
         // Reset url to root path
         $this->request->setBaseUrl('/');
 
-        $this->assertEquals($result, $this->url($url, $params));
+        $this->assertEquals($result, $this->url->to($url, $params));
     }
 
-    public function providerForUrl()
+    public function providerForTo()
     {
         return array(
             array(
@@ -79,5 +79,12 @@ class UrlTest extends TestCase
         $this->assertEquals('/articles/1?a=b', $this->url->query('articles/%s', 1));
 
         $this->assertEquals('/articles/1?c=d&a=b', $this->url->query('articles/%s', 1, array('c' => 'd')));
+    }
+
+    public function testInvoke()
+    {
+        $this->request->setBaseUrl('/');
+
+        $this->assertSame('/test', $this->url('test'));
     }
 }

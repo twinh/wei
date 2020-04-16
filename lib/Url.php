@@ -17,7 +17,7 @@ namespace Wei;
 class Url extends Base
 {
     /**
-     * Generate the URL by specified URL and parameters
+     * Invoke the "to" method
      *
      * @param string $url
      * @param string|array $argsOrParams
@@ -25,6 +25,20 @@ class Url extends Base
      * @return string
      */
     public function __invoke($url = '', $argsOrParams = array(), $params = array())
+    {
+        return $this->to(...func_get_args());
+    }
+
+    /**
+     * Generate the URL by specified URL and parameters
+     *
+     * @param string $url
+     * @param array $argsOrParams
+     * @param array $params
+     * @return string
+     * @svc
+     */
+    protected function to($url = '', $argsOrParams = array(), $params = array())
     {
         return $this->request->getBaseUrl() . '/' . $this->append($url, $argsOrParams, $params);
     }
