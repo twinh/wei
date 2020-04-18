@@ -670,4 +670,44 @@ class WeiTest extends TestCase
         $result = StaticService::staticHasTag()->dynamicDontHaveTag();
         $this->assertSame('dynamicDontHaveTag', $result);
     }
+
+    public function testCreateNewInstanceFromDynamicCall()
+    {
+        $this->wei->setAlias('staticService', StaticService::class);
+
+        $service1 = $this->wei->get('staticService');
+        $service2 = $this->wei->get('staticService');
+        $this->assertSame($service1, $service2);
+
+        StaticService::$createNewInstance = true;
+        // Remove cached service
+        $this->wei->remove('staticService');
+
+        $service1 = $this->wei->get('staticService');
+        $service2 = $this->wei->get('staticService');
+        $this->assertEquals($service1, $service2);
+        $this->assertNotSame($service1, $service2);
+
+        StaticService::$createNewInstance = false;
+    }
+
+    public function testCreateNewInstanceFromStaticCall()
+    {
+        $this->wei->setAlias('staticService', StaticService::class);
+
+        $service1 = StaticService::staticHasTag();
+        $service2 = StaticService::staticHasTag();
+        $this->assertSame($service1, $service2);
+
+        StaticService::$createNewInstance = true;
+        // Remove cached service
+        $this->wei->remove('staticService');
+
+        $service1 = StaticService::staticHasTag();
+        $service2 = StaticService::staticHasTag();
+        $this->assertEquals($service1, $service2);
+        $this->assertNotSame($service1, $service2);
+
+        StaticService::$createNewInstance = false;
+    }
 }

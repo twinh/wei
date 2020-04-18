@@ -645,7 +645,9 @@ namespace Wei {
                 $options = array('wei' => $this) + $options + (array) $this->getConfig($full);
 
                 $service = new $class($options);
-                !$new && $this->services[$full] = $service;
+                if (!$new && (!isset($class::$createNewInstance) || $class::$createNewInstance !== true)) {
+                    $this->services[$full] = $service;
+                }
 
                 // Trigger the after construct callback
                 $this->afterConstruct && call_user_func($this->afterConstruct, $this, $full, $name, $service);
@@ -693,8 +695,7 @@ namespace Wei {
 
             $name = $wei->getServiceName($class);
             if ($wei->has($name)) {
-                /** @var string|Base $class */
-                $instance = $class::$createNewInstance ? $wei->newInstance($name) : $wei->get($name);
+                $instance = $wei->get($name);
             } else {
                 // Not a registered service, simply create a new instance
                 $instance = new $class(['wei' => $wei]);
