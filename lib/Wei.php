@@ -611,10 +611,10 @@ namespace Wei {
          * @param string $name The name of the service, without class prefix "Wei\"
          * @param array $options The option properties for service
          * @param array $providers The dependent configuration
-         * @throws \BadMethodCallException
+         * @param bool $new Whether to create a new instance
          * @return Base
          */
-        public function get($name, array $options = array(), array $providers = array())
+        public function get($name, array $options = array(), array $providers = array(), $new = false)
         {
             // Resolve the service name in dependent configuration
             if (isset($providers[$name])) {
@@ -625,7 +625,7 @@ namespace Wei {
                 $name = $this->providers[$name];
             }
 
-            if (isset($this->services[$name])) {
+            if (!$new && isset($this->services[$name])) {
                 return $this->services[$name];
             }
 
@@ -644,13 +644,13 @@ namespace Wei {
                 // Load the service configuration and make sure "wei" option at first
                 $options = array('wei' => $this) + $options + (array) $this->getConfig($full);
 
-                $this->services[$full] = new $class($options);
+                $service = new $class($options);
+                !$new && $this->services[$full] = $service;
 
                 // Trigger the after construct callback
-                $this->afterConstruct && call_user_func($this->afterConstruct, $this, $full, $name,
-                    $this->services[$full]);
+                $this->afterConstruct && call_user_func($this->afterConstruct, $this, $full, $name, $service);
 
-                return $this->services[$full];
+                return $service;
             }
 
             // Build the error message
@@ -754,8 +754,7 @@ namespace Wei {
          */
         public function newInstance($name, array $options = array(), array $providers = array())
         {
-            $name .= uniqid() . '.' . $name;
-            return $this->wei->get($name, $options, $providers);
+            return $this->wei->get($name, $options, $providers, true);
         }
 
         /**

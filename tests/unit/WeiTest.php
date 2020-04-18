@@ -2,6 +2,7 @@
 
 namespace WeiTest;
 
+use Wei\Request;
 use Wei\Wei;
 use WeiTest\Fixtures\StaticService;
 
@@ -101,6 +102,13 @@ class WeiTest extends TestCase
             )
         ));
         $this->assertEquals('DELETE', $request->getMethod());
+
+        // Reset config
+        $wei->setConfig(array(
+            'request' => array(
+                'method' => null
+            )
+        ));
     }
 
     public function testGetConfigs()
@@ -328,6 +336,24 @@ class WeiTest extends TestCase
         $this->assertInstanceOf('\Wei\Request', $newRequest);
         $this->assertEquals($this->request, $newRequest);
         $this->assertNotSame($this->request, $newRequest);
+    }
+
+    public function testNewInstanceHaveSameConfig()
+    {
+        $this->wei->setConfig('request', [
+            'method' => 'DELETE',
+        ]);
+
+        $this->assertSame('DELETE', $this->wei->request->getMethod());
+
+        /** @var Request $newRequest */
+        $newRequest = $this->wei->newInstance('request');
+        $this->assertSame('DELETE', $newRequest->getMethod());
+
+        // Reset config
+        $this->wei->setConfig('request', [
+            'method' => null,
+        ]);
     }
 
     public function testGetClassFromAliases()
