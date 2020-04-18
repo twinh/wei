@@ -602,7 +602,7 @@ class HttpTest extends TestCase
             'post' => true
         );
         /** @var $http \Wei\Http */
-        $http = $this->wei->newInstance('http')->post('http://httpbin.org/post', $data, 'jsonObject');
+        $http = $this->wei->newInstance('http', ['ip' => false])->post('http://httpbin.org/post', $data, 'jsonObject');
 
         $data = $http->getResponse();
         $this->assertTrue($http->isSuccess());
