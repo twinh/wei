@@ -11,14 +11,6 @@ namespace Wei;
 /**
  * A wrapper class for password hashing functions
  *
- * If you needs these original functions, please checkout
- * https://github.com/ircmaxell/password_compat instead.
- *
- * - password_hash
- * - password_get_info
- * - password_needs_rehash
- * - password_verify
- *
  * @author      Anthony Ferrara <ircmaxell@php.net>
  * @author      https://github.com/ircmaxell/password_compat/graphs/contributors
  * @author      Twin Huang <twinhuang@qq.com>
@@ -27,53 +19,32 @@ namespace Wei;
 class Password extends Base
 {
     /**
-     * The cost parameter for bcrypt
+     * The algorithm used for new password hashes
      *
-     * @var int
+     * @var string
      */
-    protected $cost = 10;
+    protected $algo = PASSWORD_DEFAULT;
 
     /**
-     * Constructor
+     * The options array passed to password_hash
      *
-     * @param array $options
-     * @throws \Exception
+     * @var array
      */
-    public function __construct(array $options = array())
-    {
-        parent::__construct($options);
-
-        if (!defined('PASSWORD_BCRYPT')) {
-            define('PASSWORD_BCRYPT', 1);
-            define('PASSWORD_DEFAULT', PASSWORD_BCRYPT);
-        }
-    }
+    protected $options = [
+        'cost' => 10,
+    ];
 
     /**
      * Hash the password using the specified algorithm
      *
      * @param string $password The password to hash
-     * @param string $salt The salt string for the algorithm to use
-     * @throws \InvalidArgumentException
      * @return string|false The hashed password, or false on error.
+     * @throws \InvalidArgumentException
+     * @svc
      */
-    public function hash($password, $salt = null)
+    protected function hash($password)
     {
-        $hash_format = sprintf("$2y$%02d$", $this->cost);
-
-        !$salt && $salt = $this->generateSalt();
-        if (strlen($salt) < 22) {
-            throw new \InvalidArgumentException(sprintf("Provided salt is too short: %d expecting %d", strlen($salt), 22));
-        }
-
-        $hash = $hash_format . $salt;
-        $ret = crypt($password, $hash);
-
-        if (!is_string($ret) || strlen($ret) <= 13) {
-            return false;
-        }
-
-        return $ret;
+        return password_hash($password, $this->algo, $this->options);
     }
 
     /**
@@ -89,23 +60,12 @@ class Password extends Base
      * )
      *
      * @param string $hash The password hash to extract info from
-     *
      * @return array The array of information about the hash.
+     * @svc
      */
-    public function getInfo($hash)
+    protected function getInfo($hash)
     {
-        $return = array(
-            'algo' => 0,
-            'algoName' => 'unknown',
-            'options' => array(),
-        );
-        if (substr($hash, 0, 4) == '$2y$' && strlen($hash) == 60) {
-            $return['algo'] = PASSWORD_BCRYPT;
-            $return['algoName'] = 'bcrypt';
-            list($cost) = sscanf($hash, "$2y$%d$");
-            $return['options']['cost'] = $cost;
-        }
-        return $return;
+        return password_get_info($hash);
     }
 
     /**
@@ -114,50 +74,25 @@ class Password extends Base
      * If the answer is true, after validating the password using password_verify, rehash it.
      *
      * @param string $hash The hash to test
-     * @param int $algo The algorithm used for new password hashes
-     * @param array $options The options array passed to password_hash
-     *
      * @return boolean True if the password needs to be rehashed.
+     * @svc
      */
-    public function needsRehash($hash, $algo, array $options = array())
+    protected function needsRehash($hash)
     {
-        $info = $this->getInfo($hash);
-        if ($info['algo'] != $algo) {
-            return true;
-        }
-        switch ($algo) {
-            case PASSWORD_BCRYPT:
-                $cost = isset($options['cost']) ? $options['cost'] : 10;
-                if ($cost != $info['options']['cost']) {
-                    return true;
-                }
-                break;
-        }
-        return false;
+        return password_needs_rehash($hash, $this->algo, $this->options);
     }
 
     /**
      * Verify a password against a hash using a timing attack resistant approach
      *
      * @param string $password The password to verify
-     * @param string $hash     The hash to verify against
-     *
+     * @param string $hash The hash to verify against
      * @return boolean If the password matches the hash
+     * @svc
      */
-    public function verify($password, $hash)
+    protected function verify($password, $hash)
     {
-        $ret = crypt($password, $hash);
-        $len = strlen($ret);
-        if (!is_string($ret) || $len != strlen($hash) || strlen($ret) <= 13) {
-            return false;
-        }
-
-        $status = 0;
-        for ($i = 0; $i < $len; $i++) {
-            $status |= (ord($ret[$i]) ^ ord($hash[$i]));
-        }
-
-        return $status === 0;
+        return password_verify($password, $hash);
     }
 
     /**
@@ -166,13 +101,14 @@ class Password extends Base
      * @param int $cost
      * @return $this
      * @throws \InvalidArgumentException
+     * @deprecated
      */
     public function setCost($cost)
     {
         if ($cost < 4 || $cost > 31) {
             throw new \InvalidArgumentException(sprintf("Invalid bcrypt cost parameter specified: %s", $cost));
         }
-        $this->cost = $cost;
+        $this->options['cost'] = $cost;
         return $this;
     }
 
@@ -180,6 +116,7 @@ class Password extends Base
      * Generate a 22 bytes salt string
      *
      * @return string
+     * @deprecated
      */
     public function generateSalt()
     {
