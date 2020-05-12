@@ -37,12 +37,6 @@ class PasswordTest extends TestCase
         $this->password->setCost('foo');
     }
 
-    public function testInvalidBcryptSaltShort()
-    {
-        $this->setExpectedException('InvalidArgumentException', 'Provided salt is too short: 3 expecting 22');
-        $this->password->hash('foo', 'abc');
-    }
-
     /**
      * @dataProvider provideInfo
      */
