@@ -19,13 +19,6 @@ class PasswordTest extends TestCase
         $this->assertEquals($hash, crypt('foo', $hash));
     }
 
-    public function testKnownSalt()
-    {
-        $this->password->setCost(7);
-        $hash = $this->password->hash('rasmuslerdorf', 'usesomesillystringforsalt');
-        $this->assertEquals('$2y$07$usesomesillystringfore2uDLvp1Ii2e./U9C8sBjqp8I90dH6hi', $hash);
-    }
-
     public function testInvalidBcryptCostLow()
     {
         $this->setExpectedException('InvalidArgumentException', 'Invalid bcrypt cost parameter specified: 3');
