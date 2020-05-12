@@ -710,4 +710,19 @@ class WeiTest extends TestCase
 
         StaticService::$createNewInstance = false;
     }
+
+    public function testCreateNewInstanceWontBeCached()
+    {
+        $this->wei->setAlias('staticService', StaticService::class);
+        StaticService::$createNewInstance = true;
+
+        // Won't cache `staticService` service
+        $this->wei->staticService;
+
+        $service1 = StaticService::staticHasTag();
+        $service2 = StaticService::staticHasTag();
+
+        $this->assertEquals($service1, $service2);
+        $this->assertNotSame($service1, $service2);
+    }
 }

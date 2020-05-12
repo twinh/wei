@@ -919,6 +919,19 @@ namespace Wei {
         }
 
         /**
+         * Get a service object by the given name
+         *
+         * @param string $name The name of service
+         * @return Base
+         */
+        public function __get($name)
+        {
+            // The service has been conditionally cached in the `get` method,
+            // it should not call `__set` to cache the service here
+            return $this->get($name);
+        }
+
+        /**
          * Add a service to the service container
          *
          * @param string $name The name of service
