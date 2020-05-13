@@ -22,7 +22,7 @@ abstract class Base
      *
      * @var bool
      */
-    public static $createNewInstance = false;
+    protected static $createNewInstance = false;
 
     /**
      * The service provider map
@@ -93,6 +93,16 @@ abstract class Base
         } else {
             return isset($this->$name) ? $this->$name : null;
         }
+    }
+
+    /**
+     * Whether to create a new instance on static call
+     *
+     * @return bool
+     */
+    public static function isCreateNewInstance()
+    {
+        return static::$createNewInstance;
     }
 
     /**

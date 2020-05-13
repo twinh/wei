@@ -645,7 +645,7 @@ namespace Wei {
                 $options = array('wei' => $this) + $options + (array) $this->getConfig($full);
 
                 $service = new $class($options);
-                if (!$new && (!isset($class::$createNewInstance) || $class::$createNewInstance !== true)) {
+                if (!$new && (!method_exists($class, 'isCreateNewInstance') || !$class::isCreateNewInstance())) {
                     $this->services[$full] = $service;
                 }
 

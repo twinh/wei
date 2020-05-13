@@ -6,6 +6,16 @@ use Wei\Base;
 
 class StaticService extends Base
 {
+    public static function enableCreateNewInstance()
+    {
+        static::$createNewInstance = true;
+    }
+
+    public static function disableCreateNewInstance()
+    {
+        static::$createNewInstance = false;
+    }
+
     /**
      * @svc
      */

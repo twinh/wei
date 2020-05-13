@@ -679,7 +679,7 @@ class WeiTest extends TestCase
         $service2 = $this->wei->get('staticService');
         $this->assertSame($service1, $service2);
 
-        StaticService::$createNewInstance = true;
+        StaticService::enableCreateNewInstance();
         // Remove cached service
         $this->wei->remove('staticService');
 
@@ -688,7 +688,7 @@ class WeiTest extends TestCase
         $this->assertEquals($service1, $service2);
         $this->assertNotSame($service1, $service2);
 
-        StaticService::$createNewInstance = false;
+        StaticService::disableCreateNewInstance();
     }
 
     public function testCreateNewInstanceFromStaticCall()
@@ -699,7 +699,7 @@ class WeiTest extends TestCase
         $service2 = StaticService::staticHasTag();
         $this->assertSame($service1, $service2);
 
-        StaticService::$createNewInstance = true;
+        StaticService::enableCreateNewInstance();
         // Remove cached service
         $this->wei->remove('staticService');
 
@@ -708,13 +708,13 @@ class WeiTest extends TestCase
         $this->assertEquals($service1, $service2);
         $this->assertNotSame($service1, $service2);
 
-        StaticService::$createNewInstance = false;
+        StaticService::disableCreateNewInstance();
     }
 
     public function testCreateNewInstanceWontBeCached()
     {
         $this->wei->setAlias('staticService', StaticService::class);
-        StaticService::$createNewInstance = true;
+        StaticService::enableCreateNewInstance();
 
         // Won't cache `staticService` service
         $this->wei->staticService;
@@ -724,5 +724,7 @@ class WeiTest extends TestCase
 
         $this->assertEquals($service1, $service2);
         $this->assertNotSame($service1, $service2);
+
+        StaticService::disableCreateNewInstance();
     }
 }
