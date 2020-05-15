@@ -40,6 +40,7 @@ class Response extends Base
         305 => 'Use Proxy',
         307 => 'Temporary Redirect',
         // Client Errors
+        400 => 'Bad Request',
         401 => 'Unauthorized',
         403 => 'Forbidden',
         404 => 'Not Found',
