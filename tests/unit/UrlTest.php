@@ -2,6 +2,9 @@
 
 namespace WeiTest;
 
+use Wei\Request;
+use Wei\Url;
+
 class UrlTest extends TestCase
 {
     /**
@@ -20,18 +23,18 @@ class UrlTest extends TestCase
         return array(
             array(
                 '/users?id=twin',
-                'users?id=twin'
+                'users?id=twin',
             ),
             array(
                 '/user?id=twin',
                 'user',
-                array('id' => 'twin')
+                array('id' => 'twin'),
             ),
             array(
                 '/?id=twin',
                 '',
-                array('id' => 'twin')
-            )
+                array('id' => 'twin'),
+            ),
         );
     }
 
@@ -58,11 +61,14 @@ class UrlTest extends TestCase
 
         $this->assertEquals('/articles/1/comments/2', $this->url('articles/%s/comments/%s', array(1, 2)));
 
-        $this->assertEquals('/articles/1/comments/2?a=b', $this->url('articles/%s/comments/%s', array(1, 2), array('a' => 'b')));
+        $this->assertEquals('/articles/1/comments/2?a=b',
+            $this->url('articles/%s/comments/%s', array(1, 2), array('a' => 'b')));
 
-        $this->assertEquals('/articles/b/comments/d', $this->url('articles/%s/comments/%s', array('a' => 'b', 'c' => 'd')));
+        $this->assertEquals('/articles/b/comments/d',
+            $this->url('articles/%s/comments/%s', array('a' => 'b', 'c' => 'd')));
 
-        $this->assertEquals('/articles/b/comments/d', $this->url('articles/%s/comments/%s', array('a' => 'b', 'c' => 'd', 'e' => 'f')));
+        $this->assertEquals('/articles/b/comments/d',
+            $this->url('articles/%s/comments/%s', array('a' => 'b', 'c' => 'd', 'e' => 'f')));
     }
 
     public function testQueryUrl()
@@ -86,5 +92,78 @@ class UrlTest extends TestCase
         $this->request->setBaseUrl('/');
 
         $this->assertSame('/test', $this->url('test'));
+    }
+
+    /**
+     * @param array $options
+     * @param string $to
+     * @param array $argOrParams
+     * @param array $params
+     * @param string $result
+     * @dataProvider providerForUrlRewrite
+     */
+    public function testUrlRewrite(array $options, string $to, array $argOrParams, array $params, string $result)
+    {
+        $request = new Request(['wei' => $this->wei, 'fromGlobal' => false] + $options);
+        $url = new Url(['wei' => $this->wei, 'request' => $request]);
+
+        $this->assertSame($result, $url->to($to, $argOrParams, $params));
+    }
+
+    public function providerForUrlRewrite()
+    {
+        return [
+            [
+                [
+                    'defaultUrlRewrite' => true,
+                    'data' => [
+                        'r' => 'test',
+                    ],
+                ],
+                'users?id=twin',
+                [],
+                [],
+                '/users?id=twin',
+            ],
+            [
+                [
+                    'defaultUrlRewrite' => false,
+                    'data' => [
+                        'r' => 'test',
+                    ],
+                ],
+                'user',
+                ['id' => 'twin'],
+                [],
+                '/?r=user&id=twin',
+            ],
+            [
+                [
+                    'defaultUrlRewrite' => false,
+                ],
+                '',
+                ['id' => 'twin'],
+                [],
+                '/?id=twin',
+            ],
+            [
+                [
+                    'defaultUrlRewrite' => false,
+                ],
+                'users/%s',
+                [1],
+                [],
+                '/?r=users%2F1',
+            ],
+            [
+                [
+                    'defaultUrlRewrite' => false,
+                ],
+                'users/%s',
+                [1],
+                ['key' => 'value'],
+                '/?r=users%2F1&key=value',
+            ],
+        ];
     }
 }

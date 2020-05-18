@@ -68,8 +68,8 @@ class RequestTest extends TestCase
                 'wei' => $this->wei,
                 'fromGlobal' => false,
                 'servers' => array(
-                    'REQUEST_METHOD' => $method
-                )
+                    'REQUEST_METHOD' => $method,
+                ),
             ));
             $this->wei->set('request', $request);
 
@@ -149,163 +149,163 @@ class RequestTest extends TestCase
         return array(
             array(
                 array(
-                    'REQUEST_URI'     => '/index.php/news/3?var1=val1&var2=val2',
-                    'QUERY_URI'       => 'var1=val1&var2=val2',
-                    'SCRIPT_NAME'     => '/index.php',
-                    'PHP_SELF'        => '/index.php/news/3',
+                    'REQUEST_URI' => '/index.php/news/3?var1=val1&var2=val2',
+                    'QUERY_URI' => 'var1=val1&var2=val2',
+                    'SCRIPT_NAME' => '/index.php',
+                    'PHP_SELF' => '/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/index.php',
-                '/news/3'
+                '/news/3',
             ),
             array(
                 array(
-                    'REQUEST_URI'     => '/public/index.php/news/3?var1=val1&var2=val2',
-                    'QUERY_URI'       => 'var1=val1&var2=val2',
-                    'SCRIPT_NAME'     => '/public/index.php',
-                    'PHP_SELF'        => '/public/index.php/news/3',
+                    'REQUEST_URI' => '/public/index.php/news/3?var1=val1&var2=val2',
+                    'QUERY_URI' => 'var1=val1&var2=val2',
+                    'SCRIPT_NAME' => '/public/index.php',
+                    'PHP_SELF' => '/public/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/public/index.php',
                 ),
                 '/public/index.php',
-                '/news/3'
+                '/news/3',
             ),
             array(
                 array(
-                    'REQUEST_URI'     => '/index.php/news/3?var1=val1&var2=val2',
-                    'SCRIPT_NAME'     => '/home.php',
-                    'PHP_SELF'        => '/index.php/news/3',
+                    'REQUEST_URI' => '/index.php/news/3?var1=val1&var2=val2',
+                    'SCRIPT_NAME' => '/home.php',
+                    'PHP_SELF' => '/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/index.php',
-                '/news/3'
+                '/news/3',
             ),
             array(
                 array(
-                    'REQUEST_URI'      => '/index.php/news/3?var1=val1&var2=val2',
-                    'SCRIPT_NAME'      => '/home.php',
-                    'PHP_SELF'         => '/home.php',
+                    'REQUEST_URI' => '/index.php/news/3?var1=val1&var2=val2',
+                    'SCRIPT_NAME' => '/home.php',
+                    'PHP_SELF' => '/home.php',
                     'ORIG_SCRIPT_NAME' => '/index.php',
-                    'SCRIPT_FILENAME'  => '/var/web/html/index.php',
-                ),
-                '/index.php',
-                '/news/3'
-            ),
-            array(
-                array(
-                    'REQUEST_URI'     => '/index.php/news/3?var1=val1&var2=val2',
-                    'PHP_SELF'        => '/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/index.php',
-                '/news/3'
+                '/news/3',
+            ),
+            array(
+                array(
+                    'REQUEST_URI' => '/index.php/news/3?var1=val1&var2=val2',
+                    'PHP_SELF' => '/index.php/news/3',
+                    'SCRIPT_FILENAME' => '/var/web/html/index.php',
+                ),
+                '/index.php',
+                '/news/3',
             ),
             array(
                 array(
                     'HTTP_X_REWRITE_URL' => '/index.php/news/3?var1=val1&var2=val2',
-                    'PHP_SELF'           => '/index.php/news/3',
-                    'SCRIPT_FILENAME'    => '/var/web/html/index.php',
+                    'PHP_SELF' => '/index.php/news/3',
+                    'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/index.php',
-                '/news/3'
+                '/news/3',
             ),
             // IIS 7.0 or later with ISAPI_Rewrite
             array(
                 array(
-                    'HTTP_X_ORIGINAL_URL'   => '/index.php/news/3?var1=val1&var2=val2',
-                    'PHP_SELF'              => '/index.php/news/3',
-                    'SCRIPT_FILENAME'       => '/var/web/html/index.php',
+                    'HTTP_X_ORIGINAL_URL' => '/index.php/news/3?var1=val1&var2=val2',
+                    'PHP_SELF' => '/index.php/news/3',
+                    'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '',
-                '/'
+                '/',
             ),
             array(
                 array(
-                    'IIS_WasUrlRewritten'   => '1',
-                    'UNENCODED_URL'         => '/index.php/news/3?var1=val1&var2=val2',
-                    'HTTP_X_ORIGINAL_URL'   => '/index.php/news/3?var1=val1&var2=val2',
-                    'PHP_SELF'              => '/index.php/news/3',
-                    'SCRIPT_FILENAME'       => '/var/web/html/index.php',
-                ),
-                '/index.php',
-                '/news/3'
-            ),
-            array(
-                array(
-                    'ORIG_PATH_INFO'  => '/index.php/news/3',
-                    'QUERY_STRING'    => 'var1=val1&var2=val2',
-                    'PHP_SELF'        => '/index.php/news/3',
+                    'IIS_WasUrlRewritten' => '1',
+                    'UNENCODED_URL' => '/index.php/news/3?var1=val1&var2=val2',
+                    'HTTP_X_ORIGINAL_URL' => '/index.php/news/3?var1=val1&var2=val2',
+                    'PHP_SELF' => '/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/index.php',
-                '/news/3'
+                '/news/3',
             ),
             array(
                 array(
-                    'REQUEST_URI'     => '/article/archive?foo=index.php',
-                    'QUERY_STRING'    => 'foo=index.php',
+                    'ORIG_PATH_INFO' => '/index.php/news/3',
+                    'QUERY_STRING' => 'var1=val1&var2=val2',
+                    'PHP_SELF' => '/index.php/news/3',
+                    'SCRIPT_FILENAME' => '/var/web/html/index.php',
+                ),
+                '/index.php',
+                '/news/3',
+            ),
+            array(
+                array(
+                    'REQUEST_URI' => '/article/archive?foo=index.php',
+                    'QUERY_STRING' => 'foo=index.php',
                     'SCRIPT_FILENAME' => '/var/www/zftests/index.php',
                 ),
                 '',
-                '/article/archive'
+                '/article/archive',
             ),
             array(
                 array(
-                    'REQUEST_URI'     => '/html/index.php/news/3?var1=val1&var2=val2',
-                    'PHP_SELF'        => '/html/index.php/news/3',
+                    'REQUEST_URI' => '/html/index.php/news/3?var1=val1&var2=val2',
+                    'PHP_SELF' => '/html/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/html/index.php',
-                '/news/3'
+                '/news/3',
             ),
             array(
                 array(
-                    'REQUEST_URI'     => '/dir/action',
-                    'PHP_SELF'        => '/dir/index.php',
+                    'REQUEST_URI' => '/dir/action',
+                    'PHP_SELF' => '/dir/index.php',
                     'SCRIPT_FILENAME' => '/var/web/dir/index.php',
                 ),
                 '/dir',
-                '/action'
+                '/action',
             ),
             array(
                 array(
-                    'SCRIPT_NAME'     => '/~username/public/index.php',
-                    'REQUEST_URI'     => '/~username/public/',
-                    'PHP_SELF'        => '/~username/public/index.php',
+                    'SCRIPT_NAME' => '/~username/public/index.php',
+                    'REQUEST_URI' => '/~username/public/',
+                    'PHP_SELF' => '/~username/public/index.php',
                     'SCRIPT_FILENAME' => '/Users/username/Sites/public/index.php',
-                    'ORIG_SCRIPT_NAME'=> null
+                    'ORIG_SCRIPT_NAME' => null,
                 ),
                 '/~username/public',
-                '/'
+                '/',
             ),
             // ZF2-206
             array(
                 array(
-                    'SCRIPT_NAME'     => '/zf2tut/index.php',
-                    'REQUEST_URI'     => '/zf2tut/',
-                    'PHP_SELF'        => '/zf2tut/index.php',
+                    'SCRIPT_NAME' => '/zf2tut/index.php',
+                    'REQUEST_URI' => '/zf2tut/',
+                    'PHP_SELF' => '/zf2tut/index.php',
                     'SCRIPT_FILENAME' => 'c:/ZF2Tutorial/public/index.php',
-                    'ORIG_SCRIPT_NAME'=> null
+                    'ORIG_SCRIPT_NAME' => null,
                 ),
                 '/zf2tut',
-                '/'
+                '/',
             ),
             array(
                 array(
-                    'REQUEST_URI'     => '/html/index.php/news/3?var1=val1&var2=/index.php',
-                    'PHP_SELF'        => '/html/index.php/news/3',
+                    'REQUEST_URI' => '/html/index.php/news/3?var1=val1&var2=/index.php',
+                    'PHP_SELF' => '/html/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/html/index.php',
-                '/news/3'
+                '/news/3',
             ),
             array(
                 array(
-                    'REQUEST_URI'     => '/html/index.php/news/index.php',
-                    'PHP_SELF'        => '/html/index.php/news/index.php',
+                    'REQUEST_URI' => '/html/index.php/news/index.php',
+                    'PHP_SELF' => '/html/index.php/news/index.php',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/html/index.php',
-                '/news/index.php'
+                '/news/index.php',
             ),
 
             //Test when url quert contains a full http url
@@ -316,17 +316,17 @@ class RequestTest extends TestCase
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/html/index.php',
-                '/'
+                '/',
             ),
             array(
                 array(
                     'SCRIPT_FILENAME' => '/web/blog/index.php',
                     'SCRIPT_NAME' => '/blog/index.php',
                     'REQUEST_URI' => '/blog/hello?string',
-                    'PHP_SELF' => '/blog/index.php'
+                    'PHP_SELF' => '/blog/index.php',
                 ),
                 '/blog',
-                '/hello'
+                '/hello',
             ),
             array(
                 array(
@@ -335,7 +335,7 @@ class RequestTest extends TestCase
                     'REQUEST_URI' => '/blog/hello?string',
                 ),
                 '',
-                '/blog/hello'
+                '/blog/hello',
             ),
             // cli php index.php
             array(
@@ -346,17 +346,17 @@ class RequestTest extends TestCase
                     'DOCUMENT_ROOT' => '',
                 ),
                 '',
-                '/'
+                '/',
             ),
             // NOTE The following data is for codecover only
             array(
                 array(
                     'PHP_SELF' => 'index.php',
                     'SCRIPT_FILENAME' => 'index.php',
-                    'REQUEST_URI' => 'home/index.php?query=string'
+                    'REQUEST_URI' => 'home/index.php?query=string',
                 ),
                 'home/index.php',
-                '/'
+                '/',
             ),
             array(
                 array(
@@ -364,7 +364,7 @@ class RequestTest extends TestCase
                     'SCRIPT_FILENAME' => 'index.php',
                 ),
                 '',
-                '/'
+                '/',
             ),
         );
     }
@@ -376,7 +376,7 @@ class RequestTest extends TestCase
     {
         $this->request->setOption('servers', $server);
 
-        $this->assertEquals($baseUrl,  $this->request->getBaseUrl());
+        $this->assertEquals($baseUrl, $this->request->getBaseUrl());
         $this->assertEquals($pathInfo, $this->request->getPathInfo());
     }
 
@@ -385,7 +385,7 @@ class RequestTest extends TestCase
         $server = array(
             'HTTP_HOST' => 'a.test.com',
             'SERVER_NAME' => 'test.com',
-            'REMOTE_ADDR' => '127.0.0.1'
+            'REMOTE_ADDR' => '127.0.0.1',
         );
         $this->request->setOption('servers', $server);
         $this->assertEquals('a.test.com', $this->request->getHost());
@@ -419,7 +419,7 @@ class RequestTest extends TestCase
                     'HTTPS' => 'on',
                     'SERVER_PORT' => '80',
                     'HTTP_HOST' => 'test.com',
-                    'REQUEST_URI' => '/index.php?query=string'
+                    'REQUEST_URI' => '/index.php?query=string',
                 ),
                 'https://test.com/index.php?query=string',
                 'https://test.com/path',
@@ -429,11 +429,11 @@ class RequestTest extends TestCase
                     'HTTPS' => 'on',
                     'SERVER_PORT' => '8080',
                     'HTTP_HOST' => 'test.com',
-                    'REQUEST_URI' => '/index.php?query=string'
+                    'REQUEST_URI' => '/index.php?query=string',
                 ),
                 'https://test.com:8080/index.php?query=string',
-                'https://test.com:8080/path'
-            )
+                'https://test.com:8080/path',
+            ),
         );
     }
 
@@ -467,12 +467,12 @@ class RequestTest extends TestCase
             'REQUEST_URI' => '/index.php?query=string',
             'SERVER_PROTOCOL' => 'HTTP/1.0',
             'REQUEST_METHOD' => 'GET',
-            'SCRIPT_NAME' => 'index.php'
+            'SCRIPT_NAME' => 'index.php',
         ));
 
         $this->assertEquals(
             "GET https://test.com:8080/index.php?query=string HTTP/1.0\r\nHost: test.com\r\n",
-            (string)$this->request
+            (string) $this->request
         );
     }
 
@@ -489,7 +489,7 @@ class RequestTest extends TestCase
             'wei' => $this->wei,
             'fromGlobal' => false,
             'servers' => array(
-                'HTTP_HOST' => 'test.com'
+                'HTTP_HOST' => 'test.com',
             ),
         ));
 
@@ -502,7 +502,7 @@ class RequestTest extends TestCase
     public function testErrorParameterTypeWhenFromGlobalIsFalse()
     {
         $request = new \Wei\Request(array(
-            'fromGlobal' => false
+            'fromGlobal' => false,
         ));
 
         foreach (array('get', 'cookie', 'server', 'file') as $option) {
@@ -545,7 +545,7 @@ class RequestTest extends TestCase
             'REQUEST_TIME' => 1364916034,
         ));
 
-        $this->assertEquals(array (
+        $this->assertEquals(array(
             'HOST' => 'web',
             'CONNECTION' => 'keep-alive',
             'CACHE_CONTROL' => 'max-age=0',
@@ -554,7 +554,7 @@ class RequestTest extends TestCase
             'ACCEPT_ENCODING' => 'gzip,deflate,sdch',
             'ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8',
             'ACCEPT_CHARSET' => 'UTF-8,*;q=0.5',
-          ), $this->request->getHeaders());
+        ), $this->request->getHeaders());
     }
 
     public function testInvoker()
@@ -563,7 +563,7 @@ class RequestTest extends TestCase
 
         $request->fromArray(array(
             'string' => 'value',
-            1 => 2
+            1 => 2,
         ));
 
         $this->assertEquals('value', $request('string'));
@@ -580,7 +580,8 @@ class RequestTest extends TestCase
         $this->assertCount(10, $wei);
     }
 
-    public function testFromArray() {
+    public function testFromArray()
+    {
         $wei = $this->object;
 
         $wei['key2'] = 'value2';
@@ -612,7 +613,7 @@ class RequestTest extends TestCase
     {
         $array = array(
             'key' => 'value',
-            'key1' => 'value1'
+            'key1' => 'value1',
         );
 
         $this->request->set($array);
@@ -620,7 +621,8 @@ class RequestTest extends TestCase
         $this->assertIsSubset($array, $this->request->toArray());
     }
 
-    public function testOffsetExists() {
+    public function testOffsetExists()
+    {
         $wei = $this->object;
 
         $wei['key'] = 'value';
@@ -628,7 +630,8 @@ class RequestTest extends TestCase
         $this->assertTrue(isset($wei['key']));
     }
 
-    public function testOffsetGet() {
+    public function testOffsetGet()
+    {
         $wei = $this->object;
 
         $wei['key'] = 'value1';
@@ -636,7 +639,8 @@ class RequestTest extends TestCase
         $this->assertEquals('value1', $wei['key']);
     }
 
-    public function testOffsetUnset() {
+    public function testOffsetUnset()
+    {
         $wei = $this->object;
 
         unset($wei['key']);
@@ -655,9 +659,9 @@ class RequestTest extends TestCase
                 'key2' => 'value2',
                 'int' => '5',
                 'array' => array(
-                    'item' => 'value'
-                )
-            )
+                    'item' => 'value',
+                ),
+            ),
         ));
         return $request;
     }
@@ -665,7 +669,7 @@ class RequestTest extends TestCase
     public function testGetter()
     {
         $parameters = array(
-            'data' => 'request'
+            'data' => 'request',
         );
 
         foreach ($parameters as $type => $class) {
@@ -680,7 +684,7 @@ class RequestTest extends TestCase
             // int => 5, not in specified array
             $this->assertEquals('firstValue', $parameter->getInArray('int', array(
                 'firstKey' => 'firstValue',
-                'secondKey' => 'secondValue'
+                'secondKey' => 'secondValue',
             )));
 
             // int => 5
@@ -696,15 +700,15 @@ class RequestTest extends TestCase
     {
         $request = new Request(array(
             'wei' => $this->wei,
-            'data' => array()
+            'data' => array(),
         ));
         $this->assertFalse($request->isAjax());
 
         $request = new Request(array(
             'wei' => $this->wei,
             'data' => array(
-                '_ajax' => true
-            )
+                '_ajax' => true,
+            ),
         ));
         $this->assertFalse($request->isAjax());
     }
@@ -715,8 +719,8 @@ class RequestTest extends TestCase
             'wei' => $this->wei,
             'fromGlobal' => false,
             'data' => array(
-                '_method' => 'PUT'
-            )
+                '_method' => 'PUT',
+            ),
         ));
         $this->assertTrue($request->isMethod('PUT'));
     }
@@ -733,14 +737,16 @@ class RequestTest extends TestCase
         $request->setServer('HTTP_ACCEPT', 'application/json, text/javascript, */*; q=0.01');
         $this->assertTrue($request->acceptJson());
 
-        $request->setServer('HTTP_ACCEPT', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+        $request->setServer('HTTP_ACCEPT',
+            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
         $this->assertFalse($request->acceptJson());
     }
 
     public function testAcceptJsonByOverwriteFormat()
     {
         $request = $this->request;
-        $request->setServer('HTTP_ACCEPT', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+        $request->setServer('HTTP_ACCEPT',
+            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
         $this->assertFalse($request->acceptJson());
 
         $request->set('_format', 'json');
@@ -898,5 +904,142 @@ class RequestTest extends TestCase
         $this->assertArrayNotHasKey('test', $this->request->getOption('extraKeys'));
 
         $this->assertArrayHasKey('test', $this->request->toArray());
+    }
+
+    /**
+     * @dataProvider providerForIsUrlRewrite
+     * @param array $options
+     * @param bool $result
+     */
+    public function testIsUrlRewrite(array $options, bool $result)
+    {
+        $request = new Request($options + ['wei' => $this->wei, 'fromGlobal' => false]);
+        $this->assertSame($result, $request->isUrlRewrite());
+    }
+
+    public function providerForIsUrlRewrite()
+    {
+        return [
+            [
+                [
+                    'pathInfo' => '/',
+                    'defaultUrlRewrite' => false,
+                ],
+                false,
+            ],
+            [
+                [
+                    'pathInfo' => '/test',
+                    'defaultUrlRewrite' => false,
+                ],
+                true,
+            ],
+            [
+                [
+                    'pathInfo' => '/',
+                    'defaultUrlRewrite' => true,
+                ],
+                true,
+            ],
+            [
+                [
+                    'pathInfo' => '/test',
+                    'defaultUrlRewrite' => true,
+                ],
+                true,
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider providerForGetRouterPathInfo
+     * @param array $options
+     * @param string $pathInfo
+     * @param string $routerPathInfo
+     */
+    public function testGetRouterPathInfo(array $options, string $pathInfo, string $routerPathInfo)
+    {
+        $request = new Request(['wei' => $this->wei, 'fromGlobal' => false] + $options);
+        $this->assertSame($pathInfo, $request->getPathInfo());
+        $this->assertSame($routerPathInfo, $request->getRouterPathInfo());
+    }
+
+    public function providerForGetRouterPathInfo()
+    {
+        return [
+            [
+                [
+                    'pathInfo' => '/',
+                    'defaultUrlRewrite' => false,
+                ],
+                '/',
+                '/',
+            ],
+            [
+                [
+                    // We don't know whether the sever has enabled URL rewrite,
+                    // default to not enabled
+                    'pathInfo' => '/',
+                    'defaultUrlRewrite' => false,
+                    'data' => [
+                        'r' => 'test',
+                    ]
+                ],
+                '/',
+                '/test',
+            ],
+            [
+                [
+                    // The server has enabled URL rewrite(has path info), ignore router param
+                    'pathInfo' => '/test',
+                    'defaultUrlRewrite' => false,
+                    'data' => [
+                        'r' => 'abc',
+                    ]
+                ],
+                '/test',
+                '/test',
+            ],
+            [
+                [
+                    'pathInfo' => '/',
+                    'defaultUrlRewrite' => true,
+                ],
+                '/',
+                '/'
+            ],
+            [
+                [
+                    'pathInfo' => '/',
+                    // Ignore router param
+                    'defaultUrlRewrite' => true,
+                    'data' => [
+                        'r' => 'abc',
+                    ]
+                ],
+                '/',
+                '/'
+            ],
+            [
+                [
+                    'pathInfo' => '/test',
+                    'defaultUrlRewrite' => true,
+                ],
+                '/test',
+                '/test',
+            ],
+            [
+                [
+                    'pathInfo' => '/test',
+                    // Ignore router param
+                    'defaultUrlRewrite' => true,
+                    'data' => [
+                        'r' => 'abc'
+                    ]
+                ],
+                '/test',
+                '/test',
+            ],
+        ];
     }
 }

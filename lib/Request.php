@@ -104,6 +104,21 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     protected $overwriteFormat = true;
 
     /**
+     * The param name to receive path info for router, when URL rewrite is not enabled
+     *
+     * @var string
+     */
+    protected $routerKey = 'r';
+
+    /**
+     * A flag to indicate whether URL rewriting is enabled, since we cannot detected it in index page(path info is
+     * always empty).
+     *
+     * @var bool
+     */
+    protected $defaultUrlRewrite = true;
+
+    /**
      * @var string
      */
     protected $baseUrl;
@@ -966,6 +981,41 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     public function getReferer()
     {
         return $this->getServer('HTTP_REFERER');
+    }
+
+    /**
+     * @return string
+     */
+    public function getRouterKey()
+    {
+        return $this->routerKey;
+    }
+
+    /**
+     * Whether URL rewriting is enabled
+     *
+     * @return bool
+     */
+    public function isUrlRewrite()
+    {
+        if ($this->getPathInfo() !== '/') {
+            return true;
+        }
+        return $this->defaultUrlRewrite;
+    }
+
+    /**
+     * Receive path info for router
+     *
+     * @return string
+     */
+    public function getRouterPathInfo()
+    {
+        if ($this->isUrlRewrite()) {
+            return $this->getPathInfo();
+        } else {
+            return '/' . ltrim($this[$this->routerKey], '/');
+        }
     }
 
     /**

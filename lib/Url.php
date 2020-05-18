@@ -40,7 +40,21 @@ class Url extends Base
      */
     protected function to($url = '', $argsOrParams = array(), $params = array())
     {
-        return $this->request->getBaseUrl() . '/' . $this->append($url, $argsOrParams, $params);
+        if ($this->request->isUrlRewrite()) {
+            return $this->request->getBaseUrl() . '/' . $this->append($url, $argsOrParams, $params);
+        }
+
+        if (strpos($url, '%s') !== false) {
+            $url = $this->append($url, $argsOrParams);
+            $argsOrParams = $params;
+        }
+
+        // Add router path info into url
+        if ($url) {
+            $argsOrParams = [$this->request->getRouterKey() => $url] + $argsOrParams;
+        }
+
+        return $this->request->getBaseUrl() . '/' . $this->append('', $argsOrParams);
     }
 
     /**
@@ -85,7 +99,7 @@ class Url extends Base
     public function append($url = '', $argsOrParams = array(), $params = array())
     {
         if (strpos($url, '%s') !== false) {
-            $url = vsprintf($url, (array)$argsOrParams);
+            $url = vsprintf($url, (array) $argsOrParams);
         } else {
             $params = $argsOrParams;
         }
