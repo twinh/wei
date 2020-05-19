@@ -4,6 +4,7 @@
 .travis.yml export-ignore
 phpunit.xml.dist export-ignore
 /demos export-ignore
-/docs export-ignore
+/docs/en export-ignore
+/docs/zh-CN export-ignore
 /tests export-ignore
 /vendor export-ignore
