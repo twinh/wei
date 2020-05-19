@@ -334,7 +334,7 @@ class UploadMixin {
 
 /**
  * @property    Wei\Url $url A helper service to generate the URL
- * @method      string url($url = '', $argsOrParams = [], $params = []) Generate the URL by specified URL and parameters
+ * @method      string url($url = '', $argsOrParams = [], $params = []) Invoke the "to" method
  */
 class UrlMixin {
 }
@@ -696,6 +696,13 @@ class IsNoneOfMixin {
 }
 
 /**
+ * @property    Wei\Validator\NullType $isNullType Check if the input is null
+ * @method      bool isNullType($input) Validate the input value
+ */
+class IsNullTypeMixin {
+}
+
+/**
  * @property    Wei\Validator\Number $isNumber Check if the input is number
  * @method      bool isNumber($input) Validate the input value
  */
@@ -944,6 +951,7 @@ class IsUuidMixin {
  * @mixin IsMobileCnMixin
  * @mixin IsNaturalNumberMixin
  * @mixin IsNoneOfMixin
+ * @mixin IsNullTypeMixin
  * @mixin IsNumberMixin
  * @mixin IsOneOfMixin
  * @mixin IsPasswordMixin
