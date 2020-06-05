@@ -11,8 +11,9 @@ namespace Wei;
 /**
  * A service that handles exception and display pretty exception message
  *
- * @property    Logger $logger The logger wei
- * @property    Response $response The HTTP response wei
+ * @mixin \LoggerMixin
+ * @mixin \ResponseMixin
+ * @mixin \RequestMixin
  */
 class Error extends Base
 {
@@ -91,7 +92,7 @@ class Error extends Base
     protected $handlers = array(
         'error' => array(),
         'fatal' => array(),
-        'notFound' => array()
+        'notFound' => array(),
     );
 
     /**
@@ -288,6 +289,12 @@ class Error extends Base
             return;
         }
 
+        // Render JSON message
+        if ($this->request->acceptJson()) {
+            $this->displayJsonException($e, $debug);
+            return;
+        }
+
         // Render HTML message
         $code = $e->getCode();
         $file = $e->getFile();
@@ -295,14 +302,12 @@ class Error extends Base
 
         if (!$debug) {
             $view = isset($this->{'view' . $code}) ? $this->{'view' . $code} : $this->view;
-            $message = isset($this->{'message' . $code}) ? $this->{'message' . $code} : $this->message;
             $detail = isset($this->{'detail' . $code}) ? $this->{'detail' . $code} : $this->detail;
             if ($view) {
                 require $view;
                 return;
             }
         } else {
-            $message = $e->getMessage();
             $detail = sprintf('Threw by %s in %s on line %s', get_class($e), $file, $line);
 
             $fileInfo = $this->getFileCode($file, $line);
@@ -315,6 +320,7 @@ class Error extends Base
                 . "<p><pre>$trace</pre></p>";
         }
 
+        $message = $this->getDisplayMessage($e, $debug);
         $title = htmlspecialchars($message, ENT_QUOTES);
         $message = nl2br($title);
 
@@ -360,6 +366,31 @@ class Error extends Base
         if ($this->autoExit) {
             exit($this->getExitCode($e));
         }
+    }
+
+    protected function displayJsonException(\Exception $e, $debug)
+    {
+        $data = [
+            'code' => $e->getCode(),
+            'message' => $this->getDisplayMessage($e, $debug),
+        ];
+        if ($debug) {
+            $data += [
+                'exception' => get_class($e),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'traces' => $e->getTrace(),
+            ];
+        }
+        echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    }
+
+    protected function getDisplayMessage($e, $debug)
+    {
+        if ($debug) {
+            return $e->getMessage();
+        }
+        return isset($this->{'message' . $e->getCode()}) ? $this->{'message' . $e->getCode()} : $this->message;
     }
 
     /**
@@ -415,15 +446,15 @@ class Error extends Base
     /**
      * Get file code in specified range
      *
-     * @param  string $file The file name
-     * @param  int $line The file line
-     * @param  int $range The line range
+     * @param string $file The file name
+     * @param int $line The file line
+     * @param int $range The line range
      * @return string
      */
     public function getFileCode($file, $line, $range = 20)
     {
         $code = file($file);
-        $half = (int)($range / 2);
+        $half = (int) ($range / 2);
 
         $start = $line - $half;
         0 > $start && $start = 0;
