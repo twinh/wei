@@ -303,6 +303,17 @@ class Response extends Base
     }
 
     /**
+     * Get the status text by status code
+     *
+     * @param int $code
+     * @return string|null
+     */
+    public function getStatusTextByCode($code)
+    {
+        return $this->statusTexts[$code] ?? null;
+    }
+
+    /**
      * Set the HTTP version
      *
      * @param  string $version The HTTP version

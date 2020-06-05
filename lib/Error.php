@@ -300,6 +300,9 @@ class Error extends Base
         $file = $e->getFile();
         $line = $e->getLine();
 
+        $title = htmlspecialchars($this->getDisplayMessage($e, $debug), ENT_QUOTES);
+        $message = nl2br($title);
+
         if (!$debug) {
             $view = isset($this->{'view' . $code}) ? $this->{'view' . $code} : $this->view;
             $detail = isset($this->{'detail' . $code}) ? $this->{'detail' . $code} : $this->detail;
@@ -319,10 +322,6 @@ class Error extends Base
                 . "<p class=\"text-danger\">$detail</p>"
                 . "<p><pre>$trace</pre></p>";
         }
-
-        $message = $this->getDisplayMessage($e, $debug);
-        $title = htmlspecialchars($message, ENT_QUOTES);
-        $message = nl2br($title);
 
         $html = '<!DOCTYPE html>'
             . '<html>'
@@ -390,7 +389,16 @@ class Error extends Base
         if ($debug) {
             return $e->getMessage();
         }
-        return isset($this->{'message' . $e->getCode()}) ? $this->{'message' . $e->getCode()} : $this->message;
+
+        if (isset($this->{'message' . $e->getCode()})) {
+            return $this->{'message' . $e->getCode()};
+        }
+
+        if ($message = $this->response->getStatusTextByCode($e->getCode())) {
+            return $message;
+        }
+
+        return $this->message;
     }
 
     /**
