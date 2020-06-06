@@ -117,8 +117,8 @@ class Upload extends Image
     public function __construct(array $options = array())
     {
         parent::__construct($options + array(
-            'dir' => $this->dir
-        ));
+                'dir' => $this->dir,
+            ));
     }
 
     /**
@@ -134,7 +134,7 @@ class Upload extends Image
         if (is_string($field)) {
             $this->storeOption('field', $field);
             $options && $this->storeOption($options);
-        // ($options)
+            // ($options)
         } elseif (is_array($field)) {
             $field && $this->storeOption($field);
         }
@@ -249,7 +249,7 @@ class Upload extends Image
         $this->file = $this->dir . '/' . $fileName . $fullExt;
         if (!$this->overwrite) {
             $i = 1;
-            while(is_file($this->file)) {
+            while (is_file($this->file)) {
                 $this->file = $this->dir . '/' . $fileName . '-' . $i . $fullExt;
                 $i++;
             }
@@ -273,6 +273,21 @@ class Upload extends Image
         return $this->file;
     }
 
+    /**
+     * Returns the uploaded file URL for web access
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        if (getcwd() === $this->request->getServer('DOCUMENT_ROOT')) {
+            return '/' . $this->file;
+        } else {
+            // eg, file=public/uploads/1.jpg DOCUMENT_ROOT=/var/www/public cwd=/var/www
+            // returns /uploads/1.jpg
+            return '/' . substr($this->file, strlen($this->request->getServer('DOCUMENT_ROOT')) - strlen(getcwd()));
+        }
+    }
 
     /**
      * Set upload directory
