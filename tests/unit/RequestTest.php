@@ -753,6 +753,24 @@ class RequestTest extends TestCase
         $this->assertTrue($request->acceptJson());
     }
 
+    public function testIsFormat()
+    {
+        $request = $this->request;
+        $request->setServer('HTTP_ACCEPT',
+            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+        $this->assertFalse($request->acceptJson());
+
+        $request->set('_format', 'xlsx');
+        $this->assertTrue($request->isFormat('xlsx'));
+    }
+
+    public function testIsFormatJson()
+    {
+        $request = $this->request;
+        $request->setServer('HTTP_ACCEPT', 'application/json, text/javascript, */*; q=0.01');
+        $this->assertTrue($request->isFormat('json'));
+    }
+
     /**
      * @dataProvider acceptProvider
      */

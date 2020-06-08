@@ -978,6 +978,21 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     }
 
     /**
+     * Check if the request accepts the specified format
+     *
+     * @param string $format
+     * @return bool
+     */
+    public function isFormat($format)
+    {
+        if ($format === 'json') {
+            return $this->acceptJson();
+        }
+
+        return $this->get('_format') === $format;
+    }
+
+    /**
      * Shorthand method to return referer url
      *
      * @return string
