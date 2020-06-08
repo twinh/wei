@@ -69,6 +69,12 @@ class CacheMixin {
 }
 
 /**
+ * @property    Wei\ClassMap $classMap Generate class map from specified directory and pattern
+ */
+class ClassMapMixin {
+}
+
+/**
  * @property    Wei\Config $config A service to manage service container configurations
  */
 class ConfigMixin {
@@ -860,6 +866,7 @@ class IsUuidMixin {
  * @mixin BicacheMixin
  * @mixin BlockMixin
  * @mixin CacheMixin
+ * @mixin ClassMapMixin
  * @mixin ConfigMixin
  * @mixin CookieMixin
  * @mixin CouchbaseMixin

@@ -42,6 +42,10 @@ class Cache
 {
 }
 
+class ClassMap
+{
+}
+
 class Config
 {
 }
@@ -695,6 +699,10 @@ class Block
 }
 
 class Cache
+{
+}
+
+class ClassMap
 {
 }
 
