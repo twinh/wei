@@ -1042,4 +1042,18 @@ class RequestTest extends TestCase
             ],
         ];
     }
+
+    public function testPopulateJsonToData()
+    {
+        // create request wei from custom parameter
+        $request = new \Wei\Request(array(
+            'wei' => $this->wei,
+            'fromGlobal' => false,
+            'content' => '{"a":"b"}',
+            'servers' => [
+                'HTTP_CONTENT_TYPE' => 'application/json',
+            ],
+        ));
+        $this->assertEquals('b', $request->get('a'));
+    }
 }

@@ -166,6 +166,10 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
             $this->data = &$_REQUEST;
         }
 
+        if (false !== strpos($this->getServer('HTTP_CONTENT_TYPE'), 'application/json')) {
+            $this->data += (array) json_decode($this->getContent(), true);
+        }
+
         if ($this->overwriteMethod && $method = $this->get('_method')) {
             $this->setMethod($method);
         }
