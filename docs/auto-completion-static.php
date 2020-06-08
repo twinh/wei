@@ -317,6 +317,25 @@ class TagCache
 {
 }
 
+class Time
+{
+    /**
+     * @return string
+     * @see Time::now
+     */
+    public static function now()
+    {
+    }
+
+    /**
+     * @return string
+     * @see Time::today
+     */
+    public static function today()
+    {
+    }
+}
+
 class Ua
 {
 }
@@ -975,6 +994,25 @@ class T
 
 class TagCache
 {
+}
+
+class Time
+{
+    /**
+     * @return string
+     * @see Time::now
+     */
+    public function now()
+    {
+    }
+
+    /**
+     * @return string
+     * @see Time::today
+     */
+    public function today()
+    {
+    }
 }
 
 class Ua

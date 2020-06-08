@@ -325,6 +325,12 @@ class TagCacheMixin {
 }
 
 /**
+ * @property    Wei\Time $time Date time utils
+ */
+class TimeMixin {
+}
+
+/**
  * @property    Wei\Ua $ua A service to detect user OS, browser and device name and version
  * @method      bool ua($name) Check if in the specified browser, OS or device
  */
@@ -904,6 +910,7 @@ class IsUuidMixin {
  * @mixin StatsDMixin
  * @mixin TMixin
  * @mixin TagCacheMixin
+ * @mixin TimeMixin
  * @mixin UaMixin
  * @mixin UploadMixin
  * @mixin UrlMixin
