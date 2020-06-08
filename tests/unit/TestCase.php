@@ -206,4 +206,39 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $this->expectException($class);
         $message && $this->expectExceptionMessage($message);
     }
+
+    public function assertRetSuc(array $ret, $message = null, $assertMessage = null)
+    {
+        $assertMessage = $this->buildRetMessage($ret, $assertMessage);
+
+        $expected = ['code' => 1];
+        if (null !== $message) {
+            $expected['message'] = $message;
+        }
+
+        $this->assertArrayContains($expected, $ret, $assertMessage);
+    }
+
+    public function assertRetErr(array $ret, $code, $message = null, $assertMessage = null)
+    {
+        $assertMessage = $this->buildRetMessage($ret, $assertMessage);
+
+        $expected = ['code' => $code];
+        if (null !== $message) {
+            $expected['message'] = $message;
+        }
+
+        $this->assertArrayContains($expected, $ret, $assertMessage);
+    }
+
+    public static function assertArrayContains($subset, $array, $message = '')
+    {
+        $array = array_intersect_key($array, array_flip(array_keys($subset)));
+        parent::assertEquals($subset, $array, $message);
+    }
+
+    protected function buildRetMessage($ret, $assertMessage = null)
+    {
+        return $assertMessage . ' ret is ' . json_encode($ret, JSON_UNESCAPED_UNICODE);
+    }
 }

@@ -191,6 +191,12 @@ class MemcachedMixin {
 }
 
 /**
+ * @property    Wei\Migration $migration Migration
+ */
+class MigrationMixin {
+}
+
+/**
  * @property    Wei\MongoCache $mongoCache A cache service that stores data in MongoDB
  * @method      mixed mongoCache($key, $value = null, $expire = 0) Retrieve or store an item
  */
@@ -291,6 +297,12 @@ class SchemaMixin {
 }
 
 /**
+ * @property    Wei\ServiceTrait $serviceTrait Add the ability to get and call other services for the class
+ */
+class ServiceTraitMixin {
+}
+
+/**
  * @property    Wei\Session $session A service that handles session data ($_SESSION)
  * @method      mixed session($key, $value = null) Get or set session
  */
@@ -356,6 +368,13 @@ class UrlMixin {
  * @method      string uuid() Generate a RANDOM UUID(universally unique identifier)
  */
 class UuidMixin {
+}
+
+/**
+ * @property    Wei\V $v A chaining validator
+ * @method      Wei\V v($options = []) Create a new validator
+ */
+class VMixin {
 }
 
 /**
@@ -890,6 +909,7 @@ class IsUuidMixin {
  * @mixin LoggerMixin
  * @mixin MemcacheMixin
  * @mixin MemcachedMixin
+ * @mixin MigrationMixin
  * @mixin MongoCacheMixin
  * @mixin NearCacheMixin
  * @mixin PasswordMixin
@@ -905,6 +925,7 @@ class IsUuidMixin {
  * @mixin RouterMixin
  * @mixin SafeUrlMixin
  * @mixin SchemaMixin
+ * @mixin ServiceTraitMixin
  * @mixin SessionMixin
  * @mixin SoapMixin
  * @mixin StatsDMixin
@@ -915,6 +936,7 @@ class IsUuidMixin {
  * @mixin UploadMixin
  * @mixin UrlMixin
  * @mixin UuidMixin
+ * @mixin VMixin
  * @mixin ValidateMixin
  * @mixin ViewMixin
  * @mixin WeChatAppMixin

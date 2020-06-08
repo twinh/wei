@@ -185,6 +185,45 @@ class Memcached
 {
 }
 
+class Migration
+{
+    /**
+     * @param OutputInterface $output
+     * @return $this
+     * @see Migration::setOutput
+     */
+    public static function setOutput(\Symfony\Component\Console\Output\OutputInterface $output)
+    {
+    }
+
+    /**
+     * @see Migration::migrate
+     */
+    public static function migrate()
+    {
+    }
+
+    /**
+     * Rollback the last migration or to the specified target migration ID
+     *
+     * @param array $options
+     * @see Migration::rollback
+     */
+    public static function rollback($options = [])
+    {
+    }
+
+    /**
+     * @param array $options
+     * @throws \ReflectionException
+     * @throws \Exception
+     * @see Migration::create
+     */
+    public static function create($options)
+    {
+    }
+}
+
 class MongoCache
 {
 }
@@ -362,6 +401,43 @@ class Url
 
 class Uuid
 {
+}
+
+class V
+{
+    /**
+     * Add a new field
+     *
+     * @param string $name
+     * @param string|null $label
+     * @return $this
+     * @see V::key
+     */
+    public static function key($name, $label = null)
+    {
+    }
+
+    /**
+     * @param mixed $value
+     * @param callable $callback
+     * @param callable|null $default
+     * @return $this
+     * @see V::when
+     */
+    public static function when($value, $callback, callable $default = null)
+    {
+    }
+
+    /**
+     * @param mixed $value
+     * @param callable $callback
+     * @param callable|null $default
+     * @return $this
+     * @see V::unless
+     */
+    public static function unless($value, callable $callback, callable $default = null)
+    {
+    }
 }
 
 class Validate
@@ -864,6 +940,45 @@ class Memcached
 {
 }
 
+class Migration
+{
+    /**
+     * @param OutputInterface $output
+     * @return $this
+     * @see Migration::setOutput
+     */
+    public function setOutput(\Symfony\Component\Console\Output\OutputInterface $output)
+    {
+    }
+
+    /**
+     * @see Migration::migrate
+     */
+    public function migrate()
+    {
+    }
+
+    /**
+     * Rollback the last migration or to the specified target migration ID
+     *
+     * @param array $options
+     * @see Migration::rollback
+     */
+    public function rollback($options = [])
+    {
+    }
+
+    /**
+     * @param array $options
+     * @throws \ReflectionException
+     * @throws \Exception
+     * @see Migration::create
+     */
+    public function create($options)
+    {
+    }
+}
+
 class MongoCache
 {
 }
@@ -1041,6 +1156,43 @@ class Url
 
 class Uuid
 {
+}
+
+class V
+{
+    /**
+     * Add a new field
+     *
+     * @param string $name
+     * @param string|null $label
+     * @return $this
+     * @see V::key
+     */
+    public function key($name, $label = null)
+    {
+    }
+
+    /**
+     * @param mixed $value
+     * @param callable $callback
+     * @param callable|null $default
+     * @return $this
+     * @see V::when
+     */
+    public function when($value, $callback, callable $default = null)
+    {
+    }
+
+    /**
+     * @param mixed $value
+     * @param callable $callback
+     * @param callable|null $default
+     * @return $this
+     * @see V::unless
+     */
+    public function unless($value, callable $callback, callable $default = null)
+    {
+    }
 }
 
 class Validate
