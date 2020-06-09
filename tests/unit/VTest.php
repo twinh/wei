@@ -9,18 +9,18 @@ class VTest extends TestCase
     public function testCheckFail()
     {
         $ret = wei()->v()
-            ->key('question', '问题')
+            ->key('question', 'Question')
             ->check([]);
 
-        $this->assertRetErr($ret, -1, '问题不能为空');
+        $this->assertRetErr($ret, -1, 'Question is required');
     }
 
     public function testCheckPass()
     {
         $ret = wei()->v()
-            ->key('question', '问题')
+            ->key('question', 'Question')
             ->check([
-                'question' => '问题',
+                'question' => '1',
             ]);
 
         $this->assertRetSuc($ret);
@@ -51,7 +51,7 @@ class VTest extends TestCase
                 return 'twin' !== $name;
             })
             ->check(['name' => 'twin']);
-        $this->assertRetErr($ret, -1, '该项不合法');
+        $this->assertRetErr($ret, -1, 'This value is not valid');
 
         $ret = wei()->v()
             ->key('name')->callback(function ($name) {
@@ -64,11 +64,11 @@ class VTest extends TestCase
     public function testMobileCn()
     {
         $ret = wei()->v()
-            ->key('mobile', '手机')->mobileCn()
+            ->key('mobile', 'Mobile')->mobileCn()
             ->check([
                 'mobile' => '123',
             ]);
-        $this->assertRetErr($ret, -1, '手机必须是11位长度的数字,以13,14,15,17或18开头');
+        $this->assertRetErr($ret, -1, 'Mobile must be valid mobile number');
     }
 
     public function testValidate()
@@ -94,17 +94,17 @@ class VTest extends TestCase
     {
         $ret = wei()->v()
             ->mobileCn()
-            ->label('手机')
+            ->label('Mobile')
             ->check('123');
 
-        $this->assertRetErr($ret, -1, '手机必须是11位长度的数字,以13,14,15,17或18开头');
+        $this->assertRetErr($ret, -1, 'Mobile must be valid mobile number');
     }
 
     public function testWithoutKeyRetSuc()
     {
         $ret = wei()->v()
             ->mobileCn()
-            ->label('手机')
+            ->label('Mobile')
             ->check('13800138000');
 
         $this->assertRetSuc($ret);
@@ -115,12 +115,12 @@ class VTest extends TestCase
         $validator = wei()->v()
             ->digit()
             ->between(1, 150)
-            ->label('年龄')
+            ->label('Age')
             ->validate('ab');
         $this->assertFalse($validator->isValid());
 
         $messages = $validator->getSummaryMessages();
-        $this->assertEquals('年龄只能由数字(0-9)组成', $messages[''][0]);
-        $this->assertEquals('年龄必须在1到150之间', $messages[''][1]);
+        $this->assertEquals('Age must contain only digits (0-9)', $messages[''][0]);
+        $this->assertEquals('Age must between 1 and 150', $messages[''][1]);
     }
 }
