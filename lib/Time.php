@@ -2,12 +2,10 @@
 
 namespace Wei;
 
-use Miaoxing\Plugin\BaseService;
-
 /**
  * Date time utils
  */
-class Time extends BaseService
+class Time extends Base
 {
     /**
      * @var int
