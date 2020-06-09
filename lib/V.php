@@ -2,8 +2,6 @@
 
 namespace Wei;
 
-use Miaoxing\Plugin\BaseService;
-
 /**
  * A chaining validator
  *
@@ -156,7 +154,7 @@ use Miaoxing\Plugin\BaseService;
  *
  * @see Inspired by https://github.com/Respect/Validation/tree/1.1
  */
-class V extends BaseService
+class V extends Base
 {
     use RetTrait;
 
