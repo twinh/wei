@@ -756,6 +756,7 @@ class RequestTest extends TestCase
     public function testIsFormat()
     {
         $request = $this->request;
+        $request->set('_format', null);
         $request->setServer('HTTP_ACCEPT',
             'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
         $this->assertFalse($request->acceptJson());
