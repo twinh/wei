@@ -114,7 +114,7 @@ class Event
      * Attach a handler to an event
      *
      * @param string|array $name The name of event, or an array that the key is event name and the value is event hanlder
-     * @param callback $fn The event handler
+     * @param callable $fn The event handler
      * @param int $priority The event priority
      * @throws \InvalidArgumentException when the second argument is not callable
      * @return $this
@@ -869,7 +869,7 @@ class Event
      * Attach a handler to an event
      *
      * @param string|array $name The name of event, or an array that the key is event name and the value is event hanlder
-     * @param callback $fn The event handler
+     * @param callable $fn The event handler
      * @param int $priority The event priority
      * @throws \InvalidArgumentException when the second argument is not callable
      * @return $this

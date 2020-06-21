@@ -60,7 +60,7 @@ abstract class BaseCache extends Base
      * ```
      *
      * @param string $key The name of item
-     * @param int $expire The expire seconds of callback return value
+     * @param int|callable|null $expire The expire seconds of callback return value
      * @param callable $fn The callback to execute when cache not found
      * @throws \RuntimeException When set cache return false
      * @return mixed

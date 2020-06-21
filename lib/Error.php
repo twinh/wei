@@ -112,7 +112,7 @@ class Error extends Base
     /**
      * Attach a handler to exception error
      *
-     * @param callback $fn The error handler
+     * @param callable $fn The error handler
      * @return $this
      */
     public function __invoke($fn)
