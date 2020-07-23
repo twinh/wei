@@ -7,7 +7,7 @@
 * 命名空间不正确 ([0a5f57a](https://github.com/twinh/wei/commit/0a5f57abc34b102ce42d4752cac89a2a585b7396))
 * 改用 rawurlencode 来转换 cookie ([3f1070c](https://github.com/twinh/wei/commit/3f1070cd77512f3300a945b9e2dbc2dd9fe529c7))
 * 非数字值 incr 出错  ErrorException : A non-numeric value encountered ([a91ee96](https://github.com/twinh/wei/commit/a91ee96a55a71a47cb38862f963fe82af00c40a8))
-
+* Request: 解决 &offsetGet 导致 if (wei()->request['notExists']) 会在 request 内部的 data 产生额外键 notExists = null 的问题
 
 ### Features
 
@@ -33,8 +33,7 @@
 * isCallback: 回调函数除了闭包, 还允许传入字符串,数字
 * Record: reload, saveColl 方法使用 $this->primaryKey 代替 id 字符串
 * Db: 废弃 insertBatch 方法，改名为 batchInsert
-* Wei: 移除 PHP 5.3 的支持
-* Request: 解决 &offsetGet 导致 if (wei()->request['notExists']) 会在 request 内部的 data 产生额外键 notExists = null 的问题
+* Wei: 移除 PHP 5.3 的支持，要求 PHP 7.2+
 
 ## 0.9.23 (2017-03-20)
 
