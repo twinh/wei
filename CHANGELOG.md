@@ -1,3 +1,35 @@
+## 0.9.24 (2020-07-23)
+
+
+### Bug Fixes
+
+* schema nullable 设置无效 ([f565379](https://github.com/twinh/miaoxing/commit/f565379d8e0557e8a41c8238604286f1fec51fb7))
+* 命名空间不正确 ([5ab0660](https://github.com/twinh/miaoxing/commit/5ab06606f5a7a084dbad85aec92d15ef3d54e76a))
+* 改用 rawurlencode 来转换 cookie ([4b5bec8](https://github.com/twinh/miaoxing/commit/4b5bec8db2f0013d7af335d889c130cd3453b737))
+* 非数字值 incr 出错  ErrorException : A non-numeric value encountered ([143fc44](https://github.com/twinh/miaoxing/commit/143fc44c847adb976288ce1425ff2d7bd831dbc2))
+
+
+### Features
+
+* ClassMap 加入 wei 中 ([509a5b8](https://github.com/twinh/miaoxing/commit/509a5b868a54c4d29f994371e1f71379ab74b1e9))
+* Migration 加入 wei 中 ([e0c82ef](https://github.com/twinh/miaoxing/commit/e0c82efcf7e3174107b4250e0a7cda1fabd01941))
+* Request 可以读取到提交的 JSON 数据 ([6054297](https://github.com/twinh/miaoxing/commit/60542971ed2ce57f0322509167d7f735d361e1a3))
+* Request 增加 isFormat 判断请求格式 ([673d16e](https://github.com/twinh/miaoxing/commit/673d16e6cef6ff18e24626e1c861ba8841c0eb97))
+* ServiceTrait 加入 wei 中 ([ca51f27](https://github.com/twinh/miaoxing/commit/ca51f270443af2fe2666f9fccec5243ea78334ec))
+* Time 服务加入 wei 中 ([214f6fe](https://github.com/twinh/miaoxing/commit/214f6fe0ecffc6b991d5a23ec416f0101820b4a3))
+* V 服务加入 wei 中 ([ddb9727](https://github.com/twinh/miaoxing/commit/ddb97278b05bc2235a073fdc62daa6fccdd235c6))
+* **error:** 支持返回 JSON 结果 ([1db584f](https://github.com/twinh/miaoxing/commit/1db584f40d1532a2e521a01b6ae9e61cb1153f2b))
+* **error:** 获取错误信息时，尝试将异常错误码转换为 HTTP 状态文本；错误视图可以使用 $title, $message 参数 ([c65f5cb](https://github.com/twinh/miaoxing/commit/c65f5cbe444d2d2b5ef697794526e148c509bf5e))
+* **upload:** 增加 `getUrl` 方法，返回上传文件的地址 ([daefa66](https://github.com/twinh/miaoxing/commit/daefa66f1672de24a21ededc0d98ee9fb3155b3e))
+* batchInsert 也自动转换 false 值为 0 ([ad2c9ac](https://github.com/twinh/miaoxing/commit/ad2c9ac00dc76d61d1a624fc758b666a25d9694c))
+* schema 增加 defaultNullable 选项，控制是否默认为 null ([a34ff43](https://github.com/twinh/miaoxing/commit/a34ff436f3eac2edf317ca4a32c2e4b4ed886830))
+* 初步增加静态调用 ([0002232](https://github.com/twinh/miaoxing/commit/000223246cca8e089b5f397bad83e7c00159bee3))
+* 动态调用也支持指定 $createNewInstance=true 来创建新的对象 ([d3bd2eb](https://github.com/twinh/miaoxing/commit/d3bd2eb83980754ce60e22218402e554eef0cbee))
+* 增加 dropIndex 支持 ([7abe9d0](https://github.com/twinh/miaoxing/commit/7abe9d0ba8f96db273873087018dff88509372bf))
+* 增加 to 方法 ([0c8d2d2](https://github.com/twinh/miaoxing/commit/0c8d2d2f8851ebc3bdfd597ca727432199e8275d))
+* 支持使用 URL 参数 r 作为路由 ([58a8fd5](https://github.com/twinh/miaoxing/commit/58a8fd51674e4b84c353c9bf8851788631aae0cf))
+* 自动转换 false 值为 0，避免 MySQL 默认的 sql mode "STRICT_TRANS_TABLES" 提示"Incorrect integer value: '' for column ..." ([129faab](https://github.com/twinh/miaoxing/commit/129faab88ba802ea9e72b3e23a3361ad87709073))
+
 Changelog
 =========
 
