@@ -3,42 +3,36 @@
 
 ### Bug Fixes
 
-* schema nullable 设置无效 ([f565379](https://github.com/twinh/miaoxing/commit/f565379d8e0557e8a41c8238604286f1fec51fb7))
-* 命名空间不正确 ([5ab0660](https://github.com/twinh/miaoxing/commit/5ab06606f5a7a084dbad85aec92d15ef3d54e76a))
-* 改用 rawurlencode 来转换 cookie ([4b5bec8](https://github.com/twinh/miaoxing/commit/4b5bec8db2f0013d7af335d889c130cd3453b737))
-* 非数字值 incr 出错  ErrorException : A non-numeric value encountered ([143fc44](https://github.com/twinh/miaoxing/commit/143fc44c847adb976288ce1425ff2d7bd831dbc2))
+* schema nullable 设置无效 ([fb6781b](https://github.com/twinh/wei/commit/fb6781b492699e06f7c0d7ce33b1ca070d4491c5))
+* 命名空间不正确 ([0a5f57a](https://github.com/twinh/wei/commit/0a5f57abc34b102ce42d4752cac89a2a585b7396))
+* 改用 rawurlencode 来转换 cookie ([3f1070c](https://github.com/twinh/wei/commit/3f1070cd77512f3300a945b9e2dbc2dd9fe529c7))
+* 非数字值 incr 出错  ErrorException : A non-numeric value encountered ([a91ee96](https://github.com/twinh/wei/commit/a91ee96a55a71a47cb38862f963fe82af00c40a8))
 
 
 ### Features
 
-* ClassMap 加入 wei 中 ([509a5b8](https://github.com/twinh/miaoxing/commit/509a5b868a54c4d29f994371e1f71379ab74b1e9))
-* Migration 加入 wei 中 ([e0c82ef](https://github.com/twinh/miaoxing/commit/e0c82efcf7e3174107b4250e0a7cda1fabd01941))
-* Request 可以读取到提交的 JSON 数据 ([6054297](https://github.com/twinh/miaoxing/commit/60542971ed2ce57f0322509167d7f735d361e1a3))
-* Request 增加 isFormat 判断请求格式 ([673d16e](https://github.com/twinh/miaoxing/commit/673d16e6cef6ff18e24626e1c861ba8841c0eb97))
-* ServiceTrait 加入 wei 中 ([ca51f27](https://github.com/twinh/miaoxing/commit/ca51f270443af2fe2666f9fccec5243ea78334ec))
-* Time 服务加入 wei 中 ([214f6fe](https://github.com/twinh/miaoxing/commit/214f6fe0ecffc6b991d5a23ec416f0101820b4a3))
-* V 服务加入 wei 中 ([ddb9727](https://github.com/twinh/miaoxing/commit/ddb97278b05bc2235a073fdc62daa6fccdd235c6))
-* **error:** 支持返回 JSON 结果 ([1db584f](https://github.com/twinh/miaoxing/commit/1db584f40d1532a2e521a01b6ae9e61cb1153f2b))
-* **error:** 获取错误信息时，尝试将异常错误码转换为 HTTP 状态文本；错误视图可以使用 $title, $message 参数 ([c65f5cb](https://github.com/twinh/miaoxing/commit/c65f5cbe444d2d2b5ef697794526e148c509bf5e))
-* **upload:** 增加 `getUrl` 方法，返回上传文件的地址 ([daefa66](https://github.com/twinh/miaoxing/commit/daefa66f1672de24a21ededc0d98ee9fb3155b3e))
-* batchInsert 也自动转换 false 值为 0 ([ad2c9ac](https://github.com/twinh/miaoxing/commit/ad2c9ac00dc76d61d1a624fc758b666a25d9694c))
-* schema 增加 defaultNullable 选项，控制是否默认为 null ([a34ff43](https://github.com/twinh/miaoxing/commit/a34ff436f3eac2edf317ca4a32c2e4b4ed886830))
-* 初步增加静态调用 ([0002232](https://github.com/twinh/miaoxing/commit/000223246cca8e089b5f397bad83e7c00159bee3))
-* 动态调用也支持指定 $createNewInstance=true 来创建新的对象 ([d3bd2eb](https://github.com/twinh/miaoxing/commit/d3bd2eb83980754ce60e22218402e554eef0cbee))
-* 增加 dropIndex 支持 ([7abe9d0](https://github.com/twinh/miaoxing/commit/7abe9d0ba8f96db273873087018dff88509372bf))
-* 增加 to 方法 ([0c8d2d2](https://github.com/twinh/miaoxing/commit/0c8d2d2f8851ebc3bdfd597ca727432199e8275d))
-* 支持使用 URL 参数 r 作为路由 ([58a8fd5](https://github.com/twinh/miaoxing/commit/58a8fd51674e4b84c353c9bf8851788631aae0cf))
-* 自动转换 false 值为 0，避免 MySQL 默认的 sql mode "STRICT_TRANS_TABLES" 提示"Incorrect integer value: '' for column ..." ([129faab](https://github.com/twinh/miaoxing/commit/129faab88ba802ea9e72b3e23a3361ad87709073))
-
-Changelog
-=========
-
-## 0.9.24
-
-* Block: 增加js,css快捷方法
-* isCallback: 回调函数除了闭包,还允许传入字符串,数字
-* Record: reload,saveColl方法使用$this->primaryKey代替id字符串
-* Db: 废弃insertBatch方法，改名为batchInsert
+* ClassMap 加入 wei 中 ([cea4791](https://github.com/twinh/wei/commit/cea4791a29a425abebfe6242d188fb844017b613))
+* Migration 加入 wei 中 ([aab0acb](https://github.com/twinh/wei/commit/aab0acb4dba4abc1f5895f6d6201f7bfffebc468))
+* Request 可以读取到提交的 JSON 数据 ([0cefe24](https://github.com/twinh/wei/commit/0cefe2474ec83a8125870db4265cc9e0b8ef029e))
+* Request 增加 isFormat 判断请求格式 ([5b8b57e](https://github.com/twinh/wei/commit/5b8b57ed7f4d82fbdb0a58a9c7d8ca1ace630754))
+* ServiceTrait 加入 wei 中 ([6106fd9](https://github.com/twinh/wei/commit/6106fd98b520572c65f3aeedd7da57ff1a0f22ec))
+* Time 服务加入 wei 中 ([26088e3](https://github.com/twinh/wei/commit/26088e3fc051012ced9d4e4a835758ecac6d45eb))
+* V 服务加入 wei 中 ([ed8332e](https://github.com/twinh/wei/commit/ed8332eb351765ee7b58e7d0cf78bd780c505bc7))
+* **error:** 支持返回 JSON 结果 ([6be31d3](https://github.com/twinh/wei/commit/6be31d39fe87b2558999f4daea012cb7b6da9e69))
+* **error:** 获取错误信息时，尝试将异常错误码转换为 HTTP 状态文本；错误视图可以使用 $title, $message 参数 ([3d0ff81](https://github.com/twinh/wei/commit/3d0ff81dd4bcab1d248dddd19f1d505e43d47619))
+* **upload:** 增加 `getUrl` 方法，返回上传文件的地址 ([7638e8c](https://github.com/twinh/wei/commit/7638e8ca6a15092604020a6720e6143ea8877c8f))
+* batchInsert 也自动转换 false 值为 0 ([f7ebe4d](https://github.com/twinh/wei/commit/f7ebe4d3d9ddafb4de551fcebaedf326f852626b))
+* schema 增加 defaultNullable 选项，控制是否默认为 null ([4a10c4b](https://github.com/twinh/wei/commit/4a10c4b50d389b7353a9124d72e0fc7116575cd0))
+* 初步增加静态调用 ([756003f](https://github.com/twinh/wei/commit/756003f206dfcbf699fd20faa28ad0b4e5f0b44d))
+* 动态调用也支持指定 $createNewInstance=true 来创建新的对象 ([540c902](https://github.com/twinh/wei/commit/540c9021d677cb25728e592cb1e1534289bc4773))
+* 增加 dropIndex 支持 ([53a052c](https://github.com/twinh/wei/commit/53a052ce380c4efe5bcbc179cf1bc7930dae5737))
+* 增加 to 方法 ([7b84508](https://github.com/twinh/wei/commit/7b845083ee892cbe0043cd544abe5d31a28693a4))
+* 支持使用 URL 参数 r 作为路由 ([7de4f06](https://github.com/twinh/wei/commit/7de4f0606cc3dce5b2b445a7e3a043360bed3675))
+* 自动转换 false 值为 0，避免 MySQL 默认的 sql mode "STRICT_TRANS_TABLES" 提示"Incorrect integer value: '' for column ..." ([ef91135](https://github.com/twinh/wei/commit/ef91135ff8bdd923c8c98504718c0bb48245d62b))
+* Block: 增加 js,css 快捷方法
+* isCallback: 回调函数除了闭包, 还允许传入字符串,数字
+* Record: reload, saveColl 方法使用 $this->primaryKey 代替 id 字符串
+* Db: 废弃 insertBatch 方法，改名为 batchInsert
 * Wei: 移除 PHP 5.3 的支持
 * Request: 解决 &offsetGet 导致 if (wei()->request['notExists']) 会在 request 内部的 data 产生额外键 notExists = null 的问题
 
