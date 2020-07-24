@@ -408,6 +408,7 @@ class Error extends Base
      * Render exception message for CLI
      *
      * @param \Exception|\Throwable $e
+     * @SuppressWarnings(PHPMD.ExitExpression)
      */
     protected function displayCliException($e)
     {

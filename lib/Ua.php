@@ -72,6 +72,7 @@ class Ua extends Base
      * Constructor
      *
      * @param array $options
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function __construct(array $options = [])
     {

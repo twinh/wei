@@ -151,6 +151,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * Constructor
      *
      * @param array $options
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function __construct(array $options = [])
     {

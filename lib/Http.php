@@ -335,16 +335,16 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         }
 
         // Prepare request
-        $ch = $this->ch = curl_init();
-        curl_setopt_array($ch, $this->prepareCurlOptions());
-        $this->beforeSend && call_user_func($this->beforeSend, $this, $ch);
+        $handle = $this->ch = curl_init();
+        curl_setopt_array($handle, $this->prepareCurlOptions());
+        $this->beforeSend && call_user_func($this->beforeSend, $this, $handle);
 
         // Execute request
-        $response = curl_exec($ch);
+        $response = curl_exec($handle);
 
         // Handle response
         $this->handleResponse($response);
-        $this->complete && call_user_func($this->complete, $this, $ch);
+        $this->complete && call_user_func($this->complete, $this, $handle);
 
         // Retry if response error
         if (false === $this->result && $this->leftRetries > 0) {
@@ -866,10 +866,10 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     protected function handleResponse($response)
     {
-        $ch = $this->ch;
+        $handle = $this->ch;
 
         if (false !== $response) {
-            $curlInfo = curl_getinfo($ch);
+            $curlInfo = curl_getinfo($handle);
 
             // Parse response header
             if ($this->getCurlOption(CURLOPT_HEADER)) {
@@ -907,7 +907,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
                 $this->triggerError('http', $exception);
             }
         } else {
-            $exception = new \ErrorException(curl_error($ch), curl_errno($ch));
+            $exception = new \ErrorException(curl_error($handle), curl_errno($handle));
             $this->triggerError('curl', $exception);
         }
     }

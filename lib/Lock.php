@@ -94,6 +94,7 @@ class Lock extends Base
 
     /**
      * Release all lock keys and exit
+     * @SuppressWarnings(PHPMD.ExitExpression)
      */
     public function catchSignal()
     {

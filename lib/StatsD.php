@@ -252,13 +252,13 @@ class StatsD extends Base
             return;
         }
 
-        $fp = fsockopen('udp://' . $this->host, $this->port, $errno, $errstr);
-        if (!$fp) {
+        $handle = fsockopen('udp://' . $this->host, $this->port, $errno, $errstr);
+        if (!$handle) {
             return;
         }
         foreach ($sampledData as $stat => $value) {
-            fwrite($fp, $stat . ':' . $value);
+            fwrite($handle, $stat . ':' . $value);
         }
-        fclose($fp);
+        fclose($handle);
     }
 }

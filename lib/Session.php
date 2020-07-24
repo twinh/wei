@@ -68,6 +68,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * Start session
      *
      * @throws \RuntimeException When header has been sent
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function start()
     {

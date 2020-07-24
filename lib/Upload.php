@@ -301,10 +301,10 @@ class Upload extends Image
 
         $this->file = $this->dir . '/' . $fileName . $fullExt;
         if (!$this->overwrite) {
-            $i = 1;
+            $index = 1;
             while (is_file($this->file)) {
-                $this->file = $this->dir . '/' . $fileName . '-' . $i . $fullExt;
-                ++$i;
+                $this->file = $this->dir . '/' . $fileName . '-' . $index . $fullExt;
+                ++$index;
             }
         }
 

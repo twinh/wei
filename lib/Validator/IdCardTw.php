@@ -79,8 +79,8 @@ class IdCardTw extends BaseValidator
             return false;
         }
 
-        list($x1, $x2) = str_split((string) $this->map[$input[0]]);
-        $sum = $x1 + 9 * $x2;
+        list($left, $right) = str_split((string) $this->map[$input[0]]);
+        $sum = $left + 9 * $right;
         for ($i = 1, $j = 8; $i < 9; $i++, $j--) {
             $sum += $input[$i] * $j;
         }

@@ -27,11 +27,11 @@ class IdCardCn extends BaseValidator
      */
     public function calcChecksum($input)
     {
-        $wi = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+        $weighting = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
         $sum = 0;
 
         for ($i = 16; $i >= 0; --$i) {
-            $sum += $input[$i] * $wi[$i];
+            $sum += $input[$i] * $weighting[$i];
         }
 
         $checksum = (12 - $sum % 11) % 11;

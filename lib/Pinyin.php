@@ -16,7 +16,7 @@ namespace Wei;
  */
 class Pinyin extends Base
 {
-    public static $dictionary = [
+    protected static $dictionary = [
         ['a', -20319],
         ['ai', -20317],
         ['an', -20304],

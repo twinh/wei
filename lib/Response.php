@@ -503,10 +503,10 @@ class Response extends Base
         // Anonymous function for unit test
         $setCookie = function () {
         };
-        foreach ($this->cookies as $name => $o) {
-            $o += $this->cookieOption;
-            $fn = $this->unitTest ? $setCookie : ($o['raw'] ? 'setrawcookie' : 'setcookie');
-            $fn($name, $o['value'], $time + $o['expires'], $o['path'], $o['domain'], $o['secure'], $o['httpOnly']);
+        foreach ($this->cookies as $name => $cookie) {
+            $cookie += $this->cookieOption;
+            $fn = $this->unitTest ? $setCookie : ($cookie['raw'] ? 'setrawcookie' : 'setcookie');
+            $fn($name, $cookie['value'], $time + $cookie['expires'], $cookie['path'], $cookie['domain'], $cookie['secure'], $cookie['httpOnly']);
         }
         return $this;
     }
