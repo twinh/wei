@@ -10,7 +10,8 @@
     },
     "require-dev": {
         "joseph-lenton/php-error": "dev-master",
-        "phpunit/phpunit": "^8"
+        "phpunit/phpunit": "^8",
+        "miaoxing/coding-standards": "^5.1"
     },
     "authors": [
         {
