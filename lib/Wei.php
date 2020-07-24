@@ -342,14 +342,25 @@ namespace Wei {
                 // For call_user_func/call_user_func_array
                 $file = $traces[3]['file'] ?? $traces[4]['file'];
                 $line = $traces[3]['line'] ?? $traces[4]['line'];
-                throw new \BadMethodCallException(sprintf('Method "%s->%s" (class "%s") not found, called in file "%s" at line %s',
-                    get_class($traces[3]['object']), $traces[3]['args'][0], $class, $file, $line), 1014);
+                throw new \BadMethodCallException(sprintf(
+                    'Method "%s->%s" (class "%s") not found, called in file "%s" at line %s',
+                    get_class($traces[3]['object']),
+                    $traces[3]['args'][0],
+                    $class,
+                    $file,
+                    $line
+                ), 1014);
             }
 
             // Example: $wei->notFound
             if (isset($traces[1]) && '__get' === $traces[1]['function'] && $name === $traces[1]['args'][0]) {
-                throw new \BadMethodCallException(sprintf('Property or object "%s" (class "%s") not found, called in file "%s" at line %s',
-                    $traces[1]['args'][0], $class, $traces[1]['file'], $traces[1]['line']), 1012);
+                throw new \BadMethodCallException(sprintf(
+                    'Property or object "%s" (class "%s") not found, called in file "%s" at line %s',
+                    $traces[1]['args'][0],
+                    $class,
+                    $traces[1]['file'],
+                    $traces[1]['line']
+                ), 1012);
             }
 
             // Example: $wei->get('notFound');
@@ -610,8 +621,10 @@ namespace Wei {
         public function import($dir, $namespace, $format = null, $autoload = false)
         {
             if (!is_dir($dir)) {
-                throw new \InvalidArgumentException(sprintf('Fail to import classes from non-exists directory "%s"',
-                    $dir), 1014);
+                throw new \InvalidArgumentException(sprintf(
+                    'Fail to import classes from non-exists directory "%s"',
+                    $dir
+                ), 1014);
             }
 
             if ($autoload) {

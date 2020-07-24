@@ -51,7 +51,8 @@ abstract class TestCase extends BaseTestCase
             // null
             null,
             // callback
-            function () {},
+            function () {
+            },
         ];
 
         // Convert to test data

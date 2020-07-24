@@ -58,17 +58,18 @@ class FileCacheTest extends CacheTestCase
 
         chmod($file, 0777);
 
-        /*$file = $wei->getFile(__METHOD__);
+        /*
+            $file = $wei->getFile(__METHOD__);
 
-        $handle = fopen($file, 'wb');
+            $handle = fopen($file, 'wb');
 
-        flock($handle, LOCK_EX);
+            flock($handle, LOCK_EX);
 
-        sleep(10);
+            sleep(10);
 
-        $this->assertFalse($wei->add(__METHOD__, true));
+            $this->assertFalse($wei->add(__METHOD__, true));
 
-        flock($handle, LOCK_UN);
+            flock($handle, LOCK_UN);
 
         fclose($handle);*/
     }

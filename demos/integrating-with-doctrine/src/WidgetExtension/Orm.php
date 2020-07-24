@@ -56,17 +56,17 @@ class Orm extends Base
 
         // Create cache object
         switch (true) {
-            case is_string($options['cache']) :
+            case is_string($options['cache']):
                 $class = '\Doctrine\Common\Cache\\' . $options['cache'];
                 $cache = new $class;
                 break;
 
-             case $options['cache'] instanceof DoctrineCache :
-                 $cache = $options['cache'];
-                 break;
+            case $options['cache'] instanceof DoctrineCache:
+                $cache = $options['cache'];
+                break;
 
-             default :
-                 $cache = false;
+            default:
+                $cache = false;
         }
 
         $config = new Configuration;

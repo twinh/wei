@@ -366,7 +366,8 @@ class E extends Base
 
         if (!$this->isUtf8($result)) {
             throw new \RuntimeException(sprintf(
-                'String to be escaped was not valid UTF-8 or could not be converted: %s', $result
+                'String to be escaped was not valid UTF-8 or could not be converted: %s',
+                $result
             ));
         }
 

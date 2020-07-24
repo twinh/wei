@@ -295,8 +295,9 @@ final class ValidatorTest extends TestCase
 
         $messages = $validator->getDetailMessages();
 
-        /*The invalid messages look like blow
-        $messages = array(
+        /*
+            The invalid messages look like blow
+            $messages = array(
             'email' => array(
                 'email' => array(
                     'email' => 'xxx', // user defined
@@ -618,8 +619,10 @@ final class ValidatorTest extends TestCase
             ],
         ]);
 
-        $this->assertEquals('custom format message',
-            $validator->getRuleValidator('username', 'email')->getOption('formatMessage'));
+        $this->assertEquals(
+            'custom format message',
+            $validator->getRuleValidator('username', 'email')->getOption('formatMessage')
+        );
     }
 
     public function testInvalidArgumentException()

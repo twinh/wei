@@ -81,7 +81,7 @@ final class AppTest extends TestCase
                 'Controller\Admin' => [
                     'WeiTest\Fixtures\App\Controller\Controller\Admin',
                 ],
-        ], ], $result);
+            ], ], $result);
     }
 
     public function testActionNotFound()

@@ -290,14 +290,14 @@ final class WeChatAppTest extends TestCase
                 $this->inputTextMessage('99999'),
                 [
                 ],
-               'Your input is 99999',
+                'Your input is 99999',
             ],
             [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('t xx'),
                 [
                 ],
-               'The translation result is: xx',
+                'The translation result is: xx',
             ],
             [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',

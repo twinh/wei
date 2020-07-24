@@ -67,14 +67,20 @@ final class UrlTest extends TestCase
 
         $this->assertEquals('/articles/1/comments/2', $this->url('articles/%s/comments/%s', [1, 2]));
 
-        $this->assertEquals('/articles/1/comments/2?a=b',
-            $this->url('articles/%s/comments/%s', [1, 2], ['a' => 'b']));
+        $this->assertEquals(
+            '/articles/1/comments/2?a=b',
+            $this->url('articles/%s/comments/%s', [1, 2], ['a' => 'b'])
+        );
 
-        $this->assertEquals('/articles/b/comments/d',
-            $this->url('articles/%s/comments/%s', ['a' => 'b', 'c' => 'd']));
+        $this->assertEquals(
+            '/articles/b/comments/d',
+            $this->url('articles/%s/comments/%s', ['a' => 'b', 'c' => 'd'])
+        );
 
-        $this->assertEquals('/articles/b/comments/d',
-            $this->url('articles/%s/comments/%s', ['a' => 'b', 'c' => 'd', 'e' => 'f']));
+        $this->assertEquals(
+            '/articles/b/comments/d',
+            $this->url('articles/%s/comments/%s', ['a' => 'b', 'c' => 'd', 'e' => 'f'])
+        );
     }
 
     public function testQueryUrl()

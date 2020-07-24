@@ -255,9 +255,9 @@ final class ETest extends TestCase
 
         // call by wei
         $this->assertEquals(
-                $value,
-                $this->e($key, 'js')
-            );
+            $value,
+            $this->e($key, 'js')
+        );
     }
 
     public function testJavascriptEscapingReturnsStringIfZeroLength()

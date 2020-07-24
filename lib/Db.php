@@ -983,8 +983,10 @@ class Db extends Base
                 break;
 
             default:
-                throw new \RuntimeException(sprintf('Unsupported switching database for current driver: %s',
-                    $this->driver));
+                throw new \RuntimeException(sprintf(
+                    'Unsupported switching database for current driver: %s',
+                    $this->driver
+                ));
         }
         return $this;
     }

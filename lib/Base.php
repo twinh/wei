@@ -49,8 +49,10 @@ abstract class Base
         if (!isset($options['wei'])) {
             $this->wei = Wei::getContainer();
         } elseif (!$options['wei'] instanceof Wei) {
-            throw new \InvalidArgumentException(sprintf('Option "wei" of class "%s" should be an instance of "Wei\Wei"',
-                static::class), 1000);
+            throw new \InvalidArgumentException(sprintf(
+                'Option "wei" of class "%s" should be an instance of "Wei\Wei"',
+                static::class
+            ), 1000);
         }
         $this->setOption($options);
     }

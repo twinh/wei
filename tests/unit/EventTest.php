@@ -30,7 +30,8 @@ final class EventTest extends TestCase
 
     public function testAddHandler()
     {
-        $this->object->on('test', function () {});
+        $this->object->on('test', function () {
+        });
 
         $this->assertTrue($this->object->has('test'));
     }
@@ -65,7 +66,8 @@ final class EventTest extends TestCase
 
     public function testHasHandler()
     {
-        $fn = function () {};
+        $fn = function () {
+        };
         $em = $this->object;
 
         $this->object->off('test')
@@ -88,7 +90,8 @@ final class EventTest extends TestCase
         $em = $this->object;
 
         $init = function () use ($that) {
-            $fn = function () {};
+            $fn = function () {
+            };
             $that->event->off('test')
                 ->on('test', $fn)
                 ->on('test.before', $fn)
@@ -116,8 +119,10 @@ final class EventTest extends TestCase
     {
         $this->object->off('test')
             ->on([
-                'test.before' => function () {},
-                'test.after' => function () {},
+                'test.before' => function () {
+                },
+                'test.after' => function () {
+                },
             ]);
 
         $this->assertTrue($this->object->has('test.before'));

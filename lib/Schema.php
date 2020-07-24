@@ -898,7 +898,8 @@ class Schema extends Base
         if (!array_key_exists('default', $options)
             && $this->autoDefault
             && null === $this->typeDefaults[$options['type']]
-            && !$this->defaultNullable) {
+            && !$this->defaultNullable
+        ) {
             $options['nullable'] = true;
         }
 

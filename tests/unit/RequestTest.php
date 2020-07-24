@@ -744,16 +744,20 @@ final class RequestTest extends TestCase
         $request->setServer('HTTP_ACCEPT', 'application/json, text/javascript, */*; q=0.01');
         $this->assertTrue($request->acceptJson());
 
-        $request->setServer('HTTP_ACCEPT',
-            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+        $request->setServer(
+            'HTTP_ACCEPT',
+            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+        );
         $this->assertFalse($request->acceptJson());
     }
 
     public function testAcceptJsonByOverwriteFormat()
     {
         $request = $this->request;
-        $request->setServer('HTTP_ACCEPT',
-            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+        $request->setServer(
+            'HTTP_ACCEPT',
+            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+        );
         $this->assertFalse($request->acceptJson());
 
         $request->set('_format', 'json');
@@ -764,8 +768,10 @@ final class RequestTest extends TestCase
     {
         $request = $this->request;
         $request->set('_format', null);
-        $request->setServer('HTTP_ACCEPT',
-            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8');
+        $request->setServer(
+            'HTTP_ACCEPT',
+            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+        );
         $this->assertFalse($request->acceptJson());
 
         $request->set('_format', 'xlsx');

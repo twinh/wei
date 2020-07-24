@@ -1221,7 +1221,8 @@ abstract class DbTest extends TestCase
 
     public function testGlobalOption()
     {
-        $cb = function () {};
+        $cb = function () {
+        };
         $this->wei->setConfig([
             // sqlite
             'db' => [
