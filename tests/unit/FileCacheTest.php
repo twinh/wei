@@ -5,7 +5,7 @@ namespace WeiTest;
 /**
  * @internal
  */
-final class FileCacheTest extends CacheTestCase
+class FileCacheTest extends CacheTestCase
 {
     /**
      * @var \Wei\FileCache
