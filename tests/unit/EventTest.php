@@ -2,9 +2,10 @@
 
 namespace WeiTest;
 
-use Wei\Event;
-
-class EventTest extends TestCase
+/**
+ * @internal
+ */
+final class EventTest extends TestCase
 {
     /**
      * @var \Wei\Event
@@ -16,7 +17,7 @@ class EventTest extends TestCase
         $event = $this->object;
 
         $results = $event->off('test')
-            ->on('test', function() {
+            ->on('test', function () {
                 return 'a';
             })
             ->on('test', function () {
@@ -24,12 +25,12 @@ class EventTest extends TestCase
             })
             ->trigger('test');
 
-        $this->assertEquals(array('a', 'b'), $results);
+        $this->assertEquals(['a', 'b'], $results);
     }
 
     public function testAddHandler()
     {
-        $this->object->on('test', function(){});
+        $this->object->on('test', function () {});
 
         $this->assertTrue($this->object->has('test'));
     }
@@ -44,28 +45,27 @@ class EventTest extends TestCase
     public function testTriggerHandler()
     {
         $results = $event = $this->object->off('test')
-            ->on('test', function(){
+            ->on('test', function () {
                 return false;
             })
             ->trigger('test');
-        $this->assertEquals(false, $results[0]);
+        $this->assertFalse($results[0]);
 
         $results = $this->object->off('test')
-            ->on('test', function(){
+            ->on('test', function () {
                 return false;
             })
             // won't be triggered
-            ->on('test', function(){
+            ->on('test', function () {
                 return 'second';
             })
             ->trigger('test');
-        $this->assertEquals(array(false), $results);
+        $this->assertEquals([false], $results);
     }
-
 
     public function testHasHandler()
     {
-        $fn = function(){};
+        $fn = function () {};
         $em = $this->object;
 
         $this->object->off('test')
@@ -82,14 +82,13 @@ class EventTest extends TestCase
         $this->assertFalse($em->has('test2.ns3'));
     }
 
-
     public function testRemoveHandler()
     {
         $that = $this;
         $em = $this->object;
 
-        $init = function() use($that) {
-            $fn = function(){};
+        $init = function () use ($that) {
+            $fn = function () {};
             $that->event->off('test')
                 ->on('test', $fn)
                 ->on('test.before', $fn)
@@ -116,10 +115,10 @@ class EventTest extends TestCase
     public function testArrayAsOnParameters()
     {
         $this->object->off('test')
-            ->on(array(
-                'test.before' => function(){},
-                'test.after' => function(){}
-            ));
+            ->on([
+                'test.before' => function () {},
+                'test.after' => function () {},
+            ]);
 
         $this->assertTrue($this->object->has('test.before'));
         $this->assertTrue($this->object->has('test.after'));
@@ -131,9 +130,9 @@ class EventTest extends TestCase
             return $arg;
         });
 
-        $result = $this->object->trigger('test', array('test'));
+        $result = $this->object->trigger('test', ['test']);
 
-        $this->assertEquals(array('test'), $result);
+        $this->assertEquals(['test'], $result);
     }
 
     public function testNotArrayArgs()
@@ -144,7 +143,7 @@ class EventTest extends TestCase
 
         $result = $this->object->trigger('test', 'test');
 
-        $this->assertEquals(array('test'), $result);
+        $this->assertEquals(['test'], $result);
     }
 
     public function testUntil()

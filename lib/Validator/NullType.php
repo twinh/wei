@@ -24,7 +24,7 @@ class NullType extends BaseValidator
      */
     protected function doValidate($input)
     {
-        if (!is_null($input)) {
+        if (null !== $input) {
             $this->addError('notNull');
             return false;
         }

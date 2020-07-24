@@ -2,7 +2,10 @@
 
 namespace WeiTest\Validator;
 
-class DirTest extends TestCase
+/**
+ * @internal
+ */
+final class DirTest extends TestCase
 {
     public function testIsDir()
     {

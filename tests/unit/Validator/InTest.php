@@ -2,10 +2,16 @@
 
 namespace WeiTest\Validator;
 
-class InTest extends TestCase
+/**
+ * @internal
+ */
+final class InTest extends TestCase
 {
     /**
      * @dataProvider providerForIn
+     * @param mixed $input
+     * @param mixed $array
+     * @param mixed $case
      */
     public function testIn($input, $array, $case = false)
     {
@@ -14,6 +20,9 @@ class InTest extends TestCase
 
     /**
      * @dataProvider providerForNotIn
+     * @param mixed $input
+     * @param mixed $array
+     * @param mixed $case
      */
     public function testNotIn($input, $array, $case = false)
     {
@@ -29,17 +38,17 @@ class InTest extends TestCase
 
     public function providerForIn()
     {
-        return array(
-            array('apple', array('apple', 'pear')),
-            array('apple', new \ArrayObject(array('apple', 'pear'))),
-            array('', array(null)),
-        );
+        return [
+            ['apple', ['apple', 'pear']],
+            ['apple', new \ArrayObject(['apple', 'pear'])],
+            ['', [null]],
+        ];
     }
 
     public function providerForNotIn()
     {
-        return array(
-            array('', array(null), true),
-        );
+        return [
+            ['', [null], true],
+        ];
     }
 }

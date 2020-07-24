@@ -6,8 +6,8 @@ class ReturnArray extends Base
 {
     public function __invoke()
     {
-        return array(
-            'arrayForView' => 'arrayForView'
-        );
+        return [
+            'arrayForView' => 'arrayForView',
+        ];
     }
 }

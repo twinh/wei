@@ -48,6 +48,16 @@ class Type extends BaseValidator
     /**
      * {@inheritdoc}
      */
+    public function getMessages($name = null)
+    {
+        $this->loadTranslationMessages();
+        $this->typeName = $this->t($this->type);
+        return parent::getMessages($name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function doValidate($input)
     {
         if (function_exists($fn = 'is_' . $this->type)) {
@@ -63,15 +73,5 @@ class Type extends BaseValidator
         }
 
         return $result;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMessages($name = null)
-    {
-        $this->loadTranslationMessages();
-        $this->typeName = $this->t($this->type);
-        return parent::getMessages($name);
     }
 }

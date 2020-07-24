@@ -27,9 +27,9 @@ class FileCache extends BaseCache
      *
      * @var array
      */
-    protected $illegalChars = array(
-        '\\', '/', ':', '*', '?', '"', '<', '>', '|', "\r", "\n"
-    );
+    protected $illegalChars = [
+        '\\', '/', ':', '*', '?', '"', '<', '>', '|', "\r", "\n",
+    ];
 
     /**
      * The cache file extension
@@ -43,11 +43,11 @@ class FileCache extends BaseCache
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
-        parent::__construct($options + array(
-            'dir' => $this->dir
-        ));
+        parent::__construct($options + [
+            'dir' => $this->dir,
+        ]);
     }
 
     /**
@@ -58,7 +58,7 @@ class FileCache extends BaseCache
         if (!is_file($file = $this->getFile($key))) {
             $result = false;
         } else {
-            $content = $this->getContent($file);;
+            $content = $this->getContent($file);
             if ($content && is_array($content) && time() < $content[0]) {
                 $result = $content[1];
             } else {
@@ -194,7 +194,6 @@ class FileCache extends BaseCache
         return $this->writeAndRelease($handle, $content, true) ? $result : false;
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -311,10 +310,10 @@ class FileCache extends BaseCache
         // 2147483647 = pow(2, 31) - 1
         // avoid year 2038 problem in 32-bit system when date coverts or compares
         // @see http://en.wikipedia.org/wiki/Year_2038_problem
-        return serialize(array(
+        return serialize([
             0 => $expire ? time() + $expire : 2147483647,
             1 => $content,
-        ));
+        ]);
     }
 
     /**
@@ -323,7 +322,7 @@ class FileCache extends BaseCache
      * @param  resource $handle  file handle
      * @param  string   $content the value of cache
      * @param  bool     $rewrite whether rewrite the whole file
-     * @return boolean
+     * @return bool
      */
     protected function writeAndRelease($handle, $content, $rewrite = false)
     {

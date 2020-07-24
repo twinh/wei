@@ -30,21 +30,21 @@ class StatsD extends Base
      *
      * @var array
      */
-    protected $timings = array();
+    protected $timings = [];
 
     /**
      * Holds all memory profiles like timings
      *
      * @var array
      */
-    private $memoryProfiles = array();
+    private $memoryProfiles = [];
 
     /**
      * Sets one or more timing values
      *
-     * @param string|array $key The metric(s) to set.
+     * @param string|array $key the metric(s) to set
      * @param float $time The elapsed time (ms) to log
-     * @param int|float $sampleRate the rate (0-1) for sampling.
+     * @param int|float $sampleRate the rate (0-1) for sampling
      */
     public function timing($key, $time, $sampleRate = 1)
     {
@@ -65,7 +65,7 @@ class StatsD extends Base
      * Ends the timing for a key and sends it to StatsD
      *
      * @param string $key
-     * @param int|float $sampleRate the rate (0-1) for sampling.
+     * @param int|float $sampleRate the rate (0-1) for sampling
      * @return float|null
      */
     public function endTiming($key, $sampleRate = 1)
@@ -86,7 +86,7 @@ class StatsD extends Base
      *
      * @param string $key
      * @param \Closure $fn
-     * @param int|float $sampleRate the rate (0-1) for sampling.
+     * @param int|float $sampleRate the rate (0-1) for sampling
      * @return mixed
      */
     public function time($key, \Closure $fn, $sampleRate = 1)
@@ -111,7 +111,7 @@ class StatsD extends Base
      * Ends the memory profiling and sends the value to the server
      *
      * @param string $key
-     * @param int|float $sampleRate the rate (0-1) for sampling.
+     * @param int|float $sampleRate the rate (0-1) for sampling
      */
     public function endMemoryProfile($key, $sampleRate = 1)
     {
@@ -128,7 +128,7 @@ class StatsD extends Base
      *
      * @param string $key
      * @param int $memory
-     * @param int|float $sampleRate the rate (0-1) for sampling.
+     * @param int|float $sampleRate the rate (0-1) for sampling
      */
     public function memory($key, $memory = null, $sampleRate = 1)
     {
@@ -141,8 +141,8 @@ class StatsD extends Base
     /**
      * Sets one or more gauges to a value
      *
-     * @param string|array $key The metric(s) to set.
-     * @param float $value The value for the stats.
+     * @param string|array $key the metric(s) to set
+     * @param float $value the value for the stats
      */
     public function gauge($key, $value)
     {
@@ -160,8 +160,8 @@ class StatsD extends Base
      * and logged in users by sending the current userId of a user
      * with each request with a key of "uniques" (or similar).
      *
-     * @param string|array $key The metric(s) to set.
-     * @param float $value The value for the stats.
+     * @param string|array $key the metric(s) to set
+     * @param float $value the value for the stats
      */
     public function set($key, $value)
     {
@@ -171,9 +171,9 @@ class StatsD extends Base
     /**
      * Increments one or more stats counters
      *
-     * @param string|array $key The metric(s) to increment.
-     * @param int|float $sampleRate the rate (0-1) for sampling.
-     * @return boolean
+     * @param string|array $key the metric(s) to increment
+     * @param int|float $sampleRate the rate (0-1) for sampling
+     * @return bool
      */
     public function increment($key, $sampleRate = 1)
     {
@@ -183,8 +183,8 @@ class StatsD extends Base
     /**
      * Decrements one or more stats counters.
      *
-     * @param string|array $key The metric(s) to decrement.
-     * @param float|int $sampleRate the rate (0-1) for sampling.
+     * @param string|array $key the metric(s) to decrement
+     * @param float|int $sampleRate the rate (0-1) for sampling
      * @return bool
      */
     public function decrement($key, $sampleRate = 1)
@@ -201,24 +201,24 @@ class StatsD extends Base
      */
     public function count($key, $value, $sampleRate = 1)
     {
-        $this->updateStats($key, (int)$value, $sampleRate, 'c');
+        $this->updateStats($key, (int) $value, $sampleRate, 'c');
     }
 
     /**
      * Updates one or more stats.
      *
      * @param string|array $key The metric(s) to update. Should be either a string or array of metrics.
-     * @param int $delta The amount to increment/decrement each metric by.
-     * @param float|int $sampleRate the rate (0-1) for sampling.
+     * @param int $delta the amount to increment/decrement each metric by
+     * @param float|int $sampleRate the rate (0-1) for sampling
      * @param string $metric The metric type ("c" for count, "ms" for timing, "g" for gauge, "s" for set)
-     * @return boolean
-     **/
+     * @return bool
+     */
     public function updateStats($key, $delta = 1, $sampleRate = 1, $metric = 'c')
     {
         if (!is_array($key)) {
-            $key = array($key);
+            $key = [$key];
         }
-        $data = array();
+        $data = [];
         foreach ($key as $stat) {
             $data[$stat] = "$delta|$metric";
         }
@@ -238,7 +238,7 @@ class StatsD extends Base
         }
 
         // sampling
-        $sampledData = array();
+        $sampledData = [];
         if ($sampleRate < 1) {
             foreach ($data as $stat => $value) {
                 if ((mt_rand() / mt_getrandmax()) <= $sampleRate) {

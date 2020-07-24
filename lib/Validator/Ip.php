@@ -51,7 +51,7 @@ class Ip extends BaseValidator
     /**
      * {@inheritdoc}
      */
-    public function __invoke($input, $options = array())
+    public function __invoke($input, $options = [])
     {
         $options && $this->storeOption($options);
 

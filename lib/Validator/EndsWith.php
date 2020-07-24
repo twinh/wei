@@ -47,12 +47,12 @@ class EndsWith extends BaseValidator
         if (is_scalar($this->findMe)) {
             $pos = strlen($input) - strlen($this->findMe);
             $fn = $this->case ? 'strrpos' : 'strripos';
-            if ($pos !== $fn($input, (string)$this->findMe)) {
+            if ($pos !== $fn($input, (string) $this->findMe)) {
                 $this->addError('notFound');
                 return false;
             }
         } elseif (is_array($this->findMe)) {
-            $pattern = array();
+            $pattern = [];
             foreach ($this->findMe as $value) {
                 $pattern[] = preg_quote($value, '/') . '$';
             }

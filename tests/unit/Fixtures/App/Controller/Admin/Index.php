@@ -11,8 +11,8 @@ class Index extends \Wei\BaseController
 
     public function viewAction()
     {
-        return array(
-            'key' => 'value'
-        );
+        return [
+            'key' => 'value',
+        ];
     }
 }

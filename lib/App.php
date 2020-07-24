@@ -71,7 +71,7 @@ class App extends Base
      *
      * @var array
      */
-    protected $controllerInstances = array();
+    protected $controllerInstances = [];
 
     /**
      * An array that stores predefined controller class,
@@ -79,7 +79,7 @@ class App extends Base
      *
      * @var array
      */
-    protected $controllerMap = array();
+    protected $controllerMap = [];
 
     /**
      * Startup an MVC application
@@ -88,7 +88,7 @@ class App extends Base
      * @throws \RuntimeException
      * @return $this
      */
-    public function __invoke(array $options = array())
+    public function __invoke(array $options = [])
     {
         $options && $this->setOption($options);
 
@@ -97,7 +97,7 @@ class App extends Base
         $paramSet = $this->router->matchParamSet($request->getPathInfo(), $request->getMethod());
 
         // Find out exiting controller action and execute
-        $notFound = array();
+        $notFound = [];
         foreach ($paramSet as $params) {
             $response = $this->dispatch($params['controller'], $params['action'], $params, false);
             if (is_array($response)) {
@@ -113,14 +113,14 @@ class App extends Base
      * Dispatch by specified controller and action
      *
      * @param string $controller The name of controller
-     * @param null|string $action The name of action
+     * @param string|null $action The name of action
      * @param array $params The request parameters
      * @param bool $throwException Whether throw exception when application not found
      * @return array|Response
      */
-    public function dispatch($controller, $action = null, array $params = array(), $throwException = true)
+    public function dispatch($controller, $action = null, array $params = [], $throwException = true)
     {
-        $notFound = array();
+        $notFound = [];
         $action || $action = $this->defaultAction;
         $classes = $this->getControllerClasses($controller);
 
@@ -143,7 +143,7 @@ class App extends Base
 
                 return $this->execute($instance, $action);
             } catch (\RuntimeException $e) {
-                if ($e->getCode() === self::FORWARD) {
+                if (self::FORWARD === $e->getCode()) {
                     return $this->response;
                 } else {
                     throw $e;
@@ -159,99 +159,6 @@ class App extends Base
     }
 
     /**
-     * Build 404 exception from notFound array
-     *
-     * @param array $notFound
-     * @return \RuntimeException
-     */
-    protected function buildException(array $notFound)
-    {
-        $notFound += array('controllers' => array(), 'actions' => array());
-
-        // All controllers and actions were not found, prepare exception message
-        $message = 'The page you requested was not found';
-        if ($this->wei->isDebug()) {
-            $detail = $this->request->get('debug-detail');
-            foreach ($notFound['controllers'] as $controller => $classes) {
-                $message .= sprintf('%s - controller "%s" not found', "\n", $controller);
-                $detail && $message .= sprintf(' (class "%s")', implode('", "', $classes));
-            }
-            foreach ($notFound['actions'] as $action => $controllers) {
-                $method = $this->getActionMethod($action);
-                foreach ($controllers as $controller => $classes) {
-                    $message .= sprintf('%s - method "%s" not found in controller "%s"', "\n", $method, $controller);
-                    $detail && $message .= sprintf(' (class "%s")', implode('", "', $classes));
-                }
-            }
-        }
-
-        // You can use `$wei->error->notFound(function(){});` to custom the 404 page
-        return new \RuntimeException($message, 404);
-    }
-
-    /**
-     * Execute action with middleware
-     *
-     * @param \Wei\BaseController $instance
-     * @param string $action
-     * @return Response
-     */
-    protected function execute($instance, $action)
-    {
-        $app = $this;
-        $wei = $this->wei;
-        $middleware = $this->getMiddleware($instance, $action);
-
-        $callback = function () use ($instance, $action, $app) {
-            $instance->before($app->request, $app->response);
-
-            $method = $app->getActionMethod($action);
-            $response = $instance->$method($app->request, $app->response);
-
-            $instance->after($app->request, $response);
-
-            return $response;
-        };
-
-        $next = function () use (&$middleware, &$next, $callback, $wei) {
-            $config = array_splice($middleware, 0, 1);
-            if ($config) {
-                $class = key($config);
-                $service = new $class(array('wei' => $wei) + $config[$class]);
-                $result = $service($next);
-            } else {
-                $result = $callback();
-            }
-
-            return $result;
-        };
-
-        return $this->handleResponse($next())->send();
-    }
-
-    /**
-     * Returns middleware for specified action
-     *
-     * @param \Wei\BaseController $instance
-     * @param string $action
-     * @return array
-     */
-    protected function getMiddleware($instance, $action)
-    {
-        $results = array();
-        $middleware = (array) $instance->getOption('middleware');
-        foreach ($middleware as $class => $options) {
-            if ((!isset($options['only']) || in_array($action, (array) $options['only'])) &&
-                (!isset($options['except']) || !in_array($action, (array) $options['except']))
-            ) {
-                $results[$class] = $options;
-            }
-        }
-
-        return $results;
-    }
-
-    /**
      * Handle the response variable returned by controller action
      *
      * @param  mixed $response
@@ -262,20 +169,20 @@ class App extends Base
     {
         switch (true) {
             // Render default template and use $response as template variables
-            case is_array($response) :
+            case is_array($response):
                 $content = $this->view->render($this->getDefaultTemplate(), $response);
 
                 return $this->response->setContent($content);
 
             // Response directly
-            case is_scalar($response) || is_null($response) :
+            case is_scalar($response) || null === $response:
                 return $this->response->setContent($response);
 
             // Response if not sent
-            case $response instanceof Response :
+            case $response instanceof Response:
                 return $response;
 
-            default :
+            default:
                 throw new \InvalidArgumentException(sprintf(
                     'Expected argument of type array, printable variable or \Wei\Response, "%s" given',
                     is_object($response) ? get_class($response) : gettype($response)
@@ -385,17 +292,17 @@ class App extends Base
      */
     public function getControllerClasses($controller)
     {
-        $classes = array();
+        $classes = [];
 
         // Prepare parameters for replacing
-        $controller = strtr($controller, array('/' => '\\'));
+        $controller = strtr($controller, ['/' => '\\']);
 
         if ($this->controllerFormat) {
             // Generate class from format
             $namespace = $this->getNamespace();
             $class = str_replace(
-                array('%namespace%', '%controller%'),
-                array(ucfirst($namespace), ucfirst($controller)),
+                ['%namespace%', '%controller%'],
+                [ucfirst($namespace), ucfirst($controller)],
                 $this->controllerFormat
             );
 
@@ -437,24 +344,6 @@ class App extends Base
         $this->controllerMap = $controllerMap + $this->controllerMap;
 
         return $this;
-    }
-
-    /**
-     * Get the controller instance, if not found, return false instead
-     *
-     * @param string $class The class name of controller
-     * @return \Wei\BaseController
-     */
-    protected function getControllerInstance($class)
-    {
-        if (!isset($this->controllerInstances[$class])) {
-            $this->controllerInstances[$class] = new $class(array(
-                'wei' => $this->wei,
-                'app' => $this,
-            ));
-        }
-
-        return $this->controllerInstances[$class];
     }
 
     /**
@@ -509,12 +398,123 @@ class App extends Base
      * Forwards to the given controller and action
      *
      * @param string $controller The name of controller
-     * @param null|string $action The name of action
+     * @param string|null $action The name of action
      * @param array $params The request parameters
      */
-    public function forward($controller, $action = null, array $params = array())
+    public function forward($controller, $action = null, array $params = [])
     {
         $this->response = $this->dispatch($controller, $action, $params);
         $this->preventPreviousDispatch();
+    }
+
+    /**
+     * Build 404 exception from notFound array
+     *
+     * @param array $notFound
+     * @return \RuntimeException
+     */
+    protected function buildException(array $notFound)
+    {
+        $notFound += ['controllers' => [], 'actions' => []];
+
+        // All controllers and actions were not found, prepare exception message
+        $message = 'The page you requested was not found';
+        if ($this->wei->isDebug()) {
+            $detail = $this->request->get('debug-detail');
+            foreach ($notFound['controllers'] as $controller => $classes) {
+                $message .= sprintf('%s - controller "%s" not found', "\n", $controller);
+                $detail && $message .= sprintf(' (class "%s")', implode('", "', $classes));
+            }
+            foreach ($notFound['actions'] as $action => $controllers) {
+                $method = $this->getActionMethod($action);
+                foreach ($controllers as $controller => $classes) {
+                    $message .= sprintf('%s - method "%s" not found in controller "%s"', "\n", $method, $controller);
+                    $detail && $message .= sprintf(' (class "%s")', implode('", "', $classes));
+                }
+            }
+        }
+
+        // You can use `$wei->error->notFound(function(){});` to custom the 404 page
+        return new \RuntimeException($message, 404);
+    }
+
+    /**
+     * Execute action with middleware
+     *
+     * @param \Wei\BaseController $instance
+     * @param string $action
+     * @return Response
+     */
+    protected function execute($instance, $action)
+    {
+        $app = $this;
+        $wei = $this->wei;
+        $middleware = $this->getMiddleware($instance, $action);
+
+        $callback = function () use ($instance, $action, $app) {
+            $instance->before($app->request, $app->response);
+
+            $method = $app->getActionMethod($action);
+            $response = $instance->{$method}($app->request, $app->response);
+
+            $instance->after($app->request, $response);
+
+            return $response;
+        };
+
+        $next = function () use (&$middleware, &$next, $callback, $wei) {
+            $config = array_splice($middleware, 0, 1);
+            if ($config) {
+                $class = key($config);
+                $service = new $class(['wei' => $wei] + $config[$class]);
+                $result = $service($next);
+            } else {
+                $result = $callback();
+            }
+
+            return $result;
+        };
+
+        return $this->handleResponse($next())->send();
+    }
+
+    /**
+     * Returns middleware for specified action
+     *
+     * @param \Wei\BaseController $instance
+     * @param string $action
+     * @return array
+     */
+    protected function getMiddleware($instance, $action)
+    {
+        $results = [];
+        $middleware = (array) $instance->getOption('middleware');
+        foreach ($middleware as $class => $options) {
+            if ((!isset($options['only']) || in_array($action, (array) $options['only'], true)) &&
+                (!isset($options['except']) || !in_array($action, (array) $options['except'], true))
+            ) {
+                $results[$class] = $options;
+            }
+        }
+
+        return $results;
+    }
+
+    /**
+     * Get the controller instance, if not found, return false instead
+     *
+     * @param string $class The class name of controller
+     * @return \Wei\BaseController
+     */
+    protected function getControllerInstance($class)
+    {
+        if (!isset($this->controllerInstances[$class])) {
+            $this->controllerInstances[$class] = new $class([
+                'wei' => $this->wei,
+                'app' => $this,
+            ]);
+        }
+
+        return $this->controllerInstances[$class];
     }
 }

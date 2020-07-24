@@ -1,1 +1,3 @@
-<?php echo "sub-content\n" ?>
+<?php
+
+echo "sub-content\n";

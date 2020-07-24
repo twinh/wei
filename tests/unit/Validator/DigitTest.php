@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class DigitTest extends TestCase
+/**
+ * @internal
+ */
+final class DigitTest extends TestCase
 {
     /**
      * @dataProvider providerForDigit
+     * @param mixed $input
      */
     public function testDigit($input)
     {
@@ -14,6 +18,7 @@ class DigitTest extends TestCase
 
     /**
      * @dataProvider providerForNotDigit
+     * @param mixed $input
      */
     public function testNotDigit($input)
     {
@@ -22,22 +27,22 @@ class DigitTest extends TestCase
 
     public function providerForDigit()
     {
-        return array(
-            array('0'),
-            array(0),
-            array(0.0),
-            array('123456'),
-            array('0123456'),
-        );
+        return [
+            ['0'],
+            [0],
+            [0.0],
+            ['123456'],
+            ['0123456'],
+        ];
     }
 
     public function providerForNotDigit()
     {
-        return array(
-            array('0.123'),
-            array('a bcdefg'),
-            array('1 23456'),
-            array('string'),
-        );
+        return [
+            ['0.123'],
+            ['a bcdefg'],
+            ['1 23456'],
+            ['string'],
+        ];
     }
 }

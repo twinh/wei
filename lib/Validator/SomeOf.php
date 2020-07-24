@@ -29,7 +29,7 @@ class SomeOf extends BaseValidator
      * );
      * @var array
      */
-    protected $rules = array();
+    protected $rules = [];
 
     /**
      * How many rules should pass at least
@@ -64,57 +64,17 @@ class SomeOf extends BaseValidator
      *
      * @var BaseValidator[]
      */
-    protected $validators = array();
+    protected $validators = [];
 
     /**
      * {@inheritdoc}
      */
-    public function __invoke($input, array $rules = array(), $atLeast = null)
+    public function __invoke($input, array $rules = [], $atLeast = null)
     {
         $atLeast && $this->storeOption('atLeast', $atLeast);
         $rules && $this->storeOption('rules', $rules);
 
         return $this->isValid($input);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function doValidate($input)
-    {
-        // Adds "atLeast" error at first, make sure this error at the top of
-        // stack, if any rule is passed, the error will be removed
-        $this->addError('atLeast');
-
-        $passed = 0;
-        $validator = null;
-        $props = array('name' => $this->name);
-        foreach ($this->rules as $rule => $options) {
-            if ($this->validate->validateOne($rule, $input, $options, $validator, $props)) {
-                $passed++;
-                if ($passed >= $this->atLeast) {
-                    // Removes all error messages
-                    $this->errors = array();
-                    return true;
-                }
-            } else {
-                $this->validators[$rule] = $validator;
-            }
-        }
-
-        $this->count = count($this->rules) - $passed;
-        $this->left = $this->atLeast - $passed;
-
-        return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function reset()
-    {
-        $this->validators = array();
-        parent::reset();
     }
 
     /**
@@ -147,11 +107,11 @@ class SomeOf extends BaseValidator
                 $messages[$rule] = implode(';', $validator->getMessages($name));
             }
 
-            return array(
-                $key => implode("\n", $messages)
-            );
+            return [
+                $key => implode("\n", $messages),
+            ];
         } else {
-            $messages = array();
+            $messages = [];
             foreach ($this->validators as $rule => $validator) {
                 foreach ($validator->getMessages($name) as $option => $message) {
                     $messages[$rule . '.' . $option] = $message;
@@ -159,5 +119,45 @@ class SomeOf extends BaseValidator
             }
             return $messages;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function doValidate($input)
+    {
+        // Adds "atLeast" error at first, make sure this error at the top of
+        // stack, if any rule is passed, the error will be removed
+        $this->addError('atLeast');
+
+        $passed = 0;
+        $validator = null;
+        $props = ['name' => $this->name];
+        foreach ($this->rules as $rule => $options) {
+            if ($this->validate->validateOne($rule, $input, $options, $validator, $props)) {
+                ++$passed;
+                if ($passed >= $this->atLeast) {
+                    // Removes all error messages
+                    $this->errors = [];
+                    return true;
+                }
+            } else {
+                $this->validators[$rule] = $validator;
+            }
+        }
+
+        $this->count = count($this->rules) - $passed;
+        $this->left = $this->atLeast - $passed;
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function reset()
+    {
+        $this->validators = [];
+        parent::reset();
     }
 }

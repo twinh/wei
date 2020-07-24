@@ -4,26 +4,29 @@ namespace WeiTest;
 
 use InvalidArgumentException;
 
-class CacheTest extends CacheTestCase
+/**
+ * @internal
+ */
+final class CacheTest extends CacheTestCase
 {
     public function testDriverClassNotFound()
     {
         $this->expectException(InvalidArgumentException::class);
 
-        new \Wei\Cache(array(
+        new \Wei\Cache([
             'wei' => $this->wei,
-            'driver' => 'noThisCacheDriver'
-        ));
+            'driver' => 'noThisCacheDriver',
+        ]);
     }
 
     public function testNotImplemented()
     {
         $this->expectException(InvalidArgumentException::class);
 
-        new \Wei\Cache(array(
+        new \Wei\Cache([
             'wei' => $this->wei,
-            'driver' => 'request'
-        ));
+            'driver' => 'request',
+        ]);
     }
 
     public function testCacheDriver()

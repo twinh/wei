@@ -2,21 +2,24 @@
 
 namespace WeiTest;
 
-class DbCacheTest extends CacheTestCase
+/**
+ * @internal
+ */
+final class DbCacheTest extends CacheTestCase
 {
-    public function setUp(): void
+    public static function tearDownAfterClass(): void
+    {
+        @unlink('cache.sqlite');
+        parent::tearDownAfterClass();
+    }
+
+    protected function setUp(): void
     {
         try {
             $this->object = $this->wei->dbCache;
         } catch (\PDOException $e) {
             $this->markTestSkipped($e->getMessage());
         }
-    }
-
-    public static function tearDownAfterClass(): void
-    {
-        @unlink('cache.sqlite');
-        parent::tearDownAfterClass();
     }
 
     public function testExpire()
@@ -40,5 +43,4 @@ class DbCacheTest extends CacheTestCase
         $result = $cache->get($key);
         $this->assertFalse($result);
     }
-
 }

@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class DoubleByteTest extends TestCase
+/**
+ * @internal
+ */
+final class DoubleByteTest extends TestCase
 {
     /**
      * @dataProvider providerForDoubleByte
+     * @param mixed $input
      */
     public function testDoubleByte($input)
     {
@@ -14,6 +18,7 @@ class DoubleByteTest extends TestCase
 
     /**
      * @dataProvider providerForNotDoubleByte
+     * @param mixed $input
      */
     public function testNotDoubleByte($input)
     {
@@ -22,23 +27,23 @@ class DoubleByteTest extends TestCase
 
     public function providerForDoubleByte()
     {
-        return array(
-            array('中文'),
-            array('汉字'),
-            array('姓名'),
-            array('；１２３'),
-            array('にほんご'), // Japanese language
-            array('조선어'), // Korean language
-            array('āōêīūǖ'),
-        );
+        return [
+            ['中文'],
+            ['汉字'],
+            ['姓名'],
+            ['；１２３'],
+            ['にほんご'], // Japanese language
+            ['조선어'], // Korean language
+            ['āōêīūǖ'],
+        ];
     }
 
     public function providerForNotDoubleByte()
     {
-        return array(
-            array('abc'),
-            array('123'),
-            array('中文english'),
-        );
+        return [
+            ['abc'],
+            ['123'],
+            ['中文english'],
+        ];
     }
 }

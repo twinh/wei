@@ -1,4 +1,5 @@
 <?php
-return array(
-    'key' => 'value'
-);
+
+return [
+    'key' => 'value',
+];

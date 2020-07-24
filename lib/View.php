@@ -20,14 +20,14 @@ class View extends Base implements \ArrayAccess
      *
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * The directories to find template
      *
      * @var array
      */
-    protected $dirs = array('.');
+    protected $dirs = ['.'];
 
     /**
      * Default template file extension
@@ -41,7 +41,7 @@ class View extends Base implements \ArrayAccess
      *
      * @var array
      */
-    protected $layout = array();
+    protected $layout = [];
 
     /**
      * The default layout path for layout method
@@ -60,15 +60,15 @@ class View extends Base implements \ArrayAccess
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
 
         // Adds service container and view service to template variables
-        $this->assign(array(
-            'wei'   => $this->wei,
-            'view'  => $this,
-        ));
+        $this->assign([
+            'wei' => $this->wei,
+            'view' => $this,
+        ]);
     }
 
     /**
@@ -79,7 +79,7 @@ class View extends Base implements \ArrayAccess
      *
      * @return string
      */
-    public function __invoke($name = null, $data = array())
+    public function __invoke($name = null, $data = [])
     {
         return $this->render($name, $data);
     }
@@ -89,10 +89,10 @@ class View extends Base implements \ArrayAccess
      *
      * @param string $name The name of template
      * @param array $data The variables pass to template
-     * @return null|string
+     * @return string|null
      * @throws \Exception View file not found
      */
-    public function render($name, $data = array())
+    public function render($name, $data = [])
     {
         // Assign to double underscored variables to avoid conflict with view parameters
         $__file = $this->getFile($name);
@@ -113,7 +113,7 @@ class View extends Base implements \ArrayAccess
         // If layout is configured, render layout
         if ($__layout != $this->layout) {
             $layout = $this->layout;
-            $this->layout = array();
+            $this->layout = [];
             $__data[$layout['variable']] = $content;
             $content = $this->render($layout['name'], $__data);
         }
@@ -128,7 +128,7 @@ class View extends Base implements \ArrayAccess
      * @param array  $data  The variables pass to template
      * @return void
      */
-    public function display($name, $data = array())
+    public function display($name, $data = [])
     {
         echo $this->render($name, $data);
     }
@@ -188,28 +188,11 @@ class View extends Base implements \ArrayAccess
     {
         $components = $this->parseResource($name);
         foreach ($components['dirs'] as $dir) {
-            if (is_file($file = $dir . ($dir ? '/' : '') .  $components['file'])) {
+            if (is_file($file = $dir . ($dir ? '/' : '') . $components['file'])) {
                 return $file;
             }
         }
         return false;
-    }
-
-    /**
-     * @param string $name
-     * @return array
-     */
-    protected function parseResource($name)
-    {
-        $dirs = $this->dirs;
-        if ($this->parseResource) {
-            $components = call_user_func($this->parseResource, $name);
-            if ($components['path']) {
-                $dirs[] = $components['path'];
-            }
-            $name = $components['file'];
-        }
-        return array('dirs' => $dirs, 'file' => $name);
     }
 
     /**
@@ -221,10 +204,10 @@ class View extends Base implements \ArrayAccess
      */
     public function layout($name = null, $variable = 'content')
     {
-        $this->layout = array(
+        $this->layout = [
             'name' => $name ?: $this->defaultLayout,
-            'variable' => $variable
-        );
+            'variable' => $variable,
+        ];
         return $this;
     }
 
@@ -258,7 +241,7 @@ class View extends Base implements \ArrayAccess
      */
     public function setDirs($dirs)
     {
-        $this->dirs = (array)$dirs;
+        $this->dirs = (array) $dirs;
         return $this;
     }
 
@@ -314,5 +297,22 @@ class View extends Base implements \ArrayAccess
     public function offsetUnset($offset)
     {
         unset($this->data[$offset]);
+    }
+
+    /**
+     * @param string $name
+     * @return array
+     */
+    protected function parseResource($name)
+    {
+        $dirs = $this->dirs;
+        if ($this->parseResource) {
+            $components = call_user_func($this->parseResource, $name);
+            if ($components['path']) {
+                $dirs[] = $components['path'];
+            }
+            $name = $components['file'];
+        }
+        return ['dirs' => $dirs, 'file' => $name];
     }
 }

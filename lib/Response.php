@@ -22,7 +22,7 @@ class Response extends Base
      *
      * @var array
      */
-    protected $statusTexts = array(
+    protected $statusTexts = [
         // Successful Requests
         200 => 'OK',
         201 => 'Created',
@@ -63,8 +63,8 @@ class Response extends Base
         502 => 'Bad Gateway',
         503 => 'Service Unavailable',
         504 => 'Gateway Timeout',
-        505 => 'HTTP Version Not Supported'
-    );
+        505 => 'HTTP Version Not Supported',
+    ];
 
     /**
      * The HTTP version, current is 1.0 or 1.1
@@ -99,21 +99,21 @@ class Response extends Base
      *
      * @var array
      */
-    protected $headers = array();
+    protected $headers = [];
 
     /**
      * The sent response headers
      *
      * @var array
      */
-    protected $sentHeaders = array();
+    protected $sentHeaders = [];
 
     /**
      * The response cookies
      *
      * @var array
      */
-    protected $cookies = array();
+    protected $cookies = [];
 
     /**
      * The cookie options
@@ -130,14 +130,14 @@ class Response extends Base
      * @var array
      * @link http://php.net/manual/en/function.setcookie.php
      */
-    protected $cookieOption = array(
+    protected $cookieOption = [
         'expires' => 864000,
         'path' => '/',
         'domain' => null,
         'secure' => false,
         'httpOnly' => false,
         'raw' => false,
-    );
+    ];
 
     /**
      * The download options
@@ -154,11 +154,11 @@ class Response extends Base
      * @var array
      * @link http://stackoverflow.com/questions/1395151/content-dispositionwhat-are-the-differences-between-inline-and-attachment
      */
-    protected $downloadOption = array(
+    protected $downloadOption = [
         'type' => 'application/x-download',
         'disposition' => 'attachment',
         'filename' => null,
-    );
+    ];
 
     /**
      * Whether in unit test mode
@@ -205,6 +205,18 @@ class Response extends Base
     public function __invoke($content = null, $status = null)
     {
         return $this->send($content, $status);
+    }
+
+    /**
+     * Returns response status, headers and content as string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf('HTTP/%s %d %s', $this->version, $this->statusCode, $this->statusText) . "\r\n"
+        . $this->getHeaderString() . "\r\n"
+        . $this->content;
     }
 
     /**
@@ -281,7 +293,7 @@ class Response extends Base
      */
     public function setStatusCode($code, $text = null)
     {
-        $this->statusCode = (int)$code;
+        $this->statusCode = (int) $code;
 
         if ($text) {
             $this->statusText = $text;
@@ -352,7 +364,7 @@ class Response extends Base
             return $this;
         }
 
-        $values = (array)$values;
+        $values = (array) $values;
         if (true === $replace || !isset($this->headers[$name])) {
             $this->headers[$name] = $values;
         } else {
@@ -427,19 +439,6 @@ class Response extends Base
     }
 
     /**
-     * Send a raw HTTP header
-     *
-     * If in unit test mode, the response will store header string into
-     * `sentHeaders` property without send it for testing purpose
-     *
-     * @param string $header
-     */
-    protected function sendRawHeader($header)
-    {
-        $this->unitTest ? ($this->sentHeaders[] = $header) : header($header, false);
-    }
-
-    /**
      * Checks if or where headers have been sent
      *
      * If NOT in unit test mode and the optional `file` and `line` parameters
@@ -453,7 +452,7 @@ class Response extends Base
      */
     public function isHeaderSent(&$file = null, &$line = null)
     {
-        return $this->unitTest ? (bool)$this->sentHeaders : headers_sent($file, $line);
+        return $this->unitTest ? (bool) $this->sentHeaders : headers_sent($file, $line);
     }
 
     /**
@@ -476,9 +475,9 @@ class Response extends Base
      * @param  array $options The options of cookie
      * @return $this
      */
-    public function setCookie($key, $value, array $options = array())
+    public function setCookie($key, $value, array $options = [])
     {
-        $this->cookies[$key] = array('value' => $value) + $options;
+        $this->cookies[$key] = ['value' => $value] + $options;
         return $this;
     }
 
@@ -490,7 +489,7 @@ class Response extends Base
      */
     public function removeCookie($key)
     {
-        return $this->setCookie($key, '', array('expires' => -1));
+        return $this->setCookie($key, '', ['expires' => -1]);
     }
 
     /**
@@ -510,18 +509,6 @@ class Response extends Base
             $fn($name, $o['value'], $time + $o['expires'], $o['path'], $o['domain'], $o['secure'], $o['httpOnly']);
         }
         return $this;
-    }
-
-    /**
-     * Returns response status, headers and content as string
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return sprintf('HTTP/%s %d %s', $this->version, $this->statusCode, $this->statusText) . "\r\n"
-        . $this->getHeaderString() . "\r\n"
-        . $this->content;
     }
 
     /**
@@ -564,14 +551,14 @@ class Response extends Base
      * @param array $options The redirect wei options
      * @return $this
      */
-    public function redirect($url = null, $statusCode = 302, $options = array())
+    public function redirect($url = null, $statusCode = 302, $options = [])
     {
         $this->setStatusCode($statusCode);
         $this->setOption($options);
 
         // The variables for custom redirect view
         $escapedUrl = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
-        $wait = (int)$this->redirectWait;
+        $wait = (int) $this->redirectWait;
 
         // Location header does not support delay
         if (0 === $wait) {
@@ -613,7 +600,7 @@ class Response extends Base
         defined('JSON_UNESCAPED_UNICODE') && $options = JSON_UNESCAPED_UNICODE;
         $content = json_encode($data, $options);
 
-        if ($jsonp && preg_match('/^[$A-Z_][0-9A-Z_$.]*$/i', $this->request['callback']) === 1) {
+        if ($jsonp && 1 === preg_match('/^[$A-Z_][0-9A-Z_$.]*$/i', $this->request['callback'])) {
             $this->setHeader('Content-Type', 'application/javascript');
             $content = $this->request['callback'] . '(' . $content . ')';
         } else {
@@ -685,7 +672,7 @@ class Response extends Base
      * @return $this
      * @throws \RuntimeException When file not found
      */
-    public function download($file = null, array $downloadOptions = array())
+    public function download($file = null, array $downloadOptions = [])
     {
         $o = $downloadOptions + $this->downloadOption;
 
@@ -693,7 +680,7 @@ class Response extends Base
             throw new \RuntimeException('File not found', 404);
         }
 
-        $name = $o['filename'] ? : basename($file);
+        $name = $o['filename'] ?: basename($file);
         $name = rawurlencode($name);
 
         // For IE
@@ -704,7 +691,7 @@ class Response extends Base
             $filename = "*=UTF-8''" . $name;
         }
 
-        $this->setHeader(array(
+        $this->setHeader([
             'Content-Description' => 'File Transfer',
             'Content-Type' => $o['type'],
             'Content-Disposition' => $o['disposition'] . ';filename' . $filename,
@@ -713,7 +700,7 @@ class Response extends Base
             'Cache-Control' => 'must-revalidate',
             'Pragma' => 'public',
             'Content-Length' => filesize($file),
-        ));
+        ]);
 
         // Send headers
         $this->send();
@@ -722,5 +709,18 @@ class Response extends Base
         readfile($file);
 
         return $this;
+    }
+
+    /**
+     * Send a raw HTTP header
+     *
+     * If in unit test mode, the response will store header string into
+     * `sentHeaders` property without send it for testing purpose
+     *
+     * @param string $header
+     */
+    protected function sendRawHeader($header)
+    {
+        $this->unitTest ? ($this->sentHeaders[] = $header) : header($header, false);
     }
 }

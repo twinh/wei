@@ -2,45 +2,52 @@
 
 namespace WeiTest\Validator;
 
-class ColorTest extends TestCase
+/**
+ * @internal
+ */
+final class ColorTest extends TestCase
 {
     /**
      * @dataProvider providerForColor
+     * @param mixed $input
+     * @param mixed $options
      */
-    public function testColor($input, $options = array())
+    public function testColor($input, $options = [])
     {
         $this->assertTrue($this->isColor($input, $options));
     }
 
     /**
      * @dataProvider providerForNotColor
+     * @param mixed $input
+     * @param mixed $options
      */
-    public function testNotColor($input, $options = array())
+    public function testNotColor($input, $options = [])
     {
         $this->assertFalse($this->isColor($input, $options));
     }
 
     public function providerForColor()
     {
-        return array(
-            array('#FFFFFF'),
-            array('#FFF'),
-            array('#ABCDEF'),
-            array('#012345'),
-            array('#abcdef'),
-            array('#AABBCC'),
-            array('#fff'),
-        );
+        return [
+            ['#FFFFFF'],
+            ['#FFF'],
+            ['#ABCDEF'],
+            ['#012345'],
+            ['#abcdef'],
+            ['#AABBCC'],
+            ['#fff'],
+        ];
     }
 
     public function providerForNotColor()
     {
-        return array(
-            array('FFF'),
-            array('#FGH'),
-            array('#ffff'),
-            array('#0123456'),
-            array('AAFFFF')
-        );
+        return [
+            ['FFF'],
+            ['#FGH'],
+            ['#ffff'],
+            ['#0123456'],
+            ['AAFFFF'],
+        ];
     }
 }

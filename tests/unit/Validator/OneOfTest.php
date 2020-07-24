@@ -2,21 +2,24 @@
 
 namespace WeiTest\Validator;
 
-class OneOfTest extends TestCase
+/**
+ * @internal
+ */
+final class OneOfTest extends TestCase
 {
     public function testOneOf()
     {
-        $this->assertTrue($this->isOneOf('13', array(
+        $this->assertTrue($this->isOneOf('13', [
             'type' => 'int',
-            'alnum' => true
-        )));
+            'alnum' => true,
+        ]));
     }
-    
+
     public function testNotOneOf()
     {
-        $this->assertFalse($this->isOneOf('13', array(
+        $this->assertFalse($this->isOneOf('13', [
             'email' => true,
-            'length' => array(3, 6)
-        )));
+            'length' => [3, 6],
+        ]));
     }
 }

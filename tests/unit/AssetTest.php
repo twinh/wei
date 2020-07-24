@@ -4,50 +4,55 @@ namespace WeiTest;
 
 /**
  * @property \Wei\Asset asset
+ *
+ * @internal
  */
-class AssetTest extends TestCase
+final class AssetTest extends TestCase
 {
     /**
      * @dataProvider providerForAsset
+     * @param mixed $from
+     * @param mixed $to
+     * @param mixed $options
      */
-    public function testAsset($from, $to, $options = array())
+    public function testAsset($from, $to, $options = [])
     {
-        $asset = new \Wei\Asset(array(
+        $asset = new \Wei\Asset([
             'wei' => $this->wei,
-        ) + $options);
+        ] + $options);
 
         $this->assertEquals($asset($from), $to);
     }
 
     public function providerForAsset()
     {
-        return array(
-            array(
+        return [
+            [
                 'jquery.js',
                 '/jquery.js?v=1',
-            ),
-            array(
+            ],
+            [
                 'file.js',
                 'js/file.js?v=1',
-                array(
-                    'baseUrl' => 'js/'
-                )
-            ),
-            array(
+                [
+                    'baseUrl' => 'js/',
+                ],
+            ],
+            [
                 'version.js',
                 '/version.js?v=1',
-                array(
-                    'version' => '1'
-                ),
-            ),
-            array(
+                [
+                    'version' => '1',
+                ],
+            ],
+            [
                 'version.js?a=b',
                 '/version.js?a=b&v=1',
-                array(
-                    'version' => '1'
-                ),
-            )
-        );
+                [
+                    'version' => '1',
+                ],
+            ],
+        ];
     }
 
     public function testGetAndSetBaseUrl()
@@ -60,8 +65,8 @@ class AssetTest extends TestCase
     {
         $this->asset->setBaseUrl('abc');
         $this->asset->setOption('concatUrl', '/c/');
-        $this->assertEquals('/c/?f=a.js,b/b.js,c/c/c.js&b=abc', $this->asset->concat(array(
-            'a.js', 'b/b.js', 'c/c/c.js'
-        )));
+        $this->assertEquals('/c/?f=a.js,b/b.js,c/c/c.js&b=abc', $this->asset->concat([
+            'a.js', 'b/b.js', 'c/c/c.js',
+        ]));
     }
 }

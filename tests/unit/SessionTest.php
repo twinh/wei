@@ -2,7 +2,10 @@
 
 namespace WeiTest;
 
-class SessionTest extends TestCase
+/**
+ * @internal
+ */
+final class SessionTest extends TestCase
 {
     /**
      * @var \Wei\Session
@@ -45,7 +48,7 @@ class SessionTest extends TestCase
 
         $session->clear();
 
-        $this->assertEquals(null, $session->get('action'));
+        $this->assertNull($session->get('action'));
     }
 
     public function testDestroy()
@@ -56,7 +59,7 @@ class SessionTest extends TestCase
 
         $session->destroy();
 
-        $this->assertEquals(null, $session->get('action'));
+        $this->assertNull($session->get('action'));
     }
 
     public function testForEach()
@@ -71,6 +74,8 @@ class SessionTest extends TestCase
 
     /**
      * @dataProvider providerForGetterAndSetter
+     * @param mixed $value
+     * @param mixed $key
      */
     public function testValues($value, $key)
     {
@@ -83,25 +88,25 @@ class SessionTest extends TestCase
 
     public function providerForGetterAndSetter()
     {
-        $obj = new \stdClass;
+        $obj = new \stdClass();
 
-        return array(
-            array(array(),  'array'),
-            array(true,     'bool'),
-            array(1.2,      'float'),
-            array(1,        'int'),
-            array(1,        'integer'),
-            array(null,     'null'),
-            array('1',      'numeric'),
-            array($obj,     'object'),
-        );
+        return [
+            [[],  'array'],
+            [true,     'bool'],
+            [1.2,      'float'],
+            [1,        'int'],
+            [1,        'integer'],
+            [null,     'null'],
+            ['1',      'numeric'],
+            [$obj,     'object'],
+        ];
     }
 
     public function testArrayAccess()
     {
         $session = $this->object;
 
-        $session['a'] = array();
+        $session['a'] = [];
         $session['a']['b'] = 'c';
 
         $this->assertEquals('c', $session['a']['b']);

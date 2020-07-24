@@ -6,7 +6,7 @@ use Wei\Base;
 
 class ServiceWithProvider extends Base
 {
-    protected $providers = array(
-        'request' => 'sub.request'
-    );
+    protected $providers = [
+        'request' => 'sub.request',
+    ];
 }

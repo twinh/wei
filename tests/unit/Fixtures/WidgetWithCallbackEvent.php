@@ -2,7 +2,7 @@
 
 namespace WeiTest\Fixtures;
 
-use \Wei\Base;
+use Wei\Base;
 
 class WeiWithCallbackEvent extends Base
 {

@@ -2,11 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class ExistsTest extends TestCase
+/**
+ * @internal
+ */
+final class ExistsTest extends TestCase
 {
     public function testIsExists()
     {
-        $this->assertFalse($this->isExists(array()), 'Not File path');
+        $this->assertFalse($this->isExists([]), 'Not File path');
 
         $this->assertTrue($this->isExists(__FILE__), 'File found');
 

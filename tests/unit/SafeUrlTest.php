@@ -2,7 +2,10 @@
 
 namespace WeiTest;
 
-class SafeUrlTest extends TestCase
+/**
+ * @internal
+ */
+final class SafeUrlTest extends TestCase
 {
     /**
      * @var \Wei\SafeUrl
@@ -27,7 +30,6 @@ class SafeUrlTest extends TestCase
             ->setQuery('timestamp', $queries['timestamp'])
             ->setQuery('userId', $queries['userId'])
             ->setQuery('signature', $queries['signature']);
-
 
         $this->assertTrue($this->object->verify());
 

@@ -46,12 +46,12 @@ class StartsWith extends BaseValidator
 
         if (is_scalar($this->findMe)) {
             $fn = $this->case ? 'strpos' : 'stripos';
-            if (0 !== $fn($input, (string)$this->findMe)) {
+            if (0 !== $fn($input, (string) $this->findMe)) {
                 $this->addError('notFound');
                 return false;
             }
         } elseif (is_array($this->findMe)) {
-            $pattern = array();
+            $pattern = [];
             foreach ($this->findMe as $value) {
                 $pattern[] = '^' . preg_quote($value, '/');
             }

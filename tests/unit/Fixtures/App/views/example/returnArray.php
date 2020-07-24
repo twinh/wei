@@ -1,1 +1,5 @@
-<?php if (isset($key)) { echo $key; } ?>
+<?php
+
+if (isset($key)) {
+    echo $key;
+}

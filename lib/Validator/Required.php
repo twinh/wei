@@ -29,7 +29,7 @@ class Required extends BaseValidator
      *
      * @var array
      */
-    protected $invalid = array(null, '', false, array());
+    protected $invalid = [null, '', false, []];
 
     /**
      * {@inheritdoc}
@@ -42,6 +42,17 @@ class Required extends BaseValidator
     }
 
     /**
+     * Check if the input is in invalid variables
+     *
+     * @param mixed $input
+     * @return bool
+     */
+    public function isInvalid($input)
+    {
+        return in_array($input, $this->invalid, true);
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function doValidate($input)
@@ -51,16 +62,5 @@ class Required extends BaseValidator
             return false;
         }
         return true;
-    }
-
-    /**
-     * Check if the input is in invalid variables
-     *
-     * @param mixed $input
-     * @return bool
-     */
-    public function isInvalid($input)
-    {
-        return in_array($input, $this->invalid, true);
     }
 }

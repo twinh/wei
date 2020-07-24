@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class DateTest extends TestCase
+/**
+ * @internal
+ */
+final class DateTest extends TestCase
 {
     /**
      * @dataProvider providerForDate
+     * @param mixed $input
      */
     public function testDate($input)
     {
@@ -14,6 +18,7 @@ class DateTest extends TestCase
 
     /**
      * @dataProvider providerForNotDate
+     * @param mixed $input
      */
     public function testNotDate($input)
     {
@@ -22,24 +27,24 @@ class DateTest extends TestCase
 
     public function providerForDate()
     {
-        return array(
-            array('2013-01-13'),
-            array('1000-01-01'),
-            array('3000-01-01'),
-            array('2012-02-29'),
-        );
+        return [
+            ['2013-01-13'],
+            ['1000-01-01'],
+            ['3000-01-01'],
+            ['2012-02-29'],
+        ];
     }
 
     public function providerForNotDate()
     {
-        return array(
-            array('0'),
-            array(0),
-            array(0.0),
-            array('2013-02-29'),
-            array('2013-01-32'),
-            array('2013-00-00'),
-            array('2012')
-        );
+        return [
+            ['0'],
+            [0],
+            [0.0],
+            ['2013-02-29'],
+            ['2013-01-32'],
+            ['2013-00-00'],
+            ['2012'],
+        ];
     }
 }

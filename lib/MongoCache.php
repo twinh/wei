@@ -55,7 +55,7 @@ class MongoCache extends BaseCache
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
 
@@ -70,7 +70,7 @@ class MongoCache extends BaseCache
      */
     public function get($key, $expire = null, $fn = null)
     {
-        $result = $this->object->findOne(array('_id' => $this->namespace . $key), array('value', 'expire'));
+        $result = $this->object->findOne(['_id' => $this->namespace . $key], ['value', 'expire']);
         if (null === $result || $result['expire'] < time()) {
             $result = false;
         } else {
@@ -84,13 +84,13 @@ class MongoCache extends BaseCache
      */
     public function set($key, $value, $expire = 0)
     {
-        $result = $this->object->save(array(
+        $result = $this->object->save([
             '_id' => $this->namespace . $key,
             'value' => serialize($value),
             'expire' => $expire ? time() + $expire : 2147483647,
-            'lastModified' => time()
-        ));
-        return $result['ok'] === 1.0;
+            'lastModified' => time(),
+        ]);
+        return 1.0 === $result['ok'];
     }
 
     /**
@@ -98,8 +98,8 @@ class MongoCache extends BaseCache
      */
     public function remove($key)
     {
-        $result = $this->object->remove(array('_id' => $this->namespace . $key));
-        return $result['n'] === 1;
+        $result = $this->object->remove(['_id' => $this->namespace . $key]);
+        return 1 === $result['n'];
     }
 
     /**
@@ -107,7 +107,7 @@ class MongoCache extends BaseCache
      */
     public function exists($key)
     {
-        $result = $this->object->findOne(array('_id' => $this->namespace . $key), array('expire'));
+        $result = $this->object->findOne(['_id' => $this->namespace . $key], ['expire']);
         if (null === $result || $result['expire'] < time()) {
             return false;
         } else {

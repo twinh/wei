@@ -6,7 +6,7 @@
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
-return array(
+return [
     // default
     'This value' => '该项',
     '%name% is not valid' => '%name%不合法',
@@ -57,7 +57,7 @@ return array(
 
     // dateTime
     '%name% must be a valid datetime' => '%name%必须是合法的日期时间',
-    '%name% must be a valid datetime, the format should be "%format%", e.g. %example%'  => '%name%不是合法的日期时间,格式应该是%format%,例如:%example%',
+    '%name% must be a valid datetime, the format should be "%format%", e.g. %example%' => '%name%不是合法的日期时间,格式应该是%format%,例如:%example%',
     '%name% must be earlier than %before%' => '%name%必须早于%before%',
     '%name% must be later than %after%' => '%name%必须晚于%after%',
     '%name% must not be a valid datetime' => '%name%不能是合法的日期时间',
@@ -267,29 +267,29 @@ return array(
     '%name% must be %typeName%' => '%name%必须是%typeName%',
     '%name% must not be %typeName%' => '%name%不能是%typeName%',
     // is_xxx
-    'array'     => '数组',
-    'bool'      => '布尔',
-    'float'     => '浮点数',
-    'int'       => '整型',
-    'integer'   => '整型',
-    'null'      => 'NULL',
-    'numeric'   => '数字',
-    'object'    => '对象',
-    'resource'  => '资源',
-    'scalar'    => '标量',
-    'string'    => '字符串',
+    'array' => '数组',
+    'bool' => '布尔',
+    'float' => '浮点数',
+    'int' => '整型',
+    'integer' => '整型',
+    'null' => 'NULL',
+    'numeric' => '数字',
+    'object' => '对象',
+    'resource' => '资源',
+    'scalar' => '标量',
+    'string' => '字符串',
     // ctype_xxx
-    'alnum'     => '字母(a-z)或数字(0-9)',
-    'alpha'     => '字母',
-    'cntrl'     => '控制字符',
-    'digit'     => '数字',
-    'graph'     => '可显示字符',
-    'lower'     => '小写字母(a-z)',
-    'print'     => '可打印字符', // 包括空格
-    'punct'     => '标点符号',
-    'space'     => '空白字符',
-    'upper'     => '大写字母(A-Z)',
-    'xdigit'    => '16进制数字',
+    'alnum' => '字母(a-z)或数字(0-9)',
+    'alpha' => '字母',
+    'cntrl' => '控制字符',
+    'digit' => '数字',
+    'graph' => '可显示字符',
+    'lower' => '小写字母(a-z)',
+    'print' => '可打印字符', // 包括空格
+    'punct' => '标点符号',
+    'space' => '空白字符',
+    'upper' => '大写字母(A-Z)',
+    'xdigit' => '16进制数字',
 
     // uppercase
     '%name% must be uppercase' => '%name%不能包含小写字母',
@@ -312,5 +312,5 @@ return array(
     'Cannot write %name% to disk' => '无法保存%name%',
     'File upload stopped by extension' => '文件上传被扩展中止',
     'No file uploaded' => '没有文件被上传',
-    'Cannot move uploaded file' => '无法移动上传的文件'
-);
+    'Cannot move uploaded file' => '无法移动上传的文件',
+];

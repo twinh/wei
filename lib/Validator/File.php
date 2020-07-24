@@ -102,14 +102,14 @@ class File extends BaseValidator
      *
      * @var array
      */
-    protected $exts = array();
+    protected $exts = [];
 
     /**
      * The excluding file extensions
      *
      * @var array
      */
-    protected $excludeExts = array();
+    protected $excludeExts = [];
 
     /**
      * The detected file mime type
@@ -123,21 +123,21 @@ class File extends BaseValidator
      *
      * @var array
      */
-    protected $mimeTypes = array();
+    protected $mimeTypes = [];
 
     /**
      * The excluding file mime types
      *
      * @var array
      */
-    protected $excludeMimeTypes = array();
+    protected $excludeMimeTypes = [];
 
     /**
      * The file size unit
      *
      * @var string
      */
-    protected $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+    protected $units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
     /**
      * The magic database file to detect file mime type
@@ -150,7 +150,7 @@ class File extends BaseValidator
     /**
      * {@inheritdoc}
      */
-    public function __invoke($input, $options = array())
+    public function __invoke($input, $options = [])
     {
         $options && $this->storeOption($options);
 
@@ -158,17 +158,163 @@ class File extends BaseValidator
     }
 
     /**
+     * Checks if a mime type exists in a mime type array
+     *
+     * @param string $findMe    The mime type to be searched
+     * @param array $mimeTypes  The mime type array, allow element likes
+     *                          "image/*" to match all image mime type, such as
+     *                          "image/gif", "image/jpeg", etc
+     * @return bool
+     */
+    public function inMimeType($findMe, $mimeTypes)
+    {
+        foreach ($mimeTypes as $mimeType) {
+            if ($mimeType == $findMe) {
+                return true;
+            }
+
+            $type = strstr($mimeType, '/*', true);
+            if ($type && $type === strstr($findMe, '/', true)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Set allowed file extensions
+     *
+     * @param string|array $exts String format likes 'php,js' or array format likes [php, js]
+     * @return File
+     */
+    public function setExts($exts)
+    {
+        $this->exts = $this->convertToArray($exts);
+        return $this;
+    }
+
+    /**
+     * Set exclude file extensions
+     *
+     * @param string|array $exts String format likes 'php,js' or array format likes [php, js]
+     * @return File
+     */
+    public function setExcludeExts($exts)
+    {
+        $this->excludeExts = $this->convertToArray($exts);
+        return $this;
+    }
+
+    /**
+     * Converts human readable file size (e.g. 1.2MB, 10KB) into bytes
+     *
+     * @param string|int $size
+     * @return int
+     */
+    public function toBytes($size)
+    {
+        if (is_numeric($size)) {
+            return (int) $size;
+        }
+
+        $unit = strtoupper(substr($size, -2));
+
+        $value = substr($size, 0, -1);
+        if (!is_numeric($value)) {
+            $value = substr($value, 0, -1);
+        }
+
+        $exponent = array_search($unit, $this->units, true);
+        return (int) ($value * pow(1024, $exponent));
+    }
+
+    /**
+     * Formats bytes to human readable file size (e.g. 1.2MB, 10KB)
+     *
+     * @param int $bytes
+     * @return string
+     */
+    public function fromBytes($bytes)
+    {
+        for ($i = 0; $bytes >= 1024 && $i < 8; ++$i) {
+            $bytes /= 1024;
+        }
+        return round($bytes, 2) . $this->units[$i];
+    }
+
+    /**
+     * Set the file mime types
+     *
+     * @param string|array $mimeTypes
+     * @return File
+     */
+    public function setMimeTypes($mimeTypes)
+    {
+        $this->mimeTypes = $this->convertToArray($mimeTypes);
+        return $this;
+    }
+
+    /**
+     * Set the file exclude mime types
+     *
+     * @param string|array $excludeMimeTypes
+     * @return File
+     */
+    public function setExcludeMimeTypes($excludeMimeTypes)
+    {
+        $this->excludeMimeTypes = $this->convertToArray($excludeMimeTypes);
+        return $this;
+    }
+
+    /**
+     * Returns the file mime type on success
+     *
+     * @return string|false
+     * @throws \UnexpectedValueException When failed to open fileinfo database
+     */
+    public function getMimeType()
+    {
+        if (!$this->mimeType) {
+            $finfo = finfo_open(FILEINFO_MIME_TYPE, $this->magicFile);
+            if (!$finfo) {
+                throw new \UnexpectedValueException('Failed to open fileinfo database');
+            }
+            $this->mimeType = finfo_file($finfo, $this->file);
+        }
+        return $this->mimeType;
+    }
+
+    /**
+     * Returns the file extension, if file is not exists, return null instead
+     *
+     * @return string
+     */
+    public function getExt()
+    {
+        if (null === $this->ext && $this->originFile) {
+            $file = basename($this->originFile);
+            // Use substr instead of pathinfo, because pathinfo may return error value in unicode
+            if (false !== $pos = strrpos($file, '.')) {
+                $this->ext = strtolower(substr($file, $pos + 1));
+            } else {
+                $this->ext = '';
+            }
+        }
+        return $this->ext;
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function doValidate($input)
     {
-        switch ( true ) {
-            case is_string($input) :
+        switch (true) {
+            case is_string($input):
                 $file = $originFile = $input;
                 break;
 
             // File array from $_FILES
-            case is_array($input) :
+            case is_array($input):
                 if (!isset($input['tmp_name']) || !isset($input['name'])) {
                     $this->addError('notFound');
                     return false;
@@ -199,11 +345,11 @@ class File extends BaseValidator
             $ext = $this->getExt();
         }
 
-        if ($this->excludeExts && in_array($ext, $this->excludeExts)) {
+        if ($this->excludeExts && in_array($ext, $this->excludeExts, true)) {
             $this->addError('excludeExts');
         }
 
-        if ($this->exts && !in_array($ext, $this->exts)) {
+        if ($this->exts && !in_array($ext, $this->exts, true)) {
             $this->addError('exts');
         }
 
@@ -242,54 +388,6 @@ class File extends BaseValidator
     }
 
     /**
-     * Checks if a mime type exists in a mime type array
-     *
-     * @param string $findMe    The mime type to be searched
-     * @param array $mimeTypes  The mime type array, allow element likes
-     *                          "image/*" to match all image mime type, such as
-     *                          "image/gif", "image/jpeg", etc
-     * @return boolean
-     */
-    public function inMimeType($findMe, $mimeTypes)
-    {
-        foreach ($mimeTypes as $mimeType) {
-            if ($mimeType == $findMe) {
-                return true;
-            }
-
-            $type = strstr($mimeType, '/*', true);
-            if ($type && $type === strstr($findMe, '/', true)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Set allowed file extensions
-     *
-     * @param string|array $exts String format likes 'php,js' or array format likes [php, js]
-     * @return File
-     */
-    public function setExts($exts)
-    {
-        $this->exts = $this->convertToArray($exts);
-        return $this;
-    }
-
-     /**
-     * Set exclude file extensions
-     *
-     * @param string|array $exts String format likes 'php,js' or array format likes [php, js]
-     * @return File
-     */
-    public function setExcludeExts($exts)
-    {
-        $this->excludeExts = $this->convertToArray($exts);
-        return $this;
-    }
-
-    /**
      * Set maximum file size
      *
      * @param string|int $maxSize
@@ -316,67 +414,6 @@ class File extends BaseValidator
     }
 
     /**
-     * Converts human readable file size (e.g. 1.2MB, 10KB) into bytes
-     *
-     * @param string|int $size
-     * @return int
-     */
-    public function toBytes($size)
-    {
-        if (is_numeric($size)) {
-            return (int) $size;
-        }
-
-        $unit = strtoupper(substr($size, -2));
-
-        $value = substr($size, 0, -1);
-        if (!is_numeric($value)) {
-            $value = substr($value, 0, -1);
-        }
-
-        $exponent = array_search($unit, $this->units);
-        return (int)($value * pow(1024, $exponent));
-    }
-
-    /**
-     * Formats bytes to human readable file size (e.g. 1.2MB, 10KB)
-     *
-     * @param int $bytes
-     * @return string
-     */
-    public function fromBytes($bytes)
-    {
-        for ($i=0; $bytes >= 1024 && $i < 8; $i++) {
-            $bytes /= 1024;
-        }
-        return round($bytes, 2) . $this->units[$i];
-    }
-
-    /**
-     * Set the file mime types
-     *
-     * @param string|array $mimeTypes
-     * @return File
-     */
-    public function setMimeTypes($mimeTypes)
-    {
-        $this->mimeTypes = $this->convertToArray($mimeTypes);
-        return $this;
-    }
-
-    /**
-     * Set the file exclude mime types
-     *
-     * @param string|array $excludeMimeTypes
-     * @return File
-     */
-    public function setExcludeMimeTypes($excludeMimeTypes)
-    {
-        $this->excludeMimeTypes = $this->convertToArray($excludeMimeTypes);
-        return $this;
-    }
-
-    /**
      * Converts parameter to array
      *
      * @param mixed $var
@@ -395,42 +432,5 @@ class File extends BaseValidator
                 is_object($var) ? get_class($var) : gettype($var)
             ));
         }
-    }
-
-    /**
-     * Returns the file mime type on success
-     *
-     * @return string|false
-     * @throws \UnexpectedValueException When failed to open fileinfo database
-     */
-    public function getMimeType()
-    {
-        if (!$this->mimeType) {
-            $finfo = finfo_open(FILEINFO_MIME_TYPE, $this->magicFile);
-            if (!$finfo) {
-                throw new \UnexpectedValueException('Failed to open fileinfo database');
-            }
-            $this->mimeType = finfo_file($finfo, $this->file);
-        }
-        return $this->mimeType;
-    }
-
-    /**
-     * Returns the file extension, if file is not exists, return null instead
-     *
-     * @return string
-     */
-    public function getExt()
-    {
-        if (is_null($this->ext) && $this->originFile) {
-            $file = basename($this->originFile);
-            // Use substr instead of pathinfo, because pathinfo may return error value in unicode
-            if (false !== $pos = strrpos($file, '.')) {
-                $this->ext = strtolower(substr($file, $pos + 1));
-            } else {
-                $this->ext = '';
-            }
-        }
-        return $this->ext;
     }
 }

@@ -6,5 +6,4 @@ use Wei\Base;
 
 class Wei1 extends Base
 {
-
 }

@@ -2,7 +2,10 @@
 
 namespace WeiTest;
 
-class BlockTest extends TestCase
+/**
+ * @internal
+ */
+final class BlockTest extends TestCase
 {
     public function testBlock()
     {

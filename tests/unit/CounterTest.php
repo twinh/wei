@@ -2,14 +2,17 @@
 
 namespace WeiTest;
 
-class CounterTest extends TestCase
+/**
+ * @internal
+ */
+final class CounterTest extends TestCase
 {
     /**
      * @var \Wei\Counter
      */
     protected $object;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->object->remove('test');

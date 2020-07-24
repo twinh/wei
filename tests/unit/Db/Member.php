@@ -14,29 +14,29 @@ class Member extends Record
 
     protected $eventResult;
 
-    protected $data = array(
-        'group_id' => 0
-    );
+    protected $data = [
+        'group_id' => 0,
+    ];
 
     public function getPost()
     {
-        return $this->db->find('post', array('member_id' => $this->data['id']));
+        return $this->db->find('post', ['member_id' => $this->data['id']]);
     }
 
     public function getGroup()
     {
-        return $this->db->find('member_group', array('id' => $this->data['group_id']));
+        return $this->db->find('member_group', ['id' => $this->data['group_id']]);
     }
 
     public function getPosts()
     {
-        $this->posts = $this->db->findAll('post', array('member_id' => $this->data['id']));
+        $this->posts = $this->db->findAll('post', ['member_id' => $this->data['id']]);
         return $this->posts;
     }
 
     public function afterLoad()
     {
-        $this->loadTimes++;
+        ++$this->loadTimes;
     }
 
     public function getLoadTimes()

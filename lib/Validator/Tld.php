@@ -25,7 +25,7 @@ class Tld extends In
      * @var array
      * @link http://www.icann.org/en/resources/registries/tlds
      */
-    protected $array = array(
+    protected $array = [
         'ac', 'ad', 'ae', 'aero', 'af', 'ag', 'ai', 'al', 'am', 'an', 'ao',
         'aq', 'ar', 'arpa', 'as', 'asia', 'at', 'au', 'aw', 'ax', 'az', 'ba',
         'bb', 'bd', 'be', 'bf', 'bg', 'bh', 'bi', 'biz', 'bj', 'bm', 'bn', 'bo',
@@ -60,8 +60,8 @@ class Tld extends In
         'xn--mgberp4a5d4ar', 'xn--mgbx4cd0ab', 'xn--o3cw4h', 'xn--ogbpf8fl',
         'xn--p1ai', 'xn--pgbs0dh', 'xn--s9brj9c', 'xn--wgbh1c', 'xn--wgbl6a',
         'xn--xkc2al3hye2a', 'xn--xkc2dl3a5ee0h', 'xn--yfro4i67o',
-        'xn--ygbi2ammx', 'xn--zckzah', 'xxx', 'ye', 'yt', 'za', 'zm', 'zw'
-    );
+        'xn--ygbi2ammx', 'xn--zckzah', 'xxx', 'ye', 'yt', 'za', 'zm', 'zw',
+    ];
 
     /**
      * {@inheritdoc}

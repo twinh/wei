@@ -2,31 +2,34 @@
 
 namespace WeiTest;
 
-class ConfigTest extends TestCase
+/**
+ * @internal
+ */
+final class ConfigTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
-        $this->wei->setConfig(array(
-            'yesOrNo' => array(
+        $this->wei->setConfig([
+            'yesOrNo' => [
                 '1' => 'Yes',
-                '0' => 'No'
-            ),
-            'priorities' => array(
+                '0' => 'No',
+            ],
+            'priorities' => [
                 '5' => 'Low',
                 '10' => 'Normal',
-                '15' => 'High'
-            ),
-            'country' => array(
-                'province1' => array(
-                    'city1' => 'shenzhen'
-                ),
-                'province2' => array(
-                    'city2' => 'shanghai'
-                )
-            )
-        ));
+                '15' => 'High',
+            ],
+            'country' => [
+                'province1' => [
+                    'city1' => 'shenzhen',
+                ],
+                'province2' => [
+                    'city2' => 'shanghai',
+                ],
+            ],
+        ]);
     }
 
     public function testToJson()

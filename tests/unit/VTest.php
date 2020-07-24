@@ -4,7 +4,10 @@ namespace WeiTest;
 
 use Wei\Validate;
 
-class VTest extends TestCase
+/**
+ * @internal
+ */
+final class VTest extends TestCase
 {
     public function testCheckFail()
     {

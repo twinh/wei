@@ -27,7 +27,7 @@ class CreditCard extends BaseValidator
      *
      * @var array
      */
-    protected $type = array();
+    protected $type = [];
 
     /**
      * The array contains card name, length and validation pattern
@@ -35,36 +35,36 @@ class CreditCard extends BaseValidator
      * @var array
      * @link http://en.wikipedia.org/wiki/Credit_card_number
      */
-    protected $cards = array(
-        'Amex'          => array( // American Express
-            'length'        => 15,
-            'pattern'       => '34|37'
-        ),
-        'DinersClub'    => array(
-            'length'        => 14,
-            'pattern'       => '30|36|38'
-        ),
-        'Discover' => array(
-            'length'        => 16,
-            'pattern'       => '6011|64|65'
-        ),
-        'JCB'           => array(
-            'length'        => array(15, 16),
-            'pattern'       => '2131|1800|35'
-        ),
-        'MasterCard'    => array(
-            'length'        => 16,
-            'pattern'       => '51|52|53|54|55'
-        ),
-        'UnionPay'      => array(
-            'length'        => 16,
-            'pattern'       => '62'
-        ),
-        'Visa'          => array(
-            'length'        => array(13, 16),
-            'pattern'       => '4'
-        )
-    );
+    protected $cards = [
+        'Amex' => [ // American Express
+            'length' => 15,
+            'pattern' => '34|37',
+        ],
+        'DinersClub' => [
+            'length' => 14,
+            'pattern' => '30|36|38',
+        ],
+        'Discover' => [
+            'length' => 16,
+            'pattern' => '6011|64|65',
+        ],
+        'JCB' => [
+            'length' => [15, 16],
+            'pattern' => '2131|1800|35',
+        ],
+        'MasterCard' => [
+            'length' => 16,
+            'pattern' => '51|52|53|54|55',
+        ],
+        'UnionPay' => [
+            'length' => 16,
+            'pattern' => '62',
+        ],
+        'Visa' => [
+            'length' => [13, 16],
+            'pattern' => '4',
+        ],
+    ];
 
     /**
      * {@inheritdoc}
@@ -74,29 +74,6 @@ class CreditCard extends BaseValidator
         $type && $this->storeOption('type', $type);
 
         return $this->isValid($input);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function doValidate($input)
-    {
-        if (!$this->isString($input)) {
-            $this->addError('notString');
-            return false;
-        }
-
-        if (!$this->validateLuhn($input)) {
-            $this->addError('invalid');
-            return false;
-        }
-
-        if (!$this->validateType($input)) {
-            $this->addError('invalid');
-            return false;
-        }
-
-        return true;
     }
 
     /**
@@ -110,9 +87,9 @@ class CreditCard extends BaseValidator
     {
         $checksum = '';
         foreach (str_split(strrev($input)) as $i => $d) {
-            $checksum .= ($i %2 !== 0) ? ((int) $d * 2) : $d;
+            $checksum .= (0 !== $i % 2) ? ((int) $d * 2) : $d;
         }
-        return array_sum(str_split($checksum)) % 10 === 0;
+        return 0 === array_sum(str_split($checksum)) % 10;
     }
 
     public function validateType($input)
@@ -125,7 +102,7 @@ class CreditCard extends BaseValidator
             if (!preg_match('/^' . $card['pattern'] . '/', $input)) {
                 continue;
             }
-            if (!in_array(strlen($input), (array)$card['length'])) {
+            if (!in_array(strlen($input), (array) $card['length'], true)) {
                 continue;
             }
             return true;
@@ -159,5 +136,28 @@ class CreditCard extends BaseValidator
         }
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function doValidate($input)
+    {
+        if (!$this->isString($input)) {
+            $this->addError('notString');
+            return false;
+        }
+
+        if (!$this->validateLuhn($input)) {
+            $this->addError('invalid');
+            return false;
+        }
+
+        if (!$this->validateType($input)) {
+            $this->addError('invalid');
+            return false;
+        }
+
+        return true;
     }
 }

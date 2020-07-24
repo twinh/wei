@@ -22,7 +22,7 @@ class Block extends Base
      *
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * The name of current block
@@ -48,7 +48,7 @@ class Block extends Base
      */
     public function __invoke($name, $type = 'append')
     {
-        if (!in_array($type, array('append', 'prepend', 'set'))) {
+        if (!in_array($type, ['append', 'prepend', 'set'], true)) {
             throw new \Exception(sprintf('Unsupported block type "%s"', $type));
         }
 
@@ -83,15 +83,15 @@ class Block extends Base
     {
         $content = ob_get_clean();
         switch ($this->type) {
-            case 'append' :
+            case 'append':
                 $this->data[$this->name] .= $content;
                 break;
 
-            case 'prepend' :
+            case 'prepend':
                 $this->data[$this->name] = $content . $this->data[$this->name];
                 break;
 
-            case 'set' :
+            case 'set':
                 $this->data[$this->name] = $content;
         }
         return '';

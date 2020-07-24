@@ -35,13 +35,13 @@ class Password extends BaseValidator
      *
      * @var array
      */
-    protected $typeNames = array(
+    protected $typeNames = [
         'digit' => 'digits (0-9)',
         'letter' => 'letters (a-z)',
         'lower' => 'lowercase letters (a-z)',
         'upper' => 'uppercase letters (A-Z)',
-        'nonAlnum' => 'non-alphanumeric (For example: !, @, or #) characters'
-    );
+        'nonAlnum' => 'non-alphanumeric (For example: !, @, or #) characters',
+    ];
 
     /**
      * @var int
@@ -76,13 +76,13 @@ class Password extends BaseValidator
     /**
      * @var array
      */
-    protected $regexMap = array(
+    protected $regexMap = [
         'digit' => '0-9',
         'letter' => 'a-zA-Z',
         'lower' => 'a-z',
         'upper' => 'A-Z',
-        'nonAlnum' => '^0-9a-zA-Z'
-    );
+        'nonAlnum' => '^0-9a-zA-Z',
+    ];
 
     /**
      * The parameter for $missingCharMessage
@@ -103,15 +103,31 @@ class Password extends BaseValidator
      *
      * @var array
      */
-    protected $missingTypes = array();
+    protected $missingTypes = [];
 
     /**
      * {@inheritdoc}
      */
-    public function __invoke($input, array $options = array())
+    public function __invoke($input, array $options = [])
     {
         $options && $this->storeOption($options);
         return $this->isValid($input);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMessages($name = null)
+    {
+        if ($this->missingTypes) {
+            $this->loadTranslationMessages();
+            $types = [];
+            foreach ($this->missingTypes as $type) {
+                $types[] = $this->t($type);
+            }
+            $this->missingType = implode(', ', $types);
+        }
+        return parent::getMessages($name);
     }
 
     /**
@@ -137,17 +153,17 @@ class Password extends BaseValidator
         }
 
         // Find out what kind of characters are missing
-        $missing = array();
+        $missing = [];
         foreach ($this->regexMap as $type => $regex) {
             if (!preg_match('/[' . $regex . ']/', $input)) {
                 $missing[$type] = true;
             }
         }
 
-        $needTypes = array();
-        foreach (array('digit', 'letter', 'nonAlnum') as $type) {
+        $needTypes = [];
+        foreach (['digit', 'letter', 'nonAlnum'] as $type) {
             $propertyName = 'need' . ucfirst($type);
-            if ($this->$propertyName && isset($missing[$type])) {
+            if ($this->{$propertyName} && isset($missing[$type])) {
                 $needTypes[] = $type;
             }
         }
@@ -178,21 +194,5 @@ class Password extends BaseValidator
         }
 
         return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMessages($name = null)
-    {
-        if ($this->missingTypes) {
-            $this->loadTranslationMessages();
-            $types = array();
-            foreach ($this->missingTypes as $type) {
-                $types[] = $this->t($type);
-            }
-            $this->missingType = implode(', ', $types);
-        }
-        return parent::getMessages($name);
     }
 }

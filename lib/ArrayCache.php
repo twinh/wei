@@ -20,7 +20,7 @@ class ArrayCache extends BaseCache
      *
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * {@inheritdoc}
@@ -105,7 +105,7 @@ class ArrayCache extends BaseCache
      */
     public function clear()
     {
-        $this->data = array();
+        $this->data = [];
         return true;
     }
 }

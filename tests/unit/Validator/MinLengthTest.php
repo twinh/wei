@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class MinLengthTest extends TestCase
+/**
+ * @internal
+ */
+final class MinLengthTest extends TestCase
 {
     /**
      * @dataProvider providerForMinLength
+     * @param mixed $options
      */
     public function testMinLength($options)
     {
@@ -14,26 +18,27 @@ class MinLengthTest extends TestCase
 
     /**
      * @dataProvider providerForNotMinLength
+     * @param mixed $options
      */
     public function testNotMinLength($options)
     {
         $this->assertFalse($this->isMinLength('length7', $options));
     }
-    
+
     public function providerForMinLength()
     {
-        return array(
-            array(6),
-            array(1),
-            array(-1)
-        );
+        return [
+            [6],
+            [1],
+            [-1],
+        ];
     }
 
     public function providerForNotMinLength()
     {
-        return array(
-            array(8),
-            array(200)
-        );
+        return [
+            [8],
+            [200],
+        ];
     }
 }

@@ -5,8 +5,10 @@ namespace WeiTest;
 /**
  * @property \Wei\Password $password
  * @link https://github.com/ircmaxell/password_compat/blob/master/test/Unit
+ *
+ * @internal
  */
-class PasswordTest extends TestCase
+final class PasswordTest extends TestCase
 {
     public function testStringLength()
     {
@@ -39,6 +41,8 @@ class PasswordTest extends TestCase
 
     /**
      * @dataProvider provideInfo
+     * @param mixed $hash
+     * @param mixed $info
      */
     public function testInfo($hash, $info)
     {
@@ -50,12 +54,12 @@ class PasswordTest extends TestCase
         // Init password service to avoid "PASSWORD_BCRYPT" constant no defined error
         $this->password;
 
-        return array(
-            array('foo', array('algo' => 0, 'algoName' => 'unknown', 'options' => array())),
-            array('$2y$', array('algo' => 0, 'algoName' => 'unknown', 'options' => array())),
-            array('$2y$07$', array('algo' => 0, 'algoName' => 'unknown', 'options' => array())),
-            array('$2y$07$usesomesillystringfore2uDLvp1Ii2e./U9C8sBjqp8I90dH6hi', array('algo' => PASSWORD_BCRYPT, 'algoName' => 'bcrypt', 'options' => array('cost' => 7))),
-            array('$2y$10$usesomesillystringfore2uDLvp1Ii2e./U9C8sBjqp8I90dH6hi', array('algo' => PASSWORD_BCRYPT, 'algoName' => 'bcrypt', 'options' => array('cost' => 10))),
-        );
+        return [
+            ['foo', ['algo' => 0, 'algoName' => 'unknown', 'options' => []]],
+            ['$2y$', ['algo' => 0, 'algoName' => 'unknown', 'options' => []]],
+            ['$2y$07$', ['algo' => 0, 'algoName' => 'unknown', 'options' => []]],
+            ['$2y$07$usesomesillystringfore2uDLvp1Ii2e./U9C8sBjqp8I90dH6hi', ['algo' => PASSWORD_BCRYPT, 'algoName' => 'bcrypt', 'options' => ['cost' => 7]]],
+            ['$2y$10$usesomesillystringfore2uDLvp1Ii2e./U9C8sBjqp8I90dH6hi', ['algo' => PASSWORD_BCRYPT, 'algoName' => 'bcrypt', 'options' => ['cost' => 10]]],
+        ];
     }
 }

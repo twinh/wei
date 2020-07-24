@@ -6,48 +6,51 @@ use Wei\Request;
 use Wei\Wei;
 use WeiTest\Fixtures\StaticService;
 
-class WeiTest extends TestCase
+/**
+ * @internal
+ */
+final class WeiTest extends TestCase
 {
     public function createUserService()
     {
-        return new \WeiTest\Fixtures\User(array(
+        return new \WeiTest\Fixtures\User([
             'wei' => $this->wei,
-            'name' => 'twin'
-        ));
+            'name' => 'twin',
+        ]);
     }
 
     public function testConfig()
     {
         $wei = $this->wei;
-        $wei->setConfig(array(
-            'test' => array(
-                'a' => array(
-                    'b' => array(
-                        'c' => false
-                    )
-                )
-            )
-        ));
+        $wei->setConfig([
+            'test' => [
+                'a' => [
+                    'b' => [
+                        'c' => false,
+                    ],
+                ],
+            ],
+        ]);
 
-        $this->assertSame(array('a' => array('b' => array('c' => false))), $wei->getConfig('test'));
-        $this->assertSame(array('b' => array('c' => false)), $wei->getConfig('test:a'));
-        $this->assertSame(array('c' => false), $wei->getConfig('test:a:b'));
-        $this->assertSame(false, $wei->getConfig('test:a:b:c'));
-        $this->assertSame(null, $wei->getConfig('test:noThisKey'));
-        $this->assertSame(false, $wei->getConfig('test:noThisKey', false));
+        $this->assertSame(['a' => ['b' => ['c' => false]]], $wei->getConfig('test'));
+        $this->assertSame(['b' => ['c' => false]], $wei->getConfig('test:a'));
+        $this->assertSame(['c' => false], $wei->getConfig('test:a:b'));
+        $this->assertFalse($wei->getConfig('test:a:b:c'));
+        $this->assertNull($wei->getConfig('test:noThisKey'));
+        $this->assertFalse($wei->getConfig('test:noThisKey', false));
         $this->assertSame(0, $wei->getConfig('test:noThisKey', 0));
 
-        $wei->setConfig('test2', array());
-        $this->assertSame(array(), $wei->getConfig('test2'));
+        $wei->setConfig('test2', []);
+        $this->assertSame([], $wei->getConfig('test2'));
 
         $wei->setConfig('test2:a', 'b');
         $this->assertSame('b', $wei->getConfig('test2:a'));
-        $this->assertSame(array('a' => 'b'), $wei->getConfig('test2'));
+        $this->assertSame(['a' => 'b'], $wei->getConfig('test2'));
 
         $wei->setConfig('test2:a:b', 'c');
         $this->assertSame('c', $wei->getConfig('test2:a:b'));
 
-        $wei->setConfig('test.request', array());
+        $wei->setConfig('test.request', []);
         $providers = $wei->getOption('providers');
         $this->assertArrayHasKey('testRequest', $providers);
         $this->assertSame('test.request', $providers['testRequest']);
@@ -57,26 +60,26 @@ class WeiTest extends TestCase
     {
         $wei = $this->wei;
 
-        $wei->setConfig(array(
-            'weiName' => array(
+        $wei->setConfig([
+            'weiName' => [
                 'option1' => 'value1',
-            )
-        ));
+            ],
+        ]);
 
-        $wei->setConfig(array(
-            'weiName' => array(
+        $wei->setConfig([
+            'weiName' => [
                 'option2' => 'value2',
-            )
-        ));
+            ],
+        ]);
 
         $this->assertEquals('value1', $wei->getConfig('weiName:option1'));
         $this->assertEquals('value2', $wei->getConfig('weiName:option2'));
 
-        $wei->setConfig(array(
-            'weiName' => array(
+        $wei->setConfig([
+            'weiName' => [
                 'option1' => 'value3',
-            )
-        ));
+            ],
+        ]);
 
         $this->assertEquals('value3', $wei->getConfig('weiName:option1'));
         $this->assertEquals('value2', $wei->getConfig('weiName:option2'));
@@ -87,28 +90,28 @@ class WeiTest extends TestCase
         $wei = $this->wei;
         $request = $wei->request;
 
-        $wei->setConfig('request', array(
-            'method' => 'POST'
-        ));
+        $wei->setConfig('request', [
+            'method' => 'POST',
+        ]);
         $this->assertEquals('POST', $request->getMethod());
 
         // No effect at this time
         $wei->setConfig('request/method', 'PUT');
         $this->assertEquals('POST', $request->getMethod());
 
-        $wei->setConfig(array(
-            'request' => array(
-                'method' => 'DELETE'
-            )
-        ));
+        $wei->setConfig([
+            'request' => [
+                'method' => 'DELETE',
+            ],
+        ]);
         $this->assertEquals('DELETE', $request->getMethod());
 
         // Reset config
-        $wei->setConfig(array(
-            'request' => array(
-                'method' => null
-            )
-        ));
+        $wei->setConfig([
+            'request' => [
+                'method' => null,
+            ],
+        ]);
     }
 
     public function testGetConfigs()
@@ -124,9 +127,9 @@ class WeiTest extends TestCase
             'Option "wei" of class "Wei\Request" should be an instance of "Wei\Wei"',
             1000
         );
-        new \Wei\Request(array(
-            'wei' => new \stdClass
-        ));
+        new \Wei\Request([
+            'wei' => new \stdClass(),
+        ]);
     }
 
     public function testGetOption()
@@ -142,27 +145,27 @@ class WeiTest extends TestCase
     {
         $wei = $this->wei;
 
-        $wei->setInis(array(
-            'date.timezone' => 'Asia/Shanghai'
-        ));
+        $wei->setInis([
+            'date.timezone' => 'Asia/Shanghai',
+        ]);
 
         $this->assertEquals('Asia/Shanghai', date_default_timezone_get());
-        $this->assertIsSubset(array('date.timezone' => 'Asia/Shanghai'), $wei->getOption('inis'));
+        $this->assertIsSubset(['date.timezone' => 'Asia/Shanghai'], $wei->getOption('inis'));
 
-        $wei->setInis(array(
-            'date.default_latitude' => '31.7667'
-        ));
-        $this->assertIsSubset(array(
+        $wei->setInis([
+            'date.default_latitude' => '31.7667',
+        ]);
+        $this->assertIsSubset([
             'date.timezone' => 'Asia/Shanghai',
-            'date.default_latitude' => '31.7667'
-        ), $wei->getOption('inis'));
+            'date.default_latitude' => '31.7667',
+        ], $wei->getOption('inis'));
     }
 
     public function testSet()
     {
-        $request = new \Wei\Request(array(
+        $request = new \Wei\Request([
             'wei' => $this->wei,
-        ));
+        ]);
 
         $this->wei->set('request', $request);
         $this->assertSame($request, $this->wei->request);
@@ -170,9 +173,9 @@ class WeiTest extends TestCase
 
     public function testSetWithCaseSensitiveName()
     {
-        $arrayCache = new \Wei\ArrayCache(array(
-            'wei' => $this->wei
-        ));
+        $arrayCache = new \Wei\ArrayCache([
+            'wei' => $this->wei,
+        ]);
 
         $this->wei->set('myArrayCache', $arrayCache);
 
@@ -181,9 +184,9 @@ class WeiTest extends TestCase
 
     public function testInstanceNotFoundServiceFromContainer()
     {
-        $this->expectExceptionObject(new \BadMethodCallException(implode([
+        $this->expectExceptionObject(new \BadMethodCallException(implode('', [
             'Property or object "notFoundService" (class "Wei\NotFoundService") not found, ',
-            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3)
+            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3),
         ]), 1012));
 
         $this->wei->notFoundService;
@@ -191,9 +194,9 @@ class WeiTest extends TestCase
 
     public function testInstanceNotFoundServiceFromService()
     {
-        $this->expectExceptionObject(new \BadMethodCallException(implode([
+        $this->expectExceptionObject(new \BadMethodCallException(implode('', [
             'Property or object "notFoundService" (class "Wei\NotFoundService") not found, ',
-            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3)
+            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3),
         ]), 1012));
 
         $this->wei->request->notFoundService;
@@ -201,9 +204,9 @@ class WeiTest extends TestCase
 
     public function testInvokeNotFoundServiceFromContainer()
     {
-        $this->expectExceptionObject(new \BadMethodCallException(implode([
+        $this->expectExceptionObject(new \BadMethodCallException(implode('', [
             'Method "Wei\Wei->notFoundService" (class "Wei\NotFoundService") not found, ',
-            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3)
+            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3),
         ]), 1014));
 
         $this->wei->notFoundService();
@@ -211,9 +214,9 @@ class WeiTest extends TestCase
 
     public function testInvokeNotFoundServiceFromService()
     {
-        $this->expectExceptionObject(new \BadMethodCallException(implode([
+        $this->expectExceptionObject(new \BadMethodCallException(implode('', [
             'Method "Wei\Request->notFoundService" (class "Wei\NotFoundService") not found, ',
-            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3)
+            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3),
         ]), 1014));
 
         $this->wei->request->notFoundService();
@@ -221,9 +224,9 @@ class WeiTest extends TestCase
 
     public function testInvokeNotFoundServiceByCallUserFuncFromContainer()
     {
-        $this->expectExceptionObject(new \BadMethodCallException(implode([
+        $this->expectExceptionObject(new \BadMethodCallException(implode('', [
             'Method "Wei\Wei->notFoundService" (class "Wei\NotFoundService") not found, ',
-            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3)
+            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3),
         ]), 1014));
 
         call_user_func([$this->wei, 'notFoundService']);
@@ -231,9 +234,9 @@ class WeiTest extends TestCase
 
     public function testInvokeNotFoundServiceByCallUserFuncFromService()
     {
-        $this->expectExceptionObject(new \BadMethodCallException(implode([
+        $this->expectExceptionObject(new \BadMethodCallException(implode('', [
             'Method "Wei\Request->notFoundService" (class "Wei\NotFoundService") not found, ',
-            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3)
+            'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3),
         ]), 1014));
 
         call_user_func([$this->wei->request, 'notFoundService']);
@@ -249,19 +252,19 @@ class WeiTest extends TestCase
     public function testGetFromProviders()
     {
         // Set options for sub request
-        $this->wei->setConfig('sub.request', array(
+        $this->wei->setConfig('sub.request', [
             'fromGlobal' => false,
-            'data' => array(
-                'id' => 'fromSubRequest'
-            )
-        ));
+            'data' => [
+                'id' => 'fromSubRequest',
+            ],
+        ]);
 
         $request = $this->wei->request;
         $request->set('id', 'fromOrigin');
 
-        $serviceWithProvider = new \WeiTest\Fixtures\ServiceWithProvider(array(
-            'wei' => $this->wei
-        ));
+        $serviceWithProvider = new \WeiTest\Fixtures\ServiceWithProvider([
+            'wei' => $this->wei,
+        ]);
 
         // Instance request wei from 'request.sub' configuration
         $subRequest = $serviceWithProvider->request;
@@ -274,9 +277,9 @@ class WeiTest extends TestCase
     {
         $wei = $this->wei;
 
-        $wei->setOption('providers', array(
-            'subRequest' => 'sub.request'
-        ));
+        $wei->setOption('providers', [
+            'subRequest' => 'sub.request',
+        ]);
 
         $this->assertInstanceOf('Wei\Request', $wei->subRequest);
         $this->assertNotSame($wei->request, $wei->subRequest);
@@ -288,22 +291,22 @@ class WeiTest extends TestCase
 
     public function testPreloadWeiInDependenceMap()
     {
-        $wei = new Wei(array(
-            'wei' => array(
-                'providers' => array(
+        $wei = new Wei([
+            'wei' => [
+                'providers' => [
                     'request' => 'sub.request',
-                ),
-                'preload' => array(
-                    'request'
-                )
-            ),
-            'request' => array(
+                ],
+                'preload' => [
+                    'request',
+                ],
+            ],
+            'request' => [
                 'fromGlobal' => true,
-            ),
-            'sub.request' => array(
+            ],
+            'sub.request' => [
                 'fromGlobal' => false,
-            )
-        ));
+            ],
+        ]);
 
         $this->assertFalse($wei->request->getOption('fromGlobal'));
     }
@@ -313,18 +316,18 @@ class WeiTest extends TestCase
         $this->request->set('id', __METHOD__);
 
         // Equals to $this->wei->request('id')
-        $id = $this->wei->invoke('request', array('id'));
+        $id = $this->wei->invoke('request', ['id']);
 
         $this->assertEquals(__METHOD__, $id);
     }
 
     public function testInstanceWeiWithWeiOption()
     {
-        $wei = new \Wei\Wei(array(
-            'wei' => array(
+        $wei = new \Wei\Wei([
+            'wei' => [
                 'autoload' => false,
-            ),
-        ));
+            ],
+        ]);
 
         $this->assertFalse($wei->getOption('autoload'));
     }
@@ -386,14 +389,14 @@ class WeiTest extends TestCase
     public function testAutoload()
     {
         $this->wei->setAutoload(false);
-        $this->assertNotContains(array($this->wei, 'autoload'), spl_autoload_functions());
+        $this->assertNotContains([$this->wei, 'autoload'], spl_autoload_functions());
 
         $this->wei->setAutoload(true);
-        $this->assertContains(array($this->wei, 'autoload'), spl_autoload_functions());
+        $this->assertContains([$this->wei, 'autoload'], spl_autoload_functions());
 
-        $this->wei->setAutoloadMap(array(
-            '\WeiTest' => __DIR__
-        ));
+        $this->wei->setAutoloadMap([
+            '\WeiTest' => __DIR__,
+        ]);
 
         $this->assertTrue(class_exists('WeiTest\Fixtures\Autoload'));
         $this->assertFalse(class_exists('WeiTest\Fixtures\AutoloadNotFound'));
@@ -401,19 +404,19 @@ class WeiTest extends TestCase
 
     public function testImport()
     {
-        $wei = new Wei(array(
-            'wei' => array(
+        $wei = new Wei([
+            'wei' => [
                 'autoload' => false,
-                'import' => array(
-                    array(
+                'import' => [
+                    [
                         'dir' => __DIR__ . '/Fixtures/Import',
                         'namespace' => '\WeiTest\Fixtures\Import',
                         'format' => 'test%s',
-                        'autoload' => true
-                    )
-                )
-            )
-        ));
+                        'autoload' => true,
+                    ],
+                ],
+            ],
+        ]);
 
         $this->assertEquals('\WeiTest\Fixtures\Import\Wei1', $wei->has('testWei1'));
         $this->assertEquals('\WeiTest\Fixtures\Import\Wei2', $wei->has('testWei2'));
@@ -432,19 +435,19 @@ class WeiTest extends TestCase
 
     public function testImportWithAutoload()
     {
-        $wei = new Wei(array(
-            'wei' => array(
+        $wei = new Wei([
+            'wei' => [
                 'autoload' => false,
-                'import' => array(
-                    array(
+                'import' => [
+                    [
                         'dir' => __DIR__ . '/Fixtures/Import',
                         'namespace' => '\WeiTest\Fixtures\Import',
                         'format' => 'test%s',
-                        'autoload' => true
-                    )
-                )
-            )
-        ));
+                        'autoload' => true,
+                    ],
+                ],
+            ],
+        ]);
 
         $map = $wei->getOption('autoloadMap');
         $this->assertArrayHasKey('\WeiTest\Fixtures\Import', $map);
@@ -464,7 +467,7 @@ class WeiTest extends TestCase
             'Configuration should be array or file',
             1010
         );
-        Wei::getContainer(new \stdClass);
+        Wei::getContainer(new \stdClass());
     }
 
     public function testInvalidArgumentExceptionWhenFileNotFind()
@@ -527,18 +530,18 @@ class WeiTest extends TestCase
 
     public function testConstructCallback()
     {
-        $beforeConstruct = $afterConstruct = array();
-        $wei = new Wei(array(
-            'wei' => array(
+        $beforeConstruct = $afterConstruct = [];
+        $wei = new Wei([
+            'wei' => [
                 'autoload' => false,
-                'beforeConstruct' => function($wei, $fullName, $name) use(&$beforeConstruct) {
+                'beforeConstruct' => function ($wei, $fullName, $name) use (&$beforeConstruct) {
                     $beforeConstruct[] = $fullName;
                 },
-                'afterConstruct' => function($wei, $fullName, $name, $object) use(&$afterConstruct) {
+                'afterConstruct' => function ($wei, $fullName, $name, $object) use (&$afterConstruct) {
                     $afterConstruct[] = $fullName;
-                }
-            )
-        ));
+                },
+            ],
+        ]);
 
         // service instances
         $wei->request;
@@ -568,9 +571,9 @@ class WeiTest extends TestCase
             'InvalidArgumentException',
             'Directory "abc" for autoloading is not found'
         );
-        $this->wei->setAutoloadMap(array(
-            'namespace' => 'abc'
-        ));
+        $this->wei->setAutoloadMap([
+            'namespace' => 'abc',
+        ]);
     }
 
     public function testSetCustomService()
@@ -591,9 +594,9 @@ class WeiTest extends TestCase
     public function testCustomServiceNamespace()
     {
         $this->wei->setNamespace('app1');
-        $this->wei->setConfig('namespace.request', array(
-            'namespace' => 'test'
-        ));
+        $this->wei->setConfig('namespace.request', [
+            'namespace' => 'test',
+        ]);
         $req = $this->wei->get('namespace.request');
         $this->assertNotEquals('app1', $req->getOption('namespace'));
         $this->assertEquals('test', $req->getOption('namespace'));
@@ -652,9 +655,9 @@ class WeiTest extends TestCase
             StaticService::staticHasTag()->dynamicDontHaveTag();
         } catch (\BadMethodCallException $e) {
             $hasException = true;
-            $this->assertStringContainsString(implode([
+            $this->assertStringContainsString(implode('', [
                 'Method "WeiTest\Fixtures\StaticService->dynamicDontHaveTag" ',
-                '(class "Wei\DynamicDontHaveTag") not found, called in file '
+                '(class "Wei\DynamicDontHaveTag") not found, called in file ',
             ]), $e->getMessage());
         }
         $this->assertTrue($hasException);

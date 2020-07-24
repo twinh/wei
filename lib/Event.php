@@ -20,7 +20,7 @@ class Event extends Base
      *
      * @var array
      */
-    protected $handlers = array();
+    protected $handlers = [];
 
     /**
      * The name of last triggered event
@@ -45,23 +45,23 @@ class Event extends Base
      * @return array|mixed
      * @svc
      */
-    protected function trigger($name, $args = array(), $halt = false)
+    protected function trigger($name, $args = [], $halt = false)
     {
         $this->curName = $name;
         $this->loadEvent && call_user_func($this->loadEvent, $name);
 
         if (!is_array($args)) {
-            $args = array($args);
+            $args = [$args];
         }
 
-        $results = array();
+        $results = [];
         if (isset($this->handlers[$name])) {
             krsort($this->handlers[$name]);
             foreach ($this->handlers[$name] as $handlers) {
                 foreach ($handlers as $handler) {
                     $results[] = $result = call_user_func_array($handler, $args);
 
-                    if ($result !== null && $halt) {
+                    if (null !== $result && $halt) {
                         return $result;
                     }
 
@@ -84,7 +84,7 @@ class Event extends Base
      * @link https://github.com/laravel/framework/blob/5.1/src/Illuminate/Events/Dispatcher.php#L161
      * @svc
      */
-    protected function until($name, $args = array())
+    protected function until($name, $args = [])
     {
         return $this->trigger($name, $args, true);
     }
@@ -118,7 +118,7 @@ class Event extends Base
         }
 
         if (!isset($this->handlers[$name])) {
-            $this->handlers[$name] = array();
+            $this->handlers[$name] = [];
         }
         $this->handlers[$name][$priority][] = $fn;
 

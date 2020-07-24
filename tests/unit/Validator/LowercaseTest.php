@@ -2,10 +2,15 @@
 
 namespace WeiTest\Validator;
 
-class LowercaseTest extends TestCase
+/**
+ * @internal
+ */
+final class LowercaseTest extends TestCase
 {
     /**
      * @dataProvider providerForLowercase
+     * @param mixed $input
+     * @param mixed|null $options
      */
     public function testLowercase($input, $options = null)
     {
@@ -14,6 +19,8 @@ class LowercaseTest extends TestCase
 
     /**
      * @dataProvider providerForNotLowercase
+     * @param mixed $input
+     * @param mixed|null $options
      */
     public function testNotLowercase($input, $options = null)
     {
@@ -22,21 +29,21 @@ class LowercaseTest extends TestCase
 
     public function providerForLowercase()
     {
-        return array(
-            array('abc'),
-            array('abc123'),
-            array('abc中文'),
-            array('τάχιστη αλώπηξ βαφής ψημένη γη, δρασκελίζει υπέρ νωθρού κυνός'),
-            array('mary had a little lamb and she loved it so')
-        );
+        return [
+            ['abc'],
+            ['abc123'],
+            ['abc中文'],
+            ['τάχιστη αλώπηξ βαφής ψημένη γη, δρασκελίζει υπέρ νωθρού κυνός'],
+            ['mary had a little lamb and she loved it so'],
+        ];
     }
 
     public function providerForNotLowercase()
     {
-        return array(
-            array('ABC'),
-            array('Abc'),
-            array('Τάχιστη αλώπηξ βαφής ψημένη γη, δρασκελίζει υπέρ νωθρού κυνός')
-        );
+        return [
+            ['ABC'],
+            ['Abc'],
+            ['Τάχιστη αλώπηξ βαφής ψημένη γη, δρασκελίζει υπέρ νωθρού κυνός'],
+        ];
     }
 }

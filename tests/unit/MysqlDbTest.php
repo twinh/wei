@@ -2,10 +2,12 @@
 
 namespace WeiTest;
 
-
-class MysqlDbTest extends DbTest
+/**
+ * @internal
+ */
+final class MysqlDbTest extends DbTest
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->db = $this->mysqlDb;
 
@@ -18,19 +20,19 @@ class MysqlDbTest extends DbTest
         parent::setUp();
     }
 
-    protected function createTable()
-    {
-        $db = $this->db;
-        $db->query("CREATE TABLE prefix_member_group (id INTEGER NOT NULL AUTO_INCREMENT, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE prefix_member (id INTEGER NOT NULL AUTO_INCREMENT, group_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE prefix_post (id INTEGER NOT NULL AUTO_INCREMENT, member_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE prefix_tag (id INTEGER NOT NULL AUTO_INCREMENT, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))");
-        $db->query("CREATE TABLE prefix_post_tag (post_id INTEGER NOT NULL, tag_id INTEGER NOT NULL)");
-    }
-
     public function testUseDb()
     {
         $this->db->useDb('information_schema');
         $this->assertEquals('information_schema', $this->db->getDbname());
+    }
+
+    protected function createTable()
+    {
+        $db = $this->db;
+        $db->query('CREATE TABLE prefix_member_group (id INTEGER NOT NULL AUTO_INCREMENT, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))');
+        $db->query('CREATE TABLE prefix_member (id INTEGER NOT NULL AUTO_INCREMENT, group_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))');
+        $db->query('CREATE TABLE prefix_post (id INTEGER NOT NULL AUTO_INCREMENT, member_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))');
+        $db->query('CREATE TABLE prefix_tag (id INTEGER NOT NULL AUTO_INCREMENT, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))');
+        $db->query('CREATE TABLE prefix_post_tag (post_id INTEGER NOT NULL, tag_id INTEGER NOT NULL)');
     }
 }

@@ -2,21 +2,26 @@
 
 namespace WeiTest;
 
-class PinyinTest extends TestCase
+/**
+ * @internal
+ */
+final class PinyinTest extends TestCase
 {
     /**
      * @dataProvider providerForPinyin
+     * @param mixed $chinese
+     * @param mixed $pinyin
      */
     public function testInvoker($chinese, $pinyin)
     {
         $this->assertEquals($pinyin, $this->pinyin($chinese));
     }
-    
+
     public function providerForPinyin()
     {
-        return array(
-            array('中文', 'zhongwen'),
-            array('您好', 'ninhao')
-        );
+        return [
+            ['中文', 'zhongwen'],
+            ['您好', 'ninhao'],
+        ];
     }
 }

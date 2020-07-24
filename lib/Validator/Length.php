@@ -61,34 +61,11 @@ class Length extends BaseValidator
             $this->storeOption('min', $min);
             $this->storeOption('max', $max);
         // ($input, $length)
-        } elseif (is_numeric($min) && is_null($max)) {
+        } elseif (is_numeric($min) && null === $max) {
             $this->storeOption('length', $min);
         }
 
         return $this->isValid($input);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function doValidate($input)
-    {
-        if (false === ($len = $this->getLength($input))) {
-            $this->addError('notDetected');
-            return false;
-        }
-
-        if (!is_null($this->length)) {
-            if ($this->length != $len) {
-                $this->addError(is_scalar($input) ? 'length' : 'lengthItem');
-                return false;
-            }
-        } elseif ($this->min > $len || $this->max < $len) {
-            $this->addError(is_scalar($input) ? 'notIn' : 'notInItem');
-            return false;
-        }
-
-        return true;
     }
 
     /**
@@ -110,5 +87,28 @@ class Length extends BaseValidator
         } else {
             return false;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function doValidate($input)
+    {
+        if (false === ($len = $this->getLength($input))) {
+            $this->addError('notDetected');
+            return false;
+        }
+
+        if (null !== $this->length) {
+            if ($this->length != $len) {
+                $this->addError(is_scalar($input) ? 'length' : 'lengthItem');
+                return false;
+            }
+        } elseif ($this->min > $len || $this->max < $len) {
+            $this->addError(is_scalar($input) ? 'notIn' : 'notInItem');
+            return false;
+        }
+
+        return true;
     }
 }

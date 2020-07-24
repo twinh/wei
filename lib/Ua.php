@@ -28,31 +28,31 @@ namespace Wei;
  */
 class Ua extends Base
 {
-    protected $patterns = array(
+    protected $patterns = [
         // Browser
-        'ie'            => 'MSIE ([\w.]+)',
-        'chrome'        => 'Chrome\/([\w.]+)',
-        'firefox'       => 'Firefox\/([\w.]+)',
+        'ie' => 'MSIE ([\w.]+)',
+        'chrome' => 'Chrome\/([\w.]+)',
+        'firefox' => 'Firefox\/([\w.]+)',
 
         // OS
-        'ios'           => 'iP(?:hone|ad).*OS ([\d_]+)', // Contains iPod
-        'android'       => 'Android ([\w.]+)',
-        'windowsphone'  => 'Windows Phone (?:OS )?([\w.]+)',
+        'ios' => 'iP(?:hone|ad).*OS ([\d_]+)', // Contains iPod
+        'android' => 'Android ([\w.]+)',
+        'windowsphone' => 'Windows Phone (?:OS )?([\w.]+)',
 
         // Device (Mobile & Tablet)
-        'iphone'        => 'iPhone OS ([\d_]+)',
-        'ipad'          => 'iPad.*OS ([\d_]+)',
+        'iphone' => 'iPhone OS ([\d_]+)',
+        'ipad' => 'iPad.*OS ([\d_]+)',
 
         // App
-        'wechat'        => 'MicroMessenger',
-    );
+        'wechat' => 'MicroMessenger',
+    ];
 
     /**
      * The versions of detected os
      *
      * @var string
      */
-    protected $versions = array();
+    protected $versions = [];
 
     /**
      * The user agent string from request header
@@ -73,7 +73,7 @@ class Ua extends Base
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
 
@@ -95,6 +95,21 @@ class Ua extends Base
     public function __invoke($name)
     {
         return $this->is($name);
+    }
+
+    /**
+     * Magic call for method isXXX
+     *
+     * @param string $name
+     * @param array $args
+     * @return bool
+     */
+    public function __call($name, $args)
+    {
+        if ('is' == substr($name, 0, 2)) {
+            return $this->is(substr($name, 2));
+        }
+        return parent::__call($name, $args);
     }
 
     /**
@@ -137,21 +152,6 @@ class Ua extends Base
     }
 
     /**
-     * Magic call for method isXXX
-     *
-     * @param string $name
-     * @param array $args
-     * @return bool
-     */
-    public function __call($name, $args)
-    {
-        if('is' == substr($name, 0, 2)) {
-            return $this->is(substr($name, 2));
-        }
-        return parent::__call($name, $args);
-    }
-
-    /**
      * Check if the device is mobile
      *
      * @link https://github.com/serbanghita/Mobile-Detect
@@ -163,26 +163,26 @@ class Ua extends Base
         $s = $this->server;
         if (
             isset($s['HTTP_ACCEPT']) &&
-                (strpos($s['HTTP_ACCEPT'], 'application/x-obml2d') !== false || // Opera Mini; @reference: http://dev.opera.com/articles/view/opera-binary-markup-language/
-                 strpos($s['HTTP_ACCEPT'], 'application/vnd.rim.html') !== false || // BlackBerry devices.
-                 strpos($s['HTTP_ACCEPT'], 'text/vnd.wap.wml') !== false ||
-                 strpos($s['HTTP_ACCEPT'], 'application/vnd.wap.xhtml+xml') !== false) ||
-            isset($s['HTTP_X_WAP_PROFILE'])             ||
-            isset($s['HTTP_X_WAP_CLIENTID'])            ||
-            isset($s['HTTP_WAP_CONNECTION'])            ||
-            isset($s['HTTP_PROFILE'])                   ||
-            isset($s['HTTP_X_OPERAMINI_PHONE_UA'])      || // Reported by Nokia devices (eg. C3)
-            isset($s['HTTP_X_NOKIA_IPADDRESS'])         ||
-            isset($s['HTTP_X_NOKIA_GATEWAY_ID'])        ||
-            isset($s['HTTP_X_ORANGE_ID'])               ||
-            isset($s['HTTP_X_VODAFONE_3GPDPCONTEXT'])   ||
-            isset($s['HTTP_X_HUAWEI_USERID'])           ||
-            isset($s['HTTP_UA_OS'])                     || // Reported by Windows Smartphones.
-            isset($s['HTTP_X_MOBILE_GATEWAY'])          || // Reported by Verizon, Vodafone proxy system.
-            isset($s['HTTP_X_ATT_DEVICEID'])            || // Seend this on HTC Sensation. @ref: SensationXE_Beats_Z715e
+                (false !== strpos($s['HTTP_ACCEPT'], 'application/x-obml2d') || // Opera Mini; @reference: http://dev.opera.com/articles/view/opera-binary-markup-language/
+                 false !== strpos($s['HTTP_ACCEPT'], 'application/vnd.rim.html') || // BlackBerry devices.
+                 false !== strpos($s['HTTP_ACCEPT'], 'text/vnd.wap.wml') ||
+                 false !== strpos($s['HTTP_ACCEPT'], 'application/vnd.wap.xhtml+xml')) ||
+            isset($s['HTTP_X_WAP_PROFILE']) ||
+            isset($s['HTTP_X_WAP_CLIENTID']) ||
+            isset($s['HTTP_WAP_CONNECTION']) ||
+            isset($s['HTTP_PROFILE']) ||
+            isset($s['HTTP_X_OPERAMINI_PHONE_UA']) || // Reported by Nokia devices (eg. C3)
+            isset($s['HTTP_X_NOKIA_IPADDRESS']) ||
+            isset($s['HTTP_X_NOKIA_GATEWAY_ID']) ||
+            isset($s['HTTP_X_ORANGE_ID']) ||
+            isset($s['HTTP_X_VODAFONE_3GPDPCONTEXT']) ||
+            isset($s['HTTP_X_HUAWEI_USERID']) ||
+            isset($s['HTTP_UA_OS']) || // Reported by Windows Smartphones.
+            isset($s['HTTP_X_MOBILE_GATEWAY']) || // Reported by Verizon, Vodafone proxy system.
+            isset($s['HTTP_X_ATT_DEVICEID']) || // Seend this on HTC Sensation. @ref: SensationXE_Beats_Z715e
             //HTTP_X_NETWORK_TYPE = WIFI
-            ( isset($s['HTTP_UA_CPU']) &&
-                    $s['HTTP_UA_CPU'] == 'ARM'          // Seen this on a HTC.
+            (isset($s['HTTP_UA_CPU']) &&
+                    'ARM' == $s['HTTP_UA_CPU']          // Seen this on a HTC.
             )
         ) {
             return true;

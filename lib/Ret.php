@@ -14,10 +14,35 @@ class Ret extends Base
      *
      * @var array
      */
-    protected $defaults = array(
+    protected $defaults = [
         'message' => 'Operation successful',
         'code' => 1,
-    );
+    ];
+
+    /**
+     * Return operation result data
+     *
+     * @param string|array $message
+     * @param int $code
+     * @param string $type
+     * @return array
+     */
+    public function __invoke($message, $code = 1, $type = 'success')
+    {
+        if (is_array($message)) {
+            $data = $message + ['code' => $code] + $this->defaults;
+        } else {
+            $data = ['message' => (string) $message, 'code' => $code];
+        }
+
+        // Record error result
+        // TODO record more relative data
+        if (1 !== $code) {
+            $this->logger->log($type, $data['message'], $data);
+        }
+
+        return $data;
+    }
 
     /**
      * Return operation successful result
@@ -73,30 +98,5 @@ class Ret extends Base
     public function alert($message, $code = -1)
     {
         return $this->err($message, $code, 'alert');
-    }
-
-    /**
-     * Return operation result data
-     *
-     * @param string|array $message
-     * @param int $code
-     * @param string $type
-     * @return array
-     */
-    public function __invoke($message, $code = 1, $type = 'success')
-    {
-        if (is_array($message)) {
-            $data = $message + array('code' => $code) + $this->defaults;
-        } else {
-            $data = array('message' => (string)$message, 'code' => $code);
-        }
-
-        // Record error result
-        // TODO record more relative data
-        if ($code !== 1) {
-            $this->logger->log($type, $data['message'], $data);
-        }
-
-        return $data;
     }
 }

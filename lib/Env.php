@@ -45,9 +45,9 @@ class Env extends Base
      *
      * @var array
      */
-    protected $ipMap = array(
-        '127.0.0.1' => 'dev'
-    );
+    protected $ipMap = [
+        '127.0.0.1' => 'dev',
+    ];
 
     /**
      * The configuration file pattern
@@ -68,7 +68,7 @@ class Env extends Base
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
 
@@ -85,7 +85,7 @@ class Env extends Base
         $this->loadConfigFile($this->configFile, $this->name);
 
         // Load CLI configuration when run in CLI mode
-        if (php_sapi_name() === 'cli') {
+        if (\PHP_SAPI === 'cli') {
             $this->loadConfigFile($this->configFile, 'cli');
         }
     }
@@ -130,7 +130,7 @@ class Env extends Base
         }
 
         // Executes in CLI
-        if (php_sapi_name() == 'cli' && $ips = $this->getServerIps()) {
+        if (\PHP_SAPI == 'cli' && $ips = $this->getServerIps()) {
             foreach ($ips as $ip) {
                 if (isset($this->ipMap[$ip])) {
                     $this->name = $this->ipMap[$ip];
@@ -140,7 +140,6 @@ class Env extends Base
         }
 
         $this->name = 'prod';
-        return;
     }
 
     /**
@@ -151,7 +150,7 @@ class Env extends Base
      */
     public function is($env)
     {
-        return $this->name == $env || strpos($this->name, $env . '-') === 0;
+        return $this->name == $env || 0 === strpos($this->name, $env . '-');
     }
 
     /**
@@ -249,9 +248,9 @@ class Env extends Base
     protected function getFileConfig($file)
     {
         if (is_file($file)) {
-            return (array)require $file;
+            return (array) require $file;
         } else {
-            return array();
+            return [];
         }
     }
 

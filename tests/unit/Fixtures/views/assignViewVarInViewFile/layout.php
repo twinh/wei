@@ -1,1 +1,3 @@
-<?php echo $var;
+<?php
+
+echo $var;

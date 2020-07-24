@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class ChineseTest extends TestCase
+/**
+ * @internal
+ */
+final class ChineseTest extends TestCase
 {
     /**
      * @dataProvider providerForChinese
+     * @param mixed $input
      */
     public function testChinese($input)
     {
@@ -14,6 +18,7 @@ class ChineseTest extends TestCase
 
     /**
      * @dataProvider providerForNotChinese
+     * @param mixed $input
      */
     public function testNotChinese($input)
     {
@@ -22,21 +27,21 @@ class ChineseTest extends TestCase
 
     public function providerForChinese()
     {
-        return array(
-            array('中文'),
-            array('汉字'),
-            array('姓名'),
-        );
+        return [
+            ['中文'],
+            ['汉字'],
+            ['姓名'],
+        ];
     }
 
     public function providerForNotChinese()
     {
-        return array(
-            array('abc'),
-            array('123'),
-            array('中文english'),
-            array('にほんご'), // Japanese language
-            array('조선어'), // Korean language
-        );
+        return [
+            ['abc'],
+            ['123'],
+            ['中文english'],
+            ['にほんご'], // Japanese language
+            ['조선어'], // Korean language
+        ];
     }
 }

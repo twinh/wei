@@ -9,77 +9,77 @@ if (is_file($file = __DIR__ . '/../vendor/autoload.php')) {
 }
 
 // Localhost configuration
-wei(array(
-    'wei' => array(
+wei([
+    'wei' => [
         // Display all PHP error message
-        'inis' => array(
+        'inis' => [
             'error_reporting' => -1,
             'display_errors' => true,
             'date.timezone' => 'UTC',
-        ),
+        ],
         // Enable wei debug option
         'debug' => true,
         // Set up autoload for WeiTest namespace
-        'autoloadMap' => array(
+        'autoloadMap' => [
             '\WeiTest' => __DIR__ . '/unit',
             '' => __DIR__ . '/fallback',
-        ),
-    ),
-    'error' => array(
+        ],
+    ],
+    'error' => [
         'enableCli' => false,
-    ),
-    'http' => array(
+    ],
+    'http' => [
         'url' => 'http://localhost:8000/call.php',
         // Set ip for WeiTest\HttpTest\::testIp
-        'ip' => '127.0.0.1'
-    ),
-    'db' => array(
-        'driver'    => 'sqlite',
-        'path'      => ':memory:'
-    ),
-    'mysql.db' => array(
-        'driver'    => 'mysql',
-        'user'      => 'root',
-        'password'  => '123456',
-        'host'      => '127.0.0.1',
-        'port'      => 3306,
-        'dbname'    => 'wei',
-        'charset'   => 'utf8'
-    ),
-    'pgsql.db' => array(
-        'driver'    => 'pgsql',
-        'user'      => 'postgres',
-        'password'  => '123456',
-        'host'      => '127.0.0.1',
-        'port'      => 5432,
-        'dbname'    => 'postgres'
-    ),
-    'mysql.dbCache' => array(
-        'deps' => array(
-            'db' => 'mysql.db'
-        )
-    ),
-    'pgsql.dbCache' => array(
-        'deps' => array(
-            'db' => 'pgsql.db'
-        )
-    ),
-    'cache' => array(
-        'driver' => 'fileCache'
-    ),
-    'bicache' => array(
-        'providers' => array(
+        'ip' => '127.0.0.1',
+    ],
+    'db' => [
+        'driver' => 'sqlite',
+        'path' => ':memory:',
+    ],
+    'mysql.db' => [
+        'driver' => 'mysql',
+        'user' => 'root',
+        'password' => '123456',
+        'host' => '127.0.0.1',
+        'port' => 3306,
+        'dbname' => 'wei',
+        'charset' => 'utf8',
+    ],
+    'pgsql.db' => [
+        'driver' => 'pgsql',
+        'user' => 'postgres',
+        'password' => '123456',
+        'host' => '127.0.0.1',
+        'port' => 5432,
+        'dbname' => 'postgres',
+    ],
+    'mysql.dbCache' => [
+        'deps' => [
+            'db' => 'mysql.db',
+        ],
+    ],
+    'pgsql.dbCache' => [
+        'deps' => [
+            'db' => 'pgsql.db',
+        ],
+    ],
+    'cache' => [
+        'driver' => 'fileCache',
+    ],
+    'bicache' => [
+        'providers' => [
             'master' => 'arrayCache',
             'slave' => 'fileCache',
-        )
-    ),
-    'response' => array(
-        'unitTest' => true
-    ),
-));
+        ],
+    ],
+    'response' => [
+        'unitTest' => true,
+    ],
+]);
 
 // Load configuration for CI
-foreach (array('TRAVIS', 'CODESHIP', 'GITHUB_ACTIONS') as $ci) {
+foreach (['TRAVIS', 'CODESHIP', 'GITHUB_ACTIONS'] as $ci) {
     if (getenv($ci)) {
         wei(__DIR__ . '/config/' . strtolower(strtr($ci, '_', '-')) . '.php');
     }

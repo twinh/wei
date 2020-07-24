@@ -30,7 +30,7 @@ class Regex extends BaseValidator
      * Returns whether the $input value is valid
      *
      * @param mixed $input
-     * @param null|string $pattern
+     * @param string|null $pattern
      * @return bool
      */
     public function __invoke($input, $pattern = null)

@@ -25,7 +25,7 @@ trait RetTrait
     /**
      * Return operation successful result
      *
-     * @param null|string|array $message
+     * @param string|array|null $message
      * @return array
      */
     public function suc($message = null)

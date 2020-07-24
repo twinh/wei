@@ -2,14 +2,19 @@
 
 namespace WeiTest\Validator;
 
-class TypeTest extends TestCase
+/**
+ * @internal
+ */
+final class TypeTest extends TestCase
 {
-    protected $inputTestOptions = array(
-        'type' => 'string'
-    );
+    protected $inputTestOptions = [
+        'type' => 'string',
+    ];
 
     /**
      * @dataProvider providerForType
+     * @param mixed $input
+     * @param mixed $type
      */
     public function testType($input, $type)
     {
@@ -18,6 +23,8 @@ class TypeTest extends TestCase
 
     /**
      * @dataProvider providerForNotType
+     * @param mixed $input
+     * @param mixed $type
      */
     public function testNotType($input, $type)
     {
@@ -33,9 +40,9 @@ class TypeTest extends TestCase
 
     public function testGetMessages()
     {
-        $type = $this->validate->createRuleValidator('type', array(
+        $type = $this->validate->createRuleValidator('type', [
             'typeMessage' => 'type message',
-        ));
+        ]);
 
         $type('string', 'float');
 
@@ -44,81 +51,81 @@ class TypeTest extends TestCase
 
     public function providerForType()
     {
-        $obj = new \stdClass;
+        $obj = new \stdClass();
         $res = $this->createResource();
 
-        return array(
+        return [
             // is_xxx
-            array(array(),  'array'),
-            array(true,     'bool'),
-            array(1.2,      'float'),
-            array(1,        'int'),
-            array(1,        'integer'),
-            array(null,     'null'),
-            array('1',      'numeric'),
-            array($obj,     'object'),
+            [[],  'array'],
+            [true,     'bool'],
+            [1.2,      'float'],
+            [1,        'int'],
+            [1,        'integer'],
+            [null,     'null'],
+            ['1',      'numeric'],
+            [$obj,     'object'],
             // FIXME failure on php 5.4.7 ?
             //array($res,     'resource'),
-            array(1,        'scalar'),
-            array(1.1,      'scalar'),
-            array('str',    'scalar'),
-            array(true,     'scalar'),
-            array('str',    'string'),
+            [1,        'scalar'],
+            [1.1,      'scalar'],
+            ['str',    'scalar'],
+            [true,     'scalar'],
+            ['str',    'string'],
             // ctype_xxx
-            array('abc',    'alnum'),
-            array('a2B',    'alnum'),
-            array('123',    'alnum'),
-            array('dXy',    'alpha'),
-            array('abc',    'alpha'),
-            array("\n\r\t", 'cntrl'),
-            array('10002',  'digit'),
-            array('arf12',  'graph'),
-            array('qiutoa', 'lower'),
-            array("A#@%",   'print'),
-            array('*&$()',  'punct'),
-            array("\n\r\t", 'space'),
-            array('LMNSDO', 'upper'),
-            array('10BC9',  'xdigit'),
+            ['abc',    'alnum'],
+            ['a2B',    'alnum'],
+            ['123',    'alnum'],
+            ['dXy',    'alpha'],
+            ['abc',    'alpha'],
+            ["\n\r\t", 'cntrl'],
+            ['10002',  'digit'],
+            ['arf12',  'graph'],
+            ['qiutoa', 'lower'],
+            ['A#@%',   'print'],
+            ['*&$()',  'punct'],
+            ["\n\r\t", 'space'],
+            ['LMNSDO', 'upper'],
+            ['10BC9',  'xdigit'],
             // object
-            array($obj,     'stdClass')
-        );
+            [$obj,     'stdClass'],
+        ];
     }
 
     public function providerForNotType()
     {
-        $obj = new \stdClass;
+        $obj = new \stdClass();
         $res = $this->createResource();
 
-        return array(
+        return [
             // is_xxx
-            array('1',      'array'),
-            array('true',   'bool'),
-            array('1.2',    'float'),
-            array('1',      'int'),
-            array('1',      'integer'),
-            array('null',   'null'),
-            array('1-2',    'numeric'),
-            array('1',      'object'),
-            array(1,        'resource'),
-            array(array(),  'scalar'),
-            array($obj,     'scalar'),
-            array($res,     'scalar'),
+            ['1',      'array'],
+            ['true',   'bool'],
+            ['1.2',    'float'],
+            ['1',      'int'],
+            ['1',      'integer'],
+            ['null',   'null'],
+            ['1-2',    'numeric'],
+            ['1',      'object'],
+            [1,        'resource'],
+            [[],  'scalar'],
+            [$obj,     'scalar'],
+            [$res,     'scalar'],
             // ctype_xxx
-            array('a bc',   'alnum'),
-            array('-213a',  'alnum'),
-            array('123',    'alpha'),
-            array('a bc',   'alpha'),
-            array('arf12',  'cntrl'),
-            array('182.20', 'digit'),
-            array('wsl!12', 'digit'),
-            array("\n\r\t", 'graph'),
-            array('aac123', 'lower'),
-            array('QASsdk', 'lower'),
-            array("sdf\n",  'print'),
-            array('!@ # $', 'punct'),
-            array("\narf1", 'space'),
-            array('LWC13',  'upper'),
-            array('AR1012', 'xdigit')
-        );
+            ['a bc',   'alnum'],
+            ['-213a',  'alnum'],
+            ['123',    'alpha'],
+            ['a bc',   'alpha'],
+            ['arf12',  'cntrl'],
+            ['182.20', 'digit'],
+            ['wsl!12', 'digit'],
+            ["\n\r\t", 'graph'],
+            ['aac123', 'lower'],
+            ['QASsdk', 'lower'],
+            ["sdf\n",  'print'],
+            ['!@ # $', 'punct'],
+            ["\narf1", 'space'],
+            ['LWC13',  'upper'],
+            ['AR1012', 'xdigit'],
+        ];
     }
 }

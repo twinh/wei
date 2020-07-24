@@ -7,7 +7,6 @@
  */
 
 namespace Wei {
-
     use ReflectionException;
 
     /**
@@ -32,7 +31,7 @@ namespace Wei {
          *
          * @var array
          */
-        protected $configs = array();
+        protected $configs = [];
 
         /**
          * The name of current application
@@ -55,7 +54,7 @@ namespace Wei {
          * @see http://www.php.net/manual/en/ini.php
          * @see http://www.php.net/manual/en/function.ini-set.php
          */
-        protected $inis = array();
+        protected $inis = [];
 
         /**
          * Whether enable class autoload or not
@@ -69,21 +68,21 @@ namespace Wei {
          *
          * @var array
          */
-        protected $autoloadMap = array();
+        protected $autoloadMap = [];
 
         /**
          * The service name to class name map
          *
          * @var array
          */
-        protected $aliases = array();
+        protected $aliases = [];
 
         /**
          * The service provider map
          *
          * @var array
          */
-        protected $providers = array();
+        protected $providers = [];
 
         /**
          * The import configuration
@@ -105,7 +104,7 @@ namespace Wei {
          * );
          * @var array
          */
-        protected $import = array();
+        protected $import = [];
 
         /**
          * The callback executes *before* service constructed
@@ -126,14 +125,14 @@ namespace Wei {
          *
          * @var array
          */
-        protected $preload = array();
+        protected $preload = [];
 
         /**
          * An array contains the instanced services
          *
          * @var Base[]
          */
-        protected $services = array();
+        protected $services = [];
 
         /**
          * Whether to check if the service method exists
@@ -154,7 +153,7 @@ namespace Wei {
          *
          * @param array $config
          */
-        public function __construct(array $config = array())
+        public function __construct(array $config = [])
         {
             // Set configurations for all services
             $this->setConfig($config);
@@ -171,13 +170,38 @@ namespace Wei {
         }
 
         /**
+         * Get a service object by the given name
+         *
+         * @param string $name The name of service
+         * @return Base
+         */
+        public function __get($name)
+        {
+            // The service has been conditionally cached in the `get` method,
+            // it should not call `__set` to cache the service here
+            return $this->get($name);
+        }
+
+        /**
+         * Add a service to the service container
+         *
+         * @param string $name The name of service
+         * @param object $service The service service
+         * @return $this
+         */
+        public function __set($name, $service)
+        {
+            return $this->set($name, $service);
+        }
+
+        /**
          * Get the service container instance
          *
          * @param array $config The array or file configuration
          * @return $this
          * @throws \InvalidArgumentException    When the configuration parameter is not array or file
          */
-        public static function getContainer($config = array())
+        public static function getContainer($config = [])
         {
             // Most of time, it's called after instanced and without any arguments
             if (!$config && static::$container) {
@@ -209,7 +233,7 @@ namespace Wei {
          *
          * @param Wei $container
          */
-        public static function setContainer(Wei $container = null)
+        public static function setContainer(self $container = null)
         {
             static::$container = $container;
         }
@@ -222,12 +246,12 @@ namespace Wei {
          */
         public function autoload($class)
         {
-            $class = strtr($class, array('_' => DIRECTORY_SEPARATOR, '\\' => DIRECTORY_SEPARATOR)) . '.php';
+            $class = strtr($class, ['_' => \DIRECTORY_SEPARATOR, '\\' => \DIRECTORY_SEPARATOR]) . '.php';
 
             foreach ($this->autoloadMap as $prefix => $dir) {
                 // Autoload class from relative path like PSR-4 when prefix starts with "\"
-                if (isset($prefix[0]) && $prefix[0] == '\\' && 0 === strpos($class, ltrim($prefix, '\\'))) {
-                    $file = $dir . DIRECTORY_SEPARATOR . substr($class, strlen($prefix));
+                if (isset($prefix[0]) && '\\' == $prefix[0] && 0 === strpos($class, ltrim($prefix, '\\'))) {
+                    $file = $dir . \DIRECTORY_SEPARATOR . substr($class, strlen($prefix));
                     if (file_exists($file)) {
                         require_once $file;
                         return true;
@@ -236,7 +260,7 @@ namespace Wei {
 
                 // Allow empty class prefix
                 if (!$prefix || 0 === strpos($class, $prefix)) {
-                    if (file_exists($file = $dir . DIRECTORY_SEPARATOR . $class)) {
+                    if (file_exists($file = $dir . \DIRECTORY_SEPARATOR . $class)) {
                         require_once $file;
                         return true;
                     }
@@ -247,100 +271,6 @@ namespace Wei {
         }
 
         /**
-         * Set service's configuration
-         *
-         * @param string|array $name
-         * @param mixed $value
-         * @return $this
-         * @svc
-         */
-        protected function setConfig($name, $value = null)
-        {
-            // Set array configurations
-            if (is_array($name)) {
-                foreach ($name as $key => $value) {
-                    $this->setConfig($key, $value);
-                }
-                return $this;
-            }
-
-            // Set one configuration
-            $names = explode(':', $name);
-            $first = $names[0];
-            $configs = &$this->configs;
-
-            foreach ($names as $name) {
-                if (!is_array($configs)) {
-                    $configs = array();
-                }
-                if (!isset($configs[$name])) {
-                    $configs[$name] = array();
-                }
-                $configs = &$configs[$name];
-            }
-
-            // Merge only first child node
-            if (is_array($configs) && is_array($value)) {
-                $configs = $value + $configs;
-            } else {
-                $configs = $value;
-            }
-
-            /**
-             * Automatically create dependence map when configuration key contains "."
-             *
-             * $this->configs = array(
-             *    'mysql.db' => array(),
-             * );
-             * =>
-             * $this->providers['mysqlDb'] = 'mysql.db';
-             */
-            if (false !== strpos($first, '.')) {
-                $parts = explode('.', $first, 2);
-                $serviceName = $parts[0] . ucfirst($parts[1]);
-                if (!isset($this->providers[$serviceName])) {
-                    $this->providers[$serviceName] = $first;
-                }
-            }
-
-            // Set options for existing service
-            if (isset($this->services[$first])) {
-                $this->services[$first]->setOption($value);
-            }
-
-            return $this;
-        }
-
-        /**
-         * Get services' configuration
-         *
-         * @param string $name The name of configuration
-         * @param mixed $default The default value if configuration not found
-         * @return mixed
-         * @svc
-         */
-        protected function getConfig($name = null, $default = null)
-        {
-            if (is_null($name)) {
-                return $this->configs;
-            }
-
-            if (false === strpos($name, ':')) {
-                return isset($this->configs[$name]) ? $this->configs[$name] : $default;
-            }
-
-            $configs = &$this->configs;
-            foreach (explode(':', $name) as $key) {
-                if (is_array($configs) && isset($configs[$key])) {
-                    $configs = &$configs[$key];
-                } else {
-                    return $default;
-                }
-            }
-            return $configs;
-        }
-
-        /**
          * Get a service and call its "__invoke" method
          *
          * @param string $name The name of the service
@@ -348,10 +278,10 @@ namespace Wei {
          * @param array $providers The service providers map
          * @return mixed
          */
-        public function invoke($name, array $args = array(), $providers = array())
+        public function invoke($name, array $args = [], $providers = [])
         {
             $service = $this->get($name, $providers);
-            return call_user_func_array(array($service, '__invoke'), $args);
+            return call_user_func_array([$service, '__invoke'], $args);
         }
 
         /**
@@ -363,7 +293,7 @@ namespace Wei {
          * @param bool $new Whether to create a new instance
          * @return Base
          */
-        public function get($name, array $options = array(), array $providers = array(), $new = false)
+        public function get($name, array $options = [], array $providers = [], $new = false)
         {
             // Resolve the service name in dependent configuration
             if (isset($providers[$name])) {
@@ -391,7 +321,7 @@ namespace Wei {
                 $this->beforeConstruct && call_user_func($this->beforeConstruct, $this, $full, $name);
 
                 // Load the service configuration and make sure "wei" option at first
-                $options = array('wei' => $this) + $options + (array) $this->getConfig($full);
+                $options = ['wei' => $this] + $options + (array) $this->getConfig($full);
 
                 $service = new $class($options);
                 if (!$new && (!method_exists($class, 'isCreateNewInstance') || !$class::isCreateNewInstance())) {
@@ -470,7 +400,7 @@ namespace Wei {
             } elseif (method_exists($service, $method)) {
                 return [$service, $method];
             }
-            return $service->$method;
+            return $service->{$method};
         }
 
         /**
@@ -502,7 +432,7 @@ namespace Wei {
          * @param array $providers The dependent configuration
          * @return Base The instanced service
          */
-        public function newInstance($name, array $options = array(), array $providers = array())
+        public function newInstance($name, array $options = [], array $providers = [])
         {
             return $this->wei->get($name, $options, $providers, true);
         }
@@ -599,7 +529,7 @@ namespace Wei {
             $this->autoload = (bool) $enable;
             call_user_func(
                 $enable ? 'spl_autoload_register' : 'spl_autoload_unregister',
-                array($this, 'autoload')
+                [$this, 'autoload']
             );
             return $this;
         }
@@ -668,31 +598,6 @@ namespace Wei {
         }
 
         /**
-         * Get a service object by the given name
-         *
-         * @param string $name The name of service
-         * @return Base
-         */
-        public function __get($name)
-        {
-            // The service has been conditionally cached in the `get` method,
-            // it should not call `__set` to cache the service here
-            return $this->get($name);
-        }
-
-        /**
-         * Add a service to the service container
-         *
-         * @param string $name The name of service
-         * @param object $service The service service
-         * @return $this
-         */
-        public function __set($name, $service)
-        {
-            return $this->set($name, $service);
-        }
-
-        /**
          * Import classes in the specified directory as services
          *
          * @param string $dir The directory to search class
@@ -713,7 +618,7 @@ namespace Wei {
                 $this->autoloadMap[$namespace] = dirname($dir);
             }
 
-            $files = glob($dir . '/*.php') ?: array();
+            $files = glob($dir . '/*.php') ?: [];
             foreach ($files as $file) {
                 $class = substr(basename($file), 0, -4);
                 $name = $format ? sprintf($format, $class) : $class;
@@ -743,59 +648,6 @@ namespace Wei {
         public function getNamespace()
         {
             return $this->namespace;
-        }
-
-        /**
-         * Set import services
-         *
-         * @param array $import
-         * @return $this
-         */
-        protected function setImport(array $import = array())
-        {
-            $this->import = $import + $this->import;
-            foreach ($import as $option) {
-                $option += array(
-                    'dir' => null,
-                    'namespace' => null,
-                    'format' => null,
-                    'autoload' => false,
-                );
-                $this->import($option['dir'], $option['namespace'], $option['format'], $option['autoload']);
-            }
-        }
-
-        /**
-         * Merge the dependence map
-         *
-         * @param array $providers
-         */
-        protected function setProviders(array $providers)
-        {
-            $this->providers = $providers + $this->providers;
-        }
-
-        /**
-         * Instance preload services
-         *
-         * @param array $preload
-         */
-        protected function setPreload(array $preload)
-        {
-            $this->preload = array_merge($this->preload, $preload);
-            foreach ($preload as $service) {
-                $this->set($service, $this->get($service));
-            }
-        }
-
-        /**
-         * Merge service objects
-         *
-         * @param array $services
-         */
-        protected function setServices(array $services)
-        {
-            $this->services = $services + $this->services;
         }
 
         /**
@@ -841,7 +693,7 @@ namespace Wei {
                 return $exists = false;
             }
 
-            return $exists = strpos($ref->getDocComment(), "* @svc\n") !== false;
+            return $exists = false !== strpos($ref->getDocComment(), "* @svc\n");
         }
 
         /**
@@ -855,6 +707,153 @@ namespace Wei {
             $parts = explode('\\', $class);
             return lcfirst(end($parts));
         }
+
+        /**
+         * Set service's configuration
+         *
+         * @param string|array $name
+         * @param mixed $value
+         * @return $this
+         * @svc
+         */
+        protected function setConfig($name, $value = null)
+        {
+            // Set array configurations
+            if (is_array($name)) {
+                foreach ($name as $key => $value) {
+                    $this->setConfig($key, $value);
+                }
+                return $this;
+            }
+
+            // Set one configuration
+            $names = explode(':', $name);
+            $first = $names[0];
+            $configs = &$this->configs;
+
+            foreach ($names as $name) {
+                if (!is_array($configs)) {
+                    $configs = [];
+                }
+                if (!isset($configs[$name])) {
+                    $configs[$name] = [];
+                }
+                $configs = &$configs[$name];
+            }
+
+            // Merge only first child node
+            if (is_array($configs) && is_array($value)) {
+                $configs = $value + $configs;
+            } else {
+                $configs = $value;
+            }
+
+            /**
+             * Automatically create dependence map when configuration key contains "."
+             *
+             * $this->configs = array(
+             *    'mysql.db' => array(),
+             * );
+             * =>
+             * $this->providers['mysqlDb'] = 'mysql.db';
+             */
+            if (false !== strpos($first, '.')) {
+                $parts = explode('.', $first, 2);
+                $serviceName = $parts[0] . ucfirst($parts[1]);
+                if (!isset($this->providers[$serviceName])) {
+                    $this->providers[$serviceName] = $first;
+                }
+            }
+
+            // Set options for existing service
+            if (isset($this->services[$first])) {
+                $this->services[$first]->setOption($value);
+            }
+
+            return $this;
+        }
+
+        /**
+         * Get services' configuration
+         *
+         * @param string $name The name of configuration
+         * @param mixed $default The default value if configuration not found
+         * @return mixed
+         * @svc
+         */
+        protected function getConfig($name = null, $default = null)
+        {
+            if (null === $name) {
+                return $this->configs;
+            }
+
+            if (false === strpos($name, ':')) {
+                return isset($this->configs[$name]) ? $this->configs[$name] : $default;
+            }
+
+            $configs = &$this->configs;
+            foreach (explode(':', $name) as $key) {
+                if (is_array($configs) && isset($configs[$key])) {
+                    $configs = &$configs[$key];
+                } else {
+                    return $default;
+                }
+            }
+            return $configs;
+        }
+
+        /**
+         * Set import services
+         *
+         * @param array $import
+         * @return $this
+         */
+        protected function setImport(array $import = [])
+        {
+            $this->import = $import + $this->import;
+            foreach ($import as $option) {
+                $option += [
+                    'dir' => null,
+                    'namespace' => null,
+                    'format' => null,
+                    'autoload' => false,
+                ];
+                $this->import($option['dir'], $option['namespace'], $option['format'], $option['autoload']);
+            }
+        }
+
+        /**
+         * Merge the dependence map
+         *
+         * @param array $providers
+         */
+        protected function setProviders(array $providers)
+        {
+            $this->providers = $providers + $this->providers;
+        }
+
+        /**
+         * Instance preload services
+         *
+         * @param array $preload
+         */
+        protected function setPreload(array $preload)
+        {
+            $this->preload = array_merge($this->preload, $preload);
+            foreach ($preload as $service) {
+                $this->set($service, $this->get($service));
+            }
+        }
+
+        /**
+         * Merge service objects
+         *
+         * @param array $services
+         */
+        protected function setServices(array $services)
+        {
+            $this->services = $services + $this->services;
+        }
     }
 }
 
@@ -863,7 +862,6 @@ namespace Wei {
  */
 
 namespace {
-
     /**
      * Get the service container instance
      *
@@ -871,6 +869,6 @@ namespace {
      */
     function wei()
     {
-        return call_user_func_array(array('Wei\Wei', 'getContainer'), func_get_args());
+        return call_user_func_array(['Wei\Wei', 'getContainer'], func_get_args());
     }
 }

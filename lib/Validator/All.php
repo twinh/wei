@@ -35,14 +35,14 @@ class All extends BaseValidator
     /**
      * @var array
      */
-    protected $rules = array();
+    protected $rules = [];
 
     /**
      * The invalid validators
      *
      * @var array
      */
-    protected $validators = array();
+    protected $validators = [];
 
     /**
      * Check if all of the element in the input is valid by all specified rules
@@ -51,11 +51,41 @@ class All extends BaseValidator
      * @param array $rules The validation rules
      * @return bool
      */
-    public function __invoke($input, array $rules = array())
+    public function __invoke($input, array $rules = [])
     {
         $rules && $this->storeOption('rules', $rules);
 
         return $this->isValid($input);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMessages($name = null)
+    {
+        $this->loadTranslationMessages();
+        $translator = $this->t;
+
+        // Firstly, translates the item name (%name%'s %index% item)
+        // Secondly, translates "%name%" in the item name
+        $name = $translator($translator($this->itemName), [
+            '%name%' => $translator($name ?: $this->name),
+        ]);
+
+        $messages = [];
+        foreach ($this->validators as $index => $validators) {
+            /** @var $validator BaseValidator */
+            foreach ($validators as $rule => $validator) {
+                // Lastly, translates "index" in the item name
+                $validator->setName($translator($name, [
+                    '%index%' => $index,
+                ]));
+                foreach ($validator->getMessages() as $option => $message) {
+                    $messages[$rule . '.' . $option . '.' . $index] = $message;
+                }
+            }
+        }
+        return $messages;
     }
 
     /**
@@ -76,7 +106,7 @@ class All extends BaseValidator
                     $this->validators[$index][$rule] = $validator;
                 }
             }
-            $index++;
+            ++$index;
         }
 
         // Adds the placeholder message
@@ -85,35 +115,5 @@ class All extends BaseValidator
             return false;
         }
         return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMessages($name = null)
-    {
-        $this->loadTranslationMessages();
-        $translator = $this->t;
-
-        // Firstly, translates the item name (%name%'s %index% item)
-        // Secondly, translates "%name%" in the item name
-        $name = $translator($translator($this->itemName), array(
-            '%name%' => $translator($name ?: $this->name)
-        ));
-
-        $messages = array();
-        foreach ($this->validators as $index => $validators) {
-            /** @var $validator BaseValidator */
-            foreach ($validators as $rule => $validator) {
-                // Lastly, translates "index" in the item name
-                $validator->setName($translator($name, array(
-                    '%index%' => $index
-                )));
-                foreach ($validator->getMessages() as $option => $message) {
-                    $messages[$rule . '.' . $option . '.' . $index] = $message;
-                }
-            }
-        }
-        return $messages;
     }
 }

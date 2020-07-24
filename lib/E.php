@@ -28,12 +28,12 @@ class E extends Base
      *
      * @var array
      */
-    protected static $htmlNamedEntityMap = array(
+    protected static $htmlNamedEntityMap = [
         34 => 'quot',         // quotation mark
         38 => 'amp',          // ampersand
         60 => 'lt',           // less-than sign
         62 => 'gt',           // greater-than sign
-    );
+    ];
 
     /**
      * Current encoding for escaping. If not UTF-8, we convert strings from this encoding
@@ -79,7 +79,7 @@ class E extends Base
      *
      * @var array
      */
-    protected $supportedEncodings = array(
+    protected $supportedEncodings = [
         'iso-8859-1',   'iso8859-1',    'iso-8859-5',   'iso8859-5',
         'iso-8859-15',  'iso8859-15',   'utf-8',        'cp866',
         'ibm866',       '866',          'cp1251',       'windows-1251',
@@ -88,8 +88,8 @@ class E extends Base
         'big5',         '950',          'gb2312',       '936',
         'big5-hkscs',   'shift_jis',    'sjis',         'sjis-win',
         'cp932',        '932',          'euc-jp',       'eucjp',
-        'eucjp-win',    'macroman'
-    );
+        'eucjp-win',    'macroman',
+    ];
 
     /**
      * Constructor: Single parameter allows setting of global encoding for use by
@@ -99,24 +99,24 @@ class E extends Base
      * @param array $options
      * @throws \InvalidArgumentException
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         parent::__construct($options);
 
         $encoding = $this->encoding;
 
-        if ($encoding !== null) {
+        if (null !== $encoding) {
             $encoding = (string) $encoding;
-            if ($encoding === '') {
+            if ('' === $encoding) {
                 throw new \InvalidArgumentException(
-                    get_class($this) . ' constructor parameter does not allow a blank value'
+                    static::class . ' constructor parameter does not allow a blank value'
                 );
             }
 
             $encoding = strtolower($encoding);
-            if (!in_array($encoding, $this->supportedEncodings)) {
+            if (!in_array($encoding, $this->supportedEncodings, true)) {
                 throw new \InvalidArgumentException(
-                    'Value of \'' . $encoding . '\' passed to ' . get_class($this)
+                    'Value of \'' . $encoding . '\' passed to ' . static::class
                     . ' constructor parameter is invalid. Provide an encoding supported by htmlspecialchars()'
                 );
             }
@@ -125,13 +125,29 @@ class E extends Base
         }
 
         if (defined('ENT_SUBSTITUTE')) {
-            $this->htmlSpecialCharsFlags|= ENT_SUBSTITUTE;
+            $this->htmlSpecialCharsFlags |= ENT_SUBSTITUTE;
         }
 
         // set matcher callbacks
-        $this->htmlAttrMatcher = array($this, 'htmlAttrMatcher');
-        $this->jsMatcher       = array($this, 'jsMatcher');
-        $this->cssMatcher      = array($this, 'cssMatcher');
+        $this->htmlAttrMatcher = [$this, 'htmlAttrMatcher'];
+        $this->jsMatcher = [$this, 'jsMatcher'];
+        $this->cssMatcher = [$this, 'cssMatcher'];
+    }
+
+    /**
+     * Escapes a string by specified type for secure output
+     *
+     * @param string $string
+     * @param string $type
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function __invoke($string, $type = 'html')
+    {
+        if (in_array($type, ['html', 'js', 'css', 'attr', 'url'], true)) {
+            return $this->{$type}($string);
+        }
+        throw new \InvalidArgumentException(sprintf('Unsupported escape type "%s"', $type));
     }
 
     /**
@@ -176,7 +192,7 @@ class E extends Base
         }
 
         $string = $this->toUtf8($string);
-        if ($string === '' || ctype_digit($string)) {
+        if ('' === $string || ctype_digit($string)) {
             return $string;
         }
 
@@ -203,7 +219,7 @@ class E extends Base
         }
 
         $string = $this->toUtf8($string);
-        if ($string === '' || ctype_digit($string)) {
+        if ('' === $string || ctype_digit($string)) {
             return $string;
         }
 
@@ -242,7 +258,7 @@ class E extends Base
         }
 
         $string = $this->toUtf8($string);
-        if ($string === '' || ctype_digit($string)) {
+        if ('' === $string || ctype_digit($string)) {
             return $string;
         }
 
@@ -266,7 +282,7 @@ class E extends Base
          * The following replaces characters undefined in HTML with the
          * hex entity for the Unicode replacement character.
          */
-        if (($ord <= 0x1f && $chr != "\t" && $chr != "\n" && $chr != "\r")
+        if (($ord <= 0x1f && "\t" != $chr && "\n" != $chr && "\r" != $chr)
             || ($ord >= 0x7f && $ord <= 0x9f)
         ) {
             return '&#xFFFD;';
@@ -306,7 +322,7 @@ class E extends Base
     protected function jsMatcher($matches)
     {
         $chr = $matches[0];
-        if (strlen($chr) == 1) {
+        if (1 == strlen($chr)) {
             return sprintf('\\x%02X', ord($chr));
         }
         $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
@@ -323,7 +339,7 @@ class E extends Base
     protected function cssMatcher($matches)
     {
         $chr = $matches[0];
-        if (strlen($chr) == 1) {
+        if (1 == strlen($chr)) {
             $ord = ord($chr);
         } else {
             $chr = $this->convertEncoding($chr, 'UTF-16BE', 'UTF-8');
@@ -342,7 +358,7 @@ class E extends Base
      */
     protected function toUtf8($string)
     {
-        if ($this->getEncoding() === 'utf-8') {
+        if ('utf-8' === $this->getEncoding()) {
             $result = $string;
         } else {
             $result = $this->convertEncoding($string, 'UTF-8', $this->getEncoding());
@@ -365,7 +381,7 @@ class E extends Base
      */
     protected function fromUtf8($string)
     {
-        if ($this->getEncoding() === 'utf-8') {
+        if ('utf-8' === $this->getEncoding()) {
             return $string;
         }
 
@@ -380,7 +396,7 @@ class E extends Base
      */
     protected function isUtf8($string)
     {
-        return ($string === '' || preg_match('/^./su', $string));
+        return '' === $string || preg_match('/^./su', $string);
     }
 
     /**
@@ -402,31 +418,15 @@ class E extends Base
             $result = mb_convert_encoding($string, $to, $from);
         } else {
             throw new \RuntimeException(
-                get_class($this)
+                static::class
                 . ' requires either the iconv or mbstring extension to be installed'
                 . ' when escaping for non UTF-8 strings.'
             );
         }
 
-        if ($result === false) {
+        if (false === $result) {
             return ''; // return non-fatal blank string on encoding errors from users
         }
         return $result;
-    }
-
-    /**
-     * Escapes a string by specified type for secure output
-     *
-     * @param string $string
-     * @param string $type
-     * @return string
-     * @throws \InvalidArgumentException
-     */
-    public function __invoke($string, $type = 'html')
-    {
-        if (in_array($type, array('html', 'js', 'css', 'attr', 'url'))) {
-            return $this->$type($string);
-        }
-        throw new \InvalidArgumentException(sprintf('Unsupported escape type "%s"', $type));
     }
 }

@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class EmailTest extends TestCase
+/**
+ * @internal
+ */
+final class EmailTest extends TestCase
 {
     /**
      * @dataProvider providerForEmail
+     * @param mixed $input
      */
     public function testEmail($input)
     {
@@ -14,6 +18,7 @@ class EmailTest extends TestCase
 
     /**
      * @dataProvider providerForNotEmail
+     * @param mixed $input
      */
     public function testNotEmail($input)
     {
@@ -22,21 +27,21 @@ class EmailTest extends TestCase
 
     public function providerForEmail()
     {
-        return array(
-            array('abc@def.com'),
-            array('abc@def.com.cn'),
-            array('a@a.c'),
-            array('a_b@c.com'),
-            array('_a@b.com'),
-            array('_@a.com'),
-        );
+        return [
+            ['abc@def.com'],
+            ['abc@def.com.cn'],
+            ['a@a.c'],
+            ['a_b@c.com'],
+            ['_a@b.com'],
+            ['_@a.com'],
+        ];
     }
 
     public function providerForNotEmail()
     {
-        return array(
-            array('not email.com'),
-            array('@a.com')
-        );
+        return [
+            ['not email.com'],
+            ['@a.com'],
+        ];
     }
 }

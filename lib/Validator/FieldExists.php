@@ -26,7 +26,7 @@ class FieldExists extends BaseValidator
      *
      * @var array
      */
-    protected $fields = array();
+    protected $fields = [];
 
     /**
      * How many fields should exist
@@ -64,21 +64,21 @@ class FieldExists extends BaseValidator
         $this->count = 0;
         foreach ($this->fields as $field) {
             if ($this->validator->getFieldData($field)) {
-                $this->count++;
+                ++$this->count;
             }
         }
 
-        if (!is_null($this->length) && $this->count != $this->length) {
+        if (null !== $this->length && $this->count != $this->length) {
             $this->addError('length');
             return false;
         }
 
-        if (!is_null($this->min) && $this->count < $this->min) {
+        if (null !== $this->min && $this->count < $this->min) {
             $this->addError('tooFew');
             return false;
         }
 
-        if (!is_null($this->max) && $this->count > $this->max) {
+        if (null !== $this->max && $this->count > $this->max) {
             $this->addError('tooMany');
             return false;
         }

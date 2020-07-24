@@ -2,13 +2,13 @@
 
 require '../../../lib/Wei.php';
 
-$wei        = wei();
-$request    = $wei->request;
-$dataType   = $request->getQuery('type');
-$test       = $request->getQuery('test');
+$wei = wei();
+$request = $wei->request;
+$dataType = $request->getQuery('type');
+$test = $request->getQuery('test');
 $statusCode = $request->getQuery('code', 200);
-$wait       = (float)$request->getQuery('wait');
-$result     = null;
+$wait = (float) $request->getQuery('wait');
+$result = null;
 
 switch ($test) {
     case 'headers':
@@ -17,7 +17,7 @@ switch ($test) {
         break;
 
     case 'post':
-        $result = json_encode($_POST + array('method' => $request->getMethod()) + array('files' => $_FILES));
+        $result = json_encode($_POST + ['method' => $request->getMethod()] + ['files' => $_FILES]);
         break;
 
     case 'user-agent':
@@ -40,10 +40,10 @@ switch ($test) {
         break;
 
     case 'methods':
-        $result = array(
+        $result = [
             'method' => $request->getMethod(),
-            'data' => array()
-        );
+            'data' => [],
+        ];
         parse_str($request->getContent(), $result['data']);
         $result = json_encode($result);
         break;
@@ -55,25 +55,25 @@ switch ($test) {
     default:
         switch ($dataType) {
             case 'json':
-                $result = json_encode(array(
+                $result = json_encode([
                     'code' => 0,
                     'message' => 'success',
-                    'method' => $request->getMethod()
-                ));
+                    'method' => $request->getMethod(),
+                ]);
                 break;
 
             case 'query':
-                $result = http_build_query(array(
+                $result = http_build_query([
                     'code' => 0,
-                    'message' => 'success'
-                ));
+                    'message' => 'success',
+                ]);
                 break;
 
             case 'serialize':
-                $result = serialize(array(
+                $result = serialize([
                     'code' => 0,
-                    'message' => 'success'
-                ));
+                    'message' => 'success',
+                ]);
                 break;
 
             case 'xml':

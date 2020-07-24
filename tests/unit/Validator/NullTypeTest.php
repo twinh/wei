@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class NullTypeTest extends TestCase
+/**
+ * @internal
+ */
+final class NullTypeTest extends TestCase
 {
     /**
      * @dataProvider providerForNull
+     * @param mixed $input
      */
     public function testNull($input)
     {
@@ -14,6 +18,7 @@ class NullTypeTest extends TestCase
 
     /**
      * @dataProvider providerForNotNull
+     * @param mixed $input
      */
     public function testNotNull($input)
     {
@@ -22,20 +27,20 @@ class NullTypeTest extends TestCase
 
     public function providerForNull()
     {
-        return array(
-            array(null),
-        );
+        return [
+            [null],
+        ];
     }
 
     public function providerForNotNull()
     {
-        return array(
-            array(''),
-            array(false),
-            array(0),
-            array(0.0),
-            array(array()),
-            array('0')
-        );
+        return [
+            [''],
+            [false],
+            [0],
+            [0.0],
+            [[]],
+            ['0'],
+        ];
     }
 }

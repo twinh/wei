@@ -2,10 +2,16 @@
 
 namespace WeiTest\Validator;
 
-class CharLengthTest extends TestCase
+/**
+ * @internal
+ */
+final class CharLengthTest extends TestCase
 {
     /**
      * @dataProvider providerForLength
+     * @param mixed $input
+     * @param mixed $option1
+     * @param mixed $option2
      */
     public function testLength($input, $option1, $option2)
     {
@@ -14,6 +20,9 @@ class CharLengthTest extends TestCase
 
     /**
      * @dataProvider providerForNotLength
+     * @param mixed $input
+     * @param mixed $option1
+     * @param mixed $option2
      */
     public function testNotLength($input, $option1, $option2)
     {
@@ -22,6 +31,8 @@ class CharLengthTest extends TestCase
 
     /**
      * @dataProvider providerForSpecifiedLength
+     * @param mixed $input
+     * @param mixed $length
      */
     public function testSpecifiedLength($input, $length)
     {
@@ -29,8 +40,9 @@ class CharLengthTest extends TestCase
     }
 
     /**
-     *
      * @dataProvider providerForSpecifiedLengthNotPass
+     * @param mixed $input
+     * @param mixed $length
      */
     public function testSpecifiedLengthNotPass($input, $length)
     {
@@ -39,31 +51,31 @@ class CharLengthTest extends TestCase
 
     public function providerForSpecifiedLength()
     {
-        return array(
-            array('i♥u4', 4),
-        );
+        return [
+            ['i♥u4', 4],
+        ];
     }
 
     public function providerForSpecifiedLengthNotPass()
     {
-        return array(
-            array('i♥u4', 5),
-        );
+        return [
+            ['i♥u4', 5],
+        ];
     }
 
     public function providerForLength()
     {
-        return array(
-            array('i♥u4', 0, 4),
-            array('i♥u4', 2, 5),
-        );
+        return [
+            ['i♥u4', 0, 4],
+            ['i♥u4', 2, 5],
+        ];
     }
 
     public function providerForNotLength()
     {
-        return array(
-            array('i♥u4', 5, 6),
-            array('i♥u4', -2, -1),
-        );
+        return [
+            ['i♥u4', 5, 6],
+            ['i♥u4', -2, -1],
+        ];
     }
 }

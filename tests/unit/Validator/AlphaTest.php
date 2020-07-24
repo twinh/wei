@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class AlphaTest extends TestCase
+/**
+ * @internal
+ */
+final class AlphaTest extends TestCase
 {
     /**
      * @dataProvider providerForAlpha
+     * @param mixed $input
      */
     public function testAlpha($input)
     {
@@ -14,6 +18,7 @@ class AlphaTest extends TestCase
 
     /**
      * @dataProvider providerForNotAlpha
+     * @param mixed $input
      */
     public function testNotAlpha($input)
     {
@@ -22,21 +27,21 @@ class AlphaTest extends TestCase
 
     public function providerForAlpha()
     {
-        return array(
-            array('abcedfg'),
-            array('aBcDeFg'),
-        );
+        return [
+            ['abcedfg'],
+            ['aBcDeFg'],
+        ];
     }
 
     public function providerForNotAlpha()
     {
-        return array(
-            array('0'),
-            array(0),
-            array(0.0),
-            array('abcdefg1'),
-            array('a bcdefg'),
-            array('123'),
-        );
+        return [
+            ['0'],
+            [0],
+            [0.0],
+            ['abcdefg1'],
+            ['a bcdefg'],
+            ['123'],
+        ];
     }
 }

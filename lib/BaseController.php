@@ -23,7 +23,7 @@ abstract class BaseController extends Base
      *
      * @var array
      */
-    protected $middleware = array();
+    protected $middleware = [];
 
     /**
      * Register a middleware with specified options
@@ -32,7 +32,7 @@ abstract class BaseController extends Base
      * @param array $options
      * @return $this
      */
-    public function middleware($name, array $options = array())
+    public function middleware($name, array $options = [])
     {
         $this->middleware[$name] = $options;
         return $this;
@@ -46,7 +46,6 @@ abstract class BaseController extends Base
      */
     public function before($req, $res)
     {
-
     }
 
     /**
@@ -57,6 +56,5 @@ abstract class BaseController extends Base
      */
     public function after($req, $res)
     {
-
     }
 }

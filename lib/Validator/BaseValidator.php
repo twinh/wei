@@ -64,7 +64,7 @@ abstract class BaseValidator extends Base
      *
      * @var array
      */
-    protected $errors = array();
+    protected $errors = [];
 
     /**
      * The validate wei, available when this rule validator is invoked from validate wei
@@ -79,7 +79,7 @@ abstract class BaseValidator extends Base
      * @var array
      * @internal
      */
-    protected $backup = array();
+    protected $backup = [];
 
     /**
      * The array to store previous and current called parameters from __invoke
@@ -87,7 +87,7 @@ abstract class BaseValidator extends Base
      * @var array
      * @internal
      */
-    protected $store = array(array());
+    protected $store = [[]];
 
     /**
      * Validate the input value
@@ -111,14 +111,6 @@ abstract class BaseValidator extends Base
     }
 
     /**
-     * Validate the input value (ignore the $negative property)
-     *
-     * @param mixed $input The input to be validated
-     * @return boolean
-     */
-    abstract protected function doValidate($input);
-
-    /**
      * Returns the error messages
      *
      * @param string $name The name display in error message
@@ -132,10 +124,10 @@ abstract class BaseValidator extends Base
 
         $this->loadTranslationMessages();
 
-        $messages = array();
+        $messages = [];
         foreach ($this->errors as $optionName => $message) {
             preg_match_all('/\%(.+?)\%/', $message, $matches);
-            $parameters = array();
+            $parameters = [];
             foreach ($matches[1] as $match) {
                 if ('name' == $match) {
                     $parameters['%name%'] = $this->t($name);
@@ -143,8 +135,8 @@ abstract class BaseValidator extends Base
                     if (!property_exists($this, $match)) {
                         throw new \UnexpectedValueException(sprintf('Unknown parameter "%%%s%%" in message "%s"', $match, $message));
                     }
-                    $parameters['%' . $match . '%'] = is_array($this->$match) ?
-                        implode(', ', $this->$match) : $this->$match;
+                    $parameters['%' . $match . '%'] = is_array($this->{$match}) ?
+                        implode(', ', $this->{$match}) : $this->{$match};
                 }
             }
             $messages[$optionName] = $this->t($message, $parameters);
@@ -233,6 +225,14 @@ abstract class BaseValidator extends Base
     }
 
     /**
+     * Validate the input value (ignore the $negative property)
+     *
+     * @param mixed $input The input to be validated
+     * @return bool
+     */
+    abstract protected function doValidate($input);
+
+    /**
      * Adds error definition
      *
      * @param string $name The name of error
@@ -259,7 +259,7 @@ abstract class BaseValidator extends Base
      */
     protected function isString($input)
     {
-        return is_scalar($input) || is_null($input) || (is_object($input) && method_exists($input, '__toString'));
+        return is_scalar($input) || null === $input || (is_object($input) && method_exists($input, '__toString'));
     }
 
     /**
@@ -281,7 +281,7 @@ abstract class BaseValidator extends Base
 
         if (property_exists($this, $name)) {
             if (!array_key_exists($name, $this->backup)) {
-                $this->backup[$name] = $this->$name;
+                $this->backup[$name] = $this->{$name};
             }
             $this->store[count($this->store) - 1][$name] = $value;
         }
@@ -295,17 +295,17 @@ abstract class BaseValidator extends Base
      */
     protected function reset()
     {
-        $this->errors = array();
+        $this->errors = [];
 
         if (count($this->store) >= 2) {
             $last = end($this->store);
             foreach ($this->backup as $name => $value) {
                 if (!array_key_exists($name, $last)) {
-                    $this->$name = $value;
+                    $this->{$name} = $value;
                 }
             }
             array_shift($this->store);
         }
-        $this->store[] = array();
+        $this->store[] = [];
     }
 }

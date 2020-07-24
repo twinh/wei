@@ -2,7 +2,7 @@
 
 namespace WeiTest;
 
-class TestCase extends \PHPUnit\Framework\TestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var \Wei\Base
@@ -23,25 +23,33 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     protected $serviceName;
 
-    public function __construct($name = null, array $data = array(), $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
         $this->wei = wei();
     }
 
     /**
-     * Get the wei name
+     * Invoke the service by the given name
      *
-     * @return string
+     * @param string $name The name of wei
+     * @param array $args The arguments for wei's __invoke method
+     * @return mixed
      */
-    protected function getServiceName()
+    public function __call($name, $args)
     {
-        if (empty($this->serviceName)) {
-            $names = explode('\\', get_class($this));
-            $class = array_pop($names);
-            $this->serviceName = substr($class, 0, -4);
-        }
-        return $this->serviceName;
+        return call_user_func_array($this->{$name}, $args);
+    }
+
+    /**
+     * Get the service object by the given name
+     *
+     * @param string $name The name of wei
+     * @return \Wei\Base
+     */
+    public function __get($name)
+    {
+        return $this->wei->get($name);
     }
 
     /**
@@ -91,63 +99,16 @@ class TestCase extends \PHPUnit\Framework\TestCase
 
             // Remove all service instanced by current test object
             if ($property instanceof \Wei\Base) {
-                unset($this->$name);
+                unset($this->{$name});
                 $wei->remove($name);
             }
         }
 
-        unset($this->object);
+        $this->object = null;
 
         if (isset($wei->{$name})) {
             unset($wei->{$name});
         }
-    }
-
-    /**
-     * Invoke the service by the given name
-     *
-     * @param string $name The name of wei
-     * @param array $args The arguments for wei's __invoke method
-     * @return mixed
-     */
-    public function __call($name, $args)
-    {
-        return call_user_func_array($this->$name, $args);
-    }
-
-    /**
-     * Get the service object by the given name
-     *
-     * @param string $name The name of wei
-     * @return \Wei\Base
-     */
-    public function __get($name)
-    {
-        return $this->wei->get($name);
-    }
-
-    /**
-     * Asserts that an array is contains another array
-     *
-     * @param array $subset
-     * @param array $parent
-     * @param string $message
-     * @return void
-     */
-    protected function assertIsSubset($subset, $parent, $message = '')
-    {
-        if (!(is_array($parent) && $subset)) {
-            $this->assertTrue(false, $message);
-            return;
-        }
-
-        foreach ($subset as $item) {
-            if (!in_array($item, $parent)) {
-                $this->assertTrue(false, $message);
-            }
-        }
-
-        $this->assertTrue(true);
     }
 
     public function assertArrayBehaviour($arr)
@@ -161,13 +122,13 @@ class TestCase extends \PHPUnit\Framework\TestCase
         try {
             $arr['b'];
         } catch (\Exception $e) {
-            if ($e->getMessage() == 'Undefined index: b') {
+            if ('Undefined index: b' == $e->getMessage()) {
                 $hasException = true;
             } else {
                 throw $e;
             }
         }
-        if (gettype($arr) == 'array') {
+        if ('array' == gettype($arr)) {
             $this->assertTrue($hasException, 'Access array\'s undefined index would cause error');
         } else {
             $this->assertFalse($hasException, 'Access object\'s undefined index won\'t cause error');
@@ -176,7 +137,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $this->assertFalse(isset($arr['b']), 'Access undefined index won\'t create key');
 
         // Behaviour 3
-        $arr['c'] = array();
+        $arr['c'] = [];
         $arr['c']['d'] = 'e';
         $this->assertEquals('e', $arr['c']['d'], 'Allow to create next level array');
 
@@ -194,17 +155,6 @@ class TestCase extends \PHPUnit\Framework\TestCase
             $origArr = $arr;
         }
         $this->assertArrayHasKey('d', $origArr, 'Call array_key_exists returns true even if value is null');
-    }
-
-    /**
-     * @param string $class
-     * @param string $message
-     * @deprecated
-     */
-    protected function setExpectedException($class, $message = null)
-    {
-        $this->expectException($class);
-        $message && $this->expectExceptionMessage($message);
     }
 
     public function assertRetSuc(array $ret, $message = null, $assertMessage = null)
@@ -235,6 +185,56 @@ class TestCase extends \PHPUnit\Framework\TestCase
     {
         $array = array_intersect_key($array, array_flip(array_keys($subset)));
         parent::assertEquals($subset, $array, $message);
+    }
+
+    /**
+     * Get the wei name
+     *
+     * @return string
+     */
+    protected function getServiceName()
+    {
+        if (empty($this->serviceName)) {
+            $names = explode('\\', static::class);
+            $class = array_pop($names);
+            $this->serviceName = substr($class, 0, -4);
+        }
+        return $this->serviceName;
+    }
+
+    /**
+     * Asserts that an array is contains another array
+     *
+     * @param array $subset
+     * @param array $parent
+     * @param string $message
+     * @return void
+     */
+    protected function assertIsSubset($subset, $parent, $message = '')
+    {
+        if (!(is_array($parent) && $subset)) {
+            $this->assertTrue(false, $message);
+            return;
+        }
+
+        foreach ($subset as $item) {
+            if (!in_array($item, $parent, true)) {
+                $this->assertTrue(false, $message);
+            }
+        }
+
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @param string $class
+     * @param string $message
+     * @deprecated
+     */
+    protected function setExpectedException($class, $message = null)
+    {
+        $this->expectException($class);
+        $message && $this->expectExceptionMessage($message);
     }
 
     protected function buildRetMessage($ret, $assertMessage = null)

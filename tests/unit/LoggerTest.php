@@ -4,8 +4,10 @@ namespace WeiTest;
 
 /**
  * @property \Wei\Logger $logger
+ *
+ * @internal
  */
-class LoggerTest extends TestCase
+final class LoggerTest extends TestCase
 {
     protected function tearDown(): void
     {
@@ -35,24 +37,24 @@ class LoggerTest extends TestCase
 
     public function testGetFile()
     {
-        $logger1 = new \Wei\Logger(array(
+        $logger1 = new \Wei\Logger([
             'wei' => $this->wei,
             'fileSize' => 1,
-        ));
+        ]);
 
         $logger1->debug(__METHOD__);
 
-        $logger2 = new \Wei\Logger(array(
+        $logger2 = new \Wei\Logger([
             'wei' => $this->wei,
             'fileSize' => 1,
-        ));
+        ]);
 
         $logger2->debug(__METHOD__);
 
-        $logger3 = new \Wei\Logger(array(
+        $logger3 = new \Wei\Logger([
             'wei' => $this->wei,
             'fileSize' => 1,
-        ));
+        ]);
 
         $logger3->debug(__METHOD__);
 
@@ -69,26 +71,26 @@ class LoggerTest extends TestCase
 
         foreach ($logger->getOption('levels') as $level => $p) {
             $uid = uniqid();
-            $logger->$level($uid);
+            $logger->{$level}($uid);
             $this->assertStringContainsString($uid, file_get_contents($file));
         }
     }
 
     public function testFileSize()
     {
-        $oldLogger = new \Wei\Logger(array(
+        $oldLogger = new \Wei\Logger([
             'wei' => $this->wei,
             'fileSize' => 1,
-        ));
+        ]);
 
         $oldFile = $oldLogger->getFile();
 
         $oldLogger->debug(__METHOD__);
 
-        $newLogger = new \Wei\Logger(array(
+        $newLogger = new \Wei\Logger([
             'wei' => $this->wei,
             'fileSize' => 1,
-        ));
+        ]);
 
         $newFile = $newLogger->getFile();
 
@@ -122,15 +124,15 @@ class LoggerTest extends TestCase
     {
         $this->setExpectedException('RuntimeException', 'Fail to create directory "http://example/"');
 
-        $logger = $this->wei->newInstance('logger', array(
-            'dir' => 'http://example/'
-        ));
+        $logger = $this->wei->newInstance('logger', [
+            'dir' => 'http://example/',
+        ]);
         $logger->getFile();
     }
 
     public function testLogWithContext()
     {
-        $this->logger->debug('debug', array('name' => 'value'));
+        $this->logger->debug('debug', ['name' => 'value']);
 
         $content = file_get_contents($this->logger->getFile());
 
@@ -143,10 +145,10 @@ class LoggerTest extends TestCase
     {
         $this->logger->setContext('name', 'value');
 
-        $this->logger->setContext(array(
+        $this->logger->setContext([
             'clientIp' => '127.0.0.1',
-            'serverIp' => '127.0.0.1'
-        ));
+            'serverIp' => '127.0.0.1',
+        ]);
 
         $this->logger->debug('log with default context');
 
@@ -160,7 +162,7 @@ class LoggerTest extends TestCase
 
     public function testLogWithArrayMessage()
     {
-        $this->logger->debug(array('key' => 'value'));
+        $this->logger->debug(['key' => 'value']);
 
         $content = file_get_contents($this->logger->getFile());
 
@@ -181,10 +183,10 @@ class LoggerTest extends TestCase
 
     public function testLoggerNamespace()
     {
-        $this->logger->setOption(array(
+        $this->logger->setOption([
             'namespace' => 'test',
-            'format' => '%namespace% %message%'
-        ));
+            'format' => '%namespace% %message%',
+        ]);
         $this->logger->info('log message');
 
         $content = file_get_contents($this->logger->getFile());
@@ -193,24 +195,25 @@ class LoggerTest extends TestCase
 
     public function providerForContexts()
     {
-        return array(
-            array('debug'),
-            array('info'),
-            array('notice'),
-            array('warning'),
-            array('error'),
-            array('critical'),
-            array('alert'),
-            array('emergency'),
-        );
+        return [
+            ['debug'],
+            ['info'],
+            ['notice'],
+            ['warning'],
+            ['error'],
+            ['critical'],
+            ['alert'],
+            ['emergency'],
+        ];
     }
 
     /**
      * @dataProvider providerForContexts
+     * @param mixed $method
      */
     public function testStringAsContext($method)
     {
-        $this->logger->$method($method, $method);
+        $this->logger->{$method}($method, $method);
 
         $content = file_get_contents($this->logger->getFile());
 

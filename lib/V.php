@@ -196,29 +196,19 @@ class V extends Base
     }
 
     /**
-     * Add a new field
+     * Add rule for current field
      *
      * @param string $name
-     * @param string|null $label
+     * @param array $args
      * @return $this
-     * @svc
      */
-    protected function key($name, $label = null)
+    public function __call($name, $args)
     {
-        $this->lastKey = $name;
-
-        // Rest previous key's last rule
-        $this->lastRule = null;
-
-        if (!isset($this->options['rules'][$name])) {
-            $this->options['rules'][$name] = [];
+        // TODO wei 提供接口判断是否可以调用为服务方法
+        if (method_exists($this, $name)) {
+            return $this->{$name}(...$args);
         }
-
-        if (isset($label)) {
-            $this->label($label);
-        }
-
-        return $this;
+        return $this->addRule($name, $args);
     }
 
     /**
@@ -328,6 +318,47 @@ class V extends Base
     }
 
     /**
+     * Add rule for current field
+     *
+     * @param string $name
+     * @param mixed $args
+     * @return $this
+     */
+    public function addRule($name, $args)
+    {
+        $this->options['rules'][$this->lastKey][$name] = $args;
+        $this->lastRule = $name;
+
+        return $this;
+    }
+
+    /**
+     * Add a new field
+     *
+     * @param string $name
+     * @param string|null $label
+     * @return $this
+     * @svc
+     */
+    protected function key($name, $label = null)
+    {
+        $this->lastKey = $name;
+
+        // Rest previous key's last rule
+        $this->lastRule = null;
+
+        if (!isset($this->options['rules'][$name])) {
+            $this->options['rules'][$name] = [];
+        }
+
+        if (isset($label)) {
+            $this->label($label);
+        }
+
+        return $this;
+    }
+
+    /**
      * Instance validate object
      *
      * @param mixed $data
@@ -349,21 +380,6 @@ class V extends Base
         }
 
         return $this->validator;
-    }
-
-    /**
-     * Add rule for current field
-     *
-     * @param string $name
-     * @param mixed $args
-     * @return $this
-     */
-    public function addRule($name, $args)
-    {
-        $this->options['rules'][$this->lastKey][$name] = $args;
-        $this->lastRule = $name;
-
-        return $this;
     }
 
     /**
@@ -398,22 +414,5 @@ class V extends Base
             $default($this, $value);
         }
         return $this;
-    }
-
-
-    /**
-     * Add rule for current field
-     *
-     * @param string $name
-     * @param array $args
-     * @return $this
-     */
-    public function __call($name, $args)
-    {
-        // TODO wei 提供接口判断是否可以调用为服务方法
-        if (method_exists($this, $name)) {
-            return $this->$name(...$args);
-        }
-        return $this->addRule($name, $args);
     }
 }

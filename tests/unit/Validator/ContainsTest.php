@@ -2,14 +2,20 @@
 
 namespace WeiTest\Validator;
 
-class ContainsTest extends TestCase
+/**
+ * @internal
+ */
+final class ContainsTest extends TestCase
 {
     protected $inputTestOptions = [
-        'search' => 'test'
+        'search' => 'test',
     ];
 
     /**
      * @dataProvider providerForContains
+     * @param mixed $input
+     * @param mixed $search
+     * @param mixed $regex
      */
     public function testContains($input, $search, $regex = false)
     {
@@ -18,6 +24,9 @@ class ContainsTest extends TestCase
 
     /**
      * @dataProvider providerForNotContains
+     * @param mixed $input
+     * @param mixed $search
+     * @param mixed $regex
      */
     public function testNotContains($input, $search, $regex = false)
     {
@@ -26,20 +35,19 @@ class ContainsTest extends TestCase
 
     public function providerForContains()
     {
-        return array(
-            array(123, 1),
-            array('abc', 'a'),
-            array('@#$', '@'),
-            array('ABC', '/a/i', true),
-
-        );
+        return [
+            [123, 1],
+            ['abc', 'a'],
+            ['@#$', '@'],
+            ['ABC', '/a/i', true],
+        ];
     }
 
     public function providerForNotContains()
     {
-        return array(
-            array('123', '4'),
-            array('ABC', '/a/', true)
-        );
+        return [
+            ['123', '4'],
+            ['ABC', '/a/', true],
+        ];
     }
 }

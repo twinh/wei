@@ -20,7 +20,7 @@ class IdCardTw extends BaseValidator
 
     protected $negativeMessage = '%name% must not be valid Taiwan identity card';
 
-    protected $map = array(
+    protected $map = [
         'A' => 10,
         'B' => 11,
         'C' => 12,
@@ -46,8 +46,8 @@ class IdCardTw extends BaseValidator
         'L' => 20,
         'R' => 25,
         'S' => 26,
-        'Y' => 31
-    );
+        'Y' => 31,
+    ];
 
     /**
      * {@inheritdoc}
@@ -68,18 +68,18 @@ class IdCardTw extends BaseValidator
 
         // Validate the city letter, should be A-Z
         $first = ord($input[0]);
-        if ($first <  65 || $first > 90) {
+        if ($first < 65 || $first > 90) {
             $this->addError('invalid');
             return false;
         }
 
         // Validate the gender
-        if ($input[1] != '1' && $input[1] != '2') {
+        if ('1' != $input[1] && '2' != $input[1]) {
             $this->addError('invalid');
             return false;
         }
 
-        list($x1, $x2) = str_split((string)$this->map[$input[0]]);
+        list($x1, $x2) = str_split((string) $this->map[$input[0]]);
         $sum = $x1 + 9 * $x2;
         for ($i = 1, $j = 8; $i < 9; $i++, $j--) {
             $sum += $input[$i] * $j;

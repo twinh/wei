@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class PositiveIntegerTest extends TestCase
+/**
+ * @internal
+ */
+final class PositiveIntegerTest extends TestCase
 {
     /**
      * @dataProvider providerForPositiveInteger
+     * @param mixed $input
      */
     public function testPositiveInteger($input)
     {
@@ -14,6 +18,7 @@ class PositiveIntegerTest extends TestCase
 
     /**
      * @dataProvider providerForNotPositiveInteger
+     * @param mixed $input
      */
     public function testNotPositiveInteger($input)
     {
@@ -22,26 +27,26 @@ class PositiveIntegerTest extends TestCase
 
     public function providerForPositiveInteger()
     {
-        return array(
-            array(1),
-            array('11'),
-            array('100'),
-            array('+1'),
-            array(+1),
-        );
+        return [
+            [1],
+            ['11'],
+            ['100'],
+            ['+1'],
+            [+1],
+        ];
     }
 
     public function providerForNotPositiveInteger()
     {
-        return array(
-            array('0'),
-            array(0),
-            array('0.1'),
-            array('a bcdefg'),
-            array('1 23456'),
-            array('string'),
-            array(-1),
-            array('-1'),
-        );
+        return [
+            ['0'],
+            [0],
+            ['0.1'],
+            ['a bcdefg'],
+            ['1 23456'],
+            ['string'],
+            [-1],
+            ['-1'],
+        ];
     }
 }

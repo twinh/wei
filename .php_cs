@@ -64,6 +64,8 @@ return PhpCsFixer\Config::create()
         'semicolon_after_instruction' => false,
         // 参数过长需换行
         'single_line_throw' => false,
+        // 允许测试类继承测试类
+        'final_internal_class' => false,
 
         // Risky
         'php_unit_strict' => false,

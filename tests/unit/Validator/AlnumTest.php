@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class AlnumTest extends TestCase
+/**
+ * @internal
+ */
+final class AlnumTest extends TestCase
 {
     /**
      * @dataProvider providerForAlnum
+     * @param mixed $input
      */
     public function testAlnum($input)
     {
@@ -14,6 +18,7 @@ class AlnumTest extends TestCase
 
     /**
      * @dataProvider providerForNotAlnum
+     * @param mixed $input
      */
     public function testNotAlnum($input)
     {
@@ -22,39 +27,40 @@ class AlnumTest extends TestCase
 
     public function providerForAlnum()
     {
-        return array(
-            array('0'),
-            array(0),
-            array(0.0),
-            array('abcedfg'),
-            array('a2BcD3eFg4'),
-            array('045fewwefds'),
-        );
+        return [
+            ['0'],
+            [0],
+            [0.0],
+            ['abcedfg'],
+            ['a2BcD3eFg4'],
+            ['045fewwefds'],
+        ];
     }
 
     public function providerForNotAlnum()
     {
-        return array(
-            array('a bcdefg'),
-            array('-213a bcdefg'),
-        );
+        return [
+            ['a bcdefg'],
+            ['-213a bcdefg'],
+        ];
     }
-
 
     /**
      * @dataProvider providerForLocale
+     * @param mixed $locale
+     * @param mixed $message
      */
     public function testLocale($locale, $message)
     {
-        $t = new \Wei\T(array(
+        $t = new \Wei\T([
             'wei' => $this->wei,
             'locale' => $locale,
-        ));
+        ]);
 
-        $validator = new \Wei\Validator\Alnum(array(
+        $validator = new \Wei\Validator\Alnum([
             'wei' => $this->wei,
             't' => $t,
-        ));
+        ]);
 
         $validator('1.2');
 
@@ -63,9 +69,9 @@ class AlnumTest extends TestCase
 
     public function providerForLocale()
     {
-        return array(
-            array('en', 'This value must contain letters (a-z) and digits (0-9)'),
-            array('zh-CN', '该项只能由字母(a-z)和数字(0-9)组成')
-        );
+        return [
+            ['en', 'This value must contain letters (a-z) and digits (0-9)'],
+            ['zh-CN', '该项只能由字母(a-z)和数字(0-9)组成'],
+        ];
     }
 }

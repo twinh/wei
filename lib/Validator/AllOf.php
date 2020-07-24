@@ -25,7 +25,7 @@ class AllOf extends SomeOf
      * @param int|null $atLeast How many rules should be validated at least
      * @return bool
      */
-    public function __invoke($input, array $rules = array(), $atLeast = null)
+    public function __invoke($input, array $rules = [], $atLeast = null)
     {
         $this->atLeast = count($rules ?: $this->rules);
 

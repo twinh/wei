@@ -6,8 +6,10 @@ use Wei\Request;
 
 /**
  * @property Request $request
+ *
+ * @internal
  */
-class RequestTest extends TestCase
+final class RequestTest extends TestCase
 {
     /**
      * @var \Wei\Request
@@ -38,10 +40,10 @@ class RequestTest extends TestCase
 
         $this->assertEquals('value', $wei->request('key'), 'string param');
 
-        $wei->fromArray(array(
+        $wei->fromArray([
             'key1' => 'value1',
             'key2' => 'value2',
-        ));
+        ]);
 
         $this->assertEquals('value2', $wei->request('key2'), 'array param');
     }
@@ -61,16 +63,16 @@ class RequestTest extends TestCase
 
     public function testMethod()
     {
-        foreach (array('GET', 'POST') as $method) {
+        foreach (['GET', 'POST'] as $method) {
             $this->wei->remove('request');
             $this->wei->remove('server');
-            $request = new \Wei\Request(array(
+            $request = new \Wei\Request([
                 'wei' => $this->wei,
                 'fromGlobal' => false,
-                'servers' => array(
+                'servers' => [
                     'REQUEST_METHOD' => $method,
-                ),
-            ));
+                ],
+            ]);
             $this->wei->set('request', $request);
 
             $this->assertTrue($request->{'is' . $method}());
@@ -146,231 +148,233 @@ class RequestTest extends TestCase
      */
     public function baseUrlAndPathProvider()
     {
-        return array(
-            array(
-                array(
+        return [
+            [
+                [
                     'REQUEST_URI' => '/index.php/news/3?var1=val1&var2=val2',
                     'QUERY_URI' => 'var1=val1&var2=val2',
                     'SCRIPT_NAME' => '/index.php',
                     'PHP_SELF' => '/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
-                ),
+                ],
                 '/index.php',
                 '/news/3',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'REQUEST_URI' => '/public/index.php/news/3?var1=val1&var2=val2',
                     'QUERY_URI' => 'var1=val1&var2=val2',
                     'SCRIPT_NAME' => '/public/index.php',
                     'PHP_SELF' => '/public/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/public/index.php',
-                ),
+                ],
                 '/public/index.php',
                 '/news/3',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'REQUEST_URI' => '/index.php/news/3?var1=val1&var2=val2',
                     'SCRIPT_NAME' => '/home.php',
                     'PHP_SELF' => '/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
-                ),
+                ],
                 '/index.php',
                 '/news/3',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'REQUEST_URI' => '/index.php/news/3?var1=val1&var2=val2',
                     'SCRIPT_NAME' => '/home.php',
                     'PHP_SELF' => '/home.php',
                     'ORIG_SCRIPT_NAME' => '/index.php',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
-                ),
+                ],
                 '/index.php',
                 '/news/3',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'REQUEST_URI' => '/index.php/news/3?var1=val1&var2=val2',
                     'PHP_SELF' => '/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
-                ),
+                ],
                 '/index.php',
                 '/news/3',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'HTTP_X_REWRITE_URL' => '/index.php/news/3?var1=val1&var2=val2',
                     'PHP_SELF' => '/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
-                ),
+                ],
                 '/index.php',
                 '/news/3',
-            ),
+            ],
             // IIS 7.0 or later with ISAPI_Rewrite
-            array(
-                array(
+            [
+                [
                     'HTTP_X_ORIGINAL_URL' => '/index.php/news/3?var1=val1&var2=val2',
                     'PHP_SELF' => '/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
-                ),
+                ],
                 '',
                 '/',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'IIS_WasUrlRewritten' => '1',
                     'UNENCODED_URL' => '/index.php/news/3?var1=val1&var2=val2',
                     'HTTP_X_ORIGINAL_URL' => '/index.php/news/3?var1=val1&var2=val2',
                     'PHP_SELF' => '/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
-                ),
+                ],
                 '/index.php',
                 '/news/3',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'ORIG_PATH_INFO' => '/index.php/news/3',
                     'QUERY_STRING' => 'var1=val1&var2=val2',
                     'PHP_SELF' => '/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
-                ),
+                ],
                 '/index.php',
                 '/news/3',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'REQUEST_URI' => '/article/archive?foo=index.php',
                     'QUERY_STRING' => 'foo=index.php',
                     'SCRIPT_FILENAME' => '/var/www/zftests/index.php',
-                ),
+                ],
                 '',
                 '/article/archive',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'REQUEST_URI' => '/html/index.php/news/3?var1=val1&var2=val2',
                     'PHP_SELF' => '/html/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
-                ),
+                ],
                 '/html/index.php',
                 '/news/3',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'REQUEST_URI' => '/dir/action',
                     'PHP_SELF' => '/dir/index.php',
                     'SCRIPT_FILENAME' => '/var/web/dir/index.php',
-                ),
+                ],
                 '/dir',
                 '/action',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'SCRIPT_NAME' => '/~username/public/index.php',
                     'REQUEST_URI' => '/~username/public/',
                     'PHP_SELF' => '/~username/public/index.php',
                     'SCRIPT_FILENAME' => '/Users/username/Sites/public/index.php',
                     'ORIG_SCRIPT_NAME' => null,
-                ),
+                ],
                 '/~username/public',
                 '/',
-            ),
+            ],
             // ZF2-206
-            array(
-                array(
+            [
+                [
                     'SCRIPT_NAME' => '/zf2tut/index.php',
                     'REQUEST_URI' => '/zf2tut/',
                     'PHP_SELF' => '/zf2tut/index.php',
                     'SCRIPT_FILENAME' => 'c:/ZF2Tutorial/public/index.php',
                     'ORIG_SCRIPT_NAME' => null,
-                ),
+                ],
                 '/zf2tut',
                 '/',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'REQUEST_URI' => '/html/index.php/news/3?var1=val1&var2=/index.php',
                     'PHP_SELF' => '/html/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
-                ),
+                ],
                 '/html/index.php',
                 '/news/3',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'REQUEST_URI' => '/html/index.php/news/index.php',
                     'PHP_SELF' => '/html/index.php/news/index.php',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
-                ),
+                ],
                 '/html/index.php',
                 '/news/index.php',
-            ),
+            ],
 
             //Test when url quert contains a full http url
-            array(
-                array(
+            [
+                [
                     'REQUEST_URI' => '/html/index.php?url=http://test.example.com/path/&foo=bar',
                     'PHP_SELF' => '/html/index.php',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
-                ),
+                ],
                 '/html/index.php',
                 '/',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'SCRIPT_FILENAME' => '/web/blog/index.php',
                     'SCRIPT_NAME' => '/blog/index.php',
                     'REQUEST_URI' => '/blog/hello?string',
                     'PHP_SELF' => '/blog/index.php',
-                ),
+                ],
                 '/blog',
                 '/hello',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'SCRIPT_FILENAME' => '/web/blog/index.php',
                     'SCRIPT_NAME' => '/blog/index.php',
                     'REQUEST_URI' => '/blog/hello?string',
-                ),
+                ],
                 '',
                 '/blog/hello',
-            ),
+            ],
             // cli php index.php
-            array(
-                array(
+            [
+                [
                     'PHP_SELF' => 'index.php',
                     'SCRIPT_NAME' => 'index.php',
                     'SCRIPT_FILENAME' => 'index.php',
                     'DOCUMENT_ROOT' => '',
-                ),
+                ],
                 '',
                 '/',
-            ),
+            ],
             // NOTE The following data is for codecover only
-            array(
-                array(
+            [
+                [
                     'PHP_SELF' => 'index.php',
                     'SCRIPT_FILENAME' => 'index.php',
                     'REQUEST_URI' => 'home/index.php?query=string',
-                ),
+                ],
                 'home/index.php',
                 '/',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'ORIG_SCRIPT_NAME' => 'index.php',
                     'SCRIPT_FILENAME' => 'index.php',
-                ),
+                ],
                 '',
                 '/',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
      * @dataProvider baseUrlAndPathProvider
+     * @param mixed $baseUrl
+     * @param mixed $pathInfo
      */
     public function testBasePathDetection(array $server, $baseUrl, $pathInfo)
     {
@@ -382,11 +386,11 @@ class RequestTest extends TestCase
 
     public function testGetHost()
     {
-        $server = array(
+        $server = [
             'HTTP_HOST' => 'a.test.com',
             'SERVER_NAME' => 'test.com',
             'REMOTE_ADDR' => '127.0.0.1',
-        );
+        ];
         $this->request->setOption('servers', $server);
         $this->assertEquals('a.test.com', $this->request->getHost());
 
@@ -397,9 +401,9 @@ class RequestTest extends TestCase
 
     public function testGetHttpHostWithPort()
     {
-        $server = array(
+        $server = [
             'HTTP_HOST' => '127.0.0.1:8080',
-        );
+        ];
         $this->request->setOption('servers', $server);
         $this->assertEquals('127.0.0.1', $this->request->getHost());
     }
@@ -413,32 +417,35 @@ class RequestTest extends TestCase
 
     public function providerForGetUrl()
     {
-        return array(
-            array(
-                array(
+        return [
+            [
+                [
                     'HTTPS' => 'on',
                     'SERVER_PORT' => '80',
                     'HTTP_HOST' => 'test.com',
                     'REQUEST_URI' => '/index.php?query=string',
-                ),
+                ],
                 'https://test.com/index.php?query=string',
                 'https://test.com/path',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'HTTPS' => 'on',
                     'SERVER_PORT' => '8080',
                     'HTTP_HOST' => 'test.com',
                     'REQUEST_URI' => '/index.php?query=string',
-                ),
+                ],
                 'https://test.com:8080/index.php?query=string',
                 'https://test.com:8080/path',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
      * @dataProvider providerForGetUrl
+     * @param mixed $server
+     * @param mixed $url
+     * @param mixed $urlPath
      */
     public function testGetUrl($server, $url, $urlPath)
     {
@@ -460,7 +467,7 @@ class RequestTest extends TestCase
 
     public function testToString()
     {
-        $this->request->setOption('servers', array(
+        $this->request->setOption('servers', [
             'HTTPS' => 'on',
             'SERVER_PORT' => '8080',
             'HTTP_HOST' => 'test.com',
@@ -468,7 +475,7 @@ class RequestTest extends TestCase
             'SERVER_PROTOCOL' => 'HTTP/1.0',
             'REQUEST_METHOD' => 'GET',
             'SCRIPT_NAME' => 'index.php',
-        ));
+        ]);
 
         $this->assertEquals(
             "GET https://test.com:8080/index.php?query=string HTTP/1.0\r\nHost: test.com\r\n",
@@ -485,13 +492,13 @@ class RequestTest extends TestCase
 
     public function testEmptyPort()
     {
-        $request = new \Wei\Request(array(
+        $request = new \Wei\Request([
             'wei' => $this->wei,
             'fromGlobal' => false,
-            'servers' => array(
+            'servers' => [
                 'HTTP_HOST' => 'test.com',
-            ),
-        ));
+            ],
+        ]);
 
         $this->assertEquals('http://test.com/', $request->getUrl());
     }
@@ -501,18 +508,18 @@ class RequestTest extends TestCase
      */
     public function testErrorParameterTypeWhenFromGlobalIsFalse()
     {
-        $request = new \Wei\Request(array(
+        $request = new \Wei\Request([
             'fromGlobal' => false,
-        ));
+        ]);
 
-        foreach (array('get', 'cookie', 'server', 'file') as $option) {
+        foreach (['get', 'cookie', 'server', 'file'] as $option) {
             $this->assertIsArray($request->getParameterReference($option));
         }
     }
 
     public function testGetHeaders()
     {
-        $this->request->setOption('servers', array(
+        $this->request->setOption('servers', [
             'REDIRECT_STATUS' => '200',
             'HTTP_HOST' => 'web',
             'HTTP_CONNECTION' => 'keep-alive',
@@ -543,9 +550,9 @@ class RequestTest extends TestCase
             'SCRIPT_NAME' => '/blog/index.php',
             'PHP_SELF' => '/blog/index.php',
             'REQUEST_TIME' => 1364916034,
-        ));
+        ]);
 
-        $this->assertEquals(array(
+        $this->assertEquals([
             'HOST' => 'web',
             'CONNECTION' => 'keep-alive',
             'CACHE_CONTROL' => 'max-age=0',
@@ -554,17 +561,17 @@ class RequestTest extends TestCase
             'ACCEPT_ENCODING' => 'gzip,deflate,sdch',
             'ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8',
             'ACCEPT_CHARSET' => 'UTF-8,*;q=0.5',
-        ), $this->request->getHeaders());
+        ], $this->request->getHeaders());
     }
 
     public function testInvoker()
     {
         $request = $this->object;
 
-        $request->fromArray(array(
+        $request->fromArray([
             'string' => 'value',
             1 => 2,
-        ));
+        ]);
 
         $this->assertEquals('value', $request('string'));
 
@@ -586,10 +593,10 @@ class RequestTest extends TestCase
 
         $wei['key2'] = 'value2';
 
-        $wei->fromArray(array(
+        $wei->fromArray([
             'key1' => 'value1',
             'key2' => 'value changed',
-        ));
+        ]);
 
         $this->assertEquals('value1', $wei['key1']);
 
@@ -600,9 +607,9 @@ class RequestTest extends TestCase
     {
         $wei = $this->object;
 
-        $wei->fromArray(array(
+        $wei->fromArray([
             'key' => 'other value',
-        ));
+        ]);
 
         $arr = $wei->toArray();
 
@@ -611,10 +618,10 @@ class RequestTest extends TestCase
 
     public function testArrayAsSetParameter()
     {
-        $array = array(
+        $array = [
             'key' => 'value',
             'key1' => 'value1',
-        );
+        ];
 
         $this->request->set($array);
 
@@ -651,26 +658,26 @@ class RequestTest extends TestCase
     public function createParameterObject($type, $class)
     {
         // create request wei from custom parameter
-        $request = new \Wei\Request(array(
+        $request = new \Wei\Request([
             'wei' => $this->wei,
             'fromGlobal' => false,
-            $type => array(
+            $type => [
                 'key' => 'value',
                 'key2' => 'value2',
                 'int' => '5',
-                'array' => array(
+                'array' => [
                     'item' => 'value',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         return $request;
     }
 
     public function testGetter()
     {
-        $parameters = array(
+        $parameters = [
             'data' => 'request',
-        );
+        ];
 
         foreach ($parameters as $type => $class) {
             $parameter = $this->createParameterObject($type, $class);
@@ -682,10 +689,10 @@ class RequestTest extends TestCase
             $this->assertEquals('', $parameter->get('notFound'));
 
             // int => 5, not in specified array
-            $this->assertEquals('firstValue', $parameter->getInArray('int', array(
+            $this->assertEquals('firstValue', $parameter->getInArray('int', [
                 'firstKey' => 'firstValue',
                 'secondKey' => 'secondValue',
-            )));
+            ]));
 
             // int => 5
             $this->assertEquals(6, $parameter->getInt('int', 6));
@@ -698,36 +705,36 @@ class RequestTest extends TestCase
 
     public function testOverwriteAjax()
     {
-        $request = new Request(array(
+        $request = new Request([
             'wei' => $this->wei,
-            'data' => array(),
-        ));
+            'data' => [],
+        ]);
         $this->assertFalse($request->isAjax());
 
-        $request = new Request(array(
+        $request = new Request([
             'wei' => $this->wei,
-            'data' => array(
+            'data' => [
                 '_ajax' => true,
-            ),
-        ));
+            ],
+        ]);
         $this->assertFalse($request->isAjax());
     }
 
     public function testOverwriteMethod()
     {
-        $request = new Request(array(
+        $request = new Request([
             'wei' => $this->wei,
             'fromGlobal' => false,
-            'data' => array(
+            'data' => [
                 '_method' => 'PUT',
-            ),
-        ));
+            ],
+        ]);
         $this->assertTrue($request->isMethod('PUT'));
     }
 
     public function testArrayAccess()
     {
-        $this->assertArrayBehaviour(array());
+        $this->assertArrayBehaviour([]);
         $this->assertArrayBehaviour($this->request);
     }
 
@@ -774,6 +781,9 @@ class RequestTest extends TestCase
 
     /**
      * @dataProvider acceptProvider
+     * @param mixed $mime
+     * @param mixed $header
+     * @param mixed $result
      */
     public function testAccept($mime, $header, $result)
     {
@@ -783,52 +793,39 @@ class RequestTest extends TestCase
 
     public function acceptProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'application/json',
                 'application/json, text/javascript, */*; q=0.01',
                 true,
-            ),
-            array(
+            ],
+            [
                 'text/javascript',
                 'application/json, text/javascript, */*; q=0.01',
                 false,
-            ),
-            array(
+            ],
+            [
                 'text/html',
                 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
                 true,
-            ),
-            array(
+            ],
+            [
                 'application/xml',
                 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
                 false,
-            ),
-            array(
+            ],
+            [
                 'application/xml',
                 '*/*',
                 false,
-            ),
-        );
+            ],
+        ];
     }
 
     public function testSetMethodShouldBeUppercase()
     {
         $this->request->setMethod('put');
         $this->assertEquals('PUT', $this->request->getMethod());
-    }
-
-    protected function initExtraKey()
-    {
-        // 移除数据避免干扰
-        unset($this->request['test']);
-        $this->assertArrayNotHasKey('test', $this->request);
-
-        $extraKeys = $this->request->getOption('extraKeys');
-        $this->assertArrayNotHasKey('test', $extraKeys);
-
-        // 触发了 &offsetGet 产生了 test 键名
-        $this->request['test'];
     }
 
     public function testExtraKeyInit()
@@ -1002,7 +999,7 @@ class RequestTest extends TestCase
                     'defaultUrlRewrite' => false,
                     'data' => [
                         'r' => 'test',
-                    ]
+                    ],
                 ],
                 '/',
                 '/test',
@@ -1014,7 +1011,7 @@ class RequestTest extends TestCase
                     'defaultUrlRewrite' => false,
                     'data' => [
                         'r' => 'abc',
-                    ]
+                    ],
                 ],
                 '/test',
                 '/test',
@@ -1025,7 +1022,7 @@ class RequestTest extends TestCase
                     'defaultUrlRewrite' => true,
                 ],
                 '/',
-                '/'
+                '/',
             ],
             [
                 [
@@ -1034,10 +1031,10 @@ class RequestTest extends TestCase
                     'defaultUrlRewrite' => true,
                     'data' => [
                         'r' => 'abc',
-                    ]
+                    ],
                 ],
                 '/',
-                '/'
+                '/',
             ],
             [
                 [
@@ -1053,8 +1050,8 @@ class RequestTest extends TestCase
                     // Ignore router param
                     'defaultUrlRewrite' => true,
                     'data' => [
-                        'r' => 'abc'
-                    ]
+                        'r' => 'abc',
+                    ],
                 ],
                 '/test',
                 '/test',
@@ -1065,14 +1062,27 @@ class RequestTest extends TestCase
     public function testPopulateJsonToData()
     {
         // create request wei from custom parameter
-        $request = new \Wei\Request(array(
+        $request = new \Wei\Request([
             'wei' => $this->wei,
             'fromGlobal' => false,
             'content' => '{"a":"b"}',
             'servers' => [
                 'HTTP_CONTENT_TYPE' => 'application/json',
             ],
-        ));
+        ]);
         $this->assertEquals('b', $request->get('a'));
+    }
+
+    protected function initExtraKey()
+    {
+        // 移除数据避免干扰
+        unset($this->request['test']);
+        $this->assertArrayNotHasKey('test', $this->request);
+
+        $extraKeys = $this->request->getOption('extraKeys');
+        $this->assertArrayNotHasKey('test', $extraKeys);
+
+        // 触发了 &offsetGet 产生了 test 键名
+        $this->request['test'];
     }
 }

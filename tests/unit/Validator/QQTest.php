@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class QQTest extends TestCase
+/**
+ * @internal
+ */
+final class QQTest extends TestCase
 {
     /**
      * @dataProvider providerForQQ
+     * @param mixed $input
      */
     public function testQQ($input)
     {
@@ -14,6 +18,7 @@ class QQTest extends TestCase
 
     /**
      * @dataProvider providerForNotQQ
+     * @param mixed $input
      */
     public function testNotQQ($input)
     {
@@ -22,20 +27,20 @@ class QQTest extends TestCase
 
     public function providerForQQ()
     {
-        return array(
-            array('1234567'),
-            array('1234567'),
-            array('123456789'),
-        );
+        return [
+            ['1234567'],
+            ['1234567'],
+            ['123456789'],
+        ];
     }
 
     public function providerForNotQQ()
     {
-        return array(
-            array('1000'), // Too short
-            array('011111'), // Should not start with zero
-            array('134.433'),
-            array('not digit'),
-        );
+        return [
+            ['1000'], // Too short
+            ['011111'], // Should not start with zero
+            ['134.433'],
+            ['not digit'],
+        ];
     }
 }

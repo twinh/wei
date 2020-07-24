@@ -42,16 +42,16 @@ class Logger extends Base
      *
      * @var array
      */
-    protected $levels = array(
-        'debug'     => 100,
-        'info'      => 200,
-        'notice'    => 250,
-        'warning'   => 300,
-        'error'     => 400,
-        'critical'  => 500,
-        'alert'     => 550,
-        'emergency' => 600
-    );
+    protected $levels = [
+        'debug' => 100,
+        'info' => 200,
+        'notice' => 250,
+        'warning' => 300,
+        'error' => 400,
+        'critical' => 500,
+        'alert' => 550,
+        'emergency' => 600,
+    ];
 
     /**
      * The format for log message
@@ -71,9 +71,9 @@ class Logger extends Base
      * The log file name, if specify this parameter, the "dir" and "fileFormat"
      * parameters would be ignored
      *
-     * @var null|string
+     * @var string|null
      */
-    protected $file = null;
+    protected $file;
 
     /**
      * The directory to store log files
@@ -110,7 +110,7 @@ class Logger extends Base
      *
      * @var array
      */
-    protected $context = array();
+    protected $context = [];
 
     /**
      * The log file handle
@@ -120,6 +120,27 @@ class Logger extends Base
     private $handle;
 
     /**
+     * Destructor
+     */
+    public function __destruct()
+    {
+        $this->close();
+    }
+
+    /**
+     * Logs with an arbitrary level
+     *
+     * @param mixed $level
+     * @param string $message
+     * @param mixed $context
+     * @return bool
+     */
+    public function __invoke($level, $message, $context = [])
+    {
+        return $this->log($level, $message, $context);
+    }
+
+    /**
      * Logs with an arbitrary level
      *
      * @param mixed $level
@@ -127,7 +148,7 @@ class Logger extends Base
      * @param mixed $context
      * @return bool Whether the log record has been handled
      */
-    public function log($level, $message, $context = array())
+    public function log($level, $message, $context = [])
     {
         $level = isset($this->levels[$level]) ? $level : $this->level;
 
@@ -142,104 +163,13 @@ class Logger extends Base
     }
 
     /**
-     * Write the log message
-     *
-     * @param string $level
-     * @param string $message
-     * @param mixed $context
-     * @return bool
-     */
-    protected function writeLog($level, $message, $context)
-    {
-        if (!$this->handle) {
-            $this->handle = fopen($this->getFile(), 'a');
-        }
-        $content = $this->formatLog($level, $message, $context);
-        return (bool)fwrite($this->handle, $content);
-    }
-
-    /**
-     * Format the log content
-     *
-     * @param string $level
-     * @param string $message
-     * @param array $context
-     * @return string
-     */
-    protected function formatLog($level, $message, $context = array())
-    {
-        // Format message and content
-        $params = $this->formatParams($message, $context);
-        $message = $params['message'];
-        $context = $params['context'];
-
-        // Format log content
-        $content = str_replace(array(
-            '%datetime%', '%namespace%', '%level%', '%message%',
-        ), array(
-            date($this->dateFormat, microtime(true)),
-            $this->namespace,
-            strtoupper($level),
-            $message,
-        ), $this->format);
-
-        // Format extra context
-        if ($this->context || $context) {
-            $content .= print_r($this->context + $context, true) . "\n";
-        }
-
-        return $content;
-    }
-
-    /**
-     * Convert message to string and content to array for writing
-     *
-     * @param string|\Exception $message
-     * @param string|array $context
-     * @return array
-     */
-    protected function formatParams($message, $context)
-    {
-        if (!is_array($context)) {
-            $context = array('context' => $context);
-        }
-        if ($message instanceof \Exception) {
-            $context += array(
-                'code' => $message->getCode(),
-                'file' => $message->getFile(),
-                'line' => $message->getLine(),
-                'trace' => $message->getTraceAsString(),
-            );
-            $message = $message->getMessage();
-        } elseif (is_array($message)) {
-            $message = print_r($message, true);
-        } else {
-            $message = (string)$message;
-        }
-        return array('message' => $message, 'context' => $context);
-    }
-
-    /**
-     * Logs with an arbitrary level
-     *
-     * @param mixed $level
-     * @param string $message
-     * @param mixed $context
-     * @return bool
-     */
-    public function __invoke($level, $message, $context = array())
-    {
-        return $this->log($level, $message, $context);
-    }
-
-    /**
      * System is unusable.
      *
      * @param string $message
      * @param mixed $context
      * @return bool
      */
-    public function emergency($message, $context = array())
+    public function emergency($message, $context = [])
     {
         return $this('emergency', $message, $context);
     }
@@ -254,7 +184,7 @@ class Logger extends Base
      * @param mixed $context
      * @return bool
      */
-    public function alert($message, $context = array())
+    public function alert($message, $context = [])
     {
         return $this->log('alert', $message, $context);
     }
@@ -268,7 +198,7 @@ class Logger extends Base
      * @param mixed $context
      * @return bool
      */
-    public function critical($message, $context = array())
+    public function critical($message, $context = [])
     {
         return $this->log('critical', $message, $context);
     }
@@ -281,7 +211,7 @@ class Logger extends Base
      * @param mixed $context
      * @return bool
      */
-    public function error($message, $context = array())
+    public function error($message, $context = [])
     {
         return $this->log('error', $message, $context);
     }
@@ -296,7 +226,7 @@ class Logger extends Base
      * @param mixed $context
      * @return bool
      */
-    public function warning($message, $context = array())
+    public function warning($message, $context = [])
     {
         return $this->log('warning', $message, $context);
     }
@@ -308,7 +238,7 @@ class Logger extends Base
      * @param mixed $context
      * @return bool
      */
-    public function notice($message, $context = array())
+    public function notice($message, $context = [])
     {
         return $this->log('notice', $message, $context);
     }
@@ -322,7 +252,7 @@ class Logger extends Base
      * @param mixed $context
      * @return bool
      */
-    public function info($message, $context = array())
+    public function info($message, $context = [])
     {
         return $this->log('info', $message, $context);
     }
@@ -334,7 +264,7 @@ class Logger extends Base
      * @param mixed $context
      * @return bool
      */
-    public function debug($message, $context = array())
+    public function debug($message, $context = [])
     {
         return $this->log('debug', $message, $context);
     }
@@ -443,7 +373,7 @@ class Logger extends Base
             $files = scandir($dir);
             foreach ($files as $file) {
                 if ('.' != $file && '..' != $file) {
-                    $file = $dir . DIRECTORY_SEPARATOR .  $file;
+                    $file = $dir . \DIRECTORY_SEPARATOR . $file;
                     if (is_file($file)) {
                         unlink($file);
                     }
@@ -451,6 +381,84 @@ class Logger extends Base
             }
         }
         return $this;
+    }
+
+    /**
+     * Write the log message
+     *
+     * @param string $level
+     * @param string $message
+     * @param mixed $context
+     * @return bool
+     */
+    protected function writeLog($level, $message, $context)
+    {
+        if (!$this->handle) {
+            $this->handle = fopen($this->getFile(), 'a');
+        }
+        $content = $this->formatLog($level, $message, $context);
+        return (bool) fwrite($this->handle, $content);
+    }
+
+    /**
+     * Format the log content
+     *
+     * @param string $level
+     * @param string $message
+     * @param array $context
+     * @return string
+     */
+    protected function formatLog($level, $message, $context = [])
+    {
+        // Format message and content
+        $params = $this->formatParams($message, $context);
+        $message = $params['message'];
+        $context = $params['context'];
+
+        // Format log content
+        $content = str_replace([
+            '%datetime%', '%namespace%', '%level%', '%message%',
+        ], [
+            date($this->dateFormat, microtime(true)),
+            $this->namespace,
+            strtoupper($level),
+            $message,
+        ], $this->format);
+
+        // Format extra context
+        if ($this->context || $context) {
+            $content .= print_r($this->context + $context, true) . "\n";
+        }
+
+        return $content;
+    }
+
+    /**
+     * Convert message to string and content to array for writing
+     *
+     * @param string|\Exception $message
+     * @param string|array $context
+     * @return array
+     */
+    protected function formatParams($message, $context)
+    {
+        if (!is_array($context)) {
+            $context = ['context' => $context];
+        }
+        if ($message instanceof \Exception) {
+            $context += [
+                'code' => $message->getCode(),
+                'file' => $message->getFile(),
+                'line' => $message->getLine(),
+                'trace' => $message->getTraceAsString(),
+            ];
+            $message = $message->getMessage();
+        } elseif (is_array($message)) {
+            $message = print_r($message, true);
+        } else {
+            $message = (string) $message;
+        }
+        return ['message' => $message, 'context' => $context];
     }
 
     /**
@@ -462,13 +470,5 @@ class Logger extends Base
             fclose($this->handle);
         }
         $this->handle = null;
-    }
-
-    /**
-     * Destructor
-     */
-    public function __destruct()
-    {
-        $this->close();
     }
 }

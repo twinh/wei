@@ -23,7 +23,7 @@ trait ServiceTrait
      */
     public function __call($name, $args)
     {
-        return call_user_func_array($this->$name, $args);
+        return call_user_func_array($this->{$name}, $args);
     }
 
     /**
@@ -34,6 +34,6 @@ trait ServiceTrait
      */
     public function __get($name)
     {
-        return $this->$name = $this->wei->get($name, [], $this->providers);
+        return $this->{$name} = $this->wei->get($name, [], $this->providers);
     }
 }

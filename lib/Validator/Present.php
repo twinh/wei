@@ -24,7 +24,7 @@ class Present extends BaseValidator
      *
      * @var array
      */
-    protected $invalid = array(null, '', false, array());
+    protected $invalid = [null, '', false, []];
 
     /**
      * {@inheritdoc}

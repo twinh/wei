@@ -6,8 +6,10 @@ namespace WeiTest;
  * It's hard to test error, some of the tests is use for code coverage only
  *
  * @property \Wei\Error $error The error wei
+ *
+ * @internal
  */
-class ErrorTest extends TestCase
+final class ErrorTest extends TestCase
 {
     protected function tearDown(): void
     {
@@ -74,10 +76,10 @@ class ErrorTest extends TestCase
 
     public function testCustomErrorMessage()
     {
-        $this->error->setOption(array(
+        $this->error->setOption([
             'message' => 'Oops!',
-            'detail' => 'Something wrong'
-        ));
+            'detail' => 'Something wrong',
+        ]);
 
         $exception = new \Exception('');
 
@@ -91,10 +93,10 @@ class ErrorTest extends TestCase
 
     public function testCustom404Message()
     {
-        $this->error->setOption(array(
+        $this->error->setOption([
             'message404' => '404',
-            'detail404' => 'The page not found'
-        ));
+            'detail404' => 'The page not found',
+        ]);
 
         $exception = new \Exception('', 404);
 
@@ -108,10 +110,10 @@ class ErrorTest extends TestCase
 
     public function testCustom403Message()
     {
-        $this->error->setOption(array(
+        $this->error->setOption([
             'message403' => '403',
-            'detail403' => 'Forbidden'
-        ));
+            'detail403' => 'Forbidden',
+        ]);
 
         $exception = new \Exception('', 403);
 

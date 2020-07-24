@@ -4,7 +4,10 @@ namespace WeiTest;
 
 use Wei\WeChatApp;
 
-class WeChatAppTest extends TestCase
+/**
+ * @internal
+ */
+final class WeChatAppTest extends TestCase
 {
     /**
      * @var \Wei\WeChatApp
@@ -13,14 +16,14 @@ class WeChatAppTest extends TestCase
 
     public function testForbiddenForInvalidSignature()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
-            'query' => array(
+            'query' => [
                 'signature' => 'invalid',
                 'timestamp' => 'invalid',
-                'nonce'     => 'invalid',
-            )
-        ));
+                'nonce' => 'invalid',
+            ],
+        ]);
 
         $this->assertFalse($app->isValid());
         $this->assertFalse($app->run());
@@ -32,15 +35,15 @@ class WeChatAppTest extends TestCase
 
     public function testEchostr()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
-            'query' => array(
+            'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
-                'nonce'     => '1365872231',
-                'echostr'   => $rand = mt_rand(0, 100000)
-            )
-        ));
+                'nonce' => '1365872231',
+                'echostr' => $rand = mt_rand(0, 100000),
+            ],
+        ]);
 
         $return = $app->run();
         $this->assertEquals($rand, $return);
@@ -48,17 +51,17 @@ class WeChatAppTest extends TestCase
 
     public function testEchorStrOnlyWhenAuth()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
-            'query' => array(
+            'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
-                'nonce'     => '1365872231',
-                'echostr'   => $rand = mt_rand(0, 100000)
-            )
-        ));
+                'nonce' => '1365872231',
+                'echostr' => $rand = mt_rand(0, 100000),
+            ],
+        ]);
 
-        $app->defaults(function(){
+        $app->defaults(function () {
             return 'never see me';
         });
 
@@ -69,98 +72,102 @@ class WeChatAppTest extends TestCase
 
     /**
      * @dataProvider providerForInputAndOutput
+     * @param mixed $query
+     * @param mixed $input
+     * @param mixed $data
+     * @param mixed|null $outputContent
      */
     public function testInputAndOutput($query, $input, $data, $outputContent = null)
     {
         // Inject HTTP query
-        $gets = array();
+        $gets = [];
         parse_str($query, $gets);
 
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
             'query' => $gets,
             'postData' => $input,
-        ));
+        ]);
 
-        $app->defaults(function($app){
-            return "Your input is " . $app->getContent();
+        $app->defaults(function ($app) {
+            return 'Your input is ' . $app->getContent();
         });
 
-        $app->subscribe(function(){
+        $app->subscribe(function () {
             return 'you are my 100 reader, wonderful!';
         });
 
-        $app->unsubscribe(function(){
+        $app->unsubscribe(function () {
             return 'you won\'t see this message';
         });
 
-        $app->click('button', function(){
+        $app->click('button', function () {
             return 'you clicked the button';
         });
 
-        $app->click('index', function(){
+        $app->click('index', function () {
             return 'you clicked index';
         });
 
-        $app->receiveImage(function($app){
+        $app->receiveImage(function ($app) {
             return 'you sent a picture to me';
         });
 
-        $app->receiveLocation(function($app){
+        $app->receiveLocation(function ($app) {
             return 'the place looks livable';
         });
 
-        $app->receiveVoice(function(){
+        $app->receiveVoice(function () {
             return 'u sound like a old man~';
         });
 
-        $app->receiveVideo(function(){
+        $app->receiveVideo(function () {
             return 'good video';
         });
 
-        $app->receiveLink(function(){
+        $app->receiveLink(function () {
             return 'got a link';
         });
 
-        $app->is('0', function(){
+        $app->is('0', function () {
             return 'your input is 0';
         });
 
-        $app->is('1', function(){
+        $app->is('1', function () {
             return 'your input is 1';
         });
 
-        $app->is('2', function(WeChatApp $app){
+        $app->is('2', function (WeChatApp $app) {
             return $app->sendMusic('Burning', 'A song of Maria Arredondo', 'url', 'HQ url', true);
         });
 
-        $app->is('3', function(WeChatApp $app){
-            return $app->sendArticle(array(
+        $app->is('3', function (WeChatApp $app) {
+            return $app->sendArticle([
                 'title' => 'It\'s fine today',
                 'description' => 'A new day is coming~~',
                 'picUrl' => 'http://pic-url',
-                'url' => 'http://link-url'
-            ));
+                'url' => 'http://link-url',
+            ]);
         });
 
-        $app->has('iphone', function(){
+        $app->has('iphone', function () {
             return 'sorry, not this time';
         });
 
-        $app->has('ipad', function(WeChatApp $app){
+        $app->has('ipad', function (WeChatApp $app) {
             return $app->sendText('Find a iPad ? ok, i will remember u', true);
         });
 
         $that = $this;
-        $app->startsWith('t', function($app) use($that){
+        $app->startsWith('t', function ($app) use ($that) {
             return 'The translation result is: xx';
         });
 
-        $app->match('/twin/', function(){
+        $app->match('/twin/', function () {
             return 'anyone find my brother?';
         });
 
-        $app->match('/twin/i', function(WeChatApp $app){
+        $app->match('/twin/i', function (WeChatApp $app) {
             return 'Yes, I\'m here';
         });
 
@@ -176,8 +183,8 @@ class WeChatAppTest extends TestCase
         }
 
         $output = simplexml_load_string($content, 'SimpleXMLElement', LIBXML_NOCDATA);
-        $this->assertEquals($app->getToUserName(), (string)$output->FromUserName);
-        $this->assertEquals($app->getFromUserName(), (string)$output->ToUserName);
+        $this->assertEquals($app->getToUserName(), (string) $output->FromUserName);
+        $this->assertEquals($app->getFromUserName(), (string) $output->ToUserName);
 
         // Test message content
         switch ($app->getMsgType()) {
@@ -215,7 +222,7 @@ class WeChatAppTest extends TestCase
                         $this->assertEquals('you won\'t see this message', $output->Content);
                         break;
 
-                    case 'click' :
+                    case 'click':
                         switch ($app->getEventKey()) {
                             case 'button':
                                 $this->assertEquals('you clicked the button', $output->Content);
@@ -249,76 +256,74 @@ class WeChatAppTest extends TestCase
 
     public function providerForInputAndOutput()
     {
-        return array(
-            array(
+        return [
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('0'),
-                array(
+                [
                     'content' => '0',
                     'msgType' => 'text',
-                    'msgId' => '1234567890123456'
-                ),
-                'your input is 0'
-            ),
-            array(
+                    'msgId' => '1234567890123456',
+                ],
+                'your input is 0',
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('1'),
-                array(
+                [
                     'content' => '1',
                     'msgType' => 'text',
-                    'msgId' => '1234567890123456'
-                ),
-                'your input is 1'
-            ),
-            array(
+                    'msgId' => '1234567890123456',
+                ],
+                'your input is 1',
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('2'),
-                array(
+                [
                     'content' => '2',
-                ),
+                ],
                 '', // return music
-            ),
-            array(
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('99999'),
-                array(
-
-                ),
-               'Your input is 99999'
-            ),
-            array(
+                [
+                ],
+               'Your input is 99999',
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('t xx'),
-                array(
-
-                ),
-               'The translation result is: xx'
-            ),
-            array(
+                [
+                ],
+               'The translation result is: xx',
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('3'),
-                array(
+                [
                     'content' => '3',
-                ),
+                ],
                 '', // return news
-            ),
-            array(
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('I want a iPad'),
-                array(
+                [
                     'content' => 'I want a iPad',
-                ),
+                ],
                 'Find a iPad ? ok, i will remember u',
-            ),
-            array(
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('Are u Twin?'),
-                array(
+                [
                     'content' => 'Are u Twin?',
-                ),
+                ],
                 'Yes, I\'m here',
-            ),
-            array(
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                  <ToUserName><![CDATA[toUser]]></ToUserName>
@@ -328,14 +333,14 @@ class WeChatAppTest extends TestCase
                  <PicUrl><![CDATA[http://mmsns.qpic.cn/mmsns/X1X15BcJOnSyeD9OtgfgM5RovwBP83QMHpd2YtO8DqtWG5jarm937g/0]]></PicUrl>
                  <MsgId>1234567890123456</MsgId>
                  </xml>',
-                array(
+                [
                     'createTime' => '1366118361',
                     'msgType' => 'image',
                     'msgId' => '1234567890123456',
-                    'picUrl' => 'http://mmsns.qpic.cn/mmsns/X1X15BcJOnSyeD9OtgfgM5RovwBP83QMHpd2YtO8DqtWG5jarm937g/0'
-                ),
-            ),
-            array(
+                    'picUrl' => 'http://mmsns.qpic.cn/mmsns/X1X15BcJOnSyeD9OtgfgM5RovwBP83QMHpd2YtO8DqtWG5jarm937g/0',
+                ],
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
@@ -348,16 +353,16 @@ class WeChatAppTest extends TestCase
                     <Label><![CDATA[中国广东省深圳市 邮政编码: 518049]]></Label>
                     <MsgId>1234567890123456</MsgId>
                  </xml>',
-                array(
+                [
                     'msgType' => 'location',
                     'locationX' => '22.000000',
                     'locationY' => '114.000000',
                     'scale' => '15',
                     'label' => '中国广东省深圳市 邮政编码: 518049',
-                    'msgId' => '1234567890123456'
-                ),
-            ),
-            array(
+                    'msgId' => '1234567890123456',
+                ],
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
@@ -368,14 +373,14 @@ class WeChatAppTest extends TestCase
                     <Format><![CDATA[amr]]></Format>
                     <MsgId>1234567890123456</MsgId>
                 </xml>',
-                array(
+                [
                     'msgType' => 'voice',
                     'mediaId' => 'vLzm6LJh88oq6xFk5HzC28AbbjQJgnJZH5r5eqBLs_-ddoGK4Hyvai7zvnlL34Si',
                     'format' => 'amr',
-                    'msgId' => '1234567890123456'
-                ),
-            ),
-            array(
+                    'msgId' => '1234567890123456',
+                ],
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
@@ -385,13 +390,13 @@ class WeChatAppTest extends TestCase
                     <Event><![CDATA[unsubscribe]]></Event>
                     <EventKey><![CDATA[]]></EventKey>
                 </xml>',
-                array(
+                [
                     'msgType' => 'event',
                     'event' => 'unsubscribe',
-                    'eventKey' => ''
-                ),
-            ),
-            array(
+                    'eventKey' => '',
+                ],
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
@@ -401,13 +406,13 @@ class WeChatAppTest extends TestCase
                     <Event><![CDATA[subscribe]]></Event>
                     <EventKey><![CDATA[]]></EventKey>
                  </xml>',
-                array(
+                [
                     'msgType' => 'event',
                     'event' => 'subscribe',
-                    'eventKey' => ''
-                ),
-            ),
-            array(
+                    'eventKey' => '',
+                ],
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
@@ -417,13 +422,13 @@ class WeChatAppTest extends TestCase
                     <Event><![CDATA[CLICK]]></Event>
                     <EventKey><![CDATA[index]]></EventKey>
                  </xml>',
-                array(
+                [
                     'msgType' => 'event',
                     'event' => 'CLICK',
-                    'eventKey' => 'index'
-                ),
-            ),
-            array(
+                    'eventKey' => 'index',
+                ],
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
@@ -433,13 +438,13 @@ class WeChatAppTest extends TestCase
                     <Event><![CDATA[CLICK]]></Event>
                     <EventKey><![CDATA[button]]></EventKey>
                  </xml>',
-                array(
+                [
                     'msgType' => 'event',
                     'event' => 'CLICK',
-                    'eventKey' => 'button'
-                ),
-            ),
-            array(
+                    'eventKey' => 'button',
+                ],
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
@@ -450,13 +455,13 @@ class WeChatAppTest extends TestCase
                     <ThumbMediaId><![CDATA[ZWWu54xvKw6PRfEmrdzZuzfPAiKBpQMEPHfB732tF1QHazqp1wvN5nFWF18ppCto]]></ThumbMediaId>
                     <MsgId>1234567890123456</MsgId>
                   </xml>',
-                array(
+                [
                     'msgType' => 'video',
                     'mediaId' => '1ilIgC6h1vmkKqoodLK-PiQy6DhVccDKm0cnLANsbjxKyDldYBTlhSepr3hAg5K9',
-                    'thumbMediaId' => 'ZWWu54xvKw6PRfEmrdzZuzfPAiKBpQMEPHfB732tF1QHazqp1wvN5nFWF18ppCto'
-                ),
-            ),
-            array(
+                    'thumbMediaId' => 'ZWWu54xvKw6PRfEmrdzZuzfPAiKBpQMEPHfB732tF1QHazqp1wvN5nFWF18ppCto',
+                ],
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
@@ -468,37 +473,35 @@ class WeChatAppTest extends TestCase
                     <Url><![CDATA[url]]></Url>
                     <MsgId>1234567890123456</MsgId>
                  </xml>',
-                array(
+                [
                     'msgType' => 'link',
                     'title' => '公众平台官网链接',
                     'description' => '公众平台官网链接',
-                    'url' => 'url'
-                ),
-            ),
-            array(
+                    'url' => 'url',
+                ],
+            ],
+            [
                 'signature=46816a3b00bfd8ed18826278f140395fcdd5af8f&timestamp=1366032735&nonce=1365872231',
                 'invalid xml',
-                array(
-                    'msgType' => null
-                ),
-            ),
+                [
+                    'msgType' => null,
+                ],
+            ],
             // Test for WeChat sort bug
             // https://mp.weixin.qq.com/cgi-bin/readtemplate?t=news/php-sdk_tmpl&lang=zh_CN
-            array(
+            [
                 'signature=f73bdd6d07293461e27b2c3921e71df54ee1c3fc&timestamp=1393983248&nonce=1868297319',
                 '',
-                array(
-
-                ),
-            ),
-            array(
+                [
+                ],
+            ],
+            [
                 'signature=98cf92919c7a015019893e7967ef94972e3d0e38&timestamp=1393983225&nonce=986423648',
                 '',
-                array(
-
-                ),
-            )
-        );
+                [
+                ],
+            ],
+        ];
     }
 
     public function inputTextMessage($input)
@@ -515,16 +518,16 @@ class WeChatAppTest extends TestCase
 
     public function testFlatMode()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
-            'query' => array(
+            'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
-                'nonce'     => '1365872231',
-                'echostr'   => $rand = mt_rand(0, 100000)
-            ),
-            'postData' => $this->inputTextMessage('hi')
-        ));
+                'nonce' => '1365872231',
+                'echostr' => $rand = mt_rand(0, 100000),
+            ],
+            'postData' => $this->inputTextMessage('hi'),
+        ]);
 
         // Receive data not in callback Closure
         $this->assertEquals('hi', $app->getContent());
@@ -532,57 +535,59 @@ class WeChatAppTest extends TestCase
 
     public function testIsVerifyToken()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
-            'query' => array(
+            'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
-                'nonce'     => '1365872231',
-                'echostr'   => $rand = mt_rand(0, 100000)
-            ),
-            'postData' => $this->inputTextMessage('hi')
-        ));
+                'nonce' => '1365872231',
+                'echostr' => $rand = mt_rand(0, 100000),
+            ],
+            'postData' => $this->inputTextMessage('hi'),
+        ]);
         $this->assertTrue($app->isVerifyToken());
     }
 
     public function testIsNotVerifyToken()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
-            'query' => array(
+            'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
-                'nonce'     => '1365872231',
-            ),
-            'postData' => $this->inputTextMessage('hi')
-        ));
+                'nonce' => '1365872231',
+            ],
+            'postData' => $this->inputTextMessage('hi'),
+        ]);
         $this->assertFalse($app->isVerifyToken());
     }
 
     /**
      * @dataProvider providerForCase
+     * @param mixed $input
+     * @param mixed $output
      */
     public function testCase($input, $output)
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
-            'query' => array(
+            'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
-                'nonce'     => '1365872231',
-            ),
-            'postData' => $this->inputTextMessage($input)
-        ));
+                'nonce' => '1365872231',
+            ],
+            'postData' => $this->inputTextMessage($input),
+        ]);
 
-        $app->is('abc', function(){
+        $app->is('abc', function () {
             return 'abc';
         });
 
-        $app->startsWith('d', function(){
+        $app->startsWith('d', function () {
             return 'd';
         });
 
-        $app->has('e', function(){
+        $app->has('e', function () {
             return 'e';
         });
 
@@ -596,30 +601,30 @@ class WeChatAppTest extends TestCase
 
     public function providerForCase()
     {
-        return array(
-            array('abc', 'abc'),
-            array('ABC', 'abc'), // Case insensitive
-            array('Abc', 'abc'),
-            array('dabc', 'd'),
-            array('Dabc', 'd'),
-            array('d中文', 'd'),
-            array('e', 'e'),
-            array('EAbc', 'e'),
-            array('ARE', 'e'),
-        );
+        return [
+            ['abc', 'abc'],
+            ['ABC', 'abc'], // Case insensitive
+            ['Abc', 'abc'],
+            ['dabc', 'd'],
+            ['Dabc', 'd'],
+            ['d中文', 'd'],
+            ['e', 'e'],
+            ['EAbc', 'e'],
+            ['ARE', 'e'],
+        ];
     }
 
     public function testNoRuleHandled()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
-            'query' => array(
+            'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
-                'nonce'     => '1365872231',
-            ),
-            'postData' => $this->inputTextMessage('test')
-        ));
+                'nonce' => '1365872231',
+            ],
+            'postData' => $this->inputTextMessage('test'),
+        ]);
 
         // Execute and parse result
         $result = $app->run();
@@ -629,18 +634,17 @@ class WeChatAppTest extends TestCase
 
     public function testNotHandleInDefault()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
-            'query' => array(
+            'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
-                'nonce'     => '1365872231',
-            ),
-            'postData' => $this->inputTextMessage('test')
-        ));
+                'nonce' => '1365872231',
+            ],
+            'postData' => $this->inputTextMessage('test'),
+        ]);
 
-        $app->defaults(function() {
-
+        $app->defaults(function () {
         });
 
         // Execute and parse result
@@ -651,13 +655,13 @@ class WeChatAppTest extends TestCase
 
     public function testHasEventButNotMatch()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
-            'query' => array(
+            'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
-                'nonce'     => '1365872231',
-            ),
+                'nonce' => '1365872231',
+            ],
             'postData' => '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
                     <FromUserName><![CDATA[fromUser]]></FromUserName>
@@ -665,11 +669,10 @@ class WeChatAppTest extends TestCase
                     <MsgType><![CDATA[event]]></MsgType>
                     <Event><![CDATA[CLICK]]></Event>
                     <EventKey><![CDATA[index]]></EventKey>
-                 </xml>'
-        ));
+                 </xml>',
+        ]);
 
-
-        $app->click('my', function(){
+        $app->click('my', function () {
             return 'My info';
         });
 
@@ -678,8 +681,8 @@ class WeChatAppTest extends TestCase
 
     public function providerForScan()
     {
-        return array(
-            array(
+        return [
+            [
                 // Scan after subscribe
                 'postData' => '<xml><ToUserName><![CDATA[ToUserName]]></ToUserName>
 <FromUserName><![CDATA[FromUserName]]></FromUserName>
@@ -692,8 +695,8 @@ class WeChatAppTest extends TestCase
                 'sceneId' => 1,
                 'result' => 'scan',
                 'calledSubscribe' => false,
-            ),
-            array(
+            ],
+            [
                 // Scan and subscribe
                 'postData' => '<xml><ToUserName><![CDATA[ToUserName]]></ToUserName>
 <FromUserName><![CDATA[FromUserName]]></FromUserName>
@@ -706,8 +709,8 @@ class WeChatAppTest extends TestCase
                 'sceneId' => 2,
                 'result' => 'subscribe',
                 'calledSubscribe' => true,
-            ),
-            array(
+            ],
+            [
                 // subscribe
                 'postData' => '<xml><ToUserName><![CDATA[ToUserName]]></ToUserName>
 <FromUserName><![CDATA[FromUserName]]></FromUserName>
@@ -719,41 +722,45 @@ class WeChatAppTest extends TestCase
                 'sceneId' => false,
                 'result' => 'subscribe',
                 'calledSubscribe' => true,
-            )
-        );
+            ],
+        ];
     }
 
     /**
      * @dataProvider providerForScan
+     * @param mixed $postData
+     * @param mixed $sceneId
+     * @param mixed $result
+     * @param mixed $calledSubscribe
      */
     public function testScan($postData, $sceneId, $result, $calledSubscribe)
     {
         $test = $this;
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
-            'query' => array(
+            'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
-                'nonce'     => '1365872231',
-            ),
-            'postData' => $postData
-        ));
+                'nonce' => '1365872231',
+            ],
+            'postData' => $postData,
+        ]);
 
         $subscribeFlag = false;
 
         $this->assertEquals($sceneId, $app->getScanSceneId());
 
-        $app->subscribe(function() use(&$subscribeFlag) {
+        $app->subscribe(function () use (&$subscribeFlag) {
             $subscribeFlag = true;
             return 'subscribe';
         });
 
-        $app->scan(function(WeChatApp $app) use($test, $sceneId) {
+        $app->scan(function (WeChatApp $app) use ($test, $sceneId) {
             $test->assertEquals($sceneId, $app->getScanSceneId());
             return 'scan';
         });
 
-        $app->defaults(function(){
+        $app->defaults(function () {
             return 'This is the default message';
         });
 
@@ -768,13 +775,13 @@ class WeChatAppTest extends TestCase
     public function testScanAndSubscribe()
     {
         $test = $this;
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
-            'query' => array(
+            'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
-                'nonce'     => '1365872231',
-            ),
+                'nonce' => '1365872231',
+            ],
             'postData' => '<xml><ToUserName><![CDATA[ToUserName]]></ToUserName>
 <FromUserName><![CDATA[FromUserName]]></FromUserName>
 <CreateTime>1394729846</CreateTime>
@@ -782,10 +789,10 @@ class WeChatAppTest extends TestCase
 <Event><![CDATA[subscribe]]></Event>
 <EventKey><![CDATA[qrscene_2]]></EventKey>
 <Ticket><![CDATA[gQGS8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL2FFMmtOc0hseEhpOU05YUdzR093AAIE0OAhUwMECAcAAA==]]></Ticket>
-</xml>'
-        ));
+</xml>',
+        ]);
 
-        $app->scan(function(WeChatApp $app) use($test) {
+        $app->scan(function (WeChatApp $app) use ($test) {
             $test->assertEquals('2', $app->getScanSceneId());
             return 'scan';
         });
@@ -797,23 +804,23 @@ class WeChatAppTest extends TestCase
 
     public function testEncrypt()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
             'appId' => 'wxbad0b45542aa0b5e',
             'token' => 'weixin',
             'encodingAesKey' => 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG',
-            'query' => array(
+            'query' => [
                 'encrypt_type' => 'aes',
                 'msg_signature' => '6147984331daf7a1a9eed6e0ec3ba69055256154',
                 'signature' => '35703636de2f9df2a77a662b68e521ce17c34db4',
                 'timestamp' => '1414243737',
-                'nonce' => '1792106704'
-            ),
+                'nonce' => '1792106704',
+            ],
             'postData' => '<xml>
     <ToUserName><![CDATA[gh_680bdefc8c5d]]></ToUserName>
     <Encrypt><![CDATA[MNn4+jJ/VsFh2gUyKAaOJArwEVYCvVmyN0iXzNarP3O6vXzK62ft1/KG2/XPZ4y5bPWU/jfIfQxODRQ7sLkUsrDRqsWimuhIT8Eq+w4E/28m+XDAQKEOjWTQIOp1p6kNsIV1DdC3B+AtcKcKSNAeJDr7x7GHLx5DZYK09qQsYDOjP6R5NqebFjKt/NpEl/GU3gWFwG8LCtRNuIYdK5axbFSfmXbh5CZ6Bk5wSwj5fu5aS90cMAgUhGsxrxZTY562QR6c+3ydXxb+GHI5w+qA+eqJjrQqR7u5hS+1x5sEsA7vS+bZ5LYAR3+PZ243avQkGllQ+rg7a6TeSGDxxhvLw+mxxinyk88BNHkJnyK//hM1k9PuvuLAASdaud4vzRQlAmnYOslZl8CN7gjCjV41skUTZv3wwGPxvEqtm/nf5fQ=]]></Encrypt>
-</xml>'
-        ));
+</xml>',
+        ]);
 
         $app->is('?', function () {
             return 'xx';
@@ -830,23 +837,23 @@ class WeChatAppTest extends TestCase
 
     public function testEncryptNoRuleReturnSuccess()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
             'appId' => 'wxbad0b45542aa0b5e',
             'token' => 'weixin',
             'encodingAesKey' => 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG',
-            'query' => array(
+            'query' => [
                 'encrypt_type' => 'aes',
                 'msg_signature' => '6147984331daf7a1a9eed6e0ec3ba69055256154',
                 'signature' => '35703636de2f9df2a77a662b68e521ce17c34db4',
                 'timestamp' => '1414243737',
-                'nonce' => '1792106704'
-            ),
+                'nonce' => '1792106704',
+            ],
             'postData' => '<xml>
     <ToUserName><![CDATA[gh_680bdefc8c5d]]></ToUserName>
     <Encrypt><![CDATA[MNn4+jJ/VsFh2gUyKAaOJArwEVYCvVmyN0iXzNarP3O6vXzK62ft1/KG2/XPZ4y5bPWU/jfIfQxODRQ7sLkUsrDRqsWimuhIT8Eq+w4E/28m+XDAQKEOjWTQIOp1p6kNsIV1DdC3B+AtcKcKSNAeJDr7x7GHLx5DZYK09qQsYDOjP6R5NqebFjKt/NpEl/GU3gWFwG8LCtRNuIYdK5axbFSfmXbh5CZ6Bk5wSwj5fu5aS90cMAgUhGsxrxZTY562QR6c+3ydXxb+GHI5w+qA+eqJjrQqR7u5hS+1x5sEsA7vS+bZ5LYAR3+PZ243avQkGllQ+rg7a6TeSGDxxhvLw+mxxinyk88BNHkJnyK//hM1k9PuvuLAASdaud4vzRQlAmnYOslZl8CN7gjCjV41skUTZv3wwGPxvEqtm/nf5fQ=]]></Encrypt>
-</xml>'
-        ));
+</xml>',
+        ]);
 
         $xml = $app->run();
 
@@ -855,26 +862,25 @@ class WeChatAppTest extends TestCase
 
     public function testEncryptEmptyReturnSuccess()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
             'appId' => 'wxbad0b45542aa0b5e',
             'token' => 'weixin',
             'encodingAesKey' => 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG',
-            'query' => array(
+            'query' => [
                 'encrypt_type' => 'aes',
                 'msg_signature' => '6147984331daf7a1a9eed6e0ec3ba69055256154',
                 'signature' => '35703636de2f9df2a77a662b68e521ce17c34db4',
                 'timestamp' => '1414243737',
-                'nonce' => '1792106704'
-            ),
+                'nonce' => '1792106704',
+            ],
             'postData' => '<xml>
     <ToUserName><![CDATA[gh_680bdefc8c5d]]></ToUserName>
     <Encrypt><![CDATA[MNn4+jJ/VsFh2gUyKAaOJArwEVYCvVmyN0iXzNarP3O6vXzK62ft1/KG2/XPZ4y5bPWU/jfIfQxODRQ7sLkUsrDRqsWimuhIT8Eq+w4E/28m+XDAQKEOjWTQIOp1p6kNsIV1DdC3B+AtcKcKSNAeJDr7x7GHLx5DZYK09qQsYDOjP6R5NqebFjKt/NpEl/GU3gWFwG8LCtRNuIYdK5axbFSfmXbh5CZ6Bk5wSwj5fu5aS90cMAgUhGsxrxZTY562QR6c+3ydXxb+GHI5w+qA+eqJjrQqR7u5hS+1x5sEsA7vS+bZ5LYAR3+PZ243avQkGllQ+rg7a6TeSGDxxhvLw+mxxinyk88BNHkJnyK//hM1k9PuvuLAASdaud4vzRQlAmnYOslZl8CN7gjCjV41skUTZv3wwGPxvEqtm/nf5fQ=]]></Encrypt>
-</xml>'
-        ));
+</xml>',
+        ]);
 
         $app->is('?', function () {
-
         });
 
         $xml = $app->run();
@@ -884,23 +890,23 @@ class WeChatAppTest extends TestCase
 
     public function testEncryptMsgSignatureErr()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
             'appId' => 'wxbad0b45542aa0b5e',
             'token' => 'weixin',
             'encodingAesKey' => 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG',
-            'query' => array(
+            'query' => [
                 'encrypt_type' => 'aes',
                 'msg_signature' => '123',
                 'signature' => '35703636de2f9df2a77a662b68e521ce17c34db4',
                 'timestamp' => '1414243737',
-                'nonce' => '1792106704'
-            ),
+                'nonce' => '1792106704',
+            ],
             'postData' => '<xml>
     <ToUserName><![CDATA[gh_680bdefc8c5d]]></ToUserName>
     <Encrypt><![CDATA[MNn4+jJ/VsFh2gUyKAaOJArwEVYCvVmyN0iXzNarP3O6vXzK62ft1/KG2/XPZ4y5bPWU/jfIfQxODRQ7sLkUsrDRqsWimuhIT8Eq+w4E/28m+XDAQKEOjWTQIOp1p6kNsIV1DdC3B+AtcKcKSNAeJDr7x7GHLx5DZYK09qQsYDOjP6R5NqebFjKt/NpEl/GU3gWFwG8LCtRNuIYdK5axbFSfmXbh5CZ6Bk5wSwj5fu5aS90cMAgUhGsxrxZTY562QR6c+3ydXxb+GHI5w+qA+eqJjrQqR7u5hS+1x5sEsA7vS+bZ5LYAR3+PZ243avQkGllQ+rg7a6TeSGDxxhvLw+mxxinyk88BNHkJnyK//hM1k9PuvuLAASdaud4vzRQlAmnYOslZl8CN7gjCjV41skUTZv3wwGPxvEqtm/nf5fQ=]]></Encrypt>
-</xml>'
-        ));
+</xml>',
+        ]);
 
         $ret = $app->parse();
 
@@ -910,23 +916,23 @@ class WeChatAppTest extends TestCase
 
     public function testEncryptFromAppIdErr()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
             'appId' => 'wxbad0b45542aa0b5e1',
             'token' => 'weixin',
             'encodingAesKey' => 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG',
-            'query' => array(
+            'query' => [
                 'encrypt_type' => 'aes',
                 'msg_signature' => '6147984331daf7a1a9eed6e0ec3ba69055256154',
                 'signature' => '35703636de2f9df2a77a662b68e521ce17c34db4',
                 'timestamp' => '1414243737',
-                'nonce' => '1792106704'
-            ),
+                'nonce' => '1792106704',
+            ],
             'postData' => '<xml>
     <ToUserName><![CDATA[gh_680bdefc8c5d]]></ToUserName>
     <Encrypt><![CDATA[MNn4+jJ/VsFh2gUyKAaOJArwEVYCvVmyN0iXzNarP3O6vXzK62ft1/KG2/XPZ4y5bPWU/jfIfQxODRQ7sLkUsrDRqsWimuhIT8Eq+w4E/28m+XDAQKEOjWTQIOp1p6kNsIV1DdC3B+AtcKcKSNAeJDr7x7GHLx5DZYK09qQsYDOjP6R5NqebFjKt/NpEl/GU3gWFwG8LCtRNuIYdK5axbFSfmXbh5CZ6Bk5wSwj5fu5aS90cMAgUhGsxrxZTY562QR6c+3ydXxb+GHI5w+qA+eqJjrQqR7u5hS+1x5sEsA7vS+bZ5LYAR3+PZ243avQkGllQ+rg7a6TeSGDxxhvLw+mxxinyk88BNHkJnyK//hM1k9PuvuLAASdaud4vzRQlAmnYOslZl8CN7gjCjV41skUTZv3wwGPxvEqtm/nf5fQ=]]></Encrypt>
-</xml>'
-        ));
+</xml>',
+        ]);
 
         $ret = $app->parse();
 
@@ -936,23 +942,23 @@ class WeChatAppTest extends TestCase
 
     public function testEncryptAesErr()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
             'appId' => 'wxbad0b45542aa0b5e',
             'token' => 'weixin',
             'encodingAesKey' => '12',
-            'query' => array(
+            'query' => [
                 'encrypt_type' => 'aes',
                 'msg_signature' => '6147984331daf7a1a9eed6e0ec3ba69055256154',
                 'signature' => '35703636de2f9df2a77a662b68e521ce17c34db4',
                 'timestamp' => '1414243737',
-                'nonce' => '1792106704'
-            ),
+                'nonce' => '1792106704',
+            ],
             'postData' => '<xml>
     <ToUserName><![CDATA[gh_680bdefc8c5d]]></ToUserName>
     <Encrypt><![CDATA[MNn4+jJ/VsFh2gUyKAaOJArwEVYCvVmyN0iXzNarP3O6vXzK62ft1/KG2/XPZ4y5bPWU/jfIfQxODRQ7sLkUsrDRqsWimuhIT8Eq+w4E/28m+XDAQKEOjWTQIOp1p6kNsIV1DdC3B+AtcKcKSNAeJDr7x7GHLx5DZYK09qQsYDOjP6R5NqebFjKt/NpEl/GU3gWFwG8LCtRNuIYdK5axbFSfmXbh5CZ6Bk5wSwj5fu5aS90cMAgUhGsxrxZTY562QR6c+3ydXxb+GHI5w+qA+eqJjrQqR7u5hS+1x5sEsA7vS+bZ5LYAR3+PZ243avQkGllQ+rg7a6TeSGDxxhvLw+mxxinyk88BNHkJnyK//hM1k9PuvuLAASdaud4vzRQlAmnYOslZl8CN7gjCjV41skUTZv3wwGPxvEqtm/nf5fQ=]]></Encrypt>
-</xml>'
-        ));
+</xml>',
+        ]);
 
         $ret = $app->parse();
         $this->assertEquals(-2002, $ret['code']);
@@ -962,15 +968,15 @@ class WeChatAppTest extends TestCase
 
     public function testGetAttrs()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
-            'query' => array(
+            'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
-                'nonce'     => '1365872231',
-            ),
-            'postData' => $this->inputTextMessage('hi')
-        ));
+                'nonce' => '1365872231',
+            ],
+            'postData' => $this->inputTextMessage('hi'),
+        ]);
 
         $attrs = $app->getAttrs();
 
@@ -986,28 +992,28 @@ class WeChatAppTest extends TestCase
 
     public function testGetKeyword()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
-            'query' => array(
+            'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
-                'nonce'     => '1365872231',
-            ),
-            'postData' => $this->inputTextMessage('hi')
-        ));
+                'nonce' => '1365872231',
+            ],
+            'postData' => $this->inputTextMessage('hi'),
+        ]);
 
         $this->assertEquals('hi', $app->getKeyword());
     }
 
     public function testGetKeywordFromEvent()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
-            'query' => array(
+            'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
-                'nonce'     => '1365872231',
-            ),
+                'nonce' => '1365872231',
+            ],
             'postData' => '<xml>
                     <ToUserName><![CDATA[toUser]]></ToUserName>
                     <FromUserName><![CDATA[fromUser]]></FromUserName>
@@ -1015,21 +1021,21 @@ class WeChatAppTest extends TestCase
                     <MsgType><![CDATA[event]]></MsgType>
                     <Event><![CDATA[CLICK]]></Event>
                     <EventKey><![CDATA[index]]></EventKey>
-                 </xml>'
-        ));
+                 </xml>',
+        ]);
 
         $this->assertEquals('index', $app->getKeyword());
     }
 
     public function testGetKeywordFromSubscribe()
     {
-        $app = new \Wei\WeChatApp(array(
+        $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
-            'query' => array(
+            'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
                 'timestamp' => '1366032735',
-                'nonce'     => '1365872231',
-            ),
+                'nonce' => '1365872231',
+            ],
             'postData' => '<xml>
 <ToUserName><![CDATA[toUser]]></ToUserName>
 <FromUserName><![CDATA[fromUser]]></FromUserName>
@@ -1037,8 +1043,8 @@ class WeChatAppTest extends TestCase
 <MsgType><![CDATA[event]]></MsgType>
 <Event><![CDATA[subscribe]]></Event>
 <EventKey><![CDATA[]]></EventKey>
-</xml>'
-        ));
+</xml>',
+        ]);
 
         $this->assertFalse($app->getKeyword());
     }
@@ -1057,6 +1063,6 @@ class WeChatAppTest extends TestCase
         libxml_use_internal_errors($useErrors);
 
         // Fix the issue that XML parse empty data to new SimpleXMLElement object
-        return array_map('strval', (array)$array);
+        return array_map('strval', (array) $array);
     }
 }

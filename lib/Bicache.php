@@ -20,10 +20,10 @@ class Bicache extends BaseCache
     /**
      * @var array
      */
-    protected $providers = array(
+    protected $providers = [
         'master' => 'apc',
         'slave' => 'fileCache',
-    );
+    ];
 
     /**
      * The seconds to update the slave cache

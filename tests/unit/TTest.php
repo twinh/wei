@@ -4,14 +4,16 @@ namespace WeiTest;
 
 /**
  * @property \Wei\T $t The translator wei
+ *
+ * @internal
  */
-class TTest extends TestCase
+final class TTest extends TestCase
 {
     public function testLoadFromArray()
     {
-        $this->t->loadFromArray(array(
-            'key' => 'value'
-        ));
+        $this->t->loadFromArray([
+            'key' => 'value',
+        ]);
 
         $this->assertEquals('value', $this->t('key'));
         $this->assertEquals('value', $this->t->trans('key'));
@@ -19,10 +21,10 @@ class TTest extends TestCase
 
     public function testLoad()
     {
-        $this->t->load(function(){
-            return array(
-                'key1' => 'value1'
-            );
+        $this->t->load(function () {
+            return [
+                'key1' => 'value1',
+            ];
         });
 
         $this->assertEquals('value1', $this->t('key1'));
@@ -59,7 +61,7 @@ class TTest extends TestCase
         $this->assertEquals('zh-CN', $this->t->getDefaultLocale());
     }
 
-     public function testLocale()
+    public function testLocale()
     {
         $this->assertEquals('en', $this->t->getLocale());
 

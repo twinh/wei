@@ -49,7 +49,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @var array
      */
-    protected $fields = array();
+    protected $fields = [];
 
     /**
      * The primary key field
@@ -70,21 +70,21 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @var array|$this[]
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * The fields that are assignable through fromArray method
      *
      * @var array
      */
-    protected $fillable = array();
+    protected $fillable = [];
 
     /**
      * The fields that aren't assignable through fromArray method
      *
      * @var array
      */
-    protected $guarded = array('id');
+    protected $guarded = ['id'];
 
     /**
      * Whether the record's data is changed
@@ -98,7 +98,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @var array
      */
-    protected $changedData = array();
+    protected $changedData = [];
 
     /**
      * Whether the record has been removed from database
@@ -133,18 +133,18 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @var array
      */
-    protected $sqlParts = array(
-        'select' => array(),
+    protected $sqlParts = [
+        'select' => [],
         'from' => null,
-        'join' => array(),
-        'set' => array(),
+        'join' => [],
+        'set' => [],
         'where' => null,
-        'groupBy' => array(),
+        'groupBy' => [],
         'having' => null,
-        'orderBy' => array(),
+        'orderBy' => [],
         'limit' => null,
         'offset' => null,
-    );
+    ];
 
     /**
      * A field to be the key of the fetched array, if not provided, return
@@ -155,7 +155,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     protected $indexBy;
 
     /**
-     * @var string The complete SQL string for this query.
+     * @var string the complete SQL string for this query
      */
     protected $sql;
 
@@ -164,26 +164,26 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @var array
      */
-    protected $params = array();
+    protected $params = [];
 
     /**
      * The parameter type map of this query
      *
      * @var array
      */
-    protected $paramTypes = array();
+    protected $paramTypes = [];
 
     /**
      * The type of query this is. Can be select, update or delete
      *
-     * @var integer
+     * @var int
      */
     protected $type = self::SELECT;
 
     /**
      * The state of the query object. Can be dirty or clean
      *
-     * @var integer
+     * @var int
      */
     protected $state = self::STATE_CLEAN;
 
@@ -211,7 +211,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @var array
      */
-    protected $cacheTags = array();
+    protected $cacheTags = [];
 
     /**
      * @var string|bool
@@ -223,12 +223,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
 
         // Clear changed status after created
-        $this->changedData = array();
+        $this->changedData = [];
         $this->isChanged = false;
 
         $this->triggerCallback('afterLoad');
@@ -261,7 +261,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $returnFields A indexed array specified the fields to return
      * @return array
      */
-    public function toArray($returnFields = array())
+    public function toArray($returnFields = [])
     {
         if (!$this->isColl) {
             $data = array_fill_keys($returnFields ?: $this->getFields(), null);
@@ -272,7 +272,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                 return array_intersect_key($this->data, $data) + $data;
             }
         } else {
-            $data = array();
+            $data = [];
             /** @var $record Record */
             foreach ($this->data as $key => $record) {
                 $data[$key] = $record->toArray($returnFields);
@@ -287,7 +287,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $returnFields A indexed array specified the fields to return
      * @return array
      */
-    public function toJson($returnFields = array())
+    public function toJson($returnFields = [])
     {
         return json_encode($this->toArray($returnFields));
     }
@@ -316,7 +316,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function isFillable($field)
     {
-        return !in_array($field, $this->guarded) && !$this->fillable || in_array($field, $this->fillable);
+        return !in_array($field, $this->guarded, true) && !$this->fillable || in_array($field, $this->fillable, true);
     }
 
     /**
@@ -339,14 +339,13 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $data
      * @return $this
      */
-    public function save($data = array())
+    public function save($data = [])
     {
         // 1. Merges data from parameters
         $data && $this->fromArray($data);
 
         // 2.1 Saves single record
         if (!$this->isColl) {
-
             // 2.1.1 Returns when record has been destroy to avoid store dirty data
             if ($this->isDestroyed) {
                 return $this;
@@ -354,7 +353,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
             // Deletes the record when it's waiting to remove from database
             if ($this->detached) {
-                $this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
+                $this->db->delete($this->table, [$this->primaryKey => $this->data[$this->primaryKey]]);
                 $this->isDestroyed = true;
                 return $this;
             }
@@ -384,20 +383,20 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             } else {
                 if ($this->isChanged) {
                     $data = array_intersect_key($this->data, $this->changedData);
-                    $this->db->update($this->table, $data, array(
-                        $this->primaryKey => $this->data[$this->primaryKey]
-                    ));
+                    $this->db->update($this->table, $data, [
+                        $this->primaryKey => $this->data[$this->primaryKey],
+                    ]);
                 }
             }
 
             // 2.1.4 Reset changed data and changed status
-            $this->changedData = array();
+            $this->changedData = [];
             $this->isChanged = false;
 
             // 2.1.5. Triggers after callbacks
             $this->triggerCallback($isNew ? 'afterCreate' : 'afterUpdate');
             $this->triggerCallback('afterSave');
-            // 2.2 Loop and save collection records
+        // 2.2 Loop and save collection records
         } else {
             foreach ($this->data as $record) {
                 $record->save();
@@ -432,11 +431,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         return $this;
     }
 
-    protected function executeDestroy()
-    {
-        $this->db->delete($this->table, array($this->primaryKey => $this->data[$this->primaryKey]));
-    }
-
     /**
      * Reload the record data from database
      *
@@ -444,8 +438,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function reload()
     {
-        $this->data = (array)$this->db->select($this->table, array($this->primaryKey => $this->get($this->primaryKey)));
-        $this->changedData = array();
+        $this->data = (array) $this->db->select($this->table, [$this->primaryKey => $this->get($this->primaryKey)]);
+        $this->changedData = [];
         $this->isChanged = false;
         $this->triggerCallback('afterLoad');
         return $this;
@@ -459,14 +453,14 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param bool $sort
      * @return $this
      */
-    public function saveColl($data, $extraData = array(), $sort = false)
+    public function saveColl($data, $extraData = [], $sort = false)
     {
         if (!is_array($data)) {
             return $this;
         }
 
         // 1. Uses primary key as data index
-        $newData = array();
+        $newData = [];
         foreach ($this->data as $key => $record) {
             unset($this->data[$key]);
             // Ignore default data
@@ -484,15 +478,15 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         }
 
         // 3. Removes missing rows
-        $existIds = array();
+        $existIds = [];
         foreach ($data as $row) {
-            if (isset($row[$this->primaryKey]) && $row[$this->primaryKey] !== null) {
+            if (isset($row[$this->primaryKey]) && null !== $row[$this->primaryKey]) {
                 $existIds[] = $row[$this->primaryKey];
             }
         }
         /** @var $record Record */
         foreach ($this->data as $key => $record) {
-            if (!in_array($record[$this->primaryKey], $existIds)) {
+            if (!in_array($record[$this->primaryKey], $existIds, true)) {
                 $record->destroy();
                 unset($this->data[$key]);
             }
@@ -503,7 +497,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             if ($sort) {
                 $row[$sort] = $index;
             }
-            if (isset($row[$this->primaryKey]) && isset($this->data[$row[$this->primaryKey]])) {
+            if (isset($row[$this->primaryKey], $this->data[$row[$this->primaryKey]])) {
                 $this->data[$row[$this->primaryKey]]->fromArray($row);
             } else {
                 $this[] = $this->db($this->table)->fromArray($extraData + $row);
@@ -524,11 +518,11 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function get($name)
     {
         // Check if field exists when it is not a collection
-        if (!$this->isColl && !in_array($name, $this->getFields())) {
+        if (!$this->isColl && !in_array($name, $this->getFields(), true)) {
             throw new \InvalidArgumentException(sprintf(
                 'Field "%s" not found in record class "%s"',
                 $name,
-                get_class($this)
+                static::class
             ));
         }
         return isset($this->data[$name]) ? $this->data[$name] : null;
@@ -552,7 +546,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         }
 
         if (!$this->isColl) {
-            if (in_array($name, $this->getFields())) {
+            if (in_array($name, $this->getFields(), true)) {
                 $this->changedData[$name] = isset($this->data[$name]) ? $this->data[$name] : null;
                 $this->data[$name] = $value;
                 $this->isChanged = true;
@@ -562,7 +556,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
                 throw new \InvalidArgumentException('Value for collection must be an instance of Wei\Record');
             } else {
                 // Support $coll[] = $value;
-                if ($name === null) {
+                if (null === $name) {
                     $this->data[] = $value;
                 } else {
                     $this->data[$name] = $value;
@@ -595,7 +589,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function getAll($name)
     {
-        $data = array();
+        $data = [];
         foreach ($this->data as $record) {
             $data[] = $record[$name];
         }
@@ -629,7 +623,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function incr($name, $offset = 1)
     {
-        $this[$name] = (object)($name . ' + ' . $offset);
+        $this[$name] = (object) ($name . ' + ' . $offset);
         return $this;
     }
 
@@ -642,7 +636,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function decr($name, $offset = 1)
     {
-        $this[$name] = (object)($name . ' - ' . $offset);
+        $this[$name] = (object) ($name . ' - ' . $offset);
         return $this;
     }
 
@@ -654,7 +648,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function detach($bool = true)
     {
-        $this->detached = (bool)$bool;
+        $this->detached = (bool) $bool;
         return $this;
     }
 
@@ -769,7 +763,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Get the state of this query builder instance
      *
-     * @return integer
+     * @return int
      */
     public function getState()
     {
@@ -783,9 +777,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function execute()
     {
-        if ($this->type == self::SELECT) {
+        if (self::SELECT == $this->type) {
             $this->loaded = true;
-            if ($this->cacheTime !== false) {
+            if (false !== $this->cacheTime) {
                 return $this->fetchFromCache();
             } else {
                 return $this->db->fetchAll($this->getSql(), $this->params, $this->paramTypes);
@@ -793,20 +787,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         } else {
             return $this->db->executeUpdate($this->getSql(), $this->params, $this->paramTypes);
         }
-    }
-
-    /**
-     * @return mixed
-     */
-    protected function fetchFromCache()
-    {
-        $cache = $this->cacheTags === false ? $this->cache : $this->tagCache($this->cacheTags ?: $this->getCacheTags());
-        $that = $this;
-        $params = $this->params;
-        $paramTypes = $this->paramTypes;
-        return $cache->get($this->getCacheKey(), $this->cacheTime, function () use ($that, $params, $paramTypes) {
-            return $that->db->fetchAll($that->getSql(), $params, $paramTypes);
-        });
     }
 
     /**
@@ -846,13 +826,13 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $data
      * @return $this
      */
-    public function findOrInit($conditions = false, $data = array())
+    public function findOrInit($conditions = false, $data = [])
     {
         if (!$this->find($conditions)) {
             // Reset status when record not found
             $this->isNew = true;
 
-            !is_array($conditions) && $conditions = array($this->primaryKey => $conditions);
+            !is_array($conditions) && $conditions = [$this->primaryKey => $conditions];
 
             // Convert to object to array
             if (is_object($data) && method_exists($data, 'toArray')) {
@@ -893,7 +873,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $this->isColl = true;
         $data = $this->fetchAll($conditions);
 
-        $records = array();
+        $records = [];
         foreach ($data as $key => $row) {
             /** @var $records Record[] */
             $records[$key] = $this->db->init($this->table, $row, false);
@@ -912,7 +892,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function findById($value)
     {
-        return $this->find(array($this->primaryKey => $value));
+        return $this->find([$this->primaryKey => $value]);
     }
 
     /**
@@ -923,7 +903,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function findOneById($value)
     {
-        return $this->findOne(array($this->primaryKey => $value));
+        return $this->findOne([$this->primaryKey => $value]);
     }
 
     /**
@@ -933,9 +913,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $data
      * @return $this
      */
-    public function findOrInitById($value, $data = array())
+    public function findOrInitById($value, $data = [])
     {
-        return $this->findOrInit(array($this->primaryKey => $value), $data);
+        return $this->findOrInit([$this->primaryKey => $value], $data);
     }
 
     /**
@@ -993,7 +973,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
 
         $select = $this->sqlParts['select'];
         $this->select('COUNT(' . $count . ')');
-        $count = (int)$this->db->fetchColumn($this->getSqlForSelect(true), $this->params);
+        $count = (int) $this->db->fetchColumn($this->getSqlForSelect(true), $this->params);
         $this->sqlParts['select'] = $select;
 
         return $count;
@@ -1008,7 +988,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function countBySubQuery($conditions = false)
     {
         $this->andWhere($conditions);
-        return (int)$this->db->fetchColumn($this->getSqlForCount(), $this->params);
+        return (int) $this->db->fetchColumn($this->getSqlForCount(), $this->params);
     }
 
     /**
@@ -1038,10 +1018,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array|string $set
      * @return int
      */
-    public function update($set = array())
+    public function update($set = [])
     {
         if (is_array($set)) {
-            $params = array();
+            $params = [];
             foreach ($set as $field => $param) {
                 $this->add('set', $field . ' = ?', true);
                 $params[] = $param;
@@ -1070,12 +1050,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Sets the position of the first result to retrieve (the "offset")
      *
-     * @param integer $offset The first result to return
+     * @param int $offset The first result to return
      * @return $this
      */
     public function offset($offset)
     {
-        $offset = (int)$offset;
+        $offset = (int) $offset;
         $offset < 0 && $offset = 0;
         return $this->add('offset', $offset);
     }
@@ -1083,12 +1063,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Sets the maximum number of results to retrieve (the "limit")
      *
-     * @param integer $limit The maximum number of results to retrieve
+     * @param int $limit The maximum number of results to retrieve
      * @return $this
      */
     public function limit($limit)
     {
-        $limit = (int)$limit;
+        $limit = (int) $limit;
         $limit < 1 && $limit = 1;
         return $this->add('limit', $limit);
     }
@@ -1113,7 +1093,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Specifies an item that is to be returned in the query result.
      * Replaces any previously specified selections, if any.
      *
-     * @param mixed $select The selection expressions.
+     * @param mixed $select the selection expressions
      * @return $this
      */
     public function select($select = null)
@@ -1131,7 +1111,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Adds an item that is to be returned in the query result.
      *
-     * @param mixed $select The selection expression.
+     * @param mixed $select the selection expression
      * @return $this
      */
     public function addSelect($select = null)
@@ -1185,7 +1165,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function innerJoin($table, $on = null)
     {
-        return $this->add('join', array('type' => 'inner', 'table' => $table, 'on' => $on), true);
+        return $this->add('join', ['type' => 'inner', 'table' => $table, 'on' => $on], true);
     }
 
     /**
@@ -1197,7 +1177,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function leftJoin($table, $on = null)
     {
-        return $this->add('join', array('type' => 'left', 'table' => $table, 'on' => $on), true);
+        return $this->add('join', ['type' => 'left', 'table' => $table, 'on' => $on], true);
     }
 
     /**
@@ -1209,7 +1189,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function rightJoin($table, $on = null)
     {
-        return $this->add('join', array('type' => 'right', 'table' => $table, 'on' => $on), true);
+        return $this->add('join', ['type' => 'right', 'table' => $table, 'on' => $on], true);
     }
 
     /**
@@ -1228,9 +1208,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $types The parameter types
      * @return $this
      */
-    public function where($conditions, $params = array(), $types = array())
+    public function where($conditions, $params = [], $types = [])
     {
-        if ($conditions === false) {
+        if (false === $conditions) {
             return $this;
         } else {
             $conditions = $this->processCondition($conditions, $params, $types);
@@ -1247,9 +1227,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $types The parameter types
      * @return $this
      */
-    public function andWhere($conditions, $params = array(), $types = array())
+    public function andWhere($conditions, $params = [], $types = [])
     {
-        if ($conditions === false) {
+        if (false === $conditions) {
             return $this;
         } else {
             $conditions = $this->processCondition($conditions, $params, $types);
@@ -1266,7 +1246,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $types The parameter types
      * @return $this
      */
-    public function orWhere($conditions, $params = array(), $types = array())
+    public function orWhere($conditions, $params = [], $types = [])
     {
         $conditions = $this->processCondition($conditions, $params, $types);
         return $this->add('where', $conditions, true, 'OR');
@@ -1276,7 +1256,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Specifies a grouping over the results of the query.
      * Replaces any previously specified groupings, if any.
      *
-     * @param mixed $groupBy The grouping expression.
+     * @param mixed $groupBy the grouping expression
      * @return $this
      */
     public function groupBy($groupBy)
@@ -1292,7 +1272,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Adds a grouping expression to the query.
      *
-     * @param mixed $groupBy The grouping expression.
+     * @param mixed $groupBy the grouping expression
      * @return $this
      */
     public function addGroupBy($groupBy)
@@ -1313,7 +1293,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $types The parameter types
      * @return $this
      */
-    public function having($conditions, $params = array(), $types = array())
+    public function having($conditions, $params = [], $types = [])
     {
         $conditions = $this->processCondition($conditions, $params, $types);
         return $this->add('having', $conditions);
@@ -1328,7 +1308,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $types The parameter types
      * @return $this
      */
-    public function andHaving($conditions, $params = array(), $types = array())
+    public function andHaving($conditions, $params = [], $types = [])
     {
         $conditions = $this->processCondition($conditions, $params, $types);
         return $this->add('having', $conditions, true, 'AND');
@@ -1343,7 +1323,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $types The parameter types
      * @return $this
      */
-    public function orHaving($conditions, $params = array(), $types = array())
+    public function orHaving($conditions, $params = [], $types = [])
     {
         $conditions = $this->processCondition($conditions, $params, $types);
         return $this->add('having', $conditions, true, 'OR');
@@ -1353,8 +1333,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Specifies an ordering for the query results.
      * Replaces any previously specified orderings, if any.
      *
-     * @param string $sort The ordering expression.
-     * @param string $order The ordering direction.
+     * @param string $sort the ordering expression
+     * @param string $order the ordering direction
      * @return $this
      */
     public function orderBy($sort, $order = 'ASC')
@@ -1365,8 +1345,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Adds an ordering to the query results.
      *
-     * @param string $sort The ordering expression.
-     * @param string $order The ordering direction.
+     * @param string $sort the ordering expression
+     * @param string $order the ordering direction
      * @return $this
      */
     public function addOrderBy($sort, $order = 'ASC')
@@ -1410,24 +1390,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * @param array $data
-     * @param string $field
-     * @return array
-     */
-    protected function executeIndexBy($data, $field)
-    {
-        if (!$data) {
-            return $data;
-        }
-
-        $newData = array();
-        foreach ($data as $row) {
-            $newData[$row[$field]] = $row;
-        }
-        return $newData;
-    }
-
-    /**
      * Returns a SQL query part by its name
      *
      * @param string $name The name of SQL part
@@ -1456,7 +1418,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function resetSqlParts($name = null)
     {
-        if (is_null($name)) {
+        if (null === $name) {
             $name = array_keys($this->sqlParts);
         }
         foreach ($name as $queryPartName) {
@@ -1473,7 +1435,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function resetSqlPart($name)
     {
-        $this->sqlParts[$name] = is_array($this->sqlParts[$name]) ? array() : null;
+        $this->sqlParts[$name] = is_array($this->sqlParts[$name]) ? [] : null;
         $this->state = self::STATE_DIRTY;
         return $this;
     }
@@ -1481,14 +1443,14 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Sets a query parameter for the query being constructed
      *
-     * @param string|integer $key The parameter position or name
+     * @param string|int $key The parameter position or name
      * @param mixed $value The parameter value
      * @param string|null $type PDO::PARAM_*
      * @return $this
      */
     public function setParameter($key, $value, $type = null)
     {
-        if ($type !== null) {
+        if (null !== $type) {
             $this->paramTypes[$key] = $type;
         }
 
@@ -1514,7 +1476,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param array $types The query parameters types to set
      * @return $this
      */
-    public function setParameters(array $params, array $types = array())
+    public function setParameters(array $params, array $types = [])
     {
         $this->paramTypes = $types;
         $this->params = $params;
@@ -1524,7 +1486,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Gets all defined query parameters for the query being constructed.
      *
-     * @return array The currently defined query parameters.
+     * @return array the currently defined query parameters
      */
     public function getParameters()
     {
@@ -1538,7 +1500,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function getSql()
     {
-        if ($this->sql !== null && $this->state === self::STATE_CLEAN) {
+        if (null !== $this->sql && self::STATE_CLEAN === $this->state) {
             return $this->sql;
         }
 
@@ -1560,88 +1522,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $this->state = self::STATE_CLEAN;
 
         return $this->sql;
-    }
-
-    /**
-     * Converts this instance into an SELECT string in SQL
-     *
-     * @param bool $count
-     * @return string
-     */
-    protected function getSqlForSelect($count = false)
-    {
-        $parts = $this->sqlParts;
-
-        if (!$parts['select']) {
-            $parts['select'] = array('*');
-        }
-
-        $query = 'SELECT ' . implode(', ', $parts['select']) . ' FROM ' . $this->getFrom();
-
-        // JOIN
-        foreach ($parts['join'] as $join) {
-            $query .= ' ' . strtoupper($join['type'])
-                . ' JOIN ' . $join['table']
-                . ' ON ' . $join['on'];
-        }
-
-        $query .= ($parts['where'] !== null ? ' WHERE ' . ((string)$parts['where']) : '')
-            . ($parts['groupBy'] ? ' GROUP BY ' . implode(', ', $parts['groupBy']) : '')
-            . ($parts['having'] !== null ? ' HAVING ' . ((string)$parts['having']) : '');
-
-        if (false === $count) {
-            $query .= ($parts['orderBy'] ? ' ORDER BY ' . implode(', ', $parts['orderBy']) : '')
-                . ($parts['limit'] !== null ? ' LIMIT ' . $parts['limit'] : '')
-                . ($parts['offset'] !== null ? ' OFFSET ' . $parts['offset'] : '');
-        }
-
-        $query .= $this->generateLockSql();
-
-        return $query;
-    }
-
-    /**
-     * Converts this instance into an SELECT COUNT string in SQL
-     */
-    protected function getSqlForCount()
-    {
-        return "SELECT COUNT(*) FROM (" . $this->getSqlForSelect(true) . ") wei_count";
-    }
-
-    /**
-     * Converts this instance into an UPDATE string in SQL.
-     *
-     * @return string
-     */
-    protected function getSqlForUpdate()
-    {
-        $query = 'UPDATE ' . $this->getFrom()
-            . ' SET ' . implode(", ", $this->sqlParts['set'])
-            . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string)$this->sqlParts['where']) : '');
-        return $query;
-    }
-
-    /**
-     * Converts this instance into a DELETE string in SQL.
-     *
-     * @return string
-     */
-    protected function getSqlForDelete()
-    {
-        return 'DELETE FROM ' . $this->getFrom() . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string)$this->sqlParts['where']) : '');
-    }
-
-    /**
-     * Returns the from SQL part
-     *
-     * @return string
-     */
-    protected function getFrom()
-    {
-        if (!$this->sqlParts['from']) {
-            $this->from($this->table);
-        }
-        return $this->sqlParts['from'];
     }
 
     /**
@@ -1703,117 +1583,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     }
 
     /**
-     * Either appends to or replaces a single, generic query part.
-     *
-     * The available parts are: 'select', 'from', 'set', 'where',
-     * 'groupBy', 'having', 'orderBy', 'limit' and 'offset'.
-     *
-     * @param string $sqlPartName
-     * @param string $sqlPart
-     * @param boolean $append
-     * @param string $type
-     * @return $this
-     */
-    protected function add($sqlPartName, $sqlPart, $append = false, $type = null)
-    {
-        $this->isNew = false;
-
-        if (!$sqlPart) {
-            return $this;
-        }
-
-        $isArray = is_array($sqlPart);
-        $isMultiple = is_array($this->sqlParts[$sqlPartName]);
-
-        if ($isMultiple && !$isArray) {
-            $sqlPart = array($sqlPart);
-        }
-
-        $this->state = self::STATE_DIRTY;
-
-        if ($append) {
-            if ($sqlPartName == 'where' || $sqlPartName == 'having') {
-                if ($this->sqlParts[$sqlPartName]) {
-                    $this->sqlParts[$sqlPartName] = '(' . $this->sqlParts[$sqlPartName] . ') ' . $type . ' (' . $sqlPart . ')';
-                } else {
-                    $this->sqlParts[$sqlPartName] = $sqlPart;
-                }
-            } elseif ($sqlPartName == 'orderBy' || $sqlPartName == 'groupBy' || $sqlPartName == 'select' || $sqlPartName == 'set') {
-                foreach ($sqlPart as $part) {
-                    $this->sqlParts[$sqlPartName][] = $part;
-                }
-            } elseif ($isMultiple) {
-                $this->sqlParts[$sqlPartName][] = $sqlPart;
-            }
-            return $this;
-        }
-
-        $this->sqlParts[$sqlPartName] = $sqlPart;
-        return $this;
-    }
-
-    /**
-     * Generate condition string for WHERE or Having statement
-     *
-     * @param mixed $conditions
-     * @param array $params
-     * @param array $types
-     * @return string
-     */
-    protected function processCondition($conditions, $params, $types)
-    {
-        // Regard numeric and null as primary key value
-        if (is_numeric($conditions) || empty($conditions)) {
-            $conditions = array($this->primaryKey => $conditions);
-        }
-
-        if (is_array($conditions)) {
-            $where = array();
-            $params = array();
-            foreach ($conditions as $field => $condition) {
-                if (is_array($condition)) {
-                    $where[] = $field . ' IN (' . implode(', ', array_pad(array(), count($condition), '?')) . ')';
-                    $params = array_merge($params, $condition);
-                } else {
-                    $where[] = $field . " = ?";
-                    $params[] = $condition;
-                }
-            }
-            $conditions = implode(' AND ', $where);
-        }
-
-        if ($params !== false) {
-            if (is_array($params)) {
-                $this->params = array_merge($this->params, $params);
-                $this->paramTypes = array_merge($this->paramTypes, $types);
-            } else {
-                $this->params[] = $params;
-                if ($types) {
-                    $this->paramTypes[] = $types;
-                }
-            }
-        }
-
-        return $conditions;
-    }
-
-    /**
-     * Load record by array offset
-     *
-     * @param int|string $offset
-     */
-    protected function loadData($offset)
-    {
-        if (!$this->loaded && !$this->isNew) {
-            if (is_numeric($offset) || is_null($offset)) {
-                $this->findAll();
-            } else {
-                $this->find();
-            }
-        }
-    }
-
-    /**
      * Filters elements of the collection using a callback function
      *
      * @param \Closure $fn
@@ -1822,7 +1591,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function filter(\Closure $fn)
     {
         $data = array_filter($this->data, $fn);
-        $records = $this->db->init($this->table, array(), $this->isNew);
+        $records = $this->db->init($this->table, [], $this->isNew);
         $records->data = $data;
         $records->isColl = true;
         $records->loaded = $this->loaded;
@@ -1832,17 +1601,17 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Set or remove cache time for the query
      *
-     * @param int|null|false $seconds
+     * @param int|false|null $seconds
      * @return $this
      */
     public function cache($seconds = null)
     {
-        if ($seconds === null) {
+        if (null === $seconds) {
             $this->cacheTime = $this->defaultCacheTime;
-        } elseif ($seconds === false) {
+        } elseif (false === $seconds) {
             $this->cacheTime = false;
         } else {
-            $this->cacheTime = (int)$seconds;
+            $this->cacheTime = (int) $seconds;
         }
         return $this;
     }
@@ -1850,12 +1619,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Set or remove cache tags
      *
-     * @param array|null|false $tags
+     * @param array|false|null $tags
      * @return $this
      */
     public function tags($tags = null)
     {
-        $this->cacheTags = $tags === false ? false : $tags;
+        $this->cacheTags = false === $tags ? false : $tags;
         return $this;
     }
 
@@ -1879,28 +1648,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function getCacheKey()
     {
         return $this->cacheKey ?: md5($this->db->getDbname() . $this->getSql() . serialize($this->params) . serialize($this->paramTypes));
-    }
-
-    /**
-     * @return array
-     */
-    protected function getCacheTags()
-    {
-        $tags[] = $this->getFrom();
-        foreach ($this->sqlParts['join'] as $join) {
-            $tags[] = $join['table'];
-        }
-        return $tags;
-    }
-
-    /**
-     * Trigger a callback
-     *
-     * @param string $name
-     */
-    protected function triggerCallback($name)
-    {
-        $this->$name();
     }
 
     /**
@@ -1928,26 +1675,6 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $this->lock = $lock;
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    protected function generateLockSql()
-    {
-        if ($this->lock === '') {
-            return '';
-        }
-
-        if (is_string($this->lock)) {
-            return ' ' . $this->lock;
-        }
-
-        if ($this->lock) {
-            return ' FOR UPDATE';
-        } else {
-            return ' LOCK IN SHARE MODE';
-        }
     }
 
     /**
@@ -2018,5 +1745,277 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function afterDestroy()
     {
+    }
+
+    protected function executeDestroy()
+    {
+        $this->db->delete($this->table, [$this->primaryKey => $this->data[$this->primaryKey]]);
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function fetchFromCache()
+    {
+        $cache = false === $this->cacheTags ? $this->cache : $this->tagCache($this->cacheTags ?: $this->getCacheTags());
+        $that = $this;
+        $params = $this->params;
+        $paramTypes = $this->paramTypes;
+        return $cache->get($this->getCacheKey(), $this->cacheTime, function () use ($that, $params, $paramTypes) {
+            return $that->db->fetchAll($that->getSql(), $params, $paramTypes);
+        });
+    }
+
+    /**
+     * @param array $data
+     * @param string $field
+     * @return array
+     */
+    protected function executeIndexBy($data, $field)
+    {
+        if (!$data) {
+            return $data;
+        }
+
+        $newData = [];
+        foreach ($data as $row) {
+            $newData[$row[$field]] = $row;
+        }
+        return $newData;
+    }
+
+    /**
+     * Converts this instance into an SELECT string in SQL
+     *
+     * @param bool $count
+     * @return string
+     */
+    protected function getSqlForSelect($count = false)
+    {
+        $parts = $this->sqlParts;
+
+        if (!$parts['select']) {
+            $parts['select'] = ['*'];
+        }
+
+        $query = 'SELECT ' . implode(', ', $parts['select']) . ' FROM ' . $this->getFrom();
+
+        // JOIN
+        foreach ($parts['join'] as $join) {
+            $query .= ' ' . strtoupper($join['type'])
+                . ' JOIN ' . $join['table']
+                . ' ON ' . $join['on'];
+        }
+
+        $query .= (null !== $parts['where'] ? ' WHERE ' . ((string) $parts['where']) : '')
+            . ($parts['groupBy'] ? ' GROUP BY ' . implode(', ', $parts['groupBy']) : '')
+            . (null !== $parts['having'] ? ' HAVING ' . ((string) $parts['having']) : '');
+
+        if (false === $count) {
+            $query .= ($parts['orderBy'] ? ' ORDER BY ' . implode(', ', $parts['orderBy']) : '')
+                . (null !== $parts['limit'] ? ' LIMIT ' . $parts['limit'] : '')
+                . (null !== $parts['offset'] ? ' OFFSET ' . $parts['offset'] : '');
+        }
+
+        $query .= $this->generateLockSql();
+
+        return $query;
+    }
+
+    /**
+     * Converts this instance into an SELECT COUNT string in SQL
+     */
+    protected function getSqlForCount()
+    {
+        return 'SELECT COUNT(*) FROM (' . $this->getSqlForSelect(true) . ') wei_count';
+    }
+
+    /**
+     * Converts this instance into an UPDATE string in SQL.
+     *
+     * @return string
+     */
+    protected function getSqlForUpdate()
+    {
+        $query = 'UPDATE ' . $this->getFrom()
+            . ' SET ' . implode(', ', $this->sqlParts['set'])
+            . (null !== $this->sqlParts['where'] ? ' WHERE ' . ((string) $this->sqlParts['where']) : '');
+        return $query;
+    }
+
+    /**
+     * Converts this instance into a DELETE string in SQL.
+     *
+     * @return string
+     */
+    protected function getSqlForDelete()
+    {
+        return 'DELETE FROM ' . $this->getFrom() . (null !== $this->sqlParts['where'] ? ' WHERE ' . ((string) $this->sqlParts['where']) : '');
+    }
+
+    /**
+     * Returns the from SQL part
+     *
+     * @return string
+     */
+    protected function getFrom()
+    {
+        if (!$this->sqlParts['from']) {
+            $this->from($this->table);
+        }
+        return $this->sqlParts['from'];
+    }
+
+    /**
+     * Either appends to or replaces a single, generic query part.
+     *
+     * The available parts are: 'select', 'from', 'set', 'where',
+     * 'groupBy', 'having', 'orderBy', 'limit' and 'offset'.
+     *
+     * @param string $sqlPartName
+     * @param string $sqlPart
+     * @param bool $append
+     * @param string $type
+     * @return $this
+     */
+    protected function add($sqlPartName, $sqlPart, $append = false, $type = null)
+    {
+        $this->isNew = false;
+
+        if (!$sqlPart) {
+            return $this;
+        }
+
+        $isArray = is_array($sqlPart);
+        $isMultiple = is_array($this->sqlParts[$sqlPartName]);
+
+        if ($isMultiple && !$isArray) {
+            $sqlPart = [$sqlPart];
+        }
+
+        $this->state = self::STATE_DIRTY;
+
+        if ($append) {
+            if ('where' == $sqlPartName || 'having' == $sqlPartName) {
+                if ($this->sqlParts[$sqlPartName]) {
+                    $this->sqlParts[$sqlPartName] = '(' . $this->sqlParts[$sqlPartName] . ') ' . $type . ' (' . $sqlPart . ')';
+                } else {
+                    $this->sqlParts[$sqlPartName] = $sqlPart;
+                }
+            } elseif ('orderBy' == $sqlPartName || 'groupBy' == $sqlPartName || 'select' == $sqlPartName || 'set' == $sqlPartName) {
+                foreach ($sqlPart as $part) {
+                    $this->sqlParts[$sqlPartName][] = $part;
+                }
+            } elseif ($isMultiple) {
+                $this->sqlParts[$sqlPartName][] = $sqlPart;
+            }
+            return $this;
+        }
+
+        $this->sqlParts[$sqlPartName] = $sqlPart;
+        return $this;
+    }
+
+    /**
+     * Generate condition string for WHERE or Having statement
+     *
+     * @param mixed $conditions
+     * @param array $params
+     * @param array $types
+     * @return string
+     */
+    protected function processCondition($conditions, $params, $types)
+    {
+        // Regard numeric and null as primary key value
+        if (is_numeric($conditions) || empty($conditions)) {
+            $conditions = [$this->primaryKey => $conditions];
+        }
+
+        if (is_array($conditions)) {
+            $where = [];
+            $params = [];
+            foreach ($conditions as $field => $condition) {
+                if (is_array($condition)) {
+                    $where[] = $field . ' IN (' . implode(', ', array_pad([], count($condition), '?')) . ')';
+                    $params = array_merge($params, $condition);
+                } else {
+                    $where[] = $field . ' = ?';
+                    $params[] = $condition;
+                }
+            }
+            $conditions = implode(' AND ', $where);
+        }
+
+        if (false !== $params) {
+            if (is_array($params)) {
+                $this->params = array_merge($this->params, $params);
+                $this->paramTypes = array_merge($this->paramTypes, $types);
+            } else {
+                $this->params[] = $params;
+                if ($types) {
+                    $this->paramTypes[] = $types;
+                }
+            }
+        }
+
+        return $conditions;
+    }
+
+    /**
+     * Load record by array offset
+     *
+     * @param int|string $offset
+     */
+    protected function loadData($offset)
+    {
+        if (!$this->loaded && !$this->isNew) {
+            if (is_numeric($offset) || null === $offset) {
+                $this->findAll();
+            } else {
+                $this->find();
+            }
+        }
+    }
+
+    /**
+     * @return array
+     */
+    protected function getCacheTags()
+    {
+        $tags[] = $this->getFrom();
+        foreach ($this->sqlParts['join'] as $join) {
+            $tags[] = $join['table'];
+        }
+        return $tags;
+    }
+
+    /**
+     * Trigger a callback
+     *
+     * @param string $name
+     */
+    protected function triggerCallback($name)
+    {
+        $this->{$name}();
+    }
+
+    /**
+     * @return string
+     */
+    protected function generateLockSql()
+    {
+        if ('' === $this->lock) {
+            return '';
+        }
+
+        if (is_string($this->lock)) {
+            return ' ' . $this->lock;
+        }
+
+        if ($this->lock) {
+            return ' FOR UPDATE';
+        } else {
+            return ' LOCK IN SHARE MODE';
+        }
     }
 }

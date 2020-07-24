@@ -30,7 +30,7 @@ class Soap extends Base
      *
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * Whether use the global options in `$wei->http` object when create a
@@ -119,11 +119,11 @@ class Soap extends Base
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         // Merges options from default Soap service
         if (isset($options['global']) && true === $options['global']) {
-            $options += (array)$options['wei']->getConfig('soap');
+            $options += (array) $options['wei']->getConfig('soap');
         }
         parent::__construct($options);
         $this->defaultOptions = $options;
@@ -135,7 +135,7 @@ class Soap extends Base
      * @param array $options A options array if the first parameter is string
      * @return $this A new Soap object
      */
-    public function __invoke(array $options = array())
+    public function __invoke(array $options = [])
     {
         $soap = new self($options + $this->defaultOptions);
         return $soap->execute();
@@ -152,16 +152,16 @@ class Soap extends Base
             // https://bugs.php.net/bug.php?id=65779
 
             // Prepare request
-            $soapClient = $this->soapClient = new SoapClient($this->url, array(
-                'trace' => $this->wei->isDebug()
-            ));
+            $soapClient = $this->soapClient = new SoapClient($this->url, [
+                'trace' => $this->wei->isDebug(),
+            ]);
 
             // Execute beforeExecute and beforeSend callbacks
             $this->beforeExecute && call_user_func($this->beforeExecute, $this, $soapClient);
             $this->beforeSend && call_user_func($this->beforeSend, $this, $soapClient);
 
             // Execute request
-            $this->response = $soapClient->__soapCall($this->method, array($this->data));
+            $this->response = $soapClient->__soapCall($this->method, [$this->data]);
         } catch (\SoapFault $e) {
             $soapClient = null;
             $this->errorException = $e;

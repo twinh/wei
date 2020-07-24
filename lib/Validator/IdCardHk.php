@@ -38,7 +38,7 @@ class IdCardHk extends BaseValidator
 
         // The first char should be A-Z
         $first = ord($input[0]);
-        if ($first <  65 || $first > 90) {
+        if ($first < 65 || $first > 90) {
             $this->addError('invalid');
             return false;
         }
@@ -51,7 +51,7 @@ class IdCardHk extends BaseValidator
         }
 
         $checksum = $sum % 11;
-        if ($checksum == 1) {
+        if (1 == $checksum) {
             $checksum = 'A';
         } elseif ($checksum > 1) {
             $checksum = 11 - $checksum;

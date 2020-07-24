@@ -5,12 +5,18 @@ namespace WeiTest;
 use Wei\Request;
 use Wei\Url;
 
-class UrlTest extends TestCase
+/**
+ * @internal
+ */
+final class UrlTest extends TestCase
 {
     /**
      * @dataProvider providerForTo
+     * @param mixed $result
+     * @param mixed $url
+     * @param mixed $params
      */
-    public function testTo($result, $url, $params = array())
+    public function testTo($result, $url, $params = [])
     {
         // Reset url to root path
         $this->request->setBaseUrl('/');
@@ -20,22 +26,22 @@ class UrlTest extends TestCase
 
     public function providerForTo()
     {
-        return array(
-            array(
+        return [
+            [
                 '/users?id=twin',
                 'users?id=twin',
-            ),
-            array(
+            ],
+            [
                 '/user?id=twin',
                 'user',
-                array('id' => 'twin'),
-            ),
-            array(
+                ['id' => 'twin'],
+            ],
+            [
                 '/?id=twin',
                 '',
-                array('id' => 'twin'),
-            ),
-        );
+                ['id' => 'twin'],
+            ],
+        ];
     }
 
     public function testAppend()
@@ -43,11 +49,11 @@ class UrlTest extends TestCase
         // Reset url to root path
         $this->request->setBaseUrl('/');
 
-        $this->assertEquals('xx?a=b&c=d', $this->url->append('xx', array('a' => 'b', 'c' => 'd')));
+        $this->assertEquals('xx?a=b&c=d', $this->url->append('xx', ['a' => 'b', 'c' => 'd']));
 
-        $this->assertEquals('xx?a=b&c=d', $this->url->append('xx?a=b', array('c' => 'd')));
+        $this->assertEquals('xx?a=b&c=d', $this->url->append('xx?a=b', ['c' => 'd']));
 
-        $this->assertEquals('xx&a=b?c=d', $this->url->append('xx&a=b', array('c' => 'd')));
+        $this->assertEquals('xx&a=b?c=d', $this->url->append('xx&a=b', ['c' => 'd']));
 
         $this->assertEquals('xx?a=b&c=d', $this->url->append('xx?a=b', 'c=d'));
     }
@@ -59,16 +65,16 @@ class UrlTest extends TestCase
 
         $this->assertEquals('/articles/1', $this->url('articles/%s', 1));
 
-        $this->assertEquals('/articles/1/comments/2', $this->url('articles/%s/comments/%s', array(1, 2)));
+        $this->assertEquals('/articles/1/comments/2', $this->url('articles/%s/comments/%s', [1, 2]));
 
         $this->assertEquals('/articles/1/comments/2?a=b',
-            $this->url('articles/%s/comments/%s', array(1, 2), array('a' => 'b')));
+            $this->url('articles/%s/comments/%s', [1, 2], ['a' => 'b']));
 
         $this->assertEquals('/articles/b/comments/d',
-            $this->url('articles/%s/comments/%s', array('a' => 'b', 'c' => 'd')));
+            $this->url('articles/%s/comments/%s', ['a' => 'b', 'c' => 'd']));
 
         $this->assertEquals('/articles/b/comments/d',
-            $this->url('articles/%s/comments/%s', array('a' => 'b', 'c' => 'd', 'e' => 'f')));
+            $this->url('articles/%s/comments/%s', ['a' => 'b', 'c' => 'd', 'e' => 'f']));
     }
 
     public function testQueryUrl()
@@ -76,15 +82,15 @@ class UrlTest extends TestCase
         $this->request->setBaseUrl('/');
 
         $gets = &$this->request->getQueries();
-        $gets = array('a' => 'b');
+        $gets = ['a' => 'b'];
 
         $this->assertEquals('/articles?a=b', $this->url->query('articles'));
 
-        $this->assertEquals('/articles?c=d&a=b', $this->url->query('articles', array('c' => 'd')));
+        $this->assertEquals('/articles?c=d&a=b', $this->url->query('articles', ['c' => 'd']));
 
         $this->assertEquals('/articles/1?a=b', $this->url->query('articles/%s', 1));
 
-        $this->assertEquals('/articles/1?c=d&a=b', $this->url->query('articles/%s', 1, array('c' => 'd')));
+        $this->assertEquals('/articles/1?c=d&a=b', $this->url->query('articles/%s', 1, ['c' => 'd']));
     }
 
     public function testInvoke()

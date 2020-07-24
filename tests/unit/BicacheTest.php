@@ -2,6 +2,9 @@
 
 namespace WeiTest;
 
-class BicacheTest extends CacheTestCase
+/**
+ * @internal
+ */
+final class BicacheTest extends CacheTestCase
 {
 }

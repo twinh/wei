@@ -19,7 +19,7 @@ class Lock extends Base
     /**
      * @var array
      */
-    protected $keys = array();
+    protected $keys = [];
 
     /**
      * Expiration seconds to release lock, use to avoid deadlock when PHP crash
@@ -33,16 +33,16 @@ class Lock extends Base
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
 
-        register_shutdown_function(array($this, 'releaseAll'));
+        register_shutdown_function([$this, 'releaseAll']);
 
         // Release locks and exist when catch signal in CLI
         if (function_exists('pcntl_signal')) {
-            pcntl_signal(SIGINT, array($this, 'catchSignal'));
-            pcntl_signal(SIGTERM, array($this, 'catchSignal'));
+            pcntl_signal(SIGINT, [$this, 'catchSignal']);
+            pcntl_signal(SIGTERM, [$this, 'catchSignal']);
         }
     }
 
@@ -50,12 +50,12 @@ class Lock extends Base
      * Acquire a lock key
      *
      * @param string $key
-     * @param null|int $expire
+     * @param int|null $expire
      * @return bool
      */
     public function __invoke($key, $expire = null)
     {
-        $expire = $expire === null ? $this->expire : $expire;
+        $expire = null === $expire ? $this->expire : $expire;
         if ($this->cache->add($key, true, $expire)) {
             $this->keys[] = $key;
             return true;
@@ -73,7 +73,7 @@ class Lock extends Base
     public function release($key)
     {
         if ($this->cache->remove($key)) {
-            if (($index = array_search($key, $this->keys)) !== false) {
+            if (false !== ($index = array_search($key, $this->keys, true))) {
                 unset($this->keys[$index]);
             }
             return true;

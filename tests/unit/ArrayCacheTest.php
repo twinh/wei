@@ -2,7 +2,9 @@
 
 namespace WeiTest;
 
-class ArrayCacheTest extends CacheTestCase
+/**
+ * @internal
+ */
+final class ArrayCacheTest extends CacheTestCase
 {
-    
 }

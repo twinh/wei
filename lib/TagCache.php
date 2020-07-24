@@ -5,6 +5,7 @@
  * @copyright   Copyright (c) 2008-2020 Twin Huang
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Wei;
 
 /**
@@ -19,7 +20,7 @@ class TagCache extends BaseCache
      *
      * @var array
      */
-    protected $tags = array();
+    protected $tags = [];
 
     /**
      * The generated tags namespace
@@ -33,7 +34,7 @@ class TagCache extends BaseCache
      *
      * @var array
      */
-    protected $services = array();
+    protected $services = [];
 
     /**
      * Manager: Create a new cache service with tagging support
@@ -50,10 +51,10 @@ class TagCache extends BaseCache
         $name = implode(':', $tags);
 
         if (!isset($this->services[$name])) {
-            $this->services[$name] = new static(array(
+            $this->services[$name] = new static([
                 'wei' => $this->wei,
-                'tags' => $tags
-            ));
+                'tags' => $tags,
+            ]);
         }
         return $this->services[$name];
     }
@@ -119,7 +120,7 @@ class TagCache extends BaseCache
      */
     public function clear()
     {
-        $data = array();
+        $data = [];
         foreach ($this->tags as $tag) {
             $data[$this->getTagKey($tag)] = $this->generateTagValue();
         }
@@ -181,7 +182,7 @@ class TagCache extends BaseCache
     protected function getTagValues()
     {
         // Step1 Get tags value from cache
-        $keys = array_map(array($this, 'getTagKey'), $this->tags);
+        $keys = array_map([$this, 'getTagKey'], $this->tags);
         $values = $this->cache->getMulti($keys);
 
         // Step2 Initialize new tags value
@@ -202,7 +203,7 @@ class TagCache extends BaseCache
      */
     protected function setTagValues($keys)
     {
-        $values = array();
+        $values = [];
         foreach ($keys as $key => $value) {
             $values[$key] = $this->generateTagValue();
         }
@@ -228,6 +229,6 @@ class TagCache extends BaseCache
      */
     protected function generateTagValue()
     {
-        return strtr(uniqid('', true), array('.' => ''));
+        return strtr(uniqid('', true), ['.' => '']);
     }
 }

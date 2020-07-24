@@ -27,11 +27,11 @@ class PhpError extends Base
      * @param array $options
      * @link https://github.com/JosephLenton/PHP-Error/wiki/Options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
-        parent::__construct(array(
-            'wei' => isset($options['wei']) ? $options['wei'] : null
-        ));
+        parent::__construct([
+            'wei' => isset($options['wei']) ? $options['wei'] : null,
+        ]);
 
         // Avoid exception "Unknown option given XXX"
         unset($options['wei'], $options['namespace']);

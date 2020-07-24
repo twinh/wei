@@ -2,10 +2,15 @@
 
 namespace WeiTest\Validator;
 
-class DivisibleByTest extends TestCase
+/**
+ * @internal
+ */
+final class DivisibleByTest extends TestCase
 {
     /**
      * @dataProvider providerForDivisibleBy
+     * @param mixed $input
+     * @param mixed $divisor
      */
     public function testDivisibleBy($input, $divisor)
     {
@@ -14,6 +19,8 @@ class DivisibleByTest extends TestCase
 
     /**
      * @dataProvider providerForNotDivisibleBy
+     * @param mixed $input
+     * @param mixed $divisor
      */
     public function testNotDivisibleBy($input, $divisor)
     {
@@ -22,20 +29,20 @@ class DivisibleByTest extends TestCase
 
     public function providerForDivisibleBy()
     {
-        return array(
-            array('10', '5'),
-            array('2', '1'),
-            array(2.5, 0.5),
-        );
+        return [
+            ['10', '5'],
+            ['2', '1'],
+            [2.5, 0.5],
+        ];
     }
 
     public function providerForNotDivisibleBy()
     {
-        return array(
-            array(10, 3),
-            array(11, 2),
-            array(0.7, 0.2),
-            array(5, 0.1) // Returns 0.1
-        );
+        return [
+            [10, 3],
+            [11, 2],
+            [0.7, 0.2],
+            [5, 0.1], // Returns 0.1
+        ];
     }
 }

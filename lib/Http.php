@@ -44,21 +44,21 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @var array
      */
-    protected $cookies = array();
+    protected $cookies = [];
 
     /**
      * The data to send to the server
      *
      * @var array|string
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * The files send to the server
      *
      * @var array
      */
-    protected $files = array();
+    protected $files = [];
 
     /**
      * Whether use the global options in `$wei->http` object when create a
@@ -73,7 +73,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @var array
      */
-    protected $headers = array();
+    protected $headers = [];
 
     /**
      * Whether includes the header in the response string,
@@ -176,17 +176,17 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @var array
      */
-    protected $curlOptions = array();
+    protected $curlOptions = [];
 
     /**
      * The predefined options for cURL handle
      *
      * @var array
      */
-    protected $defaultCurlOptions = array(
+    protected $defaultCurlOptions = [
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_FOLLOWLOCATION => true,
-    );
+    ];
 
     /**
      * The request result
@@ -254,9 +254,9 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * The times left to retry request if response is error
      *
-     * @var null|int
+     * @var int|null
      */
-    protected $leftRetries = null;
+    protected $leftRetries;
 
     /**
      * The default options of current object
@@ -270,14 +270,25 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         // Merges options from default HTTP service
         if (isset($options['global']) && true === $options['global']) {
-            $options += (array)$options['wei']->getConfig('http');
+            $options += (array) $options['wei']->getConfig('http');
         }
         parent::__construct($options);
         $this->defaultOptions = $options;
+    }
+
+    /**
+     * Close the cURL session
+     */
+    public function __destruct()
+    {
+        if ($this->ch) {
+            curl_close($this->ch);
+            $this->ch = null;
+        }
     }
 
     /**
@@ -287,7 +298,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param array $options A options array if the first parameter is string
      * @return $this A new HTTP object
      */
-    public function __invoke($url = null, array $options = array())
+    public function __invoke($url = null, array $options = [])
     {
         // Merge and set options
         if (is_array($url)) {
@@ -304,12 +315,22 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
+     * Returns to response body string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->responseText;
+    }
+
+    /**
      * Execute the request, parse the response data and trigger relative callbacks
      */
     public function execute()
     {
         // Init the retry times
-        if ($this->retries && is_null($this->leftRetries)) {
+        if ($this->retries && null === $this->leftRetries) {
             $this->leftRetries = $this->retries;
         }
 
@@ -326,8 +347,8 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         $this->complete && call_user_func($this->complete, $this, $ch);
 
         // Retry if response error
-        if ($this->result === false && $this->leftRetries > 0) {
-            $this->leftRetries--;
+        if (false === $this->result && $this->leftRetries > 0) {
+            --$this->leftRetries;
             $this->execute();
             return;
         }
@@ -335,239 +356,6 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         if ($this->throwException && $this->errorException) {
             throw $this->errorException;
         }
-    }
-
-    /**
-     * Prepare cURL options
-     *
-     * @return array
-     */
-    protected function prepareCurlOptions()
-    {
-        $opts = array();
-        $url = $this->url;
-
-        // CURLOPT_RESOLVE
-        if ($this->ip) {
-            $host = parse_url($url, PHP_URL_HOST);
-            $url = substr_replace($url, $this->ip, strpos($url, $host), strlen($host));
-            $this->headers['Host'] = $host;
-        }
-
-        switch ($this->method) {
-            case 'GET' :
-                $postData = false;
-                break;
-
-            case 'POST' :
-                $postData = true;
-                $opts[CURLOPT_POST] = 1;
-                break;
-
-            case 'DELETE':
-            case 'PUT':
-            case 'PATCH':
-                $postData = true;
-                $opts[CURLOPT_CUSTOMREQUEST] = $this->method;
-                break;
-
-            default:
-                $postData = false;
-                $opts[CURLOPT_CUSTOMREQUEST] = $this->method;
-        }
-
-        if ($this->data) {
-            $data = is_string($this->data) ? $this->data : http_build_query($this->data);
-            if ($postData) {
-                $opts[CURLOPT_POSTFIELDS] = $data;
-            } else {
-                if (false === strpos($url, '?')) {
-                    $url .= '?' . $data;
-                } else {
-                    $url .= '&' . $data;
-                }
-            }
-        }
-
-        if ($this->files) {
-            $postFields = isset($opts[CURLOPT_POSTFIELDS]) ? $opts[CURLOPT_POSTFIELDS] : '';
-            $opts[CURLOPT_POSTFIELDS] = $this->addFileField($postFields, $this->files);
-        }
-
-        if ($this->timeout > 0) {
-            $opts[CURLOPT_TIMEOUT_MS] = $this->timeout;
-        }
-
-        if ($this->referer) {
-            // Automatic use current request URL as referer URL
-            if (true === $this->referer) {
-                $opts[CURLOPT_REFERER] = $this->url;
-            } else {
-                $opts[CURLOPT_REFERER] = $this->referer;
-            }
-        }
-
-        if ($this->userAgent) {
-            $opts[CURLOPT_USERAGENT] = $this->userAgent;
-        }
-
-        if ($this->cookies) {
-            $cookies = array();
-            foreach ($this->cookies as $key => $value) {
-                $cookies[] = $key . '=' . rawurlencode($value);
-            }
-            $opts[CURLOPT_COOKIE] = implode('; ', $cookies);
-        }
-
-        if ($this->contentType) {
-            $this->headers['Content-Type'] = $this->contentType;
-        }
-
-        // Custom headers will overwrite other options
-        if ($this->headers) {
-            $headers = array();
-            foreach ($this->headers as $key => $value) {
-                $headers[] = $key . ': ' . $value;
-            }
-            $opts[CURLOPT_HTTPHEADER] = $headers;
-        }
-
-        $opts[CURLOPT_HEADER] = $this->header;
-        $opts[CURLOPT_URL] = $url;
-
-        $this->curlOptions += $opts + $this->defaultCurlOptions;
-        return $this->curlOptions;
-    }
-
-    /**
-     * @param string $data
-     * @param array $files
-     * @return array
-     */
-    protected function addFileField($data, array $files)
-    {
-        $newData = array();
-        if ($data) {
-            foreach (explode('&', $data) as $key => $value) {
-                list($key, $value) = explode('=', urldecode($value));
-                $newData[$key] = $value;
-            }
-        }
-        $hasCurlFile = class_exists('CURLFile');
-        foreach ($files as $name => $file) {
-            $newData[$name] = $hasCurlFile ? new \CURLFile($file) : '@' . $file;
-        }
-        return $newData;
-    }
-
-    /**
-     * Parse response text
-     *
-     * @param string $response
-     */
-    protected function handleResponse($response)
-    {
-        $ch = $this->ch;
-
-        if (false !== $response) {
-            $curlInfo = curl_getinfo($ch);
-
-            // Parse response header
-            if ($this->getCurlOption(CURLOPT_HEADER)) {
-                // Fixes header size error when use CURLOPT_PROXY and CURLOPT_HTTPPROXYTUNNEL is true
-                // http://sourceforge.net/p/curl/bugs/1204/
-                if (false !== stripos($response, "HTTP/1.1 200 Connection established\r\n\r\n")) {
-                    $response = str_ireplace("HTTP/1.1 200 Connection established\r\n\r\n", '', $response);
-                }
-
-                $this->responseHeader = trim(substr($response, 0, $curlInfo['header_size']));
-                $this->responseText = substr($response, $curlInfo['header_size']);
-            } else {
-                $this->responseText = $response;
-            }
-
-            $statusCode = $curlInfo['http_code'];
-            $isSuccess = $statusCode >= 200 && $statusCode < 300 || $statusCode === 304;
-            if ($isSuccess) {
-                $this->response = $this->parseResponse($this->responseText, $exception);
-                if (!$exception) {
-                    $this->result = true;
-                    $this->success && call_user_func($this->success, $this->response, $this);
-                } else {
-                    $this->triggerError('parser', $exception);
-                }
-            } else {
-                if ($this->responseHeader) {
-                    preg_match('/[\d]{3} (.+?)\r/', $this->responseHeader, $matches);
-                    $statusText = $matches[1];
-                } else {
-                    $statusText = 'HTTP request error';
-                }
-                // + 1000 to avoid conflicts with error service 404 detection
-                $exception = new \ErrorException($statusText, $statusCode + 1000);
-                $this->triggerError('http', $exception);
-            }
-        } else {
-            $exception = new \ErrorException(curl_error($ch), curl_errno($ch));
-            $this->triggerError('curl', $exception);
-        }
-    }
-
-    /**
-     * Trigger error callback
-     *
-     * @param string $status
-     * @param \ErrorException $exception
-     */
-    protected function triggerError($status, \ErrorException $exception)
-    {
-        $this->result = false;
-        $this->errorStatus = $status;
-        $this->errorException = $exception;
-        $this->error && call_user_func($this->error, $this, $status, $exception);
-    }
-
-    /**
-     * Parse response data by specified type
-     *
-     * @param string $data
-     * @param null $exception A variable to store exception when parsing error
-     * @return mixed
-     */
-    protected function parseResponse($data, &$exception)
-    {
-        switch ($this->dataType) {
-            case 'json' :
-            case 'jsonObject' :
-                $result = json_decode($data, $this->dataType === 'json');
-                if (null === $result && json_last_error() != JSON_ERROR_NONE) {
-                    $exception = new \ErrorException('JSON parsing error, the data is ' . $data, json_last_error());
-                }
-                break;
-
-            case 'xml' :
-            case 'serialize' :
-                $methods = array(
-                    'xml' => 'simplexml_load_string',
-                    'serialize' => 'unserialize',
-                );
-                $result = @$methods[$this->dataType]($data);
-                if (false === $result && $e = error_get_last()) {
-                    $exception = new \ErrorException($e['message'], $e['type'], 0, $e['file'], $e['line']);
-                }
-                break;
-
-            case 'query' :
-                // Parse $data(string) and assign the result to $result(array)
-                parse_str($data, $result);
-                break;
-
-            case 'text':
-            default :
-                $result = $data;
-                break;
-        }
-        return $result;
     }
 
     /**
@@ -664,7 +452,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function getResponseHeader($name = null, $first = true)
     {
         // Return response header string when parameter is not provided
-        if (is_null($name)) {
+        if (null === $name) {
             return $this->responseHeader;
         }
 
@@ -672,7 +460,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         $headers = $this->getResponseHeaders();
 
         if (!isset($headers[$name])) {
-            return $first ? null : array();
+            return $first ? null : [];
         } else {
             return $first ? current($headers[$name]) : $headers[$name];
         }
@@ -686,7 +474,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function getResponseHeaders()
     {
         if (!is_array($this->responseHeaders)) {
-            $this->responseHeaders = array();
+            $this->responseHeaders = [];
             foreach (explode("\n", $this->responseHeader) as $line) {
                 $line = explode(':', $line, 2);
                 $name = strtoupper($line[0]);
@@ -706,7 +494,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     {
         if (!is_array($this->responseCookies)) {
             $cookies = $this->getResponseHeader('SET-COOKIE', false);
-            $this->responseCookies = array();
+            $this->responseCookies = [];
             foreach ($cookies as $cookie) {
                 $this->responseCookies += $this->parseCookie($cookie);
             }
@@ -724,39 +512,6 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     {
         $cookies = $this->getResponseCookies();
         return isset($cookies[$name]) ? $cookies[$name] : null;
-    }
-
-    /**
-     * Parse cookie from header, returns result like $_COOKIE
-     *
-     * @param string $header
-     * @return array
-     */
-    protected function parseCookie($header)
-    {
-        $elements = explode(';', $header);
-        $cookies = array();
-
-        $currentName = null;
-        foreach ($elements as $element) {
-            $pieces = explode('=', trim($element), 2);
-            if (!isset($pieces[1])) {
-                continue;
-            }
-            list($name, $value) = $pieces;
-
-            if (strtolower($name) == 'expires' && strtotime($value) < time()) {
-                // Removes expired cookie
-                unset($cookies[$currentName]);
-            } elseif (in_array(strtolower($name), array('domain', 'path', 'comment', 'expires', 'secure', 'max-age'))) {
-                // Ignore cookie attribute
-                continue;
-            } else {
-                $cookies[$name] = trim(urldecode($value));
-                $currentName = $name;
-            }
-        }
-        return $cookies;
     }
 
     /**
@@ -789,7 +544,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param string $dataType
      * @return $this
      */
-    public function get($url, $data = array(), $dataType = null)
+    public function get($url, $data = [], $dataType = null)
     {
         return $this->processMethod($url, $data, $dataType, 'GET');
     }
@@ -801,7 +556,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param array $data
      * @return $this
      */
-    public function getJson($url, $data = array())
+    public function getJson($url, $data = [])
     {
         return $this->processMethod($url, $data, 'json', 'GET');
     }
@@ -813,7 +568,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param array $data
      * @return $this
      */
-    public function getJsonObject($url, $data = array())
+    public function getJsonObject($url, $data = [])
     {
         return $this->processMethod($url, $data, 'jsonObject', 'GET');
     }
@@ -826,7 +581,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param string $dataType
      * @return $this
      */
-    public function post($url, $data = array(), $dataType = null)
+    public function post($url, $data = [], $dataType = null)
     {
         return $this->processMethod($url, $data, $dataType, 'POST');
     }
@@ -838,7 +593,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param array $data
      * @return $this
      */
-    public function postJson($url, $data = array())
+    public function postJson($url, $data = [])
     {
         return $this->processMethod($url, $data, 'json', 'POST');
     }
@@ -851,7 +606,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param string $dataType
      * @return $this
      */
-    public function put($url, $data = array(), $dataType = null)
+    public function put($url, $data = [], $dataType = null)
     {
         return $this->processMethod($url, $data, $dataType, 'PUT');
     }
@@ -864,7 +619,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param string $dataType
      * @return $this
      */
-    public function delete($url, $data = array(), $dataType = null)
+    public function delete($url, $data = [], $dataType = null)
     {
         return $this->processMethod($url, $data, $dataType, 'DELETE');
     }
@@ -877,33 +632,14 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param string $dataType
      * @return $this
      */
-    public function patch($url, $data = array(), $dataType = null)
+    public function patch($url, $data = [], $dataType = null)
     {
         return $this->processMethod($url, $data, $dataType, 'PATCH');
     }
 
-    public function upload($url, $data = array(), $dataType = null)
+    public function upload($url, $data = [], $dataType = null)
     {
         return $this->processMethod($url, $data, $dataType, 'POST');
-    }
-
-    /**
-     * Execute a specified method request
-     *
-     * @param string $url
-     * @param array $data
-     * @param string $dataType
-     * @param string $method
-     * @return $this
-     */
-    protected function processMethod($url, $data, $dataType, $method)
-    {
-        return $this->__invoke(array(
-            'url' => $url,
-            'method' => $method,
-            'dataType' => $dataType,
-            'data' => $data
-        ));
     }
 
     /**
@@ -990,19 +726,9 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
-     * Returns to response body string
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return (string)$this->responseText;
-    }
-
-    /**
      * Get information from curl
      *
-     * @param null|int $option
+     * @param int|null $option
      * @return array
      */
     public function getCurlInfo($option = null)
@@ -1011,13 +737,287 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
-     * Close the cURL session
+     * Prepare cURL options
+     *
+     * @return array
      */
-    public function __destruct()
+    protected function prepareCurlOptions()
     {
-        if ($this->ch) {
-            curl_close($this->ch);
-            unset($this->ch);
+        $opts = [];
+        $url = $this->url;
+
+        // CURLOPT_RESOLVE
+        if ($this->ip) {
+            $host = parse_url($url, PHP_URL_HOST);
+            $url = substr_replace($url, $this->ip, strpos($url, $host), strlen($host));
+            $this->headers['Host'] = $host;
         }
+
+        switch ($this->method) {
+            case 'GET':
+                $postData = false;
+                break;
+
+            case 'POST':
+                $postData = true;
+                $opts[CURLOPT_POST] = 1;
+                break;
+
+            case 'DELETE':
+            case 'PUT':
+            case 'PATCH':
+                $postData = true;
+                $opts[CURLOPT_CUSTOMREQUEST] = $this->method;
+                break;
+
+            default:
+                $postData = false;
+                $opts[CURLOPT_CUSTOMREQUEST] = $this->method;
+        }
+
+        if ($this->data) {
+            $data = is_string($this->data) ? $this->data : http_build_query($this->data);
+            if ($postData) {
+                $opts[CURLOPT_POSTFIELDS] = $data;
+            } else {
+                if (false === strpos($url, '?')) {
+                    $url .= '?' . $data;
+                } else {
+                    $url .= '&' . $data;
+                }
+            }
+        }
+
+        if ($this->files) {
+            $postFields = isset($opts[CURLOPT_POSTFIELDS]) ? $opts[CURLOPT_POSTFIELDS] : '';
+            $opts[CURLOPT_POSTFIELDS] = $this->addFileField($postFields, $this->files);
+        }
+
+        if ($this->timeout > 0) {
+            $opts[CURLOPT_TIMEOUT_MS] = $this->timeout;
+        }
+
+        if ($this->referer) {
+            // Automatic use current request URL as referer URL
+            if (true === $this->referer) {
+                $opts[CURLOPT_REFERER] = $this->url;
+            } else {
+                $opts[CURLOPT_REFERER] = $this->referer;
+            }
+        }
+
+        if ($this->userAgent) {
+            $opts[CURLOPT_USERAGENT] = $this->userAgent;
+        }
+
+        if ($this->cookies) {
+            $cookies = [];
+            foreach ($this->cookies as $key => $value) {
+                $cookies[] = $key . '=' . rawurlencode($value);
+            }
+            $opts[CURLOPT_COOKIE] = implode('; ', $cookies);
+        }
+
+        if ($this->contentType) {
+            $this->headers['Content-Type'] = $this->contentType;
+        }
+
+        // Custom headers will overwrite other options
+        if ($this->headers) {
+            $headers = [];
+            foreach ($this->headers as $key => $value) {
+                $headers[] = $key . ': ' . $value;
+            }
+            $opts[CURLOPT_HTTPHEADER] = $headers;
+        }
+
+        $opts[CURLOPT_HEADER] = $this->header;
+        $opts[CURLOPT_URL] = $url;
+
+        $this->curlOptions += $opts + $this->defaultCurlOptions;
+        return $this->curlOptions;
+    }
+
+    /**
+     * @param string $data
+     * @param array $files
+     * @return array
+     */
+    protected function addFileField($data, array $files)
+    {
+        $newData = [];
+        if ($data) {
+            foreach (explode('&', $data) as $key => $value) {
+                list($key, $value) = explode('=', urldecode($value));
+                $newData[$key] = $value;
+            }
+        }
+        $hasCurlFile = class_exists('CURLFile');
+        foreach ($files as $name => $file) {
+            $newData[$name] = $hasCurlFile ? new \CURLFile($file) : '@' . $file;
+        }
+        return $newData;
+    }
+
+    /**
+     * Parse response text
+     *
+     * @param string $response
+     */
+    protected function handleResponse($response)
+    {
+        $ch = $this->ch;
+
+        if (false !== $response) {
+            $curlInfo = curl_getinfo($ch);
+
+            // Parse response header
+            if ($this->getCurlOption(CURLOPT_HEADER)) {
+                // Fixes header size error when use CURLOPT_PROXY and CURLOPT_HTTPPROXYTUNNEL is true
+                // http://sourceforge.net/p/curl/bugs/1204/
+                if (false !== stripos($response, "HTTP/1.1 200 Connection established\r\n\r\n")) {
+                    $response = str_ireplace("HTTP/1.1 200 Connection established\r\n\r\n", '', $response);
+                }
+
+                $this->responseHeader = trim(substr($response, 0, $curlInfo['header_size']));
+                $this->responseText = substr($response, $curlInfo['header_size']);
+            } else {
+                $this->responseText = $response;
+            }
+
+            $statusCode = $curlInfo['http_code'];
+            $isSuccess = $statusCode >= 200 && $statusCode < 300 || 304 === $statusCode;
+            if ($isSuccess) {
+                $this->response = $this->parseResponse($this->responseText, $exception);
+                if (!$exception) {
+                    $this->result = true;
+                    $this->success && call_user_func($this->success, $this->response, $this);
+                } else {
+                    $this->triggerError('parser', $exception);
+                }
+            } else {
+                if ($this->responseHeader) {
+                    preg_match('/[\d]{3} (.+?)\r/', $this->responseHeader, $matches);
+                    $statusText = $matches[1];
+                } else {
+                    $statusText = 'HTTP request error';
+                }
+                // + 1000 to avoid conflicts with error service 404 detection
+                $exception = new \ErrorException($statusText, $statusCode + 1000);
+                $this->triggerError('http', $exception);
+            }
+        } else {
+            $exception = new \ErrorException(curl_error($ch), curl_errno($ch));
+            $this->triggerError('curl', $exception);
+        }
+    }
+
+    /**
+     * Trigger error callback
+     *
+     * @param string $status
+     * @param \ErrorException $exception
+     */
+    protected function triggerError($status, \ErrorException $exception)
+    {
+        $this->result = false;
+        $this->errorStatus = $status;
+        $this->errorException = $exception;
+        $this->error && call_user_func($this->error, $this, $status, $exception);
+    }
+
+    /**
+     * Parse response data by specified type
+     *
+     * @param string $data
+     * @param null $exception A variable to store exception when parsing error
+     * @return mixed
+     */
+    protected function parseResponse($data, &$exception)
+    {
+        switch ($this->dataType) {
+            case 'json':
+            case 'jsonObject':
+                $result = json_decode($data, 'json' === $this->dataType);
+                if (null === $result && JSON_ERROR_NONE != json_last_error()) {
+                    $exception = new \ErrorException('JSON parsing error, the data is ' . $data, json_last_error());
+                }
+                break;
+
+            case 'xml':
+            case 'serialize':
+                $methods = [
+                    'xml' => 'simplexml_load_string',
+                    'serialize' => 'unserialize',
+                ];
+                $result = @$methods[$this->dataType]($data);
+                if (false === $result && $e = error_get_last()) {
+                    $exception = new \ErrorException($e['message'], $e['type'], 0, $e['file'], $e['line']);
+                }
+                break;
+
+            case 'query':
+                // Parse $data(string) and assign the result to $result(array)
+                parse_str($data, $result);
+                break;
+
+            case 'text':
+            default:
+                $result = $data;
+                break;
+        }
+        return $result;
+    }
+
+    /**
+     * Parse cookie from header, returns result like $_COOKIE
+     *
+     * @param string $header
+     * @return array
+     */
+    protected function parseCookie($header)
+    {
+        $elements = explode(';', $header);
+        $cookies = [];
+
+        $currentName = null;
+        foreach ($elements as $element) {
+            $pieces = explode('=', trim($element), 2);
+            if (!isset($pieces[1])) {
+                continue;
+            }
+            list($name, $value) = $pieces;
+
+            if ('expires' == strtolower($name) && strtotime($value) < time()) {
+                // Removes expired cookie
+                unset($cookies[$currentName]);
+            } elseif (in_array(strtolower($name), ['domain', 'path', 'comment', 'expires', 'secure', 'max-age'], true)) {
+                // Ignore cookie attribute
+                continue;
+            } else {
+                $cookies[$name] = trim(urldecode($value));
+                $currentName = $name;
+            }
+        }
+        return $cookies;
+    }
+
+    /**
+     * Execute a specified method request
+     *
+     * @param string $url
+     * @param array $data
+     * @param string $dataType
+     * @param string $method
+     * @return $this
+     */
+    protected function processMethod($url, $data, $dataType, $method)
+    {
+        return $this->__invoke([
+            'url' => $url,
+            'method' => $method,
+            'dataType' => $dataType,
+            'data' => $data,
+        ]);
     }
 }

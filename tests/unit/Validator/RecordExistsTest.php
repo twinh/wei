@@ -2,33 +2,38 @@
 
 namespace WeiTest\Validator;
 
-class RecordExistsTest extends TestCase
+/**
+ * @internal
+ */
+final class RecordExistsTest extends TestCase
 {
-    protected $inputTestOptions = array(
-        'table' => 'users'
-    );
+    protected $inputTestOptions = [
+        'table' => 'users',
+    ];
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         $db = $this->wei->db;
 
-        $db->query("CREATE TABLE users (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
+        $db->query('CREATE TABLE users (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))');
 
-        $db->insert('users', array(
+        $db->insert('users', [
             'name' => 'twin',
-            'address' => 'test'
-        ));
+            'address' => 'test',
+        ]);
 
-        $db->insert('users', array(
+        $db->insert('users', [
             'name' => 'test',
-            'address' => 'test'
-        ));
+            'address' => 'test',
+        ]);
     }
 
     /**
      * @dataProvider dataProviderForRecordExists
+     * @param mixed $input
+     * @param mixed $field
      */
     public function testRecordExists($input, $field)
     {
@@ -38,6 +43,8 @@ class RecordExistsTest extends TestCase
 
     /**
      * @dataProvider dataProviderForRecordNotExists
+     * @param mixed $input
+     * @param mixed $field
      */
     public function testRecordNotExists($input, $field)
     {
@@ -47,23 +54,23 @@ class RecordExistsTest extends TestCase
 
     public function dataProviderForRecordExists()
     {
-        return array(
-            array('1', 'id'),
-            array('2', 'id'),
-            array('twin', 'name'),
-            array('test', 'name'),
-            array('test', 'address')
-        );
+        return [
+            ['1', 'id'],
+            ['2', 'id'],
+            ['twin', 'name'],
+            ['test', 'name'],
+            ['test', 'address'],
+        ];
     }
 
     public function dataProviderForRecordNotExists()
     {
-        return array(
-            array('3', 'id'),
-            array('4', 'id'),
-            array('twin', 'address'),
-            array('test2', 'name'),
-            array('test2', 'address')
-        );
+        return [
+            ['3', 'id'],
+            ['4', 'id'],
+            ['twin', 'address'],
+            ['test2', 'name'],
+            ['test2', 'address'],
+        ];
     }
 }

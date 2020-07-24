@@ -2,9 +2,12 @@
 
 namespace WeiTest;
 
-class MysqlCacheTest extends CacheTestCase
+/**
+ * @internal
+ */
+final class MysqlCacheTest extends CacheTestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         try {
             $this->object = $this->wei->mysqlDbCache;

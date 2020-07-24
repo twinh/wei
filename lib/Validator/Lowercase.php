@@ -29,7 +29,7 @@ class Lowercase extends BaseValidator
             return false;
         }
 
-        if (mb_strtolower($input, mb_detect_encoding($input)) != $input) {
+        if (mb_strtolower($input, mb_detect_encoding($input, mb_detect_order(), true)) != $input) {
             $this->addError('invalid');
             return false;
         }

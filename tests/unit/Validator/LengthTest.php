@@ -2,21 +2,27 @@
 
 namespace WeiTest\Validator;
 
-class LengthTest extends TestCase
+/**
+ * @internal
+ */
+final class LengthTest extends TestCase
 {
     protected $ao;
 
-    public function __construct($name = NULL, array $data = array(), $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
 
-        $this->ao = new \ArrayObject(array(
+        $this->ao = new \ArrayObject([
             1, 2,
-        ));
+        ]);
     }
 
     /**
      * @dataProvider providerForLength
+     * @param mixed $input
+     * @param mixed $option1
+     * @param mixed $option2
      */
     public function testLength($input, $option1, $option2)
     {
@@ -25,6 +31,9 @@ class LengthTest extends TestCase
 
     /**
      * @dataProvider providerForNotLength
+     * @param mixed $input
+     * @param mixed $option1
+     * @param mixed $option2
      */
     public function testNotLength($input, $option1, $option2)
     {
@@ -33,6 +42,8 @@ class LengthTest extends TestCase
 
     /**
      * @dataProvider providerForSpecifiedLength
+     * @param mixed $input
+     * @param mixed $length
      */
     public function testSpecifiedLength($input, $length)
     {
@@ -40,8 +51,9 @@ class LengthTest extends TestCase
     }
 
     /**
-     *
      * @dataProvider providerForSpecifiedLengthNotPass
+     * @param mixed $input
+     * @param mixed $length
      */
     public function testSpecifiedLengthNotPass($input, $length)
     {
@@ -50,39 +62,39 @@ class LengthTest extends TestCase
 
     public function providerForSpecifiedLength()
     {
-        return array(
-            array('length7', 7),
-            array(array(1, 2), 2),
-            array($this->ao, 2)
-        );
+        return [
+            ['length7', 7],
+            [[1, 2], 2],
+            [$this->ao, 2],
+        ];
     }
 
     public function providerForSpecifiedLengthNotPass()
     {
-        return array(
-            array('length7', 8),
-            array(array(1, 2), 3),
-            array($this->ao, 3)
-        );
+        return [
+            ['length7', 8],
+            [[1, 2], 3],
+            [$this->ao, 3],
+        ];
     }
 
     public function providerForLength()
     {
-        return array(
-            array('length7', 7, 10),
-            array('length7', 0, 10),
-            array(array(1, 2), 1, 2),
-            array($this->ao, 1, 10),
-        );
+        return [
+            ['length7', 7, 10],
+            ['length7', 0, 10],
+            [[1, 2], 1, 2],
+            [$this->ao, 1, 10],
+        ];
     }
 
     public function providerForNotLength()
     {
-        return array(
-            array('length7', 0, 0),
-            array('length7', -2, -1),
-            array(array(1, 2), 10, 0),
-            array($this->ao, 0, 1),
-        );
+        return [
+            ['length7', 0, 0],
+            ['length7', -2, -1],
+            [[1, 2], 10, 0],
+            [$this->ao, 0, 1],
+        ];
     }
 }

@@ -29,7 +29,7 @@ abstract class Base
      *
      * @var array
      */
-    protected $providers = array();
+    protected $providers = [];
 
     /**
      * The service container object
@@ -44,65 +44,15 @@ abstract class Base
      * @param array $options The property options
      * @throws \InvalidArgumentException When option "wei" is not an instance of "Wei\Wei"
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         if (!isset($options['wei'])) {
             $this->wei = Wei::getContainer();
         } elseif (!$options['wei'] instanceof Wei) {
             throw new \InvalidArgumentException(sprintf('Option "wei" of class "%s" should be an instance of "Wei\Wei"',
-                get_class($this)), 1000);
+                static::class), 1000);
         }
         $this->setOption($options);
-    }
-
-    /**
-     * Set option property value
-     *
-     * @param string|array $name
-     * @param mixed $value
-     * @return $this
-     */
-    public function setOption($name, $value = null)
-    {
-        // Set options
-        if (is_array($name)) {
-            foreach ($name as $k => $v) {
-                $this->setOption($k, $v);
-            }
-            return $this;
-        }
-
-        if (method_exists($this, $method = 'set' . $name)) {
-            return $this->$method($value);
-        } else {
-            $this->$name = $value;
-            return $this;
-        }
-    }
-
-    /**
-     * Returns the value of option
-     *
-     * @param string $name The name of property
-     * @return mixed
-     */
-    public function getOption($name)
-    {
-        if (method_exists($this, $method = 'get' . $name)) {
-            return $this->$method();
-        } else {
-            return isset($this->$name) ? $this->$name : null;
-        }
-    }
-
-    /**
-     * Whether to create a new instance on static call
-     *
-     * @return bool
-     */
-    public static function isCreateNewInstance()
-    {
-        return static::$createNewInstance;
     }
 
     /**
@@ -139,6 +89,56 @@ abstract class Base
      */
     public function __get($name)
     {
-        return $this->$name = $this->wei->get($name, array(), $this->providers);
+        return $this->{$name} = $this->wei->get($name, [], $this->providers);
+    }
+
+    /**
+     * Set option property value
+     *
+     * @param string|array $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function setOption($name, $value = null)
+    {
+        // Set options
+        if (is_array($name)) {
+            foreach ($name as $k => $v) {
+                $this->setOption($k, $v);
+            }
+            return $this;
+        }
+
+        if (method_exists($this, $method = 'set' . $name)) {
+            return $this->{$method}($value);
+        } else {
+            $this->{$name} = $value;
+            return $this;
+        }
+    }
+
+    /**
+     * Returns the value of option
+     *
+     * @param string $name The name of property
+     * @return mixed
+     */
+    public function getOption($name)
+    {
+        if (method_exists($this, $method = 'get' . $name)) {
+            return $this->{$method}();
+        } else {
+            return isset($this->{$name}) ? $this->{$name} : null;
+        }
+    }
+
+    /**
+     * Whether to create a new instance on static call
+     *
+     * @return bool
+     */
+    public static function isCreateNewInstance()
+    {
+        return static::$createNewInstance;
     }
 }

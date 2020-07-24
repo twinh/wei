@@ -41,18 +41,6 @@ class Callback extends BaseValidator
     }
 
     /**
-     * {@inheritdoc}
-     */
-    protected function doValidate($input)
-    {
-        if (!call_user_func($this->fn, $input, $this, $this->wei)) {
-            $this->addError('invalid');
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Set the invalid message
      *
      * @param string $message
@@ -62,5 +50,17 @@ class Callback extends BaseValidator
     {
         $this->message = $message;
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function doValidate($input)
+    {
+        if (!call_user_func($this->fn, $input, $this, $this->wei)) {
+            $this->addError('invalid');
+            return false;
+        }
+        return true;
     }
 }

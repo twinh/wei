@@ -62,16 +62,16 @@ class Redis extends BaseCache
      *
      * @var array
      */
-    protected $options = array(
-        \Redis::OPT_SERIALIZER => \Redis::SERIALIZER_PHP
-    );
+    protected $options = [
+        \Redis::OPT_SERIALIZER => \Redis::SERIALIZER_PHP,
+    ];
 
     /**
      * Constructor
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
         $this->connect();
@@ -108,9 +108,9 @@ class Redis extends BaseCache
             return true;
         }
 
-        $this->object = new \Redis;
+        $this->object = new \Redis();
         $connect = $this->persistent ? 'pconnect' : 'connect';
-        $result = $this->object->$connect($this->host, $this->port, $this->timeout);
+        $result = $this->object->{$connect}($this->host, $this->port, $this->timeout);
 
         if ($result && $this->auth) {
             $result = $this->object->auth($this->auth);
@@ -140,7 +140,7 @@ class Redis extends BaseCache
     public function set($key, $value, $expire = 0)
     {
         // Use null instead of 0 for redis extension 2.2.8, otherwise the key will expire after set
-        return $this->object->set($this->namespace . $key, $value, $expire === 0 ? null : $expire);
+        return $this->object->set($this->namespace . $key, $value, 0 === $expire ? null : $expire);
     }
 
     /**
@@ -148,7 +148,7 @@ class Redis extends BaseCache
      */
     public function getMulti(array $keys)
     {
-        $keysWithPrefix = array();
+        $keysWithPrefix = [];
         foreach ($keys as $key) {
             $keysWithPrefix[] = $this->namespace . $key;
         }
@@ -168,13 +168,13 @@ class Redis extends BaseCache
     public function setMulti(array $items, $expire = 0)
     {
         $keys = array_keys($items);
-        $keysWithPrefix = array();
+        $keysWithPrefix = [];
         foreach ($keys as $key) {
             $keysWithPrefix[] = $this->namespace . $key;
         }
         $items = array_combine($keysWithPrefix, $items);
         $result = $this->object->mset($items);
-        return array_combine($keys, array_pad(array(), count($items), $result));
+        return array_combine($keys, array_pad([], count($items), $result));
     }
 
     /**
@@ -182,7 +182,7 @@ class Redis extends BaseCache
      */
     public function remove($key)
     {
-        return (bool)$this->object->del($this->namespace . $key);
+        return (bool) $this->object->del($this->namespace . $key);
     }
 
     /**

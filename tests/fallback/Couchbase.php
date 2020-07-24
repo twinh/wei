@@ -42,12 +42,12 @@ class Couchbase
 
     public function getMulti()
     {
-        return array();
+        return [];
     }
 
     public function setMulti()
     {
-        return array();
+        return [];
     }
 
     public function flush()

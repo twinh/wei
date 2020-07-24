@@ -68,42 +68,6 @@ abstract class BaseCache extends Base
     abstract public function get($key, $expire = null, $fn = null);
 
     /**
-     * Store data to cache when data is not false and callback is provided
-     *
-     * @param string $key
-     * @param mixed $result
-     * @param int $expire
-     * @param callable $fn
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     * @return mixed
-     */
-    protected function processGetResult($key, $result, $expire, $fn)
-    {
-        if (false === $result && ($expire || $fn)) {
-            // Avoid using null as expire second, for null will be convert to 0
-            // which means that store the cache forever, and make it hart to debug.
-            if (!is_numeric($expire) && $fn) {
-                throw new \InvalidArgumentException(sprintf(
-                    'Expire time for cache "%s" must be numeric, %s given',
-                    $key,
-                    is_object($expire) ? get_class($expire) : gettype($expire)
-                ));
-            }
-
-            // Example: get($key, function(){});
-            if ($expire && !$fn) {
-                $fn = $expire;
-                $expire = 0;
-            }
-
-            $result = call_user_func($fn, $this->wei, $this);
-            $this->set($key, $result, $expire);
-        }
-        return $result;
-    }
-
-    /**
      * Store an item
      *
      * @param  string $key    The name of item
@@ -178,7 +142,7 @@ abstract class BaseCache extends Base
      */
     public function getMulti(array $keys)
     {
-        $results = array();
+        $results = [];
         foreach ($keys as $key) {
             $results[$key] = $this->get($key);
         }
@@ -194,7 +158,7 @@ abstract class BaseCache extends Base
      */
     public function setMulti(array $keys, $expire = 0)
     {
-        $results = array();
+        $results = [];
         foreach ($keys as $key => $value) {
             $results[$key] = $this->set($key, $value, $expire);
         }
@@ -211,7 +175,7 @@ abstract class BaseCache extends Base
     public function getFileContent($file, $fn)
     {
         $key = $file . filemtime($file);
-        return $this->get($key, function($wei, $cache) use ($file, $fn) {
+        return $this->get($key, function ($wei, $cache) use ($file, $fn) {
             return $fn($file, $wei, $cache);
         });
     }
@@ -251,7 +215,43 @@ abstract class BaseCache extends Base
     /**
      * Clear all items
      *
-     * @return boolean
+     * @return bool
      */
     abstract public function clear();
+
+    /**
+     * Store data to cache when data is not false and callback is provided
+     *
+     * @param string $key
+     * @param mixed $result
+     * @param int $expire
+     * @param callable $fn
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     * @return mixed
+     */
+    protected function processGetResult($key, $result, $expire, $fn)
+    {
+        if (false === $result && ($expire || $fn)) {
+            // Avoid using null as expire second, for null will be convert to 0
+            // which means that store the cache forever, and make it hart to debug.
+            if (!is_numeric($expire) && $fn) {
+                throw new \InvalidArgumentException(sprintf(
+                    'Expire time for cache "%s" must be numeric, %s given',
+                    $key,
+                    is_object($expire) ? get_class($expire) : gettype($expire)
+                ));
+            }
+
+            // Example: get($key, function(){});
+            if ($expire && !$fn) {
+                $fn = $expire;
+                $expire = 0;
+            }
+
+            $result = call_user_func($fn, $this->wei, $this);
+            $this->set($key, $result, $expire);
+        }
+        return $result;
+    }
 }

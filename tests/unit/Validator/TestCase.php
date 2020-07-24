@@ -4,7 +4,7 @@ namespace WeiTest\Validator;
 
 use WeiTest\TestCase as BaseTestCase;
 
-class TestCase extends BaseTestCase
+abstract class TestCase extends BaseTestCase
 {
     /**
      * The name of validator
@@ -18,14 +18,24 @@ class TestCase extends BaseTestCase
      *
      * @var array
      */
-    protected $inputTestOptions = array();
+    protected $inputTestOptions = [];
 
     protected static $resource;
+
+    public static function tearDownAfterClass(): void
+    {
+        parent::tearDownAfterClass();
+
+        if (static::$resource) {
+            fclose(static::$resource);
+            static::$resource = null;
+        }
+    }
 
     public function providerForInput()
     {
         // Initial test fixtures
-        $data = array(
+        $data = [
             // boolean
             true, false,
             // integer
@@ -35,18 +45,18 @@ class TestCase extends BaseTestCase
             // string
             'this is a simple string',
             // object
-            new \stdClass, new \ArrayObject(array(1, 3)), new \DateTime(),
+            new \stdClass(), new \ArrayObject([1, 3]), new \DateTime(),
             // resource
             $this->createResource(),
             // null
             null,
             // callback
-            function(){}
-        );
+            function () {},
+        ];
 
         // Convert to test data
         foreach ($data as &$value) {
-            $value = array($value);
+            $value = [$value];
         }
 
         return $data;
@@ -54,11 +64,12 @@ class TestCase extends BaseTestCase
 
     /**
      * @dataProvider providerForInput
+     * @param mixed $input
      */
     public function testInput($input)
     {
         // Gets validator name WeiTest\Validator\LengthTest => Length
-        $name = $this->name ?: substr(get_class($this), strrpos(get_class($this), '\\') + 1, -4);
+        $name = $this->name ?: substr(static::class, strrpos(static::class, '\\') + 1, -4);
         $validator = $this->validate->createRuleValidator($name, $this->inputTestOptions);
 
         // The validator should accept any type of INPUT and do NOT raise any
@@ -73,15 +84,5 @@ class TestCase extends BaseTestCase
         }
 
         return static::$resource;
-    }
-
-    public static function tearDownAfterClass(): void
-    {
-        parent::tearDownAfterClass();
-
-        if (static::$resource) {
-            fclose(static::$resource);
-            static::$resource = null;
-        }
     }
 }

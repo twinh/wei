@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class DecimalTest extends TestCase
+/**
+ * @internal
+ */
+final class DecimalTest extends TestCase
 {
     /**
      * @dataProvider providerForDecimal
+     * @param mixed $input
      */
     public function testDecimal($input)
     {
@@ -14,6 +18,7 @@ class DecimalTest extends TestCase
 
     /**
      * @dataProvider providerForNotDecimal
+     * @param mixed $input
      */
     public function testNotDecimal($input)
     {
@@ -22,30 +27,30 @@ class DecimalTest extends TestCase
 
     public function providerForDecimal()
     {
-        return array(
-            array(0.0),
-            array('0.123'),
-            array('1.0'),
-            array(1.0),
-            array('6.01'),
-            array('-2.234'),
-            array(+2.2),
-            array(-2.2),
-            array(3E-3),
-            array(2.3E-3),
-            array(2.3E3),
-        );
+        return [
+            [0.0],
+            ['0.123'],
+            ['1.0'],
+            [1.0],
+            ['6.01'],
+            ['-2.234'],
+            [+2.2],
+            [-2.2],
+            [3E-3],
+            [2.3E-3],
+            [2.3E3],
+        ];
     }
 
     public function providerForNotDecimal()
     {
-        return array(
-            array('0'),
-            array(0),
-            array('1 23456'),
-            array('a bcdefg'),
-            array('0.0.1'),
-            array('string'),
-        );
+        return [
+            ['0'],
+            [0],
+            ['1 23456'],
+            ['a bcdefg'],
+            ['0.0.1'],
+            ['string'],
+        ];
     }
 }

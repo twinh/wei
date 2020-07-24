@@ -59,15 +59,15 @@ class WeChatApp extends Base
      *
      * @var array
      */
-    protected $rules = array(
-        'text' => array(),
-        'event' => array(),
+    protected $rules = [
+        'text' => [],
+        'event' => [],
         'image' => null,
         'location' => null,
         'voice' => null,
         'video' => null,
         'link' => null,
-    );
+    ];
 
     /**
      * A handler executes when none of rules handled the input
@@ -81,7 +81,7 @@ class WeChatApp extends Base
      *
      * @var array
      */
-    protected $parseRet = array('code' => 1, 'message' => '解析成功');
+    protected $parseRet = ['code' => 1, 'message' => '解析成功'];
 
     /**
      * Are there any callbacks handled the message ?
@@ -112,14 +112,14 @@ class WeChatApp extends Base
      *
      * @var array
      */
-    protected $attrs = array();
+    protected $attrs = [];
 
     /**
      * Constructor
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         parent::__construct($options);
 
@@ -127,49 +127,11 @@ class WeChatApp extends Base
             $this->query = &$_GET;
         }
 
-        if (is_null($this->postData)) {
+        if (null === $this->postData) {
             $this->postData = file_get_contents('php://input');
         }
 
         $this->parse();
-    }
-
-    /**
-     * Parse post data to message attributes
-     *
-     * @return array
-     */
-    public function parse()
-    {
-        if (!$this->checkToken()) {
-            return $this->parseRet = array('code' => -1, 'message' => 'Token不正确');
-        }
-
-        $attrs = $this->xmlToArray($this->postData);
-        if ($this->isEncrypted()) {
-            $ret = $this->decryptMsg($attrs['Encrypt']);
-            if ($ret['code'] !== 1) {
-                return $this->parseRet = $ret;
-            }
-            $attrs = $this->xmlToArray($ret['xml']);
-        }
-
-        $this->attrs = $attrs;
-        return $this->parseRet = array('code' => 1, 'message' => '解析成功');
-    }
-
-    /**
-     * Check if the WeChat server signature is valid
-     */
-    protected function checkToken()
-    {
-        $query = $this->query;
-        $signature = $this->sign(
-            $this->token,
-            isset($query['timestamp']) ? $query['timestamp'] : '',
-            isset($query['nonce']) ? $query['nonce'] : ''
-        );
-        return isset($query['signature']) && $signature === $query['signature'];
     }
 
     /**
@@ -184,6 +146,30 @@ class WeChatApp extends Base
     }
 
     /**
+     * Parse post data to message attributes
+     *
+     * @return array
+     */
+    public function parse()
+    {
+        if (!$this->checkToken()) {
+            return $this->parseRet = ['code' => -1, 'message' => 'Token不正确'];
+        }
+
+        $attrs = $this->xmlToArray($this->postData);
+        if ($this->isEncrypted()) {
+            $ret = $this->decryptMsg($attrs['Encrypt']);
+            if (1 !== $ret['code']) {
+                return $this->parseRet = $ret;
+            }
+            $attrs = $this->xmlToArray($ret['xml']);
+        }
+
+        $this->attrs = $attrs;
+        return $this->parseRet = ['code' => 1, 'message' => '解析成功'];
+    }
+
+    /**
      * Execute the matched rule and returns the rule result
      *
      * Returns false when the token is invalid or no rules matched
@@ -193,7 +179,7 @@ class WeChatApp extends Base
     public function run()
     {
         // The token or post data is invalid
-        if ($this->parseRet['code'] !== 1) {
+        if (1 !== $this->parseRet['code']) {
             return false;
         }
 
@@ -207,74 +193,6 @@ class WeChatApp extends Base
             return 'success';
         }
         return $this->isEncrypted() ? $this->encryptMsg($msg) : $msg;
-    }
-
-    /**
-     * Executes the matched rule and returns the rule result
-     *
-     * Returns false when the token is invalid or no rules matched
-     *
-     * @return string|false
-     */
-    protected function handleMsg()
-    {
-        switch ($this->getMsgType()) {
-            case 'text':
-                if ($result = $this->handleText()) {
-                    return $result;
-                }
-                break;
-
-            case 'event':
-            case 'device_event':
-                $event = strtolower($this->getEvent());
-                switch ($event) {
-                    case 'subscribe':
-                        $result = $this->handleEvent('subscribe');
-                        $scanResult = null;
-                        if ($this->getTicket()) {
-                            $scanResult = $this->handleEvent('scan');
-                        }
-                        if ($result) {
-                            return $result;
-                        }
-                        if ($scanResult) {
-                            return $scanResult;
-                        }
-                        break;
-
-                    case 'scan':
-                        if ($result = $this->handleEvent('scan')) {
-                            return $result;
-                        }
-                        break;
-
-                    default:
-                        if ($result = $this->handleEvent($event, $this->getEventKey())) {
-                            return $result;
-                        }
-                        break;
-                }
-                break;
-
-            // Including location, image, voice, video and link
-            default:
-                if (isset($this->rules[$this->getMsgType()])) {
-                    return $this->handle($this->rules[$this->getMsgType()]);
-                }
-        }
-
-        // Check if enable to transfer to customer service
-        if (isset($this->rules['transferCustomer'])) {
-            return $this->handle($this->rules['transferCustomer']);
-        }
-
-        // Fallback to the default rule
-        if (!$this->handled && $this->defaults) {
-            return $this->handle($this->defaults);
-        }
-
-        return false;
     }
 
     /**
@@ -294,7 +212,7 @@ class WeChatApp extends Base
      */
     public function isEncrypted()
     {
-        return isset($this->query['encrypt_type']) && $this->query['encrypt_type'] == 'aes';
+        return isset($this->query['encrypt_type']) && 'aes' == $this->query['encrypt_type'];
     }
 
     /**
@@ -485,7 +403,7 @@ class WeChatApp extends Base
      * Attach a handler which executes when none of the rule handled the input
      *
      * @param Closure $fn
-     * @return boolean
+     * @return bool
      */
     public function defaults(Closure $fn)
     {
@@ -501,9 +419,9 @@ class WeChatApp extends Base
      */
     public function sendText($content)
     {
-        return $this->send('text', array(
+        return $this->send('text', [
             'Content' => $content,
-        ));
+        ]);
     }
 
     /**
@@ -517,14 +435,14 @@ class WeChatApp extends Base
      */
     public function sendMusic($title, $description, $url, $hqUrl = null)
     {
-        return $this->send('music', array(
-            'Music' => array(
+        return $this->send('music', [
+            'Music' => [
                 'Title' => $title,
                 'Description' => $description,
                 'MusicUrl' => $url,
                 'HQMusicUrl' => $hqUrl,
-            ),
-        ));
+            ],
+        ]);
     }
 
     /**
@@ -564,29 +482,29 @@ class WeChatApp extends Base
     {
         // Convert single article array
         if (!is_int(key($articles))) {
-            $articles = array($articles);
+            $articles = [$articles];
         }
 
-        $response = array(
+        $response = [
             'ArticleCount' => count($articles),
-            'Articles' => array(
-                'item' => array(),
-            ),
-        );
+            'Articles' => [
+                'item' => [],
+            ],
+        ];
 
         foreach ($articles as $article) {
-            $article += array(
+            $article += [
                 'title' => null,
                 'description' => null,
                 'picUrl' => null,
                 'url' => null,
-            );
-            $response['Articles']['item'][] = array(
+            ];
+            $response['Articles']['item'][] = [
                 'Title' => $article['title'],
                 'Description' => $article['description'],
                 'PicUrl' => $article['picUrl'],
                 'Url' => $article['url'],
-            );
+            ];
         }
 
         return $this->send('news', $response);
@@ -598,7 +516,7 @@ class WeChatApp extends Base
      * @param array $data
      * @return array
      */
-    public function sendTransferCustomerService($data = array())
+    public function sendTransferCustomerService($data = [])
     {
         return $this->send('transfer_customer_service', $data);
     }
@@ -610,7 +528,7 @@ class WeChatApp extends Base
      */
     public function isValid()
     {
-        return $this->parseRet['code'] === 1;
+        return 1 === $this->parseRet['code'];
     }
 
     /**
@@ -804,7 +722,7 @@ class WeChatApp extends Base
     public function getScanSceneId()
     {
         $eventKey = $this->getEventKey();
-        if (strpos($eventKey, 'qrscene_') === 0) {
+        if (0 === strpos($eventKey, 'qrscene_')) {
             $eventKey = substr($eventKey, 8);
         }
         return $eventKey;
@@ -867,9 +785,9 @@ class WeChatApp extends Base
      */
     public function getKeyword()
     {
-        if ($this->getMsgType() == 'text') {
+        if ('text' == $this->getMsgType()) {
             return strtolower($this->getContent());
-        } elseif ($this->getMsgType() == 'event' && strtolower($this->getEvent()) == 'click') {
+        } elseif ('event' == $this->getMsgType() && 'click' == strtolower($this->getEvent())) {
             return strtolower($this->getEventKey());
         }
         return false;
@@ -884,12 +802,112 @@ class WeChatApp extends Base
      */
     public function send($type, array $response)
     {
-        return $response + array(
+        return $response + [
                 'ToUserName' => $this->getFromUserName(),
                 'FromUserName' => $this->getToUserName(),
                 'MsgType' => $type,
                 'CreateTime' => time(),
-            );
+            ];
+    }
+
+    /**
+     * @param string $text
+     * @param string $encodingAesKey
+     * @param string $appId
+     * @return string
+     */
+    public function prpcryptEncrypt($text, $encodingAesKey, $appId)
+    {
+        $key = base64_decode($encodingAesKey . '=', true);
+
+        // 获得16位随机字符串，填充到明文之前
+        $random = $this->getRandomStr();
+        $text = $random . pack('N', strlen($text)) . $text . $appId;
+        $iv = substr($key, 0, 16);
+        $text = $this->pkcs7Encode($text);
+        return openssl_encrypt($text, 'AES-256-CBC', substr($key, 0, 32), OPENSSL_ZERO_PADDING, $iv);
+    }
+
+    /**
+     * Check if the WeChat server signature is valid
+     */
+    protected function checkToken()
+    {
+        $query = $this->query;
+        $signature = $this->sign(
+            $this->token,
+            isset($query['timestamp']) ? $query['timestamp'] : '',
+            isset($query['nonce']) ? $query['nonce'] : ''
+        );
+        return isset($query['signature']) && $signature === $query['signature'];
+    }
+
+    /**
+     * Executes the matched rule and returns the rule result
+     *
+     * Returns false when the token is invalid or no rules matched
+     *
+     * @return string|false
+     */
+    protected function handleMsg()
+    {
+        switch ($this->getMsgType()) {
+            case 'text':
+                if ($result = $this->handleText()) {
+                    return $result;
+                }
+                break;
+
+            case 'event':
+            case 'device_event':
+                $event = strtolower($this->getEvent());
+                switch ($event) {
+                    case 'subscribe':
+                        $result = $this->handleEvent('subscribe');
+                        $scanResult = null;
+                        if ($this->getTicket()) {
+                            $scanResult = $this->handleEvent('scan');
+                        }
+                        if ($result) {
+                            return $result;
+                        }
+                        if ($scanResult) {
+                            return $scanResult;
+                        }
+                        break;
+
+                    case 'scan':
+                        if ($result = $this->handleEvent('scan')) {
+                            return $result;
+                        }
+                        break;
+
+                    default:
+                        if ($result = $this->handleEvent($event, $this->getEventKey())) {
+                            return $result;
+                        }
+                        break;
+                }
+                break;
+
+            // Including location, image, voice, video and link
+            default:
+                if (isset($this->rules[$this->getMsgType()])) {
+                    return $this->handle($this->rules[$this->getMsgType()]);
+                }
+        }
+
+        // Check if enable to transfer to customer service
+        if (isset($this->rules['transferCustomer'])) {
+            return $this->handle($this->rules['transferCustomer']);
+        }
+
+        // Fallback to the default rule
+        if (!$this->handled && $this->defaults) {
+            return $this->handle($this->defaults);
+        }
+
+        return false;
     }
 
     /**
@@ -902,11 +920,11 @@ class WeChatApp extends Base
      */
     protected function addTextRule($type, $keyword, Closure $fn)
     {
-        $this->rules['text'][] = array(
+        $this->rules['text'][] = [
             'type' => $type,
             'keyword' => $keyword,
             'fn' => $fn,
-        );
+        ];
         return $this;
     }
 
@@ -919,19 +937,19 @@ class WeChatApp extends Base
     {
         $content = $this->getContent();
         foreach ($this->rules['text'] as $rule) {
-            if ($rule['type'] == 'is' && 0 === strcasecmp($content, $rule['keyword'])) {
+            if ('is' == $rule['type'] && 0 === strcasecmp($content, $rule['keyword'])) {
                 return $this->handle($rule['fn']);
             }
 
-            if ($rule['type'] == 'has' && false !== mb_stripos($content, $rule['keyword'])) {
+            if ('has' == $rule['type'] && false !== mb_stripos($content, $rule['keyword'])) {
                 return $this->handle($rule['fn']);
             }
 
-            if ($rule['type'] == 'startsWith' && 0 === mb_stripos($content, $rule['keyword'])) {
+            if ('startsWith' == $rule['type'] && 0 === mb_stripos($content, $rule['keyword'])) {
                 return $this->handle($rule['fn']);
             }
 
-            if ($rule['type'] == 'match' && preg_match($rule['keyword'], $content)) {
+            if ('match' == $rule['type'] && preg_match($rule['keyword'], $content)) {
                 return $this->handle($rule['fn']);
             }
         }
@@ -940,7 +958,7 @@ class WeChatApp extends Base
 
     protected function handleEvent($event, $eventKey = false)
     {
-        if ($eventKey !== false) {
+        if (false !== $eventKey) {
             if (isset($this->rules['event'][$event][$eventKey])) {
                 return $this->handle($this->rules['event'][$event][$eventKey]);
             }
@@ -967,7 +985,7 @@ class WeChatApp extends Base
         if ($content && !is_array($content)) {
             $content = $this->sendText($content);
         }
-        $this->beforeSend && call_user_func_array($this->beforeSend, array($this, &$content, $this->wei));
+        $this->beforeSend && call_user_func_array($this->beforeSend, [$this, &$content, $this->wei]);
 
         return $content ? $this->arrayToXml($content)->asXML() : '';
     }
@@ -981,7 +999,7 @@ class WeChatApp extends Base
      */
     protected function arrayToXml(array $array, SimpleXMLElement $xml = null)
     {
-        if ($xml === null) {
+        if (null === $xml) {
             $xml = new SimpleXMLElement('<xml/>');
         }
         foreach ($array as $key => $value) {
@@ -1027,24 +1045,6 @@ class WeChatApp extends Base
     }
 
     /**
-     * @param string $text
-     * @param string $encodingAesKey
-     * @param string $appId
-     * @return string
-     */
-    public function prpcryptEncrypt($text, $encodingAesKey, $appId)
-    {
-        $key = base64_decode($encodingAesKey . '=');
-
-        // 获得16位随机字符串，填充到明文之前
-        $random = $this->getRandomStr();
-        $text = $random . pack("N", strlen($text)) . $text . $appId;
-        $iv = substr($key, 0, 16);
-        $text = $this->pkcs7Encode($text);
-        return openssl_encrypt($text, 'AES-256-CBC', substr($key, 0, 32), OPENSSL_ZERO_PADDING, $iv);
-    }
-
-    /**
      * 对密文进行解密
      *
      * @param string $encrypted 需要解密的密文
@@ -1055,11 +1055,11 @@ class WeChatApp extends Base
     protected function prpcryptDecrypt($encrypted, $encodingAesKey, $appId)
     {
         try {
-            $key = base64_decode($encodingAesKey . '=');
+            $key = base64_decode($encodingAesKey . '=', false);
             $iv = substr($key, 0, 16);
             $decrypted = openssl_decrypt($encrypted, 'AES-256-CBC', substr($key, 0, 32), OPENSSL_ZERO_PADDING, $iv);
         } catch (\Exception $e) {
-            return array('code' => -2002, 'message' => 'AES解密失败', 'e' => (string) $e);
+            return ['code' => -2002, 'message' => 'AES解密失败', 'e' => (string) $e];
         }
 
         try {
@@ -1067,7 +1067,7 @@ class WeChatApp extends Base
             $result = $this->pkcs7Decode($decrypted);
             // 去除16位随机字符串,网络字节序和AppId
             if (strlen($result) < 16) {
-                return array('code' => -2003, 'message' => '解密后结果不能小于16位', 'result' => $result);
+                return ['code' => -2003, 'message' => '解密后结果不能小于16位', 'result' => $result];
             }
             $content = substr($result, 16, strlen($result));
             $lenList = unpack('N', substr($content, 0, 4));
@@ -1075,14 +1075,14 @@ class WeChatApp extends Base
             $xml = substr($content, 4, $xmlLen);
             $fromAppId = substr($content, $xmlLen + 4);
         } catch (\Exception $e) {
-            return array('code' => -2004, 'message' => '解密后得到的buffer非法', 'e' => (string) $e);
+            return ['code' => -2004, 'message' => '解密后得到的buffer非法', 'e' => (string) $e];
         }
 
         if ($fromAppId != $appId) {
-            return array('code' => -2005, 'message' => 'AppId 校验错误', 'appId' => $appId, 'fromAppId' => $fromAppId);
+            return ['code' => -2005, 'message' => 'AppId 校验错误', 'appId' => $appId, 'fromAppId' => $fromAppId];
         }
 
-        return array('code' => 1, 'message' => '解密成功', 'xml' => $xml);
+        return ['code' => 1, 'message' => '解密成功', 'xml' => $xml];
     }
 
     /**
@@ -1094,12 +1094,12 @@ class WeChatApp extends Base
         $encrypt = $this->prpcryptEncrypt($replyMsg, $this->encodingAesKey, $this->appId);
         $signature = $this->sign($encrypt, $this->token, $this->query['timestamp'], $this->query['nonce']);
 
-        $xml = $this->arrayToXml(array(
+        $xml = $this->arrayToXml([
             'Encrypt' => $encrypt,
             'MsgSignature' => $signature,
             'TimeStamp' => $this->query['timestamp'],
             'Nonce' => $this->query['nonce'],
-        ))->asXML();
+        ])->asXML();
         return $xml;
     }
 
@@ -1111,15 +1111,15 @@ class WeChatApp extends Base
     {
         $signature = $this->sign($encrypt, $this->token, $this->query['timestamp'], $this->query['nonce']);
         if ($signature != $this->query['msg_signature']) {
-            return array('code' => -2001, 'message' => '签名验证错误');
+            return ['code' => -2001, 'message' => '签名验证错误'];
         }
 
         $ret = $this->prpcryptDecrypt($encrypt, $this->encodingAesKey, $this->appId);
-        if ($ret['code'] !== 1) {
+        if (1 !== $ret['code']) {
             return $ret;
         }
 
-        return array('code' => 1, 'message' => '解密成功', 'xml' => $ret['xml']);
+        return ['code' => 1, 'message' => '解密成功', 'xml' => $ret['xml']];
     }
 
     /**
@@ -1132,7 +1132,7 @@ class WeChatApp extends Base
     {
         $arr = func_get_args();
         sort($arr, SORT_STRING);
-        $str = implode($arr);
+        $str = implode('', $arr);
         return sha1($str);
     }
 
@@ -1146,7 +1146,7 @@ class WeChatApp extends Base
         $str = '';
         $strPol = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
         $max = strlen($strPol) - 1;
-        for ($i = 0; $i < 16; $i++) {
+        for ($i = 0; $i < 16; ++$i) {
             $str .= $strPol[mt_rand(0, $max)];
         }
         return $str;
@@ -1165,14 +1165,14 @@ class WeChatApp extends Base
 
         // 计算需要填充的位数
         $amountToPad = $size - ($textLength % $size);
-        if ($amountToPad == 0) {
+        if (0 == $amountToPad) {
             $amountToPad = $size;
         }
 
         // 获得补位所用的字符
         $padChr = chr($amountToPad);
         $tmp = '';
-        for ($index = 0; $index < $amountToPad; $index++) {
+        for ($index = 0; $index < $amountToPad; ++$index) {
             $tmp .= $padChr;
         }
         return $text . $tmp;

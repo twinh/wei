@@ -2,7 +2,10 @@
 
 namespace WeiTest;
 
-class FileCacheTest extends CacheTestCase
+/**
+ * @internal
+ */
+final class FileCacheTest extends CacheTestCase
 {
     /**
      * @var \Wei\FileCache
@@ -22,7 +25,7 @@ class FileCacheTest extends CacheTestCase
     {
         $file = $this->object;
 
-        $newDir = $file->getDir() . DIRECTORY_SEPARATOR . 'newDir';
+        $newDir = $file->getDir() . \DIRECTORY_SEPARATOR . 'newDir';
 
         $file->setDir($newDir);
 
@@ -37,7 +40,7 @@ class FileCacheTest extends CacheTestCase
 
         $wei->add(__METHOD__, true);
 
-        $this->assertEquals(true, $wei->get(__METHOD__));
+        $this->assertTrue($wei->get(__METHOD__));
 
         $this->assertFalse($wei->add(__METHOD__, 'the other test'), 'cache "test" is exists');
 
@@ -125,7 +128,7 @@ class FileCacheTest extends CacheTestCase
 
         $wei->remove('test');
 
-        $this->assertEquals(null, $wei->get('test'));
+        $this->assertFalse($wei->get('test'));
 
         $this->assertFalse($wei->remove('test'), 'cache not found');
     }

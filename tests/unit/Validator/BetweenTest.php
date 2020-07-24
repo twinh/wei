@@ -2,10 +2,16 @@
 
 namespace WeiTest\Validator;
 
-class BetweenTest extends TestCase
+/**
+ * @internal
+ */
+final class BetweenTest extends TestCase
 {
     /**
      * @dataProvider providerForBetween
+     * @param mixed $input
+     * @param mixed $min
+     * @param mixed $max
      */
     public function testBetween($input, $min, $max)
     {
@@ -14,6 +20,9 @@ class BetweenTest extends TestCase
 
     /**
      * @dataProvider providerForNotBetween
+     * @param mixed $input
+     * @param mixed $min
+     * @param mixed $max
      */
     public function testNotBetween($input, $min, $max)
     {
@@ -22,18 +31,18 @@ class BetweenTest extends TestCase
 
     public function providerForBetween()
     {
-        return array(
-            array(20, 10, 30),
-            array('2013-01-13', '2013-01-01', '2013-01-31'),
-            array(1.5, 0.8, 3.2)
-        );
+        return [
+            [20, 10, 30],
+            ['2013-01-13', '2013-01-01', '2013-01-31'],
+            [1.5, 0.8, 3.2],
+        ];
     }
 
     public function providerForNotBetween()
     {
-        return array(
-            array(20, 30, 40),
-            array('2013-01-01', '2013-01-13', '2013-01-31'),
-        );
+        return [
+            [20, 30, 40],
+            ['2013-01-01', '2013-01-13', '2013-01-31'],
+        ];
     }
 }

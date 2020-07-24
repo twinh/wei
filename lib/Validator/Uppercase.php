@@ -29,7 +29,7 @@ class Uppercase extends BaseValidator
             return false;
         }
 
-        if (mb_strtoupper($input, mb_detect_encoding($input)) != $input) {
+        if (mb_strtoupper($input, mb_detect_encoding($input, mb_detect_order(), true)) != $input) {
             $this->addError('invalid');
             return false;
         }

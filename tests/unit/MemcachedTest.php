@@ -2,9 +2,12 @@
 
 namespace WeiTest;
 
-class MemcachedTest extends CacheTestCase
+/**
+ * @internal
+ */
+final class MemcachedTest extends CacheTestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         if (!extension_loaded('memcached') || !class_exists('\Memcached')) {
             $this->markTestSkipped('The memcache extension is not loaded');
@@ -31,17 +34,17 @@ class MemcachedTest extends CacheTestCase
 
     public function testCustomServer()
     {
-        $this->wei->setConfig(array(
-            'test.memcached' => array(
-                'servers' => array(
-                    array(
-                        'host'          => 'localhost',
-                        'port'          => 11211,
-                        'persistent'    => false
-                    )
-                )
-            )
-        ));
+        $this->wei->setConfig([
+            'test.memcached' => [
+                'servers' => [
+                    [
+                        'host' => 'localhost',
+                        'port' => 11211,
+                        'persistent' => false,
+                    ],
+                ],
+            ],
+        ]);
 
         $this->assertInstanceOf('\Wei\Memcached', $this->wei->testMemcached);
     }

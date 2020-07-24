@@ -35,7 +35,7 @@ class SafeUrl extends Base
      *
      * @var array
      */
-    protected $params = array();
+    protected $params = [];
 
     /**
      * Generate a URL with signature, alias of generate method
@@ -103,7 +103,7 @@ class SafeUrl extends Base
      */
     public function setParams($params)
     {
-        $this->params = (array)$params;
+        $this->params = (array) $params;
         return $this;
     }
 
@@ -127,6 +127,6 @@ class SafeUrl extends Base
      */
     protected function filterKeys($query, $keys)
     {
-        return $keys ? array_intersect_key($query, array_flip((array)$keys)) : $query;
+        return $keys ? array_intersect_key($query, array_flip((array) $keys)) : $query;
     }
 }

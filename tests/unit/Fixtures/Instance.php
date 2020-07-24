@@ -8,7 +8,7 @@ class Instance
     public $arg2;
     public $arg3;
     public $arg4;
-    
+
     public function __construct($arg1 = null, $arg2 = null, $arg3 = null, $arg4 = null)
     {
         $this->arg1 = $arg1;

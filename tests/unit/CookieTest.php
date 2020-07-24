@@ -2,7 +2,10 @@
 
 use WeiTest\TestCase;
 
-class CookieTest extends TestCase
+/**
+ * @internal
+ */
+final class CookieTest extends TestCase
 {
     /**
      * @var \Wei\Cookie
@@ -31,13 +34,13 @@ class CookieTest extends TestCase
     {
         $cookie = $this->object;
 
-        $cookie->set('test', __METHOD__, array('expires' => 1));
+        $cookie->set('test', __METHOD__, ['expires' => 1]);
 
         $this->assertEquals(__METHOD__, $cookie->get('test'));
 
-        $cookie->set('test', __METHOD__, array('expires' => -1));
+        $cookie->set('test', __METHOD__, ['expires' => -1]);
 
-        $this->assertEquals(null, $cookie->get('test'), 'test expiresd cookie');
+        $this->assertNull($cookie->get('test'), 'test expiresd cookie');
     }
 
     public function testRemove()
@@ -50,7 +53,7 @@ class CookieTest extends TestCase
 
         $cookie->offsetUnset('test');
 
-        $this->assertEquals(null, $cookie->get('test'));
+        $this->assertNull($cookie->get('test'));
     }
 
     public function testClear()
@@ -102,7 +105,7 @@ class CookieTest extends TestCase
         $cookie['d']['e']['f']['g'] = 'h';
         $this->assertEquals('h', $cookie['d']['e']['f']['g']);
 
-        $cookie['i'] = array();
+        $cookie['i'] = [];
         $cookie['i']['j'] = 'k';
         $this->assertEquals('k', $cookie['i']['j']);
     }

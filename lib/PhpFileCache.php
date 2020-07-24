@@ -49,7 +49,7 @@ class PhpFileCache extends FileCache
     protected function prepareContent($content, $expire)
     {
         $time = time();
-        $content = var_export(array($expire ? $time + $expire : 2147483647, $content), true);
+        $content = var_export([$expire ? $time + $expire : 2147483647, $content], true);
         return "<?php\n\nreturn " . $content . ';';
     }
 }

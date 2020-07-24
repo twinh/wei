@@ -40,7 +40,7 @@ class Url extends BaseValidator
      * @param array $options
      * @return string|bool
      */
-    public function __invoke($input, $options = array())
+    public function __invoke($input, $options = [])
     {
         $options && $this->storeOption($options);
 

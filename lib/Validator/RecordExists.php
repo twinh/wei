@@ -48,7 +48,7 @@ class RecordExists extends BaseValidator
      *
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * Check if the input is existing table record
@@ -67,6 +67,16 @@ class RecordExists extends BaseValidator
     }
 
     /**
+     * Returns the data fetch from database
+     *
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function doValidate($input)
@@ -76,7 +86,7 @@ class RecordExists extends BaseValidator
             return false;
         }
 
-        $this->data = $this->db->find($this->table, array($this->field => $input));
+        $this->data = $this->db->find($this->table, [$this->field => $input]);
 
         if (empty($this->data)) {
             $this->addError('notFound');
@@ -84,15 +94,5 @@ class RecordExists extends BaseValidator
         }
 
         return true;
-    }
-
-    /**
-     * Returns the data fetch from database
-     *
-     * @return array
-     */
-    public function getData()
-    {
-        return $this->data;
     }
 }

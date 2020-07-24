@@ -34,14 +34,14 @@ class T extends Base
      *
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * The loaded translation files
      *
      * @var array
      */
-    protected $files = array();
+    protected $files = [];
 
     /**
      * Translate a message
@@ -50,7 +50,7 @@ class T extends Base
      * @param array $parameters
      * @return string
      */
-    public function __invoke($message, array $parameters = array())
+    public function __invoke($message, array $parameters = [])
     {
         if (isset($this->data[$message])) {
             $message = $this->data[$message];
@@ -65,7 +65,7 @@ class T extends Base
      * @param array $parameters
      * @return string
      */
-    public function trans($message, array $parameters = array())
+    public function trans($message, array $parameters = [])
     {
         return $this($message, $parameters);
     }

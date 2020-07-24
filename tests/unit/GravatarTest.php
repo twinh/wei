@@ -2,8 +2,10 @@
 
 namespace WeiTest;
 
-
-class GravatarTest extends TestCase
+/**
+ * @internal
+ */
+final class GravatarTest extends TestCase
 {
     public function testInvoke()
     {

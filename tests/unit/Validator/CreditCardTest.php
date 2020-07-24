@@ -2,10 +2,15 @@
 
 namespace WeiTest\Validator;
 
-class CreditCardTest extends TestCase
+/**
+ * @internal
+ */
+final class CreditCardTest extends TestCase
 {
     /**
      * @dataProvider providerForCreditCard
+     * @param mixed $input
+     * @param mixed|null $type
      */
     public function testCreditCard($input, $type = null)
     {
@@ -14,6 +19,8 @@ class CreditCardTest extends TestCase
 
     /**
      * @dataProvider providerForNotCreditCard
+     * @param mixed $input
+     * @param mixed|null $type
      */
     public function testNotCreditCard($input, $type = null)
     {
@@ -27,61 +34,61 @@ class CreditCardTest extends TestCase
         // http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm
         // http://names.igopaygo.com/credit_card/paypal
         // http://www.regexmagic.com/manual/xmppatterncreditcard.html
-        return array(
+        return [
             // validate luhn
-            array('4111111111111111'), // Visa
-            array('5500000000000004'), // MasterCard
-            array('340000000000009'),  // American Express
-            array('30000000000004'),   // Diner's Club
-            array('30000000000004'),   // Carte Blanche
-            array('6011000000000004'), // Discover
-            array('201400000000009'),  // en Route
-            array('3088000000000009'), // JCB
-            array('378282246310005'),  // American Express
-            array('5610591081018250'), // Australian BankCard
-            array('6011111111111117'), // Discover
-            array('6011000990139424'), // Discover
-            array('3530111333300000'), // JCB
-            array('3566002020360505'), // JCB
-            array('5555555555554444'), // MasterCard
+            ['4111111111111111'], // Visa
+            ['5500000000000004'], // MasterCard
+            ['340000000000009'],  // American Express
+            ['30000000000004'],   // Diner's Club
+            ['30000000000004'],   // Carte Blanche
+            ['6011000000000004'], // Discover
+            ['201400000000009'],  // en Route
+            ['3088000000000009'], // JCB
+            ['378282246310005'],  // American Express
+            ['5610591081018250'], // Australian BankCard
+            ['6011111111111117'], // Discover
+            ['6011000990139424'], // Discover
+            ['3530111333300000'], // JCB
+            ['3566002020360505'], // JCB
+            ['5555555555554444'], // MasterCard
             // validate type
-            array('340000000000009',    'Amex'),
-            array('378282246310005',    'Amex'),
-            array('30000000000004',     'DinersClub'),
-            array('36000000000008',     'DinersClub'),
-            array('38000000000006',     'DinersClub'),
-            array('6011000000000004',   'Discover'),
-            array('6411000000000000',   'Discover'),
-            array('6511000000000009',   'Discover'),
-            array('213112345678904',    'JCB'),
-            array('180012345678905',    'JCB'),
-            array('3512345678901236',   'JCB'),
-            array('5500000000000004',   'MasterCard'),
-            array('6222222222222225',   'UnionPay'),
-            array('4123456789011',      'Visa'),
-            array('4111111111111111',   'Visa'),
-            array('4123456789011',      'UnionPay,Visa'),
-            array('4111111111111111',   array('MasterCard', 'Visa')),
-            array('4111111111111111',   'All')
-        );
+            ['340000000000009',    'Amex'],
+            ['378282246310005',    'Amex'],
+            ['30000000000004',     'DinersClub'],
+            ['36000000000008',     'DinersClub'],
+            ['38000000000006',     'DinersClub'],
+            ['6011000000000004',   'Discover'],
+            ['6411000000000000',   'Discover'],
+            ['6511000000000009',   'Discover'],
+            ['213112345678904',    'JCB'],
+            ['180012345678905',    'JCB'],
+            ['3512345678901236',   'JCB'],
+            ['5500000000000004',   'MasterCard'],
+            ['6222222222222225',   'UnionPay'],
+            ['4123456789011',      'Visa'],
+            ['4111111111111111',   'Visa'],
+            ['4123456789011',      'UnionPay,Visa'],
+            ['4111111111111111',   ['MasterCard', 'Visa']],
+            ['4111111111111111',   'All'],
+        ];
     }
 
     public function providerForNotCreditCard()
     {
-        return array(
-            array(array()),            // not string
-            array('411111111111111'),  // not 16-digit
-            array('4111111111111112'), // luhn not valid
-            array('3530111333300001'), // luhn not valid
+        return [
+            [[]],            // not string
+            ['411111111111111'],  // not 16-digit
+            ['4111111111111112'], // luhn not valid
+            ['3530111333300001'], // luhn not valid
             // invalid card
-            array('4111111111111111', 'MasterCard'),    // Visa
-            array('5500000000000004', 'Visa'),          // MasterCard
-            array('5500000000000004', 'Visa,UnionPay'), // MasterCard
-            array('5500000000000004', array('Visa', 'UnionPay')), // MasterCard
+            ['4111111111111111', 'MasterCard'],    // Visa
+            ['5500000000000004', 'Visa'],          // MasterCard
+            ['5500000000000004', 'Visa,UnionPay'], // MasterCard
+            ['5500000000000004', ['Visa', 'UnionPay']], // MasterCard
 
             // valid luhn, valid type, invalid length
-            array('411111111111116', 'Visa')
-        );
+            ['411111111111116', 'Visa'],
+        ];
     }
 
     public function testException()

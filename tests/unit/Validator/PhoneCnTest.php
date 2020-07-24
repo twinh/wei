@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class PhoneCnTest extends TestCase
+/**
+ * @internal
+ */
+final class PhoneCnTest extends TestCase
 {
     /**
      * @dataProvider providerForPhoneCn
+     * @param mixed $input
      */
     public function testPhoneCn($input)
     {
@@ -14,6 +18,7 @@ class PhoneCnTest extends TestCase
 
     /**
      * @dataProvider providerForNotPhoneCn
+     * @param mixed $input
      */
     public function testNotPhoneCn($input)
     {
@@ -22,22 +27,22 @@ class PhoneCnTest extends TestCase
 
     public function providerForPhoneCn()
     {
-        return array(
-            array('020-1234567'),
-            array('0768-123456789'),
+        return [
+            ['020-1234567'],
+            ['0768-123456789'],
             // PhoneCn number without city code
-            array('1234567'),
-            array('123456789'),
-        );
+            ['1234567'],
+            ['123456789'],
+        ];
     }
 
     public function providerForNotPhoneCn()
     {
-        return array(
-            array('012345-1234567890'),
-            array('010-1234567890'),
-            array('123456'),
-            array('not digit'),
-        );
+        return [
+            ['012345-1234567890'],
+            ['010-1234567890'],
+            ['123456'],
+            ['not digit'],
+        ];
     }
 }

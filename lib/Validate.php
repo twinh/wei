@@ -22,28 +22,28 @@ class Validate extends Base
      *
      * @var array
      */
-    protected $rules = array();
+    protected $rules = [];
 
     /**
      * The data to be validated
      *
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * The invalid messages
      *
      * @var array
      */
-    protected $messages = array();
+    protected $messages = [];
 
     /**
      * The names for messages
      *
      * @var array
      */
-    protected $names = array();
+    protected $names = [];
 
     /**
      * The callback triggered before validation
@@ -121,14 +121,14 @@ class Validate extends Base
      *
      * @var string
      */
-    protected $validRules = array();
+    protected $validRules = [];
 
     /**
      * The invalid rules array, which use the field as key, and the rules as value
      *
      * @var string
      */
-    protected $invalidRules = array();
+    protected $invalidRules = [];
 
     /**
      * The validation result
@@ -142,7 +142,7 @@ class Validate extends Base
      *
      * @var array<Validator\BaseValidator>
      */
-    protected $ruleValidators = array();
+    protected $ruleValidators = [];
 
     /**
      * Create a new validator and validate by specified options
@@ -150,7 +150,7 @@ class Validate extends Base
      * @param array $options
      * @return $this
      */
-    public function __invoke(array $options = array())
+    public function __invoke(array $options = [])
     {
         $validator = new self($options + get_object_vars($this));
 
@@ -166,7 +166,7 @@ class Validate extends Base
      * @return bool Whether pass the validation or not
      * @throws \InvalidArgumentException  When validation rule is not array, string or instance of BaseValidator
      */
-    public function valid($options = array())
+    public function valid($options = [])
     {
         $options && $this->setOption($options);
 
@@ -188,9 +188,9 @@ class Validate extends Base
              * )
              */
             if (is_string($rules)) {
-                $rules = array($rules => true);
+                $rules = [$rules => true];
             } elseif ($rules instanceof BaseValidator) {
-                $rules = array($rules);
+                $rules = [$rules];
             } elseif (!is_array($rules)) {
                 throw new \InvalidArgumentException(sprintf(
                     'Expected argument of type array, string or instance of Wei\Validator\BaseValidator, "%s" given',
@@ -205,7 +205,7 @@ class Validate extends Base
                 $isRequired = (bool) $rules['required'];
                 unset($rules['required']);
             }
-            $rules = array('required' => $isRequired) + $rules;
+            $rules = ['required' => $isRequired] + $rules;
 
             // Start validation
             foreach ($rules as $rule => $params) {
@@ -213,7 +213,7 @@ class Validate extends Base
                 $props = $this->prepareProps($field, $rule);
 
                 // The current rule validation result
-                /* @var $validator Validator\BaseValidator */
+                /** @var $validator Validator\BaseValidator */
                 $validator = null;
                 $result = $this->validateOne($rule, $data, $params, $validator, $props);
 
@@ -231,11 +231,11 @@ class Validate extends Base
 
                 // Record the valid/invalid rule
                 $method = $result ? 'addValidRule' : 'addInvalidRule';
-                $this->$method($field, $rule);
+                $this->{$method}($field, $rule);
 
                 // Trigger the ruleValid/ruleInvalid callback
                 $callback = $result ? 'ruleValid' : 'ruleInvalid';
-                if ($this->$callback && false === call_user_func($this->$callback, $rule, $field, $this, $this->wei)) {
+                if ($this->{$callback} && false === call_user_func($this->{$callback}, $rule, $field, $this, $this->wei)) {
                     return $this->result;
                 }
 
@@ -255,7 +255,7 @@ class Validate extends Base
 
             // Trigger the fieldValid/fieldInvalid callback
             $callback = $this->isFieldValid($field) ? 'fieldValid' : 'fieldInvalid';
-            if ($this->$callback && false === call_user_func($this->$callback, $field, $this, $this->wei)) {
+            if ($this->{$callback} && false === call_user_func($this->{$callback}, $field, $this, $this->wei)) {
                 return $this->result;
             }
 
@@ -271,74 +271,9 @@ class Validate extends Base
 
         // Trigger the success/failure callback
         $callback = $this->result ? 'success' : 'failure';
-        $this->$callback && call_user_func($this->$callback, $this, $this->wei);
+        $this->{$callback} && call_user_func($this->{$callback}, $this, $this->wei);
 
         return $this->result;
-    }
-
-    /**
-     * Prepare name and messages property option for rule validator
-     *
-     * @param string $field
-     * @param string $rule
-     * @return array
-     */
-    protected function prepareProps($field, $rule)
-    {
-        $props = $messages = array();
-
-        $props['validator'] = $this;
-
-        // Prepare name for validator
-        if (isset($this->names[$field])) {
-            $props['name'] = $this->names[$field];
-        }
-
-        /**
-         * Prepare messages for validator
-         *
-         * The messages array may look like below
-         * array(
-         *     // Case 1
-         *     'field' => 'message',
-         *     // Case 2
-         *     'field2' => array(
-         *         'rule' => 'message'
-         *     ),
-         *     // Case 2
-         *     'field3' => array(
-         *         'rule' => array(
-         *            'option' => 'message',
-         *            'option2' => 'message',
-         *         )
-         *     )
-         * )
-         *
-         * In case 2, checking non-numeric offsets of strings would return true
-         * in PHP 5.3, while return false in PHP 5.4, so we do NOT known
-         * $messages is array or string
-         * @link http://php.net/manual/en/function.isset.php
-         *
-         * In case 1, $messages is string
-         */
-        // Case 2
-        if (isset($this->messages[$field][$rule]) && is_array($this->messages[$field])) {
-            $messages = $this->messages[$field][$rule];
-        // Case 1
-        } elseif (isset($this->messages[$field]) && is_scalar($this->messages[$field])) {
-            $messages = $this->messages[$field];
-        }
-
-        // Convert message to array for validator
-        if (is_scalar($messages)) {
-            $props['message'] =  $messages;
-        } elseif (is_array($messages)) {
-            foreach ($messages as $name => $message) {
-                $props[$name . 'Message'] = $message;
-            }
-        }
-
-        return $props;
     }
 
     /**
@@ -395,7 +330,7 @@ class Validate extends Base
      */
     public function isFieldValid($field)
     {
-        return !in_array($field, $this->getInvalidFields());
+        return !in_array($field, $this->getInvalidFields(), true);
     }
 
     /**
@@ -406,7 +341,7 @@ class Validate extends Base
      */
     public function isFieldInvalid($field)
     {
-        return in_array($field, $this->getInvalidFields());
+        return in_array($field, $this->getInvalidFields(), true);
     }
 
     /**
@@ -417,7 +352,7 @@ class Validate extends Base
      */
     public function setRules(array $rules = null)
     {
-        $this->rules = (array)$rules;
+        $this->rules = (array) $rules;
         return $this;
     }
 
@@ -439,7 +374,7 @@ class Validate extends Base
      */
     public function getFieldRules($field)
     {
-        return isset($this->rules[$field]) ? $this->rules[$field] : array();
+        return isset($this->rules[$field]) ? $this->rules[$field] : [];
     }
 
     /**
@@ -451,7 +386,7 @@ class Validate extends Base
      */
     public function getRuleParams($field, $rule)
     {
-        return isset($this->rules[$field][$rule]) ? (array) $this->rules[$field][$rule] : array();
+        return isset($this->rules[$field][$rule]) ? (array) $this->rules[$field][$rule] : [];
     }
 
     /**
@@ -462,7 +397,7 @@ class Validate extends Base
      */
     public function getValidRules($field)
     {
-        return isset($this->validRules[$field]) ? $this->validRules[$field] : array();
+        return isset($this->validRules[$field]) ? $this->validRules[$field] : [];
     }
 
     /**
@@ -474,7 +409,7 @@ class Validate extends Base
     public function getInvalidRules($field = null)
     {
         return $field ?
-            isset($this->invalidRules[$field]) ? $this->invalidRules[$field] : array()
+            isset($this->invalidRules[$field]) ? $this->invalidRules[$field] : []
             : $this->invalidRules;
     }
 
@@ -485,7 +420,7 @@ class Validate extends Base
      */
     public function isValid()
     {
-        return is_null($this->result) ? $this->__invoke() : $this->result;
+        return null === $this->result ? $this->__invoke() : $this->result;
     }
 
     /**
@@ -585,8 +520,8 @@ class Validate extends Base
             || ($this->data instanceof \ArrayAccess && $this->data->offsetExists($field))
         ) {
             return $this->data[$field];
-        } elseif (isset($this->data->$field)) {
-            return $this->data->$field;
+        } elseif (isset($this->data->{$field})) {
+            return $this->data->{$field};
         } elseif (method_exists($this->data, 'get' . $field)) {
             return $this->data->{'get' . $field}();
         } else {
@@ -606,7 +541,7 @@ class Validate extends Base
         if (is_array($this->data)) {
             $this->data[$field] = $data;
         } else {
-            $this->data->$field = $data;
+            $this->data->{$field} = $data;
         }
         return $this;
     }
@@ -619,7 +554,7 @@ class Validate extends Base
      */
     public function setMessages(array $messages = null)
     {
-        $this->messages = (array)$messages;
+        $this->messages = (array) $messages;
         return $this;
     }
 
@@ -640,7 +575,7 @@ class Validate extends Base
      */
     public function getDetailMessages()
     {
-        $messages = array();
+        $messages = [];
         foreach ($this->invalidRules as $field => $rules) {
             foreach ($rules as $rule) {
                 $messages[$field][$rule] = $this->ruleValidators[$field][$rule]->getMessages();
@@ -657,7 +592,7 @@ class Validate extends Base
     public function getSummaryMessages()
     {
         $messages = $this->getDetailMessages();
-        $summaries = array();
+        $summaries = [];
         foreach ($messages as $field => $rules) {
             foreach ($rules as $options) {
                 foreach ($options as $message) {
@@ -677,7 +612,7 @@ class Validate extends Base
     public function getJoinedMessage($separator = "\n")
     {
         $messages = $this->getDetailMessages();
-        $array = array();
+        $array = [];
         foreach ($messages as $rules) {
             foreach ($rules as $options) {
                 foreach ($options as $message) {
@@ -720,7 +655,7 @@ class Validate extends Base
      */
     public function setNames($names)
     {
-        $this->names = (array)$names;
+        $this->names = (array) $names;
     }
 
     /**
@@ -742,7 +677,7 @@ class Validate extends Base
      * @return bool
      * @internal Do NOT use this method for it may be changed in the future
      */
-    public function validateOne($rule, $input, $options = array(), &$validator = null, $props = array())
+    public function validateOne($rule, $input, $options = [], &$validator = null, $props = [])
     {
         // Process simple array rules, eg 'username' => ['required', 'email']
         if (is_int($rule)) {
@@ -760,7 +695,7 @@ class Validate extends Base
         $validator = $this->createRuleValidator($rule, $props);
 
         if (!is_array($options)) {
-            $options = array($options);
+            $options = [$options];
         }
 
         if (is_int(key($options))) {
@@ -782,7 +717,7 @@ class Validate extends Base
      * @return Validator\BaseValidator
      * @throws \InvalidArgumentException When validator not found
      */
-    public function createRuleValidator($rule, array $options = array())
+    public function createRuleValidator($rule, array $options = [])
     {
         // Starts with "not", such as notDigit, notEqual
         if (0 === stripos($rule, 'not')) {
@@ -796,9 +731,73 @@ class Validate extends Base
             throw new \InvalidArgumentException(sprintf('Validator "%s" not found', $rule));
         }
 
-
-        $options = $options + array('wei' => $this->wei) + (array)$this->wei->getConfig('is' . ucfirst($rule));
+        $options = $options + ['wei' => $this->wei] + (array) $this->wei->getConfig('is' . ucfirst($rule));
 
         return new $class($options);
+    }
+
+    /**
+     * Prepare name and messages property option for rule validator
+     *
+     * @param string $field
+     * @param string $rule
+     * @return array
+     */
+    protected function prepareProps($field, $rule)
+    {
+        $props = $messages = [];
+
+        $props['validator'] = $this;
+
+        // Prepare name for validator
+        if (isset($this->names[$field])) {
+            $props['name'] = $this->names[$field];
+        }
+
+        /**
+         * Prepare messages for validator
+         *
+         * The messages array may look like below
+         * array(
+         *     // Case 1
+         *     'field' => 'message',
+         *     // Case 2
+         *     'field2' => array(
+         *         'rule' => 'message'
+         *     ),
+         *     // Case 2
+         *     'field3' => array(
+         *         'rule' => array(
+         *            'option' => 'message',
+         *            'option2' => 'message',
+         *         )
+         *     )
+         * )
+         *
+         * In case 2, checking non-numeric offsets of strings would return true
+         * in PHP 5.3, while return false in PHP 5.4, so we do NOT known
+         * $messages is array or string
+         * @link http://php.net/manual/en/function.isset.php
+         *
+         * In case 1, $messages is string
+         */
+        // Case 2
+        if (isset($this->messages[$field][$rule]) && is_array($this->messages[$field])) {
+            $messages = $this->messages[$field][$rule];
+        // Case 1
+        } elseif (isset($this->messages[$field]) && is_scalar($this->messages[$field])) {
+            $messages = $this->messages[$field];
+        }
+
+        // Convert message to array for validator
+        if (is_scalar($messages)) {
+            $props['message'] = $messages;
+        } elseif (is_array($messages)) {
+            foreach ($messages as $name => $message) {
+                $props[$name . 'Message'] = $message;
+            }
+        }
+
+        return $props;
     }
 }

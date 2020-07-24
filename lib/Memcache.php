@@ -28,13 +28,13 @@ class Memcache extends BaseCache
      * @var array
      * @see \Memcache::addServer
      */
-    protected $servers = array(
-        array(
-            'host'          => '127.0.0.1',
-            'port'          => 11211,
-            'persistent'    => false
-        )
-    );
+    protected $servers = [
+        [
+            'host' => '127.0.0.1',
+            'port' => 11211,
+            'persistent' => false,
+        ],
+    ];
 
     /**
      * The flag that use MEMCACHE_COMPRESSED to store the item compressed (uses zlib).
@@ -48,23 +48,10 @@ class Memcache extends BaseCache
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
         $this->connect();
-    }
-
-    /**
-     * Instance memcache object and connect to server
-     */
-    protected function connect()
-    {
-        if (!$this->object) {
-            $this->object = new \Memcache;
-        }
-        foreach ($this->servers as $server) {
-            call_user_func_array(array($this->object, 'addServer'), $server);
-        }
     }
 
     /**
@@ -158,30 +145,6 @@ class Memcache extends BaseCache
     }
 
     /**
-     * Increment/Decrement an item
-     *
-     * Compatible method for memcache < 3.0.3 that does not support
-     * negative number as $offset parameter
-     *
-     * @param string $key The name of item
-     * @param int $offset The value to be increased/decreased
-     * @param bool $inc The operation is increase or decrease
-     * @return int|false Returns the new value on success, or false on failure
-     */
-    protected function incDec($key, $offset, $inc = true)
-    {
-        $key = $this->namespace . $key;
-        $method = $inc ? 'increment' : 'decrement';
-        $offset = abs($offset);
-        // IMPORTANT: memcache may return 0 in some 3.0.x beta version
-        if (false === $this->object->$method($key, $offset)) {
-            return $this->object->set($key, $offset) ? $offset : false;
-        }
-        // Convert to int for memcache extension version < 3.0.3
-        return (int)$this->object->get($key);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function clear()
@@ -209,5 +172,42 @@ class Memcache extends BaseCache
     {
         $this->object = $object;
         return $this;
+    }
+
+    /**
+     * Instance memcache object and connect to server
+     */
+    protected function connect()
+    {
+        if (!$this->object) {
+            $this->object = new \Memcache();
+        }
+        foreach ($this->servers as $server) {
+            call_user_func_array([$this->object, 'addServer'], $server);
+        }
+    }
+
+    /**
+     * Increment/Decrement an item
+     *
+     * Compatible method for memcache < 3.0.3 that does not support
+     * negative number as $offset parameter
+     *
+     * @param string $key The name of item
+     * @param int $offset The value to be increased/decreased
+     * @param bool $inc The operation is increase or decrease
+     * @return int|false Returns the new value on success, or false on failure
+     */
+    protected function incDec($key, $offset, $inc = true)
+    {
+        $key = $this->namespace . $key;
+        $method = $inc ? 'increment' : 'decrement';
+        $offset = abs($offset);
+        // IMPORTANT: memcache may return 0 in some 3.0.x beta version
+        if (false === $this->object->{$method}($key, $offset)) {
+            return $this->object->set($key, $offset) ? $offset : false;
+        }
+        // Convert to int for memcache extension version < 3.0.3
+        return (int) $this->object->get($key);
     }
 }

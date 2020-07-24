@@ -2,10 +2,15 @@
 
 namespace WeiTest\Validator;
 
-class EqualToTest extends TestCase
+/**
+ * @internal
+ */
+final class EqualToTest extends TestCase
 {
     /**
      * @dataProvider providerForEquals
+     * @param mixed $input
+     * @param mixed $equals
      */
     public function testEquals($input, $equals)
     {
@@ -14,6 +19,8 @@ class EqualToTest extends TestCase
 
     /**
      * @dataProvider providerForNotEquals
+     * @param mixed $input
+     * @param mixed $equals
      */
     public function testNotEquals($input, $equals)
     {
@@ -22,21 +29,21 @@ class EqualToTest extends TestCase
 
     public function providerForEquals()
     {
-        return array(
-            array('abc', 'abc'),
-            array(0, null),
-            array(0, ''),
-            array(null, null),
-            array(new \stdClass, new \stdClass)
-        );
+        return [
+            ['abc', 'abc'],
+            [0, null],
+            [0, ''],
+            [null, null],
+            [new \stdClass(), new \stdClass()],
+        ];
     }
 
     public function providerForNotEquals()
     {
-        return array(
-            array('abc', 'bbc'),
-            array('', array()),
-            array(new \stdClass, new \ArrayObject())
-        );
+        return [
+            ['abc', 'bbc'],
+            ['', []],
+            [new \stdClass(), new \ArrayObject()],
+        ];
     }
 }

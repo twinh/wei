@@ -21,12 +21,12 @@ class In extends BaseValidator
 
     protected $strict = false;
 
-    protected $array = array();
+    protected $array = [];
 
     /**
      * {@inheritdoc}
      */
-    public function __invoke($input, $array = array(), $strict = null)
+    public function __invoke($input, $array = [], $strict = null)
     {
         if ($array) {
             if ($array instanceof \ArrayObject) {

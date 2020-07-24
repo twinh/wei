@@ -2,48 +2,51 @@
 
 namespace WeiTest\Validator;
 
-class AllTest extends TestCase
+/**
+ * @internal
+ */
+final class AllTest extends TestCase
 {
     public function testAll()
     {
-        $this->assertTrue($this->isAll(array(
+        $this->assertTrue($this->isAll([
             'apple', 'pear', 'orange',
-        ), array(
-            'in' => array(
-                array('apple', 'pear', 'orange')
-            )
-        )));
+        ], [
+            'in' => [
+                ['apple', 'pear', 'orange'],
+            ],
+        ]));
     }
 
     public function testNotAll()
     {
-        $this->assertFalse($this->isAll(array(
+        $this->assertFalse($this->isAll([
             'apple', 'pear',
-        ), array(
-            'in' => array(
-                array('apple', 'pear', 'orange')
-            ),
-            'length' => array(
+        ], [
+            'in' => [
+                ['apple', 'pear', 'orange'],
+            ],
+            'length' => [
                 'min' => 5,
-                'max' => 10
-            )
-        )));
+                'max' => 10,
+            ],
+        ]));
     }
 
     public function testGetMessages()
     {
-        $this->isAll(array(
+        $this->isAll([
             'apple',
             'pear', // length invalid
-        ), array(
-            'in' => array(
-                array('apple', 'pear', 'orange')
-            ),
-            'length' => array(
+        ], [
+            'in' => [
+                ['apple', 'pear', 'orange'],
+            ],
+            'length' => [
                 'min' => 5,
-                'max' => 10
-            )
-        ));
+                'max' => 10,
+            ],
+        ]);
 
         $itemName = 'custom item name';
         $this->isAll->setOption('itemName', $itemName);

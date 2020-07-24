@@ -66,7 +66,7 @@ class Error extends Base
     /**
      * The previous exception handler
      *
-     * @var null|callback
+     * @var callback|null
      */
     protected $prevExceptionHandler;
 
@@ -89,18 +89,18 @@ class Error extends Base
      *
      * @var array
      */
-    protected $handlers = array(
-        'error' => array(),
-        'fatal' => array(),
-        'notFound' => array(),
-    );
+    protected $handlers = [
+        'error' => [],
+        'fatal' => [],
+        'notFound' => [],
+    ];
 
     /**
      * Constructor
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         parent::__construct($options);
 
@@ -146,63 +146,6 @@ class Error extends Base
     }
 
     /**
-     * Register exception Handler
-     */
-    protected function registerExceptionHandler()
-    {
-        $this->prevExceptionHandler = set_exception_handler(array($this, 'handleException'));
-    }
-
-    /**
-     * Register error Handler
-     */
-    protected function registerErrorHandler()
-    {
-        set_error_handler(array($this, 'handleError'));
-    }
-
-    /**
-     * Detect fatal error and register fatal handler
-     */
-    protected function registerFatalHandler()
-    {
-        $error = $this;
-
-        // When shutdown, the current working directory will be set to the web
-        // server directory, store it for later use
-        $cwd = getcwd();
-
-        register_shutdown_function(function () use ($error, $cwd) {
-            $e = error_get_last();
-            if (!$e || !in_array($e['type'], array(E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_PARSE))) {
-                // No error or not fatal error
-                return;
-            }
-
-            ob_get_length() && ob_end_clean();
-
-            // Reset the current working directory to make sure everything work as usual
-            chdir($cwd);
-
-            $exception = new \ErrorException($e['message'], $e['type'], 0, $e['file'], $e['line']);
-
-            if ($error->triggerHandler('fatal', $exception)) {
-                // Handled!
-                return;
-            }
-
-            // Fallback to error handlers
-            if ($error->triggerHandler('error', $exception)) {
-                // Handled!
-                return;
-            }
-
-            // Fallback to internal error Handlers
-            $error->internalHandleException($exception);
-        });
-    }
-
-    /**
      * Trigger a error handler
      *
      * @param string $type The type of error handlers
@@ -212,7 +155,7 @@ class Error extends Base
     public function triggerHandler($type, $exception)
     {
         foreach ($this->handlers[$type] as $handler) {
-            $result = call_user_func_array($handler, array($exception, $this->wei));
+            $result = call_user_func_array($handler, [$exception, $this->wei]);
             if (true === $result) {
                 return true;
             }
@@ -284,7 +227,7 @@ class Error extends Base
     public function displayException($e, $debug)
     {
         // Render CLI message
-        if ($this->enableCli && php_sapi_name() == 'cli') {
+        if ($this->enableCli && \PHP_SAPI == 'cli') {
             $this->displayCliException($e);
             return;
         }
@@ -315,10 +258,10 @@ class Error extends Base
 
             $fileInfo = $this->getFileCode($file, $line);
             $trace = htmlspecialchars($e->getTraceAsString(), ENT_QUOTES);
-            $detail = "<h2>File</h2>"
+            $detail = '<h2>File</h2>'
                 . "<p class=\"text-danger\">$file</p>"
                 . "<p><pre>$fileInfo</pre></p>"
-                . "<h2>Trace</h2>"
+                . '<h2>Trace</h2>'
                 . "<p class=\"text-danger\">$detail</p>"
                 . "<p><pre>$trace</pre></p>";
         }
@@ -346,6 +289,119 @@ class Error extends Base
             . '</html>';
 
         echo $html;
+    }
+
+    /**
+     * The error handler convert PHP error to exception
+     *
+     * @param int $code The level of the error raised
+     * @param string $message The error message
+     * @param string $file The filename that the error was raised in
+     * @param int $line The line number the error was raised at
+     * @throws \ErrorException convert PHP error to exception
+     * @internal use for set_error_handler only
+     */
+    public function handleError($code, $message, $file, $line)
+    {
+        if (!(error_reporting() & $code)) {
+            // This error code is not included in error_reporting
+            return;
+        }
+        restore_error_handler();
+        throw new \ErrorException($message, $code, 500, $file, $line);
+    }
+
+    /**
+     * Get file code in specified range
+     *
+     * @param string $file The file name
+     * @param int $line The file line
+     * @param int $range The line range
+     * @return string
+     */
+    public function getFileCode($file, $line, $range = 20)
+    {
+        $code = file($file);
+        $half = (int) ($range / 2);
+
+        $start = $line - $half;
+        0 > $start && $start = 0;
+
+        $total = count($code);
+        $end = $line + $half;
+        $total < $end && $end = $total;
+
+        $len = strlen($end);
+
+        array_unshift($code, null);
+        $content = '';
+        for ($i = $start; $i < $end; ++$i) {
+            $temp = str_pad($i, $len, 0, STR_PAD_LEFT) . ':  ' . $code[$i];
+            if ($line != $i) {
+                $content .= htmlspecialchars($temp, ENT_QUOTES);
+            } else {
+                $content .= '<strong class="text-danger">' . htmlspecialchars($temp, ENT_QUOTES) . '</strong>';
+            }
+        }
+
+        return $content;
+    }
+
+    /**
+     * Register exception Handler
+     */
+    protected function registerExceptionHandler()
+    {
+        $this->prevExceptionHandler = set_exception_handler([$this, 'handleException']);
+    }
+
+    /**
+     * Register error Handler
+     */
+    protected function registerErrorHandler()
+    {
+        set_error_handler([$this, 'handleError']);
+    }
+
+    /**
+     * Detect fatal error and register fatal handler
+     */
+    protected function registerFatalHandler()
+    {
+        $error = $this;
+
+        // When shutdown, the current working directory will be set to the web
+        // server directory, store it for later use
+        $cwd = getcwd();
+
+        register_shutdown_function(function () use ($error, $cwd) {
+            $e = error_get_last();
+            if (!$e || !in_array($e['type'], [E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_PARSE], true)) {
+                // No error or not fatal error
+                return;
+            }
+
+            ob_get_length() && ob_end_clean();
+
+            // Reset the current working directory to make sure everything work as usual
+            chdir($cwd);
+
+            $exception = new \ErrorException($e['message'], $e['type'], 0, $e['file'], $e['line']);
+
+            if ($error->triggerHandler('fatal', $exception)) {
+                // Handled!
+                return;
+            }
+
+            // Fallback to error handlers
+            if ($error->triggerHandler('error', $exception)) {
+                // Handled!
+                return;
+            }
+
+            // Fallback to internal error Handlers
+            $error->internalHandleException($exception);
+        });
     }
 
     /**
@@ -429,61 +485,5 @@ class Error extends Base
     protected function highlight($text)
     {
         return sprintf("\033[1;31m%s\033[0m" . PHP_EOL . PHP_EOL, $text);
-    }
-
-    /**
-     * The error handler convert PHP error to exception
-     *
-     * @param int $code The level of the error raised
-     * @param string $message The error message
-     * @param string $file The filename that the error was raised in
-     * @param int $line The line number the error was raised at
-     * @throws \ErrorException convert PHP error to exception
-     * @internal use for set_error_handler only
-     */
-    public function handleError($code, $message, $file, $line)
-    {
-        if (!(error_reporting() & $code)) {
-            // This error code is not included in error_reporting
-            return;
-        }
-        restore_error_handler();
-        throw new \ErrorException($message, $code, 500, $file, $line);
-    }
-
-    /**
-     * Get file code in specified range
-     *
-     * @param string $file The file name
-     * @param int $line The file line
-     * @param int $range The line range
-     * @return string
-     */
-    public function getFileCode($file, $line, $range = 20)
-    {
-        $code = file($file);
-        $half = (int) ($range / 2);
-
-        $start = $line - $half;
-        0 > $start && $start = 0;
-
-        $total = count($code);
-        $end = $line + $half;
-        $total < $end && $end = $total;
-
-        $len = strlen($end);
-
-        array_unshift($code, null);
-        $content = '';
-        for ($i = $start; $i < $end; $i++) {
-            $temp = str_pad($i, $len, 0, STR_PAD_LEFT) . ':  ' . $code[$i];
-            if ($line != $i) {
-                $content .= htmlspecialchars($temp, ENT_QUOTES);
-            } else {
-                $content .= '<strong class="text-danger">' . htmlspecialchars($temp, ENT_QUOTES) . '</strong>';
-            }
-        }
-
-        return $content;
     }
 }

@@ -23,7 +23,7 @@ class NoneOf extends SomeOf
      * {@inheritdoc}
      * @param void $__ Avoid compatible error
      */
-    public function __invoke($input, array $rules = array(), $__ = null)
+    public function __invoke($input, array $rules = [], $__ = null)
     {
         $rules && $this->storeOption('rules', $rules);
 
@@ -38,10 +38,10 @@ class NoneOf extends SomeOf
         $this->addError('invalid');
 
         $validator = null;
-        $props = array(
+        $props = [
             'name' => $this->name,
-            'negative' => true
-        );
+            'negative' => true,
+        ];
         foreach ($this->rules as $rule => $options) {
             if (!$this->validate->validateOne($rule, $input, $options, $validator, $props)) {
                 $this->validators[$rule] = $validator;
@@ -49,7 +49,7 @@ class NoneOf extends SomeOf
         }
 
         if (!$this->validators) {
-            $this->errors = array();
+            $this->errors = [];
             return true;
         } else {
             return false;

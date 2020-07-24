@@ -4,7 +4,7 @@ namespace WeiTest\Fixtures\App\Controller;
 
 class DispatchBreak extends \Wei\BaseController
 {
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         parent::__construct($options);
 

@@ -2,15 +2,18 @@
 
 namespace WeiTest;
 
-class CouchbaseTest extends CacheTestCase
+/**
+ * @internal
+ */
+final class CouchbaseTest extends CacheTestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         $mock = false;
 
         if (!extension_loaded('couchbase') || !class_exists('\Couchbase')) {
             $mock = true;
-            //$this->markTestSkipped('The "couchbase" extension is not loaded');
+        //$this->markTestSkipped('The "couchbase" extension is not loaded');
         } else {
             @parent::setUp();
             if ($error = error_get_last()) {
@@ -28,78 +31,78 @@ class CouchbaseTest extends CacheTestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->wei->setConfig('couchbase', array(
-            'object' => $couchbase
-        ));
+        $this->wei->setConfig('couchbase', [
+            'object' => $couchbase,
+        ]);
 
         $cache = $this->wei->newInstance('arrayCache');
         $object = $this->object = $this->wei->couchbase;
 
         $couchbase->expects($this->any())
             ->method('get')
-            ->will($this->returnCallback(function($key) use($cache) {
+            ->willReturnCallback(function ($key) use ($cache) {
                 return $cache->get($key);
-            }));
+            });
 
         $couchbase->expects($this->any())
             ->method('set')
-            ->will($this->returnCallback(function($key, $value, $expire = 0) use($cache) {
+            ->willReturnCallback(function ($key, $value, $expire = 0) use ($cache) {
                 return $cache->set($key, $value, $expire);
-            }));
+            });
 
         $couchbase->expects($this->any())
             ->method('delete')
-            ->will($this->returnCallback(function($key) use($cache) {
+            ->willReturnCallback(function ($key) use ($cache) {
                 return $cache->remove($key);
-            }));
+            });
 
         $couchbase->expects($this->any())
             ->method('add')
-            ->will($this->returnCallback(function($key, $value, $expire = 0) use($cache) {
+            ->willReturnCallback(function ($key, $value, $expire = 0) use ($cache) {
                 return $cache->add($key, $value, $expire);
-            }));
+            });
 
         $couchbase->expects($this->any())
             ->method('replace')
-            ->will($this->returnCallback(function($key, $value, $expire = 0) use($cache) {
+            ->willReturnCallback(function ($key, $value, $expire = 0) use ($cache) {
                 return $cache->replace($key, $value, $expire);
-            }));
+            });
 
         $couchbase->expects($this->any())
             ->method('inc')
-            ->will($this->returnCallback(function($key, $offset) use($cache) {
+            ->willReturnCallback(function ($key, $offset) use ($cache) {
                 return $cache->incr($key, $offset);
-            }));
+            });
 
         $couchbase->expects($this->any())
             ->method('dec')
-            ->will($this->returnCallback(function($key, $offset) use($cache) {
+            ->willReturnCallback(function ($key, $offset) use ($cache) {
                 return $cache->decr($key, $offset);
-            }));
+            });
 
         $couchbase->expects($this->any())
             ->method('flush')
-            ->will($this->returnCallback(function() use($cache) {
+            ->willReturnCallback(function () use ($cache) {
                 return $cache->clear();
-            }));
+            });
 
         $couchbase->expects($this->any())
             ->method('setMulti')
-            ->will($this->returnCallback(function($items, $expire = 0) use($cache, $object) {
+            ->willReturnCallback(function ($items, $expire = 0) use ($cache, $object) {
                 $cache->setNamespace($object->getNamespace());
                 $result = $cache->setMulti($items, $expire);
                 $cache->setNamespace('');
                 return $result;
-            }));
+            });
 
         $couchbase->expects($this->any())
             ->method('getMulti')
-            ->will($this->returnCallback(function($items) use($cache, $object) {
+            ->willReturnCallback(function ($items) use ($cache, $object) {
                 $cache->setNamespace($object->getNamespace());
                 $result = $cache->getMulti($items);
                 $cache->setNamespace('');
                 return $result;
-            }));
+            });
     }
 
     public function testGetObject()

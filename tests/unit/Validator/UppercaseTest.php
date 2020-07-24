@@ -2,10 +2,15 @@
 
 namespace WeiTest\Validator;
 
-class UppercaseTest extends TestCase
+/**
+ * @internal
+ */
+final class UppercaseTest extends TestCase
 {
     /**
      * @dataProvider providerForUppercase
+     * @param mixed $input
+     * @param mixed|null $options
      */
     public function testUppercase($input, $options = null)
     {
@@ -14,6 +19,8 @@ class UppercaseTest extends TestCase
 
     /**
      * @dataProvider providerForNotUppercase
+     * @param mixed $input
+     * @param mixed|null $options
      */
     public function testNotUppercase($input, $options = null)
     {
@@ -22,21 +29,21 @@ class UppercaseTest extends TestCase
 
     public function providerForUppercase()
     {
-        return array(
-            array('ABC'),
-            array('ABC123'),
-            array('ABC中文'),
-            array('ΤΆΧΙΣΤΗ ΑΛΏΠΗΞ ΒΑΦΉΣ ΨΗΜΈΝΗ ΓΗ, ΔΡΑΣΚΕΛΊΖΕΙ ΥΠΈΡ ΝΩΘΡΟΎ ΚΥΝΌΣ'),
-            array('PRINTS MARY HAD A LITTLE LAMB AND SHE LOVED IT SO')
-        );
+        return [
+            ['ABC'],
+            ['ABC123'],
+            ['ABC中文'],
+            ['ΤΆΧΙΣΤΗ ΑΛΏΠΗΞ ΒΑΦΉΣ ΨΗΜΈΝΗ ΓΗ, ΔΡΑΣΚΕΛΊΖΕΙ ΥΠΈΡ ΝΩΘΡΟΎ ΚΥΝΌΣ'],
+            ['PRINTS MARY HAD A LITTLE LAMB AND SHE LOVED IT SO'],
+        ];
     }
 
     public function providerForNotUppercase()
     {
-        return array(
-            array('abc'),
-            array('Abc'),
-            array('Τάχιστη αλώπηξ βαφής ψημένη γη, δρασκελίζει υπέρ νωθρού κυνός')
-        );
+        return [
+            ['abc'],
+            ['Abc'],
+            ['Τάχιστη αλώπηξ βαφής ψημένη γη, δρασκελίζει υπέρ νωθρού κυνός'],
+        ];
     }
 }

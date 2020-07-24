@@ -4,15 +4,17 @@ namespace WeiTest;
 
 /**
  * @property \Wei\View $view
+ *
+ * @internal
  */
-class ViewTest extends TestCase
+final class ViewTest extends TestCase
 {
     /**
      * @var \Wei\View
      */
     protected $object;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -24,9 +26,9 @@ class ViewTest extends TestCase
         $view = $this->object;
 
         // Render by invoker
-        $content = $view('layout.php', array(
-            'content' => __METHOD__
-        ));
+        $content = $view('layout.php', [
+            'content' => __METHOD__,
+        ]);
         $this->assertStringContainsString(__METHOD__, $content);
     }
 
@@ -45,10 +47,10 @@ class ViewTest extends TestCase
     {
         $view = $this->object;
 
-        $view->assign(array(
+        $view->assign([
             'key' => 'value',
             'key2' => 'value2',
-        ));
+        ]);
 
         $this->assertEquals('value', $view->get('key'));
         $this->assertEquals('value2', $view->get('key2'));
@@ -73,10 +75,10 @@ class ViewTest extends TestCase
     public function testDisplay()
     {
         ob_start();
-        $this->object->display('layout.php', array('content' => 'test'));
+        $this->object->display('layout.php', ['content' => 'test']);
         $content = ob_get_clean();
 
-        $expected = $this->object->render('layout.php', array('content' => 'test'));
+        $expected = $this->object->render('layout.php', ['content' => 'test']);
 
         $this->assertEquals($expected, $content);
     }
@@ -117,7 +119,7 @@ class ViewTest extends TestCase
         $view['d']['e']['f']['g'] = 'h';
         $this->assertEquals('h', $view['d']['e']['f']['g']);
 
-        $view['i'] = array();
+        $view['i'] = [];
         $view['i']['j'] = 'k';
         $this->assertEquals('k', $view['i']['j']);
     }
@@ -126,7 +128,7 @@ class ViewTest extends TestCase
     {
         $view = $this->view;
 
-        $view['items'] = array();
+        $view['items'] = [];
         $view['items'][] = 'item 1';
         $view['items'][] = 'item 2';
 
@@ -145,9 +147,9 @@ class ViewTest extends TestCase
 
     public function testKeywordVarsOverwrite()
     {
-        $this->view->assign(array(
-            'data' => 'data'
-        ));
+        $this->view->assign([
+            'data' => 'data',
+        ]);
 
         // No error occur. Fatal error: Unsupported operand types in xxx
         $content = $this->object->render('content.php');

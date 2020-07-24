@@ -22,14 +22,14 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
      *
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * Constructor
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
 
@@ -44,7 +44,7 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
      * @param  array        $options options for set cookie
      * @return mixed
      */
-    public function __invoke($key, $value = null, $options = array())
+    public function __invoke($key, $value = null, $options = [])
     {
         if (1 == func_num_args()) {
             return $this->get($key);
@@ -73,7 +73,7 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
      * @param  array        $options
      * @return $this
      */
-    public function set($key, $value = null, array $options = array())
+    public function set($key, $value = null, array $options = [])
     {
         if (isset($options['expires']) && 0 > $options['expires'] && isset($this->data[$key])) {
             unset($this->data[$key]);
@@ -106,7 +106,7 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
      */
     public function clear()
     {
-        $this->data = array();
+        $this->data = [];
         return $this;
     }
 

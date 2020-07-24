@@ -65,7 +65,7 @@ class Couchbase extends BaseCache
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
 
@@ -116,7 +116,7 @@ class Couchbase extends BaseCache
      */
     public function add($key, $value, $expire = 0)
     {
-        return (bool)$this->object->add($this->namespace . $key, $value, $expire);
+        return (bool) $this->object->add($this->namespace . $key, $value, $expire);
     }
 
     /**
@@ -124,7 +124,7 @@ class Couchbase extends BaseCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        return (bool)$this->object->replace($this->namespace . $key, $value, $expire);
+        return (bool) $this->object->replace($this->namespace . $key, $value, $expire);
     }
 
     /**
@@ -162,7 +162,7 @@ class Couchbase extends BaseCache
     {
         $results = $this->object->setMulti($items, $expire);
         foreach ($results as &$result) {
-            $result = (bool)$result;
+            $result = (bool) $result;
         }
         return $results;
     }

@@ -31,42 +31,42 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      *
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * The URL query parameters, equal to $_GET when $fromGlobal is true
      *
      * @var array
      */
-    protected $gets = array();
+    protected $gets = [];
 
     /**
      * The HTTP request parameters, equal to $_POST when $fromGlobal is true
      *
      * @var array
      */
-    protected $posts = array();
+    protected $posts = [];
 
     /**
      * The cookie parameters, equal to $_COOKIE when $fromGlobal is true
      *
      * @var array
      */
-    protected $cookies = array();
+    protected $cookies = [];
 
     /**
      * The server parameters, equal to $_SERVER when $fromGlobal is true
      *
      * @var array
      */
-    protected $servers = array();
+    protected $servers = [];
 
     /**
      * The upload file parameters, equal to $_FILES when $fromGlobal is true
      *
      * @var array
      */
-    protected $files = array();
+    protected $files = [];
 
     /**
      * The request message body
@@ -152,7 +152,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
 
@@ -192,6 +192,23 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     }
 
     /**
+     * Returns the request message string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        $header = '';
+        foreach ($this->getHeaders() as $name => $value) {
+            $name = implode('-', array_map('ucfirst', explode('_', strtolower($name))));
+            $header .= $name . ': ' . $value . "\r\n";
+        }
+        return $this->getServer('REQUEST_METHOD') . ' ' . $this->getUrl() . ' ' . $this->getServer('SERVER_PROTOCOL') . "\r\n"
+            . $header
+            . $this->getContent();
+    }
+
+    /**
      * Returns a *stringify* or user defined($default) parameter value
      *
      * @param string $name The parameter name
@@ -207,17 +224,17 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * Returns a integer value in the specified range
      *
      * @param string $name The parameter name
-     * @param integer|null $min The min value for the parameter
-     * @param integer|null $max The max value for the parameter
+     * @param int|null $min The min value for the parameter
+     * @param int|null $max The max value for the parameter
      * @return int The parameter value
      */
     public function getInt($name, $min = null, $max = null)
     {
         $value = (int) $this($name);
 
-        if (!is_null($min) && $value < $min) {
+        if (null !== $min && $value < $min) {
             return $min;
-        } elseif (!is_null($max) && $value > $max) {
+        } elseif (null !== $max && $value > $max) {
             return $max;
         }
 
@@ -235,7 +252,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     public function getInArray($name, array $array)
     {
         $value = $this->get($name);
-        return in_array($value, $array) ? $value : $array[key($array)];
+        return in_array($value, $array, true) ? $value : $array[key($array)];
     }
 
     /**
@@ -276,7 +293,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function clear()
     {
-        $this->data = array();
+        $this->data = [];
         return $this;
     }
 
@@ -290,7 +307,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function has($name)
     {
-        return isset($this->data[$name]) && !in_array($this->data[$name], ['', null, false, array()], true);
+        return isset($this->data[$name]) && !in_array($this->data[$name], ['', null, false, []], true);
     }
 
     /**
@@ -342,8 +359,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function offsetUnset($offset)
     {
-        unset($this->extraKeys[$offset]);
-        unset($this->data[$offset]);
+        unset($this->extraKeys[$offset], $this->data[$offset]);
     }
 
     /**
@@ -352,7 +368,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * @param array $array
      * @return $this
      */
-    public function fromArray(array $array = array())
+    public function fromArray(array $array = [])
     {
         $this->data = $array;
         return $this;
@@ -433,7 +449,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function getRequestUri()
     {
-        if ($this->requestUri === null) {
+        if (null === $this->requestUri) {
             $this->requestUri = $this->detectRequestUri();
         }
         return $this->requestUri;
@@ -458,7 +474,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function getBaseUrl()
     {
-        if ($this->baseUrl === null) {
+        if (null === $this->baseUrl) {
             $this->setBaseUrl($this->detectBaseUrl());
         }
         return $this->baseUrl;
@@ -483,7 +499,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function getPathInfo()
     {
-        if ($this->pathInfo === null) {
+        if (null === $this->pathInfo) {
             $this->pathInfo = $this->detectPathInfo();
         }
         return $this->pathInfo;
@@ -509,7 +525,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     public function getSchemeAndHost()
     {
         $port = $this->getServer('SERVER_PORT');
-        if ($port == 80 || $port == 443 || empty($port)) {
+        if (80 == $port || 443 == $port || empty($port)) {
             $port = '';
         } else {
             $port = ':' . $port;
@@ -623,7 +639,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function &getParameterReference($type)
     {
-        if (in_array($type, array('get', 'post', 'cookie', 'server', 'file'))) {
+        if (in_array($type, ['get', 'post', 'cookie', 'server', 'file'], true)) {
             return $this->{$type . 's'};
         }
 
@@ -653,23 +669,6 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     {
         $this->content = $content;
         return $this;
-    }
-
-    /**
-     * Returns the request message string
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        $header = '';
-        foreach ($this->getHeaders() as $name => $value) {
-            $name = implode('-', array_map('ucfirst', explode('_', strtolower($name))));
-            $header .= $name . ': ' . $value . "\r\n";
-        }
-        return $this->getServer('REQUEST_METHOD') . ' ' . $this->getUrl() . ' ' . $this->getServer('SERVER_PROTOCOL') . "\r\n"
-            . $header
-            . $this->getContent();
     }
 
     /**
@@ -775,7 +774,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function getHeaders()
     {
-        $headers = array();
+        $headers = [];
         foreach ($this->servers as $name => $value) {
             if (0 === strpos($name, 'HTTP_')) {
                 $headers[substr($name, 5)] = $value;
@@ -796,6 +795,100 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     }
 
     /**
+     * Retrieve an array iterator
+     *
+     * @return \ArrayIterator
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->getData());
+    }
+
+    /**
+     * Check if the accept header is *starts* with the specified MIME type
+     *
+     * @param string $mine
+     * @return bool
+     */
+    public function accept($mine)
+    {
+        return 0 === strpos($this->getServer('HTTP_ACCEPT'), $mine);
+    }
+
+    /**
+     * Check if the request is accept a JSON response
+     *
+     * @return bool
+     */
+    public function acceptJson()
+    {
+        if ($this->overwriteFormat && 'json' == $this->get('_format')) {
+            return true;
+        }
+        return $this->accept('application/json');
+    }
+
+    /**
+     * Check if the request accepts the specified format
+     *
+     * @param string $format
+     * @return bool
+     */
+    public function isFormat($format)
+    {
+        if ('json' === $format) {
+            return $this->acceptJson();
+        }
+
+        return $this->get('_format') === $format;
+    }
+
+    /**
+     * Shorthand method to return referer url
+     *
+     * @return string
+     */
+    public function getReferer()
+    {
+        return $this->getServer('HTTP_REFERER');
+    }
+
+    /**
+     * @return string
+     */
+    public function getRouterKey()
+    {
+        return $this->routerKey;
+    }
+
+    /**
+     * Whether URL rewriting is enabled
+     *
+     * @return bool
+     */
+    public function isUrlRewrite()
+    {
+        if ('/' !== $this->getPathInfo()) {
+            return true;
+        }
+        return $this->defaultUrlRewrite;
+    }
+
+    /**
+     * Receive path info for router
+     *
+     * @return string
+     */
+    public function getRouterPathInfo()
+    {
+        if ($this->isUrlRewrite()) {
+            return $this->getPathInfo();
+        } else {
+            return '/' . ltrim($this[$this->routerKey], '/');
+        }
+    }
+
+    /**
      * Detect the base URI for the request
      *
      * Looks at a variety of criteria in order to attempt to autodetect a base
@@ -809,13 +902,13 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
 
         // Check this first so IIS will catch.
         $httpXRewriteUrl = $this->getServer('HTTP_X_REWRITE_URL');
-        if ($httpXRewriteUrl !== null) {
+        if (null !== $httpXRewriteUrl) {
             $requestUri = $httpXRewriteUrl;
         }
 
         // Check for IIS 7.0 or later with ISAPI_Rewrite
         $httpXOriginalUrl = $this->getServer('HTTP_X_ORIGINAL_URL');
-        if ($httpXOriginalUrl !== null) {
+        if (null !== $httpXOriginalUrl) {
             $requestUri = $httpXOriginalUrl;
         }
 
@@ -833,15 +926,15 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
             $requestUri = $this->getServer('REQUEST_URI');
         }
 
-        if ($requestUri !== null) {
+        if (null !== $requestUri) {
             return preg_replace('#^[^/:]+://[^/]+#', '', $requestUri);
         }
 
         // IIS 5.0, PHP as CGI.
         $origPathInfo = $this->getServer('ORIG_PATH_INFO');
-        if ($origPathInfo !== null) {
+        if (null !== $origPathInfo) {
             $queryString = $this->getServer('QUERY_STRING', '');
-            if ($queryString !== '') {
+            if ('' !== $queryString) {
                 $origPathInfo .= '?' . $queryString;
             }
             return $origPathInfo;
@@ -868,11 +961,11 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
         $phpSelf = $this->getServer('PHP_SELF');
         $origScriptName = $this->getServer('ORIG_SCRIPT_NAME');
 
-        if ($scriptName !== null && basename($scriptName) === $filename) {
+        if (null !== $scriptName && basename($scriptName) === $filename) {
             $baseUrl = $scriptName;
-        } elseif ($phpSelf !== null && basename($phpSelf) === $filename) {
+        } elseif (null !== $phpSelf && basename($phpSelf) === $filename) {
             $baseUrl = $phpSelf;
-        } elseif ($origScriptName !== null && basename($origScriptName) === $filename) {
+        } elseif (null !== $origScriptName && basename($origScriptName) === $filename) {
             // 1and1 shared hosting compatibility.
             $baseUrl = $origScriptName;
         } else {
@@ -918,7 +1011,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
         // out of the base path. $pos !== 0 makes sure it is not matching a
         // value from PATH_INFO or QUERY_STRING.
         if (strlen($requestUri) >= strlen($baseUrl)
-            && (false !== ($pos = strpos($requestUri, $baseUrl)) && $pos !== 0)
+            && (false !== ($pos = strpos($requestUri, $baseUrl)) && 0 !== $pos)
         ) {
             $baseUrl = substr($requestUri, 0, $pos + strlen($baseUrl));
         }
@@ -944,106 +1037,12 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
     }
 
     /**
-     * Retrieve an array iterator
-     *
-     * @return \ArrayIterator
-     */
-    public function getIterator()
-    {
-        return new \ArrayIterator($this->getData());
-    }
-
-    /**
-     * Check if the accept header is *starts* with the specified MIME type
-     *
-     * @param string $mine
-     * @return bool
-     */
-    public function accept($mine)
-    {
-        return 0 === strpos($this->getServer('HTTP_ACCEPT'), $mine);
-    }
-
-    /**
-     * Check if the request is accept a JSON response
-     *
-     * @return bool
-     */
-    public function acceptJson()
-    {
-        if ($this->overwriteFormat && $this->get('_format') == 'json') {
-            return true;
-        }
-        return $this->accept('application/json');
-    }
-
-    /**
-     * Check if the request accepts the specified format
-     *
-     * @param string $format
-     * @return bool
-     */
-    public function isFormat($format)
-    {
-        if ($format === 'json') {
-            return $this->acceptJson();
-        }
-
-        return $this->get('_format') === $format;
-    }
-
-    /**
-     * Shorthand method to return referer url
-     *
-     * @return string
-     */
-    public function getReferer()
-    {
-        return $this->getServer('HTTP_REFERER');
-    }
-
-    /**
-     * @return string
-     */
-    public function getRouterKey()
-    {
-        return $this->routerKey;
-    }
-
-    /**
-     * Whether URL rewriting is enabled
-     *
-     * @return bool
-     */
-    public function isUrlRewrite()
-    {
-        if ($this->getPathInfo() !== '/') {
-            return true;
-        }
-        return $this->defaultUrlRewrite;
-    }
-
-    /**
-     * Receive path info for router
-     *
-     * @return string
-     */
-    public function getRouterPathInfo()
-    {
-        if ($this->isUrlRewrite()) {
-            return $this->getPathInfo();
-        } else {
-            return '/' . ltrim($this[$this->routerKey], '/');
-        }
-    }
-
-    /**
      * Removes extra keys in data
      */
     protected function removeExtraKeys()
     {
         foreach ($this->extraKeys as $offset => $value) {
-            if ($this->data[$offset] === null) {
+            if (null === $this->data[$offset]) {
                 unset($this->data[$offset]);
             }
         }

@@ -2,7 +2,10 @@
 
 namespace WeiTest;
 
-class ApcTest extends CacheTestCase
+/**
+ * @internal
+ */
+final class ApcTest extends CacheTestCase
 {
     protected function setUp(): void
     {
@@ -37,7 +40,7 @@ class ApcTest extends CacheTestCase
 
         $apc->apc(__METHOD__, true);
 
-        $this->assertEquals(true, $apc->apc(__METHOD__));
+        $this->assertTrue($apc->apc(__METHOD__));
     }
 
     public function testSet()

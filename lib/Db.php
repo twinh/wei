@@ -93,7 +93,7 @@ class Db extends Base
      * @var array
      * @link http://www.php.net/manual/zh/pdo.setattribute.php
      */
-    protected $attrs = array();
+    protected $attrs = [];
 
     /**
      * The PDO object
@@ -149,7 +149,7 @@ class Db extends Base
      *
      * @var array
      */
-    protected $tables = array();
+    protected $tables = [];
 
     /**
      * The base record class when instance a new record object
@@ -163,7 +163,7 @@ class Db extends Base
      *
      * @var array
      */
-    protected $recordClasses = array();
+    protected $recordClasses = [];
 
     /**
      * The record namespace without ending "\"
@@ -191,14 +191,14 @@ class Db extends Base
      *
      * @var array
      */
-    protected $queries = array();
+    protected $queries = [];
 
     /**
      * The field names of table
      *
      * @var array
      */
-    protected $tableFields = array();
+    protected $tableFields = [];
 
     /**
      * The salve db configuration name
@@ -212,7 +212,7 @@ class Db extends Base
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         if (isset($options['global']) && true === $options['global']) {
             $options += (array) $options['wei']->getConfig('db');
@@ -234,7 +234,7 @@ class Db extends Base
     /**
      * Connect to the database server
      *
-     * @return boolean
+     * @return bool
      * @throws \PDOException When fails to connect to database server
      */
     public function connect()
@@ -247,11 +247,11 @@ class Db extends Base
             $this->beforeConnect && call_user_func($this->beforeConnect, $this);
 
             $dsn = $this->getDsn();
-            $attrs = $this->attrs + array(
+            $attrs = $this->attrs + [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_STRINGIFY_FETCHES => true,
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                );
+                ];
 
             try {
                 $this->pdo = new PDO($dsn, $this->user, $this->password, $attrs);
@@ -324,8 +324,8 @@ class Db extends Base
     {
         $table = $this->getTable($table);
         $field = implode(', ', array_keys($data[0]));
-        $placeholders = array();
-        $values = array();
+        $placeholders = [];
+        $values = [];
 
         foreach ($data as $row) {
             $placeholders[] = '(' . $this->buildSqlObject($row, ', ', false) . ')';
@@ -340,7 +340,9 @@ class Db extends Base
     }
 
     /**
-     * @deprecated Use batchInsert instead.
+     * @deprecated use batchInsert instead
+     * @param mixed $table
+     * @param mixed|null $extra
      */
     public function insertBatch($table, array $data, $extra = null)
     {
@@ -429,17 +431,17 @@ class Db extends Base
      */
     public function selectAll($table, $conditions = false, $select = '*', $limit = null)
     {
-        $params = array();
+        $params = [];
         $query = "SELECT $select FROM " . $this->getTable($table) . ' ';
 
         if (is_array($conditions)) {
             if (!empty($conditions)) {
-                $query .= "WHERE " . implode(' = ? AND ', array_keys($conditions)) . ' = ?';
+                $query .= 'WHERE ' . implode(' = ? AND ', array_keys($conditions)) . ' = ?';
                 $params = array_values($conditions);
             }
-        } elseif ($conditions !== false) {
-            $query .= "WHERE id = :id";
-            $params = array('id' => $conditions);
+        } elseif (false !== $conditions) {
+            $query .= 'WHERE id = :id';
+            $params = ['id' => $conditions];
         }
 
         if ($limit) {
@@ -457,7 +459,7 @@ class Db extends Base
      * @param array $types The parameter types to bind
      * @return array|false Return an array or false when no result found
      */
-    public function fetch($sql, $params = array(), $types = array())
+    public function fetch($sql, $params = [], $types = [])
     {
         return $this->query($sql, $params, $types)->fetch();
     }
@@ -470,7 +472,7 @@ class Db extends Base
      * @param array $types The parameter types to bind
      * @return array|false Return an array or false when no result found
      */
-    public function fetchAll($sql, $params = array(), $types = array())
+    public function fetchAll($sql, $params = [], $types = [])
     {
         return $this->query($sql, $params, $types)->fetchAll();
     }
@@ -483,7 +485,7 @@ class Db extends Base
      * @param int $column The index of column
      * @return string
      */
-    public function fetchColumn($sql, $params = array(), $column = 0)
+    public function fetchColumn($sql, $params = [], $column = 0)
     {
         return $this->query($sql, $params)->fetchColumn($column);
     }
@@ -497,7 +499,7 @@ class Db extends Base
      * @param array $types The parameter types to bind
      * @return int The number of affected rows
      */
-    public function executeUpdate($sql, $params = array(), $types = array())
+    public function executeUpdate($sql, $params = [], $types = [])
     {
         return $this->query($sql, $params, $types, true);
     }
@@ -512,7 +514,7 @@ class Db extends Base
      * @return \PDOStatement|int
      * @throws \PDOException
      */
-    public function query($sql, $params = array(), $types = array(), $returnRows = false)
+    public function query($sql, $params = [], $types = [], $returnRows = false)
     {
         // A select query, using slave db if configured
         if (!$returnRows && $this->slaveDb) {
@@ -524,7 +526,7 @@ class Db extends Base
         $this->connect();
         $this->queries[] = $sql;
         if ($this->beforeQuery) {
-            call_user_func_array($this->beforeQuery, array($sql, $params, $types, $this));
+            call_user_func_array($this->beforeQuery, [$sql, $params, $types, $this]);
         }
 
         try {
@@ -563,7 +565,7 @@ class Db extends Base
         }
 
         if ($this->afterQuery) {
-            call_user_func_array($this->afterQuery, array($sql, $params, $types, $this));
+            call_user_func_array($this->afterQuery, [$sql, $params, $types, $this]);
         }
 
         return $result;
@@ -674,16 +676,16 @@ class Db extends Base
      * @param bool $isNew Whether it's a new record and have not save to database
      * @return Record
      */
-    public function init($table, $data = array(), $isNew = true)
+    public function init($table, $data = [], $isNew = true)
     {
         $class = $this->getRecordClass($table);
-        return new $class(array(
+        return new $class([
             'wei' => $this->wei,
             'db' => $this,
             'table' => $table,
             'isNew' => $isNew,
             'data' => $data,
-        ));
+        ]);
     }
 
     /**
@@ -721,7 +723,7 @@ class Db extends Base
      * @param array $data The data to create a new record when record not found
      * @return Record
      */
-    public function findOrInit($table, $id, $data = array())
+    public function findOrInit($table, $id, $data = [])
     {
         return $this->init($table)->findOrInit($id, $data);
     }
@@ -937,7 +939,7 @@ class Db extends Base
         if (isset($this->tableFields[$fullTable])) {
             return $this->tableFields[$fullTable];
         } else {
-            $fields = array();
+            $fields = [];
             switch ($this->driver) {
                 case 'mysql':
                     $tableInfo = $this->fetchAll("SHOW COLUMNS FROM $fullTable");
@@ -951,10 +953,10 @@ class Db extends Base
 
                 case 'pgsql':
                     $tableInfo = $this->fetchAll(
-                        "SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS
+                        'SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS
                         WHERE table_catalog = ? AND table_name = ?
-                        ORDER BY dtd_identifier ASC",
-                        array($this->dbname, $fullTable)
+                        ORDER BY dtd_identifier ASC',
+                        [$this->dbname, $fullTable]
                     );
                     $fields = $this->filter($tableInfo, 'column_name');
             }
@@ -964,87 +966,6 @@ class Db extends Base
             }
             return $this->tableFields[$table] = $fields;
         }
-    }
-
-    protected function filter($data, $name)
-    {
-        $fields = array();
-        foreach ($data as $row) {
-            $fields[] = $row[$name];
-        }
-        return $fields;
-    }
-
-    protected function buildSqlObject(array &$data, $glue = ', ', $withColumn = true)
-    {
-        $query = array();
-        foreach ($data as $key => $value) {
-            $column = ($withColumn ? ($key . ' = ') : '');
-
-            if ($value === false) {
-                // Avoid MySQL default sql mode "STRICT_TRANS_TABLES" complains "Incorrect integer value: '' for column ..."
-                // Note that if the column is string type, it will insert/update a "0" string
-                $data[$key] = 0;
-                $query[] = $column . '?';
-            } elseif ($value instanceof \stdClass && isset($value->scalar)) {
-                $query[] = $column . $value->scalar;
-                unset($data[$key]);
-            } else {
-                $query[] = $column . '?';
-            }
-        }
-
-        return implode($glue, $query);
-    }
-
-    /**
-     * Bind parameters to statement object
-     *
-     * @param \PDOStatement $stmt
-     * @param array $params
-     * @param array $types
-     */
-    protected function bindParameter(\PDOStatement $stmt, $params, $types)
-    {
-        !is_array($params) && $params = array($params);
-        !is_array($types) && $types = array($types);
-
-        $isIndex = is_int(key($params));
-        $index = 1;
-
-        foreach ($params as $name => $param) {
-            // Number index parameters
-            if ($isIndex) {
-                if (isset($types[$index - 1])) {
-                    $stmt->bindValue($index, $param, $types[$index - 1]);
-                } else {
-                    $stmt->bindValue($index, $param);
-                }
-                $index++;
-                // Named parameters
-            } else {
-                if (isset($types[$name])) {
-                    $stmt->bindValue($name, $param, $types[$name]);
-                } else {
-                    $stmt->bindValue($name, $param);
-                }
-            }
-        }
-    }
-
-    /**
-     * Execute a query with aggregate function
-     *
-     * @param string $fn
-     * @param string $table
-     * @param string $field
-     * @param mixed $conditions
-     * @return float
-     */
-    protected function executeAggregate($fn, $table, $field, $conditions)
-    {
-        $data = $this->selectAll($table, $conditions, $fn . '(' . $field . ')');
-        return $data ? (float) current($data[0]) : 0.0;
     }
 
     /**
@@ -1085,5 +1006,86 @@ class Db extends Base
             $pdo->rollBack();
             throw $e;
         }
+    }
+
+    protected function filter($data, $name)
+    {
+        $fields = [];
+        foreach ($data as $row) {
+            $fields[] = $row[$name];
+        }
+        return $fields;
+    }
+
+    protected function buildSqlObject(array &$data, $glue = ', ', $withColumn = true)
+    {
+        $query = [];
+        foreach ($data as $key => $value) {
+            $column = ($withColumn ? ($key . ' = ') : '');
+
+            if (false === $value) {
+                // Avoid MySQL default sql mode "STRICT_TRANS_TABLES" complains "Incorrect integer value: '' for column ..."
+                // Note that if the column is string type, it will insert/update a "0" string
+                $data[$key] = 0;
+                $query[] = $column . '?';
+            } elseif ($value instanceof \stdClass && isset($value->scalar)) {
+                $query[] = $column . $value->scalar;
+                unset($data[$key]);
+            } else {
+                $query[] = $column . '?';
+            }
+        }
+
+        return implode($glue, $query);
+    }
+
+    /**
+     * Bind parameters to statement object
+     *
+     * @param \PDOStatement $stmt
+     * @param array $params
+     * @param array $types
+     */
+    protected function bindParameter(\PDOStatement $stmt, $params, $types)
+    {
+        !is_array($params) && $params = [$params];
+        !is_array($types) && $types = [$types];
+
+        $isIndex = is_int(key($params));
+        $index = 1;
+
+        foreach ($params as $name => $param) {
+            // Number index parameters
+            if ($isIndex) {
+                if (isset($types[$index - 1])) {
+                    $stmt->bindValue($index, $param, $types[$index - 1]);
+                } else {
+                    $stmt->bindValue($index, $param);
+                }
+                ++$index;
+            // Named parameters
+            } else {
+                if (isset($types[$name])) {
+                    $stmt->bindValue($name, $param, $types[$name]);
+                } else {
+                    $stmt->bindValue($name, $param);
+                }
+            }
+        }
+    }
+
+    /**
+     * Execute a query with aggregate function
+     *
+     * @param string $fn
+     * @param string $table
+     * @param string $field
+     * @param mixed $conditions
+     * @return float
+     */
+    protected function executeAggregate($fn, $table, $field, $conditions)
+    {
+        $data = $this->selectAll($table, $conditions, $fn . '(' . $field . ')');
+        return $data ? (float) current($data[0]) : 0.0;
     }
 }

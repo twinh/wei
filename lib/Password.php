@@ -35,67 +35,6 @@ class Password extends Base
     ];
 
     /**
-     * Hash the password using the specified algorithm
-     *
-     * @param string $password The password to hash
-     * @return string|false The hashed password, or false on error.
-     * @throws \InvalidArgumentException
-     * @svc
-     */
-    protected function hash($password)
-    {
-        return password_hash($password, $this->algo, $this->options);
-    }
-
-    /**
-     * Get information about the password hash. Returns an array of the information
-     * that was used to generate the password hash.
-     *
-     * array(
-     *    'algo' => 1,
-     *    'algoName' => 'bcrypt',
-     *    'options' => array(
-     *        'cost' => 10,
-     *    ),
-     * )
-     *
-     * @param string $hash The password hash to extract info from
-     * @return array The array of information about the hash.
-     * @svc
-     */
-    protected function getInfo($hash)
-    {
-        return password_get_info($hash);
-    }
-
-    /**
-     * Determine if the password hash needs to be rehashed according to the options provided
-     *
-     * If the answer is true, after validating the password using password_verify, rehash it.
-     *
-     * @param string $hash The hash to test
-     * @return boolean True if the password needs to be rehashed.
-     * @svc
-     */
-    protected function needsRehash($hash)
-    {
-        return password_needs_rehash($hash, $this->algo, $this->options);
-    }
-
-    /**
-     * Verify a password against a hash using a timing attack resistant approach
-     *
-     * @param string $password The password to verify
-     * @param string $hash The hash to verify against
-     * @return boolean If the password matches the hash
-     * @svc
-     */
-    protected function verify($password, $hash)
-    {
-        return password_verify($password, $hash);
-    }
-
-    /**
      * Set the cost parameter for bcrypt
      *
      * @param int $cost
@@ -106,7 +45,7 @@ class Password extends Base
     public function setCost($cost)
     {
         if ($cost < 4 || $cost > 31) {
-            throw new \InvalidArgumentException(sprintf("Invalid bcrypt cost parameter specified: %s", $cost));
+            throw new \InvalidArgumentException(sprintf('Invalid bcrypt cost parameter specified: %s', $cost));
         }
         $this->options['cost'] = $cost;
         return $this;
@@ -131,5 +70,66 @@ class Password extends Base
         $salt = substr($salt, 0, $required_salt_len);
 
         return $salt;
+    }
+
+    /**
+     * Hash the password using the specified algorithm
+     *
+     * @param string $password The password to hash
+     * @return string|false the hashed password, or false on error
+     * @throws \InvalidArgumentException
+     * @svc
+     */
+    protected function hash($password)
+    {
+        return password_hash($password, $this->algo, $this->options);
+    }
+
+    /**
+     * Get information about the password hash. Returns an array of the information
+     * that was used to generate the password hash.
+     *
+     * array(
+     *    'algo' => 1,
+     *    'algoName' => 'bcrypt',
+     *    'options' => array(
+     *        'cost' => 10,
+     *    ),
+     * )
+     *
+     * @param string $hash The password hash to extract info from
+     * @return array the array of information about the hash
+     * @svc
+     */
+    protected function getInfo($hash)
+    {
+        return password_get_info($hash);
+    }
+
+    /**
+     * Determine if the password hash needs to be rehashed according to the options provided
+     *
+     * If the answer is true, after validating the password using password_verify, rehash it.
+     *
+     * @param string $hash The hash to test
+     * @return bool true if the password needs to be rehashed
+     * @svc
+     */
+    protected function needsRehash($hash)
+    {
+        return password_needs_rehash($hash, $this->algo, $this->options);
+    }
+
+    /**
+     * Verify a password against a hash using a timing attack resistant approach
+     *
+     * @param string $password The password to verify
+     * @param string $hash The hash to verify against
+     * @return bool If the password matches the hash
+     * @svc
+     */
+    protected function verify($password, $hash)
+    {
+        return password_verify($password, $hash);
     }
 }

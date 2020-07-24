@@ -2,9 +2,12 @@
 
 namespace WeiTest;
 
-class LockTest extends TestCase
+/**
+ * @internal
+ */
+final class LockTest extends TestCase
 {
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         $this->lock->releaseAll();
     }

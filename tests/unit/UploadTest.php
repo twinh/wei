@@ -2,15 +2,11 @@
 
 namespace WeiTest;
 
-class UploadTest extends TestCase
+/**
+ * @internal
+ */
+final class UploadTest extends TestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->upload->setOption('unitTest', true);
-    }
-
     public static function tearDownAfterClass(): void
     {
         parent::tearDownAfterClass();
@@ -28,20 +24,29 @@ class UploadTest extends TestCase
         rmdir($dir);
     }
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->upload->setOption('unitTest', true);
+    }
+
     /**
      * @dataProvider providerForUploadError
+     * @param mixed $error
+     * @param mixed $name
      */
     public function testUploadError($error, $name)
     {
-        $this->request->setOption('files', array(
-            'upload' => array(
+        $this->request->setOption('files', [
+            'upload' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
                 'tmp_name' => '',
                 'size' => 20,
-                'error' => $error
-            )
-        ));
+                'error' => $error,
+            ],
+        ]);
 
         $this->upload();
 
@@ -50,52 +55,52 @@ class UploadTest extends TestCase
 
     public function providerForUploadError()
     {
-        return array(
-            array(
-                UPLOAD_ERR_INI_SIZE, 'maxSize'
-            ),
-            array(
-                UPLOAD_ERR_FORM_SIZE, 'formLimit'
-            ),
-            array(
-                UPLOAD_ERR_PARTIAL, 'partial'
-            ),
-            array(
-                UPLOAD_ERR_NO_FILE, 'noFile'
-            ),
-            array(
-                UPLOAD_ERR_NO_TMP_DIR, 'noTmpDir'
-            ),
-            array(
-                UPLOAD_ERR_CANT_WRITE, 'cantWrite'
-            ),
-            array(
-                UPLOAD_ERR_EXTENSION, 'extension'
-            ),
-            array(
-                'noThisError', 'noFile'
-            )
-        );
+        return [
+            [
+                UPLOAD_ERR_INI_SIZE, 'maxSize',
+            ],
+            [
+                UPLOAD_ERR_FORM_SIZE, 'formLimit',
+            ],
+            [
+                UPLOAD_ERR_PARTIAL, 'partial',
+            ],
+            [
+                UPLOAD_ERR_NO_FILE, 'noFile',
+            ],
+            [
+                UPLOAD_ERR_NO_TMP_DIR, 'noTmpDir',
+            ],
+            [
+                UPLOAD_ERR_CANT_WRITE, 'cantWrite',
+            ],
+            [
+                UPLOAD_ERR_EXTENSION, 'extension',
+            ],
+            [
+                'noThisError', 'noFile',
+            ],
+        ];
     }
 
     public function testUploadBySpecifiedName()
     {
-        $this->request->setOption('files', array(
-            'upload' => array(
+        $this->request->setOption('files', [
+            'upload' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
                 'tmp_name' => '',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK
-            ),
-            'picture2' => array(
+                'error' => UPLOAD_ERR_OK,
+            ],
+            'picture2' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
                 'tmp_name' => '',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK
-            )
-        ));
+                'error' => UPLOAD_ERR_OK,
+            ],
+        ]);
 
         $this->upload('picture2');
         $this->assertEquals('picture2', $this->upload->getOption('field'));
@@ -106,99 +111,98 @@ class UploadTest extends TestCase
 
     public function testInvoker()
     {
-        $this->upload(array(
-            'field' => 'upload'
-        ));
+        $this->upload([
+            'field' => 'upload',
+        ]);
 
         $this->assertEquals('upload', $this->upload->getOption('field'));
     }
 
     public function testUploadImage()
     {
-        $this->request->setOption('files', array(
-            'picture' => array(
+        $this->request->setOption('files', [
+            'picture' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
                 'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK
-            )
-        ));
+                'error' => UPLOAD_ERR_OK,
+            ],
+        ]);
 
-        $this->upload(array(
-            'maxWidth' => 3
-        ));
-
+        $this->upload([
+            'maxWidth' => 3,
+        ]);
 
         $this->assertTrue($this->upload->hasError('widthTooBig'));
     }
 
     public function testUploadNormalFile()
     {
-        $this->request->setOption('files', array(
-            'picture' => array(
+        $this->request->setOption('files', [
+            'picture' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
                 'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK
-            )
-        ));
+                'error' => UPLOAD_ERR_OK,
+            ],
+        ]);
 
-        $this->upload(array(
-            'exts' => 'jpg,png'
-        ));
+        $this->upload([
+            'exts' => 'jpg,png',
+        ]);
 
         $this->assertTrue($this->upload->hasError('exts'));
     }
 
     public function testUploadFileLargerThanMaxPostSize()
     {
-        $this->request->setOption('files', array());
-        $this->request->setOption('posts', array());
+        $this->request->setOption('files', []);
+        $this->request->setOption('posts', []);
 
-        $this->upload(array(
-            'field' => 'bigFile'
-        ));
+        $this->upload([
+            'field' => 'bigFile',
+        ]);
 
         $this->assertTrue($this->upload->hasError('postSize'));
     }
 
     public function testSaveFile()
     {
-        $this->request->setOption('files', array(
-            'picture' => array(
+        $this->request->setOption('files', [
+            'picture' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
                 'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK
-            )
-        ));
+                'error' => UPLOAD_ERR_OK,
+            ],
+        ]);
 
-        $this->upload(array(
-            'dir' => 'uploads'
-        ));
+        $this->upload([
+            'dir' => 'uploads',
+        ]);
 
         $this->assertFileExists($this->upload->getFile());
     }
 
     public function testUploadWithCustomName()
     {
-        $this->request->setOption('files', array(
-            'picture' => array(
+        $this->request->setOption('files', [
+            'picture' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
                 'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK
-            )
-        ));
+                'error' => UPLOAD_ERR_OK,
+            ],
+        ]);
 
-        $this->upload(array(
+        $this->upload([
             'dir' => 'uploads',
-            'fileName' => 'custom'
-        ));
+            'fileName' => 'custom',
+        ]);
 
         $file = 'uploads/custom.gif';
         $this->assertEquals($file, $this->upload->getFile());
@@ -207,20 +211,20 @@ class UploadTest extends TestCase
 
     public function testSaveFileToCustomDir()
     {
-        $this->request->setOption('files', array(
-            'picture' => array(
+        $this->request->setOption('files', [
+            'picture' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
                 'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK
-            )
-        ));
+                'error' => UPLOAD_ERR_OK,
+            ],
+        ]);
 
         $dir = 'uploads/' . date('Ymd');
-        $result = $this->upload(array(
-            'dir' => $dir
-        ));
+        $result = $this->upload([
+            'dir' => $dir,
+        ]);
 
         $file = $this->upload->getFile();
 
@@ -243,21 +247,21 @@ class UploadTest extends TestCase
      */
     public function testCantMoveFile()
     {
-        $this->request->setOption('files', array(
-            'picture' => array(
+        $this->request->setOption('files', [
+            'picture' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
                 'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK
-            )
-        ));
+                'error' => UPLOAD_ERR_OK,
+            ],
+        ]);
 
         // Avoid Warning: copy(uploads/cus/tom.gif) [function.copy]: failed to open stream: No such file or directory
-        $result = @$this->upload(array(
+        $result = @$this->upload([
             'dir' => 'uploads',
-            'fileName' => 'cu/stom' // invalid file name
-        ));
+            'fileName' => 'cu/stom', // invalid file name
+        ]);
 
         $this->assertFalse($result);
         $this->assertTrue($this->upload->hasError('cantMove'));
@@ -265,15 +269,15 @@ class UploadTest extends TestCase
 
     public function testOverwriteUploadFile()
     {
-        $this->request->setOption('files', array(
-            'picture' => array(
+        $this->request->setOption('files', [
+            'picture' => [
                 'name' => 'overwrite.gif',
                 'type' => 'image/gif',
                 'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK
-            )
-        ));
+                'error' => UPLOAD_ERR_OK,
+            ],
+        ]);
 
         $result1 = $this->upload();
         $file1 = $this->upload->getFile();
@@ -281,9 +285,9 @@ class UploadTest extends TestCase
         $result2 = $this->upload();
         $file2 = $this->upload->getFile();
 
-        $result3 = $this->upload(array(
-            'overwrite' => true
-        ));
+        $result3 = $this->upload([
+            'overwrite' => true,
+        ]);
         $file3 = $this->upload->getFile();
 
         $this->assertTrue($result1);
@@ -300,15 +304,15 @@ class UploadTest extends TestCase
 
     public function testUploadFileWithoutExtension()
     {
-        $this->request->setOption('files', array(
-            'picture' => array(
+        $this->request->setOption('files', [
+            'picture' => [
                 'name' => 'noext',
                 'type' => 'image/gif',
                 'tmp_name' => __DIR__ . '/Fixtures/5x5',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK
-            )
-        ));
+                'error' => UPLOAD_ERR_OK,
+            ],
+        ]);
 
         $result1 = $this->upload();
         $file1 = $this->upload->getFile();
@@ -316,9 +320,9 @@ class UploadTest extends TestCase
         $result2 = $this->upload();
         $file2 = $this->upload->getFile();
 
-        $result3 = $this->upload(array(
-            'overwrite' => true
-        ));
+        $result3 = $this->upload([
+            'overwrite' => true,
+        ]);
         $file3 = $this->upload->getFile();
 
         $this->assertTrue($result1);

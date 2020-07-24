@@ -27,7 +27,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      *
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * The session configuration options
@@ -35,17 +35,33 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * @var array
      * @link http://php.net/manual/en/session.configuration.php
      */
-    protected $inis = array();
+    protected $inis = [];
 
     /**
      * Constructor
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
         $this->start();
+    }
+
+    /**
+     * Get or set session
+     *
+     * @param  string $key The name of cookie
+     * @param  mixed $value The value of cookie
+     * @return mixed
+     */
+    public function __invoke($key, $value = null)
+    {
+        if (1 == func_num_args()) {
+            return $this->get($key);
+        } else {
+            return $this->set($key, $value);
+        }
     }
 
     /**
@@ -65,27 +81,11 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
 
         if ($this->namespace) {
             if (!isset($_SESSION[$this->namespace])) {
-                $_SESSION[$this->namespace] = array();
+                $_SESSION[$this->namespace] = [];
             }
             $this->data = &$_SESSION[$this->namespace];
         } else {
             $this->data = &$_SESSION;
-        }
-    }
-
-    /**
-     * Get or set session
-     *
-     * @param  string $key The name of cookie
-     * @param  mixed $value The value of cookie
-     * @return mixed
-     */
-    public function __invoke($key, $value = null)
-    {
-        if (1 == func_num_args()) {
-            return $this->get($key);
-        } else {
-            return $this->set($key, $value);
         }
     }
 
@@ -150,7 +150,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      */
     public function clear()
     {
-        $this->data = array();
+        $this->data = [];
         return $this;
     }
 

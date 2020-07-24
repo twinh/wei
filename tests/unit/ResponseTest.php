@@ -2,7 +2,10 @@
 
 namespace WeiTest
 {
-    class ResponseTest extends TestCase
+    /**
+     * @internal
+     */
+    final class ResponseTest extends TestCase
     {
         /**
          * @var \Wei\Response
@@ -16,10 +19,10 @@ namespace WeiTest
             // Prepare
             $response->setStatusCode(200);
             $response->setContent('body');
-            $response->setHeader(array(
+            $response->setHeader([
                 'Key' => 'Value',
-                'Key1' => 'Value1'
-            ));
+                'Key1' => 'Value1',
+            ]);
             $response->setCookie('key', 'value');
 
             // Send
@@ -44,12 +47,12 @@ namespace WeiTest
         {
             $response = $this->object;
 
-            $response->setHeader(array(
+            $response->setHeader([
                 'Key' => 'Value',
-                'Key1' => 'Value1'
-            ));
+                'Key1' => 'Value1',
+            ]);
 
-            $this->assertEquals("HTTP/1.1 200 OK\r\nKey: Value\r\nKey1: Value1\r\n\r\n", (string)$response);
+            $this->assertEquals("HTTP/1.1 200 OK\r\nKey: Value\r\nKey1: Value1\r\n\r\n", (string) $response);
         }
 
         public function getOutput(\Wei\Response $response, $content = null, $statusCode = null)
@@ -94,11 +97,13 @@ namespace WeiTest
 
         public function testDownload()
         {
+            $file = __DIR__ . '/Fixtures/views/content.php';
+
             ob_start();
-            $this->response->download(__DIR__ . '/Fixtures/views/content.php');
+            $this->response->download($file);
             $content = ob_get_clean();
 
-            $this->assertStringContainsString('<?php $this->layout(\'layout.php\') ?>', $content);
+            $this->assertSame(file_get_contents($file), $content);
         }
 
         public function testFileNotFoundException()
@@ -123,7 +128,7 @@ namespace WeiTest
              * @link https://github.com/symfony/symfony/issues/2531
              * @link https://github.com/sebastianbergmann/phpunit/issues/390
              */
-            if(ob_get_level() === 0) {
+            if (0 === ob_get_level()) {
                 ob_start();
             }
         }
@@ -132,7 +137,7 @@ namespace WeiTest
         {
             $this->expectOutputString('{"code":-1,"message":"error"}');
 
-            $this->object->json(array('code' => -1, 'message' => 'error'))->send();
+            $this->object->json(['code' => -1, 'message' => 'error'])->send();
 
             $this->assertEquals('application/json', $this->object->getHeader('Content-Type'));
         }
@@ -143,7 +148,7 @@ namespace WeiTest
 
             $this->expectOutputString('callback({"code":-1,"message":"error"})');
 
-            $this->object->jsonp(array('code' => -1, 'message' => 'error'))->send();
+            $this->object->jsonp(['code' => -1, 'message' => 'error'])->send();
 
             $this->assertEquals('application/javascript', $this->object->getHeader('Content-Type'));
         }
@@ -154,7 +159,7 @@ namespace WeiTest
 
             $this->expectOutputString('call.back({"code":-1,"message":"error"})');
 
-            $this->object->jsonp(array('code' => -1, 'message' => 'error'))->send();
+            $this->object->jsonp(['code' => -1, 'message' => 'error'])->send();
 
             $this->assertEquals('application/javascript', $this->object->getHeader('Content-Type'));
         }
@@ -163,7 +168,7 @@ namespace WeiTest
         {
             $this->expectOutputString('{"code":1,"message":"success"}');
 
-            $this->object->send(array('code' => 1, 'message' => 'success'));
+            $this->object->send(['code' => 1, 'message' => 'success']);
 
             $this->assertEquals('application/json', $this->object->getHeader('Content-Type'));
         }
@@ -197,7 +202,7 @@ namespace WeiTest
         {
             $this->expectOutputRegex('/content=\"5;url=http:\/\/www\.google\.com/');
 
-            $this->response->redirect('http://www.google.com', 302, array('redirectWait' => 5))->send();
+            $this->response->redirect('http://www.google.com', 302, ['redirectWait' => 5])->send();
         }
     }
 }
@@ -205,6 +210,8 @@ namespace WeiTest
 namespace
 {
     if (!function_exists('apache_setenv')) {
-        function apache_setenv(){}
+        function apache_setenv()
+        {
+        }
     }
 }

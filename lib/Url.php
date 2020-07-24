@@ -24,37 +24,9 @@ class Url extends Base
      * @param string|array $params
      * @return string
      */
-    public function __invoke($url = '', $argsOrParams = array(), $params = array())
+    public function __invoke($url = '', $argsOrParams = [], $params = [])
     {
         return $this->to(...func_get_args());
-    }
-
-    /**
-     * Generate the URL by specified URL and parameters
-     *
-     * @param string $url
-     * @param array $argsOrParams
-     * @param array $params
-     * @return string
-     * @svc
-     */
-    protected function to($url = '', $argsOrParams = array(), $params = array())
-    {
-        if ($this->request->isUrlRewrite()) {
-            return $this->request->getBaseUrl() . '/' . $this->append($url, $argsOrParams, $params);
-        }
-
-        if (strpos($url, '%s') !== false) {
-            $url = $this->append($url, $argsOrParams);
-            $argsOrParams = $params;
-        }
-
-        // Add router path info into url
-        if ($url) {
-            $argsOrParams = [$this->request->getRouterKey() => $url] + $argsOrParams;
-        }
-
-        return $this->request->getBaseUrl() . '/' . $this->append('', $argsOrParams);
     }
 
     /**
@@ -65,7 +37,7 @@ class Url extends Base
      * @param string|array $params
      * @return string
      */
-    public function full($url, $argsOrParams = array(), $params = array())
+    public function full($url, $argsOrParams = [], $params = [])
     {
         return $this->request->getUrlFor($this->__invoke($url, $argsOrParams, $params));
     }
@@ -78,9 +50,9 @@ class Url extends Base
      * @param string|array $params
      * @return string
      */
-    public function query($url = '', $argsOrParams = array(), $params = array())
+    public function query($url = '', $argsOrParams = [], $params = [])
     {
-        if (strpos($url, '%s') === false) {
+        if (false === strpos($url, '%s')) {
             $argsOrParams = $argsOrParams + $this->request->getQueries();
         } else {
             $params += $this->request->getQueries();
@@ -96,9 +68,9 @@ class Url extends Base
      * @param string|array $params The parameters append to the URL
      * @return string
      */
-    public function append($url = '', $argsOrParams = array(), $params = array())
+    public function append($url = '', $argsOrParams = [], $params = [])
     {
-        if (strpos($url, '%s') !== false) {
+        if (false !== strpos($url, '%s')) {
             $url = vsprintf($url, (array) $argsOrParams);
         } else {
             $params = $argsOrParams;
@@ -107,5 +79,33 @@ class Url extends Base
             $url .= (false === strpos($url, '?') ? '?' : '&');
         }
         return $url . (is_array($params) ? http_build_query($params) : $params);
+    }
+
+    /**
+     * Generate the URL by specified URL and parameters
+     *
+     * @param string $url
+     * @param array $argsOrParams
+     * @param array $params
+     * @return string
+     * @svc
+     */
+    protected function to($url = '', $argsOrParams = [], $params = [])
+    {
+        if ($this->request->isUrlRewrite()) {
+            return $this->request->getBaseUrl() . '/' . $this->append($url, $argsOrParams, $params);
+        }
+
+        if (false !== strpos($url, '%s')) {
+            $url = $this->append($url, $argsOrParams);
+            $argsOrParams = $params;
+        }
+
+        // Add router path info into url
+        if ($url) {
+            $argsOrParams = [$this->request->getRouterKey() => $url] + $argsOrParams;
+        }
+
+        return $this->request->getBaseUrl() . '/' . $this->append('', $argsOrParams);
     }
 }

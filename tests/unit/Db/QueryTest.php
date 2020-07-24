@@ -2,13 +2,15 @@
 
 namespace WeiTest\Db;
 
-use WeiTest\TestCase;
 use Wei\Record;
+use WeiTest\TestCase;
 
 /**
  * @property Record $record
+ *
+ * @internal
  */
-class QueryTest extends TestCase
+final class QueryTest extends TestCase
 {
     /**
      * The following test is from doctrine/dbal
@@ -27,18 +29,18 @@ class QueryTest extends TestCase
 
     public function testSelectWithSimpleWhere()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.id')
             ->from('users u')
             ->where('u.nickname = ?', '1');
 
-        $this->assertEquals("SELECT u.id FROM users u WHERE u.nickname = ?", $qb->getSql());
+        $this->assertEquals('SELECT u.id FROM users u WHERE u.nickname = ?', $qb->getSql());
     }
 
     public function testSelectWithLeftJoin()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -49,7 +51,7 @@ class QueryTest extends TestCase
 
     public function testSelectWithJoin()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -60,7 +62,7 @@ class QueryTest extends TestCase
 
     public function testSelectWithInnerJoin()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -71,7 +73,7 @@ class QueryTest extends TestCase
 
     public function testSelectWithRightJoin()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -82,7 +84,7 @@ class QueryTest extends TestCase
 
     public function testSelectWithAndWhereConditions()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -94,7 +96,7 @@ class QueryTest extends TestCase
 
     public function testSelectWithOrWhereConditions()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -106,7 +108,7 @@ class QueryTest extends TestCase
 
     public function testSelectWithOrOrWhereConditions()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -118,7 +120,7 @@ class QueryTest extends TestCase
 
     public function testSelectWithAndOrWhereConditions()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -132,7 +134,7 @@ class QueryTest extends TestCase
 
     public function testSelectGroupBy()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -143,10 +145,10 @@ class QueryTest extends TestCase
 
     public function testSelectEmptyGroupBy()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
-            ->groupBy(array())
+            ->groupBy([])
             ->from('users u');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u', $qb->getSql());
@@ -154,10 +156,10 @@ class QueryTest extends TestCase
 
     public function testSelectEmptyAddGroupBy()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
-            ->addGroupBy(array())
+            ->addGroupBy([])
             ->from('users u');
 
         $this->assertEquals('SELECT u.*, p.* FROM users u', $qb->getSql());
@@ -165,7 +167,7 @@ class QueryTest extends TestCase
 
     public function testSelectAddGroupBy()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -177,7 +179,7 @@ class QueryTest extends TestCase
 
     public function testSelectAddGroupBys()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -189,7 +191,7 @@ class QueryTest extends TestCase
 
     public function testSelectHaving()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -201,7 +203,7 @@ class QueryTest extends TestCase
 
     public function testSelectAndHaving()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -213,7 +215,7 @@ class QueryTest extends TestCase
 
     public function testSelectHavingAndHaving()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -226,7 +228,7 @@ class QueryTest extends TestCase
 
     public function testSelectHavingOrHaving()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -239,7 +241,7 @@ class QueryTest extends TestCase
 
     public function testSelectOrHavingOrHaving()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -252,7 +254,7 @@ class QueryTest extends TestCase
 
     public function testSelectHavingAndOrHaving()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -266,7 +268,7 @@ class QueryTest extends TestCase
 
     public function testSelectOrderBy()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -277,7 +279,7 @@ class QueryTest extends TestCase
 
     public function testSelectAddOrderBy()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -289,7 +291,7 @@ class QueryTest extends TestCase
 
     public function testSelectAddAddOrderBy()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*', 'p.*')
             ->from('users u')
@@ -301,7 +303,7 @@ class QueryTest extends TestCase
 
     public function testEmptySelect()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
         $qb2 = $qb->select();
 
         $this->assertSame($qb, $qb2);
@@ -309,7 +311,7 @@ class QueryTest extends TestCase
 
     public function testSelectAddSelect()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*')
             ->addSelect('p.*')
@@ -320,7 +322,7 @@ class QueryTest extends TestCase
 
     public function testEmptyAddSelect()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
         $qb2 = $qb->addSelect();
 
         $this->assertSame($qb, $qb2);
@@ -328,7 +330,7 @@ class QueryTest extends TestCase
 
     public function testGetState()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $this->assertEquals(Record::STATE_CLEAN, $qb->getState());
 
@@ -344,7 +346,7 @@ class QueryTest extends TestCase
 
     public function testLimit()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
         $qb->limit(10);
 
         $this->assertEquals(Record::STATE_DIRTY, $qb->getState());
@@ -353,7 +355,7 @@ class QueryTest extends TestCase
 
     public function testSetFirstResult()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
         $qb->limit(10);
 
         $this->assertEquals(Record::STATE_DIRTY, $qb->getState());
@@ -362,7 +364,7 @@ class QueryTest extends TestCase
 
     public function testResetQueryPart()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*')->from('users u')->where('u.name = ?');
 
@@ -373,12 +375,12 @@ class QueryTest extends TestCase
 
     public function testResetQueryParts()
     {
-        $qb   = $this->record;
+        $qb = $this->record;
 
         $qb->select('u.*')->from('users u')->where('u.name = ?')->orderBy('u.name');
 
         $this->assertEquals('SELECT u.* FROM users u WHERE u.name = ? ORDER BY u.name ASC', $qb->getSql());
-        $qb->resetSqlParts(array('where', 'orderBy'));
+        $qb->resetSqlParts(['where', 'orderBy']);
         $this->assertEquals('SELECT u.* FROM users u', $qb->getSql());
     }
 
@@ -389,6 +391,6 @@ class QueryTest extends TestCase
         // users table would be overwrite
         $qb->from('users')->from('groups');
 
-        $this->assertEquals("SELECT * FROM groups", $qb->getSql());
+        $this->assertEquals('SELECT * FROM groups', $qb->getSql());
     }
 }

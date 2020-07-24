@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class PresentTest extends TestCase
+/**
+ * @internal
+ */
+final class PresentTest extends TestCase
 {
     /**
      * @dataProvider providerForPresent
+     * @param mixed $input
      */
     public function testPresent($input)
     {
@@ -14,6 +18,7 @@ class PresentTest extends TestCase
 
     /**
      * @dataProvider providerForNotPresent
+     * @param mixed $input
      */
     public function testNotPresent($input)
     {
@@ -22,25 +27,25 @@ class PresentTest extends TestCase
 
     public function providerForPresent()
     {
-        return array(
-            array('0'),
-            array(0),
-            array(0.0),
-            array('string'),
-            array(' '),
-            array("\r\n"),
-            array("\n"),
-            array("\r"),
-        );
+        return [
+            ['0'],
+            [0],
+            [0.0],
+            ['string'],
+            [' '],
+            ["\r\n"],
+            ["\n"],
+            ["\r"],
+        ];
     }
 
     public function providerForNotPresent()
     {
-        return array(
-            array(''),
-            array(false),
-            array(array()),
-            array(null),
-        );
+        return [
+            [''],
+            [false],
+            [[]],
+            [null],
+        ];
     }
 }

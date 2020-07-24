@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class NaturalNumberTest extends TestCase
+/**
+ * @internal
+ */
+final class NaturalNumberTest extends TestCase
 {
     /**
      * @dataProvider providerForNaturalNumber
+     * @param mixed $input
      */
     public function testNaturalNumber($input)
     {
@@ -14,6 +18,7 @@ class NaturalNumberTest extends TestCase
 
     /**
      * @dataProvider providerForNotNaturalNumber
+     * @param mixed $input
      */
     public function testNotNaturalNumber($input)
     {
@@ -22,26 +27,26 @@ class NaturalNumberTest extends TestCase
 
     public function providerForNaturalNumber()
     {
-        return array(
-            array('0'),
-            array(0),
-            array(1),
-            array('11'),
-            array('100'),
-            array('+1'),
-            array(+1),
-        );
+        return [
+            ['0'],
+            [0],
+            [1],
+            ['11'],
+            ['100'],
+            ['+1'],
+            [+1],
+        ];
     }
 
     public function providerForNotNaturalNumber()
     {
-        return array(
-            array('0.1'),
-            array('a bcdefg'),
-            array('1 23456'),
-            array('string'),
-            array(-1),
-            array('-1'),
-        );
+        return [
+            ['0.1'],
+            ['a bcdefg'],
+            ['1 23456'],
+            ['string'],
+            [-1],
+            ['-1'],
+        ];
     }
 }

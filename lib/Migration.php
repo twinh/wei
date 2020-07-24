@@ -2,8 +2,8 @@
 
 namespace Wei;
 
-use Wei\Migration\BaseMigration;
 use Symfony\Component\Console\Output\OutputInterface;
+use Wei\Migration\BaseMigration;
 
 /**
  * Migration
@@ -49,6 +49,50 @@ class Migration extends Base
     {
         parent::__construct($options);
         $this->prepareTable();
+    }
+
+    /**
+     * Output the migration status table
+     */
+    public function status()
+    {
+        $status = $this->getStatus();
+        if (!$status) {
+            $this->writeln('No migrations found.');
+
+            return;
+        }
+
+        $this->writeln(' Ran?    Name ');
+        $this->writeln('--------------');
+
+        foreach ($status as $row) {
+            if ($row['migrated']) {
+                $mark = '<info>Y</info>';
+            } else {
+                $mark = '<error>N</error>';
+            }
+            $this->writeln(' ' . $mark . '       ' . $row['id']);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getStatus()
+    {
+        $data = [];
+        $migratedIds = $this->getMigratedIds();
+        $classes = $this->getMigrationClasses();
+
+        foreach ($classes as $id => $class) {
+            $data[] = [
+                'id' => $id,
+                'migrated' => in_array($id, $migratedIds, true),
+            ];
+        }
+
+        return $data;
     }
 
     /**
@@ -179,50 +223,6 @@ class Migration extends Base
         ob_start();
         require __DIR__ . '/Migration/stubs/migration.php';
         return ob_get_clean();
-    }
-
-    /**
-     * Output the migration status table
-     */
-    public function status()
-    {
-        $status = $this->getStatus();
-        if (!$status) {
-            $this->writeln('No migrations found.');
-
-            return;
-        }
-
-        $this->writeln(' Ran?    Name ');
-        $this->writeln('--------------');
-
-        foreach ($status as $row) {
-            if ($row['migrated']) {
-                $mark = '<info>Y</info>';
-            } else {
-                $mark = '<error>N</error>';
-            }
-            $this->writeln(' ' . $mark . '       ' . $row['id']);
-        }
-    }
-
-    /**
-     * @return array
-     */
-    public function getStatus()
-    {
-        $data = [];
-        $migratedIds = $this->getMigratedIds();
-        $classes = $this->getMigrationClasses();
-
-        foreach ($classes as $id => $class) {
-            $data[] = [
-                'id' => $id,
-                'migrated' => in_array($id, $migratedIds),
-            ];
-        }
-
-        return $data;
     }
 
     protected function getMigratedIds()

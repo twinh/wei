@@ -2,42 +2,45 @@
 
 namespace WeiTest;
 
-class RetTest extends TestCase
+/**
+ * @internal
+ */
+final class RetTest extends TestCase
 {
     public function testSuc()
     {
         $ret = wei()->ret->suc();
-        $this->assertEquals(array(
+        $this->assertEquals([
             'message' => 'Operation successful',
             'code' => 1,
-        ), $ret);
+        ], $ret);
     }
 
     public function testErr()
     {
         $ret = wei()->ret->err('Operation failed');
-        $this->assertEquals(array(
+        $this->assertEquals([
             'message' => 'Operation failed',
             'code' => -1,
-        ), $ret);
+        ], $ret);
     }
 
     public function testSucWithArray()
     {
-        $ret = wei()->ret->suc(array(
+        $ret = wei()->ret->suc([
             'message' => 'Payment successful',
             'amount' => '10.00',
-            'data' => array(
-                'key' => 'value'
-            )
-        ));
-        $this->assertEquals(array(
+            'data' => [
+                'key' => 'value',
+            ],
+        ]);
+        $this->assertEquals([
             'code' => 1,
             'message' => 'Payment successful',
             'amount' => '10.00',
-            'data' => array(
-                'key' => 'value'
-            )
-        ), $ret);
+            'data' => [
+                'key' => 'value',
+            ],
+        ], $ret);
     }
 }

@@ -35,29 +35,29 @@ class DbCache extends BaseCache
      *
      * @var array
      */
-    protected $checkTableSqls = array(
-        'mysql'     => "SHOW TABLES LIKE '%s'",
-        'sqlite'    => "SELECT name FROM sqlite_master WHERE type='table' AND name='%s'",
-        'pgsql'     => "SELECT true FROM pg_tables WHERE tablename = '%s'"
-    );
+    protected $checkTableSqls = [
+        'mysql' => "SHOW TABLES LIKE '%s'",
+        'sqlite' => "SELECT name FROM sqlite_master WHERE type='table' AND name='%s'",
+        'pgsql' => "SELECT true FROM pg_tables WHERE tablename = '%s'",
+    ];
 
     /**
      * The SQL to create cache table
      *
      * @var array
      */
-    protected $createTableSqls = array(
-        'mysql'  => "CREATE TABLE %s (id VARCHAR(255) NOT NULL, value LONGTEXT NOT NULL, expire DATETIME NOT NULL, lastModified DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB",
-        'sqlite' => "CREATE TABLE %s (id VARCHAR(255) NOT NULL, value CLOB NOT NULL, expire DATETIME NOT NULL, lastModified DATETIME NOT NULL, PRIMARY KEY(id))",
-        'pgsql'  => "CREATE TABLE %s (id VARCHAR(255) NOT NULL, value TEXT NOT NULL, expire TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, lastModified TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))",
-    );
+    protected $createTableSqls = [
+        'mysql' => 'CREATE TABLE %s (id VARCHAR(255) NOT NULL, value LONGTEXT NOT NULL, expire DATETIME NOT NULL, lastModified DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB',
+        'sqlite' => 'CREATE TABLE %s (id VARCHAR(255) NOT NULL, value CLOB NOT NULL, expire DATETIME NOT NULL, lastModified DATETIME NOT NULL, PRIMARY KEY(id))',
+        'pgsql' => 'CREATE TABLE %s (id VARCHAR(255) NOT NULL, value TEXT NOT NULL, expire TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, lastModified TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))',
+    ];
 
     /**
      * Constructor
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
         $this->prepareTable();
@@ -95,14 +95,14 @@ class DbCache extends BaseCache
      */
     public function set($key, $value, $expire = 0)
     {
-        $data = array(
+        $data = [
             'value' => serialize($value),
             'lastModified' => date('Y-m-d H:i:s'),
-            'expire' => date('Y-m-d H:i:s', $expire ? time() + $expire : 2147483647)
-        );
-        $identifier = array(
-            'id' => $this->namespace . $key
-        );
+            'expire' => date('Y-m-d H:i:s', $expire ? time() + $expire : 2147483647),
+        ];
+        $identifier = [
+            'id' => $this->namespace . $key,
+        ];
 
         if ($this->exists($key)) {
             // In MySQL, the rowCount method return 0 when data is not modified,
@@ -111,7 +111,7 @@ class DbCache extends BaseCache
         } else {
             $result = $this->db->insert($this->table, $data + $identifier);
         }
-        return (bool)$result;
+        return (bool) $result;
     }
 
     /**
@@ -119,7 +119,7 @@ class DbCache extends BaseCache
      */
     public function remove($key)
     {
-        return (bool)$this->db->delete($this->table, array('id' => $this->namespace . $key));
+        return (bool) $this->db->delete($this->table, ['id' => $this->namespace . $key]);
     }
 
     /**
@@ -180,6 +180,6 @@ class DbCache extends BaseCache
      */
     public function clear()
     {
-        return (bool)$this->db->executeUpdate("DELETE FROM {$this->table}");
+        return (bool) $this->db->executeUpdate("DELETE FROM {$this->table}");
     }
 }

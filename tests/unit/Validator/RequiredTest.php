@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class RequiredTest extends TestCase
+/**
+ * @internal
+ */
+final class RequiredTest extends TestCase
 {
     /**
      * @dataProvider providerForRequired
+     * @param mixed $input
      */
     public function testRequired($input)
     {
@@ -14,6 +18,7 @@ class RequiredTest extends TestCase
 
     /**
      * @dataProvider providerForNotRequired
+     * @param mixed $input
      */
     public function testNotRequired($input)
     {
@@ -22,29 +27,29 @@ class RequiredTest extends TestCase
 
     public function providerForRequired()
     {
-        return array(
-            array('123'),
-            array('false'),
-            array('off'),
-            array('on'),
-            array('true'),
-            array(0),
-            array('0'),
-            array(0.0),
-            array(true),
-            array('string'),
-            array(' '),
-            array("\r\n"),
-        );
+        return [
+            ['123'],
+            ['false'],
+            ['off'],
+            ['on'],
+            ['true'],
+            [0],
+            ['0'],
+            [0.0],
+            [true],
+            ['string'],
+            [' '],
+            ["\r\n"],
+        ];
     }
 
     public function providerForNotRequired()
     {
-        return array(
-            array(array()),
-            array(false),
-            array(''),
-            array(null),
-        );
+        return [
+            [[]],
+            [false],
+            [''],
+            [null],
+        ];
     }
 }

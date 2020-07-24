@@ -24,7 +24,7 @@ class Decimal extends BaseValidator
      */
     protected function doValidate($input)
     {
-        if (is_float($input) || (is_numeric($input) && count(explode('.', $input)) == 2)) {
+        if (is_float($input) || (is_numeric($input) && 2 == count(explode('.', $input)))) {
             return true;
         }
 

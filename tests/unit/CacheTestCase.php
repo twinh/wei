@@ -2,7 +2,7 @@
 
 namespace WeiTest;
 
-class CacheTestCase extends TestCase
+abstract class CacheTestCase extends TestCase
 {
     /**
      * @var \Wei\BaseCache
@@ -17,6 +17,8 @@ class CacheTestCase extends TestCase
 
     /**
      * @dataProvider providerForGetterAndSetter
+     * @param mixed $value
+     * @param mixed $key
      */
     public function testGetterAndSetter($value, $key)
     {
@@ -41,18 +43,18 @@ class CacheTestCase extends TestCase
 
     public function providerForGetterAndSetter()
     {
-        $obj = new \stdClass;
+        $obj = new \stdClass();
 
-        return array(
-            array(array(),  'array'),
-            array(true,     'bool'),
-            array(1.2,      'float'),
-            array(1,        'int'),
-            array(1,        'integer'),
-            array(null,     'null'),
-            array('1',      'numeric'),
-            array($obj,     'object'),
-        );
+        return [
+            [[],  'array'],
+            [true,     'bool'],
+            [1.2,      'float'],
+            [1,        'int'],
+            [1,        'integer'],
+            [null,     'null'],
+            ['1',      'numeric'],
+            [$obj,     'object'],
+        ];
     }
 
     public function testIncrAndDecr()
@@ -121,7 +123,7 @@ class CacheTestCase extends TestCase
 
     public function testGetAndSetMulti()
     {
-        $items = array();
+        $items = [];
         foreach ($this->providerForGetterAndSetter() as $row) {
             $items[$row[1]] = $row[0];
         }
@@ -143,21 +145,21 @@ class CacheTestCase extends TestCase
 
         $cache->clear();
 
-        $result = $cache->get($key, 60, function() use($num){
+        $result = $cache->get($key, 60, function () use ($num) {
             return ++$num;
         });
 
         $this->assertEquals(2, $result);
 
         // receive from cache
-        $result2 = $cache->get($key, function() use($num){
+        $result2 = $cache->get($key, function () use ($num) {
             return ++$num;
         });
 
         $this->assertEquals(2, $result2);
 
         $that = $this;
-        $result3 = $cache->get($key, function($wei, $cache) use($that) {
+        $result3 = $cache->get($key, function ($wei, $cache) use ($that) {
             $that->assertInstanceOf('\Wei\Wei', $wei);
             $that->assertInstanceOf('\Wei\BaseCache', $cache);
             return 2;
@@ -184,10 +186,10 @@ class CacheTestCase extends TestCase
         $this->assertTrue($cache->add('test', 3));
         $this->assertEquals(3, $cache->get('test'));
 
-        $this->assertEquals(array('test' => 3), $cache->getMulti(array('test')));
+        $this->assertEquals(['test' => 3], $cache->getMulti(['test']));
 
-        $result = $cache->setMulti(array('test' => 2));
-        $this->assertEquals(array('test' => true), $result);
+        $result = $cache->setMulti(['test' => 2]);
+        $this->assertEquals(['test' => true], $result);
 
         $this->assertEquals(2, $cache->get('test'));
     }
@@ -195,10 +197,10 @@ class CacheTestCase extends TestCase
     public function testGetFileContent()
     {
         $file = __DIR__ . '/Fixtures/User.php';
-        $cache = $this->object->getFileContent($file, function($file){
+        $cache = $this->object->getFileContent($file, function ($file) {
             return file_get_contents($file);
         });
-        $cache2 = $this->object->getFileContent($file, function($file){
+        $cache2 = $this->object->getFileContent($file, function ($file) {
             return file_get_contents($file);
         });
         $this->assertEquals($cache, $cache2);
@@ -218,8 +220,7 @@ class CacheTestCase extends TestCase
         $this->setExpectedException('\InvalidArgumentException', 'Expire time for cache "key" must be numeric, NULL given');
 
         $this->object->setNamespace('');
-        $this->object->get('key', null, function(){
-
+        $this->object->get('key', null, function () {
         });
     }
 }

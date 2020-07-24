@@ -19,7 +19,7 @@ use WeiTest\Fixtures\App\Middleware\Stack3;
  */
 class Middleware extends \Wei\BaseController
 {
-    protected $middleware = array();
+    protected $middleware = [];
 
     public function __construct($options)
     {
@@ -27,25 +27,25 @@ class Middleware extends \Wei\BaseController
 
         $this->middleware(All::className());
 
-        $this->middleware(Only::className(), array('only' => 'only'));
+        $this->middleware(Only::className(), ['only' => 'only']);
 
-        $this->middleware(Except::className(), array('except' => array(
-            'only', 'before', 'after', 'around'
-        )));
+        $this->middleware(Except::className(), ['except' => [
+            'only', 'before', 'after', 'around',
+        ]]);
 
-        $this->middleware(Before::className(), array('only' => 'before'));
+        $this->middleware(Before::className(), ['only' => 'before']);
 
-        $this->middleware(After::className(), array('only' => 'after'));
+        $this->middleware(After::className(), ['only' => 'after']);
 
-        $this->middleware(Around::className(), array('only' => 'around'));
+        $this->middleware(Around::className(), ['only' => 'around']);
 
-        $this->middleware(Stack::className(), array('only' => 'stack'));
-        $this->middleware(Stack2::className(), array('only' => 'stack'));
-        $this->middleware(Stack3::className(), array('only' => 'stack'));
+        $this->middleware(Stack::className(), ['only' => 'stack']);
+        $this->middleware(Stack2::className(), ['only' => 'stack']);
+        $this->middleware(Stack3::className(), ['only' => 'stack']);
 
-        $this->middleware(ReturnString::className(), array('only' => 'returnString'));
+        $this->middleware(ReturnString::className(), ['only' => 'returnString']);
 
-        $this->middleware(ReturnArray::className(), array('only' => 'returnArray'));
+        $this->middleware(ReturnArray::className(), ['only' => 'returnArray']);
     }
 
     public function onlyAction()
@@ -80,11 +80,9 @@ class Middleware extends \Wei\BaseController
 
     public function returnStringAction()
     {
-
     }
 
     public function returnArrayAction()
     {
-
     }
 }

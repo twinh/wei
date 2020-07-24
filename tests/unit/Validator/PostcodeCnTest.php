@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class PostcodeCnTest extends TestCase
+/**
+ * @internal
+ */
+final class PostcodeCnTest extends TestCase
 {
     /**
      * @dataProvider providerForPostcodeCn
+     * @param mixed $input
      */
     public function testPostcodeCn($input)
     {
@@ -14,6 +18,7 @@ class PostcodeCnTest extends TestCase
 
     /**
      * @dataProvider providerForNotPostcodeCn
+     * @param mixed $input
      */
     public function testNotPostcodeCn($input)
     {
@@ -22,17 +27,17 @@ class PostcodeCnTest extends TestCase
 
     public function providerForPostcodeCn()
     {
-        return array(
-            array('123456'),
-            array('515638')
-        );
+        return [
+            ['123456'],
+            ['515638'],
+        ];
     }
 
     public function providerForNotPostcodeCn()
     {
-        return array(
-            array('1234567'),
-            array('0234567'),
-        );
+        return [
+            ['1234567'],
+            ['0234567'],
+        ];
     }
 }

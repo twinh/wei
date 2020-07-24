@@ -1,5 +1,5 @@
 <?php
 
-return array(
-    'cli' => true
-);
+return [
+    'cli' => true,
+];

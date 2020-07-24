@@ -8,18 +8,20 @@ use Wei\Schema;
  * Schema
  *
  * @property Schema $schema
+ *
+ * @internal
  */
-class SchemaTest extends TestCase
+final class SchemaTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         wei()->schema->db = wei()->mysqlDb;
-        wei()->schema->setOption(array(
+        wei()->schema->setOption([
             'charset' => 'utf8mb4',
             'collate' => 'utf8mb4_unicode_ci',
-        ));
+        ]);
     }
 
     /**
@@ -148,9 +150,9 @@ class SchemaTest extends TestCase
             ->dropColumn('test')
             ->getSql();
 
-        $this->assertEquals("ALTER TABLE test
+        $this->assertEquals('ALTER TABLE test
   DROP COLUMN test
-", $sql);
+', $sql);
     }
 
     public function testMultiCommands()
@@ -233,9 +235,9 @@ class SchemaTest extends TestCase
             ->timestamp('id')
             ->getSql();
 
-        $this->assertEquals("CREATE TABLE test (
+        $this->assertEquals('CREATE TABLE test (
   id timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", $sql);
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci', $sql);
     }
 
     protected function createTestTable()

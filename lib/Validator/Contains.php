@@ -33,7 +33,7 @@ class Contains extends BaseValidator
      */
     public function __invoke($input, $search = null, $regex = false)
     {
-        $search && $this->storeOption('search', (string)$search);
+        $search && $this->storeOption('search', (string) $search);
         $this->storeOption('regex', $regex);
 
         return $this->isValid($input);
@@ -50,7 +50,7 @@ class Contains extends BaseValidator
         }
 
         if (!$this->regex) {
-            if (strpos($input, $this->search) === false) {
+            if (false === strpos($input, $this->search)) {
                 $this->addError('notContains');
                 return false;
             }

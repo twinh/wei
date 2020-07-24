@@ -30,12 +30,12 @@ class Memcached extends BaseCache
      * @var array
      * @see \Memcached::addServers
      */
-    protected $servers = array(
-        array(
-            'host'          => '127.0.0.1',
-            'port'          => 11211,
-        )
-    );
+    protected $servers = [
+        [
+            'host' => '127.0.0.1',
+            'port' => 11211,
+        ],
+    ];
 
     /**
      * Whether memcached version is >= 3.0.0
@@ -51,17 +51,17 @@ class Memcached extends BaseCache
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
 
         if (!$this->object) {
-            $this->object = new \Memcached;
+            $this->object = new \Memcached();
         }
         $this->object->addServers($this->servers);
 
         $method = new ReflectionMethod('Memcached', 'getMulti');
-        $this->isMemcached3 = $method->getNumberOfParameters() === 2;
+        $this->isMemcached3 = 2 === $method->getNumberOfParameters();
     }
 
     /**
@@ -113,17 +113,17 @@ class Memcached extends BaseCache
     public function getMulti(array $keys)
     {
         $cas = null;
-        $keysWithPrefix = array();
+        $keysWithPrefix = [];
         foreach ($keys as $key) {
             $keysWithPrefix[] = $this->namespace . $key;
         }
 
         if ($this->isMemcached3) {
-            $params = array($keysWithPrefix, \Memcached::GET_PRESERVE_ORDER);
+            $params = [$keysWithPrefix, \Memcached::GET_PRESERVE_ORDER];
         } else {
-            $params = array($keysWithPrefix, $cas, \Memcached::GET_PRESERVE_ORDER);
+            $params = [$keysWithPrefix, $cas, \Memcached::GET_PRESERVE_ORDER];
         }
-        $values = (array) call_user_func_array(array($this->object, 'getMulti'), $params);
+        $values = (array) call_user_func_array([$this->object, 'getMulti'], $params);
         return array_combine($keys, $values);
     }
 
@@ -181,28 +181,6 @@ class Memcached extends BaseCache
     }
 
     /**
-     * Increment/Decrement an item
-     *
-     * Memcached do not allow negative number as $offset parameter
-     *
-     * @link https://github.com/php-memcached-dev/php-memcached/blob/master/php_memcached.c#L1746
-     * @param string $key The name of item
-     * @param int $offset The value to be increased/decreased
-     * @param bool $inc The operation is increase or decrease
-     * @return int|false Returns the new value on success, or false on failure
-     */
-    protected function incDec($key, $offset, $inc = true)
-    {
-        $key = $this->namespace . $key;
-        $method = $inc ? 'increment' : 'decrement';
-        $offset = abs($offset);
-        if (false === $this->object->$method($key, $offset)) {
-            return $this->object->set($key, $offset) ? $offset : false;
-        }
-        return $this->object->get($key);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function clear()
@@ -238,5 +216,27 @@ class Memcached extends BaseCache
     public function getResultCode()
     {
         return $this->object->getResultCode();
+    }
+
+    /**
+     * Increment/Decrement an item
+     *
+     * Memcached do not allow negative number as $offset parameter
+     *
+     * @link https://github.com/php-memcached-dev/php-memcached/blob/master/php_memcached.c#L1746
+     * @param string $key The name of item
+     * @param int $offset The value to be increased/decreased
+     * @param bool $inc The operation is increase or decrease
+     * @return int|false Returns the new value on success, or false on failure
+     */
+    protected function incDec($key, $offset, $inc = true)
+    {
+        $key = $this->namespace . $key;
+        $method = $inc ? 'increment' : 'decrement';
+        $offset = abs($offset);
+        if (false === $this->object->{$method}($key, $offset)) {
+            return $this->object->set($key, $offset) ? $offset : false;
+        }
+        return $this->object->get($key);
     }
 }

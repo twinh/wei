@@ -2,18 +2,21 @@
 
 namespace WeiTest\Validator;
 
-class FileTest extends TestCase
+/**
+ * @internal
+ */
+final class FileTest extends TestCase
 {
     public function createFileValidator()
     {
-        return new \Wei\Validator\File(array(
+        return new \Wei\Validator\File([
             'wei' => $this->wei,
-        ));
+        ]);
     }
 
     public function testIsFile1()
     {
-        $this->assertFalse($this->isFile(array()), 'Not File path');
+        $this->assertFalse($this->isFile([]), 'Not File path');
     }
 
     public function testIsFile2()
@@ -37,24 +40,24 @@ class FileTest extends TestCase
     {
         $file = $this->createFileValidator();
 
-        $this->assertFalse($file(__FILE__, array(
+        $this->assertFalse($file(__FILE__, [
             'exts' => 'gif,jpg',
-            'excludeExts' => array('doc', 'php')
-        )));
+            'excludeExts' => ['doc', 'php'],
+        ]));
 
-        $this->assertEquals(array('excludeExts', 'exts'), array_keys($file->getErrors()));
+        $this->assertEquals(['excludeExts', 'exts'], array_keys($file->getErrors()));
     }
 
     public function testSize()
     {
         $file = $this->createFileValidator();
 
-        $this->assertFalse($file(__FILE__, array(
+        $this->assertFalse($file(__FILE__, [
             'maxSize' => 8, // 8bytes
-            'minSize' => '10.5MB'
-        )));
+            'minSize' => '10.5MB',
+        ]));
 
-        $this->assertEquals(array('maxSize', 'minSize'), array_keys($file->getErrors()));
+        $this->assertEquals(['maxSize', 'minSize'], array_keys($file->getErrors()));
     }
 
     public function testUnexpectedExts()
@@ -70,36 +73,36 @@ class FileTest extends TestCase
     {
         $file = $this->createFileValidator();
 
-        $this->assertFalse($file(dirname(__DIR__) . '/Fixtures/5x5.gif', array(
-            'mimeTypes' => array(
-                'image/jpg'
-            ),
-            'excludeMimeTypes' => array(
-                'image/gif'
-            )
-        )));
+        $this->assertFalse($file(dirname(__DIR__) . '/Fixtures/5x5.gif', [
+            'mimeTypes' => [
+                'image/jpg',
+            ],
+            'excludeMimeTypes' => [
+                'image/gif',
+            ],
+        ]));
 
-        $this->assertEquals(array('mimeTypes', 'excludeMimeTypes'), array_keys($file->getErrors()));
+        $this->assertEquals(['mimeTypes', 'excludeMimeTypes'], array_keys($file->getErrors()));
     }
 
     public function testMimeTypeWildcard()
     {
         $file = $this->createFileValidator();
 
-        $this->assertTrue($file(dirname(__DIR__) . '/Fixtures/5x5.gif', array(
-            'mimeTypes' => array(
-                'image/*'
-            )
-        )));
+        $this->assertTrue($file(dirname(__DIR__) . '/Fixtures/5x5.gif', [
+            'mimeTypes' => [
+                'image/*',
+            ],
+        ]));
     }
 
     public function testStringAsParameter()
     {
         $file = $this->createFileValidator();
 
-        $this->assertTrue($file(dirname(__DIR__) . '/Fixtures/5x5.gif', array(
-            'mimeTypes' => 'image/jpg,image/gif'
-        )));
+        $this->assertTrue($file(dirname(__DIR__) . '/Fixtures/5x5.gif', [
+            'mimeTypes' => 'image/jpg,image/gif',
+        ]));
     }
 
     public function testSplFileInfoAsInput()
@@ -114,10 +117,10 @@ class FileTest extends TestCase
         $file = $this->createFileValidator();
 
         $input = dirname(__DIR__) . '/Fixtures/5x5.gif';
-        $array = array(
+        $array = [
             'tmp_name' => $input,
-            'name' => $input
-        );
+            'name' => $input,
+        ];
 
         $this->assertTrue($file($array));
     }
@@ -126,7 +129,7 @@ class FileTest extends TestCase
     {
         $file = $this->createFileValidator();
 
-        $this->assertFalse($file(array()));
+        $this->assertFalse($file([]));
     }
 
     public function testFileWithoutExtension()

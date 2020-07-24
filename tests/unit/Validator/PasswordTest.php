@@ -2,23 +2,27 @@
 
 namespace WeiTest\Validator;
 
-class PasswordTest extends TestCase
+/**
+ * @internal
+ */
+final class PasswordTest extends TestCase
 {
     /**
      * @dataProvider providerForPassword
+     * @param mixed $password
      */
     public function testPassword($password, array $options)
     {
-        $validator = $this->validate(array(
-            'data' => array(
+        $validator = $this->validate([
+            'data' => [
                 'password' => $password,
-            ),
-            'rules' => array(
-                'password' => array(
-                    'password' => $options
-                )
-            )
-        ));
+            ],
+            'rules' => [
+                'password' => [
+                    'password' => $options,
+                ],
+            ],
+        ]);
 
         $this->assertTrue($validator->isValid());
         $this->assertTrue($this->wei->isPassword($password, $options));
@@ -26,23 +30,25 @@ class PasswordTest extends TestCase
 
     /**
      * @dataProvider providerForNotPassword
+     * @param mixed $password
+     * @param mixed $messageTypes
      */
     public function testNotPassword($password, array $options, $messageTypes)
     {
         /** @var $validator \Wei\Validate */
-        $validator = $this->validate(array(
-            'data' => array(
+        $validator = $this->validate([
+            'data' => [
                 'password' => $password,
-            ),
-            'rules' => array(
-                'password' => array(
-                    'password' => $options
-                )
-            )
-        ));
+            ],
+            'rules' => [
+                'password' => [
+                    'password' => $options,
+                ],
+            ],
+        ]);
 
         $messages = $validator->getDetailMessages();
-        foreach ((array)$messageTypes as $type) {
+        foreach ((array) $messageTypes as $type) {
             $this->assertArrayHasKey($type, $messages['password']['password']);
         }
 
@@ -52,208 +58,208 @@ class PasswordTest extends TestCase
 
     public function providerForPassword()
     {
-        return array(
-            array(
+        return [
+            [
                 '123456',
-                array(),
-            ),
-            array(
+                [],
+            ],
+            [
                 '12345',
-                array(
-                    'minLength' => 5
-                )
-            ),
-            array(
+                [
+                    'minLength' => 5,
+                ],
+            ],
+            [
                 '123456',
-                array(
+                [
                     'minLength' => 6,
-                    'maxLength' => 8
-                )
-            ),
-            array(
+                    'maxLength' => 8,
+                ],
+            ],
+            [
                 '123456',
-                array(
+                [
                     'needDigit' => true,
-                )
-            ),
-            array(
+                ],
+            ],
+            [
                 '123456a',
-                array(
-                    'needLetter' => true
-                )
-            ),
-            array(
+                [
+                    'needLetter' => true,
+                ],
+            ],
+            [
                 '123456a@',
-                array(
-                    'needNonAlnum' => true
-                )
-            ),
-            array(
+                [
+                    'needNonAlnum' => true,
+                ],
+            ],
+            [
                 '123456abc',
-                array(
+                [
                     'needDigit' => true,
-                    'needLetter' => true
-                )
-            ),
-            array(
+                    'needLetter' => true,
+                ],
+            ],
+            [
                 '123456abc中文',
-                array(
+                [
                     'needDigit' => true,
                     'needLetter' => true,
                     'needNonAlnum' => true,
-                )
-            ),
-            array(
+                ],
+            ],
+            [
                 '234',
-                array(
-                    'atLeastPresent' => 1
-                ),
-            ),
-            array(
+                [
+                    'atLeastPresent' => 1,
+                ],
+            ],
+            [
                 '234abc',
-                array(
-                    'atLeastPresent' => 2
-                ),
-            ),
-            array(
+                [
+                    'atLeastPresent' => 2,
+                ],
+            ],
+            [
                 'ab@#$c',
-                array(
-                    'atLeastPresent' => 2
-                ),
-            ),
-            array(
+                [
+                    'atLeastPresent' => 2,
+                ],
+            ],
+            [
                 '123abc@#$',
-                array(
-                    'atLeastPresent' => 2
-                ),
-            ),
-            array(
+                [
+                    'atLeastPresent' => 2,
+                ],
+            ],
+            [
                 '123abc@#$',
-                array(
-                    'atLeastPresent' => 3
-                ),
-            )
-        );
+                [
+                    'atLeastPresent' => 3,
+                ],
+            ],
+        ];
     }
 
     public function providerForNotPassword()
     {
-        return array(
-            array(
+        return [
+            [
                 '12345',
-                array(
-                    'minLength' => 6
-                ),
-                'lengthTooShort'
-            ),
-            array(
+                [
+                    'minLength' => 6,
+                ],
+                'lengthTooShort',
+            ],
+            [
                 '1234',
-                array(
-                    'minLength' => 5
-                ),
-                'lengthTooShort'
-            ),
-            array(
+                [
+                    'minLength' => 5,
+                ],
+                'lengthTooShort',
+            ],
+            [
                 '123456',
-                array(
-                    'maxLength' => 5
-                ),
-                'lengthTooLong'
-            ),
-            array(
+                [
+                    'maxLength' => 5,
+                ],
+                'lengthTooLong',
+            ],
+            [
                 'abcdef',
-                array(
+                [
                     'needDigit' => true,
-                ),
-                'missingCharType'
-            ),
-            array(
+                ],
+                'missingCharType',
+            ],
+            [
                 '123456',
-                array(
-                    'needLetter' => true
-                ),
-                'missingCharType'
-            ),
-            array(
+                [
+                    'needLetter' => true,
+                ],
+                'missingCharType',
+            ],
+            [
                 '123456a',
-                array(
-                    'needNonAlnum' => true
-                ),
-                'missingCharType'
-            ),
-            array(
+                [
+                    'needNonAlnum' => true,
+                ],
+                'missingCharType',
+            ],
+            [
                 '@#$',
-                array(
+                [
                     'needDigit' => true,
-                    'needLetter' => true
-                ),
-                'missingCharType'
-            ),
-            array(
+                    'needLetter' => true,
+                ],
+                'missingCharType',
+            ],
+            [
                 '123456abc',
-                array(
+                [
                     'needDigit' => true,
                     'needLetter' => true,
                     'needNonAlnum' => true,
-                ),
-                'missingCharType'
-            ),
-            array(
+                ],
+                'missingCharType',
+            ],
+            [
                 '123',
-                array(
-                    'atLeastPresent' => 2
-                ),
-                'missingChar'
-            ),
-            array(
+                [
+                    'atLeastPresent' => 2,
+                ],
+                'missingChar',
+            ],
+            [
                 '123abc',
-                array(
-                    'atLeastPresent' => 3
-                ),
-                'missingChar'
-            ),
-            array(
+                [
+                    'atLeastPresent' => 3,
+                ],
+                'missingChar',
+            ],
+            [
                 'abc@#$',
-                array(
-                    'atLeastPresent' => 3
-                ),
-                'missingChar'
-            ),
-            array(
+                [
+                    'atLeastPresent' => 3,
+                ],
+                'missingChar',
+            ],
+            [
                 '123ABC',
-                array(
-                    'atLeastPresent' => 3
-                ),
-                'missingChar'
-            ),
-            array(
+                [
+                    'atLeastPresent' => 3,
+                ],
+                'missingChar',
+            ],
+            [
                 '123ABCabc',
-                array(
-                    'atLeastPresent' => 4
-                ),
-                'missingCharType'
-            ),
-            array(
+                [
+                    'atLeastPresent' => 4,
+                ],
+                'missingCharType',
+            ],
+            [
                 '123@#$abc',
-                array(
-                    'atLeastPresent' => 4
-                ),
-                'missingCharType'
-            ),
-            array(
+                [
+                    'atLeastPresent' => 4,
+                ],
+                'missingCharType',
+            ],
+            [
                 '123@#$',
-                array(
-                    'atLeastPresent' => 4
-                ),
-                'missingCharType'
-            ),
-            array(
+                [
+                    'atLeastPresent' => 4,
+                ],
+                'missingCharType',
+            ],
+            [
                 '123',
-                array(
-                    'atLeastPresent' => 4
-                ),
-                'missingCharType'
-            )
-        );
+                [
+                    'atLeastPresent' => 4,
+                ],
+                'missingCharType',
+            ],
+        ];
     }
 }

@@ -2,9 +2,12 @@
 
 namespace WeiTest;
 
-class PhpErrorTest extends TestCase
+/**
+ * @internal
+ */
+final class PhpErrorTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         if (!class_exists(('\php_error\ErrorHandler'))) {
             $this->markTestSkipped('joseph-lenton/php-error is required');

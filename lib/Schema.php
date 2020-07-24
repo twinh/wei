@@ -89,12 +89,12 @@ class Schema extends Base
     /**
      * @var array
      */
-    protected $columns = array();
+    protected $columns = [];
 
     /**
      * @var array
      */
-    protected $indexes = array();
+    protected $indexes = [];
 
     /**
      * @var string
@@ -109,19 +109,19 @@ class Schema extends Base
     /**
      * @var array
      */
-    protected $columnDefaults = array(
+    protected $columnDefaults = [
         'nullable' => false,
         'comment' => '',
         'unsigned' => false,
         'change' => false,
-    );
+    ];
 
     /**
      * The default values for types, false means no default value
      *
      * @var array
      */
-    protected $typeDefaults = array(
+    protected $typeDefaults = [
         self::TYPE_BIG_INT => '0',
         self::TYPE_BOOL => '0',
         self::TYPE_CHAR => '',
@@ -138,13 +138,13 @@ class Schema extends Base
         self::TYPE_STRING => '',
         self::TYPE_TEXT => false,
         self::TYPE_TIMESTAMP => "'0000-00-00 00:00:00'",
-    );
+    ];
 
     /**
      * @var array
      */
-    protected $typeMaps = array(
-        'mysql' => array(
+    protected $typeMaps = [
+        'mysql' => [
             self::TYPE_BIG_INT => 'bigint',
             self::TYPE_BOOL => 'tinyint(1)',
             self::TYPE_CHAR => 'char',
@@ -161,22 +161,22 @@ class Schema extends Base
             self::TYPE_STRING => 'varchar',
             self::TYPE_TEXT => 'text',
             self::TYPE_TIMESTAMP => 'timestamp',
-        ),
-    );
+        ],
+    ];
 
     /**
      * The SQL to check if table exists
      *
      * @var array
      */
-    protected $checkTableSqls = array(
-        'mysql' => "SELECT * FROM information_schema.tables WHERE table_schema = ? AND table_name = ? LIMIT 1;",
-    );
+    protected $checkTableSqls = [
+        'mysql' => 'SELECT * FROM information_schema.tables WHERE table_schema = ? AND table_name = ? LIMIT 1;',
+    ];
 
     /**
      * @var array
      */
-    protected $unsignedTypes = array(
+    protected $unsignedTypes = [
         self::TYPE_BOOL,
         self::TYPE_TINY_INT,
         self::TYPE_SMALL_INT,
@@ -185,15 +185,15 @@ class Schema extends Base
         self::TYPE_BIG_INT,
         self::TYPE_DECIMAL,
         self::TYPE_DOUBLE,
-    );
+    ];
 
     /**
      * @var array
      */
-    protected $stringTypes = array(
+    protected $stringTypes = [
         self::TYPE_CHAR,
         self::TYPE_STRING,
-    );
+    ];
 
     /**
      * @param string $table
@@ -207,27 +207,16 @@ class Schema extends Base
         return $this;
     }
 
-    protected function reset()
-    {
-        $this->table = '';
-        $this->columns = array();
-        $this->indexes = array();
-        $this->lastColumn = null;
-        $this->autoIncrement = '';
-        $this->tableComment = '';
-        $this->isChange = false;
-    }
-
     /**
      * @param string $column
      * @param string $type
      * @param array $options
      * @return $this
      */
-    public function addColumn($column, $type, array $options = array())
+    public function addColumn($column, $type, array $options = [])
     {
         $this->lastColumn = $column;
-        $this->columns[$column] = array('type' => $type) + $options;
+        $this->columns[$column] = ['type' => $type] + $options;
 
         return $this;
     }
@@ -242,7 +231,7 @@ class Schema extends Base
     {
         $this->isChange = true;
         foreach ((array) $column as $item) {
-            $this->columns[$item] = array('command' => 'drop');
+            $this->columns[$item] = ['command' => 'drop'];
         }
 
         return $this;
@@ -306,104 +295,6 @@ class Schema extends Base
     }
 
     /**
-     * @return string
-     */
-    protected function getCreateDefinition()
-    {
-        $columnSqls = array();
-        foreach ($this->columns as $column => $options) {
-            $columnSqls[] .= '  ' . $this->getColumnSql($column, $options);
-        }
-
-        foreach ($this->indexes as $index => $options) {
-            $columnSqls[] .= ' ' . $this->getIndexSql($index, $options);
-        }
-
-        $sql = "\n" . implode(",\n", $columnSqls) . "\n";
-
-        return $sql;
-    }
-
-    /**
-     * @param string $index
-     * @param array $options
-     * @return string
-     */
-    protected function getIndexSql($index, array $options)
-    {
-        $sql = ' ';
-
-        if (isset($options['command'])) {
-            $method = 'get' . ucfirst($options['command']) . 'IndexSql';
-
-            return $this->$method($index, $options);
-        }
-
-        if ($options['type'] !== 'index') {
-            $sql .= strtoupper($options['type']) . ' ';
-        }
-
-        if ($this->isChange) {
-            $sql .= 'ADD ';
-        }
-
-        $sql .= 'KEY ' . $index . ' (' . implode(', ', $options['columns']) . ')';
-
-        return $sql;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getTableOptionSql()
-    {
-        $sql = '';
-        if ($this->engine) {
-            $sql .= ' ENGINE=' . $this->engine;
-        }
-
-        if ($this->charset) {
-            $sql .= ' CHARSET=' . $this->charset;
-        }
-
-        if ($this->collate) {
-            $sql .= ' COLLATE=' . $this->collate;
-        }
-
-        if ($this->tableComment) {
-            $sql .= " COMMENT='" . $this->tableComment . "'";
-        }
-
-        return $sql;
-    }
-
-    /**
-     * @param string $column
-     * @param array $options
-     * @return string
-     */
-    protected function getColumnSql($column, array $options)
-    {
-        $sql = '';
-
-        if (isset($options['command'])) {
-            $method = 'get' . ucfirst($options['command']) . 'ColumnSql';
-
-            return $this->$method($column, $options);
-        }
-
-        if ($this->isChange) {
-            if (isset($options['change'])) {
-                $sql .= $this->getChangeColumnSql($column);
-            } else {
-                $sql .= 'ADD COLUMN ';
-            }
-        }
-
-        return $sql . $this->buildColumnSql($column, $options);
-    }
-
-    /**
      * @param bool $defaultNullable
      * @return $this
      */
@@ -419,209 +310,6 @@ class Schema extends Base
     public function getDefaultNullable()
     {
         return $this->defaultNullable;
-    }
-
-    /**
-     * @param string $column
-     * @param array $options
-     * @return string
-     */
-    protected function buildColumnSql($column, array $options)
-    {
-        $sql = $column . ' ' . $this->getTypeSql($options) . ' ';
-        $sql .= $this->getUnsignedSql($options);
-
-        // Avoid automatic generate "NOT NULL DEFAULT NULL" error statement, convert it to "NULL DEFAULT NULL"
-        if (!array_key_exists('default', $options)
-            && $this->autoDefault
-            && $this->typeDefaults[$options['type']] === null
-            && !$this->defaultNullable) {
-            $options['nullable'] = true;
-        }
-
-        $sql .= $this->getNullSql(isset($options['nullable']) ? $options['nullable'] : $this->defaultNullable);
-
-        // Auto increment do not have default value
-        if ($this->autoIncrement == $column) {
-            $sql .= ' AUTO_INCREMENT';
-        } else {
-            $defaultSql = $this->getDefaultSql($options);
-            if ($defaultSql) {
-                $sql .= ' ' . $defaultSql;
-            }
-        }
-
-        if (isset($options['comment'])) {
-            $sql .= " COMMENT '" . $options['comment'] . "'";
-        }
-
-        if (isset($options['after'])) {
-            $sql .= ' AFTER ' . $options['after'];
-        }
-
-        return $sql;
-    }
-
-    /**
-     * @param string $column
-     * @return string
-     */
-    protected function getChangeColumnSql($column)
-    {
-        return 'CHANGE COLUMN ' . $column . ' ';
-    }
-
-    /**
-     * @param string $column
-     * @return string
-     */
-    protected function getDropColumnSql($column)
-    {
-        return 'DROP COLUMN ' . $column;
-    }
-
-    /**
-     * @param string $column
-     * @param array $options
-     * @return string
-     * @throws \Exception when column not found in table
-     */
-    protected function getRenameColumnSql($column, $options)
-    {
-        $dbColumns = $this->db->fetchAll("SHOW FULL COLUMNS FROM $this->table");
-        $fromColumn = null;
-        foreach ($dbColumns as $dbColumn) {
-            if ($dbColumn['Field'] == $options['from']) {
-                $fromColumn = $dbColumn;
-                break;
-            }
-        }
-        if (!$fromColumn) {
-            throw new \Exception(sprintf('Column "%s" not found in table "%s"', $options['from'], $this->table));
-        }
-
-        $newOptions = array();
-        $newOptions['type'] = $fromColumn['Type'];
-        $newOptions['nullable'] = $fromColumn['Null'] === 'YES';
-        $newOptions['comment'] = $fromColumn['Comment'];
-
-        $keys = array_keys($this->typeDefaults, false, true);
-        if (!in_array($newOptions['type'], $keys)) {
-            $newOptions['default'] = $fromColumn['Default'];
-        }
-
-        $sql = $this->buildColumnSql($options['to'], $newOptions);
-        if ($fromColumn['Extra'] === 'auto_increment') {
-            $sql .= ' AUTO_INCREMENT';
-        }
-
-        return $this->getChangeColumnSql($column) . $sql;
-    }
-
-    /**
-     * @param string $index
-     * @return string
-     */
-    protected function getDropIndexSql($index)
-    {
-        return 'DROP INDEX ' . $index;
-    }
-
-    /**
-     * @param array $options
-     * @return string
-     */
-    protected function getTypeSql(array $options)
-    {
-        $driver = $this->db->getDriver();
-        $typeMap = $this->typeMaps[$driver];
-
-        // Allow custom type (eg int(10) unsigned) from rename
-        if (!isset($typeMap[$options['type']])) {
-            return $options['type'];
-        }
-
-        $sql = $typeMap[$options['type']];
-
-        if (isset($options['length'])) {
-            if (isset($options['scale'])) {
-                $sql .= '(' . $options['length'] . ', ' . $options['scale'] . ')';
-            } else {
-                $sql .= '(' . $options['length'] . ')';
-            }
-        }
-
-        return $sql;
-    }
-
-    /**
-     * @param array $options
-     * @return string
-     */
-    protected function getUnsignedSql(array $options)
-    {
-        if (isset($options['unsigned'])) {
-            return $options['unsigned'] ? 'unsigned ' : '';
-        }
-
-        if ($this->autoUnsigned && in_array($options['type'], $this->unsignedTypes)) {
-            return 'unsigned ';
-        }
-
-        return '';
-    }
-
-    /**
-     * @param bool $null
-     * @return string
-     */
-    protected function getNullSql($null)
-    {
-        return $null ? 'NULL' : 'NOT NULL';
-    }
-
-    /**
-     * @param array $options
-     * @return string
-     */
-    protected function getDefaultSql(array $options)
-    {
-        $hasDefault = array_key_exists('default', $options);
-        if (!$hasDefault && !$this->autoDefault) {
-            return '';
-        }
-
-        if (!$hasDefault && $this->autoDefault) {
-            $options['default'] = $this->typeDefaults[$options['type']];
-        }
-
-        $default = $options['default'];
-        if ($default === false) {
-            return '';
-        }
-
-        switch (true) {
-            case $default === '':
-                $value = "''";
-                break;
-
-            case in_array($options['type'], $this->stringTypes):
-                $value = var_export($default, true);
-                break;
-
-            case $default === null:
-                $value = 'NULL';
-                break;
-
-            case is_bool($default):
-                $value = (string) $default;
-                break;
-
-            default:
-                $value = $default;
-        }
-
-        return 'DEFAULT ' . $value;
     }
 
     /**
@@ -664,7 +352,7 @@ class Schema extends Base
     public function hasTable($table)
     {
         $parts = explode('.', $table);
-        if (count($parts) === 1) {
+        if (1 === count($parts)) {
             $db = $this->db->getDbname();
             $table = $parts[0];
         } else {
@@ -674,7 +362,7 @@ class Schema extends Base
 
         $tableExistsSql = $this->checkTableSqls[$this->db->getDriver()];
 
-        return (bool) $this->db->fetchColumn($tableExistsSql, array($db, $table));
+        return (bool) $this->db->fetchColumn($tableExistsSql, [$db, $table]);
     }
 
     /**
@@ -718,7 +406,7 @@ class Schema extends Base
      */
     public function char($column, $length = 255)
     {
-        return $this->addColumn($column, self::TYPE_CHAR, array('length' => $length));
+        return $this->addColumn($column, self::TYPE_CHAR, ['length' => $length]);
     }
 
     /**
@@ -731,7 +419,7 @@ class Schema extends Base
      */
     public function decimal($column, $length = 10, $scale = 2)
     {
-        return $this->addColumn($column, self::TYPE_DECIMAL, array('length' => $length, 'scale' => $scale));
+        return $this->addColumn($column, self::TYPE_DECIMAL, ['length' => $length, 'scale' => $scale]);
     }
 
     /**
@@ -754,7 +442,7 @@ class Schema extends Base
      */
     public function string($column, $length = 255)
     {
-        return $this->addColumn($column, self::TYPE_STRING, array('length' => $length));
+        return $this->addColumn($column, self::TYPE_STRING, ['length' => $length]);
     }
 
     /**
@@ -766,7 +454,7 @@ class Schema extends Base
      */
     public function int($column, $length = null)
     {
-        return $this->addColumn($column, self::TYPE_INT, array('length' => $length));
+        return $this->addColumn($column, self::TYPE_INT, ['length' => $length]);
     }
 
     /**
@@ -811,7 +499,7 @@ class Schema extends Base
      */
     public function tinyInt($column, $length = null)
     {
-        return $this->addColumn($column, self::TYPE_TINY_INT, array('length' => $length));
+        return $this->addColumn($column, self::TYPE_TINY_INT, ['length' => $length]);
     }
 
     /**
@@ -823,7 +511,7 @@ class Schema extends Base
      */
     public function smallInt($column, $length = null)
     {
-        return $this->addColumn($column, self::TYPE_SMALL_INT, array('length' => $length));
+        return $this->addColumn($column, self::TYPE_SMALL_INT, ['length' => $length]);
     }
 
     /**
@@ -960,38 +648,10 @@ class Schema extends Base
     {
         $this->isChange = true;
         foreach ((array) $index as $item) {
-            $this->indexes[$item] = array('command' => 'drop');
+            $this->indexes[$item] = ['command' => 'drop'];
         }
 
         return $this;
-    }
-
-    /**
-     * @param string|array $columns
-     * @param string $name
-     * @param string $type
-     * @return $this
-     */
-    protected function addIndex($columns, $name, $type)
-    {
-        $columns = (array) $columns;
-        $name || $name = $this->generateIndexName($columns);
-
-        $this->indexes[$name] = array(
-            'columns' => $columns,
-            'type' => $type,
-        );
-
-        return $this;
-    }
-
-    /**
-     * @param array $columns
-     * @return string
-     */
-    protected function generateIndexName(array $columns)
-    {
-        return implode('_', $columns);
     }
 
     /**
@@ -1095,7 +755,7 @@ class Schema extends Base
      */
     public function renameColumn($from, $to)
     {
-        $this->columns[$from] = array('command' => 'rename', 'from' => $from, 'to' => $to);
+        $this->columns[$from] = ['command' => 'rename', 'from' => $from, 'to' => $to];
 
         return $this;
     }
@@ -1113,5 +773,345 @@ class Schema extends Base
         $this->db->executeUpdate($sql);
 
         return $this;
+    }
+
+    protected function reset()
+    {
+        $this->table = '';
+        $this->columns = [];
+        $this->indexes = [];
+        $this->lastColumn = null;
+        $this->autoIncrement = '';
+        $this->tableComment = '';
+        $this->isChange = false;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getCreateDefinition()
+    {
+        $columnSqls = [];
+        foreach ($this->columns as $column => $options) {
+            $columnSqls[] .= '  ' . $this->getColumnSql($column, $options);
+        }
+
+        foreach ($this->indexes as $index => $options) {
+            $columnSqls[] .= ' ' . $this->getIndexSql($index, $options);
+        }
+
+        $sql = "\n" . implode(",\n", $columnSqls) . "\n";
+
+        return $sql;
+    }
+
+    /**
+     * @param string $index
+     * @param array $options
+     * @return string
+     */
+    protected function getIndexSql($index, array $options)
+    {
+        $sql = ' ';
+
+        if (isset($options['command'])) {
+            $method = 'get' . ucfirst($options['command']) . 'IndexSql';
+
+            return $this->{$method}($index, $options);
+        }
+
+        if ('index' !== $options['type']) {
+            $sql .= strtoupper($options['type']) . ' ';
+        }
+
+        if ($this->isChange) {
+            $sql .= 'ADD ';
+        }
+
+        $sql .= 'KEY ' . $index . ' (' . implode(', ', $options['columns']) . ')';
+
+        return $sql;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getTableOptionSql()
+    {
+        $sql = '';
+        if ($this->engine) {
+            $sql .= ' ENGINE=' . $this->engine;
+        }
+
+        if ($this->charset) {
+            $sql .= ' CHARSET=' . $this->charset;
+        }
+
+        if ($this->collate) {
+            $sql .= ' COLLATE=' . $this->collate;
+        }
+
+        if ($this->tableComment) {
+            $sql .= " COMMENT='" . $this->tableComment . "'";
+        }
+
+        return $sql;
+    }
+
+    /**
+     * @param string $column
+     * @param array $options
+     * @return string
+     */
+    protected function getColumnSql($column, array $options)
+    {
+        $sql = '';
+
+        if (isset($options['command'])) {
+            $method = 'get' . ucfirst($options['command']) . 'ColumnSql';
+
+            return $this->{$method}($column, $options);
+        }
+
+        if ($this->isChange) {
+            if (isset($options['change'])) {
+                $sql .= $this->getChangeColumnSql($column);
+            } else {
+                $sql .= 'ADD COLUMN ';
+            }
+        }
+
+        return $sql . $this->buildColumnSql($column, $options);
+    }
+
+    /**
+     * @param string $column
+     * @param array $options
+     * @return string
+     */
+    protected function buildColumnSql($column, array $options)
+    {
+        $sql = $column . ' ' . $this->getTypeSql($options) . ' ';
+        $sql .= $this->getUnsignedSql($options);
+
+        // Avoid automatic generate "NOT NULL DEFAULT NULL" error statement, convert it to "NULL DEFAULT NULL"
+        if (!array_key_exists('default', $options)
+            && $this->autoDefault
+            && null === $this->typeDefaults[$options['type']]
+            && !$this->defaultNullable) {
+            $options['nullable'] = true;
+        }
+
+        $sql .= $this->getNullSql(isset($options['nullable']) ? $options['nullable'] : $this->defaultNullable);
+
+        // Auto increment do not have default value
+        if ($this->autoIncrement == $column) {
+            $sql .= ' AUTO_INCREMENT';
+        } else {
+            $defaultSql = $this->getDefaultSql($options);
+            if ($defaultSql) {
+                $sql .= ' ' . $defaultSql;
+            }
+        }
+
+        if (isset($options['comment'])) {
+            $sql .= " COMMENT '" . $options['comment'] . "'";
+        }
+
+        if (isset($options['after'])) {
+            $sql .= ' AFTER ' . $options['after'];
+        }
+
+        return $sql;
+    }
+
+    /**
+     * @param string $column
+     * @return string
+     */
+    protected function getChangeColumnSql($column)
+    {
+        return 'CHANGE COLUMN ' . $column . ' ';
+    }
+
+    /**
+     * @param string $column
+     * @return string
+     */
+    protected function getDropColumnSql($column)
+    {
+        return 'DROP COLUMN ' . $column;
+    }
+
+    /**
+     * @param string $column
+     * @param array $options
+     * @return string
+     * @throws \Exception when column not found in table
+     */
+    protected function getRenameColumnSql($column, $options)
+    {
+        $dbColumns = $this->db->fetchAll("SHOW FULL COLUMNS FROM $this->table");
+        $fromColumn = null;
+        foreach ($dbColumns as $dbColumn) {
+            if ($dbColumn['Field'] == $options['from']) {
+                $fromColumn = $dbColumn;
+                break;
+            }
+        }
+        if (!$fromColumn) {
+            throw new \Exception(sprintf('Column "%s" not found in table "%s"', $options['from'], $this->table));
+        }
+
+        $newOptions = [];
+        $newOptions['type'] = $fromColumn['Type'];
+        $newOptions['nullable'] = 'YES' === $fromColumn['Null'];
+        $newOptions['comment'] = $fromColumn['Comment'];
+
+        $keys = array_keys($this->typeDefaults, false, true);
+        if (!in_array($newOptions['type'], $keys, true)) {
+            $newOptions['default'] = $fromColumn['Default'];
+        }
+
+        $sql = $this->buildColumnSql($options['to'], $newOptions);
+        if ('auto_increment' === $fromColumn['Extra']) {
+            $sql .= ' AUTO_INCREMENT';
+        }
+
+        return $this->getChangeColumnSql($column) . $sql;
+    }
+
+    /**
+     * @param string $index
+     * @return string
+     */
+    protected function getDropIndexSql($index)
+    {
+        return 'DROP INDEX ' . $index;
+    }
+
+    /**
+     * @param array $options
+     * @return string
+     */
+    protected function getTypeSql(array $options)
+    {
+        $driver = $this->db->getDriver();
+        $typeMap = $this->typeMaps[$driver];
+
+        // Allow custom type (eg int(10) unsigned) from rename
+        if (!isset($typeMap[$options['type']])) {
+            return $options['type'];
+        }
+
+        $sql = $typeMap[$options['type']];
+
+        if (isset($options['length'])) {
+            if (isset($options['scale'])) {
+                $sql .= '(' . $options['length'] . ', ' . $options['scale'] . ')';
+            } else {
+                $sql .= '(' . $options['length'] . ')';
+            }
+        }
+
+        return $sql;
+    }
+
+    /**
+     * @param array $options
+     * @return string
+     */
+    protected function getUnsignedSql(array $options)
+    {
+        if (isset($options['unsigned'])) {
+            return $options['unsigned'] ? 'unsigned ' : '';
+        }
+
+        if ($this->autoUnsigned && in_array($options['type'], $this->unsignedTypes, true)) {
+            return 'unsigned ';
+        }
+
+        return '';
+    }
+
+    /**
+     * @param bool $null
+     * @return string
+     */
+    protected function getNullSql($null)
+    {
+        return $null ? 'NULL' : 'NOT NULL';
+    }
+
+    /**
+     * @param array $options
+     * @return string
+     */
+    protected function getDefaultSql(array $options)
+    {
+        $hasDefault = array_key_exists('default', $options);
+        if (!$hasDefault && !$this->autoDefault) {
+            return '';
+        }
+
+        if (!$hasDefault && $this->autoDefault) {
+            $options['default'] = $this->typeDefaults[$options['type']];
+        }
+
+        $default = $options['default'];
+        if (false === $default) {
+            return '';
+        }
+
+        switch (true) {
+            case '' === $default:
+                $value = "''";
+                break;
+
+            case in_array($options['type'], $this->stringTypes, true):
+                $value = var_export($default, true);
+                break;
+
+            case null === $default:
+                $value = 'NULL';
+                break;
+
+            case is_bool($default):
+                $value = (string) $default;
+                break;
+
+            default:
+                $value = $default;
+        }
+
+        return 'DEFAULT ' . $value;
+    }
+
+    /**
+     * @param string|array $columns
+     * @param string $name
+     * @param string $type
+     * @return $this
+     */
+    protected function addIndex($columns, $name, $type)
+    {
+        $columns = (array) $columns;
+        $name || $name = $this->generateIndexName($columns);
+
+        $this->indexes[$name] = [
+            'columns' => $columns,
+            'type' => $type,
+        ];
+
+        return $this;
+    }
+
+    /**
+     * @param array $columns
+     * @return string
+     */
+    protected function generateIndexName(array $columns)
+    {
+        return implode('_', $columns);
     }
 }

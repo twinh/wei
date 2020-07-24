@@ -2,14 +2,19 @@
 
 namespace WeiTest\Validator;
 
-class RegexTest extends TestCase
+/**
+ * @internal
+ */
+final class RegexTest extends TestCase
 {
-    protected $inputTestOptions = array(
-        'pattern' => '(.+?)'
-    );
-    
+    protected $inputTestOptions = [
+        'pattern' => '(.+?)',
+    ];
+
     /**
      * @dataProvider providerForRegex
+     * @param mixed $input
+     * @param mixed $regex
      */
     public function testRegex($input, $regex)
     {
@@ -18,6 +23,8 @@ class RegexTest extends TestCase
 
     /**
      * @dataProvider providerForNotRegex
+     * @param mixed $input
+     * @param mixed $regex
      */
     public function testNotRegex($input, $regex)
     {
@@ -26,16 +33,16 @@ class RegexTest extends TestCase
 
     public function providerForRegex()
     {
-        return array(
-            array('This is Wei Framework.', '/wei/i'),
-        );
+        return [
+            ['This is Wei Framework.', '/wei/i'],
+        ];
     }
 
     public function providerForNotRegex()
     {
-        return array(
-            array('This is Wei Framework.', '/that/i'),
-            array('Abc', '/abc/')
-        );
+        return [
+            ['This is Wei Framework.', '/that/i'],
+            ['Abc', '/abc/'],
+        ];
     }
 }

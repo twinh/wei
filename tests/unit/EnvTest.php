@@ -2,9 +2,12 @@
 
 namespace WeiTest;
 
-class EnvTest extends TestCase
+/**
+ * @internal
+ */
+final class EnvTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->wei->setConfig('env:configFile', __DIR__ . '/Fixtures/env/%env%.php');
 
@@ -28,34 +31,34 @@ class EnvTest extends TestCase
 
     public function testSetName()
     {
-        $env = $this->wei->newInstance('env', array(
-            'ipMap' => array(
-                '127.0.0.1'  => 'dev',
+        $env = $this->wei->newInstance('env', [
+            'ipMap' => [
+                '127.0.0.1' => 'dev',
                 '127.0.0.2' => 'beta',
                 '192.168.25.2' => 'prod',
-                '127.0.0.3' => 'prod-project-name'
-            ),
-            'server' => array(
-                'SERVER_ADDR' => '127.0.0.1'
-            )
-        ));
+                '127.0.0.3' => 'prod-project-name',
+            ],
+            'server' => [
+                'SERVER_ADDR' => '127.0.0.1',
+            ],
+        ]);
 
         $env->detectEnvName();
         $this->assertEquals('dev', $env->getName());
 
-        $env->setOption('server', array('SERVER_ADDR' => '127.0.0.2'));
+        $env->setOption('server', ['SERVER_ADDR' => '127.0.0.2']);
         $env->detectEnvName();
         $this->assertEquals('beta', $env->getName());
 
-        $env->setOption('server', array('SERVER_ADDR' => '192.168.25.2'));
+        $env->setOption('server', ['SERVER_ADDR' => '192.168.25.2']);
         $env->detectEnvName();
         $this->assertEquals('prod', $env->getName());
 
-        $env->setOption('server', array('SERVER_ADDR' => '192.168.25.3'));
+        $env->setOption('server', ['SERVER_ADDR' => '192.168.25.3']);
         $env->detectEnvName();
         $this->assertEquals('prod', $env->getName());
 
-        $env->setOption('server', array('SERVER_ADDR' => '127.0.0.3'));
+        $env->setOption('server', ['SERVER_ADDR' => '127.0.0.3']);
         $env->detectEnvName();
         $this->assertEquals('prod-project-name', $env->getName());
         $this->assertTrue($env->isProd());
@@ -73,53 +76,53 @@ class EnvTest extends TestCase
 
     public function testEnvDetectCallback()
     {
-        $env = new \Wei\Env(array(
+        $env = new \Wei\Env([
             'wei' => $this->wei,
-            'detector' => function(){
+            'detector' => function () {
                 return 'test';
-            }
-        ));
+            },
+        ]);
 
         $this->assertEquals('test', $env->getName());
     }
 
     public function testEnvDetectorReturnsFalse()
     {
-        $env = new \Wei\Env(array(
+        $env = new \Wei\Env([
             'wei' => $this->wei,
-            'detector' => function(){
+            'detector' => function () {
                 return false;
             },
-            'ipMap' => array(
-                '127.0.0.1'  => 'testing',
-            ),
-            'server' => array(
-                'SERVER_ADDR' => '127.0.0.1'
-            )
-        ));
+            'ipMap' => [
+                '127.0.0.1' => 'testing',
+            ],
+            'server' => [
+                'SERVER_ADDR' => '127.0.0.1',
+            ],
+        ]);
 
         $this->assertEquals('testing', $env->getName());
     }
 
     public function testPreloadEnvWeiOverwriteConfigError()
     {
-        $wei = new \Wei\Wei(array(
-            'wei' => array(
+        $wei = new \Wei\Wei([
+            'wei' => [
                 'debug' => true,
-                'preload' => array(
-                    'env'
-                )
-            ),
-            'env' => array(
+                'preload' => [
+                    'env',
+                ],
+            ],
+            'env' => [
                 'configFile' => __DIR__ . '/Fixtures/env/%env%.php',
-                'server' => array(
-                    'SERVER_ADDR' => '1.2.3.4'
-                ),
-                'ipMap' => array(
-                    '1.2.3.4' => 'test'
-                )
-            )
-        ));
+                'server' => [
+                    'SERVER_ADDR' => '1.2.3.4',
+                ],
+                'ipMap' => [
+                    '1.2.3.4' => 'test',
+                ],
+            ],
+        ]);
 
         $this->assertFalse($wei->isDebug());
         $this->assertFalse($wei->getConfig('wei:debug'));

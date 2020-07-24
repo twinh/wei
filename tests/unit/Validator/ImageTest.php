@@ -2,13 +2,16 @@
 
 namespace WeiTest\Validator;
 
-class ImageTest extends TestCase
+/**
+ * @internal
+ */
+final class ImageTest extends TestCase
 {
     public function createImageValidator()
     {
-        return new \Wei\Validator\Image(array(
+        return new \Wei\Validator\Image([
             'wei' => $this->wei,
-        ));
+        ]);
     }
 
     public function testNotFound()
@@ -16,7 +19,7 @@ class ImageTest extends TestCase
         $image = $this->createImageValidator();
 
         $this->assertFalse($image('not found file'));
-        $this->assertEquals(array('notFound'), array_keys($image->getErrors()));
+        $this->assertEquals(['notFound'], array_keys($image->getErrors()));
     }
 
     public function testNotDetected()
@@ -24,34 +27,34 @@ class ImageTest extends TestCase
         $image = $this->createImageValidator();
 
         $this->assertFalse($image(__FILE__));
-        $this->assertEquals(array('notDetected'), array_keys($image->getErrors()));
+        $this->assertEquals(['notDetected'], array_keys($image->getErrors()));
     }
 
     public function testSize()
     {
         $image = $this->createImageValidator();
 
-        $this->assertTrue($image(dirname(__DIR__) . '/Fixtures/5x5.gif', array(
+        $this->assertTrue($image(dirname(__DIR__) . '/Fixtures/5x5.gif', [
             'maxHeight' => 10,
             'minHeight' => 0,
             'maxWidth' => 10,
-            'minWidth' => 0
-        )));
+            'minWidth' => 0,
+        ]));
     }
 
     public function testSizeNotPass()
     {
         $image = $this->createImageValidator();
 
-        $this->assertFalse($image(dirname(__DIR__) . '/Fixtures/5x5.gif', array(
+        $this->assertFalse($image(dirname(__DIR__) . '/Fixtures/5x5.gif', [
             'maxHeight' => 4,
             'minHeight' => 6,
             'maxWidth' => 4,
-            'minWidth' => 6
-        )));
+            'minWidth' => 6,
+        ]));
 
         $this->assertEquals(
-            array('widthTooBig', 'widthTooSmall', 'heightTooBig', 'heightTooSmall'),
+            ['widthTooBig', 'widthTooSmall', 'heightTooBig', 'heightTooSmall'],
             array_keys($image->getErrors())
         );
     }
@@ -60,11 +63,11 @@ class ImageTest extends TestCase
     {
         $image = $this->createImageValidator();
 
-        $this->assertTrue($image(dirname(__DIR__) . '/Fixtures/5 x 5.gif', array(
+        $this->assertTrue($image(dirname(__DIR__) . '/Fixtures/5 x 5.gif', [
             'maxHeight' => 10,
             'minHeight' => 0,
             'maxWidth' => 10,
-            'minWidth' => 0
-        )));
+            'minWidth' => 0,
+        ]));
     }
 }

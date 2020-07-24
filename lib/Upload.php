@@ -114,11 +114,11 @@ class Upload extends Image
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
-        parent::__construct($options + array(
+        parent::__construct($options + [
                 'dir' => $this->dir,
-            ));
+            ]);
     }
 
     /**
@@ -128,13 +128,13 @@ class Upload extends Image
      * @param array $options The options of wei
      * @return bool
      */
-    public function __invoke($field = null, $options = array())
+    public function __invoke($field = null, $options = [])
     {
         // ($field, $options)
         if (is_string($field)) {
             $this->storeOption('field', $field);
             $options && $this->storeOption($options);
-            // ($options)
+        // ($options)
         } elseif (is_array($field)) {
             $field && $this->storeOption($field);
         }
@@ -168,44 +168,44 @@ class Upload extends Image
         /**
          * @link http://php.net/manual/en/features.file-upload.errors.php
          */
-        if ($uploadedFile['error'] !== UPLOAD_ERR_OK) {
+        if (UPLOAD_ERR_OK !== $uploadedFile['error']) {
             switch ($uploadedFile['error']) {
                 // The uploaded file exceeds the upload_max_filesize directive in php.ini
-                case UPLOAD_ERR_INI_SIZE :
+                case UPLOAD_ERR_INI_SIZE:
                     $this->sizeString = $this->fromBytes($uploadedFile['size']);
                     $this->maxSizeString = $this->getIniSize('upload_max_filesize');
                     $this->addError('maxSize');
                     break;
 
                 // The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form
-                case UPLOAD_ERR_FORM_SIZE :
+                case UPLOAD_ERR_FORM_SIZE:
                     $this->addError('formLimit');
                     break;
 
                 // The uploaded file was only partially uploaded
                 // http://stackoverflow.com/questions/2937466/why-might-a-file-only-be-partially-uploaded
-                case UPLOAD_ERR_PARTIAL :
+                case UPLOAD_ERR_PARTIAL:
                     $this->addError('partial');
                     break;
 
                 // Missing a temporary folder
-                case UPLOAD_ERR_NO_TMP_DIR :
+                case UPLOAD_ERR_NO_TMP_DIR:
                     $this->addError('noTmpDir');
                     break;
 
                 // Failed to write file to disk
-                case UPLOAD_ERR_CANT_WRITE :
+                case UPLOAD_ERR_CANT_WRITE:
                     $this->addError('cantWrite');
                     break;
 
                 // A PHP extension stopped the file upload
-                case UPLOAD_ERR_EXTENSION :
+                case UPLOAD_ERR_EXTENSION:
                     $this->addError('extension');
                     break;
 
                 // No file was uploaded
-                case UPLOAD_ERR_NO_FILE :
-                default :
+                case UPLOAD_ERR_NO_FILE:
+                default:
                     $this->addError('noFile');
             }
             return false;
@@ -227,40 +227,6 @@ class Upload extends Image
         }
 
         return $this->saveFile($uploadedFile);
-    }
-
-    /**
-     * Save uploaded file to upload directory
-     *
-     * @param array $uploadedFile
-     * @return boolean
-     */
-    protected function saveFile($uploadedFile)
-    {
-        $ext = $this->getExt();
-        $fullExt = $ext ? '.' . $ext : '';
-
-        if ($this->fileName) {
-            $fileName = $this->fileName;
-        } else {
-            $fileName = substr($uploadedFile['name'], 0, strlen($uploadedFile['name']) - strlen($fullExt));
-        }
-
-        $this->file = $this->dir . '/' . $fileName . $fullExt;
-        if (!$this->overwrite) {
-            $i = 1;
-            while (is_file($this->file)) {
-                $this->file = $this->dir . '/' . $fileName . '-' . $i . $fullExt;
-                $i++;
-            }
-        }
-
-        if (!$this->moveUploadedFile($uploadedFile['tmp_name'], $this->file)) {
-            $this->addError('cantMove');
-            return false;
-        }
-
-        return true;
     }
 
     /**
@@ -317,6 +283,40 @@ class Upload extends Image
     }
 
     /**
+     * Save uploaded file to upload directory
+     *
+     * @param array $uploadedFile
+     * @return bool
+     */
+    protected function saveFile($uploadedFile)
+    {
+        $ext = $this->getExt();
+        $fullExt = $ext ? '.' . $ext : '';
+
+        if ($this->fileName) {
+            $fileName = $this->fileName;
+        } else {
+            $fileName = substr($uploadedFile['name'], 0, strlen($uploadedFile['name']) - strlen($fullExt));
+        }
+
+        $this->file = $this->dir . '/' . $fileName . $fullExt;
+        if (!$this->overwrite) {
+            $i = 1;
+            while (is_file($this->file)) {
+                $this->file = $this->dir . '/' . $fileName . '-' . $i . $fullExt;
+                ++$i;
+            }
+        }
+
+        if (!$this->moveUploadedFile($uploadedFile['tmp_name'], $this->file)) {
+            $this->addError('cantMove');
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Returns a human readable file size (e.g. 1.2MB, 10KB), which recive from
      * the ini configuration
      *
@@ -346,7 +346,7 @@ class Upload extends Image
      * it will use `copy` function instead
      *
      * @param string $from The uploaded file name
-     * @param string $to The destination of the moved file.
+     * @param string $to the destination of the moved file
      * @return bool
      */
     protected function moveUploadedFile($from, $to)

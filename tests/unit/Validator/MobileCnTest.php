@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class MobileCnTest extends TestCase
+/**
+ * @internal
+ */
+final class MobileCnTest extends TestCase
 {
     /**
      * @dataProvider providerForMobileCn
+     * @param mixed $input
      */
     public function testMobileCn($input)
     {
@@ -14,6 +18,7 @@ class MobileCnTest extends TestCase
 
     /**
      * @dataProvider providerForNotMobileCn
+     * @param mixed $input
      */
     public function testNotMobileCn($input)
     {
@@ -22,29 +27,29 @@ class MobileCnTest extends TestCase
 
     public function providerForMobileCn()
     {
-        return array(
-            array('13112345678'),
-            array('13612345678'),
-            array('13800138000'),
-            array('15012345678'),
-            array('15812345678'),
-            array('18812345678'),
-            array('14012345678'),
-            array('17012345678'),
-            array('16000000000'),
-            array('19000000000'),
-        );
+        return [
+            ['13112345678'],
+            ['13612345678'],
+            ['13800138000'],
+            ['15012345678'],
+            ['15812345678'],
+            ['18812345678'],
+            ['14012345678'],
+            ['17012345678'],
+            ['16000000000'],
+            ['19000000000'],
+        ];
     }
 
     public function providerForNotMobileCn()
     {
-        return array(
-            array('10000000000'),
-            array('11000000000'),
-            array('12000000000'),
-            array('88888888'),
-            array('not digit'),
-            array('0754-8888888'),
-        );
+        return [
+            ['10000000000'],
+            ['11000000000'],
+            ['12000000000'],
+            ['88888888'],
+            ['not digit'],
+            ['0754-8888888'],
+        ];
     }
 }

@@ -2,10 +2,15 @@
 
 namespace WeiTest\Validator;
 
-class TldTest extends TestCase
+/**
+ * @internal
+ */
+final class TldTest extends TestCase
 {
     /**
      * @dataProvider providerForTld
+     * @param mixed $input
+     * @param mixed|null $format
      */
     public function testTld($input, $format = null)
     {
@@ -14,6 +19,8 @@ class TldTest extends TestCase
 
     /**
      * @dataProvider providerForNotTld
+     * @param mixed $input
+     * @param mixed|null $format
      */
     public function testNotTld($input, $format = null)
     {
@@ -22,22 +29,22 @@ class TldTest extends TestCase
 
     public function providerForTld()
     {
-        return array(
-            array('com'),
-            array('COM'),
-            array('cn'),
-            array('us'),
-            array('xn--fiqs8S'), // 中国
-        );
+        return [
+            ['com'],
+            ['COM'],
+            ['cn'],
+            ['us'],
+            ['xn--fiqs8S'], // 中国
+        ];
     }
 
     public function providerForNotTld()
     {
-        return array(
-            array('abc'),
-            array('xn'),
-            array('xn--'),
-            array('xn--abc')
-        );
+        return [
+            ['abc'],
+            ['xn'],
+            ['xn--'],
+            ['xn--abc'],
+        ];
     }
 }

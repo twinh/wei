@@ -51,7 +51,7 @@ class DateTime extends BaseValidator
      * @link http://www.php.net/manual/en/datetime.createfromformat.php
      * @var string
      */
-    protected $format = null;
+    protected $format;
 
     /**
      * @var string

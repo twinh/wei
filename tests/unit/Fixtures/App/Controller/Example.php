@@ -11,9 +11,9 @@ class Example extends \Wei\BaseController
 
     public function returnArrayAction()
     {
-        return array(
-            'key' => 'value'
-        );
+        return [
+            'key' => 'value',
+        ];
     }
 
     public function returnResponseAction()
@@ -56,7 +56,7 @@ class Example extends \Wei\BaseController
 
     public function forwardParamsAction()
     {
-        return $this->app->forward('forward', 'params', array('param' => __FUNCTION__));
+        return $this->app->forward('forward', 'params', ['param' => __FUNCTION__]);
     }
 
     public function targetAction()

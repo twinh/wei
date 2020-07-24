@@ -1,4 +1,5 @@
 <?php
-return array(
-    'twin' => true
-);
+
+return [
+    'twin' => true,
+];

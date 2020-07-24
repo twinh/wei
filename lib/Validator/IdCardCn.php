@@ -20,6 +20,26 @@ class IdCardCn extends BaseValidator
     protected $negativeMessage = '%name% must not be valid Chinese identity card';
 
     /**
+     * Calculate the final digit of id card
+     *
+     * @param string $input The 17 or 18-digit code
+     * @return string
+     */
+    public function calcChecksum($input)
+    {
+        $wi = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+        $sum = 0;
+
+        for ($i = 16; $i >= 0; --$i) {
+            $sum += $input[$i] * $wi[$i];
+        }
+
+        $checksum = (12 - $sum % 11) % 11;
+
+        return 10 == $checksum ? 'X' : (string) $checksum;
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function doValidate($input)
@@ -30,13 +50,13 @@ class IdCardCn extends BaseValidator
         }
 
         $len = strlen($input);
-        if ($len != 15 && $len != 18) {
+        if (15 != $len && 18 != $len) {
             $this->addError('invalid');
             return false;
         }
 
         // Upgrade to 18-digit
-        if ($len == 15) {
+        if (15 == $len) {
             $input = substr($input, 0, 6) . '19' . substr($input, 6);
         }
 
@@ -47,9 +67,9 @@ class IdCardCn extends BaseValidator
         }
 
         // Verify date of birth
-        $month  = substr($input, 10, 2);
-        $day    = substr($input, 12, 2);
-        $year   = substr($input, 6, 4);
+        $month = substr($input, 10, 2);
+        $day = substr($input, 12, 2);
+        $year = substr($input, 6, 4);
         if (!checkdate($month, $day, $year)) {
             $this->addError('invalid');
             return false;
@@ -65,25 +85,5 @@ class IdCardCn extends BaseValidator
         }
 
         return true;
-    }
-
-    /**
-      * Calculate the final digit of id card
-      *
-      * @param string $input The 17 or 18-digit code
-      * @return string
-      */
-    public function calcChecksum($input)
-    {
-        $wi = array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
-        $sum = 0;
-
-        for ($i = 16; $i >= 0; $i--) {
-            $sum += $input[$i] * $wi[$i];
-        }
-
-        $checksum = (12 - $sum % 11) % 11;
-
-        return $checksum == 10 ? 'X' : (string)$checksum;
     }
 }

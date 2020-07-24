@@ -2,9 +2,12 @@
 
 namespace WeiTest\Validator;
 
-class CallbackTest extends TestCase
+/**
+ * @internal
+ */
+final class CallbackTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

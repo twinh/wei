@@ -5,11 +5,14 @@ namespace WeiTest\Validator;
 /**
  * @todo more space test
  * @link http://en.wikipedia.org/wiki/Space_(punctuation)
+ *
+ * @internal
  */
-class BlankTest extends TestCase
+final class BlankTest extends TestCase
 {
     /**
      * @dataProvider providerForBlank
+     * @param mixed $input
      */
     public function testBlank($input)
     {
@@ -18,6 +21,7 @@ class BlankTest extends TestCase
 
     /**
      * @dataProvider providerForNotBlank
+     * @param mixed $input
      */
     public function testNotBlank($input)
     {
@@ -26,21 +30,21 @@ class BlankTest extends TestCase
 
     public function providerForBlank()
     {
-        return array(
-            array('   '),
-            array(" \r\n"),
-        );
+        return [
+            ['   '],
+            [" \r\n"],
+        ];
     }
 
     public function providerForNotBlank()
     {
-        return array(
-            array('0'),
-            array(0),
-            array(0.0),
-            array(' abc '),
-            array('a b'),
-            array('　'), // ﻿Unicode full width space
-        );
+        return [
+            ['0'],
+            [0],
+            [0.0],
+            [' abc '],
+            ['a b'],
+            ['　'], // ﻿Unicode full width space
+        ];
     }
 }

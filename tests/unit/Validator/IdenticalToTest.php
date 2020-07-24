@@ -2,12 +2,15 @@
 
 namespace WeiTest\Validator;
 
-use MyProject\Proxies\__CG__\stdClass;
-
-class IdenticalToTest extends TestCase
+/**
+ * @internal
+ */
+final class IdenticalToTest extends TestCase
 {
     /**
      * @dataProvider providerForIdenticalTo
+     * @param mixed $input
+     * @param mixed $equals
      */
     public function testEquals($input, $equals)
     {
@@ -16,6 +19,8 @@ class IdenticalToTest extends TestCase
 
     /**
      * @dataProvider providerForNotIdenticalTo
+     * @param mixed $input
+     * @param mixed $equals
      */
     public function testNotEquals($input, $equals)
     {
@@ -25,32 +30,32 @@ class IdenticalToTest extends TestCase
     public function providerForIdenticalTo()
     {
         $a = $b = new \stdClass();
-        return array(
-            array('abc', 'abc'),
-            array($a, $b),
-            array(1+1, 2),
-            array(array(), array()),
-            array(0, 0),
-            array(false, false)
-        );
+        return [
+            ['abc', 'abc'],
+            [$a, $b],
+            [1 + 1, 2],
+            [[], []],
+            [0, 0],
+            [false, false],
+        ];
     }
 
     public function providerForNotIdenticalTo()
     {
         $a = new \stdClass();
         $b = new \stdClass();
-        return array(
-            array('abc', 'bbc'),
-            array($a, $b),
-            array(0, false),
-            array(0, null),
-            array(0, ''),
-            array(0, 0.0),
-            array(false, null),
-            array(false, ''),
-            array(false, 0.0),
-            array(null, ''),
-            array(null, 0.0),
-        );
+        return [
+            ['abc', 'bbc'],
+            [$a, $b],
+            [0, false],
+            [0, null],
+            [0, ''],
+            [0, 0.0],
+            [false, null],
+            [false, ''],
+            [false, 0.0],
+            [null, ''],
+            [null, 0.0],
+        ];
     }
 }

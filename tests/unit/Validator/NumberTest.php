@@ -2,10 +2,14 @@
 
 namespace WeiTest\Validator;
 
-class NumberTest extends TestCase
+/**
+ * @internal
+ */
+final class NumberTest extends TestCase
 {
     /**
      * @dataProvider providerForNumber
+     * @param mixed $input
      */
     public function testNumber($input)
     {
@@ -14,6 +18,7 @@ class NumberTest extends TestCase
 
     /**
      * @dataProvider providerForNotNumber
+     * @param mixed $input
      */
     public function testNotNumber($input)
     {
@@ -22,23 +27,23 @@ class NumberTest extends TestCase
 
     public function providerForNumber()
     {
-        return array(
-            array('0'),
-            array(0),
-            array(0.0),
-            array('1234567'),
-            array('123456789'),
-            array('1.1'),
-            array(2.0)
-        );
+        return [
+            ['0'],
+            [0],
+            [0.0],
+            ['1234567'],
+            ['123456789'],
+            ['1.1'],
+            [2.0],
+        ];
     }
 
     public function providerForNotNumber()
     {
-        return array(
-            array('012345-1234567890'),
-            array('not number'),
-            array('0.1a'),
-        );
+        return [
+            ['012345-1234567890'],
+            ['not number'],
+            ['0.1a'],
+        ];
     }
 }
