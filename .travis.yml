@@ -14,7 +14,7 @@ services:
   - redis-server
 
 before_script:
-  - composer install --no-interaction
+  - composer install --no-interaction --no-suggest --prefer-dist --optimize-autoloader
   - phpenv config-add tests/config/php.ini
   - mysql -e 'CREATE DATABASE IF NOT EXISTS wei_tests;'
   - psql -c 'CREATE DATABASE wei_tests;' -U postgres
