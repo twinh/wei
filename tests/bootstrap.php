@@ -81,7 +81,7 @@ wei(array(
 // Load configuration for CI
 foreach (array('TRAVIS', 'CODESHIP', 'GITHUB_ACTIONS') as $ci) {
     if (getenv($ci)) {
-        wei(__DIR__ . '/config/' . strtolower($ci) . '.php');
+        wei(__DIR__ . '/config/' . strtolower(strtr($ci, '_', '-')) . '.php');
     }
 }
 
