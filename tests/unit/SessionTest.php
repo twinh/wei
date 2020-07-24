@@ -123,6 +123,9 @@ final class SessionTest extends TestCase
         $this->assertEquals('h', $session['d']['e']['f']['g']);
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     public function testNamespace()
     {
         $this->session->setOption('namespace', 'test');

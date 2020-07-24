@@ -52,14 +52,14 @@ final class AlnumTest extends TestCase
      */
     public function testLocale($locale, $message)
     {
-        $t = new \Wei\T([
+        $tran = new \Wei\T([
             'wei' => $this->wei,
             'locale' => $locale,
         ]);
 
         $validator = new \Wei\Validator\Alnum([
             'wei' => $this->wei,
-            't' => $t,
+            't' => $tran,
         ]);
 
         $validator('1.2');

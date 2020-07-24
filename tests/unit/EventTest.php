@@ -68,26 +68,26 @@ final class EventTest extends TestCase
     {
         $fn = function () {
         };
-        $em = $this->object;
+        $event = $this->object;
 
         $this->object->off('test')
             ->off('test.before')
             ->on('test', $fn)
             ->on('test.before', $fn);
 
-        $this->assertTrue($em->has('test'));
+        $this->assertTrue($event->has('test'));
 
-        $this->assertTrue($em->has('test.before'));
+        $this->assertTrue($event->has('test.before'));
 
-        $this->assertFalse($em->has('test2'));
+        $this->assertFalse($event->has('test2'));
 
-        $this->assertFalse($em->has('test2.ns3'));
+        $this->assertFalse($event->has('test2.ns3'));
     }
 
     public function testRemoveHandler()
     {
         $that = $this;
-        $em = $this->object;
+        $event = $this->object;
 
         $init = function () use ($that) {
             $fn = function () {
@@ -100,19 +100,19 @@ final class EventTest extends TestCase
         };
 
         $init();
-        $this->assertTrue($em->has('test'));
+        $this->assertTrue($event->has('test'));
         $this->object->off('test');
-        $this->assertFalse($em->has('test'));
+        $this->assertFalse($event->has('test'));
 
         $init();
-        $this->assertTrue($em->has('test.before'));
+        $this->assertTrue($event->has('test.before'));
         $this->object->off('test.before');
-        $this->assertFalse($em->has('test.before'));
+        $this->assertFalse($event->has('test.before'));
 
         $init();
-        $this->assertTrue($em->has('test.before.ns2'));
+        $this->assertTrue($event->has('test.before.ns2'));
         $this->object->off('test.before.ns2');
-        $this->assertFalse($em->has('test.before.ns2'));
+        $this->assertFalse($event->has('test.before.ns2'));
     }
 
     public function testArrayAsOnParameters()

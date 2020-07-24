@@ -254,6 +254,9 @@ final class WeChatAppTest extends TestCase
         }
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     */
     public function providerForInputAndOutput()
     {
         return [

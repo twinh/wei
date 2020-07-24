@@ -7,6 +7,9 @@ namespace WeiTest;
  */
 final class PhpErrorTest extends TestCase
 {
+    /**
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     protected function setUp(): void
     {
         if (!class_exists(('\php_error\ErrorHandler'))) {

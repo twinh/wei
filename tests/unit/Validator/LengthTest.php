@@ -7,13 +7,13 @@ namespace WeiTest\Validator;
  */
 final class LengthTest extends TestCase
 {
-    protected $ao;
+    protected $arrayObject;
 
     public function __construct($name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
 
-        $this->ao = new \ArrayObject([
+        $this->arrayObject = new \ArrayObject([
             1, 2,
         ]);
     }
@@ -65,7 +65,7 @@ final class LengthTest extends TestCase
         return [
             ['length7', 7],
             [[1, 2], 2],
-            [$this->ao, 2],
+            [$this->arrayObject, 2],
         ];
     }
 
@@ -74,7 +74,7 @@ final class LengthTest extends TestCase
         return [
             ['length7', 8],
             [[1, 2], 3],
-            [$this->ao, 3],
+            [$this->arrayObject, 3],
         ];
     }
 
@@ -84,7 +84,7 @@ final class LengthTest extends TestCase
             ['length7', 7, 10],
             ['length7', 0, 10],
             [[1, 2], 1, 2],
-            [$this->ao, 1, 10],
+            [$this->arrayObject, 1, 10],
         ];
     }
 
@@ -94,7 +94,7 @@ final class LengthTest extends TestCase
             ['length7', 0, 0],
             ['length7', -2, -1],
             [[1, 2], 10, 0],
-            [$this->ao, 0, 1],
+            [$this->arrayObject, 0, 1],
         ];
     }
 }

@@ -4,10 +4,10 @@ namespace WeiTest\Fixtures;
 
 class Instance
 {
-    public $arg1;
-    public $arg2;
-    public $arg3;
-    public $arg4;
+    protected $arg1;
+    protected $arg2;
+    protected $arg3;
+    protected $arg4;
 
     public function __construct($arg1 = null, $arg2 = null, $arg3 = null, $arg4 = null)
     {

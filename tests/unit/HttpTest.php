@@ -12,7 +12,8 @@ use Wei\Http;
  */
 final class HttpTest extends TestCase
 {
-    public $triggeredEvents;
+    protected $triggeredEvents = [];
+
     /**
      * The basic URL for http wei
      *

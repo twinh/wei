@@ -16,6 +16,9 @@ final class RequestTest extends TestCase
      */
     protected $object;
 
+    /**
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     public function testInvoke()
     {
         $wei = $this->object;
@@ -142,9 +145,10 @@ final class RequestTest extends TestCase
     }
 
     /**
-     * @link https://github.com/zendframework/zf2/blob/master/tests/ZendTest/Http/PhpEnvironment/RequestTest.php
-     *
      * Data provider for testing base URL and path detection.
+     *
+     * @link https://github.com/zendframework/zf2/blob/master/tests/ZendTest/Http/PhpEnvironment/RequestTest.php
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function baseUrlAndPathProvider()
     {

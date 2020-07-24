@@ -536,6 +536,9 @@ final class RouterTest extends TestCase
         $this->assertEquals(wei()->router->matchParamSet($path, $method), $routes);
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     */
     public function dataForMatchParamSet()
     {
         return [

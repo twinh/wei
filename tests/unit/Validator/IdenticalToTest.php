@@ -29,10 +29,10 @@ final class IdenticalToTest extends TestCase
 
     public function providerForIdenticalTo()
     {
-        $a = $b = new \stdClass();
+        $input = $equals = new \stdClass();
         return [
             ['abc', 'abc'],
-            [$a, $b],
+            [$input, $equals],
             [1 + 1, 2],
             [[], []],
             [0, 0],
@@ -42,11 +42,11 @@ final class IdenticalToTest extends TestCase
 
     public function providerForNotIdenticalTo()
     {
-        $a = new \stdClass();
-        $b = new \stdClass();
+        $input = new \stdClass();
+        $equals = new \stdClass();
         return [
             ['abc', 'bbc'],
-            [$a, $b],
+            [$input, $equals],
             [0, false],
             [0, null],
             [0, ''],

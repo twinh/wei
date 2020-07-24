@@ -438,7 +438,8 @@ abstract class DbTest extends TestCase
         ]);
         $member = $query->find();
 
-        $this->assertEquals('SELECT * FROM prefix_member WHERE group_id = :groupId AND name = :name LIMIT 1', $query->getSql());
+        $this->assertEquals('SELECT * FROM prefix_member WHERE group_id = :groupId AND name = :name LIMIT 1',
+            $query->getSql());
         $this->assertEquals('1', $member['group_id']);
         $this->assertEquals('twin', $member['name']);
 
@@ -448,7 +449,8 @@ abstract class DbTest extends TestCase
         ]);
         $member = $query->find();
 
-        $this->assertEquals('SELECT * FROM prefix_member WHERE group_id = :groupId AND name = :name LIMIT 1', $query->getSql());
+        $this->assertEquals('SELECT * FROM prefix_member WHERE group_id = :groupId AND name = :name LIMIT 1',
+            $query->getSql());
         $this->assertEquals('1', $member['group_id']);
         $this->assertEquals('twin', $member['name']);
 
@@ -473,7 +475,8 @@ abstract class DbTest extends TestCase
         ]);
         $member = $query->find();
 
-        $this->assertEquals('SELECT * FROM prefix_member WHERE id = ? AND group_id IN (?, ?) LIMIT 1', $query->getSql());
+        $this->assertEquals('SELECT * FROM prefix_member WHERE id = ? AND group_id IN (?, ?) LIMIT 1',
+            $query->getSql());
         $this->assertEquals('1', $member['id']);
 
         // Overwrite where
@@ -563,7 +566,8 @@ abstract class DbTest extends TestCase
         $query = $this->db('member')->groupBy('id, group_id')->having('group_id >= ?', '1');
         $member = $query->find();
 
-        $this->assertEquals('SELECT * FROM prefix_member GROUP BY id, group_id HAVING group_id >= ? LIMIT 1', $query->getSql());
+        $this->assertEquals('SELECT * FROM prefix_member GROUP BY id, group_id HAVING group_id >= ? LIMIT 1',
+            $query->getSql());
         $this->assertEquals('1', $member['group_id']);
 
         // Join
@@ -573,7 +577,8 @@ abstract class DbTest extends TestCase
             ->leftJoin('prefix_member_group', 'prefix_member_group.id = prefix_member.group_id');
         $member = $query->fetch();
 
-        $this->assertEquals('SELECT prefix_member.*, prefix_member_group.name AS group_name FROM prefix_member LEFT JOIN prefix_member_group ON prefix_member_group.id = prefix_member.group_id LIMIT 1', $query->getSql());
+        $this->assertEquals('SELECT prefix_member.*, prefix_member_group.name AS group_name FROM prefix_member LEFT JOIN prefix_member_group ON prefix_member_group.id = prefix_member.group_id LIMIT 1',
+            $query->getSql());
         $this->assertArrayHasKey('group_name', $member);
 
         // Join with table alias
@@ -581,7 +586,8 @@ abstract class DbTest extends TestCase
             ->db('member u')
             ->rightJoin('prefix_member_group g', 'g.id = u.group_id');
 
-        $this->assertEquals('SELECT * FROM prefix_member u RIGHT JOIN prefix_member_group g ON g.id = u.group_id', $query->getSql());
+        $this->assertEquals('SELECT * FROM prefix_member u RIGHT JOIN prefix_member_group g ON g.id = u.group_id',
+            $query->getSql());
     }
 
     public function testIndexBy()
@@ -865,7 +871,8 @@ abstract class DbTest extends TestCase
 
         $member = $this->db('member')->find('1');
 
-        $this->setExpectedException('\InvalidArgumentException', 'Field "notFound" not found in record class "Wei\Record"');
+        $this->setExpectedException('\InvalidArgumentException',
+            'Field "notFound" not found in record class "Wei\Record"');
 
         $member['notFound'];
     }
@@ -994,7 +1001,8 @@ abstract class DbTest extends TestCase
 
     public function testExceptionWithParams()
     {
-        $this->setExpectedException('PDOException', 'An exception occurred while executing "SELECT * FROM noThis table WHERE id = ?"');
+        $this->setExpectedException('PDOException',
+            'An exception occurred while executing "SELECT * FROM noThis table WHERE id = ?"');
 
         $this->db->query('SELECT * FROM noThis table WHERE id = ?', [1]);
     }
@@ -1221,18 +1229,18 @@ abstract class DbTest extends TestCase
 
     public function testGlobalOption()
     {
-        $cb = function () {
+        $fn = function () {
         };
         $this->wei->setConfig([
             // sqlite
             'db' => [
-                'beforeConnect' => $cb,
+                'beforeConnect' => $fn,
             ],
             'mysql.db' => [
-                'beforeConnect' => $cb,
+                'beforeConnect' => $fn,
             ],
             'pgsql.db' => [
-                'beforeConnect' => $cb,
+                'beforeConnect' => $fn,
             ],
             'cb.db' => [
                 'db' => $this->db,
@@ -1240,8 +1248,8 @@ abstract class DbTest extends TestCase
             ],
         ]);
 
-        $this->assertSame($cb, $this->db->getOption('beforeConnect'));
-        $this->assertSame($cb, $this->cbDb->getOption('beforeConnect'));
+        $this->assertSame($fn, $this->db->getOption('beforeConnect'));
+        $this->assertSame($fn, $this->cbDb->getOption('beforeConnect'));
 
         // Remove all relation configuration
         $this->cbDb = null;
@@ -1936,7 +1944,8 @@ abstract class DbTest extends TestCase
         // Make sure $members is a collection
         $members[] = $member;
 
-        $this->setExpectedException('InvalidArgumentException', 'Value for collection must be an instance of Wei\Record');
+        $this->setExpectedException('InvalidArgumentException',
+            'Value for collection must be an instance of Wei\Record');
 
         // Assign non record value to raise an exception
         $members[] = 234;
