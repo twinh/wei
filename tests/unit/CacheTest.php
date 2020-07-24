@@ -28,8 +28,8 @@ class CacheTest extends CacheTestCase
 
     public function testCacheDriver()
     {
-        $this->cache->setDriver('redis');
+        $this->cache->setDriver('phpFileCache');
 
-        $this->assertEquals('redis', $this->cache->getDriver('redis'));
+        $this->assertEquals('phpFileCache', $this->cache->getDriver());
     }
 }
