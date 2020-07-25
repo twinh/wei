@@ -486,7 +486,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         }
         /** @var $record Record */
         foreach ($this->data as $key => $record) {
-            if (!in_array($record[$this->primaryKey], $existIds, true)) {
+            if (!in_array($record[$this->primaryKey], $existIds, false)) {
                 $record->destroy();
                 unset($this->data[$key]);
             }
@@ -518,7 +518,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     public function get($name)
     {
         // Check if field exists when it is not a collection
-        if (!$this->isColl && !in_array($name, $this->getFields(), true)) {
+        if (!$this->isColl && !in_array($name, $this->getFields(), false)) {
             throw new \InvalidArgumentException(sprintf(
                 'Field "%s" not found in record class "%s"',
                 $name,
@@ -546,7 +546,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         }
 
         if (!$this->isColl) {
-            if (in_array($name, $this->getFields(), true)) {
+            if (in_array($name, $this->getFields(), false)) {
                 $this->changedData[$name] = isset($this->data[$name]) ? $this->data[$name] : null;
                 $this->data[$name] = $value;
                 $this->isChanged = true;

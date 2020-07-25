@@ -8,7 +8,7 @@ use PDO;
  * @property \Wei\Db db
  * @method \Wei\Record db($table = null)
  */
-abstract class DbTest extends TestCase
+class DbTest extends TestCase
 {
     public function initFixtures()
     {
@@ -1155,8 +1155,8 @@ abstract class DbTest extends TestCase
 
         $query->resetSqlParts();
 
-        $this->assertNull($query->getSqlPart('offset'));
-        $this->assertNull($query->getSqlPart('limit'));
+        $this->assertFalse($query->getSqlPart('offset'));
+        $this->assertFalse($query->getSqlPart('limit'));
     }
 
     public function testGetTableFromQueryBuilder()
