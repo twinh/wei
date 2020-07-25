@@ -91,6 +91,7 @@ class View extends Base implements \ArrayAccess
      * @param array $data The variables pass to template
      * @return string|null
      * @throws \Exception View file not found
+     * @SuppressWarnings(PHPMD.CamelCaseVariableName)
      */
     public function render($name, $data = [])
     {

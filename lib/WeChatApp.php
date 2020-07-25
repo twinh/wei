@@ -1126,12 +1126,11 @@ class WeChatApp extends Base
     /**
      * Generate the signature
      *
-     * @param string $_
+     * @param array $arr
      * @return string
      */
-    protected function sign($_ = null)
+    protected function sign(...$arr)
     {
-        $arr = func_get_args();
         sort($arr, SORT_STRING);
         $str = implode('', $arr);
         return sha1($str);

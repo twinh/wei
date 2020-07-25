@@ -24,7 +24,7 @@ class MinLength extends Length
     /**
      * {@inheritdoc}
      */
-    public function __invoke($input, $min = null, $__ = null)
+    public function __invoke($input, $min = null, $ignore = null)
     {
         $min && $this->storeOption('min', $min);
 

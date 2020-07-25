@@ -21,9 +21,9 @@ class NoneOf extends SomeOf
 
     /**
      * {@inheritdoc}
-     * @param void $__ Avoid compatible error
+     * @param void $ignore Avoid compatible error
      */
-    public function __invoke($input, array $rules = [], $__ = null)
+    public function __invoke($input, array $rules = [], $ignore = null)
     {
         $rules && $this->storeOption('rules', $rules);
 

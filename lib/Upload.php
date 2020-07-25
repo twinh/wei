@@ -127,6 +127,8 @@ class Upload extends Image
      * @param string|array $field The name of file input or options of wei
      * @param array $options The options of wei
      * @return bool
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @todo split to small methods
      */
     public function __invoke($field = null, $options = [])
     {

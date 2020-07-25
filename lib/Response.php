@@ -674,13 +674,13 @@ class Response extends Base
      */
     public function download($file = null, array $downloadOptions = [])
     {
-        $o = $downloadOptions + $this->downloadOption;
+        $options = $downloadOptions + $this->downloadOption;
 
         if (!is_file($file)) {
             throw new \RuntimeException('File not found', 404);
         }
 
-        $name = $o['filename'] ?: basename($file);
+        $name = $options['filename'] ?: basename($file);
         $name = rawurlencode($name);
 
         // For IE
@@ -693,8 +693,8 @@ class Response extends Base
 
         $this->setHeader([
             'Content-Description' => 'File Transfer',
-            'Content-Type' => $o['type'],
-            'Content-Disposition' => $o['disposition'] . ';filename' . $filename,
+            'Content-Type' => $options['type'],
+            'Content-Disposition' => $options['disposition'] . ';filename' . $filename,
             'Content-Transfer-Encoding' => 'binary',
             'Expires' => '0',
             'Cache-Control' => 'must-revalidate',

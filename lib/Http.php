@@ -12,6 +12,7 @@ namespace Wei;
  * An HTTP client that inspired by jQuery Ajax
  *
  * @author      Twin Huang <twinhuang@qq.com>
+ * @SuppressWarnings(PHPMD.ShortVariable)
  */
 class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 {
@@ -740,6 +741,8 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * Prepare cURL options
      *
      * @return array
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @todo split to small methods
      */
     protected function prepareCurlOptions()
     {

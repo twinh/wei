@@ -165,6 +165,8 @@ class Validate extends Base
      * @param array $options The options for validation
      * @return bool Whether pass the validation or not
      * @throws \InvalidArgumentException  When validation rule is not array, string or instance of BaseValidator
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @todo split to small methods
      */
     public function valid($options = [])
     {

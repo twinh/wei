@@ -60,14 +60,14 @@ class Password extends Base
     public function generateSalt()
     {
         // The length of salt to generate
-        $raw_salt_len = 16;
+        $rawSaltLen = 16;
         // The length required in the final serialization
-        $required_salt_len = 22;
+        $requiredSaltLen = 22;
 
-        $buffer = function_exists('random_bytes') ? random_bytes($raw_salt_len) :
-            mcrypt_create_iv($raw_salt_len, MCRYPT_DEV_URANDOM);
+        $buffer = function_exists('random_bytes') ? random_bytes($rawSaltLen) :
+            mcrypt_create_iv($rawSaltLen, MCRYPT_DEV_URANDOM);
         $salt = str_replace('+', '.', base64_encode($buffer));
-        $salt = substr($salt, 0, $required_salt_len);
+        $salt = substr($salt, 0, $requiredSaltLen);
 
         return $salt;
     }

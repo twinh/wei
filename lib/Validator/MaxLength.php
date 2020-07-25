@@ -24,7 +24,7 @@ class MaxLength extends Length
     /**
      * {@inheritdoc}
      */
-    public function __invoke($input, $max = null, $__ = null)
+    public function __invoke($input, $max = null, $ignore = null)
     {
         $max && $this->storeOption('max', $max);
 

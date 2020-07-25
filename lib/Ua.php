@@ -158,31 +158,32 @@ class Ua extends Base
      * @link https://github.com/serbanghita/Mobile-Detect
      * @license MIT License https://github.com/serbanghita/Mobile-Detect/blob/master/LICENSE.txt
      * @return bool
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function isMobile()
     {
-        $s = $this->server;
-        if (isset($s['HTTP_ACCEPT'])
-            && (false !== strpos($s['HTTP_ACCEPT'], 'application/x-obml2d')  // Opera Mini; @reference: http://dev.opera.com/articles/view/opera-binary-markup-language/
-            || false !== strpos($s['HTTP_ACCEPT'], 'application/vnd.rim.html')  // BlackBerry devices.
-            || false !== strpos($s['HTTP_ACCEPT'], 'text/vnd.wap.wml')
-            || false !== strpos($s['HTTP_ACCEPT'], 'application/vnd.wap.xhtml+xml'))
-            || isset($s['HTTP_X_WAP_PROFILE'])
-            || isset($s['HTTP_X_WAP_CLIENTID'])
-            || isset($s['HTTP_WAP_CONNECTION'])
-            || isset($s['HTTP_PROFILE'])
-            || isset($s['HTTP_X_OPERAMINI_PHONE_UA'])  // Reported by Nokia devices (eg. C3)
-            || isset($s['HTTP_X_NOKIA_IPADDRESS'])
-            || isset($s['HTTP_X_NOKIA_GATEWAY_ID'])
-            || isset($s['HTTP_X_ORANGE_ID'])
-            || isset($s['HTTP_X_VODAFONE_3GPDPCONTEXT'])
-            || isset($s['HTTP_X_HUAWEI_USERID'])
-            || isset($s['HTTP_UA_OS'])  // Reported by Windows Smartphones.
-            || isset($s['HTTP_X_MOBILE_GATEWAY'])  // Reported by Verizon, Vodafone proxy system.
-            || isset($s['HTTP_X_ATT_DEVICEID'])  // Seend this on HTC Sensation. @ref: SensationXE_Beats_Z715e
+        $server = $this->server;
+        if (isset($server['HTTP_ACCEPT'])
+            && (false !== strpos($server['HTTP_ACCEPT'], 'application/x-obml2d')  // Opera Mini; @reference: http://dev.opera.com/articles/view/opera-binary-markup-language/
+            || false !== strpos($server['HTTP_ACCEPT'], 'application/vnd.rim.html')  // BlackBerry devices.
+            || false !== strpos($server['HTTP_ACCEPT'], 'text/vnd.wap.wml')
+            || false !== strpos($server['HTTP_ACCEPT'], 'application/vnd.wap.xhtml+xml'))
+            || isset($server['HTTP_X_WAP_PROFILE'])
+            || isset($server['HTTP_X_WAP_CLIENTID'])
+            || isset($server['HTTP_WAP_CONNECTION'])
+            || isset($server['HTTP_PROFILE'])
+            || isset($server['HTTP_X_OPERAMINI_PHONE_UA'])  // Reported by Nokia devices (eg. C3)
+            || isset($server['HTTP_X_NOKIA_IPADDRESS'])
+            || isset($server['HTTP_X_NOKIA_GATEWAY_ID'])
+            || isset($server['HTTP_X_ORANGE_ID'])
+            || isset($server['HTTP_X_VODAFONE_3GPDPCONTEXT'])
+            || isset($server['HTTP_X_HUAWEI_USERID'])
+            || isset($server['HTTP_UA_OS'])  // Reported by Windows Smartphones.
+            || isset($server['HTTP_X_MOBILE_GATEWAY'])  // Reported by Verizon, Vodafone proxy system.
+            || isset($server['HTTP_X_ATT_DEVICEID'])  // Seend this on HTC Sensation. @ref: SensationXE_Beats_Z715e
             //HTTP_X_NETWORK_TYPE = WIFI
-            || (isset($s['HTTP_UA_CPU'])
-            && 'ARM' == $s['HTTP_UA_CPU']          // Seen this on a HTC.
+            || (isset($server['HTTP_UA_CPU'])
+            && 'ARM' == $server['HTTP_UA_CPU']          // Seen this on a HTC.
             )
         ) {
             return true;

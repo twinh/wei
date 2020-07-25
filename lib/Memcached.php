@@ -50,6 +50,7 @@ class Memcached extends BaseCache
      * Constructor
      *
      * @param array $options
+     * @SuppressWarnings(PHPMD.ConstructorNewOperator)
      */
     public function __construct(array $options = [])
     {

@@ -305,6 +305,8 @@ class File extends BaseValidator
 
     /**
      * {@inheritdoc}
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @todo split to small methods
      */
     protected function doValidate($input)
     {

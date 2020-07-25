@@ -306,8 +306,17 @@ class Schema extends Base
 
     /**
      * @return bool
+     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
      */
     public function getDefaultNullable()
+    {
+        return $this->defaultNullable;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDefaultNullable()
     {
         return $this->defaultNullable;
     }
