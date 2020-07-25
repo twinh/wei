@@ -1758,11 +1758,10 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     protected function fetchFromCache()
     {
         $cache = false === $this->cacheTags ? $this->cache : $this->tagCache($this->cacheTags ?: $this->getCacheTags());
-        $that = $this;
         $params = $this->params;
         $paramTypes = $this->paramTypes;
-        return $cache->get($this->getCacheKey(), $this->cacheTime, function () use ($that, $params, $paramTypes) {
-            return $that->db->fetchAll($that->getSql(), $params, $paramTypes);
+        return $cache->get($this->getCacheKey(), $this->cacheTime, function () use ($params, $paramTypes) {
+            return $this->db->fetchAll($this->getSql(), $params, $paramTypes);
         });
     }
 

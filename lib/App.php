@@ -85,8 +85,8 @@ class App extends Base
      * Startup an MVC application
      *
      * @param array $options
-     * @throws \RuntimeException
      * @return $this
+     * @throws \RuntimeException
      */
     public function __invoke(array $options = [])
     {
@@ -161,7 +161,7 @@ class App extends Base
     /**
      * Handle the response variable returned by controller action
      *
-     * @param  mixed $response
+     * @param mixed $response
      * @return Response
      * @throws \InvalidArgumentException
      */
@@ -230,7 +230,7 @@ class App extends Base
     /**
      * Set the name of controller
      *
-     * @param  string $controller The name of controller
+     * @param string $controller The name of controller
      * @return string
      */
     public function setController($controller)
@@ -253,7 +253,7 @@ class App extends Base
     /**
      * Set the name of action
      *
-     * @param  string $action The name of action
+     * @param string $action The name of action
      * @return string
      */
     public function setAction($action)
@@ -447,17 +447,16 @@ class App extends Base
      */
     protected function execute($instance, $action)
     {
-        $app = $this;
         $wei = $this->wei;
         $middleware = $this->getMiddleware($instance, $action);
 
-        $callback = function () use ($instance, $action, $app) {
-            $instance->before($app->request, $app->response);
+        $callback = function () use ($instance, $action) {
+            $instance->before($this->request, $this->response);
 
-            $method = $app->getActionMethod($action);
-            $response = $instance->{$method}($app->request, $app->response);
+            $method = $this->getActionMethod($action);
+            $response = $instance->{$method}($this->request, $this->response);
 
-            $instance->after($app->request, $response);
+            $instance->after($this->request, $response);
 
             return $response;
         };

@@ -802,11 +802,11 @@ class Schema extends Base
     {
         $columnSqls = [];
         foreach ($this->columns as $column => $options) {
-            $columnSqls[] .= '  ' . $this->getColumnSql($column, $options);
+            $columnSqls[] = '  ' . $this->getColumnSql($column, $options);
         }
 
         foreach ($this->indexes as $index => $options) {
-            $columnSqls[] .= ' ' . $this->getIndexSql($index, $options);
+            $columnSqls[] = ' ' . $this->getIndexSql($index, $options);
         }
 
         $sql = "\n" . implode(",\n", $columnSqls) . "\n";

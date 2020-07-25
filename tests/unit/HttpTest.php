@@ -45,19 +45,18 @@ final class HttpTest extends TestCase
      */
     public function testSuccess($options)
     {
-        $test = $this;
         $http = $this->http([
-                'beforeSend' => function () use ($test) {
-                    $test->triggeredEvents[] = 'beforeSend';
-                    $test->assertTrue(true);
+                'beforeSend' => function () {
+                    $this->triggeredEvents[] = 'beforeSend';
+                    $this->assertTrue(true);
                 },
-                'success' => function () use ($test) {
-                    $test->triggeredEvents[] = 'success';
-                    $test->assertTrue(true);
+                'success' => function () {
+                    $this->triggeredEvents[] = 'success';
+                    $this->assertTrue(true);
                 },
-                'complete' => function () use ($test) {
-                    $test->triggeredEvents[] = 'complete';
-                    $test->assertTrue(true);
+                'complete' => function () {
+                    $this->triggeredEvents[] = 'complete';
+                    $this->assertTrue(true);
                 },
             ] + $options);
 
@@ -71,36 +70,43 @@ final class HttpTest extends TestCase
         $url = $this->http->getOption('url');
 
         return [
-            [[
-                'url' => $url,
-            ]],
-            [[
-                'url' => $url . '?abc=cdf',
-            ]],
-            [[
-                'url' => $url . '#abc',
-            ]],
-            [[
-                'url' => $url . '?abc#abc',
-            ]],
+            [
+                [
+                    'url' => $url,
+                ],
+            ],
+            [
+                [
+                    'url' => $url . '?abc=cdf',
+                ],
+            ],
+            [
+                [
+                    'url' => $url . '#abc',
+                ],
+            ],
+            [
+                [
+                    'url' => $url . '?abc#abc',
+                ],
+            ],
         ];
     }
 
     public function testUrlAndOptionsSyntax()
     {
-        $test = $this;
         $this->http($this->url, [
-            'beforeSend' => function () use ($test) {
-                $test->triggeredEvents[] = 'beforeSend';
-                $test->assertTrue(true);
+            'beforeSend' => function () {
+                $this->triggeredEvents[] = 'beforeSend';
+                $this->assertTrue(true);
             },
-            'success' => function () use ($test) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertTrue(true);
+            'success' => function () {
+                $this->triggeredEvents[] = 'success';
+                $this->assertTrue(true);
             },
-            'complete' => function () use ($test) {
-                $test->triggeredEvents[] = 'complete';
-                $test->assertTrue(true);
+            'complete' => function () {
+                $this->triggeredEvents[] = 'complete';
+                $this->assertTrue(true);
             },
         ]);
     }
@@ -112,20 +118,18 @@ final class HttpTest extends TestCase
      */
     public function testError($options, $responseText)
     {
-        $test = $this;
-
         $http = $this->http([
-                'beforeSend' => function () use ($test) {
-                    $test->triggeredEvents[] = 'beforeSend';
-                    $test->assertTrue(true);
+                'beforeSend' => function () {
+                    $this->triggeredEvents[] = 'beforeSend';
+                    $this->assertTrue(true);
                 },
-                'error' => function () use ($test) {
-                    $test->triggeredEvents[] = 'error';
-                    $test->assertTrue(true);
+                'error' => function () {
+                    $this->triggeredEvents[] = 'error';
+                    $this->assertTrue(true);
                 },
-                'complete' => function (Http $http) use ($test, $responseText) {
-                    $test->triggeredEvents[] = 'complete';
-                    $test->assertEquals($responseText, $http->getResponseText());
+                'complete' => function (Http $http) use ($responseText) {
+                    $this->triggeredEvents[] = 'complete';
+                    $this->assertEquals($responseText, $http->getResponseText());
                 },
             ] + $options);
 
@@ -142,18 +146,27 @@ final class HttpTest extends TestCase
 
         return [
             // 404 but return content
-            [[
-                'url' => $url . '?code=404',
-            ], 'default text'],
-            [[
-                'url' => $url . '?code=500',
-            ], 'default text'],
+            [
+                [
+                    'url' => $url . '?code=404',
+                ],
+                'default text',
+            ],
+            [
+                [
+                    'url' => $url . '?code=500',
+                ],
+                'default text',
+            ],
             // Couldn't resolve host '404.php.net'
-            [[
-                'url' => 'http://404.php.net/',
-                // set ip to null to enable dns lookup
-                'ip' => null,
-            ], null],
+            [
+                [
+                    'url' => 'http://404.php.net/',
+                    // set ip to null to enable dns lookup
+                    'ip' => null,
+                ],
+                null,
+            ],
         ];
     }
 
@@ -185,7 +198,6 @@ final class HttpTest extends TestCase
 
     public function testHeaders()
     {
-        $test = $this;
         $http = $this->http([
             'url' => 'http://httpbin.org/headers',
             'ip' => false,
@@ -194,9 +206,9 @@ final class HttpTest extends TestCase
                 'Key' => 'Value',
                 'Key-Name' => 'Value with space',
             ],
-            'success' => function ($data, Http $http) use ($test) {
-                $test->assertEquals('Value', $data['headers']['Key']);
-                $test->assertEquals('Value with space', $data['headers']['Key-Name']);
+            'success' => function ($data, Http $http) {
+                $this->assertEquals('Value', $data['headers']['Key']);
+                $this->assertEquals('Value with space', $data['headers']['Key-Name']);
             },
         ]);
 
@@ -205,7 +217,6 @@ final class HttpTest extends TestCase
 
     public function testGetResponseHeader()
     {
-        $test = $this;
         $http = $this->http([
             'url' => $this->url . '?test=headers',
             'dataType' => 'json',
@@ -214,13 +225,13 @@ final class HttpTest extends TestCase
                 'Key-Name' => 'Value',
                 'Key_Name' => 'Value with space', // overwrite previous header
             ],
-            'success' => function ($data, Http $http) use ($test) {
+            'success' => function ($data, Http $http) {
                 $header = $http->getResponseHeader();
 
-                $test->assertStringContainsString('customHeader', $header);
-                $test->assertStringContainsString('value', $header);
+                $this->assertStringContainsString('customHeader', $header);
+                $this->assertStringContainsString('value', $header);
 
-                $test->assertNull($http->getResponseHeader('no this key'));
+                $this->assertNull($http->getResponseHeader('no this key'));
             },
         ]);
 
@@ -229,14 +240,12 @@ final class HttpTest extends TestCase
 
     public function testCustomOptions()
     {
-        $test = $this;
-
         $this->http([
             'url' => $this->url,
             'customOption' => 'value',
-            'beforeSend' => function (Http $http) use ($test) {
-                $test->triggeredEvents[] = 'beforeSend';
-                $test->assertEquals('value', $http->customOption);
+            'beforeSend' => function (Http $http) {
+                $this->triggeredEvents[] = 'beforeSend';
+                $this->assertEquals('value', $http->customOption);
             },
         ]);
 
@@ -245,17 +254,15 @@ final class HttpTest extends TestCase
 
     public function testSetCustomOptions()
     {
-        $test = $this;
-
         $http = $this->http([
             'url' => $this->url,
-            'beforeSend' => function (Http $http) use ($test) {
-                $test->triggeredEvents[] = 'beforeSend';
+            'beforeSend' => function (Http $http) {
+                $this->triggeredEvents[] = 'beforeSend';
                 $http->customOption = 'value';
             },
-            'success' => function ($data, Http $http) use ($test) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertEquals('value', $http->customOption);
+            'success' => function ($data, Http $http) {
+                $this->triggeredEvents[] = 'success';
+                $this->assertEquals('value', $http->customOption);
             },
         ]);
 
@@ -265,14 +272,13 @@ final class HttpTest extends TestCase
 
     public function testQueryDataType()
     {
-        $test = $this;
         $this->http([
             'url' => $this->url . '?type=query',
             'dataType' => 'query',
-            'success' => function ($data) use ($test) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertEquals('0', $data['code']);
-                $test->assertEquals('success', $data['message']);
+            'success' => function ($data) {
+                $this->triggeredEvents[] = 'success';
+                $this->assertEquals('0', $data['code']);
+                $this->assertEquals('success', $data['message']);
             },
         ]);
         $this->assertTriggeredEvents(['success']);
@@ -280,14 +286,13 @@ final class HttpTest extends TestCase
 
     public function testJsonDataType()
     {
-        $test = $this;
         $http = $this->http([
             'url' => 'http://httpbin.org/ip',
             'ip' => false,
             'dataType' => 'jsonObject',
-            'success' => function ($data) use ($test) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertObjectHasAttribute('origin', $data);
+            'success' => function ($data) {
+                $this->triggeredEvents[] = 'success';
+                $this->assertObjectHasAttribute('origin', $data);
             },
         ]);
         $this->assertTrue($http->isSuccess());
@@ -387,28 +392,27 @@ final class HttpTest extends TestCase
 
     public function testSerializeDataType()
     {
-        $test = $this;
         $http = $this->http([
             'url' => $this->url . '?type=serialize',
             'dataType' => 'serialize',
-            'success' => function ($data) use ($test) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertEquals(0, $data['code']);
-                $test->assertEquals('success', $data['message']);
+            'success' => function ($data) {
+                $this->triggeredEvents[] = 'success';
+                $this->assertEquals(0, $data['code']);
+                $this->assertEquals('success', $data['message']);
             },
         ]);
         $this->assertTrue($http->isSuccess());
         $this->assertTriggeredEvents(['success']);
 
         // Parse error
-        $test->triggeredEvents = [];
+        $this->triggeredEvents = [];
         $http = $this->http([
             'url' => $this->url . '?type=json',
             'dataType' => 'serialize',
-            'error' => function (Http $http, $textStatus, $exception) use ($test) {
-                $test->triggeredEvents[] = 'error';
-                $test->assertEquals('parser', $textStatus);
-                $test->assertInstanceOf('\ErrorException', $exception);
+            'error' => function (Http $http, $textStatus, $exception) {
+                $this->triggeredEvents[] = 'error';
+                $this->assertEquals('parser', $textStatus);
+                $this->assertInstanceOf('\ErrorException', $exception);
             },
         ]);
         $this->assertFalse($http->isSuccess());
@@ -417,14 +421,13 @@ final class HttpTest extends TestCase
 
     public function testXmlDataType()
     {
-        $test = $this;
         $http = $this->http([
             'url' => $this->url . '?type=xml',
             'dataType' => 'xml',
-            'success' => function (\SimpleXMLElement $data) use ($test) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertEquals('0', (string) $data->code);
-                $test->assertEquals('success', (string) $data->message);
+            'success' => function (\SimpleXMLElement $data) {
+                $this->triggeredEvents[] = 'success';
+                $this->assertEquals('0', (string) $data->code);
+                $this->assertEquals('success', (string) $data->message);
             },
         ]);
         $this->assertTrue($http->isSuccess());
@@ -434,10 +437,10 @@ final class HttpTest extends TestCase
         $http = $this->http([
             'url' => $this->url . '?type=json',
             'dataType' => 'xml',
-            'error' => function ($http, $textStatus, $exception) use ($test) {
-                $test->triggeredEvents[] = 'error';
-                $test->assertEquals('parser', $textStatus);
-                $test->assertInstanceOf('\ErrorException', $exception);
+            'error' => function ($http, $textStatus, $exception) {
+                $this->triggeredEvents[] = 'error';
+                $this->assertEquals('parser', $textStatus);
+                $this->assertInstanceOf('\ErrorException', $exception);
             },
         ]);
         $this->assertFalse($http->isSuccess());
@@ -446,29 +449,28 @@ final class HttpTest extends TestCase
 
     public function testUserAgent()
     {
-        $test = $this;
         $http = $this->wei->newInstance('http')->__invoke([
             'url' => 'http://httpbin.org/user-agent',
             'ip' => false,
             'userAgent' => 'Test',
             'dataType' => 'json',
-            'success' => function ($data) use ($test) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertEquals('Test', $data['user-agent']);
+            'success' => function ($data) {
+                $this->triggeredEvents[] = 'success';
+                $this->assertEquals('Test', $data['user-agent']);
             },
         ]);
         $this->assertTrue($http->isSuccess());
         $this->assertTriggeredEvents(['success']);
 
-        $test->triggeredEvents = [];
+        $this->triggeredEvents = [];
         $http = $this->http([
             'url' => 'http://httpbin.org/user-agent',
             'ip' => false,
             'userAgent' => false,
             'dataType' => 'json',
-            'success' => function ($data) use ($test) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertEquals('', $data['user-agent']);
+            'success' => function ($data) {
+                $this->triggeredEvents[] = 'success';
+                $this->assertEquals('', $data['user-agent']);
             },
         ]);
         $this->assertTrue($http->isSuccess());
@@ -478,15 +480,14 @@ final class HttpTest extends TestCase
     public function testReferer()
     {
         $referer = 'http://google.com';
-        $test = $this;
         $http = $this->http([
             'url' => 'http://httpbin.org/headers',
             'ip' => false,
             'referer' => $referer,
             'dataType' => 'json',
-            'success' => function ($data) use ($test, $referer) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertEquals($referer, $data['headers']['Referer']);
+            'success' => function ($data) use ($referer) {
+                $this->triggeredEvents[] = 'success';
+                $this->assertEquals($referer, $data['headers']['Referer']);
             },
         ]);
         $this->assertTrue($http->isSuccess());
@@ -495,15 +496,14 @@ final class HttpTest extends TestCase
 
     public function testAutoReferer()
     {
-        $test = $this;
         $http = $this->http([
             'url' => 'http://httpbin.org/headers',
             'ip' => false,
             'referer' => true, // Equals to current request URL
             'dataType' => 'json',
-            'success' => function ($data) use ($test) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertEquals('http://httpbin.org/headers', $data['headers']['Referer']);
+            'success' => function ($data) {
+                $this->triggeredEvents[] = 'success';
+                $this->assertEquals('http://httpbin.org/headers', $data['headers']['Referer']);
             },
         ]);
         $this->assertTrue($http->isSuccess());
@@ -512,7 +512,6 @@ final class HttpTest extends TestCase
 
     public function testCookie()
     {
-        $test = $this;
         $http = $this->http([
             'url' => $this->url . '?test=cookie',
             'dataType' => 'jsonObject',
@@ -522,12 +521,12 @@ final class HttpTest extends TestCase
                 'invalid' => ';"',
                 'space' => 'S P',
             ],
-            'success' => function ($data) use ($test) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertEquals('value', $data->key);
-                $test->assertEquals('1', $data->bool);
-                $test->assertEquals(';"', $data->invalid);
-                $test->assertEquals('S P', $data->space);
+            'success' => function ($data) {
+                $this->triggeredEvents[] = 'success';
+                $this->assertEquals('value', $data->key);
+                $this->assertEquals('1', $data->bool);
+                $this->assertEquals(';"', $data->invalid);
+                $this->assertEquals('S P', $data->space);
             },
         ]);
         $this->assertTrue($http->isSuccess());
@@ -536,7 +535,6 @@ final class HttpTest extends TestCase
 
     public function testGetCookie()
     {
-        $test = $this;
         $http = $this->http([
             'url' => $this->url . '?test=responseCookies',
             'header' => true,
@@ -547,17 +545,17 @@ final class HttpTest extends TestCase
                 'invalid' => ';"',
                 'space' => 'S P',
             ],
-            'success' => function ($data, Http $http) use ($test) {
-                $test->triggeredEvents[] = 'success';
+            'success' => function ($data, Http $http) {
+                $this->triggeredEvents[] = 'success';
                 $cookies = $http->getResponseCookies();
-                $test->assertIsArray($cookies);
+                $this->assertIsArray($cookies);
 
-                $test->assertEquals('value', $cookies['key']);
-                $test->assertEquals('1', $cookies['bool']);
-                $test->assertEquals(';"', $cookies['invalid']);
-                $test->assertEquals('S P', $cookies['space']);
+                $this->assertEquals('value', $cookies['key']);
+                $this->assertEquals('1', $cookies['bool']);
+                $this->assertEquals(';"', $cookies['invalid']);
+                $this->assertEquals('S P', $cookies['space']);
 
-                $test->assertEquals('value', $http->getResponseCookie('key'));
+                $this->assertEquals('value', $http->getResponseCookie('key'));
             },
         ]);
         $this->assertTrue($http->isSuccess());
@@ -566,7 +564,6 @@ final class HttpTest extends TestCase
 
     public function testIgnoreDeletedCookie()
     {
-        $test = $this;
         $http = $this->http([
             'url' => $this->url . '?test=responseCookies',
             'header' => true,
@@ -579,20 +576,20 @@ final class HttpTest extends TestCase
                 'key4' => 0,
                 'key5' => 'deleted',
             ],
-            'success' => function ($data, Http $http) use ($test) {
-                $test->triggeredEvents[] = 'success';
+            'success' => function ($data, Http $http) {
+                $this->triggeredEvents[] = 'success';
 
                 $cookies = $http->getResponseCookies();
-                $test->assertIsArray($cookies);
+                $this->assertIsArray($cookies);
 
-                $test->assertEquals('value', $cookies['key']);
+                $this->assertEquals('value', $cookies['key']);
 
-                $test->assertArrayNotHasKey('key1', $cookies);
-                $test->assertArrayNotHasKey('key2', $cookies);
-                $test->assertArrayNotHasKey('key3', $cookies);
+                $this->assertArrayNotHasKey('key1', $cookies);
+                $this->assertArrayNotHasKey('key2', $cookies);
+                $this->assertArrayNotHasKey('key3', $cookies);
 
-                $test->assertEquals('0', $cookies['key4']);
-                $test->assertEquals('deleted', $cookies['key5']);
+                $this->assertEquals('0', $cookies['key4']);
+                $this->assertEquals('deleted', $cookies['key5']);
             },
         ]);
         $this->assertTrue($http->isSuccess());
@@ -601,7 +598,6 @@ final class HttpTest extends TestCase
 
     public function testPost()
     {
-        $test = $this;
         $data = [
             'key' => 'value',
             'post' => true,
@@ -611,8 +607,8 @@ final class HttpTest extends TestCase
 
         $data = $http->getResponse();
         $this->assertTrue($http->isSuccess());
-        $test->assertEquals('value', $data->form->key);
-        $test->assertEquals('1', $data->form->post);
+        $this->assertEquals('value', $data->form->key);
+        $this->assertEquals('1', $data->form->post);
     }
 
     /**
@@ -621,7 +617,6 @@ final class HttpTest extends TestCase
      */
     public function testMethods($method)
     {
-        $test = $this;
         $http = $this->http([
             'url' => $this->url . '?test=methods',
             'method' => $method,
@@ -629,10 +624,10 @@ final class HttpTest extends TestCase
             'data' => [
                 'k' => 'v',
             ],
-            'success' => function ($data) use ($test, $method) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertEquals(strtoupper($method), $data->method);
-                $test->assertEquals('v', $data->data->k);
+            'success' => function ($data) use ($method) {
+                $this->triggeredEvents[] = 'success';
+                $this->assertEquals(strtoupper($method), $data->method);
+                $this->assertEquals('v', $data->data->k);
             },
         ]);
         $this->assertTrue($http->isSuccess());
@@ -645,7 +640,6 @@ final class HttpTest extends TestCase
      */
     public function testGet2($method)
     {
-        $test = $this;
         $http = $this->http([
             'url' => $this->url . '?test=get',
             'method' => $method,
@@ -653,9 +647,9 @@ final class HttpTest extends TestCase
             'data' => [
                 'k' => 'v',
             ],
-            'success' => function ($data) use ($test) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertEquals('v', $data->k);
+            'success' => function ($data) {
+                $this->triggeredEvents[] = 'success';
+                $this->assertEquals('v', $data->k);
             },
         ]);
         $this->assertTrue($http->isSuccess());
@@ -710,14 +704,13 @@ final class HttpTest extends TestCase
 
     public function testTimeout()
     {
-        $test = $this;
         $http = $this->http([
             'url' => $this->url . '?wait=0.1',
             'dataType' => 'jsonObject',
             'timeout' => 50,
-            'error' => function (Http $http, $textStatus) use ($test) {
-                $test->triggeredEvents[] = 'error';
-                $test->assertEquals('curl', $textStatus);
+            'error' => function (Http $http, $textStatus) {
+                $this->triggeredEvents[] = 'error';
+                $this->assertEquals('curl', $textStatus);
             },
         ]);
         $this->assertFalse($http->isSuccess());
@@ -726,7 +719,6 @@ final class HttpTest extends TestCase
 
     public function testGlobal()
     {
-        $test = $this;
         $this->wei->setConfig([
             'http' => [
                 'method' => 'post',
@@ -746,9 +738,9 @@ final class HttpTest extends TestCase
             'data' => [
                 'k' => 'v',
             ],
-            'success' => function ($data) use ($test) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertEquals('POST', $data->method);
+            'success' => function ($data) {
+                $this->triggeredEvents[] = 'success';
+                $this->assertEquals('POST', $data->method);
             },
         ]);
         $this->assertTrue($http->isSuccess());
@@ -759,9 +751,9 @@ final class HttpTest extends TestCase
             'url' => $this->url . '?test=methods',
             'dataType' => 'jsonObject',
             'global' => false,
-            'success' => function ($data) use ($test) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertEquals('GET', $data->method);
+            'success' => function ($data) {
+                $this->triggeredEvents[] = 'success';
+                $this->assertEquals('GET', $data->method);
             },
         ]);
         $this->assertTrue($http->isSuccess());
@@ -775,15 +767,14 @@ final class HttpTest extends TestCase
 
     public function testStringAsData()
     {
-        $test = $this;
         $http = $this->http([
             'url' => $this->url . '?test=get',
             'data' => 'key=value&number=10',
             'dataType' => 'jsonObject',
-            'success' => function ($data) use ($test) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertEquals('value', $data->key);
-                $test->assertEquals('10', $data->number);
+            'success' => function ($data) {
+                $this->triggeredEvents[] = 'success';
+                $this->assertEquals('value', $data->key);
+                $this->assertEquals('10', $data->number);
             },
         ]);
         $this->assertTrue($http->isSuccess());
@@ -932,7 +923,7 @@ final class HttpTest extends TestCase
         $http = $this->http($this->url, [
             'header' => true,
         ]);
-        $this->assertEquals(true, $http->getCurlOption(CURLOPT_HEADER));
+        $this->assertTrue($http->getCurlOption(CURLOPT_HEADER));
     }
 
     public function testParseJsonError()
@@ -961,27 +952,30 @@ final class HttpTest extends TestCase
 
     public function testRetryTwoTimesAndFail()
     {
-        $test = $this;
         $http = $this->http([
             'url' => $this->url . '?code=404',
             'retries' => 1,
             'throwException' => false,
-            'beforeSend' => function () use ($test) {
-                $test->triggeredEvents[] = 'beforeSend';
+            'beforeSend' => function () {
+                $this->triggeredEvents[] = 'beforeSend';
             },
-            'error' => function () use ($test) {
-                $test->triggeredEvents[] = 'error';
+            'error' => function () {
+                $this->triggeredEvents[] = 'error';
             },
-            'complete' => function (Http $http) use ($test) {
-                $test->triggeredEvents[] = 'complete';
+            'complete' => function (Http $http) {
+                $this->triggeredEvents[] = 'complete';
             },
         ]);
 
         $this->assertFalse($http->isSuccess());
 
         $this->assertTriggeredEvents([
-            'beforeSend', 'error', 'complete',
-            'beforeSend', 'error', 'complete', // Retry
+            'beforeSend',
+            'error',
+            'complete',
+            'beforeSend',
+            'error',
+            'complete', // Retry
         ]);
 
         $this->assertEquals(0, $http->getOption('leftRetries'));

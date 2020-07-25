@@ -43,10 +43,6 @@ final class ETest extends TestCase
 
     protected $htmlAttrSpecialChars = [
         '\'' => '&#x27;',
-        '"' => '&quot;',
-        '<' => '&lt;',
-        '>' => '&gt;',
-        '&' => '&amp;',
         /* Characters beyond ASCII value 255 to unicode escape */
         'Ā' => '&#x0100;',
         /* Immune chars excluded */

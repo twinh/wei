@@ -86,13 +86,12 @@ final class EventTest extends TestCase
 
     public function testRemoveHandler()
     {
-        $that = $this;
         $event = $this->object;
 
-        $init = function () use ($that) {
+        $init = function () {
             $fn = function () {
             };
-            $that->event->off('test')
+            $this->event->off('test')
                 ->on('test', $fn)
                 ->on('test.before', $fn)
                 ->on('test.after', $fn)

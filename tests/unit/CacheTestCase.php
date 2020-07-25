@@ -158,10 +158,9 @@ abstract class CacheTestCase extends TestCase
 
         $this->assertEquals(2, $result2);
 
-        $that = $this;
-        $result3 = $cache->get($key, function ($wei, $cache) use ($that) {
-            $that->assertInstanceOf('\Wei\Wei', $wei);
-            $that->assertInstanceOf('\Wei\BaseCache', $cache);
+        $result3 = $cache->get($key, function ($wei, $cache) {
+            $this->assertInstanceOf('\Wei\Wei', $wei);
+            $this->assertInstanceOf('\Wei\BaseCache', $cache);
             return 2;
         });
         $this->assertEquals(2, $result3);

@@ -368,13 +368,11 @@ class Error extends Base
      */
     protected function registerFatalHandler()
     {
-        $error = $this;
-
         // When shutdown, the current working directory will be set to the web
         // server directory, store it for later use
         $cwd = getcwd();
 
-        register_shutdown_function(function () use ($error, $cwd) {
+        register_shutdown_function(function () use ($cwd) {
             $e = error_get_last();
             if (!$e || !in_array($e['type'], [E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_PARSE], true)) {
                 // No error or not fatal error
@@ -388,19 +386,19 @@ class Error extends Base
 
             $exception = new \ErrorException($e['message'], $e['type'], 0, $e['file'], $e['line']);
 
-            if ($error->triggerHandler('fatal', $exception)) {
+            if ($this->triggerHandler('fatal', $exception)) {
                 // Handled!
                 return;
             }
 
             // Fallback to error handlers
-            if ($error->triggerHandler('error', $exception)) {
+            if ($this->triggerHandler('error', $exception)) {
                 // Handled!
                 return;
             }
 
             // Fallback to internal error Handlers
-            $error->internalHandleException($exception);
+            $this->internalHandleException($exception);
         });
     }
 

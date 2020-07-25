@@ -1230,15 +1230,14 @@ class DbTest extends TestCase
     public function testConnectFails()
     {
         $this->setExpectedException('\PDOException');
-        $test = &$this;
         $db = new \Wei\Db([
             'wei' => $this->wei,
             'driver' => 'mysql',
             'host' => '255.255.255.255',
             'dbname' => 'test',
-            'connectFails' => function ($db, $exception) use ($test) {
-                $test->assertTrue(true);
-                $test->assertInstanceOf('PDOException', $exception);
+            'connectFails' => function ($db, $exception) {
+                $this->assertTrue(true);
+                $this->assertInstanceOf('PDOException', $exception);
             },
         ]);
         $db->connect();

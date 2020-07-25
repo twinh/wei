@@ -158,8 +158,7 @@ final class WeChatAppTest extends TestCase
             return $app->sendText('Find a iPad ? ok, i will remember u', true);
         });
 
-        $that = $this;
-        $app->startsWith('t', function ($app) use ($that) {
+        $app->startsWith('t', function () {
             return 'The translation result is: xx';
         });
 
@@ -167,7 +166,7 @@ final class WeChatAppTest extends TestCase
             return 'anyone find my brother?';
         });
 
-        $app->match('/twin/i', function (WeChatApp $app) {
+        $app->match('/twin/i', function () {
             return 'Yes, I\'m here';
         });
 
@@ -738,7 +737,6 @@ final class WeChatAppTest extends TestCase
      */
     public function testScan($postData, $sceneId, $result, $calledSubscribe)
     {
-        $test = $this;
         $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
             'query' => [
@@ -758,8 +756,8 @@ final class WeChatAppTest extends TestCase
             return 'subscribe';
         });
 
-        $app->scan(function (WeChatApp $app) use ($test, $sceneId) {
-            $test->assertEquals($sceneId, $app->getScanSceneId());
+        $app->scan(function (WeChatApp $app) use ($sceneId) {
+            $this->assertEquals($sceneId, $app->getScanSceneId());
             return 'scan';
         });
 
@@ -777,7 +775,6 @@ final class WeChatAppTest extends TestCase
 
     public function testScanAndSubscribe()
     {
-        $test = $this;
         $app = new \Wei\WeChatApp([
             'wei' => $this->wei,
             'query' => [
@@ -795,8 +792,8 @@ final class WeChatAppTest extends TestCase
 </xml>',
         ]);
 
-        $app->scan(function (WeChatApp $app) use ($test) {
-            $test->assertEquals('2', $app->getScanSceneId());
+        $app->scan(function (WeChatApp $app) {
+            $this->assertEquals('2', $app->getScanSceneId());
             return 'scan';
         });
 

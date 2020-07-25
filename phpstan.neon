@@ -1,0 +1,26 @@
+parameters:
+    level: 0
+
+    paths:
+        - %currentWorkingDirectory%/lib
+        - %currentWorkingDirectory%/tests
+
+    scanFiles:
+        # 引入 *Mixin 类
+        - %currentWorkingDirectory%/docs/auto-completion.php
+
+    ignoreErrors:
+        -
+            message: "#^Unsafe usage of new static\\(\\)\\.$#"
+            count: 1
+            path: lib/Http.php
+
+        -
+            message: "#^Unsafe usage of new static\\(\\)\\.$#"
+            count: 1
+            path: lib/TagCache.php
+
+        -
+            message: "#^Unsafe usage of new static\\(\\)\\.$#"
+            count: 1
+            path: lib/Wei.php

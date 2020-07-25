@@ -19,9 +19,8 @@ final class ErrorTest extends TestCase
 
     public function testFatalException()
     {
-        $test = $this;
-        $this->error->fatal(function ($exception) use ($test) {
-            $test->assertEquals('Class not found', $exception->getMessage());
+        $this->error->fatal(function ($exception) {
+            $this->assertEquals('Class not found', $exception->getMessage());
         });
         $exception = new \ErrorException('Class not found', 0, 0, __FILE__, __LINE__);
         $this->error->triggerHandler('fatal', $exception);
@@ -46,6 +45,7 @@ final class ErrorTest extends TestCase
         error_reporting(0);
 
         // Cover \Wei\Error::handleError
+        // @phpstan-ignore-next-line
         $array['key'];
 
         error_reporting(-1);
@@ -58,6 +58,7 @@ final class ErrorTest extends TestCase
     {
         $this->expectException(\ErrorException::class);
 
+        // @phpstan-ignore-next-line
         $array['key'];
     }
 

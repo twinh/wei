@@ -621,6 +621,7 @@ final class WeiTest extends TestCase
 
         $hasException = false;
         try {
+            // @phpstan-ignore-next-line 方法没有 @svc 标签，会被检测为不存在
             StaticService::staticDontHaveTag();
         } catch (\BadMethodCallException $e) {
             $hasException = true;
@@ -638,6 +639,7 @@ final class WeiTest extends TestCase
         $result = StaticService::staticHasTag();
         $this->assertInstanceOf(StaticService::class, $result);
 
+        /** @phpstan-ignore-next-line 方法没有 @svc 标签，会被检测为不存在 */
         $result = StaticService::staticDontHaveTag();
         $this->assertInstanceOf(StaticService::class, $result);
     }

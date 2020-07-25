@@ -5,6 +5,10 @@
  */
 class Couchbase
 {
+    public function __construct()
+    {
+    }
+
     public function get()
     {
         return false;
