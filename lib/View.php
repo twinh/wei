@@ -95,6 +95,7 @@ class View extends Base implements \ArrayAccess
      */
     public function render($name, $data = [])
     {
+        // phpcs:disable Squiz.NamingConventions.ValidVariableName.NotCamelCaps
         // Assign to double underscored variables to avoid conflict with view parameters
         $__file = $this->getFile($name);
         $__data = $data + $this->data;
@@ -119,6 +120,7 @@ class View extends Base implements \ArrayAccess
             $content = $this->render($layout['name'], $__data);
         }
 
+        // phpcs:enable Squiz.NamingConventions.ValidVariableName.NotCamelCaps
         return $content;
     }
 
@@ -175,7 +177,11 @@ class View extends Base implements \ArrayAccess
             return $file;
         } else {
             $components = $this->parseResource($name);
-            throw new \RuntimeException(sprintf('Template "%s" not found in directories "%s"', $components['file'], implode('", "', $components['dirs'])));
+            throw new \RuntimeException(sprintf(
+                'Template "%s" not found in directories "%s"',
+                $components['file'],
+                implode('", "', $components['dirs'])
+            ));
         }
     }
 

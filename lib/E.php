@@ -420,8 +420,7 @@ class E extends Base
         } else {
             throw new \RuntimeException(
                 static::class
-                . ' requires either the iconv or mbstring extension to be installed'
-                . ' when escaping for non UTF-8 strings.'
+                . ' requires either the iconv or mbstring extension to be installed when escaping for non UTF-8 strings.'
             );
         }
 

@@ -236,8 +236,8 @@ class Validate extends Base
                 $this->{$method}($field, $rule);
 
                 // Trigger the ruleValid/ruleInvalid callback
-                $callback = $result ? 'ruleValid' : 'ruleInvalid';
-                if ($this->{$callback} && false === call_user_func($this->{$callback}, $rule, $field, $this, $this->wei)) {
+                $fn = $result ? 'ruleValid' : 'ruleInvalid';
+                if ($this->{$fn} && false === call_user_func($this->{$fn}, $rule, $field, $this, $this->wei)) {
                     return $this->result;
                 }
 

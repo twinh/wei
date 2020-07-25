@@ -47,9 +47,21 @@ class DbCache extends BaseCache
      * @var array
      */
     protected $createTableSqls = [
-        'mysql' => 'CREATE TABLE %s (id VARCHAR(255) NOT NULL, value LONGTEXT NOT NULL, expire DATETIME NOT NULL, lastModified DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB',
-        'sqlite' => 'CREATE TABLE %s (id VARCHAR(255) NOT NULL, value CLOB NOT NULL, expire DATETIME NOT NULL, lastModified DATETIME NOT NULL, PRIMARY KEY(id))',
-        'pgsql' => 'CREATE TABLE %s (id VARCHAR(255) NOT NULL, value TEXT NOT NULL, expire TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, lastModified TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))',
+        'mysql' => 'CREATE TABLE %s (id VARCHAR(255) NOT NULL, 
+            value LONGTEXT NOT NULL, expire DATETIME NOT NULL, 
+            lastModified DATETIME NOT NULL, 
+            PRIMARY KEY(id))
+            DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB',
+        'sqlite' => 'CREATE TABLE %s (id VARCHAR(255) NOT NULL, 
+            value CLOB NOT NULL, 
+            expire DATETIME NOT NULL, 
+            lastModified DATETIME NOT NULL, 
+            PRIMARY KEY(id))',
+        'pgsql' => 'CREATE TABLE %s (id VARCHAR(255) NOT NULL, 
+            value TEXT NOT NULL, 
+            expire TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, 
+            lastModified TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, 
+            PRIMARY KEY(id))',
     ];
 
     /**

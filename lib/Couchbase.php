@@ -71,7 +71,13 @@ class Couchbase extends BaseCache
         parent::__construct($options);
 
         if (!$this->object) {
-            $this->object = new \Couchbase($this->hosts, $this->user, $this->password, $this->bucket, $this->persistent);
+            $this->object = new \Couchbase(
+                $this->hosts,
+                $this->user,
+                $this->password,
+                $this->bucket,
+                $this->persistent
+            );
         }
     }
 

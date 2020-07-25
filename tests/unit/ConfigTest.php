@@ -39,8 +39,18 @@ final class ConfigTest extends TestCase
 
     public function testToOptions()
     {
-        $this->assertEquals('<option value="1">Yes</option><option value="0">No</option>', $this->config->toOptions('yesOrNo'));
+        $this->assertEquals(implode('', [
+            '<option value="1">Yes</option>',
+            '<option value="0">No</option>',
+        ]), $this->config->toOptions('yesOrNo'));
 
-        $this->assertEquals('<optgroup label="province1"><option value="city1">shenzhen</option></optgroup><optgroup label="province2"><option value="city2">shanghai</option></optgroup>', $this->config->toOptions('country'));
+        $this->assertEquals(implode('', [
+            '<optgroup label="province1">',
+            '<option value="city1">shenzhen</option>',
+            '</optgroup>',
+            '<optgroup label="province2">',
+            '<option value="city2">shanghai</option>',
+            '</optgroup>',
+        ]), $this->config->toOptions('country'));
     }
 }
