@@ -23,6 +23,11 @@
     "autoload": {
         "files": ["lib/Wei.php"]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "WeiTest\\": "tests/unit"
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.9.x-dev"
