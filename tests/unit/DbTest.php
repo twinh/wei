@@ -7,6 +7,7 @@ use PDO;
 /**
  * @property \Wei\Db db
  * @method \Wei\Record db($table = null)
+ * @internal
  */
 class DbTest extends TestCase
 {
