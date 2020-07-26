@@ -258,36 +258,38 @@ class Error extends Base
 
             $fileInfo = $this->getFileCode($file, $line);
             $trace = htmlspecialchars($e->getTraceAsString(), ENT_QUOTES);
-            $detail = '<h2>File</h2>'
-                . "<p class=\"text-danger\">$file</p>"
-                . "<p><pre>$fileInfo</pre></p>"
-                . '<h2>Trace</h2>'
-                . "<p class=\"text-danger\">$detail</p>"
-                . "<p><pre>$trace</pre></p>";
+            $detail = <<<DETAIL
+<h2>File</h2>
+<p class="text-danger">$file</p>
+<p><pre>$fileInfo</pre></p>
+<h2>Trace</h2>
+<p class="text-danger">$detail</p>
+<p><pre>$trace</pre></p>
+DETAIL;
         }
 
-        $html = '<!DOCTYPE html>'
-            . '<html>'
-            . '<head>'
-            . '<meta name="viewport" content="width=device-width">'
-            . '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>'
-            . "<title>$title</title>"
-            . '<style type="text/css">'
-            . 'body { font-size: 14px; color: #333; padding: 15px 20px 20px 20px; }'
-            . 'h1, h2, p, pre { margin: 0; padding: 0; }'
-            . 'body, pre '
-            . '{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "\5fae\8f6f\96c5\9ed1", "\5b8b\4f53"; }'
-            . 'h1 { font-size: 36px; }'
-            . 'h2 { font-size: 20px; margin: 20px 0 0; }'
-            . 'pre { font-size:13px; line-height: 1.42857143; }'
-            . '.text-danger { color: #fa5b50 }'
-            . '</style>'
-            . '</head>'
-            . '<body>'
-            . "<h1>$message</h1>"
-            . $detail
-            . '</body>'
-            . '</html>';
+        $html = <<<HTML
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width">
+<title>$title</title>
+<style type="text/css">
+body { font-size: 14px; color: #333; padding: 15px 20px 20px 20px; }
+h1, h2, p, pre { margin: 0; padding: 0; }
+body, pre { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "\5fae\8f6f\96c5\9ed1", "\5b8b\4f53"; }
+h1 { font-size: 36px; }
+h2 { font-size: 20px; margin: 20px 0 0; }
+pre { font-size:13px; line-height: 1.42857143; }
+.text-danger { color: #fa5b50 }
+</style>
+</head>
+<body>
+<h1>$message</h1>
+$detail
+</body>
+</html>
+HTML;
 
         echo $html;
     }

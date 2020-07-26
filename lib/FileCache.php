@@ -200,7 +200,7 @@ class FileCache extends BaseCache
     public function clear()
     {
         $result = true;
-        foreach (glob($this->dir . '/' . '*.' . $this->ext) as $file) {
+        foreach (glob($this->dir . '/*.' . $this->ext) as $file) {
             $result = $result && @unlink($file);
         }
         return $result;
