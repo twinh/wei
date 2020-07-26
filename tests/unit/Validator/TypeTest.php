@@ -64,8 +64,7 @@ final class TypeTest extends TestCase
             [null,     'null'],
             ['1',      'numeric'],
             [$obj,     'object'],
-            // FIXME failure on php 5.4.7 ?
-            //array($res,     'resource'),
+            [$res,     'resource'],
             [1,        'scalar'],
             [1.1,      'scalar'],
             ['str',    'scalar'],

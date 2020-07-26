@@ -80,8 +80,10 @@ class Orm extends Base
         }
 
         if ($options['annotationDriverPaths']) {
-            $driverImpl = $config->newDefaultAnnotationDriver($options['annotationDriverPaths'], $options['useSimpleAnnotationReader']);
-            $config->setMetadataDriverImpl($driverImpl);
+            $config->setMetadataDriverImpl($config->newDefaultAnnotationDriver(
+                $options['annotationDriverPaths'],
+                $options['useSimpleAnnotationReader']
+            ));
         }
 
         if ($options['entityNamespaces']) {

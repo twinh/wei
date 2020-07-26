@@ -58,8 +58,14 @@ final class PasswordTest extends TestCase
             ['foo', ['algo' => 0, 'algoName' => 'unknown', 'options' => []]],
             ['$2y$', ['algo' => 0, 'algoName' => 'unknown', 'options' => []]],
             ['$2y$07$', ['algo' => 0, 'algoName' => 'unknown', 'options' => []]],
-            ['$2y$07$usesomesillystringfore2uDLvp1Ii2e./U9C8sBjqp8I90dH6hi', ['algo' => PASSWORD_BCRYPT, 'algoName' => 'bcrypt', 'options' => ['cost' => 7]]],
-            ['$2y$10$usesomesillystringfore2uDLvp1Ii2e./U9C8sBjqp8I90dH6hi', ['algo' => PASSWORD_BCRYPT, 'algoName' => 'bcrypt', 'options' => ['cost' => 10]]],
+            [
+                '$2y$07$usesomesillystringfore2uDLvp1Ii2e./U9C8sBjqp8I90dH6hi',
+                ['algo' => PASSWORD_BCRYPT, 'algoName' => 'bcrypt', 'options' => ['cost' => 7]],
+            ],
+            [
+                '$2y$10$usesomesillystringfore2uDLvp1Ii2e./U9C8sBjqp8I90dH6hi',
+                ['algo' => PASSWORD_BCRYPT, 'algoName' => 'bcrypt', 'options' => ['cost' => 10]],
+            ],
         ];
     }
 }

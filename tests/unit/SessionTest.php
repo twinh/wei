@@ -23,10 +23,7 @@ final class SessionTest extends TestCase
 
     protected function tearDown(): void
     {
-        // FIXME why sometime $this->object is NULL
-        if ($this->object) {
-            $this->object->destroy();
-        }
+        $this->object->destroy();
 
         parent::tearDown();
     }

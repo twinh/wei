@@ -5,6 +5,8 @@ namespace WeiTest;
 use Wei\WeChatApp;
 
 /**
+ * phpcs:disable Generic.Files.LineLength.TooLong
+ *
  * @internal
  */
 final class WeChatAppTest extends TestCase
@@ -138,7 +140,7 @@ final class WeChatAppTest extends TestCase
         });
 
         $app->is('2', function (WeChatApp $app) {
-            return $app->sendMusic('Burning', 'A song of Maria Arredondo', 'url', 'HQ url', true);
+            return $app->sendMusic('Burning', 'A song of Maria Arredondo', 'url', 'HQ url');
         });
 
         $app->is('3', function (WeChatApp $app) {
@@ -155,7 +157,7 @@ final class WeChatAppTest extends TestCase
         });
 
         $app->has('ipad', function (WeChatApp $app) {
-            return $app->sendText('Find a iPad ? ok, i will remember u', true);
+            return $app->sendText('Find a iPad ? ok, i will remember u');
         });
 
         $app->startsWith('t', function () {
@@ -182,6 +184,8 @@ final class WeChatAppTest extends TestCase
         }
 
         $output = simplexml_load_string($content, 'SimpleXMLElement', LIBXML_NOCDATA);
+
+        // phpcs:disable Squiz.NamingConventions.ValidVariableName.NotCamelCaps
         $this->assertEquals($app->getToUserName(), (string) $output->FromUserName);
         $this->assertEquals($app->getFromUserName(), (string) $output->ToUserName);
 
@@ -212,27 +216,7 @@ final class WeChatAppTest extends TestCase
                 break;
 
             case 'event':
-                switch ($app->getEvent()) {
-                    case 'subscribe':
-                        $this->assertEquals('you are my 100 reader, wonderful!', $output->Content);
-                        break;
-
-                    case 'unsubscribe':
-                        $this->assertEquals('you won\'t see this message', $output->Content);
-                        break;
-
-                    case 'click':
-                        switch ($app->getEventKey()) {
-                            case 'button':
-                                $this->assertEquals('you clicked the button', $output->Content);
-                                break;
-
-                            case 'index':
-                                $this->assertEquals('you clicked index', $output->Content);
-                                break;
-                        }
-                        break;
-                }
+                $this->assertEvents($app, $output);
         }
 
         switch ($output->MsgType) {
@@ -963,7 +947,10 @@ final class WeChatAppTest extends TestCase
         $ret = $app->parse();
         $this->assertEquals(-2002, $ret['code']);
         $this->assertEquals('AES解密失败', $ret['message']);
-        $this->assertStringContainsString('openssl_decrypt(): IV passed is only 1 bytes long, cipher expects an IV of precisely 16 bytes, padding with \0', $ret['e']);
+        $this->assertStringContainsString(<<<MSG
+openssl_decrypt(): IV passed is only 1 bytes long, cipher expects an IV of precisely 16 bytes, padding with \0
+MSG
+            , $ret['e']);
     }
 
     public function testGetAttrs()
@@ -1064,5 +1051,30 @@ final class WeChatAppTest extends TestCase
 
         // Fix the issue that XML parse empty data to new SimpleXMLElement object
         return array_map('strval', (array) $array);
+    }
+
+    private function assertEvents($app, $output)
+    {
+        switch ($app->getEvent()) {
+            case 'subscribe':
+                $this->assertEquals('you are my 100 reader, wonderful!', $output->Content);
+                break;
+
+            case 'unsubscribe':
+                $this->assertEquals('you won\'t see this message', $output->Content);
+                break;
+
+            case 'click':
+                switch ($app->getEventKey()) {
+                    case 'button':
+                        $this->assertEquals('you clicked the button', $output->Content);
+                        break;
+
+                    case 'index':
+                        $this->assertEquals('you clicked index', $output->Content);
+                        break;
+                }
+                break;
+        }
     }
 }

@@ -17,8 +17,15 @@ final class RecordExistsTest extends TestCase
 
         $db = $this->wei->db;
 
-        $db->query('CREATE TABLE users (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))');
-
+        $db->query(<<<'SQL'
+CREATE TABLE users (
+    id INTEGER NOT NULL, 
+    name VARCHAR(50) NOT NULL, 
+    address VARCHAR(256) NOT NULL, 
+    PRIMARY KEY(id)
+)
+SQL
+        );
         $db->insert('users', [
             'name' => 'twin',
             'address' => 'test',

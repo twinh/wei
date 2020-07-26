@@ -586,10 +586,11 @@ class DbTest extends TestCase
             ->leftJoin('prefix_member_group', 'prefix_member_group.id = prefix_member.group_id');
         $member = $query->fetch();
 
-        $this->assertEquals(
-            'SELECT prefix_member.*, prefix_member_group.name AS group_name FROM prefix_member LEFT JOIN prefix_member_group ON prefix_member_group.id = prefix_member.group_id LIMIT 1',
-            $query->getSql()
-        );
+        $this->assertEquals(implode(' ', [
+            'SELECT prefix_member.*, prefix_member_group.name AS group_name',
+            'FROM prefix_member',
+            'LEFT JOIN prefix_member_group ON prefix_member_group.id = prefix_member.group_id LIMIT 1',
+        ]), $query->getSql());
         $this->assertArrayHasKey('group_name', $member);
 
         // Join with table alias
@@ -2231,11 +2232,32 @@ class DbTest extends TestCase
     protected function createTable()
     {
         $db = $this->db;
-        $db->query('CREATE TABLE prefix_member_group (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))');
-        $db->query('CREATE TABLE prefix_member (id INTEGER NOT NULL, group_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))');
-        $db->query('CREATE TABLE prefix_post (id INTEGER NOT NULL, member_id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))');
-        $db->query('CREATE TABLE prefix_tag (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))');
-        $db->query('CREATE TABLE prefix_post_tag (post_id INTEGER NOT NULL, tag_id INTEGER NOT NULL)');
+        $db->query('CREATE TABLE prefix_member_group (
+        id INTEGER NOT NULL, 
+        name VARCHAR(50) NOT NULL, 
+        PRIMARY KEY(id))');
+
+        $db->query('CREATE TABLE prefix_member (
+        id INTEGER NOT NULL, 
+        group_id INTEGER NOT NULL, 
+        name VARCHAR(50) NOT NULL, 
+        address VARCHAR(256) NOT NULL, 
+        PRIMARY KEY(id))');
+
+        $db->query('CREATE TABLE prefix_post (
+        id INTEGER NOT NULL, 
+        member_id INTEGER NOT NULL, 
+        name VARCHAR(50) NOT NULL, 
+        PRIMARY KEY(id))');
+
+        $db->query('CREATE TABLE prefix_tag (
+        id INTEGER NOT NULL, 
+        name VARCHAR(50) NOT NULL, 
+        PRIMARY KEY(id))');
+
+        $db->query('CREATE TABLE prefix_post_tag (
+        post_id INTEGER NOT NULL, 
+        tag_id INTEGER NOT NULL)');
     }
 
     protected function dropTable()

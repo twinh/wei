@@ -81,6 +81,7 @@ final class UaTest extends TestCase
      */
     public function providerForUserAgent()
     {
+        // phpcs:disable Generic.Files.LineLength.TooLong
         return [
             // iPad
             [
@@ -275,6 +276,7 @@ final class UaTest extends TestCase
                 '6.0',
             ],
         ];
+        // phpcs:enable Generic.Files.LineLength.TooLong
     }
 
     public function testNotInMobile()

@@ -54,24 +54,10 @@ class FileCacheTest extends CacheTestCase
 
         chmod($file, 0000);
 
+        // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
         $this->assertFalse(@$wei->add(__METHOD__, true));
 
         chmod($file, 0777);
-
-        /*
-            $file = $wei->getFile(__METHOD__);
-
-            $handle = fopen($file, 'wb');
-
-            flock($handle, LOCK_EX);
-
-            sleep(10);
-
-            $this->assertFalse($wei->add(__METHOD__, true));
-
-            flock($handle, LOCK_UN);
-
-        fclose($handle);*/
     }
 
     public function testGet()

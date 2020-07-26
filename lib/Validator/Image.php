@@ -23,7 +23,7 @@ class Image extends File
 
     protected $heightTooBigMessage = '%name% height is too big (%height%px), allowed maximum height is %maxHeight%px';
 
-    protected $heightTooSmallMessage = <<<MSG
+    protected $heightTooSmallMessage = <<<'MSG'
 '%name% height is too small (%height%px), expected minimum height is %minHeight%px'
 MSG;
 

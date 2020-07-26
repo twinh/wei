@@ -311,7 +311,9 @@ final class ValidatorTest extends TestCase
                    'email' => 'xxx' // get from rule validator
                 )
             )
-        );*/
+            );
+        */
+
         $this->assertArrayHasKey('username', $messages);
 
         $this->assertArrayHasKey('email', $messages);

@@ -396,7 +396,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             // 2.1.5. Triggers after callbacks
             $this->triggerCallback($isNew ? 'afterCreate' : 'afterUpdate');
             $this->triggerCallback('afterSave');
-            // 2.2 Loop and save collection records
+        // 2.2 Loop and save collection records
         } else {
             foreach ($this->data as $record) {
                 $record->save();

@@ -24,7 +24,7 @@ class Upload extends Image
      *
      * @link http://php.net/manual/en/ini.core.php#ini.post-max-size
      */
-    protected $postSizeMessage = <<<MSG
+    protected $postSizeMessage = <<<'MSG'
 'No file uploaded or the total file size is too large, allowed maximum size is %postMaxSize%'
 MSG;
 

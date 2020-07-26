@@ -1,6 +1,6 @@
 <?php
 
-use WeiTest\TestCase;
+namespace WeiTest;
 
 /**
  * @internal

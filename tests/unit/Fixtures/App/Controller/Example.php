@@ -4,7 +4,7 @@ namespace WeiTest\Fixtures\App\Controller;
 
 class Example extends \Wei\BaseController
 {
-    public function testAction()
+    public function exampleAction()
     {
         return 'test';
     }
@@ -94,6 +94,7 @@ class Example extends \Wei\BaseController
         return $req['id'];
     }
 
+    // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
     public function _actionAction()
     {
         throw new \Exception('Never call me');

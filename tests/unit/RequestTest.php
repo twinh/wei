@@ -24,12 +24,14 @@ final class RequestTest extends TestCase
         $wei = $this->object;
 
         $name = $wei->request('name');
+        // phpcs:disable MySource.PHP.GetRequestData.SuperglobalAccessedWithVar
         $source = isset($_REQUEST['name']) ? $_REQUEST['name'] : null;
 
         $this->assertEquals($name, $source);
 
         $default = 'default';
         $name2 = $wei->request('name', $default);
+        // phpcs:disable MySource.PHP.GetRequestData.SuperglobalAccessedWithVar
         $source = isset($_REQUEST['name']) ? $_REQUEST['name'] : $default;
 
         $this->assertEquals($name2, $default);
@@ -529,6 +531,7 @@ final class RequestTest extends TestCase
             'HTTP_CONNECTION' => 'keep-alive',
             'HTTP_CACHE_CONTROL' => 'max-age=0',
             'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            // phpcs:disable Generic.Files.LineLength.TooLong
             'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.5 Safari/537.22',
             'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch',
             'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8',
@@ -561,6 +564,7 @@ final class RequestTest extends TestCase
             'CONNECTION' => 'keep-alive',
             'CACHE_CONTROL' => 'max-age=0',
             'ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            // phpcs:disable Generic.Files.LineLength.TooLong
             'USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.5 Safari/537.22',
             'ACCEPT_ENCODING' => 'gzip,deflate,sdch',
             'ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8',

@@ -15,6 +15,7 @@ final class MemcacheTest extends CacheTestCase
 
         parent::setUp();
 
+        // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
         if (false === @$this->object->getObject()->getStats()) {
             $this->markTestSkipped('The memcache is not running');
         }

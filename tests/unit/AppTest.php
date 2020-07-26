@@ -28,8 +28,8 @@ final class AppTest extends TestCase
 
     public function testBaseApp()
     {
-        // WeiTest\App\Controller\Test::testAction
-        $this->app->dispatch('example', 'test');
+        // WeiTest\App\Controller\Test::exampleAction
+        $this->app->dispatch('example', 'example');
 
         $this->expectOutputString('test');
     }
@@ -316,13 +316,12 @@ final class AppTest extends TestCase
 
     public function testDebugDetailMessageForAction()
     {
-        $this->setExpectedException(
-            'RuntimeException',
-            implode("\n", [
-                'The page you requested was not found',
-                ' - method "notFoundAction" not found in controller "example" (class "WeiTest\Fixtures\App\Controller\Example")',
-            ]),
-            404
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionCode(404);
+        $this->expectExceptionMessage(<<<'MSG'
+The page you requested was not found
+ - method "notFoundAction" not found in controller "example" (class "WeiTest\Fixtures\App\Controller\Example")
+MSG
         );
 
         $this->request->set('debug-detail', '1');

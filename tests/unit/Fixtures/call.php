@@ -17,6 +17,7 @@ switch ($test) {
         break;
 
     case 'post':
+        // phpcs:ignore MySource.PHP.GetRequestData.SuperglobalAccessed
         $result = json_encode($_POST + ['method' => $request->getMethod()] + ['files' => $_FILES]);
         break;
 

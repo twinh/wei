@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
+ *
  * @link http://www.couchbase.com/autodocs/couchbase-php-client-1.1.5/files/couchbase-api.php.html
  */
 class Couchbase

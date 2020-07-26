@@ -258,6 +258,7 @@ final class UploadTest extends TestCase
         ]);
 
         // Avoid Warning: copy(uploads/cus/tom.gif) [function.copy]: failed to open stream: No such file or directory
+        // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
         $result = @$this->upload([
             'dir' => 'uploads',
             'fileName' => 'cu/stom', // invalid file name

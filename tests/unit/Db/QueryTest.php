@@ -9,6 +9,9 @@ use WeiTest\TestCase;
  * @property Record $record
  *
  * @internal
+ *
+ * NOTE: would be replace by new QueryBuilderTest
+ * phpcs:disable Generic.Files.LineLength.TooLong
  */
 final class QueryTest extends TestCase
 {
@@ -129,7 +132,10 @@ final class QueryTest extends TestCase
             ->orWhere('u.name = ?')
             ->andWhere('u.name = ?');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u WHERE (((u.username = ?) AND (u.username = ?)) OR (u.name = ?)) AND (u.name = ?)', $qb->getSql());
+        $this->assertEquals(
+            'SELECT u.*, p.* FROM users u WHERE (((u.username = ?) AND (u.username = ?)) OR (u.name = ?)) AND (u.name = ?)',
+            $qb->getSql()
+        );
     }
 
     public function testSelectGroupBy()
@@ -263,7 +269,10 @@ final class QueryTest extends TestCase
             ->orHaving('u.username = ?')
             ->andHaving('u.username = ?');
 
-        $this->assertEquals('SELECT u.*, p.* FROM users u GROUP BY u.id HAVING ((u.name = ?) OR (u.username = ?)) AND (u.username = ?)', $qb->getSql());
+        $this->assertEquals(
+            'SELECT u.*, p.* FROM users u GROUP BY u.id HAVING ((u.name = ?) OR (u.username = ?)) AND (u.username = ?)',
+            $qb->getSql()
+        );
     }
 
     public function testSelectOrderBy()

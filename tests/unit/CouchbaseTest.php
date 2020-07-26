@@ -13,12 +13,10 @@ final class CouchbaseTest extends CacheTestCase
 
         if (!extension_loaded('couchbase') || !class_exists('\Couchbase')) {
             $mock = true;
-        //$this->markTestSkipped('The "couchbase" extension is not loaded');
         } else {
-            @parent::setUp();
+            parent::setUp();
             if ($error = error_get_last()) {
                 $mock = true;
-                //$this->markTestSkipped($error['message']);
             }
         }
 
