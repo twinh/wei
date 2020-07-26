@@ -52,7 +52,6 @@ final class TypeTest extends TestCase
     public function providerForType()
     {
         $obj = new \stdClass();
-        $res = $this->createResource();
 
         return [
             // is_xxx
@@ -64,7 +63,7 @@ final class TypeTest extends TestCase
             [null,     'null'],
             ['1',      'numeric'],
             [$obj,     'object'],
-            [$res,     'resource'],
+            [curl_init(), 'resource'],
             [1,        'scalar'],
             [1.1,      'scalar'],
             ['str',    'scalar'],

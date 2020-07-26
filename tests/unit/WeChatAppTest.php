@@ -947,7 +947,7 @@ final class WeChatAppTest extends TestCase
         $ret = $app->parse();
         $this->assertEquals(-2002, $ret['code']);
         $this->assertEquals('AES解密失败', $ret['message']);
-        $this->assertStringContainsString(<<<MSG
+        $this->assertStringContainsString(<<<'MSG'
 openssl_decrypt(): IV passed is only 1 bytes long, cipher expects an IV of precisely 16 bytes, padding with \0
 MSG
             , $ret['e']);
