@@ -125,6 +125,7 @@ class WeChatApp extends Base
         parent::__construct($options);
 
         if (!$this->query) {
+            // phpcs:ignore MySource.PHP.GetRequestData.SuperglobalAccessed
             $this->query = &$_GET;
         }
 

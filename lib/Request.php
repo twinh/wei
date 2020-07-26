@@ -159,6 +159,7 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
 
         // Create parameters from super global variables on default
         if ($this->fromGlobal) {
+            // phpcs:disable MySource.PHP.GetRequestData.SuperglobalAccessed
             $this->gets = &$_GET;
             $this->posts = &$_POST;
             $this->cookies = &$_COOKIE;
