@@ -6,6 +6,8 @@
  * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
+// phpcs:disable Generic.Files.LineLength.TooLong
+
 return [
     // default
     'This value' => '该项',

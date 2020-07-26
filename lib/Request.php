@@ -204,7 +204,8 @@ class Request extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
             $name = implode('-', array_map('ucfirst', explode('_', strtolower($name))));
             $header .= $name . ': ' . $value . "\r\n";
         }
-        return $this->getServer('REQUEST_METHOD') . ' ' . $this->getUrl() . ' ' . $this->getServer('SERVER_PROTOCOL') . "\r\n"
+        return $this->getServer('REQUEST_METHOD') . ' ' . $this->getUrl() . ' ' . $this->getServer('SERVER_PROTOCOL')
+            . "\r\n"
             . $header
             . $this->getContent();
     }

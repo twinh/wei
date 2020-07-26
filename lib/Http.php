@@ -990,11 +990,12 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
                 continue;
             }
             list($name, $value) = $pieces;
+            $lowerName = strtolower($name);
 
-            if ('expires' == strtolower($name) && strtotime($value) < time()) {
+            if ('expires' === $lowerName && strtotime($value) < time()) {
                 // Removes expired cookie
                 unset($cookies[$currentName]);
-            } elseif (in_array(strtolower($name), ['domain', 'path', 'comment', 'expires', 'secure', 'max-age'], true)) {
+            } elseif (in_array($lowerName, ['domain', 'path', 'comment', 'expires', 'secure', 'max-age'], true)) {
                 // Ignore cookie attribute
                 continue;
             } else {

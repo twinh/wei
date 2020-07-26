@@ -24,6 +24,7 @@ class Upload extends Image
      *
      * @link http://php.net/manual/en/ini.core.php#ini.post-max-size
      */
+    // phpcs:ignore Generic.Files.LineLength.TooLong
     protected $postSizeMessage = 'No file uploaded or the total file size is too large, allowed maximum size is %postMaxSize%';
 
     /**

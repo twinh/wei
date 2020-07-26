@@ -133,7 +133,11 @@ abstract class BaseValidator extends Base
                     $parameters['%name%'] = $this->t($name);
                 } else {
                     if (!property_exists($this, $match)) {
-                        throw new \UnexpectedValueException(sprintf('Unknown parameter "%%%s%%" in message "%s"', $match, $message));
+                        throw new \UnexpectedValueException(sprintf(
+                            'Unknown parameter "%%%s%%" in message "%s"',
+                            $match,
+                            $message
+                        ));
                     }
                     $parameters['%' . $match . '%'] = is_array($this->{$match}) ?
                         implode(', ', $this->{$match}) : $this->{$match};

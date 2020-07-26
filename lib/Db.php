@@ -1026,7 +1026,8 @@ class Db extends Base
             $column = ($withColumn ? ($key . ' = ') : '');
 
             if (false === $value) {
-                // Avoid MySQL default sql mode "STRICT_TRANS_TABLES" complains "Incorrect integer value: '' for column ..."
+                // Avoid MySQL default sql mode "STRICT_TRANS_TABLES"
+                // complains "Incorrect integer value: '' for column ..."
                 // Note that if the column is string type, it will insert/update a "0" string
                 $data[$key] = 0;
                 $query[] = $column . '?';

@@ -396,7 +396,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
             // 2.1.5. Triggers after callbacks
             $this->triggerCallback($isNew ? 'afterCreate' : 'afterUpdate');
             $this->triggerCallback('afterSave');
-        // 2.2 Loop and save collection records
+            // 2.2 Loop and save collection records
         } else {
             foreach ($this->data as $record) {
                 $record->save();
@@ -512,8 +512,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Receives the record field value
      *
      * @param string $name
-     * @throws \InvalidArgumentException When field not found
      * @return mixed|$this
+     * @throws \InvalidArgumentException When field not found
      */
     public function get($name)
     {
@@ -533,8 +533,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @param string $name
      * @param mixed $value
-     * @throws \InvalidArgumentException
      * @return $this
+     * @throws \InvalidArgumentException
      */
     public function set($name, $value = null)
     {
@@ -850,8 +850,8 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * Find a record by specified conditions and throws 404 exception if record not found
      *
      * @param mixed $conditions
-     * @throws \Exception
      * @return $this
+     * @throws \Exception
      */
     public function findOne($conditions = false)
     {
@@ -1527,7 +1527,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Check if the offset exists
      *
-     * @param  string $offset
+     * @param string $offset
      * @return bool
      */
     public function offsetExists($offset)
@@ -1539,7 +1539,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
     /**
      * Get the offset value
      *
-     * @param  string $offset
+     * @param string $offset
      * @return mixed
      */
     public function offsetGet($offset)
@@ -1647,7 +1647,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function getCacheKey()
     {
-        return $this->cacheKey ?: md5($this->db->getDbname() . $this->getSql() . serialize($this->params) . serialize($this->paramTypes));
+        return $this->cacheKey ?: md5(
+            $this->db->getDbname()
+            . $this->getSql()
+            . serialize($this->params)
+            . serialize($this->paramTypes)
+        );
     }
 
     /**
@@ -1849,7 +1854,9 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     protected function getSqlForDelete()
     {
-        return 'DELETE FROM ' . $this->getFrom() . (null !== $this->sqlParts['where'] ? ' WHERE ' . ((string) $this->sqlParts['where']) : '');
+        return 'DELETE FROM '
+            . $this->getFrom()
+            . (null !== $this->sqlParts['where'] ? ' WHERE ' . ((string) $this->sqlParts['where']) : '');
     }
 
     /**
@@ -1897,11 +1904,12 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         if ($append) {
             if ('where' == $sqlPartName || 'having' == $sqlPartName) {
                 if ($this->sqlParts[$sqlPartName]) {
-                    $this->sqlParts[$sqlPartName] = '(' . $this->sqlParts[$sqlPartName] . ') ' . $type . ' (' . $sqlPart . ')';
+                    $this->sqlParts[$sqlPartName] = '(' . $this->sqlParts[$sqlPartName] . ') '
+                        . $type . ' (' . $sqlPart . ')';
                 } else {
                     $this->sqlParts[$sqlPartName] = $sqlPart;
                 }
-            } elseif ('orderBy' == $sqlPartName || 'groupBy' == $sqlPartName || 'select' == $sqlPartName || 'set' == $sqlPartName) {
+            } elseif (in_array($sqlPartName, ['orderBy', 'groupBy', 'select', 'set'], true)) {
                 foreach ($sqlPart as $part) {
                     $this->sqlParts[$sqlPartName][] = $part;
                 }

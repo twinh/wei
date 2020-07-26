@@ -118,14 +118,29 @@ class Response extends Base
     /**
      * The cookie options
      *
-     * Name     | Type   | Description
-     * ---------|--------|-------------
-     * expires  | int    | The lifetime of cookie (seconds)
-     * path     | string | The path on the server in which the cookie will be available on
-     * domain   | string | The domain that the cookie is available to
-     * secure   | bool   | Indicates that the cookie should only be transmitted over a secure HTTPS connection from the client
-     * httpOnly | bool   | When TRUE the cookie will be made accessible only through the HTTP protocol
-     * raw      | bool   | Whether send a cookie without urlencoding the cookie value
+     * ### expires
+     *
+     * `int`, The lifetime of cookie (seconds)
+     *
+     * ### path
+     *
+     * `string`, The path on the server in which the cookie will be available on
+     *
+     * ### domain
+     *
+     * `string`, The domain that the cookie is available to
+     *
+     * ### secure
+     *
+     * `bool`, Indicates that the cookie should only be transmitted over a secure HTTPS connection from the client
+     *
+     * ### httpOnly
+     *
+     * `bool`, When TRUE the cookie will be made accessible only through the HTTP protocol
+     *
+     * ### raw
+     *
+     * `bool`, Whether send a cookie without urlencoding the cookie value
      *
      * @var array
      * @link http://php.net/manual/en/function.setcookie.php
@@ -198,8 +213,8 @@ class Response extends Base
     /**
      * Send response header and content
      *
-     * @param  string $content
-     * @param  int $status
+     * @param string $content
+     * @param int $status
      * @return $this
      */
     public function __invoke($content = null, $status = null)
@@ -215,15 +230,15 @@ class Response extends Base
     public function __toString()
     {
         return sprintf('HTTP/%s %d %s', $this->version, $this->statusCode, $this->statusText) . "\r\n"
-        . $this->getHeaderString() . "\r\n"
-        . $this->content;
+            . $this->getHeaderString() . "\r\n"
+            . $this->content;
     }
 
     /**
      * Send response header and content
      *
-     * @param  string $content
-     * @param  int $status
+     * @param string $content
+     * @param int $status
      * @return $this
      */
     public function send($content = null, $status = null)
@@ -254,7 +269,7 @@ class Response extends Base
     /**
      * Set response content
      *
-     * @param  mixed $content
+     * @param mixed $content
      * @return $this
      */
     public function setContent($content)
@@ -287,8 +302,8 @@ class Response extends Base
     /**
      * Set the header status code
      *
-     * @param  int $code The status code
-     * @param  string|null $text The status text
+     * @param int $code The status code
+     * @param string|null $text The status text
      * @return $this
      */
     public function setStatusCode($code, $text = null)
@@ -328,7 +343,7 @@ class Response extends Base
     /**
      * Set the HTTP version
      *
-     * @param  string $version The HTTP version
+     * @param string $version The HTTP version
      * @return $this
      */
     public function setVersion($version)
@@ -350,9 +365,9 @@ class Response extends Base
     /**
      * Set the header string
      *
-     * @param  string|array $name The header name or header array
-     * @param  string|array $values The header values
-     * @param  bool $replace Whether replace the exists values or not
+     * @param string|array $name The header name or header array
+     * @param string|array $values The header values
+     * @param bool $replace Whether replace the exists values or not
      * @return $this
      */
     public function setHeader($name, $values = null, $replace = true)
@@ -377,9 +392,9 @@ class Response extends Base
     /**
      * Get the header string
      *
-     * @param  string $name The header name
-     * @param  mixed $default The default value
-     * @param  bool $first Return the first element or the whole header values
+     * @param string $name The header name
+     * @param mixed $default The default value
+     * @param bool $first Return the first element or the whole header values
      * @return mixed
      */
     public function getHeader($name, $default = null, $first = true)
@@ -458,8 +473,8 @@ class Response extends Base
     /**
      * Get response cookie
      *
-     * @param  string $key The name of cookie
-     * @param  mixed $default The default value when cookie not exists
+     * @param string $key The name of cookie
+     * @param mixed $default The default value when cookie not exists
      * @return mixed
      */
     public function getCookie($key, $default = null)
@@ -470,9 +485,9 @@ class Response extends Base
     /**
      * Set response cookie
      *
-     * @param  string $key The name of cookie
-     * @param  mixed $value The value of cookie
-     * @param  array $options The options of cookie
+     * @param string $key The name of cookie
+     * @param mixed $value The value of cookie
+     * @param array $options The options of cookie
      * @return $this
      */
     public function setCookie($key, $value, array $options = [])
@@ -506,7 +521,15 @@ class Response extends Base
         foreach ($this->cookies as $name => $cookie) {
             $cookie += $this->cookieOption;
             $fn = $this->unitTest ? $setCookie : ($cookie['raw'] ? 'setrawcookie' : 'setcookie');
-            $fn($name, $cookie['value'], $time + $cookie['expires'], $cookie['path'], $cookie['domain'], $cookie['secure'], $cookie['httpOnly']);
+            $fn(
+                $name,
+                $cookie['value'],
+                $time + $cookie['expires'],
+                $cookie['path'],
+                $cookie['domain'],
+                $cookie['secure'],
+                $cookie['httpOnly']
+            );
         }
         return $this;
     }

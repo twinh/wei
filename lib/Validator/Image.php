@@ -23,6 +23,7 @@ class Image extends File
 
     protected $heightTooBigMessage = '%name% height is too big (%height%px), allowed maximum height is %maxHeight%px';
 
+    // phpcs:ignore Generic.Files.LineLength.TooLong
     protected $heightTooSmallMessage = '%name% height is too small (%height%px), expected minimum height is %minHeight%px';
 
     protected $maxWidth;

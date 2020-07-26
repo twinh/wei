@@ -80,15 +80,40 @@ class E extends Base
      * @var array
      */
     protected $supportedEncodings = [
-        'iso-8859-1',   'iso8859-1',    'iso-8859-5',   'iso8859-5',
-        'iso-8859-15',  'iso8859-15',   'utf-8',        'cp866',
-        'ibm866',       '866',          'cp1251',       'windows-1251',
-        'win-1251',     '1251',         'cp1252',       'windows-1252',
-        '1252',         'koi8-r',       'koi8-ru',      'koi8r',
-        'big5',         '950',          'gb2312',       '936',
-        'big5-hkscs',   'shift_jis',    'sjis',         'sjis-win',
-        'cp932',        '932',          'euc-jp',       'eucjp',
-        'eucjp-win',    'macroman',
+        'iso-8859-1',
+        'iso8859-1',
+        'iso-8859-5',
+        'iso8859-5',
+        'iso-8859-15',
+        'iso8859-15',
+        'utf-8',
+        'cp866',
+        'ibm866',
+        '866',
+        'cp1251',
+        'windows-1251',
+        'win-1251',
+        '1251',
+        'cp1252',
+        'windows-1252',
+        '1252',
+        'koi8-r',
+        'koi8-ru',
+        'koi8r',
+        'big5',
+        '950',
+        'gb2312',
+        '936',
+        'big5-hkscs',
+        'shift_jis',
+        'sjis',
+        'sjis-win',
+        'cp932',
+        '932',
+        'euc-jp',
+        'eucjp',
+        'eucjp-win',
+        'macroman',
     ];
 
     /**
@@ -353,8 +378,8 @@ class E extends Base
      * class' constructor.
      *
      * @param string $string
-     * @throws \RuntimeException
      * @return string
+     * @throws \RuntimeException
      */
     protected function toUtf8($string)
     {
@@ -407,8 +432,8 @@ class E extends Base
      * @param string $string
      * @param string $to
      * @param array|string $from
-     * @throws \RuntimeException
      * @return string
+     * @throws \RuntimeException
      */
     protected function convertEncoding($string, $to, $from)
     {
@@ -419,8 +444,8 @@ class E extends Base
             $result = mb_convert_encoding($string, $to, $from);
         } else {
             throw new \RuntimeException(
-                static::class
-                . ' requires either the iconv or mbstring extension to be installed when escaping for non UTF-8 strings.'
+                static::class .
+                ' requires either the iconv or mbstring extension to be installed when escaping for non UTF-8 strings.'
             );
         }
 

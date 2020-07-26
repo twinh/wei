@@ -117,7 +117,7 @@ class T extends Base
     /**
      * Loads translator messages from file
      *
-     * @param string $pattern The file path, which can contains %s that would be convert the current locale or fallback locale
+     * @param string $pattern The file path, can contains %s that would be convert the current locale or fallback locale
      * @return $this
      * @throws \InvalidArgumentException When file not found or not readable
      */
@@ -131,7 +131,11 @@ class T extends Base
         if (!is_file($file)) {
             $defaultFile = sprintf($pattern, $this->defaultLocale);
             if (!is_file($defaultFile)) {
-                throw new \InvalidArgumentException(sprintf('File "%s" and "%s" not found or not readable', $file, $defaultFile));
+                throw new \InvalidArgumentException(sprintf(
+                    'File "%s" and "%s" not found or not readable',
+                    $file,
+                    $defaultFile
+                ));
             } else {
                 $file = $defaultFile;
             }

@@ -164,7 +164,8 @@ class Ua extends Base
     {
         $server = $this->server;
         if (isset($server['HTTP_ACCEPT'])
-            && (false !== strpos($server['HTTP_ACCEPT'], 'application/x-obml2d')  // Opera Mini; @reference: http://dev.opera.com/articles/view/opera-binary-markup-language/
+            // Opera Mini; @reference: http://dev.opera.com/articles/view/opera-binary-markup-language/
+            && (false !== strpos($server['HTTP_ACCEPT'], 'application/x-obml2d')
             || false !== strpos($server['HTTP_ACCEPT'], 'application/vnd.rim.html')  // BlackBerry devices.
             || false !== strpos($server['HTTP_ACCEPT'], 'text/vnd.wap.wml')
             || false !== strpos($server['HTTP_ACCEPT'], 'application/vnd.wap.xhtml+xml'))
