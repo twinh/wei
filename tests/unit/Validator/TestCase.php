@@ -47,7 +47,7 @@ abstract class TestCase extends BaseTestCase
             // object
             new \stdClass(), new \ArrayObject([1, 3]), new \DateTime(),
             // resource
-            $this->createResource(),
+            curl_init(),
             // null
             null,
             // callback

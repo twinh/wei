@@ -33,7 +33,7 @@ final class TypeTest extends TestCase
 
     public function testResource()
     {
-        $res = $this->createResource();
+        $res = curl_init();
         $this->assertIsResource($res);
         $this->assertTrue($this->isType->__invoke($res, 'resource'));
     }
@@ -55,74 +55,73 @@ final class TypeTest extends TestCase
 
         return [
             // is_xxx
-            [[],  'array'],
-            [true,     'bool'],
-            [1.2,      'float'],
-            [1,        'int'],
-            [1,        'integer'],
-            [null,     'null'],
-            ['1',      'numeric'],
-            [$obj,     'object'],
+            [[], 'array'],
+            [true, 'bool'],
+            [1.2, 'float'],
+            [1, 'int'],
+            [1, 'integer'],
+            [null, 'null'],
+            ['1', 'numeric'],
+            [$obj, 'object'],
             [curl_init(), 'resource'],
-            [1,        'scalar'],
-            [1.1,      'scalar'],
-            ['str',    'scalar'],
-            [true,     'scalar'],
-            ['str',    'string'],
+            [1, 'scalar'],
+            [1.1, 'scalar'],
+            ['str', 'scalar'],
+            [true, 'scalar'],
+            ['str', 'string'],
             // ctype_xxx
-            ['abc',    'alnum'],
-            ['a2B',    'alnum'],
-            ['123',    'alnum'],
-            ['dXy',    'alpha'],
-            ['abc',    'alpha'],
+            ['abc', 'alnum'],
+            ['a2B', 'alnum'],
+            ['123', 'alnum'],
+            ['dXy', 'alpha'],
+            ['abc', 'alpha'],
             ["\n\r\t", 'cntrl'],
-            ['10002',  'digit'],
-            ['arf12',  'graph'],
+            ['10002', 'digit'],
+            ['arf12', 'graph'],
             ['qiutoa', 'lower'],
-            ['A#@%',   'print'],
-            ['*&$()',  'punct'],
+            ['A#@%', 'print'],
+            ['*&$()', 'punct'],
             ["\n\r\t", 'space'],
             ['LMNSDO', 'upper'],
-            ['10BC9',  'xdigit'],
+            ['10BC9', 'xdigit'],
             // object
-            [$obj,     'stdClass'],
+            [$obj, 'stdClass'],
         ];
     }
 
     public function providerForNotType()
     {
         $obj = new \stdClass();
-        $res = $this->createResource();
 
         return [
             // is_xxx
-            ['1',      'array'],
-            ['true',   'bool'],
-            ['1.2',    'float'],
-            ['1',      'int'],
-            ['1',      'integer'],
-            ['null',   'null'],
-            ['1-2',    'numeric'],
-            ['1',      'object'],
-            [1,        'resource'],
-            [[],  'scalar'],
-            [$obj,     'scalar'],
-            [$res,     'scalar'],
+            ['1', 'array'],
+            ['true', 'bool'],
+            ['1.2', 'float'],
+            ['1', 'int'],
+            ['1', 'integer'],
+            ['null', 'null'],
+            ['1-2', 'numeric'],
+            ['1', 'object'],
+            [1, 'resource'],
+            [[], 'scalar'],
+            [$obj, 'scalar'],
+            [curl_init(), 'scalar'],
             // ctype_xxx
-            ['a bc',   'alnum'],
-            ['-213a',  'alnum'],
-            ['123',    'alpha'],
-            ['a bc',   'alpha'],
-            ['arf12',  'cntrl'],
+            ['a bc', 'alnum'],
+            ['-213a', 'alnum'],
+            ['123', 'alpha'],
+            ['a bc', 'alpha'],
+            ['arf12', 'cntrl'],
             ['182.20', 'digit'],
             ['wsl!12', 'digit'],
             ["\n\r\t", 'graph'],
             ['aac123', 'lower'],
             ['QASsdk', 'lower'],
-            ["sdf\n",  'print'],
+            ["sdf\n", 'print'],
             ['!@ # $', 'punct'],
             ["\narf1", 'space'],
-            ['LWC13',  'upper'],
+            ['LWC13', 'upper'],
             ['AR1012', 'xdigit'],
         ];
     }
