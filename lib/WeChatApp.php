@@ -849,6 +849,8 @@ class WeChatApp extends Base
      *
      * Returns false when the token is invalid or no rules matched
      *
+     * phpcs:disable Generic.Metrics.NestingLevel.TooHigh
+     *
      * @return string|false
      */
     protected function handleMsg()
