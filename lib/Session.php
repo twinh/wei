@@ -271,6 +271,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
         if (false === $current) {
             throw new \UnexpectedValueException(sprintf('Setting %s does not exists.', $setting));
         }
+        // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
         $result = @ini_set($setting, $current);
         return $result !== $current;
     }

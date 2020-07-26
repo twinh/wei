@@ -953,6 +953,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
                     'xml' => 'simplexml_load_string',
                     'serialize' => 'unserialize',
                 ];
+                // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
                 $result = @$methods[$this->dataType]($data);
                 if (false === $result && $e = error_get_last()) {
                     $exception = new \ErrorException($e['message'], $e['type'], 0, $e['file'], $e['line']);

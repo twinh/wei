@@ -61,6 +61,7 @@ class Image extends File
         // Receive the real file path resolved by parent class
         $file = $this->file;
 
+        // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
         $size = @getimagesize($file);
         if (false === $size) {
             $this->addError('notDetected');
