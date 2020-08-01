@@ -2,7 +2,12 @@
     "name": "wei/wei",
     "description": "A micro-framework provided powerful and simple APIs for faster and easier PHP development.",
     "type": "library",
-    "keywords": ["framework", "cache", "database", "validator"],
+    "keywords": [
+        "framework",
+        "cache",
+        "database",
+        "validator"
+    ],
     "homepage": "https://github.com/twinh/wei",
     "license": "MIT",
     "require": {
@@ -21,7 +26,9 @@
         }
     ],
     "autoload": {
-        "files": ["lib/Wei.php"]
+        "files": [
+            "lib/Wei.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

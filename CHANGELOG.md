@@ -1,3 +1,15 @@
+## [0.9.25](https://github.com/twinh/wei/compare/v0.9.24...v0.9.25) (2020-08-01)
+
+
+### Features
+
+* Share 服务加入 wei 中 ([c881063](https://github.com/twinh/wei/commit/c8810633cb6a96f16ae775407da5ec6a99520bc0))
+
+
+### Reverts
+
+* "test: 设置 driver 后还原" ([93be887](https://github.com/twinh/wei/commit/93be887c9c98c49524e6d658937796e7b6d2fc72))
+
 ## 0.9.24 (2020-07-23)
 
 
