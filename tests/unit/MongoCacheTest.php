@@ -7,7 +7,7 @@ namespace WeiTest;
  */
 final class MongoCacheTest extends CacheTestCase
 {
-    // @phpstan-ignore-next-line Missing call to parent::setUp() method.
+    /** @phpstan-ignore-next-line Missing call to parent::setUp() method. */
     protected function setUp(): void
     {
         if (!extension_loaded('mongo') || !class_exists('MongoClient')) {
