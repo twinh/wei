@@ -7,6 +7,7 @@ namespace WeiTest;
  */
 final class CouchbaseTest extends CacheTestCase
 {
+    // @phpstan-ignore-next-line Missing call to parent::setUp() method.
     protected function setUp(): void
     {
         $mock = false;

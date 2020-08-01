@@ -166,6 +166,7 @@ final class ETest extends TestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
         $this->escaper = new Escaper([
             'encoding' => 'utf-8',
         ]);

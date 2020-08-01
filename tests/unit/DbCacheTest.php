@@ -20,6 +20,8 @@ final class DbCacheTest extends CacheTestCase
         } catch (\PDOException $e) {
             $this->markTestSkipped($e->getMessage());
         }
+
+        parent::setUp();
     }
 
     public function testExpire()

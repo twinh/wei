@@ -10,6 +10,7 @@ final class LockTest extends TestCase
     protected function tearDown(): void
     {
         $this->lock->releaseAll();
+        parent::tearDown();
     }
 
     public function testLock()

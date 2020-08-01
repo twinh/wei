@@ -14,5 +14,7 @@ final class MysqlCacheTest extends CacheTestCase
         } catch (\PDOException $e) {
             $this->markTestSkipped($e->getMessage());
         }
+
+        parent::setUp();
     }
 }

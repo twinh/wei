@@ -14,5 +14,7 @@ final class PgsqlCacheTest extends CacheTestCase
         } catch (\PDOException $e) {
             $this->markTestSkipped($e->getMessage());
         }
+
+        parent::setUp();
     }
 }
