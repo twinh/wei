@@ -310,6 +310,12 @@ class SessionMixin {
 }
 
 /**
+ * @property    Wei\Share $share A service contains share data
+ */
+class ShareMixin {
+}
+
+/**
  * @property    Wei\Soap $soap A Soap client that works like HTTP service
  * @method      Wei\Soap soap($options = []) Create a new Soap service and execute
  */
@@ -331,7 +337,7 @@ class TMixin {
 
 /**
  * @property    Wei\TagCache $tagCache A cache service that support tagging
- * @method      Wei\TagCache tagCache($tag, $_ = null, $__ = null) Manager: Create a new cache service with tagging support
+ * @method      Wei\TagCache tagCache($tag, $ignore1 = null, $ignore2 = null) Manager: Create a new cache service with tagging support
  */
 class TagCacheMixin {
 }
@@ -693,14 +699,14 @@ class IsLuhnMixin {
 
 /**
  * @property    Wei\Validator\MaxLength $isMaxLength Check if the length (or size) of input is lower than specified length
- * @method      mixed isMaxLength($input, $max = null, $__ = null)
+ * @method      mixed isMaxLength($input, $max = null, $ignore = null)
  */
 class IsMaxLengthMixin {
 }
 
 /**
  * @property    Wei\Validator\MinLength $isMinLength Check if the length (or size) of input is greater than specified length
- * @method      mixed isMinLength($input, $min = null, $__ = null)
+ * @method      mixed isMinLength($input, $min = null, $ignore = null)
  */
 class IsMinLengthMixin {
 }
@@ -721,7 +727,7 @@ class IsNaturalNumberMixin {
 
 /**
  * @property    Wei\Validator\NoneOf $isNoneOf Check if the input is NOT valid by all of specified rules
- * @method      mixed isNoneOf($input, $rules = [], $__ = null)
+ * @method      mixed isNoneOf($input, $rules = [], $ignore = null)
  */
 class IsNoneOfMixin {
 }
@@ -927,6 +933,7 @@ class IsUuidMixin {
  * @mixin SchemaMixin
  * @mixin ServiceTraitMixin
  * @mixin SessionMixin
+ * @mixin ShareMixin
  * @mixin SoapMixin
  * @mixin StatsDMixin
  * @mixin TMixin

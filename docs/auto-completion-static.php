@@ -113,7 +113,7 @@ class Event
     /**
      * Attach a handler to an event
      *
-     * @param string|array $name The name of event, or an array that the key is event name and the value is event hanlder
+     * @param string|array $name The name of event, or an associative array contains event name and event handler pairs
      * @param callable $fn The event handler
      * @param int $priority The event priority
      * @throws \InvalidArgumentException when the second argument is not callable
@@ -238,7 +238,7 @@ class Password
      * Hash the password using the specified algorithm
      *
      * @param string $password The password to hash
-     * @return string|false The hashed password, or false on error.
+     * @return string|false the hashed password, or false on error
      * @throws \InvalidArgumentException
      * @see Password::hash
      */
@@ -259,7 +259,7 @@ class Password
      * )
      *
      * @param string $hash The password hash to extract info from
-     * @return array The array of information about the hash.
+     * @return array the array of information about the hash
      * @see Password::getInfo
      */
     public static function getInfo($hash)
@@ -272,7 +272,7 @@ class Password
      * If the answer is true, after validating the password using password_verify, rehash it.
      *
      * @param string $hash The hash to test
-     * @return boolean True if the password needs to be rehashed.
+     * @return bool true if the password needs to be rehashed
      * @see Password::needsRehash
      */
     public static function needsRehash($hash)
@@ -284,7 +284,7 @@ class Password
      *
      * @param string $password The password to verify
      * @param string $hash The hash to verify against
-     * @return boolean If the password matches the hash
+     * @return bool If the password matches the hash
      * @see Password::verify
      */
     public static function verify($password, $hash)
@@ -338,6 +338,97 @@ class Schema
 
 class Session
 {
+}
+
+class Share
+{
+    /**
+     * @param string $title
+     * @return $this
+     * @see Share::setTitle
+     */
+    public static function setTitle($title)
+    {
+    }
+
+    /**
+     * @return string
+     * @see Share::getTitle
+     */
+    public static function getTitle()
+    {
+    }
+
+    /**
+     * @param string $image
+     * @return $this
+     * @see Share::setImage
+     */
+    public static function setImage($image)
+    {
+    }
+
+    /**
+     * @return string
+     * @see Share::getImage
+     */
+    public static function getImage()
+    {
+    }
+
+    /**
+     * @param string $description
+     * @return Share
+     * @see Share::setDescription
+     */
+    public static function setDescription($description)
+    {
+    }
+
+    /**
+     * @return string
+     * @see Share::getDescription
+     */
+    public static function getDescription()
+    {
+    }
+
+    /**
+     * @param string $url
+     * @return Share
+     * @see Share::setUrl
+     */
+    public static function setUrl($url)
+    {
+    }
+
+    /**
+     * @return string
+     * @see Share::getUrl
+     */
+    public static function getUrl()
+    {
+    }
+
+    /**
+     * Returns share data as JSON
+     *
+     * @return string
+     * @see Share::toJson
+     */
+    public static function toJson()
+    {
+    }
+
+    /**
+     * Returns share data as JSON for WeChat
+     *
+     * @return string
+     * @see Share::toWechatJson
+     */
+    public static function toWechatJson()
+    {
+    }
 }
 
 class Soap
@@ -868,7 +959,7 @@ class Event
     /**
      * Attach a handler to an event
      *
-     * @param string|array $name The name of event, or an array that the key is event name and the value is event hanlder
+     * @param string|array $name The name of event, or an associative array contains event name and event handler pairs
      * @param callable $fn The event handler
      * @param int $priority The event priority
      * @throws \InvalidArgumentException when the second argument is not callable
@@ -993,7 +1084,7 @@ class Password
      * Hash the password using the specified algorithm
      *
      * @param string $password The password to hash
-     * @return string|false The hashed password, or false on error.
+     * @return string|false the hashed password, or false on error
      * @throws \InvalidArgumentException
      * @see Password::hash
      */
@@ -1014,7 +1105,7 @@ class Password
      * )
      *
      * @param string $hash The password hash to extract info from
-     * @return array The array of information about the hash.
+     * @return array the array of information about the hash
      * @see Password::getInfo
      */
     public function getInfo($hash)
@@ -1027,7 +1118,7 @@ class Password
      * If the answer is true, after validating the password using password_verify, rehash it.
      *
      * @param string $hash The hash to test
-     * @return boolean True if the password needs to be rehashed.
+     * @return bool true if the password needs to be rehashed
      * @see Password::needsRehash
      */
     public function needsRehash($hash)
@@ -1039,7 +1130,7 @@ class Password
      *
      * @param string $password The password to verify
      * @param string $hash The hash to verify against
-     * @return boolean If the password matches the hash
+     * @return bool If the password matches the hash
      * @see Password::verify
      */
     public function verify($password, $hash)
@@ -1093,6 +1184,97 @@ class Schema
 
 class Session
 {
+}
+
+class Share
+{
+    /**
+     * @param string $title
+     * @return $this
+     * @see Share::setTitle
+     */
+    public function setTitle($title)
+    {
+    }
+
+    /**
+     * @return string
+     * @see Share::getTitle
+     */
+    public function getTitle()
+    {
+    }
+
+    /**
+     * @param string $image
+     * @return $this
+     * @see Share::setImage
+     */
+    public function setImage($image)
+    {
+    }
+
+    /**
+     * @return string
+     * @see Share::getImage
+     */
+    public function getImage()
+    {
+    }
+
+    /**
+     * @param string $description
+     * @return Share
+     * @see Share::setDescription
+     */
+    public function setDescription($description)
+    {
+    }
+
+    /**
+     * @return string
+     * @see Share::getDescription
+     */
+    public function getDescription()
+    {
+    }
+
+    /**
+     * @param string $url
+     * @return Share
+     * @see Share::setUrl
+     */
+    public function setUrl($url)
+    {
+    }
+
+    /**
+     * @return string
+     * @see Share::getUrl
+     */
+    public function getUrl()
+    {
+    }
+
+    /**
+     * Returns share data as JSON
+     *
+     * @return string
+     * @see Share::toJson
+     */
+    public function toJson()
+    {
+    }
+
+    /**
+     * Returns share data as JSON for WeChat
+     *
+     * @return string
+     * @see Share::toWechatJson
+     */
+    public function toWechatJson()
+    {
+    }
 }
 
 class Soap
