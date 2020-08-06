@@ -7,5 +7,4 @@ namespace Wei;
  */
 class Response extends Res
 {
-
 }

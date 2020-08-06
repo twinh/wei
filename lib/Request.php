@@ -7,5 +7,4 @@ namespace Wei;
  */
 class Request extends Req
 {
-
 }
