@@ -272,8 +272,8 @@ class ResMixin {
 }
 
 /**
- * @property    Wei\Response $response
- * @method      Wei\Response response($content = null, $status = null) Send response header and content
+ * @property    Wei\Res $response
+ * @method      Wei\Res response($content = null, $status = null) Send response header and content
  */
 class ResponseMixin {
 }
