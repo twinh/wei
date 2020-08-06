@@ -38,7 +38,7 @@ final class UploadTest extends TestCase
      */
     public function testUploadError($error, $name)
     {
-        $this->request->setOption('files', [
+        $this->req->setOption('files', [
             'upload' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
@@ -85,7 +85,7 @@ final class UploadTest extends TestCase
 
     public function testUploadBySpecifiedName()
     {
-        $this->request->setOption('files', [
+        $this->req->setOption('files', [
             'upload' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
@@ -120,7 +120,7 @@ final class UploadTest extends TestCase
 
     public function testUploadImage()
     {
-        $this->request->setOption('files', [
+        $this->req->setOption('files', [
             'picture' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
@@ -139,7 +139,7 @@ final class UploadTest extends TestCase
 
     public function testUploadNormalFile()
     {
-        $this->request->setOption('files', [
+        $this->req->setOption('files', [
             'picture' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
@@ -158,8 +158,8 @@ final class UploadTest extends TestCase
 
     public function testUploadFileLargerThanMaxPostSize()
     {
-        $this->request->setOption('files', []);
-        $this->request->setOption('posts', []);
+        $this->req->setOption('files', []);
+        $this->req->setOption('posts', []);
 
         $this->upload([
             'field' => 'bigFile',
@@ -170,7 +170,7 @@ final class UploadTest extends TestCase
 
     public function testSaveFile()
     {
-        $this->request->setOption('files', [
+        $this->req->setOption('files', [
             'picture' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
@@ -189,7 +189,7 @@ final class UploadTest extends TestCase
 
     public function testUploadWithCustomName()
     {
-        $this->request->setOption('files', [
+        $this->req->setOption('files', [
             'picture' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
@@ -211,7 +211,7 @@ final class UploadTest extends TestCase
 
     public function testSaveFileToCustomDir()
     {
-        $this->request->setOption('files', [
+        $this->req->setOption('files', [
             'picture' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
@@ -247,7 +247,7 @@ final class UploadTest extends TestCase
      */
     public function testCantMoveFile()
     {
-        $this->request->setOption('files', [
+        $this->req->setOption('files', [
             'picture' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
@@ -270,7 +270,7 @@ final class UploadTest extends TestCase
 
     public function testOverwriteUploadFile()
     {
-        $this->request->setOption('files', [
+        $this->req->setOption('files', [
             'picture' => [
                 'name' => 'overwrite.gif',
                 'type' => 'image/gif',
@@ -305,7 +305,7 @@ final class UploadTest extends TestCase
 
     public function testUploadFileWithoutExtension()
     {
-        $this->request->setOption('files', [
+        $this->req->setOption('files', [
             'picture' => [
                 'name' => 'noext',
                 'type' => 'image/gif',

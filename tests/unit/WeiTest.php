@@ -2,7 +2,7 @@
 
 namespace WeiTest;
 
-use Wei\Request;
+use Wei\Req;
 use Wei\Wei;
 use WeiTest\Fixtures\StaticService;
 
@@ -88,19 +88,19 @@ final class WeiTest extends TestCase
     public function testSetOptionInSetConfig()
     {
         $wei = $this->wei;
-        $request = $wei->request;
+        $request = $wei->req;
 
-        $wei->setConfig('request', [
+        $wei->setConfig('req', [
             'method' => 'POST',
         ]);
         $this->assertEquals('POST', $request->getMethod());
 
         // No effect at this time
-        $wei->setConfig('request/method', 'PUT');
+        $wei->setConfig('req/method', 'PUT');
         $this->assertEquals('POST', $request->getMethod());
 
         $wei->setConfig([
-            'request' => [
+            'req' => [
                 'method' => 'DELETE',
             ],
         ]);
@@ -108,7 +108,7 @@ final class WeiTest extends TestCase
 
         // Reset config
         $wei->setConfig([
-            'request' => [
+            'req' => [
                 'method' => null,
             ],
         ]);
@@ -124,10 +124,10 @@ final class WeiTest extends TestCase
     {
         $this->setExpectedException(
             'InvalidArgumentException',
-            'Option "wei" of class "Wei\Request" should be an instance of "Wei\Wei"',
+            'Option "wei" of class "Wei\Req" should be an instance of "Wei\Wei"',
             1000
         );
-        new \Wei\Request([
+        new \Wei\Req([
             'wei' => new \stdClass(),
         ]);
     }
@@ -163,12 +163,12 @@ final class WeiTest extends TestCase
 
     public function testSet()
     {
-        $request = new \Wei\Request([
+        $request = new \Wei\Req([
             'wei' => $this->wei,
         ]);
 
-        $this->wei->set('request', $request);
-        $this->assertSame($request, $this->wei->request);
+        $this->wei->set('req', $request);
+        $this->assertSame($request, $this->wei->req);
     }
 
     public function testSetWithCaseSensitiveName()
@@ -199,7 +199,7 @@ final class WeiTest extends TestCase
             'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3),
         ]), 1012));
 
-        $this->wei->request->notFoundService;
+        $this->wei->req->notFoundService;
     }
 
     public function testInvokeNotFoundServiceFromContainer()
@@ -215,11 +215,11 @@ final class WeiTest extends TestCase
     public function testInvokeNotFoundServiceFromService()
     {
         $this->expectExceptionObject(new \BadMethodCallException(implode('', [
-            'Method "Wei\Request->notFoundService" (class "Wei\NotFoundService") not found, ',
+            'Method "Wei\Req->notFoundService" (class "Wei\NotFoundService") not found, ',
             'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3),
         ]), 1014));
 
-        $this->wei->request->notFoundService();
+        $this->wei->req->notFoundService();
     }
 
     public function testInvokeNotFoundServiceByCallUserFuncFromContainer()
@@ -235,11 +235,11 @@ final class WeiTest extends TestCase
     public function testInvokeNotFoundServiceByCallUserFuncFromService()
     {
         $this->expectExceptionObject(new \BadMethodCallException(implode('', [
-            'Method "Wei\Request->notFoundService" (class "Wei\NotFoundService") not found, ',
+            'Method "Wei\Req->notFoundService" (class "Wei\NotFoundService") not found, ',
             'called in file "' . __FILE__ . '" at line ' . (__LINE__ + 3),
         ]), 1014));
 
-        call_user_func([$this->wei->request, 'notFoundService']);
+        call_user_func([$this->wei->req, 'notFoundService']);
     }
 
     public function testInvokeNotFoundServiceByGetMethod()
@@ -252,14 +252,14 @@ final class WeiTest extends TestCase
     public function testGetFromProviders()
     {
         // Set options for sub request
-        $this->wei->setConfig('sub.request', [
+        $this->wei->setConfig('sub.req', [
             'fromGlobal' => false,
             'data' => [
                 'id' => 'fromSubRequest',
             ],
         ]);
 
-        $request = $this->wei->request;
+        $request = $this->wei->req;
         $request->set('id', 'fromOrigin');
 
         $serviceWithProvider = new \WeiTest\Fixtures\ServiceWithProvider([
@@ -267,7 +267,7 @@ final class WeiTest extends TestCase
         ]);
 
         // Instance request wei from 'request.sub' configuration
-        $subRequest = $serviceWithProvider->request;
+        $subRequest = $serviceWithProvider->req;
         $this->assertEquals('fromSubRequest', $subRequest->get('id'));
 
         $this->assertEquals('fromOrigin', $request->get('id'));
@@ -281,12 +281,12 @@ final class WeiTest extends TestCase
             'subRequest' => 'sub.request',
         ]);
 
-        $this->assertInstanceOf('Wei\Request', $wei->subRequest);
-        $this->assertNotSame($wei->request, $wei->subRequest);
+        $this->assertInstanceOf('Wei\Req', $wei->subRequest);
+        $this->assertNotSame($wei->req, $wei->subRequest);
 
-        $subRequest = $wei->request->subRequest;
-        $this->assertInstanceOf('Wei\Request', $subRequest);
-        unset($wei->request->subRequest);
+        $subRequest = $wei->req->subRequest;
+        $this->assertInstanceOf('Wei\Req', $subRequest);
+        unset($wei->req->subRequest);
     }
 
     public function testPreloadWeiInDependenceMap()
@@ -294,28 +294,28 @@ final class WeiTest extends TestCase
         $wei = new Wei([
             'wei' => [
                 'providers' => [
-                    'request' => 'sub.request',
+                    'req' => 'sub.req',
                 ],
                 'preload' => [
-                    'request',
+                    'req',
                 ],
             ],
-            'request' => [
+            'req' => [
                 'fromGlobal' => true,
             ],
-            'sub.request' => [
+            'sub.req' => [
                 'fromGlobal' => false,
             ],
         ]);
 
-        $this->assertFalse($wei->request->getOption('fromGlobal'));
+        $this->assertFalse($wei->req->getOption('fromGlobal'));
     }
 
     public function testInvoke()
     {
-        $this->request->set('id', __METHOD__);
+        $this->req->set('id', __METHOD__);
 
-        // Equals to $this->wei->request('id')
+        // Equals to $this->wei->req('id')
         $id = $this->wei->invoke('request', ['id']);
 
         $this->assertEquals(__METHOD__, $id);
@@ -334,55 +334,55 @@ final class WeiTest extends TestCase
 
     public function testNewInstance()
     {
-        $newRequest = $this->wei->newInstance('request');
+        $newRequest = $this->wei->newInstance('req');
 
-        $this->assertInstanceOf('\Wei\Request', $newRequest);
-        $this->assertEquals($this->request, $newRequest);
-        $this->assertNotSame($this->request, $newRequest);
+        $this->assertInstanceOf('\Wei\Req', $newRequest);
+        $this->assertEquals($this->req, $newRequest);
+        $this->assertNotSame($this->req, $newRequest);
     }
 
     public function testNewInstanceHaveSameConfig()
     {
-        $this->wei->setConfig('request', [
+        $this->wei->setConfig('req', [
             'method' => 'DELETE',
         ]);
 
-        $this->assertSame('DELETE', $this->wei->request->getMethod());
+        $this->assertSame('DELETE', $this->wei->req->getMethod());
 
-        /** @var Request $newRequest */
-        $newRequest = $this->wei->newInstance('request');
+        /** @var Req $newRequest */
+        $newRequest = $this->wei->newInstance('req');
         $this->assertSame('DELETE', $newRequest->getMethod());
 
         // Reset config
-        $this->wei->setConfig('request', [
+        $this->wei->setConfig('req', [
             'method' => null,
         ]);
     }
 
     public function testGetClassFromAliases()
     {
-        $this->wei->setAlias('request', '\Wei\Request');
+        $this->wei->setAlias('request', '\Wei\Req');
 
-        $this->assertEquals('\Wei\Request', $this->wei->getClass('request'));
+        $this->assertEquals('\Wei\Req', $this->wei->getClass('request'));
     }
 
     public function testRemove()
     {
         // Instance request wei
-        $request = $this->wei->request;
+        $request = $this->wei->req;
 
-        $this->assertTrue($this->wei->remove('request'));
-        $this->assertFalse($this->wei->remove('request'));
+        $this->assertTrue($this->wei->remove('req'));
+        $this->assertFalse($this->wei->remove('req'));
 
         // Re-instance request wei
-        $this->assertNotSame($request, $this->wei->request);
+        $this->assertNotSame($request, $this->wei->req);
     }
 
     public function testHas()
     {
-        $this->wei->request;
+        $this->wei->req;
 
-        $this->assertEquals('\Wei\Request', $this->wei->has('request'));
+        $this->assertEquals('\Wei\Req', $this->wei->has('request'));
         $this->assertFalse($this->wei->has('request2'));
     }
 
@@ -544,13 +544,13 @@ final class WeiTest extends TestCase
         ]);
 
         // service instances
-        $wei->request;
-        $wei->{'sub.request'};
+        $wei->req;
+        $wei->{'sub.req'};
 
-        $this->assertContains('request', $beforeConstruct);
-        $this->assertContains('sub.request', $afterConstruct);
-        $this->assertContains('request', $beforeConstruct);
-        $this->assertContains('sub.request', $afterConstruct);
+        $this->assertContains('req', $beforeConstruct);
+        $this->assertContains('sub.req', $afterConstruct);
+        $this->assertContains('req', $beforeConstruct);
+        $this->assertContains('sub.req', $afterConstruct);
     }
 
     public function testCreateNewContainer()

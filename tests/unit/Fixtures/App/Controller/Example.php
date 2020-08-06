@@ -18,9 +18,9 @@ class Example extends \Wei\BaseController
 
     public function returnResponseAction()
     {
-        $this->response->setContent('response content');
+        $this->res->setContent('response content');
 
-        return $this->response;
+        return $this->res;
     }
 
     public function returnUnexpectedTypeAction()

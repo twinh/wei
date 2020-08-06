@@ -13,8 +13,8 @@ namespace Wei;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Router $router A service that parse the URL to request data
- * @property    Request $request A service that handles the HTTP request data
- * @property    Response $response A service that handles the HTTP response data
+ * @property    Req $req A service that handles the HTTP request data
+ * @property    Res $res A service that handles the HTTP response data
  * @property    View $view A service that use to render PHP template
  */
 class App extends Base
@@ -93,7 +93,7 @@ class App extends Base
         $options && $this->setOption($options);
 
         // Parse the path info to parameter set
-        $request = $this->request;
+        $request = $this->req;
         $paramSet = $this->router->matchParamSet($request->getPathInfo(), $request->getMethod());
 
         // Find out exiting controller action and execute
@@ -116,7 +116,7 @@ class App extends Base
      * @param string|null $action The name of action
      * @param array $params The request parameters
      * @param bool $throwException Whether throw exception when application not found
-     * @return array|Response
+     * @return array|Res
      */
     public function dispatch($controller, $action = null, array $params = [], $throwException = true)
     {
@@ -137,14 +137,14 @@ class App extends Base
             // Find out existing controller and action
             $this->setController($controller);
             $this->setAction($action);
-            $this->request->set($params);
+            $this->req->set($params);
             try {
                 $instance = $this->getControllerInstance($class);
 
                 return $this->execute($instance, $action);
             } catch (\RuntimeException $e) {
                 if (self::FORWARD === $e->getCode()) {
-                    return $this->response;
+                    return $this->res;
                 } else {
                     throw $e;
                 }
@@ -162,7 +162,7 @@ class App extends Base
      * Handle the response variable returned by controller action
      *
      * @param mixed $response
-     * @return Response
+     * @return Res
      * @throws \InvalidArgumentException
      */
     public function handleResponse($response)
@@ -172,14 +172,14 @@ class App extends Base
             case is_array($response):
                 $content = $this->view->render($this->getDefaultTemplate(), $response);
 
-                return $this->response->setContent($content);
+                return $this->res->setContent($content);
 
             // Response directly
             case is_scalar($response) || null === $response:
-                return $this->response->setContent($response);
+                return $this->res->setContent($response);
 
             // Response if not sent
-            case $response instanceof Response:
+            case $response instanceof Res:
                 return $response;
 
             default:
@@ -198,7 +198,7 @@ class App extends Base
     public function getNamespace()
     {
         if (!$this->namespace) {
-            $this->namespace = $this->request->get('namespace');
+            $this->namespace = $this->req->get('namespace');
         }
 
         return $this->namespace;
@@ -403,7 +403,7 @@ class App extends Base
      */
     public function forward($controller, $action = null, array $params = [])
     {
-        $this->response = $this->dispatch($controller, $action, $params);
+        $this->res = $this->dispatch($controller, $action, $params);
         $this->preventPreviousDispatch();
     }
 
@@ -420,7 +420,7 @@ class App extends Base
         // All controllers and actions were not found, prepare exception message
         $message = 'The page you requested was not found';
         if ($this->wei->isDebug()) {
-            $detail = $this->request->get('debug-detail');
+            $detail = $this->req->get('debug-detail');
             foreach ($notFound['controllers'] as $controller => $classes) {
                 $message .= sprintf('%s - controller "%s" not found', "\n", $controller);
                 $detail && $message .= sprintf(' (class "%s")', implode('", "', $classes));
@@ -443,7 +443,7 @@ class App extends Base
      *
      * @param \Wei\BaseController $instance
      * @param string $action
-     * @return Response
+     * @return Res
      */
     protected function execute($instance, $action)
     {
@@ -451,12 +451,12 @@ class App extends Base
         $middleware = $this->getMiddleware($instance, $action);
 
         $callback = function () use ($instance, $action) {
-            $instance->before($this->request, $this->response);
+            $instance->before($this->req, $this->res);
 
             $method = $this->getActionMethod($action);
-            $response = $instance->{$method}($this->request, $this->response);
+            $response = $instance->{$method}($this->req, $this->res);
 
-            $instance->after($this->request, $response);
+            $instance->after($this->req, $response);
 
             return $response;
         };

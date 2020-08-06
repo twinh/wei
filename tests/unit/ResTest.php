@@ -5,10 +5,10 @@ namespace WeiTest
     /**
      * @internal
      */
-    final class ResponseTest extends TestCase
+    final class ResTest extends TestCase
     {
         /**
-         * @var \Wei\Response
+         * @var \Wei\Res
          */
         protected $object;
 
@@ -55,7 +55,7 @@ namespace WeiTest
             $this->assertEquals("HTTP/1.1 200 OK\r\nKey: Value\r\nKey1: Value1\r\n\r\n", (string) $response);
         }
 
-        public function getOutput(\Wei\Response $response, $content = null, $statusCode = null)
+        public function getOutput(\Wei\Res $response, $content = null, $statusCode = null)
         {
             ob_start();
             // Equals to $response->send($content, $statusCode);
@@ -100,7 +100,7 @@ namespace WeiTest
             $file = __DIR__ . '/Fixtures/views/content.php';
 
             ob_start();
-            $this->response->download($file);
+            $this->res->download($file);
             $content = ob_get_clean();
 
             $this->assertSame(file_get_contents($file), $content);
@@ -110,12 +110,12 @@ namespace WeiTest
         {
             $this->expectException(\RuntimeException::class);
 
-            $this->response->download('not found file');
+            $this->res->download('not found file');
         }
 
         public function testFlush()
         {
-            $this->assertInstanceOf('\Wei\Response', $this->response->flush());
+            $this->assertInstanceOf('\Wei\Res', $this->res->flush());
 
             $this->assertEquals('1', ini_get('implicit_flush'));
 
@@ -141,7 +141,7 @@ namespace WeiTest
 
         public function testJsonp()
         {
-            $this->request->set('callback', 'callback');
+            $this->req->set('callback', 'callback');
 
             $this->expectOutputString('callback({"code":-1,"message":"error"})');
 
@@ -152,7 +152,7 @@ namespace WeiTest
 
         public function testJsonpCallbackNameWithDot()
         {
-            $this->request->set('callback', 'call.back');
+            $this->req->set('callback', 'call.back');
 
             $this->expectOutputString('call.back({"code":-1,"message":"error"})');
 
@@ -174,32 +174,32 @@ namespace WeiTest
         {
             $this->expectOutputString('redirect');
 
-            $this->response->setRedirectView(__DIR__ . '/Fixtures/redirect.php');
+            $this->res->setRedirectView(__DIR__ . '/Fixtures/redirect.php');
 
-            $this->response->redirect()->send();
+            $this->res->redirect()->send();
         }
 
         public function testViewNotFound()
         {
             $this->expectException(\RuntimeException::class);
 
-            $this->response->setRedirectView('not found');
+            $this->res->setRedirectView('not found');
         }
 
         public function testRedirectByHeader()
         {
             $this->expectOutputRegex('/http:\/\/www\.google\.com/');
 
-            $this->response->redirect('http://www.google.com')->send();
+            $this->res->redirect('http://www.google.com')->send();
 
-            $this->assertEquals('http://www.google.com', $this->response->getHeader('Location'));
+            $this->assertEquals('http://www.google.com', $this->res->getHeader('Location'));
         }
 
         public function testWait()
         {
             $this->expectOutputRegex('/content=\"5;url=http:\/\/www\.google\.com/');
 
-            $this->response->redirect('http://www.google.com', 302, ['redirectWait' => 5])->send();
+            $this->res->redirect('http://www.google.com', 302, ['redirectWait' => 5])->send();
         }
     }
 }

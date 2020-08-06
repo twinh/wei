@@ -2,17 +2,17 @@
 
 namespace WeiTest;
 
-use Wei\Request;
+use Wei\Req;
 
 /**
- * @property Request $request
+ * @property Req $req
  *
  * @internal
  */
-final class RequestTest extends TestCase
+final class ReqTest extends TestCase
 {
     /**
-     * @var \Wei\Request
+     * @var \Wei\Req
      */
     protected $object;
 
@@ -23,14 +23,14 @@ final class RequestTest extends TestCase
     {
         $wei = $this->object;
 
-        $name = $wei->request('name');
+        $name = $wei->req('name');
         // phpcs:disable MySource.PHP.GetRequestData.SuperglobalAccessedWithVar
         $source = isset($_REQUEST['name']) ? $_REQUEST['name'] : null;
 
         $this->assertEquals($name, $source);
 
         $default = 'default';
-        $name2 = $wei->request('name', $default);
+        $name2 = $wei->req('name', $default);
         // phpcs:disable MySource.PHP.GetRequestData.SuperglobalAccessedWithVar
         $source = isset($_REQUEST['name']) ? $_REQUEST['name'] : $default;
 
@@ -43,14 +43,14 @@ final class RequestTest extends TestCase
 
         $wei->set('key', 'value');
 
-        $this->assertEquals('value', $wei->request('key'), 'string param');
+        $this->assertEquals('value', $wei->req('key'), 'string param');
 
         $wei->fromArray([
             'key1' => 'value1',
             'key2' => 'value2',
         ]);
 
-        $this->assertEquals('value2', $wei->request('key2'), 'array param');
+        $this->assertEquals('value2', $wei->req('key2'), 'array param');
     }
 
     public function testRemove()
@@ -59,11 +59,11 @@ final class RequestTest extends TestCase
 
         $wei->set('remove', 'just a moment');
 
-        $this->assertEquals('just a moment', $wei->request('remove'));
+        $this->assertEquals('just a moment', $wei->req('remove'));
 
         $wei->remove('remove');
 
-        $this->assertNull($wei->request->get('remove'));
+        $this->assertNull($wei->req->get('remove'));
     }
 
     public function testMethod()
@@ -71,7 +71,7 @@ final class RequestTest extends TestCase
         foreach (['GET', 'POST'] as $method) {
             $this->wei->remove('request');
             $this->wei->remove('server');
-            $request = new \Wei\Request([
+            $request = new \Wei\Req([
                 'wei' => $this->wei,
                 'fromGlobal' => false,
                 'servers' => [
@@ -87,63 +87,63 @@ final class RequestTest extends TestCase
 
     public function testAjax()
     {
-        $this->request->setServer('HTTP_X_REQUESTED_WITH', 'xmlhttprequest');
+        $this->req->setServer('HTTP_X_REQUESTED_WITH', 'xmlhttprequest');
 
-        $this->assertTrue($this->request->isAjax());
+        $this->assertTrue($this->req->isAjax());
 
-        $this->request->setServer('HTTP_X_REQUESTED_WITH', 'json');
+        $this->req->setServer('HTTP_X_REQUESTED_WITH', 'json');
 
-        $this->assertFalse($this->request->isAjax());
+        $this->assertFalse($this->req->isAjax());
 
-        $servers = $this->request->getParameterReference('server');
+        $servers = $this->req->getParameterReference('server');
         unset($servers['HTTP_X_REQUESTED_WITH']);
 
-        $this->assertFalse($this->request->isAjax());
+        $this->assertFalse($this->req->isAjax());
     }
 
     public function testInvalidParameterReference()
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $this->request->getParameterReference('exception');
+        $this->req->getParameterReference('exception');
     }
 
     public function testGetIp()
     {
-        $this->request->setServer('HTTP_X_FORWARDED_FOR', '1.2.3.4');
-        $this->assertEquals('1.2.3.4', $this->request->getIp());
+        $this->req->setServer('HTTP_X_FORWARDED_FOR', '1.2.3.4');
+        $this->assertEquals('1.2.3.4', $this->req->getIp());
 
-        $this->request->setServer('HTTP_X_FORWARDED_FOR', '1.2.3.4, 2.3.4.5');
-        $this->assertEquals('1.2.3.4', $this->request->getIp());
+        $this->req->setServer('HTTP_X_FORWARDED_FOR', '1.2.3.4, 2.3.4.5');
+        $this->assertEquals('1.2.3.4', $this->req->getIp());
 
-        $servers = &$this->request->getParameterReference('server');
+        $servers = &$this->req->getParameterReference('server');
         unset($servers['HTTP_X_FORWARDED_FOR']);
         $servers['HTTP_CLIENT_IP'] = '8.8.8.8';
-        $this->assertEquals('8.8.8.8', $this->request->getIp());
+        $this->assertEquals('8.8.8.8', $this->req->getIp());
 
-        $servers = $this->request->getParameterReference('server');
+        $servers = $this->req->getParameterReference('server');
         unset($servers['HTTP_CLIENT_IP']);
         $servers['REMOTE_ADDR'] = '9.9.9.9';
-        $this->assertEquals('9.9.9.9', $this->request->getIp());
+        $this->assertEquals('9.9.9.9', $this->req->getIp());
 
-        $this->request->setServer('HTTP_X_FORWARDED_FOR', 'invalid ip');
-        $this->assertEquals('0.0.0.0', $this->request->getIp());
+        $this->req->setServer('HTTP_X_FORWARDED_FOR', 'invalid ip');
+        $this->assertEquals('0.0.0.0', $this->req->getIp());
     }
 
     public function testGetScheme()
     {
-        $this->request->setServer('HTTPS', 'on');
-        $this->assertEquals('https', $this->request->getScheme());
+        $this->req->setServer('HTTPS', 'on');
+        $this->assertEquals('https', $this->req->getScheme());
 
-        $this->request->setServer('HTTPS', '1');
-        $this->assertEquals('https', $this->request->getScheme());
+        $this->req->setServer('HTTPS', '1');
+        $this->assertEquals('https', $this->req->getScheme());
 
-        $this->request->setServer('HTTPS', 'off');
-        $this->assertEquals('http', $this->request->getScheme());
+        $this->req->setServer('HTTPS', 'off');
+        $this->assertEquals('http', $this->req->getScheme());
 
-        $servers = $this->request->getParameterReference('server');
+        $servers = $this->req->getParameterReference('server');
         unset($servers['HTTPS']);
-        $this->assertEquals('http', $this->request->getScheme());
+        $this->assertEquals('http', $this->req->getScheme());
     }
 
     /**
@@ -384,10 +384,10 @@ final class RequestTest extends TestCase
      */
     public function testBasePathDetection(array $server, $baseUrl, $pathInfo)
     {
-        $this->request->setOption('servers', $server);
+        $this->req->setOption('servers', $server);
 
-        $this->assertEquals($baseUrl, $this->request->getBaseUrl());
-        $this->assertEquals($pathInfo, $this->request->getPathInfo());
+        $this->assertEquals($baseUrl, $this->req->getBaseUrl());
+        $this->assertEquals($pathInfo, $this->req->getPathInfo());
     }
 
     public function testGetHost()
@@ -397,12 +397,12 @@ final class RequestTest extends TestCase
             'SERVER_NAME' => 'test.com',
             'REMOTE_ADDR' => '127.0.0.1',
         ];
-        $this->request->setOption('servers', $server);
-        $this->assertEquals('a.test.com', $this->request->getHost());
+        $this->req->setOption('servers', $server);
+        $this->assertEquals('a.test.com', $this->req->getHost());
 
         unset($server['HTTP_HOST']);
-        $this->request->setOption('servers', $server);
-        $this->assertEquals('test.com', $this->request->getHost());
+        $this->req->setOption('servers', $server);
+        $this->assertEquals('test.com', $this->req->getHost());
     }
 
     public function testGetHttpHostWithPort()
@@ -410,15 +410,15 @@ final class RequestTest extends TestCase
         $server = [
             'HTTP_HOST' => '127.0.0.1:8080',
         ];
-        $this->request->setOption('servers', $server);
-        $this->assertEquals('127.0.0.1', $this->request->getHost());
+        $this->req->setOption('servers', $server);
+        $this->assertEquals('127.0.0.1', $this->req->getHost());
     }
 
     public function testSetRequestUri()
     {
-        $this->request->setRequestUri('/blog');
+        $this->req->setRequestUri('/blog');
 
-        $this->assertEquals('/blog', $this->request->getRequestUri());
+        $this->assertEquals('/blog', $this->req->getRequestUri());
     }
 
     public function providerForGetUrl()
@@ -455,25 +455,25 @@ final class RequestTest extends TestCase
      */
     public function testGetUrl($server, $url, $urlPath)
     {
-        $this->request->setOption('servers', $server);
+        $this->req->setOption('servers', $server);
 
-        $this->assertEquals($url, $this->request->getUrl());
-        $this->assertEquals($urlPath, $this->request->getUrlFor('/path'));
+        $this->assertEquals($url, $this->req->getUrl());
+        $this->assertEquals($urlPath, $this->req->getUrlFor('/path'));
     }
 
     public function testGetContent()
     {
         // Should be empty on not post request
-        $this->assertEmpty($this->request->getContent());
+        $this->assertEmpty($this->req->getContent());
 
-        $this->request->setContent(__METHOD__);
+        $this->req->setContent(__METHOD__);
 
-        $this->assertEquals(__METHOD__, $this->request->getContent());
+        $this->assertEquals(__METHOD__, $this->req->getContent());
     }
 
     public function testToString()
     {
-        $this->request->setOption('servers', [
+        $this->req->setOption('servers', [
             'HTTPS' => 'on',
             'SERVER_PORT' => '8080',
             'HTTP_HOST' => 'test.com',
@@ -485,20 +485,20 @@ final class RequestTest extends TestCase
 
         $this->assertEquals(
             "GET https://test.com:8080/index.php?query=string HTTP/1.0\r\nHost: test.com\r\n",
-            (string) $this->request
+            (string) $this->req
         );
     }
 
     public function testPathInfo()
     {
-        $this->request->setPathInfo('/blog');
+        $this->req->setPathInfo('/blog');
 
-        $this->assertEquals('/blog', $this->request->getPathInfo());
+        $this->assertEquals('/blog', $this->req->getPathInfo());
     }
 
     public function testEmptyPort()
     {
-        $request = new \Wei\Request([
+        $request = new \Wei\Req([
             'wei' => $this->wei,
             'fromGlobal' => false,
             'servers' => [
@@ -514,7 +514,7 @@ final class RequestTest extends TestCase
      */
     public function testErrorParameterTypeWhenFromGlobalIsFalse()
     {
-        $request = new \Wei\Request([
+        $request = new \Wei\Req([
             'fromGlobal' => false,
         ]);
 
@@ -525,7 +525,7 @@ final class RequestTest extends TestCase
 
     public function testGetHeaders()
     {
-        $this->request->setOption('servers', [
+        $this->req->setOption('servers', [
             'REDIRECT_STATUS' => '200',
             'HTTP_HOST' => 'web',
             'HTTP_CONNECTION' => 'keep-alive',
@@ -569,7 +569,7 @@ final class RequestTest extends TestCase
             'ACCEPT_ENCODING' => 'gzip,deflate,sdch',
             'ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8',
             'ACCEPT_CHARSET' => 'UTF-8,*;q=0.5',
-        ], $this->request->getHeaders());
+        ], $this->req->getHeaders());
     }
 
     public function testInvoker()
@@ -631,9 +631,9 @@ final class RequestTest extends TestCase
             'key1' => 'value1',
         ];
 
-        $this->request->set($array);
+        $this->req->set($array);
 
-        $this->assertIsSubset($array, $this->request->toArray());
+        $this->assertIsSubset($array, $this->req->toArray());
     }
 
     public function testOffsetExists()
@@ -666,7 +666,7 @@ final class RequestTest extends TestCase
     public function createParameterObject($type, $class)
     {
         // create request wei from custom parameter
-        $request = new \Wei\Request([
+        $request = new \Wei\Req([
             'wei' => $this->wei,
             'fromGlobal' => false,
             $type => [
@@ -713,13 +713,13 @@ final class RequestTest extends TestCase
 
     public function testOverwriteAjax()
     {
-        $request = new Request([
+        $request = new Req([
             'wei' => $this->wei,
             'data' => [],
         ]);
         $this->assertFalse($request->isAjax());
 
-        $request = new Request([
+        $request = new Req([
             'wei' => $this->wei,
             'data' => [
                 '_ajax' => true,
@@ -730,7 +730,7 @@ final class RequestTest extends TestCase
 
     public function testOverwriteMethod()
     {
-        $request = new Request([
+        $request = new Req([
             'wei' => $this->wei,
             'fromGlobal' => false,
             'data' => [
@@ -743,12 +743,12 @@ final class RequestTest extends TestCase
     public function testArrayAccess()
     {
         $this->assertArrayBehaviour([]);
-        $this->assertArrayBehaviour($this->request);
+        $this->assertArrayBehaviour($this->req);
     }
 
     public function testAcceptJson()
     {
-        $request = $this->request;
+        $request = $this->req;
         $request->setServer('HTTP_ACCEPT', 'application/json, text/javascript, */*; q=0.01');
         $this->assertTrue($request->acceptJson());
 
@@ -761,7 +761,7 @@ final class RequestTest extends TestCase
 
     public function testAcceptJsonByOverwriteFormat()
     {
-        $request = $this->request;
+        $request = $this->req;
         $request->setServer(
             'HTTP_ACCEPT',
             'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
@@ -774,7 +774,7 @@ final class RequestTest extends TestCase
 
     public function testIsFormat()
     {
-        $request = $this->request;
+        $request = $this->req;
         $request->set('_format', null);
         $request->setServer(
             'HTTP_ACCEPT',
@@ -788,7 +788,7 @@ final class RequestTest extends TestCase
 
     public function testIsFormatJson()
     {
-        $request = $this->request;
+        $request = $this->req;
         $request->setServer('HTTP_ACCEPT', 'application/json, text/javascript, */*; q=0.01');
         $this->assertTrue($request->isFormat('json'));
     }
@@ -801,8 +801,8 @@ final class RequestTest extends TestCase
      */
     public function testAccept($mime, $header, $result)
     {
-        $this->request->setServer('HTTP_ACCEPT', $header);
-        $this->assertSame($result, $this->request->accept($mime));
+        $this->req->setServer('HTTP_ACCEPT', $header);
+        $this->assertSame($result, $this->req->accept($mime));
     }
 
     public function acceptProvider()
@@ -838,25 +838,25 @@ final class RequestTest extends TestCase
 
     public function testSetMethodShouldBeUppercase()
     {
-        $this->request->setMethod('put');
-        $this->assertEquals('PUT', $this->request->getMethod());
+        $this->req->setMethod('put');
+        $this->assertEquals('PUT', $this->req->getMethod());
     }
 
     public function testExtraKeyInit()
     {
         $this->initExtraKey();
 
-        $extraKeys = $this->request->getOption('extraKeys');
+        $extraKeys = $this->req->getOption('extraKeys');
         $this->assertArrayHasKey('test', $extraKeys);
 
-        $this->assertArrayNotHasKey('test', $this->request);
+        $this->assertArrayNotHasKey('test', $this->req);
     }
 
     public function testExtraKeyToArray()
     {
         $this->initExtraKey();
 
-        $array = $this->request->toArray();
+        $array = $this->req->toArray();
 
         $this->assertArrayNotHasKey('test', $array, 'toArray不会带上额外键名');
     }
@@ -866,7 +866,7 @@ final class RequestTest extends TestCase
         $this->initExtraKey();
 
         $array = [];
-        foreach ($this->request as $key => $value) {
+        foreach ($this->req as $key => $value) {
             $array[$key] = $value;
         }
 
@@ -878,11 +878,11 @@ final class RequestTest extends TestCase
         $this->initExtraKey();
 
         // 触发的是offsetSet,因此不会生成extraKey
-        $this->request['test'] = 'value';
+        $this->req['test'] = 'value';
 
-        $this->assertArrayNotHasKey('test', $this->request->getOption('extraKeys'));
+        $this->assertArrayNotHasKey('test', $this->req->getOption('extraKeys'));
 
-        $this->assertEquals('value', $this->request->toArray()['test']);
+        $this->assertEquals('value', $this->req->toArray()['test']);
     }
 
     public function testExtraKeySetMultiLevel()
@@ -890,38 +890,38 @@ final class RequestTest extends TestCase
         $this->initExtraKey();
 
         // 触发的是offsetGet,因此会生成extraKey
-        $this->request['test']['level2'] = 'value';
+        $this->req['test']['level2'] = 'value';
 
-        $this->assertArrayHasKey('test', $this->request->getOption('extraKeys'));
+        $this->assertArrayHasKey('test', $this->req->getOption('extraKeys'));
 
-        $this->assertEquals('value', $this->request['test']['level2']);
+        $this->assertEquals('value', $this->req['test']['level2']);
 
-        $this->assertEquals('value', $this->request->toArray()['test']['level2']);
+        $this->assertEquals('value', $this->req->toArray()['test']['level2']);
     }
 
     public function testExtraKeyCount()
     {
-        if (isset($this->request['test'])) {
-            unset($this->request['test']);
+        if (isset($this->req['test'])) {
+            unset($this->req['test']);
         }
 
-        $count = count($this->request);
+        $count = count($this->req);
 
         $this->initExtraKey();
 
-        $this->assertCount($count, $this->request);
+        $this->assertCount($count, $this->req);
     }
 
     public function testExtraKeyUnset()
     {
         $this->initExtraKey();
 
-        $this->request['test']['level2'] = 'value';
+        $this->req['test']['level2'] = 'value';
 
-        unset($this->request['test']);
+        unset($this->req['test']);
 
-        $this->assertArrayNotHasKey('test', $this->request->getOption('extraKeys'));
-        $this->assertArrayNotHasKey('test', $this->request->toArray());
+        $this->assertArrayNotHasKey('test', $this->req->getOption('extraKeys'));
+        $this->assertArrayNotHasKey('test', $this->req->toArray());
     }
 
     public function testExtraKeySetNull()
@@ -929,11 +929,11 @@ final class RequestTest extends TestCase
         $this->initExtraKey();
 
         // 主动设置了,不会在extraKey里面
-        $this->request['test'] = null;
+        $this->req['test'] = null;
 
-        $this->assertArrayNotHasKey('test', $this->request->getOption('extraKeys'));
+        $this->assertArrayNotHasKey('test', $this->req->getOption('extraKeys'));
 
-        $this->assertArrayHasKey('test', $this->request->toArray());
+        $this->assertArrayHasKey('test', $this->req->toArray());
     }
 
     /**
@@ -943,7 +943,7 @@ final class RequestTest extends TestCase
      */
     public function testIsUrlRewrite(array $options, bool $result)
     {
-        $request = new Request($options + ['wei' => $this->wei, 'fromGlobal' => false]);
+        $request = new Req($options + ['wei' => $this->wei, 'fromGlobal' => false]);
         $this->assertSame($result, $request->isUrlRewrite());
     }
 
@@ -989,7 +989,7 @@ final class RequestTest extends TestCase
      */
     public function testGetRouterPathInfo(array $options, string $pathInfo, string $routerPathInfo)
     {
-        $request = new Request(['wei' => $this->wei, 'fromGlobal' => false] + $options);
+        $request = new Req(['wei' => $this->wei, 'fromGlobal' => false] + $options);
         $this->assertSame($pathInfo, $request->getPathInfo());
         $this->assertSame($routerPathInfo, $request->getRouterPathInfo());
     }
@@ -1076,7 +1076,7 @@ final class RequestTest extends TestCase
     public function testPopulateJsonToData()
     {
         // create request wei from custom parameter
-        $request = new \Wei\Request([
+        $request = new \Wei\Req([
             'wei' => $this->wei,
             'fromGlobal' => false,
             'content' => '{"a":"b"}',
@@ -1090,13 +1090,13 @@ final class RequestTest extends TestCase
     protected function initExtraKey()
     {
         // 移除数据避免干扰
-        unset($this->request['test']);
-        $this->assertArrayNotHasKey('test', $this->request);
+        unset($this->req['test']);
+        $this->assertArrayNotHasKey('test', $this->req);
 
-        $extraKeys = $this->request->getOption('extraKeys');
+        $extraKeys = $this->req->getOption('extraKeys');
         $this->assertArrayNotHasKey('test', $extraKeys);
 
         // 触发了 &offsetGet 产生了 test 键名
-        $this->request['test'];
+        $this->req['test'];
     }
 }

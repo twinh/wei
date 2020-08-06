@@ -26,7 +26,7 @@ final class SafeUrlTest extends TestCase
         $this->assertArrayHasKey('timestamp', $queries);
         $this->assertArrayHasKey('signature', $queries);
 
-        $this->object->request
+        $this->object->req
             ->setQuery('timestamp', $queries['timestamp'])
             ->setQuery('userId', $queries['userId'])
             ->setQuery('signature', $queries['signature']);
@@ -34,7 +34,7 @@ final class SafeUrlTest extends TestCase
         $this->assertTrue($this->object->verify());
 
         // Ignore other parameters
-        $this->object->request->setQuery('ttt', 'sss');
+        $this->object->req->setQuery('ttt', 'sss');
         $this->assertTrue($this->object->verify());
     }
 }

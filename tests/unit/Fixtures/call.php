@@ -3,7 +3,7 @@
 require '../../../lib/Wei.php';
 
 $wei = wei();
-$request = $wei->request;
+$request = $wei->req;
 $dataType = $request->getQuery('type');
 $test = $request->getQuery('test');
 $statusCode = $request->getQuery('code', 200);
@@ -12,8 +12,8 @@ $result = null;
 
 switch ($test) {
     case 'headers':
-        $wei->response->setHeader('customHeader', 'value');
-        $result = json_encode($wei->request->getHeaders());
+        $wei->res->setHeader('customHeader', 'value');
+        $result = json_encode($wei->req->getHeaders());
         break;
 
     case 'post':
@@ -22,11 +22,11 @@ switch ($test) {
         break;
 
     case 'user-agent':
-        $result = $wei->request->getServer('HTTP_USER_AGENT');
+        $result = $wei->req->getServer('HTTP_USER_AGENT');
         break;
 
     case 'referer':
-        $result = $wei->request->getServer('HTTP_REFERER');
+        $result = $wei->req->getServer('HTTP_REFERER');
         break;
 
     case 'cookie':
@@ -35,7 +35,7 @@ switch ($test) {
 
     case 'responseCookies':
         foreach ($wei->cookie->toArray() as $name => $value) {
-            $wei->response->setCookie($name, $value);
+            $wei->res->setCookie($name, $value);
         }
         $result = json_encode($wei->cookie->toArray());
         break;
@@ -93,4 +93,4 @@ if ($wait) {
     usleep(1000000 * $wait);
 }
 
-$wei->response($result, $statusCode);
+$wei->res($result, $statusCode);

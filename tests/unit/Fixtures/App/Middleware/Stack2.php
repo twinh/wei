@@ -6,7 +6,7 @@ class Stack2 extends Base
 {
     public function __invoke($next)
     {
-        $response = $this->response;
+        $response = $this->res;
 
         $response->setContent($response->getContent() . 'start2-');
 

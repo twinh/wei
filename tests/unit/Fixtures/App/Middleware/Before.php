@@ -6,6 +6,6 @@ class Before extends Base
 {
     public function __invoke($next)
     {
-        return $this->response->setContent('Before Middleware');
+        return $this->res->setContent('Before Middleware');
     }
 }

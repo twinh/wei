@@ -12,8 +12,8 @@ namespace Wei;
  * A service that handles the HTTP request and response cookies
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Request $request A service that handles the HTTP request data
- * @property    Response $response A service that handles the HTTP response data
+ * @property    Req $req A service that handles the HTTP request data
+ * @property    Res $res A service that handles the HTTP response data
  */
 class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
 {
@@ -33,7 +33,7 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
     {
         parent::__construct($options);
 
-        $this->data = &$this->request->getParameterReference('cookie');
+        $this->data = &$this->req->getParameterReference('cookie');
     }
 
     /**
@@ -81,7 +81,7 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
             $this->data[$key] = $value;
         }
 
-        $this->response->setCookie($key, $value, $options);
+        $this->res->setCookie($key, $value, $options);
 
         return $this;
     }
@@ -95,7 +95,7 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
     public function remove($key)
     {
         unset($this->data[$key]);
-        $this->response->removeCookie($key);
+        $this->res->removeCookie($key);
         return $this;
     }
 

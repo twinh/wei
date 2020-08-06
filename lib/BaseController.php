@@ -13,8 +13,8 @@ namespace Wei;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  *
- * @property Request    $request A service that handles the HTTP request data
- * @property Response   $response A object that handles the HTTP response data
+ * @property Req    $req A service that handles the HTTP request data
+ * @property Res   $res A object that handles the HTTP response data
  */
 abstract class BaseController extends Base
 {
@@ -41,8 +41,8 @@ abstract class BaseController extends Base
     /**
      * The callback triggered before execute the action
      *
-     * @param Request $req
-     * @param Response $res
+     * @param Req $req
+     * @param Res $res
      */
     public function before($req, $res)
     {
@@ -51,8 +51,8 @@ abstract class BaseController extends Base
     /**
      * The callback triggered after execute the action
      *
-     * @param Request $req
-     * @param Response $res
+     * @param Req $req
+     * @param Res $res
      */
     public function after($req, $res)
     {

@@ -73,7 +73,7 @@ wei([
             'slave' => 'fileCache',
         ],
     ],
-    'response' => [
+    'res' => [
         'unitTest' => true,
     ],
 ]);

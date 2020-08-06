@@ -323,7 +323,7 @@ final class RouterTest extends TestCase
         $this->assertIsSubset($params, $router->match($path));
 
         $this->assertIsSubset([
-            'controller' => null, // $this->request('controller', 'index'); => 'index'
+            'controller' => null, // $this->req('controller', 'index'); => 'index'
             'action' => null,
             'id' => null,
         ], $router->match('/'));

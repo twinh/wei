@@ -12,7 +12,7 @@ namespace Wei;
 /**
  * Generate a URL with signature
  *
- * @property \Wei\Request $request
+ * @property \Wei\Req $req
  */
 class SafeUrl extends Base
 {
@@ -76,14 +76,14 @@ class SafeUrl extends Base
     public function verify()
     {
         // Check if time is expired
-        $time = $this->request->getQuery('timestamp');
+        $time = $this->req->getQuery('timestamp');
         if ($this->expireTime && time() - $time > $this->expireTime) {
             return false;
         }
 
         // Remove signature parameters
-        $query = $this->request->getParameterReference('get');
-        $token = $this->request->getQuery('signature');
+        $query = $this->req->getParameterReference('get');
+        $token = $this->req->getQuery('signature');
         unset($query['signature']);
 
         $timestamp = $query['timestamp'];

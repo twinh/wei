@@ -251,15 +251,15 @@ class RedisMixin {
 }
 
 /**
- * @property    Wei\Request $request A service that handles the HTTP request data
+ * @property    Wei\Req $request A service that handles the HTTP request data
  * @method      string|null request($name, $default = '') Returns a *stringify* or user defined($default) parameter value
  */
 class RequestMixin {
 }
 
 /**
- * @property    Wei\Response $response A service that handles the HTTP response data
- * @method      Wei\Response response($content = null, $status = null) Send response header and content
+ * @property    Wei\Res $response A service that handles the HTTP response data
+ * @method      Wei\Res response($content = null, $status = null) Send response header and content
  */
 class ResponseMixin {
 }

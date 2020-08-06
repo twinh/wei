@@ -12,7 +12,7 @@ namespace Wei;
  * A helper service to generate the URL
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Request $request A service that handles the HTTP request data
+ * @property    Req $req A service that handles the HTTP request data
  */
 class Url extends Base
 {
@@ -39,7 +39,7 @@ class Url extends Base
      */
     public function full($url, $argsOrParams = [], $params = [])
     {
-        return $this->request->getUrlFor($this->__invoke($url, $argsOrParams, $params));
+        return $this->req->getUrlFor($this->__invoke($url, $argsOrParams, $params));
     }
 
     /**
@@ -53,9 +53,9 @@ class Url extends Base
     public function query($url = '', $argsOrParams = [], $params = [])
     {
         if (false === strpos($url, '%s')) {
-            $argsOrParams = $argsOrParams + $this->request->getQueries();
+            $argsOrParams = $argsOrParams + $this->req->getQueries();
         } else {
-            $params += $this->request->getQueries();
+            $params += $this->req->getQueries();
         }
         return $this->__invoke($url, $argsOrParams, $params);
     }
@@ -92,8 +92,8 @@ class Url extends Base
      */
     protected function to($url = '', $argsOrParams = [], $params = [])
     {
-        if ($this->request->isUrlRewrite()) {
-            return $this->request->getBaseUrl() . '/' . $this->append($url, $argsOrParams, $params);
+        if ($this->req->isUrlRewrite()) {
+            return $this->req->getBaseUrl() . '/' . $this->append($url, $argsOrParams, $params);
         }
 
         if (false !== strpos($url, '%s')) {
@@ -103,9 +103,9 @@ class Url extends Base
 
         // Add router path info into url
         if ($url) {
-            $argsOrParams = [$this->request->getRouterKey() => $url] + $argsOrParams;
+            $argsOrParams = [$this->req->getRouterKey() => $url] + $argsOrParams;
         }
 
-        return $this->request->getBaseUrl() . '/' . $this->append('', $argsOrParams);
+        return $this->req->getBaseUrl() . '/' . $this->append('', $argsOrParams);
     }
 }

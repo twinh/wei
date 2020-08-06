@@ -15,7 +15,7 @@ use Wei\Validator\Image;
  * A service that handles the uploaded files
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Request $request The HTTP request wei
+ * @property    Req $req The HTTP request wei
  */
 class Upload extends Image
 {
@@ -146,7 +146,7 @@ MSG;
         // Clean previous status
         parent::reset();
 
-        $uploadedFiles = $this->request->getParameterReference('file');
+        $uploadedFiles = $this->req->getParameterReference('file');
 
         // Set default name
         if (!$this->field) {
@@ -155,7 +155,7 @@ MSG;
 
         // Check if has file uploaded or file too large
         if (!isset($uploadedFiles[$this->field])) {
-            $post = $this->request->getParameterReference('post');
+            $post = $this->req->getParameterReference('post');
             if (empty($uploadedFiles) && empty($post)) {
                 $error = 'postSize';
                 // Prepare postMaxSize variable for $this->postSizeMessage
@@ -250,12 +250,12 @@ MSG;
      */
     public function getUrl()
     {
-        if (getcwd() === $this->request->getServer('DOCUMENT_ROOT')) {
+        if (getcwd() === $this->req->getServer('DOCUMENT_ROOT')) {
             return '/' . $this->file;
         } else {
             // eg, file=public/uploads/1.jpg DOCUMENT_ROOT=/var/www/public cwd=/var/www
             // returns /uploads/1.jpg
-            return '/' . substr($this->file, strlen($this->request->getServer('DOCUMENT_ROOT')) - strlen(getcwd()));
+            return '/' . substr($this->file, strlen($this->req->getServer('DOCUMENT_ROOT')) - strlen(getcwd()));
         }
     }
 

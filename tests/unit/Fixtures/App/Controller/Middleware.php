@@ -15,7 +15,7 @@ use WeiTest\Fixtures\App\Middleware\Stack2;
 use WeiTest\Fixtures\App\Middleware\Stack3;
 
 /**
- * @property \Wei\Response $response
+ * @property \Wei\Res $response
  */
 class Middleware extends \Wei\BaseController
 {
@@ -75,7 +75,7 @@ class Middleware extends \Wei\BaseController
 
     public function stackAction()
     {
-        return $this->response->setContent($this->response->getContent() . 'stack');
+        return $this->res->setContent($this->res->getContent() . 'stack');
     }
 
     public function returnStringAction()

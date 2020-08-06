@@ -5,7 +5,7 @@ namespace WeiTest;
 /**
  * @property \Wei\App $app The application service
  * @method \Wei\App app()
- * @property \Wei\Request $request
+ * @property \Wei\Req $req
  *
  * @internal
  */
@@ -65,7 +65,7 @@ final class AppTest extends TestCase
     {
         $result = $this->app->dispatch('admin/index');
 
-        $this->assertInstanceOf('\Wei\Response', $result);
+        $this->assertInstanceOf('\Wei\Res', $result);
 
         $this->expectOutputString('admin.index');
     }
@@ -114,7 +114,7 @@ final class AppTest extends TestCase
         // WeiTest\App\Controller\Example::returnResponseAction
         $result = $this->app->dispatch('example', 'returnResponse');
 
-        $this->assertInstanceOf('\Wei\Response', $result);
+        $this->assertInstanceOf('\Wei\Res', $result);
     }
 
     public function testActionReturnUnexpectedType()
@@ -143,7 +143,7 @@ final class AppTest extends TestCase
     {
         $this->expectOutputString('target');
 
-        $this->request->setPathInfo('example/forwardAction');
+        $this->req->setPathInfo('example/forwardAction');
         $this->app();
     }
 
@@ -174,7 +174,7 @@ final class AppTest extends TestCase
 
         $response = $this->app->dispatch('example', 'forwardParams');
 
-        $this->assertInstanceOf('\Wei\Response', $response);
+        $this->assertInstanceOf('\Wei\Res', $response);
 
         $this->assertEquals('forwardParamsAction', $response->getContent());
     }
@@ -185,7 +185,7 @@ final class AppTest extends TestCase
 
         $result = $this->app->dispatch('admin/index', 'view');
 
-        $this->assertInstanceOf('\Wei\Response', $result);
+        $this->assertInstanceOf('\Wei\Res', $result);
     }
 
     /**
@@ -244,7 +244,7 @@ final class AppTest extends TestCase
             '404'
         );
 
-        $this->request->setPathInfo('example/protect');
+        $this->req->setPathInfo('example/protect');
         $this->app();
     }
 
@@ -252,7 +252,7 @@ final class AppTest extends TestCase
     {
         $this->expectOutputString('caseInsensitiveAction');
 
-        $this->request->setPathInfo('example/caseInsensitive');
+        $this->req->setPathInfo('example/caseInsensitive');
         $this->app();
     }
 
@@ -267,7 +267,7 @@ final class AppTest extends TestCase
             '404'
         );
 
-        $this->request->setPathInfo('example/caseinsensitive');
+        $this->req->setPathInfo('example/caseinsensitive');
         $this->app();
     }
 
@@ -275,7 +275,7 @@ final class AppTest extends TestCase
     {
         $this->assertEquals('', $this->app->getNamespace());
 
-        $this->request->set([
+        $this->req->set([
             'namespace' => 'test',
         ]);
         $this->assertEquals('test', $this->app->getNamespace());
@@ -310,7 +310,7 @@ final class AppTest extends TestCase
             404
         );
 
-        $this->request->set('debug-detail', '1');
+        $this->req->set('debug-detail', '1');
         $this->app->dispatch('notFound');
     }
 
@@ -324,7 +324,7 @@ The page you requested was not found
 MSG
         );
 
-        $this->request->set('debug-detail', '1');
+        $this->req->set('debug-detail', '1');
         $this->app->dispatch('example', 'notFound');
     }
 
@@ -381,11 +381,11 @@ MSG
     {
         $this->expectOutputString('callback');
 
-        $this->request->set(['before' => 0, 'after' => 0]);
+        $this->req->set(['before' => 0, 'after' => 0]);
         $this->app->dispatch('callback');
 
-        $this->assertEquals(1, $this->request['before']);
-        $this->assertEquals(1, $this->request['after']);
+        $this->assertEquals(1, $this->req['before']);
+        $this->assertEquals(1, $this->req['after']);
     }
 
     public function testReturnStringMiddleware()

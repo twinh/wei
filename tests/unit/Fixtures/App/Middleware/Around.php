@@ -6,7 +6,7 @@ class Around extends Base
 {
     public function __invoke($next)
     {
-        $response = wei()->response->setStatusCode(404);
+        $response = wei()->res->setStatusCode(404);
 
         $next();
 

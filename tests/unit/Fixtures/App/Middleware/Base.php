@@ -3,7 +3,7 @@
 namespace WeiTest\Fixtures\App\Middleware;
 
 /**
- * @property \Wei\Response $response
+ * @property \Wei\Res $response
  */
 class Base extends \Wei\Base
 {

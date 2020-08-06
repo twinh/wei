@@ -2,7 +2,7 @@
 
 namespace WeiTest;
 
-use Wei\Request;
+use Wei\Req;
 use Wei\Url;
 
 /**
@@ -19,7 +19,7 @@ final class UrlTest extends TestCase
     public function testTo($result, $url, $params = [])
     {
         // Reset url to root path
-        $this->request->setBaseUrl('/');
+        $this->req->setBaseUrl('/');
 
         $this->assertEquals($result, $this->url->to($url, $params));
     }
@@ -47,7 +47,7 @@ final class UrlTest extends TestCase
     public function testAppend()
     {
         // Reset url to root path
-        $this->request->setBaseUrl('/');
+        $this->req->setBaseUrl('/');
 
         $this->assertEquals('xx?a=b&c=d', $this->url->append('xx', ['a' => 'b', 'c' => 'd']));
 
@@ -61,7 +61,7 @@ final class UrlTest extends TestCase
     public function testFormat()
     {
         // Reset url to root path
-        $this->request->setBaseUrl('/');
+        $this->req->setBaseUrl('/');
 
         $this->assertEquals('/articles/1', $this->url('articles/%s', 1));
 
@@ -85,9 +85,9 @@ final class UrlTest extends TestCase
 
     public function testQueryUrl()
     {
-        $this->request->setBaseUrl('/');
+        $this->req->setBaseUrl('/');
 
-        $gets = &$this->request->getQueries();
+        $gets = &$this->req->getQueries();
         $gets = ['a' => 'b'];
 
         $this->assertEquals('/articles?a=b', $this->url->query('articles'));
@@ -101,7 +101,7 @@ final class UrlTest extends TestCase
 
     public function testInvoke()
     {
-        $this->request->setBaseUrl('/');
+        $this->req->setBaseUrl('/');
 
         $this->assertSame('/test', $this->url('test'));
     }
@@ -116,8 +116,8 @@ final class UrlTest extends TestCase
      */
     public function testUrlRewrite(array $options, string $to, array $argOrParams, array $params, string $result)
     {
-        $request = new Request(['wei' => $this->wei, 'fromGlobal' => false] + $options);
-        $url = new Url(['wei' => $this->wei, 'request' => $request]);
+        $request = new Req(['wei' => $this->wei, 'fromGlobal' => false] + $options);
+        $url = new Url(['wei' => $this->wei, 'req' => $request]);
 
         $this->assertSame($result, $url->to($to, $argOrParams, $params));
     }
