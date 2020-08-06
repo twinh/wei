@@ -1,3 +1,10 @@
+## [0.9.26](https://github.com/twinh/wei/compare/v0.9.25...v0.9.26) (2020-08-06)
+
+
+### Features
+
+* 增加 Req， Res 服务，废弃原来的 Request，Response ([1a6a7c3](https://github.com/twinh/wei/commit/1a6a7c36266604d423c568c556594541ece9e4d9))
+
 ## [0.9.25](https://github.com/twinh/wei/compare/v0.9.24...v0.9.25) (2020-08-01)
 
 
