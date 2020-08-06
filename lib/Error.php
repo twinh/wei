@@ -13,7 +13,7 @@ namespace Wei;
  *
  * @mixin \LoggerMixin
  * @mixin \ResponseMixin
- * @mixin \RequestMixin
+ * @mixin \ReqMixin
  */
 class Error extends Base
 {

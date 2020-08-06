@@ -251,15 +251,29 @@ class RedisMixin {
 }
 
 /**
- * @property    Wei\Req $request A service that handles the HTTP request data
+ * @property    Wei\Req $req A service that handles the HTTP request data
+ * @method      string|null req($name, $default = '') Returns a *stringify* or user defined($default) parameter value
+ */
+class ReqMixin {
+}
+
+/**
+ * @property    Wei\Request $request
  * @method      string|null request($name, $default = '') Returns a *stringify* or user defined($default) parameter value
  */
 class RequestMixin {
 }
 
 /**
- * @property    Wei\Res $response A service that handles the HTTP response data
- * @method      Wei\Res response($content = null, $status = null) Send response header and content
+ * @property    Wei\Res $res A service that handles the HTTP response data
+ * @method      Wei\Res res($content = null, $status = null) Send response header and content
+ */
+class ResMixin {
+}
+
+/**
+ * @property    Wei\Response $response
+ * @method      Wei\Response response($content = null, $status = null) Send response header and content
  */
 class ResponseMixin {
 }
@@ -924,7 +938,9 @@ class IsUuidMixin {
  * @mixin PinyinMixin
  * @mixin RecordMixin
  * @mixin RedisMixin
+ * @mixin ReqMixin
  * @mixin RequestMixin
+ * @mixin ResMixin
  * @mixin ResponseMixin
  * @mixin RetMixin
  * @mixin RetTraitMixin

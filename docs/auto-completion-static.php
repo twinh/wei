@@ -312,7 +312,15 @@ class Redis
 {
 }
 
+class Req
+{
+}
+
 class Request
+{
+}
+
+class Res
 {
 }
 
@@ -1158,7 +1166,15 @@ class Redis
 {
 }
 
+class Req
+{
+}
+
 class Request
+{
+}
+
+class Res
 {
 }
 
