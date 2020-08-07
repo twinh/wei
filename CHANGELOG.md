@@ -1,3 +1,10 @@
+## [0.9.27](https://github.com/twinh/wei/compare/v0.9.26...v0.9.27) (2020-08-07)
+
+
+### Bug Fixes
+
+* **error:** 增加处理 Throwable 错误 ([6d59a86](https://github.com/twinh/wei/commit/6d59a86e5011e140619b0eaecb02db27f2a3bd40))
+
 ## [0.9.26](https://github.com/twinh/wei/compare/v0.9.25...v0.9.26) (2020-08-06)
 
 
