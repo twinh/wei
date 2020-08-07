@@ -75,6 +75,15 @@ final class ErrorTest extends TestCase
         $this->error->handleException($exception);
     }
 
+    public function testHandleThrowable()
+    {
+        $this->expectOutputRegex('/TypeError/');
+
+        $error = new \TypeError();
+
+        $this->error->handleException($error);
+    }
+
     public function testCustomErrorMessage()
     {
         $this->error->setOption([
