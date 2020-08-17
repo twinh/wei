@@ -1,3 +1,13 @@
+## [0.9.30](https://github.com/twinh/wei/compare/v0.9.29...v0.9.30) (2020-08-17)
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from 6.1.0 to 6.1.1
+
 ## [0.9.29](https://github.com/twinh/wei/compare/v0.9.28...v0.9.29) (2020-08-14)
 
 
