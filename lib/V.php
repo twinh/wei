@@ -159,6 +159,11 @@ class V extends Base
     use RetTrait;
 
     /**
+     * @var bool
+     */
+    protected static $createNewInstance = true;
+
+    /**
      * @var Validate
      */
     protected $validator;

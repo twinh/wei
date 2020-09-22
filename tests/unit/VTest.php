@@ -2,6 +2,7 @@
 
 namespace WeiTest;
 
+use Wei\V;
 use Wei\Validate;
 
 /**
@@ -11,8 +12,7 @@ final class VTest extends TestCase
 {
     public function testCheckFail()
     {
-        $ret = wei()->v()
-            ->key('question', 'Question')
+        $ret = V::key('question', 'Question')
             ->check([]);
 
         $this->assertRetErr($ret, -1, 'Question is required');
@@ -20,8 +20,7 @@ final class VTest extends TestCase
 
     public function testCheckPass()
     {
-        $ret = wei()->v()
-            ->key('question', 'Question')
+        $ret = V::key('question', 'Question')
             ->check([
                 'question' => '1',
             ]);
@@ -31,8 +30,7 @@ final class VTest extends TestCase
 
     public function testMessage()
     {
-        $ret = wei()->v()
-            ->key('name', '名称')->message('required', '请填写%name%')
+        $ret = V::key('name', '名称')->message('required', '请填写%name%')
             ->check([]);
 
         $this->assertRetErr($ret, -1, '请填写名称');
@@ -40,8 +38,7 @@ final class VTest extends TestCase
 
     public function testMessageWithoutRule()
     {
-        $ret = wei()->v()
-            ->key('name', '名称')->required()->message('请填写%name%')
+        $ret = V::key('name', '名称')->required()->message('请填写%name%')
             ->check([]);
 
         $this->assertRetErr($ret, -1, '请填写名称');
@@ -49,15 +46,13 @@ final class VTest extends TestCase
 
     public function testCallback()
     {
-        $ret = wei()->v()
-            ->key('name')->callback(function ($name) {
+        $ret = V::key('name')->callback(function ($name) {
                 return 'twin' !== $name;
             })
             ->check(['name' => 'twin']);
         $this->assertRetErr($ret, -1, 'This value is not valid');
 
-        $ret = wei()->v()
-            ->key('name')->callback(function ($name) {
+        $ret = V::key('name')->callback(function ($name) {
                 return 'twin' !== $name;
             })
             ->check(['name' => 'hi']);
@@ -66,8 +61,7 @@ final class VTest extends TestCase
 
     public function testMobileCn()
     {
-        $ret = wei()->v()
-            ->key('mobile', 'Mobile')->mobileCn()
+        $ret = V::key('mobile', 'Mobile')->mobileCn()
             ->check([
                 'mobile' => '123',
             ]);
@@ -76,8 +70,7 @@ final class VTest extends TestCase
 
     public function testValidate()
     {
-        $validator = wei()->v()
-            ->key('mobile')->mobileCn()
+        $validator = V::key('mobile')->mobileCn()
             ->validate(['mobile' => '123']);
 
         $this->assertInstanceOf(Validate::class, $validator);
@@ -86,8 +79,7 @@ final class VTest extends TestCase
 
     public function testIsValid()
     {
-        $result = wei()->v()
-            ->key('mobile')->mobileCn()
+        $result = V::key('mobile')->mobileCn()
             ->isValid(['mobile' => '123']);
 
         $this->assertFalse($result);
@@ -95,8 +87,7 @@ final class VTest extends TestCase
 
     public function testWithoutKeyRetErr()
     {
-        $ret = wei()->v()
-            ->mobileCn()
+        $ret = V::mobileCn()
             ->label('Mobile')
             ->check('123');
 
@@ -105,8 +96,7 @@ final class VTest extends TestCase
 
     public function testWithoutKeyRetSuc()
     {
-        $ret = wei()->v()
-            ->mobileCn()
+        $ret = V::mobileCn()
             ->label('Mobile')
             ->check('13800138000');
 
@@ -115,8 +105,7 @@ final class VTest extends TestCase
 
     public function testWithoutKeyValidate()
     {
-        $validator = wei()->v()
-            ->digit()
+        $validator = V::digit()
             ->between(1, 150)
             ->label('Age')
             ->validate('ab');
@@ -125,5 +114,15 @@ final class VTest extends TestCase
         $messages = $validator->getSummaryMessages();
         $this->assertEquals('Age must contain only digits (0-9)', $messages[''][0]);
         $this->assertEquals('Age must between 1 and 150', $messages[''][1]);
+    }
+
+    public function testCreateNewInstance()
+    {
+        $this->assertNotSame(V::key('test'), V::key('test'));
+    }
+
+    public function testInvoke()
+    {
+        $this->assertNotSame(wei()->v(), wei()->v());
     }
 }
