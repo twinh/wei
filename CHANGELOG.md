@@ -1,3 +1,23 @@
+## [0.9.31](https://github.com/twinh/wei/compare/v0.9.30...v0.9.31) (2020-09-25)
+
+
+### Bug Fixes
+
+* **V:** 链接验证服务每次调用都应创建新的对象 ([1129420](https://github.com/twinh/wei/commit/11294200b5c07c0cd4f9c8a83f43177a80e27759))
+
+
+### Features
+
+* **Pinyin:** 获取拼音可以设置分隔符 ([1a35a7b](https://github.com/twinh/wei/commit/1a35a7b42683966b33e211905d50eb807f6d2477))
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from 6.1.1 to 6.1.2
+
 ## [0.9.30](https://github.com/twinh/wei/compare/v0.9.29...v0.9.30) (2020-08-17)
 
 
