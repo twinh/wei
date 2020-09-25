@@ -24,4 +24,9 @@ final class PinyinTest extends TestCase
             ['您好', 'ninhao'],
         ];
     }
+
+    public function testSeparator()
+    {
+        $this->assertEquals('zhong wen', $this->pinyin('中文', ' '));
+    }
 }

@@ -419,12 +419,13 @@ class Pinyin extends Base
      * Converts Chinese words to phonetic alphabets
      *
      * @param string $word
+     * @param string $separator
      * @return string
      */
-    public function __invoke($word)
+    public function __invoke($word, $separator = '')
     {
         $word = iconv('utf-8', 'gb2312', $word);
-        $output = '';
+        $output = [];
         $len = strlen($word);
         for ($i = 0; $i < $len; ++$i) {
             $letter = ord(substr($word, $i, 1));
@@ -432,9 +433,9 @@ class Pinyin extends Base
                 $tmp = ord(substr($word, ++$i, 1));
                 $letter = $letter * 256 + $tmp - 65536;
             }
-            $output .= $this->transform($letter);
+            $output[] = $this->transform($letter);
         }
-        return $output;
+        return implode($separator, $output);
     }
 
     public function transform($num)
