@@ -217,20 +217,6 @@ class V extends Base
     }
 
     /**
-     * Add name for current field
-     *
-     * @param string $label
-     * @return $this
-     * @svc
-     */
-    protected function label($label)
-    {
-        $this->options['names'][$this->lastKey] = $label;
-
-        return $this;
-    }
-
-    /**
      * Set rule message for current field
      *
      * @param string $ruleOrMessage
@@ -334,6 +320,20 @@ class V extends Base
     {
         $this->options['rules'][$this->lastKey][$name] = $args;
         $this->lastRule = $name;
+
+        return $this;
+    }
+
+    /**
+     * Add name for current field
+     *
+     * @param string $label
+     * @return $this
+     * @svc
+     */
+    protected function label($label)
+    {
+        $this->options['names'][$this->lastKey] = $label;
 
         return $this;
     }
