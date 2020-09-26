@@ -47,14 +47,14 @@ final class VTest extends TestCase
     public function testCallback()
     {
         $ret = V::key('name')->callback(function ($name) {
-                return 'twin' !== $name;
-            })
+            return 'twin' !== $name;
+        })
             ->check(['name' => 'twin']);
         $this->assertRetErr($ret, -1, 'This value is not valid');
 
         $ret = V::key('name')->callback(function ($name) {
-                return 'twin' !== $name;
-            })
+            return 'twin' !== $name;
+        })
             ->check(['name' => 'hi']);
         $this->assertRetSuc($ret);
     }
