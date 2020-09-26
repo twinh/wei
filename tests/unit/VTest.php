@@ -87,8 +87,8 @@ final class VTest extends TestCase
 
     public function testWithoutKeyRetErr()
     {
-        $ret = V::mobileCn()
-            ->label('Mobile')
+        $ret = V::label('Mobile')
+            ->mobileCn()
             ->check('123');
 
         $this->assertRetErr($ret, -1, 'Mobile must be valid mobile number');
@@ -96,8 +96,8 @@ final class VTest extends TestCase
 
     public function testWithoutKeyRetSuc()
     {
-        $ret = V::mobileCn()
-            ->label('Mobile')
+        $ret = V::label('Mobile')
+            ->mobileCn()
             ->check('13800138000');
 
         $this->assertRetSuc($ret);
@@ -105,9 +105,9 @@ final class VTest extends TestCase
 
     public function testWithoutKeyValidate()
     {
-        $validator = V::digit()
+        $validator = V::label('Age')
+            ->digit()
             ->between(1, 150)
-            ->label('Age')
             ->validate('ab');
         $this->assertFalse($validator->isValid());
 

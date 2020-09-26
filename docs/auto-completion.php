@@ -232,7 +232,7 @@ class PhpFileCacheMixin {
 
 /**
  * @property    Wei\Pinyin $pinyin An util wei that converts Chinese words to phonetic alphabets
- * @method      string pinyin($word) Converts Chinese words to phonetic alphabets
+ * @method      string pinyin($word, $separator = '') Converts Chinese words to phonetic alphabets
  */
 class PinyinMixin {
 }
@@ -272,8 +272,8 @@ class ResMixin {
 }
 
 /**
- * @property    Wei\Res $response
- * @method      Wei\Res response($content = null, $status = null) Send response header and content
+ * @property    Wei\Response $response
+ * @method      Wei\Response response($content = null, $status = null) Send response header and content
  */
 class ResponseMixin {
 }

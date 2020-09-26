@@ -221,8 +221,9 @@ class V extends Base
      *
      * @param string $label
      * @return $this
+     * @svc
      */
-    public function label($label)
+    protected function label($label)
     {
         $this->options['names'][$this->lastKey] = $label;
 

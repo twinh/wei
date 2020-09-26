@@ -505,6 +505,17 @@ class Uuid
 class V
 {
     /**
+     * Add name for current field
+     *
+     * @param string $label
+     * @return $this
+     * @see V::label
+     */
+    public static function label($label)
+    {
+    }
+
+    /**
      * Add a new field
      *
      * @param string $name
@@ -1358,6 +1369,17 @@ class Uuid
 
 class V
 {
+    /**
+     * Add name for current field
+     *
+     * @param string $label
+     * @return $this
+     * @see V::label
+     */
+    public function label($label)
+    {
+    }
+
     /**
      * Add a new field
      *
