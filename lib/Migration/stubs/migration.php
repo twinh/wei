@@ -6,7 +6,7 @@ echo '<?php';
 
 namespace <?= $namespace ?>;
 
-use Miaoxing\Services\Migration\BaseMigration;
+use Wei\Migration\BaseMigration;
 
 class <?= $class ?> extends BaseMigration
 {
