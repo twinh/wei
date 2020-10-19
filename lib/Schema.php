@@ -41,6 +41,8 @@ class Schema extends Base
 
     const TYPE_TIMESTAMP = 'timestamp';
 
+    const TYPE_JSON = 'json';
+
     /**
      * @var string
      */
@@ -138,6 +140,7 @@ class Schema extends Base
         self::TYPE_STRING => '',
         self::TYPE_TEXT => false,
         self::TYPE_TIMESTAMP => "'0000-00-00 00:00:00'",
+        self::TYPE_JSON => false,
     ];
 
     /**
@@ -161,6 +164,7 @@ class Schema extends Base
             self::TYPE_STRING => 'varchar',
             self::TYPE_TEXT => 'text',
             self::TYPE_TIMESTAMP => 'timestamp',
+            self::TYPE_JSON => 'json',
         ],
     ];
 
@@ -193,6 +197,7 @@ class Schema extends Base
     protected $stringTypes = [
         self::TYPE_CHAR,
         self::TYPE_STRING,
+        self::TYPE_JSON,
     ];
 
     /**
@@ -565,6 +570,17 @@ class Schema extends Base
     public function timestamp($column)
     {
         return $this->addColumn($column, self::TYPE_TIMESTAMP);
+    }
+
+    /**
+     * Add a timestamp column
+     *
+     * @param string $column
+     * @return $this
+     */
+    public function json($column)
+    {
+        return $this->addColumn($column, self::TYPE_JSON);
     }
 
     /**
