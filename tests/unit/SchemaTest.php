@@ -45,6 +45,7 @@ final class SchemaTest extends TestCase
             ->smallInt('small_id')
             ->date('birthday')
             ->datetime('closed_at')
+            ->json('json')
             ->timestampsV1()
             ->userstampsV1()
             ->softDeletableV1()
@@ -71,6 +72,7 @@ final class SchemaTest extends TestCase
   small_id smallint unsigned NOT NULL DEFAULT 0,
   birthday date NOT NULL DEFAULT '0000-00-00',
   closed_at datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  json json NOT NULL,
   createTime timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   updateTime timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   createUser int unsigned NOT NULL DEFAULT 0,
