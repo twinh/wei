@@ -11,6 +11,7 @@ namespace Wei;
  * @method $this alpha() Check if the input contains only letters (a-z)
  * @method $this notAlpha()
  * @method $this blank() Check if the input is blank
+ * @method $this notBlank()
  * @method $this contains($search, $regex = false) Check if the input is contains the specified string or pattern
  * @method $this notContains($search, $regex = false)
  * @method $this decimal() Check if the input is decimal
