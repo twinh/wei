@@ -56,7 +56,42 @@ final class ValidatorTest extends TestCase
             ],
         ])->isValid();
 
-        $this->assertTrue($result);
+        $this->assertFalse($result);
+    }
+
+    public function testOptionalFieldWithObjectData()
+    {
+        $result = $this->validate([
+            'data' => (object) [
+                'email' => '',
+            ],
+            'rules' => [
+                'email' => [
+                    'required' => false,
+                    'email' => true,
+                ],
+            ],
+        ])->isValid();
+
+        $this->assertFalse($result);
+    }
+
+    public function testOptionalFieldWihGetter()
+    {
+        $user = new \WeiTest\Fixtures\User();
+        $user->setName('');
+
+        $result = $this->validate([
+            'data' => $user,
+            'rules' => [
+                'name' => [
+                    'required' => false,
+                    'email' => true,
+                ],
+            ],
+        ])->isValid();
+
+        $this->assertFalse($result);
     }
 
     public function testRuleNotDefined()
@@ -257,9 +292,7 @@ final class ValidatorTest extends TestCase
     {
         $validator = $this->validate([
             'data' => [
-                'username' => '',
                 'email' => 'b.com',
-                'password' => '',
                 'id' => 'xx',
             ],
             // All is invalid
@@ -748,9 +781,7 @@ final class ValidatorTest extends TestCase
     public function testRequiredRuleNotBreakError()
     {
         $validator = $this->validate([
-            'data' => [
-                'username' => null,
-            ],
+            'data' => [],
             'rules' => [
                 'username' => [
                     'required' => true,

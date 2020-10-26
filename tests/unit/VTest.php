@@ -10,6 +10,13 @@ use Wei\Validate;
  */
 final class VTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        wei()->t->setLocale('en');
+    }
+
     public function testCheckFail()
     {
         $ret = V::key('question', 'Question')
@@ -124,5 +131,35 @@ final class VTest extends TestCase
     public function testInvoke()
     {
         $this->assertNotSame(wei()->v(), wei()->v());
+    }
+
+    public function testCheckBeforeModelCreate()
+    {
+        $ret = $this->checkModel(true, []);
+        $this->assertRetErr($ret, null, 'Name is required');
+
+        $ret = $this->checkModel(true, ['name' => '']);
+        $this->assertRetErr($ret, null, 'Name must not be blank');
+
+        $ret = $this->checkModel(true, ['name' => 'test']);
+        $this->assertRetSuc($ret);
+    }
+
+    public function testCheckBeforeModelUpdate()
+    {
+        $ret = $this->checkModel(false, []);
+        $this->assertRetSuc($ret);
+
+        $ret = $this->checkModel(false, ['name' => '']);
+        $this->assertRetErr($ret, null, 'Name must not be blank');
+
+        $ret = $this->checkModel(false, ['name' => 'test']);
+        $this->assertRetSuc($ret);
+    }
+
+    protected function checkModel(bool $isNew, $data)
+    {
+        return V::key('name', 'Name')->required($isNew)->notBlank()
+            ->check($data);
     }
 }

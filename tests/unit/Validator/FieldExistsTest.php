@@ -57,7 +57,6 @@ final class FieldExistsTest extends TestCase
         return [
             [
                 'data' => [
-                    'mobile' => null,
                     'officePhone' => '0755-88888888',
                     'homePhone' => '0755-88888888',
                 ],
@@ -95,7 +94,6 @@ final class FieldExistsTest extends TestCase
         $validator = $this->validate([
             'data' => [
                 'officePhone' => '0755-88888888',
-                'homePhone' => null,
                 'submit' => 1,
             ],
             'rules' => [

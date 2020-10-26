@@ -145,6 +145,13 @@ class Validate extends Base
     protected $ruleValidators = [];
 
     /**
+     * Current validating field
+     *
+     * @var string
+     */
+    protected $currentField;
+
+    /**
      * Create a new validator and validate by specified options
      *
      * @param array $options
@@ -178,6 +185,7 @@ class Validate extends Base
         $this->beforeValidate && call_user_func($this->beforeValidate, $this, $this->wei);
 
         foreach ($this->rules as $field => $rules) {
+            $this->currentField = $field;
             $data = $this->getFieldData($field);
 
             /**
@@ -484,8 +492,8 @@ class Validate extends Base
      * Sets data for validation
      *
      * @param array|object $data
-     * @throws \InvalidArgumentException when argument type is not array or object
      * @return $this
+     * @throws \InvalidArgumentException when argument type is not array or object
      */
     public function setData($data)
     {
@@ -528,6 +536,28 @@ class Validate extends Base
             return $this->data->{'get' . $field}();
         } else {
             return null;
+        }
+    }
+
+    /**
+     * Check if field exists in data
+     *
+     * @param string $field
+     * @return bool
+     */
+    public function hasField($field)
+    {
+        if (is_array($this->data)) {
+            return array_key_exists($field, $this->data);
+        } elseif ($this->data instanceof \ArrayAccess) {
+            return $this->data->offsetExists($field);
+        } elseif (property_exists($this->data, $field)) {
+            return true;
+        } elseif (method_exists($this->data, 'get' . $field)) {
+            // @experimental Assume field exists
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -739,6 +769,16 @@ class Validate extends Base
     }
 
     /**
+     * Returns current validating field
+     *
+     * @return string
+     */
+    public function getCurrentField()
+    {
+        return $this->currentField;
+    }
+
+    /**
      * Prepare name and messages property option for rule validator
      *
      * @param string $field
@@ -786,7 +826,7 @@ class Validate extends Base
         // Case 2
         if (isset($this->messages[$field][$rule]) && is_array($this->messages[$field])) {
             $messages = $this->messages[$field][$rule];
-        // Case 1
+            // Case 1
         } elseif (isset($this->messages[$field]) && is_scalar($this->messages[$field])) {
             $messages = $this->messages[$field];
         }

@@ -49,6 +49,11 @@ class Required extends BaseValidator
      */
     public function isInvalid($input)
     {
+        // When validating array or object data, if the data contains key, the value is considered to exist
+        if ($this->validator && $this->validator->hasField($this->validator->getCurrentField())) {
+            return false;
+        }
+
         return in_array($input, $this->invalid, true);
     }
 
