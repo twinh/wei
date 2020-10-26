@@ -157,8 +157,12 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         $this->assertArrayHasKey('d', $origArr, 'Call array_key_exists returns true even if value is null');
     }
 
-    public function assertRetSuc(array $ret, $message = null, $assertMessage = null)
+    public function assertRetSuc($ret, $message = null, $assertMessage = null)
     {
+        if (method_exists($ret, 'toArray')) {
+            $ret = $ret->toArray();
+        }
+
         $assertMessage = $this->buildRetMessage($ret, $assertMessage);
 
         $expected = ['code' => 1];
@@ -169,11 +173,18 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         $this->assertArrayContains($expected, $ret, $assertMessage);
     }
 
-    public function assertRetErr(array $ret, $code, $message = null, $assertMessage = null)
+    public function assertRetErr($ret, $code, $message = null, $assertMessage = null)
     {
+        if (method_exists($ret, 'toArray')) {
+            $ret = $ret->toArray();
+        }
+
         $assertMessage = $this->buildRetMessage($ret, $assertMessage);
 
-        $expected = ['code' => $code];
+        if (null !== $code) {
+            $expected['code'] = $code;
+        }
+
         if (null !== $message) {
             $expected['message'] = $message;
         }
