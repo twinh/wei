@@ -50,13 +50,13 @@ namespace Wei;
  * @method $this notUppercase()
  *
  * Length
- * @method $this length($length, $min = null, $max = null) Check if the length (or size) is equals or in specified range
+ * @method $this length($length, $min = null, $max = null) Check if the length ( or size) is equals or in specified range
  * @method $this notLength($length, $min = null, $max = null)
  * @method $this charLength($length) Check if the characters length of input is equals specified length
  * @method $this notCharLength($length)
- * @method $this minLength($min) Check if the length (or size) of input is greater than specified length
+ * @method $this minLength($min) Check if the length ( or size) of input is greater than specified length
  * @method $this notMinLength($min)
- * @method $this maxLength($max) Check if the length (or size) of input is lower than specified length
+ * @method $this maxLength($max) Check if the length ( or size) of input is lower than specified length
  * @method $this notMaxLength($max)
  *
  * Comparison
@@ -214,6 +214,12 @@ class V extends Base
         if (method_exists($this, $name)) {
             return $this->{$name}(...$args);
         }
+
+        // Convert options [[option: xx]] to [option: xx]
+        if (count($args) === 1 && is_array($args[0])) {
+            $args = $args[0];
+        }
+
         return $this->addRule($name, $args);
     }
 

@@ -157,6 +157,25 @@ final class VTest extends TestCase
         $this->assertRetSuc($ret);
     }
 
+    public function testOptions()
+    {
+        $ret = V::key('name')->maxLength([
+            'max' => 1,
+            'countByChars' => false,
+        ])->check([
+            'name' => '我',
+        ]);
+        $this->assertRetErr($ret, null, 'This value must have a length lower than 1');
+
+        $ret = V::key('name')->maxLength([
+            'max' => 1,
+            'countByChars' => true,
+        ])->check([
+            'name' => '我',
+        ]);
+        $this->assertRetSuc($ret);
+    }
+
     protected function checkModel(bool $isNew, $data)
     {
         return V::key('name', 'Name')->required($isNew)->notBlank()
