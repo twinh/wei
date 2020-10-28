@@ -37,15 +37,23 @@ abstract class TestCase extends BaseTestCase
         // Initial test fixtures
         $data = [
             // boolean
-            true, false,
+            true,
+            false,
             // integer
-            1234, -123, 0123, 0x1A,
+            1234,
+            -123,
+            0123,
+            0x1A,
             // float
-            1.234, 1.2e3, 7E-10,
+            1.234,
+            1.2e3,
+            7E-10,
             // string
             'this is a simple string',
             // object
-            new \stdClass(), new \ArrayObject([1, 3]), new \DateTime(),
+            new \stdClass(),
+            new \ArrayObject([1, 3]),
+            new \DateTime(),
             // resource
             curl_init(),
             // null
@@ -71,7 +79,7 @@ abstract class TestCase extends BaseTestCase
     {
         // Gets validator name WeiTest\Validator\LengthTest => Length
         $name = $this->name ?: substr(static::class, strrpos(static::class, '\\') + 1, -4);
-        $validator = $this->validate->createRuleValidator($name, $this->inputTestOptions);
+        $validator = $this->validate->createRuleValidator($name, $this->getInputTestOptions());
 
         // The validator should accept any type of INPUT and do NOT raise any
         // exceptions or errors
@@ -85,5 +93,10 @@ abstract class TestCase extends BaseTestCase
         }
 
         return static::$resource;
+    }
+
+    protected function getInputTestOptions()
+    {
+        return $this->inputTestOptions;
     }
 }

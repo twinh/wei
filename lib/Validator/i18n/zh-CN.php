@@ -37,6 +37,9 @@ return [
     '%name% must be %length% characters' => '%name%必须是%length%个字符',
     '%name% must be between %min% to %max% characters' => '%name%必须包含%min%-%max%个字符',
 
+    // children
+    '%name% must be array or object' => '%name%必须是数组或对象',
+
     // chinese
     '%name% must contain only Chinese characters' => '%name%只能由中文组成',
     '%name% must not contain only Chinese characters' => '%name%不能只由中文组成',
