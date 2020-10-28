@@ -530,6 +530,9 @@ class Validate extends Base
             || ($this->data instanceof \ArrayAccess && $this->data->offsetExists($field))
         ) {
             return $this->data[$field];
+        } elseif ($this->data instanceof \Closure) {
+            // Call isset($closure->{$field}) will throw "Error : Closure object cannot have properties"
+            return null;
         } elseif (isset($this->data->{$field})) {
             return $this->data->{$field};
         } elseif (method_exists($this->data, 'get' . $field)) {

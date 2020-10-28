@@ -825,4 +825,18 @@ final class ValidatorTest extends TestCase
         $this->assertIsString($wei->isIn->getFirstMessage());
         $this->assertStringContainsString('name', $wei->isIn->getFirstMessage('name'));
     }
+
+    public function testIgnoreClosure()
+    {
+        $validator = $this->validate([
+            'data' => function () {},
+            'rules' => [
+                'username' => [
+                    'required' => true,
+                ],
+            ],
+        ]);
+
+        $this->assertFalse($validator->isValid());
+    }
 }
