@@ -617,6 +617,35 @@ class Validate extends Base
     }
 
     /**
+     * Returns invalid messages as a one-dimensional array
+     *
+     * Example:
+     *
+     * ```
+     * [
+     *    'field-required-required' => 'Field is required',
+     *    'field2-required-required' => 'Field2 is required',
+     * ]
+     * ```
+     *
+     * @return array
+     */
+    public function getFlatMessages()
+    {
+        $messages = [];
+        $detailMessages = $this->getDetailMessages();
+
+        foreach ($detailMessages as $field => $rules) {
+            foreach ($rules as $rule => $options) {
+                foreach ($options as $name => $message) {
+                    $messages[$field . '-' . $rule . '-' . $name] = $message;
+                }
+            }
+        }
+        return $messages;
+    }
+
+    /**
      * Returns summary invalid messages
      *
      * @return array

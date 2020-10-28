@@ -586,6 +586,26 @@ final class ValidatorTest extends TestCase
         $this->assertEquals('error message 1', $firstMessage);
     }
 
+    public function testGetFlatMessages()
+    {
+        $validator = $this->validate([
+            'data' => [],
+            'rules' => [
+                'name' => 'required',
+                'email' => 'required',
+            ],
+            'messages' => [
+                'name' => 'error message 1',
+                'email' => 'error message 2',
+            ],
+        ]);
+        $messages = $validator->getFlatMessages();
+        $this->assertSame([
+            'name-required-required' => 'error message 1',
+            'email-required-required' => 'error message 2',
+        ], $messages);
+    }
+
     public function testGetRuleValidator()
     {
         $validator = $this->validate([
