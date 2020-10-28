@@ -27,7 +27,11 @@ return [
 
     // alpha
     '%name% must contain only letters (a-z)' => '%name%只能由字母(a-z)组成',
-    '%name% must not contain  only letters (a-z)' => '%name%不能只由字母(a-z)组成',
+    '%name% must not contain only letters (a-z)' => '%name%不能只由字母(a-z)组成',
+
+    // arrayVal
+    '%name% must be an array' => '%name%必须是一个数组',
+    '%name% must not be an array' => '%name%不能是一个数组',
 
     // blank
     '%name% must be blank' => '%name%必须为空',
