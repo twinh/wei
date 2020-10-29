@@ -115,6 +115,10 @@ return [
     '%name% must be identical to %value%' => '%name%必须完全等于%value%',
     '%name% must not be identical to %value%' => '%name%不能完全等于%value%',
 
+    // intVal
+    '%name% must be an integer value' => '%name%必须是一个整数',
+    '%name% must not be an integer value' => '%name%不能是一个整数',
+
     // greaterThan
     '%name% must be greater than %value%' => '%name%必须大于%value%',
     '%name% must not be greater than %value%' => '%name%不能大于%$value%',
