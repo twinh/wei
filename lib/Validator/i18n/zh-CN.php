@@ -153,6 +153,10 @@ return [
     '%name% mime type "%mimeType%" is not allowed' => '%name%的媒体类型不合法',
     '%name% must be a non-existing file' => '%name%必须是不存在的文件',
 
+    // floatVal
+    '%name% must be a float value' => '%name%必须是一个浮点数值',
+    '%name% must not be a float value' => '%name%不能是一个浮点数值',
+
     // idCardCn
     '%name% must be valid Chinese identity card' => '%name%必须是有效的中国身份证',
     '%name% must not be valid Chinese identity card' => '%name%不能是有效的中国身份证',
