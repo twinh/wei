@@ -37,6 +37,10 @@ return [
     '%name% must be blank' => '%name%必须为空',
     '%name% must not be blank' => '%name%不能为空',
 
+    // boolVal/boolable
+    '%name% must be a bool value' => '%name%必须是一个布尔值',
+    '%name% must not be a bool value' => '%name%不能是一个布尔值',
+
     // charLength
     '%name% must be %length% characters' => '%name%必须是%length%个字符',
     '%name% must be between %min% to %max% characters' => '%name%必须包含%min%-%max%个字符',
