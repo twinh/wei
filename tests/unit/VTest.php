@@ -176,6 +176,22 @@ final class VTest extends TestCase
         $this->assertRetSuc($ret);
     }
 
+    public function testDefaultOptional()
+    {
+        $ret = V::defaultOptional()
+            ->key('email')->email()
+            ->check([]);
+        $this->assertRetSuc($ret);
+    }
+
+    public function testDefaultRequired()
+    {
+        $ret = V::defaultRequired()
+            ->key('email')->email()
+            ->check([]);
+        $this->assertRetErr($ret, null, 'This value is required');
+    }
+
     protected function checkModel(bool $isNew, $data)
     {
         return V::key('name', 'Name')->required($isNew)->notBlank()

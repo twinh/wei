@@ -295,6 +295,14 @@ class V extends Base
     }
 
     /**
+     * @return $this
+     */
+    public function optional()
+    {
+        return $this->required(false);
+    }
+
+    /**
      * Set data for validation
      *
      * @param mixed $data
@@ -426,6 +434,26 @@ class V extends Base
         } elseif ($default) {
             $default($this, $value);
         }
+        return $this;
+    }
+
+    /**
+     * @return $this
+     * @svc
+     */
+    protected function defaultOptional()
+    {
+        $this->options['defaultRequired'] = false;
+        return $this;
+    }
+
+    /**
+     * @return $this
+     * @svc
+     */
+    protected function defaultRequired()
+    {
+        $this->options['defaultRequired'] = true;
         return $this;
     }
 }

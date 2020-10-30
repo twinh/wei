@@ -2,6 +2,8 @@
 
 namespace WeiTest;
 
+use Wei\Validator\Required;
+
 /**
  * @property \Wei\Is $is
  * @method bool is()
@@ -92,6 +94,44 @@ final class ValidatorTest extends TestCase
         ])->isValid();
 
         $this->assertFalse($result);
+    }
+
+    public function testDefaultRequired()
+    {
+        $validate = $this->validate([
+            'defaultRequired' => false,
+            'data' => [
+
+            ],
+            'rules' => [
+                'email' => [
+                    'email' => true,
+                ],
+            ],
+        ]);
+
+        $this->assertTrue($validate->isValid());
+
+        /** @var Required $required */
+        $required = $validate->getRuleValidator('email', 'required');
+        $this->assertFalse($required->getOption('required'));
+    }
+
+    public function testDefaultRequiredFail()
+    {
+        $validate = $this->validate([
+            'defaultRequired' => false,
+            'data' => [
+                'email' => '',
+            ],
+            'rules' => [
+                'email' => [
+                    'email' => true,
+                ],
+            ],
+        ]);
+
+        $this->assertFalse($validate->isValid());
     }
 
     public function testRuleNotDefined()
@@ -829,7 +869,8 @@ final class ValidatorTest extends TestCase
     public function testIgnoreClosure()
     {
         $validator = $this->validate([
-            'data' => function () {},
+            'data' => function () {
+            },
             'rules' => [
                 'username' => [
                     'required' => true,

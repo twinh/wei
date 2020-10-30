@@ -117,6 +117,13 @@ class Validate extends Base
     protected $skip = false;
 
     /**
+     * Whether all data is required by default
+     *
+     * @var bool
+     */
+    protected $defaultRequired = true;
+
+    /**
      * The valid rules array, which use the field as key, and the rules as value
      *
      * @var string
@@ -210,7 +217,7 @@ class Validate extends Base
 
             // Make sure the "required" rule at first
             if (!isset($rules['required'])) {
-                $isRequired = true;
+                $isRequired = $this->defaultRequired;
             } else {
                 $isRequired = (bool) $rules['required'];
                 unset($rules['required']);
