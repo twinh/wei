@@ -192,6 +192,30 @@ final class VTest extends TestCase
         $this->assertRetErr($ret, null, 'This value is required');
     }
 
+    public function testGetOptions()
+    {
+        $v = V::key('email', 'Email')->email()
+            ->key('name', 'Name')->length(['max' => 1, 'countByChars' => true]);
+        $this->assertSame([
+            'data' => [],
+            'rules' => [
+                'email' => [
+                    'email' => [],
+                ],
+                'name' => [
+                    'length' => [
+                        'max' => 1,
+                        'countByChars' => true,
+                    ],
+                ],
+            ],
+            'names' => [
+                'email' => 'Email',
+                'name' => 'Name',
+            ],
+        ], $v->getOptions());
+    }
+
     protected function checkModel(bool $isNew, $data)
     {
         return V::key('name', 'Name')->required($isNew)->notBlank()

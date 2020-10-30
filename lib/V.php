@@ -340,6 +340,16 @@ class V extends Base
     }
 
     /**
+     * Returns the validate options
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
      * Add name for current field
      *
      * @param string $label
