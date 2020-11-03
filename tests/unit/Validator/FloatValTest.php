@@ -30,11 +30,15 @@ final class FloatValTest extends TestCase
         return [
             [0],
             [1],
+            [99],
             [1.0],
+            [1.1],
             [-1],
+            ['1'],
             ['1.0'],
             ['0.1'],
             ['-1'],
+            ['99'],
         ];
     }
 
