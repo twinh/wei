@@ -28,8 +28,8 @@ class Between extends BaseValidator
      */
     public function __invoke($input, $min = null, $max = null)
     {
-        // Allows not numeric parameter like 2000-01-01, 10:03, etc
-        if ($min && $max) {
+        // Allows non numeric parameter like 2000-01-01, 10:03, etc
+        if (null !== $min && null !== $max) {
             $this->storeOption('min', $min);
             $this->storeOption('max', $max);
         }
