@@ -202,6 +202,9 @@ return [
     // luhn
     '%name% is not a valid number' => '%name%不是有效的数字',
 
+    // maxAccuracy
+    '%name% can have at most %max% decimal(s)' => '%name%最多只能有%max%位小数',
+
     // maxLength
     '%name% must have a length lower than %max%' => '%name%的长度必须小于等于%max%',
     '%name% must contain no more than %max% items' => '%name%最多只能包含%max%项',
