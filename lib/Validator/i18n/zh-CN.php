@@ -220,6 +220,7 @@ return [
     // number
     '%name% must be valid number' => '%name%必须是有效的数字',
     '%name% must not be number' => '%name%不能是数字',
+    '%name% can have at most %scale% decimal(s)' => '%name%最多只能有%scale%位小数',
 
     // naturalNumber
     '%name% must be positive integer or zero' => '%name%必须是大于等于0的整数',
