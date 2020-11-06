@@ -321,7 +321,7 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param string $offset
      * @return bool
-     * @see \WeiTest\RequestTest::assertArrayBehaviour
+     * @see \WeiTest\ReqTest::assertArrayBehaviour
      */
     public function offsetExists($offset)
     {
