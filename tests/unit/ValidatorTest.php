@@ -2,6 +2,7 @@
 
 namespace WeiTest;
 
+use Wei\Validate;
 use Wei\Validator\Required;
 
 /**
@@ -879,5 +880,34 @@ final class ValidatorTest extends TestCase
         ]);
 
         $this->assertFalse($validator->isValid());
+    }
+
+    public function testGetCurrentRule()
+    {
+        $currentRules = [];
+        $result = $this->validate([
+            'data' => [
+                'email' => 'twinhuang@qq.com',
+                'age' => '5',
+            ],
+            'rules' => [
+                'email' => [
+                    'email' => true,
+                ],
+                'age' => [
+                    'digit' => true,
+                    'between' => [
+                        'min' => 1,
+                        'max' => 150,
+                    ],
+                ],
+            ],
+            'ruleValid' => function ($rule, $field, Validate $validator) use(&$currentRules) {
+                $currentRules[] = $validator->getCurrentRule();
+            }
+        ])->isValid();
+
+        $this->assertTrue($result);
+        $this->assertSame(['required', 'email', 'required', 'digit', 'between'], $currentRules);
     }
 }

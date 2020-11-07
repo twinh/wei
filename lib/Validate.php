@@ -152,11 +152,18 @@ class Validate extends Base
     protected $ruleValidators = [];
 
     /**
-     * Current validating field
+     * The current validating field name
      *
      * @var string
      */
     protected $currentField;
+
+    /**
+     * The current validating rule name
+     *
+     * @var string
+     */
+    protected $currentRule;
 
     /**
      * Create a new validator and validate by specified options
@@ -226,6 +233,8 @@ class Validate extends Base
 
             // Start validation
             foreach ($rules as $rule => $params) {
+                $this->currentRule = $rule;
+
                 // Prepare property options for validator
                 $props = $this->prepareProps($field, $rule);
 
@@ -808,13 +817,23 @@ class Validate extends Base
     }
 
     /**
-     * Returns current validating field
+     * Returns the current validating rule name
      *
      * @return string
      */
     public function getCurrentField()
     {
         return $this->currentField;
+    }
+
+    /**
+     * Returns the current validating rule name
+     *
+     * @return string
+     */
+    public function getCurrentRule()
+    {
+        return $this->currentRule;
     }
 
     /**
