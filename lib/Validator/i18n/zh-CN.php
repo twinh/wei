@@ -205,9 +205,15 @@ return [
     // maxAccuracy
     '%name% can have at most %max% decimal(s)' => '%name%最多只能有%max%位小数',
 
+    // maxCharLength
+    '%name% must be no more than %max% character(s)' => '%name%最多只能包含%max%个字符',
+
     // maxLength
     '%name% must have a length lower than %max%' => '%name%的长度必须小于等于%max%',
     '%name% must contain no more than %max% items' => '%name%最多只能包含%max%项',
+
+    // minCharLength
+    '%name% must be at least %min% character(s)' => '%name%至少要包含%min%个字符',
 
     // minLength
     '%name% must have a length greater than %min%' => '%name%的长度必须大于等于%min%',
