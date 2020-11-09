@@ -216,6 +216,25 @@ final class VTest extends TestCase
         ], $v->getOptions());
     }
 
+    public function testShortType()
+    {
+        $ret = V::email('email', '邮箱')->check([
+            'email' => 'test',
+        ]);
+        $this->assertRetErr($ret, null, '邮箱 must be valid email address');
+    }
+
+    public function testShortTypeSame()
+    {
+        $ret = V::email('email', '邮箱')
+            ->string('email2', '邮箱2')->email()
+            ->check([
+                'email' => 'test@example.com',
+                'email2' => 'test',
+            ]);
+        $this->assertRetErr($ret, null, '邮箱2 must be valid email address');
+    }
+
     protected function checkModel(bool $isNew, $data)
     {
         return V::key('name', 'Name')->required($isNew)->notBlank()

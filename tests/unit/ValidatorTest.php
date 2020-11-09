@@ -3,7 +3,7 @@
 namespace WeiTest;
 
 use Wei\Validate;
-use Wei\Validator\Required;
+use Wei\IsRequired;
 
 /**
  * @property \Wei\Is $is
@@ -113,7 +113,7 @@ final class ValidatorTest extends TestCase
 
         $this->assertTrue($validate->isValid());
 
-        /** @var Required $required */
+        /** @var IsRequired $required */
         $required = $validate->getRuleValidator('email', 'required');
         $this->assertFalse($required->getOption('required'));
     }
@@ -665,9 +665,9 @@ final class ValidatorTest extends TestCase
             ],
         ]);
 
-        $this->assertInstanceOf('\Wei\Validator\Required', $validator->getRuleValidator('email', 'required'));
-        $this->assertInstanceOf('\Wei\Validator\Length', $validator->getRuleValidator('email', 'length'));
-        $this->assertInstanceOf('\Wei\Validator\Email', $validator->getRuleValidator('email', 'email'));
+        $this->assertInstanceOf('\Wei\Validator\IsRequired', $validator->getRuleValidator('email', 'required'));
+        $this->assertInstanceOf('\Wei\Validator\IsLength', $validator->getRuleValidator('email', 'length'));
+        $this->assertInstanceOf('\Wei\Validator\IsEmail', $validator->getRuleValidator('email', 'email'));
     }
 
     public function testGetNames()

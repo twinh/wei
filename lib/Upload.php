@@ -8,8 +8,7 @@
 
 namespace Wei;
 
-use Wei\Validator\File as FileValidator;
-use Wei\Validator\Image;
+use Wei\IsFile as FileValidator;
 
 /**
  * A service that handles the uploaded files
@@ -17,7 +16,7 @@ use Wei\Validator\Image;
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Req $req The HTTP request wei
  */
-class Upload extends Image
+class Upload extends IsImage
 {
     /**
      * Seems that the total post data size is too large

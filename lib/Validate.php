@@ -8,7 +8,7 @@
 
 namespace Wei;
 
-use Wei\Validator\BaseValidator;
+use Wei\BaseValidator;
 
 /**
  * A validator service
@@ -147,7 +147,7 @@ class Validate extends Base
     /**
      * The rule validator instances
      *
-     * @var array<Validator\BaseValidator>
+     * @var array<Wei\BaseValidator>
      */
     protected $ruleValidators = [];
 
@@ -239,7 +239,7 @@ class Validate extends Base
                 $props = $this->prepareProps($field, $rule);
 
                 // The current rule validation result
-                /** @var $validator Validator\BaseValidator */
+                /** @var $validator Wei\BaseValidator */
                 $validator = null;
                 $result = $this->validateOne($rule, $data, $params, $validator, $props);
 
@@ -267,7 +267,7 @@ class Validate extends Base
 
                 if ($result) {
                     // The field data is empty and optional, skip the remaining validation rules
-                    /** @var $validator Validator\Required */
+                    /** @var $validator Wei\IsRequired */
                     if ('required' === $rule && $validator->isInvalid($data)) {
                         break;
                     }
@@ -721,7 +721,7 @@ class Validate extends Base
      *
      * @param string $field
      * @param string $rule
-     * @return Validator\BaseValidator
+     * @return Wei\BaseValidator
      */
     public function getRuleValidator($field, $rule)
     {
@@ -749,7 +749,7 @@ class Validate extends Base
     }
 
     /**
-     * @param string|Validator\BaseValidator|int $rule
+     * @param string|Wei\BaseValidator|int $rule
      * @param array|null $input
      * @param mixed $options
      * @param null &$validator
@@ -767,7 +767,7 @@ class Validate extends Base
             }
         }
 
-        if ($rule instanceof Validator\BaseValidator) {
+        if ($rule instanceof Wei\BaseValidator) {
             $validator = $rule;
             return $rule($input);
         }
@@ -794,7 +794,7 @@ class Validate extends Base
      *
      * @param string $rule The name of rule validator
      * @param array $options The property options for rule validator
-     * @return Validator\BaseValidator
+     * @return \Wei\BaseValidator
      * @throws \InvalidArgumentException When validator not found
      */
     public function createRuleValidator($rule, array $options = [])

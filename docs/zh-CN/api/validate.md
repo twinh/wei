@@ -422,7 +422,7 @@ $validator = wei()->validate(array(
     ),
     'rules' => array(
         'age' => array(
-            'callback' => function($data, \Wei\Validator\Callback $callback, $wei) {
+            'callback' => function($data, \Wei\IsCallback $callback, $wei) {
                 if ($data < 18) {
                     $callback->setMessage('您还未满18周岁');
                     return false;

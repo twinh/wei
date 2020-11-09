@@ -486,8 +486,6 @@ namespace Wei {
         {
             if (isset($this->aliases[$name])) {
                 $class = $this->aliases[$name];
-            } elseif ('is' == substr($name, 0, 2) && strlen($name) > 2) {
-                $class = 'Wei\Validator\\' . ucfirst(substr($name, 2));
             } else {
                 $class = 'Wei\\' . ucfirst($name);
             }
