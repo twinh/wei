@@ -42,6 +42,7 @@ final class IsMinCharLengthTest extends BaseValidatorTestCase
             ['123', 4],
             ['我', 2],
             ['我1', 3],
+            [[1, 2], 1],
         ];
     }
 }

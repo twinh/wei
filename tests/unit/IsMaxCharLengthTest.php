@@ -42,6 +42,7 @@ final class IsMaxCharLengthTest extends BaseValidatorTestCase
             ['123', 2],
             ['我我', 1],
             ['我我12', 3],
+            [[1, 2], 2],
         ];
     }
 }

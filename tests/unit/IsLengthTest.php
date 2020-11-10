@@ -14,7 +14,8 @@ final class IsLengthTest extends BaseValidatorTestCase
         parent::__construct($name, $data, $dataName);
 
         $this->arrayObject = new \ArrayObject([
-            1, 2,
+            1,
+            2,
         ]);
     }
 
@@ -96,5 +97,16 @@ final class IsLengthTest extends BaseValidatorTestCase
             [[1, 2], 10, 0],
             [$this->arrayObject, 0, 1],
         ];
+    }
+
+    public function testCountByChars()
+    {
+        $this->assertTrue($this->isLength('我爱你', 9));
+
+        $this->isLength->storeOption('countByChars', true);
+        $this->assertTrue($this->isLength('我爱你', 3));
+
+        $this->isLength->storeOption('countByChars', true);
+        $this->assertFalse($this->isLength([1, 2], 2));
     }
 }

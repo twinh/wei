@@ -9,6 +9,11 @@ use Wei\IsDateTime;
  */
 final class IsStringTest extends BaseValidatorTestCase
 {
+    public function testD()
+    {
+        dd(strlen('我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我你很好很123'));
+    }
+
     /**
      * @dataProvider providerForStringVal
      * @param mixed $input

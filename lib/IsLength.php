@@ -94,6 +94,11 @@ class IsLength extends BaseValidator
      */
     protected function doValidate($input)
     {
+        if ($this->countByChars && !$this->isString($input)) {
+            $this->addError('notString');
+            return false;
+        }
+
         if (false === ($len = $this->getLength($input))) {
             $this->addError('notDetected');
             return false;
