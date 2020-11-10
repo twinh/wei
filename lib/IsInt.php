@@ -20,6 +20,27 @@ class IsInt extends BaseValidator
     protected $negativeMessage = '%name% must not be an integer value';
 
     /**
+     * @var int|null
+     */
+    protected $min;
+
+    /**
+     * @var int|null
+     */
+    protected $max;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __invoke($input, int $min = null, int $max = null)
+    {
+        null !== $min && $this->storeOption('min', $min);
+        null !== $max && $this->storeOption('max', $max);
+
+        return $this->isValid($input);
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function doValidate($input)
@@ -28,6 +49,21 @@ class IsInt extends BaseValidator
             $this->addError('notInt');
             return false;
         }
+
+        if (null !== $this->min) {
+            $result = $this->validateRule($input, 'gte', $this->min);
+            if (!$result) {
+                return $result;
+            }
+        }
+
+        if (null !== $this->max) {
+            $result = $this->validateRule($input, 'lte', $this->max);
+            if (!$result) {
+                return $result;
+            }
+        }
+
         return true;
     }
 

@@ -10,19 +10,23 @@ final class IsIntTest extends BaseValidatorTestCase
     /**
      * @dataProvider providerForIntVal
      * @param mixed $input
+     * @param int|null $min
+     * @param int|null $max
      */
-    public function testIntVal($input)
+    public function testIntVal($input, int $min = null, int $max = null)
     {
-        $this->assertTrue($this->isInt($input));
+        $this->assertTrue($this->isInt($input, $min, $max));
     }
 
     /**
      * @dataProvider providerForNotIntVal
      * @param mixed $input
+     * @param int|null $min
+     * @param int|null $max
      */
-    public function testNotIntVal($input)
+    public function testNotIntVal($input, int $min = null, int $max = null)
     {
-        $this->assertFalse($this->isInt($input));
+        $this->assertFalse($this->isInt($input, $min, $max));
     }
 
     public function providerForIntVal()
@@ -35,6 +39,9 @@ final class IsIntTest extends BaseValidatorTestCase
             ['123'],
             ['0'],
             [0],
+            [1, 1],
+            [1, null, 1],
+            [1, 1, 2],
         ];
     }
 
@@ -46,6 +53,9 @@ final class IsIntTest extends BaseValidatorTestCase
             [null],
             [1.1],
             ['1.0'],
+            [1, 2],
+            [1, null, 0],
+            [2, 3, 4],
         ];
     }
 }
