@@ -13,7 +13,7 @@ namespace Wei;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class IsIntVal extends BaseValidator
+class IsInt extends BaseValidator
 {
     protected $notIntMessage = '%name% must be an integer value';
 

@@ -5,7 +5,7 @@ namespace WeiTest;
 /**
  * @internal
  */
-final class IsFloatValTest extends BaseValidatorTestCase
+final class IsFloatTest extends BaseValidatorTestCase
 {
     /**
      * @dataProvider providerForFloatVal
@@ -13,7 +13,7 @@ final class IsFloatValTest extends BaseValidatorTestCase
      */
     public function testFloatVal($input)
     {
-        $this->assertTrue($this->isFloatVal($input));
+        $this->assertTrue($this->isFloat($input));
     }
 
     /**
@@ -22,7 +22,7 @@ final class IsFloatValTest extends BaseValidatorTestCase
      */
     public function testNotFloatVal($input)
     {
-        $this->assertFalse($this->isFloatVal($input));
+        $this->assertFalse($this->isFloat($input));
     }
 
     public function providerForFloatVal()

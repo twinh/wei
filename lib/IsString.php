@@ -13,7 +13,7 @@ namespace Wei;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class IsStringVal extends BaseValidator
+class IsString extends BaseValidator
 {
     protected function doValidate($input)
     {

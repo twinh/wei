@@ -13,7 +13,7 @@ namespace Wei;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class IsBoolVal extends BaseValidator
+class IsBool extends BaseValidator
 {
     protected $notBoolMessage = '%name% must be a bool value';
 

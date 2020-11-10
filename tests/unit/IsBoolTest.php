@@ -5,7 +5,7 @@ namespace WeiTest;
 /**
  * @internal
  */
-final class IsBoolValTest extends BaseValidatorTestCase
+final class IsBoolTest extends BaseValidatorTestCase
 {
     /**
      * @dataProvider providerForBoolVal
@@ -13,7 +13,7 @@ final class IsBoolValTest extends BaseValidatorTestCase
      */
     public function testBoolVal($input)
     {
-        $this->assertTrue($this->isBoolVal($input));
+        $this->assertTrue($this->isBool($input));
     }
 
     /**
@@ -22,7 +22,7 @@ final class IsBoolValTest extends BaseValidatorTestCase
      */
     public function testNotBoolVal($input)
     {
-        $this->assertFalse($this->isBoolVal($input));
+        $this->assertFalse($this->isBool($input));
     }
 
     public function providerForBoolVal()

@@ -7,7 +7,7 @@ use Wei\IsDateTime;
 /**
  * @internal
  */
-final class IsStringValTest extends BaseValidatorTestCase
+final class IsStringTest extends BaseValidatorTestCase
 {
     /**
      * @dataProvider providerForStringVal
@@ -15,7 +15,7 @@ final class IsStringValTest extends BaseValidatorTestCase
      */
     public function testStringVal($input)
     {
-        $this->assertTrue($this->isStringVal($input));
+        $this->assertTrue($this->isString($input));
     }
 
     /**
@@ -24,7 +24,7 @@ final class IsStringValTest extends BaseValidatorTestCase
      */
     public function testNotStringVal($input)
     {
-        $this->assertFalse($this->isStringVal($input));
+        $this->assertFalse($this->isString($input));
     }
 
     public function providerForStringVal()

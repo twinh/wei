@@ -5,7 +5,7 @@ namespace WeiTest;
 /**
  * @internal
  */
-final class IsIntValTest extends BaseValidatorTestCase
+final class IsIntTest extends BaseValidatorTestCase
 {
     /**
      * @dataProvider providerForIntVal
@@ -13,7 +13,7 @@ final class IsIntValTest extends BaseValidatorTestCase
      */
     public function testIntVal($input)
     {
-        $this->assertTrue($this->isIntVal($input));
+        $this->assertTrue($this->isInt($input));
     }
 
     /**
@@ -22,7 +22,7 @@ final class IsIntValTest extends BaseValidatorTestCase
      */
     public function testNotIntVal($input)
     {
-        $this->assertFalse($this->isIntVal($input));
+        $this->assertFalse($this->isInt($input));
     }
 
     public function providerForIntVal()

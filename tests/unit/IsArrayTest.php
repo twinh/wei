@@ -5,7 +5,7 @@ namespace WeiTest;
 /**
  * @internal
  */
-final class IsArrayValTest extends BaseValidatorTestCase
+final class IsArrayTest extends BaseValidatorTestCase
 {
     /**
      * @dataProvider providerForArrayVal
@@ -13,7 +13,7 @@ final class IsArrayValTest extends BaseValidatorTestCase
      */
     public function testArrayVal($input)
     {
-        $this->assertTrue($this->isArrayVal($input));
+        $this->assertTrue($this->isArray($input));
     }
 
     /**
@@ -22,7 +22,7 @@ final class IsArrayValTest extends BaseValidatorTestCase
      */
     public function testNotArrayVal($input)
     {
-        $this->assertFalse($this->isArrayVal($input));
+        $this->assertFalse($this->isArray($input));
     }
 
     public function providerForArrayVal()

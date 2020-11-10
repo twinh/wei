@@ -13,7 +13,7 @@ namespace Wei;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class IsFloatVal extends BaseValidator
+class IsFloat extends BaseValidator
 {
     protected $notFloatMessage = '%name% must be a float value';
 

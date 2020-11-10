@@ -13,7 +13,7 @@ namespace Wei;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class IsArrayVal extends BaseValidator
+class IsArray extends BaseValidator
 {
     protected $notArrayMessage = '%name% must be an array';
 
