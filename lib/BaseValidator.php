@@ -93,7 +93,7 @@ abstract class BaseValidator extends Base
      * @var BaseValidator[]
      * @experimental
      */
-    private $subValidators;
+    private $subValidators = [];
 
     /**
      * Validate the input value
