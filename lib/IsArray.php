@@ -20,6 +20,24 @@ class IsArray extends BaseValidator
     protected $negativeMessage = '%name% must not be an array';
 
     /**
+     * @var int|null
+     */
+    protected $minLength;
+
+    /**
+     * @var int|null
+     */
+    protected $maxLength;
+
+    public function __invoke($input, int $minLength = null, int $maxLength = null)
+    {
+        null !== $minLength && $this->storeOption('minLength', $minLength);
+        null !== $maxLength && $this->storeOption('maxLength', $maxLength);
+
+        return $this->isValid($input);
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function doValidate($input)
@@ -28,6 +46,18 @@ class IsArray extends BaseValidator
             $this->addError('notArray');
             return false;
         }
+
+        if (null !== $this->minLength) {
+            $result = $this->validateRule($input, 'minLength', $this->minLength);
+            if (!$result) {
+                return $result;
+            }
+        }
+
+        if (null !== $this->maxLength) {
+            return $this->validateRule($input, 'maxLength', $this->maxLength);
+        }
+
         return true;
     }
 }

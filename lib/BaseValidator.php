@@ -14,8 +14,8 @@ use Wei\Base;
  * The base class of validator
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @method      string t(string $message, array $parameters = array()) Translates a message
- * @property    \Wei\T $t The translator wei
+ * @mixin \ValidateMixin
+ * @mixin \TMixin
  */
 abstract class BaseValidator extends Base
 {
@@ -90,6 +90,12 @@ abstract class BaseValidator extends Base
     protected $store = [[]];
 
     /**
+     * @var BaseValidator[]
+     * @experimental
+     */
+    private $subValidators;
+
+    /**
      * Validate the input value
      *
      * @param mixed $input
@@ -125,6 +131,12 @@ abstract class BaseValidator extends Base
         $this->loadTranslationMessages();
 
         $messages = [];
+        foreach ($this->subValidators as $validator) {
+            if ($validator->getErrors()) {
+                $messages = array_merge($messages, $validator->getMessages($name));
+            }
+        }
+
         foreach ($this->errors as $optionName => $message) {
             preg_match_all('/\%(.+?)\%/', $message, $matches);
             $parameters = [];
@@ -311,5 +323,34 @@ abstract class BaseValidator extends Base
             array_shift($this->store);
         }
         $this->store[] = [];
+    }
+
+    /**
+     * Validate by other rule
+     *
+     * @param mixed $input The input value to be validated
+     * @param string $rule The name of rule, like minLength, maxLength
+     * @param mixed $options The options pass to rule
+     * @param bool $skipExists Whether to skip current rule if there is same rule to validate later
+     * @return bool
+     * @experimental
+     */
+    protected function validateRule($input, $rule, $options = null, bool $skipExists = true)
+    {
+        if ($skipExists && $this->validator) {
+            $rules = $this->validator->getFieldRules($this->validator->getCurrentField());
+            if (isset($rules[$rule])) {
+                $keys = array_keys($rules);
+                if ($keys[$this->validator->getCurrentRule()] < $keys[$rule]) {
+                    return true;
+                }
+            }
+        }
+
+        $validator = null;
+        $this->subValidators[] = &$validator;
+        return $this->validate->validateOne($rule, $input, $options, $validator, [
+            'name' => $this->name,
+        ]);
     }
 }
