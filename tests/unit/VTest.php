@@ -17,6 +17,29 @@ final class VTest extends TestCase
         wei()->t->setLocale('en');
     }
 
+    public function testChainMode()
+    {
+        $ret = V::key('email')->email()
+            ->key('name')->minLength(1)
+            ->check([
+                'email' => 'test@email.com',
+                'name' => '123',
+            ]);
+        $this->assertRetSuc($ret);
+    }
+
+    public function testSplitMode()
+    {
+        $v = V::new();
+        $v->key('email')->email();
+        $v->key('name')->minLength(1);
+        $ret = $v->check([
+            'email' => 'test@email.com',
+            'name' => '123',
+        ]);
+        $this->assertRetSuc($ret);
+    }
+
     public function testCheckFail()
     {
         $ret = V::key('question', 'Question')

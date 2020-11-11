@@ -41,6 +41,17 @@ class V extends Base
     protected $lastRule;
 
     /**
+     * Return a new instance of current service
+     *
+     * @return static
+     */
+    public static function new()
+    {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        return Wei::getContainer()->newInstance('v');
+    }
+
+    /**
      * Create a new validator
      *
      * @param array $options
