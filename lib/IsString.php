@@ -15,12 +15,45 @@ namespace Wei;
  */
 class IsString extends BaseValidator
 {
+    /**
+     * @var int|null
+     */
+    protected $minLength;
+
+    /**
+     * @var int|null
+     */
+    protected $maxLength;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function __invoke($input, int $minLength = null, int $maxLength = null)
+    {
+        null !== $minLength && $this->storeOption('minLength', $minLength);
+        null !== $maxLength && $this->storeOption('maxLength', $maxLength);
+
+        return $this->isValid($input);
+    }
+
     protected function doValidate($input)
     {
         if (!$this->isString($input)) {
             $this->addError('notString');
             return false;
         }
+
+        if (null !== $this->minLength) {
+            $result = $this->validateRule($input, 'minLength', $this->minLength);
+            if (!$result) {
+                return $result;
+            }
+        }
+
+        if (null !== $this->maxLength) {
+            return $this->validateRule($input, 'maxLength', $this->maxLength);
+        }
+
         return true;
     }
 }
