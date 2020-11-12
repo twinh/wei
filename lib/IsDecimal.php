@@ -15,6 +15,11 @@ namespace Wei;
  */
 class IsDecimal extends BaseValidator
 {
+    /**
+     * {@inheritDoc}
+     */
+    public const BASIC_TYPE = true;
+
     protected $invalidMessage = '%name% must be decimal';
 
     protected $negativeMessage = '%name% must not be decimal';

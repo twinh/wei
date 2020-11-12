@@ -83,6 +83,22 @@ class V extends Base
             $args = $args[0];
         }
 
+        // Convert `$type($name, $label, ...$args)` to `key($name, $label)->addRule($type, $args)`
+        if (substr($name, 0, 3) === 'not') {
+            $rule = substr($name, 3);
+        } else {
+            $rule = $name;
+        }
+        $class = $this->wei->getClass('is' . ucfirst($rule));
+        if (defined($class . '::BASIC_TYPE') && $class::BASIC_TYPE) {
+            if (count($args) < 2) {
+                throw new \InvalidArgumentException('Expected at least 2 arguments for type rule, but got ' . count($args));
+            }
+            [$keyName, $label] = $args;
+            $args = array_slice($args, 2);
+            $this->key($keyName, $label);
+        }
+
         return $this->addRule($name, $args);
     }
 

@@ -239,23 +239,35 @@ final class VTest extends TestCase
         ], $v->getOptions());
     }
 
-    public function testShortType()
+    public function testBasicType()
     {
-        $ret = V::email('email', '邮箱')->check([
-            'email' => 'test',
+        $ret = V::char('name', '名称', 2)->check([
+            'name' => '1',
         ]);
-        $this->assertRetErr($ret, null, '邮箱 must be valid email address');
+        $this->assertRetErr($ret, null, '名称 must be at least 2 character(s)');
     }
 
-    public function testShortTypeSame()
+    public function testBasicTypeChain()
     {
-        $ret = V::email('email', '邮箱')
-            ->string('email2', '邮箱2')->email()
+        $ret = V::char('name', '名称', 2)
+            ->key('name2', '名称2')->addRule('char', 2)
             ->check([
-                'email' => 'test@example.com',
-                'email2' => 'test',
+                'name' => '12',
+                'name2' => '1',
             ]);
-        $this->assertRetErr($ret, null, '邮箱2 must be valid email address');
+        $this->assertRetErr($ret, null, '名称2 must be at least 2 character(s)');
+    }
+
+    public function testBasicTypeInvalidArgument()
+    {
+        $this->expectExceptionObject(new \InvalidArgumentException('Expected at least 2 arguments for type rule, but got 0'));
+        V::char();
+    }
+
+    public function testBasicTypeInvalidArgument2()
+    {
+        $this->expectExceptionObject(new \InvalidArgumentException('Expected at least 2 arguments for type rule, but got 1'));
+        V::char('name');
     }
 
     protected function checkModel(bool $isNew, $data)

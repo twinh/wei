@@ -16,6 +16,11 @@ namespace Wei;
 class IsUNumber extends IsNumber
 {
     /**
+     * {@inheritDoc}
+     */
+    public const BASIC_TYPE = true;
+
+    /**
      * {@inheritdoc}
      */
     protected $unsigned = true;

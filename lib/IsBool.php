@@ -15,6 +15,11 @@ namespace Wei;
  */
 class IsBool extends BaseValidator
 {
+    /**
+     * {@inheritDoc}
+     */
+    public const BASIC_TYPE = true;
+
     protected $notBoolMessage = '%name% must be a bool value';
 
     protected $negativeMessage = '%name% must not be a bool value';

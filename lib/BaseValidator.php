@@ -20,6 +20,13 @@ use Wei\Base;
 abstract class BaseValidator extends Base
 {
     /**
+     * Whether the validator cant be
+     *
+     * @experimental
+     */
+    const BASIC_TYPE = false;
+
+    /**
      * The message added when the input required a stringify value
      *
      * @var string

@@ -16,6 +16,11 @@ namespace Wei;
 class IsString extends BaseValidator
 {
     /**
+     * {@inheritDoc}
+     */
+    public const BASIC_TYPE = true;
+
+    /**
      * @var int|null
      */
     protected $minLength;

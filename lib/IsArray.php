@@ -15,6 +15,11 @@ namespace Wei;
  */
 class IsArray extends BaseValidator
 {
+    /**
+     * {@inheritDoc}
+     */
+    public const BASIC_TYPE = true;
+
     protected $notArrayMessage = '%name% must be an array';
 
     protected $negativeMessage = '%name% must not be an array';
