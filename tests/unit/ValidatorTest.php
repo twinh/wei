@@ -2,6 +2,8 @@
 
 namespace WeiTest;
 
+use Wei\IsEmail;
+use Wei\IsLength;
 use Wei\Validate;
 use Wei\IsRequired;
 
@@ -440,22 +442,11 @@ final class ValidatorTest extends TestCase
                 'username' => '',
             ],
             'rules' => [
-                'username' => [
-                    $this->validate->createRuleValidator('email'),
-                ],
-            ],
-        ]);
-
-        $validator2 = $this->validate([
-            'data' => [
-                'username' => '',
-            ],
-            'rules' => [
                 'username' => $this->validate->createRuleValidator('email'),
             ],
         ]);
 
-        $this->assertFalse($validator2->isValid());
+        $this->assertFalse($validator->isValid());
     }
 
     public function testSkip()
@@ -665,9 +656,9 @@ final class ValidatorTest extends TestCase
             ],
         ]);
 
-        $this->assertInstanceOf('\Wei\Validator\IsRequired', $validator->getRuleValidator('email', 'required'));
-        $this->assertInstanceOf('\Wei\Validator\IsLength', $validator->getRuleValidator('email', 'length'));
-        $this->assertInstanceOf('\Wei\Validator\IsEmail', $validator->getRuleValidator('email', 'email'));
+        $this->assertInstanceOf(IsRequired::class, $validator->getRuleValidator('email', 'required'));
+        $this->assertInstanceOf(IsLength::class, $validator->getRuleValidator('email', 'length'));
+        $this->assertInstanceOf(IsEmail::class, $validator->getRuleValidator('email', 'email'));
     }
 
     public function testGetNames()

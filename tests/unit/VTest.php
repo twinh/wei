@@ -2,6 +2,7 @@
 
 namespace WeiTest;
 
+use Wei\IsEmail;
 use Wei\V;
 use Wei\Validate;
 
@@ -236,6 +237,7 @@ final class VTest extends TestCase
                 'email' => 'Email',
                 'name' => 'Name',
             ],
+            'fields' => [],
         ], $v->getOptions());
     }
 
@@ -268,6 +270,109 @@ final class VTest extends TestCase
     {
         $this->expectExceptionObject(new \InvalidArgumentException('Expected at least 2 arguments for type rule, but got 1'));
         V::char('name');
+    }
+
+    public function testArrayKey()
+    {
+        $ret = V::key(['user', 'email'], '测试')->email()
+            ->check([
+                'user' => [
+                    'email' => 'test@example.com',
+                ],
+            ]);
+
+        $this->assertRetSuc($ret);
+    }
+
+    public function testArrayKey2()
+    {
+        $ret = V::key(['user', 'primary', 'email'], '测试')->email()
+            ->check([
+                'user' => [
+                    'primary' => [
+                        'email' => 'test@example.com',
+                    ],
+                ],
+            ]);
+
+        $this->assertRetSuc($ret);
+    }
+
+    public function testArray()
+    {
+        $validator = V::key('name', 'Name')
+            ->key(['user', 'sex'])->in(['array' => [0, 1, 2]])
+            ->key(['user', 'email'], 'Email')->email()->message('Invalid %name%')
+            ->validate([
+                'name' => 'test',
+                'user' => [
+                    'sex' => 1,
+                    'email' => 'test',
+                ],
+            ]);
+
+        $this->assertSame('email', $validator->getCurrentRule());
+        $this->assertSame(['user', 'email'], $validator->getCurrentField());
+
+        $this->assertSame(['name', ['user', 'sex']], $validator->getValidFields());
+        $this->assertSame([['user', 'email']], $validator->getInvalidFields());
+
+        $this->assertSame([
+            'user.email' => [
+                'email' => [
+                    'format' => 'Invalid Email',
+                ],
+            ],
+        ], $validator->getDetailMessages());
+
+        $this->assertSame([
+            'user.email' => [
+                'Invalid Email',
+            ],
+        ], $validator->getSummaryMessages());
+
+        $this->assertSame([
+            'user.email-email-format' => 'Invalid Email',
+        ], $validator->getFlatMessages());
+
+        $this->assertSame(['user.email' => ['email' => 'Invalid %name%']], $validator->getMessages());
+
+        $this->assertSame(['email' => []], $validator->getFieldRules(['user', 'email']));
+
+        $this->assertSame('test', $validator->getFieldData(['user', 'email']));
+
+        $this->assertInstanceOf(IsEmail::class, $validator->getRuleValidator(['user', 'email'], 'email'));
+
+        $this->assertSame(['required'], $validator->getValidRules(['user', 'email']));
+        $this->assertSame(['email'], $validator->getInvalidRules(['user', 'email']));
+
+        $this->assertFalse($validator->isFieldValid(['user', 'email']));
+        $this->assertTrue($validator->isFieldInvalid(['user', 'email']));
+
+        $this->assertSame([], $validator->getRuleParams(['user', 'email'], 'email'));
+
+        $this->assertTrue($validator->hasField(['user', 'email']));
+        $this->assertSame('test', $validator->getFieldData(['user', 'email']));
+
+        $validator->addValidRule(['user.email'], 'test');
+        $this->assertSame(['required', 'test'], $validator->getValidRules(['user', 'email']));
+
+        $validator->addInvalidRule(['user.email'], 'test');
+        $this->assertSame(['email', 'test'], $validator->getInvalidRules(['user', 'email']));
+
+        $validator->addRule(['user', 'email'], 'test', 'test params');
+        $this->assertSame(['test params'], $validator->getRuleParams(['user', 'email'], 'test'));
+
+        $validator->addRule(['user', 'email'], 'test', 'test params');
+        $this->assertSame(['test params'], $validator->getRuleParams(['user', 'email'], 'test'));
+
+        $this->assertTrue($validator->hasRule(['user', 'email'], 'test'));
+
+        $this->assertFalse($validator->removeRule(['user', 'email2'], 'test'));
+        $this->assertTrue($validator->removeRule(['user', 'email'], 'test'));
+
+        $this->assertFalse($validator->removeField(['user', 'email2']));
+        $this->assertTrue($validator->removeField(['user', 'email']));
     }
 
     protected function checkModel(bool $isNew, $data)

@@ -28,6 +28,7 @@ class V extends Base
         'data' => [],
         'rules' => [],
         'names' => [],
+        'fields' => [],
     ];
 
     /**
@@ -245,13 +246,19 @@ class V extends Base
     /**
      * Add a new field
      *
-     * @param string $name
+     * @param string|array $name
      * @param string|null $label
      * @return $this
      * @svc
      */
     protected function key($name, $label = null)
     {
+        if (is_array($name)) {
+            $key = implode('.', $name);
+            $this->options['fields'][$key] = $name;
+            $name = $key;
+        }
+
         $this->lastKey = $name;
 
         // Rest previous key's last rule

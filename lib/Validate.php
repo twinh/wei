@@ -8,8 +8,6 @@
 
 namespace Wei;
 
-use Wei\BaseValidator;
-
 /**
  * A validator service
  *
@@ -147,14 +145,14 @@ class Validate extends Base
     /**
      * The rule validator instances
      *
-     * @var array<Wei\BaseValidator>
+     * @var array<BaseValidator>
      */
     protected $ruleValidators = [];
 
     /**
      * The current validating field name
      *
-     * @var string
+     * @var string|array
      */
     protected $currentField;
 
@@ -164,6 +162,15 @@ class Validate extends Base
      * @var string
      */
     protected $currentRule;
+
+    /**
+     * An array contains data path and field
+     *
+     * eg: ['user.email' => ['user', 'email']]
+     *
+     * @var array
+     */
+    protected $fields = [];
 
     /**
      * Create a new validator and validate by specified options
@@ -198,9 +205,9 @@ class Validate extends Base
 
         $this->beforeValidate && call_user_func($this->beforeValidate, $this, $this->wei);
 
-        foreach ($this->rules as $field => $rules) {
-            $this->currentField = $field;
-            $data = $this->getFieldData($field);
+        foreach ($this->rules as $path => $rules) {
+            $this->currentField = $this->toField($path);
+            $data = $this->getFieldData($this->currentField);
 
             /**
              * Process simple rule
@@ -217,7 +224,7 @@ class Validate extends Base
                 $rules = [$rules];
             } elseif (!is_array($rules)) {
                 throw new \InvalidArgumentException(sprintf(
-                    'Expected argument of type array, string or instance of Wei\Validator\BaseValidator, "%s" given',
+                    'Expected argument of type array, string or instance of Wei\BaseValidator, "%s" given',
                     is_object($rules) ? get_class($rules) : gettype($rules)
                 ));
             }
@@ -236,10 +243,10 @@ class Validate extends Base
                 $this->currentRule = $rule;
 
                 // Prepare property options for validator
-                $props = $this->prepareProps($field, $rule);
+                $props = $this->prepareProps($path, $rule);
 
                 // The current rule validation result
-                /** @var $validator Wei\BaseValidator */
+                /** @var $validator BaseValidator */
                 $validator = null;
                 $result = $this->validateOne($rule, $data, $params, $validator, $props);
 
@@ -248,7 +255,7 @@ class Validate extends Base
                 }
 
                 // Record the rule validators
-                $this->ruleValidators[$field][$rule] = $validator;
+                $this->ruleValidators[$path][$rule] = $validator;
 
                 // If any rule is invalid, the result would always be false in the whole validation flow
                 if (false === $result) {
@@ -257,11 +264,11 @@ class Validate extends Base
 
                 // Record the valid/invalid rule
                 $method = $result ? 'addValidRule' : 'addInvalidRule';
-                $this->{$method}($field, $rule);
+                $this->{$method}($this->currentField, $rule);
 
                 // Trigger the ruleValid/ruleInvalid callback
                 $fn = $result ? 'ruleValid' : 'ruleInvalid';
-                if ($this->{$fn} && false === call_user_func($this->{$fn}, $rule, $field, $this, $this->wei)) {
+                if ($this->{$fn} && false === call_user_func($this->{$fn}, $rule, $path, $this, $this->wei)) {
                     return $this->result;
                 }
 
@@ -280,8 +287,8 @@ class Validate extends Base
             }
 
             // Trigger the fieldValid/fieldInvalid callback
-            $callback = $this->isFieldValid($field) ? 'fieldValid' : 'fieldInvalid';
-            if ($this->{$callback} && false === call_user_func($this->{$callback}, $field, $this, $this->wei)) {
+            $callback = $this->isFieldValid($path) ? 'fieldValid' : 'fieldInvalid';
+            if ($this->{$callback} && false === call_user_func($this->{$callback}, $path, $this, $this->wei)) {
                 return $this->result;
             }
 
@@ -305,26 +312,26 @@ class Validate extends Base
     /**
      * Add valid rule
      *
-     * @param string $field The field name
+     * @param string|array $field The field name
      * @param string $rule The rule name
      * @return $this
      */
     public function addValidRule($field, $rule)
     {
-        $this->validRules[$field][] = $rule;
+        $this->validRules[$this->toPath($field)][] = $rule;
         return $this;
     }
 
     /**
      * Add invalid rule
      *
-     * @param string $field The field name
+     * @param string|array $field The field name
      * @param string $rule The rule name
      * @return $this
      */
     public function addInvalidRule($field, $rule)
     {
-        $this->invalidRules[$field][] = $rule;
+        $this->invalidRules[$this->toPath($field)][] = $rule;
         return $this;
     }
 
@@ -335,7 +342,7 @@ class Validate extends Base
      */
     public function getValidFields()
     {
-        return array_keys(array_diff_key($this->validRules, $this->invalidRules));
+        return array_map([$this, 'toField'], array_keys(array_diff_key($this->validRules, $this->invalidRules)));
     }
 
     /**
@@ -345,13 +352,13 @@ class Validate extends Base
      */
     public function getInvalidFields()
     {
-        return array_keys($this->invalidRules);
+        return array_map([$this, 'toField'], array_keys($this->invalidRules));
     }
 
     /**
      * Check if field is valid
      *
-     * @param string $field
+     * @param string|array $field
      * @return bool
      */
     public function isFieldValid($field)
@@ -362,7 +369,7 @@ class Validate extends Base
     /**
      * Check if field is invalid
      *
-     * @param string $field
+     * @param string|array $field
      * @return bool
      */
     public function isFieldInvalid($field)
@@ -395,47 +402,47 @@ class Validate extends Base
     /**
      * Get validator rules by specified field
      *
-     * @param string $field
+     * @param string|array $field
      * @return array
      */
     public function getFieldRules($field)
     {
-        return isset($this->rules[$field]) ? $this->rules[$field] : [];
+        return $this->rules[$this->toPath($field)] ?? [];
     }
 
     /**
      * Get validation rule parameters
      *
-     * @param string $field The validation field
+     * @param string|array $field The validation field
      * @param string $rule The validation rule
      * @return array
      */
     public function getRuleParams($field, $rule)
     {
-        return isset($this->rules[$field][$rule]) ? (array) $this->rules[$field][$rule] : [];
+        return (array) ($this->rules[$this->toPath($field)][$rule] ?? []);
     }
 
     /**
      * Get valid rules by field
      *
-     * @param string $field
+     * @param string|array $field
      * @return array
      */
     public function getValidRules($field)
     {
-        return isset($this->validRules[$field]) ? $this->validRules[$field] : [];
+        return $this->validRules[$this->toPath($field)] ?? [];
     }
 
     /**
      * Get invalid rules by field
      *
-     * @param string $field
+     * @param string|array $field
      * @return array
      */
     public function getInvalidRules($field = null)
     {
         return $field ?
-            isset($this->invalidRules[$field]) ? $this->invalidRules[$field] : []
+            $this->invalidRules[$this->toPath($field)] ?? []
             : $this->invalidRules;
     }
 
@@ -452,38 +459,39 @@ class Validate extends Base
     /**
      * Adds rule for specified field
      *
-     * @param string $field The name of field
+     * @param string|array $field The name of field
      * @param string $rule The name of rule
      * @param mixed $parameters The parameters for rule
      */
     public function addRule($field, $rule, $parameters)
     {
-        $this->rules[$field][$rule] = $parameters;
+        $this->rules[$this->toPath($field)][$rule] = $parameters;
     }
 
     /**
      * Returns whether the validation rule exists in specified field
      *
-     * @param string $field
+     * @param string|array $field
      * @param string $rule
      * @return bool
      */
     public function hasRule($field, $rule)
     {
-        return isset($this->rules[$field][$rule]);
+        return isset($this->rules[$this->toPath($field)][$rule]);
     }
 
     /**
      * Removes the rule in field
      *
-     * @param string $field The name of field
+     * @param string|array $field The name of field
      * @param string $rule The name of rule
      * @return bool
      */
     public function removeRule($field, $rule)
     {
-        if (isset($this->rules[$field][$rule])) {
-            unset($this->rules[$field][$rule]);
+        $path = $this->toPath($field);
+        if (isset($this->rules[$path][$rule])) {
+            unset($this->rules[$path][$rule]);
             return true;
         }
         return false;
@@ -492,13 +500,14 @@ class Validate extends Base
     /**
      * Removes the validate field
      *
-     * @param string $field
+     * @param string|array $field
      * @return bool
      */
     public function removeField($field)
     {
-        if (isset($this->rules[$field])) {
-            unset($this->rules[$field]);
+        $path = $this->toPath($field);
+        if (isset($this->rules[$path])) {
+            unset($this->rules[$path]);
             return true;
         }
         return false;
@@ -536,43 +545,37 @@ class Validate extends Base
     /**
      * Returns validation field data
      *
-     * @param string $field The name of field
+     * @param string|array $field The name of field
      * @return mixed
      */
     public function getFieldData($field)
     {
-        // $this->data could only be array or object, which has been checked by $this->setData
-        if ((is_array($this->data) && array_key_exists($field, $this->data))
-            || ($this->data instanceof \ArrayAccess && $this->data->offsetExists($field))
-        ) {
-            return $this->data[$field];
-        } elseif ($this->data instanceof \Closure) {
-            // Call isset($closure->{$field}) will throw "Error : Closure object cannot have properties"
-            return null;
-        } elseif (isset($this->data->{$field})) {
-            return $this->data->{$field};
-        } elseif (method_exists($this->data, 'get' . $field)) {
-            return $this->data->{'get' . $field}();
-        } else {
-            return null;
-        }
+        return $this->getDataByPaths($this->data, (array) $field);
     }
 
     /**
      * Check if field exists in data
      *
-     * @param string $field
+     * @param string|array $field
      * @return bool
      */
     public function hasField($field)
     {
-        if (is_array($this->data)) {
-            return array_key_exists($field, $this->data);
-        } elseif ($this->data instanceof \ArrayAccess) {
-            return $this->data->offsetExists($field);
-        } elseif (property_exists($this->data, $field)) {
+        if (is_array($field)) {
+            $lastField = array_pop($field);
+            $data = $this->getDataByPaths($this->data, $field);
+        } else {
+            $lastField = $field;
+            $data = $this->data;
+        }
+
+        if (is_array($data)) {
+            return array_key_exists($lastField, $data);
+        } elseif ($data instanceof \ArrayAccess) {
+            return $data->offsetExists($lastField);
+        } elseif (property_exists($this->data, $lastField)) {
             return true;
-        } elseif (method_exists($this->data, 'get' . $field)) {
+        } elseif (method_exists($this->data, 'get' . $lastField)) {
             // @experimental Assume field exists
             return true;
         } else {
@@ -582,6 +585,8 @@ class Validate extends Base
 
     /**
      * Sets data for validation field
+     *
+     * NOTE: Do not support array fields yet.
      *
      * @param string $field The name of field
      * @param mixed $data The data of field
@@ -627,9 +632,9 @@ class Validate extends Base
     public function getDetailMessages()
     {
         $messages = [];
-        foreach ($this->invalidRules as $field => $rules) {
+        foreach ($this->invalidRules as $path => $rules) {
             foreach ($rules as $rule) {
-                $messages[$field][$rule] = $this->ruleValidators[$field][$rule]->getMessages();
+                $messages[$path][$rule] = $this->ruleValidators[$path][$rule]->getMessages();
             }
         }
         return $messages;
@@ -643,7 +648,7 @@ class Validate extends Base
      * ```
      * [
      *    'field-required-required' => 'Field is required',
-     *    'field2-required-required' => 'Field2 is required',
+     *    'my.field2-required-required' => 'Field2 is required',
      * ]
      * ```
      *
@@ -654,10 +659,10 @@ class Validate extends Base
         $messages = [];
         $detailMessages = $this->getDetailMessages();
 
-        foreach ($detailMessages as $field => $rules) {
+        foreach ($detailMessages as $path => $rules) {
             foreach ($rules as $rule => $options) {
                 foreach ($options as $name => $message) {
-                    $messages[$field . '-' . $rule . '-' . $name] = $message;
+                    $messages[$path . '-' . $rule . '-' . $name] = $message;
                 }
             }
         }
@@ -673,10 +678,10 @@ class Validate extends Base
     {
         $messages = $this->getDetailMessages();
         $summaries = [];
-        foreach ($messages as $field => $rules) {
+        foreach ($messages as $path => $rules) {
             foreach ($rules as $options) {
                 foreach ($options as $message) {
-                    $summaries[$field][] = $message;
+                    $summaries[$path][] = $message;
                 }
             }
         }
@@ -719,13 +724,13 @@ class Validate extends Base
     /**
      * Returns the rule validator object
      *
-     * @param string $field
+     * @param string|array $field
      * @param string $rule
-     * @return Wei\BaseValidator
+     * @return BaseValidator
      */
     public function getRuleValidator($field, $rule)
     {
-        return isset($this->ruleValidators[$field][$rule]) ? $this->ruleValidators[$field][$rule] : null;
+        return $this->ruleValidators[$this->toPath($field)][$rule] ?? null;
     }
 
     /**
@@ -749,7 +754,7 @@ class Validate extends Base
     }
 
     /**
-     * @param string|Wei\BaseValidator|int $rule
+     * @param string|BaseValidator|int $rule
      * @param array|null $input
      * @param mixed $options
      * @param null &$validator
@@ -767,7 +772,7 @@ class Validate extends Base
             }
         }
 
-        if ($rule instanceof Wei\BaseValidator) {
+        if ($rule instanceof BaseValidator) {
             $validator = $rule;
             return $rule($input);
         }
@@ -794,7 +799,7 @@ class Validate extends Base
      *
      * @param string $rule The name of rule validator
      * @param array $options The property options for rule validator
-     * @return \Wei\BaseValidator
+     * @return BaseValidator
      * @throws \InvalidArgumentException When validator not found
      */
     public function createRuleValidator($rule, array $options = [])
@@ -819,7 +824,7 @@ class Validate extends Base
     /**
      * Returns the current validating rule name
      *
-     * @return string
+     * @return string|array
      */
     public function getCurrentField()
     {
@@ -839,19 +844,19 @@ class Validate extends Base
     /**
      * Prepare name and messages property option for rule validator
      *
-     * @param string $field
+     * @param string $path
      * @param string $rule
      * @return array
      */
-    protected function prepareProps($field, $rule)
+    protected function prepareProps($path, $rule)
     {
         $props = $messages = [];
 
         $props['validator'] = $this;
 
         // Prepare name for validator
-        if (isset($this->names[$field])) {
-            $props['name'] = $this->names[$field];
+        if (isset($this->names[$path])) {
+            $props['name'] = $this->names[$path];
         }
 
         /**
@@ -882,11 +887,11 @@ class Validate extends Base
          * In case 1, $messages is string
          */
         // Case 2
-        if (isset($this->messages[$field][$rule]) && is_array($this->messages[$field])) {
-            $messages = $this->messages[$field][$rule];
+        if (isset($this->messages[$path][$rule]) && is_array($this->messages[$path])) {
+            $messages = $this->messages[$path][$rule];
             // Case 1
-        } elseif (isset($this->messages[$field]) && is_scalar($this->messages[$field])) {
-            $messages = $this->messages[$field];
+        } elseif (isset($this->messages[$path]) && is_scalar($this->messages[$path])) {
+            $messages = $this->messages[$path];
         }
 
         // Convert message to array for validator
@@ -899,5 +904,57 @@ class Validate extends Base
         }
 
         return $props;
+    }
+
+    /**
+     * Convert path to field, eg 'user.email' to ['user', 'email']
+     *
+     * @param string $path
+     * @return string
+     */
+    private function toField(string $path)
+    {
+        return $this->fields[$path] ?? $path;
+    }
+
+    /**
+     * Convert field to path, eg ['user', 'email'] to 'user.email'
+     *
+     * @param string|array $field
+     * @return string
+     */
+    private function toPath($field)
+    {
+        if (is_array($field)) {
+            return array_search($field, $this->fields, true) ?: implode('.', $field);
+        }
+        return $field;
+    }
+
+    /**
+     * @param mixed $data
+     * @param array $paths
+     * @return mixed
+     */
+    private function getDataByPaths($data, array $paths)
+    {
+        foreach ($paths as $path) {
+            // $data could only be array or object, which has been checked by $this->setData
+            if ((is_array($data) && array_key_exists($path, $data))
+                || ($data instanceof \ArrayAccess && $data->offsetExists($path))
+            ) {
+                $data = $data[$path];
+            } elseif ($data instanceof \Closure) {
+                // Call isset($closure->{$field}) will throw "Error : Closure object cannot have properties"
+                return null;
+            } elseif (isset($data->{$path})) {
+                $data = $data->{$path};
+            } elseif (method_exists($data, 'get' . $path)) {
+                $data = $data->{'get' . $path}();
+            } else {
+                return null;
+            }
+        }
+        return $data;
     }
 }
