@@ -95,6 +95,12 @@ return [
     '%name% must contain only double byte characters' => '%name%只能由双字节字符组成',
     '%name% must not contain only double byte characters' => '%name%不能只由双字节字符组成',
 
+    // each
+    'The %index%st %name%\'s ' => '第 %index% 个%name%的',
+    'The %index%nd %name%\'s ' => '第 %index% 个%name%的',
+    'The %index%rd %name%\'s ' => '第 %index% 个%name%的',
+    'The %index%th %name%\'s ' => '第 %index% 个%name%的',
+
     // email
     '%name% must be valid email address' => '%name%必须是有效的邮箱地址',
     '%name% must not be an email address' => '%name%不能是邮箱地址',
