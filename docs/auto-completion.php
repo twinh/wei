@@ -29,25 +29,6 @@ class AssetMixin {
 }
 
 /**
- * @property    Wei\Base $base The base class for all services
- */
-class BaseMixin {
-}
-
-/**
- * @property    Wei\BaseCache $baseCache The base class for cache services
- * @method      mixed baseCache($key, $value = null, $expire = 0) Retrieve or store an item
- */
-class BaseCacheMixin {
-}
-
-/**
- * @property    Wei\BaseController $baseController The base class for controller
- */
-class BaseControllerMixin {
-}
-
-/**
  * @property    Wei\Bicache $bicache A two-level cache service
  * @method      mixed bicache($key, $value = null, $expire = 0) Retrieve or store an item
  */
@@ -160,6 +141,678 @@ class GravatarMixin {
  * @method      Wei\Http http($url = null, $options = []) Create a new HTTP object and execute
  */
 class HttpMixin {
+}
+
+/**
+ * @property    Wei\IsAll $isAll Check if all of the element in the input is valid by all specified rules
+ * @method      bool isAll($input, $rules = []) Check if all of the element in the input is valid by all specified rules
+ */
+class IsAllMixin {
+}
+
+/**
+ * @property    Wei\IsAllOf $isAllOf Check if the input is valid by all of the rules
+ * @method      bool isAllOf($input, $rules = [], $atLeast = null) Check if the input is valid by all of the rules
+ */
+class IsAllOfMixin {
+}
+
+/**
+ * @property    Wei\IsAlnum $isAlnum Check if the input contains letters (a-z) and digits (0-9)
+ * @method      bool isAlnum($input, $pattern = null) Returns whether the $input value is valid
+ */
+class IsAlnumMixin {
+}
+
+/**
+ * @property    Wei\IsAlpha $isAlpha Check if the input contains only letters (a-z)
+ * @method      bool isAlpha($input, $pattern = null) Returns whether the $input value is valid
+ */
+class IsAlphaMixin {
+}
+
+/**
+ * @property    Wei\IsArray $isArray Check if the input could be convert to array
+ * @method      mixed isArray($input, $minLength = null, $maxLength = null)
+ */
+class IsArrayMixin {
+}
+
+/**
+ * @property    Wei\IsBetween $isBetween Check if the input is between the specified minimum and maximum value
+ * @method      mixed isBetween($input, $min = null, $max = null)
+ */
+class IsBetweenMixin {
+}
+
+/**
+ * @property    Wei\IsBigInt $isBigInt Check if the input is int value and between -2^63(-9,223,372,036,854,775,808) and 2^64-1(9,223,372,036,854,775,807) (8 Bytes)
+ * @method      mixed isBigInt($input, $min = null, $max = null)
+ */
+class IsBigIntMixin {
+}
+
+/**
+ * @property    Wei\IsBlank $isBlank Check if the input is blank
+ * @method      bool isBlank($input) Validate the input value
+ */
+class IsBlankMixin {
+}
+
+/**
+ * @property    Wei\IsBool $isBool Check if the input is a bool value
+ * @method      bool isBool($input) Validate the input value
+ */
+class IsBoolMixin {
+}
+
+/**
+ * @property    Wei\IsBoolable $isBoolable Check if the input is a bool value
+ * @method      bool isBoolable($input) Validate the input value
+ */
+class IsBoolableMixin {
+}
+
+/**
+ * @property    Wei\IsCallback $isCallback Check if the input is valid by specified callback
+ * @method      bool isCallback($input, $fn = null, $message = null) Check if the input is valid by specified callback
+ */
+class IsCallbackMixin {
+}
+
+/**
+ * @property    Wei\IsChar $isChar Check if the input is a string within the specified character lengths
+ * @method      mixed isChar($input, $minLength = null, $maxLength = null)
+ */
+class IsCharMixin {
+}
+
+/**
+ * @property    Wei\IsChildren $isChildren Check if the input is validated by the specified V service
+ * @method      mixed isChildren($input, $v = null)
+ */
+class IsChildrenMixin {
+}
+
+/**
+ * @property    Wei\IsChinese $isChinese Check if the input contains only Chinese characters
+ * @method      bool isChinese($input, $pattern = null) Returns whether the $input value is valid
+ */
+class IsChineseMixin {
+}
+
+/**
+ * @property    Wei\IsColor $isColor Check if the input is valid Hex color
+ * @method      bool isColor($input, $pattern = null) Returns whether the $input value is valid
+ */
+class IsColorMixin {
+}
+
+/**
+ * @property    Wei\IsContains $isContains Check if the input is contains the specified string or pattern
+ * @method      bool isContains($input, $search = null, $regex = false) Returns whether the $input value is valid
+ */
+class IsContainsMixin {
+}
+
+/**
+ * @property    Wei\IsCreditCard $isCreditCard Check if the input is valid credit card number
+ * @method      mixed isCreditCard($input, $type = null)
+ */
+class IsCreditCardMixin {
+}
+
+/**
+ * @property    Wei\IsDate $isDate Check if the input is a valid date
+ * @method      mixed isDate($input, $format = null)
+ */
+class IsDateMixin {
+}
+
+/**
+ * @property    Wei\IsDateTime $isDateTime Check if the input is a valid datetime
+ * @method      mixed isDateTime($input, $format = null)
+ */
+class IsDateTimeMixin {
+}
+
+/**
+ * @property    Wei\IsDecimal $isDecimal Check if the input is decimal
+ * @method      bool isDecimal($input) Validate the input value
+ */
+class IsDecimalMixin {
+}
+
+/**
+ * @property    Wei\IsDefaultInt $isDefaultInt Check if the input is int value and between -2147483648(-2^31) and 2147483647(2^31-1) (4 Bytes)
+ * @method      mixed isDefaultInt($input, $min = null, $max = null)
+ */
+class IsDefaultIntMixin {
+}
+
+/**
+ * @property    Wei\IsDigit $isDigit Check if the input contains only digits (0-9)
+ * @method      bool isDigit($input, $pattern = null) Returns whether the $input value is valid
+ */
+class IsDigitMixin {
+}
+
+/**
+ * @property    Wei\IsDir $isDir Check if the input is existing directory
+ * @method      bool isDir($input) Validate the input value
+ */
+class IsDirMixin {
+}
+
+/**
+ * @property    Wei\IsDivisibleBy $isDivisibleBy Check if the input could be divisible by specified divisor
+ * @method      mixed isDivisibleBy($input, $divisor = null)
+ */
+class IsDivisibleByMixin {
+}
+
+/**
+ * @property    Wei\IsDoubleByte $isDoubleByte Check if the input contains only double characters
+ * @method      bool isDoubleByte($input, $pattern = null) Returns whether the $input value is valid
+ */
+class IsDoubleByteMixin {
+}
+
+/**
+ * @property    Wei\IsEach $isEach Check if every item in the input is validated by the specified V service
+ * @method      mixed isEach($input, $v = null)
+ */
+class IsEachMixin {
+}
+
+/**
+ * @property    Wei\IsEmail $isEmail Check if the input is valid email address
+ * @method      bool isEmail($input) Validate the input value
+ */
+class IsEmailMixin {
+}
+
+/**
+ * @property    Wei\IsEndsWith $isEndsWith Check if the input is ends with specified string
+ * @method      mixed isEndsWith($input, $findMe = null, $case = null)
+ */
+class IsEndsWithMixin {
+}
+
+/**
+ * @property    Wei\IsEqualTo $isEqualTo Check if the input is equals to (==) the specified value
+ * @method      mixed isEqualTo($input, $value = null)
+ */
+class IsEqualToMixin {
+}
+
+/**
+ * @property    Wei\IsExists $isExists Check if the input is existing file or directory
+ * @method      bool isExists($input) Validate the input value
+ */
+class IsExistsMixin {
+}
+
+/**
+ * @property    Wei\IsFieldExists $isFieldExists Check if the validate fields data is exists
+ * @method      bool isFieldExists($input) Validate the input value
+ */
+class IsFieldExistsMixin {
+}
+
+/**
+ * @property    Wei\IsFile $isFile Check if the input is valid file
+ * @method      mixed isFile($input, $options = [])
+ */
+class IsFileMixin {
+}
+
+/**
+ * @property    Wei\IsFloat $isFloat Check if the input is a float value
+ * @method      bool isFloat($input) Validate the input value
+ */
+class IsFloatMixin {
+}
+
+/**
+ * @property    Wei\IsGreaterThan $isGreaterThan Check if the input is greater than (>=) the specified value
+ * @method      mixed isGreaterThan($input, $value = null)
+ */
+class IsGreaterThanMixin {
+}
+
+/**
+ * @property    Wei\IsGreaterThanOrEqual $isGreaterThanOrEqual Check if the input is greater than or equal to (>=) the specified value
+ * @method      mixed isGreaterThanOrEqual($input, $value = null)
+ */
+class IsGreaterThanOrEqualMixin {
+}
+
+/**
+ * @property    Wei\IsGt $isGt Check if the input is greater than (>=) the specified value
+ * @method      mixed isGt($input, $value = null)
+ */
+class IsGtMixin {
+}
+
+/**
+ * @property    Wei\IsGte $isGte Check if the input is greater than or equal to (>=) the specified value
+ * @method      mixed isGte($input, $value = null)
+ */
+class IsGteMixin {
+}
+
+/**
+ * @property    Wei\IsIdCardCn $isIdCardCn Check if the input is valid Chinese identity card
+ * @method      bool isIdCardCn($input) Validate the input value
+ */
+class IsIdCardCnMixin {
+}
+
+/**
+ * @property    Wei\IsIdCardHk $isIdCardHk Check if the input is valid Hong Kong identity card
+ * @method      bool isIdCardHk($input) Validate the input value
+ */
+class IsIdCardHkMixin {
+}
+
+/**
+ * @property    Wei\IsIdCardMo $isIdCardMo Check if the input is valid Macau identity card
+ * @method      bool isIdCardMo($input, $pattern = null) Returns whether the $input value is valid
+ */
+class IsIdCardMoMixin {
+}
+
+/**
+ * @property    Wei\IsIdCardTw $isIdCardTw Check if the input is valid Taiwan identity card
+ * @method      bool isIdCardTw($input) Validate the input value
+ */
+class IsIdCardTwMixin {
+}
+
+/**
+ * @property    Wei\IsIdenticalTo $isIdenticalTo Check if the input is identical to (===) specified value
+ * @method      mixed isIdenticalTo($input, $value = null)
+ */
+class IsIdenticalToMixin {
+}
+
+/**
+ * @property    Wei\IsImage $isImage Check if the input is valid image
+ * @method      mixed isImage($input, $options = [])
+ */
+class IsImageMixin {
+}
+
+/**
+ * @property    Wei\IsIn $isIn Check if the input is in specified array
+ * @method      mixed isIn($input, $array = [], $strict = null)
+ */
+class IsInMixin {
+}
+
+/**
+ * @property    Wei\IsInt $isInt Check if the input could be convert to int
+ * @method      mixed isInt($input, $min = null, $max = null)
+ */
+class IsIntMixin {
+}
+
+/**
+ * @property    Wei\IsIp $isIp Check if the input is valid IP address
+ * @method      mixed isIp($input, $options = [])
+ */
+class IsIpMixin {
+}
+
+/**
+ * @property    Wei\IsLength $isLength Check if the length (or size) of input is equals specified length or in
+ * @method      mixed isLength($input, $min = null, $max = null)
+ */
+class IsLengthMixin {
+}
+
+/**
+ * @property    Wei\IsLessThan $isLessThan Check if the input is less than (<) the specified value
+ * @method      mixed isLessThan($input, $value = null)
+ */
+class IsLessThanMixin {
+}
+
+/**
+ * @property    Wei\IsLessThanOrEqual $isLessThanOrEqual Check if the input is less than or equal to (<=) the specified value
+ * @method      mixed isLessThanOrEqual($input, $value = null)
+ */
+class IsLessThanOrEqualMixin {
+}
+
+/**
+ * @property    Wei\IsLowercase $isLowercase Check if the input is lowercase
+ * @method      bool isLowercase($input) Validate the input value
+ */
+class IsLowercaseMixin {
+}
+
+/**
+ * @property    Wei\IsLt $isLt Check if the input is less than (<) the specified value
+ * @method      mixed isLt($input, $value = null)
+ */
+class IsLtMixin {
+}
+
+/**
+ * @property    Wei\IsLte $isLte Check if the input is less than or equal to (<=) the specified value
+ * @method      mixed isLte($input, $value = null)
+ */
+class IsLteMixin {
+}
+
+/**
+ * @property    Wei\IsLuhn $isLuhn Check if the input is valid by the Luhn algorithm
+ * @method      bool isLuhn($input) Validate the input value
+ */
+class IsLuhnMixin {
+}
+
+/**
+ * @property    Wei\IsMaxAccuracy $isMaxAccuracy Check if the number of digits after the decimal point of the input is lower than specified length
+ * @method      mixed isMaxAccuracy($input, $max = null)
+ */
+class IsMaxAccuracyMixin {
+}
+
+/**
+ * @property    Wei\IsMaxCharLength $isMaxCharLength Check if the character length of input is lower than specified length
+ * @method      mixed isMaxCharLength($input, $max = null, $ignore = null)
+ */
+class IsMaxCharLengthMixin {
+}
+
+/**
+ * @property    Wei\IsMaxLength $isMaxLength Check if the length (or size) of input is lower than specified length
+ * @method      mixed isMaxLength($input, $max = null, $ignore = null)
+ */
+class IsMaxLengthMixin {
+}
+
+/**
+ * @property    Wei\IsMediumInt $isMediumInt Check if the input is int value and between -8388608(-2^23) and 8388607(2^23-1) (3 Bytes)
+ * @method      mixed isMediumInt($input, $min = null, $max = null)
+ */
+class IsMediumIntMixin {
+}
+
+/**
+ * @property    Wei\IsMediumText $isMediumText Check if the input is a string of 16777215(16Mb-1) bytes or less
+ * @method      mixed isMediumText($input, $minLength = null, $maxLength = null)
+ */
+class IsMediumTextMixin {
+}
+
+/**
+ * @property    Wei\IsMinCharLength $isMinCharLength Check if the character length of input is greater than specified length
+ * @method      mixed isMinCharLength($input, $min = null, $ignore = null)
+ */
+class IsMinCharLengthMixin {
+}
+
+/**
+ * @property    Wei\IsMinLength $isMinLength Check if the length (or size) of input is greater than specified length
+ * @method      mixed isMinLength($input, $min = null, $ignore = null)
+ */
+class IsMinLengthMixin {
+}
+
+/**
+ * @property    Wei\IsMobileCn $isMobileCn Check if the input is valid Chinese mobile number
+ * @method      bool isMobileCn($input, $pattern = null) Returns whether the $input value is valid
+ */
+class IsMobileCnMixin {
+}
+
+/**
+ * @property    Wei\IsNaturalNumber $isNaturalNumber Check if the input is a natural number (integer that greater than or equals 0)
+ * @method      bool isNaturalNumber($input) Validate the input value
+ */
+class IsNaturalNumberMixin {
+}
+
+/**
+ * @property    Wei\IsNoneOf $isNoneOf Check if the input is NOT valid by all of specified rules
+ * @method      mixed isNoneOf($input, $rules = [], $ignore = null)
+ */
+class IsNoneOfMixin {
+}
+
+/**
+ * @property    Wei\IsNullType $isNullType Check if the input is null
+ * @method      bool isNullType($input) Validate the input value
+ */
+class IsNullTypeMixin {
+}
+
+/**
+ * @property    Wei\IsNumber $isNumber Check if the input is number
+ * @method      mixed isNumber($input, $precision = null, $scale = null)
+ */
+class IsNumberMixin {
+}
+
+/**
+ * @property    Wei\IsOneOf $isOneOf Check if the input is valid by any of the rules
+ * @method      mixed isOneOf($input, $rules = [], $atLeast = null)
+ */
+class IsOneOfMixin {
+}
+
+/**
+ * @property    Wei\IsPassword $isPassword Check if the input password is secure enough
+ * @method      mixed isPassword($input, $options = [])
+ */
+class IsPasswordMixin {
+}
+
+/**
+ * @property    Wei\IsPhone $isPhone Check if the input is valid phone number, contains only digit, +, - and spaces
+ * @method      bool isPhone($input, $pattern = null) Returns whether the $input value is valid
+ */
+class IsPhoneMixin {
+}
+
+/**
+ * @property    Wei\IsPhoneCn $isPhoneCn Check if the input is valid Chinese phone number
+ * @method      bool isPhoneCn($input, $pattern = null) Returns whether the $input value is valid
+ */
+class IsPhoneCnMixin {
+}
+
+/**
+ * @property    Wei\IsPlateNumberCn $isPlateNumberCn Check if the input is valid Chinese plate number
+ * @method      bool isPlateNumberCn($input, $pattern = null) Returns whether the $input value is valid
+ */
+class IsPlateNumberCnMixin {
+}
+
+/**
+ * @property    Wei\IsPositiveInteger $isPositiveInteger Check if the input is a positive integer (integer that greater than 0)
+ * @method      bool isPositiveInteger($input) Validate the input value
+ */
+class IsPositiveIntegerMixin {
+}
+
+/**
+ * @property    Wei\IsPostcodeCn $isPostcodeCn Check if the input is valid Chinese postcode
+ * @method      bool isPostcodeCn($input, $pattern = null) Returns whether the $input value is valid
+ */
+class IsPostcodeCnMixin {
+}
+
+/**
+ * @property    Wei\IsPresent $isPresent Check if the input is not empty
+ * @method      bool isPresent($input) Validate the input value
+ */
+class IsPresentMixin {
+}
+
+/**
+ * @property    Wei\IsQQ $isQQ Check if the input is valid QQ number
+ * @method      bool isQQ($input, $pattern = null) Returns whether the $input value is valid
+ */
+class IsQQMixin {
+}
+
+/**
+ * @property    Wei\IsRecordExists $isRecordExists Check if the input is existing table record
+ * @method      bool isRecordExists($input = null, $table = null, $field = 'id') Check if the input is existing table record
+ */
+class IsRecordExistsMixin {
+}
+
+/**
+ * @property    Wei\IsRegex $isRegex Check if the input is valid by specified regular expression
+ * @method      bool isRegex($input, $pattern = null) Returns whether the $input value is valid
+ */
+class IsRegexMixin {
+}
+
+/**
+ * @property    Wei\IsRequired $isRequired Check if the input is provided
+ * @method      mixed isRequired($input, $required = null)
+ */
+class IsRequiredMixin {
+}
+
+/**
+ * @property    Wei\IsSmallInt $isSmallInt Check if the input is int value and between -32768(-2^15) and 32767(2^15-1) (2 Bytes)
+ * @method      mixed isSmallInt($input, $min = null, $max = null)
+ */
+class IsSmallIntMixin {
+}
+
+/**
+ * @property    Wei\IsSomeOf $isSomeOf Check if the input is valid by specified number of the rules
+ * @method      mixed isSomeOf($input, $rules = [], $atLeast = null)
+ */
+class IsSomeOfMixin {
+}
+
+/**
+ * @property    Wei\IsStartsWith $isStartsWith Check if the input is starts with specified string
+ * @method      mixed isStartsWith($input, $findMe = null, $case = null)
+ */
+class IsStartsWithMixin {
+}
+
+/**
+ * @property    Wei\IsString $isString Check if the input could be convert to string
+ * @method      mixed isString($input, $minLength = null, $maxLength = null)
+ */
+class IsStringMixin {
+}
+
+/**
+ * @property    Wei\IsText $isText Check if the input is a string of 65535(64Kb-1) bytes or less
+ * @method      mixed isText($input, $minLength = null, $maxLength = null)
+ */
+class IsTextMixin {
+}
+
+/**
+ * @property    Wei\IsTime $isTime Check if the input is a valid time
+ * @method      mixed isTime($input, $format = null)
+ */
+class IsTimeMixin {
+}
+
+/**
+ * @property    Wei\IsTinyChar $isTinyChar Check if the input is a string of 255 characters or less
+ * @method      mixed isTinyChar($input, $minLength = null, $maxLength = null)
+ */
+class IsTinyCharMixin {
+}
+
+/**
+ * @property    Wei\IsTinyInt $isTinyInt Check if the input is int value and between -128(-2^7) and 127(2^7-1) (1 Byte)
+ * @method      mixed isTinyInt($input, $min = null, $max = null)
+ */
+class IsTinyIntMixin {
+}
+
+/**
+ * @property    Wei\IsTld $isTld Check if the input is a valid top-level domain
+ * @method      mixed isTld($input, $array = [], $strict = null)
+ */
+class IsTldMixin {
+}
+
+/**
+ * @property    Wei\IsType $isType Check if the type of input is equals specified type name
+ * @method      mixed isType($input, $type = null)
+ */
+class IsTypeMixin {
+}
+
+/**
+ * @property    Wei\IsUBigInt $isUBigInt Check if the input is int value and between 0 and 2^64-1(18,446,744,073,709,551,615) (8 Bytes)
+ * @method      mixed isUBigInt($input, $min = null, $max = null)
+ */
+class IsUBigIntMixin {
+}
+
+/**
+ * @property    Wei\IsUDefaultInt $isUDefaultInt Check if the input is int value and between 0 and 4,294,967,295 (2^32-1) (4 Bytes)
+ * @method      mixed isUDefaultInt($input, $min = null, $max = null)
+ */
+class IsUDefaultIntMixin {
+}
+
+/**
+ * @property    Wei\IsUMediumInt $isUMediumInt Check if the input is int value and between 0 and 16,777,215 (2^24-1) (3 Bytes)
+ * @method      mixed isUMediumInt($input, $min = null, $max = null)
+ */
+class IsUMediumIntMixin {
+}
+
+/**
+ * @property    Wei\IsUNumber $isUNumber Check if the input is a unsigned number
+ * @method      mixed isUNumber($input, $precision = null, $scale = null)
+ */
+class IsUNumberMixin {
+}
+
+/**
+ * @property    Wei\IsUSmallInt $isUSmallInt Check if the input is int value and between 0 and 65,535 (2^16-1) (2 Bytes)
+ * @method      mixed isUSmallInt($input, $min = null, $max = null)
+ */
+class IsUSmallIntMixin {
+}
+
+/**
+ * @property    Wei\IsUTinyInt $isUTinyInt Check if the input is int value and between 0 and 255 (2^8-1) (1 Byte)
+ * @method      mixed isUTinyInt($input, $min = null, $max = null)
+ */
+class IsUTinyIntMixin {
+}
+
+/**
+ * @property    Wei\IsUppercase $isUppercase Check if the input is uppercase
+ * @method      bool isUppercase($input) Validate the input value
+ */
+class IsUppercaseMixin {
+}
+
+/**
+ * @property    Wei\IsUrl $isUrl Check if the input is valid URL address
+ * @method      string|bool isUrl($input, $options = []) Check if the input is valid URL address, options could be "path" and "query"
+ */
+class IsUrlMixin {
+}
+
+/**
+ * @property    Wei\IsUuid $isUuid Check if the input is valid UUID(v4)
+ * @method      bool isUuid($input, $pattern = null) Returns whether the $input value is valid
+ */
+class IsUuidMixin {
 }
 
 /**
@@ -425,489 +1078,10 @@ class WeiMixin {
 }
 
 /**
- * @property    Wei\Validator\All $isAll Check if all of the element in the input is valid by all specified rules
- * @method      bool isAll($input, $rules = []) Check if all of the element in the input is valid by all specified rules
- */
-class IsAllMixin {
-}
-
-/**
- * @property    Wei\Validator\AllOf $isAllOf Check if the input is valid by all of the rules
- * @method      bool isAllOf($input, $rules = [], $atLeast = null) Check if the input is valid by all of the rules
- */
-class IsAllOfMixin {
-}
-
-/**
- * @property    Wei\Validator\Alnum $isAlnum Check if the input contains letters (a-z) and digits (0-9)
- * @method      bool isAlnum($input, $pattern = null) Returns whether the $input value is valid
- */
-class IsAlnumMixin {
-}
-
-/**
- * @property    Wei\Validator\Alpha $isAlpha Check if the input contains only letters (a-z)
- * @method      bool isAlpha($input, $pattern = null) Returns whether the $input value is valid
- */
-class IsAlphaMixin {
-}
-
-/**
- * @property    Wei\Validator\BaseValidator $isBaseValidator The base class of validator
- * @method      bool isBaseValidator($input) Validate the input value
- */
-class IsBaseValidatorMixin {
-}
-
-/**
- * @property    Wei\Validator\Between $isBetween Check if the input is between the specified minimum and maximum value
- * @method      mixed isBetween($input, $min = null, $max = null)
- */
-class IsBetweenMixin {
-}
-
-/**
- * @property    Wei\Validator\Blank $isBlank Check if the input is blank
- * @method      bool isBlank($input) Validate the input value
- */
-class IsBlankMixin {
-}
-
-/**
- * @property    Wei\Validator\Callback $isCallback Check if the input is valid by specified callback
- * @method      bool isCallback($input, $fn = null, $message = null) Check if the input is valid by specified callback
- */
-class IsCallbackMixin {
-}
-
-/**
- * @property    Wei\Validator\CharLength $isCharLength Check if the characters length of input is equals specified length
- * @method      mixed isCharLength($input, $min = null, $max = null)
- */
-class IsCharLengthMixin {
-}
-
-/**
- * @property    Wei\Validator\Chinese $isChinese Check if the input contains only Chinese characters
- * @method      bool isChinese($input, $pattern = null) Returns whether the $input value is valid
- */
-class IsChineseMixin {
-}
-
-/**
- * @property    Wei\Validator\Color $isColor Check if the input is valid Hex color
- * @method      bool isColor($input, $pattern = null) Returns whether the $input value is valid
- */
-class IsColorMixin {
-}
-
-/**
- * @property    Wei\Validator\Contains $isContains Check if the input is contains the specified string or pattern
- * @method      bool isContains($input, $search = null, $regex = false) Returns whether the $input value is valid
- */
-class IsContainsMixin {
-}
-
-/**
- * @property    Wei\Validator\CreditCard $isCreditCard Check if the input is valid credit card number
- * @method      mixed isCreditCard($input, $type = null)
- */
-class IsCreditCardMixin {
-}
-
-/**
- * @property    Wei\Validator\Date $isDate Check if the input is a valid date
- * @method      mixed isDate($input, $format = null)
- */
-class IsDateMixin {
-}
-
-/**
- * @property    Wei\Validator\DateTime $isDateTime Check if the input is a valid datetime
- * @method      mixed isDateTime($input, $format = null)
- */
-class IsDateTimeMixin {
-}
-
-/**
- * @property    Wei\Validator\Decimal $isDecimal Check if the input is decimal
- * @method      bool isDecimal($input) Validate the input value
- */
-class IsDecimalMixin {
-}
-
-/**
- * @property    Wei\Validator\Digit $isDigit Check if the input contains only digits (0-9)
- * @method      bool isDigit($input, $pattern = null) Returns whether the $input value is valid
- */
-class IsDigitMixin {
-}
-
-/**
- * @property    Wei\Validator\Dir $isDir Check if the input is existing directory
- * @method      bool isDir($input) Validate the input value
- */
-class IsDirMixin {
-}
-
-/**
- * @property    Wei\Validator\DivisibleBy $isDivisibleBy Check if the input could be divisible by specified divisor
- * @method      mixed isDivisibleBy($input, $divisor = null)
- */
-class IsDivisibleByMixin {
-}
-
-/**
- * @property    Wei\Validator\DoubleByte $isDoubleByte Check if the input contains only double characters
- * @method      bool isDoubleByte($input, $pattern = null) Returns whether the $input value is valid
- */
-class IsDoubleByteMixin {
-}
-
-/**
- * @property    Wei\Validator\Email $isEmail Check if the input is valid email address
- * @method      bool isEmail($input) Validate the input value
- */
-class IsEmailMixin {
-}
-
-/**
- * @property    Wei\Validator\EndsWith $isEndsWith Check if the input is ends with specified string
- * @method      mixed isEndsWith($input, $findMe = null, $case = null)
- */
-class IsEndsWithMixin {
-}
-
-/**
- * @property    Wei\Validator\EqualTo $isEqualTo Check if the input is equals to (==) the specified value
- * @method      mixed isEqualTo($input, $value = null)
- */
-class IsEqualToMixin {
-}
-
-/**
- * @property    Wei\Validator\Exists $isExists Check if the input is existing file or directory
- * @method      bool isExists($input) Validate the input value
- */
-class IsExistsMixin {
-}
-
-/**
- * @property    Wei\Validator\FieldExists $isFieldExists Check if the validate fields data is exists
- * @method      bool isFieldExists($input) Validate the input value
- */
-class IsFieldExistsMixin {
-}
-
-/**
- * @property    Wei\Validator\File $isFile Check if the input is valid file
- * @method      mixed isFile($input, $options = [])
- */
-class IsFileMixin {
-}
-
-/**
- * @property    Wei\Validator\GreaterThan $isGreaterThan Check if the input is greater than (>=) the specified value
- * @method      mixed isGreaterThan($input, $value = null)
- */
-class IsGreaterThanMixin {
-}
-
-/**
- * @property    Wei\Validator\GreaterThanOrEqual $isGreaterThanOrEqual Check if the input is greater than or equal to (>=) the specified value
- * @method      mixed isGreaterThanOrEqual($input, $value = null)
- */
-class IsGreaterThanOrEqualMixin {
-}
-
-/**
- * @property    Wei\Validator\IdCardCn $isIdCardCn Check if the input is valid Chinese identity card
- * @method      bool isIdCardCn($input) Validate the input value
- */
-class IsIdCardCnMixin {
-}
-
-/**
- * @property    Wei\Validator\IdCardHk $isIdCardHk Check if the input is valid Hong Kong identity card
- * @method      bool isIdCardHk($input) Validate the input value
- */
-class IsIdCardHkMixin {
-}
-
-/**
- * @property    Wei\Validator\IdCardMo $isIdCardMo Check if the input is valid Macau identity card
- * @method      bool isIdCardMo($input, $pattern = null) Returns whether the $input value is valid
- */
-class IsIdCardMoMixin {
-}
-
-/**
- * @property    Wei\Validator\IdCardTw $isIdCardTw Check if the input is valid Taiwan identity card
- * @method      bool isIdCardTw($input) Validate the input value
- */
-class IsIdCardTwMixin {
-}
-
-/**
- * @property    Wei\Validator\IdenticalTo $isIdenticalTo Check if the input is identical to (===) specified value
- * @method      mixed isIdenticalTo($input, $value = null)
- */
-class IsIdenticalToMixin {
-}
-
-/**
- * @property    Wei\Validator\Image $isImage Check if the input is valid image
- * @method      mixed isImage($input, $options = [])
- */
-class IsImageMixin {
-}
-
-/**
- * @property    Wei\Validator\In $isIn Check if the input is in specified array
- * @method      mixed isIn($input, $array = [], $strict = null)
- */
-class IsInMixin {
-}
-
-/**
- * @property    Wei\Validator\Ip $isIp Check if the input is valid IP address
- * @method      mixed isIp($input, $options = [])
- */
-class IsIpMixin {
-}
-
-/**
- * @property    Wei\Validator\Length $isLength Check if the length (or size) of input is equals specified length or in
- * @method      mixed isLength($input, $min = null, $max = null)
- */
-class IsLengthMixin {
-}
-
-/**
- * @property    Wei\Validator\LessThan $isLessThan Check if the input is less than (<) the specified value
- * @method      mixed isLessThan($input, $value = null)
- */
-class IsLessThanMixin {
-}
-
-/**
- * @property    Wei\Validator\LessThanOrEqual $isLessThanOrEqual Check if the input is less than or equal to (<=) the specified value
- * @method      mixed isLessThanOrEqual($input, $value = null)
- */
-class IsLessThanOrEqualMixin {
-}
-
-/**
- * @property    Wei\Validator\Lowercase $isLowercase Check if the input is lowercase
- * @method      bool isLowercase($input) Validate the input value
- */
-class IsLowercaseMixin {
-}
-
-/**
- * @property    Wei\Validator\Luhn $isLuhn Check if the input is valid by the Luhn algorithm
- * @method      bool isLuhn($input) Validate the input value
- */
-class IsLuhnMixin {
-}
-
-/**
- * @property    Wei\Validator\MaxLength $isMaxLength Check if the length (or size) of input is lower than specified length
- * @method      mixed isMaxLength($input, $max = null, $ignore = null)
- */
-class IsMaxLengthMixin {
-}
-
-/**
- * @property    Wei\Validator\MinLength $isMinLength Check if the length (or size) of input is greater than specified length
- * @method      mixed isMinLength($input, $min = null, $ignore = null)
- */
-class IsMinLengthMixin {
-}
-
-/**
- * @property    Wei\Validator\MobileCn $isMobileCn Check if the input is valid Chinese mobile number
- * @method      bool isMobileCn($input, $pattern = null) Returns whether the $input value is valid
- */
-class IsMobileCnMixin {
-}
-
-/**
- * @property    Wei\Validator\NaturalNumber $isNaturalNumber Check if the input is a natural number (integer that greater than or equals 0)
- * @method      bool isNaturalNumber($input) Validate the input value
- */
-class IsNaturalNumberMixin {
-}
-
-/**
- * @property    Wei\Validator\NoneOf $isNoneOf Check if the input is NOT valid by all of specified rules
- * @method      mixed isNoneOf($input, $rules = [], $ignore = null)
- */
-class IsNoneOfMixin {
-}
-
-/**
- * @property    Wei\Validator\NullType $isNullType Check if the input is null
- * @method      bool isNullType($input) Validate the input value
- */
-class IsNullTypeMixin {
-}
-
-/**
- * @property    Wei\Validator\Number $isNumber Check if the input is number
- * @method      bool isNumber($input) Validate the input value
- */
-class IsNumberMixin {
-}
-
-/**
- * @property    Wei\Validator\OneOf $isOneOf Check if the input is valid by any of the rules
- * @method      mixed isOneOf($input, $rules = [], $atLeast = null)
- */
-class IsOneOfMixin {
-}
-
-/**
- * @property    Wei\Validator\Password $isPassword Check if the input password is secure enough
- * @method      mixed isPassword($input, $options = [])
- */
-class IsPasswordMixin {
-}
-
-/**
- * @property    Wei\Validator\Phone $isPhone Check if the input is valid phone number, contains only digit, +, - and spaces
- * @method      bool isPhone($input, $pattern = null) Returns whether the $input value is valid
- */
-class IsPhoneMixin {
-}
-
-/**
- * @property    Wei\Validator\PhoneCn $isPhoneCn Check if the input is valid Chinese phone number
- * @method      bool isPhoneCn($input, $pattern = null) Returns whether the $input value is valid
- */
-class IsPhoneCnMixin {
-}
-
-/**
- * @property    Wei\Validator\PlateNumberCn $isPlateNumberCn Check if the input is valid Chinese plate number
- * @method      bool isPlateNumberCn($input, $pattern = null) Returns whether the $input value is valid
- */
-class IsPlateNumberCnMixin {
-}
-
-/**
- * @property    Wei\Validator\PositiveInteger $isPositiveInteger Check if the input is a positive integer (integer that greater than 0)
- * @method      bool isPositiveInteger($input) Validate the input value
- */
-class IsPositiveIntegerMixin {
-}
-
-/**
- * @property    Wei\Validator\PostcodeCn $isPostcodeCn Check if the input is valid Chinese postcode
- * @method      bool isPostcodeCn($input, $pattern = null) Returns whether the $input value is valid
- */
-class IsPostcodeCnMixin {
-}
-
-/**
- * @property    Wei\Validator\Present $isPresent Check if the input is not empty
- * @method      bool isPresent($input) Validate the input value
- */
-class IsPresentMixin {
-}
-
-/**
- * @property    Wei\Validator\QQ $isQQ Check if the input is valid QQ number
- * @method      bool isQQ($input, $pattern = null) Returns whether the $input value is valid
- */
-class IsQQMixin {
-}
-
-/**
- * @property    Wei\Validator\RecordExists $isRecordExists Check if the input is existing table record
- * @method      bool isRecordExists($input = null, $table = null, $field = 'id') Check if the input is existing table record
- */
-class IsRecordExistsMixin {
-}
-
-/**
- * @property    Wei\Validator\Regex $isRegex Check if the input is valid by specified regular expression
- * @method      bool isRegex($input, $pattern = null) Returns whether the $input value is valid
- */
-class IsRegexMixin {
-}
-
-/**
- * @property    Wei\Validator\Required $isRequired Check if the input is provided
- * @method      mixed isRequired($input, $required = null)
- */
-class IsRequiredMixin {
-}
-
-/**
- * @property    Wei\Validator\SomeOf $isSomeOf Check if the input is valid by specified number of the rules
- * @method      mixed isSomeOf($input, $rules = [], $atLeast = null)
- */
-class IsSomeOfMixin {
-}
-
-/**
- * @property    Wei\Validator\StartsWith $isStartsWith Check if the input is starts with specified string
- * @method      mixed isStartsWith($input, $findMe = null, $case = null)
- */
-class IsStartsWithMixin {
-}
-
-/**
- * @property    Wei\Validator\Time $isTime Check if the input is a valid time
- * @method      mixed isTime($input, $format = null)
- */
-class IsTimeMixin {
-}
-
-/**
- * @property    Wei\Validator\Tld $isTld Check if the input is a valid top-level domain
- * @method      mixed isTld($input, $array = [], $strict = null)
- */
-class IsTldMixin {
-}
-
-/**
- * @property    Wei\Validator\Type $isType Check if the type of input is equals specified type name
- * @method      mixed isType($input, $type = null)
- */
-class IsTypeMixin {
-}
-
-/**
- * @property    Wei\Validator\Uppercase $isUppercase Check if the input is uppercase
- * @method      bool isUppercase($input) Validate the input value
- */
-class IsUppercaseMixin {
-}
-
-/**
- * @property    Wei\Validator\Url $isUrl Check if the input is valid URL address
- * @method      string|bool isUrl($input, $options = []) Check if the input is valid URL address, options could be "path" and "query"
- */
-class IsUrlMixin {
-}
-
-/**
- * @property    Wei\Validator\Uuid $isUuid Check if the input is valid UUID(v4)
- * @method      bool isUuid($input, $pattern = null) Returns whether the $input value is valid
- */
-class IsUuidMixin {
-}
-
-/**
  * @mixin ApcMixin
  * @mixin AppMixin
  * @mixin ArrayCacheMixin
  * @mixin AssetMixin
- * @mixin BaseMixin
- * @mixin BaseCacheMixin
- * @mixin BaseControllerMixin
  * @mixin BicacheMixin
  * @mixin BlockMixin
  * @mixin CacheMixin
@@ -925,6 +1099,102 @@ class IsUuidMixin {
  * @mixin FileCacheMixin
  * @mixin GravatarMixin
  * @mixin HttpMixin
+ * @mixin IsAllMixin
+ * @mixin IsAllOfMixin
+ * @mixin IsAlnumMixin
+ * @mixin IsAlphaMixin
+ * @mixin IsArrayMixin
+ * @mixin IsBetweenMixin
+ * @mixin IsBigIntMixin
+ * @mixin IsBlankMixin
+ * @mixin IsBoolMixin
+ * @mixin IsBoolableMixin
+ * @mixin IsCallbackMixin
+ * @mixin IsCharMixin
+ * @mixin IsChildrenMixin
+ * @mixin IsChineseMixin
+ * @mixin IsColorMixin
+ * @mixin IsContainsMixin
+ * @mixin IsCreditCardMixin
+ * @mixin IsDateMixin
+ * @mixin IsDateTimeMixin
+ * @mixin IsDecimalMixin
+ * @mixin IsDefaultIntMixin
+ * @mixin IsDigitMixin
+ * @mixin IsDirMixin
+ * @mixin IsDivisibleByMixin
+ * @mixin IsDoubleByteMixin
+ * @mixin IsEachMixin
+ * @mixin IsEmailMixin
+ * @mixin IsEndsWithMixin
+ * @mixin IsEqualToMixin
+ * @mixin IsExistsMixin
+ * @mixin IsFieldExistsMixin
+ * @mixin IsFileMixin
+ * @mixin IsFloatMixin
+ * @mixin IsGreaterThanMixin
+ * @mixin IsGreaterThanOrEqualMixin
+ * @mixin IsGtMixin
+ * @mixin IsGteMixin
+ * @mixin IsIdCardCnMixin
+ * @mixin IsIdCardHkMixin
+ * @mixin IsIdCardMoMixin
+ * @mixin IsIdCardTwMixin
+ * @mixin IsIdenticalToMixin
+ * @mixin IsImageMixin
+ * @mixin IsInMixin
+ * @mixin IsIntMixin
+ * @mixin IsIpMixin
+ * @mixin IsLengthMixin
+ * @mixin IsLessThanMixin
+ * @mixin IsLessThanOrEqualMixin
+ * @mixin IsLowercaseMixin
+ * @mixin IsLtMixin
+ * @mixin IsLteMixin
+ * @mixin IsLuhnMixin
+ * @mixin IsMaxAccuracyMixin
+ * @mixin IsMaxCharLengthMixin
+ * @mixin IsMaxLengthMixin
+ * @mixin IsMediumIntMixin
+ * @mixin IsMediumTextMixin
+ * @mixin IsMinCharLengthMixin
+ * @mixin IsMinLengthMixin
+ * @mixin IsMobileCnMixin
+ * @mixin IsNaturalNumberMixin
+ * @mixin IsNoneOfMixin
+ * @mixin IsNullTypeMixin
+ * @mixin IsNumberMixin
+ * @mixin IsOneOfMixin
+ * @mixin IsPasswordMixin
+ * @mixin IsPhoneMixin
+ * @mixin IsPhoneCnMixin
+ * @mixin IsPlateNumberCnMixin
+ * @mixin IsPositiveIntegerMixin
+ * @mixin IsPostcodeCnMixin
+ * @mixin IsPresentMixin
+ * @mixin IsQQMixin
+ * @mixin IsRecordExistsMixin
+ * @mixin IsRegexMixin
+ * @mixin IsRequiredMixin
+ * @mixin IsSmallIntMixin
+ * @mixin IsSomeOfMixin
+ * @mixin IsStartsWithMixin
+ * @mixin IsStringMixin
+ * @mixin IsTextMixin
+ * @mixin IsTimeMixin
+ * @mixin IsTinyCharMixin
+ * @mixin IsTinyIntMixin
+ * @mixin IsTldMixin
+ * @mixin IsTypeMixin
+ * @mixin IsUBigIntMixin
+ * @mixin IsUDefaultIntMixin
+ * @mixin IsUMediumIntMixin
+ * @mixin IsUNumberMixin
+ * @mixin IsUSmallIntMixin
+ * @mixin IsUTinyIntMixin
+ * @mixin IsUppercaseMixin
+ * @mixin IsUrlMixin
+ * @mixin IsUuidMixin
  * @mixin LockMixin
  * @mixin LoggerMixin
  * @mixin MemcacheMixin
@@ -964,74 +1234,6 @@ class IsUuidMixin {
  * @mixin ViewMixin
  * @mixin WeChatAppMixin
  * @mixin WeiMixin
- * @mixin IsAllMixin
- * @mixin IsAllOfMixin
- * @mixin IsAlnumMixin
- * @mixin IsAlphaMixin
- * @mixin IsBaseValidatorMixin
- * @mixin IsBetweenMixin
- * @mixin IsBlankMixin
- * @mixin IsCallbackMixin
- * @mixin IsCharLengthMixin
- * @mixin IsChineseMixin
- * @mixin IsColorMixin
- * @mixin IsContainsMixin
- * @mixin IsCreditCardMixin
- * @mixin IsDateMixin
- * @mixin IsDateTimeMixin
- * @mixin IsDecimalMixin
- * @mixin IsDigitMixin
- * @mixin IsDirMixin
- * @mixin IsDivisibleByMixin
- * @mixin IsDoubleByteMixin
- * @mixin IsEmailMixin
- * @mixin IsEndsWithMixin
- * @mixin IsEqualToMixin
- * @mixin IsExistsMixin
- * @mixin IsFieldExistsMixin
- * @mixin IsFileMixin
- * @mixin IsGreaterThanMixin
- * @mixin IsGreaterThanOrEqualMixin
- * @mixin IsIdCardCnMixin
- * @mixin IsIdCardHkMixin
- * @mixin IsIdCardMoMixin
- * @mixin IsIdCardTwMixin
- * @mixin IsIdenticalToMixin
- * @mixin IsImageMixin
- * @mixin IsInMixin
- * @mixin IsIpMixin
- * @mixin IsLengthMixin
- * @mixin IsLessThanMixin
- * @mixin IsLessThanOrEqualMixin
- * @mixin IsLowercaseMixin
- * @mixin IsLuhnMixin
- * @mixin IsMaxLengthMixin
- * @mixin IsMinLengthMixin
- * @mixin IsMobileCnMixin
- * @mixin IsNaturalNumberMixin
- * @mixin IsNoneOfMixin
- * @mixin IsNullTypeMixin
- * @mixin IsNumberMixin
- * @mixin IsOneOfMixin
- * @mixin IsPasswordMixin
- * @mixin IsPhoneMixin
- * @mixin IsPhoneCnMixin
- * @mixin IsPlateNumberCnMixin
- * @mixin IsPositiveIntegerMixin
- * @mixin IsPostcodeCnMixin
- * @mixin IsPresentMixin
- * @mixin IsQQMixin
- * @mixin IsRecordExistsMixin
- * @mixin IsRegexMixin
- * @mixin IsRequiredMixin
- * @mixin IsSomeOfMixin
- * @mixin IsStartsWithMixin
- * @mixin IsTimeMixin
- * @mixin IsTldMixin
- * @mixin IsTypeMixin
- * @mixin IsUppercaseMixin
- * @mixin IsUrlMixin
- * @mixin IsUuidMixin
  */
 class AutoCompletion {
 }
