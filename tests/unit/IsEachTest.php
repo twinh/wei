@@ -23,6 +23,30 @@ final class IsEachTest extends BaseValidatorTestCase
         wei()->t->setLocale('en');
     }
 
+    public function testEachSuc()
+    {
+        $ret = V
+            ::key('products')->each(
+                V
+                    ::key('name')->maxLength(5)
+                    ->key('stock')->greaterThanOrEqual(0)
+            )
+            ->check([
+                'products' => [
+                    [
+                        'name' => 'name',
+                        'stock' => 1,
+                    ],
+                    [
+                        'name' => 'name',
+                        'stock' => 1,
+                    ],
+                ],
+            ]);
+
+        $this->assertRetSuc($ret);
+    }
+
     public function testEach()
     {
         $ret = V
@@ -95,7 +119,29 @@ final class IsEachTest extends BaseValidatorTestCase
         ];
     }
 
-    public function testEachColl()
+    public function testEachCollSuc()
+    {
+        $ret = V
+            ::each(
+                V
+                    ::key('name')->maxLength(5)
+                    ->key('stock')->greaterThanOrEqual(0)
+            )
+            ->check([
+                [
+                    'name' => 'name',
+                    'stock' => 1,
+                ],
+                [
+                    'name' => 'name',
+                    'stock' => 1,
+                ],
+            ]);
+
+        $this->assertRetSuc($ret);
+    }
+
+    public function testEachCollErr()
     {
         $ret = V::label('用户')->each(
             V
