@@ -269,6 +269,10 @@ class IsEmail
 {
 }
 
+class IsEmpty
+{
+}
+
 class IsEndsWith
 {
 }
@@ -1386,6 +1390,22 @@ class V
      * @see \Wei\IsEmail::__invoke
      */
     public static function notEmail()
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsEmpty::__invoke
+     */
+    public static function empty()
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsEmpty::__invoke
+     */
+    public static function notEmpty()
     {
     }
 
@@ -2803,6 +2823,10 @@ class IsEmail
 {
 }
 
+class IsEmpty
+{
+}
+
 class IsEndsWith
 {
 }
@@ -3920,6 +3944,22 @@ class V
      * @see \Wei\IsEmail::__invoke
      */
     public function notEmail()
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsEmpty::__invoke
+     */
+    public function empty()
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsEmpty::__invoke
+     */
+    public function notEmpty()
     {
     }
 

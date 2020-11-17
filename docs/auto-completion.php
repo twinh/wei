@@ -158,7 +158,7 @@ class IsAllOfMixin {
 }
 
 /**
- * @property    Wei\IsAllowEmpty $isAllowEmpty
+ * @property    Wei\IsAllowEmpty $isAllowEmpty Ignore the remaining rules of current field if input value is empty string or null
  * @method      bool isAllowEmpty($input) Validate the input value
  */
 class IsAllowEmptyMixin {
@@ -337,6 +337,13 @@ class IsEachMixin {
  * @method      bool isEmail($input) Validate the input value
  */
 class IsEmailMixin {
+}
+
+/**
+ * @property    Wei\IsEmpty $isEmpty Check if the input is not empty
+ * @method      bool isEmpty($input) Validate the input value
+ */
+class IsEmptyMixin {
 }
 
 /**
@@ -1134,6 +1141,7 @@ class WeiMixin {
  * @mixin IsDoubleByteMixin
  * @mixin IsEachMixin
  * @mixin IsEmailMixin
+ * @mixin IsEmptyMixin
  * @mixin IsEndsWithMixin
  * @mixin IsEqualToMixin
  * @mixin IsExistsMixin
