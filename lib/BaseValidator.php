@@ -74,9 +74,9 @@ abstract class BaseValidator extends Base
     protected $errors = [];
 
     /**
-     * The validate wei, available when this rule validator is invoked from validate wei
+     * The validate service, available when this rule validator is invoked from validate service
      *
-     * @var \Wei\Validate
+     * @var Validate
      */
     protected $validator;
 
