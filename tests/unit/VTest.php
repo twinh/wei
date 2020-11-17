@@ -375,6 +375,38 @@ final class VTest extends TestCase
         $this->assertTrue($validator->removeField(['user', 'email']));
     }
 
+    public function testAllowEmptyWithEmptyString()
+    {
+        $ret = V::key('email')->allowEmpty()->email()->check(['email' => '']);
+        $this->assertRetSuc($ret);
+    }
+
+    public function testAllowEmptyWithNull()
+    {
+        $ret = V::key('email')->allowEmpty()->email()->check(['email' => null]);
+        $this->assertRetSuc($ret);
+    }
+
+    public function testAllowEmptyWithValidData()
+    {
+        $ret = V::key('email')->email()->check(['email' => 'test@example.com']);
+        $this->assertRetSuc($ret);
+
+        $ret = V::key('email')->allowEmpty()->email()->check(['email' => 'test@example.com']);
+        $this->assertRetSuc($ret);
+    }
+
+    public function testSkipArray()
+    {
+        $ret = V::key('email')->allowEmpty()->email()
+            ->time('send_at', 'Send time')->allowEmpty()->gt('2020-01-01')
+            ->check([
+                'email' => '',
+                'send_at' => null,
+            ]);
+        $this->assertRetSuc($ret);
+    }
+
     protected function checkModel(bool $isNew, $data)
     {
         return V::key('name', 'Name')->required($isNew)->notBlank()

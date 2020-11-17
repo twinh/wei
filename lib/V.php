@@ -183,6 +183,16 @@ class V extends Base
     }
 
     /**
+     * Prepend allowEmpty rule to current key
+     *
+     * @return $this
+     */
+    public function allowEmpty()
+    {
+        return $this->prependRule(__FUNCTION__);
+    }
+
+    /**
      * Set data for validation
      *
      * @param mixed $data
@@ -218,6 +228,7 @@ class V extends Base
 
         return $this;
     }
+
 
     /**
      * Returns the validate options
@@ -350,6 +361,19 @@ class V extends Base
     protected function defaultRequired()
     {
         $this->options['defaultRequired'] = true;
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $args
+     * @return $this
+     */
+    private function prependRule(string $name, $args = [])
+    {
+        $this->options['rules'][$this->lastKey] = [$name => $args] + $this->options['rules'][$this->lastKey];
+        $this->lastRule = $name;
+
         return $this;
     }
 }

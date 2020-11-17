@@ -165,6 +165,10 @@ class IsAllOf
 {
 }
 
+class IsAllowEmpty
+{
+}
+
 class IsAlnum
 {
 }
@@ -966,6 +970,22 @@ class V
      * @see \Wei\IsAllOf::__invoke
      */
     public static function notAllOf(array $rules = [], $atLeast = null)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsAllowEmpty::__invoke
+     */
+    public static function allowEmpty()
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsAllowEmpty::__invoke
+     */
+    public static function notAllowEmpty()
     {
     }
 
@@ -2679,6 +2699,10 @@ class IsAllOf
 {
 }
 
+class IsAllowEmpty
+{
+}
+
 class IsAlnum
 {
 }
@@ -3480,6 +3504,22 @@ class V
      * @see \Wei\IsAllOf::__invoke
      */
     public function notAllOf(array $rules = [], $atLeast = null)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsAllowEmpty::__invoke
+     */
+    public function allowEmpty()
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsAllowEmpty::__invoke
+     */
+    public function notAllowEmpty()
     {
     }
 

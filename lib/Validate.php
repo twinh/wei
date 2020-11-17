@@ -173,6 +173,13 @@ class Validate extends Base
     protected $fields = [];
 
     /**
+     * Whether to ignore the remaining rules of current field
+     *
+     * @var bool
+     */
+    protected $skipNextRules = false;
+
+    /**
      * Create a new validator and validate by specified options
      *
      * @param array $options
@@ -284,6 +291,11 @@ class Validate extends Base
                         break;
                     }
                 }
+
+                if ($this->skipNextRules) {
+                    $this->skipNextRules = false;
+                    break;
+                }
             }
 
             // Trigger the fieldValid/fieldInvalid callback
@@ -307,6 +319,16 @@ class Validate extends Base
         $this->{$callback} && call_user_func($this->{$callback}, $this, $this->wei);
 
         return $this->result;
+    }
+
+    /**
+     * Whether to ignore the remaining rules of current field
+     *
+     * @param bool $skipNextRules
+     */
+    public function skipNextRules($skipNextRules = true)
+    {
+        $this->skipNextRules = $skipNextRules;
     }
 
     /**

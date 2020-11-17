@@ -158,6 +158,13 @@ class IsAllOfMixin {
 }
 
 /**
+ * @property    Wei\IsAllowEmpty $isAllowEmpty
+ * @method      bool isAllowEmpty($input) Validate the input value
+ */
+class IsAllowEmptyMixin {
+}
+
+/**
  * @property    Wei\IsAlnum $isAlnum Check if the input contains letters (a-z) and digits (0-9)
  * @method      bool isAlnum($input, $pattern = null) Returns whether the $input value is valid
  */
@@ -1101,6 +1108,7 @@ class WeiMixin {
  * @mixin HttpMixin
  * @mixin IsAllMixin
  * @mixin IsAllOfMixin
+ * @mixin IsAllowEmptyMixin
  * @mixin IsAlnumMixin
  * @mixin IsAlphaMixin
  * @mixin IsArrayMixin
