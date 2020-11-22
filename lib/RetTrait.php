@@ -4,8 +4,6 @@ namespace Wei;
 
 /**
  * Add common usage result functions to service
- *
- * @property \Wei\Ret $ret
  */
 trait RetTrait
 {
@@ -17,20 +15,21 @@ trait RetTrait
      * @param string $type
      * @return array
      */
-    public function ret($message, $code = 1, $type = 'success')
+    public function ret($message, $code = null, $type = null)
     {
-        return $this->ret->__invoke($message, $code, $type);
+        // NOTE: always create new Ret instance
+        return $this->wei->ret->__invoke($message, $code, $type);
     }
 
     /**
      * Return operation successful result
      *
      * @param string|array|null $message
-     * @return array
+     * @return Ret
      */
     public function suc($message = null)
     {
-        return $this->ret->suc($message);
+        return $this->wei->ret->suc($message);
     }
 
     /**
@@ -39,34 +38,10 @@ trait RetTrait
      * @param string|array $message
      * @param int $code
      * @param string $level
-     * @return array
+     * @return Ret
      */
-    public function err($message, $code = -1, $level = 'info')
+    public function err($message, $code = null, $level = null)
     {
-        return $this->ret->err($message, $code, $level);
-    }
-
-    /**
-     * Return operation failed result, and logs with a warning level
-     *
-     * @param string $message
-     * @param int $code
-     * @return array
-     */
-    public function warning($message, $code = -1)
-    {
-        return $this->ret->warning($message, $code);
-    }
-
-    /**
-     * Return operation failed result, and logs with an alert level
-     *
-     * @param string $message
-     * @param int $code
-     * @return array
-     */
-    public function alert($message, $code = -1)
-    {
-        return $this->ret->alert($message, $code);
+        return $this->wei->ret->err($message, $code, $level);
     }
 }

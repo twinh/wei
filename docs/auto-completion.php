@@ -947,7 +947,7 @@ class ResponseMixin {
 
 /**
  * @property    Wei\Ret $ret A service that use to build operation result
- * @method      array ret($message, $code = 1, $type = 'success') Return operation result data
+ * @method      Wei\Ret ret($message, $code = 0, $type = null) Return operation result data
  */
 class RetMixin {
 }

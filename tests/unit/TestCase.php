@@ -2,6 +2,8 @@
 
 namespace WeiTest;
 
+use Wei\Ret;
+
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -157,30 +159,23 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         $this->assertArrayHasKey('d', $origArr, 'Call array_key_exists returns true even if value is null');
     }
 
-    public function assertRetSuc($ret, $message = null, $assertMessage = null)
+    public function assertRetSuc(Ret $ret, $message = null, $assertMessage = null)
     {
-        if (method_exists($ret, 'toArray')) {
-            $ret = $ret->toArray();
-        }
-
         $assertMessage = $this->buildRetMessage($ret, $assertMessage);
 
-        $expected = ['code' => 1];
+        $expected = ['code' => $ret->getOption('defaultSucCode')];
         if (null !== $message) {
             $expected['message'] = $message;
         }
 
-        $this->assertArrayContains($expected, $ret, $assertMessage);
+        $this->assertArrayContains($expected, $ret->toArray(), $assertMessage);
     }
 
-    public function assertRetErr($ret, $code, $message = null, $assertMessage = null)
+    public function assertRetErr(Ret $ret, $code, $message = null, $assertMessage = null)
     {
-        if (method_exists($ret, 'toArray')) {
-            $ret = $ret->toArray();
-        }
-
         $assertMessage = $this->buildRetMessage($ret, $assertMessage);
 
+        $expected = [];
         if (null !== $code) {
             $expected['code'] = $code;
         }
@@ -189,7 +184,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             $expected['message'] = $message;
         }
 
-        $this->assertArrayContains($expected, $ret, $assertMessage);
+        $this->assertArrayContains($expected, $ret->toArray(), $assertMessage);
     }
 
     public static function assertArrayContains($subset, $array, $message = '')

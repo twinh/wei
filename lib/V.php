@@ -150,7 +150,7 @@ class V extends Base
      * Validate the data and return the ret array
      *
      * @param mixed $data
-     * @return \Miaoxing\Plugin\Service\Ret
+     * @return Ret
      */
     public function check($data = null)
     {

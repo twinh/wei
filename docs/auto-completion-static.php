@@ -710,6 +710,64 @@ class Response
 
 class Ret
 {
+    /**
+     * Return operation successful result
+     *
+     * ```php
+     * // Specified message
+     * $this->suc('Payment successful');
+     *
+     * // Format
+     * $this->suc(['me%sage', 'ss']);
+     *
+     * // More data
+     * $this->suc(['message' => 'Read successful', 'page' => 1, 'rows' => 123]);
+     * ```
+     *
+     * @param array|string|null $message
+     * @return $this
+     * @see Ret::suc
+     */
+    public static function suc($message = null)
+    {
+    }
+
+    /**
+     * Return operation failed result, and logs with an info level
+     *
+     * @param array|string $message
+     * @param int|null $code
+     * @param string $level
+     * @return $this
+     * @see Ret::err
+     */
+    public static function err($message, $code = null, $level = 'info')
+    {
+    }
+
+    /**
+     * Return operation failed result, and logs with a warning level
+     *
+     * @param string $message
+     * @param int $code
+     * @return $this
+     * @see Ret::warning
+     */
+    public static function warning($message, $code = null)
+    {
+    }
+
+    /**
+     * Return operation failed result, and logs with an alert level
+     *
+     * @param string $message
+     * @param int $code
+     * @return $this
+     * @see Ret::alert
+     */
+    public static function alert($message, $code = null)
+    {
+    }
 }
 
 class Router
@@ -3264,6 +3322,64 @@ class Response
 
 class Ret
 {
+    /**
+     * Return operation successful result
+     *
+     * ```php
+     * // Specified message
+     * $this->suc('Payment successful');
+     *
+     * // Format
+     * $this->suc(['me%sage', 'ss']);
+     *
+     * // More data
+     * $this->suc(['message' => 'Read successful', 'page' => 1, 'rows' => 123]);
+     * ```
+     *
+     * @param array|string|null $message
+     * @return $this
+     * @see Ret::suc
+     */
+    public function suc($message = null)
+    {
+    }
+
+    /**
+     * Return operation failed result, and logs with an info level
+     *
+     * @param array|string $message
+     * @param int|null $code
+     * @param string $level
+     * @return $this
+     * @see Ret::err
+     */
+    public function err($message, $code = null, $level = 'info')
+    {
+    }
+
+    /**
+     * Return operation failed result, and logs with a warning level
+     *
+     * @param string $message
+     * @param int $code
+     * @return $this
+     * @see Ret::warning
+     */
+    public function warning($message, $code = null)
+    {
+    }
+
+    /**
+     * Return operation failed result, and logs with an alert level
+     *
+     * @param string $message
+     * @param int $code
+     * @return $this
+     * @see Ret::alert
+     */
+    public function alert($message, $code = null)
+    {
+    }
 }
 
 class Router
