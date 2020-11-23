@@ -735,30 +735,6 @@ class Schema extends Base
     }
 
     /**
-     * @deprecated
-     */
-    public function timestampsV1()
-    {
-        return $this->timestamp('createTime')->timestamp('updateTime');
-    }
-
-    /**
-     * @deprecated
-     */
-    public function userstampsV1()
-    {
-        return $this->int('createUser')->int('updateUser');
-    }
-
-    /**
-     * @deprecated
-     */
-    public function softDeletableV1()
-    {
-        return $this->timestamp('deleteTime')->int('deleteUser');
-    }
-
-    /**
      * Set the comment for current table
      *
      * @param string $comment
