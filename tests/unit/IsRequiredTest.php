@@ -5,51 +5,11 @@ namespace WeiTest;
 /**
  * @internal
  */
-final class IsRequiredTest extends BaseValidatorTestCase
+final class IsRequiredTest extends TestCase
 {
-    /**
-     * @dataProvider providerForRequired
-     * @param mixed $input
-     */
-    public function testRequired($input)
+    public function testCallWithoutValidator()
     {
-        $this->assertTrue($this->isRequired($input));
-    }
-
-    /**
-     * @dataProvider providerForNotRequired
-     * @param mixed $input
-     */
-    public function testNotRequired($input)
-    {
-        $this->assertFalse($this->isRequired($input));
-    }
-
-    public function providerForRequired()
-    {
-        return [
-            ['123'],
-            ['false'],
-            ['off'],
-            ['on'],
-            ['true'],
-            [0],
-            ['0'],
-            [0.0],
-            [true],
-            ['string'],
-            [' '],
-            ["\r\n"],
-        ];
-    }
-
-    public function providerForNotRequired()
-    {
-        return [
-            [[]],
-            [false],
-            [''],
-            [null],
-        ];
+        $this->expectExceptionObject(new \LogicException('The "required" validator should not call directly, please use with \Wei\V'));
+        $this->isRequired('test');
     }
 }

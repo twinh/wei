@@ -12,6 +12,7 @@ namespace Wei;
  * Check if the input is provided
  *
  * @author      Twin Huang <twinhuang@qq.com>
+ * @@internal
  */
 class IsRequired extends BaseValidator
 {
@@ -25,17 +26,14 @@ class IsRequired extends BaseValidator
     protected $required = true;
 
     /**
-     * The invalid variable values
-     *
-     * @var array
-     */
-    protected $invalid = [null, '', false, []];
-
-    /**
      * {@inheritdoc}
      */
     public function __invoke($input, $required = null)
     {
+        if (!$this->validator) {
+            throw new \LogicException('The "required" validator should not call directly, please use with \Wei\V');
+        }
+
         is_bool($required) && $this->storeOption('required', $required);
 
         return $this->isValid($input);
@@ -44,17 +42,12 @@ class IsRequired extends BaseValidator
     /**
      * Check if the input is in invalid variables
      *
-     * @param mixed $input
      * @return bool
      */
-    public function isInvalid($input)
+    public function isInvalid()
     {
         // When validating array or object data, if the data contains key, the value is considered to exist
-        if ($this->validator && $this->validator->hasField($this->validator->getCurrentField())) {
-            return false;
-        }
-
-        return in_array($input, $this->invalid, true);
+        return !$this->validator->hasField($this->validator->getCurrentField());
     }
 
     /**
@@ -62,7 +55,7 @@ class IsRequired extends BaseValidator
      */
     protected function doValidate($input)
     {
-        if ($this->required && $this->isInvalid($input)) {
+        if ($this->required && $this->isInvalid()) {
             $this->addError('required');
             return false;
         }
