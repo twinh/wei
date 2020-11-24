@@ -28,7 +28,7 @@ class IsCallback extends BaseValidator
      * Check if the input is valid by specified callback
      *
      * @param mixed $input The input value
-     * @param callable|null $fn  The callback to validate the input
+     * @param callable|null $fn The callback to validate the input
      * @param string|null $message The custom invalid message
      * @return bool
      */
@@ -50,6 +50,16 @@ class IsCallback extends BaseValidator
     {
         $this->message = $message;
         return $this;
+    }
+
+    /**
+     * Returns the validator instance
+     *
+     * @return Validate|null
+     */
+    public function getValidator()
+    {
+        return $this->validator;
     }
 
     /**

@@ -2,6 +2,10 @@
 
 namespace WeiTest;
 
+use Wei\IsCallback;
+use Wei\V;
+use Wei\Validate;
+
 /**
  * @internal
  */
@@ -47,6 +51,26 @@ final class IsCallbackTest extends BaseValidatorTestCase
         $result = $this->isCallback('data', [$this, 'arrayCallback']);
 
         $this->assertFalse($result);
+    }
+
+    public function testGetValidator()
+    {
+        $validator = wei()->isCallback->getValidator();
+        $this->assertNull($validator);
+    }
+
+    public function testGetValidatorFromV()
+    {
+        $validator = null;
+        V
+            ::key('test')->callback(function ($input, IsCallback $callback) use (&$validator) {
+                $validator = $callback->getValidator();
+                return false;
+            })
+            ->check([
+                'test' => 1,
+            ]);
+        $this->assertInstanceOf(Validate::class, $validator);
     }
 
     public function arrayCallback()
