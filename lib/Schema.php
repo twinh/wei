@@ -705,6 +705,19 @@ class Schema extends Base
     }
 
     /**
+     * Add a big int auto increment id to table
+     *
+     * @param string $column
+     * @return $this
+     */
+    public function bigId($column = 'id')
+    {
+        $this->bigInt($column)->unsigned()->autoIncrement();
+
+        return $this->primary($column);
+    }
+
+    /**
      * Add created_at and updated_at columns to current table
      *
      * @return $this

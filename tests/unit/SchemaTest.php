@@ -82,6 +82,25 @@ final class SchemaTest extends TestCase
 ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Test'", $sql);
     }
 
+    public function testBigId()
+    {
+        $sql = $this->schema->table('test')
+            ->bigId()
+            ->getSql();
+        $this->assertSame('CREATE TABLE test (
+  id bigint unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY id (id)
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci', $sql);
+
+        $sql = $this->schema->table('test')
+            ->bigId('test_id')
+            ->getSql();
+        $this->assertSame('CREATE TABLE test (
+  test_id bigint unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY test_id (test_id)
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci', $sql);
+    }
+
     public function testChange()
     {
         $sql = wei()->schema->table('products')
