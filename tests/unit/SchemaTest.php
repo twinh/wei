@@ -2,13 +2,10 @@
 
 namespace WeiTest;
 
-use Wei\Schema;
+use SchemaMixin;
 
 /**
- * Schema
- *
- * @property Schema $schema
- *
+ * @mixin SchemaMixin
  * @internal
  */
 final class SchemaTest extends TestCase
@@ -17,11 +14,11 @@ final class SchemaTest extends TestCase
     {
         parent::setUp();
 
-        if (wei()->has('mysqlDb')) {
-            wei()->schema->db = wei()->mysqlDb;
+        if ($this->wei->has('mysqlDb')) {
+            $this->schema->db = $this->wei->mysqlDb;
         }
 
-        wei()->schema->setOption([
+        $this->schema->setOption([
             'charset' => 'utf8mb4',
             'collate' => 'utf8mb4_unicode_ci',
         ]);
@@ -103,7 +100,7 @@ final class SchemaTest extends TestCase
 
     public function testChange()
     {
-        $sql = wei()->schema->table('products')
+        $sql = $this->schema->table('products')
             ->string('no', 64)->comment('商品编码')->change()
             ->string('barcode', 64)->comment('条码')->after('no')
             ->getSql();
@@ -118,7 +115,7 @@ final class SchemaTest extends TestCase
     {
         $this->createTestTable();
 
-        $sql = wei()->schema->table('test_products')
+        $sql = $this->schema->table('test_products')
             ->renameColumn('name', 'new_name')
             ->getSql();
 
@@ -133,7 +130,7 @@ final class SchemaTest extends TestCase
     {
         $this->createTestTable();
 
-        $sql = wei()->schema->table('test_products')
+        $sql = $this->schema->table('test_products')
             ->renameColumn('description', 'new_description')
             ->getSql();
 
@@ -151,14 +148,14 @@ final class SchemaTest extends TestCase
 
         $this->setExpectedException('Exception', 'Column "not_exists" not found in table "test_products"');
 
-        wei()->schema->table('test_products')
+        $this->schema->table('test_products')
             ->renameColumn('not_exists', 'new_column')
             ->exec();
     }
 
     public function testDrop()
     {
-        $sql = wei()->schema->table('test')
+        $sql = $this->schema->table('test')
             ->dropColumn('test')
             ->getSql();
 
@@ -171,7 +168,7 @@ final class SchemaTest extends TestCase
     {
         $this->createTestTable();
 
-        $sql = wei()->schema->table('test_products')
+        $sql = $this->schema->table('test_products')
             ->string('new_description')->comment('product detail')
             ->renameColumn('name', 'new_name')
             ->dropColumn('test')
@@ -183,14 +180,14 @@ final class SchemaTest extends TestCase
   DROP COLUMN test
 ", $sql);
 
-        wei()->schema->db->executeUpdate($sql);
+        $this->schema->db->executeUpdate($sql);
 
         $this->dropTestTable();
     }
 
     public function testNullable()
     {
-        $sql = wei()->schema->table('test_null')
+        $sql = $this->schema->table('test_null')
             ->string('id')->nullable(true)
             ->getSql();
 
@@ -201,7 +198,7 @@ final class SchemaTest extends TestCase
 
     public function testDefaultNullable()
     {
-        $schema = wei()->schema;
+        $schema = $this->schema;
 
         $schema->setDefaultNullable(true);
 
@@ -224,7 +221,7 @@ final class SchemaTest extends TestCase
 
     public function testNullableAndDefault()
     {
-        $sql = wei()->schema->table('test')
+        $sql = $this->schema->table('test')
             ->timestamp('id')
             ->getSql();
 
@@ -252,7 +249,7 @@ final class SchemaTest extends TestCase
     private function assertSqlSame($expected, $actual, string $message = ''): void
     {
         $this->assertSame(
-            str_replace(' TABLE ', ' TABLE ' . wei()->db->getTablePrefix(), $expected),
+            str_replace(' TABLE ', ' TABLE ' . $this->schema->db->getTablePrefix(), $expected),
             $actual,
             $message
         );
