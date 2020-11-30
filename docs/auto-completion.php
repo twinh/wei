@@ -179,6 +179,13 @@ class IsAlphaMixin {
 }
 
 /**
+ * @property    Wei\IsAnyDateTime $isAnyDateTime Check if the input is any valid English textual datetime
+ * @method      mixed isAnyDateTime($input, $format = null)
+ */
+class IsAnyDateTimeMixin {
+}
+
+/**
  * @property    Wei\IsArray $isArray Check if the input could be convert to array
  * @method      mixed isArray($input, $minLength = null, $maxLength = null)
  */
@@ -270,14 +277,14 @@ class IsCreditCardMixin {
 }
 
 /**
- * @property    Wei\IsDate $isDate Check if the input is a valid date
+ * @property    Wei\IsDate $isDate Check if the input is a valid date with specific format
  * @method      mixed isDate($input, $format = null)
  */
 class IsDateMixin {
 }
 
 /**
- * @property    Wei\IsDateTime $isDateTime Check if the input is a valid datetime
+ * @property    Wei\IsDateTime $isDateTime Check if the input is a valid datetime with specific format
  * @method      mixed isDateTime($input, $format = null)
  */
 class IsDateTimeMixin {
@@ -732,7 +739,7 @@ class IsTextMixin {
 }
 
 /**
- * @property    Wei\IsTime $isTime Check if the input is a valid time
+ * @property    Wei\IsTime $isTime Check if the input is a valid time with specific format
  * @method      mixed isTime($input, $format = null)
  */
 class IsTimeMixin {
@@ -947,7 +954,7 @@ class ResponseMixin {
 
 /**
  * @property    Wei\Ret $ret A service that use to build operation result
- * @method      Wei\Ret ret($message, $code = 0, $type = null) Return operation result data
+ * @method      Wei\Ret ret($message, $code = null, $type = null) Return operation result data
  */
 class RetMixin {
 }
@@ -1118,6 +1125,7 @@ class WeiMixin {
  * @mixin IsAllowEmptyMixin
  * @mixin IsAlnumMixin
  * @mixin IsAlphaMixin
+ * @mixin IsAnyDateTimeMixin
  * @mixin IsArrayMixin
  * @mixin IsBetweenMixin
  * @mixin IsBigIntMixin

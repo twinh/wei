@@ -177,6 +177,10 @@ class IsAlpha
 {
 }
 
+class IsAnyDateTime
+{
+}
+
 class IsArray
 {
 }
@@ -737,11 +741,11 @@ class Ret
      *
      * @param array|string $message
      * @param int|null $code
-     * @param string $level
+     * @param string $level The log level, default to "info"
      * @return $this
      * @see Ret::err
      */
-    public static function err($message, $code = null, $level = 'info')
+    public static function err($message, $code = null, $level = null)
     {
     }
 
@@ -1080,6 +1084,22 @@ class V
      * @see \Wei\IsAlpha::__invoke
      */
     public static function notAlpha($pattern = null)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsAnyDateTime::__invoke
+     */
+    public static function anyDateTime($name = null, string $label = null, $format = null)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsAnyDateTime::__invoke
+     */
+    public static function notAnyDateTime($name = null, string $label = null, $format = null)
     {
     }
 
@@ -2789,6 +2809,10 @@ class IsAlpha
 {
 }
 
+class IsAnyDateTime
+{
+}
+
 class IsArray
 {
 }
@@ -3349,11 +3373,11 @@ class Ret
      *
      * @param array|string $message
      * @param int|null $code
-     * @param string $level
+     * @param string $level The log level, default to "info"
      * @return $this
      * @see Ret::err
      */
-    public function err($message, $code = null, $level = 'info')
+    public function err($message, $code = null, $level = null)
     {
     }
 
@@ -3692,6 +3716,22 @@ class V
      * @see \Wei\IsAlpha::__invoke
      */
     public function notAlpha($pattern = null)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsAnyDateTime::__invoke
+     */
+    public function anyDateTime($name = null, string $label = null, $format = null)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsAnyDateTime::__invoke
+     */
+    public function notAnyDateTime($name = null, string $label = null, $format = null)
     {
     }
 

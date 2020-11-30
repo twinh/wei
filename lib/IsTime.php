@@ -9,11 +9,11 @@
 namespace Wei;
 
 /**
- * Check if the input is a valid time
+ * Check if the input is a valid time with specific format
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class IsTime extends IsDateTime
+class IsTime extends IsAnyDateTime
 {
     protected $formatMessage = '%name% must be a valid time, the format should be "%format%", e.g. %example%';
 

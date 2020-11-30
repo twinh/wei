@@ -9,11 +9,11 @@
 namespace Wei;
 
 /**
- * Check if the input is a valid date
+ * Check if the input is a valid date with specific format
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class IsDate extends IsDateTime
+class IsDate extends IsAnyDateTime
 {
     protected $formatMessage = '%name% must be a valid date, the format should be "%format%", e.g. %example%';
 
