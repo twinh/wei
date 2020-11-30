@@ -17,16 +17,16 @@ final class SchemaTest extends TestCase
     {
         parent::setUp();
 
-        wei()->schema->db = wei()->mysqlDb;
+        if (wei()->has('mysqlDb')) {
+            wei()->schema->db = wei()->mysqlDb;
+        }
+
         wei()->schema->setOption([
             'charset' => 'utf8mb4',
             'collate' => 'utf8mb4_unicode_ci',
         ]);
     }
 
-    /**
-     * 生成SQL语句
-     */
     public function testCreateTable()
     {
         $sql = $this->schema->table('test')->tableComment('Test')
@@ -53,7 +53,7 @@ final class SchemaTest extends TestCase
             ->unique('name')
             ->getSql();
 
-        $this->assertEquals("CREATE TABLE test (
+        $this->assertSqlSame("CREATE TABLE test (
   id int unsigned NOT NULL AUTO_INCREMENT,
   user_id int unsigned NOT NULL DEFAULT 0 COMMENT 'User ID',
   name varchar(255) NOT NULL DEFAULT '',
@@ -67,14 +67,14 @@ final class SchemaTest extends TestCase
   long_description longtext NOT NULL,
   medium_description mediumtext NOT NULL,
   small_id smallint unsigned NOT NULL DEFAULT 0,
-  birthday date NOT NULL DEFAULT '0000-00-00',
-  closed_at datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  birthday date NULL DEFAULT NULL,
+  closed_at datetime NULL DEFAULT NULL,
   json json NOT NULL,
-  created_at timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  updated_at timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  created_at timestamp NULL DEFAULT NULL,
+  updated_at timestamp NULL DEFAULT NULL,
   created_by int unsigned NOT NULL DEFAULT 0,
   updated_by int unsigned NOT NULL DEFAULT 0,
-  deleted_at timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  deleted_at timestamp NULL DEFAULT NULL,
   deleted_by int unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY id (id),
   KEY user_id (user_id),
@@ -87,7 +87,7 @@ final class SchemaTest extends TestCase
         $sql = $this->schema->table('test')
             ->bigId()
             ->getSql();
-        $this->assertSame('CREATE TABLE test (
+        $this->assertSqlSame('CREATE TABLE test (
   id bigint unsigned NOT NULL AUTO_INCREMENT,
   PRIMARY KEY id (id)
 ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci', $sql);
@@ -95,7 +95,7 @@ final class SchemaTest extends TestCase
         $sql = $this->schema->table('test')
             ->bigId('test_id')
             ->getSql();
-        $this->assertSame('CREATE TABLE test (
+        $this->assertSqlSame('CREATE TABLE test (
   test_id bigint unsigned NOT NULL AUTO_INCREMENT,
   PRIMARY KEY test_id (test_id)
 ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci', $sql);
@@ -108,7 +108,7 @@ final class SchemaTest extends TestCase
             ->string('barcode', 64)->comment('条码')->after('no')
             ->getSql();
 
-        $this->assertEquals("ALTER TABLE products
+        $this->assertSqlSame("ALTER TABLE products
   CHANGE COLUMN no no varchar(64) NOT NULL DEFAULT '' COMMENT '商品编码',
   ADD COLUMN barcode varchar(64) NOT NULL DEFAULT '' COMMENT '条码' AFTER no
 ", $sql);
@@ -122,7 +122,7 @@ final class SchemaTest extends TestCase
             ->renameColumn('name', 'new_name')
             ->getSql();
 
-        $this->assertEquals("ALTER TABLE test_products
+        $this->assertSqlSame("ALTER TABLE test_products
   CHANGE COLUMN name new_name varchar(128) NOT NULL DEFAULT '' COMMENT 'product name'
 ", $sql);
 
@@ -138,7 +138,7 @@ final class SchemaTest extends TestCase
             ->getSql();
 
         // Text column don't support default value
-        $this->assertEquals("ALTER TABLE test_products
+        $this->assertSqlSame("ALTER TABLE test_products
   CHANGE COLUMN description new_description text NOT NULL COMMENT 'product description'
 ", $sql);
 
@@ -162,7 +162,7 @@ final class SchemaTest extends TestCase
             ->dropColumn('test')
             ->getSql();
 
-        $this->assertEquals('ALTER TABLE test
+        $this->assertSqlSame('ALTER TABLE test
   DROP COLUMN test
 ', $sql);
     }
@@ -177,7 +177,7 @@ final class SchemaTest extends TestCase
             ->dropColumn('test')
             ->getSql();
 
-        $this->assertEquals("ALTER TABLE test_products
+        $this->assertSqlSame("ALTER TABLE test_products
   ADD COLUMN new_description varchar(255) NOT NULL DEFAULT '' COMMENT 'product detail',
   CHANGE COLUMN name new_name varchar(128) NOT NULL DEFAULT '' COMMENT 'product name',
   DROP COLUMN test
@@ -194,7 +194,7 @@ final class SchemaTest extends TestCase
             ->string('id')->nullable(true)
             ->getSql();
 
-        $this->assertEquals("CREATE TABLE test_null (
+        $this->assertSqlSame("CREATE TABLE test_null (
   id varchar(255) NULL DEFAULT ''
 ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", $sql);
     }
@@ -208,7 +208,7 @@ final class SchemaTest extends TestCase
         $sql = $schema->table('test')
             ->string('id')
             ->getSql();
-        $this->assertEquals("CREATE TABLE test (
+        $this->assertSqlSame("CREATE TABLE test (
   id varchar(255) NULL DEFAULT ''
 ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", $sql);
 
@@ -217,37 +217,18 @@ final class SchemaTest extends TestCase
         $sql = $schema->table('test')
             ->string('id')
             ->getSql();
-        $this->assertEquals("CREATE TABLE test (
+        $this->assertSqlSame("CREATE TABLE test (
   id varchar(255) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", $sql);
     }
 
     public function testNullableAndDefault()
     {
-        wei()->schema->setOption('typeDefaults', [
-            Schema::TYPE_BIG_INT => '0',
-            Schema::TYPE_BOOL => '0',
-            Schema::TYPE_CHAR => '',
-            Schema::TYPE_DATE => null,
-            Schema::TYPE_DATETIME => null,
-            Schema::TYPE_DECIMAL => '0',
-            Schema::TYPE_DOUBLE => '0',
-            Schema::TYPE_INT => '0',
-            Schema::TYPE_LONG_TEXT => false,
-            Schema::TYPE_MEDIUM_INT => '0',
-            Schema::TYPE_MEDIUM_TEXT => false,
-            Schema::TYPE_TINY_INT => '0',
-            Schema::TYPE_SMALL_INT => '0',
-            Schema::TYPE_STRING => '',
-            Schema::TYPE_TEXT => false,
-            Schema::TYPE_TIMESTAMP => null,
-        ]);
-
         $sql = wei()->schema->table('test')
             ->timestamp('id')
             ->getSql();
 
-        $this->assertEquals('CREATE TABLE test (
+        $this->assertSqlSame('CREATE TABLE test (
   id timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci', $sql);
     }
@@ -266,5 +247,14 @@ final class SchemaTest extends TestCase
     protected function dropTestTable()
     {
         $this->schema->dropIfExists('test_products');
+    }
+
+    private function assertSqlSame($expected, $actual, string $message = ''): void
+    {
+        $this->assertSame(
+            str_replace(' TABLE ', ' TABLE ' . wei()->db->getTablePrefix(), $expected),
+            $actual,
+            $message
+        );
     }
 }

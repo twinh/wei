@@ -127,8 +127,8 @@ class Schema extends Base
         self::TYPE_BIG_INT => '0',
         self::TYPE_BOOL => '0',
         self::TYPE_CHAR => '',
-        self::TYPE_DATE => "'0000-00-00'",
-        self::TYPE_DATETIME => "'0000-00-00 00:00:00'",
+        self::TYPE_DATE => null,
+        self::TYPE_DATETIME => null,
         self::TYPE_DECIMAL => '0',
         self::TYPE_DOUBLE => '0',
         self::TYPE_INT => '0',
@@ -139,7 +139,7 @@ class Schema extends Base
         self::TYPE_SMALL_INT => '0',
         self::TYPE_STRING => '',
         self::TYPE_TEXT => false,
-        self::TYPE_TIMESTAMP => "'0000-00-00 00:00:00'",
+        self::TYPE_TIMESTAMP => null,
         self::TYPE_JSON => false,
     ];
 
@@ -966,7 +966,8 @@ class Schema extends Base
      */
     protected function getRenameColumnSql($column, $options)
     {
-        $dbColumns = $this->db->fetchAll("SHOW FULL COLUMNS FROM $this->table");
+        $table = $this->db->getTable($this->table);
+        $dbColumns = $this->db->fetchAll("SHOW FULL COLUMNS FROM $table");
         $fromColumn = null;
         foreach ($dbColumns as $dbColumn) {
             if ($dbColumn['Field'] == $options['from']) {
