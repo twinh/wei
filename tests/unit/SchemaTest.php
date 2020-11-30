@@ -29,17 +29,25 @@ final class SchemaTest extends TestCase
         $sql = $this->schema->table('test')->tableComment('Test')
             ->id()
             ->int('user_id')->comment('User ID')
+            ->uInt('unsigned_user_id')
             ->string('name')
             ->text('description')
             ->decimal('price', 10, 2)
+            ->uDecimal('unsigned_price', 10, 2)
             ->bool('is_default')->defaults(true)
             ->tinyInt('type', 1)
+            ->uTinyInt('unsigned_type')
+            ->mediumInt('medium_id')
+            ->uMediumInt('unsigned_medium_id')
             ->bigInt('big_id')
+            ->uBigInt('unsigned_big_id')
             ->char('id_card', 18)
             ->double('lat')
+            ->uDouble('unsigned_lat')
             ->longText('long_description')
             ->mediumText('medium_description')
             ->smallInt('small_id')
+            ->uSmallInt('unsigned_small_id')
             ->date('birthday')
             ->datetime('closed_at')
             ->json('json')
@@ -52,18 +60,26 @@ final class SchemaTest extends TestCase
 
         $this->assertSqlSame("CREATE TABLE test (
   id int unsigned NOT NULL AUTO_INCREMENT,
-  user_id int unsigned NOT NULL DEFAULT 0 COMMENT 'User ID',
+  user_id int NOT NULL DEFAULT 0 COMMENT 'User ID',
+  unsigned_user_id int unsigned NOT NULL DEFAULT 0,
   name varchar(255) NOT NULL DEFAULT '',
   description text NOT NULL,
-  price decimal(10, 2) unsigned NOT NULL DEFAULT 0,
-  is_default tinyint(1) unsigned NOT NULL DEFAULT 1,
-  type tinyint(1) unsigned NOT NULL DEFAULT 0,
-  big_id bigint unsigned NOT NULL DEFAULT 0,
+  price decimal(10, 2) NOT NULL DEFAULT 0,
+  unsigned_price decimal(10, 2) unsigned NOT NULL DEFAULT 0,
+  is_default tinyint(1) NOT NULL DEFAULT 1,
+  type tinyint(1) NOT NULL DEFAULT 0,
+  unsigned_type tinyint unsigned NOT NULL DEFAULT 0,
+  medium_id mediumint NOT NULL DEFAULT 0,
+  unsigned_medium_id mediumint unsigned NOT NULL DEFAULT 0,
+  big_id bigint NOT NULL DEFAULT 0,
+  unsigned_big_id bigint unsigned NOT NULL DEFAULT 0,
   id_card char(18) NOT NULL DEFAULT '',
-  lat double unsigned NOT NULL DEFAULT 0,
+  lat double NOT NULL DEFAULT 0,
+  unsigned_lat double unsigned NOT NULL DEFAULT 0,
   long_description longtext NOT NULL,
   medium_description mediumtext NOT NULL,
-  small_id smallint unsigned NOT NULL DEFAULT 0,
+  small_id smallint NOT NULL DEFAULT 0,
+  unsigned_small_id smallint unsigned NOT NULL DEFAULT 0,
   birthday date NULL DEFAULT NULL,
   closed_at datetime NULL DEFAULT NULL,
   json json NOT NULL,

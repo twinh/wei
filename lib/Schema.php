@@ -76,11 +76,6 @@ class Schema extends Base
     /**
      * @var bool
      */
-    protected $autoUnsigned = true;
-
-    /**
-     * @var bool
-     */
     protected $defaultNullable = false;
 
     /**
@@ -175,20 +170,6 @@ class Schema extends Base
      */
     protected $checkTableSqls = [
         'mysql' => 'SELECT * FROM information_schema.tables WHERE table_schema = ? AND table_name = ? LIMIT 1;',
-    ];
-
-    /**
-     * @var array
-     */
-    protected $unsignedTypes = [
-        self::TYPE_BOOL,
-        self::TYPE_TINY_INT,
-        self::TYPE_SMALL_INT,
-        self::TYPE_MEDIUM_INT,
-        self::TYPE_INT,
-        self::TYPE_BIG_INT,
-        self::TYPE_DECIMAL,
-        self::TYPE_DOUBLE,
     ];
 
     /**
@@ -401,6 +382,17 @@ class Schema extends Base
     }
 
     /**
+     * Add an unsigned big int column
+     *
+     * @param string $column
+     * @return $this
+     */
+    public function uBigInt($column)
+    {
+        return $this->bigInt($column)->unsigned();
+    }
+
+    /**
      * Add a char column
      *
      * @param string $column
@@ -437,6 +429,19 @@ class Schema extends Base
     }
 
     /**
+     * Add an unsigned decimal column
+     *
+     * @param string $column
+     * @param int $length
+     * @param int $scale
+     * @return $this
+     */
+    public function uDecimal($column, $length = 10, $scale = 2)
+    {
+        return $this->decimal($column, $length, $scale)->unsigned();
+    }
+
+    /**
      * Add a double column
      *
      * @param string $column
@@ -445,6 +450,17 @@ class Schema extends Base
     public function double($column)
     {
         return $this->addColumn($column, self::TYPE_DOUBLE);
+    }
+
+    /**
+     * Add an unsigned double column
+     *
+     * @param string $column
+     * @return $this
+     */
+    public function uDouble($column)
+    {
+        return $this->double($column)->unsigned();
     }
 
     /**
@@ -472,6 +488,18 @@ class Schema extends Base
     }
 
     /**
+     * Add an unsigned int column
+     *
+     * @param string $column
+     * @param int|null $length
+     * @return $this
+     */
+    public function uInt($column, $length = null)
+    {
+        return $this->int($column, $length)->unsigned();
+    }
+
+    /**
      * Add a long text column
      *
      * @param $column
@@ -491,6 +519,17 @@ class Schema extends Base
     public function mediumInt($column)
     {
         return $this->addColumn($column, self::TYPE_MEDIUM_INT);
+    }
+
+    /**
+     * Add an unsigned medium int column
+     *
+     * @param $column
+     * @return $this
+     */
+    public function uMediumInt($column)
+    {
+        return $this->mediumInt($column)->unsigned();
     }
 
     /**
@@ -517,6 +556,18 @@ class Schema extends Base
     }
 
     /**
+     * Add an unsigned tiny int column
+     *
+     * @param $column
+     * @param int|null $length
+     * @return $this
+     */
+    public function uTinyInt($column, $length = null)
+    {
+        return $this->tinyInt($column, $length)->unsigned();
+    }
+
+    /**
      * Add a small int column
      *
      * @param $column
@@ -526,6 +577,18 @@ class Schema extends Base
     public function smallInt($column, $length = null)
     {
         return $this->addColumn($column, self::TYPE_SMALL_INT, ['length' => $length]);
+    }
+
+    /**
+     * Add an unsigned small int column
+     *
+     * @param $column
+     * @param int|null $length
+     * @return $this
+     */
+    public function uSmallInt($column, $length = null)
+    {
+        return $this->smallInt($column, $length)->unsigned();
     }
 
     /**
@@ -699,7 +762,7 @@ class Schema extends Base
      */
     public function id($column = 'id')
     {
-        $this->int($column)->unsigned()->autoIncrement();
+        $this->uInt($column)->autoIncrement();
 
         return $this->primary($column);
     }
@@ -712,7 +775,7 @@ class Schema extends Base
      */
     public function bigId($column = 'id')
     {
-        $this->bigInt($column)->unsigned()->autoIncrement();
+        $this->uBigInt($column)->autoIncrement();
 
         return $this->primary($column);
     }
@@ -734,7 +797,7 @@ class Schema extends Base
      */
     public function userstamps()
     {
-        return $this->int('created_by')->int('updated_by');
+        return $this->uInt('created_by')->uInt('updated_by');
     }
 
     /**
@@ -744,7 +807,7 @@ class Schema extends Base
      */
     public function softDeletable()
     {
-        return $this->timestamp('deleted_at')->int('deleted_by');
+        return $this->timestamp('deleted_at')->uInt('deleted_by');
     }
 
     /**
@@ -1042,11 +1105,6 @@ class Schema extends Base
         if (isset($options['unsigned'])) {
             return $options['unsigned'] ? 'unsigned ' : '';
         }
-
-        if ($this->autoUnsigned && in_array($options['type'], $this->unsignedTypes, true)) {
-            return 'unsigned ';
-        }
-
         return '';
     }
 
