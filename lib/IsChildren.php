@@ -66,4 +66,9 @@ class IsChildren extends BaseValidator
         }
         return $this->selfValidator->getFlatMessages();
     }
+
+    public function getValidData()
+    {
+        return $this->selfValidator->getValidData();
+    }
 }

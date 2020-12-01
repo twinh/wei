@@ -81,6 +81,13 @@ abstract class BaseValidator extends Base
     protected $validator;
 
     /**
+     * The data that has been validated
+     *
+     * @var string
+     */
+    protected $validData;
+
+    /**
      * An array contains the validator original property values
      *
      * @var array
@@ -120,7 +127,11 @@ abstract class BaseValidator extends Base
     {
         // Clean previous status
         $this->reset();
-        return $this->negative xor $this->doValidate($input);
+        $result = ($this->negative xor $this->doValidate($input));
+        if ($result) {
+            $this->validData = $input;
+        }
+        return $result;
     }
 
     /**
@@ -248,6 +259,16 @@ abstract class BaseValidator extends Base
     }
 
     /**
+     * The data that has been validated
+     *
+     * @return mixed
+     */
+    public function getValidData()
+    {
+        return $this->validData;
+    }
+
+    /**
      * Validate the input value (ignore the $negative property)
      *
      * @param mixed $input The input to be validated
@@ -319,6 +340,7 @@ abstract class BaseValidator extends Base
     protected function reset()
     {
         $this->errors = [];
+        $this->validData = null;
 
         if (count($this->store) >= 2) {
             $last = end($this->store);

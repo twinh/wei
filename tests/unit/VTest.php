@@ -407,6 +407,207 @@ final class VTest extends TestCase
         $this->assertRetSuc($ret);
     }
 
+    public function testGetValidDataSuc()
+    {
+        $ret = V::key('email')->email()
+            ->key('name')->minLength(1)
+            ->check([
+                'email' => 'test@email.com',
+                'name' => '123',
+                'notChecked' => true,
+            ]);
+        $this->assertSame([
+            'email' => 'test@email.com',
+            'name' => '123',
+        ], $ret['data']);
+    }
+
+    public function testGetValidDataErr()
+    {
+        $v = V::key('email')->email()
+            ->key('name')->minLength(1);
+
+        $ret = $v->check([
+            'email' => 'test@email.com',
+            'name' => '',
+            'notChecked' => true,
+        ]);
+
+        $this->assertRetErr($ret, null, 'This value must have a length greater than 1');
+        $this->assertArrayNotHasKey('data', $ret);
+        $this->assertSame([], $v->getOption('validator')->getValidData());
+    }
+
+    public function testGetValidDataWithArrayKey()
+    {
+        $ret = V::key(['user', 'email'], '测试')->email()
+            ->check([
+                'notChecked' => true,
+                'user' => [
+                    'email' => 'test@example.com',
+                    'notChecked' => true,
+                ],
+            ]);
+
+        $this->assertSame([
+            'user' => [
+                'email' => 'test@example.com',
+            ],
+        ], $ret['data']);
+    }
+
+    public function testGetValidDataWithChildren()
+    {
+        $ret = V
+            ::key('configs')->children(
+                V
+                    ::key('key1', 'name1')->minLength(3)
+                    ->key('key2', 'name2')->minLength(2)
+            )
+            ->check([
+                'notChecked' => true,
+                'configs' => [
+                    'notChecked' => true,
+                    'key1' => '123',
+                    'key2' => '22',
+                ],
+            ]);
+        $this->assertSame([
+            'configs' => [
+                'key1' => '123',
+                'key2' => '22',
+            ],
+        ], $ret['data']);
+    }
+
+    public function testGetValidDataWithEach()
+    {
+        $ret = V
+            ::key('products')->each(
+                V
+                    ::key('name')->maxLength(5)
+                    ->key('stock')->greaterThanOrEqual(0)
+            )
+            ->check([
+                'notChecked' => true,
+                'products' => [
+                    [
+                        'name' => 'name',
+                        'stock' => 1,
+                        'notChecked' => true,
+                    ],
+                    [
+                        'name' => 'name',
+                        'stock' => 1,
+                    ],
+                ],
+            ]);
+        $this->assertSame([
+            'products' => [
+                [
+                    'name' => 'name',
+                    'stock' => 1,
+                ],
+                [
+                    'name' => 'name',
+                    'stock' => 1,
+                ],
+            ],
+        ], $ret['data']);
+
+        $this->assertRetSuc($ret);
+    }
+
+    public function testGetValidDataWithEachKeepKeys()
+    {
+        $ret = V
+            ::key('products')->each(
+                V
+                    ::key('name')->maxLength(5)
+                    ->key('stock')->greaterThanOrEqual(0)
+            )
+            ->check([
+                'notChecked' => true,
+                'products' => [
+                    'key1' => [
+                        'name' => 'name',
+                        'stock' => 1,
+                        'notChecked' => true,
+                    ],
+                    'key2' => [
+                        'name' => 'name',
+                        'stock' => 1,
+                    ],
+                ],
+            ]);
+        $this->assertSame([
+            'products' => [
+                'key1' => [
+                    'name' => 'name',
+                    'stock' => 1,
+                ],
+                'key2' => [
+                    'name' => 'name',
+                    'stock' => 1,
+                ],
+            ],
+        ], $ret['data']);
+
+        $this->assertRetSuc($ret);
+    }
+
+    public function testGetValidDataWithEachAndOtherRule()
+    {
+        $ret = V
+            ::key('products')->each(
+                V
+                    ::key('name')->maxLength(5)
+                    ->key('stock')->greaterThanOrEqual(0)
+            )->notEmpty()
+            ->check([
+                'notChecked' => true,
+                'products' => [
+                    [
+                        'name' => 'name',
+                        'stock' => 1,
+                        'notChecked' => true,
+                    ],
+                    [
+                        'name' => 'name',
+                        'stock' => 1,
+                    ],
+                ],
+            ]);
+        $this->assertSame([
+            'products' => [
+                [
+                    'name' => 'name',
+                    'stock' => 1,
+                    'notChecked' => true,
+                ],
+                [
+                    'name' => 'name',
+                    'stock' => 1,
+                ],
+            ],
+        ], $ret['data']);
+
+        $this->assertRetSuc($ret);
+    }
+
+    public function testGetValidDataExcludeOptionalKey()
+    {
+        $ret = V::key('email')->email()->optional()
+            ->key('name')->minLength(1)
+            ->check([
+                'name' => '123',
+                'notChecked' => true,
+            ]);
+        $this->assertSame([
+            'name' => '123',
+        ], $ret['data']);
+    }
+
     protected function checkModel(bool $isNew, $data)
     {
         return V::key('name', 'Name')->required($isNew)->notBlank()

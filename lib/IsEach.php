@@ -66,7 +66,7 @@ class IsEach extends BaseValidator
         foreach ($input as $i => $row) {
             $options['data'] = $row;
             $validator = wei()->validate($options);
-            $this->selfValidators[] = $validator;
+            $this->selfValidators[$i] = $validator;
             if ($result && !$validator->isValid()) {
                 $result = false;
             }
@@ -95,6 +95,13 @@ class IsEach extends BaseValidator
             }
         }
         return array_merge($messages, parent::getMessages($name));
+    }
+
+    public function getValidData()
+    {
+        return array_map(function (Validate $validator) {
+            return $validator->getValidData();
+        }, $this->selfValidators);
     }
 
     /**

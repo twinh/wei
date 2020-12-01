@@ -157,7 +157,7 @@ class V extends Base
         $validator = $this->getValidator($data);
 
         if ($validator->isValid()) {
-            return $this->suc();
+            return $this->suc(['data' => $validator->getValidData()]);
         } else {
             return $this->err($validator->getFirstMessage());
         }

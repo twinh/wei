@@ -180,6 +180,13 @@ class Validate extends Base
     protected $skipNextRules = false;
 
     /**
+     * The data that has been validated
+     *
+     * @var array
+     */
+    protected $validData = [];
+
+    /**
      * Create a new validator and validate by specified options
      *
      * @param array $options
@@ -269,6 +276,11 @@ class Validate extends Base
                     $this->result = false;
                 }
 
+                $isOptional = $validator instanceof IsRequired && $validator->isInvalid();
+                if ($result && !$isOptional) {
+                    $this->addValidData($this->currentField, $validator->getValidData());
+                }
+
                 // Record the valid/invalid rule
                 $method = $result ? 'addValidRule' : 'addInvalidRule';
                 $this->{$method}($this->currentField, $rule);
@@ -281,8 +293,7 @@ class Validate extends Base
 
                 if ($result) {
                     // The field data is empty and optional, skip the remaining validation rules
-                    /** @var $validator IsRequired */
-                    if ('required' === $rule && $validator->isInvalid()) {
+                    if ($isOptional) {
                         break;
                     }
                 } else {
@@ -805,6 +816,8 @@ class Validate extends Base
             $options = [$options];
         }
 
+       // dd('xxx', $options, $input);
+
         if (is_int(key($options))) {
             array_unshift($options, $input);
             $result = call_user_func_array($validator, $options);
@@ -812,6 +825,9 @@ class Validate extends Base
             $validator->setOption($options);
             $result = $validator($input);
         }
+
+        //dd('x12313', get_class($validator), $options, $result);
+
 
         return $result;
     }
@@ -861,6 +877,29 @@ class Validate extends Base
     public function getCurrentRule()
     {
         return $this->currentRule;
+    }
+
+    /**
+     * Add valid data
+     *
+     * @param string|array $field
+     * @param $data
+     * @return $this
+     */
+    public function addValidData($field, $data)
+    {
+        $this->validData = $this->setDataByPaths($this->validData, $field, $data);
+        return $this;
+    }
+
+    /**
+     * Get the data that has been validated
+     *
+     * @return array
+     */
+    public function getValidData()
+    {
+        return $this->result ? $this->validData : [];
     }
 
     /**
@@ -977,6 +1016,27 @@ class Validate extends Base
                 return null;
             }
         }
+        return $data;
+    }
+
+    /**
+     * @param array $data
+     * @param string|array $paths
+     * @param mixed $value
+     * @return array
+     */
+    private function setDataByPaths(array $data, $paths, $value): array
+    {
+        $next = &$data;
+        $paths = (array) $paths;
+        $lastPath = array_pop($paths);
+        foreach ($paths as $path) {
+            if (!array_key_exists($path, $next)) {
+                $next[$path] = [];
+            }
+            $next = &$next[$path];
+        }
+        $next[$lastPath] = $value;
         return $data;
     }
 }
