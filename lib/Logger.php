@@ -8,6 +8,8 @@
 
 namespace Wei;
 
+use Monolog\Utils;
+
 /**
  * A logger service, which is inspired by Monolog
  *
@@ -427,7 +429,7 @@ class Logger extends Base
 
         // Format extra context
         if ($this->context || $context) {
-            $content .= print_r($this->context + $context, true) . "\n";
+            $content .= $this->formatContext($this->context + $context);
         }
 
         return $content;
@@ -459,6 +461,22 @@ class Logger extends Base
             $message = (string) $message;
         }
         return ['message' => $message, 'context' => $context];
+    }
+
+    /**
+     * Convert context to string
+     *
+     * @param array $context
+     * @return string
+     * @see
+     */
+    protected function formatContext(array $context): string
+    {
+        return str_replace(
+            ['\r', '\n'],
+            ["\r", "\n"],
+            json_encode($context, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
+        ) . "\n";
     }
 
     /**

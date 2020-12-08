@@ -178,7 +178,7 @@ final class LoggerTest extends TestCase
         $content = file_get_contents($this->logger->getFile());
 
         $this->assertStringContainsString('test exception', $content);
-        $this->assertStringContainsString('[file] => ' . __FILE__, $content);
+        $this->assertStringContainsString('"file": "' . __FILE__, $content);
     }
 
     public function testLoggerNamespace()
