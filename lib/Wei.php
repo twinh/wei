@@ -409,6 +409,9 @@ namespace Wei {
                     return [$service, $method];
                 }
             } elseif (method_exists($service, $method)) {
+                // NOTE: Calling `Class::privateMethod()` or the non-existent `parent::$method()`
+                // will be caught by `__call`, which will lead to an endless loop and eventually run out of memory
+                // To debug these cases, please set `checkServiceMethod` to `true`
                 return [$service, $method];
             }
             return $service->{$method};
