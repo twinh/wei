@@ -816,7 +816,7 @@ class Validate extends Base
             $options = [$options];
         }
 
-       // dd('xxx', $options, $input);
+        // dd('xxx', $options, $input);
 
         if (is_int(key($options))) {
             array_unshift($options, $input);
@@ -1010,7 +1010,7 @@ class Validate extends Base
                 return null;
             } elseif (isset($data->{$path})) {
                 $data = $data->{$path};
-            } elseif (method_exists($data, 'get' . $path)) {
+            } elseif (is_object($data) && method_exists($data, 'get' . $path)) {
                 $data = $data->{'get' . $path}();
             } else {
                 return null;
