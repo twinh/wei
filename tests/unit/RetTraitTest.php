@@ -15,7 +15,7 @@ class RetTraitTest extends TestCase
 
     public function testErr()
     {
-        $this->assertRetErr($this->err('Error!', 2), 2, 'Error!');
+        $this->assertRetErr($this->err('Error!', 2), 'Error!', 2);
     }
 
     public function testRet()
@@ -24,6 +24,6 @@ class RetTraitTest extends TestCase
 
         $this->assertRetSuc($this->ret('message', 0));
 
-        $this->assertRetErr($this->ret('message', 2), 2, 'message');
+        $this->assertRetErr($this->ret('message', 2), 'message', 2);
     }
 }

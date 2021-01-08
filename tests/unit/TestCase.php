@@ -171,11 +171,12 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         $this->assertArrayContains($expected, $ret->toArray(), $assertMessage);
     }
 
-    public function assertRetErr(Ret $ret, $code, $message = null, $assertMessage = null)
+    public function assertRetErr(Ret $ret, $message = null, $code = null, $assertMessage = null)
     {
         $assertMessage = $this->buildRetMessage($ret, $assertMessage);
 
         $expected = [];
+
         if (null !== $code) {
             $expected['code'] = $code;
         }
@@ -187,8 +188,12 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         $this->assertArrayContains($expected, $ret->toArray(), $assertMessage);
     }
 
-    public static function assertArrayContains($subset, $array, $message = '')
-    {
+    public
+    static function assertArrayContains(
+        $subset,
+        $array,
+        $message = ''
+    ) {
         $array = array_intersect_key($array, array_flip(array_keys($subset)));
         parent::assertEquals($subset, $array, $message);
     }
@@ -198,7 +203,8 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
      *
      * @return string
      */
-    protected function getServiceName()
+    protected
+    function getServiceName()
     {
         if (empty($this->serviceName)) {
             $names = explode('\\', static::class);
@@ -216,8 +222,12 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
      * @param string $message
      * @return void
      */
-    protected function assertIsSubset($subset, $parent, $message = '')
-    {
+    protected
+    function assertIsSubset(
+        $subset,
+        $parent,
+        $message = ''
+    ) {
         if (!(is_array($parent) && $subset)) {
             $this->assertTrue(false, $message);
             return;
@@ -237,14 +247,20 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
      * @param string $message
      * @deprecated
      */
-    protected function setExpectedException($class, $message = null)
-    {
+    protected
+    function setExpectedException(
+        $class,
+        $message = null
+    ) {
         $this->expectException($class);
         $message && $this->expectExceptionMessage($message);
     }
 
-    protected function buildRetMessage($ret, $assertMessage = null)
-    {
+    protected
+    function buildRetMessage(
+        $ret,
+        $assertMessage = null
+    ) {
         return $assertMessage . ' ret is ' . json_encode($ret, JSON_UNESCAPED_UNICODE);
     }
 }

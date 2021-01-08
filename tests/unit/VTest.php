@@ -46,7 +46,7 @@ final class VTest extends TestCase
         $ret = V::key('question', 'Question')
             ->check([]);
 
-        $this->assertRetErr($ret, -1, 'Question is required');
+        $this->assertRetErr($ret, 'Question is required', -1);
     }
 
     public function testCheckPass()
@@ -64,7 +64,7 @@ final class VTest extends TestCase
         $ret = V::key('name', '名称')->message('required', '请填写%name%')
             ->check([]);
 
-        $this->assertRetErr($ret, -1, '请填写名称');
+        $this->assertRetErr($ret, '请填写名称', -1);
     }
 
     public function testMessageWithoutRule()
@@ -72,7 +72,7 @@ final class VTest extends TestCase
         $ret = V::key('name', '名称')->required()->message('请填写%name%')
             ->check([]);
 
-        $this->assertRetErr($ret, -1, '请填写名称');
+        $this->assertRetErr($ret, '请填写名称', -1);
     }
 
     public function testCallback()
@@ -81,7 +81,7 @@ final class VTest extends TestCase
             return 'twin' !== $name;
         })
             ->check(['name' => 'twin']);
-        $this->assertRetErr($ret, -1, 'This value is not valid');
+        $this->assertRetErr($ret, 'This value is not valid', -1);
 
         $ret = V::key('name')->callback(function ($name) {
             return 'twin' !== $name;
@@ -96,7 +96,7 @@ final class VTest extends TestCase
             ->check([
                 'mobile' => '123',
             ]);
-        $this->assertRetErr($ret, -1, 'Mobile must be valid mobile number');
+        $this->assertRetErr($ret, 'Mobile must be valid mobile number', -1);
     }
 
     public function testValidate()
@@ -122,7 +122,7 @@ final class VTest extends TestCase
             ->mobileCn()
             ->check('123');
 
-        $this->assertRetErr($ret, -1, 'Mobile must be valid mobile number');
+        $this->assertRetErr($ret, 'Mobile must be valid mobile number', -1);
     }
 
     public function testWithoutKeyRetSuc()
@@ -160,10 +160,10 @@ final class VTest extends TestCase
     public function testCheckBeforeModelCreate()
     {
         $ret = $this->checkModel(true, []);
-        $this->assertRetErr($ret, null, 'Name is required');
+        $this->assertRetErr($ret, 'Name is required');
 
         $ret = $this->checkModel(true, ['name' => '']);
-        $this->assertRetErr($ret, null, 'Name must not be blank');
+        $this->assertRetErr($ret, 'Name must not be blank');
 
         $ret = $this->checkModel(true, ['name' => 'test']);
         $this->assertRetSuc($ret);
@@ -175,7 +175,7 @@ final class VTest extends TestCase
         $this->assertRetSuc($ret);
 
         $ret = $this->checkModel(false, ['name' => '']);
-        $this->assertRetErr($ret, null, 'Name must not be blank');
+        $this->assertRetErr($ret, 'Name must not be blank');
 
         $ret = $this->checkModel(false, ['name' => 'test']);
         $this->assertRetSuc($ret);
@@ -189,7 +189,7 @@ final class VTest extends TestCase
         ])->check([
             'name' => '我',
         ]);
-        $this->assertRetErr($ret, null, 'This value must have a length lower than 1');
+        $this->assertRetErr($ret, 'This value must have a length lower than 1');
 
         $ret = V::key('name')->maxLength([
             'max' => 1,
@@ -213,7 +213,7 @@ final class VTest extends TestCase
         $ret = V::defaultRequired()
             ->key('email')->email()
             ->check([]);
-        $this->assertRetErr($ret, null, 'This value is required');
+        $this->assertRetErr($ret, 'This value is required');
     }
 
     public function testGetOptions()
@@ -246,7 +246,7 @@ final class VTest extends TestCase
         $ret = V::char('name', '名称', 2)->check([
             'name' => '1',
         ]);
-        $this->assertRetErr($ret, null, '名称 must be at least 2 character(s)');
+        $this->assertRetErr($ret, '名称 must be at least 2 character(s)');
     }
 
     public function testBasicTypeChain()
@@ -257,7 +257,7 @@ final class VTest extends TestCase
                 'name' => '12',
                 'name2' => '1',
             ]);
-        $this->assertRetErr($ret, null, '名称2 must be at least 2 character(s)');
+        $this->assertRetErr($ret, '名称2 must be at least 2 character(s)');
     }
 
     public function testBasicTypeInvalidArgument()
@@ -433,7 +433,7 @@ final class VTest extends TestCase
             'notChecked' => true,
         ]);
 
-        $this->assertRetErr($ret, null, 'This value must have a length greater than 1');
+        $this->assertRetErr($ret, 'This value must have a length greater than 1');
         $this->assertArrayNotHasKey('data', $ret);
         $this->assertSame([], $v->getOption('validator')->getValidData());
     }

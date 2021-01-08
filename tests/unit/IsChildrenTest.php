@@ -49,7 +49,7 @@ final class IsChildrenTest extends BaseValidatorTestCase
                 ],
             ]);
 
-        $this->assertRetErr($ret, null, '配置1 must have a length greater than 3');
+        $this->assertRetErr($ret, '配置1 must have a length greater than 3');
     }
 
     public function testChildrenNestedErr()
@@ -72,7 +72,7 @@ final class IsChildrenTest extends BaseValidatorTestCase
                 ],
             ]);
 
-        $this->assertRetErr($ret, null, '配置2.1 must have a length greater than 2');
+        $this->assertRetErr($ret, '配置2.1 must have a length greater than 2');
     }
 
     public function testInvalidInputType()
@@ -85,7 +85,7 @@ final class IsChildrenTest extends BaseValidatorTestCase
                 'configs' => 123,
             ]);
 
-        $this->assertRetErr($ret, null, '配置 must be array or object');
+        $this->assertRetErr($ret, '配置 must be array or object');
     }
 
     protected function getInputTestOptions()

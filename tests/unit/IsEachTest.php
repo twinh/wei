@@ -67,7 +67,7 @@ final class IsEachTest extends BaseValidatorTestCase
                     ],
                 ],
             ]);
-        $this->assertRetErr($ret, null, 'The 2nd 用户\'s 姓名 must have a length greater than 3');
+        $this->assertRetErr($ret, 'The 2nd 用户\'s 姓名 must have a length greater than 3');
     }
 
     /**
@@ -108,7 +108,7 @@ final class IsEachTest extends BaseValidatorTestCase
                 ],
             ]);
 
-        $this->assertRetErr($ret, null, $message);
+        $this->assertRetErr($ret, $message);
     }
 
     public function providerForEachNested()
@@ -158,7 +158,7 @@ final class IsEachTest extends BaseValidatorTestCase
                     'email' => 't',
                 ],
             ]);
-        $this->assertRetErr($ret, null, 'The 2nd 用户\'s 姓名 must have a length greater than 3');
+        $this->assertRetErr($ret, 'The 2nd 用户\'s 姓名 must have a length greater than 3');
     }
 
     public function testCallableParameter()
@@ -180,7 +180,7 @@ final class IsEachTest extends BaseValidatorTestCase
                     ],
                 ],
             ]);
-        $this->assertRetErr($ret, null, 'The 2nd 用户\'s 姓名 must have a length greater than 3');
+        $this->assertRetErr($ret, 'The 2nd 用户\'s 姓名 must have a length greater than 3');
     }
 
     public function testNotArray()
@@ -191,7 +191,7 @@ final class IsEachTest extends BaseValidatorTestCase
                     ::string('name', '姓名')->minLength(3)
                     ->string('email', '邮箱')->email()
             )->check(['users' => null]);
-        $this->assertRetErr($ret, null, '用户 must be an array');
+        $this->assertRetErr($ret, '用户 must be an array');
     }
 
     public function testCallWithoutValidator()
