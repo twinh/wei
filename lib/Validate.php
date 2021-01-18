@@ -606,9 +606,9 @@ class Validate extends Base
             return array_key_exists($lastField, $data);
         } elseif ($data instanceof \ArrayAccess) {
             return $data->offsetExists($lastField);
-        } elseif (property_exists($this->data, $lastField)) {
+        } elseif (is_object($data) && property_exists($data, $lastField)) {
             return true;
-        } elseif (method_exists($this->data, 'get' . $lastField)) {
+        } elseif (is_object($data) && method_exists($data, 'get' . $lastField)) {
             // @experimental Assume field exists
             return true;
         } else {

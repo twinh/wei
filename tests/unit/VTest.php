@@ -608,6 +608,16 @@ final class VTest extends TestCase
         ], $ret['data']);
     }
 
+    public function testHasFieldError()
+    {
+        $ret = V::defaultOptional()
+            ->mediumText(['detail', 'content'], 'Content')
+            ->check(wei()->req);
+
+        $this->assertNotSame("Content's length could not be detected", $ret['message']);
+        $this->assertRetSuc($ret);
+    }
+
     protected function checkModel(bool $isNew, $data)
     {
         return V::key('name', 'Name')->required($isNew)->notBlank()
