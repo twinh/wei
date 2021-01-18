@@ -28,7 +28,17 @@ class FileCache extends BaseCache
      * @var array
      */
     protected $illegalChars = [
-        '\\', '/', ':', '*', '?', '"', '<', '>', '|', "\r", "\n",
+        '\\',
+        '/',
+        ':',
+        '*',
+        '?',
+        '"',
+        '<',
+        '>',
+        '|',
+        "\r",
+        "\n",
     ];
 
     /**
@@ -46,8 +56,8 @@ class FileCache extends BaseCache
     public function __construct(array $options = [])
     {
         parent::__construct($options + [
-            'dir' => $this->dir,
-        ]);
+                'dir' => $this->dir,
+            ]);
     }
 
     /**
@@ -84,8 +94,9 @@ class FileCache extends BaseCache
      */
     public function remove($key)
     {
-        if (is_file($file = $this->getFile($key))) {
-            return unlink($file);
+        if (file_exists($file = $this->getFile($key))) {
+            // Ignore errors caused by slow io(docker) and request concurrency
+            return @unlink($file);
         } else {
             return false;
         }
@@ -209,7 +220,7 @@ class FileCache extends BaseCache
     /**
      * Get cache file by key
      *
-     * @param  string $key
+     * @param string $key
      * @return string
      */
     public function getFile($key)
@@ -249,9 +260,9 @@ class FileCache extends BaseCache
     /**
      * Open and lock file
      *
-     * @param  string         $file      file path
-     * @param  string         $mode      open mode
-     * @param  int            $operation lock operation
+     * @param string $file file path
+     * @param string $mode open mode
+     * @param int $operation lock operation
      * @return resource|false file handle or false
      */
     protected function openAndLock($file, $mode, $operation)
@@ -269,8 +280,8 @@ class FileCache extends BaseCache
     /**
      * Read file by handle and verify if content is expired
      *
-     * @param  resource    $handle file handle
-     * @param  string      $file   file path
+     * @param resource $handle file handle
+     * @param string $file file path
      * @return false|array false or file content array
      */
     protected function readAndVerify($handle, $file)
@@ -301,8 +312,8 @@ class FileCache extends BaseCache
     /**
      * Prepare content for writing
      *
-     * @param  string $content the value of cache
-     * @param  int    $expire  expire time
+     * @param string $content the value of cache
+     * @param int $expire expire time
      * @return string file content
      */
     protected function prepareContent($content, $expire)
@@ -319,9 +330,9 @@ class FileCache extends BaseCache
     /**
      * Write content, release lock and close file
      *
-     * @param  resource $handle  file handle
-     * @param  string   $content the value of cache
-     * @param  bool     $rewrite whether rewrite the whole file
+     * @param resource $handle file handle
+     * @param string $content the value of cache
+     * @param bool $rewrite whether rewrite the whole file
      * @return bool
      */
     protected function writeAndRelease($handle, $content, $rewrite = false)
