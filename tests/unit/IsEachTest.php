@@ -183,6 +183,31 @@ final class IsEachTest extends BaseValidatorTestCase
         $this->assertRetErr($ret, 'The 2nd 用户\'s 姓名 must have a length greater than 3');
     }
 
+    public function testCreateNewInstanceEveryTime()
+    {
+        $validators = [];
+        $ret = V
+            ::key('users', '用户')->each(function (V $v) use (&$validators) {
+                $validators[] = $v;
+                $v->string('name', '姓名')->minLength(3)
+                    ->string('email', '邮箱')->email();
+            })
+            ->check([
+                'users' => [
+                    [
+                        'name' => 'test',
+                        'email' => 'test@example.com',
+                    ],
+                    [
+                        'name' => 't',
+                        'email' => 't',
+                    ],
+                ],
+            ]);
+        $this->assertRetErr($ret, 'The 2nd 用户\'s 姓名 must have a length greater than 3');
+        $this->assertNotSame($validators[0], $validators[1]);
+    }
+
     public function testNotArray()
     {
         $ret = V

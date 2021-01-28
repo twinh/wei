@@ -61,9 +61,8 @@ class IsEach extends BaseValidator
         }
 
         $result = true;
-        $options = $this->getValidatorOptions();
-
         foreach ($input as $i => $row) {
+            $options = $this->getValidatorOptions();
             $options['data'] = $row;
             $validator = wei()->validate($options);
             $this->selfValidators[$i] = $validator;
