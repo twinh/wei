@@ -8,9 +8,6 @@
 
 namespace Wei;
 
-use Wei\V;
-use Wei\Validate;
-
 /**
  * Check if every item in the input is validated by the specified V service
  *
@@ -26,6 +23,13 @@ class IsEach extends BaseValidator
      * @var V|callable
      */
     protected $v;
+
+    /**
+     * The key name of the current validating data
+     *
+     * @var int|string
+     */
+    protected $curKey;
 
     /**
      * @var Validate[]
@@ -61,11 +65,11 @@ class IsEach extends BaseValidator
         }
 
         $result = true;
-        foreach ($input as $i => $row) {
-            $options = $this->getValidatorOptions();
-            $options['data'] = $row;
+        foreach ($input as $key => $data) {
+            $this->curKey = $key;
+            $options = $this->getValidatorOptions($data);
             $validator = wei()->validate($options);
-            $this->selfValidators[$i] = $validator;
+            $this->selfValidators[$key] = $validator;
             if ($result && !$validator->isValid()) {
                 $result = false;
             }
@@ -104,18 +108,30 @@ class IsEach extends BaseValidator
     }
 
     /**
+     * Return the key name of the current validating data
+     *
+     * @return int|string
+     */
+    public function getCurKey()
+    {
+        return $this->curKey;
+    }
+
+    /**
      * Returns validator options from V object or callback
      *
+     * @param mixed $data
      * @return array[]
      */
-    protected function getValidatorOptions()
+    protected function getValidatorOptions($data)
     {
         if ($this->v instanceof V) {
+            $this->v->setData($data);
             return $this->v->getOptions();
         }
 
-        $v = V::new();
-        call_user_func($this->v, $v);
+        $v = V::new()->setData($data);
+        call_user_func($this->v, $v, $this);
         return $v->getOptions();
     }
 

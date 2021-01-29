@@ -2,6 +2,7 @@
 
 namespace WeiTest;
 
+use Wei\IsEach;
 use Wei\V;
 
 /**
@@ -183,7 +184,24 @@ final class IsEachTest extends BaseValidatorTestCase
         $this->assertRetErr($ret, 'The 2nd 用户\'s 姓名 must have a length greater than 3');
     }
 
-    public function testCreateNewInstanceEveryTime()
+    public function testNotArray()
+    {
+        $ret = V
+            ::key('users', '用户')->each(
+                V
+                    ::string('name', '姓名')->minLength(3)
+                    ->string('email', '邮箱')->email()
+            )->check(['users' => null]);
+        $this->assertRetErr($ret, '用户 must be an array');
+    }
+
+    public function testCallWithoutValidator()
+    {
+        $this->expectExceptionObject(new \LogicException('The "each" validator should not call directly, please use with \Wei\V'));
+        $this->isEach('test');
+    }
+
+    public function testCallbackCreateNewValidator()
     {
         $validators = [];
         $ret = V
@@ -208,20 +226,52 @@ final class IsEachTest extends BaseValidatorTestCase
         $this->assertNotSame($validators[0], $validators[1]);
     }
 
-    public function testNotArray()
+    public function testCallbackGetData()
     {
+        $data = [
+            [
+                'name' => 'test',
+                'email' => 'test@example.com',
+            ],
+            [
+
+            ],
+        ];
+
+        $validateData = [];
         $ret = V
-            ::key('users', '用户')->each(
-                V
-                    ::string('name', '姓名')->minLength(3)
-                    ->string('email', '邮箱')->email()
-            )->check(['users' => null]);
-        $this->assertRetErr($ret, '用户 must be an array');
+            ::key('users', '用户')->each(function (V $v) use (&$validateData) {
+                $validateData[] = $v->getData();
+                $v->string('name', '姓名')->minLength(3)
+                    ->string('email', '邮箱')->email();
+            })
+            ->check(['users' => $data]);
+        $this->assertRetErr($ret, 'The 2nd 用户\'s 姓名 is required');
+        $this->assertSame($validateData, $data);
     }
 
-    public function testCallWithoutValidator()
+    public function testCallbackKeys()
     {
-        $this->expectExceptionObject(new \LogicException('The "each" validator should not call directly, please use with \Wei\V'));
-        $this->isEach('test');
+        $keys = [];
+        $ret = V
+            ::key('users', '用户')->each(function (V $v, IsEach $isEach) use (&$keys) {
+                $keys[] = $isEach->getCurKey();
+                $v->string('name', '姓名')->minLength(3)
+                    ->string('email', '邮箱')->email();
+            })
+            ->check([
+                'users' => [
+                    [
+                        'name' => 'test',
+                        'email' => 'test@example.com',
+                    ],
+                    [
+                        'name' => 't',
+                        'email' => 't',
+                    ],
+                ],
+            ]);
+        $this->assertRetErr($ret, 'The 2nd 用户\'s 姓名 must have a length greater than 3');
+        $this->assertSame($keys, [0, 1]);
     }
 }

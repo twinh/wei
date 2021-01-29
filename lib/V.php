@@ -132,7 +132,14 @@ class V extends Base
      */
     public function validate($data = null)
     {
-        return $this->getValidator($data);
+        if (func_get_args()) {
+            // Validate without key
+            if ('' === $this->lastKey) {
+                $data = ['' => $data];
+            }
+            $this->setData($data);
+        }
+        return $this->getValidator();
     }
 
     /**
@@ -143,7 +150,7 @@ class V extends Base
      */
     public function isValid($data = null)
     {
-        return $this->getValidator($data)->isValid();
+        return $this->validate(...func_get_args())->isValid();
     }
 
     /**
@@ -154,8 +161,7 @@ class V extends Base
      */
     public function check($data = null)
     {
-        $validator = $this->getValidator($data);
-
+        $validator = $this->validate(...func_get_args());
         if ($validator->isValid()) {
             return $this->suc(['data' => $validator->getValidData()]);
         } else {
@@ -229,7 +235,6 @@ class V extends Base
         return $this;
     }
 
-
     /**
      * Returns the validate options
      *
@@ -238,6 +243,28 @@ class V extends Base
     public function getOptions()
     {
         return $this->options;
+    }
+
+    /**
+     * Set the data to be validated
+     *
+     * @param mixed $data
+     * @return $this
+     */
+    public function setData($data): self
+    {
+        $this->options['data'] = $data;
+        return $this;
+    }
+
+    /**
+     * Return the data to be validated
+     *
+     * @return mixed
+     */
+    public function getData()
+    {
+        return $this->options['data'] ?? null;
     }
 
     /**
@@ -289,24 +316,13 @@ class V extends Base
     /**
      * Instance validate object
      *
-     * @param mixed $data
      * @return Validate
      */
-    protected function getValidator($data = null)
+    protected function getValidator()
     {
         if (!$this->validator) {
-            if ($data) {
-                // Validate without key
-                if ('' === $this->lastKey) {
-                    $data = ['' => $data];
-                }
-
-                $this->options['data'] = $data;
-            }
-
             $this->validator = $this->wei->validate($this->options);
         }
-
         return $this->validator;
     }
 

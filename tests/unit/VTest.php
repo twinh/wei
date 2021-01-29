@@ -108,12 +108,31 @@ final class VTest extends TestCase
         $this->assertFalse($validator->isValid());
     }
 
+    public function testSetDataValidate()
+    {
+        $validator = V::key('email')
+            ->setData(['email' => 'test@test.com'])
+            ->validate();
+
+        $this->assertInstanceOf(Validate::class, $validator);
+        $this->assertTrue($validator->isValid());
+    }
+
     public function testIsValid()
     {
         $result = V::key('mobile')->mobileCn()
             ->isValid(['mobile' => '123']);
 
         $this->assertFalse($result);
+    }
+
+    public function testSetDataIsValid()
+    {
+        $result = V::key('email')
+            ->setData(['email' => 'test@test.com'])
+            ->isValid();
+
+        $this->assertTrue($result);
     }
 
     public function testWithoutKeyRetErr()
@@ -483,10 +502,10 @@ final class VTest extends TestCase
     public function testGetValidDataWithEach()
     {
         $ret = V
-            ::key('products')->each(
+            ::key('products', 'Products')->each(
                 V
-                    ::key('name')->maxLength(5)
-                    ->key('stock')->greaterThanOrEqual(0)
+                    ::key('name', 'Name')->maxLength(5)
+                    ->key('stock', 'Stock')->greaterThanOrEqual(0)
             )
             ->check([
                 'notChecked' => true,
@@ -502,6 +521,8 @@ final class VTest extends TestCase
                     ],
                 ],
             ]);
+        $this->assertRetSuc($ret);
+
         $this->assertSame([
             'products' => [
                 [
@@ -615,6 +636,14 @@ final class VTest extends TestCase
             ->check(wei()->req);
 
         $this->assertNotSame("Content's length could not be detected", $ret['message']);
+        $this->assertRetSuc($ret);
+    }
+
+    public function testSetData()
+    {
+        $ret = V::key('email')
+            ->setData(['email' => 'test@test.com'])
+            ->check();
         $this->assertRetSuc($ret);
     }
 
