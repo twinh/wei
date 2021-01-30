@@ -1087,6 +1087,26 @@ final class ReqTest extends TestCase
         $this->assertEquals('b', $request->get('a'));
     }
 
+    public function testClear()
+    {
+        $request = new \Wei\Req([
+            'wei' => $this->wei,
+            'fromGlobal' => false,
+            'data' => [],
+        ]);
+
+        // Cause request to record extra key "foo"
+        $foo = $request['foo'];
+        $this->assertNull($foo);
+
+        // Remove extra key "foo"
+        $request->clear();
+
+        // Wont cause error : Undefined array key "foo"
+        $data = $request->getData();
+        $this->assertSame([], $data);
+    }
+
     protected function initExtraKey()
     {
         // 移除数据避免干扰

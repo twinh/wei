@@ -297,6 +297,7 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function clear()
     {
         $this->data = [];
+        $this->extraKeys = [];
         return $this;
     }
 
