@@ -10,6 +10,15 @@ use Wei\Url;
  */
 final class UrlTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        // Reset url to root path
+        $this->req->setBaseUrl('/');
+        $this->req->setOption('defaultUrlRewrite', true);
+    }
+
     /**
      * @dataProvider providerForTo
      * @param mixed $result
@@ -18,9 +27,6 @@ final class UrlTest extends TestCase
      */
     public function testTo($result, $url, $params = [])
     {
-        // Reset url to root path
-        $this->req->setBaseUrl('/');
-
         $this->assertEquals($result, $this->url->to($url, $params));
     }
 
@@ -60,9 +66,6 @@ final class UrlTest extends TestCase
 
     public function testFormat()
     {
-        // Reset url to root path
-        $this->req->setBaseUrl('/');
-
         $this->assertEquals('/articles/1', $this->url('articles/%s', 1));
 
         $this->assertEquals('/articles/1/comments/2', $this->url('articles/%s/comments/%s', [1, 2]));
@@ -85,8 +88,6 @@ final class UrlTest extends TestCase
 
     public function testQueryUrl()
     {
-        $this->req->setBaseUrl('/');
-
         $gets = &$this->req->getQueries();
         $gets = ['a' => 'b'];
 
@@ -101,8 +102,6 @@ final class UrlTest extends TestCase
 
     public function testInvoke()
     {
-        $this->req->setBaseUrl('/');
-
         $this->assertSame('/test', $this->url('test'));
     }
 
