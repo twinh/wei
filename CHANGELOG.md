@@ -1,3 +1,10 @@
+## [0.10.2](https://github.com/twinh/wei/compare/v0.10.1...v0.10.2) (2021-03-05)
+
+
+### Bug Fixes
+
+* PHP 7.4 Trying to access array offset on value of type float|null|bool 错误 ([3301cbe](https://github.com/twinh/wei/commit/3301cbe7e9ee15d553e10e644b00a59341ccd2aa))
+
 ## [0.10.1](https://github.com/twinh/wei/compare/v0.10.0...v0.10.1) (2021-03-05)
 
 
