@@ -57,25 +57,25 @@ final class UploadTest extends TestCase
     {
         return [
             [
-                UPLOAD_ERR_INI_SIZE, 'maxSize',
+                \UPLOAD_ERR_INI_SIZE, 'maxSize',
             ],
             [
-                UPLOAD_ERR_FORM_SIZE, 'formLimit',
+                \UPLOAD_ERR_FORM_SIZE, 'formLimit',
             ],
             [
-                UPLOAD_ERR_PARTIAL, 'partial',
+                \UPLOAD_ERR_PARTIAL, 'partial',
             ],
             [
-                UPLOAD_ERR_NO_FILE, 'noFile',
+                \UPLOAD_ERR_NO_FILE, 'noFile',
             ],
             [
-                UPLOAD_ERR_NO_TMP_DIR, 'noTmpDir',
+                \UPLOAD_ERR_NO_TMP_DIR, 'noTmpDir',
             ],
             [
-                UPLOAD_ERR_CANT_WRITE, 'cantWrite',
+                \UPLOAD_ERR_CANT_WRITE, 'cantWrite',
             ],
             [
-                UPLOAD_ERR_EXTENSION, 'extension',
+                \UPLOAD_ERR_EXTENSION, 'extension',
             ],
             [
                 'noThisError', 'noFile',
@@ -91,14 +91,14 @@ final class UploadTest extends TestCase
                 'type' => 'image/gif',
                 'tmp_name' => '',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK,
+                'error' => \UPLOAD_ERR_OK,
             ],
             'picture2' => [
                 'name' => 'test.gif',
                 'type' => 'image/gif',
                 'tmp_name' => '',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK,
+                'error' => \UPLOAD_ERR_OK,
             ],
         ]);
 
@@ -126,7 +126,7 @@ final class UploadTest extends TestCase
                 'type' => 'image/gif',
                 'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK,
+                'error' => \UPLOAD_ERR_OK,
             ],
         ]);
 
@@ -145,7 +145,7 @@ final class UploadTest extends TestCase
                 'type' => 'image/gif',
                 'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK,
+                'error' => \UPLOAD_ERR_OK,
             ],
         ]);
 
@@ -176,7 +176,7 @@ final class UploadTest extends TestCase
                 'type' => 'image/gif',
                 'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK,
+                'error' => \UPLOAD_ERR_OK,
             ],
         ]);
 
@@ -195,7 +195,7 @@ final class UploadTest extends TestCase
                 'type' => 'image/gif',
                 'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK,
+                'error' => \UPLOAD_ERR_OK,
             ],
         ]);
 
@@ -217,7 +217,7 @@ final class UploadTest extends TestCase
                 'type' => 'image/gif',
                 'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK,
+                'error' => \UPLOAD_ERR_OK,
             ],
         ]);
 
@@ -253,7 +253,7 @@ final class UploadTest extends TestCase
                 'type' => 'image/gif',
                 'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK,
+                'error' => \UPLOAD_ERR_OK,
             ],
         ]);
 
@@ -276,7 +276,7 @@ final class UploadTest extends TestCase
                 'type' => 'image/gif',
                 'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK,
+                'error' => \UPLOAD_ERR_OK,
             ],
         ]);
 
@@ -311,7 +311,7 @@ final class UploadTest extends TestCase
                 'type' => 'image/gif',
                 'tmp_name' => __DIR__ . '/Fixtures/5x5',
                 'size' => 20,
-                'error' => UPLOAD_ERR_OK,
+                'error' => \UPLOAD_ERR_OK,
             ],
         ]);
 

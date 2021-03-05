@@ -57,7 +57,7 @@ class SafeUrl extends Base
     public function generate($url)
     {
         $time = time();
-        $query = parse_url($url, PHP_URL_QUERY);
+        $query = parse_url($url, \PHP_URL_QUERY);
         parse_str($query, $query);
 
         $query = $this->filterKeys($query, $this->params);

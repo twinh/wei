@@ -24,7 +24,7 @@ class IsEmail extends BaseValidator
      */
     protected function doValidate($input)
     {
-        if (!filter_var($input, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($input, \FILTER_VALIDATE_EMAIL)) {
             $this->addError('format');
             return false;
         }

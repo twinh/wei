@@ -187,7 +187,7 @@ class WeChatApp extends Base
 
         // Output 'echostr' for first time authentication
         if (isset($this->query['echostr'])) {
-            return htmlspecialchars($this->query['echostr'], ENT_QUOTES, 'UTF-8');
+            return htmlspecialchars($this->query['echostr'], \ENT_QUOTES, 'UTF-8');
         }
 
         $msg = $this->handleMsg();
@@ -827,7 +827,7 @@ class WeChatApp extends Base
         $text = $random . pack('N', strlen($text)) . $text . $appId;
         $iv = substr($key, 0, 16);
         $text = $this->pkcs7Encode($text);
-        return openssl_encrypt($text, 'AES-256-CBC', substr($key, 0, 32), OPENSSL_ZERO_PADDING, $iv);
+        return openssl_encrypt($text, 'AES-256-CBC', substr($key, 0, 32), \OPENSSL_ZERO_PADDING, $iv);
     }
 
     /**
@@ -1041,7 +1041,7 @@ class WeChatApp extends Base
     {
         // Do not output libxml error messages to screen
         $useErrors = libxml_use_internal_errors(true);
-        $array = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+        $array = simplexml_load_string($xml, 'SimpleXMLElement', \LIBXML_NOCDATA);
         libxml_use_internal_errors($useErrors);
 
         // Fix the issue that XML parse empty data to new SimpleXMLElement object
@@ -1061,7 +1061,7 @@ class WeChatApp extends Base
         try {
             $key = base64_decode($encodingAesKey . '=', false);
             $iv = substr($key, 0, 16);
-            $decrypted = openssl_decrypt($encrypted, 'AES-256-CBC', substr($key, 0, 32), OPENSSL_ZERO_PADDING, $iv);
+            $decrypted = openssl_decrypt($encrypted, 'AES-256-CBC', substr($key, 0, 32), \OPENSSL_ZERO_PADDING, $iv);
         } catch (\Exception $e) {
             return ['code' => -2002, 'message' => 'AES解密失败', 'e' => (string) $e];
         }
@@ -1134,7 +1134,7 @@ class WeChatApp extends Base
      */
     protected function sign(...$arr)
     {
-        sort($arr, SORT_STRING);
+        sort($arr, \SORT_STRING);
         $str = implode('', $arr);
         return sha1($str);
     }

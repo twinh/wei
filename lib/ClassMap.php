@@ -144,7 +144,7 @@ class ClassMap extends Base
         $dirs = implode(',', $dirs);
         $pattern = '{' . $dirs . '}' . $pattern;
 
-        return glob($pattern, GLOB_BRACE | GLOB_NOSORT);
+        return glob($pattern, \GLOB_BRACE | \GLOB_NOSORT);
     }
 
     /**

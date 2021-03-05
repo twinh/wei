@@ -335,7 +335,7 @@ namespace Wei {
             }
 
             // Build the error message
-            $traces = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 5);
+            $traces = debug_backtrace(\DEBUG_BACKTRACE_PROVIDE_OBJECT, 5);
 
             // Example: $wei->notFound(), call_user_func([$wei, 'notFound'])
             if (isset($traces[3]) && '__call' === $traces[3]['function'] && $name === $traces[3]['args'][0]) {

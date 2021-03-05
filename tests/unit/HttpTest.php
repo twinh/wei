@@ -915,7 +915,7 @@ final class HttpTest extends TestCase
     public function testGetCurlInfoWithOption()
     {
         $http = $this->http($this->url);
-        $this->assertEquals(200, $http->getCurlInfo(CURLINFO_HTTP_CODE));
+        $this->assertEquals(200, $http->getCurlInfo(\CURLINFO_HTTP_CODE));
     }
 
     public function testGetCurlOption()
@@ -923,7 +923,7 @@ final class HttpTest extends TestCase
         $http = $this->http($this->url, [
             'header' => true,
         ]);
-        $this->assertTrue($http->getCurlOption(CURLOPT_HEADER));
+        $this->assertTrue($http->getCurlOption(\CURLOPT_HEADER));
     }
 
     public function testParseJsonError()
@@ -939,8 +939,8 @@ final class HttpTest extends TestCase
 
     public function testSetCurlOption()
     {
-        $this->http->setCurlOption(CURLOPT_HEADER, 1);
-        $this->assertEquals(1, $this->http->getCurlOption(CURLOPT_HEADER));
+        $this->http->setCurlOption(\CURLOPT_HEADER, 1);
+        $this->assertEquals(1, $this->http->getCurlOption(\CURLOPT_HEADER));
     }
 
     public function assertTriggeredEvents($events)

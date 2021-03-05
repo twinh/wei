@@ -23,7 +23,7 @@ class Password extends Base
      *
      * @var string
      */
-    protected $algo = PASSWORD_DEFAULT;
+    protected $algo = \PASSWORD_DEFAULT;
 
     /**
      * The options array passed to password_hash

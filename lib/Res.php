@@ -580,7 +580,7 @@ class Res extends Base
         $this->setOption($options);
 
         // The variables for custom redirect view
-        $escapedUrl = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
+        $escapedUrl = htmlspecialchars($url, \ENT_QUOTES, 'UTF-8');
         $wait = (int) $this->redirectWait;
 
         // Location header does not support delay
@@ -620,7 +620,7 @@ class Res extends Base
     public function json($data, $jsonp = false)
     {
         $options = 0;
-        defined('JSON_UNESCAPED_UNICODE') && $options = JSON_UNESCAPED_UNICODE;
+        defined('JSON_UNESCAPED_UNICODE') && $options = \JSON_UNESCAPED_UNICODE;
         $content = json_encode($data, $options);
 
         if ($jsonp && 1 === preg_match('/^[$A-Z_][0-9A-Z_$.]*$/i', $this->request['callback'])) {

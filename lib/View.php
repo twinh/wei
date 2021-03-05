@@ -102,7 +102,7 @@ class View extends Base implements \ArrayAccess
         $__layout = $this->layout;
 
         // Render view
-        extract($__data, EXTR_OVERWRITE);
+        extract($__data, \EXTR_OVERWRITE);
         ob_start();
         try {
             require $__file;

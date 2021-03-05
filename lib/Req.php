@@ -565,7 +565,7 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             : $this->getServer('HTTP_CLIENT_IP')
         ) ?: $this->getServer('REMOTE_ADDR');
 
-        return filter_var($ip, FILTER_VALIDATE_IP) ? $ip : $default;
+        return filter_var($ip, \FILTER_VALIDATE_IP) ? $ip : $default;
     }
 
     /**

@@ -126,7 +126,7 @@ class Share extends Base
             'image' => $this->image,
             'description' => $this->description,
             'url' => $this->url,
-        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        ], \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -142,6 +142,6 @@ class Share extends Base
             'desc' => $this->description,
             'link' => $this->url,
             'imgUrl' => $this->image,
-        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        ], \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE);
     }
 }

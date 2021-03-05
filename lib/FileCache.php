@@ -86,7 +86,7 @@ class FileCache extends BaseCache
     {
         $file = $this->getFile($key);
         $content = $this->prepareContent($value, $expire);
-        return (bool) file_put_contents($file, $content, LOCK_EX);
+        return (bool) file_put_contents($file, $content, \LOCK_EX);
     }
 
     /**
@@ -129,14 +129,14 @@ class FileCache extends BaseCache
 
         if (!is_file($file)) {
             // Open and try to lock file immediately
-            if (!$handle = $this->openAndLock($file, 'wb', LOCK_EX | LOCK_NB)) {
+            if (!$handle = $this->openAndLock($file, 'wb', \LOCK_EX | \LOCK_NB)) {
                 return false;
             }
 
             $rewrite = false;
         } else {
             // Open file for reading and rewriting
-            if (!$handle = $this->openAndLock($file, 'r+b', LOCK_EX)) {
+            if (!$handle = $this->openAndLock($file, 'r+b', \LOCK_EX)) {
                 return false;
             }
 
@@ -163,7 +163,7 @@ class FileCache extends BaseCache
         }
 
         // Open file for reading and rewriting
-        if (!$handle = $this->openAndLock($file, 'r+b', LOCK_EX)) {
+        if (!$handle = $this->openAndLock($file, 'r+b', \LOCK_EX)) {
             return false;
         }
 
@@ -188,7 +188,7 @@ class FileCache extends BaseCache
         }
 
         // Open file for reading and rewriting
-        if (!$handle = $this->openAndLock($file, 'r+b', LOCK_EX)) {
+        if (!$handle = $this->openAndLock($file, 'r+b', \LOCK_EX)) {
             return false;
         }
 
@@ -339,7 +339,7 @@ class FileCache extends BaseCache
     {
         $rewrite && rewind($handle) && ftruncate($handle, 0);
         $result = fwrite($handle, $content);
-        flock($handle, LOCK_UN);
+        flock($handle, \LOCK_UN);
         fclose($handle);
         return (bool) $result;
     }

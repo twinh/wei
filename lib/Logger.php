@@ -295,7 +295,7 @@ class Logger extends Base
         if ($this->fileSize) {
             $firstFile = $file;
 
-            $files = glob($file . '*', GLOB_NOSORT);
+            $files = glob($file . '*', \GLOB_NOSORT);
 
             if (1 < count($files)) {
                 natsort($files);
@@ -303,7 +303,7 @@ class Logger extends Base
             }
 
             if (is_file($file) && $this->fileSize < filesize($file)) {
-                $ext = pathinfo($file, PATHINFO_EXTENSION);
+                $ext = pathinfo($file, \PATHINFO_EXTENSION);
                 if (is_numeric($ext)) {
                     $file = $firstFile . '.' . ($ext + 1);
                 } else {
@@ -473,7 +473,7 @@ class Logger extends Base
         return str_replace(
             ['\r', '\n'],
             ["\r", "\n"],
-            json_encode($context, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
+            json_encode($context, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE)
         ) . "\n";
     }
 

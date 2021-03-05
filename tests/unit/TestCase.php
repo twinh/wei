@@ -256,6 +256,6 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         $ret,
         $assertMessage = null
     ) {
-        return $assertMessage . ' ret is ' . json_encode($ret, JSON_UNESCAPED_UNICODE);
+        return $assertMessage . ' ret is ' . json_encode($ret, \JSON_UNESCAPED_UNICODE);
     }
 }

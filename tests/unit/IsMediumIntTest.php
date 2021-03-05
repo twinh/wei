@@ -40,8 +40,8 @@ final class IsMediumIntTest extends BaseValidatorTestCase
     {
         return [
             ['1.0'],
-            [pow(-2, 23) - 1],
-            [pow(2, 23)],
+            [(-2) ** 23 - 1],
+            [2 ** 23],
         ];
     }
 }

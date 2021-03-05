@@ -37,7 +37,7 @@ final class IsMaxAccuracyTest extends BaseValidatorTestCase
             ['-1', 0],
             [(0.1 + 0.7) * 10, 0],
             [1.1E-10, 11],
-            [NAN, 0],
+            [\NAN, 0],
         ];
     }
 

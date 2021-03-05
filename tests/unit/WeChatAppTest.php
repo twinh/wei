@@ -183,7 +183,7 @@ final class WeChatAppTest extends TestCase
             $this->assertEquals($value, $app->{'get' . $name}());
         }
 
-        $output = simplexml_load_string($content, 'SimpleXMLElement', LIBXML_NOCDATA);
+        $output = simplexml_load_string($content, 'SimpleXMLElement', \LIBXML_NOCDATA);
 
         // phpcs:disable Squiz.NamingConventions.ValidVariableName.NotCamelCaps
         $this->assertEquals($app->getToUserName(), (string) $output->FromUserName);
@@ -1046,7 +1046,7 @@ MSG
     {
         // Do not output libxml error messages to screen
         $useErrors = libxml_use_internal_errors(true);
-        $array = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+        $array = simplexml_load_string($xml, 'SimpleXMLElement', \LIBXML_NOCDATA);
         libxml_use_internal_errors($useErrors);
 
         // Fix the issue that XML parse empty data to new SimpleXMLElement object

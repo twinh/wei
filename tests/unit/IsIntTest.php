@@ -34,7 +34,7 @@ final class IsIntTest extends BaseValidatorTestCase
         return [
             [1],
             [-1],
-            [PHP_INT_MAX],
+            [\PHP_INT_MAX],
             ['-1'],
             ['123'],
             ['0'],

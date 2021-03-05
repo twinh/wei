@@ -185,8 +185,8 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @var array
      */
     protected $defaultCurlOptions = [
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_FOLLOWLOCATION => true,
+        \CURLOPT_RETURNTRANSFER => true,
+        \CURLOPT_FOLLOWLOCATION => true,
     ];
 
     /**
@@ -751,7 +751,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 
         // CURLOPT_RESOLVE
         if ($this->ip) {
-            $host = parse_url($url, PHP_URL_HOST);
+            $host = parse_url($url, \PHP_URL_HOST);
             $url = substr_replace($url, $this->ip, strpos($url, $host), strlen($host));
             $this->headers['Host'] = $host;
         }
@@ -763,25 +763,25 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 
             case 'POST':
                 $postData = true;
-                $opts[CURLOPT_POST] = 1;
+                $opts[\CURLOPT_POST] = 1;
                 break;
 
             case 'DELETE':
             case 'PUT':
             case 'PATCH':
                 $postData = true;
-                $opts[CURLOPT_CUSTOMREQUEST] = $this->method;
+                $opts[\CURLOPT_CUSTOMREQUEST] = $this->method;
                 break;
 
             default:
                 $postData = false;
-                $opts[CURLOPT_CUSTOMREQUEST] = $this->method;
+                $opts[\CURLOPT_CUSTOMREQUEST] = $this->method;
         }
 
         if ($this->data) {
             $data = is_string($this->data) ? $this->data : http_build_query($this->data);
             if ($postData) {
-                $opts[CURLOPT_POSTFIELDS] = $data;
+                $opts[\CURLOPT_POSTFIELDS] = $data;
             } else {
                 if (false === strpos($url, '?')) {
                     $url .= '?' . $data;
@@ -792,25 +792,25 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         }
 
         if ($this->files) {
-            $postFields = isset($opts[CURLOPT_POSTFIELDS]) ? $opts[CURLOPT_POSTFIELDS] : '';
-            $opts[CURLOPT_POSTFIELDS] = $this->addFileField($postFields, $this->files);
+            $postFields = isset($opts[\CURLOPT_POSTFIELDS]) ? $opts[\CURLOPT_POSTFIELDS] : '';
+            $opts[\CURLOPT_POSTFIELDS] = $this->addFileField($postFields, $this->files);
         }
 
         if ($this->timeout > 0) {
-            $opts[CURLOPT_TIMEOUT_MS] = $this->timeout;
+            $opts[\CURLOPT_TIMEOUT_MS] = $this->timeout;
         }
 
         if ($this->referer) {
             // Automatic use current request URL as referer URL
             if (true === $this->referer) {
-                $opts[CURLOPT_REFERER] = $this->url;
+                $opts[\CURLOPT_REFERER] = $this->url;
             } else {
-                $opts[CURLOPT_REFERER] = $this->referer;
+                $opts[\CURLOPT_REFERER] = $this->referer;
             }
         }
 
         if ($this->userAgent) {
-            $opts[CURLOPT_USERAGENT] = $this->userAgent;
+            $opts[\CURLOPT_USERAGENT] = $this->userAgent;
         }
 
         if ($this->cookies) {
@@ -818,7 +818,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             foreach ($this->cookies as $key => $value) {
                 $cookies[] = $key . '=' . rawurlencode($value);
             }
-            $opts[CURLOPT_COOKIE] = implode('; ', $cookies);
+            $opts[\CURLOPT_COOKIE] = implode('; ', $cookies);
         }
 
         if ($this->contentType) {
@@ -831,11 +831,11 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             foreach ($this->headers as $key => $value) {
                 $headers[] = $key . ': ' . $value;
             }
-            $opts[CURLOPT_HTTPHEADER] = $headers;
+            $opts[\CURLOPT_HTTPHEADER] = $headers;
         }
 
-        $opts[CURLOPT_HEADER] = $this->header;
-        $opts[CURLOPT_URL] = $url;
+        $opts[\CURLOPT_HEADER] = $this->header;
+        $opts[\CURLOPT_URL] = $url;
 
         $this->curlOptions += $opts + $this->defaultCurlOptions;
         return $this->curlOptions;
@@ -875,7 +875,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             $curlInfo = curl_getinfo($handle);
 
             // Parse response header
-            if ($this->getCurlOption(CURLOPT_HEADER)) {
+            if ($this->getCurlOption(\CURLOPT_HEADER)) {
                 // Fixes header size error when use CURLOPT_PROXY and CURLOPT_HTTPPROXYTUNNEL is true
                 // http://sourceforge.net/p/curl/bugs/1204/
                 if (false !== stripos($response, "HTTP/1.1 200 Connection established\r\n\r\n")) {
@@ -942,7 +942,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             case 'json':
             case 'jsonObject':
                 $result = json_decode($data, 'json' === $this->dataType);
-                if (null === $result && JSON_ERROR_NONE != json_last_error()) {
+                if (null === $result && \JSON_ERROR_NONE != json_last_error()) {
                     $exception = new \ErrorException('JSON parsing error, the data is ' . $data, json_last_error());
                 }
                 break;

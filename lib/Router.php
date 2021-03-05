@@ -243,7 +243,7 @@ class Router extends Base
 
         // Split out format
         if (false !== strpos($path, '.')) {
-            $params['_format'] = pathinfo($path, PATHINFO_EXTENSION);
+            $params['_format'] = pathinfo($path, \PATHINFO_EXTENSION);
             $path = substr($path, 0, -strlen($params['_format']) - 1);
         }
 

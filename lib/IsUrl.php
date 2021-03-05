@@ -54,13 +54,13 @@ class IsUrl extends BaseValidator
     {
         $flag = 0;
         if ($this->path) {
-            $flag = $flag | FILTER_FLAG_PATH_REQUIRED;
+            $flag = $flag | \FILTER_FLAG_PATH_REQUIRED;
         }
         if ($this->query) {
-            $flag = $flag | FILTER_FLAG_QUERY_REQUIRED;
+            $flag = $flag | \FILTER_FLAG_QUERY_REQUIRED;
         }
 
-        if (!filter_var($input, FILTER_VALIDATE_URL, $flag)) {
+        if (!filter_var($input, \FILTER_VALIDATE_URL, $flag)) {
             $this->addError('invalid');
             return false;
         }

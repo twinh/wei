@@ -28,7 +28,7 @@ class IsBoolable extends BaseValidator
             return true;
         }
 
-        if (null === filter_var($input, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE)) {
+        if (null === filter_var($input, \FILTER_VALIDATE_BOOLEAN, \FILTER_NULL_ON_FAILURE)) {
             $this->addError('notBool');
             return false;
         }

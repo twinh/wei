@@ -264,7 +264,7 @@ class Env extends Base
     protected function getServerIps()
     {
         // TODO check command result: command not found, Permission denied
-        preg_match_all('/eth(?:.+?)inet addr: ?([^ ]+)/s', `/sbin/ifconfig`, $ips);
+        preg_match_all('/eth(?:.+?)inet addr: ?([^ ]+)/s', shell_exec('/sbin/ifconfig'), $ips);
         return $ips[1];
     }
 }

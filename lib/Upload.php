@@ -171,43 +171,43 @@ MSG;
         /**
          * @link http://php.net/manual/en/features.file-upload.errors.php
          */
-        if (UPLOAD_ERR_OK !== $uploadedFile['error']) {
+        if (\UPLOAD_ERR_OK !== $uploadedFile['error']) {
             switch ($uploadedFile['error']) {
                 // The uploaded file exceeds the upload_max_filesize directive in php.ini
-                case UPLOAD_ERR_INI_SIZE:
+                case \UPLOAD_ERR_INI_SIZE:
                     $this->sizeString = $this->fromBytes($uploadedFile['size']);
                     $this->maxSizeString = $this->getIniSize('upload_max_filesize');
                     $this->addError('maxSize');
                     break;
 
                 // The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form
-                case UPLOAD_ERR_FORM_SIZE:
+                case \UPLOAD_ERR_FORM_SIZE:
                     $this->addError('formLimit');
                     break;
 
                 // The uploaded file was only partially uploaded
                 // http://stackoverflow.com/questions/2937466/why-might-a-file-only-be-partially-uploaded
-                case UPLOAD_ERR_PARTIAL:
+                case \UPLOAD_ERR_PARTIAL:
                     $this->addError('partial');
                     break;
 
                 // Missing a temporary folder
-                case UPLOAD_ERR_NO_TMP_DIR:
+                case \UPLOAD_ERR_NO_TMP_DIR:
                     $this->addError('noTmpDir');
                     break;
 
                 // Failed to write file to disk
-                case UPLOAD_ERR_CANT_WRITE:
+                case \UPLOAD_ERR_CANT_WRITE:
                     $this->addError('cantWrite');
                     break;
 
                 // A PHP extension stopped the file upload
-                case UPLOAD_ERR_EXTENSION:
+                case \UPLOAD_ERR_EXTENSION:
                     $this->addError('extension');
                     break;
 
                 // No file was uploaded
-                case UPLOAD_ERR_NO_FILE:
+                case \UPLOAD_ERR_NO_FILE:
                 default:
                     $this->addError('noFile');
             }

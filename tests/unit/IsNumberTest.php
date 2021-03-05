@@ -53,8 +53,8 @@ final class IsNumberTest extends BaseValidatorTestCase
             ['-1', null, 0],
             [(0.1 + 0.7) * 10, null, 0],
             [1.1E-10, null, 11],
-            [INF, null, 0],
-            [-INF, null, 0],
+            [\INF, null, 0],
+            [-\INF, null, 0],
             [1, 1],
             [10, 2],
             [100, 3],
@@ -85,11 +85,11 @@ final class IsNumberTest extends BaseValidatorTestCase
             [10.1, 2, 1],
             [100.1, 3, 1],
             [1000.1, 4, 1],
-            [NAN],
-            [INF, 1, null],
-            [-INF, 1, null],
-            [INF, 100, null],
-            [-INF, 100, null],
+            [\NAN],
+            [\INF, 1, null],
+            [-\INF, 1, null],
+            [\INF, 100, null],
+            [-\INF, 100, null],
         ];
     }
 

@@ -245,7 +245,7 @@ class Error extends Base
         $file = $e->getFile();
         $line = $e->getLine();
 
-        $title = htmlspecialchars($this->getDisplayMessage($e, $debug), ENT_QUOTES);
+        $title = htmlspecialchars($this->getDisplayMessage($e, $debug), \ENT_QUOTES);
         $message = nl2br($title);
 
         if (!$debug) {
@@ -259,7 +259,7 @@ class Error extends Base
             $detail = sprintf('Threw by %s in %s on line %s', get_class($e), $file, $line);
 
             $fileInfo = $this->getFileCode($file, $line);
-            $trace = htmlspecialchars($e->getTraceAsString(), ENT_QUOTES);
+            $trace = htmlspecialchars($e->getTraceAsString(), \ENT_QUOTES);
             $detail = <<<DETAIL
 <h2>File</h2>
 <p class="text-danger">$file</p>
@@ -341,11 +341,11 @@ HTML;
         array_unshift($code, null);
         $content = '';
         for ($i = $start; $i < $end; ++$i) {
-            $temp = str_pad($i, $len, 0, STR_PAD_LEFT) . ':  ' . $code[$i];
+            $temp = str_pad($i, $len, 0, \STR_PAD_LEFT) . ':  ' . $code[$i];
             if ($line != $i) {
-                $content .= htmlspecialchars($temp, ENT_QUOTES);
+                $content .= htmlspecialchars($temp, \ENT_QUOTES);
             } else {
-                $content .= '<strong class="text-danger">' . htmlspecialchars($temp, ENT_QUOTES) . '</strong>';
+                $content .= '<strong class="text-danger">' . htmlspecialchars($temp, \ENT_QUOTES) . '</strong>';
             }
         }
 
@@ -379,7 +379,7 @@ HTML;
 
         register_shutdown_function(function () use ($cwd) {
             $e = error_get_last();
-            if (!$e || !in_array($e['type'], [E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_PARSE], true)) {
+            if (!$e || !in_array($e['type'], [\E_ERROR, \E_CORE_ERROR, \E_COMPILE_ERROR, \E_PARSE], true)) {
                 // No error or not fatal error
                 return;
             }
@@ -415,11 +415,11 @@ HTML;
      */
     protected function displayCliException(Throwable $e)
     {
-        echo 'Exception', PHP_EOL,
+        echo 'Exception', \PHP_EOL,
         $this->highlight($e->getMessage()),
-        'File', PHP_EOL,
+        'File', \PHP_EOL,
         $this->highlight($e->getFile() . ' on line ' . $e->getLine()),
-        'Trace', PHP_EOL,
+        'Trace', \PHP_EOL,
         $this->highlight($e->getTraceAsString());
 
         if ($this->autoExit) {
@@ -441,7 +441,7 @@ HTML;
                 'traces' => $e->getTrace(),
             ];
         }
-        echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        echo json_encode($data, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE);
     }
 
     protected function getDisplayMessage($e, $debug)
@@ -488,6 +488,6 @@ HTML;
      */
     protected function highlight($text)
     {
-        return sprintf("\033[1;31m%s\033[0m" . PHP_EOL . PHP_EOL, $text);
+        return sprintf("\033[1;31m%s\033[0m" . \PHP_EOL . \PHP_EOL, $text);
     }
 }

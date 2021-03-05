@@ -51,7 +51,7 @@ class E extends Base
      *
      * @var string
      */
-    protected $htmlSpecialCharsFlags = ENT_QUOTES;
+    protected $htmlSpecialCharsFlags = \ENT_QUOTES;
 
     /**
      * Static Matcher which escapes characters for HTML Attribute contexts
@@ -150,7 +150,7 @@ class E extends Base
         }
 
         if (defined('ENT_SUBSTITUTE')) {
-            $this->htmlSpecialCharsFlags |= ENT_SUBSTITUTE;
+            $this->htmlSpecialCharsFlags |= \ENT_SUBSTITUTE;
         }
 
         // set matcher callbacks

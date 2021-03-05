@@ -225,7 +225,7 @@ class IsFile extends BaseValidator
         }
 
         $exponent = array_search($unit, $this->units, true);
-        return (int) ($value * pow(1024, $exponent));
+        return (int) ($value * 1024 ** $exponent);
     }
 
     /**
@@ -275,7 +275,7 @@ class IsFile extends BaseValidator
     public function getMimeType()
     {
         if (!$this->mimeType) {
-            $finfo = finfo_open(FILEINFO_MIME_TYPE, $this->magicFile);
+            $finfo = finfo_open(\FILEINFO_MIME_TYPE, $this->magicFile);
             if (!$finfo) {
                 throw new \UnexpectedValueException('Failed to open fileinfo database');
             }
