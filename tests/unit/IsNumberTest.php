@@ -103,7 +103,7 @@ final class IsNumberTest extends BaseValidatorTestCase
     public function testScaleMessage()
     {
         $this->assertFalse($this->isNumber(0.11, 2, 1));
-        $this->assertSame('This value can have at most 1 decimals', $this->isNumber->getFirstMessage());
+        $this->assertSame('This value can have at most 1 decimal(s)', $this->isNumber->getFirstMessage());
     }
 
     public function testGreaterThanMessage()
