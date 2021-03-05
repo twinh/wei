@@ -16,7 +16,7 @@ namespace Wei;
 class IsString extends BaseValidator
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public const BASIC_TYPE = true;
 
@@ -31,7 +31,7 @@ class IsString extends BaseValidator
     protected $maxLength;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function __invoke($input, int $minLength = null, int $maxLength = null)
     {

@@ -9,7 +9,7 @@ use Wei\V;
  */
 final class IsChildrenTest extends BaseValidatorTestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -22,9 +22,9 @@ final class IsChildrenTest extends BaseValidatorTestCase
             ::key('configs')->children(
                 V
                     ::key('key1', '配置1')->minLength(3)
-                    ->key('key2', '配置2')->minLength(2)
+                        ->key('key2', '配置2')->minLength(2)
             )
-            ->check([
+                ->check([
                 'configs' => [
                     'key1' => '123',
                     'key2' => '22',
@@ -40,9 +40,9 @@ final class IsChildrenTest extends BaseValidatorTestCase
             ::key('configs')->children(
                 V
                     ::key('key1', '配置1')->minLength(3)
-                    ->key('key2', '配置2')->minLength(2)
+                        ->key('key2', '配置2')->minLength(2)
             )
-            ->check([
+                ->check([
                 'configs' => [
                     'key1' => '1',
                     'key2' => '2',
@@ -56,14 +56,14 @@ final class IsChildrenTest extends BaseValidatorTestCase
     {
         $ret = V
             ::key('configs')
-            ->children(
+                ->children(
                 V
                     ::key('key1', '配置1')->minLength(3)
-                    ->key('key2', '配置2')->children(
+                        ->key('key2', '配置2')->children(
                         V::key('key2.1', '配置2.1')->minLength(2)
                     )
             )
-            ->check([
+                ->check([
                 'configs' => [
                     'key1' => '123',
                     'key2' => [
@@ -81,7 +81,7 @@ final class IsChildrenTest extends BaseValidatorTestCase
             ::key('configs', '配置')->children(
                 V::key('key1', '配置1')->minLength(3)
             )
-            ->check([
+                ->check([
                 'configs' => 123,
             ]);
 

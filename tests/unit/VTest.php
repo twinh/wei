@@ -11,7 +11,7 @@ use Wei\Validate;
  */
 final class VTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -485,9 +485,9 @@ final class VTest extends TestCase
             ::key('configs')->children(
                 V
                     ::key('key1', 'name1')->minLength(3)
-                    ->key('key2', 'name2')->minLength(2)
+                        ->key('key2', 'name2')->minLength(2)
             )
-            ->check([
+                ->check([
                 'notChecked' => true,
                 'configs' => [
                     'notChecked' => true,
@@ -509,9 +509,9 @@ final class VTest extends TestCase
             ::key('products', 'Products')->each(
                 V
                     ::key('name', 'Name')->maxLength(5)
-                    ->key('stock', 'Stock')->greaterThanOrEqual(0)
+                        ->key('stock', 'Stock')->greaterThanOrEqual(0)
             )
-            ->check([
+                ->check([
                 'notChecked' => true,
                 'products' => [
                     [
@@ -549,9 +549,9 @@ final class VTest extends TestCase
             ::key('products')->each(
                 V
                     ::key('name')->maxLength(5)
-                    ->key('stock')->greaterThanOrEqual(0)
+                        ->key('stock')->greaterThanOrEqual(0)
             )
-            ->check([
+                ->check([
                 'notChecked' => true,
                 'products' => [
                     'key1' => [
@@ -587,9 +587,9 @@ final class VTest extends TestCase
             ::key('products')->each(
                 V
                     ::key('name')->maxLength(5)
-                    ->key('stock')->greaterThanOrEqual(0)
+                        ->key('stock')->greaterThanOrEqual(0)
             )->notEmpty()
-            ->check([
+                ->check([
                 'notChecked' => true,
                 'products' => [
                     [

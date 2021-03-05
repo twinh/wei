@@ -16,7 +16,7 @@ namespace Wei;
 class IsDecimal extends BaseValidator
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public const BASIC_TYPE = true;
 

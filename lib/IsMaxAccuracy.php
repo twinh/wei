@@ -70,7 +70,7 @@ class IsMaxAccuracy extends BaseValidator
                 break;
             }
             $number *= 10;
-            $precision++;
+            ++$precision;
         }
         return $precision;
     }

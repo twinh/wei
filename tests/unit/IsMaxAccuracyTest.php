@@ -10,6 +10,7 @@ final class IsMaxAccuracyTest extends BaseValidatorTestCase
     /**
      * @dataProvider providerForMaxAccuracy
      * @param mixed $input
+     * @param mixed $max
      */
     public function testMaxAccuracy($input, $max)
     {
@@ -19,6 +20,7 @@ final class IsMaxAccuracyTest extends BaseValidatorTestCase
     /**
      * @dataProvider providerForNotMaxAccuracy
      * @param mixed $input
+     * @param mixed $max
      */
     public function testNotMaxAccuracy($input, $max)
     {

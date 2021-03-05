@@ -42,17 +42,6 @@ class V extends Base
     protected $lastRule;
 
     /**
-     * Return a new instance of current service
-     *
-     * @return static
-     */
-    public static function new()
-    {
-        /** @noinspection PhpIncompatibleReturnTypeInspection */
-        return Wei::getContainer()->newInstance('v');
-    }
-
-    /**
      * Create a new validator
      *
      * @param array $options
@@ -80,12 +69,12 @@ class V extends Base
         }
 
         // Convert options [[option: xx]] to [option: xx]
-        if (count($args) === 1 && is_array($args[0])) {
+        if (1 === count($args) && is_array($args[0])) {
             $args = $args[0];
         }
 
         // Convert `$type($name, $label, ...$args)` to `key($name, $label)->addRule($type, $args)`
-        if (substr($name, 0, 3) === 'not') {
+        if ('not' === substr($name, 0, 3)) {
             $rule = substr($name, 3);
         } else {
             $rule = $name;
@@ -101,6 +90,17 @@ class V extends Base
         }
 
         return $this->addRule($name, $args);
+    }
+
+    /**
+     * Return a new instance of current service
+     *
+     * @return static
+     */
+    public static function new()
+    {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        return Wei::getContainer()->newInstance('v');
     }
 
     /**

@@ -8,8 +8,6 @@
 
 namespace Wei;
 
-use Monolog\Utils;
-
 /**
  * A logger service, which is inspired by Monolog
  *

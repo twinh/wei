@@ -67,7 +67,7 @@ final class IsCallbackTest extends BaseValidatorTestCase
                 $validator = $callback->getValidator();
                 return false;
             })
-            ->check([
+                ->check([
                 'test' => 1,
             ]);
         $this->assertInstanceOf(Validate::class, $validator);

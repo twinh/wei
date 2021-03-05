@@ -8,8 +8,6 @@
 
 namespace Wei;
 
-use Wei\Base;
-
 /**
  * The base class of validator
  *

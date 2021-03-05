@@ -16,7 +16,7 @@ namespace Wei;
 class IsNumber extends BaseValidator
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public const BASIC_TYPE = true;
 
@@ -142,7 +142,7 @@ class IsNumber extends BaseValidator
                 break;
             }
             $number *= 10;
-            $precision++;
+            ++$precision;
         }
         return $precision;
     }

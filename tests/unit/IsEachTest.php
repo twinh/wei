@@ -10,18 +10,18 @@ use Wei\V;
  */
 final class IsEachTest extends BaseValidatorTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        wei()->t->setLocale('en');
+    }
+
     public function getInputTestOptions()
     {
         return [
             'validator' => wei()->validate,
         ];
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        wei()->t->setLocale('en');
     }
 
     public function testEachSuc()
@@ -30,9 +30,9 @@ final class IsEachTest extends BaseValidatorTestCase
             ::key('products')->each(
                 V
                     ::key('name')->maxLength(5)
-                    ->key('stock')->greaterThanOrEqual(0)
+                        ->key('stock')->greaterThanOrEqual(0)
             )
-            ->check([
+                ->check([
                 'products' => [
                     [
                         'name' => 'name',
@@ -54,9 +54,9 @@ final class IsEachTest extends BaseValidatorTestCase
             ::key('users', '用户')->each(
                 V
                     ::string('name', '姓名')->minLength(3)
-                    ->string('email', '邮箱')->email()
+                        ->string('email', '邮箱')->email()
             )
-            ->check([
+                ->check([
                 'users' => [
                     [
                         'name' => 'test',
@@ -84,7 +84,7 @@ final class IsEachTest extends BaseValidatorTestCase
                     V::string('address', '地址')->email()
                 )
             )
-            ->check([
+                ->check([
                 'users' => [
                     [
                         'emails' => [
@@ -126,9 +126,9 @@ final class IsEachTest extends BaseValidatorTestCase
             ::each(
                 V
                     ::key('name')->maxLength(5)
-                    ->key('stock')->greaterThanOrEqual(0)
+                        ->key('stock')->greaterThanOrEqual(0)
             )
-            ->check([
+                ->check([
                 [
                     'name' => 'name',
                     'stock' => 1,
@@ -147,7 +147,7 @@ final class IsEachTest extends BaseValidatorTestCase
         $ret = V::label('用户')->each(
             V
                 ::string('name', '姓名')->minLength(3)
-                ->string('email', '邮箱')->email()
+                    ->string('email', '邮箱')->email()
         )
             ->check([
                 [
@@ -169,7 +169,7 @@ final class IsEachTest extends BaseValidatorTestCase
                 $v->string('name', '姓名')->minLength(3)
                     ->string('email', '邮箱')->email();
             })
-            ->check([
+                ->check([
                 'users' => [
                     [
                         'name' => 'test',
@@ -190,7 +190,7 @@ final class IsEachTest extends BaseValidatorTestCase
             ::key('users', '用户')->each(
                 V
                     ::string('name', '姓名')->minLength(3)
-                    ->string('email', '邮箱')->email()
+                        ->string('email', '邮箱')->email()
             )->check(['users' => null]);
         $this->assertRetErr($ret, '用户 must be an array');
     }
@@ -210,7 +210,7 @@ final class IsEachTest extends BaseValidatorTestCase
                 $v->string('name', '姓名')->minLength(3)
                     ->string('email', '邮箱')->email();
             })
-            ->check([
+                ->check([
                 'users' => [
                     [
                         'name' => 'test',
@@ -234,7 +234,6 @@ final class IsEachTest extends BaseValidatorTestCase
                 'email' => 'test@example.com',
             ],
             [
-
             ],
         ];
 
@@ -245,7 +244,7 @@ final class IsEachTest extends BaseValidatorTestCase
                 $v->string('name', '姓名')->minLength(3)
                     ->string('email', '邮箱')->email();
             })
-            ->check(['users' => $data]);
+                ->check(['users' => $data]);
         $this->assertRetErr($ret, 'The 2nd 用户\'s 姓名 is required');
         $this->assertSame($validateData, $data);
     }
@@ -259,7 +258,7 @@ final class IsEachTest extends BaseValidatorTestCase
                 $v->string('name', '姓名')->minLength(3)
                     ->string('email', '邮箱')->email();
             })
-            ->check([
+                ->check([
                 'users' => [
                     [
                         'name' => 'test',

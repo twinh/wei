@@ -57,29 +57,8 @@ class IsEach extends BaseValidator
         return $this->isValid($input);
     }
 
-    protected function doValidate($input)
-    {
-        if (!is_array($input)) {
-            $this->addError('notArray');
-            return false;
-        }
-
-        $result = true;
-        foreach ($input as $key => $data) {
-            $this->curKey = $key;
-            $options = $this->getValidatorOptions($data);
-            $validator = wei()->validate($options);
-            $this->selfValidators[$key] = $validator;
-            if ($result && !$validator->isValid()) {
-                $result = false;
-            }
-        }
-
-        return $result;
-    }
-
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getMessages($name = null)
     {
@@ -117,6 +96,27 @@ class IsEach extends BaseValidator
         return $this->curKey;
     }
 
+    protected function doValidate($input)
+    {
+        if (!is_array($input)) {
+            $this->addError('notArray');
+            return false;
+        }
+
+        $result = true;
+        foreach ($input as $key => $data) {
+            $this->curKey = $key;
+            $options = $this->getValidatorOptions($data);
+            $validator = wei()->validate($options);
+            $this->selfValidators[$key] = $validator;
+            if ($result && !$validator->isValid()) {
+                $result = false;
+            }
+        }
+
+        return $result;
+    }
+
     /**
      * Returns validator options from V object or callback
      *
@@ -137,7 +137,7 @@ class IsEach extends BaseValidator
 
     private function updateSubMessage($message)
     {
-        if (strpos($message, 'The ') === 0) {
+        if (0 === strpos($message, 'The ')) {
             return substr($message, 4);
         }
         return $message;
@@ -155,7 +155,7 @@ class IsEach extends BaseValidator
      */
     private function getSuffix($index)
     {
-        if (!in_array(($index % 100), [11, 12, 13])) {
+        if (!in_array(($index % 100), [11, 12, 13], true)) {
             switch ($index % 10) {
                 case 1:
                     return 'st';

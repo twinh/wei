@@ -26,7 +26,7 @@ class IsFloat extends BaseValidator
     {
         if (!is_float(filter_var($input, FILTER_VALIDATE_FLOAT))
             // `true` will convert to `1.0`
-            || $input === true
+            || true === $input
         ) {
             $this->addError('notFloat');
             return false;

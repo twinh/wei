@@ -16,7 +16,7 @@ namespace Wei;
 class IsUNumber extends IsNumber
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public const BASIC_TYPE = true;
 

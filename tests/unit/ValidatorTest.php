@@ -4,8 +4,8 @@ namespace WeiTest;
 
 use Wei\IsEmail;
 use Wei\IsLength;
-use Wei\Validate;
 use Wei\IsRequired;
+use Wei\Validate;
 
 /**
  * @property \Wei\Is $is
@@ -104,7 +104,6 @@ final class ValidatorTest extends TestCase
         $validate = $this->validate([
             'defaultRequired' => false,
             'data' => [
-
             ],
             'rules' => [
                 'email' => [

@@ -2,13 +2,16 @@
 
 namespace WeiTest;
 
-use Wei\IsDateTime;
-
 /**
  * @internal
  */
 final class IsStringTest extends BaseValidatorTestCase
 {
+    public function __toString()
+    {
+        return 'test';
+    }
+
     /**
      * @dataProvider providerForStringVal
      * @param mixed $input
@@ -68,10 +71,5 @@ final class IsStringTest extends BaseValidatorTestCase
             ['😊', null, 3],
             ['😊', 6, 7],
         ];
-    }
-
-    public function __toString()
-    {
-        return 'test';
     }
 }

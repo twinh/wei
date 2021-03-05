@@ -12,7 +12,7 @@ use InvalidArgumentException;
 class Ret extends Base implements \JsonSerializable, \ArrayAccess
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected static $createNewInstance = true;
 
@@ -61,7 +61,7 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
      */
     public function __invoke($message, $code = null, $type = null)
     {
-        is_null($code) && $code = $this->defaultSucCode;
+        null === $code && $code = $this->defaultSucCode;
 
         if (is_string($message)) {
             // Use string message

@@ -17,7 +17,7 @@ namespace Wei;
 class IsAllowEmpty extends BaseValidator
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function doValidate($input)
     {

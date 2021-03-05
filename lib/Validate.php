@@ -816,8 +816,6 @@ class Validate extends Base
             $options = [$options];
         }
 
-        // dd('xxx', $options, $input);
-
         if (is_int(key($options))) {
             array_unshift($options, $input);
             $result = call_user_func_array($validator, $options);
@@ -825,9 +823,6 @@ class Validate extends Base
             $validator->setOption($options);
             $result = $validator($input);
         }
-
-        //dd('x12313', get_class($validator), $options, $result);
-
 
         return $result;
     }
@@ -950,7 +945,7 @@ class Validate extends Base
         // Case 2
         if (isset($this->messages[$path][$rule]) && is_array($this->messages[$path])) {
             $messages = $this->messages[$path][$rule];
-            // Case 1
+        // Case 1
         } elseif (isset($this->messages[$path]) && is_scalar($this->messages[$path])) {
             $messages = $this->messages[$path];
         }

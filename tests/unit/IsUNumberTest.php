@@ -2,9 +2,12 @@
 
 namespace WeiTest;
 
+/**
+ * @internal
+ */
 class IsUNumberTest extends BaseValidatorTestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

@@ -8,9 +8,6 @@
 
 namespace Wei;
 
-use Wei\V;
-use Wei\Validate;
-
 /**
  * Check if the input is validated by the specified V service
  *
@@ -44,21 +41,6 @@ class IsChildren extends BaseValidator
     /**
      * {@inheritdoc}
      */
-    protected function doValidate($input)
-    {
-        if (!is_array($input) && !is_object($input)) {
-            $this->addError('type');
-            return false;
-        }
-
-        $options = $this->v->getOptions();
-        $this->selfValidator = $this->validate(['data' => $input] + $options);
-        return $this->selfValidator->isValid();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getMessages($name = null)
     {
         if ($this->getErrors()) {
@@ -70,5 +52,20 @@ class IsChildren extends BaseValidator
     public function getValidData()
     {
         return $this->selfValidator->getValidData();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function doValidate($input)
+    {
+        if (!is_array($input) && !is_object($input)) {
+            $this->addError('type');
+            return false;
+        }
+
+        $options = $this->v->getOptions();
+        $this->selfValidator = $this->validate(['data' => $input] + $options);
+        return $this->selfValidator->isValid();
     }
 }

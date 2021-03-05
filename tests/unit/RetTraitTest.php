@@ -4,6 +4,9 @@ namespace WeiTest;
 
 use Wei\RetTrait;
 
+/**
+ * @internal
+ */
 class RetTraitTest extends TestCase
 {
     use RetTrait;

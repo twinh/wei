@@ -7,7 +7,7 @@ namespace WeiTest;
  */
 final class IsNumberTest extends BaseValidatorTestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

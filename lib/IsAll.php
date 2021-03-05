@@ -8,8 +8,6 @@
 
 namespace Wei;
 
-use Wei\BaseValidator;
-
 /**
  * Check if all of the element in the input is valid by all specified rules
  *
