@@ -893,9 +893,9 @@ final class ValidatorTest extends TestCase
                     ],
                 ],
             ],
-            'ruleValid' => function ($rule, $field, Validate $validator) use(&$currentRules) {
+            'ruleValid' => function ($rule, $field, Validate $validator) use (&$currentRules) {
                 $currentRules[] = $validator->getCurrentRule();
-            }
+            },
         ])->isValid();
 
         $this->assertTrue($result);

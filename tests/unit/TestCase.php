@@ -188,8 +188,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         $this->assertArrayContains($expected, $ret->toArray(), $assertMessage);
     }
 
-    public
-    static function assertArrayContains(
+    public static function assertArrayContains(
         $subset,
         $array,
         $message = ''
@@ -203,8 +202,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
      *
      * @return string
      */
-    protected
-    function getServiceName()
+    protected function getServiceName()
     {
         if (empty($this->serviceName)) {
             $names = explode('\\', static::class);
@@ -222,8 +220,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
      * @param string $message
      * @return void
      */
-    protected
-    function assertIsSubset(
+    protected function assertIsSubset(
         $subset,
         $parent,
         $message = ''
@@ -247,8 +244,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
      * @param string $message
      * @deprecated
      */
-    protected
-    function setExpectedException(
+    protected function setExpectedException(
         $class,
         $message = null
     ) {
@@ -256,8 +252,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         $message && $this->expectExceptionMessage($message);
     }
 
-    protected
-    function buildRetMessage(
+    protected function buildRetMessage(
         $ret,
         $assertMessage = null
     ) {

@@ -281,13 +281,17 @@ final class VTest extends TestCase
 
     public function testBasicTypeInvalidArgument()
     {
-        $this->expectExceptionObject(new \InvalidArgumentException('Expected at least 2 arguments for type rule, but got 0'));
+        $this->expectExceptionObject(
+            new \InvalidArgumentException('Expected at least 2 arguments for type rule, but got 0')
+        );
         V::char();
     }
 
     public function testBasicTypeInvalidArgument2()
     {
-        $this->expectExceptionObject(new \InvalidArgumentException('Expected at least 2 arguments for type rule, but got 1'));
+        $this->expectExceptionObject(
+            new \InvalidArgumentException('Expected at least 2 arguments for type rule, but got 1')
+        );
         V::char('name');
     }
 
