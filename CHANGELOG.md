@@ -70,7 +70,7 @@
 * **IsEach:** `V::getValidator` 方法移除 `$data` 参数
 `IsEach::getValidatorOptions` 方法增加 `$data` 参数
 * 为数值类型增加 `u` 开头的方法来表示无符号，例如 `uInt`，`uDecimal`，移除 `autoUnsigned` 选项，改为明确指定是否有符号
-* refactor(Schema): `date`, `datetime`, `timestamp` 类型的默认值改为 `NULL`，匹配 MySQL 5.7+ 的默认模式
+* **Schema:** `date`, `datetime`, `timestamp` 类型的默认值改为 `NULL`，匹配 MySQL 5.7+ 的默认模式
 * `IsDateTime` 改名为 `IsAnyDateTime`，增加 `IsDateTime` 校验格式为 `Y-m-d H:i:s` 的日期
 * **Schema:** 移除废弃的 `timestampsV1`, `userstampsV1` 和 `softDeletableV1` 方法，直接使用 `timestamps`, `userstamps` 和 `softDeletable`
 * **V:** 基础类型不再可以作为方法附加到已有的校验中，需直接调用 `addRule($type)`
