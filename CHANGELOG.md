@@ -1,3 +1,13 @@
+## [0.10.1](https://github.com/twinh/wei/compare/v0.10.0...v0.10.1) (2021-03-05)
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from 6.1.2 to 6.2.0
+
 # [0.10.0](https://github.com/twinh/wei/compare/v0.9.31...v0.10.0) (2021-03-05)
 
 
