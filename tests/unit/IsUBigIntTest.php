@@ -5,7 +5,7 @@ namespace WeiTest;
 /**
  * @internal
  */
-final class IsUBigtIntTest extends BaseValidatorTestCase
+final class IsUBigIntTest extends BaseValidatorTestCase
 {
     /**
      * @dataProvider providerForUBigInt
