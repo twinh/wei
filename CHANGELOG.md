@@ -1,3 +1,87 @@
+# [0.10.0](https://github.com/twinh/wei/compare/v0.9.31...v0.10.0) (2021-03-05)
+
+
+### Bug Fixes
+
+* **Between:** 解决参数传入 0 时校验错误 ([2844408](https://github.com/twinh/wei/commit/2844408a988c56cc6cd61d93c9986d084a519046))
+* **FileCache:** 忽略慢 io（docker）和请求并发导致同时调用删除文件时错误 ([25ab8b4](https://github.com/twinh/wei/commit/25ab8b41dd4a69a618b8ff9564f3a90d2a7a6089))
+* **IsEach:** 每次校验时都要创建一个新的 `V` 对象，以便对每个数组项目自定义规则 ([6a47768](https://github.com/twinh/wei/commit/6a477681dcfe451d772175be5c7b5a4dae880e68))
+* **IsTinyChar:** 增加 `IsTinyChar` 校验规则 ([4178fc9](https://github.com/twinh/wei/commit/4178fc95bad184ed6b6845a05f9a3a99ddef4dda))
+* **Logger:** 输出日志内容由 `print_r` 改为 `json_encode`, 解决复杂变量可能导致内存溢出的问题 ([efded05](https://github.com/twinh/wei/commit/efded05fc4cd6964ef5e6dc168c8b6f2ee4f9ef9))
+* **Req:** 调用 `clear` 后再调用 `getData` 可能出现 `Undefined array key "xxx"` 的错误 ([d50987e](https://github.com/twinh/wei/commit/d50987e1f09ab430736615127fd39cf3b87cddbf))
+* **V:** 校验规则传入关联数组作为选项无效 ([b62cd31](https://github.com/twinh/wei/commit/b62cd3156984f1def094bb5f7626899c39d46e2d))
+* **Validate:** `hasField` 判断数据错误 ([298a614](https://github.com/twinh/wei/commit/298a614ada7fef6123a7ba97d0d55a8bd25597f8))
+* **Validate:** data 传入闭包抛出 Error : Closure object cannot have properties ([d6d6989](https://github.com/twinh/wei/commit/d6d698974ba249b7337f8bb69d2289ea9cf410f6))
+* **Validate:** PHP8 method_exists 需传入对象或类名字符串 ([174ca14](https://github.com/twinh/wei/commit/174ca140be91293855ce1b3c00c87391d19d0e75)), closes [#1](https://github.com/twinh/miaoxing/issues/1)
+* **Validator:** 指定 subValidators 的默认值为数组 ([1094631](https://github.com/twinh/wei/commit/109463144f9e47b8651adc9993dfed6e22602a69))
+* **Validator:** 指定了 `countByChars` 选项后，如果校验的值不是字符串值，则返回失败 ([31980b3](https://github.com/twinh/wei/commit/31980b36e241ef99415b08c2f92428f73e91b62b))
+* 更正生成 Migration 的基类的命名空间 ([b124bfa](https://github.com/twinh/wei/commit/b124bfa008ce6b11234e44d82b8517a1785b06b0))
+
+
+### Features
+
+* **IsArray:** 增加 `minLength`, `maxLength` 选项 ([c6dc44c](https://github.com/twinh/wei/commit/c6dc44cbb93f78e06a1450bb457dfe25a8c04789))
+* **IsCallback:** 增加 `getValidator` 方法，可用于回调中获取当前校验器的信息 ([c3718cb](https://github.com/twinh/wei/commit/c3718cb2bae5adc5f94b0c246990128c33b2564f))
+* **IsEach:** `each` 校验器支持获取当前校验数据和键名 ([182852e](https://github.com/twinh/wei/commit/182852eb26a382210915e8a6a151aef637f3b686))
+* **IsEach:** 增加 IsEach 校验规则，用于校验二维数组 ([8dc17e7](https://github.com/twinh/wei/commit/8dc17e7e1d7c4d5abeef6e297d2c70b07856a6b1))
+* **IsEmpty:** 增加 `IsEmpty` 校验规则 ([88dd648](https://github.com/twinh/wei/commit/88dd6480bab8501b98e05efc9d0d7526506e637a))
+* **IsInt:** 增加 `min`, `max` 选项 ([04ab90f](https://github.com/twinh/wei/commit/04ab90f8a43044da6b67fab3cdf7494477712edc))
+* **IsString:** 增加 `minLength` 和 `maxLength` 选项 ([962ace0](https://github.com/twinh/wei/commit/962ace0f47e57344a9c5829302eb07d28ca21d78))
+* **IsText, IsMediumText:** 增加 `IsText` 和 `IsMediumText` 校验规则 ([6c6e1da](https://github.com/twinh/wei/commit/6c6e1da892b22bd20c47708734f811f19407845c))
+* **Schema:** 增加 `bigId()` 方法，用于生成 bigint 类型的自增 id ([0036247](https://github.com/twinh/wei/commit/0036247f69040b16c8311d0c703c20e87a45e156))
+* **Schema:** 增加 json 类型 ([2ec9326](https://github.com/twinh/wei/commit/2ec9326340ca4d84014a3e40aac062d518c45c00))
+* **V:** 允许使用基础类型（如 `string`）来创建一行新的数据校验 ([b46b327](https://github.com/twinh/wei/commit/b46b327d08143fee82e5b256ac210b9992b24663))
+* **V:** 增加 `allowEmpty` 方法，允许字段为空值时不校验 ([245c048](https://github.com/twinh/wei/commit/245c0483e4fa7b3bbda8e584c1dbb87554178aa7))
+* **V:** 增加 `new` 方法，用于返回新的校验器实例 ([f813b71](https://github.com/twinh/wei/commit/f813b71f5ab7c6d957508223a093c9471e329785))
+* **V:** 增加 defaultRequired 选项，用于控制所有数据是默认必填还是选填 ([de4aed7](https://github.com/twinh/wei/commit/de4aed74c7fbf0c795d9f0300dfab30dc6ff967f))
+* **V:** 增加 getOptions 方法，返回用于 Validate 服务的配置 ([f3e33d3](https://github.com/twinh/wei/commit/f3e33d3fd784ff48a733b12e69293db17e803f04))
+* **Validate:** 增加 `getCurrentRule` 方法 ([6406806](https://github.com/twinh/wei/commit/64068066e3da532d5afe7cd9da513084b549e0b0))
+* **Validate:** 增加 getFlatMessages 方法，用于获取一维数组的错误信息 ([023b60b](https://github.com/twinh/wei/commit/023b60b1a23df89371dec3fdb61ef24005107be0))
+* **Validator:** Number 增加总长度和小数长度选项 ([22e32eb](https://github.com/twinh/wei/commit/22e32ebe24cb7272910958f43bfa697a8bbc1b39))
+* **Validator:** 增加 `IsTiny`, `IsSmallInt`, `IsMediumInt`, `IsDefaultInt`, `IsBigInt`,`IsUTiny`, `IsUSmallInt`, `IsUMediumInt`, `IsUDefaultInt` 和 `IsUBigInt` ([3562913](https://github.com/twinh/wei/commit/35629137e4e873b011e2b7708ae289e4a0acfb65))
+* **Validator:** 增加 ArrayVal 规则，用于校验数据是否为数组 ([981069a](https://github.com/twinh/wei/commit/981069a367622907b0910ca2abfabe578ea8b2bf))
+* **Validator:** 增加 BoolVal 和 Boolable 规则，用于校验数据是否为布尔值 ([23ba996](https://github.com/twinh/wei/commit/23ba996d1d39f932da42b5e38e8517cb9f5fd323))
+* **Validator:** 增加 Children 规则，用于校验多级数组 ([9c39028](https://github.com/twinh/wei/commit/9c3902816b32a3bbe12b9fce43d6bda6d1ff7466))
+* **Validator:** 增加 FloatVal 规则，用于校验数据是否为浮点数值 ([1f735e7](https://github.com/twinh/wei/commit/1f735e7f8ccc92edb063f3161ff24399f9eb4981))
+* **Validator:** 增加 IntVal 规则，用于校验数据是否为整数值 ([31ab9ce](https://github.com/twinh/wei/commit/31ab9ce1ceb7618c8bbb102278776dd1d007f7c3))
+* **Validator:** 增加 MaxAccuracy 规则，用于校验数字的最大小数位数 ([526f67f](https://github.com/twinh/wei/commit/526f67fcd3707e944919bdd3995a3282d2666ec9))
+* **Validator:** 增加 MinCharLength 和 MaxCharLength 规则 ([438d97d](https://github.com/twinh/wei/commit/438d97d91d695dbeb5ab8e862d8f70117976ed24))
+* **Validator:** 增加 StringVal 规则 ([8c6a120](https://github.com/twinh/wei/commit/8c6a1205deb9a2cc90c15a7d5d67c75d2c5be199))
+* **Validator:** 增加 UNumber 表示大于 0 的Number ([0857e5e](https://github.com/twinh/wei/commit/0857e5e3541120f8da832f5201eaf1127b445424))
+* **Validator:** 增加大小判断规则的简写：Gt、Gte、Lt 和 Lte ([a0d68e7](https://github.com/twinh/wei/commit/a0d68e7a8217dc2ab4c4049534784fe0ff718bc1))
+* **Validator:** 增加方法以获取校验通过的数据 ([47d985c](https://github.com/twinh/wei/commit/47d985cea6a44500bbfc534771d33f9a04a8265c))
+* **Validator:** 校验的键名可以传入数组，表示校验相应数据路径的数据 ([bac0a23](https://github.com/twinh/wei/commit/bac0a23e142cce21a88b85158c0c968cf6598683))
+* 增加 getCurrentField 和 hasField 方法 ([e1e5169](https://github.com/twinh/wei/commit/e1e5169b01793e996528d016a6f06428db3a2ef3))
+
+
+* feat!: 为数值类型增加 `u` 开头的方法来表示无符号，例如 `uInt`，`uDecimal`，移除 `autoUnsigned` 选项，改为明确指定是否有符号 ([f964fc1](https://github.com/twinh/wei/commit/f964fc1dfc7431d500271a0ef731fc0a3658d507))
+* refactor(Schema)!: `date`, `datetime`, `timestamp` 类型的默认值改为 `NULL`，匹配 MySQL 5.7+ 的默认模式 ([659e6d4](https://github.com/twinh/wei/commit/659e6d4ece3f1c3ff0c04e5f4642d29c14b8c775))
+* refactor(IsDateTime)!: `IsDateTime` 改名为 `IsAnyDateTime`，增加 `IsDateTime` 校验格式为 `Y-m-d H:i:s` 的日期 ([d7d4ccb](https://github.com/twinh/wei/commit/d7d4ccb627b69da87a3abf2a3a9ea337f0f2eb83))
+
+
+### Code Refactoring
+
+* **IsChar:** 更改 `IsCharLength` 为 `IsChar` ([41853b4](https://github.com/twinh/wei/commit/41853b4858bbb3ef8ab51f37e722e95fbd29c488))
+* **Schema:** 移除废弃的 `timestampsV1`, `userstampsV1` 和 `softDeletableV1` 方法，直接使用 `timestamps`, `userstamps` 和 `softDeletable` ([0202591](https://github.com/twinh/wei/commit/0202591034e81a0eb3ce301104034fdb949e07b6))
+* **Validator:** 基础类型校验器移除 Val 后缀 ([1a49d63](https://github.com/twinh/wei/commit/1a49d63c0edc2212eb10b79e2a525db4d8e095f0))
+* **Validator:** 校验规则类移除 Validator 命名空间，增加 Is 前缀 ([eb8a2ef](https://github.com/twinh/wei/commit/eb8a2ef6f12a6e53fdd8e36eb3c591f0ff30349e))
+
+
+### BREAKING CHANGES
+
+* **IsEach:** `V::getValidator` 方法移除 `$data` 参数
+`IsEach::getValidatorOptions` 方法增加 `$data` 参数
+* 为数值类型增加 `u` 开头的方法来表示无符号，例如 `uInt`，`uDecimal`，移除 `autoUnsigned` 选项，改为明确指定是否有符号
+* refactor(Schema): `date`, `datetime`, `timestamp` 类型的默认值改为 `NULL`，匹配 MySQL 5.7+ 的默认模式
+* `IsDateTime` 改名为 `IsAnyDateTime`，增加 `IsDateTime` 校验格式为 `Y-m-d H:i:s` 的日期
+* **Schema:** 移除废弃的 `timestampsV1`, `userstampsV1` 和 `softDeletableV1` 方法，直接使用 `timestamps`, `userstamps` 和 `softDeletable`
+* **V:** 基础类型不再可以作为方法附加到已有的校验中，需直接调用 `addRule($type)`
+* **IsChar:** 更改 `IsCharLength` 为 `IsChar`
+* **Validator:** 基础类型校验器移除 Val 后缀
+* **Validator:** 校验规则类移除 Validator 命名空间，增加 Is 前缀
+* **Validator:** Number 规则传入 NAN 将返回 false
+* 校验数组或对象数据时，如果数据中包含要校验的键名，则认为值是存在的
+
 ## [0.9.31](https://github.com/twinh/wei/compare/v0.9.30...v0.9.31) (2020-09-25)
 
 
