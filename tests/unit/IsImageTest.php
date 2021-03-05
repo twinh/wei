@@ -34,7 +34,7 @@ final class IsImageTest extends BaseValidatorTestCase
     {
         $image = $this->createImageValidator();
 
-        $this->assertTrue($image(dirname(__DIR__) . '/Fixtures/5x5.gif', [
+        $this->assertTrue($image(__DIR__ . '/Fixtures/5x5.gif', [
             'maxHeight' => 10,
             'minHeight' => 0,
             'maxWidth' => 10,
@@ -46,7 +46,7 @@ final class IsImageTest extends BaseValidatorTestCase
     {
         $image = $this->createImageValidator();
 
-        $this->assertFalse($image(dirname(__DIR__) . '/Fixtures/5x5.gif', [
+        $this->assertFalse($image(__DIR__ . '/Fixtures/5x5.gif', [
             'maxHeight' => 4,
             'minHeight' => 6,
             'maxWidth' => 4,
@@ -63,7 +63,7 @@ final class IsImageTest extends BaseValidatorTestCase
     {
         $image = $this->createImageValidator();
 
-        $this->assertTrue($image(dirname(__DIR__) . '/Fixtures/5 x 5.gif', [
+        $this->assertTrue($image(__DIR__ . '/Fixtures/5 x 5.gif', [
             'maxHeight' => 10,
             'minHeight' => 0,
             'maxWidth' => 10,
