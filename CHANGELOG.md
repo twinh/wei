@@ -52,11 +52,7 @@
 * **Validator:** 增加方法以获取校验通过的数据 ([47d985c](https://github.com/twinh/wei/commit/47d985cea6a44500bbfc534771d33f9a04a8265c))
 * **Validator:** 校验的键名可以传入数组，表示校验相应数据路径的数据 ([bac0a23](https://github.com/twinh/wei/commit/bac0a23e142cce21a88b85158c0c968cf6598683))
 * 增加 getCurrentField 和 hasField 方法 ([e1e5169](https://github.com/twinh/wei/commit/e1e5169b01793e996528d016a6f06428db3a2ef3))
-
-
-* feat!: 为数值类型增加 `u` 开头的方法来表示无符号，例如 `uInt`，`uDecimal`，移除 `autoUnsigned` 选项，改为明确指定是否有符号 ([f964fc1](https://github.com/twinh/wei/commit/f964fc1dfc7431d500271a0ef731fc0a3658d507))
-* refactor(Schema)!: `date`, `datetime`, `timestamp` 类型的默认值改为 `NULL`，匹配 MySQL 5.7+ 的默认模式 ([659e6d4](https://github.com/twinh/wei/commit/659e6d4ece3f1c3ff0c04e5f4642d29c14b8c775))
-* refactor(IsDateTime)!: `IsDateTime` 改名为 `IsAnyDateTime`，增加 `IsDateTime` 校验格式为 `Y-m-d H:i:s` 的日期 ([d7d4ccb](https://github.com/twinh/wei/commit/d7d4ccb627b69da87a3abf2a3a9ea337f0f2eb83))
+* 为数值类型增加 `u` 开头的方法来表示无符号，例如 `uInt`，`uDecimal`，移除 `autoUnsigned` 选项，改为明确指定是否有符号 ([f964fc1](https://github.com/twinh/wei/commit/f964fc1dfc7431d500271a0ef731fc0a3658d507))
 
 
 ### Code Refactoring
@@ -65,6 +61,8 @@
 * **Schema:** 移除废弃的 `timestampsV1`, `userstampsV1` 和 `softDeletableV1` 方法，直接使用 `timestamps`, `userstamps` 和 `softDeletable` ([0202591](https://github.com/twinh/wei/commit/0202591034e81a0eb3ce301104034fdb949e07b6))
 * **Validator:** 基础类型校验器移除 Val 后缀 ([1a49d63](https://github.com/twinh/wei/commit/1a49d63c0edc2212eb10b79e2a525db4d8e095f0))
 * **Validator:** 校验规则类移除 Validator 命名空间，增加 Is 前缀 ([eb8a2ef](https://github.com/twinh/wei/commit/eb8a2ef6f12a6e53fdd8e36eb3c591f0ff30349e))
+* **Schema:** `date`, `datetime`, `timestamp` 类型的默认值改为 `NULL`，匹配 MySQL 5.7+ 的默认模式 ([659e6d4](https://github.com/twinh/wei/commit/659e6d4ece3f1c3ff0c04e5f4642d29c14b8c775))
+* **IsDateTime:** `IsDateTime` 改名为 `IsAnyDateTime`，增加 `IsDateTime` 校验格式为 `Y-m-d H:i:s` 的日期 ([d7d4ccb](https://github.com/twinh/wei/commit/d7d4ccb627b69da87a3abf2a3a9ea337f0f2eb83))
 
 
 ### BREAKING CHANGES
