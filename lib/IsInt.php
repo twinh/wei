@@ -78,7 +78,7 @@ class IsInt extends BaseValidator
             return true;
         }
 
-        if ($this->isString($input) && '-' === $input[0]) {
+        if ($this->isString($input) && isset($input[0]) && '-' === $input[0]) {
             return ctype_digit(substr($input, 1));
         }
         return ctype_digit($input);
