@@ -73,7 +73,7 @@ final class IsFileTest extends BaseValidatorTestCase
     {
         $file = $this->createFileValidator();
 
-        $this->assertFalse($file(dirname(__DIR__) . '/Fixtures/5x5.gif', [
+        $this->assertFalse($file(__DIR__ . '/Fixtures/5x5.gif', [
             'mimeTypes' => [
                 'image/jpg',
             ],
@@ -89,7 +89,7 @@ final class IsFileTest extends BaseValidatorTestCase
     {
         $file = $this->createFileValidator();
 
-        $this->assertTrue($file(dirname(__DIR__) . '/Fixtures/5x5.gif', [
+        $this->assertTrue($file(__DIR__ . '/Fixtures/5x5.gif', [
             'mimeTypes' => [
                 'image/*',
             ],
@@ -100,7 +100,7 @@ final class IsFileTest extends BaseValidatorTestCase
     {
         $file = $this->createFileValidator();
 
-        $this->assertTrue($file(dirname(__DIR__) . '/Fixtures/5x5.gif', [
+        $this->assertTrue($file(__DIR__ . '/Fixtures/5x5.gif', [
             'mimeTypes' => 'image/jpg,image/gif',
         ]));
     }
@@ -109,14 +109,14 @@ final class IsFileTest extends BaseValidatorTestCase
     {
         $file = $this->createFileValidator();
 
-        $this->assertTrue($file(new \SplFileInfo(dirname(__DIR__) . '/Fixtures/5x5.gif')));
+        $this->assertTrue($file(new \SplFileInfo(__DIR__ . '/Fixtures/5x5.gif')));
     }
 
     public function testFilesArrayAsInput()
     {
         $file = $this->createFileValidator();
 
-        $input = dirname(__DIR__) . '/Fixtures/5x5.gif';
+        $input = __DIR__ . '/Fixtures/5x5.gif';
         $array = [
             'tmp_name' => $input,
             'name' => $input,
@@ -134,14 +134,14 @@ final class IsFileTest extends BaseValidatorTestCase
 
     public function testFileWithoutExtension()
     {
-        $file = dirname(__DIR__) . '/Fixtures/5x5';
+        $file = __DIR__ . '/Fixtures/5x5';
         $this->assertTrue($this->isFile($file));
         $this->assertEquals('', $this->isFile->getExt());
     }
 
     public function testRelativeFileWithoutExtension()
     {
-        $file = __DIR__ . '/../Fixtures/5x5';
+        $file = __DIR__ . '/Fixtures/../Fixtures/5x5';
         $this->assertTrue($this->isFile($file));
         $this->assertEquals('', $this->isFile->getExt());
     }
