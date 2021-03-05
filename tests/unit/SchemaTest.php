@@ -14,7 +14,7 @@ final class SchemaTest extends TestCase
     {
         parent::setUp();
 
-        if ($this->wei->has('mysqlDb')) {
+        if ($this->wei->getConfig('mysql.db')) {
             $this->schema->db = $this->wei->mysqlDb;
         }
 
