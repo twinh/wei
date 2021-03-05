@@ -57,12 +57,12 @@ final class IsChildrenTest extends BaseValidatorTestCase
         $ret = V
             ::key('configs')
                 ->children(
-                V
+                    V
                     ::key('key1', '配置1')->minLength(3)
                         ->key('key2', '配置2')->children(
-                        V::key('key2.1', '配置2.1')->minLength(2)
-                    )
-            )
+                            V::key('key2.1', '配置2.1')->minLength(2)
+                        )
+                )
                 ->check([
                 'configs' => [
                     'key1' => '123',

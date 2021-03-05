@@ -197,7 +197,9 @@ final class IsEachTest extends BaseValidatorTestCase
 
     public function testCallWithoutValidator()
     {
-        $this->expectExceptionObject(new \LogicException('The "each" validator should not call directly, please use with \Wei\V'));
+        $this->expectExceptionObject(
+            new \LogicException('The "each" validator should not call directly, please use with \Wei\V')
+        );
         $this->isEach('test');
     }
 

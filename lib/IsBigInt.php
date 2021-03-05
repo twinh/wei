@@ -9,7 +9,8 @@
 namespace Wei;
 
 /**
- * Check if the input is int value and between -2^63(-9,223,372,036,854,775,808) and 2^64-1(9,223,372,036,854,775,807) (8 Bytes)
+ * Check if the input is int value and between -2^63(-9,223,372,036,854,775,808) and 2^64-1(9,223,372,036,854,775,807)
+ * (8 Bytes)
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

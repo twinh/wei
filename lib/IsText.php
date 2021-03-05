@@ -8,7 +8,6 @@
 
 namespace Wei;
 
-
 /**
  * Check if the input is a string of 65535(64Kb-1) bytes or less
  *

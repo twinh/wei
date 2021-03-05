@@ -104,7 +104,9 @@ final class RetTest extends TestCase
 
     public function testInvalidArgument()
     {
-        $this->expectExceptionObject(new \InvalidArgumentException('Expected argument of type string or array, "boolean" given'));
+        $this->expectExceptionObject(
+            new \InvalidArgumentException('Expected argument of type string or array, "boolean" given')
+        );
 
         Ret::suc(false);
     }
