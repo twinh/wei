@@ -41,8 +41,8 @@ class Lock extends Base
 
         // Release locks and exist when catch signal in CLI
         if (function_exists('pcntl_signal')) {
-            pcntl_signal(SIGINT, [$this, 'catchSignal']);
-            pcntl_signal(SIGTERM, [$this, 'catchSignal']);
+            pcntl_signal(\SIGINT, [$this, 'catchSignal']);
+            pcntl_signal(\SIGTERM, [$this, 'catchSignal']);
         }
     }
 
