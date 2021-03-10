@@ -3,7 +3,7 @@ name: Build
 on: [push, pull_request, workflow_dispatch]
 
 env:
-  extensions: mbstring, mysql
+  extensions: mbstring, mysql, redis
   key: cache-v1 # can be any string, change to clear the extension cache.
 
 jobs:
