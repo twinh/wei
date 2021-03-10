@@ -16,7 +16,7 @@
     "require-dev": {
         "joseph-lenton/php-error": "dev-master",
         "phpunit/phpunit": "^8",
-        "miaoxing/dev": "^6.3.1"
+        "miaoxing/dev": "^6.3.2"
     },
     "authors": [
         {
