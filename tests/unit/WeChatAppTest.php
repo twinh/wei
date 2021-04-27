@@ -185,7 +185,7 @@ final class WeChatAppTest extends TestCase
 
         $output = simplexml_load_string($content, 'SimpleXMLElement', \LIBXML_NOCDATA);
 
-        // phpcs:disable Squiz.NamingConventions.ValidVariableName.NotCamelCaps
+        // phpcs:disable Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
         $this->assertEquals($app->getToUserName(), (string) $output->FromUserName);
         $this->assertEquals($app->getFromUserName(), (string) $output->ToUserName);
 
