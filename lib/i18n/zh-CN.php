@@ -240,6 +240,9 @@ return [
     // naturalNumber
     '%name% must be positive integer or zero' => '%name%必须是大于等于0的整数',
 
+    '%name% must be an object' => '%name%必须是一个对象',
+    '%name% must not be an object' => '%name%不能是一个对象',
+
     // oneOf
     '%name% must be passed by at least one rule' => '%name%至少需要满足以下任何一条规则',
 

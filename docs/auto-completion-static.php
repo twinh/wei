@@ -429,6 +429,10 @@ class IsNumber
 {
 }
 
+class IsObject
+{
+}
+
 class IsOneOf
 {
 }
@@ -1979,8 +1983,12 @@ class V
      * @return $this
      * @see \Wei\IsMediumText::__invoke
      */
-    public static function notMediumText($name = null, string $label = null, int $minLength = null, int $maxLength = null)
-    {
+    public static function notMediumText(
+        $name = null,
+        string $label = null,
+        int $minLength = null,
+        int $maxLength = null
+    ) {
     }
 
     /**
@@ -2092,6 +2100,22 @@ class V
      * @see \Wei\IsNumber::__invoke
      */
     public static function notNumber($name = null, string $label = null, int $precision = null, int $scale = null)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsObject::__invoke
+     */
+    public static function object($name = null, string $label = null)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsObject::__invoke
+     */
+    public static function notObject($name = null, string $label = null)
     {
     }
 
@@ -3058,6 +3082,10 @@ class IsNullType
 }
 
 class IsNumber
+{
+}
+
+class IsObject
 {
 }
 
@@ -4724,6 +4752,22 @@ class V
      * @see \Wei\IsNumber::__invoke
      */
     public function notNumber($name = null, string $label = null, int $precision = null, int $scale = null)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsObject::__invoke
+     */
+    public function object($name = null, string $label = null)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsObject::__invoke
+     */
+    public function notObject($name = null, string $label = null)
     {
     }
 

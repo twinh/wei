@@ -200,7 +200,7 @@ class IsBetweenMixin {
 }
 
 /**
- * @property    Wei\IsBigInt $isBigInt Check if the input is int value and between -2^63(-9,223,372,036,854,775,808) and 2^64-1(9,223,372,036,854,775,807) (8 Bytes)
+ * @property    Wei\IsBigInt $isBigInt Check if the input is int value and between -2^63(-9,223,372,036,854,775,808) and 2^64-1(9,223,372,036,854,775,807)
  * @method      mixed isBigInt($input, $min = null, $max = null)
  */
 class IsBigIntMixin {
@@ -617,6 +617,13 @@ class IsNullTypeMixin {
  * @method      mixed isNumber($input, $precision = null, $scale = null)
  */
 class IsNumberMixin {
+}
+
+/**
+ * @property    Wei\IsObject $isObject Check if the input is an object
+ * @method      bool isObject($input) Validate the input value
+ */
+class IsObjectMixin {
 }
 
 /**
@@ -1188,6 +1195,7 @@ class WeiMixin {
  * @mixin IsNoneOfMixin
  * @mixin IsNullTypeMixin
  * @mixin IsNumberMixin
+ * @mixin IsObjectMixin
  * @mixin IsOneOfMixin
  * @mixin IsPasswordMixin
  * @mixin IsPhoneMixin
