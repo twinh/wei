@@ -1,3 +1,18 @@
+## [0.10.8](https://github.com/twinh/wei/compare/v0.10.7...v0.10.8) (2021-04-27)
+
+
+### Features
+
+* **IsObject:** 增加 `IsObject` 校验规则 ([08c36e8](https://github.com/twinh/wei/commit/08c36e8494fa393bc1fdbd71423ff6ee7b92191d))
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `6.3.4` to `6.4.0`
+
 ## [0.10.7](https://github.com/twinh/wei/compare/v0.10.6...v0.10.7) (2021-03-22)
 
 
