@@ -4,5 +4,8 @@
   "main": "index.js",
   "author": "twinh",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@miaoxing/dev": "^6.4.0"
+  }
 }
