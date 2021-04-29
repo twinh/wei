@@ -1,7 +1,26 @@
-vendor/
+.idea/
+
+# js
+/node_modules/
+/dist/
+/coverage/
+/yarn.lock
+/yarn-error.log
+/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# php
+/vendor/
 composer.lock
-TODO.md
-tests/config/local.php
-/.phpunit.result.cache
-/cache/
+phpunit.xml
+.php_cs.cache
+.phpunit.result.cache
+
+# php-coveralls
+/build/logs/clover.xml
+
+# miaoxing
+/storage/
+/tests/config-local.php
+
+# wei
 /log/
