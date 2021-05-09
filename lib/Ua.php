@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wei Framework
  *
@@ -163,7 +164,8 @@ class Ua extends Base
     public function isMobile()
     {
         $server = $this->server;
-        if (isset($server['HTTP_ACCEPT'])
+        if (
+            isset($server['HTTP_ACCEPT'])
             // Opera Mini; @reference: http://dev.opera.com/articles/view/opera-binary-markup-language/
             && (false !== strpos($server['HTTP_ACCEPT'], 'application/x-obml2d')
             || false !== strpos($server['HTTP_ACCEPT'], 'application/vnd.rim.html')  // BlackBerry devices.

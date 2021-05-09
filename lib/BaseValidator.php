@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wei Framework
  *
@@ -22,7 +23,7 @@ abstract class BaseValidator extends Base
      *
      * @experimental
      */
-    const BASIC_TYPE = false;
+    public const BASIC_TYPE = false;
 
     /**
      * The message added when the input required a stringify value

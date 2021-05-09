@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wei Framework
  *
@@ -22,7 +23,7 @@ class App extends Base
     /**
      * The exception code for forward action
      */
-    const FORWARD = 1302;
+    public const FORWARD = 1302;
 
     /**
      * The format of controller class
@@ -489,7 +490,8 @@ class App extends Base
         $results = [];
         $middleware = (array) $instance->getOption('middleware');
         foreach ($middleware as $class => $options) {
-            if ((!isset($options['only']) || in_array($action, (array) $options['only'], true))
+            if (
+                (!isset($options['only']) || in_array($action, (array) $options['only'], true))
                 && (!isset($options['except']) || !in_array($action, (array) $options['except'], true))
             ) {
                 $results[$class] = $options;

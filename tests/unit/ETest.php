@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -334,7 +335,8 @@ final class ETest extends TestCase
     {
         $immune = [',', '.', '_']; // Exceptions to escaping ranges
         for ($chr = 0; $chr < 0xFF; ++$chr) {
-            if ($chr >= 0x30 && $chr <= 0x39
+            if (
+                $chr >= 0x30 && $chr <= 0x39
                 || $chr >= 0x41 && $chr <= 0x5A
                 || $chr >= 0x61 && $chr <= 0x7A
             ) {
@@ -359,7 +361,8 @@ final class ETest extends TestCase
     {
         $immune = [',', '.', '-', '_']; // Exceptions to escaping ranges
         for ($chr = 0; $chr < 0xFF; ++$chr) {
-            if ($chr >= 0x30 && $chr <= 0x39
+            if (
+                $chr >= 0x30 && $chr <= 0x39
                 || $chr >= 0x41 && $chr <= 0x5A
                 || $chr >= 0x61 && $chr <= 0x7A
             ) {
@@ -384,7 +387,8 @@ final class ETest extends TestCase
     {
         $immune = []; // CSS has no exceptions to escaping ranges
         for ($chr = 0; $chr < 0xFF; ++$chr) {
-            if ($chr >= 0x30 && $chr <= 0x39
+            if (
+                $chr >= 0x30 && $chr <= 0x39
                 || $chr >= 0x41 && $chr <= 0x5A
                 || $chr >= 0x61 && $chr <= 0x7A
             ) {

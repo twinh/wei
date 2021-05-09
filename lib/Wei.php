@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wei Framework
  *
@@ -24,7 +25,7 @@ namespace Wei {
         /**
          * Version
          */
-        const VERSION = '0.9.23';
+        public const VERSION = '0.9.23';
 
         /**
          * The configurations for all objects

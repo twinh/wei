@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wei Framework
  *
@@ -996,7 +997,8 @@ class Validate extends Base
     {
         foreach ($paths as $path) {
             // $data could only be array or object, which has been checked by $this->setData
-            if ((is_array($data) && array_key_exists($path, $data))
+            if (
+                (is_array($data) && array_key_exists($path, $data))
                 || ($data instanceof \ArrayAccess && $data->offsetExists($path))
             ) {
                 $data = $data[$path];

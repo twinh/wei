@@ -9,39 +9,39 @@ namespace Wei;
  */
 class Schema extends Base
 {
-    const TYPE_BIG_INT = 'bigInt';
+    public const TYPE_BIG_INT = 'bigInt';
 
-    const TYPE_BOOL = 'bool';
+    public const TYPE_BOOL = 'bool';
 
-    const TYPE_CHAR = 'char';
+    public const TYPE_CHAR = 'char';
 
-    const TYPE_DATE = 'date';
+    public const TYPE_DATE = 'date';
 
-    const TYPE_DATETIME = 'datetime';
+    public const TYPE_DATETIME = 'datetime';
 
-    const TYPE_DECIMAL = 'decimal';
+    public const TYPE_DECIMAL = 'decimal';
 
-    const TYPE_DOUBLE = 'double';
+    public const TYPE_DOUBLE = 'double';
 
-    const TYPE_INT = 'int';
+    public const TYPE_INT = 'int';
 
-    const TYPE_LONG_TEXT = 'longText';
+    public const TYPE_LONG_TEXT = 'longText';
 
-    const TYPE_MEDIUM_INT = 'mediumInt';
+    public const TYPE_MEDIUM_INT = 'mediumInt';
 
-    const TYPE_MEDIUM_TEXT = 'mediumText';
+    public const TYPE_MEDIUM_TEXT = 'mediumText';
 
-    const TYPE_TINY_INT = 'tinyInt';
+    public const TYPE_TINY_INT = 'tinyInt';
 
-    const TYPE_SMALL_INT = 'smallInt';
+    public const TYPE_SMALL_INT = 'smallInt';
 
-    const TYPE_STRING = 'string';
+    public const TYPE_STRING = 'string';
 
-    const TYPE_TEXT = 'text';
+    public const TYPE_TEXT = 'text';
 
-    const TYPE_TIMESTAMP = 'timestamp';
+    public const TYPE_TIMESTAMP = 'timestamp';
 
-    const TYPE_JSON = 'json';
+    public const TYPE_JSON = 'json';
 
     /**
      * @var string
@@ -972,7 +972,8 @@ class Schema extends Base
         $sql .= $this->getUnsignedSql($options);
 
         // Avoid automatic generate "NOT NULL DEFAULT NULL" error statement, convert it to "NULL DEFAULT NULL"
-        if (!array_key_exists('default', $options)
+        if (
+            !array_key_exists('default', $options)
             && $this->autoDefault
             && null === $this->typeDefaults[$options['type']]
             && !$this->defaultNullable

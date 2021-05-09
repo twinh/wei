@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -307,7 +308,8 @@ class E extends Base
          * The following replaces characters undefined in HTML with the
          * hex entity for the Unicode replacement character.
          */
-        if (($ord <= 0x1f && "\t" != $chr && "\n" != $chr && "\r" != $chr)
+        if (
+            ($ord <= 0x1f && "\t" != $chr && "\n" != $chr && "\r" != $chr)
             || ($ord >= 0x7f && $ord <= 0x9f)
         ) {
             return '&#xFFFD;';

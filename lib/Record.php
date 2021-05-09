@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wei Framework
  *
@@ -20,13 +21,13 @@ namespace Wei;
 class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countable
 {
     /* The query types. */
-    const SELECT = 0;
-    const DELETE = 1;
-    const UPDATE = 2;
+    public const SELECT = 0;
+    public const DELETE = 1;
+    public const UPDATE = 2;
 
     /* The builder states. */
-    const STATE_DIRTY = 0;
-    const STATE_CLEAN = 1;
+    public const STATE_DIRTY = 0;
+    public const STATE_CLEAN = 1;
 
     /**
      * The record table name

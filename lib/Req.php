@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wei Framework
  *
@@ -1014,7 +1015,8 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         // If using mod_rewrite or ISAPI_Rewrite strip the script filename
         // out of the base path. $pos !== 0 makes sure it is not matching a
         // value from PATH_INFO or QUERY_STRING.
-        if (strlen($requestUri) >= strlen($baseUrl)
+        if (
+            strlen($requestUri) >= strlen($baseUrl)
             && (false !== ($pos = strpos($requestUri, $baseUrl)) && 0 !== $pos)
         ) {
             $baseUrl = substr($requestUri, 0, $pos + strlen($baseUrl));

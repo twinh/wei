@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wei Framework
  *
@@ -24,7 +25,8 @@ class IsFloat extends BaseValidator
      */
     protected function doValidate($input)
     {
-        if (!is_float(filter_var($input, \FILTER_VALIDATE_FLOAT))
+        if (
+            !is_float(filter_var($input, \FILTER_VALIDATE_FLOAT))
             // `true` will convert to `1.0`
             || true === $input
         ) {

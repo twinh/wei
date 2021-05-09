@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wei Framework
  *
@@ -31,7 +32,8 @@ class IsBlank extends BaseValidator
      */
     protected function doValidate($input)
     {
-        if (in_array($input, $this->invalid, true)
+        if (
+            in_array($input, $this->invalid, true)
             || ($this->isString($input) && '' === trim($input))
         ) {
             return true;
