@@ -349,7 +349,10 @@ jobs:
           composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Run
-        run: ./vendor/bin/miaoxing-phpmnd
+        run: >
+          ./vendor/bin/phpmnd lib tests --ignore-numbers=-1,0,1,2,3 --non-zero-exit-on-violation --progress
+          --exclude-path E.php --exclude-path Pinyin.php --exclude-path unit/ETest.php
+          --exclude-path IsIdCardHk.php --exclude-path IsIdCardTw.php --exclude-path Password.php
 
   php-cs-fixer:
     runs-on: ${{ matrix.operating-system }}

@@ -27,6 +27,10 @@ namespace Wei;
  */
 class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 {
+    public const HTTP_PORT = 80;
+
+    public const HTTPS_PORT = 443;
+
     /**
      * The request parameters, equals to $_REQUEST when $fromGlobal is true
      *
@@ -530,7 +534,7 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function getSchemeAndHost()
     {
         $port = $this->getServer('SERVER_PORT');
-        if (80 == $port || 443 == $port || empty($port)) {
+        if (static::HTTP_PORT == $port || static::HTTPS_PORT == $port || empty($port)) {
             $port = '';
         } else {
             $port = ':' . $port;

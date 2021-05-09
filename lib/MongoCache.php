@@ -16,6 +16,8 @@ namespace Wei;
  */
 class MongoCache extends BaseCache
 {
+    private const OK_CODE = 1.0;
+
     /**
      * The host connect to MongoDB
      *
@@ -92,7 +94,7 @@ class MongoCache extends BaseCache
             'expire' => $expire ? time() + $expire : 2147483647,
             'lastModified' => time(),
         ]);
-        return 1.0 === $result['ok'];
+        return static::OK_CODE === $result['ok'];
     }
 
     /**

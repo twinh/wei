@@ -20,6 +20,10 @@ use SimpleXMLElement;
  */
 class WeChatApp extends Base
 {
+    protected const RANDOM_STR_LENGTH = 16;
+
+    private const MAX_PAD_VALUE = 32;
+
     /**
      * A string to generate signature
      *
@@ -1071,7 +1075,7 @@ class WeChatApp extends Base
             // 去除补位字符
             $result = $this->pkcs7Decode($decrypted);
             // 去除16位随机字符串,网络字节序和AppId
-            if (strlen($result) < 16) {
+            if (strlen($result) < static::RANDOM_STR_LENGTH) {
                 return ['code' => -2003, 'message' => '解密后结果不能小于16位', 'result' => $result];
             }
             $content = substr($result, 16, strlen($result));
@@ -1150,7 +1154,7 @@ class WeChatApp extends Base
         $str = '';
         $strPol = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
         $max = strlen($strPol) - 1;
-        for ($i = 0; $i < 16; ++$i) {
+        for ($i = 0; $i < static::RANDOM_STR_LENGTH; ++$i) {
             $str .= $strPol[mt_rand(0, $max)];
         }
         return $str;
@@ -1191,7 +1195,7 @@ class WeChatApp extends Base
     protected function pkcs7Decode($text)
     {
         $pad = ord(substr($text, -1));
-        if ($pad < 1 || $pad > 32) {
+        if ($pad < 1 || $pad > static::MAX_PAD_VALUE) {
             $pad = 0;
         }
         return substr($text, 0, (strlen($text) - $pad));

@@ -17,6 +17,12 @@ namespace Wei;
  */
 class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 {
+    private const MIN_SUCCESSFUL = 200;
+
+    private const MAX_SUCCESSFUL = 299;
+
+    private const NOT_MODIFIED = 304;
+
     /**
      * The request URL
      *
@@ -667,7 +673,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Check if the offset exists
      *
-     * @param  string $offset
+     * @param string $offset
      * @return bool
      */
     public function offsetExists($offset)
@@ -678,7 +684,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Get the offset value
      *
-     * @param  string $offset
+     * @param string $offset
      * @return mixed
      */
     public function offsetGet($offset)
@@ -890,7 +896,9 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             }
 
             $statusCode = $curlInfo['http_code'];
-            $isSuccess = $statusCode >= 200 && $statusCode < 300 || 304 === $statusCode;
+            $isSuccess = $statusCode >= static::MIN_SUCCESSFUL
+                && $statusCode <= static::MAX_SUCCESSFUL
+                || static::NOT_MODIFIED === $statusCode;
             if ($isSuccess) {
                 $this->response = $this->parseResponse($this->responseText, $exception);
                 if (!$exception) {

@@ -156,16 +156,16 @@ class IsEach extends BaseValidator
      */
     private function getSuffix($index)
     {
+        $suffixes = [
+            1 => 'st',
+            2 => 'nd',
+            3 => 'rd',
+        ];
+
         if (!in_array(($index % 100), [11, 12, 13], true)) {
-            switch ($index % 10) {
-                case 1:
-                    return 'st';
-                case 2:
-                    return 'nd';
-                case 3:
-                    return 'rd';
-            }
+            return $suffixes[$index % 10] ?? 'th';
         }
+
         return 'th';
     }
 }

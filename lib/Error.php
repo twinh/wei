@@ -20,6 +20,16 @@ use Throwable;
  */
 class Error extends Base
 {
+    private const MAX_EXIT_CODE = 255;
+
+    private const MIN_HTTP_CODE = 100;
+
+    private const MAX_HTTP_CODE = 600;
+
+    private const NOT_FOUND = 404;
+
+    private const DEFAULT_ERROR_CODE = 500;
+
     /**
      * The default error view
      *
@@ -177,7 +187,7 @@ class Error extends Base
             call_user_func($this->prevExceptionHandler, $exception);
         }
 
-        if (404 == $exception->getCode()) {
+        if (static::NOT_FOUND == $exception->getCode()) {
             if ($this->triggerHandler('notFound', $exception)) {
                 return;
             }
@@ -199,12 +209,12 @@ class Error extends Base
         $debug = $this->wei->isDebug();
 
         // HTTP status code
-        if ($code < 100 || $code > 600) {
-            $code = 500;
+        if ($code < static::MIN_HTTP_CODE || $code > static::MAX_HTTP_CODE) {
+            $code = static::DEFAULT_ERROR_CODE;
         }
 
         // Logger level
-        if ($code >= 500) {
+        if ($code >= static::DEFAULT_ERROR_CODE) {
             $level = 'critical';
         } else {
             $level = 'info';
@@ -314,7 +324,7 @@ HTML;
             return;
         }
         restore_error_handler();
-        throw new \ErrorException($message, $code, 500, $file, $line);
+        throw new \ErrorException($message, $code, static::DEFAULT_ERROR_CODE, $file, $line);
     }
 
     /**
@@ -474,8 +484,8 @@ HTML;
         }
 
         $code = (int) $code;
-        if ($code > 255) {
-            return 255;
+        if ($code > static::MAX_EXIT_CODE) {
+            return static::MAX_EXIT_CODE;
         }
 
         return $code;

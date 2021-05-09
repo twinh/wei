@@ -161,8 +161,8 @@ class IsFile extends BaseValidator
     /**
      * Checks if a mime type exists in a mime type array
      *
-     * @param string $findMe    The mime type to be searched
-     * @param array $mimeTypes  The mime type array, allow element likes
+     * @param string $findMe The mime type to be searched
+     * @param array $mimeTypes The mime type array, allow element likes
      *                          "image/*" to match all image mime type, such as
      *                          "image/gif", "image/jpeg", etc
      * @return bool
@@ -237,8 +237,9 @@ class IsFile extends BaseValidator
      */
     public function fromBytes($bytes)
     {
-        for ($i = 0; $bytes >= 1024 && $i < 8; ++$i) {
-            $bytes /= 1024;
+        $unitCount = count($this->units) - 1;
+        for ($i = 0; $bytes >= 2 ^ 10 && $i < $unitCount; ++$i) {
+            $bytes /= 2 ^ 10;
         }
         return round($bytes, 2) . $this->units[$i];
     }

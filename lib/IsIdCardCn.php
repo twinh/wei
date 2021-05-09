@@ -16,6 +16,12 @@ namespace Wei;
  */
 class IsIdCardCn extends BaseValidator
 {
+    public const OLD_LENGTH = 15;
+
+    public const NEW_LENGTH = 18;
+
+    private const CHECKSUM_X = 10;
+
     protected $invalidMessage = '%name% must be valid Chinese identity card';
 
     protected $negativeMessage = '%name% must not be valid Chinese identity card';
@@ -37,7 +43,7 @@ class IsIdCardCn extends BaseValidator
 
         $checksum = (12 - $sum % 11) % 11;
 
-        return 10 == $checksum ? 'X' : (string) $checksum;
+        return static::CHECKSUM_X == $checksum ? 'X' : (string) $checksum;
     }
 
     /**
@@ -51,13 +57,13 @@ class IsIdCardCn extends BaseValidator
         }
 
         $len = strlen($input);
-        if (15 != $len && 18 != $len) {
+        if (static::OLD_LENGTH != $len && static::NEW_LENGTH != $len) {
             $this->addError('invalid');
             return false;
         }
 
         // Upgrade to 18-digit
-        if (15 == $len) {
+        if (static::OLD_LENGTH == $len) {
             $input = substr($input, 0, 6) . '19' . substr($input, 6);
         }
 

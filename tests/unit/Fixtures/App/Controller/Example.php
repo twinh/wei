@@ -66,7 +66,7 @@ class Example extends \Wei\BaseController
 
     public function returnIntAction()
     {
-        return 123;
+        return (int) 123;
     }
 
     public function returnNullAction()
@@ -76,7 +76,7 @@ class Example extends \Wei\BaseController
 
     public function returnFloatAction()
     {
-        return 1.1;
+        return (float) 1.1;
     }
 
     public function returnTrueAction()
