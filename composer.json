@@ -1,46 +1,50 @@
 {
-    "name": "wei/wei",
-    "description": "A micro-framework provided powerful and simple APIs for faster and easier PHP development.",
-    "type": "library",
-    "keywords": [
-        "framework",
-        "cache",
-        "database",
-        "validator"
-    ],
-    "homepage": "https://github.com/twinh/wei",
-    "license": "MIT",
-    "require": {
-        "php": ">=7.2"
-    },
-    "require-dev": {
-        "joseph-lenton/php-error": "dev-master",
-        "phpunit/phpunit": "^8",
-        "miaoxing/dev": "^6.4.0"
-    },
-    "authors": [
-        {
-            "name": "Twin Huang",
-            "email": "twinhuang@qq.com",
-            "homepage": "https://github.com/twinh/wei"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Wei\\": "lib"
-        },
-        "files": [
-            "lib/Wei.php"
-        ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "WeiTest\\": "tests/unit"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.9.x-dev"
-        }
+  "name": "wei/wei",
+  "description": "A micro-framework provided powerful and simple APIs for faster and easier PHP development.",
+  "type": "library",
+  "keywords": [
+    "framework",
+    "cache",
+    "database",
+    "validator"
+  ],
+  "homepage": "https://github.com/twinh/wei",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.2"
+  },
+  "require-dev": {
+    "joseph-lenton/php-error": "dev-master",
+    "phpunit/phpunit": "^8",
+    "miaoxing/dev": "^6.4.0"
+  },
+  "authors": [
+    {
+      "name": "Twin Huang",
+      "email": "twinhuang@qq.com",
+      "homepage": "https://github.com/twinh/wei"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Wei\\": "lib"
+    },
+    "files": [
+      "lib/Wei.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "WeiTest\\": "tests/unit"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.9.x-dev"
+    },
+    "require-ci": {
+      "miaoxing/dev": "miaoxing/dev as 6.x-dev",
+      "miaoxing/phpstan-miaoxing": "miaoxing/phpstan-miaoxing as 0.1.x-dev"
+    }
+  }
 }
