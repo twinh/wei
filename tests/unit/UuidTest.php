@@ -7,9 +7,11 @@ namespace WeiTest;
  */
 final class UuidTest extends TestCase
 {
+    protected $testCount = 10;
+
     public function testUuid()
     {
-        for ($i = 0; $i < 10; ++$i) {
+        for ($i = 0; $i < $this->testCount; ++$i) {
             $this->assertTrue($this->isUuid($this->uuid()));
         }
     }

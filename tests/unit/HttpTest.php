@@ -985,12 +985,14 @@ final class HttpTest extends TestCase
     {
         $http = $this->createPartialMock('\Wei\Http', ['handleResponse']);
 
+        // @phpstan-ignore-next-line Trying to mock an undefined method handleResponse() on class \Wei\Http.
         $http->expects($this->at(0))
             ->method('handleResponse')
             ->willReturnCallback(function () use ($http) {
                 $http->setOption('result', false);
             });
 
+        // @phpstan-ignore-next-line Trying to mock an undefined method handleResponse() on class \Wei\Http.
         $http->expects($this->at(1))
             ->method('handleResponse')
             ->willReturnCallback(function () use ($http) {
