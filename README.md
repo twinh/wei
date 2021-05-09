@@ -16,23 +16,23 @@ Start using Wei in 3 steps, it's easier than any frameworks you've seen before!
 require 'path/to/wei/lib/Wei.php';
 
 // 2. Create the default wei container instance
-$wei = wei(array(
+$wei = wei([
     // Options for wei container
-    'wei' => array(
+    'wei' => [
         'debug' => true,
         // Other options ...
-    ),
+    ],
     // Options for database
-    'db' => array(
+    'db' => [
         'driver'    => 'mysql',
         'host'      => 'localhost',
         'dbname'    => 'wei',
         'charset'   => 'utf8',
         'user'      => 'root',
         'password'  => 'xxxxxx',
-    ),
+    ],
     // More options ...
-));
+]);
 
 // 3. Using "db" object to execute SQL query
 $result = $wei->db->fetch("SELECT 1 + 2");
@@ -42,18 +42,15 @@ $result = $wei->db->fetch("SELECT 1 + 2");
 
 ### Composer
 
-Define the following requirement in your `composer.json` file and run `php composer.phar install` to install
-```json
-{
-    "require": {
-        "wei/wei": "0.9.23"
-    }
-}
+Run the following command to install
+
+```sh
+composer require wei/wei
 ```
 
 ### Download source code
 
-* [Stable Version](https://github.com/twinh/wei/archive/v0.9.23.zip)
+* [Stable Version](https://github.com/twinh/wei/releases/latest)
 * [Develop Version](https://github.com/twinh/wei/archive/master.zip)
 
 ## Resources

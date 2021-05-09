@@ -16,20 +16,10 @@ Wei支持通过[Composer](https://getcomposer.org)下载和直接下载源文件
     $ curl -sS https://getcomposer.org/installer | php
     ```
 
-2. 在根目录下创建或更新您的composer.json文件
-
-    ```json
-    {
-        "require": {
-            "wei/wei": "0.9.23"
-        }
-    }
-    ```
-
-3. 执行安装命令,耐心等待到安装结束
+2. 执行安装命令,耐心等待到安装结束
 
     ```sh
-    $ php composer.phar install
+    composer require wei/wei
     ```
 
 至此,您可以看到根目录下增加了`vendor`目录,安装完成.
@@ -38,11 +28,11 @@ Wei支持通过[Composer](https://getcomposer.org)下载和直接下载源文件
 
 ### 稳定版
 
-Zip文件下载: https://github.com/twinh/wei/archive/v0.9.23.zip
+https://github.com/twinh/wei/releases/latest
 
 ### 开发尝鲜版
 
-Zip文件下载: https://github.com/twinh/wei/archive/master.zip
+https://github.com/twinh/wei/archive/master.zip
 
 ### 更多历史版本
 
