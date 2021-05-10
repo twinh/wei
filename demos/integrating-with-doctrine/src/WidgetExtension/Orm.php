@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wei Framework
  *
@@ -58,7 +59,7 @@ class Orm extends Base
         switch (true) {
             case is_string($options['cache']):
                 $class = '\Doctrine\Common\Cache\\' . $options['cache'];
-                $cache = new $class;
+                $cache = new $class();
                 break;
 
             case $options['cache'] instanceof DoctrineCache:
@@ -69,7 +70,7 @@ class Orm extends Base
                 $cache = false;
         }
 
-        $config = new Configuration;
+        $config = new Configuration();
 
         // Set default cache
         if ($cache) {
