@@ -1,3 +1,18 @@
+## [0.10.9](https://github.com/twinh/wei/compare/v0.10.8...v0.10.9) (2021-05-11)
+
+
+### Features
+
+* **wei:** 增加 psr-4 自动加载 ([cb11217](https://github.com/twinh/wei/commit/cb11217bd9af7f2f64856adade8a71742dfb7275))
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `6.4.0` to `7.0.0`
+
 ## [0.10.8](https://github.com/twinh/wei/compare/v0.10.7...v0.10.8) (2021-04-27)
 
 
