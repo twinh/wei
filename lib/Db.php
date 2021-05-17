@@ -400,7 +400,7 @@ class Db extends Base
      * ```
      *
      * @param string $table The name of table
-     * @param string|array $conditions The "id" key value or an associative array containing column-value pairs
+     * @param mixed $conditions The "id" key value or an associative array containing column-value pairs
      * @param string $select The table columns to select
      * @return array|false An associative array containing column-value pairs
      */
@@ -425,7 +425,7 @@ class Db extends Base
      * ```
      *
      * @param string $table The name of table
-     * @param bool $conditions The "id" key value or an associative array containing column-value pairs
+     * @param mixed $conditions The "id" key value or an associative array containing column-value pairs
      * @param string $select The table columns to select
      * @param int $limit The row number to retrieve
      * @return array
