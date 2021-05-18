@@ -10,7 +10,7 @@
 namespace Wei;
 
 /**
- * Check if the input is int value and between -2^63(-9,223,372,036,854,775,808) and 2^64-1(9,223,372,036,854,775,807)
+ * Check if the input is int value and between -2^63(-9,223,372,036,854,775,808) and 2^63-1(9,223,372,036,854,775,807)
  * (8 Bytes)
  *
  * @author      Twin Huang <twinhuang@qq.com>
@@ -18,12 +18,12 @@ namespace Wei;
 class IsBigInt extends IsInt
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $min = -2 ^ 63;
+    protected $min = '-9223372036854775808';
 
     /**
-     * @var int
+     * @var string
      */
-    protected $max = 2 ^ 64 - 1;
+    protected $max = '9223372036854775807';
 }

@@ -22,7 +22,7 @@ class IsUBigInt extends IsInt
     protected $min = 0;
 
     /**
-     * @var int
+     * @var string
      */
-    protected $max = 2 ^ 64 - 1;
+    protected $max = '18446744073709551615';
 }

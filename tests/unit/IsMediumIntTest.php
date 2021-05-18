@@ -31,8 +31,8 @@ final class IsMediumIntTest extends BaseValidatorTestCase
             [0],
             [1],
             [-1],
-            [-2 ^ 23],
-            [2 ^ 23 - 1],
+            [(-2) ** 23],
+            [2 ** 23 - 1],
         ];
     }
 

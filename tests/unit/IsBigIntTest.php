@@ -31,8 +31,8 @@ final class IsBigIntTest extends BaseValidatorTestCase
             [0],
             [1],
             [-1],
-            [-2 ^ 63],
-            [2 ^ 64 - 1],
+            ['-9223372036854775808'], // -2 ** 63
+            ['9223372036854775807'], // 2 ** 63 - 1
         ];
     }
 
@@ -40,8 +40,10 @@ final class IsBigIntTest extends BaseValidatorTestCase
     {
         return [
             ['1.0'],
-            [-2 ^ 63 - 1],
-            [2 ^ 64],
+            [-2 ** 63], // become float
+            [2 ** 64 - 1], // become float
+            ['-9223372036854775809'],
+            ['9223372036854775808'],
         ];
     }
 }

@@ -30,7 +30,8 @@ final class IsUBigIntTest extends BaseValidatorTestCase
         return [
             [1],
             [0],
-            [2 ^ 64 - 1],
+            ['18446744073709551615'], // 2 ** 64-1
+            ['18446744073709551614'],
         ];
     }
 
@@ -39,7 +40,9 @@ final class IsUBigIntTest extends BaseValidatorTestCase
         return [
             ['1.0'],
             [0 - 1],
-            [(2 ^ 64 - 1) + 1],
+            [2 ** 64 - 1], // become float
+            [18446744073709551615], // become float
+            ['18446744073709551616'],
         ];
     }
 }

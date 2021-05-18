@@ -26,12 +26,12 @@ class IsInt extends BaseValidator
     protected $negativeMessage = '%name% must not be an integer value';
 
     /**
-     * @var int|null
+     * @var int|string|null
      */
     protected $min;
 
     /**
-     * @var int|null
+     * @var int|string|null
      */
     protected $max;
 

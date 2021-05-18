@@ -238,8 +238,8 @@ class IsFile extends BaseValidator
     public function fromBytes($bytes)
     {
         $unitCount = count($this->units) - 1;
-        for ($i = 0; $bytes >= 2 ^ 10 && $i < $unitCount; ++$i) {
-            $bytes /= 2 ^ 10;
+        for ($i = 0; $bytes >= 2 ** 10 && $i < $unitCount; ++$i) {
+            $bytes /= 2 ** 10;
         }
         return round($bytes, 2) . $this->units[$i];
     }
