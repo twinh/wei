@@ -1,3 +1,10 @@
+## [0.10.11](https://github.com/twinh/wei/compare/v0.10.10...v0.10.11) (2021-05-21)
+
+
+### Bug Fixes
+
+* **Validator:** 幂计算符号错误，整数溢出变浮点数 ([dcb6980](https://github.com/twinh/wei/commit/dcb6980a75f714c2a94d2216fe01a685274d94fd))
+
 ## [0.10.10](https://github.com/twinh/wei/compare/v0.10.9...v0.10.10) (2021-05-12)
 
 
