@@ -187,7 +187,7 @@ class Error extends Base
             call_user_func($this->prevExceptionHandler, $exception);
         }
 
-        if (static::NOT_FOUND == $exception->getCode()) {
+        if (self::NOT_FOUND == $exception->getCode()) {
             if ($this->triggerHandler('notFound', $exception)) {
                 return;
             }
@@ -209,12 +209,12 @@ class Error extends Base
         $debug = $this->wei->isDebug();
 
         // HTTP status code
-        if ($code < static::MIN_HTTP_CODE || $code > static::MAX_HTTP_CODE) {
-            $code = static::DEFAULT_ERROR_CODE;
+        if ($code < self::MIN_HTTP_CODE || $code > self::MAX_HTTP_CODE) {
+            $code = self::DEFAULT_ERROR_CODE;
         }
 
         // Logger level
-        if ($code >= static::DEFAULT_ERROR_CODE) {
+        if ($code >= self::DEFAULT_ERROR_CODE) {
             $level = 'critical';
         } else {
             $level = 'info';
@@ -324,7 +324,7 @@ HTML;
             return;
         }
         restore_error_handler();
-        throw new \ErrorException($message, $code, static::DEFAULT_ERROR_CODE, $file, $line);
+        throw new \ErrorException($message, $code, self::DEFAULT_ERROR_CODE, $file, $line);
     }
 
     /**
@@ -484,8 +484,8 @@ HTML;
         }
 
         $code = (int) $code;
-        if ($code > static::MAX_EXIT_CODE) {
-            return static::MAX_EXIT_CODE;
+        if ($code > self::MAX_EXIT_CODE) {
+            return self::MAX_EXIT_CODE;
         }
 
         return $code;

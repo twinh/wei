@@ -94,7 +94,7 @@ class MongoCache extends BaseCache
             'expire' => $expire ? time() + $expire : 2147483647,
             'lastModified' => time(),
         ]);
-        return static::OK_CODE === $result['ok'];
+        return self::OK_CODE === $result['ok'];
     }
 
     /**

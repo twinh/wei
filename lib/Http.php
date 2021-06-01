@@ -896,9 +896,9 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             }
 
             $statusCode = $curlInfo['http_code'];
-            $isSuccess = $statusCode >= static::MIN_SUCCESSFUL
-                && $statusCode <= static::MAX_SUCCESSFUL
-                || static::NOT_MODIFIED === $statusCode;
+            $isSuccess = $statusCode >= self::MIN_SUCCESSFUL
+                && $statusCode <= self::MAX_SUCCESSFUL
+                || self::NOT_MODIFIED === $statusCode;
             if ($isSuccess) {
                 $this->response = $this->parseResponse($this->responseText, $exception);
                 if (!$exception) {

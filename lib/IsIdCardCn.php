@@ -43,7 +43,7 @@ class IsIdCardCn extends BaseValidator
 
         $checksum = (12 - $sum % 11) % 11;
 
-        return static::CHECKSUM_X == $checksum ? 'X' : (string) $checksum;
+        return self::CHECKSUM_X == $checksum ? 'X' : (string) $checksum;
     }
 
     /**

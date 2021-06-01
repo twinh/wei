@@ -1075,7 +1075,7 @@ class WeChatApp extends Base
             // 去除补位字符
             $result = $this->pkcs7Decode($decrypted);
             // 去除16位随机字符串,网络字节序和AppId
-            if (strlen($result) < static::RANDOM_STR_LENGTH) {
+            if (strlen($result) < self::RANDOM_STR_LENGTH) {
                 return ['code' => -2003, 'message' => '解密后结果不能小于16位', 'result' => $result];
             }
             $content = substr($result, 16, strlen($result));
