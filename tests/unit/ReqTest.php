@@ -740,6 +740,18 @@ final class ReqTest extends TestCase
         $this->assertTrue($request->isMethod('PUT'));
     }
 
+    public function testXHttpMethodOverride()
+    {
+        $request = new Req([
+            'wei' => $this->wei,
+            'fromGlobal' => false,
+            'servers' => [
+                'HTTP_X_HTTP_METHOD_OVERRIDE' => 'PUT',
+            ],
+        ]);
+        $this->assertTrue($request->isMethod('PUT'));
+    }
+
     public function testArrayAccess()
     {
         $this->assertArrayBehaviour([]);

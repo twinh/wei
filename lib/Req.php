@@ -581,7 +581,11 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function getMethod()
     {
         if (null === $this->method) {
-            $this->method = $this->getServer('REQUEST_METHOD', 'GET');
+            if ($method = $this->getServer('HTTP_X_HTTP_METHOD_OVERRIDE')) {
+                $this->method = strtoupper($method);
+            } else {
+                $this->method = $this->getServer('REQUEST_METHOD', 'GET');
+            }
         }
         return $this->method;
     }
