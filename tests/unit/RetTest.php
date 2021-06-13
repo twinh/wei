@@ -237,4 +237,69 @@ final class RetTest extends TestCase
             'code' => -1,
         ], $ret->toArray());
     }
+
+    public function testWithArray()
+    {
+        $ret = Ret::suc()->with(['key' => 'value']);
+        $this->assertSame([
+            'message' => $ret['message'],
+            'code' => 0,
+            'key' => 'value',
+        ], $ret->toArray());
+    }
+
+    public function testWithKeyValue()
+    {
+        $ret = Ret::suc()->with('key', 'value');
+        $this->assertSame([
+            'message' => $ret['message'],
+            'code' => 0,
+            'key' => 'value',
+        ], $ret->toArray());
+    }
+
+    public function testWithOverwrite()
+    {
+        $ret = Ret::suc()->with('message', 'value');
+        $this->assertSame([
+            'message' => 'value',
+            'code' => 0,
+        ], $ret->toArray());
+    }
+
+    public function testDataArray()
+    {
+        $ret = Ret::suc()->data(['key' => 'value']);
+        $this->assertSame([
+            'message' => $ret['message'],
+            'code' => 0,
+            'data' => [
+                'key' => 'value',
+            ],
+        ], $ret->toArray());
+    }
+
+    public function testDataKeyValue()
+    {
+        $ret = Ret::suc()->data('key', 'value');
+        $this->assertSame([
+            'message' => $ret['message'],
+            'code' => 0,
+            'data' => [
+                'key' => 'value',
+            ],
+        ], $ret->toArray());
+    }
+
+    public function testDataOverwrite()
+    {
+        $ret = Ret::suc(['data' => ['key' => 'foo']])->data('key', 'value');
+        $this->assertSame([
+            'data' => [
+                'key' => 'value',
+            ],
+            'message' => $ret['message'],
+            'code' => 0,
+        ], $ret->toArray());
+    }
 }

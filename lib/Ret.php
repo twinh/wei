@@ -122,6 +122,38 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
     }
 
     /**
+     * Add value to the result data
+     *
+     * @param string|array $with
+     * @param mixed $value
+     * @return $this
+     */
+    public function with($with, $value = null): self
+    {
+        if (is_string($with)) {
+            $with = [$with => $value];
+        }
+        $this->data = array_merge($this->data, $with);
+        return $this;
+    }
+
+    /**
+     * Add value to the "data" key in result data
+     *
+     * @param string|array $data
+     * @param mixed $value
+     * @return $this
+     */
+    public function data($data, $value = null): self
+    {
+        if (is_string($data)) {
+            $data = [$data => $value];
+        }
+        $this->data['data'] = array_merge($this->data['data'] ?? [], $data);
+        return $this;
+    }
+
+    /**
      * Returns metadata value by key, or returns all metadata if key is not set
      *
      * @param string|null $key
