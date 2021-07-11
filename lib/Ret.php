@@ -198,6 +198,30 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
     }
 
     /**
+     * Transform result data if exists
+     *
+     * @param string|class-string|object $class
+     * @return $this
+     * @experimental maybe rename
+     */
+    public function transform($class): self
+    {
+        if (!method_exists($class, 'toArray')) {
+            throw new \InvalidArgumentException(sprintf(
+                'Expected class `%s` to have method `toArray`',
+                is_object($class) ? get_class($class) : $class
+            ));
+        }
+
+        if (!isset($this->data['data'])) {
+            return $this;
+        }
+
+        $this->data = $class::toArray($this->data['data']) + $this->data;
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function jsonSerialize()

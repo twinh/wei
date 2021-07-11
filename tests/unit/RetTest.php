@@ -2,6 +2,7 @@
 
 namespace WeiTest;
 
+use Wei\Base;
 use Wei\Logger;
 use Wei\Ret;
 use Wei\RetTrait;
@@ -301,5 +302,79 @@ final class RetTest extends TestCase
             'message' => $ret['message'],
             'code' => 0,
         ], $ret->toArray());
+    }
+
+    public function testTransform()
+    {
+        $ret = Ret::suc(['data' => ['id' => 1, 'password' => 2]]);
+
+        $ret->transform(new class () extends Base {
+            /**
+             * @svc
+             * @param mixed $data
+             */
+            protected function toArray($data): array
+            {
+                return [
+                    'data' => [
+                        'id' => $data['id'],
+                    ],
+                ];
+            }
+        });
+
+        $this->assertSame(['id' => 1], $ret['data']);
+    }
+
+    public function testTransformWithMoreData()
+    {
+        $ret = Ret::suc(['data' => ['id' => 1, 'password' => 2]]);
+
+        $ret->transform(new class () extends Base {
+            /**
+             * @svc
+             * @param mixed $data
+             */
+            protected function toArray($data): array
+            {
+                return [
+                    'custom' => true,
+                    'data' => [
+                        'id' => $data['id'],
+                    ],
+                ];
+            }
+        });
+
+        $this->assertSame(['id' => 1], $ret['data']);
+        $this->assertTrue($ret['custom']);
+    }
+
+    public function testTransformWithoutData()
+    {
+        $ret = Ret::err('err', 1);
+
+        $ret->transform(new class () extends Base {
+            /**
+             * @svc
+             */
+            protected function toArray()
+            {
+                throw new \Exception('should not called');
+            }
+        });
+
+        $this->assertArrayNotHasKey('data', $ret);
+    }
+
+    public function testTransformWithInvalidArgument()
+    {
+        $ret = Ret::suc(['data' => ['id' => 1, 'password' => 2]]);
+
+        $this->expectExceptionObject(new \InvalidArgumentException(
+            'Expected class `stdClass` to have method `toArray`'
+        ));
+
+        $ret->transform(\stdClass::class);
     }
 }
