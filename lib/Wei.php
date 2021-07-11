@@ -821,7 +821,6 @@ namespace Wei {
          * Set import services
          *
          * @param array $import
-         * @return $this
          */
         protected function setImport(array $import = [])
         {
