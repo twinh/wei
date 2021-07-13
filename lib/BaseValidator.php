@@ -18,6 +18,8 @@ namespace Wei;
  */
 abstract class BaseValidator extends Base
 {
+    use RetTrait;
+
     /**
      * Whether the validator cant be
      *
@@ -274,6 +276,22 @@ abstract class BaseValidator extends Base
      * @return bool
      */
     abstract protected function doValidate($input);
+
+    /**
+     * Check the input value, return a Ret object
+     *
+     * @param mixed $input
+     * @param string $name
+     * @return Ret
+     * @svc
+     */
+    protected function check($input, string $name = '%name%'): Ret
+    {
+        if (!$this->isValid($input)) {
+            return $this->err($this->getFirstMessage($name));
+        }
+        return $this->suc();
+    }
 
     /**
      * Adds error definition

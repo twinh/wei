@@ -200,7 +200,7 @@ class IsBetweenMixin {
 }
 
 /**
- * @property    Wei\IsBigInt $isBigInt Check if the input is int value and between -2^63(-9,223,372,036,854,775,808) and 2^64-1(9,223,372,036,854,775,807)
+ * @property    Wei\IsBigInt $isBigInt Check if the input is int value and between -2^63(-9,223,372,036,854,775,808) and 2^63-1(9,223,372,036,854,775,807)
  * @method      mixed isBigInt($input, $min = null, $max = null)
  */
 class IsBigIntMixin {

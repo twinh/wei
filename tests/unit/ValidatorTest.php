@@ -4,6 +4,7 @@ namespace WeiTest;
 
 use Wei\IsEmail;
 use Wei\IsLength;
+use Wei\IsPositiveInteger;
 use Wei\IsRequired;
 use Wei\Validate;
 
@@ -16,6 +17,13 @@ use Wei\Validate;
  */
 final class ValidatorTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        wei()->t->setLocale('en');
+    }
+
     public function testIsInException()
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -899,5 +907,23 @@ final class ValidatorTest extends TestCase
 
         $this->assertTrue($result);
         $this->assertSame(['required', 'email', 'required', 'digit', 'between'], $currentRules);
+    }
+
+    public function testCheck()
+    {
+        $ret = IsPositiveInteger::check(1, 'Number');
+        $this->assertRetSuc($ret);
+    }
+
+    public function testCheckErr()
+    {
+        $ret = IsPositiveInteger::check(0, 'Number');
+        $this->assertRetErr($ret, 'Number must be positive integer');
+    }
+
+    public function testCheckWithoutName()
+    {
+        $ret = IsPositiveInteger::check(0);
+        $this->assertRetErr($ret, '%name% must be positive integer');
     }
 }
