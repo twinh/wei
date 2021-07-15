@@ -5,7 +5,7 @@ namespace WeiTest;
 /**
  * @internal
  */
-class IsUNumberTest extends BaseValidatorTestCase
+final class IsUNumberTest extends BaseValidatorTestCase
 {
     protected function setUp(): void
     {

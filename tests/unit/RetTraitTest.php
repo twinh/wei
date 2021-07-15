@@ -7,7 +7,7 @@ use Wei\RetTrait;
 /**
  * @internal
  */
-class RetTraitTest extends TestCase
+final class RetTraitTest extends TestCase
 {
     use RetTrait;
 

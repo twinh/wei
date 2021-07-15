@@ -15,7 +15,7 @@ namespace Wei;
  * @author      Twin Huang <twinhuang@qq.com>
  * @internal    This is not a really validator, may be change in the future
  */
-class IsAllowEmpty extends BaseValidator
+final class IsAllowEmpty extends BaseValidator
 {
     /**
      * {@inheritdoc}

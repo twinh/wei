@@ -7,7 +7,7 @@ use Wei\Share;
 /**
  * @internal
  */
-class ShareTest extends TestCase
+final class ShareTest extends TestCase
 {
     public function testTitle()
     {
