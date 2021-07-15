@@ -291,7 +291,7 @@ jobs:
           composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Run
-        run: ./vendor/bin/miaoxing-phpmd
+        run: ./vendor/bin/miaoxing-phpmd --exclude tests/unit/RetTest.php
 
   phpmnd:
     runs-on: ${{ matrix.operating-system }}
