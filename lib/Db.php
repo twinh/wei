@@ -10,6 +10,7 @@
 namespace Wei;
 
 use PDO;
+use Wei\Db\Raw;
 
 /**
  * A database service inspired by Doctrine DBAL
@@ -341,9 +342,9 @@ class Db extends Base
     }
 
     /**
-     * @deprecated use batchInsert instead
      * @param mixed $table
      * @param mixed|null $extra
+     * @deprecated use batchInsert instead
      */
     public function insertBatch($table, array $data, $extra = null)
     {
@@ -1011,6 +1012,40 @@ class Db extends Base
         }
     }
 
+    /**
+     * Return the raw value
+     *
+     * @param Raw $raw
+     * @return mixed
+     */
+    public function getRawValue(Raw $raw)
+    {
+        return $raw->getValue();
+    }
+
+    /**
+     * Check if a variable is a raw object
+     *
+     * @param mixed $raw
+     * @return bool
+     */
+    public function isRaw($raw): bool
+    {
+        return $raw instanceof Raw;
+    }
+
+    /**
+     * Create a raw value instance
+     *
+     * @param mixed $value
+     * @return Raw
+     * @svc
+     */
+    protected function raw($value): Raw
+    {
+        return new Raw($value);
+    }
+
     protected function filter($data, $name)
     {
         $fields = [];
@@ -1032,8 +1067,8 @@ class Db extends Base
                 // Note that if the column is string type, it will insert/update a "0" string
                 $data[$key] = 0;
                 $query[] = $column . '?';
-            } elseif ($value instanceof \stdClass && isset($value->scalar)) {
-                $query[] = $column . $value->scalar;
+            } elseif ($this->isRaw($value)) {
+                $query[] = $column . $this->getRawValue($value);
                 unset($data[$key]);
             } else {
                 $query[] = $column . '?';

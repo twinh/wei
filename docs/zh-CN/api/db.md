@@ -231,7 +231,7 @@ $db = $wei->db;
 
 // 执行写操作,使用主数据库
 $db->insert('table', array('key' => 'value'));
-$db->update('table', array('set' => 'value'), array('where' => 'value'))
+$db->update('table', array('set' => 'value'), array('where' => 'value'));
 
 // 执行读操作,使用备数据库
 $db->select('table', array('key' => 'value'));
@@ -244,7 +244,7 @@ $slaveDb = $wei->slaveDb;
 $slaveDb->select('table', array('key' => 'value'));
 ```
 
-### 使用`(object)`加强增删查改(CRUD)操作
+### 使用 `raw` 方法加强增删查改(CRUD)操作
 
 传统的数据库框架中,要增加文章点击数,为用户增减积分等操作,CRUD是无法一步实现的.
 
@@ -264,35 +264,39 @@ wei()->db->update('article', array('hit' => $article['hit']++), array('id' => 1)
 wei()->db->executeUpdate("UPDATE article SET hit = hit + 1 WHERE id = ?", array('id' => 1));
 ```
 
-在微框架中提供了一种非常简洁的方法,只需在要插入的值前面加上`(object)`,即可实现一步更新数据,同时避免并发问题.
+在微框架中提供了一种方法,只需在要使用插入的值使用 `raw` 方法包起来,即可实现一步更新数据,同时避免并发问题.
 
 ```php
-wei()->db->update('article', array('hit' => (object)'hit + 1'), array('id' => 1));
+use Wei\Db;
+
+wei()->db->update('article', array('hit' => Db::raw('hit + 1')), array('id' => 1));
 ```
 
-**使用`(object)`对比**
+**使用 `raw` 对比**
 
 写法                                                                        | 生成的SQL语句
 ----------------------------------------------------------------------------|---------------
 wei()->db->update('article', hit' => 'hit + 1', array('id' => 1));          | UPDATE article SET hit = ? WHERE id = ?
-wei()->db->update('article', hit' => (object)'hit + 1', array('id' => 1));  | UPDATE article SET hit = hit + 1 WHERE id = ?
+wei()->db->update('article', hit' => Db::raw('hit + 1'), array('id' => 1));  | UPDATE article SET hit = hit + 1 WHERE id = ?
 
 > #### 注意
 >
 > 目前只有`insert`, `update`, `delete`方法支持
 
-#### 在Active Record中使用`(object)`
+#### 在Active Record中使用 `raw`
 
 为文章增加1点击数
 
 ```php
+use Wei\Db;
+
 $article = wei()->db('article')->find(1);
 
 // 记录原始点击数,可供后续输出使用
 $hit = $article['hit'];
 
 // 更改点击数并保存
-$article['hit'] = (object)'hit + 1';
+$article['hit'] = Db::raw('hit + 1');
 $article->save();
 
 // 如果后续需要用到`hit`字段的值,有两种方法

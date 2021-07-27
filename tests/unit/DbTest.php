@@ -1472,13 +1472,13 @@ class DbTest extends TestCase
         }
     }
 
-    public function testInsertWithSqlObject()
+    public function testInsertWithRawValue()
     {
         $this->initFixtures();
 
         $this->db->insert('member', [
             'group_id' => '1',
-            'name' => (object) '1 + 1',
+            'name' => $this->db->raw('1 + 1'),
             'address' => 'test',
         ]);
 
@@ -1518,11 +1518,15 @@ class DbTest extends TestCase
         $this->assertSame('0', $member['name']);
     }
 
-    public function testUpdateWithSqlObject()
+    public function testUpdateWithRawValue()
     {
         $this->initFixtures();
 
-        $this->db->update('member', ['group_id' => (object) 'group_id + 1'], ['id' => (object) '0.5 + 0.5']);
+        $this->db->update(
+            'member',
+            ['group_id' => $this->db->raw('group_id + 1')],
+            ['id' => $this->db->raw('0.5 + 0.5')]
+        );
 
         $member = $this->db->select('member', 1);
 
@@ -1533,7 +1537,7 @@ class DbTest extends TestCase
     {
         $this->initFixtures();
 
-        $result = $this->db->delete('member', ['id' => (object) '0.5 + 0.5']);
+        $result = $this->db->delete('member', ['id' => $this->db->raw('0.5 + 0.5')]);
 
         $this->assertEquals(1, $result);
         $this->assertFalse($this->db->select('member', 1));
@@ -1546,7 +1550,7 @@ class DbTest extends TestCase
         $member = $this->db->find('member', 1);
         $groupId = $member['group_id'];
 
-        $member['group_id'] = (object) 'group_id + 1';
+        $member['group_id'] = $this->db->raw('group_id + 1');
         $member->save();
         $member->reload();
 

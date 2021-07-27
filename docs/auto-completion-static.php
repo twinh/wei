@@ -52,6 +52,16 @@ class Counter
 
 class Db
 {
+    /**
+     * Create a raw value instance
+     *
+     * @param mixed $value
+     * @return Raw
+     * @see Db::raw
+     */
+    public static function raw($value): Db\Raw
+    {
+    }
 }
 
 class DbCache
@@ -167,7 +177,7 @@ class IsAll
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -182,7 +192,7 @@ class IsAllOf
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -197,7 +207,7 @@ class IsAllowEmpty
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -212,7 +222,7 @@ class IsAlnum
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -227,7 +237,7 @@ class IsAlpha
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -242,7 +252,7 @@ class IsAnyDateTime
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -257,7 +267,7 @@ class IsArray
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -272,7 +282,7 @@ class IsBetween
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -287,7 +297,7 @@ class IsBigInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -302,7 +312,7 @@ class IsBlank
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -317,7 +327,7 @@ class IsBool
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -332,7 +342,7 @@ class IsBoolable
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -347,7 +357,7 @@ class IsCallback
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -362,7 +372,7 @@ class IsChar
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -377,7 +387,7 @@ class IsChildren
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -392,7 +402,7 @@ class IsChinese
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -407,7 +417,7 @@ class IsColor
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -422,7 +432,7 @@ class IsContains
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -437,7 +447,7 @@ class IsCreditCard
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -452,7 +462,7 @@ class IsDate
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -467,7 +477,7 @@ class IsDateTime
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -482,7 +492,7 @@ class IsDecimal
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -497,7 +507,7 @@ class IsDefaultInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -512,7 +522,7 @@ class IsDigit
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -527,7 +537,7 @@ class IsDir
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -542,7 +552,7 @@ class IsDivisibleBy
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -557,7 +567,7 @@ class IsDoubleByte
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -572,7 +582,7 @@ class IsEach
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -587,7 +597,7 @@ class IsEmail
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -602,7 +612,7 @@ class IsEmpty
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -617,7 +627,7 @@ class IsEndsWith
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -632,7 +642,7 @@ class IsEqualTo
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -647,7 +657,7 @@ class IsExists
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -662,7 +672,7 @@ class IsFieldExists
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -677,7 +687,7 @@ class IsFile
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -692,7 +702,7 @@ class IsFloat
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -707,7 +717,7 @@ class IsGreaterThan
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -722,7 +732,7 @@ class IsGreaterThanOrEqual
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -737,7 +747,7 @@ class IsGt
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -752,7 +762,7 @@ class IsGte
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -767,7 +777,7 @@ class IsIdCardCn
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -782,7 +792,7 @@ class IsIdCardHk
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -797,7 +807,7 @@ class IsIdCardMo
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -812,7 +822,7 @@ class IsIdCardTw
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -827,7 +837,7 @@ class IsIdenticalTo
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -842,7 +852,7 @@ class IsImage
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -857,7 +867,7 @@ class IsIn
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -872,7 +882,7 @@ class IsInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -887,7 +897,7 @@ class IsIp
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -902,7 +912,7 @@ class IsLength
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -917,7 +927,7 @@ class IsLessThan
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -932,7 +942,7 @@ class IsLessThanOrEqual
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -947,7 +957,7 @@ class IsLowercase
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -962,7 +972,7 @@ class IsLt
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -977,7 +987,7 @@ class IsLte
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -992,7 +1002,7 @@ class IsLuhn
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1007,7 +1017,7 @@ class IsMaxAccuracy
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1022,7 +1032,7 @@ class IsMaxCharLength
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1037,7 +1047,7 @@ class IsMaxLength
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1052,7 +1062,7 @@ class IsMediumInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1067,7 +1077,7 @@ class IsMediumText
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1082,7 +1092,7 @@ class IsMinCharLength
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1097,7 +1107,7 @@ class IsMinLength
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1112,7 +1122,7 @@ class IsMobileCn
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1127,7 +1137,7 @@ class IsNaturalNumber
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1142,7 +1152,7 @@ class IsNoneOf
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1157,7 +1167,7 @@ class IsNullType
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1172,7 +1182,7 @@ class IsNumber
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1187,7 +1197,7 @@ class IsObject
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1202,7 +1212,7 @@ class IsOneOf
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1217,7 +1227,7 @@ class IsPassword
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1232,7 +1242,7 @@ class IsPhone
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1247,7 +1257,7 @@ class IsPhoneCn
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1262,7 +1272,7 @@ class IsPlateNumberCn
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1277,7 +1287,7 @@ class IsPositiveInteger
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1292,7 +1302,7 @@ class IsPostcodeCn
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1307,7 +1317,7 @@ class IsPresent
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1322,7 +1332,7 @@ class IsQQ
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1337,7 +1347,7 @@ class IsRecordExists
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1352,7 +1362,7 @@ class IsRegex
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1367,7 +1377,7 @@ class IsRequired
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1382,7 +1392,7 @@ class IsSmallInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1397,7 +1407,7 @@ class IsSomeOf
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1412,7 +1422,7 @@ class IsStartsWith
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1427,7 +1437,7 @@ class IsString
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1442,7 +1452,7 @@ class IsText
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1457,7 +1467,7 @@ class IsTime
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1472,7 +1482,7 @@ class IsTinyChar
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1487,7 +1497,7 @@ class IsTinyInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1502,7 +1512,7 @@ class IsTld
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1517,7 +1527,7 @@ class IsType
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1532,7 +1542,7 @@ class IsUBigInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1547,7 +1557,7 @@ class IsUDefaultInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1562,7 +1572,7 @@ class IsUMediumInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1577,7 +1587,7 @@ class IsUNumber
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1592,7 +1602,7 @@ class IsUSmallInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1607,7 +1617,7 @@ class IsUTinyInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1622,7 +1632,7 @@ class IsUppercase
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1637,7 +1647,7 @@ class IsUrl
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -1652,7 +1662,7 @@ class IsUuid
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -2034,7 +2044,7 @@ class Upload
      * @return Ret
      * @see BaseValidator::check
      */
-    public static function check($input, string $name): Ret
+    public static function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -3819,6 +3829,16 @@ class Counter
 
 class Db
 {
+    /**
+     * Create a raw value instance
+     *
+     * @param mixed $value
+     * @return Raw
+     * @see Db::raw
+     */
+    public function raw($value): Db\Raw
+    {
+    }
 }
 
 class DbCache
@@ -3934,7 +3954,7 @@ class IsAll
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -3949,7 +3969,7 @@ class IsAllOf
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -3964,7 +3984,7 @@ class IsAllowEmpty
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -3979,7 +3999,7 @@ class IsAlnum
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -3994,7 +4014,7 @@ class IsAlpha
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4009,7 +4029,7 @@ class IsAnyDateTime
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4024,7 +4044,7 @@ class IsArray
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4039,7 +4059,7 @@ class IsBetween
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4054,7 +4074,7 @@ class IsBigInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4069,7 +4089,7 @@ class IsBlank
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4084,7 +4104,7 @@ class IsBool
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4099,7 +4119,7 @@ class IsBoolable
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4114,7 +4134,7 @@ class IsCallback
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4129,7 +4149,7 @@ class IsChar
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4144,7 +4164,7 @@ class IsChildren
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4159,7 +4179,7 @@ class IsChinese
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4174,7 +4194,7 @@ class IsColor
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4189,7 +4209,7 @@ class IsContains
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4204,7 +4224,7 @@ class IsCreditCard
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4219,7 +4239,7 @@ class IsDate
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4234,7 +4254,7 @@ class IsDateTime
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4249,7 +4269,7 @@ class IsDecimal
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4264,7 +4284,7 @@ class IsDefaultInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4279,7 +4299,7 @@ class IsDigit
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4294,7 +4314,7 @@ class IsDir
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4309,7 +4329,7 @@ class IsDivisibleBy
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4324,7 +4344,7 @@ class IsDoubleByte
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4339,7 +4359,7 @@ class IsEach
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4354,7 +4374,7 @@ class IsEmail
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4369,7 +4389,7 @@ class IsEmpty
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4384,7 +4404,7 @@ class IsEndsWith
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4399,7 +4419,7 @@ class IsEqualTo
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4414,7 +4434,7 @@ class IsExists
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4429,7 +4449,7 @@ class IsFieldExists
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4444,7 +4464,7 @@ class IsFile
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4459,7 +4479,7 @@ class IsFloat
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4474,7 +4494,7 @@ class IsGreaterThan
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4489,7 +4509,7 @@ class IsGreaterThanOrEqual
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4504,7 +4524,7 @@ class IsGt
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4519,7 +4539,7 @@ class IsGte
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4534,7 +4554,7 @@ class IsIdCardCn
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4549,7 +4569,7 @@ class IsIdCardHk
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4564,7 +4584,7 @@ class IsIdCardMo
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4579,7 +4599,7 @@ class IsIdCardTw
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4594,7 +4614,7 @@ class IsIdenticalTo
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4609,7 +4629,7 @@ class IsImage
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4624,7 +4644,7 @@ class IsIn
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4639,7 +4659,7 @@ class IsInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4654,7 +4674,7 @@ class IsIp
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4669,7 +4689,7 @@ class IsLength
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4684,7 +4704,7 @@ class IsLessThan
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4699,7 +4719,7 @@ class IsLessThanOrEqual
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4714,7 +4734,7 @@ class IsLowercase
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4729,7 +4749,7 @@ class IsLt
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4744,7 +4764,7 @@ class IsLte
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4759,7 +4779,7 @@ class IsLuhn
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4774,7 +4794,7 @@ class IsMaxAccuracy
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4789,7 +4809,7 @@ class IsMaxCharLength
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4804,7 +4824,7 @@ class IsMaxLength
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4819,7 +4839,7 @@ class IsMediumInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4834,7 +4854,7 @@ class IsMediumText
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4849,7 +4869,7 @@ class IsMinCharLength
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4864,7 +4884,7 @@ class IsMinLength
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4879,7 +4899,7 @@ class IsMobileCn
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4894,7 +4914,7 @@ class IsNaturalNumber
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4909,7 +4929,7 @@ class IsNoneOf
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4924,7 +4944,7 @@ class IsNullType
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4939,7 +4959,7 @@ class IsNumber
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4954,7 +4974,7 @@ class IsObject
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4969,7 +4989,7 @@ class IsOneOf
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4984,7 +5004,7 @@ class IsPassword
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -4999,7 +5019,7 @@ class IsPhone
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5014,7 +5034,7 @@ class IsPhoneCn
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5029,7 +5049,7 @@ class IsPlateNumberCn
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5044,7 +5064,7 @@ class IsPositiveInteger
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5059,7 +5079,7 @@ class IsPostcodeCn
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5074,7 +5094,7 @@ class IsPresent
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5089,7 +5109,7 @@ class IsQQ
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5104,7 +5124,7 @@ class IsRecordExists
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5119,7 +5139,7 @@ class IsRegex
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5134,7 +5154,7 @@ class IsRequired
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5149,7 +5169,7 @@ class IsSmallInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5164,7 +5184,7 @@ class IsSomeOf
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5179,7 +5199,7 @@ class IsStartsWith
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5194,7 +5214,7 @@ class IsString
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5209,7 +5229,7 @@ class IsText
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5224,7 +5244,7 @@ class IsTime
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5239,7 +5259,7 @@ class IsTinyChar
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5254,7 +5274,7 @@ class IsTinyInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5269,7 +5289,7 @@ class IsTld
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5284,7 +5304,7 @@ class IsType
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5299,7 +5319,7 @@ class IsUBigInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5314,7 +5334,7 @@ class IsUDefaultInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5329,7 +5349,7 @@ class IsUMediumInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5344,7 +5364,7 @@ class IsUNumber
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5359,7 +5379,7 @@ class IsUSmallInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5374,7 +5394,7 @@ class IsUTinyInt
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5389,7 +5409,7 @@ class IsUppercase
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5404,7 +5424,7 @@ class IsUrl
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5419,7 +5439,7 @@ class IsUuid
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }
@@ -5801,7 +5821,7 @@ class Upload
      * @return Ret
      * @see BaseValidator::check
      */
-    public function check($input, string $name): Ret
+    public function check($input, string $name = '%name%'): Ret
     {
     }
 }

@@ -624,7 +624,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function incr($name, $offset = 1)
     {
-        $this[$name] = (object) ($name . ' + ' . $offset);
+        $this[$name] = $this->db->raw($name . ' + ' . $offset);
         return $this;
     }
 
@@ -637,7 +637,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      */
     public function decr($name, $offset = 1)
     {
-        $this[$name] = (object) ($name . ' - ' . $offset);
+        $this[$name] = $this->db->raw($name . ' - ' . $offset);
         return $this;
     }
 
