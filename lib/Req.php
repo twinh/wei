@@ -902,6 +902,31 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
+     * Check if the specified header is set
+     *
+     * @param string $name
+     * @return bool
+     * @svc
+     */
+    protected function hasHeader(string $name): bool
+    {
+        return isset($this->servers['HTTP_' . strtoupper($name)]);
+    }
+
+    /**
+     * Return the specified header value
+     *
+     * @param string $name
+     * @return string|null
+     * @svc
+     */
+    protected function getHeader(string $name): ?string
+    {
+        $name = 'HTTP_' . strtoupper($name);
+        return $this->servers[$name] ?? null;
+    }
+
+    /**
      * Detect the base URI for the request
      *
      * Looks at a variety of criteria in order to attempt to autodetect a base

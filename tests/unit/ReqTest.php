@@ -1119,6 +1119,28 @@ final class ReqTest extends TestCase
         $this->assertSame([], $data);
     }
 
+    public function testGetHeaderAndHasHeader()
+    {
+        $req = new \Wei\Req([
+            'wei' => $this->wei,
+            'fromGlobal' => false,
+            'servers' => [
+                'HTTP_ORIGIN' => 'https://test.com',
+                'HTTP_TEST' => 'test',
+                'ORIGIN' => 'https://test2.com',
+            ],
+        ]);
+        $this->assertSame('https://test.com', $req->getHeader('ORIGIN'));
+        $this->assertSame('https://test.com', $req->getHeader('origin'));
+        $this->assertSame('test', $req->getHeader('test'));
+        $this->assertNull($req->getHeader('test2'));
+
+        $this->assertTrue($req->hasHeader('ORIGIN'));
+        $this->assertTrue($req->hasHeader('origin'));
+        $this->assertTrue($req->hasHeader('test'));
+        $this->assertFalse($req->hasHeader('test2'));
+    }
+
     protected function initExtraKey()
     {
         // 移除数据避免干扰

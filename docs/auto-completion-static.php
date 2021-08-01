@@ -1812,10 +1812,52 @@ class Redis
 
 class Req
 {
+    /**
+     * Check if the specified header has been set
+     *
+     * @param string $name
+     * @return bool
+     * @see Req::hasHeader
+     */
+    public static function hasHeader(string $name): bool
+    {
+    }
+
+    /**
+     * Return the specified header value
+     *
+     * @param string $name
+     * @return string|null
+     * @see Req::getHeader
+     */
+    public static function getHeader(string $name): ?string
+    {
+    }
 }
 
 class Request
 {
+    /**
+     * Check if the specified header has been set
+     *
+     * @param string $name
+     * @return bool
+     * @see Req::hasHeader
+     */
+    public static function hasHeader(string $name): bool
+    {
+    }
+
+    /**
+     * Return the specified header value
+     *
+     * @param string $name
+     * @return string|null
+     * @see Req::getHeader
+     */
+    public static function getHeader(string $name): ?string
+    {
+    }
 }
 
 class Res
@@ -5589,10 +5631,52 @@ class Redis
 
 class Req
 {
+    /**
+     * Check if the specified header has been set
+     *
+     * @param string $name
+     * @return bool
+     * @see Req::hasHeader
+     */
+    public function hasHeader(string $name): bool
+    {
+    }
+
+    /**
+     * Return the specified header value
+     *
+     * @param string $name
+     * @return string|null
+     * @see Req::getHeader
+     */
+    public function getHeader(string $name): ?string
+    {
+    }
 }
 
 class Request
 {
+    /**
+     * Check if the specified header has been set
+     *
+     * @param string $name
+     * @return bool
+     * @see Req::hasHeader
+     */
+    public function hasHeader(string $name): bool
+    {
+    }
+
+    /**
+     * Return the specified header value
+     *
+     * @param string $name
+     * @return string|null
+     * @see Req::getHeader
+     */
+    public function getHeader(string $name): ?string
+    {
+    }
 }
 
 class Res
