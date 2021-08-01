@@ -927,6 +927,20 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
+     * Check if current request is a preflight request
+     *
+     * @return bool
+     * @link https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
+     * @svc
+     */
+    protected function isPreflight(): bool
+    {
+        return $this->isMethod('OPTIONS')
+            && $this->hasHeader('ORIGIN')
+            && $this->hasHeader('ACCESS_CONTROL_REQUEST_METHOD');
+    }
+
+    /**
      * Detect the base URI for the request
      *
      * Looks at a variety of criteria in order to attempt to autodetect a base

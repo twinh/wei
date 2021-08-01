@@ -1141,6 +1141,57 @@ final class ReqTest extends TestCase
         $this->assertFalse($req->hasHeader('test2'));
     }
 
+    /**
+     * @param array $servers
+     * @param bool $bool
+     * @dataProvider providerForIsPreflight
+     */
+    public function testIsPreflight(array $servers, bool $bool)
+    {
+        $req = new \Wei\Req([
+            'wei' => $this->wei,
+            'fromGlobal' => false,
+            'servers' => $servers,
+        ]);
+        $this->assertSame($bool, $req->isPreflight());
+    }
+
+    public static function providerForIsPreflight(): array
+    {
+        return [
+            [
+                [
+                    'REQUEST_METHOD' => 'OPTIONS',
+                    'HTTP_ORIGIN' => 'https://test.com',
+                    'HTTP_ACCESS_CONTROL_REQUEST_METHOD' => 'PUT',
+                ],
+                true,
+            ],
+            [
+                [
+                    'REQUEST_METHOD' => 'OPTIONS',
+                    'HTTP_ORIGIN' => 'https://test.com',
+                ],
+                false,
+            ],
+            [
+                [
+                    'REQUEST_METHOD' => 'OPTIONS',
+                    'HTTP_ACCESS_CONTROL_REQUEST_METHOD' => 'PUT',
+                ],
+                false,
+            ],
+            [
+                [
+                    'REQUEST_METHOD' => 'PUT',
+                    'HTTP_ORIGIN' => 'https://test.com',
+                    'HTTP_ACCESS_CONTROL_REQUEST_METHOD' => 'PUT',
+                ],
+                false,
+            ],
+        ];
+    }
+
     protected function initExtraKey()
     {
         // 移除数据避免干扰

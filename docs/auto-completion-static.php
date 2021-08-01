@@ -1813,7 +1813,7 @@ class Redis
 class Req
 {
     /**
-     * Check if the specified header has been set
+     * Check if the specified header is set
      *
      * @param string $name
      * @return bool
@@ -1831,6 +1831,14 @@ class Req
      * @see Req::getHeader
      */
     public static function getHeader(string $name): ?string
+    {
+    }
+
+    /**
+     * @return bool
+     * @see Req::isPreflight
+     */
+    public static function isPreflight(): bool
     {
     }
 }
@@ -1838,7 +1846,7 @@ class Req
 class Request
 {
     /**
-     * Check if the specified header has been set
+     * Check if the specified header is set
      *
      * @param string $name
      * @return bool
@@ -1856,6 +1864,14 @@ class Request
      * @see Req::getHeader
      */
     public static function getHeader(string $name): ?string
+    {
+    }
+
+    /**
+     * @return bool
+     * @see Req::isPreflight
+     */
+    public static function isPreflight(): bool
     {
     }
 }
@@ -5632,7 +5648,7 @@ class Redis
 class Req
 {
     /**
-     * Check if the specified header has been set
+     * Check if the specified header is set
      *
      * @param string $name
      * @return bool
@@ -5650,6 +5666,14 @@ class Req
      * @see Req::getHeader
      */
     public function getHeader(string $name): ?string
+    {
+    }
+
+    /**
+     * @return bool
+     * @see Req::isPreflight
+     */
+    public function isPreflight(): bool
     {
     }
 }
@@ -5657,7 +5681,7 @@ class Req
 class Request
 {
     /**
-     * Check if the specified header has been set
+     * Check if the specified header is set
      *
      * @param string $name
      * @return bool
@@ -5675,6 +5699,14 @@ class Request
      * @see Req::getHeader
      */
     public function getHeader(string $name): ?string
+    {
+    }
+
+    /**
+     * @return bool
+     * @see Req::isPreflight
+     */
+    public function isPreflight(): bool
     {
     }
 }
