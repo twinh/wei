@@ -204,8 +204,7 @@ namespace WeiTest
     }
 }
 
-namespace
-{
+namespace {
     if (!function_exists('apache_setenv')) {
         function apache_setenv()
         {
