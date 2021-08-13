@@ -8,6 +8,7 @@ use InvalidArgumentException;
  * A service that use to build operation result
  *
  * @mixin \LoggerMixin
+ * @mixin \ReqMixin
  */
 class Ret extends Base implements \JsonSerializable, \ArrayAccess
 {
@@ -134,6 +135,38 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
             $with = [$with => $value];
         }
         $this->data = array_merge($this->data, $with);
+        return $this;
+    }
+
+    /**
+     * Add value to to the "data" key in result if the item is specified in the request
+     *
+     * @param string $include
+     * @param callable $callback
+     * @return $this
+     * @experimental
+     */
+    public function include(string $include, callable $callback): self
+    {
+        if ($this->isInclude($include, $this->req['include'])) {
+            $this->data($include, $callback());
+        }
+        return $this;
+    }
+
+    /**
+     * Add value to the result data if the item is specified in the request
+     *
+     * @param string $include
+     * @param callable $callback
+     * @return $this
+     * @experimental
+     */
+    public function includeWith(string $include, callable $callback): self
+    {
+        if ($this->isInclude($include, $this->req['includeWith'])) {
+            $this->with($include, $callback());
+        }
         return $this;
     }
 
@@ -322,5 +355,26 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
     protected function alert($message, $code = null)
     {
         return $this->err($message, $code, 'alert');
+    }
+
+    /**
+     * Check if a item is in the string list or array
+     *
+     * @param string $include
+     * @param string|array $includes
+     * @return bool
+     * @experimental
+     */
+    protected function isInclude(string $include, $includes): bool
+    {
+        if (is_string($includes)) {
+            return in_array($include, explode(',', $includes), true);
+        }
+
+        if (is_array($includes)) {
+            return in_array($include, $includes, true);
+        }
+
+        return false;
     }
 }
