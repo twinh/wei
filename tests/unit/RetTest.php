@@ -4,6 +4,7 @@ namespace WeiTest;
 
 use Wei\Base;
 use Wei\Logger;
+use Wei\Req;
 use Wei\Ret;
 use Wei\RetTrait;
 
@@ -376,5 +377,43 @@ final class RetTest extends TestCase
         ));
 
         $ret->transform(\stdClass::class);
+    }
+
+    public function testInclude()
+    {
+        $req = new Req([
+            'wei' => $this->wei,
+            'fromGlobal' => false,
+            'data' => [
+                'include' => 'key,key2',
+            ],
+        ]);
+        $ret = Ret::suc();
+        $ret->req = $req;
+        $ret->include('key', function () {
+           return 'value';
+        });
+        $this->assertSame('value', $ret['data']['key']);
+        $this->assertArrayNotHasKey('key2', $ret['data']);
+    }
+
+    public function testIncludeWith()
+    {
+        $req = new Req([
+            'wei' => $this->wei,
+            'fromGlobal' => false,
+            'data' => [
+                'includeWith' => ['key', 'key2'],
+            ],
+        ]);
+        $ret = Ret::suc();
+        $ret->req = $req;
+        $ret->includeWith('key', function () {
+            return 'value';
+        });
+
+        $this->assertSame('value', $ret['key']);
+        $this->assertArrayNotHasKey('key2', $ret);
+        $this->assertArrayNotHasKey('data', $ret);
     }
 }
