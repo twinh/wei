@@ -123,6 +123,93 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
     }
 
     /**
+     * Return the operation result code
+     *
+     * @return int
+     */
+    public function getCode(): int
+    {
+        return $this->get('code');
+    }
+
+    /**
+     * Set the operation result code
+     *
+     * @param int $code
+     * @return $this
+     */
+    public function setCode(int $code): self
+    {
+        return $this->set('code', $code);
+    }
+
+    /**
+     * Return the operation result message
+     *
+     * @return mixed
+     */
+    public function getMessage()
+    {
+        return $this->get('message');
+    }
+
+    /**
+     * Set the operation result message
+     *
+     * @param mixed $message
+     * @return $this
+     */
+    public function setMessage($message): self
+    {
+        return $this->set('message', $message);
+    }
+
+    /**
+     * Return the operation result data
+     *
+     * @return mixed
+     */
+    public function getData()
+    {
+        return $this->get('data');
+    }
+
+    /**
+     * Set the operation result data
+     *
+     * @param mixed $data
+     * @return $this
+     */
+    public function setData($data): self
+    {
+        return $this->set('data', $data);
+    }
+
+    /**
+     * Return the operation result value by key
+     *
+     * @param string $key
+     * @return mixed|null
+     */
+    public function get(string $key)
+    {
+        return $this->data[$key] ?? null;
+    }
+
+    /**
+     * Set the operation result value by key
+     *
+     * @param string $key
+     * @param mixed $value
+     * @return $this
+     */
+    public function set(string $key, $value): self
+    {
+        $this->data[$key] = $value;
+        return $this;
+    }
+
+    /**
      * Add value to the result data
      *
      * @param string|array $with

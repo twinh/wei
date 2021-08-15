@@ -391,7 +391,7 @@ final class RetTest extends TestCase
         $ret = Ret::suc();
         $ret->req = $req;
         $ret->include('key', function () {
-           return 'value';
+            return 'value';
         });
         $this->assertSame('value', $ret['data']['key']);
         $this->assertArrayNotHasKey('key2', $ret['data']);
@@ -415,5 +415,34 @@ final class RetTest extends TestCase
         $this->assertSame('value', $ret['key']);
         $this->assertArrayNotHasKey('key2', $ret);
         $this->assertArrayNotHasKey('data', $ret);
+    }
+
+    public function testGetter()
+    {
+        $ret = Ret::suc('suc');
+        $this->assertSame(0, $ret->getCode());
+        $this->assertSame('suc', $ret->getMessage());
+        $this->assertNull($ret->get('test'));
+        $this->assertNull($ret->get('data'));
+
+        $ret = Ret::err('err', 2);
+        $this->assertSame(2, $ret->getCode());
+        $this->assertSame('err', $ret->getMessage());
+        $this->assertNull($ret->get('test'));
+        $this->assertNull($ret->get('data'));
+    }
+
+    public function testSetter()
+    {
+        $ret = Ret::suc('suc');
+        $ret->setCode(1);
+        $ret->setMessage('test');
+        $ret->setData('data');
+        $ret->set('key', 'value');
+
+        $this->assertSame(1, $ret->getCode());
+        $this->assertSame('test', $ret->getMessage());
+        $this->assertSame('data', $ret->getData());
+        $this->assertSame('value', $ret->get('key'));
     }
 }
