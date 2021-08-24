@@ -74,18 +74,21 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
             $data = $message + ['message' => $this->defaultSucMessage, 'code' => $code];
         } elseif (is_array($message) && isset($message[0])) {
             // Use associative array to pass original message and arguments to be formatted.
-            // The original message can be recorded in the log, which is convenient to merge the same logs
             // $this->xxx(['me%sage', 'ss'], code)
-            $rawMessage = array_shift($message);
-            $params = $message;
-            $message = vsprintf($rawMessage, $params);
-            $data = ['message' => (string) $message, 'code' => $code];
+            $data = ['message' => $message, 'code' => $code];
         } else {
             throw new InvalidArgumentException(sprintf(
                 'Expected argument of type string or array, "%s" given',
                 is_object($message) ? get_class($message) : gettype($message)
             ));
         }
+
+        if (is_array($data['message'])) {
+            // The original message can be recorded in the log, which is convenient to merge the same logs
+            $rawMessage = array_shift($data['message']);
+            $data['message'] = vsprintf($rawMessage, $data['message']);
+        }
+
         $this->data = $data;
 
         // Record error result

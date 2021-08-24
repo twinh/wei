@@ -104,6 +104,23 @@ final class RetTest extends TestCase
         ], $ret->toArray());
     }
 
+    public function testSucMessageWithFormat()
+    {
+        $ret = Ret::suc([
+            'message' => ['me%sage', 'ss'],
+        ]);
+        $this->assertSame('message', $ret['message']);
+    }
+
+    public function testErrMessageWithFormat()
+    {
+        $ret = Ret::err([
+            'message' => ['me%sage', 'ss'],
+            'code' => 2,
+        ]);
+        $this->assertSame('message', $ret['message']);
+    }
+
     public function testInvalidArgument()
     {
         $this->expectExceptionObject(
