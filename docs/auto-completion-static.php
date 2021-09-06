@@ -1712,6 +1712,15 @@ class Migration
     }
 
     /**
+     * Rollback all migrations
+     *
+     * @see Migration::reset
+     */
+    public static function reset()
+    {
+    }
+
+    /**
      * @param array $options
      * @throws \ReflectionException
      * @throws \Exception
@@ -1835,7 +1844,10 @@ class Req
     }
 
     /**
+     * Check if current request is a preflight request
+     *
      * @return bool
+     * @link https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
      * @see Req::isPreflight
      */
     public static function isPreflight(): bool
@@ -1868,7 +1880,10 @@ class Request
     }
 
     /**
+     * Check if current request is a preflight request
+     *
      * @return bool
+     * @link https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
      * @see Req::isPreflight
      */
     public static function isPreflight(): bool
@@ -5547,6 +5562,15 @@ class Migration
     }
 
     /**
+     * Rollback all migrations
+     *
+     * @see Migration::reset
+     */
+    public function reset()
+    {
+    }
+
+    /**
      * @param array $options
      * @throws \ReflectionException
      * @throws \Exception
@@ -5670,7 +5694,10 @@ class Req
     }
 
     /**
+     * Check if current request is a preflight request
+     *
      * @return bool
+     * @link https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
      * @see Req::isPreflight
      */
     public function isPreflight(): bool
@@ -5703,7 +5730,10 @@ class Request
     }
 
     /**
+     * Check if current request is a preflight request
+     *
      * @return bool
+     * @link https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
      * @see Req::isPreflight
      */
     public function isPreflight(): bool

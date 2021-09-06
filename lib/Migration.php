@@ -192,6 +192,17 @@ class Migration extends Base
     }
 
     /**
+     * Rollback all migrations
+     *
+     * @svc
+     */
+    protected function reset()
+    {
+        $migrationIds = $this->getMigratedIds();
+        $this->rollback(['target' => $migrationIds ? end($migrationIds) : null]);
+    }
+
+    /**
      * @param array $options
      * @throws \ReflectionException
      * @throws \Exception
