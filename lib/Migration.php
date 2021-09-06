@@ -170,7 +170,7 @@ class Migration extends Base
             // Return migrations included target
             $migrationIds = array_slice($migrationIds, 0, $index + 1, true);
         } else {
-            $migrationIds = [current($migrationIds)];
+            $migrationIds = $migrationIds ? [current($migrationIds)] : [];
         }
 
         if (!$migrationIds) {
