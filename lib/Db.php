@@ -883,7 +883,7 @@ class Db extends Base
             default:
                 throw new \RuntimeException(sprintf('Unsupported database driver: %s', $this->driver));
         }
-        return $this->dsn = $dsn;
+        return $dsn;
     }
 
     /**
