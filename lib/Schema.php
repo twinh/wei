@@ -361,6 +361,44 @@ class Schema extends Base
     }
 
     /**
+     * Check if database exists
+     *
+     * @param string $database
+     * @return bool
+     * @svc
+     */
+    protected function hasDatabase(string $database): bool
+    {
+        return (bool) $this->db->fetchColumn('SHOW DATABASES LIKE ?', [$database]);
+    }
+
+    /**
+     * Create a database
+     *
+     * @param string $database
+     * @return $this
+     * @svc
+     */
+    protected function createDatabase(string $database): self
+    {
+        $this->db->executeUpdate('CREATE DATABASE ' . $database);
+        return $this;
+    }
+
+    /**
+     * Drop a database
+     *
+     * @param string $database
+     * @return $this
+     * @svc
+     */
+    protected function dropDatabase(string $database): self
+    {
+        $this->db->executeUpdate('DROP DATABASE ' . $database);
+        return $this;
+    }
+
+    /**
      * @return $this
      */
     public function exec()

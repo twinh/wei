@@ -3,6 +3,7 @@
 namespace WeiTest;
 
 use SchemaMixin;
+use Wei\Schema;
 
 /**
  * @mixin SchemaMixin
@@ -244,6 +245,19 @@ final class SchemaTest extends TestCase
         $this->assertSqlSame('CREATE TABLE test (
   id timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci', $sql);
+    }
+
+    public function testDatabase()
+    {
+        $database = 'test' . mt_rand();
+
+        $this->assertFalse(Schema::hasDatabase($database));
+
+        Schema::createDatabase($database);
+        $this->assertTrue(Schema::hasDatabase($database));
+
+        Schema::dropDatabase($database);
+        $this->assertFalse(Schema::hasDatabase($database));
     }
 
     protected function createTestTable()

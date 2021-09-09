@@ -1971,6 +1971,38 @@ class SafeUrl
 
 class Schema
 {
+    /**
+     * Check if database exists
+     *
+     * @param string $database
+     * @return bool
+     * @see Schema::hasDatabase
+     */
+    public static function hasDatabase(string $database): bool
+    {
+    }
+
+    /**
+     * Create a database
+     *
+     * @param string $database
+     * @return $this
+     * @see Schema::createDatabase
+     */
+    public static function createDatabase(string $database): self
+    {
+    }
+
+    /**
+     * Drop a database
+     *
+     * @param string $database
+     * @return $this
+     * @see Schema::dropDatabase
+     */
+    public static function dropDatabase(string $database): self
+    {
+    }
 }
 
 class Session
@@ -5821,6 +5853,38 @@ class SafeUrl
 
 class Schema
 {
+    /**
+     * Check if database exists
+     *
+     * @param string $database
+     * @return bool
+     * @see Schema::hasDatabase
+     */
+    public function hasDatabase(string $database): bool
+    {
+    }
+
+    /**
+     * Create a database
+     *
+     * @param string $database
+     * @return $this
+     * @see Schema::createDatabase
+     */
+    public function createDatabase(string $database): self
+    {
+    }
+
+    /**
+     * Drop a database
+     *
+     * @param string $database
+     * @return $this
+     * @see Schema::dropDatabase
+     */
+    public function dropDatabase(string $database): self
+    {
+    }
 }
 
 class Session
