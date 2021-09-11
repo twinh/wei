@@ -22,6 +22,7 @@ final class SchemaTest extends TestCase
         $this->schema->setOption([
             'charset' => 'utf8mb4',
             'collate' => 'utf8mb4_unicode_ci',
+            'userIdType' => 'uInt',
         ]);
     }
 
@@ -258,6 +259,32 @@ final class SchemaTest extends TestCase
 
         Schema::dropDatabase($database);
         $this->assertFalse(Schema::hasDatabase($database));
+    }
+
+    public function testUserIdType()
+    {
+        Schema::setUserIdType('uBigInt');
+
+        $this->assertSame('uBigInt', Schema::getUserIdType());
+
+        $sql = $this->schema->table('test')
+            ->userstamps()
+            ->softDeletable()
+            ->getSql();
+
+        $this->assertSqlSame('CREATE TABLE test (
+  created_by bigint unsigned NOT NULL DEFAULT 0,
+  updated_by bigint unsigned NOT NULL DEFAULT 0,
+  deleted_at timestamp NULL DEFAULT NULL,
+  deleted_by bigint unsigned NOT NULL DEFAULT 0
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci', $sql);
+    }
+
+    public function testInvalidUserIdType()
+    {
+        $this->expectExceptionObject(new \InvalidArgumentException('Invalid user id type "invalidType"'));
+
+        Schema::setUserIdType('invalidType');
     }
 
     protected function createTestTable()
