@@ -2003,6 +2003,27 @@ class Schema
     public static function dropDatabase(string $database): self
     {
     }
+
+    /**
+     * Set user id type
+     *
+     * @param string $userIdType
+     * @return $this
+     * @see Schema::setUserIdType
+     */
+    public static function setUserIdType(string $userIdType): self
+    {
+    }
+
+    /**
+     * Get user id type
+     *
+     * @return string
+     * @see Schema::getUserIdType
+     */
+    public static function getUserIdType(): string
+    {
+    }
 }
 
 class Session
@@ -5883,6 +5904,27 @@ class Schema
      * @see Schema::dropDatabase
      */
     public function dropDatabase(string $database): self
+    {
+    }
+
+    /**
+     * Set user id type
+     *
+     * @param string $userIdType
+     * @return $this
+     * @see Schema::setUserIdType
+     */
+    public function setUserIdType(string $userIdType): self
+    {
+    }
+
+    /**
+     * Get user id type
+     *
+     * @return string
+     * @see Schema::getUserIdType
+     */
+    public function getUserIdType(): string
     {
     }
 }

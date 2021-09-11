@@ -2,6 +2,8 @@
 
 namespace Wei;
 
+use InvalidArgumentException;
+
 /**
  * A MySQL schema builder
  *
@@ -77,6 +79,13 @@ class Schema extends Base
      * @var bool
      */
     protected $defaultNullable = false;
+
+    /**
+     * The column type for user id column, like created_by and updated_by
+     *
+     * @var string
+     */
+    protected $userIdType = 'uInt';
 
     /**
      * @var string
@@ -396,6 +405,40 @@ class Schema extends Base
     {
         $this->db->executeUpdate('DROP DATABASE ' . $database);
         return $this;
+    }
+
+    /**
+     * Set user id type
+     *
+     * @param string $userIdType
+     * @return $this
+     * @svc
+     */
+    protected function setUserIdType(string $userIdType): self
+    {
+        if ('u' === substr($userIdType, 0, 1)) {
+            $type = lcfirst(substr($userIdType, 1));
+        } else {
+            $type = $userIdType;
+        }
+
+        if (!array_key_exists($type, $this->typeDefaults)) {
+            throw new InvalidArgumentException(sprintf('Invalid user id type "%s"', $userIdType));
+        }
+
+        $this->userIdType = $userIdType;
+        return $this;
+    }
+
+    /**
+     * Get user id type
+     *
+     * @return string
+     * @svc
+     */
+    protected function getUserIdType(): string
+    {
+        return $this->userIdType;
     }
 
     /**
@@ -835,7 +878,7 @@ class Schema extends Base
      */
     public function userstamps()
     {
-        return $this->uInt('created_by')->uInt('updated_by');
+        return $this->{$this->userIdType}('created_by')->{$this->userIdType}('updated_by');
     }
 
     /**
@@ -845,7 +888,7 @@ class Schema extends Base
      */
     public function softDeletable()
     {
-        return $this->timestamp('deleted_at')->uInt('deleted_by');
+        return $this->timestamp('deleted_at')->{$this->userIdType}('deleted_by');
     }
 
     /**
