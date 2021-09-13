@@ -311,7 +311,7 @@ namespace Wei {
 
             // Resolve the real service name and the config name($full)
             $full = $name;
-            if (false !== ($pos = strpos($name, '.'))) {
+            if (false !== ($pos = strpos($name, ':'))) {
                 $name = substr($name, $pos + 1);
             }
 
@@ -742,7 +742,7 @@ namespace Wei {
             }
 
             // Set one configuration
-            $names = explode(':', $name);
+            $names = explode('.', $name);
             $first = $names[0];
             $configs = &$this->configs;
 
@@ -767,13 +767,13 @@ namespace Wei {
              * Automatically create dependence map when configuration key contains "."
              *
              * $this->configs = array(
-             *    'mysql.db' => array(),
+             *    'mysql:db' => array(),
              * );
              * =>
-             * $this->providers['mysqlDb'] = 'mysql.db';
+             * $this->providers['mysqlDb'] = 'mysql:db';
              */
-            if (false !== strpos($first, '.')) {
-                $parts = explode('.', $first, 2);
+            if (false !== strpos($first, ':')) {
+                $parts = explode(':', $first, 2);
                 $serviceName = $parts[0] . ucfirst($parts[1]);
                 if (!isset($this->providers[$serviceName])) {
                     $this->providers[$serviceName] = $first;
@@ -802,12 +802,12 @@ namespace Wei {
                 return $this->configs;
             }
 
-            if (false === strpos($name, ':')) {
+            if (false === strpos($name, '.')) {
                 return isset($this->configs[$name]) ? $this->configs[$name] : $default;
             }
 
             $configs = &$this->configs;
-            foreach (explode(':', $name) as $key) {
+            foreach (explode('.', $name) as $key) {
                 if (is_array($configs) && isset($configs[$key])) {
                     $configs = &$configs[$key];
                 } else {

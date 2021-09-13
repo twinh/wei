@@ -723,10 +723,10 @@ final class HttpTest extends TestCase
             'http' => [
                 'method' => 'post',
             ],
-            'global.http' => [
+            'global:http' => [
                 'global' => true,
             ],
-            'notGlobal.http' => [
+            'notGlobal:http' => [
                 'global' => false,
             ],
         ]);

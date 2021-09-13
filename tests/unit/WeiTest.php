@@ -33,27 +33,27 @@ final class WeiTest extends TestCase
         ]);
 
         $this->assertSame(['a' => ['b' => ['c' => false]]], $wei->getConfig('test'));
-        $this->assertSame(['b' => ['c' => false]], $wei->getConfig('test:a'));
-        $this->assertSame(['c' => false], $wei->getConfig('test:a:b'));
-        $this->assertFalse($wei->getConfig('test:a:b:c'));
-        $this->assertNull($wei->getConfig('test:noThisKey'));
-        $this->assertFalse($wei->getConfig('test:noThisKey', false));
-        $this->assertSame(0, $wei->getConfig('test:noThisKey', 0));
+        $this->assertSame(['b' => ['c' => false]], $wei->getConfig('test.a'));
+        $this->assertSame(['c' => false], $wei->getConfig('test.a.b'));
+        $this->assertFalse($wei->getConfig('test.a.b.c'));
+        $this->assertNull($wei->getConfig('test.noThisKey'));
+        $this->assertFalse($wei->getConfig('test.noThisKey', false));
+        $this->assertSame(0, $wei->getConfig('test.noThisKey', 0));
 
         $wei->setConfig('test2', []);
         $this->assertSame([], $wei->getConfig('test2'));
 
-        $wei->setConfig('test2:a', 'b');
-        $this->assertSame('b', $wei->getConfig('test2:a'));
+        $wei->setConfig('test2.a', 'b');
+        $this->assertSame('b', $wei->getConfig('test2.a'));
         $this->assertSame(['a' => 'b'], $wei->getConfig('test2'));
 
-        $wei->setConfig('test2:a:b', 'c');
-        $this->assertSame('c', $wei->getConfig('test2:a:b'));
+        $wei->setConfig('test2.a.b', 'c');
+        $this->assertSame('c', $wei->getConfig('test2.a.b'));
 
-        $wei->setConfig('test.request', []);
+        $wei->setConfig('test:request', []);
         $providers = $wei->getOption('providers');
         $this->assertArrayHasKey('testRequest', $providers);
-        $this->assertSame('test.request', $providers['testRequest']);
+        $this->assertSame('test:request', $providers['testRequest']);
     }
 
     public function testMergeConfig()
@@ -72,8 +72,8 @@ final class WeiTest extends TestCase
             ],
         ]);
 
-        $this->assertEquals('value1', $wei->getConfig('weiName:option1'));
-        $this->assertEquals('value2', $wei->getConfig('weiName:option2'));
+        $this->assertEquals('value1', $wei->getConfig('weiName.option1'));
+        $this->assertEquals('value2', $wei->getConfig('weiName.option2'));
 
         $wei->setConfig([
             'weiName' => [
@@ -81,8 +81,8 @@ final class WeiTest extends TestCase
             ],
         ]);
 
-        $this->assertEquals('value3', $wei->getConfig('weiName:option1'));
-        $this->assertEquals('value2', $wei->getConfig('weiName:option2'));
+        $this->assertEquals('value3', $wei->getConfig('weiName.option1'));
+        $this->assertEquals('value2', $wei->getConfig('weiName.option2'));
     }
 
     public function testSetOptionInSetConfig()
@@ -252,7 +252,7 @@ final class WeiTest extends TestCase
     public function testGetFromProviders()
     {
         // Set options for sub request
-        $this->wei->setConfig('sub.req', [
+        $this->wei->setConfig('sub:req', [
             'fromGlobal' => false,
             'data' => [
                 'id' => 'fromSubRequest',
@@ -278,7 +278,7 @@ final class WeiTest extends TestCase
         $wei = $this->wei;
 
         $wei->setOption('providers', [
-            'subRequest' => 'sub.request',
+            'subRequest' => 'sub:request',
         ]);
 
         $this->assertInstanceOf('Wei\Req', $wei->subRequest);
@@ -294,7 +294,7 @@ final class WeiTest extends TestCase
         $wei = new Wei([
             'wei' => [
                 'providers' => [
-                    'req' => 'sub.req',
+                    'req' => 'sub:req',
                 ],
                 'preload' => [
                     'req',
@@ -303,7 +303,7 @@ final class WeiTest extends TestCase
             'req' => [
                 'fromGlobal' => true,
             ],
-            'sub.req' => [
+            'sub:req' => [
                 'fromGlobal' => false,
             ],
         ]);
@@ -545,12 +545,12 @@ final class WeiTest extends TestCase
 
         // service instances
         $wei->req;
-        $wei->{'sub.req'};
+        $wei->{'sub:req'};
 
         $this->assertContains('req', $beforeConstruct);
-        $this->assertContains('sub.req', $afterConstruct);
+        $this->assertContains('sub:req', $afterConstruct);
         $this->assertContains('req', $beforeConstruct);
-        $this->assertContains('sub.req', $afterConstruct);
+        $this->assertContains('sub:req', $afterConstruct);
     }
 
     public function testCreateNewContainer()
@@ -594,10 +594,10 @@ final class WeiTest extends TestCase
     public function testCustomServiceNamespace()
     {
         $this->wei->setNamespace('app1');
-        $this->wei->setConfig('namespace.request', [
+        $this->wei->setConfig('namespace:request', [
             'namespace' => 'test',
         ]);
-        $req = $this->wei->get('namespace.request');
+        $req = $this->wei->get('namespace:request');
         $this->assertNotEquals('app1', $req->getOption('namespace'));
         $this->assertEquals('test', $req->getOption('namespace'));
     }

@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'mysql.db' => [
+    'mysql:db' => [
         'driver' => 'mysql',
         'user' => getenv('MYSQL_USER'),
         'password' => getenv('MYSQL_PASSWORD'),
         'dbname' => 'wei_test',
     ],
-    'pgsql.db' => [
+    'pgsql:db' => [
         'driver' => 'pgsql',
         'user' => getenv('PG_USER'),
         'password' => getenv('PG_PASSWORD'),

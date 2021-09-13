@@ -9,7 +9,7 @@ final class EnvTest extends TestCase
 {
     protected function setUp(): void
     {
-        $this->wei->setConfig('env:configFile', __DIR__ . '/Fixtures/env/%env%.php');
+        $this->wei->setConfig('env.configFile', __DIR__ . '/Fixtures/env/%env%.php');
 
         parent::setUp();
     }
@@ -125,7 +125,7 @@ final class EnvTest extends TestCase
         ]);
 
         $this->assertFalse($wei->isDebug());
-        $this->assertFalse($wei->getConfig('wei:debug'));
+        $this->assertFalse($wei->getConfig('wei.debug'));
     }
 
     public function testLodConfigFileReturnsEnvService()

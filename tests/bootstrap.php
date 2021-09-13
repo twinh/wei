@@ -37,7 +37,7 @@ wei([
         'driver' => 'sqlite',
         'path' => ':memory:',
     ],
-    'mysql.db' => [
+    'mysql:db' => [
         'driver' => 'mysql',
         'user' => 'root',
         'password' => '123456',
@@ -46,7 +46,7 @@ wei([
         'dbname' => 'wei',
         'charset' => 'utf8',
     ],
-    'pgsql.db' => [
+    'pgsql:db' => [
         'driver' => 'pgsql',
         'user' => 'postgres',
         'password' => '123456',
@@ -54,12 +54,12 @@ wei([
         'port' => 5432,
         'dbname' => 'postgres',
     ],
-    'mysql.dbCache' => [
+    'mysql:dbCache' => [
         'deps' => [
             'db' => 'mysql.db',
         ],
     ],
-    'pgsql.dbCache' => [
+    'pgsql:dbCache' => [
         'deps' => [
             'db' => 'pgsql.db',
         ],

@@ -1253,13 +1253,13 @@ class DbTest extends TestCase
             'db' => [
                 'beforeConnect' => $fn,
             ],
-            'mysql.db' => [
+            'mysql:db' => [
                 'beforeConnect' => $fn,
             ],
-            'pgsql.db' => [
+            'pgsql:db' => [
                 'beforeConnect' => $fn,
             ],
-            'cb.db' => [
+            'cb:db' => [
                 'db' => $this->db,
                 'global' => true,
             ],
@@ -1271,7 +1271,7 @@ class DbTest extends TestCase
         // Remove all relation configuration
         $this->cbDb = null;
         $this->wei->remove('cbDb');
-        $this->wei->setConfig('cb.db', [
+        $this->wei->setConfig('cb:db', [
             'db' => null,
         ]);
     }
@@ -1345,7 +1345,7 @@ class DbTest extends TestCase
     {
         // Generate slave db configuration name
         $driver = $this->db->getDriver();
-        $configName = $driver . 'Slave.db';
+        $configName = $driver . 'Slave:db';
 
         // Set configuration for slave db
         $options = $this->wei->getConfig('db');
@@ -1443,7 +1443,7 @@ class DbTest extends TestCase
     public function testGetter()
     {
         wei([
-            'test.db' => [
+            'test:db' => [
                 'user' => 'user',
                 'password' => 'password',
                 'host' => 'host',
