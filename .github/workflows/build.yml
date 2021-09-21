@@ -93,6 +93,7 @@ jobs:
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}
 
       - name: Upload coverage results to Coveralls
+        continue-on-error: true
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_PARALLEL: true
@@ -104,6 +105,7 @@ jobs:
   coveralls-finish:
     needs: [ phpunit ]
     runs-on: ubuntu-18.04
+    continue-on-error: true
     steps:
       - name: Coveralls Finished
         uses: coverallsapp/github-action@master
