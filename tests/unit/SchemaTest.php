@@ -94,7 +94,7 @@ final class SchemaTest extends TestCase
   PRIMARY KEY id (id),
   KEY user_id (user_id),
   UNIQUE KEY name (name)
-) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Test'", $sql);
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Test';", $sql);
     }
 
     public function testBigId()
@@ -105,7 +105,7 @@ final class SchemaTest extends TestCase
         $this->assertSqlSame('CREATE TABLE test (
   id bigint unsigned NOT NULL AUTO_INCREMENT,
   PRIMARY KEY id (id)
-) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci', $sql);
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;', $sql);
 
         $sql = $this->schema->table('test')
             ->bigId('test_id')
@@ -113,7 +113,7 @@ final class SchemaTest extends TestCase
         $this->assertSqlSame('CREATE TABLE test (
   test_id bigint unsigned NOT NULL AUTO_INCREMENT,
   PRIMARY KEY test_id (test_id)
-) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci', $sql);
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;', $sql);
     }
 
     public function testChange()
@@ -125,8 +125,7 @@ final class SchemaTest extends TestCase
 
         $this->assertSqlSame("ALTER TABLE products
   CHANGE COLUMN no no varchar(64) NOT NULL DEFAULT '' COMMENT '商品编码',
-  ADD COLUMN barcode varchar(64) NOT NULL DEFAULT '' COMMENT '条码' AFTER no
-", $sql);
+  ADD COLUMN barcode varchar(64) NOT NULL DEFAULT '' COMMENT '条码' AFTER no;", $sql);
     }
 
     public function testRename()
@@ -138,8 +137,7 @@ final class SchemaTest extends TestCase
             ->getSql();
 
         $this->assertSqlSame("ALTER TABLE test_products
-  CHANGE COLUMN name new_name varchar(128) NOT NULL DEFAULT '' COMMENT 'product name'
-", $sql);
+  CHANGE COLUMN name new_name varchar(128) NOT NULL DEFAULT '' COMMENT 'product name';", $sql);
 
         $this->dropTestTable();
     }
@@ -154,8 +152,7 @@ final class SchemaTest extends TestCase
 
         // Text column don't support default value
         $this->assertSqlSame("ALTER TABLE test_products
-  CHANGE COLUMN description new_description text NOT NULL COMMENT 'product description'
-", $sql);
+  CHANGE COLUMN description new_description text NOT NULL COMMENT 'product description';", $sql);
 
         $this->dropTestTable();
     }
@@ -178,8 +175,7 @@ final class SchemaTest extends TestCase
             ->getSql();
 
         $this->assertSqlSame('ALTER TABLE test
-  DROP COLUMN test
-', $sql);
+  DROP COLUMN test;', $sql);
     }
 
     public function testMultiCommands()
@@ -195,8 +191,7 @@ final class SchemaTest extends TestCase
         $this->assertSqlSame("ALTER TABLE test_products
   ADD COLUMN new_description varchar(255) NOT NULL DEFAULT '' COMMENT 'product detail',
   CHANGE COLUMN name new_name varchar(128) NOT NULL DEFAULT '' COMMENT 'product name',
-  DROP COLUMN test
-", $sql);
+  DROP COLUMN test;", $sql);
 
         $this->schema->db->executeUpdate($sql);
 
@@ -211,7 +206,7 @@ final class SchemaTest extends TestCase
 
         $this->assertSqlSame("CREATE TABLE test_null (
   id varchar(255) NULL DEFAULT ''
-) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", $sql);
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;", $sql);
     }
 
     public function testDefaultNullable()
@@ -225,7 +220,7 @@ final class SchemaTest extends TestCase
             ->getSql();
         $this->assertSqlSame("CREATE TABLE test (
   id varchar(255) NULL DEFAULT ''
-) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", $sql);
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;", $sql);
 
         $schema->setDefaultNullable(false);
 
@@ -234,7 +229,7 @@ final class SchemaTest extends TestCase
             ->getSql();
         $this->assertSqlSame("CREATE TABLE test (
   id varchar(255) NOT NULL DEFAULT ''
-) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", $sql);
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;", $sql);
     }
 
     public function testNullableAndDefault()
@@ -245,7 +240,7 @@ final class SchemaTest extends TestCase
 
         $this->assertSqlSame('CREATE TABLE test (
   id timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci', $sql);
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;', $sql);
     }
 
     public function testDatabase()
@@ -277,7 +272,7 @@ final class SchemaTest extends TestCase
   updated_by bigint unsigned NOT NULL DEFAULT 0,
   deleted_at timestamp NULL DEFAULT NULL,
   deleted_by bigint unsigned NOT NULL DEFAULT 0
-) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci', $sql);
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;', $sql);
     }
 
     public function testInvalidUserIdType()

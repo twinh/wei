@@ -280,11 +280,13 @@ class Schema extends Base
         $columnSql = $this->getCreateDefinition();
 
         if ($this->isChange) {
-            $sql = "ALTER TABLE $table" . $columnSql;
+            $sql = "ALTER TABLE $table" . rtrim($columnSql);
         } else {
             $sql = "CREATE TABLE $table ($columnSql)";
             $sql .= $this->getTableOptionSql();
         }
+
+        $sql .= ';';
 
         return $sql;
     }
