@@ -22,22 +22,6 @@ final class RedisTest extends CacheTestCase
         }
     }
 
-    public function testIncrAndDecr()
-    {
-        $redis = $this->object->getObject();
-        $redis->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_NONE);
-
-        parent::testIncrAndDecr();
-    }
-
-    public function testPrefix()
-    {
-        $redis = $this->object->getObject();
-        $redis->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_NONE);
-
-        parent::testPrefix();
-    }
-
     public function testGetAndSetObject()
     {
         $cache = $this->object;

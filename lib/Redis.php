@@ -12,7 +12,14 @@ namespace Wei;
 /**
  * A cache service that stored data in Redis
  *
+ * The methods are derived from code of the Laravel Framework
+ *   * serialize
+ *   * unserialize
+ *
  * @author      Twin Huang <twinhuang@qq.com>
+ * @see https://github.com/laravel/framework/blob/v8.68.1/src/Illuminate/Cache/RedisStore.php
+ * @copyright Copyright (c) Taylor Otwell
+ * @license The MIT License (MIT)
  */
 class Redis extends BaseCache
 {
@@ -63,9 +70,7 @@ class Redis extends BaseCache
      *
      * @var array
      */
-    protected $options = [
-        \Redis::OPT_SERIALIZER => \Redis::SERIALIZER_PHP,
-    ];
+    protected $options = [];
 
     /**
      * Constructor
@@ -131,7 +136,7 @@ class Redis extends BaseCache
      */
     public function get($key, $expire = null, $fn = null)
     {
-        $result = $this->object->get($this->namespace . $key);
+        $result = $this->unserialize($this->object->get($this->namespace . $key));
         return $this->processGetResult($key, $result, $expire, $fn);
     }
 
@@ -141,7 +146,7 @@ class Redis extends BaseCache
     public function set($key, $value, $expire = 0)
     {
         // Use null instead of 0 for redis extension 2.2.8, otherwise the key will expire after set
-        return $this->object->set($this->namespace . $key, $value, 0 === $expire ? null : $expire);
+        return $this->object->set($this->namespace . $key, $this->serialize($value), 0 === $expire ? null : $expire);
     }
 
     /**
@@ -153,7 +158,14 @@ class Redis extends BaseCache
         foreach ($keys as $key) {
             $keysWithPrefix[] = $this->namespace . $key;
         }
-        return array_combine($keys, $this->object->mGet($keysWithPrefix));
+        $values = $this->object->mGet($keysWithPrefix);
+
+        $results = [];
+        foreach ($values as $index => $value) {
+            $results[$keys[$index]] = $this->unserialize($value);
+        }
+
+        return $results;
     }
 
     /**
@@ -166,16 +178,14 @@ class Redis extends BaseCache
      * @link http://redis.io/commands/mset
      * @link https://github.com/nicolasff/phpredis/blob/master/redis_array.c#L844
      */
-    public function setMulti(array $items, $expire = 0)
+    public function setMulti(array $keys, $expire = 0)
     {
-        $keys = array_keys($items);
-        $keysWithPrefix = [];
-        foreach ($keys as $key) {
-            $keysWithPrefix[] = $this->namespace . $key;
+        $values = [];
+        foreach ($keys as $key => $value) {
+            $values[$this->namespace . $key] = $this->serialize($value);
         }
-        $items = array_combine($keysWithPrefix, $items);
-        $result = $this->object->mset($items);
-        return array_combine($keys, array_pad([], count($items), $result));
+        $result = $this->object->mset($values);
+        return array_combine(array_keys($keys), array_pad([], count($keys), $result));
     }
 
     /**
@@ -201,7 +211,7 @@ class Redis extends BaseCache
     public function add($key, $value, $expire = 0)
     {
         $key = $this->namespace . $key;
-        $result = $this->object->setnx($key, $value);
+        $result = $this->object->setnx($key, $this->serialize($value));
         if (true === $result && $expire) {
             $this->object->expire($key, $expire);
         }
@@ -218,7 +228,7 @@ class Redis extends BaseCache
         if (false === $this->get($key)) {
             return false;
         }
-        return $this->set($key, $value, $expire);
+        return $this->set($key, $this->serialize($value), $expire);
     }
 
     /**
@@ -257,5 +267,28 @@ class Redis extends BaseCache
     {
         $this->object = $object;
         return $this;
+    }
+
+    /**
+     * Serialize the value.
+     *
+     * @param mixed $value
+     * @return mixed
+     */
+    protected function serialize($value)
+    {
+        return is_numeric($value) && !in_array($value, [\INF, -\INF], true) && !is_nan($value)
+            ? $value : serialize($value);
+    }
+
+    /**
+     * Unserialize the value.
+     *
+     * @param mixed $value
+     * @return mixed
+     */
+    protected function unserialize($value)
+    {
+        return null === $value || is_numeric($value) ? $value : unserialize($value);
     }
 }
