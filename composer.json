@@ -16,7 +16,7 @@
   "require-dev": {
     "joseph-lenton/php-error": "dev-master",
     "phpunit/phpunit": "^8",
-    "miaoxing/dev": "^7.0.1"
+    "miaoxing/dev": "^8.0.0"
   },
   "authors": [
     {
@@ -40,7 +40,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "0.4.3-dev"
+      "dev-master": "0.11.0-dev"
     },
     "require-ci": {
       "miaoxing/dev": "miaoxing/dev as 6.x-dev",

@@ -1,3 +1,50 @@
+# [0.11.0](https://github.com/twinh/wei/compare/v0.10.11...v0.11.0) (2021-10-28)
+
+
+### Bug Fixes
+
+* **Db:** 不缓存 dsn，每次应实时生成 ([33a525a](https://github.com/twinh/wei/commit/33a525acd6cbb6fa1c5e02f97d02513bda02070c))
+* **Migration:** migrations 为空时处理错误 ([b1bef9a](https://github.com/twinh/wei/commit/b1bef9a9355246163e7bacf2a871f9641fd42c8b))
+* **Migration:** 构造函数的参数允许为空数组 ([b2d6239](https://github.com/twinh/wei/commit/b2d62398e73b839177c71b248c8e78cf6e025d73))
+* **wei:** 子类通过 `static::` 调用父类私有常量会出错 ([19ec9f2](https://github.com/twinh/wei/commit/19ec9f22b248b094356e4b043cd11490ea648533))
+
+
+### Code Refactoring
+
+* **Redis:** 去除内置的`SERIALIZER_PHP`，改用 Laravel 的 `serialize` 逻辑 ([1b296fa](https://github.com/twinh/wei/commit/1b296fa724346ff5b47542e8b6297301cac4c0b2))
+* **Wei:** 配置分隔符改用 `.`，服务名称分隔符改用 `:` ([f0c921b](https://github.com/twinh/wei/commit/f0c921b22c97d0bed07a18c6e67667e5504f109c))
+
+
+### Features
+
+* **db:** 增加 `raw`，`getRawValue` 和 `isRaw` 方法来生成和处理原生 SQL 值 ([899e8f9](https://github.com/twinh/wei/commit/899e8f9d635d7d4fa9ac19aab972592be81a9c1b))
+* **Migration:** 增加 `reset` 方法，用于回滚所有的迁移脚本 ([b292617](https://github.com/twinh/wei/commit/b292617209d4a0677ebe8d38af7de70f3e3cc91c))
+* **Req:** 允许通过 `HTTP_X_HTTP_METHOD_OVERRIDE` 标头来覆盖请求方法 ([320f03d](https://github.com/twinh/wei/commit/320f03de311afd61dcab5f491e1154784352df6b))
+* **Req:** 增加 `getHeader` 和 `hasHeader` 方法 ([aa4dce0](https://github.com/twinh/wei/commit/aa4dce0b301aa6e48fe5d966394347a23d1b99ef))
+* **Req:** 增加 `isPreflight` 方法 ([ae4a261](https://github.com/twinh/wei/commit/ae4a2612e4ab140b764c73be967e97c4ead57bfd))
+* **Ret:** 增加 `with` 和 `data` 方法用于附加数据 ([6160708](https://github.com/twinh/wei/commit/61607081669ade6109112e9878c15c3c871db091))
+* **Ret:** 增加 getter 和 setter，用于获取 `code`，`message`，`data` 和自定义数据 ([e93ddbe](https://github.com/twinh/wei/commit/e93ddbec3c013765b3980fde015fe5aa67cfa91b))
+* **Ret, experimental:** 增加 `include` 和 `includeWith` 方法，用于通过 URL 指定参数来附加数据 ([a349eff](https://github.com/twinh/wei/commit/a349eff416610d3f54d986d212471c456abefd0c))
+* **Ret, experimental:** 增加 `transform` 方法，用于转换 `data` ([d225bb2](https://github.com/twinh/wei/commit/d225bb2cc4134f7c5b20de54daf24c61d50bcb92))
+* **Schema:** 增加 `hasDatabase`，`createDatabase` 和 `dropDatabase` 方法 ([686e5fc](https://github.com/twinh/wei/commit/686e5fcf7da485d19e4eecc7fc9989848a7f415d))
+* **Schema:** 增加 `userIdType` 属性和方法，用于自定义用户编号字段的类型 ([0614a46](https://github.com/twinh/wei/commit/0614a4637271a355a0879d64fe24f35f2323b09f))
+* **Validator:** 增加 `check` 方法，用于检查后返回一个 `Ret` 对象 ([5aa45d2](https://github.com/twinh/wei/commit/5aa45d2dc5519164b67006791806a6a3094a55fd))
+
+
+### BREAKING CHANGES
+
+* **Redis:** Redis 服务去除内置的`SERIALIZER_PHP`，改用 Laravel 的 `serialize` 逻辑
+* **Wei:** 配置分隔符改用 `.`，服务名称分隔符改用 `:`
+* **db:** 移除通过 `(objet)` 生成原生 SQL 值，改为通过 `raw` 方法生成
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `7.0.1` to `8.0.0`
+
 ## [0.10.11](https://github.com/twinh/wei/compare/v0.10.10...v0.10.11) (2021-05-21)
 
 
