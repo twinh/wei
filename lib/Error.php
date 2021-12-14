@@ -15,7 +15,7 @@ use Throwable;
  * A service that handles exception and display pretty exception message
  *
  * @mixin \LoggerMixin
- * @mixin \ResponseMixin
+ * @mixin \ResMixin
  * @mixin \ReqMixin
  */
 class Error extends Base
@@ -222,7 +222,7 @@ class Error extends Base
 
         try {
             // The flowing services may throw exception too
-            $this->response->setStatusCode($code)->send();
+            $this->res->setStatusCode($code)->send();
             $this->logger->log($level, $e);
 
             $this->displayException($e, $debug);
@@ -465,7 +465,7 @@ HTML;
             return $this->{'message' . $e->getCode()};
         }
 
-        if ($message = $this->response->getStatusTextByCode($e->getCode())) {
+        if ($message = $this->res->getStatusTextByCode($e->getCode())) {
             return $message;
         }
 
