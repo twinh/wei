@@ -8,5 +8,4 @@ namespace controllers;
  */
 abstract class Base extends \Wei\BaseController
 {
-
 }

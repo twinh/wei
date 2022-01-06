@@ -7,7 +7,6 @@ namespace services
      */
     class Base extends \Wei\Base
     {
-
     }
 }
 
