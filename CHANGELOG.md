@@ -1,3 +1,18 @@
+## [0.11.1](https://github.com/twinh/wei/compare/v0.11.0...v0.11.1) (2022-01-12)
+
+
+### Bug Fixes
+
+* **wei, Error:** 解决错误时，使用 `response` 对象发送响应缺少 header 的问题 ([d4fe44d](https://github.com/twinh/wei/commit/d4fe44d8ce7dba3549579d206d7e4f1bf5743c05))
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `8.0.0` to `8.0.1`
+
 # [0.11.0](https://github.com/twinh/wei/compare/v0.10.11...v0.11.0) (2021-10-28)
 
 
