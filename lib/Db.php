@@ -998,8 +998,9 @@ class Db extends Base
      *
      * @param callable $fn
      * @throws \Exception
+     * @svc
      */
-    public function transactional(callable $fn)
+    protected function transactional(callable $fn)
     {
         $pdo = $this->getPdo();
         $pdo->beginTransaction();
