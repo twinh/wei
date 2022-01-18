@@ -145,47 +145,6 @@ class Env extends Base
     }
 
     /**
-     * Check if in specified environment
-     *
-     * @param string $env
-     * @return bool
-     */
-    public function is($env)
-    {
-        return $this->name == $env || 0 === strpos($this->name, $env . '-');
-    }
-
-    /**
-     * Check if in the development environment
-     *
-     * @return bool
-     */
-    public function isDev()
-    {
-        return $this->is('dev');
-    }
-
-    /**
-     * Check if is the test environment
-     *
-     * @return bool
-     */
-    public function isTest()
-    {
-        return $this->is('test');
-    }
-
-    /**
-     * Check if in the production environment
-     *
-     * @return bool
-     */
-    public function isProd()
-    {
-        return $this->is('prod');
-    }
-
-    /**
      * Returns the env string
      *
      * @return string
@@ -239,6 +198,51 @@ class Env extends Base
         $config = array_replace_recursive($config, $envConfig);
         $this->wei->setConfig($config);
         return $this;
+    }
+
+    /**
+     * Check if in specified environment
+     *
+     * @param string $env
+     * @return bool
+     * @svc
+     */
+    protected function is($env)
+    {
+        return $this->name == $env || 0 === strpos($this->name, $env . '-');
+    }
+
+    /**
+     * Check if in the development environment
+     *
+     * @return bool
+     * @svc
+     */
+    protected function isDev()
+    {
+        return $this->is('dev');
+    }
+
+    /**
+     * Check if is the test environment
+     *
+     * @return bool
+     * @svc
+     */
+    protected function isTest()
+    {
+        return $this->is('test');
+    }
+
+    /**
+     * Check if in the production environment
+     *
+     * @return bool
+     * @svc
+     */
+    protected function isProd()
+    {
+        return $this->is('prod');
     }
 
     /**

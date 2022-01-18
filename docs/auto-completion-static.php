@@ -85,6 +85,46 @@ class E
 
 class Env
 {
+    /**
+     * Check if in specified environment
+     *
+     * @param string $env
+     * @return bool
+     * @see Env::is
+     */
+    public static function is($env)
+    {
+    }
+
+    /**
+     * Check if in the development environment
+     *
+     * @return bool
+     * @see Env::isDev
+     */
+    public static function isDev()
+    {
+    }
+
+    /**
+     * Check if is the test environment
+     *
+     * @return bool
+     * @see Env::isTest
+     */
+    public static function isTest()
+    {
+    }
+
+    /**
+     * Check if in the production environment
+     *
+     * @return bool
+     * @see Env::isProd
+     */
+    public static function isProd()
+    {
+    }
 }
 
 class Error
@@ -3999,6 +4039,46 @@ if (0) {
 
     class Env
     {
+        /**
+         * Check if in specified environment
+         *
+         * @param string $env
+         * @return bool
+         * @see Env::is
+         */
+        public function is($env)
+        {
+        }
+
+        /**
+         * Check if in the development environment
+         *
+         * @return bool
+         * @see Env::isDev
+         */
+        public function isDev()
+        {
+        }
+
+        /**
+         * Check if is the test environment
+         *
+         * @return bool
+         * @see Env::isTest
+         */
+        public function isTest()
+        {
+        }
+
+        /**
+         * Check if in the production environment
+         *
+         * @return bool
+         * @see Env::isProd
+         */
+        public function isProd()
+        {
+        }
     }
 
     class Error
