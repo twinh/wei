@@ -41,7 +41,7 @@ final class TagCacheTest extends CacheTestCase
 
         $this->assertEquals('The content of first post', $cache->get('1'));
 
-        $this->assertFalse($postCache->get('1'));
+        $this->assertNull($postCache->get('1'));
 
         $puCache->clear();
         $postCache->clear();
@@ -56,7 +56,7 @@ final class TagCacheTest extends CacheTestCase
         $postCache->set('1', 'This is the first post');
         $postCache->clear();
 
-        $this->assertFalse($postCache->get('1'));
+        $this->assertNull($postCache->get('1'));
 
         // Clear tag caches have no effect with other caches
         $this->assertEquals('The content of first post', $cache->get('1'));
@@ -80,10 +80,10 @@ final class TagCacheTest extends CacheTestCase
 
         $userCache->clear();
 
-        $this->assertFalse($userCache->get('1'));
+        $this->assertNull($userCache->get('1'));
         $this->assertEquals('This is the first post, from admin', $puCache->get('1-1'));
 
-        $this->assertFalse($puCache->reload()->get('1-1'));
+        $this->assertNull($puCache->reload()->get('1-1'));
         $this->assertEquals('This is the first post', $postCache->get('1'));
 
         $puCache->clear();

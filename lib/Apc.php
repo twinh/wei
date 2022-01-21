@@ -21,7 +21,10 @@ class Apc extends BaseCache
      */
     public function get($key, $expire = null, $fn = null)
     {
-        $result = apc_fetch($this->namespace . $key);
+        $result = apc_fetch($this->namespace . $key, $success);
+        if (!$success) {
+            $result = null;
+        }
         return $this->processGetResult($key, $result, $expire, $fn);
     }
 

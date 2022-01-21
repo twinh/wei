@@ -76,7 +76,7 @@ class MongoCache extends BaseCache
     {
         $result = $this->object->findOne(['_id' => $this->namespace . $key], ['value', 'expire']);
         if (null === $result || $result['expire'] < time()) {
-            $result = false;
+            $result = null;
         } else {
             $result = unserialize($result['value']);
         }

@@ -98,7 +98,7 @@ class DbCache extends BaseCache
             $result = $this->db->select($this->table, $this->namespace . $key);
             $result = unserialize($result['value']);
         } else {
-            $result = false;
+            $result = null;
         }
         return $this->processGetResult($key, $result, $expire, $fn);
     }

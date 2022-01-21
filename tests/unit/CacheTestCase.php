@@ -25,7 +25,7 @@ abstract class CacheTestCase extends TestCase
         $cache = $this->object;
 
         $cache->remove($key);
-        $this->assertFalse($cache->get($key));
+        $this->assertNull($cache->get($key));
 
         $this->assertFalse($cache->replace($key, $value));
         $this->assertTrue($cache->add($key, $value));
@@ -92,7 +92,7 @@ abstract class CacheTestCase extends TestCase
         $this->assertEquals($key, $cache->get($key));
 
         $cache->clear();
-        $this->assertFalse($cache->get($key));
+        $this->assertNull($cache->get($key));
     }
 
     public function testInvoker()

@@ -43,6 +43,6 @@ final class DbCacheTest extends CacheTestCase
         //sleep(2);
 
         $result = $cache->get($key);
-        $this->assertFalse($result);
+        $this->assertNull($result);
     }
 }

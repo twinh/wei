@@ -80,7 +80,11 @@ class Memcache extends BaseCache
      */
     public function get($key, $expire = null, $fn = null)
     {
-        $result = $this->object->get($this->namespace . $key);
+        $flags = false;
+        $result = $this->object->get($this->namespace . $key, $flags);
+        if ($flags === false) {
+            $result = null;
+        }
         return $this->processGetResult($key, $result, $expire, $fn);
     }
 

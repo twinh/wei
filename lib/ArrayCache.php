@@ -30,7 +30,7 @@ class ArrayCache extends BaseCache
     {
         $oriKey = $key;
         $key = $this->namespace . $key;
-        $result = array_key_exists($key, $this->data) ? $this->data[$key] : false;
+        $result = array_key_exists($key, $this->data) ? $this->data[$key] : null;
         return $this->processGetResult($oriKey, $result, $expire, $fn);
     }
 

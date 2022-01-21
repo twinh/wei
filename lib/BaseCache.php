@@ -233,7 +233,7 @@ abstract class BaseCache extends Base
      */
     protected function processGetResult($key, $result, $expire, $fn)
     {
-        if (false === $result && ($expire || $fn)) {
+        if (null === $result && ($expire || $fn)) {
             // Avoid using null as expire second, for null will be convert to 0
             // which means that store the cache forever, and make it hart to debug.
             if (!is_numeric($expire) && $fn) {

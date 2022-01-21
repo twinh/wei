@@ -136,7 +136,11 @@ class Redis extends BaseCache
      */
     public function get($key, $expire = null, $fn = null)
     {
-        $result = $this->unserialize($this->object->get($this->namespace . $key));
+        $result = $this->object->get($this->namespace . $key);
+        if (false === $result) {
+            $result = null;
+        }
+        $result = $this->unserialize($result);
         return $this->processGetResult($key, $result, $expire, $fn);
     }
 
@@ -225,7 +229,7 @@ class Redis extends BaseCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        if (false === $this->get($key)) {
+        if (false === $this->object->get($this->namespace . $key)) {
             return false;
         }
         return $this->set($key, $this->serialize($value), $expire);

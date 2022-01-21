@@ -39,7 +39,7 @@ class Bicache extends BaseCache
     public function get($key, $expire = null, $fn = null)
     {
         $result = $this->master->get($key);
-        if (false === $result) {
+        if (null === $result) {
             $result = $this->slave->get($key);
         }
         return $this->processGetResult($key, $result, $expire, $fn);

@@ -67,14 +67,14 @@ class FileCache extends BaseCache
     public function get($key, $expire = null, $fn = null)
     {
         if (!is_file($file = $this->getFile($key))) {
-            $result = false;
+            $result = null;
         } else {
             $content = $this->getContent($file);
             if ($content && is_array($content) && time() < $content[0]) {
                 $result = $content[1];
             } else {
                 $this->remove($key);
-                $result = false;
+                $result = null;
             }
         }
         return $this->processGetResult($key, $result, $expire, $fn);

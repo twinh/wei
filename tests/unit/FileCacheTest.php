@@ -70,11 +70,11 @@ class FileCacheTest extends CacheTestCase
 
         $wei->remove('test');
 
-        $this->assertFalse($wei->get('test'), 'cache has been removed');
+        $this->assertNull($wei->get('test'), 'cache has been removed');
 
         $wei->set('test', __METHOD__, -1);
 
-        $this->assertFalse($wei->get('test'), 'cache is expired');
+        $this->assertNull($wei->get('test'), 'cache is expired');
     }
 
     public function testSet()
@@ -100,7 +100,7 @@ class FileCacheTest extends CacheTestCase
 
         $cache->replace('test', __CLASS__);
 
-        $this->assertFalse($cache->get('test'), 'cache not found');
+        $this->assertNull($cache->get('test'), 'cache not found');
 
         $cache->set(__METHOD__, true, -1);
 
@@ -115,7 +115,7 @@ class FileCacheTest extends CacheTestCase
 
         $wei->remove('test');
 
-        $this->assertFalse($wei->get('test'));
+        $this->assertNull($wei->get('test'));
 
         $this->assertFalse($wei->remove('test'), 'cache not found');
     }
