@@ -4,6 +4,18 @@ namespace Wei;
 
 class Apc
 {
+    /**
+     * Store data from callback to cache
+     *
+     * @param string $key
+     * @param int|callable $expireOrFn
+     * @param callable|null $fn
+     * @return false|mixed
+     * @see BaseCache::remember
+     */
+    public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
 }
 
 class App
@@ -12,6 +24,18 @@ class App
 
 class ArrayCache
 {
+    /**
+     * Store data from callback to cache
+     *
+     * @param string $key
+     * @param int|callable $expireOrFn
+     * @param callable|null $fn
+     * @return false|mixed
+     * @see BaseCache::remember
+     */
+    public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
 }
 
 class Asset
@@ -20,6 +44,18 @@ class Asset
 
 class Bicache
 {
+    /**
+     * Store data from callback to cache
+     *
+     * @param string $key
+     * @param int|callable $expireOrFn
+     * @param callable|null $fn
+     * @return false|mixed
+     * @see BaseCache::remember
+     */
+    public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
 }
 
 class Block
@@ -28,6 +64,18 @@ class Block
 
 class Cache
 {
+    /**
+     * Store data from callback to cache
+     *
+     * @param string $key
+     * @param int|callable $expireOrFn
+     * @param callable|null $fn
+     * @return false|mixed
+     * @see BaseCache::remember
+     */
+    public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
 }
 
 class ClassMap
@@ -44,6 +92,18 @@ class Cookie
 
 class Couchbase
 {
+    /**
+     * Store data from callback to cache
+     *
+     * @param string $key
+     * @param int|callable $expireOrFn
+     * @param callable|null $fn
+     * @return false|mixed
+     * @see BaseCache::remember
+     */
+    public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
 }
 
 class Counter
@@ -77,6 +137,18 @@ class Db
 
 class DbCache
 {
+    /**
+     * Store data from callback to cache
+     *
+     * @param string $key
+     * @param int|callable $expireOrFn
+     * @param callable|null $fn
+     * @return false|mixed
+     * @see BaseCache::remember
+     */
+    public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
 }
 
 class E
@@ -208,6 +280,18 @@ class Event
 
 class FileCache
 {
+    /**
+     * Store data from callback to cache
+     *
+     * @param string $key
+     * @param int|callable $expireOrFn
+     * @param callable|null $fn
+     * @return false|mixed
+     * @see BaseCache::remember
+     */
+    public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
 }
 
 class Gravatar
@@ -1728,10 +1812,34 @@ class Logger
 
 class Memcache
 {
+    /**
+     * Store data from callback to cache
+     *
+     * @param string $key
+     * @param int|callable $expireOrFn
+     * @param callable|null $fn
+     * @return false|mixed
+     * @see BaseCache::remember
+     */
+    public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
 }
 
 class Memcached
 {
+    /**
+     * Store data from callback to cache
+     *
+     * @param string $key
+     * @param int|callable $expireOrFn
+     * @param callable|null $fn
+     * @return false|mixed
+     * @see BaseCache::remember
+     */
+    public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
 }
 
 class Migration
@@ -1784,10 +1892,34 @@ class Migration
 
 class MongoCache
 {
+    /**
+     * Store data from callback to cache
+     *
+     * @param string $key
+     * @param int|callable $expireOrFn
+     * @param callable|null $fn
+     * @return false|mixed
+     * @see BaseCache::remember
+     */
+    public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
 }
 
 class NearCache
 {
+    /**
+     * Store data from callback to cache
+     *
+     * @param string $key
+     * @param int|callable $expireOrFn
+     * @param callable|null $fn
+     * @return false|mixed
+     * @see BaseCache::remember
+     */
+    public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
 }
 
 class Password
@@ -1856,6 +1988,18 @@ class PhpError
 
 class PhpFileCache
 {
+    /**
+     * Store data from callback to cache
+     *
+     * @param string $key
+     * @param int|callable $expireOrFn
+     * @param callable|null $fn
+     * @return false|mixed
+     * @see BaseCache::remember
+     */
+    public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
 }
 
 class Pinyin
@@ -1868,6 +2012,18 @@ class Record
 
 class Redis
 {
+    /**
+     * Store data from callback to cache
+     *
+     * @param string $key
+     * @param int|callable $expireOrFn
+     * @param callable|null $fn
+     * @return false|mixed
+     * @see BaseCache::remember
+     */
+    public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
 }
 
 class Req
@@ -2186,6 +2342,18 @@ class T
 
 class TagCache
 {
+    /**
+     * Store data from callback to cache
+     *
+     * @param string $key
+     * @param int|callable $expireOrFn
+     * @param callable|null $fn
+     * @return false|mixed
+     * @see BaseCache::remember
+     */
+    public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
 }
 
 class Time
@@ -3958,6 +4126,18 @@ namespace Wei;
 if (0) {
     class Apc
     {
+        /**
+         * Store data from callback to cache
+         *
+         * @param string $key
+         * @param int|callable $expireOrFn
+         * @param callable|null $fn
+         * @return false|mixed
+         * @see BaseCache::remember
+         */
+        public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
     }
 
     class App
@@ -3966,6 +4146,18 @@ if (0) {
 
     class ArrayCache
     {
+        /**
+         * Store data from callback to cache
+         *
+         * @param string $key
+         * @param int|callable $expireOrFn
+         * @param callable|null $fn
+         * @return false|mixed
+         * @see BaseCache::remember
+         */
+        public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
     }
 
     class Asset
@@ -3974,6 +4166,18 @@ if (0) {
 
     class Bicache
     {
+        /**
+         * Store data from callback to cache
+         *
+         * @param string $key
+         * @param int|callable $expireOrFn
+         * @param callable|null $fn
+         * @return false|mixed
+         * @see BaseCache::remember
+         */
+        public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
     }
 
     class Block
@@ -3982,6 +4186,18 @@ if (0) {
 
     class Cache
     {
+        /**
+         * Store data from callback to cache
+         *
+         * @param string $key
+         * @param int|callable $expireOrFn
+         * @param callable|null $fn
+         * @return false|mixed
+         * @see BaseCache::remember
+         */
+        public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
     }
 
     class ClassMap
@@ -3998,6 +4214,18 @@ if (0) {
 
     class Couchbase
     {
+        /**
+         * Store data from callback to cache
+         *
+         * @param string $key
+         * @param int|callable $expireOrFn
+         * @param callable|null $fn
+         * @return false|mixed
+         * @see BaseCache::remember
+         */
+        public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
     }
 
     class Counter
@@ -4031,6 +4259,18 @@ if (0) {
 
     class DbCache
     {
+        /**
+         * Store data from callback to cache
+         *
+         * @param string $key
+         * @param int|callable $expireOrFn
+         * @param callable|null $fn
+         * @return false|mixed
+         * @see BaseCache::remember
+         */
+        public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
     }
 
     class E
@@ -4162,6 +4402,18 @@ if (0) {
 
     class FileCache
     {
+        /**
+         * Store data from callback to cache
+         *
+         * @param string $key
+         * @param int|callable $expireOrFn
+         * @param callable|null $fn
+         * @return false|mixed
+         * @see BaseCache::remember
+         */
+        public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
     }
 
     class Gravatar
@@ -5682,10 +5934,34 @@ if (0) {
 
     class Memcache
     {
+        /**
+         * Store data from callback to cache
+         *
+         * @param string $key
+         * @param int|callable $expireOrFn
+         * @param callable|null $fn
+         * @return false|mixed
+         * @see BaseCache::remember
+         */
+        public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
     }
 
     class Memcached
     {
+        /**
+         * Store data from callback to cache
+         *
+         * @param string $key
+         * @param int|callable $expireOrFn
+         * @param callable|null $fn
+         * @return false|mixed
+         * @see BaseCache::remember
+         */
+        public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
     }
 
     class Migration
@@ -5738,10 +6014,34 @@ if (0) {
 
     class MongoCache
     {
+        /**
+         * Store data from callback to cache
+         *
+         * @param string $key
+         * @param int|callable $expireOrFn
+         * @param callable|null $fn
+         * @return false|mixed
+         * @see BaseCache::remember
+         */
+        public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
     }
 
     class NearCache
     {
+        /**
+         * Store data from callback to cache
+         *
+         * @param string $key
+         * @param int|callable $expireOrFn
+         * @param callable|null $fn
+         * @return false|mixed
+         * @see BaseCache::remember
+         */
+        public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
     }
 
     class Password
@@ -5810,6 +6110,18 @@ if (0) {
 
     class PhpFileCache
     {
+        /**
+         * Store data from callback to cache
+         *
+         * @param string $key
+         * @param int|callable $expireOrFn
+         * @param callable|null $fn
+         * @return false|mixed
+         * @see BaseCache::remember
+         */
+        public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
     }
 
     class Pinyin
@@ -5822,6 +6134,18 @@ if (0) {
 
     class Redis
     {
+        /**
+         * Store data from callback to cache
+         *
+         * @param string $key
+         * @param int|callable $expireOrFn
+         * @param callable|null $fn
+         * @return false|mixed
+         * @see BaseCache::remember
+         */
+        public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
     }
 
     class Req
@@ -6140,6 +6464,18 @@ if (0) {
 
     class TagCache
     {
+        /**
+         * Store data from callback to cache
+         *
+         * @param string $key
+         * @param int|callable $expireOrFn
+         * @param callable|null $fn
+         * @return false|mixed
+         * @see BaseCache::remember
+         */
+        public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
     }
 
     class Time

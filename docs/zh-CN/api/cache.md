@@ -48,7 +48,7 @@ echo $cache->getDriver();
 如缓存用户总数,每30秒缓存过期,并重新拉取
 
 ```php
-$totalUsers = wei()->cache->get('totalUsers', 30, function($wei){
+$totalUsers = wei()->cache->remember('totalUsers', 30, function($wei){
 	return $wei->db->fetchColumn("SELECT COUNT(1) FROM user");
 });
 ```
@@ -61,7 +61,7 @@ $user = array(
     'updateTime' => '2013-12-01 12:00:00'
 );
 
-wei()->cache->get($user['id'] . $user['updateTime'], function($wei){
+wei()->cache->remember($user['id'] . $user['updateTime'], function($wei){
     // 渲染复杂的视图,拉取远程接口等耗时较长的操作
     return $wei->view->render('userInfo.php');
 });

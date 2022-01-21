@@ -221,6 +221,46 @@ abstract class BaseCache extends Base
     abstract public function clear();
 
     /**
+     * Store data from callback to cache
+     *
+     * @param string $key
+     * @param int|callable $expireOrFn
+     * @param callable|null $fn
+     * @return false|mixed
+     * @svc
+     */
+    protected function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+        $value = $this->get($key);
+        if (null !== $value) {
+            return $value;
+        }
+
+        // Avoid using null as expire second, for null will be convert to 0
+        // which means that store the cache forever, and make it hart to debug.
+        if (!is_int($expireOrFn) && $fn) {
+            throw new \InvalidArgumentException(sprintf(
+                'Expire time for cache "%s" must be int, %s given',
+                $key,
+                is_object($expireOrFn) ? get_class($expireOrFn) : gettype($expireOrFn)
+            ));
+        }
+
+        // Example: get($key, function(){});
+        if ($expireOrFn && !$fn) {
+            $fn = $expireOrFn;
+            $expire = 0;
+        } else {
+            $expire = $expireOrFn;
+        }
+
+        $result = call_user_func($fn, $this);
+        $this->set($key, $result, $expire);
+
+        return $result;
+    }
+
+    /**
      * Store data to cache when data is not false and callback is provided
      *
      * @param string $key

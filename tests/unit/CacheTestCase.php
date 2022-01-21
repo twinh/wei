@@ -46,14 +46,14 @@ abstract class CacheTestCase extends TestCase
         $obj = new \stdClass();
 
         return [
-            [[],  'array'],
-            [true,     'bool'],
-            [1.2,      'float'],
-            [1,        'int'],
-            [1,        'integer'],
-            [null,     'null'],
-            ['1',      'numeric'],
-            [$obj,     'object'],
+            [[], 'array'],
+            [true, 'bool'],
+            [1.2, 'float'],
+            [1, 'int'],
+            [1, 'integer'],
+            [null, 'null'],
+            ['1', 'numeric'],
+            [$obj, 'object'],
         ];
     }
 
@@ -221,6 +221,46 @@ abstract class CacheTestCase extends TestCase
 
         $this->object->setNamespace('');
         $this->object->get('key', null, function () {
+        });
+    }
+
+    public function testRemember()
+    {
+        $this->object->set('test', 'value');
+
+        $callback = function () use (&$called) {
+            $called = true;
+            return 'value2';
+        };
+
+        $called = false;
+        $result = $this->object->remember('test', $callback);
+
+        $this->assertSame('value', $result);
+        $this->assertFalse($called);
+
+        $this->object->remove('test');
+        $result = $this->object->remember('test', $callback);
+        $this->assertSame('value2', $result);
+        $this->assertTrue($called);
+    }
+
+    public function testRememberWithExpire()
+    {
+        $this->object->remove('test');
+        $result = $this->object->remember('test', 1, function () {
+            return 'value';
+        });
+        $this->assertSame('value', $result);
+    }
+
+    public function testRememberInvalidExpireTime()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Expire time for cache "key" must be int, NULL given');
+
+        $this->object->setNamespace('');
+        $this->object->remember('key', null, function () {
         });
     }
 }
