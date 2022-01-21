@@ -1766,7 +1766,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
         $cache = false === $this->cacheTags ? $this->cache : $this->tagCache($this->cacheTags ?: $this->getCacheTags());
         $params = $this->params;
         $paramTypes = $this->paramTypes;
-        return $cache->get($this->getCacheKey(), $this->cacheTime, function () use ($params, $paramTypes) {
+        return $cache->remember($this->getCacheKey(), $this->cacheTime, function () use ($params, $paramTypes) {
             return $this->db->fetchAll($this->getSql(), $params, $paramTypes);
         });
     }
