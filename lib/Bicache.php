@@ -36,13 +36,13 @@ class Bicache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function get($key, $expire = null, $fn = null)
+    public function get($key, $default = null)
     {
-        $result = $this->master->get($key);
-        if (null === $result) {
-            $result = $this->slave->get($key);
+        $result = $this->master->get($key, $default);
+        if ($default === $result) {
+            $result = $this->slave->get($key, $default);
         }
-        return $this->processGetResult($key, $result, $expire, $fn);
+        return $result;
     }
 
     /**

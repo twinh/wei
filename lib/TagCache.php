@@ -63,9 +63,9 @@ class TagCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function get($key, $expire = null, $fn = null)
+    public function get($key, $default = null)
     {
-        return $this->cache->get($this->getKey($key), $expire, $fn);
+        return $this->cache->get($this->getKey($key), $default);
     }
 
     /**

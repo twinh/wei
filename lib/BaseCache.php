@@ -41,6 +41,96 @@ abstract class BaseCache extends Base
     }
 
     /**
+     * Retrieve multiple items
+     *
+     * @param array $keys The name of items
+     * @return array
+     * @deprecated use getMultiple instead
+     */
+    public function getMulti(array $keys)
+    {
+        return (array) $this->getMultiple($keys);
+    }
+
+    /**
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int $expire
+     * @return array
+     * @deprecated use setMultiple instead
+     */
+    public function setMulti(array $keys, $expire = 0)
+    {
+        $results = [];
+        foreach ($keys as $key => $value) {
+            $results[$key] = $this->set($key, $value, $expire);
+        }
+        return $results;
+    }
+
+    /**
+     * Use the file modify time as cache key to store an item from a callback
+     *
+     * @param string $file The path of file
+     * @param callable $fn The callback to get and parse file content
+     * @return mixed
+     */
+    public function getFileContent($file, $fn)
+    {
+        $key = $file . filemtime($file);
+        return $this->remember($key, function ($cache) use ($file, $fn) {
+            return $fn($file, $cache);
+        });
+    }
+
+    /**
+     * Returns the key prefix
+     *
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
+    }
+
+    /**
+     * Set the cache key prefix
+     *
+     * @param string $namespace
+     * @return $this
+     */
+    public function setNamespace($namespace)
+    {
+        $this->namespace = $namespace;
+        return $this;
+    }
+
+    /**
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
+     * @deprecated use has instead
+     */
+    public function exists($key)
+    {
+        return $this->has($key);
+    }
+
+    /**
+     * Remove an item
+     *
+     * @param string $key The name of item
+     * @return bool
+     * @deprecated use delete instead
+     */
+    public function remove($key)
+    {
+        return $this->delete($key);
+    }
+
+    /**
      * Retrieve an item
      *
      * ```php
@@ -49,24 +139,14 @@ abstract class BaseCache extends Base
      * // Retrieve cache by key
      * $cache->get('key');
      *
-     * // Get cache value from callback
-     * $cache->get('key', function($wei){
-     *      return 'value';
-     * });
-     *
-     * // Get cache value from callback with timeout
-     * $cache->get('key', 10, function($wei){
-     *      return 'value';
-     * });
-     * ```
+     * // Custom default value
+     * $cache->get('key', 'default value');
      *
      * @param string $key The name of item
-     * @param int|callable|null $expire The expire seconds of callback return value
-     * @param callable $fn The callback to execute when cache not found
-     * @throws \RuntimeException When set cache return false
+     * @param mixed $default The default value to return when cache not exists
      * @return mixed
      */
-    abstract public function get($key, $expire = null, $fn = null);
+    abstract public function get($key, $default = null);
 
     /**
      * Store an item
@@ -246,7 +326,7 @@ abstract class BaseCache extends Base
             ));
         }
 
-        // Example: get($key, function(){});
+        // Example: remember($key, function(){});
         if ($expireOrFn && !$fn) {
             $fn = $expireOrFn;
             $expire = 0;
@@ -257,42 +337,6 @@ abstract class BaseCache extends Base
         $result = call_user_func($fn, $this);
         $this->set($key, $result, $expire);
 
-        return $result;
-    }
-
-    /**
-     * Store data to cache when data is not false and callback is provided
-     *
-     * @param string $key
-     * @param mixed $result
-     * @param int $expire
-     * @param callable $fn
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     * @return mixed
-     */
-    protected function processGetResult($key, $result, $expire, $fn)
-    {
-        if (null === $result && ($expire || $fn)) {
-            // Avoid using null as expire second, for null will be convert to 0
-            // which means that store the cache forever, and make it hart to debug.
-            if (!is_numeric($expire) && $fn) {
-                throw new \InvalidArgumentException(sprintf(
-                    'Expire time for cache "%s" must be numeric, %s given',
-                    $key,
-                    is_object($expire) ? get_class($expire) : gettype($expire)
-                ));
-            }
-
-            // Example: get($key, function(){});
-            if ($expire && !$fn) {
-                $fn = $expire;
-                $expire = 0;
-            }
-
-            $result = call_user_func($fn, $this->wei, $this);
-            $this->set($key, $result, $expire);
-        }
         return $result;
     }
 }

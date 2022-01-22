@@ -137,7 +137,7 @@ abstract class CacheTestCase extends TestCase
         $this->assertEquals($items, $cache->getMulti(array_keys($items)));
     }
 
-    public function testGetFalseResultAndSet()
+    public function testGetNullResultAndSet()
     {
         $cache = $this->object;
         $num = 1;
@@ -145,14 +145,14 @@ abstract class CacheTestCase extends TestCase
 
         $cache->clear();
 
-        $result = $cache->get($key, 60, function () use ($num) {
+        $result = $cache->remember($key, 60, function () use ($num) {
             return ++$num;
         });
 
         $this->assertEquals(2, $result);
 
         // receive from cache
-        $result2 = $cache->get($key, function () use ($num) {
+        $result2 = $cache->remember($key, function () use ($num) {
             return ++$num;
         });
 
@@ -212,16 +212,6 @@ abstract class CacheTestCase extends TestCase
 
         $this->assertTrue($this->object->remove('key'));
         $this->assertFalse($this->object->remove('key'));
-    }
-
-    public function testInvalidExpireTimeForGetWithCallback()
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expire time for cache "key" must be numeric, NULL given');
-
-        $this->object->setNamespace('');
-        $this->object->get('key', null, function () {
-        });
     }
 
     public function testRemember()

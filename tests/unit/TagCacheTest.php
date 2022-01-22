@@ -98,10 +98,10 @@ final class TagCacheTest extends CacheTestCase
     public function testInvalidExpireTimeForGetWithCallback()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expire time for cache ":key" must be numeric, NULL given');
+        $this->expectExceptionMessage('Expire time for cache "key" must be int, NULL given');
 
         $this->object->setNamespace('');
-        $this->object->get('key', null, function () {
+        $this->object->remember('key', null, function () {
         });
     }
 

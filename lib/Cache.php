@@ -81,10 +81,9 @@ class Cache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function get($key, $expire = null, $fn = null)
+    public function get($key, $default = null)
     {
-        $result = $this->object->get($key);
-        return $this->processGetResult($key, $result, $expire, $fn);
+        return $this->object->get($key, $default);
     }
 
     /**

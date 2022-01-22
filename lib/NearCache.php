@@ -23,16 +23,16 @@ class NearCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function get($key, $expire = null, $fn = null)
+    public function get($key, $default = null)
     {
-        $result = $this->front->get($key);
-        if (null === $result) {
-            $result = $this->back->get($key);
-            if (null !== $result) {
-                $this->front->set($key, $result, $expire);
+        $result = $this->front->get($key, $default);
+        if ($default === $result) {
+            $result = $this->back->get($key, $default);
+            if ($default !== $result) {
+                $this->front->set($key, $result);
             }
         }
-        return $this->processGetResult($key, $result, $expire, $fn);
+        return $default;
     }
 
     /**

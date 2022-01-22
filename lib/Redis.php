@@ -134,14 +134,13 @@ class Redis extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function get($key, $expire = null, $fn = null)
+    public function get($key, $default = null)
     {
         $result = $this->object->get($this->namespace . $key);
         if (false === $result) {
-            $result = null;
+            return $default;
         }
-        $result = $this->unserialize($result);
-        return $this->processGetResult($key, $result, $expire, $fn);
+        return $this->unserialize($result);
     }
 
     /**

@@ -92,15 +92,15 @@ class DbCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function get($key, $expire = null, $fn = null)
+    public function get($key, $default = null)
     {
         if ($this->exists($key)) {
             $result = $this->db->select($this->table, $this->namespace . $key);
             $result = unserialize($result['value']);
         } else {
-            $result = null;
+            $result = $default;
         }
-        return $this->processGetResult($key, $result, $expire, $fn);
+        return $result;
     }
 
     /**

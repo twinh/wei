@@ -78,14 +78,11 @@ class Memcache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function get($key, $expire = null, $fn = null)
+    public function get($key, $default = null)
     {
         $flags = false;
         $result = $this->object->get($this->namespace . $key, $flags);
-        if ($flags === false) {
-            $result = null;
-        }
-        return $this->processGetResult($key, $result, $expire, $fn);
+        return $flags ? $result : $default;
     }
 
     /**

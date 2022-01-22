@@ -89,13 +89,13 @@ class Memcached extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function get($key, $expire = null, $fn = null)
+    public function get($key, $default = null)
     {
         $result = $this->object->get($this->namespace . $key);
-        if ($this->object->getResultCode() !== \Memcached::RES_SUCCESS) {
-            $result = null;
+        if ($this->object->getResultCode() === \Memcached::RES_SUCCESS) {
+            return $result;
         }
-        return $this->processGetResult($key, $result, $expire, $fn);
+        return $default;
     }
 
     /**

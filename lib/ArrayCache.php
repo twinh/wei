@@ -26,12 +26,9 @@ class ArrayCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function get($key, $expire = null, $fn = null)
+    public function get($key, $default = null)
     {
-        $oriKey = $key;
-        $key = $this->namespace . $key;
-        $result = array_key_exists($key, $this->data) ? $this->data[$key] : null;
-        return $this->processGetResult($oriKey, $result, $expire, $fn);
+        return $this->data[$this->namespace . $key] ?? $default;
     }
 
     /**
