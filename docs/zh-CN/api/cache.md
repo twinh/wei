@@ -99,7 +99,7 @@ wei()->memcached->set('key', 'value');
 
 ### 批量设置和获取缓存
 
-**注意:** 目前只有`redis`和`couchbase`支持原生的批量设置,其他的缓存实际都是通过`foreach`语句逐个设置.
+**注意:** 目前只有`redis`支持原生的批量设置,其他的缓存实际都是通过`foreach`语句逐个设置.
 
 ```php
 $cache = wei()->cache;
@@ -178,7 +178,6 @@ driver    | string | apc       | 缓存的类型
 
 * [apc](apc.md) - APC缓存 *(推荐)*
 * [arrayCache](arrayCache.md) - PHP数组缓存
-* [couchbase](couchbase.md) - Couchbase缓存
 * [dbCache](dbCache.md) - 数据库缓存
 * [fileCache](fileCache.md) - 文件缓存
 * [memcache](memcache.md) - Memcachce缓存
@@ -189,12 +188,12 @@ driver    | string | apc       | 缓存的类型
 
 #### 特性对比
 
-特性   | Apc | ArrayCache | DbCache | FileCache | Memecache | Memcached | MongoCache | Couchbase | Redis
--------|-----|------------|---------|-----------|-----------|-----------|------------|-----------|-------
-速度   | 快  | 快         | 慢      | 慢        | 快        | 快        | 快         | 快        | 快
-持久化 | ×  | -          |  √     | √        | ×        | ×        | √         | √        | √
-分布式 | ×  | ×         |  √     | ×        | √        | √        | √         | √        | √
-原子性 | √  | √         |  ×     | √        | √        | √        | ×         | √        | √
+特性   | Apc | ArrayCache | DbCache | FileCache | Memecache | Memcached | MongoCache  | Redis
+-------|-----|------------|---------|-----------|-----------|-----------|------------|-------
+速度   | 快  | 快         | 慢      | 慢        | 快        | 快        | 快         | 快
+持久化 | ×  | -          |  √     | √        | ×        | ×        | √         | √
+分布式 | ×  | ×         |  √     | ×        | √        | √        | √         | √
+原子性 | √  | √         |  ×     | √        | √        | √        | ×         | √
 
 * `√` 表示支持
 * `×` 表示不支持

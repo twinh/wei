@@ -69,7 +69,6 @@ composer require wei/wei
 $wei->cache;
 $wei->apc;
 $wei->arrayCache;
-$wei->couchbase;
 $wei->dbCache;
 $wei->fileCache;
 $wei->memcache;

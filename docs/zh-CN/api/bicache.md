@@ -38,7 +38,7 @@ wei()->bicache('key', 'value', 60);
 ----------|--------|-----------|---------------------------------------------------------------------------------------|
 time      | int    | 5         | 当主缓存写数据时,会检查上次更新到slave缓存的间隔秒数,如果超过该秒数,就同步到从缓存中  |
 deps      | array  |           | 主从缓存类型的配置                                                                    |
- - master | string | apc       | 主缓存的类型,推荐使用内存类缓存,如apc,redis,memcache,memcached或couchbase             |
+ - master | string | apc       | 主缓存的类型,推荐使用内存类缓存,如apc,redis,memcache或memcached             |
  - slave  | string | fileCache | 从缓存的类型,推荐使用文件类缓存,如fileCache或dbCache                                  |
 
 ### 继承的方法

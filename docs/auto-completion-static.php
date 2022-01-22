@@ -90,22 +90,6 @@ class Cookie
 {
 }
 
-class Couchbase
-{
-    /**
-     * Store data from callback to cache
-     *
-     * @param string $key
-     * @param int|callable $expireOrFn
-     * @param callable|null $fn
-     * @return false|mixed
-     * @see BaseCache::remember
-     */
-    public static function remember(string $key, $expireOrFn, callable $fn = null)
-    {
-    }
-}
-
 class Counter
 {
 }
@@ -4210,22 +4194,6 @@ if (0) {
 
     class Cookie
     {
-    }
-
-    class Couchbase
-    {
-        /**
-         * Store data from callback to cache
-         *
-         * @param string $key
-         * @param int|callable $expireOrFn
-         * @param callable|null $fn
-         * @return false|mixed
-         * @see BaseCache::remember
-         */
-        public function remember(string $key, $expireOrFn, callable $fn = null)
-        {
-        }
     }
 
     class Counter

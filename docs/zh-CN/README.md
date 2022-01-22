@@ -30,7 +30,6 @@ API参考目录
 * [cache](api/cache.md) - 通用缓存
 * [apc](api/apc.md) - APC缓存
 * [arrayCache](api/arrayCache.md) - PHP数组缓存
-* [couchbase](api/couchbase.md) - Couchbase缓存
 * [dbCache](api/dbCache.md) - 数据库缓存
 * [fileCache](api/fileCache.md) - 文件缓存
 * [memcache](api/memcache.md) - Memcachce缓存

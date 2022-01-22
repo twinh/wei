@@ -22,7 +22,6 @@ wei([
         // Set up autoload for WeiTest namespace
         'autoloadMap' => [
             '\WeiTest' => __DIR__ . '/unit',
-            '' => __DIR__ . '/fallback',
         ],
     ],
     'error' => [

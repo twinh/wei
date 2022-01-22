@@ -79,14 +79,6 @@ class CookieMixin
 }
 
 /**
- * @property    Wei\Couchbase $couchbase A cache service that stored data in Couchbase
- * @method      mixed couchbase($key, $value = null, $expire = 0) Retrieve or store an item
- */
-class CouchbaseMixin
-{
-}
-
-/**
  * @property    Wei\Counter $counter A counter service
  */
 class CounterMixin
@@ -1276,7 +1268,6 @@ class WeiMixin
  * @mixin ClassMapMixin
  * @mixin ConfigMixin
  * @mixin CookieMixin
- * @mixin CouchbaseMixin
  * @mixin CounterMixin
  * @mixin DbMixin
  * @mixin DbCacheMixin
