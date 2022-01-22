@@ -38,8 +38,8 @@ class Bicache extends BaseCache
      */
     public function get($key, $default = null)
     {
-        $result = $this->master->get($key, $default);
-        if ($default === $result) {
+        $result = $this->master->get($key);
+        if (null === $result) {
             $result = $this->slave->get($key, $default);
         }
         return $result;

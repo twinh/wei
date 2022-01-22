@@ -138,7 +138,7 @@ class Redis extends BaseCache
     {
         $result = $this->object->get($this->namespace . $key);
         if (false === $result) {
-            return $default;
+            return $this->getDefault($default);
         }
         return $this->unserialize($result);
     }

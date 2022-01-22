@@ -25,14 +25,18 @@ class NearCache extends BaseCache
      */
     public function get($key, $default = null)
     {
-        $result = $this->front->get($key, $default);
-        if ($default === $result) {
-            $result = $this->back->get($key, $default);
-            if ($default !== $result) {
-                $this->front->set($key, $result);
-            }
+        $result = $this->front->get($key);
+        if (null !== $result) {
+            return $result;
         }
-        return $default;
+
+        $result = $this->back->get($key);
+        if (null !== $result) {
+            $this->front->set($key, $result);
+            return $result;
+        }
+
+        return $this->getDefault($default);
     }
 
     /**

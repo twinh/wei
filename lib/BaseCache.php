@@ -329,4 +329,15 @@ abstract class BaseCache extends Base
 
         return $result;
     }
+
+    /**
+     * Call and return if the argument is a closure, otherwise return the argument directly
+     *
+     * @param mixed $default
+     * @return mixed
+     */
+    protected function getDefault($default)
+    {
+        return $default instanceof \Closure ? $default() : $default;
+    }
 }

@@ -82,7 +82,7 @@ class Memcache extends BaseCache
     {
         $flags = false;
         $result = $this->object->get($this->namespace . $key, $flags);
-        return $flags ? $result : $default;
+        return $flags ? $result : $this->getDefault($default);
     }
 
     /**

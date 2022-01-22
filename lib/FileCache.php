@@ -67,7 +67,7 @@ class FileCache extends BaseCache
     public function get($key, $default = null)
     {
         if (!is_file($file = $this->getFile($key))) {
-            return $default;
+            return $this->getDefault($default);
         }
 
         $content = $this->getContent($file);
@@ -75,7 +75,7 @@ class FileCache extends BaseCache
             $result = $content[1];
         } else {
             $this->remove($key);
-            $result = $default;
+            $result = $this->getDefault($default);
         }
         return $result;
     }

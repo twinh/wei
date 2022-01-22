@@ -22,7 +22,7 @@ class Apc extends BaseCache
     public function get($key, $default = null)
     {
         $result = apc_fetch($this->namespace . $key, $success);
-        return $success ? $result : $default;
+        return $success ? $result : $this->getDefault($default);
     }
 
     /**

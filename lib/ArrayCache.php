@@ -28,7 +28,7 @@ class ArrayCache extends BaseCache
      */
     public function get($key, $default = null)
     {
-        return $this->data[$this->namespace . $key] ?? $default;
+        return $this->data[$this->namespace . $key] ?? $this->getDefault($default);
     }
 
     /**

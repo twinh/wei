@@ -95,7 +95,7 @@ class Memcached extends BaseCache
         if ($this->object->getResultCode() === \Memcached::RES_SUCCESS) {
             return $result;
         }
-        return $default;
+        return $this->getDefault($default);
     }
 
     /**
