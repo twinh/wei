@@ -284,16 +284,6 @@ abstract class BaseCache extends Base
     }
 
     /**
-     * Return the result code of the last operation
-     *
-     * @return int
-     */
-    public function getResultCode()
-    {
-        return 0;
-    }
-
-    /**
      * Clear all items
      *
      * @return bool
