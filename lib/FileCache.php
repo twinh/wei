@@ -74,7 +74,7 @@ class FileCache extends BaseCache
         if ($content && is_array($content) && time() < $content[0]) {
             $result = $content[1];
         } else {
-            $this->remove($key);
+            $this->delete($key);
             $result = $this->getDefault($default);
         }
         return $result;
@@ -93,7 +93,7 @@ class FileCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    protected function delete(string $key): bool
     {
         if (file_exists($file = $this->getFile($key))) {
             // Ignore errors caused by slow io(docker) and request concurrency
@@ -106,7 +106,7 @@ class FileCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    protected function has(string $key): bool
     {
         if (!is_file($file = $this->getFile($key))) {
             return false;
@@ -116,7 +116,7 @@ class FileCache extends BaseCache
         if ($content && is_array($content) && time() < $content[0]) {
             return true;
         } else {
-            $this->remove($key);
+            $this->delete($key);
             return false;
         }
     }

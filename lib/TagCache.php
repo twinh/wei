@@ -79,17 +79,17 @@ class TagCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    protected function delete(string $key): bool
     {
-        return $this->cache->remove($this->getKey($key));
+        return $this->cache->delete($this->getKey($key));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    protected function has(string $key): bool
     {
-        return $this->cache->exists($this->getKey($key));
+        return $this->cache->has($this->getKey($key));
     }
 
     /**

@@ -36,7 +36,7 @@ class FileCacheTest extends CacheTestCase
     {
         $wei = $this->object;
 
-        $wei->remove(__METHOD__);
+        $wei->delete(__METHOD__);
 
         $wei->add(__METHOD__, true);
 
@@ -68,7 +68,7 @@ class FileCacheTest extends CacheTestCase
 
         $this->assertEquals(__METHOD__, $wei->get('test'), 'get known cache');
 
-        $wei->remove('test');
+        $wei->delete('test');
 
         $this->assertNull($wei->get('test'), 'cache has been removed');
 
@@ -96,7 +96,7 @@ class FileCacheTest extends CacheTestCase
 
         $this->assertEquals(__CLASS__, $cache->get('test'), 'cache replaced');
 
-        $cache->remove('test');
+        $cache->delete('test');
 
         $cache->replace('test', __CLASS__);
 
@@ -113,11 +113,11 @@ class FileCacheTest extends CacheTestCase
 
         $wei->set('test', __METHOD__);
 
-        $wei->remove('test');
+        $wei->delete('test');
 
         $this->assertNull($wei->get('test'));
 
-        $this->assertFalse($wei->remove('test'), 'cache not found');
+        $this->assertFalse($wei->delete('test'), 'cache not found');
     }
 
     public function testIncr()
@@ -130,7 +130,7 @@ class FileCacheTest extends CacheTestCase
 
         $this->assertEquals($wei->get(__METHOD__), 2);
 
-        $wei->remove(__METHOD__);
+        $wei->delete(__METHOD__);
         $result = $wei->incr(__METHOD__);
         $this->assertEquals(1, $result);
 

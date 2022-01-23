@@ -43,7 +43,7 @@ class ArrayCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    protected function delete(string $key): bool
     {
         if (isset($this->data[$this->namespace . $key])) {
             unset($this->data[$this->namespace . $key]);
@@ -56,7 +56,7 @@ class ArrayCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    protected function has(string $key): bool
     {
         return array_key_exists($this->namespace . $key, $this->data);
     }
@@ -66,7 +66,7 @@ class ArrayCache extends BaseCache
      */
     public function add($key, $value, $expire = 0)
     {
-        if ($this->exists($key)) {
+        if ($this->has($key)) {
             return false;
         } else {
             return $this->set($key, $value);
@@ -78,7 +78,7 @@ class ArrayCache extends BaseCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        if (!$this->exists($key)) {
+        if (!$this->has($key)) {
             return false;
         } else {
             $this->data[$this->namespace . $key] = $value;
@@ -91,7 +91,7 @@ class ArrayCache extends BaseCache
      */
     public function incr($key, $offset = 1)
     {
-        if ($this->exists($key)) {
+        if ($this->has($key)) {
             return $this->data[$this->namespace . $key] += $offset;
         } else {
             return $this->data[$this->namespace . $key] = $offset;

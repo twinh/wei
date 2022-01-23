@@ -81,8 +81,8 @@ $cache = $wei->memcached;
 // Cache APIs
 $cache->get('key');
 $cache->set('key', 'value', 60);
-$cache->remove('key');
-$cache->exists('key');
+$cache->delete('key');
+$cache->has('key');
 $cache->add('key', 'value');
 $cache->replace('key', 'value');
 $cache->incr('key', 1);

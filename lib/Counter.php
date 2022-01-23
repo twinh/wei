@@ -72,7 +72,7 @@ class Counter extends Base
      */
     public function exits($key)
     {
-        return $this->cache->exists($key);
+        return $this->cache->has($key);
     }
 
     /**
@@ -83,6 +83,6 @@ class Counter extends Base
      */
     public function remove($key)
     {
-        return $this->cache->remove($key);
+        return $this->cache->delete($key);
     }
 }

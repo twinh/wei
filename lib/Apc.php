@@ -37,7 +37,7 @@ class Apc extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    protected function delete(string $key): bool
     {
         return apc_delete($this->namespace . $key);
     }
@@ -45,7 +45,7 @@ class Apc extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    protected function has(string $key): bool
     {
         return apc_exists($this->namespace . $key);
     }

@@ -24,7 +24,7 @@ abstract class CacheTestCase extends TestCase
     {
         $cache = $this->object;
 
-        $cache->remove($key);
+        $cache->delete($key);
         $this->assertNull($cache->get($key));
 
         $this->assertFalse($cache->replace($key, $value));
@@ -62,7 +62,7 @@ abstract class CacheTestCase extends TestCase
         $cache = $this->object;
 
         $key = __METHOD__;
-        $cache->remove($key);
+        $cache->delete($key);
 
         // Increase from not exists key
         $this->assertSame(2, $cache->incr($key, 2));
@@ -110,15 +110,15 @@ abstract class CacheTestCase extends TestCase
         $cache = $this->object;
         $key = __METHOD__;
 
-        $cache->remove($key);
-        $this->assertFalse($cache->exists($key));
+        $cache->delete($key);
+        $this->assertFalse($cache->has($key));
 
         $cache->set($key, 'value');
-        $this->assertTrue($cache->exists($key));
+        $this->assertTrue($cache->has($key));
 
         // The key is exists and the value is "false"
         $cache->set($key, false);
-        $this->assertTrue($cache->exists($key));
+        $this->assertTrue($cache->has($key));
     }
 
     public function testHas()
@@ -126,7 +126,7 @@ abstract class CacheTestCase extends TestCase
         $cache = $this->object;
         $key = __METHOD__;
 
-        $cache->remove($key);
+        $cache->delete($key);
         $this->assertFalse($cache->has($key));
 
         $cache->set($key, 'value');
@@ -211,7 +211,7 @@ abstract class CacheTestCase extends TestCase
         $this->assertEquals(2, $cache->replace('test', 2));
         $this->assertEquals(2, $cache->get('test'));
 
-        $this->assertTrue($cache->remove('test'));
+        $this->assertTrue($cache->delete('test'));
         $this->assertTrue($cache->add('test', 3));
         $this->assertEquals(3, $cache->get('test'));
 
@@ -268,7 +268,7 @@ abstract class CacheTestCase extends TestCase
         $this->assertSame('value', $result);
         $this->assertFalse($called);
 
-        $this->object->remove('test');
+        $this->object->delete('test');
         $result = $this->object->remember('test', $callback);
         $this->assertSame('value2', $result);
         $this->assertTrue($called);
@@ -276,7 +276,7 @@ abstract class CacheTestCase extends TestCase
 
     public function testRememberWithExpire()
     {
-        $this->object->remove('test');
+        $this->object->delete('test');
         $result = $this->object->remember('test', 1, function () {
             return 'value';
         });

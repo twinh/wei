@@ -34,7 +34,7 @@ final class DbCacheTest extends CacheTestCase
 
         //sleep(2);
 
-        $result = $cache->exists($key);
+        $result = $cache->has($key);
         $this->assertFalse($result);
 
         $result = $cache->set($key, true, -1);

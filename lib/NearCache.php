@@ -53,10 +53,10 @@ class NearCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    protected function delete(string $key): bool
     {
-        $result1 = $this->front->remove($key);
-        $result2 = $this->back->remove($key);
+        $result1 = $this->front->delete($key);
+        $result2 = $this->back->delete($key);
 
         return $result1 && $result2;
     }
@@ -64,9 +64,9 @@ class NearCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    protected function has(string $key): bool
     {
-        return $this->front->exists($key) || $this->back->exists($key);
+        return $this->front->has($key) || $this->back->has($key);
     }
 
     /**

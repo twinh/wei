@@ -194,7 +194,7 @@ class Redis extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    protected function delete(string $key): bool
     {
         return (bool) $this->object->del($this->namespace . $key);
     }
@@ -202,7 +202,7 @@ class Redis extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    protected function has(string $key): bool
     {
         // Redis >= 4.0 returned int, if < 4.0 returned bool
         return (bool) $this->object->exists($this->namespace . $key);

@@ -19,13 +19,13 @@ final class ApcTest extends CacheTestCase
     {
         $apc = $this->object;
 
-        $apc->remove('test');
+        $apc->delete('test');
 
         $apc->set('test', __METHOD__);
 
         $this->assertEquals(__METHOD__, $apc->get('test'), 'get known cache');
 
-        $apc->remove('test');
+        $apc->delete('test');
 
         $this->assertFalse($apc->get('test'), 'cache has been removed');
 
@@ -47,7 +47,7 @@ final class ApcTest extends CacheTestCase
     {
         $apc = $this->object;
 
-        $apc->remove('test2');
+        $apc->delete('test2');
 
         $apc->set('test2', __METHOD__);
 
@@ -58,7 +58,7 @@ final class ApcTest extends CacheTestCase
     {
         $apc = $this->object;
 
-        $apc->remove(__METHOD__);
+        $apc->delete(__METHOD__);
 
         $this->assertTrue($apc->add(__METHOD__, true));
 
@@ -71,7 +71,7 @@ final class ApcTest extends CacheTestCase
     {
         $apc = $this->object;
 
-        $apc->remove(__METHOD__);
+        $apc->delete(__METHOD__);
 
         $this->assertFalse($apc->replace(__METHOD__, true));
 
@@ -90,7 +90,7 @@ final class ApcTest extends CacheTestCase
 
         $this->assertEquals($apc->get(__METHOD__), 2);
 
-        $apc->remove(__METHOD__);
+        $apc->delete(__METHOD__);
 
         $result = $apc->incr(__METHOD__);
 

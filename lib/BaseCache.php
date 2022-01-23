@@ -163,18 +163,18 @@ abstract class BaseCache extends Base
      *
      * @param  string $key The name of item
      * @return bool
-     * @deprecated use delete instead
+     * @svc
      */
-    abstract public function remove($key);
+    abstract protected function delete(string $key): bool;
 
     /**
      * Check if an item is exists
      *
      * @param string $key
      * @return bool
-     * @deprecated use has instead
+     * @svc
      */
-    abstract public function exists($key);
+    abstract protected function has(string $key): bool;
 
     /**
      * Add an item
@@ -299,11 +299,11 @@ abstract class BaseCache extends Base
      *
      * @param string $key
      * @return bool
-     * @svc
+     * @deprecated use has instead
      */
-    protected function has(string $key): bool
+    public function exists($key)
     {
-        return $this->exists($key);
+        return $this->has($key);
     }
 
     /**
@@ -311,11 +311,11 @@ abstract class BaseCache extends Base
      *
      * @param  string $key The name of item
      * @return bool
-     * @svc
+     * @deprecated use delete instead
      */
-    protected function delete(string $key): bool
+    public function remove($key)
     {
-        return $this->remove($key);
+        return $this->delete($key);
     }
 
     /**

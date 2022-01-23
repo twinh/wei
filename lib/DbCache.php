@@ -94,7 +94,7 @@ class DbCache extends BaseCache
      */
     public function get($key, $default = null)
     {
-        if ($this->exists($key)) {
+        if ($this->has($key)) {
             $result = $this->db->select($this->table, $this->namespace . $key);
             $result = unserialize($result['value']);
         } else {
@@ -117,7 +117,7 @@ class DbCache extends BaseCache
             'id' => $this->namespace . $key,
         ];
 
-        if ($this->exists($key)) {
+        if ($this->has($key)) {
             // In MySQL, the rowCount method return 0 when data is not modified,
             // so check errorCode to make sure it executed success
             $result = $this->db->update($this->table, $data, $identifier) || '0000' == $this->db->errorCode();
@@ -130,7 +130,7 @@ class DbCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    protected function delete(string $key): bool
     {
         return (bool) $this->db->delete($this->table, ['id' => $this->namespace . $key]);
     }
@@ -138,7 +138,7 @@ class DbCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    protected function has(string $key): bool
     {
         $result = $this->db->select($this->table, $this->namespace . $key);
 
@@ -146,7 +146,7 @@ class DbCache extends BaseCache
             return false;
         }
         if ($result['expire'] < date('Y-m-d H:i:s')) {
-            $this->remove($key);
+            $this->delete($key);
             return false;
         }
 
@@ -158,7 +158,7 @@ class DbCache extends BaseCache
      */
     public function add($key, $value, $expire = 0)
     {
-        if ($this->exists($key)) {
+        if ($this->has($key)) {
             return false;
         } else {
             return $this->set($key, $value, $expire);
@@ -170,7 +170,7 @@ class DbCache extends BaseCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        if (!$this->exists($key)) {
+        if (!$this->has($key)) {
             return false;
         } else {
             return $this->set($key, $value, $expire);

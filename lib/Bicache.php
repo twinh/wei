@@ -64,10 +64,10 @@ class Bicache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    protected function delete(string $key): bool
     {
-        $result1 = $this->master->remove($key);
-        $result2 = $this->slave->remove($key);
+        $result1 = $this->master->delete($key);
+        $result2 = $this->slave->delete($key);
 
         return $result1 && $result2;
     }
@@ -75,9 +75,9 @@ class Bicache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    protected function has(string $key): bool
     {
-        return $this->master->exists($key) || $this->slave->exists($key);
+        return $this->master->has($key) || $this->slave->has($key);
     }
 
     /**

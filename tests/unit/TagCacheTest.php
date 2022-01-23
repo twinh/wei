@@ -34,7 +34,7 @@ final class TagCacheTest extends CacheTestCase
         $puCache->get('x');
         $postCache = wei()->tagCache('posts');
 
-        $postCache->remove('1');
+        $postCache->delete('1');
         $puCache->set('1', 'This is the first post, from admin.');
 
         $this->assertEquals('This is the first post, from admin.', $puCache->get('1'));

@@ -245,7 +245,7 @@ $key      | string    | 无        | 缓存的键名
 
 获取缓存的值,同`cache($key)`
 
-#### cache->remove($key)
+#### cache->delete($key)
 
 移除一项缓存
 
@@ -257,7 +257,7 @@ $key      | string    | 无        | 缓存的键名
 ----------|-----------|-----------|------
 $key      | string    | 无        | 缓存的键名
 
-#### cache->exists($key)
+#### cache->has($key)
 
 检查缓存是否存在
 

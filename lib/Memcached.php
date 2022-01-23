@@ -135,7 +135,7 @@ class Memcached extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    protected function delete(string $key): bool
     {
         return $this->object->delete($this->namespace . $key);
     }
@@ -143,7 +143,7 @@ class Memcached extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    protected function has(string $key): bool
     {
         $key = $this->namespace . $key;
         if ($this->object->add($key, true)) {

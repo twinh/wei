@@ -100,7 +100,7 @@ class MongoCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    protected function delete(string $key): bool
     {
         $result = $this->object->remove(['_id' => $this->namespace . $key]);
         return 1 === $result['n'];
@@ -109,7 +109,7 @@ class MongoCache extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    protected function has(string $key): bool
     {
         $result = $this->object->findOne(['_id' => $this->namespace . $key], ['expire']);
         if (null === $result || $result['expire'] < time()) {
@@ -124,7 +124,7 @@ class MongoCache extends BaseCache
      */
     public function add($key, $value, $expire = 0)
     {
-        if ($this->exists($key)) {
+        if ($this->has($key)) {
             return false;
         } else {
             return $this->set($key, $value, $expire);
@@ -136,7 +136,7 @@ class MongoCache extends BaseCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        if ($this->exists($key)) {
+        if ($this->has($key)) {
             return $this->set($key, $value, $expire);
         } else {
             return false;
