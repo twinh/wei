@@ -121,6 +121,22 @@ abstract class CacheTestCase extends TestCase
         $this->assertTrue($cache->exists($key));
     }
 
+    public function testHas()
+    {
+        $cache = $this->object;
+        $key = __METHOD__;
+
+        $cache->remove($key);
+        $this->assertFalse($cache->has($key));
+
+        $cache->set($key, 'value');
+        $this->assertTrue($cache->has($key));
+
+        // The key is exists and the value is "false"
+        $cache->set($key, false);
+        $this->assertTrue($cache->has($key));
+    }
+
     public function testGetAndSetMulti()
     {
         $items = [];
@@ -135,6 +151,20 @@ abstract class CacheTestCase extends TestCase
         }
 
         $this->assertEquals($items, $cache->getMulti(array_keys($items)));
+    }
+
+    public function testGetAndSetMultiple()
+    {
+        $items = [];
+        foreach ($this->providerForGetterAndSetter() as $row) {
+            $items[$row[1]] = $row[0];
+        }
+        $cache = $this->object;
+
+        $result = $cache->setMultiple($items);
+        $this->assertTrue($result);
+
+        $this->assertEquals($items, $cache->getMultiple(array_keys($items)));
     }
 
     public function testGetNullResultAndSet()
@@ -212,6 +242,15 @@ abstract class CacheTestCase extends TestCase
 
         $this->assertTrue($this->object->remove('key'));
         $this->assertFalse($this->object->remove('key'));
+    }
+
+    public function testDelete()
+    {
+        $result = $this->object->set('key', 'value');
+        $this->assertTrue($result);
+
+        $this->assertTrue($this->object->delete('key'));
+        $this->assertFalse($this->object->delete('key'));
     }
 
     public function testRemember()

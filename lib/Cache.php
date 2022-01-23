@@ -141,4 +141,22 @@ class Cache extends BaseCache
     {
         return $this->object->clear();
     }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function getMultiple(iterable $keys, $default = null): iterable
+    {
+        return $this->object->getMultiple($keys, $default);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function setMultiple(iterable $keys, $ttl = null): bool
+    {
+        return $this->object->setMultiple($keys, $ttl);
+    }
 }

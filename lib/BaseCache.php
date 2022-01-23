@@ -163,6 +163,7 @@ abstract class BaseCache extends Base
      *
      * @param  string $key The name of item
      * @return bool
+     * @deprecated use delete instead
      */
     abstract public function remove($key);
 
@@ -171,6 +172,7 @@ abstract class BaseCache extends Base
      *
      * @param string $key
      * @return bool
+     * @deprecated use has instead
      */
     abstract public function exists($key);
 
@@ -220,6 +222,7 @@ abstract class BaseCache extends Base
      *
      * @param array $keys The name of items
      * @return array
+     * @deprecated use getMultiple instead
      */
     public function getMulti(array $keys)
     {
@@ -236,6 +239,7 @@ abstract class BaseCache extends Base
      * @param array $keys The name of items
      * @param int $expire
      * @return array
+     * @deprecated use setMultiple instead
      */
     public function setMulti(array $keys, $expire = 0)
     {
@@ -289,6 +293,64 @@ abstract class BaseCache extends Base
      * @return bool
      */
     abstract public function clear();
+
+    /**
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
+     * @svc
+     */
+    protected function has(string $key): bool
+    {
+        return $this->exists($key);
+    }
+
+    /**
+     * Remove an item
+     *
+     * @param  string $key The name of item
+     * @return bool
+     * @svc
+     */
+    protected function delete(string $key): bool
+    {
+        return $this->remove($key);
+    }
+
+    /**
+     * Retrieve multiple items
+     *
+     * @param iterable $keys The name of items
+     * @param mixed $default
+     * @return iterable<string, mixed>
+     * @svc
+     */
+    protected function getMultiple(iterable $keys, $default = null): iterable
+    {
+        $results = [];
+        foreach ($keys as $key) {
+            $results[$key] = $this->get($key, $default);
+        }
+        return $results;
+    }
+
+    /**
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int|null $ttl
+     * @return bool
+     * @svc
+     */
+    protected function setMultiple(iterable $keys, $ttl = null): bool
+    {
+        $success = true;
+        foreach ($keys as $key => $value) {
+            $success = $this->set($key, $value, $ttl ?: 0) && $success;
+        }
+        return $success;
+    }
 
     /**
      * Store data from callback to cache

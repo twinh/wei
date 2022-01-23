@@ -5,6 +5,52 @@ namespace Wei;
 class Apc
 {
     /**
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
+     * @see BaseCache::has
+     */
+    public static function has(string $key): bool
+    {
+    }
+
+    /**
+     * Remove an item
+     *
+     * @param  string $key The name of item
+     * @return bool
+     * @see BaseCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * Retrieve multiple items
+     *
+     * @param iterable $keys The name of items
+     * @param mixed $default
+     * @return iterable<string, mixed>
+     * @see BaseCache::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int|null $ttl
+     * @return bool
+     * @see BaseCache::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
+    /**
      * Store data from callback to cache
      *
      * @param string $key
@@ -24,6 +70,52 @@ class App
 
 class ArrayCache
 {
+    /**
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
+     * @see BaseCache::has
+     */
+    public static function has(string $key): bool
+    {
+    }
+
+    /**
+     * Remove an item
+     *
+     * @param  string $key The name of item
+     * @return bool
+     * @see BaseCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * Retrieve multiple items
+     *
+     * @param iterable $keys The name of items
+     * @param mixed $default
+     * @return iterable<string, mixed>
+     * @see BaseCache::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int|null $ttl
+     * @return bool
+     * @see BaseCache::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
     /**
      * Store data from callback to cache
      *
@@ -45,6 +137,52 @@ class Asset
 class Bicache
 {
     /**
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
+     * @see BaseCache::has
+     */
+    public static function has(string $key): bool
+    {
+    }
+
+    /**
+     * Remove an item
+     *
+     * @param  string $key The name of item
+     * @return bool
+     * @see BaseCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * Retrieve multiple items
+     *
+     * @param iterable $keys The name of items
+     * @param mixed $default
+     * @return iterable<string, mixed>
+     * @see BaseCache::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int|null $ttl
+     * @return bool
+     * @see BaseCache::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
+    /**
      * Store data from callback to cache
      *
      * @param string $key
@@ -64,6 +202,52 @@ class Block
 
 class Cache
 {
+    /**
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
+     * @see BaseCache::has
+     */
+    public static function has(string $key): bool
+    {
+    }
+
+    /**
+     * Remove an item
+     *
+     * @param  string $key The name of item
+     * @return bool
+     * @see BaseCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * Retrieve multiple items
+     *
+     * @param iterable $keys The name of items
+     * @param mixed $default
+     * @return iterable<string, mixed>
+     * @see BaseCache::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int|null $ttl
+     * @return bool
+     * @see BaseCache::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
     /**
      * Store data from callback to cache
      *
@@ -121,6 +305,52 @@ class Db
 
 class DbCache
 {
+    /**
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
+     * @see BaseCache::has
+     */
+    public static function has(string $key): bool
+    {
+    }
+
+    /**
+     * Remove an item
+     *
+     * @param  string $key The name of item
+     * @return bool
+     * @see BaseCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * Retrieve multiple items
+     *
+     * @param iterable $keys The name of items
+     * @param mixed $default
+     * @return iterable<string, mixed>
+     * @see BaseCache::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int|null $ttl
+     * @return bool
+     * @see BaseCache::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
     /**
      * Store data from callback to cache
      *
@@ -264,6 +494,52 @@ class Event
 
 class FileCache
 {
+    /**
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
+     * @see BaseCache::has
+     */
+    public static function has(string $key): bool
+    {
+    }
+
+    /**
+     * Remove an item
+     *
+     * @param  string $key The name of item
+     * @return bool
+     * @see BaseCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * Retrieve multiple items
+     *
+     * @param iterable $keys The name of items
+     * @param mixed $default
+     * @return iterable<string, mixed>
+     * @see BaseCache::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int|null $ttl
+     * @return bool
+     * @see BaseCache::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
     /**
      * Store data from callback to cache
      *
@@ -1797,6 +2073,52 @@ class Logger
 class Memcache
 {
     /**
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
+     * @see BaseCache::has
+     */
+    public static function has(string $key): bool
+    {
+    }
+
+    /**
+     * Remove an item
+     *
+     * @param  string $key The name of item
+     * @return bool
+     * @see BaseCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * Retrieve multiple items
+     *
+     * @param iterable $keys The name of items
+     * @param mixed $default
+     * @return iterable<string, mixed>
+     * @see BaseCache::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int|null $ttl
+     * @return bool
+     * @see BaseCache::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
+    /**
      * Store data from callback to cache
      *
      * @param string $key
@@ -1812,6 +2134,52 @@ class Memcache
 
 class Memcached
 {
+    /**
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
+     * @see BaseCache::has
+     */
+    public static function has(string $key): bool
+    {
+    }
+
+    /**
+     * Remove an item
+     *
+     * @param  string $key The name of item
+     * @return bool
+     * @see BaseCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * Retrieve multiple items
+     *
+     * @param iterable $keys The name of items
+     * @param mixed $default
+     * @return iterable<string, mixed>
+     * @see BaseCache::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int|null $ttl
+     * @return bool
+     * @see BaseCache::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
     /**
      * Store data from callback to cache
      *
@@ -1877,6 +2245,52 @@ class Migration
 class MongoCache
 {
     /**
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
+     * @see BaseCache::has
+     */
+    public static function has(string $key): bool
+    {
+    }
+
+    /**
+     * Remove an item
+     *
+     * @param  string $key The name of item
+     * @return bool
+     * @see BaseCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * Retrieve multiple items
+     *
+     * @param iterable $keys The name of items
+     * @param mixed $default
+     * @return iterable<string, mixed>
+     * @see BaseCache::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int|null $ttl
+     * @return bool
+     * @see BaseCache::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
+    /**
      * Store data from callback to cache
      *
      * @param string $key
@@ -1892,6 +2306,52 @@ class MongoCache
 
 class NearCache
 {
+    /**
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
+     * @see BaseCache::has
+     */
+    public static function has(string $key): bool
+    {
+    }
+
+    /**
+     * Remove an item
+     *
+     * @param  string $key The name of item
+     * @return bool
+     * @see BaseCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * Retrieve multiple items
+     *
+     * @param iterable $keys The name of items
+     * @param mixed $default
+     * @return iterable<string, mixed>
+     * @see BaseCache::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int|null $ttl
+     * @return bool
+     * @see BaseCache::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
     /**
      * Store data from callback to cache
      *
@@ -1973,6 +2433,52 @@ class PhpError
 class PhpFileCache
 {
     /**
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
+     * @see BaseCache::has
+     */
+    public static function has(string $key): bool
+    {
+    }
+
+    /**
+     * Remove an item
+     *
+     * @param  string $key The name of item
+     * @return bool
+     * @see BaseCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * Retrieve multiple items
+     *
+     * @param iterable $keys The name of items
+     * @param mixed $default
+     * @return iterable<string, mixed>
+     * @see BaseCache::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int|null $ttl
+     * @return bool
+     * @see BaseCache::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
+    /**
      * Store data from callback to cache
      *
      * @param string $key
@@ -1996,6 +2502,52 @@ class Record
 
 class Redis
 {
+    /**
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
+     * @see BaseCache::has
+     */
+    public static function has(string $key): bool
+    {
+    }
+
+    /**
+     * Remove an item
+     *
+     * @param  string $key The name of item
+     * @return bool
+     * @see BaseCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * Retrieve multiple items
+     *
+     * @param iterable $keys The name of items
+     * @param mixed $default
+     * @return iterable<string, mixed>
+     * @see BaseCache::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int|null $ttl
+     * @return bool
+     * @see BaseCache::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
     /**
      * Store data from callback to cache
      *
@@ -2326,6 +2878,52 @@ class T
 
 class TagCache
 {
+    /**
+     * Check if an item is exists
+     *
+     * @param string $key
+     * @return bool
+     * @see BaseCache::has
+     */
+    public static function has(string $key): bool
+    {
+    }
+
+    /**
+     * Remove an item
+     *
+     * @param  string $key The name of item
+     * @return bool
+     * @see BaseCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * Retrieve multiple items
+     *
+     * @param iterable $keys The name of items
+     * @param mixed $default
+     * @return iterable<string, mixed>
+     * @see BaseCache::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int|null $ttl
+     * @return bool
+     * @see BaseCache::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
     /**
      * Store data from callback to cache
      *
@@ -4111,6 +4709,52 @@ if (0) {
     class Apc
     {
         /**
+         * Check if an item is exists
+         *
+         * @param string $key
+         * @return bool
+         * @see BaseCache::has
+         */
+        public function has(string $key): bool
+        {
+        }
+
+        /**
+         * Remove an item
+         *
+         * @param  string $key The name of item
+         * @return bool
+         * @see BaseCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * Retrieve multiple items
+         *
+         * @param iterable $keys The name of items
+         * @param mixed $default
+         * @return iterable<string, mixed>
+         * @see BaseCache::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * Store multiple items
+         *
+         * @param array $keys The name of items
+         * @param int|null $ttl
+         * @return bool
+         * @see BaseCache::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
+        /**
          * Store data from callback to cache
          *
          * @param string $key
@@ -4130,6 +4774,52 @@ if (0) {
 
     class ArrayCache
     {
+        /**
+         * Check if an item is exists
+         *
+         * @param string $key
+         * @return bool
+         * @see BaseCache::has
+         */
+        public function has(string $key): bool
+        {
+        }
+
+        /**
+         * Remove an item
+         *
+         * @param  string $key The name of item
+         * @return bool
+         * @see BaseCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * Retrieve multiple items
+         *
+         * @param iterable $keys The name of items
+         * @param mixed $default
+         * @return iterable<string, mixed>
+         * @see BaseCache::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * Store multiple items
+         *
+         * @param array $keys The name of items
+         * @param int|null $ttl
+         * @return bool
+         * @see BaseCache::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
         /**
          * Store data from callback to cache
          *
@@ -4151,6 +4841,52 @@ if (0) {
     class Bicache
     {
         /**
+         * Check if an item is exists
+         *
+         * @param string $key
+         * @return bool
+         * @see BaseCache::has
+         */
+        public function has(string $key): bool
+        {
+        }
+
+        /**
+         * Remove an item
+         *
+         * @param  string $key The name of item
+         * @return bool
+         * @see BaseCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * Retrieve multiple items
+         *
+         * @param iterable $keys The name of items
+         * @param mixed $default
+         * @return iterable<string, mixed>
+         * @see BaseCache::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * Store multiple items
+         *
+         * @param array $keys The name of items
+         * @param int|null $ttl
+         * @return bool
+         * @see BaseCache::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
+        /**
          * Store data from callback to cache
          *
          * @param string $key
@@ -4170,6 +4906,52 @@ if (0) {
 
     class Cache
     {
+        /**
+         * Check if an item is exists
+         *
+         * @param string $key
+         * @return bool
+         * @see BaseCache::has
+         */
+        public function has(string $key): bool
+        {
+        }
+
+        /**
+         * Remove an item
+         *
+         * @param  string $key The name of item
+         * @return bool
+         * @see BaseCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * Retrieve multiple items
+         *
+         * @param iterable $keys The name of items
+         * @param mixed $default
+         * @return iterable<string, mixed>
+         * @see BaseCache::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * Store multiple items
+         *
+         * @param array $keys The name of items
+         * @param int|null $ttl
+         * @return bool
+         * @see BaseCache::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
         /**
          * Store data from callback to cache
          *
@@ -4227,6 +5009,52 @@ if (0) {
 
     class DbCache
     {
+        /**
+         * Check if an item is exists
+         *
+         * @param string $key
+         * @return bool
+         * @see BaseCache::has
+         */
+        public function has(string $key): bool
+        {
+        }
+
+        /**
+         * Remove an item
+         *
+         * @param  string $key The name of item
+         * @return bool
+         * @see BaseCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * Retrieve multiple items
+         *
+         * @param iterable $keys The name of items
+         * @param mixed $default
+         * @return iterable<string, mixed>
+         * @see BaseCache::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * Store multiple items
+         *
+         * @param array $keys The name of items
+         * @param int|null $ttl
+         * @return bool
+         * @see BaseCache::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
         /**
          * Store data from callback to cache
          *
@@ -4370,6 +5198,52 @@ if (0) {
 
     class FileCache
     {
+        /**
+         * Check if an item is exists
+         *
+         * @param string $key
+         * @return bool
+         * @see BaseCache::has
+         */
+        public function has(string $key): bool
+        {
+        }
+
+        /**
+         * Remove an item
+         *
+         * @param  string $key The name of item
+         * @return bool
+         * @see BaseCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * Retrieve multiple items
+         *
+         * @param iterable $keys The name of items
+         * @param mixed $default
+         * @return iterable<string, mixed>
+         * @see BaseCache::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * Store multiple items
+         *
+         * @param array $keys The name of items
+         * @param int|null $ttl
+         * @return bool
+         * @see BaseCache::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
         /**
          * Store data from callback to cache
          *
@@ -5903,6 +6777,52 @@ if (0) {
     class Memcache
     {
         /**
+         * Check if an item is exists
+         *
+         * @param string $key
+         * @return bool
+         * @see BaseCache::has
+         */
+        public function has(string $key): bool
+        {
+        }
+
+        /**
+         * Remove an item
+         *
+         * @param  string $key The name of item
+         * @return bool
+         * @see BaseCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * Retrieve multiple items
+         *
+         * @param iterable $keys The name of items
+         * @param mixed $default
+         * @return iterable<string, mixed>
+         * @see BaseCache::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * Store multiple items
+         *
+         * @param array $keys The name of items
+         * @param int|null $ttl
+         * @return bool
+         * @see BaseCache::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
+        /**
          * Store data from callback to cache
          *
          * @param string $key
@@ -5918,6 +6838,52 @@ if (0) {
 
     class Memcached
     {
+        /**
+         * Check if an item is exists
+         *
+         * @param string $key
+         * @return bool
+         * @see BaseCache::has
+         */
+        public function has(string $key): bool
+        {
+        }
+
+        /**
+         * Remove an item
+         *
+         * @param  string $key The name of item
+         * @return bool
+         * @see BaseCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * Retrieve multiple items
+         *
+         * @param iterable $keys The name of items
+         * @param mixed $default
+         * @return iterable<string, mixed>
+         * @see BaseCache::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * Store multiple items
+         *
+         * @param array $keys The name of items
+         * @param int|null $ttl
+         * @return bool
+         * @see BaseCache::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
         /**
          * Store data from callback to cache
          *
@@ -5983,6 +6949,52 @@ if (0) {
     class MongoCache
     {
         /**
+         * Check if an item is exists
+         *
+         * @param string $key
+         * @return bool
+         * @see BaseCache::has
+         */
+        public function has(string $key): bool
+        {
+        }
+
+        /**
+         * Remove an item
+         *
+         * @param  string $key The name of item
+         * @return bool
+         * @see BaseCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * Retrieve multiple items
+         *
+         * @param iterable $keys The name of items
+         * @param mixed $default
+         * @return iterable<string, mixed>
+         * @see BaseCache::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * Store multiple items
+         *
+         * @param array $keys The name of items
+         * @param int|null $ttl
+         * @return bool
+         * @see BaseCache::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
+        /**
          * Store data from callback to cache
          *
          * @param string $key
@@ -5998,6 +7010,52 @@ if (0) {
 
     class NearCache
     {
+        /**
+         * Check if an item is exists
+         *
+         * @param string $key
+         * @return bool
+         * @see BaseCache::has
+         */
+        public function has(string $key): bool
+        {
+        }
+
+        /**
+         * Remove an item
+         *
+         * @param  string $key The name of item
+         * @return bool
+         * @see BaseCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * Retrieve multiple items
+         *
+         * @param iterable $keys The name of items
+         * @param mixed $default
+         * @return iterable<string, mixed>
+         * @see BaseCache::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * Store multiple items
+         *
+         * @param array $keys The name of items
+         * @param int|null $ttl
+         * @return bool
+         * @see BaseCache::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
         /**
          * Store data from callback to cache
          *
@@ -6079,6 +7137,52 @@ if (0) {
     class PhpFileCache
     {
         /**
+         * Check if an item is exists
+         *
+         * @param string $key
+         * @return bool
+         * @see BaseCache::has
+         */
+        public function has(string $key): bool
+        {
+        }
+
+        /**
+         * Remove an item
+         *
+         * @param  string $key The name of item
+         * @return bool
+         * @see BaseCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * Retrieve multiple items
+         *
+         * @param iterable $keys The name of items
+         * @param mixed $default
+         * @return iterable<string, mixed>
+         * @see BaseCache::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * Store multiple items
+         *
+         * @param array $keys The name of items
+         * @param int|null $ttl
+         * @return bool
+         * @see BaseCache::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
+        /**
          * Store data from callback to cache
          *
          * @param string $key
@@ -6102,6 +7206,52 @@ if (0) {
 
     class Redis
     {
+        /**
+         * Check if an item is exists
+         *
+         * @param string $key
+         * @return bool
+         * @see BaseCache::has
+         */
+        public function has(string $key): bool
+        {
+        }
+
+        /**
+         * Remove an item
+         *
+         * @param  string $key The name of item
+         * @return bool
+         * @see BaseCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * Retrieve multiple items
+         *
+         * @param iterable $keys The name of items
+         * @param mixed $default
+         * @return iterable<string, mixed>
+         * @see BaseCache::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * Store multiple items
+         *
+         * @param array $keys The name of items
+         * @param int|null $ttl
+         * @return bool
+         * @see BaseCache::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
         /**
          * Store data from callback to cache
          *
@@ -6432,6 +7582,52 @@ if (0) {
 
     class TagCache
     {
+        /**
+         * Check if an item is exists
+         *
+         * @param string $key
+         * @return bool
+         * @see BaseCache::has
+         */
+        public function has(string $key): bool
+        {
+        }
+
+        /**
+         * Remove an item
+         *
+         * @param  string $key The name of item
+         * @return bool
+         * @see BaseCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * Retrieve multiple items
+         *
+         * @param iterable $keys The name of items
+         * @param mixed $default
+         * @return iterable<string, mixed>
+         * @see BaseCache::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * Store multiple items
+         *
+         * @param array $keys The name of items
+         * @param int|null $ttl
+         * @return bool
+         * @see BaseCache::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
         /**
          * Store data from callback to cache
          *
