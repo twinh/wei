@@ -105,7 +105,7 @@ wei()->memcached->set('key', 'value');
 $cache = wei()->cache;
 
 // 批量设置缓存
-$result = $cache->setMulti(array(
+$result = $cache->setMultiple(array(
     'array' 	=> array(),
     'bool'		=> true,
     'float'		=> 1.2,
@@ -115,17 +115,10 @@ $result = $cache->setMulti(array(
 ));
 
 // 返回结果
-$result = array (
-    'array' => true,
-    'bool' => true,
-    'float' => true,
-    'int' => true,
-    'null' => true,
-    'object' => true,
-);
+$result = true;
 
 // 批量获取缓存
-$result = $cache->getMulti(array(
+$result = $cache->getMultiple(array(
     'array',
     'bool',
     'float',
@@ -322,7 +315,7 @@ $offset   | int       | 1         | 增大的值
 $key      | string    | 无        | 缓存的键名
 $offset   | int       | 1         | 减小的值
 
-#### cache->getMulti($keys)
+#### cache->getMultiple($keys)
 
 批量获取缓存的值
 

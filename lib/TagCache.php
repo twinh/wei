@@ -125,7 +125,7 @@ class TagCache extends BaseCache
         foreach ($this->tags as $tag) {
             $data[$this->getTagKey($tag)] = $this->generateTagValue();
         }
-        $this->cache->setMulti($data);
+        $this->cache->setMultiple($data);
         $this->reload();
         return $this;
     }
@@ -184,7 +184,7 @@ class TagCache extends BaseCache
     {
         // Step1 Get tags value from cache
         $keys = array_map([$this, 'getTagKey'], $this->tags);
-        $values = $this->cache->getMulti($keys);
+        $values = $this->cache->getMultiple($keys);
 
         // Step2 Initialize new tags value
         $emptyKeys = array_diff($values, array_filter($values));
@@ -208,7 +208,7 @@ class TagCache extends BaseCache
         foreach ($keys as $key => $value) {
             $values[$key] = $this->generateTagValue();
         }
-        $this->cache->setMulti($values);
+        $this->cache->setMultiple($values);
         return $values;
     }
 

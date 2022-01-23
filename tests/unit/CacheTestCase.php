@@ -215,10 +215,10 @@ abstract class CacheTestCase extends TestCase
         $this->assertTrue($cache->add('test', 3));
         $this->assertEquals(3, $cache->get('test'));
 
-        $this->assertEquals(['test' => 3], $cache->getMulti(['test']));
+        $this->assertEquals(['test' => 3], $cache->getMultiple(['test']));
 
-        $result = $cache->setMulti(['test' => 2]);
-        $this->assertEquals(['test' => true], $result);
+        $result = $cache->setMultiple(['test' => 2]);
+        $this->assertTrue($result);
 
         $this->assertEquals(2, $cache->get('test'));
     }

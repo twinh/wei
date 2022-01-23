@@ -87,8 +87,8 @@ $cache->add('key', 'value');
 $cache->replace('key', 'value');
 $cache->incr('key', 1);
 $cache->decr('key', 1);
-$cache->getMulti(array('key', 'key2'));
-$cache->setMulti(array('key' => 'value', 'key2' => 'value2'));
+$cache->getMultiple(array('key', 'key2'));
+$cache->setMultiple(array('key' => 'value', 'key2' => 'value2'));
 $cache->clear();
 
 // ...
