@@ -18,8 +18,9 @@ class Apc extends BaseCache
 {
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function get($key, $default = null)
+    protected function get($key, $default = null)
     {
         $result = apc_fetch($this->namespace . $key, $success);
         return $success ? $result : $this->getDefault($default);
@@ -27,8 +28,9 @@ class Apc extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function set($key, $value, $expire = 0)
+    protected function set($key, $value, $expire = 0)
     {
         $key = $this->namespace . $key;
         return $expire >= 0 ? apc_store($key, $value, $expire) : apc_delete($key);
@@ -36,6 +38,7 @@ class Apc extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
     protected function delete(string $key): bool
     {
@@ -44,6 +47,7 @@ class Apc extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
     protected function has(string $key): bool
     {
@@ -52,16 +56,18 @@ class Apc extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function add($key, $value, $expire = 0)
+    protected function add($key, $value, $expire = 0)
     {
         return apc_add($this->namespace . $key, $value, $expire);
     }
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function replace($key, $value, $expire = 0)
+    protected function replace($key, $value, $expire = 0)
     {
         $key = $this->namespace . $key;
         if (apc_exists($key)) {
@@ -73,8 +79,9 @@ class Apc extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function incr($key, $offset = 1)
+    protected function incr($key, $offset = 1)
     {
         $key = $this->namespace . $key;
         $value = apc_inc($key, $offset, $success);
@@ -87,8 +94,9 @@ class Apc extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function clear()
+    protected function clear()
     {
         return apc_clear_cache('user');
     }

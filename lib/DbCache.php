@@ -91,8 +91,9 @@ class DbCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function get($key, $default = null)
+    protected function get($key, $default = null)
     {
         if ($this->has($key)) {
             $result = $this->db->select($this->table, $this->namespace . $key);
@@ -105,8 +106,9 @@ class DbCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function set($key, $value, $expire = 0)
+    protected function set($key, $value, $expire = 0)
     {
         $data = [
             'value' => serialize($value),
@@ -129,6 +131,7 @@ class DbCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
     protected function delete(string $key): bool
     {
@@ -137,6 +140,7 @@ class DbCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
     protected function has(string $key): bool
     {
@@ -155,8 +159,9 @@ class DbCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function add($key, $value, $expire = 0)
+    protected function add($key, $value, $expire = 0)
     {
         if ($this->has($key)) {
             return false;
@@ -167,8 +172,9 @@ class DbCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function replace($key, $value, $expire = 0)
+    protected function replace($key, $value, $expire = 0)
     {
         if (!$this->has($key)) {
             return false;
@@ -181,8 +187,9 @@ class DbCache extends BaseCache
      * Note: This method is not an atomic operation
      *
      * {@inheritdoc}
+     * @svc
      */
-    public function incr($key, $offset = 1)
+    protected function incr($key, $offset = 1)
     {
         $value = $this->get($key) + $offset;
         return $this->set($key, $value) ? $value : false;
@@ -190,8 +197,9 @@ class DbCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function clear()
+    protected function clear()
     {
         return (bool) $this->db->executeUpdate("DELETE FROM {$this->table}");
     }

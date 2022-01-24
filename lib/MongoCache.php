@@ -70,9 +70,31 @@ class MongoCache extends BaseCache
     }
 
     /**
+     * Get couchbase object
+     *
+     * @return \MongoCollection
+     */
+    public function getObject()
+    {
+        return $this->object;
+    }
+
+    /**
+     * Set couchbase object
+     *
+     * @param \MongoCollection $object
+     * @return $this
+     */
+    public function setObject(\MongoCollection $object)
+    {
+        $this->object = $object;
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      */
-    public function get($key, $default = null)
+    protected function get($key, $default = null)
     {
         $result = $this->object->findOne(['_id' => $this->namespace . $key], ['value', 'expire']);
         if (null === $result || $result['expire'] < time()) {
@@ -85,8 +107,9 @@ class MongoCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function set($key, $value, $expire = 0)
+    protected function set($key, $value, $expire = 0)
     {
         $result = $this->object->save([
             '_id' => $this->namespace . $key,
@@ -121,8 +144,9 @@ class MongoCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function add($key, $value, $expire = 0)
+    protected function add($key, $value, $expire = 0)
     {
         if ($this->has($key)) {
             return false;
@@ -133,8 +157,9 @@ class MongoCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function replace($key, $value, $expire = 0)
+    protected function replace($key, $value, $expire = 0)
     {
         if ($this->has($key)) {
             return $this->set($key, $value, $expire);
@@ -147,8 +172,9 @@ class MongoCache extends BaseCache
      * Note: This method is not an atomic operation
      *
      * {@inheritdoc}
+     * @svc
      */
-    public function incr($key, $offset = 1)
+    protected function incr($key, $offset = 1)
     {
         $value = $this->get($key) + $offset;
         return $this->set($key, $value) ? $value : false;
@@ -156,31 +182,10 @@ class MongoCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function clear()
+    protected function clear()
     {
         return $this->object->remove();
-    }
-
-    /**
-     * Get couchbase object
-     *
-     * @return \MongoCollection
-     */
-    public function getObject()
-    {
-        return $this->object;
-    }
-
-    /**
-     * Set couchbase object
-     *
-     * @param \MongoCollection $object
-     * @return $this
-     */
-    public function setObject(\MongoCollection $object)
-    {
-        $this->object = $object;
-        return $this;
     }
 }

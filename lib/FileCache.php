@@ -62,163 +62,6 @@ class FileCache extends BaseCache
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function get($key, $default = null)
-    {
-        if (!is_file($file = $this->getFile($key))) {
-            return $this->getDefault($default);
-        }
-
-        $content = $this->getContent($file);
-        if ($content && is_array($content) && time() < $content[0]) {
-            $result = $content[1];
-        } else {
-            $this->delete($key);
-            $result = $this->getDefault($default);
-        }
-        return $result;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function set($key, $value, $expire = 0)
-    {
-        $file = $this->getFile($key);
-        $content = $this->prepareContent($value, $expire);
-        return (bool) file_put_contents($file, $content, \LOCK_EX);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function delete(string $key): bool
-    {
-        if (file_exists($file = $this->getFile($key))) {
-            // Ignore errors caused by slow io(docker) and request concurrency
-            return @unlink($file);
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function has(string $key): bool
-    {
-        if (!is_file($file = $this->getFile($key))) {
-            return false;
-        }
-
-        $content = $this->getContent($file);
-        if ($content && is_array($content) && time() < $content[0]) {
-            return true;
-        } else {
-            $this->delete($key);
-            return false;
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function add($key, $value, $expire = 0)
-    {
-        $file = $this->getFile($key);
-
-        if (!is_file($file)) {
-            // Open and try to lock file immediately
-            if (!$handle = $this->openAndLock($file, 'wb', \LOCK_EX | \LOCK_NB)) {
-                return false;
-            }
-
-            $rewrite = false;
-        } else {
-            // Open file for reading and rewriting
-            if (!$handle = $this->openAndLock($file, 'r+b', \LOCK_EX)) {
-                return false;
-            }
-
-            // The cache is not expired
-            if ($this->readAndVerify($handle, $file)) {
-                fclose($handle);
-                return false;
-            }
-
-            $rewrite = true;
-        }
-
-        $content = $this->prepareContent($value, $expire);
-        return $this->writeAndRelease($handle, $content, $rewrite);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function replace($key, $value, $expire = 0)
-    {
-        if (!is_file($file = $this->getFile($key))) {
-            return false;
-        }
-
-        // Open file for reading and rewriting
-        if (!$handle = $this->openAndLock($file, 'r+b', \LOCK_EX)) {
-            return false;
-        }
-
-        if (!$this->readAndVerify($handle, $file)) {
-            fclose($handle);
-            return false;
-        }
-
-        $content = $this->prepareContent($value, $expire);
-        return $this->writeAndRelease($handle, $content, true);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function incr($key, $offset = 1)
-    {
-        $file = $this->getFile($key);
-
-        if (!is_file($file)) {
-            return $this->set($key, $offset) ? $offset : false;
-        }
-
-        // Open file for reading and rewriting
-        if (!$handle = $this->openAndLock($file, 'r+b', \LOCK_EX)) {
-            return false;
-        }
-
-        // Prepare file content
-        if (!$content = $this->readAndVerify($handle, $file)) {
-            $content = $this->prepareContent($offset, 0);
-            $result = $offset;
-        } else {
-            $result = $content[1] = (int) $content[1] + $offset;
-            $content = $this->prepareContent($content[1], $content[0]);
-        }
-
-        // Rewrite content
-        return $this->writeAndRelease($handle, $content, true) ? $result : false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function clear()
-    {
-        $result = true;
-        foreach (glob($this->dir . '/*.' . $this->ext) as $file) {
-            $result = $result && @unlink($file);
-        }
-        return $result;
-    }
-
-    /**
      * Get cache file by key
      *
      * @param string $key
@@ -256,6 +99,171 @@ class FileCache extends BaseCache
     public function getDir()
     {
         return $this->dir;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function get($key, $default = null)
+    {
+        if (!is_file($file = $this->getFile($key))) {
+            return $this->getDefault($default);
+        }
+
+        $content = $this->getContent($file);
+        if ($content && is_array($content) && time() < $content[0]) {
+            $result = $content[1];
+        } else {
+            $this->delete($key);
+            $result = $this->getDefault($default);
+        }
+        return $result;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function set($key, $value, $expire = 0)
+    {
+        $file = $this->getFile($key);
+        $content = $this->prepareContent($value, $expire);
+        return (bool) file_put_contents($file, $content, \LOCK_EX);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function delete(string $key): bool
+    {
+        if (file_exists($file = $this->getFile($key))) {
+            // Ignore errors caused by slow io(docker) and request concurrency
+            return @unlink($file);
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function has(string $key): bool
+    {
+        if (!is_file($file = $this->getFile($key))) {
+            return false;
+        }
+
+        $content = $this->getContent($file);
+        if ($content && is_array($content) && time() < $content[0]) {
+            return true;
+        } else {
+            $this->delete($key);
+            return false;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function add($key, $value, $expire = 0)
+    {
+        $file = $this->getFile($key);
+
+        if (!is_file($file)) {
+            // Open and try to lock file immediately
+            if (!$handle = $this->openAndLock($file, 'wb', \LOCK_EX | \LOCK_NB)) {
+                return false;
+            }
+
+            $rewrite = false;
+        } else {
+            // Open file for reading and rewriting
+            if (!$handle = $this->openAndLock($file, 'r+b', \LOCK_EX)) {
+                return false;
+            }
+
+            // The cache is not expired
+            if ($this->readAndVerify($handle, $file)) {
+                fclose($handle);
+                return false;
+            }
+
+            $rewrite = true;
+        }
+
+        $content = $this->prepareContent($value, $expire);
+        return $this->writeAndRelease($handle, $content, $rewrite);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function replace($key, $value, $expire = 0)
+    {
+        if (!is_file($file = $this->getFile($key))) {
+            return false;
+        }
+
+        // Open file for reading and rewriting
+        if (!$handle = $this->openAndLock($file, 'r+b', \LOCK_EX)) {
+            return false;
+        }
+
+        if (!$this->readAndVerify($handle, $file)) {
+            fclose($handle);
+            return false;
+        }
+
+        $content = $this->prepareContent($value, $expire);
+        return $this->writeAndRelease($handle, $content, true);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function incr($key, $offset = 1)
+    {
+        $file = $this->getFile($key);
+
+        if (!is_file($file)) {
+            return $this->set($key, $offset) ? $offset : false;
+        }
+
+        // Open file for reading and rewriting
+        if (!$handle = $this->openAndLock($file, 'r+b', \LOCK_EX)) {
+            return false;
+        }
+
+        // Prepare file content
+        if (!$content = $this->readAndVerify($handle, $file)) {
+            $content = $this->prepareContent($offset, 0);
+            $result = $offset;
+        } else {
+            $result = $content[1] = (int) $content[1] + $offset;
+            $content = $this->prepareContent($content[1], $content[0]);
+        }
+
+        // Rewrite content
+        return $this->writeAndRelease($handle, $content, true) ? $result : false;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function clear()
+    {
+        $result = true;
+        foreach (glob($this->dir . '/*.' . $this->ext) as $file) {
+            $result = $result && @unlink($file);
+        }
+        return $result;
     }
 
     /**

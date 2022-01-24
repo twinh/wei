@@ -49,7 +49,11 @@ abstract class BaseCache extends Base
      */
     public function getMulti(array $keys)
     {
-        return (array) $this->getMultiple($keys);
+        $results = [];
+        foreach ($keys as $key) {
+            $results[$key] = $this->get($key);
+        }
+        return $results;
     }
 
     /**
@@ -145,27 +149,37 @@ abstract class BaseCache extends Base
      * @param string $key The name of item
      * @param mixed $default The default value to return when cache not exists
      * @return mixed
+     * @svc
      */
-    abstract public function get($key, $default = null);
+    abstract protected function get($key, $default = null);
 
     /**
      * Store an item
      *
-     * @param  string $key    The name of item
-     * @param  mixed  $value  The value of item
-     * @param  int    $expire The expire seconds, defaults to 0, means never expired
+     * @param string $key The name of item
+     * @param mixed $value The value of item
+     * @param int $expire The expire seconds, defaults to 0, means never expired
      * @return bool
+     * @svc
      */
-    abstract public function set($key, $value, $expire = 0);
+    abstract protected function set($key, $value, $expire = 0);
 
     /**
      * Remove an item
      *
-     * @param  string $key The name of item
+     * @param string $key The name of item
      * @return bool
      * @svc
      */
     abstract protected function delete(string $key): bool;
+
+    /**
+     * Clear all items
+     *
+     * @return bool
+     * @svc
+     */
+    abstract protected function clear();
 
     /**
      * Check if an item is exists
@@ -179,143 +193,46 @@ abstract class BaseCache extends Base
     /**
      * Add an item
      *
-     * @param  string $key    The name of item
-     * @param  mixed  $value  The value of item
-     * @param  int    $expire The expire seconds, defaults to 0, means never expired
+     * @param string $key The name of item
+     * @param mixed $value The value of item
+     * @param int $expire The expire seconds, defaults to 0, means never expired
      * @return bool
+     * @svc
      */
-    abstract public function add($key, $value, $expire = 0);
+    abstract protected function add($key, $value, $expire = 0);
 
     /**
      * Replace an existing item
      *
-     * @param  string $key    The name of item
-     * @param  mixed  $value  The value of item
-     * @param  int    $expire The expire seconds, defaults to 0, means never expired
+     * @param string $key The name of item
+     * @param mixed $value The value of item
+     * @param int $expire The expire seconds, defaults to 0, means never expired
      * @return bool
+     * @svc
      */
-    abstract public function replace($key, $value, $expire = 0);
+    abstract protected function replace($key, $value, $expire = 0);
 
     /**
      * Increment an item
      *
-     * @param  string    $key    The name of item
-     * @param  int       $offset The value to increased
+     * @param string $key The name of item
+     * @param int $offset The value to increased
      * @return int|false Returns the new value on success, or false on failure
+     * @svc
      */
-    abstract public function incr($key, $offset = 1);
+    abstract protected function incr($key, $offset = 1);
 
     /**
      * Decrement an item
      *
-     * @param  string    $key    The name of item
-     * @param  int       $offset The value to be decreased
+     * @param string $key The name of item
+     * @param int $offset The value to be decreased
      * @return int|false Returns the new value on success, or false on failure
+     * @svc
      */
-    public function decr($key, $offset = 1)
+    protected function decr($key, $offset = 1)
     {
         return $this->incr($key, -$offset);
-    }
-
-    /**
-     * Retrieve multiple items
-     *
-     * @param array $keys The name of items
-     * @return array
-     * @deprecated use getMultiple instead
-     */
-    public function getMulti(array $keys)
-    {
-        $results = [];
-        foreach ($keys as $key) {
-            $results[$key] = $this->get($key);
-        }
-        return $results;
-    }
-
-    /**
-     * Store multiple items
-     *
-     * @param array $keys The name of items
-     * @param int $expire
-     * @return array
-     * @deprecated use setMultiple instead
-     */
-    public function setMulti(array $keys, $expire = 0)
-    {
-        $results = [];
-        foreach ($keys as $key => $value) {
-            $results[$key] = $this->set($key, $value, $expire);
-        }
-        return $results;
-    }
-
-    /**
-     * Use the file modify time as cache key to store an item from a callback
-     *
-     * @param string $file The path of file
-     * @param callable $fn The callback to get and parse file content
-     * @return mixed
-     */
-    public function getFileContent($file, $fn)
-    {
-        $key = $file . filemtime($file);
-        return $this->get($key, function ($wei, $cache) use ($file, $fn) {
-            return $fn($file, $wei, $cache);
-        });
-    }
-
-    /**
-     * Returns the key prefix
-     *
-     * @return string
-     */
-    public function getNamespace()
-    {
-        return $this->namespace;
-    }
-
-    /**
-     * Set the cache key prefix
-     *
-     * @param string $namespace
-     * @return $this
-     */
-    public function setNamespace($namespace)
-    {
-        $this->namespace = $namespace;
-        return $this;
-    }
-
-    /**
-     * Clear all items
-     *
-     * @return bool
-     */
-    abstract public function clear();
-
-    /**
-     * Check if an item is exists
-     *
-     * @param string $key
-     * @return bool
-     * @deprecated use has instead
-     */
-    public function exists($key)
-    {
-        return $this->has($key);
-    }
-
-    /**
-     * Remove an item
-     *
-     * @param  string $key The name of item
-     * @return bool
-     * @deprecated use delete instead
-     */
-    public function remove($key)
-    {
-        return $this->delete($key);
     }
 
     /**

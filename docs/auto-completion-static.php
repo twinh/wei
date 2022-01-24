@@ -5,24 +5,78 @@ namespace Wei;
 class Apc
 {
     /**
-     * Check if an item is exists
-     *
-     * @param string $key
-     * @return bool
-     * @see BaseCache::has
+     * {@inheritdoc}
+     * @see Apc::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Apc::set
+     */
+    public static function set($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Apc::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Apc::has
      */
     public static function has(string $key): bool
     {
     }
 
     /**
-     * Remove an item
-     *
-     * @param  string $key The name of item
-     * @return bool
-     * @see BaseCache::delete
+     * {@inheritdoc}
+     * @see Apc::add
      */
-    public static function delete(string $key): bool
+    public static function add($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Apc::replace
+     */
+    public static function replace($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Apc::incr
+     */
+    public static function incr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Apc::clear
+     */
+    public static function clear()
+    {
+    }
+
+    /**
+     * Decrement an item
+     *
+     * @param string $key The name of item
+     * @param int $offset The value to be decreased
+     * @return int|false Returns the new value on success, or false on failure
+     * @see BaseCache::decr
+     */
+    public static function decr($key, $offset = 1)
     {
     }
 
@@ -71,24 +125,78 @@ class App
 class ArrayCache
 {
     /**
-     * Check if an item is exists
-     *
-     * @param string $key
-     * @return bool
-     * @see BaseCache::has
+     * {@inheritdoc}
+     * @see ArrayCache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see ArrayCache::set
+     */
+    public static function set($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see ArrayCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see ArrayCache::has
      */
     public static function has(string $key): bool
     {
     }
 
     /**
-     * Remove an item
-     *
-     * @param  string $key The name of item
-     * @return bool
-     * @see BaseCache::delete
+     * {@inheritdoc}
+     * @see ArrayCache::add
      */
-    public static function delete(string $key): bool
+    public static function add($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see ArrayCache::replace
+     */
+    public static function replace($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see ArrayCache::incr
+     */
+    public static function incr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see ArrayCache::clear
+     */
+    public static function clear()
+    {
+    }
+
+    /**
+     * Decrement an item
+     *
+     * @param string $key The name of item
+     * @param int $offset The value to be decreased
+     * @return int|false Returns the new value on success, or false on failure
+     * @see BaseCache::decr
+     */
+    public static function decr($key, $offset = 1)
     {
     }
 
@@ -137,24 +245,78 @@ class Asset
 class Bicache
 {
     /**
-     * Check if an item is exists
-     *
-     * @param string $key
-     * @return bool
-     * @see BaseCache::has
+     * {@inheritdoc}
+     * @see Bicache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Bicache::set
+     */
+    public static function set($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Bicache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Bicache::has
      */
     public static function has(string $key): bool
     {
     }
 
     /**
-     * Remove an item
-     *
-     * @param  string $key The name of item
-     * @return bool
-     * @see BaseCache::delete
+     * {@inheritdoc}
+     * @see Bicache::add
      */
-    public static function delete(string $key): bool
+    public static function add($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Bicache::replace
+     */
+    public static function replace($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Bicache::incr
+     */
+    public static function incr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Bicache::clear
+     */
+    public static function clear()
+    {
+    }
+
+    /**
+     * Decrement an item
+     *
+     * @param string $key The name of item
+     * @param int $offset The value to be decreased
+     * @return int|false Returns the new value on success, or false on failure
+     * @see BaseCache::decr
+     */
+    public static function decr($key, $offset = 1)
     {
     }
 
@@ -203,24 +365,78 @@ class Block
 class Cache
 {
     /**
-     * Check if an item is exists
-     *
-     * @param string $key
-     * @return bool
-     * @see BaseCache::has
+     * {@inheritdoc}
+     * @see Cache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Cache::set
+     */
+    public static function set($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Cache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Cache::has
      */
     public static function has(string $key): bool
     {
     }
 
     /**
-     * Remove an item
-     *
-     * @param  string $key The name of item
-     * @return bool
-     * @see BaseCache::delete
+     * {@inheritdoc}
+     * @see Cache::add
      */
-    public static function delete(string $key): bool
+    public static function add($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Cache::replace
+     */
+    public static function replace($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Cache::incr
+     */
+    public static function incr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Cache::clear
+     */
+    public static function clear()
+    {
+    }
+
+    /**
+     * Decrement an item
+     *
+     * @param string $key The name of item
+     * @param int $offset The value to be decreased
+     * @return int|false Returns the new value on success, or false on failure
+     * @see BaseCache::decr
+     */
+    public static function decr($key, $offset = 1)
     {
     }
 
@@ -306,24 +522,80 @@ class Db
 class DbCache
 {
     /**
-     * Check if an item is exists
-     *
-     * @param string $key
-     * @return bool
-     * @see BaseCache::has
+     * {@inheritdoc}
+     * @see DbCache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see DbCache::set
+     */
+    public static function set($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see DbCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see DbCache::has
      */
     public static function has(string $key): bool
     {
     }
 
     /**
-     * Remove an item
-     *
-     * @param  string $key The name of item
-     * @return bool
-     * @see BaseCache::delete
+     * {@inheritdoc}
+     * @see DbCache::add
      */
-    public static function delete(string $key): bool
+    public static function add($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see DbCache::replace
+     */
+    public static function replace($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * Note: This method is not an atomic operation
+     *
+     * {@inheritdoc}
+     * @see DbCache::incr
+     */
+    public static function incr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see DbCache::clear
+     */
+    public static function clear()
+    {
+    }
+
+    /**
+     * Decrement an item
+     *
+     * @param string $key The name of item
+     * @param int $offset The value to be decreased
+     * @return int|false Returns the new value on success, or false on failure
+     * @see BaseCache::decr
+     */
+    public static function decr($key, $offset = 1)
     {
     }
 
@@ -495,24 +767,78 @@ class Event
 class FileCache
 {
     /**
-     * Check if an item is exists
-     *
-     * @param string $key
-     * @return bool
-     * @see BaseCache::has
+     * {@inheritdoc}
+     * @see FileCache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see FileCache::set
+     */
+    public static function set($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see FileCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see FileCache::has
      */
     public static function has(string $key): bool
     {
     }
 
     /**
-     * Remove an item
-     *
-     * @param  string $key The name of item
-     * @return bool
-     * @see BaseCache::delete
+     * {@inheritdoc}
+     * @see FileCache::add
      */
-    public static function delete(string $key): bool
+    public static function add($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see FileCache::replace
+     */
+    public static function replace($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see FileCache::incr
+     */
+    public static function incr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see FileCache::clear
+     */
+    public static function clear()
+    {
+    }
+
+    /**
+     * Decrement an item
+     *
+     * @param string $key The name of item
+     * @param int $offset The value to be decreased
+     * @return int|false Returns the new value on success, or false on failure
+     * @see BaseCache::decr
+     */
+    public static function decr($key, $offset = 1)
     {
     }
 
@@ -2073,24 +2399,74 @@ class Logger
 class Memcache
 {
     /**
-     * Check if an item is exists
-     *
-     * @param string $key
-     * @return bool
-     * @see BaseCache::has
+     * {@inheritdoc}
+     * @see Memcache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Memcache::set
+     */
+    public static function set($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Memcache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Memcache::has
      */
     public static function has(string $key): bool
     {
     }
 
     /**
-     * Remove an item
-     *
-     * @param  string $key The name of item
-     * @return bool
-     * @see BaseCache::delete
+     * {@inheritdoc}
+     * @see Memcache::add
      */
-    public static function delete(string $key): bool
+    public static function add($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Memcache::replace
+     */
+    public static function replace($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Memcache::incr
+     */
+    public static function incr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Memcache::decr
+     */
+    public static function decr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Memcache::clear
+     */
+    public static function clear()
     {
     }
 
@@ -2135,24 +2511,74 @@ class Memcache
 class Memcached
 {
     /**
-     * Check if an item is exists
-     *
-     * @param string $key
-     * @return bool
-     * @see BaseCache::has
+     * {@inheritdoc}
+     * @see Memcached::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Memcached::set
+     */
+    public static function set($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Memcached::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Memcached::has
      */
     public static function has(string $key): bool
     {
     }
 
     /**
-     * Remove an item
-     *
-     * @param  string $key The name of item
-     * @return bool
-     * @see BaseCache::delete
+     * {@inheritdoc}
+     * @see Memcached::add
      */
-    public static function delete(string $key): bool
+    public static function add($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Memcached::replace
+     */
+    public static function replace($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Memcached::incr
+     */
+    public static function incr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Memcached::decr
+     */
+    public static function decr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Memcached::clear
+     */
+    public static function clear()
     {
     }
 
@@ -2245,24 +2671,56 @@ class Migration
 class MongoCache
 {
     /**
-     * Check if an item is exists
-     *
-     * @param string $key
-     * @return bool
-     * @see BaseCache::has
+     * {@inheritdoc}
+     * @see MongoCache::set
      */
-    public static function has(string $key): bool
+    public static function set($key, $value, $expire = 0)
     {
     }
 
     /**
-     * Remove an item
-     *
-     * @param  string $key The name of item
-     * @return bool
-     * @see BaseCache::delete
+     * {@inheritdoc}
+     * @see MongoCache::add
      */
-    public static function delete(string $key): bool
+    public static function add($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see MongoCache::replace
+     */
+    public static function replace($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * Note: This method is not an atomic operation
+     *
+     * {@inheritdoc}
+     * @see MongoCache::incr
+     */
+    public static function incr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see MongoCache::clear
+     */
+    public static function clear()
+    {
+    }
+
+    /**
+     * Decrement an item
+     *
+     * @param string $key The name of item
+     * @param int $offset The value to be decreased
+     * @return int|false Returns the new value on success, or false on failure
+     * @see BaseCache::decr
+     */
+    public static function decr($key, $offset = 1)
     {
     }
 
@@ -2307,24 +2765,80 @@ class MongoCache
 class NearCache
 {
     /**
-     * Check if an item is exists
+     * {@inheritdoc}
+     * @see NearCache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
+     * First write data to front cache (eg local cache), then write to back cache (eg memcache)
      *
-     * @param string $key
-     * @return bool
-     * @see BaseCache::has
+     * {@inheritdoc}
+     * @see NearCache::set
+     */
+    public static function set($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see NearCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see NearCache::has
      */
     public static function has(string $key): bool
     {
     }
 
     /**
-     * Remove an item
-     *
-     * @param  string $key The name of item
-     * @return bool
-     * @see BaseCache::delete
+     * {@inheritdoc}
+     * @see NearCache::add
      */
-    public static function delete(string $key): bool
+    public static function add($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see NearCache::replace
+     */
+    public static function replace($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see NearCache::incr
+     */
+    public static function incr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see NearCache::clear
+     */
+    public static function clear()
+    {
+    }
+
+    /**
+     * Decrement an item
+     *
+     * @param string $key The name of item
+     * @param int $offset The value to be decreased
+     * @return int|false Returns the new value on success, or false on failure
+     * @see BaseCache::decr
+     */
+    public static function decr($key, $offset = 1)
     {
     }
 
@@ -2433,24 +2947,78 @@ class PhpError
 class PhpFileCache
 {
     /**
-     * Check if an item is exists
-     *
-     * @param string $key
-     * @return bool
-     * @see BaseCache::has
+     * {@inheritdoc}
+     * @see FileCache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see FileCache::set
+     */
+    public static function set($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see FileCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see FileCache::has
      */
     public static function has(string $key): bool
     {
     }
 
     /**
-     * Remove an item
-     *
-     * @param  string $key The name of item
-     * @return bool
-     * @see BaseCache::delete
+     * {@inheritdoc}
+     * @see FileCache::add
      */
-    public static function delete(string $key): bool
+    public static function add($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see FileCache::replace
+     */
+    public static function replace($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see FileCache::incr
+     */
+    public static function incr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see FileCache::clear
+     */
+    public static function clear()
+    {
+    }
+
+    /**
+     * Decrement an item
+     *
+     * @param string $key The name of item
+     * @param int $offset The value to be decreased
+     * @return int|false Returns the new value on success, or false on failure
+     * @see BaseCache::decr
+     */
+    public static function decr($key, $offset = 1)
     {
     }
 
@@ -2503,24 +3071,80 @@ class Record
 class Redis
 {
     /**
-     * Check if an item is exists
-     *
-     * @param string $key
-     * @return bool
-     * @see BaseCache::has
+     * {@inheritdoc}
+     * @see Redis::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Redis::set
+     */
+    public static function set($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Redis::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Redis::has
      */
     public static function has(string $key): bool
     {
     }
 
     /**
-     * Remove an item
-     *
-     * @param  string $key The name of item
-     * @return bool
-     * @see BaseCache::delete
+     * {@inheritdoc}
+     * @see Redis::add
      */
-    public static function delete(string $key): bool
+    public static function add($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * Note: This method is not an atomic operation
+     *
+     * {@inheritdoc}
+     * @see Redis::replace
+     */
+    public static function replace($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Redis::incr
+     */
+    public static function incr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Redis::clear
+     */
+    public static function clear()
+    {
+    }
+
+    /**
+     * Decrement an item
+     *
+     * @param string $key The name of item
+     * @param int $offset The value to be decreased
+     * @return int|false Returns the new value on success, or false on failure
+     * @see BaseCache::decr
+     */
+    public static function decr($key, $offset = 1)
     {
     }
 
@@ -2879,24 +3503,78 @@ class T
 class TagCache
 {
     /**
-     * Check if an item is exists
-     *
-     * @param string $key
-     * @return bool
-     * @see BaseCache::has
+     * {@inheritdoc}
+     * @see TagCache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see TagCache::set
+     */
+    public static function set($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see TagCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see TagCache::has
      */
     public static function has(string $key): bool
     {
     }
 
     /**
-     * Remove an item
-     *
-     * @param  string $key The name of item
-     * @return bool
-     * @see BaseCache::delete
+     * {@inheritdoc}
+     * @see TagCache::add
      */
-    public static function delete(string $key): bool
+    public static function add($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see TagCache::replace
+     */
+    public static function replace($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see TagCache::incr
+     */
+    public static function incr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see TagCache::clear
+     */
+    public static function clear()
+    {
+    }
+
+    /**
+     * Decrement an item
+     *
+     * @param string $key The name of item
+     * @param int $offset The value to be decreased
+     * @return int|false Returns the new value on success, or false on failure
+     * @see BaseCache::decr
+     */
+    public static function decr($key, $offset = 1)
     {
     }
 
@@ -4709,24 +5387,78 @@ if (0) {
     class Apc
     {
         /**
-         * Check if an item is exists
-         *
-         * @param string $key
-         * @return bool
-         * @see BaseCache::has
+         * {@inheritdoc}
+         * @see Apc::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Apc::set
+         */
+        public function set($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Apc::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Apc::has
          */
         public function has(string $key): bool
         {
         }
 
         /**
-         * Remove an item
-         *
-         * @param  string $key The name of item
-         * @return bool
-         * @see BaseCache::delete
+         * {@inheritdoc}
+         * @see Apc::add
          */
-        public function delete(string $key): bool
+        public function add($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Apc::replace
+         */
+        public function replace($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Apc::incr
+         */
+        public function incr($key, $offset = 1)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Apc::clear
+         */
+        public function clear()
+        {
+        }
+
+        /**
+         * Decrement an item
+         *
+         * @param string $key The name of item
+         * @param int $offset The value to be decreased
+         * @return int|false Returns the new value on success, or false on failure
+         * @see BaseCache::decr
+         */
+        public function decr($key, $offset = 1)
         {
         }
 
@@ -4775,24 +5507,78 @@ if (0) {
     class ArrayCache
     {
         /**
-         * Check if an item is exists
-         *
-         * @param string $key
-         * @return bool
-         * @see BaseCache::has
+         * {@inheritdoc}
+         * @see ArrayCache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see ArrayCache::set
+         */
+        public function set($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see ArrayCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see ArrayCache::has
          */
         public function has(string $key): bool
         {
         }
 
         /**
-         * Remove an item
-         *
-         * @param  string $key The name of item
-         * @return bool
-         * @see BaseCache::delete
+         * {@inheritdoc}
+         * @see ArrayCache::add
          */
-        public function delete(string $key): bool
+        public function add($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see ArrayCache::replace
+         */
+        public function replace($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see ArrayCache::incr
+         */
+        public function incr($key, $offset = 1)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see ArrayCache::clear
+         */
+        public function clear()
+        {
+        }
+
+        /**
+         * Decrement an item
+         *
+         * @param string $key The name of item
+         * @param int $offset The value to be decreased
+         * @return int|false Returns the new value on success, or false on failure
+         * @see BaseCache::decr
+         */
+        public function decr($key, $offset = 1)
         {
         }
 
@@ -4841,24 +5627,78 @@ if (0) {
     class Bicache
     {
         /**
-         * Check if an item is exists
-         *
-         * @param string $key
-         * @return bool
-         * @see BaseCache::has
+         * {@inheritdoc}
+         * @see Bicache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Bicache::set
+         */
+        public function set($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Bicache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Bicache::has
          */
         public function has(string $key): bool
         {
         }
 
         /**
-         * Remove an item
-         *
-         * @param  string $key The name of item
-         * @return bool
-         * @see BaseCache::delete
+         * {@inheritdoc}
+         * @see Bicache::add
          */
-        public function delete(string $key): bool
+        public function add($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Bicache::replace
+         */
+        public function replace($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Bicache::incr
+         */
+        public function incr($key, $offset = 1)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Bicache::clear
+         */
+        public function clear()
+        {
+        }
+
+        /**
+         * Decrement an item
+         *
+         * @param string $key The name of item
+         * @param int $offset The value to be decreased
+         * @return int|false Returns the new value on success, or false on failure
+         * @see BaseCache::decr
+         */
+        public function decr($key, $offset = 1)
         {
         }
 
@@ -4907,24 +5747,78 @@ if (0) {
     class Cache
     {
         /**
-         * Check if an item is exists
-         *
-         * @param string $key
-         * @return bool
-         * @see BaseCache::has
+         * {@inheritdoc}
+         * @see Cache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Cache::set
+         */
+        public function set($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Cache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Cache::has
          */
         public function has(string $key): bool
         {
         }
 
         /**
-         * Remove an item
-         *
-         * @param  string $key The name of item
-         * @return bool
-         * @see BaseCache::delete
+         * {@inheritdoc}
+         * @see Cache::add
          */
-        public function delete(string $key): bool
+        public function add($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Cache::replace
+         */
+        public function replace($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Cache::incr
+         */
+        public function incr($key, $offset = 1)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Cache::clear
+         */
+        public function clear()
+        {
+        }
+
+        /**
+         * Decrement an item
+         *
+         * @param string $key The name of item
+         * @param int $offset The value to be decreased
+         * @return int|false Returns the new value on success, or false on failure
+         * @see BaseCache::decr
+         */
+        public function decr($key, $offset = 1)
         {
         }
 
@@ -5010,24 +5904,80 @@ if (0) {
     class DbCache
     {
         /**
-         * Check if an item is exists
-         *
-         * @param string $key
-         * @return bool
-         * @see BaseCache::has
+         * {@inheritdoc}
+         * @see DbCache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see DbCache::set
+         */
+        public function set($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see DbCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see DbCache::has
          */
         public function has(string $key): bool
         {
         }
 
         /**
-         * Remove an item
-         *
-         * @param  string $key The name of item
-         * @return bool
-         * @see BaseCache::delete
+         * {@inheritdoc}
+         * @see DbCache::add
          */
-        public function delete(string $key): bool
+        public function add($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see DbCache::replace
+         */
+        public function replace($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * Note: This method is not an atomic operation
+         *
+         * {@inheritdoc}
+         * @see DbCache::incr
+         */
+        public function incr($key, $offset = 1)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see DbCache::clear
+         */
+        public function clear()
+        {
+        }
+
+        /**
+         * Decrement an item
+         *
+         * @param string $key The name of item
+         * @param int $offset The value to be decreased
+         * @return int|false Returns the new value on success, or false on failure
+         * @see BaseCache::decr
+         */
+        public function decr($key, $offset = 1)
         {
         }
 
@@ -5199,24 +6149,78 @@ if (0) {
     class FileCache
     {
         /**
-         * Check if an item is exists
-         *
-         * @param string $key
-         * @return bool
-         * @see BaseCache::has
+         * {@inheritdoc}
+         * @see FileCache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see FileCache::set
+         */
+        public function set($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see FileCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see FileCache::has
          */
         public function has(string $key): bool
         {
         }
 
         /**
-         * Remove an item
-         *
-         * @param  string $key The name of item
-         * @return bool
-         * @see BaseCache::delete
+         * {@inheritdoc}
+         * @see FileCache::add
          */
-        public function delete(string $key): bool
+        public function add($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see FileCache::replace
+         */
+        public function replace($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see FileCache::incr
+         */
+        public function incr($key, $offset = 1)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see FileCache::clear
+         */
+        public function clear()
+        {
+        }
+
+        /**
+         * Decrement an item
+         *
+         * @param string $key The name of item
+         * @param int $offset The value to be decreased
+         * @return int|false Returns the new value on success, or false on failure
+         * @see BaseCache::decr
+         */
+        public function decr($key, $offset = 1)
         {
         }
 
@@ -6777,24 +7781,74 @@ if (0) {
     class Memcache
     {
         /**
-         * Check if an item is exists
-         *
-         * @param string $key
-         * @return bool
-         * @see BaseCache::has
+         * {@inheritdoc}
+         * @see Memcache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Memcache::set
+         */
+        public function set($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Memcache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Memcache::has
          */
         public function has(string $key): bool
         {
         }
 
         /**
-         * Remove an item
-         *
-         * @param  string $key The name of item
-         * @return bool
-         * @see BaseCache::delete
+         * {@inheritdoc}
+         * @see Memcache::add
          */
-        public function delete(string $key): bool
+        public function add($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Memcache::replace
+         */
+        public function replace($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Memcache::incr
+         */
+        public function incr($key, $offset = 1)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Memcache::decr
+         */
+        public function decr($key, $offset = 1)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Memcache::clear
+         */
+        public function clear()
         {
         }
 
@@ -6839,24 +7893,74 @@ if (0) {
     class Memcached
     {
         /**
-         * Check if an item is exists
-         *
-         * @param string $key
-         * @return bool
-         * @see BaseCache::has
+         * {@inheritdoc}
+         * @see Memcached::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Memcached::set
+         */
+        public function set($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Memcached::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Memcached::has
          */
         public function has(string $key): bool
         {
         }
 
         /**
-         * Remove an item
-         *
-         * @param  string $key The name of item
-         * @return bool
-         * @see BaseCache::delete
+         * {@inheritdoc}
+         * @see Memcached::add
          */
-        public function delete(string $key): bool
+        public function add($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Memcached::replace
+         */
+        public function replace($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Memcached::incr
+         */
+        public function incr($key, $offset = 1)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Memcached::decr
+         */
+        public function decr($key, $offset = 1)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Memcached::clear
+         */
+        public function clear()
         {
         }
 
@@ -6949,24 +8053,56 @@ if (0) {
     class MongoCache
     {
         /**
-         * Check if an item is exists
-         *
-         * @param string $key
-         * @return bool
-         * @see BaseCache::has
+         * {@inheritdoc}
+         * @see MongoCache::set
          */
-        public function has(string $key): bool
+        public function set($key, $value, $expire = 0)
         {
         }
 
         /**
-         * Remove an item
-         *
-         * @param  string $key The name of item
-         * @return bool
-         * @see BaseCache::delete
+         * {@inheritdoc}
+         * @see MongoCache::add
          */
-        public function delete(string $key): bool
+        public function add($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see MongoCache::replace
+         */
+        public function replace($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * Note: This method is not an atomic operation
+         *
+         * {@inheritdoc}
+         * @see MongoCache::incr
+         */
+        public function incr($key, $offset = 1)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see MongoCache::clear
+         */
+        public function clear()
+        {
+        }
+
+        /**
+         * Decrement an item
+         *
+         * @param string $key The name of item
+         * @param int $offset The value to be decreased
+         * @return int|false Returns the new value on success, or false on failure
+         * @see BaseCache::decr
+         */
+        public function decr($key, $offset = 1)
         {
         }
 
@@ -7011,24 +8147,80 @@ if (0) {
     class NearCache
     {
         /**
-         * Check if an item is exists
+         * {@inheritdoc}
+         * @see NearCache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
+         * First write data to front cache (eg local cache), then write to back cache (eg memcache)
          *
-         * @param string $key
-         * @return bool
-         * @see BaseCache::has
+         * {@inheritdoc}
+         * @see NearCache::set
+         */
+        public function set($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see NearCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see NearCache::has
          */
         public function has(string $key): bool
         {
         }
 
         /**
-         * Remove an item
-         *
-         * @param  string $key The name of item
-         * @return bool
-         * @see BaseCache::delete
+         * {@inheritdoc}
+         * @see NearCache::add
          */
-        public function delete(string $key): bool
+        public function add($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see NearCache::replace
+         */
+        public function replace($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see NearCache::incr
+         */
+        public function incr($key, $offset = 1)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see NearCache::clear
+         */
+        public function clear()
+        {
+        }
+
+        /**
+         * Decrement an item
+         *
+         * @param string $key The name of item
+         * @param int $offset The value to be decreased
+         * @return int|false Returns the new value on success, or false on failure
+         * @see BaseCache::decr
+         */
+        public function decr($key, $offset = 1)
         {
         }
 
@@ -7137,24 +8329,78 @@ if (0) {
     class PhpFileCache
     {
         /**
-         * Check if an item is exists
-         *
-         * @param string $key
-         * @return bool
-         * @see BaseCache::has
+         * {@inheritdoc}
+         * @see FileCache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see FileCache::set
+         */
+        public function set($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see FileCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see FileCache::has
          */
         public function has(string $key): bool
         {
         }
 
         /**
-         * Remove an item
-         *
-         * @param  string $key The name of item
-         * @return bool
-         * @see BaseCache::delete
+         * {@inheritdoc}
+         * @see FileCache::add
          */
-        public function delete(string $key): bool
+        public function add($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see FileCache::replace
+         */
+        public function replace($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see FileCache::incr
+         */
+        public function incr($key, $offset = 1)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see FileCache::clear
+         */
+        public function clear()
+        {
+        }
+
+        /**
+         * Decrement an item
+         *
+         * @param string $key The name of item
+         * @param int $offset The value to be decreased
+         * @return int|false Returns the new value on success, or false on failure
+         * @see BaseCache::decr
+         */
+        public function decr($key, $offset = 1)
         {
         }
 
@@ -7207,24 +8453,80 @@ if (0) {
     class Redis
     {
         /**
-         * Check if an item is exists
-         *
-         * @param string $key
-         * @return bool
-         * @see BaseCache::has
+         * {@inheritdoc}
+         * @see Redis::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Redis::set
+         */
+        public function set($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Redis::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Redis::has
          */
         public function has(string $key): bool
         {
         }
 
         /**
-         * Remove an item
-         *
-         * @param  string $key The name of item
-         * @return bool
-         * @see BaseCache::delete
+         * {@inheritdoc}
+         * @see Redis::add
          */
-        public function delete(string $key): bool
+        public function add($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * Note: This method is not an atomic operation
+         *
+         * {@inheritdoc}
+         * @see Redis::replace
+         */
+        public function replace($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Redis::incr
+         */
+        public function incr($key, $offset = 1)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Redis::clear
+         */
+        public function clear()
+        {
+        }
+
+        /**
+         * Decrement an item
+         *
+         * @param string $key The name of item
+         * @param int $offset The value to be decreased
+         * @return int|false Returns the new value on success, or false on failure
+         * @see BaseCache::decr
+         */
+        public function decr($key, $offset = 1)
         {
         }
 
@@ -7583,24 +8885,78 @@ if (0) {
     class TagCache
     {
         /**
-         * Check if an item is exists
-         *
-         * @param string $key
-         * @return bool
-         * @see BaseCache::has
+         * {@inheritdoc}
+         * @see TagCache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see TagCache::set
+         */
+        public function set($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see TagCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see TagCache::has
          */
         public function has(string $key): bool
         {
         }
 
         /**
-         * Remove an item
-         *
-         * @param  string $key The name of item
-         * @return bool
-         * @see BaseCache::delete
+         * {@inheritdoc}
+         * @see TagCache::add
          */
-        public function delete(string $key): bool
+        public function add($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see TagCache::replace
+         */
+        public function replace($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see TagCache::incr
+         */
+        public function incr($key, $offset = 1)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see TagCache::clear
+         */
+        public function clear()
+        {
+        }
+
+        /**
+         * Decrement an item
+         *
+         * @param string $key The name of item
+         * @param int $offset The value to be decreased
+         * @return int|false Returns the new value on success, or false on failure
+         * @see BaseCache::decr
+         */
+        public function decr($key, $offset = 1)
         {
         }
 

@@ -22,8 +22,9 @@ class NearCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function get($key, $default = null)
+    protected function get($key, $default = null)
     {
         $result = $this->front->get($key);
         if (null !== $result) {
@@ -43,8 +44,9 @@ class NearCache extends BaseCache
      * First write data to front cache (eg local cache), then write to back cache (eg memcache)
      *
      * {@inheritdoc}
+     * @svc
      */
-    public function set($key, $value, $expire = 0)
+    protected function set($key, $value, $expire = 0)
     {
         $this->front->set($key, $value, $expire);
         return $this->back->set($key, $value, $expire);
@@ -52,6 +54,7 @@ class NearCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
     protected function delete(string $key): bool
     {
@@ -63,6 +66,7 @@ class NearCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
     protected function has(string $key): bool
     {
@@ -71,8 +75,9 @@ class NearCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function add($key, $value, $expire = 0)
+    protected function add($key, $value, $expire = 0)
     {
         $result = $this->back->add($key, $value, $expire);
         if ($result) {
@@ -83,8 +88,9 @@ class NearCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function replace($key, $value, $expire = 0)
+    protected function replace($key, $value, $expire = 0)
     {
         $result = $this->back->replace($key, $value, $expire);
         if ($result) {
@@ -95,8 +101,9 @@ class NearCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function incr($key, $offset = 1)
+    protected function incr($key, $offset = 1)
     {
         $result = $this->back->incr($key, $offset);
         if ($result) {
@@ -107,8 +114,9 @@ class NearCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function clear()
+    protected function clear()
     {
         $result1 = $this->front->clear();
         $result2 = $this->back->clear();

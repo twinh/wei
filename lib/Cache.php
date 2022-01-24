@@ -80,22 +80,25 @@ class Cache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function get($key, $default = null)
+    protected function get($key, $default = null)
     {
         return $this->object->get($key, $default);
     }
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function set($key, $value, $expire = 0)
+    protected function set($key, $value, $expire = 0)
     {
         return $this->object->set($key, $value, $expire);
     }
 
     /**
      * {@inheritdoc}
+     * @svc
      */
     protected function delete(string $key): bool
     {
@@ -104,6 +107,7 @@ class Cache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
     protected function has(string $key): bool
     {
@@ -112,32 +116,36 @@ class Cache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function add($key, $value, $expire = 0)
+    protected function add($key, $value, $expire = 0)
     {
         return $this->object->add($key, $value, $expire);
     }
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function replace($key, $value, $expire = 0)
+    protected function replace($key, $value, $expire = 0)
     {
         return $this->object->replace($key, $value, $expire);
     }
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function incr($key, $offset = 1)
+    protected function incr($key, $offset = 1)
     {
         return $this->object->incr($key, $offset);
     }
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function clear()
+    protected function clear()
     {
         return $this->object->clear();
     }

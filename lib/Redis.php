@@ -134,27 +134,6 @@ class Redis extends BaseCache
     /**
      * {@inheritdoc}
      */
-    public function get($key, $default = null)
-    {
-        $result = $this->object->get($this->namespace . $key);
-        if (false === $result) {
-            return $this->getDefault($default);
-        }
-        return $this->unserialize($result);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function set($key, $value, $expire = 0)
-    {
-        // Use null instead of 0 for redis extension 2.2.8, otherwise the key will expire after set
-        return $this->object->set($this->namespace . $key, $this->serialize($value), 0 === $expire ? null : $expire);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getMulti(array $keys)
     {
         $keysWithPrefix = [];
@@ -192,65 +171,6 @@ class Redis extends BaseCache
     }
 
     /**
-     * {@inheritdoc}
-     */
-    protected function delete(string $key): bool
-    {
-        return (bool) $this->object->del($this->namespace . $key);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function has(string $key): bool
-    {
-        // Redis >= 4.0 returned int, if < 4.0 returned bool
-        return (bool) $this->object->exists($this->namespace . $key);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function add($key, $value, $expire = 0)
-    {
-        $key = $this->namespace . $key;
-        $result = $this->object->setnx($key, $this->serialize($value));
-        if (true === $result && $expire) {
-            $this->object->expire($key, $expire);
-        }
-        return $result;
-    }
-
-    /**
-     * Note: This method is not an atomic operation
-     *
-     * {@inheritdoc}
-     */
-    public function replace($key, $value, $expire = 0)
-    {
-        if (false === $this->object->get($this->namespace . $key)) {
-            return false;
-        }
-        return $this->set($key, $this->serialize($value), $expire);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function incr($key, $offset = 1)
-    {
-        return $this->object->incrBy($this->namespace . $key, $offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function clear()
-    {
-        return $this->object->flushAll();
-    }
-
-    /**
      * Get the redis object
      *
      * @return \Redis
@@ -270,6 +190,94 @@ class Redis extends BaseCache
     {
         $this->object = $object;
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function get($key, $default = null)
+    {
+        $result = $this->object->get($this->namespace . $key);
+        if (false === $result) {
+            return $this->getDefault($default);
+        }
+        return $this->unserialize($result);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function set($key, $value, $expire = 0)
+    {
+        // Use null instead of 0 for redis extension 2.2.8, otherwise the key will expire after set
+        return $this->object->set($this->namespace . $key, $this->serialize($value), 0 === $expire ? null : $expire);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function delete(string $key): bool
+    {
+        return (bool) $this->object->del($this->namespace . $key);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function has(string $key): bool
+    {
+        // Redis >= 4.0 returned int, if < 4.0 returned bool
+        return (bool) $this->object->exists($this->namespace . $key);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function add($key, $value, $expire = 0)
+    {
+        $key = $this->namespace . $key;
+        $result = $this->object->setnx($key, $this->serialize($value));
+        if (true === $result && $expire) {
+            $this->object->expire($key, $expire);
+        }
+        return $result;
+    }
+
+    /**
+     * Note: This method is not an atomic operation
+     *
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function replace($key, $value, $expire = 0)
+    {
+        if (false === $this->object->get($this->namespace . $key)) {
+            return false;
+        }
+        return $this->set($key, $this->serialize($value), $expire);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function incr($key, $offset = 1)
+    {
+        return $this->object->incrBy($this->namespace . $key, $offset);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function clear()
+    {
+        return $this->object->flushAll();
     }
 
     /**

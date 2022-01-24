@@ -25,16 +25,18 @@ class ArrayCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function get($key, $default = null)
+    protected function get($key, $default = null)
     {
         return $this->data[$this->namespace . $key] ?? $this->getDefault($default);
     }
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function set($key, $value, $expire = 0)
+    protected function set($key, $value, $expire = 0)
     {
         $this->data[$this->namespace . $key] = $value;
         return true;
@@ -42,6 +44,7 @@ class ArrayCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
     protected function delete(string $key): bool
     {
@@ -55,6 +58,7 @@ class ArrayCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
     protected function has(string $key): bool
     {
@@ -63,8 +67,9 @@ class ArrayCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function add($key, $value, $expire = 0)
+    protected function add($key, $value, $expire = 0)
     {
         if ($this->has($key)) {
             return false;
@@ -75,8 +80,9 @@ class ArrayCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function replace($key, $value, $expire = 0)
+    protected function replace($key, $value, $expire = 0)
     {
         if (!$this->has($key)) {
             return false;
@@ -88,8 +94,9 @@ class ArrayCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function incr($key, $offset = 1)
+    protected function incr($key, $offset = 1)
     {
         if ($this->has($key)) {
             return $this->data[$this->namespace . $key] += $offset;
@@ -100,8 +107,9 @@ class ArrayCache extends BaseCache
 
     /**
      * {@inheritdoc}
+     * @svc
      */
-    public function clear()
+    protected function clear()
     {
         $this->data = [];
         return true;

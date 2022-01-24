@@ -61,76 +61,6 @@ class TagCache extends BaseCache
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function get($key, $default = null)
-    {
-        return $this->cache->get($this->getKey($key), $default);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function set($key, $value, $expire = 0)
-    {
-        return $this->cache->set($this->getKey($key), $value, $expire);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function delete(string $key): bool
-    {
-        return $this->cache->delete($this->getKey($key));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function has(string $key): bool
-    {
-        return $this->cache->has($this->getKey($key));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function add($key, $value, $expire = 0)
-    {
-        return $this->cache->add($this->getKey($key), $value, $expire);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function replace($key, $value, $expire = 0)
-    {
-        return $this->cache->replace($this->getKey($key), $value, $expire);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function incr($key, $offset = 1)
-    {
-        return $this->cache->incr($this->getKey($key), $offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function clear()
-    {
-        $data = [];
-        foreach ($this->tags as $tag) {
-            $data[$this->getTagKey($tag)] = $this->generateTagValue();
-        }
-        $this->cache->setMultiple($data);
-        $this->reload();
-        return $this;
-    }
-
-    /**
      * Set tag names and reload tags namespace
      *
      * @param array $tags
@@ -151,6 +81,84 @@ class TagCache extends BaseCache
     public function reload()
     {
         $this->tagsNamespace = $this->getTagsNamespace();
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function get($key, $default = null)
+    {
+        return $this->cache->get($this->getKey($key), $default);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function set($key, $value, $expire = 0)
+    {
+        return $this->cache->set($this->getKey($key), $value, $expire);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function delete(string $key): bool
+    {
+        return $this->cache->delete($this->getKey($key));
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function has(string $key): bool
+    {
+        return $this->cache->has($this->getKey($key));
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function add($key, $value, $expire = 0)
+    {
+        return $this->cache->add($this->getKey($key), $value, $expire);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function replace($key, $value, $expire = 0)
+    {
+        return $this->cache->replace($this->getKey($key), $value, $expire);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function incr($key, $offset = 1)
+    {
+        return $this->cache->incr($this->getKey($key), $offset);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function clear()
+    {
+        $data = [];
+        foreach ($this->tags as $tag) {
+            $data[$this->getTagKey($tag)] = $this->generateTagValue();
+        }
+        $this->cache->setMultiple($data);
+        $this->reload();
         return $this;
     }
 

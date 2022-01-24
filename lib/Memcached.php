@@ -88,26 +88,6 @@ class Memcached extends BaseCache
 
     /**
      * {@inheritdoc}
-     */
-    public function get($key, $default = null)
-    {
-        $result = $this->object->get($this->namespace . $key);
-        if ($this->object->getResultCode() === \Memcached::RES_SUCCESS) {
-            return $result;
-        }
-        return $this->getDefault($default);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function set($key, $value, $expire = 0)
-    {
-        return $this->object->set($this->namespace . $key, $value, $expire);
-    }
-
-    /**
-     * {@inheritdoc}
      *
      * Note: setMulti method is not reimplemented for it returning only one
      * "true" or "false" for all items
@@ -130,67 +110,6 @@ class Memcached extends BaseCache
         }
         $values = (array) call_user_func_array([$this->object, 'getMulti'], $params);
         return array_combine($keys, $values);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function delete(string $key): bool
-    {
-        return $this->object->delete($this->namespace . $key);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function has(string $key): bool
-    {
-        $key = $this->namespace . $key;
-        if ($this->object->add($key, true)) {
-            $this->object->delete($key);
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function add($key, $value, $expire = 0)
-    {
-        return $this->object->add($this->namespace . $key, $value, $expire);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function replace($key, $value, $expire = 0)
-    {
-        return $this->object->replace($this->namespace . $key, $value, $expire);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function incr($key, $offset = 1)
-    {
-        return $this->incDec($key, $offset, $offset > 0);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function decr($key, $offset = 1)
-    {
-        return $this->incDec($key, $offset, $offset < 0);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function clear()
-    {
-        return $this->object->flush();
     }
 
     /**
@@ -221,6 +140,96 @@ class Memcached extends BaseCache
     public function getResultCode()
     {
         return $this->object->getResultCode();
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function get($key, $default = null)
+    {
+        $result = $this->object->get($this->namespace . $key);
+        if ($this->object->getResultCode() === \Memcached::RES_SUCCESS) {
+            return $result;
+        }
+        return $this->getDefault($default);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function set($key, $value, $expire = 0)
+    {
+        return $this->object->set($this->namespace . $key, $value, $expire);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function delete(string $key): bool
+    {
+        return $this->object->delete($this->namespace . $key);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function has(string $key): bool
+    {
+        $key = $this->namespace . $key;
+        if ($this->object->add($key, true)) {
+            $this->object->delete($key);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function add($key, $value, $expire = 0)
+    {
+        return $this->object->add($this->namespace . $key, $value, $expire);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function replace($key, $value, $expire = 0)
+    {
+        return $this->object->replace($this->namespace . $key, $value, $expire);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function incr($key, $offset = 1)
+    {
+        return $this->incDec($key, $offset, $offset > 0);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function decr($key, $offset = 1)
+    {
+        return $this->incDec($key, $offset, $offset < 0);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function clear()
+    {
+        return $this->object->flush();
     }
 
     /**
