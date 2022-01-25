@@ -35,15 +35,18 @@ class Bicache extends BaseCache
 
     /**
      * {@inheritdoc}
-     * @svc
      */
-    protected function get($key, $default = null)
+    protected function doGet(string $key): array
     {
         $result = $this->master->get($key);
-        if (null === $result) {
-            $result = $this->slave->get($key, $default);
+        $isHit = $this->master->isHit();
+
+        if (!$isHit) {
+            $result = $this->slave->get($key);
+            $isHit = $this->slave->isHit();
         }
-        return $result;
+
+        return [$result, $isHit];
     }
 
     /**

@@ -18,12 +18,11 @@ class Apc extends BaseCache
 {
     /**
      * {@inheritdoc}
-     * @svc
      */
-    protected function get($key, $default = null)
+    protected function doGet(string $key): array
     {
-        $result = apc_fetch($this->namespace . $key, $success);
-        return $success ? $result : $this->getDefault($default);
+        $value = apc_fetch($this->namespace . $key, $isHit);
+        return [$value, $isHit];
     }
 
     /**

@@ -103,22 +103,20 @@ class FileCache extends BaseCache
 
     /**
      * {@inheritdoc}
-     * @svc
      */
-    protected function get($key, $default = null)
+    protected function doGet(string $key): array
     {
         if (!is_file($file = $this->getFile($key))) {
-            return $this->getDefault($default);
+            return [null, false];
         }
 
         $content = $this->getContent($file);
         if ($content && is_array($content) && time() < $content[0]) {
-            $result = $content[1];
-        } else {
-            $this->delete($key);
-            $result = $this->getDefault($default);
+            return [$content[1], true];
         }
-        return $result;
+
+        $this->delete($key);
+        return [null, false];
     }
 
     /**

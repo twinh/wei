@@ -22,22 +22,21 @@ class NearCache extends BaseCache
 
     /**
      * {@inheritdoc}
-     * @svc
      */
-    protected function get($key, $default = null)
+    protected function doGet(string $key): array
     {
         $result = $this->front->get($key);
-        if (null !== $result) {
-            return $result;
+        if ($this->front->isHit()) {
+            return [$result, true];
         }
 
         $result = $this->back->get($key);
-        if (null !== $result) {
+        if ($this->back->isHit()) {
             $this->front->set($key, $result);
-            return $result;
+            return [$result, true];
         }
 
-        return $this->getDefault($default);
+        return [null, false];
     }
 
     /**

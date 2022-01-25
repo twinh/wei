@@ -99,13 +99,12 @@ class Memcache extends BaseCache
 
     /**
      * {@inheritdoc}
-     * @svc
      */
-    protected function get($key, $default = null)
+    protected function doGet(string $key): array
     {
         $flags = false;
         $result = $this->object->get($this->namespace . $key, $flags);
-        return $flags ? $result : $this->getDefault($default);
+        return [$flags ? $result : null, (bool) $flags];
     }
 
     /**

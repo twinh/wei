@@ -167,4 +167,13 @@ class Cache extends BaseCache
     {
         return $this->object->setMultiple($keys, $ttl);
     }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function isHit(string $key = null): bool
+    {
+        return $this->object->isHit($key);
+    }
 }

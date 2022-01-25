@@ -292,4 +292,47 @@ abstract class CacheTestCase extends TestCase
         $this->object->remember('key', null, function () {
         });
     }
+
+    public function testIsHit()
+    {
+        $this->object->set('test', 'value');
+
+        $this->object->get('test');
+        $this->assertTrue($this->object->isHit());
+
+        $this->object->delete('test');
+        $this->object->get('test');
+        $this->assertFalse($this->object->isHit());
+    }
+
+    public function testIsHitWithNull()
+    {
+        $this->object->set('test', null);
+
+        $this->object->get('test');
+        $this->assertTrue($this->object->isHit());
+    }
+
+    public function testIsHitMultiple()
+    {
+        $this->object->delete('test');
+        $this->object->delete('test2');
+        $this->object->delete('test3');
+
+        $this->object->getMultiple(['test', 'test2', 'test3']);
+
+        $this->assertFalse($this->object->isHit('test'));
+        $this->assertFalse($this->object->isHit('test2'));
+        $this->assertFalse($this->object->isHit('test3'));
+
+        $this->object->setMultiple([
+            'test' => 'value',
+            'test2' => null,
+        ]);
+
+        $this->object->getMultiple(['test', 'test2', 'test3']);
+        $this->assertTrue($this->object->isHit('test'));
+        $this->assertTrue($this->object->isHit('test2'));
+        $this->assertFalse($this->object->isHit('test3'));
+    }
 }

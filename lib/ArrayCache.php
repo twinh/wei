@@ -25,11 +25,10 @@ class ArrayCache extends BaseCache
 
     /**
      * {@inheritdoc}
-     * @svc
      */
-    protected function get($key, $default = null)
+    protected function doGet(string $key): array
     {
-        return $this->data[$this->namespace . $key] ?? $this->getDefault($default);
+        return [$this->data[$this->namespace . $key] ?? null, $this->has($key)];
     }
 
     /**

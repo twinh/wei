@@ -144,15 +144,12 @@ class Memcached extends BaseCache
 
     /**
      * {@inheritdoc}
-     * @svc
      */
-    protected function get($key, $default = null)
+    protected function doGet(string $key): array
     {
         $result = $this->object->get($this->namespace . $key);
-        if ($this->object->getResultCode() === \Memcached::RES_SUCCESS) {
-            return $result;
-        }
-        return $this->getDefault($default);
+        $isHit = \Memcached::RES_SUCCESS === $this->object->getResultCode();
+        return [$isHit ? $result : null, $isHit];
     }
 
     /**

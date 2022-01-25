@@ -196,13 +196,10 @@ class Redis extends BaseCache
      * {@inheritdoc}
      * @svc
      */
-    protected function get($key, $default = null)
+    protected function doGet(string $key): array
     {
-        $result = $this->object->get($this->namespace . $key);
-        if (false === $result) {
-            return $this->getDefault($default);
-        }
-        return $this->unserialize($result);
+        $value = $this->object->get($this->namespace . $key);
+        return [false === $value ? null : $this->unserialize($value), false !== $value];
     }
 
     /**
@@ -278,6 +275,26 @@ class Redis extends BaseCache
     protected function clear()
     {
         return $this->object->flushAll();
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function getMultiple(iterable $keys, $default = null): iterable
+    {
+        $keysWithPrefix = [];
+        foreach ($keys as $key) {
+            $keysWithPrefix[] = $this->namespace . $key;
+        }
+        $values = $this->object->mGet($keysWithPrefix);
+
+        $results = [];
+        foreach ($values as $index => $value) {
+            $results[$keys[$index]] = $this->unserialize($value);
+        }
+
+        return $results;
     }
 
     /**
