@@ -230,6 +230,32 @@ class Memcached extends BaseCache
     }
 
     /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function getMultiple(iterable $keys, $default = null): iterable
+    {
+        $keys = $this->iterableToArray($keys);
+
+        $keysWithPrefix = [];
+        foreach ($keys as $key) {
+            $keysWithPrefix[] = $this->namespace . $key;
+        }
+
+        $caches = $this->object->getMulti($keys);
+
+        $this->hits = [];
+        $values = [];
+        foreach ($keysWithPrefix as $i => $key) {
+            $isHit = array_key_exists($key, $caches);
+            $this->hits[$keys[$i]] = $isHit;
+            $values[$keys[$i]] = $isHit ? $caches[$key] : $default;
+        }
+
+        return $values;
+    }
+
+    /**
      * Increment/Decrement an item
      *
      * Memcached do not allow negative number as $offset parameter
@@ -249,5 +275,22 @@ class Memcached extends BaseCache
             return $this->object->set($key, $offset) ? $offset : false;
         }
         return $this->object->get($key);
+    }
+
+    /**
+     * Convert iterable type to array
+     *
+     * @param iterable $iterable
+     * @return array
+     * @internal
+     */
+    protected function iterableToArray(iterable $iterable): array
+    {
+        if (is_array($iterable)) {
+            return $iterable;
+        }
+        return iterator_to_array((function () use ($iterable) {
+            yield from $iterable;
+        })());
     }
 }
