@@ -287,14 +287,17 @@ class Redis extends BaseCache
         foreach ($keys as $key) {
             $keysWithPrefix[] = $this->namespace . $key;
         }
-        $values = $this->object->mGet($keysWithPrefix);
+        $results = $this->object->mGet($keysWithPrefix);
 
-        $results = [];
-        foreach ($values as $index => $value) {
-            $results[$keys[$index]] = $this->unserialize($value);
+        $this->hits = [];
+        $values = [];
+        foreach ($results as $index => $value) {
+            $isHit = false !== $value;
+            $this->hits[$keys[$index]] = $isHit;
+            $values[$keys[$index]] = $isHit ? $this->unserialize($value) : $default;
         }
 
-        return $results;
+        return $values;
     }
 
     /**
