@@ -24,6 +24,11 @@ abstract class BaseCache extends Base
     protected $namespace = '';
 
     /**
+     * @var array<string, bool>
+     */
+    protected $hits = [];
+
+    /**
      * Retrieve or store an item
      *
      * @param string $key The name of item
@@ -151,7 +156,12 @@ abstract class BaseCache extends Base
      * @return mixed
      * @svc
      */
-    abstract protected function get($key, $default = null);
+    protected function get($key, $default = null)
+    {
+        [$value, $isHit] = $this->doGet($key);
+        $this->hits = [$key => $isHit];
+        return $isHit ? $value : $this->getDefault($default);
+    }
 
     /**
      * Store an item
@@ -245,10 +255,14 @@ abstract class BaseCache extends Base
      */
     protected function getMultiple(iterable $keys, $default = null): iterable
     {
+        $hits = [];
         $results = [];
         foreach ($keys as $key) {
             $results[$key] = $this->get($key, $default);
+            // $this->hits will be reset after get
+            $hits[$key] = $this->hits[$key];
         }
+        $this->hits = $hits;
         return $results;
     }
 
@@ -281,7 +295,7 @@ abstract class BaseCache extends Base
     protected function remember(string $key, $expireOrFn, callable $fn = null)
     {
         $value = $this->get($key);
-        if (null !== $value) {
+        if ($this->isHit()) {
             return $value;
         }
 
@@ -307,6 +321,30 @@ abstract class BaseCache extends Base
         $this->set($key, $result, $expire);
 
         return $result;
+    }
+
+    /**
+     * Check if the cache is exists
+     *
+     * @param string|null $key
+     * @return bool
+     * @svc
+     */
+    protected function isHit(string $key = null): bool
+    {
+        if (null !== $key) {
+            return $this->hits[$key] ?? false;
+        }
+        return end($this->hits);
+    }
+
+    /**
+     * @param string $key
+     * @return array
+     */
+    protected function doGet(string $key): array
+    {
+        return [false, null];
     }
 
     /**
