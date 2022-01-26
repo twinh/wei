@@ -301,6 +301,23 @@ class Redis extends BaseCache
     }
 
     /**
+     * {@inheritdoc}
+     *
+     * Note: The "$ttl" parameter is not support by redis MSET command
+     *
+     * @link https://stackoverflow.com/questions/16423342/redis-multi-set-with-a-ttl
+     * @svc
+     */
+    protected function setMultiple(iterable $keys, $ttl = null): bool
+    {
+        $values = [];
+        foreach ($keys as $key => $value) {
+            $values[$this->namespace . $key] = $this->serialize($value);
+        }
+        return $this->object->mset($values);
+    }
+
+    /**
      * Serialize the value.
      *
      * @param mixed $value
