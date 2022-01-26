@@ -9,8 +9,6 @@
 
 namespace Wei;
 
-use ReflectionMethod;
-
 /**
  * A cache service that stored data in Memcached
  *
@@ -39,15 +37,6 @@ class Memcached extends BaseCache
     ];
 
     /**
-     * Whether memcached version is >= 3.0.0
-     *
-     * @var bool
-     * @link https://github.com/php-memcached-dev/php-memcached/issues/229
-     * @link https://github.com/laravel/framework/pull/15739
-     */
-    protected $isMemcached3;
-
-    /**
      * Constructor
      *
      * @param array $options
@@ -61,9 +50,6 @@ class Memcached extends BaseCache
             $this->object = new \Memcached();
         }
         $this->object->addServers($this->servers);
-
-        $method = new ReflectionMethod('Memcached', 'getMulti');
-        $this->isMemcached3 = 2 === $method->getNumberOfParameters();
     }
 
     /**
@@ -84,32 +70,6 @@ class Memcached extends BaseCache
             default:
                 return $this->set($key, $value, $expire);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * Note: setMulti method is not reimplemented for it returning only one
-     * "true" or "false" for all items
-     *
-     * @link http://www.php.net/manual/en/memcached.setmulti.php
-     * @link https://github.com/php-memcached-dev/php-memcached/blob/master/php_memcached.c#L1219
-     */
-    public function getMulti(array $keys)
-    {
-        $cas = null;
-        $keysWithPrefix = [];
-        foreach ($keys as $key) {
-            $keysWithPrefix[] = $this->namespace . $key;
-        }
-
-        if ($this->isMemcached3) {
-            $params = [$keysWithPrefix, \Memcached::GET_PRESERVE_ORDER];
-        } else {
-            $params = [$keysWithPrefix, $cas, \Memcached::GET_PRESERVE_ORDER];
-        }
-        $values = (array) call_user_func_array([$this->object, 'getMulti'], $params);
-        return array_combine($keys, $values);
     }
 
     /**

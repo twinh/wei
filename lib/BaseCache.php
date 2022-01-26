@@ -54,11 +54,7 @@ abstract class BaseCache extends Base
      */
     public function getMulti(array $keys)
     {
-        $results = [];
-        foreach ($keys as $key) {
-            $results[$key] = $this->get($key);
-        }
-        return $results;
+        return (array) $this->getMultiple($keys);
     }
 
     /**
