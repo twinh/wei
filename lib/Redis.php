@@ -132,45 +132,6 @@ class Redis extends BaseCache
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getMulti(array $keys)
-    {
-        $keysWithPrefix = [];
-        foreach ($keys as $key) {
-            $keysWithPrefix[] = $this->namespace . $key;
-        }
-        $values = $this->object->mGet($keysWithPrefix);
-
-        $results = [];
-        foreach ($values as $index => $value) {
-            $results[$keys[$index]] = $this->unserialize($value);
-        }
-
-        return $results;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * Note:
-     * 1. The "$expire" parameter is not support by redis MSET command
-     * 2. The elements in returning values are all true or false, see links for more detail
-     *
-     * @link http://redis.io/commands/mset
-     * @link https://github.com/nicolasff/phpredis/blob/master/redis_array.c#L844
-     */
-    public function setMulti(array $keys, $expire = 0)
-    {
-        $values = [];
-        foreach ($keys as $key => $value) {
-            $values[$this->namespace . $key] = $this->serialize($value);
-        }
-        $result = $this->object->mset($values);
-        return array_combine(array_keys($keys), array_pad([], count($keys), $result));
-    }
-
-    /**
      * Get the redis object
      *
      * @return \Redis
