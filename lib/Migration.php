@@ -130,7 +130,7 @@ class Migration extends Base
         }
 
         foreach ($classes as $id => $class) {
-            $migration = $this->instance($classes[$id]);
+            $migration = $this->newInstance($classes[$id]);
             $migration->up();
 
             $this->db->insert($this->table, [
@@ -180,7 +180,7 @@ class Migration extends Base
 
         foreach ($migrationIds as $id) {
             if (isset($classes[$id])) {
-                $migration = $this->instance($classes[$id]);
+                $migration = $this->newInstance($classes[$id]);
                 $migration->down();
             } else {
                 $this->writeln(sprintf('<error>Missing migration "%s"</error>', $id));
@@ -252,7 +252,7 @@ class Migration extends Base
      * @param string $class
      * @return BaseMigration
      */
-    protected function instance($class)
+    protected function newInstance($class)
     {
         $object = new $class([
             'wei' => $this->wei,

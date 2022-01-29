@@ -144,4 +144,16 @@ abstract class Base
     {
         return static::$createNewInstance;
     }
+
+    /**
+     * Return the current service object
+     *
+     * @return $this
+     * @experimental
+     * @svc
+     */
+    protected function instance(): self
+    {
+        return $this;
+    }
 }
