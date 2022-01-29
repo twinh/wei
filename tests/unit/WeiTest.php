@@ -732,4 +732,10 @@ final class WeiTest extends TestCase
 
         StaticService::disableCreateNewInstance();
     }
+
+    public function testGetBy()
+    {
+        $req = Wei::getBy(Req::class);
+        $this->assertInstanceOf(Req::class, $req);
+    }
 }

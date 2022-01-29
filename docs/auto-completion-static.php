@@ -6,14 +6,6 @@ class Apc
 {
     /**
      * {@inheritdoc}
-     * @see Apc::get
-     */
-    public static function get($key, $default = null)
-    {
-    }
-
-    /**
-     * {@inheritdoc}
      * @see Apc::set
      */
     public static function set($key, $value, $expire = 0)
@@ -69,6 +61,27 @@ class Apc
     }
 
     /**
+     * Retrieve an item
+     *
+     * ```php
+     * $cache = wei()->cache;
+     *
+     * // Retrieve cache by key
+     * $cache->get('key');
+     *
+     * // Custom default value
+     * $cache->get('key', 'default value');
+     *
+     * @param string $key The name of item
+     * @param mixed $default The default value to return when cache not exists
+     * @return mixed
+     * @see BaseCache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
      * Decrement an item
      *
      * @param string $key The name of item
@@ -116,6 +129,17 @@ class Apc
     public static function remember(string $key, $expireOrFn, callable $fn = null)
     {
     }
+
+    /**
+     * Check if the cache is exists
+     *
+     * @param string|null $key
+     * @return bool
+     * @see BaseCache::isHit
+     */
+    public static function isHit(string $key = null): bool
+    {
+    }
 }
 
 class App
@@ -124,14 +148,6 @@ class App
 
 class ArrayCache
 {
-    /**
-     * {@inheritdoc}
-     * @see ArrayCache::get
-     */
-    public static function get($key, $default = null)
-    {
-    }
-
     /**
      * {@inheritdoc}
      * @see ArrayCache::set
@@ -189,6 +205,27 @@ class ArrayCache
     }
 
     /**
+     * Retrieve an item
+     *
+     * ```php
+     * $cache = wei()->cache;
+     *
+     * // Retrieve cache by key
+     * $cache->get('key');
+     *
+     * // Custom default value
+     * $cache->get('key', 'default value');
+     *
+     * @param string $key The name of item
+     * @param mixed $default The default value to return when cache not exists
+     * @return mixed
+     * @see BaseCache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
      * Decrement an item
      *
      * @param string $key The name of item
@@ -236,6 +273,17 @@ class ArrayCache
     public static function remember(string $key, $expireOrFn, callable $fn = null)
     {
     }
+
+    /**
+     * Check if the cache is exists
+     *
+     * @param string|null $key
+     * @return bool
+     * @see BaseCache::isHit
+     */
+    public static function isHit(string $key = null): bool
+    {
+    }
 }
 
 class Asset
@@ -244,14 +292,6 @@ class Asset
 
 class Bicache
 {
-    /**
-     * {@inheritdoc}
-     * @see Bicache::get
-     */
-    public static function get($key, $default = null)
-    {
-    }
-
     /**
      * {@inheritdoc}
      * @see Bicache::set
@@ -309,6 +349,27 @@ class Bicache
     }
 
     /**
+     * Retrieve an item
+     *
+     * ```php
+     * $cache = wei()->cache;
+     *
+     * // Retrieve cache by key
+     * $cache->get('key');
+     *
+     * // Custom default value
+     * $cache->get('key', 'default value');
+     *
+     * @param string $key The name of item
+     * @param mixed $default The default value to return when cache not exists
+     * @return mixed
+     * @see BaseCache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
      * Decrement an item
      *
      * @param string $key The name of item
@@ -354,6 +415,17 @@ class Bicache
      * @see BaseCache::remember
      */
     public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
+
+    /**
+     * Check if the cache is exists
+     *
+     * @param string|null $key
+     * @return bool
+     * @see BaseCache::isHit
+     */
+    public static function isHit(string $key = null): bool
     {
     }
 }
@@ -425,6 +497,14 @@ class Cache
      * @see Cache::clear
      */
     public static function clear()
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Cache::isHit
+     */
+    public static function isHit(string $key = null): bool
     {
     }
 
@@ -523,14 +603,6 @@ class DbCache
 {
     /**
      * {@inheritdoc}
-     * @see DbCache::get
-     */
-    public static function get($key, $default = null)
-    {
-    }
-
-    /**
-     * {@inheritdoc}
      * @see DbCache::set
      */
     public static function set($key, $value, $expire = 0)
@@ -588,6 +660,27 @@ class DbCache
     }
 
     /**
+     * Retrieve an item
+     *
+     * ```php
+     * $cache = wei()->cache;
+     *
+     * // Retrieve cache by key
+     * $cache->get('key');
+     *
+     * // Custom default value
+     * $cache->get('key', 'default value');
+     *
+     * @param string $key The name of item
+     * @param mixed $default The default value to return when cache not exists
+     * @return mixed
+     * @see BaseCache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
      * Decrement an item
      *
      * @param string $key The name of item
@@ -633,6 +726,17 @@ class DbCache
      * @see BaseCache::remember
      */
     public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
+
+    /**
+     * Check if the cache is exists
+     *
+     * @param string|null $key
+     * @return bool
+     * @see BaseCache::isHit
+     */
+    public static function isHit(string $key = null): bool
     {
     }
 }
@@ -768,14 +872,6 @@ class FileCache
 {
     /**
      * {@inheritdoc}
-     * @see FileCache::get
-     */
-    public static function get($key, $default = null)
-    {
-    }
-
-    /**
-     * {@inheritdoc}
      * @see FileCache::set
      */
     public static function set($key, $value, $expire = 0)
@@ -831,6 +927,27 @@ class FileCache
     }
 
     /**
+     * Retrieve an item
+     *
+     * ```php
+     * $cache = wei()->cache;
+     *
+     * // Retrieve cache by key
+     * $cache->get('key');
+     *
+     * // Custom default value
+     * $cache->get('key', 'default value');
+     *
+     * @param string $key The name of item
+     * @param mixed $default The default value to return when cache not exists
+     * @return mixed
+     * @see BaseCache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
      * Decrement an item
      *
      * @param string $key The name of item
@@ -876,6 +993,17 @@ class FileCache
      * @see BaseCache::remember
      */
     public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
+
+    /**
+     * Check if the cache is exists
+     *
+     * @param string|null $key
+     * @return bool
+     * @see BaseCache::isHit
+     */
+    public static function isHit(string $key = null): bool
     {
     }
 }
@@ -2400,14 +2528,6 @@ class Memcache
 {
     /**
      * {@inheritdoc}
-     * @see Memcache::get
-     */
-    public static function get($key, $default = null)
-    {
-    }
-
-    /**
-     * {@inheritdoc}
      * @see Memcache::set
      */
     public static function set($key, $value, $expire = 0)
@@ -2471,6 +2591,27 @@ class Memcache
     }
 
     /**
+     * Retrieve an item
+     *
+     * ```php
+     * $cache = wei()->cache;
+     *
+     * // Retrieve cache by key
+     * $cache->get('key');
+     *
+     * // Custom default value
+     * $cache->get('key', 'default value');
+     *
+     * @param string $key The name of item
+     * @param mixed $default The default value to return when cache not exists
+     * @return mixed
+     * @see BaseCache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
      * Retrieve multiple items
      *
      * @param iterable $keys The name of items
@@ -2506,18 +2647,21 @@ class Memcache
     public static function remember(string $key, $expireOrFn, callable $fn = null)
     {
     }
+
+    /**
+     * Check if the cache is exists
+     *
+     * @param string|null $key
+     * @return bool
+     * @see BaseCache::isHit
+     */
+    public static function isHit(string $key = null): bool
+    {
+    }
 }
 
 class Memcached
 {
-    /**
-     * {@inheritdoc}
-     * @see Memcached::get
-     */
-    public static function get($key, $default = null)
-    {
-    }
-
     /**
      * {@inheritdoc}
      * @see Memcached::set
@@ -2583,14 +2727,31 @@ class Memcached
     }
 
     /**
-     * Retrieve multiple items
-     *
-     * @param iterable $keys The name of items
-     * @param mixed $default
-     * @return iterable<string, mixed>
-     * @see BaseCache::getMultiple
+     * {@inheritdoc}
+     * @see Memcached::getMultiple
      */
     public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * Retrieve an item
+     *
+     * ```php
+     * $cache = wei()->cache;
+     *
+     * // Retrieve cache by key
+     * $cache->get('key');
+     *
+     * // Custom default value
+     * $cache->get('key', 'default value');
+     *
+     * @param string $key The name of item
+     * @param mixed $default The default value to return when cache not exists
+     * @return mixed
+     * @see BaseCache::get
+     */
+    public static function get($key, $default = null)
     {
     }
 
@@ -2616,6 +2777,17 @@ class Memcached
      * @see BaseCache::remember
      */
     public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
+
+    /**
+     * Check if the cache is exists
+     *
+     * @param string|null $key
+     * @return bool
+     * @see BaseCache::isHit
+     */
+    public static function isHit(string $key = null): bool
     {
     }
 }
@@ -2760,18 +2932,21 @@ class MongoCache
     public static function remember(string $key, $expireOrFn, callable $fn = null)
     {
     }
+
+    /**
+     * Check if the cache is exists
+     *
+     * @param string|null $key
+     * @return bool
+     * @see BaseCache::isHit
+     */
+    public static function isHit(string $key = null): bool
+    {
+    }
 }
 
 class NearCache
 {
-    /**
-     * {@inheritdoc}
-     * @see NearCache::get
-     */
-    public static function get($key, $default = null)
-    {
-    }
-
     /**
      * First write data to front cache (eg local cache), then write to back cache (eg memcache)
      *
@@ -2831,6 +3006,27 @@ class NearCache
     }
 
     /**
+     * Retrieve an item
+     *
+     * ```php
+     * $cache = wei()->cache;
+     *
+     * // Retrieve cache by key
+     * $cache->get('key');
+     *
+     * // Custom default value
+     * $cache->get('key', 'default value');
+     *
+     * @param string $key The name of item
+     * @param mixed $default The default value to return when cache not exists
+     * @return mixed
+     * @see BaseCache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
      * Decrement an item
      *
      * @param string $key The name of item
@@ -2876,6 +3072,17 @@ class NearCache
      * @see BaseCache::remember
      */
     public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
+
+    /**
+     * Check if the cache is exists
+     *
+     * @param string|null $key
+     * @return bool
+     * @see BaseCache::isHit
+     */
+    public static function isHit(string $key = null): bool
     {
     }
 }
@@ -2948,14 +3155,6 @@ class PhpFileCache
 {
     /**
      * {@inheritdoc}
-     * @see FileCache::get
-     */
-    public static function get($key, $default = null)
-    {
-    }
-
-    /**
-     * {@inheritdoc}
      * @see FileCache::set
      */
     public static function set($key, $value, $expire = 0)
@@ -3011,6 +3210,27 @@ class PhpFileCache
     }
 
     /**
+     * Retrieve an item
+     *
+     * ```php
+     * $cache = wei()->cache;
+     *
+     * // Retrieve cache by key
+     * $cache->get('key');
+     *
+     * // Custom default value
+     * $cache->get('key', 'default value');
+     *
+     * @param string $key The name of item
+     * @param mixed $default The default value to return when cache not exists
+     * @return mixed
+     * @see BaseCache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
      * Decrement an item
      *
      * @param string $key The name of item
@@ -3058,6 +3278,17 @@ class PhpFileCache
     public static function remember(string $key, $expireOrFn, callable $fn = null)
     {
     }
+
+    /**
+     * Check if the cache is exists
+     *
+     * @param string|null $key
+     * @return bool
+     * @see BaseCache::isHit
+     */
+    public static function isHit(string $key = null): bool
+    {
+    }
 }
 
 class Pinyin
@@ -3072,9 +3303,9 @@ class Redis
 {
     /**
      * {@inheritdoc}
-     * @see Redis::get
+     * @see Redis::doGet
      */
-    public static function get($key, $default = null)
+    public static function doGet(string $key): array
     {
     }
 
@@ -3137,6 +3368,47 @@ class Redis
     }
 
     /**
+     * {@inheritdoc}
+     * @see Redis::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Note: The "$ttl" parameter is not support by redis MSET command
+     *
+     * @link https://stackoverflow.com/questions/16423342/redis-multi-set-with-a-ttl
+     * @see Redis::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
+    /**
+     * Retrieve an item
+     *
+     * ```php
+     * $cache = wei()->cache;
+     *
+     * // Retrieve cache by key
+     * $cache->get('key');
+     *
+     * // Custom default value
+     * $cache->get('key', 'default value');
+     *
+     * @param string $key The name of item
+     * @param mixed $default The default value to return when cache not exists
+     * @return mixed
+     * @see BaseCache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
      * Decrement an item
      *
      * @param string $key The name of item
@@ -3145,30 +3417,6 @@ class Redis
      * @see BaseCache::decr
      */
     public static function decr($key, $offset = 1)
-    {
-    }
-
-    /**
-     * Retrieve multiple items
-     *
-     * @param iterable $keys The name of items
-     * @param mixed $default
-     * @return iterable<string, mixed>
-     * @see BaseCache::getMultiple
-     */
-    public static function getMultiple(iterable $keys, $default = null): iterable
-    {
-    }
-
-    /**
-     * Store multiple items
-     *
-     * @param array $keys The name of items
-     * @param int|null $ttl
-     * @return bool
-     * @see BaseCache::setMultiple
-     */
-    public static function setMultiple(iterable $keys, $ttl = null): bool
     {
     }
 
@@ -3182,6 +3430,17 @@ class Redis
      * @see BaseCache::remember
      */
     public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
+
+    /**
+     * Check if the cache is exists
+     *
+     * @param string|null $key
+     * @return bool
+     * @see BaseCache::isHit
+     */
+    public static function isHit(string $key = null): bool
     {
     }
 }
@@ -3563,6 +3822,14 @@ class TagCache
      * @see TagCache::clear
      */
     public static function clear()
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see TagCache::isHit
+     */
+    public static function isHit(string $key = null): bool
     {
     }
 
@@ -5379,6 +5646,18 @@ class Wei
     public static function getConfig($name = null, $default = null)
     {
     }
+
+    /**
+     * Get service by class name
+     *
+     * @template T
+     * @param string|class-string<T> $class
+     * @return Base|T
+     * @see Wei::getBy
+     */
+    public static function getBy(string $class): Base
+    {
+    }
 }
 
 namespace Wei;
@@ -5386,14 +5665,6 @@ namespace Wei;
 if (0) {
     class Apc
     {
-        /**
-         * {@inheritdoc}
-         * @see Apc::get
-         */
-        public function get($key, $default = null)
-        {
-        }
-
         /**
          * {@inheritdoc}
          * @see Apc::set
@@ -5451,6 +5722,27 @@ if (0) {
         }
 
         /**
+         * Retrieve an item
+         *
+         * ```php
+         * $cache = wei()->cache;
+         *
+         * // Retrieve cache by key
+         * $cache->get('key');
+         *
+         * // Custom default value
+         * $cache->get('key', 'default value');
+         *
+         * @param string $key The name of item
+         * @param mixed $default The default value to return when cache not exists
+         * @return mixed
+         * @see BaseCache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
          * Decrement an item
          *
          * @param string $key The name of item
@@ -5498,6 +5790,17 @@ if (0) {
         public function remember(string $key, $expireOrFn, callable $fn = null)
         {
         }
+
+        /**
+         * Check if the cache is exists
+         *
+         * @param string|null $key
+         * @return bool
+         * @see BaseCache::isHit
+         */
+        public function isHit(string $key = null): bool
+        {
+        }
     }
 
     class App
@@ -5506,14 +5809,6 @@ if (0) {
 
     class ArrayCache
     {
-        /**
-         * {@inheritdoc}
-         * @see ArrayCache::get
-         */
-        public function get($key, $default = null)
-        {
-        }
-
         /**
          * {@inheritdoc}
          * @see ArrayCache::set
@@ -5571,6 +5866,27 @@ if (0) {
         }
 
         /**
+         * Retrieve an item
+         *
+         * ```php
+         * $cache = wei()->cache;
+         *
+         * // Retrieve cache by key
+         * $cache->get('key');
+         *
+         * // Custom default value
+         * $cache->get('key', 'default value');
+         *
+         * @param string $key The name of item
+         * @param mixed $default The default value to return when cache not exists
+         * @return mixed
+         * @see BaseCache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
          * Decrement an item
          *
          * @param string $key The name of item
@@ -5618,6 +5934,17 @@ if (0) {
         public function remember(string $key, $expireOrFn, callable $fn = null)
         {
         }
+
+        /**
+         * Check if the cache is exists
+         *
+         * @param string|null $key
+         * @return bool
+         * @see BaseCache::isHit
+         */
+        public function isHit(string $key = null): bool
+        {
+        }
     }
 
     class Asset
@@ -5626,14 +5953,6 @@ if (0) {
 
     class Bicache
     {
-        /**
-         * {@inheritdoc}
-         * @see Bicache::get
-         */
-        public function get($key, $default = null)
-        {
-        }
-
         /**
          * {@inheritdoc}
          * @see Bicache::set
@@ -5691,6 +6010,27 @@ if (0) {
         }
 
         /**
+         * Retrieve an item
+         *
+         * ```php
+         * $cache = wei()->cache;
+         *
+         * // Retrieve cache by key
+         * $cache->get('key');
+         *
+         * // Custom default value
+         * $cache->get('key', 'default value');
+         *
+         * @param string $key The name of item
+         * @param mixed $default The default value to return when cache not exists
+         * @return mixed
+         * @see BaseCache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
          * Decrement an item
          *
          * @param string $key The name of item
@@ -5736,6 +6076,17 @@ if (0) {
          * @see BaseCache::remember
          */
         public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
+
+        /**
+         * Check if the cache is exists
+         *
+         * @param string|null $key
+         * @return bool
+         * @see BaseCache::isHit
+         */
+        public function isHit(string $key = null): bool
         {
         }
     }
@@ -5807,6 +6158,14 @@ if (0) {
          * @see Cache::clear
          */
         public function clear()
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Cache::isHit
+         */
+        public function isHit(string $key = null): bool
         {
         }
 
@@ -5905,14 +6264,6 @@ if (0) {
     {
         /**
          * {@inheritdoc}
-         * @see DbCache::get
-         */
-        public function get($key, $default = null)
-        {
-        }
-
-        /**
-         * {@inheritdoc}
          * @see DbCache::set
          */
         public function set($key, $value, $expire = 0)
@@ -5970,6 +6321,27 @@ if (0) {
         }
 
         /**
+         * Retrieve an item
+         *
+         * ```php
+         * $cache = wei()->cache;
+         *
+         * // Retrieve cache by key
+         * $cache->get('key');
+         *
+         * // Custom default value
+         * $cache->get('key', 'default value');
+         *
+         * @param string $key The name of item
+         * @param mixed $default The default value to return when cache not exists
+         * @return mixed
+         * @see BaseCache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
          * Decrement an item
          *
          * @param string $key The name of item
@@ -6015,6 +6387,17 @@ if (0) {
          * @see BaseCache::remember
          */
         public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
+
+        /**
+         * Check if the cache is exists
+         *
+         * @param string|null $key
+         * @return bool
+         * @see BaseCache::isHit
+         */
+        public function isHit(string $key = null): bool
         {
         }
     }
@@ -6150,14 +6533,6 @@ if (0) {
     {
         /**
          * {@inheritdoc}
-         * @see FileCache::get
-         */
-        public function get($key, $default = null)
-        {
-        }
-
-        /**
-         * {@inheritdoc}
          * @see FileCache::set
          */
         public function set($key, $value, $expire = 0)
@@ -6213,6 +6588,27 @@ if (0) {
         }
 
         /**
+         * Retrieve an item
+         *
+         * ```php
+         * $cache = wei()->cache;
+         *
+         * // Retrieve cache by key
+         * $cache->get('key');
+         *
+         * // Custom default value
+         * $cache->get('key', 'default value');
+         *
+         * @param string $key The name of item
+         * @param mixed $default The default value to return when cache not exists
+         * @return mixed
+         * @see BaseCache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
          * Decrement an item
          *
          * @param string $key The name of item
@@ -6258,6 +6654,17 @@ if (0) {
          * @see BaseCache::remember
          */
         public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
+
+        /**
+         * Check if the cache is exists
+         *
+         * @param string|null $key
+         * @return bool
+         * @see BaseCache::isHit
+         */
+        public function isHit(string $key = null): bool
         {
         }
     }
@@ -7782,14 +8189,6 @@ if (0) {
     {
         /**
          * {@inheritdoc}
-         * @see Memcache::get
-         */
-        public function get($key, $default = null)
-        {
-        }
-
-        /**
-         * {@inheritdoc}
          * @see Memcache::set
          */
         public function set($key, $value, $expire = 0)
@@ -7853,6 +8252,27 @@ if (0) {
         }
 
         /**
+         * Retrieve an item
+         *
+         * ```php
+         * $cache = wei()->cache;
+         *
+         * // Retrieve cache by key
+         * $cache->get('key');
+         *
+         * // Custom default value
+         * $cache->get('key', 'default value');
+         *
+         * @param string $key The name of item
+         * @param mixed $default The default value to return when cache not exists
+         * @return mixed
+         * @see BaseCache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
          * Retrieve multiple items
          *
          * @param iterable $keys The name of items
@@ -7888,18 +8308,21 @@ if (0) {
         public function remember(string $key, $expireOrFn, callable $fn = null)
         {
         }
+
+        /**
+         * Check if the cache is exists
+         *
+         * @param string|null $key
+         * @return bool
+         * @see BaseCache::isHit
+         */
+        public function isHit(string $key = null): bool
+        {
+        }
     }
 
     class Memcached
     {
-        /**
-         * {@inheritdoc}
-         * @see Memcached::get
-         */
-        public function get($key, $default = null)
-        {
-        }
-
         /**
          * {@inheritdoc}
          * @see Memcached::set
@@ -7965,14 +8388,31 @@ if (0) {
         }
 
         /**
-         * Retrieve multiple items
-         *
-         * @param iterable $keys The name of items
-         * @param mixed $default
-         * @return iterable<string, mixed>
-         * @see BaseCache::getMultiple
+         * {@inheritdoc}
+         * @see Memcached::getMultiple
          */
         public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * Retrieve an item
+         *
+         * ```php
+         * $cache = wei()->cache;
+         *
+         * // Retrieve cache by key
+         * $cache->get('key');
+         *
+         * // Custom default value
+         * $cache->get('key', 'default value');
+         *
+         * @param string $key The name of item
+         * @param mixed $default The default value to return when cache not exists
+         * @return mixed
+         * @see BaseCache::get
+         */
+        public function get($key, $default = null)
         {
         }
 
@@ -7998,6 +8438,17 @@ if (0) {
          * @see BaseCache::remember
          */
         public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
+
+        /**
+         * Check if the cache is exists
+         *
+         * @param string|null $key
+         * @return bool
+         * @see BaseCache::isHit
+         */
+        public function isHit(string $key = null): bool
         {
         }
     }
@@ -8142,18 +8593,21 @@ if (0) {
         public function remember(string $key, $expireOrFn, callable $fn = null)
         {
         }
+
+        /**
+         * Check if the cache is exists
+         *
+         * @param string|null $key
+         * @return bool
+         * @see BaseCache::isHit
+         */
+        public function isHit(string $key = null): bool
+        {
+        }
     }
 
     class NearCache
     {
-        /**
-         * {@inheritdoc}
-         * @see NearCache::get
-         */
-        public function get($key, $default = null)
-        {
-        }
-
         /**
          * First write data to front cache (eg local cache), then write to back cache (eg memcache)
          *
@@ -8213,6 +8667,27 @@ if (0) {
         }
 
         /**
+         * Retrieve an item
+         *
+         * ```php
+         * $cache = wei()->cache;
+         *
+         * // Retrieve cache by key
+         * $cache->get('key');
+         *
+         * // Custom default value
+         * $cache->get('key', 'default value');
+         *
+         * @param string $key The name of item
+         * @param mixed $default The default value to return when cache not exists
+         * @return mixed
+         * @see BaseCache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
          * Decrement an item
          *
          * @param string $key The name of item
@@ -8258,6 +8733,17 @@ if (0) {
          * @see BaseCache::remember
          */
         public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
+
+        /**
+         * Check if the cache is exists
+         *
+         * @param string|null $key
+         * @return bool
+         * @see BaseCache::isHit
+         */
+        public function isHit(string $key = null): bool
         {
         }
     }
@@ -8330,14 +8816,6 @@ if (0) {
     {
         /**
          * {@inheritdoc}
-         * @see FileCache::get
-         */
-        public function get($key, $default = null)
-        {
-        }
-
-        /**
-         * {@inheritdoc}
          * @see FileCache::set
          */
         public function set($key, $value, $expire = 0)
@@ -8393,6 +8871,27 @@ if (0) {
         }
 
         /**
+         * Retrieve an item
+         *
+         * ```php
+         * $cache = wei()->cache;
+         *
+         * // Retrieve cache by key
+         * $cache->get('key');
+         *
+         * // Custom default value
+         * $cache->get('key', 'default value');
+         *
+         * @param string $key The name of item
+         * @param mixed $default The default value to return when cache not exists
+         * @return mixed
+         * @see BaseCache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
          * Decrement an item
          *
          * @param string $key The name of item
@@ -8440,6 +8939,17 @@ if (0) {
         public function remember(string $key, $expireOrFn, callable $fn = null)
         {
         }
+
+        /**
+         * Check if the cache is exists
+         *
+         * @param string|null $key
+         * @return bool
+         * @see BaseCache::isHit
+         */
+        public function isHit(string $key = null): bool
+        {
+        }
     }
 
     class Pinyin
@@ -8454,9 +8964,9 @@ if (0) {
     {
         /**
          * {@inheritdoc}
-         * @see Redis::get
+         * @see Redis::doGet
          */
-        public function get($key, $default = null)
+        public function doGet(string $key): array
         {
         }
 
@@ -8519,6 +9029,47 @@ if (0) {
         }
 
         /**
+         * {@inheritdoc}
+         * @see Redis::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         *
+         * Note: The "$ttl" parameter is not support by redis MSET command
+         *
+         * @link https://stackoverflow.com/questions/16423342/redis-multi-set-with-a-ttl
+         * @see Redis::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
+        /**
+         * Retrieve an item
+         *
+         * ```php
+         * $cache = wei()->cache;
+         *
+         * // Retrieve cache by key
+         * $cache->get('key');
+         *
+         * // Custom default value
+         * $cache->get('key', 'default value');
+         *
+         * @param string $key The name of item
+         * @param mixed $default The default value to return when cache not exists
+         * @return mixed
+         * @see BaseCache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
          * Decrement an item
          *
          * @param string $key The name of item
@@ -8527,30 +9078,6 @@ if (0) {
          * @see BaseCache::decr
          */
         public function decr($key, $offset = 1)
-        {
-        }
-
-        /**
-         * Retrieve multiple items
-         *
-         * @param iterable $keys The name of items
-         * @param mixed $default
-         * @return iterable<string, mixed>
-         * @see BaseCache::getMultiple
-         */
-        public function getMultiple(iterable $keys, $default = null): iterable
-        {
-        }
-
-        /**
-         * Store multiple items
-         *
-         * @param array $keys The name of items
-         * @param int|null $ttl
-         * @return bool
-         * @see BaseCache::setMultiple
-         */
-        public function setMultiple(iterable $keys, $ttl = null): bool
         {
         }
 
@@ -8564,6 +9091,17 @@ if (0) {
          * @see BaseCache::remember
          */
         public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
+
+        /**
+         * Check if the cache is exists
+         *
+         * @param string|null $key
+         * @return bool
+         * @see BaseCache::isHit
+         */
+        public function isHit(string $key = null): bool
         {
         }
     }
@@ -8945,6 +9483,14 @@ if (0) {
          * @see TagCache::clear
          */
         public function clear()
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see TagCache::isHit
+         */
+        public function isHit(string $key = null): bool
         {
         }
 
@@ -10755,6 +11301,18 @@ if (0) {
          * @see Wei::getConfig
          */
         public function getConfig($name = null, $default = null)
+        {
+        }
+
+        /**
+         * Get service by class name
+         *
+         * @template T
+         * @param string|class-string<T> $class
+         * @return Base|T
+         * @see Wei::getBy
+         */
+        public function getBy(string $class): Base
         {
         }
     }
