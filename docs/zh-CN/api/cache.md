@@ -178,6 +178,7 @@ driver    | string | apc       | 缓存的类型
 * [mongoCache](mongoCache.md) - MongoDB缓存
 * [redis](redis.md) - Redis缓存 *(推荐)*
 * [bicache](bicache.md) - 二级缓存
+* [nullCache](nullCache.md) - 空缓存
 
 #### 特性对比
 

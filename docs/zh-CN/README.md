@@ -37,6 +37,7 @@ API参考目录
 * [mongoCache](api/mongoCache.md) - MongoCache缓存
 * [redis](api/redis.md) - Redis缓存
 * [bicache](api/bicache.md) - 二级缓存
+* [nullCache](api/nullCache.md) - 空缓存
 
 #### 数据库
 

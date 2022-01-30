@@ -75,6 +75,7 @@ $wei->memcache;
 $wei->memcached;
 $wei->mongoCache;
 $wei->redis;
+$wei->nullCache;
 
 $cache = $wei->memcached;
 
