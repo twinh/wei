@@ -4471,6 +4471,157 @@ class NearCache
     }
 }
 
+class NullCache
+{
+    /**
+     * {@inheritdoc}
+     * @see NullCache::set
+     */
+    public static function set($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see NullCache::delete
+     */
+    public static function delete(string $key): bool
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see NullCache::clear
+     */
+    public static function clear()
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see NullCache::has
+     */
+    public static function has(string $key): bool
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see NullCache::add
+     */
+    public static function add($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see NullCache::replace
+     */
+    public static function replace($key, $value, $expire = 0)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see NullCache::incr
+     */
+    public static function incr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * Retrieve an item
+     *
+     * ```php
+     * $cache = wei()->cache;
+     *
+     * // Retrieve cache by key
+     * $cache->get('key');
+     *
+     * // Custom default value
+     * $cache->get('key', 'default value');
+     *
+     * @param string $key The name of item
+     * @param mixed $default The default value to return when cache not exists
+     * @return mixed
+     * @see BaseCache::get
+     */
+    public static function get($key, $default = null)
+    {
+    }
+
+    /**
+     * Decrement an item
+     *
+     * @param string $key The name of item
+     * @param int $offset The value to be decreased
+     * @return int|false Returns the new value on success, or false on failure
+     * @see BaseCache::decr
+     */
+    public static function decr($key, $offset = 1)
+    {
+    }
+
+    /**
+     * Retrieve multiple items
+     *
+     * @param iterable $keys The name of items
+     * @param mixed $default
+     * @return iterable<string, mixed>
+     * @see BaseCache::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * Store multiple items
+     *
+     * @param array $keys The name of items
+     * @param int|null $ttl
+     * @return bool
+     * @see BaseCache::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
+    /**
+     * Store data from callback to cache
+     *
+     * @param string $key
+     * @param int|callable $expireOrFn
+     * @param callable|null $fn
+     * @return false|mixed
+     * @see BaseCache::remember
+     */
+    public static function remember(string $key, $expireOrFn, callable $fn = null)
+    {
+    }
+
+    /**
+     * Check if the cache is exists
+     *
+     * @param string|null $key
+     * @return bool
+     * @see BaseCache::isHit
+     */
+    public static function isHit(string $key = null): bool
+    {
+    }
+
+    /**
+     * Return the current service object
+     *
+     * @return $this
+     * @experimental
+     * @see Base::instance
+     */
+    public static function instance(): self
+    {
+    }
+}
+
 class Password
 {
     /**
@@ -11734,6 +11885,157 @@ if (0) {
          * @see NearCache::clear
          */
         public function clear()
+        {
+        }
+
+        /**
+         * Retrieve an item
+         *
+         * ```php
+         * $cache = wei()->cache;
+         *
+         * // Retrieve cache by key
+         * $cache->get('key');
+         *
+         * // Custom default value
+         * $cache->get('key', 'default value');
+         *
+         * @param string $key The name of item
+         * @param mixed $default The default value to return when cache not exists
+         * @return mixed
+         * @see BaseCache::get
+         */
+        public function get($key, $default = null)
+        {
+        }
+
+        /**
+         * Decrement an item
+         *
+         * @param string $key The name of item
+         * @param int $offset The value to be decreased
+         * @return int|false Returns the new value on success, or false on failure
+         * @see BaseCache::decr
+         */
+        public function decr($key, $offset = 1)
+        {
+        }
+
+        /**
+         * Retrieve multiple items
+         *
+         * @param iterable $keys The name of items
+         * @param mixed $default
+         * @return iterable<string, mixed>
+         * @see BaseCache::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * Store multiple items
+         *
+         * @param array $keys The name of items
+         * @param int|null $ttl
+         * @return bool
+         * @see BaseCache::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
+        /**
+         * Store data from callback to cache
+         *
+         * @param string $key
+         * @param int|callable $expireOrFn
+         * @param callable|null $fn
+         * @return false|mixed
+         * @see BaseCache::remember
+         */
+        public function remember(string $key, $expireOrFn, callable $fn = null)
+        {
+        }
+
+        /**
+         * Check if the cache is exists
+         *
+         * @param string|null $key
+         * @return bool
+         * @see BaseCache::isHit
+         */
+        public function isHit(string $key = null): bool
+        {
+        }
+
+        /**
+         * Return the current service object
+         *
+         * @return $this
+         * @experimental
+         * @see Base::instance
+         */
+        public function instance(): self
+        {
+        }
+    }
+
+    class NullCache
+    {
+        /**
+         * {@inheritdoc}
+         * @see NullCache::set
+         */
+        public function set($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see NullCache::delete
+         */
+        public function delete(string $key): bool
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see NullCache::clear
+         */
+        public function clear()
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see NullCache::has
+         */
+        public function has(string $key): bool
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see NullCache::add
+         */
+        public function add($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see NullCache::replace
+         */
+        public function replace($key, $value, $expire = 0)
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see NullCache::incr
+         */
+        public function incr($key, $offset = 1)
         {
         }
 

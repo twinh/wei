@@ -1012,6 +1012,14 @@ class NearCacheMixin
 }
 
 /**
+ * @property    Wei\NullCache $nullCache NullCache always returns false when reading and true when writing, mainly for testing purposes
+ * @method      mixed nullCache($key, $value = null, $expire = 0) Retrieve or store an item
+ */
+class NullCacheMixin
+{
+}
+
+/**
  * @property    Wei\Password $password A wrapper class for password hashing functions
  */
 class PasswordMixin
@@ -1385,6 +1393,7 @@ class WeiMixin
  * @mixin MigrationMixin
  * @mixin MongoCacheMixin
  * @mixin NearCacheMixin
+ * @mixin NullCacheMixin
  * @mixin PasswordMixin
  * @mixin PhpErrorMixin
  * @mixin PhpFileCacheMixin
