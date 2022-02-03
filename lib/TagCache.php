@@ -151,6 +151,35 @@ class TagCache extends BaseCache
      * {@inheritdoc}
      * @svc
      */
+    protected function getMultiple(iterable $keys, $default = null): iterable
+    {
+        $keysWithPrefix = [];
+        foreach ($keys as $key) {
+            $keysWithPrefix[] = $this->getKey($key);
+        }
+
+        $caches = $this->cache->getMultiple($keysWithPrefix);
+
+        return array_combine($this->iterableToArray($keys), $this->iterableToArray($caches));
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
+    protected function setMultiple(iterable $keys, $ttl = null): bool
+    {
+        $values = [];
+        foreach ($keys as $key => $value) {
+            $values[$this->getKey($key)] = $value;
+        }
+        return $this->cache->setMultiple($values);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @svc
+     */
     protected function clear()
     {
         $data = [];
@@ -168,7 +197,7 @@ class TagCache extends BaseCache
      */
     protected function isHit(string $key = null): bool
     {
-        return $this->cache->isHit($this->getKey($key));
+        return $this->cache->isHit($key ? $this->getKey($key) : null);
     }
 
     /**
@@ -248,5 +277,22 @@ class TagCache extends BaseCache
     protected function generateTagValue()
     {
         return strtr(uniqid('', true), ['.' => '']);
+    }
+
+    /**
+     * Convert iterable type to array
+     *
+     * @param iterable $iterable
+     * @return array
+     * @internal
+     */
+    protected function iterableToArray(iterable $iterable): array
+    {
+        if (is_array($iterable)) {
+            return $iterable;
+        }
+        return iterator_to_array((function () use ($iterable) {
+            yield from $iterable;
+        })());
     }
 }
