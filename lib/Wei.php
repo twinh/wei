@@ -818,6 +818,30 @@ namespace Wei {
         }
 
         /**
+         * Remove services' configuration
+         *
+         * @param string $name
+         * @return $this
+         * @svc
+         */
+        protected function removeConfig(string $name): self
+        {
+            $names = explode('.', $name);
+            $last = array_pop($names);
+
+            $configs = &$this->configs;
+
+            foreach ($names as $name) {
+                if (!is_array($configs)) {
+                    $configs = [];
+                }
+                $configs = &$configs[$name];
+            }
+            unset($configs[$last]);
+            return $this;
+        }
+
+        /**
          * Get service by class name
          *
          * @template T

@@ -1012,7 +1012,7 @@ class NearCacheMixin
 }
 
 /**
- * @property    Wei\NullCache $nullCache NullCache always returns false when reading and true when writing, mainly for testing purposes
+ * @property    Wei\NullCache $nullCache NullCache always returns false when reading and true when writing,
  * @method      mixed nullCache($key, $value = null, $expire = 0) Retrieve or store an item
  */
 class NullCacheMixin

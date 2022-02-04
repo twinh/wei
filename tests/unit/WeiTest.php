@@ -121,6 +121,28 @@ final class WeiTest extends TestCase
         $this->assertIsArray($configs);
     }
 
+    public function testRemoveConfig()
+    {
+        $wei = $this->wei;
+
+        $wei->setConfig('testWei.config', true);
+        $wei->removeConfig('testWei.config');
+
+        $this->assertNull($wei->getConfig('testWei.config'));
+        $this->assertIsArray($wei->getConfig('testWei'));
+
+        $wei->setConfig('testWei.config.next', 'value');
+        $wei->removeConfig('testWei.config.next');
+        $this->assertIsArray($wei->getConfig('testWei.config'));
+
+        $wei->removeConfig('testWei.config');
+        $this->assertNull($wei->getConfig('testWei.config'));
+        $this->assertIsArray($wei->getConfig('testWei'));
+
+        $wei->removeConfig('testWei');
+        $this->assertNull($wei->getConfig('testWei'));
+    }
+
     public function testInvalidArgumentExceptionForWeiOption()
     {
         $this->setExpectedException(

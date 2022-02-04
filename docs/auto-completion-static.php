@@ -565,6 +565,22 @@ class Cache
 
     /**
      * {@inheritdoc}
+     * @see Cache::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Cache::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
+    /**
+     * {@inheritdoc}
      * @see Cache::isHit
      */
     public static function isHit(string $key = null): bool
@@ -580,30 +596,6 @@ class Cache
      * @see BaseCache::decr
      */
     public static function decr($key, $offset = 1)
-    {
-    }
-
-    /**
-     * Retrieve multiple items
-     *
-     * @param iterable $keys The name of items
-     * @param mixed $default
-     * @return iterable<string, mixed>
-     * @see BaseCache::getMultiple
-     */
-    public static function getMultiple(iterable $keys, $default = null): iterable
-    {
-    }
-
-    /**
-     * Store multiple items
-     *
-     * @param array $keys The name of items
-     * @param int|null $ttl
-     * @return bool
-     * @see BaseCache::setMultiple
-     */
-    public static function setMultiple(iterable $keys, $ttl = null): bool
     {
     }
 
@@ -5552,6 +5544,22 @@ class TagCache
 
     /**
      * {@inheritdoc}
+     * @see TagCache::getMultiple
+     */
+    public static function getMultiple(iterable $keys, $default = null): iterable
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see TagCache::setMultiple
+     */
+    public static function setMultiple(iterable $keys, $ttl = null): bool
+    {
+    }
+
+    /**
+     * {@inheritdoc}
      * @see TagCache::clear
      */
     public static function clear()
@@ -5575,30 +5583,6 @@ class TagCache
      * @see BaseCache::decr
      */
     public static function decr($key, $offset = 1)
-    {
-    }
-
-    /**
-     * Retrieve multiple items
-     *
-     * @param iterable $keys The name of items
-     * @param mixed $default
-     * @return iterable<string, mixed>
-     * @see BaseCache::getMultiple
-     */
-    public static function getMultiple(iterable $keys, $default = null): iterable
-    {
-    }
-
-    /**
-     * Store multiple items
-     *
-     * @param array $keys The name of items
-     * @param int|null $ttl
-     * @return bool
-     * @see BaseCache::setMultiple
-     */
-    public static function setMultiple(iterable $keys, $ttl = null): bool
     {
     }
 
@@ -7486,6 +7470,17 @@ class Wei
     }
 
     /**
+     * Remove services' configuration
+     *
+     * @param string $name
+     * @return $this
+     * @see Wei::removeConfig
+     */
+    public static function removeConfig(string $name): self
+    {
+    }
+
+    /**
      * Get service by class name
      *
      * @template T
@@ -8075,6 +8070,22 @@ if (0) {
 
         /**
          * {@inheritdoc}
+         * @see Cache::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see Cache::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
+        /**
+         * {@inheritdoc}
          * @see Cache::isHit
          */
         public function isHit(string $key = null): bool
@@ -8090,30 +8101,6 @@ if (0) {
          * @see BaseCache::decr
          */
         public function decr($key, $offset = 1)
-        {
-        }
-
-        /**
-         * Retrieve multiple items
-         *
-         * @param iterable $keys The name of items
-         * @param mixed $default
-         * @return iterable<string, mixed>
-         * @see BaseCache::getMultiple
-         */
-        public function getMultiple(iterable $keys, $default = null): iterable
-        {
-        }
-
-        /**
-         * Store multiple items
-         *
-         * @param array $keys The name of items
-         * @param int|null $ttl
-         * @return bool
-         * @see BaseCache::setMultiple
-         */
-        public function setMultiple(iterable $keys, $ttl = null): bool
         {
         }
 
@@ -13062,6 +13049,22 @@ if (0) {
 
         /**
          * {@inheritdoc}
+         * @see TagCache::getMultiple
+         */
+        public function getMultiple(iterable $keys, $default = null): iterable
+        {
+        }
+
+        /**
+         * {@inheritdoc}
+         * @see TagCache::setMultiple
+         */
+        public function setMultiple(iterable $keys, $ttl = null): bool
+        {
+        }
+
+        /**
+         * {@inheritdoc}
          * @see TagCache::clear
          */
         public function clear()
@@ -13085,30 +13088,6 @@ if (0) {
          * @see BaseCache::decr
          */
         public function decr($key, $offset = 1)
-        {
-        }
-
-        /**
-         * Retrieve multiple items
-         *
-         * @param iterable $keys The name of items
-         * @param mixed $default
-         * @return iterable<string, mixed>
-         * @see BaseCache::getMultiple
-         */
-        public function getMultiple(iterable $keys, $default = null): iterable
-        {
-        }
-
-        /**
-         * Store multiple items
-         *
-         * @param array $keys The name of items
-         * @param int|null $ttl
-         * @return bool
-         * @see BaseCache::setMultiple
-         */
-        public function setMultiple(iterable $keys, $ttl = null): bool
         {
         }
 
@@ -14988,6 +14967,17 @@ if (0) {
          * @see Wei::getConfig
          */
         public function getConfig($name = null, $default = null)
+        {
+        }
+
+        /**
+         * Remove services' configuration
+         *
+         * @param string $name
+         * @return $this
+         * @see Wei::removeConfig
+         */
+        public function removeConfig(string $name): self
         {
         }
 
