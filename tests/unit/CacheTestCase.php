@@ -31,7 +31,14 @@ abstract class CacheTestCase extends TestCase
         $this->assertTrue($cache->add($key, $value));
 
         $cache->set($key, $value);
-        $this->assertEquals($value, $cache->get($key));
+
+        if (is_float($value) && is_nan($value)) {
+            $this->assertNan($cache->get($key));
+        } elseif (is_scalar($value)) {
+            $this->assertSame($value, $cache->get($key));
+        } else {
+            $this->assertEquals($value, $cache->get($key));
+        }
 
         $this->assertFalse($cache->add($key, $value));
 
@@ -41,20 +48,30 @@ abstract class CacheTestCase extends TestCase
         $this->assertTrue($cache->replace($key, uniqid()));
     }
 
-    public function providerForGetterAndSetter()
+    public function getFixtures(): array
     {
-        $obj = new \stdClass();
-
+        $object = new \stdClass();
         return [
             [[], 'array'],
             [true, 'bool'],
             [1.2, 'float'],
+            [1.0, 'float-int'],
+            [7E+20, 'float-e'],
+            [7E-20, 'float-e2'],
+            [\INF, 'float-inf'],
+            [-\INF, 'float-ninf'],
             [1, 'int'],
-            [1, 'integer'],
             [null, 'null'],
             ['1', 'numeric'],
-            [$obj, 'object'],
+            [$object, 'object'],
         ];
+    }
+
+    public function providerForGetterAndSetter()
+    {
+        $types = $this->getFixtures();
+        $types[] = [\NAN, 'nan'];
+        return $types;
     }
 
     public function testIncrAndDecr()
@@ -140,7 +157,7 @@ abstract class CacheTestCase extends TestCase
     public function testGetAndSetMulti()
     {
         $items = [];
-        foreach ($this->providerForGetterAndSetter() as $row) {
+        foreach ($this->getFixtures() as $row) {
             $items[$row[1]] = $row[0];
         }
         $cache = $this->object;
@@ -156,7 +173,7 @@ abstract class CacheTestCase extends TestCase
     public function testGetAndSetMultiple()
     {
         $items = [];
-        foreach ($this->providerForGetterAndSetter() as $row) {
+        foreach ($this->getFixtures() as $row) {
             $items[$row[1]] = $row[0];
         }
         $cache = $this->object;
