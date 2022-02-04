@@ -282,12 +282,22 @@ class Redis extends BaseCache
      * Serialize the value.
      *
      * @param mixed $value
-     * @return mixed
+     * @return int|string
      */
     protected function serialize($value)
     {
-        return is_numeric($value) && !in_array($value, [\INF, -\INF], true) && !is_nan($value)
-            ? $value : serialize($value);
+        if (is_int($value)) {
+            return $value;
+        }
+
+        if (is_float($value) && !in_array($value, [\INF, -\INF], true) && !is_nan($value)) {
+            // Note that 1.0 will be convert to "1"
+            $value = (string) $value;
+            // Append missing ".", because we use "." to detect float (trailing 0 could be ignored)
+            return false === strpos($value, '.') ? ($value . '.') : $value;
+        }
+
+        return serialize($value);
     }
 
     /**
@@ -298,6 +308,9 @@ class Redis extends BaseCache
      */
     protected function unserialize($value)
     {
-        return null === $value || is_numeric($value) ? $value : unserialize($value);
+        if (is_numeric($value)) {
+            return false === strpos($value, '.') ? (int) $value : (float) $value;
+        }
+        return unserialize($value);
     }
 }
