@@ -2,6 +2,8 @@
 
 namespace WeiTest;
 
+use WeiTest\Fixtures\CacheObject;
+
 abstract class CacheTestCase extends TestCase
 {
     /**
@@ -50,7 +52,7 @@ abstract class CacheTestCase extends TestCase
 
     public function getFixtures(): array
     {
-        $object = new \stdClass();
+        $object = new CacheObject('test');
         return [
             [[], 'array'],
             [true, 'bool'],
