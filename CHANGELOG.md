@@ -1,3 +1,56 @@
+# [0.12.0](https://github.com/twinh/wei/compare/v0.11.1...v0.12.0) (2022-02-05)
+
+
+### Bug Fixes
+
+* **Cache:** 缓存无数据返回值由 `false` 改为 `null` ([b46ad12](https://github.com/twinh/wei/commit/b46ad12ed07ebb0a382c612a665cd3ec812a6b4c))
+* **Redis:** 解决存储整数读取出来为字符串 ([00ddc90](https://github.com/twinh/wei/commit/00ddc90e905b53578b0f6b7a32c0b11fc1091ef5))
+
+
+### Code Refactoring
+
+* **Cache:** 移除 `getResultCode` 方法，该方法是 `memcached` 特有的 ([5a6da73](https://github.com/twinh/wei/commit/5a6da7320d231469b4ed8c05f53c280394ff63c7))
+* **Cache:** 移除过时的 `Couchbase` 服务 ([2eaa354](https://github.com/twinh/wei/commit/2eaa3546a2d9553f08d69fb42e5cc655ba7cc557))
+* **Cache:** 移除通过 `get` 设置缓存的功能，改用 `remember` ([37fd419](https://github.com/twinh/wei/commit/37fd41917bfbe47e042b3465f42f66dbf375390e))
+* **Memcached:** `getMulti` 改为直接调用 `getMultiple` ([9039f6b](https://github.com/twinh/wei/commit/9039f6b7cda18ad1b08ab4e67bb00e0e7ff1bf9f))
+
+
+### Features
+
+* **Cache:** 允许静态调用缓存方法 ([d5eb300](https://github.com/twinh/wei/commit/d5eb3005e2754a05a35425c4498214b211180909))
+* **Cache:** 增加 `has`，`delete`，`getMultiple` 和 `setMultiple` 方法，废弃 `exists`，`remove`，`getMultiple` 和 `setMultiple` 方法 ([3bf9df0](https://github.com/twinh/wei/commit/3bf9df0ad708784531bb250ff53793c616b140cb))
+* **Cache:** 增加 `isHit` 方法用于判断 `get` 或 `getMultiple` 获取的缓存是否存在 ([25ddb69](https://github.com/twinh/wei/commit/25ddb6916881af288a36088bfb61884137bade88))
+* **Cache:** 增加 `remember` 方法，用于缓存回调生成的数据 ([8493b4f](https://github.com/twinh/wei/commit/8493b4f55ae5b7db8fe297fb0285e1f5fdda58f4))
+* **Cache:** 缓存驱动增加 `isHit` 支持 ([8c05617](https://github.com/twinh/wei/commit/8c05617348ab0a81cc73c35ff99aa6d619d1a4e9))
+* **Cache:** 默认值支持通过闭包生成 ([e285407](https://github.com/twinh/wei/commit/e2854075239c757ef11d4bc44b75f83d0b4e234a))
+* **Db:** 允许静态调用 `Db::transactional` 方法 ([15e90f2](https://github.com/twinh/wei/commit/15e90f2fd78b9bf575d4063aa8b8eb5dcc566999))
+* **Env:** 允许静态调用 `Env::is*` 方法 ([2897cd1](https://github.com/twinh/wei/commit/2897cd1c0df23f3cb27f061c4eb84cd62440a915))
+* **Memcached:** `getMultiple` 支持 `isHit` 判断缓存是否存在 ([fe90ee6](https://github.com/twinh/wei/commit/fe90ee6e8da46aef9875cbee8c95c762d05b0a0a))
+* **NullCache:** 增加 `NullCache` 服务 ([b0ddc66](https://github.com/twinh/wei/commit/b0ddc6607192ef832b6399f4ac5ee8494a7982a9))
+* **Redis:** `getMultiple` 支持 `isHit` 判断缓存是否存在 ([f4f7f75](https://github.com/twinh/wei/commit/f4f7f75b4ad9e12eb4d6deb0514fd4f4d09958ee))
+* **Redis:** `setMultiple` 方法改为调用 `mset`，支持一次性设置 ([eb8ab65](https://github.com/twinh/wei/commit/eb8ab657cc633a21497c9dbad6b6f1846c1f6711))
+* **service:** 增加 `instance` 方法来获取当前类对应的服务对象 ([debc3f3](https://github.com/twinh/wei/commit/debc3f3cc953fca53f0cef1f0a5384c8d313ae39))
+* **TagCache:** 支持 `getMultiple`，`setMultiple` 和 `isHit` 方法 ([6a007c9](https://github.com/twinh/wei/commit/6a007c94e01953ad4ebff49718135935c52977ad))
+* **wei:** 增加 `getBy` 方法，用于传入类名，获取对应的服务 ([26b4632](https://github.com/twinh/wei/commit/26b4632dbbfc84849b22c149091267640ab62ad2))
+* **Wei:** 增加 `removeConfig` 方法 ([84137c7](https://github.com/twinh/wei/commit/84137c740acab0aae538ca3640ccddc3d3b75b8a))
+
+
+### BREAKING CHANGES
+
+* **Memcached:** `Memcached` 服务移除 `isMemcached3` 属性
+* **Cache:** 移除 `getResultCode` 方法，该方法是 `memcached` 特有的
+* **Cache:** 移除通过 `get` 设置缓存的功能，改用 `remember`
+* **Cache:** 移除过时的 `Couchbase` 服务
+* **Cache:** 缓存无数据返回值由 `false` 改为 `null`
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `8.0.1` to `8.1.0`
+
 ## [0.11.1](https://github.com/twinh/wei/compare/v0.11.0...v0.11.1) (2022-01-12)
 
 
