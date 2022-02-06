@@ -287,6 +287,24 @@ MSG;
     }
 
     /**
+     * Upload a file, return a Ret object
+     *
+     * @param array $options
+     * @return Ret
+     * @svc
+     */
+    protected function save(array $options = []): Ret
+    {
+        $result = $this->__invoke($options);
+        if (!$result) {
+            return $this->err($this->getFirstMessage());
+        }
+        return $this->suc([
+            'file' => $this->getFile(),
+        ]);
+    }
+
+    /**
      * Save uploaded file to upload directory
      *
      * @param array $uploadedFile

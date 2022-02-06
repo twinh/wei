@@ -5658,6 +5658,17 @@ class Ua
 class Upload
 {
     /**
+     * Upload a file, return a Ret object
+     *
+     * @param array $options
+     * @return Ret
+     * @see Upload::save
+     */
+    public static function save(array $options = []): Ret
+    {
+    }
+
+    /**
      * Check the input value, return a Ret object
      *
      * @param mixed $input
@@ -13162,6 +13173,17 @@ if (0) {
 
     class Upload
     {
+        /**
+         * Upload a file, return a Ret object
+         *
+         * @param array $options
+         * @return Ret
+         * @see Upload::save
+         */
+        public function save(array $options = []): Ret
+        {
+        }
+
         /**
          * Check the input value, return a Ret object
          *
