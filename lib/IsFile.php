@@ -295,7 +295,8 @@ class IsFile extends BaseValidator
     {
         if (null === $this->ext && $this->originFile) {
             $file = basename($this->originFile);
-            // Use substr instead of pathinfo, because pathinfo may return error value in unicode
+            // Use substr instead of pathinfo, because pathinfo is locale aware, may return error value in unicode
+            // @link https://www.php.net/manual/en/function.pathinfo.php
             if (false !== $pos = strrpos($file, '.')) {
                 $this->ext = strtolower(substr($file, $pos + 1));
             } else {
