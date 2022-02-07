@@ -112,6 +112,14 @@ MSG;
     protected $postMaxSize;
 
     /**
+     * The PHP $_FILES item
+     *
+     * @var array
+     * @internal
+     */
+    protected $uploadedFile = [];
+
+    /**
      * Constructor
      *
      * @param array $options
@@ -168,6 +176,7 @@ MSG;
         }
 
         $uploadedFile = $uploadedFiles[$this->field];
+        $this->uploadedFile = $uploadedFile;
 
         /**
          * @link http://php.net/manual/en/features.file-upload.errors.php
@@ -290,7 +299,7 @@ MSG;
      * Upload a file, return a Ret object
      *
      * @param array $options
-     * @return Ret
+     * @return Ret|array{file: string, name: string, size: int, mimeType: string}
      * @svc
      */
     protected function save(array $options = []): Ret
@@ -299,8 +308,12 @@ MSG;
         if (!$result) {
             return $this->err($this->getFirstMessage());
         }
+
         return $this->suc([
             'file' => $this->getFile(),
+            'name' => $this->uploadedFile['name'],
+            'size' => $this->uploadedFile['size'],
+            'type' => $this->uploadedFile['type'],
         ]);
     }
 
