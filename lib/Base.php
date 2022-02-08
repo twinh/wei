@@ -150,10 +150,9 @@ abstract class Base
      *
      * @return $this
      * @experimental
-     * @svc
      */
-    protected function instance(): self
+    public static function instance(): self
     {
-        return $this;
+        return Wei::getContainer()->getBy(static::class);
     }
 }

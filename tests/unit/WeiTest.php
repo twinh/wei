@@ -764,22 +764,18 @@ final class WeiTest extends TestCase
 
     public function testInstance()
     {
-        /** @phpstan-ignore-next-line Static call to instance method Wei\Base::instance(). */
         $req = Req::instance();
         $this->assertInstanceOf(Req::class, $req);
 
-        /** @phpstan-ignore-next-line Static call to instance method Wei\Base::instance(). */
         $req2 = Req::instance();
         $this->assertSame($req, $req2);
     }
 
     public function testInstanceNewService()
     {
-        /** @phpstan-ignore-next-line Static call to instance method Wei\Base::instance(). */
         $ret = Ret::instance();
         $this->assertInstanceOf(Ret::class, $ret);
 
-        /** @phpstan-ignore-next-line Static call to instance method Wei\Base::instance(). */
         $ret2 = Ret::instance();
         $this->assertNotSame($ret, $ret2);
     }

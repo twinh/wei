@@ -140,31 +140,10 @@ class Apc
     public static function isHit(string $key = null): bool
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class App
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class ArrayCache
@@ -305,31 +284,10 @@ class ArrayCache
     public static function isHit(string $key = null): bool
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Asset
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Bicache
@@ -470,31 +428,10 @@ class Bicache
     public static function isHit(string $key = null): bool
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Block
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Cache
@@ -611,73 +548,22 @@ class Cache
     public static function remember(string $key, $expireOrFn, callable $fn = null)
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class ClassMap
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Config
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Cookie
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Counter
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Db
@@ -701,17 +587,6 @@ class Db
      * @see Db::raw
      */
     public static function raw($value): Db\Raw
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -856,31 +731,10 @@ class DbCache
     public static function isHit(string $key = null): bool
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class E
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Env
@@ -925,31 +779,10 @@ class Env
     public static function isProd()
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Error
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Event
@@ -1023,17 +856,6 @@ class Event
      * @see Event::getCurName
      */
     public static function getCurName()
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -1176,45 +998,14 @@ class FileCache
     public static function isHit(string $key = null): bool
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Gravatar
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Http
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsAll
@@ -1228,17 +1019,6 @@ class IsAll
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -1256,17 +1036,6 @@ class IsAllOf
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsAllowEmpty
@@ -1280,17 +1049,6 @@ class IsAllowEmpty
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -1308,17 +1066,6 @@ class IsAlnum
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsAlpha
@@ -1332,17 +1079,6 @@ class IsAlpha
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -1360,17 +1096,6 @@ class IsAnyDateTime
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsArray
@@ -1384,17 +1109,6 @@ class IsArray
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -1412,17 +1126,6 @@ class IsBetween
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsBigInt
@@ -1436,17 +1139,6 @@ class IsBigInt
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -1464,17 +1156,6 @@ class IsBlank
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsBool
@@ -1488,17 +1169,6 @@ class IsBool
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -1516,17 +1186,6 @@ class IsBoolable
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsCallback
@@ -1540,17 +1199,6 @@ class IsCallback
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -1568,17 +1216,6 @@ class IsChar
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsChildren
@@ -1592,17 +1229,6 @@ class IsChildren
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -1620,17 +1246,6 @@ class IsChinese
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsColor
@@ -1644,17 +1259,6 @@ class IsColor
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -1672,17 +1276,6 @@ class IsContains
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsCreditCard
@@ -1696,17 +1289,6 @@ class IsCreditCard
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -1724,17 +1306,6 @@ class IsDate
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsDateTime
@@ -1748,17 +1319,6 @@ class IsDateTime
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -1776,17 +1336,6 @@ class IsDecimal
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsDefaultInt
@@ -1800,17 +1349,6 @@ class IsDefaultInt
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -1828,17 +1366,6 @@ class IsDigit
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsDir
@@ -1852,17 +1379,6 @@ class IsDir
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -1880,17 +1396,6 @@ class IsDivisibleBy
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsDoubleByte
@@ -1904,17 +1409,6 @@ class IsDoubleByte
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -1932,17 +1426,6 @@ class IsEach
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsEmail
@@ -1956,17 +1439,6 @@ class IsEmail
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -1984,17 +1456,6 @@ class IsEmpty
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsEndsWith
@@ -2008,17 +1469,6 @@ class IsEndsWith
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2036,17 +1486,6 @@ class IsEqualTo
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsExists
@@ -2060,17 +1499,6 @@ class IsExists
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2088,17 +1516,6 @@ class IsFieldExists
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsFile
@@ -2112,17 +1529,6 @@ class IsFile
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2140,17 +1546,6 @@ class IsFloat
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsGreaterThan
@@ -2164,17 +1559,6 @@ class IsGreaterThan
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2192,17 +1576,6 @@ class IsGreaterThanOrEqual
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsGt
@@ -2216,17 +1589,6 @@ class IsGt
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2244,17 +1606,6 @@ class IsGte
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsIdCardCn
@@ -2268,17 +1619,6 @@ class IsIdCardCn
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2296,17 +1636,6 @@ class IsIdCardHk
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsIdCardMo
@@ -2320,17 +1649,6 @@ class IsIdCardMo
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2348,17 +1666,6 @@ class IsIdCardTw
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsIdenticalTo
@@ -2372,17 +1679,6 @@ class IsIdenticalTo
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2400,17 +1696,6 @@ class IsImage
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsIn
@@ -2424,17 +1709,6 @@ class IsIn
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2452,17 +1726,6 @@ class IsInt
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsIp
@@ -2476,17 +1739,6 @@ class IsIp
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2504,17 +1756,6 @@ class IsLength
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsLessThan
@@ -2528,17 +1769,6 @@ class IsLessThan
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2556,17 +1786,6 @@ class IsLessThanOrEqual
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsLowercase
@@ -2580,17 +1799,6 @@ class IsLowercase
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2608,17 +1816,6 @@ class IsLt
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsLte
@@ -2632,17 +1829,6 @@ class IsLte
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2660,17 +1846,6 @@ class IsLuhn
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsMaxAccuracy
@@ -2684,17 +1859,6 @@ class IsMaxAccuracy
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2712,17 +1876,6 @@ class IsMaxCharLength
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsMaxLength
@@ -2736,17 +1889,6 @@ class IsMaxLength
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2764,17 +1906,6 @@ class IsMediumInt
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsMediumText
@@ -2788,17 +1919,6 @@ class IsMediumText
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2816,17 +1936,6 @@ class IsMinCharLength
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsMinLength
@@ -2840,17 +1949,6 @@ class IsMinLength
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2868,17 +1966,6 @@ class IsMobileCn
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsNaturalNumber
@@ -2892,17 +1979,6 @@ class IsNaturalNumber
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2920,17 +1996,6 @@ class IsNoneOf
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsNullType
@@ -2944,17 +2009,6 @@ class IsNullType
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -2972,17 +2026,6 @@ class IsNumber
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsObject
@@ -2996,17 +2039,6 @@ class IsObject
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -3024,17 +2056,6 @@ class IsOneOf
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsPassword
@@ -3048,17 +2069,6 @@ class IsPassword
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -3076,17 +2086,6 @@ class IsPhone
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsPhoneCn
@@ -3100,17 +2099,6 @@ class IsPhoneCn
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -3128,17 +2116,6 @@ class IsPlateNumberCn
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsPositiveInteger
@@ -3152,17 +2129,6 @@ class IsPositiveInteger
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -3180,17 +2146,6 @@ class IsPostcodeCn
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsPresent
@@ -3204,17 +2159,6 @@ class IsPresent
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -3232,17 +2176,6 @@ class IsQQ
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsRecordExists
@@ -3256,17 +2189,6 @@ class IsRecordExists
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -3284,17 +2206,6 @@ class IsRegex
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsRequired
@@ -3308,17 +2219,6 @@ class IsRequired
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -3336,17 +2236,6 @@ class IsSmallInt
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsSomeOf
@@ -3360,17 +2249,6 @@ class IsSomeOf
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -3388,17 +2266,6 @@ class IsStartsWith
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsString
@@ -3412,17 +2279,6 @@ class IsString
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -3440,17 +2296,6 @@ class IsText
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsTime
@@ -3464,17 +2309,6 @@ class IsTime
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -3492,17 +2326,6 @@ class IsTinyChar
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsTinyInt
@@ -3516,17 +2339,6 @@ class IsTinyInt
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -3544,17 +2356,6 @@ class IsTld
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsType
@@ -3568,17 +2369,6 @@ class IsType
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -3596,17 +2386,6 @@ class IsUBigInt
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsUDefaultInt
@@ -3620,17 +2399,6 @@ class IsUDefaultInt
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -3648,17 +2416,6 @@ class IsUMediumInt
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsUNumber
@@ -3672,17 +2429,6 @@ class IsUNumber
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -3700,17 +2446,6 @@ class IsUSmallInt
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsUTinyInt
@@ -3724,17 +2459,6 @@ class IsUTinyInt
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -3752,17 +2476,6 @@ class IsUppercase
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class IsUrl
@@ -3776,17 +2489,6 @@ class IsUrl
      * @see BaseValidator::check
      */
     public static function check($input, string $name = '%name%'): Ret
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -3804,45 +2506,14 @@ class IsUuid
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Lock
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Logger
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Memcache
@@ -3979,17 +2650,6 @@ class Memcache
     public static function isHit(string $key = null): bool
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Memcached
@@ -4122,17 +2782,6 @@ class Memcached
     public static function isHit(string $key = null): bool
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Migration
@@ -4179,17 +2828,6 @@ class Migration
      * @see Migration::create
      */
     public static function create($options)
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -4295,17 +2933,6 @@ class MongoCache
      * @see BaseCache::isHit
      */
     public static function isHit(string $key = null): bool
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -4450,17 +3077,6 @@ class NearCache
     public static function isHit(string $key = null): bool
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class NullCache
@@ -4601,17 +3217,6 @@ class NullCache
     public static function isHit(string $key = null): bool
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Password
@@ -4672,31 +3277,10 @@ class Password
     public static function verify($password, $hash)
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class PhpError
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class PhpFileCache
@@ -4837,45 +3421,14 @@ class PhpFileCache
     public static function isHit(string $key = null): bool
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Pinyin
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Record
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Redis
@@ -5022,17 +3575,6 @@ class Redis
     public static function isHit(string $key = null): bool
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Req
@@ -5067,17 +3609,6 @@ class Req
      * @see Req::isPreflight
      */
     public static function isPreflight(): bool
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -5116,45 +3647,14 @@ class Request
     public static function isPreflight(): bool
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Res
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Response
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Ret
@@ -5217,45 +3717,14 @@ class Ret
     public static function alert($message, $code = null)
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Router
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class SafeUrl
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Schema
@@ -5313,31 +3782,10 @@ class Schema
     public static function getUserIdType(): string
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Session
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Share
@@ -5429,59 +3877,18 @@ class Share
     public static function toWechatJson()
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Soap
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class StatsD
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class T
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class TagCache
@@ -5598,17 +4005,6 @@ class TagCache
     public static function remember(string $key, $expireOrFn, callable $fn = null)
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Time
@@ -5628,31 +4024,10 @@ class Time
     public static function today()
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Ua
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Upload
@@ -5679,17 +4054,6 @@ class Upload
     public static function check($input, string $name = '%name%'): Ret
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Url
@@ -5706,31 +4070,10 @@ class Url
     public static function to($url = '', $argsOrParams = [], $params = [])
     {
     }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Uuid
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class V
@@ -5793,17 +4136,6 @@ class V
      * @see V::defaultRequired
      */
     public static function defaultRequired()
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 
@@ -7414,44 +5746,14 @@ class V
 
 class Validate
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class View
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class WeChatApp
 {
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
-    {
-    }
 }
 
 class Wei
@@ -7500,17 +5802,6 @@ class Wei
      * @see Wei::getBy
      */
     public static function getBy(string $class): Base
-    {
-    }
-
-    /**
-     * Return the current service object
-     *
-     * @return $this
-     * @experimental
-     * @see Base::instance
-     */
-    public static function instance(): self
     {
     }
 }
@@ -7656,31 +5947,10 @@ if (0) {
         public function isHit(string $key = null): bool
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class App
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class ArrayCache
@@ -7821,31 +6091,10 @@ if (0) {
         public function isHit(string $key = null): bool
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Asset
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Bicache
@@ -7986,31 +6235,10 @@ if (0) {
         public function isHit(string $key = null): bool
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Block
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Cache
@@ -8127,73 +6355,22 @@ if (0) {
         public function remember(string $key, $expireOrFn, callable $fn = null)
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class ClassMap
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Config
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Cookie
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Counter
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Db
@@ -8217,17 +6394,6 @@ if (0) {
          * @see Db::raw
          */
         public function raw($value): Db\Raw
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -8372,31 +6538,10 @@ if (0) {
         public function isHit(string $key = null): bool
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class E
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Env
@@ -8441,31 +6586,10 @@ if (0) {
         public function isProd()
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Error
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Event
@@ -8539,17 +6663,6 @@ if (0) {
          * @see Event::getCurName
          */
         public function getCurName()
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -8692,45 +6805,14 @@ if (0) {
         public function isHit(string $key = null): bool
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Gravatar
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Http
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsAll
@@ -8744,17 +6826,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -8772,17 +6843,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsAllowEmpty
@@ -8796,17 +6856,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -8824,17 +6873,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsAlpha
@@ -8848,17 +6886,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -8876,17 +6903,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsArray
@@ -8900,17 +6916,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -8928,17 +6933,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsBigInt
@@ -8952,17 +6946,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -8980,17 +6963,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsBool
@@ -9004,17 +6976,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9032,17 +6993,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsCallback
@@ -9056,17 +7006,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9084,17 +7023,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsChildren
@@ -9108,17 +7036,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9136,17 +7053,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsColor
@@ -9160,17 +7066,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9188,17 +7083,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsCreditCard
@@ -9212,17 +7096,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9240,17 +7113,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsDateTime
@@ -9264,17 +7126,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9292,17 +7143,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsDefaultInt
@@ -9316,17 +7156,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9344,17 +7173,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsDir
@@ -9368,17 +7186,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9396,17 +7203,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsDoubleByte
@@ -9420,17 +7216,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9448,17 +7233,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsEmail
@@ -9472,17 +7246,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9500,17 +7263,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsEndsWith
@@ -9524,17 +7276,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9552,17 +7293,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsExists
@@ -9576,17 +7306,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9604,17 +7323,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsFile
@@ -9628,17 +7336,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9656,17 +7353,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsGreaterThan
@@ -9680,17 +7366,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9708,17 +7383,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsGt
@@ -9732,17 +7396,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9760,17 +7413,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsIdCardCn
@@ -9784,17 +7426,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9812,17 +7443,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsIdCardMo
@@ -9836,17 +7456,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9864,17 +7473,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsIdenticalTo
@@ -9888,17 +7486,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9916,17 +7503,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsIn
@@ -9940,17 +7516,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -9968,17 +7533,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsIp
@@ -9992,17 +7546,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10020,17 +7563,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsLessThan
@@ -10044,17 +7576,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10072,17 +7593,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsLowercase
@@ -10096,17 +7606,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10124,17 +7623,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsLte
@@ -10148,17 +7636,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10176,17 +7653,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsMaxAccuracy
@@ -10200,17 +7666,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10228,17 +7683,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsMaxLength
@@ -10252,17 +7696,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10280,17 +7713,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsMediumText
@@ -10304,17 +7726,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10332,17 +7743,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsMinLength
@@ -10356,17 +7756,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10384,17 +7773,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsNaturalNumber
@@ -10408,17 +7786,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10436,17 +7803,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsNullType
@@ -10460,17 +7816,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10488,17 +7833,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsObject
@@ -10512,17 +7846,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10540,17 +7863,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsPassword
@@ -10564,17 +7876,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10592,17 +7893,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsPhoneCn
@@ -10616,17 +7906,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10644,17 +7923,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsPositiveInteger
@@ -10668,17 +7936,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10696,17 +7953,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsPresent
@@ -10720,17 +7966,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10748,17 +7983,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsRecordExists
@@ -10772,17 +7996,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10800,17 +8013,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsRequired
@@ -10824,17 +8026,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10852,17 +8043,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsSomeOf
@@ -10876,17 +8056,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10904,17 +8073,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsString
@@ -10928,17 +8086,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -10956,17 +8103,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsTime
@@ -10980,17 +8116,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -11008,17 +8133,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsTinyInt
@@ -11032,17 +8146,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -11060,17 +8163,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsType
@@ -11084,17 +8176,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -11112,17 +8193,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsUDefaultInt
@@ -11136,17 +8206,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -11164,17 +8223,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsUNumber
@@ -11188,17 +8236,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -11216,17 +8253,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsUTinyInt
@@ -11240,17 +8266,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -11268,17 +8283,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class IsUrl
@@ -11292,17 +8296,6 @@ if (0) {
          * @see BaseValidator::check
          */
         public function check($input, string $name = '%name%'): Ret
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -11320,45 +8313,14 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Lock
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Logger
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Memcache
@@ -11495,17 +8457,6 @@ if (0) {
         public function isHit(string $key = null): bool
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Memcached
@@ -11638,17 +8589,6 @@ if (0) {
         public function isHit(string $key = null): bool
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Migration
@@ -11695,17 +8635,6 @@ if (0) {
          * @see Migration::create
          */
         public function create($options)
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -11811,17 +8740,6 @@ if (0) {
          * @see BaseCache::isHit
          */
         public function isHit(string $key = null): bool
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -11966,17 +8884,6 @@ if (0) {
         public function isHit(string $key = null): bool
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class NullCache
@@ -12117,17 +9024,6 @@ if (0) {
         public function isHit(string $key = null): bool
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Password
@@ -12188,31 +9084,10 @@ if (0) {
         public function verify($password, $hash)
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class PhpError
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class PhpFileCache
@@ -12353,45 +9228,14 @@ if (0) {
         public function isHit(string $key = null): bool
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Pinyin
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Record
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Redis
@@ -12538,17 +9382,6 @@ if (0) {
         public function isHit(string $key = null): bool
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Req
@@ -12583,17 +9416,6 @@ if (0) {
          * @see Req::isPreflight
          */
         public function isPreflight(): bool
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
@@ -12632,45 +9454,14 @@ if (0) {
         public function isPreflight(): bool
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Res
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Response
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Ret
@@ -12733,45 +9524,14 @@ if (0) {
         public function alert($message, $code = null)
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Router
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class SafeUrl
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Schema
@@ -12829,31 +9589,10 @@ if (0) {
         public function getUserIdType(): string
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Session
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Share
@@ -12945,59 +9684,18 @@ if (0) {
         public function toWechatJson()
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Soap
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class StatsD
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class T
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class TagCache
@@ -13114,17 +9812,6 @@ if (0) {
         public function remember(string $key, $expireOrFn, callable $fn = null)
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Time
@@ -13144,31 +9831,10 @@ if (0) {
         public function today()
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Ua
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Upload
@@ -13195,17 +9861,6 @@ if (0) {
         public function check($input, string $name = '%name%'): Ret
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Url
@@ -13222,31 +9877,10 @@ if (0) {
         public function to($url = '', $argsOrParams = [], $params = [])
         {
         }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Uuid
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class V
@@ -13309,17 +9943,6 @@ if (0) {
          * @see V::defaultRequired
          */
         public function defaultRequired()
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
 
@@ -14926,44 +11549,14 @@ if (0) {
 
     class Validate
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class View
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class WeChatApp
     {
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
-        {
-        }
     }
 
     class Wei
@@ -15012,17 +11605,6 @@ if (0) {
          * @see Wei::getBy
          */
         public function getBy(string $class): Base
-        {
-        }
-
-        /**
-         * Return the current service object
-         *
-         * @return $this
-         * @experimental
-         * @see Base::instance
-         */
-        public function instance(): self
         {
         }
     }
