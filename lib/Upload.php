@@ -77,6 +77,13 @@ MSG;
     protected $fileName;
 
     /**
+     * The path (without extension) to save file, if specified, $dir and $fileName will be ignored
+     *
+     * @var string
+     */
+    protected $path;
+
+    /**
      * Whether check if the upload file is valid image or not
      *
      * You can specify any one of the following options to enable image detect
@@ -328,18 +335,27 @@ MSG;
         $ext = $this->getExt();
         $fullExt = $ext ? '.' . $ext : '';
 
-        if ($this->fileName) {
-            $fileName = $this->fileName;
-        } else {
-            $fileName = substr($uploadedFile['name'], 0, strlen($uploadedFile['name']) - strlen($fullExt));
-        }
+        if ($this->path) {
+            $dir = dirname($this->path);
+            if (!is_dir($dir)) {
+                mkdir($dir, 0700, true);
+            }
 
-        $this->file = $this->dir . '/' . $fileName . $fullExt;
-        if (!$this->overwrite) {
-            $index = 1;
-            while (is_file($this->file)) {
-                $this->file = $this->dir . '/' . $fileName . '-' . $index . $fullExt;
-                ++$index;
+            $this->file = $this->path . $fullExt;
+        } else {
+            if ($this->fileName) {
+                $fileName = $this->fileName;
+            } else {
+                $fileName = substr($uploadedFile['name'], 0, strlen($uploadedFile['name']) - strlen($fullExt));
+            }
+
+            $this->file = $this->dir . '/' . $fileName . $fullExt;
+            if (!$this->overwrite) {
+                $index = 1;
+                while (is_file($this->file)) {
+                    $this->file = $this->dir . '/' . $fileName . '-' . $index . $fullExt;
+                    ++$index;
+                }
             }
         }
 
