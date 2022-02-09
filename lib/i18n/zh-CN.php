@@ -345,6 +345,7 @@ return [
     '%name% must not be valid UUID' => '%name%不能是有效的UUID',
 
     // upload
+    'file' => '文件',
     'No file uploaded or the total file size is too large, allowed maximum size is %postMaxSize%' => '没有文件被上传,或您上传的总文件大小超过%postMaxSize%',
     'No file uploaded, please select a file to upload' => '没有文件被上传,请选择一个文件上传',
     '%name% is larger than the MAX_FILE_SIZE value in the HTML form' => '%name%的大小超过HTML表单设置',
