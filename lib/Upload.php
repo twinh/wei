@@ -285,7 +285,7 @@ MSG;
     {
         $dir = rtrim($dir, '/');
         if (!is_dir($dir)) {
-            mkdir($dir, 0700, true);
+            mkdir($dir, 0755, true);
         }
         $this->dir = $dir;
 
@@ -338,7 +338,7 @@ MSG;
         if ($this->path) {
             $dir = dirname($this->path);
             if (!is_dir($dir)) {
-                mkdir($dir, 0700, true);
+                mkdir($dir, 0755, true);
             }
 
             $this->file = $this->path . $fullExt;
