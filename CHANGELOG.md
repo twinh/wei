@@ -1,3 +1,19 @@
+## [0.12.1](https://github.com/twinh/wei/compare/v0.12.0...v0.12.1) (2022-02-28)
+
+
+### Bug Fixes
+
+* **Upload:** 创建目录使用默认的 `0755` 权限，解决 PHP 写入文件 nginx 不可读的问题 ([6f86418](https://github.com/twinh/wei/commit/6f8641887f3d09b3c95c72cd040b936f4e774fdf))
+
+
+### Features
+
+* **service, experimental:** 更改 `instance` 为静态方法 ([127b91e](https://github.com/twinh/wei/commit/127b91e70d8dd5718a89cf6203e40a75322e2e4b))
+* **Upload:** `save` 方法返回值增加 `name`，`type` 和 `size` ([b21604a](https://github.com/twinh/wei/commit/b21604a66799e502bc26b664c0fb684a1340b1a4))
+* **Upload:** 增加 `path` 属性，用于指定上传文件的完整路径 ([6842a8b](https://github.com/twinh/wei/commit/6842a8bea23a86d3d44922bfeb4ea802c05acfff))
+* **Upload:** 增加 `save` 方法 ([7221d33](https://github.com/twinh/wei/commit/7221d3327f7b413416637e9688798121c49c96f4))
+* **Upload:** 增加默认名称 `file` 的中文翻译 ([63703ca](https://github.com/twinh/wei/commit/63703ca952ebbd4a718d8dceaffc238010fa8714))
+
 # [0.12.0](https://github.com/twinh/wei/compare/v0.11.1...v0.12.0) (2022-02-05)
 
 
