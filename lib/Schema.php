@@ -321,19 +321,21 @@ class Schema extends Base
     /**
      * Execute a drop table sql
      *
-     * @param string $table
+     * @param string|array $table
      * @param bool $ifExists
      * @return $this
      */
     public function drop($table, $ifExists = false)
     {
-        $sql = 'DROP TABLE ';
-        if ($ifExists) {
-            $sql .= 'IF EXISTS ';
-        }
-        $sql .= $this->db->getTable($table);
+        foreach ((array) $table as $name) {
+            $sql = 'DROP TABLE ';
+            if ($ifExists) {
+                $sql .= 'IF EXISTS ';
+            }
+            $sql .= $this->db->getTable($name);
 
-        $this->db->executeUpdate($sql);
+            $this->db->executeUpdate($sql);
+        }
 
         return $this;
     }
@@ -341,7 +343,7 @@ class Schema extends Base
     /**
      * Execute a drop table if exist sql
      *
-     * @param string $table
+     * @param string|array $table
      * @return $this
      */
     public function dropIfExists($table)
