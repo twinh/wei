@@ -1,3 +1,10 @@
+## [0.12.2](https://github.com/twinh/wei/compare/v0.12.1...v0.12.2) (2022-03-31)
+
+
+### Features
+
+* **Schema:** `drop`, `dropIfExists` 支持支持一次删除多个表名 ([5429a99](https://github.com/twinh/wei/commit/5429a9965e631f77013c25364d9643009b7b93ac))
+
 ## [0.12.1](https://github.com/twinh/wei/compare/v0.12.0...v0.12.1) (2022-02-28)
 
 
