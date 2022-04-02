@@ -198,7 +198,7 @@ namespace Wei {
         /**
          * Get the service container instance
          *
-         * @param array $config The array or file configuration
+         * @param array|string $config The array or file configuration
          * @return $this
          * @throws \InvalidArgumentException    When the configuration parameter is not array or file
          */
