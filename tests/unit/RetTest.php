@@ -462,4 +462,35 @@ final class RetTest extends TestCase
         $this->assertSame('data', $ret->getData());
         $this->assertSame('value', $ret->get('key'));
     }
+
+    public function testToStringSuc()
+    {
+        $ret = Ret::suc('suc');
+        $this->assertSame('{
+    "message": "suc",
+    "code": 0
+}', (string) $ret);
+    }
+
+    public function testToStringErr()
+    {
+        $ret = Ret::err('err', 1);
+        $this->assertSame('{
+    "message": "err",
+    "code": 1
+}', (string) $ret);
+    }
+
+    public function testToStringWithData()
+    {
+        $ret = Ret::suc([
+            'message' => 'ok',
+            'data' => 'data',
+        ]);
+        $this->assertSame('{
+    "message": "ok",
+    "data": "data",
+    "code": 0
+}', (string) $ret);
+    }
 }

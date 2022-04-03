@@ -385,6 +385,19 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
     }
 
     /**
+     * Convert to JSON string
+     *
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return json_encode(
+            $this->jsonSerialize(),
+            \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE
+        );
+    }
+
+    /**
      * Return operation successful result
      *
      * ```php
