@@ -128,7 +128,7 @@ final class SchemaTest extends TestCase
   ADD COLUMN barcode varchar(64) NOT NULL DEFAULT '' COMMENT '条码' AFTER no;", $sql);
     }
 
-    public function testRename()
+    public function testRenameColumn()
     {
         $this->createTestTable();
 
@@ -280,6 +280,18 @@ final class SchemaTest extends TestCase
         $this->expectExceptionObject(new \InvalidArgumentException('Invalid user id type "invalidType"'));
 
         Schema::setUserIdType('invalidType');
+    }
+
+    public function testRename()
+    {
+        $this->schema->table('test_rename')->id()->exec();
+        $this->assertFalse($this->schema->hasTable('text_rename2'));
+
+        $this->schema->rename('test_rename', 'test_rename2');
+        $this->assertTrue($this->schema->hasTable('test_rename2'));
+
+        $this->schema->dropIfExists('test_rename2');
+        $this->assertFalse($this->schema->hasTable('test_rename2'));
     }
 
     protected function createTestTable()

@@ -931,7 +931,7 @@ class Schema extends Base
      */
     public function rename($from, $to)
     {
-        $sql = sprintf('RENAME TABLE %s TO %s', $from, $to);
+        $sql = sprintf('RENAME TABLE %s TO %s', $this->db->getTable($from), $this->db->getTable($to));
         $this->db->executeUpdate($sql);
 
         return $this;
