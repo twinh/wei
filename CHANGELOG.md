@@ -1,3 +1,15 @@
+## [0.12.3](https://github.com/twinh/wei/compare/v0.12.2...v0.12.3) (2022-04-30)
+
+
+### Bug Fixes
+
+* **Schema:** 解决 `rename` 表名缺少前缀 ([edfa09d](https://github.com/twinh/wei/commit/edfa09daeecc86d7fc799088947c7aececd4ad2e))
+
+
+### Features
+
+* **Ret:** 允许 `Ret` 对象转换为字符串 ([2e67678](https://github.com/twinh/wei/commit/2e676789854d6b0af4e360248c1c4584e758d66c))
+
 ## [0.12.2](https://github.com/twinh/wei/compare/v0.12.1...v0.12.2) (2022-03-31)
 
 
