@@ -1,0 +1,29 @@
+name: "GitHub Release"
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - run: |
+          CHANGELOG=$(npx conventional-changelog-cli -p angular -r 2)
+          echo "CHANGELOG<<EOF" >> $GITHUB_ENV
+          echo "$CHANGELOG" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - uses: softprops/action-gh-release@v1
+        with:
+          body: ${{ env.CHANGELOG }}
