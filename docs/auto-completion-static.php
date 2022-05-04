@@ -4036,7 +4036,7 @@ class Upload
      * Upload a file, return a Ret object
      *
      * @param array $options
-     * @return Ret
+     * @return Ret|array{file: string, name: string, size: int, mimeType: string}
      * @see Upload::save
      */
     public static function save(array $options = []): Ret
@@ -9843,7 +9843,7 @@ if (0) {
          * Upload a file, return a Ret object
          *
          * @param array $options
-         * @return Ret
+         * @return Ret|array{file: string, name: string, size: int, mimeType: string}
          * @see Upload::save
          */
         public function save(array $options = []): Ret
