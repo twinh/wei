@@ -177,10 +177,6 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             $this->data += (array) json_decode($this->getContent(), true);
         }
 
-        if ($this->overwriteMethod && $method = $this->get('_method')) {
-            $this->setMethod($method);
-        }
-
         if ($this->overwriteAjax && $this->get('_ajax')) {
             $this->setServer('HTTP_X_REQUESTED_WITH', 'XMLHttpRequest');
         }
@@ -582,6 +578,8 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     {
         if (null === $this->method) {
             if ($method = $this->getServer('HTTP_X_HTTP_METHOD_OVERRIDE')) {
+                $this->method = strtoupper($method);
+            } elseif ($this->overwriteMethod && $method = $this->get('_method')) {
                 $this->method = strtoupper($method);
             } else {
                 $this->method = $this->getServer('REQUEST_METHOD', 'GET');
