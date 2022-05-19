@@ -733,11 +733,26 @@ final class ReqTest extends TestCase
         $request = new Req([
             'wei' => $this->wei,
             'fromGlobal' => false,
+            'servers' => [
+                'REQUEST_METHOD' => 'POST',
+            ],
             'data' => [
                 '_method' => 'PUT',
             ],
         ]);
         $this->assertTrue($request->isMethod('PUT'));
+    }
+
+    public function testOverwriteMethodWithGetMethod()
+    {
+        $request = new Req([
+            'wei' => $this->wei,
+            'fromGlobal' => false,
+            'data' => [
+                '_method' => 'PUT',
+            ],
+        ]);
+        $this->assertTrue($request->isMethod('GET'));
     }
 
     public function testXHttpMethodOverride()

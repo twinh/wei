@@ -575,7 +575,11 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         if (null === $this->method) {
             if ($method = $this->getServer('HTTP_X_HTTP_METHOD_OVERRIDE')) {
                 $this->method = strtoupper($method);
-            } elseif ($this->overwriteMethod && $method = $this->get('_method')) {
+            } elseif (
+                $this->overwriteMethod
+                && 'POST' === $this->getServer('REQUEST_METHOD')
+                && $method = $this->get('_method')
+            ) {
                 $this->method = strtoupper($method);
             } else {
                 $this->method = $this->getServer('REQUEST_METHOD', 'GET');
