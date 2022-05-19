@@ -176,10 +176,6 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         if (false !== strpos($this->getServer('HTTP_CONTENT_TYPE'), 'application/json')) {
             $this->data += (array) json_decode($this->getContent(), true);
         }
-
-        if ($this->overwriteAjax && $this->get('_ajax')) {
-            $this->setServer('HTTP_X_REQUESTED_WITH', 'XMLHttpRequest');
-        }
     }
 
     /**
@@ -638,6 +634,9 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     public function isAjax()
     {
+        if ($this->overwriteAjax && $this->get('_ajax')) {
+            return true;
+        }
         return 'xmlhttprequest' == strtolower($this->getServer('HTTP_X_REQUESTED_WITH'));
     }
 
