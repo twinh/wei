@@ -1,3 +1,24 @@
+## [0.12.4](https://github.com/twinh/wei/compare/v0.12.3...v0.12.4) (2022-06-01)
+
+
+### Bug Fixes
+
+* **Req:** 请求方式为 `POST` 才可以通过 `_method` 参数来更改请求方式 ([b5d0e91](https://github.com/twinh/wei/commit/b5d0e91f5b708d300a7373621a0f6cbce8f3809f))
+
+
+### Performance Improvements
+
+* **Req:** 优化判断是否为 ajax 的逻辑 ([948d4da](https://github.com/twinh/wei/commit/948d4daaa8efdb7125405ad8aa154cfcdbb1f179))
+* **Req:** 优化获取请求方式的逻辑 ([3162ae7](https://github.com/twinh/wei/commit/3162ae7378ad10317ec862dbd7c022e85fcc7093))
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `8.1.0` to `8.1.1`
+
 ## [0.12.3](https://github.com/twinh/wei/compare/v0.12.2...v0.12.3) (2022-04-30)
 
 
