@@ -122,4 +122,26 @@ class NearCache extends BaseCache
 
         return $result1 && $result2;
     }
+
+    /**
+     * Return the front cache object
+     *
+     * @return BaseCache
+     * @svc
+     */
+    protected function getFront(): BaseCache
+    {
+        return $this->front;
+    }
+
+    /**
+     * Return the back cache object
+     *
+     * @return BaseCache
+     * @svc
+     */
+    protected function getBack(): BaseCache
+    {
+        return $this->back;
+    }
 }

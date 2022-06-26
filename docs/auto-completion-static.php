@@ -2998,6 +2998,26 @@ class NearCache
     }
 
     /**
+     * Return the front cache object
+     *
+     * @return BaseCache
+     * @see NearCache::getFront
+     */
+    public static function getFront(): BaseCache
+    {
+    }
+
+    /**
+     * Return the back cache object
+     *
+     * @return BaseCache
+     * @see NearCache::getBack
+     */
+    public static function getBack(): BaseCache
+    {
+    }
+
+    /**
      * Retrieve an item
      *
      * ```php
@@ -8801,6 +8821,26 @@ if (0) {
          * @see NearCache::clear
          */
         public function clear()
+        {
+        }
+
+        /**
+         * Return the front cache object
+         *
+         * @return BaseCache
+         * @see NearCache::getFront
+         */
+        public function getFront(): BaseCache
+        {
+        }
+
+        /**
+         * Return the back cache object
+         *
+         * @return BaseCache
+         * @see NearCache::getBack
+         */
+        public function getBack(): BaseCache
         {
         }
 
