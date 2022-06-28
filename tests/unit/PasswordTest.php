@@ -3,10 +3,9 @@
 namespace WeiTest;
 
 /**
- * @property \Wei\Password $password
- * @link https://github.com/ircmaxell/password_compat/blob/master/test/Unit
- *
  * @internal
+ * @mixin \PasswordMixin
+ * @link https://github.com/ircmaxell/password_compat/blob/master/test/Unit
  */
 final class PasswordTest extends TestCase
 {
@@ -67,5 +66,19 @@ final class PasswordTest extends TestCase
                 ['algo' => \PASSWORD_BCRYPT, 'algoName' => 'bcrypt', 'options' => ['cost' => 10]],
             ],
         ];
+    }
+
+    public function testNeedRehash()
+    {
+        $hash = $this->password->hash('123456');
+        $result = $this->password->needsRehash($hash);
+        $this->assertFalse($result);
+    }
+
+    public function testVerify()
+    {
+        $hash = $this->password->hash('123456');
+        $this->assertTrue($this->password->verify('123456', $hash));
+        $this->assertFalse($this->password->verify('test', $hash));
     }
 }
