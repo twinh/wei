@@ -10,4 +10,10 @@ return [
     'redis' => [
         'port' => getenv('REDIS_PORT'),
     ],
+    'nearCache' => [
+        'providers' => [
+            'front' => 'arrayCache',
+            'back' => 'cache',
+        ],
+    ],
 ];
