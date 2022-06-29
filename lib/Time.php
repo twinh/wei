@@ -32,6 +32,7 @@ class Time extends Base
 
     /**
      * @return int
+     * @svc
      */
     protected function timestamp()
     {

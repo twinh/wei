@@ -4044,6 +4044,14 @@ class Time
     public static function today()
     {
     }
+
+    /**
+     * @return int
+     * @see Time::timestamp
+     */
+    public static function timestamp()
+    {
+    }
 }
 
 class Ua
@@ -9869,6 +9877,14 @@ if (0) {
          * @see Time::today
          */
         public function today()
+        {
+        }
+
+        /**
+         * @return int
+         * @see Time::timestamp
+         */
+        public function timestamp()
         {
         }
     }
