@@ -10,6 +10,13 @@ use Wei\NearCache;
  */
 final class NearCacheTest extends CacheTestCase
 {
+    protected function tearDown(): void
+    {
+        $this->object->clear();
+
+        parent::tearDown();
+    }
+
     public function testGetFromFront()
     {
         $time = time();
