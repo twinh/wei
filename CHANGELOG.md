@@ -299,7 +299,7 @@
 * **V:** 校验规则传入关联数组作为选项无效 ([b62cd31](https://github.com/twinh/wei/commit/b62cd3156984f1def094bb5f7626899c39d46e2d))
 * **Validate:** `hasField` 判断数据错误 ([298a614](https://github.com/twinh/wei/commit/298a614ada7fef6123a7ba97d0d55a8bd25597f8))
 * **Validate:** data 传入闭包抛出 Error : Closure object cannot have properties ([d6d6989](https://github.com/twinh/wei/commit/d6d698974ba249b7337f8bb69d2289ea9cf410f6))
-* **Validate:** PHP8 method_exists 需传入对象或类名字符串 ([174ca14](https://github.com/twinh/wei/commit/174ca140be91293855ce1b3c00c87391d19d0e75)), closes [#1](https://github.com/twinh/miaoxing/issues/1)
+* **Validate:** PHP8 method_exists 需传入对象或类名字符串 ([174ca14](https://github.com/twinh/wei/commit/174ca140be91293855ce1b3c00c87391d19d0e75)), closes [#1](https://github.com/miaoxing/miaoxing/issues/1)
 * **Validator:** 指定 subValidators 的默认值为数组 ([1094631](https://github.com/twinh/wei/commit/109463144f9e47b8651adc9993dfed6e22602a69))
 * **Validator:** 指定了 `countByChars` 选项后，如果校验的值不是字符串值，则返回失败 ([31980b3](https://github.com/twinh/wei/commit/31980b36e241ef99415b08c2f92428f73e91b62b))
 * 更正生成 Migration 的基类的命名空间 ([b124bfa](https://github.com/twinh/wei/commit/b124bfa008ce6b11234e44d82b8517a1785b06b0))
