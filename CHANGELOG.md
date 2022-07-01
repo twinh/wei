@@ -1,3 +1,18 @@
+## [0.12.5](https://github.com/twinh/wei/compare/v0.12.4...v0.12.5) (2022-07-01)
+
+
+### Features
+
+* **NearCache:** 增加 `getFront` 和 `getBack` 方法 ([07d73fe](https://github.com/twinh/wei/commit/07d73fea1d3e2b9cd49ae98cd3f55dcfe9e56f45))
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `8.1.1` to `8.1.2`
+
 ## [0.12.4](https://github.com/twinh/wei/compare/v0.12.3...v0.12.4) (2022-06-01)
 
 
