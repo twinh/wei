@@ -1,3 +1,10 @@
+## [0.12.6](https://github.com/twinh/wei/compare/v0.12.5...v0.12.6) (2022-07-02)
+
+
+### Bug Fixes
+
+* 解决 composer 2.2+ 默认不启用插件导致安装路径错误 ([428729a](https://github.com/twinh/wei/commit/428729a5b2a0c6c1f85fe2f0ef08aa2f854661f6))
+
 ## [0.12.5](https://github.com/twinh/wei/compare/v0.12.4...v0.12.5) (2022-07-01)
 
 
