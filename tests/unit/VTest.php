@@ -485,9 +485,9 @@ final class VTest extends TestCase
             ::key('configs')->children(
                 V
                     ::key('key1', 'name1')->minLength(3)
-                        ->key('key2', 'name2')->minLength(2)
+                    ->key('key2', 'name2')->minLength(2)
             )
-                ->check([
+            ->check([
                 'notChecked' => true,
                 'configs' => [
                     'notChecked' => true,
@@ -509,9 +509,9 @@ final class VTest extends TestCase
             ::key('products', 'Products')->each(
                 V
                     ::key('name', 'Name')->maxLength(5)
-                        ->key('stock', 'Stock')->greaterThanOrEqual(0)
+                    ->key('stock', 'Stock')->greaterThanOrEqual(0)
             )
-                ->check([
+            ->check([
                 'notChecked' => true,
                 'products' => [
                     [
@@ -549,9 +549,9 @@ final class VTest extends TestCase
             ::key('products')->each(
                 V
                     ::key('name')->maxLength(5)
-                        ->key('stock')->greaterThanOrEqual(0)
+                    ->key('stock')->greaterThanOrEqual(0)
             )
-                ->check([
+            ->check([
                 'notChecked' => true,
                 'products' => [
                     'key1' => [
@@ -587,9 +587,9 @@ final class VTest extends TestCase
             ::key('products')->each(
                 V
                     ::key('name')->maxLength(5)
-                        ->key('stock')->greaterThanOrEqual(0)
+                    ->key('stock')->greaterThanOrEqual(0)
             )->notEmpty()
-                ->check([
+            ->check([
                 'notChecked' => true,
                 'products' => [
                     [
@@ -675,6 +675,18 @@ final class VTest extends TestCase
         ]);
 
         $this->assertRetErr($ret, 'Your email must be valid email address');
+    }
+
+    public function testCheckOneSuc()
+    {
+        $ret = V::label('Your mobile')->mobileCn()->check('13800138000');
+        $this->assertRetSuc($ret);
+    }
+
+    public function testCheckOneErr()
+    {
+        $ret = V::label('Your mobile')->mobileCn()->check('test');
+        $this->assertRetErr($ret, 'Your mobile must be valid mobile number');
     }
 
     protected function checkModel(bool $isNew, $data)
