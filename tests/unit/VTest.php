@@ -651,6 +651,32 @@ final class VTest extends TestCase
         $this->assertRetSuc($ret);
     }
 
+    public function testBasicTypeRule()
+    {
+        $v = V::new();
+
+        $v->tinyChar('name', 'Name', 3);
+
+        $ret = $v->check([
+            'name' => 'te',
+        ]);
+
+        $this->assertRetErr($ret, 'Name must be at least 3 character(s)');
+    }
+
+    public function testNormalType()
+    {
+        $v = V::new();
+
+        $v->email('email', 'Your email');
+
+        $ret = $v->check([
+            'email' => 'test',
+        ]);
+
+        $this->assertRetErr($ret, 'Your email must be valid email address');
+    }
+
     protected function checkModel(bool $isNew, $data)
     {
         return V::key('name', 'Name')->required($isNew)->notBlank()
