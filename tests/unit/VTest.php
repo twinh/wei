@@ -29,18 +29,6 @@ final class VTest extends TestCase
         $this->assertRetSuc($ret);
     }
 
-    public function testSplitMode()
-    {
-        $v = V::new();
-        $v->key('email')->email();
-        $v->key('name')->minLength(1);
-        $ret = $v->check([
-            'email' => 'test@email.com',
-            'name' => '123',
-        ]);
-        $this->assertRetSuc($ret);
-    }
-
     public function testCheckFail()
     {
         $v = V::new();
@@ -265,6 +253,10 @@ final class VTest extends TestCase
                 'name' => 'Name',
             ],
             'fields' => [],
+            'messages' => [
+                'email' => [],
+                'name' => [],
+            ],
         ], $v->getOptions());
     }
 
@@ -695,6 +687,36 @@ final class VTest extends TestCase
     {
         $ret = V::label('Your mobile')->mobileCn()->check('test');
         $this->assertRetErr($ret, 'Your mobile must be valid mobile number');
+    }
+
+    public function testCheckObjectSuc()
+    {
+        $v = V::new();
+        $v->key('email')->email();
+        $v->key('name')->minLength(1);
+        $ret = $v->check([
+            'email' => 'test@email.com',
+            'name' => '123',
+        ]);
+        $this->assertRetSuc($ret);
+    }
+
+    public function testCheckObjectErr()
+    {
+        $v = V::new();
+        $v->email('email', 'This email');
+        $v->minLength('name', 'This name', 3);
+        $ret = $v->check([
+            'email' => 'test',
+            'name' => '1',
+        ]);
+        $this->assertRetErr($ret, 'This email must be valid email address');
+
+        $ret = $v->check([
+            'email' => 'test@example.com',
+            'name' => '1',
+        ]);
+        $this->assertRetErr($ret, 'This name must have a length greater than 3');
     }
 
     protected function checkModel(bool $isNew, $data)
