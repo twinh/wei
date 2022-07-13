@@ -62,16 +62,18 @@ final class VTest extends TestCase
 
     public function testMessage()
     {
-        $ret = V::key('name', '名称')->message('required', '请填写%name%')
-            ->check([]);
+        $v = V::new();
+        $v->key('name', '名称')->message('required', '请填写%name%');
+        $ret = $v->check([]);
 
         $this->assertRetErr($ret, '请填写名称', -1);
     }
 
     public function testMessageWithoutRule()
     {
-        $ret = V::key('name', '名称')->required()->message('请填写%name%')
-            ->check([]);
+        $v = V::new();
+        $v->key('name', '名称')->required()->message('请填写%name%');
+        $ret = $v->check([]);
 
         $this->assertRetErr($ret, '请填写名称', -1);
     }
