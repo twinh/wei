@@ -295,20 +295,6 @@ final class VTest extends TestCase
         V::char('name');
     }
 
-    public function testArrayKey2()
-    {
-        $ret = V::key(['user', 'primary', 'email'], '测试')->email()
-            ->check([
-                'user' => [
-                    'primary' => [
-                        'email' => 'test@example.com',
-                    ],
-                ],
-            ]);
-
-        $this->assertRetSuc($ret);
-    }
-
     public function testArray()
     {
         $validator = V::key('name', 'Name')
@@ -734,6 +720,48 @@ final class VTest extends TestCase
             'name' => 'test',
         ]);
         $this->assertRetErr($ret, 'The email must be valid email address');
+    }
+
+    public function testCheckDeepNestedObjectSuc()
+    {
+        $v = V::new();
+        $v->email(['user', 'primary', 'email'], 'The email');
+        $v->minLength('name', 'This name', 3);
+
+        $ret = $v->check([
+            'user' => [
+                'primary' => [
+                    'email' => 'test@example.com',
+                ],
+            ],
+            'name' => 'test',
+        ]);
+        $this->assertRetSuc($ret);
+    }
+
+    public function testCheckDeepNestedObjectErr()
+    {
+        $v = V::new();
+        $v->email(['user', 'primary', 'email'], 'The email');
+        $v->minLength('name', 'This name', 3);
+
+        $ret = $v->check([
+            'user' => [
+                'primary' => [
+                    'email' => 'test',
+                ],
+            ],
+            'name' => 'test',
+        ]);
+        $this->assertRetErr($ret, 'The email must be valid email address');
+
+        $ret = $v->check([
+            'user' => [
+                'primary' => 'test',
+            ],
+            'name' => 'test',
+        ]);
+        $this->assertRetErr($ret, 'The email is required');
     }
 
     protected function checkModel(bool $isNew, $data)
