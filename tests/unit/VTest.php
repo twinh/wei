@@ -43,8 +43,9 @@ final class VTest extends TestCase
 
     public function testCheckFail()
     {
-        $ret = V::key('question', 'Question')
-            ->check([]);
+        $v = V::new();
+        $v->key('question', 'Question');
+        $ret = $v->check([]);
 
         $this->assertRetErr($ret, 'Question is required', -1);
     }
@@ -202,18 +203,22 @@ final class VTest extends TestCase
 
     public function testOptions()
     {
-        $ret = V::key('name')->maxLength([
+        $v = V::new();
+        $v->key('name')->maxLength([
             'max' => 1,
             'countByChars' => false,
-        ])->check([
+        ]);
+        $ret = $v->check([
             'name' => '我',
         ]);
         $this->assertRetErr($ret, 'This value must have a length lower than 1');
 
-        $ret = V::key('name')->maxLength([
+        $v = V::new();
+        $v->key('name')->maxLength([
             'max' => 1,
             'countByChars' => true,
-        ])->check([
+        ]);
+        $ret = $v->check([
             'name' => '我',
         ]);
         $this->assertRetSuc($ret);
@@ -237,8 +242,9 @@ final class VTest extends TestCase
 
     public function testGetOptions()
     {
-        $v = V::key('email', 'Email')->email()
-            ->key('name', 'Name')->length(['max' => 1, 'countByChars' => true]);
+        $v = V::new();
+        $v->key('email', 'Email')->email();
+        $v->key('name', 'Name')->length(['max' => 1, 'countByChars' => true]);
         $this->assertSame([
             'data' => [],
             'rules' => [
@@ -691,7 +697,8 @@ final class VTest extends TestCase
 
     protected function checkModel(bool $isNew, $data)
     {
-        return V::key('name', 'Name')->required($isNew)->notBlank()
-            ->check($data);
+        $v = V::new();
+        $v->key('name', 'Name')->required($isNew)->notBlank();
+        return $v->check($data);
     }
 }
