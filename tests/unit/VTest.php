@@ -295,18 +295,6 @@ final class VTest extends TestCase
         V::char('name');
     }
 
-    public function testArrayKey()
-    {
-        $ret = V::key(['user', 'email'], '测试')->email()
-            ->check([
-                'user' => [
-                    'email' => 'test@example.com',
-                ],
-            ]);
-
-        $this->assertRetSuc($ret);
-    }
-
     public function testArrayKey2()
     {
         $ret = V::key(['user', 'primary', 'email'], '测试')->email()
@@ -717,6 +705,35 @@ final class VTest extends TestCase
             'name' => '1',
         ]);
         $this->assertRetErr($ret, 'This name must have a length greater than 3');
+    }
+
+    public function testCheckNestedObjectSuc()
+    {
+        $v = V::new();
+        $v->email(['user', 'email'], 'The email');
+        $v->minLength('name', 'This name', 3);
+        $ret = $v->check([
+            'user' => [
+                'email' => 'test@example.com',
+            ],
+            'name' => 'test',
+        ]);
+        $this->assertRetSuc($ret);
+    }
+
+    public function testCheckNestedObjectErr()
+    {
+        $v = V::new();
+        $v->email(['user', 'email'], 'The email');
+        $v->minLength('name', 'This name', 3);
+
+        $ret = $v->check([
+            'user' => [
+                'email' => 'test',
+            ],
+            'name' => 'test',
+        ]);
+        $this->assertRetErr($ret, 'The email must be valid email address');
     }
 
     protected function checkModel(bool $isNew, $data)
