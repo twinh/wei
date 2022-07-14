@@ -26,48 +26,46 @@ final class IsEachTest extends BaseValidatorTestCase
 
     public function testEachSuc()
     {
-        $ret = V
-            ::key('products')->each(
-                V
-                    ::key('name')->maxLength(5)
-                        ->key('stock')->greaterThanOrEqual(0)
-            )
-                ->check([
-                'products' => [
-                    [
-                        'name' => 'name',
-                        'stock' => 1,
-                    ],
-                    [
-                        'name' => 'name',
-                        'stock' => 1,
-                    ],
+        $v = V::new();
+        $v->key('products')->each(function (V $v) {
+            $v->key('name')->maxLength(5);
+            $v->key('stock')->greaterThanOrEqual(0);
+        });
+        $ret = $v->check([
+            'products' => [
+                [
+                    'name' => 'name',
+                    'stock' => 1,
                 ],
-            ]);
+                [
+                    'name' => 'name',
+                    'stock' => 1,
+                ],
+            ],
+        ]);
 
         $this->assertRetSuc($ret);
     }
 
     public function testEach()
     {
-        $ret = V
-            ::key('users', '用户')->each(
-                V
-                    ::string('name', '姓名')->minLength(3)
-                        ->string('email', '邮箱')->email()
-            )
-                ->check([
-                'users' => [
-                    [
-                        'name' => 'test',
-                        'email' => 'test@example.com',
-                    ],
-                    [
-                        'name' => 't',
-                        'email' => 't',
-                    ],
+        $v = V::new();
+        $v->key('users', '用户')->each(function (V $v) {
+            $v->string('name', '姓名')->minLength(3);
+            $v->string('email', '邮箱')->email();
+        });
+        $ret = $v->check([
+            'users' => [
+                [
+                    'name' => 'test',
+                    'email' => 'test@example.com',
                 ],
-            ]);
+                [
+                    'name' => 't',
+                    'email' => 't',
+                ],
+            ],
+        ]);
         $this->assertRetErr($ret, 'The 2nd 用户\'s 姓名 must have a length greater than 3');
     }
 
@@ -78,36 +76,36 @@ final class IsEachTest extends BaseValidatorTestCase
     {
         wei()->t->setLocale($lang);
 
-        $ret = V
-            ::key('users', '用户')->each(
-                V::array('emails', '邮箱')->each(
-                    V::string('address', '地址')->email()
-                )
-            )
-                ->check([
-                'users' => [
-                    [
-                        'emails' => [
-                            [
-                                'address' => 'test@example.com',
-                            ],
-                        ],
-                    ],
-                    [
-                        'emails' => [
-                            [
-                                'address' => 'test@example.com',
-                            ],
-                            [
-                                'address' => 'test@example.com',
-                            ],
-                            [
-                                'address' => 'test',
-                            ],
+        $v = V::new();
+        $v->key('users', '用户')->each(function (V $v) {
+            $v->array('emails', '邮箱')->each(function (V $v) {
+                $v->string('address', '地址')->email();
+            });
+        });
+        $ret = $v->check([
+            'users' => [
+                [
+                    'emails' => [
+                        [
+                            'address' => 'test@example.com',
                         ],
                     ],
                 ],
-            ]);
+                [
+                    'emails' => [
+                        [
+                            'address' => 'test@example.com',
+                        ],
+                        [
+                            'address' => 'test@example.com',
+                        ],
+                        [
+                            'address' => 'test',
+                        ],
+                    ],
+                ],
+            ],
+        ]);
 
         $this->assertRetErr($ret, $message);
     }
@@ -122,34 +120,53 @@ final class IsEachTest extends BaseValidatorTestCase
 
     public function testEachCollSuc()
     {
-        $ret = V
-            ::each(
-                V
-                    ::key('name')->maxLength(5)
-                        ->key('stock')->greaterThanOrEqual(0)
-            )
-                ->check([
-                [
-                    'name' => 'name',
-                    'stock' => 1,
-                ],
-                [
-                    'name' => 'name',
-                    'stock' => 1,
-                ],
-            ]);
+        $v = V::label('用户')->each(function (V $v) {
+            $v->key('name')->maxLength(5);
+            $v->key('stock')->greaterThanOrEqual(0);
+        });
+        $ret = $v->check([
+            [
+                'name' => 'name',
+                'stock' => 1,
+            ],
+            [
+                'name' => 'name',
+                'stock' => 1,
+            ],
+        ]);
 
         $this->assertRetSuc($ret);
     }
 
     public function testEachCollErr()
     {
-        $ret = V::label('用户')->each(
-            V
-                ::string('name', '姓名')->minLength(3)
-                    ->string('email', '邮箱')->email()
-        )
-            ->check([
+        $v = V::label('用户')->each(function (V $v) {
+            $v->string('name', '姓名')->minLength(3);
+            $v->string('email', '邮箱')->email();
+        });
+        $ret = $v->check([
+            [
+                'name' => 'test',
+                'email' => 'test@example.com',
+            ],
+            [
+                'name' => 't',
+                'email' => 't',
+            ],
+        ]);
+        $this->assertRetErr($ret, 'The 2nd 用户\'s 姓名 must have a length greater than 3');
+    }
+
+    public function testVParameter()
+    {
+        $eachV = V::new();
+        $eachV->string('name', '姓名')->minLength(3);
+        $eachV->string('email', '邮箱')->email();
+
+        $v = V::new();
+        $v->key('users', '用户')->each($eachV);
+        $ret = $v->check([
+            'users' => [
                 [
                     'name' => 'test',
                     'email' => 'test@example.com',
@@ -158,40 +175,19 @@ final class IsEachTest extends BaseValidatorTestCase
                     'name' => 't',
                     'email' => 't',
                 ],
-            ]);
-        $this->assertRetErr($ret, 'The 2nd 用户\'s 姓名 must have a length greater than 3');
-    }
-
-    public function testCallableParameter()
-    {
-        $ret = V
-            ::key('users', '用户')->each(function (V $v) {
-                $v->string('name', '姓名')->minLength(3)
-                    ->string('email', '邮箱')->email();
-            })
-                ->check([
-                'users' => [
-                    [
-                        'name' => 'test',
-                        'email' => 'test@example.com',
-                    ],
-                    [
-                        'name' => 't',
-                        'email' => 't',
-                    ],
-                ],
-            ]);
+            ],
+        ]);
         $this->assertRetErr($ret, 'The 2nd 用户\'s 姓名 must have a length greater than 3');
     }
 
     public function testNotArray()
     {
-        $ret = V
-            ::key('users', '用户')->each(
-                V
-                    ::string('name', '姓名')->minLength(3)
-                        ->string('email', '邮箱')->email()
-            )->check(['users' => null]);
+        $v = V::new();
+        $v->key('users', '用户')->each(function (V $v) {
+            $v->string('name', '姓名')->minLength(3);
+            $v->string('email', '邮箱')->email();
+        });
+        $ret = $v->check(['users' => null]);
         $this->assertRetErr($ret, '用户 must be an array');
     }
 
@@ -206,24 +202,25 @@ final class IsEachTest extends BaseValidatorTestCase
     public function testCallbackCreateNewValidator()
     {
         $validators = [];
-        $ret = V
-            ::key('users', '用户')->each(function (V $v) use (&$validators) {
-                $validators[] = $v;
-                $v->string('name', '姓名')->minLength(3)
-                    ->string('email', '邮箱')->email();
-            })
-                ->check([
-                'users' => [
-                    [
-                        'name' => 'test',
-                        'email' => 'test@example.com',
-                    ],
-                    [
-                        'name' => 't',
-                        'email' => 't',
-                    ],
+
+        $v = V::new();
+        $v->key('users', '用户')->each(function (V $v) use (&$validators) {
+            $validators[] = $v;
+            $v->string('name', '姓名')->minLength(3);
+            $v->string('email', '邮箱')->email();
+        });
+        $ret = $v->check([
+            'users' => [
+                [
+                    'name' => 'test',
+                    'email' => 'test@example.com',
                 ],
-            ]);
+                [
+                    'name' => 't',
+                    'email' => 't',
+                ],
+            ],
+        ]);
         $this->assertRetErr($ret, 'The 2nd 用户\'s 姓名 must have a length greater than 3');
         $this->assertNotSame($validators[0], $validators[1]);
     }
@@ -240,13 +237,13 @@ final class IsEachTest extends BaseValidatorTestCase
         ];
 
         $validateData = [];
-        $ret = V
-            ::key('users', '用户')->each(function (V $v) use (&$validateData) {
-                $validateData[] = $v->getData();
-                $v->string('name', '姓名')->minLength(3)
-                    ->string('email', '邮箱')->email();
-            })
-                ->check(['users' => $data]);
+        $v = V::new();
+        $v->key('users', '用户')->each(function (V $v) use (&$validateData) {
+            $validateData[] = $v->getData();
+            $v->string('name', '姓名')->minLength(3);
+            $v->string('email', '邮箱')->email();
+        });
+        $ret = $v->check(['users' => $data]);
         $this->assertRetErr($ret, 'The 2nd 用户\'s 姓名 is required');
         $this->assertSame($validateData, $data);
     }
@@ -254,24 +251,25 @@ final class IsEachTest extends BaseValidatorTestCase
     public function testCallbackKeys()
     {
         $keys = [];
-        $ret = V
-            ::key('users', '用户')->each(function (V $v, IsEach $isEach) use (&$keys) {
-                $keys[] = $isEach->getCurKey();
-                $v->string('name', '姓名')->minLength(3)
-                    ->string('email', '邮箱')->email();
-            })
-                ->check([
-                'users' => [
-                    [
-                        'name' => 'test',
-                        'email' => 'test@example.com',
-                    ],
-                    [
-                        'name' => 't',
-                        'email' => 't',
-                    ],
+
+        $v = V::new();
+        $v->key('users', '用户')->each(function (V $v, IsEach $isEach) use (&$keys) {
+            $keys[] = $isEach->getCurKey();
+            $v->string('name', '姓名')->minLength(3);
+            $v->string('email', '邮箱')->email();
+        });
+        $ret = $v->check([
+            'users' => [
+                [
+                    'name' => 'test',
+                    'email' => 'test@example.com',
                 ],
-            ]);
+                [
+                    'name' => 't',
+                    'email' => 't',
+                ],
+            ],
+        ]);
         $this->assertRetErr($ret, 'The 2nd 用户\'s 姓名 must have a length greater than 3');
         $this->assertSame($keys, [0, 1]);
     }
