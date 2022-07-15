@@ -20,7 +20,8 @@ final class VTest extends TestCase
 
     public function testChainMode()
     {
-        $ret = V::key('email')->email()
+        $v = V::new();
+        $ret = $v->key('email')->email()
             ->key('name')->minLength(1)
             ->check([
                 'email' => 'test@email.com',
@@ -40,10 +41,11 @@ final class VTest extends TestCase
 
     public function testCheckPass()
     {
-        $ret = V::key('question', 'Question')
-            ->check([
-                'question' => '1',
-            ]);
+        $v = V::new();
+        $v->key('question', 'Question');
+        $ret = $v->check([
+            'question' => 1,
+        ]);
 
         $this->assertRetSuc($ret);
     }
@@ -68,32 +70,22 @@ final class VTest extends TestCase
 
     public function testCallback()
     {
-        $ret = V::key('name')->callback(function ($name) {
+        $ret = V::callback(function ($name) {
             return 'twin' !== $name;
         })
-            ->check(['name' => 'twin']);
+            ->check('twin');
         $this->assertRetErr($ret, 'This value is not valid', -1);
 
-        $ret = V::key('name')->callback(function ($name) {
+        $ret = V::callback(function ($name) {
             return 'twin' !== $name;
         })
-            ->check(['name' => 'hi']);
+            ->check('hi');
         $this->assertRetSuc($ret);
-    }
-
-    public function testMobileCn()
-    {
-        $ret = V::key('mobile', 'Mobile')->mobileCn()
-            ->check([
-                'mobile' => '123',
-            ]);
-        $this->assertRetErr($ret, 'Mobile must be valid mobile number', -1);
     }
 
     public function testValidate()
     {
-        $validator = V::key('mobile')->mobileCn()
-            ->validate(['mobile' => '123']);
+        $validator = V::mobileCn()->validate('123');
 
         $this->assertInstanceOf(Validate::class, $validator);
         $this->assertFalse($validator->isValid());
@@ -101,9 +93,7 @@ final class VTest extends TestCase
 
     public function testSetDataValidate()
     {
-        $validator = V::key('email')
-            ->setData(['email' => 'test@test.com'])
-            ->validate();
+        $validator = V::email()->setData('test@test.com')->validate();
 
         $this->assertInstanceOf(Validate::class, $validator);
         $this->assertTrue($validator->isValid());
@@ -111,17 +101,16 @@ final class VTest extends TestCase
 
     public function testIsValid()
     {
-        $result = V::key('mobile')->mobileCn()
-            ->isValid(['mobile' => '123']);
-
+        $result = V::mobileCn()->isValid('123');
         $this->assertFalse($result);
+
+        $result = V::mobileCn()->isValid('13800138000');
+        $this->assertTrue($result);
     }
 
     public function testSetDataIsValid()
     {
-        $result = V::key('email')
-            ->setData(['email' => 'test@test.com'])
-            ->isValid();
+        $result = V::email()->setData('test@test.com')->isValid();
 
         $this->assertTrue($result);
     }
@@ -159,12 +148,7 @@ final class VTest extends TestCase
 
     public function testCreateNewInstance()
     {
-        $this->assertNotSame(V::key('test'), V::key('test'));
-    }
-
-    public function testInvoke()
-    {
-        $this->assertNotSame(wei()->v(), wei()->v());
+        $this->assertNotSame(V::label('test'), V::label('test'));
     }
 
     public function testCheckBeforeModelCreate()
@@ -297,16 +281,17 @@ final class VTest extends TestCase
 
     public function testArray()
     {
-        $validator = V::key('name', 'Name')
-            ->key(['user', 'sex'])->in(['array' => [0, 1, 2]])
-            ->key(['user', 'email'], 'Email')->email()->message('Invalid %name%')
-            ->validate([
-                'name' => 'test',
-                'user' => [
-                    'sex' => 1,
-                    'email' => 'test',
-                ],
-            ]);
+        $v = V::new();
+        $v->key('name', 'Name');
+        $v->key(['user', 'sex'])->in(['array' => [0, 1, 2]]);
+        $v->key(['user', 'email'], 'Email')->email()->message('Invalid %name%');
+        $validator = $v->validate([
+            'name' => 'test',
+            'user' => [
+                'sex' => 1,
+                'email' => 'test',
+            ],
+        ]);
 
         $this->assertSame('email', $validator->getCurrentRule());
         $this->assertSame(['user', 'email'], $validator->getCurrentField());
@@ -374,45 +359,47 @@ final class VTest extends TestCase
 
     public function testAllowEmptyWithEmptyString()
     {
-        $ret = V::key('email')->allowEmpty()->email()->check(['email' => '']);
+        $ret = V::allowEmpty()->email()->check('');
         $this->assertRetSuc($ret);
     }
 
     public function testAllowEmptyWithNull()
     {
-        $ret = V::key('email')->allowEmpty()->email()->check(['email' => null]);
+        $ret = V::allowEmpty()->email()->check(null);
         $this->assertRetSuc($ret);
     }
 
     public function testAllowEmptyWithValidData()
     {
-        $ret = V::key('email')->email()->check(['email' => 'test@example.com']);
+        $ret = V::email()->check('test@example.com');
         $this->assertRetSuc($ret);
 
-        $ret = V::key('email')->allowEmpty()->email()->check(['email' => 'test@example.com']);
+        $ret = V::allowEmpty()->email()->check('test@example.com');
         $this->assertRetSuc($ret);
     }
 
     public function testSkipArray()
     {
-        $ret = V::key('email')->allowEmpty()->email()
-            ->time('send_at', 'Send time')->allowEmpty()->gt('2020-01-01')
-            ->check([
-                'email' => '',
-                'send_at' => null,
-            ]);
+        $v = V::new();
+        $v->key('email')->allowEmpty()->email();
+        $v->time('send_at', 'Send time')->allowEmpty()->gt('2020-01-01');
+        $ret = $v->check([
+            'email' => '',
+            'send_at' => null,
+        ]);
         $this->assertRetSuc($ret);
     }
 
     public function testGetValidDataSuc()
     {
-        $ret = V::key('email')->email()
-            ->key('name')->minLength(1)
-            ->check([
-                'email' => 'test@email.com',
-                'name' => '123',
-                'notChecked' => true,
-            ]);
+        $v = V::new();
+        $v->key('email')->email();
+        $v->key('name')->minLength(1);
+        $ret = $v->check([
+            'email' => 'test@email.com',
+            'name' => '123',
+            'notChecked' => true,
+        ]);
         $this->assertSame([
             'email' => 'test@email.com',
             'name' => '123',
@@ -421,8 +408,9 @@ final class VTest extends TestCase
 
     public function testGetValidDataErr()
     {
-        $v = V::key('email')->email()
-            ->key('name')->minLength(1);
+        $v = V::new();
+        $v->key('email')->email();
+        $v->key('name')->minLength(1);
 
         $ret = $v->check([
             'email' => 'test@email.com',
@@ -437,14 +425,15 @@ final class VTest extends TestCase
 
     public function testGetValidDataWithArrayKey()
     {
-        $ret = V::key(['user', 'email'], '测试')->email()
-            ->check([
+        $v = V::new();
+        $v->key(['user', 'email'], '测试')->email();
+        $ret = $v->check([
+            'notChecked' => true,
+            'user' => [
+                'email' => 'test@example.com',
                 'notChecked' => true,
-                'user' => [
-                    'email' => 'test@example.com',
-                    'notChecked' => true,
-                ],
-            ]);
+            ],
+        ]);
 
         $this->assertSame([
             'user' => [
@@ -455,20 +444,21 @@ final class VTest extends TestCase
 
     public function testGetValidDataWithChildren()
     {
-        $ret = V
-            ::key('configs')->children(
-                V
-                    ::key('key1', 'name1')->minLength(3)
-                    ->key('key2', 'name2')->minLength(2)
-            )
-            ->check([
+        $v = V::new();
+        $v->key('configs')->children(call_user_func(function () {
+            $v = V::new();
+            $v->key('key1', 'name1')->minLength(3);
+            $v->key('key2', 'name2')->minLength(2);
+            return $v;
+        }));
+        $ret = $v->check([
+            'notChecked' => true,
+            'configs' => [
                 'notChecked' => true,
-                'configs' => [
-                    'notChecked' => true,
-                    'key1' => '123',
-                    'key2' => '22',
-                ],
-            ]);
+                'key1' => '123',
+                'key2' => '22',
+            ],
+        ]);
         $this->assertSame([
             'configs' => [
                 'key1' => '123',
@@ -479,26 +469,25 @@ final class VTest extends TestCase
 
     public function testGetValidDataWithEach()
     {
-        $ret = V
-            ::key('products', 'Products')->each(
-                V
-                    ::key('name', 'Name')->maxLength(5)
-                    ->key('stock', 'Stock')->greaterThanOrEqual(0)
-            )
-            ->check([
-                'notChecked' => true,
-                'products' => [
-                    [
-                        'name' => 'name',
-                        'stock' => 1,
-                        'notChecked' => true,
-                    ],
-                    [
-                        'name' => 'name',
-                        'stock' => 1,
-                    ],
+        $v = V::new();
+        $v->key('products', 'Products')->each(function (V $v) {
+            $v->key('name', 'Name')->maxLength(5);
+            $v->key('stock', 'Stock')->greaterThanOrEqual(0);
+        });
+        $ret = $v->check([
+            'notChecked' => true,
+            'products' => [
+                [
+                    'name' => 'name',
+                    'stock' => 1,
+                    'notChecked' => true,
                 ],
-            ]);
+                [
+                    'name' => 'name',
+                    'stock' => 1,
+                ],
+            ],
+        ]);
         $this->assertRetSuc($ret);
 
         $this->assertSame([
@@ -519,26 +508,25 @@ final class VTest extends TestCase
 
     public function testGetValidDataWithEachKeepKeys()
     {
-        $ret = V
-            ::key('products')->each(
-                V
-                    ::key('name')->maxLength(5)
-                    ->key('stock')->greaterThanOrEqual(0)
-            )
-            ->check([
-                'notChecked' => true,
-                'products' => [
-                    'key1' => [
-                        'name' => 'name',
-                        'stock' => 1,
-                        'notChecked' => true,
-                    ],
-                    'key2' => [
-                        'name' => 'name',
-                        'stock' => 1,
-                    ],
+        $v = V::new();
+        $v->key('products')->each(function (V $v) {
+            $v->key('name')->maxLength(5);
+            $v->key('stock')->greaterThanOrEqual(0);
+        });
+        $ret = $v->check([
+            'notChecked' => true,
+            'products' => [
+                'key1' => [
+                    'name' => 'name',
+                    'stock' => 1,
+                    'notChecked' => true,
                 ],
-            ]);
+                'key2' => [
+                    'name' => 'name',
+                    'stock' => 1,
+                ],
+            ],
+        ]);
         $this->assertSame([
             'products' => [
                 'key1' => [
@@ -557,13 +545,12 @@ final class VTest extends TestCase
 
     public function testGetValidDataWithEachAndOtherRule()
     {
-        $ret = V
-            ::key('products')->each(
-                V
-                    ::key('name')->maxLength(5)
-                    ->key('stock')->greaterThanOrEqual(0)
-            )->notEmpty()
-            ->check([
+        $v = V::new();
+        $v->key('products')->each(function (V $v) {
+            $v->key('name')->maxLength(5);
+                $v->key('stock')->greaterThanOrEqual(0);
+        })->notEmpty();
+            $ret = $v->check([
                 'notChecked' => true,
                 'products' => [
                     [
@@ -596,9 +583,10 @@ final class VTest extends TestCase
 
     public function testGetValidDataExcludeOptionalKey()
     {
-        $ret = V::key('email')->email()->optional()
-            ->key('name')->minLength(1)
-            ->check([
+        $v = V::new();
+        $v->key('email')->email()->optional();
+            $v->key('name')->minLength(1);
+            $ret = $v->check([
                 'name' => '123',
                 'notChecked' => true,
             ]);
@@ -619,9 +607,7 @@ final class VTest extends TestCase
 
     public function testSetData()
     {
-        $ret = V::key('email')
-            ->setData(['email' => 'test@test.com'])
-            ->check();
+        $ret = V::email()->setData('test@test.com')->check();
         $this->assertRetSuc($ret);
     }
 
