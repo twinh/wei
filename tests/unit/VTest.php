@@ -4,7 +4,6 @@ namespace WeiTest;
 
 use Wei\IsEmail;
 use Wei\V;
-use Wei\Validate;
 
 /**
  * @internal
@@ -83,20 +82,15 @@ final class VTest extends TestCase
         $this->assertRetSuc($ret);
     }
 
-    public function testValidate()
+    public function testSetDataCheck()
     {
-        $validator = V::mobileCn()->validate('123');
+        $v = V::email();
 
-        $this->assertInstanceOf(Validate::class, $validator);
-        $this->assertFalse($validator->isValid());
-    }
+        $ret = $v->setData('test')->check();
+        $this->assertRetErr($ret);
 
-    public function testSetDataValidate()
-    {
-        $validator = V::email()->setData('test@test.com')->validate();
-
-        $this->assertInstanceOf(Validate::class, $validator);
-        $this->assertTrue($validator->isValid());
+        $ret = $v->setData('test@test.com')->check();
+        $this->assertRetSuc($ret);
     }
 
     public function testIsValid()
@@ -110,8 +104,12 @@ final class VTest extends TestCase
 
     public function testSetDataIsValid()
     {
-        $result = V::email()->setData('test@test.com')->isValid();
+        $v = V::email();
 
+        $result = $v->setData('test')->isValid();
+        $this->assertFalse($result);
+
+        $result = $v->setData('test@test.com')->isValid();
         $this->assertTrue($result);
     }
 
@@ -175,7 +173,7 @@ final class VTest extends TestCase
         $this->assertRetSuc($ret);
     }
 
-    public function testOptions()
+    public function testAssociativeArrayAsOptions()
     {
         $v = V::new();
         $v->key('name')->maxLength([
@@ -200,17 +198,17 @@ final class VTest extends TestCase
 
     public function testDefaultOptional()
     {
-        $ret = V::defaultOptional()
-            ->key('email')->email()
-            ->check([]);
+        $v = V::defaultOptional();
+        $v->key('email')->email();
+        $ret = $v->check([]);
         $this->assertRetSuc($ret);
     }
 
     public function testDefaultRequired()
     {
-        $ret = V::defaultRequired()
-            ->key('email')->email()
-            ->check([]);
+        $v = V::defaultRequired();
+        $v->key('email')->email();
+        $ret = $v->check([]);
         $this->assertRetErr($ret, 'This value is required');
     }
 
@@ -244,39 +242,32 @@ final class VTest extends TestCase
         ], $v->getOptions());
     }
 
-    public function testBasicType()
+    public function testKeyAndLabelInValidator()
     {
-        $ret = V::char('name', '名称', 2)->check([
+        $v = V::new();
+        $v->char('name', '名称', 2);
+        $ret = $v->check([
             'name' => '1',
         ]);
         $this->assertRetErr($ret, '名称 must be at least 2 character(s)');
     }
 
-    public function testBasicTypeChain()
-    {
-        $ret = V::char('name', '名称', 2)
-            ->key('name2', '名称2')->addRule('char', 2)
-            ->check([
-                'name' => '12',
-                'name2' => '1',
-            ]);
-        $this->assertRetErr($ret, '名称2 must be at least 2 character(s)');
-    }
-
-    public function testBasicTypeInvalidArgument()
+    public function testTypeInvalidArgument()
     {
         $this->expectExceptionObject(
             new \InvalidArgumentException('Expected at least 2 arguments for type rule, but got 0')
         );
-        V::char();
+        $v = V::new();
+        $v->char();
     }
 
-    public function testBasicTypeInvalidArgument2()
+    public function testTypeInvalidArgument2()
     {
         $this->expectExceptionObject(
             new \InvalidArgumentException('Expected at least 2 arguments for type rule, but got 1')
         );
-        V::char('name');
+        $v = V::new();
+        $v->char('name');
     }
 
     public function testArray()
@@ -420,7 +411,6 @@ final class VTest extends TestCase
 
         $this->assertRetErr($ret, 'This value must have a length greater than 1');
         $this->assertArrayNotHasKey('data', $ret);
-        $this->assertSame([], $v->getOption('validator')->getValidData());
     }
 
     public function testGetValidDataWithArrayKey()
@@ -597,9 +587,9 @@ final class VTest extends TestCase
 
     public function testHasFieldError()
     {
-        $ret = V::defaultOptional()
-            ->mediumText(['detail', 'content'], 'Content')
-            ->check(wei()->req);
+        $v = V::defaultOptional();
+        $v->mediumText(['detail', 'content'], 'Content');
+        $ret = $v->check(wei()->req);
 
         $this->assertNotSame("Content's length could not be detected", $ret['message']);
         $this->assertRetSuc($ret);
