@@ -62,14 +62,14 @@ final class IsCallbackTest extends BaseValidatorTestCase
     public function testGetValidatorFromV()
     {
         $validator = null;
-        V
-            ::key('test')->callback(function ($input, IsCallback $callback) use (&$validator) {
-                $validator = $callback->getValidator();
-                return false;
-            })
-                ->check([
-                'test' => 1,
-            ]);
+        $v = V::new();
+        $v->key('test')->callback(function ($input, IsCallback $callback) use (&$validator) {
+            $validator = $callback->getValidator();
+            return false;
+        });
+        $v->check([
+            'test' => 1,
+        ]);
         $this->assertInstanceOf(Validate::class, $validator);
     }
 
