@@ -131,19 +131,6 @@ final class VTest extends TestCase
         $this->assertRetSuc($ret);
     }
 
-    public function testWithoutKeyValidate()
-    {
-        $validator = V::label('Age')
-            ->digit()
-            ->between(1, 150)
-            ->validate('ab');
-        $this->assertFalse($validator->isValid());
-
-        $messages = $validator->getSummaryMessages();
-        $this->assertEquals('Age must contain only digits (0-9)', $messages[''][0]);
-        $this->assertEquals('Age must between 1 and 150', $messages[''][1]);
-    }
-
     public function testCreateNewInstance()
     {
         $this->assertNotSame(V::label('test'), V::label('test'));
@@ -218,7 +205,12 @@ final class VTest extends TestCase
         $v->key('email', 'Email')->email();
         $v->key('name', 'Name')->length(['max' => 1, 'countByChars' => true]);
         $this->assertSame([
-            'data' => [],
+            'defaultRequired' => true,
+            'data' => null,
+            'names' => [
+                'email' => 'Email',
+                'name' => 'Name',
+            ],
             'rules' => [
                 'email' => [
                     'email' => [],
@@ -230,15 +222,11 @@ final class VTest extends TestCase
                     ],
                 ],
             ],
-            'names' => [
-                'email' => 'Email',
-                'name' => 'Name',
-            ],
-            'fields' => [],
             'messages' => [
                 'email' => [],
                 'name' => [],
             ],
+            'fields' => [],
         ], $v->getOptions());
     }
 
@@ -308,7 +296,11 @@ final class VTest extends TestCase
             'user.email-email-format' => 'Invalid Email',
         ], $validator->getFlatMessages());
 
-        $this->assertSame(['user.email' => ['email' => 'Invalid %name%']], $validator->getMessages());
+        $this->assertSame([
+            'name' => [],
+            'user.sex' => [],
+            'user.email' => ['email' => 'Invalid %name%']
+        ], $validator->getMessages());
 
         $this->assertSame(['email' => []], $validator->getFieldRules(['user', 'email']));
 
