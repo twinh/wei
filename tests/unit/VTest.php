@@ -17,34 +17,54 @@ final class VTest extends TestCase
         wei()->t->setLocale('en');
     }
 
-    public function testChainMode()
+    public function testCreateNewInstance()
     {
-        $v = V::new();
-        $ret = $v->key('email')->email()
-            ->key('name')->minLength(1)
-            ->check([
-                'email' => 'test@email.com',
-                'name' => '123',
-            ]);
-        $this->assertRetSuc($ret);
+        $this->assertNotSame(V::label('test'), V::label('test'));
     }
 
-    public function testCheckFail()
+    public function testKey()
     {
         $v = V::new();
         $v->key('question', 'Question');
+
         $ret = $v->check([]);
-
         $this->assertRetErr($ret, 'Question is required', -1);
-    }
 
-    public function testCheckPass()
-    {
-        $v = V::new();
-        $v->key('question', 'Question');
         $ret = $v->check([
             'question' => 1,
         ]);
+        $this->assertRetSuc($ret);
+    }
+
+    public function testLabel()
+    {
+        $v = V::new();
+        $v->key('question')->label('The question');
+
+        $ret = $v->check([]);
+        $this->assertRetErr($ret, 'The question is required', -1);
+    }
+
+    public function testLabelStaticCall()
+    {
+        $ret = V::label('The age')->number()->check(null);
+        $this->assertRetErr($ret, 'The age must be valid number');
+    }
+
+    public function testLabelWithoutKeyCheckErr()
+    {
+        $ret = V::label('Mobile')
+            ->mobileCn()
+            ->check('123');
+
+        $this->assertRetErr($ret, 'Mobile must be valid mobile number', -1);
+    }
+
+    public function testLabelWithoutKeyCheckSuc()
+    {
+        $ret = V::label('Mobile')
+            ->mobileCn()
+            ->check('13800138000');
 
         $this->assertRetSuc($ret);
     }
@@ -67,21 +87,6 @@ final class VTest extends TestCase
         $this->assertRetErr($ret, '请填写名称', -1);
     }
 
-    public function testCallback()
-    {
-        $ret = V::callback(function ($name) {
-            return 'twin' !== $name;
-        })
-            ->check('twin');
-        $this->assertRetErr($ret, 'This value is not valid', -1);
-
-        $ret = V::callback(function ($name) {
-            return 'twin' !== $name;
-        })
-            ->check('hi');
-        $this->assertRetSuc($ret);
-    }
-
     public function testSetDataCheck()
     {
         $v = V::email();
@@ -91,15 +96,6 @@ final class VTest extends TestCase
 
         $ret = $v->setData('test@test.com')->check();
         $this->assertRetSuc($ret);
-    }
-
-    public function testIsValid()
-    {
-        $result = V::mobileCn()->isValid('123');
-        $this->assertFalse($result);
-
-        $result = V::mobileCn()->isValid('13800138000');
-        $this->assertTrue($result);
     }
 
     public function testSetDataIsValid()
@@ -113,74 +109,95 @@ final class VTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testWithoutKeyRetErr()
+    public function testIsValid()
     {
-        $ret = V::label('Mobile')
-            ->mobileCn()
-            ->check('123');
+        $result = V::mobileCn()->isValid('123');
+        $this->assertFalse($result);
 
-        $this->assertRetErr($ret, 'Mobile must be valid mobile number', -1);
+        $result = V::mobileCn()->isValid('13800138000');
+        $this->assertTrue($result);
     }
 
-    public function testWithoutKeyRetSuc()
-    {
-        $ret = V::label('Mobile')
-            ->mobileCn()
-            ->check('13800138000');
-
-        $this->assertRetSuc($ret);
-    }
-
-    public function testCreateNewInstance()
-    {
-        $this->assertNotSame(V::label('test'), V::label('test'));
-    }
-
-    public function testCheckBeforeModelCreate()
-    {
-        $ret = $this->checkModel(true, []);
-        $this->assertRetErr($ret, 'Name is required');
-
-        $ret = $this->checkModel(true, ['name' => '']);
-        $this->assertRetErr($ret, 'Name must not be blank');
-
-        $ret = $this->checkModel(true, ['name' => 'test']);
-        $this->assertRetSuc($ret);
-    }
-
-    public function testCheckBeforeModelUpdate()
-    {
-        $ret = $this->checkModel(false, []);
-        $this->assertRetSuc($ret);
-
-        $ret = $this->checkModel(false, ['name' => '']);
-        $this->assertRetErr($ret, 'Name must not be blank');
-
-        $ret = $this->checkModel(false, ['name' => 'test']);
-        $this->assertRetSuc($ret);
-    }
-
-    public function testAssociativeArrayAsOptions()
+    public function testValidate()
     {
         $v = V::new();
-        $v->key('name')->maxLength([
-            'max' => 1,
-            'countByChars' => false,
+        $v->key('name', 'Name');
+        $v->key(['user', 'sex'])->in(['array' => [0, 1, 2]]);
+        $v->key(['user', 'email'], 'Email')->email()->message('Invalid %name%');
+        $validator = $v->validate([
+            'name' => 'test',
+            'user' => [
+                'sex' => 1,
+                'email' => 'test',
+            ],
         ]);
-        $ret = $v->check([
-            'name' => '我',
-        ]);
-        $this->assertRetErr($ret, 'This value must have a length lower than 1');
 
-        $v = V::new();
-        $v->key('name')->maxLength([
-            'max' => 1,
-            'countByChars' => true,
-        ]);
-        $ret = $v->check([
-            'name' => '我',
-        ]);
-        $this->assertRetSuc($ret);
+        $this->assertSame('email', $validator->getCurrentRule());
+        $this->assertSame(['user', 'email'], $validator->getCurrentField());
+
+        $this->assertSame(['name', ['user', 'sex']], $validator->getValidFields());
+        $this->assertSame([['user', 'email']], $validator->getInvalidFields());
+
+        $this->assertSame([
+            'user.email' => [
+                'email' => [
+                    'format' => 'Invalid Email',
+                ],
+            ],
+        ], $validator->getDetailMessages());
+
+        $this->assertSame([
+            'user.email' => [
+                'Invalid Email',
+            ],
+        ], $validator->getSummaryMessages());
+
+        $this->assertSame([
+            'user.email-email-format' => 'Invalid Email',
+        ], $validator->getFlatMessages());
+
+        $this->assertSame([
+            'name' => [],
+            'user.sex' => [],
+            'user.email' => ['email' => 'Invalid %name%'],
+        ], $validator->getMessages());
+
+        $this->assertSame(['email' => []], $validator->getFieldRules(['user', 'email']));
+
+        $this->assertSame('test', $validator->getFieldData(['user', 'email']));
+
+        $this->assertInstanceOf(IsEmail::class, $validator->getRuleValidator(['user', 'email'], 'email'));
+
+        $this->assertSame(['required'], $validator->getValidRules(['user', 'email']));
+        $this->assertSame(['email'], $validator->getInvalidRules(['user', 'email']));
+
+        $this->assertFalse($validator->isFieldValid(['user', 'email']));
+        $this->assertTrue($validator->isFieldInvalid(['user', 'email']));
+
+        $this->assertSame([], $validator->getRuleParams(['user', 'email'], 'email'));
+
+        $this->assertTrue($validator->hasField(['user', 'email']));
+        $this->assertSame('test', $validator->getFieldData(['user', 'email']));
+
+        $validator->addValidRule(['user.email'], 'test');
+        $this->assertSame(['required', 'test'], $validator->getValidRules(['user', 'email']));
+
+        $validator->addInvalidRule(['user.email'], 'test');
+        $this->assertSame(['email', 'test'], $validator->getInvalidRules(['user', 'email']));
+
+        $validator->addRule(['user', 'email'], 'test', 'test params');
+        $this->assertSame(['test params'], $validator->getRuleParams(['user', 'email'], 'test'));
+
+        $validator->addRule(['user', 'email'], 'test', 'test params');
+        $this->assertSame(['test params'], $validator->getRuleParams(['user', 'email'], 'test'));
+
+        $this->assertTrue($validator->hasRule(['user', 'email'], 'test'));
+
+        $this->assertFalse($validator->removeRule(['user', 'email2'], 'test'));
+        $this->assertTrue($validator->removeRule(['user', 'email'], 'test'));
+
+        $this->assertFalse($validator->removeField(['user', 'email2']));
+        $this->assertTrue($validator->removeField(['user', 'email']));
     }
 
     public function testDefaultOptional()
@@ -230,114 +247,66 @@ final class VTest extends TestCase
         ], $v->getOptions());
     }
 
-    public function testKeyAndLabelInValidator()
+    public function testAddRuleWithKeyAndLabel()
     {
         $v = V::new();
-        $v->char('name', '名称', 2);
+        $v->char('name', 'The name', 2);
         $ret = $v->check([
             'name' => '1',
         ]);
-        $this->assertRetErr($ret, '名称 must be at least 2 character(s)');
+        $this->assertRetErr($ret, 'The name must be at least 2 character(s)');
     }
 
-    public function testTypeInvalidArgument()
+    public function testAddRuleInvalidArgument()
     {
         $this->expectExceptionObject(
-            new \InvalidArgumentException('Expected at least 2 arguments for type rule, but got 0')
+            new \InvalidArgumentException('Expected at least 2 arguments for rule, but got 0')
         );
         $v = V::new();
         $v->char();
     }
 
-    public function testTypeInvalidArgument2()
+    public function testAddRuleInvalidArgument2()
     {
         $this->expectExceptionObject(
-            new \InvalidArgumentException('Expected at least 2 arguments for type rule, but got 1')
+            new \InvalidArgumentException('Expected at least 2 arguments for rule, but got 1')
         );
         $v = V::new();
         $v->char('name');
     }
 
-    public function testArray()
+    public function testAddRuleWithEmailValidator()
     {
         $v = V::new();
-        $v->key('name', 'Name');
-        $v->key(['user', 'sex'])->in(['array' => [0, 1, 2]]);
-        $v->key(['user', 'email'], 'Email')->email()->message('Invalid %name%');
-        $validator = $v->validate([
-            'name' => 'test',
-            'user' => [
-                'sex' => 1,
-                'email' => 'test',
-            ],
+        $v->email('email', 'Your email');
+        $ret = $v->check([
+            'email' => 'test',
         ]);
 
-        $this->assertSame('email', $validator->getCurrentRule());
-        $this->assertSame(['user', 'email'], $validator->getCurrentField());
+        $this->assertRetErr($ret, 'Your email must be valid email address');
+    }
 
-        $this->assertSame(['name', ['user', 'sex']], $validator->getValidFields());
-        $this->assertSame([['user', 'email']], $validator->getInvalidFields());
+    public function testAddRuleWithAssociativeArrayOptions()
+    {
+        $v = V::new();
+        $v->key('name')->maxLength([
+            'max' => 1,
+            'countByChars' => false,
+        ]);
+        $ret = $v->check([
+            'name' => '我',
+        ]);
+        $this->assertRetErr($ret, 'This value must have a length lower than 1');
 
-        $this->assertSame([
-            'user.email' => [
-                'email' => [
-                    'format' => 'Invalid Email',
-                ],
-            ],
-        ], $validator->getDetailMessages());
-
-        $this->assertSame([
-            'user.email' => [
-                'Invalid Email',
-            ],
-        ], $validator->getSummaryMessages());
-
-        $this->assertSame([
-            'user.email-email-format' => 'Invalid Email',
-        ], $validator->getFlatMessages());
-
-        $this->assertSame([
-            'name' => [],
-            'user.sex' => [],
-            'user.email' => ['email' => 'Invalid %name%']
-        ], $validator->getMessages());
-
-        $this->assertSame(['email' => []], $validator->getFieldRules(['user', 'email']));
-
-        $this->assertSame('test', $validator->getFieldData(['user', 'email']));
-
-        $this->assertInstanceOf(IsEmail::class, $validator->getRuleValidator(['user', 'email'], 'email'));
-
-        $this->assertSame(['required'], $validator->getValidRules(['user', 'email']));
-        $this->assertSame(['email'], $validator->getInvalidRules(['user', 'email']));
-
-        $this->assertFalse($validator->isFieldValid(['user', 'email']));
-        $this->assertTrue($validator->isFieldInvalid(['user', 'email']));
-
-        $this->assertSame([], $validator->getRuleParams(['user', 'email'], 'email'));
-
-        $this->assertTrue($validator->hasField(['user', 'email']));
-        $this->assertSame('test', $validator->getFieldData(['user', 'email']));
-
-        $validator->addValidRule(['user.email'], 'test');
-        $this->assertSame(['required', 'test'], $validator->getValidRules(['user', 'email']));
-
-        $validator->addInvalidRule(['user.email'], 'test');
-        $this->assertSame(['email', 'test'], $validator->getInvalidRules(['user', 'email']));
-
-        $validator->addRule(['user', 'email'], 'test', 'test params');
-        $this->assertSame(['test params'], $validator->getRuleParams(['user', 'email'], 'test'));
-
-        $validator->addRule(['user', 'email'], 'test', 'test params');
-        $this->assertSame(['test params'], $validator->getRuleParams(['user', 'email'], 'test'));
-
-        $this->assertTrue($validator->hasRule(['user', 'email'], 'test'));
-
-        $this->assertFalse($validator->removeRule(['user', 'email2'], 'test'));
-        $this->assertTrue($validator->removeRule(['user', 'email'], 'test'));
-
-        $this->assertFalse($validator->removeField(['user', 'email2']));
-        $this->assertTrue($validator->removeField(['user', 'email']));
+        $v = V::new();
+        $v->key('name')->maxLength([
+            'max' => 1,
+            'countByChars' => true,
+        ]);
+        $ret = $v->check([
+            'name' => '我',
+        ]);
+        $this->assertRetSuc($ret);
     }
 
     public function testAllowEmptyWithEmptyString()
@@ -530,22 +499,22 @@ final class VTest extends TestCase
         $v = V::new();
         $v->key('products')->each(function (V $v) {
             $v->key('name')->maxLength(5);
-                $v->key('stock')->greaterThanOrEqual(0);
+            $v->key('stock')->greaterThanOrEqual(0);
         })->notEmpty();
-            $ret = $v->check([
-                'notChecked' => true,
-                'products' => [
-                    [
-                        'name' => 'name',
-                        'stock' => 1,
-                        'notChecked' => true,
-                    ],
-                    [
-                        'name' => 'name',
-                        'stock' => 1,
-                    ],
+        $ret = $v->check([
+            'notChecked' => true,
+            'products' => [
+                [
+                    'name' => 'name',
+                    'stock' => 1,
+                    'notChecked' => true,
                 ],
-            ]);
+                [
+                    'name' => 'name',
+                    'stock' => 1,
+                ],
+            ],
+        ]);
         $this->assertSame([
             'products' => [
                 [
@@ -567,56 +536,14 @@ final class VTest extends TestCase
     {
         $v = V::new();
         $v->key('email')->email()->optional();
-            $v->key('name')->minLength(1);
-            $ret = $v->check([
-                'name' => '123',
-                'notChecked' => true,
-            ]);
+        $v->key('name')->minLength(1);
+        $ret = $v->check([
+            'name' => '123',
+            'notChecked' => true,
+        ]);
         $this->assertSame([
             'name' => '123',
         ], $ret['data']);
-    }
-
-    public function testHasFieldError()
-    {
-        $v = V::defaultOptional();
-        $v->mediumText(['detail', 'content'], 'Content');
-        $ret = $v->check(wei()->req);
-
-        $this->assertNotSame("Content's length could not be detected", $ret['message']);
-        $this->assertRetSuc($ret);
-    }
-
-    public function testSetData()
-    {
-        $ret = V::email()->setData('test@test.com')->check();
-        $this->assertRetSuc($ret);
-    }
-
-    public function testBasicTypeRule()
-    {
-        $v = V::new();
-
-        $v->tinyChar('name', 'Name', 3);
-
-        $ret = $v->check([
-            'name' => 'te',
-        ]);
-
-        $this->assertRetErr($ret, 'Name must be at least 3 character(s)');
-    }
-
-    public function testNormalType()
-    {
-        $v = V::new();
-
-        $v->email('email', 'Your email');
-
-        $ret = $v->check([
-            'email' => 'test',
-        ]);
-
-        $this->assertRetErr($ret, 'Your email must be valid email address');
     }
 
     public function testCheckOneSuc()
@@ -629,6 +556,21 @@ final class VTest extends TestCase
     {
         $ret = V::label('Your mobile')->mobileCn()->check('test');
         $this->assertRetErr($ret, 'Your mobile must be valid mobile number');
+    }
+
+    public function testCheckOneWithCallback()
+    {
+        $ret = V::callback(function ($name) {
+            return 'twin' !== $name;
+        })
+            ->check('twin');
+        $this->assertRetErr($ret, 'This value is not valid', -1);
+
+        $ret = V::callback(function ($name) {
+            return 'twin' !== $name;
+        })
+            ->check('hi');
+        $this->assertRetSuc($ret);
     }
 
     public function testCheckObjectSuc()
@@ -730,6 +672,40 @@ final class VTest extends TestCase
             'name' => 'test',
         ]);
         $this->assertRetErr($ret, 'The email is required');
+    }
+
+    public function testCheckBeforeModelCreate()
+    {
+        $ret = $this->checkModel(true, []);
+        $this->assertRetErr($ret, 'Name is required');
+
+        $ret = $this->checkModel(true, ['name' => '']);
+        $this->assertRetErr($ret, 'Name must not be blank');
+
+        $ret = $this->checkModel(true, ['name' => 'test']);
+        $this->assertRetSuc($ret);
+    }
+
+    public function testCheckBeforeModelUpdate()
+    {
+        $ret = $this->checkModel(false, []);
+        $this->assertRetSuc($ret);
+
+        $ret = $this->checkModel(false, ['name' => '']);
+        $this->assertRetErr($ret, 'Name must not be blank');
+
+        $ret = $this->checkModel(false, ['name' => 'test']);
+        $this->assertRetSuc($ret);
+    }
+
+    public function testHasFieldError()
+    {
+        $v = V::defaultOptional();
+        $v->mediumText(['detail', 'content'], 'Content');
+        $ret = $v->check(wei()->req);
+
+        $this->assertNotSame("Content's length could not be detected", $ret['message']);
+        $this->assertRetSuc($ret);
     }
 
     protected function checkModel(bool $isNew, $data)
