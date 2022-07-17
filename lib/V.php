@@ -17,41 +17,63 @@ class V extends Base
     protected static $createNewInstance = true;
 
     /**
-     * @var Validate
+     * @var string|array|null
      */
-    protected $validator;
+    protected $key;
+
+    /**
+     * @var string|null
+     */
+    protected $label;
+
+    /**
+     * The data to be validated
+     *
+     * @var mixed
+     */
+    protected $data;
+
+    /**
+     * The rules for validating the current key
+     *
+     * @var array
+     */
+    protected $rules = [];
 
     /**
      * @var array
      */
-    protected $options = [
-        'data' => [],
-        'rules' => [],
-        'names' => [],
-        'fields' => [],
-    ];
+    protected $messages = [];
 
     /**
-     * @var string
+     * @var array<static>
      */
-    protected $lastKey = '';
+    protected $validators = [];
 
     /**
-     * @var string
-     */
-    protected $lastRule;
-
-    /**
-     * Create a new validator
+     * Whether all validators are required by default
      *
-     * @param array $options
-     * @return $this
+     * @var bool
      */
-    public function __invoke(array $options = [])
-    {
-        $validator = new self($options + get_object_vars($this));
+    protected $defaultRequired = true;
 
-        return $validator;
+    /**
+     * Return a new instance of current service
+     *
+     * @return static
+     */
+    public static function new(): self
+    {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        return Wei::getContainer()->newInstance('v');
+    }
+
+    public static function __callStatic(string $method, array $args)
+    {
+        if (method_exists(static::class, $method)) {
+            return parent::__callStatic($method, $args);
+        }
+        return static::new()->addRule($method, $args);
     }
 
     /**
@@ -59,116 +81,90 @@ class V extends Base
      *
      * @param string $name
      * @param array $args
-     * @return $this
+     * @return self|mixed
      */
-    public function __call($name, $args)
+    public function __call(string $name, array $args)
     {
-        // TODO wei 提供接口判断是否可以调用为服务方法
+        // Call service methods like: `V::defaultOptional`, `V::label()`
         if (method_exists($this, $name)) {
             return $this->{$name}(...$args);
         }
 
-        // Convert options [[option: xx]] to [option: xx]
+        // Important: Convert options from [[option: xx]] to [option: xx]
         if (1 === count($args) && is_array($args[0])) {
             $args = $args[0];
         }
 
-        // Convert `$type($name, $label, ...$args)` to `key($name, $label)->addRule($type, $args)`
-        if ('not' === substr($name, 0, 3)) {
-            $rule = substr($name, 3);
+        if ($this->hasValidatorConfig()) {
+            return $this->addRule($name, $args);
         } else {
-            $rule = $name;
+            return $this->addValidatorAndRule($name, $args);
         }
-        $class = $this->wei->getClass('is' . ucfirst($rule));
-        if (defined($class . '::BASIC_TYPE') && $class::BASIC_TYPE) {
-            if (count($args) < 2) {
-                throw new \InvalidArgumentException(
-                    'Expected at least 2 arguments for type rule, but got ' . count($args)
-                );
-            }
-            [$keyName, $label] = $args;
-            $args = array_slice($args, 2);
-            $this->key($keyName, $label);
-        }
-
-        return $this->addRule($name, $args);
     }
 
     /**
-     * Return a new instance of current service
-     *
-     * @return static
+     * @return array|string
      */
-    public static function new()
+    public function getKey()
     {
-        /** @noinspection PhpIncompatibleReturnTypeInspection */
-        return Wei::getContainer()->newInstance('v');
+        return $this->key;
     }
 
     /**
-     * Set rule message for current field
+     * @return string|null
+     */
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    /**
+     * Add a new validator for specified key
+     *
+     * @param string|array $key
+     * @param string|null $label
+     * @return $this
+     */
+    public function addValidator($key, string $label = null): self
+    {
+        return $this->validators[] = new static([
+            'wei' => $this->wei,
+            'key' => $key,
+            'label' => $label,
+        ]);
+    }
+
+    /**
+     * Alias of `addValidator`
+     *
+     * @param string|array $key
+     * @param string|null $label
+     * @return $this
+     */
+    public function key($key, string $label = null): self
+    {
+        return $this->addValidator($key, $label);
+    }
+
+    /**
+     * Set rule message for current validator
      *
      * @param string $ruleOrMessage
      * @param string|null $message
      * @return $this
      */
-    public function message($ruleOrMessage, $message = null)
+    public function message(string $ruleOrMessage, string $message = null): self
     {
         if (1 === func_num_args()) {
-            $rule = $this->lastRule;
+            $rule = $this->getLastKey($this->rules);
             $message = $ruleOrMessage;
         } else {
             $rule = $ruleOrMessage;
         }
 
-        $this->options['messages'][$this->lastKey][$rule] = $message;
+        $this->messages[$rule] = $message;
 
         return $this;
-    }
-
-    /**
-     * Returns the \Wei\Validate object
-     *
-     * @param mixed $data
-     * @return Validate
-     */
-    public function validate($data = null)
-    {
-        if (func_get_args()) {
-            // Validate without key
-            if ('' === $this->lastKey) {
-                $data = ['' => $data];
-            }
-            $this->setData($data);
-        }
-        return $this->getValidator();
-    }
-
-    /**
-     * Returns the validation result
-     *
-     * @param mixed $data
-     * @return bool
-     */
-    public function isValid($data = null)
-    {
-        return $this->validate(...func_get_args())->isValid();
-    }
-
-    /**
-     * Validate the data and return the ret array
-     *
-     * @param mixed $data
-     * @return Ret
-     */
-    public function check($data = null)
-    {
-        $validator = $this->validate(...func_get_args());
-        if ($validator->isValid()) {
-            return $this->suc(['data' => $validator->getValidData()]);
-        } else {
-            return $this->err($validator->getFirstMessage());
-        }
     }
 
     /**
@@ -177,7 +173,7 @@ class V extends Base
      * @param bool $required
      * @return $this
      */
-    public function required($required = true)
+    public function required(bool $required = true): self
     {
         return $this->addRule('required', $required);
     }
@@ -185,66 +181,53 @@ class V extends Base
     /**
      * @return $this
      */
-    public function optional()
+    public function optional(): self
     {
         return $this->required(false);
-    }
-
-    /**
-     * Prepend allowEmpty rule to current key
-     *
-     * @return $this
-     */
-    public function allowEmpty()
-    {
-        return $this->prependRule(__FUNCTION__);
-    }
-
-    /**
-     * Set data for validation
-     *
-     * @param mixed $data
-     * @return $this
-     */
-    public function data($data)
-    {
-        if (!$data) {
-            return $this;
-        }
-
-        // Validate without key
-        if (!$this->lastKey) {
-            $data = ['' => $data];
-        }
-
-        $this->options['data'] = $data;
-
-        return $this;
     }
 
     /**
      * Add rule for current field
      *
      * @param string $name
-     * @param mixed $args
+     * @param mixed $options
      * @return $this
      */
-    public function addRule($name, $args)
+    public function addRule(string $name, $options): self
     {
-        $this->options['rules'][$this->lastKey][$name] = $args;
-        $this->lastRule = $name;
+        if ('not' === substr($name, 0, 3)) {
+            $rule = substr($name, 3);
+        } else {
+            $rule = $name;
+        }
+        if (!$this->wei->has('is' . ucfirst($rule))) {
+            throw new \InvalidArgumentException(sprintf('Validator "%s" not found', $name));
+        }
+
+        // IMPORTANT
+        if ('allowEmpty' === $name) {
+            $this->prependRule($name, $options);
+        } else {
+            $this->rules[$name] = $options;
+        }
 
         return $this;
     }
 
     /**
-     * Returns the validate options
-     *
      * @return array
      */
-    public function getOptions()
+    public function getRules(): array
     {
-        return $this->options;
+        return $this->rules;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMessages(): array
+    {
+        return $this->messages;
     }
 
     /**
@@ -255,7 +238,7 @@ class V extends Base
      */
     public function setData($data): self
     {
-        $this->options['data'] = $data;
+        $this->data = $data;
         return $this;
     }
 
@@ -266,66 +249,7 @@ class V extends Base
      */
     public function getData()
     {
-        return $this->options['data'] ?? null;
-    }
-
-    /**
-     * Add name for current field
-     *
-     * @param string $label
-     * @return $this
-     * @svc
-     */
-    protected function label($label)
-    {
-        $this->options['names'][$this->lastKey] = $label;
-
-        return $this;
-    }
-
-    /**
-     * Add a new field
-     *
-     * @param string|array $name
-     * @param string|null $label
-     * @return $this
-     * @svc
-     */
-    protected function key($name, $label = null)
-    {
-        if (is_array($name)) {
-            $key = implode('.', $name);
-            $this->options['fields'][$key] = $name;
-            $name = $key;
-        }
-
-        $this->lastKey = $name;
-
-        // Rest previous key's last rule
-        $this->lastRule = null;
-
-        if (!isset($this->options['rules'][$name])) {
-            $this->options['rules'][$name] = [];
-        }
-
-        if (isset($label)) {
-            $this->label($label);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Instance validate object
-     *
-     * @return Validate
-     */
-    protected function getValidator()
-    {
-        if (!$this->validator) {
-            $this->validator = $this->wei->validate($this->options);
-        }
-        return $this->validator;
+        return $this->data;
     }
 
     /**
@@ -333,9 +257,8 @@ class V extends Base
      * @param callable $callback
      * @param callable|null $default
      * @return $this
-     * @svc
      */
-    protected function when($value, $callback, callable $default = null)
+    public function when($value, callable $callback, callable $default = null): self
     {
         if ($value) {
             $callback($this, $value);
@@ -350,9 +273,8 @@ class V extends Base
      * @param callable $callback
      * @param callable|null $default
      * @return $this
-     * @svc
      */
-    protected function unless($value, callable $callback, callable $default = null)
+    public function unless($value, callable $callback, callable $default = null): self
     {
         if (!$value) {
             $callback($this, $value);
@@ -363,12 +285,115 @@ class V extends Base
     }
 
     /**
-     * @return $this
+     * Returns the validation result
+     *
+     * @param mixed $data
+     * @return bool
+     */
+    public function isValid($data = null): bool
+    {
+        return $this->validate(...func_get_args())->isValid();
+    }
+
+    /**
+     * Validate the data and return the ret array
+     *
+     * @param mixed $data
+     * @return Ret
+     */
+    public function check($data = null): Ret
+    {
+        $validator = $this->validate(...func_get_args());
+        if ($validator->isValid()) {
+            return $this->suc(['data' => $validator->getValidData()]);
+        } else {
+            return $this->err($validator->getFirstMessage());
+        }
+    }
+
+    /**
+     * Returns the \Wei\Validate object
+     *
+     * @param mixed $data
+     * @return Validate
+     * @internal will change in the future
+     */
+    public function validate($data = null): Validate
+    {
+        if (func_num_args()) {
+            $this->setData($data);
+        }
+
+        $validator = null;
+        if ($this->rules) {
+            $key = $this->getKey();
+            $validator = $this->wei->validate([
+                'names' => [
+                    $key => $this->getLabel(),
+                ],
+                'data' => [
+                    $key => $this->getData(),
+                ],
+                'rules' => [
+                    $key => $this->getRules(),
+                ],
+            ]);
+            if (!$validator->isValid()) {
+                return $validator;
+            }
+        }
+
+        if ($this->validators) {
+            return $this->wei->validate($this->getOptions());
+        }
+
+        return $validator;
+    }
+
+    /**
+     * Returns the validate options
+     *
+     * @return array
+     * @internal will remove in the future
+     */
+    public function getOptions(): array
+    {
+        $rules = [];
+        $names = [];
+        $messages = [];
+        $fields = [];
+        foreach ($this->validators as $validator) {
+            $key = $validator->getKey();
+            if (is_array($key)) {
+                $name = implode('.', $key);
+                $fields[$name] = $key;
+            } else {
+                $name = $key;
+            }
+            $names[$name] = $validator->getLabel();
+            $rules[$name] = $validator->getRules();
+            $messages[$name] = $validator->getMessages();
+        }
+        return [
+            'defaultRequired' => $this->defaultRequired,
+            'data' => $this->data,
+            'names' => $names,
+            'rules' => $rules,
+            'messages' => $messages,
+            'fields' => $fields,
+        ];
+    }
+
+    /**
+     * Add label for current validator
+     *
+     * @param string $label
+     * @return self
      * @svc
      */
-    protected function defaultOptional()
+    protected function label(string $label): self
     {
-        $this->options['defaultRequired'] = false;
+        $this->label = $label;
         return $this;
     }
 
@@ -376,10 +401,51 @@ class V extends Base
      * @return $this
      * @svc
      */
-    protected function defaultRequired()
+    protected function defaultOptional(): self
     {
-        $this->options['defaultRequired'] = true;
+        $this->defaultRequired = false;
         return $this;
+    }
+
+    /**
+     * @return $this
+     * @svc
+     */
+    protected function defaultRequired(): self
+    {
+        $this->defaultRequired = true;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     * @internal
+     */
+    protected function hasValidatorConfig(): bool
+    {
+        return null !== $this->key || null !== $this->label || $this->rules;
+    }
+
+    /**
+     * @param string $name
+     * @param array $args
+     * @return static
+     */
+    protected function addValidatorAndRule(string $name, array $args): self
+    {
+        if (count($args) < 2) {
+            throw new \InvalidArgumentException(
+                'Expected at least 2 arguments for rule, but got ' . count($args)
+            );
+        }
+
+        // Convert `$type($key, $label, ...$args)` to `key($key, $label)->addRule($type, $args)`
+        [$key, $label] = $args;
+        $args = array_slice($args, 2);
+
+        $validator = $this->addValidator($key, $label);
+        $validator->addRule($name, $args);
+        return $validator;
     }
 
     /**
@@ -387,11 +453,19 @@ class V extends Base
      * @param mixed $args
      * @return $this
      */
-    private function prependRule(string $name, $args = [])
+    protected function prependRule(string $name, $args = []): self
     {
-        $this->options['rules'][$this->lastKey] = [$name => $args] + $this->options['rules'][$this->lastKey];
-        $this->lastRule = $name;
-
+        $this->rules = [$name => $args] + $this->rules;
         return $this;
+    }
+
+    /**
+     * @param array $array
+     * @return string
+     * @internal
+     */
+    protected function getLastKey(array $array): string
+    {
+        return key(array_slice($array, -1));
     }
 }
