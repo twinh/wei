@@ -16,11 +16,6 @@ namespace Wei;
  */
 class IsInt extends BaseValidator
 {
-    /**
-     * {@inheritdoc}
-     */
-    public const BASIC_TYPE = true;
-
     protected $notIntMessage = '%name% must be an integer value';
 
     protected $negativeMessage = '%name% must not be an integer value';

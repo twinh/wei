@@ -19,10 +19,5 @@ class IsUNumber extends IsNumber
     /**
      * {@inheritdoc}
      */
-    public const BASIC_TYPE = true;
-
-    /**
-     * {@inheritdoc}
-     */
     protected $unsigned = true;
 }

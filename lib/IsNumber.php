@@ -16,11 +16,6 @@ namespace Wei;
  */
 class IsNumber extends BaseValidator
 {
-    /**
-     * {@inheritdoc}
-     */
-    public const BASIC_TYPE = true;
-
     protected $notNumberMessage = '%name% must be valid number';
 
     protected $scaleMessage = '%name% can have at most %scale% decimal(s)';

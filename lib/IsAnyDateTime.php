@@ -17,11 +17,6 @@ namespace Wei;
 class IsAnyDateTime extends BaseValidator
 {
     /**
-     * {@inheritdoc}
-     */
-    public const BASIC_TYPE = true;
-
-    /**
      * Message occurred when thrown "Failed to parse time string" exception
      *
      * @var string

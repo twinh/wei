@@ -16,11 +16,6 @@ namespace Wei;
  */
 class IsObject extends BaseValidator
 {
-    /**
-     * {@inheritdoc}
-     */
-    public const BASIC_TYPE = true;
-
     protected $notObjectMessage = '%name% must be an object';
 
     protected $negativeMessage = '%name% must not be an object';
