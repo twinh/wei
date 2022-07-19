@@ -2,7 +2,9 @@
 
 namespace WeiTest;
 
+use Miaoxing\Plugin\RetException;
 use Wei\IsEmail;
+use Wei\Ret;
 use Wei\V;
 
 /**
@@ -116,6 +118,23 @@ final class VTest extends TestCase
 
         $result = V::mobileCn()->isValid('13800138000');
         $this->assertTrue($result);
+    }
+
+    public function testAssertErr()
+    {
+        $this->expectExceptionObject(new RetException(Ret::err('The mobile must be valid mobile number')));
+
+        $v = V::new();
+        $v->mobileCn('mobile', 'The mobile');
+        $v->assert(['mobile' => '123']);
+    }
+
+    public function testAssertSuc()
+    {
+        $v = V::new();
+        $v->mobileCn('mobile', '手机');
+        $data = $v->assert(['mobile' => '13800138000']);
+        $this->assertSame(['mobile' => '13800138000'], $data);
     }
 
     public function testValidate()

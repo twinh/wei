@@ -2,6 +2,8 @@
 
 namespace Wei;
 
+use Miaoxing\Plugin\RetException;
+
 /**
  * A chaining validator
  *
@@ -309,6 +311,22 @@ class V extends Base
         } else {
             return $this->err($validator->getFirstMessage());
         }
+    }
+
+    /**
+     * Return validated data on success or throw exception on invalid
+     *
+     * @param mixed $data
+     * @return mixed
+     * @throws RetException
+     */
+    public function assert($data)
+    {
+        $ret = $this->check(...func_get_args());
+        if ($ret->isErr()) {
+            throw new RetException($ret);
+        }
+        return $ret->getData();
     }
 
     /**
