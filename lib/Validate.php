@@ -222,7 +222,11 @@ class Validate extends Base
 
         foreach ($this->rules as $path => $rules) {
             $this->currentField = $this->toField($path);
-            $data = $this->getFieldData($this->currentField);
+            if ($this->isSelf($path)) {
+                $data = $this->data;
+            } else {
+                $data = $this->getFieldData($this->currentField);
+            }
 
             /**
              * Process simple rule
@@ -550,18 +554,11 @@ class Validate extends Base
     /**
      * Sets data for validation
      *
-     * @param array|object $data
+     * @param mixed $data
      * @return $this
-     * @throws \InvalidArgumentException when argument type is not array or object
      */
     public function setData($data)
     {
-        if (!is_array($data) && !is_object($data)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Expected argument of type array or object, "%s" given',
-                is_object($data) ? get_class($data) : gettype($data)
-            ));
-        }
         $this->data = $data;
         return $this;
     }
@@ -595,6 +592,10 @@ class Validate extends Base
      */
     public function hasField($field)
     {
+        if ($this->isSelf($field)) {
+            return true;
+        }
+
         if (is_array($field)) {
             $lastField = array_pop($field);
             $data = $this->getDataByPaths($this->data, $field);
@@ -964,6 +965,20 @@ class Validate extends Base
     }
 
     /**
+     * Check if the field value (empty value) is reference to the whole data variable
+     *
+     * NOTE: Currently use empty value to reference to the whole data variable
+     *
+     * @param string|array|null $field
+     * @return bool
+     * @experimental implementation may be changed
+     */
+    protected function isSelf($field): bool
+    {
+        return !$field;
+    }
+
+    /**
      * Convert path to field, eg 'user.email' to ['user', 'email']
      *
      * @param string $path
@@ -971,7 +986,7 @@ class Validate extends Base
      */
     private function toField(string $path)
     {
-        return $this->fields[$path] ?? $path;
+        return array_key_exists($path, $this->fields) ? $this->fields[$path] : $path;
     }
 
     /**

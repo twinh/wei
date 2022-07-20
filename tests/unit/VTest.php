@@ -38,6 +38,29 @@ final class VTest extends TestCase
         $this->assertRetSuc($ret);
     }
 
+    public function testSelf()
+    {
+        $v = V::new();
+        $v->self()->maxLength(1);
+        $v->maxLength('item', 'The item', 2);
+
+        $ret = $v->check([1, 2]);
+        $this->assertRetErr($ret, 'This value must contain no more than 1 items');
+
+        $ret = $v->check([1]);
+        $this->assertRetErr($ret, 'The item is required');
+
+        $ret = $v->check([
+            'item' => [1, 2, 3],
+        ]);
+        $this->assertRetErr($ret, 'The item must contain no more than 2 items');
+
+        $ret = $v->check([
+            'item' => [1, 2],
+        ]);
+        $this->assertRetSuc($ret);
+    }
+
     public function testLabel()
     {
         $v = V::new();

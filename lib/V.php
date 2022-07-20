@@ -149,6 +149,17 @@ class V extends Base
     }
 
     /**
+     * Add a new validator to check the current data
+     *
+     * @return $this
+     * @experimental implementation may be changed
+     */
+    public function self(): self
+    {
+        return $this->addValidator('');
+    }
+
+    /**
      * Set rule message for current validator
      *
      * @param string $ruleOrMessage
@@ -349,9 +360,7 @@ class V extends Base
                 'names' => [
                     $key => $this->getLabel(),
                 ],
-                'data' => [
-                    $key => $this->getData(),
-                ],
+                'data' => $this->getData(),
                 'rules' => [
                     $key => $this->getRules(),
                 ],
@@ -384,6 +393,9 @@ class V extends Base
             $key = $validator->getKey();
             if (is_array($key)) {
                 $name = implode('.', $key);
+                $fields[$name] = $key;
+            } elseif (null === $key) {
+                $name = $key;
                 $fields[$name] = $key;
             } else {
                 $name = $key;

@@ -536,13 +536,13 @@ final class ValidatorTest extends TestCase
         $this->assertSame(18, $validator->getFieldData('age'));
     }
 
-    public function testUnexpectedTypeException()
+    public function testSetDataString()
     {
-        $this->expectException(\InvalidArgumentException::class);
-
         $validator = $this->validate();
 
         $validator->setData('string');
+
+        $this->assertSame('string', $validator->getData());
     }
 
     public function testCustomFieldName()
