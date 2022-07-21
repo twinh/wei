@@ -1228,7 +1228,6 @@ class UuidMixin
 
 /**
  * @property    Wei\V $v A chaining validator
- * @method      Wei\V v($options = []) Create a new validator
  */
 class VMixin
 {

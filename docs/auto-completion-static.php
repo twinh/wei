@@ -4107,47 +4107,13 @@ class Uuid
 class V
 {
     /**
-     * Add name for current field
+     * Add label for current validator
      *
      * @param string $label
-     * @return $this
+     * @return self
      * @see V::label
      */
-    public static function label($label)
-    {
-    }
-
-    /**
-     * Add a new field
-     *
-     * @param string|array $name
-     * @param string|null $label
-     * @return $this
-     * @see V::key
-     */
-    public static function key($name, $label = null)
-    {
-    }
-
-    /**
-     * @param mixed $value
-     * @param callable $callback
-     * @param callable|null $default
-     * @return $this
-     * @see V::when
-     */
-    public static function when($value, $callback, callable $default = null)
-    {
-    }
-
-    /**
-     * @param mixed $value
-     * @param callable $callback
-     * @param callable|null $default
-     * @return $this
-     * @see V::unless
-     */
-    public static function unless($value, callable $callback, callable $default = null)
+    public static function label(string $label): self
     {
     }
 
@@ -4155,7 +4121,7 @@ class V
      * @return $this
      * @see V::defaultOptional
      */
-    public static function defaultOptional()
+    public static function defaultOptional(): self
     {
     }
 
@@ -4163,7 +4129,7 @@ class V
      * @return $this
      * @see V::defaultRequired
      */
-    public static function defaultRequired()
+    public static function defaultRequired(): self
     {
     }
 
@@ -4171,7 +4137,7 @@ class V
      * @return $this
      * @see \Wei\IsAll::__invoke
      */
-    public static function all(array $rules = [])
+    public static function all($input, array $rules = [])
     {
     }
 
@@ -4179,7 +4145,7 @@ class V
      * @return $this
      * @see \Wei\IsAll::__invoke
      */
-    public static function notAll(array $rules = [])
+    public static function notAll($input, array $rules = [])
     {
     }
 
@@ -4187,7 +4153,7 @@ class V
      * @return $this
      * @see \Wei\IsAllOf::__invoke
      */
-    public static function allOf(array $rules = [], $atLeast = null)
+    public static function allOf($input, array $rules = [], $atLeast = null)
     {
     }
 
@@ -4195,7 +4161,7 @@ class V
      * @return $this
      * @see \Wei\IsAllOf::__invoke
      */
-    public static function notAllOf(array $rules = [], $atLeast = null)
+    public static function notAllOf($input, array $rules = [], $atLeast = null)
     {
     }
 
@@ -4203,7 +4169,7 @@ class V
      * @return $this
      * @see \Wei\IsAllowEmpty::__invoke
      */
-    public static function allowEmpty()
+    public static function allowEmpty($input)
     {
     }
 
@@ -4211,7 +4177,7 @@ class V
      * @return $this
      * @see \Wei\IsAllowEmpty::__invoke
      */
-    public static function notAllowEmpty()
+    public static function notAllowEmpty($input)
     {
     }
 
@@ -4219,7 +4185,7 @@ class V
      * @return $this
      * @see \Wei\IsAlnum::__invoke
      */
-    public static function alnum($pattern = null)
+    public static function alnum($input, $pattern = null)
     {
     }
 
@@ -4227,7 +4193,7 @@ class V
      * @return $this
      * @see \Wei\IsAlnum::__invoke
      */
-    public static function notAlnum($pattern = null)
+    public static function notAlnum($input, $pattern = null)
     {
     }
 
@@ -4235,7 +4201,7 @@ class V
      * @return $this
      * @see \Wei\IsAlpha::__invoke
      */
-    public static function alpha($pattern = null)
+    public static function alpha($input, $pattern = null)
     {
     }
 
@@ -4243,7 +4209,7 @@ class V
      * @return $this
      * @see \Wei\IsAlpha::__invoke
      */
-    public static function notAlpha($pattern = null)
+    public static function notAlpha($input, $pattern = null)
     {
     }
 
@@ -4251,7 +4217,7 @@ class V
      * @return $this
      * @see \Wei\IsAnyDateTime::__invoke
      */
-    public static function anyDateTime($name = null, string $label = null, $format = null)
+    public static function anyDateTime($input, $format = null)
     {
     }
 
@@ -4259,7 +4225,7 @@ class V
      * @return $this
      * @see \Wei\IsAnyDateTime::__invoke
      */
-    public static function notAnyDateTime($name = null, string $label = null, $format = null)
+    public static function notAnyDateTime($input, $format = null)
     {
     }
 
@@ -4267,7 +4233,7 @@ class V
      * @return $this
      * @see \Wei\IsArray::__invoke
      */
-    public static function array($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+    public static function array($input, int $minLength = null, int $maxLength = null)
     {
     }
 
@@ -4275,7 +4241,7 @@ class V
      * @return $this
      * @see \Wei\IsArray::__invoke
      */
-    public static function notArray($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+    public static function notArray($input, int $minLength = null, int $maxLength = null)
     {
     }
 
@@ -4283,7 +4249,7 @@ class V
      * @return $this
      * @see \Wei\IsBetween::__invoke
      */
-    public static function between($min = null, $max = null)
+    public static function between($input, $min = null, $max = null)
     {
     }
 
@@ -4291,7 +4257,7 @@ class V
      * @return $this
      * @see \Wei\IsBetween::__invoke
      */
-    public static function notBetween($min = null, $max = null)
+    public static function notBetween($input, $min = null, $max = null)
     {
     }
 
@@ -4299,7 +4265,7 @@ class V
      * @return $this
      * @see \Wei\IsBigInt::__invoke
      */
-    public static function bigInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function bigInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -4307,7 +4273,7 @@ class V
      * @return $this
      * @see \Wei\IsBigInt::__invoke
      */
-    public static function notBigInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function notBigInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -4315,7 +4281,7 @@ class V
      * @return $this
      * @see \Wei\IsBlank::__invoke
      */
-    public static function blank()
+    public static function blank($input)
     {
     }
 
@@ -4323,7 +4289,7 @@ class V
      * @return $this
      * @see \Wei\IsBlank::__invoke
      */
-    public static function notBlank()
+    public static function notBlank($input)
     {
     }
 
@@ -4331,7 +4297,7 @@ class V
      * @return $this
      * @see \Wei\IsBool::__invoke
      */
-    public static function bool($name = null, string $label = null)
+    public static function bool($input)
     {
     }
 
@@ -4339,7 +4305,7 @@ class V
      * @return $this
      * @see \Wei\IsBool::__invoke
      */
-    public static function notBool($name = null, string $label = null)
+    public static function notBool($input)
     {
     }
 
@@ -4347,7 +4313,7 @@ class V
      * @return $this
      * @see \Wei\IsBoolable::__invoke
      */
-    public static function boolable()
+    public static function boolable($input)
     {
     }
 
@@ -4355,7 +4321,7 @@ class V
      * @return $this
      * @see \Wei\IsBoolable::__invoke
      */
-    public static function notBoolable()
+    public static function notBoolable($input)
     {
     }
 
@@ -4363,7 +4329,7 @@ class V
      * @return $this
      * @see \Wei\IsCallback::__invoke
      */
-    public static function callback($fn = null, $message = null)
+    public static function callback($input, $fn = null, $message = null)
     {
     }
 
@@ -4371,7 +4337,7 @@ class V
      * @return $this
      * @see \Wei\IsCallback::__invoke
      */
-    public static function notCallback($fn = null, $message = null)
+    public static function notCallback($input, $fn = null, $message = null)
     {
     }
 
@@ -4379,7 +4345,7 @@ class V
      * @return $this
      * @see \Wei\IsChar::__invoke
      */
-    public static function char($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+    public static function char($input, int $minLength = null, int $maxLength = null)
     {
     }
 
@@ -4387,7 +4353,7 @@ class V
      * @return $this
      * @see \Wei\IsChar::__invoke
      */
-    public static function notChar($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+    public static function notChar($input, int $minLength = null, int $maxLength = null)
     {
     }
 
@@ -4395,7 +4361,7 @@ class V
      * @return $this
      * @see \Wei\IsChildren::__invoke
      */
-    public static function children(V $v = null)
+    public static function children($input, V $v = null)
     {
     }
 
@@ -4403,7 +4369,7 @@ class V
      * @return $this
      * @see \Wei\IsChildren::__invoke
      */
-    public static function notChildren(V $v = null)
+    public static function notChildren($input, V $v = null)
     {
     }
 
@@ -4411,7 +4377,7 @@ class V
      * @return $this
      * @see \Wei\IsChinese::__invoke
      */
-    public static function chinese($pattern = null)
+    public static function chinese($input, $pattern = null)
     {
     }
 
@@ -4419,7 +4385,7 @@ class V
      * @return $this
      * @see \Wei\IsChinese::__invoke
      */
-    public static function notChinese($pattern = null)
+    public static function notChinese($input, $pattern = null)
     {
     }
 
@@ -4427,7 +4393,7 @@ class V
      * @return $this
      * @see \Wei\IsColor::__invoke
      */
-    public static function color($pattern = null)
+    public static function color($input, $pattern = null)
     {
     }
 
@@ -4435,7 +4401,7 @@ class V
      * @return $this
      * @see \Wei\IsColor::__invoke
      */
-    public static function notColor($pattern = null)
+    public static function notColor($input, $pattern = null)
     {
     }
 
@@ -4443,7 +4409,7 @@ class V
      * @return $this
      * @see \Wei\IsContains::__invoke
      */
-    public static function contains($search = null, $regex = false)
+    public static function contains($input, $search = null, $regex = false)
     {
     }
 
@@ -4451,7 +4417,7 @@ class V
      * @return $this
      * @see \Wei\IsContains::__invoke
      */
-    public static function notContains($search = null, $regex = false)
+    public static function notContains($input, $search = null, $regex = false)
     {
     }
 
@@ -4459,7 +4425,7 @@ class V
      * @return $this
      * @see \Wei\IsCreditCard::__invoke
      */
-    public static function creditCard($type = null)
+    public static function creditCard($input, $type = null)
     {
     }
 
@@ -4467,7 +4433,7 @@ class V
      * @return $this
      * @see \Wei\IsCreditCard::__invoke
      */
-    public static function notCreditCard($type = null)
+    public static function notCreditCard($input, $type = null)
     {
     }
 
@@ -4475,7 +4441,7 @@ class V
      * @return $this
      * @see \Wei\IsDate::__invoke
      */
-    public static function date($name = null, string $label = null, $format = null)
+    public static function date($input, $format = null)
     {
     }
 
@@ -4483,7 +4449,7 @@ class V
      * @return $this
      * @see \Wei\IsDate::__invoke
      */
-    public static function notDate($name = null, string $label = null, $format = null)
+    public static function notDate($input, $format = null)
     {
     }
 
@@ -4491,7 +4457,7 @@ class V
      * @return $this
      * @see \Wei\IsDateTime::__invoke
      */
-    public static function dateTime($name = null, string $label = null, $format = null)
+    public static function dateTime($input, $format = null)
     {
     }
 
@@ -4499,7 +4465,7 @@ class V
      * @return $this
      * @see \Wei\IsDateTime::__invoke
      */
-    public static function notDateTime($name = null, string $label = null, $format = null)
+    public static function notDateTime($input, $format = null)
     {
     }
 
@@ -4507,7 +4473,7 @@ class V
      * @return $this
      * @see \Wei\IsDecimal::__invoke
      */
-    public static function decimal($name = null, string $label = null)
+    public static function decimal($input)
     {
     }
 
@@ -4515,7 +4481,7 @@ class V
      * @return $this
      * @see \Wei\IsDecimal::__invoke
      */
-    public static function notDecimal($name = null, string $label = null)
+    public static function notDecimal($input)
     {
     }
 
@@ -4523,7 +4489,7 @@ class V
      * @return $this
      * @see \Wei\IsDefaultInt::__invoke
      */
-    public static function defaultInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function defaultInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -4531,7 +4497,7 @@ class V
      * @return $this
      * @see \Wei\IsDefaultInt::__invoke
      */
-    public static function notDefaultInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function notDefaultInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -4539,7 +4505,7 @@ class V
      * @return $this
      * @see \Wei\IsDigit::__invoke
      */
-    public static function digit($pattern = null)
+    public static function digit($input, $pattern = null)
     {
     }
 
@@ -4547,7 +4513,7 @@ class V
      * @return $this
      * @see \Wei\IsDigit::__invoke
      */
-    public static function notDigit($pattern = null)
+    public static function notDigit($input, $pattern = null)
     {
     }
 
@@ -4555,7 +4521,7 @@ class V
      * @return $this
      * @see \Wei\IsDir::__invoke
      */
-    public static function dir()
+    public static function dir($input)
     {
     }
 
@@ -4563,7 +4529,7 @@ class V
      * @return $this
      * @see \Wei\IsDir::__invoke
      */
-    public static function notDir()
+    public static function notDir($input)
     {
     }
 
@@ -4571,7 +4537,7 @@ class V
      * @return $this
      * @see \Wei\IsDivisibleBy::__invoke
      */
-    public static function divisibleBy($divisor = null)
+    public static function divisibleBy($input, $divisor = null)
     {
     }
 
@@ -4579,7 +4545,7 @@ class V
      * @return $this
      * @see \Wei\IsDivisibleBy::__invoke
      */
-    public static function notDivisibleBy($divisor = null)
+    public static function notDivisibleBy($input, $divisor = null)
     {
     }
 
@@ -4587,7 +4553,7 @@ class V
      * @return $this
      * @see \Wei\IsDoubleByte::__invoke
      */
-    public static function doubleByte($pattern = null)
+    public static function doubleByte($input, $pattern = null)
     {
     }
 
@@ -4595,7 +4561,7 @@ class V
      * @return $this
      * @see \Wei\IsDoubleByte::__invoke
      */
-    public static function notDoubleByte($pattern = null)
+    public static function notDoubleByte($input, $pattern = null)
     {
     }
 
@@ -4603,7 +4569,7 @@ class V
      * @return $this
      * @see \Wei\IsEach::__invoke
      */
-    public static function each($v = null)
+    public static function each($input, $v = null)
     {
     }
 
@@ -4611,7 +4577,7 @@ class V
      * @return $this
      * @see \Wei\IsEach::__invoke
      */
-    public static function notEach($v = null)
+    public static function notEach($input, $v = null)
     {
     }
 
@@ -4619,7 +4585,7 @@ class V
      * @return $this
      * @see \Wei\IsEmail::__invoke
      */
-    public static function email()
+    public static function email($input)
     {
     }
 
@@ -4627,7 +4593,7 @@ class V
      * @return $this
      * @see \Wei\IsEmail::__invoke
      */
-    public static function notEmail()
+    public static function notEmail($input)
     {
     }
 
@@ -4635,7 +4601,7 @@ class V
      * @return $this
      * @see \Wei\IsEmpty::__invoke
      */
-    public static function empty()
+    public static function empty($input)
     {
     }
 
@@ -4643,7 +4609,7 @@ class V
      * @return $this
      * @see \Wei\IsEmpty::__invoke
      */
-    public static function notEmpty()
+    public static function notEmpty($input)
     {
     }
 
@@ -4651,7 +4617,7 @@ class V
      * @return $this
      * @see \Wei\IsEndsWith::__invoke
      */
-    public static function endsWith($findMe = null, $case = null)
+    public static function endsWith($input, $findMe = null, $case = null)
     {
     }
 
@@ -4659,7 +4625,7 @@ class V
      * @return $this
      * @see \Wei\IsEndsWith::__invoke
      */
-    public static function notEndsWith($findMe = null, $case = null)
+    public static function notEndsWith($input, $findMe = null, $case = null)
     {
     }
 
@@ -4667,7 +4633,7 @@ class V
      * @return $this
      * @see \Wei\IsEqualTo::__invoke
      */
-    public static function equalTo($value = null)
+    public static function equalTo($input, $value = null)
     {
     }
 
@@ -4675,7 +4641,7 @@ class V
      * @return $this
      * @see \Wei\IsEqualTo::__invoke
      */
-    public static function notEqualTo($value = null)
+    public static function notEqualTo($input, $value = null)
     {
     }
 
@@ -4683,7 +4649,7 @@ class V
      * @return $this
      * @see \Wei\IsExists::__invoke
      */
-    public static function exists()
+    public static function exists($input)
     {
     }
 
@@ -4691,7 +4657,7 @@ class V
      * @return $this
      * @see \Wei\IsExists::__invoke
      */
-    public static function notExists()
+    public static function notExists($input)
     {
     }
 
@@ -4699,7 +4665,7 @@ class V
      * @return $this
      * @see \Wei\IsFieldExists::__invoke
      */
-    public static function fieldExists()
+    public static function fieldExists($input)
     {
     }
 
@@ -4707,7 +4673,7 @@ class V
      * @return $this
      * @see \Wei\IsFieldExists::__invoke
      */
-    public static function notFieldExists()
+    public static function notFieldExists($input)
     {
     }
 
@@ -4715,7 +4681,7 @@ class V
      * @return $this
      * @see \Wei\IsFile::__invoke
      */
-    public static function file($options = [])
+    public static function file($input, $options = [])
     {
     }
 
@@ -4723,7 +4689,7 @@ class V
      * @return $this
      * @see \Wei\IsFile::__invoke
      */
-    public static function notFile($options = [])
+    public static function notFile($input, $options = [])
     {
     }
 
@@ -4731,7 +4697,7 @@ class V
      * @return $this
      * @see \Wei\IsFloat::__invoke
      */
-    public static function float()
+    public static function float($input)
     {
     }
 
@@ -4739,7 +4705,7 @@ class V
      * @return $this
      * @see \Wei\IsFloat::__invoke
      */
-    public static function notFloat()
+    public static function notFloat($input)
     {
     }
 
@@ -4747,7 +4713,7 @@ class V
      * @return $this
      * @see \Wei\IsGreaterThan::__invoke
      */
-    public static function greaterThan($value = null)
+    public static function greaterThan($input, $value = null)
     {
     }
 
@@ -4755,7 +4721,7 @@ class V
      * @return $this
      * @see \Wei\IsGreaterThan::__invoke
      */
-    public static function notGreaterThan($value = null)
+    public static function notGreaterThan($input, $value = null)
     {
     }
 
@@ -4763,7 +4729,7 @@ class V
      * @return $this
      * @see \Wei\IsGreaterThanOrEqual::__invoke
      */
-    public static function greaterThanOrEqual($value = null)
+    public static function greaterThanOrEqual($input, $value = null)
     {
     }
 
@@ -4771,7 +4737,7 @@ class V
      * @return $this
      * @see \Wei\IsGreaterThanOrEqual::__invoke
      */
-    public static function notGreaterThanOrEqual($value = null)
+    public static function notGreaterThanOrEqual($input, $value = null)
     {
     }
 
@@ -4779,7 +4745,7 @@ class V
      * @return $this
      * @see \Wei\IsGt::__invoke
      */
-    public static function gt($value = null)
+    public static function gt($input, $value = null)
     {
     }
 
@@ -4787,7 +4753,7 @@ class V
      * @return $this
      * @see \Wei\IsGt::__invoke
      */
-    public static function notGt($value = null)
+    public static function notGt($input, $value = null)
     {
     }
 
@@ -4795,7 +4761,7 @@ class V
      * @return $this
      * @see \Wei\IsGte::__invoke
      */
-    public static function gte($value = null)
+    public static function gte($input, $value = null)
     {
     }
 
@@ -4803,7 +4769,7 @@ class V
      * @return $this
      * @see \Wei\IsGte::__invoke
      */
-    public static function notGte($value = null)
+    public static function notGte($input, $value = null)
     {
     }
 
@@ -4811,7 +4777,7 @@ class V
      * @return $this
      * @see \Wei\IsIdCardCn::__invoke
      */
-    public static function idCardCn()
+    public static function idCardCn($input)
     {
     }
 
@@ -4819,7 +4785,7 @@ class V
      * @return $this
      * @see \Wei\IsIdCardCn::__invoke
      */
-    public static function notIdCardCn()
+    public static function notIdCardCn($input)
     {
     }
 
@@ -4827,7 +4793,7 @@ class V
      * @return $this
      * @see \Wei\IsIdCardHk::__invoke
      */
-    public static function idCardHk()
+    public static function idCardHk($input)
     {
     }
 
@@ -4835,7 +4801,7 @@ class V
      * @return $this
      * @see \Wei\IsIdCardHk::__invoke
      */
-    public static function notIdCardHk()
+    public static function notIdCardHk($input)
     {
     }
 
@@ -4843,7 +4809,7 @@ class V
      * @return $this
      * @see \Wei\IsIdCardMo::__invoke
      */
-    public static function idCardMo($pattern = null)
+    public static function idCardMo($input, $pattern = null)
     {
     }
 
@@ -4851,7 +4817,7 @@ class V
      * @return $this
      * @see \Wei\IsIdCardMo::__invoke
      */
-    public static function notIdCardMo($pattern = null)
+    public static function notIdCardMo($input, $pattern = null)
     {
     }
 
@@ -4859,7 +4825,7 @@ class V
      * @return $this
      * @see \Wei\IsIdCardTw::__invoke
      */
-    public static function idCardTw()
+    public static function idCardTw($input)
     {
     }
 
@@ -4867,7 +4833,7 @@ class V
      * @return $this
      * @see \Wei\IsIdCardTw::__invoke
      */
-    public static function notIdCardTw()
+    public static function notIdCardTw($input)
     {
     }
 
@@ -4875,7 +4841,7 @@ class V
      * @return $this
      * @see \Wei\IsIdenticalTo::__invoke
      */
-    public static function identicalTo($value = null)
+    public static function identicalTo($input, $value = null)
     {
     }
 
@@ -4883,7 +4849,7 @@ class V
      * @return $this
      * @see \Wei\IsIdenticalTo::__invoke
      */
-    public static function notIdenticalTo($value = null)
+    public static function notIdenticalTo($input, $value = null)
     {
     }
 
@@ -4891,7 +4857,7 @@ class V
      * @return $this
      * @see \Wei\IsImage::__invoke
      */
-    public static function image($options = [])
+    public static function image($input, $options = [])
     {
     }
 
@@ -4899,7 +4865,7 @@ class V
      * @return $this
      * @see \Wei\IsImage::__invoke
      */
-    public static function notImage($options = [])
+    public static function notImage($input, $options = [])
     {
     }
 
@@ -4907,7 +4873,7 @@ class V
      * @return $this
      * @see \Wei\IsIn::__invoke
      */
-    public static function in($array = [], $strict = null)
+    public static function in($input, $array = [], $strict = null)
     {
     }
 
@@ -4915,7 +4881,7 @@ class V
      * @return $this
      * @see \Wei\IsIn::__invoke
      */
-    public static function notIn($array = [], $strict = null)
+    public static function notIn($input, $array = [], $strict = null)
     {
     }
 
@@ -4923,7 +4889,7 @@ class V
      * @return $this
      * @see \Wei\IsInt::__invoke
      */
-    public static function int($name = null, string $label = null, int $min = null, int $max = null)
+    public static function int($input, int $min = null, int $max = null)
     {
     }
 
@@ -4931,7 +4897,7 @@ class V
      * @return $this
      * @see \Wei\IsInt::__invoke
      */
-    public static function notInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function notInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -4939,7 +4905,7 @@ class V
      * @return $this
      * @see \Wei\IsIp::__invoke
      */
-    public static function ip($options = [])
+    public static function ip($input, $options = [])
     {
     }
 
@@ -4947,7 +4913,7 @@ class V
      * @return $this
      * @see \Wei\IsIp::__invoke
      */
-    public static function notIp($options = [])
+    public static function notIp($input, $options = [])
     {
     }
 
@@ -4955,7 +4921,7 @@ class V
      * @return $this
      * @see \Wei\IsLength::__invoke
      */
-    public static function length($min = null, $max = null)
+    public static function length($input, $min = null, $max = null)
     {
     }
 
@@ -4963,7 +4929,7 @@ class V
      * @return $this
      * @see \Wei\IsLength::__invoke
      */
-    public static function notLength($min = null, $max = null)
+    public static function notLength($input, $min = null, $max = null)
     {
     }
 
@@ -4971,7 +4937,7 @@ class V
      * @return $this
      * @see \Wei\IsLessThan::__invoke
      */
-    public static function lessThan($value = null)
+    public static function lessThan($input, $value = null)
     {
     }
 
@@ -4979,7 +4945,7 @@ class V
      * @return $this
      * @see \Wei\IsLessThan::__invoke
      */
-    public static function notLessThan($value = null)
+    public static function notLessThan($input, $value = null)
     {
     }
 
@@ -4987,7 +4953,7 @@ class V
      * @return $this
      * @see \Wei\IsLessThanOrEqual::__invoke
      */
-    public static function lessThanOrEqual($value = null)
+    public static function lessThanOrEqual($input, $value = null)
     {
     }
 
@@ -4995,7 +4961,7 @@ class V
      * @return $this
      * @see \Wei\IsLessThanOrEqual::__invoke
      */
-    public static function notLessThanOrEqual($value = null)
+    public static function notLessThanOrEqual($input, $value = null)
     {
     }
 
@@ -5003,7 +4969,7 @@ class V
      * @return $this
      * @see \Wei\IsLowercase::__invoke
      */
-    public static function lowercase()
+    public static function lowercase($input)
     {
     }
 
@@ -5011,7 +4977,7 @@ class V
      * @return $this
      * @see \Wei\IsLowercase::__invoke
      */
-    public static function notLowercase()
+    public static function notLowercase($input)
     {
     }
 
@@ -5019,7 +4985,7 @@ class V
      * @return $this
      * @see \Wei\IsLt::__invoke
      */
-    public static function lt($value = null)
+    public static function lt($input, $value = null)
     {
     }
 
@@ -5027,7 +4993,7 @@ class V
      * @return $this
      * @see \Wei\IsLt::__invoke
      */
-    public static function notLt($value = null)
+    public static function notLt($input, $value = null)
     {
     }
 
@@ -5035,7 +5001,7 @@ class V
      * @return $this
      * @see \Wei\IsLte::__invoke
      */
-    public static function lte($value = null)
+    public static function lte($input, $value = null)
     {
     }
 
@@ -5043,7 +5009,7 @@ class V
      * @return $this
      * @see \Wei\IsLte::__invoke
      */
-    public static function notLte($value = null)
+    public static function notLte($input, $value = null)
     {
     }
 
@@ -5051,7 +5017,7 @@ class V
      * @return $this
      * @see \Wei\IsLuhn::__invoke
      */
-    public static function luhn()
+    public static function luhn($input)
     {
     }
 
@@ -5059,7 +5025,7 @@ class V
      * @return $this
      * @see \Wei\IsLuhn::__invoke
      */
-    public static function notLuhn()
+    public static function notLuhn($input)
     {
     }
 
@@ -5067,7 +5033,7 @@ class V
      * @return $this
      * @see \Wei\IsMaxAccuracy::__invoke
      */
-    public static function maxAccuracy($max = null)
+    public static function maxAccuracy($input, $max = null)
     {
     }
 
@@ -5075,7 +5041,7 @@ class V
      * @return $this
      * @see \Wei\IsMaxAccuracy::__invoke
      */
-    public static function notMaxAccuracy($max = null)
+    public static function notMaxAccuracy($input, $max = null)
     {
     }
 
@@ -5083,7 +5049,7 @@ class V
      * @return $this
      * @see \Wei\IsMaxCharLength::__invoke
      */
-    public static function maxCharLength($max = null, $ignore = null)
+    public static function maxCharLength($input, $max = null, $ignore = null)
     {
     }
 
@@ -5091,7 +5057,7 @@ class V
      * @return $this
      * @see \Wei\IsMaxCharLength::__invoke
      */
-    public static function notMaxCharLength($max = null, $ignore = null)
+    public static function notMaxCharLength($input, $max = null, $ignore = null)
     {
     }
 
@@ -5099,7 +5065,7 @@ class V
      * @return $this
      * @see \Wei\IsMaxLength::__invoke
      */
-    public static function maxLength($max = null, $ignore = null)
+    public static function maxLength($input, $max = null, $ignore = null)
     {
     }
 
@@ -5107,7 +5073,7 @@ class V
      * @return $this
      * @see \Wei\IsMaxLength::__invoke
      */
-    public static function notMaxLength($max = null, $ignore = null)
+    public static function notMaxLength($input, $max = null, $ignore = null)
     {
     }
 
@@ -5115,7 +5081,7 @@ class V
      * @return $this
      * @see \Wei\IsMediumInt::__invoke
      */
-    public static function mediumInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function mediumInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -5123,7 +5089,7 @@ class V
      * @return $this
      * @see \Wei\IsMediumInt::__invoke
      */
-    public static function notMediumInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function notMediumInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -5131,7 +5097,7 @@ class V
      * @return $this
      * @see \Wei\IsMediumText::__invoke
      */
-    public static function mediumText($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+    public static function mediumText($input, int $minLength = null, int $maxLength = null)
     {
     }
 
@@ -5139,19 +5105,7 @@ class V
      * @return $this
      * @see \Wei\IsMediumText::__invoke
      */
-    public static function notMediumText(
-        $name = null,
-        string $label = null,
-        int $minLength = null,
-        int $maxLength = null
-    ) {
-    }
-
-    /**
-     * @return $this
-     * @see \Wei\IsMinCharLength::__invoke
-     */
-    public static function minCharLength($min = null, $ignore = null)
+    public static function notMediumText($input, int $minLength = null, int $maxLength = null)
     {
     }
 
@@ -5159,7 +5113,15 @@ class V
      * @return $this
      * @see \Wei\IsMinCharLength::__invoke
      */
-    public static function notMinCharLength($min = null, $ignore = null)
+    public static function minCharLength($input, $min = null, $ignore = null)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsMinCharLength::__invoke
+     */
+    public static function notMinCharLength($input, $min = null, $ignore = null)
     {
     }
 
@@ -5167,7 +5129,7 @@ class V
      * @return $this
      * @see \Wei\IsMinLength::__invoke
      */
-    public static function minLength($min = null, $ignore = null)
+    public static function minLength($input, $min = null, $ignore = null)
     {
     }
 
@@ -5175,7 +5137,7 @@ class V
      * @return $this
      * @see \Wei\IsMinLength::__invoke
      */
-    public static function notMinLength($min = null, $ignore = null)
+    public static function notMinLength($input, $min = null, $ignore = null)
     {
     }
 
@@ -5183,7 +5145,7 @@ class V
      * @return $this
      * @see \Wei\IsMobileCn::__invoke
      */
-    public static function mobileCn($pattern = null)
+    public static function mobileCn($input, $pattern = null)
     {
     }
 
@@ -5191,7 +5153,7 @@ class V
      * @return $this
      * @see \Wei\IsMobileCn::__invoke
      */
-    public static function notMobileCn($pattern = null)
+    public static function notMobileCn($input, $pattern = null)
     {
     }
 
@@ -5199,7 +5161,7 @@ class V
      * @return $this
      * @see \Wei\IsNaturalNumber::__invoke
      */
-    public static function naturalNumber()
+    public static function naturalNumber($input)
     {
     }
 
@@ -5207,7 +5169,7 @@ class V
      * @return $this
      * @see \Wei\IsNaturalNumber::__invoke
      */
-    public static function notNaturalNumber()
+    public static function notNaturalNumber($input)
     {
     }
 
@@ -5215,7 +5177,7 @@ class V
      * @return $this
      * @see \Wei\IsNoneOf::__invoke
      */
-    public static function noneOf(array $rules = [], $ignore = null)
+    public static function noneOf($input, array $rules = [], $ignore = null)
     {
     }
 
@@ -5223,7 +5185,7 @@ class V
      * @return $this
      * @see \Wei\IsNoneOf::__invoke
      */
-    public static function notNoneOf(array $rules = [], $ignore = null)
+    public static function notNoneOf($input, array $rules = [], $ignore = null)
     {
     }
 
@@ -5231,7 +5193,7 @@ class V
      * @return $this
      * @see \Wei\IsNullType::__invoke
      */
-    public static function nullType()
+    public static function nullType($input)
     {
     }
 
@@ -5239,7 +5201,7 @@ class V
      * @return $this
      * @see \Wei\IsNullType::__invoke
      */
-    public static function notNullType()
+    public static function notNullType($input)
     {
     }
 
@@ -5247,7 +5209,7 @@ class V
      * @return $this
      * @see \Wei\IsNumber::__invoke
      */
-    public static function number($name = null, string $label = null, int $precision = null, int $scale = null)
+    public static function number($input, int $precision = null, int $scale = null)
     {
     }
 
@@ -5255,7 +5217,7 @@ class V
      * @return $this
      * @see \Wei\IsNumber::__invoke
      */
-    public static function notNumber($name = null, string $label = null, int $precision = null, int $scale = null)
+    public static function notNumber($input, int $precision = null, int $scale = null)
     {
     }
 
@@ -5263,7 +5225,7 @@ class V
      * @return $this
      * @see \Wei\IsObject::__invoke
      */
-    public static function object($name = null, string $label = null)
+    public static function object($input)
     {
     }
 
@@ -5271,7 +5233,7 @@ class V
      * @return $this
      * @see \Wei\IsObject::__invoke
      */
-    public static function notObject($name = null, string $label = null)
+    public static function notObject($input)
     {
     }
 
@@ -5279,7 +5241,7 @@ class V
      * @return $this
      * @see \Wei\IsOneOf::__invoke
      */
-    public static function oneOf(array $rules = [], $atLeast = null)
+    public static function oneOf($input, array $rules = [], $atLeast = null)
     {
     }
 
@@ -5287,7 +5249,7 @@ class V
      * @return $this
      * @see \Wei\IsOneOf::__invoke
      */
-    public static function notOneOf(array $rules = [], $atLeast = null)
+    public static function notOneOf($input, array $rules = [], $atLeast = null)
     {
     }
 
@@ -5295,7 +5257,7 @@ class V
      * @return $this
      * @see \Wei\IsPassword::__invoke
      */
-    public static function password(array $options = [])
+    public static function password($input, array $options = [])
     {
     }
 
@@ -5303,7 +5265,7 @@ class V
      * @return $this
      * @see \Wei\IsPassword::__invoke
      */
-    public static function notPassword(array $options = [])
+    public static function notPassword($input, array $options = [])
     {
     }
 
@@ -5311,7 +5273,7 @@ class V
      * @return $this
      * @see \Wei\IsPhone::__invoke
      */
-    public static function phone($pattern = null)
+    public static function phone($input, $pattern = null)
     {
     }
 
@@ -5319,7 +5281,7 @@ class V
      * @return $this
      * @see \Wei\IsPhone::__invoke
      */
-    public static function notPhone($pattern = null)
+    public static function notPhone($input, $pattern = null)
     {
     }
 
@@ -5327,7 +5289,7 @@ class V
      * @return $this
      * @see \Wei\IsPhoneCn::__invoke
      */
-    public static function phoneCn($pattern = null)
+    public static function phoneCn($input, $pattern = null)
     {
     }
 
@@ -5335,7 +5297,7 @@ class V
      * @return $this
      * @see \Wei\IsPhoneCn::__invoke
      */
-    public static function notPhoneCn($pattern = null)
+    public static function notPhoneCn($input, $pattern = null)
     {
     }
 
@@ -5343,7 +5305,7 @@ class V
      * @return $this
      * @see \Wei\IsPlateNumberCn::__invoke
      */
-    public static function plateNumberCn($pattern = null)
+    public static function plateNumberCn($input, $pattern = null)
     {
     }
 
@@ -5351,7 +5313,7 @@ class V
      * @return $this
      * @see \Wei\IsPlateNumberCn::__invoke
      */
-    public static function notPlateNumberCn($pattern = null)
+    public static function notPlateNumberCn($input, $pattern = null)
     {
     }
 
@@ -5359,7 +5321,7 @@ class V
      * @return $this
      * @see \Wei\IsPositiveInteger::__invoke
      */
-    public static function positiveInteger()
+    public static function positiveInteger($input)
     {
     }
 
@@ -5367,7 +5329,7 @@ class V
      * @return $this
      * @see \Wei\IsPositiveInteger::__invoke
      */
-    public static function notPositiveInteger()
+    public static function notPositiveInteger($input)
     {
     }
 
@@ -5375,7 +5337,7 @@ class V
      * @return $this
      * @see \Wei\IsPostcodeCn::__invoke
      */
-    public static function postcodeCn($pattern = null)
+    public static function postcodeCn($input, $pattern = null)
     {
     }
 
@@ -5383,7 +5345,7 @@ class V
      * @return $this
      * @see \Wei\IsPostcodeCn::__invoke
      */
-    public static function notPostcodeCn($pattern = null)
+    public static function notPostcodeCn($input, $pattern = null)
     {
     }
 
@@ -5391,7 +5353,7 @@ class V
      * @return $this
      * @see \Wei\IsPresent::__invoke
      */
-    public static function present()
+    public static function present($input)
     {
     }
 
@@ -5399,7 +5361,7 @@ class V
      * @return $this
      * @see \Wei\IsPresent::__invoke
      */
-    public static function notPresent()
+    public static function notPresent($input)
     {
     }
 
@@ -5407,7 +5369,7 @@ class V
      * @return $this
      * @see \Wei\IsQQ::__invoke
      */
-    public static function qQ($pattern = null)
+    public static function qQ($input, $pattern = null)
     {
     }
 
@@ -5415,7 +5377,7 @@ class V
      * @return $this
      * @see \Wei\IsQQ::__invoke
      */
-    public static function notQQ($pattern = null)
+    public static function notQQ($input, $pattern = null)
     {
     }
 
@@ -5423,7 +5385,7 @@ class V
      * @return $this
      * @see \Wei\IsRecordExists::__invoke
      */
-    public static function recordExists($table = null, $field = 'id')
+    public static function recordExists($input = null, $table = null, $field = 'id')
     {
     }
 
@@ -5431,7 +5393,7 @@ class V
      * @return $this
      * @see \Wei\IsRecordExists::__invoke
      */
-    public static function notRecordExists($table = null, $field = 'id')
+    public static function notRecordExists($input = null, $table = null, $field = 'id')
     {
     }
 
@@ -5439,7 +5401,7 @@ class V
      * @return $this
      * @see \Wei\IsRegex::__invoke
      */
-    public static function regex($pattern = null)
+    public static function regex($input, $pattern = null)
     {
     }
 
@@ -5447,7 +5409,7 @@ class V
      * @return $this
      * @see \Wei\IsRegex::__invoke
      */
-    public static function notRegex($pattern = null)
+    public static function notRegex($input, $pattern = null)
     {
     }
 
@@ -5455,7 +5417,7 @@ class V
      * @return $this
      * @see \Wei\IsRequired::__invoke
      */
-    public static function required($required = null)
+    public static function required($input, $required = null)
     {
     }
 
@@ -5463,7 +5425,7 @@ class V
      * @return $this
      * @see \Wei\IsRequired::__invoke
      */
-    public static function notRequired($required = null)
+    public static function notRequired($input, $required = null)
     {
     }
 
@@ -5471,7 +5433,7 @@ class V
      * @return $this
      * @see \Wei\IsSmallInt::__invoke
      */
-    public static function smallInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function smallInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -5479,7 +5441,7 @@ class V
      * @return $this
      * @see \Wei\IsSmallInt::__invoke
      */
-    public static function notSmallInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function notSmallInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -5487,7 +5449,7 @@ class V
      * @return $this
      * @see \Wei\IsSomeOf::__invoke
      */
-    public static function someOf(array $rules = [], $atLeast = null)
+    public static function someOf($input, array $rules = [], $atLeast = null)
     {
     }
 
@@ -5495,7 +5457,7 @@ class V
      * @return $this
      * @see \Wei\IsSomeOf::__invoke
      */
-    public static function notSomeOf(array $rules = [], $atLeast = null)
+    public static function notSomeOf($input, array $rules = [], $atLeast = null)
     {
     }
 
@@ -5503,7 +5465,7 @@ class V
      * @return $this
      * @see \Wei\IsStartsWith::__invoke
      */
-    public static function startsWith($findMe = null, $case = null)
+    public static function startsWith($input, $findMe = null, $case = null)
     {
     }
 
@@ -5511,7 +5473,7 @@ class V
      * @return $this
      * @see \Wei\IsStartsWith::__invoke
      */
-    public static function notStartsWith($findMe = null, $case = null)
+    public static function notStartsWith($input, $findMe = null, $case = null)
     {
     }
 
@@ -5519,7 +5481,7 @@ class V
      * @return $this
      * @see \Wei\IsString::__invoke
      */
-    public static function string($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+    public static function string($input, int $minLength = null, int $maxLength = null)
     {
     }
 
@@ -5527,7 +5489,7 @@ class V
      * @return $this
      * @see \Wei\IsString::__invoke
      */
-    public static function notString($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+    public static function notString($input, int $minLength = null, int $maxLength = null)
     {
     }
 
@@ -5535,7 +5497,7 @@ class V
      * @return $this
      * @see \Wei\IsText::__invoke
      */
-    public static function text($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+    public static function text($input, int $minLength = null, int $maxLength = null)
     {
     }
 
@@ -5543,7 +5505,7 @@ class V
      * @return $this
      * @see \Wei\IsText::__invoke
      */
-    public static function notText($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+    public static function notText($input, int $minLength = null, int $maxLength = null)
     {
     }
 
@@ -5551,7 +5513,7 @@ class V
      * @return $this
      * @see \Wei\IsTime::__invoke
      */
-    public static function time($name = null, string $label = null, $format = null)
+    public static function time($input, $format = null)
     {
     }
 
@@ -5559,7 +5521,7 @@ class V
      * @return $this
      * @see \Wei\IsTime::__invoke
      */
-    public static function notTime($name = null, string $label = null, $format = null)
+    public static function notTime($input, $format = null)
     {
     }
 
@@ -5567,7 +5529,7 @@ class V
      * @return $this
      * @see \Wei\IsTinyChar::__invoke
      */
-    public static function tinyChar($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+    public static function tinyChar($input, int $minLength = null, int $maxLength = null)
     {
     }
 
@@ -5575,7 +5537,7 @@ class V
      * @return $this
      * @see \Wei\IsTinyChar::__invoke
      */
-    public static function notTinyChar($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+    public static function notTinyChar($input, int $minLength = null, int $maxLength = null)
     {
     }
 
@@ -5583,7 +5545,7 @@ class V
      * @return $this
      * @see \Wei\IsTinyInt::__invoke
      */
-    public static function tinyInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function tinyInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -5591,7 +5553,7 @@ class V
      * @return $this
      * @see \Wei\IsTinyInt::__invoke
      */
-    public static function notTinyInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function notTinyInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -5599,7 +5561,7 @@ class V
      * @return $this
      * @see \Wei\IsTld::__invoke
      */
-    public static function tld($array = [], $strict = null)
+    public static function tld($input, $array = [], $strict = null)
     {
     }
 
@@ -5607,7 +5569,7 @@ class V
      * @return $this
      * @see \Wei\IsTld::__invoke
      */
-    public static function notTld($array = [], $strict = null)
+    public static function notTld($input, $array = [], $strict = null)
     {
     }
 
@@ -5615,7 +5577,7 @@ class V
      * @return $this
      * @see \Wei\IsType::__invoke
      */
-    public static function type($type = null)
+    public static function type($input, $type = null)
     {
     }
 
@@ -5623,7 +5585,7 @@ class V
      * @return $this
      * @see \Wei\IsType::__invoke
      */
-    public static function notType($type = null)
+    public static function notType($input, $type = null)
     {
     }
 
@@ -5631,7 +5593,7 @@ class V
      * @return $this
      * @see \Wei\IsUBigInt::__invoke
      */
-    public static function uBigInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function uBigInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -5639,7 +5601,7 @@ class V
      * @return $this
      * @see \Wei\IsUBigInt::__invoke
      */
-    public static function notUBigInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function notUBigInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -5647,7 +5609,7 @@ class V
      * @return $this
      * @see \Wei\IsUDefaultInt::__invoke
      */
-    public static function uDefaultInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function uDefaultInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -5655,7 +5617,7 @@ class V
      * @return $this
      * @see \Wei\IsUDefaultInt::__invoke
      */
-    public static function notUDefaultInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function notUDefaultInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -5663,7 +5625,7 @@ class V
      * @return $this
      * @see \Wei\IsUMediumInt::__invoke
      */
-    public static function uMediumInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function uMediumInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -5671,7 +5633,7 @@ class V
      * @return $this
      * @see \Wei\IsUMediumInt::__invoke
      */
-    public static function notUMediumInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function notUMediumInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -5679,7 +5641,7 @@ class V
      * @return $this
      * @see \Wei\IsUNumber::__invoke
      */
-    public static function uNumber($name = null, string $label = null, int $precision = null, int $scale = null)
+    public static function uNumber($input, int $precision = null, int $scale = null)
     {
     }
 
@@ -5687,7 +5649,7 @@ class V
      * @return $this
      * @see \Wei\IsUNumber::__invoke
      */
-    public static function notUNumber($name = null, string $label = null, int $precision = null, int $scale = null)
+    public static function notUNumber($input, int $precision = null, int $scale = null)
     {
     }
 
@@ -5695,7 +5657,7 @@ class V
      * @return $this
      * @see \Wei\IsUSmallInt::__invoke
      */
-    public static function uSmallInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function uSmallInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -5703,7 +5665,7 @@ class V
      * @return $this
      * @see \Wei\IsUSmallInt::__invoke
      */
-    public static function notUSmallInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function notUSmallInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -5711,7 +5673,7 @@ class V
      * @return $this
      * @see \Wei\IsUTinyInt::__invoke
      */
-    public static function uTinyInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function uTinyInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -5719,7 +5681,7 @@ class V
      * @return $this
      * @see \Wei\IsUTinyInt::__invoke
      */
-    public static function notUTinyInt($name = null, string $label = null, int $min = null, int $max = null)
+    public static function notUTinyInt($input, int $min = null, int $max = null)
     {
     }
 
@@ -5727,7 +5689,7 @@ class V
      * @return $this
      * @see \Wei\IsUppercase::__invoke
      */
-    public static function uppercase()
+    public static function uppercase($input)
     {
     }
 
@@ -5735,7 +5697,7 @@ class V
      * @return $this
      * @see \Wei\IsUppercase::__invoke
      */
-    public static function notUppercase()
+    public static function notUppercase($input)
     {
     }
 
@@ -5743,7 +5705,7 @@ class V
      * @return $this
      * @see \Wei\IsUrl::__invoke
      */
-    public static function url($options = [])
+    public static function url($input, $options = [])
     {
     }
 
@@ -5751,7 +5713,7 @@ class V
      * @return $this
      * @see \Wei\IsUrl::__invoke
      */
-    public static function notUrl($options = [])
+    public static function notUrl($input, $options = [])
     {
     }
 
@@ -5759,7 +5721,7 @@ class V
      * @return $this
      * @see \Wei\IsUuid::__invoke
      */
-    public static function uuid($pattern = null)
+    public static function uuid($input, $pattern = null)
     {
     }
 
@@ -5767,7 +5729,7 @@ class V
      * @return $this
      * @see \Wei\IsUuid::__invoke
      */
-    public static function notUuid($pattern = null)
+    public static function notUuid($input, $pattern = null)
     {
     }
 }
@@ -9942,47 +9904,13 @@ if (0) {
     class V
     {
         /**
-         * Add name for current field
+         * Add label for current validator
          *
          * @param string $label
-         * @return $this
+         * @return self
          * @see V::label
          */
-        public function label($label)
-        {
-        }
-
-        /**
-         * Add a new field
-         *
-         * @param string|array $name
-         * @param string|null $label
-         * @return $this
-         * @see V::key
-         */
-        public function key($name, $label = null)
-        {
-        }
-
-        /**
-         * @param mixed $value
-         * @param callable $callback
-         * @param callable|null $default
-         * @return $this
-         * @see V::when
-         */
-        public function when($value, $callback, callable $default = null)
-        {
-        }
-
-        /**
-         * @param mixed $value
-         * @param callable $callback
-         * @param callable|null $default
-         * @return $this
-         * @see V::unless
-         */
-        public function unless($value, callable $callback, callable $default = null)
+        public function label(string $label): self
         {
         }
 
@@ -9990,7 +9918,7 @@ if (0) {
          * @return $this
          * @see V::defaultOptional
          */
-        public function defaultOptional()
+        public function defaultOptional(): self
         {
         }
 
@@ -9998,7 +9926,7 @@ if (0) {
          * @return $this
          * @see V::defaultRequired
          */
-        public function defaultRequired()
+        public function defaultRequired(): self
         {
         }
 
@@ -10006,7 +9934,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsAll::__invoke
          */
-        public function all(array $rules = [])
+        public function all($key = null, string $label = null, array $rules = [])
         {
         }
 
@@ -10014,7 +9942,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsAll::__invoke
          */
-        public function notAll(array $rules = [])
+        public function notAll($key = null, string $label = null, array $rules = [])
         {
         }
 
@@ -10022,7 +9950,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsAllOf::__invoke
          */
-        public function allOf(array $rules = [], $atLeast = null)
+        public function allOf($key = null, string $label = null, array $rules = [], $atLeast = null)
         {
         }
 
@@ -10030,7 +9958,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsAllOf::__invoke
          */
-        public function notAllOf(array $rules = [], $atLeast = null)
+        public function notAllOf($key = null, string $label = null, array $rules = [], $atLeast = null)
         {
         }
 
@@ -10038,7 +9966,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsAllowEmpty::__invoke
          */
-        public function allowEmpty()
+        public function allowEmpty($key = null, string $label = null)
         {
         }
 
@@ -10046,7 +9974,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsAllowEmpty::__invoke
          */
-        public function notAllowEmpty()
+        public function notAllowEmpty($key = null, string $label = null)
         {
         }
 
@@ -10054,7 +9982,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsAlnum::__invoke
          */
-        public function alnum($pattern = null)
+        public function alnum($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -10062,7 +9990,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsAlnum::__invoke
          */
-        public function notAlnum($pattern = null)
+        public function notAlnum($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -10070,7 +9998,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsAlpha::__invoke
          */
-        public function alpha($pattern = null)
+        public function alpha($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -10078,7 +10006,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsAlpha::__invoke
          */
-        public function notAlpha($pattern = null)
+        public function notAlpha($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -10086,7 +10014,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsAnyDateTime::__invoke
          */
-        public function anyDateTime($name = null, string $label = null, $format = null)
+        public function anyDateTime($key = null, string $label = null, $format = null)
         {
         }
 
@@ -10094,7 +10022,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsAnyDateTime::__invoke
          */
-        public function notAnyDateTime($name = null, string $label = null, $format = null)
+        public function notAnyDateTime($key = null, string $label = null, $format = null)
         {
         }
 
@@ -10102,7 +10030,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsArray::__invoke
          */
-        public function array($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+        public function array($key = null, string $label = null, int $minLength = null, int $maxLength = null)
         {
         }
 
@@ -10110,7 +10038,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsArray::__invoke
          */
-        public function notArray($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+        public function notArray($key = null, string $label = null, int $minLength = null, int $maxLength = null)
         {
         }
 
@@ -10118,7 +10046,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsBetween::__invoke
          */
-        public function between($min = null, $max = null)
+        public function between($key = null, string $label = null, $min = null, $max = null)
         {
         }
 
@@ -10126,7 +10054,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsBetween::__invoke
          */
-        public function notBetween($min = null, $max = null)
+        public function notBetween($key = null, string $label = null, $min = null, $max = null)
         {
         }
 
@@ -10134,7 +10062,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsBigInt::__invoke
          */
-        public function bigInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function bigInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -10142,7 +10070,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsBigInt::__invoke
          */
-        public function notBigInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function notBigInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -10150,7 +10078,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsBlank::__invoke
          */
-        public function blank()
+        public function blank($key = null, string $label = null)
         {
         }
 
@@ -10158,7 +10086,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsBlank::__invoke
          */
-        public function notBlank()
+        public function notBlank($key = null, string $label = null)
         {
         }
 
@@ -10166,7 +10094,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsBool::__invoke
          */
-        public function bool($name = null, string $label = null)
+        public function bool($key = null, string $label = null)
         {
         }
 
@@ -10174,7 +10102,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsBool::__invoke
          */
-        public function notBool($name = null, string $label = null)
+        public function notBool($key = null, string $label = null)
         {
         }
 
@@ -10182,7 +10110,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsBoolable::__invoke
          */
-        public function boolable()
+        public function boolable($key = null, string $label = null)
         {
         }
 
@@ -10190,7 +10118,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsBoolable::__invoke
          */
-        public function notBoolable()
+        public function notBoolable($key = null, string $label = null)
         {
         }
 
@@ -10198,7 +10126,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsCallback::__invoke
          */
-        public function callback($fn = null, $message = null)
+        public function callback($key = null, string $label = null, $fn = null, $message = null)
         {
         }
 
@@ -10206,7 +10134,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsCallback::__invoke
          */
-        public function notCallback($fn = null, $message = null)
+        public function notCallback($key = null, string $label = null, $fn = null, $message = null)
         {
         }
 
@@ -10214,7 +10142,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsChar::__invoke
          */
-        public function char($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+        public function char($key = null, string $label = null, int $minLength = null, int $maxLength = null)
         {
         }
 
@@ -10222,7 +10150,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsChar::__invoke
          */
-        public function notChar($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+        public function notChar($key = null, string $label = null, int $minLength = null, int $maxLength = null)
         {
         }
 
@@ -10230,7 +10158,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsChildren::__invoke
          */
-        public function children(V $v = null)
+        public function children($key = null, string $label = null, V $v = null)
         {
         }
 
@@ -10238,7 +10166,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsChildren::__invoke
          */
-        public function notChildren(V $v = null)
+        public function notChildren($key = null, string $label = null, V $v = null)
         {
         }
 
@@ -10246,7 +10174,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsChinese::__invoke
          */
-        public function chinese($pattern = null)
+        public function chinese($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -10254,7 +10182,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsChinese::__invoke
          */
-        public function notChinese($pattern = null)
+        public function notChinese($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -10262,7 +10190,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsColor::__invoke
          */
-        public function color($pattern = null)
+        public function color($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -10270,7 +10198,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsColor::__invoke
          */
-        public function notColor($pattern = null)
+        public function notColor($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -10278,7 +10206,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsContains::__invoke
          */
-        public function contains($search = null, $regex = false)
+        public function contains($key = null, string $label = null, $search = null, $regex = false)
         {
         }
 
@@ -10286,7 +10214,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsContains::__invoke
          */
-        public function notContains($search = null, $regex = false)
+        public function notContains($key = null, string $label = null, $search = null, $regex = false)
         {
         }
 
@@ -10294,7 +10222,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsCreditCard::__invoke
          */
-        public function creditCard($type = null)
+        public function creditCard($key = null, string $label = null, $type = null)
         {
         }
 
@@ -10302,7 +10230,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsCreditCard::__invoke
          */
-        public function notCreditCard($type = null)
+        public function notCreditCard($key = null, string $label = null, $type = null)
         {
         }
 
@@ -10310,7 +10238,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsDate::__invoke
          */
-        public function date($name = null, string $label = null, $format = null)
+        public function date($key = null, string $label = null, $format = null)
         {
         }
 
@@ -10318,7 +10246,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsDate::__invoke
          */
-        public function notDate($name = null, string $label = null, $format = null)
+        public function notDate($key = null, string $label = null, $format = null)
         {
         }
 
@@ -10326,7 +10254,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsDateTime::__invoke
          */
-        public function dateTime($name = null, string $label = null, $format = null)
+        public function dateTime($key = null, string $label = null, $format = null)
         {
         }
 
@@ -10334,7 +10262,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsDateTime::__invoke
          */
-        public function notDateTime($name = null, string $label = null, $format = null)
+        public function notDateTime($key = null, string $label = null, $format = null)
         {
         }
 
@@ -10342,7 +10270,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsDecimal::__invoke
          */
-        public function decimal($name = null, string $label = null)
+        public function decimal($key = null, string $label = null)
         {
         }
 
@@ -10350,7 +10278,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsDecimal::__invoke
          */
-        public function notDecimal($name = null, string $label = null)
+        public function notDecimal($key = null, string $label = null)
         {
         }
 
@@ -10358,7 +10286,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsDefaultInt::__invoke
          */
-        public function defaultInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function defaultInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -10366,7 +10294,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsDefaultInt::__invoke
          */
-        public function notDefaultInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function notDefaultInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -10374,7 +10302,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsDigit::__invoke
          */
-        public function digit($pattern = null)
+        public function digit($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -10382,7 +10310,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsDigit::__invoke
          */
-        public function notDigit($pattern = null)
+        public function notDigit($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -10390,7 +10318,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsDir::__invoke
          */
-        public function dir()
+        public function dir($key = null, string $label = null)
         {
         }
 
@@ -10398,7 +10326,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsDir::__invoke
          */
-        public function notDir()
+        public function notDir($key = null, string $label = null)
         {
         }
 
@@ -10406,7 +10334,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsDivisibleBy::__invoke
          */
-        public function divisibleBy($divisor = null)
+        public function divisibleBy($key = null, string $label = null, $divisor = null)
         {
         }
 
@@ -10414,7 +10342,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsDivisibleBy::__invoke
          */
-        public function notDivisibleBy($divisor = null)
+        public function notDivisibleBy($key = null, string $label = null, $divisor = null)
         {
         }
 
@@ -10422,7 +10350,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsDoubleByte::__invoke
          */
-        public function doubleByte($pattern = null)
+        public function doubleByte($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -10430,7 +10358,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsDoubleByte::__invoke
          */
-        public function notDoubleByte($pattern = null)
+        public function notDoubleByte($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -10438,7 +10366,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsEach::__invoke
          */
-        public function each($v = null)
+        public function each($key = null, string $label = null, $v = null)
         {
         }
 
@@ -10446,7 +10374,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsEach::__invoke
          */
-        public function notEach($v = null)
+        public function notEach($key = null, string $label = null, $v = null)
         {
         }
 
@@ -10454,7 +10382,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsEmail::__invoke
          */
-        public function email()
+        public function email($key = null, string $label = null)
         {
         }
 
@@ -10462,7 +10390,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsEmail::__invoke
          */
-        public function notEmail()
+        public function notEmail($key = null, string $label = null)
         {
         }
 
@@ -10470,7 +10398,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsEmpty::__invoke
          */
-        public function empty()
+        public function empty($key = null, string $label = null)
         {
         }
 
@@ -10478,7 +10406,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsEmpty::__invoke
          */
-        public function notEmpty()
+        public function notEmpty($key = null, string $label = null)
         {
         }
 
@@ -10486,7 +10414,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsEndsWith::__invoke
          */
-        public function endsWith($findMe = null, $case = null)
+        public function endsWith($key = null, string $label = null, $findMe = null, $case = null)
         {
         }
 
@@ -10494,7 +10422,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsEndsWith::__invoke
          */
-        public function notEndsWith($findMe = null, $case = null)
+        public function notEndsWith($key = null, string $label = null, $findMe = null, $case = null)
         {
         }
 
@@ -10502,7 +10430,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsEqualTo::__invoke
          */
-        public function equalTo($value = null)
+        public function equalTo($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10510,7 +10438,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsEqualTo::__invoke
          */
-        public function notEqualTo($value = null)
+        public function notEqualTo($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10518,7 +10446,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsExists::__invoke
          */
-        public function exists()
+        public function exists($key = null, string $label = null)
         {
         }
 
@@ -10526,7 +10454,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsExists::__invoke
          */
-        public function notExists()
+        public function notExists($key = null, string $label = null)
         {
         }
 
@@ -10534,7 +10462,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsFieldExists::__invoke
          */
-        public function fieldExists()
+        public function fieldExists($key = null, string $label = null)
         {
         }
 
@@ -10542,7 +10470,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsFieldExists::__invoke
          */
-        public function notFieldExists()
+        public function notFieldExists($key = null, string $label = null)
         {
         }
 
@@ -10550,7 +10478,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsFile::__invoke
          */
-        public function file($options = [])
+        public function file($key = null, string $label = null, $options = [])
         {
         }
 
@@ -10558,7 +10486,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsFile::__invoke
          */
-        public function notFile($options = [])
+        public function notFile($key = null, string $label = null, $options = [])
         {
         }
 
@@ -10566,7 +10494,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsFloat::__invoke
          */
-        public function float()
+        public function float($key = null, string $label = null)
         {
         }
 
@@ -10574,7 +10502,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsFloat::__invoke
          */
-        public function notFloat()
+        public function notFloat($key = null, string $label = null)
         {
         }
 
@@ -10582,7 +10510,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsGreaterThan::__invoke
          */
-        public function greaterThan($value = null)
+        public function greaterThan($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10590,7 +10518,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsGreaterThan::__invoke
          */
-        public function notGreaterThan($value = null)
+        public function notGreaterThan($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10598,7 +10526,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsGreaterThanOrEqual::__invoke
          */
-        public function greaterThanOrEqual($value = null)
+        public function greaterThanOrEqual($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10606,7 +10534,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsGreaterThanOrEqual::__invoke
          */
-        public function notGreaterThanOrEqual($value = null)
+        public function notGreaterThanOrEqual($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10614,7 +10542,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsGt::__invoke
          */
-        public function gt($value = null)
+        public function gt($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10622,7 +10550,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsGt::__invoke
          */
-        public function notGt($value = null)
+        public function notGt($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10630,7 +10558,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsGte::__invoke
          */
-        public function gte($value = null)
+        public function gte($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10638,7 +10566,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsGte::__invoke
          */
-        public function notGte($value = null)
+        public function notGte($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10646,7 +10574,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsIdCardCn::__invoke
          */
-        public function idCardCn()
+        public function idCardCn($key = null, string $label = null)
         {
         }
 
@@ -10654,7 +10582,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsIdCardCn::__invoke
          */
-        public function notIdCardCn()
+        public function notIdCardCn($key = null, string $label = null)
         {
         }
 
@@ -10662,7 +10590,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsIdCardHk::__invoke
          */
-        public function idCardHk()
+        public function idCardHk($key = null, string $label = null)
         {
         }
 
@@ -10670,7 +10598,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsIdCardHk::__invoke
          */
-        public function notIdCardHk()
+        public function notIdCardHk($key = null, string $label = null)
         {
         }
 
@@ -10678,7 +10606,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsIdCardMo::__invoke
          */
-        public function idCardMo($pattern = null)
+        public function idCardMo($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -10686,7 +10614,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsIdCardMo::__invoke
          */
-        public function notIdCardMo($pattern = null)
+        public function notIdCardMo($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -10694,7 +10622,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsIdCardTw::__invoke
          */
-        public function idCardTw()
+        public function idCardTw($key = null, string $label = null)
         {
         }
 
@@ -10702,7 +10630,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsIdCardTw::__invoke
          */
-        public function notIdCardTw()
+        public function notIdCardTw($key = null, string $label = null)
         {
         }
 
@@ -10710,7 +10638,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsIdenticalTo::__invoke
          */
-        public function identicalTo($value = null)
+        public function identicalTo($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10718,7 +10646,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsIdenticalTo::__invoke
          */
-        public function notIdenticalTo($value = null)
+        public function notIdenticalTo($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10726,7 +10654,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsImage::__invoke
          */
-        public function image($options = [])
+        public function image($key = null, string $label = null, $options = [])
         {
         }
 
@@ -10734,7 +10662,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsImage::__invoke
          */
-        public function notImage($options = [])
+        public function notImage($key = null, string $label = null, $options = [])
         {
         }
 
@@ -10742,7 +10670,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsIn::__invoke
          */
-        public function in($array = [], $strict = null)
+        public function in($key = null, string $label = null, $array = [], $strict = null)
         {
         }
 
@@ -10750,7 +10678,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsIn::__invoke
          */
-        public function notIn($array = [], $strict = null)
+        public function notIn($key = null, string $label = null, $array = [], $strict = null)
         {
         }
 
@@ -10758,7 +10686,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsInt::__invoke
          */
-        public function int($name = null, string $label = null, int $min = null, int $max = null)
+        public function int($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -10766,7 +10694,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsInt::__invoke
          */
-        public function notInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function notInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -10774,7 +10702,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsIp::__invoke
          */
-        public function ip($options = [])
+        public function ip($key = null, string $label = null, $options = [])
         {
         }
 
@@ -10782,7 +10710,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsIp::__invoke
          */
-        public function notIp($options = [])
+        public function notIp($key = null, string $label = null, $options = [])
         {
         }
 
@@ -10790,7 +10718,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsLength::__invoke
          */
-        public function length($min = null, $max = null)
+        public function length($key = null, string $label = null, $min = null, $max = null)
         {
         }
 
@@ -10798,7 +10726,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsLength::__invoke
          */
-        public function notLength($min = null, $max = null)
+        public function notLength($key = null, string $label = null, $min = null, $max = null)
         {
         }
 
@@ -10806,7 +10734,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsLessThan::__invoke
          */
-        public function lessThan($value = null)
+        public function lessThan($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10814,7 +10742,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsLessThan::__invoke
          */
-        public function notLessThan($value = null)
+        public function notLessThan($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10822,7 +10750,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsLessThanOrEqual::__invoke
          */
-        public function lessThanOrEqual($value = null)
+        public function lessThanOrEqual($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10830,7 +10758,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsLessThanOrEqual::__invoke
          */
-        public function notLessThanOrEqual($value = null)
+        public function notLessThanOrEqual($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10838,7 +10766,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsLowercase::__invoke
          */
-        public function lowercase()
+        public function lowercase($key = null, string $label = null)
         {
         }
 
@@ -10846,7 +10774,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsLowercase::__invoke
          */
-        public function notLowercase()
+        public function notLowercase($key = null, string $label = null)
         {
         }
 
@@ -10854,7 +10782,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsLt::__invoke
          */
-        public function lt($value = null)
+        public function lt($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10862,7 +10790,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsLt::__invoke
          */
-        public function notLt($value = null)
+        public function notLt($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10870,7 +10798,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsLte::__invoke
          */
-        public function lte($value = null)
+        public function lte($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10878,7 +10806,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsLte::__invoke
          */
-        public function notLte($value = null)
+        public function notLte($key = null, string $label = null, $value = null)
         {
         }
 
@@ -10886,7 +10814,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsLuhn::__invoke
          */
-        public function luhn()
+        public function luhn($key = null, string $label = null)
         {
         }
 
@@ -10894,7 +10822,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsLuhn::__invoke
          */
-        public function notLuhn()
+        public function notLuhn($key = null, string $label = null)
         {
         }
 
@@ -10902,7 +10830,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsMaxAccuracy::__invoke
          */
-        public function maxAccuracy($max = null)
+        public function maxAccuracy($key = null, string $label = null, $max = null)
         {
         }
 
@@ -10910,7 +10838,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsMaxAccuracy::__invoke
          */
-        public function notMaxAccuracy($max = null)
+        public function notMaxAccuracy($key = null, string $label = null, $max = null)
         {
         }
 
@@ -10918,7 +10846,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsMaxCharLength::__invoke
          */
-        public function maxCharLength($max = null, $ignore = null)
+        public function maxCharLength($key = null, string $label = null, $max = null, $ignore = null)
         {
         }
 
@@ -10926,7 +10854,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsMaxCharLength::__invoke
          */
-        public function notMaxCharLength($max = null, $ignore = null)
+        public function notMaxCharLength($key = null, string $label = null, $max = null, $ignore = null)
         {
         }
 
@@ -10934,7 +10862,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsMaxLength::__invoke
          */
-        public function maxLength($max = null, $ignore = null)
+        public function maxLength($key = null, string $label = null, $max = null, $ignore = null)
         {
         }
 
@@ -10942,7 +10870,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsMaxLength::__invoke
          */
-        public function notMaxLength($max = null, $ignore = null)
+        public function notMaxLength($key = null, string $label = null, $max = null, $ignore = null)
         {
         }
 
@@ -10950,7 +10878,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsMediumInt::__invoke
          */
-        public function mediumInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function mediumInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -10958,7 +10886,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsMediumInt::__invoke
          */
-        public function notMediumInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function notMediumInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -10966,7 +10894,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsMediumText::__invoke
          */
-        public function mediumText($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+        public function mediumText($key = null, string $label = null, int $minLength = null, int $maxLength = null)
         {
         }
 
@@ -10974,7 +10902,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsMediumText::__invoke
          */
-        public function notMediumText($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+        public function notMediumText($key = null, string $label = null, int $minLength = null, int $maxLength = null)
         {
         }
 
@@ -10982,7 +10910,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsMinCharLength::__invoke
          */
-        public function minCharLength($min = null, $ignore = null)
+        public function minCharLength($key = null, string $label = null, $min = null, $ignore = null)
         {
         }
 
@@ -10990,7 +10918,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsMinCharLength::__invoke
          */
-        public function notMinCharLength($min = null, $ignore = null)
+        public function notMinCharLength($key = null, string $label = null, $min = null, $ignore = null)
         {
         }
 
@@ -10998,7 +10926,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsMinLength::__invoke
          */
-        public function minLength($min = null, $ignore = null)
+        public function minLength($key = null, string $label = null, $min = null, $ignore = null)
         {
         }
 
@@ -11006,7 +10934,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsMinLength::__invoke
          */
-        public function notMinLength($min = null, $ignore = null)
+        public function notMinLength($key = null, string $label = null, $min = null, $ignore = null)
         {
         }
 
@@ -11014,7 +10942,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsMobileCn::__invoke
          */
-        public function mobileCn($pattern = null)
+        public function mobileCn($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -11022,7 +10950,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsMobileCn::__invoke
          */
-        public function notMobileCn($pattern = null)
+        public function notMobileCn($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -11030,7 +10958,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsNaturalNumber::__invoke
          */
-        public function naturalNumber()
+        public function naturalNumber($key = null, string $label = null)
         {
         }
 
@@ -11038,7 +10966,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsNaturalNumber::__invoke
          */
-        public function notNaturalNumber()
+        public function notNaturalNumber($key = null, string $label = null)
         {
         }
 
@@ -11046,7 +10974,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsNoneOf::__invoke
          */
-        public function noneOf(array $rules = [], $ignore = null)
+        public function noneOf($key = null, string $label = null, array $rules = [], $ignore = null)
         {
         }
 
@@ -11054,7 +10982,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsNoneOf::__invoke
          */
-        public function notNoneOf(array $rules = [], $ignore = null)
+        public function notNoneOf($key = null, string $label = null, array $rules = [], $ignore = null)
         {
         }
 
@@ -11062,7 +10990,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsNullType::__invoke
          */
-        public function nullType()
+        public function nullType($key = null, string $label = null)
         {
         }
 
@@ -11070,7 +10998,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsNullType::__invoke
          */
-        public function notNullType()
+        public function notNullType($key = null, string $label = null)
         {
         }
 
@@ -11078,7 +11006,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsNumber::__invoke
          */
-        public function number($name = null, string $label = null, int $precision = null, int $scale = null)
+        public function number($key = null, string $label = null, int $precision = null, int $scale = null)
         {
         }
 
@@ -11086,7 +11014,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsNumber::__invoke
          */
-        public function notNumber($name = null, string $label = null, int $precision = null, int $scale = null)
+        public function notNumber($key = null, string $label = null, int $precision = null, int $scale = null)
         {
         }
 
@@ -11094,7 +11022,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsObject::__invoke
          */
-        public function object($name = null, string $label = null)
+        public function object($key = null, string $label = null)
         {
         }
 
@@ -11102,7 +11030,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsObject::__invoke
          */
-        public function notObject($name = null, string $label = null)
+        public function notObject($key = null, string $label = null)
         {
         }
 
@@ -11110,7 +11038,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsOneOf::__invoke
          */
-        public function oneOf(array $rules = [], $atLeast = null)
+        public function oneOf($key = null, string $label = null, array $rules = [], $atLeast = null)
         {
         }
 
@@ -11118,7 +11046,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsOneOf::__invoke
          */
-        public function notOneOf(array $rules = [], $atLeast = null)
+        public function notOneOf($key = null, string $label = null, array $rules = [], $atLeast = null)
         {
         }
 
@@ -11126,7 +11054,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsPassword::__invoke
          */
-        public function password(array $options = [])
+        public function password($key = null, string $label = null, array $options = [])
         {
         }
 
@@ -11134,7 +11062,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsPassword::__invoke
          */
-        public function notPassword(array $options = [])
+        public function notPassword($key = null, string $label = null, array $options = [])
         {
         }
 
@@ -11142,7 +11070,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsPhone::__invoke
          */
-        public function phone($pattern = null)
+        public function phone($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -11150,7 +11078,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsPhone::__invoke
          */
-        public function notPhone($pattern = null)
+        public function notPhone($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -11158,7 +11086,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsPhoneCn::__invoke
          */
-        public function phoneCn($pattern = null)
+        public function phoneCn($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -11166,7 +11094,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsPhoneCn::__invoke
          */
-        public function notPhoneCn($pattern = null)
+        public function notPhoneCn($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -11174,7 +11102,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsPlateNumberCn::__invoke
          */
-        public function plateNumberCn($pattern = null)
+        public function plateNumberCn($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -11182,7 +11110,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsPlateNumberCn::__invoke
          */
-        public function notPlateNumberCn($pattern = null)
+        public function notPlateNumberCn($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -11190,7 +11118,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsPositiveInteger::__invoke
          */
-        public function positiveInteger()
+        public function positiveInteger($key = null, string $label = null)
         {
         }
 
@@ -11198,7 +11126,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsPositiveInteger::__invoke
          */
-        public function notPositiveInteger()
+        public function notPositiveInteger($key = null, string $label = null)
         {
         }
 
@@ -11206,7 +11134,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsPostcodeCn::__invoke
          */
-        public function postcodeCn($pattern = null)
+        public function postcodeCn($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -11214,7 +11142,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsPostcodeCn::__invoke
          */
-        public function notPostcodeCn($pattern = null)
+        public function notPostcodeCn($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -11222,7 +11150,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsPresent::__invoke
          */
-        public function present()
+        public function present($key = null, string $label = null)
         {
         }
 
@@ -11230,7 +11158,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsPresent::__invoke
          */
-        public function notPresent()
+        public function notPresent($key = null, string $label = null)
         {
         }
 
@@ -11238,7 +11166,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsQQ::__invoke
          */
-        public function qQ($pattern = null)
+        public function qQ($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -11246,7 +11174,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsQQ::__invoke
          */
-        public function notQQ($pattern = null)
+        public function notQQ($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -11254,7 +11182,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsRecordExists::__invoke
          */
-        public function recordExists($table = null, $field = 'id')
+        public function recordExists($key = null, string $label = null, $table = null, $field = 'id')
         {
         }
 
@@ -11262,7 +11190,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsRecordExists::__invoke
          */
-        public function notRecordExists($table = null, $field = 'id')
+        public function notRecordExists($key = null, string $label = null, $table = null, $field = 'id')
         {
         }
 
@@ -11270,7 +11198,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsRegex::__invoke
          */
-        public function regex($pattern = null)
+        public function regex($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -11278,7 +11206,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsRegex::__invoke
          */
-        public function notRegex($pattern = null)
+        public function notRegex($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -11286,7 +11214,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsRequired::__invoke
          */
-        public function required($required = null)
+        public function required($key = null, string $label = null, $required = null)
         {
         }
 
@@ -11294,7 +11222,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsRequired::__invoke
          */
-        public function notRequired($required = null)
+        public function notRequired($key = null, string $label = null, $required = null)
         {
         }
 
@@ -11302,7 +11230,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsSmallInt::__invoke
          */
-        public function smallInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function smallInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -11310,7 +11238,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsSmallInt::__invoke
          */
-        public function notSmallInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function notSmallInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -11318,7 +11246,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsSomeOf::__invoke
          */
-        public function someOf(array $rules = [], $atLeast = null)
+        public function someOf($key = null, string $label = null, array $rules = [], $atLeast = null)
         {
         }
 
@@ -11326,7 +11254,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsSomeOf::__invoke
          */
-        public function notSomeOf(array $rules = [], $atLeast = null)
+        public function notSomeOf($key = null, string $label = null, array $rules = [], $atLeast = null)
         {
         }
 
@@ -11334,7 +11262,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsStartsWith::__invoke
          */
-        public function startsWith($findMe = null, $case = null)
+        public function startsWith($key = null, string $label = null, $findMe = null, $case = null)
         {
         }
 
@@ -11342,7 +11270,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsStartsWith::__invoke
          */
-        public function notStartsWith($findMe = null, $case = null)
+        public function notStartsWith($key = null, string $label = null, $findMe = null, $case = null)
         {
         }
 
@@ -11350,7 +11278,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsString::__invoke
          */
-        public function string($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+        public function string($key = null, string $label = null, int $minLength = null, int $maxLength = null)
         {
         }
 
@@ -11358,7 +11286,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsString::__invoke
          */
-        public function notString($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+        public function notString($key = null, string $label = null, int $minLength = null, int $maxLength = null)
         {
         }
 
@@ -11366,7 +11294,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsText::__invoke
          */
-        public function text($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+        public function text($key = null, string $label = null, int $minLength = null, int $maxLength = null)
         {
         }
 
@@ -11374,7 +11302,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsText::__invoke
          */
-        public function notText($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+        public function notText($key = null, string $label = null, int $minLength = null, int $maxLength = null)
         {
         }
 
@@ -11382,7 +11310,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsTime::__invoke
          */
-        public function time($name = null, string $label = null, $format = null)
+        public function time($key = null, string $label = null, $format = null)
         {
         }
 
@@ -11390,7 +11318,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsTime::__invoke
          */
-        public function notTime($name = null, string $label = null, $format = null)
+        public function notTime($key = null, string $label = null, $format = null)
         {
         }
 
@@ -11398,7 +11326,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsTinyChar::__invoke
          */
-        public function tinyChar($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+        public function tinyChar($key = null, string $label = null, int $minLength = null, int $maxLength = null)
         {
         }
 
@@ -11406,7 +11334,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsTinyChar::__invoke
          */
-        public function notTinyChar($name = null, string $label = null, int $minLength = null, int $maxLength = null)
+        public function notTinyChar($key = null, string $label = null, int $minLength = null, int $maxLength = null)
         {
         }
 
@@ -11414,7 +11342,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsTinyInt::__invoke
          */
-        public function tinyInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function tinyInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -11422,7 +11350,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsTinyInt::__invoke
          */
-        public function notTinyInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function notTinyInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -11430,7 +11358,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsTld::__invoke
          */
-        public function tld($array = [], $strict = null)
+        public function tld($key = null, string $label = null, $array = [], $strict = null)
         {
         }
 
@@ -11438,7 +11366,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsTld::__invoke
          */
-        public function notTld($array = [], $strict = null)
+        public function notTld($key = null, string $label = null, $array = [], $strict = null)
         {
         }
 
@@ -11446,7 +11374,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsType::__invoke
          */
-        public function type($type = null)
+        public function type($key = null, string $label = null, $type = null)
         {
         }
 
@@ -11454,7 +11382,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsType::__invoke
          */
-        public function notType($type = null)
+        public function notType($key = null, string $label = null, $type = null)
         {
         }
 
@@ -11462,7 +11390,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUBigInt::__invoke
          */
-        public function uBigInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function uBigInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -11470,7 +11398,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUBigInt::__invoke
          */
-        public function notUBigInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function notUBigInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -11478,7 +11406,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUDefaultInt::__invoke
          */
-        public function uDefaultInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function uDefaultInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -11486,7 +11414,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUDefaultInt::__invoke
          */
-        public function notUDefaultInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function notUDefaultInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -11494,7 +11422,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUMediumInt::__invoke
          */
-        public function uMediumInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function uMediumInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -11502,7 +11430,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUMediumInt::__invoke
          */
-        public function notUMediumInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function notUMediumInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -11510,7 +11438,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUNumber::__invoke
          */
-        public function uNumber($name = null, string $label = null, int $precision = null, int $scale = null)
+        public function uNumber($key = null, string $label = null, int $precision = null, int $scale = null)
         {
         }
 
@@ -11518,7 +11446,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUNumber::__invoke
          */
-        public function notUNumber($name = null, string $label = null, int $precision = null, int $scale = null)
+        public function notUNumber($key = null, string $label = null, int $precision = null, int $scale = null)
         {
         }
 
@@ -11526,7 +11454,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUSmallInt::__invoke
          */
-        public function uSmallInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function uSmallInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -11534,7 +11462,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUSmallInt::__invoke
          */
-        public function notUSmallInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function notUSmallInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -11542,7 +11470,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUTinyInt::__invoke
          */
-        public function uTinyInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function uTinyInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -11550,7 +11478,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUTinyInt::__invoke
          */
-        public function notUTinyInt($name = null, string $label = null, int $min = null, int $max = null)
+        public function notUTinyInt($key = null, string $label = null, int $min = null, int $max = null)
         {
         }
 
@@ -11558,7 +11486,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUppercase::__invoke
          */
-        public function uppercase()
+        public function uppercase($key = null, string $label = null)
         {
         }
 
@@ -11566,7 +11494,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUppercase::__invoke
          */
-        public function notUppercase()
+        public function notUppercase($key = null, string $label = null)
         {
         }
 
@@ -11574,7 +11502,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUrl::__invoke
          */
-        public function url($options = [])
+        public function url($key = null, string $label = null, $options = [])
         {
         }
 
@@ -11582,7 +11510,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUrl::__invoke
          */
-        public function notUrl($options = [])
+        public function notUrl($key = null, string $label = null, $options = [])
         {
         }
 
@@ -11590,7 +11518,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUuid::__invoke
          */
-        public function uuid($pattern = null)
+        public function uuid($key = null, string $label = null, $pattern = null)
         {
         }
 
@@ -11598,7 +11526,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUuid::__invoke
          */
-        public function notUuid($pattern = null)
+        public function notUuid($key = null, string $label = null, $pattern = null)
         {
         }
     }
