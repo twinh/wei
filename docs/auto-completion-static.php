@@ -3447,6 +3447,685 @@ class Pinyin
 {
 }
 
+class QueryBuilder
+{
+    /**
+     * Set or remove cache time for the query
+     *
+     * @param int|null $seconds
+     * @return $this
+     * @see QueryBuilder::setCacheTime
+     */
+    public static function setCacheTime(?int $seconds): self
+    {
+    }
+
+    /**
+     * Return the record table name
+     *
+     * @return string|null
+     * @see QueryBuilder::getTable
+     */
+    public static function getTable(): ?string
+    {
+    }
+
+    /**
+     * Returns the name of columns of current table
+     *
+     * @return array
+     * @see QueryBuilder::getColumns
+     */
+    public static function getColumns(): array
+    {
+    }
+
+    /**
+     * Check if column name exists
+     *
+     * @param string|int|null $name
+     * @return bool
+     * @see QueryBuilder::hasColumn
+     */
+    public static function hasColumn($name): bool
+    {
+    }
+
+    /**
+     * Executes the generated query and returns the first array result
+     *
+     * @param mixed|null $column
+     * @param mixed|null $operator
+     * @param mixed|null $value
+     * @return array|null
+     * @see QueryBuilder::fetch
+     */
+    public static function fetch($column = null, $operator = null, $value = null): ?array
+    {
+    }
+
+    /**
+     * Executes the generated query and returns all array results
+     *
+     * @param mixed|null $column
+     * @param mixed|null $operator
+     * @param mixed|null $value
+     * @return array
+     * @see QueryBuilder::fetchAll
+     */
+    public static function fetchAll($column = null, $operator = null, $value = null): array
+    {
+    }
+
+    /**
+     * Executes the generated SQL and returns the found record object or null if not found
+     *
+     * @return array|null
+     * @see QueryBuilder::first
+     */
+    public static function first(): ?array
+    {
+    }
+
+    /**
+     * @return array
+     * @see QueryBuilder::all
+     */
+    public static function all(): array
+    {
+    }
+
+    /**
+     * @param string $column
+     * @param string|null $index
+     * @return array
+     * @see QueryBuilder::pluck
+     */
+    public static function pluck(string $column, string $index = null): array
+    {
+    }
+
+    /**
+     * @param int $count
+     * @param callable $callback
+     * @return bool
+     * @see QueryBuilder::chunk
+     */
+    public static function chunk(int $count, callable $callback): bool
+    {
+    }
+
+    /**
+     * Executes a COUNT query to receive the rows number
+     *
+     * @param string $column
+     * @return int
+     * @see QueryBuilder::cnt
+     */
+    public static function cnt($column = '*'): int
+    {
+    }
+
+    /**
+     * Executes a MAX query to receive the max value of column
+     *
+     * @param string $column
+     * @return string|null
+     * @see QueryBuilder::max
+     */
+    public static function max(string $column): ?string
+    {
+    }
+
+    /**
+     * Execute a update query with specified data
+     *
+     * @param array|string $set
+     * @param mixed $value
+     * @return int
+     * @see QueryBuilder::update
+     */
+    public static function update($set = [], $value = null): int
+    {
+    }
+
+    /**
+     * Execute a delete query with specified conditions
+     *
+     * @param mixed|null $column
+     * @param mixed|null $operator
+     * @param mixed|null $value
+     * @return int
+     * @see QueryBuilder::delete
+     */
+    public static function delete($column = null, $operator = null, $value = null): int
+    {
+    }
+
+    /**
+     * Sets the position of the first result to retrieve (the "offset")
+     *
+     * @param int|float|string $offset The first result to return
+     * @return $this
+     * @see QueryBuilder::offset
+     */
+    public static function offset($offset): self
+    {
+    }
+
+    /**
+     * Sets the maximum number of results to retrieve (the "limit")
+     *
+     * @param int|float|string $limit The maximum number of results to retrieve
+     * @return $this
+     * @see QueryBuilder::limit
+     */
+    public static function limit($limit): self
+    {
+    }
+
+    /**
+     * Sets the page number, the "OFFSET" value is equals "($page - 1) * LIMIT"
+     *
+     * @param int $page The page number
+     * @return $this
+     * @see QueryBuilder::page
+     */
+    public static function page($page): self
+    {
+    }
+
+    /**
+     * Specifies an item that is to be returned in the query result.
+     * Replaces any previously specified selections, if any.
+     *
+     * @param array|string $columns the selection expressions
+     * @return $this
+     * @see QueryBuilder::select
+     */
+    public static function select($columns = ['*']): self
+    {
+    }
+
+    /**
+     * @param array|string $columns
+     * @return $this
+     * @see QueryBuilder::selectDistinct
+     */
+    public static function selectDistinct($columns): self
+    {
+    }
+
+    /**
+     * @param string $expression
+     * @return $this
+     * @see QueryBuilder::selectRaw
+     */
+    public static function selectRaw($expression): self
+    {
+    }
+
+    /**
+     * Specifies columns that are not to be returned in the query result.
+     * Replaces any previously specified selections, if any.
+     *
+     * @param array|string $columns
+     * @return $this
+     * @see QueryBuilder::selectExcept
+     */
+    public static function selectExcept($columns): self
+    {
+    }
+
+    /**
+     * Specifies an item of the main table that is to be returned in the query result.
+     * Default to all columns of the main table
+     *
+     * @param string $column
+     * @return $this
+     * @see QueryBuilder::selectMain
+     */
+    public static function selectMain(string $column = '*'): self
+    {
+    }
+
+    /**
+     * Sets table for FROM query
+     *
+     * @param string $table
+     * @param string|null $alias
+     * @return $this
+     * @see QueryBuilder::from
+     */
+    public static function from(string $table, $alias = null): self
+    {
+    }
+
+    /**
+     * @param string $table
+     * @param mixed|null $alias
+     * @return $this
+     * @see QueryBuilder::table
+     */
+    public static function table(string $table, $alias = null): self
+    {
+    }
+
+    /**
+     * Adds a inner join to the query
+     *
+     * @param string $table The table name to join
+     * @param string|null $first
+     * @param string $operator
+     * @param string|null $second
+     * @param string $type
+     * @return $this
+     * @see QueryBuilder::join
+     */
+    public static function join(
+        string $table,
+        string $first = null,
+        string $operator = '=',
+        string $second = null,
+        string $type = 'INNER'
+    ): self {
+    }
+
+    /**
+     * Adds a inner join to the query
+     *
+     * @param string $table The table name to join
+     * @param string|null $first
+     * @param string $operator
+     * @param string|null $second
+     * @return $this
+     * @see QueryBuilder::innerJoin
+     */
+    public static function innerJoin(
+        string $table,
+        string $first = null,
+        string $operator = '=',
+        string $second = null
+    ): self {
+    }
+
+    /**
+     * Adds a left join to the query
+     *
+     * @param string $table The table name to join
+     * @param string|null $first
+     * @param string $operator
+     * @param string|null $second
+     * @return $this
+     * @see QueryBuilder::leftJoin
+     */
+    public static function leftJoin(
+        string $table,
+        string $first = null,
+        string $operator = '=',
+        string $second = null
+    ): self {
+    }
+
+    /**
+     * Adds a right join to the query
+     *
+     * @param string $table The table name to join
+     * @param string|null $first
+     * @param string $operator
+     * @param string|null $second
+     * @return $this
+     * @see QueryBuilder::rightJoin
+     */
+    public static function rightJoin(
+        string $table,
+        string $first = null,
+        string $operator = '=',
+        string $second = null
+    ): self {
+    }
+
+    /**
+     * Specifies one or more restrictions to the query result.
+     * Replaces any previously specified restrictions, if any.
+     *
+     * ```php
+     * $user = wei()->db('user')->where('id = 1');
+     * $user = wei()->db('user')->where('id = ?', 1);
+     * $users = wei()->db('user')->where(array('id' => '1', 'username' => 'twin'));
+     * $users = wei()->where(array('id' => array('1', '2', '3')));
+     * ```
+     *
+     * @param array|Closure|string|null $column
+     * @param mixed|null $operator
+     * @param mixed|null $value
+     * @return $this
+     * @see QueryBuilder::where
+     */
+    public static function where($column = null, $operator = null, $value = null): self
+    {
+    }
+
+    /**
+     * @param scalar $expression
+     * @param mixed $params
+     * @return $this
+     * @see QueryBuilder::whereRaw
+     */
+    public static function whereRaw($expression, $params = null): self
+    {
+    }
+
+    /**
+     * @param string $column
+     * @param array $params
+     * @return $this
+     * @see QueryBuilder::whereBetween
+     */
+    public static function whereBetween(string $column, array $params): self
+    {
+    }
+
+    /**
+     * @param string $column
+     * @param array $params
+     * @return $this
+     * @see QueryBuilder::whereNotBetween
+     */
+    public static function whereNotBetween(string $column, array $params): self
+    {
+    }
+
+    /**
+     * @param string $column
+     * @param array $params
+     * @return $this
+     * @see QueryBuilder::whereIn
+     */
+    public static function whereIn(string $column, array $params): self
+    {
+    }
+
+    /**
+     * @param string $column
+     * @param array $params
+     * @return $this
+     * @see QueryBuilder::whereNotIn
+     */
+    public static function whereNotIn(string $column, array $params): self
+    {
+    }
+
+    /**
+     * @param string $column
+     * @return $this
+     * @see QueryBuilder::whereNull
+     */
+    public static function whereNull(string $column): self
+    {
+    }
+
+    /**
+     * @param string $column
+     * @return $this
+     * @see QueryBuilder::whereNotNull
+     */
+    public static function whereNotNull(string $column): self
+    {
+    }
+
+    /**
+     * @param string $column
+     * @param mixed $opOrValue
+     * @param mixed|null $value
+     * @return $this
+     * @see QueryBuilder::whereDate
+     */
+    public static function whereDate(string $column, $opOrValue, $value = null): self
+    {
+    }
+
+    /**
+     * @param string $column
+     * @param mixed $opOrValue
+     * @param mixed|null $value
+     * @return $this
+     * @see QueryBuilder::whereMonth
+     */
+    public static function whereMonth(string $column, $opOrValue, $value = null): self
+    {
+    }
+
+    /**
+     * @param string $column
+     * @param mixed $opOrValue
+     * @param mixed|null $value
+     * @return $this
+     * @see QueryBuilder::whereDay
+     */
+    public static function whereDay(string $column, $opOrValue, $value = null): self
+    {
+    }
+
+    /**
+     * @param string $column
+     * @param mixed $opOrValue
+     * @param mixed|null $value
+     * @return $this
+     * @see QueryBuilder::whereYear
+     */
+    public static function whereYear(string $column, $opOrValue, $value = null): self
+    {
+    }
+
+    /**
+     * @param string $column
+     * @param mixed $opOrValue
+     * @param mixed|null $value
+     * @return $this
+     * @see QueryBuilder::whereTime
+     */
+    public static function whereTime(string $column, $opOrValue, $value = null): self
+    {
+    }
+
+    /**
+     * @param string $column
+     * @param mixed $opOrColumn2
+     * @param mixed|null $column2
+     * @return $this
+     * @see QueryBuilder::whereColumn
+     */
+    public static function whereColumn(string $column, $opOrColumn2, $column2 = null): self
+    {
+    }
+
+    /**
+     * 搜索字段是否包含某个值
+     *
+     * @param string $column
+     * @param mixed $value
+     * @param string $condition
+     * @return $this
+     * @see QueryBuilder::whereContains
+     */
+    public static function whereContains(string $column, $value, string $condition = 'AND'): self
+    {
+    }
+
+    /**
+     * @param string $column
+     * @param mixed $value
+     * @param string $condition
+     * @return $this
+     * @see QueryBuilder::whereNotContains
+     */
+    public static function whereNotContains(string $column, $value, string $condition = 'OR'): self
+    {
+    }
+
+    /**
+     * Search whether a column has a value other than the default value
+     *
+     * @param string $column
+     * @param bool $has
+     * @return $this
+     * @see QueryBuilder::whereHas
+     */
+    public static function whereHas(string $column, bool $has = true): self
+    {
+    }
+
+    /**
+     * Search whether a column dont have a value other than the default value
+     *
+     * @param string $column
+     * @return $this
+     * @see QueryBuilder::whereNotHas
+     */
+    public static function whereNotHas(string $column): self
+    {
+    }
+
+    /**
+     * Specifies a grouping over the results of the query.
+     * Replaces any previously specified groupings, if any.
+     *
+     * @param mixed $column the grouping column
+     * @return $this
+     * @see QueryBuilder::groupBy
+     */
+    public static function groupBy($column): self
+    {
+    }
+
+    /**
+     * Specifies a restriction over the groups of the query.
+     * Replaces any previous having restrictions, if any.
+     *
+     * @param mixed $column
+     * @param mixed $operator
+     * @param mixed|null $value
+     * @param mixed $condition
+     * @return $this
+     * @see QueryBuilder::having
+     */
+    public static function having($column, $operator, $value = null, $condition = 'AND'): self
+    {
+    }
+
+    /**
+     * Specifies an ordering for the query results.
+     * Replaces any previously specified orderings, if any.
+     *
+     * @param string $column the ordering expression
+     * @param string $order the ordering direction
+     * @return $this
+     * @see QueryBuilder::orderBy
+     */
+    public static function orderBy(string $column, $order = 'ASC'): self
+    {
+    }
+
+    /**
+     * Adds a DESC ordering to the query
+     *
+     * @param string $field The name of field
+     * @return $this
+     * @see QueryBuilder::desc
+     */
+    public static function desc(string $field): self
+    {
+    }
+
+    /**
+     * Add an ASC ordering to the query
+     *
+     * @param string $field The name of field
+     * @return $this
+     * @see QueryBuilder::asc
+     */
+    public static function asc(string $field): self
+    {
+    }
+
+    /**
+     * Specifies a field to be the key of the fetched array
+     *
+     * @param string $column
+     * @return $this
+     * @see QueryBuilder::indexBy
+     */
+    public static function indexBy(string $column): self
+    {
+    }
+
+    /**
+     * @return $this
+     * @see QueryBuilder::forUpdate
+     */
+    public static function forUpdate(): self
+    {
+    }
+
+    /**
+     * @return $this
+     * @see QueryBuilder::forShare
+     */
+    public static function forShare(): self
+    {
+    }
+
+    /**
+     * @param string|bool $lock
+     * @return $this
+     * @see QueryBuilder::lock
+     */
+    public static function lock($lock): self
+    {
+    }
+
+    /**
+     * @param mixed $value
+     * @param callable $callback
+     * @param callable|null $default
+     * @return $this
+     * @see QueryBuilder::when
+     */
+    public static function when($value, callable $callback, callable $default = null): self
+    {
+    }
+
+    /**
+     * @param mixed $value
+     * @param callable $callback
+     * @param callable|null $default
+     * @return $this
+     * @see QueryBuilder::unless
+     */
+    public static function unless($value, callable $callback, callable $default = null): self
+    {
+    }
+
+    /**
+     * @param callable|null $converter
+     * @return $this
+     * @see QueryBuilder::setDbKeyConverter
+     */
+    public static function setDbKeyConverter(callable $converter = null): self
+    {
+    }
+
+    /**
+     * @param callable|null $converter
+     * @return $this
+     * @see QueryBuilder::setPhpKeyConverter
+     */
+    public static function setPhpKeyConverter(callable $converter = null): self
+    {
+    }
+}
+
 class Record
 {
 }
@@ -9242,6 +9921,673 @@ if (0) {
 
     class Pinyin
     {
+    }
+
+    class QueryBuilder
+    {
+        /**
+         * Set or remove cache time for the query
+         *
+         * @param int|null $seconds
+         * @return $this
+         * @see QueryBuilder::setCacheTime
+         */
+        public function setCacheTime(?int $seconds): self
+        {
+        }
+
+        /**
+         * Return the record table name
+         *
+         * @return string|null
+         * @see QueryBuilder::getTable
+         */
+        public function getTable(): ?string
+        {
+        }
+
+        /**
+         * Returns the name of columns of current table
+         *
+         * @return array
+         * @see QueryBuilder::getColumns
+         */
+        public function getColumns(): array
+        {
+        }
+
+        /**
+         * Check if column name exists
+         *
+         * @param string|int|null $name
+         * @return bool
+         * @see QueryBuilder::hasColumn
+         */
+        public function hasColumn($name): bool
+        {
+        }
+
+        /**
+         * Executes the generated query and returns the first array result
+         *
+         * @param mixed|null $column
+         * @param mixed|null $operator
+         * @param mixed|null $value
+         * @return array|null
+         * @see QueryBuilder::fetch
+         */
+        public function fetch($column = null, $operator = null, $value = null): ?array
+        {
+        }
+
+        /**
+         * Executes the generated query and returns all array results
+         *
+         * @param mixed|null $column
+         * @param mixed|null $operator
+         * @param mixed|null $value
+         * @return array
+         * @see QueryBuilder::fetchAll
+         */
+        public function fetchAll($column = null, $operator = null, $value = null): array
+        {
+        }
+
+        /**
+         * Executes the generated SQL and returns the found record object or null if not found
+         *
+         * @return array|null
+         * @see QueryBuilder::first
+         */
+        public function first(): ?array
+        {
+        }
+
+        /**
+         * @return array
+         * @see QueryBuilder::all
+         */
+        public function all(): array
+        {
+        }
+
+        /**
+         * @param string $column
+         * @param string|null $index
+         * @return array
+         * @see QueryBuilder::pluck
+         */
+        public function pluck(string $column, string $index = null): array
+        {
+        }
+
+        /**
+         * @param int $count
+         * @param callable $callback
+         * @return bool
+         * @see QueryBuilder::chunk
+         */
+        public function chunk(int $count, callable $callback): bool
+        {
+        }
+
+        /**
+         * Executes a COUNT query to receive the rows number
+         *
+         * @param string $column
+         * @return int
+         * @see QueryBuilder::cnt
+         */
+        public function cnt($column = '*'): int
+        {
+        }
+
+        /**
+         * Executes a MAX query to receive the max value of column
+         *
+         * @param string $column
+         * @return string|null
+         * @see QueryBuilder::max
+         */
+        public function max(string $column): ?string
+        {
+        }
+
+        /**
+         * Execute a update query with specified data
+         *
+         * @param array|string $set
+         * @param mixed $value
+         * @return int
+         * @see QueryBuilder::update
+         */
+        public function update($set = [], $value = null): int
+        {
+        }
+
+        /**
+         * Execute a delete query with specified conditions
+         *
+         * @param mixed|null $column
+         * @param mixed|null $operator
+         * @param mixed|null $value
+         * @return int
+         * @see QueryBuilder::delete
+         */
+        public function delete($column = null, $operator = null, $value = null): int
+        {
+        }
+
+        /**
+         * Sets the position of the first result to retrieve (the "offset")
+         *
+         * @param int|float|string $offset The first result to return
+         * @return $this
+         * @see QueryBuilder::offset
+         */
+        public function offset($offset): self
+        {
+        }
+
+        /**
+         * Sets the maximum number of results to retrieve (the "limit")
+         *
+         * @param int|float|string $limit The maximum number of results to retrieve
+         * @return $this
+         * @see QueryBuilder::limit
+         */
+        public function limit($limit): self
+        {
+        }
+
+        /**
+         * Sets the page number, the "OFFSET" value is equals "($page - 1) * LIMIT"
+         *
+         * @param int $page The page number
+         * @return $this
+         * @see QueryBuilder::page
+         */
+        public function page($page): self
+        {
+        }
+
+        /**
+         * Specifies an item that is to be returned in the query result.
+         * Replaces any previously specified selections, if any.
+         *
+         * @param array|string $columns the selection expressions
+         * @return $this
+         * @see QueryBuilder::select
+         */
+        public function select($columns = ['*']): self
+        {
+        }
+
+        /**
+         * @param array|string $columns
+         * @return $this
+         * @see QueryBuilder::selectDistinct
+         */
+        public function selectDistinct($columns): self
+        {
+        }
+
+        /**
+         * @param string $expression
+         * @return $this
+         * @see QueryBuilder::selectRaw
+         */
+        public function selectRaw($expression): self
+        {
+        }
+
+        /**
+         * Specifies columns that are not to be returned in the query result.
+         * Replaces any previously specified selections, if any.
+         *
+         * @param array|string $columns
+         * @return $this
+         * @see QueryBuilder::selectExcept
+         */
+        public function selectExcept($columns): self
+        {
+        }
+
+        /**
+         * Specifies an item of the main table that is to be returned in the query result.
+         * Default to all columns of the main table
+         *
+         * @param string $column
+         * @return $this
+         * @see QueryBuilder::selectMain
+         */
+        public function selectMain(string $column = '*'): self
+        {
+        }
+
+        /**
+         * Sets table for FROM query
+         *
+         * @param string $table
+         * @param string|null $alias
+         * @return $this
+         * @see QueryBuilder::from
+         */
+        public function from(string $table, $alias = null): self
+        {
+        }
+
+        /**
+         * @param string $table
+         * @param mixed|null $alias
+         * @return $this
+         * @see QueryBuilder::table
+         */
+        public function table(string $table, $alias = null): self
+        {
+        }
+
+        /**
+         * Adds a inner join to the query
+         *
+         * @param string $table The table name to join
+         * @param string|null $first
+         * @param string $operator
+         * @param string|null $second
+         * @param string $type
+         * @return $this
+         * @see QueryBuilder::join
+         */
+        public function join(
+            string $table,
+            string $first = null,
+            string $operator = '=',
+            string $second = null,
+            string $type = 'INNER'
+        ): self {
+        }
+
+        /**
+         * Adds a inner join to the query
+         *
+         * @param string $table The table name to join
+         * @param string|null $first
+         * @param string $operator
+         * @param string|null $second
+         * @return $this
+         * @see QueryBuilder::innerJoin
+         */
+        public function innerJoin(string $table, string $first = null, string $operator = '=', string $second = null): self
+        {
+        }
+
+        /**
+         * Adds a left join to the query
+         *
+         * @param string $table The table name to join
+         * @param string|null $first
+         * @param string $operator
+         * @param string|null $second
+         * @return $this
+         * @see QueryBuilder::leftJoin
+         */
+        public function leftJoin(string $table, string $first = null, string $operator = '=', string $second = null): self
+        {
+        }
+
+        /**
+         * Adds a right join to the query
+         *
+         * @param string $table The table name to join
+         * @param string|null $first
+         * @param string $operator
+         * @param string|null $second
+         * @return $this
+         * @see QueryBuilder::rightJoin
+         */
+        public function rightJoin(string $table, string $first = null, string $operator = '=', string $second = null): self
+        {
+        }
+
+        /**
+         * Specifies one or more restrictions to the query result.
+         * Replaces any previously specified restrictions, if any.
+         *
+         * ```php
+         * $user = wei()->db('user')->where('id = 1');
+         * $user = wei()->db('user')->where('id = ?', 1);
+         * $users = wei()->db('user')->where(array('id' => '1', 'username' => 'twin'));
+         * $users = wei()->where(array('id' => array('1', '2', '3')));
+         * ```
+         *
+         * @param array|Closure|string|null $column
+         * @param mixed|null $operator
+         * @param mixed|null $value
+         * @return $this
+         * @see QueryBuilder::where
+         */
+        public function where($column = null, $operator = null, $value = null): self
+        {
+        }
+
+        /**
+         * @param scalar $expression
+         * @param mixed $params
+         * @return $this
+         * @see QueryBuilder::whereRaw
+         */
+        public function whereRaw($expression, $params = null): self
+        {
+        }
+
+        /**
+         * @param string $column
+         * @param array $params
+         * @return $this
+         * @see QueryBuilder::whereBetween
+         */
+        public function whereBetween(string $column, array $params): self
+        {
+        }
+
+        /**
+         * @param string $column
+         * @param array $params
+         * @return $this
+         * @see QueryBuilder::whereNotBetween
+         */
+        public function whereNotBetween(string $column, array $params): self
+        {
+        }
+
+        /**
+         * @param string $column
+         * @param array $params
+         * @return $this
+         * @see QueryBuilder::whereIn
+         */
+        public function whereIn(string $column, array $params): self
+        {
+        }
+
+        /**
+         * @param string $column
+         * @param array $params
+         * @return $this
+         * @see QueryBuilder::whereNotIn
+         */
+        public function whereNotIn(string $column, array $params): self
+        {
+        }
+
+        /**
+         * @param string $column
+         * @return $this
+         * @see QueryBuilder::whereNull
+         */
+        public function whereNull(string $column): self
+        {
+        }
+
+        /**
+         * @param string $column
+         * @return $this
+         * @see QueryBuilder::whereNotNull
+         */
+        public function whereNotNull(string $column): self
+        {
+        }
+
+        /**
+         * @param string $column
+         * @param mixed $opOrValue
+         * @param mixed|null $value
+         * @return $this
+         * @see QueryBuilder::whereDate
+         */
+        public function whereDate(string $column, $opOrValue, $value = null): self
+        {
+        }
+
+        /**
+         * @param string $column
+         * @param mixed $opOrValue
+         * @param mixed|null $value
+         * @return $this
+         * @see QueryBuilder::whereMonth
+         */
+        public function whereMonth(string $column, $opOrValue, $value = null): self
+        {
+        }
+
+        /**
+         * @param string $column
+         * @param mixed $opOrValue
+         * @param mixed|null $value
+         * @return $this
+         * @see QueryBuilder::whereDay
+         */
+        public function whereDay(string $column, $opOrValue, $value = null): self
+        {
+        }
+
+        /**
+         * @param string $column
+         * @param mixed $opOrValue
+         * @param mixed|null $value
+         * @return $this
+         * @see QueryBuilder::whereYear
+         */
+        public function whereYear(string $column, $opOrValue, $value = null): self
+        {
+        }
+
+        /**
+         * @param string $column
+         * @param mixed $opOrValue
+         * @param mixed|null $value
+         * @return $this
+         * @see QueryBuilder::whereTime
+         */
+        public function whereTime(string $column, $opOrValue, $value = null): self
+        {
+        }
+
+        /**
+         * @param string $column
+         * @param mixed $opOrColumn2
+         * @param mixed|null $column2
+         * @return $this
+         * @see QueryBuilder::whereColumn
+         */
+        public function whereColumn(string $column, $opOrColumn2, $column2 = null): self
+        {
+        }
+
+        /**
+         * 搜索字段是否包含某个值
+         *
+         * @param string $column
+         * @param mixed $value
+         * @param string $condition
+         * @return $this
+         * @see QueryBuilder::whereContains
+         */
+        public function whereContains(string $column, $value, string $condition = 'AND'): self
+        {
+        }
+
+        /**
+         * @param string $column
+         * @param mixed $value
+         * @param string $condition
+         * @return $this
+         * @see QueryBuilder::whereNotContains
+         */
+        public function whereNotContains(string $column, $value, string $condition = 'OR'): self
+        {
+        }
+
+        /**
+         * Search whether a column has a value other than the default value
+         *
+         * @param string $column
+         * @param bool $has
+         * @return $this
+         * @see QueryBuilder::whereHas
+         */
+        public function whereHas(string $column, bool $has = true): self
+        {
+        }
+
+        /**
+         * Search whether a column dont have a value other than the default value
+         *
+         * @param string $column
+         * @return $this
+         * @see QueryBuilder::whereNotHas
+         */
+        public function whereNotHas(string $column): self
+        {
+        }
+
+        /**
+         * Specifies a grouping over the results of the query.
+         * Replaces any previously specified groupings, if any.
+         *
+         * @param mixed $column the grouping column
+         * @return $this
+         * @see QueryBuilder::groupBy
+         */
+        public function groupBy($column): self
+        {
+        }
+
+        /**
+         * Specifies a restriction over the groups of the query.
+         * Replaces any previous having restrictions, if any.
+         *
+         * @param mixed $column
+         * @param mixed $operator
+         * @param mixed|null $value
+         * @param mixed $condition
+         * @return $this
+         * @see QueryBuilder::having
+         */
+        public function having($column, $operator, $value = null, $condition = 'AND'): self
+        {
+        }
+
+        /**
+         * Specifies an ordering for the query results.
+         * Replaces any previously specified orderings, if any.
+         *
+         * @param string $column the ordering expression
+         * @param string $order the ordering direction
+         * @return $this
+         * @see QueryBuilder::orderBy
+         */
+        public function orderBy(string $column, $order = 'ASC'): self
+        {
+        }
+
+        /**
+         * Adds a DESC ordering to the query
+         *
+         * @param string $field The name of field
+         * @return $this
+         * @see QueryBuilder::desc
+         */
+        public function desc(string $field): self
+        {
+        }
+
+        /**
+         * Add an ASC ordering to the query
+         *
+         * @param string $field The name of field
+         * @return $this
+         * @see QueryBuilder::asc
+         */
+        public function asc(string $field): self
+        {
+        }
+
+        /**
+         * Specifies a field to be the key of the fetched array
+         *
+         * @param string $column
+         * @return $this
+         * @see QueryBuilder::indexBy
+         */
+        public function indexBy(string $column): self
+        {
+        }
+
+        /**
+         * @return $this
+         * @see QueryBuilder::forUpdate
+         */
+        public function forUpdate(): self
+        {
+        }
+
+        /**
+         * @return $this
+         * @see QueryBuilder::forShare
+         */
+        public function forShare(): self
+        {
+        }
+
+        /**
+         * @param string|bool $lock
+         * @return $this
+         * @see QueryBuilder::lock
+         */
+        public function lock($lock): self
+        {
+        }
+
+        /**
+         * @param mixed $value
+         * @param callable $callback
+         * @param callable|null $default
+         * @return $this
+         * @see QueryBuilder::when
+         */
+        public function when($value, callable $callback, callable $default = null): self
+        {
+        }
+
+        /**
+         * @param mixed $value
+         * @param callable $callback
+         * @param callable|null $default
+         * @return $this
+         * @see QueryBuilder::unless
+         */
+        public function unless($value, callable $callback, callable $default = null): self
+        {
+        }
+
+        /**
+         * @param callable|null $converter
+         * @return $this
+         * @see QueryBuilder::setDbKeyConverter
+         */
+        public function setDbKeyConverter(callable $converter = null): self
+        {
+        }
+
+        /**
+         * @param callable|null $converter
+         * @return $this
+         * @see QueryBuilder::setPhpKeyConverter
+         */
+        public function setPhpKeyConverter(callable $converter = null): self
+        {
+        }
     }
 
     class Record

@@ -1051,6 +1051,13 @@ class PinyinMixin
 }
 
 /**
+ * @property    Wei\QueryBuilder $queryBuilder A SQL query builder class
+ */
+class QueryBuilderMixin
+{
+}
+
+/**
  * @property    Wei\Record $record A base database record class
  */
 class RecordMixin
@@ -1397,6 +1404,7 @@ class WeiMixin
  * @mixin PhpErrorMixin
  * @mixin PhpFileCacheMixin
  * @mixin PinyinMixin
+ * @mixin QueryBuilderMixin
  * @mixin RecordMixin
  * @mixin RedisMixin
  * @mixin ReqMixin
