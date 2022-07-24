@@ -554,6 +554,22 @@ class ClassMap
 {
 }
 
+class Cls
+{
+    /**
+     * Return the traits used by the given class, including those used by all parent classes and other traits
+     *
+     * @param string|object $class
+     * @param bool $autoload
+     * @return array
+     * @see https://www.php.net/manual/en/function.class-uses.php#112671
+     * @see Cls::usesDeep
+     */
+    public static function usesDeep($class, bool $autoload = true): array
+    {
+    }
+}
+
 class Config
 {
 }
@@ -4586,6 +4602,67 @@ class StatsD
 {
 }
 
+class Str
+{
+    /**
+     * Returns a word in plural form
+     *
+     * @param string $word
+     * @return string
+     * @experimental will remove doctrine dependency
+     * @see Str::pluralize
+     */
+    public static function pluralize(string $word): string
+    {
+    }
+
+    /**
+     * Returns a word in singular form
+     *
+     * @param string $word
+     * @return string
+     * @experimental will remove doctrine dependency
+     * @see Str::singularize
+     */
+    public static function singularize(string $word): string
+    {
+    }
+
+    /**
+     * Convert a input to snake case
+     *
+     * @param string $input
+     * @param string $delimiter
+     * @return string
+     * @see Str::snake
+     */
+    public static function snake(string $input, string $delimiter = '_'): string
+    {
+    }
+
+    /**
+     * Convert a input to camel case
+     *
+     * @param string $input
+     * @return string
+     * @see Str::camel
+     */
+    public static function camel(string $input): string
+    {
+    }
+
+    /**
+     * Convert a input to dash case
+     *
+     * @param string $input
+     * @return string
+     * @see Str::dash
+     */
+    public static function dash(string $input): string
+    {
+    }
+}
+
 class T
 {
 }
@@ -7028,6 +7105,22 @@ if (0) {
 
     class ClassMap
     {
+    }
+
+    class Cls
+    {
+        /**
+         * Return the traits used by the given class, including those used by all parent classes and other traits
+         *
+         * @param string|object $class
+         * @param bool $autoload
+         * @return array
+         * @see https://www.php.net/manual/en/function.class-uses.php#112671
+         * @see Cls::usesDeep
+         */
+        public function usesDeep($class, bool $autoload = true): array
+        {
+        }
     }
 
     class Config
@@ -11048,6 +11141,67 @@ if (0) {
 
     class StatsD
     {
+    }
+
+    class Str
+    {
+        /**
+         * Returns a word in plural form
+         *
+         * @param string $word
+         * @return string
+         * @experimental will remove doctrine dependency
+         * @see Str::pluralize
+         */
+        public function pluralize(string $word): string
+        {
+        }
+
+        /**
+         * Returns a word in singular form
+         *
+         * @param string $word
+         * @return string
+         * @experimental will remove doctrine dependency
+         * @see Str::singularize
+         */
+        public function singularize(string $word): string
+        {
+        }
+
+        /**
+         * Convert a input to snake case
+         *
+         * @param string $input
+         * @param string $delimiter
+         * @return string
+         * @see Str::snake
+         */
+        public function snake(string $input, string $delimiter = '_'): string
+        {
+        }
+
+        /**
+         * Convert a input to camel case
+         *
+         * @param string $input
+         * @return string
+         * @see Str::camel
+         */
+        public function camel(string $input): string
+        {
+        }
+
+        /**
+         * Convert a input to dash case
+         *
+         * @param string $input
+         * @return string
+         * @see Str::dash
+         */
+        public function dash(string $input): string
+        {
+        }
     }
 
     class T

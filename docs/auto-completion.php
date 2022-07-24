@@ -64,6 +64,13 @@ class ClassMapMixin
 }
 
 /**
+ * @property    Wei\Cls $cls The class util service
+ */
+class ClsMixin
+{
+}
+
+/**
  * @property    Wei\Config $config A service to manage service container configurations
  */
 class ConfigMixin
@@ -996,6 +1003,13 @@ class MigrationMixin
 }
 
 /**
+ * @property    Wei\ModelTrait $modelTrait The main functions of the model, expected to be used with \Wei\BaseModel
+ */
+class ModelTraitMixin
+{
+}
+
+/**
  * @property    Wei\MongoCache $mongoCache A cache service that stores data in MongoDB
  * @method      mixed mongoCache($key, $value = null, $expire = 0) Retrieve or store an item
  */
@@ -1179,6 +1193,13 @@ class StatsDMixin
 }
 
 /**
+ * @property    Wei\Str $str The string util service
+ */
+class StrMixin
+{
+}
+
+/**
  * @property    Wei\T $t A translator wei
  * @method      string t($message, $parameters = []) Translate a message
  */
@@ -1280,6 +1301,7 @@ class WeiMixin
  * @mixin BlockMixin
  * @mixin CacheMixin
  * @mixin ClassMapMixin
+ * @mixin ClsMixin
  * @mixin ConfigMixin
  * @mixin CookieMixin
  * @mixin CounterMixin
@@ -1397,6 +1419,7 @@ class WeiMixin
  * @mixin MemcacheMixin
  * @mixin MemcachedMixin
  * @mixin MigrationMixin
+ * @mixin ModelTraitMixin
  * @mixin MongoCacheMixin
  * @mixin NearCacheMixin
  * @mixin NullCacheMixin
@@ -1421,6 +1444,7 @@ class WeiMixin
  * @mixin ShareMixin
  * @mixin SoapMixin
  * @mixin StatsDMixin
+ * @mixin StrMixin
  * @mixin TMixin
  * @mixin TagCacheMixin
  * @mixin TimeMixin
