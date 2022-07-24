@@ -2,13 +2,11 @@
 
 namespace WeiTest;
 
-use Miaoxing\Plugin\Test\BaseTestCase;
-
 /**
  * @internal
  * @mixin \StrMixin
  */
-final class StrTest extends BaseTestCase
+final class StrTest extends TestCase
 {
     public function providerForSnake()
     {
