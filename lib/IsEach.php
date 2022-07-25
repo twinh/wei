@@ -46,7 +46,7 @@ class IsEach extends BaseValidator
             throw new \LogicException('The "each" validator should not call directly, please use with \Wei\V');
         }
 
-        if (null !== $v && !is_callable($v)) {
+        if (null !== $v && !$v instanceof V && !is_callable($v)) {
             throw new \InvalidArgumentException(sprintf(
                 'Expected argument of type Wei\V or callable, "%s" given',
                 is_object($v) ? get_class($v) : gettype($v)
