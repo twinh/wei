@@ -1482,6 +1482,15 @@ trait QueryBuilderTrait
     }
 
     /**
+     * @return void
+     * @internal only use for test
+     */
+    public static function resetDbDrivers(): void
+    {
+        static::$dbDrivers = [];
+    }
+
+    /**
      * @param array $data
      * @param string $column
      * @return array

@@ -21,6 +21,8 @@ class QueryBuilderCacheTest extends TestCase
     {
         static::dropTables();
         static::resetTablePrefix();
+        // NOTE: 待移除
+        Qb::resetDbDrivers();
         parent::tearDownAfterClass();
     }
 
