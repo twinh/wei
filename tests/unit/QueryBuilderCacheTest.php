@@ -24,6 +24,12 @@ class QueryBuilderCacheTest extends TestCase
         parent::tearDownAfterClass();
     }
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->wei->set('db', $this->wei->get('mysqlDb'));
+    }
+
     public function testCacheTags()
     {
         $this->initFixtures();
