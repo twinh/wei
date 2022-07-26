@@ -18,12 +18,6 @@ final class QueryBuilderTest extends TestCase
 {
     use DbTrait;
 
-    public static function setUpBeforeClass(): void
-    {
-        parent::setUpBeforeClass();
-        static::setTablePrefix('p_');
-    }
-
     public static function tearDownAfterClass(): void
     {
         static::dropTables();
@@ -34,7 +28,8 @@ final class QueryBuilderTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
+        $this->wei->set('db', $this->wei->get('mysqlDb'));
+        $this->db->setOption('tablePrefix', 'p_');
         $this->wei->setConfig('queryBuilder', [
             'dbKeyConverter' => null,
             'phpKeyConverter' => null,
