@@ -2,9 +2,9 @@
 
 namespace WeiTest;
 
-use Miaoxing\Plugin\RetException;
 use Wei\IsEmail;
 use Wei\Ret;
+use Wei\Ret\RetException;
 use Wei\V;
 
 /**

@@ -2,7 +2,7 @@
 
 namespace Wei;
 
-use Miaoxing\Plugin\RetException;
+use Wei\Ret\RetException;
 
 /**
  * A chaining validator
