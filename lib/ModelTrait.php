@@ -272,6 +272,15 @@ trait ModelTrait
     }
 
     /**
+     * @return void
+     * @internal only use for test
+     */
+    public static function resetBoot(): void
+    {
+        static::$booted = [];
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function jsonSerialize(): array

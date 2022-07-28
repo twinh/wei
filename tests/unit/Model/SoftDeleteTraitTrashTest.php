@@ -32,6 +32,12 @@ final class SoftDeleteTraitTrashTest extends TestCase
         parent::tearDownAfterClass();
     }
 
+    protected function setUp(): void
+    {
+        TestSoftDeleteTrash::resetBoot();
+        parent::setUp();
+    }
+
     public function testPurge()
     {
         $record = TestSoftDeleteTrash::save();
