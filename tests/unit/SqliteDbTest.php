@@ -5,11 +5,11 @@ namespace WeiTest;
 /**
  * @internal
  */
-final class MysqlDbTest extends DbTest
+final class SqliteDbTest extends DbTest
 {
     protected function setUp(): void
     {
-        $this->db = $this->mysqlDb;
+        $this->db = $this->sqliteDb;
 
         try {
             $this->db->connect();
@@ -20,36 +20,29 @@ final class MysqlDbTest extends DbTest
         parent::setUp();
     }
 
-    public function testUseDb()
-    {
-        $this->db->useDb('information_schema');
-        $this->assertEquals('information_schema', $this->db->getDbname());
-    }
-
     protected function createTable()
     {
         $db = $this->db;
-
         $db->query('CREATE TABLE prefix_member_group (
-        id INTEGER NOT NULL AUTO_INCREMENT,
+        id INTEGER NOT NULL,
         name VARCHAR(50) NOT NULL,
         PRIMARY KEY(id))');
 
         $db->query('CREATE TABLE prefix_member (
-        id INTEGER NOT NULL AUTO_INCREMENT,
+        id INTEGER NOT NULL,
         group_id INTEGER NOT NULL,
         name VARCHAR(50) NOT NULL,
         address VARCHAR(256) NOT NULL,
         PRIMARY KEY(id))');
 
         $db->query('CREATE TABLE prefix_post (
-        id INTEGER NOT NULL AUTO_INCREMENT,
+        id INTEGER NOT NULL,
         member_id INTEGER NOT NULL,
         name VARCHAR(50) NOT NULL,
         PRIMARY KEY(id))');
 
         $db->query('CREATE TABLE prefix_tag (
-        id INTEGER NOT NULL AUTO_INCREMENT,
+        id INTEGER NOT NULL,
         name VARCHAR(50) NOT NULL,
         PRIMARY KEY(id))');
 

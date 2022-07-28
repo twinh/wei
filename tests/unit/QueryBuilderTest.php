@@ -28,7 +28,6 @@ final class QueryBuilderTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->wei->set('db', $this->wei->get('mysqlDb'));
         $this->db->setOption('tablePrefix', 'p_');
         $this->wei->setConfig('queryBuilder', [
             'dbKeyConverter' => null,

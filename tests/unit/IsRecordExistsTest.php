@@ -4,6 +4,7 @@ namespace WeiTest;
 
 /**
  * @internal
+ * @mixin \SchemaMixin
  */
 final class IsRecordExistsTest extends BaseValidatorTestCase
 {
@@ -17,15 +18,12 @@ final class IsRecordExistsTest extends BaseValidatorTestCase
 
         $db = $this->wei->db;
 
-        $db->query(<<<'SQL'
-CREATE TABLE users (
-    id INTEGER NOT NULL,
-    name VARCHAR(50) NOT NULL,
-    address VARCHAR(256) NOT NULL,
-    PRIMARY KEY(id)
-)
-SQL
-        );
+        $this->schema->table('users')
+            ->id()
+            ->string('name')
+            ->string('address')
+            ->exec();
+
         $db->insert('users', [
             'name' => 'twin',
             'address' => 'test',
@@ -35,6 +33,12 @@ SQL
             'name' => 'test',
             'address' => 'test',
         ]);
+    }
+
+    protected function tearDown(): void
+    {
+        $this->schema->dropIfExists('users');
+        parent::tearDown();
     }
 
     /**

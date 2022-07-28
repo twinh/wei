@@ -15,10 +15,6 @@ final class SchemaTest extends TestCase
     {
         parent::setUp();
 
-        if ($this->wei->getConfig('mysql:db')) {
-            $this->schema->db = $this->wei->mysqlDb;
-        }
-
         $this->schema->setOption([
             'charset' => 'utf8mb4',
             'collate' => 'utf8mb4_unicode_ci',

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'mysql:db' => [
+    'db' => [
         'driver' => 'mysql',
         'user' => 'travis',
         'password' => '',

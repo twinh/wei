@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'mysql:db' => [
+    'db' => [
         'host' => '127.0.0.1',
         'port' => getenv('DB_PORT'),
         'password' => 'password',

@@ -5,12 +5,12 @@ namespace WeiTest;
 /**
  * @internal
  */
-final class MysqlCacheTest extends CacheTestCase
+final class SqliteCacheTest extends CacheTestCase
 {
     protected function setUp(): void
     {
         try {
-            $this->object = $this->wei->mysqlDbCache;
+            $this->object = $this->wei->sqliteDbCache;
         } catch (\PDOException $e) {
             $this->markTestSkipped($e->getMessage());
         }
