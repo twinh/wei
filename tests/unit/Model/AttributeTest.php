@@ -17,17 +17,10 @@ class AttributeTest extends TestCase
 {
     use Fixture\DbTrait;
 
-    public static function setUpBeforeClass(): void
-    {
-        parent::setUpBeforeClass();
-        static::setTablePrefix('p_');
-    }
-
     public static function tearDownAfterClass(): void
     {
         parent::tearDownAfterClass();
         self::dropTables();
-        static::resetTablePrefix();
     }
 
     public function testOffsetExists()
@@ -258,6 +251,9 @@ class AttributeTest extends TestCase
         $this->assertInstanceOf(Logger::class, $logger);
     }
 
+    /**
+     * @group kk
+     */
     public function testMagicSetService()
     {
         $this->initFixtures();
@@ -273,6 +269,9 @@ class AttributeTest extends TestCase
         $this->assertSame($logger, $user->logger);
     }
 
+    /**
+     * @group kk
+     */
     public function testServiceNameAsColumn()
     {
         $schema = wei()->schema;

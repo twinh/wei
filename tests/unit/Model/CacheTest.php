@@ -11,16 +11,9 @@ class CacheTest extends TestCase
 {
     use Fixture\DbTrait;
 
-    public static function setUpBeforeClass(): void
-    {
-        parent::setUpBeforeClass();
-        static::setTablePrefix('p_');
-    }
-
     public static function tearDownAfterClass(): void
     {
         static::dropTables();
-        static::resetTablePrefix();
         parent::tearDownAfterClass();
     }
 

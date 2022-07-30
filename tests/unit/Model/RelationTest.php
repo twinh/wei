@@ -26,7 +26,6 @@ final class RelationTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
-        static::setTablePrefix();
         static::dropRelationTables();
         static::createRelationTables();
 
@@ -126,7 +125,6 @@ final class RelationTest extends TestCase
     public static function tearDownAfterClass(): void
     {
         static::dropRelationTables();
-        static::resetTablePrefix();
         parent::tearDownAfterClass();
     }
 

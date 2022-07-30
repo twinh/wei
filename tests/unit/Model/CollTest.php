@@ -16,17 +16,10 @@ class CollTest extends TestCase
 {
     use DbTrait;
 
-    public static function setUpBeforeClass(): void
-    {
-        parent::setUpBeforeClass();
-        static::setTablePrefix('p_');
-    }
-
     public static function tearDownAfterClass(): void
     {
         parent::tearDownAfterClass();
         self::dropTables();
-        static::resetTablePrefix();
     }
 
     public function testOffsetExists()
