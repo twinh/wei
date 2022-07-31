@@ -6,7 +6,6 @@ namespace WeiTest\Model;
 
 use Wei\Db;
 use Wei\Req;
-use Wei\Res;
 use Wei\Ret;
 use WeiTest\Model\Fixture\DbTrait;
 use WeiTest\Model\Fixture\TestUser;
@@ -877,32 +876,6 @@ final class ModelTest extends TestCase
         $this->assertSame('custom', $ret['data']);
 
         $this->assertSame($user, $ret->getMetadata('model'));
-    }
-
-    public function testToRetToRes()
-    {
-        $this->initFixtures();
-
-        $req = new Req([
-            'wei' => $this->wei,
-            'fromGlobal' => false,
-            'servers' => [
-                'HTTP_ACCEPT' => 'application/json',
-            ],
-        ]);
-        $res = new Res(['wei' => $this->wei]);
-
-        $user = TestUser::first();
-        /** @var Ret $ret */
-        $ret = $user->toRet();
-        $ret->toRes($req, $res);
-        $this->assertSame(200, $res->getStatusCode());
-
-        $user = TestUser::save();
-        /** @var Ret $ret */
-        $ret = $user->toRet();
-        $ret->toRes($req, $res);
-        $this->assertSame(201, $res->getStatusCode());
     }
 
     public function testFindByOrCreateWithNewAttribute()
