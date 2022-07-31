@@ -47,6 +47,8 @@ final class SoftDeleteTraitTest extends TestCase
     protected function setUp(): void
     {
         TestSoftDelete::resetBoot();
+        // Compatible without user service
+        wei()->user = (object) ['id' => 0];
         parent::setUp();
     }
 
