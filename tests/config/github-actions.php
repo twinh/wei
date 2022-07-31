@@ -7,6 +7,10 @@ return [
         'password' => 'password',
         'dbname' => 'miaoxing',
     ],
+    'schema' => [
+        'charset' => 'utf8mb4',
+        'collate' => 'utf8mb4_unicode_ci',
+    ],
     'redis' => [
         'port' => getenv('REDIS_PORT'),
     ],
