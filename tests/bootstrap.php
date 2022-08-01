@@ -40,10 +40,12 @@ wei([
         'port' => 3306,
         'dbname' => 'app',
         'charset' => 'utf8',
+        'tablePrefix' => 'p_',
     ],
     'sqlite:db' => [
         'driver' => 'sqlite',
         'path' => ':memory:',
+        'tablePrefix' => 'p_',
     ],
     'pgsql:db' => [
         'driver' => 'pgsql',
@@ -52,6 +54,7 @@ wei([
         'host' => '127.0.0.1',
         'port' => 5432,
         'dbname' => 'postgres',
+        'tablePrefix' => 'p_',
     ],
     'sqlite:dbCache' => [
         'deps' => [

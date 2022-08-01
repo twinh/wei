@@ -2228,10 +2228,10 @@ class DbTest extends TestCase
     public function testEmptyFrom()
     {
         $sql = $this->db('member')->resetSqlPart('from')->getSql();
-        $this->assertEquals('SELECT * FROM member', $sql);
+        $this->assertEquals('SELECT * FROM p_member', $sql);
 
         $sql = $this->db('member')->from('member m')->getSql();
-        $this->assertEquals('SELECT * FROM member m', $sql);
+        $this->assertEquals('SELECT * FROM p_member m', $sql);
     }
 
     public function testUseDb()

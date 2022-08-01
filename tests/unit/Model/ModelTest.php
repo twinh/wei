@@ -27,14 +27,6 @@ final class ModelTest extends TestCase
     {
         parent::tearDownAfterClass();
         self::dropTables();
-        static::resetTablePrefix();
-    }
-
-    protected function setUp(): void
-    {
-        static::setTablePrefix('p_');
-        TestUser::resetBoot();
-        parent::setUp();
     }
 
     public function testFind()

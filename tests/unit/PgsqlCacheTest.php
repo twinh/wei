@@ -16,5 +16,6 @@ final class PgsqlCacheTest extends CacheTestCase
         }
 
         parent::setUp();
+        $this->object->db->setOption('tablePrefix', '');
     }
 }

@@ -15,6 +15,12 @@ use WeiTest\TestCase;
  */
 final class QueryTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->db->setOption('tablePrefix', '');
+    }
+
     /**
      * The following test is from doctrine/dbal
      *
