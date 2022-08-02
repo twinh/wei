@@ -1,9 +1,48 @@
+# [0.13.0](https://github.com/twinh/wei/compare/v0.12.6...v0.13.0) (2022-08-02)
+
+
+### Bug Fixes
+
+* **IsEach:** `each` 方法传入 `V` 对象报错 ([0b8eb58](https://github.com/twinh/wei/commit/0b8eb58dc29a38a248209ad82f68684807dfcf84))
+
+
+### Code Refactoring
+
+* **Cls:** 移动 `Str` 到 `wei` 中 ([fedea6a](https://github.com/twinh/wei/commit/fedea6a9890c744594e88924f1945b61e2ebe718))
+
+
+### Features
+
+* **Cls:** 增加 `cls` 服务，用于处理类相关功能 ([5c8389e](https://github.com/twinh/wei/commit/5c8389e40dc7588f50ca548d13f279b5846242e9))
+* **Model:** 移动模型基类到 `wei` 中 ([5c532ca](https://github.com/twinh/wei/commit/5c532ca1ce0d38e52b50a31d35b2112fe37d4202))
+* **QueryBuilder:** 移动 `QueryBuilder` 到 `wei` 中 ([d7a3826](https://github.com/twinh/wei/commit/d7a3826b790aaf6d0f985d6c1eae548b3cc1d4c1))
+* **Ret, experimental:** 增加 `RetException` ([52b4de3](https://github.com/twinh/wei/commit/52b4de392639b7c62b5cabe4056258f15b613ec5))
+* **Str:** 移动 `Str` 到 `wei` 中 ([6897b4d](https://github.com/twinh/wei/commit/6897b4d4076e885dbb4a81ac551e7fce8a809dff))
+* **V:** 增加 `assert` 方法，校验成功返回校验过的数据，失败抛出异常 ([1037684](https://github.com/twinh/wei/commit/103768417a711f9bebe75251a83db8e8fcb20d95))
+* **V:** 支持通过任意校验器初始化键名校验，重写 `V` 服务 ([b6e2236](https://github.com/twinh/wei/commit/b6e2236a332c4ff5ae02f339fad7bd67bf12c55a))
+* **V, experimental:** 增加 `self` 方法，用于校验整个数据，而非数据中的某一项 ([1bed1f4](https://github.com/twinh/wei/commit/1bed1f417204095a02356e7ab90fe5bd7f4672ea))
+* **Validator, experimental:** 移除 `BASIC_TYPE` 常量 ([c015f0a](https://github.com/twinh/wei/commit/c015f0ab4dfbbd19cd31b880efe6365023ef3b27))
+
+
+### BREAKING CHANGES
+
+* **Cls:** 移动 `Str` 到 `wei` 中
+* **V:** `V` 服务不再支持串联校验，以便支持通过任意校验器初始化键名校验
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `8.1.2` to `8.1.3`
+
 ## [0.12.6](https://github.com/twinh/wei/compare/v0.12.5...v0.12.6) (2022-07-02)
 
 
 ### Bug Fixes
 
-* 解决 composer 2.2+ 默认不启用插件导致安装路径错误 ([428729a](https://github.com/twinh/wei/commit/428729a5b2a0c6c1f85fe2f0ef08aa2f854661f6))
+* 解决 composer 2.2+ 默认不启用插件导致安装路径错误 ([ce7db78](https://github.com/twinh/wei/commit/ce7db787ede6a8661b3bef821347e9b00f8485b0))
 
 ## [0.12.5](https://github.com/twinh/wei/compare/v0.12.4...v0.12.5) (2022-07-01)
 
