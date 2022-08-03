@@ -16,6 +16,5 @@ final class SqliteCacheTest extends CacheTestCase
         }
 
         parent::setUp();
-        $this->object->db->setOption('tablePrefix', '');
     }
 }

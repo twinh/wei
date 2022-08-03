@@ -22,7 +22,6 @@ final class DbCacheTest extends CacheTestCase
         }
 
         parent::setUp();
-        $this->object->db->setOption('tablePrefix', '');
     }
 
     public function testExpire()

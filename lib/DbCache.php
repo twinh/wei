@@ -82,9 +82,10 @@ class DbCache extends BaseCache
     public function prepareTable()
     {
         $driver = $this->db->getDriver();
-        $tableExistsSql = sprintf($this->checkTableSqls[$driver], $this->table);
+        $table = $this->db->getTable($this->table);
+        $tableExistsSql = sprintf($this->checkTableSqls[$driver], $table);
         if ($this->checkTable && !$this->db->fetchColumn($tableExistsSql)) {
-            $createTableSql = sprintf($this->createTableSqls[$driver], $this->table);
+            $createTableSql = sprintf($this->createTableSqls[$driver], $table);
             $this->db->executeUpdate($createTableSql);
         }
     }
@@ -198,6 +199,6 @@ class DbCache extends BaseCache
      */
     protected function clear()
     {
-        return (bool) $this->db->executeUpdate("DELETE FROM {$this->table}");
+        return (bool) $this->db->executeUpdate("DELETE FROM {$this->db->getTable($this->table)}");
     }
 }
