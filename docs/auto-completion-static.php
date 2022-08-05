@@ -585,6 +585,17 @@ class Counter
 class Db
 {
     /**
+     * Set the prefix string of table name
+     *
+     * @param string $tablePrefix
+     * @return $this
+     * @see Db::setTablePrefix
+     */
+    public static function setTablePrefix(string $tablePrefix): self
+    {
+    }
+
+    /**
      * Execute a function in a transaction
      *
      * @param callable $fn
@@ -7137,6 +7148,17 @@ if (0) {
 
     class Db
     {
+        /**
+         * Set the prefix string of table name
+         *
+         * @param string $tablePrefix
+         * @return $this
+         * @see Db::setTablePrefix
+         */
+        public function setTablePrefix(string $tablePrefix): self
+        {
+        }
+
         /**
          * Execute a function in a transaction
          *

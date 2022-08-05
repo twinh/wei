@@ -994,6 +994,19 @@ class Db extends Base
     }
 
     /**
+     * Set the prefix string of table name
+     *
+     * @param string $tablePrefix
+     * @return $this
+     * @svc
+     */
+    protected function setTablePrefix(string $tablePrefix): self
+    {
+        $this->tablePrefix = $tablePrefix;
+        return $this;
+    }
+
+    /**
      * Execute a function in a transaction
      *
      * @param callable $fn

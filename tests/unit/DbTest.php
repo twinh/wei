@@ -2247,6 +2247,14 @@ class DbTest extends TestCase
         }
     }
 
+    public function testSetTablePrefix()
+    {
+        $prefix = $this->db->getTablePrefix();
+        $this->db->setTablePrefix('custom_prefix');
+        $this->assertSame('custom_prefix', $this->db->getTablePrefix());
+        $this->db->setTablePrefix($prefix);
+    }
+
     protected function createTable()
     {
         $db = $this->db;
