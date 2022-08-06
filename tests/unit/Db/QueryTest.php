@@ -9,6 +9,7 @@ use WeiTest\TestCase;
  * @property Record $record
  *
  * @internal
+ * @mixin \DbMixin
  *
  * NOTE: would be replace by new QueryBuilderTest
  * phpcs:disable Generic.Files.LineLength.TooLong
@@ -18,7 +19,7 @@ final class QueryTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->db->setOption('tablePrefix', '');
+        $this->db->setTablePrefix('');
     }
 
     /**

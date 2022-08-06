@@ -16,7 +16,7 @@ class DbTest extends TestCase
     {
         $db = $this->db;
 
-        $db->setOption('tablePrefix', 'prefix_');
+        $db->setTablePrefix('prefix_');
 
         $this->dropTable();
         $this->createTable();
@@ -1222,10 +1222,10 @@ class DbTest extends TestCase
 
         $db = $this->db;
 
-        $db->setOption('tablePrefix', 'tbl_');
+        $db->setTablePrefix('tbl_');
         $this->assertEquals('tbl_member', $db->getTable('member'));
 
-        $db->setOption('tablePrefix', 'prefix_post_');
+        $db->setTablePrefix('prefix_post_');
         $this->assertEquals(3, $db->count('tag'));
     }
 
