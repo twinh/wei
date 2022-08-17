@@ -32,7 +32,7 @@ https://github.com/twinh/wei/releases/latest
 
 ### 开发尝鲜版
 
-https://github.com/twinh/wei/archive/master.zip
+https://github.com/twinh/wei/archive/main.zip
 
 ### 更多历史版本
 

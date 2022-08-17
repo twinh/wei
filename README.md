@@ -1,6 +1,6 @@
 # Wei
 
-[![Build Status](https://img.shields.io/travis/twinh/wei/master.svg?style=flat-square)](https://travis-ci.org/twinh/wei)
+[![Build Status](https://img.shields.io/github/checks-status/twinh/wei/main?style=flat-square)](https://travis-ci.org/twinh/wei)
 [![Coverage Status](https://img.shields.io/coveralls/twinh/wei.svg?style=flat-square)](https://coveralls.io/r/twinh/wei)
 [![Latest Stable Version](http://img.shields.io/packagist/v/wei/wei.svg?style=flat-square)](https://packagist.org/packages/wei/wei)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](http://www.opensource.org/licenses/MIT)
@@ -51,7 +51,7 @@ composer require wei/wei
 ### Download source code
 
 * [Stable Version](https://github.com/twinh/wei/releases/latest)
-* [Develop Version](https://github.com/twinh/wei/archive/master.zip)
+* [Develop Version](https://github.com/twinh/wei/archive/main.zip)
 
 ## Resources
 

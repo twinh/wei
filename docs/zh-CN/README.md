@@ -16,7 +16,7 @@
 演示案例
 --------
 
-https://github.com/twinh/wei/tree/master/demos
+https://github.com/twinh/wei/tree/main/demos
 
 API参考目录
 -----------
