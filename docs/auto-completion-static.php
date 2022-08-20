@@ -4045,12 +4045,21 @@ class QueryBuilder
      * Specifies an ordering for the query results.
      * Replaces any previously specified orderings, if any.
      *
-     * @param string $column the ordering expression
+     * @param string|Raw $column the ordering expression
      * @param string $order the ordering direction
      * @return $this
      * @see QueryBuilder::orderBy
      */
-    public static function orderBy(string $column, $order = 'ASC'): self
+    public static function orderBy($column, $order = 'ASC'): self
+    {
+    }
+
+    /**
+     * @param scalar $expression
+     * @return $this
+     * @see QueryBuilder::orderByRaw
+     */
+    public static function orderByRaw($expression): self
     {
     }
 
@@ -10597,12 +10606,21 @@ if (0) {
          * Specifies an ordering for the query results.
          * Replaces any previously specified orderings, if any.
          *
-         * @param string $column the ordering expression
+         * @param string|Raw $column the ordering expression
          * @param string $order the ordering direction
          * @return $this
          * @see QueryBuilder::orderBy
          */
-        public function orderBy(string $column, $order = 'ASC'): self
+        public function orderBy($column, $order = 'ASC'): self
+        {
+        }
+
+        /**
+         * @param scalar $expression
+         * @return $this
+         * @see QueryBuilder::orderByRaw
+         */
+        public function orderByRaw($expression): self
         {
         }
 

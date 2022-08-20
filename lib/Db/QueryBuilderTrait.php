@@ -1334,12 +1334,12 @@ trait QueryBuilderTrait
      * Specifies an ordering for the query results.
      * Replaces any previously specified orderings, if any.
      *
-     * @param string $column the ordering expression
+     * @param string|Raw $column the ordering expression
      * @param string $order the ordering direction
      * @return $this
      * @svc
      */
-    protected function orderBy(string $column, $order = 'ASC'): self
+    protected function orderBy($column, $order = 'ASC'): self
     {
         $order = strtoupper($order);
         if (!in_array($order, ['ASC', 'DESC'], true)) {
@@ -1347,6 +1347,16 @@ trait QueryBuilderTrait
         }
 
         return $this->addQueryPart('orderBy', [compact('column', 'order')], true);
+    }
+
+    /**
+     * @param scalar $expression
+     * @return $this
+     * @svc
+     */
+    protected function orderByRaw($expression): self
+    {
+        return $this->orderBy($this->raw($expression));
     }
 
     /**

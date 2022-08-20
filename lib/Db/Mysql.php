@@ -206,7 +206,11 @@ class Mysql extends BaseDriver
                 $query .= ' ORDER BY ';
                 $orderBys = [];
                 foreach ($parts['orderBy'] as $orderBy) {
-                    $orderBys[] = $this->wrap($orderBy['column']) . ' ' . $orderBy['order'];
+                    if ($this->isRaw($orderBy['column'])) {
+                        $orderBys[] = $this->getRawValue($orderBy['column']);
+                    } else {
+                        $orderBys[] = $this->wrap($orderBy['column']) . ' ' . $orderBy['order'];
+                    }
                 }
                 $query .= implode(', ', $orderBys);
             }

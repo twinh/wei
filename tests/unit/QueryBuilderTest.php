@@ -550,6 +550,13 @@ final class QueryBuilderTest extends TestCase
         $this->assertEquals('SELECT * FROM `p_test_users` ORDER BY `id` ASC', $sql);
     }
 
+    public function testOrderByRaw()
+    {
+        $sql = Qb::table('test_users')->orderByRaw('RAND()')->getRawSql();
+
+        $this->assertEquals('SELECT * FROM `p_test_users` ORDER BY RAND()', $sql);
+    }
+
     public function testOrderByDesc()
     {
         $sql = Qb::table('test_users')->orderBy('id', 'DESC')->getRawSql();
