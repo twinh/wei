@@ -67,6 +67,6 @@ trait DbTrait
 
     private static function resetTablePrefix()
     {
-        wei()->db->setOption('tablePrefix', static::$tablePrefix);
+        static::$tablePrefix && wei()->db->setOption('tablePrefix', static::$tablePrefix);
     }
 }
