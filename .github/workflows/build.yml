@@ -8,7 +8,7 @@ on:
     - cron: '0 22 * * *'
 
 env:
-  extensions: mbstring, mysql, redis, pgsql, sqlite3
+  extensions: mbstring, mysql, redis, pgsql, sqlite3, apcu
   key: cache-v1 # can be any string, change to clear the extension cache.
 
 jobs:
