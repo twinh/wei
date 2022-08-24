@@ -9,6 +9,14 @@ class ApcMixin
 }
 
 /**
+ * @property    Wei\Apcu $apcu A cache service that stored data in PHP APCu
+ * @method      mixed apcu($key, $value = null, $expire = 0) Retrieve or store an item
+ */
+class ApcuMixin
+{
+}
+
+/**
  * @property    Wei\App $app A service to build an MVC application
  * @method      Wei\App app($options = []) Startup an MVC application
  */
@@ -1294,6 +1302,7 @@ class WeiMixin
 
 /**
  * @mixin ApcMixin
+ * @mixin ApcuMixin
  * @mixin AppMixin
  * @mixin ArrayCacheMixin
  * @mixin AssetMixin
