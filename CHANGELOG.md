@@ -1,3 +1,32 @@
+# [0.14.0](https://github.com/twinh/wei/compare/v0.13.0...v0.14.0) (2022-09-03)
+
+
+### Bug Fixes
+
+* **DbCache:** 指定表前缀时出错 ([e0a294f](https://github.com/twinh/wei/commit/e0a294f9662ed3a01745ab1be6609883e52b5185))
+
+
+### Code Refactoring
+
+* **apc:** 移除失效的 `apc` 缓存 ([e178b00](https://github.com/twinh/wei/commit/e178b0068dde43161cb75171a6422b3c992af651))
+* **bicache:** 主缓存默认缓存由 `apc` 改为 `apcu` ([2e74df0](https://github.com/twinh/wei/commit/2e74df0de7811d1731d0d77fc897f5c287ad5b67))
+* **cache:** 默认缓存由 `apc` 改为 `phpFileCache` ([fbd12fc](https://github.com/twinh/wei/commit/fbd12fcd8bb418b9fd4fd3c8f1911ad4201cef5f))
+
+
+### Features
+
+* **apcu:** 增加 `apcu` 缓存服务 ([6ccf765](https://github.com/twinh/wei/commit/6ccf765abfacf52ef08fc74e7d59f842f4ae560e))
+* **db:** 增加 `setTablePrefix` 方法 ([04f50eb](https://github.com/twinh/wei/commit/04f50ebb738dd9c16d0100802621ba0a28301a8a))
+* **QueryBuilder:** 增加 `orderByRaw` 方法 ([f6a4c54](https://github.com/twinh/wei/commit/f6a4c5499343619b00792b3c84a6fb516b4dcb40))
+
+
+### BREAKING CHANGES
+
+* **bicache:** `bicache` 主缓存默认缓存由 `apc` 改为 `apcu`
+* **cache:** 默认缓存由 `apc` 改为 `phpFileCache`
+* **apc:** 移除失效的 `apc` 缓存
+* **QueryBuilder:** `QueryBuilder::orderBy` 第一个参数移除类型，允许传入 `Raw` 对象
+
 # [0.13.0](https://github.com/twinh/wei/compare/v0.12.6...v0.13.0) (2022-08-02)
 
 
@@ -42,7 +71,7 @@
 
 ### Bug Fixes
 
-* 解决 composer 2.2+ 默认不启用插件导致安装路径错误 ([ce7db78](https://github.com/twinh/wei/commit/ce7db787ede6a8661b3bef821347e9b00f8485b0))
+* 解决 composer 2.2+ 默认不启用插件导致安装路径错误 ([](https://github.com/twinh/wei/commit/))
 
 ## [0.12.5](https://github.com/twinh/wei/compare/v0.12.4...v0.12.5) (2022-07-01)
 
