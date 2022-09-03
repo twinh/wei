@@ -22,7 +22,7 @@ class Bicache extends BaseCache
      * @var array
      */
     protected $providers = [
-        'master' => 'apc',
+        'master' => 'apcu',
         'slave' => 'fileCache',
     ];
 
