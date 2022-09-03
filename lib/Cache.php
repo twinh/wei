@@ -28,7 +28,7 @@ class Cache extends BaseCache
      *
      * @ver string
      */
-    protected $driver = 'apc';
+    protected $driver = 'phpFileCache';
 
     /**
      * Constructor

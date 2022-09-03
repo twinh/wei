@@ -17,7 +17,7 @@ class NearCache extends BaseCache
      */
     protected $providers = [
         'front' => 'arrayCache',
-        'back' => 'apc',
+        'back' => 'cache',
     ];
 
     /**
