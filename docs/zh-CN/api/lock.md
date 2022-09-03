@@ -52,7 +52,7 @@ if (!wei()->lock('lottery-' . $userId)) {
 
 锁服务依赖于缓存服务,您可以通过`providers`选项配置.
 
-推荐配置的缓存服务:`apc`(单台服务器),`memcached`,`redis`等.
+推荐配置的缓存服务:`apcu`(单台服务器),`memcached`,`redis`等.
 
 ```php
 wei(array(

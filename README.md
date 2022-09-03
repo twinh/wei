@@ -67,7 +67,7 @@ composer require wei/wei
 ```php
 // Available cache objects
 $wei->cache;
-$wei->apc;
+$wei->apcu;
 $wei->arrayCache;
 $wei->dbCache;
 $wei->fileCache;

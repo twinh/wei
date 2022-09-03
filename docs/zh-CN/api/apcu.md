@@ -1,7 +1,7 @@
-Apc
-===
+Apcu
+====
 
-通过面向对象的方式设置或获取PHP APC缓存,并提供更多友好方便的功能方法.
+通过面向对象的方式设置或获取PHP APCu缓存,并提供更多友好方便的功能方法.
 
 案例
 ----
@@ -10,16 +10,16 @@ Apc
 
 ```php
 // 设置缓存,返回true
-wei()->apc('key', 'value');
+wei()->apcu('key', 'value');
 
 // 获取缓存,返回'value'
-wei()->apc('key');
+wei()->apcu('key');
 ```
 
 ### 设置60秒后就过期的缓存
 
 ```php
-wei()->apc('key', 'value', 60);
+wei()->apcu('key', 'value', 60);
 ```
 
 更多案例请查看[Cache](cache.md)类

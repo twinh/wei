@@ -28,7 +28,7 @@ API参考目录
 #### 缓存
 
 * [cache](api/cache.md) - 通用缓存
-* [apc](api/apc.md) - APC缓存
+* [apcu](api/apcu.md) - APCu缓存
 * [arrayCache](api/arrayCache.md) - PHP数组缓存
 * [dbCache](api/dbCache.md) - 数据库缓存
 * [fileCache](api/fileCache.md) - 文件缓存
