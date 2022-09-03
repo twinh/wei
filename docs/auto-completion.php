@@ -1,14 +1,6 @@
 <?php
 
 /**
- * @property    Wei\Apc $apc A cache service that stored data in PHP APC
- * @method      mixed apc($key, $value = null, $expire = 0) Retrieve or store an item
- */
-class ApcMixin
-{
-}
-
-/**
  * @property    Wei\Apcu $apcu A cache service that stored data in PHP APCu
  * @method      mixed apcu($key, $value = null, $expire = 0) Retrieve or store an item
  */
@@ -1301,7 +1293,6 @@ class WeiMixin
 }
 
 /**
- * @mixin ApcMixin
  * @mixin ApcuMixin
  * @mixin AppMixin
  * @mixin ArrayCacheMixin
