@@ -1229,6 +1229,14 @@ class DbTest extends TestCase
         $this->assertEquals(3, $db->count('tag'));
     }
 
+    public function testTablePrefixWithDbName()
+    {
+        $db = $this->db;
+
+        $db->setTablePrefix('tbl_');
+        $this->assertSame('db2.tbl_member', $db->getTable('db2.member'));
+    }
+
     public function testConnectFails()
     {
         $this->setExpectedException('\PDOException');

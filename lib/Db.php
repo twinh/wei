@@ -785,6 +785,10 @@ class Db extends Base
      */
     public function getTable($table)
     {
+        if (false !== strpos($table, '.')) {
+            [$dbname, $table] = explode('.', $table, 2);
+            return $dbname . '.' . $this->tablePrefix . $table;
+        }
         return $this->tablePrefix . $table;
     }
 
