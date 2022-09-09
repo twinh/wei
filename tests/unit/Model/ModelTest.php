@@ -8,6 +8,7 @@ use Wei\Db;
 use Wei\Req;
 use Wei\Ret;
 use WeiTest\Model\Fixture\DbTrait;
+use WeiTest\Model\Fixture\TestTableHasDatabase;
 use WeiTest\Model\Fixture\TestUser;
 use WeiTest\TestCase;
 
@@ -913,5 +914,15 @@ final class ModelTest extends TestCase
 
         $sql = TestUser::new()->orderBy('id')->getRawSql();
         $this->assertSame('SELECT * FROM `p_test_users` ORDER BY `id` ASC', $sql);
+    }
+
+    public function testTableHasDatabase()
+    {
+        $this->initFixtures();
+
+        $user = TestTableHasDatabase::new();
+
+        $data = $user->fetch();
+        $this->assertNotEmpty($data);
     }
 }

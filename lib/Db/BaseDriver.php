@@ -87,7 +87,17 @@ abstract class BaseDriver extends Base
 
     protected function wrapTable($table)
     {
-        return $this->wrap($this->isAlias($table) ? $table : $this->db->getTable($table));
+        if ($this->isAlias($table)) {
+            return $this->wrapValue($table);
+        }
+
+        $value = '';
+        if (false !== strpos($table, '.')) {
+            [$dbname, $table] = explode('.', $table, 2);
+            $value = $this->wrapValue($dbname) . '.';
+        }
+
+        return $value . $this->wrapValue($this->db->getTable($table));
     }
 
     protected function addAlias($name)
