@@ -542,7 +542,8 @@ final class VTest extends TestCase
         $v->key('products')->each(function (V $v) {
             $v->key('name')->maxLength(5);
             $v->key('stock')->greaterThanOrEqual(0);
-        })->notEmpty();
+            // last rule call `addValidData` overwrite previous rules
+        })->minLength(1);
         $ret = $v->check([
             'notChecked' => true,
             'products' => [

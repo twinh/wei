@@ -60,6 +60,17 @@ class V extends Base
     protected $defaultRequired = true;
 
     /**
+     * The rules that need to validate before other rules
+     *
+     * @var string[]
+     * @internal
+     */
+    protected $prependRules = [
+        'allowEmpty',
+        'notEmpty',
+    ];
+
+    /**
      * Return a new instance of current service
      *
      * @return static
@@ -218,7 +229,7 @@ class V extends Base
         }
 
         // IMPORTANT
-        if ('allowEmpty' === $name) {
+        if (in_array($name, $this->prependRules, true)) {
             $this->prependRule($name, $options);
         } else {
             $this->rules[$name] = $options;
