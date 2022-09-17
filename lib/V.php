@@ -60,6 +60,12 @@ class V extends Base
     protected $defaultRequired = true;
 
     /**
+     * @var bool
+     * @experimental
+     */
+    protected $defaultNotEmpty = false;
+
+    /**
      * The rules that need to validate before other rules
      *
      * @var string[]
@@ -144,6 +150,7 @@ class V extends Base
             'wei' => $this->wei,
             'key' => $key,
             'label' => $label,
+            'defaultNotEmpty' => $this->defaultNotEmpty,
         ]);
     }
 
@@ -219,6 +226,10 @@ class V extends Base
      */
     public function addRule(string $name, $options): self
     {
+        if ($this->defaultNotEmpty && !$this->rules) {
+            $this->rules['notEmpty'] = [];
+        }
+
         if ('not' === substr($name, 0, 3)) {
             $rule = substr($name, 3);
         } else {
@@ -455,6 +466,27 @@ class V extends Base
     protected function defaultRequired(): self
     {
         $this->defaultRequired = true;
+        return $this;
+    }
+
+    /**
+     * @return $this
+     * @svc
+     * @experimental
+     */
+    protected function defaultNotEmpty(): self
+    {
+        $this->defaultNotEmpty = true;
+        return $this;
+    }
+
+    /**
+     * @return $this
+     * @svc
+     */
+    protected function defaultAllowEmpty(): self
+    {
+        $this->defaultNotEmpty = false;
         return $this;
     }
 

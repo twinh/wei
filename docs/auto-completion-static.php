@@ -4911,6 +4911,23 @@ class V
 
     /**
      * @return $this
+     * @see V::defaultNotEmpty
+     * @experimental
+     */
+    public static function defaultNotEmpty(): self
+    {
+    }
+
+    /**
+     * @return $this
+     * @see V::defaultAllowEmpty
+     */
+    public static function defaultAllowEmpty(): self
+    {
+    }
+
+    /**
+     * @return $this
      * @see \Wei\IsAll::__invoke
      */
     public static function all($input, array $rules = [])
@@ -11467,6 +11484,23 @@ if (0) {
          * @see V::defaultRequired
          */
         public function defaultRequired(): self
+        {
+        }
+
+        /**
+         * @return $this
+         * @see V::defaultNotEmpty
+         * @experimental
+         */
+        public function defaultNotEmpty(): self
+        {
+        }
+
+        /**
+         * @return $this
+         * @see V::defaultAllowEmpty
+         */
+        public function defaultAllowEmpty(): self
         {
         }
 

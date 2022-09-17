@@ -751,6 +751,17 @@ final class VTest extends TestCase
         $this->assertRetSuc($ret);
     }
 
+    public function testDefaultNotEmpty()
+    {
+        $v = V::defaultNotEmpty();
+        $v->tinyChar('name', 'Name');
+
+        $ret = $v->check([
+            'name' => '',
+        ]);
+        $this->assertRetErr($ret, 'Name must not be empty');
+    }
+
     protected function checkModel(bool $isNew, $data)
     {
         $v = V::new();
