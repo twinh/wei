@@ -4,6 +4,7 @@ namespace WeiTest;
 
 /**
  * @internal
+ * @mixin \IsIdCardCnMixin
  */
 final class IsIdCardCnTest extends BaseValidatorTestCase
 {
@@ -50,5 +51,15 @@ final class IsIdCardCnTest extends BaseValidatorTestCase
             ['010-1234567890'],
             ['not digit'],
         ];
+    }
+
+    public function testLength()
+    {
+        wei()->t->setLocale('en');
+
+        $result = $this->isIdCardCn('x');
+        $this->assertFalse($result);
+
+        $this->assertSame('ID card must have a length of 18', $this->isIdCardCn->getFirstMessage('ID card'));
     }
 }

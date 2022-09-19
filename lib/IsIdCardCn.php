@@ -22,6 +22,8 @@ class IsIdCardCn extends BaseValidator
 
     private const CHECKSUM_X = 10;
 
+    protected $lengthMessage = '%name% must have a length of 18';
+
     protected $invalidMessage = '%name% must be valid Chinese identity card';
 
     protected $negativeMessage = '%name% must not be valid Chinese identity card';
@@ -58,7 +60,7 @@ class IsIdCardCn extends BaseValidator
 
         $len = strlen($input);
         if (static::OLD_LENGTH != $len && static::NEW_LENGTH != $len) {
-            $this->addError('invalid');
+            $this->addError('length');
             return false;
         }
 
