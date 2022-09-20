@@ -164,21 +164,9 @@ return [
     '%name% must be a float value' => '%name%必须是一个浮点数值',
     '%name% must not be a float value' => '%name%不能是一个浮点数值',
 
-    // idCardCn
-    '%name% must be valid Chinese identity card' => '%name%必须是有效的中国身份证',
-    '%name% must not be valid Chinese identity card' => '%name%不能是有效的中国身份证',
-
-    // idCardHk
-    '%name% must be valid Hong Kong identity card' => '%name%必须是有效的香港身份证',
-    '%name% must not be valid Hong Kong identity card' => '%name%不能是有效的香港身份证',
-
-    // idCardMo
-    '%name% must be valid Macau identity card' => '%name%必须是有效的澳门身份证',
-    '%name% must not be valid Macau identity card' => '%name%不能是有效的澳门身份证',
-
-    // idCardTw
-    '%name% must be valid Taiwan identity card' => '%name%必须是有效的台湾身份证',
-    '%name% must not be valid Taiwan identity card' => '%name%不能是有效的台湾身份证',
+    // idCardCn, idCardHk, idCardMo, idCardTw
+    '%name% is incorrect' => '%name%不正确',
+    '%name% must not be an identity card number' => '%name%不能是身份证号',
 
     // image
     '%name% is not a valid image or the size of the image could not be detected' => '%name%不是有效的图片,或是无法检测到图片的尺寸',

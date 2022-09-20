@@ -17,9 +17,9 @@ namespace Wei;
  */
 class IsIdCardTw extends BaseValidator
 {
-    protected $invalidMessage = '%name% must be valid Taiwan identity card';
+    protected $invalidMessage = '%name% is incorrect';
 
-    protected $negativeMessage = '%name% must not be valid Taiwan identity card';
+    protected $negativeMessage = '%name% must not be an identity card number';
 
     protected $map = [
         'A' => 10,

@@ -26,9 +26,9 @@ class IsIdCardCn extends BaseValidator
 
     protected $lengthMessage = '%name% must have a length of %length%';
 
-    protected $invalidMessage = '%name% must be valid Chinese identity card';
+    protected $invalidMessage = '%name% is incorrect';
 
-    protected $negativeMessage = '%name% must not be valid Chinese identity card';
+    protected $negativeMessage = '%name% must not be an identity card number';
 
     /**
      * Calculate the final digit of id card

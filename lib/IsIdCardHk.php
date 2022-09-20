@@ -16,9 +16,9 @@ namespace Wei;
  */
 class IsIdCardHk extends BaseValidator
 {
-    protected $invalidMessage = '%name% must be valid Hong Kong identity card';
+    protected $invalidMessage = '%name% is incorrect';
 
-    protected $negativeMessage = '%name% must not be valid Hong Kong identity card';
+    protected $negativeMessage = '%name% must not be an identity card number';
 
     /**
      * {@inheritdoc}

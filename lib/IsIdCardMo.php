@@ -17,9 +17,9 @@ namespace Wei;
  */
 class IsIdCardMo extends IsRegex
 {
-    protected $patternMessage = '%name% must be valid Macau identity card';
+    protected $invalidMessage = '%name% is incorrect';
 
-    protected $negativeMessage = '%name% must not be valid Macau identity card';
+    protected $negativeMessage = '%name% must not be an identity card number';
 
     protected $pattern = '/^[1|5|7][\d]{7}$/';
 }
