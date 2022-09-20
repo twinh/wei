@@ -165,7 +165,6 @@ return [
     '%name% must not be a float value' => '%name%不能是一个浮点数值',
 
     // idCardCn
-    '%name% must have a length of 18' => '%name%的长度必须是18位',
     '%name% must be valid Chinese identity card' => '%name%必须是有效的中国身份证',
     '%name% must not be valid Chinese identity card' => '%name%不能是有效的中国身份证',
 

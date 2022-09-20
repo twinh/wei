@@ -34,7 +34,6 @@ final class IsIdCardCnTest extends BaseValidatorTestCase
             ['34262219840209049X'],
             ['34262219840209049x'],
             ['310109198002147295'],
-            ['342622840209049'],
         ];
     }
 
@@ -50,6 +49,7 @@ final class IsIdCardCnTest extends BaseValidatorTestCase
             ['012345-1234567890'],
             ['010-1234567890'],
             ['not digit'],
+            ['342622840209049'], // old length
         ];
     }
 
