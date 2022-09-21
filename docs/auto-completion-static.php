@@ -1065,6 +1065,21 @@ class IsAllOf
     }
 }
 
+class IsAllow
+{
+    /**
+     * Check the input value, return a Ret object
+     *
+     * @param mixed $input
+     * @param string $name
+     * @return Ret
+     * @see BaseValidator::check
+     */
+    public static function check($input, string $name = '%name%'): Ret
+    {
+    }
+}
+
 class IsAllowEmpty
 {
     /**
@@ -4960,6 +4975,22 @@ class V
 
     /**
      * @return $this
+     * @see \Wei\IsAllow::__invoke
+     */
+    public static function allow($input, ...$values)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsAllow::__invoke
+     */
+    public static function notAllow($input, ...$values)
+    {
+    }
+
+    /**
+     * @return $this
      * @see \Wei\IsAllowEmpty::__invoke
      */
     public static function allowEmpty($input)
@@ -7641,6 +7672,21 @@ if (0) {
     }
 
     class IsAllOf
+    {
+        /**
+         * Check the input value, return a Ret object
+         *
+         * @param mixed $input
+         * @param string $name
+         * @return Ret
+         * @see BaseValidator::check
+         */
+        public function check($input, string $name = '%name%'): Ret
+        {
+        }
+    }
+
+    class IsAllow
     {
         /**
          * Check the input value, return a Ret object
@@ -11533,6 +11579,22 @@ if (0) {
          * @see \Wei\IsAllOf::__invoke
          */
         public function notAllOf($key = null, string $label = null, array $rules = [], $atLeast = null)
+        {
+        }
+
+        /**
+         * @return $this
+         * @see \Wei\IsAllow::__invoke
+         */
+        public function allow($key = null, string $label = null, ...$values)
+        {
+        }
+
+        /**
+         * @return $this
+         * @see \Wei\IsAllow::__invoke
+         */
+        public function notAllow($key = null, string $label = null, ...$values)
         {
         }
 

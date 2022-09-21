@@ -180,6 +180,14 @@ class IsAllOfMixin
 }
 
 /**
+ * @property    Wei\IsAllow $isAllow Ignore the remaining rules of current field if input value is in the specified values
+ * @method      mixed isAllow($input, $values)
+ */
+class IsAllowMixin
+{
+}
+
+/**
  * @property    Wei\IsAllowEmpty $isAllowEmpty Ignore the remaining rules of current field if input value is empty string or null
  * @method      bool isAllowEmpty($input) Validate the input value
  */
@@ -1316,6 +1324,7 @@ class WeiMixin
  * @mixin HttpMixin
  * @mixin IsAllMixin
  * @mixin IsAllOfMixin
+ * @mixin IsAllowMixin
  * @mixin IsAllowEmptyMixin
  * @mixin IsAlnumMixin
  * @mixin IsAlphaMixin

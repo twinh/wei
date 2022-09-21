@@ -351,6 +351,54 @@ final class VTest extends TestCase
         $this->assertRetSuc($ret);
     }
 
+    /**
+     * @dataProvider providerForAllow
+     * @param mixed $value
+     * @param mixed $allow
+     */
+    public function testAllow($value, $allow, bool $result)
+    {
+        $v = V::new();
+        $v->mobileCn('key', 'label')->allow($allow);
+        $ret = $v->check([
+            'key' => $value,
+        ]);
+        $this->assertSame($result, $ret->isSuc());
+    }
+
+    public function providerForAllow()
+    {
+        return [
+            ['13800138000', '', true],
+            ['', '', true],
+            ['', null, false],
+            [null, null, true],
+            [[], [], true],
+            ['', [], false],
+        ];
+    }
+
+    public function testAllowMultiple()
+    {
+        $v = V::new();
+        $v->mobileCn('key', 'label')->allow([], '');
+
+        $ret = $v->check([
+            'key' => [],
+        ]);
+        $this->assertRetSuc($ret);
+
+        $ret = $v->check([
+            'key' => '',
+        ]);
+        $this->assertRetSuc($ret);
+
+        $ret = $v->check([
+            'key' => null,
+        ]);
+        $this->assertRetErr($ret, 'label must be valid mobile number');
+    }
+
     public function testAllowEmptyWithEmptyString()
     {
         $ret = V::allowEmpty()->email()->check('');

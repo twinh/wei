@@ -491,6 +491,19 @@ class V extends Base
     }
 
     /**
+     * Add "allow" rule for current field
+     *
+     * @param ...$values
+     * @return $this
+     * @experimental may be remove in the feature
+     */
+    protected function allow(...$values): self
+    {
+        // Hack: specify "allows" key to support empty array: "[]"
+        return $this->prependRule('allow', ['values' => $values]);
+    }
+
+    /**
      * @return bool
      * @internal
      */
