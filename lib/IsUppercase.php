@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsUppercase extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     protected $invalidMessage = '%name% must be uppercase';
 
     protected $negativeMessage = '%name% must not be uppercase';

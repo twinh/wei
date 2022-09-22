@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsRegex extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     protected $patternMessage = '%name% must match against pattern "%pattern%"';
 
     protected $negativeMessage = '%name% must not match against pattern "%pattern%"';

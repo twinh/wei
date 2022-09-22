@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsPositiveInteger extends BaseValidator
 {
+    public const VALID_TYPE = ['string', 'int'];
+
     protected $invalidMessage = '%name% must be positive integer';
 
     /**

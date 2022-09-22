@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsDir extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     protected $notFoundMessage = '%name% must be an existing directory';
 
     protected $negativeMessage = '%name% must be a non-existing directory';

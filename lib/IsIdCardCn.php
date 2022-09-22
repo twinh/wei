@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsIdCardCn extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     private const CHECKSUM_X = 10;
 
     /**

@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsContains extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     protected $notContainsMessage = '%name% must contains %search%';
 
     protected $negativeMessage = '%name% must not contains %search%';

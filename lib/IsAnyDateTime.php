@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsAnyDateTime extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     /**
      * Message occurred when thrown "Failed to parse time string" exception
      *

@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsBetween extends BaseValidator
 {
+    public const VALID_TYPE = ['int', 'string'];
+
     protected $betweenMessage = '%name% must between %min% and %max%';
 
     protected $negativeMessage = '%name% must not between %min% and %max%';

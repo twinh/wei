@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsBool extends BaseValidator
 {
+    public const VALID_TYPE = 'bool';
+
     protected $notBoolMessage = '%name% must be a bool value';
 
     protected $negativeMessage = '%name% must not be a bool value';

@@ -399,27 +399,6 @@ final class VTest extends TestCase
         $this->assertRetErr($ret, 'label must be valid mobile number');
     }
 
-    public function testAllowEmptyWithEmptyString()
-    {
-        $ret = V::allowEmpty()->email()->check('');
-        $this->assertRetSuc($ret);
-    }
-
-    public function testAllowEmptyWithNull()
-    {
-        $ret = V::allowEmpty()->email()->check(null);
-        $this->assertRetSuc($ret);
-    }
-
-    public function testAllowEmptyWithValidData()
-    {
-        $ret = V::email()->check('test@example.com');
-        $this->assertRetSuc($ret);
-
-        $ret = V::allowEmpty()->email()->check('test@example.com');
-        $this->assertRetSuc($ret);
-    }
-
     public function testSkipArray()
     {
         $v = V::new();

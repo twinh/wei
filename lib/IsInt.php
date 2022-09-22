@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsInt extends BaseValidator
 {
+    public const VALID_TYPE = 'int';
+
     protected $notIntMessage = '%name% must be an integer value';
 
     protected $negativeMessage = '%name% must not be an integer value';

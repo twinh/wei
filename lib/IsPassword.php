@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsPassword extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     protected $lengthTooShortMessage = '%name% must have a length greater than %minLength%';
 
     protected $lengthTooLongMessage = '%name% must have a length lower than %maxLength%';

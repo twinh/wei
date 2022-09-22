@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsStartsWith extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     protected $notFoundMessage = '%name% must start with "%findMe%"';
 
     protected $negativeMessage = '%name% must not start with "%findMe%"';

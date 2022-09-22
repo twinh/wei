@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsString extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     /**
      * @var int|null
      */

@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsEmail extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     protected $formatMessage = '%name% must be valid email address';
 
     protected $negativeMessage = '%name% must not be an email address';

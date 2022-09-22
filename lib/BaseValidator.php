@@ -21,6 +21,11 @@ abstract class BaseValidator extends Base
     use RetTrait;
 
     /**
+     * @experimental may be change value to int, rename
+     */
+    public const VALID_TYPE = null;
+
+    /**
      * The message added when the input required a stringify value
      *
      * @var string

@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsUrl extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     protected $invalidMessage = '%name% must be valid URL';
 
     protected $negativeMessage = '%name% must not be URL';

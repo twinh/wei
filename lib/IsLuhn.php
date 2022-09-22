@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsLuhn extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     protected $invalidMessage = '%name% is not a valid number';
 
     /**

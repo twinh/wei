@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsEndsWith extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     protected $notFoundMessage = '%name% must end with "%findMe%"';
 
     protected $negativeMessage = '%name% must not end with "%findMe%"';

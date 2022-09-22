@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsFloat extends BaseValidator
 {
+    public const VALID_TYPE = ['string', 'float'];
+
     protected $notFloatMessage = '%name% must be a float value';
 
     protected $negativeMessage = '%name% must not be a float value';

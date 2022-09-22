@@ -19,6 +19,8 @@ namespace Wei;
  */
 class IsCreditCard extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     protected $invalidMessage = '%name% must be valid credit card number';
 
     protected $negativeMessage = '%name% must not be valid credit card number';

@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsIdCardHk extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     protected $invalidMessage = '%name% is incorrect';
 
     protected $negativeMessage = '%name% must not be an identity card number';

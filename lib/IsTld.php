@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsTld extends IsIn
 {
+    public const VALID_TYPE = 'string';
+
     protected $notInMessage = '%name% must be a valid top-level domain';
 
     protected $negativeMessage = '%name% must not a valid top-level domain';

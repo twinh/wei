@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsExists extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     protected $notFoundMessage = '%name% must be an existing file or directory';
 
     protected $negativeMessage = '%name% must be a non-existing file or directory';

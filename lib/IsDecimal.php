@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsDecimal extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     protected $invalidMessage = '%name% must be decimal';
 
     protected $negativeMessage = '%name% must not be decimal';

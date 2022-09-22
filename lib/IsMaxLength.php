@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsMaxLength extends IsLength
 {
+    public const VALID_TYPE = 'string';
+
     protected $tooLongMessage = '%name% must have a length lower than %max%';
 
     protected $tooManyMessage = '%name% must contain no more than %max% items';

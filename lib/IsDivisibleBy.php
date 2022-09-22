@@ -16,6 +16,8 @@ namespace Wei;
  */
 class IsDivisibleBy extends BaseValidator
 {
+    public const VALID_TYPE = 'string';
+
     protected $notDivisibleMessage = '%name% must be divisible by %divisor%';
 
     protected $negativeMessage = '%name% must not be divisible by %divisor%';
