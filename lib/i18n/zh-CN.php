@@ -179,6 +179,10 @@ return [
     '%name% must be in %array%' => '%name%必须在指定的数据中:%array%',
     '%name% must not be in %array%' => '%name%不能在指定的数据中:%array%',
 
+    // inConst
+    '%name% must be in the specified data' => '%name%必须在指定的数据中',
+    '%name% must not be in the specified data' => '%name%不能在指定的数据中',
+
     // ip
     '%name% must be valid IP' => '%name%必须是有效的IP地址',
     '%name% must not be IP' => '%name%不能是IP地址',

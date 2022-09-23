@@ -1755,6 +1755,21 @@ class IsIn
     }
 }
 
+class IsInConst
+{
+    /**
+     * Check the input value, return a Ret object
+     *
+     * @param mixed $input
+     * @param string $name
+     * @return Ret
+     * @see BaseValidator::check
+     */
+    public static function check($input, string $name = '%name%'): Ret
+    {
+    }
+}
+
 class IsInt
 {
     /**
@@ -5711,6 +5726,22 @@ class V
 
     /**
      * @return $this
+     * @see \Wei\IsInConst::__invoke
+     */
+    public static function inConst($input, $class = '', $prefix = null)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsInConst::__invoke
+     */
+    public static function notInConst($input, $class = '', $prefix = null)
+    {
+    }
+
+    /**
+     * @return $this
      * @see \Wei\IsInt::__invoke
      */
     public static function int($input, int $min = null, int $max = null)
@@ -8362,6 +8393,21 @@ if (0) {
     }
 
     class IsIn
+    {
+        /**
+         * Check the input value, return a Ret object
+         *
+         * @param mixed $input
+         * @param string $name
+         * @return Ret
+         * @see BaseValidator::check
+         */
+        public function check($input, string $name = '%name%'): Ret
+        {
+        }
+    }
+
+    class IsInConst
     {
         /**
          * Check the input value, return a Ret object
@@ -12315,6 +12361,22 @@ if (0) {
          * @see \Wei\IsIn::__invoke
          */
         public function notIn($key = null, string $label = null, $array = [], $strict = null)
+        {
+        }
+
+        /**
+         * @return $this
+         * @see \Wei\IsInConst::__invoke
+         */
+        public function inConst($key = null, string $label = null, $class = '', $prefix = null)
+        {
+        }
+
+        /**
+         * @return $this
+         * @see \Wei\IsInConst::__invoke
+         */
+        public function notInConst($key = null, string $label = null, $class = '', $prefix = null)
         {
         }
 

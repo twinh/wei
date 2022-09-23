@@ -548,6 +548,14 @@ class IsInMixin
 }
 
 /**
+ * @property    Wei\IsInConst $isInConst Check if the input is one of the class const
+ * @method      mixed isInConst($input, $class = '', $prefix = null)
+ */
+class IsInConstMixin
+{
+}
+
+/**
  * @property    Wei\IsInt $isInt Check if the input could be convert to int
  * @method      mixed isInt($input, $min = null, $max = null)
  */
@@ -1370,6 +1378,7 @@ class WeiMixin
  * @mixin IsIdenticalToMixin
  * @mixin IsImageMixin
  * @mixin IsInMixin
+ * @mixin IsInConstMixin
  * @mixin IsIntMixin
  * @mixin IsIpMixin
  * @mixin IsLengthMixin
