@@ -131,16 +131,6 @@ class Env extends Base
             return;
         }
 
-        // Executes in CLI
-        if (\PHP_SAPI == 'cli' && $ips = $this->getServerIps()) {
-            foreach ($ips as $ip) {
-                if (isset($this->ipMap[$ip])) {
-                    $this->name = $this->ipMap[$ip];
-                    return;
-                }
-            }
-        }
-
         $this->name = 'prod';
     }
 
