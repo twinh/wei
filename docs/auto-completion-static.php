@@ -1740,6 +1740,21 @@ class IsImage
     }
 }
 
+class IsImageUrl
+{
+    /**
+     * Check the input value, return a Ret object
+     *
+     * @param mixed $input
+     * @param string $name
+     * @return Ret
+     * @see BaseValidator::check
+     */
+    public static function check($input, string $name = '%name%'): Ret
+    {
+    }
+}
+
 class IsIn
 {
     /**
@@ -5710,6 +5725,22 @@ class V
 
     /**
      * @return $this
+     * @see \Wei\IsImageUrl::__invoke
+     */
+    public static function imageUrl($input, int $maxLength = null)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsImageUrl::__invoke
+     */
+    public static function notImageUrl($input, int $maxLength = null)
+    {
+    }
+
+    /**
+     * @return $this
      * @see \Wei\IsIn::__invoke
      */
     public static function in($input, $array = [], $strict = null)
@@ -8378,6 +8409,21 @@ if (0) {
     }
 
     class IsImage
+    {
+        /**
+         * Check the input value, return a Ret object
+         *
+         * @param mixed $input
+         * @param string $name
+         * @return Ret
+         * @see BaseValidator::check
+         */
+        public function check($input, string $name = '%name%'): Ret
+        {
+        }
+    }
+
+    class IsImageUrl
     {
         /**
          * Check the input value, return a Ret object
@@ -12345,6 +12391,22 @@ if (0) {
          * @see \Wei\IsImage::__invoke
          */
         public function notImage($key = null, string $label = null, $options = [])
+        {
+        }
+
+        /**
+         * @return $this
+         * @see \Wei\IsImageUrl::__invoke
+         */
+        public function imageUrl($key = null, string $label = null, int $maxLength = null)
+        {
+        }
+
+        /**
+         * @return $this
+         * @see \Wei\IsImageUrl::__invoke
+         */
+        public function notImageUrl($key = null, string $label = null, int $maxLength = null)
         {
         }
 

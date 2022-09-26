@@ -540,6 +540,14 @@ class IsImageMixin
 }
 
 /**
+ * @property    Wei\IsImageUrl $isImageUrl Check if the input is valid image URL address
+ * @method      mixed isImageUrl($input, $maxLength = null)
+ */
+class IsImageUrlMixin
+{
+}
+
+/**
  * @property    Wei\IsIn $isIn Check if the input is in specified array
  * @method      mixed isIn($input, $array = [], $strict = null)
  */
@@ -1377,6 +1385,7 @@ class WeiMixin
  * @mixin IsIdCardTwMixin
  * @mixin IsIdenticalToMixin
  * @mixin IsImageMixin
+ * @mixin IsImageUrlMixin
  * @mixin IsInMixin
  * @mixin IsInConstMixin
  * @mixin IsIntMixin
