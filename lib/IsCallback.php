@@ -68,10 +68,17 @@ class IsCallback extends BaseValidator
      */
     protected function doValidate($input)
     {
-        if (!call_user_func($this->fn, $input, $this, $this->wei)) {
-            $this->addError('invalid');
-            return false;
+        $result = call_user_func($this->fn, $input, $this, $this->wei);
+        if (true === $result) {
+            return true;
         }
-        return true;
+
+        // Allow return string as message
+        if (is_string($result)) {
+            $this->setMessage($result);
+        }
+
+        $this->addError('invalid');
+        return false;
     }
 }

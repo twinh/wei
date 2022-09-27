@@ -7,6 +7,7 @@ use Wei\V;
 use Wei\Validate;
 
 /**
+ * @mixin \IsCallbackMixin
  * @internal
  */
 final class IsCallbackTest extends BaseValidatorTestCase
@@ -76,5 +77,13 @@ final class IsCallbackTest extends BaseValidatorTestCase
     public function arrayCallback()
     {
         return false;
+    }
+
+    public function testReturnMessage()
+    {
+        $this->isCallback('data', function () {
+            return 'invalid message';
+        });
+        $this->assertEquals('invalid message', $this->isCallback->getFirstMessage());
     }
 }
