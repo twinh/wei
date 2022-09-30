@@ -789,6 +789,85 @@ final class VTest extends TestCase
         $this->assertRetErr($ret, 'Name must not be empty');
     }
 
+    public function testDefaultNotEmptyWithBool()
+    {
+        $v = V::defaultNotEmpty();
+        $v->bool('isAgree', 'Agreement')->allowEmpty();
+
+        $ret = $v->check([
+            'isAgree' => false,
+        ]);
+        $this->assertRetSuc($ret);
+    }
+
+    public function testDefaultNotEmptyWithArray()
+    {
+        $v = V::defaultNotEmpty();
+        $v->array('images', 'Images');
+
+        $ret = $v->check([
+            'images' => [],
+        ]);
+        $this->assertRetErr($ret, 'Images must not be empty');
+    }
+
+    /**
+     * @dataProvider providerForDefaultNotEmptyWithTypes
+     * @param mixed $value
+     */
+    public function testDefaultNotEmptyWithTypes(string $type, $value, bool $notEmptyResult, string $message = null)
+    {
+        $v = V::defaultNotEmpty();
+        $v->key('key', 'label')->addRule($type, []);
+        $ret = $v->check([
+            'key' => $value,
+        ]);
+        $this->assertSame($notEmptyResult, $ret->isSuc());
+        if ($ret->isErr()) {
+            $this->assertRetErr($ret, $message ?: 'label must not be empty');
+        }
+    }
+
+    public function providerForDefaultNotEmptyWithTypes()
+    {
+        return [
+            ['string', '', false],
+            ['string', null, false],
+            ['string', [], false, 'label must be a string'],
+            ['string', false, false],
+
+            ['int', '', false],
+            ['int', null, false],
+            ['int', [], false, 'label must be an integer value'],
+            ['int', false, false],
+
+            ['float', '', false],
+            ['float', null, false],
+            ['float', [], false, 'label must be a float value'],
+            ['float', false, false],
+
+            ['bool', '', false],
+            ['bool', null, false],
+            ['bool', [], false, 'label must be a bool value'],
+            ['bool', false, true],
+
+            ['array', '', false],
+            ['array', null, false],
+            ['array', [], false],
+            ['array', false, false, 'label must be an array'],
+        ];
+    }
+
+    public function testNotEmpty2()
+    {
+        $v = V::defaultNotEmpty();
+        $v->bool('name', 'Name');
+        $ret = $v->check([
+            'name' => '',
+        ]);
+        $this->assertRetErr($ret, 'Name must not be empty');
+    }
+
     protected function checkModel(bool $isNew, $data)
     {
         $v = V::new();

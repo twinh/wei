@@ -29,8 +29,6 @@ final class IsEmptyTest extends BaseValidatorTestCase
     {
         return [
             [''],
-            [false],
-            [[]],
             [null],
         ];
     }
@@ -46,6 +44,8 @@ final class IsEmptyTest extends BaseValidatorTestCase
             ["\r\n"],
             ["\n"],
             ["\r"],
+            [false],
+            [[]],
         ];
     }
 }
