@@ -1,3 +1,39 @@
+# [0.15.0](https://github.com/twinh/wei/compare/v0.14.0...v0.15.0) (2022-09-30)
+
+
+### Bug Fixes
+
+* **idCard:** 简化身份证校验错误的信息 ([824c9b7](https://github.com/twinh/wei/commit/824c9b71d0effd3cfdc24abf1b963f383af69cdc))
+* **idCardCn:** 不再支持已经停用的 15 位身份证号 ([f2a8373](https://github.com/twinh/wei/commit/f2a8373d2ab0596fb94869060b5fdc10d848a7ab))
+
+
+### Code Refactoring
+
+* **env:** 移除通过 `ifconfig` 获取本机 ip 的功能 ([a05d019](https://github.com/twinh/wei/commit/a05d01903574b1f95caff4a326cb3f63d6264972))
+
+
+### Features
+
+* **Db:** 支持跨数据库操作 ([f0e7cd4](https://github.com/twinh/wei/commit/f0e7cd40903bddf0bcd5ce306566d56c86068a78))
+* **isAllow:** 增加 `isAllow` 规则，用于遇到指定值则跳过剩下的规则 ([f2da440](https://github.com/twinh/wei/commit/f2da440ec75af4b26c8aa54b49542b5e0d6a1b70))
+* **isAllowEmpty, experimental:** 通过校验器类型自动识别允许的空值 ([2b8f9e3](https://github.com/twinh/wei/commit/2b8f9e32248b40a57a3a50bcb80fac1c4702e21c))
+* **isCallback:** 回调允许返回字符串表示错误信息 ([59dabd7](https://github.com/twinh/wei/commit/59dabd73a8fdbdfac742c896e00325a674d7567c))
+* **isEmpty, experimental:** 通过校验器类型自动识别允许的空值 ([dd99ebf](https://github.com/twinh/wei/commit/dd99ebf702da29922c283c0061bb4dfaa10e7071))
+* **isIdCardCn:** 增加长度错误提示 ([7c778cd](https://github.com/twinh/wei/commit/7c778cd9438594d24243787054633769ba4b9ea2))
+* **isImageUrl:** 增加 `isImageUrl` 校验器，用于检查字符串（如用户上传的文件）是否为图片地址 ([9082fe7](https://github.com/twinh/wei/commit/9082fe78b219ed405910dcd5eb69265898cc2030))
+* **isInConst:** 增加 `isInConst` 校验器，用于校验值在指定类的常量中 ([3fcddcc](https://github.com/twinh/wei/commit/3fcddcc6137d986e23a6120451b5db3b84b60284))
+* **Model:** 支持模型表包含数据库 ([db57ed4](https://github.com/twinh/wei/commit/db57ed40abc924a173c2c9a6420244f6c6b236f3))
+* **V:** 如果设置了 `notEmpty` 规则，优先校验 ([5864e45](https://github.com/twinh/wei/commit/5864e458d06580c1735c5f4ad3fbdd18a56add61))
+* **V, experimental:** 增加 `defaultNotEmpty` 功能 ([d7a4953](https://github.com/twinh/wei/commit/d7a495301cd91a7dc3950cad1d73c1ddde172912))
+
+
+### BREAKING CHANGES
+
+* **isEmpty, experimental:** `false` 和空数组 `[]` 默认不再认为是空值
+* **env:** 移除通过 `ifconfig` 获取本机 ip 的功能
+* **idCard:** 移除旧的身份证校验错误的翻译信息，增加新的翻译信息
+* **idCardCn:** 不再支持已经停用的 15 位身份证号
+
 # [0.14.0](https://github.com/twinh/wei/compare/v0.13.0...v0.14.0) (2022-09-03)
 
 
