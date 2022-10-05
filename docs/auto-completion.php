@@ -908,6 +908,14 @@ class IsTldMixin
 }
 
 /**
+ * @property    Wei\IsTrue $isTrue Check if the input is a true value
+ * @method      mixed isTrue($input, $invalidMessage = null)
+ */
+class IsTrueMixin
+{
+}
+
+/**
  * @property    Wei\IsType $isType Check if the type of input is equals specified type name
  * @method      mixed isType($input, $type = null)
  */
@@ -1431,6 +1439,7 @@ class WeiMixin
  * @mixin IsTinyCharMixin
  * @mixin IsTinyIntMixin
  * @mixin IsTldMixin
+ * @mixin IsTrueMixin
  * @mixin IsTypeMixin
  * @mixin IsUBigIntMixin
  * @mixin IsUDefaultIntMixin

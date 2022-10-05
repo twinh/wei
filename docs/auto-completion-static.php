@@ -2430,6 +2430,21 @@ class IsTld
     }
 }
 
+class IsTrue
+{
+    /**
+     * Check the input value, return a Ret object
+     *
+     * @param mixed $input
+     * @param string $name
+     * @return Ret
+     * @see BaseValidator::check
+     */
+    public static function check($input, string $name = '%name%'): Ret
+    {
+    }
+}
+
 class IsType
 {
     /**
@@ -6461,6 +6476,22 @@ class V
 
     /**
      * @return $this
+     * @see \Wei\IsTrue::__invoke
+     */
+    public static function true($input, $invalidMessage = null)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsTrue::__invoke
+     */
+    public static function notTrue($input, $invalidMessage = null)
+    {
+    }
+
+    /**
+     * @return $this
      * @see \Wei\IsType::__invoke
      */
     public static function type($input, $type = null)
@@ -9099,6 +9130,21 @@ if (0) {
     }
 
     class IsTld
+    {
+        /**
+         * Check the input value, return a Ret object
+         *
+         * @param mixed $input
+         * @param string $name
+         * @return Ret
+         * @see BaseValidator::check
+         */
+        public function check($input, string $name = '%name%'): Ret
+        {
+        }
+    }
+
+    class IsTrue
     {
         /**
          * Check the input value, return a Ret object
@@ -13127,6 +13173,22 @@ if (0) {
          * @see \Wei\IsTld::__invoke
          */
         public function notTld($key = null, string $label = null, $array = [], $strict = null)
+        {
+        }
+
+        /**
+         * @return $this
+         * @see \Wei\IsTrue::__invoke
+         */
+        public function true($key = null, string $label = null, $invalidMessage = null)
+        {
+        }
+
+        /**
+         * @return $this
+         * @see \Wei\IsTrue::__invoke
+         */
+        public function notTrue($key = null, string $label = null, $invalidMessage = null)
         {
         }
 
