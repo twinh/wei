@@ -6126,7 +6126,7 @@ class V
      * @return $this
      * @see \Wei\IsObject::__invoke
      */
-    public static function object($input)
+    public static function object($input, $max = null)
     {
     }
 
@@ -6134,7 +6134,7 @@ class V
      * @return $this
      * @see \Wei\IsObject::__invoke
      */
-    public static function notObject($input)
+    public static function notObject($input, $max = null)
     {
     }
 
@@ -12828,7 +12828,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsObject::__invoke
          */
-        public function object($key = null, string $label = null)
+        public function object($key = null, string $label = null, $max = null)
         {
         }
 
@@ -12836,7 +12836,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsObject::__invoke
          */
-        public function notObject($key = null, string $label = null)
+        public function notObject($key = null, string $label = null, $max = null)
         {
         }
 

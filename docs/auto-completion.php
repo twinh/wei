@@ -733,7 +733,7 @@ class IsNumberMixin
 
 /**
  * @property    Wei\IsObject $isObject Check if the input is an object
- * @method      bool isObject($input) Validate the input value
+ * @method      mixed isObject($input, $max = null)
  */
 class IsObjectMixin
 {

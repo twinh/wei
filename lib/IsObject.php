@@ -20,6 +20,23 @@ class IsObject extends BaseValidator
 
     protected $negativeMessage = '%name% must not be an object';
 
+    protected $tooLongMessage = '%name% must be no more than %max% character(s)';
+
+    /**
+     * @var int|string
+     * @experimental better message, length detect
+     */
+    protected $max;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __invoke($input, $max = null)
+    {
+        null !== $max && $this->storeOption('max', $max);
+        return parent::__invoke($input);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -29,6 +46,15 @@ class IsObject extends BaseValidator
             $this->addError('notObject');
             return false;
         }
+
+        if (
+            $this->max
+            && mb_strlen(json_encode($input, \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE)) > $this->max
+        ) {
+            $this->addError('tooLong');
+            return false;
+        }
+
         return true;
     }
 }
