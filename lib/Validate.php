@@ -975,7 +975,7 @@ class Validate extends Base
      */
     protected function isSelf($field): bool
     {
-        return !$field;
+        return '' === $field;
     }
 
     /**

@@ -61,6 +61,14 @@ final class VTest extends TestCase
         $this->assertRetSuc($ret);
     }
 
+    public function testZeroKey()
+    {
+        $v = V::new();
+        $v->email(0, 'The email');
+        $ret = $v->check([0 => 'test@test.com']);
+        $this->assertRetSuc($ret);
+    }
+
     public function testLabel()
     {
         $v = V::new();
