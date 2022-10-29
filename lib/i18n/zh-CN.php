@@ -175,6 +175,9 @@ return [
     '%name% height is too big (%height%px), allowed maximum height is %maxHeight%px' => '%name%的高度太大(%height%px), 允许的最大高度为%maxHeight%px',
     '%name% height is too small (%height%px), expected minimum height is %minHeight%px' => '%name%的高度太小(%height%px), 允许的最小高度为%minHeight%px',
 
+    // imageUrl
+    '%name% must be a valid image URL' => '%name%必须是一个图片地址',
+
     // in
     '%name% must be in %array%' => '%name%必须在指定的数据中:%array%',
     '%name% must not be in %array%' => '%name%不能在指定的数据中:%array%',
