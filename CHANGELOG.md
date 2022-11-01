@@ -1,3 +1,17 @@
+## [0.15.1](https://github.com/twinh/wei/compare/v0.15.0...v0.15.1) (2022-11-01)
+
+
+### Bug Fixes
+
+* **V:** `key` 为 `0` 时被识别为校验所有数据 ([66cd782](https://github.com/twinh/wei/commit/66cd7829fc0d2d5b9112668b8e3f548852dd830e))
+
+
+### Features
+
+* **isImageUrl:** 增加错误信息的中文翻译 ([a67ca6d](https://github.com/twinh/wei/commit/a67ca6dcc1d658b4b367d2193c631b04d20e1f59))
+* **isObject, experimental:** 增加长度校验 ([e21c008](https://github.com/twinh/wei/commit/e21c008aa5b1a9d3c975a51cabaa828ee5f81108))
+* **isTrue:** 增加 `isTrue` 校验器，用于校验值是否为真，如选中单选框，同意协议 ([1f4ae10](https://github.com/twinh/wei/commit/1f4ae10c29a60ed29bcb941ac94b47839655a4c7))
+
 # [0.15.0](https://github.com/twinh/wei/compare/v0.14.0...v0.15.0) (2022-09-30)
 
 
