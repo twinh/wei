@@ -23,6 +23,7 @@ class TestVirtual extends BaseModel
     protected $virtual = [
         'virtual_column',
         'full_name',
+        'only_get',
     ];
 
     protected $virtualColumnValue;
@@ -50,5 +51,10 @@ class TestVirtual extends BaseModel
     public function setFullNameAttribute($fullName)
     {
         [$this->first_name, $this->last_name] = explode(' ', $fullName);
+    }
+
+    public function getOnlyGetAttribute()
+    {
+        return 'test';
     }
 }

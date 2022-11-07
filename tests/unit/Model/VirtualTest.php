@@ -118,4 +118,15 @@ final class VirtualTest extends TestCase
         // @phpstan-ignore-next-line
         $virtual->virtualColumn = 'abc';
     }
+
+    public function testMissingSetVirtualAttributeMethod()
+    {
+        $virtual = TestVirtual::new();
+
+        $virtual->fromArray([
+            'only_get' => 'test2',
+        ]);
+
+        $this->assertSame('test', $virtual->get('only_get'));
+    }
 }

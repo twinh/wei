@@ -647,7 +647,7 @@ trait ModelTrait
             }
 
             if ($this->hasVirtual($name)) {
-                $this->setVirtualValue($name, $value);
+                $this->callSetter($name, $value);
             }
         }
         return $this;
