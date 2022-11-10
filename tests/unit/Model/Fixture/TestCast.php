@@ -23,6 +23,8 @@ use Wei\ModelTrait;
  * @property object $default_object_column
  * @property array $list_column
  * @property array $list2_column
+ * @property string $decimal_column
+ * @property string|null $nullable_decimal_column
  */
 class TestCast extends BaseModel
 {

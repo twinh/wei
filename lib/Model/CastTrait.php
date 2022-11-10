@@ -194,8 +194,10 @@ trait CastTrait
 
             case 'string':
             case 'float':
-            case 'decimal':
                 return (string) $value;
+
+            case 'decimal':
+                return (string) $value ?: 0;
 
             case 'date':
             case 'datetime':

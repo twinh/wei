@@ -44,6 +44,8 @@ final class CastTraitTest extends TestCase
             ->string('list_column')
             ->string('nullable_list_column')->nullable()
             ->string('list2_column')
+            ->decimal('decimal_column')
+            ->decimal('nullable_decimal_column')->nullable()
             ->exec();
 
         wei()->db->batchInsert('test_casts', [
@@ -580,6 +582,8 @@ final class CastTraitTest extends TestCase
             'list_column' => '',
             'nullable_list_column' => null,
             'list2_column' => '',
+            'decimal_column' => '0.00',
+            'nullable_decimal_column' => null,
         ], $data);
     }
 
@@ -637,6 +641,8 @@ final class CastTraitTest extends TestCase
                 'type' => 'int',
                 'separator' => '|',
             ],
+            'decimal_column' => 'decimal',
+            'nullable_decimal_column' => 'decimal',
         ], $casts);
     }
 
@@ -688,6 +694,8 @@ final class CastTraitTest extends TestCase
             'list_column' => [],
             'nullable_list_column' => null,
             'list2_column' => [],
+            'decimal_column' => '0',
+            'nullable_decimal_column' => null,
         ], $array);
     }
 
@@ -778,5 +786,30 @@ final class CastTraitTest extends TestCase
         ]);
         $this->assertSame('', $cast->big_int_column);
         $this->assertSame('1', $cast->nullable_big_int_column);
+    }
+
+    /**
+     * @dataProvider providerForTestSaveDecimal
+     * @param mixed $value
+     * @param mixed $decimalValue
+     * @param mixed $nullableDecimalValue
+     */
+    public function testSaveDecimal($value, $decimalValue, $nullableDecimalValue)
+    {
+        $cast = TestCast::save([
+            'decimal_column' => $value,
+            'nullable_decimal_column' => $value,
+        ]);
+        $this->assertSame($decimalValue, $cast->decimal_column);
+        $this->assertSame($nullableDecimalValue, $cast->nullable_decimal_column);
+    }
+
+    public function providerForTestSaveDecimal(): array
+    {
+        return [
+            ['', '0', '0'],
+            [null, '0', null],
+            [false, '0', '0'],
+        ];
     }
 }
