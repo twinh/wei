@@ -896,6 +896,16 @@ class Schema extends Base
     }
 
     /**
+     * Remove deleted_at and deleted_by columns in current table
+     *
+     * @return $this
+     */
+    public function dropSoftDeletable(): self
+    {
+        return $this->dropColumn(['deleted_at', 'deleted_by']);
+    }
+
+    /**
      * Set the comment for current table
      *
      * @param string $comment
