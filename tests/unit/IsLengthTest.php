@@ -4,6 +4,7 @@ namespace WeiTest;
 
 /**
  * @internal
+ * @mixin \IsLengthMixin
  */
 final class IsLengthTest extends BaseValidatorTestCase
 {
@@ -108,5 +109,11 @@ final class IsLengthTest extends BaseValidatorTestCase
 
         $this->isLength->storeOption('countByChars', true);
         $this->assertFalse($this->isLength([1, 2], 2));
+    }
+
+    public function testNull()
+    {
+        $this->assertFalse($this->isLength(null, 1));
+        $this->assertTrue($this->isLength(null, 0));
     }
 }

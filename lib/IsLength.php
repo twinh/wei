@@ -85,6 +85,8 @@ class IsLength extends BaseValidator
             }
         } elseif (is_array($input) || $input instanceof \Countable) {
             return count($input);
+        } elseif (null === $input) {
+            return 0;
         } else {
             return false;
         }
