@@ -11,6 +11,19 @@ class Mysql extends BaseDriver
 
     protected $sqlParts = [];
 
+    /**
+     * @var string[]
+     * @internal
+     */
+    protected $typeMap = [
+        'smallint' => 'smallInt',
+        'mediumint' => 'mediumInt',
+        'int' => 'int',
+        'text' => 'text',
+        'mediumtext' => 'mediumText',
+        'longtext' => 'longText',
+    ];
+
     public function getSql($type, $sqlParts, $identifierConverter = null)
     {
         $this->aliases = [];
@@ -73,20 +86,7 @@ class Mysql extends BaseDriver
         $dbColumns = $this->db->fetchAll("SHOW COLUMNS FROM $table");
 
         foreach ($dbColumns as $dbColumn) {
-            $column = [];
-
-            $column['cast'] = $this->getCastType($dbColumn['Type']);
-
-            // Auto increment column cant have default value, so it's allow to be null
-            if ('YES' === $dbColumn['Null'] || false !== strpos($dbColumn['Extra'], 'auto_increment')) {
-                $column['nullable'] = true;
-            }
-
-            [$default, $isCustom] = $this->getCustomDefault($dbColumn);
-            if ($isCustom) {
-                $column['default'] = $default;
-            }
-
+            $column = $this->parseColumn($dbColumn);
             $name = $phpKeyConverter ? $phpKeyConverter($dbColumn['Field']) : $dbColumn['Field'];
             $columns[$name] = $column;
         }
@@ -393,6 +393,144 @@ class Mysql extends BaseDriver
         }
     }
 
+    /**
+     * Parse column metadata from database column information
+     *
+     * @param array $dbColumn
+     * @return array
+     */
+    protected function parseColumn(array $dbColumn): array
+    {
+        $column = $this->parseColumnType($dbColumn['Type']);
+
+        // Auto increment column cant have default value, so it's allow to be null
+        if ('YES' === $dbColumn['Null'] || false !== strpos($dbColumn['Extra'], 'auto_increment')) {
+            $column['nullable'] = true;
+        }
+
+        [$default, $isCustom] = $this->getCustomDefault($dbColumn);
+        if ($isCustom) {
+            $column['default'] = $default;
+        }
+
+        return $column;
+    }
+
+    /**
+     * Parse column metadata from database column type
+     *
+     * $columnType examples:
+     *
+     * bigint(20) unsigned
+     * decimal(16,2) unsigned
+     * timestamp
+     *
+     * @param string $columnType
+     * @return array
+     * @internal
+     */
+    protected function parseColumnType(string $columnType): array
+    {
+        [$type, $left] = explode('(', $columnType) + [1 => 0];
+        $length = (int) $left;
+
+        switch ($type) {
+            case 'tinyint':
+                return 1 === $length ? [
+                    'type' => 'bool',
+                    'cast' => 'bool',
+                ] : [
+                    'type' => 'tinyInt',
+                    'cast' => 'int',
+                    'unsigned' => $this->isTypeUnsigned($columnType),
+                ];
+
+            case 'smallint':
+            case 'mediumint':
+            case 'int':
+                return [
+                    'type' => $this->typeMap[$type],
+                    'cast' => 'int',
+                    'unsigned' => $this->isTypeUnsigned($columnType),
+                ];
+
+            case 'bigint':
+                return [
+                    'type' => 'bigInt',
+                    'cast' => 'intString',
+                    'unsigned' => $this->isTypeUnsigned($columnType),
+                ];
+
+            case 'timestamp':
+            case 'datetime':
+                return [
+                    'type' => $type,
+                    'cast' => 'datetime',
+                ];
+
+            case 'date':
+                return [
+                    'type' => 'date',
+                    'cast' => 'date',
+                ];
+
+            case 'decimal':
+                // $left = 16,2) unsigned
+                $scale = (int) explode(',', $left)[1];
+                return [
+                    'type' => 'decimal',
+                    'cast' => 'decimal',
+                    'unsigned' => $this->isTypeUnsigned($columnType),
+                    'length' => $length,
+                    'scale' => $scale,
+                ];
+
+            case 'json':
+                return [
+                    'type' => 'json',
+                    'cast' => 'json',
+                    'length' => 1024 ** 3, // 1GB
+                ];
+
+            case 'char':
+            case 'varchar':
+                return [
+                    'type' => 'string',
+                    'cast' => 'string',
+                    'length' => $length,
+                ];
+
+            case 'text':
+            case 'mediumtext':
+            case 'longtext':
+                return [
+                    'type' => $this->typeMap[$type],
+                    'cast' => 'string',
+                ];
+
+            default:
+                return [
+                    'type' => 'string',
+                    'cast' => 'string',
+                ];
+        }
+    }
+
+    /**
+     * @param string $columnType
+     * @return bool
+     * @internal
+     */
+    protected function isTypeUnsigned(string $columnType): bool
+    {
+        return 'unsigned' === substr($columnType, -8);
+    }
+
+    /**
+     * @param string $columnType
+     * @return string
+     * @deprecated
+     */
     protected function getCastType($columnType)
     {
         $parts = explode('(', $columnType);

@@ -812,4 +812,149 @@ final class CastTraitTest extends TestCase
             [false, '0', '0'],
         ];
     }
+
+    public function testGetColumns()
+    {
+        $columns = TestCast::getColumns();
+        $this->assertSame([
+            'int_column' => [
+                'type' => 'int',
+                'cast' => 'int',
+                'unsigned' => true,
+                'nullable' => true,
+            ],
+            'nullable_int_column' => [
+                'type' => 'int',
+                'cast' => 'int',
+                'unsigned' => false,
+                'nullable' => true,
+            ],
+            'nullable_default_int_column' => [
+                'type' => 'int',
+                'cast' => 'int',
+                'unsigned' => false,
+                'nullable' => true,
+                'default' => 7,
+            ],
+            'big_int_column' => [
+                'type' => 'bigInt',
+                'cast' => 'intString',
+                'unsigned' => false,
+            ],
+            'nullable_big_int_column' => [
+                'type' => 'bigInt',
+                'cast' => 'intString',
+                'unsigned' => false,
+                'nullable' => true,
+            ],
+            'bool_column' => [
+                'type' => 'bool',
+                'cast' => 'bool',
+            ],
+            'nullable_bool_column' => [
+                'type' => 'bool',
+                'cast' => 'bool',
+                'nullable' => true,
+            ],
+            'string_column' => [
+                'type' => 'string',
+                'cast' => 'string',
+                'length' => 255,
+            ],
+            'nullable_string_column' => [
+                'type' => 'string',
+                'cast' => 'string',
+                'length' => 255,
+                'nullable' => true,
+            ],
+            'datetime_column' => [
+                'type' => 'datetime',
+                'cast' => 'datetime',
+                'nullable' => true,
+            ],
+            'nullable_datetime_column' => [
+                'type' => 'datetime',
+                'cast' => 'datetime',
+                'nullable' => true,
+            ],
+            'date_column' => [
+                'type' => 'date',
+                'cast' => 'date',
+                'nullable' => true,
+            ],
+            'nullable_date_column' => [
+                'type' => 'date',
+                'cast' => 'date',
+                'nullable' => true,
+            ],
+            'json_column' => [
+                'type' => 'string',
+                'cast' => 'array',
+                'length' => 255,
+                'default' => [
+                ],
+            ],
+            'nullable_json_column' => [
+                'type' => 'string',
+                'cast' => 'string',
+                'length' => 255,
+                'nullable' => true,
+            ],
+            'object_column' => [
+                'type' => 'string',
+                'cast' => 'object',
+                'length' => 255,
+            ],
+            'nullable_object_column' => [
+                'type' => 'string',
+                'cast' => 'object',
+                'length' => 255,
+                'nullable' => true,
+            ],
+            'default_object_column' => [
+                'type' => 'string',
+                'cast' => 'object',
+                'length' => 255,
+                'default' => '{"a":"c"}',
+            ],
+            'list_column' => [
+                'type' => 'string',
+                'cast' => 'list',
+                'length' => 255,
+                'default' => [
+                ],
+            ],
+            'nullable_list_column' => [
+                'type' => 'string',
+                'cast' => 'string',
+                'length' => 255,
+                'nullable' => true,
+            ],
+            'list2_column' => [
+                'type' => 'string',
+                'cast' => [
+                    0 => 'list',
+                    'type' => 'int',
+                    'separator' => '|',
+                ],
+                'length' => 255,
+                'default' => [],
+            ],
+            'decimal_column' => [
+                'type' => 'decimal',
+                'cast' => 'decimal',
+                'unsigned' => false,
+                'length' => 10,
+                'scale' => 2,
+            ],
+            'nullable_decimal_column' => [
+                'type' => 'decimal',
+                'cast' => 'decimal',
+                'unsigned' => false,
+                'length' => 10,
+                'scale' => 2,
+                'nullable' => true,
+            ],
+        ], $columns);
+    }
 }
