@@ -2,6 +2,7 @@
 
 namespace Wei;
 
+use InvalidArgumentException;
 use Wei\Ret\RetException;
 
 /**
@@ -75,6 +76,11 @@ class V extends Base
         'allowEmpty',
         'notEmpty',
     ];
+
+    /**
+     * @var BaseModel|null
+     */
+    protected $model;
 
     /**
      * Return a new instance of current service
@@ -236,7 +242,7 @@ class V extends Base
             $rule = $name;
         }
         if (!$this->wei->has('is' . ucfirst($rule))) {
-            throw new \InvalidArgumentException(sprintf('Validator "%s" not found', $name));
+            throw new InvalidArgumentException(sprintf('Validator "%s" not found', $name));
         }
 
         // IMPORTANT
@@ -360,6 +366,98 @@ class V extends Base
             throw new RetException($ret);
         }
         return $ret->getData();
+    }
+
+    public function setModel(BaseModel $model = null): self
+    {
+        $this->model = $model;
+        return $this;
+    }
+
+    public function getModel(): BaseModel
+    {
+        return $this->model;
+    }
+
+    /**
+     * Add a new validator  from model column definition
+     *
+     * @param string $name
+     * @param string|null $label
+     * @param BaseModel|null $model
+     * @param array|string|null $key
+     * @return $this
+     * @experimental
+     */
+    public function modelColumn(string $name, string $label = null, BaseModel $model = null, $key = null): self
+    {
+        $model || $model = $this->model;
+        if (!$model) {
+            throw new InvalidArgumentException('$model argument is required');
+        }
+
+        $column = $model->getColumns()[$name] ?? [];
+        if (!$column) {
+            throw new InvalidArgumentException(sprintf(
+                'Column "%s" not found in model "%s"',
+                $name,
+                get_class($model)
+            ));
+        }
+
+        $validator = $this->addValidator($key ?? $name, $label);
+
+        switch ($column['type']) {
+            case 'string':
+                return $validator->maxCharLength($column['length']);
+
+            case 'decimal':
+                return $column['unsigned'] ?? false ?
+                        $validator->uNumber($column['length'], $column['scale'])
+                        : $validator->number($column['length'], $column['scale']);
+
+            case 'tinyInt':
+                return $column['unsigned'] ?? false ? $validator->uTinyInt() : $validator->tinyInt();
+
+            case 'smallInt':
+                return $column['unsigned'] ?? false ? $validator->uSmallInt() : $validator->smallInt();
+
+            case 'mediumInt':
+                return $column['unsigned'] ?? false ? $validator->uMediumInt() : $validator->mediumInt();
+
+            case 'int':
+                return $column['unsigned'] ?? false ? $validator->uDefaultInt() : $validator->defaultInt();
+
+            case 'bigInt':
+                // big int as string
+                $validator->allow('');
+                return $column['unsigned'] ?? false ? $validator->uBigInt() : $validator->bigInt();
+
+            case 'bool':
+                return $validator->bool();
+
+            case 'datetime':
+                return $validator->dateTime();
+
+            case 'timestamp':
+                return $validator->dateTime()->between('1970-01-01 00:00:01', '2038-01-19 03:14:07');
+
+            case 'date':
+                return $validator->date();
+
+            case 'json':
+                return $validator->object($column['length']);
+
+            case 'text':
+                return $validator->text();
+
+            case 'mediumText':
+                return $validator->mediumText();
+
+            case 'longtext':
+            default:
+                throw new InvalidArgumentException(sprintf('Unsupported column type: %s', $column['type']));
+        }
     }
 
     /**
@@ -520,7 +618,7 @@ class V extends Base
     protected function addValidatorAndRule(string $name, array $args): self
     {
         if (count($args) < 2) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Expected at least 2 arguments for rule, but got ' . count($args)
             );
         }
