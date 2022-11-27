@@ -83,7 +83,7 @@ class Mysql extends BaseDriver
         $columns = [];
 
         $table = $this->db->getTable($table);
-        $dbColumns = $this->db->fetchAll("SHOW COLUMNS FROM $table");
+        $dbColumns = $this->db->fetchAll("SHOW FULL COLUMNS FROM $table");
 
         foreach ($dbColumns as $dbColumn) {
             $column = $this->parseColumn($dbColumn);
@@ -411,6 +411,10 @@ class Mysql extends BaseDriver
         [$default, $isCustom] = $this->getCustomDefault($dbColumn);
         if ($isCustom) {
             $column['default'] = $default;
+        }
+
+        if ($dbColumn['Comment']) {
+            $column['title'] = explode('。', $dbColumn['Comment'], 2)[0];
         }
 
         return $column;
