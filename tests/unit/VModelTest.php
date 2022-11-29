@@ -25,7 +25,7 @@ final class VModelTest extends TestCase
 
         wei()->schema->table('test_vs')
             ->id()
-            ->bool('bool_column')
+            ->bool('bool_column')->comment('Bool column')
             ->tinyInt('tiny_int_column')
             ->uTinyInt('u_tiny_int_column')
             ->smallInt('small_int_column')
@@ -114,6 +114,17 @@ final class VModelTest extends TestCase
             ],
         ]);
         $this->assertRetSuc($ret);
+    }
+
+    public function testLabelFromTable()
+    {
+        $v = V::new();
+        $v->setModel(TestV::new());
+        $v->modelColumn('bool_column');
+        $ret = $v->check([
+            'bool_column' => 'abc',
+        ]);
+        $this->assertRetErr($ret, 'Bool column must be a bool value');
     }
 
     /**

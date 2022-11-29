@@ -405,7 +405,7 @@ class V extends Base
             ));
         }
 
-        $validator = $this->addValidator($key ?? $name, $label);
+        $validator = $this->addValidator($key ?? $name, $label ?? $column['title'] ?: null);
 
         switch ($column['type']) {
             case 'string':
