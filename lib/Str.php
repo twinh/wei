@@ -106,6 +106,23 @@ class Str extends Base
     }
 
     /**
+     * Truncate a string to specified length and append
+     *
+     * @param string|null $str
+     * @param int $length
+     * @param string $ellipsis
+     * @return string|null
+     * @svc
+     */
+    protected function truncate(?string $str, int $length, string $ellipsis = '…'): ?string
+    {
+        if (mb_strlen($str) > $length) {
+            return mb_substr($str, 0, $length - mb_strlen($ellipsis)) . $ellipsis;
+        }
+        return $str;
+    }
+
+    /**
      * Get the inflector instance.
      *
      * @return Inflector

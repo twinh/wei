@@ -4741,6 +4741,19 @@ class Str
     public static function dash(string $input): string
     {
     }
+
+    /**
+     * Truncate a string to specified length and append
+     *
+     * @param string|null $str
+     * @param int $length
+     * @param string $ellipsis
+     * @return string|null
+     * @see Str::truncate
+     */
+    public static function truncate(?string $str, int $length, string $ellipsis = '…'): ?string
+    {
+    }
 }
 
 class T
@@ -11441,6 +11454,19 @@ if (0) {
          * @see Str::dash
          */
         public function dash(string $input): string
+        {
+        }
+
+        /**
+         * Truncate a string to specified length and append
+         *
+         * @param string|null $str
+         * @param int $length
+         * @param string $ellipsis
+         * @return string|null
+         * @see Str::truncate
+         */
+        public function truncate(?string $str, int $length, string $ellipsis = '…'): ?string
         {
         }
     }
