@@ -1,3 +1,22 @@
+## [0.15.2](https://github.com/twinh/wei/compare/v0.15.1...v0.15.2) (2022-12-01)
+
+
+### Bug Fixes
+
+* **isLength:** 解决 `null` 值提示长度未识别 ([3ead9b6](https://github.com/twinh/wei/commit/3ead9b6a6021359c7fa5cb12c58c793bc7dc8550))
+* **Model:** `fromArray` 包含虚拟字段触发 `Invalid virtual column: ` 错误 ([f38dc31](https://github.com/twinh/wei/commit/f38dc31160a31fc2ae4db60835d68823a9a8fb10))
+
+
+### Features
+
+* **Model:** `getColumns` 方法增加返回 `title` ([00dab8d](https://github.com/twinh/wei/commit/00dab8d2dabf367ffb41a5b657daf4572e3b076d))
+* **Model:** `getColumns` 方法增加返回 `type`，`unsigned`，`length` 和 `scale` ([53a5992](https://github.com/twinh/wei/commit/53a5992631aebf8488b10f27a3210fed6100c2bd))
+* **Model, Cast:** `decimal` 字段，如果传入空值，自动转换为 0 ([0e29613](https://github.com/twinh/wei/commit/0e296138ff60788cc00692cd3db994d835d7332a))
+* **Schema:** 增加 `dropSoftDeletable` 方法 ([d8e9b94](https://github.com/twinh/wei/commit/d8e9b94e79b28d49c3120ce7650dca6fc636c19f))
+* **Str:** 增加 `truncate` 方法 ([2492499](https://github.com/twinh/wei/commit/249249965972b6518711dfb511bb3d6013753be4))
+* **V:** `modelColumn` 名称留空时，从数据库表读取名称 ([97243d6](https://github.com/twinh/wei/commit/97243d6bdc9d2e3e7f043668ac6f562feca7f834))
+* **V:** 支持指定数据表字段生成校验规则 ([77f74eb](https://github.com/twinh/wei/commit/77f74eb66e1ab642f480f033e421ff47c4b21cdc))
+
 ## [0.15.1](https://github.com/twinh/wei/compare/v0.15.0...v0.15.1) (2022-11-01)
 
 
