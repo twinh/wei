@@ -884,6 +884,14 @@ class IsTimeMixin
 }
 
 /**
+ * @property    Wei\IsTimestamp $isTimestamp Check if the input is a valid database timestamp
+ * @method      mixed isTimestamp($input, $format = null)
+ */
+class IsTimestampMixin
+{
+}
+
+/**
  * @property    Wei\IsTinyChar $isTinyChar Check if the input is a string of 255 characters or less
  * @method      mixed isTinyChar($input, $minLength = null, $maxLength = null)
  */
@@ -1436,6 +1444,7 @@ class WeiMixin
  * @mixin IsStringMixin
  * @mixin IsTextMixin
  * @mixin IsTimeMixin
+ * @mixin IsTimestampMixin
  * @mixin IsTinyCharMixin
  * @mixin IsTinyIntMixin
  * @mixin IsTldMixin

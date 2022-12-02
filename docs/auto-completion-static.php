@@ -2385,6 +2385,21 @@ class IsTime
     }
 }
 
+class IsTimestamp
+{
+    /**
+     * Check the input value, return a Ret object
+     *
+     * @param mixed $input
+     * @param string $name
+     * @return Ret
+     * @see BaseValidator::check
+     */
+    public static function check($input, string $name = '%name%'): Ret
+    {
+    }
+}
+
 class IsTinyChar
 {
     /**
@@ -6441,6 +6456,22 @@ class V
 
     /**
      * @return $this
+     * @see \Wei\IsTimestamp::__invoke
+     */
+    public static function timestamp($input, $format = null)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsTimestamp::__invoke
+     */
+    public static function notTimestamp($input, $format = null)
+    {
+    }
+
+    /**
+     * @return $this
      * @see \Wei\IsTinyChar::__invoke
      */
     public static function tinyChar($input, int $minLength = null, int $maxLength = null)
@@ -9098,6 +9129,21 @@ if (0) {
     }
 
     class IsTime
+    {
+        /**
+         * Check the input value, return a Ret object
+         *
+         * @param mixed $input
+         * @param string $name
+         * @return Ret
+         * @see BaseValidator::check
+         */
+        public function check($input, string $name = '%name%'): Ret
+        {
+        }
+    }
+
+    class IsTimestamp
     {
         /**
          * Check the input value, return a Ret object
@@ -13151,6 +13197,22 @@ if (0) {
          * @see \Wei\IsTime::__invoke
          */
         public function notTime($key = null, string $label = null, $format = null)
+        {
+        }
+
+        /**
+         * @return $this
+         * @see \Wei\IsTimestamp::__invoke
+         */
+        public function timestamp($key = null, string $label = null, $format = null)
+        {
+        }
+
+        /**
+         * @return $this
+         * @see \Wei\IsTimestamp::__invoke
+         */
+        public function notTimestamp($key = null, string $label = null, $format = null)
         {
         }
 
