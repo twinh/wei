@@ -110,6 +110,8 @@ final class ReqTest extends TestCase
 
     public function testGetIp()
     {
+        $this->req->setOption('trustedProxies', true);
+
         $this->req->setServer('HTTP_X_FORWARDED_FOR', '1.2.3.4');
         $this->assertEquals('1.2.3.4', $this->req->getIp());
 
@@ -125,8 +127,17 @@ final class ReqTest extends TestCase
         unset($servers['HTTP_CLIENT_IP']);
         $servers['REMOTE_ADDR'] = '9.9.9.9';
         $this->assertEquals('9.9.9.9', $this->req->getIp());
+        unset($servers['REMOTE_ADDR']);
 
         $this->req->setServer('HTTP_X_FORWARDED_FOR', 'invalid ip');
+        $this->assertEquals('0.0.0.0', $this->req->getIp());
+    }
+
+    public function testTrustedProxies()
+    {
+        $this->req->setOption('trustedProxies', false);
+
+        $this->req->setServer('HTTP_X_FORWARDED_FOR', '1.2.3.4');
         $this->assertEquals('0.0.0.0', $this->req->getIp());
     }
 

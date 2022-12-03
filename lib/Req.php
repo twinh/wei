@@ -146,6 +146,15 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     protected $method;
 
     /**
+     * Whether trust HTTP_X_FORWARDED_FOR HEADER
+     *
+     * NOTE: currently only support bool value
+     *
+     * @var array|bool
+     */
+    protected $trustedProxies = [];
+
+    /**
      * The extra keys course by &offsetGet
      *
      * @var array
@@ -557,10 +566,14 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     public function getIp($default = '0.0.0.0')
     {
-        $ip = ($this->getServer('HTTP_X_FORWARDED_FOR') ?
-            current(explode(',', $this->getServer('HTTP_X_FORWARDED_FOR')))
-            : $this->getServer('HTTP_CLIENT_IP')
-        ) ?: $this->getServer('REMOTE_ADDR');
+        if (!$this->trustedProxies) {
+            $ip = $this->getServer('REMOTE_ADDR');
+        } else {
+            $ip = ($this->getServer('HTTP_X_FORWARDED_FOR') ?
+                current(explode(',', $this->getServer('HTTP_X_FORWARDED_FOR')))
+                : $this->getServer('HTTP_CLIENT_IP')
+            ) ?: $this->getServer('REMOTE_ADDR');
+        }
 
         return filter_var($ip, \FILTER_VALIDATE_IP) ? $ip : $default;
     }
