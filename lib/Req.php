@@ -941,6 +941,17 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
+     * Returns the server ip address
+     *
+     * @return string|null
+     * @svc
+     */
+    protected function getServerIp(): ?string
+    {
+        return $this->getServer('SERVER_ADDR');
+    }
+
+    /**
      * Check if current request is a preflight request
      *
      * @return bool

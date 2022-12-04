@@ -4412,6 +4412,16 @@ class Req
     }
 
     /**
+     * Returns the server ip address
+     *
+     * @return string|null
+     * @see Req::getServerIp
+     */
+    public static function getServerIp(): ?string
+    {
+    }
+
+    /**
      * Check if current request is a preflight request
      *
      * @return bool
@@ -4444,6 +4454,16 @@ class Request
      * @see Req::getHeader
      */
     public static function getHeader(string $name): ?string
+    {
+    }
+
+    /**
+     * Returns the server ip address
+     *
+     * @return string|null
+     * @see Req::getServerIp
+     */
+    public static function getServerIp(): ?string
     {
     }
 
@@ -11158,6 +11178,16 @@ if (0) {
         }
 
         /**
+         * Returns the server ip address
+         *
+         * @return string|null
+         * @see Req::getServerIp
+         */
+        public function getServerIp(): ?string
+        {
+        }
+
+        /**
          * Check if current request is a preflight request
          *
          * @return bool
@@ -11190,6 +11220,16 @@ if (0) {
          * @see Req::getHeader
          */
         public function getHeader(string $name): ?string
+        {
+        }
+
+        /**
+         * Returns the server ip address
+         *
+         * @return string|null
+         * @see Req::getServerIp
+         */
+        public function getServerIp(): ?string
         {
         }
 

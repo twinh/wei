@@ -1218,6 +1218,15 @@ final class ReqTest extends TestCase
         ];
     }
 
+    public function testGetServerIp()
+    {
+        $this->req->setServer('SERVER_ADDR', '1.2.3.4');
+        $this->assertSame('1.2.3.4', $this->req->getServerIp());
+
+        $this->req->setServer('SERVER_ADDR', null);
+        $this->assertNull($this->req->getServerIp());
+    }
+
     protected function initExtraKey()
     {
         // 移除数据避免干扰
