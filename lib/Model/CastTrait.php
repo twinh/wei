@@ -190,7 +190,9 @@ trait CastTrait
                 return is_numeric($value) ? $value : (int) $value;
 
             case 'bool':
-                return (bool) $value;
+                // Avoid MySQL default sql mode "STRICT_TRANS_TABLES"
+                // complains "Incorrect integer value: '' for column ..."
+                return (int) (bool) $value;
 
             case 'string':
             case 'float':
