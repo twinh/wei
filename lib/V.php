@@ -440,7 +440,7 @@ class V extends Base
                 return $validator->dateTime();
 
             case 'timestamp':
-                return $validator->dateTime()->between('1970-01-01 00:00:01', '2038-01-19 03:14:07');
+                return $validator->timestamp();
 
             case 'date':
                 return $validator->date();
