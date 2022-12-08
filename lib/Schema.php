@@ -45,6 +45,10 @@ class Schema extends Base
 
     public const TYPE_JSON = 'json';
 
+    public const TYPE_BINARY = 'binary';
+
+    public const TYPE_VAR_BINARY = 'varBinary';
+
     /**
      * @var string
      */
@@ -145,6 +149,8 @@ class Schema extends Base
         self::TYPE_TEXT => false,
         self::TYPE_TIMESTAMP => null,
         self::TYPE_JSON => false,
+        self::TYPE_BINARY => '',
+        self::TYPE_VAR_BINARY => '',
     ];
 
     /**
@@ -169,6 +175,8 @@ class Schema extends Base
             self::TYPE_TEXT => 'text',
             self::TYPE_TIMESTAMP => 'timestamp',
             self::TYPE_JSON => 'json',
+            self::TYPE_BINARY => 'binary',
+            self::TYPE_VAR_BINARY => 'varbinary',
         ],
     ];
 
@@ -558,6 +566,16 @@ class Schema extends Base
     public function string($column, $length = 255)
     {
         return $this->addColumn($column, self::TYPE_STRING, ['length' => $length]);
+    }
+
+    public function binary(string $column, int $length): self
+    {
+        return $this->addColumn($column, self::TYPE_BINARY, ['length' => $length]);
+    }
+
+    public function varBinary(string $column, int $length): self
+    {
+        return $this->addColumn($column, self::TYPE_VAR_BINARY, ['length' => $length]);
     }
 
     /**
