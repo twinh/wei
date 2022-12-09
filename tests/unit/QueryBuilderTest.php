@@ -212,6 +212,15 @@ final class QueryBuilderTest extends TestCase
         $this->assertEquals('twin', $qb->fetch()['name']);
     }
 
+    public function testWhereNot()
+    {
+        $this->initFixtures();
+
+        $qb = Qb::table('test_users')->whereNot('id', 1);
+        $this->assertEquals('SELECT * FROM `p_test_users` WHERE `id` != 1', $qb->getRawSql());
+        $this->assertEquals('test', $qb->fetch()['name']);
+    }
+
     public function testOrWhere()
     {
         $sql = Qb::table('test_users')

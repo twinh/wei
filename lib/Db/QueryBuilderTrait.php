@@ -1060,6 +1060,17 @@ trait QueryBuilderTrait
     }
 
     /**
+     * @param mixed $column
+     * @param mixed $value
+     * @return $this
+     * @svc
+     */
+    protected function whereNot($column, $value): self
+    {
+        return $this->where($column, '!=', $value);
+    }
+
+    /**
      * @param string $column
      * @param array $params
      * @return $this
