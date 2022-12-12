@@ -980,6 +980,14 @@ class IsUTinyIntMixin
 }
 
 /**
+ * @property    Wei\IsUnique $isUnique Check if the input is not contains the same value
+ * @method      bool isUnique($input) Validate the input value
+ */
+class IsUniqueMixin
+{
+}
+
+/**
  * @property    Wei\IsUppercase $isUppercase Check if the input is uppercase
  * @method      bool isUppercase($input) Validate the input value
  */
@@ -1456,6 +1464,7 @@ class WeiMixin
  * @mixin IsUNumberMixin
  * @mixin IsUSmallIntMixin
  * @mixin IsUTinyIntMixin
+ * @mixin IsUniqueMixin
  * @mixin IsUppercaseMixin
  * @mixin IsUrlMixin
  * @mixin IsUuidMixin

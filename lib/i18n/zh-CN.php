@@ -327,6 +327,10 @@ return [
     'upper' => '大写字母(A-Z)',
     'xdigit' => '16进制数字',
 
+    // unique
+    '%name% must not contain the same value' => '%name%不能包含相同的值',
+    '%name% must contain the same value' => '%name%必须包含相同的值',
+
     // uppercase
     '%name% must be uppercase' => '%name%不能包含小写字母',
     '%name% must not be uppercase' => '%name%不能包含大写字母',

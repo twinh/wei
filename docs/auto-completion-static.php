@@ -2565,6 +2565,21 @@ class IsUTinyInt
     }
 }
 
+class IsUnique
+{
+    /**
+     * Check the input value, return a Ret object
+     *
+     * @param mixed $input
+     * @param string $name
+     * @return Ret
+     * @see BaseValidator::check
+     */
+    public static function check($input, string $name = '%name%'): Ret
+    {
+    }
+}
+
 class IsUppercase
 {
     /**
@@ -6668,6 +6683,22 @@ class V
 
     /**
      * @return $this
+     * @see \Wei\IsUnique::__invoke
+     */
+    public static function unique($input)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsUnique::__invoke
+     */
+    public static function notUnique($input)
+    {
+    }
+
+    /**
+     * @return $this
      * @see \Wei\IsUppercase::__invoke
      */
     public static function uppercase($input)
@@ -9329,6 +9360,21 @@ if (0) {
     }
 
     class IsUTinyInt
+    {
+        /**
+         * Check the input value, return a Ret object
+         *
+         * @param mixed $input
+         * @param string $name
+         * @return Ret
+         * @see BaseValidator::check
+         */
+        public function check($input, string $name = '%name%'): Ret
+        {
+        }
+    }
+
+    class IsUnique
     {
         /**
          * Check the input value, return a Ret object
@@ -13429,6 +13475,22 @@ if (0) {
          * @see \Wei\IsUTinyInt::__invoke
          */
         public function notUTinyInt($key = null, string $label = null, int $min = null, int $max = null)
+        {
+        }
+
+        /**
+         * @return $this
+         * @see \Wei\IsUnique::__invoke
+         */
+        public function unique($key = null, string $label = null)
+        {
+        }
+
+        /**
+         * @return $this
+         * @see \Wei\IsUnique::__invoke
+         */
+        public function notUnique($key = null, string $label = null)
         {
         }
 
