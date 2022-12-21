@@ -3,6 +3,7 @@
 namespace Wei\Model;
 
 use Wei\BaseModel;
+use Wei\ModelTrait;
 use Wei\Str;
 
 /**
