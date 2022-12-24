@@ -25,6 +25,7 @@ trait ModelTrait
         addQueryPart as private parentAddQueryPart;
         execute as private parentExecute;
         indexBy as private parentIndexBy;
+        update as private parentUpdate;
     }
     use RelationTrait;
     use RetTrait;
@@ -1021,6 +1022,27 @@ trait ModelTrait
         $this->parentIndexBy($column);
         $this->attributes = $this->executeIndexBy($this->attributes, $column);
         return $this;
+    }
+
+    /**
+     * Execute a update query with specified data
+     *
+     * @param array|string $set
+     * @param mixed $value
+     * @return int
+     * @svc
+     */
+    protected function update($set = [], $value = null): int
+    {
+        if (2 === func_num_args()) {
+            $set = [$set => $value];
+        }
+
+        foreach ($set as $name => $value) {
+            $set[$name] = $this->castColumnToDb($value, $name);
+        }
+
+        return $this->parentUpdate($set);
     }
 
     /**

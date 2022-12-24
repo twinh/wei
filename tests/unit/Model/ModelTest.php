@@ -839,6 +839,16 @@ final class ModelTest extends TestCase
         $this->assertEquals('test address 3', $user['address']);
     }
 
+    public function testUpdateWithCast()
+    {
+        $this->initFixtures();
+
+        // Won't complains "Incorrect integer value: '' for column ..."
+        TestUser::update(['is_admin' => false]);
+
+        $this->assertSame('UPDATE `p_test_users` SET `is_admin` = ?', $this->db->getLastQuery());
+    }
+
     public function testWasRecentlyCreated()
     {
         $this->initFixtures();

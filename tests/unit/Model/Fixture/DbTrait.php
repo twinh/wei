@@ -42,6 +42,7 @@ trait DbTrait
             ->id()
             ->int('group_id')
             ->string('name')
+            ->bool('is_admin')
             ->string('address')
             ->date('birthday')
             ->date('joined_date')->defaults("'2000-01-01'")->nullable()
