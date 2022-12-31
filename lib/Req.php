@@ -783,7 +783,6 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param string $name
      * @param string $value
-     * @return $this
      */
     public function setPost($name, $value = null)
     {

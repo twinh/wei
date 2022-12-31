@@ -845,7 +845,8 @@ namespace Wei {
          * Get service by class name
          *
          * @template T
-         * @param string|class-string<T> $class
+         * @param string $class
+         * @phpstan-param class-string<T> $class
          * @return Base|T
          * @svc
          */

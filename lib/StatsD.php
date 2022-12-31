@@ -173,7 +173,6 @@ class StatsD extends Base
      *
      * @param string|array $key the metric(s) to increment
      * @param int|float $sampleRate the rate (0-1) for sampling
-     * @return bool
      */
     public function increment($key, $sampleRate = 1)
     {
@@ -185,7 +184,6 @@ class StatsD extends Base
      *
      * @param string|array $key the metric(s) to decrement
      * @param float|int $sampleRate the rate (0-1) for sampling
-     * @return bool
      */
     public function decrement($key, $sampleRate = 1)
     {
@@ -211,7 +209,6 @@ class StatsD extends Base
      * @param int $delta the amount to increment/decrement each metric by
      * @param float|int $sampleRate the rate (0-1) for sampling
      * @param string $metric The metric type ("c" for count, "ms" for timing, "g" for gauge, "s" for set)
-     * @return bool
      */
     public function updateStats($key, $delta = 1, $sampleRate = 1, $metric = 'c')
     {
