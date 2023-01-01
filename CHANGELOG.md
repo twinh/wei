@@ -1,3 +1,30 @@
+## [0.15.3](https://github.com/twinh/wei/compare/v0.15.2...v0.15.3) (2023-01-01)
+
+
+### Bug Fixes
+
+* **Model:** `bool` 类型存储到数据库前要转换为 `int` ([63398ec](https://github.com/twinh/wei/commit/63398ec8fd310d2cc6032a320d8e144d14caa766))
+* **Model:** `ModelTrait` 类缺少引入 ([b25fb3d](https://github.com/twinh/wei/commit/b25fb3d7c78832af3eb785b970d40d2d2c51e188))
+
+
+### Features
+
+* **isTimestamp:** 增加 `isTimestamp` 校验器，用于校验数据是否符合数据库 `timestamp` 字段 ([28e844c](https://github.com/twinh/wei/commit/28e844c59bc6851e0fe21482f0b93f6a722d11d8))
+* **isUnique:** 增加 `isUnique` 校验器，用于检查数组不能包含相同的值 ([b215bd0](https://github.com/twinh/wei/commit/b215bd0369e12e824bd026fbdfb4fbaa0265f980))
+* **Model:** `Model::update` 对参数进行转换 ([024403b](https://github.com/twinh/wei/commit/024403ba7cd7042033f99ee393ac949a3a925ef5))
+* **QueryBuilder:** 增加 `whereNot` 方法 ([540b629](https://github.com/twinh/wei/commit/540b6295c3c92bba6c1f6af6ad597f0c2771d852))
+* **Req:** 增加 `getServerIp` 方法 ([488e8a6](https://github.com/twinh/wei/commit/488e8a6da0fc51b2ae77d31048d3d75af8395403))
+* **Req:** 增加 `trustedProxies` 选项，允许控制是否信任代理 IP ([cd575b3](https://github.com/twinh/wei/commit/cd575b35b64d18dc577c88b383a8594904ab2f8d))
+* **Schema:** 增加 `binary` 和 `varBinary` 方法 ([a3ded88](https://github.com/twinh/wei/commit/a3ded883bd623d8cd3265670769224ef4e112ac4))
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `8.1.3` to `8.2.0`
+
 ## [0.15.2](https://github.com/twinh/wei/compare/v0.15.1...v0.15.2) (2022-12-01)
 
 
