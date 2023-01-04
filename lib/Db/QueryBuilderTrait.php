@@ -92,7 +92,7 @@ trait QueryBuilderTrait
     }
 
     /**
-     * @param scalar $expression
+     * @param string $expression
      * @return object
      */
     public function raw($expression): object
@@ -127,7 +127,7 @@ trait QueryBuilderTrait
     }
 
     /**
-     * @param scalar $expression
+     * @param string $expression
      * @param mixed $params
      * @return $this
      */
@@ -1049,7 +1049,7 @@ trait QueryBuilderTrait
     }
 
     /**
-     * @param scalar $expression
+     * @param string $expression
      * @param mixed $params
      * @return $this
      * @svc
@@ -1331,7 +1331,7 @@ trait QueryBuilderTrait
     }
 
     /**
-     * @param scalar $expression
+     * @param string $expression
      * @param mixed $params
      * @return $this
      * @svc
@@ -1361,7 +1361,7 @@ trait QueryBuilderTrait
     }
 
     /**
-     * @param scalar $expression
+     * @param string $expression
      * @return $this
      * @svc
      */

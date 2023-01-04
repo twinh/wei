@@ -3924,7 +3924,7 @@ class QueryBuilder
     }
 
     /**
-     * @param scalar $expression
+     * @param string $expression
      * @param mixed $params
      * @return $this
      * @see QueryBuilder::whereRaw
@@ -4145,7 +4145,7 @@ class QueryBuilder
     }
 
     /**
-     * @param scalar $expression
+     * @param string $expression
      * @return $this
      * @see QueryBuilder::orderByRaw
      */
@@ -4720,6 +4720,70 @@ class Share
      * @see Share::toWechatJson
      */
     public static function toWechatJson()
+    {
+    }
+}
+
+class Snowflake
+{
+    /**
+     * @return int
+     * @see Snowflake::getWorkerId
+     */
+    public static function getWorkerId(): int
+    {
+    }
+
+    /**
+     * Set the worker id
+     *
+     * @param int $workerId
+     * @return $this
+     * @see Snowflake::setWorkerId
+     */
+    public static function setWorkerId(int $workerId): self
+    {
+    }
+
+    /**
+     * Return the start timestamp
+     *
+     * @return int
+     * @see Snowflake::getStartTimestamp
+     */
+    public static function getStartTimestamp(): int
+    {
+    }
+
+    /**
+     * Set the start timestamp
+     *
+     * @param int $startTimestamp
+     * @return $this
+     * @see Snowflake::setStartTimestamp
+     */
+    public static function setStartTimestamp(int $startTimestamp): self
+    {
+    }
+
+    /**
+     * Generate an id
+     *
+     * @return string
+     * @see Snowflake::next
+     */
+    public static function next(): string
+    {
+    }
+
+    /**
+     * Parse the given id, return timestamp, worker ID and sequence
+     *
+     * @param string|int $id
+     * @return array{timestamp: int, workerId: int, sequence: int}
+     * @see Snowflake::parse
+     */
+    public static function parse($id): array
     {
     }
 }
@@ -6685,7 +6749,7 @@ class V
      * @return $this
      * @see \Wei\IsUnique::__invoke
      */
-    public static function unique($input)
+    public static function unique($input, $flags = null)
     {
     }
 
@@ -6693,7 +6757,7 @@ class V
      * @return $this
      * @see \Wei\IsUnique::__invoke
      */
-    public static function notUnique($input)
+    public static function notUnique($input, $flags = null)
     {
     }
 
@@ -6799,7 +6863,8 @@ class Wei
      * Get service by class name
      *
      * @template T
-     * @param string|class-string<T> $class
+     * @param string $class
+     * @phpstan-param class-string<T> $class
      * @return Base|T
      * @see Wei::getBy
      */
@@ -10721,7 +10786,7 @@ if (0) {
         }
 
         /**
-         * @param scalar $expression
+         * @param string $expression
          * @param mixed $params
          * @return $this
          * @see QueryBuilder::whereRaw
@@ -10942,7 +11007,7 @@ if (0) {
         }
 
         /**
-         * @param scalar $expression
+         * @param string $expression
          * @return $this
          * @see QueryBuilder::orderByRaw
          */
@@ -11517,6 +11582,70 @@ if (0) {
          * @see Share::toWechatJson
          */
         public function toWechatJson()
+        {
+        }
+    }
+
+    class Snowflake
+    {
+        /**
+         * @return int
+         * @see Snowflake::getWorkerId
+         */
+        public function getWorkerId(): int
+        {
+        }
+
+        /**
+         * Set the worker id
+         *
+         * @param int $workerId
+         * @return $this
+         * @see Snowflake::setWorkerId
+         */
+        public function setWorkerId(int $workerId): self
+        {
+        }
+
+        /**
+         * Return the start timestamp
+         *
+         * @return int
+         * @see Snowflake::getStartTimestamp
+         */
+        public function getStartTimestamp(): int
+        {
+        }
+
+        /**
+         * Set the start timestamp
+         *
+         * @param int $startTimestamp
+         * @return $this
+         * @see Snowflake::setStartTimestamp
+         */
+        public function setStartTimestamp(int $startTimestamp): self
+        {
+        }
+
+        /**
+         * Generate an id
+         *
+         * @return string
+         * @see Snowflake::next
+         */
+        public function next(): string
+        {
+        }
+
+        /**
+         * Parse the given id, return timestamp, worker ID and sequence
+         *
+         * @param string|int $id
+         * @return array{timestamp: int, workerId: int, sequence: int}
+         * @see Snowflake::parse
+         */
+        public function parse($id): array
         {
         }
     }
@@ -13482,7 +13611,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUnique::__invoke
          */
-        public function unique($key = null, string $label = null)
+        public function unique($key = null, string $label = null, $flags = null)
         {
         }
 
@@ -13490,7 +13619,7 @@ if (0) {
          * @return $this
          * @see \Wei\IsUnique::__invoke
          */
-        public function notUnique($key = null, string $label = null)
+        public function notUnique($key = null, string $label = null, $flags = null)
         {
         }
 
@@ -13596,7 +13725,8 @@ if (0) {
          * Get service by class name
          *
          * @template T
-         * @param string|class-string<T> $class
+         * @param string $class
+         * @phpstan-param class-string<T> $class
          * @return Base|T
          * @see Wei::getBy
          */

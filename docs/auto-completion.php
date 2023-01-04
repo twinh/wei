@@ -981,7 +981,7 @@ class IsUTinyIntMixin
 
 /**
  * @property    Wei\IsUnique $isUnique Check if the input is not contains the same value
- * @method      bool isUnique($input) Validate the input value
+ * @method      mixed isUnique($input, $flags = null)
  */
 class IsUniqueMixin
 {
@@ -1222,6 +1222,13 @@ class SessionMixin
  * @property    Wei\Share $share A service contains share data
  */
 class ShareMixin
+{
+}
+
+/**
+ * @property    Wei\Snowflake $snowflake
+ */
+class SnowflakeMixin
 {
 }
 
@@ -1496,6 +1503,7 @@ class WeiMixin
  * @mixin ServiceTraitMixin
  * @mixin SessionMixin
  * @mixin ShareMixin
+ * @mixin SnowflakeMixin
  * @mixin SoapMixin
  * @mixin StatsDMixin
  * @mixin StrMixin
@@ -1523,4 +1531,3 @@ function wei()
 {
     return new AutoCompletion();
 }
-
