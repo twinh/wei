@@ -221,6 +221,24 @@ final class QueryBuilderTest extends TestCase
         $this->assertEquals('test', $qb->fetch()['name']);
     }
 
+    public function testWhereNotNullValue()
+    {
+        $this->initFixtures();
+
+        $qb = Qb::table('test_users')->whereNot('id', null);
+        $this->assertEquals('SELECT * FROM `p_test_users` WHERE `id` != NULL', $qb->getRawSql());
+        $this->assertNull($qb->fetch());
+    }
+
+    public function testWhereGtNullValue()
+    {
+        $this->initFixtures();
+
+        $qb = Qb::table('test_users')->where('id', '>', null);
+        $this->assertEquals('SELECT * FROM `p_test_users` WHERE `id` > NULL', $qb->getRawSql());
+        $this->assertNull($qb->fetch());
+    }
+
     public function testOrWhere()
     {
         $sql = Qb::table('test_users')

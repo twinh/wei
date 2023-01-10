@@ -1056,7 +1056,11 @@ trait QueryBuilderTrait
      */
     protected function whereRaw($expression, $params = null): self
     {
-        return $this->where($this->raw($expression), null, $params);
+        $args = [$this->raw($expression), null];
+        if (func_num_args() > 1) {
+            $args[] = $params;
+        }
+        return $this->addWhere(...$args);
     }
 
     /**
@@ -1590,7 +1594,8 @@ trait QueryBuilderTrait
         string $condition = 'AND',
         string $type = null
     ): self {
-        if ($column instanceof Closure) {
+        $isClosure = $column instanceof Closure;
+        if ($isClosure) {
             /** @phpstan-ignore-next-line Allow new static */
             $query = new static([
                 'wei' => $this->wei,
@@ -1602,15 +1607,18 @@ trait QueryBuilderTrait
             $this->addQueryParams($query->getQueryParams());
         }
 
-        if (null === $value) {
-            $operator = 'NOT NULL' === $operator ? $operator : 'NULL';
-        } elseif (is_array($value) && !in_array($operator, ['BETWEEN', 'NOT BETWEEN'], true)) {
+        if (is_array($value) && !in_array($operator, ['BETWEEN', 'NOT BETWEEN'], true)) {
             $operator = 'NOT IN' === $operator ? $operator : 'IN';
         }
 
         $this->addQueryPart('where', compact('column', 'operator', 'value', 'condition', 'type'), true);
-        if (null !== $value) {
-            $this->addQueryParam($value);
+
+        // Ignore params when
+        // 1. query is closure
+        // 2. operator is NULL or NOT NULL
+        // 3. params are not passed
+        if (!$isClosure && !in_array($operator, ['NULL', 'NOT NULL'], true) && func_num_args() > 2) {
+            $this->addQueryParam(null === $value ? [null] : $value);
         }
 
         return $this;
