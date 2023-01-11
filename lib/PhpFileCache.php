@@ -41,7 +41,9 @@ class PhpFileCache extends FileCache
      */
     protected function getContent($file)
     {
-        return require $file;
+        // Ignore errors caused by slow io (eg, docker) and request concurrency
+        // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+        return @include $file;
     }
 
     /**
