@@ -374,7 +374,7 @@ class V extends Base
         return $this;
     }
 
-    public function getModel(): BaseModel
+    public function getModel(): ?BaseModel
     {
         return $this->model;
     }
