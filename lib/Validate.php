@@ -604,7 +604,10 @@ class Validate extends Base
             $data = $this->data;
         }
 
-        if (is_array($data)) {
+        if (is_object($data) && method_exists($data, 'toArray')) {
+            // For object like \Wei\Req, can't use `offsetExists` to check if key exists
+            return array_key_exists($lastField, $data->toArray());
+        } elseif (is_array($data)) {
             return array_key_exists($lastField, $data);
         } elseif ($data instanceof \ArrayAccess) {
             return $data->offsetExists($lastField);

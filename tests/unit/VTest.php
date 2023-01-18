@@ -8,6 +8,7 @@ use Wei\Ret\RetException;
 use Wei\V;
 
 /**
+ * @mixin \ReqMixin
  * @internal
  */
 final class VTest extends TestCase
@@ -874,6 +875,18 @@ final class VTest extends TestCase
             'name' => '',
         ]);
         $this->assertRetErr($ret, 'Name must not be empty');
+    }
+
+    public function testToArray()
+    {
+        $req = $this->req;
+        $req['testV'] = null;
+        $this->assertFalse(isset($req['testV']));
+
+        $v = V::new();
+        $v->string('testV', 'Test V');
+        $ret = $v->check($req);
+        $this->assertRetSuc($ret);
     }
 
     protected function checkModel(bool $isNew, $data)
