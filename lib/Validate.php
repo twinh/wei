@@ -888,7 +888,11 @@ class Validate extends Base
      */
     public function addValidData($field, $data)
     {
-        $this->validData = $this->setDataByPaths($this->validData, $field, $data);
+        if ($this->isSelf($field)) {
+            $this->validData = $data;
+        } else {
+            $this->validData = $this->setDataByPaths($this->validData, $field, $data);
+        }
         return $this;
     }
 

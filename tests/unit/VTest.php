@@ -62,6 +62,18 @@ final class VTest extends TestCase
         $this->assertRetSuc($ret);
     }
 
+    public function testSelfValidData()
+    {
+        $v = V::new();
+        $v->self()->maxLength(1);
+        $ret = $v->check([
+            'test',
+        ]);
+
+        $this->assertRetSuc($ret);
+        $this->assertSame(['test'], $ret['data']);
+    }
+
     public function testZeroKey()
     {
         $v = V::new();
