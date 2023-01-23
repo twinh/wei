@@ -140,6 +140,12 @@ trait CastTrait
             case 'list':
                 return $this->castValueToPhpList($value, $options);
 
+            // @experimental
+            case 'ip':
+                // Ignore PHP 7.2 "Invalid in_addr value" warning
+                // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+                return @inet_ntop($value) ?: '';
+
             default:
                 throw new InvalidArgumentException('Unsupported cast type: ' . $type);
         }
@@ -220,6 +226,12 @@ trait CastTrait
 
             case 'list':
                 return implode($options['separator'] ?? ',', (array) $value);
+
+            // @experimental
+            case 'ip':
+                // Ignore PHP 7.2 "Unrecognized address" warning
+                // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+                return @inet_pton($value) ?: '';
 
             default:
                 throw new InvalidArgumentException('Unsupported cast type: ' . $type);

@@ -73,6 +73,9 @@ class TestCast extends BaseModel
             ],
             'default' => [],
         ],
+        'ip_column' => [
+            'cast' => 'ip',
+        ],
     ];
 
     public function getAttributes(): array
