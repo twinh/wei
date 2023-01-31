@@ -1,3 +1,20 @@
+## [0.15.4](https://github.com/twinh/wei/compare/v0.15.3...v0.15.4) (2023-01-31)
+
+
+### Bug Fixes
+
+* **PhpFileCache:** 屏蔽在慢 io 或请求并发时，缓存过期，文件被删除，会出现 "failed to open stream: No such file or directory" 错误 ([0e57b2d](https://github.com/twinh/wei/commit/0e57b2d20271b51bb7231e39741e0d8b67d062fa))
+* **QueryBuilder:** 参数传入 `null` 时生成 SQL 错误 ([c902a97](https://github.com/twinh/wei/commit/c902a9715636696ce4308feb643a796fec8f5d24))
+* **V:** `getModel` 返回值可能为 `null` ([69ae892](https://github.com/twinh/wei/commit/69ae892c5e0e97d2a3608b9e6e2eee115469fabe))
+* **V:** 测试自身数据时，获取校验通过的数据错误 ([79e344a](https://github.com/twinh/wei/commit/79e344a190117b4cdab2993c06af7fbe7bb2f03a))
+* **Validate:** 解决 `Req` 对象，`offsetExists` 会忽略 `null` 值，导致传入 `null` 时，认为 key 不存在 ([4c18953](https://github.com/twinh/wei/commit/4c18953b461dc0a8a96cd2a8f142f6e59efff780))
+
+
+### Features
+
+* **Model, Cast, experimental:** 增加 `ip` 转换 ([39ab6b6](https://github.com/twinh/wei/commit/39ab6b6bfad15fb6d4649db9ed372160c6639451))
+* **Snowflake:** 增加 `Snowflake` 服务，用于生成全局唯一 ID ([4cc7fed](https://github.com/twinh/wei/commit/4cc7fed3af03ca172590a49c87e5292c63cd1214))
+
 ## [0.15.3](https://github.com/twinh/wei/compare/v0.15.2...v0.15.3) (2023-01-01)
 
 
