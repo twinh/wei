@@ -3934,6 +3934,16 @@ class QueryBuilder
     }
 
     /**
+     * @param mixed $column
+     * @param mixed $value
+     * @return $this
+     * @see QueryBuilder::whereNot
+     */
+    public static function whereNot($column, $value): self
+    {
+    }
+
+    /**
      * @param string $column
      * @param array $params
      * @return $this
@@ -10792,6 +10802,16 @@ if (0) {
          * @see QueryBuilder::whereRaw
          */
         public function whereRaw($expression, $params = null): self
+        {
+        }
+
+        /**
+         * @param mixed $column
+         * @param mixed $value
+         * @return $this
+         * @see QueryBuilder::whereNot
+         */
+        public function whereNot($column, $value): self
         {
         }
 
