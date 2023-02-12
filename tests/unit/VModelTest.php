@@ -249,4 +249,38 @@ final class VModelTest extends TestCase
             ],
         ];
     }
+
+    public function testRequiredIfNew()
+    {
+        $v = V::defaultOptional();
+        $v->setModel(TestV::new());
+        $v->modelColumn('string_column', 'String')->requiredIfNew();
+        $ret = $v->check([]);
+        $this->assertRetErr($ret, 'String is required');
+    }
+
+    public function testRequiredIfNewWithExistsModel()
+    {
+        $v = V::defaultOptional();
+        $v->setModel(TestV::save());
+        $v->modelColumn('string_column', 'String')->requiredIfNew();
+        $ret = $v->check([]);
+        $this->assertRetSuc($ret);
+    }
+
+    public function testRequiredIfNewWithModelArg()
+    {
+        $v = V::defaultOptional();
+        $v->string('string_column', 'String')->requiredIfNew(TestV::new());
+        $ret = $v->check([]);
+        $this->assertRetErr($ret, 'String is required');
+    }
+
+    public function testRequiredIfNewWithoutModel()
+    {
+        $this->expectExceptionObject(new InvalidArgumentException('$model argument is required'));
+
+        $v = V::new();
+        $v->string('test', 'Test')->requiredIfNew();
+    }
 }

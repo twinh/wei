@@ -83,6 +83,13 @@ class V extends Base
     protected $model;
 
     /**
+     * The parent validator
+     *
+     * @var self
+     */
+    protected $validator;
+
+    /**
      * Return a new instance of current service
      *
      * @return static
@@ -157,6 +164,7 @@ class V extends Base
             'key' => $key,
             'label' => $label,
             'defaultNotEmpty' => $this->defaultNotEmpty,
+            'validator' => $this,
         ]);
     }
 
@@ -221,6 +229,24 @@ class V extends Base
     public function optional(): self
     {
         return $this->required(false);
+    }
+
+    /**
+     * Add required rule to current key when model is new
+     *
+     * @return $this
+     */
+    public function requiredIfNew(BaseModel $model = null): self
+    {
+        $model || $model = $this->validator->getModel();
+        if (!$model) {
+            throw new InvalidArgumentException('$model argument is required');
+        }
+
+        if ($model->isNew()) {
+            $this->required();
+        }
+        return $this;
     }
 
     /**
@@ -413,8 +439,8 @@ class V extends Base
 
             case 'decimal':
                 return $column['unsigned'] ?? false ?
-                        $validator->uNumber($column['length'], $column['scale'])
-                        : $validator->number($column['length'], $column['scale']);
+                    $validator->uNumber($column['length'], $column['scale'])
+                    : $validator->number($column['length'], $column['scale']);
 
             case 'tinyInt':
                 return $column['unsigned'] ?? false ? $validator->uTinyInt() : $validator->tinyInt();
