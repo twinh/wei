@@ -42,7 +42,7 @@ final class VModelTest extends TestCase
             ->decimal('decimal_column', 3, 1)
             ->uDecimal('u_decimal_column', 6, 3)
             ->char('char_column', 3)
-            ->string('string_column', 4)
+            ->string('string_column', 32)
             ->text('text_column')
             ->mediumText('medium_text_column')
             ->longText('long_text_column')
@@ -229,8 +229,8 @@ final class VModelTest extends TestCase
             ],
             [
                 'string_column',
-                '12345',
-                $this->err('The string_column must be no more than 4 character(s)'),
+                str_repeat('1', 32) . '1',
+                $this->err('The string_column must be no more than 32 character(s)'),
             ],
             [
                 'text_column',
@@ -282,5 +282,41 @@ final class VModelTest extends TestCase
 
         $v = V::new();
         $v->string('test', 'Test')->requiredIfNew();
+    }
+
+    public function testModelNotDup()
+    {
+        $name = uniqid('Test');
+        TestV::save(['string_column' => $name]);
+
+        $v = V::new();
+        $v->setModel(TestV::new());
+        $v->string('string_column', 'Test')->notModelDup();
+        $ret = $v->check([
+            'string_column' => $name,
+        ]);
+        $this->assertRetErr($ret, 'Test already exists');
+    }
+
+    public function testModelNotDupWithUpdate()
+    {
+        $name = uniqid('Test');
+        $model = TestV::save(['string_column' => $name]);
+
+        $v = V::new();
+        $v->setModel($model);
+        $v->string('string_column', 'Test')->notModelDup();
+        $ret = $v->check([
+            'string_column' => $name,
+        ]);
+        $this->assertRetSuc($ret);
+    }
+
+    public function testModelNotDupWithoutModel()
+    {
+        $this->expectExceptionObject(new InvalidArgumentException('$model argument is required'));
+
+        $v = V::new();
+        $v->string('test', 'Test')->notModelDup();
     }
 }

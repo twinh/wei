@@ -250,6 +250,25 @@ class V extends Base
     }
 
     /**
+     * @param BaseModel|null $model
+     * @return $this
+     */
+    public function notModelDup(BaseModel $model = null): self
+    {
+        $model || $model = $this->validator->getModel();
+        if (!$model) {
+            throw new InvalidArgumentException('$model argument is required');
+        }
+
+        $newModel = $model::new();
+        if (!$model->isNew()) {
+            $newModel->whereNot($model->getPrimaryKey(), $model->get($model->getPrimaryKey()));
+        }
+
+        return $this->notModelExists($newModel, $this->key);
+    }
+
+    /**
      * Add rule for current field
      *
      * @param string $name
