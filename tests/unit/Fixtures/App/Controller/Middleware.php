@@ -8,6 +8,7 @@ use WeiTest\Fixtures\App\Middleware\Around;
 use WeiTest\Fixtures\App\Middleware\Before;
 use WeiTest\Fixtures\App\Middleware\Except;
 use WeiTest\Fixtures\App\Middleware\Only;
+use WeiTest\Fixtures\App\Middleware\Remove;
 use WeiTest\Fixtures\App\Middleware\ReturnArray;
 use WeiTest\Fixtures\App\Middleware\ReturnString;
 use WeiTest\Fixtures\App\Middleware\Stack;

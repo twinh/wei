@@ -27,6 +27,16 @@ abstract class BaseController extends Base
     protected $middleware = [];
 
     /**
+     * Return the registered middleware
+     *
+     * @return array
+     */
+    public function getMiddleware(): array
+    {
+        return $this->middleware;
+    }
+
+    /**
      * Register a middleware with specified options
      *
      * @param string $name
@@ -36,6 +46,18 @@ abstract class BaseController extends Base
     public function middleware($name, array $options = [])
     {
         $this->middleware[$name] = $options;
+        return $this;
+    }
+
+    /**
+     * Remove a middleware
+     *
+     * @param string $name
+     * @return $this
+     */
+    public function removeMiddleware(string $name): self
+    {
+        unset($this->middleware[$name]);
         return $this;
     }
 

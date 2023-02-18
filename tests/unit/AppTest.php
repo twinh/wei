@@ -2,6 +2,9 @@
 
 namespace WeiTest;
 
+use WeiTest\Fixtures\App\Controller\Middleware;
+use WeiTest\Fixtures\App\Middleware\All;
+
 /**
  * @property \Wei\App $app The application service
  * @method \Wei\App app()
@@ -81,7 +84,8 @@ final class AppTest extends TestCase
                 'Controller\Admin' => [
                     'WeiTest\Fixtures\App\Controller\Controller\Admin',
                 ],
-            ], ], $result);
+            ],
+        ], $result);
     }
 
     public function testActionNotFound()
@@ -400,5 +404,16 @@ MSG
         $this->expectOutputString('arrayForView');
 
         $this->app->dispatch('middleware', 'returnArray');
+    }
+
+    public function testRemoveMiddleware()
+    {
+        $controller = new Middleware(['wei' => $this->wei]);
+
+        $controller->middleware(All::class);
+        $this->assertArrayHasKey(All::class, $controller->getMiddleware());
+
+        $controller->removeMiddleware(All::class);
+        $this->assertArrayNotHasKey(All::class, $controller->getMiddleware());
     }
 }

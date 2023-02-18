@@ -488,7 +488,7 @@ class App extends Base
     protected function getMiddleware($instance, $action)
     {
         $results = [];
-        $middleware = (array) $instance->getOption('middleware');
+        $middleware = $instance->getMiddleware();
         foreach ($middleware as $class => $options) {
             if (
                 (!isset($options['only']) || in_array($action, (array) $options['only'], true))
