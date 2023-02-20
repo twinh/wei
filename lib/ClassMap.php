@@ -174,14 +174,15 @@ class ClassMap extends Base
     {
         foreach ($this->duplicates as $name => $classes) {
             foreach ($classes as $class => $flag) {
-                // 如果是继承某个主类,则认为是该主类是想要的类
-                // 只考虑一个主类的情况
+                // 如果是继承某个主类，则认为是该类是想要的类
                 $parent = get_parent_class($class);
                 if ($parent && isset($this->duplicates[$name][$parent])) {
                     $map[$name] = $class;
-                    unset($this->duplicates[$name]);
-                    break;
+                    unset($this->duplicates[$name][$parent]);
                 }
+            }
+            if (1 === count($this->duplicates[$name])) {
+                unset($this->duplicates[$name]);
             }
         }
 
