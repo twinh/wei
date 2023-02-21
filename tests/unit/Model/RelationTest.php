@@ -443,6 +443,33 @@ final class RelationTest extends TestCase
         $this->assertCount(2, $queries);
     }
 
+    public function testCollGetBelongsToMany()
+    {
+        $articles = TestArticle::newColl();
+
+        $articles->findAll([1, 2, 3]);
+
+        $tags = $articles->tags;
+
+        $this->assertCount(2, $tags);
+
+        $this->assertEquals('work', $tags[0]->name);
+        $this->assertEquals('life', $tags[1]->name);
+
+        $queries = wei()->db->getQueries();
+        $this->assertEquals('SELECT * FROM `p_test_articles` WHERE `id` IN (?, ?, ?)', $queries[0]);
+        $this->assertEquals(implode(' ', [
+            'SELECT `p_test_tags`.*, `p_test_articles_test_tags`.`test_article_id` FROM `p_test_tags`',
+            'INNER JOIN `p_test_articles_test_tags` ON `p_test_articles_test_tags`.`test_tag_id` = `p_test_tags`.`id`',
+            'WHERE `p_test_articles_test_tags`.`test_article_id` IN (?, ?, ?)',
+        ]), $queries[1]);
+        $this->assertCount(2, $queries);
+
+        $array = $articles->toArray();
+        $this->assertArrayHasKey('tags', $array[0]);
+        $this->assertEquals(1, $array[0]['tags'][0]['id']);
+    }
+
     public function testGetHasOneReturnsNull()
     {
         $user = TestUser::new();

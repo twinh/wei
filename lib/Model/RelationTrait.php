@@ -2,6 +2,10 @@
 
 namespace Wei\Model;
 
+use InvalidArgumentException;
+use LogicException;
+use ReflectionException;
+use ReflectionMethod;
 use Wei\BaseModel;
 use Wei\ModelTrait;
 use Wei\Str;
@@ -39,6 +43,7 @@ trait RelationTrait
      * The relations that the current object has loaded
      *
      * @var array
+     * @deprecated use $relationValues
      */
     protected $loadedRelations = [];
 
@@ -78,10 +83,10 @@ trait RelationTrait
     }
 
     /**
-     * @param \Wei\BaseModel|string $model
+     * @param BaseModel|string $model
      * @param string|null $foreignKey
      * @param string|null $localKey
-     * @return \Wei\BaseModel
+     * @return BaseModel
      */
     public function hasOne($model, $foreignKey = null, $localKey = null): BaseModel
     {
@@ -108,7 +113,7 @@ trait RelationTrait
      * @param self|string $model
      * @param string|null $foreignKey
      * @param string|null $localKey
-     * @return \Wei\BaseModel
+     * @return BaseModel
      */
     public function hasMany($model, $foreignKey = null, $localKey = null): BaseModel
     {
@@ -119,7 +124,7 @@ trait RelationTrait
      * @param self|string $model
      * @param string|null $foreignKey
      * @param string|null $localKey
-     * @return \Wei\BaseModel
+     * @return BaseModel
      */
     public function belongsTo($model, $foreignKey = null, $localKey = null): BaseModel
     {
@@ -172,56 +177,20 @@ trait RelationTrait
     public function load($names): self
     {
         foreach ((array) $names as $name) {
-            // 1. Load relation config
             $parts = explode('.', $name, 2);
             $name = $parts[0];
             $next = $parts[1] ?? null;
 
-            // Load model
-            if (!$this->isColl()) {
+            if ($this->isLoaded($name)) {
                 $value = $this->getRelationValue($name);
-                if ($next && $value) {
-                    $value->load($next);
-                }
-                continue;
-            }
-
-            // Load collection
-            if (isset($this->loadedRelations[$name])) {
-                continue;
-            }
-
-            /** @var static $related */
-            $related = $this->{$name}();
-            $isColl = $related->isColl();
-            $relation = $related->getRelation();
-
-            // 2. Fetch relation model data
-            $ids = $this->getAll($relation['localKey']);
-            $ids = array_unique(array_filter($ids));
-            if ($ids) {
-                $this->relationParams = $ids;
-                $related = $this->{$name}();
-                $this->relationParams = null;
             } else {
-                $related = null;
+                $value = $this->isColl() ? $this->loadCollRelation($name) : $this->loadOneRelation($name);
+                $this->setRelationValue($name, $value);
             }
 
-            // 3. Load relation data
-            if (isset($relation['junctionTable'])) {
-                $models = $this->loadBelongsToMany($related, $relation, $name);
-            } elseif ($isColl) {
-                $models = $this->loadHasMany($related, $relation, $name);
-            } else {
-                $models = $this->loadHasOne($related, $relation, $name);
+            if ($next && $value) {
+                $value->load($next);
             }
-
-            // 4. Load nested relations
-            if ($next && $models) {
-                $models->load($next);
-            }
-
-            $this->loadedRelations[$name] = true;
         }
 
         return $this;
@@ -235,19 +204,20 @@ trait RelationTrait
      */
     public function isLoaded(string $name): bool
     {
-        return array_key_exists($name, $this->isColl() ? $this->loadedRelations : $this->relationValues);
+        return array_key_exists($name, $this->relationValues);
     }
 
     /**
      * Set relation value
      *
      * @param string $name
-     * @param \Wei\BaseModel|null $value
+     * @param BaseModel|null $value
      * @return $this
      */
     public function setRelationValue(string $name, ?BaseModel $value): self
     {
         $this->relationValues[$name] = $value;
+        $this->loadedRelations[$name] = true;
         return $this;
     }
 
@@ -338,7 +308,69 @@ trait RelationTrait
     }
 
     /**
-     * @param \Wei\BaseModel|null $related
+     * @param string $name
+     * @return BaseModel
+     * @internal
+     */
+    protected function loadCollRelation(string $name): BaseModel
+    {
+        $related = $this->getRelationModel($name);
+        $isColl = $related->isColl();
+        $relation = $related->getRelation();
+
+        // Fetch relation model data
+        $ids = $this->getAll($relation['localKey']);
+        $ids = array_unique(array_filter($ids));
+        if ($ids) {
+            $this->relationParams = $ids;
+            $related = $this->{$name}();
+            $this->relationParams = null;
+        } else {
+            $related->beColl();
+        }
+
+        // Load relation data
+        if (isset($relation['junctionTable'])) {
+            $models = $this->loadBelongsToMany($related, $relation, $name);
+        } elseif ($isColl) {
+            $models = $this->loadHasMany($related, $relation, $name);
+        } else {
+            $models = $this->loadHasOne($related, $relation, $name);
+        }
+
+        return $models;
+    }
+
+    /**
+     * @param string $name
+     * @return BaseModel|null
+     * @internal
+     */
+    protected function loadOneRelation(string $name): ?BaseModel
+    {
+        $related = $this->getRelationModel($name);
+        $relation = $related->getRelation();
+        $localValue = $this->get($relation['localKey']);
+
+        // hasMany/belongsToMany
+        if ($related->isColl()) {
+            if ($localValue) {
+                return $related->all();
+            } else {
+                return $related;
+            }
+        }
+
+        // hasOne
+        if ($localValue) {
+            return $related->first() ?: null;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param BaseModel|null $related
      * @param array $relation
      * @param string $name
      * @return $this|$this[]
@@ -362,29 +394,34 @@ trait RelationTrait
      * @param BaseModel|null $related
      * @param array $relation
      * @param string $name
-     * @return BaseModel|\Wei\BaseModel[]
+     * @return BaseModel|BaseModel[]
      * @phpstan-return BaseModel
      */
     protected function loadHasMany(?BaseModel $related, array $relation, string $name)
     {
-        $coll = $related ? $related::newColl() : [];
+        $coll = [];
         $data = $related ? $related->fetchAll() : [];
-        $hasForeignKey = $related ? $related->hasColumn($relation['foreignKey']) : false;
+        $hasForeignKey = $related && $related->hasColumn($relation['foreignKey']);
 
         // An array containing model objects grouped by relational foreign keys
         $groupBy = [];
 
         foreach ($data as $row) {
-            /** @var \Wei\BaseModel $model */
-            $model = call_user_func([$related, 'new']);
-            $coll[] = $model;
-            $groupBy[$row[$relation['foreignKey']]][] = $model;
+            $localValue = $row[$relation['localKey']];
+            if (isset($coll[$localValue])) {
+                $groupBy[$row[$relation['foreignKey']]][] = $coll[$localValue];
+            } else {
+                /** @var BaseModel $model */
+                $model = call_user_func([$related, 'new']);
+                $groupBy[$row[$relation['foreignKey']]][] = $model;
 
-            // Remove external data
-            if (!$hasForeignKey) {
-                unset($row[$relation['foreignKey']]);
+                // Remove external data
+                if (!$hasForeignKey) {
+                    unset($row[$relation['foreignKey']]);
+                }
+                $model->setAttributesFromDb($row);
+                $coll[$localValue] = $model;
             }
-            $model->setAttributesFromDb($row);
         }
 
         foreach ($this->attributes as $model) {
@@ -398,15 +435,15 @@ trait RelationTrait
             }
         }
 
-        return $coll;
+        return $related ? $related::newColl(array_values($coll)) : null;
     }
 
     /**
-     * @param \Wei\BaseModel|null $related
+     * @param BaseModel|null $related
      * @param array $relation
      * @param string $name
-     * @return \Wei\BaseModel|\Wei\BaseModel[]
-     * @phpstan-return \Wei\BaseModel
+     * @return BaseModel|BaseModel[]
+     * @phpstan-return BaseModel
      */
     protected function loadBelongsToMany(?BaseModel $related, array $relation, string $name)
     {
@@ -457,7 +494,7 @@ trait RelationTrait
      * or return the parameter if the parameter is a model object
      *
      * @param object|string $model
-     * @return \Wei\BaseModel
+     * @return BaseModel
      */
     protected function instanceRelationModel($model): BaseModel
     {
@@ -469,7 +506,7 @@ trait RelationTrait
             return forward_static_call([$model, 'new']);
         }
 
-        throw new \InvalidArgumentException(sprintf(
+        throw new InvalidArgumentException(sprintf(
             'Expected "model" argument to be a subclass or an instance of BaseModel, "%s" given',
             // @phpstan-ignore-next-line Else branch is unreachable because ternary operator condition is always true.
             is_object($model) ? get_class($model) : (is_string($model) ? $model : gettype($model))
@@ -502,7 +539,7 @@ trait RelationTrait
 
         if (!$related instanceof BaseModel) {
             if ($throw) {
-                throw new \LogicException(sprintf(
+                throw new LogicException(sprintf(
                     'Expected method "%s" to return an instance of BaseModel, but returns "%s"',
                     $name,
                     is_object($related) ? get_class($related) : gettype($related)
@@ -521,7 +558,7 @@ trait RelationTrait
      * @param string $name
      * @param bool $exists
      * @param bool $throw
-     * @return \Wei\BaseModel|null
+     * @return BaseModel|null
      */
     protected function &getRelationValue(string $name, bool &$exists = null, bool $throw = true): ?BaseModel
     {
@@ -536,23 +573,7 @@ trait RelationTrait
             return $related;
         }
 
-        $relation = $related->getRelation();
-        $localValue = $this[$relation['localKey']];
-
-        if ($related->isColl()) {
-            if ($localValue) {
-                $this->setRelationValue($name, $related->all());
-            } else {
-                $this->setRelationValue($name, $related);
-            }
-        } else {
-            if ($localValue) {
-                $this->setRelationValue($name, $related->first() ?: null);
-            } else {
-                $this->setRelationValue($name, null);
-            }
-        }
-
+        $this->load($name);
         return $this->relationValues[$name];
     }
 
@@ -570,8 +591,8 @@ trait RelationTrait
     protected function isRelation(string $method): bool
     {
         try {
-            $ref = new \ReflectionMethod($this, $method);
-        } catch (\ReflectionException $e) {
+            $ref = new ReflectionMethod($this, $method);
+        } catch (ReflectionException $e) {
             return false;
         }
 
