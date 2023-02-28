@@ -83,10 +83,12 @@ trait RelationTrait
     }
 
     /**
+     * @template T of BaseModel
      * @param BaseModel|string $model
+     * @phpstan-param BaseModel|class-string<T> $model
      * @param string|null $foreignKey
      * @param string|null $localKey
-     * @return BaseModel
+     * @return T
      */
     public function hasOne($model, $foreignKey = null, $localKey = null): BaseModel
     {
@@ -110,10 +112,12 @@ trait RelationTrait
     }
 
     /**
+     * @template T of BaseModel
      * @param self|string $model
+     * @phpstan-param self|class-string<T> $model
      * @param string|null $foreignKey
      * @param string|null $localKey
-     * @return BaseModel
+     * @return T
      */
     public function hasMany($model, $foreignKey = null, $localKey = null): BaseModel
     {
@@ -121,10 +125,12 @@ trait RelationTrait
     }
 
     /**
+     * @template T of BaseModel
      * @param self|string $model
+     * @phpstan-param self|class-string<T> $model
      * @param string|null $foreignKey
      * @param string|null $localKey
-     * @return BaseModel
+     * @return T
      */
     public function belongsTo($model, $foreignKey = null, $localKey = null): BaseModel
     {
@@ -136,11 +142,13 @@ trait RelationTrait
     }
 
     /**
+     * @template T of BaseModel
      * @param self|string $model
+     * @phpstan-param self|class-string<T> $model
      * @param string|null $junctionTable
      * @param string|null $foreignKey
      * @param string|null $relatedKey
-     * @return BaseModel
+     * @return T
      */
     public function belongsToMany($model, $junctionTable = null, $foreignKey = null, $relatedKey = null): BaseModel
     {
