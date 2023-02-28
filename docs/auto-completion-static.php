@@ -2040,6 +2040,21 @@ class IsMobileCn
     }
 }
 
+class IsModelExists
+{
+    /**
+     * Check the input value, return a Ret object
+     *
+     * @param mixed $input
+     * @param string $name
+     * @return Ret
+     * @see BaseValidator::check
+     */
+    public static function check($input, string $name = '%name%'): Ret
+    {
+    }
+}
+
 class IsNaturalNumber
 {
     /**
@@ -6197,6 +6212,22 @@ class V
 
     /**
      * @return $this
+     * @see \Wei\IsModelExists::__invoke
+     */
+    public static function modelExists($input = null, $model = null, $column = 'id')
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsModelExists::__invoke
+     */
+    public static function notModelExists($input = null, $model = null, $column = 'id')
+    {
+    }
+
+    /**
+     * @return $this
      * @see \Wei\IsNaturalNumber::__invoke
      */
     public static function naturalNumber($input)
@@ -8910,6 +8941,21 @@ if (0) {
     }
 
     class IsMobileCn
+    {
+        /**
+         * Check the input value, return a Ret object
+         *
+         * @param mixed $input
+         * @param string $name
+         * @return Ret
+         * @see BaseValidator::check
+         */
+        public function check($input, string $name = '%name%'): Ret
+        {
+        }
+    }
+
+    class IsModelExists
     {
         /**
          * Check the input value, return a Ret object
@@ -13064,6 +13110,22 @@ if (0) {
          * @see \Wei\IsMobileCn::__invoke
          */
         public function notMobileCn($key = null, string $label = null, $pattern = null)
+        {
+        }
+
+        /**
+         * @return $this
+         * @see \Wei\IsModelExists::__invoke
+         */
+        public function modelExists($key = null, string $label = null, $model = null, $column = 'id')
+        {
+        }
+
+        /**
+         * @return $this
+         * @see \Wei\IsModelExists::__invoke
+         */
+        public function notModelExists($key = null, string $label = null, $model = null, $column = 'id')
         {
         }
 

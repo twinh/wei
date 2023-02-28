@@ -1316,6 +1316,21 @@ class IsMobileCnPropMixin
 }
 
 /**
+ * @property    Wei\IsModelExists $isModelExists
+ * @method      bool isModelExists($input = null, $model = null, $column = 'id') Check if the input is existing model
+ */
+class IsModelExistsMixin
+{
+}
+
+/**
+ * @property    Wei\IsModelExists $isModelExists
+ */
+class IsModelExistsPropMixin
+{
+}
+
+/**
  * @property    Wei\IsNaturalNumber $isNaturalNumber Check if the input is a natural number (integer that greater than or equals 0)
  * @method      bool isNaturalNumber($input) Validate the input value
  */
@@ -2633,6 +2648,7 @@ class WeiPropMixin
  * @mixin IsMinCharLengthMixin
  * @mixin IsMinLengthMixin
  * @mixin IsMobileCnMixin
+ * @mixin IsModelExistsMixin
  * @mixin IsNaturalNumberMixin
  * @mixin IsNoneOfMixin
  * @mixin IsNullTypeMixin
