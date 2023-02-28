@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace WeiTest\Model;
 
 use TypeError;
-use WeiTest\Model\Fixture\DbTrait;
+use WeiTest\Fixtures\DbTrait;
 use WeiTest\Model\Fixture\TestUser;
 use WeiTest\TestCase;
 

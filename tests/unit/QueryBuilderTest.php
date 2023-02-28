@@ -107,7 +107,7 @@ final class QueryBuilderTest extends TestCase
         $sql = Qb::table('test_users')->selectExcept('id')->getSql();
 
         $this->assertEqualsIgnoringCase(implode(' ', [
-            'SELECT `group_id`, `name`, `address`, `birthday`, `joined_date`, `signature`',
+            'SELECT `group_id`, `name`, `is_admin`, `address`, `birthday`, `joined_date`, `signature`',
             'FROM `p_test_users`',
         ]), $sql);
     }

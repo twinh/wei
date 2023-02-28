@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace WeiTest\Model;
 
+use WeiTest\Fixtures\DbTrait;
 use WeiTest\Model\Fixture\TestUser;
 use WeiTest\TestCase;
 
 class CacheTest extends TestCase
 {
-    use Fixture\DbTrait;
+    use DbTrait;
 
     public static function tearDownAfterClass(): void
     {

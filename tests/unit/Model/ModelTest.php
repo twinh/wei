@@ -7,7 +7,7 @@ namespace WeiTest\Model;
 use Wei\Db;
 use Wei\Req;
 use Wei\Ret;
-use WeiTest\Model\Fixture\DbTrait;
+use WeiTest\Fixtures\DbTrait;
 use WeiTest\Model\Fixture\TestTableHasDatabase;
 use WeiTest\Model\Fixture\TestUser;
 use WeiTest\TestCase;

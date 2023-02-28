@@ -42,6 +42,7 @@ trait DbTrait
             ->id()
             ->int('group_id')
             ->string('name')
+            ->bool('is_admin')
             ->string('address')
             ->date('birthday')
             ->date('joined_date')->defaults("'2000-01-01'")->nullable()
@@ -62,11 +63,11 @@ trait DbTrait
     private static function setTablePrefix($tablePrefix = '')
     {
         static::$tablePrefix = wei()->db->getTablePrefix();
-        wei()->db->setOption('tablePrefix', $tablePrefix);
+        wei()->db->setTablePrefix($tablePrefix);
     }
 
     private static function resetTablePrefix()
     {
-        static::$tablePrefix && wei()->db->setOption('tablePrefix', static::$tablePrefix);
+        static::$tablePrefix && wei()->db->setTablePrefix(static::$tablePrefix);
     }
 }

@@ -6,7 +6,7 @@ namespace WeiTest\Model;
 
 use Wei\QueryBuilder as Qb;
 use Wei\Str;
-use WeiTest\Model\Fixture\DbTrait;
+use WeiTest\Fixtures\DbTrait;
 use WeiTest\TestCase;
 
 class QueryBuilderCamelCaseTest extends TestCase

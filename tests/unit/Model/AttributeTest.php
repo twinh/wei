@@ -7,6 +7,7 @@ namespace WeiTest\Model;
 use Wei\BaseModel;
 use Wei\Logger;
 use Wei\ModelTrait;
+use WeiTest\Fixtures\DbTrait;
 use WeiTest\Model\Fixture\TestUser;
 use WeiTest\TestCase;
 
@@ -15,7 +16,7 @@ use WeiTest\TestCase;
  */
 class AttributeTest extends TestCase
 {
-    use Fixture\DbTrait;
+    use DbTrait;
 
     public static function tearDownAfterClass(): void
     {

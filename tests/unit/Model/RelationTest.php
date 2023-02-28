@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace WeiTest\Model;
 
-use WeiTest\Model\Fixture\DbTrait;
+use WeiTest\Fixtures\DbTrait;
 use WeiTest\Model\Fixture\TestArticle;
 use WeiTest\Model\Fixture\TestProfile;
 use WeiTest\Model\Fixture\TestTag;
