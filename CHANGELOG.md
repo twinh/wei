@@ -1,3 +1,15 @@
+## [0.15.5](https://github.com/twinh/wei/compare/v0.15.4...v0.15.5) (2023-03-01)
+
+
+### Features
+
+* **BaseController:** 增加 `getMiddleware` 和 `removeMiddleware` 方法 ([fa3c0b0](https://github.com/twinh/wei/commit/fa3c0b0402b1618f29ef034907ea0757a4592816))
+* **classMap:** 支持多级继承的情况 ([6c152f0](https://github.com/twinh/wei/commit/6c152f0df928eaab4a39f048bc707569d64369c8))
+* **isModelExists:** 增加 `isModelExists` 校验器 ([ccc2b8f](https://github.com/twinh/wei/commit/ccc2b8f238444c1b8e1bc56253b8de7a9625acd8))
+* **Model:** 支持多个记录获取多对多（如 `$articles->tags`）的情况 ([95368e9](https://github.com/twinh/wei/commit/95368e99d8a6e0ae55cc14c468f918d97d72f14f))
+* **V:** 增加 `notModelDup` 方法，简化数据库重复值校验逻辑 ([7de73f5](https://github.com/twinh/wei/commit/7de73f5d268e88e7bf9575947194a5a2feb6c227))
+* **V:** 增加 `requiredIfNew` 方法，用于校验模型新对象必须有数据 ([921b187](https://github.com/twinh/wei/commit/921b187ca1e1c80674c081cd28ce0b016faf14b2))
+
 ## [0.15.4](https://github.com/twinh/wei/compare/v0.15.3...v0.15.4) (2023-01-31)
 
 
