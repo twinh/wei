@@ -73,6 +73,9 @@ final class RelationTest extends TestCase
             [
                 'name' => 'life',
             ],
+            [
+                'name' => 'plan',
+            ],
         ]);
 
         wei()->db->batchInsert('test_articles', [
@@ -1035,6 +1038,23 @@ final class RelationTest extends TestCase
             'SELECT * FROM `p_test_users`',
             'INNER JOIN `p_test_profiles` ON `p_test_profiles`.`test_user_id` = `p_test_users`.`id`',
         ]), $user->getSql());
+    }
+
+    public function testSyncRelation()
+    {
+        $article = TestArticle::find(1);
+
+        $tags = $article->tags;
+        $this->assertCount(2, $tags);
+        $this->assertSame(1, $tags[0]->id);
+        $this->assertSame(2, $tags[1]->id);
+
+        $article->tags()->syncRelation([2, 3]);
+
+        $tags = $article->tags;
+        $this->assertCount(2, $tags);
+        $this->assertSame(2, $tags[0]->id);
+        $this->assertSame(3, $tags[1]->id);
     }
 
     protected function clearLogs()

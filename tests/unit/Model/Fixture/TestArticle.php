@@ -31,7 +31,7 @@ class TestArticle extends BaseModel
 
     public function tags()
     {
-        return $this->belongsToMany(TestTag::class);
+        return $this->belongsToMany(TestTag::class, TestArticlesTestTag::class);
     }
 
     public function customTags()

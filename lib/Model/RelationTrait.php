@@ -7,6 +7,7 @@ use LogicException;
 use ReflectionException;
 use ReflectionMethod;
 use Wei\BaseModel;
+use Wei\Cls;
 use Wei\ModelTrait;
 use Wei\Str;
 
@@ -153,6 +154,22 @@ trait RelationTrait
     public function belongsToMany($model, $junctionTable = null, $foreignKey = null, $relatedKey = null): BaseModel
     {
         $related = $this->instanceRelationModel($model);
+        $name = debug_backtrace(\DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]['function'];
+
+        if (class_exists($junctionTable)) {
+            /** @var class-string<BaseModel> $junctionClass */
+            $junctionClass = $junctionTable;
+            $junctionTable = $junctionClass::getTable();
+        } else {
+            // Example: convert "[ArticleModel, TagModel]" to "articlesTagModel"
+            $names = [$this->getModelBaseName(), $related->getModelBaseName()];
+            sort($names);
+            $serviceName = Str::pluralize(lcfirst($names[0])) . ucfirst($names[1]);
+            if ('Model' === substr(Cls::baseName(static::class), -5)) {
+                $serviceName .= 'Model';
+            }
+            $junctionClass = $this->wei->getClass($serviceName);
+        }
 
         $primaryKey = $this->getPrimaryKey();
         $junctionTable || $junctionTable = $this->getJunctionTable($related);
@@ -164,6 +181,11 @@ trait RelationTrait
             'relatedKey' => $this->convertToPhpKey($relatedKey),
             'foreignKey' => $this->convertToPhpKey($foreignKey),
             'localKey' => $this->convertToPhpKey($primaryKey),
+            // @experimental
+            'name' => $name,
+            'foreignModel' => $this,
+            'foreignValue' => $this->getRelationParams($primaryKey),
+            'junctionClass' => $junctionClass,
         ]);
 
         $relatedTable = $related->getTable();
@@ -227,6 +249,63 @@ trait RelationTrait
         $this->relationValues[$name] = $value;
         $this->loadedRelations[$name] = true;
         return $this;
+    }
+
+    /**
+     * Remove relation value
+     *
+     * @param string $name
+     * @return $this
+     */
+    public function removeRelationValue(string $name): self
+    {
+        unset($this->relationValues[$name]);
+        return $this;
+    }
+
+    /**
+     * Save data to junction table
+     *
+     * @param mixed $ids
+     * @return void
+     * @experimental
+     */
+    public function syncRelation($ids)
+    {
+        $relation = $this->relation;
+
+        // Load all junction models
+        /** @var BaseModel|BaseModel[] $coll */
+        $coll = $relation['junctionClass']::new();
+        $coll->where($relation['foreignKey'], $relation['foreignValue'])->all();
+
+        // Remove missing models
+        $ids = (array) $ids;
+        $existIds = [];
+        foreach ($coll as $model) {
+            $id = $model->getColumnValue($relation['relatedKey']);
+            if (!in_array($id, $ids, true)) {
+                $model->destroy();
+            } else {
+                $existIds[] = $id;
+            }
+        }
+
+        // Add new models
+        $newIds = array_diff($ids, $existIds);
+        if ($newIds) {
+            foreach ($newIds as $id) {
+                /** @var BaseModel $model */
+                $model = $relation['junctionClass']::new();
+                $model->saveAttributes([
+                    $relation['foreignKey'] => $relation['foreignValue'],
+                    $relation['relatedKey'] => $id,
+                ]);
+            }
+        }
+
+        // Remove loaded values
+        $relation['foreignModel']->removeRelationValue($relation['name']);
     }
 
     /**
