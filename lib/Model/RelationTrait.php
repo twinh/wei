@@ -405,9 +405,15 @@ trait RelationTrait
         $isColl = $related->isColl();
         $relation = $related->getRelation();
 
+        // @experimental
+        if (isset($relation['match'])) {
+            return $this->loadCustomRelation($related, $relation, $name);
+        }
+
         // Fetch relation model data
         $ids = $this->getAll($relation['localKey']);
         $ids = array_unique(array_filter($ids));
+
         if ($ids) {
             $this->relationParams = $ids;
             $related = $this->{$name}();
@@ -539,6 +545,56 @@ trait RelationTrait
         }
 
         return $this->loadHasMany($related, $relation, $name);
+    }
+
+    /**
+     * @param BaseModel $related
+     * @param array $relation
+     * @param string $name
+     * @return BaseModel|BaseModel[]
+     * @phpstan-return BaseModel
+     * @experimental
+     */
+    protected function loadCustomRelation(BaseModel $related, array $relation, string $name)
+    {
+        $isMany = $related->isColl();
+        $coll = $related::newColl();
+        $data = $related->fetchAll();
+
+        foreach ($data as $row) {
+            $model = $related::new([], ['new' => false]);
+            $model->setAttributesFromDb($row);
+            $coll[] = $model;
+
+            foreach ($this->attributes as $attribute) {
+                // TODO refactor one to one logic
+                // one to one has loaded
+                if (!$isMany && $attribute->isLoaded($name)) {
+                    continue;
+                }
+
+                if (!$relation['match']($attribute, $model)) {
+                    continue;
+                }
+
+                // one to one
+                if (!$isMany) {
+                    $attribute->setRelationValue($name, $model);
+                    continue;
+                }
+
+                // one to many
+                if (!$attribute->isLoaded($name)) {
+                    $relationValue = $related::newColl();
+                    $attribute->setRelationValue($name, $relationValue);
+                } else {
+                    $relationValue = $attribute->getRelationValue($name);
+                }
+                $relationValue[] = $model;
+            }
+        }
+
+        return $coll;
     }
 
     /**
