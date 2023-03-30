@@ -491,7 +491,7 @@ class V extends Base
                 return $validator->date();
 
             case 'json':
-                return $validator->object($column['length']);
+                return $validator->json($column['length']);
 
             case 'text':
                 return $validator->text();

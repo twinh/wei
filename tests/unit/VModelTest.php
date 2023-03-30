@@ -245,7 +245,7 @@ final class VModelTest extends TestCase
             [
                 'json_column',
                 'test',
-                $this->err('The json_column must be an object'),
+                $this->err('The json_column must be an array or object'),
             ],
         ];
     }
