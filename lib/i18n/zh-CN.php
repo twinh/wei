@@ -190,6 +190,10 @@ return [
     '%name% must be valid IP' => '%name%必须是有效的IP地址',
     '%name% must not be IP' => '%name%不能是IP地址',
 
+    // json
+    '%name% must be an array or object' => '%name%必须是一个数组或对象',
+    '%name% must not be an array or object' => '%name%不能是一个数组或对象',
+
     // length
     '%name% must have a length of %length%' => '%name%的长度必须是%length%',
     '%name% must contain %length% item(s)' => '%name%必须包含%length%项',

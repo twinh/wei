@@ -1815,6 +1815,21 @@ class IsIp
     }
 }
 
+class IsJson
+{
+    /**
+     * Check the input value, return a Ret object
+     *
+     * @param mixed $input
+     * @param string $name
+     * @return Ret
+     * @see BaseValidator::check
+     */
+    public static function check($input, string $name = '%name%'): Ret
+    {
+    }
+}
+
 class IsLength
 {
     /**
@@ -5980,6 +5995,22 @@ class V
 
     /**
      * @return $this
+     * @see \Wei\IsJson::__invoke
+     */
+    public static function json($input, $max = null)
+    {
+    }
+
+    /**
+     * @return $this
+     * @see \Wei\IsJson::__invoke
+     */
+    public static function notJson($input, $max = null)
+    {
+    }
+
+    /**
+     * @return $this
      * @see \Wei\IsLength::__invoke
      */
     public static function notLength($input, $min = null, $max = null)
@@ -8716,6 +8747,21 @@ if (0) {
     }
 
     class IsIp
+    {
+        /**
+         * Check the input value, return a Ret object
+         *
+         * @param mixed $input
+         * @param string $name
+         * @return Ret
+         * @see BaseValidator::check
+         */
+        public function check($input, string $name = '%name%'): Ret
+        {
+        }
+    }
+
+    class IsJson
     {
         /**
          * Check the input value, return a Ret object
@@ -12878,6 +12924,22 @@ if (0) {
          * @see \Wei\IsLength::__invoke
          */
         public function length($key = null, string $label = null, $min = null, $max = null)
+        {
+        }
+
+        /**
+         * @return $this
+         * @see \Wei\IsJson::__invoke
+         */
+        public function json($key = null, string $label = null, $max = null)
+        {
+        }
+
+        /**
+         * @return $this
+         * @see \Wei\IsJson::__invoke
+         */
+        public function notJson($key = null, string $label = null, $max = null)
         {
         }
 

@@ -17,7 +17,7 @@ class ApcuPropMixin
 
 /**
  * @property    Wei\App $app A service to build an MVC application
- * @method      Wei\App app($options = []) Startup an MVC application
+ * @method      Res app($options = []) Startup an MVC application
  */
 class AppMixin
 {
@@ -1087,6 +1087,21 @@ class IsIpMixin
  * @property    Wei\IsIp $isIp Check if the input is valid IP address
  */
 class IsIpPropMixin
+{
+}
+
+/**
+ * @property    Wei\IsJson $isJson Check if the input is a database JSON array or object
+ * @method      mixed isJson($input, $max = null)
+ */
+class IsJsonMixin
+{
+}
+
+/**
+ * @property    Wei\IsJson $isJson Check if the input is a database JSON array or object
+ */
+class IsJsonPropMixin
 {
 }
 
@@ -2633,6 +2648,7 @@ class WeiPropMixin
  * @mixin IsInConstMixin
  * @mixin IsIntMixin
  * @mixin IsIpMixin
+ * @mixin IsJsonMixin
  * @mixin IsLengthMixin
  * @mixin IsLessThanMixin
  * @mixin IsLessThanOrEqualMixin
