@@ -246,7 +246,7 @@ class Error extends Base
         }
 
         // Render JSON message
-        if ($this->request->acceptJson()) {
+        if ($this->req->acceptJson()) {
             $this->displayJsonException($e, $debug);
             return;
         }
