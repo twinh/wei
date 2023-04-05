@@ -159,10 +159,10 @@ final class RetTest extends TestCase
 
     public function testRetErr()
     {
-        $ret = Ret::err('err', 0);
+        $ret = Ret::err('err');
         $this->assertSame([
             'message' => 'err',
-            'code' => 0,
+            'code' => -1,
         ], $ret->toArray());
     }
 
@@ -492,5 +492,11 @@ final class RetTest extends TestCase
     "data": "data",
     "code": 0
 }', (string) $ret);
+    }
+
+    public function testErrToUseErrCode()
+    {
+        $ret = Ret::err('x', 0);
+        $this->assertSame(-1, $ret->getCode());
     }
 }

@@ -431,7 +431,11 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
      */
     protected function err($message, $code = null, $level = null)
     {
-        return $this->__invoke($message, $code ?? $this->defaultErrCode, $level);
+        // Covert success code to error code, useful for exception or result code from external APIs
+        if (!isset($code) || $this->defaultSucCode === $code) {
+            $code = $this->defaultErrCode;
+        }
+        return $this->__invoke($message, $code, $level);
     }
 
     /**
