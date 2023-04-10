@@ -745,6 +745,19 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
+     * Create a new HTTP object and execute
+     *
+     * @param array|string $url A options array or the request URL
+     * @param array $options A options array if the first parameter is string
+     * @return $this A new HTTP object
+     * @svc
+     */
+    protected function request($url = null, array $options = []): self
+    {
+        return $this->__invoke($url, $options);
+    }
+
+    /**
      * Prepare cURL options
      *
      * @return array
