@@ -345,6 +345,19 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
     }
 
     /**
+     * Prepend content to message
+     *
+     * @param string $prefix
+     * @return $this
+     * @experimental
+     */
+    public function prefix(string $prefix): self
+    {
+        $this->data['message'] = $prefix . $this->data['message'];
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function jsonSerialize()
