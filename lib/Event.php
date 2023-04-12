@@ -41,7 +41,7 @@ class Event extends Base
      * Trigger an event
      *
      * @param  string $name The name of event
-     * @param  array $args The arguments pass to the handle
+     * @param  mixed $args The arguments pass to the handle
      * @param bool $halt
      * @return array|mixed
      * @svc
@@ -80,7 +80,7 @@ class Event extends Base
      * Trigger an event until the first non-null response is returned
      *
      * @param string $name
-     * @param array $args
+     * @param mixed $args
      * @return mixed
      * @link https://github.com/laravel/framework/blob/5.1/src/Illuminate/Events/Dispatcher.php#L161
      * @svc
