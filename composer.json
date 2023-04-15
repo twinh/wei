@@ -46,7 +46,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-main": "0.15.5-dev"
+      "dev-main": "0.15.6-dev"
     },
     "require-ci": {
       "miaoxing/dev": "miaoxing/dev as 8.x-dev",

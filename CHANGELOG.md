@@ -1,3 +1,20 @@
+## [0.15.6](https://github.com/twinh/wei/compare/v0.15.5...v0.15.6) (2023-04-15)
+
+
+### Bug Fixes
+
+* **V:** `json` 列允许存入数组，改用 `isJson` 校验 `json` 列 ([432790f](https://github.com/twinh/wei/commit/432790f6c452e21d72a9a53a0eecb42d408137a5))
+
+
+### Features
+
+* **Http:** 增加 `Http::request` 方法，替代 `wei()->http` ([da33434](https://github.com/twinh/wei/commit/da334346990b2e7ae10b2bafe6c49eb4b919535a))
+* **isJson:** 增加 `isJson` 校验器，用于校验数据是否为数据库 JSON 数组或对象 ([3363cd9](https://github.com/twinh/wei/commit/3363cd9a318674db103b82cc9ebe1e4256c1bb67))
+* **Model, experimental:** 增加 `syncRelation` 用于保存关联表的数据 ([de7ec87](https://github.com/twinh/wei/commit/de7ec876d1466bb4bfde7b7a10fc55437e6a6ef1))
+* **Model, experimental:** 支持自定义关联 ([ba0c988](https://github.com/twinh/wei/commit/ba0c9889126aa5edb7d3ab083d467e47f611b871))
+* **Ret:** 调用 `err` 方法时，如果 `code` 是成功代码，则转换为错误代码 ([a926125](https://github.com/twinh/wei/commit/a9261250989232dd6bc03f593586e09400fae027))
+* **Ret, experimental:** 增加 `prefix` 方法，用于附加内容到信息前面 ([8c81c3f](https://github.com/twinh/wei/commit/8c81c3f153570f222b6682207b7b45344d41c68c))
+
 ## [0.15.5](https://github.com/twinh/wei/compare/v0.15.4...v0.15.5) (2023-03-01)
 
 
