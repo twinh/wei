@@ -14,6 +14,7 @@ namespace Wei;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @SuppressWarnings(PHPMD.ShortVariable)
+ * @mixin \RetMixin
  */
 class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
 {
@@ -742,6 +743,24 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function getCurlInfo($option = null)
     {
         return $option ? curl_getinfo($this->ch, $option) : curl_getinfo($this->ch);
+    }
+
+    /**
+     * Convert the HTTP response to a Ret object
+     *
+     * @param array $data
+     * @return Ret
+     */
+    public function toRet(array $data = [])
+    {
+        if ($this->isSuccess()) {
+            $response = $this->getResponse();
+            $extra = is_array($response) ? $response : ['data' => $response];
+            return $this->ret->suc($data + $extra);
+        }
+
+        $e = $this->getErrorException();
+        return $this->ret->err($data + ['code' => $e->getCode(), 'message' => $e->getMessage()]);
     }
 
     /**
