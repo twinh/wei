@@ -1044,4 +1044,16 @@ final class HttpTest extends TestCase
         $this->assertRetErr($ret);
         $this->assertSame('d', $ret['c']);
     }
+
+    public function testRequestRet()
+    {
+        $ret = $this->http->requestRet([
+            'url' => 'https://httpbin.org/get?a=b',
+            'ip' => false,
+            'dataType' => 'json',
+        ]);
+
+        $this->assertRetSuc($ret);
+        $this->assertSame('b', $ret['args']['a']);
+    }
 }

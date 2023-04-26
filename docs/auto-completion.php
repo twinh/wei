@@ -17,7 +17,7 @@ class ApcuPropMixin
 
 /**
  * @property    Wei\App $app A service to build an MVC application
- * @method      Res app($options = []) Startup an MVC application
+ * @method      Wei\App app($options = []) Startup an MVC application
  */
 class AppMixin
 {
@@ -2760,3 +2760,4 @@ function wei()
 {
     return new AutoCompletion();
 }
+
