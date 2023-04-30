@@ -1,3 +1,11 @@
+## [0.15.7](https://github.com/twinh/wei/compare/v0.15.6...v0.15.7) (2023-04-30)
+
+
+### Features
+
+* **Http:** 增加 `requestRet` 方法 ([dd35fab](https://github.com/twinh/wei/commit/dd35fab6f1db8734072a9ce7ac683c84c0eeb8e4))
+* **Http:** 增加 `toRet` 方法，用于将请求结果转换为 `Ret` 对象 ([70aa7fa](https://github.com/twinh/wei/commit/70aa7fa7f0ef67c7819239d31cea53e96f61e2af))
+
 ## [0.15.6](https://github.com/twinh/wei/compare/v0.15.5...v0.15.6) (2023-04-15)
 
 
