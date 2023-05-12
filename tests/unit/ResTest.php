@@ -4,6 +4,7 @@ namespace WeiTest
 {
     /**
      * @internal
+     * @mixin \ResPropMixin
      */
     final class ResTest extends TestCase
     {
@@ -200,6 +201,12 @@ namespace WeiTest
             $this->expectOutputRegex('/content=\"5;url=http:\/\/www\.google\.com/');
 
             $this->res->redirect('http://www.google.com', 302, ['redirectWait' => 5])->send();
+        }
+
+        public function testGetHeaders()
+        {
+            $this->res->setHeader('test', 'value');
+            $this->assertArrayContains(['test' => ['value']], $this->res->getHeaders());
         }
     }
 }

@@ -425,6 +425,16 @@ class Res extends Base
     }
 
     /**
+     * Return the response headers
+     *
+     * @return array
+     */
+    public function getHeaders(): array
+    {
+        return $this->headers;
+    }
+
+    /**
      * Send HTTP headers, including HTTP status, raw headers and cookies
      *
      * @return bool If the header has been seen, return false, otherwise, return true
