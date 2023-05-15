@@ -4157,6 +4157,16 @@ class QueryBuilder
     }
 
     /**
+     * @param mixed $if
+     * @param mixed ...$args
+     * @return $this
+     * @see QueryBuilder::whereIf
+     */
+    public static function whereIf($if, ...$args): self
+    {
+    }
+
+    /**
      * Search whether a column dont have a value other than the default value
      *
      * @param string $column
@@ -11110,6 +11120,16 @@ if (0) {
          * @see QueryBuilder::whereHas
          */
         public function whereHas(string $column, bool $has = true): self
+        {
+        }
+
+        /**
+         * @param mixed $if
+         * @param mixed ...$args
+         * @return $this
+         * @see QueryBuilder::whereIf
+         */
+        public function whereIf($if, ...$args): self
         {
         }
 

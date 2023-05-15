@@ -1273,6 +1273,7 @@ trait QueryBuilderTrait
      * @param mixed $if
      * @param mixed ...$args
      * @return $this
+     * @svc
      */
     protected function whereIf($if, ...$args): self
     {
