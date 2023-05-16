@@ -108,7 +108,7 @@ class IsEach extends BaseValidator
         foreach ($input as $key => $data) {
             $this->curKey = $key;
             $options = $this->getValidatorOptions($data);
-            $validator = wei()->validate($options);
+            $validator = $this->validate($options);
             $this->selfValidators[$key] = $validator;
             if ($result && !$validator->isValid()) {
                 $result = false;
