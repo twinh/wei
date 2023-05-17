@@ -139,13 +139,12 @@ abstract class BaseCache extends Base
      * Retrieve an item
      *
      * ```php
-     * $cache = wei()->cache;
-     *
      * // Retrieve cache by key
      * $cache->get('key');
      *
      * // Custom default value
      * $cache->get('key', 'default value');
+     * ```
      *
      * @param string $key The name of item
      * @param mixed $default The default value to return when cache not exists

@@ -1011,10 +1011,10 @@ trait QueryBuilderTrait
      * Replaces any previously specified restrictions, if any.
      *
      * ```php
-     * $user = wei()->db('user')->where('id = 1');
-     * $user = wei()->db('user')->where('id = ?', 1);
-     * $users = wei()->db('user')->where(array('id' => '1', 'username' => 'twin'));
-     * $users = wei()->where(array('id' => array('1', '2', '3')));
+     * $user = QueryBuilder::table('user')->where('id', 1);
+     * $users = QueryBuilder::table('user')->where('id', '>', 1);
+     * $users = QueryBuilder::table('user')->where(['id' => '1', 'username' => 'twin']);
+     * $users = QueryBuilder::table('user')->where(['id' => ['1', '2', '3']]);
      * ```
      *
      * @param array|Closure|string|null $column
