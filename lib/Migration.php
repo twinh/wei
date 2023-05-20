@@ -161,6 +161,8 @@ class Migration extends Base
         $migrationIds = $this->getMigratedIds();
 
         if (isset($options['target'])) {
+            // Allow use class name
+            $options['target'] = lcfirst($options['target']);
             $index = array_search($options['target'], $migrationIds, true);
             if (false === $index) {
                 $this->writeln(sprintf('<error>Target "%s" not found</error>', $options['target']));
