@@ -169,8 +169,13 @@ class Migration extends Base
                 return;
             }
 
-            // Return migrations included target
-            $migrationIds = array_slice($migrationIds, 0, $index + 1, true);
+            if ($options['only'] ?? false) {
+                // Return only the specified target
+                $migrationIds = [$options['target']];
+            } else {
+                // Return migrations included target
+                $migrationIds = array_slice($migrationIds, 0, $index + 1, true);
+            }
         } else {
             $migrationIds = $migrationIds ? [current($migrationIds)] : [];
         }
