@@ -1,3 +1,20 @@
+## [0.15.8](https://github.com/twinh/wei/compare/v0.15.7...v0.15.8) (2023-05-31)
+
+
+### Features
+
+* **Migration:** `rollback` 允许只回退指定的一个编号 ([9e9a0b3](https://github.com/twinh/wei/commit/9e9a0b3ff68cb56bd5afa6359adbf1688970e660))
+* **Migration:** `target` 允许传入大写开头的类名 ([6088573](https://github.com/twinh/wei/commit/60885737ae4ad62cf8d806fe86fea3635ffe075f))
+* **Res:** 增加 `getHeaders` 方法 ([160f161](https://github.com/twinh/wei/commit/160f16100f1453368451bf75dc9d958df44c4b6b))
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `8.2.0` to `8.2.1`
+
 ## [0.15.7](https://github.com/twinh/wei/compare/v0.15.6...v0.15.7) (2023-04-30)
 
 
