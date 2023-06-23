@@ -14,8 +14,8 @@ namespace Wei;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  *
- * @property Req    $req A service that handles the HTTP request data
- * @property Res   $res A object that handles the HTTP response data
+ * @property Req $req A service that handles the HTTP request data
+ * @property Res $res A object that handles the HTTP response data
  */
 abstract class BaseController extends Base
 {
@@ -59,6 +59,15 @@ abstract class BaseController extends Base
     {
         unset($this->middleware[$name]);
         return $this;
+    }
+
+    /**
+     * Initialize the controller, can be used to register middleware
+     *
+     * @experimental
+     */
+    public function init()
+    {
     }
 
     /**
