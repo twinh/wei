@@ -1,3 +1,10 @@
+## [0.15.9](https://github.com/twinh/wei/compare/v0.15.8...v0.15.9) (2023-06-30)
+
+
+### Features
+
+* **BaseController, experimental:** 增加 `init` 方法 ([00fc885](https://github.com/twinh/wei/commit/00fc885444bbab8213d9f17badcf0c08d022a628))
+
 ## [0.15.8](https://github.com/twinh/wei/compare/v0.15.7...v0.15.8) (2023-05-31)
 
 
