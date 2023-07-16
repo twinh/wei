@@ -167,6 +167,7 @@ final class RelationTest extends TestCase
         $this->assertEquals($users[0]->id, $users[0]->profile->test_user_id);
         $this->assertEquals($users[1]->id, $users[1]->profile->test_user_id);
         $this->assertNull($users[2]->profile);
+        $this->assertFalse($users[0]->profile->isNew());
 
         $queries = wei()->db->getQueries();
 
@@ -232,6 +233,7 @@ final class RelationTest extends TestCase
         foreach ($articles as $article) {
             $user = $article->user;
             $this->assertEquals($article->test_user_id, $user->id);
+            $this->assertFalse($user->isNew());
         }
 
         $queries = wei()->db->getQueries();
@@ -294,6 +296,7 @@ final class RelationTest extends TestCase
 
         $users->load('articles');
         $this->assertNotNull($users[0]->articles[0]->id);
+        $this->assertFalse($users[0]->articles[0]->isNew());
     }
 
     public function testModelHasManyWithQuery()
@@ -397,6 +400,7 @@ final class RelationTest extends TestCase
         foreach ($articles as $article) {
             foreach ($article->tags as $tag) {
                 $this->assertInstanceOf(TestTag::class, $tag);
+                $this->assertFalse($tag->isNew());
             }
         }
 

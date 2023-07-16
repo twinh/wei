@@ -504,8 +504,7 @@ trait RelationTrait
             if (isset($coll[$localValue])) {
                 $groupBy[$row[$relation['foreignKey']]][] = $coll[$localValue];
             } else {
-                /** @var BaseModel $model */
-                $model = call_user_func([$related, 'new']);
+                $model = $related::new([], ['new' => false]);
                 $groupBy[$row[$relation['foreignKey']]][] = $model;
 
                 // Remove external data
