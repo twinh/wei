@@ -673,6 +673,20 @@ trait QueryBuilderTrait
     }
 
     /**
+     * Check if the query has result
+     *
+     * @param mixed|null $column
+     * @param mixed|null $operator
+     * @param mixed|null $value
+     * @return bool
+     * @svc
+     */
+    protected function exists($column = null, $operator = null, $value = null): bool
+    {
+        return (bool) $this->selectRaw('1')->fetchColumn(...func_get_args());
+    }
+
+    /**
      * @param string $column
      * @param string|null $index
      * @return array

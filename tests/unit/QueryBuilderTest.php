@@ -860,6 +860,21 @@ final class QueryBuilderTest extends TestCase
         $this->assertEquals('1', $data[0]['group_id']);
     }
 
+    public function testExists()
+    {
+        $this->initFixtures();
+
+        $exists = Qb::table('test_users')->exists();
+        $this->assertIsBool($exists);
+        $this->assertTrue($exists);
+
+        $exists = Qb::table('test_users')->exists('id', 0);
+        $this->assertFalse($exists);
+
+        $exists = Qb::table('test_users')->selectRaw(0)->exists();
+        $this->assertTrue($exists);
+    }
+
     public function testIndexBy()
     {
         $this->initFixtures();
