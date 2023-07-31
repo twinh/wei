@@ -1,3 +1,23 @@
+## [0.15.10](https://github.com/twinh/wei/compare/v0.15.9...v0.15.10) (2023-07-31)
+
+
+### Bug Fixes
+
+* **Model:** 关联数据应设置为已加载的状态 ([211301c](https://github.com/twinh/wei/commit/211301ceda41f56bb3aea20ccffa5bf6c850791f))
+
+
+### Features
+
+* **QueryBuilder:** 增加 `exists` 方法，用于判断查询是否有结果 ([b0bb602](https://github.com/twinh/wei/commit/b0bb6025826411ed8f6301988ea860f956074569))
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `8.2.1` to `8.2.2`
+
 ## [0.15.9](https://github.com/twinh/wei/compare/v0.15.8...v0.15.9) (2023-06-30)
 
 
