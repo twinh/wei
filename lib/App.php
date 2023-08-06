@@ -86,7 +86,7 @@ class App extends Base
      * Startup an MVC application
      *
      * @param array $options
-     * @return $this
+     * @return Res
      * @throws \RuntimeException
      */
     public function __invoke(array $options = [])
@@ -232,7 +232,7 @@ class App extends Base
      * Set the name of controller
      *
      * @param string $controller The name of controller
-     * @return string
+     * @return $this
      */
     public function setController($controller)
     {
@@ -255,7 +255,7 @@ class App extends Base
      * Set the name of action
      *
      * @param string $action The name of action
-     * @return string
+     * @return $this
      */
     public function setAction($action)
     {
