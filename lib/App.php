@@ -33,6 +33,14 @@ class App extends Base
     protected $controllerFormat = 'controllers\%controller%';
 
     /**
+     * The format of action method
+     *
+     * @var string
+     * @option
+     */
+    protected $actionMethodFormat = '%action%Action';
+
+    /**
      * The default controller name
      *
      * @var string
@@ -272,7 +280,7 @@ class App extends Base
      */
     public function getActionMethod($action)
     {
-        return $action . 'Action';
+        return str_replace('%action%', $action, $this->actionMethodFormat);
     }
 
     /**
@@ -344,6 +352,28 @@ class App extends Base
     {
         $this->controllerMap = $controllerMap + $this->controllerMap;
 
+        return $this;
+    }
+
+    /**
+     * Return the action method format
+     *
+     * @return string
+     */
+    public function getActionMethodFormat(): string
+    {
+        return $this->actionMethodFormat;
+    }
+
+    /**
+     * Set the action method format
+     *
+     * @param string $actionMethodFormat
+     * @return $this
+     */
+    public function setActionMethodFormat(string $actionMethodFormat): self
+    {
+        $this->actionMethodFormat = $actionMethodFormat;
         return $this;
     }
 

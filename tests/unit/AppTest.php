@@ -416,4 +416,16 @@ MSG
         $controller->removeMiddleware(All::class);
         $this->assertArrayNotHasKey(All::class, $controller->getMiddleware());
     }
+
+    public function testActionMethodFormat()
+    {
+        $format = $this->app->getActionMethodFormat();
+
+        $this->app->setActionMethodFormat('%action%');
+        $this->assertSame('%action%', $this->app->getActionMethodFormat());
+
+        $this->assertSame('get', $this->app->getActionMethod('get'));
+
+        $this->app->setActionMethodFormat($format);
+    }
 }
