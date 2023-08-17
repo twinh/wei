@@ -4941,6 +4941,18 @@ class Str
     public static function truncate(?string $str, int $length, string $ellipsis = '…'): ?string
     {
     }
+
+    /**
+     * Truncate a string to specified length
+     *
+     * @param string|null $str
+     * @param int $length
+     * @return string|null
+     * @see Str::cut
+     */
+    public static function cut(?string $str, int $length): ?string
+    {
+    }
 }
 
 class T
@@ -11906,6 +11918,18 @@ if (0) {
          * @see Str::truncate
          */
         public function truncate(?string $str, int $length, string $ellipsis = '…'): ?string
+        {
+        }
+
+        /**
+         * Truncate a string to specified length
+         *
+         * @param string|null $str
+         * @param int $length
+         * @return string|null
+         * @see Str::cut
+         */
+        public function cut(?string $str, int $length): ?string
         {
         }
     }

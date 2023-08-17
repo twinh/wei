@@ -123,6 +123,19 @@ class Str extends Base
     }
 
     /**
+     * Truncate a string to specified length
+     *
+     * @param string|null $str
+     * @param int $length
+     * @return string|null
+     * @svc
+     */
+    protected function cut(?string $str, int $length): ?string
+    {
+        return $this->truncate($str, $length, '');
+    }
+
+    /**
      * Get the inflector instance.
      *
      * @return Inflector

@@ -112,4 +112,31 @@ final class StrTest extends TestCase
     {
         $this->assertEquals($output, $this->str->pluralize($input));
     }
+
+    /**
+     * @param string $input
+     * @param int $length
+     * @param string $output
+     * @return void
+     * @dataProvider providerForCut
+     */
+    public function testCut(string $input, int $length, string $output): void
+    {
+        $this->assertSame($output, $this->str->cut($input, $length));
+    }
+
+    public function providerForCut(): array
+    {
+        return [
+            ['test', 3, 'tes'],
+            ['test', 4, 'test'],
+            ['test', 5, 'test'],
+            ['我爱你', 2, '我爱'],
+            ['我爱你', 3, '我爱你'],
+            ['我爱你', 4, '我爱你'],
+            ['我爱12', 2, '我爱'],
+            ['我爱12', 3, '我爱1'],
+            ['我爱12', 4, '我爱12'],
+        ];
+    }
 }
