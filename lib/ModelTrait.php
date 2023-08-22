@@ -279,6 +279,7 @@ trait ModelTrait
     public static function resetBoot(): void
     {
         static::$booted = [];
+        static::$modelEvents = [];
     }
 
     /**
