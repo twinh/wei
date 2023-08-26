@@ -924,6 +924,17 @@ class Schema extends Base
     }
 
     /**
+     * Add a user id column to table
+     *
+     * @param string $column
+     * @return $this
+     */
+    public function userId(string $column = 'user_id'): self
+    {
+        return $this->{$this->userIdType}($column);
+    }
+
+    /**
      * Set the comment for current table
      *
      * @param string $comment
