@@ -1,3 +1,27 @@
+## [0.15.11](https://github.com/twinh/wei/compare/v0.15.10...v0.15.11) (2023-09-02)
+
+
+### Bug Fixes
+
+* **ClassMap:** 解决过滤重复类错误 ([357f3cf](https://github.com/twinh/wei/commit/357f3cf6f7c74655ab824b875b22864eed0fcced))
+
+
+### Features
+
+* **App:** 增加 `actionMethodFormat` 选项，用于设置操作方法的格式 ([5d8c2cd](https://github.com/twinh/wei/commit/5d8c2cd13b6b6666ab5fdf541f968cfcb7d65057))
+* **Ret, experimental:** 增加 `assert` 方法，当 ret 为错误时，抛出异常 ([46db6e6](https://github.com/twinh/wei/commit/46db6e654f4b8c1bfa79c2707b1a0936833f20c4))
+* **Schema:** 增加 `userId` 方法，用于增加 `user_id` 列 ([7d56599](https://github.com/twinh/wei/commit/7d565992f4eb6897600727f4b7a2146e085c928d))
+* **Str:** 增加 `cut` 方法，用于截断字符串 ([c78cd98](https://github.com/twinh/wei/commit/c78cd9829c45c16ddbc07e82cba97c71ddeb8bf6))
+* **TreeTrait:** 模型增加 `TreeTrait` ([bbab56b](https://github.com/twinh/wei/commit/bbab56bee787d333e9a8da3f141edd2941c7c6c4))
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `8.2.2` to `8.2.3`
+
 ## [0.15.10](https://github.com/twinh/wei/compare/v0.15.9...v0.15.10) (2023-07-31)
 
 

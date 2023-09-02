@@ -17,7 +17,7 @@
     "doctrine/inflector": "^1.4|^2.0",
     "joseph-lenton/php-error": "dev-master",
     "phpunit/phpunit": "^8",
-    "miaoxing/dev": "^8.2.2"
+    "miaoxing/dev": "^8.2.3"
   },
   "authors": [
     {
@@ -46,7 +46,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-main": "0.15.10-dev"
+      "dev-main": "0.15.11-dev"
     },
     "require-ci": {
       "miaoxing/dev": "miaoxing/dev as 8.x-dev",
