@@ -506,4 +506,19 @@ final class RetTest extends TestCase
         $ret->prefix('API error: ');
         $this->assertSame('API error: some error from external', $ret->getMessage());
     }
+
+    public function testAssertErr()
+    {
+        $ret = Ret::err('error from api');
+
+        $this->expectExceptionObject(new Ret\RetException($ret));
+        $ret->assert();
+    }
+
+    public function testAssertSuc()
+    {
+        $ret = Ret::suc();
+        $result = $ret->assert();
+        $this->assertSame($ret, $result);
+    }
 }

@@ -3,6 +3,7 @@
 namespace Wei;
 
 use InvalidArgumentException;
+use Wei\Ret\RetException;
 
 /**
  * A service that use to build operation result
@@ -354,6 +355,21 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
     public function prefix(string $prefix): self
     {
         $this->data['message'] = $prefix . $this->data['message'];
+        return $this;
+    }
+
+    /**
+     * Throw exception if ret is error
+     *
+     * @return $this
+     * @throws RetException
+     * @experimental
+     */
+    public function assert(): ?self
+    {
+        if ($this->isErr()) {
+            throw new RetException($this);
+        }
         return $this;
     }
 
