@@ -42,7 +42,14 @@ class ClassMap extends Base
                 if (!$class) {
                     continue;
                 }
-                if ((new ReflectionClass($class))->isAbstract()) {
+
+                $reflection = new ReflectionClass($class);
+                if ($reflection->isAbstract()) {
+                    continue;
+                }
+
+                // @experimental may be change to @wei-ignored
+                if (false !== strpos($reflection->getDocComment(), '@ignored')) {
                     continue;
                 }
 
