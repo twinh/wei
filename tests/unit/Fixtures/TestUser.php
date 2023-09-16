@@ -4,7 +4,7 @@ namespace WeiTest\Fixtures;
 
 use Wei\Base;
 
-class User extends Base
+class TestUser extends Base
 {
     protected $name;
 

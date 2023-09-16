@@ -91,7 +91,7 @@ final class ValidatorTest extends TestCase
 
     public function testOptionalFieldWihGetter()
     {
-        $user = new \WeiTest\Fixtures\User();
+        $user = new \WeiTest\Fixtures\TestUser();
         $user->setName('');
 
         $result = $this->validate([
@@ -508,7 +508,7 @@ final class ValidatorTest extends TestCase
 
     public function testGetterAsData()
     {
-        $user = new \WeiTest\Fixtures\User();
+        $user = new \WeiTest\Fixtures\TestUser();
 
         $user->setName('test@example.com');
 

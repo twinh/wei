@@ -14,7 +14,7 @@ final class WeiTest extends TestCase
 {
     public function createUserService()
     {
-        return new \WeiTest\Fixtures\User([
+        return new \WeiTest\Fixtures\TestUser([
             'wei' => $this->wei,
             'name' => 'twin',
         ]);

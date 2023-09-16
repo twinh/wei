@@ -244,7 +244,7 @@ abstract class CacheTestCase extends TestCase
 
     public function testGetFileContent()
     {
-        $file = __DIR__ . '/Fixtures/User.php';
+        $file = __DIR__ . '/Fixtures/TestUser.php';
         $cache = $this->object->getFileContent($file, function ($file) {
             return file_get_contents($file);
         });
