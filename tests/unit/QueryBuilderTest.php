@@ -994,6 +994,30 @@ final class QueryBuilderTest extends TestCase
         $this->assertEquals('test address', $user['address']);
     }
 
+    public function testUpdateOrderBy()
+    {
+        $this->initFixtures();
+
+        Qb::table('test_users')
+            ->orderBy('id', 'DESC')
+            ->orderBy('name')
+            ->update(['address' => 'test address']);
+        $this->assertSame(
+            'UPDATE `p_test_users` SET `address` = ? ORDER BY `id` DESC, `name` ASC',
+            $this->db->getLastQuery()
+        );
+    }
+
+    public function testUpdateLimit()
+    {
+        $this->initFixtures();
+
+        Qb::table('test_users')
+            ->limit(3)
+            ->update(['address' => 'test address']);
+        $this->assertSame('UPDATE `p_test_users` SET `address` = ? LIMIT 3', $this->db->getLastQuery());
+    }
+
     public function testParameters()
     {
         $this->initFixtures();
@@ -1104,6 +1128,22 @@ final class QueryBuilderTest extends TestCase
 
         $result = Qb::table('test_users')->delete(['group_id' => 1]);
         $this->assertEquals(0, $result);
+    }
+
+    public function testDeleteOrderBy()
+    {
+        $this->initFixtures();
+
+        Qb::table('test_users')->orderBy('id', 'DESC')->delete();
+        $this->assertSame('DELETE FROM `p_test_users` ORDER BY `id` DESC', $this->db->getLastQuery());
+    }
+
+    public function testDeleteLimit()
+    {
+        $this->initFixtures();
+
+        Qb::table('test_users')->limit(2)->delete();
+        $this->assertSame('DELETE FROM `p_test_users` LIMIT 2', $this->db->getLastQuery());
     }
 
     public function testInvalidLimit()

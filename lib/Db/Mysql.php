@@ -203,16 +203,7 @@ class Mysql extends BaseDriver
 
         if (!$parts['aggregate']) {
             if ($parts['orderBy']) {
-                $query .= ' ORDER BY ';
-                $orderBys = [];
-                foreach ($parts['orderBy'] as $orderBy) {
-                    if ($this->isRaw($orderBy['column'])) {
-                        $orderBys[] = $this->getRawValue($orderBy['column']);
-                    } else {
-                        $orderBys[] = $this->wrap($orderBy['column']) . ' ' . $orderBy['order'];
-                    }
-                }
-                $query .= implode(', ', $orderBys);
+                $query .= ' ORDER BY ' . $this->buildOrderBy($parts);
             }
 
             $query .= (null !== $parts['limit'] ? ' LIMIT ' . $parts['limit'] : '')
@@ -290,6 +281,19 @@ class Mysql extends BaseDriver
         return $query;
     }
 
+    protected function buildOrderBy(array $parts): string
+    {
+        $orderBys = [];
+        foreach ($parts['orderBy'] as $orderBy) {
+            if ($this->isRaw($orderBy['column'])) {
+                $orderBys[] = $this->getRawValue($orderBy['column']);
+            } else {
+                $orderBys[] = $this->wrap($orderBy['column']) . ' ' . $orderBy['order'];
+            }
+        }
+        return implode(', ', $orderBys);
+    }
+
     /**
      * Converts this instance into an SELECT COUNT string in SQL
      */
@@ -317,6 +321,15 @@ class Mysql extends BaseDriver
             $query .= ' WHERE ' . $this->buildWhere($this->sqlParts);
         }
 
+        if ($this->sqlParts['orderBy']) {
+            $query .= ' ORDER BY ' . $this->buildOrderBy($this->sqlParts);
+        }
+
+        // Note that MySQL don't support OFFSET in UPDATE
+        if ($this->sqlParts['limit']) {
+            $query .= ' LIMIT ' . $this->sqlParts['limit'];
+        }
+
         return $query;
     }
 
@@ -327,8 +340,22 @@ class Mysql extends BaseDriver
      */
     protected function getSqlForDelete()
     {
-        return 'DELETE FROM ' . $this->getFrom()
-            . ($this->sqlParts['where'] ? ' WHERE ' . $this->buildWhere($this->sqlParts) : '');
+        $query = 'DELETE FROM ' . $this->getFrom();
+
+        if ($this->sqlParts['where']) {
+            $query .= ' WHERE ' . $this->buildWhere($this->sqlParts);
+        }
+
+        if ($this->sqlParts['orderBy']) {
+            $query .= ' ORDER BY ' . $this->buildOrderBy($this->sqlParts);
+        }
+
+        // Note that MySQL don't support OFFSET in UPDATE
+        if ($this->sqlParts['limit']) {
+            $query .= ' LIMIT ' . $this->sqlParts['limit'];
+        }
+
+        return $query;
     }
 
     /**
