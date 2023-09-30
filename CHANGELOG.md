@@ -1,3 +1,11 @@
+## [0.15.12](https://github.com/twinh/wei/compare/v0.15.11...v0.15.12) (2023-09-30)
+
+
+### Features
+
+* **classMap:** 允许通过 `[@ignored](https://github.com/ignored)` 注释来忽略生成类映射表 ([d60e29e](https://github.com/twinh/wei/commit/d60e29e7f43e0a20dd64798e847c5d200d6dce96))
+* **QueryBuilder:** `update` 和 `delete` 语句支持 `orderBy` `limit` 方法 ([6d5812f](https://github.com/twinh/wei/commit/6d5812fd035f2598fe31deef1842fdf80fa75315))
+
 ## [0.15.11](https://github.com/twinh/wei/compare/v0.15.10...v0.15.11) (2023-09-02)
 
 
