@@ -64,13 +64,12 @@ class Apcu
      * Retrieve an item
      *
      * ```php
-     * $cache = wei()->cache;
-     *
      * // Retrieve cache by key
      * $cache->get('key');
      *
      * // Custom default value
      * $cache->get('key', 'default value');
+     * ```
      *
      * @param string $key The name of item
      * @param mixed $default The default value to return when cache not exists
@@ -208,13 +207,12 @@ class ArrayCache
      * Retrieve an item
      *
      * ```php
-     * $cache = wei()->cache;
-     *
      * // Retrieve cache by key
      * $cache->get('key');
      *
      * // Custom default value
      * $cache->get('key', 'default value');
+     * ```
      *
      * @param string $key The name of item
      * @param mixed $default The default value to return when cache not exists
@@ -352,13 +350,12 @@ class Bicache
      * Retrieve an item
      *
      * ```php
-     * $cache = wei()->cache;
-     *
      * // Retrieve cache by key
      * $cache->get('key');
      *
      * // Custom default value
      * $cache->get('key', 'default value');
+     * ```
      *
      * @param string $key The name of item
      * @param mixed $default The default value to return when cache not exists
@@ -682,13 +679,12 @@ class DbCache
      * Retrieve an item
      *
      * ```php
-     * $cache = wei()->cache;
-     *
      * // Retrieve cache by key
      * $cache->get('key');
      *
      * // Custom default value
      * $cache->get('key', 'default value');
+     * ```
      *
      * @param string $key The name of item
      * @param mixed $default The default value to return when cache not exists
@@ -949,13 +945,12 @@ class FileCache
      * Retrieve an item
      *
      * ```php
-     * $cache = wei()->cache;
-     *
      * // Retrieve cache by key
      * $cache->get('key');
      *
      * // Custom default value
      * $cache->get('key', 'default value');
+     * ```
      *
      * @param string $key The name of item
      * @param mixed $default The default value to return when cache not exists
@@ -2756,13 +2751,12 @@ class Memcache
      * Retrieve an item
      *
      * ```php
-     * $cache = wei()->cache;
-     *
      * // Retrieve cache by key
      * $cache->get('key');
      *
      * // Custom default value
      * $cache->get('key', 'default value');
+     * ```
      *
      * @param string $key The name of item
      * @param mixed $default The default value to return when cache not exists
@@ -2900,13 +2894,12 @@ class Memcached
      * Retrieve an item
      *
      * ```php
-     * $cache = wei()->cache;
-     *
      * // Retrieve cache by key
      * $cache->get('key');
      *
      * // Custom default value
      * $cache->get('key', 'default value');
+     * ```
      *
      * @param string $key The name of item
      * @param mixed $default The default value to return when cache not exists
@@ -3191,13 +3184,12 @@ class NearCache
      * Retrieve an item
      *
      * ```php
-     * $cache = wei()->cache;
-     *
      * // Retrieve cache by key
      * $cache->get('key');
      *
      * // Custom default value
      * $cache->get('key', 'default value');
+     * ```
      *
      * @param string $key The name of item
      * @param mixed $default The default value to return when cache not exists
@@ -3331,13 +3323,12 @@ class NullCache
      * Retrieve an item
      *
      * ```php
-     * $cache = wei()->cache;
-     *
      * // Retrieve cache by key
      * $cache->get('key');
      *
      * // Custom default value
      * $cache->get('key', 'default value');
+     * ```
      *
      * @param string $key The name of item
      * @param mixed $default The default value to return when cache not exists
@@ -3535,13 +3526,12 @@ class PhpFileCache
      * Retrieve an item
      *
      * ```php
-     * $cache = wei()->cache;
-     *
      * // Retrieve cache by key
      * $cache->get('key');
      *
      * // Custom default value
      * $cache->get('key', 'default value');
+     * ```
      *
      * @param string $key The name of item
      * @param mixed $default The default value to return when cache not exists
@@ -3702,6 +3692,19 @@ class QueryBuilder
      * @see QueryBuilder::all
      */
     public static function all(): array
+    {
+    }
+
+    /**
+     * Check if the query has result
+     *
+     * @param mixed|null $column
+     * @param mixed|null $operator
+     * @param mixed|null $value
+     * @return bool
+     * @see QueryBuilder::exists
+     */
+    public static function exists($column = null, $operator = null, $value = null): bool
     {
     }
 
@@ -3960,10 +3963,10 @@ class QueryBuilder
      * Replaces any previously specified restrictions, if any.
      *
      * ```php
-     * $user = wei()->db('user')->where('id = 1');
-     * $user = wei()->db('user')->where('id = ?', 1);
-     * $users = wei()->db('user')->where(array('id' => '1', 'username' => 'twin'));
-     * $users = wei()->where(array('id' => array('1', '2', '3')));
+     * $user = QueryBuilder::table('user')->where('id', 1);
+     * $users = QueryBuilder::table('user')->where('id', '>', 1);
+     * $users = QueryBuilder::table('user')->where(['id' => '1', 'username' => 'twin']);
+     * $users = QueryBuilder::table('user')->where(['id' => ['1', '2', '3']]);
      * ```
      *
      * @param array|Closure|string|null $column
@@ -4421,13 +4424,12 @@ class Redis
      * Retrieve an item
      *
      * ```php
-     * $cache = wei()->cache;
-     *
      * // Retrieve cache by key
      * $cache->get('key');
      *
      * // Custom default value
      * $cache->get('key', 'default value');
+     * ```
      *
      * @param string $key The name of item
      * @param mixed $default The default value to return when cache not exists
@@ -4884,14 +4886,16 @@ class Str
     }
 
     /**
-     * Returns a word in singular form
+     * Returns a word in singular form.
+     *
+     * The implementation is borrowed from Doctrine Inflector
      *
      * @param string $word
      * @return string
-     * @experimental will remove doctrine dependency
+     * @link https://github.com/doctrine/inflector
      * @see Str::singularize
      */
-    public static function singularize(string $word): string
+    public static function singularize($word)
     {
     }
 
@@ -7055,13 +7059,12 @@ if (0) {
          * Retrieve an item
          *
          * ```php
-         * $cache = wei()->cache;
-         *
          * // Retrieve cache by key
          * $cache->get('key');
          *
          * // Custom default value
          * $cache->get('key', 'default value');
+         * ```
          *
          * @param string $key The name of item
          * @param mixed $default The default value to return when cache not exists
@@ -7199,13 +7202,12 @@ if (0) {
          * Retrieve an item
          *
          * ```php
-         * $cache = wei()->cache;
-         *
          * // Retrieve cache by key
          * $cache->get('key');
          *
          * // Custom default value
          * $cache->get('key', 'default value');
+         * ```
          *
          * @param string $key The name of item
          * @param mixed $default The default value to return when cache not exists
@@ -7343,13 +7345,12 @@ if (0) {
          * Retrieve an item
          *
          * ```php
-         * $cache = wei()->cache;
-         *
          * // Retrieve cache by key
          * $cache->get('key');
          *
          * // Custom default value
          * $cache->get('key', 'default value');
+         * ```
          *
          * @param string $key The name of item
          * @param mixed $default The default value to return when cache not exists
@@ -7673,13 +7674,12 @@ if (0) {
          * Retrieve an item
          *
          * ```php
-         * $cache = wei()->cache;
-         *
          * // Retrieve cache by key
          * $cache->get('key');
          *
          * // Custom default value
          * $cache->get('key', 'default value');
+         * ```
          *
          * @param string $key The name of item
          * @param mixed $default The default value to return when cache not exists
@@ -7940,13 +7940,12 @@ if (0) {
          * Retrieve an item
          *
          * ```php
-         * $cache = wei()->cache;
-         *
          * // Retrieve cache by key
          * $cache->get('key');
          *
          * // Custom default value
          * $cache->get('key', 'default value');
+         * ```
          *
          * @param string $key The name of item
          * @param mixed $default The default value to return when cache not exists
@@ -9747,13 +9746,12 @@ if (0) {
          * Retrieve an item
          *
          * ```php
-         * $cache = wei()->cache;
-         *
          * // Retrieve cache by key
          * $cache->get('key');
          *
          * // Custom default value
          * $cache->get('key', 'default value');
+         * ```
          *
          * @param string $key The name of item
          * @param mixed $default The default value to return when cache not exists
@@ -9891,13 +9889,12 @@ if (0) {
          * Retrieve an item
          *
          * ```php
-         * $cache = wei()->cache;
-         *
          * // Retrieve cache by key
          * $cache->get('key');
          *
          * // Custom default value
          * $cache->get('key', 'default value');
+         * ```
          *
          * @param string $key The name of item
          * @param mixed $default The default value to return when cache not exists
@@ -10182,13 +10179,12 @@ if (0) {
          * Retrieve an item
          *
          * ```php
-         * $cache = wei()->cache;
-         *
          * // Retrieve cache by key
          * $cache->get('key');
          *
          * // Custom default value
          * $cache->get('key', 'default value');
+         * ```
          *
          * @param string $key The name of item
          * @param mixed $default The default value to return when cache not exists
@@ -10322,13 +10318,12 @@ if (0) {
          * Retrieve an item
          *
          * ```php
-         * $cache = wei()->cache;
-         *
          * // Retrieve cache by key
          * $cache->get('key');
          *
          * // Custom default value
          * $cache->get('key', 'default value');
+         * ```
          *
          * @param string $key The name of item
          * @param mixed $default The default value to return when cache not exists
@@ -10526,13 +10521,12 @@ if (0) {
          * Retrieve an item
          *
          * ```php
-         * $cache = wei()->cache;
-         *
          * // Retrieve cache by key
          * $cache->get('key');
          *
          * // Custom default value
          * $cache->get('key', 'default value');
+         * ```
          *
          * @param string $key The name of item
          * @param mixed $default The default value to return when cache not exists
@@ -10693,6 +10687,19 @@ if (0) {
          * @see QueryBuilder::all
          */
         public function all(): array
+        {
+        }
+
+        /**
+         * Check if the query has result
+         *
+         * @param mixed|null $column
+         * @param mixed|null $operator
+         * @param mixed|null $value
+         * @return bool
+         * @see QueryBuilder::exists
+         */
+        public function exists($column = null, $operator = null, $value = null): bool
         {
         }
 
@@ -10939,10 +10946,10 @@ if (0) {
          * Replaces any previously specified restrictions, if any.
          *
          * ```php
-         * $user = wei()->db('user')->where('id = 1');
-         * $user = wei()->db('user')->where('id = ?', 1);
-         * $users = wei()->db('user')->where(array('id' => '1', 'username' => 'twin'));
-         * $users = wei()->where(array('id' => array('1', '2', '3')));
+         * $user = QueryBuilder::table('user')->where('id', 1);
+         * $users = QueryBuilder::table('user')->where('id', '>', 1);
+         * $users = QueryBuilder::table('user')->where(['id' => '1', 'username' => 'twin']);
+         * $users = QueryBuilder::table('user')->where(['id' => ['1', '2', '3']]);
          * ```
          *
          * @param array|Closure|string|null $column
@@ -11400,13 +11407,12 @@ if (0) {
          * Retrieve an item
          *
          * ```php
-         * $cache = wei()->cache;
-         *
          * // Retrieve cache by key
          * $cache->get('key');
          *
          * // Custom default value
          * $cache->get('key', 'default value');
+         * ```
          *
          * @param string $key The name of item
          * @param mixed $default The default value to return when cache not exists
@@ -11863,14 +11869,16 @@ if (0) {
         }
 
         /**
-         * Returns a word in singular form
+         * Returns a word in singular form.
+         *
+         * The implementation is borrowed from Doctrine Inflector
          *
          * @param string $word
          * @return string
-         * @experimental will remove doctrine dependency
+         * @link https://github.com/doctrine/inflector
          * @see Str::singularize
          */
-        public function singularize(string $word): string
+        public function singularize($word)
         {
         }
 

@@ -30,6 +30,40 @@ class Str extends Base
     protected static $camelCache = [];
 
     /**
+     * Singular inflector rules
+     *
+     * @var array
+     */
+    protected $singularRules = [
+        '/(o|x|ch|ss|sh)es$/i' => '\1', // heroes, potatoes, tomatoes
+        '/([^aeiouy]|qu)ies$/i' => '\1y', // histories
+        '/s$/i' => '',
+    ];
+
+    /**
+     * The plural to singular array
+     *
+     * @var array
+     */
+    protected $singulars = [
+        'aliases' => 'alias',
+        'analyses' => 'analysis',
+        'buses' => 'bus',
+        'children' => 'child',
+        'cookies' => 'cookie',
+        'criteria' => 'criterion',
+        'data' => 'datum',
+        'lives' => 'life',
+        'matrices' => 'matrix',
+        'men' => 'man',
+        'menus' => 'menu',
+        'monies' => 'money',
+        'news' => 'news',
+        'people' => 'person',
+        'quizzes' => 'quiz',
+    ];
+
+    /**
      *  Returns a word in plural form
      *
      * @param string $word
@@ -43,16 +77,30 @@ class Str extends Base
     }
 
     /**
-     * Returns a word in singular form
+     * Returns a word in singular form.
+     *
+     * The implementation is borrowed from Doctrine Inflector
      *
      * @param string $word
      * @return string
-     * @experimental will remove doctrine dependency
+     * @link https://github.com/doctrine/inflector
      * @svc
      */
-    protected function singularize(string $word): string
+    protected function singularize($word)
     {
-        return $this->getInflector()->singularize($word);
+        if (isset($this->singulars[$word])) {
+            return $this->singulars[$word];
+        }
+
+        foreach ($this->singularRules as $rule => $replacement) {
+            if (preg_match($rule, $word)) {
+                $this->singulars[$word] = preg_replace($rule, $replacement, $word);
+                return $this->singulars[$word];
+            }
+        }
+
+        $this->singulars[$word] = $word;
+        return $word;
     }
 
     /**

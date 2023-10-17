@@ -72,14 +72,83 @@ final class StrTest extends TestCase
         $this->assertEquals($output, $this->str->camel($input));
     }
 
+    /**
+     * @link http://zh.wiktionary.org/zh/%E9%99%84%E5%BD%95:%E8%8B%B1%E8%AF%AD%E4%B8%8D%E8%A7%84%E5%88%99%E5%A4%8D%E6%95%B0
+     * @link https://github.com/doctrine/inflector/blob/master/tests/Doctrine/Tests/Common/Inflector/InflectorTest.php
+     */
     public function providerForSingularize()
     {
         return [
             ['test', 'test'],
-            ['tests', 'test'],
-            ['queries', 'query'],
+            ['test', 'tests'],
+            ['query', 'queries'],
             ['news', 'news'],
-            ['myLists', 'myList'],
+            ['myList', 'myLists'],
+
+            ['life', 'lives'],
+
+            ['man', 'men'],
+
+            ['child', 'children'],
+
+            ['auto', 'autos'],
+            ['memo', 'memos'],
+            ['photo', 'photos'],
+            ['piano', 'pianos'],
+            ['pro', 'pros'],
+            ['solo', 'solos'],
+            ['studio', 'studios'],
+            ['tattoo', 'tattoos'],
+            ['video', 'videos'],
+            ['zoo', 'zoos'],
+
+            ['echo', 'echoes'],
+            ['hero', 'heroes'],
+            ['potato', 'potatoes'],
+            ['tomato', 'tomatoes'],
+
+            ['zero', 'zeros'],
+            ['zero', 'zeroes'],
+
+            ['deer', 'deer'],
+            ['fish', 'fish'],
+            ['sheep', 'sheep'],
+
+            ['formula', 'formulas'],
+
+            ['datum', 'data'],
+            ['analysis', 'analyses'],
+            ['money', 'monies'],
+            ['move', 'moves'],
+            ['sex', 'sexes'],
+            ['human', 'humans'],
+
+            ['appendix', 'appendixes'],
+            ['index', 'indexes'],
+            ['matrix', 'matrixes'],
+
+            ['history', 'histories'],
+            ['information', 'information'],
+
+            ['categoria', 'categorias'],
+            ['house', 'houses'],
+            ['bus', 'buses'],
+            ['menu', 'menus'],
+            ['news', 'news'],
+            ['quiz', 'quizzes'],
+            ['matrix_row', 'matrix_rows'],
+            ['matrix', 'matrices'],
+            ['alias', 'aliases'],
+            ['Media', 'Media'],
+            ['person', 'people'],
+            ['glove', 'gloves'],
+            ['wave', 'waves'],
+            ['cafe', 'cafes'],
+            ['roof', 'roofs'],
+            ['cookie', 'cookies'],
+            ['identity', 'identities'],
+            ['criterion', 'criteria'],
+            ['', ''],
         ];
     }
 
@@ -88,7 +157,7 @@ final class StrTest extends TestCase
      * @param string $output
      * @dataProvider providerForSingularize
      */
-    public function testSingularize($input, $output)
+    public function testSingularize($output, $input)
     {
         $this->assertEquals($output, $this->str->singularize($input));
     }
