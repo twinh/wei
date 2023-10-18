@@ -14,7 +14,6 @@
     "php": ">=7.2"
   },
   "require-dev": {
-    "doctrine/inflector": "^1.4|^2.0",
     "joseph-lenton/php-error": "dev-master",
     "phpunit/phpunit": "^8",
     "miaoxing/dev": "^8.2.3"
@@ -52,8 +51,5 @@
       "miaoxing/dev": "miaoxing/dev as 8.x-dev",
       "miaoxing/phpstan-miaoxing": "miaoxing/phpstan-miaoxing as 1.x-dev"
     }
-  },
-  "suggest": {
-    "doctrine/inflector": "^1.4|^2.0 To use `Str::pluralize|singularize()`"
   }
 }

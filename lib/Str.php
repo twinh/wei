@@ -30,7 +30,7 @@ class Str extends Base
     protected static $camelCache = [];
 
     /**
-     * Singular inflector rules
+     * The singular inflector rules
      *
      * @var array
      */
@@ -64,16 +64,75 @@ class Str extends Base
     ];
 
     /**
+     * The plural inflector rules
+     *
+     * @var array
+     */
+    protected $pluralRules = [
+        '/(s)tatus$/i' => '\1\2tatuses',
+        '/(quiz)$/i' => '\1zes',
+        '/^(ox)$/i' => '\1\2en',
+        '/([m|l])ouse$/i' => '\1ice',
+        '/(x|ch|ss|sh)$/i' => '\1es',
+        '/([^aeiouy]|qu)y$/i' => '\1ies',
+        '/(hive|gulf)$/i' => '\1s',
+        '/(?:([^f])fe|([lr])f)$/i' => '\1\2ves',
+        '/sis$/i' => 'ses',
+        '/([ti])um$/i' => '\1a',
+        '/(c)riterion$/i' => '\1riteria',
+        '/(p)erson$/i' => '\1eople',
+        '/(m)an$/i' => '\1en',
+        '/(c)hild$/i' => '\1hildren',
+        '/(f)oot$/i' => '\1eet',
+        '/(buffal|her|potat|tomat|volcan)o$/i' => '\1\2oes',
+        '/(alumn|bacill|cact|foc|fung|nucle|radi|stimul|syllab|termin|vir)us$/i' => '\1i',
+        '/us$/i' => 'uses',
+        '/(alias)$/i' => '\1es',
+        '/(analys|ax|cris|test|thes)is$/i' => '\1es',
+        '/s$/' => 's',
+        '/^$/' => '',
+        '/$/' => 's',
+    ];
+
+    /**
+     * The singular to plural array
+     *
+     * @var array
+     */
+    protected $plurals = [
+        'deer' => 'deer',
+        'echo' => 'echoes',
+        'fish' => 'fish',
+        'sheep' => 'sheep',
+        'money' => 'monies',
+        'human' => 'humans',
+        'information' => 'information',
+        'cafe' => 'cafes',
+    ];
+
+    /**
      *  Returns a word in plural form
      *
      * @param string $word
      * @return string
-     * @experimental will remove doctrine dependency
+     * @link https://github.com/doctrine/inflector
      * @svc
      */
     protected function pluralize(string $word): string
     {
-        return $this->getInflector()->pluralize($word);
+        if (isset($this->plurals[$word])) {
+            return $this->plurals[$word];
+        }
+
+        foreach ($this->pluralRules as $rule => $replacement) {
+            if (preg_match($rule, $word)) {
+                $this->plurals[$word] = preg_replace($rule, $replacement, $word);
+                return $this->plurals[$word];
+            }
+        }
+
+        $this->plurals[$word] = $word;
+        return $word;
     }
 
     /**
@@ -187,10 +246,13 @@ class Str extends Base
      * Get the inflector instance.
      *
      * @return Inflector
+     * @deprecated
+     * @phpstan-ignore-next-line class not found
      */
     public function getInflector(): Inflector
     {
         if (!$this->inflector) {
+            /** @phpstan-ignore-next-line class not found */
             $this->inflector = InflectorFactory::create()->build();
         }
         return $this->inflector;

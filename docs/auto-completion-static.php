@@ -4878,7 +4878,7 @@ class Str
      *
      * @param string $word
      * @return string
-     * @experimental will remove doctrine dependency
+     * @link https://github.com/doctrine/inflector
      * @see Str::pluralize
      */
     public static function pluralize(string $word): string
@@ -11861,7 +11861,7 @@ if (0) {
          *
          * @param string $word
          * @return string
-         * @experimental will remove doctrine dependency
+         * @link https://github.com/doctrine/inflector
          * @see Str::pluralize
          */
         public function pluralize(string $word): string

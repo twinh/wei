@@ -169,6 +169,69 @@ final class StrTest extends TestCase
             ['query', 'queries'],
             ['news', 'news'],
             ['myList', 'myLists'],
+
+            ['life', 'lives'],
+
+            ['man', 'men'],
+
+            ['child', 'children'],
+
+            ['auto', 'autos'],
+            ['memo', 'memos'],
+            ['photo', 'photos'],
+            ['piano', 'pianos'],
+            ['pro', 'pros'],
+            ['solo', 'solos'],
+            ['studio', 'studios'],
+            ['tattoo', 'tattoos'],
+            ['video', 'videos'],
+            ['zoo', 'zoos'],
+
+            ['echo', 'echoes'],
+            ['hero', 'heroes'],
+            ['potato', 'potatoes'],
+            ['tomato', 'tomatoes'],
+
+            ['zero', 'zeros'],
+
+            ['deer', 'deer'],
+            ['fish', 'fish'],
+            ['sheep', 'sheep'],
+
+            ['formula', 'formulas'],
+
+            ['datum', 'data'],
+            ['analysis', 'analyses'],
+            ['money', 'monies'],
+            ['move', 'moves'],
+            ['sex', 'sexes'],
+            ['human', 'humans'],
+
+            ['appendix', 'appendixes'],
+            ['index', 'indexes'],
+
+            ['history', 'histories'],
+            ['information', 'information'],
+
+            ['categoria', 'categorias'],
+            ['house', 'houses'],
+            ['bus', 'buses'],
+            ['menu', 'menus'],
+            ['news', 'news'],
+            ['quiz', 'quizzes'],
+            ['matrix_row', 'matrix_rows'],
+            ['matrix', 'matrixes'], // matrices or matrixes, default to matrixes
+            ['alias', 'aliases'],
+            ['Media', 'Medias'], // media or medias, default to medias
+            ['person', 'people'],
+            ['glove', 'gloves'],
+            ['wave', 'waves'],
+            ['cafe', 'cafes'],
+            ['roof', 'roofs'],
+            ['cookie', 'cookies'],
+            ['identity', 'identities'],
+            ['criterion', 'criteria'],
+            ['', ''],
         ];
     }
 
