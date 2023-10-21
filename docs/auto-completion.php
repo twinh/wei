@@ -297,7 +297,7 @@ class GravatarPropMixin
 
 /**
  * @property    Wei\Http $http An HTTP client that inspired by jQuery Ajax
- * @method      Wei\Http http($url = null, $options = []) Create a new HTTP object and execute
+ * @method      Wei\Http http($url = null, $options = []) Execute the request
  */
 class HttpMixin
 {

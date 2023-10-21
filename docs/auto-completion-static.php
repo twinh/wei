@@ -1031,12 +1031,72 @@ class Http
     /**
      * Create a new HTTP object and execute
      *
-     * @param array|string $url A options array or the request URL
+     * @param array|string|null $url A options array or the request URL
      * @param array $options A options array if the first parameter is string
      * @return $this A new HTTP object
      * @see Http::request
      */
     public static function request($url = null, array $options = []): self
+    {
+    }
+
+    /**
+     * Execute a GET method request
+     *
+     * @param string|array|null $url
+     * @param array $options
+     * @return $this
+     * @see Http::get
+     */
+    public static function get($url = null, array $options = []): self
+    {
+    }
+
+    /**
+     * Execute a POST method request
+     *
+     * @param string|array|null $url
+     * @param array $options
+     * @return $this
+     * @see Http::post
+     */
+    public static function post($url = null, array $options = []): self
+    {
+    }
+
+    /**
+     * Execute a PUT method request
+     *
+     * @param string|array|null $url
+     * @param array $options
+     * @return $this
+     * @see Http::put
+     */
+    public static function put($url = null, array $options = []): self
+    {
+    }
+
+    /**
+     * Execute a DELETE method request
+     *
+     * @param string|array|null $url
+     * @param array $options
+     * @return $this
+     * @see Http::delete
+     */
+    public static function delete($url = null, array $options = []): self
+    {
+    }
+
+    /**
+     * Execute a PATCH method request
+     *
+     * @param string|array|null $url
+     * @param array $options
+     * @return $this
+     * @see Http::patch
+     */
+    public static function patch($url = null, array $options = []): self
     {
     }
 
@@ -8026,12 +8086,72 @@ if (0) {
         /**
          * Create a new HTTP object and execute
          *
-         * @param array|string $url A options array or the request URL
+         * @param array|string|null $url A options array or the request URL
          * @param array $options A options array if the first parameter is string
          * @return $this A new HTTP object
          * @see Http::request
          */
         public function request($url = null, array $options = []): self
+        {
+        }
+
+        /**
+         * Execute a GET method request
+         *
+         * @param string|array|null $url
+         * @param array $options
+         * @return $this
+         * @see Http::get
+         */
+        public function get($url = null, array $options = []): self
+        {
+        }
+
+        /**
+         * Execute a POST method request
+         *
+         * @param string|array|null $url
+         * @param array $options
+         * @return $this
+         * @see Http::post
+         */
+        public function post($url = null, array $options = []): self
+        {
+        }
+
+        /**
+         * Execute a PUT method request
+         *
+         * @param string|array|null $url
+         * @param array $options
+         * @return $this
+         * @see Http::put
+         */
+        public function put($url = null, array $options = []): self
+        {
+        }
+
+        /**
+         * Execute a DELETE method request
+         *
+         * @param string|array|null $url
+         * @param array $options
+         * @return $this
+         * @see Http::delete
+         */
+        public function delete($url = null, array $options = []): self
+        {
+        }
+
+        /**
+         * Execute a PATCH method request
+         *
+         * @param string|array|null $url
+         * @param array $options
+         * @return $this
+         * @see Http::patch
+         */
+        public function patch($url = null, array $options = []): self
         {
         }
 

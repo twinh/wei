@@ -303,7 +303,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Create a new HTTP object and execute
      *
-     * @param array|string $url A options array or the request URL
+     * @param array|string|null $url A options array or the request URL
      * @param array $options A options array if the first parameter is string
      * @return $this A new HTTP object
      */
@@ -312,7 +312,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         // Merge and set options
         if (is_array($url)) {
             $options = $url;
-        } else {
+        } elseif ($url) {
             $options['url'] = $url;
         }
         $options = $options + $this->defaultOptions;
@@ -546,19 +546,6 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
-     * Execute a GET method request
-     *
-     * @param string $url
-     * @param array $data
-     * @param string $dataType
-     * @return $this
-     */
-    public function get($url, $data = [], $dataType = null)
-    {
-        return $this->processMethod($url, $data, $dataType, 'GET');
-    }
-
-    /**
      * Execute a GET method request and parser response data to JSON array
      *
      * @param string $url
@@ -583,19 +570,6 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
-     * Execute a POST method request
-     *
-     * @param string $url
-     * @param array $data
-     * @param string $dataType
-     * @return $this
-     */
-    public function post($url, $data = [], $dataType = null)
-    {
-        return $this->processMethod($url, $data, $dataType, 'POST');
-    }
-
-    /**
      * Execute a POST method request and parser response data to JSON array
      *
      * @param string $url
@@ -605,45 +579,6 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function postJson($url, $data = [])
     {
         return $this->processMethod($url, $data, 'json', 'POST');
-    }
-
-    /**
-     * Execute a PUT method request
-     *
-     * @param string $url
-     * @param array $data
-     * @param string $dataType
-     * @return $this
-     */
-    public function put($url, $data = [], $dataType = null)
-    {
-        return $this->processMethod($url, $data, $dataType, 'PUT');
-    }
-
-    /**
-     * Execute a DELETE method request
-     *
-     * @param string $url
-     * @param array $data
-     * @param string $dataType
-     * @return $this
-     */
-    public function delete($url, $data = [], $dataType = null)
-    {
-        return $this->processMethod($url, $data, $dataType, 'DELETE');
-    }
-
-    /**
-     * Execute a PATCH method request
-     *
-     * @param string $url
-     * @param array $data
-     * @param string $dataType
-     * @return $this
-     */
-    public function patch($url, $data = [], $dataType = null)
-    {
-        return $this->processMethod($url, $data, $dataType, 'PATCH');
     }
 
     public function upload($url, $data = [], $dataType = null)
@@ -766,7 +701,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Create a new HTTP object and execute
      *
-     * @param array|string $url A options array or the request URL
+     * @param array|string|null $url A options array or the request URL
      * @param array $options A options array if the first parameter is string
      * @return $this A new HTTP object
      * @svc
@@ -774,6 +709,71 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     protected function request($url = null, array $options = []): self
     {
         return $this->__invoke($url, $options);
+    }
+
+    /**
+     * Execute a GET method request
+     *
+     * @param string|array|null $url
+     * @param array $options
+     * @return $this
+     * @svc
+     */
+    protected function get($url = null, array $options = []): self
+    {
+        return $this->request($url, $options);
+    }
+
+    /**
+     * Execute a POST method request
+     *
+     * @param string|array|null $url
+     * @param array $options
+     * @return $this
+     * @svc
+     */
+    protected function post($url = null, array $options = []): self
+    {
+        return $this->setMethod('POST')->request($url, $options);
+    }
+
+    /**
+     * Execute a PUT method request
+     *
+     * @param string|array|null $url
+     * @param array $options
+     * @return $this
+     * @svc
+     */
+    protected function put($url = null, array $options = []): self
+    {
+        return $this->setMethod('PUT')->request($url, $options);
+    }
+
+    /**
+     * Execute a DELETE method request
+     *
+     * @param string|array|null $url
+     * @param array $options
+     * @return $this
+     * @svc
+     */
+    protected function delete($url = null, array $options = []): self
+    {
+        return $this->setMethod('DELETE')->request($url, $options);
+    }
+
+    /**
+     * Execute a PATCH method request
+     *
+     * @param string|array|null $url
+     * @param array $options
+     * @return $this
+     * @svc
+     */
+    protected function patch($url = null, array $options = []): self
+    {
+        return $this->setMethod('PATCH')->request($url, $options);
     }
 
     /**

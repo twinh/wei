@@ -686,8 +686,14 @@ final class HttpTest extends TestCase
     public function testAliasMethod($method)
     {
         /** @var $http Http */
-        $http = $this->http->{strtolower($method)}($this->url . '?test=methods', [], 'jsonObject');
-        $this->assertEquals($method, $http->getResponse()->method);
+        $http = $this->http->{strtolower($method)}('https://httpbin.org/' . strtolower($method), [
+            'dataType' => 'jsonObject',
+            'data' => [
+                'method' => $method,
+            ],
+        ]);
+        $response = $http->getResponse();
+        $this->assertSame($method, $response->args->method ?? $response->form->method);
         $this->assertTrue($http->isSuccess());
     }
 
