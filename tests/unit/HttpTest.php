@@ -1062,4 +1062,37 @@ final class HttpTest extends TestCase
         $this->assertRetSuc($ret);
         $this->assertSame('b', $ret['args']['a']);
     }
+
+    /**
+     * @dataProvider providerForParams
+     * @param string $url
+     * @param array $params
+     * @param string $result
+     */
+    public function testParams(string $url, array $params, string $result)
+    {
+        $http = $this->http->get([
+            'url' => $url,
+            'dataType' => 'json',
+            'params' => $params,
+        ]);
+        $response = $http->getResponse();
+        $this->assertSame($result, $response['url']);
+    }
+
+    public function providerForParams(): array
+    {
+        return [
+            [
+                'https://httpbin.org/get',
+                ['a' => 'b'],
+                'https://httpbin.org/get?a=b',
+            ],
+            [
+                'https://httpbin.org/get?a=b',
+                ['c' => 'd'],
+                'https://httpbin.org/get?a=b&c=d',
+            ],
+        ];
+    }
 }

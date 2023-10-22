@@ -56,6 +56,13 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     protected $cookies = [];
 
     /**
+     * The data append to the URL
+     *
+     * @var array|string
+     */
+    protected $params = [];
+
+    /**
      * The data to send to the server
      *
      * @var array|string
@@ -830,16 +837,16 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
                 $opts[\CURLOPT_CUSTOMREQUEST] = $this->method;
         }
 
+        if ($this->params) {
+            $url = $this->appendParams($url, $this->params);
+        }
+
         if ($this->data) {
             $data = is_string($this->data) ? $this->data : http_build_query($this->data);
             if ($postData) {
                 $opts[\CURLOPT_POSTFIELDS] = $data;
             } else {
-                if (false === strpos($url, '?')) {
-                    $url .= '?' . $data;
-                } else {
-                    $url .= '&' . $data;
-                }
+                $url = $this->appendParams($url, $data);
             }
         }
 
@@ -1078,5 +1085,18 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             'dataType' => $dataType,
             'data' => $data,
         ]);
+    }
+
+    /**
+     * @param string $url
+     * @param array|string $params
+     * @return string
+     */
+    protected function appendParams(string $url, $params): string
+    {
+        if (!is_string($params)) {
+            $params = http_build_query($params);
+        }
+        return $url . ((false === strpos($url, '?')) ? '?' : '&') . $params;
     }
 }
