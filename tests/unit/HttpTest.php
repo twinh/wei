@@ -1095,4 +1095,16 @@ final class HttpTest extends TestCase
             ],
         ];
     }
+
+    public function testDetectJson()
+    {
+        $http = $this->http->get([
+            'url' => 'https://httpbin.org/get',
+        ]);
+        $this->assertSame('application/json', $http->getResponseHeader('CONTENT-TYPE'));
+
+        $response = $http->getResponse();
+        $this->assertIsArray($response);
+        $this->assertSame('https://httpbin.org/get', $response['url']);
+    }
 }

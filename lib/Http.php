@@ -121,9 +121,9 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * The data type could by `json`, `jsonObject`, `xml`, `query`(URL query string),
      * `serialize` and `text`
      *
-     * @var string
+     * @var string|null
      */
-    protected $dataType = 'text';
+    protected $dataType;
 
     /**
      * The custom HTTP referer string
@@ -999,10 +999,15 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     protected function parseResponse($data, &$exception)
     {
-        switch ($this->dataType) {
+        $dataType = $this->dataType;
+        if (!$dataType && 'application/json' === $this->getResponseHeader('CONTENT-TYPE')) {
+            $dataType = 'json';
+        }
+
+        switch ($dataType) {
             case 'json':
             case 'jsonObject':
-                $result = json_decode($data, 'json' === $this->dataType);
+                $result = json_decode($data, 'json' === $dataType);
                 if (null === $result && \JSON_ERROR_NONE != json_last_error()) {
                     $exception = new \ErrorException('JSON parsing error, the data is ' . $data, json_last_error());
                 }
