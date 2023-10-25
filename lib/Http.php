@@ -25,6 +25,11 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     private const NOT_MODIFIED = 304;
 
     /**
+     * {@inheritdoc}
+     */
+    protected static $createNewInstance = true;
+
+    /**
      * The request URL
      *
      * @var string
@@ -75,14 +80,6 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @var array
      */
     protected $files = [];
-
-    /**
-     * Whether use the global options in `$wei->http` object when create a
-     * new object
-     *
-     * @var bool
-     */
-    protected $global = false;
 
     /**
      * A key-value array to store request headers
@@ -275,28 +272,6 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     protected $leftRetries;
 
     /**
-     * The default options of current object
-     *
-     * @var array
-     */
-    private $defaultOptions;
-
-    /**
-     * Constructor
-     *
-     * @param array $options
-     */
-    public function __construct(array $options = [])
-    {
-        // Merges options from default HTTP service
-        if (isset($options['global']) && true === $options['global']) {
-            $options += (array) $options['wei']->getConfig('http');
-        }
-        parent::__construct($options);
-        $this->defaultOptions = $options;
-    }
-
-    /**
      * Close the cURL session
      */
     public function __destruct()
@@ -308,7 +283,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
-     * Create a new HTTP object and execute
+     * Execute the request
      *
      * @param array|string|null $url A options array or the request URL
      * @param array $options A options array if the first parameter is string
@@ -322,12 +297,9 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         } elseif ($url) {
             $options['url'] = $url;
         }
-        $options = $options + $this->defaultOptions;
-
-        $http = new static($options);
-        $http->execute();
-
-        return $http;
+        $this->setOption($options);
+        $this->execute();
+        return $this;
     }
 
     /**

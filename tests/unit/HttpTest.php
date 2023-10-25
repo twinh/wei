@@ -723,54 +723,6 @@ final class HttpTest extends TestCase
         $this->assertTriggeredEvents(['error']);
     }
 
-    public function testGlobal()
-    {
-        $this->wei->setConfig([
-            'http' => [
-                'method' => 'post',
-            ],
-            'global:http' => [
-                'global' => true,
-            ],
-            'notGlobal:http' => [
-                'global' => false,
-            ],
-        ]);
-
-        $http = $this->wei->globalHttp([
-            'url' => $this->url . '?test=methods',
-            'global' => true,
-            'dataType' => 'jsonObject',
-            'data' => [
-                'k' => 'v',
-            ],
-            'success' => function ($data) {
-                $this->triggeredEvents[] = 'success';
-                $this->assertEquals('POST', $data->method);
-            },
-        ]);
-        $this->assertTrue($http->isSuccess());
-        $this->assertTriggeredEvents(['success']);
-
-        $this->triggeredEvents = [];
-        $http = $this->wei->notGlobalHttp([
-            'url' => $this->url . '?test=methods',
-            'dataType' => 'jsonObject',
-            'global' => false,
-            'success' => function ($data) {
-                $this->triggeredEvents[] = 'success';
-                $this->assertEquals('GET', $data->method);
-            },
-        ]);
-        $this->assertTrue($http->isSuccess());
-        $this->assertTriggeredEvents(['success']);
-
-        // reset method
-        $this->wei->setConfig('http', [
-            'method' => 'get',
-        ]);
-    }
-
     public function testStringAsData()
     {
         $http = $this->http([
@@ -945,8 +897,9 @@ final class HttpTest extends TestCase
 
     public function testSetCurlOption()
     {
-        $this->http->setCurlOption(\CURLOPT_HEADER, 1);
-        $this->assertEquals(1, $this->http->getCurlOption(\CURLOPT_HEADER));
+        $http = $this->http;
+        $http->setCurlOption(\CURLOPT_HEADER, 1);
+        $this->assertEquals(1, $http->getCurlOption(\CURLOPT_HEADER));
     }
 
     public function assertTriggeredEvents($events)
@@ -1106,5 +1059,10 @@ final class HttpTest extends TestCase
         $response = $http->getResponse();
         $this->assertIsArray($response);
         $this->assertSame('https://httpbin.org/get', $response['url']);
+    }
+
+    public function testNewInstance()
+    {
+        $this->assertNotSame(Http::instance(), Http::instance());
     }
 }
