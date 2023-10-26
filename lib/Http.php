@@ -75,6 +75,13 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     protected $data = [];
 
     /**
+     * The json data to send to the server
+     *
+     * @var array
+     */
+    protected $json = [];
+
+    /**
      * The files send to the server
      *
      * @var array
@@ -820,6 +827,11 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             } else {
                 $url = $this->appendParams($url, $data);
             }
+        }
+
+        if ($this->json) {
+            $opts[\CURLOPT_POSTFIELDS] = json_encode($this->json, \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE);
+            $this->headers['Content-Type'] = 'application/json';
         }
 
         if ($this->files) {

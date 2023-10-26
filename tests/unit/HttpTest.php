@@ -1053,6 +1053,7 @@ final class HttpTest extends TestCase
     {
         $http = $this->http->get([
             'url' => 'https://httpbin.org/get',
+            'ip' => false,
         ]);
         $this->assertSame('application/json', $http->getResponseHeader('CONTENT-TYPE'));
 
@@ -1064,5 +1065,17 @@ final class HttpTest extends TestCase
     public function testNewInstance()
     {
         $this->assertNotSame(Http::instance(), Http::instance());
+    }
+
+    public function testJson()
+    {
+        $http = Http::post([
+            'url' => 'https://httpbin.org/post',
+            'json' => [
+                'a' => 'b',
+            ],
+        ]);
+        $this->assertSame('application/json', $http['headers']['Content-Type']);
+        $this->assertSame('b', $http['json']['a']);
     }
 }
