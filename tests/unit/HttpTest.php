@@ -162,8 +162,6 @@ final class HttpTest extends TestCase
             [
                 [
                     'url' => 'http://404.php.net/',
-                    // set ip to null to enable dns lookup
-                    'ip' => null,
                 ],
                 null,
             ],
@@ -175,7 +173,6 @@ final class HttpTest extends TestCase
         try {
             $this->http([
                 'url' => 'http://httpbin.org/status/404',
-                'ip' => false,
                 'header' => true,
                 'throwException' => true,
             ]);
@@ -190,7 +187,6 @@ final class HttpTest extends TestCase
 
         $this->http([
             'url' => 'http://httpbin.org/status/404',
-            'ip' => false,
             'header' => false,
             'throwException' => true,
         ]);
@@ -200,7 +196,6 @@ final class HttpTest extends TestCase
     {
         $http = $this->http([
             'url' => 'http://httpbin.org/headers',
-            'ip' => false,
             'dataType' => 'json',
             'headers' => [
                 'Key' => 'Value',
@@ -288,7 +283,6 @@ final class HttpTest extends TestCase
     {
         $http = $this->http([
             'url' => 'http://httpbin.org/ip',
-            'ip' => false,
             'dataType' => 'jsonObject',
             'success' => function ($data) {
                 $this->triggeredEvents[] = 'success';
@@ -451,7 +445,6 @@ final class HttpTest extends TestCase
     {
         $http = $this->wei->newInstance('http')->__invoke([
             'url' => 'http://httpbin.org/user-agent',
-            'ip' => false,
             'userAgent' => 'Test',
             'dataType' => 'json',
             'success' => function ($data) {
@@ -465,7 +458,6 @@ final class HttpTest extends TestCase
         $this->triggeredEvents = [];
         $http = $this->http([
             'url' => 'http://httpbin.org/user-agent',
-            'ip' => false,
             'userAgent' => false,
             'dataType' => 'json',
             'success' => function ($data) {
@@ -482,7 +474,6 @@ final class HttpTest extends TestCase
         $referer = 'http://google.com';
         $http = $this->http([
             'url' => 'http://httpbin.org/headers',
-            'ip' => false,
             'referer' => $referer,
             'dataType' => 'json',
             'success' => function ($data) use ($referer) {
@@ -498,7 +489,6 @@ final class HttpTest extends TestCase
     {
         $http = $this->http([
             'url' => 'http://httpbin.org/headers',
-            'ip' => false,
             'referer' => true, // Equals to current request URL
             'dataType' => 'json',
             'success' => function ($data) {
@@ -598,15 +588,18 @@ final class HttpTest extends TestCase
 
     public function testPost()
     {
-        $data = [
-            'key' => 'value',
-            'post' => true,
-        ];
-        /** @var $http \Wei\Http */
-        $http = $this->wei->newInstance('http', ['ip' => false])->post('http://httpbin.org/post', $data, 'jsonObject');
+        $http = $this->http->post([
+            'url' => 'https://httpbin.org/post',
+            'dataType' => 'jsonObject',
+            'data' => [
+                'key' => 'value',
+                'post' => true,
+            ],
+        ]);
 
         $data = $http->getResponse();
         $this->assertTrue($http->isSuccess());
+
         $this->assertEquals('value', $data->form->key);
         $this->assertEquals('1', $data->form->post);
     }
@@ -788,6 +781,18 @@ final class HttpTest extends TestCase
             'ip' => '8.8.8.8',
         ]);
         $this->assertEquals('8.8.8.8', $http->getIp());
+    }
+
+    public function testIp()
+    {
+        $http = $this->http->get([
+            'url' => $this->url . '?type=json',
+            'ip' => '127.0.0.1',
+        ]);
+        $this->assertTrue($http->isSuccess());
+
+        // URL replaced to ip
+        $this->assertStringContainsString('127.0.0.1', $http->getCurlOption(\CURLOPT_URL));
     }
 
     public function testGetData()
@@ -979,7 +984,6 @@ final class HttpTest extends TestCase
     {
         $http = $this->http->request([
             'url' => 'https://httpbin.org/get?a=b',
-            'ip' => false,
             'dataType' => 'json',
         ]);
         $ret = $http->toRet(['c' => 'd']);
@@ -994,7 +998,6 @@ final class HttpTest extends TestCase
     {
         $http = $this->http->request([
             'url' => 'https://httpbin.org/status/404',
-            'ip' => false,
             'header' => true,
             'throwException' => false,
         ]);
@@ -1008,7 +1011,6 @@ final class HttpTest extends TestCase
     {
         $ret = $this->http->requestRet([
             'url' => 'https://httpbin.org/get?a=b',
-            'ip' => false,
             'dataType' => 'json',
         ]);
 
@@ -1053,7 +1055,6 @@ final class HttpTest extends TestCase
     {
         $http = $this->http->get([
             'url' => 'https://httpbin.org/get',
-            'ip' => false,
         ]);
         $this->assertSame('application/json', $http->getResponseHeader('CONTENT-TYPE'));
 
