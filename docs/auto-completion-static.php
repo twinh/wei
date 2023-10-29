@@ -1029,6 +1029,17 @@ class Gravatar
 class Http
 {
     /**
+     * Set URL of the current request
+     *
+     * @param string $url
+     * @return $this
+     * @see Http::url
+     */
+    public static function url(string $url): self
+    {
+    }
+
+    /**
      * Create a new HTTP object and execute
      *
      * @param array|string|null $url A options array or the request URL
@@ -8083,6 +8094,17 @@ if (0) {
 
     class Http
     {
+        /**
+         * Set URL of the current request
+         *
+         * @param string $url
+         * @return $this
+         * @see Http::url
+         */
+        public function url(string $url): self
+        {
+        }
+
         /**
          * Create a new HTTP object and execute
          *

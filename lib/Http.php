@@ -685,6 +685,67 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
+     * Set request method
+     *
+     * @param string $method
+     * @return $this
+     */
+    public function method(string $method): self
+    {
+        $this->setMethod($method);
+        return $this;
+    }
+
+    /**
+     * Set the data to send to the server
+     *
+     * @param array|string $data
+     * @return $this
+     */
+    public function data($data): self
+    {
+        $this->data = $data;
+        return $this;
+    }
+
+    /**
+     * The json data to send to the server
+     *
+     * @param array|\JsonSerializable $json
+     * @return $this
+     */
+    public function json($json): self
+    {
+        $this->json = $json;
+        return $this;
+    }
+
+    /**
+     * Set the data append to the URL
+     *
+     * @param array|string $params
+     * @return $this
+     */
+    public function params($params): self
+    {
+        $this->params = $params;
+        return $this;
+    }
+
+    /**
+     * Set URL of the current request
+     *
+     * @param string $url
+     * @return $this
+     * @svc
+     */
+    protected function url(string $url): self
+    {
+        $this->url = $url;
+        return $this;
+    }
+
+    /**
      * Create a new HTTP object and execute
      *
      * @param array|string|null $url A options array or the request URL

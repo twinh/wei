@@ -1079,4 +1079,16 @@ final class HttpTest extends TestCase
         $this->assertSame('application/json', $http['headers']['Content-Type']);
         $this->assertSame('b', $http['json']['a']);
     }
+
+    public function testUrl()
+    {
+        $http = Http::url('https://httpbin.org/post')
+            ->params(['a' => 'b'])
+            ->json(['e' => 'f'])
+            ->method('POST')
+            ->request();
+
+        $this->assertSame('b', $http['args']['a']);
+        $this->assertSame('f', $http['json']['e']);
+    }
 }
