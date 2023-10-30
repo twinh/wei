@@ -630,9 +630,7 @@ class Res extends Base
      */
     public function json($data, $jsonp = false)
     {
-        $options = 0;
-        defined('JSON_UNESCAPED_UNICODE') && $options = \JSON_UNESCAPED_UNICODE;
-        $content = json_encode($data, $options);
+        $content = json_encode($data, \JSON_UNESCAPED_UNICODE);
 
         if ($jsonp && 1 === preg_match('/^[$A-Z_][0-9A-Z_$.]*$/i', $this->request['callback'])) {
             $this->setHeader('Content-Type', 'application/javascript');
