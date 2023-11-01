@@ -112,9 +112,11 @@ final class DefaultScopeTraitTest extends TestCase
     public function testScopeWithClosure()
     {
         $scope = TestDefaultScope::where(function (TestDefaultScope $defaultScope) {
-            $defaultScope->unscoped();
             $defaultScope->where('name', 'test');
         });
+
+        $this->assertStringNotContainsString('(`active` = 1', $scope->getRawSql());
+
         $this->assertStringContainsString(
             "WHERE `active` = 1 AND `type` = 'A' AND (`name` = 'test')",
             $scope->getRawSql()

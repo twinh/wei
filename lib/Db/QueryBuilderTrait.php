@@ -1616,6 +1616,8 @@ trait QueryBuilderTrait
                 'wei' => $this->wei,
                 'db' => $this->getDb(),
                 'table' => $this->getTable(),
+                // NOTE: Remove default scopes for model
+                'withoutScopes' => true,
             ]);
             $column($query);
             $column = $query;
