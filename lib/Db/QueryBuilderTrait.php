@@ -1619,7 +1619,7 @@ trait QueryBuilderTrait
             ]);
             $column($query);
             $column = $query;
-            $this->addQueryParams($query->getQueryParams());
+            $value = $query->getQueryParams();
         }
 
         if (is_array($value) && !in_array($operator, ['BETWEEN', 'NOT BETWEEN'], true)) {
@@ -1629,10 +1629,9 @@ trait QueryBuilderTrait
         $this->addQueryPart('where', compact('column', 'operator', 'value', 'condition', 'type'), true);
 
         // Ignore params when
-        // 1. query is closure
-        // 2. operator is NULL or NOT NULL
-        // 3. params are not passed
-        if (!$isClosure && !in_array($operator, ['NULL', 'NOT NULL'], true) && func_num_args() > 2) {
+        // 1. operator is NULL or NOT NULL
+        // 2. params are not passed
+        if (!in_array($operator, ['NULL', 'NOT NULL'], true) && func_num_args() > 2) {
             $this->addQueryParam(null === $value ? [null] : $value);
         }
 

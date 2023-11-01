@@ -154,6 +154,19 @@ final class QueryBuilderTest extends TestCase
         ]), $sql);
     }
 
+    public function testWhereClosureWithNullParams()
+    {
+        $sql = Qb::table('test_users')
+            ->where(function (Qb $qb) {
+                $qb->where('email', null);
+            })
+            ->getRawSql();
+        $this->assertEquals(implode(' ', [
+            'SELECT * FROM `p_test_users`',
+            'WHERE (`email` = NULL)',
+        ]), $sql);
+    }
+
     public function testWhereIgnoreNullColumn()
     {
         $this->initFixtures();
