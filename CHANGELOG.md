@@ -1,3 +1,35 @@
+# [0.16.0](https://github.com/twinh/wei/compare/v0.15.12...v0.16.0) (2023-11-02)
+
+
+### Bug Fixes
+
+* **QueryBuilder:** `where(Closure)` 生成的语句参数顺序错误 ([9b743a1](https://github.com/twinh/wei/commit/9b743a1792262e9fa346262413925d9078a249a1))
+* **QueryBuilder:** `where(Closure)` 生成的语句排除默认范围查询 ([4255288](https://github.com/twinh/wei/commit/425528877b0d8129345a364940e81d6166f4bf00))
+
+
+### Code Refactoring
+
+* **Http:** 改为每次调用都创建一个新的对象 ([94add7a](https://github.com/twinh/wei/commit/94add7af395bcdd1195a404a21d5c8c7b6a2e39f))
+
+
+### Features
+
+* **Http:** 允许通过 `url` 方法初始化服务，并通过 `params`， `json` 等方法链式调用 ([b6d6c0a](https://github.com/twinh/wei/commit/b6d6c0a8cbdf7f08d8c58f45a4f566c2f5e293d3))
+* **Http:** 允许静态调用 `get`，`post`，`put`，`delete`，`patch` 方法 ([3e16dc6](https://github.com/twinh/wei/commit/3e16dc6eeb696d6998032a7b5b57dc34f775e232))
+* **Http:** 增加 `params` 用于向 URL 增加参数 ([ccc5161](https://github.com/twinh/wei/commit/ccc516122ccef3bf83cfdfc577e8a4f8256b14de))
+* **Http:** 如果返回内容是 `application/json`，则自动解析返回内容为 JSON 数组，而不是返回纯文本 ([49adca1](https://github.com/twinh/wei/commit/49adca198f1fdbecf26a7638eaa39fc516f8822b))
+* **Http:** 支持传入 `json` 来发送 json 数据 ([8052cd6](https://github.com/twinh/wei/commit/8052cd6f9fa1c2c6dc9dfdfbc7ef4cc3608544a3))
+* **Str:** 使用自定义的 `pluralize` 方法，移除 `doctrine/inflector` 依赖 ([6188a93](https://github.com/twinh/wei/commit/6188a93996c1f7365dddcf6bd225ca95e43871fe))
+* **Str:** 使用自定义的 `singularize` 方法，移除 `doctrine/inflector` 依赖 ([63b8335](https://github.com/twinh/wei/commit/63b83350bcb7beaae3f2f443b91da07f293f5946))
+
+
+### BREAKING CHANGES
+
+* **Http:** `Http` 服务移除 `global` 选项
+* **Http:** `Http` 服务如果返回内容是 `application/json`，则自动解析返回内容为 JSON 数组，而不是返回纯文本
+* **Http:** `get`，`post`，`put`，`delete`，`patch` 参数更新为 `($url = null, array $options = []): self`
+* **Str:** 使用自定义的 `singularize` 方法，移除 `doctrine/inflector` 依赖
+
 ## [0.15.12](https://github.com/twinh/wei/compare/v0.15.11...v0.15.12) (2023-09-30)
 
 
