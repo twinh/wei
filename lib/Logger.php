@@ -422,7 +422,7 @@ class Logger extends Base
         $content = str_replace([
             '%datetime%', '%namespace%', '%level%', '%message%',
         ], [
-            date($this->dateFormat, microtime(true)),
+            date($this->dateFormat, time()),
             $this->namespace,
             strtoupper($level),
             $message,
