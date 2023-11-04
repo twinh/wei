@@ -598,7 +598,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param string $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return is_array($this->response) && array_key_exists($offset, $this->response);
     }
@@ -609,6 +609,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param string $offset
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->response[$offset]) ? $this->response[$offset] : null;
@@ -620,7 +621,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param string $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->response[$offset] = $value;
     }
@@ -630,7 +631,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param string $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->response[$offset]);
     }
@@ -640,7 +641,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @return int the length of data
      */
-    public function count()
+    public function count(): int
     {
         return count($this->response);
     }
@@ -650,7 +651,7 @@ class Http extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @return \ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->response);
     }

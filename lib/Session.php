@@ -9,6 +9,8 @@
 
 namespace Wei;
 
+use ReturnTypeWillChange;
+
 /**
  * A service that handles session data ($_SESSION)
  *
@@ -200,7 +202,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * @param  string $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return array_key_exists($offset, $this->data);
     }
@@ -211,6 +213,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * @param  string $offset
      * @return mixed
      */
+    #[ReturnTypeWillChange]
     public function &offsetGet($offset)
     {
         return $this->data[$offset];
@@ -222,7 +225,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * @param string $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->data[$offset] = $value;
     }
@@ -232,7 +235,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      *
      * @param string $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->data[$offset]);
     }
@@ -242,7 +245,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      *
      * @return int the length of data
      */
-    public function count()
+    public function count(): int
     {
         return count($this->data);
     }
@@ -252,7 +255,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      *
      * @return \ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->data);
     }

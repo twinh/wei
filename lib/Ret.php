@@ -3,6 +3,7 @@
 namespace Wei;
 
 use InvalidArgumentException;
+use ReturnTypeWillChange;
 use Wei\Ret\RetException;
 
 /**
@@ -376,6 +377,7 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
     /**
      * {@inheritdoc}
      */
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->data;
@@ -384,7 +386,7 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return array_key_exists($offset, $this->data);
     }
@@ -392,6 +394,7 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
     /**
      * {@inheritdoc}
      */
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->data[$offset];
@@ -400,7 +403,7 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->data[$offset] = $value;
     }
@@ -408,7 +411,7 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->data[$offset]);
     }

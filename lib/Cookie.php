@@ -9,6 +9,8 @@
 
 namespace Wei;
 
+use ReturnTypeWillChange;
+
 /**
  * A service that handles the HTTP request and response cookies
  *
@@ -127,7 +129,7 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
      * @param  string $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return array_key_exists($offset, $this->data);
     }
@@ -138,6 +140,7 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
      * @param  string $offset
      * @return mixed
      */
+    #[ReturnTypeWillChange]
     public function &offsetGet($offset)
     {
         return $this->data[$offset];
@@ -148,22 +151,22 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
      *
      * @param string $offset
      * @param mixed  $value
-     * @return mixed
+     * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
-        return $this->data[$offset] = $value;
+        $this->data[$offset] = $value;
     }
 
     /**
      * Unset the offset
      *
      * @param string $offset
-     * @return $this
+     * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
-        return $this->remove($offset);
+        $this->remove($offset);
     }
 
     /**
@@ -171,7 +174,7 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
      *
      * @return \ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->data);
     }

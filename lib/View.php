@@ -9,6 +9,8 @@
 
 namespace Wei;
 
+use ReturnTypeWillChange;
+
 /**
  * A service that use to render PHP template
  *
@@ -270,7 +272,7 @@ class View extends Base implements \ArrayAccess
      * @param  string $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return array_key_exists($offset, $this->data);
     }
@@ -281,6 +283,7 @@ class View extends Base implements \ArrayAccess
      * @param  string $offset
      * @return mixed
      */
+    #[ReturnTypeWillChange]
     public function &offsetGet($offset)
     {
         return $this->data[$offset];
@@ -292,7 +295,7 @@ class View extends Base implements \ArrayAccess
      * @param string $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->data[$offset] = $value;
     }
@@ -302,7 +305,7 @@ class View extends Base implements \ArrayAccess
      *
      * @param string $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->data[$offset]);
     }

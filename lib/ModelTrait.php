@@ -3,6 +3,7 @@
 namespace Wei;
 
 use InvalidArgumentException;
+use ReturnTypeWillChange;
 use Wei\Db\QueryBuilderCacheTrait;
 use Wei\Db\QueryBuilderTrait;
 use Wei\Model\CastTrait;
@@ -433,6 +434,7 @@ trait ModelTrait
      * @param string|int $offset
      * @return mixed
      */
+    #[ReturnTypeWillChange]
     public function &offsetGet($offset)
     {
         return $this->get($offset);
@@ -444,7 +446,7 @@ trait ModelTrait
      * @param string|int|null $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->set($offset, $value);
     }
@@ -454,7 +456,7 @@ trait ModelTrait
      *
      * @param string|int $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         $this->unsetAttribute($offset);
     }

@@ -9,6 +9,8 @@
 
 namespace Wei;
 
+use ReturnTypeWillChange;
+
 /**
  * A base database record class
  *
@@ -968,7 +970,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param string $count
      * @return int
      */
-    public function count($conditions = false, $count = '1')
+    public function count($conditions = false, $count = '1'): int
     {
         $this->andWhere($conditions);
 
@@ -1531,7 +1533,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param string $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         $this->loadData($offset);
         return isset($this->data[$offset]);
@@ -1543,6 +1545,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param string $offset
      * @return mixed
      */
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         $this->loadData($offset);
@@ -1555,7 +1558,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param string $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->loadData($offset);
         $this->set($offset, $value);
@@ -1566,7 +1569,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @param string $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         $this->loadData($offset);
         $this->remove($offset);
@@ -1577,7 +1580,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      *
      * @return \ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         $this->loadData(0);
         return new \ArrayIterator($this->data);

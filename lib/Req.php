@@ -9,6 +9,8 @@
 
 namespace Wei;
 
+use ReturnTypeWillChange;
+
 /**
  * A service that handles the HTTP request data
  *
@@ -330,7 +332,7 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @return bool
      * @see \WeiTest\ReqTest::assertArrayBehaviour
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->data[$offset]);
     }
@@ -341,6 +343,7 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param string $offset
      * @return mixed
      */
+    #[ReturnTypeWillChange]
     public function &offsetGet($offset)
     {
         if (!isset($this->data[$offset])) {
@@ -354,12 +357,12 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param string $offset
      * @param mixed $value
-     * @return mixed
+     * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         unset($this->extraKeys[$offset]);
-        return $this->data[$offset] = $value;
+        $this->data[$offset] = $value;
     }
 
     /**
@@ -367,7 +370,7 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param string $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->extraKeys[$offset], $this->data[$offset]);
     }
@@ -410,7 +413,7 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @return int the length of data
      */
-    public function count()
+    public function count(): int
     {
         return count($this->getData());
     }
@@ -825,7 +828,7 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @return \ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->getData());
     }
