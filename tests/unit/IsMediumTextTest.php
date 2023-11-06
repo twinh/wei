@@ -32,7 +32,7 @@ final class IsMediumTextTest extends BaseValidatorTestCase
             ['123'],
             [str_repeat('1', 16777215)],
             [str_repeat('我', 16777215 / 3)],
-            [str_repeat('🙂', 16777215 / 4)],
+            [str_repeat('🙂', (int) (16777215 / 4))],
         ];
     }
 
@@ -41,7 +41,7 @@ final class IsMediumTextTest extends BaseValidatorTestCase
         return [
             [str_repeat('1', 16777215 + 1)],
             [str_repeat('我', 16777215 / 3) . '1'],
-            [str_repeat('🙂', 16777215 / 4) . '1234'],
+            [str_repeat('🙂', (int) (16777215 / 4)) . '1234'],
         ];
     }
 }

@@ -32,7 +32,7 @@ final class IsTextTest extends BaseValidatorTestCase
             ['123'],
             [str_repeat('1', 65535)],
             [str_repeat('我', 65535 / 3)],
-            [str_repeat('🙂', 65535 / 4)],
+            [str_repeat('🙂', (int) (65535 / 4))],
         ];
     }
 
@@ -41,7 +41,7 @@ final class IsTextTest extends BaseValidatorTestCase
         return [
             [str_repeat('1', 65535) . '1'],
             [str_repeat('我', 65535 / 3) . '1'],
-            [str_repeat('🙂', 65535 / 4) . '1234'],
+            [str_repeat('🙂', (int) (65535 / 4)) . '1234'],
         ];
     }
 }
