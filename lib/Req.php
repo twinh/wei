@@ -184,7 +184,7 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
             $this->data = &$_REQUEST;
         }
 
-        if (false !== strpos($this->getServer('HTTP_CONTENT_TYPE'), 'application/json')) {
+        if (false !== strpos($this->getServer('HTTP_CONTENT_TYPE', ''), 'application/json')) {
             $this->data += (array) json_decode($this->getContent(), true);
         }
     }
@@ -425,7 +425,8 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     public function getScheme()
     {
-        if ('on' === strtolower($this->getServer('HTTPS')) || 1 == $this->getServer('HTTPS')) {
+        $https = $this->getServer('HTTPS');
+        if ($https && ('on' === strtolower($https) || 1 == $https)) {
             return 'https';
         } else {
             return 'http';
@@ -657,7 +658,7 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         if ($this->overwriteAjax && $this->get('_ajax')) {
             return true;
         }
-        return 'xmlhttprequest' == strtolower($this->getServer('HTTP_X_REQUESTED_WITH'));
+        return 'xmlhttprequest' == strtolower($this->getServer('HTTP_X_REQUESTED_WITH', ''));
     }
 
     /**
@@ -913,7 +914,7 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
         if ($this->isUrlRewrite()) {
             return $this->getPathInfo();
         } else {
-            return '/' . ltrim($this[$this->routerKey], '/');
+            return '/' . ltrim($this->get($this->routerKey, ''), '/');
         }
     }
 

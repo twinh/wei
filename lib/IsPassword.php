@@ -138,7 +138,8 @@ class IsPassword extends BaseValidator
      */
     protected function doValidate($input)
     {
-        if (!$this->isString($input)) {
+        $input = $this->toString($input);
+        if (null === $input) {
             $this->addError('notString');
             return false;
         }

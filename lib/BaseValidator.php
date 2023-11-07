@@ -322,6 +322,20 @@ abstract class BaseValidator extends Base
     }
 
     /**
+     * Convert variable to string, return null if it cant be convert to string
+     *
+     * @param mixed $input
+     * @return string|null
+     */
+    protected function toString($input): ?string
+    {
+        if ($this->isString($input)) {
+            return (string) $input;
+        }
+        return null;
+    }
+
+    /**
      * Set property value
      *
      * @param string|array $name The name of property

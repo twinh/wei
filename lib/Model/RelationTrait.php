@@ -156,7 +156,7 @@ trait RelationTrait
         $related = $this->instanceRelationModel($model);
         $name = debug_backtrace(\DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]['function'];
 
-        if (class_exists($junctionTable)) {
+        if ($junctionTable && class_exists($junctionTable)) {
             /** @var class-string<BaseModel> $junctionClass */
             $junctionClass = $junctionTable;
             $junctionTable = $junctionClass::getTable();

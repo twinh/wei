@@ -60,7 +60,7 @@ class IsInConst extends BaseValidator
         $reflect = new ReflectionClass($this->class);
         $consts = $reflect->getConstants();
 
-        $length = strlen($this->prefix);
+        $length = null === $this->prefix ? 0 : strlen($this->prefix);
         foreach ($consts as $key => $value) {
             if ($value != $input) {
                 continue;
