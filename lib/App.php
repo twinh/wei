@@ -59,14 +59,14 @@ class App extends Base
      *
      * @var string
      */
-    protected $namespace;
+    protected $namespace = '';
 
     /**
      * The name of controller
      *
      * @var string
      */
-    protected $controller;
+    protected $controller = '';
 
     /**
      * The name of action
@@ -207,7 +207,7 @@ class App extends Base
     public function getNamespace()
     {
         if (!$this->namespace) {
-            $this->namespace = $this->req->get('namespace');
+            $this->namespace = (string) $this->req->get('namespace');
         }
 
         return $this->namespace;
