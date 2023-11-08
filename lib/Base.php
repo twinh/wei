@@ -16,6 +16,7 @@ use ReflectionException;
  *
  * @author   Twin Huang <twinhuang@qq.com>
  */
+#[\AllowDynamicProperties]
 abstract class Base
 {
     /**
