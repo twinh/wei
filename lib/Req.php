@@ -441,7 +441,7 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
     public function getHost()
     {
         $host = $this->getServer('HTTP_HOST') ?: $this->getServer('SERVER_NAME') ?: $this->getServer('REMOTE_ADDR');
-        return preg_replace('/:\d+$/', '', $host);
+        return preg_replace('/:\d+$/', '', $host ?? '');
     }
 
     /**
