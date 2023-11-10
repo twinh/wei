@@ -165,6 +165,11 @@ final class ETest extends TestCase
         ' ' => '\\20 ',
     ];
 
+    /**
+     * @var Escaper
+     */
+    private $escaper;
+
     protected function setUp(): void
     {
         parent::setUp();

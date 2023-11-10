@@ -9,7 +9,7 @@ final class SqliteDbTest extends DbTest
 {
     protected function setUp(): void
     {
-        $this->db = $this->sqliteDb;
+        $this->db = $this->wei->get('sqlite:db');
 
         try {
             $this->db->connect();

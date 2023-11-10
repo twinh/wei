@@ -9,7 +9,7 @@ final class PgsqlDbTest extends DbTest
 {
     protected function setUp(): void
     {
-        $this->db = $this->pgsqlDb;
+        $this->db = $this->wei->get('pgsql:db');
 
         try {
             $this->db->connect();

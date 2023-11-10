@@ -4,12 +4,14 @@ namespace WeiTest;
 
 use PDO;
 use RuntimeException;
+use Wei\Db;
 
 /**
  * @property \Wei\Db db
  * @method \Wei\Record db($table = null)
  * @internal
  */
+#[\AllowDynamicProperties]
 class DbTest extends TestCase
 {
     public function initFixtures()
@@ -1275,10 +1277,9 @@ class DbTest extends TestCase
         ]);
 
         $this->assertSame($fn, $this->db->getOption('beforeConnect'));
-        $this->assertSame($fn, $this->cbDb->getOption('beforeConnect'));
+        $this->assertSame($fn, $this->wei->get('cbDb')->getOption('beforeConnect'));
 
         // Remove all relation configuration
-        $this->cbDb = null;
         $this->wei->remove('cbDb');
         $this->wei->setConfig('cb:db', [
             'db' => null,
