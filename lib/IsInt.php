@@ -76,7 +76,17 @@ class IsInt extends BaseValidator
             return true;
         }
 
-        if ($this->isString($input) && isset($input[0]) && '-' === $input[0]) {
+        // True will be convert to "1"
+        if (true === $input) {
+            return false;
+        }
+
+        $input = $this->toString($input);
+        if (null === $input) {
+            return false;
+        }
+
+        if (isset($input[0]) && '-' === $input[0]) {
             return ctype_digit(substr($input, 1));
         }
         return ctype_digit($input);

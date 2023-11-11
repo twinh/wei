@@ -218,7 +218,7 @@ class E extends Base
         }
 
         $string = $this->toUtf8($string);
-        if ('' === $string || ctype_digit($string)) {
+        if ('' === $string || ctype_digit((string) $string)) {
             return $string;
         }
 
@@ -245,7 +245,7 @@ class E extends Base
         }
 
         $string = $this->toUtf8($string);
-        if ('' === $string || ctype_digit($string)) {
+        if ('' === $string || ctype_digit((string) $string)) {
             return $string;
         }
 
@@ -284,7 +284,7 @@ class E extends Base
         }
 
         $string = $this->toUtf8($string);
-        if ('' === $string || ctype_digit($string)) {
+        if ('' === $string || ctype_digit((string) $string)) {
             return $string;
         }
 
