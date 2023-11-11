@@ -193,7 +193,7 @@ class Memcache extends BaseCache
             $this->object = new \Memcache();
         }
         foreach ($this->servers as $server) {
-            call_user_func_array([$this->object, 'addServer'], $server);
+            call_user_func_array([$this->object, 'addServer'], array_values($server));
         }
     }
 
