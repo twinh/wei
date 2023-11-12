@@ -1029,7 +1029,7 @@ class WeChatApp extends Base
                 } else {
                     $child = $xml->addChild($key);
                     $node = dom_import_simplexml($child);
-                    $node->appendChild($node->ownerDocument->createCDATASection($value));
+                    $node->appendChild($node->ownerDocument->createCDATASection($value ?? ''));
                 }
             }
         }

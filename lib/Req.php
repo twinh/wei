@@ -842,7 +842,7 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     public function accept($mine)
     {
-        return 0 === strpos($this->getServer('HTTP_ACCEPT'), $mine);
+        return 0 === strpos($this->getServer('HTTP_ACCEPT', ''), $mine);
     }
 
     /**

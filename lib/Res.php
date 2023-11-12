@@ -591,7 +591,7 @@ class Res extends Base
         $this->setOption($options);
 
         // The variables for custom redirect view
-        $escapedUrl = htmlspecialchars($url, \ENT_QUOTES, 'UTF-8');
+        $escapedUrl = $url ? htmlspecialchars($url, \ENT_QUOTES, 'UTF-8') : $url;
         $wait = (int) $this->redirectWait;
 
         // Location header does not support delay
@@ -716,7 +716,7 @@ class Res extends Base
         $name = rawurlencode($name);
 
         // For IE
-        $userAgent = $this->request->getServer('HTTP_USER_AGENT');
+        $userAgent = $this->request->getServer('HTTP_USER_AGENT', '');
         if (preg_match('/MSIE ([\w.]+)/', $userAgent)) {
             $filename = '=' . $name;
         } else {
