@@ -342,7 +342,7 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
             return $this;
         }
 
-        $this->data = $class::toArray($this->data['data']) + $this->data;
+        $this->data = forward_static_call([$class, 'toArray'], $this->data['data']) + $this->data;
         return $this;
     }
 
