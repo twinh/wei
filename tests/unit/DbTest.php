@@ -1652,16 +1652,16 @@ class DbTest extends TestCase
         $members = $this->db('member');
 
         $members->fromArray([
-            [
+            $this->db('member')->fromArray([
                 'group_id' => 1,
                 'name' => 'John',
                 'address' => 'xx street',
-            ],
-            [
+            ]),
+            $this->db('member')->fromArray([
                 'group_id' => 2,
                 'name' => 'Tome',
                 'address' => 'xx street',
-            ],
+            ]),
         ]);
 
         $this->assertSame(1, $members[0]['group_id']);
