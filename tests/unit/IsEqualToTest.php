@@ -2,6 +2,8 @@
 
 namespace WeiTest;
 
+use const PHP_MAJOR_VERSION;
+
 /**
  * @internal
  */
@@ -32,7 +34,7 @@ final class IsEqualToTest extends BaseValidatorTestCase
         return [
             ['abc', 'abc'],
             [0, null],
-            [0, ''],
+            [0, PHP_MAJOR_VERSION >= 8 ? 0 : ''],
             [null, null],
             [new \stdClass(), new \stdClass()],
         ];
@@ -44,6 +46,7 @@ final class IsEqualToTest extends BaseValidatorTestCase
             ['abc', 'bbc'],
             ['', []],
             [new \stdClass(), new \ArrayObject()],
+            [0, PHP_MAJOR_VERSION >= 8 ? '' : 1],
         ];
     }
 }
