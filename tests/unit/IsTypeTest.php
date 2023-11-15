@@ -33,7 +33,7 @@ final class IsTypeTest extends BaseValidatorTestCase
 
     public function testResource()
     {
-        $res = curl_init();
+        $res = fopen(__FILE__, 'r');
         $this->assertIsResource($res);
         $this->assertTrue($this->isType->__invoke($res, 'resource'));
     }
@@ -63,7 +63,7 @@ final class IsTypeTest extends BaseValidatorTestCase
             [null, 'null'],
             ['1', 'numeric'],
             [$obj, 'object'],
-            [curl_init(), 'resource'],
+            [fopen(__FILE__, 'r'), 'resource'],
             [1, 'scalar'],
             [1.1, 'scalar'],
             ['str', 'scalar'],
@@ -106,7 +106,7 @@ final class IsTypeTest extends BaseValidatorTestCase
             [1, 'resource'],
             [[], 'scalar'],
             [$obj, 'scalar'],
-            [curl_init(), 'scalar'],
+            [fopen(__FILE__, 'r'), 'scalar'],
             // ctype_xxx
             ['a bc', 'alnum'],
             ['-213a', 'alnum'],
