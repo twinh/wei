@@ -110,7 +110,7 @@ final class WeiTest extends TestCase
         // Reset config
         $wei->setConfig([
             'req' => [
-                'method' => null,
+                'method' => '',
             ],
         ]);
     }
@@ -378,7 +378,7 @@ final class WeiTest extends TestCase
 
         // Reset config
         $this->wei->setConfig('req', [
-            'method' => null,
+            'method' => '',
         ]);
     }
 
