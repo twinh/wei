@@ -124,7 +124,8 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         try {
             $arr['b'];
         } catch (\Exception $e) {
-            if ('Undefined index: b' == $e->getMessage()) {
+            // [PHP before 8, PHP 8 and after]
+            if (in_array($e->getMessage(), ['Undefined index: b', 'Undefined array key "b"'], true)) {
                 $hasException = true;
             } else {
                 throw $e;
@@ -151,7 +152,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         $this->assertFalse(isset($arr['d']), 'Call isset returns false when value is null');
 
         // Behaviour 5
-        if (method_exists($arr, 'toArray')) {
+        if (is_object($arr) && method_exists($arr, 'toArray')) {
             $origArr = $arr->toArray();
         } else {
             $origArr = $arr;
