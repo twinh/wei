@@ -15,9 +15,9 @@ trait QueryBuilderPropsTrait
     /**
      * The name of the table
      *
-     * @var string|null
+     * @var string
      */
-    protected $table;
+    protected $table = '';
 
     /**
      * The column names of the table
@@ -55,7 +55,7 @@ trait QueryBuilderPropsTrait
     protected $queryParts = [
         'select' => [],
         'distinct' => null,
-        'from' => null,
+        'from' => '',
         'join' => [],
         'set' => [],
         'where' => [],

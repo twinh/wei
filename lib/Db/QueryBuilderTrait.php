@@ -520,7 +520,7 @@ trait QueryBuilderTrait
      */
     protected function getTable(): ?string
     {
-        return $this->table ?? null;
+        return $this->table;
     }
 
     /**

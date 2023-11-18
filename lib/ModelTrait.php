@@ -590,7 +590,7 @@ trait ModelTrait
      */
     protected function getTable(): string
     {
-        if (!isset($this->table)) {
+        if (!$this->table) {
             $str = $this->wei->str;
             $this->table = $str->pluralize($str->snake($this->getModelBaseName()));
         }
