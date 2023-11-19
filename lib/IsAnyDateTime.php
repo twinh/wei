@@ -106,7 +106,7 @@ class IsAnyDateTime extends BaseValidator
         }
 
         $lastErrors = date_get_last_errors();
-        if ($lastErrors['warning_count'] || $lastErrors['error_count']) {
+        if ($lastErrors && ($lastErrors['warning_count'] || $lastErrors['error_count'])) {
             $this->addError('invalid');
             return false;
         }
