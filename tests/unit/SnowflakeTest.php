@@ -28,6 +28,7 @@ class SnowflakeTest extends TestCase
         $snowflake = new Snowflake([
             'workerId' => 1,
             'randomStartSequence' => false,
+            'cache' => $this->wei->arrayCache,
         ]);
 
         $id = $snowflake->next();
@@ -54,6 +55,7 @@ class SnowflakeTest extends TestCase
         $workerId = mt_rand(0, 1023);
         $snowflake = new Snowflake([
             'workerId' => $workerId,
+            'cache' => $this->wei->arrayCache,
         ]);
 
         $id = $snowflake->next();
