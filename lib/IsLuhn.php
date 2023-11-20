@@ -54,6 +54,6 @@ class IsLuhn extends BaseValidator
         foreach (str_split(strrev($string)) as $i => $d) {
             $checksum .= (0 === $i % 2) ? ((int) $d * 2) : $d;
         }
-        return (10 - array_sum(str_split($checksum)) % 10) % 10;
+        return (10 - array_sum(array_map('intval', str_split($checksum))) % 10) % 10;
     }
 }
