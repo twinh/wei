@@ -65,8 +65,7 @@ class Password extends Base
         // The length required in the final serialization
         $requiredSaltLen = 22;
 
-        $buffer = function_exists('random_bytes') ? random_bytes($rawSaltLen) :
-            mcrypt_create_iv($rawSaltLen, MCRYPT_DEV_URANDOM);
+        $buffer = random_bytes($rawSaltLen);
         $salt = str_replace('+', '.', base64_encode($buffer));
         $salt = substr($salt, 0, $requiredSaltLen);
 
