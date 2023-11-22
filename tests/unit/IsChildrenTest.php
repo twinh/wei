@@ -85,6 +85,7 @@ final class IsChildrenTest extends BaseValidatorTestCase
         $v->key('configs', '配置')->children(call_user_func(function () {
             $v = V::new();
             $v->key('key1', '配置1')->minLength(3);
+            return $v;
         }));
         $ret = $v->check([
             'configs' => 123,
