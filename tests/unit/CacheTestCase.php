@@ -354,4 +354,10 @@ abstract class CacheTestCase extends TestCase
         $this->assertTrue($this->object->isHit('test2'));
         $this->assertFalse($this->object->isHit('test3'));
     }
+
+    public function testGetMultipleEmptyKeys()
+    {
+        $empty = $this->object->getMultiple([]);
+        $this->assertSame([], $empty);
+    }
 }

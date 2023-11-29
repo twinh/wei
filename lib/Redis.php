@@ -248,7 +248,7 @@ class Redis extends BaseCache
         foreach ($keys as $key) {
             $keysWithPrefix[] = $this->namespace . $key;
         }
-        $results = $this->object->mGet($keysWithPrefix);
+        $results = $keysWithPrefix ? $this->object->mGet($keysWithPrefix) : [];
 
         $this->hits = [];
         $values = [];
