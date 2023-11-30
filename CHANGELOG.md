@@ -1,3 +1,42 @@
+# [0.17.0](https://github.com/twinh/wei/compare/v0.16.0...v0.17.0) (2023-11-30)
+
+
+### Bug Fixes
+
+* **Redis:** foreach() argument must be of type array|object, bool given when get empty keys ([f2fbf50](https://github.com/twinh/wei/commit/f2fbf506da538ff82a2f8f06122d64a025163db2))
+* PHP 8.3 array_sum(): Addition is not supported on type string ([67881e5](https://github.com/twinh/wei/commit/67881e5b796c8afbbc317e1db71da34b58e9fc02))
+* **App:** PHP 8.1 控制 namespace 和 controller 为字符串 ([868942d](https://github.com/twinh/wei/commit/868942d303a39e43dbbe3d32eed50cfb8db1990f))
+* **Base:** PHP 8.2 允许动态创建属性 ([6c22ec7](https://github.com/twinh/wei/commit/6c22ec7a1f54ba77f4a09324736e4800a4332c3a))
+* **IsAnyDateTime:** PHP 8.2 `date_get_last_errors` return false when no errors ([5ac8cf0](https://github.com/twinh/wei/commit/5ac8cf08e850cb337ac7f294161dacfc162c6ffd))
+* **IsEqualTo:** PHP 8.0 '' not equal to 0 ([e698dea](https://github.com/twinh/wei/commit/e698dea15fb0eaae1fbc90b636fcc32bec276d9a))
+* **Logger:** PHP 8.1 Deprecated:  Implicit conversion from float to int loses precision ([0cdfc16](https://github.com/twinh/wei/commit/0cdfc1665302741ba240fd5e2d1507592e2e9450))
+* **Memcache:** PHP 8.0 Unknown named parameter $port ([5d18ebf](https://github.com/twinh/wei/commit/5d18ebfce1befc88f45b66149110eceaf0a1db9a))
+* **QueryBuilder:** PHP 8.1 `table` 设置为字符串，以避免 Passing null to parameter of type string is deprecated 错误 ([0eb223f](https://github.com/twinh/wei/commit/0eb223fdd2924d315787605d1abfaf7ad7fe698b))
+* **Record:** createCollection should only accept Record object ([6029f5f](https://github.com/twinh/wei/commit/6029f5f0f0c269b2d2538d0385d001e87be5859a))
+* **Ret:** PHP 8.0 BadMethodCallException: Property or method "329$139" not found ([87ff581](https://github.com/twinh/wei/commit/87ff58151c5812d678d0febcca5b3ac01d90d90d))
+* PHP 8.1 ctype_digit(): Argument of type will be interpreted as string in the future ([88cbfb4](https://github.com/twinh/wei/commit/88cbfb416ed8bbfabc34805e1483d9089c18b502))
+* PHP 8.1 Passing null to parameter of type string is deprecated ([f1376e1](https://github.com/twinh/wei/commit/f1376e17cabc5381d0562d4fb2b7a51406e4188e))
+* **Req:** PHP 8.1 Passing null to parameter of type string is deprecated ([37b5f3e](https://github.com/twinh/wei/commit/37b5f3e17882fde8657d7e858edc87ba9bc98a68))
+* PHP 8.1 Passing null to parameter of type string is deprecated ([2b75121](https://github.com/twinh/wei/commit/2b751210130cea9c4de88f4edf8d888d25d2b43b))
+
+
+### Features
+
+* 更改 offsetXxx, count, getIterator 方法返回值以兼容 PHP 8.1 ([c32c90e](https://github.com/twinh/wei/commit/c32c90e74be5c2e4717dbc87cc7b914a54d7c6db))
+
+
+### BREAKING CHANGES
+
+* 更改 offsetXxx, count, getIterator 方法返回值以兼容 PHP 8.1
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `8.2.3` to `8.2.4`
+
 # [0.16.0](https://github.com/twinh/wei/compare/v0.15.12...v0.16.0) (2023-11-02)
 
 
