@@ -49,7 +49,7 @@
     },
     "require-ci": {
       "miaoxing/dev": "miaoxing/dev as 8.x-dev",
-      "miaoxing/phpstan-miaoxing": "miaoxing/phpstan-miaoxing as 1.x-dev"
+      "miaoxing/phpstan-miaoxing": "miaoxing/phpstan-miaoxing as 2.x-dev"
     }
   },
   "suggest": {
