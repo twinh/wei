@@ -4040,7 +4040,7 @@ class QueryBuilder
      * $users = QueryBuilder::table('user')->where(['id' => ['1', '2', '3']]);
      * ```
      *
-     * @param array|Closure|string|null $column
+     * @param array|\Closure|string|null $column
      * @param mixed|null $operator
      * @param mixed|null $value
      * @return $this
@@ -11094,7 +11094,7 @@ if (0) {
          * $users = QueryBuilder::table('user')->where(['id' => ['1', '2', '3']]);
          * ```
          *
-         * @param array|Closure|string|null $column
+         * @param array|\Closure|string|null $column
          * @param mixed|null $operator
          * @param mixed|null $value
          * @return $this
