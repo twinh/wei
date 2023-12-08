@@ -79,7 +79,7 @@ class Error extends Base
     /**
      * The previous exception handler
      *
-     * @var callback|null
+     * @var callable|null
      */
     protected $prevExceptionHandler;
 

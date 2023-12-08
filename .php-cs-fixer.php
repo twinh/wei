@@ -1,10 +1,10 @@
 <?php
 
-$file = __DIR__ . '/vendor/miaoxing/dev/.php_cs';
+$file = __DIR__ . '/vendor/miaoxing/dev/.php-cs-fixer.php';
 if (is_file($file)) {
     $fixer = require $file;
 } else {
-    $fixer = require __DIR__ . '/../miaoxing-dev/.php_cs';
+    $fixer = require __DIR__ . '/../miaoxing-dev/.php-cs-fixer.php';
 }
 
 $cwd = getcwd();

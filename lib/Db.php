@@ -107,35 +107,35 @@ class Db extends Base
     /**
      * The callback triggers before connect to database
      *
-     * @var callback
+     * @var callable
      */
     protected $beforeConnect;
 
     /**
      * The callback triggers when fails to connect to database
      *
-     * @var callback
+     * @var callable
      */
     protected $connectFails;
 
     /**
      * The callback triggers after connect to database
      *
-     * @var callback
+     * @var callable
      */
     protected $afterConnect;
 
     /**
      * The callback triggers before execute query
      *
-     * @var callback
+     * @var callable
      */
     protected $beforeQuery;
 
     /**
      * The callback triggers after execute query
      *
-     * @var callback
+     * @var callable
      */
     protected $afterQuery;
 

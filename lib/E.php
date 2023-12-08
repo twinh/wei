@@ -309,8 +309,8 @@ class E extends Base
          * hex entity for the Unicode replacement character.
          */
         if (
-            ($ord <= 0x1f && "\t" != $chr && "\n" != $chr && "\r" != $chr)
-            || ($ord >= 0x7f && $ord <= 0x9f)
+            ($ord <= 0x1F && "\t" != $chr && "\n" != $chr && "\r" != $chr)
+            || ($ord >= 0x7F && $ord <= 0x9F)
         ) {
             return '&#xFFFD;';
         }
