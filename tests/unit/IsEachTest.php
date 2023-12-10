@@ -27,7 +27,7 @@ final class IsEachTest extends BaseValidatorTestCase
     public function testEachSuc()
     {
         $v = V::new();
-        $v->key('products')->each(function (V $v) {
+        $v->key('products')->each(static function (V $v) {
             $v->key('name')->maxLength(5);
             $v->key('stock')->greaterThanOrEqual(0);
         });
@@ -50,7 +50,7 @@ final class IsEachTest extends BaseValidatorTestCase
     public function testEach()
     {
         $v = V::new();
-        $v->key('users', '用户')->each(function (V $v) {
+        $v->key('users', '用户')->each(static function (V $v) {
             $v->string('name', '姓名')->minLength(3);
             $v->string('email', '邮箱')->email();
         });
@@ -77,8 +77,8 @@ final class IsEachTest extends BaseValidatorTestCase
         wei()->t->setLocale($lang);
 
         $v = V::new();
-        $v->key('users', '用户')->each(function (V $v) {
-            $v->array('emails', '邮箱')->each(function (V $v) {
+        $v->key('users', '用户')->each(static function (V $v) {
+            $v->array('emails', '邮箱')->each(static function (V $v) {
                 $v->string('address', '地址')->email();
             });
         });
@@ -120,7 +120,7 @@ final class IsEachTest extends BaseValidatorTestCase
 
     public function testEachCollSuc()
     {
-        $v = V::label('用户')->each(function (V $v) {
+        $v = V::label('用户')->each(static function (V $v) {
             $v->key('name')->maxLength(5);
             $v->key('stock')->greaterThanOrEqual(0);
         });
@@ -140,7 +140,7 @@ final class IsEachTest extends BaseValidatorTestCase
 
     public function testEachCollErr()
     {
-        $v = V::label('用户')->each(function (V $v) {
+        $v = V::label('用户')->each(static function (V $v) {
             $v->string('name', '姓名')->minLength(3);
             $v->string('email', '邮箱')->email();
         });
@@ -183,7 +183,7 @@ final class IsEachTest extends BaseValidatorTestCase
     public function testNotArray()
     {
         $v = V::new();
-        $v->key('users', '用户')->each(function (V $v) {
+        $v->key('users', '用户')->each(static function (V $v) {
             $v->string('name', '姓名')->minLength(3);
             $v->string('email', '邮箱')->email();
         });
@@ -204,7 +204,7 @@ final class IsEachTest extends BaseValidatorTestCase
         $validators = [];
 
         $v = V::new();
-        $v->key('users', '用户')->each(function (V $v) use (&$validators) {
+        $v->key('users', '用户')->each(static function (V $v) use (&$validators) {
             $validators[] = $v;
             $v->string('name', '姓名')->minLength(3);
             $v->string('email', '邮箱')->email();
@@ -238,7 +238,7 @@ final class IsEachTest extends BaseValidatorTestCase
 
         $validateData = [];
         $v = V::new();
-        $v->key('users', '用户')->each(function (V $v) use (&$validateData) {
+        $v->key('users', '用户')->each(static function (V $v) use (&$validateData) {
             $validateData[] = $v->getData();
             $v->string('name', '姓名')->minLength(3);
             $v->string('email', '邮箱')->email();
@@ -253,7 +253,7 @@ final class IsEachTest extends BaseValidatorTestCase
         $keys = [];
 
         $v = V::new();
-        $v->key('users', '用户')->each(function (V $v, IsEach $isEach) use (&$keys) {
+        $v->key('users', '用户')->each(static function (V $v, IsEach $isEach) use (&$keys) {
             $keys[] = $isEach->getCurKey();
             $v->string('name', '姓名')->minLength(3);
             $v->string('email', '邮箱')->email();

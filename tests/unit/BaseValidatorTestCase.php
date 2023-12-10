@@ -59,7 +59,7 @@ abstract class BaseValidatorTestCase extends BaseTestCase
             // null
             null,
             // callback
-            function () {
+            static function () {
             },
         ];
 

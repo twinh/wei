@@ -486,7 +486,7 @@ final class VTest extends TestCase
     public function testGetValidDataWithChildren()
     {
         $v = V::new();
-        $v->key('configs')->children(call_user_func(function () {
+        $v->key('configs')->children(call_user_func(static function () {
             $v = V::new();
             $v->key('key1', 'name1')->minLength(3);
             $v->key('key2', 'name2')->minLength(2);
@@ -511,7 +511,7 @@ final class VTest extends TestCase
     public function testGetValidDataWithEach()
     {
         $v = V::new();
-        $v->key('products', 'Products')->each(function (V $v) {
+        $v->key('products', 'Products')->each(static function (V $v) {
             $v->key('name', 'Name')->maxLength(5);
             $v->key('stock', 'Stock')->greaterThanOrEqual(0);
         });
@@ -550,7 +550,7 @@ final class VTest extends TestCase
     public function testGetValidDataWithEachKeepKeys()
     {
         $v = V::new();
-        $v->key('products')->each(function (V $v) {
+        $v->key('products')->each(static function (V $v) {
             $v->key('name')->maxLength(5);
             $v->key('stock')->greaterThanOrEqual(0);
         });
@@ -587,7 +587,7 @@ final class VTest extends TestCase
     public function testGetValidDataWithEachAndOtherRule()
     {
         $v = V::new();
-        $v->key('products')->each(function (V $v) {
+        $v->key('products')->each(static function (V $v) {
             $v->key('name')->maxLength(5);
             $v->key('stock')->greaterThanOrEqual(0);
             // last rule call `addValidData` overwrite previous rules
@@ -651,13 +651,13 @@ final class VTest extends TestCase
 
     public function testCheckOneWithCallback()
     {
-        $ret = V::callback(function ($name) {
+        $ret = V::callback(static function ($name) {
             return 'twin' !== $name;
         })
             ->check('twin');
         $this->assertRetErr($ret, 'This value is not valid', -1);
 
-        $ret = V::callback(function ($name) {
+        $ret = V::callback(static function ($name) {
             return 'twin' !== $name;
         })
             ->check('hi');

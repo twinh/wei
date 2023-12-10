@@ -557,10 +557,10 @@ final class WeiTest extends TestCase
         $wei = new Wei([
             'wei' => [
                 'autoload' => false,
-                'beforeConstruct' => function ($wei, $fullName, $name) use (&$beforeConstruct) {
+                'beforeConstruct' => static function ($wei, $fullName, $name) use (&$beforeConstruct) {
                     $beforeConstruct[] = $fullName;
                 },
-                'afterConstruct' => function ($wei, $fullName, $name, $object) use (&$afterConstruct) {
+                'afterConstruct' => static function ($wei, $fullName, $name, $object) use (&$afterConstruct) {
                     $afterConstruct[] = $fullName;
                 },
             ],

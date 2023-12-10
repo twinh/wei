@@ -9,8 +9,6 @@
 
 namespace Wei;
 
-use Throwable;
-
 /**
  * A service that handles exception and display pretty exception message
  *
@@ -162,7 +160,7 @@ class Error extends Base
      * Trigger a error handler
      *
      * @param string $type The type of error handlers
-     * @param Throwable $exception
+     * @param \Throwable $exception
      * @return bool
      */
     public function triggerHandler($type, $exception)
@@ -179,7 +177,7 @@ class Error extends Base
     /**
      * The exception handler to render pretty message
      *
-     * @param Throwable $exception
+     * @param \Throwable $exception
      */
     public function handleException($exception)
     {
@@ -201,9 +199,9 @@ class Error extends Base
     }
 
     /**
-     * @param Throwable $e
+     * @param \Throwable $e
      */
-    public function internalHandleException(Throwable $e)
+    public function internalHandleException(\Throwable $e)
     {
         $code = $e->getCode();
         $debug = $this->wei->isDebug();
@@ -226,7 +224,7 @@ class Error extends Base
             $this->logger->log($level, $e);
 
             $this->displayException($e, $debug);
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->displayException($e, $debug);
         }
     }
@@ -234,10 +232,10 @@ class Error extends Base
     /**
      * Render exception message
      *
-     * @param Throwable $e
+     * @param \Throwable $e
      * @param bool $debug Whether show debug trace
      */
-    public function displayException(Throwable $e, $debug)
+    public function displayException(\Throwable $e, $debug)
     {
         // Render CLI message
         if ($this->enableCli && \PHP_SAPI == 'cli') {
@@ -421,10 +419,10 @@ HTML;
     /**
      * Render exception message for CLI
      *
-     * @param Throwable $e
+     * @param \Throwable $e
      * @SuppressWarnings(PHPMD.ExitExpression)
      */
-    protected function displayCliException(Throwable $e)
+    protected function displayCliException(\Throwable $e)
     {
         echo 'Exception', \PHP_EOL,
         $this->highlight($e->getMessage()),
@@ -438,7 +436,7 @@ HTML;
         }
     }
 
-    protected function displayJsonException(Throwable $e, $debug)
+    protected function displayJsonException(\Throwable $e, $debug)
     {
         $data = [
             'code' => $e->getCode(),
@@ -473,7 +471,7 @@ HTML;
     }
 
     /**
-     * @param Throwable $e
+     * @param \Throwable $e
      * @return int
      */
     protected function getExitCode($e)

@@ -20,7 +20,7 @@ final class CastTraitTest extends TestCase
     {
         parent::setUpBeforeClass();
 
-        static::dropTables();
+        self::dropTables();
 
         wei()->schema->table('test_casts')
             ->id('int_column')
@@ -71,7 +71,7 @@ final class CastTraitTest extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        static::dropTables();
+        self::dropTables();
         parent::tearDownAfterClass();
     }
 
@@ -528,7 +528,7 @@ final class CastTraitTest extends TestCase
     {
         $cast = TestCast::new();
 
-        $cast::onModelEvent('beforeSave', function () use ($cast) {
+        $cast::onModelEvent('beforeSave', static function () use ($cast) {
             // @phpstan-ignore-next-line cast to string
             $cast->string_column = count($cast->json_column);
         });

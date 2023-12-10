@@ -358,7 +358,7 @@ final class HttpTest extends TestCase
         $data = [
             'key' => 'value',
             'post' => true,
-            //'file' => '@dff', // not support with upload
+            // 'file' => '@dff', // not support with upload
             'array' => [
                 1,
                 'string' => 'value',
@@ -654,11 +654,11 @@ final class HttpTest extends TestCase
         // The result is depend on the server configuration
         return [             // Apache               PHP 5.4 cli web server
             ['GET'],         // OK                   OK
-            //array('HEAD'),      // No content           200 But no content
-            //array('TRACE'),     // Method Not Allowed   OK
+            // array('HEAD'),      // No content           200 But no content
+            // array('TRACE'),     // Method Not Allowed   OK
             ['OPTIONS'],     // OK                   OK
-            //array('CONNECT'),   // Bad                  Request Invalid request (Malformed HTTP request)
-            //array('CUSTOM')     // OK                   Request Invalid request (Malformed HTTP request)
+            // array('CONNECT'),   // Bad                  Request Invalid request (Malformed HTTP request)
+            // array('CUSTOM')     // OK                   Request Invalid request (Malformed HTTP request)
         ];
     }
 
@@ -694,7 +694,7 @@ final class HttpTest extends TestCase
     {
         return [
             ['GET'],
-            //array('POST'), Malformed HTTP request why?
+            // array('POST'), Malformed HTTP request why?
             ['DELETE'],
             ['PUT'],
             ['PATCH'],
@@ -750,7 +750,7 @@ final class HttpTest extends TestCase
         // Error
         $http = $this->http([
             'url' => $this->url . '?code=404',
-            'error' => function () {
+            'error' => static function () {
                 // overwrite the default error handler
             },
         ]);
@@ -952,14 +952,14 @@ final class HttpTest extends TestCase
         // @phpstan-ignore-next-line Trying to mock an undefined method handleResponse() on class \Wei\Http.
         $http->expects($this->at(0))
             ->method('handleResponse')
-            ->willReturnCallback(function () use ($http) {
+            ->willReturnCallback(static function () use ($http) {
                 $http->setOption('result', false);
             });
 
         // @phpstan-ignore-next-line Trying to mock an undefined method handleResponse() on class \Wei\Http.
         $http->expects($this->at(1))
             ->method('handleResponse')
-            ->willReturnCallback(function () use ($http) {
+            ->willReturnCallback(static function () use ($http) {
                 $http->setOption('result', true);
             });
 

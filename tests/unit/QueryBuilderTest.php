@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace WeiTest;
 
-use PDO;
 use Wei\QueryBuilder as Qb;
 use WeiTest\Fixtures\DbTrait;
 
@@ -20,8 +19,8 @@ final class QueryBuilderTest extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        static::dropTables();
-        static::resetTablePrefix();
+        self::dropTables();
+        self::resetTablePrefix();
         parent::tearDownAfterClass();
     }
 
@@ -143,7 +142,7 @@ final class QueryBuilderTest extends TestCase
     {
         $sql = Qb::table('test_users')
             ->where('name', 'twin')
-            ->where(function (Qb $qb) {
+            ->where(static function (Qb $qb) {
                 $qb->where('email', '=', 'twin@example.com')
                     ->orWhere('score', '>', 100);
             })
@@ -157,7 +156,7 @@ final class QueryBuilderTest extends TestCase
     public function testWhereClosureWithNullParams()
     {
         $sql = Qb::table('test_users')
-            ->where(function (Qb $qb) {
+            ->where(static function (Qb $qb) {
                 $qb->where('email', null);
             })
             ->getRawSql();
@@ -295,7 +294,7 @@ final class QueryBuilderTest extends TestCase
     {
         $sql = Qb::table('test_users')
             ->where('name', 'twin')
-            ->orWhere(function (Qb $qb) {
+            ->orWhere(static function (Qb $qb) {
                 $qb->where('email', '=', 'twin@example.com')
                     ->orWhere('score', '>', 100);
             })
@@ -734,7 +733,7 @@ final class QueryBuilderTest extends TestCase
 
     public function testWhen()
     {
-        $sql = Qb::table('test_users')->when('twin', function (Qb $qb, $value) {
+        $sql = Qb::table('test_users')->when('twin', static function (Qb $qb, $value) {
             $qb->where('name', $value);
         })->getRawSql();
 
@@ -743,7 +742,7 @@ final class QueryBuilderTest extends TestCase
 
     public function testWhenFalse()
     {
-        $sql = Qb::table('test_users')->when(false, function (Qb $qb, $value) {
+        $sql = Qb::table('test_users')->when(false, static function (Qb $qb, $value) {
             $qb->where('name', $value);
         })->getRawSql();
 
@@ -752,9 +751,9 @@ final class QueryBuilderTest extends TestCase
 
     public function testWhenDefault()
     {
-        $sql = Qb::table('test_users')->when(false, function (Qb $qb, $value) {
+        $sql = Qb::table('test_users')->when(false, static function (Qb $qb, $value) {
             $qb->where('name', $value);
-        }, function (Qb $qb, $value) {
+        }, static function (Qb $qb, $value) {
             $qb->where('type', 0);
         })->getRawSql();
 
@@ -763,7 +762,7 @@ final class QueryBuilderTest extends TestCase
 
     public function testUnless()
     {
-        $sql = Qb::table('test_users')->unless(false, function (Qb $qb, $value) {
+        $sql = Qb::table('test_users')->unless(false, static function (Qb $qb, $value) {
             $qb->where('name', 'twin');
         })->getRawSql();
 
@@ -772,7 +771,7 @@ final class QueryBuilderTest extends TestCase
 
     public function testUnlessTrue()
     {
-        $sql = Qb::table('test_users')->unless(true, function (Qb $qb, $value) {
+        $sql = Qb::table('test_users')->unless(true, static function (Qb $qb, $value) {
             $qb->where('name', $value);
         })->getRawSql();
 
@@ -781,9 +780,9 @@ final class QueryBuilderTest extends TestCase
 
     public function testUnlessDefault()
     {
-        $sql = Qb::table('test_users')->unless(true, function (Qb $qb, $value) {
+        $sql = Qb::table('test_users')->unless(true, static function (Qb $qb, $value) {
             $qb->where('name', $value);
-        }, function (Qb $qb, $value) {
+        }, static function (Qb $qb, $value) {
             $qb->where('type', 0);
         })->getRawSql();
 
@@ -1265,7 +1264,7 @@ final class QueryBuilderTest extends TestCase
 
     public function testGetIdentifierConvert()
     {
-        $fn = function () {
+        $fn = static function () {
         };
         $qb = Qb::setDbKeyConverter($fn);
 
@@ -1325,8 +1324,8 @@ final class QueryBuilderTest extends TestCase
                 'name' => 'twin',
             ])
             ->setQueryParamTypes([
-                'groupId' => PDO::PARAM_INT,
-                'name' => PDO::PARAM_STR,
+                'groupId' => \PDO::PARAM_INT,
+                'name' => \PDO::PARAM_STR,
             ]);
 
         $data = $qb->fetch();

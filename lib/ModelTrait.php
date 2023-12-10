@@ -2,8 +2,6 @@
 
 namespace Wei;
 
-use InvalidArgumentException;
-use ReturnTypeWillChange;
 use Wei\Db\QueryBuilderCacheTrait;
 use Wei\Db\QueryBuilderTrait;
 use Wei\Model\CastTrait;
@@ -172,7 +170,7 @@ trait ModelTrait
      * @param bool|null $exists
      * @param bool $throwException
      * @return mixed
-     * @throws InvalidArgumentException When column not found
+     * @throws \InvalidArgumentException When column not found
      */
     public function &get($name, bool &$exists = null, bool $throwException = true)
     {
@@ -201,7 +199,7 @@ trait ModelTrait
 
         $exists = false;
         if ($throwException) {
-            throw new InvalidArgumentException('Invalid property: ' . $name);
+            throw new \InvalidArgumentException('Invalid property: ' . $name);
         } else {
             $null = null;
             return $null;
@@ -434,7 +432,7 @@ trait ModelTrait
      * @param string|int $offset
      * @return mixed
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function &offsetGet($offset)
     {
         return $this->get($offset);
@@ -493,7 +491,7 @@ trait ModelTrait
             return $this->{$name} = $value;
         }
 
-        throw new InvalidArgumentException('Invalid property: ' . $name);
+        throw new \InvalidArgumentException('Invalid property: ' . $name);
     }
 
     /**
@@ -791,7 +789,7 @@ trait ModelTrait
         }
 
         if ($throwException) {
-            throw new InvalidArgumentException('Invalid property: ' . (null === $name ? '[null]' : $name));
+            throw new \InvalidArgumentException('Invalid property: ' . (null === $name ? '[null]' : $name));
         } else {
             return false;
         }
@@ -1231,7 +1229,7 @@ trait ModelTrait
             return $value;
         }
 
-        throw new InvalidArgumentException('Invalid virtual column: ' . $name);
+        throw new \InvalidArgumentException('Invalid virtual column: ' . $name);
     }
 
     /**
@@ -1245,7 +1243,7 @@ trait ModelTrait
     {
         $result = $this->callSetter($name, $value);
         if (!$result) {
-            throw new InvalidArgumentException('Invalid virtual column: ' . $name);
+            throw new \InvalidArgumentException('Invalid virtual column: ' . $name);
         }
 
         return $this;

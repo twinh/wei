@@ -78,7 +78,7 @@ final class EnvTest extends TestCase
     {
         $env = new \Wei\Env([
             'wei' => $this->wei,
-            'detector' => function () {
+            'detector' => static function () {
                 return 'test';
             },
         ]);
@@ -90,7 +90,7 @@ final class EnvTest extends TestCase
     {
         $env = new \Wei\Env([
             'wei' => $this->wei,
-            'detector' => function () {
+            'detector' => static function () {
                 return false;
             },
             'ipMap' => [

@@ -82,7 +82,7 @@ class IsEach extends BaseValidator
 
     public function getValidData()
     {
-        return array_map(function (Validate $validator) {
+        return array_map(static function (Validate $validator) {
             return $validator->getValidData();
         }, $this->selfValidators);
     }
@@ -162,7 +162,7 @@ class IsEach extends BaseValidator
             3 => 'rd',
         ];
 
-        if (!in_array(($index % 100), [11, 12, 13], true)) {
+        if (!in_array($index % 100, [11, 12, 13], true)) {
             return $suffixes[$index % 10] ?? 'th';
         }
 

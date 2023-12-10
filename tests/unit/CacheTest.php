@@ -2,8 +2,6 @@
 
 namespace WeiTest;
 
-use InvalidArgumentException;
-
 /**
  * @internal
  */
@@ -11,7 +9,7 @@ final class CacheTest extends CacheTestCase
 {
     public function testDriverClassNotFound()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         new \Wei\Cache([
             'wei' => $this->wei,
@@ -21,7 +19,7 @@ final class CacheTest extends CacheTestCase
 
     public function testNotImplemented()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         new \Wei\Cache([
             'wei' => $this->wei,

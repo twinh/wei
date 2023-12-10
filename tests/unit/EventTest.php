@@ -17,10 +17,10 @@ final class EventTest extends TestCase
         $event = $this->object;
 
         $results = $event->off('test')
-            ->on('test', function () {
+            ->on('test', static function () {
                 return 'a';
             })
-            ->on('test', function () {
+            ->on('test', static function () {
                 return 'b';
             })
             ->trigger('test');
@@ -30,7 +30,7 @@ final class EventTest extends TestCase
 
     public function testAddHandler()
     {
-        $this->object->on('test', function () {
+        $this->object->on('test', static function () {
         });
 
         $this->assertTrue($this->object->has('test'));
@@ -46,18 +46,18 @@ final class EventTest extends TestCase
     public function testTriggerHandler()
     {
         $results = $event = $this->object->off('test')
-            ->on('test', function () {
+            ->on('test', static function () {
                 return false;
             })
             ->trigger('test');
         $this->assertFalse($results[0]);
 
         $results = $this->object->off('test')
-            ->on('test', function () {
+            ->on('test', static function () {
                 return false;
             })
             // won't be triggered
-            ->on('test', function () {
+            ->on('test', static function () {
                 return 'second';
             })
             ->trigger('test');
@@ -66,7 +66,7 @@ final class EventTest extends TestCase
 
     public function testHasHandler()
     {
-        $fn = function () {
+        $fn = static function () {
         };
         $event = $this->object;
 
@@ -89,7 +89,7 @@ final class EventTest extends TestCase
         $event = $this->object;
 
         $init = function () {
-            $fn = function () {
+            $fn = static function () {
             };
             $this->event->off('test')
                 ->on('test', $fn)
@@ -118,9 +118,9 @@ final class EventTest extends TestCase
     {
         $this->object->off('test')
             ->on([
-                'test.before' => function () {
+                'test.before' => static function () {
                 },
-                'test.after' => function () {
+                'test.after' => static function () {
                 },
             ]);
 
@@ -130,7 +130,7 @@ final class EventTest extends TestCase
 
     public function testArrayArgs()
     {
-        $this->object->on('test', function ($arg) {
+        $this->object->on('test', static function ($arg) {
             return $arg;
         });
 
@@ -141,7 +141,7 @@ final class EventTest extends TestCase
 
     public function testNotArrayArgs()
     {
-        $this->object->on('test', function ($arg) {
+        $this->object->on('test', static function ($arg) {
             return $arg;
         });
 
@@ -152,15 +152,15 @@ final class EventTest extends TestCase
 
     public function testUntil()
     {
-        $this->object->on(__FUNCTION__, function () {
+        $this->object->on(__FUNCTION__, static function () {
             return null;
         });
 
-        $this->object->on(__FUNCTION__, function () {
+        $this->object->on(__FUNCTION__, static function () {
             return 'here';
         });
 
-        $this->object->on(__FUNCTION__, function () {
+        $this->object->on(__FUNCTION__, static function () {
             return 'not here';
         });
 

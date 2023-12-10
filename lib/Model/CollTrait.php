@@ -2,8 +2,6 @@
 
 namespace Wei\Model;
 
-use ArrayIterator;
-use BadMethodCallException;
 use Wei\Ret;
 
 /**
@@ -186,11 +184,11 @@ trait CollTrait
     /**
      * Retrieve an array iterator
      *
-     * @return ArrayIterator
+     * @return \ArrayIterator
      */
-    public function getIterator(): ArrayIterator
+    public function getIterator(): \ArrayIterator
     {
-        return new ArrayIterator($this->attributes);
+        return new \ArrayIterator($this->attributes);
     }
 
     /**
@@ -259,7 +257,7 @@ trait CollTrait
     {
         if (!$this->coll) {
             $traces = debug_backtrace(\DEBUG_BACKTRACE_IGNORE_ARGS, 2);
-            throw new BadMethodCallException(sprintf(
+            throw new \BadMethodCallException(sprintf(
                 'Method "%s" can be called when the object is a collection',
                 $traces[1]['function']
             ));

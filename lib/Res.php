@@ -527,7 +527,7 @@ class Res extends Base
     {
         $time = time();
         // Anonymous function for unit test
-        $setCookie = function () {
+        $setCookie = static function () {
         };
         foreach ($this->cookies as $name => $cookie) {
             $cookie += $this->cookieOption;

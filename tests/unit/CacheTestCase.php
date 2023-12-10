@@ -194,14 +194,14 @@ abstract class CacheTestCase extends TestCase
 
         $cache->clear();
 
-        $result = $cache->remember($key, 60, function () use ($num) {
+        $result = $cache->remember($key, 60, static function () use ($num) {
             return ++$num;
         });
 
         $this->assertEquals(2, $result);
 
         // receive from cache
-        $result2 = $cache->remember($key, function () use ($num) {
+        $result2 = $cache->remember($key, static function () use ($num) {
             return ++$num;
         });
 
@@ -245,10 +245,10 @@ abstract class CacheTestCase extends TestCase
     public function testGetFileContent()
     {
         $file = __DIR__ . '/Fixtures/TestUser.php';
-        $cache = $this->object->getFileContent($file, function ($file) {
+        $cache = $this->object->getFileContent($file, static function ($file) {
             return file_get_contents($file);
         });
-        $cache2 = $this->object->getFileContent($file, function ($file) {
+        $cache2 = $this->object->getFileContent($file, static function ($file) {
             return file_get_contents($file);
         });
         $this->assertEquals($cache, $cache2);
@@ -276,7 +276,7 @@ abstract class CacheTestCase extends TestCase
     {
         $this->object->set('test', 'value');
 
-        $callback = function () use (&$called) {
+        $callback = static function () use (&$called) {
             $called = true;
             return 'value2';
         };
@@ -296,7 +296,7 @@ abstract class CacheTestCase extends TestCase
     public function testRememberWithExpire()
     {
         $this->object->delete('test');
-        $result = $this->object->remember('test', 1, function () {
+        $result = $this->object->remember('test', 1, static function () {
             return 'value';
         });
         $this->assertSame('value', $result);
@@ -308,7 +308,7 @@ abstract class CacheTestCase extends TestCase
         $this->expectExceptionMessage('Expire time for cache "key" must be int, NULL given');
 
         $this->object->setNamespace('');
-        $this->object->remember('key', null, function () {
+        $this->object->remember('key', null, static function () {
         });
     }
 

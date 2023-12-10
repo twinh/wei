@@ -57,7 +57,7 @@ trait EventTrait
             foreach (static::$modelEvents[$class][$name] as $callback) {
                 // Prefer self class method
                 if (is_string($callback) && method_exists($this, $callback)) {
-                    $callback = function ($model, ...$args) use ($callback) {
+                    $callback = static function ($model, ...$args) use ($callback) {
                         return $model->{$callback}(...$args);
                     };
                 }

@@ -2,8 +2,6 @@
 
 namespace Wei;
 
-use SoapClient;
-
 /**
  * A Soap client that works like HTTP service
  *
@@ -96,7 +94,7 @@ class Soap extends Base
     /**
      * The instance of soap client
      *
-     * @var SoapClient
+     * @var \SoapClient
      */
     protected $soapClient;
 
@@ -152,7 +150,7 @@ class Soap extends Base
             // https://bugs.php.net/bug.php?id=65779
 
             // Prepare request
-            $soapClient = $this->soapClient = new SoapClient($this->url, [
+            $soapClient = $this->soapClient = new \SoapClient($this->url, [
                 'trace' => $this->wei->isDebug(),
             ]);
 

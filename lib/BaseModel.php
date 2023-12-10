@@ -2,10 +2,6 @@
 
 namespace Wei;
 
-use ArrayAccess;
-use Countable;
-use IteratorAggregate;
-use JsonSerializable;
 use Wei\Db\QueryBuilderPropsTrait;
 
 /**
@@ -13,7 +9,7 @@ use Wei\Db\QueryBuilderPropsTrait;
  * @phpstan-ignore-next-line PHPStorm allows trait type to prompt code call
  * @mixin ModelTrait
  */
-abstract class BaseModel extends Base implements ArrayAccess, IteratorAggregate, Countable, JsonSerializable
+abstract class BaseModel extends Base implements \ArrayAccess, \IteratorAggregate, \Countable, \JsonSerializable
 {
     use QueryBuilderPropsTrait;
 

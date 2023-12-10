@@ -2,7 +2,6 @@
 
 namespace WeiTest;
 
-use stdClass;
 use Wei\Cls;
 
 class ClsTest extends TestCase
@@ -23,7 +22,7 @@ class ClsTest extends TestCase
         return [
             ['ClsTest', Cls::baseName(static::class)],
             ['test', Cls::baseName('test')],
-            [stdClass::class, Cls::baseName(stdClass::class)],
+            [\stdClass::class, Cls::baseName(\stdClass::class)],
         ];
     }
 }

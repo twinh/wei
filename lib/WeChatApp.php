@@ -9,7 +9,6 @@
 
 namespace Wei;
 
-use Closure;
 use SimpleXMLElement;
 
 /**
@@ -225,10 +224,10 @@ class WeChatApp extends Base
     /**
      * Attach a callback which triggered when transfer to customer service
      *
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return $this
      */
-    public function transferCustomer(Closure $fn)
+    public function transferCustomer(\Closure $fn)
     {
         $this->rules['transferCustomer'] = $fn;
         return $this;
@@ -237,10 +236,10 @@ class WeChatApp extends Base
     /**
      * Attach a callback which triggered when user subscribed you
      *
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return $this
      */
-    public function subscribe(Closure $fn)
+    public function subscribe(\Closure $fn)
     {
         return $this->on('subscribe', $fn);
     }
@@ -248,10 +247,10 @@ class WeChatApp extends Base
     /**
      * Attach a callback which triggered when user unsubscribed you
      *
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return $this
      */
-    public function unsubscribe(Closure $fn)
+    public function unsubscribe(\Closure $fn)
     {
         return $this->on('unsubscribe', $fn);
     }
@@ -260,10 +259,10 @@ class WeChatApp extends Base
      * Attach a callback which triggered when user click the custom menu
      *
      * @param string $key The key of event
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return $this
      */
-    public function click($key, Closure $fn)
+    public function click($key, \Closure $fn)
     {
         return $this->on('click', $key, $fn);
     }
@@ -271,10 +270,10 @@ class WeChatApp extends Base
     /**
      * Attach a callback which triggered when user scan the QR Code
      *
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return $this
      */
-    public function scan(Closure $fn)
+    public function scan(\Closure $fn)
     {
         return $this->on('scan', $fn);
     }
@@ -283,14 +282,14 @@ class WeChatApp extends Base
      * Adds a rule to handle user event, such as click, subscribe
      *
      * @param string $name
-     * @param Closure|string $key
-     * @param Closure $fn
+     * @param \Closure|string $key
+     * @param \Closure $fn
      * @return $this
      */
-    public function on($name, $key, Closure $fn = null)
+    public function on($name, $key, \Closure $fn = null)
     {
         $name = strtolower($name);
-        if ($key instanceof Closure) {
+        if ($key instanceof \Closure) {
             $this->rules['event'][$name][''] = $key;
         } else {
             $this->rules['event'][$name][$key] = $fn;
@@ -302,10 +301,10 @@ class WeChatApp extends Base
      * Attach a callback which triggered when user input equals to the keyword
      *
      * @param string $keyword The keyword to compare with user input
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return $this
      */
-    public function is($keyword, Closure $fn)
+    public function is($keyword, \Closure $fn)
     {
         return $this->addTextRule('is', $keyword, $fn);
     }
@@ -314,10 +313,10 @@ class WeChatApp extends Base
      * Attach a callback with a keyword, which triggered when user input contains the keyword
      *
      * @param string $keyword The keyword to search in user input
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return $this
      */
-    public function has($keyword, Closure $fn)
+    public function has($keyword, \Closure $fn)
     {
         return $this->addTextRule('has', $keyword, $fn);
     }
@@ -326,10 +325,10 @@ class WeChatApp extends Base
      * Attach a callback with a keyword, which triggered when user input starts with the keyword (case insensitive)
      *
      * @param string $keyword The keyword to search in user input
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return $this
      */
-    public function startsWith($keyword, Closure $fn)
+    public function startsWith($keyword, \Closure $fn)
     {
         return $this->addTextRule('startsWith', $keyword, $fn);
     }
@@ -338,10 +337,10 @@ class WeChatApp extends Base
      * Attach a callback with a regex pattern which triggered when user input match the pattern
      *
      * @param string $pattern The pattern to match
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return $this
      */
-    public function match($pattern, Closure $fn)
+    public function match($pattern, \Closure $fn)
     {
         return $this->addTextRule('match', $pattern, $fn);
     }
@@ -349,10 +348,10 @@ class WeChatApp extends Base
     /**
      * Attach a callback to handle image message
      *
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return $this
      */
-    public function receiveImage(Closure $fn)
+    public function receiveImage(\Closure $fn)
     {
         $this->rules['image'] = $fn;
         return $this;
@@ -361,10 +360,10 @@ class WeChatApp extends Base
     /**
      * Attach a callback to handle location message
      *
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return $this
      */
-    public function receiveLocation(Closure $fn)
+    public function receiveLocation(\Closure $fn)
     {
         $this->rules['location'] = $fn;
         return $this;
@@ -373,10 +372,10 @@ class WeChatApp extends Base
     /**
      * Attach a callback to handle voice message
      *
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return $this
      */
-    public function receiveVoice(Closure $fn)
+    public function receiveVoice(\Closure $fn)
     {
         $this->rules['voice'] = $fn;
         return $this;
@@ -385,10 +384,10 @@ class WeChatApp extends Base
     /**
      * Attach a callback to handle video message
      *
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return $this
      */
-    public function receiveVideo(Closure $fn)
+    public function receiveVideo(\Closure $fn)
     {
         $this->rules['video'] = $fn;
         return $this;
@@ -397,10 +396,10 @@ class WeChatApp extends Base
     /**
      * Attach a callback to handle link message
      *
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return $this
      */
-    public function receiveLink(Closure $fn)
+    public function receiveLink(\Closure $fn)
     {
         $this->rules['link'] = $fn;
         return $this;
@@ -409,10 +408,10 @@ class WeChatApp extends Base
     /**
      * Attach a handler which executes when none of the rule handled the input
      *
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return bool
      */
-    public function defaults(Closure $fn)
+    public function defaults(\Closure $fn)
     {
         $this->defaults = $fn;
         return $this;
@@ -924,10 +923,10 @@ class WeChatApp extends Base
      *
      * @param string $type
      * @param string $keyword
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return $this
      */
-    protected function addTextRule($type, $keyword, Closure $fn)
+    protected function addTextRule($type, $keyword, \Closure $fn)
     {
         $this->rules['text'][] = [
             'type' => $type,
@@ -982,7 +981,7 @@ class WeChatApp extends Base
     /**
      * Executes callback handler
      *
-     * @param Closure $fn
+     * @param \Closure $fn
      * @return string
      */
     protected function handle($fn)
@@ -1003,13 +1002,13 @@ class WeChatApp extends Base
      * Convert to XML element
      *
      * @param array $array
-     * @param SimpleXMLElement $xml
-     * @return SimpleXMLElement
+     * @param \SimpleXMLElement $xml
+     * @return \SimpleXMLElement
      */
-    protected function arrayToXml(array $array, SimpleXMLElement $xml = null)
+    protected function arrayToXml(array $array, \SimpleXMLElement $xml = null)
     {
         if (null === $xml) {
-            $xml = new SimpleXMLElement('<xml/>');
+            $xml = new \SimpleXMLElement('<xml/>');
         }
         foreach ($array as $key => $value) {
             if (is_array($value)) {
@@ -1198,6 +1197,6 @@ class WeChatApp extends Base
         if ($pad < 1 || $pad > static::MAX_PAD_VALUE) {
             $pad = 0;
         }
-        return substr($text, 0, (strlen($text) - $pad));
+        return substr($text, 0, strlen($text) - $pad);
     }
 }

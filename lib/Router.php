@@ -498,7 +498,7 @@ class Router extends Base
     protected function methodToAction($method, $collection = false)
     {
         if ('GET' == $method && $collection) {
-            $method = $method . '-collection';
+            $method .= '-collection';
         }
         return isset($this->methodToAction[$method]) ? $this->methodToAction[$method] : $this->defaultAction;
     }

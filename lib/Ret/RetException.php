@@ -2,12 +2,10 @@
 
 namespace Wei\Ret;
 
-use Exception;
-
 /**
  * @experimental may be rename
  */
-class RetException extends Exception
+class RetException extends \Exception
 {
     protected $ret;
 

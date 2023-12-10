@@ -134,7 +134,7 @@ class Logger extends Base
      * Logs with an arbitrary level
      *
      * @param mixed $level
-     * @param string|array|Exception $message
+     * @param string|array|\Exception $message
      * @param mixed $context
      * @return bool
      */
@@ -147,7 +147,7 @@ class Logger extends Base
      * Logs with an arbitrary level
      *
      * @param mixed $level
-     * @param string|array|Exception $message
+     * @param string|array|\Exception $message
      * @param mixed $context
      * @return bool Whether the log record has been handled
      */
@@ -168,7 +168,7 @@ class Logger extends Base
     /**
      * System is unusable.
      *
-     * @param string|array|Exception $message
+     * @param string|array|\Exception $message
      * @param mixed $context
      * @return bool
      */
@@ -183,7 +183,7 @@ class Logger extends Base
      * Example: Entire website down, database unavailable, etc. This should
      * trigger the SMS alerts and wake you up.
      *
-     * @param string|array|Exception $message
+     * @param string|array|\Exception $message
      * @param mixed $context
      * @return bool
      */
@@ -197,7 +197,7 @@ class Logger extends Base
      *
      * Example: Application component unavailable, unexpected exception.
      *
-     * @param string|array|Exception $message
+     * @param string|array|\Exception $message
      * @param mixed $context
      * @return bool
      */
@@ -210,7 +210,7 @@ class Logger extends Base
      * Runtime errors that do not require immediate action but should typically
      * be logged and monitored.
      *
-     * @param string|array|Exception $message
+     * @param string|array|\Exception $message
      * @param mixed $context
      * @return bool
      */
@@ -225,7 +225,7 @@ class Logger extends Base
      * Example: Use of deprecated APIs, poor use of an API, undesirable things
      * that are not necessarily wrong.
      *
-     * @param string|array|Exception $message
+     * @param string|array|\Exception $message
      * @param mixed $context
      * @return bool
      */
@@ -237,7 +237,7 @@ class Logger extends Base
     /**
      * Normal but significant events.
      *
-     * @param string|array|Exception $message
+     * @param string|array|\Exception $message
      * @param mixed $context
      * @return bool
      */
@@ -251,7 +251,7 @@ class Logger extends Base
      *
      * Example: User logs in, SQL logs.
      *
-     * @param string|array|Exception $message
+     * @param string|array|\Exception $message
      * @param mixed $context
      * @return bool
      */
@@ -263,7 +263,7 @@ class Logger extends Base
     /**
      * Detailed debug information.
      *
-     * @param string|array|Exception $message
+     * @param string|array|\Exception $message
      * @param mixed $context
      * @return bool
      */
@@ -390,7 +390,7 @@ class Logger extends Base
      * Write the log message
      *
      * @param string $level
-     * @param string|array|Exception $message
+     * @param string|array|\Exception $message
      * @param mixed $context
      * @return bool
      */
@@ -407,7 +407,7 @@ class Logger extends Base
      * Format the log content
      *
      * @param string $level
-     * @param string|array|Exception $message
+     * @param string|array|\Exception $message
      * @param array $context
      * @return string
      */
@@ -439,7 +439,7 @@ class Logger extends Base
     /**
      * Convert message to string and content to array for writing
      *
-     * @param string|array|Exception $message
+     * @param string|array|\Exception $message
      * @param string|array $context
      * @return array
      */
@@ -448,7 +448,7 @@ class Logger extends Base
         if (!is_array($context)) {
             $context = ['context' => $context];
         }
-        if ($message instanceof Exception) {
+        if ($message instanceof \Exception) {
             $context += [
                 'code' => $message->getCode(),
                 'file' => $message->getFile(),

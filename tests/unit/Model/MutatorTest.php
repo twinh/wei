@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace WeiTest\Model;
 
-use InvalidArgumentException;
 use WeiTest\Model\Fixture\TestMutator;
 use WeiTest\TestCase;
 
@@ -18,7 +17,7 @@ final class MutatorTest extends TestCase
     {
         parent::setUpBeforeClass();
 
-        static::dropTables();
+        self::dropTables();
 
         $table = 'test_mutators';
         wei()->schema->table($table)
@@ -48,7 +47,7 @@ final class MutatorTest extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        static::dropTables();
+        self::dropTables();
         parent::tearDownAfterClass();
     }
 
@@ -143,7 +142,7 @@ final class MutatorTest extends TestCase
 
     public function testSetInvalid()
     {
-        $this->expectExceptionObject(new InvalidArgumentException('Invalid property: invalid'));
+        $this->expectExceptionObject(new \InvalidArgumentException('Invalid property: invalid'));
 
         // @phpstan-ignore-next-line
         TestMutator::new()->invalid = 'xx';

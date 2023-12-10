@@ -17,7 +17,7 @@ final class CamelCaseTraitTest extends TestCase
     {
         parent::setUpBeforeClass();
 
-        static::dropTables();
+        self::dropTables();
 
         wei()->schema->table('test_camel_cases')
             ->id()
@@ -27,7 +27,7 @@ final class CamelCaseTraitTest extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        static::dropTables();
+        self::dropTables();
         parent::tearDownAfterClass();
     }
 

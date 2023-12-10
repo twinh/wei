@@ -101,7 +101,7 @@ final class TagCacheTest extends CacheTestCase
         $this->expectExceptionMessage('Expire time for cache "key" must be int, NULL given');
 
         $this->object->setNamespace('');
-        $this->object->remember('key', null, function () {
+        $this->object->remember('key', null, static function () {
         });
     }
 

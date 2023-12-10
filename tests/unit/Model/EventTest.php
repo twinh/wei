@@ -93,7 +93,7 @@ class EventTest extends TestCase
     {
         $result = '';
         $eventObject = null;
-        TestEvent::onModelEvent('beforeSave', function ($event) use (&$result, &$eventObject) {
+        TestEvent::onModelEvent('beforeSave', static function ($event) use (&$result, &$eventObject) {
             $result = 'beforeSave';
             $eventObject = $event;
         });
@@ -107,7 +107,7 @@ class EventTest extends TestCase
     public function testGlobalEvent()
     {
         $result = '';
-        Event::on('testEventModelBeforeSave', function () use (&$result) {
+        Event::on('testEventModelBeforeSave', static function () use (&$result) {
             $result = 'custom';
         });
 
@@ -131,7 +131,7 @@ class EventTest extends TestCase
 
     public function testCallSelfMethodFirst()
     {
-        Event::on('testEventModelBeforeSave', function (TestEvent $event) {
+        Event::on('testEventModelBeforeSave', static function (TestEvent $event) {
             $event->addEventResult('custom');
         });
 
@@ -146,7 +146,7 @@ class EventTest extends TestCase
     public function testEventNameWontConflict()
     {
         $result = '';
-        TestEvent::onModelEvent('afterFind', function () use (&$result) {
+        TestEvent::onModelEvent('afterFind', static function () use (&$result) {
             $result .= 'afterFind';
         });
 
@@ -160,7 +160,7 @@ class EventTest extends TestCase
     public function testReturnFalseStopPropagation()
     {
         $result = '';
-        TestEvent::onModelEvent('afterFind', function () use (&$result) {
+        TestEvent::onModelEvent('afterFind', static function () use (&$result) {
             $result .= 'afterFind';
         });
 

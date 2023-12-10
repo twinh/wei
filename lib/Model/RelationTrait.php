@@ -2,10 +2,6 @@
 
 namespace Wei\Model;
 
-use InvalidArgumentException;
-use LogicException;
-use ReflectionException;
-use ReflectionMethod;
 use Wei\BaseModel;
 use Wei\Cls;
 use Wei\ModelTrait;
@@ -648,7 +644,7 @@ trait RelationTrait
             return forward_static_call([$model, 'new']);
         }
 
-        throw new InvalidArgumentException(sprintf(
+        throw new \InvalidArgumentException(sprintf(
             'Expected "model" argument to be a subclass or an instance of BaseModel, "%s" given',
             // @phpstan-ignore-next-line Else branch is unreachable because ternary operator condition is always true.
             is_object($model) ? get_class($model) : (is_string($model) ? $model : gettype($model))
@@ -681,7 +677,7 @@ trait RelationTrait
 
         if (!$related instanceof BaseModel) {
             if ($throw) {
-                throw new LogicException(sprintf(
+                throw new \LogicException(sprintf(
                     'Expected method "%s" to return an instance of BaseModel, but returns "%s"',
                     $name,
                     is_object($related) ? get_class($related) : gettype($related)
@@ -733,8 +729,8 @@ trait RelationTrait
     protected function isRelation(string $method): bool
     {
         try {
-            $ref = new ReflectionMethod($this, $method);
-        } catch (ReflectionException $e) {
+            $ref = new \ReflectionMethod($this, $method);
+        } catch (\ReflectionException $e) {
             return false;
         }
 

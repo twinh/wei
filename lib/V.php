@@ -2,7 +2,6 @@
 
 namespace Wei;
 
-use InvalidArgumentException;
 use Wei\Ret\RetException;
 
 /**
@@ -240,7 +239,7 @@ class V extends Base
     {
         $model || $model = $this->validator->getModel();
         if (!$model) {
-            throw new InvalidArgumentException('$model argument is required');
+            throw new \InvalidArgumentException('$model argument is required');
         }
 
         if ($model->isNew()) {
@@ -257,7 +256,7 @@ class V extends Base
     {
         $model || $model = $this->validator->getModel();
         if (!$model) {
-            throw new InvalidArgumentException('$model argument is required');
+            throw new \InvalidArgumentException('$model argument is required');
         }
 
         $newModel = $model::new();
@@ -287,7 +286,7 @@ class V extends Base
             $rule = $name;
         }
         if (!$this->wei->has('is' . ucfirst($rule))) {
-            throw new InvalidArgumentException(sprintf('Validator "%s" not found', $name));
+            throw new \InvalidArgumentException(sprintf('Validator "%s" not found', $name));
         }
 
         // IMPORTANT
@@ -438,12 +437,12 @@ class V extends Base
     {
         $model || $model = $this->model;
         if (!$model) {
-            throw new InvalidArgumentException('$model argument is required');
+            throw new \InvalidArgumentException('$model argument is required');
         }
 
         $column = $model->getColumns()[$name] ?? [];
         if (!$column) {
-            throw new InvalidArgumentException(sprintf(
+            throw new \InvalidArgumentException(sprintf(
                 'Column "%s" not found in model "%s"',
                 $name,
                 get_class($model)
@@ -501,7 +500,7 @@ class V extends Base
 
             case 'longtext':
             default:
-                throw new InvalidArgumentException(sprintf('Unsupported column type: %s', $column['type']));
+                throw new \InvalidArgumentException(sprintf('Unsupported column type: %s', $column['type']));
         }
     }
 
@@ -663,7 +662,7 @@ class V extends Base
     protected function addValidatorAndRule(string $name, array $args): self
     {
         if (count($args) < 2) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Expected at least 2 arguments for rule, but got ' . count($args)
             );
         }

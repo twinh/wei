@@ -63,7 +63,7 @@ final class WeChatAppTest extends TestCase
             ],
         ]);
 
-        $app->defaults(function () {
+        $app->defaults(static function () {
             return 'never see me';
         });
 
@@ -91,59 +91,59 @@ final class WeChatAppTest extends TestCase
             'postData' => $input,
         ]);
 
-        $app->defaults(function ($app) {
+        $app->defaults(static function ($app) {
             return 'Your input is ' . $app->getContent();
         });
 
-        $app->subscribe(function () {
+        $app->subscribe(static function () {
             return 'you are my 100 reader, wonderful!';
         });
 
-        $app->unsubscribe(function () {
+        $app->unsubscribe(static function () {
             return 'you won\'t see this message';
         });
 
-        $app->click('button', function () {
+        $app->click('button', static function () {
             return 'you clicked the button';
         });
 
-        $app->click('index', function () {
+        $app->click('index', static function () {
             return 'you clicked index';
         });
 
-        $app->receiveImage(function ($app) {
+        $app->receiveImage(static function ($app) {
             return 'you sent a picture to me';
         });
 
-        $app->receiveLocation(function ($app) {
+        $app->receiveLocation(static function ($app) {
             return 'the place looks livable';
         });
 
-        $app->receiveVoice(function () {
+        $app->receiveVoice(static function () {
             return 'u sound like a old man~';
         });
 
-        $app->receiveVideo(function () {
+        $app->receiveVideo(static function () {
             return 'good video';
         });
 
-        $app->receiveLink(function () {
+        $app->receiveLink(static function () {
             return 'got a link';
         });
 
-        $app->is('0', function () {
+        $app->is('0', static function () {
             return 'your input is 0';
         });
 
-        $app->is('1', function () {
+        $app->is('1', static function () {
             return 'your input is 1';
         });
 
-        $app->is('2', function (WeChatApp $app) {
+        $app->is('2', static function (WeChatApp $app) {
             return $app->sendMusic('Burning', 'A song of Maria Arredondo', 'url', 'HQ url');
         });
 
-        $app->is('3', function (WeChatApp $app) {
+        $app->is('3', static function (WeChatApp $app) {
             return $app->sendArticle([
                 'title' => 'It\'s fine today',
                 'description' => 'A new day is coming~~',
@@ -152,23 +152,23 @@ final class WeChatAppTest extends TestCase
             ]);
         });
 
-        $app->has('iphone', function () {
+        $app->has('iphone', static function () {
             return 'sorry, not this time';
         });
 
-        $app->has('ipad', function (WeChatApp $app) {
+        $app->has('ipad', static function (WeChatApp $app) {
             return $app->sendText('Find a iPad ? ok, i will remember u');
         });
 
-        $app->startsWith('t', function () {
+        $app->startsWith('t', static function () {
             return 'The translation result is: xx';
         });
 
-        $app->match('/twin/', function () {
+        $app->match('/twin/', static function () {
             return 'anyone find my brother?';
         });
 
-        $app->match('/twin/i', function () {
+        $app->match('/twin/i', static function () {
             return 'Yes, I\'m here';
         });
 
@@ -565,15 +565,15 @@ final class WeChatAppTest extends TestCase
             'postData' => $this->inputTextMessage($input),
         ]);
 
-        $app->is('abc', function () {
+        $app->is('abc', static function () {
             return 'abc';
         });
 
-        $app->startsWith('d', function () {
+        $app->startsWith('d', static function () {
             return 'd';
         });
 
-        $app->has('e', function () {
+        $app->has('e', static function () {
             return 'e';
         });
 
@@ -630,7 +630,7 @@ final class WeChatAppTest extends TestCase
             'postData' => $this->inputTextMessage('test'),
         ]);
 
-        $app->defaults(function () {
+        $app->defaults(static function () {
         });
 
         // Execute and parse result
@@ -658,7 +658,7 @@ final class WeChatAppTest extends TestCase
                  </xml>',
         ]);
 
-        $app->click('my', function () {
+        $app->click('my', static function () {
             return 'My info';
         });
 
@@ -735,7 +735,7 @@ final class WeChatAppTest extends TestCase
 
         $this->assertEquals($sceneId, $app->getScanSceneId());
 
-        $app->subscribe(function () use (&$subscribeFlag) {
+        $app->subscribe(static function () use (&$subscribeFlag) {
             $subscribeFlag = true;
             return 'subscribe';
         });
@@ -745,7 +745,7 @@ final class WeChatAppTest extends TestCase
             return 'scan';
         });
 
-        $app->defaults(function () {
+        $app->defaults(static function () {
             return 'This is the default message';
         });
 
@@ -806,7 +806,7 @@ final class WeChatAppTest extends TestCase
 </xml>',
         ]);
 
-        $app->is('?', function () {
+        $app->is('?', static function () {
             return 'xx';
         });
 
@@ -864,7 +864,7 @@ final class WeChatAppTest extends TestCase
 </xml>',
         ]);
 
-        $app->is('?', function () {
+        $app->is('?', static function () {
         });
 
         $xml = $app->run();

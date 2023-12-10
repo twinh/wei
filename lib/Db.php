@@ -250,13 +250,13 @@ class Db extends Base
 
             $dsn = $this->getDsn();
             $attrs = $this->attrs + [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_STRINGIFY_FETCHES => true,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+                    \PDO::ATTR_STRINGIFY_FETCHES => true,
+                    \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
                 ];
 
             try {
-                $this->pdo = new PDO($dsn, $this->user, $this->password, $attrs);
+                $this->pdo = new \PDO($dsn, $this->user, $this->password, $attrs);
             } catch (\PDOException $e) {
                 $this->connectFails && call_user_func($this->connectFails, $this, $e);
                 throw $e;
@@ -893,7 +893,7 @@ class Db extends Base
     /**
      * Returns the original PDO object
      *
-     * @return PDO
+     * @return \PDO
      */
     public function getPdo()
     {

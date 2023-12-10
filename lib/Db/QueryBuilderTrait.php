@@ -2,7 +2,6 @@
 
 namespace Wei\Db;
 
-use Closure;
 use Wei\BaseCache;
 use Wei\Db;
 
@@ -68,7 +67,7 @@ trait QueryBuilderTrait
     public function countBySubQuery(): int
     {
         return (int) $this->where(...func_get_args())->fetchColumn();
-        //return (int) $this->db->fetchColumn($this->getSqlForCount(), $this->getBindParams());
+        // return (int) $this->db->fetchColumn($this->getSqlForCount(), $this->getBindParams());
     }
 
     /**
@@ -1031,7 +1030,7 @@ trait QueryBuilderTrait
      * $users = QueryBuilder::table('user')->where(['id' => ['1', '2', '3']]);
      * ```
      *
-     * @param array|Closure|string|null $column
+     * @param array|\Closure|string|null $column
      * @param mixed|null $operator
      * @param mixed|null $value
      * @return $this
@@ -1266,7 +1265,7 @@ trait QueryBuilderTrait
         if (array_key_exists('default', $config)) {
             if ($nullable) {
                 if ($has) {
-                    return $this->where(function (self $qb) use ($column, $config) {
+                    return $this->where(static function (self $qb) use ($column, $config) {
                         $qb->where($column, '!=', $config['default'])->orWhereNull($column);
                     });
                 } else {
@@ -1595,7 +1594,7 @@ trait QueryBuilderTrait
     }
 
     /**
-     * @param string|Closure $column
+     * @param string|\Closure $column
      * @param string $operator
      * @param mixed|null $value
      * @param string $condition
@@ -1609,7 +1608,7 @@ trait QueryBuilderTrait
         string $condition = 'AND',
         string $type = null
     ): self {
-        $isClosure = $column instanceof Closure;
+        $isClosure = $column instanceof \Closure;
         if ($isClosure) {
             /** @phpstan-ignore-next-line Allow new static */
             $query = new static([

@@ -9,8 +9,6 @@
 
 namespace Wei;
 
-use ReflectionClass;
-
 /**
  * Check if the input is one of the class const
  *
@@ -57,7 +55,7 @@ class IsInConst extends BaseValidator
      */
     protected function doValidate($input)
     {
-        $reflect = new ReflectionClass($this->class);
+        $reflect = new \ReflectionClass($this->class);
         $consts = $reflect->getConstants();
 
         $length = null === $this->prefix ? 0 : strlen($this->prefix);

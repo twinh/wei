@@ -23,7 +23,7 @@ class IsUnique extends BaseValidator
      *
      * @var int
      */
-    protected $flags = SORT_REGULAR;
+    protected $flags = \SORT_REGULAR;
 
     /**
      * @var string

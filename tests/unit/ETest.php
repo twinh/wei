@@ -422,7 +422,7 @@ final class ETest extends TestCase
         return [
             [''],
             [null],
-            //array(0),
+            // array(0),
             ['0'],
         ];
     }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace WeiTest\Model;
 
-use ReflectionMethod;
 use WeiTest\Fixtures\DbTrait;
 use WeiTest\Model\Fixture\TestUser;
 use WeiTest\TestCase;
@@ -85,9 +84,9 @@ class AttributeSourceTest extends TestCase
 
     protected function createAttributeSource($user)
     {
-        $method = new ReflectionMethod($user, 'getAttributeSource');
+        $method = new \ReflectionMethod($user, 'getAttributeSource');
         $method->setAccessible(true);
-        return function ($name) use ($user, $method) {
+        return static function ($name) use ($user, $method) {
             return $method->invoke($user, $name);
         };
     }

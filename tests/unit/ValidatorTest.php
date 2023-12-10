@@ -175,7 +175,7 @@ final class ValidatorTest extends TestCase
                 ],
             ],
             'breakRule' => true,
-            'ruleInvalid' => function ($rule, $field, $validator) use (&$breakRule) {
+            'ruleInvalid' => static function ($rule, $field, $validator) use (&$breakRule) {
                 $breakRule = $rule;
             },
         ]);
@@ -197,7 +197,7 @@ final class ValidatorTest extends TestCase
                     'email' => true, // Will not valid
                 ],
             ],
-            'ruleValid' => function ($rule, $field, $validator) use (&$lastRule) {
+            'ruleValid' => static function ($rule, $field, $validator) use (&$lastRule) {
                 $lastRule = $rule;
 
                 // Return false to break the validation flow
@@ -227,7 +227,7 @@ final class ValidatorTest extends TestCase
                     'between' => [0, 150],
                 ],
             ],
-            'fieldValid' => function ($field, $validator) use (&$lastField) {
+            'fieldValid' => static function ($field, $validator) use (&$lastField) {
                 $lastField = $field;
 
                 // Return false to break the validation flow
@@ -868,7 +868,7 @@ final class ValidatorTest extends TestCase
     public function testIgnoreClosure()
     {
         $validator = $this->validate([
-            'data' => function () {
+            'data' => static function () {
             },
             'rules' => [
                 'username' => [
@@ -900,7 +900,7 @@ final class ValidatorTest extends TestCase
                     ],
                 ],
             ],
-            'ruleValid' => function ($rule, $field, Validate $validator) use (&$currentRules) {
+            'ruleValid' => static function ($rule, $field, Validate $validator) use (&$currentRules) {
                 $currentRules[] = $validator->getCurrentRule();
             },
         ])->isValid();

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace WeiTest\Model;
 
-use TypeError;
 use WeiTest\Fixtures\DbTrait;
 use WeiTest\Model\Fixture\TestUser;
 use WeiTest\TestCase;
@@ -74,7 +73,7 @@ class CollTest extends TestCase
 
     public function testOffsetSetInvalid()
     {
-        $this->expectException(TypeError::class);
+        $this->expectException(\TypeError::class);
 
         $users = TestUser::newColl();
         $users['key'] = 'test';
@@ -138,7 +137,7 @@ class CollTest extends TestCase
 
     public function testSetInvalid()
     {
-        $this->expectException(TypeError::class);
+        $this->expectException(\TypeError::class);
 
         $users = TestUser::newColl();
         $users->set('key', 'test');
@@ -263,7 +262,7 @@ class CollTest extends TestCase
 
         $users = TestUser::newColl();
 
-        $this->expectException(TypeError::class);
+        $this->expectException(\TypeError::class);
 
         // Assign non record value to raise an exception
         $users[] = 234;
@@ -433,7 +432,7 @@ class CollTest extends TestCase
             'key1' => TestUser::new(),
         ]);
 
-        $users = $users->toArray(function (TestUser $model) {
+        $users = $users->toArray(static function (TestUser $model) {
             return [
                 'test' => $model->address,
             ];
@@ -461,7 +460,7 @@ class CollTest extends TestCase
             'key1' => TestUser::new(),
         ]);
 
-        $users = $users->toArray(['id', 'name'], function (TestUser $model) {
+        $users = $users->toArray(['id', 'name'], static function (TestUser $model) {
             return [
                 'test' => $model->address,
             ];
@@ -511,7 +510,7 @@ class CollTest extends TestCase
 
         $users = TestUser::limit(1)->all();
 
-        $data = $users->toArray(function (TestUser $user) {
+        $data = $users->toArray(static function (TestUser $user) {
             return [
                 'newId' => $user->id + 1,
             ];
@@ -519,7 +518,7 @@ class CollTest extends TestCase
         $this->assertSame(2, $data[0]['newId']);
         $this->assertArrayHasKey('id', $data[0]);
 
-        $data = $users->toArray(['name'], function ($user) {
+        $data = $users->toArray(['name'], static function ($user) {
             return [
                 'newId' => $user->id + 1,
             ];
@@ -581,7 +580,7 @@ class CollTest extends TestCase
         ));
 
         $user = TestUser::new();
-        $user->filter(function () {
+        $user->filter(static function () {
         });
     }
 

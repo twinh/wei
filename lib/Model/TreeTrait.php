@@ -2,7 +2,6 @@
 
 namespace Wei\Model;
 
-use InvalidArgumentException;
 use Wei\Snowflake;
 
 /**
@@ -69,7 +68,7 @@ trait TreeTrait
             ->where($pathColumn, $this->getRootPaths() ?: null)
             ->setRelation([
                 'localKey' => $pathColumn,
-                'match' => function (self $related, self $dbModel) {
+                'match' => static function (self $related, self $dbModel) {
                     return $dbModel->isAncestorOf($related);
                 },
             ]);
@@ -88,7 +87,7 @@ trait TreeTrait
             ->asc($pathColumn)
             ->setRelation([
                 'localKey' => $pathColumn,
-                'match' => function (self $related, self $dbModel) {
+                'match' => static function (self $related, self $dbModel) {
                     return $dbModel->isAncestorOf($related);
                 },
             ]);
@@ -112,7 +111,7 @@ trait TreeTrait
             })
             ->setRelation([
                 'localKey' => $pathColumn,
-                'match' => function (self $related, self $dbModel) {
+                'match' => static function (self $related, self $dbModel) {
                     return $dbModel->isDescendantOf($related);
                 },
             ]);
@@ -395,11 +394,11 @@ trait TreeTrait
         $parentId = $this->getColumnValue($this->getParentIdColumn());
 
         if ($parentId === $this->getColumnValue($this->getPrimaryKey())) {
-            throw new InvalidArgumentException('Node can\'t move to self');
+            throw new \InvalidArgumentException('Node can\'t move to self');
         }
 
         if ($parentId && $this->isAncestorOf($this->parent)) {
-            throw new InvalidArgumentException('Node can\'t move to child');
+            throw new \InvalidArgumentException('Node can\'t move to child');
         }
 
         $this->updateDescendants = [

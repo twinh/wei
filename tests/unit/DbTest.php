@@ -2,8 +2,6 @@
 
 namespace WeiTest;
 
-use PDO;
-use RuntimeException;
 use Wei\Db;
 
 /**
@@ -688,17 +686,17 @@ class DbTest extends TestCase
         $this->initFixtures();
 
         // Not array parameter
-        $member = $this->db->fetch('SELECT * FROM prefix_member WHERE id = ?', 1, PDO::PARAM_INT);
+        $member = $this->db->fetch('SELECT * FROM prefix_member WHERE id = ?', 1, \PDO::PARAM_INT);
 
         $this->assertEquals('1', $member['id']);
 
         // Array parameter
-        $member = $this->db->fetch('SELECT * FROM prefix_member WHERE id = ?', [1], [PDO::PARAM_INT]);
+        $member = $this->db->fetch('SELECT * FROM prefix_member WHERE id = ?', [1], [\PDO::PARAM_INT]);
 
         $this->assertEquals('1', $member['id']);
 
         $member = $this->db->fetch('SELECT * FROM prefix_member WHERE id = ? AND group_id = ?', [1, 1], [
-            PDO::PARAM_INT, // (no parameter type for second placeholder)
+            \PDO::PARAM_INT, // (no parameter type for second placeholder)
         ]);
 
         $this->assertEquals('1', $member['id']);
@@ -708,7 +706,7 @@ class DbTest extends TestCase
         $member = $this->db->fetch('SELECT * FROM prefix_member WHERE id = :id', [
             'id' => 1,
         ], [
-            'id' => PDO::PARAM_INT,
+            'id' => \PDO::PARAM_INT,
         ]);
 
         $this->assertEquals('1', $member['id']);
@@ -717,7 +715,7 @@ class DbTest extends TestCase
         $member = $this->db->fetch('SELECT * FROM prefix_member WHERE id = :id', [
             'id' => 1,
         ], [
-            ':id' => PDO::PARAM_INT,
+            ':id' => \PDO::PARAM_INT,
         ]);
 
         $this->assertEquals('1', $member['id']);
@@ -912,7 +910,7 @@ class DbTest extends TestCase
         }
 
         // Filter
-        $firstGroupMembers = $members->filter(function ($member) {
+        $firstGroupMembers = $members->filter(static function ($member) {
             if ('1' == $member['group_id']) {
                 return true;
             } else {
@@ -932,14 +930,14 @@ class DbTest extends TestCase
         $this->db->setOption('recordNamespace', 'WeiTest\Db');
         $members = $this->db('member')->findAll();
 
-        $oneMembers = $members->filter(function ($member) {
+        $oneMembers = $members->filter(static function ($member) {
             return 1 == $member['id'];
         });
 
         $this->assertEquals(1, $oneMembers->length());
         $this->assertEquals(1, $oneMembers[0]['id']);
 
-        $noMembers = $members->filter(function () {
+        $noMembers = $members->filter(static function () {
             return false;
         });
 
@@ -980,10 +978,10 @@ class DbTest extends TestCase
         $this->expectOutputRegex('/beforeQueryafterQuery/');
 
         $this->db->setOption([
-            'beforeQuery' => function () {
+            'beforeQuery' => static function () {
                 echo 'beforeQuery';
             },
-            'afterQuery' => function () {
+            'afterQuery' => static function () {
                 echo 'afterQuery';
             },
         ]);
@@ -998,10 +996,10 @@ class DbTest extends TestCase
         $this->expectOutputString('beforeQueryafterQuery');
 
         $this->db->setOption([
-            'beforeQuery' => function () {
+            'beforeQuery' => static function () {
                 echo 'beforeQuery';
             },
-            'afterQuery' => function () {
+            'afterQuery' => static function () {
                 echo 'afterQuery';
             },
         ]);
@@ -1092,8 +1090,8 @@ class DbTest extends TestCase
                 'id' => 1,
                 'groupId' => 1,
             ], [
-                PDO::PARAM_INT,
-                PDO::PARAM_INT,
+                \PDO::PARAM_INT,
+                \PDO::PARAM_INT,
             ]);
         $member = $query->find();
 
@@ -1109,7 +1107,7 @@ class DbTest extends TestCase
         $this->assertEquals(1, $member['group_id']);
 
         // Set parameter
-        $query->setParameter('id', 1, PDO::PARAM_STR);
+        $query->setParameter('id', 1, \PDO::PARAM_STR);
         $member = $query->find();
         $this->assertEquals(1, $member['id']);
 
@@ -1119,7 +1117,7 @@ class DbTest extends TestCase
 
         $query = $this
             ->db('member')
-            ->andWhere('id = ?', '1', PDO::PARAM_INT);
+            ->andWhere('id = ?', '1', \PDO::PARAM_INT);
 
         $member = $query->find();
         $this->assertEquals('1', $member['id']);
@@ -1257,7 +1255,7 @@ class DbTest extends TestCase
 
     public function testGlobalOption()
     {
-        $fn = function () {
+        $fn = static function () {
         };
         $this->wei->setConfig([
             // mysql
@@ -2250,7 +2248,7 @@ class DbTest extends TestCase
             $this->assertEquals('information_schema', $this->db->getDbname());
         } else {
             $this->expectExceptionObject(
-                new RuntimeException('Unsupported switching database for current driver: ' . $this->db->getDriver())
+                new \RuntimeException('Unsupported switching database for current driver: ' . $this->db->getDriver())
             );
             $this->db->useDb('information_schema');
         }

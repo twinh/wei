@@ -2,8 +2,6 @@
 
 namespace Wei;
 
-use InvalidArgumentException;
-use ReturnTypeWillChange;
 use Wei\Ret\RetException;
 
 /**
@@ -79,7 +77,7 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
             // $this->xxx(['me%sage', 'ss'], code)
             $data = ['message' => $message, 'code' => $code];
         } else {
-            throw new InvalidArgumentException(sprintf(
+            throw new \InvalidArgumentException(sprintf(
                 'Expected argument of type string or array, "%s" given',
                 is_object($message) ? get_class($message) : gettype($message)
             ));
@@ -377,7 +375,7 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
     /**
      * {@inheritdoc}
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->data;
@@ -394,7 +392,7 @@ class Ret extends Base implements \JsonSerializable, \ArrayAccess
     /**
      * {@inheritdoc}
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->data[$offset];

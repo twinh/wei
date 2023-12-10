@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace WeiTest;
 
-use InvalidArgumentException;
 use Wei\Ret;
 use Wei\RetTrait;
 use Wei\V;
@@ -21,7 +20,7 @@ final class VModelTest extends TestCase
     {
         parent::setUpBeforeClass();
 
-        static::dropTables();
+        self::dropTables();
 
         wei()->schema->table('test_vs')
             ->id()
@@ -53,7 +52,7 @@ final class VModelTest extends TestCase
     public static function tearDownAfterClass(): void
     {
         TestV::getColumns();
-        static::dropTables();
+        self::dropTables();
         parent::tearDownAfterClass();
     }
 
@@ -81,7 +80,7 @@ final class VModelTest extends TestCase
 
     public function testModelNotSpecified()
     {
-        $this->expectExceptionObject(new InvalidArgumentException('$model argument is required'));
+        $this->expectExceptionObject(new \InvalidArgumentException('$model argument is required'));
 
         $v = V::new();
         $v->modelColumn('test', 'Test');
@@ -89,7 +88,7 @@ final class VModelTest extends TestCase
 
     public function testColumnNotFound()
     {
-        $this->expectExceptionObject(new InvalidArgumentException(
+        $this->expectExceptionObject(new \InvalidArgumentException(
             'Column "test" not found in model "WeiTest\Model\Fixture\TestV"'
         ));
 
@@ -99,7 +98,7 @@ final class VModelTest extends TestCase
 
     public function testUnsupportedType()
     {
-        $this->expectExceptionObject(new InvalidArgumentException('Unsupported column type: longText'));
+        $this->expectExceptionObject(new \InvalidArgumentException('Unsupported column type: longText'));
         $v = V::new();
         $v->modelColumn('long_text_column', 'Test', TestV::new());
     }
@@ -278,7 +277,7 @@ final class VModelTest extends TestCase
 
     public function testRequiredIfNewWithoutModel()
     {
-        $this->expectExceptionObject(new InvalidArgumentException('$model argument is required'));
+        $this->expectExceptionObject(new \InvalidArgumentException('$model argument is required'));
 
         $v = V::new();
         $v->string('test', 'Test')->requiredIfNew();
@@ -314,7 +313,7 @@ final class VModelTest extends TestCase
 
     public function testModelNotDupWithoutModel()
     {
-        $this->expectExceptionObject(new InvalidArgumentException('$model argument is required'));
+        $this->expectExceptionObject(new \InvalidArgumentException('$model argument is required'));
 
         $v = V::new();
         $v->string('test', 'Test')->notModelDup();

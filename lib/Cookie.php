@@ -9,8 +9,6 @@
 
 namespace Wei;
 
-use ReturnTypeWillChange;
-
 /**
  * A service that handles the HTTP request and response cookies
  *
@@ -140,7 +138,7 @@ class Cookie extends Base implements \ArrayAccess, \IteratorAggregate
      * @param  string $offset
      * @return mixed
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function &offsetGet($offset)
     {
         return $this->data[$offset];

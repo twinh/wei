@@ -249,7 +249,7 @@ class Memcached extends BaseCache
         if (is_array($iterable)) {
             return $iterable;
         }
-        return iterator_to_array((function () use ($iterable) {
+        return iterator_to_array((static function () use ($iterable) {
             yield from $iterable;
         })());
     }

@@ -21,7 +21,7 @@ final class TTest extends TestCase
 
     public function testLoad()
     {
-        $this->t->load(function () {
+        $this->t->load(static function () {
             return [
                 'key1' => 'value1',
             ];

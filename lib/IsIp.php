@@ -68,16 +68,16 @@ class IsIp extends BaseValidator
     {
         $flag = 0;
         if ($this->ipv4) {
-            $flag = $flag | \FILTER_FLAG_IPV4;
+            $flag |= \FILTER_FLAG_IPV4;
         }
         if ($this->ipv6) {
-            $flag = $flag | \FILTER_FLAG_IPV6;
+            $flag |= \FILTER_FLAG_IPV6;
         }
         if ($this->noPrivRange) {
-            $flag = $flag | \FILTER_FLAG_NO_PRIV_RANGE;
+            $flag |= \FILTER_FLAG_NO_PRIV_RANGE;
         }
         if ($this->noResRange) {
-            $flag = $flag | \FILTER_FLAG_NO_RES_RANGE;
+            $flag |= \FILTER_FLAG_NO_RES_RANGE;
         }
 
         if (!filter_var($input, \FILTER_VALIDATE_IP, $flag)) {

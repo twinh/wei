@@ -54,7 +54,7 @@ class Url extends Base
     public function query($url = '', $argsOrParams = [], $params = [])
     {
         if (false === strpos($url, '%s')) {
-            $argsOrParams = $argsOrParams + $this->req->getQueries();
+            $argsOrParams += $this->req->getQueries();
         } else {
             $params += $this->req->getQueries();
         }

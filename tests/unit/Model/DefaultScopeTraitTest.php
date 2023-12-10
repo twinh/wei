@@ -16,7 +16,7 @@ final class DefaultScopeTraitTest extends TestCase
     {
         parent::setUpBeforeClass();
 
-        static::dropTables();
+        self::dropTables();
 
         wei()->schema->table('test_default_scopes')
             ->id()
@@ -51,7 +51,7 @@ final class DefaultScopeTraitTest extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        static::dropTables();
+        self::dropTables();
         parent::tearDownAfterClass();
     }
 
@@ -111,7 +111,7 @@ final class DefaultScopeTraitTest extends TestCase
 
     public function testScopeWithClosure()
     {
-        $scope = TestDefaultScope::where(function (TestDefaultScope $defaultScope) {
+        $scope = TestDefaultScope::where(static function (TestDefaultScope $defaultScope) {
             $defaultScope->where('name', 'test');
         });
 

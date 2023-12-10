@@ -9,8 +9,6 @@
 
 namespace Wei;
 
-use ReturnTypeWillChange;
-
 /**
  * A service that handles the HTTP request data
  *
@@ -343,7 +341,7 @@ class Req extends Base implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param string $offset
      * @return mixed
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function &offsetGet($offset)
     {
         if (!isset($this->data[$offset])) {

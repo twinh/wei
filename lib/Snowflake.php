@@ -2,8 +2,6 @@
 
 namespace Wei;
 
-use InvalidArgumentException;
-
 /**
  * @mixin \CacheMixin
  */
@@ -75,10 +73,10 @@ class Snowflake extends Base
     protected function setWorkerId(int $workerId): self
     {
         if ($workerId < 0) {
-            throw new InvalidArgumentException('Worker ID must be greater than 0');
+            throw new \InvalidArgumentException('Worker ID must be greater than 0');
         }
         if ($workerId > $this->getMaxNumber($this->workerBits)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Worker ID must be less than or equal to ' . $this->getMaxNumber($this->workerBits)
             );
         }
@@ -107,10 +105,10 @@ class Snowflake extends Base
     protected function setStartTimestamp(int $startTimestamp): self
     {
         if ($startTimestamp < 0) {
-            throw new InvalidArgumentException('Start timestamp must be greater than 0');
+            throw new \InvalidArgumentException('Start timestamp must be greater than 0');
         }
         if ($startTimestamp > time() * 1000) {
-            throw new InvalidArgumentException('Start timestamp must be less than or equal to the current time');
+            throw new \InvalidArgumentException('Start timestamp must be less than or equal to the current time');
         }
         $this->startTimestamp = $startTimestamp;
         return $this;

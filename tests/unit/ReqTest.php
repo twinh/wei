@@ -327,7 +327,7 @@ final class ReqTest extends TestCase
                 '/news/index.php',
             ],
 
-            //Test when url quert contains a full http url
+            // Test when url quert contains a full http url
             [
                 [
                     'REQUEST_URI' => '/html/index.php?url=http://test.example.com/path/&foo=bar',

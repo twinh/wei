@@ -12,7 +12,7 @@ final class PhpErrorTest extends TestCase
      */
     protected function setUp(): void
     {
-        if (!class_exists(('\php_error\ErrorHandler'))) {
+        if (!class_exists('\php_error\ErrorHandler')) {
             $this->markTestSkipped('joseph-lenton/php-error is required');
             return;
         }

@@ -492,7 +492,7 @@ class App extends Base
             return $response;
         };
 
-        $next = function () use (&$middleware, &$next, $callback, $wei) {
+        $next = static function () use (&$middleware, &$next, $callback, $wei) {
             $config = array_splice($middleware, 0, 1);
             if ($config) {
                 $class = key($config);

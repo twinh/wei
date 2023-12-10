@@ -2,12 +2,10 @@
 
 namespace Wei\Model;
 
-use Attribute;
-
 /**
  * @experimental may be rename
  */
-#[Attribute]
+#[\Attribute]
 final class Relation
 {
 }

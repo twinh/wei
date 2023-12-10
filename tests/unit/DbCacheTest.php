@@ -32,7 +32,7 @@ final class DbCacheTest extends CacheTestCase
         $result = $cache->set($key, true, -1);
         $this->assertTrue($result);
 
-        //sleep(2);
+        // sleep(2);
 
         $result = $cache->has($key);
         $this->assertFalse($result);
@@ -40,7 +40,7 @@ final class DbCacheTest extends CacheTestCase
         $result = $cache->set($key, true, -1);
         $this->assertTrue($result);
 
-        //sleep(2);
+        // sleep(2);
 
         $result = $cache->get($key);
         $this->assertNull($result);

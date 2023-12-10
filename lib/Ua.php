@@ -184,7 +184,7 @@ class Ua extends Base
             || isset($server['HTTP_UA_OS'])  // Reported by Windows Smartphones.
             || isset($server['HTTP_X_MOBILE_GATEWAY'])  // Reported by Verizon, Vodafone proxy system.
             || isset($server['HTTP_X_ATT_DEVICEID'])  // Seend this on HTC Sensation. @ref: SensationXE_Beats_Z715e
-            //HTTP_X_NETWORK_TYPE = WIFI
+            // HTTP_X_NETWORK_TYPE = WIFI
             || (isset($server['HTTP_UA_CPU'])
             && 'ARM' == $server['HTTP_UA_CPU'])          // Seen this on a HTC.
         ) {

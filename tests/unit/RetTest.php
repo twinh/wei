@@ -407,7 +407,7 @@ final class RetTest extends TestCase
         ]);
         $ret = Ret::suc();
         $ret->req = $req;
-        $ret->include('key', function () {
+        $ret->include('key', static function () {
             return 'value';
         });
         $this->assertSame('value', $ret['data']['key']);
@@ -425,7 +425,7 @@ final class RetTest extends TestCase
         ]);
         $ret = Ret::suc();
         $ret->req = $req;
-        $ret->includeWith('key', function () {
+        $ret->includeWith('key', static function () {
             return 'value';
         });
 

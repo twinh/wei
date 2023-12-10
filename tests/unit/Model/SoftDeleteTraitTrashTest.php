@@ -16,7 +16,7 @@ final class SoftDeleteTraitTrashTest extends TestCase
     {
         parent::setUpBeforeClass();
 
-        static::dropTables();
+        self::dropTables();
 
         wei()->schema->table('test_soft_delete_trashes')
             ->id()
@@ -28,7 +28,7 @@ final class SoftDeleteTraitTrashTest extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        static::dropTables();
+        self::dropTables();
         parent::tearDownAfterClass();
     }
 

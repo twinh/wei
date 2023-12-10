@@ -84,7 +84,7 @@ abstract class BaseCache extends Base
     public function getFileContent($file, $fn)
     {
         $key = $file . filemtime($file);
-        return $this->remember($key, function ($cache) use ($file, $fn) {
+        return $this->remember($key, static function ($cache) use ($file, $fn) {
             return $fn($file, $cache);
         });
     }

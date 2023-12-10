@@ -9,8 +9,6 @@
 
 namespace Wei;
 
-use ReturnTypeWillChange;
-
 /**
  * A service that handles session data ($_SESSION)
  *
@@ -213,7 +211,7 @@ class Session extends Base implements \ArrayAccess, \Countable, \IteratorAggrega
      * @param  string $offset
      * @return mixed
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function &offsetGet($offset)
     {
         return $this->data[$offset];

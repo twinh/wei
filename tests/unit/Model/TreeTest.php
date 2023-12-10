@@ -2,7 +2,6 @@
 
 namespace WeiTest\Model;
 
-use InvalidArgumentException;
 use WeiTest\Model\Fixture\TestTree;
 use WeiTest\TestCase;
 
@@ -17,7 +16,7 @@ final class TreeTest extends TestCase
     {
         parent::setUpBeforeClass();
 
-        static::dropTables();
+        self::dropTables();
 
         wei()->schema->table('test_trees')
             ->bigId()
@@ -38,7 +37,7 @@ final class TreeTest extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        static::dropTables();
+        self::dropTables();
         parent::tearDownAfterClass();
     }
 
@@ -284,7 +283,7 @@ EOF
         $node1 = $node->saveNode();
         $node11 = $node1->saveNode();
 
-        $this->expectExceptionObject(new InvalidArgumentException('Node can\'t move to child'));
+        $this->expectExceptionObject(new \InvalidArgumentException('Node can\'t move to child'));
 
         $node->save(['parent_id' => $node11->id]);
     }
@@ -293,7 +292,7 @@ EOF
     {
         $node = TestTree::new()->first();
 
-        $this->expectExceptionObject(new InvalidArgumentException('Node can\'t move to self'));
+        $this->expectExceptionObject(new \InvalidArgumentException('Node can\'t move to self'));
 
         $node->save(['parent_id' => $node->id]);
     }

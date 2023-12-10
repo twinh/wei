@@ -2,9 +2,6 @@
 
 namespace Wei;
 
-use Exception;
-use ReflectionClass;
-
 /**
  * Generate class map from specified directory and pattern
  */
@@ -26,7 +23,7 @@ class ClassMap extends Base
      * @param bool $ignoreProject
      * @param bool $ignoreType
      * @return array
-     * @throws Exception
+     * @throws \Exception
      */
     public function generate($dirs, $pattern, $type, $ignoreProject = true, $ignoreType = false)
     {
@@ -43,7 +40,7 @@ class ClassMap extends Base
                     continue;
                 }
 
-                $reflection = new ReflectionClass($class);
+                $reflection = new \ReflectionClass($class);
                 if ($reflection->isAbstract()) {
                     continue;
                 }
@@ -76,7 +73,7 @@ class ClassMap extends Base
      * @param string $file
      * @param bool $ignoreProject
      * @return string
-     * @throws Exception
+     * @throws \Exception
      */
     protected function guessClassName($file, $ignoreProject = false)
     {
@@ -89,7 +86,7 @@ class ClassMap extends Base
 
         $composerJson = ($dir ? ($dir . '/') : '') . 'composer.json';
         if (!is_file($composerJson)) {
-            throw new Exception(sprintf('Composer file "%s" not found', $composerJson));
+            throw new \Exception(sprintf('Composer file "%s" not found', $composerJson));
         }
 
         $json = json_decode(file_get_contents($composerJson), true);
@@ -98,7 +95,7 @@ class ClassMap extends Base
         }
 
         if (!isset($json['autoload']['psr-4']) || !$json['autoload']['psr-4']) {
-            throw new Exception('Missing psr-4 autoload config');
+            throw new \Exception('Missing psr-4 autoload config');
         }
 
         $namespace = key($json['autoload']['psr-4']);

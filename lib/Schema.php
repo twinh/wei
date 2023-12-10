@@ -2,8 +2,6 @@
 
 namespace Wei;
 
-use InvalidArgumentException;
-
 /**
  * A MySQL schema builder
  *
@@ -435,7 +433,7 @@ class Schema extends Base
         }
 
         if (!array_key_exists($type, $this->typeDefaults)) {
-            throw new InvalidArgumentException(sprintf('Invalid user id type "%s"', $userIdType));
+            throw new \InvalidArgumentException(sprintf('Invalid user id type "%s"', $userIdType));
         }
 
         $this->userIdType = $userIdType;

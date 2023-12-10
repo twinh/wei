@@ -527,7 +527,7 @@ final class ModelTest extends TestCase
 
         $count = 0;
         $times = 0;
-        $result = $user->chunk(2, function (TestUser $users, $page) use (&$count, &$times) {
+        $result = $user->chunk(2, static function (TestUser $users, $page) use (&$count, &$times) {
             $count += count($users);
             ++$times;
         });
@@ -545,7 +545,7 @@ final class ModelTest extends TestCase
 
         $count = 0;
         $times = 0;
-        $result = $users->chunk(1, function (TestUser $users, $page) use (&$count, &$times) {
+        $result = $users->chunk(1, static function (TestUser $users, $page) use (&$count, &$times) {
             $count += count($users);
             ++$times;
             return false;

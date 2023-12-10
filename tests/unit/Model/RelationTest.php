@@ -26,8 +26,8 @@ final class RelationTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
-        static::dropRelationTables();
-        static::createRelationTables();
+        self::dropRelationTables();
+        self::createRelationTables();
 
         wei()->db->batchInsert('test_users', [
             [
@@ -127,7 +127,7 @@ final class RelationTest extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        static::dropRelationTables();
+        self::dropRelationTables();
         parent::tearDownAfterClass();
     }
 
@@ -1075,7 +1075,7 @@ final class RelationTest extends TestCase
 
     private static function createRelationTables()
     {
-        static::createTables();
+        self::createTables();
 
         wei()->schema->table('test_profiles')
             ->id()
@@ -1105,7 +1105,7 @@ final class RelationTest extends TestCase
 
     private static function dropRelationTables()
     {
-        static::dropTables();
+        self::dropTables();
         wei()->schema->dropIfExists(['test_profiles', 'test_articles', 'test_tags', 'test_articles_test_tags']);
     }
 }

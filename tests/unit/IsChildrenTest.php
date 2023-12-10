@@ -19,7 +19,7 @@ final class IsChildrenTest extends BaseValidatorTestCase
     public function testChildrenSuc()
     {
         $v = V::new();
-        $v->key('configs')->children(call_user_func(function () {
+        $v->key('configs')->children(call_user_func(static function () {
             $v = V::new();
             $v->key('key1', '配置1')->minLength(3);
             $v->key('key2', '配置2')->minLength(2);
@@ -38,7 +38,7 @@ final class IsChildrenTest extends BaseValidatorTestCase
     public function testChildrenErr()
     {
         $v = V::new();
-        $v->key('configs')->children(call_user_func(function () {
+        $v->key('configs')->children(call_user_func(static function () {
             $v = V::new();
             $v->key('key1', '配置1')->minLength(3);
             $v->key('key2', '配置2')->minLength(2);
@@ -57,10 +57,10 @@ final class IsChildrenTest extends BaseValidatorTestCase
     public function testChildrenNestedErr()
     {
         $v = V::new();
-        $v->key('configs')->children(call_user_func(function () {
+        $v->key('configs')->children(call_user_func(static function () {
             $v = V::new();
             $v->key('key1', '配置1')->minLength(3);
-            $v->key('key2', '配置2')->children(call_user_func(function () {
+            $v->key('key2', '配置2')->children(call_user_func(static function () {
                 $v = V::new();
                 $v->key('key2.1', '配置2.1')->minLength(2);
                 return $v;
@@ -82,7 +82,7 @@ final class IsChildrenTest extends BaseValidatorTestCase
     public function testInvalidInputType()
     {
         $v = V::new();
-        $v->key('configs', '配置')->children(call_user_func(function () {
+        $v->key('configs', '配置')->children(call_user_func(static function () {
             $v = V::new();
             $v->key('key1', '配置1')->minLength(3);
             return $v;

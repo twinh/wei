@@ -9,8 +9,6 @@
 
 namespace Wei;
 
-use ReturnTypeWillChange;
-
 /**
  * A service that use to render PHP template
  *
@@ -283,7 +281,7 @@ class View extends Base implements \ArrayAccess
      * @param  string $offset
      * @return mixed
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function &offsetGet($offset)
     {
         return $this->data[$offset];

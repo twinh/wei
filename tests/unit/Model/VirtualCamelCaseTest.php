@@ -17,7 +17,7 @@ final class VirtualCamelCaseTest extends TestCase
     {
         parent::setUpBeforeClass();
 
-        static::dropTables();
+        self::dropTables();
 
         wei()->schema->table('test_virtual_camel_cases')
             ->id()
@@ -28,7 +28,7 @@ final class VirtualCamelCaseTest extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        static::dropTables();
+        self::dropTables();
         parent::tearDownAfterClass();
     }
 

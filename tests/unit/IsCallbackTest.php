@@ -16,24 +16,24 @@ final class IsCallbackTest extends BaseValidatorTestCase
     {
         parent::setUp();
 
-        $this->inputTestOptions['fn'] = function () {
+        $this->inputTestOptions['fn'] = static function () {
         };
     }
 
     public function testCallback()
     {
-        $this->assertTrue($this->isCallback('data', function () {
+        $this->assertTrue($this->isCallback('data', static function () {
             return true;
         }));
     }
 
     public function testNotCallback()
     {
-        $this->assertFalse($this->isCallback('data', function () {
+        $this->assertFalse($this->isCallback('data', static function () {
             return false;
         }));
 
-        $this->assertFalse($this->isCallback('data', function () {
+        $this->assertFalse($this->isCallback('data', static function () {
             // convert to boolen(false)
             return null;
         }));
@@ -41,7 +41,7 @@ final class IsCallbackTest extends BaseValidatorTestCase
 
     public function testCallbackMessage()
     {
-        $this->isCallback('data', function () {
+        $this->isCallback('data', static function () {
             return false;
         }, 'invalid message');
         $this->assertEquals('invalid message', $this->isCallback->getFirstMessage());
@@ -64,7 +64,7 @@ final class IsCallbackTest extends BaseValidatorTestCase
     {
         $validator = null;
         $v = V::new();
-        $v->key('test')->callback(function ($input, IsCallback $callback) use (&$validator) {
+        $v->key('test')->callback(static function ($input, IsCallback $callback) use (&$validator) {
             $validator = $callback->getValidator();
             return false;
         });
@@ -81,7 +81,7 @@ final class IsCallbackTest extends BaseValidatorTestCase
 
     public function testReturnMessage()
     {
-        $this->isCallback('data', function () {
+        $this->isCallback('data', static function () {
             return 'invalid message';
         });
         $this->assertEquals('invalid message', $this->isCallback->getFirstMessage());

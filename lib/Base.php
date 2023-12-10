@@ -9,8 +9,6 @@
 
 namespace Wei;
 
-use ReflectionException;
-
 /**
  * The base class for all services
  *
@@ -65,7 +63,7 @@ abstract class Base
      * @param string $method
      * @param array $args
      * @return mixed
-     * @throws ReflectionException
+     * @throws \ReflectionException
      */
     public static function __callStatic(string $method, array $args)
     {
@@ -78,7 +76,7 @@ abstract class Base
      * @param string $name The name of service
      * @param array $args The arguments for the service's __invoke method
      * @return mixed
-     * @throws ReflectionException
+     * @throws \ReflectionException
      */
     public function __call(string $name, array $args)
     {

@@ -17,7 +17,7 @@ final class GetSetTraitTest extends TestCase
     {
         parent::setUpBeforeClass();
 
-        static::dropTables();
+        self::dropTables();
 
         wei()->schema->table('test_get_sets')
             ->id('id')
@@ -35,7 +35,7 @@ final class GetSetTraitTest extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        static::dropTables();
+        self::dropTables();
         parent::tearDownAfterClass();
     }
 

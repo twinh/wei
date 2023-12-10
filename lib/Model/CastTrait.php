@@ -2,9 +2,6 @@
 
 namespace Wei\Model;
 
-use InvalidArgumentException;
-use stdClass;
-
 /**
  * Add cast functions to the model
  *
@@ -147,7 +144,7 @@ trait CastTrait
                 return @inet_ntop($value) ?: '';
 
             default:
-                throw new InvalidArgumentException('Unsupported cast type: ' . $type);
+                throw new \InvalidArgumentException('Unsupported cast type: ' . $type);
         }
     }
 
@@ -234,7 +231,7 @@ trait CastTrait
                 return @inet_pton($value) ?: '';
 
             default:
-                throw new InvalidArgumentException('Unsupported cast type: ' . $type);
+                throw new \InvalidArgumentException('Unsupported cast type: ' . $type);
         }
     }
 
@@ -243,7 +240,7 @@ trait CastTrait
      *
      * @param string $value
      * @param bool $assoc
-     * @return array|stdClass
+     * @return array|\stdClass
      */
     protected function cacheJsonDecode(string $value, bool $assoc = false)
     {

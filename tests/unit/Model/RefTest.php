@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace WeiTest\Model;
 
-use PDOException;
 use Wei\Req;
 use WeiTest\Model\Fixture\TestRef;
 use WeiTest\TestCase;
@@ -18,9 +17,9 @@ final class RefTest extends TestCase
     {
         parent::setUpBeforeClass();
 
-        static::dropTables();
+        self::dropTables();
 
-        $table = 'test_refs'; //TestRef::getTable();
+        $table = 'test_refs'; // TestRef::getTable();
         wei()->schema->table($table)
             ->id()
             ->string('json')
@@ -38,7 +37,7 @@ final class RefTest extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        static::dropTables();
+        self::dropTables();
         parent::tearDownAfterClass();
     }
 
@@ -140,7 +139,7 @@ final class RefTest extends TestCase
 
     public function testArrayGetRefBecomeNull()
     {
-        $this->expectException(PDOException::class);
+        $this->expectException(\PDOException::class);
 
         $model = $this->getModel();
 
@@ -164,7 +163,7 @@ final class RefTest extends TestCase
 
     public function testPropGetRefBecomeNull()
     {
-        $this->expectException(PDOException::class);
+        $this->expectException(\PDOException::class);
 
         $model = $this->getModel();
 

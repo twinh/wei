@@ -9,8 +9,6 @@
 
 namespace Wei;
 
-use ReturnTypeWillChange;
-
 /**
  * A base database record class
  *
@@ -1545,7 +1543,7 @@ class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countabl
      * @param string $offset
      * @return mixed
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         $this->loadData($offset);
