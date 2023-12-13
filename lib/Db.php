@@ -382,7 +382,7 @@ class Db extends Base
         $table = $this->getTable($table);
         $where = $this->buildSqlObject($conditions, ' AND ');
 
-        $query = "DELETE FROM $table WHERE " . $where;
+        $query = "DELETE FROM $table" . ($where ? ' WHERE ' . $where : '');
         return $this->executeUpdate($query, array_values($conditions));
     }
 

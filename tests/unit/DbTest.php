@@ -189,6 +189,17 @@ class DbTest extends TestCase
         $this->assertFalse($member);
     }
 
+    public function testDeleteWithoutCondition()
+    {
+        $this->initFixtures();
+
+        $this->db->delete('member', []);
+
+        $members = $this->db->selectAll('member');
+
+        $this->assertEmpty($members);
+    }
+
     public function testFind()
     {
         $this->initFixtures();
