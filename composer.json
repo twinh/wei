@@ -52,6 +52,7 @@
     }
   },
   "suggest": {
-    "ext-curl": "To use `\\Wei\\Http`"
+    "ext-curl": "To use `\\Wei\\Http`",
+    "ext-redis": "To use `\\Wei\\Redis`"
   }
 }
