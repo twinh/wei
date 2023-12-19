@@ -189,7 +189,7 @@ class ClassMap extends Base
                 $map[$name] = key($classes);
                 unset($this->duplicates[$name]);
             } else {
-                $this->duplicates = $classes;
+                $this->duplicates[$name] = $classes;
             }
         }
 
