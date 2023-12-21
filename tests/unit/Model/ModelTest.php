@@ -935,4 +935,25 @@ final class ModelTest extends TestCase
         $data = $user->fetch();
         $this->assertNotEmpty($data);
     }
+
+    public function testSerialize()
+    {
+        $this->initFixtures();
+
+        $user = TestUser::first();
+
+        $data = serialize($user);
+        $this->assertStringContainsString((string) $user->id, $data);
+
+        $user2 = unserialize($data);
+        $this->assertSame($user->id, $user2->id);
+
+        $sql = $user2->getSql();
+        $this->assertSqlSame('SELECT * FROM `test_users` WHERE `id` = ? LIMIT 1', $sql);
+    }
+
+    protected function assertSqlSame($expected, $actual, string $message = '')
+    {
+        $this->assertSame($expected, str_replace($this->db->getTablePrefix(), '', $actual), $message);
+    }
 }

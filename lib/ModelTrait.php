@@ -516,6 +516,30 @@ trait ModelTrait
     }
 
     /**
+     * @return array
+     * @experimental *NOT* all properties will be serialized now
+     */
+    public function __serialize(): array
+    {
+        return [
+            'coll' => $this->isColl(),
+            'id' => $this->isColl() ? $this->getAll($this->getPrimaryKey()) : $this->get($this->getPrimaryKey()),
+        ];
+    }
+
+    /**
+     * @param array $data
+     * @return void
+     * @experimental
+     */
+    public function __unserialize(array $data): void
+    {
+        $this->__construct();
+        $this->reload();
+        $data['coll'] ? $this->findAll($data['id']) : $this->find($data['id']);
+    }
+
+    /**
      * Set each attribute value, without checking whether the column is fillable, and save the model
      *
      * @param iterable $attributes

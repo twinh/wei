@@ -603,4 +603,24 @@ class CollTest extends TestCase
             TestUser::new(),
         ]);
     }
+
+    public function testSerialize()
+    {
+        $this->initFixtures();
+
+        $users = TestUser::new()->limit(2)->all();
+
+        $data = serialize($users);
+
+        $users2 = unserialize($data);
+        $this->assertSame($users->count(), $users2->count());
+
+        $sql = $users2->getSql();
+        $this->assertSqlSame('SELECT * FROM `test_users` WHERE `id` IN (?, ?)', $sql);
+    }
+
+    protected function assertSqlSame($expected, $actual, string $message = '')
+    {
+        $this->assertSame($expected, str_replace($this->db->getTablePrefix(), '', $actual), $message);
+    }
 }
