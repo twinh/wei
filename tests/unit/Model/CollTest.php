@@ -606,6 +606,10 @@ class CollTest extends TestCase
 
     public function testSerialize()
     {
+        if (version_compare(\PHP_VERSION, '7.4.0', '<')) {
+            $this->markTestSkipped('Serialize require PHP 7.4+');
+        }
+
         $this->initFixtures();
 
         $users = TestUser::new()->limit(2)->all();

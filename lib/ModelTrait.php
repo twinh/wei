@@ -517,7 +517,7 @@ trait ModelTrait
 
     /**
      * @return array
-     * @experimental *NOT* all properties will be serialized now
+     * @experimental *ONLY* the primary key and collection flag will be serialized. requires PHP 7.4+
      */
     public function __serialize(): array
     {
