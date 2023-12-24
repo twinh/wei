@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace WeiTest\Model;
 
-use Wei\BaseModel;
-use Wei\ModelTrait;
 use Wei\QueryBuilder;
 use WeiTest\Model\Fixture\TestCast;
+use WeiTest\Model\Fixture\TestCastObject;
 use WeiTest\TestCase;
 
 /**
@@ -377,31 +376,7 @@ final class CastTraitTest extends TestCase
      */
     public function testStringAsObject($default, $dbValue)
     {
-        $object = new /**
-         * @property int $id
-         */
-        class ($default) extends BaseModel {
-            use ModelTrait {
-                __construct as modelConstruct;
-            }
-
-            protected $table = 'test_cast_objects';
-
-            protected $columns = [
-                'object_column' => [
-                    'cast' => 'object',
-                ],
-            ];
-
-            public function __construct($default)
-            {
-                if (null !== $default) {
-                    $this->columns['object_column']['default'] = $default;
-                }
-                $this->modelConstruct();
-            }
-        };
-
+        $object = TestCastObject::new()->setObjectColumnDefault($default);
         $object->save();
         $data = wei()->db->select('test_cast_objects', $object->id);
         $this->assertSame($dbValue, $data['object_column']);
