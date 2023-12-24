@@ -19,10 +19,4 @@ class TestCastObject extends BaseModel
             'cast' => 'object',
         ],
     ];
-
-    public function setObjectColumnDefault($default)
-    {
-        $this->columns['object_column']['default'] = $default;
-        return $this;
-    }
 }

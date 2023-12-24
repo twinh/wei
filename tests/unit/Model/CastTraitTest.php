@@ -376,7 +376,17 @@ final class CastTraitTest extends TestCase
      */
     public function testStringAsObject($default, $dbValue)
     {
-        $object = TestCastObject::new()->setObjectColumnDefault($default);
+        $object = TestCastObject::new(
+            [],
+            [
+                'columns' => [
+                    'object_column' => [
+                        'cast' => 'object',
+                        'default' => $default,
+                    ],
+                ],
+            ]
+        );
         $object->save();
         $data = wei()->db->select('test_cast_objects', $object->id);
         $this->assertSame($dbValue, $data['object_column']);
