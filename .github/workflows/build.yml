@@ -99,7 +99,7 @@ jobs:
           COVERALLS_PARALLEL: true
           COVERALLS_FLAG_NAME: php-${{ matrix.php-versions }}
         run: |
-          composer global require twinh/php-coveralls
+          composer global require php-coveralls/php-coveralls
           php-coveralls --coverage_clover=build/logs/clover.xml -vvv
 
   coveralls-finish:
