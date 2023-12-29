@@ -53,6 +53,7 @@
   },
   "suggest": {
     "ext-curl": "To use `\\Wei\\Http`",
-    "ext-redis": "To use `\\Wei\\Redis`"
+    "ext-redis": "To use `\\Wei\\Redis`",
+    "ext-simplexml": "To use `\\Wei\\WeChatApp`"
   }
 }
