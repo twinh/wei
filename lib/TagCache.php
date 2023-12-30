@@ -12,7 +12,7 @@ namespace Wei;
 /**
  * A cache service that support tagging
  *
- * @property \Wei\BaseCache $cache
+ * @property BaseCache $cache
  */
 class TagCache extends BaseCache
 {

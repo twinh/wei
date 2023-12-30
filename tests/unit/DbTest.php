@@ -5,7 +5,7 @@ namespace WeiTest;
 use Wei\Db;
 
 /**
- * @property \Wei\Db db
+ * @property Db db
  * @method \Wei\Record db($table = null)
  * @internal
  */

@@ -11,7 +11,7 @@ namespace Wei {
     use ReflectionException;
 
     /**
-     * @see Wei\Base
+     * @see Base
      */
     require_once 'Base.php';
 

@@ -12,7 +12,7 @@ namespace Wei;
 /**
  * Generate a URL with signature
  *
- * @property \Wei\Req $req
+ * @property Req $req
  */
 class SafeUrl extends Base
 {

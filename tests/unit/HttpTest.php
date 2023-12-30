@@ -6,7 +6,7 @@ use Wei\Http;
 
 /**
  * @method \Wei\Http http($options)
- * @property \Wei\Http $http
+ * @property Http $http
  *
  * @internal
  */

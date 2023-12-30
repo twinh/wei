@@ -12,7 +12,7 @@ use Wei\Req;
 final class ReqTest extends TestCase
 {
     /**
-     * @var \Wei\Req
+     * @var Req
      */
     protected $object;
 

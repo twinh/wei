@@ -5,7 +5,7 @@ namespace Wei;
 /**
  * A MySQL schema builder
  *
- * @property \Wei\Db $db
+ * @property Db $db
  */
 class Schema extends Base
 {

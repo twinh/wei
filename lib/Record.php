@@ -15,7 +15,7 @@ namespace Wei;
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Db $db A database service inspired by Doctrine DBAL
  * @method      \Wei\Record db($table = null) Create a new record object
- * @property    \Wei\BaseCache $cache A cache service (Optional)
+ * @property    BaseCache $cache A cache service (Optional)
  * @method      \Wei\TagCache tagCache($tags) Create a new cache service with tagging support (Optional)
  */
 class Record extends Base implements \ArrayAccess, \IteratorAggregate, \Countable

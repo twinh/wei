@@ -12,7 +12,7 @@ use Wei\WeChatApp;
 final class WeChatAppTest extends TestCase
 {
     /**
-     * @var \Wei\WeChatApp
+     * @var WeChatApp
      */
     protected $object;
 

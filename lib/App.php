@@ -472,7 +472,7 @@ class App extends Base
     /**
      * Execute action with middleware
      *
-     * @param \Wei\BaseController $instance
+     * @param BaseController $instance
      * @param string $action
      * @return Res
      */
@@ -511,7 +511,7 @@ class App extends Base
     /**
      * Returns middleware for specified action
      *
-     * @param \Wei\BaseController $instance
+     * @param BaseController $instance
      * @param string $action
      * @return array
      */
@@ -535,7 +535,7 @@ class App extends Base
      * Get the controller instance, if not found, return false instead
      *
      * @param string $class The class name of controller
-     * @return \Wei\BaseController
+     * @return BaseController
      */
     protected function getControllerInstance($class)
     {
