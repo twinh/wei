@@ -1,3 +1,24 @@
+## [0.17.1](https://github.com/twinh/wei/compare/v0.17.0...v0.17.1) (2023-12-31)
+
+
+### Bug Fixes
+
+* **ClassMap:** 类重复时，记录类名错误 ([4e5c3a7](https://github.com/twinh/wei/commit/4e5c3a794e7d45e1af32c92030abc0e03267ca63))
+
+
+### Features
+
+* **Db:** `delete` 允许删除所有数据 ([ba82c2d](https://github.com/twinh/wei/commit/ba82c2d94d6f67dc513b1c33fa8bf23a81a0261d))
+* **Model, experimental:** 增加模型序列化 ([d7a7246](https://github.com/twinh/wei/commit/d7a7246119768967d59833146f6cbf317a80fb8b))
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `8.2.4` to `9.0.0`
+
 # [0.17.0](https://github.com/twinh/wei/compare/v0.16.0...v0.17.0) (2023-11-30)
 
 
