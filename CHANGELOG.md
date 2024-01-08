@@ -1,3 +1,13 @@
+## [0.17.2](https://github.com/twinh/wei/compare/v0.17.1...v0.17.2) (2024-01-08)
+
+
+
+
+
+### Dependencies
+
+* **@miaoxing/dev:** upgrade from `9.0.0` to `9.1.0`
+
 ## [0.17.1](https://github.com/twinh/wei/compare/v0.17.0...v0.17.1) (2023-12-31)
 
 
