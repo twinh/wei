@@ -18,7 +18,7 @@ final class WeChatAppTest extends TestCase
 
     public function testForbiddenForInvalidSignature()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => [
                 'signature' => 'invalid',
@@ -37,7 +37,7 @@ final class WeChatAppTest extends TestCase
 
     public function testEchostr()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
@@ -53,7 +53,7 @@ final class WeChatAppTest extends TestCase
 
     public function testEchorStrOnlyWhenAuth()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
@@ -85,7 +85,7 @@ final class WeChatAppTest extends TestCase
         $gets = [];
         parse_str($query, $gets);
 
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => $gets,
             'postData' => $input,
@@ -504,7 +504,7 @@ final class WeChatAppTest extends TestCase
 
     public function testFlatMode()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
@@ -521,7 +521,7 @@ final class WeChatAppTest extends TestCase
 
     public function testIsVerifyToken()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
@@ -536,7 +536,7 @@ final class WeChatAppTest extends TestCase
 
     public function testIsNotVerifyToken()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
@@ -555,7 +555,7 @@ final class WeChatAppTest extends TestCase
      */
     public function testCase($input, $output)
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
@@ -602,7 +602,7 @@ final class WeChatAppTest extends TestCase
 
     public function testNoRuleHandled()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
@@ -620,7 +620,7 @@ final class WeChatAppTest extends TestCase
 
     public function testNotHandleInDefault()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
@@ -641,7 +641,7 @@ final class WeChatAppTest extends TestCase
 
     public function testHasEventButNotMatch()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
@@ -721,7 +721,7 @@ final class WeChatAppTest extends TestCase
      */
     public function testScan($postData, $sceneId, $result, $calledSubscribe)
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
@@ -759,7 +759,7 @@ final class WeChatAppTest extends TestCase
 
     public function testScanAndSubscribe()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
@@ -788,7 +788,7 @@ final class WeChatAppTest extends TestCase
 
     public function testEncrypt()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'appId' => 'wxbad0b45542aa0b5e',
             'token' => 'weixin',
@@ -821,7 +821,7 @@ final class WeChatAppTest extends TestCase
 
     public function testEncryptNoRuleReturnSuccess()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'appId' => 'wxbad0b45542aa0b5e',
             'token' => 'weixin',
@@ -846,7 +846,7 @@ final class WeChatAppTest extends TestCase
 
     public function testEncryptEmptyReturnSuccess()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'appId' => 'wxbad0b45542aa0b5e',
             'token' => 'weixin',
@@ -874,7 +874,7 @@ final class WeChatAppTest extends TestCase
 
     public function testEncryptMsgSignatureErr()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'appId' => 'wxbad0b45542aa0b5e',
             'token' => 'weixin',
@@ -900,7 +900,7 @@ final class WeChatAppTest extends TestCase
 
     public function testEncryptFromAppIdErr()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'appId' => 'wxbad0b45542aa0b5e1',
             'token' => 'weixin',
@@ -926,7 +926,7 @@ final class WeChatAppTest extends TestCase
 
     public function testEncryptAesErr()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'appId' => 'wxbad0b45542aa0b5e',
             'token' => 'weixin',
@@ -955,7 +955,7 @@ MSG
 
     public function testGetAttrs()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
@@ -979,7 +979,7 @@ MSG
 
     public function testGetKeyword()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
@@ -994,7 +994,7 @@ MSG
 
     public function testGetKeywordFromEvent()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',
@@ -1016,7 +1016,7 @@ MSG
 
     public function testGetKeywordFromSubscribe()
     {
-        $app = new \Wei\WeChatApp([
+        $app = new WeChatApp([
             'wei' => $this->wei,
             'query' => [
                 'signature' => '46816a3b00bfd8ed18826278f140395fcdd5af8f',

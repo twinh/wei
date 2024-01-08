@@ -14,7 +14,7 @@ final class WeiTest extends TestCase
 {
     public function createUserService()
     {
-        return new \WeiTest\Fixtures\TestUser([
+        return new Fixtures\TestUser([
             'wei' => $this->wei,
             'name' => 'twin',
         ]);
@@ -150,7 +150,7 @@ final class WeiTest extends TestCase
             'Option "wei" of class "Wei\Req" should be an instance of "Wei\Wei"',
             1000
         );
-        new \Wei\Req([
+        new Req([
             'wei' => new \stdClass(),
         ]);
     }
@@ -186,7 +186,7 @@ final class WeiTest extends TestCase
 
     public function testSet()
     {
-        $request = new \Wei\Req([
+        $request = new Req([
             'wei' => $this->wei,
         ]);
 
@@ -285,7 +285,7 @@ final class WeiTest extends TestCase
         $request = $this->wei->req;
         $request->set('id', 'fromOrigin');
 
-        $serviceWithProvider = new \WeiTest\Fixtures\ServiceWithProvider([
+        $serviceWithProvider = new Fixtures\ServiceWithProvider([
             'wei' => $this->wei,
         ]);
 
@@ -346,7 +346,7 @@ final class WeiTest extends TestCase
 
     public function testInstanceWeiWithWeiOption()
     {
-        $wei = new \Wei\Wei([
+        $wei = new Wei([
             'wei' => [
                 'autoload' => false,
             ],

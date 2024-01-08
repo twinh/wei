@@ -71,7 +71,7 @@ final class ReqTest extends TestCase
         foreach (['GET', 'POST'] as $method) {
             $this->wei->remove('request');
             $this->wei->remove('server');
-            $request = new \Wei\Req([
+            $request = new Req([
                 'wei' => $this->wei,
                 'fromGlobal' => false,
                 'servers' => [
@@ -509,7 +509,7 @@ final class ReqTest extends TestCase
 
     public function testEmptyPort()
     {
-        $request = new \Wei\Req([
+        $request = new Req([
             'wei' => $this->wei,
             'fromGlobal' => false,
             'servers' => [
@@ -525,7 +525,7 @@ final class ReqTest extends TestCase
      */
     public function testErrorParameterTypeWhenFromGlobalIsFalse()
     {
-        $request = new \Wei\Req([
+        $request = new Req([
             'fromGlobal' => false,
         ]);
 
@@ -677,7 +677,7 @@ final class ReqTest extends TestCase
     public function createParameterObject($type, $class)
     {
         // create request wei from custom parameter
-        $request = new \Wei\Req([
+        $request = new Req([
             'wei' => $this->wei,
             'fromGlobal' => false,
             $type => [
@@ -1114,7 +1114,7 @@ final class ReqTest extends TestCase
     public function testPopulateJsonToData()
     {
         // create request wei from custom parameter
-        $request = new \Wei\Req([
+        $request = new Req([
             'wei' => $this->wei,
             'fromGlobal' => false,
             'content' => '{"a":"b"}',
@@ -1127,7 +1127,7 @@ final class ReqTest extends TestCase
 
     public function testClear()
     {
-        $request = new \Wei\Req([
+        $request = new Req([
             'wei' => $this->wei,
             'fromGlobal' => false,
             'data' => [],
@@ -1147,7 +1147,7 @@ final class ReqTest extends TestCase
 
     public function testGetHeaderAndHasHeader()
     {
-        $req = new \Wei\Req([
+        $req = new Req([
             'wei' => $this->wei,
             'fromGlobal' => false,
             'servers' => [
@@ -1174,7 +1174,7 @@ final class ReqTest extends TestCase
      */
     public function testIsPreflight(array $servers, bool $bool)
     {
-        $req = new \Wei\Req([
+        $req = new Req([
             'wei' => $this->wei,
             'fromGlobal' => false,
             'servers' => $servers,

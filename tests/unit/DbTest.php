@@ -1251,7 +1251,7 @@ class DbTest extends TestCase
     public function testConnectFails()
     {
         $this->setExpectedException('\PDOException');
-        $db = new \Wei\Db([
+        $db = new Db([
             'wei' => $this->wei,
             'driver' => 'mysql',
             'host' => '255.255.255.255',
@@ -1299,7 +1299,7 @@ class DbTest extends TestCase
     {
         $this->setExpectedException('\RuntimeException', 'Unsupported database driver: abc');
 
-        $db = new \Wei\Db([
+        $db = new Db([
             'wei' => $this->wei,
             'driver' => 'abc',
         ]);
@@ -1309,7 +1309,7 @@ class DbTest extends TestCase
 
     public function testCustomDsn()
     {
-        $db = new \Wei\Db([
+        $db = new Db([
             'wei' => $this->wei,
             'dsn' => 'sqlite::memory:',
         ]);

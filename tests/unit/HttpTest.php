@@ -761,13 +761,13 @@ final class HttpTest extends TestCase
 
     public function testGetMethod()
     {
-        $http = new \Wei\Http([
+        $http = new Http([
             'wei' => $this->wei,
             'method' => 'GET',
         ]);
         $this->assertEquals('GET', $http->getMethod());
 
-        $http = new \Wei\Http([
+        $http = new Http([
             'wei' => $this->wei,
             'method' => 'test',
         ]);
@@ -776,7 +776,7 @@ final class HttpTest extends TestCase
 
     public function testGetIp()
     {
-        $http = new \Wei\Http([
+        $http = new Http([
             'wei' => $this->wei,
             'ip' => '8.8.8.8',
         ]);
@@ -797,7 +797,7 @@ final class HttpTest extends TestCase
 
     public function testGetData()
     {
-        $http = new \Wei\Http([
+        $http = new Http([
             'wei' => $this->wei,
             'data' => [
                 'key' => 'value',
@@ -805,7 +805,7 @@ final class HttpTest extends TestCase
         ]);
         $this->assertEquals(['key' => 'value'], $http->getData());
 
-        $http = new \Wei\Http([
+        $http = new Http([
             'wei' => $this->wei,
             'data' => 'string',
         ]);
